@@ -37,6 +37,8 @@ public class SearchEngineUtil {
 	public static final String INDEX_WRITER_DESTINATION =
 		"liferay/search/IndexWriter";
 
+	public static final int ALL_POS = -1;
+
 	public static void addDocument(long companyId, Document doc)
 		throws SearchException {
 
@@ -82,6 +84,28 @@ public class SearchEngineUtil {
 
 		try {
 			hits = _instance._getSearcher().search(companyId, query);
+		}
+		finally {
+			Thread.currentThread().setContextClassLoader(contextClassLoader);
+		}
+
+		return hits;
+	}
+
+	public static Hits search(long companyId, Query query, int begin, int end)
+		throws SearchException {
+
+		ClassLoader contextClassLoader =
+			Thread.currentThread().getContextClassLoader();
+
+		Thread.currentThread().setContextClassLoader(
+			_instance._getCurrentSearchEngineClassLoader());
+
+		Hits hits = null;
+
+		try {
+			hits = _instance._getSearcher().search(
+				companyId, query, begin, end);
 		}
 		finally {
 			Thread.currentThread().setContextClassLoader(contextClassLoader);

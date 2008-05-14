@@ -22,14 +22,19 @@
 
 package com.liferay.portal.lucene;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.IndexSearcher;
 import com.liferay.portal.kernel.search.Query;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.util.search.QueryImpl;
 
 import java.io.IOException;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.search.BooleanQuery;
 
 /**
  * <a href="LuceneIndexSearcherImpl.java.html"><b><i>View Source</i></b></a>
@@ -39,44 +44,64 @@ import java.io.IOException;
  */
 public class LuceneIndexSearcherImpl implements IndexSearcher {
 
-	public Hits close(long companyId, String keywords, Exception e)
+	public Hits search(long companyId, Query query)
 		throws SearchException {
 
-		Hits hits = new LuceneHitsImpl();
-
-		try {
-			org.apache.lucene.search.IndexSearcher searcher =
-				LuceneUtil.getSearcher(companyId);
-
-			hits = LuceneUtil.closeSearcher(searcher, keywords, e);
-		}
-		catch (IOException ioe) {
-			throw new SearchException(ioe);
-		}
-		catch (SystemException se) {
-			throw new SearchException(se);
-		}
-
-		return hits;
+		return search(
+			companyId, query, SearchEngineUtil.ALL_POS,
+			SearchEngineUtil.ALL_POS);
 	}
 
-	public Hits search(long companyId, Query query)
+	public Hits search(long companyId, Query query, int begin, int end)
 		throws SearchException {
 
 		LuceneHitsImpl hits = new LuceneHitsImpl();
 
+		org.apache.lucene.search.IndexSearcher searcher = null;
+
 		try {
-			org.apache.lucene.search.IndexSearcher searcher =
-				LuceneUtil.getSearcher(companyId);
+			searcher = LuceneUtil.getSearcher(companyId);
 
 			hits.recordHits(
 				searcher.search(((QueryImpl)query).getQuery()), searcher);
+
+			if ((begin == SearchEngineUtil.ALL_POS) &&
+				(end == SearchEngineUtil.ALL_POS)) {
+
+				hits = hits.subset(0, hits.getLength());
+			}
+			else {
+				hits = hits.subset(begin, end);
+			}
 		}
-		catch (IOException ioe) {
-			throw new SearchException(ioe);
+		catch (Exception e) {
+			if (e instanceof BooleanQuery.TooManyClauses ||
+				e instanceof ParseException) {
+
+				_log.error("Parsing keywords " + query.parse(), e);
+
+				return new LuceneHitsImpl();
+			}
+			else {
+				throw new SearchException(e);
+			}
+		}
+		finally {
+			try {
+				if (searcher != null) {
+					searcher.close();
+
+					hits.setSearcher(null);
+				}
+			}
+			catch (IOException ioe) {
+				throw new SearchException(ioe);
+			}
 		}
 
 		return hits;
 	}
+
+	private static Log _log = LogFactory.getLog(LuceneHitsImpl.class);
 
 }

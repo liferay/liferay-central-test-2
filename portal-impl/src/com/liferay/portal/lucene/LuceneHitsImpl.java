@@ -34,10 +34,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.queryParser.ParseException;
-import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.Searcher;
 
 /**
@@ -111,33 +107,15 @@ public class LuceneHitsImpl implements Hits {
 		_searcher = searcher;
 	}
 
+	@Deprecated
 	public void closeSearcher() {
-		try {
-			if (_searcher != null){
-				_searcher.close();
-
-				_searcher = null;
-			}
-		}
-		catch (Exception e) {
-		}
 	}
 
+	@Deprecated
 	public Hits closeSearcher(String keywords, Exception e)
 		throws SearchException {
 
-		closeSearcher();
-
-		if (e instanceof BooleanQuery.TooManyClauses ||
-			e instanceof ParseException) {
-
-			_log.error("Parsing keywords " + keywords, e);
-
-			return new LuceneHitsImpl();
-		}
-		else {
-			throw new SearchException(e);
-		}
+		return null;
 	}
 
 	public Document doc(int n) {
@@ -164,14 +142,20 @@ public class LuceneHitsImpl implements Hits {
 		return _scores[n];
 	}
 
-	public Hits subset(int begin, int end) {
-		Hits subset = new LuceneHitsImpl();
+	public LuceneHitsImpl subset(int begin, int end) {
+		LuceneHitsImpl subset = new LuceneHitsImpl();
 
 		if ((begin > - 1) && (begin <= end)) {
 			subset.setStart(getStart());
 
-			Document[] subsetDocs = new DocumentImpl[getLength()];
-			float[] subsetScores = new float[getLength()];
+			if (end > _length) {
+				end = _length;
+			}
+
+			int subsetTotal = end - begin;
+
+			Document[] subsetDocs = new DocumentImpl[subsetTotal];
+			float[] subsetScores = new float[subsetTotal];
 
 			int j = 0;
 
@@ -180,7 +164,7 @@ public class LuceneHitsImpl implements Hits {
 				subsetScores[j] = score(i);
 			}
 
-			subset.setLength(j);
+			subset.setLength(_length);
 
 			subset.setDocs(subsetDocs);
 			subset.setScores(subsetScores);
@@ -230,8 +214,6 @@ public class LuceneHitsImpl implements Hits {
 
 		return newDoc;
 	}
-
-	private static Log _log = LogFactory.getLog(LuceneHitsImpl.class);
 
 	private org.apache.lucene.search.Hits _hits;
 	private long _start;

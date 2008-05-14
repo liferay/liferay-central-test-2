@@ -161,8 +161,8 @@ public interface BookmarksFolderLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long[] folderIds, java.lang.String keywords)
-		throws com.liferay.portal.SystemException;
+		long groupId, long[] folderIds, java.lang.String keywords, int begin,
+		int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,

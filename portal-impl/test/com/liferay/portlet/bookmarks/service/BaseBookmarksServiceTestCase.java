@@ -24,6 +24,7 @@ package com.liferay.portlet.bookmarks.service;
 
 import com.liferay.portal.service.BaseServiceTestCase;
 import com.liferay.portal.util.TestPropsValues;
+import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
@@ -36,6 +37,22 @@ import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
  *
  */
 public class BaseBookmarksServiceTestCase extends BaseServiceTestCase {
+
+	protected BookmarksEntry addEntry() throws Exception {
+		BookmarksFolder folder = addFolder();
+
+		String name = "Test Entry";
+		String url = "http://www.liferay.com";
+		String comments = "This is a test entry.";
+		String[] tagsEntries = new String[0];
+
+		boolean addGommunityPermissions = true;
+		boolean addGuestPermissions = true;
+
+		return BookmarksEntryServiceUtil.addEntry(
+			folder.getFolderId(), name, url, comments, tagsEntries,
+			addGommunityPermissions, addGuestPermissions);
+	}
 
 	protected BookmarksFolder addFolder() throws Exception {
 		long parentFolderId = BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID;

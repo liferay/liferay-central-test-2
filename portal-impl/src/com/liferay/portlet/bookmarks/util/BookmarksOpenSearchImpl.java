@@ -23,6 +23,7 @@
 package com.liferay.portlet.bookmarks.util;
 
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.search.HitsOpenSearchImpl;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 
@@ -40,7 +41,8 @@ public class BookmarksOpenSearchImpl extends HitsOpenSearchImpl {
 
 	public Hits getHits(long companyId, String keywords) throws Exception {
 		return BookmarksFolderLocalServiceUtil.search(
-			companyId, 0, null, keywords);
+			companyId, 0, null, keywords, SearchEngineUtil.ALL_POS,
+			SearchEngineUtil.ALL_POS);
 	}
 
 	public String getSearchPath() {
