@@ -428,40 +428,10 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		}
 		%>
 
-		<c:if test='<%= tabs1.equals("recent_posts") %>'>
-
-			<%
-			String rssURL = themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&groupId=" + portletGroupId.longValue();
-
-			if (groupThreadsUserId > 0) {
-				rssURL += "&userId=" + groupThreadsUserId;
-			}
-
-			rssURL += rssURLParams;
-			%>
-
-			<table class="lfr-table">
-			<tr>
-				<td>
-					<liferay-ui:icon
-						image="rss"
-						message="recent-posts-rss"
-						url="<%= rssURL %>"
-						method="get"
-						target="_blank"
-						label="<%= true %>"
-					/>
-				</td>
-
-				<c:if test="<%= groupThreadsUserId > 0 %>">
-					<td>
-						<liferay-ui:message key="filter-by-user" />: <%= PortalUtil.getUserName(groupThreadsUserId, StringPool.BLANK) %>
-					</td>
-				</c:if>
-			</tr>
-			</table>
-
-			<br />
+		<c:if test='<%= tabs1.equals("recent_posts") && (groupThreadsUserId > 0) %>'>
+			<div class="portlet-msg-info">
+				<liferay-ui:message key="filter-by-user" />: <%= PortalUtil.getUserName(groupThreadsUserId, StringPool.BLANK) %>
+			</div>
 		</c:if>
 
 		<%
@@ -709,6 +679,36 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		</c:if>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+		<c:if test='<%= tabs1.equals("recent_posts") %>'>
+
+			<%
+			String rssURL = themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&groupId=" + portletGroupId.longValue();
+
+			if (groupThreadsUserId > 0) {
+				rssURL += "&userId=" + groupThreadsUserId;
+			}
+
+			rssURL += rssURLParams;
+			%>
+
+			<br />
+
+			<table class="lfr-table">
+			<tr>
+				<td>
+					<liferay-ui:icon
+						image="rss"
+						message="subscribe-to-recent-posts"
+						url="<%= rssURL %>"
+						method="get"
+						target="_blank"
+						label="<%= true %>"
+					/>
+				</td>
+			</tr>
+			</table>
+		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("statistics") %>'>
 		<liferay-ui:tabs
