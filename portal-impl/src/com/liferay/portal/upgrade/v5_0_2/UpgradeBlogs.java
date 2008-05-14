@@ -20,32 +20,56 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade;
+package com.liferay.portal.upgrade.v5_0_2;
 
-import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.upgrade.v4_3_6.UpgradeBlogs;
+import com.liferay.portal.upgrade.UpgradeException;
+import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
+import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portal.upgrade.v4_3_6.util.BlogsEntryUrlTitleUpgradeColumnImpl;
+import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UpgradeProcess_4_3_6.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeBlogs.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class UpgradeProcess_4_3_6 extends UpgradeProcess {
-
-	public int getThreshold() {
-		return ReleaseInfo.RELEASE_4_3_6_BUILD_NUMBER;
-	}
+public class UpgradeBlogs extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
 
-		upgrade(UpgradeBlogs.class);
+		try {
+			doUpgrade();
+		}
+		catch (Exception e) {
+			throw new UpgradeException(e);
+		}
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeProcess_4_3_6.class);
+	protected void doUpgrade() throws Exception {
+		runSQL("update BlogsEntry set urlTitle = ''");
+
+		UpgradeColumn entryIdColumn = new TempUpgradeColumnImpl("entryId");
+
+		UpgradeColumn titleColumn = new TempUpgradeColumnImpl("title");
+
+		UpgradeColumn urlTitleColumn = new BlogsEntryUrlTitleUpgradeColumnImpl(
+			entryIdColumn, titleColumn);
+
+		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+			BlogsEntryImpl.TABLE_NAME, BlogsEntryImpl.TABLE_COLUMNS,
+			entryIdColumn, titleColumn, urlTitleColumn);
+
+		upgradeTable.updateTable();
+	}
+
+	private static Log _log = LogFactory.getLog(UpgradeBlogs.class);
 
 }

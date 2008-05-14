@@ -407,12 +407,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 			char newChar = oldChar;
 
-			if ((oldChar == CharPool.UNDERLINE) ||
+			if ((oldChar == CharPool.DASH) ||
 				(Validator.isChar(oldChar)) || (Validator.isDigit(oldChar))) {
 
 			}
 			else if (ArrayUtil.contains(_URL_TITLE_REPLACE_CHARS, oldChar)) {
-				newChar = CharPool.UNDERLINE;
+				newChar = CharPool.DASH;
 			}
 			else {
 				return urlTitle;
@@ -625,7 +625,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				break;
 			}
 			else {
-				newUrlTitle = urlTitle + "_" + i;
+				newUrlTitle = urlTitle + StringPool.DASH + i;
 			}
 		}
 
@@ -694,7 +694,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	private static final char[] _URL_TITLE_REPLACE_CHARS = new char[] {
-		' ',  '.',  '-',  ',',  '/',  '\\',  '\'',  '\"'
+		' ', '.', ',', '/', '\\', '\'', '\"'
 	};
 
 	private static Log _log =

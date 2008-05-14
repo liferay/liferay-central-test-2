@@ -23,10 +23,13 @@
 package com.liferay.portlet.blogs.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.blogs.NoSuchEntryException;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 
@@ -69,8 +72,26 @@ public class ActionUtil {
 			entry = BlogsEntryServiceUtil.getEntry(entryId);
 		}
 		else if (Validator.isNotNull(urlTitle)) {
-			entry = BlogsEntryServiceUtil.getEntry(
-				themeDisplay.getPortletGroupId(), urlTitle);
+			try {
+				entry = BlogsEntryServiceUtil.getEntry(
+					themeDisplay.getPortletGroupId(), urlTitle);
+			}
+			catch (NoSuchEntryException nsee) {
+				if (urlTitle.indexOf(StringPool.UNDERLINE) != -1) {
+
+					// Check another URL title for backwards compatibility. See
+					// LEP-5733.
+
+					urlTitle = StringUtil.replace(
+						urlTitle, StringPool.UNDERLINE, StringPool.DASH);
+
+					entry = BlogsEntryServiceUtil.getEntry(
+						themeDisplay.getPortletGroupId(), urlTitle);
+				}
+				else {
+					throw nsee;
+				}
+			}
 		}
 
 		req.setAttribute(WebKeys.BLOGS_ENTRY, entry);
