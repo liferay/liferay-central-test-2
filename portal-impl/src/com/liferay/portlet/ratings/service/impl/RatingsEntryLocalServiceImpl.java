@@ -49,43 +49,42 @@ import org.apache.commons.logging.LogFactory;
 public class RatingsEntryLocalServiceImpl
 	extends RatingsEntryLocalServiceBaseImpl {
 
-	public void deleteEntry(
-			long userId, String className, long classPK)
+	public void deleteEntry(long userId, String className, long classPK)
 		throws PortalException, SystemException {
+
+		// Entry
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		try {
-			RatingsEntry entry = ratingsEntryPersistence.findByU_C_C(
-				userId, classNameId, classPK);
+		RatingsEntry entry = ratingsEntryPersistence.fetchByU_C_C(
+			userId, classNameId, classPK);
 
-			double oldScore = entry.getScore();
-
-			ratingsEntryPersistence.removeByU_C_C(
-				userId, classNameId, classPK);
-
-			// Stats
-
-			RatingsStats stats = ratingsStatsLocalService.getStats(
-				className, classPK);
-
-			int totalEntries = stats.getTotalEntries() - 1;
-			double totalScore = stats.getTotalScore() - oldScore;
-			double averageScore = 0;
-
-			if (totalEntries > 0) {
-				averageScore = totalScore / totalEntries;
-			}
-
-			stats.setTotalEntries(totalEntries);
-			stats.setTotalScore(totalScore);
-			stats.setAverageScore(averageScore);
-
-			ratingsStatsPersistence.update(stats, false);
+		if (entry == null) {
+			return;
 		}
-		catch (NoSuchEntryException nsee) {
-			_log.warn(nsee);
+
+		double oldScore = entry.getScore();
+
+		ratingsEntryPersistence.removeByU_C_C(userId, classNameId, classPK);
+
+		// Stats
+
+		RatingsStats stats = ratingsStatsLocalService.getStats(
+			className, classPK);
+
+		int totalEntries = stats.getTotalEntries() - 1;
+		double totalScore = stats.getTotalScore() - oldScore;
+		double averageScore = 0;
+
+		if (totalEntries > 0) {
+			averageScore = totalScore / totalEntries;
 		}
+
+		stats.setTotalEntries(totalEntries);
+		stats.setTotalScore(totalScore);
+		stats.setAverageScore(averageScore);
+
+		ratingsStatsPersistence.update(stats, false);
 	}
 
 	public RatingsEntry getEntry(long userId, String className, long classPK)

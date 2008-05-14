@@ -60,8 +60,8 @@ public class RatingsEntryLocalServiceUtil {
 	}
 
 	public static void deleteRatingsEntry(long entryId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
 
 		ratingsEntryLocalService.deleteRatingsEntry(entryId);
@@ -69,8 +69,8 @@ public class RatingsEntryLocalServiceUtil {
 
 	public static void deleteRatingsEntry(
 		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
 
 		ratingsEntryLocalService.deleteRatingsEntry(ratingsEntry);
@@ -103,8 +103,8 @@ public class RatingsEntryLocalServiceUtil {
 
 	public static void deleteEntry(long userId, java.lang.String className,
 		long classPK)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
 
 		ratingsEntryLocalService.deleteEntry(userId, className, classPK);
@@ -112,8 +112,8 @@ public class RatingsEntryLocalServiceUtil {
 
 	public static com.liferay.portlet.ratings.model.RatingsEntry getEntry(
 		long userId, java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
 
 		return ratingsEntryLocalService.getEntry(userId, className, classPK);
@@ -121,8 +121,8 @@ public class RatingsEntryLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> getEntries(
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
 
 		return ratingsEntryLocalService.getEntries(className, classPK);
@@ -130,8 +130,8 @@ public class RatingsEntryLocalServiceUtil {
 
 	public static com.liferay.portlet.ratings.model.RatingsEntry updateEntry(
 		long userId, java.lang.String className, long classPK, double score)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
 
 		return ratingsEntryLocalService.updateEntry(userId, className, classPK,
