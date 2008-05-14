@@ -1193,7 +1193,7 @@ public class StringUtil {
 	public static String upperCaseFirstLetter(String s) {
 		char[] chars = s.toCharArray();
 
-		if (chars[0] >= 97 && chars[0] <= 122) {
+		if ((chars[0] >= 97) && (chars[0] <= 122)) {
 			chars[0] = (char)(chars[0] - 32);
 		}
 
@@ -1201,7 +1201,7 @@ public class StringUtil {
 	}
 
 	public static String wrap(String text) {
-		return wrap(text, 80, "\n");
+		return wrap(text, 80, StringPool.NEW_LINE);
 	}
 
 	public static String wrap(String text, int width, String lineSeparator) {
