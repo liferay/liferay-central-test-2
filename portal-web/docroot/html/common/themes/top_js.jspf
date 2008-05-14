@@ -235,7 +235,7 @@
 			<c:if test="<%= Validator.isNotNull(scroll) %>">
 				jQuery(document).last(
 					function() {
-						document.getElementById("<%= scroll %>").scrollIntoView();
+						document.getElementById("<%= HtmlUtil.escape(scroll) %>").scrollIntoView();
 					}
 				);
 			</c:if>
