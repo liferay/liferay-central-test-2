@@ -78,8 +78,12 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 			else {
 				friendlyURLPath = "/message_boards";
 
-				if (Validator.isNotNull(tabs1) && !tabs1.equals("categories")) {
-					friendlyURLPath += "/" + tabs1;
+				if (Validator.isNotNull(tabs1)) {
+					friendlyURLPath += "/";
+
+					if (!tabs1.equals("categories")) {
+						friendlyURLPath += tabs1;
+					}
 				}
 
 				portletURL.addParameterIncludedInPath("tabs1");
