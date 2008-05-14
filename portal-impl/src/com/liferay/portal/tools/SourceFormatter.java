@@ -195,9 +195,21 @@ public class SourceFormatter {
 				xssVulnerable = true;
 			}
 
-			String inlineStringVulnerability = "'<%= " + jspVariable + " %>";
+			String inlineStringVulnerability1 = "'<%= " + jspVariable + " %>";
 
-			if (jspContent.indexOf(inlineStringVulnerability) != -1) {
+			if (jspContent.indexOf(inlineStringVulnerability1) != -1) {
+				xssVulnerable = true;
+			}
+
+			String inlineStringVulnerability2 = "(\"<%= " + jspVariable + " %>";
+
+			if (jspContent.indexOf(inlineStringVulnerability2) != -1) {
+				xssVulnerable = true;
+			}
+
+			String inlineStringVulnerability3 = " \"<%= " + jspVariable + " %>";
+
+			if (jspContent.indexOf(inlineStringVulnerability3) != -1) {
 				xssVulnerable = true;
 			}
 
@@ -656,7 +668,7 @@ public class SourceFormatter {
 	}
 
 	private static final Pattern _STRING_PARAM_PATTERN = Pattern.compile(
-		"String ([^\\s]+) = ParamUtil\\.getString\\(");
+		"String\\s+([^\\s]+)\\s*=\\s*ParamUtil\\.getString\\(");
 
 	private static final String[] _TAG_LIBRARIES = new String[] {
 		"c", "html", "jsp", "liferay-portlet", "liferay-security",
