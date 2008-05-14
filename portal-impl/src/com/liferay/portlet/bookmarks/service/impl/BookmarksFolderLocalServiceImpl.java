@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lucene.LuceneUtil;
@@ -372,7 +373,14 @@ public class BookmarksFolderLocalServiceImpl
 			hits = SearchEngineUtil.search(companyId, new QueryImpl(fullQuery));
 		}
 		catch (Exception e) {
-			return hits.closeSearcher(keywords, e);
+			try {
+				if (hits != null) {
+					hits = hits.closeSearcher(keywords, e);
+				}
+			}
+			catch (SearchException se) {
+				throw new SystemException(se);
+			}
 		}
 
 		return hits;

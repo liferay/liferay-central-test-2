@@ -22,10 +22,10 @@
 
 package com.liferay.portal.lucene;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.util.Time;
 import com.liferay.util.search.DocumentImpl;
 
@@ -124,7 +124,7 @@ public class LuceneHitsImpl implements Hits {
 	}
 
 	public Hits closeSearcher(String keywords, Exception e)
-		throws SystemException {
+		throws SearchException {
 
 		closeSearcher();
 
@@ -136,7 +136,7 @@ public class LuceneHitsImpl implements Hits {
 			return new LuceneHitsImpl();
 		}
 		else {
-			throw new SystemException(e);
+			throw new SearchException(e);
 		}
 	}
 

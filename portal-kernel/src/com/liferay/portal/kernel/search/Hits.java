@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.search;
 
-import com.liferay.portal.SystemException;
-
 import java.io.Serializable;
 
 import java.util.List;
@@ -61,7 +59,7 @@ public interface Hits extends Serializable {
 	public void closeSearcher();
 
 	public Hits closeSearcher(String keywords, Exception e)
-		throws SystemException;
+		throws SearchException;
 
 	public Document doc(int n);
 

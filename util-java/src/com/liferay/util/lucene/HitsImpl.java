@@ -22,9 +22,9 @@
 
 package com.liferay.util.lucene;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.util.Time;
 
 import java.io.IOException;
@@ -121,7 +121,7 @@ public class HitsImpl implements Hits {
 	}
 
 	public Hits closeSearcher(String keywords, Exception e)
-		throws SystemException {
+		throws SearchException {
 
 		closeSearcher();
 
@@ -133,7 +133,7 @@ public class HitsImpl implements Hits {
 			return new HitsImpl();
 		}
 		else {
-			throw new SystemException(e);
+			throw new SearchException(e);
 		}
 	}
 
