@@ -22,7 +22,7 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.portal.image.ImageProcessorImplTestCase;
+import com.liferay.portal.image.ImageProcessorImplTest;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.util.TestPropsUtil;
 
@@ -43,7 +43,7 @@ public class MiscTestSuite extends TestSuite {
 			return;
 		}
 
-		addTestSuite(ImageProcessorImplTestCase.class);
+		addTestSuite(ImageProcessorImplTest.class);
 	}
 
 	public void test() {

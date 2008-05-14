@@ -40,12 +40,12 @@ import java.util.Arrays;
 import javax.imageio.ImageIO;
 
 /**
- * <a href="ImageProcessorImplTestCase.java.html"><b><i>View Source</i></b></a>
+ * <a href="ImageProcessorImplTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
  *
  */
-public class ImageProcessorImplTestCase extends BaseTestCase {
+public class ImageProcessorImplTest extends BaseTestCase {
 
 	public void testReadBMP() throws Exception {
 		testRead("liferay.bmp");

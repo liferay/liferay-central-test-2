@@ -42,218 +42,218 @@ public class ClassicToCreoleTranslatorTest extends TestCase {
 	public void testBold() throws Exception {
 		String content = "This is '''bold'''.";
 
-		String result = _translate(content);
 		String expected = "This is **bold**.";
+		String actual = _translate(content);
 
-		assertEquals(result, expected);
+		assertEquals(expected, actual);
 	}
 
 	public void testItalics() throws Exception {
 		String content = "This is ''italics''.";
 
-		String result = _translate(content);
 		String expected = "This is //italics//.";
+		String actual = _translate(content);
 
-		assertEquals(result, expected);
+		assertEquals(expected, actual);
 	}
 
 	public void testBoldItalics() throws Exception {
 		String content = "This is '''''bold and italics'''''.";
 
-		String result = _translate(content);
 		String expected = "This is **//bold and italics//**.";
+		String actual = _translate(content);
 
-		assertEquals(result, expected);
+		assertEquals(expected, actual);
 	}
 
 	public void testQuoted() throws Exception {
 		String content = "This is 'quoted'.";
 
-		String result = _translate(content);
 		String expected = content;
+		String actual = _translate(content);
 
-		assertEquals(result, expected);
+		assertEquals(expected, actual);
 	}
 
 	public void testHeader1() throws Exception {
 		String content = "= Header 1 =";
 
-		String result = _translate(content);
 		String expected = content;
+		String actual = _translate(content);
 
-		assertEquals(result, expected);
+		assertEquals(expected, actual);
 	}
 
 	public void testLink() throws Exception {
 		String content = "[Link]";
 
-		String result = _translate(content);
 		String expected = "[[Link]]";
+		String actual = _translate(content);
 
-		assertEquals(result, expected);
+		assertEquals(expected, actual);
 	}
 
 	public void testLinkWithLabel() throws Exception {
 		String content = "[Link This is the label]";
 
-		String result = _translate(content);
 		String expected = "[[Link|This is the label]]";
+		String actual = _translate(content);
 
-		assertEquals(result, expected);
+		assertEquals(expected, actual);
 	}
 
 	public void testURL() throws Exception {
 		String content = "text[http://www.liferay.com]text";
 
-		String result = _translate(content);
 		String expected = "text[[http://www.liferay.com]]text";
+		String actual = _translate(content);
 
-		assertEquals(result, expected);
+		assertEquals(expected, actual);
 	}
 
 	public void testURLWithLabel() throws Exception {
 		String content = "[http://www.liferay.com This is the label]";
 
-		String result = _translate(content);
 		String expected = "[[http://www.liferay.com|This is the label]]";
+		String actual = _translate(content);
 
-		assertEquals(result, expected);
+		assertEquals(expected, actual);
 	}
 
 	public void testMonospace() throws Exception {
 		String content = "previous line\n monospace\nnext line";
 
-		String result = _translate(content);
 		String expected = "previous line\n{{{monospace}}}\nnext line";
+		String actual = _translate(content);
 
-		assertEquals(result, expected);
+		assertEquals(expected, actual);
 	}
 
 	public void testMultilinePre() throws Exception {
 		String content = "previous line\n monospace\n second line\nnext line";
 
-		String result = _translate(content);
 		String expected =
 			"previous line\n{{{monospace\nsecond line}}}\nnext line";
+		String actual = _translate(content);
 
-		assertEquals(result, expected);
+		assertEquals(expected, actual);
 	}
 
 	public void testNotListItem() throws Exception {
 		String content = "\t*item";
 
-		String result = _translate(content);
 		String expected = content;
+		String actual = _translate(content);
 
-		assertEquals(result, expected);
+		assertEquals(expected, actual);
 	}
 
 	public void testListItem() throws Exception {
 		String content = "\t* item";
 
-		String result = _translate(content);
 		String expected = "* item";
+		String actual = _translate(content);
 
-		assertEquals(result, expected);
+		assertEquals(expected, actual);
 	}
 
 	public void testListSubItem() throws Exception {
 		String content = "\t\t* subitem";
 
-		String result = _translate(content);
 		String expected = "** subitem";
+		String actual = _translate(content);
 
-		assertEquals(result, expected);
+		assertEquals(expected, actual);
 	}
 
 	public void testListSubSubItem() throws Exception {
 		String content = "\t\t\t* subsubitem";
 
-		String result = _translate(content);
 		String expected = "*** subsubitem";
+		String actual = _translate(content);
 
-		assertEquals(result, expected);
+		assertEquals(expected, actual);
 	}
 
 	public void testListSubSubSubItem() throws Exception {
 		String content = "\t\t\t\t* subsubitem";
 
-		String result = _translate(content);
 		String expected = "**** subsubitem";
+		String actual = _translate(content);
 
-		assertEquals(result, expected);
+		assertEquals(expected, actual);
 	}
 
 	public void testOrderedListItem() throws Exception {
 		String content = "\t1 item";
 
-		String result = _translate(content);
 		String expected = "# item";
+		String actual = _translate(content);
 
-		assertEquals(result, expected);
+		assertEquals(expected, actual);
 	}
 
 	public void testOrderedListSubItem() throws Exception {
 		String content = "\t\t1 subitem";
 
-		String result = _translate(content);
 		String expected = "## subitem";
+		String actual = _translate(content);
 
-		assertEquals(result, expected);
+		assertEquals(expected, actual);
 	}
 
 	public void testOrderedListSubSubItem() throws Exception {
 		String content = "\t\t\t1 subsubitem";
 
-		String result = _translate(content);
 		String expected = "### subsubitem";
+		String actual = _translate(content);
 
-		assertEquals(result, expected);
+		assertEquals(expected, actual);
 	}
 
 	public void testOrderedListSubSubSubItem() throws Exception {
 		String content = "\t\t\t\t1 subsubitem";
 
-		String result = _translate(content);
 		String expected = "#### subsubitem";
+		String actual = _translate(content);
 
-		assertEquals(result, expected);
+		assertEquals(expected, actual);
 	}
 
 	public void testHorizontalRule() throws Exception {
 		String content = "\n----";
 
-		String result = _translate(content);
 		String expected = content;
+		String actual = _translate(content);
 
-		assertEquals(result, expected);
+		assertEquals(expected, actual);
 	}
 
 	public void testTermDefinition() throws Exception {
 		String content = "\tterm:\tdefinition";
 
-		String result = _translate(content);
 		String expected = "**term**:\ndefinition";
+		String actual = _translate(content);
 
-		assertEquals(result, expected);
+		assertEquals(expected, actual);
 	}
 
 	public void testIndentedParagraph() throws Exception {
 		String content = "\t:\tparagraph";
 
-		String result = _translate(content);
 		String expected = "paragraph";
+		String actual = _translate(content);
 
-		assertEquals(result, expected);
+		assertEquals(expected, actual);
 	}
 
 	public void testCamelCase() throws Exception {
 		String content = "text CamelCase text";
 
-		String result = _translate(content);
 		String expected = "text [[CamelCase]] text";
+		String actual = _translate(content);
 
-		assertEquals(result, expected);
+		assertEquals(expected, actual);
 	}
 
 	public String _translate(String content) {

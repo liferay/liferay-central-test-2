@@ -44,20 +44,18 @@ public class DiffTest extends TestCase {
 		StringReader reader1 = new StringReader("liferay");
 		StringReader reader2 = new StringReader("liferay");
 
-		List<DiffResult>[] results = DiffUtil.diff(reader1, reader2);
-
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
 
-		assertEquals(results[0], expectedSource);
-		assertEquals(results[1], expectedTarget);
+		List<DiffResult>[] actual = DiffUtil.diff(reader1, reader2);
+
+		assertEquals(expectedSource, actual[0]);
+		assertEquals(expectedTarget, actual[1]);
 	}
 
 	public void testTwo() {
 		StringReader reader1 = new StringReader("liferay");
 		StringReader reader2 = new StringReader("LifeRay");
-
-		List<DiffResult>[] results = DiffUtil.diff(reader1, reader2);
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -78,15 +76,15 @@ public class DiffTest extends TestCase {
 
 		expectedTarget.add(new DiffResult(0, changedLines));
 
-		assertEquals(results[0], expectedSource);
-		assertEquals(results[1], expectedTarget);
+		List<DiffResult>[] actual = DiffUtil.diff(reader1, reader2);
+
+		assertEquals(expectedSource, actual[0]);
+		assertEquals(expectedTarget, actual[1]);
 	}
 
 	public void testThree() {
 		StringReader reader1 = new StringReader("aaa");
 		StringReader reader2 = new StringReader("bbb");
-
-		List<DiffResult>[] results = DiffUtil.diff(reader1, reader2);
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -101,15 +99,15 @@ public class DiffTest extends TestCase {
 
 		expectedTarget.add(new DiffResult(0, DiffUtil.CONTEXT_LINE));
 
-		assertEquals(results[0], expectedSource);
-		assertEquals(results[1], expectedTarget);
+		List<DiffResult>[] actual = DiffUtil.diff(reader1, reader2);
+
+		assertEquals(expectedSource, actual[0]);
+		assertEquals(expectedTarget, actual[1]);
 	}
 
 	public void testFour() {
 		StringReader reader1 = new StringReader("rahab");
 		StringReader reader2 = new StringReader("boaz");
-
-		List<DiffResult>[] results = DiffUtil.diff(reader1, reader2);
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -125,15 +123,15 @@ public class DiffTest extends TestCase {
 
 		expectedTarget.add(new DiffResult(0, DiffUtil.CONTEXT_LINE));
 
-		assertEquals(results[0], expectedSource);
-		assertEquals(results[1], expectedTarget);
+		List<DiffResult>[] actual = DiffUtil.diff(reader1, reader2);
+
+		assertEquals(expectedSource, actual[0]);
+		assertEquals(expectedTarget, actual[1]);
 	}
 
 	public void testFive() {
 		StringReader reader1 = new StringReader("aaa\nbbb");
 		StringReader reader2 = new StringReader("ccc\naaa");
-
-		List<DiffResult>[] results = DiffUtil.diff(reader1, reader2);
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -157,15 +155,15 @@ public class DiffTest extends TestCase {
 
 		expectedTarget.add(new DiffResult(1, changedLines));
 
-		assertEquals(results[0], expectedSource);
-		assertEquals(results[1], expectedTarget);
+		List<DiffResult>[] actual = DiffUtil.diff(reader1, reader2);
+
+		assertEquals(expectedSource, actual[0]);
+		assertEquals(expectedTarget, actual[1]);
 	}
 
 	public void testSix() {
 		StringReader reader1 = new StringReader("ccc\naaa");
 		StringReader reader2 = new StringReader("aaa\nbbb");
-
-		List<DiffResult>[] results = DiffUtil.diff(reader1, reader2);
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -189,15 +187,15 @@ public class DiffTest extends TestCase {
 
 		expectedTarget.add(new DiffResult(1, changedLines));
 
-		assertEquals(results[0], expectedSource);
-		assertEquals(results[1], expectedTarget);
+		List<DiffResult>[] actual = DiffUtil.diff(reader1, reader2);
+
+		assertEquals(expectedSource, actual[0]);
+		assertEquals(expectedTarget, actual[1]);
 	}
 
 	public void testSeven() {
 		StringReader reader1 = new StringReader("ccc\naaa\nbbe");
 		StringReader reader2 = new StringReader("aaa\nbbb");
-
-		List<DiffResult>[] results = DiffUtil.diff(reader1, reader2);
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -219,15 +217,15 @@ public class DiffTest extends TestCase {
 		changedLines.add("bb" + DiffUtil.OPEN_INS + "b" + DiffUtil.CLOSE_INS);
 		expectedTarget.add(new DiffResult(1, changedLines));
 
-		assertEquals(results[0], expectedSource);
-		assertEquals(results[1], expectedTarget);
+		List<DiffResult>[] actual = DiffUtil.diff(reader1, reader2);
+
+		assertEquals(expectedSource, actual[0]);
+		assertEquals(expectedTarget, actual[1]);
 	}
 
 	public void testEight() {
 		StringReader reader1 = new StringReader("add\nbbb\nccc");
 		StringReader reader2 = new StringReader("bbb\nccc\naee");
-
-		List<DiffResult>[] results = DiffUtil.diff(reader1, reader2);
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -251,15 +249,15 @@ public class DiffTest extends TestCase {
 		changedLines.add(DiffUtil.OPEN_INS + "aee" + DiffUtil.CLOSE_INS);
 		expectedTarget.add(new DiffResult(2, changedLines));
 
-		assertEquals(results[0], expectedSource);
-		assertEquals(results[1], expectedTarget);
+		List<DiffResult>[] actual = DiffUtil.diff(reader1, reader2);
+
+		assertEquals(expectedSource, actual[0]);
+		assertEquals(expectedTarget, actual[1]);
 	}
 
 	public void testNine() {
 		StringReader reader1 = new StringReader("abcd");
 		StringReader reader2 = new StringReader("abcdee");
-
-		List<DiffResult>[] results = DiffUtil.diff(reader1, reader2);
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -270,15 +268,15 @@ public class DiffTest extends TestCase {
 			new DiffResult(
 				0, "abcd" + DiffUtil.OPEN_INS + "ee" + DiffUtil.CLOSE_INS));
 
-		assertEquals(results[0], expectedSource);
-		assertEquals(results[1], expectedTarget);
+		List<DiffResult>[] actual = DiffUtil.diff(reader1, reader2);
+
+		assertEquals(expectedSource, actual[0]);
+		assertEquals(expectedTarget, actual[1]);
 	}
 
 	public void testTen() {
 		StringReader reader1 = new StringReader("abcd");
 		StringReader reader2 = new StringReader("abcdeee");
-
-		List<DiffResult>[] results = DiffUtil.diff(reader1, reader2);
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -294,15 +292,15 @@ public class DiffTest extends TestCase {
 
 		expectedTarget.add(new DiffResult(0, DiffUtil.CONTEXT_LINE));
 
-		assertEquals(results[0], expectedSource);
-		assertEquals(results[1], expectedTarget);
+		List<DiffResult>[] actual = DiffUtil.diff(reader1, reader2);
+
+		assertEquals(expectedSource, actual[0]);
+		assertEquals(expectedTarget, actual[1]);
 	}
 
 	public void testEleven() {
 		StringReader reader1 = new StringReader("aaa\nbbb\nfff");
 		StringReader reader2 = new StringReader("ccc\nada\nbeb");
-
-		List<DiffResult>[] results = DiffUtil.diff(reader1, reader2);
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -334,15 +332,15 @@ public class DiffTest extends TestCase {
 
 		expectedTarget.add(new DiffResult(2, DiffUtil.CONTEXT_LINE));
 
-		assertEquals(results[0], expectedSource);
-		assertEquals(results[1], expectedTarget);
+		List<DiffResult>[] actual = DiffUtil.diff(reader1, reader2);
+
+		assertEquals(expectedSource, actual[0]);
+		assertEquals(expectedTarget, actual[1]);
 	}
 
 	public void testTwelve() {
 		StringReader reader1 = new StringReader("ada");
 		StringReader reader2 = new StringReader("aaa\nccc");
-
-		List<DiffResult>[] results = DiffUtil.diff(reader1, reader2);
 
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
@@ -360,8 +358,10 @@ public class DiffTest extends TestCase {
 		expectedTarget.add(
 			new DiffResult(1, DiffUtil.OPEN_INS + "ccc" + DiffUtil.CLOSE_INS));
 
-		assertEquals(results[0], expectedSource);
-		assertEquals(results[1], expectedTarget);
+		List<DiffResult>[] actual = DiffUtil.diff(reader1, reader2);
+
+		assertEquals(expectedSource, actual[0]);
+		assertEquals(expectedTarget, actual[1]);
 	}
 
 }
