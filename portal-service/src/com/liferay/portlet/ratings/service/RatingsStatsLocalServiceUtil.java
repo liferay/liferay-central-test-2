@@ -60,8 +60,8 @@ public class RatingsStatsLocalServiceUtil {
 	}
 
 	public static void deleteRatingsStats(long statsId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
 		RatingsStatsLocalService ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getService();
 
 		ratingsStatsLocalService.deleteRatingsStats(statsId);
@@ -69,8 +69,8 @@ public class RatingsStatsLocalServiceUtil {
 
 	public static void deleteRatingsStats(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
 		RatingsStatsLocalService ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getService();
 
 		ratingsStatsLocalService.deleteRatingsStats(ratingsStats);
@@ -102,8 +102,8 @@ public class RatingsStatsLocalServiceUtil {
 	}
 
 	public static void deleteStats(java.lang.String className, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
 		RatingsStatsLocalService ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getService();
 
 		ratingsStatsLocalService.deleteStats(className, classPK);
@@ -111,8 +111,8 @@ public class RatingsStatsLocalServiceUtil {
 
 	public static com.liferay.portlet.ratings.model.RatingsStats getStats(
 		long statsId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
 		RatingsStatsLocalService ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getService();
 
 		return ratingsStatsLocalService.getStats(statsId);
@@ -120,8 +120,8 @@ public class RatingsStatsLocalServiceUtil {
 
 	public static com.liferay.portlet.ratings.model.RatingsStats getStats(
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
 		RatingsStatsLocalService ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getService();
 
 		return ratingsStatsLocalService.getStats(className, classPK);

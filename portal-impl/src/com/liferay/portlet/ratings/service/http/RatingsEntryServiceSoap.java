@@ -81,6 +81,18 @@ import java.rmi.RemoteException;
  *
  */
 public class RatingsEntryServiceSoap {
+	public static void deleteEntry(java.lang.String className, long classPK)
+		throws RemoteException {
+		try {
+			RatingsEntryServiceUtil.deleteEntry(className, classPK);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.ratings.model.RatingsEntrySoap updateEntry(
 		java.lang.String className, long classPK, double score)
 		throws RemoteException {

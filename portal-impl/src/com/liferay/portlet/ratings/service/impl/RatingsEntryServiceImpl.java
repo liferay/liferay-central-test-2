@@ -35,6 +35,12 @@ import com.liferay.portlet.ratings.service.base.RatingsEntryServiceBaseImpl;
  */
 public class RatingsEntryServiceImpl extends RatingsEntryServiceBaseImpl {
 
+	public void deleteEntry(String className, long classPK)
+		throws PortalException, SystemException {
+
+		ratingsEntryLocalService.deleteEntry(getUserId(), className, classPK);
+	}
+
 	public RatingsEntry updateEntry(
 			String className, long classPK, double score)
 		throws PortalException, SystemException {

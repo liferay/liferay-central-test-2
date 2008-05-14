@@ -53,7 +53,12 @@ public class RateEntryAction extends JSONAction {
 		long classPK = getClassPK(req);
 		double score = ParamUtil.getDouble(req, "score");
 
-		RatingsEntryServiceUtil.updateEntry(className, classPK, score);
+		if (score == 0) {
+			RatingsEntryServiceUtil.deleteEntry(className, classPK);
+		}
+		else {
+			RatingsEntryServiceUtil.updateEntry(className, classPK, score);
+		}
 
 		RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(
 			className, classPK);

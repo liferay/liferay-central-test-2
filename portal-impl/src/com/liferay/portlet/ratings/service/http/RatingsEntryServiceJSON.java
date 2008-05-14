@@ -71,6 +71,12 @@ import org.json.JSONObject;
  *
  */
 public class RatingsEntryServiceJSON {
+	public static void deleteEntry(java.lang.String className, long classPK)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		RatingsEntryServiceUtil.deleteEntry(className, classPK);
+	}
+
 	public static JSONObject updateEntry(java.lang.String className,
 		long classPK, double score)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,

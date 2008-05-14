@@ -36,6 +36,9 @@ import com.liferay.portlet.ratings.service.base.RatingsEntryLocalServiceBaseImpl
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="RatingsEntryLocalServiceImpl.java.html"><b><i>View Source</i></b>
  * </a>
@@ -45,6 +48,42 @@ import java.util.List;
  */
 public class RatingsEntryLocalServiceImpl
 	extends RatingsEntryLocalServiceBaseImpl {
+
+	public void deleteEntry(
+			long userId, String className, long classPK)
+		throws PortalException, SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		try {
+			RatingsEntry entry = ratingsEntryPersistence.findByU_C_C(
+				userId, classNameId, classPK);
+
+			double oldScore = entry.getScore();
+			double avgScore = 0;
+
+			ratingsEntryPersistence.removeByU_C_C(
+				userId, classNameId, classPK);
+
+			// Stats
+
+			RatingsStats stats = ratingsStatsLocalService.getStats(
+				className, classPK);
+
+			if (stats.getTotalEntries() > 1) {
+				avgScore = stats.getTotalScore() / stats.getTotalEntries();
+			}
+
+			stats.setTotalEntries(stats.getTotalEntries() - 1);
+			stats.setTotalScore(stats.getTotalScore() - oldScore);
+			stats.setAverageScore(avgScore);
+
+			ratingsStatsPersistence.update(stats, false);
+		}
+		catch (NoSuchEntryException nsee) {
+			_log.warn(nsee);
+		}
+	}
 
 	public RatingsEntry getEntry(long userId, String className, long classPK)
 		throws PortalException, SystemException {
@@ -163,5 +202,8 @@ public class RatingsEntryLocalServiceImpl
 
 		return entry;
 	}
+
+	private static Log _log =
+		LogFactory.getLog(RatingsEntryLocalServiceImpl.class);
 
 }

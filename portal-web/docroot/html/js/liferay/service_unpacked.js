@@ -2026,6 +2026,13 @@ Liferay.Service.Ratings = {
 Liferay.Service.Ratings.RatingsEntry = {
 	serviceClassName: Liferay.Service.Ratings.servicePackage + "RatingsEntry" + Liferay.Service.classNameSuffix,
 
+	deleteEntry: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteEntry";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	updateEntry: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "updateEntry";
