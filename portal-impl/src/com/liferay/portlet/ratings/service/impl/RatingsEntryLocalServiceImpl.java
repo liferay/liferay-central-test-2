@@ -60,7 +60,6 @@ public class RatingsEntryLocalServiceImpl
 				userId, classNameId, classPK);
 
 			double oldScore = entry.getScore();
-			double avgScore = 0;
 
 			ratingsEntryPersistence.removeByU_C_C(
 				userId, classNameId, classPK);
@@ -70,13 +69,17 @@ public class RatingsEntryLocalServiceImpl
 			RatingsStats stats = ratingsStatsLocalService.getStats(
 				className, classPK);
 
-			if (stats.getTotalEntries() > 1) {
-				avgScore = stats.getTotalScore() / stats.getTotalEntries();
+			int totalEntries = stats.getTotalEntries() - 1;
+			double totalScore = stats.getTotalScore() - oldScore;
+			double averageScore = 0;
+
+			if (totalEntries > 0) {
+				averageScore = totalScore / totalEntries;
 			}
 
-			stats.setTotalEntries(stats.getTotalEntries() - 1);
-			stats.setTotalScore(stats.getTotalScore() - oldScore);
-			stats.setAverageScore(avgScore);
+			stats.setTotalEntries(totalEntries);
+			stats.setTotalScore(totalScore);
+			stats.setAverageScore(averageScore);
 
 			ratingsStatsPersistence.update(stats, false);
 		}
