@@ -164,7 +164,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 											document.getElementById("<%= randomNamespace %>totalRating").innerHTML = "<span class='zero-total'>0</span>";
 										}
 										else {
-											document.getElementById("<%= randomNamespace %>totalRating").innerHTML = (res.averageScore > 0) ? "<span class='pos-total'>+" + res.totalEntries * res.averageScore + "</span>" : "<span class='neg-total'>" + res.totalEntries * res.averageScore + "</span>";
+											document.getElementById("<%= randomNamespace %>totalRating").innerHTML = (res.averageScore > 0) ? "<span class='pos-total'>+" + Math.round(res.totalEntries * res.averageScore) + "</span>" : "<span class='neg-total'>" + Math.round(res.totalEntries * res.averageScore) + "</span>";
 										}
 
 										document.getElementById("<%= randomNamespace %>totalEntries").innerHTML = res.totalEntries;
