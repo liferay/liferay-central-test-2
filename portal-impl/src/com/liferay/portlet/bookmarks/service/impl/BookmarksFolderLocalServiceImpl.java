@@ -374,7 +374,7 @@ public class BookmarksFolderLocalServiceImpl
 		catch (Exception e) {
 			return hits.closeSearcher(keywords, e);
 		}
-		
+
 		return hits;
 	}
 

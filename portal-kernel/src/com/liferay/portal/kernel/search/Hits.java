@@ -22,11 +22,11 @@
 
 package com.liferay.portal.kernel.search;
 
+import com.liferay.portal.SystemException;
+
 import java.io.Serializable;
 
 import java.util.List;
-
-import com.liferay.portal.SystemException;
 
 /**
  * <a href="Hits.java.html"><b><i>View Source</i></b></a>
@@ -59,7 +59,7 @@ public interface Hits extends Serializable {
 	public void setScores(Float[] scores);
 
 	public void closeSearcher();
-	
+
 	public Hits closeSearcher(String keywords, Exception e)
 		throws SystemException;
 

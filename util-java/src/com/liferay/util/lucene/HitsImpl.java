@@ -119,17 +119,17 @@ public class HitsImpl implements Hits {
 		catch (Exception e) {
 		}
 	}
-	
+
 	public Hits closeSearcher(String keywords, Exception e)
 		throws SystemException {
-	
+
 		closeSearcher();
-	
+
 		if (e instanceof BooleanQuery.TooManyClauses ||
 			e instanceof ParseException) {
-	
+
 			_log.error("Parsing keywords " + keywords, e);
-	
+
 			return new HitsImpl();
 		}
 		else {

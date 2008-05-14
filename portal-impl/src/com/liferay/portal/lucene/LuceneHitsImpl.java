@@ -122,7 +122,7 @@ public class LuceneHitsImpl implements Hits {
 		catch (Exception e) {
 		}
 	}
-	
+
 	public Hits closeSearcher(String keywords, Exception e)
 		throws SystemException {
 
