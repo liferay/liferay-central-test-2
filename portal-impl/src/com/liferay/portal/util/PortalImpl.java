@@ -187,8 +187,8 @@ public class PortalImpl implements Portal {
 		}
 
 		try {
-			_computerAddress =
-				InetAddress.getByName(_computerName).getHostAddress();
+			_computerAddress = InetAddress.getByName(
+				_computerName).getHostAddress();
 		}
 		catch (UnknownHostException uhe) {
 		}
