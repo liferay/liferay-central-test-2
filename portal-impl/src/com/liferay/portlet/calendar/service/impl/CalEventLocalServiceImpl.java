@@ -1258,8 +1258,10 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		TimeZone timeZone = user.getTimeZone();
 
-		timeZone = TimeZone.getTimeZone(
-			vTimeZone.getTimeZoneId().getValue());
+		if (Validator.isNotNull(vTimeZone)) {
+			timeZone = TimeZone.getTimeZone(
+				vTimeZone.getTimeZoneId().getValue());
+		}
 
 		return timeZone;
 	}
