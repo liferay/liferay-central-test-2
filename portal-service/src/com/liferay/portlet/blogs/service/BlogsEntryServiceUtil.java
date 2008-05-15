@@ -54,7 +54,7 @@ public class BlogsEntryServiceUtil {
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
 		long plid, java.lang.String title, java.lang.String content,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute,
+		int displayDateHour, int displayDateMinute, boolean draft,
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
@@ -64,14 +64,14 @@ public class BlogsEntryServiceUtil {
 
 		return blogsEntryService.addEntry(plid, title, content,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, tagsEntries, addCommunityPermissions,
+			displayDateMinute, draft, tagsEntries, addCommunityPermissions,
 			addGuestPermissions, themeDisplay);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
 		long plid, java.lang.String title, java.lang.String content,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute,
+		int displayDateHour, int displayDateMinute, boolean draft,
 		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions,
@@ -82,7 +82,7 @@ public class BlogsEntryServiceUtil {
 
 		return blogsEntryService.addEntry(plid, title, content,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, tagsEntries, communityPermissions,
+			displayDateMinute, draft, tagsEntries, communityPermissions,
 			guestPermissions, themeDisplay);
 	}
 
@@ -180,7 +180,7 @@ public class BlogsEntryServiceUtil {
 	public static com.liferay.portlet.blogs.model.BlogsEntry updateEntry(
 		long entryId, java.lang.String title, java.lang.String content,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute,
+		int displayDateHour, int displayDateMinute, boolean draft,
 		java.lang.String[] tagsEntries,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
@@ -189,6 +189,6 @@ public class BlogsEntryServiceUtil {
 
 		return blogsEntryService.updateEntry(entryId, title, content,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, tagsEntries, themeDisplay);
+			displayDateMinute, draft, tagsEntries, themeDisplay);
 	}
 }

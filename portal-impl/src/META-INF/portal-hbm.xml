@@ -602,6 +602,7 @@
 		<property name="urlTitle" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="content" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="displayDate" />
+		<property name="draft" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
 	<class name="com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl" table="BlogsStatsUser">
 		<cache usage="read-write" />

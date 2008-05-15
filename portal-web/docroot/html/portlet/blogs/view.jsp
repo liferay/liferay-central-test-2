@@ -42,11 +42,25 @@ portletURL.setParameter("struts_action", "/blogs/view");
 <%
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, pageDelta, portletURL, null, null);
 
-int total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(portletGroupId.longValue());
+int total = 0;
+
+if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.BLOGS, ActionKeys.ADD_ENTRY)) {
+	total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(portletGroupId.longValue());
+}
+else {
+	total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(portletGroupId.longValue(), false);
+}
 
 searchContainer.setTotal(total);
 
-List results = BlogsEntryLocalServiceUtil.getGroupEntries(portletGroupId.longValue(), searchContainer.getStart(), searchContainer.getEnd());
+List results = null;
+
+if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.BLOGS, ActionKeys.ADD_ENTRY)) {
+	results = BlogsEntryLocalServiceUtil.getGroupEntries(portletGroupId.longValue(), searchContainer.getStart(), searchContainer.getEnd());
+}
+else {
+	results = BlogsEntryLocalServiceUtil.getGroupEntries(portletGroupId.longValue(), false, searchContainer.getStart(), searchContainer.getEnd());
+}
 
 searchContainer.setResults(results);
 %>

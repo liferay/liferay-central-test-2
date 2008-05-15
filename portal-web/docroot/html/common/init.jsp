@@ -53,6 +53,7 @@
 
 <%@ page import="com.germinus.easyconf.Filter" %>
 
+<%@ page import="com.liferay.counter.service.CounterLocalServiceUtil" %>
 <%@ page import="com.liferay.lock.DuplicateLockException" %>
 <%@ page import="com.liferay.lock.model.Lock" %>
 <%@ page import="com.liferay.lock.service.LockServiceUtil" %>

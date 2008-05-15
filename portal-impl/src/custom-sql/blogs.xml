@@ -14,7 +14,8 @@
 				Users_Orgs ON
 					(Users_Orgs.userId = User_.userId)
 			WHERE
-				[$ORGANIZATION_ID$]
+				[$ORGANIZATION_ID$] AND
+				(BlogsEntry.draft = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder.findByOrganizationIds">
@@ -30,7 +31,8 @@
 				Users_Orgs ON
 					(Users_Orgs.userId = User_.userId)
 			WHERE
-				[$ORGANIZATION_ID$]
+				[$ORGANIZATION_ID$] AND
+				(BlogsEntry.draft = ?)
 			ORDER BY
 				BlogsEntry.displayDate DESC
 		]]>

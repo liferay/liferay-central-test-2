@@ -1402,6 +1402,545 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public List<BlogsEntry> findByG_D(long groupId, boolean draft)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = BlogsEntryModelImpl.CACHE_ENABLED;
+		String finderClassName = BlogsEntry.class.getName();
+		String finderMethodName = "findByG_D";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Boolean.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), Boolean.valueOf(draft)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("draft = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("displayDate DESC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(draft);
+
+				List<BlogsEntry> list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<BlogsEntry>)result;
+		}
+	}
+
+	public List<BlogsEntry> findByG_D(long groupId, boolean draft, int begin,
+		int end) throws SystemException {
+		return findByG_D(groupId, draft, begin, end, null);
+	}
+
+	public List<BlogsEntry> findByG_D(long groupId, boolean draft, int begin,
+		int end, OrderByComparator obc) throws SystemException {
+		boolean finderClassNameCacheEnabled = BlogsEntryModelImpl.CACHE_ENABLED;
+		String finderClassName = BlogsEntry.class.getName();
+		String finderMethodName = "findByG_D";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), Boolean.valueOf(draft),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("draft = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("displayDate DESC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(draft);
+
+				List<BlogsEntry> list = (List<BlogsEntry>)QueryUtil.list(q,
+						getDialect(), begin, end);
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<BlogsEntry>)result;
+		}
+	}
+
+	public BlogsEntry findByG_D_First(long groupId, boolean draft,
+		OrderByComparator obc) throws NoSuchEntryException, SystemException {
+		List<BlogsEntry> list = findByG_D(groupId, draft, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No BlogsEntry exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("draft=" + draft);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public BlogsEntry findByG_D_Last(long groupId, boolean draft,
+		OrderByComparator obc) throws NoSuchEntryException, SystemException {
+		int count = countByG_D(groupId, draft);
+
+		List<BlogsEntry> list = findByG_D(groupId, draft, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No BlogsEntry exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("draft=" + draft);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public BlogsEntry[] findByG_D_PrevAndNext(long entryId, long groupId,
+		boolean draft, OrderByComparator obc)
+		throws NoSuchEntryException, SystemException {
+		BlogsEntry blogsEntry = findByPrimaryKey(entryId);
+
+		int count = countByG_D(groupId, draft);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+
+			query.append(
+				"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+
+			query.append("groupId = ?");
+
+			query.append(" AND ");
+
+			query.append("draft = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("displayDate DESC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(draft);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					blogsEntry);
+
+			BlogsEntry[] array = new BlogsEntryImpl[3];
+
+			array[0] = (BlogsEntry)objArray[0];
+			array[1] = (BlogsEntry)objArray[1];
+			array[2] = (BlogsEntry)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<BlogsEntry> findByC_D(long companyId, boolean draft)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = BlogsEntryModelImpl.CACHE_ENABLED;
+		String finderClassName = BlogsEntry.class.getName();
+		String finderMethodName = "findByC_D";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Boolean.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), Boolean.valueOf(draft)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+
+				query.append("companyId = ?");
+
+				query.append(" AND ");
+
+				query.append("draft = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("displayDate DESC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(draft);
+
+				List<BlogsEntry> list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<BlogsEntry>)result;
+		}
+	}
+
+	public List<BlogsEntry> findByC_D(long companyId, boolean draft, int begin,
+		int end) throws SystemException {
+		return findByC_D(companyId, draft, begin, end, null);
+	}
+
+	public List<BlogsEntry> findByC_D(long companyId, boolean draft, int begin,
+		int end, OrderByComparator obc) throws SystemException {
+		boolean finderClassNameCacheEnabled = BlogsEntryModelImpl.CACHE_ENABLED;
+		String finderClassName = BlogsEntry.class.getName();
+		String finderMethodName = "findByC_D";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), Boolean.valueOf(draft),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+
+				query.append("companyId = ?");
+
+				query.append(" AND ");
+
+				query.append("draft = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("displayDate DESC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(draft);
+
+				List<BlogsEntry> list = (List<BlogsEntry>)QueryUtil.list(q,
+						getDialect(), begin, end);
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<BlogsEntry>)result;
+		}
+	}
+
+	public BlogsEntry findByC_D_First(long companyId, boolean draft,
+		OrderByComparator obc) throws NoSuchEntryException, SystemException {
+		List<BlogsEntry> list = findByC_D(companyId, draft, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No BlogsEntry exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
+			msg.append(", ");
+			msg.append("draft=" + draft);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public BlogsEntry findByC_D_Last(long companyId, boolean draft,
+		OrderByComparator obc) throws NoSuchEntryException, SystemException {
+		int count = countByC_D(companyId, draft);
+
+		List<BlogsEntry> list = findByC_D(companyId, draft, count - 1, count,
+				obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No BlogsEntry exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
+			msg.append(", ");
+			msg.append("draft=" + draft);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public BlogsEntry[] findByC_D_PrevAndNext(long entryId, long companyId,
+		boolean draft, OrderByComparator obc)
+		throws NoSuchEntryException, SystemException {
+		BlogsEntry blogsEntry = findByPrimaryKey(entryId);
+
+		int count = countByC_D(companyId, draft);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+
+			query.append(
+				"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+
+			query.append("companyId = ?");
+
+			query.append(" AND ");
+
+			query.append("draft = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("displayDate DESC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			qPos.add(draft);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					blogsEntry);
+
+			BlogsEntry[] array = new BlogsEntryImpl[3];
+
+			array[0] = (BlogsEntry)objArray[0];
+			array[1] = (BlogsEntry)objArray[1];
+			array[2] = (BlogsEntry)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public BlogsEntry findByG_UT(long groupId, String urlTitle)
 		throws NoSuchEntryException, SystemException {
 		BlogsEntry blogsEntry = fetchByG_UT(groupId, urlTitle);
@@ -1515,15 +2054,18 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<BlogsEntry> findByC_U(long companyId, long userId)
+	public List<BlogsEntry> findByG_U_D(long groupId, long userId, boolean draft)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = BlogsEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = BlogsEntry.class.getName();
-		String finderMethodName = "findByC_U";
+		String finderMethodName = "findByG_U_D";
 		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
+				Long.class.getName(), Long.class.getName(),
+				Boolean.class.getName()
 			};
-		Object[] finderArgs = new Object[] { new Long(companyId), new Long(userId) };
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(userId), Boolean.valueOf(draft)
+			};
 
 		Object result = null;
 
@@ -1543,11 +2085,15 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
 
-				query.append("companyId = ?");
+				query.append("groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("userId = ?");
+
+				query.append(" AND ");
+
+				query.append("draft = ?");
 
 				query.append(" ");
 
@@ -1559,9 +2105,11 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(companyId);
+				qPos.add(groupId);
 
 				qPos.add(userId);
+
+				qPos.add(draft);
 
 				List<BlogsEntry> list = q.list();
 
@@ -1583,24 +2131,26 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<BlogsEntry> findByC_U(long companyId, long userId, int begin,
-		int end) throws SystemException {
-		return findByC_U(companyId, userId, begin, end, null);
+	public List<BlogsEntry> findByG_U_D(long groupId, long userId,
+		boolean draft, int begin, int end) throws SystemException {
+		return findByG_U_D(groupId, userId, draft, begin, end, null);
 	}
 
-	public List<BlogsEntry> findByC_U(long companyId, long userId, int begin,
-		int end, OrderByComparator obc) throws SystemException {
+	public List<BlogsEntry> findByG_U_D(long groupId, long userId,
+		boolean draft, int begin, int end, OrderByComparator obc)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = BlogsEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = BlogsEntry.class.getName();
-		String finderMethodName = "findByC_U";
+		String finderMethodName = "findByG_U_D";
 		String[] finderParams = new String[] {
 				Long.class.getName(), Long.class.getName(),
+				Boolean.class.getName(),
 				
 				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(userId),
+				new Long(groupId), new Long(userId), Boolean.valueOf(draft),
 				
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
@@ -1623,11 +2173,15 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
 
-				query.append("companyId = ?");
+				query.append("groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("userId = ?");
+
+				query.append(" AND ");
+
+				query.append("draft = ?");
 
 				query.append(" ");
 
@@ -1646,9 +2200,11 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(companyId);
+				qPos.add(groupId);
 
 				qPos.add(userId);
+
+				qPos.add(draft);
 
 				List<BlogsEntry> list = (List<BlogsEntry>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1671,19 +2227,23 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public BlogsEntry findByC_U_First(long companyId, long userId,
-		OrderByComparator obc) throws NoSuchEntryException, SystemException {
-		List<BlogsEntry> list = findByC_U(companyId, userId, 0, 1, obc);
+	public BlogsEntry findByG_U_D_First(long groupId, long userId,
+		boolean draft, OrderByComparator obc)
+		throws NoSuchEntryException, SystemException {
+		List<BlogsEntry> list = findByG_U_D(groupId, userId, draft, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
 
 			msg.append("No BlogsEntry exists with the key {");
 
-			msg.append("companyId=" + companyId);
+			msg.append("groupId=" + groupId);
 
 			msg.append(", ");
 			msg.append("userId=" + userId);
+
+			msg.append(", ");
+			msg.append("draft=" + draft);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1694,22 +2254,26 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public BlogsEntry findByC_U_Last(long companyId, long userId,
-		OrderByComparator obc) throws NoSuchEntryException, SystemException {
-		int count = countByC_U(companyId, userId);
+	public BlogsEntry findByG_U_D_Last(long groupId, long userId,
+		boolean draft, OrderByComparator obc)
+		throws NoSuchEntryException, SystemException {
+		int count = countByG_U_D(groupId, userId, draft);
 
-		List<BlogsEntry> list = findByC_U(companyId, userId, count - 1, count,
-				obc);
+		List<BlogsEntry> list = findByG_U_D(groupId, userId, draft, count - 1,
+				count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
 
 			msg.append("No BlogsEntry exists with the key {");
 
-			msg.append("companyId=" + companyId);
+			msg.append("groupId=" + groupId);
 
 			msg.append(", ");
 			msg.append("userId=" + userId);
+
+			msg.append(", ");
+			msg.append("draft=" + draft);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1720,12 +2284,12 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public BlogsEntry[] findByC_U_PrevAndNext(long entryId, long companyId,
-		long userId, OrderByComparator obc)
+	public BlogsEntry[] findByG_U_D_PrevAndNext(long entryId, long groupId,
+		long userId, boolean draft, OrderByComparator obc)
 		throws NoSuchEntryException, SystemException {
 		BlogsEntry blogsEntry = findByPrimaryKey(entryId);
 
-		int count = countByC_U(companyId, userId);
+		int count = countByG_U_D(groupId, userId, draft);
 
 		Session session = null;
 
@@ -1737,11 +2301,15 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 			query.append(
 				"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
 
-			query.append("companyId = ?");
+			query.append("groupId = ?");
 
 			query.append(" AND ");
 
 			query.append("userId = ?");
+
+			query.append(" AND ");
+
+			query.append("draft = ?");
 
 			query.append(" ");
 
@@ -1760,9 +2328,11 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(companyId);
+			qPos.add(groupId);
 
 			qPos.add(userId);
+
+			qPos.add(draft);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					blogsEntry);
@@ -1933,6 +2503,20 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void removeByG_D(long groupId, boolean draft)
+		throws SystemException {
+		for (BlogsEntry blogsEntry : findByG_D(groupId, draft)) {
+			remove(blogsEntry);
+		}
+	}
+
+	public void removeByC_D(long companyId, boolean draft)
+		throws SystemException {
+		for (BlogsEntry blogsEntry : findByC_D(companyId, draft)) {
+			remove(blogsEntry);
+		}
+	}
+
 	public void removeByG_UT(long groupId, String urlTitle)
 		throws NoSuchEntryException, SystemException {
 		BlogsEntry blogsEntry = findByG_UT(groupId, urlTitle);
@@ -1940,9 +2524,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 		remove(blogsEntry);
 	}
 
-	public void removeByC_U(long companyId, long userId)
+	public void removeByG_U_D(long groupId, long userId, boolean draft)
 		throws SystemException {
-		for (BlogsEntry blogsEntry : findByC_U(companyId, userId)) {
+		for (BlogsEntry blogsEntry : findByG_U_D(groupId, userId, draft)) {
 			remove(blogsEntry);
 		}
 	}
@@ -2314,6 +2898,160 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public int countByG_D(long groupId, boolean draft)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = BlogsEntryModelImpl.CACHE_ENABLED;
+		String finderClassName = BlogsEntry.class.getName();
+		String finderMethodName = "countByG_D";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Boolean.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), Boolean.valueOf(draft)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("draft = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(draft);
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByC_D(long companyId, boolean draft)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = BlogsEntryModelImpl.CACHE_ENABLED;
+		String finderClassName = BlogsEntry.class.getName();
+		String finderMethodName = "countByC_D";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Boolean.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), Boolean.valueOf(draft)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
+
+				query.append("companyId = ?");
+
+				query.append(" AND ");
+
+				query.append("draft = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(draft);
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
 	public int countByG_UT(long groupId, String urlTitle)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = BlogsEntryModelImpl.CACHE_ENABLED;
@@ -2396,15 +3134,18 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public int countByC_U(long companyId, long userId)
+	public int countByG_U_D(long groupId, long userId, boolean draft)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = BlogsEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = BlogsEntry.class.getName();
-		String finderMethodName = "countByC_U";
+		String finderMethodName = "countByG_U_D";
 		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
+				Long.class.getName(), Long.class.getName(),
+				Boolean.class.getName()
 			};
-		Object[] finderArgs = new Object[] { new Long(companyId), new Long(userId) };
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(userId), Boolean.valueOf(draft)
+			};
 
 		Object result = null;
 
@@ -2425,11 +3166,15 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
 
-				query.append("companyId = ?");
+				query.append("groupId = ?");
 
 				query.append(" AND ");
 
 				query.append("userId = ?");
+
+				query.append(" AND ");
+
+				query.append("draft = ?");
 
 				query.append(" ");
 
@@ -2437,9 +3182,11 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(companyId);
+				qPos.add(groupId);
 
 				qPos.add(userId);
+
+				qPos.add(draft);
 
 				Long count = null;
 

@@ -206,7 +206,7 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 			</c:when>
 			<c:otherwise>
 				<li class="toggle">
-					<a href="<%= HtmlUtil.escape(backURL) %>">&laquo; <liferay-ui:message key="back" /></a>
+					<a href="<%= HtmlUtil.escape(backURL) %>" id="<%= namespace %><%= param %>TabsBack">&laquo; <liferay-ui:message key="back" /></a>
 				</li>
 			</c:otherwise>
 		</c:choose>

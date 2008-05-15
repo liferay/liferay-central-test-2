@@ -77,7 +77,7 @@ public interface BlogsEntryLocalService {
 	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(long userId,
 		long plid, java.lang.String title, java.lang.String content,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute,
+		int displayDateHour, int displayDateMinute, boolean draft,
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
@@ -88,8 +88,8 @@ public interface BlogsEntryLocalService {
 		java.lang.String uuid, long userId, long plid, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
-		boolean addGuestPermissions,
+		boolean draft, java.lang.String[] tagsEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
@@ -97,7 +97,7 @@ public interface BlogsEntryLocalService {
 	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(long userId,
 		long plid, java.lang.String title, java.lang.String content,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute,
+		int displayDateHour, int displayDateMinute, boolean draft,
 		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions,
@@ -109,7 +109,7 @@ public interface BlogsEntryLocalService {
 		java.lang.String uuid, long userId, long plid, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		java.lang.String[] tagsEntries,
+		boolean draft, java.lang.String[] tagsEntries,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -163,7 +163,19 @@ public interface BlogsEntryLocalService {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getCompanyEntries(
+		long companyId, boolean draft, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getCompanyEntries(
+		long companyId, boolean draft, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
 	public int getCompanyEntriesCount(long companyId)
+		throws com.liferay.portal.SystemException;
+
+	public int getCompanyEntriesCount(long companyId, boolean draft)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.blogs.model.BlogsEntry getEntry(long entryId)
@@ -184,24 +196,53 @@ public interface BlogsEntryLocalService {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupEntries(
+		long groupId, boolean draft, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupEntries(
+		long groupId, boolean draft, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
 	public int getGroupEntriesCount(long groupId)
+		throws com.liferay.portal.SystemException;
+
+	public int getGroupEntriesCount(long groupId, boolean draft)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupUserEntries(
 		long groupId, long userId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupUserEntries(
+		long groupId, long userId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupUserEntries(
+		long groupId, long userId, boolean draft, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupUserEntries(
+		long groupId, long userId, boolean draft, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
 	public int getGroupUserEntriesCount(long groupId, long userId)
+		throws com.liferay.portal.SystemException;
+
+	public int getGroupUserEntriesCount(long groupId, long userId, boolean draft)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getNoAssetEntries()
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getOrganizationEntries(
-		long organizationId, int begin, int end)
+		long organizationId, boolean draft, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public int getOrganizationEntriesCount(long organizationId)
+	public int getOrganizationEntriesCount(long organizationId, boolean draft)
 		throws com.liferay.portal.SystemException;
 
 	public java.lang.String getUrlTitle(long entryId, java.lang.String title);
@@ -216,7 +257,7 @@ public interface BlogsEntryLocalService {
 	public com.liferay.portlet.blogs.model.BlogsEntry updateEntry(long userId,
 		long entryId, java.lang.String title, java.lang.String content,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute,
+		int displayDateHour, int displayDateMinute, boolean draft,
 		java.lang.String[] tagsEntries,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,

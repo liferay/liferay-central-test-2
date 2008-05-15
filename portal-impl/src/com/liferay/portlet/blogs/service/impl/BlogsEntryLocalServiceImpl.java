@@ -45,7 +45,6 @@ import com.liferay.portlet.blogs.EntryContentException;
 import com.liferay.portlet.blogs.EntryDisplayDateException;
 import com.liferay.portlet.blogs.EntryTitleException;
 import com.liferay.portlet.blogs.model.BlogsEntry;
-import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.blogs.service.base.BlogsEntryLocalServiceBaseImpl;
 import com.liferay.portlet.blogs.social.BlogsActivityKeys;
 import com.liferay.portlet.blogs.util.Indexer;
@@ -78,55 +77,55 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	public BlogsEntry addEntry(
 			long userId, long plid, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, String[] tagsEntries,
-			boolean addCommunityPermissions, boolean addGuestPermissions,
-			ThemeDisplay themeDisplay)
+			int displayDateHour, int displayDateMinute, boolean draft,
+			String[] tagsEntries, boolean addCommunityPermissions,
+			boolean addGuestPermissions, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		return addEntry(
 			null, userId, plid, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			tagsEntries, Boolean.valueOf(addCommunityPermissions),
+			draft, tagsEntries, Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null, themeDisplay);
 	}
 
 	public BlogsEntry addEntry(
 			String uuid, long userId, long plid, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, String[] tagsEntries,
-			boolean addCommunityPermissions, boolean addGuestPermissions,
-			ThemeDisplay themeDisplay)
+			int displayDateHour, int displayDateMinute, boolean draft,
+			String[] tagsEntries, boolean addCommunityPermissions,
+			boolean addGuestPermissions, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		return addEntry(
 			uuid, userId, plid, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			tagsEntries, Boolean.valueOf(addCommunityPermissions),
+			draft, tagsEntries, Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null, themeDisplay);
 	}
 
 	public BlogsEntry addEntry(
 			long userId, long plid, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, String[] tagsEntries,
-			String[] communityPermissions, String[] guestPermissions,
-			ThemeDisplay themeDisplay)
+			int displayDateHour, int displayDateMinute, boolean draft,
+			String[] tagsEntries, String[] communityPermissions,
+			String[] guestPermissions, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		return addEntry(
 			null, userId, plid, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			tagsEntries, null, null, communityPermissions, guestPermissions,
-			themeDisplay);
+			draft, tagsEntries, null, null, communityPermissions,
+			guestPermissions, themeDisplay);
 	}
 
 	public BlogsEntry addEntry(
 			String uuid, long userId, long plid, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, String[] tagsEntries,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions,
-			ThemeDisplay themeDisplay)
+			int displayDateHour, int displayDateMinute, boolean draft,
+			String[] tagsEntries, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		// Entry
@@ -158,6 +157,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		entry.setUrlTitle(getUniqueUrlTitle(entryId, groupId, title));
 		entry.setContent(content);
 		entry.setDisplayDate(displayDate);
+		entry.setDraft(draft);
 
 		blogsEntryPersistence.update(entry, false);
 
@@ -176,13 +176,17 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Statistics
 
-		blogsStatsUserLocalService.updateStatsUser(groupId, userId, now);
+		if (!draft) {
+			blogsStatsUserLocalService.updateStatsUser(groupId, userId, now);
+		}
 
 		// Social
 
-		socialActivityLocalService.addActivity(
-			userId, groupId, BlogsEntry.class.getName(), entryId,
-			BlogsActivityKeys.ADD_ENTRY, StringPool.BLANK, 0);
+		if (!draft) {
+			socialActivityLocalService.addActivity(
+				userId, groupId, BlogsEntry.class.getName(), entryId,
+				BlogsActivityKeys.ADD_ENTRY, StringPool.BLANK, 0);
+		}
 
 		// Tags
 
@@ -191,9 +195,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		// Lucene
 
 		try {
-			Indexer.addEntry(
-				entry.getCompanyId(), entry.getGroupId(), userId, entryId,
-				title, content, tagsEntries);
+			if (!draft) {
+				Indexer.addEntry(
+					entry.getCompanyId(), entry.getGroupId(), userId, entryId,
+					title, content, tagsEntries);
+			}
 		}
 		catch (IOException ioe) {
 			_log.error("Indexing " + entryId, ioe);
@@ -201,7 +207,9 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Google
 
-		pingGoogle(entry, themeDisplay);
+		if (!draft) {
+			pingGoogle(entry, themeDisplay);
+		}
 
 		return entry;
 	}
@@ -322,8 +330,30 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			companyId, begin, end, obc);
 	}
 
+	public List<BlogsEntry> getCompanyEntries(
+			long companyId, boolean draft, int begin, int end)
+		throws SystemException {
+
+		return blogsEntryPersistence.findByC_D(companyId, draft, begin, end);
+	}
+
+	public List<BlogsEntry> getCompanyEntries(
+			long companyId, boolean draft, int begin, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		return blogsEntryPersistence.findByC_D(
+			companyId, draft, begin, end, obc);
+	}
+
 	public int getCompanyEntriesCount(long companyId) throws SystemException {
 		return blogsEntryPersistence.countByCompanyId(companyId);
+	}
+
+	public int getCompanyEntriesCount(long companyId, boolean draft)
+		throws SystemException {
+
+		return blogsEntryPersistence.countByC_D(companyId, draft);
 	}
 
 	public BlogsEntry getEntry(long entryId)
@@ -351,8 +381,29 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return blogsEntryPersistence.findByGroupId(groupId, begin, end, obc);
 	}
 
+	public List<BlogsEntry> getGroupEntries(
+			long groupId, boolean draft, int begin, int end)
+		throws SystemException {
+
+		return blogsEntryPersistence.findByG_D(groupId, draft, begin, end);
+	}
+
+	public List<BlogsEntry> getGroupEntries(
+			long groupId, boolean draft, int begin, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		return blogsEntryPersistence.findByG_D(groupId, draft, begin, end, obc);
+	}
+
 	public int getGroupEntriesCount(long groupId) throws SystemException {
 		return blogsEntryPersistence.countByGroupId(groupId);
+	}
+
+	public int getGroupEntriesCount(long groupId, boolean draft)
+		throws SystemException {
+
+		return blogsEntryPersistence.countByG_D(groupId, draft);
 	}
 
 	public List<BlogsEntry> getGroupUserEntries(
@@ -362,10 +413,43 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return blogsEntryPersistence.findByG_U(groupId, userId, begin, end);
 	}
 
+	public List<BlogsEntry> getGroupUserEntries(
+			long groupId, long userId, int begin, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		return blogsEntryPersistence.findByG_U(
+			groupId, userId, begin, end, obc);
+	}
+
+	public List<BlogsEntry> getGroupUserEntries(
+			long groupId, long userId, boolean draft, int begin, int end)
+		throws SystemException {
+
+		return blogsEntryPersistence.findByG_U_D(
+			groupId, userId, draft, begin, end);
+	}
+
+	public List<BlogsEntry> getGroupUserEntries(
+			long groupId, long userId, boolean draft, int begin, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		return blogsEntryPersistence.findByG_U_D(
+			groupId, userId, draft, begin, end, obc);
+	}
+
 	public int getGroupUserEntriesCount(long groupId, long userId)
 		throws SystemException {
 
 		return blogsEntryPersistence.countByG_U(groupId, userId);
+	}
+
+	public int getGroupUserEntriesCount(
+			long groupId, long userId, boolean draft)
+		throws SystemException {
+
+		return blogsEntryPersistence.countByG_U_D(groupId, userId, draft);
 	}
 
 	public List<BlogsEntry> getNoAssetEntries() throws SystemException {
@@ -373,18 +457,18 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public List<BlogsEntry> getOrganizationEntries(
-			long organizationId, int begin, int end)
+			long organizationId, boolean draft, int begin, int end)
 		throws SystemException {
 
 		return blogsEntryFinder.findByOrganizationId(
-			organizationId, begin, end);
+			organizationId, draft, begin, end);
 	}
 
-	public int getOrganizationEntriesCount(long organizationId)
+	public int getOrganizationEntriesCount(long organizationId, boolean draft)
 		throws SystemException {
 
 		return blogsEntryFinder.countByOrganizationId(
-			organizationId);
+			organizationId, draft);
 	}
 
 	public String getUrlTitle(long entryId, String title) {
@@ -537,8 +621,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	public BlogsEntry updateEntry(
 			long userId, long entryId, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, String[] tagsEntries,
-			ThemeDisplay themeDisplay)
+			int displayDateHour, int displayDateMinute, boolean draft,
+			String[] tagsEntries, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		// Entry
@@ -556,24 +640,31 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(entryId);
 
+		boolean oldDraft = entry.isDraft();
+
 		entry.setModifiedDate(now);
 		entry.setTitle(title);
 		entry.setUrlTitle(
 			getUniqueUrlTitle(entryId, entry.getGroupId(), title));
 		entry.setContent(content);
 		entry.setDisplayDate(displayDate);
+		entry.setDraft(draft);
 
 		blogsEntryPersistence.update(entry, false);
 
 		// Statistics
 
-		BlogsStatsUser statsUser = blogsStatsUserPersistence.fetchByG_U(
-			entry.getGroupId(), entry.getUserId());
+		if (!draft) {
+			blogsStatsUserLocalService.updateStatsUser(
+				entry.getGroupId(), entry.getUserId(), now);
+		}
 
-		if (statsUser != null) {
-			statsUser.setLastPostDate(now);
+		// Social
 
-			blogsStatsUserPersistence.update(statsUser, false);
+		if (oldDraft && !draft) {
+			socialActivityLocalService.addActivity(
+				userId, entry.getGroupId(), BlogsEntry.class.getName(), entryId,
+				BlogsActivityKeys.ADD_ENTRY, StringPool.BLANK, 0);
 		}
 
 		// Tags
@@ -583,9 +674,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		// Lucene
 
 		try {
-			Indexer.updateEntry(
-				entry.getCompanyId(), entry.getGroupId(), userId, entryId,
-				title, content, tagsEntries);
+			if (!draft) {
+				Indexer.updateEntry(
+					entry.getCompanyId(), entry.getGroupId(), userId, entryId,
+					title, content, tagsEntries);
+			}
 		}
 		catch (IOException ioe) {
 			_log.error("Indexing " + entryId, ioe);
@@ -593,7 +686,9 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Google
 
-		pingGoogle(entry, themeDisplay);
+		if (!draft) {
+			pingGoogle(entry, themeDisplay);
+		}
 
 		return entry;
 	}

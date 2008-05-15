@@ -100,7 +100,8 @@ create table BlogsEntry (
 	title VARCHAR(150) null,
 	urlTitle VARCHAR(150) null,
 	content TEXT null,
-	displayDate DATE null
+	displayDate DATE null,
+	draft BOOLEAN
 );
 
 create table BlogsStatsUser (

@@ -244,23 +244,24 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 					entry.getUuid(), userId, plid, entry.getTitle(),
 					entry.getContent(), displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
-					tagsEntries, addCommunityPermissions, addGuestPermissions,
-					themeDisplay);
+					entry.isDraft(), tagsEntries, addCommunityPermissions,
+					addGuestPermissions, themeDisplay);
 			}
 			else {
 				existingEntry = BlogsEntryLocalServiceUtil.updateEntry(
 					userId, existingEntry.getEntryId(), entry.getTitle(),
 					entry.getContent(), displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
-					tagsEntries, themeDisplay);
+					entry.isDraft(), tagsEntries, themeDisplay);
 			}
 		}
 		else {
 			existingEntry = BlogsEntryLocalServiceUtil.addEntry(
 				userId, plid, entry.getTitle(), entry.getContent(),
 				displayDateMonth, displayDateDay, displayDateYear,
-				displayDateHour, displayDateMinute, tagsEntries,
-				addCommunityPermissions, addGuestPermissions, themeDisplay);
+				displayDateHour, displayDateMinute, entry.isDraft(),
+				tagsEntries, addCommunityPermissions, addGuestPermissions,
+				themeDisplay);
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "comments")) {

@@ -200,6 +200,67 @@ public interface BlogsEntryPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchEntryException;
 
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_D(
+		long groupId, boolean draft) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_D(
+		long groupId, boolean draft, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_D(
+		long groupId, boolean draft, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.blogs.model.BlogsEntry findByG_D_First(
+		long groupId, boolean draft,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.blogs.NoSuchEntryException;
+
+	public com.liferay.portlet.blogs.model.BlogsEntry findByG_D_Last(
+		long groupId, boolean draft,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.blogs.NoSuchEntryException;
+
+	public com.liferay.portlet.blogs.model.BlogsEntry[] findByG_D_PrevAndNext(
+		long entryId, long groupId, boolean draft,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.blogs.NoSuchEntryException;
+
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByC_D(
+		long companyId, boolean draft)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByC_D(
+		long companyId, boolean draft, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByC_D(
+		long companyId, boolean draft, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.blogs.model.BlogsEntry findByC_D_First(
+		long companyId, boolean draft,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.blogs.NoSuchEntryException;
+
+	public com.liferay.portlet.blogs.model.BlogsEntry findByC_D_Last(
+		long companyId, boolean draft,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.blogs.NoSuchEntryException;
+
+	public com.liferay.portlet.blogs.model.BlogsEntry[] findByC_D_PrevAndNext(
+		long entryId, long companyId, boolean draft,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.blogs.NoSuchEntryException;
+
 	public com.liferay.portlet.blogs.model.BlogsEntry findByG_UT(long groupId,
 		java.lang.String urlTitle)
 		throws com.liferay.portal.SystemException,
@@ -209,32 +270,33 @@ public interface BlogsEntryPersistence {
 		long groupId, java.lang.String urlTitle)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByC_U(
-		long companyId, long userId) throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByC_U(
-		long companyId, long userId, int begin, int end)
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_U_D(
+		long groupId, long userId, boolean draft)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByC_U(
-		long companyId, long userId, int begin, int end,
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_U_D(
+		long groupId, long userId, boolean draft, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_U_D(
+		long groupId, long userId, boolean draft, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.blogs.model.BlogsEntry findByC_U_First(
-		long companyId, long userId,
+	public com.liferay.portlet.blogs.model.BlogsEntry findByG_U_D_First(
+		long groupId, long userId, boolean draft,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchEntryException;
 
-	public com.liferay.portlet.blogs.model.BlogsEntry findByC_U_Last(
-		long companyId, long userId,
+	public com.liferay.portlet.blogs.model.BlogsEntry findByG_U_D_Last(
+		long groupId, long userId, boolean draft,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchEntryException;
 
-	public com.liferay.portlet.blogs.model.BlogsEntry[] findByC_U_PrevAndNext(
-		long entryId, long companyId, long userId,
+	public com.liferay.portlet.blogs.model.BlogsEntry[] findByG_U_D_PrevAndNext(
+		long entryId, long groupId, long userId, boolean draft,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchEntryException;
@@ -273,11 +335,17 @@ public interface BlogsEntryPersistence {
 	public void removeByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByG_D(long groupId, boolean draft)
+		throws com.liferay.portal.SystemException;
+
+	public void removeByC_D(long companyId, boolean draft)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByG_UT(long groupId, java.lang.String urlTitle)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.blogs.NoSuchEntryException;
 
-	public void removeByC_U(long companyId, long userId)
+	public void removeByG_U_D(long groupId, long userId, boolean draft)
 		throws com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
@@ -297,10 +365,16 @@ public interface BlogsEntryPersistence {
 	public int countByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
+	public int countByG_D(long groupId, boolean draft)
+		throws com.liferay.portal.SystemException;
+
+	public int countByC_D(long companyId, boolean draft)
+		throws com.liferay.portal.SystemException;
+
 	public int countByG_UT(long groupId, java.lang.String urlTitle)
 		throws com.liferay.portal.SystemException;
 
-	public int countByC_U(long companyId, long userId)
+	public int countByG_U_D(long groupId, long userId, boolean draft)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

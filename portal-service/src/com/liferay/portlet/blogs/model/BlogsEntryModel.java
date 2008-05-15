@@ -99,5 +99,11 @@ public interface BlogsEntryModel extends BaseModel {
 
 	public void setDisplayDate(Date displayDate);
 
+	public boolean getDraft();
+
+	public boolean isDraft();
+
+	public void setDraft(boolean draft);
+
 	public BlogsEntry toEscapedModel();
 }

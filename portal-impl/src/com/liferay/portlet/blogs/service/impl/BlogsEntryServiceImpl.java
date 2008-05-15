@@ -68,7 +68,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 	public BlogsEntry addEntry(
 			long plid, String title, String content, int displayDateMonth,
 			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, String[] tagsEntries,
+			int displayDateMinute, boolean draft, String[] tagsEntries,
 			boolean addCommunityPermissions, boolean addGuestPermissions,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -79,14 +79,15 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 		return blogsEntryLocalService.addEntry(
 			getUserId(), plid, title, content, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute, tagsEntries,
-			addCommunityPermissions, addGuestPermissions, themeDisplay);
+			displayDateYear, displayDateHour, displayDateMinute, draft,
+			tagsEntries, addCommunityPermissions, addGuestPermissions,
+			themeDisplay);
 	}
 
 	public BlogsEntry addEntry(
 			long plid, String title, String content, int displayDateMonth,
 			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, String[] tagsEntries,
+			int displayDateMinute, boolean draft, String[] tagsEntries,
 			String[] communityPermissions, String[] guestPermissions,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -97,8 +98,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 		return blogsEntryLocalService.addEntry(
 			getUserId(), plid, title, content, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute, tagsEntries,
-			communityPermissions, guestPermissions, themeDisplay);
+			displayDateYear, displayDateHour, displayDateMinute, draft,
+			tagsEntries, communityPermissions, guestPermissions, themeDisplay);
 	}
 
 	public void deleteEntry(long entryId)
@@ -116,7 +117,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		List<BlogsEntry> entries = new ArrayList<BlogsEntry>();
 
 		Iterator<BlogsEntry> itr = blogsEntryLocalService.getCompanyEntries(
-			companyId, 0, _MAX_END, new EntryDisplayDateComparator())
+			companyId, false, 0, _MAX_END, new EntryDisplayDateComparator())
 				.iterator();
 
 		while (itr.hasNext() && (entries.size() < max)) {
@@ -175,7 +176,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		List<BlogsEntry> entries = new ArrayList<BlogsEntry>();
 
 		Iterator<BlogsEntry> itr = blogsEntryLocalService.getGroupEntries(
-			groupId, 0, _MAX_END).iterator();
+			groupId, false, 0, _MAX_END).iterator();
 
 		while (itr.hasNext() && (entries.size() < max)) {
 			BlogsEntry entry = itr.next();
@@ -213,7 +214,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		List<BlogsEntry> entries = new ArrayList<BlogsEntry>();
 
 		Iterator<BlogsEntry> itr = blogsEntryFinder.findByOrganizationId(
-			organizationId, 0, _MAX_END).iterator();
+			organizationId, false, 0, _MAX_END).iterator();
 
 		while (itr.hasNext() && (entries.size() < max)) {
 			BlogsEntry entry = itr.next();
@@ -250,7 +251,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 	public BlogsEntry updateEntry(
 			long entryId, String title, String content, int displayDateMonth,
 			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, String[] tagsEntries,
+			int displayDateMinute, boolean draft, String[] tagsEntries,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
@@ -260,7 +261,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		return blogsEntryLocalService.updateEntry(
 			getUserId(), entryId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			tagsEntries, themeDisplay);
+			draft, tagsEntries, themeDisplay);
 	}
 
 	protected String exportToRSS(

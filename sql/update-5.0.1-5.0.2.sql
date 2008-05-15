@@ -1,3 +1,9 @@
+alter table BlogsEntry add draft BOOLEAN;
+
+COMMIT_TRANSACTION;
+
+update BlogsEntry set draft = FALSE;
+
 alter table Contact_ add facebookSn VARCHAR(75) null;
 alter table Contact_ add mySpaceSn VARCHAR(75) null;
 

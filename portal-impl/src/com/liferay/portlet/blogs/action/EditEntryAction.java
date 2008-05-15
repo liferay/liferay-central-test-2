@@ -23,6 +23,7 @@
 package com.liferay.portlet.blogs.action;
 
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -30,8 +31,10 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.blogs.EntryContentException;
 import com.liferay.portlet.blogs.EntryDisplayDateException;
@@ -42,7 +45,12 @@ import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 import com.liferay.portlet.taggedcontent.util.AssetPublisherUtil;
 import com.liferay.portlet.tags.TagsEntryException;
+import com.liferay.util.JSONUtil;
+import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.servlet.SessionErrors;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
 import java.util.Calendar;
 
@@ -52,9 +60,13 @@ import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+
+import org.json.JSONObject;
 
 /**
  * <a href="EditEntryAction.java.html"><b><i>View Source</i></b></a>
@@ -87,6 +99,7 @@ public class EditEntryAction extends PortletAction {
 			}
 
 			String redirect = ParamUtil.getString(req, "redirect");
+			boolean updateRedirect = false;
 
 			if ((entry != null) && (Validator.isNotNull(oldUrlTitle)) &&
 				(redirect.endsWith("/blogs/" + oldUrlTitle) ||
@@ -109,19 +122,40 @@ public class EditEntryAction extends PortletAction {
 				}
 
 				redirect = newRedirect;
+				updateRedirect = true;
 			}
 
-			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
-				WebKeys.THEME_DISPLAY);
+			if ((entry != null) && entry.isDraft()) {
+				JSONObject jsonObj = new JSONObject();
 
-			LayoutTypePortlet layoutTypePortlet =
-				themeDisplay.getLayoutTypePortlet();
+				JSONUtil.put(jsonObj, "entryId", entry.getEntryId());
+				JSONUtil.put(jsonObj, "redirect", redirect);
+				JSONUtil.put(jsonObj, "updateRedirect", updateRedirect);
 
-			if (layoutTypePortlet.hasPortletId(config.getPortletName())) {
-				sendRedirect(req, res, redirect);
+				HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(
+					res);
+				InputStream is = new ByteArrayInputStream(
+					jsonObj.toString().getBytes());
+				String contentType = ContentTypes.TEXT_JAVASCRIPT;
+
+				ServletResponseUtil.sendFile(
+					httpRes, null, is, contentType);
+
+				setForward(req, ActionConstants.COMMON_NULL);
 			}
 			else {
-				res.sendRedirect(redirect);
+				ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+					WebKeys.THEME_DISPLAY);
+
+				LayoutTypePortlet layoutTypePortlet =
+					themeDisplay.getLayoutTypePortlet();
+
+				if (layoutTypePortlet.hasPortletId(config.getPortletName())) {
+					sendRedirect(req, res, redirect);
+				}
+				else {
+					res.sendRedirect(redirect);
+				}
 			}
 		}
 		catch (Exception e) {
@@ -199,13 +233,13 @@ public class EditEntryAction extends PortletAction {
 			displayDateHour += 12;
 		}
 
+		boolean draft = ParamUtil.getBoolean(req, "draft");
+
 		String[] tagsEntries = StringUtil.split(
 			ParamUtil.getString(req, "tagsEntries"));
 
-		String[] communityPermissions = req.getParameterValues(
-			"communityPermissions");
-		String[] guestPermissions = req.getParameterValues(
-			"guestPermissions");
+		boolean addCommunityPermissions = true;
+		boolean addGuestPermissions = true;
 
 		BlogsEntry entry = null;
 		String oldUrlTitle = StringPool.BLANK;
@@ -217,11 +251,13 @@ public class EditEntryAction extends PortletAction {
 			entry = BlogsEntryServiceUtil.addEntry(
 				layout.getPlid(), title, content, displayDateMonth,
 				displayDateDay, displayDateYear, displayDateHour,
-				displayDateMinute, tagsEntries, communityPermissions,
-				guestPermissions, themeDisplay);
+				displayDateMinute, draft, tagsEntries, addCommunityPermissions,
+				addGuestPermissions, themeDisplay);
 
-			AssetPublisherUtil.addAndStoreSelection(
-				req, BlogsEntry.class.getName(), entry.getEntryId(), -1);
+			if (!draft) {
+				AssetPublisherUtil.addAndStoreSelection(
+					req, BlogsEntry.class.getName(), entry.getEntryId(), -1);
+			}
 		}
 		else {
 
@@ -230,14 +266,20 @@ public class EditEntryAction extends PortletAction {
 			entry = BlogsEntryLocalServiceUtil.getEntry(entryId);
 
 			String tempOldUrlTitle = entry.getUrlTitle();
+			boolean oldDraft = entry.isDraft();
 
 			entry = BlogsEntryServiceUtil.updateEntry(
 				entryId, title, content, displayDateMonth, displayDateDay,
-				displayDateYear, displayDateHour, displayDateMinute,
+				displayDateYear, displayDateHour, displayDateMinute, draft,
 				tagsEntries, themeDisplay);
 
 			if (!tempOldUrlTitle.equals(entry.getUrlTitle())) {
 				oldUrlTitle = tempOldUrlTitle;
+			}
+
+			if (oldDraft && !draft) {
+				AssetPublisherUtil.addAndStoreSelection(
+					req, BlogsEntry.class.getName(), entry.getEntryId(), -1);
 			}
 		}
 

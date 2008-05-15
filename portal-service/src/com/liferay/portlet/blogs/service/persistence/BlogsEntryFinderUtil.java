@@ -29,27 +29,29 @@ package com.liferay.portlet.blogs.service.persistence;
  *
  */
 public class BlogsEntryFinderUtil {
-	public static int countByOrganizationId(long organizationId)
+	public static int countByOrganizationId(long organizationId, boolean draft)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByOrganizationId(organizationId);
+		return getFinder().countByOrganizationId(organizationId, draft);
 	}
 
 	public static int countByOrganizationIds(
-		java.util.List<Long> organizationIds)
+		java.util.List<Long> organizationIds, boolean draft)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByOrganizationIds(organizationIds);
+		return getFinder().countByOrganizationIds(organizationIds, draft);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByOrganizationId(
-		long organizationId, int begin, int end)
+		long organizationId, boolean draft, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByOrganizationId(organizationId, begin, end);
+		return getFinder()
+				   .findByOrganizationId(organizationId, draft, begin, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByOrganizationIds(
-		java.util.List<Long> organizationIds, int begin, int end)
+		java.util.List<Long> organizationIds, boolean draft, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByOrganizationIds(organizationIds, begin, end);
+		return getFinder()
+				   .findByOrganizationIds(organizationIds, draft, begin, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByNoAssets()
