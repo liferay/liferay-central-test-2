@@ -202,7 +202,11 @@ public class StartupAction extends SimpleAction {
 
 			CacheRegistry.setActive(true);
 
-			MultiVMPoolUtil.clear();
+			// Clear the caches only if the upgrade process was run
+
+			if (ranUpgradeProcess) {
+				MultiVMPoolUtil.clear();
+			}
 
 			// Verify
 
