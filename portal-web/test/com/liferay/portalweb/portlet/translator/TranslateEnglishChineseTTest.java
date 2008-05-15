@@ -45,7 +45,7 @@ public class TranslateEnglishChineseTTest extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent(
-							"\u6211\u7684\u540d\u5b57\u662fLiferay \u8b6f\u8005, \u6d41\u5229\u5b8c\u5168\u6210\u529f6 \u901a\u4fe1\u7684\u767e\u842c\u500b\u5f62\u5f0f\u3002")) {
+							"\u6211\u7684\u540d\u5b57\u662fLiferay\u8b6f\u8005\uff0c\u6d41\u5229\u5b8c\u5168\u6210\u529f6\u901a\u4fe1\u7684\u767e\u842c\u500b\u5f62\u5f0f\u3002 ")) {
 					break;
 				}
 			}

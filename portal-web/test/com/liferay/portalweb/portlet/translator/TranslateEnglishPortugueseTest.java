@@ -45,7 +45,7 @@ public class TranslateEnglishPortugueseTest extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent(
-							"Meu nome \u00e9 tradutor de Liferay, fluent dentro sobre 6 milh\u00e3o formul\u00e1rios de uma comunica\u00e7\u00e3o.")) {
+							"Meu nome \u00e9 tradutor de Liferay, fluente dentro sobre 6 milh\u00e3o formul\u00e1rios de uma comunica\u00e7\u00e3o. ")) {
 					break;
 				}
 			}

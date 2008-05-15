@@ -45,7 +45,7 @@ public class TranslateEnglishJapaneseTest extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent(
-							"\u79c1\u306e\u540d\u524d\u306f\u30b3\u30df\u30e5\u30cb\u30b1\u30fc\u30b7\u30e7\u30f3\u306e6,000,000 \u306e\u5f62\u614b\u306b\u6d41\u66a2\u306aJR Skywalker \u3067\u3042\u308b\u3002")) {
+							"\u79c1\u306e\u540d\u524d\u306f\u30b3\u30df\u30e5\u30cb\u30b1\u30fc\u30b7\u30e7\u30f3\u306e6,000,000\u306e\u5f62\u614b\u306b\u6d41\u66a2\u306a\u30b8\u30e5\u30cb\u30a2Skywalker\u3067\u3042\u308b\u3002 ")) {
 					break;
 				}
 			}
