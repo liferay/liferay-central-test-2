@@ -959,6 +959,10 @@ li.toggle-expand a {
 	width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;
 }
 
+.lfr-input-text.flexible {
+	width: auto;
+}
+
 .lfr-textarea {
 	height: <%= ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT %>px;
 	width: <%= ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH %>px;

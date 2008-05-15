@@ -51,3 +51,28 @@
 	position: absolute;
 	right: 0;
 }
+
+.portlet-configuration .facebook-api td {
+	padding-bottom: 2px;
+}
+
+.portlet-configuration .facebook-api .api-input {
+	padding-right: 12px;
+}
+
+.ie .portlet-configuration .facebook-api .api-input {
+	padding-right: 17px;
+}
+
+.portlet-configuration .facebook-api .lfr-input-text {
+	width: 100%;
+}
+
+.portlet-configuration .canvas-url .url-text {
+	padding-right: 0;
+	text-align: right; 
+}
+
+.portlet-configuration .canvas-url .url-input {
+	padding-left: 0
+}

@@ -61,20 +61,23 @@ iframePortletURL.setParameter("struts_action", "/message_boards/view");
 </div>
 
 <table class="lfr-table">
-<tr>
+<tr class="facebook-api">
 	<td>
 		<liferay-ui:message key="api-key" />
 	</td>
-	<td>
+	<td class="api-input" colspan="2">
 		<input class="lfr-input-text" id="<portlet:namespace />facebookAPIKey" name="<portlet:namespace />facebookAPIKey" type="text" value="<%= HtmlUtil.toInputSafe(facebookAPIKey) %>" />
 	</td>
 </tr>
-<tr>
+<tr class="canvas-url">
 	<td>
 		<liferay-ui:message key="canvas-page-url" />
 	</td>
-	<td>
-		http://apps.facebook.com/<input class="lfr-input-text" id="<portlet:namespace />facebookCanvasPageURL" name="<portlet:namespace />facebookCanvasPageURL" type="text" value="<%= HtmlUtil.toInputSafe(facebookCanvasPageURL) %>" />/
+	<td class="url-text">
+		http://apps.facebook.com/
+	</td>
+	<td class="url-input">
+		<input class="lfr-input-text flexible" id="<portlet:namespace />facebookCanvasPageURL" name="<portlet:namespace />facebookCanvasPageURL" type="text" value="<%= HtmlUtil.toInputSafe(facebookCanvasPageURL) %>" />/
 	</td>
 </tr>
 </table>
