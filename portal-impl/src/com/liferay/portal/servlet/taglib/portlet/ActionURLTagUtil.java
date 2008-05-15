@@ -116,7 +116,9 @@ public class ActionURLTagUtil {
 				portletURL.setEscapeXml(escapeXml.booleanValue());
 			}
 
-			if (lifecycle.equals(PortletRequest.ACTION_PHASE) && name != null) {
+			if (lifecycle.equals(PortletRequest.ACTION_PHASE) &&
+				Validator.isNotNull(name)) {
+
 				portletURL.setParameter(ActionRequest.ACTION_NAME, name);
 			}
 
