@@ -56,6 +56,8 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 		try {
 			searcher = LuceneUtil.getSearcher(companyId);
 
+			// LEP-5958
+
 			if (query instanceof QueryImpl) {
 				hits.recordHits(
 					searcher.search(((QueryImpl)query).getQuery()), searcher);
