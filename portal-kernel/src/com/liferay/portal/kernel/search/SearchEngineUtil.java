@@ -86,11 +86,25 @@ public class SearchEngineUtil {
 	}
 
 	public static boolean isIndexReadOnly() {
-		return _instance._isIndexReadOnly();
+		ClassLoader contextClassLoader = _setSearchEngineClassLoader();
+
+		try {
+			return _instance._isIndexReadOnly();
+		}
+		finally {
+			_setContextClassLoader(contextClassLoader);
+		}
 	}
 
 	public static boolean isMessageBusListener() {
-		return _instance._isMessageBusListener();
+		ClassLoader contextClassLoader = _setSearchEngineClassLoader();
+
+		try {
+			return _instance._isMessageBusListener();
+		}
+		finally {
+			_setContextClassLoader(contextClassLoader);
+		}
 	}
 
 	public static void registerSearchEngine(
