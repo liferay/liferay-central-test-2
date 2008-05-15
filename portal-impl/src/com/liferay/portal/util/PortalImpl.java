@@ -1278,6 +1278,8 @@ public class PortalImpl implements Portal {
 			Map<String, String[]> params)
 		throws PortalException, SystemException {
 
+		boolean foundFriendlyURLMapper = false;
+
 		String friendlyURL = url;
 		String queryString = StringPool.BLANK;
 
@@ -1308,6 +1310,8 @@ public class PortalImpl implements Portal {
 			}
 
 			if (pos != -1) {
+				foundFriendlyURLMapper = true;
+
 				friendlyURL = url.substring(0, pos);
 
 				Map<String, String[]> actualParams = null;
@@ -1348,6 +1352,43 @@ public class PortalImpl implements Portal {
 						HttpUtil.parameterMapToString(actualParams, false);
 
 				break;
+			}
+		}
+
+		if (!foundFriendlyURLMapper) {
+			int x = url.indexOf("/-/");
+
+			if (x != -1) {
+				int y = url.indexOf("/", x + 3);
+
+				if (y == -1) {
+					y = url.length();
+				}
+
+				String ppid = url.substring(x + 3, y);
+
+				if (Validator.isNotNull(ppid)) {
+					Map<String, String[]> actualParams = null;
+
+					if (params != null) {
+						actualParams = new HashMap<String, String[]>(params);
+					}
+					else {
+						actualParams = new HashMap<String, String[]>();
+					}
+
+					actualParams.put("p_p_id", new String[] {ppid});
+					actualParams.put("p_p_lifecycle", new String[] {"0"});
+					actualParams.put(
+						"p_p_state",
+						new String[] {WindowState.MAXIMIZED.toString()});
+					actualParams.put(
+						"p_p_mode", new String[] {PortletMode.VIEW.toString()});
+
+					queryString =
+						StringPool.AMPERSAND +
+							HttpUtil.parameterMapToString(actualParams, false);
+				}
 			}
 		}
 

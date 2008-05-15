@@ -331,6 +331,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String WEBSITE = "WEBSITE";
 
+	public static final String WIDGET = "WIDGET";
+
 	public static final String WIKI_NODE = "WIKI_NODE";
 
 	public static final String WIKI_PAGE = "WIKI_PAGE";

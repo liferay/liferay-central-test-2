@@ -626,6 +626,10 @@ public class PortletURLImpl
 				sm.append(portalURL);
 			}
 
+			if (themeDisplay.isWidget()) {
+				sm.append("/widget");
+			}
+
 			if (!themeDisplay.isFacebook()) {
 				sm.append(_layoutFriendlyURL);
 			}

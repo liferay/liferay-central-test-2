@@ -480,6 +480,14 @@ public class ThemeDisplay implements Serializable {
 		}
 	}
 
+	public boolean isWidget() {
+		return _widget;
+	}
+
+	public void setWidget(boolean widget) {
+		_widget = widget;
+	}
+
 	public String getCDNHost() {
 		return _cdnHost;
 	}
@@ -935,6 +943,7 @@ public class ThemeDisplay implements Serializable {
 		_statePopUp = false;
 		_facebook = false;
 		_facebookCanvasPageURL = StringPool.BLANK;
+		_widget = false;
 		_cdnHost = StringPool.BLANK;
 		_portalURL = StringPool.BLANK;
 		_pathApplet = StringPool.BLANK;
@@ -1027,6 +1036,7 @@ public class ThemeDisplay implements Serializable {
 	private boolean _statePopUp;
 	private boolean _facebook;
 	private String _facebookCanvasPageURL;
+	private boolean _widget;
 	private String _cdnHost = StringPool.BLANK;
 	private String _portalURL = StringPool.BLANK;
 	private String _pathApplet = StringPool.BLANK;

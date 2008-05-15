@@ -500,9 +500,14 @@
 		<load-on-startup>11</load-on-startup>
 	</servlet>
 	<servlet>
+		<servlet-name>WidgetServlet</servlet-name>
+		<servlet-class>com.liferay.portal.servlet.WidgetServlet</servlet-class>
+		<load-on-startup>12</load-on-startup>
+	</servlet>
+	<servlet>
 		<servlet-name>DisplayChart</servlet-name>
 		<servlet-class>org.jfree.chart.servlet.DisplayChart</servlet-class>
-		<load-on-startup>12</load-on-startup>
+		<load-on-startup>13</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>PortletBridgeServlet</servlet-name>
@@ -527,7 +532,7 @@
 			<param-name>ignorePostToGetRequestHeaders</param-name>
 			<param-value>content-type,content-length</param-value>
 		</init-param>
-		<load-on-startup>13</load-on-startup>
+		<load-on-startup>14</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>MainServlet</servlet-name>
@@ -568,6 +573,10 @@
 	<servlet-mapping>
 		<servlet-name>SoftwareCatalogServlet</servlet-name>
 		<url-pattern>/software_catalog/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>WidgetServlet</servlet-name>
+		<url-pattern>/widget/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>DisplayChart</servlet-name>

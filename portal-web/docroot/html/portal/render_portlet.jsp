@@ -629,6 +629,10 @@ if (urlBack != null) {
 	portletDisplay.setURLBack(urlBack);
 }
 
+if (themeDisplay.isWidget()) {
+	portletDisplay.setShowBackIcon(false);
+}
+
 // Make sure the Tiles context is reset for the next portlet
 
 if ((invokerPortlet != null) && invokerPortlet.isStrutsPortlet()) {

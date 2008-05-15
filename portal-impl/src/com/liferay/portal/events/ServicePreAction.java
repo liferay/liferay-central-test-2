@@ -1213,6 +1213,14 @@ public class ServicePreAction extends Action {
 		String facebookCanvasPageURL = (String)req.getAttribute(
 			WebKeys.FACEBOOK_CANVAS_PAGE_URL);
 
+		boolean widget = false;
+
+		Boolean widgetObj = (Boolean)req.getAttribute(WebKeys.WIDGET);
+
+		if (widgetObj != null) {
+			widget = widgetObj.booleanValue();
+		}
+
 		// Theme display
 
 		ThemeDisplay themeDisplay = ThemeDisplayFactory.create();
@@ -1223,6 +1231,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setCDNHost(cdnHost);
 		themeDisplay.setPortalURL(portalURL);
 		themeDisplay.setFacebookCanvasPageURL(facebookCanvasPageURL);
+		themeDisplay.setWidget(widget);
 
 		themeDisplay.setCompany(company);
 		themeDisplay.setCompanyLogo(companyLogo);
