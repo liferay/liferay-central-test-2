@@ -71,27 +71,6 @@ public class SearchEngineUtil {
 		_instance._registerSearchEngine(engine, current);
 	}
 
-	public static Hits search(long companyId, Query query)
-		throws SearchException {
-
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
-
-		Thread.currentThread().setContextClassLoader(
-			_instance._getCurrentSearchEngineClassLoader());
-
-		Hits hits = null;
-
-		try {
-			hits = _instance._getSearcher().search(companyId, query);
-		}
-		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
-		}
-
-		return hits;
-	}
-
 	public static Hits search(long companyId, Query query, int begin, int end)
 		throws SearchException {
 

@@ -44,12 +44,6 @@ import org.apache.lucene.search.BooleanQuery;
  */
 public class LuceneIndexSearcherImpl implements IndexSearcher {
 
-	public Hits search(long companyId, Query query) throws SearchException {
-		return search(
-			companyId, query, SearchEngineUtil.ALL_POS,
-			SearchEngineUtil.ALL_POS);
-	}
-
 	public Hits search(long companyId, Query query, int begin, int end)
 		throws SearchException {
 
