@@ -70,7 +70,7 @@
 
 .portlet-configuration .canvas-url .url-text {
 	padding-right: 0;
-	text-align: right; 
+	text-align: right;
 }
 
 .portlet-configuration .canvas-url .url-input {
