@@ -22,11 +22,6 @@
 
 package com.liferay.portal.service;
 
-import com.liferay.portal.kernel.messaging.DefaultMessageBus;
-import com.liferay.portal.kernel.messaging.DefaultMessageSender;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.lucene.LuceneSearchEngineImpl;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
@@ -36,7 +31,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.BaseTestCase;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.TestPropsValues;
-import com.liferay.util.search.IndexWriterMessageSender;
 
 import java.net.URL;
 
@@ -64,12 +58,6 @@ public class BaseServiceTestCase extends BaseTestCase {
 		_permissionChecker = PermissionCheckerFactory.create(user, true);
 
 		PermissionThreadLocal.setPermissionChecker(_permissionChecker);
-
-		MessageBusUtil.init(
-			new DefaultMessageBus(), new DefaultMessageSender());
-
-		SearchEngineUtil.init(
-			new LuceneSearchEngineImpl(), new IndexWriterMessageSender());
 	}
 
 	protected void tearDown() throws Exception {
