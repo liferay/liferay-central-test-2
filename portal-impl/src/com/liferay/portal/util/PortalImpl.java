@@ -103,9 +103,11 @@ import com.liferay.util.servlet.SessionErrors;
 
 import java.io.IOException;
 
+import java.net.InetAddress;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.UnknownHostException;
 
 import java.rmi.RemoteException;
 
@@ -174,6 +176,29 @@ public class PortalImpl implements Portal {
 
 		if (Validator.isNull(_computerName)) {
 			_computerName = System.getProperty("env.HOSTNAME");
+		}
+
+		if (Validator.isNull(_computerName)) {
+			try {
+				_computerName = InetAddress.getLocalHost().getHostName();
+			}
+			catch (UnknownHostException uhe) {
+			}
+		}
+
+		try {
+			_computerAddress =
+				InetAddress.getByName(_computerName).getHostAddress();
+		}
+		catch (UnknownHostException uhe) {
+		}
+
+		if (Validator.isNull(_computerAddress)) {
+			try {
+				_computerAddress = InetAddress.getLocalHost().getHostAddress();
+			}
+			catch (UnknownHostException uhe) {
+			}
 		}
 
 		// Portal lib directory
@@ -559,6 +584,10 @@ public class PortalImpl implements Portal {
 		}
 
 		return companyId;
+	}
+
+	public String getComputerAddress() {
+		return _computerAddress;
 	}
 
 	public String getComputerName() {
@@ -2590,6 +2619,7 @@ public class PortalImpl implements Portal {
 
 	private static Log _log = LogFactory.getLog(PortalImpl.class);
 
+	private String _computerAddress;
 	private String _computerName;
 	private String _portalLibDir;
 	private String _cdnHost;
