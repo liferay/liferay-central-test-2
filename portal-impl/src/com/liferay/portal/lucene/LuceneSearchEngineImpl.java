@@ -41,6 +41,7 @@ public class LuceneSearchEngineImpl implements SearchEngine {
 	public LuceneSearchEngineImpl() {
 		_searcher = new LuceneIndexSearcherImpl();
 		_writer = new LuceneIndexWriterImpl();
+		_messageBusListener = true;
 
 		Destination destination = new ParallelDispatchedDestination(
 			SearchEngineUtil.INDEX_WRITER_DESTINATION, 5, 10);
@@ -67,9 +68,14 @@ public class LuceneSearchEngineImpl implements SearchEngine {
 		return LuceneUtil.INDEX_READ_ONLY;
 	}
 
+	public boolean isMessageBusListener() {
+		return _messageBusListener;
+	}
+
 	private static final String _NAME = "LUCENE";
 
 	private IndexSearcher _searcher;
 	private IndexWriter _writer;
+	private boolean _messageBusListener;
 
 }

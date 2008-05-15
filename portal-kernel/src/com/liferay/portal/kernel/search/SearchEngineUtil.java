@@ -42,13 +42,37 @@ public class SearchEngineUtil {
 	public static void addDocument(long companyId, Document doc)
 		throws SearchException {
 
-		_instance._defaultIndexWriter.addDocument(companyId, doc);
+		if (isMessageBusListener()) {
+			_instance._messageBusIndexWriter.addDocument(companyId, doc);
+		}
+		else {
+			ClassLoader contextClassLoader = _setSearchEngineClassLoader();
+
+			try {
+				_instance._getWriter().addDocument(companyId, doc);
+			}
+			finally {
+				_setContextClassLoader(contextClassLoader);
+			}
+		}
 	}
 
 	public static void deleteDocument(long companyId, String uid)
 		throws SearchException {
 
-		_instance._defaultIndexWriter.deleteDocument(companyId, uid);
+		if (isMessageBusListener()) {
+			_instance._messageBusIndexWriter.deleteDocument(companyId, uid);
+		}
+		else {
+			ClassLoader contextClassLoader = _setSearchEngineClassLoader();
+
+			try {
+				_instance._getWriter().deleteDocument(companyId, uid);
+			}
+			finally {
+				_setContextClassLoader(contextClassLoader);
+			}
+		}
 	}
 
 	public static Collection<SearchEngine> getRegisteredSearchEngines() {
@@ -65,6 +89,10 @@ public class SearchEngineUtil {
 		return _instance._isIndexReadOnly();
 	}
 
+	public static boolean isMessageBusListener() {
+		return _instance._isMessageBusListener();
+	}
+
 	public static void registerSearchEngine(
 		SearchEngine engine, boolean current) {
 
@@ -74,11 +102,7 @@ public class SearchEngineUtil {
 	public static Hits search(long companyId, Query query, int begin, int end)
 		throws SearchException {
 
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
-
-		Thread.currentThread().setContextClassLoader(
-			_instance._getCurrentSearchEngineClassLoader());
+		ClassLoader contextClassLoader = _setSearchEngineClassLoader();
 
 		Hits hits = null;
 
@@ -87,7 +111,7 @@ public class SearchEngineUtil {
 				companyId, query, begin, end);
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			_setContextClassLoader(contextClassLoader);
 		}
 
 		return hits;
@@ -104,7 +128,34 @@ public class SearchEngineUtil {
 	public static void updateDocument(long companyId, String uid, Document doc)
 		throws SearchException {
 
-		_instance._defaultIndexWriter.updateDocument(companyId, uid, doc);
+		if (isMessageBusListener()) {
+			_instance._messageBusIndexWriter.updateDocument(
+				companyId, uid, doc);
+		}
+		else {
+			ClassLoader contextClassLoader = _setSearchEngineClassLoader();
+
+			try {
+				_instance._getWriter().updateDocument(companyId, uid, doc);
+			}
+			finally {
+				_setContextClassLoader(contextClassLoader);
+			}
+		}
+	}
+
+	private static void _setContextClassLoader(ClassLoader contextClassLoader) {
+		Thread.currentThread().setContextClassLoader(contextClassLoader);
+	}
+
+	private static ClassLoader _setSearchEngineClassLoader() {
+		ClassLoader contextClassLoader =
+			Thread.currentThread().getContextClassLoader();
+
+		Thread.currentThread().setContextClassLoader(
+			_instance._getCurrentSearchEngineClassLoader());
+
+		return contextClassLoader;
 	}
 
 	private SearchEngineUtil() {
@@ -123,16 +174,24 @@ public class SearchEngineUtil {
 		return _currentSearchEngine.getSearcher();
 	}
 
+	private IndexWriter _getWriter() {
+		return _currentSearchEngine.getWriter();
+	}
+
 	private void _init(
-		SearchEngine defaultSearchEngine, IndexWriter defaultIndexWriter) {
+		SearchEngine defaultSearchEngine, IndexWriter messageBusIndexWriter) {
 
 		_defaultSearchEngine = defaultSearchEngine;
-		_defaultIndexWriter = defaultIndexWriter;
+		_messageBusIndexWriter = messageBusIndexWriter;
 		_registerSearchEngine(_defaultSearchEngine, true);
 	}
 
 	private boolean _isIndexReadOnly() {
 		return _currentSearchEngine.isIndexReadOnly();
+	}
+
+	private boolean _isMessageBusListener() {
+		return _currentSearchEngine.isMessageBusListener();
 	}
 
 	private void _registerSearchEngine(SearchEngine engine, boolean current) {
@@ -172,6 +231,6 @@ public class SearchEngineUtil {
 		new HashMap<String, ClassLoader>();
 	private SearchEngine _currentSearchEngine;
 	private SearchEngine _defaultSearchEngine;
-	private IndexWriter _defaultIndexWriter;
+	private IndexWriter _messageBusIndexWriter;
 
 }
