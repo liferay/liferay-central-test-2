@@ -42,37 +42,13 @@ public class SearchEngineUtil {
 	public static void addDocument(long companyId, Document doc)
 		throws SearchException {
 
-		if (isMessageBusListener()) {
-			_instance._messageBusIndexWriter.addDocument(companyId, doc);
-		}
-		else {
-			ClassLoader contextClassLoader = _setSearchEngineClassLoader();
-
-			try {
-				_instance._getWriter().addDocument(companyId, doc);
-			}
-			finally {
-				_setContextClassLoader(contextClassLoader);
-			}
-		}
+		_instance._addDocument(companyId, doc);
 	}
 
 	public static void deleteDocument(long companyId, String uid)
 		throws SearchException {
 
-		if (isMessageBusListener()) {
-			_instance._messageBusIndexWriter.deleteDocument(companyId, uid);
-		}
-		else {
-			ClassLoader contextClassLoader = _setSearchEngineClassLoader();
-
-			try {
-				_instance._getWriter().deleteDocument(companyId, uid);
-			}
-			finally {
-				_setContextClassLoader(contextClassLoader);
-			}
-		}
+		_instance._deleteDocument(companyId, uid);
 	}
 
 	public static Collection<SearchEngine> getRegisteredSearchEngines() {
@@ -86,25 +62,11 @@ public class SearchEngineUtil {
 	}
 
 	public static boolean isIndexReadOnly() {
-		ClassLoader contextClassLoader = _setSearchEngineClassLoader();
-
-		try {
-			return _instance._isIndexReadOnly();
-		}
-		finally {
-			_setContextClassLoader(contextClassLoader);
-		}
+		return _instance._isIndexReadOnly();
 	}
 
 	public static boolean isMessageBusListener() {
-		ClassLoader contextClassLoader = _setSearchEngineClassLoader();
-
-		try {
-			return _instance._isMessageBusListener();
-		}
-		finally {
-			_setContextClassLoader(contextClassLoader);
-		}
+		return _instance._isMessageBusListener();
 	}
 
 	public static void registerSearchEngine(
@@ -116,19 +78,7 @@ public class SearchEngineUtil {
 	public static Hits search(long companyId, Query query, int begin, int end)
 		throws SearchException {
 
-		ClassLoader contextClassLoader = _setSearchEngineClassLoader();
-
-		Hits hits = null;
-
-		try {
-			hits = _instance._getSearcher().search(
-				companyId, query, begin, end);
-		}
-		finally {
-			_setContextClassLoader(contextClassLoader);
-		}
-
-		return hits;
+		return _instance._search(companyId, query, begin, end);
 	}
 
 	public static void setCurrentSearchEngine(String name) {
@@ -142,27 +92,49 @@ public class SearchEngineUtil {
 	public static void updateDocument(long companyId, String uid, Document doc)
 		throws SearchException {
 
-		if (isMessageBusListener()) {
-			_instance._messageBusIndexWriter.updateDocument(
-				companyId, uid, doc);
-		}
-		else {
-			ClassLoader contextClassLoader = _setSearchEngineClassLoader();
+		_instance._updateDocument(companyId, uid, doc);
+	}
 
-			try {
-				_instance._getWriter().updateDocument(companyId, uid, doc);
+	private SearchEngineUtil() {
+	}
+
+	private void _addDocument(long companyId, Document doc)
+		throws SearchException {
+
+		ClassLoader contextClassLoader = _getContextClassLoader();
+
+		try {
+			if (_currentSearchEngine.isMessageBusListener()) {
+				_messageBusIndexWriter.addDocument(companyId, doc);
 			}
-			finally {
-				_setContextClassLoader(contextClassLoader);
+			else {
+				_getWriter().addDocument(companyId, doc);
 			}
+		}
+		finally {
+			_setContextClassLoader(contextClassLoader);
 		}
 	}
 
-	private static void _setContextClassLoader(ClassLoader contextClassLoader) {
-		Thread.currentThread().setContextClassLoader(contextClassLoader);
+	private void _deleteDocument(long companyId, String uid)
+		throws SearchException {
+
+		ClassLoader contextClassLoader = _getContextClassLoader();
+
+		try {
+			if (_currentSearchEngine.isMessageBusListener()) {
+				_messageBusIndexWriter.deleteDocument(companyId, uid);
+			}
+			else {
+				_getWriter().deleteDocument(companyId, uid);
+			}
+		}
+		finally {
+			_setContextClassLoader(contextClassLoader);
+		}
 	}
 
-	private static ClassLoader _setSearchEngineClassLoader() {
+	private ClassLoader _getContextClassLoader() {
 		ClassLoader contextClassLoader =
 			Thread.currentThread().getContextClassLoader();
 
@@ -170,9 +142,6 @@ public class SearchEngineUtil {
 			_instance._getCurrentSearchEngineClassLoader());
 
 		return contextClassLoader;
-	}
-
-	private SearchEngineUtil() {
 	}
 
 	private ClassLoader _getCurrentSearchEngineClassLoader() {
@@ -201,11 +170,25 @@ public class SearchEngineUtil {
 	}
 
 	private boolean _isIndexReadOnly() {
-		return _currentSearchEngine.isIndexReadOnly();
+		ClassLoader contextClassLoader = _getContextClassLoader();
+
+		try {
+			return _currentSearchEngine.isIndexReadOnly();
+		}
+		finally {
+			_setContextClassLoader(contextClassLoader);
+		}
 	}
 
 	private boolean _isMessageBusListener() {
-		return _currentSearchEngine.isMessageBusListener();
+		ClassLoader contextClassLoader = _getContextClassLoader();
+
+		try {
+			return _currentSearchEngine.isMessageBusListener();
+		}
+		finally {
+			_setContextClassLoader(contextClassLoader);
+		}
 	}
 
 	private void _registerSearchEngine(SearchEngine engine, boolean current) {
@@ -216,6 +199,24 @@ public class SearchEngineUtil {
 		if (current) {
 			_setCurrentSearchEngine(engine.getName());
 		}
+	}
+
+	private Hits _search(long companyId, Query query, int begin, int end)
+		throws SearchException {
+
+		ClassLoader contextClassLoader = _getContextClassLoader();
+
+		try {
+			return _instance._getSearcher().search(
+				companyId, query, begin, end);
+		}
+		finally {
+			_setContextClassLoader(contextClassLoader);
+		}
+	}
+
+	private void _setContextClassLoader(ClassLoader contextClassLoader) {
+		Thread.currentThread().setContextClassLoader(contextClassLoader);
 	}
 
 	private void _setCurrentSearchEngine(String name) {
@@ -234,6 +235,24 @@ public class SearchEngineUtil {
 			if (_currentSearchEngine.getName().equals(name)) {
 				_currentSearchEngine = _defaultSearchEngine;
 			}
+		}
+	}
+
+	private void _updateDocument(long companyId, String uid, Document doc)
+		throws SearchException {
+
+		ClassLoader contextClassLoader = _getContextClassLoader();
+
+		try {
+			if (_currentSearchEngine.isMessageBusListener()) {
+				_messageBusIndexWriter.updateDocument(companyId, uid, doc);
+			}
+			else {
+				_getWriter().updateDocument(companyId, uid, doc);
+			}
+		}
+		finally {
+			_setContextClassLoader(contextClassLoader);
 		}
 	}
 
