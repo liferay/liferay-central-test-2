@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.search.IndexSearcher;
 import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.search.QueryImpl;
 
 import java.io.IOException;
@@ -34,6 +35,7 @@ import java.io.IOException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.BooleanQuery;
 
 /**
@@ -54,8 +56,17 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 		try {
 			searcher = LuceneUtil.getSearcher(companyId);
 
-			hits.recordHits(
-				searcher.search(((QueryImpl)query).getQuery()), searcher);
+			if (query instanceof QueryImpl) {
+				hits.recordHits(
+					searcher.search(((QueryImpl)query).getQuery()), searcher);
+			}
+			else {
+				QueryParser parser = new QueryParser(
+					StringPool.BLANK, LuceneUtil.getAnalyzer());
+
+				hits.recordHits(
+					searcher.search(parser.parse(query.parse())), searcher);
+			}
 
 			if ((begin == SearchEngineUtil.ALL_POS) &&
 				(end == SearchEngineUtil.ALL_POS)) {
