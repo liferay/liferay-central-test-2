@@ -40,6 +40,10 @@ List<Portlet> portlets = null;
 
 if ((layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 	portlets = layoutTypePortlet.getAllPortlets();
+
+	if (layoutTypePortlet.hasStateMaxPortletId(PortletKeys.PORTLET_CONFIGURATION)) {
+		portlets.add(PortletLocalServiceUtil.getPortletById(company.getCompanyId(), PortletKeys.PORTLET_CONFIGURATION));
+	}
 }
 %>
 
