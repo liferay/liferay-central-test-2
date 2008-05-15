@@ -35,6 +35,9 @@ import com.liferay.util.MapUtil;
 
 import java.util.Map;
 
+import javax.portlet.ActionRequest;
+import javax.portlet.PortletRequest;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
@@ -111,6 +114,10 @@ public class ActionURLTagUtil {
 
 			if (escapeXml != null) {
 				portletURL.setEscapeXml(escapeXml.booleanValue());
+			}
+
+			if (lifecycle.equals(PortletRequest.ACTION_PHASE) && name != null) {
+				portletURL.setParameter(ActionRequest.ACTION_NAME, name);
 			}
 
 			if (resourceID != null) {
