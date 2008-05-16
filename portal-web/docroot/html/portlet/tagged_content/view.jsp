@@ -46,6 +46,24 @@ if (mergeUrlTags) {
 }
 
 entries = ArrayUtil.distinct(entries, new StringComparator());
+
+for (String entryName : entries) {
+	try {
+		TagsEntry entry = TagsEntryLocalServiceUtil.getEntry(company.getCompanyId(), entryName);
+
+		TagsProperty journalTemplateIdProperty = TagsPropertyLocalServiceUtil.getProperty(entry.getEntryId(), "journal-template-id");
+
+		String journalTemplateId = journalTemplateIdProperty.getValue();
+
+		request.setAttribute(WebKeys.JOURNAL_TEMPLATE_ID, journalTemplateId);
+
+		break;
+	}
+	catch (NoSuchEntryException nsee) {
+	}
+	catch (NoSuchPropertyException nspe) {
+	}
+}
 %>
 
 <form name="<portlet:namespace/>fm">
@@ -84,7 +102,7 @@ if (showQueryLogic) {
 		}
 	}
 
-	if (entries.length > 0 && notEntries.length > 0) {
+	if ((entries.length > 0) && (notEntries.length > 0)) {
 		tagsText.append(" AND NOT ( ");
 	}
 

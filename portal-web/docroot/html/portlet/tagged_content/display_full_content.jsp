@@ -152,11 +152,12 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 		<%
 		JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(classPK);
 
+		String templateId = (String)request.getAttribute(WebKeys.JOURNAL_TEMPLATE_ID);
 		String languageId = LanguageUtil.getLanguageId(request);
 		int articlePage = ParamUtil.getInteger(request, "page", 1);
 		String xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
 
-		JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(articleResource.getGroupId(), articleResource.getArticleId(), null, languageId, themeDisplay, articlePage, xmlRequest);
+		JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(articleResource.getGroupId(), articleResource.getArticleId(), templateId, languageId, themeDisplay, articlePage, xmlRequest);
 
 		if (articleDisplay == null) {
 
