@@ -88,13 +88,12 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 						rating: <%= yourScore %>,
 						onComplete: function(rating) {
 							var url = '<%= url %>?p_l_id=<%= themeDisplay.getPlid() %>&className=<%= className %>&classPK=<%= classPK %>&score=' + rating;
-							
+
 							jQuery.ajax(
 								{
 									url: url,
 									dataType: 'json',
 									success: function(message) {
-										console.log(message.averageScore.toFixed(1));
 										jQuery('#<%= randomNamespace %>totalEntries').html(message.totalEntries);
 										jQuery('#<%= randomNamespace %>averageRating').mousemove(
 											function(event) {
