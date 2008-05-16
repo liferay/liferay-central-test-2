@@ -98,6 +98,9 @@
 .portlet-msg-info {
 }
 
+.portlet-msg-info.pending {
+}
+
 /* ---------- Error messages ---------- */
 
 .portlet-msg-error {

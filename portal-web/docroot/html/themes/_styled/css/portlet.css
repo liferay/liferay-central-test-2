@@ -161,6 +161,10 @@
 	text-align: left;
 }
 
+.portlet-msg-info.pending {
+	background-image: url(../images/common/time.png);
+}
+
 /* ---------- Error messages ---------- */
 
 .portlet-msg-error {
