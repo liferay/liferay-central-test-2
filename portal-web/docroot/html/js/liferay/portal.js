@@ -330,84 +330,46 @@ StarRating.implement({
 });
 
 var ThumbRating = new Class({
-	initialize: function(id, options) {
-		/* OPTIONS
-		 * displayOnly: (boolean) non-modifiable display
-		 * rating: rating to initialize to
-		 * onComplete: (function) executes when rating is selected
-		 */
-		var self = this;
-		var item = jQuery("#" + id);
+	/* OPTIONS
+	 * displayOnly: (boolean) non-modifiable display
+	 * rating: rating to initialize to
+	 * onComplete: (function) executes when rating is selected
+	 */
+	initialize: function(options) {
+		var instance = this;
 
-		this.img = item.find("img");
-		this.options = options || {};
-		this.rating = this.options.rating || 0;
+		options = options || {};
+		instance.rating = options.rating || 0;
 
-		if (!this.options.displayOnly) {
-			item.bind("mouseout",  {self: this}, this.onHoverOut);
+		var item = jQuery('#' + options.id);
+		instance.triggers = item.find('.rating');
+		instance._onComplete = options.onComplete;
 
-			this.img.each(function(index) {
-				this.select = (index == 0) ? 1 : -1;
-
-				jQuery(this).bind("click", {self: self}, self.onClick)
-					.bind("mouseover", {self: self}, self.onHoverOver);
-			})
+		if (!options.displayOnly) {
+			instance.triggers.click(
+				function(event) {
+					instance._click(event, this);
+				}
+			);
 		}
-
-		this.display(this.rating, "rating");
-	}
-});
-
-ThumbRating.implement({
-	display: function(rating, mode) {
-		var self = this;
-		var reference = null;
-
-		rating = rating == null ? this.rating : rating;
-		reference = (rating == 1) ? 0 : ((rating == -1) ? 1 : null);
-
-		this.img.each(function(index) {
-			image = this;
-
-			if (mode == "hover") {
-				if (index == reference) {
-					image.src = image.src.replace("icon.", "icon_hover.");
-				}
-				else {
-					image.src = image.src.replace("icon_hover.", "icon.");
-				}
-			}
-			else if (reference != null) {
-				if (reference == index) {
-					image.src = image.src.replace("icon.", "icon_hover.");
-				}
-				else {
-					image.src = image.src.replace("icon_hover.", "icon.");
-				}
-			}
-			else {
-				image.src = image.src.replace("icon_hover.", "icon.");
-			}
-		});
 	},
-	onHoverOver: function(event) {
-		event.data.self.display(this.select, "hover");
-	},
-	onHoverOut: function(event) {
-		event.data.self.display();
-	},
-	onClick: function(event) {
-		var target = this;
-		var self = event.data.self;
-		var newRating = (target.select == self.rating) ? 0 : target.select;
 
-		self.rating = newRating;
-
-		if (self.options.onComplete) {
-			self.options.onComplete(newRating);
+	_click: function(event, obj) {
+		var instance = this;
+		console.log('click', event, obj);
+		var trigger = jQuery(obj);
+		var rating = trigger.is('.rate-up') ? 1 : -1;
+		
+		if (trigger.is('.rated')) {
+			rating = 0;
 		}
+		
+		instance.triggers.not(obj).removeClass('rated');
+		trigger.toggleClass('rated');
 
-		self.display(newRating);
+		if (instance._onComplete) {
+			instance._onComplete(rating);
+		}
 	}
 });
 

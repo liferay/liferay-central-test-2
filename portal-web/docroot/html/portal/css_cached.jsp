@@ -1258,6 +1258,49 @@ fieldset:last-child, .uni-form fieldset:last-child {
 	color: #aaaaaa;
 }
 
+.taglib-ratings.thumbs .rating {
+	background: url() no-repeat;
+	display: block;
+	float: left;
+	font-size: 0;
+	height: 18px;
+	line-height: 0;
+	text-indent: -9999em;
+	width: 18px;
+}
+
+.taglib-ratings.thumbs:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+
+.ie .taglib-ratings.thumbs {
+	height: 1%;
+}
+
+.taglib-ratings.thumbs .rate-up {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/ratings/thumbs_up_icon.png);
+}
+
+.taglib-ratings.thumbs .rate-up:hover, .taglib-ratings.thumbs .rate-up.rated {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/ratings/thumbs_up_icon_hover.png);
+}
+
+.taglib-ratings.thumbs .rate-down {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/ratings/thumbs_down_icon.png);
+}
+
+.taglib-ratings.thumbs .rate-down:hover, .taglib-ratings.thumbs .rate-down.rated {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/ratings/thumbs_down_icon_hover.png);
+}
+
+.taglib-ratings.thumbs .rate-up.rated:hover, .taglib-ratings.thumbs .rate-down.rated:hover {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/ratings/thumbs_cancel_icon.png);
+}
+
 /* ---------- Taglib search iterator ---------- */
 
 .taglib-search-iterator {

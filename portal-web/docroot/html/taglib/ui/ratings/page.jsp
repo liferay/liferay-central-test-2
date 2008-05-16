@@ -121,7 +121,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 				<li class="total-rating" id="<%= randomNamespace %>totalRating">
 					<c:choose>
 						<c:when test="<%= (stats.getAverageScore() * stats.getTotalEntries() == 0) %>">
-							<span class="zero-total">0</span>
+							<span class="zero-total">&#177;0</span>
 						</c:when>
 						<c:otherwise>
 							<%= (stats.getAverageScore() > 0) ? "<span class='pos-total'>+" : "<span class='neg-total'>" %><%= (int)(stats.getAverageScore() * stats.getTotalEntries()) %></span>
@@ -134,7 +134,12 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 						onmousemove="ToolTip.show(event, this, '<liferay-ui:message key="sign-in-to-vote" />')"
 					</c:if>
 				>
-					<img class="thumbsUp" src="<%= themeDisplay.getPathThemeImages() %>/ratings/thumbs_up_icon.png" /><img class="thumbsDown" src="<%= themeDisplay.getPathThemeImages() %>/ratings/thumbs_down_icon.png" />
+					<a class="rating rate-up <%=(stats.getAverageScore() > 0) ? "rated" : "" %>" href="javascript: ;">
+						<liferay-ui:message key="rate-up" />
+					</a>
+					<a class="rating rate-down <%=(stats.getAverageScore() < 0) ? "rated" : "" %>" href="javascript: ;">
+						<liferay-ui:message key="rate-down" />
+					</a>
 				</li>
 				<li
 					class="total-votes"
@@ -148,9 +153,9 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 
 			<script type="text/javascript">
 				<%= randomNamespace %>yourRatingObj = new ThumbRating(
-					'<%= randomNamespace %>yourRating',
 					{
 						displayOnly: <%= !themeDisplay.isSignedIn() %>,
+						id: '<%= randomNamespace %>yourRating',
 						rating: <%= yourScore %>,
 						onComplete: function(rating) {
 							var url = '<%= url %>?p_l_id=<%= themeDisplay.getPlid() %>&className=<%= className %>&classPK=<%= classPK %>&score=' + rating;
@@ -165,7 +170,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 										var html = '';
 
 										if (message.totalEntries * message.averageScore == 0) {
-											html = '<span class="zero-total">0</span>';
+											html = '<span class="zero-total">&#177;0</span>';
 										}
 										else {
 											var score = Math.round(message.totalEntries * message.averageScore);
