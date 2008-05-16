@@ -982,6 +982,7 @@ download-xsl-template=Last ned XSL-mall
 download=Last ned
 downloading=Nedlastning
 downloads=Nedlastninger
+draft-saved-at-x=Draft saved at {0}.
 drafts=Skisser
 driving-directions=Vegbeskrivelse
 duration=Varighet

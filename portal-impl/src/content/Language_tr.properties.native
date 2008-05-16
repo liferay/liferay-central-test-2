@@ -330,6 +330,7 @@ documents-require-at-least-one-read-role=Dökümanlar enaz bir okuma rolü ister
 documents-require-at-least-one-write-role=Döküman enaz bir yazım rolü ister.
 down=Aşağı
 download=İndirme
+draft-saved-at-x=Draft saved at {0}.
 drafts=Taslaklar
 driving-directions=Ulaşım Tarifi
 due-date=Termin

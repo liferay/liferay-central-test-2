@@ -62,6 +62,12 @@ if (entry != null) {
 		var title = document.<portlet:namespace />fm.<portlet:namespace />title.value;
 		var content = window.<portlet:namespace />editor.getHTML();
 
+		var saveButton = jQuery('#<portlet:namespace />saveButton');
+		var cancelButton = jQuery('#<portlet:namespace />cancelButton');
+
+		var saveStatus = jQuery('#<portlet:namespace />saveStatus');
+		var saveText = '<%= LanguageUtil.format(pageContext, "draft-saved-at-x", "[TIME]") %>';
+
 		if (draft) {
 			if ((title == '') || (content == '')) {
 				return;
@@ -69,41 +75,41 @@ if (entry != null) {
 
 			var url = document.<portlet:namespace />fm.action;
 
-			url += "&<portlet:namespace /><%= Constants.CMD %>=<%= Constants.ADD %>";
-			url += "&<portlet:namespace />redirect=" + document.<portlet:namespace />fm.<portlet:namespace />redirect.value;
-			url += "&<portlet:namespace />referringPortletResource=" + document.<portlet:namespace />fm.<portlet:namespace />referringPortletResource.value;
-			url += "&<portlet:namespace />entryId=" + document.<portlet:namespace />fm.<portlet:namespace />entryId.value;
-			url += "&<portlet:namespace />title=" + encodeURIComponent(title);
-			url += "&<portlet:namespace />content=" + encodeURIComponent(content);
-			url += "&<portlet:namespace />displayDateMonth=" + document.<portlet:namespace />fm.<portlet:namespace />displayDateMonth.value;
-			url += "&<portlet:namespace />displayDateDay=" + document.<portlet:namespace />fm.<portlet:namespace />displayDateDay.value;
-			url += "&<portlet:namespace />displayDateYear=" + document.<portlet:namespace />fm.<portlet:namespace />displayDateYear.value;
-			url += "&<portlet:namespace />displayDateHour=" + document.<portlet:namespace />fm.<portlet:namespace />displayDateHour.value;
-			url += "&<portlet:namespace />displayDateMinute=" + document.<portlet:namespace />fm.<portlet:namespace />displayDateMinute.value;
-			url += "&<portlet:namespace />displayDateAmPm=" + document.<portlet:namespace />fm.<portlet:namespace />displayDateAmPm.value;
-			url += "&<portlet:namespace />draft=1";
-			url += "&<portlet:namespace />tagsEntries=" + encodeURIComponent(document.<portlet:namespace />fm.<portlet:namespace />tagsEntries.value);
+			url += '&<portlet:namespace /><%= Constants.CMD %>=<%= Constants.ADD %>';
+			url += '&<portlet:namespace />redirect=' + document.<portlet:namespace />fm.<portlet:namespace />redirect.value;
+			url += '&<portlet:namespace />referringPortletResource=' + document.<portlet:namespace />fm.<portlet:namespace />referringPortletResource.value;
+			url += '&<portlet:namespace />entryId=' + document.<portlet:namespace />fm.<portlet:namespace />entryId.value;
+			url += '&<portlet:namespace />title=' + encodeURIComponent(title);
+			url += '&<portlet:namespace />content=' + encodeURIComponent(content);
+			url += '&<portlet:namespace />displayDateMonth=' + document.<portlet:namespace />fm.<portlet:namespace />displayDateMonth.value;
+			url += '&<portlet:namespace />displayDateDay=' + document.<portlet:namespace />fm.<portlet:namespace />displayDateDay.value;
+			url += '&<portlet:namespace />displayDateYear=' + document.<portlet:namespace />fm.<portlet:namespace />displayDateYear.value;
+			url += '&<portlet:namespace />displayDateHour=' + document.<portlet:namespace />fm.<portlet:namespace />displayDateHour.value;
+			url += '&<portlet:namespace />displayDateMinute=' + document.<portlet:namespace />fm.<portlet:namespace />displayDateMinute.value;
+			url += '&<portlet:namespace />displayDateAmPm=' + document.<portlet:namespace />fm.<portlet:namespace />displayDateAmPm.value;
+			url += '&<portlet:namespace />draft=1';
+			url += '&<portlet:namespace />tagsEntries=' + encodeURIComponent(document.<portlet:namespace />fm.<portlet:namespace />tagsEntries.value);
 
 			jQuery.ajax(
 				{
 					url: url,
 					dataType: 'json',
 					beforeSend: function() {
-						jQuery('#<portlet:namespace />saveButton').attr('disabled', true);
+						saveButton.attr('disabled', true);
 
-						jQuery('#<portlet:namespace />saveStatus').html('<liferay-ui:message key="saving-draft" />');
+						saveStatus.attr('class', 'save-status portlet-msg-info pending');
+
+						saveStatus.html('<liferay-ui:message key="saving-draft" />');
 					},
 					success: function(message) {
 						document.<portlet:namespace />fm.<portlet:namespace />entryId.value = message.entryId;
 						document.<portlet:namespace />fm.<portlet:namespace />redirect.value = message.redirect;
 
-						jQuery('#<portlet:namespace />saveButton').attr('disabled', false);
+						saveButton.attr('disabled', false);
 
 						var tabs1BackButton = jQuery('#<portlet:namespace />tabs1TabsBack');
 
 						tabs1BackButton.attr('href', message.redirect);
-
-						var cancelButton = jQuery('#<portlet:namespace />cancelButton');
 
 						cancelButton.unbind();
 
@@ -113,12 +119,14 @@ if (entry != null) {
 							}
 						);
 
-						var now = new Date();
+						var now = saveText.replace(/\[TIME\]/gim, (new Date()).toString());
 
-						jQuery('#<portlet:namespace />saveStatus').html(now.toString());
+						saveStatus.attr('class', 'save-status portlet-msg-success');
+						saveStatus.html(now);
 					},
 					error: function() {
-						jQuery('#<portlet:namespace />saveStatus').html('<liferay-ui:message key="could-not-save-draft-to-the-server" />');
+						saveStatus.attr('class', 'save-status portlet-msg-error');
+						saveStatus.html('<liferay-ui:message key="could-not-save-draft-to-the-server" />');
 					}
 				}
 			);
@@ -161,13 +169,14 @@ if (entry != null) {
 <liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-a-valid-title" />
 <liferay-ui:tags-error />
 
-<c:if test="<%= (entry == null) || entry.isDraft() %>">
-	<div class="save-status" id="<portlet:namespace />saveStatus"></div>
-
-	<br />
-</c:if>
-
 <table class="lfr-table">
+<c:if test="<%= (entry == null) || entry.isDraft() %>">
+<tr>
+	<td colspan="2">
+		<div class="save-status" id="<portlet:namespace />saveStatus"></div>
+	</td>
+</tr>
+</c:if>
 <tr>
 	<td>
 		<liferay-ui:message key="title" />

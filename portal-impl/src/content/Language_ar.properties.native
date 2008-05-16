@@ -843,6 +843,7 @@ download-xsl-template=تنزيل XSL Template
 download=تنزيل
 downloading=جاري التنزيل
 downloads=الإنزالات
+draft-saved-at-x=Draft saved at {0}.
 drafts=مسودة
 driving-directions=تعليمات السواقة
 due-date=تاريخ الإنتهاء

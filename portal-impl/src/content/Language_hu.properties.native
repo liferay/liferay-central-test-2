@@ -71,6 +71,7 @@ coupons-can-be-set-to-only-apply-to-orders-above-a-minimum-amount=Coupons can be
 date-selection=Use the xab and xbb buttons to select the year. Use the {0} and {1} buttons to select the month. Hold the mouse button on any of the above buttons for faster selection.
 define-permissions-on-a-resource-that-belongs-to-the-x-portlet=Define permissions on a resource that belongs to the {0} portlet.
 display-of-live-session-data-is-disabled=Display of live session data is disabled. To enable, set the portaly property <b>{0}</b> to true.
+draft-saved-at-x=Draft saved at {0}.
 edit-settings-for-x-in-group=Edit Settings for {0} in Group:
 enter-one-city-or-zip-code-per-line=Enter one city or zip code <b>per line</b>.
 enter-one-email-address-per-line=Enter one email address <b>per line</b>.

@@ -478,6 +478,7 @@ download-link=Liên kết Download
 download-xsd=Download định nghĩa lược đồ XML 
 download-xsl-template=Download mẫu XSL 
 download=Download
+draft-saved-at-x=Draft saved at {0}.
 drafts=Nháp
 driving-directions=Hướng dẫn lái xe 
 due-date=Due Date

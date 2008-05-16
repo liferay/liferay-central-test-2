@@ -644,6 +644,7 @@ download-xsd=Скачать XML Schema Definition
 download-xsl-template=Скачать XSL Template
 download=Скачать
 downloads=Закачки
+draft-saved-at-x=Draft saved at {0}.
 drafts=Черновики
 driving-directions=Направления передвижения
 due-date=Дата платежа

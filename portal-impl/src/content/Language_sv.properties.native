@@ -1059,6 +1059,7 @@ download-xsl-template=Ladda ned XSL-mall
 download=Ladda ned
 downloading=Nedladdningar
 downloads=Nedladdningar
+draft-saved-at-x=Draft saved at {0}.
 drafts=Skisser
 drag-portlets-below-to-nest-them=Dra in portlets nedan för att lägga in dom
 driving-directions=Vägbeskrivning

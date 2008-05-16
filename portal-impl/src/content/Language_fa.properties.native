@@ -702,6 +702,7 @@ download-xsd=دانلود XML Schema Definition
 download-xsl-template=دانلود قالب XSL 
 download=دانلود
 downloads=دانلودها
+draft-saved-at-x=Draft saved at {0}.
 drafts=پيش نويس ها
 driving-directions=راهنماي راننگی
 due-date=تاريخ تحويل

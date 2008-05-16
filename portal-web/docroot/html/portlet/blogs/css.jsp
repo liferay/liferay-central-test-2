@@ -46,6 +46,19 @@
 	font-weight: bold;
 }
 
+.portlet-blogs .entry.draft {
+	background: #eee;
+	border: 1px solid #ccc;
+	color: #555;
+	padding: 5px;
+}
+
+.portlet-blogs .entry.draft h3 {
+	background: url(<%= themeImagesPath %>/common/page.png) no-repeat 0 50%;
+	margin-top: 0;
+	padding-left: 20px;
+}
+
 .portlet-blogs .stats {
 	margin-top: 1.5em;
 }

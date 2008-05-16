@@ -681,6 +681,7 @@ download-xsd=Definició de l'esquema de la descàrrega XML
 download-xsl-template=Plantilla de la descàrrega XSL
 download=Descàrregar
 downloads=Descàrregues
+draft-saved-at-x=Draft saved at {0}.
 drafts=Esborranys
 driving-directions=Com arribar
 due-date=Data de lliurament
