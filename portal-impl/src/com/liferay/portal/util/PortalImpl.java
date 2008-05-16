@@ -152,6 +152,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.struts.Globals;
 
 /**
  * <a href="PortalImpl.java.html"><b><i>View Source</i></b></a>
@@ -1022,7 +1023,12 @@ public class PortalImpl implements Portal {
 		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		return themeDisplay.getLocale();
+		if (themeDisplay != null) {
+			return themeDisplay.getLocale();
+		}
+		else {
+			return (Locale)req.getSession().getAttribute(Globals.LOCALE_KEY);
+		}
 	}
 
 	public Locale getLocale(RenderRequest req) {
