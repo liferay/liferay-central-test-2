@@ -83,24 +83,26 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 
 			<script type="text/javascript">
 				<%= randomNamespace %>yourRatingObj = new StarRating(
-					"<%= randomNamespace %>yourRating",
+					'<%= randomNamespace %>yourRating',
 					{
 						rating: <%= yourScore %>,
 						onComplete: function(rating) {
-							var url = "<%= url %>?p_l_id=<%= themeDisplay.getPlid() %>&className=<%= className %>&classPK=<%= classPK %>&score=" + rating;
-
-							AjaxUtil.request(
-								url,
+							var url = '<%= url %>?p_l_id=<%= themeDisplay.getPlid() %>&className=<%= className %>&classPK=<%= classPK %>&score=' + rating;
+							
+							jQuery.ajax(
 								{
-									onComplete: function(xmlHttpReq) {
-										var res = Liferay.Util.toJSONObject(xmlHttpReq.responseText);
+									url: url,
+									dataType: 'json',
+									success: function(message) {
+										console.log(message.averageScore.toFixed(1));
+										jQuery('#<%= randomNamespace %>totalEntries').html(message.totalEntries);
+										jQuery('#<%= randomNamespace %>averageRating').mousemove(
+											function(event) {
+												Tooltip.show(event, this, message.averageScore.toFixed(1) + ' <liferay-ui:message key="stars" />');
+											}
+										);
 
-										document.getElementById("<%= randomNamespace %>totalEntries").innerHTML = res.totalEntries;
-										document.getElementById("<%= randomNamespace %>averageRating").onmousemove = function(event) {
-											ToolTip.show(event, this, res.averageScore.toFixed(1) + ' <liferay-ui:message key="stars" />');
-										};
-
-										<%= randomNamespace %>averageRatingObj.display(res.averageScore);
+										<%= randomNamespace %>averageRatingObj.display(message.averageScore);
 									}
 								}
 							);
@@ -108,7 +110,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 					});
 
 				<%= randomNamespace %>averageRatingObj = new StarRating(
-					"<%= randomNamespace %>averageRating",
+					'<%= randomNamespace %>averageRating',
 					{
 						displayOnly: true,
 						rating: <%= stats.getAverageScore() %>
@@ -147,27 +149,39 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 
 			<script type="text/javascript">
 				<%= randomNamespace %>yourRatingObj = new ThumbRating(
-					"<%= randomNamespace %>yourRating",
+					'<%= randomNamespace %>yourRating',
 					{
 						displayOnly: <%= !themeDisplay.isSignedIn() %>,
 						rating: <%= yourScore %>,
 						onComplete: function(rating) {
-							var url = "<%= url %>?p_l_id=<%= themeDisplay.getPlid() %>&className=<%= className %>&classPK=<%= classPK %>&score=" + rating;
-
-							AjaxUtil.request(
-								url,
+							var url = '<%= url %>?p_l_id=<%= themeDisplay.getPlid() %>&className=<%= className %>&classPK=<%= classPK %>&score=' + rating;
+							jQuery.ajax(
 								{
-									onComplete: function(xmlHttpReq) {
-										var res = Liferay.Util.toJSONObject(xmlHttpReq.responseText);
+									url: url,
+									dataType: 'json',
+									success: function(message) {
+										var totalRating = jQuery('#<%= randomNamespace %>totalRating');
+										var totalEntries = jQuery('#<%= randomNamespace %>totalEntries');
 
-										if (res.totalEntries * res.averageScore == 0) {
-											document.getElementById("<%= randomNamespace %>totalRating").innerHTML = "<span class='zero-total'>0</span>";
+										var html = '';
+
+										if (message.totalEntries * message.averageScore == 0) {
+											html = '<span class="zero-total">0</span>';
 										}
 										else {
-											document.getElementById("<%= randomNamespace %>totalRating").innerHTML = (res.averageScore > 0) ? "<span class='pos-total'>+" + Math.round(res.totalEntries * res.averageScore) + "</span>" : "<span class='neg-total'>" + Math.round(res.totalEntries * res.averageScore) + "</span>";
+											var score = Math.round(message.totalEntries * message.averageScore);
+											var className = 'neg-total';
+
+											if (message.averageScore > 0) {
+ 												className = 'pos-total';
+												score = '+' + score;
+											}
+
+											html = '<span class="' + className + '">' + score + '</span>';
 										}
 
-										document.getElementById("<%= randomNamespace %>totalEntries").innerHTML = res.totalEntries;
+										totalRating.html(html);
+										totalEntries.html(message.totalEntries);
 									}
 								}
 							);
