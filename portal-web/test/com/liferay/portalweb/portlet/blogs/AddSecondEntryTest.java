@@ -35,7 +35,6 @@ public class AddSecondEntryTest extends BaseTestCase {
 		selenium.click("link=Blogs Test Page");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add Blog Entry']");
-		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -109,7 +108,25 @@ public class AddSecondEntryTest extends BaseTestCase {
 		selenium.selectFrame("//iframe");
 		selenium.typeKeys("//body", "This is a second test entry!");
 		selenium.selectFrame("relative=top");
-		selenium.click("//input[@value='Save']");
+		Thread.sleep(5000);
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_33_saveButton")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("_33_saveButton");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

@@ -38,8 +38,7 @@ public class EditSecondCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//td[2]/table[1]/tbody/tr/td[3]/nobr/a[2]")) {
+				if (selenium.isElementPresent("//td[4]/nobr/a[2]")) {
 					break;
 				}
 			}
@@ -49,11 +48,43 @@ public class EditSecondCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//td[2]/table[1]/tbody/tr/td[3]/nobr/a[2]");
+		selenium.click("//td[4]/nobr/a[2]");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_33_editBody1")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_33_editBody1", "This is an edited second entry comment!");
 		selenium.click("_33_updateReplyButton1");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent(
-				"This is an edited second entry comment!"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"This is an edited second entry comment!")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }

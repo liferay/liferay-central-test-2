@@ -33,7 +33,6 @@ import com.liferay.portalweb.portal.BaseTestCase;
 public class EditSecondEntryTest extends BaseTestCase {
 	public void testEditSecondEntry() throws Exception {
 		selenium.click("link=Edit");
-		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -107,7 +106,8 @@ public class EditSecondEntryTest extends BaseTestCase {
 		selenium.selectFrame("//iframe");
 		selenium.type("//body", "This is an edited second test entry!");
 		selenium.selectFrame("relative=top");
-		selenium.click("//input[@value='Save']");
+		Thread.sleep(5000);
+		selenium.click("_33_saveButton");
 		selenium.waitForPageToLoad("30000");
 		verifyTrue(selenium.isTextPresent(
 				"This is an edited second test entry!"));

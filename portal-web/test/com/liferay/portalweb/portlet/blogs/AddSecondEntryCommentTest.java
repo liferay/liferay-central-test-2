@@ -39,6 +39,21 @@ public class AddSecondEntryCommentTest extends BaseTestCase {
 			"This is a second entry comment!");
 		selenium.click("_33_postReplyButton0");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent("This is a second entry comment!"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("This is a second entry comment!")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }

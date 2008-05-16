@@ -32,8 +32,24 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class AddEntryTest extends BaseTestCase {
 	public void testAddEntry() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//input[@value='Add Blog Entry']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//input[@value='Add Blog Entry']");
-		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -107,6 +123,7 @@ public class AddEntryTest extends BaseTestCase {
 		selenium.selectFrame("//iframe");
 		selenium.typeKeys("//body", "This is a test entry!");
 		selenium.selectFrame("relative=top");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -114,7 +131,7 @@ public class AddEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
+				if (selenium.isElementPresent("_33_saveButton")) {
 					break;
 				}
 			}
@@ -124,7 +141,7 @@ public class AddEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Save']");
+		selenium.click("_33_saveButton");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
