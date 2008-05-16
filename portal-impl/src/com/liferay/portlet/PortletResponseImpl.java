@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.servlet.URLEncoder;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
@@ -40,6 +41,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -100,9 +102,73 @@ public abstract class PortletResponseImpl implements PortletResponse {
 		return resImpl;
 	}
 
-	public void addProperty(Cookie cookie) {
-		if (cookie == null) {
+	public void addDateHeader(String name, long date) {
+		if (Validator.isNull(name)) {
 			throw new IllegalArgumentException();
+		}
+
+		if (_headers.containsKey(name)) {
+			Long[] values = (Long[])_headers.get(name);
+
+			ArrayUtil.append(values, new Long(date));
+
+			_headers.put(name, values);
+		}
+		else {
+			setDateHeader(name, date);
+		}
+	}
+
+	public void addHeader(String name, String value) {
+		if (Validator.isNull(name)) {
+			throw new IllegalArgumentException();
+		}
+
+		if (_headers.containsKey(name)) {
+			String[] values = (String[])_headers.get(name);
+
+			ArrayUtil.append(values, value);
+
+			_headers.put(name, values);
+		}
+		else {
+			setHeader(name, value);
+		}
+	}
+
+	public void addIntHeader(String name, int value) {
+		if (Validator.isNull(name)) {
+			throw new IllegalArgumentException();
+		}
+
+		if (_headers.containsKey(name)) {
+			Integer[] values = (Integer[])_headers.get(name);
+
+			ArrayUtil.append(values, new Integer(value));
+
+			_headers.put(name, values);
+		}
+		else {
+			setIntHeader(name, value);
+		}
+	}
+
+	public void addProperty(Cookie cookie) {
+		if (Validator.isNull(cookie)) {
+			throw new IllegalArgumentException();
+		}
+
+		if (_headers.containsKey("cookies")) {
+			Cookie[] cookies = (Cookie[])_headers.get("cookies");
+
+			ArrayUtil.append(cookies, cookie);
+
+			_headers.put("cookies", cookies);
+		}
+		else {
+			Cookie[] cookies = new Cookie[] {cookie};
+
+			_headers.put("cookies", cookies);
 		}
 	}
 
@@ -113,9 +179,11 @@ public abstract class PortletResponseImpl implements PortletResponse {
 	}
 
 	public void addProperty(String key, String value) {
-		if (key == null) {
+		if (Validator.isNull(key)) {
 			throw new IllegalArgumentException();
 		}
+
+		addHeader(key, value);
 	}
 
 	public PortletURL createActionURL() {
@@ -335,6 +403,45 @@ public abstract class PortletResponseImpl implements PortletResponse {
 		return _urlEncoder;
 	}
 
+	public void setDateHeader(String name, long date) {
+		if (Validator.isNull(name)) {
+			throw new IllegalArgumentException();
+		}
+
+		if (date <= 0) {
+			_headers.remove(name);
+		}
+		else {
+			_headers.put(name, new Long[] {new Long(date)});
+		}
+	}
+
+	public void setHeader(String name, String value) {
+		if (Validator.isNull(name)) {
+			throw new IllegalArgumentException();
+		}
+
+		if (Validator.isNull(value)) {
+			_headers.remove(name);
+		}
+		else {
+			_headers.put(name, new String[] {value});
+		}
+	}
+
+	public void setIntHeader(String name, int value) {
+		if (Validator.isNull(name)) {
+			throw new IllegalArgumentException();
+		}
+
+		if (value <= 0) {
+			_headers.remove(name);
+		}
+		else {
+			_headers.put(name, new Integer[] {new Integer(value)});
+		}
+	}
+
 	public void setPlid(long plid) {
 		_plid = plid;
 
@@ -363,6 +470,57 @@ public abstract class PortletResponseImpl implements PortletResponse {
 		_urlEncoder = urlEncoder;
 	}
 
+	public void transferHeaders(HttpServletResponse res) {
+		for (Map.Entry<String, Object> entry : _headers.entrySet()) {
+			String name = entry.getKey();
+			Object values = entry.getValue();
+
+			if (values instanceof Integer[]) {
+				Integer[] intValues = (Integer[])values;
+
+				for (int i = 0; i < intValues.length; i++) {
+					if (res.containsHeader(name)) {
+						res.addIntHeader(name, intValues[i].intValue());
+					}
+					else {
+						res.addIntHeader(name, intValues[i].intValue());
+					}
+				}
+			}
+			else if (values instanceof Long[]) {
+				Long[] dateValues = (Long[])values;
+
+				for (int i = 0; i < dateValues.length; i++) {
+					if (res.containsHeader(name)) {
+						res.addDateHeader(name, dateValues[i].longValue());
+					}
+					else {
+						res.addDateHeader(name, dateValues[i].longValue());
+					}
+				}
+			}
+			else if (values instanceof String[]) {
+				String[] stringValues = (String[])values;
+
+				for (int i = 0; i < stringValues.length; i++) {
+					if (res.containsHeader(name)) {
+						res.addHeader(name, stringValues[i]);
+					}
+					else {
+						res.addHeader(name, stringValues[i]);
+					}
+				}
+			}
+			else if (values instanceof Cookie[]) {
+				Cookie[] cookies = (Cookie[])values;
+
+				for (int i = 0; i < cookies.length; i++) {
+					res.addCookie(cookies[i]);
+				}
+			}
+		}
+	}
+
 	protected void init(
 		PortletRequestImpl req, HttpServletResponse res, String portletName,
 		long companyId, long plid) {
@@ -382,6 +540,7 @@ public abstract class PortletResponseImpl implements PortletResponse {
 		_namespace = null;
 		_companyId = 0;
 		_plid = 0;
+		_headers.clear();
 	}
 
 	private static Log _log = LogFactory.getLog(PortletResponseImpl.class);
@@ -395,5 +554,8 @@ public abstract class PortletResponseImpl implements PortletResponse {
 	private long _plid;
 	private Map<String, String[]> _properties;
 	private URLEncoder _urlEncoder;
+
+	private LinkedHashMap<String, Object> _headers =
+		new LinkedHashMap<String, Object>();
 
 }

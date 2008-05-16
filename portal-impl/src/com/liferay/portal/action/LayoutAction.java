@@ -593,6 +593,8 @@ public class LayoutAction extends Action {
 
 				invokerPortlet.processAction(actionReqImpl, actionResImpl);
 
+				actionResImpl.transferHeaders(res);
+
 				RenderParametersPool.put(
 					req, layout.getPlid(), portletId,
 					actionResImpl.getRenderParameterMap());
@@ -644,6 +646,8 @@ public class LayoutAction extends Action {
 			resourceReqImpl.defineObjects(portletConfig, resourceResImpl);
 
 			invokerPortlet.serveResource(resourceReqImpl, resourceResImpl);
+
+			resourceResImpl.transferHeaders(res);
 
 			if (stringServletRes.isCalledGetOutputStream()) {
 				InputStream is = new ByteArrayInputStream(
