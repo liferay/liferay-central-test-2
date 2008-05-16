@@ -1250,7 +1250,7 @@ fieldset:last-child, .uni-form fieldset:last-child {
 }
 
 .taglib-ratings.thumbs .neg-total {
-	color: #cc3333;
+	color: #777777;
 	font-weight: bold;
 }
 
