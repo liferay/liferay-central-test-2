@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.calendar.service.impl;
 
-import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.im.AIMConnector;
@@ -88,13 +87,11 @@ import net.fortuna.ical4j.data.CalendarOutputter;
 import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.Component;
 import net.fortuna.ical4j.model.DateTime;
-import net.fortuna.ical4j.model.Parameter;
 import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.PropertyList;
 import net.fortuna.ical4j.model.Recur;
 import net.fortuna.ical4j.model.WeekDay;
 import net.fortuna.ical4j.model.component.VEvent;
-import net.fortuna.ical4j.model.component.VTimeZone;
 import net.fortuna.ical4j.model.property.CalScale;
 import net.fortuna.ical4j.model.property.Comment;
 import net.fortuna.ical4j.model.property.Description;
@@ -620,16 +617,13 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			net.fortuna.ical4j.model.Calendar calendar = builder.build(
 				new FileReader(file));
 
-			TimeZone timeZone = toTimeZone(
-				userId, (VTimeZone)calendar.getComponent(Component.VTIMEZONE));
-
 			Iterator<VEvent> itr = calendar.getComponents(
 				Component.VEVENT).iterator();
 
 			while (itr.hasNext()) {
 				VEvent vEvent = itr.next();
 
-				importICal4j(userId, plid, vEvent, timeZone);
+				importICal4j(userId, plid, vEvent);
 			}
 		}
 		catch (IOException ioe) {
@@ -805,8 +799,12 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	}
 
 	protected void importICal4j(
-			long userId, long plid, VEvent event, TimeZone timeZone)
+			long userId, long plid, VEvent event)
 		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		TimeZone timeZone = user.getTimeZone();
 
 		String title = StringPool.BLANK;
 
@@ -834,29 +832,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		long durationMins =
 			(diffMillis / (60 * 1000)) - (durationHours * 60);
 		boolean allDay = false;
-
-		if (event.getProperty(Property.DTSTART).getParameter(
-				Parameter.TZID) == null){
-
-			Calendar startDateWithoutTimeZone = Calendar.getInstance();
-
-			startDateWithoutTimeZone.setTime(
-				event.getStartDate().getDate());
-
-			startDate.set(
-				Calendar.DAY_OF_MONTH,
-				startDateWithoutTimeZone.get(Calendar.DAY_OF_MONTH));
-			startDate.set(Calendar.HOUR_OF_DAY, 0);
-			startDate.set(Calendar.MINUTE, 0);
-			startDate.set(Calendar.SECOND, 0);
-			startDate.set(Calendar.MILLISECOND, 0);
-
-			durationHours = 24;
-			durationMins = 0;
-			allDay = true;
-		}
-
-		boolean timeZoneSensitive = false;
+		boolean timeZoneSensitive = true;
 		String type = StringPool.BLANK;
 		boolean repeating = false;
 		Recurrence recurrence = null;
@@ -1249,21 +1225,6 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 
 		return weekDay;
-	}
-
-	protected TimeZone toTimeZone(long userId, VTimeZone vTimeZone)
-		throws SystemException, NoSuchUserException {
-
-		User user = userPersistence.findByPrimaryKey(userId);
-
-		TimeZone timeZone = user.getTimeZone();
-
-		if (Validator.isNotNull(vTimeZone)) {
-			timeZone = TimeZone.getTimeZone(
-				vTimeZone.getTimeZoneId().getValue());
-		}
-
-		return timeZone;
 	}
 
 	protected Recurrence toRecurrence(
