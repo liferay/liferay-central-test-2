@@ -142,11 +142,20 @@ if (displayTerms.getParentOrganizationId() > 0) {
 
 		if (toggle_id_enterprise_admin_organization_searchcurClickValue == 'basic') {
 			url += '&<portlet:namespace />redirect=' + encodeURIComponent(document.<portlet:namespace />fm.<portlet:namespace />organizationsRedirect.value);
+
+			<c:if test="<%= organization != null %>">
+				url += '&<portlet:namespace />parentOrganizationId=<%= organization.getOrganizationId() %>';
+			</c:if>
+
 			url += '&<portlet:namespace /><%= displayTerms.NAME %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>.value;
 
 			submitForm(document.hrefFm, url);
 		}
 		else {
+			<c:if test="<%= organization != null %>">
+				url += '&<portlet:namespace />parentOrganizationId=<%= organization.getOrganizationId() %>';
+			</c:if>
+
 			document.<portlet:namespace />fm.method = 'post';
 			document.<portlet:namespace />fm.<portlet:namespace />redirect.value = document.<portlet:namespace />fm.<portlet:namespace />organizationsRedirect.value;
 			submitForm(document.<portlet:namespace />fm, url);
