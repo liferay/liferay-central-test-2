@@ -356,7 +356,6 @@ var ThumbRating = new Class({
 
 	_click: function(event, obj) {
 		var instance = this;
-		console.log('click', event, obj);
 		var trigger = jQuery(obj);
 		var rating = trigger.is('.rate-up') ? 1 : -1;
 		
