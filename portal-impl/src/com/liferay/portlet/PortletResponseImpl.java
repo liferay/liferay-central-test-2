@@ -478,44 +478,44 @@ public abstract class PortletResponseImpl implements PortletResponse {
 			if (values instanceof Integer[]) {
 				Integer[] intValues = (Integer[])values;
 
-				for (int i = 0; i < intValues.length; i++) {
+				for (int value : intValues) {
 					if (res.containsHeader(name)) {
-						res.addIntHeader(name, intValues[i].intValue());
+						res.addIntHeader(name, value);
 					}
 					else {
-						res.addIntHeader(name, intValues[i].intValue());
+						res.addIntHeader(name, value);
 					}
 				}
 			}
 			else if (values instanceof Long[]) {
 				Long[] dateValues = (Long[])values;
 
-				for (int i = 0; i < dateValues.length; i++) {
+				for (long value : dateValues) {
 					if (res.containsHeader(name)) {
-						res.addDateHeader(name, dateValues[i].longValue());
+						res.addDateHeader(name, value);
 					}
 					else {
-						res.addDateHeader(name, dateValues[i].longValue());
+						res.addDateHeader(name, value);
 					}
 				}
 			}
 			else if (values instanceof String[]) {
 				String[] stringValues = (String[])values;
 
-				for (int i = 0; i < stringValues.length; i++) {
+				for (String value : stringValues) {
 					if (res.containsHeader(name)) {
-						res.addHeader(name, stringValues[i]);
+						res.addHeader(name, value);
 					}
 					else {
-						res.addHeader(name, stringValues[i]);
+						res.addHeader(name, value);
 					}
 				}
 			}
 			else if (values instanceof Cookie[]) {
 				Cookie[] cookies = (Cookie[])values;
 
-				for (int i = 0; i < cookies.length; i++) {
-					res.addCookie(cookies[i]);
+				for (Cookie cookie : cookies) {
+					res.addCookie(cookie);
 				}
 			}
 		}
@@ -554,7 +554,6 @@ public abstract class PortletResponseImpl implements PortletResponse {
 	private long _plid;
 	private Map<String, String[]> _properties;
 	private URLEncoder _urlEncoder;
-
 	private LinkedHashMap<String, Object> _headers =
 		new LinkedHashMap<String, Object>();
 
