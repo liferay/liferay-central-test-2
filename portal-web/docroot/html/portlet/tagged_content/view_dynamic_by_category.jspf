@@ -80,6 +80,14 @@ for (TagsAsset asset : assets) {
 
 Iterator<Map.Entry<String, List<TagsAsset>>> itr = assetsByCategory.entrySet().iterator();
 
+if (!itr.hasNext()) {
+	%>
+	<script>
+		var div = document.getElementById('portlet-id-<%=portletDisplay.getId() %>');
+		div.style.display = 'none';
+	</script>
+	<%
+}
 while (itr.hasNext()) {
 	Map.Entry<String, List<TagsAsset>> entry = itr.next();
 
