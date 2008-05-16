@@ -152,7 +152,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.struts.Globals;
 
 /**
  * <a href="PortalImpl.java.html"><b><i>View Source</i></b></a>
@@ -946,6 +945,16 @@ public class PortalImpl implements Portal {
 			friendlyURL = getPathFriendlyURLPublic();
 		}
 
+		if (themeDisplay.isWidget()) {
+			friendlyURL = "/widget" + friendlyURL;
+		}
+
+		if (themeDisplay.isI18n()) {
+			friendlyURL =
+				StringPool.SLASH + themeDisplay.getI18nLanguageId() +
+					friendlyURL;
+		}
+
 		return friendlyURL + group.getFriendlyURL() + layoutFriendlyURL;
 	}
 
@@ -1010,7 +1019,10 @@ public class PortalImpl implements Portal {
 	}
 
 	public Locale getLocale(HttpServletRequest req) {
-		return (Locale)req.getSession().getAttribute(Globals.LOCALE_KEY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		return themeDisplay.getLocale();
 	}
 
 	public Locale getLocale(RenderRequest req) {

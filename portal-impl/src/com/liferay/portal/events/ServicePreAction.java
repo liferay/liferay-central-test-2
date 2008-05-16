@@ -912,9 +912,15 @@ public class ServicePreAction extends Action {
 
 		// Locale
 
+		String i18nLanguageId = (String)req.getAttribute(
+			WebKeys.I18N_LANGUAGE_ID);
+
 		Locale locale = (Locale)ses.getAttribute(Globals.LOCALE_KEY);
 
-		if (locale == null) {
+		if (Validator.isNotNull(i18nLanguageId)) {
+			locale = LocaleUtil.fromLanguageId(i18nLanguageId);
+		}
+		else if (locale == null) {
 			if (signedIn) {
 				locale = user.getLocale();
 			}
@@ -1253,6 +1259,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setPermissionChecker(permissionChecker);
 		themeDisplay.setLocale(locale);
 		themeDisplay.setLanguageId(LocaleUtil.toLanguageId(locale));
+		themeDisplay.setI18nLanguageId(i18nLanguageId);
 		themeDisplay.setTimeZone(timeZone);
 		themeDisplay.setLookAndFeel(contextPath, theme, colorScheme);
 		themeDisplay.setThemeCssFastLoad(themeCssFastLoad);

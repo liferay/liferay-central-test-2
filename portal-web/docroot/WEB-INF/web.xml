@@ -470,44 +470,49 @@
 		<load-on-startup>5</load-on-startup>
 	</servlet>
 	<servlet>
+		<servlet-name>I18nServlet</servlet-name>
+		<servlet-class>com.liferay.portal.servlet.I18nServlet</servlet-class>
+		<load-on-startup>6</load-on-startup>
+	</servlet>
+	<servlet>
 		<servlet-name>ImageServlet</servlet-name>
 		<servlet-class>com.liferay.portal.servlet.ImageServlet</servlet-class>
-		<load-on-startup>6</load-on-startup>
+		<load-on-startup>7</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>LanguageServlet</servlet-name>
 		<servlet-class>com.liferay.portal.servlet.LanguageServlet</servlet-class>
-		<load-on-startup>7</load-on-startup>
+		<load-on-startup>8</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>LuceneServlet</servlet-name>
 		<servlet-class>com.liferay.portal.servlet.LuceneServlet</servlet-class>
-		<load-on-startup>8</load-on-startup>
+		<load-on-startup>9</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>PortalDelegatorServlet</servlet-name>
 		<servlet-class>com.liferay.portal.kernel.servlet.PortalDelegatorServlet</servlet-class>
-		<load-on-startup>9</load-on-startup>
+		<load-on-startup>10</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>SitemapServlet</servlet-name>
 		<servlet-class>com.liferay.portal.servlet.SitemapServlet</servlet-class>
-		<load-on-startup>10</load-on-startup>
+		<load-on-startup>11</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>SoftwareCatalogServlet</servlet-name>
 		<servlet-class>com.liferay.portal.servlet.SoftwareCatalogServlet</servlet-class>
-		<load-on-startup>11</load-on-startup>
+		<load-on-startup>12</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>WidgetServlet</servlet-name>
 		<servlet-class>com.liferay.portal.servlet.WidgetServlet</servlet-class>
-		<load-on-startup>12</load-on-startup>
+		<load-on-startup>13</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>DisplayChart</servlet-name>
 		<servlet-class>org.jfree.chart.servlet.DisplayChart</servlet-class>
-		<load-on-startup>13</load-on-startup>
+		<load-on-startup>14</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>PortletBridgeServlet</servlet-name>
@@ -532,7 +537,7 @@
 			<param-name>ignorePostToGetRequestHeaders</param-name>
 			<param-value>content-type,content-length</param-value>
 		</init-param>
-		<load-on-startup>14</load-on-startup>
+		<load-on-startup>15</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>MainServlet</servlet-name>
@@ -553,6 +558,18 @@
 	<servlet-mapping>
 		<servlet-name>FriendlyURLPublicServlet</servlet-name>
 		<url-pattern>/web/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>I18nServlet</servlet-name>
+		<url-pattern>/de/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>I18nServlet</servlet-name>
+		<url-pattern>/zh_CN/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>I18nServlet</servlet-name>
+		<url-pattern>/zh_TW/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>ImageServlet</servlet-name>

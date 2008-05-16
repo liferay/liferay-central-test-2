@@ -25,6 +25,7 @@ package com.liferay.portlet.language.action;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Layout;
@@ -110,6 +111,12 @@ public class ViewAction extends PortletAction {
 
 		if (Validator.isNull(redirect)) {
 			redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
+
+			if (themeDisplay.isI18n()) {
+				int pos = redirect.indexOf(StringPool.SLASH, 1);
+
+				redirect = redirect.substring(pos);
+			}
 		}
 
 		res.sendRedirect(redirect);

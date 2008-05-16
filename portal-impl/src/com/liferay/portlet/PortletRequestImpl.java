@@ -84,7 +84,6 @@ import javax.xml.namespace.QName;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.struts.Globals;
 
 /**
  * <a href="PortletRequestImpl.java.html"><b><i>View Source</i></b></a>
@@ -746,7 +745,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 			}
 		}
 
-		_locale = (Locale)_req.getSession().getAttribute(Globals.LOCALE_KEY);
+		_locale = themeDisplay.getLocale();
 		_plid = plid;
 	}
 

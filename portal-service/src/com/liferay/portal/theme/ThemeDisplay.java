@@ -275,6 +275,22 @@ public class ThemeDisplay implements Serializable {
 		_languageId = languageId;
 	}
 
+	public boolean isI18n() {
+		return _i18n;
+	}
+
+	public String getI18nLanguageId() {
+		return _i18nLanguageId;
+	}
+
+	public void setI18nLanguageId(String i18nLanguageId) {
+		_i18nLanguageId = i18nLanguageId;
+
+		if (Validator.isNotNull(i18nLanguageId)) {
+			_i18n = true;
+		}
+	}
+
 	public String translate(String key) {
 		return LanguageUtil.get(getCompanyId(), getLocale(), key);
 	}
@@ -924,6 +940,8 @@ public class ThemeDisplay implements Serializable {
 		_permissionChecker = null;
 		_locale = null;
 		_languageId = null;
+		_i18n = false;
+		_i18nLanguageId = null;
 		_timeZone = null;
 		_theme = null;
 		_colorScheme = null;
@@ -1017,6 +1035,8 @@ public class ThemeDisplay implements Serializable {
 	private PermissionChecker _permissionChecker;
 	private Locale _locale;
 	private String _languageId;
+	private boolean _i18n;
+	private String _i18nLanguageId;
 	private TimeZone _timeZone;
 	private Theme _theme;
 	private ColorScheme _colorScheme;

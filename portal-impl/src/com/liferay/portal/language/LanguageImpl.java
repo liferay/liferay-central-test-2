@@ -25,17 +25,18 @@ package com.liferay.portal.language;
 import com.liferay.portal.kernel.language.Language;
 import com.liferay.portal.kernel.language.LanguageWrapper;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebAppPool;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.util.Time;
 
 import java.text.MessageFormat;
@@ -43,14 +44,13 @@ import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.portlet.ActionRequest;
-import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -59,7 +59,6 @@ import javax.servlet.jsp.PageContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.Globals;
-import org.apache.struts.taglib.TagUtils;
 import org.apache.struts.util.MessageResources;
 
 /**
@@ -303,48 +302,14 @@ public class LanguageImpl implements Language {
 	public String get(
 		PageContext pageContext, String key, String defaultValue) {
 
-		if (key == null) {
-			return null;
-		}
+		ServletRequest req = pageContext.getRequest();
 
-		String value = null;
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-		try {
-			value = TagUtils.getInstance().message(
-				pageContext, null, null, key);
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
-
-		if (value == null) {
-
-			// LEP-2849
-
-			HttpServletRequest req =
-				(HttpServletRequest)pageContext.getRequest();
-
-			PortletConfig portletConfig = (PortletConfig)req.getAttribute(
-				JavaConstants.JAVAX_PORTLET_CONFIG);
-
-			if (portletConfig != null) {
-				Locale locale = req.getLocale();
-
-				ResourceBundle bundle = portletConfig.getResourceBundle(locale);
-
-				try {
-					value = bundle.getString(key);
-				}
-				catch (MissingResourceException mre) {
-				}
-			}
-		}
-
-		if (value == null) {
-			value = defaultValue;
-		}
-
-		return value;
+		return get(
+			themeDisplay.getCompanyId(), themeDisplay.getLocale(), key,
+			defaultValue);
 	}
 
 	public Locale[] getAvailableLocales() {
@@ -374,17 +339,7 @@ public class LanguageImpl implements Language {
 			return languageId;
 		}
 
-		Locale locale =
-			(Locale)req.getSession().getAttribute(Globals.LOCALE_KEY);
-
-		if (locale == null) {
-			languageId = CookieKeys.getCookie(
-				req, CookieKeys.GUEST_LANGUAGE_ID);
-
-			if (Validator.isNotNull(languageId)) {
-				locale = LocaleUtil.fromLanguageId(languageId);
-			}
-		}
+		Locale locale = PortalUtil.getLocale(req);
 
 		return getLanguageId(locale);
 	}
