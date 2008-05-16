@@ -23,17 +23,19 @@
 %>
 
 <c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.VIEW) %>">
-	<div class="entry<%= (entry.isDraft() ? " draft" : "") %>">	
+	<div class="entry <%= entry.isDraft() ? "draft" : "" %>">
 		<div class="entry-content">
 
 			<%
 			String strutsAction = ParamUtil.getString(request, "struts_action");
 			%>
+
 			<c:if test="<%= entry.isDraft() %>">
 				<h3>
 					<liferay-ui:message key="draft" />
 				</h3>
 			</c:if>
+
 			<portlet:renderURL var="viewEntryURL">
 				<portlet:param name="struts_action" value="/blogs/view_entry" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />

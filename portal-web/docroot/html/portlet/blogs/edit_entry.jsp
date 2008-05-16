@@ -98,7 +98,6 @@ if (entry != null) {
 						saveButton.attr('disabled', true);
 
 						saveStatus.attr('class', 'save-status portlet-msg-info pending');
-
 						saveStatus.html('<liferay-ui:message key="saving-draft" />');
 					},
 					success: function(message) {
@@ -170,13 +169,15 @@ if (entry != null) {
 <liferay-ui:tags-error />
 
 <table class="lfr-table">
+
 <c:if test="<%= (entry == null) || entry.isDraft() %>">
-<tr>
-	<td colspan="2">
-		<div class="save-status" id="<portlet:namespace />saveStatus"></div>
-	</td>
-</tr>
+	<tr>
+		<td colspan="2">
+			<div class="save-status" id="<portlet:namespace />saveStatus"></div>
+		</td>
+	</tr>
 </c:if>
+
 <tr>
 	<td>
 		<liferay-ui:message key="title" />
