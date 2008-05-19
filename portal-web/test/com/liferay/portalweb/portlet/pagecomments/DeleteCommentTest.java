@@ -35,7 +35,22 @@ public class DeleteCommentTest extends BaseTestCase {
 		selenium.click("link=Delete");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-		verifyFalse(selenium.isTextPresent("This is a test page comment!"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isTextPresent("This is a test page comment!")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
