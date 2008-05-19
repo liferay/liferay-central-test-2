@@ -50,7 +50,6 @@ public class AddDraftEntryTest extends BaseTestCase {
 		}
 
 		selenium.click("//input[@value='Add Blog Entry']");
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
