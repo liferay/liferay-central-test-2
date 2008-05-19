@@ -86,10 +86,10 @@ public class EmailAddressLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.EmailAddress> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
 
-		return emailAddressLocalService.dynamicQuery(queryInitializer, begin,
+		return emailAddressLocalService.dynamicQuery(queryInitializer, start,
 			end);
 	}
 

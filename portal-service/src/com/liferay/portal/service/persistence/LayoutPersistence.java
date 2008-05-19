@@ -78,11 +78,11 @@ public interface LayoutPersistence {
 		long groupId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Layout> findByGroupId(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Layout> findByGroupId(
-		long groupId, int begin, int end,
+		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -106,11 +106,11 @@ public interface LayoutPersistence {
 		long companyId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Layout> findByCompanyId(
-		long companyId, int begin, int end)
+		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Layout> findByCompanyId(
-		long companyId, int begin, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -149,11 +149,11 @@ public interface LayoutPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Layout> findByG_P(
-		long groupId, boolean privateLayout, int begin, int end)
+		long groupId, boolean privateLayout, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Layout> findByG_P(
-		long groupId, boolean privateLayout, int begin, int end,
+		long groupId, boolean privateLayout, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -189,11 +189,11 @@ public interface LayoutPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Layout> findByG_P_P(
-		long groupId, boolean privateLayout, long parentLayoutId, int begin,
+		long groupId, boolean privateLayout, long parentLayoutId, int start,
 		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Layout> findByG_P_P(
-		long groupId, boolean privateLayout, long parentLayoutId, int begin,
+		long groupId, boolean privateLayout, long parentLayoutId, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -229,11 +229,11 @@ public interface LayoutPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Layout> findByG_P_T(
-		long groupId, boolean privateLayout, java.lang.String type, int begin,
+		long groupId, boolean privateLayout, java.lang.String type, int start,
 		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Layout> findByG_P_T(
-		long groupId, boolean privateLayout, java.lang.String type, int begin,
+		long groupId, boolean privateLayout, java.lang.String type, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -261,15 +261,15 @@ public interface LayoutPersistence {
 
 	public java.util.List<com.liferay.portal.model.Layout> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Layout> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Layout> findAll(int begin,
+	public java.util.List<com.liferay.portal.model.Layout> findAll(int start,
 		int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Layout> findAll(int begin,
+	public java.util.List<com.liferay.portal.model.Layout> findAll(int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 

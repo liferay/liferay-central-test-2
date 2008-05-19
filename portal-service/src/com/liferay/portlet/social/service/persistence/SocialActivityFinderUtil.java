@@ -50,27 +50,27 @@ public class SocialActivityFinderUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> findByGroupId(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByGroupId(groupId, begin, end);
+		return getFinder().findByGroupId(groupId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> findByOrganizationId(
-		long organizationId, int begin, int end)
+		long organizationId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByOrganizationId(organizationId, begin, end);
+		return getFinder().findByOrganizationId(organizationId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> findByRelation(
-		long userId, int begin, int end)
+		long userId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByRelation(userId, begin, end);
+		return getFinder().findByRelation(userId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> findByRelationType(
-		long userId, int type, int begin, int end)
+		long userId, int type, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByRelationType(userId, type, begin, end);
+		return getFinder().findByRelationType(userId, type, start, end);
 	}
 
 	public static SocialActivityFinder getFinder() {

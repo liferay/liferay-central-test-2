@@ -146,7 +146,7 @@ public interface MBMessageService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCategoryMessages(
-		long categoryId, int begin, int end)
+		long categoryId, int start, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

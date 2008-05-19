@@ -329,12 +329,12 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 	}
 
 	public List<UserTrackerPath> findByUserTrackerId(long userTrackerId,
-		int begin, int end) throws SystemException {
-		return findByUserTrackerId(userTrackerId, begin, end, null);
+		int start, int end) throws SystemException {
+		return findByUserTrackerId(userTrackerId, start, end, null);
 	}
 
 	public List<UserTrackerPath> findByUserTrackerId(long userTrackerId,
-		int begin, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = UserTrackerPathModelImpl.CACHE_ENABLED;
 		String finderClassName = UserTrackerPath.class.getName();
 		String finderMethodName = "findByUserTrackerId";
@@ -347,7 +347,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(userTrackerId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -384,7 +384,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 				qPos.add(userTrackerId);
 
 				List<UserTrackerPath> list = (List<UserTrackerPath>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -520,7 +520,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 	}
 
 	public List<UserTrackerPath> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -529,7 +529,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -545,12 +545,12 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<UserTrackerPath> findAll(int begin, int end)
+	public List<UserTrackerPath> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<UserTrackerPath> findAll(int begin, int end,
+	public List<UserTrackerPath> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = UserTrackerPathModelImpl.CACHE_ENABLED;
 		String finderClassName = UserTrackerPath.class.getName();
@@ -560,7 +560,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -588,7 +588,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<UserTrackerPath> list = (List<UserTrackerPath>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

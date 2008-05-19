@@ -110,10 +110,10 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	public List<WikiNode> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return wikiNodePersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public WikiNode updateWikiNode(WikiNode wikiNode) throws SystemException {

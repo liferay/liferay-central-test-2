@@ -94,7 +94,7 @@ public class PasswordPolicyFinderImpl implements PasswordPolicyFinder {
 	}
 
 	public List<PasswordPolicy> findByC_N(
-			long companyId, String name, int begin, int end,
+			long companyId, String name, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
@@ -120,7 +120,7 @@ public class PasswordPolicyFinderImpl implements PasswordPolicyFinder {
 			qPos.add(name);
 
 			return (List<PasswordPolicy>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

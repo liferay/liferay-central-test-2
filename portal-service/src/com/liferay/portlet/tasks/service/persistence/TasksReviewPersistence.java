@@ -79,11 +79,11 @@ public interface TasksReviewPersistence {
 		long userId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByUserId(
-		long userId, int begin, int end)
+		long userId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByUserId(
-		long userId, int begin, int end,
+		long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -107,11 +107,11 @@ public interface TasksReviewPersistence {
 		long proposalId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByProposalId(
-		long proposalId, int begin, int end)
+		long proposalId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByProposalId(
-		long proposalId, int begin, int end,
+		long proposalId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -143,11 +143,11 @@ public interface TasksReviewPersistence {
 		long proposalId, int stage) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S(
-		long proposalId, int stage, int begin, int end)
+		long proposalId, int stage, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S(
-		long proposalId, int stage, int begin, int end,
+		long proposalId, int stage, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -174,11 +174,11 @@ public interface TasksReviewPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S_C(
-		long proposalId, int stage, boolean completed, int begin, int end)
+		long proposalId, int stage, boolean completed, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S_C(
-		long proposalId, int stage, boolean completed, int begin, int end,
+		long proposalId, int stage, boolean completed, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -206,11 +206,11 @@ public interface TasksReviewPersistence {
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S_C_R(
 		long proposalId, int stage, boolean completed, boolean rejected,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S_C_R(
 		long proposalId, int stage, boolean completed, boolean rejected,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tasks.model.TasksReview findByP_S_C_R_First(
@@ -237,16 +237,16 @@ public interface TasksReviewPersistence {
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findAll()
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByUserId(long userId)

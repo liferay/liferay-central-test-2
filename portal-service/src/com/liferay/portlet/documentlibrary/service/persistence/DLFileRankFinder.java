@@ -36,6 +36,6 @@ public interface DLFileRankFinder {
 		long groupId, long userId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findByG_U(
-		long groupId, long userId, int begin, int end)
+		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException;
 }

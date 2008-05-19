@@ -333,12 +333,12 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<TagsProperty> findByCompanyId(long companyId, int begin, int end)
+	public List<TagsProperty> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
-		return findByCompanyId(companyId, begin, end, null);
+		return findByCompanyId(companyId, start, end, null);
 	}
 
-	public List<TagsProperty> findByCompanyId(long companyId, int begin,
+	public List<TagsProperty> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = TagsPropertyModelImpl.CACHE_ENABLED;
 		String finderClassName = TagsProperty.class.getName();
@@ -352,7 +352,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -395,7 +395,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 				qPos.add(companyId);
 
 				List<TagsProperty> list = (List<TagsProperty>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -575,12 +575,12 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<TagsProperty> findByEntryId(long entryId, int begin, int end)
+	public List<TagsProperty> findByEntryId(long entryId, int start, int end)
 		throws SystemException {
-		return findByEntryId(entryId, begin, end, null);
+		return findByEntryId(entryId, start, end, null);
 	}
 
-	public List<TagsProperty> findByEntryId(long entryId, int begin, int end,
+	public List<TagsProperty> findByEntryId(long entryId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = TagsPropertyModelImpl.CACHE_ENABLED;
 		String finderClassName = TagsProperty.class.getName();
@@ -594,7 +594,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(entryId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -637,7 +637,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 				qPos.add(entryId);
 
 				List<TagsProperty> list = (List<TagsProperty>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -831,12 +831,12 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<TagsProperty> findByC_K(long companyId, String key, int begin,
+	public List<TagsProperty> findByC_K(long companyId, String key, int start,
 		int end) throws SystemException {
-		return findByC_K(companyId, key, begin, end, null);
+		return findByC_K(companyId, key, start, end, null);
 	}
 
-	public List<TagsProperty> findByC_K(long companyId, String key, int begin,
+	public List<TagsProperty> findByC_K(long companyId, String key, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = TagsPropertyModelImpl.CACHE_ENABLED;
 		String finderClassName = TagsProperty.class.getName();
@@ -852,7 +852,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 				
 				key,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -908,7 +908,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 				}
 
 				List<TagsProperty> list = (List<TagsProperty>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1180,7 +1180,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 	}
 
 	public List<TagsProperty> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -1189,7 +1189,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -1205,12 +1205,12 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<TagsProperty> findAll(int begin, int end)
+	public List<TagsProperty> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<TagsProperty> findAll(int begin, int end, OrderByComparator obc)
+	public List<TagsProperty> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = TagsPropertyModelImpl.CACHE_ENABLED;
 		String finderClassName = TagsProperty.class.getName();
@@ -1220,7 +1220,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1255,7 +1255,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<TagsProperty> list = (List<TagsProperty>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

@@ -136,12 +136,12 @@ public class ShoppingCouponServiceSoap {
 
 	public static com.liferay.portlet.shopping.model.ShoppingCouponSoap[] search(
 		long plid, long companyId, java.lang.String code, boolean active,
-		java.lang.String discountType, boolean andOperator, int begin, int end)
+		java.lang.String discountType, boolean andOperator, int start, int end)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> returnValue =
 				ShoppingCouponServiceUtil.search(plid, companyId, code, active,
-					discountType, andOperator, begin, end);
+					discountType, andOperator, start, end);
 
 			return com.liferay.portlet.shopping.model.ShoppingCouponSoap.toSoapModels(returnValue);
 		}

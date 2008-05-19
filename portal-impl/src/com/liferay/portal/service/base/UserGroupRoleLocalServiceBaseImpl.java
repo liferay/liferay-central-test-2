@@ -298,10 +298,10 @@ public abstract class UserGroupRoleLocalServiceBaseImpl
 	}
 
 	public List<UserGroupRole> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return userGroupRolePersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public UserGroupRole updateUserGroupRole(UserGroupRole userGroupRole)

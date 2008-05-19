@@ -33,5 +33,5 @@ public interface DLFileEntryAndShortcutFinder {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List findByFolderIds(java.util.List<Long> folderIds,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 }

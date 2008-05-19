@@ -105,10 +105,10 @@ public abstract class TagsEntryLocalServiceBaseImpl
 	}
 
 	public List<TagsEntry> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return tagsEntryPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public TagsEntry updateTagsEntry(TagsEntry tagsEntry)

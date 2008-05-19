@@ -189,7 +189,7 @@ public class JournalTemplateFinderImpl implements JournalTemplateFinder {
 
 	public List<JournalTemplate> findByKeywords(
 			long companyId, long groupId, String keywords, String structureId,
-			String structureIdComparator, int begin, int end,
+			String structureIdComparator, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
@@ -209,25 +209,25 @@ public class JournalTemplateFinderImpl implements JournalTemplateFinder {
 
 		return findByC_G_T_S_N_D(
 			companyId, groupId, templateIds, structureId, structureIdComparator,
-			names, descriptions, andOperator, begin, end, obc);
+			names, descriptions, andOperator, start, end, obc);
 	}
 
 	public List<JournalTemplate> findByC_G_T_S_N_D(
 			long companyId, long groupId, String templateId, String structureId,
 			String structureIdComparator, String name, String description,
-			boolean andOperator, int begin, int end, OrderByComparator obc)
+			boolean andOperator, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return findByC_G_T_S_N_D(
 			companyId, groupId, new String[] {templateId}, structureId,
 			structureIdComparator, new String[] {name},
-			new String[] {description}, andOperator, begin, end, obc);
+			new String[] {description}, andOperator, start, end, obc);
 	}
 
 	public List<JournalTemplate> findByC_G_T_S_N_D(
 			long companyId, long groupId, String[] templateIds,
 			String structureId, String structureIdComparator, String[] names,
-			String[] descriptions, boolean andOperator, int begin, int end,
+			String[] descriptions, boolean andOperator, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
@@ -302,7 +302,7 @@ public class JournalTemplateFinderImpl implements JournalTemplateFinder {
 			qPos.add(descriptions, 2);
 
 			return (List<JournalTemplate>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

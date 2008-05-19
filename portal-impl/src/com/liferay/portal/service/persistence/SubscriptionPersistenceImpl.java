@@ -328,12 +328,12 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<Subscription> findByUserId(long userId, int begin, int end)
+	public List<Subscription> findByUserId(long userId, int start, int end)
 		throws SystemException {
-		return findByUserId(userId, begin, end, null);
+		return findByUserId(userId, start, end, null);
 	}
 
-	public List<Subscription> findByUserId(long userId, int begin, int end,
+	public List<Subscription> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SubscriptionModelImpl.CACHE_ENABLED;
 		String finderClassName = Subscription.class.getName();
@@ -347,7 +347,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -384,7 +384,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 				qPos.add(userId);
 
 				List<Subscription> list = (List<Subscription>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -569,12 +569,12 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 	}
 
 	public List<Subscription> findByC_C_C(long companyId, long classNameId,
-		long classPK, int begin, int end) throws SystemException {
-		return findByC_C_C(companyId, classNameId, classPK, begin, end, null);
+		long classPK, int start, int end) throws SystemException {
+		return findByC_C_C(companyId, classNameId, classPK, start, end, null);
 	}
 
 	public List<Subscription> findByC_C_C(long companyId, long classNameId,
-		long classPK, int begin, int end, OrderByComparator obc)
+		long classPK, int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = SubscriptionModelImpl.CACHE_ENABLED;
 		String finderClassName = Subscription.class.getName();
@@ -588,7 +588,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -637,7 +637,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 				qPos.add(classPK);
 
 				List<Subscription> list = (List<Subscription>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -923,7 +923,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 	}
 
 	public List<Subscription> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -932,7 +932,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -948,12 +948,12 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<Subscription> findAll(int begin, int end)
+	public List<Subscription> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<Subscription> findAll(int begin, int end, OrderByComparator obc)
+	public List<Subscription> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = SubscriptionModelImpl.CACHE_ENABLED;
 		String finderClassName = Subscription.class.getName();
@@ -963,7 +963,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -991,7 +991,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<Subscription> list = (List<Subscription>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

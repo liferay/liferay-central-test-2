@@ -142,10 +142,10 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	public List<AnnouncementsEntry> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return announcementsEntryPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public AnnouncementsEntry updateAnnouncementsEntry(

@@ -330,12 +330,12 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<MBMessageFlag> findByUserId(long userId, int begin, int end)
+	public List<MBMessageFlag> findByUserId(long userId, int start, int end)
 		throws SystemException {
-		return findByUserId(userId, begin, end, null);
+		return findByUserId(userId, start, end, null);
 	}
 
-	public List<MBMessageFlag> findByUserId(long userId, int begin, int end,
+	public List<MBMessageFlag> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBMessageFlagModelImpl.CACHE_ENABLED;
 		String finderClassName = MBMessageFlag.class.getName();
@@ -349,7 +349,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -386,7 +386,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 				qPos.add(userId);
 
 				List<MBMessageFlag> list = (List<MBMessageFlag>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -555,12 +555,12 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<MBMessageFlag> findByMessageId(long messageId, int begin,
+	public List<MBMessageFlag> findByMessageId(long messageId, int start,
 		int end) throws SystemException {
-		return findByMessageId(messageId, begin, end, null);
+		return findByMessageId(messageId, start, end, null);
 	}
 
-	public List<MBMessageFlag> findByMessageId(long messageId, int begin,
+	public List<MBMessageFlag> findByMessageId(long messageId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBMessageFlagModelImpl.CACHE_ENABLED;
 		String finderClassName = MBMessageFlag.class.getName();
@@ -574,7 +574,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(messageId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -611,7 +611,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 				qPos.add(messageId);
 
 				List<MBMessageFlag> list = (List<MBMessageFlag>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -849,7 +849,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 	}
 
 	public List<MBMessageFlag> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -858,7 +858,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -874,12 +874,12 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<MBMessageFlag> findAll(int begin, int end)
+	public List<MBMessageFlag> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<MBMessageFlag> findAll(int begin, int end, OrderByComparator obc)
+	public List<MBMessageFlag> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = MBMessageFlagModelImpl.CACHE_ENABLED;
 		String finderClassName = MBMessageFlag.class.getName();
@@ -889,7 +889,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -918,7 +918,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<MBMessageFlag> list = (List<MBMessageFlag>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

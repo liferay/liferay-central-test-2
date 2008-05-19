@@ -86,10 +86,10 @@ public class SocialRelationLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
 
-		return socialRelationLocalService.dynamicQuery(queryInitializer, begin,
+		return socialRelationLocalService.dynamicQuery(queryInitializer, start,
 			end);
 	}
 
@@ -152,11 +152,11 @@ public class SocialRelationLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> getRelations(
-		long userId, int type, int begin, int end)
+		long userId, int type, int start, int end)
 		throws com.liferay.portal.SystemException {
 		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
 
-		return socialRelationLocalService.getRelations(userId, type, begin, end);
+		return socialRelationLocalService.getRelations(userId, type, start, end);
 	}
 
 	public static int getRelationsCount(long userId, int type)

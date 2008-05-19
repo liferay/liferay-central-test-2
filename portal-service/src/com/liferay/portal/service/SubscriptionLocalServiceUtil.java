@@ -86,10 +86,10 @@ public class SubscriptionLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.Subscription> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
 
-		return subscriptionLocalService.dynamicQuery(queryInitializer, begin,
+		return subscriptionLocalService.dynamicQuery(queryInitializer, start,
 			end);
 	}
 

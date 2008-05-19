@@ -46,7 +46,7 @@ public interface ShoppingItemFinder {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findByKeywords(
-		long groupId, long[] categoryIds, java.lang.String keywords, int begin,
+		long groupId, long[] categoryIds, java.lang.String keywords, int start,
 		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findBySale(

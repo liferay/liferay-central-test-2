@@ -782,7 +782,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public List<Group> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -791,7 +791,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -807,11 +807,11 @@ public class GroupPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<Group> findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
+	public List<Group> findAll(int start, int end) throws SystemException {
+		return findAll(start, end, null);
 	}
 
-	public List<Group> findAll(int begin, int end, OrderByComparator obc)
+	public List<Group> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED;
 		String finderClassName = Group.class.getName();
@@ -821,7 +821,7 @@ public class GroupPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -855,7 +855,7 @@ public class GroupPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<Group> list = (List<Group>)QueryUtil.list(q, getDialect(),
-						begin, end);
+						start, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1281,13 +1281,13 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public List<com.liferay.portal.model.Organization> getOrganizations(
-		long pk, int begin, int end)
+		long pk, int start, int end)
 		throws NoSuchGroupException, SystemException {
-		return getOrganizations(pk, begin, end, null);
+		return getOrganizations(pk, start, end, null);
 	}
 
 	public List<com.liferay.portal.model.Organization> getOrganizations(
-		long pk, int begin, int end, OrderByComparator obc)
+		long pk, int start, int end, OrderByComparator obc)
 		throws NoSuchGroupException, SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_ORGS;
 
@@ -1299,7 +1299,7 @@ public class GroupPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				new Long(pk), String.valueOf(start), String.valueOf(end),
 				String.valueOf(obc)
 			};
 
@@ -1343,7 +1343,7 @@ public class GroupPersistenceImpl extends BasePersistence
 				qPos.add(pk);
 
 				List<com.liferay.portal.model.Organization> list = (List<com.liferay.portal.model.Organization>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1657,12 +1657,12 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public List<com.liferay.portal.model.Permission> getPermissions(long pk,
-		int begin, int end) throws NoSuchGroupException, SystemException {
-		return getPermissions(pk, begin, end, null);
+		int start, int end) throws NoSuchGroupException, SystemException {
+		return getPermissions(pk, start, end, null);
 	}
 
 	public List<com.liferay.portal.model.Permission> getPermissions(long pk,
-		int begin, int end, OrderByComparator obc)
+		int start, int end, OrderByComparator obc)
 		throws NoSuchGroupException, SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_PERMISSIONS;
 
@@ -1674,7 +1674,7 @@ public class GroupPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				new Long(pk), String.valueOf(start), String.valueOf(end),
 				String.valueOf(obc)
 			};
 
@@ -1712,7 +1712,7 @@ public class GroupPersistenceImpl extends BasePersistence
 				qPos.add(pk);
 
 				List<com.liferay.portal.model.Permission> list = (List<com.liferay.portal.model.Permission>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -2021,12 +2021,12 @@ public class GroupPersistenceImpl extends BasePersistence
 		return getRoles(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List<com.liferay.portal.model.Role> getRoles(long pk, int begin,
+	public List<com.liferay.portal.model.Role> getRoles(long pk, int start,
 		int end) throws NoSuchGroupException, SystemException {
-		return getRoles(pk, begin, end, null);
+		return getRoles(pk, start, end, null);
 	}
 
-	public List<com.liferay.portal.model.Role> getRoles(long pk, int begin,
+	public List<com.liferay.portal.model.Role> getRoles(long pk, int start,
 		int end, OrderByComparator obc)
 		throws NoSuchGroupException, SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_ROLES;
@@ -2039,7 +2039,7 @@ public class GroupPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				new Long(pk), String.valueOf(start), String.valueOf(end),
 				String.valueOf(obc)
 			};
 
@@ -2083,7 +2083,7 @@ public class GroupPersistenceImpl extends BasePersistence
 				qPos.add(pk);
 
 				List<com.liferay.portal.model.Role> list = (List<com.liferay.portal.model.Role>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -2386,12 +2386,12 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public List<com.liferay.portal.model.UserGroup> getUserGroups(long pk,
-		int begin, int end) throws NoSuchGroupException, SystemException {
-		return getUserGroups(pk, begin, end, null);
+		int start, int end) throws NoSuchGroupException, SystemException {
+		return getUserGroups(pk, start, end, null);
 	}
 
 	public List<com.liferay.portal.model.UserGroup> getUserGroups(long pk,
-		int begin, int end, OrderByComparator obc)
+		int start, int end, OrderByComparator obc)
 		throws NoSuchGroupException, SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_GROUPS_USERGROUPS;
 
@@ -2403,7 +2403,7 @@ public class GroupPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				new Long(pk), String.valueOf(start), String.valueOf(end),
 				String.valueOf(obc)
 			};
 
@@ -2447,7 +2447,7 @@ public class GroupPersistenceImpl extends BasePersistence
 				qPos.add(pk);
 
 				List<com.liferay.portal.model.UserGroup> list = (List<com.liferay.portal.model.UserGroup>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -2756,12 +2756,12 @@ public class GroupPersistenceImpl extends BasePersistence
 		return getUsers(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List<com.liferay.portal.model.User> getUsers(long pk, int begin,
+	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
 		int end) throws NoSuchGroupException, SystemException {
-		return getUsers(pk, begin, end, null);
+		return getUsers(pk, start, end, null);
 	}
 
-	public List<com.liferay.portal.model.User> getUsers(long pk, int begin,
+	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
 		int end, OrderByComparator obc)
 		throws NoSuchGroupException, SystemException {
 		boolean finderClassNameCacheEnabled = GroupModelImpl.CACHE_ENABLED_USERS_GROUPS;
@@ -2774,7 +2774,7 @@ public class GroupPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				new Long(pk), String.valueOf(start), String.valueOf(end),
 				String.valueOf(obc)
 			};
 
@@ -2812,7 +2812,7 @@ public class GroupPersistenceImpl extends BasePersistence
 				qPos.add(pk);
 
 				List<com.liferay.portal.model.User> list = (List<com.liferay.portal.model.User>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,

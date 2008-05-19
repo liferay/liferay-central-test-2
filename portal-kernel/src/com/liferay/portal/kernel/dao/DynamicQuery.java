@@ -34,6 +34,6 @@ public interface DynamicQuery {
 
 	public List list();
 
-	public void setLimit(int begin, int end);
+	public void setLimit(int start, int end);
 
 }

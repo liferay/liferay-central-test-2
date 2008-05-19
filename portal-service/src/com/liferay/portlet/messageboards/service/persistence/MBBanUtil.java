@@ -99,16 +99,16 @@ public class MBBanUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBBan> findByGroupId(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByGroupId(groupId, begin, end);
+		return getPersistence().findByGroupId(groupId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBBan> findByGroupId(
-		long groupId, int begin, int end,
+		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByGroupId(groupId, begin, end, obc);
+		return getPersistence().findByGroupId(groupId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBBan findByGroupId_First(
@@ -139,16 +139,16 @@ public class MBBanUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBBan> findByUserId(
-		long userId, int begin, int end)
+		long userId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByUserId(userId, begin, end);
+		return getPersistence().findByUserId(userId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBBan> findByUserId(
-		long userId, int begin, int end,
+		long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByUserId(userId, begin, end, obc);
+		return getPersistence().findByUserId(userId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBBan findByUserId_First(
@@ -179,16 +179,16 @@ public class MBBanUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBBan> findByBanUserId(
-		long banUserId, int begin, int end)
+		long banUserId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByBanUserId(banUserId, begin, end);
+		return getPersistence().findByBanUserId(banUserId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBBan> findByBanUserId(
-		long banUserId, int begin, int end,
+		long banUserId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByBanUserId(banUserId, begin, end, obc);
+		return getPersistence().findByBanUserId(banUserId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBBan findByBanUserId_First(
@@ -234,9 +234,9 @@ public class MBBanUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBBan> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findWithDynamicQuery(queryInitializer, begin, end);
+				   .findWithDynamicQuery(queryInitializer, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBBan> findAll()
@@ -245,14 +245,14 @@ public class MBBanUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBBan> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end);
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBBan> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end, obc);
+		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByGroupId(long groupId)

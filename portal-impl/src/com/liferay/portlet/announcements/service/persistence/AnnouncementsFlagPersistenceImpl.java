@@ -335,12 +335,12 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<AnnouncementsFlag> findByEntryId(long entryId, int begin,
+	public List<AnnouncementsFlag> findByEntryId(long entryId, int start,
 		int end) throws SystemException {
-		return findByEntryId(entryId, begin, end, null);
+		return findByEntryId(entryId, start, end, null);
 	}
 
-	public List<AnnouncementsFlag> findByEntryId(long entryId, int begin,
+	public List<AnnouncementsFlag> findByEntryId(long entryId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = AnnouncementsFlagModelImpl.CACHE_ENABLED;
 		String finderClassName = AnnouncementsFlag.class.getName();
@@ -354,7 +354,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(entryId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -398,7 +398,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistence
 				qPos.add(entryId);
 
 				List<AnnouncementsFlag> list = (List<AnnouncementsFlag>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -659,7 +659,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistence
 	}
 
 	public List<AnnouncementsFlag> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -668,7 +668,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -684,12 +684,12 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<AnnouncementsFlag> findAll(int begin, int end)
+	public List<AnnouncementsFlag> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<AnnouncementsFlag> findAll(int begin, int end,
+	public List<AnnouncementsFlag> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = AnnouncementsFlagModelImpl.CACHE_ENABLED;
 		String finderClassName = AnnouncementsFlag.class.getName();
@@ -699,7 +699,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -735,7 +735,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<AnnouncementsFlag> list = (List<AnnouncementsFlag>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

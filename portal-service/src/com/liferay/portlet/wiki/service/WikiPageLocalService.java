@@ -67,7 +67,7 @@ public interface WikiPageLocalService {
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.wiki.model.WikiPage updateWikiPage(
 		com.liferay.portlet.wiki.model.WikiPage wikiPage)
@@ -178,27 +178,27 @@ public interface WikiPageLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
-		long nodeId, int begin, int end)
+		long nodeId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
 		java.lang.String format) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
-		long nodeId, java.lang.String title, int begin, int end)
+		long nodeId, java.lang.String title, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
-		long nodeId, java.lang.String title, int begin, int end,
+		long nodeId, java.lang.String title, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
-		long nodeId, boolean head, int begin, int end)
+		long nodeId, boolean head, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
-		long nodeId, java.lang.String title, boolean head, int begin, int end)
+		long nodeId, java.lang.String title, boolean head, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getPagesCount(long nodeId)
@@ -214,7 +214,7 @@ public interface WikiPageLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getRecentChanges(
-		long nodeId, int begin, int end)
+		long nodeId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getRecentChangesCount(long nodeId)

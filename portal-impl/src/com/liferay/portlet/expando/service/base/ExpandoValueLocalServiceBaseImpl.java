@@ -89,10 +89,10 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 	}
 
 	public List<ExpandoValue> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return expandoValuePersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public ExpandoValue updateExpandoValue(ExpandoValue expandoValue)

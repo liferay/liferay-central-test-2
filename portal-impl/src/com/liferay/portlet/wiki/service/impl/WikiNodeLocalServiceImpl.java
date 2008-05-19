@@ -260,10 +260,10 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		return wikiNodePersistence.findByGroupId(groupId);
 	}
 
-	public List<WikiNode> getNodes(long groupId, int begin, int end)
+	public List<WikiNode> getNodes(long groupId, int start, int end)
 		throws SystemException {
 
-		return wikiNodePersistence.findByGroupId(groupId, begin, end);
+		return wikiNodePersistence.findByGroupId(groupId, start, end);
 	}
 
 	public int getNodesCount(long groupId) throws SystemException {

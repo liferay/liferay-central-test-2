@@ -39,9 +39,9 @@ public class TagsPropertyKeyFinderUtil {
 		return getFinder().findByCompanyId(companyId);
 	}
 
-	public static java.lang.String[] findByCompanyId(long companyId, int begin,
+	public static java.lang.String[] findByCompanyId(long companyId, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return getFinder().findByCompanyId(companyId, begin, end);
+		return getFinder().findByCompanyId(companyId, start, end);
 	}
 
 	public static TagsPropertyKeyFinder getFinder() {

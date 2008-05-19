@@ -93,10 +93,10 @@ public abstract class TasksReviewLocalServiceBaseImpl
 	}
 
 	public List<TasksReview> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return tasksReviewPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public TasksReview updateTasksReview(TasksReview tasksReview)

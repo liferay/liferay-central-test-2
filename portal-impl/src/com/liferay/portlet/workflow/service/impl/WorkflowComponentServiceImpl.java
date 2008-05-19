@@ -113,11 +113,11 @@ public class WorkflowComponentServiceImpl
 	}
 
 	public List getDefinitions(
-			long definitionId, String name, int begin, int end)
+			long definitionId, String name, int start, int end)
 		throws WorkflowComponentException {
 
 		try {
-			String xml = getDefinitionsXml(definitionId, name, begin, end);
+			String xml = getDefinitionsXml(definitionId, name, start, end);
 
 			return WorkflowXMLUtil.parseList(xml, "definitions");
 		}
@@ -127,7 +127,7 @@ public class WorkflowComponentServiceImpl
 	}
 
 	public String getDefinitionsXml(
-			long definitionId, String name, int begin, int end)
+			long definitionId, String name, int start, int end)
 		throws WorkflowComponentException {
 
 		try {
@@ -136,7 +136,7 @@ public class WorkflowComponentServiceImpl
 			url.setParameter(Constants.CMD, "getDefinitionsXml");
 			url.setParameter("definitionId", definitionId);
 			url.setParameter("name", name);
-			url.setParameter("begin", begin);
+			url.setParameter("start", start);
 			url.setParameter("end", end);
 
 			return url.getContent();
@@ -196,7 +196,7 @@ public class WorkflowComponentServiceImpl
 			long definitionId, long instanceId, String definitionName,
 			String definitionVersion, String startDateGT, String startDateLT,
 			String endDateGT, String endDateLT, boolean hideEndedTasks,
-			boolean retrieveUserInstances, boolean andOperator, int begin,
+			boolean retrieveUserInstances, boolean andOperator, int start,
 			int end)
 		throws WorkflowComponentException {
 
@@ -204,7 +204,7 @@ public class WorkflowComponentServiceImpl
 			String xml = getInstancesXml(
 				definitionId, instanceId, definitionName, definitionVersion,
 				startDateGT, startDateLT, endDateGT, endDateLT, hideEndedTasks,
-				retrieveUserInstances, andOperator, begin, end);
+				retrieveUserInstances, andOperator, start, end);
 
 			return WorkflowXMLUtil.parseList(xml, "instances");
 		}
@@ -267,7 +267,7 @@ public class WorkflowComponentServiceImpl
 			long definitionId, long instanceId, String definitionName,
 			String definitionVersion, String startDateGT, String startDateLT,
 			String endDateGT, String endDateLT, boolean hideEndedTasks,
-			boolean retrieveUserInstances, boolean andOperator, int begin,
+			boolean retrieveUserInstances, boolean andOperator, int start,
 			int end)
 		throws WorkflowComponentException {
 
@@ -286,7 +286,7 @@ public class WorkflowComponentServiceImpl
 			url.setParameter("hideEndedTasks", hideEndedTasks);
 			url.setParameter("retrieveUserInstances", retrieveUserInstances);
 			url.setParameter("andOperator", andOperator);
-			url.setParameter("begin", begin);
+			url.setParameter("start", start);
 			url.setParameter("end", end);
 
 			return url.getContent();
@@ -384,14 +384,14 @@ public class WorkflowComponentServiceImpl
 			String assignedTo, String createDateGT, String createDateLT,
 			String startDateGT, String startDateLT, String endDateGT,
 			String endDateLT, boolean hideEndedTasks, boolean andOperator,
-			int begin, int end)
+			int start, int end)
 		throws WorkflowComponentException {
 
 		try {
 			String xml = getUserTasksXml(
 				instanceId, taskName, definitionName, assignedTo, createDateGT,
 				createDateLT, startDateGT, startDateLT, endDateGT, endDateLT,
-				hideEndedTasks, andOperator, begin, end);
+				hideEndedTasks, andOperator, start, end);
 
 			return WorkflowXMLUtil.parseList(xml, "tasks");
 		}
@@ -456,7 +456,7 @@ public class WorkflowComponentServiceImpl
 			String assignedTo, String createDateGT, String createDateLT,
 			String startDateGT, String startDateLT, String endDateGT,
 			String endDateLT, boolean hideEndedTasks, boolean andOperator,
-			int begin, int end)
+			int start, int end)
 		throws WorkflowComponentException {
 
 		try {
@@ -475,7 +475,7 @@ public class WorkflowComponentServiceImpl
 			url.setParameter("endDateLT", endDateLT);
 			url.setParameter("hideEndedTasks", hideEndedTasks);
 			url.setParameter("andOperator", andOperator);
-			url.setParameter("begin", begin);
+			url.setParameter("start", start);
 			url.setParameter("end", end);
 
 			return url.getContent();

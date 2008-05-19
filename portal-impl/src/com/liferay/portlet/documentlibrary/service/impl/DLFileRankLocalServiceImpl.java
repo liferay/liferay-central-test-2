@@ -56,10 +56,10 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 	}
 
 	public List<DLFileRank> getFileRanks(
-			long groupId, long userId, int begin, int end)
+			long groupId, long userId, int start, int end)
 		throws SystemException {
 
-		return dlFileRankFinder.findByG_U(groupId, userId, begin, end);
+		return dlFileRankFinder.findByG_U(groupId, userId, start, end);
 	}
 
 	public DLFileRank updateFileRank(

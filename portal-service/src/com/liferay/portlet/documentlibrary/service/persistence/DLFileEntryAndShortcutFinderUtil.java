@@ -35,9 +35,9 @@ public class DLFileEntryAndShortcutFinderUtil {
 	}
 
 	public static java.util.List findByFolderIds(
-		java.util.List<Long> folderIds, int begin, int end)
+		java.util.List<Long> folderIds, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByFolderIds(folderIds, begin, end);
+		return getFinder().findByFolderIds(folderIds, start, end);
 	}
 
 	public static DLFileEntryAndShortcutFinder getFinder() {

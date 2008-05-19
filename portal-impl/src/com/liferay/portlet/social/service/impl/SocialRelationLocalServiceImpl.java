@@ -146,10 +146,10 @@ public class SocialRelationLocalServiceImpl
 	}
 
 	public List<SocialRelation> getRelations(
-			long userId, int type, int begin, int end)
+			long userId, int type, int start, int end)
 		throws SystemException {
 
-		return socialRelationPersistence.findByU1_T(userId, type, begin, end);
+		return socialRelationPersistence.findByU1_T(userId, type, start, end);
 	}
 
 	public int getRelationsCount(long userId, int type) throws SystemException {

@@ -68,7 +68,7 @@ public interface ShoppingCategoryLocalService {
 
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory updateShoppingCategory(
 		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory)
@@ -139,7 +139,7 @@ public interface ShoppingCategoryLocalService {
 		long groupId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> getCategories(
-		long groupId, long parentCategoryId, int begin, int end)
+		long groupId, long parentCategoryId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getCategoriesCount(long groupId, long parentCategoryId)

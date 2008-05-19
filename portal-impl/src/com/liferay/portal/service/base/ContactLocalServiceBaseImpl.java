@@ -296,9 +296,9 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 	}
 
 	public List<Contact> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
-		return contactPersistence.findWithDynamicQuery(queryInitializer, begin,
+		return contactPersistence.findWithDynamicQuery(queryInitializer, start,
 			end);
 	}
 

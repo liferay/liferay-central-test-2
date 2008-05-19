@@ -55,11 +55,11 @@ public class GroupFinderUtil {
 
 	public static java.util.List<com.liferay.portal.model.Group> findByC_N_D(
 		long companyId, java.lang.String name, java.lang.String description,
-		java.util.LinkedHashMap<String, Object> params, int begin, int end,
+		java.util.LinkedHashMap<String, Object> params, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
-				   .findByC_N_D(companyId, name, description, params, begin,
+				   .findByC_N_D(companyId, name, description, params, start,
 			end, obc);
 	}
 

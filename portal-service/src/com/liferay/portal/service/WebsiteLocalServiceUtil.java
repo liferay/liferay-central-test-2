@@ -85,10 +85,10 @@ public class WebsiteLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.Website> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
 
-		return websiteLocalService.dynamicQuery(queryInitializer, begin, end);
+		return websiteLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
 	public static com.liferay.portal.model.Website updateWebsite(

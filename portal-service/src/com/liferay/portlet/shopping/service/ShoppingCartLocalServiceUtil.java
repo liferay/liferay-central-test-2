@@ -86,10 +86,10 @@ public class ShoppingCartLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCart> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
 
-		return shoppingCartLocalService.dynamicQuery(queryInitializer, begin,
+		return shoppingCartLocalService.dynamicQuery(queryInitializer, start,
 			end);
 	}
 

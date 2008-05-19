@@ -342,22 +342,22 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 	public List<Role> search(
 			long companyId, String name, String description, Integer type,
-			int begin, int end, OrderByComparator obc)
+			int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return search(
 			companyId, name, description, type,
-			new LinkedHashMap<String, Object>(), begin, end, obc);
+			new LinkedHashMap<String, Object>(), start, end, obc);
 	}
 
 	public List<Role> search(
 			long companyId, String name, String description, Integer type,
-			LinkedHashMap<String, Object> params, int begin, int end,
+			LinkedHashMap<String, Object> params, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
 		return roleFinder.findByC_N_D_T(
-			companyId, name, description, type, params, begin, end, obc);
+			companyId, name, description, type, params, start, end, obc);
 	}
 
 	public int searchCount(

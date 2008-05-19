@@ -86,10 +86,10 @@ public class TagsSourceLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsSource> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
 
-		return tagsSourceLocalService.dynamicQuery(queryInitializer, begin, end);
+		return tagsSourceLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsSource updateTagsSource(

@@ -97,16 +97,16 @@ public class ResourceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Resource> findByCodeId(
-		long codeId, int begin, int end)
+		long codeId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCodeId(codeId, begin, end);
+		return getPersistence().findByCodeId(codeId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Resource> findByCodeId(
-		long codeId, int begin, int end,
+		long codeId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCodeId(codeId, begin, end, obc);
+		return getPersistence().findByCodeId(codeId, start, end, obc);
 	}
 
 	public static com.liferay.portal.model.Resource findByCodeId_First(
@@ -151,9 +151,9 @@ public class ResourceUtil {
 
 	public static java.util.List<com.liferay.portal.model.Resource> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findWithDynamicQuery(queryInitializer, begin, end);
+				   .findWithDynamicQuery(queryInitializer, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Resource> findAll()
@@ -162,14 +162,14 @@ public class ResourceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Resource> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end);
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Resource> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end, obc);
+		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByCodeId(long codeId)

@@ -109,10 +109,10 @@ public abstract class DLFileRankLocalServiceBaseImpl
 	}
 
 	public List<DLFileRank> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return dlFileRankPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public DLFileRank updateDLFileRank(DLFileRank dlFileRank)

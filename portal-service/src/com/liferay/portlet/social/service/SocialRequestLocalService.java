@@ -68,7 +68,7 @@ public interface SocialRequestLocalService {
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRequest> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.social.model.SocialRequest updateSocialRequest(
 		com.liferay.portlet.social.model.SocialRequest socialRequest)
@@ -87,11 +87,11 @@ public interface SocialRequestLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRequest> getReceiverUserRequests(
-		long receiverUserId, int begin, int end)
+		long receiverUserId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRequest> getReceiverUserRequests(
-		long receiverUserId, int status, int begin, int end)
+		long receiverUserId, int status, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getReceiverUserRequestsCount(long receiverUserId)
@@ -101,11 +101,11 @@ public interface SocialRequestLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRequest> getUserRequests(
-		long userId, int begin, int end)
+		long userId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRequest> getUserRequests(
-		long userId, int status, int begin, int end)
+		long userId, int status, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getUserRequestsCount(long userId)

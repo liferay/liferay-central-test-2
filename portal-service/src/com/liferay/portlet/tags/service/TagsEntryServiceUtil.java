@@ -112,21 +112,21 @@ public class TagsEntryServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
 		long companyId, java.lang.String name, java.lang.String[] properties,
-		int begin, int end)
+		int start, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
 
-		return tagsEntryService.search(companyId, name, properties, begin, end);
+		return tagsEntryService.search(companyId, name, properties, start, end);
 	}
 
 	public static com.liferay.portal.kernel.json.JSONArrayWrapper searchAutocomplete(
 		long companyId, java.lang.String name, java.lang.String[] properties,
-		int begin, int end)
+		int start, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
 
 		return tagsEntryService.searchAutocomplete(companyId, name, properties,
-			begin, end);
+			start, end);
 	}
 
 	public static int searchCount(long companyId, java.lang.String name,

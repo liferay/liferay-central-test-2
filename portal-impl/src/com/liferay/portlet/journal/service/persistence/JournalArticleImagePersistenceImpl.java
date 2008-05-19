@@ -331,12 +331,12 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<JournalArticleImage> findByGroupId(long groupId, int begin,
+	public List<JournalArticleImage> findByGroupId(long groupId, int start,
 		int end) throws SystemException {
-		return findByGroupId(groupId, begin, end, null);
+		return findByGroupId(groupId, start, end, null);
 	}
 
-	public List<JournalArticleImage> findByGroupId(long groupId, int begin,
+	public List<JournalArticleImage> findByGroupId(long groupId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalArticleImageModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalArticleImage.class.getName();
@@ -350,7 +350,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -387,7 +387,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				qPos.add(groupId);
 
 				List<JournalArticleImage> list = (List<JournalArticleImage>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -560,12 +560,12 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 	}
 
 	public List<JournalArticleImage> findByTempImage(boolean tempImage,
-		int begin, int end) throws SystemException {
-		return findByTempImage(tempImage, begin, end, null);
+		int start, int end) throws SystemException {
+		return findByTempImage(tempImage, start, end, null);
 	}
 
 	public List<JournalArticleImage> findByTempImage(boolean tempImage,
-		int begin, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalArticleImageModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalArticleImage.class.getName();
 		String finderMethodName = "findByTempImage";
@@ -578,7 +578,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				Boolean.valueOf(tempImage),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -615,7 +615,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				qPos.add(tempImage);
 
 				List<JournalArticleImage> list = (List<JournalArticleImage>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -814,13 +814,13 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 	}
 
 	public List<JournalArticleImage> findByG_A_V(long groupId,
-		String articleId, double version, int begin, int end)
+		String articleId, double version, int start, int end)
 		throws SystemException {
-		return findByG_A_V(groupId, articleId, version, begin, end, null);
+		return findByG_A_V(groupId, articleId, version, start, end, null);
 	}
 
 	public List<JournalArticleImage> findByG_A_V(long groupId,
-		String articleId, double version, int begin, int end,
+		String articleId, double version, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalArticleImageModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalArticleImage.class.getName();
@@ -837,7 +837,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				
 				articleId, new Double(version),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -893,7 +893,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				qPos.add(version);
 
 				List<JournalArticleImage> list = (List<JournalArticleImage>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1224,7 +1224,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 	}
 
 	public List<JournalArticleImage> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -1233,7 +1233,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -1249,12 +1249,12 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<JournalArticleImage> findAll(int begin, int end)
+	public List<JournalArticleImage> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<JournalArticleImage> findAll(int begin, int end,
+	public List<JournalArticleImage> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalArticleImageModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalArticleImage.class.getName();
@@ -1264,7 +1264,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1293,7 +1293,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<JournalArticleImage> list = (List<JournalArticleImage>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

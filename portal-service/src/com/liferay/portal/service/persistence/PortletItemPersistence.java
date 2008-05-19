@@ -80,11 +80,11 @@ public interface PortletItemPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.PortletItem> findByG_C(
-		long groupId, long classNameId, int begin, int end)
+		long groupId, long classNameId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.PortletItem> findByG_C(
-		long groupId, long classNameId, int begin, int end,
+		long groupId, long classNameId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -109,11 +109,11 @@ public interface PortletItemPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.PortletItem> findByG_P_C(
-		long groupId, java.lang.String portletId, long classNameId, int begin,
+		long groupId, java.lang.String portletId, long classNameId, int start,
 		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.PortletItem> findByG_P_C(
-		long groupId, java.lang.String portletId, long classNameId, int begin,
+		long groupId, java.lang.String portletId, long classNameId, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -150,16 +150,16 @@ public interface PortletItemPersistence {
 
 	public java.util.List<com.liferay.portal.model.PortletItem> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.PortletItem> findAll()
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.PortletItem> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.PortletItem> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByG_C(long groupId, long classNameId)

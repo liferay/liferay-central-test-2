@@ -109,10 +109,10 @@ public abstract class TasksProposalLocalServiceBaseImpl
 	}
 
 	public List<TasksProposal> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return tasksProposalPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public TasksProposal updateTasksProposal(TasksProposal tasksProposal)

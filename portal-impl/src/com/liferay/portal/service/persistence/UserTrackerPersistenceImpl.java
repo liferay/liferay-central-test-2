@@ -326,12 +326,12 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<UserTracker> findByCompanyId(long companyId, int begin, int end)
+	public List<UserTracker> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
-		return findByCompanyId(companyId, begin, end, null);
+		return findByCompanyId(companyId, start, end, null);
 	}
 
-	public List<UserTracker> findByCompanyId(long companyId, int begin,
+	public List<UserTracker> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = UserTrackerModelImpl.CACHE_ENABLED;
 		String finderClassName = UserTracker.class.getName();
@@ -345,7 +345,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -381,7 +381,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 				qPos.add(companyId);
 
 				List<UserTracker> list = (List<UserTracker>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -551,12 +551,12 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<UserTracker> findByUserId(long userId, int begin, int end)
+	public List<UserTracker> findByUserId(long userId, int start, int end)
 		throws SystemException {
-		return findByUserId(userId, begin, end, null);
+		return findByUserId(userId, start, end, null);
 	}
 
-	public List<UserTracker> findByUserId(long userId, int begin, int end,
+	public List<UserTracker> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = UserTrackerModelImpl.CACHE_ENABLED;
 		String finderClassName = UserTracker.class.getName();
@@ -570,7 +570,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -606,7 +606,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 				qPos.add(userId);
 
 				List<UserTracker> list = (List<UserTracker>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -780,12 +780,12 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<UserTracker> findBySessionId(String sessionId, int begin,
+	public List<UserTracker> findBySessionId(String sessionId, int start,
 		int end) throws SystemException {
-		return findBySessionId(sessionId, begin, end, null);
+		return findBySessionId(sessionId, start, end, null);
 	}
 
-	public List<UserTracker> findBySessionId(String sessionId, int begin,
+	public List<UserTracker> findBySessionId(String sessionId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = UserTrackerModelImpl.CACHE_ENABLED;
 		String finderClassName = UserTracker.class.getName();
@@ -799,7 +799,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				sessionId,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -842,7 +842,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 				}
 
 				List<UserTracker> list = (List<UserTracker>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -984,7 +984,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 	}
 
 	public List<UserTracker> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -993,7 +993,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -1009,12 +1009,12 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<UserTracker> findAll(int begin, int end)
+	public List<UserTracker> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<UserTracker> findAll(int begin, int end, OrderByComparator obc)
+	public List<UserTracker> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = UserTrackerModelImpl.CACHE_ENABLED;
 		String finderClassName = UserTracker.class.getName();
@@ -1024,7 +1024,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1052,7 +1052,7 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<UserTracker> list = (List<UserTracker>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

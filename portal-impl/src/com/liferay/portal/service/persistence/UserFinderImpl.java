@@ -225,7 +225,7 @@ public class UserFinderImpl implements UserFinder {
 
 	public List<User> findByKeywords(
 			long companyId, String keywords, Boolean active,
-			LinkedHashMap<String, Object> params, int begin, int end,
+			LinkedHashMap<String, Object> params, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
@@ -249,7 +249,7 @@ public class UserFinderImpl implements UserFinder {
 
 		return findByC_FN_MN_LN_SN_EA_A(
 			companyId, firstNames, middleNames, lastNames, screenNames,
-			emailAddresses, active, params, andOperator, begin, end, obc);
+			emailAddresses, active, params, andOperator, start, end, obc);
 	}
 
 	public List<User> findByNoAnnouncementsDeliveries(String type)
@@ -284,13 +284,13 @@ public class UserFinderImpl implements UserFinder {
 			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
 			Boolean active, LinkedHashMap<String, Object> params,
-			boolean andOperator, int begin, int end, OrderByComparator obc)
+			boolean andOperator, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return findByC_FN_MN_LN_SN_EA_A(
 			companyId, new String[] {firstName}, new String[] {middleName},
 			new String[] {lastName}, new String[] {screenName},
-			new String[] {emailAddress}, active, params, andOperator, begin,
+			new String[] {emailAddress}, active, params, andOperator, start,
 			end, obc);
 	}
 
@@ -298,7 +298,7 @@ public class UserFinderImpl implements UserFinder {
 			long companyId, String[] firstNames, String[] middleNames,
 			String[] lastNames, String[] screenNames, String[] emailAddresses,
 			Boolean active, LinkedHashMap<String, Object> params,
-			boolean andOperator, int begin, int end, OrderByComparator obc)
+			boolean andOperator, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		firstNames = CustomSQLUtil.keywords(firstNames);
@@ -359,7 +359,7 @@ public class UserFinderImpl implements UserFinder {
 			}
 
 			return (List<User>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

@@ -1043,12 +1043,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	public List<Layout> getLayouts(
-			long groupId, boolean privateLayout, long parentLayoutId, int begin,
+			long groupId, boolean privateLayout, long parentLayoutId, int start,
 			int end)
 		throws SystemException {
 
 		return layoutPersistence.findByG_P_P(
-			groupId, privateLayout, parentLayoutId, begin, end);
+			groupId, privateLayout, parentLayoutId, start, end);
 	}
 
 	public List<Layout> getLayouts(

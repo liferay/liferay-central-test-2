@@ -68,7 +68,7 @@ public interface ExpandoValueLocalService {
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.expando.model.ExpandoValue updateExpandoValue(
 		com.liferay.portlet.expando.model.ExpandoValue expandoValue)
@@ -212,27 +212,27 @@ public interface ExpandoValueLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
-		long columnId, int begin, int end)
+		long columnId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
 		java.lang.String className, java.lang.String tableName,
-		java.lang.String columnName, int begin, int end)
+		java.lang.String columnName, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
 		long classNameId, java.lang.String tableName,
-		java.lang.String columnName, int begin, int end)
+		java.lang.String columnName, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
 		java.lang.String className, java.lang.String tableName,
-		java.lang.String columnName, java.lang.String data, int begin, int end)
+		java.lang.String columnName, java.lang.String data, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
 		long classNameId, java.lang.String tableName,
-		java.lang.String columnName, java.lang.String data, int begin, int end)
+		java.lang.String columnName, java.lang.String data, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getColumnValuesCount(long columnId)
@@ -349,11 +349,11 @@ public interface ExpandoValueLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getDefaultTableColumnValues(
-		java.lang.String className, java.lang.String columnName, int begin,
+		java.lang.String className, java.lang.String columnName, int start,
 		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getDefaultTableColumnValues(
-		long classNameId, java.lang.String columnName, int begin, int end)
+		long classNameId, java.lang.String columnName, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getDefaultTableColumnValuesCount(java.lang.String className,
@@ -366,15 +366,15 @@ public interface ExpandoValueLocalService {
 		long rowId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getRowValues(
-		long rowId, int begin, int end)
+		long rowId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getRowValues(
 		java.lang.String className, java.lang.String tableName, long classPK,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getRowValues(
-		long classNameId, java.lang.String tableName, long classPK, int begin,
+		long classNameId, java.lang.String tableName, long classPK, int start,
 		int end) throws com.liferay.portal.SystemException;
 
 	public int getRowValuesCount(long rowId)

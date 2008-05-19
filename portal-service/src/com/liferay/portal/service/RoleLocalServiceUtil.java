@@ -85,10 +85,10 @@ public class RoleLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.Role> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
-		return roleLocalService.dynamicQuery(queryInitializer, begin, end);
+		return roleLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
 	public static com.liferay.portal.model.Role updateRole(
@@ -253,24 +253,24 @@ public class RoleLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.Role> search(
 		long companyId, java.lang.String name, java.lang.String description,
-		java.lang.Integer type, int begin, int end,
+		java.lang.Integer type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
 		return roleLocalService.search(companyId, name, description, type,
-			begin, end, obc);
+			start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Role> search(
 		long companyId, java.lang.String name, java.lang.String description,
 		java.lang.Integer type, java.util.LinkedHashMap<String, Object> params,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
 		return roleLocalService.search(companyId, name, description, type,
-			params, begin, end, obc);
+			params, start, end, obc);
 	}
 
 	public static int searchCount(long companyId, java.lang.String name,

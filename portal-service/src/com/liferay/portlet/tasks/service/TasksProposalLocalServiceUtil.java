@@ -86,10 +86,10 @@ public class TasksProposalLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksProposal> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
 
-		return tasksProposalLocalService.dynamicQuery(queryInitializer, begin,
+		return tasksProposalLocalService.dynamicQuery(queryInitializer, start,
 			end);
 	}
 
@@ -262,11 +262,11 @@ public class TasksProposalLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksProposal> getProposals(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
 
-		return tasksProposalLocalService.getProposals(groupId, begin, end);
+		return tasksProposalLocalService.getProposals(groupId, start, end);
 	}
 
 	public static int getProposalsCount(long groupId)
@@ -277,12 +277,12 @@ public class TasksProposalLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksProposal> getReviewProposals(
-		long groupId, long userId, int begin, int end)
+		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
 
 		return tasksProposalLocalService.getReviewProposals(groupId, userId,
-			begin, end);
+			start, end);
 	}
 
 	public static int getReviewProposalsCount(long groupId, long userId)
@@ -293,12 +293,12 @@ public class TasksProposalLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksProposal> getUserProposals(
-		long groupId, long userId, int begin, int end)
+		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
 
 		return tasksProposalLocalService.getUserProposals(groupId, userId,
-			begin, end);
+			start, end);
 	}
 
 	public static int getUserProposalsCount(long groupId, long userId)

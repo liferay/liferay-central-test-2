@@ -320,12 +320,12 @@ public class PhonePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<Phone> findByCompanyId(long companyId, int begin, int end)
+	public List<Phone> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
-		return findByCompanyId(companyId, begin, end, null);
+		return findByCompanyId(companyId, start, end, null);
 	}
 
-	public List<Phone> findByCompanyId(long companyId, int begin, int end,
+	public List<Phone> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = PhoneModelImpl.CACHE_ENABLED;
 		String finderClassName = Phone.class.getName();
@@ -339,7 +339,7 @@ public class PhonePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -381,7 +381,7 @@ public class PhonePersistenceImpl extends BasePersistence
 				qPos.add(companyId);
 
 				List<Phone> list = (List<Phone>)QueryUtil.list(q, getDialect(),
-						begin, end);
+						start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -555,12 +555,12 @@ public class PhonePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<Phone> findByUserId(long userId, int begin, int end)
+	public List<Phone> findByUserId(long userId, int start, int end)
 		throws SystemException {
-		return findByUserId(userId, begin, end, null);
+		return findByUserId(userId, start, end, null);
 	}
 
-	public List<Phone> findByUserId(long userId, int begin, int end,
+	public List<Phone> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = PhoneModelImpl.CACHE_ENABLED;
 		String finderClassName = Phone.class.getName();
@@ -574,7 +574,7 @@ public class PhonePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -616,7 +616,7 @@ public class PhonePersistenceImpl extends BasePersistence
 				qPos.add(userId);
 
 				List<Phone> list = (List<Phone>)QueryUtil.list(q, getDialect(),
-						begin, end);
+						start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -801,12 +801,12 @@ public class PhonePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<Phone> findByC_C(long companyId, long classNameId, int begin,
+	public List<Phone> findByC_C(long companyId, long classNameId, int start,
 		int end) throws SystemException {
-		return findByC_C(companyId, classNameId, begin, end, null);
+		return findByC_C(companyId, classNameId, start, end, null);
 	}
 
-	public List<Phone> findByC_C(long companyId, long classNameId, int begin,
+	public List<Phone> findByC_C(long companyId, long classNameId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = PhoneModelImpl.CACHE_ENABLED;
 		String finderClassName = Phone.class.getName();
@@ -820,7 +820,7 @@ public class PhonePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -868,7 +868,7 @@ public class PhonePersistenceImpl extends BasePersistence
 				qPos.add(classNameId);
 
 				List<Phone> list = (List<Phone>)QueryUtil.list(q, getDialect(),
-						begin, end);
+						start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1074,12 +1074,12 @@ public class PhonePersistenceImpl extends BasePersistence
 	}
 
 	public List<Phone> findByC_C_C(long companyId, long classNameId,
-		long classPK, int begin, int end) throws SystemException {
-		return findByC_C_C(companyId, classNameId, classPK, begin, end, null);
+		long classPK, int start, int end) throws SystemException {
+		return findByC_C_C(companyId, classNameId, classPK, start, end, null);
 	}
 
 	public List<Phone> findByC_C_C(long companyId, long classNameId,
-		long classPK, int begin, int end, OrderByComparator obc)
+		long classPK, int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = PhoneModelImpl.CACHE_ENABLED;
 		String finderClassName = Phone.class.getName();
@@ -1093,7 +1093,7 @@ public class PhonePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1147,7 +1147,7 @@ public class PhonePersistenceImpl extends BasePersistence
 				qPos.add(classPK);
 
 				List<Phone> list = (List<Phone>)QueryUtil.list(q, getDialect(),
-						begin, end);
+						start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1376,14 +1376,14 @@ public class PhonePersistenceImpl extends BasePersistence
 	}
 
 	public List<Phone> findByC_C_C_P(long companyId, long classNameId,
-		long classPK, boolean primary, int begin, int end)
+		long classPK, boolean primary, int start, int end)
 		throws SystemException {
-		return findByC_C_C_P(companyId, classNameId, classPK, primary, begin,
+		return findByC_C_C_P(companyId, classNameId, classPK, primary, start,
 			end, null);
 	}
 
 	public List<Phone> findByC_C_C_P(long companyId, long classNameId,
-		long classPK, boolean primary, int begin, int end, OrderByComparator obc)
+		long classPK, boolean primary, int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = PhoneModelImpl.CACHE_ENABLED;
 		String finderClassName = Phone.class.getName();
@@ -1399,7 +1399,7 @@ public class PhonePersistenceImpl extends BasePersistence
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				Boolean.valueOf(primary),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1459,7 +1459,7 @@ public class PhonePersistenceImpl extends BasePersistence
 				qPos.add(primary);
 
 				List<Phone> list = (List<Phone>)QueryUtil.list(q, getDialect(),
-						begin, end);
+						start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1636,7 +1636,7 @@ public class PhonePersistenceImpl extends BasePersistence
 	}
 
 	public List<Phone> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -1645,7 +1645,7 @@ public class PhonePersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -1661,11 +1661,11 @@ public class PhonePersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<Phone> findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
+	public List<Phone> findAll(int start, int end) throws SystemException {
+		return findAll(start, end, null);
 	}
 
-	public List<Phone> findAll(int begin, int end, OrderByComparator obc)
+	public List<Phone> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = PhoneModelImpl.CACHE_ENABLED;
 		String finderClassName = Phone.class.getName();
@@ -1675,7 +1675,7 @@ public class PhonePersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1709,7 +1709,7 @@ public class PhonePersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<Phone> list = (List<Phone>)QueryUtil.list(q, getDialect(),
-						begin, end);
+						start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

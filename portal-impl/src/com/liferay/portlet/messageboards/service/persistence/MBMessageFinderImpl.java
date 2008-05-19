@@ -191,14 +191,14 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 		}
 	}
 
-	public List<MBMessage> findByGroupId(long groupId, int begin, int end)
+	public List<MBMessage> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 
-		return findByGroupId(groupId, begin, end, null);
+		return findByGroupId(groupId, start, end, null);
 	}
 
 	public List<MBMessage> findByGroupId(
-			long groupId, int begin, int end, OrderByComparator obc)
+			long groupId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		Session session = null;
@@ -219,7 +219,7 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 			qPos.add(groupId);
 
 			return (List<MBMessage>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -299,14 +299,14 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 	}
 
 	public List<MBMessage> findByG_U(
-			long groupId, long userId, int begin, int end)
+			long groupId, long userId, int start, int end)
 		throws SystemException {
 
-		return findByG_U(groupId, userId, begin, end, null);
+		return findByG_U(groupId, userId, start, end, null);
 	}
 
 	public List<MBMessage> findByG_U(
-			long groupId, long userId, int begin, int end,
+			long groupId, long userId, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
@@ -329,7 +329,7 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 			qPos.add(userId);
 
 			return (List<MBMessage>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

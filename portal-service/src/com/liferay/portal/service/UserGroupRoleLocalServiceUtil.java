@@ -87,10 +87,10 @@ public class UserGroupRoleLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.UserGroupRole> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
 
-		return userGroupRoleLocalService.dynamicQuery(queryInitializer, begin,
+		return userGroupRoleLocalService.dynamicQuery(queryInitializer, start,
 			end);
 	}
 

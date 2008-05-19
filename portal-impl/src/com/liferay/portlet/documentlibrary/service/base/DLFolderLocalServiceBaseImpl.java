@@ -131,10 +131,10 @@ public abstract class DLFolderLocalServiceBaseImpl
 	}
 
 	public List<DLFolder> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return dlFolderPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public DLFolder updateDLFolder(DLFolder dlFolder) throws SystemException {

@@ -86,10 +86,10 @@ public class DLFolderLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
-		return dlFolderLocalService.dynamicQuery(queryInitializer, begin, end);
+		return dlFolderLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder updateDLFolder(
@@ -272,11 +272,11 @@ public class DLFolderLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
-		long groupId, long parentFolderId, int begin, int end)
+		long groupId, long parentFolderId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
-		return dlFolderLocalService.getFolders(groupId, parentFolderId, begin,
+		return dlFolderLocalService.getFolders(groupId, parentFolderId, start,
 			end);
 	}
 

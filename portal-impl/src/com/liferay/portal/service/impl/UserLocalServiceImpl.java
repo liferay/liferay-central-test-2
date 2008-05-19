@@ -946,7 +946,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			long companyId, long groupId, String name, String primKey,
 			String actionId, String firstName, String middleName,
 			String lastName, String emailAddress, boolean andOperator,
-			int begin, int end)
+			int start, int end)
 		throws PortalException, SystemException {
 
 		int orgGroupPermissionsCount =
@@ -956,12 +956,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		if (orgGroupPermissionsCount > 0) {
 			return permissionUserFinder.findByUserAndOrgGroupPermission(
 				companyId, name, primKey, actionId, firstName, middleName,
-				lastName, emailAddress, andOperator, begin, end);
+				lastName, emailAddress, andOperator, start, end);
 		}
 		else {
 			return permissionUserFinder.findByPermissionAndRole(
 				companyId, groupId, name, primKey, actionId, firstName,
-				middleName, lastName, emailAddress, andOperator, begin, end);
+				middleName, lastName, emailAddress, andOperator, start, end);
 		}
 	}
 
@@ -1012,7 +1012,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public List<User> getSocialUsers(
-			long userId, int begin, int end, OrderByComparator obc)
+			long userId, int start, int end, OrderByComparator obc)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -1023,11 +1023,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		params.put("socialRelation", new Long[] {userId});
 
 		return search(
-			user.getCompanyId(), null, null, params, begin, end, obc);
+			user.getCompanyId(), null, null, params, start, end, obc);
 	}
 
 	public List<User> getSocialUsers(
-			long userId, int type, int begin, int end, OrderByComparator obc)
+			long userId, int type, int start, int end, OrderByComparator obc)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -1037,11 +1037,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		params.put("socialRelationType", new Long[] {userId, new Long(type)});
 
-		return search(user.getCompanyId(), null, null, params, begin, end, obc);
+		return search(user.getCompanyId(), null, null, params, start, end, obc);
 	}
 
 	public List<User> getSocialUsers(
-			long userId1, long userId2, int begin, int end,
+			long userId1, long userId2, int start, int end,
 			OrderByComparator obc)
 		throws PortalException, SystemException {
 
@@ -1053,11 +1053,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		params.put("socialMutualRelation", new Long[] {userId1, userId2});
 
 		return search(
-			user1.getCompanyId(), null, null, params, begin, end, obc);
+			user1.getCompanyId(), null, null, params, start, end, obc);
 	}
 
 	public List<User> getSocialUsers(
-			long userId1, long userId2, int type, int begin, int end,
+			long userId1, long userId2, int type, int start, int end,
 			OrderByComparator obc)
 		throws PortalException, SystemException {
 
@@ -1071,7 +1071,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			new Long[] {userId1, new Long(type), userId2, new Long(type)});
 
 		return search(
-			user1.getCompanyId(), null, null, params, begin, end, obc);
+			user1.getCompanyId(), null, null, params, start, end, obc);
 	}
 
 	public int getSocialUsersCount(long userId)
@@ -1305,24 +1305,24 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	public List<User> search(
 			long companyId, String keywords, Boolean active,
-			LinkedHashMap<String, Object> params, int begin, int end,
+			LinkedHashMap<String, Object> params, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
 		return userFinder.findByKeywords(
-			companyId, keywords, active, params, begin, end, obc);
+			companyId, keywords, active, params, start, end, obc);
 	}
 
 	public List<User> search(
 			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
 			Boolean active, LinkedHashMap<String, Object> params,
-			boolean andSearch, int begin, int end, OrderByComparator obc)
+			boolean andSearch, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return userFinder.findByC_FN_MN_LN_SN_EA_A(
 			companyId, firstName, middleName, lastName, screenName,
-			emailAddress, active, params, andSearch, begin, end, obc);
+			emailAddress, active, params, andSearch, start, end, obc);
 	}
 
 	public int searchCount(

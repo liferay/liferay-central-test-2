@@ -69,14 +69,14 @@ public class AnnouncementsEntryFinderUtil {
 		int displayDateDay, int displayDateYear, int displayDateHour,
 		int displayDateMinute, int expirationDateMonth, int expirationDateDay,
 		int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean alert, int flagValue, int begin,
+		int expirationDateMinute, boolean alert, int flagValue, int start,
 		int end) throws com.liferay.portal.SystemException {
 		return getFinder()
 				   .findByScope(userId, classNameId, classPKs,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
-			alert, flagValue, begin, end);
+			alert, flagValue, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByScopes(
@@ -84,14 +84,14 @@ public class AnnouncementsEntryFinderUtil {
 		int displayDateMonth, int displayDateDay, int displayDateYear,
 		int displayDateHour, int displayDateMinute, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean alert, int flagValue, int begin,
+		int expirationDateMinute, boolean alert, int flagValue, int start,
 		int end) throws com.liferay.portal.SystemException {
 		return getFinder()
 				   .findByScopes(userId, scopes, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
-			alert, flagValue, begin, end);
+			alert, flagValue, start, end);
 	}
 
 	public static AnnouncementsEntryFinder getFinder() {

@@ -102,19 +102,19 @@ public class SocialRequestLocalServiceImpl
 	}
 
 	public List<SocialRequest> getReceiverUserRequests(
-			long receiverUserId, int begin, int end)
+			long receiverUserId, int start, int end)
 		throws SystemException {
 
 		return socialRequestPersistence.findByReceiverUserId(
-			receiverUserId, begin, end);
+			receiverUserId, start, end);
 	}
 
 	public List<SocialRequest> getReceiverUserRequests(
-			long receiverUserId, int status, int begin, int end)
+			long receiverUserId, int status, int start, int end)
 		throws SystemException {
 
 		return socialRequestPersistence.findByR_S(
-			receiverUserId, status, begin, end);
+			receiverUserId, status, start, end);
 	}
 
 	public int getReceiverUserRequestsCount(long receiverUserId)
@@ -129,17 +129,17 @@ public class SocialRequestLocalServiceImpl
 		return socialRequestPersistence.countByR_S(receiverUserId, status);
 	}
 
-	public List<SocialRequest> getUserRequests(long userId, int begin, int end)
+	public List<SocialRequest> getUserRequests(long userId, int start, int end)
 		throws SystemException {
 
-		return socialRequestPersistence.findByUserId(userId, begin, end);
+		return socialRequestPersistence.findByUserId(userId, start, end);
 	}
 
 	public List<SocialRequest> getUserRequests(
-			long userId, int status, int begin, int end)
+			long userId, int status, int start, int end)
 		throws SystemException {
 
-		return socialRequestPersistence.findByU_S(userId, status, begin, end);
+		return socialRequestPersistence.findByU_S(userId, status, start, end);
 	}
 
 	public int getUserRequestsCount(long userId) throws SystemException {

@@ -41,9 +41,9 @@ public class TagsPropertyFinderUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByC_K(
-		long companyId, java.lang.String key, int begin, int end)
+		long companyId, java.lang.String key, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByC_K(companyId, key, begin, end);
+		return getFinder().findByC_K(companyId, key, start, end);
 	}
 
 	public static TagsPropertyFinder getFinder() {

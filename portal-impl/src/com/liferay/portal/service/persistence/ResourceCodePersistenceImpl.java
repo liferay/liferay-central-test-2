@@ -326,12 +326,12 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<ResourceCode> findByCompanyId(long companyId, int begin, int end)
+	public List<ResourceCode> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
-		return findByCompanyId(companyId, begin, end, null);
+		return findByCompanyId(companyId, start, end, null);
 	}
 
-	public List<ResourceCode> findByCompanyId(long companyId, int begin,
+	public List<ResourceCode> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ResourceCodeModelImpl.CACHE_ENABLED;
 		String finderClassName = ResourceCode.class.getName();
@@ -345,7 +345,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -382,7 +382,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 				qPos.add(companyId);
 
 				List<ResourceCode> list = (List<ResourceCode>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -559,12 +559,12 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<ResourceCode> findByName(String name, int begin, int end)
+	public List<ResourceCode> findByName(String name, int start, int end)
 		throws SystemException {
-		return findByName(name, begin, end, null);
+		return findByName(name, start, end, null);
 	}
 
-	public List<ResourceCode> findByName(String name, int begin, int end,
+	public List<ResourceCode> findByName(String name, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ResourceCodeModelImpl.CACHE_ENABLED;
 		String finderClassName = ResourceCode.class.getName();
@@ -578,7 +578,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				name,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -622,7 +622,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 				}
 
 				List<ResourceCode> list = (List<ResourceCode>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -884,7 +884,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 	}
 
 	public List<ResourceCode> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -893,7 +893,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -909,12 +909,12 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<ResourceCode> findAll(int begin, int end)
+	public List<ResourceCode> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<ResourceCode> findAll(int begin, int end, OrderByComparator obc)
+	public List<ResourceCode> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = ResourceCodeModelImpl.CACHE_ENABLED;
 		String finderClassName = ResourceCode.class.getName();
@@ -924,7 +924,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -952,7 +952,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<ResourceCode> list = (List<ResourceCode>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

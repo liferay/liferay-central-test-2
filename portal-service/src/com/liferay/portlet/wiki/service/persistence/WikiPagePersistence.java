@@ -78,11 +78,11 @@ public interface WikiPagePersistence {
 		java.lang.String uuid) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByUuid(
-		java.lang.String uuid, int begin, int end)
+		java.lang.String uuid, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByUuid(
-		java.lang.String uuid, int begin, int end,
+		java.lang.String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -108,11 +108,11 @@ public interface WikiPagePersistence {
 		long nodeId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByNodeId(
-		long nodeId, int begin, int end)
+		long nodeId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByNodeId(
-		long nodeId, int begin, int end,
+		long nodeId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -136,11 +136,11 @@ public interface WikiPagePersistence {
 		java.lang.String format) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByFormat(
-		java.lang.String format, int begin, int end)
+		java.lang.String format, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByFormat(
-		java.lang.String format, int begin, int end,
+		java.lang.String format, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -167,11 +167,11 @@ public interface WikiPagePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_T(
-		long nodeId, java.lang.String title, int begin, int end)
+		long nodeId, java.lang.String title, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_T(
-		long nodeId, java.lang.String title, int begin, int end,
+		long nodeId, java.lang.String title, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -197,11 +197,11 @@ public interface WikiPagePersistence {
 		long nodeId, boolean head) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_H(
-		long nodeId, boolean head, int begin, int end)
+		long nodeId, boolean head, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_H(
-		long nodeId, boolean head, int begin, int end,
+		long nodeId, boolean head, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -227,11 +227,11 @@ public interface WikiPagePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_P(
-		long nodeId, java.lang.String parentTitle, int begin, int end)
+		long nodeId, java.lang.String parentTitle, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_P(
-		long nodeId, java.lang.String parentTitle, int begin, int end,
+		long nodeId, java.lang.String parentTitle, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -258,11 +258,11 @@ public interface WikiPagePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_R(
-		long nodeId, java.lang.String redirectTitle, int begin, int end)
+		long nodeId, java.lang.String redirectTitle, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_R(
-		long nodeId, java.lang.String redirectTitle, int begin, int end,
+		long nodeId, java.lang.String redirectTitle, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -298,11 +298,11 @@ public interface WikiPagePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_T_H(
-		long nodeId, java.lang.String title, boolean head, int begin, int end)
+		long nodeId, java.lang.String title, boolean head, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_T_H(
-		long nodeId, java.lang.String title, boolean head, int begin, int end,
+		long nodeId, java.lang.String title, boolean head, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -329,11 +329,11 @@ public interface WikiPagePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_H_P(
-		long nodeId, boolean head, java.lang.String parentTitle, int begin,
+		long nodeId, boolean head, java.lang.String parentTitle, int start,
 		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_H_P(
-		long nodeId, boolean head, java.lang.String parentTitle, int begin,
+		long nodeId, boolean head, java.lang.String parentTitle, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -361,16 +361,16 @@ public interface WikiPagePersistence {
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findAll()
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByUuid(java.lang.String uuid)

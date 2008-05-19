@@ -68,7 +68,7 @@ public interface IGImageLocalService {
 
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage updateIGImage(
 		com.liferay.portlet.imagegallery.model.IGImage igImage)
@@ -153,11 +153,11 @@ public interface IGImageLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getGroupImages(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getGroupImages(
-		long groupId, long userId, int begin, int end)
+		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getGroupImagesCount(long groupId)
@@ -204,11 +204,11 @@ public interface IGImageLocalService {
 		long folderId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages(
-		long folderId, int begin, int end)
+		long folderId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages(
-		long folderId, int begin, int end,
+		long folderId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 

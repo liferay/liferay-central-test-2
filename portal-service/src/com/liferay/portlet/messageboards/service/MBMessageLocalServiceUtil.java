@@ -86,10 +86,10 @@ public class MBMessageLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
-		return mbMessageLocalService.dynamicQuery(queryInitializer, begin, end);
+		return mbMessageLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMBMessage(
@@ -372,20 +372,20 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCategoryMessages(
-		long categoryId, int begin, int end)
+		long categoryId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
-		return mbMessageLocalService.getCategoryMessages(categoryId, begin, end);
+		return mbMessageLocalService.getCategoryMessages(categoryId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCategoryMessages(
-		long categoryId, int begin, int end,
+		long categoryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
-		return mbMessageLocalService.getCategoryMessages(categoryId, begin,
+		return mbMessageLocalService.getCategoryMessages(categoryId, start,
 			end, obc);
 	}
 
@@ -405,20 +405,20 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCompanyMessages(
-		long companyId, int begin, int end)
+		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
-		return mbMessageLocalService.getCompanyMessages(companyId, begin, end);
+		return mbMessageLocalService.getCompanyMessages(companyId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCompanyMessages(
-		long companyId, int begin, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
-		return mbMessageLocalService.getCompanyMessages(companyId, begin, end,
+		return mbMessageLocalService.getCompanyMessages(companyId, start, end,
 			obc);
 	}
 
@@ -448,38 +448,38 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getGroupMessages(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
-		return mbMessageLocalService.getGroupMessages(groupId, begin, end);
+		return mbMessageLocalService.getGroupMessages(groupId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getGroupMessages(
-		long groupId, int begin, int end,
+		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
-		return mbMessageLocalService.getGroupMessages(groupId, begin, end, obc);
+		return mbMessageLocalService.getGroupMessages(groupId, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getGroupMessages(
-		long groupId, long userId, int begin, int end)
+		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
-		return mbMessageLocalService.getGroupMessages(groupId, userId, begin,
+		return mbMessageLocalService.getGroupMessages(groupId, userId, start,
 			end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getGroupMessages(
-		long groupId, long userId, int begin, int end,
+		long groupId, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
-		return mbMessageLocalService.getGroupMessages(groupId, userId, begin,
+		return mbMessageLocalService.getGroupMessages(groupId, userId, start,
 			end, obc);
 	}
 

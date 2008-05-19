@@ -68,7 +68,7 @@ public interface MBThreadLocalService {
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBThread updateMBThread(
 		com.liferay.portlet.messageboards.model.MBThread mbThread)
@@ -91,15 +91,15 @@ public interface MBThreadLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> getGroupThreads(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> getGroupThreads(
-		long groupId, long userId, int begin, int end)
+		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> getGroupThreads(
-		long groupId, long userId, boolean subscribed, int begin, int end)
+		long groupId, long userId, boolean subscribed, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getGroupThreadsCount(long groupId)
@@ -117,7 +117,7 @@ public interface MBThreadLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> getThreads(
-		long categoryId, int begin, int end)
+		long categoryId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getThreadsCount(long categoryId)

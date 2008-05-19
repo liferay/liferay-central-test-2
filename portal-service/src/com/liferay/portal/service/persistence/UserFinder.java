@@ -49,7 +49,7 @@ public interface UserFinder {
 
 	public java.util.List<com.liferay.portal.model.User> findByKeywords(
 		long companyId, java.lang.String keywords, java.lang.Boolean active,
-		java.util.LinkedHashMap<String, Object> params, int begin, int end,
+		java.util.LinkedHashMap<String, Object> params, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -62,7 +62,7 @@ public interface UserFinder {
 		java.lang.String screenName, java.lang.String emailAddress,
 		java.lang.Boolean active,
 		java.util.LinkedHashMap<String, Object> params, boolean andOperator,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> findByC_FN_MN_LN_SN_EA_A(
@@ -71,6 +71,6 @@ public interface UserFinder {
 		java.lang.String[] screenNames, java.lang.String[] emailAddresses,
 		java.lang.Boolean active,
 		java.util.LinkedHashMap<String, Object> params, boolean andOperator,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 }

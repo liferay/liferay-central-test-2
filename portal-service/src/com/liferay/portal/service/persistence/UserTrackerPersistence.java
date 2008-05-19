@@ -79,11 +79,11 @@ public interface UserTrackerPersistence {
 		long companyId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserTracker> findByCompanyId(
-		long companyId, int begin, int end)
+		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserTracker> findByCompanyId(
-		long companyId, int begin, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -107,11 +107,11 @@ public interface UserTrackerPersistence {
 		long userId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserTracker> findByUserId(
-		long userId, int begin, int end)
+		long userId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserTracker> findByUserId(
-		long userId, int begin, int end,
+		long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -135,11 +135,11 @@ public interface UserTrackerPersistence {
 		java.lang.String sessionId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserTracker> findBySessionId(
-		java.lang.String sessionId, int begin, int end)
+		java.lang.String sessionId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserTracker> findBySessionId(
-		java.lang.String sessionId, int begin, int end,
+		java.lang.String sessionId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -167,16 +167,16 @@ public interface UserTrackerPersistence {
 
 	public java.util.List<com.liferay.portal.model.UserTracker> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserTracker> findAll()
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserTracker> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserTracker> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByCompanyId(long companyId)

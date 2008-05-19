@@ -489,18 +489,18 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	public List<DLFileEntry> getCompanyFileEntries(
-			long companyId, int begin, int end)
+			long companyId, int start, int end)
 		throws SystemException {
 
-		return dlFileEntryPersistence.findByCompanyId(companyId, begin, end);
+		return dlFileEntryPersistence.findByCompanyId(companyId, start, end);
 	}
 
 	public List<DLFileEntry> getCompanyFileEntries(
-			long companyId, int begin, int end, OrderByComparator obc)
+			long companyId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return dlFileEntryPersistence.findByCompanyId(
-			companyId, begin, end, obc);
+			companyId, start, end, obc);
 	}
 
 	public int getCompanyFileEntriesCount(long companyId)
@@ -550,21 +550,21 @@ public class DLFileEntryLocalServiceImpl
 		return dlFileEntryPersistence.findByFolderId(folderId);
 	}
 
-	public List<DLFileEntry> getFileEntries(long folderId, int begin, int end)
+	public List<DLFileEntry> getFileEntries(long folderId, int start, int end)
 		throws SystemException {
 
-		return dlFileEntryPersistence.findByFolderId(folderId, begin, end);
+		return dlFileEntryPersistence.findByFolderId(folderId, start, end);
 	}
 
 	public List<DLFileEntry> getFileEntries(
-			long folderId, int begin, int end, OrderByComparator obc)
+			long folderId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return dlFileEntryPersistence.findByFolderId(folderId, begin, end, obc);
+		return dlFileEntryPersistence.findByFolderId(folderId, start, end, obc);
 	}
 
 	public List<DLFileEntry> getFileEntriesAndShortcuts(
-			long folderId, int begin, int end)
+			long folderId, int start, int end)
 		throws SystemException {
 
 		List<Long> folderIds = new ArrayList<Long>();
@@ -572,15 +572,15 @@ public class DLFileEntryLocalServiceImpl
 		folderIds.add(folderId);
 
 		return dlFileEntryAndShortcutFinder.findByFolderIds(
-			folderIds, begin, end);
+			folderIds, start, end);
 	}
 
 	public List<DLFileEntry> getFileEntriesAndShortcuts(
-			List<Long> folderIds, int begin, int end)
+			List<Long> folderIds, int start, int end)
 		throws SystemException {
 
 		return dlFileEntryAndShortcutFinder.findByFolderIds(
-			folderIds, begin, end);
+			folderIds, start, end);
 	}
 
 	public int getFileEntriesAndShortcutsCount(long folderId)
@@ -655,42 +655,42 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	public List<DLFileEntry> getGroupFileEntries(
-			long groupId, int begin, int end)
+			long groupId, int start, int end)
 		throws SystemException {
 
-		return dlFileEntryFinder.findByGroupId(groupId, begin, end);
+		return dlFileEntryFinder.findByGroupId(groupId, start, end);
 	}
 
 	public List<DLFileEntry> getGroupFileEntries(
-			long groupId, int begin, int end, OrderByComparator obc)
+			long groupId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return dlFileEntryFinder.findByGroupId(groupId, begin, end, obc);
+		return dlFileEntryFinder.findByGroupId(groupId, start, end, obc);
 	}
 
 	public List<DLFileEntry> getGroupFileEntries(
-			long groupId, long userId, int begin, int end)
+			long groupId, long userId, int start, int end)
 		throws SystemException {
 
 		if (userId <= 0) {
-			return dlFileEntryFinder.findByGroupId(groupId, begin, end);
+			return dlFileEntryFinder.findByGroupId(groupId, start, end);
 		}
 		else {
-			return dlFileEntryFinder.findByG_U(groupId, userId, begin, end);
+			return dlFileEntryFinder.findByG_U(groupId, userId, start, end);
 		}
 	}
 
 	public List<DLFileEntry> getGroupFileEntries(
-			long groupId, long userId, int begin, int end,
+			long groupId, long userId, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
 		if (userId <= 0) {
-			return dlFileEntryFinder.findByGroupId(groupId, begin, end, obc);
+			return dlFileEntryFinder.findByGroupId(groupId, start, end, obc);
 		}
 		else {
 			return dlFileEntryFinder.findByG_U(
-				groupId, userId, begin, end, obc);
+				groupId, userId, start, end, obc);
 		}
 	}
 

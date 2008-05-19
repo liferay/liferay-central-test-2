@@ -145,12 +145,12 @@ public class MBMessageServiceJSON {
 		MBMessageServiceUtil.deleteMessage(messageId);
 	}
 
-	public static JSONArray getCategoryMessages(long categoryId, int begin,
+	public static JSONArray getCategoryMessages(long categoryId, int start,
 		int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		java.util.List<com.liferay.portlet.messageboards.model.MBMessage> returnValue =
-			MBMessageServiceUtil.getCategoryMessages(categoryId, begin, end);
+			MBMessageServiceUtil.getCategoryMessages(categoryId, start, end);
 
 		return MBMessageJSONSerializer.toJSONArray(returnValue);
 	}

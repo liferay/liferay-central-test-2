@@ -301,9 +301,9 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 	}
 
 	public List<Website> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
-		return websitePersistence.findWithDynamicQuery(queryInitializer, begin,
+		return websitePersistence.findWithDynamicQuery(queryInitializer, start,
 			end);
 	}
 

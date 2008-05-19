@@ -191,10 +191,10 @@ public class MBMessageServiceSoap {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap[] getCategoryMessages(
-		long categoryId, int begin, int end) throws RemoteException {
+		long categoryId, int start, int end) throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.messageboards.model.MBMessage> returnValue =
-				MBMessageServiceUtil.getCategoryMessages(categoryId, begin, end);
+				MBMessageServiceUtil.getCategoryMessages(categoryId, start, end);
 
 			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModels(returnValue);
 		}

@@ -99,16 +99,16 @@ public class SCFrameworkVersionUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> findByGroupId(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByGroupId(groupId, begin, end);
+		return getPersistence().findByGroupId(groupId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> findByGroupId(
-		long groupId, int begin, int end,
+		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByGroupId(groupId, begin, end, obc);
+		return getPersistence().findByGroupId(groupId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion findByGroupId_First(
@@ -140,16 +140,16 @@ public class SCFrameworkVersionUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> findByCompanyId(
-		long companyId, int begin, int end)
+		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId(companyId, begin, end);
+		return getPersistence().findByCompanyId(companyId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> findByCompanyId(
-		long companyId, int begin, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId(companyId, begin, end, obc);
+		return getPersistence().findByCompanyId(companyId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion findByCompanyId_First(
@@ -182,16 +182,16 @@ public class SCFrameworkVersionUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> findByG_A(
-		long groupId, boolean active, int begin, int end)
+		long groupId, boolean active, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByG_A(groupId, active, begin, end);
+		return getPersistence().findByG_A(groupId, active, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> findByG_A(
-		long groupId, boolean active, int begin, int end,
+		long groupId, boolean active, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByG_A(groupId, active, begin, end, obc);
+		return getPersistence().findByG_A(groupId, active, start, end, obc);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion findByG_A_First(
@@ -228,9 +228,9 @@ public class SCFrameworkVersionUtil {
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findWithDynamicQuery(queryInitializer, begin, end);
+				   .findWithDynamicQuery(queryInitializer, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> findAll()
@@ -239,14 +239,14 @@ public class SCFrameworkVersionUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end);
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end, obc);
+		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByGroupId(long groupId)
@@ -295,18 +295,18 @@ public class SCFrameworkVersionUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> getSCProductVersions(
-		long pk, int begin, int end)
+		long pk, int start, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException {
-		return getPersistence().getSCProductVersions(pk, begin, end);
+		return getPersistence().getSCProductVersions(pk, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> getSCProductVersions(
-		long pk, int begin, int end,
+		long pk, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException {
-		return getPersistence().getSCProductVersions(pk, begin, end, obc);
+		return getPersistence().getSCProductVersions(pk, start, end, obc);
 	}
 
 	public static int getSCProductVersionsSize(long pk)

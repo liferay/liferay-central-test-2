@@ -52,13 +52,13 @@ public interface PermissionUserFinder {
 		java.lang.String primKey, java.lang.String actionId,
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String emailAddress,
-		boolean andOperator, int begin, int end)
+		boolean andOperator, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> findByUserAndOrgGroupPermission(
 		long companyId, java.lang.String name, java.lang.String primKey,
 		java.lang.String actionId, java.lang.String firstName,
 		java.lang.String middleName, java.lang.String lastName,
-		java.lang.String emailAddress, boolean andOperator, int begin, int end)
+		java.lang.String emailAddress, boolean andOperator, int start, int end)
 		throws com.liferay.portal.SystemException;
 }

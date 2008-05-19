@@ -68,7 +68,7 @@ public interface JournalStructureLocalService {
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalStructure updateJournalStructure(
 		com.liferay.portlet.journal.model.JournalStructure journalStructure)
@@ -179,21 +179,21 @@ public interface JournalStructureLocalService {
 		long groupId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> getStructures(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getStructuresCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> search(
-		long companyId, long groupId, java.lang.String keywords, int begin,
+		long companyId, long groupId, java.lang.String keywords, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> search(
 		long companyId, long groupId, java.lang.String structureId,
 		java.lang.String name, java.lang.String description,
-		boolean andOperator, int begin, int end,
+		boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 

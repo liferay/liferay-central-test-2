@@ -301,10 +301,10 @@ public abstract class ResourceLocalServiceBaseImpl
 	}
 
 	public List<Resource> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return resourcePersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public Resource updateResource(Resource resource) throws SystemException {

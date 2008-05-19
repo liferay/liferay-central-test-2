@@ -114,10 +114,10 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 	}
 
 	public List<JournalArticleResource> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return journalArticleResourcePersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public JournalArticleResource updateJournalArticleResource(

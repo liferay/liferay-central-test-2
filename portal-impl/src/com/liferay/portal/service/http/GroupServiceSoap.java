@@ -213,11 +213,11 @@ public class GroupServiceSoap {
 
 	public static com.liferay.portal.model.GroupSoap[] search(long companyId,
 		java.lang.String name, java.lang.String description,
-		java.lang.String[] params, int begin, int end)
+		java.lang.String[] params, int start, int end)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.portal.model.Group> returnValue = GroupServiceUtil.search(companyId,
-					name, description, params, begin, end);
+					name, description, params, start, end);
 
 			return com.liferay.portal.model.GroupSoap.toSoapModels(returnValue);
 		}

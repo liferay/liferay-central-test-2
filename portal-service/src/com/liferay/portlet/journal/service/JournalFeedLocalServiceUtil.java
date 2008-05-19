@@ -86,10 +86,10 @@ public class JournalFeedLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalFeed> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		JournalFeedLocalService journalFeedLocalService = JournalFeedLocalServiceFactory.getService();
 
-		return journalFeedLocalService.dynamicQuery(queryInitializer, begin, end);
+		return journalFeedLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalFeed updateJournalFeed(
@@ -342,11 +342,11 @@ public class JournalFeedLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalFeed> getFeeds(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		JournalFeedLocalService journalFeedLocalService = JournalFeedLocalServiceFactory.getService();
 
-		return journalFeedLocalService.getFeeds(groupId, begin, end);
+		return journalFeedLocalService.getFeeds(groupId, start, end);
 	}
 
 	public static int getFeedsCount(long groupId)
@@ -357,25 +357,25 @@ public class JournalFeedLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalFeed> search(
-		long companyId, long groupId, java.lang.String keywords, int begin,
+		long companyId, long groupId, java.lang.String keywords, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		JournalFeedLocalService journalFeedLocalService = JournalFeedLocalServiceFactory.getService();
 
 		return journalFeedLocalService.search(companyId, groupId, keywords,
-			begin, end, obc);
+			start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalFeed> search(
 		long companyId, long groupId, java.lang.String feedId,
 		java.lang.String name, java.lang.String description,
-		boolean andOperator, int begin, int end,
+		boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		JournalFeedLocalService journalFeedLocalService = JournalFeedLocalServiceFactory.getService();
 
 		return journalFeedLocalService.search(companyId, groupId, feedId, name,
-			description, andOperator, begin, end, obc);
+			description, andOperator, start, end, obc);
 	}
 
 	public static int searchCount(long companyId, long groupId,

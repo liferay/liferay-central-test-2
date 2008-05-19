@@ -86,11 +86,11 @@ public class ShoppingItemFieldLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		ShoppingItemFieldLocalService shoppingItemFieldLocalService = ShoppingItemFieldLocalServiceFactory.getService();
 
 		return shoppingItemFieldLocalService.dynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemField updateShoppingItemField(

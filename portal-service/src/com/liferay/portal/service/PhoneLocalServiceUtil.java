@@ -85,10 +85,10 @@ public class PhoneLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.Phone> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
 
-		return phoneLocalService.dynamicQuery(queryInitializer, begin, end);
+		return phoneLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
 	public static com.liferay.portal.model.Phone updatePhone(

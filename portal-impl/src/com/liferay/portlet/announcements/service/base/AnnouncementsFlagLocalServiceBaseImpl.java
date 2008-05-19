@@ -85,10 +85,10 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	}
 
 	public List<AnnouncementsFlag> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return announcementsFlagPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public AnnouncementsFlag updateAnnouncementsFlag(

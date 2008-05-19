@@ -86,11 +86,11 @@ public class PasswordPolicyRelLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.PasswordPolicyRel> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
 
 		return passwordPolicyRelLocalService.dynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public static com.liferay.portal.model.PasswordPolicyRel updatePasswordPolicyRel(

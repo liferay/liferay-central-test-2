@@ -304,10 +304,10 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 	}
 
 	public List<UserIdMapper> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return userIdMapperPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public UserIdMapper updateUserIdMapper(UserIdMapper userIdMapper)

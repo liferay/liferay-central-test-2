@@ -301,8 +301,8 @@ public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService,
 	}
 
 	public List<Phone> dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
-		return phonePersistence.findWithDynamicQuery(queryInitializer, begin,
+		int start, int end) throws SystemException {
+		return phonePersistence.findWithDynamicQuery(queryInitializer, start,
 			end);
 	}
 

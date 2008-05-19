@@ -301,9 +301,9 @@ public abstract class CompanyLocalServiceBaseImpl implements CompanyLocalService
 	}
 
 	public List<Company> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
-		return companyPersistence.findWithDynamicQuery(queryInitializer, begin,
+		return companyPersistence.findWithDynamicQuery(queryInitializer, start,
 			end);
 	}
 

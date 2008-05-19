@@ -35,6 +35,6 @@ public interface ShoppingCouponFinder {
 
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> findByG_C_C_A_DT(
 		long groupId, long companyId, java.lang.String code, boolean active,
-		java.lang.String discountType, boolean andOperator, int begin, int end)
+		java.lang.String discountType, boolean andOperator, int start, int end)
 		throws com.liferay.portal.SystemException;
 }

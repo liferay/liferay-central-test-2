@@ -39,7 +39,7 @@ public interface IGImageFinder {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByGroupId(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByNoAssets()
@@ -51,6 +51,6 @@ public interface IGImageFinder {
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByG_U(
-		long groupId, long userId, int begin, int end)
+		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException;
 }

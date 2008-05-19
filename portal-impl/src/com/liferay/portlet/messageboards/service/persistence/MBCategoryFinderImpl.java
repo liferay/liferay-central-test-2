@@ -91,7 +91,7 @@ public class MBCategoryFinderImpl implements MBCategoryFinder {
 	}
 
 	public List<MBCategory> findByS_G_U(
-			long groupId, long userId, int begin, int end)
+			long groupId, long userId, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -112,7 +112,7 @@ public class MBCategoryFinderImpl implements MBCategoryFinder {
 			qPos.add(userId);
 
 			return (List<MBCategory>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

@@ -79,11 +79,11 @@ public interface EmailAddressPersistence {
 		long companyId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.EmailAddress> findByCompanyId(
-		long companyId, int begin, int end)
+		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.EmailAddress> findByCompanyId(
-		long companyId, int begin, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -107,11 +107,11 @@ public interface EmailAddressPersistence {
 		long userId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.EmailAddress> findByUserId(
-		long userId, int begin, int end)
+		long userId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.EmailAddress> findByUserId(
-		long userId, int begin, int end,
+		long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -136,11 +136,11 @@ public interface EmailAddressPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.EmailAddress> findByC_C(
-		long companyId, long classNameId, int begin, int end)
+		long companyId, long classNameId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.EmailAddress> findByC_C(
-		long companyId, long classNameId, int begin, int end,
+		long companyId, long classNameId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -167,11 +167,11 @@ public interface EmailAddressPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.EmailAddress> findByC_C_C(
-		long companyId, long classNameId, long classPK, int begin, int end)
+		long companyId, long classNameId, long classPK, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.EmailAddress> findByC_C_C(
-		long companyId, long classNameId, long classPK, int begin, int end,
+		long companyId, long classNameId, long classPK, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -199,11 +199,11 @@ public interface EmailAddressPersistence {
 
 	public java.util.List<com.liferay.portal.model.EmailAddress> findByC_C_C_P(
 		long companyId, long classNameId, long classPK, boolean primary,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.EmailAddress> findByC_C_C_P(
 		long companyId, long classNameId, long classPK, boolean primary,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.EmailAddress findByC_C_C_P_First(
@@ -230,16 +230,16 @@ public interface EmailAddressPersistence {
 
 	public java.util.List<com.liferay.portal.model.EmailAddress> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.EmailAddress> findAll()
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.EmailAddress> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.EmailAddress> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByCompanyId(long companyId)

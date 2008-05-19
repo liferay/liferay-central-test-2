@@ -79,11 +79,11 @@ public interface PollsVotePersistence {
 		long questionId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.polls.model.PollsVote> findByQuestionId(
-		long questionId, int begin, int end)
+		long questionId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.polls.model.PollsVote> findByQuestionId(
-		long questionId, int begin, int end,
+		long questionId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -107,11 +107,11 @@ public interface PollsVotePersistence {
 		long choiceId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.polls.model.PollsVote> findByChoiceId(
-		long choiceId, int begin, int end)
+		long choiceId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.polls.model.PollsVote> findByChoiceId(
-		long choiceId, int begin, int end,
+		long choiceId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -145,16 +145,16 @@ public interface PollsVotePersistence {
 
 	public java.util.List<com.liferay.portlet.polls.model.PollsVote> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.polls.model.PollsVote> findAll()
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.polls.model.PollsVote> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.polls.model.PollsVote> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByQuestionId(long questionId)

@@ -99,10 +99,10 @@ public abstract class PollsQuestionLocalServiceBaseImpl
 	}
 
 	public List<PollsQuestion> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return pollsQuestionPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public PollsQuestion updatePollsQuestion(PollsQuestion pollsQuestion)

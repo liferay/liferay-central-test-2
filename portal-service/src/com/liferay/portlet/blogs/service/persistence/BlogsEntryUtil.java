@@ -99,16 +99,16 @@ public class BlogsEntryUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByUuid(
-		java.lang.String uuid, int begin, int end)
+		java.lang.String uuid, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByUuid(uuid, begin, end);
+		return getPersistence().findByUuid(uuid, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByUuid(
-		java.lang.String uuid, int begin, int end,
+		java.lang.String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByUuid(uuid, begin, end, obc);
+		return getPersistence().findByUuid(uuid, start, end, obc);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry findByUuid_First(
@@ -154,16 +154,16 @@ public class BlogsEntryUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByGroupId(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByGroupId(groupId, begin, end);
+		return getPersistence().findByGroupId(groupId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByGroupId(
-		long groupId, int begin, int end,
+		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByGroupId(groupId, begin, end, obc);
+		return getPersistence().findByGroupId(groupId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry findByGroupId_First(
@@ -194,16 +194,16 @@ public class BlogsEntryUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByCompanyId(
-		long companyId, int begin, int end)
+		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId(companyId, begin, end);
+		return getPersistence().findByCompanyId(companyId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByCompanyId(
-		long companyId, int begin, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId(companyId, begin, end, obc);
+		return getPersistence().findByCompanyId(companyId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry findByCompanyId_First(
@@ -235,16 +235,16 @@ public class BlogsEntryUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_U(
-		long groupId, long userId, int begin, int end)
+		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByG_U(groupId, userId, begin, end);
+		return getPersistence().findByG_U(groupId, userId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_U(
-		long groupId, long userId, int begin, int end,
+		long groupId, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByG_U(groupId, userId, begin, end, obc);
+		return getPersistence().findByG_U(groupId, userId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry findByG_U_First(
@@ -278,16 +278,16 @@ public class BlogsEntryUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_D(
-		long groupId, boolean draft, int begin, int end)
+		long groupId, boolean draft, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByG_D(groupId, draft, begin, end);
+		return getPersistence().findByG_D(groupId, draft, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_D(
-		long groupId, boolean draft, int begin, int end,
+		long groupId, boolean draft, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByG_D(groupId, draft, begin, end, obc);
+		return getPersistence().findByG_D(groupId, draft, start, end, obc);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry findByG_D_First(
@@ -322,16 +322,16 @@ public class BlogsEntryUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByC_D(
-		long companyId, boolean draft, int begin, int end)
+		long companyId, boolean draft, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_D(companyId, draft, begin, end);
+		return getPersistence().findByC_D(companyId, draft, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByC_D(
-		long companyId, boolean draft, int begin, int end,
+		long companyId, boolean draft, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_D(companyId, draft, begin, end, obc);
+		return getPersistence().findByC_D(companyId, draft, start, end, obc);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry findByC_D_First(
@@ -379,17 +379,17 @@ public class BlogsEntryUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_U_D(
-		long groupId, long userId, boolean draft, int begin, int end)
+		long groupId, long userId, boolean draft, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByG_U_D(groupId, userId, draft, begin, end);
+		return getPersistence().findByG_U_D(groupId, userId, draft, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByG_U_D(
-		long groupId, long userId, boolean draft, int begin, int end,
+		long groupId, long userId, boolean draft, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findByG_U_D(groupId, userId, draft, begin, end, obc);
+				   .findByG_U_D(groupId, userId, draft, start, end, obc);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry findByG_U_D_First(
@@ -425,9 +425,9 @@ public class BlogsEntryUtil {
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findWithDynamicQuery(queryInitializer, begin, end);
+				   .findWithDynamicQuery(queryInitializer, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findAll()
@@ -436,14 +436,14 @@ public class BlogsEntryUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end);
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end, obc);
+		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByUuid(java.lang.String uuid)

@@ -346,12 +346,12 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<DLFolder> findByUuid(String uuid, int begin, int end)
+	public List<DLFolder> findByUuid(String uuid, int start, int end)
 		throws SystemException {
-		return findByUuid(uuid, begin, end, null);
+		return findByUuid(uuid, start, end, null);
 	}
 
-	public List<DLFolder> findByUuid(String uuid, int begin, int end,
+	public List<DLFolder> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFolderModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFolder.class.getName();
@@ -365,7 +365,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -416,7 +416,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 				}
 
 				List<DLFolder> list = (List<DLFolder>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -715,12 +715,12 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<DLFolder> findByGroupId(long groupId, int begin, int end)
+	public List<DLFolder> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
-		return findByGroupId(groupId, begin, end, null);
+		return findByGroupId(groupId, start, end, null);
 	}
 
-	public List<DLFolder> findByGroupId(long groupId, int begin, int end,
+	public List<DLFolder> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFolderModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFolder.class.getName();
@@ -734,7 +734,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -778,7 +778,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 				qPos.add(groupId);
 
 				List<DLFolder> list = (List<DLFolder>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -957,12 +957,12 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<DLFolder> findByCompanyId(long companyId, int begin, int end)
+	public List<DLFolder> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
-		return findByCompanyId(companyId, begin, end, null);
+		return findByCompanyId(companyId, start, end, null);
 	}
 
-	public List<DLFolder> findByCompanyId(long companyId, int begin, int end,
+	public List<DLFolder> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFolderModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFolder.class.getName();
@@ -976,7 +976,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1020,7 +1020,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 				qPos.add(companyId);
 
 				List<DLFolder> list = (List<DLFolder>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1211,12 +1211,12 @@ public class DLFolderPersistenceImpl extends BasePersistence
 	}
 
 	public List<DLFolder> findByG_P(long groupId, long parentFolderId,
-		int begin, int end) throws SystemException {
-		return findByG_P(groupId, parentFolderId, begin, end, null);
+		int start, int end) throws SystemException {
+		return findByG_P(groupId, parentFolderId, start, end, null);
 	}
 
 	public List<DLFolder> findByG_P(long groupId, long parentFolderId,
-		int begin, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFolderModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFolder.class.getName();
 		String finderMethodName = "findByG_P";
@@ -1229,7 +1229,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(parentFolderId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1279,7 +1279,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 				qPos.add(parentFolderId);
 
 				List<DLFolder> list = (List<DLFolder>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1488,12 +1488,12 @@ public class DLFolderPersistenceImpl extends BasePersistence
 	}
 
 	public List<DLFolder> findByP_N(long parentFolderId, String name,
-		int begin, int end) throws SystemException {
-		return findByP_N(parentFolderId, name, begin, end, null);
+		int start, int end) throws SystemException {
+		return findByP_N(parentFolderId, name, start, end, null);
 	}
 
 	public List<DLFolder> findByP_N(long parentFolderId, String name,
-		int begin, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFolderModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFolder.class.getName();
 		String finderMethodName = "findByP_N";
@@ -1508,7 +1508,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 				
 				name,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1565,7 +1565,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 				}
 
 				List<DLFolder> list = (List<DLFolder>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1852,7 +1852,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 	}
 
 	public List<DLFolder> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -1861,7 +1861,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -1877,11 +1877,11 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<DLFolder> findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
+	public List<DLFolder> findAll(int start, int end) throws SystemException {
+		return findAll(start, end, null);
 	}
 
-	public List<DLFolder> findAll(int begin, int end, OrderByComparator obc)
+	public List<DLFolder> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFolderModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFolder.class.getName();
@@ -1891,7 +1891,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1927,7 +1927,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<DLFolder> list = (List<DLFolder>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

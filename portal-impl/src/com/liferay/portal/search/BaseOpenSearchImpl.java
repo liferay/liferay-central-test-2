@@ -148,7 +148,7 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 		String keywords, int startPage, int itemsPerPage, int total, Hits hits,
 		String title, String searchPath, ThemeDisplay themeDisplay) {
 
-		int begin = (startPage * itemsPerPage) - itemsPerPage;
+		int start = (startPage * itemsPerPage) - itemsPerPage;
 
 		if (hits != null) {
 			int end = startPage * itemsPerPage;
@@ -159,7 +159,7 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 				end = total;
 			}
 
-			hits = hits.subset(begin, end);
+			hits = hits.subset(start, end);
 		}
 
 		int totalPages = 0;
@@ -222,7 +222,7 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 		// opensearch:startIndex
 
 		OpenSearchUtil.addElement(
-			root, "startIndex", OpenSearchUtil.OS_NAMESPACE, begin + 1);
+			root, "startIndex", OpenSearchUtil.OS_NAMESPACE, start + 1);
 
 		// opensearch:itemsPerPage
 

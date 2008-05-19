@@ -100,16 +100,16 @@ public class OrgGroupRoleUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.OrgGroupRole> findByGroupId(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByGroupId(groupId, begin, end);
+		return getPersistence().findByGroupId(groupId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.OrgGroupRole> findByGroupId(
-		long groupId, int begin, int end,
+		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByGroupId(groupId, begin, end, obc);
+		return getPersistence().findByGroupId(groupId, start, end, obc);
 	}
 
 	public static com.liferay.portal.model.OrgGroupRole findByGroupId_First(
@@ -141,16 +141,16 @@ public class OrgGroupRoleUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.OrgGroupRole> findByRoleId(
-		long roleId, int begin, int end)
+		long roleId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByRoleId(roleId, begin, end);
+		return getPersistence().findByRoleId(roleId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.OrgGroupRole> findByRoleId(
-		long roleId, int begin, int end,
+		long roleId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByRoleId(roleId, begin, end, obc);
+		return getPersistence().findByRoleId(roleId, start, end, obc);
 	}
 
 	public static com.liferay.portal.model.OrgGroupRole findByRoleId_First(
@@ -184,9 +184,9 @@ public class OrgGroupRoleUtil {
 
 	public static java.util.List<com.liferay.portal.model.OrgGroupRole> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findWithDynamicQuery(queryInitializer, begin, end);
+				   .findWithDynamicQuery(queryInitializer, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.OrgGroupRole> findAll()
@@ -195,14 +195,14 @@ public class OrgGroupRoleUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.OrgGroupRole> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end);
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.OrgGroupRole> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end, obc);
+		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByGroupId(long groupId)

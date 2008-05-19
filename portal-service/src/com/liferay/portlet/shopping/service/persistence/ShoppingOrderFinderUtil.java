@@ -50,14 +50,14 @@ public class ShoppingOrderFinderUtil {
 		java.lang.String billingEmailAddress,
 		java.lang.String shippingFirstName, java.lang.String shippingLastName,
 		java.lang.String shippingEmailAddress,
-		java.lang.String ppPaymentStatus, boolean andOperator, int begin,
+		java.lang.String ppPaymentStatus, boolean andOperator, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
 				   .findByG_C_U_N_PPPS(groupId, companyId, userId, number,
 			billingFirstName, billingLastName, billingEmailAddress,
 			shippingFirstName, shippingLastName, shippingEmailAddress,
-			ppPaymentStatus, andOperator, begin, end, obc);
+			ppPaymentStatus, andOperator, start, end, obc);
 	}
 
 	public static ShoppingOrderFinder getFinder() {

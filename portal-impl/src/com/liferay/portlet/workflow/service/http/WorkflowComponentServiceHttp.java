@@ -211,7 +211,7 @@ public class WorkflowComponentServiceHttp {
 	}
 
 	public static java.util.List getDefinitions(HttpPrincipal httpPrincipal,
-		long definitionId, java.lang.String name, int begin, int end)
+		long definitionId, java.lang.String name, int start, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
@@ -223,7 +223,7 @@ public class WorkflowComponentServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = new IntegerWrapper(begin);
+			Object paramObj2 = new IntegerWrapper(start);
 
 			Object paramObj3 = new IntegerWrapper(end);
 
@@ -255,7 +255,7 @@ public class WorkflowComponentServiceHttp {
 
 	public static java.lang.String getDefinitionsXml(
 		HttpPrincipal httpPrincipal, long definitionId, java.lang.String name,
-		int begin, int end)
+		int start, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
@@ -267,7 +267,7 @@ public class WorkflowComponentServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = new IntegerWrapper(begin);
+			Object paramObj2 = new IntegerWrapper(start);
 
 			Object paramObj3 = new IntegerWrapper(end);
 
@@ -411,7 +411,7 @@ public class WorkflowComponentServiceHttp {
 		java.lang.String definitionVersion, java.lang.String startDateGT,
 		java.lang.String startDateLT, java.lang.String endDateGT,
 		java.lang.String endDateLT, boolean hideEndedTasks,
-		boolean retrieveUserInstances, boolean andOperator, int begin, int end)
+		boolean retrieveUserInstances, boolean andOperator, int start, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
@@ -461,7 +461,7 @@ public class WorkflowComponentServiceHttp {
 
 			Object paramObj10 = new BooleanWrapper(andOperator);
 
-			Object paramObj11 = new IntegerWrapper(begin);
+			Object paramObj11 = new IntegerWrapper(start);
 
 			Object paramObj12 = new IntegerWrapper(end);
 
@@ -672,7 +672,7 @@ public class WorkflowComponentServiceHttp {
 		java.lang.String startDateGT, java.lang.String startDateLT,
 		java.lang.String endDateGT, java.lang.String endDateLT,
 		boolean hideEndedTasks, boolean retrieveUserInstances,
-		boolean andOperator, int begin, int end)
+		boolean andOperator, int start, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
@@ -722,7 +722,7 @@ public class WorkflowComponentServiceHttp {
 
 			Object paramObj10 = new BooleanWrapper(andOperator);
 
-			Object paramObj11 = new IntegerWrapper(begin);
+			Object paramObj11 = new IntegerWrapper(start);
 
 			Object paramObj12 = new IntegerWrapper(end);
 
@@ -954,7 +954,7 @@ public class WorkflowComponentServiceHttp {
 		java.lang.String createDateGT, java.lang.String createDateLT,
 		java.lang.String startDateGT, java.lang.String startDateLT,
 		java.lang.String endDateGT, java.lang.String endDateLT,
-		boolean hideEndedTasks, boolean andOperator, int begin, int end)
+		boolean hideEndedTasks, boolean andOperator, int start, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
@@ -1018,7 +1018,7 @@ public class WorkflowComponentServiceHttp {
 
 			Object paramObj11 = new BooleanWrapper(andOperator);
 
-			Object paramObj12 = new IntegerWrapper(begin);
+			Object paramObj12 = new IntegerWrapper(start);
 
 			Object paramObj13 = new IntegerWrapper(end);
 
@@ -1259,7 +1259,7 @@ public class WorkflowComponentServiceHttp {
 		java.lang.String createDateLT, java.lang.String startDateGT,
 		java.lang.String startDateLT, java.lang.String endDateGT,
 		java.lang.String endDateLT, boolean hideEndedTasks,
-		boolean andOperator, int begin, int end)
+		boolean andOperator, int start, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException {
 		try {
@@ -1323,7 +1323,7 @@ public class WorkflowComponentServiceHttp {
 
 			Object paramObj11 = new BooleanWrapper(andOperator);
 
-			Object paramObj12 = new IntegerWrapper(begin);
+			Object paramObj12 = new IntegerWrapper(start);
 
 			Object paramObj13 = new IntegerWrapper(end);
 

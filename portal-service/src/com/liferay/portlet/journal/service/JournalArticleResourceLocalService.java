@@ -68,7 +68,7 @@ public interface JournalArticleResourceLocalService {
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticleResource> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalArticleResource updateJournalArticleResource(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource)

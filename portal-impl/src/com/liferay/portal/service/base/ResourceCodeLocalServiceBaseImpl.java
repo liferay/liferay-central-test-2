@@ -304,10 +304,10 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 	}
 
 	public List<ResourceCode> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return resourceCodePersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public ResourceCode updateResourceCode(ResourceCode resourceCode)

@@ -86,10 +86,10 @@ public class LayoutSetLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.LayoutSet> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
 
-		return layoutSetLocalService.dynamicQuery(queryInitializer, begin, end);
+		return layoutSetLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
 	public static com.liferay.portal.model.LayoutSet updateLayoutSet(

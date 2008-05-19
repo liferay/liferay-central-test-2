@@ -191,10 +191,10 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	public List<MBMessage> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return mbMessagePersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public MBMessage updateMBMessage(MBMessage mbMessage)

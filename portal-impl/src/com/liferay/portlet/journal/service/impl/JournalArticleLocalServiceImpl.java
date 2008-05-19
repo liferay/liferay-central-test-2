@@ -1148,18 +1148,18 @@ public class JournalArticleLocalServiceImpl
 		return journalArticlePersistence.findByGroupId(groupId);
 	}
 
-	public List<JournalArticle> getArticles(long groupId, int begin, int end)
+	public List<JournalArticle> getArticles(long groupId, int start, int end)
 		throws SystemException {
 
-		return journalArticlePersistence.findByGroupId(groupId, begin, end);
+		return journalArticlePersistence.findByGroupId(groupId, start, end);
 	}
 
 	public List<JournalArticle> getArticles(
-			long groupId, int begin, int end, OrderByComparator obc)
+			long groupId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return journalArticlePersistence.findByGroupId(
-			groupId, begin, end, obc);
+			groupId, start, end, obc);
 	}
 
 	public List<JournalArticle> getArticles(long groupId, String articleId)
@@ -1258,12 +1258,12 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public List<JournalArticle> getStructureArticles(
-			long groupId, String structureId, int begin, int end,
+			long groupId, String structureId, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
 		return journalArticlePersistence.findByG_S(
-			groupId, structureId, begin, end, obc);
+			groupId, structureId, start, end, obc);
 	}
 
 	public int getStructureArticlesCount(long groupId, String structureId)
@@ -1280,12 +1280,12 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public List<JournalArticle> getTemplateArticles(
-			long groupId, String templateId, int begin, int end,
+			long groupId, String templateId, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
 		return journalArticlePersistence.findByG_T(
-			groupId, templateId, begin, end, obc);
+			groupId, templateId, start, end, obc);
 	}
 
 	public int getTemplateArticlesCount(long groupId, String templateId)
@@ -1491,14 +1491,14 @@ public class JournalArticleLocalServiceImpl
 			long companyId, long groupId, String keywords, Double version,
 			String type, String structureId, String templateId,
 			Date displayDateGT, Date displayDateLT, Boolean approved,
-			Boolean expired, Date reviewDate, int begin, int end,
+			Boolean expired, Date reviewDate, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
 		return journalArticleFinder.findByKeywords(
 			companyId, groupId, keywords, version, type, structureId,
 			templateId, displayDateGT, displayDateLT, approved, expired,
-			reviewDate, begin, end, obc);
+			reviewDate, start, end, obc);
 	}
 
 	public List<JournalArticle> search(
@@ -1506,14 +1506,14 @@ public class JournalArticleLocalServiceImpl
 			String title, String description, String content, String type,
 			String structureId, String templateId, Date displayDateGT,
 			Date displayDateLT, Boolean approved, Boolean expired,
-			Date reviewDate, boolean andOperator, int begin, int end,
+			Date reviewDate, boolean andOperator, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
 		return journalArticleFinder.findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
 			companyId, groupId, articleId, version, title, description, content,
 			type, structureId, templateId, displayDateGT, displayDateLT,
-			approved, expired, reviewDate, andOperator, begin, end, obc);
+			approved, expired, reviewDate, andOperator, start, end, obc);
 	}
 
 	public List<JournalArticle> search(
@@ -1521,14 +1521,14 @@ public class JournalArticleLocalServiceImpl
 			String title, String description, String content, String type,
 			String[] structureIds, String[] templateIds, Date displayDateGT,
 			Date displayDateLT, Boolean approved, Boolean expired,
-			Date reviewDate, boolean andOperator, int begin, int end,
+			Date reviewDate, boolean andOperator, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
 		return journalArticleFinder.findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
 			companyId, groupId, articleId, version, title, description, content,
 			type, structureIds, templateIds, displayDateGT, displayDateLT,
-			approved, expired, reviewDate, andOperator, begin, end, obc);
+			approved, expired, reviewDate, andOperator, start, end, obc);
 	}
 
 	public int searchCount(

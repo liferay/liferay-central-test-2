@@ -163,12 +163,12 @@ public class SCFrameworkVersionServiceSoap {
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap[] getFrameworkVersions(
-		long groupId, boolean active, int begin, int end)
+		long groupId, boolean active, int start, int end)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> returnValue =
 				SCFrameworkVersionServiceUtil.getFrameworkVersions(groupId,
-					active, begin, end);
+					active, start, end);
 
 			return com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap.toSoapModels(returnValue);
 		}

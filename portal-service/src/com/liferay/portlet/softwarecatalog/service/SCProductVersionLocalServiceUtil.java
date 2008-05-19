@@ -86,11 +86,11 @@ public class SCProductVersionLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
 
 		return scProductVersionLocalService.dynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion updateSCProductVersion(
@@ -196,12 +196,12 @@ public class SCProductVersionLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> getProductVersions(
-		long productEntryId, int begin, int end)
+		long productEntryId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
 
 		return scProductVersionLocalService.getProductVersions(productEntryId,
-			begin, end);
+			start, end);
 	}
 
 	public static int getProductVersionsCount(long productEntryId)

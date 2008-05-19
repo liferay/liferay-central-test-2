@@ -82,12 +82,12 @@ public interface TagsEntryService {
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
 		long companyId, java.lang.String name, java.lang.String[] properties,
-		int begin, int end)
+		int start, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public com.liferay.portal.kernel.json.JSONArrayWrapper searchAutocomplete(
 		long companyId, java.lang.String name, java.lang.String[] properties,
-		int begin, int end)
+		int start, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public int searchCount(long companyId, java.lang.String name,

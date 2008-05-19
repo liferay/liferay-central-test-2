@@ -86,11 +86,11 @@ public class BookmarksFolderLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 
 		return bookmarksFolderLocalService.dynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder updateBookmarksFolder(
@@ -235,12 +235,12 @@ public class BookmarksFolderLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> getFolders(
-		long groupId, long parentFolderId, int begin, int end)
+		long groupId, long parentFolderId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 
 		return bookmarksFolderLocalService.getFolders(groupId, parentFolderId,
-			begin, end);
+			start, end);
 	}
 
 	public static int getFoldersCount(long groupId, long parentFolderId)
@@ -266,12 +266,12 @@ public class BookmarksFolderLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long[] folderIds, java.lang.String keywords, int begin,
+		long groupId, long[] folderIds, java.lang.String keywords, int start,
 		int end) throws com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 
 		return bookmarksFolderLocalService.search(companyId, groupId,
-			folderIds, keywords, begin, end);
+			folderIds, keywords, start, end);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder updateFolder(

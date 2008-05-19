@@ -75,10 +75,10 @@ public class SearchEngineUtil {
 		_instance._registerSearchEngine(engine, current);
 	}
 
-	public static Hits search(long companyId, Query query, int begin, int end)
+	public static Hits search(long companyId, Query query, int start, int end)
 		throws SearchException {
 
-		return _instance._search(companyId, query, begin, end);
+		return _instance._search(companyId, query, start, end);
 	}
 
 	public static void setCurrentSearchEngine(String name) {
@@ -201,14 +201,14 @@ public class SearchEngineUtil {
 		}
 	}
 
-	private Hits _search(long companyId, Query query, int begin, int end)
+	private Hits _search(long companyId, Query query, int start, int end)
 		throws SearchException {
 
 		ClassLoader contextClassLoader = _getContextClassLoader();
 
 		try {
 			return _instance._getSearcher().search(
-				companyId, query, begin, end);
+				companyId, query, start, end);
 		}
 		finally {
 			_setContextClassLoader(contextClassLoader);

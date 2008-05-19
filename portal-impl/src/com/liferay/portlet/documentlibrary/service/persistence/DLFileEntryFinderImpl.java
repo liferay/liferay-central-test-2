@@ -186,14 +186,14 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 		}
 	}
 
-	public List<DLFileEntry> findByGroupId(long groupId, int begin, int end)
+	public List<DLFileEntry> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 
-		return findByGroupId(groupId, begin, end, null);
+		return findByGroupId(groupId, start, end, null);
 	}
 
 	public List<DLFileEntry> findByGroupId(
-			long groupId, int begin, int end, OrderByComparator obc)
+			long groupId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		Session session = null;
@@ -214,7 +214,7 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 			qPos.add(groupId);
 
 			return (List<DLFileEntry>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -247,14 +247,14 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 	}
 
 	public List<DLFileEntry> findByG_U(
-			long groupId, long userId, int begin, int end)
+			long groupId, long userId, int start, int end)
 		throws SystemException {
 
-		return findByG_U(groupId, userId, begin, end, null);
+		return findByG_U(groupId, userId, start, end, null);
 	}
 
 	public List<DLFileEntry> findByG_U(
-			long groupId, long userId, int begin, int end,
+			long groupId, long userId, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
@@ -277,7 +277,7 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 			qPos.add(userId);
 
 			return (List<DLFileEntry>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

@@ -68,7 +68,7 @@ public interface MBStatsUserLocalService {
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBStatsUser updateMBStatsUser(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
@@ -86,7 +86,7 @@ public interface MBStatsUserLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> getStatsUsers(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getStatsUsersCount(long groupId)

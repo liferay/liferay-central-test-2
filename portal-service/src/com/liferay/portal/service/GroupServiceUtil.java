@@ -133,11 +133,11 @@ public class GroupServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.Group> search(
 		long companyId, java.lang.String name, java.lang.String description,
-		java.lang.String[] params, int begin, int end)
+		java.lang.String[] params, int start, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
 
-		return groupService.search(companyId, name, description, params, begin,
+		return groupService.search(companyId, name, description, params, start,
 			end);
 	}
 

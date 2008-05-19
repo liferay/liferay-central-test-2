@@ -78,11 +78,11 @@ public interface CountryPersistence {
 		boolean active) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Country> findByActive(
-		boolean active, int begin, int end)
+		boolean active, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Country> findByActive(
-		boolean active, int begin, int end,
+		boolean active, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -108,15 +108,15 @@ public interface CountryPersistence {
 
 	public java.util.List<com.liferay.portal.model.Country> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Country> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Country> findAll(int begin,
+	public java.util.List<com.liferay.portal.model.Country> findAll(int start,
 		int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Country> findAll(int begin,
+	public java.util.List<com.liferay.portal.model.Country> findAll(int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 

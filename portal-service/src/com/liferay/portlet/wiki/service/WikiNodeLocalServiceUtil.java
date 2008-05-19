@@ -86,10 +86,10 @@ public class WikiNodeLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiNode> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
 
-		return wikiNodeLocalService.dynamicQuery(queryInitializer, begin, end);
+		return wikiNodeLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode updateWikiNode(
@@ -244,11 +244,11 @@ public class WikiNodeLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiNode> getNodes(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
 
-		return wikiNodeLocalService.getNodes(groupId, begin, end);
+		return wikiNodeLocalService.getNodes(groupId, start, end);
 	}
 
 	public static int getNodesCount(long groupId)

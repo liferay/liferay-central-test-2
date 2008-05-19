@@ -101,13 +101,13 @@ public class SCProductVersionServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> getProductVersions(
-		long productEntryId, int begin, int end)
+		long productEntryId, int start, int end)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SCProductVersionService scProductVersionService = SCProductVersionServiceFactory.getService();
 
 		return scProductVersionService.getProductVersions(productEntryId,
-			begin, end);
+			start, end);
 	}
 
 	public static int getProductVersionsCount(long productEntryId)

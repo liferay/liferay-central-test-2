@@ -86,10 +86,10 @@ public class SCProductEntryLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
-		return scProductEntryLocalService.dynamicQuery(queryInitializer, begin,
+		return scProductEntryLocalService.dynamicQuery(queryInitializer, start,
 			end);
 	}
 
@@ -239,40 +239,40 @@ public class SCProductEntryLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getProductEntries(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
-		return scProductEntryLocalService.getProductEntries(groupId, begin, end);
+		return scProductEntryLocalService.getProductEntries(groupId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getProductEntries(
-		long groupId, int begin, int end,
+		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
-		return scProductEntryLocalService.getProductEntries(groupId, begin,
+		return scProductEntryLocalService.getProductEntries(groupId, start,
 			end, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getProductEntries(
-		long groupId, long userId, int begin, int end)
+		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
 		return scProductEntryLocalService.getProductEntries(groupId, userId,
-			begin, end);
+			start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getProductEntries(
-		long groupId, long userId, int begin, int end,
+		long groupId, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
 		return scProductEntryLocalService.getProductEntries(groupId, userId,
-			begin, end, obc);
+			start, end, obc);
 	}
 
 	public static int getProductEntriesCount(long groupId)

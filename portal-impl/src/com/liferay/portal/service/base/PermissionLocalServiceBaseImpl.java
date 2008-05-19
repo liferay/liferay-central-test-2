@@ -302,10 +302,10 @@ public abstract class PermissionLocalServiceBaseImpl
 	}
 
 	public List<Permission> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return permissionPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public Permission updatePermission(Permission permission)

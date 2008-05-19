@@ -68,7 +68,7 @@ public interface WikiPageResourceLocalService {
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.wiki.model.WikiPageResource updateWikiPageResource(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)

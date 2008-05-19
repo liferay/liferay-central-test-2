@@ -67,7 +67,7 @@ public interface LayoutLocalService {
 
 	public java.util.List<com.liferay.portal.model.Layout> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Layout updateLayout(
 		com.liferay.portal.model.Layout layout)
@@ -179,7 +179,7 @@ public interface LayoutLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Layout> getLayouts(
-		long groupId, boolean privateLayout, long parentLayoutId, int begin,
+		long groupId, boolean privateLayout, long parentLayoutId, int start,
 		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Layout> getLayouts(

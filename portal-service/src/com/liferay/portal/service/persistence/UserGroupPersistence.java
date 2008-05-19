@@ -78,11 +78,11 @@ public interface UserGroupPersistence {
 		long companyId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserGroup> findByCompanyId(
-		long companyId, int begin, int end)
+		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserGroup> findByCompanyId(
-		long companyId, int begin, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -107,11 +107,11 @@ public interface UserGroupPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserGroup> findByC_P(
-		long companyId, long parentUserGroupId, int begin, int end)
+		long companyId, long parentUserGroupId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserGroup> findByC_P(
-		long companyId, long parentUserGroupId, int begin, int end,
+		long companyId, long parentUserGroupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -147,16 +147,16 @@ public interface UserGroupPersistence {
 
 	public java.util.List<com.liferay.portal.model.UserGroup> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserGroup> findAll()
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserGroup> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserGroup> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByCompanyId(long companyId)
@@ -187,12 +187,12 @@ public interface UserGroupPersistence {
 			com.liferay.portal.NoSuchUserGroupException;
 
 	public java.util.List<com.liferay.portal.model.User> getUsers(long pk,
-		int begin, int end)
+		int start, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserGroupException;
 
 	public java.util.List<com.liferay.portal.model.User> getUsers(long pk,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserGroupException;
 

@@ -68,13 +68,13 @@ public interface UserTrackerPathLocalService {
 
 	public java.util.List<com.liferay.portal.model.UserTrackerPath> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserTrackerPath updateUserTrackerPath(
 		com.liferay.portal.model.UserTrackerPath userTrackerPath)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserTrackerPath> getUserTrackerPaths(
-		long userTrackerId, int begin, int end)
+		long userTrackerId, int start, int end)
 		throws com.liferay.portal.SystemException;
 }

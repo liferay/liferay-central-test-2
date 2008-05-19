@@ -41,17 +41,17 @@ public class BlogsEntryFinderUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByOrganizationId(
-		long organizationId, boolean draft, int begin, int end)
+		long organizationId, boolean draft, int start, int end)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
-				   .findByOrganizationId(organizationId, draft, begin, end);
+				   .findByOrganizationId(organizationId, draft, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByOrganizationIds(
-		java.util.List<Long> organizationIds, boolean draft, int begin, int end)
+		java.util.List<Long> organizationIds, boolean draft, int start, int end)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
-				   .findByOrganizationIds(organizationIds, draft, begin, end);
+				   .findByOrganizationIds(organizationIds, draft, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByNoAssets()

@@ -371,7 +371,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 	}
 
 	public List<ShoppingItem> findByKeywords(
-			long groupId, long[] categoryIds, String keywords, int begin,
+			long groupId, long[] categoryIds, String keywords, int start,
 			int end)
 		throws SystemException {
 
@@ -426,7 +426,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 			qPos.add(keywords);
 
 			return (List<ShoppingItem>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

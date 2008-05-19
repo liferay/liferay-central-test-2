@@ -86,10 +86,10 @@ public class IGFolderLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 
-		return igFolderLocalService.dynamicQuery(queryInitializer, begin, end);
+		return igFolderLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder updateIGFolder(
@@ -272,11 +272,11 @@ public class IGFolderLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> getFolders(
-		long groupId, long parentFolderId, int begin, int end)
+		long groupId, long parentFolderId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 
-		return igFolderLocalService.getFolders(groupId, parentFolderId, begin,
+		return igFolderLocalService.getFolders(groupId, parentFolderId, start,
 			end);
 	}
 

@@ -102,9 +102,9 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 	}
 
 	public List<IGImage> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
-		return igImagePersistence.findWithDynamicQuery(queryInitializer, begin,
+		return igImagePersistence.findWithDynamicQuery(queryInitializer, start,
 			end);
 	}
 

@@ -33,6 +33,6 @@ public interface TasksProposalFinder {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByG_U(
-		long groupId, long userId, int begin, int end)
+		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException;
 }

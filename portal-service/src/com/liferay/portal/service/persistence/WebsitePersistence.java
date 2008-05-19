@@ -78,11 +78,11 @@ public interface WebsitePersistence {
 		long companyId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Website> findByCompanyId(
-		long companyId, int begin, int end)
+		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Website> findByCompanyId(
-		long companyId, int begin, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -106,11 +106,11 @@ public interface WebsitePersistence {
 		long userId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Website> findByUserId(
-		long userId, int begin, int end)
+		long userId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Website> findByUserId(
-		long userId, int begin, int end,
+		long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -135,11 +135,11 @@ public interface WebsitePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Website> findByC_C(
-		long companyId, long classNameId, int begin, int end)
+		long companyId, long classNameId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Website> findByC_C(
-		long companyId, long classNameId, int begin, int end,
+		long companyId, long classNameId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -164,11 +164,11 @@ public interface WebsitePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Website> findByC_C_C(
-		long companyId, long classNameId, long classPK, int begin, int end)
+		long companyId, long classNameId, long classPK, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Website> findByC_C_C(
-		long companyId, long classNameId, long classPK, int begin, int end,
+		long companyId, long classNameId, long classPK, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -196,11 +196,11 @@ public interface WebsitePersistence {
 
 	public java.util.List<com.liferay.portal.model.Website> findByC_C_C_P(
 		long companyId, long classNameId, long classPK, boolean primary,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Website> findByC_C_C_P(
 		long companyId, long classNameId, long classPK, boolean primary,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Website findByC_C_C_P_First(
@@ -227,15 +227,15 @@ public interface WebsitePersistence {
 
 	public java.util.List<com.liferay.portal.model.Website> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Website> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Website> findAll(int begin,
+	public java.util.List<com.liferay.portal.model.Website> findAll(int start,
 		int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Website> findAll(int begin,
+	public java.util.List<com.liferay.portal.model.Website> findAll(int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 

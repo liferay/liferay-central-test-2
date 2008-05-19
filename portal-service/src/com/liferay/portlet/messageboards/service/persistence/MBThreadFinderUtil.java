@@ -50,21 +50,21 @@ public class MBThreadFinderUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByGroupId(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByGroupId(groupId, begin, end);
+		return getFinder().findByGroupId(groupId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_U(
-		long groupId, long userId, int begin, int end)
+		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByG_U(groupId, userId, begin, end);
+		return getFinder().findByG_U(groupId, userId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByS_G_U(
-		long groupId, long userId, int begin, int end)
+		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByS_G_U(groupId, userId, begin, end);
+		return getFinder().findByS_G_U(groupId, userId, start, end);
 	}
 
 	public static MBThreadFinder getFinder() {

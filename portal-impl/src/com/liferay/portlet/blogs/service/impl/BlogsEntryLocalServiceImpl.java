@@ -316,34 +316,34 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public List<BlogsEntry> getCompanyEntries(
-			long companyId, int begin, int end)
+			long companyId, int start, int end)
 		throws SystemException {
 
-		return blogsEntryPersistence.findByCompanyId(companyId, begin, end);
+		return blogsEntryPersistence.findByCompanyId(companyId, start, end);
 	}
 
 	public List<BlogsEntry> getCompanyEntries(
-			long companyId, int begin, int end, OrderByComparator obc)
+			long companyId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return blogsEntryPersistence.findByCompanyId(
-			companyId, begin, end, obc);
+			companyId, start, end, obc);
 	}
 
 	public List<BlogsEntry> getCompanyEntries(
-			long companyId, boolean draft, int begin, int end)
+			long companyId, boolean draft, int start, int end)
 		throws SystemException {
 
-		return blogsEntryPersistence.findByC_D(companyId, draft, begin, end);
+		return blogsEntryPersistence.findByC_D(companyId, draft, start, end);
 	}
 
 	public List<BlogsEntry> getCompanyEntries(
-			long companyId, boolean draft, int begin, int end,
+			long companyId, boolean draft, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
 		return blogsEntryPersistence.findByC_D(
-			companyId, draft, begin, end, obc);
+			companyId, draft, start, end, obc);
 	}
 
 	public int getCompanyEntriesCount(long companyId) throws SystemException {
@@ -368,32 +368,32 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return blogsEntryPersistence.findByG_UT(groupId, urlTitle);
 	}
 
-	public List<BlogsEntry> getGroupEntries(long groupId, int begin, int end)
+	public List<BlogsEntry> getGroupEntries(long groupId, int start, int end)
 		throws SystemException {
 
-		return blogsEntryPersistence.findByGroupId(groupId, begin, end);
+		return blogsEntryPersistence.findByGroupId(groupId, start, end);
 	}
 
 	public List<BlogsEntry> getGroupEntries(
-			long groupId, int begin, int end, OrderByComparator obc)
+			long groupId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return blogsEntryPersistence.findByGroupId(groupId, begin, end, obc);
+		return blogsEntryPersistence.findByGroupId(groupId, start, end, obc);
 	}
 
 	public List<BlogsEntry> getGroupEntries(
-			long groupId, boolean draft, int begin, int end)
+			long groupId, boolean draft, int start, int end)
 		throws SystemException {
 
-		return blogsEntryPersistence.findByG_D(groupId, draft, begin, end);
+		return blogsEntryPersistence.findByG_D(groupId, draft, start, end);
 	}
 
 	public List<BlogsEntry> getGroupEntries(
-			long groupId, boolean draft, int begin, int end,
+			long groupId, boolean draft, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
-		return blogsEntryPersistence.findByG_D(groupId, draft, begin, end, obc);
+		return blogsEntryPersistence.findByG_D(groupId, draft, start, end, obc);
 	}
 
 	public int getGroupEntriesCount(long groupId) throws SystemException {
@@ -407,36 +407,36 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public List<BlogsEntry> getGroupUserEntries(
-			long groupId, long userId, int begin, int end)
+			long groupId, long userId, int start, int end)
 		throws SystemException {
 
-		return blogsEntryPersistence.findByG_U(groupId, userId, begin, end);
+		return blogsEntryPersistence.findByG_U(groupId, userId, start, end);
 	}
 
 	public List<BlogsEntry> getGroupUserEntries(
-			long groupId, long userId, int begin, int end,
+			long groupId, long userId, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
 		return blogsEntryPersistence.findByG_U(
-			groupId, userId, begin, end, obc);
+			groupId, userId, start, end, obc);
 	}
 
 	public List<BlogsEntry> getGroupUserEntries(
-			long groupId, long userId, boolean draft, int begin, int end)
+			long groupId, long userId, boolean draft, int start, int end)
 		throws SystemException {
 
 		return blogsEntryPersistence.findByG_U_D(
-			groupId, userId, draft, begin, end);
+			groupId, userId, draft, start, end);
 	}
 
 	public List<BlogsEntry> getGroupUserEntries(
-			long groupId, long userId, boolean draft, int begin, int end,
+			long groupId, long userId, boolean draft, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
 		return blogsEntryPersistence.findByG_U_D(
-			groupId, userId, draft, begin, end, obc);
+			groupId, userId, draft, start, end, obc);
 	}
 
 	public int getGroupUserEntriesCount(long groupId, long userId)
@@ -457,11 +457,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public List<BlogsEntry> getOrganizationEntries(
-			long organizationId, boolean draft, int begin, int end)
+			long organizationId, boolean draft, int start, int end)
 		throws SystemException {
 
 		return blogsEntryFinder.findByOrganizationId(
-			organizationId, draft, begin, end);
+			organizationId, draft, start, end);
 	}
 
 	public int getOrganizationEntriesCount(long organizationId, boolean draft)

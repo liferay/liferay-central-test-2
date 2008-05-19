@@ -78,10 +78,10 @@ public interface ImagePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Image> findBySize(int size,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Image> findBySize(int size,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Image findBySize_First(int size,
@@ -106,15 +106,15 @@ public interface ImagePersistence {
 
 	public java.util.List<com.liferay.portal.model.Image> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Image> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Image> findAll(int begin,
+	public java.util.List<com.liferay.portal.model.Image> findAll(int start,
 		int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Image> findAll(int begin,
+	public java.util.List<com.liferay.portal.model.Image> findAll(int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 

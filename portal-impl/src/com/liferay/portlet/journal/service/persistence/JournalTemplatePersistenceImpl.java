@@ -350,12 +350,12 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<JournalTemplate> findByUuid(String uuid, int begin, int end)
+	public List<JournalTemplate> findByUuid(String uuid, int start, int end)
 		throws SystemException {
-		return findByUuid(uuid, begin, end, null);
+		return findByUuid(uuid, start, end, null);
 	}
 
-	public List<JournalTemplate> findByUuid(String uuid, int begin, int end,
+	public List<JournalTemplate> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalTemplateModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalTemplate.class.getName();
@@ -369,7 +369,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -419,7 +419,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 				}
 
 				List<JournalTemplate> list = (List<JournalTemplate>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -717,12 +717,12 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<JournalTemplate> findByGroupId(long groupId, int begin, int end)
+	public List<JournalTemplate> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
-		return findByGroupId(groupId, begin, end, null);
+		return findByGroupId(groupId, start, end, null);
 	}
 
-	public List<JournalTemplate> findByGroupId(long groupId, int begin,
+	public List<JournalTemplate> findByGroupId(long groupId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalTemplateModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalTemplate.class.getName();
@@ -736,7 +736,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -779,7 +779,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 				qPos.add(groupId);
 
 				List<JournalTemplate> list = (List<JournalTemplate>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -965,12 +965,12 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<JournalTemplate> findByTemplateId(String templateId, int begin,
+	public List<JournalTemplate> findByTemplateId(String templateId, int start,
 		int end) throws SystemException {
-		return findByTemplateId(templateId, begin, end, null);
+		return findByTemplateId(templateId, start, end, null);
 	}
 
-	public List<JournalTemplate> findByTemplateId(String templateId, int begin,
+	public List<JournalTemplate> findByTemplateId(String templateId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalTemplateModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalTemplate.class.getName();
@@ -984,7 +984,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				templateId,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1034,7 +1034,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 				}
 
 				List<JournalTemplate> list = (List<JournalTemplate>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1445,12 +1445,12 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 	}
 
 	public List<JournalTemplate> findByG_S(long groupId, String structureId,
-		int begin, int end) throws SystemException {
-		return findByG_S(groupId, structureId, begin, end, null);
+		int start, int end) throws SystemException {
+		return findByG_S(groupId, structureId, start, end, null);
 	}
 
 	public List<JournalTemplate> findByG_S(long groupId, String structureId,
-		int begin, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalTemplateModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalTemplate.class.getName();
 		String finderMethodName = "findByG_S";
@@ -1465,7 +1465,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 				
 				structureId,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1521,7 +1521,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 				}
 
 				List<JournalTemplate> list = (List<JournalTemplate>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1680,7 +1680,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 	}
 
 	public List<JournalTemplate> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -1689,7 +1689,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -1705,12 +1705,12 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<JournalTemplate> findAll(int begin, int end)
+	public List<JournalTemplate> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<JournalTemplate> findAll(int begin, int end,
+	public List<JournalTemplate> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalTemplateModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalTemplate.class.getName();
@@ -1720,7 +1720,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1755,7 +1755,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<JournalTemplate> list = (List<JournalTemplate>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

@@ -569,11 +569,11 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			page.getRedirectTitle(), page.getAttachmentsFiles());
 	}
 
-	public List<WikiPage> getPages(long nodeId, int begin, int end)
+	public List<WikiPage> getPages(long nodeId, int start, int end)
 		throws SystemException {
 
 		return wikiPagePersistence.findByNodeId(
-			nodeId, begin, end, new PageCreateDateComparator(false));
+			nodeId, start, end, new PageCreateDateComparator(false));
 	}
 
 	public List<WikiPage> getPages(String format) throws SystemException {
@@ -581,35 +581,35 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	public List<WikiPage> getPages(
-			long nodeId, String title, int begin, int end)
+			long nodeId, String title, int start, int end)
 		throws SystemException {
 
 		return wikiPagePersistence.findByN_T(
-			nodeId, title, begin, end, new PageCreateDateComparator(false));
+			nodeId, title, start, end, new PageCreateDateComparator(false));
 	}
 
 	public List<WikiPage> getPages(
-			long nodeId, String title, int begin, int end,
+			long nodeId, String title, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
-		return wikiPagePersistence.findByN_T(nodeId, title, begin, end, obc);
+		return wikiPagePersistence.findByN_T(nodeId, title, start, end, obc);
 	}
 
 	public List<WikiPage> getPages(
-			long nodeId, boolean head, int begin, int end)
+			long nodeId, boolean head, int start, int end)
 		throws SystemException {
 
 		return wikiPagePersistence.findByN_H(
-			nodeId, head, begin, end, new PageCreateDateComparator(false));
+			nodeId, head, start, end, new PageCreateDateComparator(false));
 	}
 
 	public List<WikiPage> getPages(
-			long nodeId, String title, boolean head, int begin, int end)
+			long nodeId, String title, boolean head, int start, int end)
 		throws SystemException {
 
 		return wikiPagePersistence.findByN_T_H(
-			nodeId, title, head, begin, end,
+			nodeId, title, head, start, end,
 			new PageCreateDateComparator(false));
 	}
 
@@ -635,7 +635,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		return wikiPagePersistence.countByN_T_H(nodeId, title, head);
 	}
 
-	public List<WikiPage> getRecentChanges(long nodeId, int begin, int end)
+	public List<WikiPage> getRecentChanges(long nodeId, int start, int end)
 		throws SystemException {
 
 		Calendar cal = CalendarFactoryUtil.getCalendar();
@@ -643,7 +643,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		cal.add(Calendar.WEEK_OF_YEAR, -1);
 
 		return wikiPageFinder.findByCreateDate(
-			nodeId, cal.getTime(), false, begin, end);
+			nodeId, cal.getTime(), false, start, end);
 	}
 
 	public int getRecentChangesCount(long nodeId) throws SystemException {

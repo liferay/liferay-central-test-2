@@ -363,12 +363,12 @@ public class RolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<Role> findByCompanyId(long companyId, int begin, int end)
+	public List<Role> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
-		return findByCompanyId(companyId, begin, end, null);
+		return findByCompanyId(companyId, start, end, null);
 	}
 
-	public List<Role> findByCompanyId(long companyId, int begin, int end,
+	public List<Role> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = RoleModelImpl.CACHE_ENABLED;
 		String finderClassName = Role.class.getName();
@@ -382,7 +382,7 @@ public class RolePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -424,7 +424,7 @@ public class RolePersistenceImpl extends BasePersistence
 				qPos.add(companyId);
 
 				List<Role> list = (List<Role>)QueryUtil.list(q, getDialect(),
-						begin, end);
+						start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -788,7 +788,7 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public List<Role> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -797,7 +797,7 @@ public class RolePersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -813,11 +813,11 @@ public class RolePersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<Role> findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
+	public List<Role> findAll(int start, int end) throws SystemException {
+		return findAll(start, end, null);
 	}
 
-	public List<Role> findAll(int begin, int end, OrderByComparator obc)
+	public List<Role> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = RoleModelImpl.CACHE_ENABLED;
 		String finderClassName = Role.class.getName();
@@ -827,7 +827,7 @@ public class RolePersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -861,7 +861,7 @@ public class RolePersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<Role> list = (List<Role>)QueryUtil.list(q, getDialect(),
-						begin, end);
+						start, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1197,12 +1197,12 @@ public class RolePersistenceImpl extends BasePersistence
 		return getGroups(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List<com.liferay.portal.model.Group> getGroups(long pk, int begin,
+	public List<com.liferay.portal.model.Group> getGroups(long pk, int start,
 		int end) throws NoSuchRoleException, SystemException {
-		return getGroups(pk, begin, end, null);
+		return getGroups(pk, start, end, null);
 	}
 
-	public List<com.liferay.portal.model.Group> getGroups(long pk, int begin,
+	public List<com.liferay.portal.model.Group> getGroups(long pk, int start,
 		int end, OrderByComparator obc)
 		throws NoSuchRoleException, SystemException {
 		boolean finderClassNameCacheEnabled = RoleModelImpl.CACHE_ENABLED_GROUPS_ROLES;
@@ -1215,7 +1215,7 @@ public class RolePersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				new Long(pk), String.valueOf(start), String.valueOf(end),
 				String.valueOf(obc)
 			};
 
@@ -1259,7 +1259,7 @@ public class RolePersistenceImpl extends BasePersistence
 				qPos.add(pk);
 
 				List<com.liferay.portal.model.Group> list = (List<com.liferay.portal.model.Group>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1565,12 +1565,12 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public List<com.liferay.portal.model.Permission> getPermissions(long pk,
-		int begin, int end) throws NoSuchRoleException, SystemException {
-		return getPermissions(pk, begin, end, null);
+		int start, int end) throws NoSuchRoleException, SystemException {
+		return getPermissions(pk, start, end, null);
 	}
 
 	public List<com.liferay.portal.model.Permission> getPermissions(long pk,
-		int begin, int end, OrderByComparator obc)
+		int start, int end, OrderByComparator obc)
 		throws NoSuchRoleException, SystemException {
 		boolean finderClassNameCacheEnabled = RoleModelImpl.CACHE_ENABLED_ROLES_PERMISSIONS;
 
@@ -1582,7 +1582,7 @@ public class RolePersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				new Long(pk), String.valueOf(start), String.valueOf(end),
 				String.valueOf(obc)
 			};
 
@@ -1620,7 +1620,7 @@ public class RolePersistenceImpl extends BasePersistence
 				qPos.add(pk);
 
 				List<com.liferay.portal.model.Permission> list = (List<com.liferay.portal.model.Permission>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1929,12 +1929,12 @@ public class RolePersistenceImpl extends BasePersistence
 		return getUsers(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List<com.liferay.portal.model.User> getUsers(long pk, int begin,
+	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
 		int end) throws NoSuchRoleException, SystemException {
-		return getUsers(pk, begin, end, null);
+		return getUsers(pk, start, end, null);
 	}
 
-	public List<com.liferay.portal.model.User> getUsers(long pk, int begin,
+	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
 		int end, OrderByComparator obc)
 		throws NoSuchRoleException, SystemException {
 		boolean finderClassNameCacheEnabled = RoleModelImpl.CACHE_ENABLED_USERS_ROLES;
@@ -1947,7 +1947,7 @@ public class RolePersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				new Long(pk), String.valueOf(start), String.valueOf(end),
 				String.valueOf(obc)
 			};
 
@@ -1985,7 +1985,7 @@ public class RolePersistenceImpl extends BasePersistence
 				qPos.add(pk);
 
 				List<com.liferay.portal.model.User> list = (List<com.liferay.portal.model.User>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,

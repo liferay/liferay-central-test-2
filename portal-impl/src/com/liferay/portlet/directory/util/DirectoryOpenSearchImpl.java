@@ -74,11 +74,11 @@ public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		int begin = (startPage * itemsPerPage) - itemsPerPage;
+		int start = (startPage * itemsPerPage) - itemsPerPage;
 		int end = startPage * itemsPerPage;
 
 		List<User> results = UserLocalServiceUtil.search(
-			themeDisplay.getCompanyId(), keywords, Boolean.TRUE, null, begin,
+			themeDisplay.getCompanyId(), keywords, Boolean.TRUE, null, start,
 			end, new ContactLastNameComparator(true));
 
 		int total = UserLocalServiceUtil.searchCount(

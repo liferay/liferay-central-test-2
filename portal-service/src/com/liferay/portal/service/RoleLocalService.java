@@ -67,7 +67,7 @@ public interface RoleLocalService {
 
 	public java.util.List<com.liferay.portal.model.Role> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Role updateRole(
 		com.liferay.portal.model.Role role)
@@ -152,14 +152,14 @@ public interface RoleLocalService {
 
 	public java.util.List<com.liferay.portal.model.Role> search(
 		long companyId, java.lang.String name, java.lang.String description,
-		java.lang.Integer type, int begin, int end,
+		java.lang.Integer type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Role> search(
 		long companyId, java.lang.String name, java.lang.String description,
 		java.lang.Integer type, java.util.LinkedHashMap<String, Object> params,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public int searchCount(long companyId, java.lang.String name,

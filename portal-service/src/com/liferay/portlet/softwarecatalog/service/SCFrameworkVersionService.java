@@ -77,7 +77,7 @@ public interface SCFrameworkVersionService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getFrameworkVersions(
-		long groupId, boolean active, int begin, int end)
+		long groupId, boolean active, int start, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion updateFrameworkVersion(

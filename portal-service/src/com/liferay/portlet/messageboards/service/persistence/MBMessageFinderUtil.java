@@ -45,16 +45,16 @@ public class MBMessageFinderUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByGroupId(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByGroupId(groupId, begin, end);
+		return getFinder().findByGroupId(groupId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByGroupId(
-		long groupId, int begin, int end,
+		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByGroupId(groupId, begin, end, obc);
+		return getFinder().findByGroupId(groupId, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByNoAssets()
@@ -70,16 +70,16 @@ public class MBMessageFinderUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_U(
-		long groupId, long userId, int begin, int end)
+		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByG_U(groupId, userId, begin, end);
+		return getFinder().findByG_U(groupId, userId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_U(
-		long groupId, long userId, int begin, int end,
+		long groupId, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByG_U(groupId, userId, begin, end, obc);
+		return getFinder().findByG_U(groupId, userId, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByC_C(

@@ -245,7 +245,7 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 			long companyId, long groupId, String name, String primKey,
 			String actionId, String firstName, String middleName,
 			String lastName, String emailAddress, boolean andOperator,
-			int begin, int end)
+			int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -312,7 +312,7 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 			List<User> users = new ArrayList<User>();
 
 			List<Long> userIds = (List<Long>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 
 			for (long userId : userIds) {
 				User user = UserUtil.findByPrimaryKey(userId);
@@ -333,7 +333,7 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 	public List<User> findByUserAndOrgGroupPermission(
 			long companyId, String name, String primKey, String actionId,
 			String firstName, String middleName, String lastName,
-			String emailAddress, boolean andOperator, int begin, int end)
+			String emailAddress, boolean andOperator, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -384,7 +384,7 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 			List<User> users = new ArrayList<User>();
 
 			List<Long> userIds = (List<Long>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 
 			for (long userId : userIds) {
 				User user = UserUtil.findByPrimaryKey(userId);

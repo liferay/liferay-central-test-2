@@ -68,7 +68,7 @@ public interface DLFolderLocalService {
 
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder updateDLFolder(
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder)
@@ -170,7 +170,7 @@ public interface DLFolderLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
-		long groupId, long parentFolderId, int begin, int end)
+		long groupId, long parentFolderId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getFoldersCount(long groupId, long parentFolderId)

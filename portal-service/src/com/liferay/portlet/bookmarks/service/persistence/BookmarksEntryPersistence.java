@@ -81,11 +81,11 @@ public interface BookmarksEntryPersistence {
 		java.lang.String uuid) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByUuid(
-		java.lang.String uuid, int begin, int end)
+		java.lang.String uuid, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByUuid(
-		java.lang.String uuid, int begin, int end,
+		java.lang.String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -111,11 +111,11 @@ public interface BookmarksEntryPersistence {
 		long folderId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByFolderId(
-		long folderId, int begin, int end)
+		long folderId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByFolderId(
-		long folderId, int begin, int end,
+		long folderId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -141,16 +141,16 @@ public interface BookmarksEntryPersistence {
 
 	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findAll()
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByUuid(java.lang.String uuid)

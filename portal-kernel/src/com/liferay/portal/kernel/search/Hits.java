@@ -65,7 +65,7 @@ public interface Hits extends Serializable {
 
 	public float score(int n);
 
-	public Hits subset(int begin, int end);
+	public Hits subset(int start, int end);
 
 	public List<Document> toList();
 

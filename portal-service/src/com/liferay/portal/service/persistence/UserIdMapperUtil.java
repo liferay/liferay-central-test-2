@@ -99,16 +99,16 @@ public class UserIdMapperUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserIdMapper> findByUserId(
-		long userId, int begin, int end)
+		long userId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByUserId(userId, begin, end);
+		return getPersistence().findByUserId(userId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserIdMapper> findByUserId(
-		long userId, int begin, int end,
+		long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByUserId(userId, begin, end, obc);
+		return getPersistence().findByUserId(userId, start, end, obc);
 	}
 
 	public static com.liferay.portal.model.UserIdMapper findByUserId_First(
@@ -168,9 +168,9 @@ public class UserIdMapperUtil {
 
 	public static java.util.List<com.liferay.portal.model.UserIdMapper> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findWithDynamicQuery(queryInitializer, begin, end);
+				   .findWithDynamicQuery(queryInitializer, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserIdMapper> findAll()
@@ -179,14 +179,14 @@ public class UserIdMapperUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserIdMapper> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end);
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserIdMapper> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end, obc);
+		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByUserId(long userId)

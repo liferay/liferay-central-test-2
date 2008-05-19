@@ -139,7 +139,7 @@ public class ShoppingOrderFinderImpl implements ShoppingOrderFinder {
 			String billingFirstName, String billingLastName,
 			String billingEmailAddress, String shippingFirstName,
 			String shippingLastName, String shippingEmailAddress,
-			String ppPaymentStatus, boolean andOperator, int begin, int end,
+			String ppPaymentStatus, boolean andOperator, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
@@ -196,7 +196,7 @@ public class ShoppingOrderFinderImpl implements ShoppingOrderFinder {
 			qPos.add(ppPaymentStatus);
 
 			return (List<ShoppingOrder>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

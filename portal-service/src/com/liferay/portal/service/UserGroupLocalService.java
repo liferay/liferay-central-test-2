@@ -67,7 +67,7 @@ public interface UserGroupLocalService {
 
 	public java.util.List<com.liferay.portal.model.UserGroup> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserGroup updateUserGroup(
 		com.liferay.portal.model.UserGroup userGroup)
@@ -111,7 +111,7 @@ public interface UserGroupLocalService {
 
 	public java.util.List<com.liferay.portal.model.UserGroup> search(
 		long companyId, java.lang.String name, java.lang.String description,
-		java.util.LinkedHashMap<String, Object> params, int begin, int end,
+		java.util.LinkedHashMap<String, Object> params, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 

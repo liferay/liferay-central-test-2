@@ -74,13 +74,13 @@ public class OrganizationFinderUtil {
 		java.lang.String parentOrganizationComparator,
 		java.lang.String keywords, int type, java.lang.Long regionId,
 		java.lang.Long countryId,
-		java.util.LinkedHashMap<String, Object> params, int begin, int end,
+		java.util.LinkedHashMap<String, Object> params, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
 				   .findByKeywords(companyId, parentOrganizationId,
 			parentOrganizationComparator, keywords, type, regionId, countryId,
-			params, begin, end, obc);
+			params, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> findByC_PO_N_T_S_C_Z_R_C(
@@ -90,12 +90,12 @@ public class OrganizationFinderUtil {
 		java.lang.String zip, java.lang.Long regionId,
 		java.lang.Long countryId,
 		java.util.LinkedHashMap<String, Object> params, boolean andOperator,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
 				   .findByC_PO_N_T_S_C_Z_R_C(companyId, parentOrganizationId,
 			parentOrganizationComparator, name, type, street, city, zip,
-			regionId, countryId, params, andOperator, begin, end, obc);
+			regionId, countryId, params, andOperator, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> findByC_PO_N_T_S_C_Z_R_C(
@@ -105,12 +105,12 @@ public class OrganizationFinderUtil {
 		java.lang.String[] cities, java.lang.String[] zips,
 		java.lang.Long regionId, java.lang.Long countryId,
 		java.util.LinkedHashMap<String, Object> params, boolean andOperator,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
 				   .findByC_PO_N_T_S_C_Z_R_C(companyId, parentOrganizationId,
 			parentOrganizationComparator, names, type, streets, cities, zips,
-			regionId, countryId, params, andOperator, begin, end, obc);
+			regionId, countryId, params, andOperator, start, end, obc);
 	}
 
 	public static OrganizationFinder getFinder() {

@@ -58,7 +58,7 @@ public interface RoleFinder {
 	public java.util.List<com.liferay.portal.model.Role> findByC_N_D_T(
 		long companyId, java.lang.String name, java.lang.String description,
 		java.lang.Integer type, java.util.LinkedHashMap<String, Object> params,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.Map<String, java.util.List<String>> findByC_N_S_P(

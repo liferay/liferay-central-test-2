@@ -97,16 +97,16 @@ public class CountryUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Country> findByActive(
-		boolean active, int begin, int end)
+		boolean active, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByActive(active, begin, end);
+		return getPersistence().findByActive(active, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Country> findByActive(
-		boolean active, int begin, int end,
+		boolean active, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByActive(active, begin, end, obc);
+		return getPersistence().findByActive(active, start, end, obc);
 	}
 
 	public static com.liferay.portal.model.Country findByActive_First(
@@ -139,9 +139,9 @@ public class CountryUtil {
 
 	public static java.util.List<com.liferay.portal.model.Country> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findWithDynamicQuery(queryInitializer, begin, end);
+				   .findWithDynamicQuery(queryInitializer, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Country> findAll()
@@ -150,14 +150,14 @@ public class CountryUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Country> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end);
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Country> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end, obc);
+		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByActive(boolean active)

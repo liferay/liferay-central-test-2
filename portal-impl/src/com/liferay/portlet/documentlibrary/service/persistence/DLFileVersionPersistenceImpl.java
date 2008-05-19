@@ -351,12 +351,12 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<DLFileVersion> findByF_N(long folderId, String name, int begin,
+	public List<DLFileVersion> findByF_N(long folderId, String name, int start,
 		int end) throws SystemException {
-		return findByF_N(folderId, name, begin, end, null);
+		return findByF_N(folderId, name, start, end, null);
 	}
 
-	public List<DLFileVersion> findByF_N(long folderId, String name, int begin,
+	public List<DLFileVersion> findByF_N(long folderId, String name, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFileVersionModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileVersion.class.getName();
@@ -372,7 +372,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 				
 				name,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -430,7 +430,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 				}
 
 				List<DLFileVersion> list = (List<DLFileVersion>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -722,7 +722,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 	}
 
 	public List<DLFileVersion> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -731,7 +731,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -747,12 +747,12 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<DLFileVersion> findAll(int begin, int end)
+	public List<DLFileVersion> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<DLFileVersion> findAll(int begin, int end, OrderByComparator obc)
+	public List<DLFileVersion> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFileVersionModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileVersion.class.getName();
@@ -762,7 +762,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -799,7 +799,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<DLFileVersion> list = (List<DLFileVersion>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

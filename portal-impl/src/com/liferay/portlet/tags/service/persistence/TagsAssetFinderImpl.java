@@ -343,7 +343,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 			long groupId, long[] classNameIds, String orderByCol1,
 			String orderByCol2, String orderByType1, String orderByType2,
 			boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
-			int begin, int end)
+			int start, int end)
 		throws SystemException {
 
 		orderByCol1 = checkOrderByCol(orderByCol1);
@@ -407,7 +407,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 			setClassNamedIds(qPos, classNameIds);
 
 			return (List<TagsAsset>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -422,7 +422,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 			long[] notEntryIds, String orderByCol1, String orderByCol2,
 			String orderByType1, String orderByType2,
 			boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
-			int begin, int end)
+			int start, int end)
 		throws SystemException {
 
 		orderByCol1 = checkOrderByCol(orderByCol1);
@@ -526,7 +526,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 			setClassNamedIds(qPos, classNameIds);
 
 			return (List<TagsAsset>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -552,7 +552,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 			long[] notEntryIds, String orderByCol1, String orderByCol2,
 			String orderByType1, String orderByType2,
 			boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
-			int begin, int end)
+			int start, int end)
 		throws SystemException {
 
 		orderByCol1 = checkOrderByCol(orderByCol1);
@@ -642,7 +642,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 			setClassNamedIds(qPos, classNameIds);
 
 			return (List<TagsAsset>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -653,7 +653,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 	}
 
 	public List<TagsAsset> findByViewCount(
-			long[] classNameId, boolean asc, int begin, int end)
+			long[] classNameId, boolean asc, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -700,7 +700,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 			}
 
 			return (List<TagsAsset>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

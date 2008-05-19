@@ -487,16 +487,16 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 	public List<Group> search(
 			long companyId, String name, String description,
-			LinkedHashMap<String, Object> params, int begin, int end)
+			LinkedHashMap<String, Object> params, int start, int end)
 		throws SystemException {
 
 		return groupFinder.findByC_N_D(
-			companyId, name, description, params, begin, end, null);
+			companyId, name, description, params, start, end, null);
 	}
 
 	public List<Group> search(
 			long companyId, String name, String description,
-			LinkedHashMap<String, Object> params, int begin, int end,
+			LinkedHashMap<String, Object> params, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
@@ -505,7 +505,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 
 		return groupFinder.findByC_N_D(
-			companyId, name, description, params, begin, end, obc);
+			companyId, name, description, params, start, end, obc);
 	}
 
 	public int searchCount(

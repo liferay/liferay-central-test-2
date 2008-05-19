@@ -99,16 +99,16 @@ public class BookmarksEntryUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByUuid(
-		java.lang.String uuid, int begin, int end)
+		java.lang.String uuid, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByUuid(uuid, begin, end);
+		return getPersistence().findByUuid(uuid, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByUuid(
-		java.lang.String uuid, int begin, int end,
+		java.lang.String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByUuid(uuid, begin, end, obc);
+		return getPersistence().findByUuid(uuid, start, end, obc);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry findByUuid_First(
@@ -141,16 +141,16 @@ public class BookmarksEntryUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByFolderId(
-		long folderId, int begin, int end)
+		long folderId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByFolderId(folderId, begin, end);
+		return getPersistence().findByFolderId(folderId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByFolderId(
-		long folderId, int begin, int end,
+		long folderId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByFolderId(folderId, begin, end, obc);
+		return getPersistence().findByFolderId(folderId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry findByFolderId_First(
@@ -184,9 +184,9 @@ public class BookmarksEntryUtil {
 
 	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findWithDynamicQuery(queryInitializer, begin, end);
+				   .findWithDynamicQuery(queryInitializer, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findAll()
@@ -195,14 +195,14 @@ public class BookmarksEntryUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end);
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end, obc);
+		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByUuid(java.lang.String uuid)

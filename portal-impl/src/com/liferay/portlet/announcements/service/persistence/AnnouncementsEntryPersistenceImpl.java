@@ -354,12 +354,12 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<AnnouncementsEntry> findByUuid(String uuid, int begin, int end)
+	public List<AnnouncementsEntry> findByUuid(String uuid, int start, int end)
 		throws SystemException {
-		return findByUuid(uuid, begin, end, null);
+		return findByUuid(uuid, start, end, null);
 	}
 
-	public List<AnnouncementsEntry> findByUuid(String uuid, int begin, int end,
+	public List<AnnouncementsEntry> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = AnnouncementsEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = AnnouncementsEntry.class.getName();
@@ -373,7 +373,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -424,7 +424,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistence
 				}
 
 				List<AnnouncementsEntry> list = (List<AnnouncementsEntry>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -612,12 +612,12 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<AnnouncementsEntry> findByUserId(long userId, int begin, int end)
+	public List<AnnouncementsEntry> findByUserId(long userId, int start, int end)
 		throws SystemException {
-		return findByUserId(userId, begin, end, null);
+		return findByUserId(userId, start, end, null);
 	}
 
-	public List<AnnouncementsEntry> findByUserId(long userId, int begin,
+	public List<AnnouncementsEntry> findByUserId(long userId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = AnnouncementsEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = AnnouncementsEntry.class.getName();
@@ -631,7 +631,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -675,7 +675,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistence
 				qPos.add(userId);
 
 				List<AnnouncementsEntry> list = (List<AnnouncementsEntry>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -868,12 +868,12 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistence
 	}
 
 	public List<AnnouncementsEntry> findByC_C(long classNameId, long classPK,
-		int begin, int end) throws SystemException {
-		return findByC_C(classNameId, classPK, begin, end, null);
+		int start, int end) throws SystemException {
+		return findByC_C(classNameId, classPK, start, end, null);
 	}
 
 	public List<AnnouncementsEntry> findByC_C(long classNameId, long classPK,
-		int begin, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = AnnouncementsEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = AnnouncementsEntry.class.getName();
 		String finderMethodName = "findByC_C";
@@ -886,7 +886,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -936,7 +936,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistence
 				qPos.add(classPK);
 
 				List<AnnouncementsEntry> list = (List<AnnouncementsEntry>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1149,12 +1149,12 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistence
 	}
 
 	public List<AnnouncementsEntry> findByC_C_A(long classNameId, long classPK,
-		boolean alert, int begin, int end) throws SystemException {
-		return findByC_C_A(classNameId, classPK, alert, begin, end, null);
+		boolean alert, int start, int end) throws SystemException {
+		return findByC_C_A(classNameId, classPK, alert, start, end, null);
 	}
 
 	public List<AnnouncementsEntry> findByC_C_A(long classNameId, long classPK,
-		boolean alert, int begin, int end, OrderByComparator obc)
+		boolean alert, int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = AnnouncementsEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = AnnouncementsEntry.class.getName();
@@ -1169,7 +1169,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK), Boolean.valueOf(alert),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1225,7 +1225,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistence
 				qPos.add(alert);
 
 				List<AnnouncementsEntry> list = (List<AnnouncementsEntry>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1393,7 +1393,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistence
 	}
 
 	public List<AnnouncementsEntry> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -1402,7 +1402,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -1418,12 +1418,12 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<AnnouncementsEntry> findAll(int begin, int end)
+	public List<AnnouncementsEntry> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<AnnouncementsEntry> findAll(int begin, int end,
+	public List<AnnouncementsEntry> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = AnnouncementsEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = AnnouncementsEntry.class.getName();
@@ -1433,7 +1433,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1469,7 +1469,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<AnnouncementsEntry> list = (List<AnnouncementsEntry>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

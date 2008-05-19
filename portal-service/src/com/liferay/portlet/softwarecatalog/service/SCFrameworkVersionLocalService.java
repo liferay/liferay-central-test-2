@@ -68,7 +68,7 @@ public interface SCFrameworkVersionLocalService {
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion updateSCFrameworkVersion(
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion)
@@ -141,14 +141,14 @@ public interface SCFrameworkVersionLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getFrameworkVersions(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getFrameworkVersions(
 		long groupId, boolean active) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getFrameworkVersions(
-		long groupId, boolean active, int begin, int end)
+		long groupId, boolean active, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getFrameworkVersionsCount(long groupId)

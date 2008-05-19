@@ -86,10 +86,10 @@ public class UserIdMapperLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.UserIdMapper> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
 
-		return userIdMapperLocalService.dynamicQuery(queryInitializer, begin,
+		return userIdMapperLocalService.dynamicQuery(queryInitializer, start,
 			end);
 	}
 

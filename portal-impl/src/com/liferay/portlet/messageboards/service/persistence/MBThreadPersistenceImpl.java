@@ -328,12 +328,12 @@ public class MBThreadPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<MBThread> findByCategoryId(long categoryId, int begin, int end)
+	public List<MBThread> findByCategoryId(long categoryId, int start, int end)
 		throws SystemException {
-		return findByCategoryId(categoryId, begin, end, null);
+		return findByCategoryId(categoryId, start, end, null);
 	}
 
-	public List<MBThread> findByCategoryId(long categoryId, int begin, int end,
+	public List<MBThread> findByCategoryId(long categoryId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBThreadModelImpl.CACHE_ENABLED;
 		String finderClassName = MBThread.class.getName();
@@ -347,7 +347,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(categoryId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -391,7 +391,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 				qPos.add(categoryId);
 
 				List<MBThread> list = (List<MBThread>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -530,7 +530,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 	}
 
 	public List<MBThread> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -539,7 +539,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -555,11 +555,11 @@ public class MBThreadPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<MBThread> findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
+	public List<MBThread> findAll(int start, int end) throws SystemException {
+		return findAll(start, end, null);
 	}
 
-	public List<MBThread> findAll(int begin, int end, OrderByComparator obc)
+	public List<MBThread> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = MBThreadModelImpl.CACHE_ENABLED;
 		String finderClassName = MBThread.class.getName();
@@ -569,7 +569,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -605,7 +605,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<MBThread> list = (List<MBThread>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

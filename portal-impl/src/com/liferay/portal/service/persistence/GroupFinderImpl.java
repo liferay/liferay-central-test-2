@@ -343,7 +343,7 @@ public class GroupFinderImpl implements GroupFinder {
 
 	public List<Group> findByC_N_D(
 			long companyId, String name, String description,
-			LinkedHashMap<String, Object> params, int begin, int end,
+			LinkedHashMap<String, Object> params, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
@@ -458,7 +458,7 @@ public class GroupFinderImpl implements GroupFinder {
 		};
 		Object finderArgs[] = new Object[] {
 			companyId, name, description, params.toString(),
-			String.valueOf(begin), String.valueOf(end)
+			String.valueOf(start), String.valueOf(end)
 		};
 
 		Object result = null;
@@ -507,7 +507,7 @@ public class GroupFinderImpl implements GroupFinder {
 				List<Group> groups = new ArrayList<Group>();
 
 				Iterator<String> itr = (Iterator<String>)QueryUtil.iterate(
-					q, HibernateUtil.getDialect(), begin, end);
+					q, HibernateUtil.getDialect(), start, end);
 
 				while (itr.hasNext()) {
 					long groupId = GetterUtil.getLong(itr.next());

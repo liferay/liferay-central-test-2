@@ -305,10 +305,10 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 	}
 
 	public List<MembershipRequest> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return membershipRequestPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public MembershipRequest updateMembershipRequest(

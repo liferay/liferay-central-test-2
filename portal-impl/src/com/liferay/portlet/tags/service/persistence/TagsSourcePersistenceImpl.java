@@ -288,7 +288,7 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 	}
 
 	public List<TagsSource> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -297,7 +297,7 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -313,12 +313,12 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<TagsSource> findAll(int begin, int end)
+	public List<TagsSource> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<TagsSource> findAll(int begin, int end, OrderByComparator obc)
+	public List<TagsSource> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = TagsSourceModelImpl.CACHE_ENABLED;
 		String finderClassName = TagsSource.class.getName();
@@ -328,7 +328,7 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -356,7 +356,7 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<TagsSource> list = (List<TagsSource>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

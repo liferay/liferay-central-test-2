@@ -56,10 +56,10 @@ public class ShoppingItemFinderUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findByKeywords(
-		long groupId, long[] categoryIds, java.lang.String keywords, int begin,
+		long groupId, long[] categoryIds, java.lang.String keywords, int start,
 		int end) throws com.liferay.portal.SystemException {
 		return getFinder()
-				   .findByKeywords(groupId, categoryIds, keywords, begin, end);
+				   .findByKeywords(groupId, categoryIds, keywords, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findBySale(

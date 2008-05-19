@@ -105,10 +105,10 @@ public abstract class TagsPropertyLocalServiceBaseImpl
 	}
 
 	public List<TagsProperty> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return tagsPropertyPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public TagsProperty updateTagsProperty(TagsProperty tagsProperty)

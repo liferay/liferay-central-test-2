@@ -301,9 +301,9 @@ public abstract class AddressLocalServiceBaseImpl implements AddressLocalService
 	}
 
 	public List<Address> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
-		return addressPersistence.findWithDynamicQuery(queryInitializer, begin,
+		return addressPersistence.findWithDynamicQuery(queryInitializer, start,
 			end);
 	}
 

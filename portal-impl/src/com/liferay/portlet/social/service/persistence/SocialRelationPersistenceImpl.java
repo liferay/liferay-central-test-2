@@ -348,12 +348,12 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<SocialRelation> findByUuid(String uuid, int begin, int end)
+	public List<SocialRelation> findByUuid(String uuid, int start, int end)
 		throws SystemException {
-		return findByUuid(uuid, begin, end, null);
+		return findByUuid(uuid, start, end, null);
 	}
 
-	public List<SocialRelation> findByUuid(String uuid, int begin, int end,
+	public List<SocialRelation> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
 		String finderClassName = SocialRelation.class.getName();
@@ -367,7 +367,7 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -411,7 +411,7 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 				}
 
 				List<SocialRelation> list = (List<SocialRelation>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -587,12 +587,12 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<SocialRelation> findByCompanyId(long companyId, int begin,
+	public List<SocialRelation> findByCompanyId(long companyId, int start,
 		int end) throws SystemException {
-		return findByCompanyId(companyId, begin, end, null);
+		return findByCompanyId(companyId, start, end, null);
 	}
 
-	public List<SocialRelation> findByCompanyId(long companyId, int begin,
+	public List<SocialRelation> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
 		String finderClassName = SocialRelation.class.getName();
@@ -606,7 +606,7 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -643,7 +643,7 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 				qPos.add(companyId);
 
 				List<SocialRelation> list = (List<SocialRelation>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -813,12 +813,12 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<SocialRelation> findByUserId1(long userId1, int begin, int end)
+	public List<SocialRelation> findByUserId1(long userId1, int start, int end)
 		throws SystemException {
-		return findByUserId1(userId1, begin, end, null);
+		return findByUserId1(userId1, start, end, null);
 	}
 
-	public List<SocialRelation> findByUserId1(long userId1, int begin, int end,
+	public List<SocialRelation> findByUserId1(long userId1, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
 		String finderClassName = SocialRelation.class.getName();
@@ -832,7 +832,7 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(userId1),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -869,7 +869,7 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 				qPos.add(userId1);
 
 				List<SocialRelation> list = (List<SocialRelation>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1038,12 +1038,12 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<SocialRelation> findByUserId2(long userId2, int begin, int end)
+	public List<SocialRelation> findByUserId2(long userId2, int start, int end)
 		throws SystemException {
-		return findByUserId2(userId2, begin, end, null);
+		return findByUserId2(userId2, start, end, null);
 	}
 
-	public List<SocialRelation> findByUserId2(long userId2, int begin, int end,
+	public List<SocialRelation> findByUserId2(long userId2, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
 		String finderClassName = SocialRelation.class.getName();
@@ -1057,7 +1057,7 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(userId2),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1094,7 +1094,7 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 				qPos.add(userId2);
 
 				List<SocialRelation> list = (List<SocialRelation>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1262,12 +1262,12 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<SocialRelation> findByType(int type, int begin, int end)
+	public List<SocialRelation> findByType(int type, int start, int end)
 		throws SystemException {
-		return findByType(type, begin, end, null);
+		return findByType(type, start, end, null);
 	}
 
-	public List<SocialRelation> findByType(int type, int begin, int end,
+	public List<SocialRelation> findByType(int type, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
 		String finderClassName = SocialRelation.class.getName();
@@ -1281,7 +1281,7 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Integer(type),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1318,7 +1318,7 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 				qPos.add(type);
 
 				List<SocialRelation> list = (List<SocialRelation>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1496,12 +1496,12 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<SocialRelation> findByC_T(long companyId, int type, int begin,
+	public List<SocialRelation> findByC_T(long companyId, int type, int start,
 		int end) throws SystemException {
-		return findByC_T(companyId, type, begin, end, null);
+		return findByC_T(companyId, type, start, end, null);
 	}
 
-	public List<SocialRelation> findByC_T(long companyId, int type, int begin,
+	public List<SocialRelation> findByC_T(long companyId, int type, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
 		String finderClassName = SocialRelation.class.getName();
@@ -1515,7 +1515,7 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Integer(type),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1558,7 +1558,7 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 				qPos.add(type);
 
 				List<SocialRelation> list = (List<SocialRelation>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1748,12 +1748,12 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<SocialRelation> findByU1_T(long userId1, int type, int begin,
+	public List<SocialRelation> findByU1_T(long userId1, int type, int start,
 		int end) throws SystemException {
-		return findByU1_T(userId1, type, begin, end, null);
+		return findByU1_T(userId1, type, start, end, null);
 	}
 
-	public List<SocialRelation> findByU1_T(long userId1, int type, int begin,
+	public List<SocialRelation> findByU1_T(long userId1, int type, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
 		String finderClassName = SocialRelation.class.getName();
@@ -1767,7 +1767,7 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(userId1), new Integer(type),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1810,7 +1810,7 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 				qPos.add(type);
 
 				List<SocialRelation> list = (List<SocialRelation>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -2000,12 +2000,12 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<SocialRelation> findByU2_T(long userId2, int type, int begin,
+	public List<SocialRelation> findByU2_T(long userId2, int type, int start,
 		int end) throws SystemException {
-		return findByU2_T(userId2, type, begin, end, null);
+		return findByU2_T(userId2, type, start, end, null);
 	}
 
-	public List<SocialRelation> findByU2_T(long userId2, int type, int begin,
+	public List<SocialRelation> findByU2_T(long userId2, int type, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
 		String finderClassName = SocialRelation.class.getName();
@@ -2019,7 +2019,7 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(userId2), new Integer(type),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -2062,7 +2062,7 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 				qPos.add(type);
 
 				List<SocialRelation> list = (List<SocialRelation>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -2322,7 +2322,7 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 	}
 
 	public List<SocialRelation> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -2331,7 +2331,7 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -2347,12 +2347,12 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<SocialRelation> findAll(int begin, int end)
+	public List<SocialRelation> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<SocialRelation> findAll(int begin, int end,
+	public List<SocialRelation> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SocialRelationModelImpl.CACHE_ENABLED;
 		String finderClassName = SocialRelation.class.getName();
@@ -2362,7 +2362,7 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -2391,7 +2391,7 @@ public class SocialRelationPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<SocialRelation> list = (List<SocialRelation>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

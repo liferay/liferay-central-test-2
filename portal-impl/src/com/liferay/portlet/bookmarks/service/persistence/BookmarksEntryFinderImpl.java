@@ -185,7 +185,7 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 		}
 	}
 
-	public List<BookmarksEntry> findByGroupId(long groupId, int begin, int end)
+	public List<BookmarksEntry> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -204,7 +204,7 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 			qPos.add(groupId);
 
 			return (List<BookmarksEntry>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -284,7 +284,7 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 	}
 
 	public List<BookmarksEntry> findByG_U(
-			long groupId, long userId, int begin, int end)
+			long groupId, long userId, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -304,7 +304,7 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 			qPos.add(userId);
 
 			return (List<BookmarksEntry>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

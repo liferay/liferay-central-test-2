@@ -302,10 +302,10 @@ public abstract class OrganizationLocalServiceBaseImpl
 	}
 
 	public List<Organization> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return organizationPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public Organization updateOrganization(Organization organization)

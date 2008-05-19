@@ -47,21 +47,21 @@ public class QueryUtil {
 	public static final int ALL_POS = -1;
 
 	public static Iterator<?> iterate(
-		Query query, Dialect dialect, int begin, int end) {
+		Query query, Dialect dialect, int start, int end) {
 
-		return list(query, dialect, begin, end).iterator();
+		return list(query, dialect, start, end).iterator();
 	}
 
 	public static List<?> list(
-		Query query, Dialect dialect, int begin, int end) {
+		Query query, Dialect dialect, int start, int end) {
 
-		if ((begin == ALL_POS) && (end == ALL_POS)) {
+		if ((start == ALL_POS) && (end == ALL_POS)) {
 			return query.list();
 		}
 		else {
 			if (dialect.supportsLimit()) {
-				query.setMaxResults(end - begin);
-				query.setFirstResult(begin);
+				query.setMaxResults(end - start);
+				query.setFirstResult(start);
 
 				return query.list();
 			}
@@ -70,8 +70,8 @@ public class QueryUtil {
 
 				ScrollableResults sr = query.scroll();
 
-				if (sr.first() && sr.scroll(begin)) {
-					for (int i = begin; i < end; i++) {
+				if (sr.first() && sr.scroll(start)) {
+					for (int i = start; i < end; i++) {
 						Object obj = sr.get(0);
 
 						list.add(obj);

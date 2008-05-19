@@ -304,10 +304,10 @@ public abstract class PasswordPolicyRelLocalServiceBaseImpl
 	}
 
 	public List<PasswordPolicyRel> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return passwordPolicyRelPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public PasswordPolicyRel updatePasswordPolicyRel(

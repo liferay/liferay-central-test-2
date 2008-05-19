@@ -86,11 +86,11 @@ public class MembershipRequestLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.MembershipRequest> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
 
 		return membershipRequestLocalService.dynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public static com.liferay.portal.model.MembershipRequest updateMembershipRequest(
@@ -135,11 +135,11 @@ public class MembershipRequestLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.MembershipRequest> search(
-		long groupId, int status, int begin, int end)
+		long groupId, int status, int start, int end)
 		throws com.liferay.portal.SystemException {
 		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
 
-		return membershipRequestLocalService.search(groupId, status, begin, end);
+		return membershipRequestLocalService.search(groupId, status, start, end);
 	}
 
 	public static int searchCount(long groupId, int status)

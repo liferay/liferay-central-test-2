@@ -86,10 +86,10 @@ public class TagsPropertyLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
 
-		return tagsPropertyLocalService.dynamicQuery(queryInitializer, begin,
+		return tagsPropertyLocalService.dynamicQuery(queryInitializer, start,
 			end);
 	}
 

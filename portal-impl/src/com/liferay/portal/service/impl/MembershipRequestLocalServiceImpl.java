@@ -110,11 +110,11 @@ public class MembershipRequestLocalServiceImpl
 	}
 
 	public List<MembershipRequest> search(
-			long groupId, int status, int begin, int end)
+			long groupId, int status, int start, int end)
 		throws SystemException {
 
 		return membershipRequestPersistence.findByG_S(
-			groupId, status, begin, end);
+			groupId, status, start, end);
 	}
 
 	public int searchCount(long groupId, int status) throws SystemException {

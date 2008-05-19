@@ -86,11 +86,11 @@ public class AnnouncementsFlagLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
 
 		return announcementsFlagLocalService.dynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag updateAnnouncementsFlag(

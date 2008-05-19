@@ -49,8 +49,8 @@ public class TagsEntryFinderUtil {
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByC_N_P(
 		long companyId, java.lang.String name, java.lang.String[] properties,
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getFinder().findByC_N_P(companyId, name, properties, begin, end);
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getFinder().findByC_N_P(companyId, name, properties, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByG_C_C_N(
@@ -61,9 +61,9 @@ public class TagsEntryFinderUtil {
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByG_C_C_N(
 		long groupId, long companyId, long classNameId, java.lang.String name,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getFinder()
-				   .findByG_C_C_N(groupId, companyId, classNameId, name, begin,
+				   .findByG_C_C_N(groupId, companyId, classNameId, name, start,
 			end);
 	}
 

@@ -352,12 +352,12 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<BookmarksEntry> findByUuid(String uuid, int begin, int end)
+	public List<BookmarksEntry> findByUuid(String uuid, int start, int end)
 		throws SystemException {
-		return findByUuid(uuid, begin, end, null);
+		return findByUuid(uuid, start, end, null);
 	}
 
-	public List<BookmarksEntry> findByUuid(String uuid, int begin, int end,
+	public List<BookmarksEntry> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = BookmarksEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = BookmarksEntry.class.getName();
@@ -371,7 +371,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -422,7 +422,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 				}
 
 				List<BookmarksEntry> list = (List<BookmarksEntry>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -609,12 +609,12 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<BookmarksEntry> findByFolderId(long folderId, int begin, int end)
+	public List<BookmarksEntry> findByFolderId(long folderId, int start, int end)
 		throws SystemException {
-		return findByFolderId(folderId, begin, end, null);
+		return findByFolderId(folderId, start, end, null);
 	}
 
-	public List<BookmarksEntry> findByFolderId(long folderId, int begin,
+	public List<BookmarksEntry> findByFolderId(long folderId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = BookmarksEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = BookmarksEntry.class.getName();
@@ -628,7 +628,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(folderId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -672,7 +672,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 				qPos.add(folderId);
 
 				List<BookmarksEntry> list = (List<BookmarksEntry>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -813,7 +813,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 	}
 
 	public List<BookmarksEntry> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -822,7 +822,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -838,12 +838,12 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<BookmarksEntry> findAll(int begin, int end)
+	public List<BookmarksEntry> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<BookmarksEntry> findAll(int begin, int end,
+	public List<BookmarksEntry> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = BookmarksEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = BookmarksEntry.class.getName();
@@ -853,7 +853,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -889,7 +889,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<BookmarksEntry> list = (List<BookmarksEntry>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

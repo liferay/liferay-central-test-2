@@ -344,13 +344,13 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	}
 
 	public List<MBMessage> getCategoryMessages(
-			long categoryId, int begin, int end)
+			long categoryId, int start, int end)
 		throws PortalException, SystemException {
 
 		List<MBMessage> messages = new ArrayList<MBMessage>();
 
 		Iterator<MBMessage> itr = mbMessageLocalService.getCategoryMessages(
-			categoryId, begin, end).iterator();
+			categoryId, start, end).iterator();
 
 		while (itr.hasNext()) {
 			MBMessage message = itr.next();

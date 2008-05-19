@@ -336,12 +336,12 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<ShoppingCategory> findByGroupId(long groupId, int begin, int end)
+	public List<ShoppingCategory> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
-		return findByGroupId(groupId, begin, end, null);
+		return findByGroupId(groupId, start, end, null);
 	}
 
-	public List<ShoppingCategory> findByGroupId(long groupId, int begin,
+	public List<ShoppingCategory> findByGroupId(long groupId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ShoppingCategoryModelImpl.CACHE_ENABLED;
 		String finderClassName = ShoppingCategory.class.getName();
@@ -355,7 +355,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -399,7 +399,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 				qPos.add(groupId);
 
 				List<ShoppingCategory> list = (List<ShoppingCategory>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -592,12 +592,12 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 	}
 
 	public List<ShoppingCategory> findByG_P(long groupId,
-		long parentCategoryId, int begin, int end) throws SystemException {
-		return findByG_P(groupId, parentCategoryId, begin, end, null);
+		long parentCategoryId, int start, int end) throws SystemException {
+		return findByG_P(groupId, parentCategoryId, start, end, null);
 	}
 
 	public List<ShoppingCategory> findByG_P(long groupId,
-		long parentCategoryId, int begin, int end, OrderByComparator obc)
+		long parentCategoryId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = ShoppingCategoryModelImpl.CACHE_ENABLED;
 		String finderClassName = ShoppingCategory.class.getName();
@@ -611,7 +611,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(parentCategoryId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -661,7 +661,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 				qPos.add(parentCategoryId);
 
 				List<ShoppingCategory> list = (List<ShoppingCategory>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -816,7 +816,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 	}
 
 	public List<ShoppingCategory> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -825,7 +825,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -841,12 +841,12 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<ShoppingCategory> findAll(int begin, int end)
+	public List<ShoppingCategory> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<ShoppingCategory> findAll(int begin, int end,
+	public List<ShoppingCategory> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ShoppingCategoryModelImpl.CACHE_ENABLED;
 		String finderClassName = ShoppingCategory.class.getName();
@@ -856,7 +856,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -892,7 +892,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<ShoppingCategory> list = (List<ShoppingCategory>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

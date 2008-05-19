@@ -352,12 +352,12 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<JournalStructure> findByUuid(String uuid, int begin, int end)
+	public List<JournalStructure> findByUuid(String uuid, int start, int end)
 		throws SystemException {
-		return findByUuid(uuid, begin, end, null);
+		return findByUuid(uuid, start, end, null);
 	}
 
-	public List<JournalStructure> findByUuid(String uuid, int begin, int end,
+	public List<JournalStructure> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalStructureModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalStructure.class.getName();
@@ -371,7 +371,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -421,7 +421,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				}
 
 				List<JournalStructure> list = (List<JournalStructure>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -719,12 +719,12 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<JournalStructure> findByGroupId(long groupId, int begin, int end)
+	public List<JournalStructure> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
-		return findByGroupId(groupId, begin, end, null);
+		return findByGroupId(groupId, start, end, null);
 	}
 
-	public List<JournalStructure> findByGroupId(long groupId, int begin,
+	public List<JournalStructure> findByGroupId(long groupId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalStructureModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalStructure.class.getName();
@@ -738,7 +738,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -781,7 +781,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				qPos.add(groupId);
 
 				List<JournalStructure> list = (List<JournalStructure>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -968,12 +968,12 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 	}
 
 	public List<JournalStructure> findByStructureId(String structureId,
-		int begin, int end) throws SystemException {
-		return findByStructureId(structureId, begin, end, null);
+		int start, int end) throws SystemException {
+		return findByStructureId(structureId, start, end, null);
 	}
 
 	public List<JournalStructure> findByStructureId(String structureId,
-		int begin, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalStructureModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalStructure.class.getName();
 		String finderMethodName = "findByStructureId";
@@ -986,7 +986,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				structureId,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1036,7 +1036,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				}
 
 				List<JournalStructure> list = (List<JournalStructure>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1296,7 +1296,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 	}
 
 	public List<JournalStructure> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -1305,7 +1305,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -1321,12 +1321,12 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<JournalStructure> findAll(int begin, int end)
+	public List<JournalStructure> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<JournalStructure> findAll(int begin, int end,
+	public List<JournalStructure> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalStructureModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalStructure.class.getName();
@@ -1336,7 +1336,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1371,7 +1371,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<JournalStructure> list = (List<JournalStructure>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

@@ -354,12 +354,12 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<SCLicense> findByActive(boolean active, int begin, int end)
+	public List<SCLicense> findByActive(boolean active, int start, int end)
 		throws SystemException {
-		return findByActive(active, begin, end, null);
+		return findByActive(active, start, end, null);
 	}
 
-	public List<SCLicense> findByActive(boolean active, int begin, int end,
+	public List<SCLicense> findByActive(boolean active, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SCLicenseModelImpl.CACHE_ENABLED;
 		String finderClassName = SCLicense.class.getName();
@@ -373,7 +373,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				Boolean.valueOf(active),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -416,7 +416,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 				qPos.add(active);
 
 				List<SCLicense> list = (List<SCLicense>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -605,12 +605,12 @@ public class SCLicensePersistenceImpl extends BasePersistence
 	}
 
 	public List<SCLicense> findByA_R(boolean active, boolean recommended,
-		int begin, int end) throws SystemException {
-		return findByA_R(active, recommended, begin, end, null);
+		int start, int end) throws SystemException {
+		return findByA_R(active, recommended, start, end, null);
 	}
 
 	public List<SCLicense> findByA_R(boolean active, boolean recommended,
-		int begin, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SCLicenseModelImpl.CACHE_ENABLED;
 		String finderClassName = SCLicense.class.getName();
 		String finderMethodName = "findByA_R";
@@ -623,7 +623,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				Boolean.valueOf(active), Boolean.valueOf(recommended),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -672,7 +672,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 				qPos.add(recommended);
 
 				List<SCLicense> list = (List<SCLicense>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -824,7 +824,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 	}
 
 	public List<SCLicense> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -833,7 +833,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -849,12 +849,12 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<SCLicense> findAll(int begin, int end)
+	public List<SCLicense> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<SCLicense> findAll(int begin, int end, OrderByComparator obc)
+	public List<SCLicense> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = SCLicenseModelImpl.CACHE_ENABLED;
 		String finderClassName = SCLicense.class.getName();
@@ -864,7 +864,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -899,7 +899,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<SCLicense> list = (List<SCLicense>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1144,13 +1144,13 @@ public class SCLicensePersistenceImpl extends BasePersistence
 	}
 
 	public List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getSCProductEntries(
-		long pk, int begin, int end)
+		long pk, int start, int end)
 		throws NoSuchLicenseException, SystemException {
-		return getSCProductEntries(pk, begin, end, null);
+		return getSCProductEntries(pk, start, end, null);
 	}
 
 	public List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getSCProductEntries(
-		long pk, int begin, int end, OrderByComparator obc)
+		long pk, int start, int end, OrderByComparator obc)
 		throws NoSuchLicenseException, SystemException {
 		boolean finderClassNameCacheEnabled = SCLicenseModelImpl.CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES;
 
@@ -1162,7 +1162,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				new Long(pk), String.valueOf(start), String.valueOf(end),
 				String.valueOf(obc)
 			};
 
@@ -1208,7 +1208,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 				List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> list =
 					(List<com.liferay.portlet.softwarecatalog.model.SCProductEntry>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,

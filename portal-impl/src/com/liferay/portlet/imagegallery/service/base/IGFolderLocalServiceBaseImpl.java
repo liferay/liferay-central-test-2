@@ -110,10 +110,10 @@ public abstract class IGFolderLocalServiceBaseImpl
 	}
 
 	public List<IGFolder> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return igFolderPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public IGFolder updateIGFolder(IGFolder igFolder) throws SystemException {

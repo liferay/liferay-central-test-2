@@ -42,7 +42,7 @@ public interface TagsEntryFinder {
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByC_N_P(
 		long companyId, java.lang.String name, java.lang.String[] properties,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByG_C_C_N(
 		long groupId, long companyId, long classNameId, java.lang.String name)
@@ -50,5 +50,5 @@ public interface TagsEntryFinder {
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByG_C_C_N(
 		long groupId, long companyId, long classNameId, java.lang.String name,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 }

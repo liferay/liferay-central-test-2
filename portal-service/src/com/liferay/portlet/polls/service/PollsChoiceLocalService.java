@@ -68,7 +68,7 @@ public interface PollsChoiceLocalService {
 
 	public java.util.List<com.liferay.portlet.polls.model.PollsChoice> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.polls.model.PollsChoice updatePollsChoice(
 		com.liferay.portlet.polls.model.PollsChoice pollsChoice)

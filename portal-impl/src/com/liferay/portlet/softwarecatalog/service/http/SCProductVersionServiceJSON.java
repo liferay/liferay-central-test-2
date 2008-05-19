@@ -117,13 +117,13 @@ public class SCProductVersionServiceJSON {
 		return SCProductVersionJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONArray getProductVersions(long productEntryId, int begin,
+	public static JSONArray getProductVersions(long productEntryId, int start,
 		int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> returnValue =
 			SCProductVersionServiceUtil.getProductVersions(productEntryId,
-				begin, end);
+				start, end);
 
 		return SCProductVersionJSONSerializer.toJSONArray(returnValue);
 	}

@@ -113,8 +113,8 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	public List<MBBan> dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
-		return mbBanPersistence.findWithDynamicQuery(queryInitializer, begin,
+		int start, int end) throws SystemException {
+		return mbBanPersistence.findWithDynamicQuery(queryInitializer, start,
 			end);
 	}
 

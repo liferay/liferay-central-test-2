@@ -273,7 +273,7 @@ public class MBCategoryServiceHttp {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getCategories(
 		HttpPrincipal httpPrincipal, long groupId, long parentCategoryId,
-		int begin, int end)
+		int start, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -281,7 +281,7 @@ public class MBCategoryServiceHttp {
 
 			Object paramObj1 = new LongWrapper(parentCategoryId);
 
-			Object paramObj2 = new IntegerWrapper(begin);
+			Object paramObj2 = new IntegerWrapper(start);
 
 			Object paramObj3 = new IntegerWrapper(end);
 

@@ -96,16 +96,16 @@ public class LayoutUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Layout> findByGroupId(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByGroupId(groupId, begin, end);
+		return getPersistence().findByGroupId(groupId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Layout> findByGroupId(
-		long groupId, int begin, int end,
+		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByGroupId(groupId, begin, end, obc);
+		return getPersistence().findByGroupId(groupId, start, end, obc);
 	}
 
 	public static com.liferay.portal.model.Layout findByGroupId_First(
@@ -136,16 +136,16 @@ public class LayoutUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Layout> findByCompanyId(
-		long companyId, int begin, int end)
+		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId(companyId, begin, end);
+		return getPersistence().findByCompanyId(companyId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Layout> findByCompanyId(
-		long companyId, int begin, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId(companyId, begin, end, obc);
+		return getPersistence().findByCompanyId(companyId, start, end, obc);
 	}
 
 	public static com.liferay.portal.model.Layout findByCompanyId_First(
@@ -201,17 +201,17 @@ public class LayoutUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Layout> findByG_P(
-		long groupId, boolean privateLayout, int begin, int end)
+		long groupId, boolean privateLayout, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByG_P(groupId, privateLayout, begin, end);
+		return getPersistence().findByG_P(groupId, privateLayout, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Layout> findByG_P(
-		long groupId, boolean privateLayout, int begin, int end,
+		long groupId, boolean privateLayout, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findByG_P(groupId, privateLayout, begin, end, obc);
+				   .findByG_P(groupId, privateLayout, start, end, obc);
 	}
 
 	public static com.liferay.portal.model.Layout findByG_P_First(
@@ -260,19 +260,19 @@ public class LayoutUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Layout> findByG_P_P(
-		long groupId, boolean privateLayout, long parentLayoutId, int begin,
+		long groupId, boolean privateLayout, long parentLayoutId, int start,
 		int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findByG_P_P(groupId, privateLayout, parentLayoutId, begin,
+				   .findByG_P_P(groupId, privateLayout, parentLayoutId, start,
 			end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Layout> findByG_P_P(
-		long groupId, boolean privateLayout, long parentLayoutId, int begin,
+		long groupId, boolean privateLayout, long parentLayoutId, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findByG_P_P(groupId, privateLayout, parentLayoutId, begin,
+				   .findByG_P_P(groupId, privateLayout, parentLayoutId, start,
 			end, obc);
 	}
 
@@ -325,18 +325,18 @@ public class LayoutUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Layout> findByG_P_T(
-		long groupId, boolean privateLayout, java.lang.String type, int begin,
+		long groupId, boolean privateLayout, java.lang.String type, int start,
 		int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findByG_P_T(groupId, privateLayout, type, begin, end);
+				   .findByG_P_T(groupId, privateLayout, type, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Layout> findByG_P_T(
-		long groupId, boolean privateLayout, java.lang.String type, int begin,
+		long groupId, boolean privateLayout, java.lang.String type, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findByG_P_T(groupId, privateLayout, type, begin, end, obc);
+				   .findByG_P_T(groupId, privateLayout, type, start, end, obc);
 	}
 
 	public static com.liferay.portal.model.Layout findByG_P_T_First(
@@ -375,9 +375,9 @@ public class LayoutUtil {
 
 	public static java.util.List<com.liferay.portal.model.Layout> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findWithDynamicQuery(queryInitializer, begin, end);
+				   .findWithDynamicQuery(queryInitializer, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Layout> findAll()
@@ -386,14 +386,14 @@ public class LayoutUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Layout> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end);
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Layout> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end, obc);
+		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByGroupId(long groupId)

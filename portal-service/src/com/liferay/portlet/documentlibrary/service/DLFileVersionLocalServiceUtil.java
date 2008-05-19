@@ -86,10 +86,10 @@ public class DLFileVersionLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
 
-		return dlFileVersionLocalService.dynamicQuery(queryInitializer, begin,
+		return dlFileVersionLocalService.dynamicQuery(queryInitializer, start,
 			end);
 	}
 

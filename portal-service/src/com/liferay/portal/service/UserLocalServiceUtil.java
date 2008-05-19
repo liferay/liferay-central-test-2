@@ -85,10 +85,10 @@ public class UserLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.User> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
-		return userLocalService.dynamicQuery(queryInitializer, begin, end);
+		return userLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
 	public static com.liferay.portal.model.User updateUser(
@@ -392,14 +392,14 @@ public class UserLocalServiceUtil {
 		java.lang.String primKey, java.lang.String actionId,
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String emailAddress,
-		boolean andOperator, int begin, int end)
+		boolean andOperator, int start, int end)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		return userLocalService.getPermissionUsers(companyId, groupId, name,
 			primKey, actionId, firstName, middleName, lastName, emailAddress,
-			andOperator, begin, end);
+			andOperator, start, end);
 	}
 
 	public static int getPermissionUsersCount(long companyId, long groupId,
@@ -441,43 +441,43 @@ public class UserLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getSocialUsers(
-		long userId, int begin, int end,
+		long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
-		return userLocalService.getSocialUsers(userId, begin, end, obc);
+		return userLocalService.getSocialUsers(userId, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getSocialUsers(
-		long userId, int type, int begin, int end,
+		long userId, int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
-		return userLocalService.getSocialUsers(userId, type, begin, end, obc);
+		return userLocalService.getSocialUsers(userId, type, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getSocialUsers(
-		long userId1, long userId2, int begin, int end,
+		long userId1, long userId2, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
-		return userLocalService.getSocialUsers(userId1, userId2, begin, end, obc);
+		return userLocalService.getSocialUsers(userId1, userId2, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getSocialUsers(
-		long userId1, long userId2, int type, int begin, int end,
+		long userId1, long userId2, int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
-		return userLocalService.getSocialUsers(userId1, userId2, type, begin,
+		return userLocalService.getSocialUsers(userId1, userId2, type, start,
 			end, obc);
 	}
 
@@ -668,13 +668,13 @@ public class UserLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.User> search(
 		long companyId, java.lang.String keywords, java.lang.Boolean active,
-		java.util.LinkedHashMap<String, Object> params, int begin, int end,
+		java.util.LinkedHashMap<String, Object> params, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		return userLocalService.search(companyId, keywords, active, params,
-			begin, end, obc);
+			start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> search(
@@ -683,13 +683,13 @@ public class UserLocalServiceUtil {
 		java.lang.String screenName, java.lang.String emailAddress,
 		java.lang.Boolean active,
 		java.util.LinkedHashMap<String, Object> params, boolean andSearch,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		return userLocalService.search(companyId, firstName, middleName,
 			lastName, screenName, emailAddress, active, params, andSearch,
-			begin, end, obc);
+			start, end, obc);
 	}
 
 	public static int searchCount(long companyId, java.lang.String keywords,

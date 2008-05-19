@@ -339,12 +339,12 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 	}
 
 	public List<RatingsEntry> findByC_C(long classNameId, long classPK,
-		int begin, int end) throws SystemException {
-		return findByC_C(classNameId, classPK, begin, end, null);
+		int start, int end) throws SystemException {
+		return findByC_C(classNameId, classPK, start, end, null);
 	}
 
 	public List<RatingsEntry> findByC_C(long classNameId, long classPK,
-		int begin, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = RatingsEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = RatingsEntry.class.getName();
 		String finderMethodName = "findByC_C";
@@ -357,7 +357,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId), new Long(classPK),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -400,7 +400,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 				qPos.add(classPK);
 
 				List<RatingsEntry> list = (List<RatingsEntry>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -659,7 +659,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 	}
 
 	public List<RatingsEntry> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -668,7 +668,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -684,12 +684,12 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<RatingsEntry> findAll(int begin, int end)
+	public List<RatingsEntry> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<RatingsEntry> findAll(int begin, int end, OrderByComparator obc)
+	public List<RatingsEntry> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = RatingsEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = RatingsEntry.class.getName();
@@ -699,7 +699,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -728,7 +728,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<RatingsEntry> list = (List<RatingsEntry>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

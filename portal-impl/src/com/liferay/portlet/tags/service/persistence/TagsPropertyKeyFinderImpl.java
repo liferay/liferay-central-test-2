@@ -89,7 +89,7 @@ public class TagsPropertyKeyFinderImpl implements TagsPropertyKeyFinder {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public String[] findByCompanyId(long companyId, int begin, int end)
+	public String[] findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -108,7 +108,7 @@ public class TagsPropertyKeyFinderImpl implements TagsPropertyKeyFinder {
 			qPos.add(companyId);
 
 			List<String> list = (List<String>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 
 			return list.toArray(new String[list.size()]);
 		}

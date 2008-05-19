@@ -86,10 +86,10 @@ public class DLFileEntryLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
-		return dlFileEntryLocalService.dynamicQuery(queryInitializer, begin, end);
+		return dlFileEntryLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateDLFileEntry(
@@ -328,21 +328,21 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getCompanyFileEntries(
-		long companyId, int begin, int end)
+		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
-		return dlFileEntryLocalService.getCompanyFileEntries(companyId, begin,
+		return dlFileEntryLocalService.getCompanyFileEntries(companyId, start,
 			end);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getCompanyFileEntries(
-		long companyId, int begin, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
-		return dlFileEntryLocalService.getCompanyFileEntries(companyId, begin,
+		return dlFileEntryLocalService.getCompanyFileEntries(companyId, start,
 			end, obc);
 	}
 
@@ -381,38 +381,38 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
-		long folderId, int begin, int end)
+		long folderId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
-		return dlFileEntryLocalService.getFileEntries(folderId, begin, end);
+		return dlFileEntryLocalService.getFileEntries(folderId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
-		long folderId, int begin, int end,
+		long folderId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
-		return dlFileEntryLocalService.getFileEntries(folderId, begin, end, obc);
+		return dlFileEntryLocalService.getFileEntries(folderId, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntriesAndShortcuts(
-		long folderId, int begin, int end)
+		long folderId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
 		return dlFileEntryLocalService.getFileEntriesAndShortcuts(folderId,
-			begin, end);
+			start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntriesAndShortcuts(
-		java.util.List<Long> folderIds, int begin, int end)
+		java.util.List<Long> folderIds, int start, int end)
 		throws com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
 		return dlFileEntryLocalService.getFileEntriesAndShortcuts(folderIds,
-			begin, end);
+			start, end);
 	}
 
 	public static int getFileEntriesAndShortcutsCount(long folderId)
@@ -483,40 +483,40 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getGroupFileEntries(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
-		return dlFileEntryLocalService.getGroupFileEntries(groupId, begin, end);
+		return dlFileEntryLocalService.getGroupFileEntries(groupId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getGroupFileEntries(
-		long groupId, int begin, int end,
+		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
-		return dlFileEntryLocalService.getGroupFileEntries(groupId, begin, end,
+		return dlFileEntryLocalService.getGroupFileEntries(groupId, start, end,
 			obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getGroupFileEntries(
-		long groupId, long userId, int begin, int end)
+		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
 		return dlFileEntryLocalService.getGroupFileEntries(groupId, userId,
-			begin, end);
+			start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getGroupFileEntries(
-		long groupId, long userId, int begin, int end,
+		long groupId, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
 		return dlFileEntryLocalService.getGroupFileEntries(groupId, userId,
-			begin, end, obc);
+			start, end, obc);
 	}
 
 	public static int getGroupFileEntriesCount(long groupId)

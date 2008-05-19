@@ -187,7 +187,7 @@ public class IGImageFinderImpl implements IGImageFinder {
 		}
 	}
 
-	public List<IGImage> findByGroupId(long groupId, int begin, int end)
+	public List<IGImage> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -206,7 +206,7 @@ public class IGImageFinderImpl implements IGImageFinder {
 			qPos.add(groupId);
 
 			return (List<IGImage>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -286,7 +286,7 @@ public class IGImageFinderImpl implements IGImageFinder {
 	}
 
 	public List<IGImage> findByG_U(
-			long groupId, long userId, int begin, int end)
+			long groupId, long userId, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -306,7 +306,7 @@ public class IGImageFinderImpl implements IGImageFinder {
 			qPos.add(userId);
 
 			return (List<IGImage>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

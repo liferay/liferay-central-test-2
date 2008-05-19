@@ -81,11 +81,11 @@ public interface SocialRelationPersistence {
 		java.lang.String uuid) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findByUuid(
-		java.lang.String uuid, int begin, int end)
+		java.lang.String uuid, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findByUuid(
-		java.lang.String uuid, int begin, int end,
+		java.lang.String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -111,11 +111,11 @@ public interface SocialRelationPersistence {
 		long companyId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findByCompanyId(
-		long companyId, int begin, int end)
+		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findByCompanyId(
-		long companyId, int begin, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -139,11 +139,11 @@ public interface SocialRelationPersistence {
 		long userId1) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findByUserId1(
-		long userId1, int begin, int end)
+		long userId1, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findByUserId1(
-		long userId1, int begin, int end,
+		long userId1, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -167,11 +167,11 @@ public interface SocialRelationPersistence {
 		long userId2) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findByUserId2(
-		long userId2, int begin, int end)
+		long userId2, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findByUserId2(
-		long userId2, int begin, int end,
+		long userId2, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -195,10 +195,10 @@ public interface SocialRelationPersistence {
 		int type) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findByType(
-		int type, int begin, int end) throws com.liferay.portal.SystemException;
+		int type, int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findByType(
-		int type, int begin, int end,
+		int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -222,11 +222,11 @@ public interface SocialRelationPersistence {
 		long companyId, int type) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findByC_T(
-		long companyId, int type, int begin, int end)
+		long companyId, int type, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findByC_T(
-		long companyId, int type, int begin, int end,
+		long companyId, int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -252,11 +252,11 @@ public interface SocialRelationPersistence {
 		long userId1, int type) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findByU1_T(
-		long userId1, int type, int begin, int end)
+		long userId1, int type, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findByU1_T(
-		long userId1, int type, int begin, int end,
+		long userId1, int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -282,11 +282,11 @@ public interface SocialRelationPersistence {
 		long userId2, int type) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findByU2_T(
-		long userId2, int type, int begin, int end)
+		long userId2, int type, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findByU2_T(
-		long userId2, int type, int begin, int end,
+		long userId2, int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -323,16 +323,16 @@ public interface SocialRelationPersistence {
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findAll()
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByUuid(java.lang.String uuid)

@@ -95,10 +95,10 @@ public abstract class AnnouncementsDeliveryLocalServiceBaseImpl
 	}
 
 	public List<AnnouncementsDelivery> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return announcementsDeliveryPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public AnnouncementsDelivery updateAnnouncementsDelivery(

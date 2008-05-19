@@ -86,10 +86,10 @@ public class PluginSettingLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.PluginSetting> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
 
-		return pluginSettingLocalService.dynamicQuery(queryInitializer, begin,
+		return pluginSettingLocalService.dynamicQuery(queryInitializer, start,
 			end);
 	}
 

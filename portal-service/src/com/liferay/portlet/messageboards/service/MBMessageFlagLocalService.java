@@ -68,7 +68,7 @@ public interface MBMessageFlagLocalService {
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag updateMBMessageFlag(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)

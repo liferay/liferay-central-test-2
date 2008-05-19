@@ -96,17 +96,17 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 	}
 
 	public TagsAssetDisplay[] getCompanyAssetDisplays(
-			long companyId, int begin, int end, String languageId)
+			long companyId, int start, int end, String languageId)
 		throws PortalException, SystemException {
 
 		return tagsAssetLocalService.getCompanyAssetDisplays(
-			companyId, begin, end, languageId);
+			companyId, start, end, languageId);
 	}
 
-	public List<TagsAsset> getCompanyAssets(long companyId, int begin, int end)
+	public List<TagsAsset> getCompanyAssets(long companyId, int start, int end)
 		throws SystemException {
 
-		return tagsAssetLocalService.getCompanyAssets(companyId, begin, end);
+		return tagsAssetLocalService.getCompanyAssets(companyId, start, end);
 	}
 
 	public int getCompanyAssetsCount(long companyId) throws SystemException {
@@ -136,11 +136,11 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 
 	public TagsAssetDisplay[] searchAssetDisplays(
 			long companyId, String portletId, String keywords,
-			String languageId, int begin, int end)
+			String languageId, int start, int end)
 		throws PortalException, SystemException {
 
 		return tagsAssetLocalService.searchAssetDisplays(
-			companyId, portletId, keywords, languageId, begin, end);
+			companyId, portletId, keywords, languageId, start, end);
 	}
 
 	public int searchAssetDisplaysCount(

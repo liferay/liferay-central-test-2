@@ -99,17 +99,17 @@ public class SCProductScreenshotUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> findByProductEntryId(
-		long productEntryId, int begin, int end)
+		long productEntryId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByProductEntryId(productEntryId, begin, end);
+		return getPersistence().findByProductEntryId(productEntryId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> findByProductEntryId(
-		long productEntryId, int begin, int end,
+		long productEntryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findByProductEntryId(productEntryId, begin, end, obc);
+				   .findByProductEntryId(productEntryId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot findByProductEntryId_First(
@@ -183,9 +183,9 @@ public class SCProductScreenshotUtil {
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findWithDynamicQuery(queryInitializer, begin, end);
+				   .findWithDynamicQuery(queryInitializer, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> findAll()
@@ -194,14 +194,14 @@ public class SCProductScreenshotUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end);
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end, obc);
+		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByProductEntryId(long productEntryId)

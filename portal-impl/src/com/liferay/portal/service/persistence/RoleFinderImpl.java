@@ -388,7 +388,7 @@ public class RoleFinderImpl implements RoleFinder {
 
 	public List<Role> findByC_N_D_T(
 			long companyId, String name, String description, Integer type,
-			LinkedHashMap<String, Object> params, int begin, int end,
+			LinkedHashMap<String, Object> params, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
@@ -428,7 +428,7 @@ public class RoleFinderImpl implements RoleFinder {
 			}
 
 			return (List<Role>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

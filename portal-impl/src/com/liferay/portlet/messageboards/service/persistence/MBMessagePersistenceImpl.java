@@ -349,12 +349,12 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<MBMessage> findByUuid(String uuid, int begin, int end)
+	public List<MBMessage> findByUuid(String uuid, int start, int end)
 		throws SystemException {
-		return findByUuid(uuid, begin, end, null);
+		return findByUuid(uuid, start, end, null);
 	}
 
-	public List<MBMessage> findByUuid(String uuid, int begin, int end,
+	public List<MBMessage> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBMessageModelImpl.CACHE_ENABLED;
 		String finderClassName = MBMessage.class.getName();
@@ -368,7 +368,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -419,7 +419,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 				}
 
 				List<MBMessage> list = (List<MBMessage>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -606,12 +606,12 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<MBMessage> findByCompanyId(long companyId, int begin, int end)
+	public List<MBMessage> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
-		return findByCompanyId(companyId, begin, end, null);
+		return findByCompanyId(companyId, start, end, null);
 	}
 
-	public List<MBMessage> findByCompanyId(long companyId, int begin, int end,
+	public List<MBMessage> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBMessageModelImpl.CACHE_ENABLED;
 		String finderClassName = MBMessage.class.getName();
@@ -625,7 +625,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -669,7 +669,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 				qPos.add(companyId);
 
 				List<MBMessage> list = (List<MBMessage>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -850,12 +850,12 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<MBMessage> findByCategoryId(long categoryId, int begin, int end)
+	public List<MBMessage> findByCategoryId(long categoryId, int start, int end)
 		throws SystemException {
-		return findByCategoryId(categoryId, begin, end, null);
+		return findByCategoryId(categoryId, start, end, null);
 	}
 
-	public List<MBMessage> findByCategoryId(long categoryId, int begin,
+	public List<MBMessage> findByCategoryId(long categoryId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBMessageModelImpl.CACHE_ENABLED;
 		String finderClassName = MBMessage.class.getName();
@@ -869,7 +869,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(categoryId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -913,7 +913,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 				qPos.add(categoryId);
 
 				List<MBMessage> list = (List<MBMessage>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1095,12 +1095,12 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<MBMessage> findByThreadId(long threadId, int begin, int end)
+	public List<MBMessage> findByThreadId(long threadId, int start, int end)
 		throws SystemException {
-		return findByThreadId(threadId, begin, end, null);
+		return findByThreadId(threadId, start, end, null);
 	}
 
-	public List<MBMessage> findByThreadId(long threadId, int begin, int end,
+	public List<MBMessage> findByThreadId(long threadId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBMessageModelImpl.CACHE_ENABLED;
 		String finderClassName = MBMessage.class.getName();
@@ -1114,7 +1114,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(threadId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1158,7 +1158,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 				qPos.add(threadId);
 
 				List<MBMessage> list = (List<MBMessage>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1349,12 +1349,12 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<MBMessage> findByC_T(long categoryId, long threadId, int begin,
+	public List<MBMessage> findByC_T(long categoryId, long threadId, int start,
 		int end) throws SystemException {
-		return findByC_T(categoryId, threadId, begin, end, null);
+		return findByC_T(categoryId, threadId, start, end, null);
 	}
 
-	public List<MBMessage> findByC_T(long categoryId, long threadId, int begin,
+	public List<MBMessage> findByC_T(long categoryId, long threadId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBMessageModelImpl.CACHE_ENABLED;
 		String finderClassName = MBMessage.class.getName();
@@ -1368,7 +1368,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(categoryId), new Long(threadId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1418,7 +1418,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 				qPos.add(threadId);
 
 				List<MBMessage> list = (List<MBMessage>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1623,12 +1623,12 @@ public class MBMessagePersistenceImpl extends BasePersistence
 	}
 
 	public List<MBMessage> findByT_P(long threadId, long parentMessageId,
-		int begin, int end) throws SystemException {
-		return findByT_P(threadId, parentMessageId, begin, end, null);
+		int start, int end) throws SystemException {
+		return findByT_P(threadId, parentMessageId, start, end, null);
 	}
 
 	public List<MBMessage> findByT_P(long threadId, long parentMessageId,
-		int begin, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBMessageModelImpl.CACHE_ENABLED;
 		String finderClassName = MBMessage.class.getName();
 		String finderMethodName = "findByT_P";
@@ -1641,7 +1641,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(threadId), new Long(parentMessageId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1691,7 +1691,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 				qPos.add(parentMessageId);
 
 				List<MBMessage> list = (List<MBMessage>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1844,7 +1844,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 	}
 
 	public List<MBMessage> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -1853,7 +1853,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -1869,12 +1869,12 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<MBMessage> findAll(int begin, int end)
+	public List<MBMessage> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<MBMessage> findAll(int begin, int end, OrderByComparator obc)
+	public List<MBMessage> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = MBMessageModelImpl.CACHE_ENABLED;
 		String finderClassName = MBMessage.class.getName();
@@ -1884,7 +1884,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1920,7 +1920,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<MBMessage> list = (List<MBMessage>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

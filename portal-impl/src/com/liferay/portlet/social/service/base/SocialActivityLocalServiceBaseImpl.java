@@ -93,10 +93,10 @@ public abstract class SocialActivityLocalServiceBaseImpl
 	}
 
 	public List<SocialActivity> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return socialActivityPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public SocialActivity updateSocialActivity(SocialActivity socialActivity)

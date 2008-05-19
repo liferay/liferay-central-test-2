@@ -87,11 +87,11 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 	}
 
 	public List<MBCategory> getCategories(
-			long groupId, long parentCategoryId, int begin, int end)
+			long groupId, long parentCategoryId, int start, int end)
 		throws PortalException, SystemException {
 
 		List<MBCategory> categories = mbCategoryLocalService.getCategories(
-			groupId, parentCategoryId, begin, end);
+			groupId, parentCategoryId, start, end);
 
 		Iterator<MBCategory> itr = categories.iterator();
 

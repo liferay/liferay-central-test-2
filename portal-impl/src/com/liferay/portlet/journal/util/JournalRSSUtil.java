@@ -96,7 +96,7 @@ public class JournalRSSUtil {
 		Boolean expired = Boolean.FALSE;
 		Date reviewDate = null;
 		boolean andOperator = true;
-		int begin = 0;
+		int start = 0;
 		int end = feed.getDelta();
 
 		String orderByCol = feed.getOrderByCol();
@@ -112,7 +112,7 @@ public class JournalRSSUtil {
 		return JournalArticleLocalServiceUtil.search(
 			companyId, groupId, articleId, version, title, description, content,
 			type, structureId, templateId, displayDateGT, displayDateLT,
-			approved, expired, reviewDate, andOperator, begin, end, obc);
+			approved, expired, reviewDate, andOperator, start, end, obc);
 	}
 
 	public static List<SyndEnclosure> getDLEnclosures(

@@ -39,11 +39,11 @@ public class UserTrackerPathLocalServiceImpl
 	extends UserTrackerPathLocalServiceBaseImpl {
 
 	public List<UserTrackerPath> getUserTrackerPaths(
-			long userTrackerId, int begin, int end)
+			long userTrackerId, int start, int end)
 		throws SystemException {
 
 		return userTrackerPathPersistence.findByUserTrackerId(
-			userTrackerId, begin, end);
+			userTrackerId, start, end);
 	}
 
 }

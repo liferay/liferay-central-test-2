@@ -92,10 +92,10 @@ public class PollsVoteLocalServiceImpl extends PollsVoteLocalServiceBaseImpl {
 		return vote;
 	}
 
-	public List<PollsVote> getChoiceVotes(long choiceId, int begin, int end)
+	public List<PollsVote> getChoiceVotes(long choiceId, int start, int end)
 		throws SystemException {
 
-		return pollsVotePersistence.findByChoiceId(choiceId,  begin, end);
+		return pollsVotePersistence.findByChoiceId(choiceId,  start, end);
 	}
 
 	public int getChoiceVotesCount(long choiceId) throws SystemException {
@@ -108,10 +108,10 @@ public class PollsVoteLocalServiceImpl extends PollsVoteLocalServiceBaseImpl {
 		return pollsVotePersistence.findByQ_U(questionId, userId);
 	}
 
-	public List<PollsVote> getQuestionVotes(long questionId, int begin, int end)
+	public List<PollsVote> getQuestionVotes(long questionId, int start, int end)
 		throws SystemException {
 
-		return pollsVotePersistence.findByQuestionId(questionId, begin, end);
+		return pollsVotePersistence.findByQuestionId(questionId, start, end);
 	}
 
 	public int getQuestionVotesCount(long questionId) throws SystemException {

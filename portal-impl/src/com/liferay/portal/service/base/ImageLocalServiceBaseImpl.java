@@ -298,8 +298,8 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService,
 	}
 
 	public List<Image> dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
-		return imagePersistence.findWithDynamicQuery(queryInitializer, begin,
+		int start, int end) throws SystemException {
+		return imagePersistence.findWithDynamicQuery(queryInitializer, start,
 			end);
 	}
 

@@ -68,7 +68,7 @@ public interface CalEventLocalService {
 
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.calendar.model.CalEvent updateCalEvent(
 		com.liferay.portlet.calendar.model.CalEvent calEvent)
@@ -182,7 +182,7 @@ public interface CalEventLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
-		long groupId, java.lang.String type, int begin, int end)
+		long groupId, java.lang.String type, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(

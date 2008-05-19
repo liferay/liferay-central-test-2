@@ -86,10 +86,10 @@ public class DLFileShortcutLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
 
-		return dlFileShortcutLocalService.dynamicQuery(queryInitializer, begin,
+		return dlFileShortcutLocalService.dynamicQuery(queryInitializer, start,
 			end);
 	}
 

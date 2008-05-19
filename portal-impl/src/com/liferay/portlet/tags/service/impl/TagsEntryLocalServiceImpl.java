@@ -207,11 +207,11 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 	public List<TagsEntry> getEntries(
 			long groupId, long companyId, long classNameId, String name,
-			int begin, int end)
+			int start, int end)
 		throws SystemException {
 
 		return tagsEntryFinder.findByG_C_C_N(
-			groupId, companyId, classNameId, name, begin, end);
+			groupId, companyId, classNameId, name, start, end);
 	}
 
 	public int getEntriesSize(
@@ -307,21 +307,21 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	}
 
 	public List<TagsEntry> search(
-			long companyId, String name, String[] properties, int begin,
+			long companyId, String name, String[] properties, int start,
 			int end)
 		throws SystemException {
 
 		return tagsEntryFinder.findByC_N_P(
-			companyId, name, properties, begin, end);
+			companyId, name, properties, start, end);
 	}
 
 	public JSONArrayWrapper searchAutocomplete(
-			long companyId, String name, String[] properties, int begin,
+			long companyId, String name, String[] properties, int start,
 			int end)
 		throws SystemException {
 
 		List<TagsEntry> list = tagsEntryFinder.findByC_N_P(
-			companyId, name, properties, begin, end);
+			companyId, name, properties, start, end);
 
 		return new JSONArrayWrapper(
 			Autocomplete.listToJson(list, "name", "name"));

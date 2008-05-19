@@ -359,12 +359,12 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<SCProductEntry> findByGroupId(long groupId, int begin, int end)
+	public List<SCProductEntry> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
-		return findByGroupId(groupId, begin, end, null);
+		return findByGroupId(groupId, start, end, null);
 	}
 
-	public List<SCProductEntry> findByGroupId(long groupId, int begin, int end,
+	public List<SCProductEntry> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = SCProductEntry.class.getName();
@@ -378,7 +378,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -422,7 +422,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				qPos.add(groupId);
 
 				List<SCProductEntry> list = (List<SCProductEntry>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -604,12 +604,12 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<SCProductEntry> findByCompanyId(long companyId, int begin,
+	public List<SCProductEntry> findByCompanyId(long companyId, int start,
 		int end) throws SystemException {
-		return findByCompanyId(companyId, begin, end, null);
+		return findByCompanyId(companyId, start, end, null);
 	}
 
-	public List<SCProductEntry> findByCompanyId(long companyId, int begin,
+	public List<SCProductEntry> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = SCProductEntry.class.getName();
@@ -623,7 +623,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -667,7 +667,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				qPos.add(companyId);
 
 				List<SCProductEntry> list = (List<SCProductEntry>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -859,12 +859,12 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<SCProductEntry> findByG_U(long groupId, long userId, int begin,
+	public List<SCProductEntry> findByG_U(long groupId, long userId, int start,
 		int end) throws SystemException {
-		return findByG_U(groupId, userId, begin, end, null);
+		return findByG_U(groupId, userId, start, end, null);
 	}
 
-	public List<SCProductEntry> findByG_U(long groupId, long userId, int begin,
+	public List<SCProductEntry> findByG_U(long groupId, long userId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = SCProductEntry.class.getName();
@@ -878,7 +878,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(userId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -928,7 +928,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				qPos.add(userId);
 
 				List<SCProductEntry> list = (List<SCProductEntry>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1204,7 +1204,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 	}
 
 	public List<SCProductEntry> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -1213,7 +1213,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -1229,12 +1229,12 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<SCProductEntry> findAll(int begin, int end)
+	public List<SCProductEntry> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<SCProductEntry> findAll(int begin, int end,
+	public List<SCProductEntry> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = SCProductEntry.class.getName();
@@ -1244,7 +1244,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1280,7 +1280,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<SCProductEntry> list = (List<SCProductEntry>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1690,13 +1690,13 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 	}
 
 	public List<com.liferay.portlet.softwarecatalog.model.SCLicense> getSCLicenses(
-		long pk, int begin, int end)
+		long pk, int start, int end)
 		throws NoSuchProductEntryException, SystemException {
-		return getSCLicenses(pk, begin, end, null);
+		return getSCLicenses(pk, start, end, null);
 	}
 
 	public List<com.liferay.portlet.softwarecatalog.model.SCLicense> getSCLicenses(
-		long pk, int begin, int end, OrderByComparator obc)
+		long pk, int start, int end, OrderByComparator obc)
 		throws NoSuchProductEntryException, SystemException {
 		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES;
 
@@ -1708,7 +1708,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				new Long(pk), String.valueOf(start), String.valueOf(end),
 				String.valueOf(obc)
 			};
 
@@ -1752,7 +1752,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				qPos.add(pk);
 
 				List<com.liferay.portlet.softwarecatalog.model.SCLicense> list = (List<com.liferay.portlet.softwarecatalog.model.SCLicense>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,

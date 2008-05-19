@@ -16,8 +16,6 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="xml" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addCommunityPermissions" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addGuestPermissions" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="urn:http.service.workflow.portlet.liferay.com" qname="communityPermissions" type="tns:ArrayOf_xsd_string"></parameter>
-			<parameter xmlns:tns="urn:http.service.workflow.portlet.liferay.com" qname="guestPermissions" type="tns:ArrayOf_xsd_string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.workflow.portlet.liferay.com" xmlns:rtns="http://model.workflow.portlet.liferay.com" name="addDefinition" qname="operNS:addDefinition" returnQName="addDefinitionReturn" returnType="rtns:WorkflowDefinitionSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="xml" type="tns:string"></parameter>
@@ -28,10 +26,6 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="xml" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addCommunityPermissions" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addGuestPermissions" type="tns:boolean"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.workflow.portlet.liferay.com" name="addDefinitionResources" qname="operNS:addDefinitionResources" soapAction="">
-			<parameter xmlns:tns="http://model.portal.liferay.com" qname="user" type="tns:UserSoap"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="definitionId" type="tns:long"></parameter>
 			<parameter xmlns:tns="urn:http.service.workflow.portlet.liferay.com" qname="communityPermissions" type="tns:ArrayOf_xsd_string"></parameter>
 			<parameter xmlns:tns="urn:http.service.workflow.portlet.liferay.com" qname="guestPermissions" type="tns:ArrayOf_xsd_string"></parameter>
 		</operation>
@@ -40,6 +34,12 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="definitionId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addCommunityPermissions" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addGuestPermissions" type="tns:boolean"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.workflow.portlet.liferay.com" name="addDefinitionResources" qname="operNS:addDefinitionResources" soapAction="">
+			<parameter xmlns:tns="http://model.portal.liferay.com" qname="user" type="tns:UserSoap"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="definitionId" type="tns:long"></parameter>
+			<parameter xmlns:tns="urn:http.service.workflow.portlet.liferay.com" qname="communityPermissions" type="tns:ArrayOf_xsd_string"></parameter>
+			<parameter xmlns:tns="urn:http.service.workflow.portlet.liferay.com" qname="guestPermissions" type="tns:ArrayOf_xsd_string"></parameter>
 		</operation>
 		<parameter name="allowedMethods" value="addDefinitionResources addDefinition getDefinition"/>
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:UserSoap" type="java:com.liferay.portal.model.UserSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>

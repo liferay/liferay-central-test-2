@@ -112,12 +112,12 @@ public class MBCategoryServiceJSON {
 	}
 
 	public static JSONArray getCategories(long groupId, long parentCategoryId,
-		int begin, int end)
+		int start, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		java.util.List<com.liferay.portlet.messageboards.model.MBCategory> returnValue =
 			MBCategoryServiceUtil.getCategories(groupId, parentCategoryId,
-				begin, end);
+				start, end);
 
 		return MBCategoryJSONSerializer.toJSONArray(returnValue);
 	}

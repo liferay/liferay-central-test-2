@@ -86,10 +86,10 @@ public class UserTrackerLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.UserTracker> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
 
-		return userTrackerLocalService.dynamicQuery(queryInitializer, begin, end);
+		return userTrackerLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
 	public static com.liferay.portal.model.UserTracker updateUserTracker(
@@ -114,10 +114,10 @@ public class UserTrackerLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserTracker> getUserTrackers(
-		long companyId, int begin, int end)
+		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
 
-		return userTrackerLocalService.getUserTrackers(companyId, begin, end);
+		return userTrackerLocalService.getUserTrackers(companyId, start, end);
 	}
 }

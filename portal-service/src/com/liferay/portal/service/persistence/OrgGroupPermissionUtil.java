@@ -100,16 +100,16 @@ public class OrgGroupPermissionUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.OrgGroupPermission> findByGroupId(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByGroupId(groupId, begin, end);
+		return getPersistence().findByGroupId(groupId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.OrgGroupPermission> findByGroupId(
-		long groupId, int begin, int end,
+		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByGroupId(groupId, begin, end, obc);
+		return getPersistence().findByGroupId(groupId, start, end, obc);
 	}
 
 	public static com.liferay.portal.model.OrgGroupPermission findByGroupId_First(
@@ -141,16 +141,16 @@ public class OrgGroupPermissionUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.OrgGroupPermission> findByPermissionId(
-		long permissionId, int begin, int end)
+		long permissionId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByPermissionId(permissionId, begin, end);
+		return getPersistence().findByPermissionId(permissionId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.OrgGroupPermission> findByPermissionId(
-		long permissionId, int begin, int end,
+		long permissionId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByPermissionId(permissionId, begin, end, obc);
+		return getPersistence().findByPermissionId(permissionId, start, end, obc);
 	}
 
 	public static com.liferay.portal.model.OrgGroupPermission findByPermissionId_First(
@@ -185,9 +185,9 @@ public class OrgGroupPermissionUtil {
 
 	public static java.util.List<com.liferay.portal.model.OrgGroupPermission> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findWithDynamicQuery(queryInitializer, begin, end);
+				   .findWithDynamicQuery(queryInitializer, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.OrgGroupPermission> findAll()
@@ -196,14 +196,14 @@ public class OrgGroupPermissionUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.OrgGroupPermission> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end);
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.OrgGroupPermission> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end, obc);
+		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByGroupId(long groupId)

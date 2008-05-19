@@ -191,7 +191,7 @@ public class ExpandoValueFinderImpl implements ExpandoValueFinder {
 	}
 
 	public List<ExpandoValue> findByTC_TN_CN(
-			long classNameId, String tableName, String columnName, int begin,
+			long classNameId, String tableName, String columnName, int start,
 			int end)
 		throws SystemException {
 
@@ -213,7 +213,7 @@ public class ExpandoValueFinderImpl implements ExpandoValueFinder {
 			qPos.add(columnName);
 
 			return (List<ExpandoValue>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -224,7 +224,7 @@ public class ExpandoValueFinderImpl implements ExpandoValueFinder {
 	}
 
 	public List<ExpandoValue> findByTC_TN_C(
-			long classNameId, String tableName, long classPK, int begin,
+			long classNameId, String tableName, long classPK, int start,
 			int end)
 		throws SystemException {
 
@@ -246,7 +246,7 @@ public class ExpandoValueFinderImpl implements ExpandoValueFinder {
 			qPos.add(classPK);
 
 			return (List<ExpandoValue>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -290,7 +290,7 @@ public class ExpandoValueFinderImpl implements ExpandoValueFinder {
 
 	public List<ExpandoValue> findByTC_TN_CN_D(
 			long classNameId, String tableName, String columnName, String data,
-			int begin, int end)
+			int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -312,7 +312,7 @@ public class ExpandoValueFinderImpl implements ExpandoValueFinder {
 			qPos.add(data);
 
 			return (List<ExpandoValue>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

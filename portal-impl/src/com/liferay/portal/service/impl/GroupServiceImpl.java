@@ -120,14 +120,14 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 
 	public List<Group> search(
 			long companyId, String name, String description, String[] params,
-			int begin, int end)
+			int start, int end)
 		throws SystemException {
 
 		LinkedHashMap<String, Object> paramsObj = MapUtil.toLinkedHashMap(
 			params);
 
 		return groupLocalService.search(
-			companyId, name, description, paramsObj, begin, end);
+			companyId, name, description, paramsObj, start, end);
 	}
 
 	public int searchCount(

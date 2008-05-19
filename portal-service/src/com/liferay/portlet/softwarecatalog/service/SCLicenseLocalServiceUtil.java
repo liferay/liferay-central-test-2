@@ -86,10 +86,10 @@ public class SCLicenseLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
 
-		return scLicenseLocalService.dynamicQuery(queryInitializer, begin, end);
+		return scLicenseLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense updateSCLicense(
@@ -136,10 +136,10 @@ public class SCLicenseLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getLicenses(
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
 
-		return scLicenseLocalService.getLicenses(begin, end);
+		return scLicenseLocalService.getLicenses(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getLicenses(
@@ -151,11 +151,11 @@ public class SCLicenseLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getLicenses(
-		boolean active, boolean recommended, int begin, int end)
+		boolean active, boolean recommended, int start, int end)
 		throws com.liferay.portal.SystemException {
 		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
 
-		return scLicenseLocalService.getLicenses(active, recommended, begin, end);
+		return scLicenseLocalService.getLicenses(active, recommended, start, end);
 	}
 
 	public static int getLicensesCount()

@@ -68,7 +68,7 @@ public interface ShoppingItemLocalService {
 
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingItem updateShoppingItem(
 		com.liferay.portlet.shopping.model.ShoppingItem shoppingItem)
@@ -204,7 +204,7 @@ public interface ShoppingItemLocalService {
 		long categoryId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> getItems(
-		long categoryId, int begin, int end,
+		long categoryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -221,7 +221,7 @@ public interface ShoppingItemLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> search(
-		long groupId, long[] categoryIds, java.lang.String keywords, int begin,
+		long groupId, long[] categoryIds, java.lang.String keywords, int start,
 		int end) throws com.liferay.portal.SystemException;
 
 	public int searchCount(long groupId, long[] categoryIds,

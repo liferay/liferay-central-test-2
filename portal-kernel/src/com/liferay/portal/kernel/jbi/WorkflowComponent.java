@@ -45,11 +45,11 @@ public interface WorkflowComponent {
 		throws WorkflowComponentException;
 
 	public List getDefinitions(
-			long definitionId, String name, int begin, int end)
+			long definitionId, String name, int start, int end)
 		throws WorkflowComponentException;
 
 	public String getDefinitionsXml(
-			long definitionId, String name, int begin, int end)
+			long definitionId, String name, int start, int end)
 		throws WorkflowComponentException;
 
 	public int getDefinitionsCount(long definitionId, String name)
@@ -65,7 +65,7 @@ public interface WorkflowComponent {
 			long definitionId, long instanceId, String definitionName,
 			String definitionVersion, String startDateGT, String startDateLT,
 			String endDateGT, String endDateLT, boolean hideEndedTasks,
-			boolean retrieveUserInstances, boolean andOperator, int begin,
+			boolean retrieveUserInstances, boolean andOperator, int start,
 			int end)
 		throws WorkflowComponentException;
 
@@ -87,7 +87,7 @@ public interface WorkflowComponent {
 			long definitionId, long instanceId, String definitionName,
 			String definitionVersion, String startDateGT, String startDateLT,
 			String endDateGT, String endDateLT, boolean hideEndedTasks,
-			boolean retrieveUserInstances, boolean andOperator, int begin,
+			boolean retrieveUserInstances, boolean andOperator, int start,
 			int end)
 		throws WorkflowComponentException;
 
@@ -108,7 +108,7 @@ public interface WorkflowComponent {
 			String assignedTo, String createDateGT, String createDateLT,
 			String startDateGT, String startDateLT, String endDateGT,
 			String endDateLT, boolean hideEndedTasks, boolean andOperator,
-			int begin, int end)
+			int start, int end)
 		throws WorkflowComponentException;
 
 	public int getUserTasksCount(
@@ -130,7 +130,7 @@ public interface WorkflowComponent {
 			String assignedTo, String createDateGT, String createDateLT,
 			String startDateGT, String startDateLT, String endDateGT,
 			String endDateLT, boolean hideEndedTasks, boolean andOperator,
-			int begin, int end)
+			int start, int end)
 		throws WorkflowComponentException;
 
 	public void signalInstance(long instanceId)

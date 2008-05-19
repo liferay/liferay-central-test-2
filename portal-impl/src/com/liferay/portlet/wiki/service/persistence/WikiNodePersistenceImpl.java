@@ -344,12 +344,12 @@ public class WikiNodePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<WikiNode> findByUuid(String uuid, int begin, int end)
+	public List<WikiNode> findByUuid(String uuid, int start, int end)
 		throws SystemException {
-		return findByUuid(uuid, begin, end, null);
+		return findByUuid(uuid, start, end, null);
 	}
 
-	public List<WikiNode> findByUuid(String uuid, int begin, int end,
+	public List<WikiNode> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = WikiNodeModelImpl.CACHE_ENABLED;
 		String finderClassName = WikiNode.class.getName();
@@ -363,7 +363,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -413,7 +413,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 				}
 
 				List<WikiNode> list = (List<WikiNode>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -708,12 +708,12 @@ public class WikiNodePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<WikiNode> findByGroupId(long groupId, int begin, int end)
+	public List<WikiNode> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
-		return findByGroupId(groupId, begin, end, null);
+		return findByGroupId(groupId, start, end, null);
 	}
 
-	public List<WikiNode> findByGroupId(long groupId, int begin, int end,
+	public List<WikiNode> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = WikiNodeModelImpl.CACHE_ENABLED;
 		String finderClassName = WikiNode.class.getName();
@@ -727,7 +727,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -770,7 +770,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 				qPos.add(groupId);
 
 				List<WikiNode> list = (List<WikiNode>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -946,12 +946,12 @@ public class WikiNodePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<WikiNode> findByCompanyId(long companyId, int begin, int end)
+	public List<WikiNode> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
-		return findByCompanyId(companyId, begin, end, null);
+		return findByCompanyId(companyId, start, end, null);
 	}
 
-	public List<WikiNode> findByCompanyId(long companyId, int begin, int end,
+	public List<WikiNode> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = WikiNodeModelImpl.CACHE_ENABLED;
 		String finderClassName = WikiNode.class.getName();
@@ -965,7 +965,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1008,7 +1008,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 				qPos.add(companyId);
 
 				List<WikiNode> list = (List<WikiNode>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1257,7 +1257,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 	}
 
 	public List<WikiNode> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -1266,7 +1266,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -1282,11 +1282,11 @@ public class WikiNodePersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<WikiNode> findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
+	public List<WikiNode> findAll(int start, int end) throws SystemException {
+		return findAll(start, end, null);
 	}
 
-	public List<WikiNode> findAll(int begin, int end, OrderByComparator obc)
+	public List<WikiNode> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = WikiNodeModelImpl.CACHE_ENABLED;
 		String finderClassName = WikiNode.class.getName();
@@ -1296,7 +1296,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1330,7 +1330,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<WikiNode> list = (List<WikiNode>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

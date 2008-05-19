@@ -101,10 +101,10 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 	}
 
 	public List<SCProductVersion> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return scProductVersionPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public SCProductVersion updateSCProductVersion(

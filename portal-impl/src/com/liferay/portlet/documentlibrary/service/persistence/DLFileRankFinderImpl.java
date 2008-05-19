@@ -95,7 +95,7 @@ public class DLFileRankFinderImpl implements DLFileRankFinder {
 	}
 
 	public List<DLFileRank> findByG_U(
-			long groupId, long userId, int begin, int end)
+			long groupId, long userId, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -115,7 +115,7 @@ public class DLFileRankFinderImpl implements DLFileRankFinder {
 			qPos.add(userId);
 
 			return (List<DLFileRank>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

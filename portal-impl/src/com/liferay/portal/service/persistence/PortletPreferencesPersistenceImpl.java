@@ -329,12 +329,12 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<PortletPreferences> findByPlid(long plid, int begin, int end)
+	public List<PortletPreferences> findByPlid(long plid, int start, int end)
 		throws SystemException {
-		return findByPlid(plid, begin, end, null);
+		return findByPlid(plid, start, end, null);
 	}
 
-	public List<PortletPreferences> findByPlid(long plid, int begin, int end,
+	public List<PortletPreferences> findByPlid(long plid, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = PortletPreferencesModelImpl.CACHE_ENABLED;
 		String finderClassName = PortletPreferences.class.getName();
@@ -348,7 +348,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(plid),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -385,7 +385,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				qPos.add(plid);
 
 				List<PortletPreferences> list = (List<PortletPreferences>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -570,12 +570,12 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 	}
 
 	public List<PortletPreferences> findByP_P(long plid, String portletId,
-		int begin, int end) throws SystemException {
-		return findByP_P(plid, portletId, begin, end, null);
+		int start, int end) throws SystemException {
+		return findByP_P(plid, portletId, start, end, null);
 	}
 
 	public List<PortletPreferences> findByP_P(long plid, String portletId,
-		int begin, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = PortletPreferencesModelImpl.CACHE_ENABLED;
 		String finderClassName = PortletPreferences.class.getName();
 		String finderMethodName = "findByP_P";
@@ -590,7 +590,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				
 				portletId,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -640,7 +640,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				}
 
 				List<PortletPreferences> list = (List<PortletPreferences>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -850,12 +850,12 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 	}
 
 	public List<PortletPreferences> findByO_O_P(long ownerId, int ownerType,
-		long plid, int begin, int end) throws SystemException {
-		return findByO_O_P(ownerId, ownerType, plid, begin, end, null);
+		long plid, int start, int end) throws SystemException {
+		return findByO_O_P(ownerId, ownerType, plid, start, end, null);
 	}
 
 	public List<PortletPreferences> findByO_O_P(long ownerId, int ownerType,
-		long plid, int begin, int end, OrderByComparator obc)
+		long plid, int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = PortletPreferencesModelImpl.CACHE_ENABLED;
 		String finderClassName = PortletPreferences.class.getName();
@@ -870,7 +870,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(ownerId), new Integer(ownerType), new Long(plid),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -919,7 +919,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				qPos.add(plid);
 
 				List<PortletPreferences> list = (List<PortletPreferences>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1215,7 +1215,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 	}
 
 	public List<PortletPreferences> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -1224,7 +1224,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -1240,12 +1240,12 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<PortletPreferences> findAll(int begin, int end)
+	public List<PortletPreferences> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<PortletPreferences> findAll(int begin, int end,
+	public List<PortletPreferences> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = PortletPreferencesModelImpl.CACHE_ENABLED;
 		String finderClassName = PortletPreferences.class.getName();
@@ -1255,7 +1255,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1284,7 +1284,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<PortletPreferences> list = (List<PortletPreferences>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

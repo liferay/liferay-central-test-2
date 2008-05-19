@@ -236,7 +236,7 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 			int displayDateHour, int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute, boolean alert,
-			int flagValue, int begin, int end)
+			int flagValue, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -273,7 +273,7 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 			qPos.add(AnnouncementsFlagImpl.HIDDEN);
 
 			return (List<AnnouncementsEntry>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -289,7 +289,7 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 			int displayDateHour, int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute, boolean alert,
-			int flagValue, int begin, int end)
+			int flagValue, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -325,7 +325,7 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 			qPos.add(AnnouncementsFlagImpl.HIDDEN);
 
 			return (List<AnnouncementsEntry>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

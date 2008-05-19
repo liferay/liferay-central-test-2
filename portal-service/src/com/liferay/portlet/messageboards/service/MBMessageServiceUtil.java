@@ -212,12 +212,12 @@ public class MBMessageServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCategoryMessages(
-		long categoryId, int begin, int end)
+		long categoryId, int start, int end)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
 
-		return mbMessageService.getCategoryMessages(categoryId, begin, end);
+		return mbMessageService.getCategoryMessages(categoryId, start, end);
 	}
 
 	public static int getCategoryMessagesCount(long categoryId)

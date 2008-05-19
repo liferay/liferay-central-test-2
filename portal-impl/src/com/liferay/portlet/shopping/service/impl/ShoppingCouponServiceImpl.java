@@ -84,7 +84,7 @@ public class ShoppingCouponServiceImpl extends ShoppingCouponServiceBaseImpl {
 
 	public List<ShoppingCoupon> search(
 			long plid, long companyId, String code, boolean active,
-			String discountType, boolean andOperator, int begin, int end)
+			String discountType, boolean andOperator, int start, int end)
 		throws PortalException, SystemException {
 
 		PortletPermissionUtil.check(
@@ -92,7 +92,7 @@ public class ShoppingCouponServiceImpl extends ShoppingCouponServiceBaseImpl {
 			ActionKeys.MANAGE_COUPONS);
 
 		return shoppingCouponLocalService.search(
-			plid, companyId, code, active, discountType, andOperator, begin,
+			plid, companyId, code, active, discountType, andOperator, start,
 			end);
 	}
 

@@ -264,7 +264,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			long companyId, long parentOrganizationId,
 			String parentOrganizationComparator, String keywords,
 			int type, Long regionId, Long countryId,
-			LinkedHashMap<String, Object> params, int begin, int end,
+			LinkedHashMap<String, Object> params, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
@@ -287,7 +287,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 		return findByC_PO_N_T_S_C_Z_R_C(
 			companyId, parentOrganizationId, parentOrganizationComparator,
 			names, type, streets, cities, zips, regionId, countryId, params,
-			andOperator, begin, end, obc);
+			andOperator, start, end, obc);
 	}
 
 	public List<Organization> findByC_PO_N_T_S_C_Z_R_C(
@@ -295,14 +295,14 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			String parentOrganizationComparator, String name, int type,
 			String street, String city, String zip, Long regionId,
 			Long countryId, LinkedHashMap<String, Object> params,
-			boolean andOperator, int begin, int end, OrderByComparator obc)
+			boolean andOperator, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return findByC_PO_N_T_S_C_Z_R_C(
 			companyId, parentOrganizationId, parentOrganizationComparator,
 			new String[] {name}, type, new String[] {street},
 			new String[] {city}, new String[] {zip}, regionId, countryId,
-			params, andOperator, begin, end, obc);
+			params, andOperator, start, end, obc);
 	}
 
 	public List<Organization> findByC_PO_N_T_S_C_Z_R_C(
@@ -310,7 +310,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			String parentOrganizationComparator, String[] names,
 			int type, String[] streets, String[] cities, String[] zips,
 			Long regionId, Long countryId, LinkedHashMap<String, Object> params,
-			boolean andOperator, int begin, int end, OrderByComparator obc)
+			boolean andOperator, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		names = CustomSQLUtil.keywords(names);
@@ -329,7 +329,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 					companyId, parentOrganizationId,
 					parentOrganizationComparator, names, type, streets,
 					cities, zips, regionId, countryId, resourceId.longValue(),
-					groupId.longValue(), andOperator, begin, end, obc);
+					groupId.longValue(), andOperator, start, end, obc);
 			}
 		}
 
@@ -420,7 +420,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			List<Organization> organizations = new ArrayList<Organization>();
 
 			Iterator<Long> itr = (Iterator<Long>)QueryUtil.iterate(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 
 			while (itr.hasNext()) {
 				Long organizationId = itr.next();
@@ -618,7 +618,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			String parentOrganizationComparator, String[] names,
 			int type, String[] streets, String[] cities, String[] zips,
 			Long regionId, Long countryId, long resourceId, long groupId,
-			boolean andOperator, int begin, int end, OrderByComparator obc)
+			boolean andOperator, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		Session session = null;
@@ -768,7 +768,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			List<Organization> organizations = new ArrayList<Organization>();
 
 			Iterator<Long> itr = (Iterator<Long>)QueryUtil.iterate(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 
 			while (itr.hasNext()) {
 				Long organizationId = itr.next();

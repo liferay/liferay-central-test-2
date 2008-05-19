@@ -68,7 +68,7 @@ public interface JournalTemplateLocalService {
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalTemplate> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalTemplate updateJournalTemplate(
 		com.liferay.portlet.journal.model.JournalTemplate journalTemplate)
@@ -178,7 +178,7 @@ public interface JournalTemplateLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalTemplate> getStructureTemplates(
-		long groupId, java.lang.String structureId, int begin, int end)
+		long groupId, java.lang.String structureId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getStructureTemplatesCount(long groupId,
@@ -206,7 +206,7 @@ public interface JournalTemplateLocalService {
 		long groupId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalTemplate> getTemplates(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getTemplatesCount(long groupId)
@@ -218,14 +218,14 @@ public interface JournalTemplateLocalService {
 	public java.util.List<com.liferay.portlet.journal.model.JournalTemplate> search(
 		long companyId, long groupId, java.lang.String keywords,
 		java.lang.String structureId, java.lang.String structureIdComparator,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalTemplate> search(
 		long companyId, long groupId, java.lang.String templateId,
 		java.lang.String structureId, java.lang.String structureIdComparator,
 		java.lang.String name, java.lang.String description,
-		boolean andOperator, int begin, int end,
+		boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 

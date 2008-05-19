@@ -367,12 +367,12 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<Organization> findByCompanyId(long companyId, int begin, int end)
+	public List<Organization> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
-		return findByCompanyId(companyId, begin, end, null);
+		return findByCompanyId(companyId, start, end, null);
 	}
 
-	public List<Organization> findByCompanyId(long companyId, int begin,
+	public List<Organization> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = OrganizationModelImpl.CACHE_ENABLED;
 		String finderClassName = Organization.class.getName();
@@ -386,7 +386,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -429,7 +429,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				qPos.add(companyId);
 
 				List<Organization> list = (List<Organization>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -610,12 +610,12 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<Organization> findByLocations(long companyId, int begin, int end)
+	public List<Organization> findByLocations(long companyId, int start, int end)
 		throws SystemException {
-		return findByLocations(companyId, begin, end, null);
+		return findByLocations(companyId, start, end, null);
 	}
 
-	public List<Organization> findByLocations(long companyId, int begin,
+	public List<Organization> findByLocations(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = OrganizationModelImpl.CACHE_ENABLED;
 		String finderClassName = Organization.class.getName();
@@ -629,7 +629,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -672,7 +672,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				qPos.add(companyId);
 
 				List<Organization> list = (List<Organization>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -864,13 +864,13 @@ public class OrganizationPersistenceImpl extends BasePersistence
 	}
 
 	public List<Organization> findByC_P(long companyId,
-		long parentOrganizationId, int begin, int end)
+		long parentOrganizationId, int start, int end)
 		throws SystemException {
-		return findByC_P(companyId, parentOrganizationId, begin, end, null);
+		return findByC_P(companyId, parentOrganizationId, start, end, null);
 	}
 
 	public List<Organization> findByC_P(long companyId,
-		long parentOrganizationId, int begin, int end, OrderByComparator obc)
+		long parentOrganizationId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = OrganizationModelImpl.CACHE_ENABLED;
 		String finderClassName = Organization.class.getName();
@@ -884,7 +884,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(parentOrganizationId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -933,7 +933,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				qPos.add(parentOrganizationId);
 
 				List<Organization> list = (List<Organization>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1200,7 +1200,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 	}
 
 	public List<Organization> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -1209,7 +1209,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -1225,12 +1225,12 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<Organization> findAll(int begin, int end)
+	public List<Organization> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<Organization> findAll(int begin, int end, OrderByComparator obc)
+	public List<Organization> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = OrganizationModelImpl.CACHE_ENABLED;
 		String finderClassName = Organization.class.getName();
@@ -1240,7 +1240,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1274,7 +1274,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<Organization> list = (List<Organization>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1680,12 +1680,12 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		return getGroups(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List<com.liferay.portal.model.Group> getGroups(long pk, int begin,
+	public List<com.liferay.portal.model.Group> getGroups(long pk, int start,
 		int end) throws NoSuchOrganizationException, SystemException {
-		return getGroups(pk, begin, end, null);
+		return getGroups(pk, start, end, null);
 	}
 
-	public List<com.liferay.portal.model.Group> getGroups(long pk, int begin,
+	public List<com.liferay.portal.model.Group> getGroups(long pk, int start,
 		int end, OrderByComparator obc)
 		throws NoSuchOrganizationException, SystemException {
 		boolean finderClassNameCacheEnabled = OrganizationModelImpl.CACHE_ENABLED_GROUPS_ORGS;
@@ -1698,7 +1698,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				new Long(pk), String.valueOf(start), String.valueOf(end),
 				String.valueOf(obc)
 			};
 
@@ -1742,7 +1742,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				qPos.add(pk);
 
 				List<com.liferay.portal.model.Group> list = (List<com.liferay.portal.model.Group>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -2047,12 +2047,12 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		return getUsers(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List<com.liferay.portal.model.User> getUsers(long pk, int begin,
+	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
 		int end) throws NoSuchOrganizationException, SystemException {
-		return getUsers(pk, begin, end, null);
+		return getUsers(pk, start, end, null);
 	}
 
-	public List<com.liferay.portal.model.User> getUsers(long pk, int begin,
+	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
 		int end, OrderByComparator obc)
 		throws NoSuchOrganizationException, SystemException {
 		boolean finderClassNameCacheEnabled = OrganizationModelImpl.CACHE_ENABLED_USERS_ORGS;
@@ -2065,7 +2065,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				new Long(pk), String.valueOf(start), String.valueOf(end),
 				String.valueOf(obc)
 			};
 
@@ -2103,7 +2103,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				qPos.add(pk);
 
 				List<com.liferay.portal.model.User> list = (List<com.liferay.portal.model.User>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,

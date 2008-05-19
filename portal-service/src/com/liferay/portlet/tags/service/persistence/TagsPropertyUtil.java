@@ -99,16 +99,16 @@ public class TagsPropertyUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByCompanyId(
-		long companyId, int begin, int end)
+		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId(companyId, begin, end);
+		return getPersistence().findByCompanyId(companyId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByCompanyId(
-		long companyId, int begin, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId(companyId, begin, end, obc);
+		return getPersistence().findByCompanyId(companyId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty findByCompanyId_First(
@@ -140,16 +140,16 @@ public class TagsPropertyUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByEntryId(
-		long entryId, int begin, int end)
+		long entryId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByEntryId(entryId, begin, end);
+		return getPersistence().findByEntryId(entryId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByEntryId(
-		long entryId, int begin, int end,
+		long entryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByEntryId(entryId, begin, end, obc);
+		return getPersistence().findByEntryId(entryId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty findByEntryId_First(
@@ -182,16 +182,16 @@ public class TagsPropertyUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByC_K(
-		long companyId, java.lang.String key, int begin, int end)
+		long companyId, java.lang.String key, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_K(companyId, key, begin, end);
+		return getPersistence().findByC_K(companyId, key, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByC_K(
-		long companyId, java.lang.String key, int begin, int end,
+		long companyId, java.lang.String key, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_K(companyId, key, begin, end, obc);
+		return getPersistence().findByC_K(companyId, key, start, end, obc);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty findByC_K_First(
@@ -240,9 +240,9 @@ public class TagsPropertyUtil {
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findWithDynamicQuery(queryInitializer, begin, end);
+				   .findWithDynamicQuery(queryInitializer, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findAll()
@@ -251,14 +251,14 @@ public class TagsPropertyUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end);
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end, obc);
+		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByCompanyId(long companyId)

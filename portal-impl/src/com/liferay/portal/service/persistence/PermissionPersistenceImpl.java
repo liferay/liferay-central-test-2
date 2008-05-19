@@ -370,12 +370,12 @@ public class PermissionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<Permission> findByResourceId(long resourceId, int begin, int end)
+	public List<Permission> findByResourceId(long resourceId, int start, int end)
 		throws SystemException {
-		return findByResourceId(resourceId, begin, end, null);
+		return findByResourceId(resourceId, start, end, null);
 	}
 
-	public List<Permission> findByResourceId(long resourceId, int begin,
+	public List<Permission> findByResourceId(long resourceId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED;
 		String finderClassName = Permission.class.getName();
@@ -389,7 +389,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(resourceId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -425,7 +425,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 				qPos.add(resourceId);
 
 				List<Permission> list = (List<Permission>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -668,7 +668,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public List<Permission> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -677,7 +677,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -693,12 +693,12 @@ public class PermissionPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<Permission> findAll(int begin, int end)
+	public List<Permission> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<Permission> findAll(int begin, int end, OrderByComparator obc)
+	public List<Permission> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED;
 		String finderClassName = Permission.class.getName();
@@ -708,7 +708,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -736,7 +736,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<Permission> list = (List<Permission>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -983,12 +983,12 @@ public class PermissionPersistenceImpl extends BasePersistence
 		return getGroups(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List<com.liferay.portal.model.Group> getGroups(long pk, int begin,
+	public List<com.liferay.portal.model.Group> getGroups(long pk, int start,
 		int end) throws NoSuchPermissionException, SystemException {
-		return getGroups(pk, begin, end, null);
+		return getGroups(pk, start, end, null);
 	}
 
-	public List<com.liferay.portal.model.Group> getGroups(long pk, int begin,
+	public List<com.liferay.portal.model.Group> getGroups(long pk, int start,
 		int end, OrderByComparator obc)
 		throws NoSuchPermissionException, SystemException {
 		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED_GROUPS_PERMISSIONS;
@@ -1001,7 +1001,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				new Long(pk), String.valueOf(start), String.valueOf(end),
 				String.valueOf(obc)
 			};
 
@@ -1045,7 +1045,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 				qPos.add(pk);
 
 				List<com.liferay.portal.model.Group> list = (List<com.liferay.portal.model.Group>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1350,12 +1350,12 @@ public class PermissionPersistenceImpl extends BasePersistence
 		return getRoles(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List<com.liferay.portal.model.Role> getRoles(long pk, int begin,
+	public List<com.liferay.portal.model.Role> getRoles(long pk, int start,
 		int end) throws NoSuchPermissionException, SystemException {
-		return getRoles(pk, begin, end, null);
+		return getRoles(pk, start, end, null);
 	}
 
-	public List<com.liferay.portal.model.Role> getRoles(long pk, int begin,
+	public List<com.liferay.portal.model.Role> getRoles(long pk, int start,
 		int end, OrderByComparator obc)
 		throws NoSuchPermissionException, SystemException {
 		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED_ROLES_PERMISSIONS;
@@ -1368,7 +1368,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				new Long(pk), String.valueOf(start), String.valueOf(end),
 				String.valueOf(obc)
 			};
 
@@ -1412,7 +1412,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 				qPos.add(pk);
 
 				List<com.liferay.portal.model.Role> list = (List<com.liferay.portal.model.Role>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1714,12 +1714,12 @@ public class PermissionPersistenceImpl extends BasePersistence
 		return getUsers(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List<com.liferay.portal.model.User> getUsers(long pk, int begin,
+	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
 		int end) throws NoSuchPermissionException, SystemException {
-		return getUsers(pk, begin, end, null);
+		return getUsers(pk, start, end, null);
 	}
 
-	public List<com.liferay.portal.model.User> getUsers(long pk, int begin,
+	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
 		int end, OrderByComparator obc)
 		throws NoSuchPermissionException, SystemException {
 		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED_USERS_PERMISSIONS;
@@ -1732,7 +1732,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				new Long(pk), String.valueOf(start), String.valueOf(end),
 				String.valueOf(obc)
 			};
 
@@ -1770,7 +1770,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 				qPos.add(pk);
 
 				List<com.liferay.portal.model.User> list = (List<com.liferay.portal.model.User>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,

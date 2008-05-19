@@ -352,12 +352,12 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<PollsQuestion> findByUuid(String uuid, int begin, int end)
+	public List<PollsQuestion> findByUuid(String uuid, int start, int end)
 		throws SystemException {
-		return findByUuid(uuid, begin, end, null);
+		return findByUuid(uuid, start, end, null);
 	}
 
-	public List<PollsQuestion> findByUuid(String uuid, int begin, int end,
+	public List<PollsQuestion> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = PollsQuestionModelImpl.CACHE_ENABLED;
 		String finderClassName = PollsQuestion.class.getName();
@@ -371,7 +371,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -421,7 +421,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 				}
 
 				List<PollsQuestion> list = (List<PollsQuestion>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -719,12 +719,12 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<PollsQuestion> findByGroupId(long groupId, int begin, int end)
+	public List<PollsQuestion> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
-		return findByGroupId(groupId, begin, end, null);
+		return findByGroupId(groupId, start, end, null);
 	}
 
-	public List<PollsQuestion> findByGroupId(long groupId, int begin, int end,
+	public List<PollsQuestion> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = PollsQuestionModelImpl.CACHE_ENABLED;
 		String finderClassName = PollsQuestion.class.getName();
@@ -738,7 +738,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -781,7 +781,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 				qPos.add(groupId);
 
 				List<PollsQuestion> list = (List<PollsQuestion>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -920,7 +920,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 	}
 
 	public List<PollsQuestion> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -929,7 +929,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -945,12 +945,12 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<PollsQuestion> findAll(int begin, int end)
+	public List<PollsQuestion> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<PollsQuestion> findAll(int begin, int end, OrderByComparator obc)
+	public List<PollsQuestion> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = PollsQuestionModelImpl.CACHE_ENABLED;
 		String finderClassName = PollsQuestion.class.getName();
@@ -960,7 +960,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -995,7 +995,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<PollsQuestion> list = (List<PollsQuestion>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

@@ -98,11 +98,11 @@ public class SCFrameworkVersionServiceImpl
 	}
 
 	public List<SCFrameworkVersion> getFrameworkVersions(
-			long groupId, boolean active, int begin, int end)
+			long groupId, boolean active, int start, int end)
 		throws SystemException {
 
 		return scFrameworkVersionLocalService.getFrameworkVersions(
-			groupId, active, begin, end);
+			groupId, active, start, end);
 	}
 
 	public SCFrameworkVersion updateFrameworkVersion(

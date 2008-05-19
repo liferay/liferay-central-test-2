@@ -96,10 +96,10 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 	}
 
 	public List<DLFileVersion> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return dlFileVersionPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public DLFileVersion updateDLFileVersion(DLFileVersion dlFileVersion)

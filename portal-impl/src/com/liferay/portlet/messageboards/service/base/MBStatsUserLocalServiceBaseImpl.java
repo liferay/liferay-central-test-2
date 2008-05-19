@@ -109,10 +109,10 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 	}
 
 	public List<MBStatsUser> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return mbStatsUserPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public MBStatsUser updateMBStatsUser(MBStatsUser mbStatsUser)

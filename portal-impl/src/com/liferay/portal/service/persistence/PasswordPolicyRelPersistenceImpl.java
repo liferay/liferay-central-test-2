@@ -513,7 +513,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 	}
 
 	public List<PasswordPolicyRel> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -522,7 +522,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -538,12 +538,12 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<PasswordPolicyRel> findAll(int begin, int end)
+	public List<PasswordPolicyRel> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<PasswordPolicyRel> findAll(int begin, int end,
+	public List<PasswordPolicyRel> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = PasswordPolicyRelModelImpl.CACHE_ENABLED;
 		String finderClassName = PasswordPolicyRel.class.getName();
@@ -553,7 +553,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -581,7 +581,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<PasswordPolicyRel> list = (List<PasswordPolicyRel>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

@@ -147,10 +147,10 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 	}
 
 	public List<DLFileEntry> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return dlFileEntryPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public DLFileEntry updateDLFileEntry(DLFileEntry dlFileEntry)

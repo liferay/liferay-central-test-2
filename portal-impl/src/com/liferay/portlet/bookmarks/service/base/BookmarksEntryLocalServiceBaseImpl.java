@@ -103,10 +103,10 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	public List<BookmarksEntry> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return bookmarksEntryPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public BookmarksEntry updateBookmarksEntry(BookmarksEntry bookmarksEntry)

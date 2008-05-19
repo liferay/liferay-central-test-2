@@ -151,10 +151,10 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 	}
 
 	public List<BlogsEntry> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return blogsEntryPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public BlogsEntry updateBlogsEntry(BlogsEntry blogsEntry)

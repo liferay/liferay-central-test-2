@@ -328,12 +328,12 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<PluginSetting> findByCompanyId(long companyId, int begin,
+	public List<PluginSetting> findByCompanyId(long companyId, int start,
 		int end) throws SystemException {
-		return findByCompanyId(companyId, begin, end, null);
+		return findByCompanyId(companyId, start, end, null);
 	}
 
-	public List<PluginSetting> findByCompanyId(long companyId, int begin,
+	public List<PluginSetting> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = PluginSettingModelImpl.CACHE_ENABLED;
 		String finderClassName = PluginSetting.class.getName();
@@ -347,7 +347,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -384,7 +384,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 				qPos.add(companyId);
 
 				List<PluginSetting> list = (List<PluginSetting>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -652,7 +652,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 	}
 
 	public List<PluginSetting> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -661,7 +661,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -677,12 +677,12 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<PluginSetting> findAll(int begin, int end)
+	public List<PluginSetting> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<PluginSetting> findAll(int begin, int end, OrderByComparator obc)
+	public List<PluginSetting> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = PluginSettingModelImpl.CACHE_ENABLED;
 		String finderClassName = PluginSetting.class.getName();
@@ -692,7 +692,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -720,7 +720,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<PluginSetting> list = (List<PluginSetting>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

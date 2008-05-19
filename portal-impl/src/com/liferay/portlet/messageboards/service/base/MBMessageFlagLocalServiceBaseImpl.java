@@ -117,10 +117,10 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 	}
 
 	public List<MBMessageFlag> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return mbMessageFlagPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public MBMessageFlag updateMBMessageFlag(MBMessageFlag mbMessageFlag)

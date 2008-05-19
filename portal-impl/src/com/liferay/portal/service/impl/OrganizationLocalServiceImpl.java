@@ -399,12 +399,12 @@ public class OrganizationLocalServiceImpl
 			long companyId, long parentOrganizationId, String keywords,
 			int type, Long regionId, Long countryId,
 			LinkedHashMap<String, Object> params,
-			int begin, int end)
+			int start, int end)
 		throws PortalException, SystemException {
 
 		return search(
 			companyId, parentOrganizationId, keywords, type, regionId,
-			countryId, params, begin, end,
+			countryId, params, start, end,
 			new OrganizationNameComparator(true));
 	}
 
@@ -412,7 +412,7 @@ public class OrganizationLocalServiceImpl
 			long companyId, long parentOrganizationId, String keywords,
 			int type, Long regionId, Long countryId,
 			LinkedHashMap<String, Object> params,
-			int begin, int end, OrderByComparator obc)
+			int start, int end, OrderByComparator obc)
 		throws PortalException, SystemException {
 
 		String parentOrganizationComparator = StringPool.EQUAL;
@@ -425,7 +425,7 @@ public class OrganizationLocalServiceImpl
 
 		return organizationFinder.findByKeywords(
 			companyId, parentOrganizationId, parentOrganizationComparator,
-			keywords, type, regionId, countryId, params, begin, end,
+			keywords, type, regionId, countryId, params, start, end,
 			obc);
 	}
 
@@ -434,12 +434,12 @@ public class OrganizationLocalServiceImpl
 			String street, String city, String zip,
 			Long regionId, Long countryId,
 			LinkedHashMap<String, Object> params, boolean andOperator,
-			int begin, int end)
+			int start, int end)
 		throws PortalException, SystemException {
 
 		return search(
 			companyId, parentOrganizationId, name, type, street, city, zip,
-			regionId, countryId, params, andOperator, begin, end,
+			regionId, countryId, params, andOperator, start, end,
 			new OrganizationNameComparator(true));
 	}
 
@@ -447,7 +447,7 @@ public class OrganizationLocalServiceImpl
 			long companyId, long parentOrganizationId, String name, int type,
 			String street, String city, String zip,
 			Long regionId, Long countryId, LinkedHashMap<String, Object> params,
-			boolean andOperator, int begin, int end, OrderByComparator obc)
+			boolean andOperator, int start, int end, OrderByComparator obc)
 		throws PortalException, SystemException {
 
 		String parentOrganizationComparator = StringPool.EQUAL;
@@ -461,7 +461,7 @@ public class OrganizationLocalServiceImpl
 		return organizationFinder.findByC_PO_N_T_S_C_Z_R_C(
 			companyId, parentOrganizationId, parentOrganizationComparator,
 			name, type, street, city, zip, regionId, countryId, params,
-			andOperator, begin, end, obc);
+			andOperator, start, end, obc);
 	}
 
 	public int searchCount(

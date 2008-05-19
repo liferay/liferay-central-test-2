@@ -85,10 +85,10 @@ public class PortletLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.Portlet> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 
-		return portletLocalService.dynamicQuery(queryInitializer, begin, end);
+		return portletLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
 	public static com.liferay.portal.model.Portlet updatePortlet(

@@ -108,10 +108,10 @@ public abstract class ShoppingOrderItemLocalServiceBaseImpl
 	}
 
 	public List<ShoppingOrderItem> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return shoppingOrderItemPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public ShoppingOrderItem updateShoppingOrderItem(

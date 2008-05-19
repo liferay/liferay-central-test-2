@@ -121,10 +121,10 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	public List<SCProductEntry> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return scProductEntryPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public SCProductEntry updateSCProductEntry(SCProductEntry scProductEntry)

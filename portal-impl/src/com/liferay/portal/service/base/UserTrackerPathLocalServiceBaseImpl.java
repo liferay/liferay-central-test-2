@@ -304,10 +304,10 @@ public abstract class UserTrackerPathLocalServiceBaseImpl
 	}
 
 	public List<UserTrackerPath> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return userTrackerPathPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public UserTrackerPath updateUserTrackerPath(

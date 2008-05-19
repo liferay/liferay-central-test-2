@@ -115,10 +115,10 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 	}
 
 	public List<DLFileShortcut> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return dlFileShortcutPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public DLFileShortcut updateDLFileShortcut(DLFileShortcut dlFileShortcut)

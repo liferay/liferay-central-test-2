@@ -482,49 +482,49 @@ public class ExpandoValueLocalServiceImpl
 		expandoValuePersistence.removeByC_C(classNameId, classPK);
 	}
 
-	public List<ExpandoValue> getColumnValues(long columnId, int begin, int end)
+	public List<ExpandoValue> getColumnValues(long columnId, int start, int end)
 		throws SystemException {
 
-		return expandoValuePersistence.findByColumnId(columnId, begin, end);
+		return expandoValuePersistence.findByColumnId(columnId, start, end);
 	}
 
 	public List<ExpandoValue> getColumnValues(
-			String className, String tableName, String columnName, int begin,
+			String className, String tableName, String columnName, int start,
 			int end)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getColumnValues(classNameId, tableName, columnName, begin, end);
+		return getColumnValues(classNameId, tableName, columnName, start, end);
 	}
 
 	public List<ExpandoValue> getColumnValues(
-			long classNameId, String tableName, String columnName, int begin,
+			long classNameId, String tableName, String columnName, int start,
 			int end)
 		throws SystemException {
 
 		return expandoValueFinder.findByTC_TN_CN(
-			classNameId, tableName, columnName, begin, end);
+			classNameId, tableName, columnName, start, end);
 	}
 
 	public List<ExpandoValue> getColumnValues(
 			String className, String tableName, String columnName, String data,
-			int begin, int end)
+			int start, int end)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		return getColumnValues(
-			classNameId, tableName, columnName, data, begin, end);
+			classNameId, tableName, columnName, data, start, end);
 	}
 
 	public List<ExpandoValue> getColumnValues(
 			long classNameId, String tableName, String columnName, String data,
-			int begin, int end)
+			int start, int end)
 		throws SystemException {
 
 		return expandoValueFinder.findByTC_TN_CN_D(
-			classNameId, tableName, columnName, data, begin, end);
+			classNameId, tableName, columnName, data, start, end);
 	}
 
 	public int getColumnValuesCount(long columnId) throws SystemException {
@@ -822,21 +822,21 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public List<ExpandoValue> getDefaultTableColumnValues(
-			String className, String columnName, int begin, int end)
+			String className, String columnName, int start, int end)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getDefaultTableColumnValues(classNameId, columnName, begin, end);
+		return getDefaultTableColumnValues(classNameId, columnName, start, end);
 	}
 
 	public List<ExpandoValue> getDefaultTableColumnValues(
-			long classNameId, String columnName, int begin, int end)
+			long classNameId, String columnName, int start, int end)
 		throws SystemException {
 
 		return getColumnValues(
 			classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME, columnName,
-			begin, end);
+			start, end);
 	}
 
 	public int getDefaultTableColumnValuesCount(
@@ -860,29 +860,29 @@ public class ExpandoValueLocalServiceImpl
 		return expandoValuePersistence.findByRowId(rowId);
 	}
 
-	public List<ExpandoValue> getRowValues(long rowId, int begin, int end)
+	public List<ExpandoValue> getRowValues(long rowId, int start, int end)
 		throws SystemException {
 
-		return expandoValuePersistence.findByRowId(rowId, begin, end);
+		return expandoValuePersistence.findByRowId(rowId, start, end);
 	}
 
 	public List<ExpandoValue> getRowValues(
-			String className, String tableName, long classPK, int begin,
+			String className, String tableName, long classPK, int start,
 			int end)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getRowValues(classNameId, tableName, classPK, begin, end);
+		return getRowValues(classNameId, tableName, classPK, start, end);
 	}
 
 	public List<ExpandoValue> getRowValues(
-			long classNameId, String tableName, long classPK, int begin,
+			long classNameId, String tableName, long classPK, int start,
 			int end)
 		throws SystemException {
 
 		return expandoValueFinder.findByTC_TN_C(
-			classNameId, tableName, classPK, begin, end);
+			classNameId, tableName, classPK, start, end);
 	}
 
 	public int getRowValuesCount(long rowId) throws SystemException {

@@ -96,7 +96,7 @@ public class TagsPropertyFinderImpl implements TagsPropertyFinder {
 	}
 
 	public List<TagsProperty> findByC_K(
-			long companyId, String key, int begin, int end)
+			long companyId, String key, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -118,7 +118,7 @@ public class TagsPropertyFinderImpl implements TagsPropertyFinder {
 			List<TagsProperty> properties = new ArrayList<TagsProperty>();
 
 			Iterator<String> itr = (Iterator<String>)QueryUtil.iterate(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 
 			while (itr.hasNext()) {
 				String value = itr.next();

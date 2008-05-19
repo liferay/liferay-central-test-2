@@ -76,8 +76,8 @@ import org.springframework.beans.factory.InitializingBean;
 		return ${entity.varName}Persistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List<${entity.name}> dynamicQuery(DynamicQueryInitializer queryInitializer, int begin, int end) throws SystemException {
-		return ${entity.varName}Persistence.findWithDynamicQuery(queryInitializer, begin, end);
+	public List<${entity.name}> dynamicQuery(DynamicQueryInitializer queryInitializer, int start, int end) throws SystemException {
+		return ${entity.varName}Persistence.findWithDynamicQuery(queryInitializer, start, end);
 	}
 
 	public ${entity.name} update${entity.name}(${entity.name} ${entity.varName}) throws SystemException {

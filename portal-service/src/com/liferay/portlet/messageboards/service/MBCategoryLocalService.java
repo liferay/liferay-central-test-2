@@ -68,7 +68,7 @@ public interface MBCategoryLocalService {
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBCategory updateMBCategory(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory)
@@ -147,7 +147,7 @@ public interface MBCategoryLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getCategories(
-		long groupId, long parentCategoryId, int begin, int end)
+		long groupId, long parentCategoryId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getCategoriesCount(long groupId)
@@ -166,7 +166,7 @@ public interface MBCategoryLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getSubscribedCategories(
-		long groupId, long userId, int begin, int end)
+		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getSubscribedCategoriesCount(long groupId, long userId)

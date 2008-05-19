@@ -72,12 +72,12 @@ public interface TagsAssetService {
 		java.lang.String languageId) throws java.rmi.RemoteException;
 
 	public com.liferay.portlet.tags.model.TagsAssetDisplay[] getCompanyAssetDisplays(
-		long companyId, int begin, int end, java.lang.String languageId)
+		long companyId, int start, int end, java.lang.String languageId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getCompanyAssets(
-		long companyId, int begin, int end)
+		long companyId, int start, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public int getCompanyAssetsCount(long companyId)
@@ -96,7 +96,7 @@ public interface TagsAssetService {
 
 	public com.liferay.portlet.tags.model.TagsAssetDisplay[] searchAssetDisplays(
 		long companyId, java.lang.String portletId, java.lang.String keywords,
-		java.lang.String languageId, int begin, int end)
+		java.lang.String languageId, int start, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

@@ -217,7 +217,7 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 		}
 	}
 
-	public List<SocialActivity> findByGroupId(long groupId, int begin, int end)
+	public List<SocialActivity> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -236,7 +236,7 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 			qPos.add(groupId);
 
 			return (List<SocialActivity>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -247,7 +247,7 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 	}
 
 	public List<SocialActivity> findByOrganizationId(
-			long organizationId, int begin, int end)
+			long organizationId, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -266,7 +266,7 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 			qPos.add(organizationId);
 
 			return (List<SocialActivity>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -276,7 +276,7 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 		}
 	}
 
-	public List<SocialActivity> findByRelation(long userId, int begin, int end)
+	public List<SocialActivity> findByRelation(long userId, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -295,7 +295,7 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 			qPos.add(userId);
 
 			return (List<SocialActivity>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -306,7 +306,7 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 	}
 
 	public List<SocialActivity> findByRelationType(
-			long userId, int type, int begin, int end)
+			long userId, int type, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -326,7 +326,7 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 			qPos.add(type);
 
 			return (List<SocialActivity>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

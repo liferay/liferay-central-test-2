@@ -304,10 +304,10 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	public List<Subscription> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return subscriptionPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public Subscription updateSubscription(Subscription subscription)

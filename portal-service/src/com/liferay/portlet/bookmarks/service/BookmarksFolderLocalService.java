@@ -68,7 +68,7 @@ public interface BookmarksFolderLocalService {
 
 	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder updateBookmarksFolder(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder)
@@ -148,7 +148,7 @@ public interface BookmarksFolderLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> getFolders(
-		long groupId, long parentFolderId, int begin, int end)
+		long groupId, long parentFolderId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getFoldersCount(long groupId, long parentFolderId)
@@ -161,7 +161,7 @@ public interface BookmarksFolderLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long[] folderIds, java.lang.String keywords, int begin,
+		long groupId, long[] folderIds, java.lang.String keywords, int start,
 		int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder updateFolder(

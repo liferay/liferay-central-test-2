@@ -152,40 +152,40 @@ public class SocialActivityLocalServiceImpl
 	}
 
 	public List<SocialActivity> getActivities(
-			String className, int begin, int end)
+			String className, int start, int end)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getActivities(classNameId, begin, end);
+		return getActivities(classNameId, start, end);
 	}
 
 	public List<SocialActivity> getActivities(
-			long classNameId, int begin, int end)
+			long classNameId, int start, int end)
 		throws SystemException {
 
 		return socialActivityPersistence.findByClassNameId(
-			classNameId, begin, end);
+			classNameId, start, end);
 	}
 
 	public List<SocialActivity> getActivities(
-			long mirrorActivityId, String className, long classPK, int begin,
+			long mirrorActivityId, String className, long classPK, int start,
 			int end)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		return getActivities(
-			mirrorActivityId, classNameId, classPK, begin, end);
+			mirrorActivityId, classNameId, classPK, start, end);
 	}
 
 	public List<SocialActivity> getActivities(
-			long mirrorActivityId, long classNameId, long classPK, int begin,
+			long mirrorActivityId, long classNameId, long classPK, int start,
 			int end)
 		throws SystemException {
 
 		return socialActivityPersistence.findByM_C_C(
-			mirrorActivityId, classNameId, classPK, begin, end);
+			mirrorActivityId, classNameId, classPK, start, end);
 	}
 
 	public int getActivitiesCount(String className) throws SystemException {
@@ -222,10 +222,10 @@ public class SocialActivityLocalServiceImpl
 	}
 
 	public List<SocialActivity> getGroupActivities(
-			long groupId, int begin, int end)
+			long groupId, int start, int end)
 		throws SystemException {
 
-		return socialActivityFinder.findByGroupId(groupId, begin, end);
+		return socialActivityFinder.findByGroupId(groupId, start, end);
 	}
 
 	public int getGroupActivitiesCount(long groupId) throws SystemException {
@@ -240,11 +240,11 @@ public class SocialActivityLocalServiceImpl
 	}
 
 	public List<SocialActivity> getOrganizationActivities(
-			long organizationId, int begin, int end)
+			long organizationId, int start, int end)
 		throws SystemException {
 
 		return socialActivityFinder.findByOrganizationId(
-			organizationId, begin, end);
+			organizationId, start, end);
 	}
 
 	public int getOrganizationActivitiesCount(long organizationId)
@@ -254,18 +254,18 @@ public class SocialActivityLocalServiceImpl
 	}
 
 	public List<SocialActivity> getRelationActivities(
-			long userId, int begin, int end)
+			long userId, int start, int end)
 		throws SystemException {
 
-		return socialActivityFinder.findByRelation(userId, begin, end);
+		return socialActivityFinder.findByRelation(userId, start, end);
 	}
 
 	public List<SocialActivity> getRelationActivities(
-			long userId, int type, int begin, int end)
+			long userId, int type, int start, int end)
 		throws SystemException {
 
 		return socialActivityFinder.findByRelationType(
-			userId, type, begin, end);
+			userId, type, start, end);
 	}
 
 	public int getRelationActivitiesCount(long userId) throws SystemException {
@@ -279,10 +279,10 @@ public class SocialActivityLocalServiceImpl
 	}
 
 	public List<SocialActivity> getUserActivities(
-			long userId, int begin, int end)
+			long userId, int start, int end)
 		throws SystemException {
 
-		return socialActivityPersistence.findByUserId(userId, begin, end);
+		return socialActivityPersistence.findByUserId(userId, start, end);
 	}
 
 	public int getUserActivitiesCount(long userId) throws SystemException {

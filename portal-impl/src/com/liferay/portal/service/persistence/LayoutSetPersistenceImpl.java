@@ -322,12 +322,12 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<LayoutSet> findByGroupId(long groupId, int begin, int end)
+	public List<LayoutSet> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
-		return findByGroupId(groupId, begin, end, null);
+		return findByGroupId(groupId, start, end, null);
 	}
 
-	public List<LayoutSet> findByGroupId(long groupId, int begin, int end,
+	public List<LayoutSet> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = LayoutSetModelImpl.CACHE_ENABLED;
 		String finderClassName = LayoutSet.class.getName();
@@ -341,7 +341,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -377,7 +377,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 				qPos.add(groupId);
 
 				List<LayoutSet> list = (List<LayoutSet>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -709,7 +709,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 	}
 
 	public List<LayoutSet> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -718,7 +718,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -734,12 +734,12 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<LayoutSet> findAll(int begin, int end)
+	public List<LayoutSet> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<LayoutSet> findAll(int begin, int end, OrderByComparator obc)
+	public List<LayoutSet> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = LayoutSetModelImpl.CACHE_ENABLED;
 		String finderClassName = LayoutSet.class.getName();
@@ -749,7 +749,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -777,7 +777,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<LayoutSet> list = (List<LayoutSet>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

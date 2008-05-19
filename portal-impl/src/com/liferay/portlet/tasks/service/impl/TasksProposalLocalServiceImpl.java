@@ -266,10 +266,10 @@ public class TasksProposalLocalServiceImpl
 		return tasksProposalPersistence.findByC_C(classNameId, classPK);
 	}
 
-	public List<TasksProposal> getProposals(long groupId, int begin, int end)
+	public List<TasksProposal> getProposals(long groupId, int start, int end)
 		throws SystemException {
 
-		return tasksProposalPersistence.findByGroupId(groupId, begin, end);
+		return tasksProposalPersistence.findByGroupId(groupId, start, end);
 	}
 
 	public int getProposalsCount(long groupId) throws SystemException {
@@ -277,10 +277,10 @@ public class TasksProposalLocalServiceImpl
 	}
 
 	public List<TasksProposal> getReviewProposals(
-			long groupId, long userId, int begin, int end)
+			long groupId, long userId, int start, int end)
 		throws SystemException {
 
-		return tasksProposalFinder.findByG_U(groupId, userId, begin, end);
+		return tasksProposalFinder.findByG_U(groupId, userId, start, end);
 	}
 
 	public int getReviewProposalsCount(long groupId, long userId)
@@ -290,10 +290,10 @@ public class TasksProposalLocalServiceImpl
 	}
 
 	public List<TasksProposal> getUserProposals(
-			long groupId, long userId, int begin, int end)
+			long groupId, long userId, int start, int end)
 		throws SystemException {
 
-		return tasksProposalPersistence.findByG_U(groupId, userId, begin, end);
+		return tasksProposalPersistence.findByG_U(groupId, userId, start, end);
 	}
 
 	public int getUserProposalsCount(long groupId, long userId)

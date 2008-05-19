@@ -67,7 +67,7 @@ public interface AccountLocalService {
 
 	public java.util.List<com.liferay.portal.model.Account> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Account updateAccount(
 		com.liferay.portal.model.Account account)

@@ -99,16 +99,16 @@ public class ExpandoValueUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByTableId(
-		long tableId, int begin, int end)
+		long tableId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByTableId(tableId, begin, end);
+		return getPersistence().findByTableId(tableId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByTableId(
-		long tableId, int begin, int end,
+		long tableId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByTableId(tableId, begin, end, obc);
+		return getPersistence().findByTableId(tableId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue findByTableId_First(
@@ -139,16 +139,16 @@ public class ExpandoValueUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByColumnId(
-		long columnId, int begin, int end)
+		long columnId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByColumnId(columnId, begin, end);
+		return getPersistence().findByColumnId(columnId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByColumnId(
-		long columnId, int begin, int end,
+		long columnId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByColumnId(columnId, begin, end, obc);
+		return getPersistence().findByColumnId(columnId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue findByColumnId_First(
@@ -180,16 +180,16 @@ public class ExpandoValueUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByRowId(
-		long rowId, int begin, int end)
+		long rowId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByRowId(rowId, begin, end);
+		return getPersistence().findByRowId(rowId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByRowId(
-		long rowId, int begin, int end,
+		long rowId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByRowId(rowId, begin, end, obc);
+		return getPersistence().findByRowId(rowId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue findByRowId_First(
@@ -220,16 +220,16 @@ public class ExpandoValueUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByT_R(
-		long tableId, long rowId, int begin, int end)
+		long tableId, long rowId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByT_R(tableId, rowId, begin, end);
+		return getPersistence().findByT_R(tableId, rowId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByT_R(
-		long tableId, long rowId, int begin, int end,
+		long tableId, long rowId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByT_R(tableId, rowId, begin, end, obc);
+		return getPersistence().findByT_R(tableId, rowId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue findByT_R_First(
@@ -276,16 +276,16 @@ public class ExpandoValueUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByC_C(
-		long classNameId, long classPK, int begin, int end)
+		long classNameId, long classPK, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_C(classNameId, classPK, begin, end);
+		return getPersistence().findByC_C(classNameId, classPK, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByC_C(
-		long classNameId, long classPK, int begin, int end,
+		long classNameId, long classPK, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_C(classNameId, classPK, begin, end, obc);
+		return getPersistence().findByC_C(classNameId, classPK, start, end, obc);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue findByC_C_First(
@@ -334,20 +334,20 @@ public class ExpandoValueUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByT_C_C_C(
-		long tableId, long columnId, long classNameId, long classPK, int begin,
+		long tableId, long columnId, long classNameId, long classPK, int start,
 		int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByT_C_C_C(tableId, columnId, classNameId, classPK,
-			begin, end);
+			start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByT_C_C_C(
-		long tableId, long columnId, long classNameId, long classPK, int begin,
+		long tableId, long columnId, long classNameId, long classPK, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByT_C_C_C(tableId, columnId, classNameId, classPK,
-			begin, end, obc);
+			start, end, obc);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue findByT_C_C_C_First(
@@ -388,9 +388,9 @@ public class ExpandoValueUtil {
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findWithDynamicQuery(queryInitializer, begin, end);
+				   .findWithDynamicQuery(queryInitializer, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findAll()
@@ -399,14 +399,14 @@ public class ExpandoValueUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end);
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end, obc);
+		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByTableId(long tableId)

@@ -68,7 +68,7 @@ public interface SocialActivityLocalService {
 
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.social.model.SocialActivity updateSocialActivity(
 		com.liferay.portlet.social.model.SocialActivity socialActivity)
@@ -101,19 +101,19 @@ public interface SocialActivityLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> getActivities(
-		java.lang.String className, int begin, int end)
+		java.lang.String className, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> getActivities(
-		long classNameId, int begin, int end)
+		long classNameId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> getActivities(
 		long mirrorActivityId, java.lang.String className, long classPK,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> getActivities(
-		long mirrorActivityId, long classNameId, long classPK, int begin,
+		long mirrorActivityId, long classNameId, long classPK, int start,
 		int end) throws com.liferay.portal.SystemException;
 
 	public int getActivitiesCount(java.lang.String className)
@@ -135,7 +135,7 @@ public interface SocialActivityLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> getGroupActivities(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getGroupActivitiesCount(long groupId)
@@ -147,18 +147,18 @@ public interface SocialActivityLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> getOrganizationActivities(
-		long organizationId, int begin, int end)
+		long organizationId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getOrganizationActivitiesCount(long organizationId)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> getRelationActivities(
-		long userId, int begin, int end)
+		long userId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> getRelationActivities(
-		long userId, int type, int begin, int end)
+		long userId, int type, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getRelationActivitiesCount(long userId)
@@ -168,7 +168,7 @@ public interface SocialActivityLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> getUserActivities(
-		long userId, int begin, int end)
+		long userId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getUserActivitiesCount(long userId)

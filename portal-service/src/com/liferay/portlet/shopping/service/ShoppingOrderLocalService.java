@@ -68,7 +68,7 @@ public interface ShoppingOrderLocalService {
 
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder updateShoppingOrder(
 		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder)
@@ -120,7 +120,7 @@ public interface ShoppingOrderLocalService {
 		java.lang.String billingEmailAddress,
 		java.lang.String shippingFirstName, java.lang.String shippingLastName,
 		java.lang.String shippingEmailAddress,
-		java.lang.String ppPaymentStatus, boolean andOperator, int begin,
+		java.lang.String ppPaymentStatus, boolean andOperator, int start,
 		int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

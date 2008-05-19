@@ -464,14 +464,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 				${finderCol.type} ${finderCol.name},
 			</#list>
 
-			int begin, int end) throws SystemException {
+			int start, int end) throws SystemException {
 				return findBy${finder.name}(
 
 				<#list finderColsList as finderCol>
 					${finderCol.name},
 				</#list>
 
-				begin, end, null);
+				start, end, null);
 			}
 
 			public List<${entity.name}> findBy${finder.name}(
@@ -480,7 +480,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 				${finderCol.type} ${finderCol.name},
 			</#list>
 
-			int begin, int end, OrderByComparator obc) throws SystemException {
+			int start, int end, OrderByComparator obc) throws SystemException {
 				boolean finderClassNameCacheEnabled = ${entity.name}ModelImpl.CACHE_ENABLED;
 				String finderClassName = ${entity.name}.class.getName();
 				String finderMethodName = "findBy${finder.name}";
@@ -510,7 +510,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 						,
 					</#list>
 
-					String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+					String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 				};
 
 				Object result = null;
@@ -607,7 +607,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 							</#if>
 						</#list>
 
-						List<${entity.name}> list = (List<${entity.name}>)QueryUtil.list(q, getDialect(), begin, end);
+						List<${entity.name}> list = (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end);
 
 						FinderCache.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
 
@@ -1068,7 +1068,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 		}
 	}
 
-	public List<${entity.name}> findWithDynamicQuery(DynamicQueryInitializer queryInitializer, int begin, int end) throws SystemException {
+	public List<${entity.name}> findWithDynamicQuery(DynamicQueryInitializer queryInitializer, int start, int end) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1076,7 +1076,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -1092,16 +1092,16 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<${entity.name}> findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
+	public List<${entity.name}> findAll(int start, int end) throws SystemException {
+		return findAll(start, end, null);
 	}
 
-	public List<${entity.name}> findAll(int begin, int end, OrderByComparator obc) throws SystemException {
+	public List<${entity.name}> findAll(int start, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ${entity.name}ModelImpl.CACHE_ENABLED;
 		String finderClassName = ${entity.name}.class.getName();
 		String finderMethodName = "findAll";
 		String[] finderParams = new String[] {"java.lang.Integer", "java.lang.Integer", "com.liferay.portal.kernel.util.OrderByComparator"};
-		Object[] finderArgs = new Object[] {String.valueOf(begin), String.valueOf(end), String.valueOf(obc)};
+		Object[] finderArgs = new Object[] {String.valueOf(start), String.valueOf(end), String.valueOf(obc)};
 
 		Object result = null;
 
@@ -1138,7 +1138,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 				Query q = session.createQuery(query.toString());
 
-				List<${entity.name}> list = (List<${entity.name}>)QueryUtil.list(q, getDialect(), begin, end);
+				List<${entity.name}> list = (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -1432,11 +1432,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 				return get${tempEntity.names}(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 			}
 
-			public List<${tempEntity.packagePath}.model.${tempEntity.name}> get${tempEntity.names}(${entity.PKClassName} pk, int begin, int end) throws ${noSuchEntity}Exception, SystemException {
-				return get${tempEntity.names}(pk, begin, end, null);
+			public List<${tempEntity.packagePath}.model.${tempEntity.name}> get${tempEntity.names}(${entity.PKClassName} pk, int start, int end) throws ${noSuchEntity}Exception, SystemException {
+				return get${tempEntity.names}(pk, start, end, null);
 			}
 
-			public List<${tempEntity.packagePath}.model.${tempEntity.name}> get${tempEntity.names}(${entity.PKClassName} pk, int begin, int end, OrderByComparator obc) throws ${noSuchEntity}Exception, SystemException {
+			public List<${tempEntity.packagePath}.model.${tempEntity.name}> get${tempEntity.names}(${entity.PKClassName} pk, int start, int end, OrderByComparator obc) throws ${noSuchEntity}Exception, SystemException {
 				boolean finderClassNameCacheEnabled =
 					<#if column.mappingTable??>
 						${entity.name}ModelImpl.CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)}
@@ -1478,7 +1478,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 						)
 					</#if>
 
-					, String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+					, String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 				};
 
 				Object result = null;
@@ -1524,7 +1524,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 						qPos.add(pk);
 
-						List<${tempEntity.packagePath}.model.${tempEntity.name}> list = (List<${tempEntity.packagePath}.model.${tempEntity.name}>)QueryUtil.list(q, getDialect(), begin, end);
+						List<${tempEntity.packagePath}.model.${tempEntity.name}> list = (List<${tempEntity.packagePath}.model.${tempEntity.name}>)QueryUtil.list(q, getDialect(), start, end);
 
 						FinderCache.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
 

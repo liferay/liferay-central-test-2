@@ -68,7 +68,7 @@ public interface SCProductScreenshotLocalService {
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot updateSCProductScreenshot(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot)

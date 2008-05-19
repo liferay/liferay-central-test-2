@@ -161,10 +161,10 @@ public class HitsImpl implements Hits {
 		return _scores[n];
 	}
 
-	public Hits subset(int begin, int end) {
+	public Hits subset(int start, int end) {
 		Hits subset = new HitsImpl();
 
-		if ((begin > - 1) && (begin <= end)) {
+		if ((start > - 1) && (start <= end)) {
 			subset.setStart(getStart());
 
 			Document[] subsetDocs = new DocumentImpl[getLength()];
@@ -172,7 +172,7 @@ public class HitsImpl implements Hits {
 
 			int j = 0;
 
-			for (int i = begin; (i < end) && (i < getLength()); i++, j++) {
+			for (int i = start; (i < end) && (i < getLength()); i++, j++) {
 				subsetDocs[j] = doc(i);
 				subsetScores[j] = score(i);
 			}

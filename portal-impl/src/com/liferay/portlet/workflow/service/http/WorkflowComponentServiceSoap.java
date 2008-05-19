@@ -140,10 +140,10 @@ public class WorkflowComponentServiceSoap {
 	}
 
 	public static java.util.List getDefinitions(long definitionId,
-		java.lang.String name, int begin, int end) throws RemoteException {
+		java.lang.String name, int start, int end) throws RemoteException {
 		try {
 			java.util.List returnValue = WorkflowComponentServiceUtil.getDefinitions(definitionId,
-					name, begin, end);
+					name, start, end);
 
 			return returnValue;
 		}
@@ -155,10 +155,10 @@ public class WorkflowComponentServiceSoap {
 	}
 
 	public static java.lang.String getDefinitionsXml(long definitionId,
-		java.lang.String name, int begin, int end) throws RemoteException {
+		java.lang.String name, int start, int end) throws RemoteException {
 		try {
 			java.lang.String returnValue = WorkflowComponentServiceUtil.getDefinitionsXml(definitionId,
-					name, begin, end);
+					name, start, end);
 
 			return returnValue;
 		}
@@ -218,13 +218,13 @@ public class WorkflowComponentServiceSoap {
 		java.lang.String definitionVersion, java.lang.String startDateGT,
 		java.lang.String startDateLT, java.lang.String endDateGT,
 		java.lang.String endDateLT, boolean hideEndedTasks,
-		boolean retrieveUserInstances, boolean andOperator, int begin, int end)
+		boolean retrieveUserInstances, boolean andOperator, int start, int end)
 		throws RemoteException {
 		try {
 			java.util.List returnValue = WorkflowComponentServiceUtil.getInstances(definitionId,
 					instanceId, definitionName, definitionVersion, startDateGT,
 					startDateLT, endDateGT, endDateLT, hideEndedTasks,
-					retrieveUserInstances, andOperator, begin, end);
+					retrieveUserInstances, andOperator, start, end);
 
 			return returnValue;
 		}
@@ -283,13 +283,13 @@ public class WorkflowComponentServiceSoap {
 		java.lang.String definitionVersion, java.lang.String startDateGT,
 		java.lang.String startDateLT, java.lang.String endDateGT,
 		java.lang.String endDateLT, boolean hideEndedTasks,
-		boolean retrieveUserInstances, boolean andOperator, int begin, int end)
+		boolean retrieveUserInstances, boolean andOperator, int start, int end)
 		throws RemoteException {
 		try {
 			java.lang.String returnValue = WorkflowComponentServiceUtil.getInstancesXml(definitionId,
 					instanceId, definitionName, definitionVersion, startDateGT,
 					startDateLT, endDateGT, endDateLT, hideEndedTasks,
-					retrieveUserInstances, andOperator, begin, end);
+					retrieveUserInstances, andOperator, start, end);
 
 			return returnValue;
 		}
@@ -390,12 +390,12 @@ public class WorkflowComponentServiceSoap {
 		java.lang.String createDateLT, java.lang.String startDateGT,
 		java.lang.String startDateLT, java.lang.String endDateGT,
 		java.lang.String endDateLT, boolean hideEndedTasks,
-		boolean andOperator, int begin, int end) throws RemoteException {
+		boolean andOperator, int start, int end) throws RemoteException {
 		try {
 			java.util.List returnValue = WorkflowComponentServiceUtil.getUserTasks(instanceId,
 					taskName, definitionName, assignedTo, createDateGT,
 					createDateLT, startDateGT, startDateLT, endDateGT,
-					endDateLT, hideEndedTasks, andOperator, begin, end);
+					endDateLT, hideEndedTasks, andOperator, start, end);
 
 			return returnValue;
 		}
@@ -456,12 +456,12 @@ public class WorkflowComponentServiceSoap {
 		java.lang.String createDateLT, java.lang.String startDateGT,
 		java.lang.String startDateLT, java.lang.String endDateGT,
 		java.lang.String endDateLT, boolean hideEndedTasks,
-		boolean andOperator, int begin, int end) throws RemoteException {
+		boolean andOperator, int start, int end) throws RemoteException {
 		try {
 			java.lang.String returnValue = WorkflowComponentServiceUtil.getUserTasksXml(instanceId,
 					taskName, definitionName, assignedTo, createDateGT,
 					createDateLT, startDateGT, startDateLT, endDateGT,
-					endDateLT, hideEndedTasks, andOperator, begin, end);
+					endDateLT, hideEndedTasks, andOperator, start, end);
 
 			return returnValue;
 		}

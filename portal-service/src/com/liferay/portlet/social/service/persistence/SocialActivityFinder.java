@@ -42,18 +42,18 @@ public interface SocialActivityFinder {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findByGroupId(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findByOrganizationId(
-		long organizationId, int begin, int end)
+		long organizationId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findByRelation(
-		long userId, int begin, int end)
+		long userId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findByRelationType(
-		long userId, int type, int begin, int end)
+		long userId, int type, int start, int end)
 		throws com.liferay.portal.SystemException;
 }

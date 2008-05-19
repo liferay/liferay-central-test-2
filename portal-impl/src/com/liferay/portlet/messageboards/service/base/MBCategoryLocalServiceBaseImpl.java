@@ -135,10 +135,10 @@ public abstract class MBCategoryLocalServiceBaseImpl
 	}
 
 	public List<MBCategory> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return mbCategoryPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public MBCategory updateMBCategory(MBCategory mbCategory)

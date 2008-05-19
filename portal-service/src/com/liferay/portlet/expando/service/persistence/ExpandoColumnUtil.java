@@ -99,16 +99,16 @@ public class ExpandoColumnUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> findByTableId(
-		long tableId, int begin, int end)
+		long tableId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByTableId(tableId, begin, end);
+		return getPersistence().findByTableId(tableId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> findByTableId(
-		long tableId, int begin, int end,
+		long tableId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByTableId(tableId, begin, end, obc);
+		return getPersistence().findByTableId(tableId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoColumn findByTableId_First(
@@ -154,9 +154,9 @@ public class ExpandoColumnUtil {
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findWithDynamicQuery(queryInitializer, begin, end);
+				   .findWithDynamicQuery(queryInitializer, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> findAll()
@@ -165,14 +165,14 @@ public class ExpandoColumnUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end);
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end, obc);
+		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByTableId(long tableId)

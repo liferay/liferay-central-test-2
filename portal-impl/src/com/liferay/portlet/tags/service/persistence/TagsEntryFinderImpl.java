@@ -156,7 +156,7 @@ public class TagsEntryFinderImpl implements TagsEntryFinder {
 	}
 
 	public List<TagsEntry> findByC_N_P(
-			long companyId, String name, String[] properties, int begin,
+			long companyId, String name, String[] properties, int start,
 			int end)
 		throws SystemException {
 
@@ -181,7 +181,7 @@ public class TagsEntryFinderImpl implements TagsEntryFinder {
 			qPos.add(name);
 
 			return (List<TagsEntry>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -202,7 +202,7 @@ public class TagsEntryFinderImpl implements TagsEntryFinder {
 
 	public List<TagsEntry> findByG_C_C_N(
 			long groupId, long companyId, long classNameId, String name,
-			int begin, int end)
+			int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -225,7 +225,7 @@ public class TagsEntryFinderImpl implements TagsEntryFinder {
 			qPos.add(name);
 
 			return (List<TagsEntry>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

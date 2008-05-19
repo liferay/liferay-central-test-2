@@ -155,7 +155,7 @@ public class GetArticlesAction extends Action {
 		Boolean expired = Boolean.FALSE;
 		Date reviewDate = null;
 		boolean andOperator = true;
-		int begin = 0;
+		int start = 0;
 		int end = ParamUtil.getInteger(req, "delta", 5);
 		String orderBy = ParamUtil.getString(req, "orderBy");
 		String orderByCol = ParamUtil.getString(req, "orderByCol", orderBy);
@@ -171,7 +171,7 @@ public class GetArticlesAction extends Action {
 		return JournalArticleLocalServiceUtil.search(
 			companyId, groupId, articleId, version, title, description, content,
 			type, structureIds, templateIds, displayDateGT, displayDateLT,
-			approved, expired, reviewDate, andOperator, begin, end, obc);
+			approved, expired, reviewDate, andOperator, start, end, obc);
 	}
 
 	protected byte[] getContent(

@@ -93,10 +93,10 @@ public abstract class SCLicenseLocalServiceBaseImpl
 	}
 
 	public List<SCLicense> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return scLicensePersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public SCLicense updateSCLicense(SCLicense scLicense)

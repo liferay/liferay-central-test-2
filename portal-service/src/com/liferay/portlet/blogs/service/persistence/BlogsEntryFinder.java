@@ -36,11 +36,11 @@ public interface BlogsEntryFinder {
 		boolean draft) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByOrganizationId(
-		long organizationId, boolean draft, int begin, int end)
+		long organizationId, boolean draft, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByOrganizationIds(
-		java.util.List<Long> organizationIds, boolean draft, int begin, int end)
+		java.util.List<Long> organizationIds, boolean draft, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByNoAssets()

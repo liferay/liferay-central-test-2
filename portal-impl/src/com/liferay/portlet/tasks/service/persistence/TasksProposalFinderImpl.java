@@ -91,7 +91,7 @@ public class TasksProposalFinderImpl implements TasksProposalFinder {
 	}
 
 	public List<TasksProposal> findByG_U(
-			long groupId, long userId, int begin, int end)
+			long groupId, long userId, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -111,7 +111,7 @@ public class TasksProposalFinderImpl implements TasksProposalFinder {
 			qPos.add(userId);
 
 			return (List<TasksProposal>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

@@ -328,12 +328,12 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<OrgGroupRole> findByGroupId(long groupId, int begin, int end)
+	public List<OrgGroupRole> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
-		return findByGroupId(groupId, begin, end, null);
+		return findByGroupId(groupId, start, end, null);
 	}
 
-	public List<OrgGroupRole> findByGroupId(long groupId, int begin, int end,
+	public List<OrgGroupRole> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = OrgGroupRoleModelImpl.CACHE_ENABLED;
 		String finderClassName = OrgGroupRole.class.getName();
@@ -347,7 +347,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -384,7 +384,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 				qPos.add(groupId);
 
 				List<OrgGroupRole> list = (List<OrgGroupRole>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -552,12 +552,12 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<OrgGroupRole> findByRoleId(long roleId, int begin, int end)
+	public List<OrgGroupRole> findByRoleId(long roleId, int start, int end)
 		throws SystemException {
-		return findByRoleId(roleId, begin, end, null);
+		return findByRoleId(roleId, start, end, null);
 	}
 
-	public List<OrgGroupRole> findByRoleId(long roleId, int begin, int end,
+	public List<OrgGroupRole> findByRoleId(long roleId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = OrgGroupRoleModelImpl.CACHE_ENABLED;
 		String finderClassName = OrgGroupRole.class.getName();
@@ -571,7 +571,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(roleId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -608,7 +608,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 				qPos.add(roleId);
 
 				List<OrgGroupRole> list = (List<OrgGroupRole>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -740,7 +740,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 	}
 
 	public List<OrgGroupRole> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -749,7 +749,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -765,12 +765,12 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<OrgGroupRole> findAll(int begin, int end)
+	public List<OrgGroupRole> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<OrgGroupRole> findAll(int begin, int end, OrderByComparator obc)
+	public List<OrgGroupRole> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = OrgGroupRoleModelImpl.CACHE_ENABLED;
 		String finderClassName = OrgGroupRole.class.getName();
@@ -780,7 +780,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -808,7 +808,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<OrgGroupRole> list = (List<OrgGroupRole>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

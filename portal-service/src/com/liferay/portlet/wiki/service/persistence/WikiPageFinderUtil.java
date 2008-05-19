@@ -41,17 +41,17 @@ public class WikiPageFinderUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByCreateDate(
-		long nodeId, java.util.Date createDate, boolean before, int begin,
+		long nodeId, java.util.Date createDate, boolean before, int start,
 		int end) throws com.liferay.portal.SystemException {
 		return getFinder()
-				   .findByCreateDate(nodeId, createDate, before, begin, end);
+				   .findByCreateDate(nodeId, createDate, before, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByCreateDate(
-		long nodeId, java.sql.Timestamp createDate, boolean before, int begin,
+		long nodeId, java.sql.Timestamp createDate, boolean before, int start,
 		int end) throws com.liferay.portal.SystemException {
 		return getFinder()
-				   .findByCreateDate(nodeId, createDate, before, begin, end);
+				   .findByCreateDate(nodeId, createDate, before, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByNoAssets()

@@ -245,11 +245,11 @@ public class BookmarksFolderLocalServiceImpl
 	}
 
 	public List<BookmarksFolder> getFolders(
-			long groupId, long parentFolderId, int begin, int end)
+			long groupId, long parentFolderId, int start, int end)
 		throws SystemException {
 
 		return bookmarksFolderPersistence.findByG_P(
-			groupId, parentFolderId, begin, end);
+			groupId, parentFolderId, start, end);
 	}
 
 	public int getFoldersCount(long groupId, long parentFolderId)
@@ -323,7 +323,7 @@ public class BookmarksFolderLocalServiceImpl
 
 	public Hits search(
 			long companyId, long groupId, long[] folderIds, String keywords,
-			int begin, int end)
+			int start, int end)
 		throws SystemException {
 
 		Hits hits = null;
@@ -371,7 +371,7 @@ public class BookmarksFolderLocalServiceImpl
 			}
 
 			hits = SearchEngineUtil.search(
-				companyId, new QueryImpl(fullQuery), begin, end);
+				companyId, new QueryImpl(fullQuery), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

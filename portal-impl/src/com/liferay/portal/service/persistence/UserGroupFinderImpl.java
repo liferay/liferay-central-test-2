@@ -187,7 +187,7 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 
 	public List<UserGroup> findByC_N_D(
 			long companyId, String name, String description,
-			LinkedHashMap<String, Object> params, int begin, int end,
+			LinkedHashMap<String, Object> params, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
@@ -219,7 +219,7 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 			qPos.add(description);
 
 			return (List<UserGroup>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

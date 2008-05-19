@@ -167,12 +167,12 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 	public List<UserGroup> search(
 			long companyId, String name, String description,
-			LinkedHashMap<String, Object> params, int begin, int end,
+			LinkedHashMap<String, Object> params, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
 		return userGroupFinder.findByC_N_D(
-			companyId, name, description, params, begin, end, obc);
+			companyId, name, description, params, start, end, obc);
 	}
 
 	public int searchCount(

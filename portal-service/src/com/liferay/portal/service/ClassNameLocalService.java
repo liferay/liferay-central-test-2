@@ -67,7 +67,7 @@ public interface ClassNameLocalService {
 
 	public java.util.List<com.liferay.portal.model.ClassName> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ClassName updateClassName(
 		com.liferay.portal.model.ClassName className)

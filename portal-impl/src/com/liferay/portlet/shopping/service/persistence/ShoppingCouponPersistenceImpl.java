@@ -333,12 +333,12 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<ShoppingCoupon> findByGroupId(long groupId, int begin, int end)
+	public List<ShoppingCoupon> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
-		return findByGroupId(groupId, begin, end, null);
+		return findByGroupId(groupId, start, end, null);
 	}
 
-	public List<ShoppingCoupon> findByGroupId(long groupId, int begin, int end,
+	public List<ShoppingCoupon> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ShoppingCouponModelImpl.CACHE_ENABLED;
 		String finderClassName = ShoppingCoupon.class.getName();
@@ -352,7 +352,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -395,7 +395,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 				qPos.add(groupId);
 
 				List<ShoppingCoupon> list = (List<ShoppingCoupon>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -635,7 +635,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 	}
 
 	public List<ShoppingCoupon> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -644,7 +644,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -660,12 +660,12 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<ShoppingCoupon> findAll(int begin, int end)
+	public List<ShoppingCoupon> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<ShoppingCoupon> findAll(int begin, int end,
+	public List<ShoppingCoupon> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ShoppingCouponModelImpl.CACHE_ENABLED;
 		String finderClassName = ShoppingCoupon.class.getName();
@@ -675,7 +675,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -710,7 +710,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<ShoppingCoupon> list = (List<ShoppingCoupon>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

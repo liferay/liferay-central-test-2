@@ -112,10 +112,10 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 	}
 
 	public List<JournalArticleImage> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return journalArticleImagePersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public JournalArticleImage updateJournalArticleImage(

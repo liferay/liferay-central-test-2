@@ -67,7 +67,7 @@ public interface ImageLocalService {
 
 	public java.util.List<com.liferay.portal.model.Image> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Image updateImage(
 		com.liferay.portal.model.Image image)
@@ -80,7 +80,7 @@ public interface ImageLocalService {
 	public java.util.List<com.liferay.portal.model.Image> getImages()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Image> getImages(int begin,
+	public java.util.List<com.liferay.portal.model.Image> getImages(int start,
 		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Image> getImagesBySize(

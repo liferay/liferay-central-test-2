@@ -223,11 +223,11 @@ public class ShoppingCategoryLocalServiceImpl
 	}
 
 	public List<ShoppingCategory> getCategories(
-			long groupId, long parentCategoryId, int begin, int end)
+			long groupId, long parentCategoryId, int start, int end)
 		throws SystemException {
 
 		return shoppingCategoryPersistence.findByG_P(
-			groupId, parentCategoryId, begin, end);
+			groupId, parentCategoryId, start, end);
 	}
 
 	public int getCategoriesCount(long groupId, long parentCategoryId)

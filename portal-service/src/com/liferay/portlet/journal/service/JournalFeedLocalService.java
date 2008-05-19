@@ -68,7 +68,7 @@ public interface JournalFeedLocalService {
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalFeed> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalFeed updateJournalFeed(
 		com.liferay.portlet.journal.model.JournalFeed journalFeed)
@@ -216,21 +216,21 @@ public interface JournalFeedLocalService {
 		long groupId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalFeed> getFeeds(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getFeedsCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalFeed> search(
-		long companyId, long groupId, java.lang.String keywords, int begin,
+		long companyId, long groupId, java.lang.String keywords, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalFeed> search(
 		long companyId, long groupId, java.lang.String feedId,
 		java.lang.String name, java.lang.String description,
-		boolean andOperator, int begin, int end,
+		boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 

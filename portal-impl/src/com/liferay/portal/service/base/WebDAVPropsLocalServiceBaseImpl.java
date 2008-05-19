@@ -304,10 +304,10 @@ public abstract class WebDAVPropsLocalServiceBaseImpl
 	}
 
 	public List<WebDAVProps> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return webDAVPropsPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public WebDAVProps updateWebDAVProps(WebDAVProps webDAVProps)

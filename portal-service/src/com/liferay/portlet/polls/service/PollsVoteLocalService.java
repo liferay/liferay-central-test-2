@@ -68,7 +68,7 @@ public interface PollsVoteLocalService {
 
 	public java.util.List<com.liferay.portlet.polls.model.PollsVote> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.polls.model.PollsVote updatePollsVote(
 		com.liferay.portlet.polls.model.PollsVote pollsVote)
@@ -80,7 +80,7 @@ public interface PollsVoteLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.polls.model.PollsVote> getChoiceVotes(
-		long choiceId, int begin, int end)
+		long choiceId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getChoiceVotesCount(long choiceId)
@@ -92,7 +92,7 @@ public interface PollsVoteLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.polls.model.PollsVote> getQuestionVotes(
-		long questionId, int begin, int end)
+		long questionId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getQuestionVotesCount(long questionId)

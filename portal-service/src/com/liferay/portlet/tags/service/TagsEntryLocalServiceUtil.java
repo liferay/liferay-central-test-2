@@ -86,10 +86,10 @@ public class TagsEntryLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
 
-		return tagsEntryLocalService.dynamicQuery(queryInitializer, begin, end);
+		return tagsEntryLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry updateTagsEntry(
@@ -195,11 +195,11 @@ public class TagsEntryLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
 		long groupId, long companyId, long classNameId, java.lang.String name,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
 
 		return tagsEntryLocalService.getEntries(groupId, companyId,
-			classNameId, name, begin, end);
+			classNameId, name, start, end);
 	}
 
 	public static int getEntriesSize(long groupId, long companyId,
@@ -280,20 +280,20 @@ public class TagsEntryLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
 		long companyId, java.lang.String name, java.lang.String[] properties,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
 
-		return tagsEntryLocalService.search(companyId, name, properties, begin,
+		return tagsEntryLocalService.search(companyId, name, properties, start,
 			end);
 	}
 
 	public static com.liferay.portal.kernel.json.JSONArrayWrapper searchAutocomplete(
 		long companyId, java.lang.String name, java.lang.String[] properties,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
 
 		return tagsEntryLocalService.searchAutocomplete(companyId, name,
-			properties, begin, end);
+			properties, start, end);
 	}
 
 	public static int searchCount(long companyId, java.lang.String name,

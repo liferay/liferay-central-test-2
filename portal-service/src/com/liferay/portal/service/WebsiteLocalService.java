@@ -67,7 +67,7 @@ public interface WebsiteLocalService {
 
 	public java.util.List<com.liferay.portal.model.Website> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Website updateWebsite(
 		com.liferay.portal.model.Website website)

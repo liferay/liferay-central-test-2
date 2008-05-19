@@ -99,16 +99,16 @@ public class JournalStructureUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> findByUuid(
-		java.lang.String uuid, int begin, int end)
+		java.lang.String uuid, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByUuid(uuid, begin, end);
+		return getPersistence().findByUuid(uuid, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> findByUuid(
-		java.lang.String uuid, int begin, int end,
+		java.lang.String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByUuid(uuid, begin, end, obc);
+		return getPersistence().findByUuid(uuid, start, end, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure findByUuid_First(
@@ -154,16 +154,16 @@ public class JournalStructureUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> findByGroupId(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByGroupId(groupId, begin, end);
+		return getPersistence().findByGroupId(groupId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> findByGroupId(
-		long groupId, int begin, int end,
+		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByGroupId(groupId, begin, end, obc);
+		return getPersistence().findByGroupId(groupId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure findByGroupId_First(
@@ -194,16 +194,16 @@ public class JournalStructureUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> findByStructureId(
-		java.lang.String structureId, int begin, int end)
+		java.lang.String structureId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByStructureId(structureId, begin, end);
+		return getPersistence().findByStructureId(structureId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> findByStructureId(
-		java.lang.String structureId, int begin, int end,
+		java.lang.String structureId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByStructureId(structureId, begin, end, obc);
+		return getPersistence().findByStructureId(structureId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure findByStructureId_First(
@@ -252,9 +252,9 @@ public class JournalStructureUtil {
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findWithDynamicQuery(queryInitializer, begin, end);
+				   .findWithDynamicQuery(queryInitializer, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> findAll()
@@ -263,14 +263,14 @@ public class JournalStructureUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end);
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end, obc);
+		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByUuid(java.lang.String uuid)

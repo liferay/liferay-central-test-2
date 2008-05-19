@@ -328,12 +328,12 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<UserGroupRole> findByUserId(long userId, int begin, int end)
+	public List<UserGroupRole> findByUserId(long userId, int start, int end)
 		throws SystemException {
-		return findByUserId(userId, begin, end, null);
+		return findByUserId(userId, start, end, null);
 	}
 
-	public List<UserGroupRole> findByUserId(long userId, int begin, int end,
+	public List<UserGroupRole> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
 		String finderClassName = UserGroupRole.class.getName();
@@ -347,7 +347,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -384,7 +384,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				qPos.add(userId);
 
 				List<UserGroupRole> list = (List<UserGroupRole>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -552,12 +552,12 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<UserGroupRole> findByGroupId(long groupId, int begin, int end)
+	public List<UserGroupRole> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
-		return findByGroupId(groupId, begin, end, null);
+		return findByGroupId(groupId, start, end, null);
 	}
 
-	public List<UserGroupRole> findByGroupId(long groupId, int begin, int end,
+	public List<UserGroupRole> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
 		String finderClassName = UserGroupRole.class.getName();
@@ -571,7 +571,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -608,7 +608,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				qPos.add(groupId);
 
 				List<UserGroupRole> list = (List<UserGroupRole>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -776,12 +776,12 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<UserGroupRole> findByRoleId(long roleId, int begin, int end)
+	public List<UserGroupRole> findByRoleId(long roleId, int start, int end)
 		throws SystemException {
-		return findByRoleId(roleId, begin, end, null);
+		return findByRoleId(roleId, start, end, null);
 	}
 
-	public List<UserGroupRole> findByRoleId(long roleId, int begin, int end,
+	public List<UserGroupRole> findByRoleId(long roleId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
 		String finderClassName = UserGroupRole.class.getName();
@@ -795,7 +795,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(roleId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -832,7 +832,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				qPos.add(roleId);
 
 				List<UserGroupRole> list = (List<UserGroupRole>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1008,12 +1008,12 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<UserGroupRole> findByU_G(long userId, long groupId, int begin,
+	public List<UserGroupRole> findByU_G(long userId, long groupId, int start,
 		int end) throws SystemException {
-		return findByU_G(userId, groupId, begin, end, null);
+		return findByU_G(userId, groupId, start, end, null);
 	}
 
-	public List<UserGroupRole> findByU_G(long userId, long groupId, int begin,
+	public List<UserGroupRole> findByU_G(long userId, long groupId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
 		String finderClassName = UserGroupRole.class.getName();
@@ -1027,7 +1027,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(userId), new Long(groupId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1070,7 +1070,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				qPos.add(groupId);
 
 				List<UserGroupRole> list = (List<UserGroupRole>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1262,12 +1262,12 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<UserGroupRole> findByG_R(long groupId, long roleId, int begin,
+	public List<UserGroupRole> findByG_R(long groupId, long roleId, int start,
 		int end) throws SystemException {
-		return findByG_R(groupId, roleId, begin, end, null);
+		return findByG_R(groupId, roleId, start, end, null);
 	}
 
-	public List<UserGroupRole> findByG_R(long groupId, long roleId, int begin,
+	public List<UserGroupRole> findByG_R(long groupId, long roleId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
 		String finderClassName = UserGroupRole.class.getName();
@@ -1281,7 +1281,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(roleId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1324,7 +1324,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				qPos.add(roleId);
 
 				List<UserGroupRole> list = (List<UserGroupRole>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1472,7 +1472,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 	}
 
 	public List<UserGroupRole> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -1481,7 +1481,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -1497,12 +1497,12 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<UserGroupRole> findAll(int begin, int end)
+	public List<UserGroupRole> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<UserGroupRole> findAll(int begin, int end, OrderByComparator obc)
+	public List<UserGroupRole> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = UserGroupRoleModelImpl.CACHE_ENABLED;
 		String finderClassName = UserGroupRole.class.getName();
@@ -1512,7 +1512,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1540,7 +1540,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<UserGroupRole> list = (List<UserGroupRole>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

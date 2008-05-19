@@ -336,12 +336,12 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<ShoppingItemPrice> findByItemId(long itemId, int begin, int end)
+	public List<ShoppingItemPrice> findByItemId(long itemId, int start, int end)
 		throws SystemException {
-		return findByItemId(itemId, begin, end, null);
+		return findByItemId(itemId, start, end, null);
 	}
 
-	public List<ShoppingItemPrice> findByItemId(long itemId, int begin,
+	public List<ShoppingItemPrice> findByItemId(long itemId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ShoppingItemPriceModelImpl.CACHE_ENABLED;
 		String finderClassName = ShoppingItemPrice.class.getName();
@@ -355,7 +355,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(itemId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -399,7 +399,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistence
 				qPos.add(itemId);
 
 				List<ShoppingItemPrice> list = (List<ShoppingItemPrice>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -540,7 +540,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistence
 	}
 
 	public List<ShoppingItemPrice> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -549,7 +549,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -565,12 +565,12 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<ShoppingItemPrice> findAll(int begin, int end)
+	public List<ShoppingItemPrice> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<ShoppingItemPrice> findAll(int begin, int end,
+	public List<ShoppingItemPrice> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ShoppingItemPriceModelImpl.CACHE_ENABLED;
 		String finderClassName = ShoppingItemPrice.class.getName();
@@ -580,7 +580,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -616,7 +616,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<ShoppingItemPrice> list = (List<ShoppingItemPrice>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

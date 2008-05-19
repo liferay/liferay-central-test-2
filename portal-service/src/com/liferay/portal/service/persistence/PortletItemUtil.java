@@ -100,16 +100,16 @@ public class PortletItemUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletItem> findByG_C(
-		long groupId, long classNameId, int begin, int end)
+		long groupId, long classNameId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByG_C(groupId, classNameId, begin, end);
+		return getPersistence().findByG_C(groupId, classNameId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletItem> findByG_C(
-		long groupId, long classNameId, int begin, int end,
+		long groupId, long classNameId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByG_C(groupId, classNameId, begin, end, obc);
+		return getPersistence().findByG_C(groupId, classNameId, start, end, obc);
 	}
 
 	public static com.liferay.portal.model.PortletItem findByG_C_First(
@@ -145,18 +145,18 @@ public class PortletItemUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletItem> findByG_P_C(
-		long groupId, java.lang.String portletId, long classNameId, int begin,
+		long groupId, java.lang.String portletId, long classNameId, int start,
 		int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findByG_P_C(groupId, portletId, classNameId, begin, end);
+				   .findByG_P_C(groupId, portletId, classNameId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletItem> findByG_P_C(
-		long groupId, java.lang.String portletId, long classNameId, int begin,
+		long groupId, java.lang.String portletId, long classNameId, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findByG_P_C(groupId, portletId, classNameId, begin, end, obc);
+				   .findByG_P_C(groupId, portletId, classNameId, start, end, obc);
 	}
 
 	public static com.liferay.portal.model.PortletItem findByG_P_C_First(
@@ -211,9 +211,9 @@ public class PortletItemUtil {
 
 	public static java.util.List<com.liferay.portal.model.PortletItem> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findWithDynamicQuery(queryInitializer, begin, end);
+				   .findWithDynamicQuery(queryInitializer, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletItem> findAll()
@@ -222,14 +222,14 @@ public class PortletItemUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletItem> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end);
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletItem> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end, obc);
+		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByG_C(long groupId, long classNameId)

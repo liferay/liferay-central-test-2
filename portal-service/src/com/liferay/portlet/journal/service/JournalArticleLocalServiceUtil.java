@@ -86,10 +86,10 @@ public class JournalArticleLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
 
-		return journalArticleLocalService.dynamicQuery(queryInitializer, begin,
+		return journalArticleLocalService.dynamicQuery(queryInitializer, start,
 			end);
 	}
 
@@ -608,20 +608,20 @@ public class JournalArticleLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticles(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
 
-		return journalArticleLocalService.getArticles(groupId, begin, end);
+		return journalArticleLocalService.getArticles(groupId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticles(
-		long groupId, int begin, int end,
+		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
 
-		return journalArticleLocalService.getArticles(groupId, begin, end, obc);
+		return journalArticleLocalService.getArticles(groupId, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticles(
@@ -703,13 +703,13 @@ public class JournalArticleLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getStructureArticles(
-		long groupId, java.lang.String structureId, int begin, int end,
+		long groupId, java.lang.String structureId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
 
 		return journalArticleLocalService.getStructureArticles(groupId,
-			structureId, begin, end, obc);
+			structureId, start, end, obc);
 	}
 
 	public static int getStructureArticlesCount(long groupId,
@@ -730,13 +730,13 @@ public class JournalArticleLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getTemplateArticles(
-		long groupId, java.lang.String templateId, int begin, int end,
+		long groupId, java.lang.String templateId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
 
 		return journalArticleLocalService.getTemplateArticles(groupId,
-			templateId, begin, end, obc);
+			templateId, start, end, obc);
 	}
 
 	public static int getTemplateArticlesCount(long groupId,
@@ -815,14 +815,14 @@ public class JournalArticleLocalServiceUtil {
 		java.lang.String structureId, java.lang.String templateId,
 		java.util.Date displayDateGT, java.util.Date displayDateLT,
 		java.lang.Boolean approved, java.lang.Boolean expired,
-		java.util.Date reviewDate, int begin, int end,
+		java.util.Date reviewDate, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
 
 		return journalArticleLocalService.search(companyId, groupId, keywords,
 			version, type, structureId, templateId, displayDateGT,
-			displayDateLT, approved, expired, reviewDate, begin, end, obc);
+			displayDateLT, approved, expired, reviewDate, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> search(
@@ -833,7 +833,7 @@ public class JournalArticleLocalServiceUtil {
 		java.lang.String templateId, java.util.Date displayDateGT,
 		java.util.Date displayDateLT, java.lang.Boolean approved,
 		java.lang.Boolean expired, java.util.Date reviewDate,
-		boolean andOperator, int begin, int end,
+		boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
@@ -841,7 +841,7 @@ public class JournalArticleLocalServiceUtil {
 		return journalArticleLocalService.search(companyId, groupId, articleId,
 			version, title, description, content, type, structureId,
 			templateId, displayDateGT, displayDateLT, approved, expired,
-			reviewDate, andOperator, begin, end, obc);
+			reviewDate, andOperator, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> search(
@@ -852,7 +852,7 @@ public class JournalArticleLocalServiceUtil {
 		java.lang.String[] templateIds, java.util.Date displayDateGT,
 		java.util.Date displayDateLT, java.lang.Boolean approved,
 		java.lang.Boolean expired, java.util.Date reviewDate,
-		boolean andOperator, int begin, int end,
+		boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
@@ -860,7 +860,7 @@ public class JournalArticleLocalServiceUtil {
 		return journalArticleLocalService.search(companyId, groupId, articleId,
 			version, title, description, content, type, structureIds,
 			templateIds, displayDateGT, displayDateLT, approved, expired,
-			reviewDate, andOperator, begin, end, obc);
+			reviewDate, andOperator, start, end, obc);
 	}
 
 	public static int searchCount(long companyId, long groupId,

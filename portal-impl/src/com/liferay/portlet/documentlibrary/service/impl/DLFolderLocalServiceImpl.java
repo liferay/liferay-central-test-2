@@ -318,11 +318,11 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	public List<DLFolder> getFolders(
-			long groupId, long parentFolderId, int begin, int end)
+			long groupId, long parentFolderId, int start, int end)
 		throws SystemException {
 
 		return dlFolderPersistence.findByG_P(
-			groupId, parentFolderId, begin, end);
+			groupId, parentFolderId, start, end);
 	}
 
 	public int getFoldersCount(long groupId, long parentFolderId)

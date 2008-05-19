@@ -337,12 +337,12 @@ public class PortletItemPersistenceImpl extends BasePersistence
 	}
 
 	public List<PortletItem> findByG_C(long groupId, long classNameId,
-		int begin, int end) throws SystemException {
-		return findByG_C(groupId, classNameId, begin, end, null);
+		int start, int end) throws SystemException {
+		return findByG_C(groupId, classNameId, start, end, null);
 	}
 
 	public List<PortletItem> findByG_C(long groupId, long classNameId,
-		int begin, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = PortletItemModelImpl.CACHE_ENABLED;
 		String finderClassName = PortletItem.class.getName();
 		String finderMethodName = "findByG_C";
@@ -355,7 +355,7 @@ public class PortletItemPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Long(classNameId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -397,7 +397,7 @@ public class PortletItemPersistenceImpl extends BasePersistence
 				qPos.add(classNameId);
 
 				List<PortletItem> list = (List<PortletItem>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -606,12 +606,12 @@ public class PortletItemPersistenceImpl extends BasePersistence
 	}
 
 	public List<PortletItem> findByG_P_C(long groupId, String portletId,
-		long classNameId, int begin, int end) throws SystemException {
-		return findByG_P_C(groupId, portletId, classNameId, begin, end, null);
+		long classNameId, int start, int end) throws SystemException {
+		return findByG_P_C(groupId, portletId, classNameId, start, end, null);
 	}
 
 	public List<PortletItem> findByG_P_C(long groupId, String portletId,
-		long classNameId, int begin, int end, OrderByComparator obc)
+		long classNameId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = PortletItemModelImpl.CACHE_ENABLED;
 		String finderClassName = PortletItem.class.getName();
@@ -628,7 +628,7 @@ public class PortletItemPersistenceImpl extends BasePersistence
 				
 				portletId, new Long(classNameId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -683,7 +683,7 @@ public class PortletItemPersistenceImpl extends BasePersistence
 				qPos.add(classNameId);
 
 				List<PortletItem> list = (List<PortletItem>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -992,7 +992,7 @@ public class PortletItemPersistenceImpl extends BasePersistence
 	}
 
 	public List<PortletItem> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -1001,7 +1001,7 @@ public class PortletItemPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -1017,12 +1017,12 @@ public class PortletItemPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<PortletItem> findAll(int begin, int end)
+	public List<PortletItem> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<PortletItem> findAll(int begin, int end, OrderByComparator obc)
+	public List<PortletItem> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = PortletItemModelImpl.CACHE_ENABLED;
 		String finderClassName = PortletItem.class.getName();
@@ -1032,7 +1032,7 @@ public class PortletItemPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1060,7 +1060,7 @@ public class PortletItemPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<PortletItem> list = (List<PortletItem>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

@@ -86,10 +86,10 @@ public class WebDAVPropsLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.WebDAVProps> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		WebDAVPropsLocalService webDAVPropsLocalService = WebDAVPropsLocalServiceFactory.getService();
 
-		return webDAVPropsLocalService.dynamicQuery(queryInitializer, begin, end);
+		return webDAVPropsLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
 	public static com.liferay.portal.model.WebDAVProps updateWebDAVProps(

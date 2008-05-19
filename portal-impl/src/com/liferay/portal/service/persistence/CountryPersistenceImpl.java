@@ -322,12 +322,12 @@ public class CountryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<Country> findByActive(boolean active, int begin, int end)
+	public List<Country> findByActive(boolean active, int start, int end)
 		throws SystemException {
-		return findByActive(active, begin, end, null);
+		return findByActive(active, start, end, null);
 	}
 
-	public List<Country> findByActive(boolean active, int begin, int end,
+	public List<Country> findByActive(boolean active, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = CountryModelImpl.CACHE_ENABLED;
 		String finderClassName = Country.class.getName();
@@ -341,7 +341,7 @@ public class CountryPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				Boolean.valueOf(active),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -383,7 +383,7 @@ public class CountryPersistenceImpl extends BasePersistence
 				qPos.add(active);
 
 				List<Country> list = (List<Country>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -519,7 +519,7 @@ public class CountryPersistenceImpl extends BasePersistence
 	}
 
 	public List<Country> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -528,7 +528,7 @@ public class CountryPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -544,11 +544,11 @@ public class CountryPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<Country> findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
+	public List<Country> findAll(int start, int end) throws SystemException {
+		return findAll(start, end, null);
 	}
 
-	public List<Country> findAll(int begin, int end, OrderByComparator obc)
+	public List<Country> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = CountryModelImpl.CACHE_ENABLED;
 		String finderClassName = Country.class.getName();
@@ -558,7 +558,7 @@ public class CountryPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -592,7 +592,7 @@ public class CountryPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<Country> list = (List<Country>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

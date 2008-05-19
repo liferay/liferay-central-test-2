@@ -112,18 +112,18 @@ public class BlogsStatsUserFinderImpl implements BlogsStatsUserFinder {
 	}
 
 	public List<BlogsStatsUser> findByOrganizationId(
-			long organizationId, int begin, int end, OrderByComparator obc)
+			long organizationId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		List<Long> organizationIds = new ArrayList<Long>();
 
 		organizationIds.add(organizationId);
 
-		return findByOrganizationIds(organizationIds, begin, end, obc);
+		return findByOrganizationIds(organizationIds, start, end, obc);
 	}
 
 	public List<BlogsStatsUser> findByOrganizationIds(
-			List<Long> organizationIds, int begin, int end,
+			List<Long> organizationIds, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
@@ -152,7 +152,7 @@ public class BlogsStatsUserFinderImpl implements BlogsStatsUserFinder {
 			}
 
 			return (List<BlogsStatsUser>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

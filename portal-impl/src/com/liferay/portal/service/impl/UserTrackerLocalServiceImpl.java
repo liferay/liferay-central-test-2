@@ -98,10 +98,10 @@ public class UserTrackerLocalServiceImpl
 		userTrackerPersistence.remove(userTrackerId);
 	}
 
-	public List<UserTracker> getUserTrackers(long companyId, int begin, int end)
+	public List<UserTracker> getUserTrackers(long companyId, int start, int end)
 		throws SystemException {
 
-		return userTrackerPersistence.findByCompanyId(companyId, begin, end);
+		return userTrackerPersistence.findByCompanyId(companyId, start, end);
 	}
 
 }

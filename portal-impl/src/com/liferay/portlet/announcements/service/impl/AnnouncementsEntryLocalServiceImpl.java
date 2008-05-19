@@ -170,11 +170,11 @@ public class AnnouncementsEntryLocalServiceImpl
 	}
 
 	public List<AnnouncementsEntry> getEntries(
-			long classNameId, long classPK, boolean alert, int begin, int end)
+			long classNameId, long classPK, boolean alert, int start, int end)
 		throws PortalException, SystemException {
 
 		return announcementsEntryPersistence.findByC_C_A(
-			classNameId, classPK, alert, begin, end);
+			classNameId, classPK, alert, start, end);
 	}
 
 	public List<AnnouncementsEntry> getEntries(
@@ -183,25 +183,25 @@ public class AnnouncementsEntryLocalServiceImpl
 			int displayDateHour, int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute, boolean alert,
-			int flagValue, int begin, int end)
+			int flagValue, int start, int end)
 		throws PortalException, SystemException {
 
 		return announcementsEntryFinder.findByScope(
 			userId, classNameId, classPKs, displayDateMonth, displayDateDay,
 			displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, alert, flagValue, begin,
+			expirationDateHour, expirationDateMinute, alert, flagValue, start,
 			end);
 	}
 
 	public List<AnnouncementsEntry> getEntries(
 			long userId, LinkedHashMap<Long, long[]> scopes, boolean alert,
-			int flagValue, int begin, int end)
+			int flagValue, int start, int end)
 		throws PortalException, SystemException {
 
 		return getEntries(
 			userId, scopes, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, alert, flagValue,
-			begin, end);
+			start, end);
 	}
 
 	public List<AnnouncementsEntry> getEntries(
@@ -210,14 +210,14 @@ public class AnnouncementsEntryLocalServiceImpl
 			int displayDateHour, int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute, boolean alert,
-			int flagValue, int begin, int end)
+			int flagValue, int start, int end)
 		throws PortalException, SystemException {
 
 		return announcementsEntryFinder.findByScopes(
 			userId, scopes, displayDateMonth, displayDateDay, displayDateYear,
 			displayDateHour, displayDateMinute, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, alert, flagValue, begin, end);
+			expirationDateMinute, alert, flagValue, start, end);
 	}
 
 	public int getEntriesCount(long classNameId, long classPK, boolean alert)
@@ -279,10 +279,10 @@ public class AnnouncementsEntryLocalServiceImpl
 	}
 
 	public List<AnnouncementsEntry> getUserEntries(
-			long userId, int begin, int end)
+			long userId, int start, int end)
 		throws SystemException {
 
-		return announcementsEntryPersistence.findByUserId(userId, begin, end);
+		return announcementsEntryPersistence.findByUserId(userId, start, end);
 	}
 
 	public int getUserEntriesCount(long userId) throws SystemException {

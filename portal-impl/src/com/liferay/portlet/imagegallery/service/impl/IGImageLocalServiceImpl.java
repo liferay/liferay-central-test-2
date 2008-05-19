@@ -314,21 +314,21 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		return igImageFinder.countByFolderIds(folderIds);
 	}
 
-	public List<IGImage> getGroupImages(long groupId, int begin, int end)
+	public List<IGImage> getGroupImages(long groupId, int start, int end)
 		throws SystemException {
 
-		return igImageFinder.findByGroupId(groupId, begin, end);
+		return igImageFinder.findByGroupId(groupId, start, end);
 	}
 
 	public List<IGImage> getGroupImages(
-			long groupId, long userId, int begin, int end)
+			long groupId, long userId, int start, int end)
 		throws SystemException {
 
 		if (userId <= 0) {
-			return igImageFinder.findByGroupId(groupId, begin, end);
+			return igImageFinder.findByGroupId(groupId, start, end);
 		}
 		else {
-			return igImageFinder.findByG_U(groupId, userId, begin, end);
+			return igImageFinder.findByG_U(groupId, userId, start, end);
 		}
 	}
 
@@ -404,17 +404,17 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		return igImagePersistence.findByFolderId(folderId);
 	}
 
-	public List<IGImage> getImages(long folderId, int begin, int end)
+	public List<IGImage> getImages(long folderId, int start, int end)
 		throws SystemException {
 
-		return igImagePersistence.findByFolderId(folderId, begin, end);
+		return igImagePersistence.findByFolderId(folderId, start, end);
 	}
 
 	public List<IGImage> getImages(
-			long folderId, int begin, int end, OrderByComparator obc)
+			long folderId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return igImagePersistence.findByFolderId(folderId, begin, end, obc);
+		return igImagePersistence.findByFolderId(folderId, start, end, obc);
 	}
 
 	public int getImagesCount(long folderId) throws SystemException {

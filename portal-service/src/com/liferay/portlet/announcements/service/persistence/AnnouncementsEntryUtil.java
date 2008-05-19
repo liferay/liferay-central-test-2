@@ -99,16 +99,16 @@ public class AnnouncementsEntryUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByUuid(
-		java.lang.String uuid, int begin, int end)
+		java.lang.String uuid, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByUuid(uuid, begin, end);
+		return getPersistence().findByUuid(uuid, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByUuid(
-		java.lang.String uuid, int begin, int end,
+		java.lang.String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByUuid(uuid, begin, end, obc);
+		return getPersistence().findByUuid(uuid, start, end, obc);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry findByUuid_First(
@@ -141,16 +141,16 @@ public class AnnouncementsEntryUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByUserId(
-		long userId, int begin, int end)
+		long userId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByUserId(userId, begin, end);
+		return getPersistence().findByUserId(userId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByUserId(
-		long userId, int begin, int end,
+		long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByUserId(userId, begin, end, obc);
+		return getPersistence().findByUserId(userId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry findByUserId_First(
@@ -182,16 +182,16 @@ public class AnnouncementsEntryUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByC_C(
-		long classNameId, long classPK, int begin, int end)
+		long classNameId, long classPK, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_C(classNameId, classPK, begin, end);
+		return getPersistence().findByC_C(classNameId, classPK, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByC_C(
-		long classNameId, long classPK, int begin, int end,
+		long classNameId, long classPK, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_C(classNameId, classPK, begin, end, obc);
+		return getPersistence().findByC_C(classNameId, classPK, start, end, obc);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry findByC_C_First(
@@ -226,18 +226,18 @@ public class AnnouncementsEntryUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByC_C_A(
-		long classNameId, long classPK, boolean alert, int begin, int end)
+		long classNameId, long classPK, boolean alert, int start, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findByC_C_A(classNameId, classPK, alert, begin, end);
+				   .findByC_C_A(classNameId, classPK, alert, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByC_C_A(
-		long classNameId, long classPK, boolean alert, int begin, int end,
+		long classNameId, long classPK, boolean alert, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findByC_C_A(classNameId, classPK, alert, begin, end, obc);
+				   .findByC_C_A(classNameId, classPK, alert, start, end, obc);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry findByC_C_A_First(
@@ -276,9 +276,9 @@ public class AnnouncementsEntryUtil {
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findWithDynamicQuery(queryInitializer, begin, end);
+				   .findWithDynamicQuery(queryInitializer, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findAll()
@@ -287,14 +287,14 @@ public class AnnouncementsEntryUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end);
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end, obc);
+		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByUuid(java.lang.String uuid)

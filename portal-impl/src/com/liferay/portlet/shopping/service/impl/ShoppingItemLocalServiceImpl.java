@@ -435,11 +435,11 @@ public class ShoppingItemLocalServiceImpl
 	}
 
 	public List<ShoppingItem> getItems(
-			long categoryId, int begin, int end, OrderByComparator obc)
+			long categoryId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return shoppingItemPersistence.findByCategoryId(
-			categoryId, begin, end, obc);
+			categoryId, start, end, obc);
 	}
 
 	public ShoppingItem[] getItemsPrevAndNext(
@@ -485,12 +485,12 @@ public class ShoppingItemLocalServiceImpl
 	}
 
 	public List<ShoppingItem> search(
-			long groupId, long[] categoryIds, String keywords, int begin,
+			long groupId, long[] categoryIds, String keywords, int start,
 			int end)
 		throws SystemException {
 
 		return shoppingItemFinder.findByKeywords(
-			groupId, categoryIds, keywords, begin, end);
+			groupId, categoryIds, keywords, start, end);
 	}
 
 	public int searchCount(long groupId, long[] categoryIds, String keywords)

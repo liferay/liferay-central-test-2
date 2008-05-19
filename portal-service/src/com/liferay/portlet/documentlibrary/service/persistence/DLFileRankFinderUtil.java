@@ -40,9 +40,9 @@ public class DLFileRankFinderUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findByG_U(
-		long groupId, long userId, int begin, int end)
+		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByG_U(groupId, userId, begin, end);
+		return getFinder().findByG_U(groupId, userId, start, end);
 	}
 
 	public static DLFileRankFinder getFinder() {

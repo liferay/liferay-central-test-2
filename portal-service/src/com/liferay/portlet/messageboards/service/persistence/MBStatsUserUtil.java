@@ -99,16 +99,16 @@ public class MBStatsUserUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByGroupId(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByGroupId(groupId, begin, end);
+		return getPersistence().findByGroupId(groupId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByGroupId(
-		long groupId, int begin, int end,
+		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByGroupId(groupId, begin, end, obc);
+		return getPersistence().findByGroupId(groupId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBStatsUser findByGroupId_First(
@@ -140,16 +140,16 @@ public class MBStatsUserUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByUserId(
-		long userId, int begin, int end)
+		long userId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByUserId(userId, begin, end);
+		return getPersistence().findByUserId(userId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByUserId(
-		long userId, int begin, int end,
+		long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByUserId(userId, begin, end, obc);
+		return getPersistence().findByUserId(userId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBStatsUser findByUserId_First(
@@ -194,16 +194,16 @@ public class MBStatsUserUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByG_M(
-		long groupId, int messageCount, int begin, int end)
+		long groupId, int messageCount, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByG_M(groupId, messageCount, begin, end);
+		return getPersistence().findByG_M(groupId, messageCount, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findByG_M(
-		long groupId, int messageCount, int begin, int end,
+		long groupId, int messageCount, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByG_M(groupId, messageCount, begin, end, obc);
+		return getPersistence().findByG_M(groupId, messageCount, start, end, obc);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBStatsUser findByG_M_First(
@@ -240,9 +240,9 @@ public class MBStatsUserUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findWithDynamicQuery(queryInitializer, begin, end);
+				   .findWithDynamicQuery(queryInitializer, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findAll()
@@ -251,14 +251,14 @@ public class MBStatsUserUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end);
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end, obc);
+		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByGroupId(long groupId)

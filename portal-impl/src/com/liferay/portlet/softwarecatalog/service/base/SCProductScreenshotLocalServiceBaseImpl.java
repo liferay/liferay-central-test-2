@@ -91,10 +91,10 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 	}
 
 	public List<SCProductScreenshot> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return scProductScreenshotPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public SCProductScreenshot updateSCProductScreenshot(

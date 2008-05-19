@@ -460,7 +460,7 @@ public class GroupServiceHttp {
 
 	public static java.util.List<com.liferay.portal.model.Group> search(
 		HttpPrincipal httpPrincipal, long companyId, java.lang.String name,
-		java.lang.String description, java.lang.String[] params, int begin,
+		java.lang.String description, java.lang.String[] params, int start,
 		int end) throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
@@ -483,7 +483,7 @@ public class GroupServiceHttp {
 				paramObj3 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj4 = new IntegerWrapper(begin);
+			Object paramObj4 = new IntegerWrapper(start);
 
 			Object paramObj5 = new IntegerWrapper(end);
 

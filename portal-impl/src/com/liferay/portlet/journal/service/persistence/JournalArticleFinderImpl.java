@@ -294,7 +294,7 @@ public class JournalArticleFinderImpl implements JournalArticleFinder {
 			long companyId, long groupId, String keywords, Double version,
 			String type, String structureId, String templateId,
 			Date displayDateGT, Date displayDateLT, Boolean approved,
-			Boolean expired, Date reviewDate, int begin, int end,
+			Boolean expired, Date reviewDate, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
@@ -318,7 +318,7 @@ public class JournalArticleFinderImpl implements JournalArticleFinder {
 			companyId, groupId, articleIds, version, titles, descriptions,
 			contents, type, new String[] {structureId},
 			new String[] {templateId}, displayDateGT, displayDateLT, approved,
-			expired, reviewDate, andOperator, begin, end, obc);
+			expired, reviewDate, andOperator, start, end, obc);
 	}
 
 	public List<JournalArticle> findByReviewDate(
@@ -358,7 +358,7 @@ public class JournalArticleFinderImpl implements JournalArticleFinder {
 			String title, String description, String content, String type,
 			String structureId, String templateId, Date displayDateGT,
 			Date displayDateLT, Boolean approved, Boolean expired,
-			Date reviewDate, boolean andOperator, int begin, int end,
+			Date reviewDate, boolean andOperator, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
@@ -366,7 +366,7 @@ public class JournalArticleFinderImpl implements JournalArticleFinder {
 			companyId, groupId, articleId, version, title, description,
 			content, type, new String[] {structureId},
 			new String[] {templateId}, displayDateGT, displayDateLT, approved,
-			expired, reviewDate, andOperator, begin, end, obc);
+			expired, reviewDate, andOperator, start, end, obc);
 	}
 
 	public List<JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
@@ -374,7 +374,7 @@ public class JournalArticleFinderImpl implements JournalArticleFinder {
 			String title, String description, String content, String type,
 			String[] structureIds, String[] templateIds, Date displayDateGT,
 			Date displayDateLT, Boolean approved, Boolean expired,
-			Date reviewDate, boolean andOperator, int begin, int end,
+			Date reviewDate, boolean andOperator, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
@@ -383,7 +383,7 @@ public class JournalArticleFinderImpl implements JournalArticleFinder {
 			new String[] {title}, new String[] {description},
 			new String[] {content}, type, structureIds, templateIds,
 			displayDateGT, displayDateLT, approved, expired, reviewDate,
-			andOperator, begin, end, obc);
+			andOperator, start, end, obc);
 	}
 
 	public List<JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
@@ -391,7 +391,7 @@ public class JournalArticleFinderImpl implements JournalArticleFinder {
 			String[] titles, String[] descriptions, String[] contents,
 			String type, String[] structureIds, String[] templateIds,
 			Date displayDateGT, Date displayDateLT, Boolean approved,
-			Boolean expired, Date reviewDate, boolean andOperator, int begin,
+			Boolean expired, Date reviewDate, boolean andOperator, int start,
 			int end, OrderByComparator obc)
 		throws SystemException {
 
@@ -488,7 +488,7 @@ public class JournalArticleFinderImpl implements JournalArticleFinder {
 			qPos.add(reviewDate_TS);
 
 			return (List<JournalArticle>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

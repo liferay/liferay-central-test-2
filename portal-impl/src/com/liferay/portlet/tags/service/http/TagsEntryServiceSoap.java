@@ -184,10 +184,10 @@ public class TagsEntryServiceSoap {
 
 	public static com.liferay.portlet.tags.model.TagsEntrySoap[] search(
 		long companyId, java.lang.String name, java.lang.String[] properties,
-		int begin, int end) throws RemoteException {
+		int start, int end) throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.tags.model.TagsEntry> returnValue =
-				TagsEntryServiceUtil.search(companyId, name, properties, begin,
+				TagsEntryServiceUtil.search(companyId, name, properties, start,
 					end);
 
 			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModels(returnValue);
@@ -201,10 +201,10 @@ public class TagsEntryServiceSoap {
 
 	public static com.liferay.portal.kernel.json.JSONArrayWrapper searchAutocomplete(
 		long companyId, java.lang.String name, java.lang.String[] properties,
-		int begin, int end) throws RemoteException {
+		int start, int end) throws RemoteException {
 		try {
 			com.liferay.portal.kernel.json.JSONArrayWrapper returnValue = TagsEntryServiceUtil.searchAutocomplete(companyId,
-					name, properties, begin, end);
+					name, properties, start, end);
 
 			return returnValue;
 		}

@@ -265,11 +265,11 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	}
 
 	public List<MBCategory> getCategories(
-			long groupId, long parentCategoryId, int begin, int end)
+			long groupId, long parentCategoryId, int start, int end)
 		throws SystemException {
 
 		return mbCategoryPersistence.findByG_P(
-			groupId, parentCategoryId, begin, end);
+			groupId, parentCategoryId, start, end);
 	}
 
 	public int getCategoriesCount(long groupId) throws SystemException {
@@ -304,10 +304,10 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	}
 
 	public List<MBCategory> getSubscribedCategories(
-			long groupId, long userId, int begin, int end)
+			long groupId, long userId, int start, int end)
 		throws SystemException {
 
-		return mbCategoryFinder.findByS_G_U(groupId, userId, begin, end);
+		return mbCategoryFinder.findByS_G_U(groupId, userId, start, end);
 	}
 
 	public int getSubscribedCategoriesCount(long groupId, long userId)

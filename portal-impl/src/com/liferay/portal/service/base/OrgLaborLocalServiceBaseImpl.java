@@ -301,10 +301,10 @@ public abstract class OrgLaborLocalServiceBaseImpl
 	}
 
 	public List<OrgLabor> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return orgLaborPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public OrgLabor updateOrgLabor(OrgLabor orgLabor) throws SystemException {

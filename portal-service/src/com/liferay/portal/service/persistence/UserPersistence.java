@@ -78,11 +78,11 @@ public interface UserPersistence {
 		java.lang.String uuid) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> findByUuid(
-		java.lang.String uuid, int begin, int end)
+		java.lang.String uuid, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> findByUuid(
-		java.lang.String uuid, int begin, int end,
+		java.lang.String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -108,11 +108,11 @@ public interface UserPersistence {
 		long companyId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> findByCompanyId(
-		long companyId, int begin, int end)
+		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> findByCompanyId(
-		long companyId, int begin, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -144,11 +144,11 @@ public interface UserPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> findByEmailAddress(
-		java.lang.String emailAddress, int begin, int end)
+		java.lang.String emailAddress, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> findByEmailAddress(
-		java.lang.String emailAddress, int begin, int end,
+		java.lang.String emailAddress, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -197,11 +197,11 @@ public interface UserPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> findByC_P(
-		long companyId, java.lang.String password, int begin, int end)
+		long companyId, java.lang.String password, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> findByC_P(
-		long companyId, java.lang.String password, int begin, int end,
+		long companyId, java.lang.String password, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -246,15 +246,15 @@ public interface UserPersistence {
 
 	public java.util.List<com.liferay.portal.model.User> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> findAll()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.User> findAll(int begin,
+	public java.util.List<com.liferay.portal.model.User> findAll(int start,
 		int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.User> findAll(int begin,
+	public java.util.List<com.liferay.portal.model.User> findAll(int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -333,12 +333,12 @@ public interface UserPersistence {
 			com.liferay.portal.NoSuchUserException;
 
 	public java.util.List<com.liferay.portal.model.Group> getGroups(long pk,
-		int begin, int end)
+		int start, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserException;
 
 	public java.util.List<com.liferay.portal.model.Group> getGroups(long pk,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserException;
 
@@ -413,12 +413,12 @@ public interface UserPersistence {
 			com.liferay.portal.NoSuchUserException;
 
 	public java.util.List<com.liferay.portal.model.Organization> getOrganizations(
-		long pk, int begin, int end)
+		long pk, int start, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserException;
 
 	public java.util.List<com.liferay.portal.model.Organization> getOrganizations(
-		long pk, int begin, int end,
+		long pk, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserException;
@@ -497,12 +497,12 @@ public interface UserPersistence {
 			com.liferay.portal.NoSuchUserException;
 
 	public java.util.List<com.liferay.portal.model.Permission> getPermissions(
-		long pk, int begin, int end)
+		long pk, int start, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserException;
 
 	public java.util.List<com.liferay.portal.model.Permission> getPermissions(
-		long pk, int begin, int end,
+		long pk, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserException;
@@ -580,12 +580,12 @@ public interface UserPersistence {
 			com.liferay.portal.NoSuchUserException;
 
 	public java.util.List<com.liferay.portal.model.Role> getRoles(long pk,
-		int begin, int end)
+		int start, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserException;
 
 	public java.util.List<com.liferay.portal.model.Role> getRoles(long pk,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserException;
 
@@ -660,12 +660,12 @@ public interface UserPersistence {
 			com.liferay.portal.NoSuchUserException;
 
 	public java.util.List<com.liferay.portal.model.UserGroup> getUserGroups(
-		long pk, int begin, int end)
+		long pk, int start, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserException;
 
 	public java.util.List<com.liferay.portal.model.UserGroup> getUserGroups(
-		long pk, int begin, int end,
+		long pk, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserException;

@@ -319,12 +319,12 @@ public class ContactPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<Contact> findByCompanyId(long companyId, int begin, int end)
+	public List<Contact> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
-		return findByCompanyId(companyId, begin, end, null);
+		return findByCompanyId(companyId, start, end, null);
 	}
 
-	public List<Contact> findByCompanyId(long companyId, int begin, int end,
+	public List<Contact> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ContactModelImpl.CACHE_ENABLED;
 		String finderClassName = Contact.class.getName();
@@ -338,7 +338,7 @@ public class ContactPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -374,7 +374,7 @@ public class ContactPersistenceImpl extends BasePersistence
 				qPos.add(companyId);
 
 				List<Contact> list = (List<Contact>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -505,7 +505,7 @@ public class ContactPersistenceImpl extends BasePersistence
 	}
 
 	public List<Contact> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -514,7 +514,7 @@ public class ContactPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -530,11 +530,11 @@ public class ContactPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<Contact> findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
+	public List<Contact> findAll(int start, int end) throws SystemException {
+		return findAll(start, end, null);
 	}
 
-	public List<Contact> findAll(int begin, int end, OrderByComparator obc)
+	public List<Contact> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = ContactModelImpl.CACHE_ENABLED;
 		String finderClassName = Contact.class.getName();
@@ -544,7 +544,7 @@ public class ContactPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -572,7 +572,7 @@ public class ContactPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<Contact> list = (List<Contact>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

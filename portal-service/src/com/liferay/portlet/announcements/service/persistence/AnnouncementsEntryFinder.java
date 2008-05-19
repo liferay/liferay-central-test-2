@@ -53,7 +53,7 @@ public interface AnnouncementsEntryFinder {
 		int displayDateDay, int displayDateYear, int displayDateHour,
 		int displayDateMinute, int expirationDateMonth, int expirationDateDay,
 		int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean alert, int flagValue, int begin,
+		int expirationDateMinute, boolean alert, int flagValue, int start,
 		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByScopes(
@@ -61,6 +61,6 @@ public interface AnnouncementsEntryFinder {
 		int displayDateMonth, int displayDateDay, int displayDateYear,
 		int displayDateHour, int displayDateMinute, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean alert, int flagValue, int begin,
+		int expirationDateMinute, boolean alert, int flagValue, int start,
 		int end) throws com.liferay.portal.SystemException;
 }

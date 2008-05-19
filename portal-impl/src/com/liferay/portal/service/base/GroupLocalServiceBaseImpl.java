@@ -442,8 +442,8 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 	}
 
 	public List<Group> dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
-		return groupPersistence.findWithDynamicQuery(queryInitializer, begin,
+		int start, int end) throws SystemException {
+		return groupPersistence.findWithDynamicQuery(queryInitializer, start,
 			end);
 	}
 

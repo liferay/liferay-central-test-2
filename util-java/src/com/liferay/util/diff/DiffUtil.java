@@ -214,22 +214,22 @@ public class DiffUtil {
 	}
 
 	private static List<String> _addMargins(
-		List<DiffResult> results, List<String> stringList, int beginPos,
+		List<DiffResult> results, List<String> stringList, int startPos,
 		int margin) {
 
 		List<String> changedLines = new ArrayList<String>();
 
-		if (margin == 0 || beginPos == 0) {
+		if (margin == 0 || startPos == 0) {
 			return changedLines;
 		}
 
-		int i = beginPos - margin;
+		int i = startPos - margin;
 
 		for (; i < 0; i++) {
 			changedLines.add(CONTEXT_LINE);
 		}
 
-		for (; i < beginPos; i++) {
+		for (; i < startPos; i++) {
 			if (i < stringList.size()) {
 				changedLines.add(stringList.get(i));
 			}
@@ -368,9 +368,9 @@ public class DiffUtil {
 	}
 
 	private static int _checkOverlapping(
-		List<DiffResult> results, int beginPos, int margin) {
+		List<DiffResult> results, int startPos, int margin) {
 
-		if (results.size() == 0 || (beginPos - margin) < 0) {
+		if (results.size() == 0 || (startPos - margin) < 0) {
 			return margin;
 		}
 
@@ -383,7 +383,7 @@ public class DiffUtil {
 		int lastChangedLine = (lastDiff.getLineNumber() - 1) +
 			lastDiff.getChangedLines().size();
 
-		int currentChangedLine = beginPos - margin;
+		int currentChangedLine = startPos - margin;
 
 		if ((lastDiff.getChangedLines().size() == 1) &&
 			(lastDiff.getChangedLines().get(0).equals(CONTEXT_LINE))) {
@@ -400,11 +400,11 @@ public class DiffUtil {
 
 	private static void _highlightChars(
 		List<String> stringList, String markerStart, String markerEnd,
-		int beginPos, int endPos) {
+		int startPos, int endPos) {
 
-		String start = markerStart + stringList.get(beginPos);
+		String start = markerStart + stringList.get(startPos);
 
-		stringList.set(beginPos, start);
+		stringList.set(startPos, start);
 
 		String end = stringList.get(endPos) + markerEnd;
 
@@ -413,9 +413,9 @@ public class DiffUtil {
 
 	private static void _highlightLines(
 		List<String> stringList, String markerStart, String markerEnd,
-		int beginPos, int endPos) {
+		int startPos, int endPos) {
 
-		for (int i = beginPos; i <= endPos; i++) {
+		for (int i = startPos; i <= endPos; i++) {
 			stringList.set(i, markerStart + stringList.get(i) + markerEnd);
 		}
 	}

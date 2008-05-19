@@ -86,11 +86,11 @@ public class ShoppingCategoryLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
 
 		return shoppingCategoryLocalService.dynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory updateShoppingCategory(
@@ -220,12 +220,12 @@ public class ShoppingCategoryLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> getCategories(
-		long groupId, long parentCategoryId, int begin, int end)
+		long groupId, long parentCategoryId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
 
 		return shoppingCategoryLocalService.getCategories(groupId,
-			parentCategoryId, begin, end);
+			parentCategoryId, start, end);
 	}
 
 	public static int getCategoriesCount(long groupId, long parentCategoryId)

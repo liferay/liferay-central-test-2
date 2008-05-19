@@ -117,18 +117,18 @@ public class BlogsEntryFinderImpl implements BlogsEntryFinder {
 	}
 
 	public List<BlogsEntry> findByOrganizationId(
-			long organizationId, boolean draft, int begin, int end)
+			long organizationId, boolean draft, int start, int end)
 		throws SystemException {
 
 		List<Long> organizationIds = new ArrayList<Long>();
 
 		organizationIds.add(organizationId);
 
-		return findByOrganizationIds(organizationIds, draft, begin, end);
+		return findByOrganizationIds(organizationIds, draft, start, end);
 	}
 
 	public List<BlogsEntry> findByOrganizationIds(
-			List<Long> organizationIds, boolean draft, int begin, int end)
+			List<Long> organizationIds, boolean draft, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -157,7 +157,7 @@ public class BlogsEntryFinderImpl implements BlogsEntryFinder {
 			qPos.add(draft);
 
 			return (List<BlogsEntry>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

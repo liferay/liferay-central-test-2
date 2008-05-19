@@ -342,12 +342,12 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 	}
 
 	public List<ServiceComponent> findByBuildNamespace(String buildNamespace,
-		int begin, int end) throws SystemException {
-		return findByBuildNamespace(buildNamespace, begin, end, null);
+		int start, int end) throws SystemException {
+		return findByBuildNamespace(buildNamespace, start, end, null);
 	}
 
 	public List<ServiceComponent> findByBuildNamespace(String buildNamespace,
-		int begin, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ServiceComponentModelImpl.CACHE_ENABLED;
 		String finderClassName = ServiceComponent.class.getName();
 		String finderMethodName = "findByBuildNamespace";
@@ -360,7 +360,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				buildNamespace,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -411,7 +411,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 				}
 
 				List<ServiceComponent> list = (List<ServiceComponent>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -678,7 +678,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 	}
 
 	public List<ServiceComponent> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -687,7 +687,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -703,12 +703,12 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<ServiceComponent> findAll(int begin, int end)
+	public List<ServiceComponent> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<ServiceComponent> findAll(int begin, int end,
+	public List<ServiceComponent> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ServiceComponentModelImpl.CACHE_ENABLED;
 		String finderClassName = ServiceComponent.class.getName();
@@ -718,7 +718,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -753,7 +753,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<ServiceComponent> list = (List<ServiceComponent>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

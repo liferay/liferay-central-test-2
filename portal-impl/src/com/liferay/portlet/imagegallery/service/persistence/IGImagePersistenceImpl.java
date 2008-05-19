@@ -344,12 +344,12 @@ public class IGImagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<IGImage> findByUuid(String uuid, int begin, int end)
+	public List<IGImage> findByUuid(String uuid, int start, int end)
 		throws SystemException {
-		return findByUuid(uuid, begin, end, null);
+		return findByUuid(uuid, start, end, null);
 	}
 
-	public List<IGImage> findByUuid(String uuid, int begin, int end,
+	public List<IGImage> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = IGImageModelImpl.CACHE_ENABLED;
 		String finderClassName = IGImage.class.getName();
@@ -363,7 +363,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -413,7 +413,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 				}
 
 				List<IGImage> list = (List<IGImage>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -597,12 +597,12 @@ public class IGImagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<IGImage> findByFolderId(long folderId, int begin, int end)
+	public List<IGImage> findByFolderId(long folderId, int start, int end)
 		throws SystemException {
-		return findByFolderId(folderId, begin, end, null);
+		return findByFolderId(folderId, start, end, null);
 	}
 
-	public List<IGImage> findByFolderId(long folderId, int begin, int end,
+	public List<IGImage> findByFolderId(long folderId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = IGImageModelImpl.CACHE_ENABLED;
 		String finderClassName = IGImage.class.getName();
@@ -616,7 +616,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(folderId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -659,7 +659,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 				qPos.add(folderId);
 
 				List<IGImage> list = (List<IGImage>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1231,12 +1231,12 @@ public class IGImagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<IGImage> findByF_N(long folderId, String name, int begin,
+	public List<IGImage> findByF_N(long folderId, String name, int start,
 		int end) throws SystemException {
-		return findByF_N(folderId, name, begin, end, null);
+		return findByF_N(folderId, name, start, end, null);
 	}
 
-	public List<IGImage> findByF_N(long folderId, String name, int begin,
+	public List<IGImage> findByF_N(long folderId, String name, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = IGImageModelImpl.CACHE_ENABLED;
 		String finderClassName = IGImage.class.getName();
@@ -1252,7 +1252,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 				
 				name,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1308,7 +1308,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 				}
 
 				List<IGImage> list = (List<IGImage>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1465,7 +1465,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 	}
 
 	public List<IGImage> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -1474,7 +1474,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -1490,11 +1490,11 @@ public class IGImagePersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<IGImage> findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
+	public List<IGImage> findAll(int start, int end) throws SystemException {
+		return findAll(start, end, null);
 	}
 
-	public List<IGImage> findAll(int begin, int end, OrderByComparator obc)
+	public List<IGImage> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = IGImageModelImpl.CACHE_ENABLED;
 		String finderClassName = IGImage.class.getName();
@@ -1504,7 +1504,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1539,7 +1539,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<IGImage> list = (List<IGImage>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

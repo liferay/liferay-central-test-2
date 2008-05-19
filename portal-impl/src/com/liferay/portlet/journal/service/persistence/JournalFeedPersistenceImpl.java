@@ -347,12 +347,12 @@ public class JournalFeedPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<JournalFeed> findByUuid(String uuid, int begin, int end)
+	public List<JournalFeed> findByUuid(String uuid, int start, int end)
 		throws SystemException {
-		return findByUuid(uuid, begin, end, null);
+		return findByUuid(uuid, start, end, null);
 	}
 
-	public List<JournalFeed> findByUuid(String uuid, int begin, int end,
+	public List<JournalFeed> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalFeedModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalFeed.class.getName();
@@ -366,7 +366,7 @@ public class JournalFeedPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -416,7 +416,7 @@ public class JournalFeedPersistenceImpl extends BasePersistence
 				}
 
 				List<JournalFeed> list = (List<JournalFeed>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -714,12 +714,12 @@ public class JournalFeedPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<JournalFeed> findByGroupId(long groupId, int begin, int end)
+	public List<JournalFeed> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
-		return findByGroupId(groupId, begin, end, null);
+		return findByGroupId(groupId, start, end, null);
 	}
 
-	public List<JournalFeed> findByGroupId(long groupId, int begin, int end,
+	public List<JournalFeed> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalFeedModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalFeed.class.getName();
@@ -733,7 +733,7 @@ public class JournalFeedPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -776,7 +776,7 @@ public class JournalFeedPersistenceImpl extends BasePersistence
 				qPos.add(groupId);
 
 				List<JournalFeed> list = (List<JournalFeed>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1027,7 +1027,7 @@ public class JournalFeedPersistenceImpl extends BasePersistence
 	}
 
 	public List<JournalFeed> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -1036,7 +1036,7 @@ public class JournalFeedPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -1052,12 +1052,12 @@ public class JournalFeedPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<JournalFeed> findAll(int begin, int end)
+	public List<JournalFeed> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<JournalFeed> findAll(int begin, int end, OrderByComparator obc)
+	public List<JournalFeed> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalFeedModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalFeed.class.getName();
@@ -1067,7 +1067,7 @@ public class JournalFeedPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1102,7 +1102,7 @@ public class JournalFeedPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<JournalFeed> list = (List<JournalFeed>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

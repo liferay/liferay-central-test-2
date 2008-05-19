@@ -61,11 +61,11 @@ public class UserFinderUtil {
 
 	public static java.util.List<com.liferay.portal.model.User> findByKeywords(
 		long companyId, java.lang.String keywords, java.lang.Boolean active,
-		java.util.LinkedHashMap<String, Object> params, int begin, int end,
+		java.util.LinkedHashMap<String, Object> params, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
-				   .findByKeywords(companyId, keywords, active, params, begin,
+				   .findByKeywords(companyId, keywords, active, params, start,
 			end, obc);
 	}
 
@@ -80,12 +80,12 @@ public class UserFinderUtil {
 		java.lang.String screenName, java.lang.String emailAddress,
 		java.lang.Boolean active,
 		java.util.LinkedHashMap<String, Object> params, boolean andOperator,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
 				   .findByC_FN_MN_LN_SN_EA_A(companyId, firstName, middleName,
 			lastName, screenName, emailAddress, active, params, andOperator,
-			begin, end, obc);
+			start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> findByC_FN_MN_LN_SN_EA_A(
@@ -94,12 +94,12 @@ public class UserFinderUtil {
 		java.lang.String[] screenNames, java.lang.String[] emailAddresses,
 		java.lang.Boolean active,
 		java.util.LinkedHashMap<String, Object> params, boolean andOperator,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
 				   .findByC_FN_MN_LN_SN_EA_A(companyId, firstNames,
 			middleNames, lastNames, screenNames, emailAddresses, active,
-			params, andOperator, begin, end, obc);
+			params, andOperator, start, end, obc);
 	}
 
 	public static UserFinder getFinder() {

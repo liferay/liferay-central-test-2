@@ -68,7 +68,7 @@ public interface JournalArticleLocalService {
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalArticle updateJournalArticle(
 		com.liferay.portlet.journal.model.JournalArticle journalArticle)
@@ -365,11 +365,11 @@ public interface JournalArticleLocalService {
 		long groupId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticles(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticles(
-		long groupId, int begin, int end,
+		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -412,7 +412,7 @@ public interface JournalArticleLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getStructureArticles(
-		long groupId, java.lang.String structureId, int begin, int end,
+		long groupId, java.lang.String structureId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -424,7 +424,7 @@ public interface JournalArticleLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getTemplateArticles(
-		long groupId, java.lang.String templateId, int begin, int end,
+		long groupId, java.lang.String templateId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -467,7 +467,7 @@ public interface JournalArticleLocalService {
 		java.lang.String structureId, java.lang.String templateId,
 		java.util.Date displayDateGT, java.util.Date displayDateLT,
 		java.lang.Boolean approved, java.lang.Boolean expired,
-		java.util.Date reviewDate, int begin, int end,
+		java.util.Date reviewDate, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -479,7 +479,7 @@ public interface JournalArticleLocalService {
 		java.lang.String templateId, java.util.Date displayDateGT,
 		java.util.Date displayDateLT, java.lang.Boolean approved,
 		java.lang.Boolean expired, java.util.Date reviewDate,
-		boolean andOperator, int begin, int end,
+		boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -491,7 +491,7 @@ public interface JournalArticleLocalService {
 		java.lang.String[] templateIds, java.util.Date displayDateGT,
 		java.util.Date displayDateLT, java.lang.Boolean approved,
 		java.lang.Boolean expired, java.util.Date reviewDate,
-		boolean andOperator, int begin, int end,
+		boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 

@@ -93,7 +93,7 @@ public interface GroupService {
 
 	public java.util.List<com.liferay.portal.model.Group> search(
 		long companyId, java.lang.String name, java.lang.String description,
-		java.lang.String[] params, int begin, int end)
+		java.lang.String[] params, int start, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public int searchCount(long companyId, java.lang.String name,

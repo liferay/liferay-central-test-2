@@ -400,12 +400,12 @@ public class UserPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<User> findByUuid(String uuid, int begin, int end)
+	public List<User> findByUuid(String uuid, int start, int end)
 		throws SystemException {
-		return findByUuid(uuid, begin, end, null);
+		return findByUuid(uuid, start, end, null);
 	}
 
-	public List<User> findByUuid(String uuid, int begin, int end,
+	public List<User> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = UserModelImpl.CACHE_ENABLED;
 		String finderClassName = User.class.getName();
@@ -419,7 +419,7 @@ public class UserPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -462,7 +462,7 @@ public class UserPersistenceImpl extends BasePersistence
 				}
 
 				List<User> list = (List<User>)QueryUtil.list(q, getDialect(),
-						begin, end);
+						start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -633,12 +633,12 @@ public class UserPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<User> findByCompanyId(long companyId, int begin, int end)
+	public List<User> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
-		return findByCompanyId(companyId, begin, end, null);
+		return findByCompanyId(companyId, start, end, null);
 	}
 
-	public List<User> findByCompanyId(long companyId, int begin, int end,
+	public List<User> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = UserModelImpl.CACHE_ENABLED;
 		String finderClassName = User.class.getName();
@@ -652,7 +652,7 @@ public class UserPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -688,7 +688,7 @@ public class UserPersistenceImpl extends BasePersistence
 				qPos.add(companyId);
 
 				List<User> list = (List<User>)QueryUtil.list(q, getDialect(),
-						begin, end);
+						start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -949,12 +949,12 @@ public class UserPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<User> findByEmailAddress(String emailAddress, int begin, int end)
+	public List<User> findByEmailAddress(String emailAddress, int start, int end)
 		throws SystemException {
-		return findByEmailAddress(emailAddress, begin, end, null);
+		return findByEmailAddress(emailAddress, start, end, null);
 	}
 
-	public List<User> findByEmailAddress(String emailAddress, int begin,
+	public List<User> findByEmailAddress(String emailAddress, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = UserModelImpl.CACHE_ENABLED;
 		String finderClassName = User.class.getName();
@@ -968,7 +968,7 @@ public class UserPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				emailAddress,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1011,7 +1011,7 @@ public class UserPersistenceImpl extends BasePersistence
 				}
 
 				List<User> list = (List<User>)QueryUtil.list(q, getDialect(),
-						begin, end);
+						start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1492,12 +1492,12 @@ public class UserPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<User> findByC_P(long companyId, String password, int begin,
+	public List<User> findByC_P(long companyId, String password, int start,
 		int end) throws SystemException {
-		return findByC_P(companyId, password, begin, end, null);
+		return findByC_P(companyId, password, start, end, null);
 	}
 
-	public List<User> findByC_P(long companyId, String password, int begin,
+	public List<User> findByC_P(long companyId, String password, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = UserModelImpl.CACHE_ENABLED;
 		String finderClassName = User.class.getName();
@@ -1513,7 +1513,7 @@ public class UserPersistenceImpl extends BasePersistence
 				
 				password,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1562,7 +1562,7 @@ public class UserPersistenceImpl extends BasePersistence
 				}
 
 				List<User> list = (List<User>)QueryUtil.list(q, getDialect(),
-						begin, end);
+						start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1928,7 +1928,7 @@ public class UserPersistenceImpl extends BasePersistence
 	}
 
 	public List<User> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -1937,7 +1937,7 @@ public class UserPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -1953,11 +1953,11 @@ public class UserPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<User> findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
+	public List<User> findAll(int start, int end) throws SystemException {
+		return findAll(start, end, null);
 	}
 
-	public List<User> findAll(int begin, int end, OrderByComparator obc)
+	public List<User> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = UserModelImpl.CACHE_ENABLED;
 		String finderClassName = User.class.getName();
@@ -1967,7 +1967,7 @@ public class UserPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1995,7 +1995,7 @@ public class UserPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<User> list = (List<User>)QueryUtil.list(q, getDialect(),
-						begin, end);
+						start, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -2884,12 +2884,12 @@ public class UserPersistenceImpl extends BasePersistence
 		return getGroups(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List<com.liferay.portal.model.Group> getGroups(long pk, int begin,
+	public List<com.liferay.portal.model.Group> getGroups(long pk, int start,
 		int end) throws NoSuchUserException, SystemException {
-		return getGroups(pk, begin, end, null);
+		return getGroups(pk, start, end, null);
 	}
 
-	public List<com.liferay.portal.model.Group> getGroups(long pk, int begin,
+	public List<com.liferay.portal.model.Group> getGroups(long pk, int start,
 		int end, OrderByComparator obc)
 		throws NoSuchUserException, SystemException {
 		boolean finderClassNameCacheEnabled = UserModelImpl.CACHE_ENABLED_USERS_GROUPS;
@@ -2902,7 +2902,7 @@ public class UserPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				new Long(pk), String.valueOf(start), String.valueOf(end),
 				String.valueOf(obc)
 			};
 
@@ -2946,7 +2946,7 @@ public class UserPersistenceImpl extends BasePersistence
 				qPos.add(pk);
 
 				List<com.liferay.portal.model.Group> list = (List<com.liferay.portal.model.Group>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -3252,13 +3252,13 @@ public class UserPersistenceImpl extends BasePersistence
 	}
 
 	public List<com.liferay.portal.model.Organization> getOrganizations(
-		long pk, int begin, int end)
+		long pk, int start, int end)
 		throws NoSuchUserException, SystemException {
-		return getOrganizations(pk, begin, end, null);
+		return getOrganizations(pk, start, end, null);
 	}
 
 	public List<com.liferay.portal.model.Organization> getOrganizations(
-		long pk, int begin, int end, OrderByComparator obc)
+		long pk, int start, int end, OrderByComparator obc)
 		throws NoSuchUserException, SystemException {
 		boolean finderClassNameCacheEnabled = UserModelImpl.CACHE_ENABLED_USERS_ORGS;
 
@@ -3270,7 +3270,7 @@ public class UserPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				new Long(pk), String.valueOf(start), String.valueOf(end),
 				String.valueOf(obc)
 			};
 
@@ -3314,7 +3314,7 @@ public class UserPersistenceImpl extends BasePersistence
 				qPos.add(pk);
 
 				List<com.liferay.portal.model.Organization> list = (List<com.liferay.portal.model.Organization>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -3628,12 +3628,12 @@ public class UserPersistenceImpl extends BasePersistence
 	}
 
 	public List<com.liferay.portal.model.Permission> getPermissions(long pk,
-		int begin, int end) throws NoSuchUserException, SystemException {
-		return getPermissions(pk, begin, end, null);
+		int start, int end) throws NoSuchUserException, SystemException {
+		return getPermissions(pk, start, end, null);
 	}
 
 	public List<com.liferay.portal.model.Permission> getPermissions(long pk,
-		int begin, int end, OrderByComparator obc)
+		int start, int end, OrderByComparator obc)
 		throws NoSuchUserException, SystemException {
 		boolean finderClassNameCacheEnabled = UserModelImpl.CACHE_ENABLED_USERS_PERMISSIONS;
 
@@ -3645,7 +3645,7 @@ public class UserPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				new Long(pk), String.valueOf(start), String.valueOf(end),
 				String.valueOf(obc)
 			};
 
@@ -3683,7 +3683,7 @@ public class UserPersistenceImpl extends BasePersistence
 				qPos.add(pk);
 
 				List<com.liferay.portal.model.Permission> list = (List<com.liferay.portal.model.Permission>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -3992,12 +3992,12 @@ public class UserPersistenceImpl extends BasePersistence
 		return getRoles(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List<com.liferay.portal.model.Role> getRoles(long pk, int begin,
+	public List<com.liferay.portal.model.Role> getRoles(long pk, int start,
 		int end) throws NoSuchUserException, SystemException {
-		return getRoles(pk, begin, end, null);
+		return getRoles(pk, start, end, null);
 	}
 
-	public List<com.liferay.portal.model.Role> getRoles(long pk, int begin,
+	public List<com.liferay.portal.model.Role> getRoles(long pk, int start,
 		int end, OrderByComparator obc)
 		throws NoSuchUserException, SystemException {
 		boolean finderClassNameCacheEnabled = UserModelImpl.CACHE_ENABLED_USERS_ROLES;
@@ -4010,7 +4010,7 @@ public class UserPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				new Long(pk), String.valueOf(start), String.valueOf(end),
 				String.valueOf(obc)
 			};
 
@@ -4054,7 +4054,7 @@ public class UserPersistenceImpl extends BasePersistence
 				qPos.add(pk);
 
 				List<com.liferay.portal.model.Role> list = (List<com.liferay.portal.model.Role>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -4356,12 +4356,12 @@ public class UserPersistenceImpl extends BasePersistence
 	}
 
 	public List<com.liferay.portal.model.UserGroup> getUserGroups(long pk,
-		int begin, int end) throws NoSuchUserException, SystemException {
-		return getUserGroups(pk, begin, end, null);
+		int start, int end) throws NoSuchUserException, SystemException {
+		return getUserGroups(pk, start, end, null);
 	}
 
 	public List<com.liferay.portal.model.UserGroup> getUserGroups(long pk,
-		int begin, int end, OrderByComparator obc)
+		int start, int end, OrderByComparator obc)
 		throws NoSuchUserException, SystemException {
 		boolean finderClassNameCacheEnabled = UserModelImpl.CACHE_ENABLED_USERS_USERGROUPS;
 
@@ -4373,7 +4373,7 @@ public class UserPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				new Long(pk), String.valueOf(start), String.valueOf(end),
 				String.valueOf(obc)
 			};
 
@@ -4417,7 +4417,7 @@ public class UserPersistenceImpl extends BasePersistence
 				qPos.add(pk);
 
 				List<com.liferay.portal.model.UserGroup> list = (List<com.liferay.portal.model.UserGroup>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,

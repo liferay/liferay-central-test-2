@@ -68,7 +68,7 @@ public interface MembershipRequestLocalService {
 
 	public java.util.List<com.liferay.portal.model.MembershipRequest> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.MembershipRequest updateMembershipRequest(
 		com.liferay.portal.model.MembershipRequest membershipRequest)
@@ -91,7 +91,7 @@ public interface MembershipRequestLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.MembershipRequest> search(
-		long groupId, int status, int begin, int end)
+		long groupId, int status, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int searchCount(long groupId, int status)

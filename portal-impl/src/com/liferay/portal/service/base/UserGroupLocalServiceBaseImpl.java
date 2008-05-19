@@ -302,10 +302,10 @@ public abstract class UserGroupLocalServiceBaseImpl
 	}
 
 	public List<UserGroup> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return userGroupPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public UserGroup updateUserGroup(UserGroup userGroup)

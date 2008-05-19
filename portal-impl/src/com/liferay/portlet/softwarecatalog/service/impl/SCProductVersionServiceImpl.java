@@ -100,14 +100,14 @@ public class SCProductVersionServiceImpl
 	}
 
 	public List<SCProductVersion> getProductVersions(
-			long productEntryId, int begin, int end)
+			long productEntryId, int start, int end)
 		throws SystemException, PortalException {
 
 		SCProductEntryPermission.check(
 			getPermissionChecker(), productEntryId, ActionKeys.VIEW);
 
 		return scProductVersionLocalService.getProductVersions(
-			productEntryId, begin, end);
+			productEntryId, start, end);
 	}
 
 	public int getProductVersionsCount(long productEntryId)

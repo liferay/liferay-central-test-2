@@ -86,10 +86,10 @@ public class ExpandoColumnLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		ExpandoColumnLocalService expandoColumnLocalService = ExpandoColumnLocalServiceFactory.getService();
 
-		return expandoColumnLocalService.dynamicQuery(queryInitializer, begin,
+		return expandoColumnLocalService.dynamicQuery(queryInitializer, start,
 			end);
 	}
 

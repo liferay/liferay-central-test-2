@@ -153,11 +153,11 @@ public class SCProductVersionServiceSoap {
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersionSoap[] getProductVersions(
-		long productEntryId, int begin, int end) throws RemoteException {
+		long productEntryId, int start, int end) throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> returnValue =
 				SCProductVersionServiceUtil.getProductVersions(productEntryId,
-					begin, end);
+					start, end);
 
 			return com.liferay.portlet.softwarecatalog.model.SCProductVersionSoap.toSoapModels(returnValue);
 		}

@@ -66,12 +66,12 @@ public interface WorkflowComponentService {
 			com.liferay.portal.kernel.jbi.WorkflowComponentException;
 
 	public java.util.List getDefinitions(long definitionId,
-		java.lang.String name, int begin, int end)
+		java.lang.String name, int start, int end)
 		throws java.rmi.RemoteException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException;
 
 	public java.lang.String getDefinitionsXml(long definitionId,
-		java.lang.String name, int begin, int end)
+		java.lang.String name, int start, int end)
 		throws java.rmi.RemoteException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException;
 
@@ -93,7 +93,7 @@ public interface WorkflowComponentService {
 		java.lang.String startDateGT, java.lang.String startDateLT,
 		java.lang.String endDateGT, java.lang.String endDateLT,
 		boolean hideEndedTasks, boolean retrieveUserInstances,
-		boolean andOperator, int begin, int end)
+		boolean andOperator, int start, int end)
 		throws java.rmi.RemoteException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException;
 
@@ -120,7 +120,7 @@ public interface WorkflowComponentService {
 		java.lang.String startDateGT, java.lang.String startDateLT,
 		java.lang.String endDateGT, java.lang.String endDateLT,
 		boolean hideEndedTasks, boolean retrieveUserInstances,
-		boolean andOperator, int begin, int end)
+		boolean andOperator, int start, int end)
 		throws java.rmi.RemoteException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException;
 
@@ -154,7 +154,7 @@ public interface WorkflowComponentService {
 		java.lang.String createDateLT, java.lang.String startDateGT,
 		java.lang.String startDateLT, java.lang.String endDateGT,
 		java.lang.String endDateLT, boolean hideEndedTasks,
-		boolean andOperator, int begin, int end)
+		boolean andOperator, int start, int end)
 		throws java.rmi.RemoteException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException;
 
@@ -182,7 +182,7 @@ public interface WorkflowComponentService {
 		java.lang.String createDateLT, java.lang.String startDateGT,
 		java.lang.String startDateLT, java.lang.String endDateGT,
 		java.lang.String endDateLT, boolean hideEndedTasks,
-		boolean andOperator, int begin, int end)
+		boolean andOperator, int start, int end)
 		throws java.rmi.RemoteException,
 			com.liferay.portal.kernel.jbi.WorkflowComponentException;
 

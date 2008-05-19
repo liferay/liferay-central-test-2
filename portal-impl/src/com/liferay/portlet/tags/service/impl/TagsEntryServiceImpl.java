@@ -84,20 +84,20 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 	}
 
 	public List<TagsEntry> search(
-		long companyId, String name, String[] properties, int begin, int end)
+		long companyId, String name, String[] properties, int start, int end)
 		throws SystemException {
 
 		return tagsEntryLocalService.search(
-			companyId, name, properties, begin, end);
+			companyId, name, properties, start, end);
 	}
 
 	public JSONArrayWrapper searchAutocomplete(
-			long companyId, String name, String[] properties, int begin,
+			long companyId, String name, String[] properties, int start,
 			int end)
 		throws SystemException {
 
 		return tagsEntryLocalService.searchAutocomplete(
-			companyId, name, properties, begin, end);
+			companyId, name, properties, start, end);
 	}
 
 	public int searchCount(long companyId, String name, String[] properties)

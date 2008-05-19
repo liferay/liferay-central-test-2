@@ -333,12 +333,12 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<MembershipRequest> findByGroupId(long groupId, int begin,
+	public List<MembershipRequest> findByGroupId(long groupId, int start,
 		int end) throws SystemException {
-		return findByGroupId(groupId, begin, end, null);
+		return findByGroupId(groupId, start, end, null);
 	}
 
-	public List<MembershipRequest> findByGroupId(long groupId, int begin,
+	public List<MembershipRequest> findByGroupId(long groupId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MembershipRequestModelImpl.CACHE_ENABLED;
 		String finderClassName = MembershipRequest.class.getName();
@@ -352,7 +352,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -395,7 +395,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 				qPos.add(groupId);
 
 				List<MembershipRequest> list = (List<MembershipRequest>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -577,12 +577,12 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<MembershipRequest> findByUserId(long userId, int begin, int end)
+	public List<MembershipRequest> findByUserId(long userId, int start, int end)
 		throws SystemException {
-		return findByUserId(userId, begin, end, null);
+		return findByUserId(userId, start, end, null);
 	}
 
-	public List<MembershipRequest> findByUserId(long userId, int begin,
+	public List<MembershipRequest> findByUserId(long userId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MembershipRequestModelImpl.CACHE_ENABLED;
 		String finderClassName = MembershipRequest.class.getName();
@@ -596,7 +596,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -639,7 +639,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 				qPos.add(userId);
 
 				List<MembershipRequest> list = (List<MembershipRequest>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -832,12 +832,12 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 	}
 
 	public List<MembershipRequest> findByG_S(long groupId, int statusId,
-		int begin, int end) throws SystemException {
-		return findByG_S(groupId, statusId, begin, end, null);
+		int start, int end) throws SystemException {
+		return findByG_S(groupId, statusId, start, end, null);
 	}
 
 	public List<MembershipRequest> findByG_S(long groupId, int statusId,
-		int begin, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MembershipRequestModelImpl.CACHE_ENABLED;
 		String finderClassName = MembershipRequest.class.getName();
 		String finderMethodName = "findByG_S";
@@ -850,7 +850,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), new Integer(statusId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -899,7 +899,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 				qPos.add(statusId);
 
 				List<MembershipRequest> list = (List<MembershipRequest>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1053,7 +1053,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 	}
 
 	public List<MembershipRequest> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -1062,7 +1062,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -1078,12 +1078,12 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<MembershipRequest> findAll(int begin, int end)
+	public List<MembershipRequest> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<MembershipRequest> findAll(int begin, int end,
+	public List<MembershipRequest> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MembershipRequestModelImpl.CACHE_ENABLED;
 		String finderClassName = MembershipRequest.class.getName();
@@ -1093,7 +1093,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1127,7 +1127,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<MembershipRequest> list = (List<MembershipRequest>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

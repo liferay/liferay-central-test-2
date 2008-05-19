@@ -85,10 +85,10 @@ public class ContactLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.Contact> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
 
-		return contactLocalService.dynamicQuery(queryInitializer, begin, end);
+		return contactLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
 	public static com.liferay.portal.model.Contact updateContact(

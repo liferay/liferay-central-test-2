@@ -100,16 +100,16 @@ public class RatingsEntryUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findByC_C(
-		long classNameId, long classPK, int begin, int end)
+		long classNameId, long classPK, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_C(classNameId, classPK, begin, end);
+		return getPersistence().findByC_C(classNameId, classPK, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findByC_C(
-		long classNameId, long classPK, int begin, int end,
+		long classNameId, long classPK, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_C(classNameId, classPK, begin, end, obc);
+		return getPersistence().findByC_C(classNameId, classPK, start, end, obc);
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsEntry findByC_C_First(
@@ -158,9 +158,9 @@ public class RatingsEntryUtil {
 
 	public static java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findWithDynamicQuery(queryInitializer, begin, end);
+				   .findWithDynamicQuery(queryInitializer, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findAll()
@@ -169,14 +169,14 @@ public class RatingsEntryUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end);
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end, obc);
+		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByC_C(long classNameId, long classPK)

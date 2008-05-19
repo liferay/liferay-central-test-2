@@ -159,14 +159,14 @@ public class ShoppingCouponLocalServiceImpl
 
 	public List<ShoppingCoupon> search(
 			long plid, long companyId, String code, boolean active,
-			String discountType, boolean andOperator, int begin, int end)
+			String discountType, boolean andOperator, int start, int end)
 		throws SystemException {
 
 		long groupId = PortalUtil.getPortletGroupId(plid);
 
 		return shoppingCouponFinder.findByG_C_C_A_DT(
 			groupId, companyId, code, active, discountType, andOperator,
-			begin, end);
+			start, end);
 	}
 
 	public int searchCount(

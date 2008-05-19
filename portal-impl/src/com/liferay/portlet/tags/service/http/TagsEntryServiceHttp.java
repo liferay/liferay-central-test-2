@@ -356,7 +356,7 @@ public class TagsEntryServiceHttp {
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
 		HttpPrincipal httpPrincipal, long companyId, java.lang.String name,
-		java.lang.String[] properties, int begin, int end)
+		java.lang.String[] properties, int start, int end)
 		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
@@ -373,7 +373,7 @@ public class TagsEntryServiceHttp {
 				paramObj2 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj3 = new IntegerWrapper(begin);
+			Object paramObj3 = new IntegerWrapper(start);
 
 			Object paramObj4 = new IntegerWrapper(end);
 
@@ -407,7 +407,7 @@ public class TagsEntryServiceHttp {
 
 	public static com.liferay.portal.kernel.json.JSONArrayWrapper searchAutocomplete(
 		HttpPrincipal httpPrincipal, long companyId, java.lang.String name,
-		java.lang.String[] properties, int begin, int end)
+		java.lang.String[] properties, int start, int end)
 		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
@@ -424,7 +424,7 @@ public class TagsEntryServiceHttp {
 				paramObj2 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj3 = new IntegerWrapper(begin);
+			Object paramObj3 = new IntegerWrapper(start);
 
 			Object paramObj4 = new IntegerWrapper(end);
 

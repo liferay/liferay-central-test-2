@@ -68,7 +68,7 @@ public interface PortletPreferencesLocalService {
 
 	public java.util.List<com.liferay.portal.model.PortletPreferences> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PortletPreferences updatePortletPreferences(
 		com.liferay.portal.model.PortletPreferences portletPreferences)

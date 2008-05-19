@@ -89,10 +89,10 @@ public abstract class ExpandoColumnLocalServiceBaseImpl
 	}
 
 	public List<ExpandoColumn> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return expandoColumnPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public ExpandoColumn updateExpandoColumn(ExpandoColumn expandoColumn)

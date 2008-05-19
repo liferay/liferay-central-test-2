@@ -245,11 +245,11 @@ public class PasswordPolicyLocalServiceImpl
 	}
 
 	public List<PasswordPolicy> search(
-			long companyId, String name, int begin, int end,
+			long companyId, String name, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
-		return passwordPolicyFinder.findByC_N(companyId, name, begin, end, obc);
+		return passwordPolicyFinder.findByC_N(companyId, name, start, end, obc);
 	}
 
 	public int searchCount(long companyId, String name)

@@ -302,10 +302,10 @@ public abstract class EmailAddressLocalServiceBaseImpl
 	}
 
 	public List<EmailAddress> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return emailAddressPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public EmailAddress updateEmailAddress(EmailAddress emailAddress)

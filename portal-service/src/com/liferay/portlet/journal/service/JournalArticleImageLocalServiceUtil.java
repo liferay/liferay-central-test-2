@@ -86,11 +86,11 @@ public class JournalArticleImageLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
 
 		return journalArticleImageLocalService.dynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticleImage updateJournalArticleImage(

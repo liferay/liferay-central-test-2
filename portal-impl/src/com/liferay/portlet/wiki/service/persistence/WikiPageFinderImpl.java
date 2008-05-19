@@ -122,15 +122,15 @@ public class WikiPageFinderImpl implements WikiPageFinder {
 	}
 
 	public List<WikiPage> findByCreateDate(
-			long nodeId, Date createDate, boolean before, int begin, int end)
+			long nodeId, Date createDate, boolean before, int start, int end)
 		throws SystemException {
 
 		return findByCreateDate(
-			nodeId, new Timestamp(createDate.getTime()), before, begin, end);
+			nodeId, new Timestamp(createDate.getTime()), before, start, end);
 	}
 
 	public List<WikiPage> findByCreateDate(
-			long nodeId, Timestamp createDate, boolean before, int begin,
+			long nodeId, Timestamp createDate, boolean before, int start,
 			int end)
 		throws SystemException {
 
@@ -161,7 +161,7 @@ public class WikiPageFinderImpl implements WikiPageFinder {
 			qPos.add(true);
 
 			return (List<WikiPage>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

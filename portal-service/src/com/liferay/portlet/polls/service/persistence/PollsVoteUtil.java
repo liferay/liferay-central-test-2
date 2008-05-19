@@ -97,16 +97,16 @@ public class PollsVoteUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findByQuestionId(
-		long questionId, int begin, int end)
+		long questionId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByQuestionId(questionId, begin, end);
+		return getPersistence().findByQuestionId(questionId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findByQuestionId(
-		long questionId, int begin, int end,
+		long questionId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByQuestionId(questionId, begin, end, obc);
+		return getPersistence().findByQuestionId(questionId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsVote findByQuestionId_First(
@@ -138,16 +138,16 @@ public class PollsVoteUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findByChoiceId(
-		long choiceId, int begin, int end)
+		long choiceId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByChoiceId(choiceId, begin, end);
+		return getPersistence().findByChoiceId(choiceId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findByChoiceId(
-		long choiceId, int begin, int end,
+		long choiceId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByChoiceId(choiceId, begin, end, obc);
+		return getPersistence().findByChoiceId(choiceId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsVote findByChoiceId_First(
@@ -192,9 +192,9 @@ public class PollsVoteUtil {
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findWithDynamicQuery(queryInitializer, begin, end);
+				   .findWithDynamicQuery(queryInitializer, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findAll()
@@ -203,14 +203,14 @@ public class PollsVoteUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end);
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end, obc);
+		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByQuestionId(long questionId)

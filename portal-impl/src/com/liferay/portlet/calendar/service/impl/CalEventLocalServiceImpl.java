@@ -447,14 +447,14 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	}
 
 	public List<CalEvent> getEvents(
-			long groupId, String type, int begin, int end)
+			long groupId, String type, int start, int end)
 		throws SystemException {
 
 		if (Validator.isNull(type)) {
-			return calEventPersistence.findByGroupId(groupId, begin, end);
+			return calEventPersistence.findByGroupId(groupId, start, end);
 		}
 		else {
-			return calEventPersistence.findByG_T(groupId, type, begin, end);
+			return calEventPersistence.findByG_T(groupId, type, start, end);
 		}
 	}
 

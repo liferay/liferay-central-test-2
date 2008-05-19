@@ -345,12 +345,12 @@ public class CalEventPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<CalEvent> findByUuid(String uuid, int begin, int end)
+	public List<CalEvent> findByUuid(String uuid, int start, int end)
 		throws SystemException {
-		return findByUuid(uuid, begin, end, null);
+		return findByUuid(uuid, start, end, null);
 	}
 
-	public List<CalEvent> findByUuid(String uuid, int begin, int end,
+	public List<CalEvent> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = CalEventModelImpl.CACHE_ENABLED;
 		String finderClassName = CalEvent.class.getName();
@@ -364,7 +364,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -415,7 +415,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				}
 
 				List<CalEvent> list = (List<CalEvent>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -714,12 +714,12 @@ public class CalEventPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<CalEvent> findByGroupId(long groupId, int begin, int end)
+	public List<CalEvent> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
-		return findByGroupId(groupId, begin, end, null);
+		return findByGroupId(groupId, start, end, null);
 	}
 
-	public List<CalEvent> findByGroupId(long groupId, int begin, int end,
+	public List<CalEvent> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = CalEventModelImpl.CACHE_ENABLED;
 		String finderClassName = CalEvent.class.getName();
@@ -733,7 +733,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -777,7 +777,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				qPos.add(groupId);
 
 				List<CalEvent> list = (List<CalEvent>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -971,12 +971,12 @@ public class CalEventPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<CalEvent> findByG_T(long groupId, String type, int begin,
+	public List<CalEvent> findByG_T(long groupId, String type, int start,
 		int end) throws SystemException {
-		return findByG_T(groupId, type, begin, end, null);
+		return findByG_T(groupId, type, start, end, null);
 	}
 
-	public List<CalEvent> findByG_T(long groupId, String type, int begin,
+	public List<CalEvent> findByG_T(long groupId, String type, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = CalEventModelImpl.CACHE_ENABLED;
 		String finderClassName = CalEvent.class.getName();
@@ -992,7 +992,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				
 				type,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1049,7 +1049,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				}
 
 				List<CalEvent> list = (List<CalEvent>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1258,12 +1258,12 @@ public class CalEventPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<CalEvent> findByG_R(long groupId, boolean repeating, int begin,
+	public List<CalEvent> findByG_R(long groupId, boolean repeating, int start,
 		int end) throws SystemException {
-		return findByG_R(groupId, repeating, begin, end, null);
+		return findByG_R(groupId, repeating, start, end, null);
 	}
 
-	public List<CalEvent> findByG_R(long groupId, boolean repeating, int begin,
+	public List<CalEvent> findByG_R(long groupId, boolean repeating, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = CalEventModelImpl.CACHE_ENABLED;
 		String finderClassName = CalEvent.class.getName();
@@ -1277,7 +1277,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId), Boolean.valueOf(repeating),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1327,7 +1327,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				qPos.add(repeating);
 
 				List<CalEvent> list = (List<CalEvent>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1479,7 +1479,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 	}
 
 	public List<CalEvent> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -1488,7 +1488,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -1504,11 +1504,11 @@ public class CalEventPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<CalEvent> findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
+	public List<CalEvent> findAll(int start, int end) throws SystemException {
+		return findAll(start, end, null);
 	}
 
-	public List<CalEvent> findAll(int begin, int end, OrderByComparator obc)
+	public List<CalEvent> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = CalEventModelImpl.CACHE_ENABLED;
 		String finderClassName = CalEvent.class.getName();
@@ -1518,7 +1518,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1554,7 +1554,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<CalEvent> list = (List<CalEvent>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

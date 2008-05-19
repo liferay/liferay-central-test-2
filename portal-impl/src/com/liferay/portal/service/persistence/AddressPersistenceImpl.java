@@ -323,12 +323,12 @@ public class AddressPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<Address> findByCompanyId(long companyId, int begin, int end)
+	public List<Address> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
-		return findByCompanyId(companyId, begin, end, null);
+		return findByCompanyId(companyId, start, end, null);
 	}
 
-	public List<Address> findByCompanyId(long companyId, int begin, int end,
+	public List<Address> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = AddressModelImpl.CACHE_ENABLED;
 		String finderClassName = Address.class.getName();
@@ -342,7 +342,7 @@ public class AddressPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -384,7 +384,7 @@ public class AddressPersistenceImpl extends BasePersistence
 				qPos.add(companyId);
 
 				List<Address> list = (List<Address>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -559,12 +559,12 @@ public class AddressPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<Address> findByUserId(long userId, int begin, int end)
+	public List<Address> findByUserId(long userId, int start, int end)
 		throws SystemException {
-		return findByUserId(userId, begin, end, null);
+		return findByUserId(userId, start, end, null);
 	}
 
-	public List<Address> findByUserId(long userId, int begin, int end,
+	public List<Address> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = AddressModelImpl.CACHE_ENABLED;
 		String finderClassName = Address.class.getName();
@@ -578,7 +578,7 @@ public class AddressPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -620,7 +620,7 @@ public class AddressPersistenceImpl extends BasePersistence
 				qPos.add(userId);
 
 				List<Address> list = (List<Address>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -805,12 +805,12 @@ public class AddressPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<Address> findByC_C(long companyId, long classNameId, int begin,
+	public List<Address> findByC_C(long companyId, long classNameId, int start,
 		int end) throws SystemException {
-		return findByC_C(companyId, classNameId, begin, end, null);
+		return findByC_C(companyId, classNameId, start, end, null);
 	}
 
-	public List<Address> findByC_C(long companyId, long classNameId, int begin,
+	public List<Address> findByC_C(long companyId, long classNameId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = AddressModelImpl.CACHE_ENABLED;
 		String finderClassName = Address.class.getName();
@@ -824,7 +824,7 @@ public class AddressPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -872,7 +872,7 @@ public class AddressPersistenceImpl extends BasePersistence
 				qPos.add(classNameId);
 
 				List<Address> list = (List<Address>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1078,12 +1078,12 @@ public class AddressPersistenceImpl extends BasePersistence
 	}
 
 	public List<Address> findByC_C_C(long companyId, long classNameId,
-		long classPK, int begin, int end) throws SystemException {
-		return findByC_C_C(companyId, classNameId, classPK, begin, end, null);
+		long classPK, int start, int end) throws SystemException {
+		return findByC_C_C(companyId, classNameId, classPK, start, end, null);
 	}
 
 	public List<Address> findByC_C_C(long companyId, long classNameId,
-		long classPK, int begin, int end, OrderByComparator obc)
+		long classPK, int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = AddressModelImpl.CACHE_ENABLED;
 		String finderClassName = Address.class.getName();
@@ -1097,7 +1097,7 @@ public class AddressPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1151,7 +1151,7 @@ public class AddressPersistenceImpl extends BasePersistence
 				qPos.add(classPK);
 
 				List<Address> list = (List<Address>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1380,14 +1380,14 @@ public class AddressPersistenceImpl extends BasePersistence
 	}
 
 	public List<Address> findByC_C_C_M(long companyId, long classNameId,
-		long classPK, boolean mailing, int begin, int end)
+		long classPK, boolean mailing, int start, int end)
 		throws SystemException {
-		return findByC_C_C_M(companyId, classNameId, classPK, mailing, begin,
+		return findByC_C_C_M(companyId, classNameId, classPK, mailing, start,
 			end, null);
 	}
 
 	public List<Address> findByC_C_C_M(long companyId, long classNameId,
-		long classPK, boolean mailing, int begin, int end, OrderByComparator obc)
+		long classPK, boolean mailing, int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = AddressModelImpl.CACHE_ENABLED;
 		String finderClassName = Address.class.getName();
@@ -1403,7 +1403,7 @@ public class AddressPersistenceImpl extends BasePersistence
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				Boolean.valueOf(mailing),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1463,7 +1463,7 @@ public class AddressPersistenceImpl extends BasePersistence
 				qPos.add(mailing);
 
 				List<Address> list = (List<Address>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1704,14 +1704,14 @@ public class AddressPersistenceImpl extends BasePersistence
 	}
 
 	public List<Address> findByC_C_C_P(long companyId, long classNameId,
-		long classPK, boolean primary, int begin, int end)
+		long classPK, boolean primary, int start, int end)
 		throws SystemException {
-		return findByC_C_C_P(companyId, classNameId, classPK, primary, begin,
+		return findByC_C_C_P(companyId, classNameId, classPK, primary, start,
 			end, null);
 	}
 
 	public List<Address> findByC_C_C_P(long companyId, long classNameId,
-		long classPK, boolean primary, int begin, int end, OrderByComparator obc)
+		long classPK, boolean primary, int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = AddressModelImpl.CACHE_ENABLED;
 		String finderClassName = Address.class.getName();
@@ -1727,7 +1727,7 @@ public class AddressPersistenceImpl extends BasePersistence
 				new Long(companyId), new Long(classNameId), new Long(classPK),
 				Boolean.valueOf(primary),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1787,7 +1787,7 @@ public class AddressPersistenceImpl extends BasePersistence
 				qPos.add(primary);
 
 				List<Address> list = (List<Address>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1964,7 +1964,7 @@ public class AddressPersistenceImpl extends BasePersistence
 	}
 
 	public List<Address> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -1973,7 +1973,7 @@ public class AddressPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -1989,11 +1989,11 @@ public class AddressPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<Address> findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
+	public List<Address> findAll(int start, int end) throws SystemException {
+		return findAll(start, end, null);
 	}
 
-	public List<Address> findAll(int begin, int end, OrderByComparator obc)
+	public List<Address> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = AddressModelImpl.CACHE_ENABLED;
 		String finderClassName = Address.class.getName();
@@ -2003,7 +2003,7 @@ public class AddressPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -2037,7 +2037,7 @@ public class AddressPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<Address> list = (List<Address>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

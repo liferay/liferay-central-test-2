@@ -282,10 +282,10 @@ public class PollsQuestionLocalServiceImpl
 		return pollsQuestionPersistence.findByGroupId(groupId);
 	}
 
-	public List<PollsQuestion> getQuestions(long groupId, int begin, int end)
+	public List<PollsQuestion> getQuestions(long groupId, int start, int end)
 		throws SystemException {
 
-		return pollsQuestionPersistence.findByGroupId(groupId, begin, end);
+		return pollsQuestionPersistence.findByGroupId(groupId, start, end);
 	}
 
 	public int getQuestionsCount(long groupId) throws SystemException {

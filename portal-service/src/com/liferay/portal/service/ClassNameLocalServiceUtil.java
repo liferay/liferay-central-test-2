@@ -86,10 +86,10 @@ public class ClassNameLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.ClassName> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
 
-		return classNameLocalService.dynamicQuery(queryInitializer, begin, end);
+		return classNameLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
 	public static com.liferay.portal.model.ClassName updateClassName(

@@ -146,24 +146,24 @@ public class LuceneHitsImpl implements Hits {
 		return _scores[n];
 	}
 
-	public LuceneHitsImpl subset(int begin, int end) {
+	public LuceneHitsImpl subset(int start, int end) {
 		LuceneHitsImpl subset = new LuceneHitsImpl();
 
-		if ((begin > - 1) && (begin <= end)) {
+		if ((start > - 1) && (start <= end)) {
 			subset.setStart(getStart());
 
 			if (end > _length) {
 				end = _length;
 			}
 
-			int subsetTotal = end - begin;
+			int subsetTotal = end - start;
 
 			Document[] subsetDocs = new DocumentImpl[subsetTotal];
 			float[] subsetScores = new float[subsetTotal];
 
 			int j = 0;
 
-			for (int i = begin; (i < end) && (i < getLength()); i++, j++) {
+			for (int i = start; (i < end) && (i < getLength()); i++, j++) {
 				subsetDocs[j] = doc(i);
 				subsetScores[j] = score(i);
 			}

@@ -818,18 +818,18 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public List<MBMessage> getCategoryMessages(
-			long categoryId, int begin, int end)
+			long categoryId, int start, int end)
 		throws SystemException {
 
-		return mbMessagePersistence.findByCategoryId(categoryId, begin, end);
+		return mbMessagePersistence.findByCategoryId(categoryId, start, end);
 	}
 
 	public List<MBMessage> getCategoryMessages(
-			long categoryId, int begin, int end, OrderByComparator obc)
+			long categoryId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return mbMessagePersistence.findByCategoryId(
-			categoryId, begin, end, obc);
+			categoryId, start, end, obc);
 	}
 
 	public int getCategoryMessagesCount(long categoryId)
@@ -845,17 +845,17 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public List<MBMessage> getCompanyMessages(
-			long companyId, int begin, int end)
+			long companyId, int start, int end)
 		throws SystemException {
 
-		return mbMessagePersistence.findByCompanyId(companyId, begin, end);
+		return mbMessagePersistence.findByCompanyId(companyId, start, end);
 	}
 
 	public List<MBMessage> getCompanyMessages(
-			long companyId, int begin, int end, OrderByComparator obc)
+			long companyId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return mbMessagePersistence.findByCompanyId(companyId, begin, end, obc);
+		return mbMessagePersistence.findByCompanyId(companyId, start, end, obc);
 	}
 
 	public int getCompanyMessagesCount(long companyId)
@@ -924,32 +924,32 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 	}
 
-	public List<MBMessage> getGroupMessages(long groupId, int begin, int end)
+	public List<MBMessage> getGroupMessages(long groupId, int start, int end)
 		throws SystemException {
 
-		return mbMessageFinder.findByGroupId(groupId, begin, end);
+		return mbMessageFinder.findByGroupId(groupId, start, end);
 	}
 
 	public List<MBMessage> getGroupMessages(
-			long groupId, int begin, int end, OrderByComparator obc)
+			long groupId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return mbMessageFinder.findByGroupId(groupId, begin, end, obc);
+		return mbMessageFinder.findByGroupId(groupId, start, end, obc);
 	}
 
 	public List<MBMessage> getGroupMessages(
-			long groupId, long userId, int begin, int end)
+			long groupId, long userId, int start, int end)
 		throws SystemException {
 
-		return mbMessageFinder.findByG_U(groupId, userId, begin, end);
+		return mbMessageFinder.findByG_U(groupId, userId, start, end);
 	}
 
 	public List<MBMessage> getGroupMessages(
-			long groupId, long userId, int begin, int end,
+			long groupId, long userId, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
-		return mbMessageFinder.findByG_U(groupId, userId, begin, end, obc);
+		return mbMessageFinder.findByG_U(groupId, userId, start, end, obc);
 	}
 
 	public int getGroupMessagesCount(long groupId) throws SystemException {

@@ -109,12 +109,12 @@ public class ShoppingCouponServiceJSON {
 
 	public static JSONArray search(long plid, long companyId,
 		java.lang.String code, boolean active, java.lang.String discountType,
-		boolean andOperator, int begin, int end)
+		boolean andOperator, int start, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> returnValue =
 			ShoppingCouponServiceUtil.search(plid, companyId, code, active,
-				discountType, andOperator, begin, end);
+				discountType, andOperator, start, end);
 
 		return ShoppingCouponJSONSerializer.toJSONArray(returnValue);
 	}

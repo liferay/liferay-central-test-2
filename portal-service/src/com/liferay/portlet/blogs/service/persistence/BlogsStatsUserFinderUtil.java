@@ -41,18 +41,18 @@ public class BlogsStatsUserFinderUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByOrganizationId(
-		long organizationId, int begin, int end,
+		long organizationId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByOrganizationId(organizationId, begin, end, obc);
+		return getFinder().findByOrganizationId(organizationId, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByOrganizationIds(
-		java.util.List<Long> organizationIds, int begin, int end,
+		java.util.List<Long> organizationIds, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
-				   .findByOrganizationIds(organizationIds, begin, end, obc);
+				   .findByOrganizationIds(organizationIds, start, end, obc);
 	}
 
 	public static BlogsStatsUserFinder getFinder() {

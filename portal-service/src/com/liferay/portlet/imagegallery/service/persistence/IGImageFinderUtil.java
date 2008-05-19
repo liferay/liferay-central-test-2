@@ -45,9 +45,9 @@ public class IGImageFinderUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByGroupId(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByGroupId(groupId, begin, end);
+		return getFinder().findByGroupId(groupId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByNoAssets()
@@ -63,9 +63,9 @@ public class IGImageFinderUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByG_U(
-		long groupId, long userId, int begin, int end)
+		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByG_U(groupId, userId, begin, end);
+		return getFinder().findByG_U(groupId, userId, start, end);
 	}
 
 	public static IGImageFinder getFinder() {

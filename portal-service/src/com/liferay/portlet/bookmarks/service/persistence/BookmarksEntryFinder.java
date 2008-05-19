@@ -39,7 +39,7 @@ public interface BookmarksEntryFinder {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByGroupId(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByNoAssets()
@@ -51,6 +51,6 @@ public interface BookmarksEntryFinder {
 			com.liferay.portlet.bookmarks.NoSuchEntryException;
 
 	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByG_U(
-		long groupId, long userId, int begin, int end)
+		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException;
 }

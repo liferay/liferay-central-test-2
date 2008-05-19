@@ -86,10 +86,10 @@ public class PollsQuestionLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsQuestion> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
 
-		return pollsQuestionLocalService.dynamicQuery(queryInitializer, begin,
+		return pollsQuestionLocalService.dynamicQuery(queryInitializer, start,
 			end);
 	}
 
@@ -275,11 +275,11 @@ public class PollsQuestionLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsQuestion> getQuestions(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
 
-		return pollsQuestionLocalService.getQuestions(groupId, begin, end);
+		return pollsQuestionLocalService.getQuestions(groupId, start, end);
 	}
 
 	public static int getQuestionsCount(long groupId)

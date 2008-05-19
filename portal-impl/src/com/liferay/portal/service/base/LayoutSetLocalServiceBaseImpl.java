@@ -302,10 +302,10 @@ public abstract class LayoutSetLocalServiceBaseImpl
 	}
 
 	public List<LayoutSet> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return layoutSetPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public LayoutSet updateLayoutSet(LayoutSet layoutSet)

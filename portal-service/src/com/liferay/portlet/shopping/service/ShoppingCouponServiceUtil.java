@@ -90,13 +90,13 @@ public class ShoppingCouponServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> search(
 		long plid, long companyId, java.lang.String code, boolean active,
-		java.lang.String discountType, boolean andOperator, int begin, int end)
+		java.lang.String discountType, boolean andOperator, int start, int end)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingCouponService shoppingCouponService = ShoppingCouponServiceFactory.getService();
 
 		return shoppingCouponService.search(plid, companyId, code, active,
-			discountType, andOperator, begin, end);
+			discountType, andOperator, start, end);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon updateCoupon(

@@ -86,10 +86,10 @@ public class ShoppingItemLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
 
-		return shoppingItemLocalService.dynamicQuery(queryInitializer, begin,
+		return shoppingItemLocalService.dynamicQuery(queryInitializer, start,
 			end);
 	}
 
@@ -330,12 +330,12 @@ public class ShoppingItemLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> getItems(
-		long categoryId, int begin, int end,
+		long categoryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
 
-		return shoppingItemLocalService.getItems(categoryId, begin, end, obc);
+		return shoppingItemLocalService.getItems(categoryId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem[] getItemsPrevAndNext(
@@ -364,12 +364,12 @@ public class ShoppingItemLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> search(
-		long groupId, long[] categoryIds, java.lang.String keywords, int begin,
+		long groupId, long[] categoryIds, java.lang.String keywords, int start,
 		int end) throws com.liferay.portal.SystemException {
 		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
 
 		return shoppingItemLocalService.search(groupId, categoryIds, keywords,
-			begin, end);
+			start, end);
 	}
 
 	public static int searchCount(long groupId, long[] categoryIds,

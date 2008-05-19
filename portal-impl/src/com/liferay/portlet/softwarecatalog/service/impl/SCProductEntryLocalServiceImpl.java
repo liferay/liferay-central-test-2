@@ -325,34 +325,34 @@ public class SCProductEntryLocalServiceImpl
 	}
 
 	public List<SCProductEntry> getProductEntries(
-			long groupId, int begin, int end)
+			long groupId, int start, int end)
 		throws SystemException {
 
-		return scProductEntryPersistence.findByGroupId(groupId, begin, end);
+		return scProductEntryPersistence.findByGroupId(groupId, start, end);
 	}
 
 	public List<SCProductEntry> getProductEntries(
-			long groupId, int begin, int end, OrderByComparator obc)
+			long groupId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return scProductEntryPersistence.findByGroupId(
-			groupId, begin, end, obc);
+			groupId, start, end, obc);
 	}
 
 	public List<SCProductEntry> getProductEntries(
-			long groupId, long userId, int begin, int end)
+			long groupId, long userId, int start, int end)
 		throws SystemException {
 
-		return scProductEntryPersistence.findByG_U(groupId, userId, begin, end);
+		return scProductEntryPersistence.findByG_U(groupId, userId, start, end);
 	}
 
 	public List<SCProductEntry> getProductEntries(
-			long groupId, long userId, int begin, int end,
+			long groupId, long userId, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
 		return scProductEntryPersistence.findByG_U(
-			groupId, userId, begin, end, obc);
+			groupId, userId, start, end, obc);
 	}
 
 	public int getProductEntriesCount(long groupId)

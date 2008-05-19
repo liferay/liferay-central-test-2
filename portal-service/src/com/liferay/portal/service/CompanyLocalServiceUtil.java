@@ -85,10 +85,10 @@ public class CompanyLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.Company> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
 
-		return companyLocalService.dynamicQuery(queryInitializer, begin, end);
+		return companyLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
 	public static com.liferay.portal.model.Company updateCompany(

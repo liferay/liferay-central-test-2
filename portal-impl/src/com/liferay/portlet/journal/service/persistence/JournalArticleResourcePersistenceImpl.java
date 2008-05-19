@@ -336,12 +336,12 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<JournalArticleResource> findByGroupId(long groupId, int begin,
+	public List<JournalArticleResource> findByGroupId(long groupId, int start,
 		int end) throws SystemException {
-		return findByGroupId(groupId, begin, end, null);
+		return findByGroupId(groupId, start, end, null);
 	}
 
-	public List<JournalArticleResource> findByGroupId(long groupId, int begin,
+	public List<JournalArticleResource> findByGroupId(long groupId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalArticleResourceModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalArticleResource.class.getName();
@@ -355,7 +355,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -392,7 +392,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 				qPos.add(groupId);
 
 				List<JournalArticleResource> list = (List<JournalArticleResource>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -638,7 +638,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 	}
 
 	public List<JournalArticleResource> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -647,7 +647,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -663,12 +663,12 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<JournalArticleResource> findAll(int begin, int end)
+	public List<JournalArticleResource> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<JournalArticleResource> findAll(int begin, int end,
+	public List<JournalArticleResource> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = JournalArticleResourceModelImpl.CACHE_ENABLED;
 		String finderClassName = JournalArticleResource.class.getName();
@@ -678,7 +678,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -707,7 +707,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<JournalArticleResource> list = (List<JournalArticleResource>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

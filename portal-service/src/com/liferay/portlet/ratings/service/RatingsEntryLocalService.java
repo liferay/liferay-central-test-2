@@ -68,7 +68,7 @@ public interface RatingsEntryLocalService {
 
 	public java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.ratings.model.RatingsEntry updateRatingsEntry(
 		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry)

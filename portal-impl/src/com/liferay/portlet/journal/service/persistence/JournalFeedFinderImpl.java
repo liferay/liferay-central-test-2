@@ -152,7 +152,7 @@ public class JournalFeedFinderImpl implements JournalFeedFinder {
 	}
 
 	public List<JournalFeed> findByKeywords(
-			long companyId, long groupId, String keywords, int begin, int end,
+			long companyId, long groupId, String keywords, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
@@ -172,23 +172,23 @@ public class JournalFeedFinderImpl implements JournalFeedFinder {
 
 		return findByC_G_F_N_D(
 			companyId, groupId, feedIds, names, descriptions, andOperator,
-			begin, end, obc);
+			start, end, obc);
 	}
 
 	public List<JournalFeed> findByC_G_F_N_D(
 			long companyId, long groupId, String feedId, String name,
-			String description, boolean andOperator, int begin, int end,
+			String description, boolean andOperator, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
 		return findByC_G_F_N_D(
 			companyId, groupId, new String[] {feedId}, new String[] {name},
-			new String[] {description}, andOperator, begin, end, obc);
+			new String[] {description}, andOperator, start, end, obc);
 	}
 
 	public List<JournalFeed> findByC_G_F_N_D(
 			long companyId, long groupId, String[] feedIds, String[] names,
-			String[] descriptions, boolean andOperator, int begin, int end,
+			String[] descriptions, boolean andOperator, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
@@ -234,7 +234,7 @@ public class JournalFeedFinderImpl implements JournalFeedFinder {
 			qPos.add(descriptions, 2);
 
 			return (List<JournalFeed>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

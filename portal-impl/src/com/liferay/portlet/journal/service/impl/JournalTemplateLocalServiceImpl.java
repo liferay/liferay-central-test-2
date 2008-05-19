@@ -351,11 +351,11 @@ public class JournalTemplateLocalServiceImpl
 	}
 
 	public List<JournalTemplate> getStructureTemplates(
-			long groupId, String structureId, int begin, int end)
+			long groupId, String structureId, int start, int end)
 		throws SystemException {
 
 		return journalTemplatePersistence.findByG_S(
-			groupId, structureId, begin, end);
+			groupId, structureId, start, end);
 	}
 
 	public int getStructureTemplatesCount(long groupId, String structureId)
@@ -415,10 +415,10 @@ public class JournalTemplateLocalServiceImpl
 		return journalTemplatePersistence.findByGroupId(groupId);
 	}
 
-	public List<JournalTemplate> getTemplates(long groupId, int begin, int end)
+	public List<JournalTemplate> getTemplates(long groupId, int start, int end)
 		throws SystemException {
 
-		return journalTemplatePersistence.findByGroupId(groupId, begin, end);
+		return journalTemplatePersistence.findByGroupId(groupId, start, end);
 	}
 
 	public int getTemplatesCount(long groupId) throws SystemException {
@@ -440,24 +440,24 @@ public class JournalTemplateLocalServiceImpl
 
 	public List<JournalTemplate> search(
 			long companyId, long groupId, String keywords, String structureId,
-			String structureIdComparator, int begin, int end,
+			String structureIdComparator, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
 		return journalTemplateFinder.findByKeywords(
 			companyId, groupId, keywords, structureId, structureIdComparator,
-			begin, end, obc);
+			start, end, obc);
 	}
 
 	public List<JournalTemplate> search(
 			long companyId, long groupId, String templateId, String structureId,
 			String structureIdComparator, String name, String description,
-			boolean andOperator, int begin, int end, OrderByComparator obc)
+			boolean andOperator, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return journalTemplateFinder.findByC_G_T_S_N_D(
 			companyId, groupId, templateId, structureId, structureIdComparator,
-			name, description, andOperator, begin, end, obc);
+			name, description, andOperator, start, end, obc);
 	}
 
 	public int searchCount(

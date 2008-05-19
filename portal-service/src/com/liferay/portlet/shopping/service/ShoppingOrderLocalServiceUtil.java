@@ -86,10 +86,10 @@ public class ShoppingOrderLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		ShoppingOrderLocalService shoppingOrderLocalService = ShoppingOrderLocalServiceFactory.getService();
 
-		return shoppingOrderLocalService.dynamicQuery(queryInitializer, begin,
+		return shoppingOrderLocalService.dynamicQuery(queryInitializer, start,
 			end);
 	}
 
@@ -181,7 +181,7 @@ public class ShoppingOrderLocalServiceUtil {
 		java.lang.String billingEmailAddress,
 		java.lang.String shippingFirstName, java.lang.String shippingLastName,
 		java.lang.String shippingEmailAddress,
-		java.lang.String ppPaymentStatus, boolean andOperator, int begin,
+		java.lang.String ppPaymentStatus, boolean andOperator, int start,
 		int end)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -190,7 +190,7 @@ public class ShoppingOrderLocalServiceUtil {
 		return shoppingOrderLocalService.search(groupId, companyId, userId,
 			number, billingFirstName, billingLastName, billingEmailAddress,
 			shippingFirstName, shippingLastName, shippingEmailAddress,
-			ppPaymentStatus, andOperator, begin, end);
+			ppPaymentStatus, andOperator, start, end);
 	}
 
 	public static int searchCount(long groupId, long companyId, long userId,

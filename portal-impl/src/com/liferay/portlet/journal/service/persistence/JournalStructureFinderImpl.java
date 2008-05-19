@@ -152,7 +152,7 @@ public class JournalStructureFinderImpl implements JournalStructureFinder {
 	}
 
 	public List<JournalStructure> findByKeywords(
-			long companyId, long groupId, String keywords, int begin, int end,
+			long companyId, long groupId, String keywords, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
@@ -172,23 +172,23 @@ public class JournalStructureFinderImpl implements JournalStructureFinder {
 
 		return findByC_G_S_N_D(
 			companyId, groupId, structureIds, names, descriptions, andOperator,
-			begin, end, obc);
+			start, end, obc);
 	}
 
 	public List<JournalStructure> findByC_G_S_N_D(
 			long companyId, long groupId, String structureId, String name,
-			String description, boolean andOperator, int begin, int end,
+			String description, boolean andOperator, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
 		return findByC_G_S_N_D(
 			companyId, groupId, new String[] {structureId}, new String[] {name},
-			new String[] {description}, andOperator, begin, end, obc);
+			new String[] {description}, andOperator, start, end, obc);
 	}
 
 	public List<JournalStructure> findByC_G_S_N_D(
 			long companyId, long groupId, String[] structureIds, String[] names,
-			String[] descriptions, boolean andOperator, int begin, int end,
+			String[] descriptions, boolean andOperator, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
@@ -234,7 +234,7 @@ public class JournalStructureFinderImpl implements JournalStructureFinder {
 			qPos.add(descriptions, 2);
 
 			return (List<JournalStructure>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

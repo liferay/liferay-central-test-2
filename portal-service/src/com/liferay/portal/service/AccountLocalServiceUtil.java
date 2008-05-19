@@ -85,10 +85,10 @@ public class AccountLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.Account> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
 
-		return accountLocalService.dynamicQuery(queryInitializer, begin, end);
+		return accountLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
 	public static com.liferay.portal.model.Account updateAccount(

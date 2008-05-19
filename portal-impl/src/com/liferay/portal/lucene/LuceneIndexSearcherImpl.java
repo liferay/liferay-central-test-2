@@ -46,7 +46,7 @@ import org.apache.lucene.search.BooleanQuery;
  */
 public class LuceneIndexSearcherImpl implements IndexSearcher {
 
-	public Hits search(long companyId, Query query, int begin, int end)
+	public Hits search(long companyId, Query query, int start, int end)
 		throws SearchException {
 
 		LuceneHitsImpl hits = new LuceneHitsImpl();
@@ -70,13 +70,13 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 					searcher.search(parser.parse(query.parse())), searcher);
 			}
 
-			if ((begin == SearchEngineUtil.ALL_POS) &&
+			if ((start == SearchEngineUtil.ALL_POS) &&
 				(end == SearchEngineUtil.ALL_POS)) {
 
 				hits = hits.subset(0, hits.getLength());
 			}
 			else {
-				hits = hits.subset(begin, end);
+				hits = hits.subset(start, end);
 			}
 		}
 		catch (Exception e) {

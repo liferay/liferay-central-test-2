@@ -308,14 +308,14 @@ public class TagsAssetServiceHttp {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] getCompanyAssetDisplays(
-		HttpPrincipal httpPrincipal, long companyId, int begin, int end,
+		HttpPrincipal httpPrincipal, long companyId, int start, int end,
 		java.lang.String languageId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
 
-			Object paramObj1 = new IntegerWrapper(begin);
+			Object paramObj1 = new IntegerWrapper(start);
 
 			Object paramObj2 = new IntegerWrapper(end);
 
@@ -356,12 +356,12 @@ public class TagsAssetServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsAsset> getCompanyAssets(
-		HttpPrincipal httpPrincipal, long companyId, int begin, int end)
+		HttpPrincipal httpPrincipal, long companyId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
 
-			Object paramObj1 = new IntegerWrapper(begin);
+			Object paramObj1 = new IntegerWrapper(start);
 
 			Object paramObj2 = new IntegerWrapper(end);
 
@@ -537,7 +537,7 @@ public class TagsAssetServiceHttp {
 	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] searchAssetDisplays(
 		HttpPrincipal httpPrincipal, long companyId,
 		java.lang.String portletId, java.lang.String keywords,
-		java.lang.String languageId, int begin, int end)
+		java.lang.String languageId, int start, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -561,7 +561,7 @@ public class TagsAssetServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = new IntegerWrapper(begin);
+			Object paramObj4 = new IntegerWrapper(start);
 
 			Object paramObj5 = new IntegerWrapper(end);
 

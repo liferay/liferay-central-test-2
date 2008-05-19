@@ -101,12 +101,12 @@ public class SCFrameworkVersionServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getFrameworkVersions(
-		long groupId, boolean active, int begin, int end)
+		long groupId, boolean active, int start, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SCFrameworkVersionService scFrameworkVersionService = SCFrameworkVersionServiceFactory.getService();
 
 		return scFrameworkVersionService.getFrameworkVersions(groupId, active,
-			begin, end);
+			start, end);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion updateFrameworkVersion(

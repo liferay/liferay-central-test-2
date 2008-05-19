@@ -662,7 +662,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 	}
 
 	public List<Company> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -671,7 +671,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -687,11 +687,11 @@ public class CompanyPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<Company> findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
+	public List<Company> findAll(int start, int end) throws SystemException {
+		return findAll(start, end, null);
 	}
 
-	public List<Company> findAll(int begin, int end, OrderByComparator obc)
+	public List<Company> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = CompanyModelImpl.CACHE_ENABLED;
 		String finderClassName = Company.class.getName();
@@ -701,7 +701,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -729,7 +729,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<Company> list = (List<Company>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

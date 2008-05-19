@@ -82,11 +82,11 @@ public interface ServiceComponentPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.ServiceComponent> findByBuildNamespace(
-		java.lang.String buildNamespace, int begin, int end)
+		java.lang.String buildNamespace, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.ServiceComponent> findByBuildNamespace(
-		java.lang.String buildNamespace, int begin, int end,
+		java.lang.String buildNamespace, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -123,16 +123,16 @@ public interface ServiceComponentPersistence {
 
 	public java.util.List<com.liferay.portal.model.ServiceComponent> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.ServiceComponent> findAll()
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.ServiceComponent> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.ServiceComponent> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByBuildNamespace(java.lang.String buildNamespace)

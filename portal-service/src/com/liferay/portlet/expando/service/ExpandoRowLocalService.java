@@ -68,7 +68,7 @@ public interface ExpandoRowLocalService {
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoRow> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.expando.model.ExpandoRow updateExpandoRow(
 		com.liferay.portlet.expando.model.ExpandoRow expandoRow)
@@ -98,11 +98,11 @@ public interface ExpandoRowLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getDefaultTableRows(
-		java.lang.String className, int begin, int end)
+		java.lang.String className, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getDefaultTableRows(
-		long classNameId, int begin, int end)
+		long classNameId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getDefaultTableRowsCount(java.lang.String className)
@@ -131,15 +131,15 @@ public interface ExpandoRowLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getRows(
-		long tableId, int begin, int end)
+		long tableId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getRows(
-		java.lang.String className, java.lang.String tableName, int begin,
+		java.lang.String className, java.lang.String tableName, int start,
 		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getRows(
-		long classNameId, java.lang.String tableName, int begin, int end)
+		long classNameId, java.lang.String tableName, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getRowsCount(long tableId)

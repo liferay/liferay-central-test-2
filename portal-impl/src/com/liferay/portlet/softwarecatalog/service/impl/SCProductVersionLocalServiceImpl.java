@@ -194,11 +194,11 @@ public class SCProductVersionLocalServiceImpl
 	}
 
 	public List<SCProductVersion> getProductVersions(
-			long productEntryId, int begin, int end)
+			long productEntryId, int start, int end)
 		throws SystemException {
 
 		return scProductVersionPersistence.findByProductEntryId(
-			productEntryId, begin, end);
+			productEntryId, start, end);
 	}
 
 	public int getProductVersionsCount(long productEntryId)

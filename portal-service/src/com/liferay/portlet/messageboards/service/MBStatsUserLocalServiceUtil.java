@@ -86,10 +86,10 @@ public class MBStatsUserLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
 
-		return mbStatsUserLocalService.dynamicQuery(queryInitializer, begin, end);
+		return mbStatsUserLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBStatsUser updateMBStatsUser(
@@ -124,11 +124,11 @@ public class MBStatsUserLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> getStatsUsers(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
 
-		return mbStatsUserLocalService.getStatsUsers(groupId, begin, end);
+		return mbStatsUserLocalService.getStatsUsers(groupId, start, end);
 	}
 
 	public static int getStatsUsersCount(long groupId)

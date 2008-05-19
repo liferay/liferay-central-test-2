@@ -35,6 +35,6 @@ public interface TagsPropertyKeyFinder {
 	public java.lang.String[] findByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException;
 
-	public java.lang.String[] findByCompanyId(long companyId, int begin, int end)
+	public java.lang.String[] findByCompanyId(long companyId, int start, int end)
 		throws com.liferay.portal.SystemException;
 }

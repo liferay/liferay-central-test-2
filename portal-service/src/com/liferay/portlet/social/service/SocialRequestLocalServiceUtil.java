@@ -86,10 +86,10 @@ public class SocialRequestLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
 
-		return socialRequestLocalService.dynamicQuery(queryInitializer, begin,
+		return socialRequestLocalService.dynamicQuery(queryInitializer, start,
 			end);
 	}
 
@@ -127,21 +127,21 @@ public class SocialRequestLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> getReceiverUserRequests(
-		long receiverUserId, int begin, int end)
+		long receiverUserId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
 
 		return socialRequestLocalService.getReceiverUserRequests(receiverUserId,
-			begin, end);
+			start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> getReceiverUserRequests(
-		long receiverUserId, int status, int begin, int end)
+		long receiverUserId, int status, int start, int end)
 		throws com.liferay.portal.SystemException {
 		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
 
 		return socialRequestLocalService.getReceiverUserRequests(receiverUserId,
-			status, begin, end);
+			status, start, end);
 	}
 
 	public static int getReceiverUserRequestsCount(long receiverUserId)
@@ -160,19 +160,19 @@ public class SocialRequestLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> getUserRequests(
-		long userId, int begin, int end)
+		long userId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
 
-		return socialRequestLocalService.getUserRequests(userId, begin, end);
+		return socialRequestLocalService.getUserRequests(userId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> getUserRequests(
-		long userId, int status, int begin, int end)
+		long userId, int status, int start, int end)
 		throws com.liferay.portal.SystemException {
 		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
 
-		return socialRequestLocalService.getUserRequests(userId, status, begin,
+		return socialRequestLocalService.getUserRequests(userId, status, start,
 			end);
 	}
 

@@ -67,7 +67,7 @@ public interface UserLocalService {
 
 	public java.util.List<com.liferay.portal.model.User> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User updateUser(
 		com.liferay.portal.model.User user)
@@ -225,7 +225,7 @@ public interface UserLocalService {
 		java.lang.String primKey, java.lang.String actionId,
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String emailAddress,
-		boolean andOperator, int begin, int end)
+		boolean andOperator, int start, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -250,25 +250,25 @@ public interface UserLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.User> getSocialUsers(
-		long userId, int begin, int end,
+		long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.User> getSocialUsers(
-		long userId, int type, int begin, int end,
+		long userId, int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.User> getSocialUsers(
-		long userId1, long userId2, int begin, int end,
+		long userId1, long userId2, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.User> getSocialUsers(
-		long userId1, long userId2, int type, int begin, int end,
+		long userId1, long userId2, int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
@@ -367,7 +367,7 @@ public interface UserLocalService {
 
 	public java.util.List<com.liferay.portal.model.User> search(
 		long companyId, java.lang.String keywords, java.lang.Boolean active,
-		java.util.LinkedHashMap<String, Object> params, int begin, int end,
+		java.util.LinkedHashMap<String, Object> params, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -377,7 +377,7 @@ public interface UserLocalService {
 		java.lang.String screenName, java.lang.String emailAddress,
 		java.lang.Boolean active,
 		java.util.LinkedHashMap<String, Object> params, boolean andSearch,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public int searchCount(long companyId, java.lang.String keywords,

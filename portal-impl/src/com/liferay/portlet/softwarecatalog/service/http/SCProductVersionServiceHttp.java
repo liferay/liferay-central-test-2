@@ -312,13 +312,13 @@ public class SCProductVersionServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> getProductVersions(
-		HttpPrincipal httpPrincipal, long productEntryId, int begin, int end)
+		HttpPrincipal httpPrincipal, long productEntryId, int start, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(productEntryId);
 
-			Object paramObj1 = new IntegerWrapper(begin);
+			Object paramObj1 = new IntegerWrapper(start);
 
 			Object paramObj2 = new IntegerWrapper(end);
 

@@ -298,9 +298,9 @@ public abstract class ReleaseLocalServiceBaseImpl implements ReleaseLocalService
 	}
 
 	public List<Release> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
-		return releasePersistence.findWithDynamicQuery(queryInitializer, begin,
+		return releasePersistence.findWithDynamicQuery(queryInitializer, start,
 			end);
 	}
 

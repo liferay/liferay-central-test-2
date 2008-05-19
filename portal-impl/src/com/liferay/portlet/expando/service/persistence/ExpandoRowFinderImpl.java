@@ -94,7 +94,7 @@ public class ExpandoRowFinderImpl implements ExpandoRowFinder {
 	}
 
 	public List<ExpandoRow> findByTC_TN(
-			long classNameId, String tableName, int begin, int end)
+			long classNameId, String tableName, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -114,7 +114,7 @@ public class ExpandoRowFinderImpl implements ExpandoRowFinder {
 			qPos.add(tableName);
 
 			return (List<ExpandoRow>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

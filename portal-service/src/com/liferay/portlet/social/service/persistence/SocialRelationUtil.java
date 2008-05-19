@@ -99,16 +99,16 @@ public class SocialRelationUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByUuid(
-		java.lang.String uuid, int begin, int end)
+		java.lang.String uuid, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByUuid(uuid, begin, end);
+		return getPersistence().findByUuid(uuid, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByUuid(
-		java.lang.String uuid, int begin, int end,
+		java.lang.String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByUuid(uuid, begin, end, obc);
+		return getPersistence().findByUuid(uuid, start, end, obc);
 	}
 
 	public static com.liferay.portlet.social.model.SocialRelation findByUuid_First(
@@ -141,16 +141,16 @@ public class SocialRelationUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByCompanyId(
-		long companyId, int begin, int end)
+		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId(companyId, begin, end);
+		return getPersistence().findByCompanyId(companyId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByCompanyId(
-		long companyId, int begin, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId(companyId, begin, end, obc);
+		return getPersistence().findByCompanyId(companyId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.social.model.SocialRelation findByCompanyId_First(
@@ -182,16 +182,16 @@ public class SocialRelationUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByUserId1(
-		long userId1, int begin, int end)
+		long userId1, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByUserId1(userId1, begin, end);
+		return getPersistence().findByUserId1(userId1, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByUserId1(
-		long userId1, int begin, int end,
+		long userId1, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByUserId1(userId1, begin, end, obc);
+		return getPersistence().findByUserId1(userId1, start, end, obc);
 	}
 
 	public static com.liferay.portlet.social.model.SocialRelation findByUserId1_First(
@@ -223,16 +223,16 @@ public class SocialRelationUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByUserId2(
-		long userId2, int begin, int end)
+		long userId2, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByUserId2(userId2, begin, end);
+		return getPersistence().findByUserId2(userId2, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByUserId2(
-		long userId2, int begin, int end,
+		long userId2, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByUserId2(userId2, begin, end, obc);
+		return getPersistence().findByUserId2(userId2, start, end, obc);
 	}
 
 	public static com.liferay.portlet.social.model.SocialRelation findByUserId2_First(
@@ -264,15 +264,15 @@ public class SocialRelationUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByType(
-		int type, int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findByType(type, begin, end);
+		int type, int start, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findByType(type, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByType(
-		int type, int begin, int end,
+		int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByType(type, begin, end, obc);
+		return getPersistence().findByType(type, start, end, obc);
 	}
 
 	public static com.liferay.portlet.social.model.SocialRelation findByType_First(
@@ -303,16 +303,16 @@ public class SocialRelationUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByC_T(
-		long companyId, int type, int begin, int end)
+		long companyId, int type, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_T(companyId, type, begin, end);
+		return getPersistence().findByC_T(companyId, type, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByC_T(
-		long companyId, int type, int begin, int end,
+		long companyId, int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByC_T(companyId, type, begin, end, obc);
+		return getPersistence().findByC_T(companyId, type, start, end, obc);
 	}
 
 	public static com.liferay.portlet.social.model.SocialRelation findByC_T_First(
@@ -346,16 +346,16 @@ public class SocialRelationUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByU1_T(
-		long userId1, int type, int begin, int end)
+		long userId1, int type, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByU1_T(userId1, type, begin, end);
+		return getPersistence().findByU1_T(userId1, type, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByU1_T(
-		long userId1, int type, int begin, int end,
+		long userId1, int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByU1_T(userId1, type, begin, end, obc);
+		return getPersistence().findByU1_T(userId1, type, start, end, obc);
 	}
 
 	public static com.liferay.portlet.social.model.SocialRelation findByU1_T_First(
@@ -389,16 +389,16 @@ public class SocialRelationUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByU2_T(
-		long userId2, int type, int begin, int end)
+		long userId2, int type, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByU2_T(userId2, type, begin, end);
+		return getPersistence().findByU2_T(userId2, type, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByU2_T(
-		long userId2, int type, int begin, int end,
+		long userId2, int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByU2_T(userId2, type, begin, end, obc);
+		return getPersistence().findByU2_T(userId2, type, start, end, obc);
 	}
 
 	public static com.liferay.portlet.social.model.SocialRelation findByU2_T_First(
@@ -447,9 +447,9 @@ public class SocialRelationUtil {
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findWithDynamicQuery(queryInitializer, begin, end);
+				   .findWithDynamicQuery(queryInitializer, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findAll()
@@ -458,14 +458,14 @@ public class SocialRelationUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end);
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end, obc);
+		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByUuid(java.lang.String uuid)

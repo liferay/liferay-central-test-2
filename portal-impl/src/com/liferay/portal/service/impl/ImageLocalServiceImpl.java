@@ -59,8 +59,8 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 		return imagePersistence.findAll();
 	}
 
-	public List<Image> getImages(int begin, int end) throws SystemException {
-		return imagePersistence.findAll(begin, end);
+	public List<Image> getImages(int start, int end) throws SystemException {
+		return imagePersistence.findAll(start, end);
 	}
 
 	public List<Image> getImagesBySize(int size) throws SystemException {

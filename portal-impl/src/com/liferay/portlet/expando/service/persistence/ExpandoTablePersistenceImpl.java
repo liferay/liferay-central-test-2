@@ -328,12 +328,12 @@ public class ExpandoTablePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<ExpandoTable> findByClassNameId(long classNameId, int begin,
+	public List<ExpandoTable> findByClassNameId(long classNameId, int start,
 		int end) throws SystemException {
-		return findByClassNameId(classNameId, begin, end, null);
+		return findByClassNameId(classNameId, start, end, null);
 	}
 
-	public List<ExpandoTable> findByClassNameId(long classNameId, int begin,
+	public List<ExpandoTable> findByClassNameId(long classNameId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ExpandoTableModelImpl.CACHE_ENABLED;
 		String finderClassName = ExpandoTable.class.getName();
@@ -347,7 +347,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(classNameId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -384,7 +384,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistence
 				qPos.add(classNameId);
 
 				List<ExpandoTable> list = (List<ExpandoTable>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -627,7 +627,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistence
 	}
 
 	public List<ExpandoTable> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -636,7 +636,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -652,12 +652,12 @@ public class ExpandoTablePersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<ExpandoTable> findAll(int begin, int end)
+	public List<ExpandoTable> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<ExpandoTable> findAll(int begin, int end, OrderByComparator obc)
+	public List<ExpandoTable> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = ExpandoTableModelImpl.CACHE_ENABLED;
 		String finderClassName = ExpandoTable.class.getName();
@@ -667,7 +667,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -696,7 +696,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<ExpandoTable> list = (List<ExpandoTable>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

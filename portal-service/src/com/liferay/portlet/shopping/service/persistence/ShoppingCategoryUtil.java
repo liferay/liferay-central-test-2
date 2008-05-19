@@ -99,16 +99,16 @@ public class ShoppingCategoryUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> findByGroupId(
-		long groupId, int begin, int end)
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByGroupId(groupId, begin, end);
+		return getPersistence().findByGroupId(groupId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> findByGroupId(
-		long groupId, int begin, int end,
+		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByGroupId(groupId, begin, end, obc);
+		return getPersistence().findByGroupId(groupId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory findByGroupId_First(
@@ -141,17 +141,17 @@ public class ShoppingCategoryUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> findByG_P(
-		long groupId, long parentCategoryId, int begin, int end)
+		long groupId, long parentCategoryId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByG_P(groupId, parentCategoryId, begin, end);
+		return getPersistence().findByG_P(groupId, parentCategoryId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> findByG_P(
-		long groupId, long parentCategoryId, int begin, int end,
+		long groupId, long parentCategoryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findByG_P(groupId, parentCategoryId, begin, end, obc);
+				   .findByG_P(groupId, parentCategoryId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory findByG_P_First(
@@ -188,9 +188,9 @@ public class ShoppingCategoryUtil {
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findWithDynamicQuery(queryInitializer, begin, end);
+				   .findWithDynamicQuery(queryInitializer, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> findAll()
@@ -199,14 +199,14 @@ public class ShoppingCategoryUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end);
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end, obc);
+		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByGroupId(long groupId)

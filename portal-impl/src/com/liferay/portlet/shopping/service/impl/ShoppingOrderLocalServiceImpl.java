@@ -381,7 +381,7 @@ public class ShoppingOrderLocalServiceImpl
 			String billingFirstName, String billingLastName,
 			String billingEmailAddress, String shippingFirstName,
 			String shippingLastName, String shippingEmailAddress,
-			String ppPaymentStatus, boolean andOperator, int begin, int end)
+			String ppPaymentStatus, boolean andOperator, int start, int end)
 		throws PortalException, SystemException {
 
 		OrderDateComparator obc = new OrderDateComparator(false);
@@ -390,7 +390,7 @@ public class ShoppingOrderLocalServiceImpl
 			groupId, companyId, userId, number, billingFirstName,
 			billingLastName, billingEmailAddress, shippingFirstName,
 			shippingLastName, shippingEmailAddress, ppPaymentStatus,
-			andOperator, begin, end, obc);
+			andOperator, start, end, obc);
 	}
 
 	public int searchCount(

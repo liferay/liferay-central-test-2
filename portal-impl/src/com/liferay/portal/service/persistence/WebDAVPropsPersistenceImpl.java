@@ -394,7 +394,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistence
 	}
 
 	public List<WebDAVProps> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -403,7 +403,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -419,12 +419,12 @@ public class WebDAVPropsPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<WebDAVProps> findAll(int begin, int end)
+	public List<WebDAVProps> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<WebDAVProps> findAll(int begin, int end, OrderByComparator obc)
+	public List<WebDAVProps> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = WebDAVPropsModelImpl.CACHE_ENABLED;
 		String finderClassName = WebDAVProps.class.getName();
@@ -434,7 +434,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -462,7 +462,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<WebDAVProps> list = (List<WebDAVProps>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

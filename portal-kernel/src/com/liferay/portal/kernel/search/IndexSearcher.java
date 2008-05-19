@@ -30,7 +30,7 @@ package com.liferay.portal.kernel.search;
  */
 public interface IndexSearcher {
 
-	public Hits search(long companyId, Query query, int begin, int end)
+	public Hits search(long companyId, Query query, int start, int end)
 		throws SearchException;
 
 }

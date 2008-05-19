@@ -178,18 +178,18 @@ public class ListUtil {
 		return fromArray(StringUtil.split(s, StringPool.NEW_LINE));
 	}
 
-	public static List subList(List list, int begin, int end) {
+	public static List subList(List list, int start, int end) {
 		List newList = new ArrayList();
 
 		int normalizedSize = list.size() - 1;
 
-		if ((begin < 0) || (begin > normalizedSize) || (end < 0) ||
-			(begin > end)) {
+		if ((start < 0) || (start > normalizedSize) || (end < 0) ||
+			(start > end)) {
 
 			return newList;
 		}
 
-		for (int i = begin; i < end && i <= normalizedSize; i++) {
+		for (int i = start; i < end && i <= normalizedSize; i++) {
 			newList.add(list.get(i));
 		}
 

@@ -260,19 +260,19 @@ public class BookmarksEntryLocalServiceImpl
 		bookmarksEntryPersistence.remove(entry.getEntryId());
 	}
 
-	public List<BookmarksEntry> getEntries(long folderId, int begin, int end)
+	public List<BookmarksEntry> getEntries(long folderId, int start, int end)
 		throws SystemException {
 
-		return bookmarksEntryPersistence.findByFolderId(folderId, begin, end);
+		return bookmarksEntryPersistence.findByFolderId(folderId, start, end);
 	}
 
 	public List<BookmarksEntry> getEntries(
-			long folderId, int begin, int end,
+			long folderId, int start, int end,
 			OrderByComparator orderByComparator)
 		throws SystemException {
 
 		return bookmarksEntryPersistence.findByFolderId(
-			folderId, begin, end, orderByComparator);
+			folderId, start, end, orderByComparator);
 	}
 
 	public int getEntriesCount(long folderId) throws SystemException {
@@ -292,21 +292,21 @@ public class BookmarksEntryLocalServiceImpl
 	}
 
 	public List<BookmarksEntry> getGroupEntries(
-			long groupId, int begin, int end)
+			long groupId, int start, int end)
 		throws SystemException {
 
-		return bookmarksEntryFinder.findByGroupId(groupId, begin, end);
+		return bookmarksEntryFinder.findByGroupId(groupId, start, end);
 	}
 
 	public List<BookmarksEntry> getGroupEntries(
-			long groupId, long userId, int begin, int end)
+			long groupId, long userId, int start, int end)
 		throws SystemException {
 
 		if (userId <= 0) {
-			return bookmarksEntryFinder.findByGroupId(groupId, begin, end);
+			return bookmarksEntryFinder.findByGroupId(groupId, start, end);
 		}
 		else {
-			return bookmarksEntryFinder.findByG_U(groupId, userId, begin, end);
+			return bookmarksEntryFinder.findByG_U(groupId, userId, start, end);
 		}
 	}
 

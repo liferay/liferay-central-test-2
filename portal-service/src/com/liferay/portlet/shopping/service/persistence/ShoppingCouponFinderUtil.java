@@ -39,11 +39,11 @@ public class ShoppingCouponFinderUtil {
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> findByG_C_C_A_DT(
 		long groupId, long companyId, java.lang.String code, boolean active,
-		java.lang.String discountType, boolean andOperator, int begin, int end)
+		java.lang.String discountType, boolean andOperator, int start, int end)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
 				   .findByG_C_C_A_DT(groupId, companyId, code, active,
-			discountType, andOperator, begin, end);
+			discountType, andOperator, start, end);
 	}
 
 	public static ShoppingCouponFinder getFinder() {

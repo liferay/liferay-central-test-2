@@ -328,12 +328,12 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<ShoppingCart> findByGroupId(long groupId, int begin, int end)
+	public List<ShoppingCart> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
-		return findByGroupId(groupId, begin, end, null);
+		return findByGroupId(groupId, start, end, null);
 	}
 
-	public List<ShoppingCart> findByGroupId(long groupId, int begin, int end,
+	public List<ShoppingCart> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ShoppingCartModelImpl.CACHE_ENABLED;
 		String finderClassName = ShoppingCart.class.getName();
@@ -347,7 +347,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -384,7 +384,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 				qPos.add(groupId);
 
 				List<ShoppingCart> list = (List<ShoppingCart>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -552,12 +552,12 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<ShoppingCart> findByUserId(long userId, int begin, int end)
+	public List<ShoppingCart> findByUserId(long userId, int start, int end)
 		throws SystemException {
-		return findByUserId(userId, begin, end, null);
+		return findByUserId(userId, start, end, null);
 	}
 
-	public List<ShoppingCart> findByUserId(long userId, int begin, int end,
+	public List<ShoppingCart> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = ShoppingCartModelImpl.CACHE_ENABLED;
 		String finderClassName = ShoppingCart.class.getName();
@@ -571,7 +571,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -608,7 +608,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 				qPos.add(userId);
 
 				List<ShoppingCart> list = (List<ShoppingCart>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -842,7 +842,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 	}
 
 	public List<ShoppingCart> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -851,7 +851,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -867,12 +867,12 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<ShoppingCart> findAll(int begin, int end)
+	public List<ShoppingCart> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<ShoppingCart> findAll(int begin, int end, OrderByComparator obc)
+	public List<ShoppingCart> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = ShoppingCartModelImpl.CACHE_ENABLED;
 		String finderClassName = ShoppingCart.class.getName();
@@ -882,7 +882,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -911,7 +911,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<ShoppingCart> list = (List<ShoppingCart>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

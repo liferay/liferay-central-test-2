@@ -357,8 +357,8 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 	}
 
 	public List<User> dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
-		return userPersistence.findWithDynamicQuery(queryInitializer, begin, end);
+		int start, int end) throws SystemException {
+		return userPersistence.findWithDynamicQuery(queryInitializer, start, end);
 	}
 
 	public User updateUser(User user) throws SystemException {

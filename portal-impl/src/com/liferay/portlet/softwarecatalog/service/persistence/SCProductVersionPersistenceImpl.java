@@ -360,12 +360,12 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 	}
 
 	public List<SCProductVersion> findByProductEntryId(long productEntryId,
-		int begin, int end) throws SystemException {
-		return findByProductEntryId(productEntryId, begin, end, null);
+		int start, int end) throws SystemException {
+		return findByProductEntryId(productEntryId, start, end, null);
 	}
 
 	public List<SCProductVersion> findByProductEntryId(long productEntryId,
-		int begin, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SCProductVersionModelImpl.CACHE_ENABLED;
 		String finderClassName = SCProductVersion.class.getName();
 		String finderMethodName = "findByProductEntryId";
@@ -378,7 +378,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(productEntryId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -421,7 +421,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 				qPos.add(productEntryId);
 
 				List<SCProductVersion> list = (List<SCProductVersion>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -666,7 +666,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 	}
 
 	public List<SCProductVersion> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -675,7 +675,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -691,12 +691,12 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<SCProductVersion> findAll(int begin, int end)
+	public List<SCProductVersion> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<SCProductVersion> findAll(int begin, int end,
+	public List<SCProductVersion> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = SCProductVersionModelImpl.CACHE_ENABLED;
 		String finderClassName = SCProductVersion.class.getName();
@@ -706,7 +706,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -741,7 +741,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<SCProductVersion> list = (List<SCProductVersion>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -986,13 +986,13 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 	}
 
 	public List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getSCFrameworkVersions(
-		long pk, int begin, int end)
+		long pk, int start, int end)
 		throws NoSuchProductVersionException, SystemException {
-		return getSCFrameworkVersions(pk, begin, end, null);
+		return getSCFrameworkVersions(pk, start, end, null);
 	}
 
 	public List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getSCFrameworkVersions(
-		long pk, int begin, int end, OrderByComparator obc)
+		long pk, int start, int end, OrderByComparator obc)
 		throws NoSuchProductVersionException, SystemException {
 		boolean finderClassNameCacheEnabled = SCProductVersionModelImpl.CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS;
 
@@ -1004,7 +1004,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				new Long(pk), String.valueOf(start), String.valueOf(end),
 				String.valueOf(obc)
 			};
 
@@ -1050,7 +1050,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 
 				List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> list =
 					(List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,

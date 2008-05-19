@@ -299,8 +299,8 @@ public abstract class RoleLocalServiceBaseImpl implements RoleLocalService,
 	}
 
 	public List<Role> dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws SystemException {
-		return rolePersistence.findWithDynamicQuery(queryInitializer, begin, end);
+		int start, int end) throws SystemException {
+		return rolePersistence.findWithDynamicQuery(queryInitializer, start, end);
 	}
 
 	public Role updateRole(Role role) throws SystemException {

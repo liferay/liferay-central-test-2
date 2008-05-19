@@ -68,7 +68,7 @@ public interface TagsEntryLocalService {
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsEntry updateTagsEntry(
 		com.liferay.portlet.tags.model.TagsEntry tagsEntry)
@@ -123,7 +123,7 @@ public interface TagsEntryLocalService {
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
 		long groupId, long companyId, long classNameId, java.lang.String name,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public int getEntriesSize(long groupId, long companyId, long classNameId,
 		java.lang.String name) throws com.liferay.portal.SystemException;
@@ -163,11 +163,11 @@ public interface TagsEntryLocalService {
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
 		long companyId, java.lang.String name, java.lang.String[] properties,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.kernel.json.JSONArrayWrapper searchAutocomplete(
 		long companyId, java.lang.String name, java.lang.String[] properties,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public int searchCount(long companyId, java.lang.String name,
 		java.lang.String[] properties)

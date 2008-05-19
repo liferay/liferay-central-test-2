@@ -93,13 +93,13 @@ public class MBCategoryServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getCategories(
-		long groupId, long parentCategoryId, int begin, int end)
+		long groupId, long parentCategoryId, int start, int end)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MBCategoryService mbCategoryService = MBCategoryServiceFactory.getService();
 
 		return mbCategoryService.getCategories(groupId, parentCategoryId,
-			begin, end);
+			start, end);
 	}
 
 	public static int getCategoriesCount(long groupId, long parentCategoryId)

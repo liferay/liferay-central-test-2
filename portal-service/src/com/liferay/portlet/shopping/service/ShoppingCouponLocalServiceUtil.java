@@ -86,10 +86,10 @@ public class ShoppingCouponLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
 
-		return shoppingCouponLocalService.dynamicQuery(queryInitializer, begin,
+		return shoppingCouponLocalService.dynamicQuery(queryInitializer, start,
 			end);
 	}
 
@@ -156,12 +156,12 @@ public class ShoppingCouponLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> search(
 		long plid, long companyId, java.lang.String code, boolean active,
-		java.lang.String discountType, boolean andOperator, int begin, int end)
+		java.lang.String discountType, boolean andOperator, int start, int end)
 		throws com.liferay.portal.SystemException {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
 
 		return shoppingCouponLocalService.search(plid, companyId, code, active,
-			discountType, andOperator, begin, end);
+			discountType, andOperator, start, end);
 	}
 
 	public static int searchCount(long groupId, long companyId,

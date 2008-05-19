@@ -149,11 +149,11 @@ public class GroupServiceJSON {
 	}
 
 	public static JSONArray search(long companyId, java.lang.String name,
-		java.lang.String description, java.lang.String[] params, int begin,
+		java.lang.String description, java.lang.String[] params, int start,
 		int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portal.model.Group> returnValue = GroupServiceUtil.search(companyId,
-				name, description, params, begin, end);
+				name, description, params, start, end);
 
 		return GroupJSONSerializer.toJSONArray(returnValue);
 	}

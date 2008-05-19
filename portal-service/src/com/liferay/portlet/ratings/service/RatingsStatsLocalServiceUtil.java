@@ -86,10 +86,10 @@ public class RatingsStatsLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.ratings.model.RatingsStats> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		RatingsStatsLocalService ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getService();
 
-		return ratingsStatsLocalService.dynamicQuery(queryInitializer, begin,
+		return ratingsStatsLocalService.dynamicQuery(queryInitializer, start,
 			end);
 	}
 

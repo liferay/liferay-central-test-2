@@ -266,7 +266,7 @@ public class ShoppingCouponServiceHttp {
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> search(
 		HttpPrincipal httpPrincipal, long plid, long companyId,
 		java.lang.String code, boolean active, java.lang.String discountType,
-		boolean andOperator, int begin, int end)
+		boolean andOperator, int start, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -290,7 +290,7 @@ public class ShoppingCouponServiceHttp {
 
 			Object paramObj5 = new BooleanWrapper(andOperator);
 
-			Object paramObj6 = new IntegerWrapper(begin);
+			Object paramObj6 = new IntegerWrapper(start);
 
 			Object paramObj7 = new IntegerWrapper(end);
 

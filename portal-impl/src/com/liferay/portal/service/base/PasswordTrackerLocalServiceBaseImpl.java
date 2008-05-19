@@ -304,10 +304,10 @@ public abstract class PasswordTrackerLocalServiceBaseImpl
 	}
 
 	public List<PasswordTracker> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return passwordTrackerPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public PasswordTracker updatePasswordTracker(

@@ -333,12 +333,12 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<AnnouncementsDelivery> findByUserId(long userId, int begin,
+	public List<AnnouncementsDelivery> findByUserId(long userId, int start,
 		int end) throws SystemException {
-		return findByUserId(userId, begin, end, null);
+		return findByUserId(userId, start, end, null);
 	}
 
-	public List<AnnouncementsDelivery> findByUserId(long userId, int begin,
+	public List<AnnouncementsDelivery> findByUserId(long userId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = AnnouncementsDeliveryModelImpl.CACHE_ENABLED;
 		String finderClassName = AnnouncementsDelivery.class.getName();
@@ -352,7 +352,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -389,7 +389,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistence
 				qPos.add(userId);
 
 				List<AnnouncementsDelivery> list = (List<AnnouncementsDelivery>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -632,7 +632,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistence
 	}
 
 	public List<AnnouncementsDelivery> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -641,7 +641,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -657,12 +657,12 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<AnnouncementsDelivery> findAll(int begin, int end)
+	public List<AnnouncementsDelivery> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<AnnouncementsDelivery> findAll(int begin, int end,
+	public List<AnnouncementsDelivery> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = AnnouncementsDeliveryModelImpl.CACHE_ENABLED;
 		String finderClassName = AnnouncementsDelivery.class.getName();
@@ -672,7 +672,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -701,7 +701,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<AnnouncementsDelivery> list = (List<AnnouncementsDelivery>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

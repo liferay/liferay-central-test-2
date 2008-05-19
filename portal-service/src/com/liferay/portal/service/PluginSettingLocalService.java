@@ -68,7 +68,7 @@ public interface PluginSettingLocalService {
 
 	public java.util.List<com.liferay.portal.model.PluginSetting> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PluginSetting updatePluginSetting(
 		com.liferay.portal.model.PluginSetting pluginSetting)

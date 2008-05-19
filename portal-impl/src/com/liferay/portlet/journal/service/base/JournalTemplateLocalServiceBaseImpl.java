@@ -129,10 +129,10 @@ public abstract class JournalTemplateLocalServiceBaseImpl
 	}
 
 	public List<JournalTemplate> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return journalTemplatePersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public JournalTemplate updateJournalTemplate(

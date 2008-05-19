@@ -53,11 +53,11 @@ public class BlogsStatsUserLocalServiceImpl
 	}
 
 	public List<BlogsStatsUser> getCompanyStatsUsers(
-			long companyId, int begin, int end, OrderByComparator obc)
+			long companyId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return blogsStatsUserPersistence.findByC_E(
-			companyId, 0, begin, end, obc);
+			companyId, 0, start, end, obc);
 	}
 
 	public int getCompanyStatsUsersCount(long companyId)
@@ -67,10 +67,10 @@ public class BlogsStatsUserLocalServiceImpl
 	}
 
 	public List<BlogsStatsUser> getGroupStatsUsers(
-			long groupId, int begin, int end, OrderByComparator obc)
+			long groupId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return blogsStatsUserPersistence.findByG_E(groupId, 0, begin, end, obc);
+		return blogsStatsUserPersistence.findByG_E(groupId, 0, start, end, obc);
 	}
 
 	public int getGroupStatsUsersCount(long groupId) throws SystemException {
@@ -78,11 +78,11 @@ public class BlogsStatsUserLocalServiceImpl
 	}
 
 	public List<BlogsStatsUser> getOrganizationStatsUsers(
-			long organizationId, int begin, int end, OrderByComparator obc)
+			long organizationId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return blogsStatsUserFinder.findByOrganizationId(
-			organizationId, begin, end, obc);
+			organizationId, start, end, obc);
 	}
 
 	public int getOrganizationStatsUsersCount(long organizationId)

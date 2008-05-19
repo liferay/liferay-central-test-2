@@ -274,11 +274,11 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 	}
 
 	public List<IGFolder> getFolders(
-			long groupId, long parentFolderId, int begin, int end)
+			long groupId, long parentFolderId, int start, int end)
 		throws SystemException {
 
 		return igFolderPersistence.findByG_P(
-			groupId, parentFolderId, begin, end);
+			groupId, parentFolderId, start, end);
 	}
 
 	public int getFoldersCount(long groupId, long parentFolderId)

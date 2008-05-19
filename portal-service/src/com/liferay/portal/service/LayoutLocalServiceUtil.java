@@ -85,10 +85,10 @@ public class LayoutLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.Layout> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
-		return layoutLocalService.dynamicQuery(queryInitializer, begin, end);
+		return layoutLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
 	public static com.liferay.portal.model.Layout updateLayout(
@@ -305,12 +305,12 @@ public class LayoutLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Layout> getLayouts(
-		long groupId, boolean privateLayout, long parentLayoutId, int begin,
+		long groupId, boolean privateLayout, long parentLayoutId, int start,
 		int end) throws com.liferay.portal.SystemException {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
 		return layoutLocalService.getLayouts(groupId, privateLayout,
-			parentLayoutId, begin, end);
+			parentLayoutId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Layout> getLayouts(

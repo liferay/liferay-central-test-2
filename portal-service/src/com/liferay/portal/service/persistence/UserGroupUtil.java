@@ -97,16 +97,16 @@ public class UserGroupUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserGroup> findByCompanyId(
-		long companyId, int begin, int end)
+		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId(companyId, begin, end);
+		return getPersistence().findByCompanyId(companyId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserGroup> findByCompanyId(
-		long companyId, int begin, int end,
+		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId(companyId, begin, end, obc);
+		return getPersistence().findByCompanyId(companyId, start, end, obc);
 	}
 
 	public static com.liferay.portal.model.UserGroup findByCompanyId_First(
@@ -139,18 +139,18 @@ public class UserGroupUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserGroup> findByC_P(
-		long companyId, long parentUserGroupId, int begin, int end)
+		long companyId, long parentUserGroupId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findByC_P(companyId, parentUserGroupId, begin, end);
+				   .findByC_P(companyId, parentUserGroupId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserGroup> findByC_P(
-		long companyId, long parentUserGroupId, int begin, int end,
+		long companyId, long parentUserGroupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findByC_P(companyId, parentUserGroupId, begin, end, obc);
+				   .findByC_P(companyId, parentUserGroupId, start, end, obc);
 	}
 
 	public static com.liferay.portal.model.UserGroup findByC_P_First(
@@ -201,9 +201,9 @@ public class UserGroupUtil {
 
 	public static java.util.List<com.liferay.portal.model.UserGroup> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findWithDynamicQuery(queryInitializer, begin, end);
+				   .findWithDynamicQuery(queryInitializer, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserGroup> findAll()
@@ -212,14 +212,14 @@ public class UserGroupUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserGroup> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end);
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserGroup> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end, obc);
+		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByCompanyId(long companyId)
@@ -269,18 +269,18 @@ public class UserGroupUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getUsers(
-		long pk, int begin, int end)
+		long pk, int start, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserGroupException {
-		return getPersistence().getUsers(pk, begin, end);
+		return getPersistence().getUsers(pk, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getUsers(
-		long pk, int begin, int end,
+		long pk, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserGroupException {
-		return getPersistence().getUsers(pk, begin, end, obc);
+		return getPersistence().getUsers(pk, start, end, obc);
 	}
 
 	public static int getUsersSize(long pk)

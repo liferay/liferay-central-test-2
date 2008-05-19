@@ -68,7 +68,7 @@ public interface SCLicenseLocalService {
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCLicense updateSCLicense(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
@@ -93,14 +93,14 @@ public interface SCLicenseLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getLicenses(
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getLicenses(
 		boolean active, boolean recommended)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getLicenses(
-		boolean active, boolean recommended, int begin, int end)
+		boolean active, boolean recommended, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getLicensesCount() throws com.liferay.portal.SystemException;

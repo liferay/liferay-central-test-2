@@ -304,10 +304,10 @@ public abstract class ServiceComponentLocalServiceBaseImpl
 	}
 
 	public List<ServiceComponent> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		return serviceComponentPersistence.findWithDynamicQuery(queryInitializer,
-			begin, end);
+			start, end);
 	}
 
 	public ServiceComponent updateServiceComponent(

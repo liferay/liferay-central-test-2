@@ -61,37 +61,37 @@ public class JournalTemplateFinderUtil {
 	public static java.util.List<com.liferay.portlet.journal.model.JournalTemplate> findByKeywords(
 		long companyId, long groupId, java.lang.String keywords,
 		java.lang.String structureId, java.lang.String structureIdComparator,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
 				   .findByKeywords(companyId, groupId, keywords, structureId,
-			structureIdComparator, begin, end, obc);
+			structureIdComparator, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalTemplate> findByC_G_T_S_N_D(
 		long companyId, long groupId, java.lang.String templateId,
 		java.lang.String structureId, java.lang.String structureIdComparator,
 		java.lang.String name, java.lang.String description,
-		boolean andOperator, int begin, int end,
+		boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
 				   .findByC_G_T_S_N_D(companyId, groupId, templateId,
 			structureId, structureIdComparator, name, description, andOperator,
-			begin, end, obc);
+			start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalTemplate> findByC_G_T_S_N_D(
 		long companyId, long groupId, java.lang.String[] templateIds,
 		java.lang.String structureId, java.lang.String structureIdComparator,
 		java.lang.String[] names, java.lang.String[] descriptions,
-		boolean andOperator, int begin, int end,
+		boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
 				   .findByC_G_T_S_N_D(companyId, groupId, templateIds,
 			structureId, structureIdComparator, names, descriptions,
-			andOperator, begin, end, obc);
+			andOperator, start, end, obc);
 	}
 
 	public static JournalTemplateFinder getFinder() {

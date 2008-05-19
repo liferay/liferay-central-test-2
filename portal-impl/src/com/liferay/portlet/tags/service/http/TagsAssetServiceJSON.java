@@ -113,19 +113,19 @@ public class TagsAssetServiceJSON {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] getCompanyAssetDisplays(
-		long companyId, int begin, int end, java.lang.String languageId)
+		long companyId, int start, int end, java.lang.String languageId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.tags.model.TagsAssetDisplay[] returnValue = TagsAssetServiceUtil.getCompanyAssetDisplays(companyId,
-				begin, end, languageId);
+				start, end, languageId);
 
 		return returnValue;
 	}
 
-	public static JSONArray getCompanyAssets(long companyId, int begin, int end)
+	public static JSONArray getCompanyAssets(long companyId, int start, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.tags.model.TagsAsset> returnValue = TagsAssetServiceUtil.getCompanyAssets(companyId,
-				begin, end);
+				start, end);
 
 		return TagsAssetJSONSerializer.toJSONArray(returnValue);
 	}
@@ -160,11 +160,11 @@ public class TagsAssetServiceJSON {
 
 	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] searchAssetDisplays(
 		long companyId, java.lang.String portletId, java.lang.String keywords,
-		java.lang.String languageId, int begin, int end)
+		java.lang.String languageId, int start, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.tags.model.TagsAssetDisplay[] returnValue = TagsAssetServiceUtil.searchAssetDisplays(companyId,
-				portletId, keywords, languageId, begin, end);
+				portletId, keywords, languageId, start, end);
 
 		return returnValue;
 	}

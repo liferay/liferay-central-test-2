@@ -86,10 +86,10 @@ public class PollsVoteLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
 
-		return pollsVoteLocalService.dynamicQuery(queryInitializer, begin, end);
+		return pollsVoteLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsVote updatePollsVote(
@@ -110,11 +110,11 @@ public class PollsVoteLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> getChoiceVotes(
-		long choiceId, int begin, int end)
+		long choiceId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
 
-		return pollsVoteLocalService.getChoiceVotes(choiceId, begin, end);
+		return pollsVoteLocalService.getChoiceVotes(choiceId, start, end);
 	}
 
 	public static int getChoiceVotesCount(long choiceId)
@@ -134,11 +134,11 @@ public class PollsVoteLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> getQuestionVotes(
-		long questionId, int begin, int end)
+		long questionId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
 
-		return pollsVoteLocalService.getQuestionVotes(questionId, begin, end);
+		return pollsVoteLocalService.getQuestionVotes(questionId, start, end);
 	}
 
 	public static int getQuestionVotesCount(long questionId)

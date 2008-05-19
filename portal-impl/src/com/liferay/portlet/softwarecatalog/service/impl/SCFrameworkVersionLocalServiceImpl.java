@@ -198,10 +198,10 @@ public class SCFrameworkVersionLocalServiceImpl
 	}
 
 	public List<SCFrameworkVersion> getFrameworkVersions(
-			long groupId, int begin, int end)
+			long groupId, int start, int end)
 		throws SystemException {
 
-		return scFrameworkVersionPersistence.findByGroupId(groupId, begin, end);
+		return scFrameworkVersionPersistence.findByGroupId(groupId, start, end);
 	}
 
 	public List<SCFrameworkVersion> getFrameworkVersions(
@@ -212,11 +212,11 @@ public class SCFrameworkVersionLocalServiceImpl
 	}
 
 	public List<SCFrameworkVersion> getFrameworkVersions(
-			long groupId, boolean active, int begin, int end)
+			long groupId, boolean active, int start, int end)
 		throws SystemException {
 
 		return scFrameworkVersionPersistence.findByG_A(
-			groupId, active, begin, end);
+			groupId, active, start, end);
 	}
 
 	public int getFrameworkVersionsCount(long groupId)

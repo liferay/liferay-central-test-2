@@ -86,10 +86,10 @@ public class MBMessageFlagLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
 
-		return mbMessageFlagLocalService.dynamicQuery(queryInitializer, begin,
+		return mbMessageFlagLocalService.dynamicQuery(queryInitializer, start,
 			end);
 	}
 

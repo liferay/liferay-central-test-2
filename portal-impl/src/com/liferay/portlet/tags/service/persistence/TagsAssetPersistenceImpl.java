@@ -348,12 +348,12 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<TagsAsset> findByCompanyId(long companyId, int begin, int end)
+	public List<TagsAsset> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
-		return findByCompanyId(companyId, begin, end, null);
+		return findByCompanyId(companyId, start, end, null);
 	}
 
-	public List<TagsAsset> findByCompanyId(long companyId, int begin, int end,
+	public List<TagsAsset> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = TagsAssetModelImpl.CACHE_ENABLED;
 		String finderClassName = TagsAsset.class.getName();
@@ -367,7 +367,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(companyId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -404,7 +404,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 				qPos.add(companyId);
 
 				List<TagsAsset> list = (List<TagsAsset>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -640,7 +640,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 	}
 
 	public List<TagsAsset> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -649,7 +649,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -665,12 +665,12 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<TagsAsset> findAll(int begin, int end)
+	public List<TagsAsset> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<TagsAsset> findAll(int begin, int end, OrderByComparator obc)
+	public List<TagsAsset> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = TagsAssetModelImpl.CACHE_ENABLED;
 		String finderClassName = TagsAsset.class.getName();
@@ -680,7 +680,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -708,7 +708,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<TagsAsset> list = (List<TagsAsset>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);
@@ -953,13 +953,13 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 	}
 
 	public List<com.liferay.portlet.tags.model.TagsEntry> getTagsEntries(
-		long pk, int begin, int end)
+		long pk, int start, int end)
 		throws NoSuchAssetException, SystemException {
-		return getTagsEntries(pk, begin, end, null);
+		return getTagsEntries(pk, start, end, null);
 	}
 
 	public List<com.liferay.portlet.tags.model.TagsEntry> getTagsEntries(
-		long pk, int begin, int end, OrderByComparator obc)
+		long pk, int start, int end, OrderByComparator obc)
 		throws NoSuchAssetException, SystemException {
 		boolean finderClassNameCacheEnabled = TagsAssetModelImpl.CACHE_ENABLED_TAGSASSETS_TAGSENTRIES;
 
@@ -971,7 +971,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(pk), String.valueOf(begin), String.valueOf(end),
+				new Long(pk), String.valueOf(start), String.valueOf(end),
 				String.valueOf(obc)
 			};
 
@@ -1015,7 +1015,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 				qPos.add(pk);
 
 				List<com.liferay.portlet.tags.model.TagsEntry> list = (List<com.liferay.portlet.tags.model.TagsEntry>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,

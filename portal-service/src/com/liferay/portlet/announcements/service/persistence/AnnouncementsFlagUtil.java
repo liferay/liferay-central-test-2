@@ -99,16 +99,16 @@ public class AnnouncementsFlagUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> findByEntryId(
-		long entryId, int begin, int end)
+		long entryId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByEntryId(entryId, begin, end);
+		return getPersistence().findByEntryId(entryId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> findByEntryId(
-		long entryId, int begin, int end,
+		long entryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByEntryId(entryId, begin, end, obc);
+		return getPersistence().findByEntryId(entryId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag findByEntryId_First(
@@ -154,9 +154,9 @@ public class AnnouncementsFlagUtil {
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .findWithDynamicQuery(queryInitializer, begin, end);
+				   .findWithDynamicQuery(queryInitializer, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> findAll()
@@ -165,14 +165,14 @@ public class AnnouncementsFlagUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> findAll(
-		int begin, int end) throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end);
+		int start, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> findAll(
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findAll(begin, end, obc);
+		return getPersistence().findAll(start, end, obc);
 	}
 
 	public static void removeByEntryId(long entryId)

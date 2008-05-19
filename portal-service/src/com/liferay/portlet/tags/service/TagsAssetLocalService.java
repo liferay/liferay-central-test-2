@@ -68,7 +68,7 @@ public interface TagsAssetLocalService {
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsAsset updateTagsAsset(
 		com.liferay.portlet.tags.model.TagsAsset tagsAsset)
@@ -100,24 +100,24 @@ public interface TagsAssetLocalService {
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getAssets(
 		long[] entryIds, long[] notEntryIds, boolean andOperator,
-		boolean excludeZeroViewCount, int begin, int end)
+		boolean excludeZeroViewCount, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getAssets(
 		long groupId, long[] classNameIds, long[] entryIds, long[] notEntryIds,
-		boolean andOperator, boolean excludeZeroViewCount, int begin, int end)
+		boolean andOperator, boolean excludeZeroViewCount, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getAssets(
 		long[] entryIds, long[] notEntryIds, boolean andOperator,
 		boolean excludeZeroViewCount, java.util.Date publishDate,
-		java.util.Date expirationDate, int begin, int end)
+		java.util.Date expirationDate, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getAssets(
 		long groupId, long[] classNameIds, long[] entryIds, long[] notEntryIds,
 		boolean andOperator, boolean excludeZeroViewCount,
-		java.util.Date publishDate, java.util.Date expirationDate, int begin,
+		java.util.Date publishDate, java.util.Date expirationDate, int start,
 		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getAssets(
@@ -125,7 +125,7 @@ public interface TagsAssetLocalService {
 		java.lang.String orderByCol1, java.lang.String orderByCol2,
 		java.lang.String orderByType1, java.lang.String orderByType2,
 		boolean excludeZeroViewCount, java.util.Date publishDate,
-		java.util.Date expirationDate, int begin, int end)
+		java.util.Date expirationDate, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getAssets(
@@ -133,7 +133,7 @@ public interface TagsAssetLocalService {
 		boolean andOperator, java.lang.String orderByCol1,
 		java.lang.String orderByCol2, java.lang.String orderByType1,
 		java.lang.String orderByType2, boolean excludeZeroViewCount,
-		java.util.Date publishDate, java.util.Date expirationDate, int begin,
+		java.util.Date publishDate, java.util.Date expirationDate, int start,
 		int end) throws com.liferay.portal.SystemException;
 
 	public int getAssetsCount(long[] entryIds, long[] notEntryIds,
@@ -156,23 +156,23 @@ public interface TagsAssetLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsAssetDisplay[] getCompanyAssetDisplays(
-		long companyId, int begin, int end, java.lang.String languageId)
+		long companyId, int start, int end, java.lang.String languageId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getCompanyAssets(
-		long companyId, int begin, int end)
+		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getCompanyAssetsCount(long companyId)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getTopViewedAssets(
-		java.lang.String className, boolean asc, int begin, int end)
+		java.lang.String className, boolean asc, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getTopViewedAssets(
-		java.lang.String[] className, boolean asc, int begin, int end)
+		java.lang.String[] className, boolean asc, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsAsset incrementViewCounter(
@@ -186,7 +186,7 @@ public interface TagsAssetLocalService {
 
 	public com.liferay.portlet.tags.model.TagsAssetDisplay[] searchAssetDisplays(
 		long companyId, java.lang.String portletId, java.lang.String keywords,
-		java.lang.String languageId, int begin, int end)
+		java.lang.String languageId, int start, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

@@ -85,10 +85,10 @@ public class AddressLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.Address> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-		int begin, int end) throws com.liferay.portal.SystemException {
+		int start, int end) throws com.liferay.portal.SystemException {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 
-		return addressLocalService.dynamicQuery(queryInitializer, begin, end);
+		return addressLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
 	public static com.liferay.portal.model.Address updateAddress(

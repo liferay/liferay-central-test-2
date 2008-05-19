@@ -104,7 +104,7 @@ public class ShoppingCouponFinderImpl implements ShoppingCouponFinder {
 
 	public List<ShoppingCoupon> findByG_C_C_A_DT(
 			long groupId, long companyId, String code, boolean active,
-			String discountType, boolean andOperator, int begin, int end)
+			String discountType, boolean andOperator, int start, int end)
 		throws SystemException {
 
 		code = StringUtil.upperCase(code);
@@ -133,7 +133,7 @@ public class ShoppingCouponFinderImpl implements ShoppingCouponFinder {
 			qPos.add(discountType);
 
 			return (List<ShoppingCoupon>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

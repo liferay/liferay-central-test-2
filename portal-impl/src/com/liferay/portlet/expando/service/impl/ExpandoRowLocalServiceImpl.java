@@ -93,20 +93,20 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 	}
 
 	public List<ExpandoRow> getDefaultTableRows(
-			String className, int begin, int end)
+			String className, int start, int end)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getDefaultTableRows(classNameId, begin, end);
+		return getDefaultTableRows(classNameId, start, end);
 	}
 
 	public List<ExpandoRow> getDefaultTableRows(
-			long classNameId, int begin, int end)
+			long classNameId, int start, int end)
 		throws SystemException {
 
 		return expandoRowFinder.findByTC_TN(
-			classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME, begin, end);
+			classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME, start, end);
 	}
 
 	public int getDefaultTableRowsCount(String className)
@@ -150,27 +150,27 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 		return expandoRowFinder.fetchByTC_TN_C(classNameId, tableName, classPK);
 	}
 
-	public List<ExpandoRow> getRows(long tableId, int begin, int end)
+	public List<ExpandoRow> getRows(long tableId, int start, int end)
 		throws SystemException {
 
-		return expandoRowPersistence.findByTableId(tableId, begin, end);
+		return expandoRowPersistence.findByTableId(tableId, start, end);
 	}
 
 	public List<ExpandoRow> getRows(
-			String className, String tableName, int begin, int end)
+			String className, String tableName, int start, int end)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getRows(classNameId, tableName, begin, end);
+		return getRows(classNameId, tableName, start, end);
 	}
 
 	public List<ExpandoRow> getRows(
-			long classNameId, String tableName, int begin, int end)
+			long classNameId, String tableName, int start, int end)
 		throws SystemException {
 
 		return expandoRowFinder.findByTC_TN(
-			classNameId, tableName, begin, end);
+			classNameId, tableName, start, end);
 	}
 
 	public int getRowsCount(long tableId) throws SystemException {

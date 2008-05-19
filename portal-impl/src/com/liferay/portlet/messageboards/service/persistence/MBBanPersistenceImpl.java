@@ -317,12 +317,12 @@ public class MBBanPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<MBBan> findByGroupId(long groupId, int begin, int end)
+	public List<MBBan> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
-		return findByGroupId(groupId, begin, end, null);
+		return findByGroupId(groupId, start, end, null);
 	}
 
-	public List<MBBan> findByGroupId(long groupId, int begin, int end,
+	public List<MBBan> findByGroupId(long groupId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBBanModelImpl.CACHE_ENABLED;
 		String finderClassName = MBBan.class.getName();
@@ -336,7 +336,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -373,7 +373,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 				qPos.add(groupId);
 
 				List<MBBan> list = (List<MBBan>)QueryUtil.list(q, getDialect(),
-						begin, end);
+						start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -539,12 +539,12 @@ public class MBBanPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<MBBan> findByUserId(long userId, int begin, int end)
+	public List<MBBan> findByUserId(long userId, int start, int end)
 		throws SystemException {
-		return findByUserId(userId, begin, end, null);
+		return findByUserId(userId, start, end, null);
 	}
 
-	public List<MBBan> findByUserId(long userId, int begin, int end,
+	public List<MBBan> findByUserId(long userId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBBanModelImpl.CACHE_ENABLED;
 		String finderClassName = MBBan.class.getName();
@@ -558,7 +558,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(userId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -595,7 +595,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 				qPos.add(userId);
 
 				List<MBBan> list = (List<MBBan>)QueryUtil.list(q, getDialect(),
-						begin, end);
+						start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -762,12 +762,12 @@ public class MBBanPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<MBBan> findByBanUserId(long banUserId, int begin, int end)
+	public List<MBBan> findByBanUserId(long banUserId, int start, int end)
 		throws SystemException {
-		return findByBanUserId(banUserId, begin, end, null);
+		return findByBanUserId(banUserId, start, end, null);
 	}
 
-	public List<MBBan> findByBanUserId(long banUserId, int begin, int end,
+	public List<MBBan> findByBanUserId(long banUserId, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = MBBanModelImpl.CACHE_ENABLED;
 		String finderClassName = MBBan.class.getName();
@@ -781,7 +781,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(banUserId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -818,7 +818,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 				qPos.add(banUserId);
 
 				List<MBBan> list = (List<MBBan>)QueryUtil.list(q, getDialect(),
-						begin, end);
+						start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1053,7 +1053,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 	}
 
 	public List<MBBan> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -1062,7 +1062,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -1078,11 +1078,11 @@ public class MBBanPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<MBBan> findAll(int begin, int end) throws SystemException {
-		return findAll(begin, end, null);
+	public List<MBBan> findAll(int start, int end) throws SystemException {
+		return findAll(start, end, null);
 	}
 
-	public List<MBBan> findAll(int begin, int end, OrderByComparator obc)
+	public List<MBBan> findAll(int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = MBBanModelImpl.CACHE_ENABLED;
 		String finderClassName = MBBan.class.getName();
@@ -1092,7 +1092,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1121,7 +1121,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<MBBan> list = (List<MBBan>)QueryUtil.list(q, getDialect(),
-						begin, end);
+						start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

@@ -310,14 +310,14 @@ public class SCFrameworkVersionServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getFrameworkVersions(
-		HttpPrincipal httpPrincipal, long groupId, boolean active, int begin,
+		HttpPrincipal httpPrincipal, long groupId, boolean active, int start,
 		int end) throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
 
 			Object paramObj1 = new BooleanWrapper(active);
 
-			Object paramObj2 = new IntegerWrapper(begin);
+			Object paramObj2 = new IntegerWrapper(start);
 
 			Object paramObj3 = new IntegerWrapper(end);
 

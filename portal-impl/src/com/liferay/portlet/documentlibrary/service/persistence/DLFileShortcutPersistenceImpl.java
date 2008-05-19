@@ -349,12 +349,12 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<DLFileShortcut> findByUuid(String uuid, int begin, int end)
+	public List<DLFileShortcut> findByUuid(String uuid, int start, int end)
 		throws SystemException {
-		return findByUuid(uuid, begin, end, null);
+		return findByUuid(uuid, start, end, null);
 	}
 
-	public List<DLFileShortcut> findByUuid(String uuid, int begin, int end,
+	public List<DLFileShortcut> findByUuid(String uuid, int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFileShortcutModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileShortcut.class.getName();
@@ -368,7 +368,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				uuid,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -412,7 +412,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				}
 
 				List<DLFileShortcut> list = (List<DLFileShortcut>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -588,12 +588,12 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<DLFileShortcut> findByFolderId(long folderId, int begin, int end)
+	public List<DLFileShortcut> findByFolderId(long folderId, int start, int end)
 		throws SystemException {
-		return findByFolderId(folderId, begin, end, null);
+		return findByFolderId(folderId, start, end, null);
 	}
 
-	public List<DLFileShortcut> findByFolderId(long folderId, int begin,
+	public List<DLFileShortcut> findByFolderId(long folderId, int start,
 		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFileShortcutModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileShortcut.class.getName();
@@ -607,7 +607,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		Object[] finderArgs = new Object[] {
 				new Long(folderId),
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -644,7 +644,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				qPos.add(folderId);
 
 				List<DLFileShortcut> list = (List<DLFileShortcut>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -832,12 +832,12 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 	}
 
 	public List<DLFileShortcut> findByTF_TN(long toFolderId, String toName,
-		int begin, int end) throws SystemException {
-		return findByTF_TN(toFolderId, toName, begin, end, null);
+		int start, int end) throws SystemException {
+		return findByTF_TN(toFolderId, toName, start, end, null);
 	}
 
 	public List<DLFileShortcut> findByTF_TN(long toFolderId, String toName,
-		int begin, int end, OrderByComparator obc) throws SystemException {
+		int start, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFileShortcutModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileShortcut.class.getName();
 		String finderMethodName = "findByTF_TN";
@@ -852,7 +852,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				
 				toName,
 				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -902,7 +902,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				}
 
 				List<DLFileShortcut> list = (List<DLFileShortcut>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				FinderCache.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
@@ -1057,7 +1057,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 	}
 
 	public List<DLFileShortcut> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int begin, int end)
+		DynamicQueryInitializer queryInitializer, int start, int end)
 		throws SystemException {
 		Session session = null;
 
@@ -1066,7 +1066,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 			DynamicQuery query = queryInitializer.initialize(session);
 
-			query.setLimit(begin, end);
+			query.setLimit(start, end);
 
 			return query.list();
 		}
@@ -1082,12 +1082,12 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
-	public List<DLFileShortcut> findAll(int begin, int end)
+	public List<DLFileShortcut> findAll(int start, int end)
 		throws SystemException {
-		return findAll(begin, end, null);
+		return findAll(start, end, null);
 	}
 
-	public List<DLFileShortcut> findAll(int begin, int end,
+	public List<DLFileShortcut> findAll(int start, int end,
 		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = DLFileShortcutModelImpl.CACHE_ENABLED;
 		String finderClassName = DLFileShortcut.class.getName();
@@ -1097,7 +1097,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
 
 		Object result = null;
@@ -1126,7 +1126,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 				Query q = session.createQuery(query.toString());
 
 				List<DLFileShortcut> list = (List<DLFileShortcut>)QueryUtil.list(q,
-						getDialect(), begin, end);
+						getDialect(), start, end);
 
 				if (obc == null) {
 					Collections.sort(list);

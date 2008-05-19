@@ -225,7 +225,7 @@ public class MBThreadFinderImpl implements MBThreadFinder {
 		}
 	}
 
-	public List<MBThread> findByGroupId(long groupId, int begin, int end)
+	public List<MBThread> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -244,7 +244,7 @@ public class MBThreadFinderImpl implements MBThreadFinder {
 			qPos.add(groupId);
 
 			return (List<MBThread>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -255,7 +255,7 @@ public class MBThreadFinderImpl implements MBThreadFinder {
 	}
 
 	public List<MBThread> findByG_U(
-			long groupId, long userId, int begin, int end)
+			long groupId, long userId, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -275,7 +275,7 @@ public class MBThreadFinderImpl implements MBThreadFinder {
 			qPos.add(userId);
 
 			return (List<MBThread>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -286,7 +286,7 @@ public class MBThreadFinderImpl implements MBThreadFinder {
 	}
 
 	public List<MBThread> findByS_G_U(
-			long groupId, long userId, int begin, int end)
+			long groupId, long userId, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -307,7 +307,7 @@ public class MBThreadFinderImpl implements MBThreadFinder {
 			qPos.add(userId);
 
 			return (List<MBThread>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
+				q, HibernateUtil.getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
