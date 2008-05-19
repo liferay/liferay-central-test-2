@@ -23,6 +23,7 @@
 package com.liferay.portlet.wiki.util;
 
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.search.HitsOpenSearchImpl;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 
@@ -40,7 +41,8 @@ public class WikiOpenSearchImpl extends HitsOpenSearchImpl {
 
 	public Hits getHits(long companyId, String keywords) throws Exception {
 		return WikiNodeLocalServiceUtil.search(
-			companyId, 0, null, keywords);
+			companyId, 0, null, keywords, SearchEngineUtil.ALL_POS,
+			SearchEngineUtil.ALL_POS);
 	}
 
 	public String getSearchPath() {

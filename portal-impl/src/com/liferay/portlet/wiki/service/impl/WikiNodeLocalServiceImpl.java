@@ -24,7 +24,10 @@ package com.liferay.portlet.wiki.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
@@ -38,9 +41,7 @@ import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.base.WikiNodeLocalServiceBaseImpl;
 import com.liferay.portlet.wiki.util.Indexer;
-import com.liferay.util.lucene.HitsImpl;
-
-import java.io.IOException;
+import com.liferay.util.search.QueryImpl;
 
 import java.util.Date;
 import java.util.Iterator;
@@ -48,13 +49,9 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.document.Document;
-import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
-import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
-import org.apache.lucene.search.Searcher;
 import org.apache.lucene.search.TermQuery;
 
 /**
@@ -204,11 +201,8 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		try {
 			Indexer.deletePages(node.getCompanyId(), node.getNodeId());
 		}
-		catch (IOException ioe) {
-			_log.error("Deleting index " + node.getNodeId(), ioe);
-		}
-		catch (ParseException pe) {
-			_log.error("Deleting index " + node.getNodeId(), pe);
+		catch (SearchException se) {
+			_log.error("Deleting index " + node.getNodeId(), se);
 		}
 
 		// Subscriptions
@@ -271,17 +265,13 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 	}
 
 	public void reIndex(String[] ids) throws SystemException {
-		if (LuceneUtil.INDEX_READ_ONLY) {
+		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
 
 		long companyId = GetterUtil.getLong(ids[0]);
 
-		IndexWriter writer = null;
-
 		try {
-			writer = LuceneUtil.getWriter(companyId);
-
 			Iterator<WikiNode> nodesItr = wikiNodePersistence.findByCompanyId(
 				companyId).iterator();
 
@@ -304,11 +294,12 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 						WikiPage.class.getName(), page.getResourcePrimKey());
 
 					try {
-						Document doc = Indexer.getAddPageDocument(
-							companyId, groupId, nodeId, title, content,
-							tagsEntries);
+						Document doc =
+							Indexer.getPageDocument(
+								companyId, groupId, nodeId, title, content,
+								tagsEntries);
 
-						writer.addDocument(doc);
+						SearchEngineUtil.addDocument(companyId, doc);
 					}
 					catch (Exception e1) {
 						_log.error("Reindexing " + page.getPrimaryKey(), e1);
@@ -322,27 +313,16 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		catch (Exception e2) {
 			throw new SystemException(e2);
 		}
-		finally {
-			try {
-				if (writer != null) {
-					LuceneUtil.write(companyId);
-				}
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
 	}
 
 	public Hits search(
-			long companyId, long groupId, long[] nodeIds, String keywords)
+			long companyId, long groupId, long[] nodeIds, String keywords,
+			int start, int end)
 		throws SystemException {
 
-		Searcher searcher = null;
+		Hits hits = null;
 
 		try {
-			HitsImpl hits = new HitsImpl();
-
 			BooleanQuery contextQuery = new BooleanQuery();
 
 			LuceneUtil.addRequiredTerm(
@@ -383,15 +363,14 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 			}
 
-			searcher = LuceneUtil.getSearcher(companyId);
-
-			hits.recordHits(searcher.search(fullQuery), searcher);
-
-			return hits;
+			hits = SearchEngineUtil.search(
+				companyId, new QueryImpl(fullQuery), start, end);
 		}
 		catch (Exception e) {
-			return LuceneUtil.closeSearcher(searcher, keywords, e);
+			throw new SystemException(e);
 		}
+
+		return hits;
 	}
 
 	public void subscribeNode(long userId, long nodeId)

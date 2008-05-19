@@ -28,6 +28,7 @@ import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ObjectValuePair;
@@ -185,8 +186,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				page.getCompanyId(), node.getGroupId(), nodeId, title,
 				content, tagsEntries);
 		}
-		catch (IOException ioe) {
-			_log.error("Indexing " + pageId, ioe);
+		catch (SearchException se) {
+			_log.error("Indexing " + pageId, se);
 		}
 
 		// Cache
@@ -322,8 +323,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			Indexer.deletePage(
 				page.getCompanyId(), page.getNodeId(), page.getTitle());
 		}
-		catch (IOException ioe) {
-			_log.error("Deleting index " + page.getPrimaryKey(), ioe);
+		catch (SearchException se) {
+			_log.error("Deleting index " + page.getPrimaryKey(), se);
 		}
 
 		// Attachments
@@ -753,8 +754,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				page.getCompanyId(), page.getNode().getGroupId(), nodeId,
 				newTitle, content, tagsEntries);
 		}
-		catch (IOException ioe) {
-			_log.error("Indexing " + newTitle, ioe);
+		catch (SearchException se) {
+			_log.error("Indexing " + newTitle, se);
 		}
 	}
 
@@ -882,8 +883,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				node.getCompanyId(), node.getGroupId(), nodeId, title, content,
 				tagsEntries);
 		}
-		catch (IOException ioe) {
-			_log.error("Indexing " + page.getPrimaryKey(), ioe);
+		catch (SearchException se) {
+			_log.error("Indexing " + page.getPrimaryKey(), se);
 		}
 
 		// Cache

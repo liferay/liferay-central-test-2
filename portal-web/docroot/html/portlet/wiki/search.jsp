@@ -68,19 +68,16 @@ headerNames.add("score");
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-pages-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
 
-Hits hits = null;
-
 try {
-	hits = WikiNodeLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), nodeIds, keywords);
+	Hits results = WikiNodeLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), nodeIds, keywords, searchContainer.getStart(), searchContainer.getEnd());
 
-	Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
-	int total = hits.getLength();
+	int total = results.getLength();
 
 	searchContainer.setTotal(total);
 
 	List resultRows = searchContainer.getResultRows();
 
-	for (int i = 0; i < results.getLength(); i++) {
+	for (int i = 0; i < results.getDocs().length; i++) {
 		Document doc = results.doc(i);
 
 		ResultRow row = new ResultRow(doc, i, i);
@@ -133,11 +130,6 @@ try {
 }
 catch (Exception e) {
 	_log.error(e.getMessage());
-}
-finally {
-	if (hits != null) {
-		hits.closeSearcher();
-	}
 }
 %>
 

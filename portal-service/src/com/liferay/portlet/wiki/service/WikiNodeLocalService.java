@@ -160,8 +160,8 @@ public interface WikiNodeLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long[] nodeIds, java.lang.String keywords)
-		throws com.liferay.portal.SystemException;
+		long groupId, long[] nodeIds, java.lang.String keywords, int start,
+		int end) throws com.liferay.portal.SystemException;
 
 	public void subscribeNode(long userId, long nodeId)
 		throws com.liferay.portal.SystemException,

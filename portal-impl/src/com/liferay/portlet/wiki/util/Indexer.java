@@ -22,35 +22,30 @@
 
 package com.liferay.portlet.wiki.util;
 
+import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentSummary;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.search.lucene.LuceneFields;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
-
-import java.io.IOException;
+import com.liferay.util.search.DocumentImpl;
+import com.liferay.util.search.QueryImpl;
 
 import javax.portlet.PortletURL;
 
-import org.apache.lucene.document.Document;
-import org.apache.lucene.document.Field;
-import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.index.Term;
-import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.BooleanQuery;
-import org.apache.lucene.search.Hits;
-import org.apache.lucene.search.Searcher;
 
 /**
  * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Harry Mark
+ * @author Bruno Farache
  *
  */
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
@@ -60,127 +55,89 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void addPage(
 			long companyId, long groupId, long nodeId, String title,
 			String content, String[] tagsEntries)
-		throws IOException {
+		throws SearchException {
 
 		try {
 			deletePage(companyId, nodeId, title);
 		}
-		catch (IOException ioe) {
+		catch (SearchException se) {
 		}
 
-		Document doc = getAddPageDocument(
+		Document doc = getPageDocument(
 			companyId, groupId, nodeId, title, content, tagsEntries);
 
-		IndexWriter writer = null;
-
-		try {
-			writer = LuceneUtil.getWriter(companyId);
-
-			writer.addDocument(doc);
-		}
-		finally {
-			if (writer != null) {
-				LuceneUtil.write(companyId);
-			}
-		}
+		SearchEngineUtil.addDocument(companyId, doc);
 	}
 
 	public static void deletePage(long companyId, long nodeId, String title)
-		throws IOException {
+		throws SearchException {
 
-		LuceneUtil.deleteDocuments(
-			companyId,
-			new Term(
-				LuceneFields.UID,
-				LuceneFields.getUID(PORTLET_ID, nodeId, title)));
+		SearchEngineUtil.deleteDocument(companyId, getPageUID(nodeId, title));
 	}
 
 	public static void deletePages(long companyId, long nodeId)
-		throws IOException, ParseException {
+		throws SearchException {
 
 		BooleanQuery booleanQuery = new BooleanQuery();
 
-		LuceneUtil.addRequiredTerm(
-			booleanQuery, LuceneFields.PORTLET_ID, PORTLET_ID);
+		LuceneUtil.addRequiredTerm(booleanQuery, Field.PORTLET_ID, PORTLET_ID);
 
 		LuceneUtil.addRequiredTerm(booleanQuery, "nodeId", nodeId);
 
-		Searcher searcher = LuceneUtil.getSearcher(companyId);
+		Hits hits = SearchEngineUtil.search(
+			companyId, new QueryImpl(booleanQuery),
+			SearchEngineUtil.ALL_POS, SearchEngineUtil.ALL_POS);
 
-		try {
-			Hits hits = searcher.search(booleanQuery);
+		for (int i = 0; i < hits.getLength(); i++) {
+			Document doc = hits.doc(i);
 
-			if (hits.length() > 0) {
-				IndexReader reader = null;
-
-				try {
-					LuceneUtil.acquireLock(companyId);
-
-					reader = LuceneUtil.getReader(companyId);
-
-					for (int i = 0; i < hits.length(); i++) {
-						Document doc = hits.doc(i);
-
-						Field field = doc.getField(LuceneFields.UID);
-
-						reader.deleteDocuments(
-							new Term(LuceneFields.UID, field.stringValue()));
-					}
-				}
-				finally {
-					if (reader != null) {
-						reader.close();
-					}
-
-					LuceneUtil.releaseLock(companyId);
-				}
-			}
-		}
-		finally {
-			LuceneUtil.closeSearcher(searcher);
+			SearchEngineUtil.deleteDocument(companyId, doc.get(Field.UID));
 		}
 	}
 
-	public static Document getAddPageDocument(
+	public static Document getPageDocument(
 		long companyId, long groupId, long nodeId, String title,
 		String content, String[] tagsEntries) {
 
 		content = HtmlUtil.extractText(content);
 
-		Document doc = new Document();
+		Document doc = new DocumentImpl();
 
-		LuceneUtil.addKeyword(
-			doc, LuceneFields.UID,
-			LuceneFields.getUID(PORTLET_ID, nodeId, title));
+		doc.addUID(PORTLET_ID, nodeId, title);
 
-		LuceneUtil.addKeyword(doc, LuceneFields.COMPANY_ID, companyId);
-		LuceneUtil.addKeyword(doc, LuceneFields.PORTLET_ID, PORTLET_ID);
-		LuceneUtil.addKeyword(doc, LuceneFields.GROUP_ID, groupId);
+		doc.addKeyword(Field.COMPANY_ID, companyId);
+		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
+		doc.addKeyword(Field.GROUP_ID, groupId);
 
-		LuceneUtil.addText(doc, LuceneFields.TITLE, title);
-		LuceneUtil.addText(doc, LuceneFields.CONTENT, content);
+		doc.addText(Field.TITLE, title);
+		doc.addText(Field.CONTENT, content);
 
-		LuceneUtil.addModifiedDate(doc);
+		doc.addModifiedDate();
 
-		LuceneUtil.addKeyword(doc, "nodeId", nodeId);
+		doc.addKeyword("nodeId", nodeId);
 
-		LuceneUtil.addKeyword(doc, LuceneFields.TAGS_ENTRIES, tagsEntries);
+		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
 		return doc;
+	}
+
+	public static String getPageUID(long nodeId, String title) {
+		Document doc = new DocumentImpl();
+
+		doc.addUID(PORTLET_ID, nodeId, title);
+
+		return doc.get(Field.UID);
 	}
 
 	public static void updatePage(
 			long companyId, long groupId, long nodeId, String title,
 			String content, String[] tagsEntries)
-		throws IOException {
+		throws SearchException {
 
-		try {
-			deletePage(companyId, nodeId, title);
-		}
-		catch (IOException ioe) {
-		}
+		Document doc = getPageDocument(
+			companyId, groupId, nodeId, title, content, tagsEntries);
 
-		addPage(companyId, groupId, nodeId, title, content, tagsEntries);
+		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}
 
 	public DocumentSummary getDocumentSummary(
@@ -188,20 +145,20 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		// Title
 
-		String title = doc.get(LuceneFields.TITLE);
+		String title = doc.get(Field.TITLE);
 
 		// Content
 
-		String content = doc.get(LuceneFields.CONTENT);
+		String content = doc.get(Field.CONTENT);
 
 		content = StringUtil.shorten(content, 200);
 
-		// URL
+		// Portlet URL
 
-		long nodeId = GetterUtil.getLong(doc.get("nodeId"));
+		String nodeId = doc.get("nodeId");
 
 		portletURL.setParameter("struts_action", "/wiki/view");
-		portletURL.setParameter("nodeId", String.valueOf(nodeId));
+		portletURL.setParameter("nodeId", nodeId);
 		portletURL.setParameter("title", title);
 
 		return new DocumentSummary(title, content, portletURL);
