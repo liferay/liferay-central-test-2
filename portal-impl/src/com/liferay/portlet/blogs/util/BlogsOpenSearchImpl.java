@@ -23,6 +23,7 @@
 package com.liferay.portlet.blogs.util;
 
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.search.HitsOpenSearchImpl;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 
@@ -39,7 +40,9 @@ public class BlogsOpenSearchImpl extends HitsOpenSearchImpl {
 	public static final String TITLE = "Liferay Blogs Search: ";
 
 	public Hits getHits(long companyId, String keywords) throws Exception {
-		return BlogsEntryLocalServiceUtil.search(companyId, 0, 0, keywords);
+		return BlogsEntryLocalServiceUtil.search(
+			companyId, 0, 0, keywords, SearchEngineUtil.ALL_POS,
+			SearchEngineUtil.ALL_POS);
 	}
 
 	public String getSearchPath() {

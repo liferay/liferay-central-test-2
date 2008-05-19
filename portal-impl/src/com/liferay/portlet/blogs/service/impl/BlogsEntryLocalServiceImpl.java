@@ -24,7 +24,10 @@ package com.liferay.portlet.blogs.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -49,7 +52,7 @@ import com.liferay.portlet.blogs.service.base.BlogsEntryLocalServiceBaseImpl;
 import com.liferay.portlet.blogs.social.BlogsActivityKeys;
 import com.liferay.portlet.blogs.util.Indexer;
 import com.liferay.util.Normalizer;
-import com.liferay.util.lucene.HitsImpl;
+import com.liferay.util.search.QueryImpl;
 
 import java.io.IOException;
 
@@ -58,11 +61,9 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
-import org.apache.lucene.search.Searcher;
 
 /**
  * <a href="BlogsEntryLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -201,8 +202,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 					title, content, tagsEntries);
 			}
 		}
-		catch (IOException ioe) {
-			_log.error("Indexing " + entryId, ioe);
+		catch (SearchException se) {
+			_log.error("Indexing " + entryId, se);
 		}
 
 		// Google
@@ -280,8 +281,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		try {
 			Indexer.deleteEntry(entry.getCompanyId(), entry.getEntryId());
 		}
-		catch (IOException ioe) {
-			_log.error("Deleting index " + entry.getEntryId(), ioe);
+		catch (SearchException se) {
+			_log.error("Deleting index " + entry.getEntryId(), se);
 		}
 
 		// Tags
@@ -513,7 +514,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public void reIndex(String[] ids) throws SystemException {
-		if (LuceneUtil.INDEX_READ_ONLY) {
+		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
 
@@ -537,11 +538,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 					BlogsEntry.class.getName(), entryId);
 
 				try {
-					Document doc = Indexer.getAddEntryDocument(
+					Document doc = Indexer.getEntryDocument(
 						companyId, groupId, userId, entryId, title, content,
 						tagsEntries);
 
-					writer.addDocument(doc);
+					SearchEngineUtil.addDocument(companyId, doc);
 				}
 				catch (Exception e1) {
 					_log.error("Reindexing " + entryId, e1);
@@ -567,14 +568,13 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public Hits search(
-			long companyId, long groupId, long userId, String keywords)
+			long companyId, long groupId, long userId, String keywords,
+			int begin, int end)
 		throws SystemException {
 
-		Searcher searcher = null;
+		Hits hits = null;
 
 		try {
-			HitsImpl hits = new HitsImpl();
-
 			BooleanQuery contextQuery = new BooleanQuery();
 
 			LuceneUtil.addRequiredTerm(
@@ -607,15 +607,14 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 			}
 
-			searcher = LuceneUtil.getSearcher(companyId);
-
-			hits.recordHits(searcher.search(fullQuery), searcher);
-
-			return hits;
+			hits = SearchEngineUtil.search(
+				companyId, new QueryImpl(fullQuery), begin, end);
 		}
 		catch (Exception e) {
-			return LuceneUtil.closeSearcher(searcher, keywords, e);
+			throw new SystemException(e);
 		}
+
+		return hits;
 	}
 
 	public BlogsEntry updateEntry(
@@ -680,8 +679,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 					title, content, tagsEntries);
 			}
 		}
-		catch (IOException ioe) {
-			_log.error("Indexing " + entryId, ioe);
+		catch (SearchException se) {
+			_log.error("Indexing " + entryId, se);
 		}
 
 		// Google
