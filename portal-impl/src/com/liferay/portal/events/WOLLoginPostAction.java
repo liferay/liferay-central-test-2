@@ -22,14 +22,15 @@
 
 package com.liferay.portal.events;
 
+import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.kernel.events.Action;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.LayoutConstants;
+import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
@@ -38,6 +39,8 @@ import com.liferay.util.dao.DataAccess;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -62,35 +65,17 @@ import org.apache.commons.logging.LogFactory;
  */
 public class WOLLoginPostAction extends Action {
 
-	public static final int ORGANIZATION_COMMUNITY_CHAMPION_ID = 21;
+	public static final int ORGANIZATION_COMMUNITY_AFFILIATE_ID = 810671;
+
+	public static final int ORGANIZATION_INDVIDUAL_CONTRIBUTOR_ID = 813865;
 
 	public static final int ORGANIZATION_LIFERAY_INC_ID = 21;
 
-	public static void addAdvancedUserPages(User user) throws Exception {
-		if (!UserLocalServiceUtil.hasOrganizationUser(
-				ORGANIZATION_COMMUNITY_CHAMPION_ID, user.getUserId()) &&
-			!UserLocalServiceUtil.hasOrganizationUser(
-				ORGANIZATION_LIFERAY_INC_ID, user.getUserId())) {
+	public static final int ORGANIZATION_SERVICES_PARTNER_ID = 810694;
 
-			return;
-		}
+	public static final int ORGANIZATION_TECHNOLOGY_PARTNER_ID = 810690;
 
-		int publicLayoutsPageCount = user.getPublicLayoutsPageCount();
-
-		if (publicLayoutsPageCount == 4) {
-			return;
-		}
-
-		long userId = user.getUserId();
-		long groupId = user.getGroup().getGroupId();
-
-		addLayout(userId, groupId, "Profile", "/profile");
-		addLayout(userId, groupId, "Friends", "/friends");
-		addLayout(userId, groupId, "Blog", "/blog");
-		addLayout(userId, groupId, "Documents", "/documents");
-
-		updateLookAndFeel(groupId);
-	}
+	public static final int USER_DEFAULT_ADMIN_ID = 2;
 
 	public static void addJiraUserId(User user) throws Exception {
 		Connection con = null;
@@ -123,13 +108,119 @@ public class WOLLoginPostAction extends Action {
 			long userId, long groupId, String name, String friendlyURL)
 		throws Exception {
 
-		LayoutLocalServiceUtil.addLayout(
-			userId, groupId, false, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID,
-			name, StringPool.BLANK, StringPool.BLANK,
-			LayoutConstants.TYPE_PORTLET, false, friendlyURL);
+		try {
+			LayoutLocalServiceUtil.addLayout(
+				userId, groupId, false,
+				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, name,
+				StringPool.BLANK, StringPool.BLANK,
+				LayoutConstants.TYPE_PORTLET, false, friendlyURL);
+		}
+		catch (LayoutFriendlyURLException lfurle) {
+		}
 	}
 
-	public static void addSimpleUserPages(User user) throws Exception {
+	public static void addOrganizationLayoutsAdvanced(Organization organization)
+		throws Exception {
+
+		if ((organization.getParentOrganizationId() !=
+				ORGANIZATION_SERVICES_PARTNER_ID) &&
+			(organization.getParentOrganizationId() !=
+				ORGANIZATION_TECHNOLOGY_PARTNER_ID)) {
+
+			return;
+		}
+
+		int publicLayoutsPageCount = organization.getPublicLayoutsPageCount();
+
+		if (publicLayoutsPageCount > 0) {
+			return;
+		}
+
+		long userId = USER_DEFAULT_ADMIN_ID;
+		long groupId = organization.getGroup().getGroupId();
+
+		addLayout(userId, groupId, "Profile", "/profile");
+		addLayout(userId, groupId, "Blog", "/blog");
+
+		updateLookAndFeel(groupId);
+	}
+
+	public static void addOrganizationLayoutsSimple(Organization organization)
+		throws Exception {
+
+		if (organization.getParentOrganizationId() !=
+				ORGANIZATION_COMMUNITY_AFFILIATE_ID) {
+
+			return;
+		}
+
+		int publicLayoutsPageCount = organization.getPublicLayoutsPageCount();
+
+		if (publicLayoutsPageCount > 0) {
+			return;
+		}
+
+		long userId = USER_DEFAULT_ADMIN_ID;
+		long groupId = organization.getGroup().getGroupId();
+
+		addLayout(userId, groupId, "Profile", "/profile");
+
+		updateLookAndFeel(groupId);
+	}
+
+	public static void addOrganizationsLayouts(List<Organization> organizations)
+		throws Exception {
+
+		for (Organization organization : organizations) {
+			addOrganizationLayoutsAdvanced(organization);
+			addOrganizationLayoutsSimple(organization);
+		}
+	}
+
+	public static void addUserLayoutsAdvanced(
+			User user, List<Organization> organizations)
+		throws Exception {
+
+		boolean addUserLayoutsAdvanced = false;
+
+		for (Organization organization : organizations) {
+			if ((organization.getOrganizationId() ==
+					ORGANIZATION_INDVIDUAL_CONTRIBUTOR_ID) ||
+				(organization.getOrganizationId() ==
+					ORGANIZATION_LIFERAY_INC_ID) ||
+				(organization.getParentOrganizationId() ==
+					ORGANIZATION_SERVICES_PARTNER_ID) ||
+				(organization.getParentOrganizationId() ==
+					ORGANIZATION_TECHNOLOGY_PARTNER_ID)) {
+
+				addUserLayoutsAdvanced = true;
+
+				break;
+			}
+		}
+
+		if (!addUserLayoutsAdvanced) {
+			return;
+		}
+
+		int publicLayoutsPageCount = user.getPublicLayoutsPageCount();
+
+		if (publicLayoutsPageCount > 0) {
+			return;
+		}
+
+		long userId = user.getUserId();
+		long groupId = user.getGroup().getGroupId();
+
+		addLayout(userId, groupId, "Profile", "/profile");
+		addLayout(userId, groupId, "Friends", "/friends");
+		addLayout(userId, groupId, "Blog", "/blog");
+		addLayout(userId, groupId, "Documents", "/documents");
+
+		updateLookAndFeel(groupId);
+	}
+
+	public static void addUserLayoutsSimple(User user) throws Exception {
 		int publicLayoutsPageCount = user.getPublicLayoutsPageCount();
 
 		if (publicLayoutsPageCount > 0) {
@@ -167,10 +258,14 @@ public class WOLLoginPostAction extends Action {
 
 		User user = PortalUtil.getUser(req);
 
-		addAdvancedUserPages(user);
-		addSimpleUserPages(user);
+		List<Organization> organizations = user.getOrganizations();
+
+		addUserLayoutsAdvanced(user, organizations);
+		addUserLayoutsSimple(user);
 
 		addJiraUserId(user);
+
+		addOrganizationsLayouts(organizations);
 	}
 
 	private static final String _GET_JIRA_USER_ID =
