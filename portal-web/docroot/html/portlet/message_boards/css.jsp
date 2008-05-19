@@ -88,10 +88,6 @@
 	padding: 3px 5px;
 }
 
-.portlet-message-boards .taglib-ratings.thumbs {
-	float: none;
-}
-
 .portlet-message-boards .taglib-ratings.thumbs .total-rating {
 	padding: 0 5px 0 10px;
 }
