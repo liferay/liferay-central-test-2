@@ -104,7 +104,9 @@ portletURL.setParameter("tabs1", tabs1);
 		searchContainer.setOrderByCol(orderByCol);
 		searchContainer.setOrderByType(orderByType);
 
-		List hits = SCProductEntryLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), keywords, type).toList();
+		Hits hits = SCProductEntryLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), keywords, type, searchContainer.getStart(), searchContainer.getEnd());
+
+		List results = hits.toList();
 
 		DocumentComparator docComparator = null;
 
@@ -140,10 +142,9 @@ portletURL.setParameter("tabs1", tabs1);
 			docComparator.addOrderBy("type");
 		}
 
-		Collections.sort(hits, docComparator);
+		Collections.sort(results, docComparator);
 
-		List results = ListUtil.subList(hits, searchContainer.getStart(), searchContainer.getEnd());
-		int total = hits.size();
+		int total = hits.getLength();
 
 		searchContainer.setTotal(total);
 

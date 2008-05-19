@@ -183,10 +183,10 @@ public class LuceneHitsImpl implements Hits {
 	}
 
 	public List<Document> toList() {
-		List<Document> subset = new ArrayList<Document>(_length);
+		List<Document> subset = new ArrayList<Document>(_docs.length);
 
-		for (int i = 0; i < _length; i++) {
-			subset.add(doc(i));
+		for (int i = 0; i < _docs.length; i++) {
+			subset.add(_docs[i]);
 		}
 
 		return subset;

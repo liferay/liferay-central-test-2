@@ -24,6 +24,7 @@ package com.liferay.portlet.softwarecatalog.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portlet.softwarecatalog.DuplicateProductVersionDirectDownloadURLException;
@@ -36,8 +37,6 @@ import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
 import com.liferay.portlet.softwarecatalog.service.base.SCProductVersionLocalServiceBaseImpl;
 import com.liferay.portlet.softwarecatalog.util.Indexer;
-
-import java.io.IOException;
 
 import java.util.Date;
 import java.util.List;
@@ -146,8 +145,8 @@ public class SCProductVersionLocalServiceImpl
 				productEntry.getRepoGroupId(),
 				productEntry.getRepoArtifactId());
 		}
-		catch (IOException ioe) {
-			_log.error("Indexing " + productEntry.getProductEntryId(), ioe);
+		catch (SearchException se) {
+			_log.error("Indexing " + productEntry.getProductEntryId(), se);
 		}
 
 		return productVersion;
@@ -263,8 +262,8 @@ public class SCProductVersionLocalServiceImpl
 				productEntry.getRepoGroupId(),
 				productEntry.getRepoArtifactId());
 		}
-		catch (IOException ioe) {
-			_log.error("Indexing " + productEntry.getProductEntryId(), ioe);
+		catch (SearchException se) {
+			_log.error("Indexing " + productEntry.getProductEntryId(), se);
 		}
 
 		return productVersion;

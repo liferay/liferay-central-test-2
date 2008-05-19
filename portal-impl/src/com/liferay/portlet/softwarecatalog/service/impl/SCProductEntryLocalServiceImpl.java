@@ -25,6 +25,8 @@ package com.liferay.portlet.softwarecatalog.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -56,10 +58,8 @@ import com.liferay.portlet.softwarecatalog.service.base.SCProductEntryLocalServi
 import com.liferay.portlet.softwarecatalog.util.Indexer;
 import com.liferay.util.Time;
 import com.liferay.util.Version;
-import com.liferay.util.lucene.HitsImpl;
+import com.liferay.util.search.QueryImpl;
 import com.liferay.util.xml.DocUtil;
-
-import java.io.IOException;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -71,10 +71,8 @@ import java.util.Properties;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
-import org.apache.lucene.search.Searcher;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
@@ -197,8 +195,8 @@ public class SCProductEntryLocalServiceImpl
 				type, shortDescription, longDescription, pageURL, repoGroupId,
 				repoArtifactId);
 		}
-		catch (IOException ioe) {
-			_log.error("Indexing " + productEntryId, ioe);
+		catch (SearchException se) {
+			_log.error("Indexing " + productEntryId, se);
 		}
 
 		return productEntry;
@@ -281,9 +279,9 @@ public class SCProductEntryLocalServiceImpl
 			Indexer.deleteProductEntry(
 				productEntry.getCompanyId(), productEntry.getProductEntryId());
 		}
-		catch (IOException ioe) {
+		catch (SearchException se) {
 			_log.error(
-				"Deleting index " + productEntry.getProductEntryId(), ioe);
+				"Deleting index " + productEntry.getProductEntryId(), se);
 		}
 
 		// Product screenshots
@@ -441,17 +439,13 @@ public class SCProductEntryLocalServiceImpl
 	}
 
 	public void reIndex(String[] ids) throws SystemException {
-		if (LuceneUtil.INDEX_READ_ONLY) {
+		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
 
 		long companyId = GetterUtil.getLong(ids[0]);
 
-		IndexWriter writer = null;
-
 		try {
-			writer = LuceneUtil.getWriter(companyId);
-
 			List<SCProductEntry> productEntries =
 				scProductEntryPersistence.findByCompanyId(companyId);
 
@@ -468,8 +462,8 @@ public class SCProductEntryLocalServiceImpl
 				}
 
 				try {
-					org.apache.lucene.document.Document doc =
-						Indexer.getAddProductEntryDocument(
+					com.liferay.portal.kernel.search.Document doc =
+						Indexer.getProductEntryDocument(
 							companyId, productEntry.getGroupId(),
 							productEntry.getUserId(),
 							productEntry.getUserName(),
@@ -482,7 +476,7 @@ public class SCProductEntryLocalServiceImpl
 							productEntry.getRepoGroupId(),
 							productEntry.getRepoArtifactId());
 
-					writer.addDocument(doc);
+					SearchEngineUtil.addDocument(companyId, doc);
 				}
 				catch (Exception e1) {
 					_log.error("Reindexing " + productEntryId, e1);
@@ -495,27 +489,16 @@ public class SCProductEntryLocalServiceImpl
 		catch (Exception e2) {
 			throw new SystemException(e2);
 		}
-		finally {
-			try {
-				if (writer != null) {
-					LuceneUtil.write(companyId);
-				}
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
 	}
 
 	public Hits search(
-			long companyId, long groupId, String keywords, String type)
+			long companyId, long groupId, String keywords, String type,
+			int start, int end)
 		throws SystemException {
 
-		Searcher searcher = null;
+		Hits hits = null;
 
 		try {
-			HitsImpl hits = new HitsImpl();
-
 			BooleanQuery contextQuery = new BooleanQuery();
 
 			LuceneUtil.addRequiredTerm(
@@ -544,15 +527,14 @@ public class SCProductEntryLocalServiceImpl
 				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 			}
 
-			searcher = LuceneUtil.getSearcher(companyId);
-
-			hits.recordHits(searcher.search(fullQuery), searcher);
-
-			return hits;
+			hits = SearchEngineUtil.search(
+				companyId, new QueryImpl(fullQuery), start, end);
 		}
 		catch (Exception e) {
-			return LuceneUtil.closeSearcher(searcher, keywords, e);
+			throw new SystemException(e);
 		}
+
+		return hits;
 	}
 
 	public SCProductEntry updateProductEntry(
@@ -630,8 +612,8 @@ public class SCProductEntryLocalServiceImpl
 				productEntryId, name, now, version, type, shortDescription,
 				longDescription, pageURL, repoGroupId, repoArtifactId);
 		}
-		catch (IOException ioe) {
-			_log.error("Indexing " + productEntryId, ioe);
+		catch (SearchException se) {
+			_log.error("Indexing " + productEntryId, se);
 		}
 
 		return productEntry;

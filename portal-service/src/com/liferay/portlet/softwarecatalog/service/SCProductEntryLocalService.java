@@ -194,8 +194,8 @@ public interface SCProductEntryLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, java.lang.String keywords, java.lang.String type)
-		throws com.liferay.portal.SystemException;
+		long groupId, java.lang.String keywords, java.lang.String type,
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry updateProductEntry(
 		long productEntryId, java.lang.String name, java.lang.String type,

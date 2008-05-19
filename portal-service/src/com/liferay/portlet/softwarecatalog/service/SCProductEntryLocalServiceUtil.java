@@ -320,12 +320,12 @@ public class SCProductEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, java.lang.String keywords, java.lang.String type)
-		throws com.liferay.portal.SystemException {
+		long groupId, java.lang.String keywords, java.lang.String type,
+		int start, int end) throws com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
 		return scProductEntryLocalService.search(companyId, groupId, keywords,
-			type);
+			type, start, end);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry updateProductEntry(

@@ -22,24 +22,20 @@
 
 package com.liferay.portlet.softwarecatalog.util;
 
+import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentSummary;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.search.lucene.LuceneFields;
-import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil;
-
-import java.io.IOException;
+import com.liferay.util.search.DocumentImpl;
 
 import java.util.Date;
 
 import javax.portlet.PortletURL;
-
-import org.apache.lucene.document.Document;
-import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.index.Term;
 
 /**
  * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
@@ -47,6 +43,7 @@ import org.apache.lucene.index.Term;
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  * @author Harry Mark
+ * @author Bruno Farache
  *
  */
 public class Indexer
@@ -59,38 +56,23 @@ public class Indexer
 			long productEntryId, String name, Date modifiedDate, String version,
 			String type, String shortDescription, String longDescription,
 			String pageURL, String repoGroupId, String repoArtifactId)
-		throws IOException {
+		throws SearchException {
 
-		Document doc = getAddProductEntryDocument(
+		Document doc = getProductEntryDocument(
 			companyId, groupId, userId, userName, productEntryId, name,
 			modifiedDate, version, type, shortDescription, longDescription,
 			pageURL, repoGroupId, repoArtifactId);
 
-		IndexWriter writer = null;
-
-		try {
-			writer = LuceneUtil.getWriter(companyId);
-
-			writer.addDocument(doc);
-		}
-		finally {
-			if (writer != null) {
-				LuceneUtil.write(companyId);
-			}
-		}
+		SearchEngineUtil.addDocument(companyId, doc);
 	}
 
 	public static void deleteProductEntry(long companyId, long productEntryId)
-		throws IOException {
+		throws SearchException {
 
-		LuceneUtil.deleteDocuments(
-			companyId,
-			new Term(
-				LuceneFields.UID,
-				LuceneFields.getUID(PORTLET_ID, productEntryId)));
+		SearchEngineUtil.deleteDocument(companyId, getEntryUID(productEntryId));
 	}
 
-	public static Document getAddProductEntryDocument(
+	public static Document getProductEntryDocument(
 		long companyId, long groupId, long userId, String userName,
 		long productEntryId, String name, Date modifiedDate, String version,
 		String type, String shortDescription, String longDescription,
@@ -104,31 +86,36 @@ public class Indexer
 				" " + longDescription + " " + pageURL + repoGroupId + " " +
 					repoArtifactId;
 
-		Document doc = new Document();
+		Document doc = new DocumentImpl();
 
-		doc.add(
-			LuceneFields.getKeyword(
-				LuceneFields.UID,
-				LuceneFields.getUID(PORTLET_ID, productEntryId)));
+		doc.addUID(PORTLET_ID, productEntryId);
 
-		doc.add(LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
-		doc.add(LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
-		doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
-		doc.add(LuceneFields.getKeyword(LuceneFields.USER_ID, userId));
+		doc.addKeyword(Field.COMPANY_ID, companyId);
+		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
+		doc.addKeyword(Field.GROUP_ID, groupId);
+		doc.addKeyword(Field.USER_ID, userId);
 
-		doc.add(LuceneFields.getText(LuceneFields.TITLE, name));
-		doc.add(LuceneFields.getText(LuceneFields.CONTENT, content));
+		doc.addText(Field.NAME, name);
+		doc.addText(Field.CONTENT, content);
 
-		doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
+		doc.addModifiedDate();
 
-		doc.add(LuceneFields.getKeyword("productEntryId", productEntryId));
-		doc.add(LuceneFields.getDate("modified-date", modifiedDate));
-		doc.add(LuceneFields.getText("version", version));
-		doc.add(LuceneFields.getKeyword("type", type));
-		doc.add(LuceneFields.getKeyword("repoGroupId", repoGroupId));
-		doc.add(LuceneFields.getKeyword("repoArtifactId", repoArtifactId));
+		doc.addKeyword("productEntryId", productEntryId);
+		doc.addDate("modified-date", modifiedDate);
+		doc.addText("version", version);
+		doc.addKeyword("type", type);
+		doc.addKeyword("repoGroupId", repoGroupId);
+		doc.addKeyword("repoArtifactId", repoArtifactId);
 
 		return doc;
+	}
+
+	public static String getEntryUID(long productEntryId) {
+		Document doc = new DocumentImpl();
+
+		doc.addUID(PORTLET_ID, productEntryId);
+
+		return doc.get(Field.UID);
 	}
 
 	public static void updateProductEntry(
@@ -136,18 +123,14 @@ public class Indexer
 			long productEntryId, String name, Date modifiedDate, String version,
 			String type, String shortDescription, String longDescription,
 			String pageURL, String repoGroupId, String repoArtifactId)
-		throws IOException {
+		throws SearchException {
 
-		try {
-			deleteProductEntry(companyId, productEntryId);
-		}
-		catch (IOException ioe) {
-		}
-
-		addProductEntry(
+		Document doc = getProductEntryDocument(
 			companyId, groupId, userId, userName, productEntryId, name,
 			modifiedDate, version, type, shortDescription, longDescription,
 			pageURL, repoGroupId, repoArtifactId);
+
+		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}
 
 	public DocumentSummary getDocumentSummary(
@@ -155,15 +138,15 @@ public class Indexer
 
 		// Title
 
-		String title = doc.get(LuceneFields.TITLE);
+		String title = doc.get(Field.TITLE);
 
 		// Content
 
-		String content = doc.get(LuceneFields.CONTENT);
+		String content = doc.get(Field.CONTENT);
 
 		content = StringUtil.shorten(content, 200);
 
-		// URL
+		// Portlet URL
 
 		String productEntryId = doc.get("productEntryId");
 
