@@ -125,6 +125,22 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div/ul/li[2]/ul/li[5]/a/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//div/ul/li[2]/ul/li[5]/a/span");
 		selenium.waitForPageToLoad("30000");
 
