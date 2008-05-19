@@ -569,7 +569,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 	public Hits search(
 			long companyId, long groupId, long userId, String keywords,
-			int begin, int end)
+			int start, int end)
 		throws SystemException {
 
 		Hits hits = null;
@@ -608,7 +608,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			}
 
 			hits = SearchEngineUtil.search(
-				companyId, new QueryImpl(fullQuery), begin, end);
+				companyId, new QueryImpl(fullQuery), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
