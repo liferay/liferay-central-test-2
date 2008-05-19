@@ -46,8 +46,16 @@ if (Validator.isNotNull(portletResource)) {
 }
 
 long organizationId = GetterUtil.getLong(prefs.getValue("organization-id", "0"));
-String displayStyle = prefs.getValue("display-style", "body-and-image");
+String displayStyle = prefs.getValue("display-style", "abstract");
 int max = GetterUtil.getInteger(prefs.getValue("max", "20"));
+
+if (organizationId == 0) {
+	Group group = GroupLocalServiceUtil.getGroup(themeDisplay.getPortletGroupId());
+
+	if (group.isOrganization()) {
+		organizationId = group.getClassPK();
+	}
+}
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>

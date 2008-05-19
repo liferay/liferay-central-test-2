@@ -41,7 +41,15 @@ if (Validator.isNotNull(portletResource)) {
 
 long organizationId = GetterUtil.getLong(prefs.getValue("organization-id", "0"));
 String displayStyle = prefs.getValue("display-style", "user-name-and-image");
-int max = GetterUtil.getInteger(prefs.getValue("max", String.valueOf(10)));
+int max = GetterUtil.getInteger(prefs.getValue("max", "10"));
+
+if (organizationId == 0) {
+	Group group = GroupLocalServiceUtil.getGroup(themeDisplay.getPortletGroupId());
+
+	if (group.isOrganization()) {
+		organizationId = group.getClassPK();
+	}
+}
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 %>
