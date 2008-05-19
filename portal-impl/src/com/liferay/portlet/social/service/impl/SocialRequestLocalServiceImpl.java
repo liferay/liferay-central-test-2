@@ -153,6 +153,22 @@ public class SocialRequestLocalServiceImpl
 	}
 
 	public boolean hasRequest(
+			long userId, String className, long classPK, int type, int status)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		if (socialRequestPersistence.countByU_C_C_T_S(
+				userId, classNameId, classPK, type, status) <= 0) {
+
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
+	public boolean hasRequest(
 			long userId, String className, long classPK, int type,
 			long receiverUserId, int status)
 		throws SystemException {
@@ -178,6 +194,8 @@ public class SocialRequestLocalServiceImpl
 		SocialRequest request = socialRequestPersistence.findByPrimaryKey(
 			requestId);
 
+		int oldStatus = request.getStatus();
+
 		request.setModifiedDate(new Date());
 		request.setStatus(status);
 
@@ -190,6 +208,16 @@ public class SocialRequestLocalServiceImpl
 		else if (status == SocialRequestConstants.STATUS_IGNORE) {
 			socialRequestInterpreterLocalService.processRejection(
 				request, themeDisplay);
+		}
+
+		List<SocialRequest> requests = socialRequestPersistence.findByU_C_C_T_S(
+			request.getUserId(), request.getClassNameId(), request.getClassPK(),
+			request.getType(), oldStatus);
+
+		for (SocialRequest curRequest : requests) {
+			curRequest.setStatus(status);
+
+			socialRequestPersistence.update(curRequest, false);
 		}
 
 		return request;

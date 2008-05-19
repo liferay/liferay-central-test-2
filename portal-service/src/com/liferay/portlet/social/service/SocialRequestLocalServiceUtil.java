@@ -191,6 +191,15 @@ public class SocialRequestLocalServiceUtil {
 	}
 
 	public static boolean hasRequest(long userId, java.lang.String className,
+		long classPK, int type, int status)
+		throws com.liferay.portal.SystemException {
+		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
+
+		return socialRequestLocalService.hasRequest(userId, className, classPK,
+			type, status);
+	}
+
+	public static boolean hasRequest(long userId, java.lang.String className,
 		long classPK, int type, long receiverUserId, int status)
 		throws com.liferay.portal.SystemException {
 		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();

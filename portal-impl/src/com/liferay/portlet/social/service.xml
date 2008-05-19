@@ -182,6 +182,13 @@
 			<finder-column name="type" />
 			<finder-column name="receiverUserId" />
 		</finder>
+		<finder name="U_C_C_T_S" return-type="Collection">
+			<finder-column name="userId" />
+			<finder-column name="classNameId" />
+			<finder-column name="classPK" />
+			<finder-column name="type" />
+			<finder-column name="status" />
+		</finder>
 		<finder name="U_C_C_T_R_S" return-type="SocialRequest">
 			<finder-column name="userId" />
 			<finder-column name="classNameId" />

@@ -115,6 +115,10 @@ public interface SocialRequestLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public boolean hasRequest(long userId, java.lang.String className,
+		long classPK, int type, int status)
+		throws com.liferay.portal.SystemException;
+
+	public boolean hasRequest(long userId, java.lang.String className,
 		long classPK, int type, long receiverUserId, int status)
 		throws com.liferay.portal.SystemException;
 

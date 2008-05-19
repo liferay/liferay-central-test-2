@@ -382,6 +382,7 @@ create index IX_D9380CB7 on SocialRequest (receiverUserId, status);
 create index IX_80F7A9C2 on SocialRequest (userId);
 create index IX_36A90CA7 on SocialRequest (userId, classNameId, classPK, type_, receiverUserId);
 create index IX_F3BFB48D on SocialRequest (userId, classNameId, classPK, type_, receiverUserId, status);
+create index IX_CC86A444 on SocialRequest (userId, classNameId, classPK, type_, status);
 create index IX_AB5906A8 on SocialRequest (userId, status);
 create index IX_49D5872C on SocialRequest (uuid_);
 create index IX_4F973EFE on SocialRequest (uuid_, groupId);
