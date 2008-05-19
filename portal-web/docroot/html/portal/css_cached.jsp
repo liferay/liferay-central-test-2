@@ -1254,6 +1254,10 @@ fieldset:last-child, .uni-form fieldset:last-child {
 	font-weight: bold;
 }
 
+.taglib-ratings.thumbs .entries-total {
+	color: #777777;
+}
+
 .taglib-ratings.thumbs .zero-total {
 	color: #aaaaaa;
 }

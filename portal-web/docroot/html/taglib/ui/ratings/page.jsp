@@ -134,20 +134,16 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 						onmousemove="ToolTip.show(event, this, '<liferay-ui:message key="sign-in-to-vote" />')"
 					</c:if>
 				>
-					<a class="rating rate-up <%=(stats.getAverageScore() > 0) ? "rated" : "" %>" href="javascript: ;">
-						<liferay-ui:message key="rate-up" />
-					</a>
-					<a class="rating rate-down <%=(stats.getAverageScore() < 0) ? "rated" : "" %>" href="javascript: ;">
-						<liferay-ui:message key="rate-down" />
-					</a>
+					<a class="rating rate-up <%= (yourScore > 0) ? "rated" : "" %>" href="javascript: ;"></a>
+					<a class="rating rate-down <%= (yourScore < 0) ? "rated" : "" %>" href="javascript: ;"></a>
 				</li>
 				<li
-					class="total-votes"
+					class="total-votes" id="<%= randomNamespace %>totalEntries"
 					<c:if test="<%= stats.getTotalEntries() == 0 %>">
 						style="color: #AAAAAA;"
 					</c:if>
 				>
-					(<span id="<%= randomNamespace %>totalEntries"><%= stats.getTotalEntries() %></span> <%= LanguageUtil.get(pageContext, (stats.getTotalEntries() == 1) ? "vote" : "votes") %>)
+					(<%= stats.getTotalEntries() %> <%= LanguageUtil.get(pageContext, (stats.getTotalEntries() == 1) ? "vote" : "votes") %>)
 				</li>
 			</ul>
 
@@ -167,10 +163,11 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 										var totalRating = jQuery('#<%= randomNamespace %>totalRating');
 										var totalEntries = jQuery('#<%= randomNamespace %>totalEntries');
 
-										var html = '';
+										var ratingHtml = '';
+										var entriesHtml = '';
 
 										if (message.totalEntries * message.averageScore == 0) {
-											html = '<span class="zero-total">&#177;0</span>';
+											ratingHtml = '<span class="zero-total">&#177;0</span>';
 										}
 										else {
 											var score = Math.round(message.totalEntries * message.averageScore);
@@ -181,11 +178,21 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 												score = '+' + score;
 											}
 
-											html = '<span class="' + className + '">' + score + '</span>';
+											ratingHtml = '<span class="' + className + '">' + score + '</span>';
 										}
 
-										totalRating.html(html);
-										totalEntries.html(message.totalEntries);
+										if (message.totalEntries == 0) {
+											entriesHtml = '<span class="zero-total">(0 <%= LanguageUtil.get(pageContext, "votes") %>)</span>';
+										}
+										else if (message.totalEntries == 1) {
+											entriesHtml = '<span class="entries-total">(1 <%= LanguageUtil.get(pageContext, "vote") %>)</span>';
+										}
+										else {
+											entriesHtml = '<span class="entries-total">(' + message.totalEntries + ' <%= LanguageUtil.get(pageContext, "votes") %>)</span>';
+										}
+
+										totalRating.html(ratingHtml);
+										totalEntries.html(entriesHtml);
 									}
 								}
 							);
