@@ -246,31 +246,31 @@ var Tabs = {
 };
 
 var StarRating = new Class({
+	/* OPTIONS
+	 * displayOnly: (boolean) non-modifiable display
+	 * onComplete: (function) executes when rating is selected
+	 * rating: rating to initialize to
+	 */
 	initialize: function(id, options) {
-		/* OPTIONS
-		 * displayOnly: (boolean) non-modifiable display
-		 * onComplete: (function) executes when rating is selected
-		 * rating: rating to initialize to
-		 */
-			this.options = options || {};
-			this.rating = this.options.rating || 0;
-			var item = jQuery("#" + id);
-			this.stars = item.find("img");
-			var self = this;
+		this.options = options || {};
+		this.rating = this.options.rating || 0;
+		var item = jQuery("#" + id);
+		this.stars = item.find("img");
+		var self = this;
 
-			if (!this.options.displayOnly) {
-				item.bind("mouseout", {self: this}, this.onHoverOut);
+		if (!this.options.displayOnly) {
+			item.bind("mouseout", {self: this}, this.onHoverOut);
 
-				this.stars.each(function(index) {
-					this.index = index + 1;
-					jQuery(this).bind("click", {self: self}, self.onClick)
-						.bind("mouseover", {self: self}, self.onHoverOver);
-				})
-			}
-
-			this.display(this.rating, "rating");
+			this.stars.each(function(index) {
+				this.index = index + 1;
+				jQuery(this).bind("click", {self: self}, self.onClick)
+					.bind("mouseover", {self: self}, self.onHoverOver);
+			})
 		}
-	});
+
+		this.display(this.rating, "rating");
+	}
+});
 
 StarRating.implement({
 	display: function(rating, mode) {
@@ -358,11 +358,11 @@ var ThumbRating = new Class({
 		var instance = this;
 		var trigger = jQuery(obj);
 		var rating = trigger.is('.rate-up') ? 1 : -1;
-		
+
 		if (trigger.is('.rated')) {
 			rating = 0;
 		}
-		
+
 		instance.triggers.not(obj).removeClass('rated');
 		trigger.toggleClass('rated');
 
