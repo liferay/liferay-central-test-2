@@ -20,42 +20,42 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.lucene;
+package com.liferay.portal.search.lucene;
 
-import com.liferay.portal.kernel.search.Document;
-import com.liferay.portal.kernel.search.SearchEngine;
-import com.liferay.portal.kernel.search.SearchException;
+import org.apache.lucene.index.IndexWriter;
 
 /**
- * <a href="LuceneSearchEngineUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="IndexWriterData.java.html"><b><i>View Source</i></b></a>
  *
- * @author Bruno Farache
+ * @author Harry Mark
  *
  */
-public class LuceneSearchEngineUtil {
+public class IndexWriterData {
 
-	public static void addDocument(long companyId, Document doc)
-		throws SearchException {
-
-		_engine.getWriter().addDocument(companyId, doc);
+	public IndexWriterData(long companyId, IndexWriter writer, int count) {
+		_companyId = companyId;
+		_writer = writer;
+		_count = count;
 	}
 
-	public static void deleteDocument(long companyId, String uid)
-		throws SearchException {
-
-		_engine.getWriter().deleteDocument(companyId, uid);
+	public long getCompanyId() {
+		return _companyId;
 	}
 
-	public static SearchEngine getSearchEngine() {
-		return _engine;
+	public IndexWriter getWriter() {
+		return _writer;
 	}
 
-	public static void updateDocument(long companyId, String uid, Document doc)
-		throws SearchException {
-
-		_engine.getWriter().updateDocument(companyId, uid, doc);
+	public int getCount() {
+		return _count;
 	}
 
-	private static SearchEngine _engine = new LuceneSearchEngineImpl();
+	public void setCount(int count) {
+		_count = count;
+	}
+
+	private long _companyId;
+	private IndexWriter _writer;
+	private int _count;
 
 }

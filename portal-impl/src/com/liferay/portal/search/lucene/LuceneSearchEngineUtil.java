@@ -20,51 +20,42 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.lucene;
+package com.liferay.portal.search.lucene;
 
-import com.liferay.portal.kernel.job.IntervalJob;
-import com.liferay.portal.kernel.job.JobExecutionContext;
-import com.liferay.portal.kernel.job.JobExecutionException;
-import com.liferay.util.SystemProperties;
-import com.liferay.util.Time;
-import com.liferay.util.ant.DeleteTask;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.SearchEngine;
+import com.liferay.portal.kernel.search.SearchException;
 
 /**
- * <a href="CleanUpJob.java.html"><b><i>View Source</i></b></a>
+ * <a href="LuceneSearchEngineUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Bruno Farache
  *
  */
-public class CleanUpJob implements IntervalJob {
+public class LuceneSearchEngineUtil {
 
-	public CleanUpJob() {
-		_interval = Time.DAY;
+	public static void addDocument(long companyId, Document doc)
+		throws SearchException {
+
+		_engine.getWriter().addDocument(companyId, doc);
 	}
 
-	public void execute(JobExecutionContext context)
-		throws JobExecutionException {
+	public static void deleteDocument(long companyId, String uid)
+		throws SearchException {
 
-		try {
-
-			// LEP-2180
-
-			DeleteTask.deleteFiles(
-				SystemProperties.TMP_DIR, "LUCENE_liferay_com*.ljt", null);
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
+		_engine.getWriter().deleteDocument(companyId, uid);
 	}
 
-	public long getInterval() {
-		return _interval;
+	public static SearchEngine getSearchEngine() {
+		return _engine;
 	}
 
-	private static Log _log = LogFactory.getLog(CleanUpJob.class);
+	public static void updateDocument(long companyId, String uid, Document doc)
+		throws SearchException {
 
-	private long _interval;
+		_engine.getWriter().updateDocument(companyId, uid, doc);
+	}
+
+	private static SearchEngine _engine = new LuceneSearchEngineImpl();
 
 }

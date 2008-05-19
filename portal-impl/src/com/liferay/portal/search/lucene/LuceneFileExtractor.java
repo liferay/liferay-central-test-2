@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.lucene;
+package com.liferay.portal.search.lucene;
 
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Validator;

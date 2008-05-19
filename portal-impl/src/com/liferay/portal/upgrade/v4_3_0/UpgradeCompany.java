@@ -24,9 +24,9 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.documentlibrary.service.DLLocalServiceUtil;
-import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;

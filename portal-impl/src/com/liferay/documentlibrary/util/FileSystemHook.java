@@ -31,7 +31,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.lucene.LuceneUtil;
+import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.FileUtil;
 

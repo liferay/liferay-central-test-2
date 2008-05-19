@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.lucene.LuceneFields;
+import com.liferay.portal.search.lucene.LuceneFields;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 
 import javax.portlet.PortletRequest;

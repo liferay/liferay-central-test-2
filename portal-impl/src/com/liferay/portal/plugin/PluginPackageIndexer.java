@@ -29,9 +29,9 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.lucene.LuceneFields;
-import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.CompanyConstants;
+import com.liferay.portal.search.lucene.LuceneFields;
+import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.util.License;
 
 import java.io.IOException;

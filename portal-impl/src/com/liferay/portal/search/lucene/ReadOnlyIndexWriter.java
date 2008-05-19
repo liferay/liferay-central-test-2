@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.lucene;
+package com.liferay.portal.search.lucene;
 
 import java.io.IOException;
 

@@ -35,7 +35,7 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.lucene.LuceneUtil;
+import com.liferay.portal.search.lucene.LuceneUtil;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;

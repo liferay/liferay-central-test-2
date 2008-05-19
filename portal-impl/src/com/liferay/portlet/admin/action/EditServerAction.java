@@ -31,7 +31,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
 import com.liferay.portal.lastmodified.LastModifiedJavaScript;
-import com.liferay.portal.lucene.LuceneIndexer;
+import com.liferay.portal.search.lucene.LuceneIndexer;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.struts.PortletAction;

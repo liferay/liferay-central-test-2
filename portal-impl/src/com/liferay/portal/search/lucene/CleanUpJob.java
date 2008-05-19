@@ -20,42 +20,51 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.lucene;
+package com.liferay.portal.search.lucene;
 
-import org.apache.lucene.index.IndexWriter;
+import com.liferay.portal.kernel.job.IntervalJob;
+import com.liferay.portal.kernel.job.JobExecutionContext;
+import com.liferay.portal.kernel.job.JobExecutionException;
+import com.liferay.util.SystemProperties;
+import com.liferay.util.Time;
+import com.liferay.util.ant.DeleteTask;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="IndexWriterData.java.html"><b><i>View Source</i></b></a>
+ * <a href="CleanUpJob.java.html"><b><i>View Source</i></b></a>
  *
- * @author Harry Mark
+ * @author Brian Wing Shun Chan
  *
  */
-public class IndexWriterData {
+public class CleanUpJob implements IntervalJob {
 
-	public IndexWriterData(long companyId, IndexWriter writer, int count) {
-		_companyId = companyId;
-		_writer = writer;
-		_count = count;
+	public CleanUpJob() {
+		_interval = Time.DAY;
 	}
 
-	public long getCompanyId() {
-		return _companyId;
+	public void execute(JobExecutionContext context)
+		throws JobExecutionException {
+
+		try {
+
+			// LEP-2180
+
+			DeleteTask.deleteFiles(
+				SystemProperties.TMP_DIR, "LUCENE_liferay_com*.ljt", null);
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
 	}
 
-	public IndexWriter getWriter() {
-		return _writer;
+	public long getInterval() {
+		return _interval;
 	}
 
-	public int getCount() {
-		return _count;
-	}
+	private static Log _log = LogFactory.getLog(CleanUpJob.class);
 
-	public void setCount(int count) {
-		_count = count;
-	}
-
-	private long _companyId;
-	private IndexWriter _writer;
-	private int _count;
+	private long _interval;
 
 }

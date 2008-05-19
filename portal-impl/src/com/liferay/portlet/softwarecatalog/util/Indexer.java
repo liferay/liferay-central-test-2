@@ -26,8 +26,8 @@ import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.lucene.LuceneFields;
-import com.liferay.portal.lucene.LuceneUtil;
+import com.liferay.portal.search.lucene.LuceneFields;
+import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil;
 
