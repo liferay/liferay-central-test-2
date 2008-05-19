@@ -134,13 +134,34 @@ public interface SocialActivityLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.social.model.SocialActivity> getGroupActivities(
+		long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public int getGroupActivitiesCount(long groupId)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.social.model.SocialActivity getMirrorActivity(
 		long mirrorActivityId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.social.model.SocialActivity> getOrganizationActivities(
+		long organizationId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public int getOrganizationActivitiesCount(long organizationId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialActivity> getRelationActivities(
+		long userId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> getRelationActivities(
 		long userId, int type, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public int getRelationActivitiesCount(long userId)
 		throws com.liferay.portal.SystemException;
 
 	public int getRelationActivitiesCount(long userId, int type)

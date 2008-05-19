@@ -228,6 +228,21 @@ public class SocialActivityLocalServiceUtil {
 		return socialActivityLocalService.getActivity(activityId);
 	}
 
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> getGroupActivities(
+		long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		SocialActivityLocalService socialActivityLocalService = SocialActivityLocalServiceFactory.getService();
+
+		return socialActivityLocalService.getGroupActivities(groupId, begin, end);
+	}
+
+	public static int getGroupActivitiesCount(long groupId)
+		throws com.liferay.portal.SystemException {
+		SocialActivityLocalService socialActivityLocalService = SocialActivityLocalServiceFactory.getService();
+
+		return socialActivityLocalService.getGroupActivitiesCount(groupId);
+	}
+
 	public static com.liferay.portlet.social.model.SocialActivity getMirrorActivity(
 		long mirrorActivityId)
 		throws com.liferay.portal.PortalException,
@@ -237,6 +252,31 @@ public class SocialActivityLocalServiceUtil {
 		return socialActivityLocalService.getMirrorActivity(mirrorActivityId);
 	}
 
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> getOrganizationActivities(
+		long organizationId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		SocialActivityLocalService socialActivityLocalService = SocialActivityLocalServiceFactory.getService();
+
+		return socialActivityLocalService.getOrganizationActivities(organizationId,
+			begin, end);
+	}
+
+	public static int getOrganizationActivitiesCount(long organizationId)
+		throws com.liferay.portal.SystemException {
+		SocialActivityLocalService socialActivityLocalService = SocialActivityLocalServiceFactory.getService();
+
+		return socialActivityLocalService.getOrganizationActivitiesCount(organizationId);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> getRelationActivities(
+		long userId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		SocialActivityLocalService socialActivityLocalService = SocialActivityLocalServiceFactory.getService();
+
+		return socialActivityLocalService.getRelationActivities(userId, begin,
+			end);
+	}
+
 	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> getRelationActivities(
 		long userId, int type, int begin, int end)
 		throws com.liferay.portal.SystemException {
@@ -244,6 +284,13 @@ public class SocialActivityLocalServiceUtil {
 
 		return socialActivityLocalService.getRelationActivities(userId, type,
 			begin, end);
+	}
+
+	public static int getRelationActivitiesCount(long userId)
+		throws com.liferay.portal.SystemException {
+		SocialActivityLocalService socialActivityLocalService = SocialActivityLocalServiceFactory.getService();
+
+		return socialActivityLocalService.getRelationActivitiesCount(userId);
 	}
 
 	public static int getRelationActivitiesCount(long userId, int type)

@@ -63,6 +63,14 @@ public interface Organization extends OrganizationModel {
 
 	public com.liferay.portal.model.Group getGroup();
 
+	public int getPrivateLayoutsPageCount();
+
+	public boolean hasPrivateLayouts();
+
+	public int getPublicLayoutsPageCount();
+
+	public boolean hasPublicLayouts();
+
 	public com.liferay.portal.model.Address getAddress();
 
 	public java.util.List<com.liferay.portal.model.Address> getAddresses()

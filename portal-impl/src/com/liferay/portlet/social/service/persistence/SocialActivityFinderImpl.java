@@ -44,11 +44,23 @@ import org.hibernate.Session;
  */
 public class SocialActivityFinderImpl implements SocialActivityFinder {
 
+	public static String COUNT_BY_GROUP_ID =
+		SocialActivityFinder.class.getName() + ".countByGroupId";
+
+	public static String COUNT_BY_ORGANIZATION_ID =
+		SocialActivityFinder.class.getName() + ".countByOrganizationId";
+
 	public static String COUNT_BY_RELATION =
 		SocialActivityFinder.class.getName() + ".countByRelation";
 
 	public static String COUNT_BY_RELATION_TYPE =
 		SocialActivityFinder.class.getName() + ".countByRelationType";
+
+	public static String FIND_BY_GROUP_ID =
+		SocialActivityFinder.class.getName() + ".findByGroupId";
+
+	public static String FIND_BY_ORGANIZATION_ID =
+		SocialActivityFinder.class.getName() + ".findByOrganizationId";
 
 	public static String FIND_BY_RELATION =
 		SocialActivityFinder.class.getName() + ".findByRelation";
@@ -56,7 +68,81 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 	public static String FIND_BY_RELATION_TYPE =
 		SocialActivityFinder.class.getName() + ".findByRelationType";
 
-	public int countByRelationType(long userId) throws SystemException {
+	public int countByGroupId(long groupId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_GROUP_ID);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("SocialActivity", SocialActivityImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public int countByOrganizationId(long organizationId)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_ORGANIZATION_ID);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("SocialActivity", SocialActivityImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(organizationId);
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public int countByRelation(long userId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -131,8 +217,66 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 		}
 	}
 
-	public List<SocialActivity> findByRelationType(
-			long userId, int begin, int end)
+	public List<SocialActivity> findByGroupId(long groupId, int begin, int end)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_GROUP_ID);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("SocialActivity", SocialActivityImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			return (List<SocialActivity>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public List<SocialActivity> findByOrganizationId(
+			long organizationId, int begin, int end)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_ORGANIZATION_ID);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("SocialActivity", SocialActivityImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(organizationId);
+
+			return (List<SocialActivity>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public List<SocialActivity> findByRelation(long userId, int begin, int end)
 		throws SystemException {
 
 		Session session = null;

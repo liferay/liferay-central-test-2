@@ -221,11 +221,43 @@ public class SocialActivityLocalServiceImpl
 		return socialActivityPersistence.findByPrimaryKey(activityId);
 	}
 
+	public List<SocialActivity> getGroupActivities(
+			long groupId, int begin, int end)
+		throws SystemException {
+
+		return socialActivityFinder.findByGroupId(groupId, begin, end);
+	}
+
+	public int getGroupActivitiesCount(long groupId) throws SystemException {
+		return socialActivityFinder.countByGroupId(groupId);
+	}
+
 	public SocialActivity getMirrorActivity(long mirrorActivityId)
 		throws PortalException, SystemException {
 
 		return socialActivityPersistence.findByMirrorActivityId(
 			mirrorActivityId);
+	}
+
+	public List<SocialActivity> getOrganizationActivities(
+			long organizationId, int begin, int end)
+		throws SystemException {
+
+		return socialActivityFinder.findByOrganizationId(
+			organizationId, begin, end);
+	}
+
+	public int getOrganizationActivitiesCount(long organizationId)
+		throws SystemException {
+
+		return socialActivityFinder.countByOrganizationId(organizationId);
+	}
+
+	public List<SocialActivity> getRelationActivities(
+			long userId, int begin, int end)
+		throws SystemException {
+
+		return socialActivityFinder.findByRelation(userId, begin, end);
 	}
 
 	public List<SocialActivity> getRelationActivities(
@@ -234,6 +266,10 @@ public class SocialActivityLocalServiceImpl
 
 		return socialActivityFinder.findByRelationType(
 			userId, type, begin, end);
+	}
+
+	public int getRelationActivitiesCount(long userId) throws SystemException {
+		return socialActivityFinder.countByRelation(userId);
 	}
 
 	public int getRelationActivitiesCount(long userId, int type)

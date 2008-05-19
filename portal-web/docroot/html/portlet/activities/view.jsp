@@ -27,13 +27,20 @@
 <%
 Group group = GroupLocalServiceUtil.getGroup(themeDisplay.getPortletGroupId());
 
-User user2 = user;
+int start = 0;
+int end = 10;
 
-if (group.isUser()) {
-	user2 = UserLocalServiceUtil.getUserById(group.getClassPK());
+List<SocialActivity> activities = null;
+
+if (group.isCommunity()) {
+	activities = SocialActivityLocalServiceUtil.getGroupActivities(group.getClassPK(), start, end);
 }
-
-List<SocialActivity> activities = SocialActivityLocalServiceUtil.getUserActivities(user2.getUserId(), 0, 10);
+else if (group.isOrganization()) {
+	activities = SocialActivityLocalServiceUtil.getOrganizationActivities(group.getClassPK(), start, end);
+}
+else if (group.isUser()) {
+	activities = SocialActivityLocalServiceUtil.getUserActivities(group.getClassPK(), start, end);
+}
 
 PortletURL rssURL = renderResponse.createRenderURL();
 
@@ -43,7 +50,7 @@ rssURL.setParameter("rss", "1");
 <liferay-ui:social-activities
 	activities="<%= activities %>"
 	feedEnabled="<%= true %>"
-	feedTitle='<%= LanguageUtil.format(pageContext, "subscribe-to-x's-activities", user2.getFirstName()) %>'
+	feedTitle='<%= LanguageUtil.format(pageContext, "subscribe-to-x's-activities", group.getDescriptiveName()) %>'
 	feedLink="<%= rssURL.toString() %>"
-	feedLinkMessage='<%= LanguageUtil.format(pageContext, "subscribe-to-x's-activities", user2.getFirstName()) %>'
+	feedLinkMessage='<%= LanguageUtil.format(pageContext, "subscribe-to-x's-activities", group.getDescriptiveName()) %>'
 />

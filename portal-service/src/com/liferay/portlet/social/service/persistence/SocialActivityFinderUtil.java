@@ -29,9 +29,19 @@ package com.liferay.portlet.social.service.persistence;
  *
  */
 public class SocialActivityFinderUtil {
-	public static int countByRelationType(long userId)
+	public static int countByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByRelationType(userId);
+		return getFinder().countByGroupId(groupId);
+	}
+
+	public static int countByOrganizationId(long organizationId)
+		throws com.liferay.portal.SystemException {
+		return getFinder().countByOrganizationId(organizationId);
+	}
+
+	public static int countByRelation(long userId)
+		throws com.liferay.portal.SystemException {
+		return getFinder().countByRelation(userId);
 	}
 
 	public static int countByRelationType(long userId, int type)
@@ -39,10 +49,22 @@ public class SocialActivityFinderUtil {
 		return getFinder().countByRelationType(userId, type);
 	}
 
-	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> findByRelationType(
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> findByGroupId(
+		long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getFinder().findByGroupId(groupId, begin, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> findByOrganizationId(
+		long organizationId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getFinder().findByOrganizationId(organizationId, begin, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> findByRelation(
 		long userId, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByRelationType(userId, begin, end);
+		return getFinder().findByRelation(userId, begin, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> findByRelationType(
