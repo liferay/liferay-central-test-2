@@ -69,19 +69,15 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
 
-		Hits hits = null;
-
 		try {
-			hits = BlogsEntryLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), userId, keywords);
-
-			Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
-			int total = hits.getLength();
+			Hits results = BlogsEntryLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), userId, keywords, searchContainer.getStart(), searchContainer.getEnd());
+			int total = results.getLength();
 
 			searchContainer.setTotal(total);
 
 			List resultRows = searchContainer.getResultRows();
 
-			for (int i = 0; i < results.getLength(); i++) {
+			for (int i = 0; i < results.getDocs().length; i++) {
 				com.liferay.portal.kernel.search.Document doc = results.doc(i);
 
 				ResultRow row = new ResultRow(doc, i, i);
@@ -130,11 +126,6 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 			}
 		}
 		catch (Exception e) {
-		}
-		finally {
-			if (hits != null) {
-				hits.closeSearcher();
-			}
 		}
 		%>
 
