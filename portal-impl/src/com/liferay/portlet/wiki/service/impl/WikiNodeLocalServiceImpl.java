@@ -294,10 +294,9 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 						WikiPage.class.getName(), page.getResourcePrimKey());
 
 					try {
-						Document doc =
-							Indexer.getPageDocument(
-								companyId, groupId, nodeId, title, content,
-								tagsEntries);
+						Document doc = Indexer.getPageDocument(
+							companyId, groupId, nodeId, title, content,
+							tagsEntries);
 
 						SearchEngineUtil.addDocument(companyId, doc);
 					}
@@ -319,8 +318,6 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 			long companyId, long groupId, long[] nodeIds, String keywords,
 			int start, int end)
 		throws SystemException {
-
-		Hits hits = null;
 
 		try {
 			BooleanQuery contextQuery = new BooleanQuery();
@@ -363,14 +360,12 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 			}
 
-			hits = SearchEngineUtil.search(
+			return SearchEngineUtil.search(
 				companyId, new QueryImpl(fullQuery), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
-
-		return hits;
 	}
 
 	public void subscribeNode(long userId, long nodeId)

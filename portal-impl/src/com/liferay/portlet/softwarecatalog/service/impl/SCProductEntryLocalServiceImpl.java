@@ -496,8 +496,6 @@ public class SCProductEntryLocalServiceImpl
 			int start, int end)
 		throws SystemException {
 
-		Hits hits = null;
-
 		try {
 			BooleanQuery contextQuery = new BooleanQuery();
 
@@ -527,14 +525,12 @@ public class SCProductEntryLocalServiceImpl
 				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 			}
 
-			hits = SearchEngineUtil.search(
+			return SearchEngineUtil.search(
 				companyId, new QueryImpl(fullQuery), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
-
-		return hits;
 	}
 
 	public SCProductEntry updateProductEntry(
