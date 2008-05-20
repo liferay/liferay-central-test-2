@@ -23,12 +23,12 @@
 package com.liferay.portal.kernel.search;
 
 /**
- * <a href="IndexWriterRequest.java.html"><b><i>View Source</i></b></a>
+ * <a href="IndexWriterRequestMessage.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  *
  */
-public class IndexWriterRequest {
+public class IndexWriterRequestMessage {
 
 	public static final String ADD = "add";
 
@@ -36,18 +36,22 @@ public class IndexWriterRequest {
 
 	public static final String UPDATE = "update";
 
-	public IndexWriterRequest() {
+	public IndexWriterRequestMessage() {
 	}
 
-    public IndexWriterRequest(String command, long companyId, String uid) {
+    public IndexWriterRequestMessage(
+		String command, long companyId, String uid) {
+
 		this(command, companyId, uid, null);
 	}
 
-	public IndexWriterRequest(String command, long companyId, Document doc) {
+	public IndexWriterRequestMessage(
+		String command, long companyId, Document doc) {
+
 		this(command, companyId, null, doc);
 	}
 
-	public IndexWriterRequest(
+	public IndexWriterRequestMessage(
 		String command, long companyId, String uid, Document doc) {
 
 		_command = command;

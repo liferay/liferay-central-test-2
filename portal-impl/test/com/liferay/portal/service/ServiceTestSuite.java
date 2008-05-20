@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageSender;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.search.IndexWriterImpl;
 import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.spring.util.SpringUtil;
@@ -41,7 +42,6 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceTest;
 import com.liferay.portlet.imagegallery.service.IGImageServiceTest;
 import com.liferay.portlet.messageboards.service.MBMessageServiceTest;
 import com.liferay.portlet.social.service.SocialRelationLocalServiceTest;
-import com.liferay.util.search.IndexWriterMessageSender;
 
 import junit.framework.TestSuite;
 
@@ -93,8 +93,7 @@ public class ServiceTestSuite extends TestSuite {
 		// Search Engines
 
 		SearchEngineUtil.init(
-			LuceneSearchEngineUtil.getSearchEngine(),
-			new IndexWriterMessageSender());
+			LuceneSearchEngineUtil.getSearchEngine(), new IndexWriterImpl());
 
 		addTestSuite(BookmarksFolderServiceTest.class);
 		addTestSuite(BookmarksEntryServiceTest.class);

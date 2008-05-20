@@ -41,11 +41,11 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.pop.POPServerUtil;
+import com.liferay.portal.search.IndexWriterImpl;
 import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.util.search.IndexWriterMessageSender;
 
 import java.io.File;
 
@@ -226,8 +226,7 @@ public class GlobalStartupAction extends SimpleAction {
 		// Search Engines
 
 		SearchEngineUtil.init(
-			LuceneSearchEngineUtil.getSearchEngine(),
-			new IndexWriterMessageSender());
+			LuceneSearchEngineUtil.getSearchEngine(), new IndexWriterImpl());
 	}
 
 	private static Log _log = LogFactory.getLog(GlobalStartupAction.class);
