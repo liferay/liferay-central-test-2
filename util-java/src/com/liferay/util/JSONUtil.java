@@ -24,15 +24,16 @@ package com.liferay.util;
 
 import com.liferay.portal.kernel.util.StringPool;
 
-import com.metaparadigm.jsonrpc.JSONSerializer;
-import com.metaparadigm.jsonrpc.MarshallException;
-import com.metaparadigm.jsonrpc.UnmarshallException;
-
 import java.util.Date;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.jabsorb.JSONSerializer;
+import org.jabsorb.serializer.MarshallException;
+import org.jabsorb.serializer.UnmarshallException;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -48,28 +49,70 @@ public class JSONUtil {
 	}
 
 	public static void put(JSONObject jsonObj, String key, boolean value) {
-		jsonObj.put(key, value);
+		try {
+			jsonObj.put(key, value);
+		}
+		catch (JSONException jsone) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(jsone, jsone);
+			}
+		}
 	}
 
 	public static void put(JSONObject jsonObj, String key, double value) {
-		jsonObj.put(key, value);
+		try {
+			jsonObj.put(key, value);
+		}
+		catch (JSONException jsone) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(jsone, jsone);
+			}
+		}
 	}
 
 	public static void put(JSONObject jsonObj, String key, int value) {
-		jsonObj.put(key, value);
+		try {
+			jsonObj.put(key, value);
+		}
+		catch (JSONException jsone) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(jsone, jsone);
+			}
+		}
 	}
 
 	public static void put(JSONObject jsonObj, String key, long value) {
-		jsonObj.put(key, value);
+		try {
+			jsonObj.put(key, value);
+		}
+		catch (JSONException jsone) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(jsone, jsone);
+			}
+		}
 	}
 
 	public static void put(JSONObject jsonObj, String key, short value) {
-		jsonObj.put(key, value);
+		try {
+			jsonObj.put(key, value);
+		}
+		catch (JSONException jsone) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(jsone, jsone);
+			}
+		}
 	}
 
 	public static void put(JSONObject jsonObj, String key, Date value) {
 		if (value == null) {
-			jsonObj.put(key, StringPool.BLANK);
+			try {
+				jsonObj.put(key, StringPool.BLANK);
+			}
+			catch (JSONException jsone) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(jsone, jsone);
+				}
+			}
 		}
 		else {
 
@@ -83,10 +126,16 @@ public class JSONUtil {
 
 	public static void put(JSONObject jsonObj, String key, Object value) {
 		if (value == null) {
-			jsonObj.put(key, StringPool.BLANK);
+			value = StringPool.BLANK;
 		}
-		else {
+
+		try {
 			jsonObj.put(key, value.toString());
+		}
+		catch (JSONException jsone) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(jsone, jsone);
+			}
 		}
 	}
 

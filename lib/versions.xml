@@ -1364,6 +1364,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/jabsorb.jar</file-name>
+		<version>1.2.2</version>
+		<project-name>jabsorb</project-name>
+		<project-url>http://jabsorb.org</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/jackrabbit-api.jar</file-name>
 		<version>1.4.0</version>
 		<project-name>Jackrabbit</project-name>
@@ -1651,18 +1662,6 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 1.1</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>portal/jsonrpc.jar</file-name>
-		<version>1.0</version>
-		<project-name>JSON-RPC-Java</project-name>
-		<project-url>http://oss.metaparadigm.com/jsonrpc</project-url>
-		<licenses>
-			<license>
-				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) Metaparadigm Pte. Ltd. 2004.</copyright-notice>
 			</license>
 		</licenses>
 	</library>

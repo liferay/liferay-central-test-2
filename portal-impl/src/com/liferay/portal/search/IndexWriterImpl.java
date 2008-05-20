@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.search.IndexWriterRequestMessage;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.util.JSONUtil;
 
-import com.metaparadigm.jsonrpc.MarshallException;
+import org.jabsorb.serializer.MarshallException;
 
 /**
  * <a href="IndexWriterImpl.java.html"><b><i>View Source</i></b></a>

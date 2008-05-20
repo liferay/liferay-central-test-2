@@ -74,6 +74,7 @@ import com.liferay.portlet.messageboards.util.Indexer;
 import com.liferay.portlet.messageboards.util.MBUtil;
 import com.liferay.portlet.messageboards.util.comparator.MessageThreadComparator;
 import com.liferay.portlet.messageboards.util.comparator.ThreadLastPostDateComparator;
+import com.liferay.util.JSONUtil;
 
 import java.io.IOException;
 
@@ -184,7 +185,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			JSONObject extraData = new JSONObject();
 
-			extraData.put("messageId", message.getMessageId());
+			JSONUtil.put(extraData, "messageId", message.getMessageId());
 
 			socialActivityLocalService.addActivity(
 				userId, entry.getGroupId(), BlogsEntry.class.getName(),

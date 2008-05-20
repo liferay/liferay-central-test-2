@@ -44,6 +44,7 @@ import com.liferay.portlet.mail.util.comparator.SubjectComparator;
 import com.liferay.portlet.mail.util.recipient.RecipientFinder;
 import com.liferay.portlet.mail.util.recipient.RecipientFinderLocator;
 import com.liferay.util.Autocomplete;
+import com.liferay.util.JSONUtil;
 import com.liferay.util.ListUtil;
 import com.liferay.util.TextFormatter;
 
@@ -374,18 +375,21 @@ public class MailAction extends JSONAction {
 			String subject = GetterUtil.getString(
 				mailEnvelope.getSubject(), StringPool.NBSP);
 
-			jsonEnvelope.put("id", mailEnvelope.getMessageId());
-			jsonEnvelope.put("folderId", mailEnvelope.getFolderName());
-			jsonEnvelope.put("email", recipient);
-			jsonEnvelope.put("subject", subject);
-			jsonEnvelope.put("date", dateFormat.format(mailEnvelope.getDate()));
-			jsonEnvelope.put(
+			JSONUtil.put(jsonEnvelope, "id", mailEnvelope.getMessageId());
+			JSONUtil.put(
+				jsonEnvelope, "folderId", mailEnvelope.getFolderName());
+			JSONUtil.put(jsonEnvelope, "email", recipient);
+			JSONUtil.put(jsonEnvelope, "subject", subject);
+			JSONUtil.put(
+				jsonEnvelope, "date",
+				dateFormat.format(mailEnvelope.getDate()));
+			JSONUtil.put(jsonEnvelope,
 				"size",
 				TextFormatter.formatKB(
 					mailEnvelope.getSize(), themeDisplay.getLocale()) + "k");
-			jsonEnvelope.put("read", mailEnvelope.isRead());
-			jsonEnvelope.put("replied", mailEnvelope.isAnswered());
-			jsonEnvelope.put("flagged", mailEnvelope.isFlagged());
+			JSONUtil.put(jsonEnvelope, "read", mailEnvelope.isRead());
+			JSONUtil.put(jsonEnvelope, "replied", mailEnvelope.isAnswered());
+			JSONUtil.put(jsonEnvelope, "flagged", mailEnvelope.isFlagged());
 
 			jsonEnvelopes.put(jsonEnvelope);
 		}

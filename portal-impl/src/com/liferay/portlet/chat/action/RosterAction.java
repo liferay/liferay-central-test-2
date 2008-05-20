@@ -30,6 +30,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messaging.util.MessagingUtil;
+import com.liferay.util.JSONUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -91,7 +92,7 @@ public class RosterAction extends JSONAction {
 			jo = MessagingUtil.addRosterEntry(req.getSession(), user);
 		}
 		catch (Exception e) {
-			jo.put("status", "failure");
+			JSONUtil.put(jo, "status", "failure");
 		}
 
 		return jo;
@@ -108,7 +109,7 @@ public class RosterAction extends JSONAction {
 			jo.put("status", "success");
 		}
 		catch (Exception e) {
-			jo.put("status", "failure");
+			JSONUtil.put(jo, "status", "failure");
 		}
 
 		return jo;

@@ -31,6 +31,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messaging.util.MessagingUtil;
+import com.liferay.util.JSONUtil;
 
 import java.io.PrintWriter;
 
@@ -150,7 +151,7 @@ public class MessagingAction extends Action {
 			}
 		}
 		catch (Exception e) {
-			jo.put("status", "failure");
+			JSONUtil.put(jo, "status", "failure");
 		}
 
 		return jo;

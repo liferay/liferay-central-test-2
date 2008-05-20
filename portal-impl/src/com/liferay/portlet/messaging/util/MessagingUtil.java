@@ -35,6 +35,7 @@ import com.liferay.portlet.chat.model.RosterUpdateListener;
 import com.liferay.portlet.messaging.model.JabberSession;
 import com.liferay.portlet.messaging.model.MessageListener;
 import com.liferay.portlet.messaging.util.comparator.NameComparator;
+import com.liferay.util.JSONUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -106,9 +107,9 @@ public class MessagingUtil {
 
 		roster.createEntry(smackId, name, null);
 
-		jo.put("name", name);
-		jo.put("user", user.getUserId());
-		jo.put("status", "success");
+		JSONUtil.put(jo, "name", name);
+		JSONUtil.put(jo, "user", user.getUserId());
+		JSONUtil.put(jo, "status", "success");
 
 		return jo;
 	}
@@ -219,13 +220,13 @@ public class MessagingUtil {
 			JSONObject jMsg = new JSONObject();
 			String fromId = (String)message.getProperty("fromId");
 
-			jMsg.put("body", message.getBody());
-			jMsg.put("category", message.getProperty("category"));
-			jMsg.put("toId", message.getProperty("toId"));
-			jMsg.put("toName", message.getProperty("toName"));
-			jMsg.put("fromId", fromId);
-			jMsg.put("fromName", message.getProperty("fromName"));
-			jMsg.put(
+			JSONUtil.put(jMsg, "body", message.getBody());
+			JSONUtil.put(jMsg, "category", message.getProperty("category"));
+			JSONUtil.put(jMsg, "toId", message.getProperty("toId"));
+			JSONUtil.put(jMsg, "toName", message.getProperty("toName"));
+			JSONUtil.put(jMsg, "fromId", fromId);
+			JSONUtil.put(jMsg, "fromName", message.getProperty("fromName"));
+			JSONUtil.put(jMsg,
 				"status", getPresence(roster.getPresence(getXmppId(fromId))));
 
 			ja.put(jMsg);
@@ -233,8 +234,8 @@ public class MessagingUtil {
 			message = getNextMessage(collector);
 		}
 
-		jo.put("chat", ja);
-		jo.put("status", "success");
+		JSONUtil.put(jo, "chat", ja);
+		JSONUtil.put(jo, "status", "success");
 
 		return jo;
 	}
@@ -300,15 +301,15 @@ public class MessagingUtil {
 				JSONObject jEntry = new JSONObject();
 				RosterEntry entry = (RosterEntry)rosterList.get(i);
 
-				jEntry.put("user", getUserId(entry));
-				jEntry.put("name", entry.getName());
-				jEntry.put("status", getPresence(roster
+				JSONUtil.put(jEntry, "user", getUserId(entry));
+				JSONUtil.put(jEntry, "name", entry.getName());
+				JSONUtil.put(jEntry, "status", getPresence(roster
 					.getPresence(entry.getUser())));
 				ja.put(jEntry);
 			}
 		}
 
-		jo.put("roster", ja);
+		JSONUtil.put(jo, "roster", ja);
 
 		return jo;
 	}

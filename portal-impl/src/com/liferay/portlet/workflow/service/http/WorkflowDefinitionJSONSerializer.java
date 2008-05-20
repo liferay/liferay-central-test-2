@@ -23,6 +23,7 @@
 package com.liferay.portlet.workflow.service.http;
 
 import com.liferay.portlet.workflow.model.WorkflowDefinition;
+import com.liferay.util.JSONUtil;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -41,21 +42,19 @@ public class WorkflowDefinitionJSONSerializer {
 	public static JSONObject toJSONObject(WorkflowDefinition model) {
 		JSONObject jsonObj = new JSONObject();
 
-		jsonObj.put("definitionId", model.getDefinitionId());
-		jsonObj.put("name", model.getName());
-		jsonObj.put("type", model.getType());
-		jsonObj.put("version", model.getVersion());
-		jsonObj.put("xml", model.getXml());
+		JSONUtil.put(jsonObj, "definitionId", model.getDefinitionId());
+		JSONUtil.put(jsonObj, "name", model.getName());
+		JSONUtil.put(jsonObj, "type", model.getType());
+		JSONUtil.put(jsonObj, "version", model.getVersion());
+		JSONUtil.put(jsonObj, "xml", model.getXml());
 
 		return jsonObj;
 	}
 
-	public static JSONArray toJSONArray(List models) {
+	public static JSONArray toJSONArray(List<WorkflowDefinition> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			WorkflowDefinition model = (WorkflowDefinition)models.get(i);
-
+		for (WorkflowDefinition model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

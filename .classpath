@@ -127,6 +127,7 @@
 	<classpathentry kind="lib" path="lib/portal/icq.jar"/>
 	<classpathentry kind="lib" path="lib/portal/icu4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/j2ee-management.jar"/>
+	<classpathentry kind="lib" path="lib/portal/jabsorb.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jackrabbit-api.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jackrabbit-core.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jackrabbit-jcr-commons.jar"/>
@@ -152,7 +153,6 @@
 	<classpathentry kind="lib" path="lib/portal/jmx-ri.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jodconverter.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jrcs-diff.jar"/>
-	<classpathentry kind="lib" path="lib/portal/jsonrpc.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jspwiki.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jsr107cache.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jstl.jar"/>

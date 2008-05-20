@@ -56,8 +56,8 @@ public class Autocomplete {
 
 			JSONObject jsonObj = new JSONObject();
 
-			jsonObj.put("text", text);
-			jsonObj.put("value", value);
+			JSONUtil.put(jsonObj, "text", text);
+			JSONUtil.put(jsonObj, "value", value);
 
 			jsonArray.put(jsonObj);
 		}

@@ -30,6 +30,7 @@ import com.liferay.portlet.tasks.model.TasksProposal;
 import com.liferay.portlet.tasks.model.TasksReview;
 import com.liferay.portlet.tasks.service.base.TasksReviewLocalServiceBaseImpl;
 import com.liferay.portlet.tasks.social.TasksActivityKeys;
+import com.liferay.util.JSONUtil;
 import com.liferay.util.SetUtil;
 
 import java.util.Date;
@@ -85,9 +86,9 @@ public class TasksReviewLocalServiceImpl
 
 		JSONObject extraData = new JSONObject();
 
-		extraData.put("stage", review.getStage());
-		extraData.put("completed", review.getCompleted());
-		extraData.put("rejected", review.getRejected());
+		JSONUtil.put(extraData, "stage", review.getStage());
+		JSONUtil.put(extraData, "completed", review.getCompleted());
+		JSONUtil.put(extraData, "rejected", review.getRejected());
 
 		socialActivityLocalService.addActivity(
 			assignedByUserId, proposal.getGroupId(),
@@ -219,9 +220,9 @@ public class TasksReviewLocalServiceImpl
 
 		JSONObject extraData = new JSONObject();
 
-		extraData.put("stage", review.getStage());
-		extraData.put("completed", review.getCompleted());
-		extraData.put("rejected", review.getRejected());
+		JSONUtil.put(extraData, "stage", review.getStage());
+		JSONUtil.put(extraData, "completed", review.getCompleted());
+		JSONUtil.put(extraData, "rejected", review.getRejected());
 
 		socialActivityLocalService.addActivity(
 			userId, review.getGroupId(), TasksProposal.class.getName(),
