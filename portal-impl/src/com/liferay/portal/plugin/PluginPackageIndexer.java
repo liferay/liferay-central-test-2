@@ -23,6 +23,7 @@
 package com.liferay.portal.plugin;
 
 import com.liferay.portal.kernel.search.DocumentSummary;
+import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -87,7 +88,7 @@ public class PluginPackageIndexer implements Indexer {
 	public static void cleanIndex() throws IOException {
 		LuceneUtil.deleteDocuments(
 			CompanyConstants.SYSTEM,
-			new Term(LuceneFields.PORTLET_ID, PORTLET_ID));
+			new Term(Field.PORTLET_ID, PORTLET_ID));
 	}
 
 	public static Document getAddPluginPackageDocument(
@@ -110,14 +111,14 @@ public class PluginPackageIndexer implements Indexer {
 
 		doc.add(
 			LuceneFields.getKeyword(
-				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, moduleId)));
+				Field.UID, LuceneFields.getUID(PORTLET_ID, moduleId)));
 
-		doc.add(LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
+		doc.add(LuceneFields.getKeyword(Field.PORTLET_ID, PORTLET_ID));
 
-		doc.add(LuceneFields.getText(LuceneFields.TITLE, name));
-		doc.add(LuceneFields.getText(LuceneFields.CONTENT, content));
+		doc.add(LuceneFields.getText(Field.TITLE, name));
+		doc.add(LuceneFields.getText(Field.CONTENT, content));
 
-		doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
+		doc.add(LuceneFields.getDate(Field.MODIFIED));
 
 		doc.add(LuceneFields.getKeyword("moduleId", moduleId));
 		doc.add(LuceneFields.getKeyword("groupId", moduleIdObj.getGroupId()));
@@ -201,7 +202,7 @@ public class PluginPackageIndexer implements Indexer {
 		LuceneUtil.deleteDocuments(
 			CompanyConstants.SYSTEM,
 			new Term(
-				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, moduleId)));
+				Field.UID, LuceneFields.getUID(PORTLET_ID, moduleId)));
 	}
 
 	public static void updatePluginPackage(
@@ -229,11 +230,11 @@ public class PluginPackageIndexer implements Indexer {
 
 		// Title
 
-		String title = doc.get(LuceneFields.TITLE);
+		String title = doc.get(Field.TITLE);
 
 		// Content
 
-		String content = doc.get(LuceneFields.CONTENT);
+		String content = doc.get(Field.CONTENT);
 
 		content = StringUtil.shorten(content, 200);
 
