@@ -33,6 +33,7 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -51,7 +52,6 @@ import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.model.impl.RegionImpl;
 import com.liferay.portal.model.impl.RoleImpl;
-import com.liferay.portal.search.lucene.LuceneFields;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.service.base.CompanyLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalInstances;
@@ -430,34 +430,30 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			BooleanQuery contextQuery = new BooleanQuery();
 
 			LuceneUtil.addRequiredTerm(
-				contextQuery, LuceneFields.COMPANY_ID, companyId);
+				contextQuery, Field.COMPANY_ID, companyId);
 
 			if (Validator.isNotNull(portletId)) {
 				LuceneUtil.addRequiredTerm(
-					contextQuery, LuceneFields.PORTLET_ID, portletId);
+					contextQuery, Field.PORTLET_ID, portletId);
 			}
 
 			if (groupId > 0) {
 				LuceneUtil.addRequiredTerm(
-					contextQuery, LuceneFields.GROUP_ID, groupId);
+					contextQuery, Field.GROUP_ID, groupId);
 			}
 
 			if (Validator.isNotNull(type)) {
-				LuceneUtil.addRequiredTerm(
-					contextQuery, LuceneFields.TYPE, type);
+				LuceneUtil.addRequiredTerm(contextQuery, Field.TYPE, type);
 			}
 
 			BooleanQuery searchQuery = new BooleanQuery();
 
 			if (Validator.isNotNull(keywords)) {
-				LuceneUtil.addTerm(searchQuery, LuceneFields.TITLE, keywords);
-				LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
-				LuceneUtil.addTerm(
-					searchQuery, LuceneFields.DESCRIPTION, keywords);
-				LuceneUtil.addTerm(
-					searchQuery, LuceneFields.PROPERTIES, keywords);
-				LuceneUtil.addTerm(
-					searchQuery, LuceneFields.TAGS_ENTRIES, keywords);
+				LuceneUtil.addTerm(searchQuery, Field.TITLE, keywords);
+				LuceneUtil.addTerm(searchQuery, Field.CONTENT, keywords);
+				LuceneUtil.addTerm(searchQuery, Field.DESCRIPTION, keywords);
+				LuceneUtil.addTerm(searchQuery, Field.PROPERTIES, keywords);
+				LuceneUtil.addTerm(searchQuery, Field.TAGS_ENTRIES, keywords);
 			}
 
 			BooleanQuery fullQuery = new BooleanQuery();

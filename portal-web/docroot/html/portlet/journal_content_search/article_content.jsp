@@ -31,13 +31,13 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 
 Document doc = (Document)row.getObject();
 
-String content = doc.get(LuceneFields.CONTENT);
+String content = doc.get(Field.CONTENT);
 
 content = StringUtil.shorten(content, 200);
 content = StringUtil.highlight(content, keywords);
 
 String articleId = doc.get("articleId");
-long articleGroupId = GetterUtil.getLong(doc.get(LuceneFields.GROUP_ID));
+long articleGroupId = GetterUtil.getLong(doc.get(Field.GROUP_ID));
 
 List hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(layout.getGroupId(), layout.isPrivateLayout(), articleId);
 %>

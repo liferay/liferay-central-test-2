@@ -84,7 +84,7 @@
 
 				// Title
 
-				String title = doc.get(LuceneFields.TITLE);
+				String title = doc.get(Field.TITLE);
 
 				title = StringUtil.highlight(title, keywords);
 

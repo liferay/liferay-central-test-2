@@ -25,6 +25,7 @@ package com.liferay.portlet.tags.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
@@ -32,7 +33,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
-import com.liferay.portal.search.lucene.LuceneFields;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
@@ -348,7 +348,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 			if (Validator.isNotNull(portletId)) {
 				LuceneUtil.addRequiredTerm(
-					contextQuery, LuceneFields.PORTLET_ID, portletId);
+					contextQuery, Field.PORTLET_ID, portletId);
 			}
 			else {
 				BooleanQuery portletIdsQuery = new BooleanQuery();
@@ -357,8 +357,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 						i++) {
 
 					Term term = new Term(
-						LuceneFields.PORTLET_ID,
-						TagsUtil.ASSET_TYPE_PORTLET_IDS[i]);
+						Field.PORTLET_ID, TagsUtil.ASSET_TYPE_PORTLET_IDS[i]);
 					TermQuery termQuery = new TermQuery(term);
 
 					portletIdsQuery.add(termQuery, BooleanClause.Occur.SHOULD);
@@ -370,14 +369,11 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			BooleanQuery searchQuery = new BooleanQuery();
 
 			if (Validator.isNotNull(keywords)) {
-				LuceneUtil.addTerm(searchQuery, LuceneFields.TITLE, keywords);
-				LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
-				LuceneUtil.addTerm(
-					searchQuery, LuceneFields.DESCRIPTION, keywords);
-				LuceneUtil.addTerm(
-					searchQuery, LuceneFields.PROPERTIES, keywords);
-				LuceneUtil.addTerm(
-					searchQuery, LuceneFields.TAGS_ENTRIES, keywords);
+				LuceneUtil.addTerm(searchQuery, Field.TITLE, keywords);
+				LuceneUtil.addTerm(searchQuery, Field.CONTENT, keywords);
+				LuceneUtil.addTerm(searchQuery, Field.DESCRIPTION, keywords);
+				LuceneUtil.addTerm(searchQuery, Field.PROPERTIES, keywords);
+				LuceneUtil.addTerm(searchQuery, Field.TAGS_ENTRIES, keywords);
 			}
 
 			BooleanQuery fullQuery = new BooleanQuery();
@@ -621,8 +617,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 	protected TagsAsset getAsset(Document doc)
 		throws PortalException, SystemException {
 
-		String portletId = GetterUtil.getString(
-			doc.get(LuceneFields.PORTLET_ID));
+		String portletId = GetterUtil.getString(doc.get(Field.PORTLET_ID));
 
 		if (portletId.equals(PortletKeys.BLOGS)) {
 			long entryId = GetterUtil.getLong(doc.get("entryId"));
@@ -665,8 +660,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			return tagsAssetPersistence.findByC_C(classNameId, classPK);
 		}
 		else if (portletId.equals(PortletKeys.JOURNAL)) {
-			long groupId = GetterUtil.getLong(
-				doc.get(LuceneFields.GROUP_ID));
+			long groupId = GetterUtil.getLong(doc.get(Field.GROUP_ID));
 			String articleId = doc.get("articleId");
 			//double version = GetterUtil.getDouble(doc.get("version"));
 
@@ -691,7 +685,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		}
 		else if (portletId.equals(PortletKeys.WIKI)) {
 			long nodeId = GetterUtil.getLong(doc.get("nodeId"));
-			String title = doc.get(LuceneFields.TITLE);
+			String title = doc.get(Field.TITLE);
 
 			long pageResourcePrimKey =
 				wikiPageResourceLocalService.getPageResourcePrimKey(

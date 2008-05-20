@@ -24,6 +24,7 @@ package com.liferay.portal.search;
 
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentSummary;
+import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchException;
@@ -34,7 +35,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.search.lucene.LuceneFields;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
@@ -94,7 +94,7 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 			for (int i = 0; i < results.getLength(); i++) {
 				Document result = results.doc(i);
 
-				String portletId = result.get(LuceneFields.PORTLET_ID);
+				String portletId = result.get(Field.PORTLET_ID);
 
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(
 					themeDisplay.getCompanyId(), portletId);
@@ -106,8 +106,7 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 				String portletTitle = PortalUtil.getPortletTitle(
 					portletId, themeDisplay.getUser());
 
-				long groupId = GetterUtil.getLong(
-					result.get(LuceneFields.GROUP_ID));
+				long groupId = GetterUtil.getLong(result.get(Field.GROUP_ID));
 
 				String title = StringPool.BLANK;
 
@@ -116,7 +115,7 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 				String url = portletURL.toString();
 
 				Date modifedDate = DateTools.stringToDate(
-					result.get(LuceneFields.MODIFIED));
+					result.get(Field.MODIFIED));
 
 				String content = StringPool.BLANK;
 

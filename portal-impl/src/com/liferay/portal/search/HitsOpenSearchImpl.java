@@ -24,13 +24,13 @@ package com.liferay.portal.search;
 
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentSummary;
+import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.search.lucene.LuceneFields;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
@@ -87,7 +87,7 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 			for (int i = 0; i < results.getLength(); i++) {
 				Document result = results.doc(i);
 
-				String portletId = result.get(LuceneFields.PORTLET_ID);
+				String portletId = result.get(Field.PORTLET_ID);
 
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(
 					themeDisplay.getCompanyId(), portletId);
@@ -95,8 +95,7 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 				//String portletTitle = PortalUtil.getPortletTitle(
 				//	portletId, themeDisplay.getUser());
 
-				long groupId = GetterUtil.getLong(
-					result.get(LuceneFields.GROUP_ID));
+				long groupId = GetterUtil.getLong(result.get(Field.GROUP_ID));
 
 				PortletURL portletURL = getPortletURL(req, portletId, groupId);
 
@@ -109,7 +108,7 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 				String title = docSummary.getTitle();
 				String url = getURL(themeDisplay, groupId, result, portletURL);
 				Date modifedDate = DateTools.stringToDate(
-					result.get(LuceneFields.MODIFIED));
+					result.get(Field.MODIFIED));
 				String content = docSummary.getContent();
 				double score = hits.score(i);
 

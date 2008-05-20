@@ -23,6 +23,7 @@
 package com.liferay.portal.search.lucene;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
@@ -164,7 +165,7 @@ public class LuceneUtil {
 	}
 
 	public static void addModifiedDate(Document doc) {
-		doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
+		doc.add(LuceneFields.getDate(Field.MODIFIED));
 	}
 
 	public static void addTerm(

@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.search.lucene.LuceneFields;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
@@ -77,8 +76,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		BooleanQuery booleanQuery = new BooleanQuery();
 
-		LuceneUtil.addRequiredTerm(
-			booleanQuery, LuceneFields.PORTLET_ID, PORTLET_ID);
+		LuceneUtil.addRequiredTerm(booleanQuery, Field.PORTLET_ID, PORTLET_ID);
 
 		LuceneUtil.addRequiredTerm(booleanQuery, "threadId", threadId);
 

@@ -146,7 +146,7 @@ try {
 
 	Map orderableHeaders = new HashMap();
 
-	orderableHeaders.put(pluginType + "-plugin", LuceneFields.TITLE);
+	orderableHeaders.put(pluginType + "-plugin", Field.TITLE);
 	orderableHeaders.put("modified-date", "modified-date");
 
 	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.get(pageContext, "no-" + pluginType + "-plugins-were-found"));
@@ -170,7 +170,7 @@ try {
 		docComparator.addOrderBy("modified-date");
 	}
 	else {
-		docComparator.addOrderBy(LuceneFields.TITLE);
+		docComparator.addOrderBy(Field.TITLE);
 		docComparator.addOrderBy("version");
 	}
 
@@ -186,7 +186,7 @@ try {
 	for (int i = 0; i < results.size(); i++) {
 		Document doc = (Document)results.get(i);
 
-		String pluginPackageName = doc.get(LuceneFields.TITLE);
+		String pluginPackageName = doc.get(Field.TITLE);
 		String pluginPackageModuleId = doc.get("moduleId");
 		String pluginPackageGroupId = doc.get("groupId");
 		String pluginPackageArtifactId = doc.get("artifactId");
