@@ -86,7 +86,7 @@
 	}
 </script>
 
-<c:if test="<%= results.size() > 0 %>">
+<c:if test="<%= images.size() > 0 %>">
 	<div class="taglib-search-iterator-page-iterator-top">
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</div>
@@ -95,8 +95,8 @@
 <div>
 
 	<%
-	for (int i = 0; i < results.size(); i++) {
-		IGImage image = (IGImage)results.get(i);
+	for (int i = 0; i < images.size(); i++) {
+		IGImage image = (IGImage)images.get(i);
 
 		Image largeImage = ImageLocalServiceUtil.getImage(image.getLargeImageId());
 		Image smallImage = ImageLocalServiceUtil.getImage(image.getSmallImageId());
@@ -139,7 +139,7 @@
 
 </div>
 
-<c:if test="<%= results.size() > 0 %>">
+<c:if test="<%= images.size() > 0 %>">
 	<div class="taglib-search-iterator-page-iterator-bottom">
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</div>

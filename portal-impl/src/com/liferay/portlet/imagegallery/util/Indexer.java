@@ -22,26 +22,23 @@
 
 package com.liferay.portlet.imagegallery.util;
 
+import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentSummary;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.search.lucene.LuceneFields;
-import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
-
-import java.io.IOException;
+import com.liferay.util.search.DocumentImpl;
 
 import javax.portlet.PortletURL;
-
-import org.apache.lucene.document.Document;
-import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.index.Term;
 
 /**
  * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Bruno Farache
  *
  */
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
@@ -51,75 +48,64 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void addImage(
 			long companyId, long groupId, long folderId, long imageId,
 			String name, String description, String[] tagsEntries)
-		throws IOException {
+		throws SearchException {
 
-		Document doc = getAddImageDocument(
+		Document doc = getImageDocument(
 			companyId, groupId, folderId, imageId, name, description,
 			tagsEntries);
 
-		IndexWriter writer = null;
-
-		try {
-			writer = LuceneUtil.getWriter(companyId);
-
-			writer.addDocument(doc);
-		}
-		finally {
-			if (writer != null) {
-				LuceneUtil.write(companyId);
-			}
-		}
+		SearchEngineUtil.addDocument(companyId, doc);
 	}
 
 	public static void deleteImage(long companyId, long imageId)
-		throws IOException {
+		throws SearchException {
 
-		LuceneUtil.deleteDocuments(
-			companyId,
-			new Term(
-				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, imageId)));
+		SearchEngineUtil.deleteDocument(companyId, getImageUID(imageId));
 	}
 
-	public static Document getAddImageDocument(
+	public static Document getImageDocument(
 		long companyId, long groupId, long folderId, long imageId,
 		String name, String description, String[] tagsEntries) {
 
-		Document doc = new Document();
+		Document doc = new DocumentImpl();
 
-		LuceneUtil.addKeyword(
-			doc, LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, imageId));
+		doc.addUID(PORTLET_ID, imageId);
 
-		LuceneUtil.addKeyword(doc, LuceneFields.COMPANY_ID, companyId);
-		LuceneUtil.addKeyword(doc, LuceneFields.PORTLET_ID, PORTLET_ID);
-		LuceneUtil.addKeyword(doc, LuceneFields.GROUP_ID, groupId);
+		doc.addKeyword(Field.COMPANY_ID, companyId);
+		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
+		doc.addKeyword(Field.GROUP_ID, groupId);
 
-		LuceneUtil.addText(doc, LuceneFields.NAME, name);
-		LuceneUtil.addText(doc, LuceneFields.DESCRIPTION, description);
+		doc.addText(Field.NAME, name);
+		doc.addText(Field.DESCRIPTION, description);
 
-		LuceneUtil.addModifiedDate(doc);
+		doc.addModifiedDate();
 
-		LuceneUtil.addKeyword(doc, "folderId", folderId);
-		LuceneUtil.addKeyword(doc, "imageId", imageId);
+		doc.addKeyword("folderId", folderId);
+		doc.addKeyword("imageId", imageId);
 
-		LuceneUtil.addKeyword(doc, LuceneFields.TAGS_ENTRIES, tagsEntries);
+		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
 		return doc;
+	}
+
+	public static String getImageUID(long imageId) {
+		Document doc = new DocumentImpl();
+
+		doc.addUID(PORTLET_ID, imageId);
+
+		return doc.get(Field.UID);
 	}
 
 	public static void updateImage(
 			long companyId, long groupId, long folderId, long imageId,
 			String name, String description, String[] tagsEntries)
-		throws IOException {
+		throws SearchException {
 
-		try {
-			deleteImage(companyId, imageId);
-		}
-		catch (IOException ioe) {
-		}
-
-		addImage(
+		Document doc = getImageDocument(
 			companyId, groupId, folderId, imageId, name, description,
 			tagsEntries);
+
+		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}
 
 	public DocumentSummary getDocumentSummary(
@@ -127,15 +113,15 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		// Title
 
-		String title = doc.get(LuceneFields.TITLE);
+		String title = doc.get(Field.TITLE);
 
 		// Content
 
-		String content = doc.get(LuceneFields.CONTENT);
+		String content = doc.get(Field.CONTENT);
 
 		content = StringUtil.shorten(content, 200);
 
-		// URL
+		// Portlet URL
 
 		String imageId = doc.get("imageId");
 

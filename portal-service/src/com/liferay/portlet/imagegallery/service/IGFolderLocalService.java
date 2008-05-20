@@ -183,8 +183,8 @@ public interface IGFolderLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long[] folderIds, java.lang.String keywords)
-		throws com.liferay.portal.SystemException;
+		long groupId, long[] folderIds, java.lang.String keywords, int start,
+		int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,

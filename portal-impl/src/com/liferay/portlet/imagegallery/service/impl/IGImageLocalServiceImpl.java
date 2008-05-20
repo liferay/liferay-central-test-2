@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.image.ImageProcessor;
 import com.liferay.portal.kernel.image.ImageProcessorUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
@@ -200,8 +201,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 					image.getCompanyId(), folder.getGroupId(), folderId,
 					imageId, name, description, tagsEntries);
 			}
-			catch (IOException ioe) {
-				_log.error("Indexing " + imageId, ioe);
+			catch (SearchException se) {
+				_log.error("Indexing " + imageId, se);
 			}
 
 			return image;
@@ -273,8 +274,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		try {
 			Indexer.deleteImage(image.getCompanyId(), image.getImageId());
 		}
-		catch (IOException ioe) {
-			_log.error("Deleting index " + image.getImageId(), ioe);
+		catch (SearchException se) {
+			_log.error("Deleting index " + image.getImageId(), se);
 		}
 
 		// Tags
@@ -488,8 +489,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 					folder.getFolderId(), imageId, name, description,
 					tagsEntries);
 			}
-			catch (IOException ioe) {
-				_log.error("Indexing " + imageId, ioe);
+			catch (SearchException se) {
+				_log.error("Indexing " + imageId, se);
 			}
 
 			return image;

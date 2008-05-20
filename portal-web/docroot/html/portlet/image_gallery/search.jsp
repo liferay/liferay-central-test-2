@@ -78,29 +78,26 @@ portletURL.setParameter("keywords", keywords);
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
 
-Hits hits = null;
-
 try {
-	hits = IGFolderLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), folderIdsArray, keywords);
+	Hits results = IGFolderLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), folderIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
 
-	Hits resultHits = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
-	int total = hits.getLength();
+	int total = results.getLength();
 
 	searchContainer.setTotal(total);
 
-	List results = new ArrayList(resultHits.getLength());
-	List scores = new ArrayList(resultHits.getLength());
+	List images = new ArrayList(results.getDocs().length);
+	List scores = new ArrayList(results.getDocs().length);
 
-	for (int i = 0; i < resultHits.getLength(); i++) {
-		Document doc = resultHits.doc(i);
+	for (int i = 0; i < results.getDocs().length; i++) {
+		Document doc = results.doc(i);
 
 		long imageId = GetterUtil.getLong(doc.get("imageId"));
 
 		try {
 			IGImage image = IGImageLocalServiceUtil.getImage(imageId);
 
-			results.add(image);
-			scores.add(new Double(resultHits.score(i)));
+			images.add(image);
+			scores.add(new Double(results.score(i)));
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -122,11 +119,6 @@ try {
 }
 catch (Exception e) {
 	_log.error(e.getMessage());
-}
-finally {
-	if (hits != null) {
-		hits.closeSearcher();
-	}
 }
 %>
 

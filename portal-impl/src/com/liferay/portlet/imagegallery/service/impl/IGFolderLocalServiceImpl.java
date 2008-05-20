@@ -24,7 +24,9 @@ package com.liferay.portlet.imagegallery.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -41,7 +43,7 @@ import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.service.base.IGFolderLocalServiceBaseImpl;
 import com.liferay.portlet.imagegallery.util.Indexer;
 import com.liferay.util.FileUtil;
-import com.liferay.util.lucene.HitsImpl;
+import com.liferay.util.search.QueryImpl;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -49,12 +51,9 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.document.Document;
-import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
-import org.apache.lucene.search.Searcher;
 import org.apache.lucene.search.TermQuery;
 
 /**
@@ -303,17 +302,13 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 	}
 
 	public void reIndex(String[] ids) throws SystemException {
-		if (LuceneUtil.INDEX_READ_ONLY) {
+		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
 
 		long companyId = GetterUtil.getLong(ids[0]);
 
-		IndexWriter writer = null;
-
 		try {
-			writer = LuceneUtil.getWriter(companyId);
-
 			List<IGFolder> folders = igFolderPersistence.findByCompanyId(
 				companyId);
 
@@ -333,11 +328,11 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 						IGImage.class.getName(), imageId);
 
 					try {
-						Document doc = Indexer.getAddImageDocument(
+						Document doc = Indexer.getImageDocument(
 							companyId, groupId, folderId, imageId, name,
 							description, tagsEntries);
 
-						writer.addDocument(doc);
+						SearchEngineUtil.addDocument(companyId, doc);
 					}
 					catch (Exception e1) {
 						_log.error("Reindexing " + imageId, e1);
@@ -351,27 +346,14 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		catch (Exception e2) {
 			throw new SystemException(e2);
 		}
-		finally {
-			try {
-				if (writer != null) {
-					LuceneUtil.write(companyId);
-				}
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
 	}
 
 	public Hits search(
-			long companyId, long groupId, long[] folderIds, String keywords)
+			long companyId, long groupId, long[] folderIds, String keywords,
+			int start, int end)
 		throws SystemException {
 
-		Searcher searcher = null;
-
 		try {
-			HitsImpl hits = new HitsImpl();
-
 			BooleanQuery contextQuery = new BooleanQuery();
 
 			LuceneUtil.addRequiredTerm(
@@ -413,14 +395,11 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 			}
 
-			searcher = LuceneUtil.getSearcher(companyId);
-
-			hits.recordHits(searcher.search(fullQuery), searcher);
-
-			return hits;
+			return SearchEngineUtil.search(
+				companyId, new QueryImpl(fullQuery), start, end);
 		}
 		catch (Exception e) {
-			return LuceneUtil.closeSearcher(searcher, keywords, e);
+			throw new SystemException(e);
 		}
 	}
 
