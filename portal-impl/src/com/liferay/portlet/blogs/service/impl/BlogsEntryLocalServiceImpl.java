@@ -61,7 +61,6 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
 
@@ -520,11 +519,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		long companyId = GetterUtil.getLong(ids[0]);
 
-		IndexWriter writer = null;
-
 		try {
-			writer = LuceneUtil.getWriter(companyId);
-
 			for (BlogsEntry entry :
 					blogsEntryPersistence.findByCompanyId(companyId)) {
 
@@ -554,16 +549,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		}
 		catch (Exception e2) {
 			throw new SystemException(e2);
-		}
-		finally {
-			try {
-				if (writer != null) {
-					LuceneUtil.write(companyId);
-				}
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
 		}
 	}
 
