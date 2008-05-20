@@ -70,8 +70,8 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 				</c:if>
 
 				<td>
-					<div style="font-size: xx-small; padding-bottom: 2px;">
-						<liferay-ui:message key="average" /> (<span id="<%= randomNamespace %>totalEntries"><%= stats.getTotalEntries() %></span> <%= LanguageUtil.get(pageContext, (stats.getTotalEntries() == 1) ? "vote" : "votes") %>)<br />
+					<div id="<%= randomNamespace %>totalEntries" style="font-size: xx-small; padding-bottom: 2px;">
+						<liferay-ui:message key="average" /> (<%= stats.getTotalEntries() %> <%= LanguageUtil.get(pageContext, (stats.getTotalEntries() == 1) ? "vote" : "votes") %>)
 					</div>
 
 					<div id="<%= randomNamespace %>averageRating" onmousemove="ToolTip.show(event, this, '<%= stats.getAverageScore() %> <liferay-ui:message key="stars" />')">
@@ -94,7 +94,11 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 									url: url,
 									dataType: 'json',
 									success: function(message) {
-										jQuery('#<%= randomNamespace %>totalEntries').html(message.totalEntries);
+										var totalEntries = jQuery('#<%= randomNamespace %>totalEntries');
+										var entriesHtml = (message.totalEntries == 1) ? '<%= LanguageUtil.get(pageContext, "average") %> (' + message.totalEntries + ' <%= LanguageUtil.get(pageContext, "vote") %>)' : '<%= LanguageUtil.get(pageContext, "average") %> (' + message.totalEntries + ' <%= LanguageUtil.get(pageContext, "votes") %>)';
+
+										totalEntries.html(entriesHtml);
+
 										jQuery('#<%= randomNamespace %>averageRating').mousemove(
 											function(event) {
 												Tooltip.show(event, this, message.averageScore.toFixed(1) + ' <liferay-ui:message key="stars" />');
@@ -134,8 +138,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 						onmousemove="ToolTip.show(event, this, '<liferay-ui:message key="sign-in-to-vote" />')"
 					</c:if>
 				>
-					<a class="rating rate-up <%= (yourScore > 0) ? "rated" : "" %>" href="javascript: ;"></a>
-					<a class="rating rate-down <%= (yourScore < 0) ? "rated" : "" %>" href="javascript: ;"></a>
+					<a class="rating rate-up <%= (yourScore > 0) ? "rated" : "" %>" href="javascript: ;"></a><a class="rating rate-down <%= (yourScore < 0) ? "rated" : "" %>" href="javascript: ;"></a>
 				</li>
 				<li
 					class="total-votes" id="<%= randomNamespace %>totalEntries"
@@ -184,11 +187,8 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 										if (message.totalEntries == 0) {
 											entriesHtml = '<span class="zero-total">(0 <%= LanguageUtil.get(pageContext, "votes") %>)</span>';
 										}
-										else if (message.totalEntries == 1) {
-											entriesHtml = '<span class="entries-total">(1 <%= LanguageUtil.get(pageContext, "vote") %>)</span>';
-										}
 										else {
-											entriesHtml = '<span class="entries-total">(' + message.totalEntries + ' <%= LanguageUtil.get(pageContext, "votes") %>)</span>';
+											entriesHtml = (message.totalEntries == 1) ? '<span class="total-entries">(1 <%= LanguageUtil.get(pageContext, "vote") %>)</span>' : '<span class="total-entries">(' + message.totalEntries + ' <%= LanguageUtil.get(pageContext, "votes") %>)</span>';
 										}
 
 										totalRating.html(ratingHtml);

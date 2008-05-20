@@ -1223,11 +1223,27 @@ fieldset:last-child, .uni-form fieldset:last-child {
 	margin: 0;
 }
 
+.ie .taglib-ratings.thumbs {
+	height: 1%;
+}
+
+.taglib-ratings.thumbs:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+
 .taglib-ratings.thumbs li {
 	float: left;
 	list-style-image: none;
 	list-style-position: outside;
 	list-style-type: none;
+}
+
+.taglib-ratings.thumbs .total-entries {
+	color: #777777;
 }
 
 .taglib-ratings.thumbs .total-rating {
@@ -1254,10 +1270,6 @@ fieldset:last-child, .uni-form fieldset:last-child {
 	font-weight: bold;
 }
 
-.taglib-ratings.thumbs .entries-total {
-	color: #777777;
-}
-
 .taglib-ratings.thumbs .zero-total {
 	color: #aaaaaa;
 }
@@ -1271,18 +1283,6 @@ fieldset:last-child, .uni-form fieldset:last-child {
 	line-height: 0;
 	text-indent: -9999em;
 	width: 18px;
-}
-
-.taglib-ratings.thumbs:after {
-	clear: both;
-	content: ".";
-	display: block;
-	height: 0;
-	visibility: hidden;
-}
-
-.ie .taglib-ratings.thumbs {
-	height: 1%;
 }
 
 .taglib-ratings.thumbs .rate-up {
