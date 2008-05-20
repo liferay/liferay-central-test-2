@@ -139,7 +139,7 @@ if (entry != null) {
 	}
 
 	<c:if test="<%= (entry == null) || entry.isDraft() %>">
-		setInterval('<portlet:namespace />saveEntry(true)', 10000);
+		setInterval('<portlet:namespace />saveEntry(true)', 30000);
 	</c:if>
 
 	jQuery(
