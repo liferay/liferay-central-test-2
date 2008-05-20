@@ -28,6 +28,7 @@ import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -545,8 +546,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					messageId, subject, body, tagsEntries);
 			}
 		}
-		catch (IOException ioe) {
-			_log.error("Indexing " + messageId, ioe);
+		catch (SearchException se) {
+			_log.error("Indexing " + messageId, se);
 		}
 
 		logAddMessage(messageId, stopWatch, 11);
@@ -670,8 +671,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			Indexer.deleteMessage(
 				message.getCompanyId(), message.getMessageId());
 		}
-		catch (IOException ioe) {
-			_log.error("Deleting index " + message.getMessageId(), ioe);
+		catch (SearchException se) {
+			_log.error("Deleting index " + message.getMessageId(), se);
 		}
 
 		// Attachments
@@ -1227,8 +1228,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					tagsEntries);
 			}
 		}
-		catch (IOException ioe) {
-			_log.error("Indexing " + messageId, ioe);
+		catch (SearchException se) {
+			_log.error("Indexing " + messageId, se);
 		}
 
 		return message;

@@ -308,11 +308,12 @@ public class MBCategoryLocalServiceUtil {
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
 		long groupId, long[] categoryIds, long threadId,
-		java.lang.String keywords) throws com.liferay.portal.SystemException {
+		java.lang.String keywords, int start, int end)
+		throws com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 
 		return mbCategoryLocalService.search(companyId, groupId, categoryIds,
-			threadId, keywords);
+			threadId, keywords, start, end);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory updateCategory(

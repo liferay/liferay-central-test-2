@@ -181,7 +181,8 @@ public interface MBCategoryLocalService {
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
 		long groupId, long[] categoryIds, long threadId,
-		java.lang.String keywords) throws com.liferay.portal.SystemException;
+		java.lang.String keywords, int start, int end)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBCategory updateCategory(
 		long categoryId, long parentCategoryId, java.lang.String name,

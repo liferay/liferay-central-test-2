@@ -93,25 +93,25 @@ headerNames.add("score");
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-messages-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
 
-Hits hits = null;
-
 try {
-	hits = MBCategoryLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), categoryIdsArray, threadId, keywords);
+	Hits results = MBCategoryLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), categoryIdsArray, threadId, keywords, searchContainer.getStart(), searchContainer.getEnd());
 
-	ThreadHits threadHits = new ThreadHits();
-
-	threadHits.recordHits(hits);
-
-	hits = threadHits;
-
-	Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
-	int total = hits.getLength();
+	int total = results.getLength();
 
 	searchContainer.setTotal(total);
 
 	List resultRows = searchContainer.getResultRows();
 
-	for (int i = 0; i < results.getLength(); i++) {
+	Set<Long> threadIds = new HashSet<Long>();
+
+	for (int i = 0; i < results.getDocs().length; i++) {
+		if (!threadIds.contains(threadId)) {
+			threadIds.add(threadId);
+		}
+		else {
+			continue;
+		}
+
 		Document doc = results.doc(i);
 
 		ResultRow row = new ResultRow(doc, i, i);
@@ -200,11 +200,6 @@ try {
 }
 catch (Exception e) {
 	_log.error(e.getMessage());
-}
-finally {
-	if (hits != null) {
-		hits.closeSearcher();
-	}
 }
 %>
 
