@@ -78,6 +78,13 @@ public class SearchEngineUtil {
 		return _instance._search(companyId, query, start, end);
 	}
 
+	public static Hits search(
+			long companyId, Query query, Sort sort, int start, int end)
+		throws SearchException {
+
+		return _instance._search(companyId, query, sort, start, end);
+	}
+
 	public static void setCurrentSearchEngine(String name) {
 		_instance._setCurrentSearchEngine(name);
 	}
@@ -206,6 +213,21 @@ public class SearchEngineUtil {
 		try {
 			return _instance._getSearcher().search(
 				companyId, query, start, end);
+		}
+		finally {
+			_setContextClassLoader(contextClassLoader);
+		}
+	}
+
+	private Hits _search(
+			long companyId, Query query, Sort sort, int start, int end)
+		throws SearchException {
+
+		ClassLoader contextClassLoader = _getContextClassLoader();
+
+		try {
+			return _instance._getSearcher().search(
+				companyId, query, sort, start, end);
 		}
 		finally {
 			_setContextClassLoader(contextClassLoader);

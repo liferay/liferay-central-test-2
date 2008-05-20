@@ -793,20 +793,21 @@ public class JournalArticleLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, java.lang.String keywords)
-		throws com.liferay.portal.SystemException {
-		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
-
-		return journalArticleLocalService.search(companyId, groupId, keywords);
-	}
-
-	public static com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, java.lang.String keywords, java.lang.String sortField)
+		long groupId, java.lang.String keywords, int start, int end)
 		throws com.liferay.portal.SystemException {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
 
 		return journalArticleLocalService.search(companyId, groupId, keywords,
-			sortField);
+			start, end);
+	}
+
+	public static com.liferay.portal.kernel.search.Hits search(long companyId,
+		long groupId, java.lang.String keywords, java.lang.String sortField,
+		int start, int end) throws com.liferay.portal.SystemException {
+		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
+
+		return journalArticleLocalService.search(companyId, groupId, keywords,
+			sortField, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> search(

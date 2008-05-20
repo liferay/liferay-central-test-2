@@ -26,6 +26,9 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -77,7 +80,7 @@ import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.LocalizationUtil;
 import com.liferay.util.MathUtil;
-import com.liferay.util.lucene.HitsImpl;
+import com.liferay.util.search.QueryImpl;
 
 import java.io.File;
 import java.io.IOException;
@@ -95,12 +98,8 @@ import javax.portlet.PortletPreferences;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
-import org.apache.lucene.search.Searcher;
-import org.apache.lucene.search.Sort;
-import org.apache.lucene.search.SortField;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -514,8 +513,8 @@ public class JournalArticleLocalServiceImpl
 					article.getDisplayDate(), tagsEntries);
 			}
 		}
-		catch (IOException ioe) {
-			_log.error("Indexing " + article.getId(), ioe);
+		catch (SearchException se) {
+			_log.error("Indexing " + article.getId(), se);
 		}
 
 		return article;
@@ -569,8 +568,8 @@ public class JournalArticleLocalServiceImpl
 						article.getCompanyId(), article.getArticleId());
 				}
 			}
-			catch (IOException ioe) {
-				_log.error("Removing index " + article.getId(), ioe);
+			catch (SearchException se) {
+				_log.error("Removing index " + article.getId(), se);
 			}
 
 			JournalContentUtil.clearCache(
@@ -676,8 +675,8 @@ public class JournalArticleLocalServiceImpl
 					article.getCompanyId(), article.getArticleId());
 			}
 		}
-		catch (IOException ioe) {
-			_log.error("Deleting index " + article.getPrimaryKey(), ioe);
+		catch (SearchException se) {
+			_log.error("Deleting index " + article.getPrimaryKey(), se);
 		}
 
 		// Email
@@ -810,8 +809,8 @@ public class JournalArticleLocalServiceImpl
 					article.getCompanyId(), article.getArticleId());
 			}
 		}
-		catch (IOException ioe) {
-			_log.error("Removing index " + article.getId(), ioe);
+		catch (SearchException se) {
+			_log.error("Removing index " + article.getId(), se);
 		}
 	}
 
@@ -1332,17 +1331,13 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public void reIndex(String[] ids) throws SystemException {
-		if (LuceneUtil.INDEX_READ_ONLY) {
+		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
 
 		long companyId = GetterUtil.getLong(ids[0]);
 
-		IndexWriter writer = null;
-
 		try {
-			writer = LuceneUtil.getWriter(companyId);
-
 			for (JournalArticle article :
 					journalArticlePersistence.findByCompanyId(companyId)) {
 
@@ -1361,13 +1356,13 @@ public class JournalArticleLocalServiceImpl
 						JournalArticle.class.getName(), resourcePrimKey);
 
 					try {
-						org.apache.lucene.document.Document doc =
-							Indexer.getAddArticleDocument(
+						com.liferay.portal.kernel.search.Document doc =
+							Indexer.getArticleDocument(
 								companyId, groupId, articleId, version, title,
 								description, content, type, displayDate,
 								tagsEntries);
 
-						writer.addDocument(doc);
+						SearchEngineUtil.addDocument(companyId, doc);
 					}
 					catch (Exception e1) {
 						_log.error("Reindexing " + article.getId(), e1);
@@ -1380,16 +1375,6 @@ public class JournalArticleLocalServiceImpl
 		}
 		catch (Exception e2) {
 			throw new SystemException(e2);
-		}
-		finally {
-			try {
-				if (writer != null) {
-					LuceneUtil.write(companyId);
-				}
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
 		}
 	}
 
@@ -1417,21 +1402,19 @@ public class JournalArticleLocalServiceImpl
 		return article;
 	}
 
-	public Hits search(long companyId, long groupId, String keywords)
+	public Hits search(
+			long companyId, long groupId, String keywords, int start, int end)
 		throws SystemException {
 
-		return search(companyId, groupId, keywords, "displayDate");
+		return search(companyId, groupId, keywords, "displayDate", start, end);
 	}
 
 	public Hits search(
-			long companyId, long groupId, String keywords, String sortField)
+			long companyId, long groupId, String keywords, String sortField,
+			int start, int end)
 		throws SystemException {
 
-		Searcher searcher = null;
-
 		try {
-			HitsImpl hits = new HitsImpl();
-
 			BooleanQuery contextQuery = new BooleanQuery();
 
 			LuceneUtil.addRequiredTerm(
@@ -1461,29 +1444,13 @@ public class JournalArticleLocalServiceImpl
 				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 			}
 
-			searcher = LuceneUtil.getSearcher(companyId);
+			Sort sort = new Sort(sortField, true);
 
-			Sort sort = new Sort(new SortField(sortField, true));
-
-			try {
-				hits.recordHits(searcher.search(fullQuery, sort), searcher);
-			}
-			catch (RuntimeException re) {
-
-				// Trying to sort on a field when there are no results throws a
-				// RuntimeException that should not be rethrown
-
-				String msg = GetterUtil.getString(re.getMessage());
-
-				if (!msg.endsWith("does not appear to be indexed")) {
-					throw re;
-				}
-			}
-
-			return hits;
+			return SearchEngineUtil.search(
+				companyId, new QueryImpl(fullQuery), sort, start, end);
 		}
 		catch (Exception e) {
-			return LuceneUtil.closeSearcher(searcher, keywords, e);
+			throw new SystemException(e);
 		}
 	}
 
@@ -1733,8 +1700,8 @@ public class JournalArticleLocalServiceImpl
 				}
 			}
 		}
-		catch (IOException ioe) {
-			_log.error("Indexing " + article.getPrimaryKey(), ioe);
+		catch (SearchException se) {
+			_log.error("Indexing " + article.getPrimaryKey(), se);
 		}
 
 		return article;

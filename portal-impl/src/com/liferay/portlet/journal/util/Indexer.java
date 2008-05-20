@@ -22,28 +22,25 @@
 
 package com.liferay.portlet.journal.util;
 
+import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentSummary;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.search.lucene.LuceneFields;
-import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
+import com.liferay.util.search.DocumentImpl;
 
-import java.io.IOException;
 import java.io.StringReader;
 
 import java.util.Date;
 import java.util.List;
 
 import javax.portlet.PortletURL;
-
-import org.apache.lucene.document.Document;
-import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.index.Term;
 
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
@@ -53,6 +50,7 @@ import org.dom4j.io.SAXReader;
  *
  * @author Brian Wing Shun Chan
  * @author Harry Mark
+ * @author Bruno Farache
  *
  */
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
@@ -63,36 +61,22 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			long companyId, long groupId, String articleId, double version,
 			String title, String description, String content, String type,
 			Date displayDate, String[] tagsEntries)
-		throws IOException {
+		throws SearchException {
 
-		Document doc = getAddArticleDocument(
+		Document doc = getArticleDocument(
 			companyId, groupId, articleId, version, title, description, content,
 			type, displayDate, tagsEntries);
 
-		IndexWriter writer = null;
-
-		try {
-			writer = LuceneUtil.getWriter(companyId);
-
-			writer.addDocument(doc);
-		}
-		finally {
-			if (writer != null) {
-				LuceneUtil.write(companyId);
-			}
-		}
+		SearchEngineUtil.addDocument(companyId, doc);
 	}
 
 	public static void deleteArticle(long companyId, String articleId)
-		throws IOException {
+		throws SearchException {
 
-		LuceneUtil.deleteDocuments(
-			companyId,
-			new Term(
-				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, articleId)));
+		SearchEngineUtil.deleteDocument(companyId, getArticleUID(articleId));
 	}
 
-	public static Document getAddArticleDocument(
+	public static Document getArticleDocument(
 		long companyId, long groupId, String articleId, double version,
 		String title, String description, String content, String type,
 		Date displayDate, String[] tagsEntries) {
@@ -114,46 +98,49 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		content = HtmlUtil.extractText(content);
 
-		Document doc = new Document();
+		Document doc = new DocumentImpl();
 
-		LuceneUtil.addKeyword(
-			doc, LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, articleId));
+		doc.addUID(PORTLET_ID, articleId);
 
-		LuceneUtil.addKeyword(doc, LuceneFields.COMPANY_ID, companyId);
-		LuceneUtil.addKeyword(doc, LuceneFields.PORTLET_ID, PORTLET_ID);
-		LuceneUtil.addKeyword(doc, LuceneFields.GROUP_ID, groupId);
+		doc.addKeyword(Field.COMPANY_ID, companyId);
+		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
+		doc.addKeyword(Field.GROUP_ID, groupId);
 
-		LuceneUtil.addText(doc, LuceneFields.TITLE, title);
-		LuceneUtil.addText(doc, LuceneFields.CONTENT, content);
-		LuceneUtil.addText(doc, LuceneFields.DESCRIPTION, description);
+		doc.addText(Field.TITLE, title);
+		doc.addText(Field.CONTENT, content);
+		doc.addText(Field.DESCRIPTION, description);
 
-		LuceneUtil.addModifiedDate(doc);
+		doc.addModifiedDate();
 
-		LuceneUtil.addKeyword(doc, "articleId", articleId);
-		LuceneUtil.addKeyword(doc, "version", version);
-		LuceneUtil.addKeyword(doc, "type", type);
-		LuceneUtil.addDate(doc, "displayDate", displayDate);
+		doc.addKeyword("articleId", articleId);
+		doc.addKeyword("version", version);
+		doc.addKeyword("type", type);
+		doc.addDate("displayDate", displayDate);
 
-		LuceneUtil.addKeyword(doc, LuceneFields.TAGS_ENTRIES, tagsEntries);
+		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
 		return doc;
+	}
+
+	public static String getArticleUID(String articleId) {
+		Document doc = new DocumentImpl();
+
+		doc.addUID(PORTLET_ID, articleId);
+
+		return doc.get(Field.UID);
 	}
 
 	public static void updateArticle(
 			long companyId, long groupId, String articleId, double version,
 			String title, String description, String content, String type,
 			Date displayDate, String[] tagsEntries)
-		throws IOException {
+		throws SearchException {
 
-		try {
-			deleteArticle(companyId, articleId);
-		}
-		catch (IOException ioe) {
-		}
-
-		addArticle(
+		Document doc = getArticleDocument(
 			companyId, groupId, articleId, version, title, description, content,
 			type, displayDate, tagsEntries);
+
+		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}
 
 	public DocumentSummary getDocumentSummary(
@@ -161,15 +148,15 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		// Title
 
-		String title = doc.get(LuceneFields.TITLE);
+		String title = doc.get(Field.TITLE);
 
 		// Content
 
-		String content = doc.get(LuceneFields.CONTENT);
+		String content = doc.get(Field.CONTENT);
 
 		content = StringUtil.shorten(content, 200);
 
-		// URL
+		// Portlet URL
 
 		String groupId = doc.get("groupId");
 		String articleId = doc.get("articleId");

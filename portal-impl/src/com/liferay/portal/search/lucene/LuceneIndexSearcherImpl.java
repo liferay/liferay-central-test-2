@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.search.IndexSearcher;
 import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.search.QueryImpl;
 
@@ -37,6 +39,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.BooleanQuery;
+import org.apache.lucene.search.SortField;
 
 /**
  * <a href="LuceneIndexSearcherImpl.java.html"><b><i>View Source</i></b></a>
@@ -49,6 +52,15 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 	public Hits search(long companyId, Query query, int start, int end)
 		throws SearchException {
 
+		Sort sort = null;
+
+		return search(companyId, query, sort, start, end);
+	}
+
+	public Hits search(
+			long companyId, Query query, Sort sort, int start, int end)
+		throws SearchException {
+
 		LuceneHitsImpl hits = new LuceneHitsImpl();
 
 		org.apache.lucene.search.IndexSearcher searcher = null;
@@ -56,18 +68,27 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 		try {
 			searcher = LuceneUtil.getSearcher(companyId);
 
+			org.apache.lucene.search.Sort luceneSort = null;
+
+			if (sort != null) {
+				luceneSort = new org.apache.lucene.search.Sort(
+					new SortField(sort.getFieldName(), sort.isReverse()));
+			}
+
 			// LEP-5958
 
 			if (query instanceof QueryImpl) {
 				hits.recordHits(
-					searcher.search(((QueryImpl)query).getQuery()), searcher);
+					searcher.search(((QueryImpl)query).getQuery(), luceneSort),
+					searcher);
 			}
 			else {
 				QueryParser parser = new QueryParser(
 					StringPool.BLANK, LuceneUtil.getAnalyzer());
 
 				hits.recordHits(
-					searcher.search(parser.parse(query.parse())), searcher);
+					searcher.search(parser.parse(query.parse()), luceneSort),
+					searcher);
 			}
 
 			if ((start == SearchEngineUtil.ALL_POS) &&
@@ -77,6 +98,17 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 			}
 			else {
 				hits = hits.subset(start, end);
+			}
+		}
+		catch (RuntimeException re) {
+
+			// Trying to sort on a field when there are no results throws a
+			// RuntimeException that should not be rethrown
+
+			String msg = GetterUtil.getString(re.getMessage());
+
+			if (!msg.endsWith("does not appear to be indexed")) {
+				throw re;
 			}
 		}
 		catch (Exception e) {

@@ -23,18 +23,35 @@
 package com.liferay.portal.kernel.search;
 
 /**
- * <a href="IndexSearcher.java.html"><b><i>View Source</i></b></a>
+ * <a href="Sort.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  *
  */
-public interface IndexSearcher {
+public class Sort {
 
-	public Hits search(long companyId, Query query, int start, int end)
-		throws SearchException;
+	public Sort(String fieldName, boolean reverse) {
+		_fieldName = fieldName;
+		_reverse = reverse;
+	}
 
-	public Hits search(
-			long companyId, Query query, Sort sort, int start, int end)
-		throws SearchException;
+	public String getFieldName() {
+		return _fieldName;
+	}
+
+	public void setFieldName(String fieldName) {
+		_fieldName = fieldName;
+	}
+
+	public boolean isReverse() {
+		return _reverse;
+	}
+
+	public void setReverse(boolean reverse) {
+		_reverse = reverse;
+	}
+
+	private String _fieldName;
+	private boolean _reverse;
 
 }
