@@ -314,7 +314,7 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 						var instance = this;
 
 						var numField = instance._numField;
-						var inputs = newField.find('[@class$=input-field]');
+						var inputs = newField.find('[@class$=lfr-input-text]');
 						var selects = newField.find('select');
 						var label = newField.find('label');
 						var selectId = '<portlet:namespace/>fieldType' + numField;
