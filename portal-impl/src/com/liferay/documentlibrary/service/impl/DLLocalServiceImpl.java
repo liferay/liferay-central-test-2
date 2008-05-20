@@ -30,15 +30,16 @@ import com.liferay.documentlibrary.util.Hook;
 import com.liferay.documentlibrary.util.HookFactory;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.search.lucene.LuceneFields;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.FileUtil;
-import com.liferay.util.lucene.HitsImpl;
+import com.liferay.util.search.QueryImpl;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,7 +48,6 @@ import java.io.InputStream;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
-import org.apache.lucene.search.Searcher;
 import org.apache.lucene.search.TermQuery;
 
 /**
@@ -117,22 +117,18 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 	public Hits search(
 			long companyId, String portletId, long groupId,
-			long[] repositoryIds, String keywords)
+			long[] repositoryIds, String keywords, int start, int end)
 		throws SystemException {
 
-		Searcher searcher = null;
-
 		try {
-			HitsImpl hits = new HitsImpl();
-
 			BooleanQuery contextQuery = new BooleanQuery();
 
 			LuceneUtil.addRequiredTerm(
-				contextQuery, LuceneFields.PORTLET_ID, portletId);
+				contextQuery, Field.PORTLET_ID, portletId);
 
 			if (groupId > 0) {
 				LuceneUtil.addRequiredTerm(
-					contextQuery, LuceneFields.GROUP_ID, groupId);
+					contextQuery, Field.GROUP_ID, groupId);
 			}
 
 			if ((repositoryIds != null) && (repositoryIds.length > 0)) {
@@ -153,11 +149,9 @@ public class DLLocalServiceImpl implements DLLocalService {
 			BooleanQuery searchQuery = new BooleanQuery();
 
 			if (Validator.isNotNull(keywords)) {
-				LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
-				LuceneUtil.addTerm(
-					searchQuery, LuceneFields.PROPERTIES, keywords);
-				LuceneUtil.addTerm(
-					searchQuery, LuceneFields.TAGS_ENTRIES, keywords);
+				LuceneUtil.addTerm(searchQuery, Field.CONTENT, keywords);
+				LuceneUtil.addTerm(searchQuery, Field.PROPERTIES, keywords);
+				LuceneUtil.addTerm(searchQuery, Field.TAGS_ENTRIES, keywords);
 			}
 
 			BooleanQuery fullQuery = new BooleanQuery();
@@ -168,14 +162,11 @@ public class DLLocalServiceImpl implements DLLocalService {
 				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 			}
 
-			searcher = LuceneUtil.getSearcher(companyId);
-
-			hits.recordHits(searcher.search(fullQuery), searcher);
-
-			return hits;
+			return SearchEngineUtil.search(
+				companyId, new QueryImpl(fullQuery), start, end);
 		}
 		catch (Exception e) {
-			return LuceneUtil.closeSearcher(searcher, keywords, e);
+			throw new SystemException(e);
 		}
 	}
 

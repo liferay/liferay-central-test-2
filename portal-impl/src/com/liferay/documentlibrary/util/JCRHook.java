@@ -31,14 +31,14 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.jcr.JCRConstants;
 import com.liferay.portal.jcr.JCRFactory;
 import com.liferay.portal.jcr.JCRFactoryUtil;
+import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.search.lucene.LuceneUtil;
 
 import java.io.BufferedInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.ArrayList;
@@ -58,8 +58,6 @@ import javax.jcr.version.VersionIterator;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.document.Document;
-import org.apache.lucene.index.IndexWriter;
 
 /**
  * <a href="JCRHook.java.html"><b><i>View Source</i></b></a>
@@ -157,8 +155,8 @@ public class JCRHook extends BaseHook {
 					properties, tagsEntries);
 			}
 		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
+		catch (SearchException se) {
+			throw new SystemException(se);
 		}
 		catch (RepositoryException re) {
 			throw new SystemException(re);
@@ -209,8 +207,8 @@ public class JCRHook extends BaseHook {
 
 			session.save();
 		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
+		catch (SearchException se) {
+			throw new SystemException(se);
 		}
 		catch (PathNotFoundException pnfe) {
 			throw new NoSuchDirectoryException(dirName);
@@ -329,8 +327,8 @@ public class JCRHook extends BaseHook {
 
 			session.save();
 		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
+		catch (SearchException se) {
+			throw new SystemException(se);
 		}
 		catch (PathNotFoundException pnfe) {
 			throw new NoSuchFileException(fileName);
@@ -526,13 +524,9 @@ public class JCRHook extends BaseHook {
 		long groupId = GetterUtil.getLong(ids[2]);
 		long repositoryId = GetterUtil.getLong(ids[3]);
 
-		IndexWriter writer = null;
-
 		Session session = null;
 
 		try {
-			writer = LuceneUtil.getWriter(companyId);
-
 			session = JCRFactoryUtil.createSession();
 
 			Node rootNode = getRootNode(session, companyId);
@@ -547,11 +541,11 @@ public class JCRHook extends BaseHook {
 						JCRConstants.NT_FILE)) {
 
 					try {
-						Document doc = Indexer.getAddFileDocument(
+						Document doc = Indexer.getFileDocument(
 							companyId, portletId, groupId, repositoryId,
 							node.getName());
 
-						writer.addDocument(doc);
+						SearchEngineUtil.addDocument(companyId, doc);
 					}
 					catch (Exception e1) {
 						_log.error("Reindexing " + node.getName(), e1);
@@ -566,15 +560,6 @@ public class JCRHook extends BaseHook {
 			try {
 				if (session != null) {
 					session.logout();
-				}
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-
-			try {
-				if (writer != null) {
-					LuceneUtil.write(companyId);
 				}
 			}
 			catch (Exception e) {
@@ -619,8 +604,8 @@ public class JCRHook extends BaseHook {
 				companyId, portletId, groupId, repositoryId, fileName,
 				properties, tagsEntries);
 		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
+		catch (SearchException se) {
+			throw new SystemException(se);
 		}
 		catch (PathNotFoundException pnfe) {
 			throw new NoSuchFileException(fileName);
@@ -705,15 +690,15 @@ public class JCRHook extends BaseHook {
 					Indexer.deleteFile(
 						companyId, portletId, repositoryId, fileName);
 				}
-				catch (IOException ioe) {
+				catch (SearchException se) {
 				}
 
 				Indexer.addFile(
 					companyId, portletId, groupId, newRepositoryId, fileName);
 			}
 		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
+		catch (SearchException se) {
+			throw new SystemException(se);
 		}
 		catch (PathNotFoundException pnfe) {
 			throw new NoSuchFileException(fileName);
@@ -730,7 +715,7 @@ public class JCRHook extends BaseHook {
 
 	protected void deleteDirectory(
 			long companyId, String portletId, long repositoryId, Node dirNode)
-		throws IOException {
+		throws SearchException {
 
 		try {
 			NodeIterator itr = dirNode.getNodes();

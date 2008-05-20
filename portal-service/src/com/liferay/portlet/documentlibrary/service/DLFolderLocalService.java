@@ -183,7 +183,8 @@ public interface DLFolderLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long groupId, long[] folderIds, java.lang.String keywords)
+		long groupId, long[] folderIds, java.lang.String keywords, int start,
+		int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

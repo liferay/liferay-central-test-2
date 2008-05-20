@@ -96,19 +96,16 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-documents-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
 
-		Hits hits = null;
-
 		try {
-			hits = DLFolderLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), folderIdsArray, keywords);
+			Hits results = DLFolderLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), folderIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
 
-			Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
-			int total = hits.getLength();
+			int total = results.getLength();
 
 			searchContainer.setTotal(total);
 
 			List resultRows = searchContainer.getResultRows();
 
-			for (int i = 0; i < results.getLength(); i++) {
+			for (int i = 0; i < results.getDocs().length; i++) {
 				com.liferay.portal.kernel.search.Document doc = results.doc(i);
 
 				ResultRow row = new ResultRow(doc, i, i);
@@ -153,11 +150,6 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 			}
 		}
 		catch (Exception e) {
-		}
-		finally {
-			if (hits != null) {
-				hits.closeSearcher();
-			}
 		}
 		%>
 

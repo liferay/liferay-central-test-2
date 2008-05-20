@@ -25,18 +25,21 @@ package com.liferay.documentlibrary.util;
 import com.liferay.documentlibrary.service.impl.DLServiceImpl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentSummary;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.search.lucene.LuceneFields;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
+import com.liferay.util.search.DocumentImpl;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -49,15 +52,13 @@ import javax.portlet.PortletURL;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.document.Document;
-import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.index.Term;
 
 /**
  * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Harry Mark
+ * @author Bruno Farache
  *
  */
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
@@ -65,64 +66,39 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName)
-		throws IOException {
+		throws SearchException {
 
-		Document doc = getAddFileDocument(
+		Document doc = getFileDocument(
 			companyId, portletId, groupId, repositoryId, fileName);
 
-		IndexWriter writer = null;
-
-		try {
-			writer = LuceneUtil.getWriter(companyId);
-
-			writer.addDocument(doc);
-		}
-		finally {
-			if (writer != null) {
-				LuceneUtil.write(companyId);
-			}
-		}
+		SearchEngineUtil.addDocument(companyId, doc);
 	}
 
 	public static void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, String properties, String[] tagsEntries)
-		throws IOException {
+		throws SearchException {
 
-		Document doc = getAddFileDocument(
+		Document doc = getFileDocument(
 			companyId, portletId, groupId, repositoryId, fileName, properties,
 			tagsEntries);
 
-		IndexWriter writer = null;
-
-		try {
-			writer = LuceneUtil.getWriter(companyId);
-
-			writer.addDocument(doc);
-		}
-		finally {
-			if (writer != null) {
-				LuceneUtil.write(companyId);
-			}
-		}
+		SearchEngineUtil.addDocument(companyId, doc);
 	}
 
 	public static void deleteFile(
 			long companyId, String portletId, long repositoryId,
 			String fileName)
-		throws IOException {
+		throws SearchException {
 
-		LuceneUtil.deleteDocuments(
-			companyId,
-			new Term(
-				LuceneFields.UID,
-				LuceneFields.getUID(portletId, repositoryId, fileName)));
+		SearchEngineUtil.deleteDocument(companyId, getFileUID(
+			portletId, repositoryId, fileName));
 	}
 
-	public static Document getAddFileDocument(
+	public static Document getFileDocument(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName)
-		throws IOException {
+		throws SearchException {
 
 		try {
 			DLFileEntry fileEntry = null;
@@ -168,22 +144,22 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			String[] tagsEntries = TagsEntryLocalServiceUtil.getEntryNames(
 				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
-			return getAddFileDocument(
+			return getFileDocument(
 				companyId, portletId, groupId, repositoryId, fileName,
 				properties, tagsEntries);
 		}
 		catch (PortalException pe) {
-			throw new IOException(pe.getMessage());
+			throw new SearchException(pe.getMessage());
 		}
 		catch (SystemException se) {
-			throw new IOException(se.getMessage());
+			throw new SearchException(se.getMessage());
 		}
 	}
 
-	public static Document getAddFileDocument(
+	public static Document getFileDocument(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, String properties, String[] tagsEntries)
-		throws IOException {
+		throws SearchException {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
@@ -232,28 +208,33 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			return null;
 		}
 
-		Document doc = new Document();
+		Document doc = new DocumentImpl();
 
-		LuceneUtil.addKeyword(
-			doc, LuceneFields.UID,
-			LuceneFields.getUID(portletId, repositoryId, fileName));
+		doc.addUID(portletId, repositoryId, fileName);
 
-		LuceneUtil.addKeyword(doc, LuceneFields.COMPANY_ID, companyId);
-		LuceneUtil.addKeyword(doc, LuceneFields.PORTLET_ID, portletId);
-		LuceneUtil.addKeyword(doc, LuceneFields.GROUP_ID, groupId);
+		doc.addKeyword(Field.COMPANY_ID, companyId);
+		doc.addKeyword(Field.PORTLET_ID, portletId);
+		doc.addKeyword(Field.GROUP_ID, groupId);
 
-		doc.add(LuceneFields.getFile(LuceneFields.CONTENT, is, fileExt));
-
-		if (Validator.isNotNull(properties)) {
-			LuceneUtil.addText(doc, LuceneFields.PROPERTIES, properties);
+		try {
+			doc.addFile(Field.CONTENT, is, fileExt);
+		}
+		catch (IOException ioe) {
+			throw new SearchException(
+				"Cannot extract text from file" + companyId + " " + portletId +
+					" " + groupId + " " + repositoryId + " " + fileName);
 		}
 
-		LuceneUtil.addModifiedDate(doc);
+		if (Validator.isNotNull(properties)) {
+			doc.addText(Field.PROPERTIES, properties);
+		}
 
-		LuceneUtil.addKeyword(doc, "repositoryId", repositoryId);
-		LuceneUtil.addKeyword(doc, "path", fileName);
+		doc.addModifiedDate();
 
-		LuceneUtil.addKeyword(doc, LuceneFields.TAGS_ENTRIES, tagsEntries);
+		doc.addKeyword("repositoryId", repositoryId);
+		doc.addKeyword("path", fileName);
+
+		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
@@ -265,20 +246,25 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		return doc;
 	}
 
+	public static String getFileUID(
+			String portletId, long repositoryId, String fileName) {
+		Document doc = new DocumentImpl();
+
+		doc.addUID(portletId, repositoryId, fileName);
+
+		return doc.get(Field.UID);
+	}
+
 	public static void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, String properties, String[] tagsEntries)
-		throws IOException {
+		throws SearchException {
 
-		try {
-			deleteFile(companyId, portletId, repositoryId, fileName);
-		}
-		catch (IOException ioe) {
-		}
-
-		addFile(
+		Document doc = getFileDocument(
 			companyId, portletId, groupId, repositoryId, fileName, properties,
 			tagsEntries);
+
+		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}
 
 	public DocumentSummary getDocumentSummary(

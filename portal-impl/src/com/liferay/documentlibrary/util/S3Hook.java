@@ -25,12 +25,13 @@ package com.liferay.documentlibrary.util;
 import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.SystemProperties;
@@ -51,8 +52,6 @@ import java.util.Set;
 import org.apache.commons.id.uuid.UUID;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.document.Document;
-import org.apache.lucene.index.IndexWriter;
 
 import org.jets3t.service.S3Service;
 import org.jets3t.service.S3ServiceException;
@@ -103,8 +102,8 @@ public class S3Hook extends BaseHook {
 				companyId, portletId, groupId, repositoryId, fileName,
 				properties, tagsEntries);
 		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
+		catch (SearchException se) {
+			throw new SystemException(se);
 		}
 		catch (S3ServiceException s3se) {
 			throw new SystemException(s3se);
@@ -150,8 +149,8 @@ public class S3Hook extends BaseHook {
 
 			Indexer.deleteFile(companyId, portletId, repositoryId, fileName);
 		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
+		catch (SearchException se) {
+			throw new SystemException(se);
 		}
 		catch (S3ServiceException s3se) {
 			throw new SystemException(s3se);
@@ -279,11 +278,7 @@ public class S3Hook extends BaseHook {
 		long groupId = GetterUtil.getLong(ids[2]);
 		long repositoryId = GetterUtil.getLong(ids[3]);
 
-		IndexWriter writer = null;
-
 		try {
-			writer = LuceneUtil.getWriter(companyId);
-
 			S3Object[] searchObjects = _s3Service.listObjects(
 				_s3Bucket, getKey(companyId, repositoryId), null);
 
@@ -303,31 +298,18 @@ public class S3Hook extends BaseHook {
 				String fileName = itr.next();
 
 				try {
-					Document doc = Indexer.getAddFileDocument(
+					Document doc = Indexer.getFileDocument(
 						companyId, portletId, groupId, repositoryId, fileName);
 
-					writer.addDocument(doc);
+					SearchEngineUtil.addDocument(companyId, doc);
 				}
 				catch (Exception e) {
 					_log.error("Reindexing " + fileName, e);
 				}
 			}
 		}
-		catch (IOException ioe) {
-			throw new SearchException(ioe);
-		}
 		catch (S3ServiceException s3se) {
 			throw new SearchException(s3se);
-		}
-		finally {
-			try {
-				if (writer != null) {
-					LuceneUtil.write(companyId);
-				}
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
 		}
 	}
 
@@ -350,8 +332,8 @@ public class S3Hook extends BaseHook {
 				companyId, portletId, groupId, repositoryId, fileName,
 				properties, tagsEntries);
 		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
+		catch (SearchException se) {
+			throw new SystemException(se);
 		}
 		catch (S3ServiceException s3se) {
 			throw new SystemException(s3se);

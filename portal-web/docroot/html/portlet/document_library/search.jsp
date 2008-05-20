@@ -86,19 +86,16 @@ headerNames.add(StringPool.BLANK);
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-documents-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
 
-Hits hits = null;
-
 try {
-	hits = DLFolderLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), folderIdsArray, keywords);
+	Hits results = DLFolderLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), folderIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
 
-	Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
-	int total = hits.getLength();
+	int total = results.getLength();
 
 	searchContainer.setTotal(total);
 
 	List resultRows = searchContainer.getResultRows();
 
-	for (int i = 0; i < results.getLength(); i++) {
+	for (int i = 0; i < results.getDocs().length; i++) {
 		Document doc = results.doc(i);
 
 		ResultRow row = new ResultRow(doc, i, i);
@@ -177,11 +174,6 @@ try {
 }
 catch (Exception e) {
 	_log.error(e.getMessage());
-}
-finally {
-	if (hits != null) {
-		hits.closeSearcher();
-	}
 }
 %>
 
