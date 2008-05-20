@@ -87,8 +87,7 @@ public class PluginPackageIndexer implements Indexer {
 
 	public static void cleanIndex() throws IOException {
 		LuceneUtil.deleteDocuments(
-			CompanyConstants.SYSTEM,
-			new Term(Field.PORTLET_ID, PORTLET_ID));
+			CompanyConstants.SYSTEM, new Term(Field.PORTLET_ID, PORTLET_ID));
 	}
 
 	public static Document getAddPluginPackageDocument(
@@ -201,8 +200,7 @@ public class PluginPackageIndexer implements Indexer {
 
 		LuceneUtil.deleteDocuments(
 			CompanyConstants.SYSTEM,
-			new Term(
-				Field.UID, LuceneFields.getUID(PORTLET_ID, moduleId)));
+			new Term(Field.UID, LuceneFields.getUID(PORTLET_ID, moduleId)));
 	}
 
 	public static void updatePluginPackage(
