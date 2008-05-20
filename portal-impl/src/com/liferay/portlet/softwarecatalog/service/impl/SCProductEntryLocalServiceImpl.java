@@ -513,7 +513,7 @@ public class SCProductEntryLocalServiceImpl
 			if (Validator.isNotNull(keywords)) {
 				BooleanQuery searchQuery = new BooleanQuery();
 
-				LuceneUtil.addTerm(searchQuery, LuceneFields.TITLE, keywords);
+				LuceneUtil.addTerm(searchQuery, LuceneFields.NAME, keywords);
 				LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
 
 				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
