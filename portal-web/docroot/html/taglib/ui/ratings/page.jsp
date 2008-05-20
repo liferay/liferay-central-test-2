@@ -95,7 +95,8 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 									dataType: 'json',
 									success: function(message) {
 										var totalEntries = jQuery('#<%= randomNamespace %>totalEntries');
-										var entriesHtml = (message.totalEntries == 1) ? '<%= LanguageUtil.get(pageContext, "average") %> (' + message.totalEntries + ' <%= LanguageUtil.get(pageContext, "vote") %>)' : '<%= LanguageUtil.get(pageContext, "average") %> (' + message.totalEntries + ' <%= LanguageUtil.get(pageContext, "votes") %>)';
+
+										var entriesHtml = (message.totalEntries == 1) ? '<liferay-ui:message key="average" /> (' + message.totalEntries + ' <liferay-ui:message key="vote" />)' : '<liferay-ui:message key="average" /> (' + message.totalEntries + ' <liferay-ui:message key="votes" />)';
 
 										totalEntries.html(entriesHtml);
 
@@ -185,10 +186,10 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 										}
 
 										if (message.totalEntries == 0) {
-											entriesHtml = '<span class="zero-total">(0 <%= LanguageUtil.get(pageContext, "votes") %>)</span>';
+											entriesHtml = '<span class="zero-total">(0 <liferay-ui:message key="votes" />)</span>';
 										}
 										else {
-											entriesHtml = (message.totalEntries == 1) ? '<span class="total-entries">(1 <%= LanguageUtil.get(pageContext, "vote") %>)</span>' : '<span class="total-entries">(' + message.totalEntries + ' <%= LanguageUtil.get(pageContext, "votes") %>)</span>';
+											entriesHtml = (message.totalEntries == 1) ? '<span class="total-entries">(1 <liferay-ui:message key="vote" />)</span>' : '<span class="total-entries">(' + message.totalEntries + ' <liferay-ui:message key="votes" />)</span>';
 										}
 
 										totalRating.html(ratingHtml);

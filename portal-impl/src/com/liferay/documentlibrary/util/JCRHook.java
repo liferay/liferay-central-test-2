@@ -155,11 +155,11 @@ public class JCRHook extends BaseHook {
 					properties, tagsEntries);
 			}
 		}
-		catch (SearchException se) {
-			throw new SystemException(se);
-		}
 		catch (RepositoryException re) {
 			throw new SystemException(re);
+		}
+		catch (SearchException se) {
+			throw new SystemException(se);
 		}
 		finally {
 			if (session != null) {
@@ -207,14 +207,14 @@ public class JCRHook extends BaseHook {
 
 			session.save();
 		}
-		catch (SearchException se) {
-			throw new SystemException(se);
-		}
 		catch (PathNotFoundException pnfe) {
 			throw new NoSuchDirectoryException(dirName);
 		}
 		catch (RepositoryException e) {
 			throw new PortalException(e);
+		}
+		catch (SearchException se) {
+			throw new SystemException(se);
 		}
 		finally {
 			if (session != null) {
@@ -327,14 +327,14 @@ public class JCRHook extends BaseHook {
 
 			session.save();
 		}
-		catch (SearchException se) {
-			throw new SystemException(se);
-		}
 		catch (PathNotFoundException pnfe) {
 			throw new NoSuchFileException(fileName);
 		}
 		catch (RepositoryException re) {
 			throw new SystemException(re);
+		}
+		catch (SearchException se) {
+			throw new SystemException(se);
 		}
 		finally {
 			if (session != null) {
@@ -604,14 +604,14 @@ public class JCRHook extends BaseHook {
 				companyId, portletId, groupId, repositoryId, fileName,
 				properties, tagsEntries);
 		}
-		catch (SearchException se) {
-			throw new SystemException(se);
-		}
 		catch (PathNotFoundException pnfe) {
 			throw new NoSuchFileException(fileName);
 		}
 		catch (RepositoryException re) {
 			throw new SystemException(re);
+		}
+		catch (SearchException se) {
+			throw new SystemException(se);
 		}
 		finally {
 			if (session != null) {
@@ -697,14 +697,14 @@ public class JCRHook extends BaseHook {
 					companyId, portletId, groupId, newRepositoryId, fileName);
 			}
 		}
-		catch (SearchException se) {
-			throw new SystemException(se);
-		}
 		catch (PathNotFoundException pnfe) {
 			throw new NoSuchFileException(fileName);
 		}
 		catch (RepositoryException re) {
 			throw new SystemException(re);
+		}
+		catch (SearchException se) {
+			throw new SystemException(se);
 		}
 		finally {
 			if (session != null) {

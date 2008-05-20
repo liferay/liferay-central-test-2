@@ -102,11 +102,11 @@ public class S3Hook extends BaseHook {
 				companyId, portletId, groupId, repositoryId, fileName,
 				properties, tagsEntries);
 		}
-		catch (SearchException se) {
-			throw new SystemException(se);
-		}
 		catch (S3ServiceException s3se) {
 			throw new SystemException(s3se);
+		}
+		catch (SearchException se) {
+			throw new SystemException(se);
 		}
 	}
 
@@ -149,11 +149,11 @@ public class S3Hook extends BaseHook {
 
 			Indexer.deleteFile(companyId, portletId, repositoryId, fileName);
 		}
-		catch (SearchException se) {
-			throw new SystemException(se);
-		}
 		catch (S3ServiceException s3se) {
 			throw new SystemException(s3se);
+		}
+		catch (SearchException se) {
+			throw new SystemException(se);
 		}
 	}
 
@@ -332,11 +332,11 @@ public class S3Hook extends BaseHook {
 				companyId, portletId, groupId, repositoryId, fileName,
 				properties, tagsEntries);
 		}
-		catch (SearchException se) {
-			throw new SystemException(se);
-		}
 		catch (S3ServiceException s3se) {
 			throw new SystemException(s3se);
+		}
+		catch (SearchException se) {
+			throw new SystemException(se);
 		}
 	}
 
