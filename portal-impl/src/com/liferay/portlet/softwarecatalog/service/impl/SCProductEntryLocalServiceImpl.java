@@ -24,6 +24,7 @@ package com.liferay.portlet.softwarecatalog.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
@@ -36,7 +37,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.plugin.ModuleId;
-import com.liferay.portal.search.lucene.LuceneFields;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -500,9 +500,8 @@ public class SCProductEntryLocalServiceImpl
 			BooleanQuery contextQuery = new BooleanQuery();
 
 			LuceneUtil.addRequiredTerm(
-				contextQuery, LuceneFields.PORTLET_ID, Indexer.PORTLET_ID);
-			LuceneUtil.addRequiredTerm(
-				contextQuery, LuceneFields.GROUP_ID, groupId);
+				contextQuery, Field.PORTLET_ID, Indexer.PORTLET_ID);
+			LuceneUtil.addRequiredTerm(contextQuery, Field.GROUP_ID, groupId);
 
 			BooleanQuery fullQuery = new BooleanQuery();
 
@@ -511,8 +510,8 @@ public class SCProductEntryLocalServiceImpl
 			if (Validator.isNotNull(keywords)) {
 				BooleanQuery searchQuery = new BooleanQuery();
 
-				LuceneUtil.addTerm(searchQuery, LuceneFields.NAME, keywords);
-				LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
+				LuceneUtil.addTerm(searchQuery, Field.NAME, keywords);
+				LuceneUtil.addTerm(searchQuery, Field.CONTENT, keywords);
 
 				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 			}

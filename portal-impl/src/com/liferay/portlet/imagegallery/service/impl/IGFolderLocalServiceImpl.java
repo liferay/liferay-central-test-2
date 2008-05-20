@@ -25,6 +25,7 @@ package com.liferay.portlet.imagegallery.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -32,7 +33,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.search.lucene.LuceneFields;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.imagegallery.DuplicateFolderNameException;
@@ -357,11 +357,11 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 			BooleanQuery contextQuery = new BooleanQuery();
 
 			LuceneUtil.addRequiredTerm(
-				contextQuery, LuceneFields.PORTLET_ID, Indexer.PORTLET_ID);
+				contextQuery, Field.PORTLET_ID, Indexer.PORTLET_ID);
 
 			if (groupId > 0) {
 				LuceneUtil.addRequiredTerm(
-					contextQuery, LuceneFields.GROUP_ID, groupId);
+					contextQuery, Field.GROUP_ID, groupId);
 			}
 
 			if ((folderIds != null) && (folderIds.length > 0)) {
@@ -381,10 +381,8 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 			BooleanQuery searchQuery = new BooleanQuery();
 
 			if (Validator.isNotNull(keywords)) {
-				LuceneUtil.addTerm(
-					searchQuery, LuceneFields.DESCRIPTION, keywords);
-				LuceneUtil.addTerm(
-					searchQuery, LuceneFields.TAGS_ENTRIES, keywords);
+				LuceneUtil.addTerm(searchQuery, Field.DESCRIPTION, keywords);
+				LuceneUtil.addTerm(searchQuery, Field.TAGS_ENTRIES, keywords);
 			}
 
 			BooleanQuery fullQuery = new BooleanQuery();
