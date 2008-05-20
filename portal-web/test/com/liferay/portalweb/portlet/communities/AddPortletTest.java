@@ -41,7 +41,7 @@ public class AddPortletTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@id=\"Community-Communities\"]")) {
+							"document.getElementById('Community-Communities')")) {
 					break;
 				}
 			}
@@ -51,8 +51,10 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.mouseDown("//div[@id=\"Community-Communities\"]/p/a");
-		selenium.mouseUp("//div[@id=\"Community-Communities\"]/p/a");
+		selenium.mouseDown(
+			"document.getElementById('Community-Communities').getElementsByTagName('p')[0].getElementsByTagName('a')[0]");
+		selenium.mouseUp(
+			"document.getElementById('Community-Communities').getElementsByTagName('p')[0].getElementsByTagName('a')[0]");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -60,7 +62,8 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@title='Configuration']")) {
+				if (selenium.isElementPresent(
+							"document.getElementById('portlet-small-icon-bar_29').getElementsByTagName('nobr')[1].getElementsByTagName('a')[0].getElementsByTagName('img')[0]")) {
 					break;
 				}
 			}

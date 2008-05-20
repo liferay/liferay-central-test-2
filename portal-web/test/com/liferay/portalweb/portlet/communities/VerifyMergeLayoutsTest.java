@@ -38,6 +38,22 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 			}
 
 			try {
+				if (selenium.isElementPresent("//img[@title='Configuration']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
 				if (selenium.isElementPresent(
 							"//div[@id=\"banner\"]/div/div/ul/li[8]/ul/li[5]/ul/li[1]/a[2]")) {
 					break;
@@ -131,7 +147,8 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div/ul/li[2]/ul/li[5]/a/span")) {
+				if (selenium.isElementPresent(
+							"document.getElementById('_branchId_2018').getElementsByTagName('a')[0].getElementsByTagName('span')[0]")) {
 					break;
 				}
 			}
@@ -141,7 +158,8 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div/ul/li[2]/ul/li[5]/a/span");
+		selenium.click(
+			"document.getElementById('_branchId_2018').getElementsByTagName('a')[0].getElementsByTagName('span')[0]");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -237,7 +255,7 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//a[@id=\"my-community-private-pages\"]");
+		selenium.click("document.getElementById('my-community-private-pages')");
 		selenium.waitForPageToLoad("30000");
 	}
 }

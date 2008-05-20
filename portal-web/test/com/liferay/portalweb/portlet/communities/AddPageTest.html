@@ -10,17 +10,17 @@
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//a[@id="my-community-private-pages"]</td>
+	<td>document.getElementById('my-community-private-pages')</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//a[@id="my-community-private-pages"]</td>
+	<td>document.getElementById('my-community-private-pages')</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div/a/span</td>
+	<td>document.getElementById('add-page').getElementsByTagName('a')[0].getElementsByTagName('span')[0]</td>
 	<td></td>
 </tr>
 <tr>
@@ -29,7 +29,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>typeKeys</td>
+	<td>type</td>
 	<td>new_page</td>
 	<td>Communities Test Page</td>
 </tr>
