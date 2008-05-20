@@ -77,14 +77,14 @@ List scores = null;
 
 		searchContainer.setTotal(total);
 
-		List results = IGFolderLocalServiceUtil.getFolders(portletGroupId.longValue(), folderId, searchContainer.getStart(), searchContainer.getEnd());
+		List images = IGFolderLocalServiceUtil.getFolders(portletGroupId.longValue(), folderId, searchContainer.getStart(), searchContainer.getEnd());
 
-		searchContainer.setResults(results);
+		searchContainer.setResults(images);
 
 		List resultRows = searchContainer.getResultRows();
 
-		for (int i = 0; i < results.size(); i++) {
-			IGFolder curFolder = (IGFolder)results.get(i);
+		for (int i = 0; i < images.size(); i++) {
+			IGFolder curFolder = (IGFolder)images.get(i);
 
 			curFolder = curFolder.toEscapedModel();
 
@@ -187,9 +187,9 @@ List scores = null;
 		boolean showAddFolderButton = IGFolderPermission.contains(permissionChecker, plid.longValue(), folderId, ActionKeys.ADD_FOLDER);
 		%>
 
-		<c:if test="<%= showAddFolderButton || (results.size() > 0) %>">
+		<c:if test="<%= showAddFolderButton || (images.size() > 0) %>">
 			<div>
-				<c:if test="<%= results.size() > 0 %>">
+				<c:if test="<%= images.size() > 0 %>">
 					<label for="<portlet:namespace />keywords1"><liferay-ui:message key="search" /></label>
 
 					<input id="<portlet:namespace />keywords1" name="<portlet:namespace />keywords" size="30" type="text" />
@@ -202,14 +202,14 @@ List scores = null;
 				</c:if>
 			</div>
 
-			<c:if test="<%= results.size() > 0 %>">
+			<c:if test="<%= images.size() > 0 %>">
 				<br />
 			</c:if>
 		</c:if>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-		<c:if test="<%= showAddFolderButton || (results.size() > 0) %>">
+		<c:if test="<%= showAddFolderButton || (images.size() > 0) %>">
 			<br />
 		</c:if>
 
@@ -294,16 +294,16 @@ List scores = null;
 
 			searchContainer.setTotal(total);
 
-			results = IGImageLocalServiceUtil.getImages(folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd());
+			images = IGImageLocalServiceUtil.getImages(folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd());
 
-			searchContainer.setResults(results);
+			searchContainer.setResults(images);
 
 			boolean showAddImageButton = IGFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_IMAGE);
 			%>
 
-			<c:if test="<%= showAddImageButton || (results.size() > 0) %>">
+			<c:if test="<%= showAddImageButton || (images.size() > 0) %>">
 				<div>
-					<c:if test="<%= results.size() > 0 %>">
+					<c:if test="<%= images.size() > 0 %>">
 						<label for="<portlet:namespace />keywords2"><liferay-ui:message key="search" /></label>
 
 						<input id="<portlet:namespace />keywords2" name="<portlet:namespace />keywords" size="30" type="text" />
@@ -315,12 +315,12 @@ List scores = null;
 						<input type="button" value="<liferay-ui:message key="add-image" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/image_gallery/edit_image" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" />
 					</c:if>
 
-					<c:if test="<%= results.size() > 0 %>">
+					<c:if test="<%= images.size() > 0 %>">
 						<input type="button" value="<liferay-ui:message key="view-slide-show" />" onClick="<portlet:namespace />viewSlideShow();" />
 					</c:if>
 				</div>
 
-				<c:if test="<%= results.size() > 0 %>">
+				<c:if test="<%= images.size() > 0 %>">
 					<br />
 				</c:if>
 			</c:if>
@@ -352,9 +352,9 @@ List scores = null;
 
 		searchContainer.setTotal(total);
 
-		List results = IGImageLocalServiceUtil.getGroupImages(portletGroupId.longValue(), groupImagesUserId, searchContainer.getStart(), searchContainer.getEnd());
+		List images = IGImageLocalServiceUtil.getGroupImages(portletGroupId.longValue(), groupImagesUserId, searchContainer.getStart(), searchContainer.getEnd());
 
-		searchContainer.setResults(results);
+		searchContainer.setResults(images);
 		%>
 
 		<%@ include file="/html/portlet/image_gallery/view_images.jspf" %>
