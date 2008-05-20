@@ -282,7 +282,8 @@ public class PropsValues {
 		PropsUtil.get(PropsUtil.DEFAULT_USER_PRIVATE_LAYOUT_TEMPLATE_ID);
 
 	public static final String DEFAULT_USER_PRIVATE_LAYOUT_WAP_COLOR_SCHEME_ID =
-		PropsUtil.get(PropsUtil.DEFAULT_USER_PRIVATE_LAYOUT_WAP_COLOR_SCHEME_ID);
+		PropsUtil.get(PropsUtil.
+			DEFAULT_USER_PRIVATE_LAYOUT_WAP_COLOR_SCHEME_ID);
 
 	public static final String DEFAULT_USER_PRIVATE_LAYOUT_WAP_THEME_ID =
 		PropsUtil.get(PropsUtil.DEFAULT_USER_PRIVATE_LAYOUT_WAP_THEME_ID);
