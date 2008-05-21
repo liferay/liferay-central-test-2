@@ -510,6 +510,24 @@ public class PortletHotDeployListener implements HotDeployListener {
 				while (itr.hasNext()) {
 					Portlet portlet = itr.next();
 
+					PortletApp portletApp = portlet.getPortletApp();
+
+					Set<PortletFilter> portletFilters =
+						portletApp.getPortletFilters();
+
+					for (PortletFilter portletFilter : portletFilters) {
+						PortletFilterFactory.destroy(portletFilter);
+					}
+
+					Set<PortletURLListener> portletURLListeners =
+						portletApp.getPortletURLListeners();
+
+					for (PortletURLListener portletURLListener :
+							portletURLListeners) {
+
+						PortletURLListenerFactory.destroy(portletURLListener);
+					}
+
 					Scheduler scheduler = portlet.getSchedulerInstance();
 
 					if (scheduler != null) {
