@@ -125,7 +125,7 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 			<option <%= orderByCol.equals("create-date") ? "selected" : "" %> value="create-date"><liferay-ui:message key="create-date" /></option>
 			<option <%= orderByCol.equals("modified-date") ? "selected" : "" %> value="modified-date"><liferay-ui:message key="modified-date" /></option>
 			<option <%= orderByCol.equals("title") ? "selected" : "" %> value="title"><liferay-ui:message key="article-title" /></option>
-			<option <%= orderByCol.equals("articleId") ? "selected" : "" %> value="articleId"><liferay-ui:message key="article-id" /></option>
+			<option <%= orderByCol.equals("id") ? "selected" : "" %> value="id"><liferay-ui:message key="id" /></option>
 		</select>
 	</td>
 </tr>
