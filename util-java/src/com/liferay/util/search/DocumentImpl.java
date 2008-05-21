@@ -101,9 +101,7 @@ public class DocumentImpl implements Document {
 			return;
 		}
 
-		for (String value : values) {
-			addKeyword(name, value);
-		}
+		_fields.put(name, new Field(name, values, false));
 	}
 
 	public void addModifiedDate() {
