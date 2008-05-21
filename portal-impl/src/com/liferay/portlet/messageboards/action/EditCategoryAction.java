@@ -40,7 +40,7 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-
+import com.liferay.portal.util.PropsValues;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -156,7 +156,9 @@ public class EditCategoryAction extends PortletAction {
 			"guestPermissions");
 
 		if (categoryId <= 0) {
-			if (false) {
+			if (PropsValues.
+					CAPTCHA_CHECK_PORTLET_MESSAGE_BOARDS_EDIT_CATEGORY) {
+
 				CaptchaUtil.check(req);
 			}
 

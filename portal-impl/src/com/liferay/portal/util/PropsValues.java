@@ -149,6 +149,24 @@ public class PropsValues {
 	public static final int BLOGS_PAGE_ABSTRACT_LENGTH = GetterUtil.getInteger(
 		PropsUtil.get(PropsUtil.BLOGS_PAGE_ABSTRACT_LENGTH));
 
+	public static final boolean CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT));
+
+	public static final boolean CAPTCHA_CHECK_PORTAL_SEND_PASSWORD =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD));
+
+	public static final boolean
+		CAPTCHA_CHECK_PORTLET_MESSAGE_BOARDS_EDIT_CATEGORY =
+			GetterUtil.getBoolean(PropsUtil.get(PropsUtil.
+				CAPTCHA_CHECK_PORTLET_MESSAGE_BOARDS_EDIT_CATEGORY));
+
+	public static final boolean
+		CAPTCHA_CHECK_PORTLET_MESSAGE_BOARDS_EDIT_MESSAGE =
+			GetterUtil.getBoolean(PropsUtil.get(PropsUtil.
+				CAPTCHA_CHECK_PORTLET_MESSAGE_BOARDS_EDIT_MESSAGE));
+
 	public static final int CAPTCHA_MAX_CHALLENGES = GetterUtil.getInteger(
 		PropsUtil.get(PropsUtil.CAPTCHA_MAX_CHALLENGES));
 

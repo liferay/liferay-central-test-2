@@ -32,6 +32,7 @@ import com.liferay.portal.UserEmailAddressException;
 import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserLockoutException;
 import com.liferay.portal.UserPasswordException;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.captcha.CaptchaTextException;
 import com.liferay.portal.captcha.CaptchaUtil;
@@ -469,7 +470,9 @@ public class LoginAction extends Action {
 			return;
 		}
 
-		CaptchaUtil.check(req);
+		if (PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD) {
+			CaptchaUtil.check(req);
+		}
 
 		String emailAddress = ParamUtil.getString(req, "emailAddress");
 

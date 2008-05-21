@@ -40,6 +40,7 @@ import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.messageboards.RequiredMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
@@ -222,7 +223,7 @@ public class EditMessageAction extends PortletAction {
 		MBMessage message = null;
 
 		if (messageId <= 0) {
-			if (false) {
+			if (PropsValues.CAPTCHA_CHECK_PORTLET_MESSAGE_BOARDS_EDIT_MESSAGE) {
 				CaptchaUtil.check(req);
 			}
 

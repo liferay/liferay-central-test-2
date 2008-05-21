@@ -515,6 +515,14 @@ public class PropsUtil {
 
 	public static final String CAPTCHA_MAX_CHALLENGES = "captcha.max.challenges";
 
+	public static final String CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT = "captcha.check.portal.create_account";
+
+	public static final String CAPTCHA_CHECK_PORTAL_SEND_PASSWORD = "captcha.check.portal.send_password";
+
+	public static final String CAPTCHA_CHECK_PORTLET_MESSAGE_BOARDS_EDIT_CATEGORY = "captcha.check.portlet.message_boards.edit_category";
+
+	public static final String CAPTCHA_CHECK_PORTLET_MESSAGE_BOARDS_EDIT_MESSAGE = "captcha.check.portlet.message_boards.edit_message";
+
 	// Startup Events
 
 	public static final String GLOBAL_STARTUP_EVENTS = "global.startup.events";

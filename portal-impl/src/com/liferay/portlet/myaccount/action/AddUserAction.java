@@ -50,6 +50,7 @@ import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
@@ -160,7 +161,9 @@ public class AddUserAction extends PortletAction {
 			ParamUtil.getString(req, "organizationIds"),  0L);
 		boolean sendEmail = true;
 
-		CaptchaUtil.check(req);
+		if (PropsValues.CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT) {
+			CaptchaUtil.check(req);
+		}
 
 		User user = UserServiceUtil.addUser(
 			company.getCompanyId(), autoPassword, password1, password2,
