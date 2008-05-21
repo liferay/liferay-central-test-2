@@ -31,6 +31,7 @@ import com.liferay.portal.im.YMConnector;
 import com.liferay.portal.kernel.cal.DayAndPosition;
 import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.DateFormats;
@@ -53,6 +54,7 @@ import com.liferay.portlet.calendar.EventStartDateException;
 import com.liferay.portlet.calendar.EventTitleException;
 import com.liferay.portlet.calendar.job.CheckEventJob;
 import com.liferay.portlet.calendar.model.CalEvent;
+import com.liferay.portlet.calendar.model.TimeZoneSensitive;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 import com.liferay.portlet.calendar.service.base.CalEventLocalServiceBaseImpl;
 import com.liferay.portlet.calendar.util.CalUtil;
@@ -87,14 +89,19 @@ import net.fortuna.ical4j.data.CalendarOutputter;
 import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.Component;
 import net.fortuna.ical4j.model.DateTime;
+import net.fortuna.ical4j.model.Dur;
+import net.fortuna.ical4j.model.Parameter;
 import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.PropertyList;
 import net.fortuna.ical4j.model.Recur;
 import net.fortuna.ical4j.model.WeekDay;
 import net.fortuna.ical4j.model.component.VEvent;
+import net.fortuna.ical4j.model.parameter.Value;
 import net.fortuna.ical4j.model.property.CalScale;
 import net.fortuna.ical4j.model.property.Comment;
+import net.fortuna.ical4j.model.property.DateProperty;
 import net.fortuna.ical4j.model.property.Description;
+import net.fortuna.ical4j.model.property.DtEnd;
 import net.fortuna.ical4j.model.property.DtStart;
 import net.fortuna.ical4j.model.property.Duration;
 import net.fortuna.ical4j.model.property.ProdId;
@@ -806,11 +813,27 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		TimeZone timeZone = user.getTimeZone();
 
+		// X iCal property
+
+		Property timeZoneXProperty =
+			event.getProperty(TimeZoneSensitive.PROPERTY_NAME);
+
+		boolean timeZoneXPropertyValue = true;
+
+		if (Validator.isNotNull(timeZoneXProperty) &&
+			timeZoneXProperty.getValue().equals("FALSE")) {
+			timeZoneXPropertyValue = false;
+		}
+
+		// Title
+
 		String title = StringPool.BLANK;
 
 		if (event.getSummary() != null) {
 			title = event.getSummary().getValue();
 		}
+
+		// Description
 
 		String description = StringPool.BLANK;
 
@@ -818,28 +841,126 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			description = event.getDescription().getValue();
 		}
 
-		Calendar startDate = Calendar.getInstance(timeZone);
+		// Start Date
 
-		startDate.setTime(event.getStartDate().getDate());
+		DtStart dtStart = event.getStartDate();
 
-		Calendar endDate = Calendar.getInstance(timeZone);
+		Calendar startDate = toCalendar(
+			dtStart, timeZone, timeZoneXPropertyValue);
 
-		endDate.setTime(event.getEndDate().getDate());
+		startDate.setTime(dtStart.getDate());
 
-		long diffMillis =
-			endDate.getTimeInMillis() - startDate.getTimeInMillis();
-		long durationHours = diffMillis / (60 * 60 * 1000);
-		long durationMins =
-			(diffMillis / (60 * 1000)) - (durationHours * 60);
+		// End Date
+
+		Calendar endDate = null;
+
+		DtEnd dtEnd = event.getEndDate(true);
+
+		RRule rrule = (RRule) event.getProperty(Property.RRULE);
+
+		/*if (Validator.isNotNull(rrule)) {
+			endDate = Calendar.getInstance(timeZone);
+
+			if (false && Validator.isNotNull(rrule.getRecur().getUntil())) {
+				endDate.setTime(rrule.getRecur().getUntil());
+			}
+			else {
+				endDate.setTimeInMillis(
+					startDate.getTimeInMillis() + (Time.DAY * 365));
+			}
+		}
+		else*/ if (Validator.isNotNull(dtEnd)) {
+			endDate = toCalendar(dtEnd, timeZone, timeZoneXPropertyValue);
+
+			endDate.setTime(dtEnd.getDate());
+		}
+		else {
+			endDate = (Calendar) startDate.clone();
+			endDate.add(Calendar.DATE, 1);
+		}
+
+		// Duration
+
+		long diffMillis = 0;
+
+		long durationHours = 24;
+		long durationMins = 0;
+
+		boolean multiDayEvent = false;
+
+		if (Validator.isNotNull(dtEnd)) {
+			diffMillis =
+				dtEnd.getDate().getTime() - startDate.getTimeInMillis();
+
+			durationHours = diffMillis / Time.HOUR;
+
+			durationMins = (diffMillis / Time.MINUTE) - (durationHours * 60);
+
+			if ((durationHours > 24) ||
+				((durationHours == 24) && (durationMins > 0))) {
+
+				durationHours = 24;
+				durationMins = 0;
+
+				multiDayEvent = true;
+			}
+		}
+
+		// All Day
+
 		boolean allDay = false;
+
+		if (isICal4jDateOnly(event.getStartDate()) || multiDayEvent) {
+			allDay = true;
+		}
+
+		// Time zone sensitive
+
 		boolean timeZoneSensitive = true;
+
+		if (allDay || !timeZoneXPropertyValue) {
+			timeZoneSensitive = false;
+		}
+
+		// Type
+
 		String type = StringPool.BLANK;
+
+		Property comment = event.getProperty(Property.COMMENT);
+
+		if (Validator.isNotNull(comment) &&
+			ArrayUtil.contains(CalEventImpl.TYPES, comment.getValue())) {
+
+			type = comment.getValue();
+		}
+
+		// Recurrence
+
 		boolean repeating = false;
 		Recurrence recurrence = null;
 
-		RRule rrule = (RRule)event.getProperty(Property.RRULE);
+		if (multiDayEvent) {
+			repeating = true;
 
-		if (rrule != null) {
+			Calendar recStartCal = CalendarFactoryUtil.getCalendar(timeZone);
+
+			recStartCal.setTime(startDate.getTime());
+
+			com.liferay.portal.kernel.cal.Duration duration =
+				new com.liferay.portal.kernel.cal.Duration(1, 0, 0, 0);
+
+			recurrence = new Recurrence(
+				recStartCal, duration, Recurrence.DAILY);
+
+			Calendar until = (Calendar) startDate.clone();
+
+			until.setTimeInMillis(until.getTimeInMillis() + diffMillis);
+
+			recurrence.setUntil(until);
+
+			endDate = recurrence.getUntil();
+		}
+		else if (rrule != null) {
 			repeating = true;
 			recurrence = toRecurrence(
 				rrule.getRecur(), timeZone, startDate);
@@ -849,17 +970,20 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			}
 		}
 
+		// Reminder
+
 		String remindBy = "none";
 		int firstReminder = 300000;
 		int secondReminder = 300000;
+
+		// Permissions
 
 		boolean addCommunityPermissions = false;
 		boolean addGuestPermissions = false;
 
 		addEvent(
 			userId, plid, title, description, startDate.get(Calendar.MONTH),
-			startDate.get(Calendar.DAY_OF_MONTH),
-			startDate.get(Calendar.YEAR),
+			startDate.get(Calendar.DAY_OF_MONTH), startDate.get(Calendar.YEAR),
 			startDate.get(Calendar.HOUR_OF_DAY),
 			startDate.get(Calendar.MINUTE), endDate.get(Calendar.MONTH),
 			endDate.get(Calendar.DAY_OF_MONTH), endDate.get(Calendar.YEAR),
@@ -868,6 +992,16 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			firstReminder, secondReminder, addCommunityPermissions,
 			addGuestPermissions);
 
+	}
+
+	protected boolean isICal4jDateOnly(DateProperty date) {
+		if (Validator.isNotNull(date.getParameter(Parameter.VALUE)) &&
+			date.getParameter(Parameter.VALUE).getValue().equals("DATE")) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	protected void remindUser(CalEvent event, User user) {
@@ -994,6 +1128,25 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		catch (Exception e) {
 			_log.error(e);
 		}
+	}
+
+	protected Calendar toCalendar(
+		DateProperty date, TimeZone timeZone, boolean timeZoneSensitive) {
+
+		Calendar calendar = null;
+
+		if (isICal4jDateOnly(date)) {
+			calendar = Calendar.getInstance();
+		}
+		else if (!timeZoneSensitive) {
+
+			calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+		}
+		else {
+			calendar = Calendar.getInstance(timeZone);
+		}
+
+		return calendar;
 	}
 
 	protected int toCalendarWeekDay(WeekDay weekDay) {
@@ -1149,24 +1302,36 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		eventProps.add(uid);
 
-		DtStart dtStart = new DtStart(new DateTime(event.getStartDate()));
+		if (event.isAllDay()) {
 
-		eventProps.add(dtStart);
+			// Start Date
 
-		// Duration
+			DtStart dtStart = new DtStart(
+				new net.fortuna.ical4j.model.Date(event.getStartDate()));
 
-		Calendar cal = Calendar.getInstance();
+			eventProps.add(dtStart);
 
-		Date start = cal.getTime();
+			eventProps
+				.getProperty(Property.DTSTART)
+				.getParameters()
+				.add(Value.DATE);
+		}
+		else {
 
-		cal.add(Calendar.HOUR, event.getDurationHour());
-		cal.add(Calendar.MINUTE, event.getDurationHour());
+			// Start Date
 
-		Date end = cal.getTime();
+			DtStart dtStart = new DtStart(new DateTime(event.getStartDate()));
 
-		Duration duration = new Duration(start, end);
+			eventProps.add(dtStart);
 
-		eventProps.add(duration);
+			// Duration
+
+			Duration duration = new Duration(
+				new Dur(
+					0, event.getDurationHour(), event.getDurationMinute(), 0));
+
+			eventProps.add(duration);
+		}
 
 		// Summary
 
@@ -1194,6 +1359,13 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			RRule rRule = new RRule(recur);
 
 			eventProps.add(rRule);
+		}
+
+		// TimeZone Sensitive
+
+		if (!event.getTimeZoneSensitive()) {
+			eventProps.add(
+				new TimeZoneSensitive("FALSE"));
 		}
 
 		return vEvent;
@@ -1246,13 +1418,38 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		Calendar until = Calendar.getInstance(timeZone);
 
-		if (recur.getUntil() != null) {
+		String frequency = recur.getFrequency();
+
+		if (Validator.isNotNull(recur.getUntil())) {
 			until.setTime(recur.getUntil());
 
 			recurrence.setUntil(until);
 		}
+		else if (Validator.isNotNull(recur.getCount())) {
+			until.setTimeInMillis(startDate.getTimeInMillis());
 
-		String frequency = recur.getFrequency();
+			int addAmount = recurrence.getInterval() * recur.getCount();
+
+			int addField = 0;
+
+			if (Recur.DAILY.equals(frequency)) {
+				addField = Calendar.DAY_OF_YEAR;
+			}
+			else if (Recur.WEEKLY.equals(frequency)) {
+				addField = Calendar.WEEK_OF_YEAR;
+			}
+			else if (Recur.MONTHLY.equals(frequency)) {
+				addField = Calendar.MONTH;
+			}
+			else if (Recur.YEARLY.equals(frequency)) {
+				addField = Calendar.YEAR;
+			}
+
+			until.add(addField, addAmount);
+			until.add(Calendar.DAY_OF_YEAR, -1);
+
+			recurrence.setUntil(until);
+		}
 
 		if (Recur.DAILY.equals(frequency)) {
 			recurrence.setFrequency(Recurrence.DAILY);
