@@ -37,6 +37,8 @@ import org.apache.lucene.index.Term;
  * <a href="LuceneIndexWriterImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
+ * @author Brian Wing Shun Chan
+ * @author Allen Chiang
  *
  */
 public class LuceneIndexWriterImpl implements IndexWriter {
@@ -95,12 +97,14 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 
 		for (Field field : values) {
 			if (field.isTokenized()) {
-				LuceneUtil.addText(
-					luceneDoc, field.getName(), field.getValue());
+				for (String value : field.getValues()) {
+					LuceneUtil.addText(luceneDoc, field.getName(), value);
+				}
 			}
 			else {
-				LuceneUtil.addKeyword(
-					luceneDoc, field.getName(), field.getValue());
+				for (String value : field.getValues()) {
+					LuceneUtil.addKeyword(luceneDoc, field.getName(), value);
+				}
 			}
 		}
 

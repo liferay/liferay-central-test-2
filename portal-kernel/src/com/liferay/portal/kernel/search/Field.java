@@ -26,6 +26,8 @@ package com.liferay.portal.kernel.search;
  * <a href="Field.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
+ * @author Brian Wing Shun Chan
+ * @author Allen Chiang
  *
  */
 public class Field {
@@ -68,8 +70,12 @@ public class Field {
 	}
 
 	public Field(String name, String value, boolean tokenized) {
+		this(name, new String[] {value}, tokenized);
+	}
+
+	public Field(String name, String[] values, boolean tokenized) {
 		_name = name;
-		_value = value;
+		_values = values;
 		_tokenized = tokenized;
 	}
 
@@ -90,15 +96,28 @@ public class Field {
 	}
 
 	public String getValue() {
-		return _value;
+		if ((_values != null) && (_values.length > 1)) {
+			return _values[0];
+		}
+		else {
+			return null;
+		}
 	}
 
 	public void setValue(String value) {
-		_value = value;
+		setValues(new String[] {value});
+	}
+
+	public String[] getValues() {
+		return _values;
+	}
+
+	public void setValues(String[] values) {
+		_values = values;
 	}
 
 	private String _name;
 	private boolean _tokenized;
-	private String _value;
+	private String[] _values;
 
 }

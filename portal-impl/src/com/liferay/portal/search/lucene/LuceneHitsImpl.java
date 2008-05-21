@@ -41,6 +41,7 @@ import org.apache.lucene.search.Searcher;
  *
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
+ * @author Allen Chiang
  *
  */
 public class LuceneHitsImpl implements Hits {
@@ -208,12 +209,24 @@ public class LuceneHitsImpl implements Hits {
 
 		DocumentImpl newDoc = new DocumentImpl();
 
-		List<org.apache.lucene.document.Field> fields = oldDoc.getFields();
+		List<org.apache.lucene.document.Field> oldFields = oldDoc.getFields();
 
-		for (org.apache.lucene.document.Field field : fields) {
-			newDoc.add(
-				new Field(
-					field.name(), field.stringValue(), field.isTokenized()));
+		for (org.apache.lucene.document.Field oldField : oldFields) {
+			String[] values = oldDoc.getValues(oldField.name());
+
+			if ((values != null) && (values.length > 1)) {
+				Field newField = new Field(
+					oldField.name(), values, oldField.isTokenized());
+
+				newDoc.add(newField);
+			}
+			else {
+				Field newField = new Field(
+					oldField.name(), oldField.stringValue(),
+					oldField.isTokenized());
+
+				newDoc.add(newField);
+			}
 		}
 
 		return newDoc;
