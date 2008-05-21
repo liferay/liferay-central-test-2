@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
@@ -80,7 +81,8 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 			hits = CompanyLocalServiceUtil.search(
-				themeDisplay.getCompanyId(), keywords);
+				themeDisplay.getCompanyId(), keywords,
+				SearchEngineUtil.ALL_POS, SearchEngineUtil.ALL_POS);
 
 			Object[] values = addSearchResults(
 				keywords, startPage, itemsPerPage, hits,

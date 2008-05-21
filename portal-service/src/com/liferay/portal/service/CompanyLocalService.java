@@ -117,11 +117,13 @@ public interface CompanyLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		java.lang.String keywords) throws com.liferay.portal.SystemException;
+		java.lang.String keywords, int start, int end)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
 		java.lang.String portletId, long groupId, java.lang.String type,
-		java.lang.String keywords) throws com.liferay.portal.SystemException;
+		java.lang.String keywords, int start, int end)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Company updateCompany(long companyId,
 		java.lang.String virtualHost, java.lang.String mx)

@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.util.Time;
-import com.liferay.util.lucene.HitsImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +39,7 @@ import java.util.List;
  * @author Raymond Augé
  *
  */
-public class ContentHits extends HitsImpl {
+public class ContentHits {
 
 	public ContentHits() {
 		super();
@@ -49,12 +48,10 @@ public class ContentHits extends HitsImpl {
 	public void recordHits(Hits hits, long groupId, boolean privateLayout)
 		throws Exception  {
 
-		setSearcher(((HitsImpl)hits).getSearcher());
-
 		// This can later be optimized according to LEP-915.
 
-		List<Document> docs = new ArrayList<Document>(hits.getLength());
-		List<Float> scores = new ArrayList<Float>(hits.getLength());
+		List<Document> docs = new ArrayList<Document>();
+		List<Float> scores = new ArrayList<Float>();
 
 		for (int i = 0; i < hits.getLength(); i++) {
 			Document doc = hits.doc(i);
@@ -74,12 +71,13 @@ public class ContentHits extends HitsImpl {
 			}
 		}
 
-		setLength(docs.size());
-		setDocs(docs.toArray(new Document[docs.size()]));
-		setScores(scores.toArray(new Float[scores.size()]));
+		hits.setLength(docs.size());
+		hits.setDocs(docs.toArray(new Document[docs.size()]));
+		hits.setScores(scores.toArray(new Float[scores.size()]));
 
-		setSearchTime(
-			(float)(System.currentTimeMillis() - getStart()) / Time.SECOND);
+		hits.setSearchTime(
+			(float)(System.currentTimeMillis() - hits.getStart()) /
+				Time.SECOND);
 	}
 
 	public boolean isShowListed() {
