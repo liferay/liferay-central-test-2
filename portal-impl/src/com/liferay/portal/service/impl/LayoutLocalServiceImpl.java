@@ -1414,7 +1414,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			importPortletPreferences(
 				context, layoutSet.getCompanyId(), layout.getGroupId(),
-				layout.getPlid(), layoutEl, importPortletSetup,
+				layout.getPlid(), null, layoutEl, importPortletSetup,
 				importPortletArchivedSetups, importPortletUserPreferences);
 
 			// Portlet data
@@ -1435,7 +1435,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		// Archived setups
 
 		importPortletPreferences(
-			context, layoutSet.getCompanyId(), groupId, 0, root,
+			context, layoutSet.getCompanyId(), groupId, 0, null, root,
 			importPortletSetup, importPortletArchivedSetups,
 			importPortletUserPreferences);
 
@@ -1587,8 +1587,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		// Portlet preferences
 
 		importPortletPreferences(
-			context, layout.getCompanyId(), layout.getGroupId(), plid, root,
-			importPortletSetup, importPortletArchivedSetups,
+			context, layout.getCompanyId(), layout.getGroupId(), plid,
+			portletId, root, importPortletSetup, importPortletArchivedSetups,
 			importUserPreferences);
 
 		// Portlet data
@@ -3373,7 +3373,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	protected void importPortletPreferences(
 			PortletDataContext context, long companyId, long groupId, long plid,
-			Element parentEl, boolean importPortletSetup,
+			String portletId, Element parentEl, boolean importPortletSetup,
 			boolean importPortletArchivedSetups, boolean importUserPreferences)
 		throws PortalException, SystemException {
 
@@ -3419,7 +3419,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			boolean defaultUser = GetterUtil.getBoolean(
 				el.attributeValue("default-user"));
-			String portletId = el.attributeValue("portlet-id");
+
+			if (portletId == null) {
+				portletId = el.attributeValue("portlet-id");
+			}
+
 			String preferences = el.elementText("preferences");
 
 			if (ownerType == PortletKeys.PREFS_OWNER_TYPE_ARCHIVED) {
