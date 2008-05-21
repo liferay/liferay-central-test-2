@@ -96,7 +96,7 @@ public class Field {
 	}
 
 	public String getValue() {
-		if ((_values != null) && (_values.length > 1)) {
+		if ((_values != null) && (_values.length > 0)) {
 			return _values[0];
 		}
 		else {
