@@ -39,8 +39,8 @@ public class DefaultSingleDestinationMessageSender
 		_sender = sender;
 	}
 
-	public void send(String message) {
-		_sender.send(_destination, message);
+	public void send(String messageId, String message) {
+		_sender.send(_destination, messageId, message);
 	}
 
 	private MessageSender _sender;

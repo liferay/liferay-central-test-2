@@ -31,6 +31,6 @@ package com.liferay.portal.kernel.messaging;
  */
 public interface SingleDestinationMessageSender {
 
-	public void send(String message);
+	public void send(String messageId, String message);
 
 }

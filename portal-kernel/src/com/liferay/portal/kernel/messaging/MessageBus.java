@@ -34,12 +34,17 @@ public interface MessageBus {
 
 	public void addDestination(Destination destination);
 
+	public String getNextMessageId();
+
 	public void registerMessageListener(
 		String destination, MessageListener listener);
 
 	public void removeDestination(String destination);
 
 	public void sendMessage(String destination, String message);
+
+	public void sendMessage(
+		String destination, String messageId, String message);
 
 	public void setDestinations(List<Destination> destinations);
 

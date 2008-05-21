@@ -53,14 +53,16 @@ public class ParallelDispatchedDestination extends BaseDestination {
 		open();
 	}
 
-	protected void dispatch(MessageListener[] listeners, String message) {
+	protected void dispatch(
+		MessageListener[] listeners, String messageId, String message) {
+
 		if (executor.isShutdown()) {
 			throw new IllegalStateException(
 				"Destination " + getName() + " is shutdown and cannot " +
 					"receive more messages");
 		}
 
-		doDispatch(listeners, message);
+		doDispatch(listeners, messageId, message);
 	}
 
 	protected void doClose() {
@@ -70,13 +72,14 @@ public class ParallelDispatchedDestination extends BaseDestination {
 	}
 
 	protected void doDispatch(
-		MessageListener[] listeners, final String message) {
+		MessageListener[] listeners, final String messageId,
+		final String message) {
 
 		for (final MessageListener listener : listeners) {
 			Runnable runnable = new Runnable() {
 
 				public void run() {
-					listener.receive(message);
+					listener.receive(messageId, message);
 				}
 
 			};

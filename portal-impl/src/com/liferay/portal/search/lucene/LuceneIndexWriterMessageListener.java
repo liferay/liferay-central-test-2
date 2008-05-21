@@ -30,14 +30,15 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="LuceneIndexWriterListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="LuceneIndexWriterMessageListener.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Bruno Farache
  *
  */
-public class LuceneIndexWriterListener implements MessageListener {
+public class LuceneIndexWriterMessageListener implements MessageListener {
 
-	public void receive(String message) {
+	public void receive(String messageId, String message) {
 		try {
 			IndexWriterRequestMessage iwrm =
 				(IndexWriterRequestMessage)JSONUtil.deserialize(message);
@@ -63,6 +64,6 @@ public class LuceneIndexWriterListener implements MessageListener {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(LuceneIndexWriterListener.class);
+		LogFactory.getLog(LuceneIndexWriterMessageListener.class);
 
 }

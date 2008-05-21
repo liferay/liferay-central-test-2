@@ -40,13 +40,14 @@ public class SerialDispatchedDestination extends ParallelDispatchedDestination {
 	}
 
 	protected void doDispatch(
-		final MessageListener[] listeners, final String message) {
+		final MessageListener[] listeners, final String messageId,
+		final String message) {
 
 		Runnable runnable = new Runnable() {
 
 			public void run() {
 				for (MessageListener listener : listeners) {
-					listener.receive(message);
+					listener.receive(messageId, message);
 				}
 			}
 

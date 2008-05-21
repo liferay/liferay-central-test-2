@@ -30,6 +30,6 @@ package com.liferay.portal.kernel.messaging;
  */
 public interface MessageListener {
 
-	public void receive(String message);
+	public void receive(String messageId, String message);
 
 }

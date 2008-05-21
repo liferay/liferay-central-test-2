@@ -39,13 +39,13 @@ public class FilteredMessageListener implements MessageListener {
 		_listener = listener;
 	}
 
-	public void receive(String message) {
+	public void receive(String messageId, String message) {
 		String filterFieldAndValue =
 			"\"" + DESTINATION_FILTER_FIELD + "\":\"" + _destinationFilter +
 				"\"";
 
 		if (message.indexOf(filterFieldAndValue) != -1) {
-			_listener.receive(message);
+			_listener.receive(messageId, message);
 		}
 	}
 

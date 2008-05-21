@@ -24,6 +24,7 @@ package com.liferay.portal.kernel.messaging;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -39,6 +40,10 @@ public class DefaultMessageBus implements MessageBus {
 
 	public synchronized void addDestination(Destination destination) {
 		_destinations.put(destination.getName(), destination);
+	}
+
+	public String getNextMessageId() {
+		return PortalUUIDUtil.generate();
 	}
 
 	public synchronized void registerMessageListener(
@@ -59,6 +64,12 @@ public class DefaultMessageBus implements MessageBus {
 	}
 
 	public void sendMessage(String destination, String message) {
+		sendMessage(destination, null, message);
+	}
+
+	public void sendMessage(
+		String destination, String messageId, String message) {
+
 		Destination destinationModel = _destinations.get(destination);
 
 		if (destinationModel == null) {
@@ -69,7 +80,7 @@ public class DefaultMessageBus implements MessageBus {
 			return;
 		}
 
-		destinationModel.send(message);
+		destinationModel.send(messageId, message);
 	}
 
 	public synchronized void setDestinations(List<Destination> destinations) {

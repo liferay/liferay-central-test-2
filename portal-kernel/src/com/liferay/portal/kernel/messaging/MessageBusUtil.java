@@ -74,6 +74,12 @@ public class MessageBusUtil {
 		_instance._sendMessage(destination, message);
 	}
 
+	public static void sendMessage(
+		String destination, String messageId, String message) {
+
+		_instance._sendMessage(destination, messageId, message);
+	}
+
 	public static boolean unregisterMessageListener(
 		String destination, MessageListener listener) {
 
@@ -115,6 +121,12 @@ public class MessageBusUtil {
 
 	private void _sendMessage(String destination, String message) {
 		_messageBus.sendMessage(destination, message);
+	}
+
+	private void _sendMessage(
+		String destination, String messageId, String message) {
+
+		_messageBus.sendMessage(destination, messageId, message);
 	}
 
 	private boolean _unregisterMessageListener(

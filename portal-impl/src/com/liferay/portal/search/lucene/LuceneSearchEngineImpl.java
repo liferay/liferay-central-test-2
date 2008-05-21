@@ -49,7 +49,7 @@ public class LuceneSearchEngineImpl implements SearchEngine {
 		MessageBusUtil.addDestination(destination);
 
 		MessageBusUtil.registerMessageListener(
-			destination.getName(), new LuceneIndexWriterListener());
+			destination.getName(), new LuceneIndexWriterMessageListener());
 	}
 
 	public String getName() {
