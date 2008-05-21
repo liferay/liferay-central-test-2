@@ -178,7 +178,7 @@ public class DocumentImpl implements Document {
 		Field field = _fields.get(name);
 
 		if (field == null) {
-			return new String[] { StringPool.BLANK };
+			return new String[] {StringPool.BLANK};
 		}
 
 		return field.getValues();
