@@ -313,6 +313,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		// Entry
 
 		blogsEntryPersistence.remove(entry.getEntryId());
+
+		// Statistics
+
+		blogsStatsUserLocalService.updateStatsUser(
+			entry.getGroupId(), entry.getUserId());
 	}
 
 	public List<BlogsEntry> getCompanyEntries(

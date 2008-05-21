@@ -175,6 +175,14 @@ public class BlogsStatsUserLocalServiceUtil {
 		return blogsStatsUserLocalService.getStatsUser(groupId, userId);
 	}
 
+	public static void updateStatsUser(long groupId, long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+
+		blogsStatsUserLocalService.updateStatsUser(groupId, userId);
+	}
+
 	public static void updateStatsUser(long groupId, long userId,
 		java.util.Date lastPostDate)
 		throws com.liferay.portal.PortalException,

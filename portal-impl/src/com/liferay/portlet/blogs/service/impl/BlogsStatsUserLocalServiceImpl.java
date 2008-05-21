@@ -114,6 +114,12 @@ public class BlogsStatsUserLocalServiceImpl
 		return statsUser;
 	}
 
+	public void updateStatsUser(long groupId, long userId)
+		throws PortalException, SystemException {
+
+		updateStatsUser(groupId, userId, null);
+	}
+
 	public void updateStatsUser(long groupId, long userId, Date lastPostDate)
 		throws PortalException, SystemException {
 
@@ -122,7 +128,10 @@ public class BlogsStatsUserLocalServiceImpl
 		BlogsStatsUser statsUser = getStatsUser(groupId, userId);
 
 		statsUser.setEntryCount(entryCount);
-		statsUser.setLastPostDate(lastPostDate);
+
+		if (lastPostDate != null) {
+			statsUser.setLastPostDate(lastPostDate);
+		}
 
 		blogsStatsUserPersistence.update(statsUser, false);
 	}
