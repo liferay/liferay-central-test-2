@@ -1539,14 +1539,21 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			String xml = zipReader.getEntryAsString("portlet.xml");
 
-			SAXReader reader = new SAXReader();
+			if (xml != null) {
+				SAXReader reader = new SAXReader();
 
-			Document doc = reader.read(new StringReader(xml));
+				Document doc = reader.read(new StringReader(xml));
 
-			root = doc.getRootElement();
+				root = doc.getRootElement();
+			}
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
+		}
+
+		if (root == null) {
+			throw new LarTypeException(
+				"The LAR does not contain a portlet.xml file");
 		}
 
 		// Build compatibility
