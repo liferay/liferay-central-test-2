@@ -50,6 +50,7 @@ import com.liferay.portal.util.WebKeys;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
 import javax.portlet.PreferencesValidator;
 import javax.portlet.RenderRequest;
 
@@ -330,14 +331,14 @@ public class PortletPreferencesFactoryImpl
 	}
 
 	public PortletPreferences getPreferences(HttpServletRequest req) {
-		RenderRequest renderRequest = (RenderRequest)req.getAttribute(
+		PortletRequest portletReq = (PortletRequest)req.getAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST);
 
 		PortletPreferences prefs = null;
 
-		if (renderRequest != null) {
+		if (portletReq != null) {
 			PortletPreferencesWrapper prefsWrapper =
-				(PortletPreferencesWrapper)renderRequest.getPreferences();
+				(PortletPreferencesWrapper)portletReq.getPreferences();
 
 			prefs = prefsWrapper.getPreferencesImpl();
 		}
