@@ -174,6 +174,16 @@ public class DocumentImpl implements Document {
 		return field.getValue();
 	}
 
+	public String[] getValues(String name) {
+		Field field = _fields.get(name);
+
+		if (field == null) {
+			return new String[] { StringPool.BLANK };
+		}
+
+		return field.getValues();
+	}
+
 	public Map<String, Field> getFields() {
 		return _fields;
 	}

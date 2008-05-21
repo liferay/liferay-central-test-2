@@ -84,6 +84,8 @@ public interface Document {
 
 	public String get(String name);
 
+	public String[] getValues(String name);
+
 	public Map<String, Field> getFields();
 
 }

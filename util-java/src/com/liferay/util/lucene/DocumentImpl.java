@@ -112,6 +112,10 @@ public class DocumentImpl implements Document {
 		return  _doc.get(name);
 	}
 
+	public String[] getValues(String name) {
+		return null;
+	}
+
 	public Map<String, Field> getFields() {
 		return null;
 	}
