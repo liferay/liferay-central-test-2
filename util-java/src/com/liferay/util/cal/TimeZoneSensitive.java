@@ -26,10 +26,8 @@ import net.fortuna.ical4j.model.ParameterList;
 import net.fortuna.ical4j.model.property.XProperty;
 
 /**
- * <a href="CalEventLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="TimeZoneSensitive.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
- * @author Bruno Farache
  * @author Samuel Kong
  *
  */
