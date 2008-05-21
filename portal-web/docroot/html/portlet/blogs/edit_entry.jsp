@@ -45,20 +45,13 @@ if (entry != null) {
 %>
 
 <script type="text/javascript">
+	var <portlet:namespace />_saveDraftIntervalId = null;
 
-	if (!Liferay.Blogs) {
-		Liferay.Blogs = {};
-	}
-
-	Liferay.Blogs.clearDraftInterval = function() {
-		var instance = this;
-
-		if (instance._draftInterval != null) {			
-			clearInterval(instance._draftInterval);
+	function <portlet:namespace />clearSaveDraftIntervalId() {
+		if (<portlet:namespace />_saveDraftIntervalId != null) {
+			clearInterval(<portlet:namespace />_saveDraftIntervalId);
 		}
-	};
-
-	Liferay.Blogs._draftInterval = null;
+	}
 
 	function <portlet:namespace />getSuggestionsContent() {
 		var content = '';
@@ -146,7 +139,7 @@ if (entry != null) {
 			);
 		}
 		else {
-			Liferay.Blogs.clearDraftInterval();
+			<portlet:namespace />clearSaveDraftIntervalId();
 
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= entry == null ? Constants.ADD : Constants.UPDATE %>";
 			document.<portlet:namespace />fm.<portlet:namespace />content.value = content;
@@ -155,18 +148,19 @@ if (entry != null) {
 		}
 	}
 
-	<c:if test="<%= (entry == null) || entry.isDraft() %>">
-		Liferay.Blogs._draftInterval = setInterval('<portlet:namespace />saveEntry(true)', 30000);
-	</c:if>
-
 	jQuery(
 		function() {
 			jQuery('#<portlet:namespace />cancelButton').click(
 				function() {
-					Liferay.Blogs.clearDraftInterval();
+					<portlet:namespace />clearSaveDraftIntervalId();
+
 					location.href = '<%= HtmlUtil.escape(redirect) %>';
 				}
 			);
+
+			<c:if test="<%= (entry == null) || entry.isDraft() %>">
+				<portlet:namespace />_saveDraftIntervalId = setInterval('<portlet:namespace />saveEntry(true)', 30000);
+			</c:if>
 		}
 	);
 </script>
