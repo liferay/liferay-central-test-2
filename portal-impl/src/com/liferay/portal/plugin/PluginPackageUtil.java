@@ -1207,7 +1207,7 @@ public class PluginPackageUtil {
 			if (Validator.isNotNull(tag)) {
 				BooleanQuery searchQuery = new BooleanQuery();
 
-				LuceneUtil.addExactTerm(searchQuery, Field.TAGS_ENTRIES, tag);
+				LuceneUtil.addExactTerm(searchQuery, "tag", tag);
 
 				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 			}

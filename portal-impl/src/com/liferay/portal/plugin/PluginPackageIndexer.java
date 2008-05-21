@@ -109,6 +109,7 @@ public class PluginPackageIndexer implements Indexer {
 		doc.addKeyword("changeLog", changeLog);
 		doc.addKeyword("repositoryURL", repositoryURL);
 		doc.addKeyword("type", types.toArray(new String[0]));
+		doc.addKeyword("tag", tags.toArray(new String[0]));
 
 		String[] licenseNames = new String[licenses.size()];
 
@@ -131,8 +132,6 @@ public class PluginPackageIndexer implements Indexer {
 		if (installedVersion != null) {
 			doc.addKeyword("installedVersion", installedVersion);
 		}
-
-		doc.addKeyword(Field.TAGS_ENTRIES, tags.toArray(new String[0]));
 
 		return doc;
 	}
