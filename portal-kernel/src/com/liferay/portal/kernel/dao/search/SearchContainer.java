@@ -58,7 +58,12 @@ public class SearchContainer {
 		_searchTerms = searchTerms;
 
 		_curParam = curParam;
-		_curValue = ParamUtil.get(req, _curParam, 1);
+		_curValue = ParamUtil.get(req, _curParam, DEFAULT_CUR_VALUE);
+
+		if (_curValue < 1) {
+			_curValue = DEFAULT_CUR_VALUE;
+		}
+
 		setDelta(delta);
 
 		_iteratorURL = iteratorURL;
