@@ -54,12 +54,12 @@ import com.liferay.portlet.calendar.EventStartDateException;
 import com.liferay.portlet.calendar.EventTitleException;
 import com.liferay.portlet.calendar.job.CheckEventJob;
 import com.liferay.portlet.calendar.model.CalEvent;
-import com.liferay.portlet.calendar.model.TimeZoneSensitive;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 import com.liferay.portlet.calendar.service.base.CalEventLocalServiceBaseImpl;
 import com.liferay.portlet.calendar.util.CalUtil;
 import com.liferay.util.Time;
 import com.liferay.util.cal.CalendarUtil;
+import com.liferay.util.cal.TimeZoneSensitive;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.BufferedOutputStream;
@@ -118,6 +118,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
+ * @author Samuel Kong
  *
  */
 public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
@@ -815,13 +816,14 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		// X iCal property
 
-		Property timeZoneXProperty =
-			event.getProperty(TimeZoneSensitive.PROPERTY_NAME);
+		Property timeZoneXProperty = event.getProperty(
+			TimeZoneSensitive.PROPERTY_NAME);
 
 		boolean timeZoneXPropertyValue = true;
 
 		if (Validator.isNotNull(timeZoneXProperty) &&
 			timeZoneXProperty.getValue().equals("FALSE")) {
+
 			timeZoneXPropertyValue = false;
 		}
 
@@ -841,7 +843,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			description = event.getDescription().getValue();
 		}
 
-		// Start Date
+		// Start date
 
 		DtStart dtStart = event.getStartDate();
 
@@ -850,50 +852,35 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		startDate.setTime(dtStart.getDate());
 
-		// End Date
+		// End date
 
 		Calendar endDate = null;
 
 		DtEnd dtEnd = event.getEndDate(true);
 
-		RRule rrule = (RRule) event.getProperty(Property.RRULE);
+		RRule rrule = (RRule)event.getProperty(Property.RRULE);
 
-		/*if (Validator.isNotNull(rrule)) {
-			endDate = Calendar.getInstance(timeZone);
-
-			if (false && Validator.isNotNull(rrule.getRecur().getUntil())) {
-				endDate.setTime(rrule.getRecur().getUntil());
-			}
-			else {
-				endDate.setTimeInMillis(
-					startDate.getTimeInMillis() + (Time.DAY * 365));
-			}
-		}
-		else*/ if (Validator.isNotNull(dtEnd)) {
+		if (Validator.isNotNull(dtEnd)) {
 			endDate = toCalendar(dtEnd, timeZone, timeZoneXPropertyValue);
 
 			endDate.setTime(dtEnd.getDate());
 		}
 		else {
-			endDate = (Calendar) startDate.clone();
+			endDate = (Calendar)startDate.clone();
 			endDate.add(Calendar.DATE, 1);
 		}
 
 		// Duration
 
 		long diffMillis = 0;
-
 		long durationHours = 24;
 		long durationMins = 0;
-
 		boolean multiDayEvent = false;
 
 		if (Validator.isNotNull(dtEnd)) {
 			diffMillis =
 				dtEnd.getDate().getTime() - startDate.getTimeInMillis();
-
 			durationHours = diffMillis / Time.HOUR;
-
 			durationMins = (diffMillis / Time.MINUTE) - (durationHours * 60);
 
 			if ((durationHours > 24) ||
@@ -901,12 +888,11 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 				durationHours = 24;
 				durationMins = 0;
-
 				multiDayEvent = true;
 			}
 		}
 
-		// All Day
+		// All day
 
 		boolean allDay = false;
 
@@ -1133,20 +1119,19 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	protected Calendar toCalendar(
 		DateProperty date, TimeZone timeZone, boolean timeZoneSensitive) {
 
-		Calendar calendar = null;
+		Calendar cal = null;
 
 		if (isICal4jDateOnly(date)) {
-			calendar = Calendar.getInstance();
+			cal = Calendar.getInstance();
 		}
 		else if (!timeZoneSensitive) {
-
-			calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+			cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
 		}
 		else {
-			calendar = Calendar.getInstance(timeZone);
+			cal = Calendar.getInstance(timeZone);
 		}
 
-		return calendar;
+		return cal;
 	}
 
 	protected int toCalendarWeekDay(WeekDay weekDay) {
@@ -1304,21 +1289,20 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		if (event.isAllDay()) {
 
-			// Start Date
+			// Start date
 
 			DtStart dtStart = new DtStart(
 				new net.fortuna.ical4j.model.Date(event.getStartDate()));
 
 			eventProps.add(dtStart);
 
-			eventProps
-				.getProperty(Property.DTSTART)
-				.getParameters()
-				.add(Value.DATE);
+			Property dtStartProperty = eventProps.getProperty(Property.DTSTART);
+
+			dtStartProperty.getParameters().add(Value.DATE);
 		}
 		else {
 
-			// Start Date
+			// Start date
 
 			DtStart dtStart = new DtStart(new DateTime(event.getStartDate()));
 
@@ -1361,11 +1345,10 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			eventProps.add(rRule);
 		}
 
-		// TimeZone Sensitive
+		// Time zone sensitive
 
 		if (!event.getTimeZoneSensitive()) {
-			eventProps.add(
-				new TimeZoneSensitive("FALSE"));
+			eventProps.add(new TimeZoneSensitive("FALSE"));
 		}
 
 		return vEvent;
@@ -1428,8 +1411,6 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		else if (Validator.isNotNull(recur.getCount())) {
 			until.setTimeInMillis(startDate.getTimeInMillis());
 
-			int addAmount = recurrence.getInterval() * recur.getCount();
-
 			int addField = 0;
 
 			if (Recur.DAILY.equals(frequency)) {
@@ -1444,6 +1425,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			else if (Recur.YEARLY.equals(frequency)) {
 				addField = Calendar.YEAR;
 			}
+
+			int addAmount = recurrence.getInterval() * recur.getCount();
 
 			until.add(addField, addAmount);
 			until.add(Calendar.DAY_OF_YEAR, -1);

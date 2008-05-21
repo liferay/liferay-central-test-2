@@ -20,11 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.calendar.model;
+package com.liferay.util.cal;
 
 import net.fortuna.ical4j.model.ParameterList;
 import net.fortuna.ical4j.model.property.XProperty;
 
+/**
+ * <a href="CalEventLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ * @author Bruno Farache
+ * @author Samuel Kong
+ *
+ */
 public class TimeZoneSensitive extends XProperty {
 
 	public static final String PROPERTY_NAME = "X-LIFERAY-TIMEZONE-SENSITIVE";
@@ -33,15 +41,16 @@ public class TimeZoneSensitive extends XProperty {
 		super(PROPERTY_NAME);
 	}
 
-	public TimeZoneSensitive(String aValue) {
-		super(PROPERTY_NAME, aValue);
+	public TimeZoneSensitive(String value) {
+		super(PROPERTY_NAME, value);
 	}
 
-	public TimeZoneSensitive(ParameterList aList, String aValue) {
-		super(PROPERTY_NAME, aList, aValue);
+	public TimeZoneSensitive(ParameterList list, String value) {
+		super(PROPERTY_NAME, list, value);
 	}
 
-	public void setValue(boolean aValue) {
-		setValue(aValue ? "TRUE" : "FALSE");
+	public void setValue(boolean value) {
+		setValue(value ? "TRUE" : "FALSE");
 	}
+
 }
