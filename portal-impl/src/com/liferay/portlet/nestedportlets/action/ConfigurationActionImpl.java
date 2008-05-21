@@ -151,6 +151,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		layoutTypePortlet.reorganizeNestedColumns(
 			portletResource, newColumns, oldColumns);
 
+		layoutTypePortlet.setStateMax(StringPool.BLANK);
+
 		LayoutLocalServiceUtil.updateLayout(
 			layout.getGroupId(), layout.isPrivateLayout(),
 			layout.getLayoutId(), layout.getTypeSettings());
