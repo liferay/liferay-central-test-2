@@ -294,6 +294,9 @@ public class PortalLDAPUtil {
 		env.put(Context.PROVIDER_URL, providerURL);
 		env.put(Context.SECURITY_PRINCIPAL, pricipal);
 		env.put(Context.SECURITY_CREDENTIALS, credentials);
+		env.put(
+			Context.REFERRAL,
+			PrefsPropsUtil.getString(companyId, PropsUtil.LDAP_REFERRAL));
 
 		LogUtil.debug(_log, env);
 

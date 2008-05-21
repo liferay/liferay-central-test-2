@@ -341,6 +341,8 @@ public class PropsUtil {
 
 	public static final String LDAP_SECURITY_CREDENTIALS = "ldap.security.credentials";
 
+	public static final String LDAP_REFERRAL = "ldap.referral";
+
 	public static final String LDAP_AUTH_ENABLED = "ldap.auth.enabled";
 
 	public static final String LDAP_AUTH_REQUIRED = "ldap.auth.required";
