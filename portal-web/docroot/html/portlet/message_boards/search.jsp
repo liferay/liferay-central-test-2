@@ -102,16 +102,7 @@ try {
 
 	List resultRows = searchContainer.getResultRows();
 
-	Set<Long> threadIds = new HashSet<Long>();
-
 	for (int i = 0; i < results.getDocs().length; i++) {
-		if (!threadIds.contains(threadId)) {
-			threadIds.add(threadId);
-		}
-		else {
-			continue;
-		}
-
 		Document doc = results.doc(i);
 
 		ResultRow row = new ResultRow(doc, i, i);
