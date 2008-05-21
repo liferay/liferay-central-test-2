@@ -48,6 +48,12 @@ public class SearchEngineUtil {
 		_instance._deleteDocument(companyId, uid);
 	}
 
+	public static void deletePortletDocuments(long companyId, String portletId)
+		throws SearchException {
+
+		_instance._deletePortletDocuments(companyId, portletId);
+	}
+
 	public static Collection<SearchEngine> getRegisteredSearchEngines() {
 		return _instance._getRegisteredSearchEngines();
 	}
@@ -131,6 +137,25 @@ public class SearchEngineUtil {
 			}
 			else {
 				_getWriter().deleteDocument(companyId, uid);
+			}
+		}
+		finally {
+			_setContextClassLoader(contextClassLoader);
+		}
+	}
+
+	private void _deletePortletDocuments(long companyId, String portletId)
+		throws SearchException {
+
+		ClassLoader contextClassLoader = _getContextClassLoader();
+
+		try {
+			if (_currentSearchEngine.isMessageBusListener()) {
+				_messageBusIndexWriter.deletePortletDocuments(
+					companyId, portletId);
+			}
+			else {
+				_getWriter().deletePortletDocuments(companyId, portletId);
 			}
 		}
 		finally {

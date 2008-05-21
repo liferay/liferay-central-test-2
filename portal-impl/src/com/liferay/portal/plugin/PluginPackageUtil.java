@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.plugin.RemotePluginPackageRepository;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -49,7 +50,7 @@ import com.liferay.util.License;
 import com.liferay.util.Screenshot;
 import com.liferay.util.Time;
 import com.liferay.util.Version;
-import com.liferay.util.lucene.HitsImpl;
+import com.liferay.util.search.QueryImpl;
 
 import java.io.IOException;
 
@@ -77,12 +78,10 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.Query;
-import org.apache.lucene.search.Searcher;
 import org.apache.lucene.search.TermQuery;
 
 import org.dom4j.Attribute;
@@ -236,11 +235,11 @@ public class PluginPackageUtil {
 
 	public static Hits search(
 			String keywords, String type, String tag, String license,
-			String repositoryURL, String status)
+			String repositoryURL, String status, int start, int end)
 		throws SystemException {
 
 		return _instance._search(
-			keywords, type, tag, license, repositoryURL, status);
+			keywords, type, tag, license, repositoryURL, status, start, end);
 	}
 
 	public static void unregisterInstalledPluginPackage(
@@ -1079,16 +1078,12 @@ public class PluginPackageUtil {
 	}
 
 	private void _reIndex() throws SystemException {
-		if (LuceneUtil.INDEX_READ_ONLY) {
+		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
 
-		IndexWriter writer = null;
-
 		try {
 			PluginPackageIndexer.cleanIndex();
-
-			writer = LuceneUtil.getWriter(CompanyConstants.SYSTEM);
 
 			for (PluginPackage pluginPackage :
 					_getAllAvailablePluginPackages()) {
@@ -1099,8 +1094,8 @@ public class PluginPackageUtil {
 				String status = statusAndInstalledVersion[0];
 				String installedVersion = statusAndInstalledVersion[1];
 
-				org.apache.lucene.document.Document doc =
-					PluginPackageIndexer.getAddPluginPackageDocument(
+				com.liferay.portal.kernel.search.Document doc =
+					PluginPackageIndexer.getPluginPackageDocument(
 						pluginPackage.getModuleId(), pluginPackage.getName(),
 						pluginPackage.getVersion(),
 						pluginPackage.getModifiedDate(),
@@ -1114,7 +1109,7 @@ public class PluginPackageUtil {
 						pluginPackage.getRepositoryURL(), status,
 					installedVersion);
 
-				writer.addDocument(doc);
+				SearchEngineUtil.addDocument(CompanyConstants.SYSTEM, doc);
 			}
 		}
 		catch (SystemException se) {
@@ -1122,16 +1117,6 @@ public class PluginPackageUtil {
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
-		}
-		finally {
-			try {
-				if (writer != null) {
-					LuceneUtil.write(CompanyConstants.SYSTEM);
-				}
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
 		}
 	}
 
@@ -1186,16 +1171,12 @@ public class PluginPackageUtil {
 
 	private Hits _search(
 			String keywords, String type, String tag, String license,
-			String repositoryURL, String status)
+			String repositoryURL, String status, int start, int end)
 		throws SystemException {
 
 		_checkRepositories(repositoryURL);
 
-		Searcher searcher = null;
-
 		try {
-			HitsImpl hits = new HitsImpl();
-
 			BooleanQuery contextQuery = new BooleanQuery();
 
 			LuceneUtil.addRequiredTerm(
@@ -1226,7 +1207,7 @@ public class PluginPackageUtil {
 			if (Validator.isNotNull(tag)) {
 				BooleanQuery searchQuery = new BooleanQuery();
 
-				LuceneUtil.addExactTerm(searchQuery, "tag", tag);
+				LuceneUtil.addExactTerm(searchQuery, Field.TAGS_ENTRIES, tag);
 
 				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 			}
@@ -1270,14 +1251,11 @@ public class PluginPackageUtil {
 				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 			}
 
-			searcher = LuceneUtil.getSearcher(CompanyConstants.SYSTEM);
-
-			hits.recordHits(searcher.search(fullQuery), searcher);
-
-			return hits;
+			return SearchEngineUtil.search(
+				CompanyConstants.SYSTEM, new QueryImpl(fullQuery), start, end);
 		}
 		catch (Exception e) {
-			return LuceneUtil.closeSearcher(searcher, keywords, e);
+			throw new SystemException(e);
 		}
 	}
 

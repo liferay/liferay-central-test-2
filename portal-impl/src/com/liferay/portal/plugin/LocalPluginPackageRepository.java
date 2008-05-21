@@ -24,10 +24,9 @@ package com.liferay.portal.plugin;
 
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.plugin.PluginPackageNameAndContextComparator;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.Version;
-
-import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -132,8 +131,8 @@ public class LocalPluginPackageRepository {
 			PluginPackageIndexer.removePluginPackage(
 				pluginPackage.getModuleId());
 		}
-		catch (IOException ioe) {
-			_log.error("Deleting index " + pluginPackage.getModuleId(), ioe);
+		catch (SearchException se) {
+			_log.error("Deleting index " + pluginPackage.getModuleId(), se);
 		}
 	}
 

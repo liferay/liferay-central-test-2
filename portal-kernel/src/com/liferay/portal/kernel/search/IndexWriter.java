@@ -36,6 +36,9 @@ public interface IndexWriter {
 	public void deleteDocument(long companyId, String uid)
 		throws SearchException;
 
+	public void deletePortletDocuments(long companyId, String portletId)
+		throws SearchException;
+
 	public void updateDocument(long companyId, String uid, Document doc)
 		throws SearchException;
 

@@ -51,11 +51,15 @@ public class LuceneIndexWriterMessageListener implements MessageListener {
 			}
 			else if (command.equals(IndexWriterRequestMessage.DELETE)) {
 				LuceneSearchEngineUtil.deleteDocument(
-					iwrm.getCompanyId(), iwrm.getUid());
+					iwrm.getCompanyId(), iwrm.getId());
+			}
+			else if (command.equals(IndexWriterRequestMessage.DELETE_PORTLET_DOCS)) {
+				LuceneSearchEngineUtil.deletePortletDocuments(
+					iwrm.getCompanyId(), iwrm.getId());
 			}
 			else if (command.equals(IndexWriterRequestMessage.UPDATE)) {
 				LuceneSearchEngineUtil.updateDocument(
-					iwrm.getCompanyId(), iwrm.getUid(), iwrm.getDocument());
+					iwrm.getCompanyId(), iwrm.getId(), iwrm.getDocument());
 			}
 		}
 		catch (Exception e) {

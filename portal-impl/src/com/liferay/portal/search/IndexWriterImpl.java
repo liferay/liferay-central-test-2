@@ -72,6 +72,22 @@ public class IndexWriterImpl implements IndexWriter {
 		}
 	}
 
+	public void deletePortletDocuments(long companyId, String portletId)
+		throws SearchException {
+
+		try {
+			IndexWriterRequestMessage req = new IndexWriterRequestMessage(
+				IndexWriterRequestMessage.DELETE_PORTLET_DOCS, companyId, portletId);
+
+			MessageBusUtil.sendMessage(
+				DestinationNames.SEARCH_INDEX_WRITER_REQUEST,
+				JSONUtil.serialize(req));
+		}
+		catch (MarshallException me) {
+			throw new SearchException(me);
+		}
+	}
+
 	public void updateDocument(long companyId, String uid, Document doc)
 		throws SearchException {
 

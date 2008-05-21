@@ -22,36 +22,29 @@
 
 package com.liferay.portal.plugin;
 
+import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.CompanyConstants;
-import com.liferay.portal.search.lucene.LuceneFields;
-import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.util.License;
-
-import java.io.IOException;
+import com.liferay.util.search.DocumentImpl;
 
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.portlet.PortletURL;
-
-import org.apache.lucene.document.Document;
-import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.index.Term;
 
 /**
  * <a href="PluginPackageIndexer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
+ * @author Bruno Farache
  *
  */
 public class PluginPackageIndexer implements Indexer {
@@ -64,33 +57,23 @@ public class PluginPackageIndexer implements Indexer {
 			List liferayVersions, String shortDescription,
 			String longDescription, String changeLog, String pageURL,
 			String repositoryURL, String status, String installedVersion)
-		throws IOException {
+		throws SearchException {
 
-		Document doc = getAddPluginPackageDocument(
+		Document doc = getPluginPackageDocument(
 			moduleId, name, version, modifiedDate, author, types, tags,
 			licenses, liferayVersions, shortDescription, longDescription,
 			changeLog, pageURL, repositoryURL, status, installedVersion);
 
-		IndexWriter writer = null;
-
-		try {
-			writer = LuceneUtil.getWriter(CompanyConstants.SYSTEM);
-
-			writer.addDocument(doc);
-		}
-		finally {
-			if (writer != null) {
-				LuceneUtil.write(CompanyConstants.SYSTEM);
-			}
-		}
+		SearchEngineUtil.addDocument(CompanyConstants.SYSTEM, doc);
 	}
 
-	public static void cleanIndex() throws IOException {
-		LuceneUtil.deleteDocuments(
-			CompanyConstants.SYSTEM, new Term(Field.PORTLET_ID, PORTLET_ID));
+	public static void cleanIndex() throws SearchException {
+
+		SearchEngineUtil.deletePortletDocuments(
+			CompanyConstants.SYSTEM, PORTLET_ID);
 	}
 
-	public static Document getAddPluginPackageDocument(
+	public static Document getPluginPackageDocument(
 		String moduleId, String name, String version, Date modifiedDate,
 		String author, List<String> types, List<String> tags, List licenses,
 		List liferayVersions, String shortDescription,
@@ -106,101 +89,67 @@ public class PluginPackageIndexer implements Indexer {
 			name + " " + author + " " + shortDescription + " " +
 				longDescription;
 
-		Document doc = new Document();
+		Document doc = new DocumentImpl();
 
-		doc.add(
-			LuceneFields.getKeyword(
-				Field.UID, LuceneFields.getUID(PORTLET_ID, moduleId)));
+		doc.addUID(PORTLET_ID, moduleId);
 
-		doc.add(LuceneFields.getKeyword(Field.PORTLET_ID, PORTLET_ID));
+		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
+		doc.addKeyword(Field.GROUP_ID, moduleIdObj.getGroupId());
 
-		doc.add(LuceneFields.getText(Field.TITLE, name));
-		doc.add(LuceneFields.getText(Field.CONTENT, content));
+		doc.addText(Field.TITLE, name);
+		doc.addText(Field.CONTENT, content);
 
-		doc.add(LuceneFields.getDate(Field.MODIFIED));
+		doc.addModifiedDate();
 
-		doc.add(LuceneFields.getKeyword("moduleId", moduleId));
-		doc.add(LuceneFields.getKeyword("groupId", moduleIdObj.getGroupId()));
-		doc.add(
-			LuceneFields.getKeyword("artifactId", moduleIdObj.getArtifactId()));
-		doc.add(LuceneFields.getKeyword("version", version));
-		doc.add(LuceneFields.getDate("modified-date", modifiedDate));
-		doc.add(LuceneFields.getKeyword("shortDescription", shortDescription));
-		doc.add(LuceneFields.getKeyword("changeLog", changeLog));
-		doc.add(LuceneFields.getKeyword("repositoryURL", repositoryURL));
+		doc.addKeyword("moduleId", moduleId);
+		doc.addKeyword("artifactId", moduleIdObj.getArtifactId());
+		doc.addKeyword("version", version);
+		doc.addDate("modified-date", modifiedDate);
+		doc.addKeyword("shortDescription", shortDescription);
+		doc.addKeyword("changeLog", changeLog);
+		doc.addKeyword("repositoryURL", repositoryURL);
+		doc.addKeyword("type", types.toArray(new String[0]));
 
-		StringMaker sm = new StringMaker();
-
-		Iterator itr = types.iterator();
-
-		while (itr.hasNext()) {
-			String type = (String)itr.next();
-
-			doc.add(LuceneFields.getKeyword("type", type));
-
-			sm.append(type);
-
-			if (itr.hasNext()) {
-				sm.append(StringPool.COMMA);
-				sm.append(StringPool.SPACE);
-			}
-		}
-
-		doc.add(LuceneFields.getKeyword("types", sm.toString()));
-
-		sm = new StringMaker();
-
-		itr = tags.iterator();
-
-		while (itr.hasNext()) {
-			String tag = (String)itr.next();
-
-			doc.add(LuceneFields.getKeyword("tag", tag));
-
-			sm.append(tag);
-
-			if (itr.hasNext()) {
-				sm.append(StringPool.COMMA);
-				sm.append(StringPool.SPACE);
-			}
-		}
-
-		doc.add(LuceneFields.getKeyword("tags", sm.toString()));
+		String[] licenseNames = new String[licenses.size()];
 
 		boolean osiLicense = false;
 
-		itr = licenses.iterator();
+		for (int i = 0; i < licenses.size(); i++) {
+			License license = (License)licenses.get(i);
 
-		while (itr.hasNext()) {
-			License license = (License)itr.next();
-
-			doc.add(LuceneFields.getKeyword("license", license.getName()));
+			licenseNames[i] = license.getName();
 
 			if (license.isOsiApproved()) {
 				osiLicense = true;
 			}
 		}
 
-		doc.add(
-			LuceneFields.getKeyword(
-				"osi-approved-license", String.valueOf(osiLicense)));
-
-		doc.add(LuceneFields.getKeyword("status", status));
+		doc.addKeyword("license", licenseNames);
+		doc.addKeyword("osi-approved-license", String.valueOf(osiLicense));
+		doc.addKeyword("status", status);
 
 		if (installedVersion != null) {
-			doc.add(
-				LuceneFields.getKeyword("installedVersion", installedVersion));
+			doc.addKeyword("installedVersion", installedVersion);
 		}
+
+		doc.addKeyword(Field.TAGS_ENTRIES, tags.toArray(new String[0]));
 
 		return doc;
 	}
 
 	public static void removePluginPackage(String moduleId)
-		throws IOException {
+		throws SearchException {
 
-		LuceneUtil.deleteDocuments(
-			CompanyConstants.SYSTEM,
-			new Term(Field.UID, LuceneFields.getUID(PORTLET_ID, moduleId)));
+		SearchEngineUtil.deleteDocument(
+			CompanyConstants.SYSTEM, getPluginPackagerUID(moduleId));
+	}
+
+	public static String getPluginPackagerUID(String moduleId) {
+		Document doc = new DocumentImpl();
+
+		doc.addUID(PORTLET_ID, moduleId);
+
+		return doc.get(Field.UID);
 	}
 
 	public static void updatePluginPackage(
@@ -209,18 +158,15 @@ public class PluginPackageIndexer implements Indexer {
 			List liferayVersions, String shortDescription,
 			String longDescription, String changeLog, String pageURL,
 			String repositoryURL, String status, String installedVersion)
-		throws IOException {
+		throws SearchException {
 
-		try {
-			removePluginPackage(moduleId);
-		}
-		catch (IOException ioe) {
-		}
-
-		addPluginPackage(
+		Document doc = getPluginPackageDocument(
 			moduleId, name, version, modifiedDate, author, types, tags,
 			licenses, liferayVersions, shortDescription, longDescription,
 			changeLog, pageURL, repositoryURL, status, installedVersion);
+
+		SearchEngineUtil.updateDocument(
+			CompanyConstants.SYSTEM, doc.get(Field.UID), doc);
 	}
 
 	public DocumentSummary getDocumentSummary(
@@ -236,7 +182,7 @@ public class PluginPackageIndexer implements Indexer {
 
 		content = StringUtil.shorten(content, 200);
 
-		// URL
+		// Portlet URL
 
 		String moduleId = doc.get("moduleId");
 		String repositoryURL = doc.get("repositoryURL");

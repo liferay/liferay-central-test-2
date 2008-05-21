@@ -34,15 +34,17 @@ public class IndexWriterRequestMessage {
 
 	public static final String DELETE = "delete";
 
+	public static final String DELETE_PORTLET_DOCS = "delete_portlet_docs";
+
 	public static final String UPDATE = "update";
 
 	public IndexWriterRequestMessage() {
 	}
 
     public IndexWriterRequestMessage(
-		String command, long companyId, String uid) {
+		String command, long companyId, String id) {
 
-		this(command, companyId, uid, null);
+		this(command, companyId, id, null);
 	}
 
 	public IndexWriterRequestMessage(
@@ -52,11 +54,11 @@ public class IndexWriterRequestMessage {
 	}
 
 	public IndexWriterRequestMessage(
-		String command, long companyId, String uid, Document doc) {
+		String command, long companyId, String id, Document doc) {
 
 		_command = command;
 		_companyId = companyId;
-		_uid = uid;
+		_id = id;
 		_doc = doc;
 	}
 
@@ -76,12 +78,12 @@ public class IndexWriterRequestMessage {
 		_companyId = companyId;
 	}
 
-	public String getUid() {
-		return _uid;
+	public String getId() {
+		return _id;
 	}
 
-	public void setUid(String uid) {
-		_uid = uid;
+	public void setId(String id) {
+		_id = id;
 	}
 
 	public Document getDocument() {
@@ -94,7 +96,7 @@ public class IndexWriterRequestMessage {
 
 	private String _command;
 	private long _companyId;
-	private String _uid;
+	private String _id;
 	private Document _doc;
 
 }

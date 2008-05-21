@@ -46,6 +46,12 @@ public class LuceneSearchEngineUtil {
 		_engine.getWriter().deleteDocument(companyId, uid);
 	}
 
+	public static void deletePortletDocuments(long companyId, String portletId)
+		throws SearchException {
+
+		_engine.getWriter().deletePortletDocuments(companyId, portletId);
+	}
+
 	public static SearchEngine getSearchEngine() {
 		return _engine;
 	}

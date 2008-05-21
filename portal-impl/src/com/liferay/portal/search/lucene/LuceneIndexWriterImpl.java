@@ -79,6 +79,18 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 		}
 	}
 
+	public void deletePortletDocuments(long companyId, String portletId)
+		throws SearchException {
+
+		try {
+			LuceneUtil.deleteDocuments(
+				companyId, new Term(Field.PORTLET_ID, portletId));
+		}
+		catch (IOException ioe) {
+			throw new SearchException(ioe);
+		}
+	}
+
 	public void updateDocument(long companyId, String uid, Document doc)
 		throws SearchException {
 

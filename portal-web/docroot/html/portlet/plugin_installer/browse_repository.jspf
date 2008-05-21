@@ -155,7 +155,7 @@ try {
 	searchContainer.setOrderByCol(orderByCol);
 	searchContainer.setOrderByType(orderByType);
 
-	List hits = PluginPackageUtil.search(keywords, pluginType, tag, license, searchRepositoryURL, installStatus).toList();
+	List results = PluginPackageUtil.search(keywords, pluginType, tag, license, searchRepositoryURL, installStatus, searchContainer.getStart(), searchContainer.getEnd()).toList();
 
 	DocumentComparator docComparator = null;
 
@@ -174,10 +174,9 @@ try {
 		docComparator.addOrderBy("version");
 	}
 
-	Collections.sort(hits, docComparator);
+	Collections.sort(results, docComparator);
 
-	List results = ListUtil.subList(hits, searchContainer.getStart(), searchContainer.getEnd());
-	int total = hits.size();
+	int total = results.size();
 
 	searchContainer.setTotal(total);
 
@@ -195,7 +194,7 @@ try {
 		String pluginPackageShortDescription = doc.get("shortDescription");
 		String pluginPackageChangeLog = doc.get("changeLog");
 		String pluginPackageRepositoryURL = doc.get("repositoryURL");
-		String pluginPackageTags = doc.get("tags");
+		String pluginPackageTags = StringUtil.merge(doc.getValues(Field.TAGS_ENTRIES), StringPool.COMMA + StringPool.SPACE);
 
 		// The value for pluginPackage should never be null except when Lucene
 		// is out of sync as in LEP-4783 or when the plugin was not installed

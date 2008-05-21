@@ -64,8 +64,6 @@ public class Field {
 
 	public static final String USER_NAME = "userName";
 
-	public static final String VERSION_LABEL = "versionLabel";
-
 	public Field() {
 	}
 
