@@ -54,9 +54,10 @@
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-pages-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
 
 		try {
-			// We must use SearchEngine.ALL_POS in this case, otherwise
-			// pagination will break. We need to filter the results with
-			// ContentHits first and THEN make a subset of the filtered results.
+
+			// We must use SearchEngine.ALL_POS or else pagination will break.
+			// We need to filter the results with ContentHits first and then
+			// make a subset of the filtered results.
 
 			Hits hits = CompanyLocalServiceUtil.search(company.getCompanyId(), PortletKeys.JOURNAL, 0, type, keywords, SearchEngineUtil.ALL_POS, SearchEngineUtil.ALL_POS);
 
