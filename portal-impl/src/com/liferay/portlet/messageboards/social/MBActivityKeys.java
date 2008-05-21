@@ -30,8 +30,8 @@ package com.liferay.portlet.messageboards.social;
  */
 public class MBActivityKeys {
 
-	public static final String ADD_MESSAGE = "ADD_MESSAGE";
+	public static final int ADD_MESSAGE = 1;
 
-	public static final String REPLY_MESSAGE = "REPLY_MESSAGE";
+	public static final int REPLY_MESSAGE = 2;
 
 }

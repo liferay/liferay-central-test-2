@@ -7,10 +7,7 @@ update BlogsEntry set draft = FALSE;
 alter table Contact_ add facebookSn VARCHAR(75) null;
 alter table Contact_ add mySpaceSn VARCHAR(75) null;
 
-alter table SocialActivity add mirrorActivityId LONG;
-
 drop table ExpandoRow;
-
 create table ExpandoRow (
 	rowId_ LONG not null primary key,
 	tableId LONG,
@@ -18,7 +15,6 @@ create table ExpandoRow (
 );
 
 drop table ExpandoValue;
-
 create table ExpandoValue (
 	valueId LONG not null primary key,
 	tableId LONG,
@@ -29,7 +25,20 @@ create table ExpandoValue (
 	data_ STRING null
 );
 
-update SocialActivity set type_ = 'ADD_PROPOSAL' where type_ = 'PROPOSE';
+drop table SocialActivity;
+create table SocialActivity (
+	activityId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	createDate DATE null,
+	mirrorActivityId LONG,
+	classNameId LONG,
+	classPK LONG,
+	type_ INTEGER,
+	extraData TEXT null,
+	receiverUserId LONG
+);
 
 create table SocialRequest (
 	uuid_ VARCHAR(75) null,

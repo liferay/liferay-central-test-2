@@ -1364,7 +1364,7 @@
 		<field name="mirrorActivityId" type="long" />
 		<field name="classNameId" type="long" />
 		<field name="classPK" type="long" />
-		<field name="type" type="String" />
+		<field name="type" type="int" />
 		<field name="extraData" type="String">
 			<hint-collection name="CLOB" />
 		</field>

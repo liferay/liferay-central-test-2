@@ -85,9 +85,9 @@ public interface SocialActivityModel extends BaseModel {
 
 	public void setClassPK(long classPK);
 
-	public String getType();
+	public int getType();
 
-	public void setType(String type);
+	public void setType(int type);
 
 	public String getExtraData();
 

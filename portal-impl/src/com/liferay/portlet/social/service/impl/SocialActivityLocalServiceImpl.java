@@ -45,8 +45,8 @@ public class SocialActivityLocalServiceImpl
 	extends SocialActivityLocalServiceBaseImpl {
 
 	public SocialActivity addActivity(
-			long userId, long groupId, String className, long classPK,
-			String type, String extraData, long receiverUserId)
+			long userId, long groupId, String className, long classPK, int type,
+			String extraData, long receiverUserId)
 		throws PortalException, SystemException {
 
 		return addActivity(
@@ -56,7 +56,7 @@ public class SocialActivityLocalServiceImpl
 
 	public SocialActivity addActivity(
 			long userId, long groupId, Date createDate, String className,
-			long classPK, String type, String extraData, long receiverUserId)
+			long classPK, int type, String extraData, long receiverUserId)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);

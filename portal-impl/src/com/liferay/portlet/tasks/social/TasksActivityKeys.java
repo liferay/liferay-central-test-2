@@ -30,10 +30,10 @@ package com.liferay.portlet.tasks.social;
  */
 public class TasksActivityKeys {
 
-	public static final String ADD_PROPOSAL = "ADD_PROPOSAL";
+	public static final int ADD_PROPOSAL = 1;
 
-	public static final String ASSIGN_PROPOSAL = "ASSIGN_PROPOSAL";
+	public static final int ASSIGN_PROPOSAL = 2;
 
-	public static final String REVIEW_PROPOSAL = "REVIEW_PROPOSAL";
+	public static final int REVIEW_PROPOSAL = 3;
 
 }

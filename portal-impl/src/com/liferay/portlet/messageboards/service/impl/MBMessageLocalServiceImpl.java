@@ -510,7 +510,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		if (!message.isDiscussion() && !message.isAnonymous() &&
 			!user.isDefaultUser()) {
 
-			String activityType = MBActivityKeys.ADD_MESSAGE;
+			int activityType = MBActivityKeys.ADD_MESSAGE;
 			long receiverUserId = 0;
 
 			if (parentMessage != null) {

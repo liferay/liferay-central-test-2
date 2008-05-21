@@ -1205,7 +1205,7 @@ create table SocialActivity (
 	mirrorActivityId LONG,
 	classNameId LONG,
 	classPK LONG,
-	type_ VARCHAR(75) null,
+	type_ INTEGER,
 	extraData TEXT null,
 	receiverUserId LONG
 );

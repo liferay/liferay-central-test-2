@@ -150,11 +150,11 @@ public class SocialActivitySoap implements Serializable {
 		_classPK = classPK;
 	}
 
-	public String getType() {
+	public int getType() {
 		return _type;
 	}
 
-	public void setType(String type) {
+	public void setType(int type) {
 		_type = type;
 	}
 
@@ -182,7 +182,7 @@ public class SocialActivitySoap implements Serializable {
 	private long _mirrorActivityId;
 	private long _classNameId;
 	private long _classPK;
-	private String _type;
+	private int _type;
 	private String _extraData;
 	private long _receiverUserId;
 }

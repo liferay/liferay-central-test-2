@@ -77,7 +77,7 @@ public class SocialActivityPersistenceTest extends BasePersistenceTestCase {
 		newSocialActivity.setMirrorActivityId(nextLong());
 		newSocialActivity.setClassNameId(nextLong());
 		newSocialActivity.setClassPK(nextLong());
-		newSocialActivity.setType(randomString());
+		newSocialActivity.setType(nextInt());
 		newSocialActivity.setExtraData(randomString());
 		newSocialActivity.setReceiverUserId(nextLong());
 
@@ -157,7 +157,7 @@ public class SocialActivityPersistenceTest extends BasePersistenceTestCase {
 		socialActivity.setMirrorActivityId(nextLong());
 		socialActivity.setClassNameId(nextLong());
 		socialActivity.setClassPK(nextLong());
-		socialActivity.setType(randomString());
+		socialActivity.setType(nextInt());
 		socialActivity.setExtraData(randomString());
 		socialActivity.setReceiverUserId(nextLong());
 

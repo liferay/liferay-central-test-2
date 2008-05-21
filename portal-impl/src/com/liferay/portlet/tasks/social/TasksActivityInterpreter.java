@@ -55,7 +55,7 @@ public class TasksActivityInterpreter extends BaseSocialActivityInterpreter {
 		String receiverUserName = getUserName(
 			activity.getReceiverUserId(), themeDisplay);
 
-		String activityType = activity.getType();
+		int activityType = activity.getType();
 
 		JSONObject extraData = null;
 
@@ -67,16 +67,16 @@ public class TasksActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String title = StringPool.BLANK;
 
-		if (activityType.equals(TasksActivityKeys.ADD_PROPOSAL)) {
+		if (activityType == TasksActivityKeys.ADD_PROPOSAL) {
 			title = themeDisplay.translate(
 				"activity-tasks-add-proposal", creatorUserName);
 		}
-		else if (activityType.equals(TasksActivityKeys.ASSIGN_PROPOSAL)) {
+		else if (activityType == TasksActivityKeys.ASSIGN_PROPOSAL) {
 			title = themeDisplay.translate(
 				"activity-tasks-assign-proposal",
 				new Object[] {creatorUserName, receiverUserName});
 		}
-		else if (activityType.equals(TasksActivityKeys.REVIEW_PROPOSAL)) {
+		else if (activityType == TasksActivityKeys.REVIEW_PROPOSAL) {
 			title = themeDisplay.translate(
 				"activity-tasks-review-proposal",
 				new Object[] {creatorUserName, receiverUserName});
@@ -100,7 +100,7 @@ public class TasksActivityInterpreter extends BaseSocialActivityInterpreter {
 		sm.append(": ");
 		sm.append(proposal.getDescription());
 
-		if (!activityType.equals(TasksActivityKeys.ADD_PROPOSAL)) {
+		if (activityType != TasksActivityKeys.ADD_PROPOSAL) {
 			int stage = extraData.getInt("stage");
 			boolean completed = extraData.getBoolean("completed");
 			boolean rejected = extraData.getBoolean("rejected");

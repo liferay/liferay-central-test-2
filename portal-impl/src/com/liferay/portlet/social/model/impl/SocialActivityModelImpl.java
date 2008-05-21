@@ -90,7 +90,7 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 			{ "classPK", new Integer(Types.BIGINT) },
 			
 
-			{ "type_", new Integer(Types.VARCHAR) },
+			{ "type_", new Integer(Types.INTEGER) },
 			
 
 			{ "extraData", new Integer(Types.CLOB) },
@@ -98,7 +98,7 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 
 			{ "receiverUserId", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table SocialActivity (activityId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,mirrorActivityId LONG,classNameId LONG,classPK LONG,type_ VARCHAR(75) null,extraData TEXT null,receiverUserId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table SocialActivity (activityId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,mirrorActivityId LONG,classNameId LONG,classPK LONG,type_ INTEGER,extraData TEXT null,receiverUserId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table SocialActivity";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -240,14 +240,12 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getType() {
-		return GetterUtil.getString(_type);
+	public int getType() {
+		return _type;
 	}
 
-	public void setType(String type) {
-		if (((type == null) && (_type != null)) ||
-				((type != null) && (_type == null)) ||
-				((type != null) && (_type != null) && !type.equals(_type))) {
+	public void setType(int type) {
+		if (type != _type) {
 			_type = type;
 		}
 	}
@@ -292,7 +290,7 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 			model.setMirrorActivityId(getMirrorActivityId());
 			model.setClassNameId(getClassNameId());
 			model.setClassPK(getClassPK());
-			model.setType(HtmlUtil.escape(getType()));
+			model.setType(getType());
 			model.setExtraData(HtmlUtil.escape(getExtraData()));
 			model.setReceiverUserId(getReceiverUserId());
 
@@ -379,7 +377,7 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 	private long _mirrorActivityId;
 	private long _classNameId;
 	private long _classPK;
-	private String _type;
+	private int _type;
 	private String _extraData;
 	private long _receiverUserId;
 }

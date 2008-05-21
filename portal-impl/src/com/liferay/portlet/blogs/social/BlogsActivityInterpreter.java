@@ -57,7 +57,7 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 		String receiverUserName = getUserName(
 			activity.getReceiverUserId(), themeDisplay);
 
-		String activityType = activity.getType();
+		int activityType = activity.getType();
 
 		JSONObject extraData = null;
 
@@ -69,12 +69,12 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String title = StringPool.BLANK;
 
-		if (activityType.equals(BlogsActivityKeys.ADD_COMMENT)) {
+		if (activityType == BlogsActivityKeys.ADD_COMMENT) {
 			title = themeDisplay.translate(
 				"activity-blogs-add-comment",
 				new Object[] {creatorUserName, receiverUserName});
 		}
-		else if (activityType.equals(BlogsActivityKeys.ADD_ENTRY)) {
+		else if (activityType == BlogsActivityKeys.ADD_ENTRY) {
 			title = themeDisplay.translate(
 				"activity-blogs-add-entry", creatorUserName);
 		}
@@ -94,20 +94,20 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 		sm.append(entryURL);
 		sm.append("\">");
 
-		if (activityType.equals(BlogsActivityKeys.ADD_COMMENT)) {
+		if (activityType == BlogsActivityKeys.ADD_COMMENT) {
 			long messageId = extraData.getInt("messageId");
 
 			MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
 
 			sm.append(cleanContent(message.getBody()));
 		}
-		else if (activityType.equals(BlogsActivityKeys.ADD_ENTRY)) {
+		else if (activityType == BlogsActivityKeys.ADD_ENTRY) {
 			sm.append(entry.getTitle());
 		}
 
 		sm.append("</a><br />");
 
-		if (activityType.equals(BlogsActivityKeys.ADD_ENTRY)) {
+		if (activityType == BlogsActivityKeys.ADD_ENTRY) {
 			sm.append(cleanContent(entry.getContent()));
 		}
 
