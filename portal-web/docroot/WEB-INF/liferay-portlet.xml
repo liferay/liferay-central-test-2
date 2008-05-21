@@ -386,7 +386,6 @@
 		<struts-path>shopping</struts-path>
 		<configuration-action-class>com.liferay.portlet.shopping.action.ConfigurationActionImpl</configuration-action-class>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
-		<preferences-owned-by-group>false</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
