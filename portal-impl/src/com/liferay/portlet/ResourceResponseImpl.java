@@ -26,6 +26,7 @@ import java.util.Locale;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
+import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 import javax.portlet.ResourceURL;
 
@@ -50,13 +51,21 @@ public class ResourceResponseImpl
 	public PortletURLImpl createPortletURLImpl(
 		String portletName, String lifecycle) {
 
-		if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
+		ResourceRequest resourceReq = (ResourceRequest)getPortletRequest();
+
+		String cacheability = resourceReq.getCacheability();
+
+		if (cacheability.equals(ResourceURL.PAGE)) {
+		}
+		else if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
 			throw new IllegalStateException(
-				"Unable to create an action URL from a resource response");
+				"Unable to create an action URL from a resource response " +
+					"when the cacheability is not set to PAGE");
 		}
 		else if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
 			throw new IllegalStateException(
-				"Unable to create a render URL from a resource response");
+				"Unable to create a render URL from a resource response when " +
+					"the cacheability is not set to PAGE");
 		}
 
 		return super.createPortletURLImpl(portletName, lifecycle);
