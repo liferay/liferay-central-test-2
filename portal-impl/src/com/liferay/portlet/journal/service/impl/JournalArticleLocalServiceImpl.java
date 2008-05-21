@@ -1723,25 +1723,22 @@ public class JournalArticleLocalServiceImpl
 			long userId, JournalArticle article, String[] tagsEntries)
 		throws PortalException, SystemException {
 
-		if (article.isApproved() || (article.getVersion() == 1)) {
+		// Get the earliest display date and latest expiration date among
+		// all article versions
 
-			// Get the earliest display date and latest expiration date among
-			// all article versions
+		Date[] dateInterval = getDateInterval(
+			article.getGroupId(), article.getArticleId(),
+			article.getDisplayDate(), article.getExpirationDate());
 
-			Date[] dateInterval = getDateInterval(
-				article.getGroupId(), article.getArticleId(),
-				article.getDisplayDate(), article.getExpirationDate());
+		Date displayDate = dateInterval[0];
+		Date expirationDate = dateInterval[1];
 
-			Date displayDate = dateInterval[0];
-			Date expirationDate = dateInterval[1];
-
-			tagsAssetLocalService.updateAsset(
-				userId, article.getGroupId(), JournalArticle.class.getName(),
-				article.getResourcePrimKey(), tagsEntries, null, null,
-				displayDate, expirationDate, ContentTypes.TEXT_HTML,
-				article.getTitle(), article.getDescription(), null, null, 0, 0,
-				null, false);
-		}
+		tagsAssetLocalService.updateAsset(
+			userId, article.getGroupId(), JournalArticle.class.getName(),
+			article.getResourcePrimKey(), tagsEntries, null, null,
+			displayDate, expirationDate, ContentTypes.TEXT_HTML,
+			article.getTitle(), article.getDescription(), null, null, 0, 0,
+			null, false);
 	}
 
 	protected void checkStructure(JournalArticle article)
