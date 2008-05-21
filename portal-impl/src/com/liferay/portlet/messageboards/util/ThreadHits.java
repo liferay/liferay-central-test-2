@@ -20,31 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.journalcontentsearch.util;
+package com.liferay.portlet.messageboards.util;
 
 import com.liferay.portal.kernel.search.Document;
-import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.util.Time;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
- * <a href="ContentHits.java.html"><b><i>View Source</i></b></a>
+ * <a href="ThreadHits.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
- * @author Raymond Augé
+ * @author Brian Wing Shun Chan
  *
  */
-public class ContentHits {
+public class ThreadHits {
 
-	public void recordHits(Hits hits, long groupId, boolean privateLayout)
-		throws Exception  {
-
-		// This can later be optimized according to LEP-915.
+	public void recordHits(Hits hits) throws Exception {
+		Set<Long> threadIds = new HashSet<Long>();
 
 		List<Document> docs = new ArrayList<Document>();
 		List<Float> scores = new ArrayList<Float>();
@@ -52,16 +49,11 @@ public class ContentHits {
 		for (int i = 0; i < hits.getLength(); i++) {
 			Document doc = hits.doc(i);
 
-			String articleId = doc.get("articleId");
-			long articleGroupId = GetterUtil.getLong(doc.get(Field.GROUP_ID));
+			Long threadId = GetterUtil.getLong(doc.get("threadId"));
 
-			if (JournalContentSearchLocalServiceUtil.getLayoutIdsCount(
-					groupId, privateLayout, articleId) > 0) {
+			if (!threadIds.contains(threadId)) {
+				threadIds.add(threadId);
 
-				docs.add(hits.doc(i));
-				scores.add(hits.score(i));
-			}
-			else if (!isShowListed() && (articleGroupId == groupId)) {
 				docs.add(hits.doc(i));
 				scores.add(hits.score(i));
 			}
@@ -75,15 +67,5 @@ public class ContentHits {
 			(float)(System.currentTimeMillis() - hits.getStart()) /
 				Time.SECOND);
 	}
-
-	public boolean isShowListed() {
-		return _showListed;
-	}
-
-	public void setShowListed(boolean showListed) {
-		_showListed = showListed;
-	}
-
-	private boolean _showListed = true;
 
 }

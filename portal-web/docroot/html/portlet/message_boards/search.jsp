@@ -94,9 +94,18 @@ headerNames.add("score");
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-messages-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
 
 try {
-	Hits results = MBCategoryLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), categoryIdsArray, threadId, keywords, searchContainer.getStart(), searchContainer.getEnd());
+	// We must use SearchEngine.ALL_POS in this case, otherwise
+	// pagination will break. We need to filter the results with
+	// ThreadHits first and THEN make a subset of the filtered results.
 
-	int total = results.getLength();
+	Hits hits = MBCategoryLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), categoryIdsArray, threadId, keywords, SearchEngineUtil.ALL_POS, SearchEngineUtil.ALL_POS);
+
+	ThreadHits threadHits = new ThreadHits();
+
+	threadHits.recordHits(hits);
+
+	Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
+	int total = hits.getLength();
 
 	searchContainer.setTotal(total);
 

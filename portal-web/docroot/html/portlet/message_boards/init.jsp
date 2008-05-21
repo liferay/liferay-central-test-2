@@ -29,6 +29,7 @@
 <%@ page import="com.liferay.documentlibrary.service.DLServiceUtil" %>
 <%@ page import="com.liferay.portal.kernel.search.Document" %>
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>
+<%@ page import="com.liferay.portal.kernel.search.SearchEngineUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.BannedUserException" %>
 <%@ page import="com.liferay.portlet.messageboards.CategoryNameException" %>
 <%@ page import="com.liferay.portlet.messageboards.MessageBodyException" %>
@@ -57,6 +58,7 @@
 <%@ page import="com.liferay.portlet.messageboards.service.permission.MBMessagePermission" %>
 <%@ page import="com.liferay.portlet.messageboards.util.BBCodeUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.util.MBUtil" %>
+<%@ page import="com.liferay.portlet.messageboards.util.ThreadHits" %>
 <%@ page import="com.liferay.portlet.messageboards.util.comparator.MessageCreateDateComparator" %>
 <%@ page import="com.liferay.util.RSSUtil" %>
 
