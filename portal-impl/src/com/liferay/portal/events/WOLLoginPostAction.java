@@ -25,6 +25,8 @@ package com.liferay.portal.events;
 import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.kernel.events.Action;
 import com.liferay.portal.kernel.events.ActionException;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.Organization;
@@ -266,6 +268,9 @@ public class WOLLoginPostAction extends Action {
 		addJiraUserId(user);
 
 		addOrganizationsLayouts(organizations);
+
+		MessageBusUtil.sendMessage(
+			DestinationNames.IP_GEOCODER_REQUEST, user.getLastLoginIP());
 	}
 
 	private static final String _GET_JIRA_USER_ID =
