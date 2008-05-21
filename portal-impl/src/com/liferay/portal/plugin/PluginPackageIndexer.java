@@ -68,7 +68,6 @@ public class PluginPackageIndexer implements Indexer {
 	}
 
 	public static void cleanIndex() throws SearchException {
-
 		SearchEngineUtil.deletePortletDocuments(
 			CompanyConstants.SYSTEM, PORTLET_ID);
 	}
@@ -136,19 +135,19 @@ public class PluginPackageIndexer implements Indexer {
 		return doc;
 	}
 
-	public static void removePluginPackage(String moduleId)
-		throws SearchException {
-
-		SearchEngineUtil.deleteDocument(
-			CompanyConstants.SYSTEM, getPluginPackagerUID(moduleId));
-	}
-
 	public static String getPluginPackagerUID(String moduleId) {
 		Document doc = new DocumentImpl();
 
 		doc.addUID(PORTLET_ID, moduleId);
 
 		return doc.get(Field.UID);
+	}
+
+	public static void removePluginPackage(String moduleId)
+		throws SearchException {
+
+		SearchEngineUtil.deleteDocument(
+			CompanyConstants.SYSTEM, getPluginPackagerUID(moduleId));
 	}
 
 	public static void updatePluginPackage(
