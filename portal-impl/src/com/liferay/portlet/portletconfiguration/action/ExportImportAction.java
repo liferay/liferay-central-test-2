@@ -22,8 +22,10 @@
 
 package com.liferay.portlet.portletconfiguration.action;
 
+import com.liferay.portal.LarTypeException;
 import com.liferay.portal.LayoutImportException;
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.PortletIdException;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Portlet;
@@ -175,9 +177,15 @@ public class ExportImportAction extends EditConfigurationAction {
 			SessionMessages.add(req, "request_processed");
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			if ((e instanceof LarTypeException) ||
+					(e instanceof PortletIdException)) {
+				SessionErrors.add(req, e.getClass().getName());
+			}
+			else {
+				_log.error(e, e);
 
-			SessionErrors.add(req, LayoutImportException.class.getName());
+				SessionErrors.add(req, LayoutImportException.class.getName());
+			}
 		}
 	}
 

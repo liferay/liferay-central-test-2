@@ -24,10 +24,12 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
+<%@ page import="com.liferay.portal.LarTypeException" %>
 <%@ page import="com.liferay.portal.LayoutImportException" %>
 <%@ page import="com.liferay.portal.NoSuchLayoutException" %>
 <%@ page import="com.liferay.portal.NoSuchPortletItemException" %>
 <%@ page import="com.liferay.portal.NoSuchResourceException" %>
+<%@ page import="com.liferay.portal.PortletIdException" %>
 <%@ page import="com.liferay.portal.PortletItemNameException" %>
 <%@ page import="com.liferay.portal.ResourcePrimKeyException" %>
 <%@ page import="com.liferay.portal.kernel.lar.PortletDataException" %>

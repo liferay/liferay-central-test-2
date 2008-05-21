@@ -115,8 +115,10 @@ boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionCla
 			url="<%= portletURL.toString() %>"
 		/>
 
+		<liferay-ui:error exception="<%= LarTypeException.class %>" message="please-import-a-valid-lar-file" />
 		<liferay-ui:error exception="<%= LayoutImportException.class %>" message="an-unexpected-error-occurred-while-importing-your-file" />
 		<liferay-ui:error exception="<%= NoSuchLayoutException.class %>" message="an-error-occurred-because-the-live-group-does-not-have-the-current-page" />
+		<liferay-ui:error exception="<%= PortletIdException.class %>" message="please-import-a-lar-file-for-the-current-portlet" />
 
 		<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/export_import" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveData(); return false;">
 		<input name="<portlet:namespace />tabs1" type="hidden" value="export_import">

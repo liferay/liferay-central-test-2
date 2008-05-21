@@ -1696,6 +1696,7 @@
 		<exception>GroupFriendlyURL</exception>
 		<exception>GroupName</exception>
 		<exception>EmailAddress</exception>
+		<exception>LarType</exception>
 		<exception>LayoutFriendlyURL</exception>
 		<exception>LayoutHidden</exception>
 		<exception>LayoutImport</exception>
@@ -1714,6 +1715,7 @@
 		<exception>PhoneNumber</exception>
 		<exception>PortletActive</exception>
 		<exception>PortletDefaultPreferences</exception>
+		<exception>PortletId</exception>
 		<exception>PortletItemName</exception>
 		<exception>RegionCode</exception>
 		<exception>RegionName</exception>

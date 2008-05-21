@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.portal.LarTypeException;
 import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.LayoutHiddenException;
 import com.liferay.portal.LayoutImportException;
@@ -30,6 +31,7 @@ import com.liferay.portal.LayoutTypeException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchPortletPreferencesException;
 import com.liferay.portal.PortalException;
+import com.liferay.portal.PortletIdException;
 import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.comm.CommLink;
@@ -828,6 +830,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		header.addAttribute("group-id", String.valueOf(layout.getGroupId()));
 		header.addAttribute("export-date", Time.getRFC822());
 		header.addAttribute("type", "portlet");
+		header.addAttribute(
+			"rootPortletId", PortletConstants.getRootPortletId(portletId));
 
 		// Data
 
@@ -1563,8 +1567,16 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		String type = header.attributeValue("type");
 
 		if (!type.equals("portlet")) {
-			throw new LayoutImportException(
+			throw new LarTypeException(
 				"Invalid type of LAR file (" + type + ")");
+		}
+
+		String rootPortletId = header.attributeValue("rootPortletId");
+
+		if (!PortletConstants.getRootPortletId(portletId).equals(
+				rootPortletId)) {
+			throw new PortletIdException(
+				"Invalid portletId (" + rootPortletId +")");
 		}
 
 		// Read comments, ratings, and tags to make them available to the data
