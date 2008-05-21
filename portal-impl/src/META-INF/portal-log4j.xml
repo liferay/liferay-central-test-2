@@ -664,6 +664,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="org.jabsorb">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="org.jgroups">
 		<priority value="ERROR" />
 	</category>
