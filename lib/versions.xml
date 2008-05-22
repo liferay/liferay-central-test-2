@@ -154,6 +154,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>development/groovy.jar</file-name>
+		<version>1.5.6</version>
+		<project-name>Groovy</project-name>
+		<project-url>http://groovy.codehaus.org</project-url>
+		<licenses>
+			<license>
+				<license-name>BSD Style License</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>development/hsql.jar</file-name>
 		<version>1.8.0.7</version>
 		<project-name>HSQL Database Engine</project-name>
@@ -325,6 +336,17 @@
 		<licenses>
 			<license>
 				<license-name>GPL 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>development/jruby.jar</file-name>
+		<version>1.1.1</version>
+		<project-name>JRuby</project-name>
+		<project-url>http://jruby.codehaus.org</project-url>
+		<licenses>
+			<license>
+				<license-name>LGPL 2.1</license-name>
 			</license>
 		</licenses>
 	</library>

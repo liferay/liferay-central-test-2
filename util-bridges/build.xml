@@ -14,7 +14,7 @@
 			<pathelement path="${project.dir}/portal-service/classes" />
 			<pathelement path="${project.dir}/util-java/classes" />
 			<fileset dir="${project.dir}/lib/development" includes="icefaces.jar,icefaces-comps.jar,jsf-api.jar,jsf-impl.jar,myfaces-api.jar,myfaces-impl.jar" />
-			<fileset dir="${project.dir}/lib/portal" includes="commons-logging.jar,portals-bridges.jar,struts.jar" />
+			<fileset dir="${project.dir}/lib/portal" includes="bsf.jar,commons-logging.jar,groovy.jar,jruby.jar,portals-bridges.jar,struts.jar" />
 		</path>
 
 		<javac
