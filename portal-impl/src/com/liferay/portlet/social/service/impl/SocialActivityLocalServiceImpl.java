@@ -105,6 +105,37 @@ public class SocialActivityLocalServiceImpl
 		return activity;
 	}
 
+	public SocialActivity addUniqueActivity(
+			long userId, long groupId, String className, long classPK, int type,
+			String extraData, long receiverUserId)
+		throws PortalException, SystemException {
+
+		return addUniqueActivity(
+			userId, groupId, new Date(), className, classPK, type, extraData,
+			receiverUserId);
+	}
+
+	public SocialActivity addUniqueActivity(
+			long userId, long groupId, Date createDate, String className,
+			long classPK, int type, String extraData, long receiverUserId)
+		throws PortalException, SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		SocialActivity socialActivity =
+			socialActivityPersistence.fetchByG_U_C_C_T_E_R(
+				groupId, userId, classNameId, classPK, type, extraData,
+				receiverUserId);
+
+		if (socialActivity != null) {
+			return socialActivity;
+		}
+
+		return addActivity(
+			userId, groupId, createDate, className, classPK, type, extraData,
+			receiverUserId);
+	}
+
 	public void deleteActivities(String className, long classPK)
 		throws SystemException {
 

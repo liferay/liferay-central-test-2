@@ -87,6 +87,19 @@ public interface SocialActivityLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portlet.social.model.SocialActivity addUniqueActivity(
+		long userId, long groupId, java.lang.String className, long classPK,
+		int type, java.lang.String extraData, long receiverUserId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.social.model.SocialActivity addUniqueActivity(
+		long userId, long groupId, java.util.Date createDate,
+		java.lang.String className, long classPK, int type,
+		java.lang.String extraData, long receiverUserId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public void deleteActivities(java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;
 

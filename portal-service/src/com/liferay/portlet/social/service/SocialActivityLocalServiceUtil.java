@@ -124,6 +124,29 @@ public class SocialActivityLocalServiceUtil {
 			createDate, className, classPK, type, extraData, receiverUserId);
 	}
 
+	public static com.liferay.portlet.social.model.SocialActivity addUniqueActivity(
+		long userId, long groupId, java.lang.String className, long classPK,
+		int type, java.lang.String extraData, long receiverUserId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		SocialActivityLocalService socialActivityLocalService = SocialActivityLocalServiceFactory.getService();
+
+		return socialActivityLocalService.addUniqueActivity(userId, groupId,
+			className, classPK, type, extraData, receiverUserId);
+	}
+
+	public static com.liferay.portlet.social.model.SocialActivity addUniqueActivity(
+		long userId, long groupId, java.util.Date createDate,
+		java.lang.String className, long classPK, int type,
+		java.lang.String extraData, long receiverUserId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		SocialActivityLocalService socialActivityLocalService = SocialActivityLocalServiceFactory.getService();
+
+		return socialActivityLocalService.addUniqueActivity(userId, groupId,
+			createDate, className, classPK, type, extraData, receiverUserId);
+	}
+
 	public static void deleteActivities(java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
 		SocialActivityLocalService socialActivityLocalService = SocialActivityLocalServiceFactory.getService();

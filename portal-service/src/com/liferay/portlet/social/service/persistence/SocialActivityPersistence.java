@@ -289,6 +289,17 @@ public interface SocialActivityPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.social.NoSuchActivityException;
 
+	public com.liferay.portlet.social.model.SocialActivity findByG_U_C_C_T_E_R(
+		long groupId, long userId, long classNameId, long classPK, int type,
+		java.lang.String extraData, long receiverUserId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchActivityException;
+
+	public com.liferay.portlet.social.model.SocialActivity fetchByG_U_C_C_T_E_R(
+		long groupId, long userId, long classNameId, long classPK, int type,
+		java.lang.String extraData, long receiverUserId)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
@@ -332,6 +343,12 @@ public interface SocialActivityPersistence {
 	public void removeByM_C_C(long mirrorActivityId, long classNameId,
 		long classPK) throws com.liferay.portal.SystemException;
 
+	public void removeByG_U_C_C_T_E_R(long groupId, long userId,
+		long classNameId, long classPK, int type, java.lang.String extraData,
+		long receiverUserId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchActivityException;
+
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByGroupId(long groupId)
@@ -357,6 +374,10 @@ public interface SocialActivityPersistence {
 
 	public int countByM_C_C(long mirrorActivityId, long classNameId,
 		long classPK) throws com.liferay.portal.SystemException;
+
+	public int countByG_U_C_C_T_E_R(long groupId, long userId,
+		long classNameId, long classPK, int type, java.lang.String extraData,
+		long receiverUserId) throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;
 }
