@@ -23,6 +23,7 @@
 package com.liferay.portal.upgrade.util;
 
 import com.liferay.portal.kernel.util.DateUtil;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
@@ -33,7 +34,6 @@ import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.StagnantRowException;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.FileUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.dao.DataAccess;
 import com.liferay.util.dao.hibernate.BooleanType;

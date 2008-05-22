@@ -23,10 +23,11 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.ClassUtil;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.util.FileUtil;
+import com.liferay.portal.util.InitUtil;
 import com.liferay.util.ListUtil;
 
 import java.io.BufferedReader;
@@ -50,6 +51,10 @@ import org.apache.tools.ant.DirectoryScanner;
  *
  */
 public class SourceFormatter {
+
+	static {
+		InitUtil.init();
+	}
 
 	public static void main(String[] args) {
 		try {

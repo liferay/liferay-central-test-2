@@ -26,7 +26,7 @@ import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.util.FileUtil;
+import com.liferay.portal.kernel.util.FileUtil;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;

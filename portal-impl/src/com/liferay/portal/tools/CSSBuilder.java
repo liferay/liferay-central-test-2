@@ -22,8 +22,9 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.util.FileUtil;
+import com.liferay.portal.util.InitUtil;
 
 import java.io.File;
 
@@ -34,6 +35,10 @@ import java.io.File;
  *
  */
 public class CSSBuilder {
+
+	static {
+		InitUtil.init();
+	}
 
 	public static void main(String[] args) {
 		if (args.length == 2) {

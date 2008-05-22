@@ -27,11 +27,11 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.image.ImageBag;
 import com.liferay.portal.kernel.image.ImageProcessorUtil;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.FileUtil;
 
 import java.awt.image.RenderedImage;
 

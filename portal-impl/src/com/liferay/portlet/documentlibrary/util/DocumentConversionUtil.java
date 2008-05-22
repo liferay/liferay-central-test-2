@@ -33,12 +33,12 @@ import com.artofsolving.jodconverter.openoffice.converter.StreamOpenOfficeDocume
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.util.FileUtil;
 import com.liferay.util.SystemProperties;
 
 import java.io.ByteArrayOutputStream;

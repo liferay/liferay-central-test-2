@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.news.tools;
 
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.util.InitUtil;
-import com.liferay.util.FileUtil;
 
 import java.io.File;
 

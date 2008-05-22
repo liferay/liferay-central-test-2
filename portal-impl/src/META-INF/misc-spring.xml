@@ -154,6 +154,12 @@
 			<ref bean="com.liferay.portal.util.DigesterImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.util.FileImpl" class="com.liferay.portal.util.FileImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.kernel.util.FileUtil" class="com.liferay.portal.kernel.util.FileUtil" lazy-init="true">
+		<property name="file">
+			<ref bean="com.liferay.portal.util.FileImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.util.HtmlImpl" class="com.liferay.portal.util.HtmlImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.kernel.util.HtmlUtil" class="com.liferay.portal.kernel.util.HtmlUtil" lazy-init="true">
 		<property name="html">

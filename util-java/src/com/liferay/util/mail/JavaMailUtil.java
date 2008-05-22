@@ -22,8 +22,8 @@
 
 package com.liferay.util.mail;
 
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.util.FileUtil;
 
 import java.io.IOException;
 import java.io.InputStream;

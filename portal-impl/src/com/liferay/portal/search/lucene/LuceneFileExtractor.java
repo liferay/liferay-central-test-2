@@ -23,9 +23,9 @@
 package com.liferay.portal.search.lucene;
 
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.util.FileUtil;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;

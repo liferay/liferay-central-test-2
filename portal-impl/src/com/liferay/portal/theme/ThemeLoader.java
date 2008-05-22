@@ -22,12 +22,12 @@
 
 package com.liferay.portal.theme;
 
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.util.FileUtil;
 
 import java.io.File;
 

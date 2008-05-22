@@ -22,11 +22,12 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.util.FileUtil;
+import com.liferay.portal.util.InitUtil;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -47,6 +48,10 @@ import org.apache.derby.tools.ij;
  *
  */
 public class DBLoader {
+
+	static {
+		InitUtil.init();
+	}
 
 	public static void main(String[] args) {
 		if (args.length == 2) {

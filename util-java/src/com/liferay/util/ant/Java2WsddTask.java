@@ -22,9 +22,9 @@
 
 package com.liferay.util.ant;
 
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.util.FileUtil;
 import com.liferay.util.Time;
 import com.liferay.util.xml.XMLFormatter;
 

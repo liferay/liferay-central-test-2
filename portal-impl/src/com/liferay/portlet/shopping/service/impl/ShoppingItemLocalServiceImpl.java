@@ -24,6 +24,7 @@ package com.liferay.portlet.shopping.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -52,7 +53,6 @@ import com.liferay.portlet.shopping.model.ShoppingItemField;
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
 import com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl;
 import com.liferay.portlet.shopping.service.base.ShoppingItemLocalServiceBaseImpl;
-import com.liferay.util.FileUtil;
 import com.liferay.util.PwdGenerator;
 import com.liferay.util.SystemProperties;
 

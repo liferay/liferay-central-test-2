@@ -22,7 +22,7 @@
 
 package com.liferay.portal.upgrade.util;
 
-import com.liferay.util.FileUtil;
+import com.liferay.portal.kernel.util.FileUtil;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

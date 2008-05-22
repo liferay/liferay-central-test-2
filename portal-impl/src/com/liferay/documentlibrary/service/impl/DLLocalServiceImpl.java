@@ -33,12 +33,12 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.util.FileUtil;
 import com.liferay.util.search.QueryImpl;
 
 import java.io.File;

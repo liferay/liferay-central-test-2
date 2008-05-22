@@ -23,11 +23,11 @@
 package com.liferay.mail.util;
 
 import com.liferay.mail.model.Filter;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ProcessUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.FileUtil;
 
 import java.io.BufferedReader;
 import java.io.File;

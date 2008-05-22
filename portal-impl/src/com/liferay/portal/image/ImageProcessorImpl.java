@@ -24,8 +24,8 @@ package com.liferay.portal.image;
 
 import com.liferay.portal.kernel.image.ImageBag;
 import com.liferay.portal.kernel.image.ImageProcessor;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.JavaProps;
-import com.liferay.util.FileUtil;
 
 import com.sun.media.jai.codec.ImageCodec;
 import com.sun.media.jai.codec.ImageDecoder;

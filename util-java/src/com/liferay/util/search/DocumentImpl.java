@@ -24,9 +24,9 @@ package com.liferay.util.search;
 
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.util.FileUtil;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;

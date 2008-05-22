@@ -22,9 +22,10 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.tools.sql.DBUtil;
-import com.liferay.util.FileUtil;
+import com.liferay.portal.util.InitUtil;
 
 import java.io.IOException;
 
@@ -37,6 +38,10 @@ import java.io.IOException;
  *
  */
 public class DBBuilder {
+
+	static {
+		InitUtil.init();
+	}
 
 	public static void main(String[] args) {
 		if (args.length == 1) {

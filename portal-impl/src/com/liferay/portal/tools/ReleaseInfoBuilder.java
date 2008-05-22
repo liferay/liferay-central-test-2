@@ -22,8 +22,9 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.util.FileUtil;
+import com.liferay.portal.util.InitUtil;
 
 import java.io.File;
 
@@ -39,6 +40,10 @@ import java.util.Properties;
  *
  */
 public class ReleaseInfoBuilder {
+
+	static {
+		InitUtil.init();
+	}
 
 	public static void main(String[] args) {
 		new ReleaseInfoBuilder();

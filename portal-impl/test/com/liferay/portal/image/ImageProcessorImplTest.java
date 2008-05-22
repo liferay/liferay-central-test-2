@@ -25,8 +25,8 @@ package com.liferay.portal.image;
 import com.liferay.portal.kernel.image.ImageBag;
 import com.liferay.portal.kernel.image.ImageProcessor;
 import com.liferay.portal.kernel.image.ImageProcessorUtil;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.util.BaseTestCase;
-import com.liferay.util.FileUtil;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;

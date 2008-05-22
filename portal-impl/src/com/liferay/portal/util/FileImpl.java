@@ -20,14 +20,18 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
+package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.util.ByteArrayMaker;
+import com.liferay.portal.kernel.util.FileComparator;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.util.PwdGenerator;
+import com.liferay.util.SystemProperties;
+import com.liferay.util.Time;
 import com.liferay.util.lucene.JerichoHTMLTextExtractor;
 
 import java.io.BufferedInputStream;
@@ -65,24 +69,19 @@ import org.mozilla.intl.chardet.nsDetector;
 import org.mozilla.intl.chardet.nsPSMDetector;
 
 /**
- * <a href="FileUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="FileImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
  *
  */
-public class FileUtil {
+public class FileImpl implements com.liferay.portal.kernel.util.File {
 
-	public static final String ENCODING = GetterUtil.getString(
-		SystemProperties.get("file.encoding"), StringPool.UTF8);
-
-	public static void copyDirectory(
-		String sourceDirName, String destinationDirName) {
-
+	public void copyDirectory(String sourceDirName, String destinationDirName) {
 		copyDirectory(new File(sourceDirName), new File(destinationDirName));
 	}
 
-	public static void copyDirectory(File source, File destination) {
+	public void copyDirectory(File source, File destination) {
 		if (source.exists() && source.isDirectory()) {
 			if (!destination.exists()) {
 				destination.mkdirs();
@@ -107,21 +106,19 @@ public class FileUtil {
 		}
 	}
 
-	public static void copyFile(String source, String destination) {
+	public void copyFile(String source, String destination) {
 		copyFile(source, destination, false);
 	}
 
-	public static void copyFile(
-		String source, String destination, boolean lazy) {
-
+	public void copyFile(String source, String destination, boolean lazy) {
 		copyFile(new File(source), new File(destination), lazy);
 	}
 
-	public static void copyFile(File source, File destination) {
+	public void copyFile(File source, File destination) {
 		copyFile(source, destination, false);
 	}
 
-	public static void copyFile(File source, File destination, boolean lazy) {
+	public void copyFile(File source, File destination, boolean lazy) {
 		if (!source.exists()) {
 			return;
 		}
@@ -144,7 +141,7 @@ public class FileUtil {
 			catch (Exception e) {
 			}
 
-			if (oldContent == null || !oldContent.equals(newContent)) {
+			if ((oldContent == null) || !oldContent.equals(newContent)) {
 				copyFile(source, destination, false);
 			}
 		}
@@ -172,11 +169,11 @@ public class FileUtil {
 		}
 	}
 
-	public static File createTempFile() {
+	public File createTempFile() {
 		return createTempFile(null);
 	}
 
-	public static File createTempFile(String extension) {
+	public File createTempFile(String extension) {
 		StringMaker sm = new StringMaker();
 
 		sm.append(SystemProperties.get(SystemProperties.TMP_DIR));
@@ -192,11 +189,11 @@ public class FileUtil {
 		return new File(sm.toString());
 	}
 
-	public static boolean delete(String file) {
+	public boolean delete(String file) {
 		return delete(new File(file));
 	}
 
-	public static boolean delete(File file) {
+	public boolean delete(File file) {
 		if (file.exists()) {
 			return file.delete();
 		}
@@ -205,11 +202,11 @@ public class FileUtil {
 		}
 	}
 
-	public static void deltree(String directory) {
+	public void deltree(String directory) {
 		deltree(new File(directory));
 	}
 
-	public static void deltree(File directory) {
+	public void deltree(File directory) {
 		if (directory.exists() && directory.isDirectory()) {
 			File[] fileArray = directory.listFiles();
 
@@ -226,15 +223,15 @@ public class FileUtil {
 		}
 	}
 
-	public static boolean exists(String fileName) {
+	public boolean exists(String fileName) {
 		return exists(new File(fileName));
 	}
 
-	public static boolean exists(File file) {
+	public boolean exists(File file) {
 		return file.exists();
 	}
 
-	public static String extractText(InputStream is, String fileExt) {
+	public String extractText(InputStream is, String fileExt) {
 		String text = null;
 
 		try {
@@ -356,70 +353,68 @@ public class FileUtil {
 		return text;
 	}
 
-	public static String getAbsolutePath(File file) {
+	public String getAbsolutePath(File file) {
 		return StringUtil.replace(
 			file.getAbsolutePath(), StringPool.BACK_SLASH, StringPool.SLASH);
 	}
 
-	public static byte[] getBytes(File file) throws IOException {
+	public byte[] getBytes(File file) throws IOException {
 		if ((file == null) || !file.exists()) {
 			return null;
 		}
 
-		FileInputStream in = new FileInputStream(file);
+		FileInputStream is = new FileInputStream(file);
 
-		byte[] bytes = getBytes(in, (int)file.length());
+		byte[] bytes = getBytes(is, (int)file.length());
 
-		in.close();
+		is.close();
 
 		return bytes;
 	}
 
-	public static byte[] getBytes(InputStream in) throws IOException {
-		return getBytes(in, -1);
+	public byte[] getBytes(InputStream is) throws IOException {
+		return getBytes(is, -1);
 	}
 
-	public static byte[] getBytes(InputStream in, int bufferSize)
-		throws IOException {
-
-		ByteArrayMaker out = null;
+	public byte[] getBytes(InputStream is, int bufferSize) throws IOException {
+		ByteArrayMaker bam = null;
 
 		if (bufferSize <= 0) {
-			out = new ByteArrayMaker();
+			bam = new ByteArrayMaker();
 		}
 		else {
-			out = new ByteArrayMaker(bufferSize);
+			bam = new ByteArrayMaker(bufferSize);
 		}
 
 		boolean createBuffered = false;
 
 		try {
-			if (!(in instanceof BufferedInputStream)) {
-				in = new BufferedInputStream(in);
+			if (!(is instanceof BufferedInputStream)) {
+				is = new BufferedInputStream(is);
 
 				createBuffered = true;
 			}
 
-			int c = in.read();
+			int c = is.read();
 
 			while (c != -1) {
-				out.write(c);
+				bam.write(c);
 
-				c = in.read();
+				c = is.read();
 			}
 		}
 		finally {
 			if (createBuffered) {
-				in.close();
+				is.close();
 			}
 		}
 
-		out.close();
+		bam.close();
 
-		return out.toByteArray();
+		return bam.toByteArray();
 	}
 
-	public static String getExtension(String fileName) {
+	public String getExtension(String fileName) {
 		if (fileName == null) {
 			return null;
 		}
@@ -434,7 +429,7 @@ public class FileUtil {
 		}
 	}
 
-	public static String getPath(String fullFileName) {
+	public String getPath(String fullFileName) {
 		int pos = fullFileName.lastIndexOf(StringPool.SLASH);
 
 		if (pos == -1) {
@@ -450,7 +445,7 @@ public class FileUtil {
 		return shortFileName;
 	}
 
-	public static String getShortFileName(String fullFileName) {
+	public String getShortFileName(String fullFileName) {
 		int pos = fullFileName.lastIndexOf(StringPool.SLASH);
 
 		if (pos == -1) {
@@ -463,7 +458,7 @@ public class FileUtil {
 		return shortFileName;
 	}
 
-	public static boolean isAscii(File file) throws IOException {
+	public boolean isAscii(File file) throws IOException {
 		boolean ascii = true;
 
 		nsDetector detector = new nsDetector(nsPSMDetector.ALL);
@@ -490,11 +485,11 @@ public class FileUtil {
 		return ascii;
 	}
 
-	public static String[] listDirs(String fileName) throws IOException {
+	public String[] listDirs(String fileName) throws IOException {
 		return listDirs(new File(fileName));
 	}
 
-	public static String[] listDirs(File file) throws IOException {
+	public String[] listDirs(File file) throws IOException {
 		List<String> dirs = new ArrayList<String>();
 
 		File[] fileArray = file.listFiles();
@@ -508,7 +503,7 @@ public class FileUtil {
 		return dirs.toArray(new String[dirs.size()]);
 	}
 
-	public static String[] listFiles(String fileName) throws IOException {
+	public String[] listFiles(String fileName) throws IOException {
 		if (Validator.isNull(fileName)) {
 			return new String[0];
 		}
@@ -516,7 +511,7 @@ public class FileUtil {
 		return listFiles(new File(fileName));
 	}
 
-	public static String[] listFiles(File file) throws IOException {
+	public String[] listFiles(File file) throws IOException {
 		List<String> files = new ArrayList<String>();
 
 		File[] fileArray = file.listFiles();
@@ -530,19 +525,17 @@ public class FileUtil {
 		return files.toArray(new String[files.size()]);
 	}
 
-	public static void mkdirs(String pathName) {
+	public void mkdirs(String pathName) {
 		File file = new File(pathName);
 
 		file.mkdirs();
 	}
 
-	public static boolean move(
-		String sourceFileName, String destinationFileName) {
-
+	public boolean move(String sourceFileName, String destinationFileName) {
 		return move(new File(sourceFileName), new File(destinationFileName));
 	}
 
-	public static boolean move(File source, File destination) {
+	public boolean move(File source, File destination) {
 		if (!source.exists()) {
 			return false;
 		}
@@ -552,17 +545,15 @@ public class FileUtil {
 		return source.renameTo(destination);
 	}
 
-	public static String read(String fileName) throws IOException {
+	public String read(String fileName) throws IOException {
 		return read(new File(fileName));
 	}
 
-	public static String read(File file) throws IOException {
+	public String read(File file) throws IOException {
 		return read(file, false);
 	}
 
-	public static String read(File file, boolean raw)
-		throws IOException {
-
+	public String read(File file, boolean raw) throws IOException {
 		FileInputStream fis = new FileInputStream(file);
 
 		byte[] bytes = new byte[fis.available()];
@@ -571,7 +562,7 @@ public class FileUtil {
 
 		fis.close();
 
-		String s = new String(bytes, ENCODING);
+		String s = new String(bytes, StringPool.UTF8);
 
 		if (raw) {
 			return s;
@@ -582,7 +573,12 @@ public class FileUtil {
 		}
 	}
 
-	public static File[] sortFiles(File[] files) {
+	public String replaceSeparator(String fileName) {
+		return StringUtil.replace(
+			fileName, StringPool.BACK_SLASH, StringPool.SLASH);
+	}
+
+	public File[] sortFiles(File[] files) {
 		if (files == null) {
 			return null;
 		}
@@ -606,7 +602,7 @@ public class FileUtil {
 		return directoryList.toArray(new File[directoryList.size()]);
 	}
 
-	public static String stripExtension(String fileName) {
+	public String stripExtension(String fileName) {
 		if (fileName == null) {
 			return null;
 		}
@@ -621,12 +617,7 @@ public class FileUtil {
 		}
 	}
 
-	public static String replaceSeparator(String fileName) {
-		return StringUtil.replace(
-			fileName, StringPool.BACK_SLASH, StringPool.SLASH);
-	}
-
-	public static List<String> toList(Reader reader) {
+	public List<String> toList(Reader reader) {
 		List<String> list = new ArrayList<String>();
 
 		try {
@@ -646,7 +637,7 @@ public class FileUtil {
 		return list;
 	}
 
-	public static List<String> toList(String fileName) {
+	public List<String> toList(String fileName) {
 		try {
 			return toList(new FileReader(fileName));
 		}
@@ -655,7 +646,7 @@ public class FileUtil {
 		}
 	}
 
-	public static Properties toProperties(FileInputStream fis) {
+	public Properties toProperties(FileInputStream fis) {
 		Properties props = new Properties();
 
 		try {
@@ -667,7 +658,7 @@ public class FileUtil {
 		return props;
 	}
 
-	public static Properties toProperties(String fileName) {
+	public Properties toProperties(String fileName) {
 		try {
 			return toProperties(new FileInputStream(fileName));
 		}
@@ -676,37 +667,35 @@ public class FileUtil {
 		}
 	}
 
-	public static void write(String fileName, String s) throws IOException {
+	public void write(String fileName, String s) throws IOException {
 		write(new File(fileName), s);
 	}
 
-	public static void write(String fileName, String s, boolean lazy)
+	public void write(String fileName, String s, boolean lazy)
 		throws IOException {
 
 		write(new File(fileName), s, lazy);
 	}
 
-	public static void write(
-			String fileName, String s, boolean lazy, boolean append)
+	public void write(String fileName, String s, boolean lazy, boolean append)
 		throws IOException {
 
 		write(new File(fileName), s, lazy, append);
 	}
 
-	public static void write(String pathName, String fileName, String s)
+	public void write(String pathName, String fileName, String s)
 		throws IOException {
 
 		write(new File(pathName, fileName), s);
 	}
 
-	public static void write(
-			String pathName, String fileName, String s, boolean lazy)
+	public void write(String pathName, String fileName, String s, boolean lazy)
 		throws IOException {
 
 		write(new File(pathName, fileName), s, lazy);
 	}
 
-	public static void write(
+	public void write(
 			String pathName, String fileName, String s, boolean lazy,
 			boolean append)
 		throws IOException {
@@ -714,17 +703,17 @@ public class FileUtil {
 		write(new File(pathName, fileName), s, lazy, append);
 	}
 
-	public static void write(File file, String s) throws IOException {
+	public void write(File file, String s) throws IOException {
 		write(file, s, false);
 	}
 
-	public static void write(File file, String s, boolean lazy)
+	public void write(File file, String s, boolean lazy)
 		throws IOException {
 
 		write(file, s, lazy, false);
 	}
 
-	public static void write(File file, String s, boolean lazy, boolean append)
+	public void write(File file, String s, boolean lazy, boolean append)
 		throws IOException {
 
 		if (file.getParent() != null) {
@@ -740,20 +729,18 @@ public class FileUtil {
 		}
 
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
-			new FileOutputStream(file, append), ENCODING));
+			new FileOutputStream(file, append), StringPool.UTF8));
 
 		bw.write(s);
 
 		bw.close();
 	}
 
-	public static void write(String fileName, byte[] byteArray)
-		throws IOException {
-
+	public void write(String fileName, byte[] byteArray) throws IOException {
 		write(new File(fileName), byteArray);
 	}
 
-	public static void write(File file, byte[] byteArray) throws IOException {
+	public void write(File file, byte[] byteArray) throws IOException {
 		if (file.getParent() != null) {
 			mkdirs(file.getParent());
 		}
@@ -765,16 +752,14 @@ public class FileUtil {
 		fos.close();
 	}
 
-	public static void write(String fileName, InputStream in)
-		throws IOException {
-
-		write(fileName, getBytes(in));
+	public void write(String fileName, InputStream is) throws IOException {
+		write(fileName, getBytes(is));
 	}
 
-	public static void write(File file, InputStream in) throws IOException {
-		write(file, getBytes(in));
+	public void write(File file, InputStream is) throws IOException {
+		write(file, getBytes(is));
 	}
 
-	private static Log _log = LogFactory.getLog(FileUtil.class);
+	private static Log _log = LogFactory.getLog(FileImpl.class);
 
 }

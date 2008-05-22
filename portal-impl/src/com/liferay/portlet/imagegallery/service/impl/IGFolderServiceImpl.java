@@ -24,6 +24,7 @@ package com.liferay.portlet.imagegallery.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.ImageLocalUtil;
@@ -32,7 +33,6 @@ import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.base.IGFolderServiceBaseImpl;
 import com.liferay.portlet.imagegallery.service.permission.IGFolderPermission;
-import com.liferay.util.FileUtil;
 
 import java.io.File;
 

@@ -23,10 +23,10 @@
 package com.liferay.portal.jcr.jackrabbit;
 
 import com.liferay.portal.jcr.JCRFactory;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.FileUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.Time;
 

@@ -22,9 +22,10 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.FileUtil;
 
 /**
  * <a href="JavaScriptBuilder.java.html"><b><i>View Source</i></b></a>
@@ -33,6 +34,10 @@ import com.liferay.util.FileUtil;
  *
  */
 public class JavaScriptBuilder {
+
+	static {
+		InitUtil.init();
+	}
 
 	public static void main(String[] args) {
 		if (args.length == 3) {

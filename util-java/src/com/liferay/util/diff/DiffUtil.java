@@ -22,9 +22,9 @@
 
 package com.liferay.util.diff;
 
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.FileUtil;
 
 import java.io.Reader;
 

@@ -22,11 +22,12 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Html;
 import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.HtmlImpl;
-import com.liferay.util.FileUtil;
+import com.liferay.portal.util.InitUtil;
 import com.liferay.util.xml.XMLFormatter;
 import com.liferay.util.xml.XMLMerger;
 import com.liferay.util.xml.descriptor.WebXML23Descriptor;
@@ -47,6 +48,10 @@ import org.dom4j.Element;
  *
  */
 public class WebXMLBuilder {
+
+	static {
+		InitUtil.init();
+	}
 
 	public static void main(String[] args) {
 		if (args.length == 3) {
