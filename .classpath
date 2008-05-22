@@ -154,6 +154,7 @@
 	<classpathentry kind="lib" path="lib/portal/jmx-ri.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jodconverter.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jrcs-diff.jar"/>
+	<classpathentry kind="lib" path="lib/portal/jsonrpc.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jspwiki.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jsr107cache.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jstl.jar"/>
