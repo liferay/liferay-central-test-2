@@ -56,7 +56,8 @@ import org.dom4j.Element;
  */
 public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 
-	public abstract Hits getHits(long companyId, String keywords)
+	public abstract Hits getHits(
+			long companyId, String keywords, int start, int end)
 		throws Exception;
 
 	public abstract String getSearchPath();
@@ -68,23 +69,26 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 			int itemsPerPage)
 		throws SearchException {
 
-		Hits hits = null;
-
 		try {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-			hits = getHits(themeDisplay.getCompanyId(), keywords);
+			int start = (startPage * itemsPerPage) - itemsPerPage;
+			int end = startPage * itemsPerPage;
+
+			Hits results = getHits(
+				themeDisplay.getCompanyId(), keywords, start, end);
+
+			int total = results.getLength();
 
 			Object[] values = addSearchResults(
-				keywords, startPage, itemsPerPage, hits, getTitle(keywords),
-				getSearchPath(), themeDisplay);
+				keywords, startPage, itemsPerPage, total, start,
+				getTitle(keywords), getSearchPath(), themeDisplay);
 
-			Hits results = (Hits)values[0];
-			org.dom4j.Document doc = (org.dom4j.Document)values[1];
-			Element root = (Element)values[2];
+			org.dom4j.Document doc = (org.dom4j.Document)values[0];
+			Element root = (Element)values[1];
 
-			for (int i = 0; i < results.getLength(); i++) {
+			for (int i = 0; i < results.getDocs().length; i++) {
 				Document result = results.doc(i);
 
 				String portletId = result.get(Field.PORTLET_ID);
@@ -110,7 +114,7 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 				Date modifedDate = DateTools.stringToDate(
 					result.get(Field.MODIFIED));
 				String content = docSummary.getContent();
-				double score = hits.score(i);
+				double score = results.score(i);
 
 				addSearchResult(root, title, url, modifedDate, content, score);
 			}
@@ -123,11 +127,6 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 		}
 		catch (Exception e) {
 			throw new SearchException(e);
-		}
-		finally {
-			if (hits != null) {
-				hits.closeSearcher();
-			}
 		}
 	}
 

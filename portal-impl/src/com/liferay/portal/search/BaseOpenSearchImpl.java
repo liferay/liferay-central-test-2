@@ -25,7 +25,6 @@ package com.liferay.portal.search;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
-import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -127,40 +126,8 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 	}
 
 	protected Object[] addSearchResults(
-		String keywords, int startPage, int itemsPerPage, int total,
+		String keywords, int startPage, int itemsPerPage, int total, int start,
 		String title, String searchPath, ThemeDisplay themeDisplay) {
-
-		return addSearchResults(
-			keywords, startPage, itemsPerPage, null, title, searchPath,
-			themeDisplay);
-	}
-
-	protected Object[] addSearchResults(
-		String keywords, int startPage, int itemsPerPage, Hits hits,
-		String title, String searchPath, ThemeDisplay themeDisplay) {
-
-		return addSearchResults(
-			keywords, startPage, itemsPerPage, 0, hits, title, searchPath,
-			themeDisplay);
-	}
-
-	protected Object[] addSearchResults(
-		String keywords, int startPage, int itemsPerPage, int total, Hits hits,
-		String title, String searchPath, ThemeDisplay themeDisplay) {
-
-		int start = (startPage * itemsPerPage) - itemsPerPage;
-
-		if (hits != null) {
-			int end = startPage * itemsPerPage;
-
-			total = hits.getLength();
-
-			if (end > total) {
-				end = total;
-			}
-
-			hits = hits.subset(start, end);
-		}
 
 		int totalPages = 0;
 
@@ -268,7 +235,7 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 		link.addAttribute("href", searchPath + "_description.xml");
 		link.addAttribute("type", "application/opensearchdescription+xml");
 
-		return new Object[] {hits, doc, root};
+		return new Object[] {doc, root};
 	}
 
 	protected PortletURL getPortletURL(HttpServletRequest req, String portletId)

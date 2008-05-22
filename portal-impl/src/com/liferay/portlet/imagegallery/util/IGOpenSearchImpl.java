@@ -23,7 +23,6 @@
 package com.liferay.portlet.imagegallery.util;
 
 import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.search.HitsOpenSearchImpl;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 
@@ -39,10 +38,12 @@ public class IGOpenSearchImpl extends HitsOpenSearchImpl {
 
 	public static final String TITLE = "Liferay Image Gallery Search: ";
 
-	public Hits getHits(long companyId, String keywords) throws Exception {
+	public Hits getHits(
+			long companyId, String keywords, int start, int end)
+		throws Exception {
+
 		return IGFolderLocalServiceUtil.search(
-			companyId, 0, null, keywords, SearchEngineUtil.ALL_POS,
-			SearchEngineUtil.ALL_POS);
+			companyId, 0, null, keywords, start, end);
 	}
 
 	public String getSearchPath() {

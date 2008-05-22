@@ -85,11 +85,11 @@ public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 			themeDisplay.getCompanyId(), keywords, Boolean.TRUE, null);
 
 		Object[] values = addSearchResults(
-			keywords, startPage, itemsPerPage, total, null,
+			keywords, startPage, itemsPerPage, total, start,
 			"Liferay Directory Search: " + keywords, SEARCH_PATH, themeDisplay);
 
-		org.dom4j.Document doc = (org.dom4j.Document)values[1];
-		Element root = (Element)values[2];
+		org.dom4j.Document doc = (org.dom4j.Document)values[0];
+		Element root = (Element)values[1];
 
 		for (User user : results) {
 			String portletId = PortletKeys.DIRECTORY;

@@ -23,7 +23,6 @@
 package com.liferay.portlet.messageboards.util;
 
 import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.search.HitsOpenSearchImpl;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 
@@ -39,10 +38,12 @@ public class MBOpenSearchImpl extends HitsOpenSearchImpl {
 
 	public static final String TITLE = "Liferay Message Boards Search: ";
 
-	public Hits getHits(long companyId, String keywords) throws Exception {
+	public Hits getHits(
+			long companyId, String keywords, int start, int end)
+		throws Exception {
+
 		return MBCategoryLocalServiceUtil.search(
-			companyId, 0, null, 0, keywords, SearchEngineUtil.ALL_POS,
-			SearchEngineUtil.ALL_POS);
+			companyId, 0, null, 0, keywords, start, end);
 	}
 
 	public String getSearchPath() {

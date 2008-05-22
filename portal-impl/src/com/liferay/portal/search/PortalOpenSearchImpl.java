@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
@@ -74,26 +73,27 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 			int itemsPerPage)
 		throws SearchException {
 
-		Hits hits = null;
-
 		try {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-			hits = CompanyLocalServiceUtil.search(
-				themeDisplay.getCompanyId(), keywords,
-				SearchEngineUtil.ALL_POS, SearchEngineUtil.ALL_POS);
+			int start = (startPage * itemsPerPage) - itemsPerPage;
+			int end = startPage * itemsPerPage;
+
+			Hits results = CompanyLocalServiceUtil.search(
+				themeDisplay.getCompanyId(), keywords, start, end);
+
+			int total = results.getLength();
 
 			Object[] values = addSearchResults(
-				keywords, startPage, itemsPerPage, hits,
+				keywords, startPage, itemsPerPage, total, start,
 				"Liferay Portal Search: " + keywords, SEARCH_PATH,
 				themeDisplay);
 
-			Hits results = (Hits)values[0];
-			org.dom4j.Document doc = (org.dom4j.Document)values[1];
-			Element root = (Element)values[2];
+			org.dom4j.Document doc = (org.dom4j.Document)values[0];
+			Element root = (Element)values[1];
 
-			for (int i = 0; i < results.getLength(); i++) {
+			for (int i = 0; i < results.getDocs().length; i++) {
 				Document result = results.doc(i);
 
 				String portletId = result.get(Field.PORTLET_ID);
@@ -137,7 +137,7 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 					}
 				}
 
-				double score = hits.score(i);
+				double score = results.score(i);
 
 				addSearchResult(
 					root, portletTitle + " &raquo; " + title, url, modifedDate,
@@ -153,11 +153,6 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 		}
 		catch (Exception e) {
 			throw new SearchException(e);
-		}
-		finally {
-			if (hits != null) {
-				hits.closeSearcher();
-			}
 		}
 	}
 

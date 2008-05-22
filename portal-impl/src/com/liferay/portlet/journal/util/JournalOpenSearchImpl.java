@@ -24,7 +24,6 @@ package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.search.HitsOpenSearchImpl;
@@ -50,10 +49,12 @@ public class JournalOpenSearchImpl extends HitsOpenSearchImpl {
 
 	public static final String TITLE = "Liferay Journal Search: ";
 
-	public Hits getHits(long companyId, String keywords) throws Exception {
+	public Hits getHits(
+			long companyId, String keywords, int start, int end)
+		throws Exception {
+
 		return JournalArticleLocalServiceUtil.search(
-			companyId, 0, keywords, SearchEngineUtil.ALL_POS,
-			SearchEngineUtil.ALL_POS);
+			companyId, 0, keywords, start, end);
 	}
 
 	public String getSearchPath() {
