@@ -366,6 +366,36 @@
 		</copy>
 
 		<if>
+			<equals arg1="${app.server.type}" arg2="glassfish" />
+			<then>
+				<copy todir="${app.server.glassfish.lib.global.dir}">
+					<fileset
+						dir="lib/portal"
+						includes="log4j.jar,xercesImpl.jar"
+					/>
+				</copy>
+
+				<if>
+					<equals arg1="${app.server.version}" arg2="v3" />
+					<then>
+						<copy
+							tofile="${app.server.dir}/domains/domain1/config/domain.xml"
+							file="tools/servers/glassfish/v3.domain.xml"
+							overwrite="yes"
+						/>
+					</then>
+					<else>
+						<copy
+							tofile="${app.server.dir}/domains/domain1/config/domain.xml"
+							file="tools/servers/glassfish/v2.domain.xml"
+							overwrite="yes"
+						/>
+					</else>
+				</if>
+			</then>
+		</if>
+
+		<if>
 			<equals arg1="${app.server.type}" arg2="geronimo-tomcat" />
 			<then>
 				<copy todir="${app.server.lib.portal.dir}">
@@ -718,32 +748,63 @@
 	</target>
 
 	<target name="build-dist-glassfish">
-		<antcall target="build-dist-glassfish-configurator" />
+		<antcall target="build-dist-glassfish-v3" />
+		<antcall target="build-dist-glassfish-v2" />
+	</target>
 
-		<antcall target="build-dist-glassfish-aix" />
-		<antcall target="build-dist-glassfish-darwin" />
-		<antcall target="build-dist-glassfish-linux" />
-		<antcall target="build-dist-glassfish-sunos" />
-		<antcall target="build-dist-glassfish-sunos_x86" />
-		<antcall target="build-dist-glassfish-windows" />
+	<target name="build-dist-glassfish-v2">
+		<antcall target="build-dist-glassfish-v2-configurator" />
+
+		<antcall target="build-dist-glassfish-v2-aix" />
+		<antcall target="build-dist-glassfish-v2-darwin" />
+		<antcall target="build-dist-glassfish-v2-linux" />
+  		<antcall target="build-dist-glassfish-v2-sunos" />
+		<antcall target="build-dist-glassfish-v2-sunos_x86" />
+		<antcall target="build-dist-glassfish-v2-windows" />
 
 		<delete file="liferay_configurator.jar" />
 	</target>
 
-	<target name="build-dist-glassfish-aix">
-		<antcall target="build-dist-glassfish-cmd">
-			<param name="glassfish.os" value="aix" />
+	<target name="build-dist-glassfish-v3">
+
+		<delete dir="${app.server.glassfish.dir}" />
+
+		<unzip
+			 src="${app.server.parent.dir}/${app.server.glassfish.zip.name}"
+			 dest="${app.server.parent.dir}"
+		/>
+
+		<echo file="app.server.${user.name}.properties">app.server.type=glassfish</echo>
+
+		<ant target="deploy" inheritAll="false" />
+
+		<antcall target="deploy-default-theme">
+			<param name="deployer.dest.dir" value="${app.server.glassfish.deploy.dir}" />
+			<param name="deployer.app.server.type" value="glassfish-tomcat" />
 		</antcall>
+
+		<replace
+			file="${app.server.glassfish.dir}/lib/registration/servicetag-registry.xml"
+			token="GlassFish V3" value="Liferay ${lp.version} on Glassfish V3" summary="true"
+		/>
+
+		<antcall target="zip-executable">
+			<param name="zip.executable.file" value="liferay-portal-glassfish" />
+			<param name="zip.executable.dir" value="${app.server.glassfish.dir}" />
+		</antcall>
+
+		<delete file="app.server.${user.name}.properties" />
+
 	</target>
 
-	<target name="build-dist-glassfish-cmd">
+	<target name="build-dist-glassfish-v2-cmd">
 		<delete dir="${app.server.glassfish.dir}" />
 
 		<java
 			dir="${app.server.parent.dir}"
 			fork="true"
 			input="tools/servers/glassfish/input.txt"
-			jar="${app.server.parent.dir}/glassfish-installer-v2ur1-b09d-${glassfish.os}.jar"
+			jar="${app.server.parent.dir}/glassfish-installer-v2ur2-b04-${glassfish.os}.jar"
 			maxmemory="256m"
 		>
 			<arg value="-console" />
@@ -765,7 +826,7 @@
 		/>
 	</target>
 
-	<target name="build-dist-glassfish-configurator">
+	<target name="build-dist-glassfish-v2-configurator">
 		<tstamp>
 			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 		</tstamp>
@@ -831,32 +892,38 @@
 		<delete dir="${tstamp.value}" />
 	</target>
 
-	<target name="build-dist-glassfish-darwin">
-		<antcall target="build-dist-glassfish-cmd">
+	<target name="build-dist-glassfish-v2-aix">
+		<antcall target="build-dist-glassfish-v2-cmd">
+			<param name="glassfish.os" value="aix" />
+		</antcall>
+	</target>
+
+	<target name="build-dist-glassfish-v2-darwin">
+		<antcall target="build-dist-glassfish-v2-cmd">
 			<param name="glassfish.os" value="darwin" />
 		</antcall>
 	</target>
 
-	<target name="build-dist-glassfish-linux">
-		<antcall target="build-dist-glassfish-cmd">
+	<target name="build-dist-glassfish-v2-linux">
+		<antcall target="build-dist-glassfish-v2-cmd">
 			<param name="glassfish.os" value="linux" />
 		</antcall>
 	</target>
 
-	<target name="build-dist-glassfish-sunos">
-		<antcall target="build-dist-glassfish-cmd">
+	<target name="build-dist-glassfish-v2-sunos">
+		<antcall target="build-dist-glassfish-v2-cmd">
 			<param name="glassfish.os" value="sunos" />
 		</antcall>
 	</target>
 
-	<target name="build-dist-glassfish-sunos_x86">
-		<antcall target="build-dist-glassfish-cmd">
+	<target name="build-dist-glassfish-v2-sunos_x86">
+		<antcall target="build-dist-glassfish-v2-cmd">
 			<param name="glassfish.os" value="sunos_x86" />
 		</antcall>
 	</target>
 
-	<target name="build-dist-glassfish-windows">
-		<antcall target="build-dist-glassfish-cmd">
+	<target name="build-dist-glassfish-v2-windows">
+		<antcall target="build-dist-glassfish-v2-cmd">
 			<param name="glassfish.os" value="windows" />
 		</antcall>
 	</target>
