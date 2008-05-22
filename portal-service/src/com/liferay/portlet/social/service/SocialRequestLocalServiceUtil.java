@@ -119,6 +119,14 @@ public class SocialRequestLocalServiceUtil {
 		socialRequestLocalService.deleteReceiverUserRequests(receiverUserId);
 	}
 
+	public static void deleteRequest(long requestId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
+
+		socialRequestLocalService.deleteRequest(requestId);
+	}
+
 	public static void deleteUserRequests(long userId)
 		throws com.liferay.portal.SystemException {
 		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();

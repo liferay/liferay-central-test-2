@@ -83,6 +83,10 @@ public interface SocialRequestLocalService {
 	public void deleteReceiverUserRequests(long receiverUserId)
 		throws com.liferay.portal.SystemException;
 
+	public void deleteRequest(long requestId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public void deleteUserRequests(long userId)
 		throws com.liferay.portal.SystemException;
 

@@ -98,6 +98,12 @@ public class SocialRequestLocalServiceImpl
 		socialRequestPersistence.removeByReceiverUserId(receiverUserId);
 	}
 
+	public void deleteRequest(long requestId)
+		throws PortalException, SystemException {
+
+		socialRequestPersistence.remove(requestId);
+	}
+
 	public void deleteUserRequests(long userId) throws SystemException {
 		socialRequestPersistence.removeByUserId(userId);
 	}
