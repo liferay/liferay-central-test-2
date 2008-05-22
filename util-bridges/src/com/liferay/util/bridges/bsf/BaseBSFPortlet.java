@@ -43,6 +43,8 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 
 import org.apache.bsf.BSFException;
 import org.apache.bsf.BSFManager;
@@ -63,6 +65,7 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 		helpFile = getInitParameter("help-file");
 		viewFile = getInitParameter("view-file");
 		actionFile = getInitParameter("action-file");
+		resourceFile = getInitParameter("resource-file");
 		globalFiles = StringUtil.split(getInitParameter("global-files"));
 
 		BSFManager.registerScriptingEngine(
@@ -114,14 +117,27 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 		include(actionFile, req, res);
 	}
 
+	public void serveResource(ResourceRequest req, ResourceResponse res)
+			throws PortletException, IOException {
+
+		include(resourceFile, req, res);
+	}
+
 	protected void declareBeans(
 			InputStream is, PortletRequest req, PortletResponse res)
+		throws BSFException, IOException {
+
+		declareBeans(new String(FileUtil.getBytes(is)), req, res);
+	}
+
+	protected void declareBeans(
+			String code, PortletRequest req, PortletResponse res)
 		throws BSFException, IOException {
 
 		StringMaker sm = new StringMaker();
 
 		sm.append(getGlobalScript());
-		sm.append(new String(FileUtil.getBytes(is)));
+		sm.append(code);
 
 		String script = sm.toString();
 
@@ -145,12 +161,19 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 		else if (req instanceof RenderRequest) {
 			bsfManager.declareBean("renderRequest", req, RenderRequest.class);
 		}
+		else if (req instanceof ResourceRequest) {
+			bsfManager.declareBean("resourceRequest", req, ResourceRequest.class);
+		}
 
 		if (res instanceof ActionResponse) {
 			bsfManager.declareBean("actionResponse", res, ActionResponse.class);
 		}
 		else if (res instanceof RenderResponse) {
 			bsfManager.declareBean("renderResponse", res, RenderResponse.class);
+		}
+		else if (res instanceof ResourceResponse) {
+			bsfManager.declareBean(
+				"resourceResponse", res, ResourceResponse.class);
 		}
 
 		bsfManager.exec(getScriptingEngineLanguage(), "(java)", 1, 1, script);
@@ -222,6 +245,7 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 	protected String helpFile;
 	protected String viewFile;
 	protected String actionFile;
+	protected String resourceFile;
 	protected String[] globalFiles;
 	protected BSFManager bsfManager;
 

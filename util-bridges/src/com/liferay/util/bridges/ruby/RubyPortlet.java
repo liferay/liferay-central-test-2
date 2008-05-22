@@ -57,7 +57,7 @@ public class RubyPortlet extends BaseBSFPortlet {
 
 	protected void logBSFException(BSFException bsfe, String path) {
 		String message =
-			"The script at " + path + " or one of the global files has errors.";
+			"The script (" + path + ") or one of the global files has errors.";
 
 		Throwable t = bsfe.getTargetException();
 
