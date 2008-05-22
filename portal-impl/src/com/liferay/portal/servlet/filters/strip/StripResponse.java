@@ -23,6 +23,7 @@
 package com.liferay.portal.servlet.filters.strip;
 
 import com.liferay.portal.kernel.util.ByteArrayMaker;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -88,7 +89,7 @@ public class StripResponse extends HttpServletResponseWrapper {
 
 		_writer = new PrintWriter(new OutputStreamWriter(
 			//_stream, _res.getCharacterEncoding()));
-			_stream, StripFilter.ENCODING));
+			_stream, StringPool.UTF8));
 
 		return _writer;
 	}

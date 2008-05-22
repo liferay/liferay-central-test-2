@@ -26,7 +26,6 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -46,13 +45,12 @@ import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.struts.LastPath;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.SystemProperties;
 import com.liferay.util.servlet.filters.CacheResponse;
 import com.liferay.util.servlet.filters.CacheResponseData;
 import com.liferay.util.servlet.filters.CacheResponseUtil;
@@ -75,16 +73,11 @@ import javax.servlet.http.HttpSession;
  *
  * @author Alexander Chow
  * @author Javier de Ros
- * @author Raymond Aug�
+ * @author Raymond Augé
  *
  */
-public class LayoutCacheFilter extends BaseFilter implements PortalInitable {
-
-	public static final boolean USE_FILTER = GetterUtil.getBoolean(
-		PropsUtil.get(LayoutCacheFilter.class.getName()), true);
-
-	public static final String ENCODING = GetterUtil.getString(
-		SystemProperties.get("file.encoding"), StringPool.UTF8);
+public class LayoutCacheFilter
+	extends BasePortalFilter implements PortalInitable {
 
 	public static final String SKIP_FILTER =
 		LayoutCacheFilter.class + "SKIP_FILTER";
@@ -107,92 +100,6 @@ public class LayoutCacheFilter extends BaseFilter implements PortalInitable {
 		_config = config;
 
 		PortalInitableUtil.init(this);
-	}
-
-	public void doFilter(
-			ServletRequest req, ServletResponse res, FilterChain chain)
-		throws IOException, ServletException {
-
-		if (_log.isDebugEnabled()) {
-			if (USE_FILTER) {
-				_log.debug("Layout cache is enabled");
-			}
-			else {
-				_log.debug("Layout cache is disabled");
-			}
-		}
-
-		HttpServletRequest httpReq = (HttpServletRequest)req;
-		HttpServletResponse httpRes = (HttpServletResponse)res;
-
-		if (USE_FILTER && !isPortletRequest(httpReq) && isLayout(httpReq) &&
-			!isSignedIn(httpReq) && !isInclude(httpReq) &&
-			!isAlreadyFiltered(httpReq)) {
-
-			httpReq.setAttribute(SKIP_FILTER, Boolean.TRUE);
-
-			String key = getCacheKey(httpReq);
-
-			long companyId = PortalInstances.getCompanyId(httpReq);
-
-			CacheResponseData data = LayoutCacheUtil.getCacheResponseData(
-				companyId, key);
-
-			if (data == null) {
-				if (!isCacheable(companyId, httpReq)) {
-					if (_log.isDebugEnabled()) {
-						_log.debug("Layout is not cacheable " + key);
-					}
-
-					doFilter(LayoutCacheFilter.class, req, res, chain);
-
-					return;
-				}
-
-				if (_log.isInfoEnabled()) {
-					_log.info("Caching layout " + key);
-				}
-
-				CacheResponse cacheResponse = new CacheResponse(
-					httpRes, ENCODING);
-
-				doFilter(LayoutCacheFilter.class, req, cacheResponse, chain);
-
-				data = new CacheResponseData(
-					cacheResponse.getData(), cacheResponse.getContentType(),
-					cacheResponse.getHeaders());
-
-				LastPath lastPath = (LastPath)httpReq.getAttribute(
-					WebKeys.LAST_PATH);
-
-				if (lastPath != null) {
-					data.setAttribute(WebKeys.LAST_PATH, lastPath);
-				}
-
-				if (data.getData().length > 0) {
-					LayoutCacheUtil.putCacheResponseData(companyId, key, data);
-				}
-			}
-			else {
-				LastPath lastPath = (LastPath)data.getAttribute(
-					WebKeys.LAST_PATH);
-
-				if (lastPath != null) {
-					HttpSession ses = httpReq.getSession();
-
-					ses.setAttribute(WebKeys.LAST_PATH, lastPath);
-				}
-			}
-
-			CacheResponseUtil.write(httpRes, data);
-		}
-		else {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Did not request a layout");
-			}
-
-			doFilter(LayoutCacheFilter.class, req, res, chain);
-		}
 	}
 
 	protected String getBrowserType(HttpServletRequest req) {
@@ -447,6 +354,84 @@ public class LayoutCacheFilter extends BaseFilter implements PortalInitable {
 		}
 		else {
 			return true;
+		}
+	}
+
+	protected void processFilter(
+			ServletRequest req, ServletResponse res, FilterChain chain)
+		throws IOException, ServletException {
+
+		HttpServletRequest httpReq = (HttpServletRequest)req;
+		HttpServletResponse httpRes = (HttpServletResponse)res;
+
+		if (!isPortletRequest(httpReq) && isLayout(httpReq) &&
+			!isSignedIn(httpReq) && !isInclude(httpReq) &&
+			!isAlreadyFiltered(httpReq)) {
+
+			httpReq.setAttribute(SKIP_FILTER, Boolean.TRUE);
+
+			String key = getCacheKey(httpReq);
+
+			long companyId = PortalInstances.getCompanyId(httpReq);
+
+			CacheResponseData data = LayoutCacheUtil.getCacheResponseData(
+				companyId, key);
+
+			if (data == null) {
+				if (!isCacheable(companyId, httpReq)) {
+					if (_log.isDebugEnabled()) {
+						_log.debug("Layout is not cacheable " + key);
+					}
+
+					processFilter(LayoutCacheFilter.class, req, res, chain);
+
+					return;
+				}
+
+				if (_log.isInfoEnabled()) {
+					_log.info("Caching layout " + key);
+				}
+
+				CacheResponse cacheResponse = new CacheResponse(
+					httpRes, StringPool.UTF8);
+
+				processFilter(
+					LayoutCacheFilter.class, req, cacheResponse, chain);
+
+				data = new CacheResponseData(
+					cacheResponse.getData(), cacheResponse.getContentType(),
+					cacheResponse.getHeaders());
+
+				LastPath lastPath = (LastPath)httpReq.getAttribute(
+					WebKeys.LAST_PATH);
+
+				if (lastPath != null) {
+					data.setAttribute(WebKeys.LAST_PATH, lastPath);
+				}
+
+				if (data.getData().length > 0) {
+					LayoutCacheUtil.putCacheResponseData(companyId, key, data);
+				}
+			}
+			else {
+				LastPath lastPath = (LastPath)data.getAttribute(
+					WebKeys.LAST_PATH);
+
+				if (lastPath != null) {
+					HttpSession ses = httpReq.getSession();
+
+					ses.setAttribute(WebKeys.LAST_PATH, lastPath);
+				}
+			}
+
+			CacheResponseUtil.write(httpRes, data);
+		}
+		else {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Did not request a layout");
+			}
+
+			processFilter(LayoutCacheFilter.class, req, res, chain);
 		}
 	}
 

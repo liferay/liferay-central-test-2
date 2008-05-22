@@ -48,9 +48,26 @@ public abstract class BaseFilter implements Filter {
 		_config = config;
 	}
 
-	public abstract void doFilter(
+	public void doFilter(
 			ServletRequest req, ServletResponse res, FilterChain chain)
-		throws IOException, ServletException;
+		throws IOException, ServletException {
+
+		if (_log.isDebugEnabled()) {
+			if (isFilterEnabled()) {
+				_log.debug(_filterClass + " is enabled");
+			}
+			else {
+				_log.debug(_filterClass + " is disabled");
+			}
+		}
+
+		if (isFilterEnabled()) {
+			processFilter(req, res, chain);
+		}
+		else {
+			processFilter(_filterClass, req, res, chain);
+		}
+	}
 
 	public FilterConfig getFilterConfig() {
 		return _config;
@@ -59,7 +76,15 @@ public abstract class BaseFilter implements Filter {
 	public void destroy() {
 	}
 
-	protected void doFilter(
+	protected boolean isFilterEnabled() {
+		return _filterEnabled;
+	}
+
+	protected abstract void processFilter(
+			ServletRequest req, ServletResponse res, FilterChain chain)
+		throws IOException, ServletException;
+
+	protected void processFilter(
 			Class<?> filterClass, ServletRequest req, ServletResponse res,
 			FilterChain chain)
 		throws IOException, ServletException {
@@ -120,5 +145,7 @@ public abstract class BaseFilter implements Filter {
 	private static Log _log = LogFactoryUtil.getLog(BaseFilter.class);
 
 	private FilterConfig _config;
+	private Class _filterClass = getClass();
+	private boolean _filterEnabled = true;
 
 }

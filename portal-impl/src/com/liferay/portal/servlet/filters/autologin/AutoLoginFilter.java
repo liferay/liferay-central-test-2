@@ -25,7 +25,6 @@ package com.liferay.portal.servlet.filters.autologin;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
@@ -35,6 +34,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.AutoLogin;
 import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
@@ -57,90 +57,7 @@ import javax.servlet.http.HttpSession;
  * @author Raymond Augé
  *
  */
-public class AutoLoginFilter extends BaseFilter {
-
-	public void doFilter(
-			ServletRequest req, ServletResponse res, FilterChain chain)
-		throws IOException, ServletException {
-
-		HttpServletRequest httpReq = (HttpServletRequest)req;
-		HttpServletResponse httpRes = (HttpServletResponse)res;
-
-		HttpSession ses = httpReq.getSession();
-
-		String host = PortalUtil.getHost(httpReq);
-
-		if (PortalInstances.isAutoLoginIgnoreHost(host)) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Ignore host " + host);
-			}
-
-			doFilter(AutoLoginFilter.class, req, res, chain);
-
-			return;
-		}
-
-		String contextPath = PortalUtil.getPathContext();
-
-		String path = httpReq.getRequestURI().toLowerCase();
-
-		if ((!contextPath.equals(StringPool.SLASH)) &&
-			(path.indexOf(contextPath) != -1)) {
-
-			path = path.substring(contextPath.length(), path.length());
-		}
-
-		if (PortalInstances.isAutoLoginIgnorePath(path)) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Ignore path " + path);
-			}
-
-			doFilter(AutoLoginFilter.class, req, res, chain);
-
-			return;
-		}
-
-		String remoteUser = httpReq.getRemoteUser();
-		String jUserName = (String)ses.getAttribute("j_username");
-
-		if ((remoteUser == null) && (jUserName == null)) {
-			for (String autoLoginHook : PropsValues.AUTO_LOGIN_HOOKS) {
-				AutoLogin autoLogin = (AutoLogin)InstancePool.get(
-					autoLoginHook);
-
-				try {
-					String[] credentials = autoLogin.login(httpReq, httpRes);
-
-					String redirect = (String)req.getAttribute(
-						AutoLogin.AUTO_LOGIN_REDIRECT);
-
-					if (redirect != null) {
-						httpRes.sendRedirect(redirect);
-
-						return;
-					}
-
-					String loginRemoteUser = getLoginRemoteUser(
-						httpReq, httpRes, ses, credentials);
-
-					if (loginRemoteUser != null) {
-						req = new ProtectedServletRequest(
-							httpReq, loginRemoteUser);
-
-						if (PropsValues.PORTAL_JAAS_ENABLE) {
-							return;
-						}
-					}
-				}
-				catch (Exception e) {
-					_log.warn(e, e);
-					_log.error(e.getMessage());
-				}
-			}
-		}
-
-		doFilter(AutoLoginFilter.class, req, res, chain);
-	}
+public class AutoLoginFilter extends BasePortalFilter {
 
 	protected String getLoginRemoteUser(
 			HttpServletRequest req, HttpServletResponse res, HttpSession ses,
@@ -199,6 +116,89 @@ public class AutoLoginFilter extends BaseFilter {
 		}
 
 		return null;
+	}
+
+	protected void processFilter(
+			ServletRequest req, ServletResponse res, FilterChain chain)
+		throws IOException, ServletException {
+
+		HttpServletRequest httpReq = (HttpServletRequest)req;
+		HttpServletResponse httpRes = (HttpServletResponse)res;
+
+		HttpSession ses = httpReq.getSession();
+
+		String host = PortalUtil.getHost(httpReq);
+
+		if (PortalInstances.isAutoLoginIgnoreHost(host)) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Ignore host " + host);
+			}
+
+			processFilter(AutoLoginFilter.class, req, res, chain);
+
+			return;
+		}
+
+		String contextPath = PortalUtil.getPathContext();
+
+		String path = httpReq.getRequestURI().toLowerCase();
+
+		if ((!contextPath.equals(StringPool.SLASH)) &&
+			(path.indexOf(contextPath) != -1)) {
+
+			path = path.substring(contextPath.length(), path.length());
+		}
+
+		if (PortalInstances.isAutoLoginIgnorePath(path)) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Ignore path " + path);
+			}
+
+			processFilter(AutoLoginFilter.class, req, res, chain);
+
+			return;
+		}
+
+		String remoteUser = httpReq.getRemoteUser();
+		String jUserName = (String)ses.getAttribute("j_username");
+
+		if ((remoteUser == null) && (jUserName == null)) {
+			for (String autoLoginHook : PropsValues.AUTO_LOGIN_HOOKS) {
+				AutoLogin autoLogin = (AutoLogin)InstancePool.get(
+					autoLoginHook);
+
+				try {
+					String[] credentials = autoLogin.login(httpReq, httpRes);
+
+					String redirect = (String)req.getAttribute(
+						AutoLogin.AUTO_LOGIN_REDIRECT);
+
+					if (redirect != null) {
+						httpRes.sendRedirect(redirect);
+
+						return;
+					}
+
+					String loginRemoteUser = getLoginRemoteUser(
+						httpReq, httpRes, ses, credentials);
+
+					if (loginRemoteUser != null) {
+						req = new ProtectedServletRequest(
+							httpReq, loginRemoteUser);
+
+						if (PropsValues.PORTAL_JAAS_ENABLE) {
+							return;
+						}
+					}
+				}
+				catch (Exception e) {
+					_log.warn(e, e);
+					_log.error(e.getMessage());
+				}
+			}
+		}
+
+		processFilter(AutoLoginFilter.class, req, res, chain);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(AutoLoginFilter.class);

@@ -22,6 +22,8 @@
 
 package com.liferay.portal.servlet.filters.compression;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -89,7 +91,7 @@ public class CompressionResponse extends HttpServletResponseWrapper {
 
 		_writer = new PrintWriter(new OutputStreamWriter(
 			//_stream, _res.getCharacterEncoding()));
-			_stream, CompressionFilter.ENCODING));
+			_stream, StringPool.UTF8));
 
 		return _writer;
 	}

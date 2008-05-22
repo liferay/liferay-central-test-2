@@ -24,12 +24,8 @@ package com.liferay.portal.servlet.filters.doubleclick;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.servlet.BaseFilter;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.SystemProperties;
+import com.liferay.portal.servlet.filters.BasePortalFilter;
 
 import java.io.IOException;
 
@@ -48,90 +44,68 @@ import org.apache.commons.lang.time.StopWatch;
  *
  * @author Olaf Fricke
  * @author Brian Wing Shun Chan
- * @author Raymond Aug�
+ * @author Raymond Augé
  *
  */
-public class DoubleClickFilter extends BaseFilter {
+public class DoubleClickFilter extends BasePortalFilter {
 
-	public static final boolean USE_FILTER = GetterUtil.getBoolean(
-		PropsUtil.get(DoubleClickFilter.class.getName()), true);
-
-	public static final String ENCODING = GetterUtil.getString(
-		SystemProperties.get("file.encoding"), StringPool.UTF8);
-
-	public void doFilter(
+	protected void processFilter(
 			ServletRequest req, ServletResponse res, FilterChain chain)
 		throws IOException, ServletException {
 
+		HttpServletRequest httpReq = (HttpServletRequest)req;
+		HttpServletResponse httpRes = (HttpServletResponse)res;
+
+		StopWatch stopWatch = null;
+
 		if (_log.isDebugEnabled()) {
-			if (USE_FILTER) {
-				_log.debug("Double click prevention is enabled");
-			}
-			else {
-				_log.debug("Double click prevention is disabled");
-			}
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
 		}
 
-		if (USE_FILTER) {
-			HttpServletRequest httpReq = (HttpServletRequest)req;
-			HttpServletResponse httpRes = (HttpServletResponse)res;
+		HttpSession ses = httpReq.getSession(false);
 
-			StopWatch stopWatch = null;
-
-			if (_log.isDebugEnabled()) {
-				stopWatch = new StopWatch();
-
-				stopWatch.start();
-			}
-
-			HttpSession ses = httpReq.getSession(false);
-
-			if (ses == null) {
-				doFilter(DoubleClickFilter.class, req, res, chain);
-			}
-			else {
-				DoubleClickController controller = null;
-
-				synchronized (ses) {
-					controller = (DoubleClickController)ses.getAttribute(
-						_CONTROLLER_KEY);
-
-					if (controller == null) {
-						controller = new DoubleClickController();
-
-						ses.setAttribute(_CONTROLLER_KEY, controller);
-					}
-				}
-
-				boolean ok = false;
-
-				try {
-					controller.control(httpReq, httpRes, chain);
-
-					ok = true;
-				}
-				finally {
-					if (_log.isDebugEnabled()) {
-						String completeURL = HttpUtil.getCompleteURL(httpReq);
-
-						if (ok) {
-							_log.debug(
-								"Double click prevention succeded in " +
-									stopWatch.getTime() + " ms for " +
-										completeURL);
-						}
-						else {
-							_log.debug(
-								"Double click prevention failed in " +
-									stopWatch.getTime() + " ms for " +
-										completeURL);
-						}
-					}
-				}
-			}
+		if (ses == null) {
+			processFilter(DoubleClickFilter.class, req, res, chain);
 		}
 		else {
-			doFilter(DoubleClickFilter.class, req, res, chain);
+			DoubleClickController controller = null;
+
+			synchronized (ses) {
+				controller = (DoubleClickController)ses.getAttribute(
+					_CONTROLLER_KEY);
+
+				if (controller == null) {
+					controller = new DoubleClickController();
+
+					ses.setAttribute(_CONTROLLER_KEY, controller);
+				}
+			}
+
+			boolean ok = false;
+
+			try {
+				controller.control(httpReq, httpRes, chain);
+
+				ok = true;
+			}
+			finally {
+				if (_log.isDebugEnabled()) {
+					String completeURL = HttpUtil.getCompleteURL(httpReq);
+
+					if (ok) {
+						_log.debug(
+							"Double click prevention succeded in " +
+								stopWatch.getTime() + " ms for " + completeURL);
+					}
+					else {
+						_log.debug(
+							"Double click prevention failed in " +
+								stopWatch.getTime() + " ms for " + completeURL);
+					}
+				}
+			}
 		}
 	}
 

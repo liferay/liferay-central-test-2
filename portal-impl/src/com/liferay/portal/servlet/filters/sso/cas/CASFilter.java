@@ -61,47 +61,6 @@ public class CASFilter extends BaseFilter {
 		_casFilters.remove(companyId);
 	}
 
-	public void doFilter(
-			ServletRequest req, ServletResponse res, FilterChain chain)
-		throws IOException, ServletException {
-
-		try {
-			HttpServletRequest httpReq = (HttpServletRequest)req;
-
-			long companyId = PortalUtil.getCompanyId(httpReq);
-
-			if (PrefsPropsUtil.getBoolean(
-					companyId, PropsUtil.CAS_AUTH_ENABLED,
-					PropsValues.CAS_AUTH_ENABLED)) {
-
-				String pathInfo = httpReq.getPathInfo();
-
-				if (pathInfo.indexOf("/portal/logout") != -1) {
-					HttpServletResponse httpRes = (HttpServletResponse)res;
-					HttpSession httpSes = httpReq.getSession();
-
-					httpSes.invalidate();
-
-					String logoutUrl = PrefsPropsUtil.getString(
-						companyId, PropsUtil.CAS_LOGOUT_URL);
-
-					httpRes.sendRedirect(logoutUrl);
-				}
-				else {
-					Filter casFilter = getCASFilter(companyId);
-
-					casFilter.doFilter(req, res, chain);
-				}
-			}
-			else {
-				doFilter(CASFilter.class, req, res, chain);
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-	}
-
 	protected Filter getCASFilter(long companyId) throws Exception {
 		edu.yale.its.tp.cas.client.filter.CASFilter casFilter =
 			_casFilters.get(companyId);
@@ -145,6 +104,47 @@ public class CASFilter extends BaseFilter {
 		}
 
 		return casFilter;
+	}
+
+	protected void processFilter(
+			ServletRequest req, ServletResponse res, FilterChain chain)
+		throws IOException, ServletException {
+
+		try {
+			HttpServletRequest httpReq = (HttpServletRequest)req;
+
+			long companyId = PortalUtil.getCompanyId(httpReq);
+
+			if (PrefsPropsUtil.getBoolean(
+					companyId, PropsUtil.CAS_AUTH_ENABLED,
+					PropsValues.CAS_AUTH_ENABLED)) {
+
+				String pathInfo = httpReq.getPathInfo();
+
+				if (pathInfo.indexOf("/portal/logout") != -1) {
+					HttpServletResponse httpRes = (HttpServletResponse)res;
+					HttpSession httpSes = httpReq.getSession();
+
+					httpSes.invalidate();
+
+					String logoutUrl = PrefsPropsUtil.getString(
+						companyId, PropsUtil.CAS_LOGOUT_URL);
+
+					httpRes.sendRedirect(logoutUrl);
+				}
+				else {
+					Filter casFilter = getCASFilter(companyId);
+
+					casFilter.doFilter(req, res, chain);
+				}
+			}
+			else {
+				processFilter(CASFilter.class, req, res, chain);
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(CASFilter.class);

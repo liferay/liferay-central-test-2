@@ -20,47 +20,25 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.servlet.filters.sessionid;
+package com.liferay.portal.servlet.filters;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.servlet.filters.BasePortalFilter;
-
-import java.io.IOException;
-
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.liferay.portal.kernel.servlet.BaseFilter;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.util.PropsUtil;
 
 /**
- * <a href="SessionIdFilter.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * http://forum.java.sun.com/thread.jspa?threadID=197150.
- * </p>
+ * <a href="BasePortalFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
  *
  */
-public class SessionIdFilter extends BasePortalFilter {
+public abstract class BasePortalFilter extends BaseFilter {
 
-	protected void processFilter(
-			ServletRequest req, ServletResponse res, FilterChain chain)
-		throws IOException, ServletException {
-
-		HttpServletRequest httpReq = (HttpServletRequest)req;
-		HttpServletResponse httpRes = (HttpServletResponse)res;
-
-		SessionIdServletRequest sessionIdReq = new SessionIdServletRequest(
-			httpReq, httpRes);
-
-		processFilter(SessionIdFilter.class, sessionIdReq, httpRes, chain);
+	protected boolean isEnabled() {
+		return _filterEnabled;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(SessionIdFilter.class);
+	private boolean _filterEnabled = GetterUtil.getBoolean(
+		PropsUtil.get(getClass().getName()), true);
 
 }

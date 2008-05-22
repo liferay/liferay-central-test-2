@@ -25,8 +25,6 @@ package com.liferay.portal.servlet.filters.virtualhost;
 import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.servlet.BaseFilter;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -35,12 +33,11 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.servlet.AbsoluteRedirectsResponse;
+import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.struts.LastPath;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.SystemProperties;
 
 import java.io.IOException;
 
@@ -68,16 +65,10 @@ import javax.servlet.http.HttpSession;
  *
  * @author Joel Kozikowski
  * @author Brian Wing Shun Chan
- * @author Raymond Aug�
+ * @author Raymond Augé
  *
  */
-public class VirtualHostFilter extends BaseFilter {
-
-	public static final boolean USE_FILTER = GetterUtil.getBoolean(
-		PropsUtil.get(VirtualHostFilter.class.getName()), true);
-
-	public static final String ENCODING = GetterUtil.getString(
-		SystemProperties.get("file.encoding"), StringPool.UTF8);
+public class VirtualHostFilter extends BasePortalFilter {
 
 	public void init(FilterConfig config) throws ServletException {
 		super.init(config);
@@ -90,18 +81,18 @@ public class VirtualHostFilter extends BaseFilter {
 		throws IOException, ServletException {
 
 		if (_log.isDebugEnabled()) {
-			if (USE_FILTER) {
-				_log.debug("Virtual host is enabled");
+			if (isFilterEnabled()) {
+				_log.debug(VirtualHostFilter.class + " is enabled");
 			}
 			else {
-				_log.debug("Virtual host is disabled");
+				_log.debug(VirtualHostFilter.class + " is disabled");
 			}
 		}
 
 		HttpServletRequest httpReq = (HttpServletRequest)req;
 		HttpServletResponse httpRes = (HttpServletResponse)res;
 
-		httpReq.setCharacterEncoding(ENCODING);
+		httpReq.setCharacterEncoding(StringPool.UTF8);
 		//httpRes.setContentType(ContentTypes.TEXT_HTML_UTF8);
 
 		// Make sure all redirects issued by the portal are absolute
@@ -133,8 +124,8 @@ public class VirtualHostFilter extends BaseFilter {
 			}
 		}
 
-		if (!USE_FILTER) {
-			doFilter(VirtualHostFilter.class, req, httpRes, chain);
+		if (!isFilterEnabled()) {
+			processFilter(VirtualHostFilter.class, req, httpRes, chain);
 
 			return;
 		}
@@ -146,7 +137,7 @@ public class VirtualHostFilter extends BaseFilter {
 		}
 
 		if (!isValidRequestURL(requestURL)) {
-			doFilter(VirtualHostFilter.class, req, httpRes, chain);
+			processFilter(VirtualHostFilter.class, req, httpRes, chain);
 
 			return;
 		}
@@ -170,7 +161,7 @@ public class VirtualHostFilter extends BaseFilter {
 		}
 
 		if (!isValidFriendlyURL(friendlyURL)) {
-			doFilter(VirtualHostFilter.class, req, httpRes, chain);
+			processFilter(VirtualHostFilter.class, req, httpRes, chain);
 
 			return;
 		}
@@ -231,7 +222,7 @@ public class VirtualHostFilter extends BaseFilter {
 			}
 		}
 
-		doFilter(VirtualHostFilter.class, req, httpRes, chain);
+		processFilter(VirtualHostFilter.class, req, httpRes, chain);
 	}
 
 	protected boolean isValidFriendlyURL(String friendlyURL) {
@@ -286,6 +277,11 @@ public class VirtualHostFilter extends BaseFilter {
 		else {
 			return true;
 		}
+	}
+
+	protected void processFilter(
+			ServletRequest req, ServletResponse res, FilterChain chain)
+		throws IOException, ServletException {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(VirtualHostFilter.class);

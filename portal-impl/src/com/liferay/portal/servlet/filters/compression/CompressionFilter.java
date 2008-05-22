@@ -24,16 +24,12 @@ package com.liferay.portal.servlet.filters.compression;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.servlet.BrowserSniffer;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.SystemProperties;
+import com.liferay.portal.servlet.filters.BasePortalFilter;
 
 import java.io.IOException;
 
@@ -48,79 +44,29 @@ import javax.servlet.http.HttpServletResponse;
  * <a href="CompressionFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Aug�
+ * @author Raymond Augé
  *
  */
-public class CompressionFilter extends BaseFilter {
-
-	static boolean useFilter = GetterUtil.getBoolean(
-		PropsUtil.get(CompressionFilter.class.getName()), true);
-
-	public static final String ENCODING = GetterUtil.getString(
-		SystemProperties.get("file.encoding"), StringPool.UTF8);
+public class CompressionFilter extends BasePortalFilter {
 
 	public static final String SKIP_FILTER =
 		CompressionFilter.class.getName() + "SKIP_FILTER";
 
-	static {
+	public CompressionFilter() {
 
 		// The compression filter will work on JBoss, Jetty, JOnAS, OC4J, Orion,
 		// and Tomcat, but may break on other servers
 
-		if (useFilter) {
+		if (isFilterEnabled()) {
 			if (ServerDetector.isJBoss() || ServerDetector.isJetty() ||
 				ServerDetector.isJOnAS() || ServerDetector.isOC4J() ||
 				ServerDetector.isOrion() || ServerDetector.isTomcat()) {
 
-				useFilter = true;
+				_filterEnabled = true;
 			}
 			else {
-				useFilter = false;
+				_filterEnabled = false;
 			}
-		}
-	}
-
-	public void doFilter(
-			ServletRequest req, ServletResponse res, FilterChain chain)
-		throws IOException, ServletException {
-
-		if (_log.isDebugEnabled()) {
-			if (useFilter) {
-				_log.debug("Compression is enabled");
-			}
-			else {
-				_log.debug("Compression is disabled");
-			}
-		}
-
-		HttpServletRequest httpReq = (HttpServletRequest)req;
-		HttpServletResponse httpRes = (HttpServletResponse)res;
-
-		String completeURL = HttpUtil.getCompleteURL(httpReq);
-
-		if (useFilter && isCompress(httpReq) && !isInclude(httpReq) &&
-			BrowserSniffer.acceptsGzip(httpReq) &&
-			!isAlreadyFiltered(httpReq)) {
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("Compressing " + completeURL);
-			}
-
-			httpReq.setAttribute(SKIP_FILTER, Boolean.TRUE);
-
-			CompressionResponse compressionResponse =
-				new CompressionResponse(httpRes);
-
-			doFilter(CompressionFilter.class, req, compressionResponse, chain);
-
-			compressionResponse.finishResponse();
-		}
-		else {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Not compressing " + completeURL);
-			}
-
-			doFilter(CompressionFilter.class, req, res, chain);
 		}
 	}
 
@@ -155,6 +101,10 @@ public class CompressionFilter extends BaseFilter {
 		}
 	}
 
+	protected boolean isFilterEnabled() {
+		return _filterEnabled;
+	}
+
 	protected boolean isInclude(HttpServletRequest req) {
 		String uri = (String)req.getAttribute(
 			JavaConstants.JAVAX_SERVLET_INCLUDE_REQUEST_URI);
@@ -167,8 +117,46 @@ public class CompressionFilter extends BaseFilter {
 		}
 	}
 
+	protected void processFilter(
+			ServletRequest req, ServletResponse res, FilterChain chain)
+		throws IOException, ServletException {
+
+		HttpServletRequest httpReq = (HttpServletRequest)req;
+		HttpServletResponse httpRes = (HttpServletResponse)res;
+
+		String completeURL = HttpUtil.getCompleteURL(httpReq);
+
+		if (isCompress(httpReq) && !isInclude(httpReq) &&
+			BrowserSniffer.acceptsGzip(httpReq) &&
+			!isAlreadyFiltered(httpReq)) {
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Compressing " + completeURL);
+			}
+
+			httpReq.setAttribute(SKIP_FILTER, Boolean.TRUE);
+
+			CompressionResponse compressionResponse =
+				new CompressionResponse(httpRes);
+
+			processFilter(
+				CompressionFilter.class, req, compressionResponse, chain);
+
+			compressionResponse.finishResponse();
+		}
+		else {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Not compressing " + completeURL);
+			}
+
+			processFilter(CompressionFilter.class, req, res, chain);
+		}
+	}
+
 	private static final String _COMPRESS = "compress";
 
 	private static Log _log = LogFactoryUtil.getLog(CompressionFilter.class);
+
+	private boolean _filterEnabled;
 
 }

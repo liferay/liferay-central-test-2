@@ -24,9 +24,9 @@ package com.liferay.portal.servlet.filters.sso.opensso;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -52,9 +52,26 @@ import javax.servlet.http.HttpSession;
  * @author Raymond Augé
  *
  */
-public class OpenSSOFilter extends BaseFilter {
+public class OpenSSOFilter extends BasePortalFilter {
 
-	public void doFilter(
+	protected boolean isAuthenticated(
+		HttpServletRequest req, String cookieName) {
+
+		String cookieValue = CookieUtil.get(req, cookieName);
+
+		if (Validator.isNotNull(cookieValue)) {
+			HttpSession ses = req.getSession();
+
+			ses.setAttribute(WebKeys.OPEN_SSO_LOGIN, cookieValue);
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	protected void processFilter(
 			ServletRequest req, ServletResponse res, FilterChain chain)
 		throws IOException, ServletException {
 
@@ -84,7 +101,7 @@ public class OpenSSOFilter extends BaseFilter {
 				Validator.isNull(logoutUrl) || Validator.isNull(serviceUrl) ||
 				Validator.isNull(cookieName)) {
 
-				doFilter(OpenSSOFilter.class, req, res, chain);
+				processFilter(OpenSSOFilter.class, req, res, chain);
 
 				return;
 			}
@@ -100,7 +117,7 @@ public class OpenSSOFilter extends BaseFilter {
 			}
 			else {
 				if (isAuthenticated(httpReq, cookieName)) {
-					doFilter(OpenSSOFilter.class, req, res, chain);
+					processFilter(OpenSSOFilter.class, req, res, chain);
 				}
 				else {
 					httpRes.sendRedirect(loginUrl);
@@ -109,23 +126,6 @@ public class OpenSSOFilter extends BaseFilter {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
-		}
-	}
-
-	protected boolean isAuthenticated(
-		HttpServletRequest req, String cookieName) {
-
-		String cookieValue = CookieUtil.get(req, cookieName);
-
-		if (Validator.isNotNull(cookieValue)) {
-			HttpSession ses = req.getSession();
-
-			ses.setAttribute(WebKeys.OPEN_SSO_LOGIN, cookieValue);
-
-			return true;
-		}
-		else {
-			return false;
 		}
 	}
 

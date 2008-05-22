@@ -25,14 +25,11 @@ package com.liferay.portal.servlet.filters.strip;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
-import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.SystemProperties;
+import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
@@ -48,39 +45,69 @@ import javax.servlet.http.HttpServletResponse;
  * <a href="StripFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Aug�
+ * @author Raymond Augé
  *
  */
-public class StripFilter extends BaseFilter {
-
-	public static final boolean USE_FILTER = GetterUtil.getBoolean(
-		PropsUtil.get(StripFilter.class.getName()), true);
-
-	public static final String ENCODING = GetterUtil.getString(
-		SystemProperties.get("file.encoding"), StringPool.UTF8);
+public class StripFilter extends BasePortalFilter {
 
 	public static final String SKIP_FILTER =
 		StripFilter.class.getName() + "SKIP_FILTER";
 
-	public void doFilter(
-			ServletRequest req, ServletResponse res, FilterChain chain)
-		throws IOException, ServletException {
+	protected boolean isAlreadyFiltered(HttpServletRequest req) {
+		if (req.getAttribute(SKIP_FILTER) != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 
-		if (_log.isDebugEnabled()) {
-			if (USE_FILTER) {
-				_log.debug("Strip is enabled");
+	protected boolean isInclude(HttpServletRequest req) {
+		String uri = (String)req.getAttribute(
+			JavaConstants.JAVAX_SERVLET_INCLUDE_REQUEST_URI);
+
+		if (uri == null) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
+	protected boolean isStrip(HttpServletRequest req) {
+		if (!ParamUtil.getBoolean(req, _STRIP, true)) {
+			return false;
+		}
+		else {
+
+			// The exclusive state is used to stream binary content.
+			// Compressing binary content through a servlet filter is bad on
+			// performance because the user will not start downloading the
+			// content until the entire content is compressed.
+
+			String lifecycle = ParamUtil.getString(req, "p_p_lifecycle");
+
+			if (lifecycle.equals("1") &&
+				LiferayWindowState.isExclusive(req)) {
+
+				return false;
 			}
 			else {
-				_log.debug("Strip is disabled");
+				return true;
 			}
 		}
+	}
+
+	protected void processFilter(
+			ServletRequest req, ServletResponse res, FilterChain chain)
+		throws IOException, ServletException {
 
 		HttpServletRequest httpReq = (HttpServletRequest)req;
 		HttpServletResponse httpRes = (HttpServletResponse)res;
 
 		String completeURL = HttpUtil.getCompleteURL(httpReq);
 
-		if (USE_FILTER && isStrip(httpReq) && !isInclude(httpReq) &&
+		if (isStrip(httpReq) && !isInclude(httpReq) &&
 			!isAlreadyFiltered(httpReq)) {
 
 			if (_log.isDebugEnabled()) {
@@ -91,7 +118,7 @@ public class StripFilter extends BaseFilter {
 
 			StripResponse stripResponse = new StripResponse(httpRes);
 
-			doFilter(StripFilter.class, req, stripResponse, chain);
+			processFilter(StripFilter.class, req, stripResponse, chain);
 
 			String contentType = GetterUtil.getString(
 				stripResponse.getContentType());
@@ -257,52 +284,7 @@ public class StripFilter extends BaseFilter {
 				_log.debug("Not stripping " + completeURL);
 			}
 
-			doFilter(StripFilter.class, req, res, chain);
-		}
-	}
-
-	protected boolean isAlreadyFiltered(HttpServletRequest req) {
-		if (req.getAttribute(SKIP_FILTER) != null) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	protected boolean isInclude(HttpServletRequest req) {
-		String uri = (String)req.getAttribute(
-			JavaConstants.JAVAX_SERVLET_INCLUDE_REQUEST_URI);
-
-		if (uri == null) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
-
-	protected boolean isStrip(HttpServletRequest req) {
-		if (!ParamUtil.getBoolean(req, _STRIP, true)) {
-			return false;
-		}
-		else {
-
-			// The exclusive state is used to stream binary content.
-			// Compressing binary content through a servlet filter is bad on
-			// performance because the user will not start downloading the
-			// content until the entire content is compressed.
-
-			String lifecycle = ParamUtil.getString(req, "p_p_lifecycle");
-
-			if (lifecycle.equals("1") &&
-				LiferayWindowState.isExclusive(req)) {
-
-				return false;
-			}
-			else {
-				return true;
-			}
+			processFilter(StripFilter.class, req, res, chain);
 		}
 	}
 

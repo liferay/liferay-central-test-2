@@ -24,9 +24,7 @@ package com.liferay.portal.servlet.filters.velocity;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.servlet.BrowserSniffer;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -36,13 +34,12 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
+import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.theme.ThemeDisplayFactory;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.velocity.VelocityVariables;
-import com.liferay.util.SystemProperties;
 import com.liferay.util.servlet.filters.CacheResponse;
 import com.liferay.util.servlet.filters.CacheResponseData;
 import com.liferay.util.servlet.filters.CacheResponseUtil;
@@ -70,16 +67,10 @@ import org.apache.velocity.app.Velocity;
  * <a href="VelocityFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Aug�
+ * @author Raymond Augé
  *
  */
-public class VelocityFilter extends BaseFilter {
-
-	public static final boolean USE_FILTER = GetterUtil.getBoolean(
-		PropsUtil.get(VelocityFilter.class.getName()), true);
-
-	public static final String ENCODING = GetterUtil.getString(
-		SystemProperties.get("file.encoding"), StringPool.UTF8);
+public class VelocityFilter extends BasePortalFilter {
 
 	public void init(FilterConfig config) throws ServletException {
 		super.init(config);
@@ -89,33 +80,30 @@ public class VelocityFilter extends BaseFilter {
 		_pattern = Pattern.compile(pattern);
 	}
 
-	public void doFilter(
+	protected boolean isMatchingURL(String completeURL) {
+		Matcher matcher = _pattern.matcher(completeURL);
+
+		return matcher.matches();
+	}
+
+	protected void processFilter(
 			ServletRequest req, ServletResponse res, FilterChain chain)
 		throws IOException, ServletException {
-
-		if (_log.isDebugEnabled()) {
-			if (USE_FILTER) {
-				_log.debug("Velocity is enabled");
-			}
-			else {
-				_log.debug("Velocity is disabled");
-			}
-		}
 
 		HttpServletRequest httpReq = (HttpServletRequest)req;
 		HttpServletResponse httpRes = (HttpServletResponse)res;
 
 		String completeURL = HttpUtil.getCompleteURL(httpReq);
 
-		if (USE_FILTER && isMatchingURL(completeURL)) {
+		if (isMatchingURL(completeURL)) {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Processing " + completeURL);
 			}
 
 			CacheResponse cacheResponse = new CacheResponse(
-				httpRes, ENCODING);
+				httpRes, StringPool.UTF8);
 
-			doFilter(VelocityFilter.class, req, cacheResponse, chain);
+			processFilter(VelocityFilter.class, req, cacheResponse, chain);
 
 			VelocityContext context = new VelocityContext();
 
@@ -191,7 +179,7 @@ public class VelocityFilter extends BaseFilter {
 			}
 
 			CacheResponseData data = new CacheResponseData(
-				writer.toString().getBytes(ENCODING),
+				writer.toString().getBytes(StringPool.UTF8),
 				cacheResponse.getContentType(), cacheResponse.getHeaders());
 
 			CacheResponseUtil.write(httpRes, data);
@@ -201,14 +189,8 @@ public class VelocityFilter extends BaseFilter {
 				_log.debug("Not processing " + completeURL);
 			}
 
-			doFilter(VelocityFilter.class, req, res, chain);
+			processFilter(VelocityFilter.class, req, res, chain);
 		}
-	}
-
-	protected boolean isMatchingURL(String completeURL) {
-		Matcher matcher = _pattern.matcher(completeURL);
-
-		return matcher.matches();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(VelocityFilter.class);

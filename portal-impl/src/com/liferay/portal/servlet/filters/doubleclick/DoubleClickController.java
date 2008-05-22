@@ -22,6 +22,7 @@
 
 package com.liferay.portal.servlet.filters.doubleclick;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.servlet.filters.CacheResponse;
 import com.liferay.util.servlet.filters.CacheResponseData;
 import com.liferay.util.servlet.filters.CacheResponseUtil;
@@ -55,8 +56,7 @@ public class DoubleClickController implements Serializable {
 			if (_cacheResponse == null) {
 				firstRequest = true;
 
-				_cacheResponse = new CacheResponse(
-					res, DoubleClickFilter.ENCODING);
+				_cacheResponse = new CacheResponse(res, StringPool.UTF8);
 				_throwable = null;
 			}
 

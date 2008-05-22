@@ -22,10 +22,12 @@
 
 package com.liferay.portal.servlet.filters.header;
 
-import com.liferay.portal.kernel.servlet.BaseFilter;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.servlet.filters.BasePortalFilter;
 
 import java.io.IOException;
 
@@ -54,7 +56,7 @@ import javax.servlet.http.HttpSession;
  * @author Raymond Augé
  *
  */
-public class HeaderFilter extends BaseFilter {
+public class HeaderFilter extends BasePortalFilter {
 
 	public void init(FilterConfig config) throws ServletException {
 		super.init(config);
@@ -63,7 +65,7 @@ public class HeaderFilter extends BaseFilter {
 		_timeZone = TimeZone.getTimeZone(_TIME_ZONE);
 	}
 
-	public void doFilter(
+	protected void processFilter(
 			ServletRequest req, ServletResponse res, FilterChain chain)
 		throws IOException, ServletException {
 
@@ -110,7 +112,7 @@ public class HeaderFilter extends BaseFilter {
 			}
 		}
 
-		doFilter(HeaderFilter.class, req, res, chain);
+		processFilter(HeaderFilter.class, req, res, chain);
 	}
 
 	private static final String _DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
@@ -118,6 +120,8 @@ public class HeaderFilter extends BaseFilter {
 	private static final String _EXPIRES = "Expires";
 
 	private static final String _TIME_ZONE = "GMT";
+
+	private static Log _log = LogFactoryUtil.getLog(HeaderFilter.class);
 
 	private FilterConfig _config;
 	private TimeZone _timeZone;
