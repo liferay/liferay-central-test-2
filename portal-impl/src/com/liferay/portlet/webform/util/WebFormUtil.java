@@ -27,9 +27,12 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.expando.NoSuchTableException;
+import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.model.ExpandoTable;
+import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoRowLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
 
@@ -39,6 +42,8 @@ import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.portlet.PortletPreferences;
 
 /**
  * <a href="WebFormUtil.java.html"><b><i>View Source</i></b></a>
@@ -64,6 +69,38 @@ public class WebFormUtil {
 
 	    return ExpandoTableLocalServiceUtil.addTable(
 		    WebFormUtil.class.getName(), tableName);
+	}
+
+	public static ExpandoTable checkTable(
+			String databaseTableName, PortletPreferences prefs)
+		throws Exception {
+
+		ExpandoTable expandoTable = null;
+
+		try {
+			expandoTable = ExpandoTableLocalServiceUtil.getTable(
+				WebFormUtil.class.getName(), databaseTableName);
+		}
+		catch (NoSuchTableException nste) {
+			expandoTable = addTable(databaseTableName);
+
+			int i = 1;
+
+			String fieldLabel =
+				prefs.getValue("fieldLabel" + i, StringPool.BLANK);
+
+			while ((i == 1) || (Validator.isNotNull(fieldLabel))) {
+				ExpandoColumnLocalServiceUtil.addColumn(
+					expandoTable.getTableId(), fieldLabel,
+					ExpandoColumnConstants.STRING);
+
+				i++;
+
+				fieldLabel = prefs.getValue("fieldLabel" + i, StringPool.BLANK);
+			}
+		}
+
+		return expandoTable;
 	}
 
 	public static int getTableRowsCount(String tableName)

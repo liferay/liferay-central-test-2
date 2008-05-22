@@ -289,81 +289,84 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 			selects.change(toggleOptions);
 			selects.each(toggleOptions);
 
-			var <portlet:namespace/>autoFields = new Liferay.autoFields(
-				{
-					addText: '<liferay-ui:message key="add-another-form-field" />',
-					removeText: '<liferay-ui:message key="remove-the-last-form-field" />',
+			<c:if test="<%= !fieldsEditingDisabled %>">
+				var <portlet:namespace/>autoFields = new Liferay.autoFields(
+					{
+						addText: '<liferay-ui:message key="add-another-form-field" />',
+						removeText: '<liferay-ui:message key="remove-the-last-form-field" />',
 
-					html: '#<portlet:namespace />webFields fieldset:first',
-					container: '#<portlet:namespace />webFields',
-					rowType: 'fieldset',
-					init: function() {
-						var instance = this;
+						html: '#<portlet:namespace />webFields fieldset:first',
+						container: '#<portlet:namespace />webFields',
+						rowType: 'fieldset',
+						init: function() {
+							var instance = this;
 
-						instance._numField = <%= (i - 1) %>;
+							instance._numField = <%= (i - 1) %>;
 
-						if (instance._numField > 1) {
-							var removeLink = instance._controlLinks.find('a:eq(1)');
+							if (instance._numField > 1) {
+								var removeLink = instance._controlLinks.find('a:eq(1)');
 
-							if (removeLink.is(':hidden')) {
-								removeLink.show();
+								if (removeLink.is(':hidden')) {
+									removeLink.show();
+								}
 							}
+						},
+						onAdd: function(newField) {
+							var instance = this;
+
+							var numField = instance._numField;
+							var inputs = newField.find('[@class$=lfr-input-text]');
+							var selects = newField.find('select');
+							var label = newField.find('label');
+							var selectId = '<portlet:namespace/>fieldType' + numField;
+							var legend = newField.find('legend');
+							var legText = legend.text();
+							var re = /([0-9])+$/;
+
+							legText = legText.replace(re, numField);
+							legend.text(legText);
+
+							label.each(
+								function() {
+									var label = jQuery(this);
+									var labelFor = label.attr('for');
+
+									labelFor = labelFor.replace(re, numField);
+									label.attr('for', labelFor);
+								}
+							);
+
+							inputs.each(
+								function() {
+									var input = jQuery(this);
+									var inputAttr = input.attr('name');
+
+									inputAttr = inputAttr.replace(re, numField);
+
+									this.value = '';
+
+									input.attr(
+										{
+											id: inputAttr,
+											name: inputAttr
+										}
+									);
+								}
+							);
+
+							selects.attr(
+								{
+									id: selectId,
+									name: selectId
+								}
+							);
+
+							selects.change(toggleOptions);
 						}
-					},
-					onAdd: function(newField) {
-						var instance = this;
-
-						var numField = instance._numField;
-						var inputs = newField.find('[@class$=lfr-input-text]');
-						var selects = newField.find('select');
-						var label = newField.find('label');
-						var selectId = '<portlet:namespace/>fieldType' + numField;
-						var legend = newField.find('legend');
-						var legText = legend.text();
-						var re = /([0-9])+$/;
-
-						legText = legText.replace(re, numField);
-						legend.text(legText);
-
-						label.each(
-							function() {
-								var label = jQuery(this);
-								var labelFor = label.attr('for');
-
-								labelFor = labelFor.replace(re, numField);
-								label.attr('for', labelFor);
-							}
-						);
-
-						inputs.each(
-							function() {
-								var input = jQuery(this);
-								var inputAttr = input.attr('name');
-
-								inputAttr = inputAttr.replace(re, numField);
-
-								this.value = '';
-
-								input.attr(
-									{
-										id: inputAttr,
-										name: inputAttr
-									}
-								);
-							}
-						);
-
-						selects.attr(
-							{
-								id: selectId,
-								name: selectId
-							}
-						);
-
-						selects.change(toggleOptions);
 					}
-				}
-			);
+				);
+			</c:if>
+
 		}
 	);
 </script>

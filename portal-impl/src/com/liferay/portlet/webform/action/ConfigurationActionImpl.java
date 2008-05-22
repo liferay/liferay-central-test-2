@@ -22,15 +22,13 @@
 
 package com.liferay.portlet.webform.action;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portlet.expando.model.ExpandoColumnConstants;
-import com.liferay.portlet.expando.model.ExpandoTable;
-import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
 import com.liferay.portlet.webform.util.WebFormUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
@@ -105,21 +103,6 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			}
 		}
 
-		ExpandoTable expandoTable = null;
-
-		if (saveToDatabase) {
-			String databaseTableName = prefs.getValue(
-				"databaseTableName", StringPool.BLANK);
-
-			if (Validator.isNull(databaseTableName)) {
-				databaseTableName = portletResource + title;
-
-				prefs.setValue("databaseTableName", databaseTableName);
-			}
-
-			expandoTable = WebFormUtil.addTable(databaseTableName);
-		}
-
 		if (saveToFile) {
 
 			// Check if server can create a file as specified
@@ -155,24 +138,26 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		if (updateFields) {
 			int i = 1;
 
+			long formPK = CounterLocalServiceUtil.increment(
+				WebFormUtil.class.getName());
+
+			String databaseTableName =
+				portletResource + StringPool.UNDERLINE + formPK;
+
+			prefs.setValue("databaseTableName", databaseTableName);
+
 			String fieldLabel = ParamUtil.getString(req, "fieldLabel" + i);
 			String fieldType = ParamUtil.getString(req, "fieldType" + i);
 			boolean fieldOptional = ParamUtil.getBoolean(
 				req, "fieldOptional" + i);
 			String fieldOptions = ParamUtil.getString(req, "fieldOptions" + i);
 
-			while ((i == 1) || (fieldLabel.trim().length() > 0)) {
+			while ((i == 1) || (Validator.isNotNull(fieldLabel))) {
 				prefs.setValue("fieldLabel" + i, fieldLabel);
 				prefs.setValue("fieldType" + i, fieldType);
 				prefs.setValue(
 					"fieldOptional" + i, String.valueOf(fieldOptional));
 				prefs.setValue("fieldOptions" + i, fieldOptions);
-
-				if (saveToDatabase) {
-					ExpandoColumnLocalServiceUtil.addColumn(
-						expandoTable.getTableId(), fieldLabel,
-						ExpandoColumnConstants.STRING);
-				}
 
 				i++;
 
@@ -186,7 +171,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 			fieldLabel = prefs.getValue("fieldLabel" + i, StringPool.BLANK);
 
-			while (fieldLabel.trim().length() > 0) {
+			while (Validator.isNotNull(fieldLabel)) {
 				prefs.setValue("fieldLabel" + i, StringPool.BLANK);
 				prefs.setValue("fieldType" + i, StringPool.BLANK);
 				prefs.setValue("fieldOptional" + i, StringPool.BLANK);
