@@ -949,7 +949,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		else if (rrule != null) {
 			repeating = true;
 			recurrence = toRecurrence(
-				rrule.getRecur(), timeZone, startDate);
+				rrule, timeZone, startDate);
 
 			if (recurrence.getUntil() != null) {
 				endDate = recurrence.getUntil();
@@ -1383,7 +1383,9 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	}
 
 	protected Recurrence toRecurrence(
-		Recur recur, TimeZone timeZone, Calendar startDate) {
+		RRule rRule, TimeZone timeZone, Calendar startDate) {
+
+		Recur recur = rRule.getRecur();
 
 		Calendar recStartCal = CalendarFactoryUtil.getCalendar(timeZone);
 
@@ -1408,7 +1410,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 			recurrence.setUntil(until);
 		}
-		else if (Validator.isNotNull(recur.getCount())) {
+		else if (rRule.getValue().indexOf("COUNT") >= 0) {
 			until.setTimeInMillis(startDate.getTimeInMillis());
 
 			int addField = 0;
