@@ -22,6 +22,8 @@
 
 package com.liferay.portal.servlet.filters.sessionid;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -30,9 +32,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="SessionIdServletRequest.java.html"><b><i>View Source</i></b></a>
@@ -104,7 +103,8 @@ public class SessionIdServletRequest extends HttpServletRequestWrapper {
 	private static final String _JESSIONID_ALREADY_SET =
 		"JESSIONID_ALREADY_SET";
 
-	private static Log _log = LogFactory.getLog(SessionIdServletRequest.class);
+	private static Log _log =
+		LogFactoryUtil.getLog(SessionIdServletRequest.class);
 
 	private HttpServletResponse _res;
 

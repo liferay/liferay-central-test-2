@@ -24,6 +24,8 @@ package com.liferay.portal.servlet.filters.layoutcache;
 
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -32,9 +34,6 @@ import com.liferay.util.servlet.filters.CacheResponseData;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LayoutCacheUtil.java.html"><b><i>View Source</i></b></a>
@@ -110,7 +109,7 @@ public class LayoutCacheUtil {
 		return sm.toString();
 	}
 
-	private static Log _log = LogFactory.getLog(LayoutCacheUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(LayoutCacheUtil.class);
 
 	private static PortalCache _cache = MultiVMPoolUtil.getCache(CACHE_NAME);
 

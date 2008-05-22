@@ -22,6 +22,8 @@
 
 package com.liferay.portal.servlet.filters;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -34,9 +36,15 @@ import com.liferay.portal.util.PropsUtil;
  */
 public abstract class BasePortalFilter extends BaseFilter {
 
-	protected boolean isEnabled() {
+	protected Log getLog() {
+		return _log;
+	}
+
+	protected boolean isFilterEnabled() {
 		return _filterEnabled;
 	}
+
+	private Log _log = LogFactoryUtil.getLog(getClass());
 
 	private boolean _filterEnabled = GetterUtil.getBoolean(
 		PropsUtil.get(getClass().getName()), true);

@@ -22,6 +22,8 @@
 
 package com.liferay.portal.servlet.filters.sso.ntlm;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.util.PortalInstances;
@@ -54,9 +56,6 @@ import jcifs.smb.NtlmPasswordAuthentication;
 import jcifs.smb.SmbSession;
 
 import jcifs.util.Base64;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="NtlmFilter.java.html"><b><i>View Source</i></b></a>
@@ -236,7 +235,7 @@ public class NtlmFilter extends NtlmHttpFilter {
 		return ntlm;
 	}
 
-	private static Log _log = LogFactory.getLog(NtlmFilter.class);
+	private static Log _log = LogFactoryUtil.getLog(NtlmFilter.class);
 
 	private DynamicFilterConfig _config;
 

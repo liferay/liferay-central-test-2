@@ -23,7 +23,6 @@
 package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.IOException;
@@ -52,12 +51,14 @@ public abstract class BaseFilter implements Filter {
 			ServletRequest req, ServletResponse res, FilterChain chain)
 		throws IOException, ServletException {
 
-		if (_log.isDebugEnabled()) {
+		Log log = getLog();
+
+		if (log.isDebugEnabled()) {
 			if (isFilterEnabled()) {
-				_log.debug(_filterClass + " is enabled");
+				log.debug(_filterClass + " is enabled");
 			}
 			else {
-				_log.debug(_filterClass + " is disabled");
+				log.debug(_filterClass + " is disabled");
 			}
 		}
 
@@ -75,6 +76,8 @@ public abstract class BaseFilter implements Filter {
 
 	public void destroy() {
 	}
+
+	protected abstract Log getLog();
 
 	protected boolean isFilterEnabled() {
 		return _filterEnabled;
@@ -95,7 +98,9 @@ public abstract class BaseFilter implements Filter {
 		String depther = null;
 		String path = null;
 
-		if (_log.isDebugEnabled()) {
+		Log log = getLog();
+
+		if (log.isDebugEnabled()) {
 			HttpServletRequest httpReq = (HttpServletRequest)req;
 
 			startTime = System.currentTimeMillis();
@@ -115,19 +120,19 @@ public abstract class BaseFilter implements Filter {
 
 			path = httpReq.getRequestURI();
 
-			_log.debug(
+			log.debug(
 				"[" + threadName + "]" + depther + "> " +
 					filterClass.getName() + " " + path);
 		}
 
 		chain.doFilter(req, res);
 
-		if (_log.isDebugEnabled()) {
+		if (log.isDebugEnabled()) {
 			long endTime = System.currentTimeMillis();
 
 			depther = (String)req.getAttribute(_DEPTHER);
 
-			_log.debug(
+			log.debug(
 				"[" + threadName + "]" + depther + "< " +
 					filterClass.getName() + " " + path + " " +
 						(endTime - startTime) + " ms");
@@ -141,8 +146,6 @@ public abstract class BaseFilter implements Filter {
 	}
 
 	private static final String _DEPTHER = "DEPTHER";
-
-	private static Log _log = LogFactoryUtil.getLog(BaseFilter.class);
 
 	private FilterConfig _config;
 	private Class _filterClass = getClass();

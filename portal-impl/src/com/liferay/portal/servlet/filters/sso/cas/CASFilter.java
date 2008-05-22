@@ -106,6 +106,10 @@ public class CASFilter extends BaseFilter {
 		return casFilter;
 	}
 
+	protected Log getLog() {
+		return _log;
+	}
+
 	protected void processFilter(
 			ServletRequest req, ServletResponse res, FilterChain chain)
 		throws IOException, ServletException {

@@ -22,6 +22,8 @@
 
 package com.liferay.portal.servlet.filters.compression;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ByteArrayMaker;
 
 import java.io.IOException;
@@ -31,9 +33,6 @@ import java.util.zip.GZIPOutputStream;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="CompressionStream.java.html"><b><i>View Source</i></b></a>
@@ -144,7 +143,7 @@ public class CompressionStream extends ServletOutputStream {
 
 	private static final String _GZIP = "gzip";
 
-	private static Log _log = LogFactory.getLog(CompressionStream.class);
+	private static Log _log = LogFactoryUtil.getLog(CompressionStream.class);
 
 	private HttpServletResponse _res = null;
 	private ServletOutputStream _output = null;

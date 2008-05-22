@@ -128,10 +128,6 @@
 		<priority value="INFO" />
 	</category>
 
-	<category name="com.liferay.portal.kernel.servlet.BaseFilter">
-		<priority value="ERROR" />
-	</category>
-
 	<category name="com.liferay.portal.kernel.servlet.PortletContextListener">
 		<priority value="INFO" />
 	</category>

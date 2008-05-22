@@ -57,7 +57,7 @@ public class CompressionFilter extends BasePortalFilter {
 		// The compression filter will work on JBoss, Jetty, JOnAS, OC4J, Orion,
 		// and Tomcat, but may break on other servers
 
-		if (isFilterEnabled()) {
+		if (super.isFilterEnabled()) {
 			if (ServerDetector.isJBoss() || ServerDetector.isJetty() ||
 				ServerDetector.isJOnAS() || ServerDetector.isOC4J() ||
 				ServerDetector.isOrion() || ServerDetector.isTomcat()) {
