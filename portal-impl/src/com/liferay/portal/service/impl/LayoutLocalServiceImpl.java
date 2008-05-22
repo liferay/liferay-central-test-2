@@ -830,7 +830,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		header.addAttribute("export-date", Time.getRFC822());
 		header.addAttribute("type", "portlet");
 		header.addAttribute("group-id", String.valueOf(layout.getGroupId()));
-		header.addAttribute("private-layout", String.valueOf(privateLayout));
+		header.addAttribute(
+			"private-layout", String.valueOf(layout.isPrivateLayout()));
 		header.addAttribute(
 			"root-portlet-id", PortletConstants.getRootPortletId(portletId));
 
