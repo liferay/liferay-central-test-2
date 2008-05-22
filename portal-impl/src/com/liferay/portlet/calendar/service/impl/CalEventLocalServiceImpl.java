@@ -948,8 +948,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 		else if (rrule != null) {
 			repeating = true;
-			recurrence = toRecurrence(
-				rrule, timeZone, startDate);
+			recurrence = toRecurrence(rrule, timeZone, startDate);
 
 			if (recurrence.getUntil() != null) {
 				endDate = recurrence.getUntil();
