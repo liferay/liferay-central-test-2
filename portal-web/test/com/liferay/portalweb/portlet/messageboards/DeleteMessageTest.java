@@ -56,7 +56,7 @@ public class DeleteMessageTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[6]/table/tbody/tr[2]/td/ul/li[3]/nobr/a[2]")) {
+							"//div[6]/table/tbody/tr[2]/td/ul[2]/li[5]/nobr/a[2]")) {
 					break;
 				}
 			}
@@ -66,7 +66,7 @@ public class DeleteMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[6]/table/tbody/tr[2]/td/ul/li[3]/nobr/a[2]");
+		selenium.click("//div[6]/table/tbody/tr[2]/td/ul[2]/li[5]/nobr/a[2]");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 

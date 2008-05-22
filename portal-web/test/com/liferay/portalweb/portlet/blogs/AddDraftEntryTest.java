@@ -141,7 +141,7 @@ public class AddDraftEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		Thread.sleep(5000);
+		Thread.sleep(15000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -150,6 +150,22 @@ public class AddDraftEntryTest extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent("Draft saved")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("Pacific Daylight Time")) {
 					break;
 				}
 			}
