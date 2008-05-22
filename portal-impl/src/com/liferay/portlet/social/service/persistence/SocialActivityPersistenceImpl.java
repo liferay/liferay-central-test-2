@@ -41,6 +41,7 @@ import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.impl.SocialActivityImpl;
 import com.liferay.portlet.social.model.impl.SocialActivityModelImpl;
 
+import com.liferay.util.cal.CalendarUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -52,6 +53,7 @@ import org.hibernate.Session;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -2149,11 +2151,11 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public SocialActivity findByG_U_C_C_T_E_R(long groupId, long userId,
-		long classNameId, long classPK, int type, String extraData,
+	public SocialActivity findByG_U_CD_C_C_T_R(long groupId, long userId,
+		Date createDate, long classNameId, long classPK, int type,
 		long receiverUserId) throws NoSuchActivityException, SystemException {
-		SocialActivity socialActivity = fetchByG_U_C_C_T_E_R(groupId, userId,
-				classNameId, classPK, type, extraData, receiverUserId);
+		SocialActivity socialActivity = fetchByG_U_CD_C_C_T_R(groupId, userId,
+				createDate, classNameId, classPK, type, receiverUserId);
 
 		if (socialActivity == null) {
 			StringMaker msg = new StringMaker();
@@ -2166,6 +2168,9 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 			msg.append("userId=" + userId);
 
 			msg.append(", ");
+			msg.append("createDate=" + createDate);
+
+			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
 
 			msg.append(", ");
@@ -2173,9 +2178,6 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 			msg.append(", ");
 			msg.append("type=" + type);
-
-			msg.append(", ");
-			msg.append("extraData=" + extraData);
 
 			msg.append(", ");
 			msg.append("receiverUserId=" + receiverUserId);
@@ -2192,22 +2194,22 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 		return socialActivity;
 	}
 
-	public SocialActivity fetchByG_U_C_C_T_E_R(long groupId, long userId,
-		long classNameId, long classPK, int type, String extraData,
+	public SocialActivity fetchByG_U_CD_C_C_T_R(long groupId, long userId,
+		Date createDate, long classNameId, long classPK, int type,
 		long receiverUserId) throws SystemException {
 		boolean finderClassNameCacheEnabled = SocialActivityModelImpl.CACHE_ENABLED;
 		String finderClassName = SocialActivity.class.getName();
-		String finderMethodName = "fetchByG_U_C_C_T_E_R";
+		String finderMethodName = "fetchByG_U_CD_C_C_T_R";
 		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				Long.class.getName(), Integer.class.getName(),
-				String.class.getName(), Long.class.getName()
+				Long.class.getName(), Long.class.getName(), Date.class.getName(),
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(userId), new Long(classNameId),
-				new Long(classPK), new Integer(type),
+				new Long(groupId), new Long(userId),
 				
-				extraData, new Long(receiverUserId)
+				createDate, new Long(classNameId), new Long(classPK),
+				new Integer(type), new Long(receiverUserId)
 			};
 
 		Object result = null;
@@ -2236,6 +2238,15 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 				query.append(" AND ");
 
+				if (createDate == null) {
+					query.append("createDate IS NULL");
+				}
+				else {
+					query.append("createDate = ?");
+				}
+
+				query.append(" AND ");
+
 				query.append("classNameId = ?");
 
 				query.append(" AND ");
@@ -2245,15 +2256,6 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 				query.append(" AND ");
 
 				query.append("type_ = ?");
-
-				query.append(" AND ");
-
-				if (extraData == null) {
-					query.append("extraData IS NULL");
-				}
-				else {
-					query.append("extraData = ?");
-				}
 
 				query.append(" AND ");
 
@@ -2273,15 +2275,15 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 				qPos.add(userId);
 
+				if (createDate != null) {
+					qPos.add(CalendarUtil.getTimestamp(createDate));
+				}
+
 				qPos.add(classNameId);
 
 				qPos.add(classPK);
 
 				qPos.add(type);
-
-				if (extraData != null) {
-					qPos.add(extraData);
-				}
 
 				qPos.add(receiverUserId);
 
@@ -2490,11 +2492,11 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeByG_U_C_C_T_E_R(long groupId, long userId,
-		long classNameId, long classPK, int type, String extraData,
+	public void removeByG_U_CD_C_C_T_R(long groupId, long userId,
+		Date createDate, long classNameId, long classPK, int type,
 		long receiverUserId) throws NoSuchActivityException, SystemException {
-		SocialActivity socialActivity = findByG_U_C_C_T_E_R(groupId, userId,
-				classNameId, classPK, type, extraData, receiverUserId);
+		SocialActivity socialActivity = findByG_U_CD_C_C_T_R(groupId, userId,
+				createDate, classNameId, classPK, type, receiverUserId);
 
 		remove(socialActivity);
 	}
@@ -3064,22 +3066,22 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public int countByG_U_C_C_T_E_R(long groupId, long userId,
-		long classNameId, long classPK, int type, String extraData,
+	public int countByG_U_CD_C_C_T_R(long groupId, long userId,
+		Date createDate, long classNameId, long classPK, int type,
 		long receiverUserId) throws SystemException {
 		boolean finderClassNameCacheEnabled = SocialActivityModelImpl.CACHE_ENABLED;
 		String finderClassName = SocialActivity.class.getName();
-		String finderMethodName = "countByG_U_C_C_T_E_R";
+		String finderMethodName = "countByG_U_CD_C_C_T_R";
 		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				Long.class.getName(), Integer.class.getName(),
-				String.class.getName(), Long.class.getName()
+				Long.class.getName(), Long.class.getName(), Date.class.getName(),
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(groupId), new Long(userId), new Long(classNameId),
-				new Long(classPK), new Integer(type),
+				new Long(groupId), new Long(userId),
 				
-				extraData, new Long(receiverUserId)
+				createDate, new Long(classNameId), new Long(classPK),
+				new Integer(type), new Long(receiverUserId)
 			};
 
 		Object result = null;
@@ -3109,6 +3111,15 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 				query.append(" AND ");
 
+				if (createDate == null) {
+					query.append("createDate IS NULL");
+				}
+				else {
+					query.append("createDate = ?");
+				}
+
+				query.append(" AND ");
+
 				query.append("classNameId = ?");
 
 				query.append(" AND ");
@@ -3118,15 +3129,6 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 				query.append(" AND ");
 
 				query.append("type_ = ?");
-
-				query.append(" AND ");
-
-				if (extraData == null) {
-					query.append("extraData IS NULL");
-				}
-				else {
-					query.append("extraData = ?");
-				}
 
 				query.append(" AND ");
 
@@ -3142,15 +3144,15 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 				qPos.add(userId);
 
+				if (createDate != null) {
+					qPos.add(CalendarUtil.getTimestamp(createDate));
+				}
+
 				qPos.add(classNameId);
 
 				qPos.add(classPK);
 
 				qPos.add(type);
-
-				if (extraData != null) {
-					qPos.add(extraData);
-				}
 
 				qPos.add(receiverUserId);
 

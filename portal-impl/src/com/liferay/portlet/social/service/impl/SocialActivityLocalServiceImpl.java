@@ -123,8 +123,8 @@ public class SocialActivityLocalServiceImpl
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		SocialActivity socialActivity =
-			socialActivityPersistence.fetchByG_U_C_C_T_E_R(
-				groupId, userId, classNameId, classPK, type, extraData,
+			socialActivityPersistence.fetchByG_U_CD_C_C_T_R(
+				groupId, userId, createDate, classNameId, classPK, type,
 				receiverUserId);
 
 		if (socialActivity != null) {

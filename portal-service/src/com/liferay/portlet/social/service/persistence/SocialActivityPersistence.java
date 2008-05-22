@@ -289,15 +289,15 @@ public interface SocialActivityPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.social.NoSuchActivityException;
 
-	public com.liferay.portlet.social.model.SocialActivity findByG_U_C_C_T_E_R(
-		long groupId, long userId, long classNameId, long classPK, int type,
-		java.lang.String extraData, long receiverUserId)
+	public com.liferay.portlet.social.model.SocialActivity findByG_U_CD_C_C_T_R(
+		long groupId, long userId, java.util.Date createDate, long classNameId,
+		long classPK, int type, long receiverUserId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.social.NoSuchActivityException;
 
-	public com.liferay.portlet.social.model.SocialActivity fetchByG_U_C_C_T_E_R(
-		long groupId, long userId, long classNameId, long classPK, int type,
-		java.lang.String extraData, long receiverUserId)
+	public com.liferay.portlet.social.model.SocialActivity fetchByG_U_CD_C_C_T_R(
+		long groupId, long userId, java.util.Date createDate, long classNameId,
+		long classPK, int type, long receiverUserId)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findWithDynamicQuery(
@@ -343,8 +343,8 @@ public interface SocialActivityPersistence {
 	public void removeByM_C_C(long mirrorActivityId, long classNameId,
 		long classPK) throws com.liferay.portal.SystemException;
 
-	public void removeByG_U_C_C_T_E_R(long groupId, long userId,
-		long classNameId, long classPK, int type, java.lang.String extraData,
+	public void removeByG_U_CD_C_C_T_R(long groupId, long userId,
+		java.util.Date createDate, long classNameId, long classPK, int type,
 		long receiverUserId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.social.NoSuchActivityException;
@@ -375,8 +375,8 @@ public interface SocialActivityPersistence {
 	public int countByM_C_C(long mirrorActivityId, long classNameId,
 		long classPK) throws com.liferay.portal.SystemException;
 
-	public int countByG_U_C_C_T_E_R(long groupId, long userId,
-		long classNameId, long classPK, int type, java.lang.String extraData,
+	public int countByG_U_CD_C_C_T_R(long groupId, long userId,
+		java.util.Date createDate, long classNameId, long classPK, int type,
 		long receiverUserId) throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

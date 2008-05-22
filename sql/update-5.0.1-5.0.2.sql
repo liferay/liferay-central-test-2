@@ -51,7 +51,7 @@ create table SocialRequest (
 	classNameId LONG,
 	classPK LONG,
 	type_ INTEGER,
-	extraData VARCHAR(75) null,
+	extraData STRING null,
 	receiverUserId LONG,
 	status INTEGER
 );

@@ -361,7 +361,7 @@ create index IX_82E39A0C on SocialActivity (classNameId);
 create index IX_A853C757 on SocialActivity (classNameId, classPK);
 create index IX_64B1BC66 on SocialActivity (companyId);
 create index IX_2A2468 on SocialActivity (groupId);
-create index IX_FE481715 on SocialActivity (groupId, userId, classNameId, classPK, type_, extraData, receiverUserId);
+create index IX_8F32DEC9 on SocialActivity (groupId, userId, createDate, classNameId, classPK, type_, receiverUserId);
 create index IX_1271F25F on SocialActivity (mirrorActivityId);
 create index IX_1F00C374 on SocialActivity (mirrorActivityId, classNameId, classPK);
 create index IX_121CA3CB on SocialActivity (receiverUserId);

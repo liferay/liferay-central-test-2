@@ -63,13 +63,13 @@
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
-		<finder name="G_U_C_C_T_E_R" return-type="SocialActivity">
+		<finder name="G_U_CD_C_C_T_R" return-type="SocialActivity">
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
+			<finder-column name="createDate" />
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 			<finder-column name="type" />
-			<finder-column name="extraData" />
 			<finder-column name="receiverUserId" />
 		</finder>
 

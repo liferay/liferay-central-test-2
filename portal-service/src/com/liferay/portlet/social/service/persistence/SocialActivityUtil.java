@@ -410,23 +410,23 @@ public class SocialActivityUtil {
 			classNameId, classPK, obc);
 	}
 
-	public static com.liferay.portlet.social.model.SocialActivity findByG_U_C_C_T_E_R(
-		long groupId, long userId, long classNameId, long classPK, int type,
-		java.lang.String extraData, long receiverUserId)
+	public static com.liferay.portlet.social.model.SocialActivity findByG_U_CD_C_C_T_R(
+		long groupId, long userId, java.util.Date createDate, long classNameId,
+		long classPK, int type, long receiverUserId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.social.NoSuchActivityException {
 		return getPersistence()
-				   .findByG_U_C_C_T_E_R(groupId, userId, classNameId, classPK,
-			type, extraData, receiverUserId);
+				   .findByG_U_CD_C_C_T_R(groupId, userId, createDate,
+			classNameId, classPK, type, receiverUserId);
 	}
 
-	public static com.liferay.portlet.social.model.SocialActivity fetchByG_U_C_C_T_E_R(
-		long groupId, long userId, long classNameId, long classPK, int type,
-		java.lang.String extraData, long receiverUserId)
+	public static com.liferay.portlet.social.model.SocialActivity fetchByG_U_CD_C_C_T_R(
+		long groupId, long userId, java.util.Date createDate, long classNameId,
+		long classPK, int type, long receiverUserId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .fetchByG_U_C_C_T_E_R(groupId, userId, classNameId, classPK,
-			type, extraData, receiverUserId);
+				   .fetchByG_U_CD_C_C_T_R(groupId, userId, createDate,
+			classNameId, classPK, type, receiverUserId);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> findWithDynamicQuery(
@@ -499,14 +499,14 @@ public class SocialActivityUtil {
 		getPersistence().removeByM_C_C(mirrorActivityId, classNameId, classPK);
 	}
 
-	public static void removeByG_U_C_C_T_E_R(long groupId, long userId,
-		long classNameId, long classPK, int type, java.lang.String extraData,
+	public static void removeByG_U_CD_C_C_T_R(long groupId, long userId,
+		java.util.Date createDate, long classNameId, long classPK, int type,
 		long receiverUserId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.social.NoSuchActivityException {
 		getPersistence()
-			.removeByG_U_C_C_T_E_R(groupId, userId, classNameId, classPK, type,
-			extraData, receiverUserId);
+			.removeByG_U_CD_C_C_T_R(groupId, userId, createDate, classNameId,
+			classPK, type, receiverUserId);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
@@ -554,12 +554,12 @@ public class SocialActivityUtil {
 				   .countByM_C_C(mirrorActivityId, classNameId, classPK);
 	}
 
-	public static int countByG_U_C_C_T_E_R(long groupId, long userId,
-		long classNameId, long classPK, int type, java.lang.String extraData,
+	public static int countByG_U_CD_C_C_T_R(long groupId, long userId,
+		java.util.Date createDate, long classNameId, long classPK, int type,
 		long receiverUserId) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .countByG_U_C_C_T_E_R(groupId, userId, classNameId, classPK,
-			type, extraData, receiverUserId);
+				   .countByG_U_CD_C_C_T_R(groupId, userId, createDate,
+			classNameId, classPK, type, receiverUserId);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {
