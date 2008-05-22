@@ -144,7 +144,7 @@ public class WebDAVUtil {
 
 			try {
 				Group group = GroupLocalServiceUtil.getFriendlyURLGroup(
-					companyId, name);
+					companyId, StringPool.SLASH + name);
 
 				return group.getGroupId();
 			}
