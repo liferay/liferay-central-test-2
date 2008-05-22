@@ -953,6 +953,31 @@ li.toggle-expand a {
 	margin-bottom: 1.5em;
 }
 
+.lfr-widget-bar {
+	margin: 1em 0;
+}
+
+.lfr-widget-bar:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+
+.ie .lfr-widget-bar {
+	height: 1%;
+}
+
+.lfr-share-icon {
+	float: left;
+	margin-right: 1em;
+}
+
+.lfr-widget-bar .widget-information {
+	display: none;
+}
+
 /* ---------- Liferay forms ---------- */
 
 .lfr-input-text {
