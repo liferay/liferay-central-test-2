@@ -162,7 +162,8 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 			bsfManager.declareBean("renderRequest", req, RenderRequest.class);
 		}
 		else if (req instanceof ResourceRequest) {
-			bsfManager.declareBean("resourceRequest", req, ResourceRequest.class);
+			bsfManager.declareBean(
+				"resourceRequest", req, ResourceRequest.class);
 		}
 
 		if (res instanceof ActionResponse) {
