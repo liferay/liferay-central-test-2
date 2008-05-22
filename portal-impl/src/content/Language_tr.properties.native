@@ -184,6 +184,7 @@ availability=Erişilebilirlik
 available-categories=Kullanılabilir Katagoriler
 available=Kullanılabilir
 back-to-top=Yukarı
+back-to-x=Back to {0}
 bad-request=Geçersiz İstek 
 basic-information=Temel Bilgi
 basic=Temel
