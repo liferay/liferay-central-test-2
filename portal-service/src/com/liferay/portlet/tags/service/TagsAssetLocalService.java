@@ -181,8 +181,8 @@ public interface TagsAssetLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		java.lang.String portletId, java.lang.String keywords)
-		throws com.liferay.portal.SystemException;
+		java.lang.String portletId, java.lang.String keywords, int start,
+		int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsAssetDisplay[] searchAssetDisplays(
 		long companyId, java.lang.String portletId, java.lang.String keywords,

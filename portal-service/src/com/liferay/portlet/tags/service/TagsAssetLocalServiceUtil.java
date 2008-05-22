@@ -316,11 +316,12 @@ public class TagsAssetLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
-		java.lang.String portletId, java.lang.String keywords)
-		throws com.liferay.portal.SystemException {
+		java.lang.String portletId, java.lang.String keywords, int start,
+		int end) throws com.liferay.portal.SystemException {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
 
-		return tagsAssetLocalService.search(companyId, portletId, keywords);
+		return tagsAssetLocalService.search(companyId, portletId, keywords,
+			start, end);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] searchAssetDisplays(

@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringPool;
@@ -53,7 +54,7 @@ import com.liferay.portlet.tags.util.TagsAssetValidator;
 import com.liferay.portlet.tags.util.TagsUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.util.ListUtil;
-import com.liferay.util.lucene.HitsImpl;
+import com.liferay.util.search.QueryImpl;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -64,7 +65,6 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
-import org.apache.lucene.search.Searcher;
 import org.apache.lucene.search.TermQuery;
 
 /**
@@ -336,14 +336,12 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		return asset;
 	}
 
-	public Hits search(long companyId, String portletId, String keywords)
+	public Hits search(
+			long companyId, String portletId, String keywords, int start,
+			int end)
 		throws SystemException {
 
-		Searcher searcher = null;
-
 		try {
-			HitsImpl hits = new HitsImpl();
-
 			BooleanQuery contextQuery = new BooleanQuery();
 
 			if (Validator.isNotNull(portletId)) {
@@ -384,14 +382,11 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 			}
 
-			searcher = LuceneUtil.getSearcher(companyId);
-
-			hits.recordHits(searcher.search(fullQuery), searcher);
-
-			return hits;
+			return SearchEngineUtil.search(
+				companyId, new QueryImpl(fullQuery), start, end);
 		}
 		catch (Exception e) {
-			return LuceneUtil.closeSearcher(searcher, keywords, e);
+			throw new SystemException(e);
 		}
 	}
 
@@ -402,9 +397,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 		List<TagsAsset> assets = new ArrayList<TagsAsset>();
 
-		Hits hits = search(companyId, portletId, keywords);
-
-		hits = hits.subset(start, end);
+		Hits hits = search(companyId, portletId, keywords, start, end);
 
 		List<Document> hitsList = hits.toList();
 
@@ -431,7 +424,9 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			String languageId)
 		throws SystemException {
 
-		Hits hits = search(companyId, portletId, keywords);
+		Hits hits = search(
+			companyId, portletId, keywords, SearchEngineUtil.ALL_POS,
+			SearchEngineUtil.ALL_POS);
 
 		return hits.getLength();
 	}
