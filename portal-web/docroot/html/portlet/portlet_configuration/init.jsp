@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portal.LarTypeException" %>
+<%@ page import="com.liferay.portal.LARTypeException" %>
 <%@ page import="com.liferay.portal.LayoutImportException" %>
 <%@ page import="com.liferay.portal.NoSuchLayoutException" %>
 <%@ page import="com.liferay.portal.NoSuchPortletItemException" %>

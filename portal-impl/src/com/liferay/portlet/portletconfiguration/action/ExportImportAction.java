@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.portletconfiguration.action;
 
-import com.liferay.portal.LarTypeException;
+import com.liferay.portal.LARTypeException;
 import com.liferay.portal.LayoutImportException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.PortletIdException;
@@ -177,8 +177,9 @@ public class ExportImportAction extends EditConfigurationAction {
 			SessionMessages.add(req, "request_processed");
 		}
 		catch (Exception e) {
-			if ((e instanceof LarTypeException) ||
-					(e instanceof PortletIdException)) {
+			if ((e instanceof LARTypeException) ||
+				(e instanceof PortletIdException)) {
+
 				SessionErrors.add(req, e.getClass().getName());
 			}
 			else {

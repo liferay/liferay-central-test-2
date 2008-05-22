@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.portal.LarTypeException;
+import com.liferay.portal.LARTypeException;
 import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.LayoutHiddenException;
 import com.liferay.portal.LayoutImportException;
@@ -434,12 +434,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		header.addAttribute(
 			"build-number", String.valueOf(ReleaseInfo.getBuildNumber()));
+		header.addAttribute("export-date", Time.getRFC822());
+		header.addAttribute("type", "layouts");
 		header.addAttribute("group-id", String.valueOf(groupId));
 		header.addAttribute("private-layout", String.valueOf(privateLayout));
-		header.addAttribute("export-date", Time.getRFC822());
 		header.addAttribute("theme-id", layoutSet.getThemeId());
 		header.addAttribute("color-scheme-id", layoutSet.getColorSchemeId());
-		header.addAttribute("type", "layouts");
 
 		// Layouts
 
@@ -827,11 +827,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		header.addAttribute(
 			"build-number", String.valueOf(ReleaseInfo.getBuildNumber()));
-		header.addAttribute("group-id", String.valueOf(layout.getGroupId()));
 		header.addAttribute("export-date", Time.getRFC822());
 		header.addAttribute("type", "portlet");
+		header.addAttribute("group-id", String.valueOf(layout.getGroupId()));
+		header.addAttribute("private-layout", String.valueOf(privateLayout));
 		header.addAttribute(
-			"rootPortletId", PortletConstants.getRootPortletId(portletId));
+			"root-portlet-id", PortletConstants.getRootPortletId(portletId));
 
 		// Data
 
@@ -1552,7 +1553,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		if (root == null) {
-			throw new LarTypeException(
+			throw new LARTypeException(
 				"The LAR does not contain a portlet.xml file");
 		}
 
@@ -1574,16 +1575,16 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		String type = header.attributeValue("type");
 
 		if (!type.equals("portlet")) {
-			throw new LarTypeException(
+			throw new LARTypeException(
 				"Invalid type of LAR file (" + type + ")");
 		}
 
-		String rootPortletId = header.attributeValue("rootPortletId");
+		String rootPortletId = header.attributeValue("root-portlet-id");
 
 		if (!PortletConstants.getRootPortletId(portletId).equals(
 				rootPortletId)) {
-			throw new PortletIdException(
-				"Invalid portletId (" + rootPortletId +")");
+
+			throw new PortletIdException("Invalid portlet id " + rootPortletId);
 		}
 
 		// Read comments, ratings, and tags to make them available to the data
