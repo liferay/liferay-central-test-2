@@ -36,7 +36,7 @@ create table SocialActivity (
 	classNameId LONG,
 	classPK LONG,
 	type_ INTEGER,
-	extraData TEXT null,
+	extraData STRING null,
 	receiverUserId LONG
 );
 

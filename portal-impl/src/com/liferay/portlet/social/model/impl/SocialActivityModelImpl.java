@@ -93,12 +93,12 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 			{ "type_", new Integer(Types.INTEGER) },
 			
 
-			{ "extraData", new Integer(Types.CLOB) },
+			{ "extraData", new Integer(Types.VARCHAR) },
 			
 
 			{ "receiverUserId", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table SocialActivity (activityId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,mirrorActivityId LONG,classNameId LONG,classPK LONG,type_ INTEGER,extraData TEXT null,receiverUserId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table SocialActivity (activityId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,mirrorActivityId LONG,classNameId LONG,classPK LONG,type_ INTEGER,extraData STRING null,receiverUserId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table SocialActivity";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
