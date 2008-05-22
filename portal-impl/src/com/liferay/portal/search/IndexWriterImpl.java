@@ -77,7 +77,8 @@ public class IndexWriterImpl implements IndexWriter {
 
 		try {
 			IndexWriterRequestMessage req = new IndexWriterRequestMessage(
-				IndexWriterRequestMessage.DELETE_PORTLET_DOCS, companyId, portletId);
+				IndexWriterRequestMessage.DELETE_PORTLET_DOCS, companyId,
+				portletId);
 
 			MessageBusUtil.sendMessage(
 				DestinationNames.SEARCH_INDEX_WRITER_REQUEST,

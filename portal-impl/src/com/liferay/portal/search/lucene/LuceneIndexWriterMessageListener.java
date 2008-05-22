@@ -53,7 +53,9 @@ public class LuceneIndexWriterMessageListener implements MessageListener {
 				LuceneSearchEngineUtil.deleteDocument(
 					iwrm.getCompanyId(), iwrm.getId());
 			}
-			else if (command.equals(IndexWriterRequestMessage.DELETE_PORTLET_DOCS)) {
+			else if (command.equals(
+						IndexWriterRequestMessage.DELETE_PORTLET_DOCS)) {
+
 				LuceneSearchEngineUtil.deletePortletDocuments(
 					iwrm.getCompanyId(), iwrm.getId());
 			}
