@@ -118,7 +118,7 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 	}
 
 	public void serveResource(ResourceRequest req, ResourceResponse res)
-			throws PortletException, IOException {
+		throws IOException, PortletException {
 
 		include(resourceFile, req, res);
 	}
