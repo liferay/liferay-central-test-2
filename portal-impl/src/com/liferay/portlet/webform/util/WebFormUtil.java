@@ -72,22 +72,22 @@ public class WebFormUtil {
 	}
 
 	public static ExpandoTable checkTable(
-			String databaseTableName, PortletPreferences prefs)
+			String tableName, PortletPreferences prefs)
 		throws Exception {
 
 		ExpandoTable expandoTable = null;
 
 		try {
 			expandoTable = ExpandoTableLocalServiceUtil.getTable(
-				WebFormUtil.class.getName(), databaseTableName);
+				WebFormUtil.class.getName(), tableName);
 		}
 		catch (NoSuchTableException nste) {
-			expandoTable = addTable(databaseTableName);
+			expandoTable = addTable(tableName);
 
 			int i = 1;
 
-			String fieldLabel =
-				prefs.getValue("fieldLabel" + i, StringPool.BLANK);
+			String fieldLabel = prefs.getValue(
+				"fieldLabel" + i, StringPool.BLANK);
 
 			while ((i == 1) || (Validator.isNotNull(fieldLabel))) {
 				ExpandoColumnLocalServiceUtil.addColumn(

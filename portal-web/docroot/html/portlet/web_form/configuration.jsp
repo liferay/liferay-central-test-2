@@ -366,7 +366,6 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 					}
 				);
 			</c:if>
-
 		}
 	);
 </script>

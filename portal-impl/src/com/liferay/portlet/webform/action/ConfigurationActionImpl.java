@@ -138,11 +138,11 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		if (updateFields) {
 			int i = 1;
 
-			long formPK = CounterLocalServiceUtil.increment(
+			long formId = CounterLocalServiceUtil.increment(
 				WebFormUtil.class.getName());
 
 			String databaseTableName =
-				portletResource + StringPool.UNDERLINE + formPK;
+				portletResource + StringPool.UNDERLINE + formId;
 
 			prefs.setValue("databaseTableName", databaseTableName);
 

@@ -186,7 +186,7 @@ public class ViewAction extends PortletAction {
 		if (Validator.isNull(databaseTableName)) {
 			return false;
 		}
-		
+
 		WebFormUtil.checkTable(databaseTableName, prefs);
 
 		long classPK = CounterLocalServiceUtil.increment(
