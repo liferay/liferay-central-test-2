@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.messaging;
 
-import com.liferay.portal.SystemException;
-
 import java.util.List;
 
 /**
@@ -82,21 +80,6 @@ public class MessageBusUtil {
 		_instance._sendMessage(destination, messageId, message);
 	}
 
-	public static String sendSynchronizedMessage(
-			String destination, String message)
-		throws SystemException {
-
-		return _instance._sendSynchronizedMessage(destination, message);
-	}
-
-	public static String sendSynchronizedMessage(
-			String destination, String messageId, String message)
-		throws SystemException {
-
-		return _instance._sendSynchronizedMessage(
-			destination, messageId, message);
-	}
-
 	public static boolean unregisterMessageListener(
 		String destination, MessageListener listener) {
 
@@ -144,23 +127,6 @@ public class MessageBusUtil {
 		String destination, String messageId, String message) {
 
 		_messageBus.sendMessage(destination, messageId, message);
-	}
-
-	private String _sendSynchronizedMessage(String destination, String message)
-		throws SystemException {
-
-		SynchronizedMessageSender sender = new SynchronizedMessageSender();
-
-		return sender.sendMessage(destination, message);
-	}
-
-	private String _sendSynchronizedMessage(
-			String destination, String messageId, String message)
-		throws SystemException {
-
-		SynchronizedMessageSender sender = new SynchronizedMessageSender();
-
-		return sender.sendMessage(destination, messageId, message);
 	}
 
 	private boolean _unregisterMessageListener(
