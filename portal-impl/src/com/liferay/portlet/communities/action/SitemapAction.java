@@ -66,15 +66,15 @@ public class SitemapAction extends Action {
 			long groupId = ParamUtil.getLong(req, "groupId");
 			boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
 
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-			if (group.isStagingGroup()) {
-				groupId = group.getLiveGroupId();
-			}
-
 			LayoutSet layoutSet = null;
 
 			if (groupId > 0) {
+				Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+				if (group.isStagingGroup()) {
+					groupId = group.getLiveGroupId();
+				}
+
 				layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 					groupId, privateLayout);
 			}
