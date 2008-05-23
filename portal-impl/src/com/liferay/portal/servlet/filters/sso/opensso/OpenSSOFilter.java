@@ -31,8 +31,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.util.WebKeys;
-import com.liferay.util.CookieUtil;
 
 import java.io.IOException;
 
@@ -54,26 +52,9 @@ import javax.servlet.http.HttpSession;
  */
 public class OpenSSOFilter extends BasePortalFilter {
 
-	protected boolean isAuthenticated(
-		HttpServletRequest req, String cookieName) {
-
-		String cookieValue = CookieUtil.get(req, cookieName);
-
-		if (Validator.isNotNull(cookieValue)) {
-			HttpSession ses = req.getSession();
-
-			ses.setAttribute(WebKeys.OPEN_SSO_LOGIN, cookieValue);
-
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
 	protected void processFilter(
-			ServletRequest req, ServletResponse res, FilterChain chain)
-		throws IOException, ServletException {
+		ServletRequest req, ServletResponse res, FilterChain chain) 
+        throws IOException, ServletException {
 
 		try {
 			HttpServletRequest httpReq = (HttpServletRequest)req;
@@ -93,13 +74,11 @@ public class OpenSSOFilter extends BasePortalFilter {
 			String serviceUrl = PrefsPropsUtil.getString(
 				companyId, PropsUtil.OPEN_SSO_SERVICE_URL,
 				PropsValues.OPEN_SSO_SERVICE_URL);
-			String cookieName = PrefsPropsUtil.getString(
-				companyId, PropsUtil.OPEN_SSO_SUBJECT_COOKIE_NAME,
-				PropsValues.OPEN_SSO_SUBJECT_COOKIE_NAME);
 
-			if (!enabled || Validator.isNull(loginUrl) ||
-				Validator.isNull(logoutUrl) || Validator.isNull(serviceUrl) ||
-				Validator.isNull(cookieName)) {
+			if (!enabled ||
+                Validator.isNull(loginUrl) ||
+				Validator.isNull(logoutUrl) ||
+                Validator.isNull(serviceUrl)) {
 
 				processFilter(OpenSSOFilter.class, req, res, chain);
 
@@ -109,17 +88,59 @@ public class OpenSSOFilter extends BasePortalFilter {
 			String requestURI = GetterUtil.getString(httpReq.getRequestURI());
 
 			if (requestURI.endsWith("/portal/logout")) {
-				HttpSession httpSes = httpReq.getSession();
-
+                HttpSession httpSes = httpReq.getSession();
+                
 				httpSes.invalidate();
-
+                
 				httpRes.sendRedirect(logoutUrl);
-			}
-			else {
-				if (isAuthenticated(httpReq, cookieName)) {
+			} else {
+                boolean authenticated = false;
+                try {
+
+                    //If the admin falied to configure properly like
+                    //entered wrong service url then it will cause an
+                    //impossible situation.
+                    //Or if the opensso server is down.
+                    //So give a chance to continue where the user
+                    //can login locally and rectify the situation
+
+                    authenticated =
+                        OpenSSOUtil.isAuthenticated(httpReq, serviceUrl);
+                } catch(Exception e) {
+                    _log.error(e, e);
+                    processFilter(OpenSSOFilter.class, req, res, chain);
+                    return;
+                }
+				if (authenticated) {
+
+                    //It is necessary to check the session attr
+                    //each time because:
+                    //1. joe bloggs logs in
+                    //2. joe bloggs accesses portal page
+                    //3. joe bloggs navigates to another sso app
+                    //4. joe bloggs logs out from another app but not portal
+                    //5. joe bloggs http session is valid at portal
+                    //6. paul auths in the same browser with another sso app
+                    //7. paul navigates to portal page
+                    //8. since joe bloggs never logged out of portal the portal
+                    //   session is still valid and paul now sees joe's
+                    //   private pages
+
+                    String newId =
+                        OpenSSOUtil.getSubjectId(httpReq, serviceUrl);
+                    HttpSession httpSes = httpReq.getSession();
+                    String oldId = (String)httpSes.getAttribute(
+                        _SUBJECT_ID_KEY);
+                    if (oldId == null) {
+                        httpSes.setAttribute(_SUBJECT_ID_KEY, newId);
+                    } else if (!newId.equals(oldId)) {
+                        httpSes.invalidate();
+                        httpSes = httpReq.getSession();
+                        httpSes.setAttribute(_SUBJECT_ID_KEY, newId);
+                    }
+
 					processFilter(OpenSSOFilter.class, req, res, chain);
-				}
-				else {
+				} else {
 					httpRes.sendRedirect(loginUrl);
 				}
 			}
@@ -129,6 +150,7 @@ public class OpenSSOFilter extends BasePortalFilter {
 		}
 	}
 
+    private static final String _SUBJECT_ID_KEY = "open.sso.subject.id";
 	private static Log _log = LogFactoryUtil.getLog(OpenSSOFilter.class);
 
 }

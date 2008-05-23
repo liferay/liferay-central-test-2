@@ -702,8 +702,17 @@ public class PropsValues {
 	public static final String OPEN_SSO_SERVICE_URL =
 		PropsUtil.get(PropsUtil.OPEN_SSO_SERVICE_URL);
 
-	public static final String OPEN_SSO_SUBJECT_COOKIE_NAME =
-		PropsUtil.get(PropsUtil.OPEN_SSO_SUBJECT_COOKIE_NAME);
+	public static final String OPEN_SSO_FIRST_NAME_ATTR =
+		PropsUtil.get(PropsUtil.OPEN_SSO_FIRST_NAME_ATTR);
+
+	public static final String OPEN_SSO_LAST_NAME_ATTR =
+		PropsUtil.get(PropsUtil.OPEN_SSO_LAST_NAME_ATTR);
+
+	public static final String OPEN_SSO_SCREEN_NAME_ATTR =
+		PropsUtil.get(PropsUtil.OPEN_SSO_SCREEN_NAME_ATTR);
+
+	public static final String OPEN_SSO_EMAIL_ATTR =
+		PropsUtil.get(PropsUtil.OPEN_SSO_EMAIL_ATTR);
 
 	public static final boolean OPENOFFICE_SERVER_ENABLED =
 		GetterUtil.getBoolean(

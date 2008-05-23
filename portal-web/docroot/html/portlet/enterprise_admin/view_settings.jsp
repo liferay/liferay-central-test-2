@@ -199,10 +199,34 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 				</tr>
 				<tr>
 					<td>
-						<liferay-ui:message key="cookie-name" />
+						<liferay-ui:message key="first-name" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />subjectCookieName" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_SUBJECT_COOKIE_NAME, PropsValues.OPEN_SSO_SUBJECT_COOKIE_NAME) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />firstNameAttr" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_FIRST_NAME_ATTR, PropsValues.OPEN_SSO_FIRST_NAME_ATTR) %>" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="last-name" />
+					</td>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />lastNameAttr" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_LAST_NAME_ATTR, PropsValues.OPEN_SSO_LAST_NAME_ATTR) %>" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="screen-name" />
+					</td>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />screenNameAttr" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_SCREEN_NAME_ATTR, PropsValues.OPEN_SSO_SCREEN_NAME_ATTR) %>" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="email-address" />
+					</td>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />emailAttr" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_EMAIL_ATTR, PropsValues.OPEN_SSO_EMAIL_ATTR) %>" />
 					</td>
 				</tr>
 				</table>

@@ -437,7 +437,13 @@ public class PropsUtil {
 
 	public static final String OPEN_SSO_SERVICE_URL = "open.sso.service.url";
 
-	public static final String OPEN_SSO_SUBJECT_COOKIE_NAME = "open.sso.subject.cookie.name";
+	public static final String OPEN_SSO_FIRST_NAME_ATTR = "open.sso.first.name.attr";
+    
+    public static final String OPEN_SSO_LAST_NAME_ATTR = "open.sso.last.name.attr";
+    
+    public static final String OPEN_SSO_SCREEN_NAME_ATTR = "open.sso.screen.name.attr";
+    
+    public static final String OPEN_SSO_EMAIL_ATTR = "open.sso.email.attr";
 
 	// Authentication Pipeline
 

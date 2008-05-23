@@ -375,16 +375,20 @@ public class EditSettingsAction extends PortletAction {
 		String loginUrl = ParamUtil.getString(req, "loginUrl");
 		String logoutUrl = ParamUtil.getString(req, "logoutUrl");
 		String serviceUrl = ParamUtil.getString(req, "serviceUrl");
-		String subjectCookieName = ParamUtil.getString(
-			req, "subjectCookieName");
+		String firstName = ParamUtil.getString(req, "firstNameAttr");
+        String lastName = ParamUtil.getString(req, "lastNameAttr");
+        String screenName = ParamUtil.getString(req, "screenNameAttr");
+        String email = ParamUtil.getString(req, "emailAttr");
 
 		prefs.setValue(
 			PropsUtil.OPEN_SSO_AUTH_ENABLED, String.valueOf(enabled));
 		prefs.setValue(PropsUtil.OPEN_SSO_LOGIN_URL, loginUrl);
 		prefs.setValue(PropsUtil.OPEN_SSO_LOGOUT_URL, logoutUrl);
 		prefs.setValue(PropsUtil.OPEN_SSO_SERVICE_URL, serviceUrl);
-		prefs.setValue(
-			PropsUtil.OPEN_SSO_SUBJECT_COOKIE_NAME, subjectCookieName);
+		prefs.setValue(PropsUtil.OPEN_SSO_FIRST_NAME_ATTR, firstName);
+        prefs.setValue(PropsUtil.OPEN_SSO_LAST_NAME_ATTR, lastName);
+        prefs.setValue(PropsUtil.OPEN_SSO_SCREEN_NAME_ATTR, screenName);
+        prefs.setValue(PropsUtil.OPEN_SSO_EMAIL_ATTR, email);
 
 		prefs.store();
 	}
