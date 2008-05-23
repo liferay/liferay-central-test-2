@@ -1064,6 +1064,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletModel.setCssClassWrapper(GetterUtil.getString(
 					portlet.elementText("css-class-wrapper"),
 					portletModel.getCssClassWrapper()));
+				portletModel.setFacebookIntegration(GetterUtil.getString(
+					portlet.elementText("facebook-integration"),
+					portletModel.getFacebookIntegration()));
 				portletModel.setAddDefaultResource(GetterUtil.getBoolean(
 					portlet.elementText("add-default-resource"),
 					portletModel.isAddDefaultResource()));

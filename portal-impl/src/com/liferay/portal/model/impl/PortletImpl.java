@@ -142,10 +142,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		List<String> headerPortletJavaScript, List<String> footerPortalCss,
 		List<String> footerPortletCss, List<String> footerPortalJavaScript,
 		List<String> footerPortletJavaScript,
-		String cssClassWrapper, boolean addDefaultResource, String roles,
-		Set<String> unlinkedRoles, Map<String, String> roleMappers,
-		boolean system, boolean active, boolean include,
-		Map<String, String> initParams, Integer expCache,
+		String cssClassWrapper, String facebookIntegration,
+		boolean addDefaultResource, String roles, Set<String> unlinkedRoles,
+		Map<String, String> roleMappers, boolean system, boolean active,
+		boolean include, Map<String, String> initParams, Integer expCache,
 		Map<String, Set<String>> portletModes, Set<String> supportedLocales,
 		String resourceBundle, PortletInfo portletInfo,
 		Map<String, PortletFilter> portletFilters, Set<QName> processingEvents,
@@ -204,6 +204,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_footerPortalJavaScript = footerPortalJavaScript;
 		_footerPortletJavaScript = footerPortletJavaScript;
 		_cssClassWrapper = cssClassWrapper;
+		_facebookIntegration = facebookIntegration;
 		_addDefaultResource = addDefaultResource;
 		setRoles(roles);
 		_unlinkedRoles = unlinkedRoles;
@@ -1626,6 +1627,27 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
+	 * Gets the Facebook integration method of the portlet.
+	 *
+	 * @return		the Facebook integration method of the portlet
+	 */
+	public String getFacebookIntegration() {
+		return _facebookIntegration;
+	}
+
+	/**
+	 * Sets the Facebook integration method of the portlet.
+	 *
+	 * @param		facebookIntegration the Facebook integration method of the
+	 *				portlet
+	 */
+	public void setFacebookIntegration(String facebookIntegration) {
+		if (Validator.isNotNull(facebookIntegration)) {
+			_facebookIntegration = facebookIntegration;
+		}
+	}
+
+	/**
 	 * Returns true if default resources for the portlet are added to a page.
 	 *
 	 * @return		true if default resources for the portlet are added to a
@@ -2399,9 +2421,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getHeaderPortalJavaScript(), getHeaderPortletJavaScript(),
 			getFooterPortalCss(), getFooterPortletCss(),
 			getFooterPortalJavaScript(), getFooterPortletJavaScript(),
-			getCssClassWrapper(), isAddDefaultResource(), getRoles(),
-			getUnlinkedRoles(), getRoleMappers(), isSystem(), isActive(),
-			isInclude(), getInitParams(), getExpCache(), getPortletModes(),
+			getCssClassWrapper(), getFacebookIntegration(),
+			isAddDefaultResource(), getRoles(), getUnlinkedRoles(),
+			getRoleMappers(), isSystem(), isActive(), isInclude(),
+			getInitParams(), getExpCache(), getPortletModes(),
 			getSupportedLocales(), getResourceBundle(), getPortletInfo(),
 			getPortletFilters(), getProcessingEvents(), getPublishingEvents(),
 			getPublicRenderParameters(), getPortletApp());
@@ -2701,6 +2724,12 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * this portlet.
 	 */
 	private String _cssClassWrapper = StringPool.BLANK;
+
+	/**
+	 * The Facebook integration method of the portlet.
+	 */
+	private String _facebookIntegration =
+		PortletConstants.FACEBOOK_INTEGRATION_IFRAME;
 
 	/**
 	 * True if default resources for the portlet are added to a page.

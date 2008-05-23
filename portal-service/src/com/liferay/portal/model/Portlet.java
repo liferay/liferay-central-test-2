@@ -316,6 +316,10 @@ public interface Portlet extends PortletModel {
 
 	public void setCssClassWrapper(java.lang.String cssClassWrapper);
 
+	public java.lang.String getFacebookIntegration();
+
+	public void setFacebookIntegration(java.lang.String facebookIntegration);
+
 	public boolean getAddDefaultResource();
 
 	public boolean isAddDefaultResource();

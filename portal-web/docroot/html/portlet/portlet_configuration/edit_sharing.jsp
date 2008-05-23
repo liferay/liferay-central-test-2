@@ -93,11 +93,17 @@ Liferay.Widget({ url: &#x27;<%= widgetURL %>&#x27;});
 		String facebookCanvasPageURL = PrefsParamUtil.getString(prefs, request, "lfr-facebook-canvas-page-url");
 		boolean facebookShowAddAppLink = PrefsParamUtil.getBoolean(prefs, request, "lfr-facebook-show-add-app-link");
 
-		PortletURL fbmlPortletURL = new PortletURLImpl(request, portletResource, plid, PortletRequest.RENDER_PHASE);
+		String callbackURL = widgetURL;
 
-		fbmlPortletURL.setWindowState(WindowState.MAXIMIZED);
+		if (portlet.getFacebookIntegration().equals(PortletConstants.FACEBOOK_INTEGRATION_FBML)) {
+			PortletURL fbmlPortletURL = new PortletURLImpl(request, portletResource, plid, PortletRequest.RENDER_PHASE);
 
-		fbmlPortletURL.setParameter("struts_action", "/message_boards/view");
+			fbmlPortletURL.setWindowState(WindowState.MAXIMIZED);
+
+			fbmlPortletURL.setParameter("struts_action", "/message_boards/view");
+
+			callbackURL = FacebookUtil.getCallbackURL(fbmlPortletURL.toString(), facebookCanvasPageURL);
+		}
 		%>
 
 		<div class="portlet-msg-info">
@@ -130,24 +136,25 @@ Liferay.Widget({ url: &#x27;<%= widgetURL %>&#x27;});
 			<br />
 
 			<div class="portlet-msg-info">
-				<liferay-ui:message key="copy-one-of-the-callback-urls-to-facebook" />
+				<liferay-ui:message key="copy-the-callback-url-and-specify-it-in-facebook" />
+
+				<c:choose>
+					<c:when test="<%= portlet.getFacebookIntegration().equals(PortletConstants.FACEBOOK_INTEGRATION_FBML) %>">
+						<liferay-ui:message key="this-application-is-exposed-to-facebook-via-fbml" />
+					</c:when>
+					<c:otherwise>
+						<liferay-ui:message key="this-application-is-exposed-to-facebook-via-an-iframe" />
+					</c:otherwise>
+				</c:choose>
 			</div>
 
 			<table class="lfr-table">
 			<tr>
 				<td>
-					<liferay-ui:message key="fbml-callback-url" />
+					<liferay-ui:message key="callback-url" />
 				</td>
 				<td>
-					<liferay-ui:input-resource url="<%= FacebookUtil.getCallbackURL(fbmlPortletURL.toString(), facebookCanvasPageURL) %>" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<liferay-ui:message key="iframe-callback-url" />
-				</td>
-				<td>
-					<liferay-ui:input-resource url="<%= widgetURL %>" />
+					<liferay-ui:input-resource url="<%= callbackURL %>" />
 				</td>
 			</tr>
 			</table>

@@ -210,6 +210,7 @@
 		<header-portlet-css>/html/portlet/message_boards/css.jsp</header-portlet-css>
 		<header-portlet-javascript>/html/portlet/message_boards/packed.js</header-portlet-javascript>
 		<css-class-wrapper>portlet-message-boards</css-class-wrapper>
+		<facebook-integration>fbml</facebook-integration>
 	</portlet>
 	<portlet>
 		<portlet-name>20</portlet-name>

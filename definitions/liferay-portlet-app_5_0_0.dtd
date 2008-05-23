@@ -30,8 +30,8 @@ user-principal-strategy?, private-request-attributes?,
 private-session-attributes?, render-weight?, ajaxable?, header-portal-css*,
 header-portlet-css*, header-portal-javascript*, header-portlet-javascript*,
 footer-portal-css*, footer-portlet-css*, footer-portal-javascript*,
-footer-portlet-javascript*, css-class-wrapper?, add-default-resource?, system?,
-active?, include?)>
+footer-portlet-javascript*, css-class-wrapper?, facebook-integration?,
+add-default-resource?, system?, active?, include?)>
 
 <!--
 The portlet-name element contains the unique name of the portlet. This name must
@@ -456,6 +456,15 @@ Set name of the CSS class that will be injected in the DIV that wraps this
 portlet.
 -->
 <!ELEMENT css-class-wrapper (#PCDATA)>
+
+<!--
+Set the facebook-integration value to either "fbml" or "iframe". The default
+value is "iframe" because IFrame integration will work without requiring any
+changes to your code. See the Message Boards portlet for minor changes that were
+made to make it FBML compliant. Note that the Liferay tag libraries already
+output FBML automatically if a request is made by Facebook.
+-->
+<!ELEMENT facebook-integration (#PCDATA)>
 
 <!--
 If the add-default-resource value is set to false, and the portlet does not

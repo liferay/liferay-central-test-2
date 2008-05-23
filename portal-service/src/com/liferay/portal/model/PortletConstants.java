@@ -62,6 +62,16 @@ public class PortletConstants {
 	public static final String USER_PRINCIPAL_STRATEGY_USER_ID = "userId";
 
 	/**
+	 * Facebook integration method for FBML.
+	 */
+	public static final String FACEBOOK_INTEGRATION_FBML = "fbml";
+
+	/**
+	 * Facebook integration method for IFrame.
+	 */
+	public static final String FACEBOOK_INTEGRATION_IFRAME = "iframe";
+
+	/**
 	 * Gets the root portlet id of the portlet.
 	 *
 	 * @param		portletId the portlet id of the portlet
