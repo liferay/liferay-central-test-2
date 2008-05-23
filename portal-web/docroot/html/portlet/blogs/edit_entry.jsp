@@ -45,11 +45,13 @@ if (entry != null) {
 %>
 
 <script type="text/javascript">
-	var <portlet:namespace />_saveDraftIntervalId = null;
+	var <portlet:namespace />saveDraftIntervalId = null;
+	var <portlet:namespace />oldTitle = null;
+	var <portlet:namespace />oldContent = null;
 
 	function <portlet:namespace />clearSaveDraftIntervalId() {
-		if (<portlet:namespace />_saveDraftIntervalId != null) {
-			clearInterval(<portlet:namespace />_saveDraftIntervalId);
+		if (<portlet:namespace />saveDraftIntervalId != null) {
+			clearInterval(<portlet:namespace />saveDraftIntervalId);
 		}
 	}
 
@@ -80,6 +82,15 @@ if (entry != null) {
 			if ((title == '') || (content == '')) {
 				return;
 			}
+
+			if ((<portlet:namespace />oldTitle == title) &&
+				(<portlet:namespace />oldContent == content)) {
+
+				return;
+			}
+
+			<portlet:namespace />oldTitle = title;
+			<portlet:namespace />oldContent = content;
 
 			var url = document.<portlet:namespace />fm.action;
 
@@ -159,7 +170,9 @@ if (entry != null) {
 			);
 
 			<c:if test="<%= (entry == null) || entry.isDraft() %>">
-				<portlet:namespace />_saveDraftIntervalId = setInterval('<portlet:namespace />saveEntry(true)', 30000);
+				<portlet:namespace />saveDraftIntervalId = setInterval('<portlet:namespace />saveEntry(true)', 30000);
+				<portlet:namespace />oldTitle = document.<portlet:namespace />fm.<portlet:namespace />title.value;
+				<portlet:namespace />oldContent = <portlet:namespace />initEditor();
 			</c:if>
 		}
 	);
