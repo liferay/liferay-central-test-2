@@ -144,17 +144,14 @@ public class UpdateLookAndFeelAction extends JSONAction {
 
 		portletSetup.setValue("portlet-setup-css", css);
 
-		//WAP styling
-
 		JSONObject wapData = jsonObj.getJSONObject("wapData");
 
 		String wapTitle = wapData.getString("title");
+		String wapInitialWindowState = wapData.getString("initialWindowState");
 
-		portletSetup.setValue("lfr-wap-portlet-title", wapTitle);
-
-		String wapInitialWindowState = wapData.getString("windowState");
-
-		portletSetup.setValue("lfr-wap-initial-window-state", wapInitialWindowState);
+		portletSetup.setValue("lfr-wap-title", wapTitle);
+		portletSetup.setValue(
+			"lfr-wap-initial-window-state", wapInitialWindowState);
 
 		portletSetup.store();
 

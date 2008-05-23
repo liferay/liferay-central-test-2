@@ -118,10 +118,10 @@ Liferay.PortletCSS = {
 				instance._saveButton = jQuery('#lfr-lookfeel-save');
 				instance._resetButton = jQuery('#lfr-lookfeel-reset');
 
-				// WAP Styling
+				// WAP styling
 
-				instance._wapInitWindowStateSelect = jQuery('#lfr-wap-initial-window-state');
-				instance._wapTitleInput = jQuery('#lfr-wap-portlet-title');
+				instance._wapTitleInput = jQuery('#lfr-wap-title');
+				instance._wapInitialWindowStateSelect = jQuery('#lfr-wap-initial-window-state');
 
 				newPanel.show();
 
@@ -278,7 +278,7 @@ Liferay.PortletCSS = {
 
 				wapData: {
 					title: '',
-					windowState: ''
+					initialWindowState: 'NORMAL'
 				}
 			};
 
@@ -380,8 +380,9 @@ Liferay.PortletCSS = {
 			instance._saveButton.unbind().click(
 				function() {
 					instance._objData.advancedData.customCSS = instance._customCSS.val();
+
 					instance._objData.wapData.title = instance._wapTitleInput.val();
-					instance._objData.wapData.windowState = instance._wapInitWindowStateSelect.val();
+					instance._objData.wapData.initialWindowState = instance._wapInitialWindowStateSelect.val();
 
 					jQuery.ajax(
 						{
@@ -1085,8 +1086,7 @@ Liferay.PortletCSS = {
 		var bgData = objData.bgData;
 		var borderData = objData.borderData;
 		var spacingData = objData.spacingData;
-		var wapData = objData.wapData ||  {title: '', windowState: ''};
-		objData.wapData = wapData;
+		var wapData = objData.wapData;
 
 		var portletTitles = portletData.titles;
 		var portletTitle = instance._portletTitles(portletData.language);
@@ -1209,7 +1209,7 @@ Liferay.PortletCSS = {
 		// WAP styling
 
 		instance._setInput(instance._wapTitleInput, wapData.title);
-		instance._setSelect(instance._wapInitWindowStateSelect, wapData.windowState);
+		instance._setSelect(instance._wapInitialWindowStateSelect, wapData.initialWindowState);
 	},
 
 	_setInput: function(obj, value) {

@@ -965,7 +965,7 @@
 			<legend><liferay-ui:message key="advanced-css-styling" /></legend>
 
 			<div class="ctrl-holder">
-				<label for="lfr-custom-css"><liferay-ui:message key="enter-in-your-custom-css" /></label>
+				<label for="lfr-custom-css"><liferay-ui:message key="enter-your-custom-css" /></label>
 
 				<textarea id="lfr-custom-css"></textarea>
 			</div>
@@ -975,18 +975,18 @@
 			<legend><liferay-ui:message key="wap-styling" /></legend>
 
 			<div class="ctrl-holder">
-				<label for="lfr-wap-initial-window-state"><liferay-ui:message key="select-the-initial-window-state" /></label>
+				<label for="lfr-wap-title"><liferay-ui:message key="title" /></label>
 
-				<select id="lfr-wap-initial-window-state">
-					<option value="MINIMIZED">Minimized</option>
-					<option value="NORMAL">Normal</option>
-				</select>
+				<input class="text-input" id="lfr-wap-title" type="text" />
 			</div>
 
 			<div class="ctrl-holder">
-				<label for="lfr-wap-portlet-title"><liferay-ui:message key="enter-in-a-custom-wap-portlet-title" /></label>
+				<label for="lfr-wap-initial-window-state"><liferay-ui:message key="initial-window-state" /></label>
 
-				<input class="text-input" id="lfr-wap-portlet-title" type="text" />
+				<select id="lfr-wap-initial-window-state">
+					<option value="MINIMIZED"><liferay-ui:message key="minimized" /></option>
+					<option value="NORMAL"><liferay-ui:message key="normal" /></option>
+				</select>
 			</div>
 		</fieldset>
 
