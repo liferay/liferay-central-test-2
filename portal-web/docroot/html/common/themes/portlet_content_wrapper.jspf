@@ -76,7 +76,6 @@ Liferay.Widget({ url: &#x27;<%= PortalUtil.getWidgetURL(portlet, themeDisplay) %
 											function () {
 												jQuery('#<portlet:namespace />exposeWidget a').click(
 													function(event) {
-														var widgetUrl = jQuery('#<portlet:namespace />widgetURL').val();
 														var message = jQuery(this).parents('.lfr-share-icon').find('.widget-information').clone();
 
 														var textarea = message.find('textarea');
@@ -95,6 +94,7 @@ Liferay.Widget({ url: &#x27;<%= PortalUtil.getWidgetURL(portlet, themeDisplay) %
 																message: message[0]
 															}
 														);
+
 														message.show();
 													}
 												);
