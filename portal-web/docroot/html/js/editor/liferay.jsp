@@ -77,7 +77,7 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 	</style>
 
 	<script type="text/javascript">
-		//<![CDATA[
+		// <![CDATA
 			var themeDisplay = {
 				getPathContext: function() {
 					return "<%= PortalUtil.getPathContext() %>";
@@ -86,7 +86,7 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 					return "<%= PortalUtil.getPathMain() %>";
 				}
 			}
-		//]]>
+		// ]]>
 	</script>
 
 	<script language="JavaScript" src="../jquery/jquery.js"></script>

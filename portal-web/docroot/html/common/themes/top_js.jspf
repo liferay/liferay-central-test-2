@@ -23,7 +23,7 @@
 %>
 
 <script type="text/javascript">
-	//<![CDATA[
+	// <![CDATA
 		var themeDisplay = {
 			getCompanyId: function() {
 				return "<%= themeDisplay.getCompanyId() %>";
@@ -92,7 +92,7 @@
 		};
 
 		var mainPath = themeDisplay.getPathMain();
-	//]]>
+	// ]]>
 </script>
 
 <c:choose>
@@ -132,7 +132,7 @@
 </c:if>
 
 <script type="text/javascript">
-	//<![CDATA[
+	// <![CDATA
 
 		<%@ include file="/html/portal/layout/view/portlet_js.jspf" %>
 
@@ -379,5 +379,5 @@
 				}
 			}
 		);
-	//]]>
+	// ]]>
 </script>
