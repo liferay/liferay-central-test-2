@@ -1,16 +1,24 @@
-#set ( $portlet_display = $portletDisplay )
+#set ($portlet_display = $portletDisplay)
 
-#set ( $portlet_id = $portlet_display.getId() )
-#set ( $portlet_title = $portlet_display.getTitle() )
-#set ( $portlet_content = $portlet_display.getContent() )
-#set ( $portlet_back_url = $portlet_display.getURLBack() )
+#set ($portlet_id = $portlet_display.getId())
+#set ($portlet_title = $portlet_display.getTitle())
+#set ($portlet_content = $portlet_display.getContent())
+#set ($portlet_back_url = $portlet_display.getURLBack())
+#set ($portlet_max_url = $portlet_display.getURLMax())
+#set ($portlet_setup = $portlet_display.getPortletSetup())
+#set ($portlet_wap_title = $portlet_setup.getValue("lfr-wap-portlet-title", ""))
+#set ($portlet_window_state = $portlet_setup.getValue("lfr-wap-initial-window-state", "NORMAL"))
+
+#if ("$portlet_wap_title" == "")
+	#set ($portlet_wap_title = $portlet_title)
+#end
 
 <p>
-	$portlet_content
+	<a href="$portlet_max_url">$portlet_wap_title</a>
 </p>
 
-#if ( $portlet_display.isStateMax() )
+#if ("$portlet_window_state" == "NORMAL" || $portlet_display.isStateMax())
 	<p>
-		<a href="$portlet_back_url">#language( "back" )</a>
+		$portlet_content
 	</p>
 #end

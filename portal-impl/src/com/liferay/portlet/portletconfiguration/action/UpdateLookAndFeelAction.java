@@ -56,6 +56,7 @@ import org.json.JSONObject;
  * <a href="UpdateLookAndFeelAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Wilson Man
  *
  */
 public class UpdateLookAndFeelAction extends JSONAction {
@@ -142,6 +143,18 @@ public class UpdateLookAndFeelAction extends JSONAction {
 		}
 
 		portletSetup.setValue("portlet-setup-css", css);
+
+		//WAP styling
+
+		JSONObject wapData = jsonObj.getJSONObject("wapData");
+
+		String wapTitle = wapData.getString("title");
+
+		portletSetup.setValue("lfr-wap-portlet-title", wapTitle);
+
+		String wapInitialWindowState = wapData.getString("windowState");
+
+		portletSetup.setValue("lfr-wap-initial-window-state", wapInitialWindowState);
 
 		portletSetup.store();
 

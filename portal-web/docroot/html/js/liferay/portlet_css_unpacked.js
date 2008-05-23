@@ -118,6 +118,11 @@ Liferay.PortletCSS = {
 				instance._saveButton = jQuery('#lfr-lookfeel-save');
 				instance._resetButton = jQuery('#lfr-lookfeel-reset');
 
+				// WAP Styling
+
+				instance._wapInitWindowStateSelect = jQuery('#lfr-wap-initial-window-state');
+				instance._wapTitleInput = jQuery('#lfr-wap-portlet-title');
+
 				newPanel.show();
 
 				newPanel.tabs({
@@ -269,6 +274,11 @@ Liferay.PortletCSS = {
 					lineHeight: '',
 					textDecoration: '',
 					wordSpacing: ''
+				},
+
+				wapData: {
+					title: '',
+					windowState: ''
 				}
 			};
 
@@ -370,6 +380,8 @@ Liferay.PortletCSS = {
 			instance._saveButton.unbind().click(
 				function() {
 					instance._objData.advancedData.customCSS = instance._customCSS.val();
+					instance._objData.wapData.title = instance._wapTitleInput.val();
+					instance._objData.wapData.windowState = instance._wapInitWindowStateSelect.val();
 
 					jQuery.ajax(
 						{
@@ -1073,6 +1085,8 @@ Liferay.PortletCSS = {
 		var bgData = objData.bgData;
 		var borderData = objData.borderData;
 		var spacingData = objData.spacingData;
+		var wapData = objData.wapData ||  {title: '', windowState: ''};
+		objData.wapData = wapData;
 
 		var portletTitles = portletData.titles;
 		var portletTitle = instance._portletTitles(portletData.language);
@@ -1191,6 +1205,11 @@ Liferay.PortletCSS = {
 		}
 
 		instance._setTextarea(instance._customCSS, customStyles);
+
+		// WAP styling
+
+		instance._setInput(instance._wapTitleInput, wapData.title);
+		instance._setSelect(instance._wapInitWindowStateSelect, wapData.windowState);
 	},
 
 	_setInput: function(obj, value) {

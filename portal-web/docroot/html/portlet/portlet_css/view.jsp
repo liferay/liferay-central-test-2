@@ -45,6 +45,9 @@
 			<li>
 				<a href="#css-styling"><liferay-ui:message key="advanced-styling" /></a>
 			</li>
+			<li>
+				<a href="#wap-styling"><liferay-ui:message key="wap-styling" /></a>
+			</li>
 		</ul>
 
 		<form class="uni-form" method="post">
@@ -965,6 +968,25 @@
 				<label for="lfr-custom-css"><liferay-ui:message key="enter-in-your-custom-css" /></label>
 
 				<textarea id="lfr-custom-css"></textarea>
+			</div>
+		</fieldset>
+
+		<fieldset class="block-labels" id="wap-styling">
+			<legend><liferay-ui:message key="wap-styling" /></legend>
+
+			<div class="ctrl-holder">
+				<label for="lfr-wap-initial-window-state"><liferay-ui:message key="select-the-initial-window-state" /></label>
+
+				<select id="lfr-wap-initial-window-state">
+					<option value="MINIMIZED">Minimized</option>
+					<option value="NORMAL">Normal</option>
+				</select>
+			</div>
+
+			<div class="ctrl-holder">
+				<label for="lfr-wap-portlet-title"><liferay-ui:message key="enter-in-a-custom-wap-portlet-title" /></label>
+
+				<input class="text-input" id="lfr-wap-portlet-title" type="text" />
 			</div>
 		</fieldset>
 
