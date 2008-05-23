@@ -137,8 +137,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		if (updateFields) {
 			int i = 1;
 
-			String databaseTableName =
-				WebFormUtil.getNewDatabaseTableName(portletResource);
+			String databaseTableName = WebFormUtil.getNewDatabaseTableName(
+				portletResource);
 
 			prefs.setValue("databaseTableName", databaseTableName);
 

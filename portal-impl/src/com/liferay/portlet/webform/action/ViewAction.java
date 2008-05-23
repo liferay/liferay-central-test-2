@@ -123,10 +123,11 @@ public class ViewAction extends PortletAction {
 
 			if (saveToDatabase) {
 				if (Validator.isNull(databaseTableName)) {
-					databaseTableName =
-						WebFormUtil.getNewDatabaseTableName(portletId);
+					databaseTableName = WebFormUtil.getNewDatabaseTableName(
+						portletId);
 
 					prefs.setValue("databaseTableName", databaseTableName);
+
 					prefs.store();
 				}
 

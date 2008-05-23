@@ -55,15 +55,6 @@ import javax.portlet.PortletPreferences;
  */
 public class WebFormUtil {
 
-	public static String getNewDatabaseTableName(String portletId)
-		throws SystemException {
-
-		long formId = CounterLocalServiceUtil.increment(
-			WebFormUtil.class.getName());
-
-		return portletId + StringPool.UNDERLINE + formId;
-	}
-
 	public static final int MAX_FIELDS = GetterUtil.getInteger(
 		PropsUtil.get(PropsUtil.WEB_FORM_PORTLET_MAX_FIELDS));
 
@@ -111,6 +102,15 @@ public class WebFormUtil {
 		}
 
 		return expandoTable;
+	}
+
+	public static String getNewDatabaseTableName(String portletId)
+		throws SystemException {
+
+		long formId = CounterLocalServiceUtil.increment(
+			WebFormUtil.class.getName());
+
+		return portletId + StringPool.UNDERLINE + formId;
 	}
 
 	public static int getTableRowsCount(String tableName)
