@@ -22,19 +22,12 @@
 
 package com.liferay.portal.servlet;
 
-import com.liferay.portal.NoSuchLayoutSetException;
-import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.model.Group;
-import com.liferay.portal.model.LayoutSet;
-import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.SitemapUtil;
 
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -54,64 +47,21 @@ public class SitemapServlet extends HttpServlet {
 	public void service(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
 
-		OutputStreamWriter out = null;
-
 		try {
-			String host = PortalUtil.getHost(req);
+			String redirect =
+				PortalUtil.getPathMain() + "/layout_management/sitemap";
 
-			long groupId = ParamUtil.getLong(req, "groupId");
-			boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
+			ServletContext ctx = getServletContext();
 
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
+			RequestDispatcher rd = ctx.getRequestDispatcher(redirect);
 
-			if (group.isStagingGroup()) {
-				groupId = group.getLiveGroupId();
-			}
-			
-			LayoutSet layoutSet = null;
-
-			if (groupId > 0) {
-				layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-					groupId, privateLayout);
-			}
-			else {
-				layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(host);
-			}
-
-			String portalURL = PortalUtil.getPortalURL(
-				host, req.getServerPort(), req.isSecure());
-
-			String mainPath = PortalUtil.getPathMain();
-
-			String sitemap = SitemapUtil.getSitemap(
-				layoutSet.getGroupId(), layoutSet.isPrivateLayout(),
-				portalURL + mainPath);
-
-			if (!res.isCommitted()) {
-				res.setContentType(ContentTypes.TEXT_XML_UTF8);
-
-				out = new OutputStreamWriter(res.getOutputStream());
-
-				out.write(sitemap);
-			}
-		}
-		catch (NoSuchLayoutSetException e) {
-			PortalUtil.sendError(
-				HttpServletResponse.SC_NOT_FOUND, e, req, res);
+			rd.forward(req, res);
 		}
 		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e, e);
-			}
+			_log.error(e, e);
 
 			PortalUtil.sendError(
 				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, req, res);
-		}
-		finally {
-			if (out != null) {
-				out.flush();
-				out.close();
-			}
 		}
 	}
 

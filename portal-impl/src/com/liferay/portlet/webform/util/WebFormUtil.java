@@ -64,7 +64,6 @@ public class WebFormUtil {
 		return portletId + StringPool.UNDERLINE + formId;
 	}
 
-
 	public static final int MAX_FIELDS = GetterUtil.getInteger(
 		PropsUtil.get(PropsUtil.WEB_FORM_PORTLET_MAX_FIELDS));
 

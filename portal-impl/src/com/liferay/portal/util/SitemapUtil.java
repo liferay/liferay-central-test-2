@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 
 import java.util.List;
 import java.util.Properties;
@@ -47,16 +48,7 @@ import org.dom4j.Element;
 public class SitemapUtil {
 
 	public static String getSitemap(
-			long groupId, boolean privateLayout, String urlPrefix)
-		throws PortalException, SystemException {
-
-		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
-			groupId, privateLayout);
-
-		return getSitemap(layouts, urlPrefix);
-	}
-
-	public static String getSitemap(List<Layout> layouts, String urlPrefix)
+			long groupId, boolean privateLayout, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		Document doc = DocumentHelper.createDocument();
@@ -66,7 +58,10 @@ public class SitemapUtil {
 		Element root = doc.addElement(
 			"urlset", "http://www.google.com/schemas/sitemap/0.84");
 
-		_visitLayouts(root, layouts, urlPrefix);
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
+			groupId, privateLayout);
+
+		_visitLayouts(root, layouts, themeDisplay);
 
 		return doc.asXML();
 	}
@@ -79,7 +74,7 @@ public class SitemapUtil {
 	}
 
 	private static void _visitLayouts(
-			Element element, List<Layout> layouts, String urlPrefix)
+			Element element, List<Layout> layouts, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		for (Layout layout : layouts) {
@@ -91,8 +86,9 @@ public class SitemapUtil {
 
 				Element url = element.addElement("url");
 
-				String layoutURL = PortalUtil.getLayoutActualURL(
-					layout, urlPrefix);
+				String layoutURL =
+					PortalUtil.getPortalURL(themeDisplay) +
+						PortalUtil.getLayoutURL(layout, themeDisplay);
 
 				url.addElement("loc").addText(encodeXML(layoutURL));
 
@@ -110,7 +106,7 @@ public class SitemapUtil {
 
 				List<Layout> children = layout.getChildren();
 
-				_visitLayouts(element, children, urlPrefix);
+				_visitLayouts(element, children, themeDisplay);
 			}
 		}
 	}

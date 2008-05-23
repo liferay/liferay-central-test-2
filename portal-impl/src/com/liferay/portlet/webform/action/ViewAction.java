@@ -125,7 +125,7 @@ public class ViewAction extends PortletAction {
 				if (Validator.isNull(databaseTableName)) {
 					databaseTableName =
 						WebFormUtil.getNewDatabaseTableName(portletId);
-					
+
 					prefs.setValue("databaseTableName", databaseTableName);
 					prefs.store();
 				}
