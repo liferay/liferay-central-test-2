@@ -25,7 +25,9 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.SitemapUtil;
@@ -60,6 +62,12 @@ public class SitemapServlet extends HttpServlet {
 			long groupId = ParamUtil.getLong(req, "groupId");
 			boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
 
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+			if (group.isStagingGroup()) {
+				groupId = group.getLiveGroupId();
+			}
+			
 			LayoutSet layoutSet = null;
 
 			if (groupId > 0) {
