@@ -22,9 +22,8 @@
 
 package com.liferay.portal.tools;
 
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.util.InitUtil;
+import com.liferay.portal.util.FileImpl;
 import com.liferay.portal.util.PropsUtil;
 
 /**
@@ -34,10 +33,6 @@ import com.liferay.portal.util.PropsUtil;
  *
  */
 public class JavaScriptBuilder {
-
-	static {
-		InitUtil.init();
-	}
 
 	public static void main(String[] args) {
 		if (args.length == 3) {
@@ -57,17 +52,19 @@ public class JavaScriptBuilder {
 			String[] files = PropsUtil.getArray(jsProperty);
 
 			for (int i = 0; i < files.length; i++) {
-				String content = FileUtil.read(jsDir + files[i]);
+				String content = _fileUtil.read(jsDir + files[i]);
 
 				sm.append(content);
 				sm.append("\n");
 			}
 
-			FileUtil.write(mergedFile, sm.toString());
+			_fileUtil.write(mergedFile, sm.toString());
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
+	private static FileImpl _fileUtil = new FileImpl();
 
 }

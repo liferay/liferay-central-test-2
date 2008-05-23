@@ -22,9 +22,8 @@
 
 package com.liferay.portal.tools;
 
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.util.InitUtil;
+import com.liferay.portal.util.FileImpl;
 
 import java.io.File;
 
@@ -35,10 +34,6 @@ import java.io.File;
  *
  */
 public class CSSBuilder {
-
-	static {
-		InitUtil.init();
-	}
 
 	public static void main(String[] args) {
 		if (args.length == 2) {
@@ -61,11 +56,13 @@ public class CSSBuilder {
 				return;
 			}
 
-			String content = FileUtil.read(mainCssFile);
+			FileImpl fileImpl = new FileImpl();
+
+			String content = fileImpl.read(mainCssFile);
 
 			content = replaceImports(cssDir, content);
 
-			FileUtil.write(mergedFile, content);
+			fileImpl.write(mergedFile, content);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -91,7 +88,8 @@ public class CSSBuilder {
 
 				String importFile = s.substring(x + _BEGIN.length(), y);
 
-				String importContent = FileUtil.read(cssDir + "/" + importFile);
+				String importContent = _fileUtil.read(
+					cssDir + "/" + importFile);
 
 				importContent = replaceImports(cssDir, importContent);
 
@@ -107,5 +105,7 @@ public class CSSBuilder {
 	private static final String _BEGIN = "@import url(";
 
 	private static final String _END = ");";
+
+	private static FileImpl _fileUtil = new FileImpl();
 
 }

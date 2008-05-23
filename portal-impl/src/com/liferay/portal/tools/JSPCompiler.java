@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OSDetector;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.util.InitUtil;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -43,6 +44,10 @@ import java.util.List;
  *
  */
 public class JSPCompiler {
+
+	static {
+		InitUtil.init();
+	}
 
 	public static void main(String[] args) throws Exception {
 		if (args.length == 4) {

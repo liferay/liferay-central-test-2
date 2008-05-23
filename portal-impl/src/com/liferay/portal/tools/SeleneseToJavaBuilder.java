@@ -23,13 +23,12 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.CharPool;
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeFormatter;
 import com.liferay.portal.tools.servicebuilder.ServiceBuilder;
-import com.liferay.portal.util.InitUtil;
+import com.liferay.portal.util.FileImpl;
 
 import java.io.File;
 
@@ -42,10 +41,6 @@ import org.apache.tools.ant.DirectoryScanner;
  *
  */
 public class SeleneseToJavaBuilder {
-
-	static {
-		InitUtil.init();
-	}
 
 	public static void main(String[] args) throws Exception {
 		if (args.length == 1) {
@@ -158,7 +153,7 @@ public class SeleneseToJavaBuilder {
 
 		sm.append("public void " + testMethodName + "() throws Exception {");
 
-		String xml = FileUtil.read(basedir + "/" + file);
+		String xml = _fileUtil.read(basedir + "/" + file);
 
 		if ((xml.indexOf("<title>" + testName + "</title>") == -1) ||
 			(xml.indexOf("colspan=\"3\">" + testName + "</td>") == -1)) {
@@ -349,5 +344,7 @@ public class SeleneseToJavaBuilder {
 	private static final String[] _FIX_PARAM_NEW_SUBS = new String[] {
 		"\\n", "\\n"
 	};
+
+	private static FileImpl _fileUtil = new FileImpl();
 
 }

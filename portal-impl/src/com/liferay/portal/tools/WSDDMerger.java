@@ -23,6 +23,7 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.util.InitUtil;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.File;
@@ -45,6 +46,10 @@ import org.dom4j.io.SAXReader;
  *
  */
 public class WSDDMerger {
+
+	static {
+		InitUtil.init();
+	}
 
 	public static void main(String[] args) {
 		new WSDDMerger(args[0], args[1]);
