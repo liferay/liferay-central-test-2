@@ -974,8 +974,8 @@ li.toggle-expand a {
 	margin-right: 1em;
 }
 
-.lfr-widget-bar .widget-information {
-	display: none;
+.lfr-widget-bar .lfr-actions.left .lfr-trigger strong span, .lfr-widget-bar .lfr-actions.right .lfr-trigger strong span {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/common/sharing.png);
 }
 
 /* ---------- Liferay forms ---------- */
@@ -1077,12 +1077,13 @@ fieldset:last-child, .uni-form fieldset:last-child {
 }
 
 .lfr-actions .lfr-trigger strong span {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/common/action.png) no-repeat 5px 0;
+	background: url(<%= themeDisplay.getPathThemeImages() %>/common/action.png) no-repeat 5px 50%;
 	padding: 2px 10px 2px 35px;
 }
 
 .lfr-actions.left .lfr-trigger strong span {
-	background-position: 98% 100%;
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/common/action_right.png);
+	background-position: 98% 50%;
 	padding: 2px 35px 2px 10px;
 }
 
