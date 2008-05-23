@@ -41,7 +41,7 @@ else {
 
 <c:if test="<%= captchaEnabled %>">
 	<div>
-		<img src="<%= url %>" />
+		<img alt="captcha" src="<%= url %>" />
 	</div>
 
 	<br />

@@ -76,7 +76,7 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 					</c:if>
 				</c:if>
 
-				<div class="journal-content-article" id="<%= articleDisplay.getGroupId() %>_<%= articleDisplay.getArticleId() %>_<%= articleDisplay.getVersion() %>">
+				<div class="journal-content-article" id="article_<%= articleDisplay.getGroupId() %>_<%= articleDisplay.getArticleId() %>_<%= articleDisplay.getVersion() %>">
 					<%= content %>
 				</div>
 

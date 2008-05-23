@@ -24,6 +24,7 @@ package com.liferay.portal.theme;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -106,6 +107,8 @@ public class PortletDisplay implements Serializable {
 	}
 
 	public void setTitle(String title) {
+		title = HtmlUtil.escape(title);
+
 		_title = title;
 
 		// LEP-5317

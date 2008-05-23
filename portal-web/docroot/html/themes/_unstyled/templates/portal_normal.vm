@@ -13,13 +13,16 @@
 	#js ($js_main_file)
 
 	<script type="text/javascript">
+		//<![CDATA[
 		$page_javascript_1
 		$page_javascript_2
 		$page_javascript_3
+		//]]>
 	</script>
 
 	#if ($company_logo != "")
 		<style type="text/css">
+			/* <![CDATA[ */
 			#banner .logo {
 				padding: 0.52em 0.6em 0.53em;
 			}
@@ -34,6 +37,7 @@
 			}
 
 			#ie6_png_fix()
+			/* ]]> */
 		</style>
 	#end
 </head>

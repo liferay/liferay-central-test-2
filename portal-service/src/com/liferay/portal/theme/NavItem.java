@@ -22,6 +22,7 @@
 
 package com.liferay.portal.theme;
 
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Layout;
@@ -81,7 +82,8 @@ public class NavItem implements Serializable {
 	}
 
 	public String getName() {
-		return _layout.getName(_vars.getThemeDisplay().getLocale());
+		return HtmlUtil.escape(
+			_layout.getName(_vars.getThemeDisplay().getLocale()));
 	}
 
 	public String getTarget() {
