@@ -32,7 +32,7 @@ String description = PrefsParamUtil.getString(prefs, request, "description");
 boolean requireCaptcha = PrefsParamUtil.getBoolean(prefs, request, "requireCaptcha");
 String successURL = PrefsParamUtil.getString(prefs, request, "successURL");
 
-boolean sendAsEmail = PrefsParamUtil.getBoolean(prefs, request, "sendAsEmail", true);
+boolean sendAsEmail = PrefsParamUtil.getBoolean(prefs, request, "sendAsEmail");
 String subject = PrefsParamUtil.getString(prefs, request, "subject");
 String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
 

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.webform.util;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -53,6 +54,16 @@ import javax.portlet.PortletPreferences;
  *
  */
 public class WebFormUtil {
+
+	public static String getNewDatabaseTableName(String portletId)
+		throws SystemException {
+
+		long formId = CounterLocalServiceUtil.increment(
+			WebFormUtil.class.getName());
+
+		return portletId + StringPool.UNDERLINE + formId;
+	}
+
 
 	public static final int MAX_FIELDS = GetterUtil.getInteger(
 		PropsUtil.get(PropsUtil.WEB_FORM_PORTLET_MAX_FIELDS));

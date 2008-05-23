@@ -87,7 +87,7 @@ public class ViewAction extends PortletAction {
 		String successURL = GetterUtil.getString(
 			prefs.getValue("successURL", StringPool.BLANK));
 		boolean sendAsEmail = GetterUtil.getBoolean(
-			prefs.getValue("sendAsEmail", StringPool.BLANK), true);
+			prefs.getValue("sendAsEmail", StringPool.BLANK));
 		boolean saveToDatabase = GetterUtil.getBoolean(
 			prefs.getValue("saveToDatabase", StringPool.BLANK));
 		String databaseTableName = GetterUtil.getString(
@@ -122,6 +122,14 @@ public class ViewAction extends PortletAction {
 			}
 
 			if (saveToDatabase) {
+				if (Validator.isNull(databaseTableName)) {
+					databaseTableName =
+						WebFormUtil.getNewDatabaseTableName(portletId);
+					
+					prefs.setValue("databaseTableName", databaseTableName);
+					prefs.store();
+				}
+
 				databaseSuccess = saveDatabase(
 					fieldValues, prefs, databaseTableName);
 			}
@@ -182,10 +190,6 @@ public class ViewAction extends PortletAction {
 			List<String> fieldValues, PortletPreferences prefs,
 			String databaseTableName)
 		throws Exception {
-
-		if (Validator.isNull(databaseTableName)) {
-			return false;
-		}
 
 		WebFormUtil.checkTable(databaseTableName, prefs);
 

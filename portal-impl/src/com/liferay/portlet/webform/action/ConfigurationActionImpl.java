@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.webform.action;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -138,11 +137,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		if (updateFields) {
 			int i = 1;
 
-			long formId = CounterLocalServiceUtil.increment(
-				WebFormUtil.class.getName());
-
 			String databaseTableName =
-				portletResource + StringPool.UNDERLINE + formId;
+				WebFormUtil.getNewDatabaseTableName(portletResource);
 
 			prefs.setValue("databaseTableName", databaseTableName);
 
