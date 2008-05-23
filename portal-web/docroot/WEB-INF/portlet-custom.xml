@@ -1964,8 +1964,8 @@
 				<value>Suggestions</value>
 			</preference>
 			<preference>
-				<name>emailAddress</name>
-				<value></value>
+				<name>saveToDatabase</name>
+				<value>true</value>
 			</preference>
 			<preference>
 				<name>fieldLabel1</name>
