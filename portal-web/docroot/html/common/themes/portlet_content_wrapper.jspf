@@ -36,7 +36,7 @@
 
 					<%@ include file="/html/common/themes/portlet_content.jspf" %>
 
-					<c:if test="<%= !themeDisplay.isFacebook() && (portletDisplay.isStateMax() || portletDisplay.isStateNormal()) %>">
+					<c:if test="<%= !themeDisplay.isFacebook() && !themeDisplay.isWidget() && (portletDisplay.isStateMax() || portletDisplay.isStateNormal()) %>">
 
 						<%
 						boolean widgetShowAddAppLink = GetterUtil.getBoolean(portletSetup.getValue("lfr-widget-show-add-app-link", StringPool.BLANK));
