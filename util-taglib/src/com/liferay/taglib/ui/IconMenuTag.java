@@ -43,8 +43,8 @@ public class IconMenuTag extends BodyTagSupport {
 	public int doStartTag() throws JspException {
 		ServletRequest req = pageContext.getRequest();
 
-		req.setAttribute("liferay-ui:icon-menu:align", _align);
         req.setAttribute("liferay-ui:icon-menu:message", _message);
+		req.setAttribute("liferay-ui:icon-menu:align", _align);
 		req.setAttribute(
 			"liferay-ui:icon-menu:icon-count", new IntegerWrapper());
 

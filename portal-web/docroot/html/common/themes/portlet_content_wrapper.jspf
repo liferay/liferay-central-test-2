@@ -53,19 +53,19 @@
 						<c:if test="<%= widgetShowAddAppLink || facebookShowAddAppLink %>">
 							<div class="lfr-widget-bar">
 								<liferay-ui:icon-menu
-									align="left"
 									message="sharing"
+									align="left"
 								>
 									<c:if test="<%= widgetShowAddAppLink %>">
 										<liferay-ui:icon
-											cssClass='<%= portletDisplay.getNamespace() + "expose-as-widget" %>'
 											image="../dock/add_content"
 											message="add-to-any-website"
-											url='javascript: ;'
-											method="get"
+											url="javascript: ;"
 											label="<%= true %>"
+											cssClass='<%= portletDisplay.getNamespace() + "expose-as-widget" %>'
 										/>
 									</c:if>
+
 									<c:if test="<%= facebookShowAddAppLink %>">
 										<liferay-ui:icon
 											image="../social_bookmarks/facebook"
@@ -76,16 +76,19 @@
 										/>
 									</c:if>
 								</liferay-ui:icon-menu>
-							
+
 								<c:if test="<%= widgetShowAddAppLink %>">
 									<div class="lfr-widget-information" id="<portlet:namespace />widgetInformation">
-										<p><liferay-ui:message key="share-this-application-on-any-website" /></p>
+										<p>
+											<liferay-ui:message key="share-this-application-on-any-website" />
+										</p>
 
 										<textarea class="lfr-textarea">&lt;script src=&quot;<%= themeDisplay.getPortalURL() %><%= themeDisplay.getPathContext() %>/html/js/liferay/widget.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
 &lt;script type=&quot;text/javascript&quot;&gt;
 Liferay.Widget({ url: &#x27;<%= PortalUtil.getWidgetURL(portlet, themeDisplay) %>&#x27;});
 &lt;/script&gt;</textarea>
 									</div>
+
 									<script type="text/javascript">
 										jQuery(
 											function () {
