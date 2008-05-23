@@ -186,6 +186,7 @@
 		<column name="msnSn" type="String" />
 		<column name="mySpaceSn" type="String" />
 		<column name="skypeSn" type="String" />
+		<column name="twitterSn" type="String" />
 		<column name="ymSn" type="String" />
 		<column name="employeeStatusId" type="String" />
 		<column name="employeeNumber" type="String" />

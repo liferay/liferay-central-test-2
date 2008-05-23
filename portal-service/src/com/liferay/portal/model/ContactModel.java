@@ -143,6 +143,10 @@ public interface ContactModel extends BaseModel {
 
 	public void setSkypeSn(String skypeSn);
 
+	public String getTwitterSn();
+
+	public void setTwitterSn(String twitterSn);
+
 	public String getYmSn();
 
 	public void setYmSn(String ymSn);

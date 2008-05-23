@@ -94,7 +94,7 @@ public class RegisterAction extends PortletAction {
 			user.getComments(), contact.getSmsSn(), contact.getAimSn(),
 			contact.getFacebookSn(), contact.getIcqSn(), contact.getJabberSn(),
 			contact.getMsnSn(), contact.getMySpaceSn(), contact.getSkypeSn(),
-			contact.getYmSn());
+			contact.getTwitterSn(), contact.getYmSn());
 
 		SessionMessages.add(req, "user_name_registered");
 	}

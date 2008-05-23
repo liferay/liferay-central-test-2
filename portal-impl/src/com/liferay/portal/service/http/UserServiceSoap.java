@@ -527,7 +527,8 @@ public class UserServiceSoap {
 		java.lang.String facebookSn, java.lang.String icqSn,
 		java.lang.String jabberSn, java.lang.String msnSn,
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
-		java.lang.String ymSn, java.lang.String jobTitle, long[] organizationIds)
+		java.lang.String twitterSn, java.lang.String ymSn,
+		java.lang.String jobTitle, long[] organizationIds)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.updateUser(userId,
@@ -536,7 +537,7 @@ public class UserServiceSoap {
 					middleName, lastName, prefixId, suffixId, male,
 					birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn,
 					facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn,
-					ymSn, jobTitle, organizationIds);
+					twitterSn, ymSn, jobTitle, organizationIds);
 
 			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}
@@ -560,7 +561,8 @@ public class UserServiceSoap {
 		java.lang.String facebookSn, java.lang.String icqSn,
 		java.lang.String jabberSn, java.lang.String msnSn,
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
-		java.lang.String ymSn, java.lang.String jobTitle, long[] organizationIds)
+		java.lang.String twitterSn, java.lang.String ymSn,
+		java.lang.String jobTitle, long[] organizationIds)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.updateUser(userId,
@@ -569,7 +571,8 @@ public class UserServiceSoap {
 					comments, firstName, middleName, lastName, prefixId,
 					suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
 					smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn,
-					mySpaceSn, skypeSn, ymSn, jobTitle, organizationIds);
+					mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle,
+					organizationIds);
 
 			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}

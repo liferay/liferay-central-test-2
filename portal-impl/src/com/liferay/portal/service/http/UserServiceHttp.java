@@ -1410,7 +1410,8 @@ public class UserServiceHttp {
 		java.lang.String facebookSn, java.lang.String icqSn,
 		java.lang.String jabberSn, java.lang.String msnSn,
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
-		java.lang.String ymSn, java.lang.String jobTitle, long[] organizationIds)
+		java.lang.String twitterSn, java.lang.String ymSn,
+		java.lang.String jobTitle, long[] organizationIds)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -1538,22 +1539,28 @@ public class UserServiceHttp {
 				paramObj25 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj26 = ymSn;
+			Object paramObj26 = twitterSn;
 
-			if (ymSn == null) {
+			if (twitterSn == null) {
 				paramObj26 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj27 = jobTitle;
+			Object paramObj27 = ymSn;
 
-			if (jobTitle == null) {
+			if (ymSn == null) {
 				paramObj27 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj28 = organizationIds;
+			Object paramObj28 = jobTitle;
+
+			if (jobTitle == null) {
+				paramObj28 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj29 = organizationIds;
 
 			if (organizationIds == null) {
-				paramObj28 = new NullWrapper("[J");
+				paramObj29 = new NullWrapper("[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
@@ -1565,7 +1572,7 @@ public class UserServiceHttp {
 						paramObj14, paramObj15, paramObj16, paramObj17,
 						paramObj18, paramObj19, paramObj20, paramObj21,
 						paramObj22, paramObj23, paramObj24, paramObj25,
-						paramObj26, paramObj27, paramObj28
+						paramObj26, paramObj27, paramObj28, paramObj29
 					});
 
 			Object returnObj = null;
@@ -1607,7 +1614,8 @@ public class UserServiceHttp {
 		java.lang.String facebookSn, java.lang.String icqSn,
 		java.lang.String jabberSn, java.lang.String msnSn,
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
-		java.lang.String ymSn, java.lang.String jobTitle, long[] organizationIds)
+		java.lang.String twitterSn, java.lang.String ymSn,
+		java.lang.String jobTitle, long[] organizationIds)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -1747,22 +1755,28 @@ public class UserServiceHttp {
 				paramObj27 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj28 = ymSn;
+			Object paramObj28 = twitterSn;
 
-			if (ymSn == null) {
+			if (twitterSn == null) {
 				paramObj28 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj29 = jobTitle;
+			Object paramObj29 = ymSn;
 
-			if (jobTitle == null) {
+			if (ymSn == null) {
 				paramObj29 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj30 = organizationIds;
+			Object paramObj30 = jobTitle;
+
+			if (jobTitle == null) {
+				paramObj30 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj31 = organizationIds;
 
 			if (organizationIds == null) {
-				paramObj30 = new NullWrapper("[J");
+				paramObj31 = new NullWrapper("[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
@@ -1775,7 +1789,7 @@ public class UserServiceHttp {
 						paramObj18, paramObj19, paramObj20, paramObj21,
 						paramObj22, paramObj23, paramObj24, paramObj25,
 						paramObj26, paramObj27, paramObj28, paramObj29,
-						paramObj30
+						paramObj30, paramObj31
 					});
 
 			Object returnObj = null;

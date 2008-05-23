@@ -277,6 +277,7 @@ public class EditUserAction extends PortletAction {
 		String msnSn = ParamUtil.getString(req, "msnSn");
 		String mySpaceSn = ParamUtil.getString(req, "mySpaceSn");
 		String skypeSn = ParamUtil.getString(req, "skypeSn");
+		String twitterSn = ParamUtil.getString(req, "twitterSn");
 		String ymSn = ParamUtil.getString(req, "ymSn");
 		String jobTitle = ParamUtil.getString(req, "jobTitle");
 		long[] organizationIds = StringUtil.split(
@@ -317,7 +318,7 @@ public class EditUserAction extends PortletAction {
 				greeting, comments, firstName, middleName, lastName, prefixId,
 				suffixId, male, birthdayMonth, birthdayDay, birthdayYear, smsSn,
 				aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn,
-				ymSn, jobTitle, organizationIds);
+				twitterSn, ymSn, jobTitle, organizationIds);
 
 			for (String type : AnnouncementsEntryImpl.TYPES) {
 				boolean email = ParamUtil.getBoolean(

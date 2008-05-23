@@ -1762,7 +1762,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
 			int birthdayYear, String smsSn, String aimSn, String facebookSn,
 			String icqSn, String jabberSn, String msnSn, String mySpaceSn,
-			String skypeSn, String ymSn, String jobTitle,
+			String skypeSn, String twitterSn, String ymSn, String jobTitle,
 			long[] organizationIds)
 		throws PortalException, SystemException {
 
@@ -1774,8 +1774,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			screenName, emailAddress, languageId, timeZoneId, greeting,
 			comments, firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
-			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, ymSn, jobTitle,
-			organizationIds);
+			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
+			jobTitle, organizationIds);
 	}
 
 	public User updateUser(
@@ -1787,7 +1787,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			boolean male, int birthdayMonth, int birthdayDay, int birthdayYear,
 			String smsSn, String aimSn, String facebookSn, String icqSn,
 			String jabberSn, String msnSn, String mySpaceSn, String skypeSn,
-			String ymSn, String jobTitle, long[] organizationIds)
+			String twitterSn, String ymSn, String jobTitle,
+			long[] organizationIds)
 		throws PortalException, SystemException {
 
 		// User
@@ -1901,6 +1902,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		contact.setMsnSn(msnSn);
 		contact.setMySpaceSn(mySpaceSn);
 		contact.setSkypeSn(skypeSn);
+		contact.setTwitterSn(twitterSn);
 		contact.setYmSn(ymSn);
 		contact.setJobTitle(jobTitle);
 

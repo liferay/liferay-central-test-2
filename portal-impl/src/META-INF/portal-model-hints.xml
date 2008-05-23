@@ -112,6 +112,7 @@
 		<field name="msnSn" type="String" />
 		<field name="mySpaceSn" type="String" />
 		<field name="skypeSn" type="String" />
+		<field name="twitterSn" type="String" />
 		<field name="ymSn" type="String" />
 		<field name="employeeStatusId" type="String" />
 		<field name="employeeNumber" type="String" />

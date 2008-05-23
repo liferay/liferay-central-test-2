@@ -91,6 +91,7 @@ public class ContactPersistenceTest extends BasePersistenceTestCase {
 		newContact.setMsnSn(randomString());
 		newContact.setMySpaceSn(randomString());
 		newContact.setSkypeSn(randomString());
+		newContact.setTwitterSn(randomString());
 		newContact.setYmSn(randomString());
 		newContact.setEmployeeStatusId(randomString());
 		newContact.setEmployeeNumber(randomString());
@@ -127,6 +128,7 @@ public class ContactPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingContact.getMsnSn(), newContact.getMsnSn());
 		assertEquals(existingContact.getMySpaceSn(), newContact.getMySpaceSn());
 		assertEquals(existingContact.getSkypeSn(), newContact.getSkypeSn());
+		assertEquals(existingContact.getTwitterSn(), newContact.getTwitterSn());
 		assertEquals(existingContact.getYmSn(), newContact.getYmSn());
 		assertEquals(existingContact.getEmployeeStatusId(),
 			newContact.getEmployeeStatusId());
@@ -201,6 +203,7 @@ public class ContactPersistenceTest extends BasePersistenceTestCase {
 		contact.setMsnSn(randomString());
 		contact.setMySpaceSn(randomString());
 		contact.setSkypeSn(randomString());
+		contact.setTwitterSn(randomString());
 		contact.setYmSn(randomString());
 		contact.setEmployeeStatusId(randomString());
 		contact.setEmployeeNumber(randomString());

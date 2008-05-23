@@ -452,7 +452,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
 			int birthdayYear, String smsSn, String aimSn, String facebookSn,
 			String icqSn, String jabberSn, String msnSn, String mySpaceSn,
-			String skypeSn, String ymSn, String jobTitle,
+			String skypeSn, String twitterSn, String ymSn, String jobTitle,
 			long[] organizationIds)
 		throws PortalException, SystemException {
 
@@ -464,8 +464,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			screenName, emailAddress, languageId, timeZoneId, greeting,
 			comments, firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
-			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, ymSn, jobTitle,
-			organizationIds);
+			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
+			jobTitle, organizationIds);
 	}
 
 	public User updateUser(
@@ -477,7 +477,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			boolean male, int birthdayMonth, int birthdayDay, int birthdayYear,
 			String smsSn, String aimSn, String facebookSn, String icqSn,
 			String jabberSn, String msnSn, String mySpaceSn, String skypeSn,
-			String ymSn, String jobTitle, long[] organizationIds)
+			String twitterSn, String ymSn, String jobTitle,
+			long[] organizationIds)
 		throws PortalException, SystemException {
 
 		UserPermissionUtil.check(
@@ -507,8 +508,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			screenName, emailAddress, languageId, timeZoneId, greeting,
 			comments, firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
-			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, ymSn, jobTitle,
-			organizationIds);
+			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
+			jobTitle, organizationIds);
 	}
 
 }

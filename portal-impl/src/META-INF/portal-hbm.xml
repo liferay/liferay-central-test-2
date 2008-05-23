@@ -92,6 +92,7 @@
 		<property name="msnSn" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="mySpaceSn" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="skypeSn" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="twitterSn" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="ymSn" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="employeeStatusId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="employeeNumber" type="com.liferay.util.dao.hibernate.StringType" />

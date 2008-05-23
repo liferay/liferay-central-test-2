@@ -131,6 +131,9 @@ public class ContactModelImpl extends BaseModelImpl {
 			{ "skypeSn", new Integer(Types.VARCHAR) },
 			
 
+			{ "twitterSn", new Integer(Types.VARCHAR) },
+			
+
 			{ "ymSn", new Integer(Types.VARCHAR) },
 			
 
@@ -148,7 +151,7 @@ public class ContactModelImpl extends BaseModelImpl {
 
 			{ "hoursOfOperation", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Contact_ (contactId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,accountId LONG,parentContactId LONG,firstName VARCHAR(75) null,middleName VARCHAR(75) null,lastName VARCHAR(75) null,prefixId INTEGER,suffixId INTEGER,male BOOLEAN,birthday DATE null,smsSn VARCHAR(75) null,aimSn VARCHAR(75) null,facebookSn VARCHAR(75) null,icqSn VARCHAR(75) null,jabberSn VARCHAR(75) null,msnSn VARCHAR(75) null,mySpaceSn VARCHAR(75) null,skypeSn VARCHAR(75) null,ymSn VARCHAR(75) null,employeeStatusId VARCHAR(75) null,employeeNumber VARCHAR(75) null,jobTitle VARCHAR(100) null,jobClass VARCHAR(75) null,hoursOfOperation VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table Contact_ (contactId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,accountId LONG,parentContactId LONG,firstName VARCHAR(75) null,middleName VARCHAR(75) null,lastName VARCHAR(75) null,prefixId INTEGER,suffixId INTEGER,male BOOLEAN,birthday DATE null,smsSn VARCHAR(75) null,aimSn VARCHAR(75) null,facebookSn VARCHAR(75) null,icqSn VARCHAR(75) null,jabberSn VARCHAR(75) null,msnSn VARCHAR(75) null,mySpaceSn VARCHAR(75) null,skypeSn VARCHAR(75) null,twitterSn VARCHAR(75) null,ymSn VARCHAR(75) null,employeeStatusId VARCHAR(75) null,employeeNumber VARCHAR(75) null,jobTitle VARCHAR(100) null,jobClass VARCHAR(75) null,hoursOfOperation VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Contact_";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -183,6 +186,7 @@ public class ContactModelImpl extends BaseModelImpl {
 		model.setMsnSn(soapModel.getMsnSn());
 		model.setMySpaceSn(soapModel.getMySpaceSn());
 		model.setSkypeSn(soapModel.getSkypeSn());
+		model.setTwitterSn(soapModel.getTwitterSn());
 		model.setYmSn(soapModel.getYmSn());
 		model.setEmployeeStatusId(soapModel.getEmployeeStatusId());
 		model.setEmployeeNumber(soapModel.getEmployeeNumber());
@@ -496,6 +500,19 @@ public class ContactModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public String getTwitterSn() {
+		return GetterUtil.getString(_twitterSn);
+	}
+
+	public void setTwitterSn(String twitterSn) {
+		if (((twitterSn == null) && (_twitterSn != null)) ||
+				((twitterSn != null) && (_twitterSn == null)) ||
+				((twitterSn != null) && (_twitterSn != null) &&
+				!twitterSn.equals(_twitterSn))) {
+			_twitterSn = twitterSn;
+		}
+	}
+
 	public String getYmSn() {
 		return GetterUtil.getString(_ymSn);
 	}
@@ -605,6 +622,7 @@ public class ContactModelImpl extends BaseModelImpl {
 			model.setMsnSn(HtmlUtil.escape(getMsnSn()));
 			model.setMySpaceSn(HtmlUtil.escape(getMySpaceSn()));
 			model.setSkypeSn(HtmlUtil.escape(getSkypeSn()));
+			model.setTwitterSn(HtmlUtil.escape(getTwitterSn()));
 			model.setYmSn(HtmlUtil.escape(getYmSn()));
 			model.setEmployeeStatusId(HtmlUtil.escape(getEmployeeStatusId()));
 			model.setEmployeeNumber(HtmlUtil.escape(getEmployeeNumber()));
@@ -646,6 +664,7 @@ public class ContactModelImpl extends BaseModelImpl {
 		clone.setMsnSn(getMsnSn());
 		clone.setMySpaceSn(getMySpaceSn());
 		clone.setSkypeSn(getSkypeSn());
+		clone.setTwitterSn(getTwitterSn());
 		clone.setYmSn(getYmSn());
 		clone.setEmployeeStatusId(getEmployeeStatusId());
 		clone.setEmployeeNumber(getEmployeeNumber());
@@ -727,6 +746,7 @@ public class ContactModelImpl extends BaseModelImpl {
 	private String _msnSn;
 	private String _mySpaceSn;
 	private String _skypeSn;
+	private String _twitterSn;
 	private String _ymSn;
 	private String _employeeStatusId;
 	private String _employeeNumber;

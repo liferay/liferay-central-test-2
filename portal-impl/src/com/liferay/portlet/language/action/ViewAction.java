@@ -97,7 +97,8 @@ public class ViewAction extends PortletAction {
 					contact.getAimSn(), contact.getFacebookSn(),
 					contact.getIcqSn(), contact.getJabberSn(),
 					contact.getMsnSn(), contact.getMySpaceSn(),
-					contact.getSkypeSn(), contact.getYmSn());
+					contact.getSkypeSn(), contact.getTwitterSn(),
+					contact.getYmSn());
 			}
 
 			httpSes.setAttribute(Globals.LOCALE_KEY, locale);

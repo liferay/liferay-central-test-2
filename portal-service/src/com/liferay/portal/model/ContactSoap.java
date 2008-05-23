@@ -73,6 +73,7 @@ public class ContactSoap implements Serializable {
 		soapModel.setMsnSn(model.getMsnSn());
 		soapModel.setMySpaceSn(model.getMySpaceSn());
 		soapModel.setSkypeSn(model.getSkypeSn());
+		soapModel.setTwitterSn(model.getTwitterSn());
 		soapModel.setYmSn(model.getYmSn());
 		soapModel.setEmployeeStatusId(model.getEmployeeStatusId());
 		soapModel.setEmployeeNumber(model.getEmployeeNumber());
@@ -292,6 +293,14 @@ public class ContactSoap implements Serializable {
 		_skypeSn = skypeSn;
 	}
 
+	public String getTwitterSn() {
+		return _twitterSn;
+	}
+
+	public void setTwitterSn(String twitterSn) {
+		_twitterSn = twitterSn;
+	}
+
 	public String getYmSn() {
 		return _ymSn;
 	}
@@ -363,6 +372,7 @@ public class ContactSoap implements Serializable {
 	private String _msnSn;
 	private String _mySpaceSn;
 	private String _skypeSn;
+	private String _twitterSn;
 	private String _ymSn;
 	private String _employeeStatusId;
 	private String _employeeNumber;

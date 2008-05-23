@@ -952,7 +952,8 @@ public class UserLocalServiceUtil {
 		java.lang.String facebookSn, java.lang.String icqSn,
 		java.lang.String jabberSn, java.lang.String msnSn,
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
-		java.lang.String ymSn, java.lang.String jobTitle, long[] organizationIds)
+		java.lang.String twitterSn, java.lang.String ymSn,
+		java.lang.String jobTitle, long[] organizationIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
@@ -961,8 +962,8 @@ public class UserLocalServiceUtil {
 			screenName, emailAddress, languageId, timeZoneId, greeting,
 			comments, firstName, middleName, lastName, prefixId, suffixId,
 			male, birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn,
-			facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, ymSn,
-			jobTitle, organizationIds);
+			facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn,
+			ymSn, jobTitle, organizationIds);
 	}
 
 	public static com.liferay.portal.model.User updateUser(long userId,
@@ -978,7 +979,8 @@ public class UserLocalServiceUtil {
 		java.lang.String facebookSn, java.lang.String icqSn,
 		java.lang.String jabberSn, java.lang.String msnSn,
 		java.lang.String mySpaceSn, java.lang.String skypeSn,
-		java.lang.String ymSn, java.lang.String jobTitle, long[] organizationIds)
+		java.lang.String twitterSn, java.lang.String ymSn,
+		java.lang.String jobTitle, long[] organizationIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
@@ -988,6 +990,6 @@ public class UserLocalServiceUtil {
 			timeZoneId, greeting, comments, firstName, middleName, lastName,
 			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
 			smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn,
-			skypeSn, ymSn, jobTitle, organizationIds);
+			skypeSn, twitterSn, ymSn, jobTitle, organizationIds);
 	}
 }

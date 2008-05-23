@@ -208,6 +208,7 @@ create table Contact_ (
 	msnSn VARCHAR(75) null,
 	mySpaceSn VARCHAR(75) null,
 	skypeSn VARCHAR(75) null,
+	twitterSn VARCHAR(75) null,
 	ymSn VARCHAR(75) null,
 	employeeStatusId VARCHAR(75) null,
 	employeeNumber VARCHAR(75) null,

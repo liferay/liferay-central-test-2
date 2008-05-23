@@ -71,7 +71,7 @@ public class AdminUtil {
 			String emailAddress, String languageId, String timeZoneId,
 			String greeting, String comments, String smsSn, String aimSn,
 			String facebookSn, String icqSn, String jabberSn, String msnSn,
-			String mySpaceSn, String skypeSn, String ymSn)
+			String mySpaceSn, String skypeSn, String twitterSn, String ymSn)
 		throws PortalException, RemoteException, SystemException {
 
 		String password = getUpdateUserPassword(req, userId);
@@ -94,7 +94,7 @@ public class AdminUtil {
 			contact.getMiddleName(), contact.getLastName(),
 			contact.getPrefixId(), contact.getSuffixId(), contact.isMale(),
 			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
-			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, ymSn,
+			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
 			contact.getJobTitle(), user.getOrganizationIds());
 	}
 
@@ -103,7 +103,7 @@ public class AdminUtil {
 			String emailAddress, String languageId, String timeZoneId,
 			String greeting, String comments, String smsSn, String aimSn,
 			String facebookSn, String icqSn, String jabberSn, String msnSn,
-			String mySpaceSn, String skypeSn, String ymSn)
+			String mySpaceSn, String skypeSn, String twitterSn, String ymSn)
 		throws PortalException, RemoteException, SystemException {
 
 		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
@@ -111,7 +111,7 @@ public class AdminUtil {
 		return updateUser(
 			httpReq, userId, screenName, emailAddress, languageId, timeZoneId,
 			greeting, comments, smsSn, aimSn, facebookSn, icqSn, jabberSn,
-			msnSn, mySpaceSn, skypeSn, ymSn);
+			msnSn, mySpaceSn, skypeSn, twitterSn, ymSn);
 	}
 
 }

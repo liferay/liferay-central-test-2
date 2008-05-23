@@ -39,6 +39,14 @@
 		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="mySpaceSn" />
 	</td>
 </tr>
+<tr>
+	<td>
+		<liferay-ui:message key="twitter" />
+	</td>
+	<td>
+		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="twitterSn" />
+	</td>
+</tr>
 </table>
 
 <br />

@@ -77,6 +77,7 @@ public class ContactJSONSerializer {
 		JSONUtil.put(jsonObj, "msnSn", model.getMsnSn());
 		JSONUtil.put(jsonObj, "mySpaceSn", model.getMySpaceSn());
 		JSONUtil.put(jsonObj, "skypeSn", model.getSkypeSn());
+		JSONUtil.put(jsonObj, "twitterSn", model.getTwitterSn());
 		JSONUtil.put(jsonObj, "ymSn", model.getYmSn());
 		JSONUtil.put(jsonObj, "employeeStatusId", model.getEmployeeStatusId());
 		JSONUtil.put(jsonObj, "employeeNumber", model.getEmployeeNumber());
