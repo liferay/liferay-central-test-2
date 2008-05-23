@@ -954,7 +954,7 @@ li.toggle-expand a {
 }
 
 .lfr-widget-bar {
-	margin: 1em 0;
+	margin: 1em 0 0;
 }
 
 .lfr-widget-bar:after {
@@ -969,13 +969,20 @@ li.toggle-expand a {
 	height: 1%;
 }
 
-.lfr-share-icon {
-	float: left;
-	margin-right: 1em;
+.lfr-widget-information {
+	display: none;
 }
 
 .lfr-widget-bar .lfr-actions.left .lfr-trigger strong span, .lfr-widget-bar .lfr-actions.right .lfr-trigger strong span {
 	background-image: url(<%= themeDisplay.getPathThemeImages() %>/common/sharing.png);
+}
+
+.lfr-widget-bar .lfr-actions.left .lfr-trigger  strong span {
+	padding-right: 25px;
+}
+
+.lfr-widget-bar .lfr-actions.right .lfr-trigger  strong span {
+	padding-left: 25px;
 }
 
 /* ---------- Liferay forms ---------- */

@@ -46,6 +46,7 @@ public class IconTag extends IncludeTag {
 		req.setAttribute("liferay-ui:icon:target", _target);
 		req.setAttribute("liferay-ui:icon:label", String.valueOf(_label));
 		req.setAttribute("liferay-ui:icon:toolTip", String.valueOf(_toolTip));
+        req.setAttribute("liferay-ui:icon:cssClass", _cssClass);
 
 		return EVAL_BODY_BUFFERED;
 	}
@@ -64,6 +65,7 @@ public class IconTag extends IncludeTag {
 			req.removeAttribute("liferay-ui:icon:target");
 			req.removeAttribute("liferay-ui:icon:label");
 			req.removeAttribute("liferay-ui:icon:toolTip");
+			req.removeAttribute("liferay-ui:icon:cssClass");
 
 			return value;
 		}
@@ -114,6 +116,10 @@ public class IconTag extends IncludeTag {
 		_toolTip = toolTip;
 	}
 
+	public void setCssClass(String cssClass) {
+		_cssClass = cssClass;
+	}
+
 	protected String getDefaultPage() {
 		return _PAGE;
 	}
@@ -128,5 +134,6 @@ public class IconTag extends IncludeTag {
 	private String _target = "_self";
 	private boolean _label;
 	private boolean _toolTip = true;
+	private String _cssClass;
 
 }

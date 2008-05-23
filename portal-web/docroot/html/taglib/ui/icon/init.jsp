@@ -66,6 +66,7 @@ if (Validator.isNull(method)) {
 String target = GetterUtil.getString((String)request.getAttribute("liferay-ui:icon:target"));
 boolean label = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon:label"));
 boolean toolTip = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon:toolTip"));
+String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:icon:cssClass"));
 
 if ((iconMenuIconCount != null) || (iconMenuSingleIcon != null)) {
 	label = true;

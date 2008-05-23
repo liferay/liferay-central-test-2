@@ -44,6 +44,7 @@ public class IconMenuTag extends BodyTagSupport {
 		ServletRequest req = pageContext.getRequest();
 
 		req.setAttribute("liferay-ui:icon-menu:align", _align);
+        req.setAttribute("liferay-ui:icon-menu:message", _message);
 		req.setAttribute(
 			"liferay-ui:icon-menu:icon-count", new IntegerWrapper());
 
@@ -138,6 +139,10 @@ public class IconMenuTag extends BodyTagSupport {
 		_endPage = endPage;
 	}
 
+	public void setMessage(String message) {
+		_message = message;
+	}
+
 	public void setAlign(String align) {
 		_align = align;
 	}
@@ -149,6 +154,7 @@ public class IconMenuTag extends BodyTagSupport {
 
 	private String _startPage;
 	private String _endPage;
+    private String _message = "actions";
 	private String _align = "right";
 	private String _bodyContentString = StringPool.BLANK;
 
