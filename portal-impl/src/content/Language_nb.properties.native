@@ -444,6 +444,7 @@ allow-dictionary-words=Tillat ord i ordlisten
 allow-simple-articles=Tillat enkle artikler
 allow-strangers-to-create-accounts-with-a-company-email-address=Tillat ukjente å opprette konto med firmaepost?
 allow-strangers-to-create-accounts=Tillat andre personer å opprette konto?
+allow-users-to-add-x-to-any-website=Allow users to add <b>{0}</b> to any website.
 allow-users-to-add-x-to-facebook=Allow users to add <b>{0}</b> to Facebook.
 allow-users-to-automatically-login=Tillat brukerne automatisk innloggning?
 allow-users-to-request-forgotten-passwords=Tillat brukerne å be om glemte passord?

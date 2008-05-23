@@ -137,6 +137,7 @@ all-pages=Tüm Sayfalar
 all-words=Tüm Kelimeler
 all=Hepsi
 allow-strangers-to-create-accounts=Yabancılara kullanıcı ekleme hakkı?
+allow-users-to-add-x-to-any-website=Allow users to add <b>{0}</b> to any website.
 allow-users-to-add-x-to-facebook=Allow users to add <b>{0}</b> to Facebook.
 allow-users-to-automatically-login=Kullanıcıların otomatik bağlanması?
 already-registered=Kayıt Yapılmış

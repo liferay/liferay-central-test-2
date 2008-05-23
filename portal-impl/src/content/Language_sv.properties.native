@@ -483,6 +483,7 @@ allow-dictionary-words=Tillåt ord i ordlistan
 allow-simple-articles=Tillåt enkla artiklar
 allow-strangers-to-create-accounts-with-a-company-email-address=Tillåt okända att skapa konton med företags-epost?
 allow-strangers-to-create-accounts=Tillåt andra personer att skapa konto?
+allow-users-to-add-x-to-any-website=Allow users to add <b>{0}</b> to any website.
 allow-users-to-add-x-to-facebook=Allow users to add <b>{0}</b> to Facebook.
 allow-users-to-automatically-login=Tillåt användarna automatisk inloggning?
 allow-users-to-request-forgotten-passwords=Tillåt användarna att begära glömda lösenord?

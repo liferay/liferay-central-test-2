@@ -382,6 +382,7 @@ all=ليك ألباني
 allow-community-administrators-to-use-their-own-logo=إسمح لمدراء المجتمعات بإستخدام الشعار الخاص بهم؟
 allow-simple-articles=إسمح بالمقالات البسيطة
 allow-strangers-to-create-accounts=إسمح للغرباء بإنشاء حسابات؟
+allow-users-to-add-x-to-any-website=Allow users to add <b>{0}</b> to any website.
 allow-users-to-add-x-to-facebook=Allow users to add <b>{0}</b> to Facebook.
 allow-users-to-automatically-login=إسمح للمستخدمين بالدخول تلقائيا؟
 allow-users-to-request-forgotten-passwords=إسمح للمستخدمين بطلب كلمات السر المنسية؟

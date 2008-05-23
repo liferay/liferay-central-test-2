@@ -189,6 +189,7 @@ all-words=Tất cả các từ
 all=Tất cả
 allow-simple-articles=Cho phép viết bài đơn giản
 allow-strangers-to-create-accounts=Cho phép khách tạo mật khẩu?
+allow-users-to-add-x-to-any-website=Allow users to add <b>{0}</b> to any website.
 allow-users-to-add-x-to-facebook=Allow users to add <b>{0}</b> to Facebook.
 allow-users-to-automatically-login=Cho phép người dùng tự động đăng nhập?
 alpha=Alpha
