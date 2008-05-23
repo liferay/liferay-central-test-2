@@ -1183,7 +1183,6 @@ enter-a-blank-entry-to-disable-email-forwarding=Lägg in tom data för att block
 enter-a-blank-paypal-email-address-to-disable-paypal=Lägg in blank PayPal e-post adress för att blockera PayPal betalning. Välj kreditkort för att göra betalning.
 enter-a-paypal-email-address-to-send-all-payments-to-paypal=Lägg in PayPal e-post adress för att skicka alla betalningar till PayPal.
 enter-again=Skriv in igen
-enter-in-your-custom-css=Egen CSS
 enter-one-city-or-zip-code-per-line=Skriv en ort eller ett postnummer <b>per rad</b>.
 enter-one-email-address-per-line=Skriv en e-post adress <b>per rad</b>.
 enter-one-isbn-number-per-line-to-add-books=Skriv ett ISBN nummer <b>per rad</b> för att lägga till böcker. Du kan lägga till upp till {0} åt gången.

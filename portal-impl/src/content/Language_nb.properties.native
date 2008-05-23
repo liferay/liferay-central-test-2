@@ -1100,7 +1100,6 @@ enter-a-blank-entry-to-disable-email-forwarding=Legg inn tom data for å blokker
 enter-a-blank-paypal-email-address-to-disable-paypal=Legg in blank PayPal e-post adresse for å blokkere PayPal betaling. Velg kreditkort for å betale.
 enter-a-paypal-email-address-to-send-all-payments-to-paypal=Legg inn PayPal e-post adresse for å sende alle betalinger til PayPal.
 enter-again=Skriv inn igjen
-enter-in-your-custom-css=Egen CSS
 enter-one-city-or-zip-code-per-line=Skriv et sted eller et postnummer <b>per rad</b>.
 enter-one-email-address-per-line=Skriv en e-post adresse <b>per rad</b>.
 enter-one-isbn-number-per-line-to-add-books=Skriv et ISBN nummer <b>per rad</b> for å legge til bøker. Du kan legge til opp til {0} om gangen.
