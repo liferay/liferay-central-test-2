@@ -523,7 +523,7 @@
 	</servlet>
 	<servlet>
 		<servlet-name>DisplayChart</servlet-name>
-		<servlet-class>org.jfree.chart.servlet.DisplayChart</servlet-class>
+		<servlet-class>com.liferay.portal.servlet.DisplayChartServlet</servlet-class>
 		<load-on-startup>14</load-on-startup>
 	</servlet>
 	<servlet>
