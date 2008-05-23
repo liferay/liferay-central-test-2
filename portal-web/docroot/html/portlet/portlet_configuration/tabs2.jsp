@@ -29,7 +29,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL");
 
 String portletResource = ParamUtil.getString(request, "portletResource");
-String previewWidth = ParamUtil.getString(request, "previewWidth");
 
 Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
 
@@ -43,7 +42,6 @@ configurationURL.setParameter("struts_action", "/portlet_configuration/edit_conf
 configurationURL.setParameter("redirect", redirect);
 configurationURL.setParameter("returnToFullPageURL", returnToFullPageURL);
 configurationURL.setParameter("portletResource", portletResource);
-configurationURL.setParameter("previewWidth", previewWidth);
 
 // Archived setups
 

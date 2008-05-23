@@ -29,7 +29,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL");
 
 String portletResource = ParamUtil.getString(request, "portletResource");
-String previewWidth = ParamUtil.getString(request, "previewWidth");
 
 Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
 
@@ -43,7 +42,6 @@ configurationURL.setParameter("struts_action", "/portlet_configuration/edit_conf
 configurationURL.setParameter("redirect", redirect);
 configurationURL.setParameter("returnToFullPageURL", returnToFullPageURL);
 configurationURL.setParameter("portletResource", portletResource);
-configurationURL.setParameter("previewWidth", previewWidth);
 
 // Supported clients
 
@@ -55,7 +53,6 @@ supportedClientsURL.setParameter("struts_action", "/portlet_configuration/edit_s
 supportedClientsURL.setParameter("redirect", redirect);
 supportedClientsURL.setParameter("returnToFullPageURL", returnToFullPageURL);
 supportedClientsURL.setParameter("portletResource", portletResource);
-configurationURL.setParameter("previewWidth", previewWidth);
 
 // Permissions
 
@@ -68,7 +65,6 @@ permissionsURL.setParameter("redirect", redirect);
 permissionsURL.setParameter("returnToFullPageURL", returnToFullPageURL);
 permissionsURL.setParameter("portletResource", portletResource);
 permissionsURL.setParameter("resourcePrimKey", PortletPermissionUtil.getPrimaryKey(layout.getPlid(), portletResource));
-permissionsURL.setParameter("previewWidth", previewWidth);
 
 // LAR
 
@@ -81,16 +77,16 @@ larURL.setParameter("redirect", redirect);
 larURL.setParameter("returnToFullPageURL", returnToFullPageURL);
 larURL.setParameter("portletResource", portletResource);
 
-// Facebook
+// Sharing
 
-PortletURL facebookURL = renderResponse.createRenderURL();
+PortletURL sharingURL = renderResponse.createRenderURL();
 
-facebookURL.setWindowState(WindowState.MAXIMIZED);
+sharingURL.setWindowState(WindowState.MAXIMIZED);
 
-facebookURL.setParameter("struts_action", "/portlet_configuration/edit_facebook");
-facebookURL.setParameter("redirect", redirect);
-facebookURL.setParameter("returnToFullPageURL", returnToFullPageURL);
-facebookURL.setParameter("portletResource", portletResource);
+sharingURL.setParameter("struts_action", "/portlet_configuration/edit_sharing");
+sharingURL.setParameter("redirect", redirect);
+sharingURL.setParameter("returnToFullPageURL", returnToFullPageURL);
+sharingURL.setParameter("portletResource", portletResource);
 
 int pos = 0;
 
@@ -116,9 +112,9 @@ tabsNames += ",export-import";
 
 request.setAttribute("liferay-ui:tabs:url" + pos++, larURL.toString());
 
-tabsNames += ",facebook";
+tabsNames += ",sharing";
 
-request.setAttribute("liferay-ui:tabs:url" + pos++, facebookURL.toString());
+request.setAttribute("liferay-ui:tabs:url" + pos++, sharingURL.toString());
 
 if (tabsNames.startsWith(",")) {
 	tabsNames = tabsNames.substring(1);

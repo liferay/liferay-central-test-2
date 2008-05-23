@@ -39,72 +39,84 @@
 					<c:if test="<%= !themeDisplay.isFacebook() && (portletDisplay.isStateMax() || portletDisplay.isStateNormal()) %>">
 
 						<%
+						boolean widgetShowAddAppLink = GetterUtil.getBoolean(portletSetup.getValue("lfr-widget-show-add-app-link", StringPool.BLANK));
+
 						String facebookAPIKey = portletSetup.getValue("lfr-facebook-api-key", StringPool.BLANK);
 						String facebookCanvasPageURL = portletSetup.getValue("lfr-facebook-canvas-page-url", StringPool.BLANK);
 						boolean facebookShowAddAppLink = GetterUtil.getBoolean(portletSetup.getValue("lfr-facebook-show-add-app-link", StringPool.BLANK));
+
+						if (Validator.isNull(facebookCanvasPageURL) || Validator.isNull(facebookAPIKey)) {
+							facebookShowAddAppLink = false;
+						}
 						%>
 
-						<div class="lfr-widget-bar">
-							<c:if test="<%= true || Validator.isNotNull(facebookCanvasPageURL) && Validator.isNotNull(facebookAPIKey) && facebookShowAddAppLink %>">
-							<div class="lfr-share-icon expose-to-facebook">
-								<liferay-ui:icon
-									image="../social_bookmarks/facebook"
-									message="add-to-facebook"
-									url='<%= "http://www.facebook.com/add.php?api_key=" + facebookAPIKey + "&ref=pd" %>'
-									method="get"
-									label="<%= true %>"
-								/>
-							</div>
-							
-							<div class="lfr-share-icon expose-as-widget" id="<portlet:namespace />exposeWidget">
-								<liferay-ui:icon
-									image="../dock/add_content"
-									message="add-to-any-website"
-									url='javascript: ;'
-									method="get"
-									label="<%= true %>"
-								/>
-								<div class="widget-information">
-									<p><liferay-ui:message key="share-this-application-on-any-website" /></p>
-										<!-- These URLs needs to be changed to be dynamic -->
-									<textarea class="lfr-textarea">&lt;script src=&quot;http://liferay.com/html/js/liferay/widget.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-&lt;script type=&quot;text/javascript&quot;&gt;
-Liferay.Widget({ url: &#x27;http://liferay.com/widget/message-boards&#x27;});
-&lt;/script&gt;</textarea>
-								</div>
-							</div>
-							<script type="text/javascript">
-								jQuery(
-									function () {
-										jQuery('#<portlet:namespace />exposeWidget a').click(
-											function(event) {
-												var widgetUrl = jQuery('#<portlet:namespace />widgetURL').val();
-												var message = jQuery(this).parents('.lfr-share-icon').find('.widget-information').clone();
-													
-												var textarea = message.find('textarea');
-												textarea.focus(
-													function(event) {
-														Liferay.Util.selectAndCopy(this);
-													}
-												);
+						<c:if test="<%= widgetShowAddAppLink || facebookShowAddAppLink %>">
+							<div class="lfr-widget-bar">
+								<c:if test="<%= widgetShowAddAppLink %>">
+									<div class="lfr-share-icon expose-as-widget" id="<portlet:namespace />exposeWidget">
+										<liferay-ui:icon
+											image="../dock/add_content"
+											message="add-to-any-website"
+											url='javascript: ;'
+											method="get"
+											label="<%= true %>"
+										/>
+										<div class="widget-information">
+											<p><liferay-ui:message key="share-this-application-on-any-website" /></p>
 
-												Liferay.Popup(
-													{
-														width: 550,
-														modal: true,
-														title: '<liferay-ui:message key="add-to-any-website" />',
-														message: message[0]
+											<textarea class="lfr-textarea">&lt;script src=&quot;<%= themeDisplay.getPortalURL() %><%= themeDisplay.getPathContext() %>/html/js/liferay/widget.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+Liferay.Widget({ url: &#x27;<%= PortalUtil.getWidgetURL(portlet, themeDisplay) %>&#x27;});
+&lt;/script&gt;</textarea>
+										</div>
+									</div>
+
+									<script type="text/javascript">
+										jQuery(
+											function () {
+												jQuery('#<portlet:namespace />exposeWidget a').click(
+													function(event) {
+														var widgetUrl = jQuery('#<portlet:namespace />widgetURL').val();
+														var message = jQuery(this).parents('.lfr-share-icon').find('.widget-information').clone();
+
+														var textarea = message.find('textarea');
+
+														textarea.focus(
+															function(event) {
+																Liferay.Util.selectAndCopy(this);
+															}
+														);
+
+														Liferay.Popup(
+															{
+																width: 550,
+																modal: true,
+																title: '<liferay-ui:message key="add-to-any-website" />',
+																message: message[0]
+															}
+														);
+														message.show();
 													}
 												);
-												message.show();
 											}
 										);
-									}
-								);
-							</script>
+									</script>
+								</c:if>
+
+								<c:if test="<%= facebookShowAddAppLink %>">
+									<div class="lfr-share-icon expose-to-facebook">
+										<liferay-ui:icon
+											image="../social_bookmarks/facebook"
+											message="add-to-facebook"
+											url='<%= "http://www.facebook.com/add.php?api_key=" + facebookAPIKey + "&ref=pd" %>'
+											method="get"
+											label="<%= true %>"
+										/>
+									</div>
+								</c:if>
+							</div>
 						</c:if>
-					</div>
-				</c:if>
+					</c:if>
 				</div>
 			</c:when>
 			<c:otherwise>

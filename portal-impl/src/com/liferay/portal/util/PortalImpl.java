@@ -1952,6 +1952,26 @@ public class PortalImpl implements Portal {
 		}
 	}
 
+	public String getWidgetURL(Portlet portlet, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		String widgetURL =
+			themeDisplay.getPortalURL() + "/widget" +
+				getLayoutURL(themeDisplay) + "/-/";
+
+		FriendlyURLMapper friendlyURLMapper =
+			portlet.getFriendlyURLMapperInstance();
+
+		if (friendlyURLMapper != null) {
+			widgetURL += friendlyURLMapper.getMapping();
+		}
+		else {
+			widgetURL += portlet.getPortletId();
+		}
+
+		return widgetURL;
+	}
+
 	public boolean isMethodGet(PortletRequest req) {
 		HttpServletRequest httpReq = getHttpServletRequest(req);
 

@@ -1085,13 +1085,13 @@
 
 		<!-- Portlet Configuration -->
 
-		<action path="/portlet_configuration/edit_configuration" type="com.liferay.portlet.portletconfiguration.action.EditConfigurationAction">
-			<forward name="portlet.portlet_configuration.edit_configuration" path="portlet.portlet_configuration.edit_configuration" />
+		<action path="/portlet_configuration/edit_archived_setups" type="com.liferay.portlet.portletconfiguration.action.EditArchivedSetupsAction">
+			<forward name="portlet.portlet_configuration.edit_archived_setups" path="portlet.portlet_configuration.edit_archived_setups" />
 			<forward name="portlet.portlet_configuration.error" path="portlet.portlet_configuration.error" />
 		</action>
 
-		<action path="/portlet_configuration/edit_facebook" type="com.liferay.portlet.portletconfiguration.action.EditFacebookAction">
-			<forward name="portlet.portlet_configuration.edit_facebook" path="portlet.portlet_configuration.edit_facebook" />
+		<action path="/portlet_configuration/edit_configuration" type="com.liferay.portlet.portletconfiguration.action.EditConfigurationAction">
+			<forward name="portlet.portlet_configuration.edit_configuration" path="portlet.portlet_configuration.edit_configuration" />
 			<forward name="portlet.portlet_configuration.error" path="portlet.portlet_configuration.error" />
 		</action>
 
@@ -1100,8 +1100,8 @@
 			<forward name="portlet.portlet_configuration.error" path="portlet.portlet_configuration.error" />
 		</action>
 
-		<action path="/portlet_configuration/edit_archived_setups" type="com.liferay.portlet.portletconfiguration.action.EditArchivedSetupsAction">
-			<forward name="portlet.portlet_configuration.edit_archived_setups" path="portlet.portlet_configuration.edit_archived_setups" />
+		<action path="/portlet_configuration/edit_sharing" type="com.liferay.portlet.portletconfiguration.action.EditSharingAction">
+			<forward name="portlet.portlet_configuration.edit_sharing" path="portlet.portlet_configuration.edit_sharing" />
 			<forward name="portlet.portlet_configuration.error" path="portlet.portlet_configuration.error" />
 		</action>
 

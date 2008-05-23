@@ -850,12 +850,12 @@
 		<put name="portlet_content" value="/portlet/portlet_configuration/edit_configuration.jsp" />
 	</definition>
 
-	<definition name="portlet.portlet_configuration.edit_facebook" extends="portlet.portlet_configuration">
-		<put name="portlet_content" value="/portlet/portlet_configuration/edit_facebook.jsp" />
-	</definition>
-
 	<definition name="portlet.portlet_configuration.edit_permissions" extends="portlet.portlet_configuration">
 		<put name="portlet_content" value="/portlet/portlet_configuration/edit_permissions.jsp" />
+	</definition>
+
+	<definition name="portlet.portlet_configuration.edit_sharing" extends="portlet.portlet_configuration">
+		<put name="portlet_content" value="/portlet/portlet_configuration/edit_sharing.jsp" />
 	</definition>
 
 	<definition name="portlet.portlet_configuration.edit_supported_clients" extends="portlet.portlet_configuration">

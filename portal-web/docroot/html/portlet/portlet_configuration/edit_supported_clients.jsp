@@ -26,6 +26,7 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
+String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL");
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
@@ -34,15 +35,6 @@ PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getPortletSetup(
 Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
 
 Set allPortletModes = portlet.getAllPortletModes();
-
-PortletURL supportedClientsRedirect = new PortletURLImpl(request, PortletKeys.PORTLET_CONFIGURATION, plid.longValue(), PortletRequest.RENDER_PHASE);
-
-supportedClientsRedirect.setWindowState(WindowState.MAXIMIZED);
-supportedClientsRedirect.setPortletMode(PortletMode.VIEW);
-
-supportedClientsRedirect.setParameter("struts_action", "/portlet_configuration/edit_supported_clients");
-supportedClientsRedirect.setParameter("redirect", redirect);
-supportedClientsRedirect.setParameter("portletResource", portletResource);
 %>
 
 <liferay-util:include page="/html/portlet/portlet_configuration/tabs1.jsp">
@@ -50,8 +42,8 @@ supportedClientsRedirect.setParameter("portletResource", portletResource);
 </liferay-util:include>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_supported_clients" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
-<input name="<portlet:namespace />supportedClientsRedirect" type="hidden" value="<%= supportedClientsRedirect %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(currentURL) %>" />
+<input name="<portlet:namespace />returnToFullPageURL" type="hidden" value="<%= HtmlUtil.escape(returnToFullPageURL) %>" />
 <input name="<portlet:namespace />portletResource" type="hidden" value="<%= HtmlUtil.escape(portletResource) %>" />
 
 <%

@@ -70,9 +70,7 @@ public class EditSupportedClientsAction extends EditConfigurationAction {
 
 		updateSupportedClients(portlet, req);
 
-		String redirect = ParamUtil.getString(req, "supportedClientsRedirect");
-
-		sendRedirect(req, res, redirect);
+		sendRedirect(req, res);
 	}
 
 	public ActionForward render(

@@ -43,12 +43,12 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="EditFacebookAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditSharingAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  *
  */
-public class EditFacebookAction extends EditConfigurationAction {
+public class EditSharingAction extends EditConfigurationAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
@@ -66,7 +66,27 @@ public class EditFacebookAction extends EditConfigurationAction {
 			setForward(req, "portlet.portlet_configuration.error");
 		}
 
-		updateFacebook(portlet, req);
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		Layout layout = themeDisplay.getLayout();
+
+		PortletPreferences prefs =
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				layout, portlet.getPortletId());
+
+		String tabs2 = ParamUtil.getString(req, "tabs2");
+
+		if (tabs2.equals("any-website")) {
+			updateAnyWebsite(req, prefs);
+		}
+		else if (tabs2.equals("facebook")) {
+			updateFacebook(req, prefs);
+		}
+
+		prefs.store();
+
+		sendRedirect(req, res);
 	}
 
 	public ActionForward render(
@@ -88,16 +108,22 @@ public class EditFacebookAction extends EditConfigurationAction {
 		res.setTitle(getTitle(portlet, req));
 
 		return mapping.findForward(
-			getForward(req, "portlet.portlet_configuration.edit_facebook"));
+			getForward(req, "portlet.portlet_configuration.edit_sharing"));
 	}
 
-	protected void updateFacebook(Portlet portlet, ActionRequest req)
+	protected void updateAnyWebsite(ActionRequest req, PortletPreferences prefs)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		boolean widgetShowAddAppLink = ParamUtil.getBoolean(
+			req, "widgetShowAddAppLink");
 
-		Layout layout = themeDisplay.getLayout();
+		prefs.setValue(
+			"lfr-widget-show-add-app-link",
+			String.valueOf(widgetShowAddAppLink));
+	}
+
+	protected void updateFacebook(ActionRequest req, PortletPreferences prefs)
+		throws Exception {
 
 		String facebookAPIKey = ParamUtil.getString(req, "facebookAPIKey");
 		String facebookCanvasPageURL = ParamUtil.getString(
@@ -105,17 +131,11 @@ public class EditFacebookAction extends EditConfigurationAction {
 		boolean facebookShowAddAppLink = ParamUtil.getBoolean(
 			req, "facebookShowAddAppLink");
 
-		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(
-				layout, portlet.getPortletId());
-
 		prefs.setValue("lfr-facebook-api-key", facebookAPIKey);
 		prefs.setValue("lfr-facebook-canvas-page-url", facebookCanvasPageURL);
 		prefs.setValue(
 			"lfr-facebook-show-add-app-link",
 			String.valueOf(facebookShowAddAppLink));
-
-		prefs.store();
 	}
 
 }

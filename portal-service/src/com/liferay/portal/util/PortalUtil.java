@@ -630,6 +630,13 @@ public class PortalUtil {
 		return getPortal().getUserValue(userId, param, defaultValue);
 	}
 
+	public static String getWidgetURL(
+			Portlet portlet, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return getPortal().getWidgetURL(portlet, themeDisplay);
+	}
+
 	public static boolean isMethodGet(PortletRequest req) {
 		return getPortal().isMethodGet(req);
 	}

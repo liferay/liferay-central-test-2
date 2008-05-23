@@ -357,6 +357,9 @@ public interface Portal {
 	public String getUserValue(long userId, String param, String defaultValue)
 		throws SystemException;
 
+	public String getWidgetURL(Portlet portlet, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException;
+
 	public boolean isMethodGet(PortletRequest req);
 
 	public boolean isMethodPost(PortletRequest req);
