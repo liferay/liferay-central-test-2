@@ -438,12 +438,12 @@ public class PropsUtil {
 	public static final String OPEN_SSO_SERVICE_URL = "open.sso.service.url";
 
 	public static final String OPEN_SSO_FIRST_NAME_ATTR = "open.sso.first.name.attr";
-    
-    public static final String OPEN_SSO_LAST_NAME_ATTR = "open.sso.last.name.attr";
-    
-    public static final String OPEN_SSO_SCREEN_NAME_ATTR = "open.sso.screen.name.attr";
-    
-    public static final String OPEN_SSO_EMAIL_ATTR = "open.sso.email.attr";
+
+	public static final String OPEN_SSO_LAST_NAME_ATTR = "open.sso.last.name.attr";
+
+	public static final String OPEN_SSO_SCREEN_NAME_ATTR = "open.sso.screen.name.attr";
+
+	public static final String OPEN_SSO_EMAIL_ADDRESS_ATTR = "open.sso.email.address.attr";
 
 	// Authentication Pipeline
 
@@ -1033,7 +1033,7 @@ public class PropsUtil {
 
 	public static final String DL_HOOK_FILE_SYSTEM_ROOT_DIR = "dl.hook.file.system.root.dir";
 
-    public static final String DL_HOOK_S3_ACCESS_KEY = "dl.hook.s3.access.key";
+	public static final String DL_HOOK_S3_ACCESS_KEY = "dl.hook.s3.access.key";
 
 	public static final String DL_HOOK_S3_SECRET_KEY = "dl.hook.s3.secret.key";
 
@@ -1237,17 +1237,17 @@ public class PropsUtil {
 
 	// My Places Portlet
 
-    public static final String MY_PLACES_SHOW_USER_PUBLIC_SITES_WITH_NO_LAYOUTS = "my.places.show.user.public.sites.with.no.layouts";
+	public static final String MY_PLACES_SHOW_USER_PUBLIC_SITES_WITH_NO_LAYOUTS = "my.places.show.user.public.sites.with.no.layouts";
 
 	public static final String MY_PLACES_SHOW_USER_PRIVATE_SITES_WITH_NO_LAYOUTS = "my.places.show.user.private.sites.with.no.layouts";
 
-    public static final String MY_PLACES_SHOW_ORGANIZATION_PUBLIC_SITES_WITH_NO_LAYOUTS = "my.places.show.organization.public.sites.with.no.layouts";
+	public static final String MY_PLACES_SHOW_ORGANIZATION_PUBLIC_SITES_WITH_NO_LAYOUTS = "my.places.show.organization.public.sites.with.no.layouts";
 
-    public static final String MY_PLACES_SHOW_ORGANIZATION_PRIVATE_SITES_WITH_NO_LAYOUTS = "my.places.show.organization.private.sites.with.no.layouts";
+	public static final String MY_PLACES_SHOW_ORGANIZATION_PRIVATE_SITES_WITH_NO_LAYOUTS = "my.places.show.organization.private.sites.with.no.layouts";
 
-    public static final String MY_PLACES_SHOW_COMMUNITY_PUBLIC_SITES_WITH_NO_LAYOUTS = "my.places.show.community.public.sites.with.no.layouts";
+	public static final String MY_PLACES_SHOW_COMMUNITY_PUBLIC_SITES_WITH_NO_LAYOUTS = "my.places.show.community.public.sites.with.no.layouts";
 
-    public static final String MY_PLACES_SHOW_COMMUNITY_PRIVATE_SITES_WITH_NO_LAYOUTS = "my.places.show.community.private.sites.with.no.layouts";
+	public static final String MY_PLACES_SHOW_COMMUNITY_PRIVATE_SITES_WITH_NO_LAYOUTS = "my.places.show.community.private.sites.with.no.layouts";
 
 	// Nested Portlet Portlet
 

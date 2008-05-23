@@ -163,7 +163,15 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Open SSO Filter</filter-name>
+		<url-pattern>/group/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Open SSO Filter</filter-name>
 		<url-pattern>/user/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Open SSO Filter</filter-name>
+		<url-pattern>/web/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Auto Login Filter</filter-name>
@@ -401,7 +409,7 @@
 		<filter-name>Velocity Filter</filter-name>
 		<url-pattern>*.css</url-pattern>
 	</filter-mapping>-->
-    <listener>
+	<listener>
 		<listener-class>com.liferay.portal.spring.context.PortalContextLoaderListener</listener-class>
 	</listener>
 	<listener>

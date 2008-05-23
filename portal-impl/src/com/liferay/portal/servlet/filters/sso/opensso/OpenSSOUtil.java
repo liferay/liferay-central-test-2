@@ -24,6 +24,7 @@ package com.liferay.portal.servlet.filters.sso.opensso;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.auth.AutoLoginException;
 import com.liferay.util.CookieUtil;
 
@@ -38,28 +39,19 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="OpenSSOUtil.java.html"><b><i>View Source</i></b></a>
  *
- * OpenSSO REST services:
- * http://localhost/opensso/identity/attributes
- * http://localhost/opensso/identity/istokenvalid
- * http://localhost/opensso/identity/getCookieNameForToken
- * http://localhost/opensso/identity/getCookieNamesToForward
- *
- * REST service return codes:
- * 200 OK
- * 401 AuthN Failed, AuthZ Failed, Permission Denied, Identity not present
- *     TokenExpired, Invalid Token, etc.
- * 500 GenericFailure (Internal server failure, exceptions on server)
- * 501 Unsupported Operations
+ * <p>
+ * See http://support.liferay.com/browse/LEP-5943.
+ * </p>
  *
  * @author Prashant Dighe
  * @author Brian Wing Shun Chan
@@ -67,223 +59,271 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class OpenSSOUtil {
 
-    public static Map<String, String> getAttributes(HttpServletRequest req,
-        String serviceUrl) throws AutoLoginException {
+	public static Map<String, String> getAttributes(
+			HttpServletRequest req, String serviceUrl)
+		throws AutoLoginException {
 
-        Map<String, String> nameValues = new HashMap<String, String>();
+		return _instance._getAttributes(req, serviceUrl);
+	}
 
-        String url = serviceUrl + _GET_ATTRIBUTES;
+	public static String getSubjectId(
+		HttpServletRequest req, String serviceUrl) {
 
-        try {
-            String formData = "dummy";
-            URL urlObj = new URL(url);
-            HttpURLConnection conn = (HttpURLConnection)urlObj.openConnection();
+		return _instance._getSubjectId(req, serviceUrl);
+	}
 
-            List<String> cookieNames = getCookieForwardList(serviceUrl);
-            forwardCookies(req, cookieNames, conn);
+	public static boolean isAuthenticated(
+			HttpServletRequest req, String serviceUrl)
+		throws IOException {
 
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-type",
-                "application/x-www-form-urlencoded");
+		return _instance._isAuthenticated(req, serviceUrl);
+	}
 
-            conn.setDoOutput(true);
-            OutputStreamWriter osw =
-                new OutputStreamWriter(conn.getOutputStream());
-            osw.write(formData);
-            osw.flush();
+	private OpenSSOUtil() {
+	}
 
-            int ret = conn.getResponseCode();
-            if (ret == HttpURLConnection.HTTP_OK ) {
-                BufferedReader reader = new BufferedReader(
-                    new InputStreamReader((InputStream)conn.getContent()));
+	private Map<String, String> _getAttributes(
+			HttpServletRequest req, String serviceUrl)
+		throws AutoLoginException {
 
-                String line = null;
-                while ((line = reader.readLine()) != null) {
-                    if (line.startsWith("userdetails.attribute.name=")) {
-                        String aname = line.replaceFirst(
-                            "userdetails.attribute.name=", "");
-                        line = reader.readLine();
-                        if (line.startsWith("userdetails.attribute.value=")) {
-                            String avalue = line.replaceFirst(
-                                "userdetails.attribute.value=", "");
-                            nameValues.put(aname, avalue);
-                        } else {
-                            throw new AutoLoginException(
-                                "Error reading user attributes");
-                        }
-                    }
-                }
+		Map<String, String> nameValues = new HashMap<String, String>();
 
-            } else if (_log.isDebugEnabled()) {
-                _log.debug("OpenSSO getAttributes returned " + ret);
-            }
-        } catch(MalformedURLException mfue) {
-            _log.error(mfue.getMessage());
-            if (_log.isDebugEnabled()) {
-                _log.debug(mfue);
-            }
-        } catch(IOException ioe) {
-            _log.error(ioe.getMessage());
-            if (_log.isDebugEnabled()) {
-                _log.debug(ioe);
-            }
-        }
-        return nameValues;
-    }
+		String url = serviceUrl + _GET_ATTRIBUTES;
 
-    /*
-     * @returns subject identifier string for an authenticated user
-     */
-    public static String getSubjectId(HttpServletRequest req,
-        String serviceUrl) {
-        String cookie = getCookieForwardList(serviceUrl).get(0);
-        return CookieUtil.get(req, cookie);
-    }
+		try {
+			URL urlObj = new URL(url);
 
-    /*
-     * Returns true if the user is authenticated.
-     */
-    public static boolean isAuthenticated(HttpServletRequest req,
-        String serviceUrl) throws Exception {
+			HttpURLConnection urlc = (HttpURLConnection)urlObj.openConnection();
 
-        boolean authenticated = false;
+			urlc.setDoOutput(true);
+			urlc.setRequestMethod("POST");
+			urlc.setRequestProperty(
+				"Content-type", "application/x-www-form-urlencoded");
 
-        String url = serviceUrl + _VALIDATE_OP;
-        try {
-            URL urlObj = new URL(url);
-            String formData = "dummy";
+			String[] cookieNames = _getCookieNames(serviceUrl);
 
-            HttpURLConnection conn = (HttpURLConnection)urlObj.openConnection();
+			_setCookieProperty(req, urlc, cookieNames);
 
-            List<String> cookieNames = getCookieForwardList(serviceUrl);
-            forwardCookies(req, cookieNames, conn);
+			OutputStreamWriter osw = new OutputStreamWriter(
+				urlc.getOutputStream());
 
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-type",
-                "application/x-www-form-urlencoded");
+			osw.write("dummy");
 
-            conn.setDoOutput(true);
-            OutputStreamWriter osw =
-                new OutputStreamWriter(conn.getOutputStream());
-            osw.write(formData);
-            osw.flush();
+			osw.flush();
 
-            int ret = conn.getResponseCode();
-            if (ret == HttpURLConnection.HTTP_OK ) {
-                authenticated = true;
-            } else if (_log.isDebugEnabled()) {
-                _log.debug("OpenSSO Auth returned " + ret);
-            }
-        } catch(MalformedURLException mfue) {
-            _log.error(mfue.getMessage());
-            throw new Exception(mfue);
-        } catch(IOException ioe) {
-            _log.error(ioe.getMessage());
-            throw new Exception(ioe);
-        }
+			int responseCode = urlc.getResponseCode();
 
-        return authenticated;
-    }
+			if (responseCode == HttpURLConnection.HTTP_OK) {
+				BufferedReader br = new BufferedReader(
+					new InputStreamReader((InputStream)urlc.getContent()));
 
-    private static void forwardCookies(HttpServletRequest req,
-        List<String> cookieNames, HttpURLConnection conn) {
-        StringBuffer cookies = new StringBuffer();
+				String line = null;
 
-        for(String cName: cookieNames) {
-            String cValue = CookieUtil.get(req, cName);
-            cookies.append(cName)
-                   .append('=')
-                   .append(cValue)
-                   .append(';');
-        }
+				while ((line = br.readLine()) != null) {
+					if (line.startsWith("userdetails.attribute.name=")) {
+						String name = line.replaceFirst(
+							"userdetails.attribute.name=", "");
 
-        if (cookies.length() > 0) {
-            conn.setRequestProperty("Cookie", cookies.toString());
-        }
-    }
-    
-    /*
-     * Retrieves and returns the names of cookies from the service
-     */
-    private static List<String> getCookieForwardList(String serviceUrl) {
+						line = br.readLine();
 
-        if (_cookieForwardList.isEmpty()) {
+						if (line.startsWith("userdetails.attribute.value=")) {
+							String value = line.replaceFirst(
+								"userdetails.attribute.value=", "");
 
-            //this block should execute only once in the lifetime of JVM
+							nameValues.put(name, value);
+						}
+						else {
+							throw new AutoLoginException(
+								"Invalid user attribute: " + line);
+						}
+					}
+				}
+			}
+			else if (_log.isDebugEnabled()) {
+				_log.debug("Attributes response code " + responseCode);
+			}
+		}
+		catch (MalformedURLException mfue) {
+			_log.error(mfue.getMessage());
 
-            String cookieName = null;
-            try {
-                String url = serviceUrl + _GET_COOKIE_NAME;
-                URL urlObj = new URL(url);
-                HttpURLConnection conn =
-                    (HttpURLConnection)urlObj.openConnection();
-                BufferedReader reader = new BufferedReader(
-                    new InputStreamReader((InputStream)conn.getContent()));
+			if (_log.isDebugEnabled()) {
+				_log.debug(mfue, mfue);
+			}
+		}
+		catch (IOException ioe) {
+			_log.error(ioe.getMessage());
 
-                if (conn.getResponseCode() != HttpURLConnection.HTTP_OK &&
-                    _log.isDebugEnabled()) {
-                    _log.debug("Error during operation " + _GET_COOKIE_NAME
-                        + ", response = " + conn.getResponseCode());
-                } else {
-                    String line = null;
-                    while ((line = reader.readLine()) != null) {
-                        if (line.startsWith("string=")) {
-                            line = line.replaceFirst("string=", "");
-                            cookieName = line;
-                        }
-                    }
-                }
+			if (_log.isDebugEnabled()) {
+				_log.debug(ioe, ioe);
+			}
+		}
 
-                url = serviceUrl + _GET_COOKIE_LIST;
-                urlObj = new URL(url);
-                conn = (HttpURLConnection)urlObj.openConnection();
-                reader = new BufferedReader(
-                    new InputStreamReader((InputStream)conn.getContent()));
+		return nameValues;
+	}
 
-                if (conn.getResponseCode() != HttpURLConnection.HTTP_OK &&
-                    _log.isDebugEnabled()) {
-                    _log.debug("Error during operation " + _GET_COOKIE_LIST
-                        + ", response = " + conn.getResponseCode());
-                } else {
-                    String line = null;
-                    while ((line = reader.readLine()) != null) {
-                        if (line.startsWith("string=")) {
-                            line = line.replaceFirst("string=", "");
-                            if (cookieName.equals(line)) {
+	private String[] _getCookieNames(String serviceUrl) {
+		String[] cookieNames = _cookieNamesMap.get(serviceUrl);
 
-                                //first in the list is the subjectId cookie name
+		if (cookieNames != null) {
+			return cookieNames;
+		}
 
-                                _cookieForwardList.add(0, cookieName);
-                            } else {
-                                _cookieForwardList.add(line);
-                            }
-                        }
-                    }
-                }
-            } catch(IOException ioe) {
-                if (_log.isDebugEnabled()) {
-                    _log.debug(ioe);
-                }
-            }
-        }
+		List<String> cookieNamesList = new ArrayList<String>();
 
-        return _cookieForwardList;
-    }    
-    
-    private static final String _GET_ATTRIBUTES = "/identity/attributes";
-    private static final String _VALIDATE_OP = "/identity/isTokenValid";
-    private static final String _GET_COOKIE_NAME =
-        "/identity/getCookieNameForToken";
-    private static final String _GET_COOKIE_LIST =
-        "/identity/getCookieNamesToForward";
+		try {
+			String cookieName = null;
 
-    /*
-     * Cached item - use getter method only
-     * The first in the list is the subject cookie name
-     */
-    private static List<String> _cookieForwardList =
-        Collections.synchronizedList(new ArrayList<String>());
+			String url = serviceUrl + _GET_COOKIE_NAME;
+
+			URL urlObj = new URL(url);
+
+			HttpURLConnection urlc = (HttpURLConnection)urlObj.openConnection();
+
+			BufferedReader br = new BufferedReader(
+				new InputStreamReader((InputStream)urlc.getContent()));
+
+			int responseCode = urlc.getResponseCode();
+
+			if (responseCode != HttpURLConnection.HTTP_OK) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(url + " has response code " + responseCode);
+				}
+			}
+			else {
+				String line = null;
+
+				while ((line = br.readLine()) != null) {
+					if (line.startsWith("string=")) {
+						line = line.replaceFirst("string=", "");
+
+						cookieName = line;
+					}
+				}
+			}
+
+			url = serviceUrl + _GET_COOKIE_NAMES;
+
+			urlObj = new URL(url);
+
+			urlc = (HttpURLConnection)urlObj.openConnection();
+
+			br = new BufferedReader(
+				new InputStreamReader((InputStream)urlc.getContent()));
+
+			if (urlc.getResponseCode() != HttpURLConnection.HTTP_OK) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(url + " has response code " + responseCode);
+				}
+			}
+			else {
+				String line = null;
+
+				while ((line = br.readLine()) != null) {
+					if (line.startsWith("string=")) {
+						line = line.replaceFirst("string=", "");
+
+						if (cookieName.equals(line)) {
+							cookieNamesList.add(0, cookieName);
+						}
+						else {
+							cookieNamesList.add(line);
+						}
+					}
+				}
+			}
+		}
+		catch (IOException ioe) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(ioe, ioe);
+			}
+		}
+
+		cookieNames = cookieNamesList.toArray(
+			new String[cookieNamesList.size()]);
+
+		_cookieNamesMap.put(serviceUrl, cookieNames);
+
+		return cookieNames;
+	}
+
+	private String _getSubjectId(HttpServletRequest req, String serviceUrl) {
+		String cookieName = _getCookieNames(serviceUrl)[0];
+
+		return CookieUtil.get(req, cookieName);
+	}
+
+	private boolean _isAuthenticated(HttpServletRequest req, String serviceUrl)
+		throws IOException {
+
+		boolean authenticated = false;
+
+		String url = serviceUrl + _VALIDATE_TOKEN;
+
+		URL urlObj = new URL(url);
+
+		HttpURLConnection urlc = (HttpURLConnection)urlObj.openConnection();
+
+		urlc.setDoOutput(true);
+		urlc.setRequestMethod("POST");
+		urlc.setRequestProperty(
+			"Content-type", "application/x-www-form-urlencoded");
+
+		String[] cookieNames = _getCookieNames(serviceUrl);
+
+		_setCookieProperty(req, urlc, cookieNames);
+
+		OutputStreamWriter osw = new OutputStreamWriter(urlc.getOutputStream());
+
+		osw.write("dummy");
+
+		osw.flush();
+
+		int responseCode = urlc.getResponseCode();
+
+		if (responseCode == HttpURLConnection.HTTP_OK) {
+			authenticated = true;
+		}
+		else if (_log.isDebugEnabled()) {
+			_log.debug("Authentication response code " + responseCode);
+		}
+
+		return authenticated;
+	}
+
+	private void _setCookieProperty(
+		HttpServletRequest req, HttpURLConnection urlc, String[] cookieNames) {
+
+		StringBuilder sb = new StringBuilder();
+
+		for (String cookieName : cookieNames) {
+			String cookieValue = CookieUtil.get(req, cookieName);
+
+			sb.append(cookieName);
+			sb.append(StringPool.EQUAL);
+			sb.append(cookieValue);
+			sb.append(StringPool.SEMICOLON);
+		}
+
+		if (sb.length() > 0) {
+			urlc.setRequestProperty("Cookie", sb.toString());
+		}
+	}
+
+	private static final String _GET_ATTRIBUTES = "/identity/attributes";
+
+	private static final String _GET_COOKIE_NAME =
+		"/identity/getCookieNameForToken";
+
+	private static final String _GET_COOKIE_NAMES =
+		"/identity/getCookieNamesToForward";
+
+	private static final String _VALIDATE_TOKEN = "/identity/isTokenValid";
 
 	private static Log _log = LogFactoryUtil.getLog(OpenSSOUtil.class);
+
+	private static OpenSSOUtil _instance = new OpenSSOUtil();
+
+	private Map<String, String[]> _cookieNamesMap =
+		new ConcurrentHashMap<String, String[]>();
 
 }

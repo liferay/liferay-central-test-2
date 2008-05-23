@@ -693,14 +693,8 @@ public class PropsValues {
 	public static final boolean OPEN_SSO_AUTH_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.OPEN_SSO_AUTH_ENABLED));
 
-	public static final String OPEN_SSO_LOGIN_URL =
-		PropsUtil.get(PropsUtil.OPEN_SSO_LOGIN_URL);
-
-	public static final String OPEN_SSO_LOGOUT_URL =
-		PropsUtil.get(PropsUtil.OPEN_SSO_LOGOUT_URL);
-
-	public static final String OPEN_SSO_SERVICE_URL =
-		PropsUtil.get(PropsUtil.OPEN_SSO_SERVICE_URL);
+	public static final String OPEN_SSO_EMAIL_ADDRESS_ATTR =
+		PropsUtil.get(PropsUtil.OPEN_SSO_EMAIL_ADDRESS_ATTR);
 
 	public static final String OPEN_SSO_FIRST_NAME_ATTR =
 		PropsUtil.get(PropsUtil.OPEN_SSO_FIRST_NAME_ATTR);
@@ -708,11 +702,17 @@ public class PropsValues {
 	public static final String OPEN_SSO_LAST_NAME_ATTR =
 		PropsUtil.get(PropsUtil.OPEN_SSO_LAST_NAME_ATTR);
 
+	public static final String OPEN_SSO_LOGIN_URL =
+		PropsUtil.get(PropsUtil.OPEN_SSO_LOGIN_URL);
+
+	public static final String OPEN_SSO_LOGOUT_URL =
+		PropsUtil.get(PropsUtil.OPEN_SSO_LOGOUT_URL);
+
 	public static final String OPEN_SSO_SCREEN_NAME_ATTR =
 		PropsUtil.get(PropsUtil.OPEN_SSO_SCREEN_NAME_ATTR);
 
-	public static final String OPEN_SSO_EMAIL_ATTR =
-		PropsUtil.get(PropsUtil.OPEN_SSO_EMAIL_ATTR);
+	public static final String OPEN_SSO_SERVICE_URL =
+		PropsUtil.get(PropsUtil.OPEN_SSO_SERVICE_URL);
 
 	public static final boolean OPENOFFICE_SERVER_ENABLED =
 		GetterUtil.getBoolean(
@@ -864,7 +864,7 @@ public class PropsValues {
 			PropsUtil.get(PropsUtil.SESSION_TRACKER_PERSISTENCE_ENABLED));
 
 	public static final String[] SHARED_SESSION_ATTRIBUTES =
-        PropsUtil.getArray(PropsUtil.SESSION_SHARED_ATTRIBUTES);
+		PropsUtil.getArray(PropsUtil.SESSION_SHARED_ATTRIBUTES);
 
 	public static final String STRUTS_PORTLET_REQUEST_PROCESSOR = PropsUtil.get(
 		PropsUtil.STRUTS_PORTLET_REQUEST_PROCESSOR);

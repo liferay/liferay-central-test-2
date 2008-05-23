@@ -49,8 +49,8 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <a href="OpenSSOAutoLogin.java.html"><b><i>View Source</i></b></a>
  *
- * @author Prashant Dighe
  * @author Brian Wing Shun Chan
+ * @author Prashant Dighe
  *
  */
 public class OpenSSOAutoLogin implements AutoLogin {
@@ -77,26 +77,26 @@ public class OpenSSOAutoLogin implements AutoLogin {
 				return credentials;
 			}
 
-            String firstNameAttr = PrefsPropsUtil.getString(
-                companyId, PropsUtil.OPEN_SSO_FIRST_NAME_ATTR,
-                PropsValues.OPEN_SSO_FIRST_NAME_ATTR);
-            String lastNameAttr = PrefsPropsUtil.getString(
-                companyId, PropsUtil.OPEN_SSO_LAST_NAME_ATTR,
-                PropsValues.OPEN_SSO_LAST_NAME_ATTR);
-            String emailAttr = PrefsPropsUtil.getString(
-                companyId, PropsUtil.OPEN_SSO_EMAIL_ATTR,
-                PropsValues.OPEN_SSO_EMAIL_ATTR);
-            String screenNameAttr = PrefsPropsUtil.getString(
-                companyId, PropsUtil.OPEN_SSO_SCREEN_NAME_ATTR,
-                PropsValues.OPEN_SSO_SCREEN_NAME_ATTR);
+			String screenNameAttr = PrefsPropsUtil.getString(
+				companyId, PropsUtil.OPEN_SSO_SCREEN_NAME_ATTR,
+				PropsValues.OPEN_SSO_SCREEN_NAME_ATTR);
+			String emailAddressAttr = PrefsPropsUtil.getString(
+				companyId, PropsUtil.OPEN_SSO_EMAIL_ADDRESS_ATTR,
+				PropsValues.OPEN_SSO_EMAIL_ADDRESS_ATTR);
+			String firstNameAttr = PrefsPropsUtil.getString(
+				companyId, PropsUtil.OPEN_SSO_FIRST_NAME_ATTR,
+				PropsValues.OPEN_SSO_FIRST_NAME_ATTR);
+			String lastNameAttr = PrefsPropsUtil.getString(
+				companyId, PropsUtil.OPEN_SSO_LAST_NAME_ATTR,
+				PropsValues.OPEN_SSO_LAST_NAME_ATTR);
 
-            Map<String, String> nameValues =
-                OpenSSOUtil.getAttributes(req, serviceUrl);
+			Map<String, String> nameValues = OpenSSOUtil.getAttributes(
+				req, serviceUrl);
 
-            String firstName = nameValues.get(firstNameAttr);
-            String lastName = nameValues.get(lastNameAttr);
-            String screenName = nameValues.get(screenNameAttr);
-            String emailAddress = nameValues.get(emailAttr);
+			String screenName = nameValues.get(screenNameAttr);
+			String emailAddress = nameValues.get(emailAddressAttr);
+			String firstName = nameValues.get(firstNameAttr);
+			String lastName = nameValues.get(lastNameAttr);
 
 			User user = null;
 
@@ -105,8 +105,8 @@ public class OpenSSOAutoLogin implements AutoLogin {
 					companyId, screenName);
 			}
 			catch (NoSuchUserException nsue) {
-                ThemeDisplay themeDisplay =
-                    (ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+				ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+					WebKeys.THEME_DISPLAY);
 
 				Locale locale = LocaleUtil.getDefault();
 
@@ -120,7 +120,7 @@ public class OpenSSOAutoLogin implements AutoLogin {
 
 				user = addUser(
 					companyId, firstName, lastName, emailAddress, screenName,
-                        locale);
+					locale);
 			}
 
 			credentials = new String[3];
@@ -137,9 +137,9 @@ public class OpenSSOAutoLogin implements AutoLogin {
 	}
 
 	protected User addUser(
-		long companyId, String firstName, String lastName, 
-        String emailAddress, String screenName, Locale locale) 
-        throws Exception {
+			long companyId, String firstName, String lastName,
+			String emailAddress, String screenName, Locale locale)
+		throws Exception {
 
 		long creatorUserId = 0;
 		boolean autoPassword = false;
@@ -159,9 +159,9 @@ public class OpenSSOAutoLogin implements AutoLogin {
 
 		return UserLocalServiceUtil.addUser(
 			creatorUserId, companyId, autoPassword, password1, password2,
-            autoScreenName, screenName, emailAddress, locale, firstName,
-            middleName, lastName, prefixId, suffixId, male, birthdayMonth,
-            birthdayDay, birthdayYear, jobTitle, organizationIds, sendEmail);
+			autoScreenName, screenName, emailAddress, locale, firstName,
+			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
+			birthdayDay, birthdayYear, jobTitle, organizationIds, sendEmail);
 	}
 
 	private static Log _log = LogFactory.getLog(OpenSSOAutoLogin.class);

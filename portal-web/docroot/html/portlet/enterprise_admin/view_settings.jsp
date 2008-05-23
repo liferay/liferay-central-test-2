@@ -199,23 +199,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 				</tr>
 				<tr>
 					<td>
-						<liferay-ui:message key="first-name" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />firstNameAttr" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_FIRST_NAME_ATTR, PropsValues.OPEN_SSO_FIRST_NAME_ATTR) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="last-name" />
-					</td>
-					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />lastNameAttr" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_LAST_NAME_ATTR, PropsValues.OPEN_SSO_LAST_NAME_ATTR) %>" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="screen-name" />
+						<liferay-ui:message key="screen-name-attribute" />
 					</td>
 					<td>
 						<input class="lfr-input-text" name="<portlet:namespace />screenNameAttr" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_SCREEN_NAME_ATTR, PropsValues.OPEN_SSO_SCREEN_NAME_ATTR) %>" />
@@ -223,10 +207,26 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 				</tr>
 				<tr>
 					<td>
-						<liferay-ui:message key="email-address" />
+						<liferay-ui:message key="email-address-attribute" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />emailAttr" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_EMAIL_ATTR, PropsValues.OPEN_SSO_EMAIL_ATTR) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />emailAddressAttr" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_EMAIL_ADDRESS_ATTR, PropsValues.OPEN_SSO_EMAIL_ADDRESS_ATTR) %>" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="first-name-attribute" />
+					</td>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />firstNameAttr" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_FIRST_NAME_ATTR, PropsValues.OPEN_SSO_FIRST_NAME_ATTR) %>" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="last-name-attribute" />
+					</td>
+					<td>
+						<input class="lfr-input-text" name="<portlet:namespace />lastNameAttr" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_LAST_NAME_ATTR, PropsValues.OPEN_SSO_LAST_NAME_ATTR) %>" />
 					</td>
 				</tr>
 				</table>
