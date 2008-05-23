@@ -87,7 +87,7 @@ public class SitemapUtil {
 				Element url = element.addElement("url");
 
 				String layoutURL =
-					PortalUtil.getPortalURL(themeDisplay) +
+					themeDisplay.getPortalURL() +
 						PortalUtil.getLayoutURL(layout, themeDisplay);
 
 				url.addElement("loc").addText(encodeXML(layoutURL));

@@ -25,6 +25,7 @@ package com.liferay.portlet.communities.action;
 import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -33,8 +34,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.SitemapUtil;
 import com.liferay.portal.util.WebKeys;
-
-import java.io.OutputStreamWriter;
+import com.liferay.util.servlet.ServletResponseUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -59,9 +59,10 @@ public class SitemapAction extends Action {
 			HttpServletResponse res)
 		throws Exception {
 
-		OutputStreamWriter out = null;
-
 		try {
+			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
 			long groupId = ParamUtil.getLong(req, "groupId");
 			boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
 
@@ -83,25 +84,17 @@ public class SitemapAction extends Action {
 				layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(host);
 			}
 
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
 			String sitemap = SitemapUtil.getSitemap(
 				layoutSet.getGroupId(), layoutSet.isPrivateLayout(),
 				themeDisplay);
 
-			if (!res.isCommitted()) {
-				res.setContentType(ContentTypes.TEXT_XML_UTF8);
-
-				out = new OutputStreamWriter(res.getOutputStream());
-
-				out.write(sitemap);
-			}
-
+			ServletResponseUtil.sendFile(
+				res, null, sitemap.getBytes(StringPool.UTF8),
+				ContentTypes.TEXT_XML_UTF8);
 		}
-		catch (NoSuchLayoutSetException e) {
+		catch (NoSuchLayoutSetException nslse) {
 			PortalUtil.sendError(
-				HttpServletResponse.SC_NOT_FOUND, e, req, res);
+				HttpServletResponse.SC_NOT_FOUND, nslse, req, res);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -110,12 +103,6 @@ public class SitemapAction extends Action {
 
 			PortalUtil.sendError(
 				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, req, res);
-		}
-		finally {
-			if (out != null) {
-				out.flush();
-				out.close();
-			}
 		}
 
 		return null;

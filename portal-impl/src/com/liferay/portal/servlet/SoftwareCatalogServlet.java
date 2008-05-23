@@ -90,11 +90,9 @@ public class SoftwareCatalogServlet extends HttpServlet {
 					groupId, version, baseImageURL, oldestDate,
 					maxNumOfVersions, repoSettings);
 
-			String fileName = null;
-			byte[] byteArray = repositoryXML.getBytes(StringPool.UTF8);
-
 			ServletResponseUtil.sendFile(
-				res, fileName, byteArray, ContentTypes.TEXT_XML_UTF8);
+				res, null, repositoryXML.getBytes(StringPool.UTF8),
+				ContentTypes.TEXT_XML_UTF8);
 		}
 		catch (NoSuchGroupException nsge) {
 			PortalUtil.sendError(
