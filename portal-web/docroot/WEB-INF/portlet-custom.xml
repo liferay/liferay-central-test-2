@@ -215,10 +215,10 @@
 	<portlet>
 		<portlet-name>6</portlet-name>
 		<display-name>Reverend Fun</display-name>
-		<portlet-class>com.liferay.util.bridges.JSPPortlet</portlet-class>
+		<portlet-class>com.liferay.util.bridges.jsp.JSPPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
-			<value>/portlet/reverend_fun/view.jsp</value>
+			<value>/html/portlet/reverend_fun/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -235,10 +235,10 @@
 	<portlet>
 		<portlet-name>7</portlet-name>
 		<display-name>Bible Gateway</display-name>
-		<portlet-class>com.liferay.util.bridges.JSPPortlet</portlet-class>
+		<portlet-class>com.liferay.util.bridges.jsp.JSPPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
-			<value>/portlet/bible_gateway/view.jsp</value>
+			<value>/html/portlet/bible_gateway/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -501,15 +501,15 @@
 		<portlet-class>com.liferay.portlet.randombibleverse.RBVPortlet</portlet-class>
 		<init-param>
 			<name>edit-jsp</name>
-			<value>/portlet/random_bible_verse/edit.jsp</value>
+			<value>/html/portlet/random_bible_verse/edit.jsp</value>
 		</init-param>
 		<init-param>
 			<name>edit-guest-jsp</name>
-			<value>/portlet/random_bible_verse/edit.jsp</value>
+			<value>/html/portlet/random_bible_verse/edit.jsp</value>
 		</init-param>
 		<init-param>
 			<name>view-jsp</name>
-			<value>/portlet/random_bible_verse/view.jsp</value>
+			<value>/html/portlet/random_bible_verse/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -534,10 +534,10 @@
 	<portlet>
 		<portlet-name>22</portlet-name>
 		<display-name>Instant Messenger</display-name>
-		<portlet-class>com.liferay.util.bridges.JSPPortlet</portlet-class>
+		<portlet-class>com.liferay.util.bridges.jsp.JSPPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
-			<value>/portlet/instant_messenger/view.jsp</value>
+			<value>/html/portlet/instant_messenger/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -554,10 +554,10 @@
 	<portlet>
 		<portlet-name>23</portlet-name>
 		<display-name>Dictionary</display-name>
-		<portlet-class>com.liferay.util.bridges.JSPPortlet</portlet-class>
+		<portlet-class>com.liferay.util.bridges.jsp.JSPPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
-			<value>/portlet/dictionary/view.jsp</value>
+			<value>/html/portlet/dictionary/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -577,7 +577,7 @@
 		<portlet-class>com.liferay.portlet.sms.SMSPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
-			<value>/portlet/sms/view.jsp</value>
+			<value>/html/portlet/sms/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -617,7 +617,7 @@
 		<portlet-class>com.liferay.portlet.translator.TranslatorPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
-			<value>/portlet/translator/view.jsp</value>
+			<value>/html/portlet/translator/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -634,10 +634,10 @@
 	<portlet>
 		<portlet-name>27</portlet-name>
 		<display-name>Unit Converter</display-name>
-		<portlet-class>com.liferay.util.bridges.JSPPortlet</portlet-class>
+		<portlet-class>com.liferay.util.bridges.jsp.JSPPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
-			<value>/portlet/unit_converter/view.jsp</value>
+			<value>/html/portlet/unit_converter/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -737,10 +737,10 @@
 	<portlet>
 		<portlet-name>32</portlet-name>
 		<display-name>Today in Christian History</display-name>
-		<portlet-class>com.liferay.util.bridges.JSPPortlet</portlet-class>
+		<portlet-class>com.liferay.util.bridges.jsp.JSPPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
-			<value>/portlet/today_in_christian_history/view.jsp</value>
+			<value>/html/portlet/today_in_christian_history/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -873,10 +873,10 @@
 	<portlet>
 		<portlet-name>42</portlet-name>
 		<display-name>Pipeline</display-name>
-		<portlet-class>com.liferay.util.bridges.JSPPortlet</portlet-class>
+		<portlet-class>com.liferay.util.bridges.jsp.JSPPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
-			<value>/portlet/pipeline/view.jsp</value>
+			<value>/html/portlet/pipeline/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -893,10 +893,10 @@
 	<portlet>
 		<portlet-name>43</portlet-name>
 		<display-name>Top Opportunities</display-name>
-		<portlet-class>com.liferay.util.bridges.JSPPortlet</portlet-class>
+		<portlet-class>com.liferay.util.bridges.jsp.JSPPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
-			<value>/portlet/top_opportunities/view.jsp</value>
+			<value>/html/portlet/top_opportunities/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -1048,7 +1048,7 @@
 		<portlet-class>com.liferay.portlet.VelocityPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/portlet/hello_velocity/view.vm</value>
+			<value>/html/portlet/hello_velocity/view.vm</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -1228,10 +1228,10 @@
 	<portlet>
 		<portlet-name>61</portlet-name>
 		<display-name>Loan Calculator</display-name>
-		<portlet-class>com.liferay.util.bridges.JSPPortlet</portlet-class>
+		<portlet-class>com.liferay.util.bridges.jsp.JSPPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
-			<value>/portlet/loan_calculator/view.jsp</value>
+			<value>/html/portlet/loan_calculator/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -1291,10 +1291,10 @@
 	<portlet>
 		<portlet-name>65</portlet-name>
 		<display-name>Analog Clock</display-name>
-		<portlet-class>com.liferay.util.bridges.JSPPortlet</portlet-class>
+		<portlet-class>com.liferay.util.bridges.jsp.JSPPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
-			<value>/portlet/analog_clock/view.jsp</value>
+			<value>/html/portlet/analog_clock/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -1450,10 +1450,10 @@
 	<portlet>
 		<portlet-name>70</portlet-name>
 		<display-name>Password Generator</display-name>
-		<portlet-class>com.liferay.util.bridges.JSPPortlet</portlet-class>
+		<portlet-class>com.liferay.util.bridges.jsp.JSPPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
-			<value>/portlet/password_generator/view.jsp</value>
+			<value>/html/portlet/password_generator/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -2100,10 +2100,10 @@
 	<portlet>
 		<portlet-name>114</portlet-name>
 		<display-name>Recent Bloggers</display-name>
-		<portlet-class>com.liferay.util.bridges.JSPPortlet</portlet-class>
+		<portlet-class>com.liferay.util.bridges.jsp.JSPPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
-			<value>/portlet/recent_bloggers/view.jsp</value>
+			<value>/html/portlet/recent_bloggers/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
