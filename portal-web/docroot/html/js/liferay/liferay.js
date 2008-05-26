@@ -59,6 +59,7 @@ if (Liferay._ajaxOld) {
 
 jQuery.ajaxSetup(
 	{
+		data: {},
 		type: 'POST'
 	}
 );
