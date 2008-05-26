@@ -37,7 +37,6 @@ PortletURL[] urls = getAddURLs(renderRequest, entries, assetTypes);
 %>
 
 <c:if test="<%= urls.length > 0 %>">
-<div class="lfr-meta-actions edit-controls">
 	<script language="JavaScript">
 		function <portlet:namespace/>addNewAsset() {
 			var url = document.<portlet:namespace />fm.<portlet:namespace />assetURL.value;
@@ -48,29 +47,30 @@ PortletURL[] urls = getAddURLs(renderRequest, entries, assetTypes);
 		}
 	</script>
 
-	<select name="<portlet:namespace/>assetURL" onchange="<portlet:namespace/>addNewAsset();">
-		<option value=""><liferay-ui:message key="add-new" />...</option>
+	<div class="lfr-meta-actions edit-controls">
+		<select name="<portlet:namespace/>assetURL" onchange="<portlet:namespace/>addNewAsset();">
+			<option value=""><liferay-ui:message key="add-new" />...</option>
 
-		<%
-		Iterator itr = assetTypes.iterator();
+			<%
+			Iterator itr = assetTypes.iterator();
 
-		while (itr.hasNext()) {
-			TagsAssetType assetType = (TagsAssetType)itr.next();
+			while (itr.hasNext()) {
+				TagsAssetType assetType = (TagsAssetType)itr.next();
 
-			PortletURL url = getAddURL(renderRequest, entries, assetType.getClassName());
+				PortletURL url = getAddURL(renderRequest, entries, assetType.getClassName());
 
-			if (url != null) {
-		%>
+				if (url != null) {
+			%>
 
-				<option value="<%= url.toString() %>"><liferay-ui:message key='<%= "model.resource." + assetType.getClassName() %>' /></option>
+					<option value="<%= url.toString() %>"><liferay-ui:message key='<%= "model.resource." + assetType.getClassName() %>' /></option>
 
-		<%
+			<%
+				}
 			}
-		}
-		%>
+			%>
 
-	</select>
-</div>
+		</select>
+	</div>
 </c:if>
 
 <%!
