@@ -23,7 +23,7 @@
 package com.liferay.portal.search.lucene;
 
 import com.liferay.portal.kernel.messaging.MessageListener;
-import com.liferay.portal.kernel.search.IndexWriterRequestMessage;
+import com.liferay.portal.kernel.search.IndexWriterMessage;
 import com.liferay.util.JSONUtil;
 
 import org.apache.commons.logging.Log;
@@ -38,30 +38,30 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LuceneIndexWriterMessageListener implements MessageListener {
 
-	public void receive(String messageId, String message) {
+	public void receive(String message) {
 		try {
-			IndexWriterRequestMessage iwrm =
-				(IndexWriterRequestMessage)JSONUtil.deserialize(message);
+			IndexWriterMessage iwm = (IndexWriterMessage)JSONUtil.deserialize(
+				message);
 
-			String command = iwrm.getCommand();
+			String command = iwm.getCommand();
 
-			if (command.equals(IndexWriterRequestMessage.ADD)) {
+			if (command.equals(IndexWriterMessage.ADD)) {
 				LuceneSearchEngineUtil.addDocument(
-					iwrm.getCompanyId(), iwrm.getDocument());
+					iwm.getCompanyId(), iwm.getDocument());
 			}
-			else if (command.equals(IndexWriterRequestMessage.DELETE)) {
+			else if (command.equals(IndexWriterMessage.DELETE)) {
 				LuceneSearchEngineUtil.deleteDocument(
-					iwrm.getCompanyId(), iwrm.getId());
+					iwm.getCompanyId(), iwm.getId());
 			}
 			else if (command.equals(
-						IndexWriterRequestMessage.DELETE_PORTLET_DOCS)) {
+						IndexWriterMessage.DELETE_PORTLET_DOCS)) {
 
 				LuceneSearchEngineUtil.deletePortletDocuments(
-					iwrm.getCompanyId(), iwrm.getId());
+					iwm.getCompanyId(), iwm.getId());
 			}
-			else if (command.equals(IndexWriterRequestMessage.UPDATE)) {
+			else if (command.equals(IndexWriterMessage.UPDATE)) {
 				LuceneSearchEngineUtil.updateDocument(
-					iwrm.getCompanyId(), iwrm.getId(), iwrm.getDocument());
+					iwm.getCompanyId(), iwm.getId(), iwm.getDocument());
 			}
 		}
 		catch (Exception e) {

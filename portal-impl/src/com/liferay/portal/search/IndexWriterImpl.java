@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.IndexWriter;
-import com.liferay.portal.kernel.search.IndexWriterRequestMessage;
+import com.liferay.portal.kernel.search.IndexWriterMessage;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.util.JSONUtil;
 
@@ -44,12 +44,11 @@ public class IndexWriterImpl implements IndexWriter {
 		throws SearchException {
 
 		try {
-			IndexWriterRequestMessage req = new IndexWriterRequestMessage(
-				IndexWriterRequestMessage.ADD, companyId, doc);
+			IndexWriterMessage req = new IndexWriterMessage(
+				IndexWriterMessage.ADD, companyId, doc);
 
 			MessageBusUtil.sendMessage(
-				DestinationNames.SEARCH_INDEX_WRITER_REQUEST,
-				JSONUtil.serialize(req));
+				DestinationNames.SEARCH_INDEX_WRITER, JSONUtil.serialize(req));
 		}
 		catch (MarshallException me) {
 			throw new SearchException(me);
@@ -60,12 +59,11 @@ public class IndexWriterImpl implements IndexWriter {
 		throws SearchException {
 
 		try {
-			IndexWriterRequestMessage req = new IndexWriterRequestMessage(
-				IndexWriterRequestMessage.DELETE, companyId, uid);
+			IndexWriterMessage req = new IndexWriterMessage(
+				IndexWriterMessage.DELETE, companyId, uid);
 
 			MessageBusUtil.sendMessage(
-				DestinationNames.SEARCH_INDEX_WRITER_REQUEST,
-				JSONUtil.serialize(req));
+				DestinationNames.SEARCH_INDEX_WRITER, JSONUtil.serialize(req));
 		}
 		catch (MarshallException me) {
 			throw new SearchException(me);
@@ -76,13 +74,11 @@ public class IndexWriterImpl implements IndexWriter {
 		throws SearchException {
 
 		try {
-			IndexWriterRequestMessage req = new IndexWriterRequestMessage(
-				IndexWriterRequestMessage.DELETE_PORTLET_DOCS, companyId,
-				portletId);
+			IndexWriterMessage req = new IndexWriterMessage(
+				IndexWriterMessage.DELETE_PORTLET_DOCS, companyId, portletId);
 
 			MessageBusUtil.sendMessage(
-				DestinationNames.SEARCH_INDEX_WRITER_REQUEST,
-				JSONUtil.serialize(req));
+				DestinationNames.SEARCH_INDEX_WRITER, JSONUtil.serialize(req));
 		}
 		catch (MarshallException me) {
 			throw new SearchException(me);
@@ -93,12 +89,11 @@ public class IndexWriterImpl implements IndexWriter {
 		throws SearchException {
 
 		try {
-			IndexWriterRequestMessage req = new IndexWriterRequestMessage(
-				IndexWriterRequestMessage.UPDATE, companyId, uid, doc);
+			IndexWriterMessage req = new IndexWriterMessage(
+				IndexWriterMessage.UPDATE, companyId, uid, doc);
 
 			MessageBusUtil.sendMessage(
-				DestinationNames.SEARCH_INDEX_WRITER_REQUEST,
-				JSONUtil.serialize(req));
+				DestinationNames.SEARCH_INDEX_WRITER, JSONUtil.serialize(req));
 		}
 		catch (MarshallException me) {
 			throw new SearchException(me);

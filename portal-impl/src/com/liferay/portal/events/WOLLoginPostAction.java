@@ -36,6 +36,7 @@ import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
+import com.liferay.util.JSONUtil;
 import com.liferay.util.dao.DataAccess;
 
 import java.sql.Connection;
@@ -49,6 +50,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import org.json.JSONObject;
 
 /**
  * <a href="WOLLoginPostAction.java.html"><b><i>View Source</i></b></a>
@@ -269,8 +272,12 @@ public class WOLLoginPostAction extends Action {
 
 		addOrganizationsLayouts(organizations);
 
+		JSONObject jsonObj = new JSONObject();
+
+		JSONUtil.put(jsonObj, "ipAddress", user.getLastLoginIP());
+
 		MessageBusUtil.sendMessage(
-			DestinationNames.IP_GEOCODER_REQUEST, user.getLastLoginIP());
+			DestinationNames.IP_GEOCODER, jsonObj.toString());
 	}
 
 	private static final String _GET_JIRA_USER_ID =

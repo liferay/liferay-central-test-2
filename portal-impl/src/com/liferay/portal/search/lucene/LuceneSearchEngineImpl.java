@@ -44,7 +44,7 @@ public class LuceneSearchEngineImpl implements SearchEngine {
 		_messageBusListener = true;
 
 		Destination destination = new ParallelDispatchedDestination(
-			DestinationNames.SEARCH_INDEX_WRITER_REQUEST, 5, 10);
+			DestinationNames.SEARCH_INDEX_WRITER);
 
 		MessageBusUtil.addDestination(destination);
 
