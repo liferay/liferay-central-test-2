@@ -24,6 +24,8 @@ package com.liferay.portal.plugin;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.plugin.RemotePluginPackageRepository;
 import com.liferay.portal.kernel.search.Field;
@@ -76,8 +78,6 @@ import org.apache.commons.httpclient.HostConfiguration;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.lang.time.StopWatch;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
@@ -1290,7 +1290,7 @@ public class PluginPackageUtil {
 			pluginPackage);
 	}
 
-	private static Log _log = LogFactory.getLog(PluginPackageUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(PluginPackageUtil.class);
 
 	private static PluginPackageUtil _instance = new PluginPackageUtil();
 
