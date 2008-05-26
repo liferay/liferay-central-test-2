@@ -80,7 +80,7 @@ for (TagsAsset asset : assets) {
 
 Iterator<Map.Entry<String, List<TagsAsset>>> itr = assetsByCategory.entrySet().iterator();
 
-if (!itr.hasNext() && !themeDisplay.isSignedIn()) {
+if (!themeDisplay.isSignedIn() && !itr.hasNext()) {
 %>
 
 	<style type="text/css">
