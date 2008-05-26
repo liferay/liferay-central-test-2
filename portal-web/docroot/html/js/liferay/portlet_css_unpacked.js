@@ -1086,7 +1086,8 @@ Liferay.PortletCSS = {
 		var bgData = objData.bgData;
 		var borderData = objData.borderData;
 		var spacingData = objData.spacingData;
-		var wapData = objData.wapData;
+		var wapData = objData.wapData ||  {title: '', initialWindowState: 'NORMAL'};
+		objData.wapData = wapData;
 
 		var portletTitles = portletData.titles;
 		var portletTitle = instance._portletTitles(portletData.language);
