@@ -1377,7 +1377,7 @@ public class PortalImpl implements Portal {
 			int x = url.indexOf("/-/");
 
 			if (x != -1) {
-				int y = url.indexOf("/", x + 3);
+				int y = url.indexOf(StringPool.SLASH, x + 3);
 
 				if (y == -1) {
 					y = url.length();
@@ -1386,6 +1386,8 @@ public class PortalImpl implements Portal {
 				String ppid = url.substring(x + 3, y);
 
 				if (Validator.isNotNull(ppid)) {
+					friendlyURL = url.substring(0, x);
+
 					Map<String, String[]> actualParams = null;
 
 					if (params != null) {
