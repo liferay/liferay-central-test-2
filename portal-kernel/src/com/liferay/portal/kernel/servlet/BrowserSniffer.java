@@ -32,370 +32,42 @@ import javax.servlet.http.HttpServletRequest;
  * @author Brian Wing Shun Chan
  *
  */
-public class BrowserSniffer {
-
-	public static boolean acceptsGzip(HttpServletRequest req) {
-		String acceptEncoding = req.getHeader(HttpHeaders.ACCEPT_ENCODING);
-
-		if ((acceptEncoding != null) &&
-			(acceptEncoding.indexOf(_GZIP) != -1)) {
-
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public static boolean is_ie(HttpServletRequest req) {
-		if (req == null) {
-			return false;
-		}
-
-		String agent = req.getHeader(HttpHeaders.USER_AGENT);
-
-		if (agent == null) {
-			return false;
-		}
-
-		agent = agent.toLowerCase();
-
-		if (agent.indexOf("msie") != -1) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public static boolean is_ie_4(HttpServletRequest req) {
-		if (req == null) {
-			return false;
-		}
-
-		String agent = req.getHeader(HttpHeaders.USER_AGENT);
-
-		if (agent == null) {
-			return false;
-		}
-
-		agent = agent.toLowerCase();
-
-		if (is_ie(req) && (agent.indexOf("msie 4") != -1)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public static boolean is_ie_5(HttpServletRequest req) {
-		if (req == null) {
-			return false;
-		}
-
-		String agent = req.getHeader(HttpHeaders.USER_AGENT);
-
-		if (agent == null) {
-			return false;
-		}
-
-		agent = agent.toLowerCase();
-
-		if (is_ie(req) && (agent.indexOf("msie 5.0") != -1)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public static boolean is_ie_5_5(HttpServletRequest req) {
-		if (req == null) {
-			return false;
-		}
-
-		String agent = req.getHeader(HttpHeaders.USER_AGENT);
-
-		if (agent == null) {
-			return false;
-		}
-
-		agent = agent.toLowerCase();
-
-		if (is_ie(req) && (agent.indexOf("msie 5.5") != -1)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public static boolean is_ie_5_5_up(HttpServletRequest req) {
-		if (is_ie(req) && !is_ie_4(req) && !is_ie_5(req)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public static boolean is_ie_6(HttpServletRequest req) {
-		if (req == null) {
-			return false;
-		}
-
-		String agent = req.getHeader(HttpHeaders.USER_AGENT);
-
-		if (agent == null) {
-			return false;
-		}
-
-		agent = agent.toLowerCase();
-
-		if (is_ie(req) && (agent.indexOf("msie 6.0") != -1)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public static boolean is_ie_7(HttpServletRequest req) {
-		if (req == null) {
-			return false;
-		}
-
-		String agent = req.getHeader(HttpHeaders.USER_AGENT);
-
-		if (agent == null) {
-			return false;
-		}
-
-		agent = agent.toLowerCase();
-
-		if (is_ie(req) && (agent.indexOf("msie 7.0") != -1)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public static boolean is_linux(HttpServletRequest req) {
-		String agent = req.getHeader(HttpHeaders.USER_AGENT);
-
-		if (agent == null) {
-			return false;
-		}
-
-		agent = agent.toLowerCase();
-
-		if (agent.matches(".*linux.*")) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public static boolean is_mozilla(HttpServletRequest req) {
-		if (req == null) {
-			return false;
-		}
-
-		String agent = req.getHeader(HttpHeaders.USER_AGENT);
-
-		if (agent == null) {
-			return false;
-		}
-
-		agent = agent.toLowerCase();
-
-		if ((agent.indexOf("mozilla") != -1) &&
-			(agent.indexOf("spoofer") == -1) &&
-			(agent.indexOf("compatible") == -1) &&
-			(agent.indexOf("opera") == -1) &&
-			(agent.indexOf("webtv") == -1) &&
-			(agent.indexOf("hotjava") == -1)) {
-
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public static boolean is_mozilla_1_3_up(HttpServletRequest req) {
-		if (req == null) {
-			return false;
-		}
-
-		String agent = req.getHeader(HttpHeaders.USER_AGENT);
-
-		if (agent == null) {
-			return false;
-		}
-
-		agent = agent.toLowerCase();
-
-		if (is_mozilla(req)) {
-			int pos = agent.indexOf("gecko/");
-
-			if (pos == -1) {
-				return false;
-			}
-			else {
-				String releaseDate = agent.substring(pos + 6, agent.length());
-
-				if (releaseDate.compareTo("20030210") > 0) {
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
-
-	public static boolean is_ns_4(HttpServletRequest req) {
-		if (req == null) {
-			return false;
-		}
-
-		String agent = req.getHeader(HttpHeaders.USER_AGENT);
-
-		if (agent == null) {
-			return false;
-		}
-
-		agent = agent.toLowerCase();
-
-		if (!is_ie(req) && (agent.indexOf("mozilla/4.") != -1)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public static boolean is_rtf(HttpServletRequest req) {
-		if (is_ie_5_5_up(req) || is_mozilla_1_3_up(req) ||
-			(is_safari_3(req) && !is_safari_mobile(req))) {
-
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public static boolean is_safari(HttpServletRequest req) {
-		if (req == null) {
-			return false;
-		}
-
-		String agent = req.getHeader(HttpHeaders.USER_AGENT);
-
-		if (agent == null) {
-			return false;
-		}
-
-		agent = agent.toLowerCase();
-
-		if (agent.indexOf("safari") != -1) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public static boolean is_safari_3(HttpServletRequest req) {
-		if (req == null) {
-			return false;
-		}
-
-		String agent = req.getHeader(HttpHeaders.USER_AGENT);
-
-		if (agent == null) {
-			return false;
-		}
-
-		agent = agent.toLowerCase();
-
-		if (is_safari(req) && (agent.indexOf("version/3.") != -1)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public static boolean is_safari_mobile(HttpServletRequest req) {
-		if (req == null) {
-			return false;
-		}
-
-		String agent = req.getHeader(HttpHeaders.USER_AGENT);
-
-		if (agent == null) {
-			return false;
-		}
-
-		agent = agent.toLowerCase();
-
-		if (is_safari(req) && (agent.indexOf("mobile") != -1)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public static boolean is_wap_xhtml(HttpServletRequest req) {
-		if (req == null) {
-			return false;
-		}
-
-		String accept = req.getHeader(HttpHeaders.ACCEPT);
-
-		if (accept == null) {
-			return false;
-		}
-
-		accept = accept.toLowerCase();
-
-		if ((accept.indexOf("application/xhtml+xml") == -1) &&
-			(accept.indexOf("wap.xhtml") != -1)) {
-
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public static boolean is_wml(HttpServletRequest req) {
-		if (req == null) {
-			return false;
-		}
-
-		String accept = req.getHeader(HttpHeaders.ACCEPT);
-
-		if (accept == null) {
-			return false;
-		}
-
-		accept = accept.toLowerCase();
-
-		if (accept.indexOf("wap.wml") != -1) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	private static final String _GZIP = "gzip";
+public interface BrowserSniffer {
+
+	public boolean acceptsGzip(HttpServletRequest req);
+
+	public boolean is_ie(HttpServletRequest req);
+
+	public boolean is_ie_4(HttpServletRequest req);
+
+	public boolean is_ie_5(HttpServletRequest req);
+
+	public boolean is_ie_5_5(HttpServletRequest req);
+
+	public boolean is_ie_5_5_up(HttpServletRequest req);
+
+	public boolean is_ie_6(HttpServletRequest req);
+
+	public boolean is_ie_7(HttpServletRequest req);
+
+	public boolean is_linux(HttpServletRequest req);
+
+	public boolean is_mozilla(HttpServletRequest req);
+
+	public boolean is_mozilla_1_3_up(HttpServletRequest req);
+
+	public boolean is_ns_4(HttpServletRequest req);
+
+	public boolean is_rtf(HttpServletRequest req);
+
+	public boolean is_safari(HttpServletRequest req);
+
+	public boolean is_safari_3(HttpServletRequest req);
+
+	public boolean is_safari_mobile(HttpServletRequest req);
+
+	public boolean is_wap_xhtml(HttpServletRequest req);
+
+	public boolean is_wml(HttpServletRequest req);
 
 }

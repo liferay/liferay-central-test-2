@@ -25,7 +25,7 @@ package com.liferay.portal.action;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.PortletModeFactory;
 import com.liferay.portal.kernel.portlet.WindowStateFactory;
-import com.liferay.portal.kernel.servlet.BrowserSniffer;
+import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -241,7 +241,7 @@ public class LayoutAction extends Action {
 
 		String path = StrutsUtil.TEXT_HTML_DIR;
 
-		if (BrowserSniffer.is_wap_xhtml(req)) {
+		if (BrowserSnifferUtil.is_wap_xhtml(req)) {
 			path = StrutsUtil.TEXT_WAP_DIR;
 		}
 

@@ -15,10 +15,6 @@
 	/>
 	<instance-wrapper
 		parent-dir="../portal-kernel/src"
-		src-file="com/liferay/portal/kernel/servlet/BrowserSniffer.java"
-	/>
-	<instance-wrapper
-		parent-dir="../portal-kernel/src"
 		src-file="com/liferay/portal/kernel/util/ArrayUtil.java"
 	/>
 	<instance-wrapper

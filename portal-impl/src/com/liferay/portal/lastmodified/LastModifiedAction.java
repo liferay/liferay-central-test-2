@@ -22,7 +22,7 @@
 
 package com.liferay.portal.lastmodified;
 
-import com.liferay.portal.kernel.servlet.BrowserSniffer;
+import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.ColorScheme;
@@ -78,7 +78,7 @@ public abstract class LastModifiedAction extends Action {
 			(!theme.getThemeId().equals(themeId)) ||
 			(!colorScheme.getColorSchemeId().equals(colorSchemeId))) {
 
-			boolean wapTheme = BrowserSniffer.is_wap_xhtml(req);
+			boolean wapTheme = BrowserSnifferUtil.is_wap_xhtml(req);
 
 			theme = ThemeLocalServiceUtil.getTheme(
 				themeDisplay.getCompanyId(), themeId, wapTheme);

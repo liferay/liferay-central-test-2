@@ -22,7 +22,7 @@
 
 package com.liferay.portal.struts;
 
-import com.liferay.portal.kernel.servlet.BrowserSniffer;
+import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 
 import java.io.IOException;
 
@@ -75,7 +75,7 @@ public class StrutsUtil {
 		if (!res.isCommitted()) {
 			String path = TEXT_HTML_DIR + uri;
 
-			if (BrowserSniffer.is_wap_xhtml(req)) {
+			if (BrowserSnifferUtil.is_wap_xhtml(req)) {
 				path = TEXT_WAP_DIR + uri;
 			}
 
@@ -96,7 +96,7 @@ public class StrutsUtil {
 
 				String errorPath = TEXT_HTML_DIR + ActionConstants.COMMON_ERROR;
 
-				if (BrowserSniffer.is_wap_xhtml(req)) {
+				if (BrowserSnifferUtil.is_wap_xhtml(req)) {
 					path = TEXT_WAP_DIR + ActionConstants.COMMON_ERROR;
 				}
 
@@ -129,7 +129,7 @@ public class StrutsUtil {
 
 		String path = TEXT_HTML_DIR + uri;
 
-		if (BrowserSniffer.is_wap_xhtml(req)) {
+		if (BrowserSnifferUtil.is_wap_xhtml(req)) {
 			path = TEXT_WAP_DIR + uri;
 		}
 

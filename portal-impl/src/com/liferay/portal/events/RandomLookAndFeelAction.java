@@ -24,7 +24,7 @@ package com.liferay.portal.events;
 
 import com.liferay.portal.kernel.events.Action;
 import com.liferay.portal.kernel.events.ActionException;
-import com.liferay.portal.kernel.servlet.BrowserSniffer;
+import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Randomizer;
 import com.liferay.portal.model.ColorScheme;
@@ -90,7 +90,7 @@ public class RandomLookAndFeelAction extends Action {
 
 			Randomizer randomizer = Randomizer.getInstance();
 
-			boolean wapTheme = BrowserSniffer.is_wap_xhtml(req);
+			boolean wapTheme = BrowserSnifferUtil.is_wap_xhtml(req);
 
 			List<Theme> themes = ThemeLocalServiceUtil.getThemes(
 				themeDisplay.getCompanyId(), themeDisplay.getPortletGroupId(),

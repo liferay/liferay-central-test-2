@@ -24,7 +24,7 @@ package com.liferay.portal.servlet.filters.compression;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.servlet.BrowserSniffer;
+import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -127,7 +127,7 @@ public class CompressionFilter extends BasePortalFilter {
 		String completeURL = HttpUtil.getCompleteURL(httpReq);
 
 		if (isCompress(httpReq) && !isInclude(httpReq) &&
-			BrowserSniffer.acceptsGzip(httpReq) &&
+			BrowserSnifferUtil.acceptsGzip(httpReq) &&
 			!isAlreadyFiltered(httpReq)) {
 
 			if (_log.isDebugEnabled()) {

@@ -136,6 +136,12 @@
 			<ref bean="com.liferay.portal.service.permission.UserPermissionImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.servlet.BrowserSnifferImpl" class="com.liferay.portal.servlet.BrowserSnifferImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.kernel.servlet.BrowserSnifferUtil" class="com.liferay.portal.kernel.servlet.BrowserSnifferUtil" lazy-init="true">
+		<property name="browserSniffer">
+			<ref bean="com.liferay.portal.servlet.BrowserSnifferImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.servlet.ImageServletTokenImpl" class="com.liferay.portal.servlet.ImageServletTokenImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.kernel.servlet.ImageServletTokenUtil" class="com.liferay.portal.kernel.servlet.ImageServletTokenUtil" lazy-init="true">
 		<property name="imageServletToken">

@@ -24,7 +24,7 @@ package com.liferay.portal.servlet.filters.velocity;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.servlet.BrowserSniffer;
+import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -138,7 +138,7 @@ public class VelocityFilter extends BasePortalFilter {
 				String colorSchemeId = ParamUtil.getString(
 					req, "colorSchemeId");
 
-				boolean wapTheme = BrowserSniffer.is_wap_xhtml(httpReq);
+				boolean wapTheme = BrowserSnifferUtil.is_wap_xhtml(httpReq);
 
 				Theme theme = ThemeLocalServiceUtil.getTheme(
 					companyId, themeId, wapTheme);

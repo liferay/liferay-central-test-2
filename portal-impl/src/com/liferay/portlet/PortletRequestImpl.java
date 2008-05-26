@@ -24,7 +24,7 @@ package com.liferay.portlet;
 
 import com.liferay.portal.ccpp.EmptyProfile;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
-import com.liferay.portal.kernel.servlet.BrowserSniffer;
+import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.ProtectedPrincipal;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -702,7 +702,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 		}
 
 		_req = dynamicReq;
-		_wapTheme = BrowserSniffer.is_wap_xhtml(_req);
+		_wapTheme = BrowserSnifferUtil.is_wap_xhtml(_req);
 		_portlet = portlet;
 		_portalCtx = new PortalContextImpl();
 		_portletCtx = portletCtx;

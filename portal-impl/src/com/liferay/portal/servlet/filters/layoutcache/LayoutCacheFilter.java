@@ -26,7 +26,7 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.servlet.BrowserSniffer;
+import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -103,10 +103,10 @@ public class LayoutCacheFilter
 	}
 
 	protected String getBrowserType(HttpServletRequest req) {
-		if (BrowserSniffer.is_ie_7(req)) {
+		if (BrowserSnifferUtil.is_ie_7(req)) {
 			return _BROWSER_TYPE_IE_7;
 		}
-		else if (BrowserSniffer.is_ie(req)) {
+		else if (BrowserSnifferUtil.is_ie(req)) {
 			return _BROWSER_TYPE_IE;
 		}
 		else {
@@ -139,7 +139,7 @@ public class LayoutCacheFilter
 		// Gzip compression
 
 		sm.append(StringPool.POUND);
-		sm.append(BrowserSniffer.acceptsGzip(req));
+		sm.append(BrowserSnifferUtil.acceptsGzip(req));
 
 		return sm.toString().trim().toUpperCase();
 	}

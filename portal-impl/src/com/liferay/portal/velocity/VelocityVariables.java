@@ -24,7 +24,7 @@ package com.liferay.portal.velocity;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.language.UnicodeLanguageUtil;
-import com.liferay.portal.kernel.servlet.BrowserSniffer_IW;
+import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ArrayUtil_IW;
@@ -110,7 +110,7 @@ public class VelocityVariables {
 
 		// Browser sniffer
 
-		vc.put("browserSniffer", BrowserSniffer_IW.getInstance());
+		vc.put("browserSniffer", BrowserSnifferUtil.getBrowserSniffer());
 
 		// Date formats
 
