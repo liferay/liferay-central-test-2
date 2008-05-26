@@ -25,15 +25,15 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <%
-if (themeDisplay.isFacebook() || themeDisplay.isWidget() || themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || layoutTypePortlet.hasStateMax()) {
+if (themeDisplay.isFacebook() || themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || themeDisplay.isWidget() || layoutTypePortlet.hasStateMax()) {
 	String ppid = ParamUtil.getString(request, "p_p_id");
 
 	String content = null;
 
-	if (themeDisplay.isFacebook() || themeDisplay.isWidget() || themeDisplay.isStateExclusive()) {
+	if (themeDisplay.isFacebook() || themeDisplay.isStateExclusive()) {
 		content = LayoutTemplateLocalServiceUtil.getContent("exclusive", true, theme.getThemeId());
 	}
-	else if (themeDisplay.isStatePopUp()) {
+	else if (themeDisplay.isStatePopUp() || themeDisplay.isWidget()) {
 		content = LayoutTemplateLocalServiceUtil.getContent("pop_up", true, theme.getThemeId());
 	}
 	else {
