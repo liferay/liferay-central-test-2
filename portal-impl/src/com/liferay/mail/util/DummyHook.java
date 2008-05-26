@@ -26,6 +26,9 @@ import com.liferay.mail.model.Filter;
 
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="DummyHook.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,30 +40,59 @@ public class DummyHook implements Hook {
 	public void addForward(
 		long userId, List<Filter> filters, List<String> emailAddresses,
 		boolean leaveCopy) {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("addForward");
+		}
 	}
 
 	public void addUser(
 		long userId, String password, String firstName, String middleName,
 		String lastName, String emailAddress) {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("addUser");
+		}
 	}
 
 	public void addVacationMessage(
 		long userId, String emailAddress, String vacationMessage) {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("addVacationMessage");
+		}
 	}
 
 	public void deleteEmailAddress(long userId) {
+		if (_log.isDebugEnabled()) {
+			_log.debug("deleteEmailAddress");
+		}
 	}
 
 	public void deleteUser(long userId) {
+		if (_log.isDebugEnabled()) {
+			_log.debug("deleteUser");
+		}
 	}
 
 	public void updateBlocked(long userId, List<String> blocked) {
+		if (_log.isDebugEnabled()) {
+			_log.debug("updateBlocked");
+		}
 	}
 
 	public void updateEmailAddress(long userId, String emailAddress) {
+		if (_log.isDebugEnabled()) {
+			_log.debug("updateEmailAddress");
+		}
 	}
 
 	public void updatePassword(long userId, String password) {
+		if (_log.isDebugEnabled()) {
+			_log.debug("updatePassword");
+		}
 	}
+
+	private static Log _log = LogFactory.getLog(DummyHook.class);
 
 }

@@ -44,7 +44,7 @@ import org.json.JSONObject;
  */
 public class JSONUtil {
 
-	public static Object deserialize(String json) throws UnmarshallException {
+	public static Object deserialize(String json) {
 		return _instance._deserialize(json);
 	}
 
@@ -139,7 +139,7 @@ public class JSONUtil {
 		}
 	}
 
-	public static String serialize(Object obj) throws MarshallException {
+	public static String serialize(Object obj) {
 		return _instance._serialize(obj);
 	}
 
@@ -154,12 +154,26 @@ public class JSONUtil {
 		 }
 	}
 
-	public Object _deserialize(String json) throws UnmarshallException {
-		return _serializer.fromJSON(json);
+	public Object _deserialize(String json) {
+		try {
+			return _serializer.fromJSON(json);
+		}
+		catch (UnmarshallException ue) {
+			 _log.error(ue, ue);
+
+			 return null;
+		}
 	}
 
-	private String _serialize(Object obj) throws MarshallException {
-		return _serializer.toJSON(obj).toString();
+	private String _serialize(Object obj) {
+		try {
+			return _serializer.toJSON(obj).toString();
+		}
+		catch (MarshallException me) {
+			_log.error(me, me);
+
+			 return null;
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(JSONUtil.class);

@@ -30,8 +30,6 @@ import com.liferay.portal.kernel.search.IndexWriterMessage;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.util.JSONUtil;
 
-import org.jabsorb.serializer.MarshallException;
-
 /**
  * <a href="IndexWriterImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -43,61 +41,41 @@ public class IndexWriterImpl implements IndexWriter {
 	public void addDocument(long companyId, Document doc)
 		throws SearchException {
 
-		try {
-			IndexWriterMessage req = new IndexWriterMessage(
-				IndexWriterMessage.ADD, companyId, doc);
+		IndexWriterMessage req = new IndexWriterMessage(
+			IndexWriterMessage.ADD, companyId, doc);
 
-			MessageBusUtil.sendMessage(
-				DestinationNames.SEARCH_INDEX_WRITER, JSONUtil.serialize(req));
-		}
-		catch (MarshallException me) {
-			throw new SearchException(me);
-		}
+		MessageBusUtil.sendMessage(
+			DestinationNames.SEARCH_INDEX_WRITER, JSONUtil.serialize(req));
 	}
 
 	public void deleteDocument(long companyId, String uid)
 		throws SearchException {
 
-		try {
-			IndexWriterMessage req = new IndexWriterMessage(
-				IndexWriterMessage.DELETE, companyId, uid);
+		IndexWriterMessage req = new IndexWriterMessage(
+			IndexWriterMessage.DELETE, companyId, uid);
 
-			MessageBusUtil.sendMessage(
-				DestinationNames.SEARCH_INDEX_WRITER, JSONUtil.serialize(req));
-		}
-		catch (MarshallException me) {
-			throw new SearchException(me);
-		}
+		MessageBusUtil.sendMessage(
+			DestinationNames.SEARCH_INDEX_WRITER, JSONUtil.serialize(req));
 	}
 
 	public void deletePortletDocuments(long companyId, String portletId)
 		throws SearchException {
 
-		try {
-			IndexWriterMessage req = new IndexWriterMessage(
-				IndexWriterMessage.DELETE_PORTLET_DOCS, companyId, portletId);
+		IndexWriterMessage req = new IndexWriterMessage(
+			IndexWriterMessage.DELETE_PORTLET_DOCS, companyId, portletId);
 
-			MessageBusUtil.sendMessage(
-				DestinationNames.SEARCH_INDEX_WRITER, JSONUtil.serialize(req));
-		}
-		catch (MarshallException me) {
-			throw new SearchException(me);
-		}
+		MessageBusUtil.sendMessage(
+			DestinationNames.SEARCH_INDEX_WRITER, JSONUtil.serialize(req));
 	}
 
 	public void updateDocument(long companyId, String uid, Document doc)
 		throws SearchException {
 
-		try {
-			IndexWriterMessage req = new IndexWriterMessage(
-				IndexWriterMessage.UPDATE, companyId, uid, doc);
+		IndexWriterMessage req = new IndexWriterMessage(
+			IndexWriterMessage.UPDATE, companyId, uid, doc);
 
-			MessageBusUtil.sendMessage(
-				DestinationNames.SEARCH_INDEX_WRITER, JSONUtil.serialize(req));
-		}
-		catch (MarshallException me) {
-			throw new SearchException(me);
-		}
+		MessageBusUtil.sendMessage(
+			DestinationNames.SEARCH_INDEX_WRITER, JSONUtil.serialize(req));
 	}
 
 }

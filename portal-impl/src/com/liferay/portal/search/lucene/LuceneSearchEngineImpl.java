@@ -48,8 +48,7 @@ public class LuceneSearchEngineImpl implements SearchEngine {
 
 		MessageBusUtil.addDestination(destination);
 
-		MessageBusUtil.registerMessageListener(
-			destination.getName(), new LuceneIndexWriterMessageListener());
+		destination.register(new LuceneIndexWriterMessageListener());
 	}
 
 	public String getName() {
