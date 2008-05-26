@@ -85,7 +85,9 @@ public class DefaultMessageBus implements MessageBus {
 	}
 
 	public String sendSynchronizedMessage(String destination, String message) {
-		if (!_destinations.containsKey(destination)) {
+		Destination destinationModel = _destinations.get(destination);
+
+		if (destinationModel == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("Destination " + destination + " is not configured");
 			}
@@ -94,12 +96,12 @@ public class DefaultMessageBus implements MessageBus {
 		}
 
 		ResponseMessageListener responseMessageListener =
-			new ResponseMessageListener(this);
+			new ResponseMessageListener(destinationModel, getNextResponseId());
 
 		_responseDestination.register(responseMessageListener);
 
 		try {
-			return responseMessageListener.send(destination, message);
+			return responseMessageListener.send(message);
 		}
 		catch (InterruptedException ie) {
 			return null;

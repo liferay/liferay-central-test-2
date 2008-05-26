@@ -30,17 +30,19 @@ package com.liferay.portal.kernel.messaging;
  */
 public class ResponseMessageListener implements MessageListener {
 
-	public ResponseMessageListener(MessageBus messageBus) {
-		this(messageBus, _TIMEOUT);
+	public ResponseMessageListener(Destination destination, String responseId) {
+		this(destination, responseId, _TIMEOUT);
 	}
 
-	public ResponseMessageListener(MessageBus messageBus, int timeout) {
-		_messageBus = messageBus;
-		_responseId = messageBus.getNextResponseId();
+	public ResponseMessageListener(
+		Destination destination, String responseId, int timeout) {
+
+		_destination = destination;
+		_responseId = responseId;
 		_timeout = timeout;
 	}
 
-	public synchronized String send(String destination, String message)
+	public synchronized String send(String message)
 		throws InterruptedException {
 
 		if (message.equals(_EMTPY_MESSAGE)) {
@@ -52,7 +54,7 @@ public class ResponseMessageListener implements MessageListener {
 					",\"responseId\":\"" + _responseId + "\"}";
 		}
 
-		_messageBus.sendMessage(destination, message);
+		_destination.send(message);
 
 		wait(_timeout);
 
@@ -71,7 +73,7 @@ public class ResponseMessageListener implements MessageListener {
 
 	private static final int _TIMEOUT = 1000;
 
-	private MessageBus _messageBus;
+	private Destination _destination;
 	private String _responseId;
 	private int _timeout;
 	private String _responseMessage;
