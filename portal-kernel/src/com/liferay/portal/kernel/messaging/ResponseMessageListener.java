@@ -23,18 +23,57 @@
 package com.liferay.portal.kernel.messaging;
 
 /**
- * <a href="DestinationNames.java.html"><b><i>View Source</i></b></a>
+ * <a href="ResponseMessageListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface DestinationNames {
+public class ResponseMessageListener implements MessageListener {
 
-	public static final String IP_GEOCODER = "liferay/ipgeocoder";
+	public ResponseMessageListener(MessageBus messageBus) {
+		this(messageBus, _TIMEOUT);
+	}
 
-	public static final String RESPONSE = "liferay/response";
+	public ResponseMessageListener(MessageBus messageBus, int timeout) {
+		_messageBus = messageBus;
+		_responseId = messageBus.getNextResponseId();
+		_timeout = timeout;
+	}
 
-	public static final String SEARCH_INDEX_WRITER =
-		"liferay/search/indexwriter";
+	public synchronized String send(String destination, String message)
+		throws InterruptedException {
+
+		if (message.equals(_EMTPY_MESSAGE)) {
+			message = "{\"responseId\":\"" + _responseId + "\"}";
+		}
+		else {
+			message =
+				message.substring(0, message.length() - 1) +
+					",\"responseId\":\"" + _responseId + "\"}";
+		}
+
+		_messageBus.sendMessage(destination, message);
+
+		wait(_timeout);
+
+		return _responseMessage;
+	}
+
+	public synchronized void receive(String message) {
+		if (message.indexOf("\"responseId\":\"" + _responseId + "\"") != -1) {
+			_responseMessage = message;
+
+			notify();
+		}
+	}
+
+	private static final String _EMTPY_MESSAGE = "{}";
+
+	private static final int _TIMEOUT = 1000;
+
+	private MessageBus _messageBus;
+	private String _responseId;
+	private int _timeout;
+	private String _responseMessage;
 
 }

@@ -38,7 +38,7 @@ public interface Destination {
 
 	public void register(MessageListener listener);
 
-	public void send(String messageId, String message);
+	public void send(String message);
 
 	public boolean unregister(MessageListener listener);
 

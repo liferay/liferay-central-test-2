@@ -66,7 +66,7 @@ public abstract class BaseDestination implements Destination {
 		resetDispatcher(_listeners.length);
 	}
 
-	public void send(String messageId, String message) {
+	public void send(String message) {
 		if (_listeners.length == 0) {
 			if (_log.isDebugEnabled()) {
 				_log.debug("No listeners for destination " + _name);
@@ -75,7 +75,7 @@ public abstract class BaseDestination implements Destination {
 			return;
 		}
 
-		dispatch(_listeners, messageId, message);
+		dispatch(_listeners, message);
 	}
 
 	public synchronized boolean unregister(MessageListener listener) {
@@ -94,7 +94,7 @@ public abstract class BaseDestination implements Destination {
 	}
 
 	protected abstract void dispatch(
-		MessageListener[] listeners, String messageId, String message);
+		MessageListener[] listeners, String message);
 
 	protected abstract void doClose();
 
@@ -122,14 +122,14 @@ public abstract class BaseDestination implements Destination {
 			_classLoader = classLoader;
 		}
 
-		public void receive(String messageId, String message) {
+		public void receive(String message) {
 			ClassLoader contextClassLoader =
 				Thread.currentThread().getContextClassLoader();
 
 			Thread.currentThread().setContextClassLoader(_classLoader);
 
 			try {
-				_messageListener.receive(messageId, message);
+				_messageListener.receive(message);
 			}
 			finally {
 				Thread.currentThread().setContextClassLoader(

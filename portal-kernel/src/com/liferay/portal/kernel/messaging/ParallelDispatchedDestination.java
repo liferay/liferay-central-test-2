@@ -42,6 +42,10 @@ import java.util.concurrent.TimeUnit;
  */
 public class ParallelDispatchedDestination extends BaseDestination {
 
+	public ParallelDispatchedDestination(String name) {
+		this(name, _NUM_WORKERS, _MAX_WORKERS);
+	}
+
 	public ParallelDispatchedDestination(
 		String name, int numWorkers, int maxWorkers) {
 
@@ -53,16 +57,14 @@ public class ParallelDispatchedDestination extends BaseDestination {
 		open();
 	}
 
-	protected void dispatch(
-		MessageListener[] listeners, String messageId, String message) {
-
+	protected void dispatch(MessageListener[] listeners, String message) {
 		if (executor.isShutdown()) {
 			throw new IllegalStateException(
 				"Destination " + getName() + " is shutdown and cannot " +
 					"receive more messages");
 		}
 
-		doDispatch(listeners, messageId, message);
+		doDispatch(listeners, message);
 	}
 
 	protected void doClose() {
@@ -72,14 +74,13 @@ public class ParallelDispatchedDestination extends BaseDestination {
 	}
 
 	protected void doDispatch(
-		MessageListener[] listeners, final String messageId,
-		final String message) {
+		MessageListener[] listeners, final String message) {
 
 		for (final MessageListener listener : listeners) {
 			Runnable runnable = new Runnable() {
 
 				public void run() {
-					listener.receive(messageId, message);
+					listener.receive(message);
 				}
 
 			};
@@ -103,6 +104,10 @@ public class ParallelDispatchedDestination extends BaseDestination {
 	}
 
 	protected ThreadPoolExecutor executor;
+
+	private static final int _NUM_WORKERS = 5;
+
+	private static final int _MAX_WORKERS = 10;
 
 	private static final int _MAX_SIZE_PADDING = 5;
 

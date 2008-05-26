@@ -36,12 +36,6 @@ public class MessageBusUtil {
 		_instance._addDestination(destination);
 	}
 
-	public static SingleDestinationMessageSender createMessageSender(
-		String destination) {
-
-		return _instance._createMessageSender(destination);
-	}
-
 	public static MessageBus getMessageBus() {
 		return _instance._messageBus;
 	}
@@ -74,10 +68,10 @@ public class MessageBusUtil {
 		_instance._sendMessage(destination, message);
 	}
 
-	public static void sendMessage(
-		String destination, String messageId, String message) {
+	public static String sendSynchronizedMessage(
+		String destination, String message) {
 
-		_instance._sendMessage(destination, messageId, message);
+		return _instance._sendSynchronizedMessage(destination, message);
 	}
 
 	public static boolean unregisterMessageListener(
@@ -91,13 +85,6 @@ public class MessageBusUtil {
 
 	private void _addDestination(Destination destination) {
 		_messageBus.addDestination(destination);
-	}
-
-	private SingleDestinationMessageSender _createMessageSender(
-		String destination) {
-
-		return new DefaultSingleDestinationMessageSender(
-			_messageSender, destination);
 	}
 
 	private void _init(MessageBus messageBus, MessageSender messageSender) {
@@ -123,10 +110,10 @@ public class MessageBusUtil {
 		_messageBus.sendMessage(destination, message);
 	}
 
-	private void _sendMessage(
-		String destination, String messageId, String message) {
+	private String _sendSynchronizedMessage(
+		String destination, String message) {
 
-		_messageBus.sendMessage(destination, messageId, message);
+		return _messageBus.sendSynchronizedMessage(destination, message);
 	}
 
 	private boolean _unregisterMessageListener(

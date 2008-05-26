@@ -34,7 +34,7 @@ public interface MessageBus {
 
 	public void addDestination(Destination destination);
 
-	public String getNextMessageId();
+	public String getNextResponseId();
 
 	public void registerMessageListener(
 		String destination, MessageListener listener);
@@ -43,8 +43,7 @@ public interface MessageBus {
 
 	public void sendMessage(String destination, String message);
 
-	public void sendMessage(
-		String destination, String messageId, String message);
+	public String sendSynchronizedMessage(String destination, String message);
 
 	public void setDestinations(List<Destination> destinations);
 

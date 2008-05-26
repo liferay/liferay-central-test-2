@@ -38,11 +38,18 @@ import java.util.Map;
  */
 public class DefaultMessageBus implements MessageBus {
 
+	public DefaultMessageBus() {
+		_responseDestination = new ParallelDispatchedDestination(
+			DestinationNames.RESPONSE);
+
+		addDestination(_responseDestination);
+	}
+
 	public synchronized void addDestination(Destination destination) {
 		_destinations.put(destination.getName(), destination);
 	}
 
-	public String getNextMessageId() {
+	public String getNextResponseId() {
 		return PortalUUIDUtil.generate();
 	}
 
@@ -64,23 +71,42 @@ public class DefaultMessageBus implements MessageBus {
 	}
 
 	public void sendMessage(String destination, String message) {
-		sendMessage(destination, null, message);
-	}
-
-	public void sendMessage(
-		String destination, String messageId, String message) {
-
 		Destination destinationModel = _destinations.get(destination);
 
 		if (destinationModel == null) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Destination " + destination + " is not configured");
+			if (_log.isWarnEnabled()) {
+				_log.warn("Destination " + destination + " is not configured");
 			}
 
 			return;
 		}
 
-		destinationModel.send(messageId, message);
+		destinationModel.send(message);
+	}
+
+	public String sendSynchronizedMessage(String destination, String message) {
+		if (!_destinations.containsKey(destination)) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Destination " + destination + " is not configured");
+			}
+
+			return null;
+		}
+
+		ResponseMessageListener responseMessageListener =
+			new ResponseMessageListener(this);
+
+		_responseDestination.register(responseMessageListener);
+
+		try {
+			return responseMessageListener.send(destination, message);
+		}
+		catch (InterruptedException ie) {
+			return null;
+		}
+		finally {
+			_responseDestination.unregister(responseMessageListener);
+		}
 	}
 
 	public synchronized void setDestinations(List<Destination> destinations) {
@@ -105,5 +131,6 @@ public class DefaultMessageBus implements MessageBus {
 
 	private Map<String, Destination> _destinations =
 		new HashMap<String, Destination>();
+	private Destination _responseDestination;
 
 }
