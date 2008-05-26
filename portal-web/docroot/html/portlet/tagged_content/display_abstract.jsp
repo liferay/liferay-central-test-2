@@ -206,7 +206,7 @@ if (Validator.isNotNull(asset.getUrl())) {
 		</c:if>
 	</div>
 
-	<div>
+	<div class="lfr-meta-actions edit-controls">
 		<br />
 
 		<%@ include file="/html/portlet/tagged_content/asset_actions.jspf" %>

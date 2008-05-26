@@ -37,6 +37,7 @@ PortletURL[] urls = getAddURLs(renderRequest, entries, assetTypes);
 %>
 
 <c:if test="<%= urls.length > 0 %>">
+<div class="lfr-meta-actions edit-controls">
 	<script language="JavaScript">
 		function <portlet:namespace/>addNewAsset() {
 			var url = document.<portlet:namespace />fm.<portlet:namespace />assetURL.value;
@@ -69,6 +70,7 @@ PortletURL[] urls = getAddURLs(renderRequest, entries, assetTypes);
 		%>
 
 	</select>
+</div>
 </c:if>
 
 <%!

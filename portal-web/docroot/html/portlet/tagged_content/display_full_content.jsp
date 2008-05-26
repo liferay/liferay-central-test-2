@@ -334,9 +334,7 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 		<%@ include file="/html/portlet/tagged_content/asset_metadata.jspf" %>
 	</div>
 
-	<div>
-		<br />
-
+	<div class="lfr-meta-actions edit-controls">
 		<%@ include file="/html/portlet/tagged_content/asset_actions.jspf" %>
 	</div>
 

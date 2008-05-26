@@ -164,8 +164,6 @@ if (Validator.isNotNull(asset.getUrl())) {
 
 <c:if test="<%= show %>">
 	<li>
-		<%@ include file="/html/portlet/tagged_content/asset_actions.jspf" %>
-
 		<c:choose>
 			<c:when test="<%= Validator.isNotNull(viewURL) %>">
 				<a href="<%= viewURL %>"><%= title %></a>
@@ -174,6 +172,10 @@ if (Validator.isNotNull(asset.getUrl())) {
 				<%= title %>
 			</c:otherwise>
 		</c:choose>
+
+		<div class="lfr-meta-actions edit-controls">
+			<%@ include file="/html/portlet/tagged_content/asset_actions.jspf" %>
+		</div>
 
 		<span class="portlet-journal-metadata">
 			<%@ include file="/html/portlet/tagged_content/asset_metadata.jspf" %>
