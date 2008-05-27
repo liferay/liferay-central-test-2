@@ -22,12 +22,11 @@
 
 package com.liferay.portal.tools;
 
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OSDetector;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.util.InitUtil;
+import com.liferay.portal.util.FileImpl;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -44,10 +43,6 @@ import java.util.List;
  *
  */
 public class JSPCompiler {
-
-	static {
-		InitUtil.init();
-	}
 
 	public static void main(String[] args) throws Exception {
 		if (args.length == 4) {
@@ -86,7 +81,7 @@ public class JSPCompiler {
 		if (directory.exists() && directory.isDirectory()) {
 			List<File> fileList = new ArrayList<File>();
 
-			File[] fileArray = FileUtil.sortFiles(directory.listFiles());
+			File[] fileArray = _fileUtil.sortFiles(directory.listFiles());
 
 			for (File file : fileArray) {
 				if (file.isDirectory()) {
@@ -159,6 +154,8 @@ public class JSPCompiler {
 			}
 		}
 	}
+
+	private static FileImpl _fileUtil = new FileImpl();
 
 	private String _compiler;
 	private String _classPath;
