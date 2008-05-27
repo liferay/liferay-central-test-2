@@ -36,6 +36,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.mail.util.DummyHook">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.bean.BeanLocatorImpl">
 		<priority value="WARN" />
 	</category>
@@ -508,11 +512,11 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portlet.messageboards.service.impl.MBMessageLocalServiceImpl">
+	<category name="com.liferay.portlet.messageboards.service.impl.MBCategoryLocalServiceImpl">
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portlet.messageboards.service.jms.MBMessageConsumer">
+	<category name="com.liferay.portlet.messageboards.service.impl.MBMessageLocalServiceImpl">
 		<priority value="ERROR" />
 	</category>
 
@@ -581,6 +585,10 @@
 	</category>
 
 	<category name="httpclient.wire">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="net.htmlparser.jericho">
 		<priority value="ERROR" />
 	</category>
 

@@ -38,6 +38,8 @@ import com.liferay.util.search.QueryImpl;
 
 import javax.portlet.PortletURL;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.search.BooleanQuery;
 
 /**
@@ -96,7 +98,14 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		long threadId, long messageId, String title, String content,
 		String[] tagsEntries) {
 
-		content = BBCodeUtil.getHTML(content);
+		try {
+			content = BBCodeUtil.getHTML(content);
+		}
+		catch (Exception e) {
+			_log.error(
+				"Could not parse message " + messageId + ": " + e.getMessage());
+		}
+
 		content = HtmlUtil.extractText(content);
 
 		Document doc = new DocumentImpl();
@@ -175,5 +184,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 			throw new SearchException(e);
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(Indexer.class);
 
 }
