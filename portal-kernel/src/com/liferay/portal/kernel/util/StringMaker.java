@@ -187,6 +187,10 @@ public class StringMaker {
 		return _sb.charAt(index);
 	}
 
+	public void clear() {
+		_sb.setLength(0);
+	}
+
 	public StringMaker delete(int start, int end) {
 		_sb.delete(start, end);
 
