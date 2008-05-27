@@ -65,9 +65,9 @@ public class POPNotificationsJob implements IntervalJob {
 		try {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Executing");
-
-				pollPopServer();
 			}
+
+			pollPopServer();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
