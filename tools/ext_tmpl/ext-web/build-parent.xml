@@ -40,6 +40,7 @@
 		<unjar src="${project.dir}/lib/portal/easyconf.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/friki.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/jabsorb.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/jackrabbit-text-extractors.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/jcifs.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/jcommon.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/jdom.jar" dest="${classpath.jsp}" />
