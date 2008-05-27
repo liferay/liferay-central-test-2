@@ -54,6 +54,7 @@ boolean showFeedPublishedDate = GetterUtil.getBoolean(prefs.getValue("show-feed-
 boolean showFeedDescription = GetterUtil.getBoolean(prefs.getValue("show-feed-description", Boolean.TRUE.toString()));
 boolean showFeedImage = GetterUtil.getBoolean(prefs.getValue("show-feed-image", Boolean.TRUE.toString()));
 String feedImageAlignment = prefs.getValue("feed-image-alignment", "right");
+boolean showFeedItemAuthor = GetterUtil.getBoolean(prefs.getValue("show-feed-item-author", Boolean.TRUE.toString()));
 
 String[] headerArticleResouceValues = prefs.getValues("header-article-resource-values", new String[] {"0", ""});
 

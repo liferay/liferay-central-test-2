@@ -153,6 +153,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		boolean showFeedImage = ParamUtil.getBoolean(req, "showFeedImage");
 		String feedImageAlignment = ParamUtil.getString(
 			req, "feedImageAlignment");
+		boolean showFeedItemAuthor = ParamUtil.getBoolean(
+			req, "showFeedItemAuthor");
 
 		if (urls != null && titles != null) {
 			prefs.setValues("urls", urls);
@@ -172,6 +174,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.setValue("show-feed-image", String.valueOf(showFeedImage));
 		prefs.setValue(
 			"feed-image-alignment", String.valueOf(feedImageAlignment));
+		prefs.setValue(
+			"show-feed-item-author", String.valueOf(showFeedItemAuthor));
 	}
 
 }

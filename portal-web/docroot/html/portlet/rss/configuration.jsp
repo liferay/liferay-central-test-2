@@ -207,6 +207,14 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 			</td>
 		</tr>
 		<tr>
+			<td>
+				<liferay-ui:message key="show-feed-item-author" />
+			</td>
+			<td>
+				<liferay-ui:input-checkbox param="showFeedItemAuthor" defaultValue="<%= showFeedItemAuthor %>" />
+			</td>
+		</tr>
+		<tr>
 			<td colspan="2">
 				<br />
 			</td>

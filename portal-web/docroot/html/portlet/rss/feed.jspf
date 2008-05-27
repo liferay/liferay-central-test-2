@@ -115,7 +115,7 @@ catch (Exception e) {
 								</div>
 							</c:if>
 
-							<c:if test="<%= Validator.isNotNull(author) %>">
+							<c:if test="<%= showFeedItemAuthor && Validator.isNotNull(author) %>">
 								<span class="feed-entry-author"><%= author %></span>
 							</c:if>
 
