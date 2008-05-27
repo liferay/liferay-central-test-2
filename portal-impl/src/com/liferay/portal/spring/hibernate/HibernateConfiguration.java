@@ -52,8 +52,8 @@ public class HibernateConfiguration extends TransactionAwareConfiguration {
 
 			for (int i = 0; i < configs.length; i++) {
 				try {
-					InputStream is =
-						classLoader.getResourceAsStream(configs[i]);
+					InputStream is = classLoader.getResourceAsStream(
+						configs[i]);
 
 					if (is != null) {
 						cfg = cfg.addInputStream(is);
@@ -61,15 +61,17 @@ public class HibernateConfiguration extends TransactionAwareConfiguration {
 						is.close();
 					}
 				}
-				catch (Exception e) {
-					e.printStackTrace();
+				catch (Exception e1) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(e1);
+					}
 				}
 			}
 
 			cfg.setProperties(PropsUtil.getProperties());
 		}
-		catch (Exception e) {
-			_log.error(e, e);
+		catch (Exception e2) {
+			_log.error(e2, e2);
 		}
 
 		return cfg;
