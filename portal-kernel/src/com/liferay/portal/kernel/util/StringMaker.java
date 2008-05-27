@@ -189,6 +189,49 @@ public class StringMaker {
 
 	public void clear() {
 		_sb.setLength(0);
+		_sb.setLength(defaultInitSize);
+
+		if (collect) {
+			_getInfo(new Throwable());
+		}
+	}
+
+	public void clear(int capacity) {
+		_sb.setLength(0);
+		_sb.setLength(capacity);
+
+		if (collect) {
+			_getInfo(new Throwable());
+		}
+	}
+
+	public void clear(String s) {
+		if (s == null) {
+			throw new NullPointerException();
+		}
+
+		_sb.setLength(0);
+		_sb.setLength(s.length() + defaultInitSize);
+
+		if (collect) {
+			_getInfo(new Throwable());
+		}
+
+		_sb.append(s);
+	}
+
+	public void clear(StringBuilder sb) {
+		if (sb != null) {
+			_sb = sb;
+		}
+		else {
+			_sb.setLength(0);
+			_sb.setLength(defaultInitSize);
+		}
+
+		if (collect) {
+			_getInfo(new Throwable());
+		}
 	}
 
 	public StringMaker delete(int start, int end) {
