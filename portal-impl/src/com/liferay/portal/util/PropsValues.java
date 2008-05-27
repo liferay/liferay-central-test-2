@@ -215,6 +215,15 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.COMPANY_SECURITY_STRANGERS_WITH_MX));
 
+	public static final String[] CUSTOM_SQL_CONFIGS =
+		PropsUtil.getArray(PropsUtil.CUSTOM_SQL_CONFIGS);
+
+	public static final String CUSTOM_SQL_FUNCTION_ISNOTNULL =
+		PropsUtil.get(PropsUtil.CUSTOM_SQL_FUNCTION_ISNOTNULL);
+
+	public static final String CUSTOM_SQL_FUNCTION_ISNULL =
+		PropsUtil.get(PropsUtil.CUSTOM_SQL_FUNCTION_ISNULL);
+
 	public static final String DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX =
 		PropsUtil.get(PropsUtil.DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX);
 

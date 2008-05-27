@@ -23,7 +23,7 @@
 package com.liferay.portal.spring.hibernate;
 
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.sql.SQLException;
 
@@ -39,12 +39,12 @@ public class PortalCustomSQLUtil
 	public PortalCustomSQLUtil() throws SQLException {
 		super(
 			HibernateUtil.getConnection(),
-			PropsUtil.get(PropsUtil.CUSTOM_SQL_FUNCTION_ISNULL),
-			PropsUtil.get(PropsUtil.CUSTOM_SQL_FUNCTION_ISNOTNULL));
+			PropsValues.CUSTOM_SQL_FUNCTION_ISNULL,
+			PropsValues.CUSTOM_SQL_FUNCTION_ISNOTNULL);
 	}
 
 	protected String[] getConfigs() {
-		return PropsUtil.getArray(PropsUtil.CUSTOM_SQL_CONFIGS);
+		return PropsValues.CUSTOM_SQL_CONFIGS;
 	}
 
 	protected String transform(String sql) {
