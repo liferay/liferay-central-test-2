@@ -2756,6 +2756,7 @@ show-company-name=Προβολή ονόματος οργανισμού
 show-edit-icon=Παρουσιάστε ότι εκδώστε την εικόνα
 show-feed-description=Παρουσιάστε περιγραφή τροφών
 show-feed-image=Παρουσιάστε εικόνα τροφών
+show-feed-item-author=Παρουσιάστε συντάκτη στοιχείων τροφών
 show-feed-published-date=Παρουσιάστε δημοσιευμένη τροφή ημερομηνία
 show-feed-title=Παρουσιάστε τίτλο τροφών
 show-guestbook=Προβολή Βιβλίου Επισκεπτών
