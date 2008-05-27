@@ -22,21 +22,25 @@
 
 package com.liferay.portalweb.portlet.webform;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="WebFormTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditFormTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class WebFormTests extends BaseTests {
-
-	public WebFormTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(EditFormTest.class);
-		addTestSuite(ArchiveTest.class);
+public class EditFormTest extends BaseTestCase {
+	public void testEditForm() throws Exception {
+		selenium.click("//img[@title='Configuration']");
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_86_title", "Feed Back");
+		selenium.type("_86_description", "Please let us know what you think!");
+		selenium.type("_86_fieldLabel1", "Your Name");
+		selenium.type("_86_fieldLabel2", "Rate Us!");
+		selenium.type("_86_fieldLabel3", "Additional Comments");
+		selenium.click("//input[@value='Save']");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Return to Full Page");
 	}
-
 }

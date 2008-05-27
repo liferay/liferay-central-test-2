@@ -22,21 +22,41 @@
 
 package com.liferay.portalweb.portlet.webform;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="WebFormTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="ArchiveTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class WebFormTests extends BaseTests {
+public class ArchiveTest extends BaseTestCase {
+	public void testArchive() throws Exception {
+		selenium.click("//img[@title='Configuration']");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Archived");
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_86_name", "test archive");
+		selenium.click("//input[@value='Save']");
+		selenium.waitForPageToLoad("30000");
 
-	public WebFormTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(EditFormTest.class);
-		addTestSuite(ArchiveTest.class);
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("test archive")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
 	}
-
 }
