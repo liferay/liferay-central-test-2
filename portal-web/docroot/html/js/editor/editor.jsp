@@ -22,7 +22,7 @@
  */
 %>
 
-<%@ page import="com.liferay.portal.kernel.servlet.BrowserSniffer" %>
+<%@ page import="com.liferay.portal.kernel.servlet.BrowserSnifferUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.Constants" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.liferay.portal.struts.StrutsUtil" %>
@@ -31,11 +31,11 @@
 <%
 String editorImpl = ParamUtil.getString(request, "editorImpl", PropsValues.EDITOR_WYSIWYG_DEFAULT);
 
-if (!BrowserSniffer.is_rtf(request)) {
-	if (BrowserSniffer.is_safari_mobile(request)) {
+if (!BrowserSnifferUtil.is_rtf(request)) {
+	if (BrowserSnifferUtil.is_safari_mobile(request)) {
 		editorImpl = "simple";
 	}
-	else if (BrowserSniffer.is_safari(request) && (editorImpl.indexOf("simple") == -1)) {
+	else if (BrowserSnifferUtil.is_safari(request) && (editorImpl.indexOf("simple") == -1)) {
 		editorImpl = "tinymcesimple";
 	}
 	else {

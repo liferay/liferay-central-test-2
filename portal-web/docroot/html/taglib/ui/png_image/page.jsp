@@ -32,7 +32,7 @@ String width = (String)request.getAttribute("liferay-ui:png_image:width");
 
 <div style="
 		<c:choose>
-			<c:when test="<%= BrowserSniffer.is_ie_5_5_up(request) %>">
+			<c:when test="<%= BrowserSnifferUtil.is_ie_5_5_up(request) %>">
 				filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= image %>', sizingMethod='scale');
 			</c:when>
 			<c:otherwise>

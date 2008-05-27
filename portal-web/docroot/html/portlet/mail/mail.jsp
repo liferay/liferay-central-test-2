@@ -239,11 +239,11 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 				height: <%= previewPaneHeight %>;
 				width: 100%;
 				<c:choose>
-					<c:when test="<%= BrowserSniffer.is_ie(request) %>">
+					<c:when test="<%= BrowserSnifferUtil.is_ie(request) %>">
 						overflow: hidden;
 						overflow-y: auto;
 					</c:when>
-					<c:when test="<%= BrowserSniffer.is_safari(request) %>">
+					<c:when test="<%= BrowserSnifferUtil.is_safari(request) %>">
 						overflow: auto;
 					</c:when>
 					<c:otherwise>
@@ -408,7 +408,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 				overflow: hidden;
 				padding-left: 5px;
 				<c:choose>
-					<c:when test="<%= BrowserSniffer.is_safari(request) %>">
+					<c:when test="<%= BrowserSnifferUtil.is_safari(request) %>">
 						width: 100%;
 					</c:when>
 					<c:otherwise>
