@@ -64,6 +64,9 @@ import java.util.List;
 
 import javax.portlet.PortletPreferences;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="MBMessageServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -737,7 +740,14 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 				value = StringPool.BLANK;
 			}
 			else {
-				value = BBCodeUtil.getHTML(message.getBody());
+				try {
+					value = BBCodeUtil.getHTML(message.getBody());
+				}
+				catch (Exception e) {
+					_log.error(
+						"Could not parse message " + message.getMessageId() +
+							" " + e.getMessage());
+				}
 
 				value = StringUtil.replace(
 					value,
@@ -790,5 +800,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	private static final int _RSS_ABSTRACT_LENGTH = GetterUtil.getInteger(
 		PropsUtil.get(PropsUtil.MESSAGE_BOARDS_RSS_ABSTRACT_LENGTH));
+
+	private static Log _log = LogFactory.getLog(MBMessageServiceImpl.class);
 
 }

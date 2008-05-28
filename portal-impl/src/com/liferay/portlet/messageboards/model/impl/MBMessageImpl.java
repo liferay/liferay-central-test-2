@@ -104,13 +104,21 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 		}
 	}
 
-	public String getBody(boolean translated) {
-		if (translated) {
-			return BBCodeUtil.getHTML(getBody());
+	public String getBody(boolean translate) {
+		String body = getBody();
+
+		if (translate) {
+			try {
+				body = BBCodeUtil.getHTML(body);
+			}
+			catch (Exception e) {
+				_log.error(
+					"Could not parse message " + getMessageId() + " " +
+						e.getMessage());
+			}
 		}
-		else {
-			return getBody();
-		}
+
+		return body;
 	}
 
 	public String getThreadAttachmentsDir() {

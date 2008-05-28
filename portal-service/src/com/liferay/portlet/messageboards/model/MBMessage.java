@@ -62,7 +62,7 @@ public interface MBMessage extends MBMessageModel {
 
 	public boolean isDiscussion();
 
-	public java.lang.String getBody(boolean translated);
+	public java.lang.String getBody(boolean translate);
 
 	public java.lang.String getThreadAttachmentsDir();
 

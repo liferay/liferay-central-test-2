@@ -242,7 +242,14 @@ public class MBMessageConsumer implements MessageListener {
 				replyToAddress, replyToAddress);
 
 			if (htmlFormat) {
-				curBody = BBCodeUtil.getHTML(curBody);
+				try {
+					curBody = BBCodeUtil.getHTML(curBody);
+				}
+				catch (Exception e) {
+					_log.error(
+						"Could not parse message " + mailId + " " +
+							e.getMessage());
+				}
 			}
 
 			MailMessage message = new MailMessage(
