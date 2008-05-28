@@ -311,7 +311,9 @@
 						);
 					}
 
-					Liferay._editControlsState = '<%= GetterUtil.getString(SessionClicks.get(request, "liferay_toggle_controls", null), "visible") %>';
+					<c:if test="<%= themeDisplay.isSignedIn() %>">
+						Liferay._editControlsState = '<%= GetterUtil.getString(SessionClicks.get(request, "liferay_toggle_controls", null), "visible") %>';
+					</c:if>
 
 					<%--/*jQuery(".journal-content-eip-text").leditable(
 						"<%= themeDisplay.getPathMain() %>/journal_content/update_article_field",
@@ -374,9 +376,11 @@
 					Liferay.Notice.prototype.setClosing();
 				}
 
-				if (Liferay.Util) {
-					Liferay.Util.toggleControls();
-				}
+				<c:if test="<%= themeDisplay.isSignedIn() %>">
+					if (Liferay.Util) {
+						Liferay.Util.toggleControls();
+					}
+				</c:if>
 			}
 		);
 	// ]]>
