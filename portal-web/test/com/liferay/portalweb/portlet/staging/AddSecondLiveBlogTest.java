@@ -88,6 +88,7 @@ public class AddSecondLiveBlogTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("_33_title", "Second Test Entry");
+		selenium.type("_33_title", "Second Test Entry");
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -142,6 +143,7 @@ public class AddSecondLiveBlogTest extends BaseTestCase {
 		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
 		selenium.selectFrame("//iframe");
 		selenium.typeKeys("//body", "This is a second staged entry test!");
+		selenium.type("//body", "This is a second staged entry test!");
 		selenium.selectFrame("relative=top");
 
 		for (int second = 0;; second++) {
@@ -150,7 +152,7 @@ public class AddSecondLiveBlogTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
+				if (selenium.isElementPresent("_33_saveButton")) {
 					break;
 				}
 			}
@@ -160,7 +162,7 @@ public class AddSecondLiveBlogTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Save']");
+		selenium.click("_33_saveButton");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

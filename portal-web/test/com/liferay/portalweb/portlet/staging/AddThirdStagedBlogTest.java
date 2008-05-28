@@ -69,6 +69,7 @@ public class AddThirdStagedBlogTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("_33_title", "Third Test Entry");
+		selenium.type("_33_title", "Third Test Entry");
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -124,6 +125,8 @@ public class AddThirdStagedBlogTest extends BaseTestCase {
 		selenium.selectFrame("//iframe");
 		selenium.typeKeys("//body",
 			"This is a test shout out to the workers in the field!");
+		selenium.type("//body",
+			"This is a test shout out to the workers in the field!");
 		selenium.selectFrame("relative=top");
 
 		for (int second = 0;; second++) {
@@ -132,7 +135,7 @@ public class AddThirdStagedBlogTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
+				if (selenium.isElementPresent("_33_saveButton")) {
 					break;
 				}
 			}
@@ -142,7 +145,7 @@ public class AddThirdStagedBlogTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Save']");
+		selenium.click("_33_saveButton");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

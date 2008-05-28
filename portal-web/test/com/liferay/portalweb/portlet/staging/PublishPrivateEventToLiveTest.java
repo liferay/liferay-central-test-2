@@ -38,7 +38,7 @@ public class PublishPrivateEventToLiveTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Publish to Live")) {
+				if (selenium.isElementPresent("link=Manage Pages")) {
 					break;
 				}
 			}
@@ -48,7 +48,27 @@ public class PublishPrivateEventToLiveTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Publish to Live");
+		selenium.click("link=Manage Pages");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//input[@value='Publish to Live']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//input[@value='Publish to Live']");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -103,8 +123,24 @@ public class PublishPrivateEventToLiveTest extends BaseTestCase {
 		}
 
 		selenium.click("publishBtn");
-		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to publish these pages[\\s\\S]$"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"Your request processed successfully.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }
