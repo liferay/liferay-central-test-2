@@ -114,7 +114,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		_lastPaths.add(_PATH_PORTAL_LAYOUT);
 
-		_addPaths(_lastPaths, PropsUtil.AUTH_FORWARD_LAST_PATHS);
+		addPaths(_lastPaths, PropsUtil.AUTH_FORWARD_LAST_PATHS);
 
 		// auth.public.path.
 
@@ -133,11 +133,11 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		_publicPaths.add(_PATH_PORTAL_RENDER_PORTLET);
 		_publicPaths.add(_PATH_PORTAL_TCK);
 
-		_addPaths(_publicPaths, PropsUtil.AUTH_PUBLIC_PATHS);
+		addPaths(_publicPaths, PropsUtil.AUTH_PUBLIC_PATHS);
 
 		_trackerIgnorePaths = new HashSet<String>();
 
-		_addPaths(_trackerIgnorePaths, PropsUtil.SESSION_TRACKER_IGNORE_PATHS);
+		addPaths(_trackerIgnorePaths, PropsUtil.SESSION_TRACKER_IGNORE_PATHS);
 	}
 
 	public void process(HttpServletRequest req, HttpServletResponse res)
@@ -172,25 +172,19 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		}
 	}
 
+	protected void addPaths(Set<String> paths, String propsKey) {
+		String[] pathsArray = PropsUtil.getArray(propsKey);
+
+		for (String path : pathsArray) {
+			paths.add(path);
+		}
+	}
+
 	protected void callParentDoForward(
 			String uri, HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
 
 		super.doForward(uri, req, res);
-	}
-
-	protected void doForward(
-			String uri, HttpServletRequest req, HttpServletResponse res)
-		throws IOException, ServletException {
-
-		StrutsUtil.forward(uri, getServletContext(), req, res);
-	}
-
-	protected void doInclude(
-			String uri, HttpServletRequest req, HttpServletResponse res)
-		throws IOException, ServletException {
-
-		StrutsUtil.include(uri, getServletContext(), req, res);
 	}
 
 	protected HttpServletRequest callParentProcessMultipart(
@@ -199,18 +193,88 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		return super.processMultipart(req);
 	}
 
-	protected HttpServletRequest processMultipart(HttpServletRequest req) {
-
-		// Disable Struts from automatically wrapping a multipart request
-
-		return req;
-	}
-
 	protected String callParentProcessPath(
 			HttpServletRequest req, HttpServletResponse res)
 		throws IOException {
 
 		return super.processPath(req, res);
+	}
+
+	protected boolean callParentProcessRoles(
+			HttpServletRequest req, HttpServletResponse res,
+			ActionMapping mapping)
+		throws IOException, ServletException {
+
+		return super.processRoles(req, res, mapping);
+	}
+
+	protected void cleanUp(HttpServletRequest req) throws Exception {
+
+		// Clean up portlet objects that may have been created by defineObjects
+		// for portlets that are called directly from a Struts path
+
+		RenderRequestImpl renderReqImpl = (RenderRequestImpl)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_REQUEST);
+
+		if (renderReqImpl != null) {
+			RenderRequestFactory.recycle(renderReqImpl);
+		}
+
+		RenderResponseImpl renderResImpl = (RenderResponseImpl)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_RESPONSE);
+
+		if (renderResImpl != null) {
+			RenderResponseFactory.recycle(renderResImpl);
+		}
+	}
+
+	protected void defineObjects(
+			HttpServletRequest req, HttpServletResponse res, Portlet portlet)
+		throws Exception {
+
+		String portletId = portlet.getPortletId();
+
+		ServletContext ctx =
+			(ServletContext)req.getAttribute(WebKeys.CTX);
+
+		InvokerPortlet invokerPortlet = PortletInstanceFactory.create(
+			portlet, ctx);
+
+		PortletPreferencesIds portletPreferencesIds =
+			PortletPreferencesFactoryUtil.getPortletPreferencesIds(
+				req, portletId);
+
+		PortletPreferences portletPreferences =
+			PortletPreferencesLocalServiceUtil.getPreferences(
+				portletPreferencesIds);
+
+		PortletConfig portletConfig = PortletConfigFactory.create(portlet, ctx);
+		PortletContext portletCtx = portletConfig.getPortletContext();
+
+		RenderRequestImpl renderReqImpl = RenderRequestFactory.create(
+			req, portlet, invokerPortlet, portletCtx, WindowState.MAXIMIZED,
+			PortletMode.VIEW, portletPreferences);
+
+		RenderResponseImpl renderResImpl = RenderResponseFactory.create(
+			renderReqImpl, res, portletId, portlet.getCompanyId());
+
+		renderReqImpl.defineObjects(portletConfig, renderResImpl);
+
+		req.setAttribute(WebKeys.PORTLET_STRUTS_EXECUTE, Boolean.TRUE);
+	}
+
+	protected void doForward(
+			String uri, HttpServletRequest req, HttpServletResponse res)
+		throws ServletException {
+
+		StrutsUtil.forward(uri, getServletContext(), req, res);
+	}
+
+	protected void doInclude(
+			String uri, HttpServletRequest req, HttpServletResponse res)
+		throws ServletException {
+
+		StrutsUtil.include(uri, getServletContext(), req, res);
 	}
 
 	protected StringMaker getFriendlyTrackerPath(
@@ -305,6 +369,106 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		return sm;
 	}
 
+	protected String getLastPath(HttpServletRequest req) {
+		HttpSession ses = req.getSession();
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		Boolean httpsInitial = (Boolean)ses.getAttribute(WebKeys.HTTPS_INITIAL);
+
+		String portalURL = null;
+
+		if ((PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS) &&
+			(httpsInitial != null) && (!httpsInitial.booleanValue())) {
+
+			portalURL = PortalUtil.getPortalURL(req, false);
+		}
+		else {
+			portalURL = PortalUtil.getPortalURL(req);
+		}
+
+		StringMaker sm = new StringMaker();
+
+		sm.append(portalURL);
+		sm.append(themeDisplay.getPathMain());
+		sm.append(_PATH_PORTAL_LAYOUT);
+
+		if (!PropsValues.AUTH_FORWARD_BY_LAST_PATH) {
+			if (req.getRemoteUser() != null) {
+
+				// If we do not forward by last path and the user is logged in,
+				// forward to the user's default layout to prevent a lagging
+				// loop
+
+				sm.append(StringPool.QUESTION);
+				sm.append("p_l_id");
+				sm.append(StringPool.EQUAL);
+				sm.append(LayoutConstants.DEFAULT_PLID);
+			}
+
+			return sm.toString();
+		}
+
+		LastPath lastPath = (LastPath)ses.getAttribute(WebKeys.LAST_PATH);
+
+		if (lastPath == null) {
+			return sm.toString();
+		}
+
+		Map<String, String[]> parameterMap = lastPath.getParameterMap();
+
+		// Only test for existing mappings for last paths that were set when the
+		// user accessed a layout directly instead of through its friendly URL
+
+		if (lastPath.getContextPath().equals(themeDisplay.getPathMain())) {
+			ActionMapping mapping =
+				(ActionMapping)moduleConfig.findActionConfig(
+					lastPath.getPath());
+
+			if ((mapping == null) || (parameterMap == null)) {
+				return sm.toString();
+			}
+		}
+
+		StringMaker lastPathSM = new StringMaker();
+
+		lastPathSM.append(portalURL);
+		lastPathSM.append(lastPath.getContextPath());
+		lastPathSM.append(lastPath.getPath());
+		lastPathSM.append(HttpUtil.parameterMapToString(parameterMap));
+
+		return lastPathSM.toString();
+	}
+
+	protected boolean isPortletPath(String path) {
+		if ((path != null) &&
+			(!path.equals(_PATH_C)) &&
+			(!path.startsWith(_PATH_COMMON)) &&
+			(path.indexOf(_PATH_J_SECURITY_CHECK) == -1) &&
+			(!path.startsWith(_PATH_PORTAL)) &&
+			(!path.startsWith(_PATH_WSRP))) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	protected boolean isPublicPath(String path) {
+		if ((path != null) &&
+			(_publicPaths.contains(path)) ||
+			(path.startsWith(_PATH_COMMON)) ||
+			(path.startsWith(_PATH_WSRP))) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	protected ActionMapping processMapping(
 			HttpServletRequest req, HttpServletResponse res, String path)
 		throws IOException {
@@ -326,6 +490,13 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		}
 
 		return mapping;
+	}
+
+	protected HttpServletRequest processMultipart(HttpServletRequest req) {
+
+		// Disable Struts from automatically wrapping a multipart request
+
+		return req;
 	}
 
 	protected String processPath(
@@ -597,14 +768,6 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		return path;
 	}
 
-	protected boolean callParentProcessRoles(
-			HttpServletRequest req, HttpServletResponse res,
-			ActionMapping mapping)
-		throws IOException, ServletException {
-
-		return super.processRoles(req, res, mapping);
-	}
-
 	protected boolean processRoles(
 			HttpServletRequest req, HttpServletResponse res,
 			ActionMapping mapping)
@@ -696,169 +859,6 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		}
 		else {
 			return true;
-		}
-	}
-
-	protected String getLastPath(HttpServletRequest req) {
-		HttpSession ses = req.getSession();
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
-		Boolean httpsInitial = (Boolean)ses.getAttribute(WebKeys.HTTPS_INITIAL);
-
-		String portalURL = null;
-
-		if ((PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS) &&
-			(httpsInitial != null) && (!httpsInitial.booleanValue())) {
-
-			portalURL = PortalUtil.getPortalURL(req, false);
-		}
-		else {
-			portalURL = PortalUtil.getPortalURL(req);
-		}
-
-		StringMaker sm = new StringMaker();
-
-		sm.append(portalURL);
-		sm.append(themeDisplay.getPathMain());
-		sm.append(_PATH_PORTAL_LAYOUT);
-
-		if (!PropsValues.AUTH_FORWARD_BY_LAST_PATH) {
-			if (req.getRemoteUser() != null) {
-
-				// If we do not forward by last path and the user is logged in,
-				// forward to the user's default layout to prevent a lagging
-				// loop
-
-				sm.append(StringPool.QUESTION);
-				sm.append("p_l_id");
-				sm.append(StringPool.EQUAL);
-				sm.append(LayoutConstants.DEFAULT_PLID);
-			}
-
-			return sm.toString();
-		}
-
-		LastPath lastPath = (LastPath)ses.getAttribute(WebKeys.LAST_PATH);
-
-		if (lastPath == null) {
-			return sm.toString();
-		}
-
-		Map<String, String[]> parameterMap = lastPath.getParameterMap();
-
-		// Only test for existing mappings for last paths that were set when the
-		// user accessed a layout directly instead of through its friendly URL
-
-		if (lastPath.getContextPath().equals(themeDisplay.getPathMain())) {
-			ActionMapping mapping =
-				(ActionMapping)moduleConfig.findActionConfig(
-					lastPath.getPath());
-
-			if ((mapping == null) || (parameterMap == null)) {
-				return sm.toString();
-			}
-		}
-
-		StringMaker lastPathSM = new StringMaker();
-
-		lastPathSM.append(portalURL);
-		lastPathSM.append(lastPath.getContextPath());
-		lastPathSM.append(lastPath.getPath());
-		lastPathSM.append(HttpUtil.parameterMapToString(parameterMap));
-
-		return lastPathSM.toString();
-	}
-
-	protected boolean isPortletPath(String path) {
-		if ((path != null) &&
-			(!path.equals(_PATH_C)) &&
-			(!path.startsWith(_PATH_COMMON)) &&
-			(path.indexOf(_PATH_J_SECURITY_CHECK) == -1) &&
-			(!path.startsWith(_PATH_PORTAL)) &&
-			(!path.startsWith(_PATH_WSRP))) {
-
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	protected boolean isPublicPath(String path) {
-		if ((path != null) &&
-			(_publicPaths.contains(path)) ||
-			(path.startsWith(_PATH_COMMON)) ||
-			(path.startsWith(_PATH_WSRP))) {
-
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	protected void defineObjects(
-			HttpServletRequest req, HttpServletResponse res, Portlet portlet)
-		throws Exception {
-
-		String portletId = portlet.getPortletId();
-
-		ServletContext ctx =
-			(ServletContext)req.getAttribute(WebKeys.CTX);
-
-		InvokerPortlet invokerPortlet = PortletInstanceFactory.create(
-			portlet, ctx);
-
-		PortletPreferencesIds portletPreferencesIds =
-			PortletPreferencesFactoryUtil.getPortletPreferencesIds(
-				req, portletId);
-
-		PortletPreferences portletPreferences =
-			PortletPreferencesLocalServiceUtil.getPreferences(
-				portletPreferencesIds);
-
-		PortletConfig portletConfig = PortletConfigFactory.create(portlet, ctx);
-		PortletContext portletCtx = portletConfig.getPortletContext();
-
-		RenderRequestImpl renderReqImpl = RenderRequestFactory.create(
-			req, portlet, invokerPortlet, portletCtx, WindowState.MAXIMIZED,
-			PortletMode.VIEW, portletPreferences);
-
-		RenderResponseImpl renderResImpl = RenderResponseFactory.create(
-			renderReqImpl, res, portletId, portlet.getCompanyId());
-
-		renderReqImpl.defineObjects(portletConfig, renderResImpl);
-
-		req.setAttribute(WebKeys.PORTLET_STRUTS_EXECUTE, Boolean.TRUE);
-	}
-
-	protected void cleanUp(HttpServletRequest req) throws Exception {
-
-		// Clean up portlet objects that may have been created by defineObjects
-		// for portlets that are called directly from a Struts path
-
-		RenderRequestImpl renderReqImpl = (RenderRequestImpl)req.getAttribute(
-			JavaConstants.JAVAX_PORTLET_REQUEST);
-
-		if (renderReqImpl != null) {
-			RenderRequestFactory.recycle(renderReqImpl);
-		}
-
-		RenderResponseImpl renderResImpl = (RenderResponseImpl)req.getAttribute(
-			JavaConstants.JAVAX_PORTLET_RESPONSE);
-
-		if (renderResImpl != null) {
-			RenderResponseFactory.recycle(renderResImpl);
-		}
-	}
-
-	private void _addPaths(Set<String> paths, String propsKey) {
-		String[] pathsArray = PropsUtil.getArray(propsKey);
-
-		for (int i = 0; i < pathsArray.length; i++) {
-			paths.add(pathsArray[i]);
 		}
 	}
 

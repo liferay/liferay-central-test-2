@@ -229,6 +229,50 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		process(httpReq, httpRes);
 	}
 
+	protected void doForward(
+			String uri, HttpServletRequest req, HttpServletResponse res)
+		throws IOException, ServletException {
+
+		doInclude(uri, req, res);
+	}
+
+	protected void doInclude(
+			String uri, HttpServletRequest req, HttpServletResponse res)
+		throws IOException, ServletException {
+
+		PortletConfigImpl portletConfig = (PortletConfigImpl)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_CONFIG);
+
+		RenderRequest renderRequest = (RenderRequest)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_REQUEST);
+
+		RenderResponse renderResponse = (RenderResponse)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_RESPONSE);
+
+		PortletRequestDispatcherImpl prd = (PortletRequestDispatcherImpl)
+			portletConfig.getPortletContext().getRequestDispatcher(
+				StrutsUtil.TEXT_HTML_DIR + uri);
+
+		try {
+			if (prd == null) {
+				_log.error(uri + " is not a valid include");
+			}
+			else {
+				prd.include(renderRequest, renderResponse, true);
+			}
+		}
+		catch (PortletException pe) {
+			Throwable cause = pe.getCause();
+
+			if (cause instanceof ServletException) {
+				throw (ServletException)cause;
+			}
+			else {
+				_log.error(cause, cause);
+			}
+		}
+	}
+
 	protected ActionForm processActionForm(
 		HttpServletRequest req, HttpServletResponse res,
 		ActionMapping mapping) {
@@ -308,6 +352,48 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		}
 
 		return mapping;
+	}
+
+	protected HttpServletRequest processMultipart(HttpServletRequest req) {
+
+		// Disable Struts from automatically wrapping a multipart request
+
+		return req;
+	}
+
+	protected String processPath(
+		HttpServletRequest req, HttpServletResponse res)  {
+
+		String path = req.getParameter("struts_action");
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Getting request parameter path " + path);
+		}
+
+		if (Validator.isNull(path)) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Getting request attribute path " + path);
+			}
+
+			path = (String)req.getAttribute(WebKeys.PORTLET_STRUTS_ACTION);
+		}
+
+		if (path == null) {
+			PortletConfigImpl portletConfig =
+				(PortletConfigImpl)req.getAttribute(
+					JavaConstants.JAVAX_PORTLET_CONFIG);
+
+			_log.error(
+				portletConfig.getPortletName() +
+					" does not have any paths specified");
+		}
+		else {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Processing path " + path);
+			}
+		}
+
+		return path;
 	}
 
 	protected boolean processRoles(
@@ -407,9 +493,8 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 	}
 
 	protected boolean processValidateAction(
-			HttpServletRequest req, HttpServletResponse res, ActionForm form,
-			ActionMapping mapping)
-		throws IOException, ServletException {
+		HttpServletRequest req, HttpServletResponse res, ActionForm form,
+		ActionMapping mapping) {
 
 		if (form == null) {
 			return true;
@@ -449,93 +534,6 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		req.setAttribute(PortletAction.getForwardKey(req), input);
 
 		return false;
-	}
-
-	protected void doForward(
-			String uri, HttpServletRequest req, HttpServletResponse res)
-		throws IOException, ServletException {
-
-		doInclude(uri, req, res);
-	}
-
-	protected void doInclude(
-			String uri, HttpServletRequest req, HttpServletResponse res)
-		throws IOException, ServletException {
-
-		PortletConfigImpl portletConfig = (PortletConfigImpl)req.getAttribute(
-			JavaConstants.JAVAX_PORTLET_CONFIG);
-
-		RenderRequest renderRequest = (RenderRequest)req.getAttribute(
-			JavaConstants.JAVAX_PORTLET_REQUEST);
-
-		RenderResponse renderResponse = (RenderResponse)req.getAttribute(
-			JavaConstants.JAVAX_PORTLET_RESPONSE);
-
-		PortletRequestDispatcherImpl prd = (PortletRequestDispatcherImpl)
-			portletConfig.getPortletContext().getRequestDispatcher(
-				StrutsUtil.TEXT_HTML_DIR + uri);
-
-		try {
-			if (prd == null) {
-				_log.error(uri + " is not a valid include");
-			}
-			else {
-				prd.include(renderRequest, renderResponse, true);
-			}
-		}
-		catch (PortletException pe) {
-			Throwable cause = pe.getCause();
-
-			if (cause instanceof ServletException) {
-				throw (ServletException)cause;
-			}
-			else {
-				_log.error(cause, cause);
-			}
-		}
-	}
-
-	protected HttpServletRequest processMultipart(HttpServletRequest req) {
-
-		// Disable Struts from automatically wrapping a multipart request
-
-		return req;
-	}
-
-	protected String processPath(
-			HttpServletRequest req, HttpServletResponse res)
-		throws IOException {
-
-		String path = req.getParameter("struts_action");
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Getting request parameter path " + path);
-		}
-
-		if (Validator.isNull(path)) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Getting request attribute path " + path);
-			}
-
-			path = (String)req.getAttribute(WebKeys.PORTLET_STRUTS_ACTION);
-		}
-
-		if (path == null) {
-			PortletConfigImpl portletConfig =
-				(PortletConfigImpl)req.getAttribute(
-					JavaConstants.JAVAX_PORTLET_CONFIG);
-
-			_log.error(
-				portletConfig.getPortletName() +
-					" does not have any paths specified");
-		}
-		else {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Processing path " + path);
-			}
-		}
-
-		return path;
 	}
 
 	private static final String _PATH_PORTAL_PORTLET_ACCESS_DENIED =
