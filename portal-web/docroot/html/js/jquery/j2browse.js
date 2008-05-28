@@ -11,7 +11,7 @@ jQuery Browser Plugin
 */
 
 (function($) {
-	
+
 	// Define whether Browser Selectors will be added automatically; set as false to disable.
 	var addSelectors = true;
 
@@ -21,7 +21,7 @@ jQuery Browser Plugin
 	var b = /(Firefox|Opera|Safari|KDE|iCab|Flock|IE)/.exec(u);
 	var os = /(Win|Mac|Linux|iPhone|Sun|Solaris)/.exec(p);
 	var versionDefaults = [0,0];
-	
+
 	b = (!b || !b.length) ? (/(Mozilla)/.exec(u) || ['']) : b;
 	os = (!os || !os.length) ? [''] : os;
 
