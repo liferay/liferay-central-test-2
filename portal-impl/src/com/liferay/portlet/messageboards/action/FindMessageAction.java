@@ -32,6 +32,7 @@ import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 
@@ -80,6 +81,12 @@ public class FindMessageAction extends Action {
 			portletURL.setParameter("messageId", String.valueOf(messageId));
 
 			res.sendRedirect(portletURL.toString());
+
+			return null;
+		}
+		catch (NoSuchMessageException nsme) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_NOT_FOUND, nsme, req, res);
 
 			return null;
 		}
