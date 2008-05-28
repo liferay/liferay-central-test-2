@@ -37,12 +37,9 @@ import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.ActionResponseImpl;
-import com.liferay.portlet.RenderRequestImpl;
-import com.liferay.portlet.RenderResponseImpl;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -63,10 +60,8 @@ public class CommunitiesUtil {
 	public static void deleteLayout(ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
-		HttpServletResponse httpRes =
-			((ActionResponseImpl)res).getHttpServletResponse();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
 
 		deleteLayout(httpReq, httpRes);
 	}
@@ -74,10 +69,8 @@ public class CommunitiesUtil {
 	public static void deleteLayout(RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		HttpServletRequest httpReq =
-			((RenderRequestImpl)req).getHttpServletRequest();
-		HttpServletResponse httpRes =
-			((RenderResponseImpl)res).getHttpServletResponse();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
 
 		deleteLayout(httpReq, httpRes);
 	}
@@ -86,8 +79,8 @@ public class CommunitiesUtil {
 			HttpServletRequest req, HttpServletResponse res)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();

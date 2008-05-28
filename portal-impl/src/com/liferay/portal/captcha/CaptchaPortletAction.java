@@ -24,9 +24,9 @@ package com.liferay.portal.captcha;
 
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsFiles;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.util.ExtPropertiesLoader;
 
 import java.util.Properties;
@@ -74,8 +74,8 @@ public class CaptchaPortletAction extends PortletAction {
 
 			ses.setAttribute(WebKeys.CAPTCHA_TEXT, captchaText);
 
-			HttpServletResponse httpRes =
-				((ActionResponseImpl)res).getHttpServletResponse();
+			HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(
+				res);
 
 			_producer.createImage(httpRes.getOutputStream(), captchaText);
 

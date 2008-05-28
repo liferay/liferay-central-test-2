@@ -177,8 +177,8 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			req.setAttribute(exceptionId, e);
 		}
 
-		String forward =
-			(String)req.getAttribute(PortletAction.getForwardKey(req));
+		String forward = (String)req.getAttribute(
+			PortletAction.getForwardKey(req));
 
 		if (forward != null) {
 			String queryString = StringPool.BLANK;

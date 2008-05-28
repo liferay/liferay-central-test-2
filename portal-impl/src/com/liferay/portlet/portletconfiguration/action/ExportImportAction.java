@@ -32,8 +32,8 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.UploadRequestUtil;
-import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.communities.util.StagingUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.servlet.SessionErrors;
@@ -149,8 +149,8 @@ public class ExportImportAction extends EditConfigurationAction {
 			byte[] byteArray = LayoutServiceUtil.exportPortletInfo(
 				plid, portlet.getPortletId(), req.getParameterMap());
 
-			HttpServletResponse httpRes =
-				((ActionResponseImpl)res).getHttpServletResponse();
+			HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(
+				res);
 
 			ServletResponseUtil.sendFile(httpRes, fileName, byteArray);
 

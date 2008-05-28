@@ -28,7 +28,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portlet.ActionResponseImpl;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.servlet.SessionErrors;
 
@@ -68,8 +68,8 @@ public class ExportPagesAction extends PortletAction {
 			byte[] byteArray = LayoutServiceUtil.exportLayouts(
 				groupId, privateLayout, req.getParameterMap());
 
-			HttpServletResponse httpRes =
-				((ActionResponseImpl)res).getHttpServletResponse();
+			HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(
+				res);
 
 			ServletResponseUtil.sendFile(httpRes, fileName, byteArray);
 

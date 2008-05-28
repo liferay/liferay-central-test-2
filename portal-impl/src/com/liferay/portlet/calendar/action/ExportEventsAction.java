@@ -26,8 +26,8 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.calendar.service.CalEventServiceUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
@@ -83,8 +83,8 @@ public class ExportEventsAction extends PortletAction {
 
 			is = new BufferedInputStream(new FileInputStream(file));
 
-			HttpServletResponse httpRes =
-				((ActionResponseImpl)res).getHttpServletResponse();
+			HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(
+				res);
 
 			ServletResponseUtil.sendFile(httpRes, file.getName(), is);
 

@@ -33,8 +33,6 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
@@ -88,10 +86,8 @@ public class RSSAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
-		HttpServletResponse httpRes =
-			((ActionResponseImpl)res).getHttpServletResponse();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
 
 		ServletResponseUtil.sendFile(
 			httpRes, null, getRSS(httpReq), ContentTypes.TEXT_XML_UTF8);

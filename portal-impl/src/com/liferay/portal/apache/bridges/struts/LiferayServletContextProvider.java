@@ -25,11 +25,10 @@ package com.liferay.portal.apache.bridges.struts;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.ServletContextProvider;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletContextImpl;
 import com.liferay.portlet.RenderRequestImpl;
-import com.liferay.portlet.RenderResponseImpl;
 import com.liferay.util.servlet.UploadServletRequest;
 
 import java.io.IOException;
@@ -69,7 +68,7 @@ public class LiferayServletContextProvider implements ServletContextProvider {
 		HttpServletRequest httpReq = null;
 
 		if (req instanceof ActionRequestImpl) {
-			httpReq = ((ActionRequestImpl)req).getHttpServletRequest();
+			httpReq = PortalUtil.getHttpServletRequest(req);
 
 	        String contentType = httpReq.getHeader(HttpHeaders.CONTENT_TYPE);
 
@@ -98,12 +97,7 @@ public class LiferayServletContextProvider implements ServletContextProvider {
 	public HttpServletResponse getHttpServletResponse(
 		GenericPortlet portlet, PortletResponse res) {
 
-		if (res instanceof RenderResponseImpl) {
-			return ((RenderResponseImpl)res).getHttpServletResponse();
-		}
-		else {
-			return ((ActionResponseImpl)res).getHttpServletResponse();
-		}
+		return PortalUtil.getHttpServletResponse(res);
 	}
 
 }

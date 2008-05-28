@@ -31,8 +31,6 @@ import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.MimeTypesUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
@@ -90,10 +88,8 @@ public class GetPageAttachmentAction extends PortletAction {
 		String title = ParamUtil.getString(req, "title");
 		String fileName = ParamUtil.getString(req, "fileName");
 
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
-		HttpServletResponse httpRes =
-			((ActionResponseImpl)res).getHttpServletResponse();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
 
 		getFile(nodeId, title, fileName, httpReq, httpRes);
 
