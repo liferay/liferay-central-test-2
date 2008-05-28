@@ -33,6 +33,7 @@ import org.jabsorb.JSONSerializer;
 import org.jabsorb.serializer.MarshallException;
 import org.jabsorb.serializer.UnmarshallException;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -121,6 +122,36 @@ public class JSONUtil {
 			long time = value.getTime() / Time.SECOND;
 
 			put(jsonObj, key, String.valueOf(time));
+		}
+	}
+
+	public static void put(JSONObject jsonObj, String key, JSONArray value) {
+		if (value == null) {
+			value = new JSONArray();
+		}
+
+		try {
+			jsonObj.put(key, value);
+		}
+		catch (JSONException jsone) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(jsone, jsone);
+			}
+		}
+	}
+
+	public static void put(JSONObject jsonObj, String key, JSONObject value) {
+		if (value == null) {
+			value = new JSONObject();
+		}
+
+		try {
+			jsonObj.put(key, value);
+		}
+		catch (JSONException jsone) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(jsone, jsone);
+			}
 		}
 	}
 
