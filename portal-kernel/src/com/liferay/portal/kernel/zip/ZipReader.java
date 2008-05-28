@@ -148,7 +148,6 @@ public class ZipReader implements Serializable {
 	}
 
 	public List<ObjectValuePair<String, byte[]>> getFolderEntries(String path) {
-
 		return _folderEntries.get(path);
 	}
 
