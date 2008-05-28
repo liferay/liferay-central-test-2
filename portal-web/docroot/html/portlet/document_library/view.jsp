@@ -309,21 +309,24 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 												'<li class="list-item">' +
 													'<img border="0" class="expand-image" hspace="0" id="<portlet:namespace />expand-image-' + json[i].folderId + '" onclick="<portlet:namespace />getFolders(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/trees/plus.png" vspace="0" />\n' +
 													'<img border="0" class="folder-image" hspace="0" id="<portlet:namespace />folder-image-' + json[i].folderId + '" onclick="<portlet:namespace />getFolders(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/common/folder.png" vspace="0" />\n' +
-													'<a href="' + folderURL + json[i].folderId + '">' + json[i].name + '</a>\n' +
+													'<a href="' + folderURL + '&<portlet:namespace />folderId=' + json[i].folderId + '">' + json[i].name + '</a>\n' +
 													'<span class="col-folders">' + json[i].subFoldersCount + '</span>\n' +
 													'<span class="col-documents">' + json[i].fileEntriesCount + '</span>\n' +
 													'<span id="span-' + json[i].folderId + '"></span>' +
 												'</li>'
 											);
 
-											jQuery('#span-' + json[i].folderId).load(actionMenuURL + json[i].folderId + '&<portlet:namespace />ajaxRedirect=' + folderURL, function() {
-												new Liferay.Menu(
-													{
-														trigger: '.lfr-trigger',
-														button: '.lfr-actions'
-													}
-												);
-											});
+											jQuery('#span-' + json[i].folderId).load(
+												actionMenuURL + '&<portlet:namespace />folderId=' + json[i].folderId + '&<portlet:namespace />ajaxRedirect=' + folderURL,
+												function() {
+													new Liferay.Menu(
+														{
+															trigger: '.lfr-trigger',
+															button: '.lfr-actions'
+														}
+													);
+												}
+											);
 										}
 									}
 
