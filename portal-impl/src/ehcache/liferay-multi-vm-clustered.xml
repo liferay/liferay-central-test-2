@@ -18,7 +18,7 @@
 		maxElementsInMemory="10000"
 		eternal="false"
         timeToIdleSeconds="600"
-		overflowToDisk="true"
+		overflowToDisk="false"
 	>
         <cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
@@ -32,7 +32,7 @@
 		maxElementsInMemory="10000"
 		eternal="false"
 		timeToLiveSeconds="300"
-		overflowToDisk="true"
+		overflowToDisk="false"
 	>
         <cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
@@ -46,7 +46,7 @@
 		maxElementsInMemory="10000"
 		eternal="false"
         timeToIdleSeconds="600"
-		overflowToDisk="true"
+		overflowToDisk="false"
 	>
         <cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
@@ -60,7 +60,7 @@
 		maxElementsInMemory="10000"
 		eternal="false"
         timeToIdleSeconds="600"
-		overflowToDisk="true"
+		overflowToDisk="false"
 	>
         <cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
@@ -74,7 +74,7 @@
 		maxElementsInMemory="1000"
 		eternal="false"
 		timeToLiveSeconds="3600"
-		overflowToDisk="true"
+		overflowToDisk="false"
 	>
         <cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
@@ -88,7 +88,7 @@
 		maxElementsInMemory="1000"
 		eternal="false"
 		timeToLiveSeconds="3600"
-		overflowToDisk="true"
+		overflowToDisk="false"
 	>
         <cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
@@ -102,7 +102,7 @@
 		maxElementsInMemory="10000"
 		eternal="false"
         timeToIdleSeconds="600"
-		overflowToDisk="true"
+		overflowToDisk="false"
 	>
         <cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
@@ -116,7 +116,7 @@
 		maxElementsInMemory="10000"
 		eternal="false"
         timeToIdleSeconds="600"
-		overflowToDisk="true"
+		overflowToDisk="false"
 	>
         <cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"

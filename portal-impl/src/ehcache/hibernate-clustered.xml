@@ -19,7 +19,7 @@
 		maxElementsInMemory="10000"
 		eternal="false"
         timeToIdleSeconds="600"
-		overflowToDisk="true"
+		overflowToDisk="false"
 	>
         <cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
@@ -41,7 +41,7 @@
 		name="org.hibernate.cache.UpdateTimestampsCache"
 		maxElementsInMemory="5000"
 		eternal="true"
-		overflowToDisk="true"
+		overflowToDisk="false"
 	>
         <cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
@@ -58,7 +58,7 @@
 		maxElementsInMemory="10000"
 		eternal="false"
         timeToIdleSeconds="600"
-		overflowToDisk="true"
+		overflowToDisk="false"
 	>
         <cacheEventListenerFactory
 			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
