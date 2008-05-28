@@ -18,6 +18,12 @@ jQuery Browser Plugin
 	// Define Navigator Properties.
 	var p = navigator.platform;
 	var u = navigator.userAgent;
+	var b = /(Firefox|Opera|Safari|KDE|iCab|Flock|IE)/.exec(u);
+	var os = /(Win|Mac|Linux|iPhone|Sun|Solaris)/.exec(p);
+	var versionDefaults = [0,0];
+	
+	b = (!b || !b.length) ? (/(Mozilla)/.exec(u) || ['']) : b;
+	os = (!os || !os.length) ? [''] : os;
 
 	// Define Browser Properties.
 	var o = jQuery.extend($.browser, {
@@ -38,14 +44,15 @@ jQuery Browser Plugin
 		netscape: /Netscape/.test(u),
 		opera: /Opera/.test(u),
 		safari: /Safari/.test(u),
-		browser: /(Firefox|Opera|Safari|KDE|iCab|Flock|IE)/.exec(u)[0].toLowerCase(),
+		browser: b[0].toLowerCase(),
 
 		// Define the opperating system
 		win: /Win/.test(p),
 		mac: /Mac/.test(p),
 		linux: /Linux/.test(p),
 		iphone: /iPhone/.test(p),
-		os: /(Win|Mac|Linux|iPhone)/.exec(p)[0].toLowerCase(),
+		sun: /Solaris|SunOS/.test(p),
+		os: os[0].toLowerCase(),
 
 		// Define the classic navigator properties
 		platform: p,
@@ -66,15 +73,15 @@ jQuery Browser Plugin
 	// Define the Browser Client Version.
 	o.version = {
 			string: (o.msie)
-			? /MSIE ([^;]+)/.exec(u)[1]
+			? (/MSIE ([^;]+)/.exec(u) || versionDefaults)[1]
 			: (o.firefox)
-				? /Firefox\/(.+)/.exec(u)[1]
+				? (/Firefox\/(.+)/.exec(u) || versionDefaults)[1]
 				: (o.safari)
-					? /Version\/([^\s]+)/.exec(u)[1]
+					? (/Version\/([^\s]+)/.exec(u) || versionDefaults)[1]
 					: (o.opera)
-						? /Opera\/([^\s]+)/.exec(u)[1]
-						: undefined };
-	o.version.number = parseFloat(o.version.string);
+						? (/Opera\/([^\s]+)/.exec(u) || versionDefaults)[1]
+						: 'undefined' };
+	o.version.number = parseFloat(o.version.string) || versionDefaults[0];
 	o.version.major = /([^\.]+)/.exec(o.version.string)[1];
 
 	// Define the Browser with Client Version.
