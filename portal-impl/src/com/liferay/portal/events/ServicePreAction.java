@@ -143,8 +143,6 @@ public class ServicePreAction extends Action {
 			servicePre(req, res);
 		}
 		catch (Exception e) {
-			_log.error(e, e);
-
 			throw new ActionException(e);
 		}
 

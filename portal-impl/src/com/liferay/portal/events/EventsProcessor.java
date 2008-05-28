@@ -129,6 +129,9 @@ public class EventsProcessor {
 					try {
 						a.run(req, res);
 					}
+					catch (ActionException ae) {
+						throw ae;
+					}
 					catch (Exception e) {
 						throw new ActionException(e);
 					}
@@ -138,6 +141,9 @@ public class EventsProcessor {
 
 					try {
 						sa.run(ses);
+					}
+					catch (ActionException ae) {
+						throw ae;
 					}
 					catch (Exception e) {
 						throw new ActionException(e);

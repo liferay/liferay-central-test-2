@@ -22,6 +22,7 @@
 
 package com.liferay.portal.servlet;
 
+import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.deploy.hot.PluginPackageHotDeployListener;
 import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.events.StartupAction;
@@ -40,6 +41,7 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalInitableUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lastmodified.LastModifiedAction;
 import com.liferay.portal.model.Company;
@@ -79,6 +81,7 @@ import com.liferay.portlet.social.model.impl.SocialActivityInterpreterImpl;
 import com.liferay.portlet.social.model.impl.SocialRequestInterpreterImpl;
 import com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialRequestInterpreterLocalServiceUtil;
+import com.liferay.util.servlet.DynamicServletRequest;
 import com.liferay.util.servlet.EncryptedServletRequest;
 
 import java.io.IOException;
@@ -657,6 +660,23 @@ public class MainServlet extends ActionServlet {
 				PropsValues.SERVLET_SERVICE_EVENTS_PRE, req, res);
 		}
 		catch (Exception e) {
+			Throwable cause = e.getCause();
+
+			if (cause instanceof NoSuchLayoutException) {
+				DynamicServletRequest dynamicReq = new DynamicServletRequest(
+					req);
+
+				// Reset p_l_id or there will be an infinite loop
+
+				dynamicReq.setParameter("p_l_id", StringPool.BLANK);
+
+				PortalUtil.sendError(
+					HttpServletResponse.SC_NOT_FOUND,
+					(NoSuchLayoutException)cause, dynamicReq, res);
+
+				return;
+			}
+
 			_log.error(e, e);
 
 			req.setAttribute(PageContext.EXCEPTION, e);
@@ -664,6 +684,8 @@ public class MainServlet extends ActionServlet {
 			StrutsUtil.forward(
 				PropsValues.SERVLET_SERVICE_EVENTS_PRE_ERROR_PAGE, ctx, req,
 				res);
+
+			return;
 		}
 
 		try {

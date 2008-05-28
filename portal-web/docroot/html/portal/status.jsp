@@ -40,7 +40,9 @@ for (String key : SessionErrors.keySet(request)) {
 
 <c:choose>
 	<c:when test="<%= SessionErrors.contains(request, PrincipalException.class.getName()) %>">
-		<h3 class="portlet-msg-error"><liferay-ui:message key="forbidden" /></h3><br />
+		<h3 class="portlet-msg-error">
+			<liferay-ui:message key="forbidden" />
+		</h3>
 
 		<liferay-ui:message key="you-do-not-have-permission-to-access-the-requested-resource" />
 
@@ -49,7 +51,9 @@ for (String key : SessionErrors.keySet(request)) {
 		<code><%= url %></code>
 	</c:when>
 	<c:when test="<%= SessionErrors.contains(request, PortalException.class.getName()) || SessionErrors.contains(request, SystemException.class.getName()) %>">
-		<h3 class="portlet-msg-error"><liferay-ui:message key="internal-server-error" /></h3><br />
+		<h3 class="portlet-msg-error">
+			<liferay-ui:message key="internal-server-error" />
+		</h3>
 
 		<liferay-ui:message key="an-error-occurred-while-accessing-the-requested-resource" />
 
@@ -58,7 +62,9 @@ for (String key : SessionErrors.keySet(request)) {
 		<code><%= url %></code>
 	</c:when>
 	<c:when test="<%= SessionErrors.contains(request, TransformException.class.getName()) %>">
-		<h3 class="portlet-msg-error"><liferay-ui:message key="internal-server-error" /></h3><br />
+		<h3 class="portlet-msg-error">
+			<liferay-ui:message key="internal-server-error" />
+		</h3>
 
 		<liferay-ui:message key="an-error-occurred-while-processing-the-requested-resource" />
 
@@ -77,7 +83,9 @@ for (String key : SessionErrors.keySet(request)) {
 		</div>
 	</c:when>
 	<c:when test="<%= noSuchResource %>">
-		<h3 class="portlet-msg-error"><liferay-ui:message key="not-found" /></h3><br />
+		<h3 class="portlet-msg-error">
+			<liferay-ui:message key="not-found" />
+		</h3>
 
 		<liferay-ui:message key="the-requested-resource-was-not-found" />
 
@@ -86,7 +94,9 @@ for (String key : SessionErrors.keySet(request)) {
 		<code><%= url %></code>
 	</c:when>
 	<c:otherwise>
-		<h3 class="portlet-msg-error"><liferay-ui:message key="internal-server-error" /></h3><br />
+		<h3 class="portlet-msg-error">
+			<liferay-ui:message key="internal-server-error" />
+		</h3>
 
 		<liferay-ui:message key="an-error-occurred-while-accessing-the-requested-resource" />
 
