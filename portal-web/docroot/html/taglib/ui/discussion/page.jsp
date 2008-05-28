@@ -212,8 +212,6 @@ List messages = treeWalker.getMessages();
 
 	for (i = 1; i < messages.size(); i++) {
 		message = (MBMessage)messages.get(i);
-
-		User user2 = UserLocalServiceUtil.getUserById(message.getUserId());
 	%>
 
 		<tr>
