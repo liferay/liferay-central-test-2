@@ -63,6 +63,9 @@ public class UserFinderImpl implements UserFinder {
 	public static String FIND_BY_C_FN_MN_LN_SN_EA_A =
 		UserFinder.class.getName() + ".findByC_FN_MN_LN_SN_EA_A";
 
+	public static String JOIN_BY_CONTACT_TWITTER_SN =
+		UserFinder.class.getName() + ".joinByContactTwitterSN";
+
 	public static String JOIN_BY_PERMISSION =
 		UserFinder.class.getName() + ".joinByPermission";
 
@@ -395,7 +398,10 @@ public class UserFinderImpl implements UserFinder {
 	protected String getJoin(String key) {
 		String join = StringPool.BLANK;
 
-		if (key.equals("permission")) {
+		if (key.equals("contactTwitterSn")) {
+			join = CustomSQLUtil.get(JOIN_BY_CONTACT_TWITTER_SN);
+		}
+		else if (key.equals("permission")) {
 			join = CustomSQLUtil.get(JOIN_BY_PERMISSION);
 		}
 		else if (key.equals("userGroupRole")) {
@@ -470,7 +476,10 @@ public class UserFinderImpl implements UserFinder {
 	protected String getWhere(String key, Object value) {
 		String join = StringPool.BLANK;
 
-		if (key.equals("permission")) {
+		if (key.equals("contactTwitterSn")) {
+			join = CustomSQLUtil.get(JOIN_BY_CONTACT_TWITTER_SN);
+		}
+		else if (key.equals("permission")) {
 			join = CustomSQLUtil.get(JOIN_BY_PERMISSION);
 		}
 		else if (key.equals("userGroupRole")) {

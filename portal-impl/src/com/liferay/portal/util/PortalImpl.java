@@ -586,6 +586,10 @@ public class PortalImpl implements Portal {
 		return companyId;
 	}
 
+	public long[] getCompanyIds() {
+		return PortalInstances.getCompanyIds();
+	}
+
 	public String getComputerAddress() {
 		return _computerAddress;
 	}

@@ -1796,6 +1796,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		String password = oldPassword;
 		screenName = getScreenName(screenName);
 		emailAddress = emailAddress.trim().toLowerCase();
+		aimSn.trim().toLowerCase();
+		facebookSn.trim().toLowerCase();
+		icqSn.trim().toLowerCase();
+		jabberSn.trim().toLowerCase();
+		msnSn.trim().toLowerCase();
+		mySpaceSn.trim().toLowerCase();
+		skypeSn.trim().toLowerCase();
+		twitterSn.trim().toLowerCase();
+		ymSn.trim().toLowerCase();
 		Date now = new Date();
 
 		validate(userId, screenName, emailAddress, firstName, lastName, smsSn);

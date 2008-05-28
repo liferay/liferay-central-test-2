@@ -117,6 +117,8 @@ public interface Portal {
 
 	public long getCompanyIdByWebId(String webId);
 
+	public long[] getCompanyIds();
+
 	public String getComputerAddress();
 
 	public String getComputerName();

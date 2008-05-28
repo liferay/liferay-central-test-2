@@ -145,6 +145,10 @@ public class PortalUtil {
 		return getPortal().getCompanyIdByWebId(webId);
 	}
 
+	public static long[] getCompanyIds() {
+		return getPortal().getCompanyIds();
+	}
+
 	public static String getComputerAddress() {
 		return getPortal().getComputerAddress();
 	}

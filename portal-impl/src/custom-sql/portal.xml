@@ -976,6 +976,12 @@
 				Contact_.lastName ASC
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.UserFinder.joinByContactTwitterSN">
+		<![CDATA[
+			WHERE
+				(Contact_.twitterSn != '')
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.joinByPermission">
 		<![CDATA[
 			INNER JOIN
