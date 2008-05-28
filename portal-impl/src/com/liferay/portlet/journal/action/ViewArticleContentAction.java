@@ -35,6 +35,7 @@ import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
@@ -186,6 +187,12 @@ public class ViewArticleContentAction extends Action {
 				return mapping.findForward(
 					"portlet.journal.view_article_content");
 			}
+		}
+		catch (NoSuchArticleException nsae) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_NOT_FOUND, nsae, req, res);
+
+			return null;
 		}
 		catch (Exception e2) {
 			req.setAttribute(PageContext.EXCEPTION, e2);
