@@ -145,8 +145,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		String path = super.processPath(req, res);
 
-		ActionMapping mapping =
-			(ActionMapping)moduleConfig.findActionConfig(path);
+		ActionMapping mapping = (ActionMapping)moduleConfig.findActionConfig(
+			path);
 
 		if ((mapping == null) && !path.startsWith(_PATH_WSRP)) {
 			String lastPath = getLastPath(req);
@@ -303,6 +303,29 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		}
 
 		return sm;
+	}
+
+	protected ActionMapping processMapping(
+			HttpServletRequest req, HttpServletResponse res, String path)
+		throws IOException {
+
+		if (path == null) {
+			return null;
+		}
+
+		ActionMapping mapping = super.processMapping(req, res, path);
+
+		if (mapping == null) {
+			String msg = getInternal().getMessage("processInvalid");
+
+			_log.error("User ID " + req.getRemoteUser());
+			_log.error("Current URL " + PortalUtil.getCurrentURL(req));
+			_log.error("Referer " + req.getHeader("Referer"));
+
+			_log.error(msg + " " + path);
+		}
+
+		return mapping;
 	}
 
 	protected String processPath(

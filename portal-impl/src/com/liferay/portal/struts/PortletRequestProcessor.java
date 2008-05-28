@@ -295,7 +295,19 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			return null;
 		}
 
-		return super.processMapping(req, res, path);
+		ActionMapping mapping = super.processMapping(req, res, path);
+
+		if (mapping == null) {
+			String msg = getInternal().getMessage("processInvalid");
+
+			_log.error("User ID " + req.getRemoteUser());
+			_log.error("Current URL " + PortalUtil.getCurrentURL(req));
+			_log.error("Referer " + req.getHeader("Referer"));
+
+			_log.error(msg + " " + path);
+		}
+
+		return mapping;
 	}
 
 	protected boolean processRoles(
