@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.journal.action;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -47,7 +46,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="GetLatestArticleContentAction.java.html"><b><i>View Source</i></b>
  * </a>
  *
- * @author Raymond Aug�
+ * @author Raymond Augé
  * @author Brian Wing Shun Chan
  *
  */
@@ -77,15 +76,15 @@ public class GetLatestArticleContentAction extends Action {
 
 			return null;
 		}
-		catch (PortalException pe) {
-			if (pe instanceof PrincipalException) {
-				PortalUtil.sendError(
-					HttpServletResponse.SC_FORBIDDEN, pe, req, res);
-			}
-			else if (pe instanceof NoSuchArticleException) {
-				PortalUtil.sendError(
-					HttpServletResponse.SC_NOT_FOUND, pe, req, res);
-			}
+		catch (NoSuchArticleException nsae) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_NOT_FOUND, nsae, req, res);
+
+			return null;
+		}
+		catch (PrincipalException pe) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_FORBIDDEN, pe, req, res);
 
 			return null;
 		}

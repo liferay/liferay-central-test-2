@@ -27,6 +27,7 @@ import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CompanyConstants;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.MimeTypesUtil;
@@ -72,6 +73,24 @@ public class GetPageAttachmentAction extends PortletAction {
 
 			return null;
 		}
+		catch (NoSuchFileException nsfe) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_NOT_FOUND, nsfe, req, res);
+
+			return null;
+		}
+		catch (NoSuchPageException nspe) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_NOT_FOUND, nspe, req, res);
+
+			return null;
+		}
+		catch (PrincipalException pe) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_FORBIDDEN, pe, req, res);
+
+			return null;
+		}
 		catch (Exception e) {
 			req.setAttribute(PageContext.EXCEPTION, e);
 
@@ -84,16 +103,36 @@ public class GetPageAttachmentAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		long nodeId = ParamUtil.getLong(req, "nodeId");
-		String title = ParamUtil.getString(req, "title");
-		String fileName = ParamUtil.getString(req, "fileName");
+		try {
+			long nodeId = ParamUtil.getLong(req, "nodeId");
+			String title = ParamUtil.getString(req, "title");
+			String fileName = ParamUtil.getString(req, "fileName");
 
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
+			HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+			HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(
+				res);
 
-		getFile(nodeId, title, fileName, httpReq, httpRes);
+			getFile(nodeId, title, fileName, httpReq, httpRes);
 
-		setForward(req, ActionConstants.COMMON_NULL);
+			setForward(req, ActionConstants.COMMON_NULL);
+		}
+		catch (NoSuchFileException nsfe) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_NOT_FOUND, nsfe, req, res);
+		}
+		catch (NoSuchPageException nspe) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_NOT_FOUND, nspe, req, res);
+		}
+		catch (PrincipalException pe) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_FORBIDDEN, pe, req, res);
+		}
+		catch (Exception e) {
+			req.setAttribute(PageContext.EXCEPTION, e);
+
+			setForward(req, ActionConstants.COMMON_ERROR);
+		}
 	}
 
 	protected void getFile(
@@ -120,14 +159,6 @@ public class GetPageAttachmentAction extends PortletAction {
 			String contentType = MimeTypesUtil.getContentType(fileName);
 
 			ServletResponseUtil.sendFile(res, fileName, is, contentType);
-		}
-		catch (NoSuchFileException nsfe) {
-			PortalUtil.sendError(
-				HttpServletResponse.SC_NOT_FOUND, nsfe, req, res);
-		}
-		catch (NoSuchPageException nspe) {
-			PortalUtil.sendError(
-				HttpServletResponse.SC_NOT_FOUND, nspe, req, res);
 		}
 		finally {
 			ServletResponseUtil.cleanUp(is);

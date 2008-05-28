@@ -24,6 +24,7 @@ package com.liferay.portlet.messageboards.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.struts.ActionConstants;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.messageboards.NoSuchThreadException;
@@ -82,9 +83,8 @@ public class FindThreadAction extends Action {
 			return null;
 		}
 		catch (NoSuchThreadException nste) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(nste);
-			}
+			PortalUtil.sendError(
+				HttpServletResponse.SC_NOT_FOUND, nste, req, res);
 
 			return null;
 		}

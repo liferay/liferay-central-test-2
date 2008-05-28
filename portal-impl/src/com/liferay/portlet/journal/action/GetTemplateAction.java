@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.journal.action;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -113,15 +112,15 @@ public class GetTemplateAction extends Action {
 
 			return null;
 		}
-		catch (PortalException pe) {
-			if (pe instanceof PrincipalException) {
-				PortalUtil.sendError(
-					HttpServletResponse.SC_FORBIDDEN, pe, req, res);
-			}
-			else if (pe instanceof NoSuchTemplateException) {
-				PortalUtil.sendError(
-					HttpServletResponse.SC_NOT_FOUND, pe, req, res);
-			}
+		catch (NoSuchTemplateException nste) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_NOT_FOUND, nste, req, res);
+
+			return null;
+		}
+		catch (PrincipalException pe) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_FORBIDDEN, pe, req, res);
 
 			return null;
 		}

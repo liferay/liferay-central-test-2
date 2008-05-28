@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.action;
 
-import com.liferay.portal.PortalException;
+import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringMaker;
@@ -36,6 +36,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.MimeTypesUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
@@ -96,6 +97,24 @@ public class GetFileAction extends PortletAction {
 
 			return null;
 		}
+		catch (NoSuchFileEntryException nsfee) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_NOT_FOUND, nsfee, req, res);
+
+			return null;
+		}
+		catch (NoSuchFileException nsfe) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_NOT_FOUND, nsfe, req, res);
+
+			return null;
+		}
+		catch (PrincipalException pe) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_FORBIDDEN, pe, req, res);
+
+			return null;
+		}
 		catch (Exception e) {
 			req.setAttribute(PageContext.EXCEPTION, e);
 
@@ -108,28 +127,47 @@ public class GetFileAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		long folderId = ParamUtil.getLong(req, "folderId");
-		String name = ParamUtil.getString(req, "name");
-		double version = ParamUtil.getDouble(req, "version");
+		try {
+			long folderId = ParamUtil.getLong(req, "folderId");
+			String name = ParamUtil.getString(req, "name");
+			double version = ParamUtil.getDouble(req, "version");
 
-		long fileShortcutId = ParamUtil.getLong(req, "fileShortcutId");
+			long fileShortcutId = ParamUtil.getLong(req, "fileShortcutId");
 
-		String uuid = ParamUtil.getString(req, "uuid");
-		long groupId = ParamUtil.getLong(req, "groupId");
+			String uuid = ParamUtil.getString(req, "uuid");
+			long groupId = ParamUtil.getLong(req, "groupId");
 
-		String targetExtension = ParamUtil.getString(req, "targetExtension");
+			String targetExtension = ParamUtil.getString(req, "targetExtension");
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
+			HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+			HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
 
-		getFile(
-			folderId, name, version, fileShortcutId, uuid, groupId,
-			targetExtension, themeDisplay, httpReq, httpRes);
+			getFile(
+				folderId, name, version, fileShortcutId, uuid, groupId,
+				targetExtension, themeDisplay, httpReq, httpRes);
 
-		setForward(req, ActionConstants.COMMON_NULL);
+			setForward(req, ActionConstants.COMMON_NULL);
+		}
+		catch (NoSuchFileEntryException nsfee) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_NOT_FOUND, nsfee, req, res);
+		}
+		catch (NoSuchFileException nsfe) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_NOT_FOUND, nsfe, req, res);
+		}
+		catch (PrincipalException pe) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_FORBIDDEN, pe, req, res);
+		}
+		catch (Exception e) {
+			req.setAttribute(PageContext.EXCEPTION, e);
+
+			setForward(req, ActionConstants.COMMON_ERROR);
+		}
 	}
 
 	protected void getFile(
@@ -212,17 +250,6 @@ public class GetFileAction extends PortletAction {
 			String contentType = MimeTypesUtil.getContentType(fileName);
 
 			ServletResponseUtil.sendFile(res, fileName, is, contentType);
-		}
-		catch (PortalException pe) {
-			if (pe instanceof PrincipalException) {
-				PortalUtil.sendError(
-					HttpServletResponse.SC_FORBIDDEN, new PrincipalException(),
-					req, res);
-			}
-			else {
-				PortalUtil.sendError(
-					HttpServletResponse.SC_NOT_FOUND, pe, req, res);
-			}
 		}
 		finally {
 			ServletResponseUtil.cleanUp(is);

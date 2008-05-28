@@ -2217,6 +2217,23 @@ public class PortalImpl implements Portal {
 		}
 	}
 
+	public void sendError(
+			int status, Exception e, ActionRequest req, ActionResponse res)
+		throws IOException {
+
+		StringMaker sm = new StringMaker();
+
+		sm.append(PATH_MAIN);
+		sm.append("/portal/status?status=");
+		sm.append(status);
+		sm.append("&exception=");
+		sm.append(e.getClass().getName());
+		sm.append("&previousURL=");
+		sm.append(HttpUtil.encodeURL(PortalUtil.getCurrentURL(req)));
+
+		res.sendRedirect(sm.toString());
+	}
+
 	/**
 	 * Sets the subtitle for a page. This is just a hint and can be overridden
 	 * by subsequent calls. The last call to this method wins.

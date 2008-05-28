@@ -731,6 +731,13 @@ public class PortalUtil {
 		getPortal().sendError(status, e, req, res);
 	}
 
+	public static void sendError(
+			int status, Exception e, ActionRequest req, ActionResponse res)
+		throws IOException {
+
+		getPortal().sendError(status, e, req, res);
+	}
+
 	/**
 	 * Sets the subtitle for a page. This is just a hint and can be overridden
 	 * by subsequent calls. The last call to this method wins.

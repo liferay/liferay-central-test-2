@@ -25,14 +25,36 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <%
-String url = themeDisplay.getPortalURL() + PortalUtil.getCurrentURL(request);
+int status = ParamUtil.getInteger(request, "status");
+
+if (status > 0) {
+	response.setStatus(status);
+}
+
+String exception = ParamUtil.getString(request, "exception");
+
+String url = ParamUtil.getString(request, "previousURL");
+
+if (Validator.isNull(url)) {
+	url = PortalUtil.getCurrentURL(request);
+}
+
+url = themeDisplay.getPortalURL() + url;
 
 boolean noSuchResource = false;
 
 for (String key : SessionErrors.keySet(request)) {
-	key = key.substring(key.lastIndexOf('.') + 1);
+	key = key.substring(key.lastIndexOf(StringPool.PERIOD) + 1);
 
 	if (key.startsWith("NoSuch") && key.endsWith("Exception")) {
+		noSuchResource = true;
+	}
+}
+
+if (Validator.isNotNull(exception)) {
+	exception = exception.substring(exception.lastIndexOf(StringPool.PERIOD) + 1);
+
+	if (exception.startsWith("NoSuch") && exception.endsWith("Exception")) {
 		noSuchResource = true;
 	}
 }

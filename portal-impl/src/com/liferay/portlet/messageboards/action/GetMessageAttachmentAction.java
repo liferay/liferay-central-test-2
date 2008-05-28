@@ -22,13 +22,17 @@
 
 package com.liferay.portlet.messageboards.action;
 
+import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.CompanyConstants;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.MimeTypesUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.ActionResponseImpl;
+import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -68,6 +72,24 @@ public class GetMessageAttachmentAction extends PortletAction {
 
 			return null;
 		}
+		catch (NoSuchFileException nsfe) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_NOT_FOUND, nsfe, req, res);
+
+			return null;
+		}
+		catch (NoSuchMessageException nsme) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_NOT_FOUND, nsme, req, res);
+
+			return null;
+		}
+		catch (PrincipalException pe) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_FORBIDDEN, pe, req, res);
+
+			return null;
+		}
 		catch (Exception e) {
 			req.setAttribute(PageContext.EXCEPTION, e);
 
@@ -80,15 +102,34 @@ public class GetMessageAttachmentAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		long messageId = ParamUtil.getLong(req, "messageId");
-		String fileName = ParamUtil.getString(req, "attachment");
+		try {
+			long messageId = ParamUtil.getLong(req, "messageId");
+			String fileName = ParamUtil.getString(req, "attachment");
 
-		HttpServletResponse httpRes =
-			((ActionResponseImpl)res).getHttpServletResponse();
+			HttpServletResponse httpRes =
+				((ActionResponseImpl)res).getHttpServletResponse();
 
-		getFile(messageId, fileName, httpRes);
+			getFile(messageId, fileName, httpRes);
 
-		setForward(req, ActionConstants.COMMON_NULL);
+			setForward(req, ActionConstants.COMMON_NULL);
+		}
+		catch (NoSuchFileException nsfe) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_NOT_FOUND, nsfe, req, res);
+		}
+		catch (NoSuchMessageException nsme) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_NOT_FOUND, nsme, req, res);
+		}
+		catch (PrincipalException pe) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_FORBIDDEN, pe, req, res);
+		}
+		catch (Exception e) {
+			req.setAttribute(PageContext.EXCEPTION, e);
+
+			setForward(req, ActionConstants.COMMON_ERROR);
+		}
 	}
 
 	protected void getFile(

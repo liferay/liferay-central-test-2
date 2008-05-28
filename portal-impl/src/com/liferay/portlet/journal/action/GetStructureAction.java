@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.journal.action;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -72,15 +71,15 @@ public class GetStructureAction extends Action {
 
 			return null;
 		}
-		catch (PortalException pe) {
-			if (pe instanceof PrincipalException) {
-				PortalUtil.sendError(
-					HttpServletResponse.SC_FORBIDDEN, pe, req, res);
-			}
-			else if (pe instanceof NoSuchStructureException) {
-				PortalUtil.sendError(
-					HttpServletResponse.SC_NOT_FOUND, pe, req, res);
-			}
+		catch (NoSuchStructureException nsse) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_NOT_FOUND, nsse, req, res);
+
+			return null;
+		}
+		catch (PrincipalException pe) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_FORBIDDEN, pe, req, res);
 
 			return null;
 		}

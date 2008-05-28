@@ -410,6 +410,10 @@ public interface Portal {
 			HttpServletResponse res)
 		throws IOException, ServletException;
 
+	public void sendError(
+			int status, Exception e, ActionRequest req, ActionResponse res)
+		throws IOException;
+
 	/**
 	 * Sets the subtitle for a page. This is just a hint and can be overridden
 	 * by subsequent calls. The last call to this method wins.
