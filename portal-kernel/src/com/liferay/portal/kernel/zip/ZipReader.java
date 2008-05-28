@@ -147,6 +147,11 @@ public class ZipReader implements Serializable {
 		return _folderEntries;
 	}
 
+	public List<ObjectValuePair<String, byte[]>> getFolderEntries(String path) {
+
+		return _folderEntries.get(path);
+	}
+
 	private static final int _BUFFER = 2048;
 
 	private static Log _log = LogFactoryUtil.getLog(ZipReader.class);
