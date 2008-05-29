@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.messaging;
 
+import java.util.concurrent.ThreadPoolExecutor;
+
 /**
  * <a href="SerialDestination.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,11 +38,13 @@ package com.liferay.portal.kernel.messaging;
 public class SerialDestination extends ParallelDestination {
 
 	public SerialDestination(String name) {
-		super(name, _NUM_WORKERS, _MAX_WORKERS);
+		super(name, _WORKERS_CORE_SIZE, _WORKERS_MAX_SIZE);
 	}
 
-	protected void doDispatch(
+	protected void dispatch(
 		final MessageListener[] listeners, final String message) {
+
+		ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
 
 		Runnable runnable = new Runnable() {
 
@@ -52,11 +56,11 @@ public class SerialDestination extends ParallelDestination {
 
 		};
 
-		executor.execute(runnable);
+		threadPoolExecutor.execute(runnable);
 	}
 
-	private static final int _NUM_WORKERS = 1;
+	private static final int _WORKERS_CORE_SIZE = 1;
 
-	private static final int _MAX_WORKERS = 1;
+	private static final int _WORKERS_MAX_SIZE = 1;
 
 }

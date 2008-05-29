@@ -22,47 +22,68 @@
 
 package com.liferay.portal.kernel.messaging;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ConcurrentHashSet;
+
+import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
- * <a href="ParallelDestination.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * Destination that delivers a message to a list of message listeners in
- * parallel.
- * </p>
+ * <a href="IteratorDispatcherDestination.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  *
  */
-public class ParallelDestination extends ArrayDispatcherDestination {
+public abstract class IteratorDispatcherDestination extends BaseDestination {
 
-	public ParallelDestination(String name) {
+	public IteratorDispatcherDestination(String name) {
 		super(name);
 	}
 
-	public ParallelDestination(
+	public IteratorDispatcherDestination(
 		String name, int workersCoreSize, int workersMaxSize) {
 
 		super(name, workersCoreSize, workersMaxSize);
 	}
 
-	protected void dispatch(
-		MessageListener[] listeners, final String message) {
+	public void register(MessageListener listener) {
+		_listeners.add(new MessageListenerWrapper(listener));
+	}
+
+	public void send(String message) {
+		if (_listeners.size() == 0) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("No listeners for destination " + getName());
+			}
+
+			return;
+		}
 
 		ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
 
-		for (final MessageListener listener : listeners) {
-			Runnable runnable = new Runnable() {
-
-				public void run() {
-					listener.receive(message);
-				}
-
-			};
-
-			threadPoolExecutor.execute(runnable);
+		if (threadPoolExecutor.isShutdown()) {
+			throw new IllegalStateException(
+				"Destination " + getName() + " is shutdown and cannot " +
+					"receive more messages");
 		}
+
+		dispatch(_listeners.iterator(), message);
 	}
+
+	public boolean unregister(MessageListener listener) {
+		return _listeners.remove(listener);
+	}
+
+	protected abstract void dispatch(
+		Iterator<MessageListener> listenersItr, String message);
+
+	private static Log _log = LogFactoryUtil.getLog(BaseDestination.class);
+
+	private Set<MessageListener> _listeners =
+		new ConcurrentHashSet<MessageListener>();
 
 }

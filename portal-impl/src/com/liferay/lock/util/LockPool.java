@@ -27,7 +27,7 @@ import com.liferay.lock.ExpiredLockException;
 import com.liferay.lock.NoSuchLockException;
 import com.liferay.lock.model.Lock;
 import com.liferay.lock.model.impl.LockImpl;
-import com.liferay.util.ConcurrentHashSet;
+import com.liferay.portal.kernel.util.ConcurrentHashSet;
 
 import java.util.Iterator;
 import java.util.Map;

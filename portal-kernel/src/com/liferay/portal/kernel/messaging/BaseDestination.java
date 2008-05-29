@@ -24,11 +24,11 @@ package com.liferay.portal.kernel.messaging;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.NamedThreadFactory;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <a href="BaseDestination.java.html"><b><i>View Source</i></b></a>
@@ -39,8 +39,17 @@ import java.util.Set;
 public abstract class BaseDestination implements Destination {
 
 	public BaseDestination(String name) {
+		this(name, _WORKERS_CORE_SIZE, _WORKERS_MAX_SIZE);
+	}
+
+	public BaseDestination(
+		String name, int workersCoreSize, int workersMaxSize) {
+
 		_name = name;
-		_listeners = new MessageListener[0];
+		_workersCoreSize = workersCoreSize;
+		_workersMaxSize = workersMaxSize;
+
+		open();
 	}
 
 	public synchronized void close() {
@@ -55,93 +64,44 @@ public abstract class BaseDestination implements Destination {
 		doOpen();
 	}
 
-	public synchronized void register(MessageListener listener) {
-		Set<MessageListener> listeners = new HashSet<MessageListener>(
-			Arrays.asList(_listeners));
+	protected void doClose() {
+		if (!_threadPoolExecutor.isShutdown() &&
+			!_threadPoolExecutor.isTerminating()) {
 
-		listeners.add(new MessageListenerWrapper(listener));
-
-		_listeners = listeners.toArray(new MessageListener[listeners.size()]);
-	}
-
-	public void send(String message) {
-		if (_listeners.length == 0) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("No listeners for destination " + _name);
-			}
-
-			return;
+			_threadPoolExecutor.shutdown();
 		}
-
-		dispatch(_listeners, message);
 	}
 
-	public synchronized boolean unregister(MessageListener listener) {
-		List<MessageListener> listeners = Arrays.asList(_listeners);
-
-		boolean value = listeners.remove(listener);
-
-		if (value) {
-			_listeners = listeners.toArray(
-				new MessageListener[listeners.size()]);
+	protected void doOpen() {
+		if ((_threadPoolExecutor == null) || _threadPoolExecutor.isShutdown()) {
+			_threadPoolExecutor = new ThreadPoolExecutor(
+				_workersCoreSize, _workersMaxSize, 0L, TimeUnit.MILLISECONDS,
+				new LinkedBlockingQueue<Runnable>(),
+				new NamedThreadFactory(getName(), Thread.NORM_PRIORITY));
 		}
-
-		return value;
 	}
 
-	protected abstract void dispatch(
-		MessageListener[] listeners, String message);
+	protected ThreadPoolExecutor getThreadPoolExecutor() {
+		return _threadPoolExecutor;
+	}
 
-	protected abstract void doClose();
+	protected int getWorkersCoreSize() {
+		return _workersCoreSize;
+	}
 
-	protected abstract void doOpen();
+	protected int getWorkersMaxSize() {
+		return _workersMaxSize;
+	}
+
+	private static final int _WORKERS_CORE_SIZE = 5;
+
+	private static final int _WORKERS_MAX_SIZE = 10;
 
 	private static Log _log = LogFactoryUtil.getLog(BaseDestination.class);
 
 	private String _name;
-	private MessageListener[] _listeners;
-
-	private class MessageListenerWrapper implements MessageListener {
-
-		public MessageListenerWrapper(MessageListener messageListener) {
-			this(
-				messageListener,
-				Thread.currentThread().getContextClassLoader());
-		}
-
-		public MessageListenerWrapper(
-			MessageListener messageListener, ClassLoader classLoader) {
-
-			_messageListener = messageListener;
-			_classLoader = classLoader;
-		}
-
-		public void receive(String message) {
-			ClassLoader contextClassLoader =
-				Thread.currentThread().getContextClassLoader();
-
-			Thread.currentThread().setContextClassLoader(_classLoader);
-
-			try {
-				_messageListener.receive(message);
-			}
-			finally {
-				Thread.currentThread().setContextClassLoader(
-					contextClassLoader);
-			}
-		}
-
-		public boolean equals(Object obj) {
-			return _messageListener.equals(obj);
-		}
-
-		public int hashCode() {
-			return _messageListener.hashCode();
-		}
-
-		private MessageListener _messageListener;
-		private ClassLoader _classLoader;
-
-	}
+	private ThreadPoolExecutor _threadPoolExecutor;
+	private int _workersCoreSize;
+	private int _workersMaxSize;
 
 }

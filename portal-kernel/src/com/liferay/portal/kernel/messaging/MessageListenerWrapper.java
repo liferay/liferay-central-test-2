@@ -22,47 +22,51 @@
 
 package com.liferay.portal.kernel.messaging;
 
-import java.util.concurrent.ThreadPoolExecutor;
-
 /**
- * <a href="ParallelDestination.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * Destination that delivers a message to a list of message listeners in
- * parallel.
- * </p>
+ * <a href="MessageListenerWrapper.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  *
  */
-public class ParallelDestination extends ArrayDispatcherDestination {
+public class MessageListenerWrapper implements MessageListener {
 
-	public ParallelDestination(String name) {
-		super(name);
-	}
+	public void receive(String message) {
+		ClassLoader contextClassLoader =
+			Thread.currentThread().getContextClassLoader();
 
-	public ParallelDestination(
-		String name, int workersCoreSize, int workersMaxSize) {
+		Thread.currentThread().setContextClassLoader(_classLoader);
 
-		super(name, workersCoreSize, workersMaxSize);
-	}
-
-	protected void dispatch(
-		MessageListener[] listeners, final String message) {
-
-		ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
-
-		for (final MessageListener listener : listeners) {
-			Runnable runnable = new Runnable() {
-
-				public void run() {
-					listener.receive(message);
-				}
-
-			};
-
-			threadPoolExecutor.execute(runnable);
+		try {
+			_messageListener.receive(message);
+		}
+		finally {
+			Thread.currentThread().setContextClassLoader(
+				contextClassLoader);
 		}
 	}
+
+	public boolean equals(Object obj) {
+		return _messageListener.equals(obj);
+	}
+
+	public int hashCode() {
+		return _messageListener.hashCode();
+	}
+
+	protected MessageListenerWrapper(MessageListener messageListener) {
+		this(
+			messageListener,
+			Thread.currentThread().getContextClassLoader());
+	}
+
+	protected MessageListenerWrapper(
+		MessageListener messageListener, ClassLoader classLoader) {
+
+		_messageListener = messageListener;
+		_classLoader = classLoader;
+	}
+
+	private MessageListener _messageListener;
+	private ClassLoader _classLoader;
 
 }

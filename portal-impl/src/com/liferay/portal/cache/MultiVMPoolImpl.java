@@ -25,7 +25,7 @@ package com.liferay.portal.cache;
 import com.liferay.portal.kernel.cache.MultiVMPool;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.cache.PortalCacheManager;
-import com.liferay.util.ConcurrentHashSet;
+import com.liferay.portal.kernel.util.ConcurrentHashSet;
 
 import java.io.Serializable;
 

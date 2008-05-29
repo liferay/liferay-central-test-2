@@ -22,37 +22,35 @@
 
 package com.liferay.portal.kernel.messaging;
 
+import java.util.Iterator;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
- * <a href="ParallelDestination.java.html"><b><i>View Source</i></b></a>
+ * <a href="TempDestination.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * Destination that delivers a message to a list of message listeners in
- * parallel.
- * </p>
- *
- * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  *
  */
-public class ParallelDestination extends ArrayDispatcherDestination {
+public class TempDestination extends IteratorDispatcherDestination {
 
-	public ParallelDestination(String name) {
+	public TempDestination(String name) {
 		super(name);
 	}
 
-	public ParallelDestination(
+	public TempDestination(
 		String name, int workersCoreSize, int workersMaxSize) {
 
 		super(name, workersCoreSize, workersMaxSize);
 	}
 
 	protected void dispatch(
-		MessageListener[] listeners, final String message) {
+		Iterator<MessageListener> listenersItr, final String message) {
 
 		ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
 
-		for (final MessageListener listener : listeners) {
+		while (listenersItr.hasNext()) {
+			final MessageListener listener = listenersItr.next();
+
 			Runnable runnable = new Runnable() {
 
 				public void run() {

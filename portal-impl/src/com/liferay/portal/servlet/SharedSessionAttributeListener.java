@@ -22,8 +22,8 @@
 
 package com.liferay.portal.servlet;
 
+import com.liferay.portal.kernel.util.ConcurrentHashSet;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.util.ConcurrentHashSet;
 
 import java.util.Set;
 
