@@ -42,5 +42,6 @@ public class EditFormTest extends BaseTestCase {
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
 	}
 }
