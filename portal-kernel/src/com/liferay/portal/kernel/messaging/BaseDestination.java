@@ -62,8 +62,6 @@ public abstract class BaseDestination implements Destination {
 		listeners.add(new MessageListenerWrapper(listener));
 
 		_listeners = listeners.toArray(new MessageListener[listeners.size()]);
-
-		resetDispatcher(_listeners.length);
 	}
 
 	public void send(String message) {
@@ -86,8 +84,6 @@ public abstract class BaseDestination implements Destination {
 		if (value) {
 			_listeners = listeners.toArray(
 				new MessageListener[listeners.size()]);
-
-			resetDispatcher(_listeners.length);
 		}
 
 		return value;
@@ -99,8 +95,6 @@ public abstract class BaseDestination implements Destination {
 	protected abstract void doClose();
 
 	protected abstract void doOpen();
-
-	protected abstract void resetDispatcher(int length);
 
 	private static Log _log = LogFactoryUtil.getLog(BaseDestination.class);
 

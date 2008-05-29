@@ -98,18 +98,11 @@ public class ParallelDispatchedDestination extends BaseDestination {
 		}
 	}
 
-	protected void resetDispatcher(int length) {
-		executor.setCorePoolSize(length);
-		executor.setMaximumPoolSize(length + _MAX_SIZE_PADDING);
-	}
-
 	protected ThreadPoolExecutor executor;
 
 	private static final int _NUM_WORKERS = 5;
 
 	private static final int _MAX_WORKERS = 10;
-
-	private static final int _MAX_SIZE_PADDING = 5;
 
 	private int _numWorkers;
 	private int _maxWorkers;
