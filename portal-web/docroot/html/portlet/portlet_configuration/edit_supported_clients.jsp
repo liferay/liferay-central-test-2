@@ -30,7 +30,7 @@ String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL")
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
-PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getPortletSetup(layout, portletResource);
+PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, portletResource);
 
 Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
 

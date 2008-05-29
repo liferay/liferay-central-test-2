@@ -97,7 +97,7 @@ if ((layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 
 		<%
 		for (Portlet portlet : portlets) {
-			PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getPortletSetup(layout, portlet.getPortletId());
+			PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, portlet.getPortletId());
 
 			String portletSetupCss = portletSetup.getValue("portlet-setup-css", StringPool.BLANK);
 		%>

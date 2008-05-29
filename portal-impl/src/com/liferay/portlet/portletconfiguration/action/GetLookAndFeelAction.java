@@ -72,7 +72,8 @@ public class GetLookAndFeelAction extends JSONAction {
 		}
 
 		PortletPreferences portletSetup =
-			PortletPreferencesFactoryUtil.getPortletSetup(layout, portletId);
+			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
+				layout, portletId);
 
 		return PortletSetupUtil.cssToString(portletSetup);
 	}

@@ -126,7 +126,7 @@ catch (RuntimeException re) {
 	re.printStackTrace();
 }
 
-PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getPortletSetup(layout, portletId);
+PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, portletId);
 
 PortletPreferencesIds portletPreferencesIds = PortletPreferencesFactoryUtil.getPortletPreferencesIds(request, portletId);
 

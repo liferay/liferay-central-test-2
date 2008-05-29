@@ -34,7 +34,7 @@ String portletResource = ParamUtil.getString(request, "portletResource");
 
 Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
 
-PortletPreferences prefs = PortletPreferencesFactoryUtil.getPortletSetup(layout, portletResource);
+PortletPreferences prefs = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, portletResource);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 

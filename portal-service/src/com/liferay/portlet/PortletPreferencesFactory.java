@@ -43,6 +43,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface PortletPreferencesFactory {
 
+	public PortletPreferences getLayoutPortletSetup(
+			Layout layout, String portletId)
+		throws PortalException, SystemException;
+
 	public PortalPreferences getPortalPreferences(HttpServletRequest req)
 		throws PortalException, SystemException;
 
@@ -64,7 +68,8 @@ public interface PortletPreferencesFactory {
 			HttpServletRequest req, Layout selLayout, String portletId)
 		throws PortalException, SystemException;
 
-	public PortletPreferences getPortletSetup(Layout layout, String portletId)
+	public PortletPreferences getPortletSetup(
+			Layout layout, String portletId, String defaultPreferences)
 		throws PortalException, SystemException;
 
 	public PortletPreferences getPortletSetup(
@@ -87,10 +92,6 @@ public interface PortletPreferencesFactory {
 
 	public PortletPreferences getPortletSetup(
 			RenderRequest req, String portletId)
-		throws PortalException, SystemException;
-
-	public PortletPreferences getPortletSetup(
-			Layout layout, String portletId, String defaultPreferences)
 		throws PortalException, SystemException;
 
 	public PortletPreferences getPreferences(HttpServletRequest req);

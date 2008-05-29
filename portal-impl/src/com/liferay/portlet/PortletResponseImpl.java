@@ -211,7 +211,7 @@ public abstract class PortletResponseImpl implements PortletResponse {
 			Layout layout = (Layout)_req.getAttribute(WebKeys.LAYOUT);
 
 			PortletPreferences portletSetup =
-				PortletPreferencesFactoryUtil.getPortletSetup(
+				PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 					layout, _portletName);
 
 			plid = GetterUtil.getLong(portletSetup.getValue(

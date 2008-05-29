@@ -72,7 +72,7 @@ public class EditSharingAction extends EditConfigurationAction {
 		Layout layout = themeDisplay.getLayout();
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(
+			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 				layout, portlet.getPortletId());
 
 		String tabs2 = ParamUtil.getString(req, "tabs2");

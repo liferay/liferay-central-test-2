@@ -104,7 +104,7 @@ public class EditSupportedClientsAction extends EditConfigurationAction {
 		Layout layout = themeDisplay.getLayout();
 
 		PortletPreferences portletSetup =
-			PortletPreferencesFactoryUtil.getPortletSetup(
+			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 				layout, portlet.getPortletId());
 
 		Set<String> allPortletModes = portlet.getAllPortletModes();

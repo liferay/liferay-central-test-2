@@ -45,6 +45,14 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class PortletPreferencesFactoryUtil {
 
+	public static PortletPreferences getLayoutPortletSetup(
+			Layout layout, String portletId)
+		throws PortalException, SystemException {
+
+		return getPortletPreferencesFactory().getLayoutPortletSetup(
+			layout, portletId);
+	}
+
 	public static PortalPreferences getPortalPreferences(HttpServletRequest req)
 		throws PortalException, SystemException {
 
@@ -92,11 +100,11 @@ public class PortletPreferencesFactoryUtil {
 	}
 
 	public static PortletPreferences getPortletSetup(
-			Layout layout, String portletId)
+			Layout layout, String portletId, String defaultPreferences)
 		throws PortalException, SystemException {
 
 		return getPortletPreferencesFactory().getPortletSetup(
-			layout, portletId);
+			layout, portletId, defaultPreferences);
 	}
 
 	public static PortletPreferences getPortletSetup(
@@ -138,14 +146,6 @@ public class PortletPreferencesFactoryUtil {
 		throws PortalException, SystemException {
 
 		return getPortletPreferencesFactory().getPortletSetup(req, portletId);
-	}
-
-	public static PortletPreferences getPortletSetup(
-			Layout layout, String portletId, String defaultPreferences)
-		throws PortalException, SystemException {
-
-		return getPortletPreferencesFactory().getPortletSetup(
-			layout, portletId, defaultPreferences);
 	}
 
 	public static PortletPreferences getPreferences(HttpServletRequest req) {

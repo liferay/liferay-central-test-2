@@ -119,7 +119,7 @@ public class UpdateLayoutAction extends Action {
 				String left = ParamUtil.getString(req, "left");
 
 				PortletPreferences prefs =
-					PortletPreferencesFactoryUtil.getPortletSetup(
+					PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 						layout, portletId);
 
 				StringMaker sm = new StringMaker();
