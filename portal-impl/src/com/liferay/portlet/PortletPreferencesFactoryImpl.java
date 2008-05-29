@@ -368,7 +368,7 @@ public class PortletPreferencesFactoryImpl
 		}
 	}
 
-	protected PortletPreferences getPortletSetup(
+	public PortletPreferences getPortletSetup(
 			Layout layout, String portletId, String defaultPreferences)
 		throws PortalException, SystemException {
 

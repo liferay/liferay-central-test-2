@@ -140,6 +140,14 @@ public class PortletPreferencesFactoryUtil {
 		return getPortletPreferencesFactory().getPortletSetup(req, portletId);
 	}
 
+	public static PortletPreferences getPortletSetup(
+			Layout layout, String portletId, String defaultPreferences)
+		throws PortalException, SystemException {
+
+		return getPortletPreferencesFactory().getPortletSetup(
+			layout, portletId, defaultPreferences);
+	}
+
 	public static PortletPreferences getPreferences(HttpServletRequest req) {
 		return getPortletPreferencesFactory().getPreferences(req);
 	}

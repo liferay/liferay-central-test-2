@@ -89,6 +89,10 @@ public interface PortletPreferencesFactory {
 			RenderRequest req, String portletId)
 		throws PortalException, SystemException;
 
+	public PortletPreferences getPortletSetup(
+			Layout layout, String portletId, String defaultPreferences)
+		throws PortalException, SystemException;
+
 	public PortletPreferences getPreferences(HttpServletRequest req);
 
 	public PreferencesValidator getPreferencesValidator(Portlet portlet);
