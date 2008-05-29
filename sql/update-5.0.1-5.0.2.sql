@@ -81,3 +81,7 @@ update User_ set timeZoneId = 'Pacific/Guadalcanal' where timeZoneId = 'SST';
 update User_ set timeZoneId = 'Pacific/Auckland' where timeZoneId = 'NST';
 
 alter table WikiPage add modifiedDate DATE null;
+
+COMMIT_TRANSACTION;
+
+update WikiPage set modifiedDate = createDate;

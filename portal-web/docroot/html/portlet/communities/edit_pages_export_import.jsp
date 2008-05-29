@@ -109,6 +109,8 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 			<liferay-ui:input-checkbox param="dateRange" onClick='<%= renderResponse.getNamespace() + "toggleDateRange()" %>' />
 
 			<liferay-ui:message key="date-range" />
+
+			<liferay-ui:icon-help message="export-date-range-help" />
 		</div>
 
 		<%

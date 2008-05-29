@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.upgrade.v5_0_2.UpgradeBlogs;
 import com.liferay.portal.upgrade.v5_0_2.UpgradeMessageBoards;
 import com.liferay.portal.upgrade.v5_0_2.UpgradeSchema;
-import com.liferay.portal.upgrade.v5_0_2.UpgradeWiki;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -40,7 +39,7 @@ import org.apache.commons.logging.LogFactory;
 public class UpgradeProcess_5_0_2 extends UpgradeProcess {
 
 	public int getThreshold() {
-		return ReleaseInfo.RELEASE_5_0_2_BUILD_NUMBER + 1;
+		return ReleaseInfo.RELEASE_5_0_2_BUILD_NUMBER;
 	}
 
 	public void upgrade() throws UpgradeException {
@@ -49,7 +48,6 @@ public class UpgradeProcess_5_0_2 extends UpgradeProcess {
 		upgrade(UpgradeSchema.class);
 		upgrade(UpgradeBlogs.class);
 		upgrade(UpgradeMessageBoards.class);
-		upgrade(UpgradeWiki.class);
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeProcess_5_0_2.class);
