@@ -65,7 +65,7 @@ catch (NoSuchResourceException nsre) {
 		if (portletId.equals(PortletKeys.LAYOUT_CONFIGURATION) || portletId.equals(PortletKeys.LAYOUT_MANAGEMENT)) {
 			Group group = layout.getGroup();
 
-			if (group.isCommunity()) {
+			if (group.isCommunity() || group.isUserGroup()) {
 				if (GroupPermissionUtil.contains(permissionChecker, portletGroupId.longValue(), ActionKeys.MANAGE_LAYOUTS) ||
 					LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE)) {
 
