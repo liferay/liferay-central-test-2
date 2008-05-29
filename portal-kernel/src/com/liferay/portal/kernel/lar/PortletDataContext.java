@@ -40,7 +40,7 @@ import java.util.Set;
  * <a href="PortletDataContext.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * Holds context information that is used during exporting adn importing portlet
+ * Holds context information that is used during exporting and importing portlet
  * data.
  * </p>
  *
@@ -50,11 +50,11 @@ import java.util.Set;
  */
 public interface PortletDataContext extends Serializable {
 
-	public static final String GROUPS_ROOT_PATH = "/groups/";
+	public static final String ROOT_PATH_GROUPS = "/groups/";
 
-	public static final String LAYOUTS_ROOT_PATH = "/layouts/";
+	public static final String ROOT_PATH_LAYOUTS = "/layouts/";
 
-	public static final String PORTLETS_ROOT_PATH = "/portlets/";
+	public static final String ROOT_PATH_PORTLETS = "/portlets/";
 
 	public void addComments(Class<?> classObj, Object primaryKey)
 		throws PortalException, SystemException;
@@ -99,13 +99,11 @@ public interface PortletDataContext extends Serializable {
 
 	public String getDataStrategy();
 
+	public Date getEndDate();
+
 	public long getGroupId();
 
 	public String getLayoutPath(long layoutId);
-
-	public String getPortletPath(String portletId);
-
-	public String getRootPath();
 
 	public Map getNewPrimaryKeysMap(Class<?> classObj);
 
@@ -113,9 +111,15 @@ public interface PortletDataContext extends Serializable {
 
 	public long getPlid();
 
+	public String getPortletPath(String portletId);
+
 	public Set getPrimaryKeys();
 
 	public Map<String, List> getRatingsEntries();
+
+	public String getRootPath();
+
+	public Date getStartDate();
 
 	public Map<String, String[]> getTagsEntries();
 
@@ -127,29 +131,25 @@ public interface PortletDataContext extends Serializable {
 
 	public UserIdStrategy getUserIdStrategy() throws SystemException;
 
-	public byte[] getZipEntryAsByteArray(String path);
+	public Map<String, byte[]> getZipEntries();
 
-	public String getZipEntryAsString(String path);
+	public byte[] getZipEntryAsByteArray(String path);
 
 	public Object getZipEntryAsObject(String path);
 
-	public Map<String,List<ObjectValuePair<String,byte[]>>>
-			getZipFolderEntries();
+	public String getZipEntryAsString(String path);
 
-	public List<ObjectValuePair<String,byte[]>> getZipFolderEntries(
-			String path);
+	public Map<String, List<ObjectValuePair<String, byte[]>>>
+		getZipFolderEntries();
 
-	public Date getStartDate();
-
-	public Date getEndDate();
-
-	public boolean hasDateRange();
-
-	public boolean isWithinDateRange(Date modifiedDate);
+	public List<ObjectValuePair<String, byte[]>> getZipFolderEntries(
+		String path);
 
 	public ZipReader getZipReader();
 
 	public ZipWriter getZipWriter();
+
+	public boolean hasDateRange();
 
 	public boolean hasPrimaryKey(Class<?> classObj, Object primaryKey);
 
@@ -162,11 +162,12 @@ public interface PortletDataContext extends Serializable {
 			Class<?> classObj, Object primaryKey, Object newPrimaryKey)
 		throws PortalException, SystemException;
 
+	public boolean isWithinDateRange(Date modifiedDate);
+
 	public void setPlid(long plid);
 
 	public String toXML(Object object);
 
-	public String toXMLFormatted(Object object)
-		throws SystemException;
+	public String toXMLFormatted(Object object) throws SystemException;
 
 }

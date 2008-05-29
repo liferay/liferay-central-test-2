@@ -60,7 +60,7 @@ import java.util.Set;
  * <a href="PortletDataContextImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * Holds context information that is used during exporting adn importing portlet
+ * Holds context information that is used during exporting and importing portlet
  * data.
  * </p>
  *
@@ -93,7 +93,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 			Set primaryKeys, Date startDate, Date endDate, ZipWriter zipWriter)
 		throws PortletDataException {
 
-		_validateDateRange(startDate, endDate);
+		validateDateRange(startDate, endDate);
 
 		_companyId = companyId;
 		_groupId = groupId;
@@ -105,71 +105,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_endDate = endDate;
 		_zipReader = null;
 		_zipWriter = zipWriter;
-	}
-
-	public long getCompanyId() {
-		return _companyId;
-	}
-
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	public long getPlid() {
-		return _plid;
-	}
-
-	public void setPlid(long plid) {
-		_plid = plid;
-	}
-
-	public Map getParameterMap() {
-		return _parameterMap;
-	}
-
-	public boolean getBooleanParameter(String namespace, String name) {
-		boolean defaultValue = MapUtil.getBoolean(
-			getParameterMap(),
-			PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT, true);
-
-		return MapUtil.getBoolean(
-			getParameterMap(),
-			PortletDataHandlerControl.getNamespacedControlName(namespace, name),
-			defaultValue);
-	}
-
-	public Set getPrimaryKeys() {
-		return _primaryKeys;
-	}
-
-	public boolean addPrimaryKey(Class<?> classObj, Object primaryKey) {
-		boolean value = hasPrimaryKey(classObj, primaryKey);
-
-		if (!value) {
-			_primaryKeys.add(getPrimaryKeyString(classObj, primaryKey));
-		}
-
-		return value;
-	}
-
-	public boolean hasPrimaryKey(Class<?> classObj, Object primaryKey) {
-		return _primaryKeys.contains(getPrimaryKeyString(classObj, primaryKey));
-	}
-
-	public Map getNewPrimaryKeysMap(Class<?> classObj) {
-		Map map = _newPrimaryKeysMaps.get(classObj.getName());
-
-		if (map == null) {
-			map = new HashMap();
-
-			_newPrimaryKeysMaps.put(classObj.getName(), map);
-		}
-
-		return map;
-	}
-
-	public Map getComments() {
-		return _commentsMap;
 	}
 
 	public void addComments(Class<?> classObj, Object primaryKey)
@@ -200,49 +135,14 @@ public class PortletDataContextImpl implements PortletDataContext {
 			getPrimaryKeyString(className, primaryKey), messages);
 	}
 
-	public void importComments(
-			Class<?> classObj, Object primaryKey, Object newPrimaryKey,
-			long groupId)
-		throws PortalException, SystemException {
+	public boolean addPrimaryKey(Class<?> classObj, Object primaryKey) {
+		boolean value = hasPrimaryKey(classObj, primaryKey);
 
-		Map messagePKs = new HashMap();
-		Map threadPKs = new HashMap();
-
-		List messages = (List)_commentsMap.get(
-			getPrimaryKeyString(classObj, primaryKey));
-
-		if (messages == null) {
-			return;
+		if (!value) {
+			_primaryKeys.add(getPrimaryKeyString(classObj, primaryKey));
 		}
 
-		Iterator itr = messages.iterator();
-
-		while (itr.hasNext()) {
-			MBMessage message = (MBMessage)itr.next();
-
-			long userId = getUserId(message.getUserUuid());
-			long parentMessageId = MapUtil.getLong(
-				messagePKs, message.getParentMessageId(),
-				message.getParentMessageId());
-			long threadId = MapUtil.getLong(
-				threadPKs, message.getThreadId(), message.getThreadId());
-
-			MBMessage newMessage =
-				MBMessageLocalServiceUtil.addDiscussionMessage(
-					userId, groupId, classObj.getName(),
-					((Long)newPrimaryKey).longValue(), threadId,
-					parentMessageId, message.getSubject(), message.getBody());
-
-			messagePKs.put(
-				message.getPrimaryKeyObj(), newMessage.getPrimaryKeyObj());
-			threadPKs.put(
-				new Long(message.getThreadId()),
-				new Long(newMessage.getThreadId()));
-		}
-	}
-
-	public Map getRatingsEntries() {
-		return _ratingsEntriesMap;
+		return value;
 	}
 
 	public void addRatingsEntries(Class<?> classObj, Object primaryKey)
@@ -273,44 +173,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 		_ratingsEntriesMap.put(
 			getPrimaryKeyString(className, primaryKey), entries);
-	}
-
-	public void importRatingsEntries(
-			Class<?> classObj, Object primaryKey, Object newPrimaryKey)
-		throws PortalException, SystemException {
-
-		List entries = (List)_ratingsEntriesMap.get(
-			getPrimaryKeyString(classObj, primaryKey));
-
-		if (entries == null) {
-			return;
-		}
-
-		Iterator itr = entries.iterator();
-
-		while (itr.hasNext()) {
-			RatingsEntry entry = (RatingsEntry)itr.next();
-
-			long userId = getUserId(entry.getUserUuid());
-
-			RatingsEntryLocalServiceUtil.updateEntry(
-				userId, classObj.getName(), ((Long)newPrimaryKey).longValue(),
-				entry.getScore());
-		}
-	}
-
-	public String[] getTagsEntries(Class<?> classObj, Object primaryKey) {
-		return (String[])_tagsEntriesMap.get(
-			getPrimaryKeyString(classObj, primaryKey));
-	}
-
-	public String[] getTagsEntries(String className, Object primaryKey) {
-		return (String[])_tagsEntriesMap.get(
-			getPrimaryKeyString(className, primaryKey));
-	}
-
-	public Map getTagsEntries() {
-		return _tagsEntriesMap;
 	}
 
 	public void addTagsEntries(Class<?> classObj, Object classPK)
@@ -356,61 +218,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_tagsEntriesMap.put(getPrimaryKeyString(className, classPK), values);
 	}
 
-	public String getDataStrategy() {
-		 return _dataStrategy;
-	}
-
-	public UserIdStrategy getUserIdStrategy() {
-		return _userIdStrategy;
-	}
-
-	public long getUserId(String userUuid) throws SystemException {
-		return _userIdStrategy.getUserId(userUuid);
-	}
-
-	public Date getStartDate() {
-		return _startDate;
-	}
-
-	public Date getEndDate() {
-		return _endDate;
-	}
-
-	public boolean hasDateRange() {
-		if (_startDate != null) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean isWithinDateRange(Date modifiedDate) {
-		if (!hasDateRange()) {
-			return true;
-		}
-		else if ((_startDate.compareTo(modifiedDate) <= 0) &&
-				 (_endDate.after(modifiedDate))) {
-
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public String getLayoutPath(long layoutId) {
-		return getRootPath() + LAYOUTS_ROOT_PATH + layoutId;
-	}
-
-	public String getPortletPath(String portletId) {
-		return getRootPath() + PORTLETS_ROOT_PATH + portletId;
-	}
-
-	public String getRootPath() {
-		return GROUPS_ROOT_PATH + getGroupId();
-	}
-
 	public void addZipEntry(String path, byte[] bytes) throws SystemException {
 		try {
 			getZipWriter().addEntry(path, bytes);
@@ -442,7 +249,112 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
-	public Map<String,byte[]> getZipEntries() {
+	public Object fromXML(byte[] bytes) {
+		return _xStream.fromXML(new String(bytes));
+	}
+
+	public Object fromXML(String xml) {
+		return _xStream.fromXML(xml);
+	}
+
+	public boolean getBooleanParameter(String namespace, String name) {
+		boolean defaultValue = MapUtil.getBoolean(
+			getParameterMap(),
+			PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT, true);
+
+		return MapUtil.getBoolean(
+			getParameterMap(),
+			PortletDataHandlerControl.getNamespacedControlName(namespace, name),
+			defaultValue);
+	}
+
+	public Map getComments() {
+		return _commentsMap;
+	}
+
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public String getDataStrategy() {
+		 return _dataStrategy;
+	}
+
+	public Date getEndDate() {
+		return _endDate;
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public String getLayoutPath(long layoutId) {
+		return getRootPath() + LAYOUTS_ROOT_PATH + layoutId;
+	}
+
+	public Map getNewPrimaryKeysMap(Class<?> classObj) {
+		Map map = _newPrimaryKeysMaps.get(classObj.getName());
+
+		if (map == null) {
+			map = new HashMap();
+
+			_newPrimaryKeysMaps.put(classObj.getName(), map);
+		}
+
+		return map;
+	}
+
+	public Map getParameterMap() {
+		return _parameterMap;
+	}
+
+	public long getPlid() {
+		return _plid;
+	}
+
+	public String getPortletPath(String portletId) {
+		return getRootPath() + PORTLETS_ROOT_PATH + portletId;
+	}
+
+	public Set getPrimaryKeys() {
+		return _primaryKeys;
+	}
+
+	public Map getRatingsEntries() {
+		return _ratingsEntriesMap;
+	}
+
+	public String getRootPath() {
+		return GROUPS_ROOT_PATH + getGroupId();
+	}
+
+	public Date getStartDate() {
+		return _startDate;
+	}
+
+	public Map getTagsEntries() {
+		return _tagsEntriesMap;
+	}
+
+	public String[] getTagsEntries(Class<?> classObj, Object primaryKey) {
+		return (String[])_tagsEntriesMap.get(
+			getPrimaryKeyString(classObj, primaryKey));
+	}
+
+	public String[] getTagsEntries(String className, Object primaryKey) {
+		return (String[])_tagsEntriesMap.get(
+			getPrimaryKeyString(className, primaryKey));
+	}
+
+	public long getUserId(String userUuid) throws SystemException {
+		return _userIdStrategy.getUserId(userUuid);
+	}
+
+	public UserIdStrategy getUserIdStrategy() {
+		return _userIdStrategy;
+	}
+
+	public Map<String, byte[]> getZipEntries() {
 		return getZipReader().getEntries();
 	}
 
@@ -457,13 +369,16 @@ public class PortletDataContextImpl implements PortletDataContext {
 	public String getZipEntryAsString(String path) {
 		return getZipReader().getEntryAsString(path);
 	}
-	public Map<String,List<ObjectValuePair<String,byte[]>>>
-			getZipFolderEntries() {
+
+	public Map<String, List<ObjectValuePair<String, byte[]>>>
+		getZipFolderEntries() {
 
 		return getZipReader().getFolderEntries();
 	}
-	public List<ObjectValuePair<String,byte[]>> getZipFolderEntries(
-			String path) {
+
+	public List<ObjectValuePair<String, byte[]>> getZipFolderEntries(
+		String path) {
+
 		return getZipReader().getFolderEntries(path);
 	}
 
@@ -475,26 +390,100 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _zipWriter;
 	}
 
-	protected String getPrimaryKeyString(Class<?> classObj, Object primaryKey) {
-		return getPrimaryKeyString(classObj.getName(), primaryKey);
+	public boolean hasDateRange() {
+		if (_startDate != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
-	protected String getPrimaryKeyString(String className, Object primaryKey) {
-		StringMaker sm = new StringMaker();
-
-		sm.append(className);
-		sm.append(StringPool.POUND);
-		sm.append(primaryKey);
-
-		return sm.toString();
+	public boolean hasPrimaryKey(Class<?> classObj, Object primaryKey) {
+		return _primaryKeys.contains(getPrimaryKeyString(classObj, primaryKey));
 	}
 
-	public Object fromXML(byte[] bytes) {
-		return _xStream.fromXML(new String(bytes));
+	public void importComments(
+			Class<?> classObj, Object primaryKey, Object newPrimaryKey,
+			long groupId)
+		throws PortalException, SystemException {
+
+		Map messagePKs = new HashMap();
+		Map threadPKs = new HashMap();
+
+		List messages = (List)_commentsMap.get(
+			getPrimaryKeyString(classObj, primaryKey));
+
+		if (messages == null) {
+			return;
+		}
+
+		Iterator itr = messages.iterator();
+
+		while (itr.hasNext()) {
+			MBMessage message = (MBMessage)itr.next();
+
+			long userId = getUserId(message.getUserUuid());
+			long parentMessageId = MapUtil.getLong(
+				messagePKs, message.getParentMessageId(),
+				message.getParentMessageId());
+			long threadId = MapUtil.getLong(
+				threadPKs, message.getThreadId(), message.getThreadId());
+
+			MBMessage newMessage =
+				MBMessageLocalServiceUtil.addDiscussionMessage(
+					userId, groupId, classObj.getName(),
+					((Long)newPrimaryKey).longValue(), threadId,
+					parentMessageId, message.getSubject(), message.getBody());
+
+			messagePKs.put(
+				message.getPrimaryKeyObj(), newMessage.getPrimaryKeyObj());
+			threadPKs.put(
+				new Long(message.getThreadId()),
+				new Long(newMessage.getThreadId()));
+		}
 	}
 
-	public Object fromXML(String xml) {
-		return _xStream.fromXML(xml);
+	public void importRatingsEntries(
+			Class<?> classObj, Object primaryKey, Object newPrimaryKey)
+		throws PortalException, SystemException {
+
+		List entries = (List)_ratingsEntriesMap.get(
+			getPrimaryKeyString(classObj, primaryKey));
+
+		if (entries == null) {
+			return;
+		}
+
+		Iterator itr = entries.iterator();
+
+		while (itr.hasNext()) {
+			RatingsEntry entry = (RatingsEntry)itr.next();
+
+			long userId = getUserId(entry.getUserUuid());
+
+			RatingsEntryLocalServiceUtil.updateEntry(
+				userId, classObj.getName(), ((Long)newPrimaryKey).longValue(),
+				entry.getScore());
+		}
+	}
+
+	public boolean isWithinDateRange(Date modifiedDate) {
+		if (!hasDateRange()) {
+			return true;
+		}
+		else if ((_startDate.compareTo(modifiedDate) <= 0) &&
+				 (_endDate.after(modifiedDate))) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public void setPlid(long plid) {
+		_plid = plid;
 	}
 
 	public String toXML(Object object) {
@@ -512,7 +501,21 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
-	private void _validateDateRange(Date startDate, Date endDate)
+	protected String getPrimaryKeyString(Class<?> classObj, Object primaryKey) {
+		return getPrimaryKeyString(classObj.getName(), primaryKey);
+	}
+
+	protected String getPrimaryKeyString(String className, Object primaryKey) {
+		StringMaker sm = new StringMaker();
+
+		sm.append(className);
+		sm.append(StringPool.POUND);
+		sm.append(primaryKey);
+
+		return sm.toString();
+	}
+
+	protected void validateDateRange(Date startDate, Date endDate)
 		throws PortletDataException {
 
 		if ((startDate == null) ^ (endDate == null)) {
@@ -538,18 +541,18 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private long _companyId;
 	private long _groupId;
 	private long _plid;
-	private Map _commentsMap = new HashMap();
-	private Map<String, String[]> _parameterMap;
-	private Map _ratingsEntriesMap = new HashMap();
-	private Map _tagsEntriesMap = new HashMap();
 	private Set _primaryKeys;
 	private Map<String, Map> _newPrimaryKeysMaps = new HashMap<String, Map>();
 	private String _dataStrategy;
 	private UserIdStrategy _userIdStrategy;
 	private Date _startDate;
 	private Date _endDate;
-	private XStream _xStream = new XStream();
 	private ZipReader _zipReader;
 	private ZipWriter _zipWriter;
+	private XStream _xStream = new XStream();
+	private Map _commentsMap = new HashMap();
+	private Map<String, String[]> _parameterMap;
+	private Map _ratingsEntriesMap = new HashMap();
+	private Map _tagsEntriesMap = new HashMap();
 
 }
