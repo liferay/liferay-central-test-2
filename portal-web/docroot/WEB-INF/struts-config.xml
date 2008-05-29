@@ -1378,6 +1378,11 @@
 
 		<action path="/wiki/get_page_attachment" type="com.liferay.portlet.wiki.action.GetPageAttachmentAction" />
 
+		<action path="/wiki/import_pages" type="com.liferay.portlet.wiki.action.ImportPagesAction">
+			<forward name="portlet.wiki.import_pages" path="portlet.wiki.import_pages" />
+			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
+		</action>
+
 		<action path="/wiki/move_page" type="com.liferay.portlet.wiki.action.MovePageAction">
 			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
 			<forward name="portlet.wiki.move_page" path="portlet.wiki.move_page" />

@@ -1141,6 +1141,10 @@
 		<put name="portlet_content" value="/portlet/wiki/error.jsp" />
 	</definition>
 
+	<definition name="portlet.wiki.import_pages" extends="portlet.wiki">
+		<put name="portlet_content" value="/portlet/wiki/import_pages.jsp" />
+	</definition>
+
 	<definition name="portlet.wiki.move_page" extends="portlet.wiki">
 		<put name="portlet_content" value="/portlet/wiki/move_page.jsp" />
 	</definition>

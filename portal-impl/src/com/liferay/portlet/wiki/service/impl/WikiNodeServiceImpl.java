@@ -31,6 +31,8 @@ import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.service.base.WikiNodeServiceBaseImpl;
 import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
 
+import java.io.File;
+
 /**
  * <a href="WikiNodeServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -93,6 +95,15 @@ public class WikiNodeServiceImpl extends WikiNodeServiceBaseImpl {
 			getPermissionChecker(), groupId, name, ActionKeys.VIEW);
 
 		return wikiNodeLocalService.getNode(groupId, name);
+	}
+
+	public void importPages(long userId, long nodeId, File pagesFile)
+		throws PortalException, SystemException {
+
+		WikiNodePermission.check(
+			getPermissionChecker(), nodeId, ActionKeys.IMPORT);
+
+		wikiNodeLocalService.importPages(userId, nodeId, pagesFile);
 	}
 
 	public void subscribeNode(long nodeId)

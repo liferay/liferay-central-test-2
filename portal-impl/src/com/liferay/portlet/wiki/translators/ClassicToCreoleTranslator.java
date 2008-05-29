@@ -22,36 +22,24 @@
 
 package com.liferay.portlet.wiki.translators;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * <a href="ClassicToCreoleTranslator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  *
  */
-public class ClassicToCreoleTranslator {
+public class ClassicToCreoleTranslator extends BaseTranslator {
 
 	public ClassicToCreoleTranslator() {
 		initRegexps();
 	}
 
-	public String translate(String content) {
-		content = normalize(content);
-
-		for (String regexp: _regexps.keySet()) {
-			String replacement = _regexps.get(regexp);
-
-			content = runRegexp(content, regexp, replacement);
-		}
-
-		return content;
-	}
-
 	protected void initRegexps() {
+
+		// Bold and italics
+
+		_regexps.put(
+			"'''''((?s:.)*?)('''''|(\n\n|\r\r|\r\n\r\n))", "**//$1//**$3");
 
 		// Bold
 
@@ -60,11 +48,6 @@ public class ClassicToCreoleTranslator {
 		// Italics
 
 		_regexps.put("''((?s:.)*?)(''|(\n\n|\r\r|\r\n\r\n))", "//$1//$3");
-
-		// Bold and italics
-
-		_regexps.put(
-			"'''''((?s:.)*?)('''''|(\n\n|\r\r|\r\n\r\n))", "**//$1//**$3");
 
 		// Link
 
@@ -124,31 +107,5 @@ public class ClassicToCreoleTranslator {
 			"(^|\\p{Punct}|\\p{Space})((\\p{Lu}\\p{Ll}+){2,})" +
 				"(\\z|\\n|\\p{Punct}|\\p{Space})", " [[$2]] ");
 	}
-
-	protected String normalize(String content) {
-		content = content.replace("\r\n", "\n");
-		content = content.replace("\r", "\n");
-
-		return content;
-	}
-
-	protected String runRegexp(
-		String content, String regexp, String replacement) {
-
-		Matcher matcher =
-			Pattern.compile(regexp, Pattern.MULTILINE).matcher(content);
-
-		StringBuffer sb = new StringBuffer();
-
-		while (matcher.find()) {
-			matcher.appendReplacement(sb, replacement);
-		}
-
-		matcher.appendTail(sb);
-
-		return sb.toString();
-	}
-
-	private Map<String, String> _regexps = new LinkedHashMap<String, String>();
 
 }

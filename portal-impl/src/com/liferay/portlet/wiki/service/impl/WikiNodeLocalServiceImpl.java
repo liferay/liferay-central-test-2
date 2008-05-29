@@ -37,11 +37,14 @@ import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.wiki.DuplicateNodeNameException;
 import com.liferay.portlet.wiki.NodeNameException;
+import com.liferay.portlet.wiki.importers.mediawiki.MediaWikiImporter;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.base.WikiNodeLocalServiceBaseImpl;
 import com.liferay.portlet.wiki.util.Indexer;
 import com.liferay.util.search.QueryImpl;
+
+import java.io.File;
 
 import java.util.Date;
 import java.util.Iterator;
@@ -264,6 +267,14 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		return wikiNodePersistence.countByGroupId(groupId);
 	}
 
+	public void importPages(long userId, long nodeId, File pagesFile)
+		throws PortalException, SystemException {
+
+		WikiNode node = getNode(nodeId);
+
+		_importer.importPages(userId, node, pagesFile);
+	}
+
 	public void reIndex(String[] ids) throws SystemException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
@@ -416,6 +427,8 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 			throw new DuplicateNodeNameException();
 		}
 	}
+
+	private MediaWikiImporter _importer = new MediaWikiImporter();
 
 	private static Log _log = LogFactory.getLog(WikiNodeLocalServiceImpl.class);
 

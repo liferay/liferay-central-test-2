@@ -304,6 +304,47 @@ public class WikiNodeServiceHttp {
 		}
 	}
 
+	public static void importPages(HttpPrincipal httpPrincipal, long userId,
+		long nodeId, java.io.File pagesFile)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(userId);
+
+			Object paramObj1 = new LongWrapper(nodeId);
+
+			Object paramObj2 = pagesFile;
+
+			if (pagesFile == null) {
+				paramObj2 = new NullWrapper("java.io.File");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(WikiNodeServiceUtil.class.getName(),
+					"importPages",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static void subscribeNode(HttpPrincipal httpPrincipal, long nodeId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {

@@ -99,6 +99,15 @@ public class WikiNodeServiceUtil {
 		return wikiNodeService.getNode(groupId, name);
 	}
 
+	public static void importPages(long userId, long nodeId,
+		java.io.File pagesFile)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
+
+		wikiNodeService.importPages(userId, nodeId, pagesFile);
+	}
+
 	public static void subscribeNode(long nodeId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

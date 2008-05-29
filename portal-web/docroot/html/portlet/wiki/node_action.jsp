@@ -52,6 +52,16 @@ WikiNode node = (WikiNode)row.getObject();
 		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 	</c:if>
 
+	<c:if test="<%= WikiNodePermission.contains(permissionChecker, node, ActionKeys.IMPORT) %>">
+		<portlet:renderURL var="importURL">
+			<portlet:param name="struts_action" value="/wiki/import_pages" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" />
+		</portlet:renderURL>
+
+		<liferay-ui:icon image="post" message="import-pages" url="<%= importURL %>" />
+	</c:if>
+
 	<liferay-ui:icon image="rss" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&nodeId=" + node.getNodeId() + rssURLParams %>' target="_blank" />
 
 	<c:if test="<%= WikiNodePermission.contains(permissionChecker, node, ActionKeys.SUBSCRIBE) %>">

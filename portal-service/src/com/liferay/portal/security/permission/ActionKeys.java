@@ -137,6 +137,8 @@ public class ActionKeys {
 
 	public static final String IMPERSONATE = "IMPERSONATE";
 
+	public static final String IMPORT = "IMPORT";
+
 	public static final String MANAGE = "MANAGE";
 
 	public static final String MANAGE_ARCHIVED_SETUPS =
