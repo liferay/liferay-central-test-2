@@ -121,7 +121,8 @@ public class ShellHook implements Hook {
 		execute(
 			new String[] {
 				SHELL_SCRIPT, "updatePassword", String.valueOf(userId), password
-		});
+			}
+		);
 	}
 
 	protected void execute(String cmdLine[]) {
