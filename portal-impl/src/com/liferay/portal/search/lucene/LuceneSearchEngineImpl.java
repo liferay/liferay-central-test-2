@@ -25,7 +25,7 @@ package com.liferay.portal.search.lucene;
 import com.liferay.portal.kernel.messaging.Destination;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.messaging.SerialDispatchedDestination;
+import com.liferay.portal.kernel.messaging.SerialDestination;
 import com.liferay.portal.kernel.search.IndexSearcher;
 import com.liferay.portal.kernel.search.IndexWriter;
 import com.liferay.portal.kernel.search.SearchEngine;
@@ -43,7 +43,7 @@ public class LuceneSearchEngineImpl implements SearchEngine {
 		_writer = new LuceneIndexWriterImpl();
 		_messageBusListener = true;
 
-		Destination destination = new SerialDispatchedDestination(
+		Destination destination = new SerialDestination(
 			DestinationNames.SEARCH_INDEX_WRITER);
 
 		MessageBusUtil.addDestination(destination);

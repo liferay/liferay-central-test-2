@@ -29,8 +29,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * <a href="ParallelDispatchedDestination.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="ParallelDestination.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * Destination that delivers a message to a list of message listeners in
@@ -40,15 +39,13 @@ import java.util.concurrent.TimeUnit;
  * @author Michael C. Han
  *
  */
-public class ParallelDispatchedDestination extends BaseDestination {
+public class ParallelDestination extends BaseDestination {
 
-	public ParallelDispatchedDestination(String name) {
+	public ParallelDestination(String name) {
 		this(name, _NUM_WORKERS, _MAX_WORKERS);
 	}
 
-	public ParallelDispatchedDestination(
-		String name, int numWorkers, int maxWorkers) {
-
+	public ParallelDestination(String name, int numWorkers, int maxWorkers) {
 		super(name);
 
 		_numWorkers = numWorkers;

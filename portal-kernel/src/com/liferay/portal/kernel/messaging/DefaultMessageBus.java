@@ -39,7 +39,7 @@ import java.util.Map;
 public class DefaultMessageBus implements MessageBus {
 
 	public DefaultMessageBus() {
-		_responseDestination = new ParallelDispatchedDestination(
+		_responseDestination = new ParallelDestination(
 			DestinationNames.RESPONSE);
 
 		addDestination(_responseDestination);

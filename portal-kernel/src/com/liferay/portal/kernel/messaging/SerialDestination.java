@@ -23,7 +23,7 @@
 package com.liferay.portal.kernel.messaging;
 
 /**
- * <a href="SerialDispatchedDestination.java.html"><b><i>View Source</i></b></a>
+ * <a href="SerialDestination.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * Destination that delivers a message to a list of message listeners one at a
@@ -33,9 +33,9 @@ package com.liferay.portal.kernel.messaging;
  * @author Michael C. Han
  *
  */
-public class SerialDispatchedDestination extends ParallelDispatchedDestination {
+public class SerialDestination extends ParallelDestination {
 
-	public SerialDispatchedDestination(String name) {
+	public SerialDestination(String name) {
 		super(name, _NUM_WORKERS, _MAX_WORKERS);
 	}
 
