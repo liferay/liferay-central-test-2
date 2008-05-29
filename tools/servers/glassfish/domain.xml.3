@@ -23,20 +23,36 @@
  <resources>
     <jdbc-resource jndi-name="jdbc/__TimerPool" pool-name="__TimerPool" object-type="system-admin" enabled="true"/>
     <jdbc-resource jndi-name="jdbc/__CallFlowPool" pool-name="__CallFlowPool" object-type="system-all" enabled="true"/>
-    <jdbc-resource jndi-name="jdbc/__default" pool-name="DerbyPool" object-type="user" enabled="true"/>    <!-- Start Liferay Resources -->
+    <jdbc-resource jndi-name="jdbc/__default" pool-name="DerbyPool" object-type="user" enabled="true"/>
+    <!-- Start Liferay Resources -->
     <jdbc-resource enabled="true" pool-name="LiferayPool" jndi-name="jdbc/LiferayPool" object-type="user" />
     <mail-resource debug="false" enabled="true" from="anonymous@anonymous.com" host="localhost" jndi-name="mail/MailSession" object-type="user" store-protocol="imap" store-protocol-class="com.sun.mail.imap.IMAPStore" transport-protocol="smtp" transport-protocol-class="com.sun.mail.smtp.SMTPTransport" user="anonymous">
     </mail-resource>
+    <!-- HSQL JDBC Pool  -->
+
     <jdbc-connection-pool connection-validation-method="auto-commit" steady-pool-size="8" associate-with-thread="false" idle-timeout-in-seconds="300" connection-leak-reclaim="false" lazy-connection-enlistment="false" validate-atmost-once-period-in-seconds="0" connection-creation-retry-interval-in-seconds="10" datasource-classname="org.hsqldb.jdbc.jdbcDataSource" is-isolation-level-guaranteed="true" max-pool-size="32" res-type="javax.sql.DataSource" max-connection-usage-count="0" name="LiferayPool" match-connections="false" is-connection-validation-required="false" fail-all-connections="false" allow-non-component-callers="false" statement-timeout-in-seconds="-1" non-transactional-connections="false" lazy-connection-association="false" max-wait-time-in-millis="60000" connection-creation-retry-attempts="0" pool-resize-quantity="2" wrap-jdbc-objects="false" connection-leak-timeout-in-seconds="0">
       <property name="database" value="jdbc:hsqldb:lportal" />
       <property name="username" value="sa" />
       <property name="password" value="" />
     </jdbc-connection-pool>
+
+    <!-- Uncomment for MySQL. Set the correct DB user, password
+
+    <jdbc-connection-pool connection-validation-method="auto-commit" steady-pool-size="8" associate-with-thread="false" idle-timeout-in-seconds="300" connection-leak-reclaim="false" lazy-connection-enlistment="false" validate-atmost-once-period-in-seconds="0" connection-creation-retry-interval-in-seconds="10" datasource-classname="com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource" is-isolation-level-guaranteed="true" max-pool-size="32" res-type="javax.sql.DataSource" max-connection-usage-count="0" name="LiferayPool" match-connections="false" is-connection-validation-required="false" fail-all-connections="false" allow-non-component-callers="false" statement-timeout-in-seconds="-1" non-transactional-connections="false" lazy-connection-association="false" max-wait-time-in-millis="60000" connection-creation-retry-attempts="0" pool-resize-quantity="2" wrap-jdbc-objects="false" connection-leak-timeout-in-seconds="0">
+     <property name="Password" value=""/>
+     <property name="User" value="root"/>
+     <property name="serverName" value="localhost"/>
+     <property name="DatabaseName" value="lportal"/>
+    </jdbc-connection-pool>
+
+    -->
+
     <!-- End Liferay Resources -->
     <jdbc-connection-pool connection-validation-method="auto-commit" datasource-classname="org.apache.derby.jdbc.EmbeddedXADataSource" fail-all-connections="false" idle-timeout-in-seconds="300" is-connection-validation-required="false" is-isolation-level-guaranteed="true" max-pool-size="32" max-wait-time-in-millis="60000" res-type="javax.sql.XADataSource" name="__CallFlowPool" pool-resize-quantity="2" steady-pool-size="8" non-transactional-connections="false" allow-non-component-callers="false" validate-atmost-once-period-in-seconds="0" connection-leak-timeout-in-seconds="0" connection-leak-reclaim="false" connection-creation-retry-attempts="0" connection-creation-retry-interval-in-seconds="10" statement-timeout-in-seconds="-1" lazy-connection-enlistment="false" lazy-connection-association="false" associate-with-thread="false" match-connections="false" max-connection-usage-count="0" wrap-jdbc-objects="false">
       <property name="databaseName" value="${com.sun.aas.instanceRoot}/lib/databases/sun-callflow"/>
       <property name="connectionAttributes" value=";create=true"/>
-    </jdbc-connection-pool>    <jdbc-connection-pool connection-validation-method="auto-commit" datasource-classname="org.apache.derby.jdbc.EmbeddedXADataSource" fail-all-connections="false" idle-timeout-in-seconds="300" is-connection-validation-required="false" is-isolation-level-guaranteed="true" max-pool-size="32" max-wait-time-in-millis="60000" res-type="javax.sql.XADataSource" name="__TimerPool" pool-resize-quantity="2" steady-pool-size="8" non-transactional-connections="false" allow-non-component-callers="false" validate-atmost-once-period-in-seconds="0" connection-leak-timeout-in-seconds="0" connection-leak-reclaim="false" connection-creation-retry-attempts="0" connection-creation-retry-interval-in-seconds="10" statement-timeout-in-seconds="-1" lazy-connection-enlistment="false" lazy-connection-association="false" associate-with-thread="false" match-connections="false" max-connection-usage-count="0" wrap-jdbc-objects="false">
+    </jdbc-connection-pool>
+    <jdbc-connection-pool connection-validation-method="auto-commit" datasource-classname="org.apache.derby.jdbc.EmbeddedXADataSource" fail-all-connections="false" idle-timeout-in-seconds="300" is-connection-validation-required="false" is-isolation-level-guaranteed="true" max-pool-size="32" max-wait-time-in-millis="60000" res-type="javax.sql.XADataSource" name="__TimerPool" pool-resize-quantity="2" steady-pool-size="8" non-transactional-connections="false" allow-non-component-callers="false" validate-atmost-once-period-in-seconds="0" connection-leak-timeout-in-seconds="0" connection-leak-reclaim="false" connection-creation-retry-attempts="0" connection-creation-retry-interval-in-seconds="10" statement-timeout-in-seconds="-1" lazy-connection-enlistment="false" lazy-connection-association="false" associate-with-thread="false" match-connections="false" max-connection-usage-count="0" wrap-jdbc-objects="false">
       <property name="databaseName" value="${com.sun.aas.instanceRoot}/lib/databases/ejbtimer"/>
     </jdbc-connection-pool>
     <jdbc-connection-pool connection-validation-method="auto-commit" datasource-classname="org.apache.derby.jdbc.ClientDataSource" fail-all-connections="false" idle-timeout-in-seconds="300" is-connection-validation-required="false" is-isolation-level-guaranteed="false" max-pool-size="32" max-wait-time-in-millis="60000" name="DerbyPool" pool-resize-quantity="2" res-type="javax.sql.DataSource" steady-pool-size="8" non-transactional-connections="false" allow-non-component-callers="false" validate-atmost-once-period-in-seconds="0" connection-leak-timeout-in-seconds="0" connection-leak-reclaim="false" connection-creation-retry-attempts="0" connection-creation-retry-interval-in-seconds="10" statement-timeout-in-seconds="-1" lazy-connection-enlistment="false" lazy-connection-association="false" associate-with-thread="false" match-connections="false" max-connection-usage-count="0" wrap-jdbc-objects="false">
@@ -212,9 +228,11 @@
     <jvm-options>-Djavax.net.ssl.trustStore=${com.sun.aas.instanceRoot}/config/cacerts.jks</jvm-options>
     <jvm-options>-Djava.ext.dirs=${com.sun.aas.javaRoot}/lib/ext${path.separator}${com.sun.aas.javaRoot}/jre/lib/ext${path.separator}${com.sun.aas.instanceRoot}/lib/ext${path.separator}${com.sun.aas.derbyRoot}/lib</jvm-options>
     <jvm-options>-Djdbc.drivers=org.apache.derby.jdbc.ClientDriver</jvm-options>
-    <jvm-options>-Dcom.sun.enterprise.config.config_environment_factory_class=com.sun.enterprise.config.serverbeans.AppserverConfigEnvironmentFactory</jvm-options>   </java-config>
+    <jvm-options>-Dcom.sun.enterprise.config.config_environment_factory_class=com.sun.enterprise.config.serverbeans.AppserverConfigEnvironmentFactory</jvm-options>
+   </java-config>
    <thread-pools>
-        <thread-pool thread-pool-id="thread-pool-1" min-thread-pool-size="0" max-thread-pool-size="200" idle-thread-timeout-in-seconds="120" num-work-queues="1"/>    </thread-pools>
+        <thread-pool thread-pool-id="thread-pool-1" min-thread-pool-size="0" max-thread-pool-size="200" idle-thread-timeout-in-seconds="120" num-work-queues="1"/>
+    </thread-pools>
   <management-rules enabled="true">
   </management-rules>
   </config> <!-- config model with name "server-config" ends -->

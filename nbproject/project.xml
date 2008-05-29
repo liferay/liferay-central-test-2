@@ -77,19 +77,25 @@
                 </source-folder>
             </folders>
             <ide-actions>
-                <action name="build">
+                <action name="Build">
                     <target>start</target>
                 </action>
-                <action name="clean">
+                <action name="Compile">
+                    <target>compile</target>
+                </action>                
+                <action name="Deploy">
+                    <target>deploy</target>
+                </action>                
+                <action name="Clean">
                     <target>clean</target>
                 </action>
-                <action name="javadoc">
+                <action name="Javadoc">
                     <target>javadoc</target>
                 </action>
-                <action name="test">
+                <action name="Test">
                     <target>test</target>
                 </action>
-                <action name="rebuild">
+                <action name="Rebuild">
                     <target>clean</target>
                     <target>start</target>
                 </action>
@@ -141,11 +147,13 @@
                     </source-file>
                 </items>
                 <context-menu>
-                    <ide-action name="build"/>
-                    <ide-action name="rebuild"/>
-                    <ide-action name="clean"/>
-                    <ide-action name="javadoc"/>
-                    <ide-action name="test"/>
+                    <ide-action name="Build"/>
+                    <ide-action name="Compile"/>                    
+                    <ide-action name="Deploy"/>
+                    <ide-action name="Rebuild"/>
+                    <ide-action name="Clean"/>
+                    <ide-action name="Javadoc"/>
+                    <ide-action name="Test"/>
                 </context-menu>
             </view>
             <subprojects/>
