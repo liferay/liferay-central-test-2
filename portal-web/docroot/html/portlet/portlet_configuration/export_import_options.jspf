@@ -60,9 +60,9 @@
 					<input name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT%>" type="hidden" value="false" />
 				</c:when>
 				<c:otherwise>
-					<input checked name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA + StringPool.UNDERLINE + selPortlet.getRootPortletId() %>" onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace />portletDataControls');" type="checkbox" />
+					<input checked name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= selPortlet.getRootPortletId() %>" onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace />portletDataControls');" type="checkbox" />
 
-					<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA  + StringPool.UNDERLINE + selPortlet.getRootPortletId() %>"><liferay-ui:message key="data" /></label>
+					<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= selPortlet.getRootPortletId() %>"><liferay-ui:message key="data" /></label>
 				</c:otherwise>
 			</c:choose>
 
@@ -150,6 +150,5 @@
 				</li>
 			</ul>
 		</li>
-
 	</c:if>
 </ul>
