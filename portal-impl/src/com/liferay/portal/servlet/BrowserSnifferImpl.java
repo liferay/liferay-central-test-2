@@ -369,7 +369,6 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		accept = accept.toLowerCase();
 
 		if (accept.indexOf("wap.xhtml") != -1) {
-
 			return true;
 		}
 		else {
