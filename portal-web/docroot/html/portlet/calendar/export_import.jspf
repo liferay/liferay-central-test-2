@@ -46,7 +46,7 @@
 		<liferay-ui:message key="file" />
 	</td>
 	<td>
-		<input class="lfr-input-text" name="<portlet:namespace />importFile" type="file" />
+		<input class="lfr-input-text" name="<portlet:namespace />file" type="file" />
 	</td>
 </tr>
 </table>

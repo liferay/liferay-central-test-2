@@ -97,13 +97,13 @@ public class WikiNodeServiceImpl extends WikiNodeServiceBaseImpl {
 		return wikiNodeLocalService.getNode(groupId, name);
 	}
 
-	public void importPages(long userId, long nodeId, File pagesFile)
+	public void importPages(long nodeId, File file)
 		throws PortalException, SystemException {
 
 		WikiNodePermission.check(
 			getPermissionChecker(), nodeId, ActionKeys.IMPORT);
 
-		wikiNodeLocalService.importPages(userId, nodeId, pagesFile);
+		wikiNodeLocalService.importPages(getUserId(), nodeId, file);
 	}
 
 	public void subscribeNode(long nodeId)

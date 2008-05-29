@@ -37,83 +37,83 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 		initNowikiRegexps();
 	}
 
+	protected void initNowikiRegexps() {
+
+		// Preformat protected
+
+		nowikiRegexps.add("(<nowiki>)(.*?)(</nowiki>)");
+
+		// Escape protected
+
+		nowikiRegexps.add(
+			"~(\\*\\*|~|//|-|#|\\{\\{|}}|\\\\|~\\[~~[|]]|----|=|\\|)");
+	}
+
 	protected void initRegexps() {
 
 		// Clean unnecessary header emphasis
 
-		_regexps.put("= '''(.*)''' =", "= $1 =");
-		_regexps.put("== '''(.*)''' ==", "== $1 ==");
-		_regexps.put("== '''(.*)''' ===", "=== $1 ===");
+		regexps.put("= '''(.*)''' =", "= $1 =");
+		regexps.put("== '''(.*)''' ==", "== $1 ==");
+		regexps.put("== '''(.*)''' ===", "=== $1 ===");
 
 		// Unscape angle brackets
 
-		_regexps.put("&lt;", "<");
-		_regexps.put("&gt;", ">");
+		regexps.put("&lt;", "<");
+		regexps.put("&gt;", ">");
 
 		// Category removal
 
-		_regexps.put("\\[\\[[Cc]ategory:(.*)\\]\\]", "");
+		regexps.put("\\[\\[[Cc]ategory:(.*)\\]\\]", "");
 
 		// Bold and italics
 
-		_regexps.put(
+		regexps.put(
 			"''''((?s:.)*?)(''''|(\n\n|\r\r|\r\n\r\n))", "**//$1//**$3");
 
 		// Bold
 
-		_regexps.put("'''((?s:.)*?)('''|(\n\n|\r\r|\r\n\r\n))", "**$1**$3");
+		regexps.put("'''((?s:.)*?)('''|(\n\n|\r\r|\r\n\r\n))", "**$1**$3");
 
 		// Italics
 
-		_regexps.put("''((?s:.)*?)(''|(\n\n|\r\r|\r\n\r\n))", "//$1//$3");
+		regexps.put("''((?s:.)*?)(''|(\n\n|\r\r|\r\n\r\n))", "//$1//$3");
 
 		// Images
 
-		_regexps.put("\\[{2}Image:([^\\]]*)\\]{2}", "{{SharedImages/$1}}");
+		regexps.put("\\[{2}Image:([^\\]]*)\\]{2}", "{{SharedImages/$1}}");
 
 		// Normalize URLs
 
-		_regexps.put("\\[{2}((http|ftp)[^ ]*) (.*)\\]{2}", "[$1 $3]");
+		regexps.put("\\[{2}((http|ftp)[^ ]*) (.*)\\]{2}", "[$1 $3]");
 
 		// URL
 
-		_regexps.put("\\[((http|ftp)[^ ]*)\\]", "[[$1]]");
+		regexps.put("\\[((http|ftp)[^ ]*)\\]", "[[$1]]");
 
 		// URL with label
 
-		_regexps.put("\\[((http|ftp)[^ ]*) (.*)\\]", "[[$1|$3]]");
+		regexps.put("\\[((http|ftp)[^ ]*) (.*)\\]", "[[$1|$3]]");
 
 		// Monospace
 
-		_regexps.put("(^ (.+))(\\n (.+))*", "{{{\n$0\n}}}");
+		regexps.put("(^ (.+))(\\n (.+))*", "{{{\n$0\n}}}");
 
 		// Term and definition
 
-		_regexps.put("^\\t([\\w]+):\\t(.*)", "**$1**:\n$2");
+		regexps.put("^\\t([\\w]+):\\t(.*)", "**$1**:\n$2");
 
 		// Indented paragraph
 
-		_regexps.put("^\\t:\\t(.*)", "$1");
+		regexps.put("^\\t:\\t(.*)", "$1");
 
 		// No wiki
 
-		_regexps.put("<nowiki>(.*)</nowiki>", "{{{$1}}}");
-
-	}
-
-	protected void initNowikiRegexps() {
-		_nowikiRegexps.add(_PREFORMATTED_PROTECTED);
-		_nowikiRegexps.add(_ESCAPE_PROTECTED);
+		regexps.put("<nowiki>(.*)</nowiki>", "{{{$1}}}");
 	}
 
 	protected String postProcess(String content) {
 		return TABLE_OF_CONTENTS + super.postProcess(content);
 	}
-
-	private static final String _ESCAPE_PROTECTED =
-		"~(\\*\\*|~|//|-|#|\\{\\{|}}|\\\\|~\\[~~[|]]|----|=|\\|)";
-
-	private static final String _PREFORMATTED_PROTECTED =
-		"(<nowiki>)(.*?)(</nowiki>)";
 
 }

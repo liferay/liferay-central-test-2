@@ -24,16 +24,12 @@ package com.liferay.portlet.wiki.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.UploadRequestUtil;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.wiki.DuplicateNodeNameException;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NodeNameException;
 import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
-import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadPortletRequest;
 
@@ -117,18 +113,11 @@ public class ImportPagesAction extends PortletAction {
 		UploadPortletRequest uploadReq =
 			UploadRequestUtil.getUploadPortletRequest(req);
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
 		long nodeId = ParamUtil.getLong(uploadReq, "nodeId");
 
-		File pagesFile = uploadReq.getFile("pagesFile");
+		File file = uploadReq.getFile("file");
 
-		WikiNodePermission.check(
-			themeDisplay.getPermissionChecker(), nodeId, ActionKeys.UPDATE);
-
-		WikiNodeServiceUtil.importPages(
-			themeDisplay.getUserId(), nodeId, pagesFile);
+		WikiNodeServiceUtil.importPages(nodeId, file);
 	}
 
 }

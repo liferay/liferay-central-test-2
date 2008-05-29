@@ -60,7 +60,7 @@ public class ImportEventsAction extends PortletAction {
 
 			Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-			File file = uploadReq.getFile("importFile");
+			File file = uploadReq.getFile("file");
 
 			CalEventServiceUtil.importICal4j(layout.getPlid(), file);
 

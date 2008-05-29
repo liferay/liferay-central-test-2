@@ -267,12 +267,12 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		return wikiNodePersistence.countByGroupId(groupId);
 	}
 
-	public void importPages(long userId, long nodeId, File pagesFile)
+	public void importPages(long userId, long nodeId, File file)
 		throws PortalException, SystemException {
 
 		WikiNode node = getNode(nodeId);
 
-		_importer.importPages(userId, node, pagesFile);
+		_importer.importPages(userId, node, file);
 	}
 
 	public void reIndex(String[] ids) throws SystemException {
@@ -428,8 +428,8 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		}
 	}
 
-	private MediaWikiImporter _importer = new MediaWikiImporter();
-
 	private static Log _log = LogFactory.getLog(WikiNodeLocalServiceImpl.class);
+
+	private MediaWikiImporter _importer = new MediaWikiImporter();
 
 }

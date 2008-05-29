@@ -30,8 +30,11 @@ import java.io.File;
  * <a href="WikiImporter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public interface WikiImporter {
-	void importPages(long userId, WikiNode node, File file) throws Exception;
+
+	public void importPages(long userId, WikiNode node, File file)
+		throws Exception;
 
 }

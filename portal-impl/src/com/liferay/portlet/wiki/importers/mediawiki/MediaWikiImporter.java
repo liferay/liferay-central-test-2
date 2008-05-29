@@ -60,7 +60,7 @@ public class MediaWikiImporter implements WikiImporter {
 	public void importPages(long userId, WikiNode node, File file)
 		throws PortalException {
 
-		int numPages = 0;
+		int count = 0;
 
 		try {
 			SAXReader saxReader = new SAXReader();
@@ -69,38 +69,36 @@ public class MediaWikiImporter implements WikiImporter {
 
 			Element root = doc.getRootElement();
 
-			Iterator<Element> it = root.elements("page").iterator();
+			Iterator<Element> itr = root.elements("page").iterator();
 
-			while (it.hasNext()) {
-				Element page = it.next();
+			while (itr.hasNext()) {
+				Element pageEl = itr.next();
 
-				String title = page.elementText("title");
+				String author = pageEl.element("revision").element(
+					"contributor").elementText("username");
+				String title = pageEl.elementText("title");
 
-				String author = page.element(
-					"revision").element("contributor").elementText("username");
+				List<Element> revisionEls = pageEl.elements("revision");
 
-				List revisions = page.elements("revision");
+				Element lastRevisionEl = revisionEls.get(
+					revisionEls.size() - 1);
 
-				Element lastRevision = (Element)revisions.get(
-					revisions.size() - 1);
+				String content = lastRevisionEl.elementText("text");
 
-				String content = lastRevision.elementText("text");
+				addPage(userId, author, node, title, content);
 
-				addPage(node, userId, title, author, content);
-
-				numPages++;
+				count++;
 			}
-
 		}
 		catch (DocumentException e) {
 			throw new PortalException(e);
 		}
 
-		_log.info("Imported " + numPages + " pages into " + node.getName());
+		_log.info("Imported " + count + " pages into " + node.getName());
 	}
 
 	protected void addPage(
-			WikiNode node, long userId, String title, String author,
+			long userId, String author, WikiNode node, String title,
 			String content)
 		throws PortalException {
 
@@ -109,14 +107,13 @@ public class MediaWikiImporter implements WikiImporter {
 
 			content = _translator.translate(content);
 
-			WikiPage page;
+			WikiPage page = null;
 
 			try {
 				page = WikiPageLocalServiceUtil.getPage(
 					node.getNodeId(), title);
 			}
 			catch (NoSuchPageException nspe) {
-
 				page = WikiPageLocalServiceUtil.addPage(
 					authorUserId, node.getNodeId(), title, null, null);
 			}
@@ -127,8 +124,7 @@ public class MediaWikiImporter implements WikiImporter {
 				new String[0], null, null);
 		}
 		catch (Exception e) {
-
-			throw new PortalException("Error handling page " + title, e);
+			throw new PortalException("Error importing page " + title, e);
 		}
 	}
 
@@ -142,15 +138,15 @@ public class MediaWikiImporter implements WikiImporter {
 				node.getCompanyId(), author);
 		}
 		catch (NoSuchUserException e) {
-
 			user = UserLocalServiceUtil.getUserById(userId);
 		}
 
 		return user.getUserId();
 	}
 
-	MediaWikiToCreoleTranslator _translator = new MediaWikiToCreoleTranslator();
-
 	private static Log _log = LogFactory.getLog(MediaWikiImporter.class);
+
+	private MediaWikiToCreoleTranslator _translator =
+		new MediaWikiToCreoleTranslator();
 
 }

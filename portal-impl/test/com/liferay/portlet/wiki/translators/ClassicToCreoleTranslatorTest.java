@@ -20,9 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.wiki;
-
-import com.liferay.portlet.wiki.translators.ClassicToCreoleTranslator;
+package com.liferay.portlet.wiki.translators;
 
 import junit.framework.TestCase;
 
@@ -260,6 +258,6 @@ public class ClassicToCreoleTranslatorTest extends TestCase {
 		return _translator.translate(content);
 	}
 
-	private ClassicToCreoleTranslator _translator = null;
+	private ClassicToCreoleTranslator _translator;
 
 }
