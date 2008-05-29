@@ -1535,6 +1535,7 @@ import-export=Importar/Exportar
 import-from-within-the-target-community-can-cause-conflicts=La importación desde la propia comunidad destino puede causar conflictos. Por favor, utilice el portlet de comunidades desde otra comunidad.
 import-interval=Intervalo de la importación
 import-on-startup-enabled=Importación en el arranque permitido
+import-pages=Páginas de la importación
 import-search-filter=Filtro de búsqueda para la importación
 import-settings=Configuación de la importación
 import-wiki-pages-help=Someta un archivo de XML exportado por MediaWiki a través del &quot; Special: Export&quot; página (véase el &quot; Pages&quot especial; en el menú de la caja de herramientas).

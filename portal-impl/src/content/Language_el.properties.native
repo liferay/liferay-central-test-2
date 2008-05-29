@@ -1535,6 +1535,7 @@ import-export=Εισαγωγή/εξαγωγή
 import-from-within-the-target-community-can-cause-conflicts=Η εισαγωγή από μέσα από την κοινότητα στόχων μπορεί να προκαλέσει τις συγκρούσεις. Παρακαλώ χρησιμοποιήστε το portlet Κοινοτήτων από μια άλλη κοινότητα αντ' αυτού.
 import-interval=Διάστημα εισαγωγών
 import-on-startup-enabled=Εισαγωγή στο ξεκίνημα που επιτρέπεται
+import-pages=Σελίδες εισαγωγών
 import-search-filter=Φίλτρο αναζήτησης εισαγωγών
 import-settings=Τοποθετήσεις εισαγωγών
 import-wiki-pages-help=Υποβάλτε ένα αρχείο XML που εξάγεται από MediaWiki μέσω του &quot Πρόσθετος: Export&quot  σελίδα (δείτε &quot Πρόσθετο pages&quot  στις επιλογές εργαλειοθηκών).

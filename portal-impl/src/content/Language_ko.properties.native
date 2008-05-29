@@ -1535,6 +1535,7 @@ import-export=수입품 / 수출
 import-from-within-the-target-community-can-cause-conflicts=표적 지역 사회안에에게서 수입품은 충돌을 일으키는 원인이 될 수 있는다. 다른 지역 사회에게서 지역 사회portlet을 대신 사용하십시요.
 import-interval=수입품 간격
 import-on-startup-enabled=가능하게 하는 개시에 수입품
+import-pages=수입품 페이지
 import-search-filter=수입품 수색 여과기
 import-settings=수입품 조정
 import-wiki-pages-help=&quot를 통해서 MediaWiki가 수출한 XML 파일을 복종시키십시오; 스페셜: Export&quot; 페이지 (&quot를 보십시오; 특별한 pages&quot; 연장통 메뉴에서).

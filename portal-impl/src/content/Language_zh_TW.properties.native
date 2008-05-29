@@ -1535,6 +1535,7 @@ import-export=輸入/輸出
 import-from-within-the-target-community-can-cause-conflicts=進口從目標社區內部可能導致衝突。改為請使用公共portlet 從其它社區。
 import-interval=進口間隔時間
 import-on-startup-enabled=進口在起動使能
+import-pages=進口頁
 import-search-filter=進口查尋過濾器
 import-settings=進口設置
 import-wiki-pages-help=遞交MediaWiki出口的XML文件通过&quot; 專輯：Export&quot; 頁(参见&quot; 特別pages&quot; 在工具箱菜單)。
