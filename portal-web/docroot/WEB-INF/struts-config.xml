@@ -753,6 +753,8 @@
 
 		<action path="/layout_management/publish_portlet" forward="portlet.communities.publish_portlet" />
 
+		<action path="/layout_management/sitemap" type="com.liferay.portlet.communities.action.SitemapAction" />
+
 		<action path="/layout_management/update_page" type="com.liferay.portlet.communities.action.UpdatePageAction" />
 
 		<!-- Login -->
