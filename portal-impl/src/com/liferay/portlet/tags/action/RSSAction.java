@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.tags.action;
 
-import com.liferay.portal.NoSuchCompanyException;
-import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -31,8 +29,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.tags.service.TagsAssetServiceUtil;
 import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
@@ -43,7 +41,6 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -72,9 +69,9 @@ public class RSSAction extends Action {
 			return null;
 		}
 		catch (Exception e) {
-			req.setAttribute(PageContext.EXCEPTION, e);
+			PortalUtil.sendError(e, req, res);
 
-			return mapping.findForward(ActionConstants.COMMON_ERROR);
+			return null;
 		}
 	}
 
@@ -101,57 +98,42 @@ public class RSSAction extends Action {
 		String rss = StringPool.BLANK;
 
 		if (companyId > 0) {
-			try {
-				rss = TagsAssetServiceUtil.getCompanyAssetsRSS(
-					companyId, max, type, version, displayStyle, feedURL,
-					entryURL);
-			}
-			catch (NoSuchCompanyException nsce) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(nsce);
-				}
-			}
+			rss = TagsAssetServiceUtil.getCompanyAssetsRSS(
+				companyId, max, type, version, displayStyle, feedURL, entryURL);
 		}
 		else if (groupId > 0) {
-			try {
-				Group group = GroupLocalServiceUtil.getGroup(groupId);
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-				companyId = group.getCompanyId();
+			companyId = group.getCompanyId();
 
-				long[] classNameIds = new long[0];
+			long[] classNameIds = new long[0];
 
-				String[] allEntries = StringUtil.split(
-					ParamUtil.getString(req, "tags"));
+			String[] allEntries = StringUtil.split(
+				ParamUtil.getString(req, "tags"));
 
-				long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(
-					companyId, allEntries);
+			long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(
+				companyId, allEntries);
 
-				String[] notEntries = StringUtil.split(
-					ParamUtil.getString(req, "noTags"));
+			String[] notEntries = StringUtil.split(
+				ParamUtil.getString(req, "noTags"));
 
-				long[] notEntryIds = TagsEntryLocalServiceUtil.getEntryIds(
-					companyId, notEntries);
+			long[] notEntryIds = TagsEntryLocalServiceUtil.getEntryIds(
+				companyId, notEntries);
 
-				boolean andOperator = false;
-				String orderByCol1 = null;
-				String orderByCol2 = null;
-				String orderByType1 = null;
-				String orderByType2 = null;
-				boolean excludeZeroViewCount = false;
-				Date publishDate = null;
-				Date expirationDate = null;
+			boolean andOperator = false;
+			String orderByCol1 = null;
+			String orderByCol2 = null;
+			String orderByType1 = null;
+			String orderByType2 = null;
+			boolean excludeZeroViewCount = false;
+			Date publishDate = null;
+			Date expirationDate = null;
 
-				rss = TagsAssetServiceUtil.getAssetsRSS(
-					groupId, classNameIds, entryIds, notEntryIds, andOperator,
-					orderByCol1, orderByCol2, orderByType1, orderByType2,
-					excludeZeroViewCount, publishDate, expirationDate,
-					max, type, version, displayStyle, feedURL, entryURL);
-			}
-			catch (NoSuchGroupException nsge) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(nsge);
-				}
-			}
+			rss = TagsAssetServiceUtil.getAssetsRSS(
+				groupId, classNameIds, entryIds, notEntryIds, andOperator,
+				orderByCol1, orderByCol2, orderByType1, orderByType2,
+				excludeZeroViewCount, publishDate, expirationDate, max, type,
+				version, displayStyle, feedURL, entryURL);
 		}
 
 		return rss.getBytes(StringPool.UTF8);

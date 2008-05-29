@@ -406,9 +406,16 @@ public interface Portal {
 		throws IOException, ServletException;
 
 	public void sendError(
+			Exception e, HttpServletRequest req, HttpServletResponse res)
+		throws IOException, ServletException;
+
+	public void sendError(
 			int status, Exception e, HttpServletRequest req,
 			HttpServletResponse res)
 		throws IOException, ServletException;
+
+	public void sendError(Exception e, ActionRequest req, ActionResponse res)
+		throws IOException;
 
 	public void sendError(
 			int status, Exception e, ActionRequest req, ActionResponse res)

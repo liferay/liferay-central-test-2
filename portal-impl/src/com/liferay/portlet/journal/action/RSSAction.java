@@ -34,7 +34,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.DocumentUtil;
@@ -109,7 +108,7 @@ public class RSSAction extends PortletAction {
 			}
 		}
 
-		return mapping.findForward(ActionConstants.COMMON_NULL);
+		return null;
 	}
 
 	protected String exportToRSS(

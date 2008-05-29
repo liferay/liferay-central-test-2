@@ -36,7 +36,6 @@ import com.liferay.util.servlet.SessionErrors;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.jsp.PageContext;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -80,9 +79,9 @@ public class ChangePasswordAction extends Action {
 					return mapping.findForward("portal.error");
 				}
 				else {
-					req.setAttribute(PageContext.EXCEPTION, e);
+					PortalUtil.sendError(e, req, res);
 
-					return mapping.findForward(ActionConstants.COMMON_ERROR);
+					return null;
 				}
 			}
 		}

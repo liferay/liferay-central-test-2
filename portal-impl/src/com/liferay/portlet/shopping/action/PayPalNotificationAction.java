@@ -24,8 +24,7 @@ package com.liferay.portlet.shopping.action;
 
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.struts.ActionConstants;
-import com.liferay.portlet.shopping.NoSuchOrderException;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceUtil;
 
 import java.io.BufferedReader;
@@ -39,7 +38,6 @@ import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -134,17 +132,12 @@ public class PayPalNotificationAction extends Action {
 			else if (payPalStatus.equals("INVALID")) {
 			}
 
-			return mapping.findForward(ActionConstants.COMMON_NULL);
-		}
-		catch (NoSuchOrderException nsoe) {
-			_log.error("Order " + invoice + " does not exist");
-
-			return mapping.findForward(ActionConstants.COMMON_NULL);
+			return null;
 		}
 		catch (Exception e) {
-			req.setAttribute(PageContext.EXCEPTION, e);
+			PortalUtil.sendError(e, req, res);
 
-			return mapping.findForward(ActionConstants.COMMON_ERROR);
+			return null;
 		}
 	}
 

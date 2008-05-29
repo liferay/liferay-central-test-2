@@ -22,13 +22,11 @@
 
 package com.liferay.portlet.documentlibrary.action;
 
-import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
@@ -36,7 +34,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.MimeTypesUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
@@ -53,7 +50,6 @@ import javax.portlet.PortletConfig;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.PageContext;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -97,28 +93,10 @@ public class GetFileAction extends PortletAction {
 
 			return null;
 		}
-		catch (NoSuchFileEntryException nsfee) {
-			PortalUtil.sendError(
-				HttpServletResponse.SC_NOT_FOUND, nsfee, req, res);
-
-			return null;
-		}
-		catch (NoSuchFileException nsfe) {
-			PortalUtil.sendError(
-				HttpServletResponse.SC_NOT_FOUND, nsfe, req, res);
-
-			return null;
-		}
-		catch (PrincipalException pe) {
-			PortalUtil.sendError(
-				HttpServletResponse.SC_FORBIDDEN, pe, req, res);
-
-			return null;
-		}
 		catch (Exception e) {
-			req.setAttribute(PageContext.EXCEPTION, e);
+			PortalUtil.sendError(e, req, res);
 
-			return mapping.findForward(ActionConstants.COMMON_ERROR);
+			return null;
 		}
 	}
 
@@ -151,22 +129,8 @@ public class GetFileAction extends PortletAction {
 
 			setForward(req, ActionConstants.COMMON_NULL);
 		}
-		catch (NoSuchFileEntryException nsfee) {
-			PortalUtil.sendError(
-				HttpServletResponse.SC_NOT_FOUND, nsfee, req, res);
-		}
-		catch (NoSuchFileException nsfe) {
-			PortalUtil.sendError(
-				HttpServletResponse.SC_NOT_FOUND, nsfe, req, res);
-		}
-		catch (PrincipalException pe) {
-			PortalUtil.sendError(
-				HttpServletResponse.SC_FORBIDDEN, pe, req, res);
-		}
 		catch (Exception e) {
-			req.setAttribute(PageContext.EXCEPTION, e);
-
-			setForward(req, ActionConstants.COMMON_ERROR);
+			PortalUtil.sendError(e, req, res);
 		}
 	}
 

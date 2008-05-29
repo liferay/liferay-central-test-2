@@ -41,13 +41,13 @@ if (Validator.isNull(url)) {
 
 url = themeDisplay.getPortalURL() + url;
 
-boolean noSuchResource = false;
+boolean noSuchResourceException = false;
 
 for (String key : SessionErrors.keySet(request)) {
 	key = key.substring(key.lastIndexOf(StringPool.PERIOD) + 1);
 
 	if (key.startsWith("NoSuch") && key.endsWith("Exception")) {
-		noSuchResource = true;
+		noSuchResourceException = true;
 	}
 }
 
@@ -55,7 +55,7 @@ if (Validator.isNotNull(exception)) {
 	exception = exception.substring(exception.lastIndexOf(StringPool.PERIOD) + 1);
 
 	if (exception.startsWith("NoSuch") && exception.endsWith("Exception")) {
-		noSuchResource = true;
+		noSuchResourceException = true;
 	}
 }
 %>
@@ -104,7 +104,7 @@ if (Validator.isNotNull(exception)) {
 			<%= StringUtil.replace(te.getMessage(), new String[] {"<", "\n"}, new String[] {"&lt;", "<br />\n"}) %>
 		</div>
 	</c:when>
-	<c:when test="<%= noSuchResource %>">
+	<c:when test="<%= noSuchResourceException %>">
 		<h3 class="portlet-msg-error">
 			<liferay-ui:message key="not-found" />
 		</h3>

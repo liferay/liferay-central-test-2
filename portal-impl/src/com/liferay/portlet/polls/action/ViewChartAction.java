@@ -24,8 +24,8 @@ package com.liferay.portlet.polls.action;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.polls.util.PollsUtil;
 
@@ -33,7 +33,6 @@ import java.io.OutputStream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.PageContext;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -119,9 +118,9 @@ public class ViewChartAction extends Action {
 			return null;
 		}
 		catch (Exception e) {
-			req.setAttribute(PageContext.EXCEPTION, e);
+			PortalUtil.sendError(e, req, res);
 
-			return mapping.findForward(ActionConstants.COMMON_ERROR);
+			return null;
 		}
 	}
 

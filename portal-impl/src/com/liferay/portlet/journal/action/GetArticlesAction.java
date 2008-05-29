@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -53,7 +52,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -93,9 +91,9 @@ public class GetArticlesAction extends Action {
 			return null;
 		}
 		catch (Exception e) {
-			req.setAttribute(PageContext.EXCEPTION, e);
+			PortalUtil.sendError(e, req, res);
 
-			return mapping.findForward(ActionConstants.COMMON_ERROR);
+			return null;
 		}
 	}
 

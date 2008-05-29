@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.OpenIdUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -43,7 +42,6 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -102,9 +100,9 @@ public class OpenIdResponseAction extends Action {
 				return mapping.findForward("portal.login");
 			}
 			else {
-				req.setAttribute(PageContext.EXCEPTION, e);
+				PortalUtil.sendError(e, req, res);
 
-				return mapping.findForward(ActionConstants.COMMON_ERROR);
+				return null;
 			}
 		}
 

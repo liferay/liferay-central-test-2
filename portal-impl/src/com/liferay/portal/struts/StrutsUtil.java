@@ -94,10 +94,10 @@ public class StrutsUtil {
 			catch (ServletException se1) {
 				req.setAttribute(PageContext.EXCEPTION, se1.getRootCause());
 
-				String errorPath = TEXT_HTML_DIR + ActionConstants.COMMON_ERROR;
+				String errorPath = TEXT_HTML_DIR + "/common/error.jsp";
 
 				if (BrowserSnifferUtil.is_wap_xhtml(req)) {
-					path = TEXT_WAP_DIR + ActionConstants.COMMON_ERROR;
+					path = TEXT_WAP_DIR + "/common/error.jsp";
 				}
 
 				rd = ctx.getRequestDispatcher(errorPath);

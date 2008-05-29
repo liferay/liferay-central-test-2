@@ -30,8 +30,6 @@ package com.liferay.portal.struts;
  */
 public class ActionConstants {
 
-	public static final String COMMON_ERROR = "/common/error.jsp";
-
 	public static final String COMMON_FORWARD = "/common/forward_js.jsp";
 
 	public static final String COMMON_FORWARD_JSP = "/common/forward_jsp.jsp";

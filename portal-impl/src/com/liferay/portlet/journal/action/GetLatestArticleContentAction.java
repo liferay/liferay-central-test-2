@@ -25,17 +25,13 @@ package com.liferay.portlet.journal.action;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.PageContext;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -76,22 +72,10 @@ public class GetLatestArticleContentAction extends Action {
 
 			return null;
 		}
-		catch (NoSuchArticleException nsae) {
-			PortalUtil.sendError(
-				HttpServletResponse.SC_NOT_FOUND, nsae, req, res);
-
-			return null;
-		}
-		catch (PrincipalException pe) {
-			PortalUtil.sendError(
-				HttpServletResponse.SC_FORBIDDEN, pe, req, res);
-
-			return null;
-		}
 		catch (Exception e) {
-			req.setAttribute(PageContext.EXCEPTION, e);
+			PortalUtil.sendError(e, req, res);
 
-			return mapping.findForward(ActionConstants.COMMON_ERROR);
+			return null;
 		}
 	}
 

@@ -63,6 +63,7 @@ import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.plugin.PluginPackageUtil;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
@@ -2174,9 +2175,35 @@ public class PortalImpl implements Portal {
 	}
 
 	public void sendError(
+			Exception e, HttpServletRequest req, HttpServletResponse res)
+		throws IOException, ServletException {
+
+		sendError(0, e, req, res);
+	}
+
+	public void sendError(
 			int status, Exception e, HttpServletRequest req,
 			HttpServletResponse res)
 		throws IOException, ServletException {
+
+		if (status == 0) {
+			if (e instanceof PrincipalException) {
+				status = HttpServletResponse.SC_FORBIDDEN;
+			}
+			else {
+				String name = e.getClass().getName();
+
+				name = name.substring(name.lastIndexOf(StringPool.PERIOD) + 1);
+
+				if (name.startsWith("NoSuch") && name.endsWith("Exception")) {
+					status = HttpServletResponse.SC_NOT_FOUND;
+				}
+			}
+
+			if (status == 0) {
+				status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
+			}
+		}
 
 		ServletContext ctx = req.getSession().getServletContext();
 
@@ -2215,6 +2242,12 @@ public class PortalImpl implements Portal {
 				res.sendError(status);
 			}
 		}
+	}
+
+	public void sendError(Exception e, ActionRequest req, ActionResponse res)
+		throws IOException {
+
+		sendError(0, e, req, res);
 	}
 
 	public void sendError(

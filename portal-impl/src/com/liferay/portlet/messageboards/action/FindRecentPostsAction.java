@@ -23,7 +23,7 @@
 package com.liferay.portlet.messageboards.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.struts.ActionConstants;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLImpl;
 
@@ -34,7 +34,6 @@ import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.PageContext;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -72,9 +71,9 @@ public class FindRecentPostsAction extends Action {
 			return null;
 		}
 		catch (Exception e) {
-			req.setAttribute(PageContext.EXCEPTION, e);
+			PortalUtil.sendError(e, req, res);
 
-			return mapping.findForward(ActionConstants.COMMON_ERROR);
+			return null;
 		}
 	}
 

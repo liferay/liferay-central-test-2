@@ -724,11 +724,25 @@ public class PortalUtil {
 	}
 
 	public static void sendError(
+			Exception e, HttpServletRequest req, HttpServletResponse res)
+		throws IOException, ServletException {
+
+		getPortal().sendError(e, req, res);
+	}
+
+	public static void sendError(
 			int status, Exception e, HttpServletRequest req,
 			HttpServletResponse res)
 		throws IOException, ServletException {
 
 		getPortal().sendError(status, e, req, res);
+	}
+
+	public static void sendError(
+			Exception e, ActionRequest req, ActionResponse res)
+		throws IOException {
+
+		getPortal().sendError(e, req, res);
 	}
 
 	public static void sendError(

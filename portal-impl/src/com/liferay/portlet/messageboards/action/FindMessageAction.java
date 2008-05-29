@@ -28,11 +28,9 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLImpl;
-import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 
@@ -43,7 +41,6 @@ import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.PageContext;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -84,16 +81,10 @@ public class FindMessageAction extends Action {
 
 			return null;
 		}
-		catch (NoSuchMessageException nsme) {
-			PortalUtil.sendError(
-				HttpServletResponse.SC_NOT_FOUND, nsme, req, res);
+		catch (Exception e) {
+			PortalUtil.sendError(e, req, res);
 
 			return null;
-		}
-		catch (Exception e) {
-			req.setAttribute(PageContext.EXCEPTION, e);
-
-			return mapping.findForward(ActionConstants.COMMON_ERROR);
 		}
 	}
 

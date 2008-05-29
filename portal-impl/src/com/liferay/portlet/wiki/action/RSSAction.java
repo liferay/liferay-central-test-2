@@ -33,8 +33,6 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.wiki.NoSuchNodeException;
-import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 import com.liferay.util.RSSUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -47,7 +45,6 @@ import javax.portlet.PortletConfig;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -75,9 +72,9 @@ public class RSSAction extends PortletAction {
 			return null;
 		}
 		catch (Exception e) {
-			req.setAttribute(PageContext.EXCEPTION, e);
+			PortalUtil.sendError(e, req, res);
 
-			return mapping.findForward(ActionConstants.COMMON_ERROR);
+			return null;
 		}
 	}
 
@@ -86,13 +83,19 @@ public class RSSAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
+		try {
+			HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+			HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(
+				res);
 
-		ServletResponseUtil.sendFile(
-			httpRes, null, getRSS(httpReq), ContentTypes.TEXT_XML_UTF8);
+			ServletResponseUtil.sendFile(
+				httpRes, null, getRSS(httpReq), ContentTypes.TEXT_XML_UTF8);
 
-		setForward(req, ActionConstants.COMMON_NULL);
+			setForward(req, ActionConstants.COMMON_NULL);
+		}
+		catch (Exception e) {
+			PortalUtil.sendError(e, req, res);
+		}
 	}
 
 	protected byte[] getRSS(HttpServletRequest req) throws Exception {
@@ -124,28 +127,13 @@ public class RSSAction extends PortletAction {
 		String rss = StringPool.BLANK;
 
 		if ((nodeId > 0) && (Validator.isNotNull(title))) {
-			try {
-				rss = WikiPageServiceUtil.getPagesRSS(
-					companyId, nodeId, title, max, type, version, displayStyle,
-					feedURL, entryURL, locale);
-			}
-			catch (NoSuchPageException nspe) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(nspe);
-				}
-			}
+			rss = WikiPageServiceUtil.getPagesRSS(
+				companyId, nodeId, title, max, type, version, displayStyle,
+				feedURL, entryURL, locale);
 		}
 		else if (nodeId > 0) {
-			try {
-				rss = WikiPageServiceUtil.getNodePagesRSS(
-					nodeId, max, type, version, displayStyle, feedURL,
-					entryURL);
-			}
-			catch (NoSuchNodeException nsne) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(nsne);
-				}
-			}
+			rss = WikiPageServiceUtil.getNodePagesRSS(
+				nodeId, max, type, version, displayStyle, feedURL, entryURL);
 		}
 
 		return rss.getBytes(StringPool.UTF8);

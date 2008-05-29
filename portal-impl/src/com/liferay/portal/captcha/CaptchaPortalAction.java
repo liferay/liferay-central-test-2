@@ -22,7 +22,7 @@
 
 package com.liferay.portal.captcha;
 
-import com.liferay.portal.struts.ActionConstants;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsFiles;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.ExtPropertiesLoader;
@@ -32,7 +32,6 @@ import java.util.Properties;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.jsp.PageContext;
 
 import nl.captcha.servlet.CaptchaProducer;
 import nl.captcha.util.Helper;
@@ -75,9 +74,9 @@ public class CaptchaPortalAction extends Action {
 			return null;
 		}
 		catch (Exception e) {
-			req.setAttribute(PageContext.EXCEPTION, e);
+			PortalUtil.sendError(e, req, res);
 
-			return mapping.findForward(ActionConstants.COMMON_ERROR);
+			return null;
 		}
 	}
 

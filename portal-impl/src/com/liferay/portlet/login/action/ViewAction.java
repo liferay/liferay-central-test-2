@@ -35,7 +35,6 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.AuthException;
-import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -51,7 +50,6 @@ import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.PageContext;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -107,9 +105,7 @@ public class ViewAction extends PortletAction {
 					SessionErrors.add(req, e.getClass().getName());
 				}
 				else {
-					req.setAttribute(PageContext.EXCEPTION, e);
-
-					setForward(req, ActionConstants.COMMON_ERROR);
+					PortalUtil.sendError(e, req, res);
 				}
 			}
 		}

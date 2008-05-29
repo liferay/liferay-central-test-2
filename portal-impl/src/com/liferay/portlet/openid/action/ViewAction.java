@@ -26,7 +26,6 @@ import com.liferay.portal.action.OpenIdRequestAction;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -41,7 +40,6 @@ import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -87,9 +85,7 @@ public class ViewAction extends PortletAction {
 					SessionErrors.add(req, e.getClass().getName());
 				}
 				else {
-					req.setAttribute(PageContext.EXCEPTION, e);
-
-					setForward(req, ActionConstants.COMMON_ERROR);
+					PortalUtil.sendError(e, req, res);
 				}
 			}
 		}

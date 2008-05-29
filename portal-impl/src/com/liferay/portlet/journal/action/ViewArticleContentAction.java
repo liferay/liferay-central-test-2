@@ -30,13 +30,10 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.impl.ImageLocalUtil;
-import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
@@ -56,7 +53,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -161,17 +157,8 @@ public class ViewArticleContentAction extends Action {
 				String langType = template.getLangType();
 				String script = template.getXsl();
 
-				try {
-					output = JournalUtil.transform(
-						tokens, languageId, xml, script, langType);
-				}
-				catch (Exception e1) {
-					_log.error(e1, e1);
-
-					PortalUtil.sendError(
-						HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e1, req,
-						res);
-				}
+				output = JournalUtil.transform(
+					tokens, languageId, xml, script, langType);
 			}
 			else {
 				output = JournalArticleServiceUtil.getArticleContent(
@@ -189,22 +176,10 @@ public class ViewArticleContentAction extends Action {
 					"portlet.journal.view_article_content");
 			}
 		}
-		catch (NoSuchArticleException nsae) {
-			PortalUtil.sendError(
-				HttpServletResponse.SC_NOT_FOUND, nsae, req, res);
+		catch (Exception e) {
+			PortalUtil.sendError(e, req, res);
 
 			return null;
-		}
-		catch (PrincipalException pe) {
-			PortalUtil.sendError(
-				HttpServletResponse.SC_FORBIDDEN, pe, req, res);
-
-			return null;
-		}
-		catch (Exception e2) {
-			req.setAttribute(PageContext.EXCEPTION, e2);
-
-			return mapping.findForward(ActionConstants.COMMON_ERROR);
 		}
 		finally {
 			if (uploadReq != null) {

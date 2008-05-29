@@ -347,6 +347,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			_log.error("User ID " + req.getRemoteUser());
 			_log.error("Current URL " + PortalUtil.getCurrentURL(req));
 			_log.error("Referer " + req.getHeader("Referer"));
+			_log.error("Remote address " + req.getRemoteAddr());
 
 			_log.error(msg + " " + path);
 		}

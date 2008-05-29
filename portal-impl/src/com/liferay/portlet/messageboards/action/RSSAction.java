@@ -26,17 +26,15 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.messageboards.NoSuchCategoryException;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.util.RSSUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -65,9 +63,9 @@ public class RSSAction extends Action {
 			return null;
 		}
 		catch (Exception e) {
-			req.setAttribute(PageContext.EXCEPTION, e);
+			PortalUtil.sendError(e, req, res);
 
-			return mapping.findForward(ActionConstants.COMMON_ERROR);
+			return null;
 		}
 	}
 
@@ -124,16 +122,9 @@ public class RSSAction extends Action {
 					"/message_boards/find_category?p_l_id=" + plid +
 						"&categoryId=" + categoryId;
 
-			try {
-				rss = MBMessageServiceUtil.getCategoryMessagesRSS(
-					categoryId, max, type, version, displayStyle, feedURL,
-					entryURL, themeDisplay);
-			}
-			catch (NoSuchCategoryException nsce) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(nsce);
-				}
-			}
+			rss = MBMessageServiceUtil.getCategoryMessagesRSS(
+				categoryId, max, type, version, displayStyle, feedURL, entryURL,
+				themeDisplay);
 		}
 		else if (threadId > 0) {
 			String feedURL =

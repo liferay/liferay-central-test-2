@@ -13,7 +13,6 @@
 	<!-- Global Forwards -->
 
 	<global-forwards>
-		<forward name="/common/error.jsp" path="/common/error.jsp" />
 		<forward name="/common/forward_js.jsp" path="/common/forward_js.jsp" />
 		<forward name="/common/forward_jsp.jsp" path="/common/forward_jsp.jsp" />
 		<forward name="/common/null.html" path="/common/null.html" />
@@ -32,10 +31,6 @@
 	<action-mappings>
 
 		<!-- Common -->
-
-		<action path="/common/close" forward="/common/close.html" />
-
-		<action path="/common/error" forward="/common/error.jsp" />
 
 		<!-- Portal -->
 

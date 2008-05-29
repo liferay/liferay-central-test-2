@@ -22,17 +22,14 @@
 
 package com.liferay.portlet.wiki.action;
 
-import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CompanyConstants;
-import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.MimeTypesUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -45,7 +42,6 @@ import javax.portlet.PortletConfig;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.PageContext;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -73,28 +69,10 @@ public class GetPageAttachmentAction extends PortletAction {
 
 			return null;
 		}
-		catch (NoSuchFileException nsfe) {
-			PortalUtil.sendError(
-				HttpServletResponse.SC_NOT_FOUND, nsfe, req, res);
-
-			return null;
-		}
-		catch (NoSuchPageException nspe) {
-			PortalUtil.sendError(
-				HttpServletResponse.SC_NOT_FOUND, nspe, req, res);
-
-			return null;
-		}
-		catch (PrincipalException pe) {
-			PortalUtil.sendError(
-				HttpServletResponse.SC_FORBIDDEN, pe, req, res);
-
-			return null;
-		}
 		catch (Exception e) {
-			req.setAttribute(PageContext.EXCEPTION, e);
+			PortalUtil.sendError(e, req, res);
 
-			return mapping.findForward(ActionConstants.COMMON_ERROR);
+			return null;
 		}
 	}
 
@@ -116,22 +94,8 @@ public class GetPageAttachmentAction extends PortletAction {
 
 			setForward(req, ActionConstants.COMMON_NULL);
 		}
-		catch (NoSuchFileException nsfe) {
-			PortalUtil.sendError(
-				HttpServletResponse.SC_NOT_FOUND, nsfe, req, res);
-		}
-		catch (NoSuchPageException nspe) {
-			PortalUtil.sendError(
-				HttpServletResponse.SC_NOT_FOUND, nspe, req, res);
-		}
-		catch (PrincipalException pe) {
-			PortalUtil.sendError(
-				HttpServletResponse.SC_FORBIDDEN, pe, req, res);
-		}
 		catch (Exception e) {
-			req.setAttribute(PageContext.EXCEPTION, e);
-
-			setForward(req, ActionConstants.COMMON_ERROR);
+			PortalUtil.sendError(e, req, res);
 		}
 	}
 

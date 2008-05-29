@@ -26,12 +26,9 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
@@ -42,7 +39,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.PageContext;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -112,22 +108,10 @@ public class GetTemplateAction extends Action {
 
 			return null;
 		}
-		catch (NoSuchTemplateException nste) {
-			PortalUtil.sendError(
-				HttpServletResponse.SC_NOT_FOUND, nste, req, res);
-
-			return null;
-		}
-		catch (PrincipalException pe) {
-			PortalUtil.sendError(
-				HttpServletResponse.SC_FORBIDDEN, pe, req, res);
-
-			return null;
-		}
 		catch (Exception e) {
-			req.setAttribute(PageContext.EXCEPTION, e);
+			PortalUtil.sendError(e, req, res);
 
-			return mapping.findForward(ActionConstants.COMMON_ERROR);
+			return null;
 		}
 	}
 

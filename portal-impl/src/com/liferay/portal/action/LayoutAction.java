@@ -100,7 +100,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.jsp.PageContext;
 
 import javax.xml.namespace.QName;
 
@@ -192,9 +191,9 @@ public class LayoutAction extends Action {
 				return mapping.findForward(ActionConstants.COMMON_FORWARD);
 			}
 			catch (Exception e) {
-				req.setAttribute(PageContext.EXCEPTION, e);
+				PortalUtil.sendError(e, req, res);
 
-				return mapping.findForward(ActionConstants.COMMON_ERROR);
+				return null;
 			}
 		}
 	}
@@ -442,9 +441,9 @@ public class LayoutAction extends Action {
 			}
 		}
 		catch (Exception e) {
-			req.setAttribute(PageContext.EXCEPTION, e);
+			PortalUtil.sendError(e, req, res);
 
-			return mapping.findForward(ActionConstants.COMMON_ERROR);
+			return null;
 		}
 		finally {
 			PortletRequest portletReq = (PortletRequest)req.getAttribute(

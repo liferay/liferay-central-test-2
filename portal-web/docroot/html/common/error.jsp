@@ -34,6 +34,7 @@ if (exception instanceof PrincipalException) {
 	_log.warn("User ID " + userId);
 	_log.warn("Current URL " + currentURL);
 	_log.warn("Referer " + request.getHeader("Referer"));
+	_log.warn("Remote address " + request.getRemoteAddr());
 
 	_log.warn(exception, exception);
 }
@@ -41,6 +42,7 @@ else {
 	_log.error("User ID " + userId);
 	_log.error("Current URL " + currentURL);
 	_log.error("Referer " + request.getHeader("Referer"));
+	_log.error("Remote address " + request.getRemoteAddr());
 
 	_log.error(exception, exception);
 }
