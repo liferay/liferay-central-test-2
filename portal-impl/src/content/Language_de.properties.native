@@ -971,6 +971,7 @@ data=Daten
 database=Datenbank
 date-and-time=Datum und Uhrzeit
 date-format=Datumsformat
+date-range=Datum-Strecke
 date-selection=Nutzen Sie die xab und xbb Buttons um das Jahr zu wählen. Nutzen Sie die {0} und {1} Buttons um den Monat zu wählen. Halten Sie die linke Maustaste auf einem Button gedrückt um eine schnellere Auswahl zu ermöglichen.
 date=Datum
 day-high=Tag weiter

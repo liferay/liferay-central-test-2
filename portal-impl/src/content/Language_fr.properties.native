@@ -971,6 +971,7 @@ data=Données
 database=Base de données
 date-and-time=Date et heure
 date-format=Format De Date
+date-range=Chaîne de date
 date-selection=Utilisez les boutons xab et xbb pour choisir l'année. Utilisez les boutons {0} et {1} pour choisir le mois. Laissez le bouton de la souris sur ces boutons pour un choix plus rapide.
 date=Date
 day-high=Jour suivant

@@ -971,6 +971,7 @@ data=データ
 database=データベース
 date-and-time=日時
 date-format=日付表示形式
+date-range=日付の範囲
 date-selection=Use the xab and xbb buttons to select the year. Use the {0} and {1} buttons to select the month. Hold the mouse button on any of the above buttons for faster selection.
 date=日付
 day-high=高い日
