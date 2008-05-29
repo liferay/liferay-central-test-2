@@ -29,7 +29,14 @@ String redirect = ParamUtil.getString(request, "ajaxRedirect");
 
 long folderId = ParamUtil.getLong(request, "folderId");
 
-DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
+try {
+	DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
 %>
 
-<%@ include file="/html/portlet/document_library/folder_action_common.jspf" %>
+	<%@ include file="/html/portlet/document_library/folder_action_common.jspf" %>
+
+<%
+}
+catch (NoSuchFolderException nsfe) {
+}
+%>
