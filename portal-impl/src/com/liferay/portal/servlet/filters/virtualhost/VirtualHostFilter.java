@@ -70,9 +70,6 @@ import javax.servlet.http.HttpSession;
  */
 public class VirtualHostFilter extends BasePortalFilter {
 
-	public static final String SKIP_SET_CHARACTER_ENCODING =
-		VirtualHostFilter.class.getName() + "SKIP_SET_CHARACTER_ENCODING";
-
 	public void init(FilterConfig config) throws ServletException {
 		super.init(config);
 
@@ -95,12 +92,8 @@ public class VirtualHostFilter extends BasePortalFilter {
 		HttpServletRequest httpReq = (HttpServletRequest)req;
 		HttpServletResponse httpRes = (HttpServletResponse)res;
 
-		if (httpReq.getAttribute(SKIP_SET_CHARACTER_ENCODING) == null) {
-			httpReq.setCharacterEncoding(StringPool.UTF8);
-			//httpRes.setContentType(ContentTypes.TEXT_HTML_UTF8);
-
-			httpReq.setAttribute(SKIP_SET_CHARACTER_ENCODING, Boolean.TRUE);
-		}
+		httpReq.setCharacterEncoding(StringPool.UTF8);
+		//httpRes.setContentType(ContentTypes.TEXT_HTML_UTF8);
 
 		// Make sure all redirects issued by the portal are absolute
 
