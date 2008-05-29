@@ -289,7 +289,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	public String getLayoutPath(long layoutId) {
-		return getRootPath() + LAYOUTS_ROOT_PATH + layoutId;
+		return getRootPath() + ROOT_PATH_LAYOUTS + layoutId;
 	}
 
 	public Map getNewPrimaryKeysMap(Class<?> classObj) {
@@ -313,7 +313,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	public String getPortletPath(String portletId) {
-		return getRootPath() + PORTLETS_ROOT_PATH + portletId;
+		return getRootPath() + ROOT_PATH_PORTLETS + portletId;
 	}
 
 	public Set getPrimaryKeys() {
@@ -325,7 +325,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	public String getRootPath() {
-		return GROUPS_ROOT_PATH + getGroupId();
+		return ROOT_PATH_GROUPS + getGroupId();
 	}
 
 	public Date getStartDate() {
