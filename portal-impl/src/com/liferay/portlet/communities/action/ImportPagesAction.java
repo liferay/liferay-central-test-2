@@ -22,7 +22,10 @@
 
 package com.liferay.portlet.communities.action;
 
+import com.liferay.portal.LARFileException;
+import com.liferay.portal.LARTypeException;
 import com.liferay.portal.LayoutImportException;
+import com.liferay.portal.PortletIdException;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.util.UploadRequestUtil;
@@ -64,15 +67,26 @@ public class ImportPagesAction extends EditPagesAction {
 				uploadReq, "privateLayout");
 			File file = uploadReq.getFile("importFileName");
 
+			if (!file.exists()) {
+				throw new LARFileException("Import file does not exist");
+			}
+
 			LayoutServiceUtil.importLayouts(
 				groupId, privateLayout, req.getParameterMap(), file);
 
 			SessionMessages.add(req, "request_processed");
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			if ((e instanceof LARFileException) ||
+				(e instanceof LARTypeException)) {
 
-			SessionErrors.add(req, LayoutImportException.class.getName());
+				SessionErrors.add(req, e.getClass().getName());
+			}
+			else {
+				_log.error(e, e);
+
+				SessionErrors.add(req, LayoutImportException.class.getName());
+			}
 		}
 	}
 

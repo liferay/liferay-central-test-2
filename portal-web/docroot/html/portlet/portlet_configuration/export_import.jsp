@@ -115,7 +115,8 @@ boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionCla
 			url="<%= portletURL.toString() %>"
 		/>
 
-		<liferay-ui:error exception="<%= LARTypeException.class %>" message="please-import-a-valid-lar-file" />
+		<liferay-ui:error exception="<%= LARFileException.class %>" message="please-specify-a-lar-file-to-import" />
+		<liferay-ui:error exception="<%= LARTypeException.class %>" message="please-import-a-lar-file-of-the-correct-type" />
 		<liferay-ui:error exception="<%= LayoutImportException.class %>" message="an-unexpected-error-occurred-while-importing-your-file" />
 		<liferay-ui:error exception="<%= NoSuchLayoutException.class %>" message="an-error-occurred-because-the-live-group-does-not-have-the-current-page" />
 		<liferay-ui:error exception="<%= PortletIdException.class %>" message="please-import-a-lar-file-for-the-current-portlet" />

@@ -37,6 +37,12 @@
 				<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS %>Checkbox"><liferay-ui:message key="archived-setups" /></label>
 			</li>
 		</c:if>
+
+		<li class="tree-item">
+			<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.PORTLET_USER_PREFERENCES %>" defaultValue="<%= false %>" />
+
+			<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_USER_PREFERENCES %>Checkbox"><liferay-ui:message key="user-preferences" /></label>
+		</li>
 	</c:if>
 
 	<c:if test="<%= supportsLAR %>">
@@ -54,9 +60,9 @@
 					<input name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT%>" type="hidden" value="false" />
 				</c:when>
 				<c:otherwise>
-					<input checked name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA + StringPool.UNDERLINE + selPortlet.getPortletId() %>" onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace />portletDataControls');" type="checkbox" />
+					<input checked name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA + StringPool.UNDERLINE + selPortlet.getRootPortletId() %>" onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace />portletDataControls');" type="checkbox" />
 
-					<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA  + StringPool.UNDERLINE + selPortlet.getPortletId() %>"><liferay-ui:message key="data" /></label>
+					<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA  + StringPool.UNDERLINE + selPortlet.getRootPortletId() %>"><liferay-ui:message key="data" /></label>
 				</c:otherwise>
 			</c:choose>
 
@@ -125,5 +131,25 @@
 				</c:if>
 			</ul>
 		</li>
+
+		<li class="tree-item">
+			<input id="<portlet:namespace /><%= PortletDataHandlerKeys.PERMISSIONS %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PERMISSIONS %>" onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace />permissionsUl');" type="checkbox" />
+
+			<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PERMISSIONS %>"><liferay-ui:message key="permissions" /></label> <liferay-ui:icon-help message="export-import-portlet-permissions-help" />
+
+			<ul id="<portlet:namespace />permissionsUl">
+				<li class="tree-item">
+					<input checked class="disabled" disabled="disabled" type="checkbox" />
+
+					<label><liferay-ui:message key="permissions-assigned-to-organizations-user-groups-roles-and-communities" /></label>
+				</li>
+				<li class="tree-item">
+					<input disabled="disabled" id="<portlet:namespace /><%= PortletDataHandlerKeys.USER_PERMISSIONS %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.USER_PERMISSIONS %>" type="checkbox" />
+
+					<label for="<portlet:namespace /><%= PortletDataHandlerKeys.USER_PERMISSIONS %>"><liferay-ui:message key="permissions-assigned-to-users" /></label> <liferay-ui:icon-help message="export-import-permissions-assigned-to-users-help" />
+				</li>
+			</ul>
+		</li>
+
 	</c:if>
 </ul>

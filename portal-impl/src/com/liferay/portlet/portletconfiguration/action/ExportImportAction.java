@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.portletconfiguration.action;
 
+import com.liferay.portal.LARFileException;
 import com.liferay.portal.LARTypeException;
 import com.liferay.portal.LayoutImportException;
 import com.liferay.portal.NoSuchLayoutException;
@@ -216,13 +217,18 @@ public class ExportImportAction extends EditConfigurationAction {
 			long plid = ParamUtil.getLong(uploadReq, "plid");
 			File file = uploadReq.getFile("importFileName");
 
+			if (!file.exists()) {
+				throw new LARFileException("Import file does not exist");
+			}
+
 			LayoutServiceUtil.importPortletInfo(
 				plid, portlet.getPortletId(), req.getParameterMap(), file);
 
 			SessionMessages.add(req, "request_processed");
 		}
 		catch (Exception e) {
-			if ((e instanceof LARTypeException) ||
+			if ((e instanceof LARFileException) ||
+				(e instanceof LARTypeException) ||
 				(e instanceof PortletIdException)) {
 
 				SessionErrors.add(req, e.getClass().getName());
