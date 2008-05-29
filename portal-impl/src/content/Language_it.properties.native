@@ -1283,6 +1283,7 @@ expiration=Scadenza
 expire=Scadenza
 expired=Scaduto
 export-data=Dati dell'esportazione
+export-date-range-help=Permetta alla gamma della data di specificare un sottoinsieme dei dati per esportare. Tutti i dati saranno esportati se generato o modificato a o dopo la data di inizio e prima della data di estremità.
 export-enabled=Export Abilitato
 export-import-permissions-assigned-to-users-help=dovuto il granularity del sistema di permesso, esportare o importare i permessi dell'utente può aumentare significativamente il tempo di lavorazione. Nonla esporti a meno che sia necessario assolutamente.
 export-import-permissions-help=I permessi assegnati per le pagine esportate e le diverse finestre di portlet saranno inclusi se questa opzione è controllata.

@@ -1283,6 +1283,7 @@ expiration=Échéance
 expire=Déprécier
 expired=Déprécié
 export-data=Données d'exportation
+export-date-range-help=Permettez à la gamme de date de spécifier un sous-ensemble des données pour exporter. Toutes les données seront exportées si créé ou modifié ou après à la date de début et avant la date de fin.
 export-enabled=L'exportation est activée
 export-import-permissions-assigned-to-users-help=En raison de la granularité du système de permission, l'exportation ou l'importation des permissions d'utilisateurs peut augmenter la durée de la transformation de manière significative. Ne l'exportez pas à moins que cela soit absolument nécessaire.
 export-import-permissions-help=Les permissions assignées sur les pages exportées et les différentes fenêtres de l'application seront incluses si cette option est activée.

@@ -1283,6 +1283,7 @@ expiration=逾期
 expire=到期
 expired=到期
 export-data=出口數據
+export-date-range-help=使日期範圍指定數據的一個子集出口。 所有數據將被出口，如果創造或修改在或在起始日期以后和在结束日期之前。
 export-enabled=出口使能
 export-import-permissions-assigned-to-users-help=由於允許系統的粒度, 出口或進口用戶允許可能極大增加處理時間。不要出口他們除非它是absolutely 必要的。
 export-import-permissions-help=允許被分配為被出口的頁和各自的portlet 窗口將是包括的如果這個選擇被檢查。

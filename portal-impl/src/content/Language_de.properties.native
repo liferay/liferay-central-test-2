@@ -1283,6 +1283,7 @@ expiration=Verfall
 expire=Verfallen
 expired=Verfallen
 export-data=Export-Daten
+export-date-range-help=Ermöglichen Sie der Datumstrecke, eine Teilmenge der Daten zu spezifizieren, um zu exportieren. Alle Daten werden exportiert, wenn sie oder nach am Anfangsdatum und vor dem Enddatum verursacht werden oder geändert werden.
 export-enabled=Export erlaubt
 export-import-permissions-assigned-to-users-help=Auf Grund der granularität des Erlaubnissytems, kann das exportieren bzw. importieren von Benutzer-Erlaubnissen die Verarbeitungszeit deutlich verlängern. Daher ist ein Export nur dann angeraten, wenn es unbedingt nötig ist.
 export-import-permissions-help=Wenn diese Option aktiviert wird, dann werden die Erlaubnisse der exportierten Seiten und der einzelnen Portlets miteinbezogen.

@@ -1283,6 +1283,7 @@ expiration=満了
 expire=切らしなさい
 expired=切らされる
 export-data=輸出データ
+export-date-range-help=日付の範囲がデータのサブセットを輸出するために指定することを可能にしなさい。 すべてのデータは開始日にまたは後にそして終了日の前に作成されたらか、または変更されて輸出される。
 export-enabled=可能になる輸出
 export-import-permissions-assigned-to-users-help=許可システムの粒度のために、ユーザーの許可を輸出するか、または輸入することは処理時間をかなり増加できる。それが絶対に必要でなかったらそれらを輸出してはいけない。
 export-import-permissions-help=輸出されたページおよび個々のportlet の窓に割り当てられた許可はこの選択が点検されれば含まれている。

@@ -1283,6 +1283,7 @@ expiration=Expiración
 expire=Expirar
 expired=Expirado
 export-data=Datos de la exportación
+export-date-range-help=Permita a la gama de la fecha especificar un subconjunto de los datos para exportar. Todos los datos serán exportados si están creados o modificados en o después de la fecha de inicio y antes de la fecha de extremo.
 export-enabled=Exportación habilitada
 export-import-permissions-assigned-to-users-help=Debido a la granularidad del sistema del permisos, la exportación o la importación de permisos específicos de usuarios puede aumentar tiempo del proceso ostensiblemente. No seleccione esta opción a menos que sea absolutamente necesario.
 export-import-permissions-help=Los permisos asignados para las páginas exportadas y las ventanas individuales del portlet serán incluidos si se selecciona esta opción.
