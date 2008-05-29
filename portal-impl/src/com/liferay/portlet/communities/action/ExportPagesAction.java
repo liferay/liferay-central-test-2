@@ -25,12 +25,13 @@ package com.liferay.portlet.communities.action;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.servlet.SessionErrors;
 
@@ -66,6 +67,9 @@ public class ExportPagesAction extends PortletAction {
 		throws Exception {
 
 		try {
+			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
 			long groupId = ParamUtil.getLong(req, "groupId");
 			boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
 			String fileName = ParamUtil.getString(req, "exportFileName");
@@ -74,15 +78,13 @@ public class ExportPagesAction extends PortletAction {
 			Date endDate = null;
 
 			if (dateRange) {
-				User user = PortalUtil.getUser(req);
-
-				int startDateMonth =
-					ParamUtil.getInteger(req, "startDateMonth");
+				int startDateMonth = ParamUtil.getInteger(
+					req, "startDateMonth");
 				int startDateDay = ParamUtil.getInteger(req, "startDateDay");
 				int startDateYear = ParamUtil.getInteger(req, "startDateYear");
 				int startDateHour = ParamUtil.getInteger(req, "startDateHour");
-				int startDateMinute =
-					ParamUtil.getInteger(req, "startDateMinute");
+				int startDateMinute = ParamUtil.getInteger(
+					req, "startDateMinute");
 				int startDateAmPm = ParamUtil.getInteger(req, "startDateAmPm");
 
 				if (startDateAmPm == Calendar.PM) {
@@ -91,7 +93,8 @@ public class ExportPagesAction extends PortletAction {
 
 				startDate = PortalUtil.getDate(
 					startDateMonth, startDateDay, startDateYear, startDateHour,
-					startDateMinute, user.getTimeZone(), new PortalException());
+					startDateMinute, themeDisplay.getTimeZone(),
+					new PortalException());
 
 				int endDateMonth = ParamUtil.getInteger(req, "endDateMonth");
 				int endDateDay = ParamUtil.getInteger(req, "endDateDay");
@@ -106,7 +109,8 @@ public class ExportPagesAction extends PortletAction {
 
 				endDate = PortalUtil.getDate(
 					endDateMonth, endDateDay, endDateYear, endDateHour,
-					endDateMinute, user.getTimeZone(), new PortalException());
+					endDateMinute, themeDisplay.getTimeZone(),
+					new PortalException());
 			}
 
 			byte[] byteArray = LayoutServiceUtil.exportLayouts(

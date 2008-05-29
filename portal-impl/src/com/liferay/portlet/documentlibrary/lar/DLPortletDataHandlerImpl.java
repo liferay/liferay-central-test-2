@@ -695,7 +695,6 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 	private static final PortletDataHandlerBoolean _tags =
 		new PortletDataHandlerBoolean(_NAMESPACE, "tags");
 
-	private static Log _log =
-		LogFactory.getLog(DLPortletDataHandlerImpl.class);
+	private static Log _log = LogFactory.getLog(DLPortletDataHandlerImpl.class);
 
 }

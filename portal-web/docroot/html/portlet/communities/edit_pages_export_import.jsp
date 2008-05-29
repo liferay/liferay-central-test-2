@@ -89,6 +89,12 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 
 <c:choose>
 	<c:when test='<%= tabs4.equals("export") %>'>
+		<script type="text/javascript">
+			function <portlet:namespace />toggleDateRange() {
+				jQuery("#<portlet:namespace />startEndDate").toggle();
+			}
+		</script>
+
 		<liferay-ui:message key="export-the-selected-data-to-the-given-lar-file-name" />
 
 		<br /><br />
@@ -99,37 +105,29 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 
 		<br />
 
-		<script type="text/javascript">
-			function toggleDateRange() {
-				jQuery("#<portlet:namespace />startEndDate").toggle();
-			}
-		</script>
-
 		<div>
-			<liferay-ui:input-checkbox param="dateRange" onClick="toggleDateRange()" />
+			<liferay-ui:input-checkbox param="dateRange" onClick='<%= renderResponse.getNamespace() + "toggleDateRange()" %>' />
 
 			<liferay-ui:message key="date-range" />
-
-			<liferay-ui:icon-help message="export-date-range-help" />
 		</div>
 
 		<%
 		Calendar today = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 		Calendar yesterday = CalendarFactoryUtil.getCalendar(timeZone, locale);
+
 		yesterday.add(Calendar.DATE, -1);
 		%>
 
 		<br />
 
-		<table id="<portlet:namespace />startEndDate" class="lfr-table" style="display: none">
+		<table class="lfr-table" id="<portlet:namespace />startEndDate" style="display: none;">
 		<tr>
 			<td>
 				<liferay-ui:message key="start-date" />
 			</td>
 			<td>
 				<liferay-ui:input-date
-					disableNamespace="<%= true %>"
 					monthParam="startDateMonth"
 					monthValue="<%= yesterday.get(Calendar.MONTH) %>"
 					dayParam="startDateDay"
@@ -152,7 +150,7 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 					minuteInterval="1"
 					amPmParam='<%= "startDateAmPm" %>'
 					amPmValue="<%= yesterday.get(Calendar.AM_PM) %>"
-					disabled="false"
+					disabled="<%= false %>"
 				/>
 			</td>
 		</tr>
@@ -162,7 +160,6 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 			</td>
 			<td>
 				<liferay-ui:input-date
-					disableNamespace="<%= true %>"
 					monthParam="endDateMonth"
 					monthValue="<%= today.get(Calendar.MONTH) %>"
 					dayParam="endDateDay"
@@ -185,12 +182,12 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 					minuteInterval="1"
 					amPmParam='<%= "endDateAmPm" %>'
 					amPmValue="<%= today.get(Calendar.AM_PM) %>"
-					disabled="false"
+					disabled="<%= false %>"
 				/>
 			</td>
 		</tr>
 		<tr>
-			<td cellspan="2">
+			<td colspan="2">
 				<br />
 			</td>
 		</tr>

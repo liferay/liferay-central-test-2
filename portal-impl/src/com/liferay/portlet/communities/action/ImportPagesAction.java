@@ -25,7 +25,6 @@ package com.liferay.portlet.communities.action;
 import com.liferay.portal.LARFileException;
 import com.liferay.portal.LARTypeException;
 import com.liferay.portal.LayoutImportException;
-import com.liferay.portal.PortletIdException;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.util.UploadRequestUtil;

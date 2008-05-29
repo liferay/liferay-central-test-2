@@ -437,11 +437,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		header.addAttribute(
 			"build-number", String.valueOf(ReleaseInfo.getBuildNumber()));
 		header.addAttribute("export-date", Time.getRFC822());
-		header.addAttribute("type", "layouts");
-		header.addAttribute("group-id", String.valueOf(groupId));
-		header.addAttribute("private-layout", String.valueOf(privateLayout));
-		header.addAttribute("theme-id", layoutSet.getThemeId());
-		header.addAttribute("color-scheme-id", layoutSet.getColorSchemeId());
 
 		if (context.hasDateRange()) {
 			header.addAttribute(
@@ -449,6 +444,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			header.addAttribute(
 				"end-date", String.valueOf(context.getEndDate()));
 		}
+
+		header.addAttribute("type", "layouts");
+		header.addAttribute("group-id", String.valueOf(groupId));
+		header.addAttribute("private-layout", String.valueOf(privateLayout));
+		header.addAttribute("theme-id", layoutSet.getThemeId());
+		header.addAttribute("color-scheme-id", layoutSet.getColorSchemeId());
 
 		// Layouts
 
@@ -838,12 +839,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		header.addAttribute(
 			"build-number", String.valueOf(ReleaseInfo.getBuildNumber()));
 		header.addAttribute("export-date", Time.getRFC822());
-		header.addAttribute("type", "portlet");
-		header.addAttribute("group-id", String.valueOf(layout.getGroupId()));
-		header.addAttribute(
-			"private-layout", String.valueOf(layout.isPrivateLayout()));
-		header.addAttribute(
-			"root-portlet-id", PortletConstants.getRootPortletId(portletId));
 
 		if (context.hasDateRange()) {
 			header.addAttribute(
@@ -851,6 +846,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			header.addAttribute(
 				"end-date", String.valueOf(context.getEndDate()));
 		}
+
+		header.addAttribute("type", "portlet");
+		header.addAttribute("group-id", String.valueOf(layout.getGroupId()));
+		header.addAttribute(
+			"private-layout", String.valueOf(layout.isPrivateLayout()));
+		header.addAttribute(
+			"root-portlet-id", PortletConstants.getRootPortletId(portletId));
 
 		// Data
 
@@ -2381,8 +2383,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			String portletId = portletPreferences.getPortletId();
 
 			if (layoutTypePortlet.hasPortletId(portletId)) {
-				exportPortletData(
-					context, portletId, jxPrefs, parentEl);
+				exportPortletData(context, portletId, jxPrefs, parentEl);
 			}
 		}
 	}

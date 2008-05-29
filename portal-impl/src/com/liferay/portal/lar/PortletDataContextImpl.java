@@ -94,9 +94,9 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_primaryKeys = primaryKeys;
 		_dataStrategy =  null;
 		_userIdStrategy = null;
-		_zipReader = null;
 		_startDate = startDate;
 		_endDate = endDate;
+		_zipReader = null;
 		_zipWriter = zipWriter;
 	}
 
@@ -349,30 +349,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_tagsEntriesMap.put(getPrimaryKeyString(className, classPK), values);
 	}
 
-	public boolean hasDateRange() {
-		if (_startDate != null) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean isWithinDateRange(Date modifiedDate) {
-		boolean isWithinRange = false;
-
-		if (!hasDateRange()) {
-			isWithinRange = true;
-		}
-		else if ((_startDate.compareTo(modifiedDate) <= 0) &&
-			_endDate.after(modifiedDate)) {
-
-			isWithinRange = true;
-		}
-
-		return isWithinRange;
-	}
-
 	public String getDataStrategy() {
 		 return _dataStrategy;
 	}
@@ -391,6 +367,29 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	public Date getEndDate() {
 		return _endDate;
+	}
+
+	public boolean hasDateRange() {
+		if (_startDate != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isWithinDateRange(Date modifiedDate) {
+		if (!hasDateRange()) {
+			return true;
+		}
+		else if ((_startDate.compareTo(modifiedDate) <= 0) &&
+				 (_endDate.after(modifiedDate))) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public ZipReader getZipReader() {

@@ -178,7 +178,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 					structuresItr.remove();
 				}
 				else if (!context.isWithinDateRange(
-						structure.getModifiedDate())) {
+							structure.getModifiedDate())) {
 
 					structuresItr.remove();
 				}
@@ -211,7 +211,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 					templatesItr.remove();
 				}
 				else if (!context.isWithinDateRange(
-						template.getModifiedDate())) {
+							template.getModifiedDate())) {
 
 					templatesItr.remove();
 				}
@@ -244,7 +244,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 					articlesItr.remove();
 				}
 				else if (!context.isWithinDateRange(
-						article.getModifiedDate())) {
+							article.getModifiedDate())) {
 
 					articlesItr.remove();
 				}
