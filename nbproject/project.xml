@@ -80,24 +80,24 @@
                 <action name="Build">
                     <target>start</target>
                 </action>
-                <action name="Compile">
-                    <target>compile</target>
-                </action>                
-                <action name="Deploy">
-                    <target>deploy</target>
-                </action>                
                 <action name="Clean">
                     <target>clean</target>
+                </action>
+                <action name="Compile">
+                    <target>compile</target>
+                </action>
+                <action name="Deploy">
+                    <target>deploy</target>
                 </action>
                 <action name="Javadoc">
                     <target>javadoc</target>
                 </action>
-                <action name="Test">
-                    <target>test</target>
-                </action>
                 <action name="Rebuild">
                     <target>clean</target>
                     <target>start</target>
+                </action>
+                <action name="Test">
+                    <target>test</target>
                 </action>
             </ide-actions>
             <view>
@@ -148,11 +148,11 @@
                 </items>
                 <context-menu>
                     <ide-action name="Build"/>
-                    <ide-action name="Compile"/>                    
-                    <ide-action name="Deploy"/>
-                    <ide-action name="Rebuild"/>
                     <ide-action name="Clean"/>
+                    <ide-action name="Compile"/>
+                    <ide-action name="Deploy"/>
                     <ide-action name="Javadoc"/>
+                    <ide-action name="Rebuild"/>
                     <ide-action name="Test"/>
                 </context-menu>
             </view>
