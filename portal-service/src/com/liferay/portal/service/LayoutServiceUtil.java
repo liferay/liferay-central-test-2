@@ -116,31 +116,37 @@ public class LayoutServiceUtil {
 	}
 
 	public static byte[] exportLayouts(long groupId, boolean privateLayout,
-		java.util.Map<String, String[]> parameterMap)
+		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
+		java.util.Date endDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
 
-		return layoutService.exportLayouts(groupId, privateLayout, parameterMap);
+		return layoutService.exportLayouts(groupId, privateLayout,
+			parameterMap, startDate, endDate);
 	}
 
 	public static byte[] exportLayouts(long groupId, boolean privateLayout,
-		long[] layoutIds, java.util.Map<String, String[]> parameterMap)
+		long[] layoutIds, java.util.Map<String, String[]> parameterMap,
+		java.util.Date startDate, java.util.Date endDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
 
 		return layoutService.exportLayouts(groupId, privateLayout, layoutIds,
-			parameterMap);
+			parameterMap, startDate, endDate);
 	}
 
 	public static byte[] exportPortletInfo(long plid,
-		java.lang.String portletId, java.util.Map<String, String[]> parameterMap)
+		java.lang.String portletId,
+		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
+		java.util.Date endDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
 
-		return layoutService.exportPortletInfo(plid, portletId, parameterMap);
+		return layoutService.exportPortletInfo(plid, portletId, parameterMap,
+			startDate, endDate);
 	}
 
 	public static void importLayouts(long groupId, boolean privateLayout,

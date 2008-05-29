@@ -142,7 +142,24 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 						MBMessageUtil.findByCategoryId(
 							category.getCategoryId());
 
-					messages.addAll(categoryMessages);
+					if (context.hasDateRange()) {
+						for (MBMessage message : categoryMessages) {
+							if (context.isWithinDateRange(
+									message.getModifiedDate())) {
+
+								messages.add(message);
+							}
+						}
+
+						if (!context.isWithinDateRange(
+								category.getModifiedDate())) {
+
+							categoriesItr.remove();
+						}
+					}
+					else {
+						messages.addAll(categoryMessages);
+					}
 				}
 			}
 

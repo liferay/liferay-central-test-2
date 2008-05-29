@@ -25,6 +25,7 @@ package com.liferay.portal.lar;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
+import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
@@ -42,6 +43,7 @@ import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.MapUtil;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -80,8 +82,11 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	public PortletDataContextImpl(
-		long companyId, long groupId, Map parameterMap, Set primaryKeys,
-		ZipWriter zipWriter) {
+			long companyId, long groupId, Map parameterMap, Set primaryKeys,
+			Date startDate, Date endDate, ZipWriter zipWriter)
+		throws PortletDataException {
+
+		_validateDateRange(startDate, endDate);
 
 		_companyId = companyId;
 		_groupId = groupId;
@@ -90,6 +95,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_dataStrategy =  null;
 		_userIdStrategy = null;
 		_zipReader = null;
+		_startDate = startDate;
+		_endDate = endDate;
 		_zipWriter = zipWriter;
 	}
 
@@ -342,6 +349,30 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_tagsEntriesMap.put(getPrimaryKeyString(className, classPK), values);
 	}
 
+	public boolean hasDateRange() {
+		if (_startDate != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isWithinDateRange(Date modifiedDate) {
+		boolean isWithinRange = false;
+
+		if (!hasDateRange()) {
+			isWithinRange = true;
+		}
+		else if ((_startDate.compareTo(modifiedDate) <= 0) &&
+			_endDate.after(modifiedDate)) {
+
+			isWithinRange = true;
+		}
+
+		return isWithinRange;
+	}
+
 	public String getDataStrategy() {
 		 return _dataStrategy;
 	}
@@ -352,6 +383,14 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	public long getUserId(String userUuid) throws SystemException {
 		return _userIdStrategy.getUserId(userUuid);
+	}
+
+	public Date getStartDate() {
+		return _startDate;
+	}
+
+	public Date getEndDate() {
+		return _endDate;
 	}
 
 	public ZipReader getZipReader() {
@@ -376,6 +415,29 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return sm.toString();
 	}
 
+	private void _validateDateRange(Date startDate, Date endDate)
+		throws PortletDataException {
+
+		if ((startDate == null) ^ (endDate == null)) {
+			throw new PortletDataException(
+				"Both start and end dates must have valid values or be null");
+		}
+
+		if (startDate != null) {
+			if (startDate.after(endDate) || startDate.equals(endDate)) {
+				throw new PortletDataException(
+					"The start date cannot be after the end date");
+			}
+
+			Date now = new Date();
+
+			if (startDate.after(now) || endDate.after(now)) {
+				throw new PortletDataException(
+					"Dates must not be in the future");
+			}
+		}
+	}
+
 	private long _companyId;
 	private long _groupId;
 	private long _plid;
@@ -387,6 +449,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private Map<String, Map> _newPrimaryKeysMaps = new HashMap();
 	private String _dataStrategy;
 	private UserIdStrategy _userIdStrategy;
+	private Date _startDate;
+	private Date _endDate;
 	private ZipReader _zipReader;
 	private ZipWriter _zipWriter;
 

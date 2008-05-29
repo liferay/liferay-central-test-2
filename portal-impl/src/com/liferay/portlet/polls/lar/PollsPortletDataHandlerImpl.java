@@ -129,6 +129,11 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 					questionsItr.remove();
 				}
+				else if (!context.isWithinDateRange(
+						question.getModifiedDate())) {
+
+					questionsItr.remove();
+				}
 				else {
 					List<PollsChoice> questionChoices =
 						PollsChoiceUtil.findByQuestionId(

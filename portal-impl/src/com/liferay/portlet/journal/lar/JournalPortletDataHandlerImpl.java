@@ -177,6 +177,11 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 					structuresItr.remove();
 				}
+				else if (!context.isWithinDateRange(
+						structure.getModifiedDate())) {
+
+					structuresItr.remove();
+				}
 				else {
 					exportStructure(structure);
 				}
@@ -205,6 +210,11 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 					templatesItr.remove();
 				}
+				else if (!context.isWithinDateRange(
+						template.getModifiedDate())) {
+
+					templatesItr.remove();
+				}
 				else {
 					exportTemplate(context, template);
 				}
@@ -230,6 +240,11 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 				if (context.addPrimaryKey(
 						JournalArticle.class, article.getPrimaryKeyObj())) {
+
+					articlesItr.remove();
+				}
+				else if (!context.isWithinDateRange(
+						article.getModifiedDate())) {
 
 					articlesItr.remove();
 				}

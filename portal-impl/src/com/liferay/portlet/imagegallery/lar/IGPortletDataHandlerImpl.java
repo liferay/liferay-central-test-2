@@ -134,7 +134,24 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 					List<IGImage> folderIGImages = IGImageUtil.findByFolderId(
 						folder.getFolderId());
 
-					igImages.addAll(folderIGImages);
+					if (context.hasDateRange()) {
+						for (IGImage image : folderIGImages) {
+							if (context.isWithinDateRange(
+									image.getModifiedDate())) {
+
+								igImages.add(image);
+							}
+						}
+
+						if (!context.isWithinDateRange(
+								folder.getModifiedDate())) {
+
+							foldersItr.remove();
+						}
+					}
+					else {
+						igImages.addAll(folderIGImages);
+					}
 				}
 			}
 

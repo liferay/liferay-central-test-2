@@ -127,7 +127,24 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 					List<WikiPage> nodePages = WikiPageUtil.findByNodeId(
 						node.getNodeId());
 
-					pages.addAll(nodePages);
+					if (context.hasDateRange()) {
+						for (WikiPage page : nodePages) {
+							if (context.isWithinDateRange(
+									page.getCreateDate())) {
+
+								pages.add(page);
+							}
+						}
+
+						if (!context.isWithinDateRange(
+								node.getModifiedDate())) {
+
+							nodesItr.remove();
+						}
+					}
+					else {
+						pages.addAll(nodePages);
+					}
 				}
 			}
 

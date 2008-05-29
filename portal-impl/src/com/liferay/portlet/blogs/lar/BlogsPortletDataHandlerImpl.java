@@ -106,6 +106,9 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 					itr.remove();
 				}
+				else if (!context.isWithinDateRange(entry.getModifiedDate())) {
+					itr.remove();
+				}
 				else {
 					entry.setUserUuid(entry.getUserUuid());
 

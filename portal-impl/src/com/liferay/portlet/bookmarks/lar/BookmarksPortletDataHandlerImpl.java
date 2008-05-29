@@ -128,7 +128,24 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 						BookmarksEntryUtil.findByFolderId(
 								folder.getFolderId());
 
-					entries.addAll(folderEntries);
+					if (context.hasDateRange()) {
+						for (BookmarksEntry entry : folderEntries) {
+							if (context.isWithinDateRange(
+									entry.getModifiedDate())) {
+
+								entries.add(entry);
+							}
+						}
+
+						if (!context.isWithinDateRange(
+								folder.getModifiedDate())) {
+
+							foldersItr.remove();
+						}
+					}
+					else {
+						entries.addAll(folderEntries);
+					}
 				}
 			}
 

@@ -401,7 +401,8 @@ public class LayoutServiceHttp {
 
 	public static byte[] exportLayouts(HttpPrincipal httpPrincipal,
 		long groupId, boolean privateLayout,
-		java.util.Map<String, String[]> parameterMap)
+		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
+		java.util.Date endDate)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -415,9 +416,23 @@ public class LayoutServiceHttp {
 				paramObj2 = new NullWrapper("java.util.Map");
 			}
 
+			Object paramObj3 = startDate;
+
+			if (startDate == null) {
+				paramObj3 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj4 = endDate;
+
+			if (endDate == null) {
+				paramObj4 = new NullWrapper("java.util.Date");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"exportLayouts",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			Object returnObj = null;
 
@@ -447,7 +462,8 @@ public class LayoutServiceHttp {
 
 	public static byte[] exportLayouts(HttpPrincipal httpPrincipal,
 		long groupId, boolean privateLayout, long[] layoutIds,
-		java.util.Map<String, String[]> parameterMap)
+		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
+		java.util.Date endDate)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -467,9 +483,24 @@ public class LayoutServiceHttp {
 				paramObj3 = new NullWrapper("java.util.Map");
 			}
 
+			Object paramObj4 = startDate;
+
+			if (startDate == null) {
+				paramObj4 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj5 = endDate;
+
+			if (endDate == null) {
+				paramObj5 = new NullWrapper("java.util.Date");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"exportLayouts",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
+					});
 
 			Object returnObj = null;
 
@@ -499,7 +530,8 @@ public class LayoutServiceHttp {
 
 	public static byte[] exportPortletInfo(HttpPrincipal httpPrincipal,
 		long plid, java.lang.String portletId,
-		java.util.Map<String, String[]> parameterMap)
+		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
+		java.util.Date endDate)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -517,9 +549,23 @@ public class LayoutServiceHttp {
 				paramObj2 = new NullWrapper("java.util.Map");
 			}
 
+			Object paramObj3 = startDate;
+
+			if (startDate == null) {
+				paramObj3 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj4 = endDate;
+
+			if (endDate == null) {
+				paramObj4 = new NullWrapper("java.util.Date");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"exportPortletInfo",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			Object returnObj = null;
 

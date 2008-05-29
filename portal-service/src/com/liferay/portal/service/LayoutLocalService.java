@@ -120,17 +120,20 @@ public interface LayoutLocalService {
 			com.liferay.portal.PortalException;
 
 	public byte[] exportLayouts(long groupId, boolean privateLayout,
-		java.util.Map<String, String[]> parameterMap)
+		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
+		java.util.Date endDate)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public byte[] exportLayouts(long groupId, boolean privateLayout,
-		long[] layoutIds, java.util.Map<String, String[]> parameterMap)
+		long[] layoutIds, java.util.Map<String, String[]> parameterMap,
+		java.util.Date startDate, java.util.Date endDate)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public byte[] exportPortletInfo(long plid, java.lang.String portletId,
-		java.util.Map<String, String[]> parameterMap)
+		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
+		java.util.Date endDate)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

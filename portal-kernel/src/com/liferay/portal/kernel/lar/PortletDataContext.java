@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.zip.ZipWriter;
 
 import java.io.Serializable;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -111,6 +112,14 @@ public interface PortletDataContext extends Serializable {
 	public UserIdStrategy getUserIdStrategy() throws SystemException;
 
 	public long getUserId(String userUuid) throws SystemException;
+
+	public Date getStartDate();
+
+	public Date getEndDate();
+
+	public boolean hasDateRange();
+
+	public boolean isWithinDateRange(Date modifiedDate);
 
 	public ZipReader getZipReader();
 

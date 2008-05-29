@@ -106,6 +106,9 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 
 					itr.remove();
 				}
+				else if (!context.isWithinDateRange(event.getModifiedDate())) {
+					itr.remove();
+				}
 				else {
 					event.setUserUuid(event.getUserUuid());
 				}

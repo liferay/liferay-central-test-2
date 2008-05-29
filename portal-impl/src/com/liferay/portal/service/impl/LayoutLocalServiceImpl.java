@@ -139,7 +139,7 @@ import org.dom4j.io.SAXReader;
  * @author Brian Wing Shun Chan
  * @author Joel Kozikowski
  * @author Charles May
- * @author Raymond Aug�
+ * @author Raymond Augé
  * @author Jorge Ferrer
  * @author Bruno Farache
  *
@@ -360,15 +360,16 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	public byte[] exportLayouts(
 			long groupId, boolean privateLayout,
-			Map<String, String[]> parameterMap)
+			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
-		return exportLayouts(groupId, privateLayout, null, parameterMap);
+		return exportLayouts(
+			groupId, privateLayout, null, parameterMap, startDate, endDate);
 	}
 
 	public byte[] exportLayouts(
 			long groupId, boolean privateLayout, long[] layoutIds,
-			Map<String, String[]> parameterMap)
+			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
 		boolean exportPermissions = MapUtil.getBoolean(
@@ -419,7 +420,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		ZipWriter zipWriter = new ZipWriter();
 
 		PortletDataContext context = new PortletDataContextImpl(
-			companyId, groupId, parameterMap, new HashSet(), zipWriter);
+			companyId, groupId, parameterMap, new HashSet(), startDate, endDate,
+			zipWriter);
 
 		Group guestGroup = groupLocalService.getGroup(
 			companyId, GroupImpl.GUEST);
@@ -440,6 +442,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		header.addAttribute("private-layout", String.valueOf(privateLayout));
 		header.addAttribute("theme-id", layoutSet.getThemeId());
 		header.addAttribute("color-scheme-id", layoutSet.getColorSchemeId());
+
+		if (context.hasDateRange()) {
+			header.addAttribute(
+				"start-date", String.valueOf(context.getStartDate()));
+			header.addAttribute(
+				"end-date", String.valueOf(context.getEndDate()));
+		}
 
 		// Layouts
 
@@ -773,7 +782,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	public byte[] exportPortletInfo(
-			long plid, String portletId, Map<String, String[]> parameterMap)
+			long plid, String portletId, Map<String, String[]> parameterMap,
+			Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
 		boolean exportPortletSetup = MapUtil.getBoolean(
@@ -813,7 +823,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		PortletDataContext context = new PortletDataContextImpl(
 			companyId, layout.getGroupId(), parameterMap, new HashSet(),
-			zipWriter);
+			startDate, endDate, zipWriter);
 
 		context.setPlid(plid);
 
@@ -834,6 +844,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			"private-layout", String.valueOf(layout.isPrivateLayout()));
 		header.addAttribute(
 			"root-portlet-id", PortletConstants.getRootPortletId(portletId));
+
+		if (context.hasDateRange()) {
+			header.addAttribute(
+				"start-date", String.valueOf(context.getStartDate()));
+			header.addAttribute(
+				"end-date", String.valueOf(context.getEndDate()));
+		}
 
 		// Data
 
@@ -2364,7 +2381,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			String portletId = portletPreferences.getPortletId();
 
 			if (layoutTypePortlet.hasPortletId(portletId)) {
-				exportPortletData(context, portletId, jxPrefs, parentEl);
+				exportPortletData(
+					context, portletId, jxPrefs, parentEl);
 			}
 		}
 	}

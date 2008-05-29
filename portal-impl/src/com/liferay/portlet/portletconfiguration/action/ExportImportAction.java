@@ -25,10 +25,12 @@ package com.liferay.portlet.portletconfiguration.action;
 import com.liferay.portal.LARTypeException;
 import com.liferay.portal.LayoutImportException;
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.PortalException;
 import com.liferay.portal.PortletIdException;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
@@ -41,6 +43,9 @@ import com.liferay.util.servlet.SessionMessages;
 import com.liferay.util.servlet.UploadPortletRequest;
 
 import java.io.File;
+
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -145,9 +150,49 @@ public class ExportImportAction extends EditConfigurationAction {
 		try {
 			long plid = ParamUtil.getLong(req, "plid");
 			String fileName = ParamUtil.getString(req, "exportFileName");
+			boolean dateRange = ParamUtil.getBoolean(req, "dateRange");
+			Date startDate = null;
+			Date endDate = null;
+
+			if (dateRange) {
+				User user = PortalUtil.getUser(req);
+
+				int startDateMonth =
+					ParamUtil.getInteger(req, "startDateMonth");
+				int startDateDay = ParamUtil.getInteger(req, "startDateDay");
+				int startDateYear = ParamUtil.getInteger(req, "startDateYear");
+				int startDateHour = ParamUtil.getInteger(req, "startDateHour");
+				int startDateMinute =
+					ParamUtil.getInteger(req, "startDateMinute");
+				int startDateAmPm = ParamUtil.getInteger(req, "startDateAmPm");
+
+				if (startDateAmPm == Calendar.PM) {
+					startDateHour += 12;
+				}
+
+				startDate = PortalUtil.getDate(
+					startDateMonth, startDateDay, startDateYear, startDateHour,
+					startDateMinute, user.getTimeZone(), new PortalException());
+
+				int endDateMonth = ParamUtil.getInteger(req, "endDateMonth");
+				int endDateDay = ParamUtil.getInteger(req, "endDateDay");
+				int endDateYear = ParamUtil.getInteger(req, "endDateYear");
+				int endDateHour = ParamUtil.getInteger(req, "endDateHour");
+				int endDateMinute = ParamUtil.getInteger(req, "endDateMinute");
+				int endDateAmPm = ParamUtil.getInteger(req, "endDateAmPm");
+
+				if (endDateAmPm == Calendar.PM) {
+					endDateHour += 12;
+				}
+
+				endDate = PortalUtil.getDate(
+					endDateMonth, endDateDay, endDateYear, endDateHour,
+					endDateMinute, user.getTimeZone(), new PortalException());
+			}
 
 			byte[] byteArray = LayoutServiceUtil.exportPortletInfo(
-				plid, portlet.getPortletId(), req.getParameterMap());
+				plid, portlet.getPortletId(), req.getParameterMap(), startDate,
+				endDate);
 
 			HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(
 				res);

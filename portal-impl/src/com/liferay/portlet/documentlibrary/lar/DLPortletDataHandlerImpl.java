@@ -141,14 +141,42 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 					List<DLFileEntry> folderEntries =
 						DLFileEntryUtil.findByFolderId(folder.getFolderId());
 
-					entries.addAll(folderEntries);
+					if (context.hasDateRange()) {
+						for (DLFileEntry entry : folderEntries) {
+							if (context.isWithinDateRange(
+									entry.getModifiedDate())) {
+
+								entries.add(entry);
+							}
+						}
+					}
+					else {
+						entries.addAll(folderEntries);
+					}
 
 					if (context.getBooleanParameter(_NAMESPACE, "shortcuts")) {
 						List<DLFileShortcut> folderShortcuts =
 							DLFileShortcutUtil.findByFolderId(
 								folder.getFolderId());
 
-						shortcuts.addAll(folderShortcuts);
+						if (context.hasDateRange()) {
+							for (DLFileShortcut shortcut : folderShortcuts) {
+								if (context.isWithinDateRange(
+										shortcut.getModifiedDate())) {
+
+									shortcuts.add(shortcut);
+								}
+							}
+						}
+						else {
+							shortcuts.addAll(folderShortcuts);
+						}
+					}
+
+					if (!context.isWithinDateRange(
+							folder.getModifiedDate())) {
+
+						foldersItr.remove();
 					}
 				}
 			}

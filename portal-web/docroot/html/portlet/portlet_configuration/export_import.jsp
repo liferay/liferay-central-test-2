@@ -141,6 +141,103 @@ boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionCla
 
 				<br />
 
+				<script type="text/javascript">
+					function toggleDateRange() {
+						jQuery("#<portlet:namespace />startEndDate").toggle();
+					}
+				</script>
+
+				<div>
+					<liferay-ui:input-checkbox param="dateRange" onClick="toggleDateRange()" />
+
+					<liferay-ui:message key="date-range" />
+
+					<liferay-ui:icon-help message="export-date-range-help" />
+				</div>
+
+				<%
+				Calendar today = CalendarFactoryUtil.getCalendar(timeZone, locale);
+
+				Calendar yesterday = CalendarFactoryUtil.getCalendar(timeZone, locale);
+				yesterday.add(Calendar.DATE, -1);
+				%>
+
+				<br />
+
+				<table id="<portlet:namespace />startEndDate" class="lfr-table" style="display: none">
+				<tr>
+					<td>
+						<liferay-ui:message key="start-date" />
+					</td>
+					<td>
+						<liferay-ui:input-date
+							disableNamespace="<%= true %>"
+							monthParam="startDateMonth"
+							monthValue="<%= yesterday.get(Calendar.MONTH) %>"
+							dayParam="startDateDay"
+							dayValue="<%= yesterday.get(Calendar.DATE) %>"
+							yearParam="startDateYear"
+							yearValue="<%= yesterday.get(Calendar.YEAR) %>"
+							yearRangeStart="<%= yesterday.get(Calendar.YEAR) - 100 %>"
+							yearRangeEnd="<%= yesterday.get(Calendar.YEAR) %>"
+							firstDayOfWeek="<%= yesterday.getFirstDayOfWeek() - 1 %>"
+							disabled="<%= false %>"
+						/>
+
+						&nbsp;
+
+						<liferay-ui:input-time
+							hourParam='<%= "startDateHour" %>'
+							hourValue="<%= yesterday.get(Calendar.HOUR) %>"
+							minuteParam='<%= "startDateMinute" %>'
+							minuteValue="<%= yesterday.get(Calendar.MINUTE) %>"
+							minuteInterval="1"
+							amPmParam='<%= "startDateAmPm" %>'
+							amPmValue="<%= yesterday.get(Calendar.AM_PM) %>"
+							disabled="false"
+						/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<liferay-ui:message key="end-date" />
+					</td>
+					<td>
+						<liferay-ui:input-date
+							disableNamespace="<%= true %>"
+							monthParam="endDateMonth"
+							monthValue="<%= today.get(Calendar.MONTH) %>"
+							dayParam="endDateDay"
+							dayValue="<%= today.get(Calendar.DATE) %>"
+							yearParam="endDateYear"
+							yearValue="<%= today.get(Calendar.YEAR) %>"
+							yearRangeStart="<%= today.get(Calendar.YEAR) - 100 %>"
+							yearRangeEnd="<%= today.get(Calendar.YEAR) %>"
+							firstDayOfWeek="<%= today.getFirstDayOfWeek() - 1 %>"
+							disabled="<%= false %>"
+						/>
+
+						&nbsp;
+
+						<liferay-ui:input-time
+							hourParam='<%= "endDateHour" %>'
+							hourValue="<%= today.get(Calendar.HOUR) %>"
+							minuteParam='<%= "endDateMinute" %>'
+							minuteValue="<%= today.get(Calendar.MINUTE) %>"
+							minuteInterval="1"
+							amPmParam='<%= "endDateAmPm" %>'
+							amPmValue="<%= today.get(Calendar.AM_PM) %>"
+							disabled="false"
+						/>
+					</td>
+				</tr>
+				<tr>
+					<td cellspan="2">
+						<br />
+					</td>
+				</tr>
+				</table>
+
 				<liferay-ui:message key="what-would-you-like-to-export" />
 
 				<br /><br />

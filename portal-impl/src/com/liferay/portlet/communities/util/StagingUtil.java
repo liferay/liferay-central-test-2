@@ -138,7 +138,7 @@ public class StagingUtil {
 		throws Exception {
 
 		byte[] data = LayoutServiceUtil.exportLayouts(
-			sourceGroupId, privateLayout, parameterMap);
+			sourceGroupId, privateLayout, parameterMap, null, null);
 
 		ByteArrayInputStream bais = new ByteArrayInputStream(data);
 
@@ -154,7 +154,7 @@ public class StagingUtil {
 		Map<String, String[]> parameterMap = getStagingParameters(req);
 
 		byte[] data = LayoutLocalServiceUtil.exportPortletInfo(
-			sourcePlid, portletId, parameterMap);
+			sourcePlid, portletId, parameterMap, null, null);
 
 		ByteArrayInputStream bais = new ByteArrayInputStream(data);
 
@@ -343,7 +343,7 @@ public class StagingUtil {
 
 		byte[] data = LayoutServiceUtil.exportLayouts(
 			layout.getGroupId(), layout.isPrivateLayout(), layoutIds,
-			parameterMap);
+			parameterMap, null, null);
 
 		ByteArrayInputStream bais = new ByteArrayInputStream(data);
 
@@ -411,7 +411,7 @@ public class StagingUtil {
 		}
 
 		byte[] data = LayoutServiceUtil.exportLayouts(
-			stagingGroupId, privateLayout, layoutIds, parameterMap);
+			stagingGroupId, privateLayout, layoutIds, parameterMap, null, null);
 
 		ByteArrayInputStream bais = new ByteArrayInputStream(data);
 

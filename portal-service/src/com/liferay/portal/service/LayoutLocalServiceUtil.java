@@ -183,33 +183,37 @@ public class LayoutLocalServiceUtil {
 	}
 
 	public static byte[] exportLayouts(long groupId, boolean privateLayout,
-		java.util.Map<String, String[]> parameterMap)
+		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
+		java.util.Date endDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
 		return layoutLocalService.exportLayouts(groupId, privateLayout,
-			parameterMap);
+			parameterMap, startDate, endDate);
 	}
 
 	public static byte[] exportLayouts(long groupId, boolean privateLayout,
-		long[] layoutIds, java.util.Map<String, String[]> parameterMap)
+		long[] layoutIds, java.util.Map<String, String[]> parameterMap,
+		java.util.Date startDate, java.util.Date endDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
 		return layoutLocalService.exportLayouts(groupId, privateLayout,
-			layoutIds, parameterMap);
+			layoutIds, parameterMap, startDate, endDate);
 	}
 
 	public static byte[] exportPortletInfo(long plid,
-		java.lang.String portletId, java.util.Map<String, String[]> parameterMap)
+		java.lang.String portletId,
+		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
+		java.util.Date endDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
 		return layoutLocalService.exportPortletInfo(plid, portletId,
-			parameterMap);
+			parameterMap, startDate, endDate);
 	}
 
 	public static long getDefaultPlid(long groupId)

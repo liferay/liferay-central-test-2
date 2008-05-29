@@ -36,6 +36,7 @@ import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import java.io.File;
 import java.io.InputStream;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -122,30 +123,32 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 	public byte[] exportLayouts(
 			long groupId, boolean privateLayout,
-			Map<String, String[]> parameterMap)
+			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
 		return layoutLocalService.exportLayouts(
-			groupId, privateLayout, parameterMap);
+			groupId, privateLayout, parameterMap, startDate, endDate);
 	}
 
 	public byte[] exportLayouts(
 			long groupId, boolean privateLayout, long[] layoutIds,
-			Map<String, String[]> parameterMap)
+			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
 		return layoutLocalService.exportLayouts(
-			groupId, privateLayout, layoutIds, parameterMap);
+			groupId, privateLayout, layoutIds, parameterMap, startDate,
+			endDate);
 	}
 
 	public byte[] exportPortletInfo(
-			long plid, String portletId, Map<String, String[]> parameterMap)
+			long plid, String portletId, Map<String, String[]> parameterMap,
+			Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
 		Layout layout = layoutLocalService.getLayout(plid);
@@ -155,7 +158,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			ActionKeys.MANAGE_LAYOUTS);
 
 		return layoutLocalService.exportPortletInfo(
-			plid, portletId, parameterMap);
+			plid, portletId, parameterMap, startDate, endDate);
 	}
 
 	public void importLayouts(
