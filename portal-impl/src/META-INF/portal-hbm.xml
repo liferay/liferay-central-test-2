@@ -1466,6 +1466,7 @@
 		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
+		<property name="modifiedDate" />
 		<property name="nodeId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="title" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="version" type="com.liferay.util.dao.hibernate.DoubleType" />

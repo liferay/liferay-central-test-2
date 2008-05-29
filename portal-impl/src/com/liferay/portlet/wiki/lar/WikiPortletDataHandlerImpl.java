@@ -130,7 +130,7 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 					if (context.hasDateRange()) {
 						for (WikiPage page : nodePages) {
 							if (context.isWithinDateRange(
-									page.getCreateDate())) {
+									page.getModifiedDate())) {
 
 								pages.add(page);
 							}

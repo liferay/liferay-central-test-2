@@ -145,6 +145,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		page.setUserId(user.getUserId());
 		page.setUserName(user.getFullName());
 		page.setCreateDate(now);
+		page.setModifiedDate(now);
 		page.setNodeId(nodeId);
 		page.setTitle(title);
 		page.setVersion(version);
@@ -824,6 +825,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		long resourcePrimKey = page.getResourcePrimKey();
 
 		page.setHead(false);
+		page.setModifiedDate(now);
 
 		wikiPagePersistence.update(page, false);
 
@@ -838,6 +840,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		page.setUserId(user.getUserId());
 		page.setUserName(user.getFullName());
 		page.setCreateDate(now);
+		page.setModifiedDate(now);
 		page.setNodeId(nodeId);
 		page.setTitle(title);
 		page.setVersion(newVersion);

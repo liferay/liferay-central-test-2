@@ -1490,6 +1490,7 @@ create table WikiPage (
 	userId LONG,
 	userName VARCHAR(75) null,
 	createDate DATE null,
+	modifiedDate DATE null,
 	nodeId LONG,
 	title VARCHAR(75) null,
 	version DOUBLE,

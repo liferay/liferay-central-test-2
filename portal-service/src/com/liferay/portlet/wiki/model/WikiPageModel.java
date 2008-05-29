@@ -79,6 +79,10 @@ public interface WikiPageModel extends BaseModel {
 
 	public void setCreateDate(Date createDate);
 
+	public Date getModifiedDate();
+
+	public void setModifiedDate(Date modifiedDate);
+
 	public long getNodeId();
 
 	public void setNodeId(long nodeId);

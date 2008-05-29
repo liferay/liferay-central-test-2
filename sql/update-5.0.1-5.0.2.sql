@@ -79,3 +79,5 @@ update User_ set timeZoneId = 'Australia/Darwin' where timeZoneId = 'ACT';
 update User_ set timeZoneId = 'Australia/Sydney' where timeZoneId = 'AET';
 update User_ set timeZoneId = 'Pacific/Guadalcanal' where timeZoneId = 'SST';
 update User_ set timeZoneId = 'Pacific/Auckland' where timeZoneId = 'NST';
+
+alter table WikiPage add modifiedDate DATE null;

@@ -85,6 +85,9 @@ public class WikiPageModelImpl extends BaseModelImpl {
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			
 
+			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			
+
 			{ "nodeId", new Integer(Types.BIGINT) },
 			
 
@@ -108,7 +111,7 @@ public class WikiPageModelImpl extends BaseModelImpl {
 
 			{ "redirectTitle", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table WikiPage (uuid_ VARCHAR(75) null,pageId LONG not null primary key,resourcePrimKey LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,nodeId LONG,title VARCHAR(75) null,version DOUBLE,content TEXT null,format VARCHAR(75) null,head BOOLEAN,parentTitle VARCHAR(75) null,redirectTitle VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table WikiPage (uuid_ VARCHAR(75) null,pageId LONG not null primary key,resourcePrimKey LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,nodeId LONG,title VARCHAR(75) null,version DOUBLE,content TEXT null,format VARCHAR(75) null,head BOOLEAN,parentTitle VARCHAR(75) null,redirectTitle VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table WikiPage";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -127,6 +130,7 @@ public class WikiPageModelImpl extends BaseModelImpl {
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setNodeId(soapModel.getNodeId());
 		model.setTitle(soapModel.getTitle());
 		model.setVersion(soapModel.getVersion());
@@ -240,6 +244,19 @@ public class WikiPageModelImpl extends BaseModelImpl {
 				((createDate != null) && (_createDate != null) &&
 				!createDate.equals(_createDate))) {
 			_createDate = createDate;
+		}
+	}
+
+	public Date getModifiedDate() {
+		return _modifiedDate;
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+		if (((modifiedDate == null) && (_modifiedDate != null)) ||
+				((modifiedDate != null) && (_modifiedDate == null)) ||
+				((modifiedDate != null) && (_modifiedDate != null) &&
+				!modifiedDate.equals(_modifiedDate))) {
+			_modifiedDate = modifiedDate;
 		}
 	}
 
@@ -357,6 +374,7 @@ public class WikiPageModelImpl extends BaseModelImpl {
 			model.setUserId(getUserId());
 			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
+			model.setModifiedDate(getModifiedDate());
 			model.setNodeId(getNodeId());
 			model.setTitle(HtmlUtil.escape(getTitle()));
 			model.setVersion(getVersion());
@@ -384,6 +402,7 @@ public class WikiPageModelImpl extends BaseModelImpl {
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
+		clone.setModifiedDate(getModifiedDate());
 		clone.setNodeId(getNodeId());
 		clone.setTitle(getTitle());
 		clone.setVersion(getVersion());
@@ -478,6 +497,7 @@ public class WikiPageModelImpl extends BaseModelImpl {
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
+	private Date _modifiedDate;
 	private long _nodeId;
 	private String _title;
 	private double _version;

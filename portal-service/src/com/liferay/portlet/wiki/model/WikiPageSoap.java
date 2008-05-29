@@ -57,6 +57,7 @@ public class WikiPageSoap implements Serializable {
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
+		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setNodeId(model.getNodeId());
 		soapModel.setTitle(model.getTitle());
 		soapModel.setVersion(model.getVersion());
@@ -146,6 +147,14 @@ public class WikiPageSoap implements Serializable {
 		_createDate = createDate;
 	}
 
+	public Date getModifiedDate() {
+		return _modifiedDate;
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+		_modifiedDate = modifiedDate;
+	}
+
 	public long getNodeId() {
 		return _nodeId;
 	}
@@ -221,6 +230,7 @@ public class WikiPageSoap implements Serializable {
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
+	private Date _modifiedDate;
 	private long _nodeId;
 	private String _title;
 	private double _version;

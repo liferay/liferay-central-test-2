@@ -1599,6 +1599,7 @@
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
 		<field name="nodeId" type="long" />
 		<field name="title" type="String" />
 		<field name="version" type="double" />

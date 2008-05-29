@@ -76,6 +76,7 @@ public class WikiPagePersistenceTest extends BasePersistenceTestCase {
 		newWikiPage.setUserId(nextLong());
 		newWikiPage.setUserName(randomString());
 		newWikiPage.setCreateDate(nextDate());
+		newWikiPage.setModifiedDate(nextDate());
 		newWikiPage.setNodeId(nextLong());
 		newWikiPage.setTitle(randomString());
 		newWikiPage.setVersion(nextDouble());
@@ -98,6 +99,8 @@ public class WikiPagePersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingWikiPage.getUserName(), newWikiPage.getUserName());
 		assertEquals(existingWikiPage.getCreateDate(),
 			newWikiPage.getCreateDate());
+		assertEquals(existingWikiPage.getModifiedDate(),
+			newWikiPage.getModifiedDate());
 		assertEquals(existingWikiPage.getNodeId(), newWikiPage.getNodeId());
 		assertEquals(existingWikiPage.getTitle(), newWikiPage.getTitle());
 		assertEquals(existingWikiPage.getVersion(), newWikiPage.getVersion());
@@ -157,6 +160,7 @@ public class WikiPagePersistenceTest extends BasePersistenceTestCase {
 		wikiPage.setUserId(nextLong());
 		wikiPage.setUserName(randomString());
 		wikiPage.setCreateDate(nextDate());
+		wikiPage.setModifiedDate(nextDate());
 		wikiPage.setNodeId(nextLong());
 		wikiPage.setTitle(randomString());
 		wikiPage.setVersion(nextDouble());
