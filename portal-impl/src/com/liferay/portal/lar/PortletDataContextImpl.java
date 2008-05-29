@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
+import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.zip.ZipReader;
@@ -42,6 +43,11 @@ import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.MapUtil;
+import com.liferay.util.xml.XMLFormatter;
+
+import com.thoughtworks.xstream.XStream;
+
+import java.io.IOException;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -61,13 +67,14 @@ import java.util.Set;
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
  * @author Bruno Farache
+ * @author Alex Chow
  *
  */
 public class PortletDataContextImpl implements PortletDataContext {
 
 	public PortletDataContextImpl(
-		long companyId, long groupId, Map parameterMap, Set primaryKeys,
-		UserIdStrategy userIdStrategy, ZipReader zipReader) {
+		long companyId, long groupId, Map<String, String[]> parameterMap,
+		Set primaryKeys, UserIdStrategy userIdStrategy, ZipReader zipReader) {
 
 		_companyId = companyId;
 		_groupId = groupId;
@@ -82,8 +89,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	public PortletDataContextImpl(
-			long companyId, long groupId, Map parameterMap, Set primaryKeys,
-			Date startDate, Date endDate, ZipWriter zipWriter)
+			long companyId, long groupId, Map<String, String[]> parameterMap,
+			Set primaryKeys, Date startDate, Date endDate, ZipWriter zipWriter)
 		throws PortletDataException {
 
 		_validateDateRange(startDate, endDate);
@@ -392,6 +399,74 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
+	public String getLayoutPath(long layoutId) {
+		return getRootPath() + LAYOUTS_ROOT_PATH + layoutId;
+	}
+
+	public String getPortletPath(String portletId) {
+		return getRootPath() + PORTLETS_ROOT_PATH + portletId;
+	}
+
+	public String getRootPath() {
+		return GROUPS_ROOT_PATH + getGroupId();
+	}
+
+	public void addZipEntry(String path, byte[] bytes) throws SystemException {
+		try {
+			getZipWriter().addEntry(path, bytes);
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
+	}
+
+	public void addZipEntry(String path, Object object) throws SystemException {
+		addZipEntry(path, toXMLFormatted(object));
+	}
+
+	public void addZipEntry(String path, String s) throws SystemException {
+		try {
+			getZipWriter().addEntry(path, s);
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
+	}
+
+	public void addZipEntry(String path, StringMaker sm) throws SystemException {
+		try {
+			getZipWriter().addEntry(path, sm);
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
+	}
+
+	public Map<String,byte[]> getZipEntries() {
+		return getZipReader().getEntries();
+	}
+
+	public byte[] getZipEntryAsByteArray(String path) {
+		return getZipReader().getEntryAsByteArray(path);
+	}
+
+	public Object getZipEntryAsObject(String path) {
+		return fromXML(getZipEntryAsString(path));
+	}
+
+	public String getZipEntryAsString(String path) {
+		return getZipReader().getEntryAsString(path);
+	}
+	public Map<String,List<ObjectValuePair<String,byte[]>>>
+			getZipFolderEntries() {
+
+		return getZipReader().getFolderEntries();
+	}
+	public List<ObjectValuePair<String,byte[]>> getZipFolderEntries(
+			String path) {
+		return getZipReader().getFolderEntries(path);
+	}
+
 	public ZipReader getZipReader() {
 		return _zipReader;
 	}
@@ -412,6 +487,29 @@ public class PortletDataContextImpl implements PortletDataContext {
 		sm.append(primaryKey);
 
 		return sm.toString();
+	}
+
+	public Object fromXML(byte[] bytes) {
+		return _xStream.fromXML(new String(bytes));
+	}
+
+	public Object fromXML(String xml) {
+		return _xStream.fromXML(xml);
+	}
+
+	public String toXML(Object object) {
+		return _xStream.toXML(object);
+	}
+
+	public String toXMLFormatted(Object object)
+		throws SystemException {
+
+		try {
+			return XMLFormatter.toString(_xStream.toXML(object));
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	private void _validateDateRange(Date startDate, Date endDate)
@@ -441,15 +539,16 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private long _groupId;
 	private long _plid;
 	private Map _commentsMap = new HashMap();
-	private Map _parameterMap;
+	private Map<String, String[]> _parameterMap;
 	private Map _ratingsEntriesMap = new HashMap();
 	private Map _tagsEntriesMap = new HashMap();
 	private Set _primaryKeys;
-	private Map<String, Map> _newPrimaryKeysMaps = new HashMap();
+	private Map<String, Map> _newPrimaryKeysMaps = new HashMap<String, Map>();
 	private String _dataStrategy;
 	private UserIdStrategy _userIdStrategy;
 	private Date _startDate;
 	private Date _endDate;
+	private XStream _xStream = new XStream();
 	private ZipReader _zipReader;
 	private ZipWriter _zipWriter;
 

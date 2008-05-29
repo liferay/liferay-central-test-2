@@ -24,6 +24,8 @@ package com.liferay.portal.kernel.lar;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
 
@@ -48,40 +50,20 @@ import java.util.Set;
  */
 public interface PortletDataContext extends Serializable {
 
-	public long getCompanyId();
+	public static final String GROUPS_ROOT_PATH = "/groups/";
 
-	public long getGroupId();
+	public static final String LAYOUTS_ROOT_PATH = "/layouts/";
 
-	public long getPlid();
-
-	public void setPlid(long plid);
-
-	public Map getParameterMap();
-
-	public boolean getBooleanParameter(String namespace, String name);
-
-	public Set getPrimaryKeys();
-
-	public boolean addPrimaryKey(Class<?> classObj, Object primaryKey);
-
-	public boolean hasPrimaryKey(Class<?> classObj, Object primaryKey);
-
-	public Map getNewPrimaryKeysMap(Class<?> classObj);
-
-	public Map getComments();
+	public static final String PORTLETS_ROOT_PATH = "/portlets/";
 
 	public void addComments(Class<?> classObj, Object primaryKey)
 		throws PortalException, SystemException;
 
-	public void addComments(String className, Object primaryKey, List messages)
+	public void addComments(
+			String className, Object primaryKey, List messages)
 		throws PortalException, SystemException;
 
-	public void importComments(
-			Class<?> classObj, Object primaryKey, Object newPrimaryKey,
-			long groupId)
-		throws PortalException, SystemException;
-
-	public Map getRatingsEntries();
+	public boolean addPrimaryKey(Class<?> classObj, Object primaryKey);
 
 	public void addRatingsEntries(Class<?> classObj, Object primaryKey)
 		throws PortalException, SystemException;
@@ -90,16 +72,6 @@ public interface PortletDataContext extends Serializable {
 			String className, Object primaryKey, List entries)
 		throws PortalException, SystemException;
 
-	public void importRatingsEntries(
-			Class<?> classObj, Object primaryKey, Object newPrimaryKey)
-		throws PortalException, SystemException;
-
-	public String[] getTagsEntries(Class<?> classObj, Object primaryKey);
-
-	public String[] getTagsEntries(String className, Object primaryKey);
-
-	public Map<String, String[]> getTagsEntries();
-
 	public void addTagsEntries(Class<?> classObj, Object classPK)
 		throws PortalException, SystemException;
 
@@ -107,11 +79,65 @@ public interface PortletDataContext extends Serializable {
 			String className, Object classPK, String[] values)
 		throws PortalException, SystemException;
 
+	public void addZipEntry(String path, byte[] bytes) throws SystemException;
+
+	public void addZipEntry(String path, Object object) throws SystemException;
+
+	public void addZipEntry(String path, String s) throws SystemException;
+
+	public void addZipEntry(String name, StringMaker sm) throws SystemException;
+
+	public Object fromXML(byte[] bytes);
+
+	public Object fromXML(String xml);
+
+	public boolean getBooleanParameter(String namespace, String name);
+
+	public Map<String, List> getComments();
+
+	public long getCompanyId();
+
 	public String getDataStrategy();
+
+	public long getGroupId();
+
+	public String getLayoutPath(long layoutId);
+
+	public String getPortletPath(String portletId);
+
+	public String getRootPath();
+
+	public Map getNewPrimaryKeysMap(Class<?> classObj);
+
+	public Map<String, String[]> getParameterMap();
+
+	public long getPlid();
+
+	public Set getPrimaryKeys();
+
+	public Map<String, List> getRatingsEntries();
+
+	public Map<String, String[]> getTagsEntries();
+
+	public String[] getTagsEntries(Class<?> classObj, Object primaryKey);
+
+	public String[] getTagsEntries(String className, Object primaryKey);
+
+	public long getUserId(String userUuid) throws SystemException;
 
 	public UserIdStrategy getUserIdStrategy() throws SystemException;
 
-	public long getUserId(String userUuid) throws SystemException;
+	public byte[] getZipEntryAsByteArray(String path);
+
+	public String getZipEntryAsString(String path);
+
+	public Object getZipEntryAsObject(String path);
+
+	public Map<String,List<ObjectValuePair<String,byte[]>>>
+			getZipFolderEntries();
+
+	public List<ObjectValuePair<String,byte[]>> getZipFolderEntries(
+			String path);
 
 	public Date getStartDate();
 
@@ -124,5 +150,23 @@ public interface PortletDataContext extends Serializable {
 	public ZipReader getZipReader();
 
 	public ZipWriter getZipWriter();
+
+	public boolean hasPrimaryKey(Class<?> classObj, Object primaryKey);
+
+	public void importComments(
+			Class<?> classObj, Object primaryKey, Object newPrimaryKey,
+			long groupId)
+		throws PortalException, SystemException;
+
+	public void importRatingsEntries(
+			Class<?> classObj, Object primaryKey, Object newPrimaryKey)
+		throws PortalException, SystemException;
+
+	public void setPlid(long plid);
+
+	public String toXML(Object object);
+
+	public String toXMLFormatted(Object object)
+		throws SystemException;
 
 }
