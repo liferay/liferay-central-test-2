@@ -151,7 +151,6 @@ public class MediaWikiToCreoleTranslatorTest extends TestCase {
 			"previous line\n<nowiki>\nmonospace\n''second'' " +
 				"line\n</nowiki>\nnext line";
 
-		String actual = _translator.translate(content);
 		String expected =
 			MediaWikiToCreoleTranslator.TABLE_OF_CONTENTS +
 				"previous line\n{{{\nmonospace\n''second'' line\n}}}\nnext" +
