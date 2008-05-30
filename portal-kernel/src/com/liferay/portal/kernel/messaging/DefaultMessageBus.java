@@ -37,18 +37,12 @@ import java.util.Map;
  */
 public class DefaultMessageBus implements MessageBus {
 
-	public DefaultMessageBus() {
-		_responseDestination = new TempDestination(DestinationNames.RESPONSE);
-
-		addDestination(_responseDestination);
-	}
-
 	public synchronized void addDestination(Destination destination) {
 		_destinations.put(destination.getName(), destination);
-	}
 
-	public String getNextResponseId() {
-		return PortalUUIDUtil.generate();
+		Destination responseDestination = getResponseDestination(destination);
+
+		_destinations.put(responseDestination.getName(), responseDestination);
 	}
 
 	public synchronized void registerMessageListener(
@@ -66,6 +60,10 @@ public class DefaultMessageBus implements MessageBus {
 
 	public synchronized void removeDestination(String destination) {
 		_destinations.remove(destination);
+
+		String responseDestination = getResponseDestination(destination);
+
+		_destinations.remove(responseDestination);
 	}
 
 	public void sendMessage(String destination, String message) {
@@ -93,10 +91,22 @@ public class DefaultMessageBus implements MessageBus {
 			return null;
 		}
 
-		ResponseMessageListener responseMessageListener =
-			new ResponseMessageListener(destinationModel, getNextResponseId());
+		Destination responseDestinationModel = _destinations.get(
+			getResponseDestination(destination));
 
-		_responseDestination.register(responseMessageListener);
+		if (responseDestinationModel == null) {
+			_log.error(
+				"Response destination " + destination + " is not configured");
+
+			return null;
+		}
+
+		ResponseMessageListener responseMessageListener =
+			new ResponseMessageListener(
+				destinationModel, responseDestinationModel,
+				getNextResponseId());
+
+		responseDestinationModel.register(responseMessageListener);
 
 		try {
 			return responseMessageListener.send(message);
@@ -105,7 +115,7 @@ public class DefaultMessageBus implements MessageBus {
 			return null;
 		}
 		finally {
-			_responseDestination.unregister(responseMessageListener);
+			responseDestinationModel.unregister(responseMessageListener);
 		}
 	}
 
@@ -121,10 +131,26 @@ public class DefaultMessageBus implements MessageBus {
 		return destinationModel.unregister(listener);
 	}
 
+	protected String getNextResponseId() {
+		return PortalUUIDUtil.generate();
+	}
+
+	protected String getResponseDestination(String destination) {
+		return destination + _RESPONSE_DESTINATION_SUFFIX;
+	}
+
+	protected Destination getResponseDestination(Destination destination) {
+		Destination responseDestination = new TempDestination(
+			getResponseDestination(destination.getName()));
+
+		return responseDestination;
+	}
+
+	private static final String _RESPONSE_DESTINATION_SUFFIX = "/response";
+
 	private static Log _log = LogFactoryUtil.getLog(DefaultMessageBus.class);
 
 	private Map<String, Destination> _destinations =
 		new HashMap<String, Destination>();
-	private Destination _responseDestination;
 
 }

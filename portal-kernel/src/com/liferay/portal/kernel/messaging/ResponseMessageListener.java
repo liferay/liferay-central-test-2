@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.messaging;
 
+import com.liferay.portal.kernel.util.StringMaker;
+
 /**
  * <a href="ResponseMessageListener.java.html"><b><i>View Source</i></b></a>
  *
@@ -30,14 +32,19 @@ package com.liferay.portal.kernel.messaging;
  */
 public class ResponseMessageListener implements MessageListener {
 
-	public ResponseMessageListener(Destination destination, String responseId) {
-		this(destination, responseId, _TIMEOUT);
+	public ResponseMessageListener(
+		Destination destination, Destination responseDestination,
+		String responseId) {
+
+		this(destination, responseDestination, responseId, _TIMEOUT);
 	}
 
 	public ResponseMessageListener(
-		Destination destination, String responseId, int timeout) {
+		Destination destination, Destination responseDestination,
+		String responseId, int timeout) {
 
 		_destination = destination;
+		_responseDestination = responseDestination;
 		_responseId = responseId;
 		_timeout = timeout;
 	}
@@ -46,12 +53,27 @@ public class ResponseMessageListener implements MessageListener {
 		throws InterruptedException {
 
 		if (message.equals(_EMTPY_MESSAGE)) {
-			message = "{\"responseId\":\"" + _responseId + "\"}";
+			StringMaker sm = new StringMaker();
+
+			sm.append("{\"lfrResponseDestination\":\"");
+			sm.append(_responseDestination.getName());
+			sm.append("\",\"lfrResponseId\":\"");
+			sm.append(_responseId);
+			sm.append("\"}");
+
+			message = sm.toString();
 		}
 		else {
-			message =
-				message.substring(0, message.length() - 1) +
-					",\"responseId\":\"" + _responseId + "\"}";
+			StringMaker sm = new StringMaker();
+
+			sm.append(message.substring(0, message.length() - 1));
+			sm.append(",\"lfrResponseDestination\":\"");
+			sm.append(_responseDestination.getName());
+			sm.append("\",\"lfrResponseId\":\"");
+			sm.append(_responseId);
+			sm.append("\"}");
+
+			message = sm.toString();
 		}
 
 		_destination.send(message);
@@ -62,7 +84,9 @@ public class ResponseMessageListener implements MessageListener {
 	}
 
 	public synchronized void receive(String message) {
-		if (message.indexOf("\"responseId\":\"" + _responseId + "\"") != -1) {
+		if (message.indexOf(
+				"\"lfrResponseId\":\"" + _responseId + "\"") != -1) {
+
 			_responseMessage = message;
 
 			notify();
@@ -74,6 +98,7 @@ public class ResponseMessageListener implements MessageListener {
 	private static final int _TIMEOUT = 1000;
 
 	private Destination _destination;
+	private Destination _responseDestination;
 	private String _responseId;
 	private int _timeout;
 	private String _responseMessage;

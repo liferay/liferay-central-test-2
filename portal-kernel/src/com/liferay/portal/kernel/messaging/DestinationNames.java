@@ -32,8 +32,6 @@ public interface DestinationNames {
 
 	public static final String IP_GEOCODER = "liferay/ipgeocoder";
 
-	public static final String RESPONSE = "liferay/response";
-
 	public static final String SEARCH_INDEX_WRITER =
 		"liferay/search/indexwriter";
 

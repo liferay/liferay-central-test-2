@@ -32,8 +32,6 @@ public interface MessageBus {
 
 	public void addDestination(Destination destination);
 
-	public String getNextResponseId();
-
 	public void registerMessageListener(
 		String destination, MessageListener listener);
 
