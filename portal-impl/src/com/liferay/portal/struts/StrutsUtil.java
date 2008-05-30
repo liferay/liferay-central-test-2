@@ -75,7 +75,7 @@ public class StrutsUtil {
 		if (!res.isCommitted()) {
 			String path = TEXT_HTML_DIR + uri;
 
-			if (BrowserSnifferUtil.is_wap_xhtml(req)) {
+			if (BrowserSnifferUtil.is_wap(req)) {
 				path = TEXT_WAP_DIR + uri;
 			}
 
@@ -96,7 +96,7 @@ public class StrutsUtil {
 
 				String errorPath = TEXT_HTML_DIR + "/common/error.jsp";
 
-				if (BrowserSnifferUtil.is_wap_xhtml(req)) {
+				if (BrowserSnifferUtil.is_wap(req)) {
 					path = TEXT_WAP_DIR + "/common/error.jsp";
 				}
 
@@ -129,7 +129,7 @@ public class StrutsUtil {
 
 		String path = TEXT_HTML_DIR + uri;
 
-		if (BrowserSnifferUtil.is_wap_xhtml(req)) {
+		if (BrowserSnifferUtil.is_wap(req)) {
 			path = TEXT_WAP_DIR + uri;
 		}
 

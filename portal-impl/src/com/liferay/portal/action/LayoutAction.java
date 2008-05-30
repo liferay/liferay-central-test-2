@@ -240,7 +240,7 @@ public class LayoutAction extends Action {
 
 		String path = StrutsUtil.TEXT_HTML_DIR;
 
-		if (BrowserSnifferUtil.is_wap_xhtml(req)) {
+		if (BrowserSnifferUtil.is_wap(req)) {
 			path = StrutsUtil.TEXT_WAP_DIR;
 		}
 

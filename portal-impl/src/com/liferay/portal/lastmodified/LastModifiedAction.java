@@ -78,7 +78,7 @@ public abstract class LastModifiedAction extends Action {
 			(!theme.getThemeId().equals(themeId)) ||
 			(!colorScheme.getColorSchemeId().equals(colorSchemeId))) {
 
-			boolean wapTheme = BrowserSnifferUtil.is_wap_xhtml(req);
+			boolean wapTheme = BrowserSnifferUtil.is_wap(req);
 
 			theme = ThemeLocalServiceUtil.getTheme(
 				themeDisplay.getCompanyId(), themeId, wapTheme);

@@ -66,6 +66,8 @@ public interface BrowserSniffer {
 
 	public boolean is_safari_mobile(HttpServletRequest req);
 
+	public boolean is_wap(HttpServletRequest req);
+
 	public boolean is_wap_xhtml(HttpServletRequest req);
 
 	public boolean is_wml(HttpServletRequest req);

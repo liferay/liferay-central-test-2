@@ -104,6 +104,10 @@ public class BrowserSnifferUtil {
 		return getBrowserSniffer().is_safari_mobile(req);
 	}
 
+	public static boolean is_wap(HttpServletRequest req) {
+		return getBrowserSniffer().is_wap(req);
+	}
+
 	public static boolean is_wap_xhtml(HttpServletRequest req) {
 		return getBrowserSniffer().is_wap_xhtml(req);
 	}

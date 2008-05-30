@@ -138,7 +138,7 @@ public class VelocityFilter extends BasePortalFilter {
 				String colorSchemeId = ParamUtil.getString(
 					req, "colorSchemeId");
 
-				boolean wapTheme = BrowserSnifferUtil.is_wap_xhtml(httpReq);
+				boolean wapTheme = BrowserSnifferUtil.is_wap(httpReq);
 
 				Theme theme = ThemeLocalServiceUtil.getTheme(
 					companyId, themeId, wapTheme);

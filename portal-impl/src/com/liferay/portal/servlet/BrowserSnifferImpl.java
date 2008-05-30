@@ -355,6 +355,11 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		}
 	}
 
+	public boolean is_wap(HttpServletRequest req) {
+
+		return is_wap_xhtml(req);
+	}
+
 	public boolean is_wap_xhtml(HttpServletRequest req) {
 		if (req == null) {
 			return false;

@@ -702,7 +702,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 		}
 
 		_req = dynamicReq;
-		_wapTheme = BrowserSnifferUtil.is_wap_xhtml(_req);
+		_wapTheme = BrowserSnifferUtil.is_wap(_req);
 		_portlet = portlet;
 		_portalCtx = new PortalContextImpl();
 		_portletCtx = portletCtx;
