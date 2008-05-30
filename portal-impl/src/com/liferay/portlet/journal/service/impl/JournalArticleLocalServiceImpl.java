@@ -326,7 +326,7 @@ public class JournalArticleLocalServiceImpl
 		Date now = new Date();
 
 		validate(
-			groupId, articleId, autoArticleId, title, content, type,
+			groupId, articleId, autoArticleId, version, title, content, type,
 			structureId, templateId, smallImage, smallImageURL, smallFile,
 			smallBytes);
 
@@ -2253,15 +2253,14 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	protected void validate(
-			long groupId, String articleId, boolean autoArticleId, String title,
-			String content, String type, String structureId, String templateId,
-			boolean smallImage, String smallImageURL, File smallFile,
-			byte[] smallBytes)
+			long groupId, String articleId, boolean autoArticleId,
+			double version, String title, String content, String type,
+			String structureId, String templateId, boolean smallImage,
+			String smallImageURL, File smallFile, byte[] smallBytes)
 		throws PortalException, SystemException {
 
 		if (!autoArticleId) {
 			if ((Validator.isNull(articleId)) ||
-				(Validator.isNumber(articleId)) ||
 				(articleId.indexOf(StringPool.SPACE) != -1)) {
 
 				throw new ArticleIdException();
@@ -2269,7 +2268,7 @@ public class JournalArticleLocalServiceImpl
 
 			try {
 				journalArticlePersistence.findByG_A_V(
-					groupId, articleId, JournalArticleImpl.DEFAULT_VERSION);
+					groupId, articleId, version);
 
 				throw new DuplicateArticleIdException();
 			}
