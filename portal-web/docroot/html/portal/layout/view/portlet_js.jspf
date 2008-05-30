@@ -51,6 +51,10 @@ function addPortletHTML(url, placeHolder, returnPortlet) {
 
 		container.replaceChild(portletBound, placeHolder);
 
+		if (Liferay.Browser.is_ie) {
+			Liferay.Util.evalScripts(portletBound);
+		}
+
 		<c:if test="<%= (layout != null) && (LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE)) %>">
 			if (!portletBound.isStatic) {
 				if (themeDisplay.isFreeformLayout()) {
