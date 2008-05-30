@@ -159,11 +159,6 @@
 		<include>true</include>
 	</portlet>
 	<portlet>
-		<portlet-name>32</portlet-name>
-		<struts-path>today_in_christian_history</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
 		<portlet-name>33</portlet-name>
 		<struts-path>blogs</struts-path>
 		<include>true</include>

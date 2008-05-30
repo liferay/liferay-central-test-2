@@ -353,15 +353,6 @@
 		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
-		<portlet-name>32</portlet-name>
-		<icon>/html/portlet/today_in_christian_history/icon.png</icon>
-		<struts-path>today_in_christian_history</struts-path>
-		<restore-current-view>false</restore-current-view>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>0</render-weight>
-	</portlet>
-	<portlet>
 		<portlet-name>33</portlet-name>
 		<icon>/html/portlet/blogs/icon.png</icon>
 		<struts-path>blogs</struts-path>
