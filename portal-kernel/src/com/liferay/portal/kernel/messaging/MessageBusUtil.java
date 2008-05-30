@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.messaging;
 
-import java.util.List;
-
 /**
  * <a href="MessageBusUtil.java.html"><b><i>View Source</i></b></a>
  *
