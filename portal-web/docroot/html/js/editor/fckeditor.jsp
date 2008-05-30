@@ -59,6 +59,10 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 			return FCKeditorAPI.GetInstance("FCKeditor1").GetXHTML();
 		}
 
+		function setHTML (value) {
+			FCKeditorAPI.GetInstance("FCKeditor1").SetHTML(value);
+		}
+
 		function initFckArea() {
 
 			// LEP-3563
