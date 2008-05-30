@@ -1697,7 +1697,7 @@
 		<exception>GroupFriendlyURL</exception>
 		<exception>GroupName</exception>
 		<exception>EmailAddress</exception>
-		<exception>LARFile</<exception>
+		<exception>LARFile</exception>
 		<exception>LARType</exception>
 		<exception>LayoutFriendlyURL</exception>
 		<exception>LayoutHidden</exception>
