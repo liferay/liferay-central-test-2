@@ -60,10 +60,6 @@ public class MessageBusUtil {
 		_instance._removeDestination(destination);
 	}
 
-	public static void setDestinations(List<Destination> destinations) {
-		_instance._setDestinations(destinations);
-	}
-
 	public static void sendMessage(String destination, String message) {
 		_instance._sendMessage(destination, message);
 	}
@@ -100,10 +96,6 @@ public class MessageBusUtil {
 
 	private void _removeDestination(String destination) {
 		_messageBus.removeDestination(destination);
-	}
-
-	private void _setDestinations(List<Destination> destinations) {
-		_messageBus.setDestinations(destinations);
 	}
 
 	private void _sendMessage(String destination, String message) {

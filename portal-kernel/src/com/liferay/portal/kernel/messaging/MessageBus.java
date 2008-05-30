@@ -45,8 +45,6 @@ public interface MessageBus {
 
 	public String sendSynchronizedMessage(String destination, String message);
 
-	public void setDestinations(List<Destination> destinations);
-
 	public boolean unregisterMessageListener(
 		String destination, MessageListener listener);
 

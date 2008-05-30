@@ -110,12 +110,6 @@ public class DefaultMessageBus implements MessageBus {
 		}
 	}
 
-	public synchronized void setDestinations(List<Destination> destinations) {
-		for (Destination destination : destinations) {
-			_destinations.put(destination.getName(), destination);
-		}
-	}
-
 	public synchronized boolean unregisterMessageListener(
 		String destination, MessageListener listener) {
 
