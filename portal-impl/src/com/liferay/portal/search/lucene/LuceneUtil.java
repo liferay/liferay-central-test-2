@@ -238,6 +238,18 @@ public class LuceneUtil {
 
 		Directory luceneDir = LuceneUtil.getLuceneDir(companyId);
 
+		try {
+
+			// LEP-6078
+
+			if (luceneDir.fileExists("write.lock")) {
+				luceneDir.deleteFile("write.lock");
+			}
+		}
+		catch (IOException ioe) {
+			_log.error("Unable to clear write lock", ioe);
+		}
+
 		IndexWriter writer = null;
 
 		// Lucene does not properly release its lock on the index when
@@ -254,7 +266,7 @@ public class LuceneUtil {
 			}
 		}
 		catch (IOException ioe) {
-			_log.error(ioe);
+			_log.error("Check Lucene directory failed for " + companyId, ioe);
 		}
 		finally {
 			if (writer != null) {
