@@ -45,6 +45,9 @@
 				getLayoutId: function() {
 					return "<%= layout.getLayoutId() %>";
 				},
+				getLayoutURL: function() {
+					return "<%= PortalUtil.getLayoutURL(layout, themeDisplay) %>";
+				},
 				isPrivateLayout: function() {
 					return "<%= layout.isPrivateLayout() %>";
 				},
