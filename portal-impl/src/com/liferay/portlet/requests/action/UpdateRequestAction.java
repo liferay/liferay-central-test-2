@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.requests.action;
 
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
@@ -35,7 +36,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.social.NoSuchRequestException;
 import com.liferay.portlet.social.service.SocialRequestLocalServiceUtil;
-import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;

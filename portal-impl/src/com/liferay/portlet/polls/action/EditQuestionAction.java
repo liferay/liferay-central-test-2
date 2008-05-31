@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.polls.action;
 
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -40,7 +41,6 @@ import com.liferay.portlet.polls.QuestionTitleException;
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.service.PollsQuestionServiceUtil;
 import com.liferay.portlet.polls.service.persistence.PollsChoiceUtil;
-import com.liferay.util.servlet.SessionErrors;
 
 import java.util.ArrayList;
 import java.util.Calendar;

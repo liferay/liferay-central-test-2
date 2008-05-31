@@ -23,6 +23,7 @@
 package com.liferay.portlet.myplaces.action;
 
 import com.liferay.portal.NoSuchLayoutSetException;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
@@ -31,7 +32,6 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.servlet.SessionErrors;
 
 import java.util.List;
 

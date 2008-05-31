@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.blogs.action;
 
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -47,7 +48,6 @@ import com.liferay.portlet.taggedcontent.util.AssetPublisherUtil;
 import com.liferay.portlet.tags.TagsEntryException;
 import com.liferay.util.JSONUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
-import com.liferay.util.servlet.SessionErrors;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;

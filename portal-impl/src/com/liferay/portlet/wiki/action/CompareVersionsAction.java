@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.wiki.action;
 
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -33,7 +34,6 @@ import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 import com.liferay.portlet.wiki.util.WikiUtil;
 import com.liferay.util.diff.DiffResult;
 import com.liferay.util.diff.DiffUtil;
-import com.liferay.util.servlet.SessionErrors;
 
 import java.io.StringReader;
 

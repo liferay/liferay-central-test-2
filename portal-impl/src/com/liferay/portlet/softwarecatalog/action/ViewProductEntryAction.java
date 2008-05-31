@@ -22,12 +22,12 @@
 
 package com.liferay.portlet.softwarecatalog.action;
 
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
-import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;

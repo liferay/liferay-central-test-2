@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.shopping.action;
 
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
@@ -29,7 +30,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.shopping.NoSuchCouponException;
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
 import com.liferay.portlet.shopping.service.ShoppingCouponLocalServiceUtil;
-import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;

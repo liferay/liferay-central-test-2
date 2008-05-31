@@ -25,6 +25,7 @@ package com.liferay.portlet.mail.action;
 import com.liferay.mail.model.Filter;
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -36,7 +37,6 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.mail.util.recipient.RecipientFinder;
 import com.liferay.portlet.mail.util.recipient.RecipientFinderLocator;
-import com.liferay.util.servlet.SessionMessages;
 
 import java.rmi.RemoteException;
 

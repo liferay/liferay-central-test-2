@@ -22,10 +22,10 @@
 
 package com.liferay.portlet.imagegallery.action;
 
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
-import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;

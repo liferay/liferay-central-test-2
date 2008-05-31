@@ -23,9 +23,9 @@
 package com.liferay.portlet.communities.action;
 
 import com.liferay.portal.NoSuchGroupException;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;

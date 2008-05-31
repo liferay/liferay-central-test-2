@@ -25,12 +25,12 @@ package com.liferay.portlet.enterpriseadmin.action;
 import com.liferay.portal.NoSuchListTypeException;
 import com.liferay.portal.NoSuchPhoneException;
 import com.liferay.portal.PhoneNumberException;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.PhoneServiceUtil;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;

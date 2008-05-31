@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.action;
 
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -42,7 +43,6 @@ import com.liferay.portlet.journal.FeedTargetPortletIdException;
 import com.liferay.portlet.journal.NoSuchFeedException;
 import com.liferay.portlet.journal.service.JournalFeedServiceUtil;
 import com.liferay.util.RSSUtil;
-import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;

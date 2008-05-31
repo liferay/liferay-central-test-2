@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -88,7 +89,6 @@ import com.liferay.portlet.PortletURLImpl;
 import com.liferay.util.ListUtil;
 import com.liferay.util.Normalizer;
 import com.liferay.util.dao.hibernate.QueryUtil;
-import com.liferay.util.servlet.SessionErrors;
 
 import java.io.File;
 

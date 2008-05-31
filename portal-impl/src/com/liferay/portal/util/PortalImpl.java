@@ -31,6 +31,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
@@ -100,7 +101,6 @@ import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.util.BeanUtil;
 import com.liferay.util.Encryptor;
 import com.liferay.util.JS;
-import com.liferay.util.servlet.SessionErrors;
 
 import java.io.IOException;
 

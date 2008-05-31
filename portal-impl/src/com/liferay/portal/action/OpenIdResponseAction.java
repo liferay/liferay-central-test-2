@@ -23,6 +23,7 @@
 package com.liferay.portal.action;
 
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -33,7 +34,6 @@ import com.liferay.portal.util.OpenIdUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.PwdGenerator;
-import com.liferay.util.servlet.SessionErrors;
 
 import java.util.Calendar;
 import java.util.List;

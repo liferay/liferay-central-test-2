@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.mail.action;
 
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.DateFormats;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -46,7 +47,6 @@ import com.liferay.portlet.mail.util.MailUtil;
 import com.liferay.portlet.mail.util.multiaccount.MailAccount;
 import com.liferay.portlet.mail.util.multiaccount.MailAccounts;
 import com.liferay.util.mail.InternetAddressUtil;
-import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadPortletRequest;
 
 import java.io.File;

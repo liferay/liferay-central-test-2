@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.servlet;
+package com.liferay.portal.kernel.servlet;
 
 import java.util.Collections;
 import java.util.Iterator;

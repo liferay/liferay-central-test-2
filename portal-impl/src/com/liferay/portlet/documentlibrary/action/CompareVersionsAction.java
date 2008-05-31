@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.action;
 
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -41,7 +42,6 @@ import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermiss
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
 import com.liferay.util.diff.DiffResult;
 import com.liferay.util.diff.DiffUtil;
-import com.liferay.util.servlet.SessionErrors;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;

@@ -24,6 +24,7 @@ package com.liferay.portlet.communities.action;
 
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.PortalException;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutServiceUtil;
@@ -33,7 +34,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.ServletResponseUtil;
-import com.liferay.util.servlet.SessionErrors;
 
 import java.util.Calendar;
 import java.util.Date;

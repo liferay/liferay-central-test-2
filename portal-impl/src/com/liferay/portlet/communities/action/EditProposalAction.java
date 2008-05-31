@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.communities.action;
 
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -48,7 +49,6 @@ import com.liferay.portlet.tasks.model.TasksProposal;
 import com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil;
 import com.liferay.portlet.tasks.service.TasksProposalServiceUtil;
 import com.liferay.portlet.tasks.service.TasksReviewServiceUtil;
-import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;

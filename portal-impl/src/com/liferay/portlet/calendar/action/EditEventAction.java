@@ -25,6 +25,7 @@ package com.liferay.portlet.calendar.action;
 import com.liferay.portal.kernel.cal.DayAndPosition;
 import com.liferay.portal.kernel.cal.Duration;
 import com.liferay.portal.kernel.cal.Recurrence;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -42,7 +43,6 @@ import com.liferay.portlet.calendar.EventStartDateException;
 import com.liferay.portlet.calendar.EventTitleException;
 import com.liferay.portlet.calendar.NoSuchEventException;
 import com.liferay.portlet.calendar.service.CalEventServiceUtil;
-import com.liferay.util.servlet.SessionErrors;
 
 import java.util.ArrayList;
 import java.util.Calendar;

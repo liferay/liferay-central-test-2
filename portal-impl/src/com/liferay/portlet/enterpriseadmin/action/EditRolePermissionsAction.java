@@ -23,6 +23,8 @@
 package com.liferay.portlet.enterpriseadmin.action;
 
 import com.liferay.portal.NoSuchRoleException;
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -40,8 +42,6 @@ import com.liferay.portal.service.RoleServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.servlet.SessionErrors;
-import com.liferay.util.servlet.SessionMessages;
 
 import java.util.Collections;
 import java.util.HashMap;

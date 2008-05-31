@@ -24,6 +24,7 @@ package com.liferay.portlet.admin.action;
 
 import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringMaker;
@@ -42,7 +43,6 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.Time;
-import com.liferay.util.servlet.SessionErrors;
 
 import java.util.Enumeration;
 import java.util.Map;

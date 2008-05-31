@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.news.action;
 
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -29,7 +30,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.news.model.Feed;
 import com.liferay.portlet.news.util.NewsUtil;
-import com.liferay.util.servlet.SessionMessages;
 
 import java.util.Iterator;
 import java.util.LinkedHashSet;

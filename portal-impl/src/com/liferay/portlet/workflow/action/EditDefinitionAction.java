@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.workflow.action;
 
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -29,7 +30,6 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.workflow.DefinitionXmlException;
 import com.liferay.portlet.workflow.NoSuchDefinitionException;
 import com.liferay.portlet.workflow.service.WorkflowDefinitionServiceUtil;
-import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;

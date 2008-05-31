@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.softwarecatalog.action;
 
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Layout;
@@ -31,7 +32,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.softwarecatalog.FrameworkVersionNameException;
 import com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceUtil;
-import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;

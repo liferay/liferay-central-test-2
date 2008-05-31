@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.announcements.action;
 
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -36,7 +37,6 @@ import com.liferay.portlet.announcements.EntryExpirationDateException;
 import com.liferay.portlet.announcements.EntryTitleException;
 import com.liferay.portlet.announcements.NoSuchEntryException;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryServiceUtil;
-import com.liferay.util.servlet.SessionErrors;
 
 import java.util.Calendar;
 

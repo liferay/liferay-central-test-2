@@ -22,12 +22,12 @@
 
 package com.liferay.portlet.calendar.action;
 
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.UploadRequestUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.calendar.service.CalEventServiceUtil;
-import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadPortletRequest;
 
 import java.io.File;
