@@ -284,12 +284,12 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _endDate;
 	}
 
-	public long getImportGroupId() {
-		return _importGroupId;
-	}
-
 	public long getGroupId() {
 		return _groupId;
+	}
+
+	public long getImportGroupId() {
+		return _importGroupId;
 	}
 
 	public String getImportLayoutPath(long layoutId) {
@@ -484,6 +484,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
+	public boolean isPathNotProcessed(String path) {
+		return !addPrimaryKey(String.class, path);
+	}
+
 	public boolean isWithinDateRange(Date modifiedDate) {
 		if (!hasDateRange()) {
 			return true;
@@ -496,10 +500,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 		else {
 			return false;
 		}
-	}
-
-	public boolean pathNotProcessed(String path) {
-		return !addPrimaryKey(String.class, path);
 	}
 
 	public void setImportGroupId(long importGroupId) {

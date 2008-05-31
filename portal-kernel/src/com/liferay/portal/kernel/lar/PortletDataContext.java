@@ -170,9 +170,9 @@ public interface PortletDataContext extends Serializable {
 			Class<?> classObj, Object primaryKey, Object newPrimaryKey)
 		throws PortalException, SystemException;
 
-	public boolean isWithinDateRange(Date modifiedDate);
+	public boolean isPathNotProcessed(String path);
 
-	public boolean pathNotProcessed(String path);
+	public boolean isWithinDateRange(Date modifiedDate);
 
 	public void setImportGroupId(long importGroupId);
 
