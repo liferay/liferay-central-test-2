@@ -293,11 +293,11 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	public String getImportLayoutPath(long layoutId) {
-		return getImportGroupId() + ROOT_PATH_LAYOUTS + layoutId;
+		return getImportRootPath() + ROOT_PATH_LAYOUTS + layoutId;
 	}
 
 	public String getImportPortletPath(String portletId) {
-		return getImportGroupId() + ROOT_PATH_PORTLETS + portletId;
+		return getImportRootPath() + ROOT_PATH_PORTLETS + portletId;
 	}
 
 	public String getImportRootPath() {
