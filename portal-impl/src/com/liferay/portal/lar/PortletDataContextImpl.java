@@ -181,10 +181,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 		TagsAsset tagsAsset = null;
 
 		try {
-            tagsAsset = TagsAssetLocalServiceUtil.getAsset(
-            	classObj.getName(), ((Long)classPK).longValue());
-        }
-        catch (NoSuchAssetException nsae) {
+			tagsAsset = TagsAssetLocalServiceUtil.getAsset(
+				classObj.getName(), ((Long)classPK).longValue());
+		}
+		catch (NoSuchAssetException nsae) {
 
 			// LEP-4979
 
@@ -284,8 +284,24 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _endDate;
 	}
 
+	public long getImportGroupId() {
+		return _importGroupId;
+	}
+
 	public long getGroupId() {
 		return _groupId;
+	}
+
+	public String getImportLayoutPath(long layoutId) {
+		return getImportGroupId() + ROOT_PATH_LAYOUTS + layoutId;
+	}
+
+	public String getImportPortletPath(String portletId) {
+		return getImportGroupId() + ROOT_PATH_PORTLETS + portletId;
+	}
+
+	public String getImportRootPath() {
+		return ROOT_PATH_GROUPS + getImportGroupId();
 	}
 
 	public String getLayoutPath(long layoutId) {
@@ -482,6 +498,14 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
+	public boolean pathNotProcessed(String path) {
+		return !addPrimaryKey(String.class, path);
+	}
+
+	public void setImportGroupId(long importGroupId) {
+		_importGroupId = importGroupId;
+	}
+
 	public void setPlid(long plid) {
 		_plid = plid;
 	}
@@ -540,6 +564,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	private long _companyId;
 	private long _groupId;
+	private long _importGroupId;
 	private long _plid;
 	private Set _primaryKeys;
 	private Map<String, Map> _newPrimaryKeysMaps = new HashMap<String, Map>();

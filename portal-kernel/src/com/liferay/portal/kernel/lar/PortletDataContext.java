@@ -103,6 +103,14 @@ public interface PortletDataContext extends Serializable {
 
 	public long getGroupId();
 
+	public long getImportGroupId();
+
+	public String getImportLayoutPath(long layoutId);
+
+	public String getImportPortletPath(String portletId);
+
+	public String getImportRootPath();
+
 	public String getLayoutPath(long layoutId);
 
 	public Map getNewPrimaryKeysMap(Class<?> classObj);
@@ -163,6 +171,10 @@ public interface PortletDataContext extends Serializable {
 		throws PortalException, SystemException;
 
 	public boolean isWithinDateRange(Date modifiedDate);
+
+	public boolean pathNotProcessed(String path);
+
+	public void setImportGroupId(long importGroupId);
 
 	public void setPlid(long plid);
 
