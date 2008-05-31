@@ -310,13 +310,13 @@ for (int i = 0; i < PropsValues.LAYOUT_TYPES.length; i++) {
 	function <portlet:namespace />toggleLayoutTypeFields(type) {
 		jQuery(".layout-type-form").hide();
 		jQuery(".layout-type-form input").attr("disabled", true);
-		jQuery(".layout-type-form textarea").attr("disabled", true);
 		jQuery(".layout-type-form select").attr("disabled", true);
+		jQuery(".layout-type-form textarea").attr("disabled", true);
 
 		jQuery(".layout-type-form-" + type).show();
 		jQuery(".layout-type-form-" + type + " input").attr("disabled", false);
-		jQuery(".layout-type-form-" + type + " textarea").attr("disabled", false);
 		jQuery(".layout-type-form-" + type + " select").attr("disabled", false);
+		jQuery(".layout-type-form-" + type + " textarea").attr("disabled", false);
 	}
 
 	function <portlet:namespace />updateLanguage() {
@@ -412,5 +412,4 @@ for (int i = 0; i < PropsValues.LAYOUT_TYPES.length; i++) {
 			<portlet:namespace />toggleLayoutTypeFields(this.value);
 		}
 	)
-
 </script>
