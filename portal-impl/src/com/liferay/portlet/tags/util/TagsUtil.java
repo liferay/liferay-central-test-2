@@ -64,43 +64,21 @@ public class TagsUtil {
 		PortletKeys.MESSAGE_BOARDS, PortletKeys.WIKI
 	};
 
-	public static String toWord(String text) {
-		if (Validator.isNull(text)) {
-			return text;
-		}
-		else {
-			char[] c = text.toCharArray();
-
-			for (int i = 0; i < c.length; i++) {
-				if (!Validator.isChar(c[i]) && !Validator.isDigit(c[i]) &&
-					(c[i] != CharPool.CLOSE_PARENTHESIS) &&
-					(c[i] != CharPool.DASH) &&
-					(c[i] != CharPool.OPEN_PARENTHESIS) &&
-					(c[i] != CharPool.PERIOD) && (c[i] != CharPool.SPACE) &&
-					(c[i] != CharPool.UNDERLINE)) {
-
-					c[i] = CharPool.SPACE;
-				}
-			}
-
-			return new String(c);
-		}
-	}
-
 	public static boolean isValidWord(String word) {
 		if (Validator.isNull(word)) {
 			return false;
 		}
 		else {
-			char[] c = word.toCharArray();
+			char[] wordCharArray = word.toCharArray();
 
-			for (int i = 0; i < c.length; i++) {
-				if (!Validator.isChar(c[i]) && !Validator.isDigit(c[i]) &&
-					(c[i] != CharPool.CLOSE_PARENTHESIS) &&
-					(c[i] != CharPool.DASH) &&
-					(c[i] != CharPool.OPEN_PARENTHESIS) &&
-					(c[i] != CharPool.PERIOD) && (c[i] != CharPool.SPACE) &&
-					(c[i] != CharPool.UNDERLINE)) {
+			for (int i = 0; i < wordCharArray.length; i++) {
+				char c = wordCharArray[i];
+
+				if (!Validator.isChar(c) && !Validator.isDigit(c) &&
+					(c != CharPool.CLOSE_PARENTHESIS) &&
+					(c != CharPool.DASH) && (c != CharPool.OPEN_PARENTHESIS) &&
+					(c != CharPool.PERIOD) && (c != CharPool.SPACE) &&
+					(c != CharPool.UNDERLINE)) {
 
 					return false;
 				}
@@ -139,6 +117,30 @@ public class TagsUtil {
 		}
 
 		return StringUtil.stripBetween(result, "[$", "$]");
+	}
+
+	public static String toWord(String text) {
+		if (Validator.isNull(text)) {
+			return text;
+		}
+		else {
+			char[] textCharArray = text.toCharArray();
+
+			for (int i = 0; i < textCharArray.length; i++) {
+				char c = textCharArray[i];
+
+				if (!Validator.isChar(c) && !Validator.isDigit(c) &&
+					(c != CharPool.CLOSE_PARENTHESIS) &&
+					(c != CharPool.DASH) && (c != CharPool.OPEN_PARENTHESIS) &&
+					(c != CharPool.PERIOD) && (c != CharPool.SPACE) &&
+					(c != CharPool.UNDERLINE)) {
+
+					textCharArray[i] = CharPool.SPACE;
+				}
+			}
+
+			return new String(textCharArray);
+		}
 	}
 
 }

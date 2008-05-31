@@ -26,16 +26,17 @@
 
 <%
 String tag = ParamUtil.getString(renderRequest, "tag");
+
 String description = null;
 
 try {
-	TagsEntry entry = TagsEntryLocalServiceUtil.getEntry(
-			themeDisplay.getCompanyId(), tag);
+	TagsEntry tagsEntry = TagsEntryLocalServiceUtil.getEntry(themeDisplay.getCompanyId(), tag);
 
-	TagsProperty property = TagsPropertyLocalServiceUtil.getProperty(
-		entry.getEntryId(), "description");
+	TagsProperty tagsProperty = TagsPropertyLocalServiceUtil.getProperty(tagsEntry.getEntryId(), "description");
 
-	description = property.getValue();
+	description = tagsProperty.getValue();
+}
+catch (NoSuchEntryException nsee) {
 }
 catch (NoSuchPropertyException nspe) {
 }
@@ -43,7 +44,9 @@ catch (NoSuchPropertyException nspe) {
 
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
-<h1 class="page-title"><%= LanguageUtil.format(pageContext, "pages-with-tag-x", tag) %></h1>
+<h1 class="page-title">
+	<%= LanguageUtil.format(pageContext, "pages-with-tag-x", tag) %>
+</h1>
 
 <c:if test="<%= Validator.isNotNull(description) %>">
 	<p class="tag-description">

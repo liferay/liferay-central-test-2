@@ -96,7 +96,7 @@ public class Validator {
 			return false;
 		}
 
-		for (char c: s.toCharArray()) {
+		for (char c : s.toCharArray()) {
 			if (!isChar(c)) {
 				return false;
 			}
