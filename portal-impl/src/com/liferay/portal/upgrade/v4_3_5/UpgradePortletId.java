@@ -216,7 +216,7 @@ public class UpgradePortletId extends UpgradeProcess {
 		new String[] {
 			"96",
 			"google_maps_portlet_WAR_googlemapsportlet"
-		},
+		}
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradePortletId.class);
