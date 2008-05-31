@@ -72,7 +72,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			prefs.setValue("header-type", headerType);
 			prefs.setValue("root-layout-type", rootLayoutType);
 			prefs.setValue(
-				"root-layout-level", Integer.toString(rootLayoutLevel));
+				"root-layout-level", String.valueOf(rootLayoutLevel));
 			prefs.setValue("included-layouts", includedLayouts);
 		}
 

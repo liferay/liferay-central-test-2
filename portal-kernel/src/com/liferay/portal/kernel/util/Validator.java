@@ -311,7 +311,7 @@ public class Validator {
 				x = Integer.parseInt(number.substring(i, i + 1)) * 2;
 
 				if (x >= 10) {
-					String s = Integer.toString(x);
+					String s = String.valueOf(x);
 
 					x = Integer.parseInt(s.substring(0, 1)) +
 						Integer.parseInt(s.substring(1, 2));

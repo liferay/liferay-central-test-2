@@ -172,7 +172,7 @@ decimalFormat.setMinimumFractionDigits(2);
 				PortletURL portletURL = renderResponse.createRenderURL();
 
 				portletURL.setParameter("struts_action", "/currency_converter/view");
-				portletURL.setParameter("number", Double.toString(number));
+				portletURL.setParameter("number", String.valueOf(number));
 				portletURL.setParameter("from", currency.getFromSymbol());
 				portletURL.setParameter("to", currency.getToSymbol());
 				%>

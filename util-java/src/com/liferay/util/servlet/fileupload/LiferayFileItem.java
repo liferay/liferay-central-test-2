@@ -130,7 +130,7 @@ public class LiferayFileItem extends DiskFileItem {
 			current = _counter++;
 		}
 
-		String id = Integer.toString(current);
+		String id = String.valueOf(current);
 
 		if (current < 100000000) {
 			id = ("00000000" + id).substring(id.length());

@@ -116,7 +116,7 @@ public class EditPreferencesAction extends PortletAction {
 			int articlesPerNews = ParamUtil.get(req, "apn", 4);
 
 			prefs.setValue(
-				"articles-per-news", Integer.toString(articlesPerNews));
+				"articles-per-news", String.valueOf(articlesPerNews));
 
 			Set<Feed> selFeeds = new LinkedHashSet<Feed>();
 

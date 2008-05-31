@@ -282,7 +282,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 			int pendingRequests = MembershipRequestLocalServiceUtil.searchCount(group.getGroupId(), MembershipRequestImpl.STATUS_PENDING);
 
 			if (group.getType() == GroupImpl.TYPE_COMMUNITY_RESTRICTED) {
-				row.addText(Integer.toString(pendingRequests));
+				row.addText(String.valueOf(pendingRequests));
 			}
 			else {
 				row.addText(StringPool.BLANK);

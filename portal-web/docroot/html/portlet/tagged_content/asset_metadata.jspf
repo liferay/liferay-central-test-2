@@ -51,13 +51,13 @@ for (int j = 0; j < metadataFields.length; j++) {
 		}
 	}
 	else if (metadataFields[j].equals("priority")) {
-		value = LanguageUtil.get(pageContext, "priority") + StringPool.COLON + StringPool.SPACE + Double.toString(asset.getPriority());
+		value = LanguageUtil.get(pageContext, "priority") + StringPool.COLON + StringPool.SPACE + asset.getPriority();
 	}
 	else if (metadataFields[j].equals("author")) {
 		value = LanguageUtil.get(pageContext, "by") + StringPool.SPACE + asset.getUserName();
 	}
 	else if (metadataFields[j].equals("view-count")) {
-		value = Integer.toString(asset.getViewCount()) + StringPool.SPACE + LanguageUtil.get(pageContext, "views") ;
+		value = asset.getViewCount() + StringPool.SPACE + LanguageUtil.get(pageContext, "views") ;
 	}
 
 	if (Validator.isNotNull(value)) {

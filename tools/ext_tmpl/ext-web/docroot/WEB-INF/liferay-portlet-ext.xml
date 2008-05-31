@@ -39,11 +39,6 @@
 		<include>true</include>
 	</portlet>
 	<portlet>
-		<portlet-name>4</portlet-name>
-		<struts-path>weather</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
 		<portlet-name>5</portlet-name>
 		<struts-path>news</struts-path>
 		<include>true</include>

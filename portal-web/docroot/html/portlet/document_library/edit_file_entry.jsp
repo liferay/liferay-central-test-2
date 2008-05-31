@@ -484,7 +484,7 @@ portletURL.setParameter("name", name);
 
 				// Statistics
 
-				row.addText(Double.toString(fileVersion.getVersion()), rowHREF);
+				row.addText(String.valueOf(fileVersion.getVersion()), rowHREF);
 				row.addText(dateFormatDateTime.format(fileVersion.getCreateDate()), rowHREF);
 				row.addText(TextFormatter.formatKB(fileVersion.getSize(), locale) + "k", rowHREF);
 

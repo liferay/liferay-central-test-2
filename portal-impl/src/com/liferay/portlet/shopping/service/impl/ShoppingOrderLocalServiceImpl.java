@@ -150,7 +150,7 @@ public class ShoppingOrderLocalServiceImpl
 							GetterUtil.getInteger(fieldsQuantities[rowPos]) -
 							orderItem.getQuantity();
 
-						fieldsQuantities[rowPos] = Integer.toString(quantity);
+						fieldsQuantities[rowPos] = String.valueOf(quantity);
 
 						item.setFieldsQuantitiesArray(fieldsQuantities);
 					}

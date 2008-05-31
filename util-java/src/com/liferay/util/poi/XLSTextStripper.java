@@ -68,11 +68,13 @@ public class XLSTextStripper {
 
 						if (cell.getCellType() == 4) {
 							boolean booleanValue = cell.getBooleanCellValue();
-							cellStringValue = Boolean.toString(booleanValue);
+
+							cellStringValue = String.valueOf(booleanValue);
 						}
 						else if (cell.getCellType() == 0) {
 							double doubleValue = cell.getNumericCellValue();
-							cellStringValue = Double.toString(doubleValue);
+
+							cellStringValue = String.valueOf(doubleValue);
 						}
 						else if (cell.getCellType() == 1) {
 							cellStringValue =

@@ -135,14 +135,14 @@ public class BBCodeUtil {
 
 			String code = tag.getElement().replaceAll("\t", "    ");
 			String[] lines = code.split("\\n");
-			int digits = Integer.toString(lines.length + 1).length();
+			int digits = String.valueOf(lines.length + 1).length();
 
 			sm = new StringMaker(preTag);
 
 			sm.append("<div class='code'>");
 
 			for (int i = 0; i < lines.length; i++) {
-				String index = Integer.toString(i + 1);
+				String index = String.valueOf(i + 1);
 				int ld = index.length();
 
 				sm.append("<span class='code-lines'>");

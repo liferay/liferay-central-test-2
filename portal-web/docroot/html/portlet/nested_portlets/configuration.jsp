@@ -80,7 +80,7 @@
 <%
 boolean portletDecorateDefault = GetterUtil.getBoolean(theme.getSetting("portlet-setup-show-borders-default"), true);
 
-boolean portletSetupShowBorders = GetterUtil.getBoolean(prefs.getValue("portlet-setup-show-borders", Boolean.toString(portletDecorateDefault)));
+boolean portletSetupShowBorders = GetterUtil.getBoolean(prefs.getValue("portlet-setup-show-borders", String.valueOf(portletDecorateDefault)));
 %>
 
 <fieldset class="block-labels">
