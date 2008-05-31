@@ -35,6 +35,7 @@ public class CalendarTests extends BaseTests {
 	public CalendarTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(SetTimezoneTest.class);
 		addTestSuite(AddAppointmentEventTest.class);
 		addTestSuite(AddConcertEventTest.class);
 		addTestSuite(AddVacationEventTest.class);

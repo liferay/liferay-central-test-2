@@ -20,26 +20,25 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.search;
+package com.liferay.portalweb.portlet.calendar;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="AddPageTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="SetTimezoneTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddPageTest extends BaseTestCase {
-	public void testAddPage() throws Exception {
+public class SetTimezoneTest extends BaseTestCase {
+	public void testSetTimezone() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//a[@id=\"my-community-private-pages\"]")) {
+				if (selenium.isElementPresent("link=My Account")) {
 					break;
 				}
 			}
@@ -49,9 +48,8 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//a[@id=\"my-community-private-pages\"]");
+		selenium.click("link=My Account");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//div/a/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -59,7 +57,7 @@ public class AddPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("new_page")) {
+				if (selenium.isElementPresent("_2_timeZoneId")) {
 					break;
 				}
 			}
@@ -69,9 +67,8 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("new_page", "Search Test Page");
-		selenium.type("new_page", "Search Test Page");
-		selenium.click("link=Save");
+		selenium.select("_2_timeZoneId",
+			"label=(UTC -08:00) Pacific Standard Time");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -79,7 +76,7 @@ public class AddPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Search Test Page")) {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
 					break;
 				}
 			}
@@ -89,7 +86,9 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Search Test Page");
+		selenium.click("//input[@value='Save']");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Return to Full Page");
 		selenium.waitForPageToLoad("30000");
 	}
 }

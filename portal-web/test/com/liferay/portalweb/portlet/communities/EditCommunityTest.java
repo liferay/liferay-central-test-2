@@ -104,7 +104,10 @@ public class EditCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("_29_name", "Test Community 2 Edited");
 		selenium.type("_29_name", "Test Community 2 Edited");
+		selenium.typeKeys("_29_description",
+			"This is a second temporary Test Community! This community has been edited.");
 		selenium.type("_29_description",
 			"This is a second temporary Test Community! This community has been edited.");
 		selenium.click("//input[@value='Save']");

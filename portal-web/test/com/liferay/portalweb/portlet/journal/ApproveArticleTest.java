@@ -32,6 +32,22 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class ApproveArticleTest extends BaseTestCase {
 	public void testApproveArticle() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Articles")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=Articles");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=1.1");

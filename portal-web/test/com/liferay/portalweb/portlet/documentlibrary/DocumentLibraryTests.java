@@ -40,9 +40,9 @@ public class DocumentLibraryTests extends BaseTests {
 
 		// Javascript security prevents automatically uploading files.
 
-		//addTestSuite(AddDocumentTest.class);
-		//addTestSuite(SearchTest.class);
-		//addTestSuite(GetDocumentsTest.class);
+		addTestSuite(AddDocumentTest.class);
+		addTestSuite(SearchTest.class);
+		addTestSuite(GetDocumentsTest.class);
 	}
 
 }

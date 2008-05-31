@@ -70,6 +70,7 @@ public class AddPageTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("new_page", "Bible Gateway Test Page");
+		selenium.type("new_page", "Bible Gateway Test Page");
 		selenium.click("link=Save");
 
 		for (int second = 0;; second++) {

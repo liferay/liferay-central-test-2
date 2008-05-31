@@ -86,7 +86,6 @@ public class PublishBlogToLiveTest extends BaseTestCase {
 
 		selenium.click("_88_PORTLET_DATA_33");
 		selenium.click("publishBtn");
-		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to publish these pages[\\s\\S]$"));
 	}

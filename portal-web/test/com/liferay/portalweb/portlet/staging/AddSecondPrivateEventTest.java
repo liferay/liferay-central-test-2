@@ -57,6 +57,24 @@ public class AddSecondPrivateEventTest extends BaseTestCase {
 			}
 
 			try {
+				if (selenium.isElementPresent("_8_timeZoneSensitiveCheckbox")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("_8_timeZoneSensitiveCheckbox");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
 				if (selenium.isElementPresent("_8_title")) {
 					break;
 				}
@@ -67,7 +85,10 @@ public class AddSecondPrivateEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("_8_title", "Star Wars Marathon!");
 		selenium.type("_8_title", "Star Wars Marathon!");
+		selenium.typeKeys("_8_description",
+			"This Star Wars Marathon event should be listed on the calendar on the LIVE and PRIVATE portion of this community. Next week: A Lord of the Rings Marathon!");
 		selenium.type("_8_description",
 			"This Star Wars Marathon event should be listed on the calendar on the LIVE and PRIVATE portion of this community. Next week: A Lord of the Rings Marathon!");
 		selenium.select("_8_type", "label=Movie");

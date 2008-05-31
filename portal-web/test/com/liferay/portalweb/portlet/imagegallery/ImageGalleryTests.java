@@ -40,7 +40,7 @@ public class ImageGalleryTests extends BaseTests {
 
 		// Javascript security prevents automatically uploading files.
 
-		//addTestSuite(AddImageTest.class);
+		addTestSuite(AddImageTest.class);
 	}
 
 }

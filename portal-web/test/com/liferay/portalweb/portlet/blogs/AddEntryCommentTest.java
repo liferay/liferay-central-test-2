@@ -36,6 +36,7 @@ public class AddEntryCommentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Post Reply");
 		selenium.typeKeys("_33_postReplyBody0", "This is a test entry comment!");
+		selenium.type("_33_postReplyBody0", "This is a test entry comment!");
 		selenium.click("_33_postReplyButton0");
 		selenium.waitForPageToLoad("30000");
 

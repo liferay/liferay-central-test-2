@@ -32,6 +32,22 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class AddArticle2Test extends BaseTestCase {
 	public void testAddArticle2() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Add Article']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//input[@value='Add Article']");
 		Thread.sleep(5000);
 
@@ -52,6 +68,7 @@ public class AddArticle2Test extends BaseTestCase {
 		}
 
 		selenium.typeKeys("_15_title", "Test Journal Article 2");
+		selenium.type("_15_title", "Test Journal Article 2");
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -106,6 +123,7 @@ public class AddArticle2Test extends BaseTestCase {
 		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
 		selenium.selectFrame("//iframe");
 		selenium.typeKeys("//body", "This is a test Journal Article 2!");
+		selenium.type("//body", "This is a test Journal Article 2!");
 		selenium.selectFrame("relative=top");
 		selenium.select("_15_type", "label=Announcements");
 		selenium.select("_15_displayDateMonth", "label=April");

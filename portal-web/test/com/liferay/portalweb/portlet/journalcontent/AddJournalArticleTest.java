@@ -50,6 +50,24 @@ public class AddJournalArticleTest extends BaseTestCase {
 
 		selenium.click("//img[@title='Select Article']");
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"toggle_id_journal_article_searchkeywords")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("toggle_id_journal_article_searchkeywords", "Test");
 		selenium.click("//input[@value='Search Articles']");
 		selenium.waitForPageToLoad("30000");

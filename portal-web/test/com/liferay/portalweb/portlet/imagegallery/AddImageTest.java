@@ -36,6 +36,23 @@ public class AddImageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add Image']");
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Use the classic uploader.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=Use the classic uploader.");
 
 		for (int second = 0;; second++) {
@@ -56,7 +73,42 @@ public class AddImageTest extends BaseTestCase {
 
 		selenium.type("_31_file",
 			"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\imagegallery\\test_image.jpg");
-		selenium.typeKeys("_31_description", "This is the Liferay logo!");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_31_name")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_31_name", "test_image");
+		selenium.type("_31_description", "This is the Liferay logo!");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 
@@ -66,8 +118,7 @@ public class AddImageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//img[@title='This is the Liferaylogo']")) {
+				if (selenium.isElementPresent("//div[1]/img")) {
 					break;
 				}
 			}

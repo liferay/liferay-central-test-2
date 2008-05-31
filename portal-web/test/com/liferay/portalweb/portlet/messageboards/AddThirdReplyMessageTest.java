@@ -69,6 +69,7 @@ public class AddThirdReplyMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("_19_textArea", "This is a third reply message.");
 		selenium.type("_19_textArea", "This is a third reply message.");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");

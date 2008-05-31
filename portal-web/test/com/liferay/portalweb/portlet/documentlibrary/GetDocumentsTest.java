@@ -32,6 +32,22 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class GetDocumentsTest extends BaseTestCase {
 	public void testGetDocuments() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=My Documents")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=My Documents");
 		selenium.waitForPageToLoad("30000");
 
@@ -41,8 +57,8 @@ public class GetDocumentsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"link=This is a test document.txt\nThis is a test document")) {
+				if (selenium.isTextPresent(
+							"Test Document.txt\nThis is a test document!")) {
 					break;
 				}
 			}
@@ -61,8 +77,8 @@ public class GetDocumentsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"link=This is a test document.txt\nThis is a test document")) {
+				if (selenium.isTextPresent(
+							"Test Document.txt\nThis is a test document!")) {
 					break;
 				}
 			}

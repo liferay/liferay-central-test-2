@@ -39,7 +39,7 @@ public class AddPageTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//a[@id=\"my-community-private-pages\"]")) {
+							"document.getElementById('my-community-private-pages')")) {
 					break;
 				}
 			}
@@ -49,9 +49,10 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//a[@id=\"my-community-private-pages\"]");
+		selenium.click("document.getElementById('my-community-private-pages')");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//div/a/span");
+		selenium.click(
+			"document.getElementById('add-page').getElementsByTagName('a')[0].getElementsByTagName('span')[0]");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -69,7 +70,7 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("new_page", "Announcements Test Page");
+		selenium.type("new_page", "Announcements Test Page");
 		selenium.click("link=Save");
 
 		for (int second = 0;; second++) {
@@ -88,7 +89,6 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		Thread.sleep(3000);
 		selenium.click("link=Announcements Test Page");
 		selenium.waitForPageToLoad("30000");
 	}

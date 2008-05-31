@@ -41,7 +41,7 @@ public class AddPortletTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@id=\"Collaboration-Calendar\"]")) {
+							"document.getElementById('Collaboration-Calendar').getElementsByTagName('p')[0].getElementsByTagName('a')[0]")) {
 					break;
 				}
 			}
@@ -51,8 +51,10 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.mouseDown("//div[@id=\"Collaboration-Calendar\"]/p/a");
-		selenium.mouseUp("//div[@id=\"Collaboration-Calendar\"]/p/a");
+		selenium.mouseDown(
+			"document.getElementById('Collaboration-Calendar').getElementsByTagName('p')[0].getElementsByTagName('a')[0]");
+		selenium.mouseUp(
+			"document.getElementById('Collaboration-Calendar').getElementsByTagName('p')[0].getElementsByTagName('a')[0]");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

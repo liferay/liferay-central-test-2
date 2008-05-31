@@ -33,7 +33,8 @@ import com.liferay.portalweb.portal.BaseTestCase;
 public class AddCommentTest extends BaseTestCase {
 	public void testAddComment() throws Exception {
 		selenium.click("link=Post Reply");
-		selenium.typeKeys("_36_postReplyBody0", "This is a test Post Reply");
+		selenium.typeKeys("_36_postReplyBody0", "This is a test Post Reply.");
+		selenium.type("_36_postReplyBody0", "This is a test Post Reply.");
 		selenium.click("_36_postReplyButton0");
 		selenium.waitForPageToLoad("30000");
 
@@ -43,7 +44,7 @@ public class AddCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("This is a test Post Reply")) {
+				if (selenium.isTextPresent("This is a test Post Reply.")) {
 					break;
 				}
 			}

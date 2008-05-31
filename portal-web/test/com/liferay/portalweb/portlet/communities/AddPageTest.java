@@ -70,6 +70,7 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("new_page", "Communities Test Page");
 		selenium.type("new_page", "Communities Test Page");
 		selenium.click("link=Save");
 

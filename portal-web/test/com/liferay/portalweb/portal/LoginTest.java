@@ -38,9 +38,10 @@ public class LoginTest extends BaseTestCase {
 		selenium.type("login", "test@liferay.com");
 		selenium.type("password", "test");
 		selenium.click("rememberMeCheckbox");
-		selenium.click("//input[@value='Sign In']");
+		selenium.click(
+			"document.getElementById('tabs1already-registeredTabsSection').getElementsByTagName('div')[0].getElementsByTagName('form')[0].getElementsByTagName('fieldset')[0].getElementsByTagName('div')[3].getElementsByTagName('input')[0]");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//a[@id=\"my-community-private-pages\"]");
+		selenium.click("document.getElementById('my-community-private-pages')");
 		selenium.waitForPageToLoad("30000");
 	}
 }

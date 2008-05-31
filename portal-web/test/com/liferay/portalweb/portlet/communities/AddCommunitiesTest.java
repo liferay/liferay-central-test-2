@@ -68,6 +68,8 @@ public class AddCommunitiesTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("_29_name", "Test Community");
+		selenium.type("_29_name", "Test Community");
+		selenium.typeKeys("_29_description", "This is a test community!");
 		selenium.type("_29_description", "This is a test community!");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
@@ -88,6 +90,7 @@ public class AddCommunitiesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("_29_name", "Test");
 		selenium.type("_29_name", "Test");
 		selenium.click("//input[@value='Search Communities']");
 		selenium.waitForPageToLoad("30000");

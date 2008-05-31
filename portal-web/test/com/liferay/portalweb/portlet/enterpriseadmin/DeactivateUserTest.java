@@ -32,6 +32,23 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class DeactivateUserTest extends BaseTestCase {
 	public void testDeactivateUser() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"toggle_id_enterprise_admin_user_searchkeywords")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("toggle_id_enterprise_admin_user_searchkeywords", "n03");
 		selenium.click("//input[@value='Search Users']");
 		selenium.waitForPageToLoad("30000");

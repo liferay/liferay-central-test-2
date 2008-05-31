@@ -32,10 +32,43 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class WorkflowTest extends BaseTestCase {
 	public void testWorkflow() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Articles")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=Articles");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("Link=Test Journal Article 2");
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_15_incrementVersionCheckbox")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("_15_incrementVersionCheckbox");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");

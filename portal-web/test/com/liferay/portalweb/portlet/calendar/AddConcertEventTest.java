@@ -34,6 +34,24 @@ public class AddConcertEventTest extends BaseTestCase {
 	public void testAddConcertEvent() throws Exception {
 		selenium.click("//input[@value='Add Event']");
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_8_timeZoneSensitiveCheckbox")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("_8_timeZoneSensitiveCheckbox");
 		selenium.type("_8_title", "Caedmon's Call Concert!");
 		selenium.type("_8_description",
 			"I love this band guys! Everyone should see them! I've never seen them before. :(");

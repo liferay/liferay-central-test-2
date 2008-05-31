@@ -57,7 +57,7 @@ public class EditCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("This is a test Post Reply")) {
+				if (selenium.isTextPresent("This is a test Post Reply.")) {
 					break;
 				}
 			}
@@ -101,6 +101,7 @@ public class EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("_36_editBody1", "This is a test edited post reply!");
 		selenium.type("_36_editBody1", "This is a test edited post reply!");
 
 		for (int second = 0;; second++) {

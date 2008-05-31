@@ -67,6 +67,23 @@ public class AddStagedEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_8_timeZoneSensitiveCheckbox")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("_8_timeZoneSensitiveCheckbox");
 		selenium.type("_8_title", "Selenium Testing Party");
 		selenium.type("_8_description",
 			"All Jedi, Liferay Fans, Automated Robots are invited!");

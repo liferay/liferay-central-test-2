@@ -41,7 +41,7 @@ public class AddPortletTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@id=\"News-Announcements\"]")) {
+							"document.getElementById('News-Announcements').getElementsByTagName('p')[0].getElementsByTagName('a')[0]")) {
 					break;
 				}
 			}
@@ -52,8 +52,10 @@ public class AddPortletTest extends BaseTestCase {
 		}
 
 		Thread.sleep(3000);
-		selenium.mouseDown("//div[@id=\"News-Announcements\"]/p/a");
-		selenium.mouseUp("//div[@id=\"News-Announcements\"]/p/a");
+		selenium.mouseDown(
+			"document.getElementById('News-Announcements').getElementsByTagName('p')[0].getElementsByTagName('a')[0]");
+		selenium.mouseUp(
+			"document.getElementById('News-Announcements').getElementsByTagName('p')[0].getElementsByTagName('a')[0]");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

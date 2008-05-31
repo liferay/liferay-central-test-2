@@ -37,6 +37,7 @@ public class AddSecondEntryCommentTest extends BaseTestCase {
 		selenium.click("link=Post Reply");
 		selenium.typeKeys("_33_postReplyBody0",
 			"This is a second entry comment!");
+		selenium.type("_33_postReplyBody0", "This is a second entry comment!");
 		selenium.click("_33_postReplyButton0");
 		selenium.waitForPageToLoad("30000");
 

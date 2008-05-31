@@ -34,6 +34,24 @@ public class AddTemporaryEventTest extends BaseTestCase {
 	public void testAddTemporaryEvent() throws Exception {
 		selenium.click("//input[@value='Add Event']");
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_8_timeZoneSensitiveCheckbox")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("_8_timeZoneSensitiveCheckbox");
 		selenium.type("_8_title", "Test Event 2");
 		selenium.type("_8_description", "This is a test event!");
 		selenium.select("_8_type", "label=Appointment");

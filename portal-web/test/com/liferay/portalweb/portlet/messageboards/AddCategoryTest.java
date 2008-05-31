@@ -52,8 +52,10 @@ public class AddCategoryTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("_19_name", "T\u00e9st Cat\u00e9gory");
+		selenium.type("_19_name", "T\u00e9st Cat\u00e9gory");
 		selenium.typeKeys("_19_description",
 			"This is a t\u00e9st cat\u00e9gory!");
+		selenium.type("_19_description", "This is a t\u00e9st cat\u00e9gory!");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

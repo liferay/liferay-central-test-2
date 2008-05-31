@@ -32,7 +32,22 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class AddCommentTest extends BaseTestCase {
 	public void testAddComment() throws Exception {
-		Thread.sleep(5000);
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Post Reply")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=Post Reply");
 
 		for (int second = 0;; second++) {
@@ -52,6 +67,7 @@ public class AddCommentTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("_107_postReplyBody0", "This is a test page comment!");
+		selenium.type("_107_postReplyBody0", "This is a test page comment!");
 		selenium.click("_107_postReplyButton0");
 		selenium.waitForPageToLoad("30000");
 

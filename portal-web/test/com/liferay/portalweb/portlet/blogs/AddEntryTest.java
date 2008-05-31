@@ -67,7 +67,7 @@ public class AddEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_33_title", "Test Entry");
+		selenium.type("_33_title", "Test Entry");
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -121,7 +121,7 @@ public class AddEntryTest extends BaseTestCase {
 		selenium.selectFrame("//iframe[@id=\"_33_editor\"]");
 		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
 		selenium.selectFrame("//iframe");
-		selenium.typeKeys("//body", "This is a test entry!");
+		selenium.type("//body", "This is a test entry!");
 		selenium.selectFrame("relative=top");
 		Thread.sleep(5000);
 

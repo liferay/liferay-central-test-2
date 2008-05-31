@@ -85,6 +85,7 @@ public class AddSecondReplyMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("_19_textArea", "This is a second reply message.");
 		selenium.type("_19_textArea", "This is a second reply message.");
 
 		for (int second = 0;; second++) {

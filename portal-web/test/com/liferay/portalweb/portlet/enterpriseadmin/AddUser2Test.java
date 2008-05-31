@@ -40,14 +40,17 @@ public class AddUser2Test extends BaseTestCase {
 		selenium.type("_79_emailAddress", "test02@selenium.com");
 		selenium.select("_79_prefixId", "label=Mrs.");
 		selenium.typeKeys("_79_firstName", "selen02");
+		selenium.type("_79_firstName", "selen02");
 		selenium.type("_79_middleName", "lenn");
 		selenium.typeKeys("_79_lastName", "nium02");
+		selenium.type("_79_lastName", "nium02");
 		selenium.select("_79_suffixId", "label=PhD.");
 		selenium.select("_79_birthdayMonth", "label=January");
 		selenium.select("_79_birthdayDay", "label=27");
 		selenium.select("_79_birthdayYear", "label=1986");
 		selenium.select("_79_male", "label=Female");
 		selenium.typeKeys("_79_jobTitle", "Selenium Test 02");
+		selenium.type("_79_jobTitle", "Selenium Test 02");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add']");

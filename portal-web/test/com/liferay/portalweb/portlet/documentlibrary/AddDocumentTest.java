@@ -36,6 +36,23 @@ public class AddDocumentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add Document']");
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Use the classic uploader.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=Use the classic uploader.");
 		Thread.sleep(3000);
 
@@ -100,8 +117,8 @@ public class AddDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"link=Test Document.txt\nThis is a test document!")) {
+				if (selenium.isTextPresent(
+							"Test Document.txt\nThis is a test document!")) {
 					break;
 				}
 			}

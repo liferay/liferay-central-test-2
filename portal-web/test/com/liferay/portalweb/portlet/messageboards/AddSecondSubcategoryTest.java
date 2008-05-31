@@ -55,7 +55,10 @@ public class AddSecondSubcategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("_19_name", "S\u00e9cond T\u00e9st Subcat\u00e9gory");
 		selenium.type("_19_name", "S\u00e9cond T\u00e9st Subcat\u00e9gory");
+		selenium.typeKeys("_19_description",
+			"This is a s\u00e9cond t\u00e9st subcat\u00e9gory!");
 		selenium.type("_19_description",
 			"This is a s\u00e9cond t\u00e9st subcat\u00e9gory!");
 		selenium.click("//input[@value='Save']");

@@ -37,6 +37,7 @@ public class AddOrganizationTest extends BaseTestCase {
 		selenium.click("//input[@value='Add Organization']");
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_79_name", "Selenium");
+		selenium.type("_79_name", "Selenium");
 		selenium.click("//input[@value='Select']");
 		selenium.waitForPopUp("organization", "30000");
 		selenium.selectWindow("organization");

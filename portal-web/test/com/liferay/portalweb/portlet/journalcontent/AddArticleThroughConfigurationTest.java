@@ -123,6 +123,7 @@ public class AddArticleThroughConfigurationTest extends BaseTestCase {
 		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
 		selenium.selectFrame("//iframe");
 		selenium.typeKeys("//body", "This is a third journal article!");
+		selenium.type("//body", "This is a third journal article!");
 		selenium.selectFrame("relative=top");
 
 		for (int second = 0;; second++) {

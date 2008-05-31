@@ -39,6 +39,7 @@ public class AddPasswordPoliciesTest extends BaseTestCase {
 		selenium.click("//input[@value='Add Password Policy']");
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_79_name", "Test");
+		selenium.type("_79_name", "Test");
 		selenium.type("_79_description", "This is a test password policy!");
 		selenium.click("_79_changeableCheckbox");
 		selenium.select("_79_minAge", "label=1 Week");
@@ -49,6 +50,7 @@ public class AddPasswordPoliciesTest extends BaseTestCase {
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_79_name", "test");
+		selenium.type("_79_name", "test");
 		selenium.click("//input[@value='Search Password Policies']");
 		selenium.waitForPageToLoad("30000");
 

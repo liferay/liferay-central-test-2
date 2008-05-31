@@ -70,6 +70,7 @@ public class AddPageTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("new_page", "Currency Converter Test Page");
+		selenium.type("new_page", "Currency Converter Test Page");
 		selenium.click("link=Save");
 
 		for (int second = 0;; second++) {

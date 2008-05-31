@@ -68,6 +68,7 @@ public class SearchTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("_19_keywords1", "T\u00e9st");
+		selenium.type("_19_keywords1", "T\u00e9st");
 		selenium.click("//input[@value='Search Messages']");
 		selenium.waitForPageToLoad("30000");
 

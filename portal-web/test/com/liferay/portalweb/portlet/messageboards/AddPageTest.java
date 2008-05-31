@@ -71,6 +71,7 @@ public class AddPageTest extends BaseTestCase {
 
 		selenium.typeKeys("new_page",
 			"M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9");
+		selenium.type("new_page", "M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9");
 		selenium.click("link=Save");
 
 		for (int second = 0;; second++) {

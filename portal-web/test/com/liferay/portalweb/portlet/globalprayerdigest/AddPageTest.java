@@ -70,6 +70,7 @@ public class AddPageTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("new_page", "Global Prayer Digest Test Page");
+		selenium.type("new_page", "Global Prayer Digest Test Page");
 		selenium.click("link=Save");
 
 		for (int second = 0;; second++) {

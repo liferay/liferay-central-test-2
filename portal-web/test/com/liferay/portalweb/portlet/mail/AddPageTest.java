@@ -70,6 +70,7 @@ public class AddPageTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("new_page", "Mail Test Page");
+		selenium.type("new_page", "Mail Test Page");
 		selenium.click("link=Save");
 
 		for (int second = 0;; second++) {
