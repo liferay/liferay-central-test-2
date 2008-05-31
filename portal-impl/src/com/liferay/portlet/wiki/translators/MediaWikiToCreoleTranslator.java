@@ -53,9 +53,9 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 
 		// Clean unnecessary header emphasis
 
-		regexps.put("= '''(.*)''' =", "= $1 =");
-		regexps.put("== '''(.*)''' ==", "== $1 ==");
-		regexps.put("== '''(.*)''' ===", "=== $1 ===");
+		regexps.put("= '''([^=]*)''' =", "= $1 =");
+		regexps.put("== '''([^=]*)''' ==", "== $1 ==");
+		regexps.put("== '''([^=]*)''' ===", "=== $1 ===");
 
 		// Unscape angle brackets
 
@@ -64,7 +64,7 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 
 		// Category removal
 
-		regexps.put("\\[\\[[Cc]ategory:(.*)\\]\\]", "");
+		regexps.put("\\[\\[[Cc]ategory:([^\\]]*)\\]\\][\\n]*", "");
 
 		// Bold and italics
 
@@ -85,7 +85,7 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 
 		// Normalize URLs
 
-		regexps.put("\\[{2}((http|ftp)[^ ]*) (.*)\\]{2}", "[$1 $3]");
+		regexps.put("\\[{2}((http|ftp)[^ ]*) ([^\\]]*)\\]{2}", "[$1 $3]");
 
 		// URL
 
@@ -93,7 +93,7 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 
 		// URL with label
 
-		regexps.put("\\[((http|ftp)[^ ]*) (.*)\\]", "[[$1|$3]]");
+		regexps.put("\\[((http|ftp)[^ ]*) ([^\\]]*)\\]", "[[$1|$3]]");
 
 		// Monospace
 
@@ -109,7 +109,7 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 
 		// No wiki
 
-		regexps.put("<nowiki>(.*)</nowiki>", "{{{$1}}}");
+		regexps.put("<nowiki>([^<]*)</nowiki>", "{{{$1}}}");
 	}
 
 	protected String postProcess(String content) {

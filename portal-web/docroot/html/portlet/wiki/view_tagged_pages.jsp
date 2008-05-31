@@ -26,11 +26,30 @@
 
 <%
 String tag = ParamUtil.getString(renderRequest, "tag");
+String description = null;
+
+try {
+	TagsEntry entry = TagsEntryLocalServiceUtil.getEntry(
+			themeDisplay.getCompanyId(), tag);
+
+	TagsProperty property = TagsPropertyLocalServiceUtil.getProperty(
+		entry.getEntryId(), "description");
+
+	description = property.getValue();
+}
+catch (NoSuchPropertyException nspe) {
+}
 %>
 
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
 <h1 class="page-title"><%= LanguageUtil.format(pageContext, "pages-with-tag-x", tag) %></h1>
+
+<c:if test="<%= Validator.isNotNull(description) %>">
+	<p class="tag-description">
+		<%= description %>
+	</p>
+</c:if>
 
 <liferay-util:include page="/html/portlet/wiki/page_iterator.jsp">
 	<liferay-util:param name="type" value="tagged_pages" />

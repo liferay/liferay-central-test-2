@@ -43,7 +43,7 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 />
 
 <liferay-ui:tabs
-	names="media-wiki"
+	names="MediaWiki"
 />
 
 <table class="lfr-table">

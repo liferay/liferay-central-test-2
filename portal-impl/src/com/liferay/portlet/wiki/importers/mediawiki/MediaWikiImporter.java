@@ -26,8 +26,15 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portlet.tags.NoSuchEntryException;
+import com.liferay.portlet.tags.model.TagsEntry;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
+import com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil;
+import com.liferay.portlet.tags.util.TagsUtil;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.importers.WikiImporter;
 import com.liferay.portlet.wiki.model.WikiNode;
@@ -37,8 +44,11 @@ import com.liferay.portlet.wiki.translators.MediaWikiToCreoleTranslator;
 
 import java.io.File;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -58,7 +68,7 @@ import org.dom4j.io.SAXReader;
 public class MediaWikiImporter implements WikiImporter {
 
 	public void importPages(long userId, WikiNode node, File file)
-		throws PortalException {
+		throws PortalException, SystemException {
 
 		int count = 0;
 
@@ -69,6 +79,14 @@ public class MediaWikiImporter implements WikiImporter {
 
 			Element root = doc.getRootElement();
 
+			List<String> specialNamespaces = _readSpecialNamespaces(root);
+
+			// Category pages
+
+			importCategoryPages(userId, node, root);
+
+			// Regular pages
+
 			Iterator<Element> itr = root.elements("page").iterator();
 
 			while (itr.hasNext()) {
@@ -78,6 +96,10 @@ public class MediaWikiImporter implements WikiImporter {
 					"contributor").elementText("username");
 				String title = pageEl.elementText("title");
 
+				if (_isSpecialMediaWikiPage(title, specialNamespaces)) {
+					continue;
+				}
+
 				List<Element> revisionEls = pageEl.elements("revision");
 
 				Element lastRevisionEl = revisionEls.get(
@@ -85,7 +107,7 @@ public class MediaWikiImporter implements WikiImporter {
 
 				String content = lastRevisionEl.elementText("text");
 
-				addPage(userId, author, node, title, content);
+				importPage(userId, author, node, title, content);
 
 				count++;
 			}
@@ -95,37 +117,6 @@ public class MediaWikiImporter implements WikiImporter {
 		}
 
 		_log.info("Imported " + count + " pages into " + node.getName());
-	}
-
-	protected void addPage(
-			long userId, String author, WikiNode node, String title,
-			String content)
-		throws PortalException {
-
-		try {
-			long authorUserId = getUserId(userId, node, author);
-
-			content = _translator.translate(content);
-
-			WikiPage page = null;
-
-			try {
-				page = WikiPageLocalServiceUtil.getPage(
-					node.getNodeId(), title);
-			}
-			catch (NoSuchPageException nspe) {
-				page = WikiPageLocalServiceUtil.addPage(
-					authorUserId, node.getNodeId(), title, null, null);
-			}
-
-			WikiPageLocalServiceUtil.updatePage(
-				authorUserId, node.getNodeId(), title, page.getVersion(),
-				content, "creole", StringPool.BLANK, StringPool.BLANK,
-				new String[0], null, null);
-		}
-		catch (Exception e) {
-			throw new PortalException("Error importing page " + title, e);
-		}
 	}
 
 	protected long getUserId(long userId, WikiNode node, String author)
@@ -143,6 +134,162 @@ public class MediaWikiImporter implements WikiImporter {
 
 		return user.getUserId();
 	}
+
+	protected void importCategoryPages(
+			long userId, WikiNode node, Element root)
+		throws PortalException, SystemException {
+
+		Iterator<Element> itr = root.elements("page").iterator();
+
+		while (itr.hasNext()) {
+			Element page = itr.next();
+
+			String title = page.elementText("title");
+
+			if (!title.startsWith("Category:")) {
+				continue;
+			}
+
+			String categoryName = title.substring("Category:".length());
+			categoryName = _normalize(categoryName, 75);
+
+			String description = page.element("revision").elementText("text");
+			description = _normalizeDescription(description);
+
+			try {
+				TagsEntry entry = null;
+
+				try {
+					entry = TagsEntryLocalServiceUtil.getEntry(
+						node.getCompanyId(), categoryName);
+				}
+				catch(NoSuchEntryException e) {
+
+					entry = TagsEntryLocalServiceUtil.addEntry(
+						userId, categoryName);
+
+					if (Validator.isNotNull(description)) {
+						TagsPropertyLocalServiceUtil.addProperty(
+							userId, entry.getEntryId(), "description",
+							description);
+					}
+				}
+			}
+			catch (SystemException e) {
+				 _log.error(e);
+			}
+		}
+	}
+
+	protected void importPage(
+			long userId, String author, WikiNode node, String title,
+			String content)
+		throws PortalException, SystemException {
+
+		try {
+			long authorUserId = getUserId(userId, node, author);
+
+			String[] tagsEntries = readTagsEntries(userId, node, content);
+
+			content = _translator.translate(content);
+
+			WikiPage page = null;
+
+			try {
+				page = WikiPageLocalServiceUtil.getPage(
+					node.getNodeId(), title);
+			}
+			catch (NoSuchPageException nspe) {
+				page = WikiPageLocalServiceUtil.addPage(
+					authorUserId, node.getNodeId(), title, null, null);
+			}
+
+			WikiPageLocalServiceUtil.updatePage(
+				authorUserId, node.getNodeId(), title, page.getVersion(),
+				content, "creole", StringPool.BLANK, StringPool.BLANK,
+				tagsEntries, null, null);
+		}
+		catch (Exception e) {
+			throw new PortalException("Error importing page " + title, e);
+		}
+	}
+
+	protected String[] readTagsEntries(
+			long userId, WikiNode node, String content)
+		throws PortalException, SystemException {
+
+		Matcher matcher = Pattern.compile(
+			_CATEGORIES_REGEXP).matcher(content);
+
+		List<String> tagsEntries = new ArrayList<String>();
+
+		while (matcher.find()) {
+		    String categoryName = matcher.group(1);
+
+			categoryName = _normalize(categoryName, 75);
+
+			TagsEntry entry = null;
+
+			try {
+				entry = TagsEntryLocalServiceUtil.getEntry(
+					node.getCompanyId(), categoryName);
+			}
+			catch(NoSuchEntryException e) {
+				entry = TagsEntryLocalServiceUtil.addEntry(
+					userId, categoryName);
+			}
+
+			tagsEntries.add(entry.getName());
+		}
+
+		return tagsEntries.toArray(new String[tagsEntries.size()]);
+	}
+
+	private boolean _isSpecialMediaWikiPage(
+		String title, List<String> specialNamespaces) {
+
+		for (String namespace: specialNamespaces) {
+			if (title.startsWith(namespace + StringPool.COLON)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	private String _normalizeDescription(String description) {
+		description = description.replaceAll(
+			_CATEGORIES_REGEXP, StringPool.BLANK);
+
+		return _normalize(description, 300);
+	}
+
+	private String _normalize(String categoryName, int length) {
+		categoryName = TagsUtil.toWord(categoryName.trim());
+
+		return StringUtil.shorten(categoryName, length);
+	}
+
+	private List<String> _readSpecialNamespaces(Element root) {
+
+		List<String> namespaces = new ArrayList<String>();
+
+		Iterator<Element> itr = root.element("siteinfo").element(
+			"namespaces").elements("namespace").iterator();
+
+		while (itr.hasNext()) {
+			Element namespace = itr.next();
+
+			if (!namespace.attribute("key").equals("0")) {
+				namespaces.add(namespace.getText());
+			}
+		}
+
+		return namespaces;
+	}
+
+	private static final String _CATEGORIES_REGEXP =
+		"\\[\\[[Cc]ategory:([^\\]]*)\\]\\][\\n]*";
 
 	private static Log _log = LogFactory.getLog(MediaWikiImporter.class);
 

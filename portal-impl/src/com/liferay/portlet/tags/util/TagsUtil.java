@@ -64,6 +64,29 @@ public class TagsUtil {
 		PortletKeys.MESSAGE_BOARDS, PortletKeys.WIKI
 	};
 
+	public static String toWord(String text) {
+		if (Validator.isNull(text)) {
+			return text;
+		}
+		else {
+			char[] c = text.toCharArray();
+
+			for (int i = 0; i < c.length; i++) {
+				if (!Validator.isChar(c[i]) && !Validator.isDigit(c[i]) &&
+					(c[i] != CharPool.CLOSE_PARENTHESIS) &&
+					(c[i] != CharPool.DASH) &&
+					(c[i] != CharPool.OPEN_PARENTHESIS) &&
+					(c[i] != CharPool.PERIOD) && (c[i] != CharPool.SPACE) &&
+					(c[i] != CharPool.UNDERLINE)) {
+
+					c[i] = CharPool.SPACE;
+				}
+			}
+
+			return new String(c);
+		}
+	}
+
 	public static boolean isValidWord(String word) {
 		if (Validator.isNull(word)) {
 			return false;
