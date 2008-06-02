@@ -61,7 +61,7 @@ else {
 		<liferay-portlet:runtime portletName="<%= PortletKeys.PORTLET_CSS %>" />
 	</c:if>
 
-	<c:if test="<%= themeDisplay.isSignedIn() && (PortletLocalServiceUtil.getPortletById(company.getCompanyId(), PortletKeys.CHAT) != null) %>">
+	<c:if test="<%= themeDisplay.isSignedIn() && PortletLocalServiceUtil.hasPortlet(company.getCompanyId(), PortletKeys.CHAT) %>">
 		<liferay-portlet:runtime portletName="<%= PortletKeys.CHAT %>" />
 	</c:if>
 
