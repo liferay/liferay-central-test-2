@@ -188,7 +188,9 @@ public class MediaWikiImporter implements WikiImporter {
 
 		try {
 			long authorUserId = getUserId(userId, node, author);
+
 			String[] tagsEntries = readTagsEntries(userId, node, content);
+
 			content = _translator.translate(content);
 
 			WikiPage page = null;
