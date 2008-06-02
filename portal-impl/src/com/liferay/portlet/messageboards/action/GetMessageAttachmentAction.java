@@ -29,7 +29,6 @@ import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.MimeTypesUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -84,8 +83,8 @@ public class GetMessageAttachmentAction extends PortletAction {
 			long messageId = ParamUtil.getLong(req, "messageId");
 			String fileName = ParamUtil.getString(req, "attachment");
 
-			HttpServletResponse httpRes =
-				((ActionResponseImpl)res).getHttpServletResponse();
+			HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(
+				res);
 
 			getFile(messageId, fileName, httpRes);
 
