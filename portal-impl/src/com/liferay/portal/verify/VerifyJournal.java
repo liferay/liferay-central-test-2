@@ -24,8 +24,6 @@ package com.liferay.portal.verify;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -74,13 +72,6 @@ public class VerifyJournal extends VerifyProcess {
 			JournalStructureLocalServiceUtil.getStructures();
 
 		for (JournalStructure structure : structures) {
-			if (Validator.isNull(structure.getUuid())) {
-				structure.setUuid(PortalUUIDUtil.generate());
-
-				JournalStructureLocalServiceUtil.updateJournalStructure(
-					structure);
-			}
-
 			ResourceLocalServiceUtil.addResources(
 				structure.getCompanyId(), 0, 0,
 				JournalStructure.class.getName(), structure.getId(), false,
@@ -97,13 +88,6 @@ public class VerifyJournal extends VerifyProcess {
 			JournalTemplateLocalServiceUtil.getTemplates();
 
 		for (JournalTemplate template : templates) {
-			if (Validator.isNull(template.getUuid())) {
-				template.setUuid(PortalUUIDUtil.generate());
-
-				JournalTemplateLocalServiceUtil.updateJournalTemplate(
-					template);
-			}
-
 			ResourceLocalServiceUtil.addResources(
 				template.getCompanyId(), 0, 0,
 				JournalTemplate.class.getName(), template.getId(), false, true,
@@ -120,13 +104,6 @@ public class VerifyJournal extends VerifyProcess {
 			JournalArticleLocalServiceUtil.getArticles();
 
 		for (JournalArticle article : articles) {
-			if (Validator.isNull(article.getUuid())) {
-				article.setUuid(PortalUUIDUtil.generate());
-
-				JournalArticleLocalServiceUtil.updateJournalArticle(
-					article);
-			}
-
 			long groupId = article.getGroupId();
 			String articleId = article.getArticleId();
 			double version = article.getVersion();
