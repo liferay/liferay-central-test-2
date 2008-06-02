@@ -127,7 +127,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_userIdStrategy = null;
 		_startDate = startDate;
 		_endDate = endDate;
-		_xStream = new XStream();
 		_zipReader = null;
 		_zipWriter = zipWriter;
 
