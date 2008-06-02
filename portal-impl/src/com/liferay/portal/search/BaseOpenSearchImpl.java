@@ -81,10 +81,16 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 			HttpServletRequest req, String keywords, int startPage,
 			int itemsPerPage)
 		throws SearchException;
-
-	protected void addSearchResult(
-		Element root, String title, String link, Date updated, String summary,
+        
+        protected void addSearchResult(
+		Element root, String title, String link, Date updated, String summary, 
 		double score) {
+            this.addSearchResult(root, title, link, updated, summary, null, score, -1.0);
+            
+        }
+	protected void addSearchResult(
+		Element root, String title, String link, Date updated, String summary, String[] tags,
+		double score, double rating) {
 
 		// entry
 
@@ -118,8 +124,26 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 
 		OpenSearchUtil.addElement(
 			entry, "summary", OpenSearchUtil.DEFAULT_NAMESPACE, summary);
+                
+                // tags
+                String tagsStr = "";
+                if (tags != null) {
+                    for (int i=0; i < tags.length; i++) {
+                        tagsStr += tags[i];
+                        if (i + 1 < tags.length) {
+                            tagsStr +=",";
+                        }
+                    }
+                }
+ 		OpenSearchUtil.addElement(
+			entry, "tags", OpenSearchUtil.DEFAULT_NAMESPACE, tagsStr);
+ 
+		// average rating
 
-		// relevance:score
+		OpenSearchUtil.addElement(
+			entry, "rating", OpenSearchUtil.DEFAULT_NAMESPACE, rating);
+                
+                // relevance:score
 
 		OpenSearchUtil.addElement(
 			entry, "score", OpenSearchUtil.RELEVANCE_NAMESPACE, score);

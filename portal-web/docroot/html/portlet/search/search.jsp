@@ -109,6 +109,8 @@ for (int i = 0; i < portlets.size(); i++) {
 
 	headerNames.add("#");
 	headerNames.add("summary");
+	headerNames.add("tags");
+	headerNames.add("average-ratings");
 	//headerNames.add("score");
 
 	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM + i, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-results-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
@@ -182,7 +184,15 @@ for (int i = 0; i < portlets.size(); i++) {
 			sm.append("</a>");
 
 			row.addText(StringUtil.highlight(sm.toString(), keywords));
-
+			String tags = el.elementText("tags");
+			row.addTags(tags);
+			String rating = el.elementText("rating");
+			try {
+			row.addScore(Float.parseFloat(rating)/5);
+			}catch (Exception le) {
+			row.addText(rating);
+			}
+ 
 			// Score
 
 			String score = el.elementText(OpenSearchUtil.getQName("score", OpenSearchUtil.RELEVANCE_NAMESPACE));

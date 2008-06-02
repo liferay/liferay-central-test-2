@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.util.search.DocumentImpl;
 
@@ -46,6 +47,7 @@ import javax.portlet.PortletURL;
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static final String PORTLET_ID = PortletKeys.BLOGS;
+	public static final String ENTRY_CLASS_NAME = BlogsEntry.class.getName();
 
 	public static void addEntry(
 			long companyId, long groupId, long userId, long entryId,
@@ -84,7 +86,9 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		doc.addModifiedDate();
 
-		doc.addKeyword("entryId", entryId);
+		doc.addKeyword(Field.ENTRY_ID, entryId);
+		doc.addKeyword(Field.ENTRY_CLASS_NAME, ENTRY_CLASS_NAME);
+
 
 		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
@@ -125,7 +129,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		// Portlet URL
 
-		String entryId = doc.get("entryId");
+		String entryId = doc.get(Field.ENTRY_ID);
 
 		portletURL.setParameter("struts_action", "/blogs/view_entry");
 		portletURL.setParameter("entryId", entryId);

@@ -64,6 +64,12 @@ public class Field {
 
 	public static final String USER_NAME = "userName";
 
+	public static final String ENTRY_CLASS_NAME = "entryclass";
+
+	public static final String ENTRY_ID = "entryId";
+
+	public static final String ACL = "acl";
+
 	public Field() {
 	}
 
@@ -100,15 +106,15 @@ public class Field {
 		else {
 			return null;
 		}
-	}
+            }
 
 	public void setValue(String value) {
 		setValues(new String[] {value});
 	}
-
-	public String[] getValues() {
-		return _values;
-	}
+        
+        public String[] getValues() {
+            return _values;
+            }
 
 	public void setValues(String[] values) {
 		_values = values;

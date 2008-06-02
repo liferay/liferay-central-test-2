@@ -35,6 +35,8 @@ import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 
+import com.liferay.portlet.ratings.model.RatingsStats;
+import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 import java.util.Date;
 
 import javax.portlet.PortletURL;
@@ -114,9 +116,22 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 				Date modifedDate = DateTools.stringToDate(
 					result.get(Field.MODIFIED));
 				String content = docSummary.getContent();
+				Field tagField = (Field)result.getFields().get(Field.TAGS_ENTRIES);
+				String[] tags = tagField.getValues();
+				double rating = 0.0;
+				try {
+					String entryClassname = result.get(Field.ENTRY_CLASS_NAME);
+					String entryId = result.get(Field.ENTRY_ID);
+					if (entryClassname != null && entryId != null) {
+						RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(entryClassname, GetterUtil.getLong(entryId));
+						rating = stats.getAverageScore();
+					}
+				} catch (Exception e) {
+					rating = 0;
+				}
 				double score = results.score(i);
 
-				addSearchResult(root, title, url, modifedDate, content, score);
+				addSearchResult(root, title, url, modifedDate, content, tags, score, rating);
 			}
 
 			if (_log.isDebugEnabled()) {

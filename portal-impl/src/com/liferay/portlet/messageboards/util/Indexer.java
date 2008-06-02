@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.util.search.DocumentImpl;
 import com.liferay.util.search.QueryImpl;
@@ -53,6 +54,7 @@ import org.apache.lucene.search.BooleanQuery;
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static final String PORTLET_ID = PortletKeys.MESSAGE_BOARDS;
+	public static final String ENTRY_CLASS_NAME = MBMessage.class.getName();
 
 	public static void addMessage(
 			long companyId, long groupId, String userName, long categoryId,
@@ -127,6 +129,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.addKeyword("messageId", messageId);
 
 		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
+		doc.addKeyword(Field.ENTRY_ID, messageId);
+		doc.addKeyword(Field.ENTRY_CLASS_NAME, ENTRY_CLASS_NAME);
 
 		return doc;
 	}
