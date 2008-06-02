@@ -186,45 +186,6 @@ var AjaxUtil = {
 	}
 };
 
-var ReverseAjax = {
-	initialize: function() {
-		jQuery(window).bind('unload', ReverseAjax.release);
-		ReverseAjax.request();
-	},
-
-	request: function() {
-		AjaxUtil.request(
-			themeDisplay.getPathMain() + "/portal/reverse_ajax",
-			{
-				onComplete: ReverseAjax.response,
-				reverseAjax: true
-			}
-		);
-	},
-
-	response: function(xmlHttpRequest) {
-		var res = Liferay.Util.toJSONObject(xmlHttpRequest.responseText);
-		var status = res.status;
-
-		if (status && status != "failure") {
-			if (status == "success") {
-				if (res.chatMessages) {
-					Messaging.getChatsReturn(res.chatMessages);
-				}
-				if (res.chatRoster) {
-					MessagingRoster.getEntriesReturn(res.chatRoster);
-				}
-			}
-
-			ReverseAjax.request();
-		}
-	},
-
-	release : function() {
-		AjaxUtil.request(themeDisplay.getPathMain() + "/portal/reverse_ajax?release=1", {reverseAjax:true});
-	}
-};
-
 function executeLoadedScript(el) {
 	var scripts = el.getElementsByTagName("script");
 

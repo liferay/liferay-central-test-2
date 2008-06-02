@@ -35,8 +35,6 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String ADDRESS = "ADDRESS";
 
-	public static final String ADDRESS_BOOK_RECIPIENTS = "ADDRESS_BOOK_RECIPIENTS";
-
 	public static final String ANNOUNCEMENTS_ENTRY = "ANNOUNCEMENTS_ENTRY";
 
 	public static final String ASSOCIATE_KEY = LiferayConfigureListener.ASSOCIATE_KEY;
@@ -118,8 +116,6 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 	public static final String LIVE_USER_TRACKERS = "LIVE_USER_TRACKERS";
 
 	public static final String LIVE_USERS = "LIVE_USERS";
-
-	public static final String JABBER_XMPP_SESSION = "JABBER_XMPP_SESSION";
 
 	public static final String JOURNAL_ARTICLE = "JOURNAL_ARTICLE";
 
@@ -266,8 +262,6 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 	public static final String RENDER_PORTLET_RESOURCE = "RENDER_PORTLET_RESOURCE";
 
 	public static final String REQUESTED_LAYOUT = "REQUESTED_LAYOUT";
-
-	public static final String REVERSE_AJAX = "REVERSE_AJAX";
 
 	public static final String ROLE = "ROLE";
 

@@ -509,17 +509,6 @@
 		<render-weight>1</render-weight>
 	</portlet>
 	<portlet>
-		<portlet-name>52</portlet-name>
-		<icon>/html/portlet/chat/icon.png</icon>
-		<struts-path>chat</struts-path>
-		<use-default-template>false</use-default-template>
-		<restore-current-view>false</restore-current-view>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
-		<css-class-wrapper>portlet-chat</css-class-wrapper>
-	</portlet>
-	<portlet>
 		<portlet-name>53</portlet-name>
 		<icon>/html/portlet/flash/icon.png</icon>
 		<struts-path>flash</struts-path>
@@ -838,20 +827,6 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
-		<system>true</system>
-	</portlet>
-	<portlet>
-		<portlet-name>92</portlet-name>
-		<icon>/html/portlet/messaging/icon.png</icon>
-		<struts-path>messaging</struts-path>
-		<use-default-template>false</use-default-template>
-		<show-portlet-access-denied>false</show-portlet-access-denied>
-		<show-portlet-inactive>false</show-portlet-inactive>
-		<restore-current-view>false</restore-current-view>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
-		<css-class-wrapper>portlet-messaging</css-class-wrapper>
 		<system>true</system>
 	</portlet>
 	<portlet>

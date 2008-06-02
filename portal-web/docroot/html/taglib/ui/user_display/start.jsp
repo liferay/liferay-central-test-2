@@ -74,10 +74,6 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 				<%= userDisplay.getFullName() %>
 
 				<c:if test="<%= Validator.isNotNull(url) %>"></a></c:if>
-
-				<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
-					<a href="javascript: Messaging.chat({toId:'<%= userId %>', toName:'<%= userDisplay.getFullName() %>'});"><img src="<%= themeDisplay.getPathThemeImages() %>/chat/user_offline.png" /></a>
-				</c:if>
 			</c:when>
 			<c:otherwise>
 				<%= userName %>

@@ -825,18 +825,6 @@ public class PropsUtil {
 
 	public static final String COUNTER_INCREMENT = "counter.increment";
 
-	// Jabber
-
-	public static final String JABBER_XMPP_SERVER_ENABLED = "jabber.xmpp.server.enabled";
-
-	public static final String JABBER_XMPP_SERVER_ADDRESS = "jabber.xmpp.server.address";
-
-	public static final String JABBER_XMPP_SERVER_NAME = "jabber.xmpp.server.name";
-
-	public static final String JABBER_XMPP_SERVER_PORT = "jabber.xmpp.server.port";
-
-	public static final String JABBER_XMPP_USER_PASSWORD = "jabber.xmpp.user.password";
-
 	// JBI
 
 	public static final String JBI_WORKFLOW_URL = "jbi.workflow.url";
@@ -874,12 +862,6 @@ public class PropsUtil {
 	public static final String POP_SERVER_NOTIFICATIONS_INTERVAL = "pop.server.notifications.interval";
 
 	public static final String POP_SERVER_SUBDOMAIN = "pop.server.subdomain";
-
-	// Reverse AJAX
-
-	public static final String REVERSE_AJAX_ENABLED = "reverse.ajax.enabled";
-
-	public static final String REVERSE_AJAX_HEARTBEAT = "reverse.ajax.heartbeat";
 
 	// Scheduler
 

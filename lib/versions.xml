@@ -2142,30 +2142,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/smack.jar</file-name>
-		<version>2.2.1</version>
-		<project-name>Smack</project-name>
-		<project-url>http://www.igniterealtime.org/projects/smack/index.jsp</project-url>
-		<licenses>
-			<license>
-				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) 2002-2007 Jive Software.</copyright-notice>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>portal/smackx.jar</file-name>
-		<version>2.2.1</version>
-		<project-name>Smack</project-name>
-		<project-url>http://www.igniterealtime.org/projects/smack/index.jsp</project-url>
-		<licenses>
-			<license>
-				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) 2002-2007 Jive Software.</copyright-notice>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>portal/soap.jar</file-name>
 		<version>2.2</version>
 		<project-name>Apache Simple Object Access Protocol (SOAP)</project-name>

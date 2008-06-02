@@ -212,14 +212,6 @@
 		<put name="portlet_content" value="/portlet/calendar/view_event.jsp" />
 	</definition>
 
-	<!-- Chat -->
-
-	<definition name="portlet.chat" extends="portlet" />
-
-	<definition name="portlet.chat.view" extends="portlet.chat">
-		<put name="portlet_content" value="/portlet/chat/view.jsp" />
-	</definition>
-
 	<!-- Communities -->
 
 	<definition name="portlet.communities" extends="portlet" />
@@ -705,10 +697,6 @@
 	<definition name="portlet.message_boards.view_message" extends="portlet.message_boards">
 		<put name="portlet_content" value="/portlet/message_boards/view_message.jsp" />
 	</definition>
-
-	<!-- Messaging -->
-
-	<definition name="portlet.messaging.chatbox" path="/portlet/chat/chatbox.jsp" />
 
 	<!-- My Account -->
 

@@ -33,7 +33,6 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.mail.util.MailSessionLock;
-import com.liferay.portlet.messaging.util.MessagingUtil;
 
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
@@ -108,9 +107,6 @@ public class PortalSessionListener implements HttpSessionListener {
 		}
 
 		ses.removeAttribute(WebKeys.PORTLET_SESSION_TRACKER);
-		ses.removeAttribute(WebKeys.REVERSE_AJAX);
-
-		MessagingUtil.closeXMPPConnection(ses);
 
 		// Process session destroyed events
 

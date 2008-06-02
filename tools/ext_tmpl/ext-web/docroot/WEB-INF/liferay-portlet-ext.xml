@@ -224,11 +224,6 @@
 		<include>true</include>
 	</portlet>
 	<portlet>
-		<portlet-name>52</portlet-name>
-		<struts-path>chat</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
 		<portlet-name>53</portlet-name>
 		<struts-path>flash</struts-path>
 		<include>true</include>
@@ -351,11 +346,6 @@
 	<portlet>
 		<portlet-name>90</portlet-name>
 		<struts-path>portal</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
-		<portlet-name>92</portlet-name>
-		<struts-path>messaging</struts-path>
 		<include>true</include>
 	</portlet>
 	<portlet>

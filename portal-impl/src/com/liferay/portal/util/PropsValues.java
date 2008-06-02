@@ -414,10 +414,6 @@ public class PropsValues {
 		GetterUtil.getInteger(
 			PropsUtil.get(PropsUtil.IG_IMAGE_THUMBNAIL_MAX_DIMENSION));
 
-	public static final boolean JABBER_XMPP_SERVER_ENABLED =
-		GetterUtil.getBoolean(
-			PropsUtil.get(PropsUtil.JABBER_XMPP_SERVER_ENABLED));
-
 	public static final boolean JAVASCRIPT_BAREBONE_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.JAVASCRIPT_BAREBONE_ENABLED));
@@ -812,12 +808,6 @@ public class PropsValues {
 
 	public static final String RESOURCE_REPOSITORIES_ROOT =
 		PropsUtil.get(PropsUtil.RESOURCE_REPOSITORIES_ROOT);
-
-	public static final boolean REVERSE_AJAX_ENABLED = GetterUtil.getBoolean(
-		PropsUtil.get(PropsUtil.REVERSE_AJAX_ENABLED));
-
-	public static final int REVERSE_AJAX_HEARTBEAT = GetterUtil.getInteger(
-		PropsUtil.get(PropsUtil.REVERSE_AJAX_HEARTBEAT));
 
 	public static final String[] SERVLET_SERVICE_EVENTS_POST =
 		PropsUtil.getArray(PropsUtil.SERVLET_SERVICE_EVENTS_POST);

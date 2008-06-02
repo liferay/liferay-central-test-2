@@ -213,23 +213,6 @@
 		);
 
 		<c:if test="<%= !themeDisplay.isStatePopUp() %>">
-			<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
-				jQuery(document).ready(
-					function() {
-						Messaging.init("<%= request.getRemoteUser() %>");
-					}
-				);
-			</c:if>
-
-			<c:if test="<%= PropsValues.REVERSE_AJAX_ENABLED && themeDisplay.isSignedIn()%>">
-				if (!Liferay.Browser.is_safari) {
-					jQuery(document).last(
-						function() {
-							ReverseAjax.initialize();
-						}
-					);
-				}
-			</c:if>
 
 			<%
 			String scroll = ParamUtil.getString(request, "scroll");

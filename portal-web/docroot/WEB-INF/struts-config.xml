@@ -91,8 +91,6 @@
 
 		<action path="/portal/rest_proxy" type="com.liferay.portal.action.RESTProxyAction" />
 
-		<action path="/portal/reverse_ajax" type="com.liferay.portal.action.ReverseAjaxAction" />
-
 		<action path="/portal/session_click" type="com.liferay.portal.action.SessionClickAction" />
 
 		<action path="/portal/session_tree_js_click" type="com.liferay.portal.action.SessionTreeJSClickAction" />
@@ -239,12 +237,6 @@
 			<forward name="portlet.calendar.edit_event" path="portlet.calendar.view_event" />
 			<forward name="portlet.calendar.error" path="portlet.calendar.error" />
 		</action>
-
-		<!-- Chat -->
-
-		<action path="/chat/roster" type="com.liferay.portlet.chat.action.RosterAction" />
-
-		<action path="/chat/view" forward="portlet.chat.view" />
 
 		<!-- Communities -->
 
@@ -844,12 +836,6 @@
 		<action path="/message_boards/view_message" type="com.liferay.portlet.messageboards.action.ViewMessageAction">
 			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
 			<forward name="portlet.message_boards.view_message" path="portlet.message_boards.view_message" />
-		</action>
-
-		<!-- Messaging -->
-
-		<action path="/messaging/action" type="com.liferay.portlet.messaging.action.MessagingAction">
-			<forward name="portlet.messaging.chatbox" path="portlet.messaging.chatbox" />
 		</action>
 
 		<!-- My Account -->
