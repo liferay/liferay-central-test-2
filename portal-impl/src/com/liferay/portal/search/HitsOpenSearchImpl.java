@@ -127,7 +127,7 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 					tags = tagsEntriesField.getValues();
 				}
 
-				double rating = 0.0;
+				double ratings = 0.0;
 
 				String entryClassName = result.get(Field.ENTRY_CLASS_NAME);
 				long entryClassPK = GetterUtil.getLong(
@@ -139,13 +139,13 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 					RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(
 						entryClassName, entryClassPK);
 
-					rating = stats.getAverageScore();
+					ratings = stats.getTotalScore();
 				}
 
 				double score = results.score(i);
 
 				addSearchResult(
-					root, title, url, modifedDate, content, tags, rating,
+					root, title, url, modifedDate, content, tags, ratings,
 					score);
 			}
 

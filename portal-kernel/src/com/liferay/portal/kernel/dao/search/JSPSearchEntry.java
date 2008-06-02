@@ -72,8 +72,8 @@ public class JSPSearchEntry extends SearchEntry {
 		if (_ctx != null) {
 			RequestDispatcher rd = _ctx.getRequestDispatcher(_path);
 
-			StringServletResponse stringServletRes =
-				new StringServletResponse(_res);
+			StringServletResponse stringServletRes = new StringServletResponse(
+				_res);
 
 			rd.include(_req, stringServletRes);
 
@@ -86,7 +86,7 @@ public class JSPSearchEntry extends SearchEntry {
 
 	public Object clone() {
 		return new JSPSearchEntry(
-			getAlign(), getValign(), getColspan(), getPath());
+			getAlign(), getValign(), getColspan(), getPath(), _ctx, _req, _res);
 	}
 
 	private String _path;

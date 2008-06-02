@@ -110,7 +110,6 @@ for (int i = 0; i < portlets.size(); i++) {
 	headerNames.add("#");
 	headerNames.add("summary");
 	headerNames.add("tags");
-	headerNames.add("average-ratings");
 	//headerNames.add("score");
 
 	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM + i, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-results-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
@@ -185,13 +184,37 @@ for (int i = 0; i < portlets.size(); i++) {
 
 			row.addText(StringUtil.highlight(sm.toString(), keywords));
 
-			String tags = el.elementText("tags");
+			// Tags
 
-			row.addTags(tags);
+			sm = new StringMaker();
 
-			String rating = el.elementText("rating");
+			String[] tags = StringUtil.split(el.elementText("tags"));
 
-			row.addScore(GetterUtil.getFloat(rating) / 5);
+			for (int k = 0; k < tags.length; k++) {
+				String tag = tags[k];
+
+				PortletURL tagURL = PortletURLUtil.clone(portletURL, renderResponse);
+
+				tagURL.setParameter("keywords", Field.TAGS_ENTRIES + StringPool.COLON + tag);
+
+				sm.append("<a href=\"");
+				sm.append(tagURL.toString());
+				sm.append("\">");
+				sm.append(tag);
+				sm.append("</a>");
+
+				if ((k + 1) < tags.length) {
+					sm.append(", ");
+				}
+			}
+
+			row.addText(StringUtil.highlight(sm.toString(), keywords));
+
+			// Ratings
+
+			String ratings = el.elementText("ratings");
+
+			//row.addText(ratings);
 
 			// Score
 

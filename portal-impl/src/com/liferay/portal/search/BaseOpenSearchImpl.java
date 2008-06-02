@@ -93,7 +93,7 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 
 	protected void addSearchResult(
 		Element root, String title, String link, Date updated, String summary,
-		String[] tags, double rating, double score) {
+		String[] tags, double ratings, double score) {
 
 		// entry
 
@@ -134,10 +134,10 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 			entry, "tags", OpenSearchUtil.DEFAULT_NAMESPACE,
 			StringUtil.merge(tags));
 
-		// rating
+		// ratings
 
 		OpenSearchUtil.addElement(
-			entry, "rating", OpenSearchUtil.DEFAULT_NAMESPACE, rating);
+			entry, "ratings", OpenSearchUtil.DEFAULT_NAMESPACE, ratings);
 
 		// relevance:score
 
