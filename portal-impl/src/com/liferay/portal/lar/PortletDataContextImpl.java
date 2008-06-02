@@ -106,7 +106,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 			parameterMap, PortletDataHandlerKeys.DATA_STRATEGY,
 			PortletDataHandlerKeys.DATA_STRATEGY_MIRROR);
 		_userIdStrategy = userIdStrategy;
-		_xStream = new XStream();
 		_zipReader = zipReader;
 		_zipWriter = null;
 
@@ -557,6 +556,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	protected void initXStream() {
+		_xStream = new XStream();
+
 		_xStream.alias("BlogsEntry", BlogsEntryImpl.class);
 		_xStream.alias("BookmarksFolder", BookmarksFolderImpl.class);
 		_xStream.alias("BookmarksEntry", BookmarksEntryImpl.class);
