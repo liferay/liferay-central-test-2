@@ -70,17 +70,17 @@ public interface MembershipRequestLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.MembershipRequest getMembershipRequest(
+		long membershipRequestId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portal.model.MembershipRequest updateMembershipRequest(
 		com.liferay.portal.model.MembershipRequest membershipRequest)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.MembershipRequest addMembershipRequest(
 		long userId, long groupId, java.lang.String comments)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portal.model.MembershipRequest getMembershipRequest(
-		long membershipRequestId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

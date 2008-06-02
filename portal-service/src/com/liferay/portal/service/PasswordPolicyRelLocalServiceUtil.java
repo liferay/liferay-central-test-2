@@ -93,6 +93,15 @@ public class PasswordPolicyRelLocalServiceUtil {
 			start, end);
 	}
 
+	public static com.liferay.portal.model.PasswordPolicyRel getPasswordPolicyRel(
+		long passwordPolicyRelId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
+
+		return passwordPolicyRelLocalService.getPasswordPolicyRel(passwordPolicyRelId);
+	}
+
 	public static com.liferay.portal.model.PasswordPolicyRel updatePasswordPolicyRel(
 		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel)
 		throws com.liferay.portal.SystemException {

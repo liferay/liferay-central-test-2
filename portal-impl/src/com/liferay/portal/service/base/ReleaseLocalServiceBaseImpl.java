@@ -304,6 +304,11 @@ public abstract class ReleaseLocalServiceBaseImpl implements ReleaseLocalService
 			end);
 	}
 
+	public Release getRelease(long releaseId)
+		throws PortalException, SystemException {
+		return releasePersistence.findByPrimaryKey(releaseId);
+	}
+
 	public Release updateRelease(Release release) throws SystemException {
 		release.setNew(false);
 

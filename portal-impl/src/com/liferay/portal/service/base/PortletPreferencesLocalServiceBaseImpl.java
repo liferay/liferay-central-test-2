@@ -308,6 +308,11 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 			start, end);
 	}
 
+	public PortletPreferences getPortletPreferences(long portletPreferencesId)
+		throws PortalException, SystemException {
+		return portletPreferencesPersistence.findByPrimaryKey(portletPreferencesId);
+	}
+
 	public PortletPreferences updatePortletPreferences(
 		PortletPreferences portletPreferences) throws SystemException {
 		portletPreferences.setNew(false);

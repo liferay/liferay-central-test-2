@@ -93,6 +93,15 @@ public class JournalArticleImageLocalServiceUtil {
 			start, end);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalArticleImage getJournalArticleImage(
+		long articleImageId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
+
+		return journalArticleImageLocalService.getJournalArticleImage(articleImageId);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticleImage updateJournalArticleImage(
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage)
 		throws com.liferay.portal.SystemException {

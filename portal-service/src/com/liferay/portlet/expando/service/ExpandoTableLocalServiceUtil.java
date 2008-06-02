@@ -93,6 +93,15 @@ public class ExpandoTableLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portlet.expando.model.ExpandoTable getExpandoTable(
+		long tableId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
+
+		return expandoTableLocalService.getExpandoTable(tableId);
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoTable updateExpandoTable(
 		com.liferay.portlet.expando.model.ExpandoTable expandoTable)
 		throws com.liferay.portal.SystemException {

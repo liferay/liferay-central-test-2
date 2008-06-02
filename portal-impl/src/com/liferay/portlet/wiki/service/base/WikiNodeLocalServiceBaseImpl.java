@@ -116,6 +116,11 @@ public abstract class WikiNodeLocalServiceBaseImpl
 			start, end);
 	}
 
+	public WikiNode getWikiNode(long nodeId)
+		throws PortalException, SystemException {
+		return wikiNodePersistence.findByPrimaryKey(nodeId);
+	}
+
 	public WikiNode updateWikiNode(WikiNode wikiNode) throws SystemException {
 		wikiNode.setNew(false);
 

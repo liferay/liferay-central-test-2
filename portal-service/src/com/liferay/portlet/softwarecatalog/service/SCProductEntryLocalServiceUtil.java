@@ -93,6 +93,15 @@ public class SCProductEntryLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry getSCProductEntry(
+		long productEntryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
+		return scProductEntryLocalService.getSCProductEntry(productEntryId);
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry updateSCProductEntry(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
 		throws com.liferay.portal.SystemException {

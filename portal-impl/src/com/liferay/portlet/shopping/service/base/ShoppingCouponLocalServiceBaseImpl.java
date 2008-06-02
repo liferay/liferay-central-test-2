@@ -125,6 +125,11 @@ public abstract class ShoppingCouponLocalServiceBaseImpl
 			start, end);
 	}
 
+	public ShoppingCoupon getShoppingCoupon(long couponId)
+		throws PortalException, SystemException {
+		return shoppingCouponPersistence.findByPrimaryKey(couponId);
+	}
+
 	public ShoppingCoupon updateShoppingCoupon(ShoppingCoupon shoppingCoupon)
 		throws SystemException {
 		shoppingCoupon.setNew(false);

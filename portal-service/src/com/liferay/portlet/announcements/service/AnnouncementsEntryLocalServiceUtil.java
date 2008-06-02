@@ -93,6 +93,15 @@ public class AnnouncementsEntryLocalServiceUtil {
 			start, end);
 	}
 
+	public static com.liferay.portlet.announcements.model.AnnouncementsEntry getAnnouncementsEntry(
+		long entryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		AnnouncementsEntryLocalService announcementsEntryLocalService = AnnouncementsEntryLocalServiceFactory.getService();
+
+		return announcementsEntryLocalService.getAnnouncementsEntry(entryId);
+	}
+
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry updateAnnouncementsEntry(
 		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry)
 		throws com.liferay.portal.SystemException {

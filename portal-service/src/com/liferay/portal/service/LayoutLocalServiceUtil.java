@@ -91,6 +91,14 @@ public class LayoutLocalServiceUtil {
 		return layoutLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portal.model.Layout getLayout(long plid)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.getLayout(plid);
+	}
+
 	public static com.liferay.portal.model.Layout updateLayout(
 		com.liferay.portal.model.Layout layout)
 		throws com.liferay.portal.SystemException {
@@ -255,14 +263,6 @@ public class LayoutLocalServiceUtil {
 
 		return layoutLocalService.getFriendlyURLLayout(groupId, privateLayout,
 			friendlyURL);
-	}
-
-	public static com.liferay.portal.model.Layout getLayout(long plid)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
-
-		return layoutLocalService.getLayout(plid);
 	}
 
 	public static com.liferay.portal.model.Layout getLayout(long groupId,

@@ -135,6 +135,11 @@ public abstract class JournalStructureLocalServiceBaseImpl
 			start, end);
 	}
 
+	public JournalStructure getJournalStructure(long id)
+		throws PortalException, SystemException {
+		return journalStructurePersistence.findByPrimaryKey(id);
+	}
+
 	public JournalStructure updateJournalStructure(
 		JournalStructure journalStructure) throws SystemException {
 		journalStructure.setNew(false);

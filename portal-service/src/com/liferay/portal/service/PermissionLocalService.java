@@ -69,6 +69,10 @@ public interface PermissionLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Permission getPermission(long permissionId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portal.model.Permission updatePermission(
 		com.liferay.portal.model.Permission permission)
 		throws com.liferay.portal.SystemException;

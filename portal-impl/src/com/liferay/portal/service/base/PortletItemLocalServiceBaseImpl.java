@@ -310,6 +310,11 @@ public abstract class PortletItemLocalServiceBaseImpl
 			start, end);
 	}
 
+	public PortletItem getPortletItem(long portletItemId)
+		throws PortalException, SystemException {
+		return portletItemPersistence.findByPrimaryKey(portletItemId);
+	}
+
 	public PortletItem updatePortletItem(PortletItem portletItem)
 		throws SystemException {
 		portletItem.setNew(false);

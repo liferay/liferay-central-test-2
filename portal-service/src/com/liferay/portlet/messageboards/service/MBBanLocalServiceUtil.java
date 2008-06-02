@@ -92,6 +92,15 @@ public class MBBanLocalServiceUtil {
 		return mbBanLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBBan getMBBan(
+		long banId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
+		return mbBanLocalService.getMBBan(banId);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBBan updateMBBan(
 		com.liferay.portlet.messageboards.model.MBBan mbBan)
 		throws com.liferay.portal.SystemException {

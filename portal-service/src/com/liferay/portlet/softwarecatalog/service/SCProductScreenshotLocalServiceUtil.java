@@ -93,6 +93,15 @@ public class SCProductScreenshotLocalServiceUtil {
 			start, end);
 	}
 
+	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot getSCProductScreenshot(
+		long productScreenshotId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
+
+		return scProductScreenshotLocalService.getSCProductScreenshot(productScreenshotId);
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot updateSCProductScreenshot(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot)
 		throws com.liferay.portal.SystemException {

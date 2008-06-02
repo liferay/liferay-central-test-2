@@ -98,6 +98,11 @@ public abstract class TagsSourceLocalServiceBaseImpl
 			start, end);
 	}
 
+	public TagsSource getTagsSource(long sourceId)
+		throws PortalException, SystemException {
+		return tagsSourcePersistence.findByPrimaryKey(sourceId);
+	}
+
 	public TagsSource updateTagsSource(TagsSource tagsSource)
 		throws SystemException {
 		tagsSource.setNew(false);

@@ -91,6 +91,14 @@ public class RoleLocalServiceUtil {
 		return roleLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portal.model.Role getRole(long roleId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
+
+		return roleLocalService.getRole(roleId);
+	}
+
 	public static com.liferay.portal.model.Role updateRole(
 		com.liferay.portal.model.Role role)
 		throws com.liferay.portal.SystemException {
@@ -161,14 +169,6 @@ public class RoleLocalServiceUtil {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
 		return roleLocalService.getResourceRoles(companyId, name, scope, primKey);
-	}
-
-	public static com.liferay.portal.model.Role getRole(long roleId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
-
-		return roleLocalService.getRole(roleId);
 	}
 
 	public static com.liferay.portal.model.Role getRole(long companyId,

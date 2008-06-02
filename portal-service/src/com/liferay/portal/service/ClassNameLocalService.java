@@ -69,15 +69,15 @@ public interface ClassNameLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.ClassName getClassName(long classNameId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portal.model.ClassName updateClassName(
 		com.liferay.portal.model.ClassName className)
 		throws com.liferay.portal.SystemException;
 
 	public void checkClassNames()
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portal.model.ClassName getClassName(long classNameId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

@@ -83,6 +83,11 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 			start, end);
 	}
 
+	public RatingsStats getRatingsStats(long statsId)
+		throws PortalException, SystemException {
+		return ratingsStatsPersistence.findByPrimaryKey(statsId);
+	}
+
 	public RatingsStats updateRatingsStats(RatingsStats ratingsStats)
 		throws SystemException {
 		ratingsStats.setNew(false);

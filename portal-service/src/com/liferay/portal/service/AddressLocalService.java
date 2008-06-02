@@ -69,6 +69,10 @@ public interface AddressLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Address getAddress(long addressId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portal.model.Address updateAddress(
 		com.liferay.portal.model.Address address)
 		throws com.liferay.portal.SystemException;
@@ -83,10 +87,6 @@ public interface AddressLocalService {
 
 	public void deleteAddresses(long companyId, java.lang.String className,
 		long classPK) throws com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.Address getAddress(long addressId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.Address> getAddresses()
 		throws com.liferay.portal.SystemException;

@@ -115,6 +115,11 @@ public abstract class DLFileRankLocalServiceBaseImpl
 			start, end);
 	}
 
+	public DLFileRank getDLFileRank(long fileRankId)
+		throws PortalException, SystemException {
+		return dlFileRankPersistence.findByPrimaryKey(fileRankId);
+	}
+
 	public DLFileRank updateDLFileRank(DLFileRank dlFileRank)
 		throws SystemException {
 		dlFileRank.setNew(false);

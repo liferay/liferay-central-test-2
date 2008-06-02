@@ -157,6 +157,11 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 			start, end);
 	}
 
+	public BlogsEntry getBlogsEntry(long entryId)
+		throws PortalException, SystemException {
+		return blogsEntryPersistence.findByPrimaryKey(entryId);
+	}
+
 	public BlogsEntry updateBlogsEntry(BlogsEntry blogsEntry)
 		throws SystemException {
 		blogsEntry.setNew(false);

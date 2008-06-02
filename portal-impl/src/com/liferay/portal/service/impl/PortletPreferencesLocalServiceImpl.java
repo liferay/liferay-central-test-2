@@ -99,12 +99,6 @@ public class PortletPreferencesLocalServiceImpl
 		return portletPreferencesPersistence.findAll();
 	}
 
-	public List<PortletPreferences> getPortletPreferences(long plid)
-		throws SystemException {
-
-		return portletPreferencesPersistence.findByPlid(plid);
-	}
-
 	public List<PortletPreferences> getPortletPreferences(
 			long plid, String portletId)
 		throws SystemException {
@@ -126,6 +120,12 @@ public class PortletPreferencesLocalServiceImpl
 
 		return portletPreferencesPersistence.findByO_O_P_P(
 			ownerId, ownerType, plid, portletId);
+	}
+
+	public List<PortletPreferences> getPortletPreferencesByPlid(long plid)
+		throws SystemException {
+
+		return portletPreferencesPersistence.findByPlid(plid);
 	}
 
 	public javax.portlet.PortletPreferences getPreferences(

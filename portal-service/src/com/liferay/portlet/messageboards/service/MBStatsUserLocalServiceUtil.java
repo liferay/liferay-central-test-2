@@ -92,6 +92,15 @@ public class MBStatsUserLocalServiceUtil {
 		return mbStatsUserLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBStatsUser getMBStatsUser(
+		long statsUserId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
+		return mbStatsUserLocalService.getMBStatsUser(statsUserId);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBStatsUser updateMBStatsUser(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
 		throws com.liferay.portal.SystemException {

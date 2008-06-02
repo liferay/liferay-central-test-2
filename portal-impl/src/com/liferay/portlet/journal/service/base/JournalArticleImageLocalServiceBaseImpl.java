@@ -118,6 +118,11 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 			start, end);
 	}
 
+	public JournalArticleImage getJournalArticleImage(long articleImageId)
+		throws PortalException, SystemException {
+		return journalArticleImagePersistence.findByPrimaryKey(articleImageId);
+	}
+
 	public JournalArticleImage updateJournalArticleImage(
 		JournalArticleImage journalArticleImage) throws SystemException {
 		journalArticleImage.setNew(false);

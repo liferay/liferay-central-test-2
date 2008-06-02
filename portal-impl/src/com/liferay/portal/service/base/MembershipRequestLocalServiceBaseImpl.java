@@ -311,6 +311,11 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 			start, end);
 	}
 
+	public MembershipRequest getMembershipRequest(long membershipRequestId)
+		throws PortalException, SystemException {
+		return membershipRequestPersistence.findByPrimaryKey(membershipRequestId);
+	}
+
 	public MembershipRequest updateMembershipRequest(
 		MembershipRequest membershipRequest) throws SystemException {
 		membershipRequest.setNew(false);

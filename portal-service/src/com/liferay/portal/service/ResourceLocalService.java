@@ -69,6 +69,10 @@ public interface ResourceLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Resource getResource(long resourceId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portal.model.Resource updateResource(
 		com.liferay.portal.model.Resource resource)
 		throws com.liferay.portal.SystemException;
@@ -125,10 +129,6 @@ public interface ResourceLocalService {
 			com.liferay.portal.PortalException;
 
 	public long getLatestResourceId()
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portal.model.Resource getResource(long resourceId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

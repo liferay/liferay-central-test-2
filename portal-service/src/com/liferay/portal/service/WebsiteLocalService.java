@@ -69,6 +69,10 @@ public interface WebsiteLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Website getWebsite(long websiteId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portal.model.Website updateWebsite(
 		com.liferay.portal.model.Website website)
 		throws com.liferay.portal.SystemException;
@@ -81,10 +85,6 @@ public interface WebsiteLocalService {
 
 	public void deleteWebsites(long companyId, java.lang.String className,
 		long classPK) throws com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.Website getWebsite(long websiteId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.Website> getWebsites()
 		throws com.liferay.portal.SystemException;

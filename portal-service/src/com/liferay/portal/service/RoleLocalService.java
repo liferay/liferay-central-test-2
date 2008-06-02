@@ -69,6 +69,10 @@ public interface RoleLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Role getRole(long roleId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portal.model.Role updateRole(
 		com.liferay.portal.model.Role role)
 		throws com.liferay.portal.SystemException;
@@ -105,10 +109,6 @@ public interface RoleLocalService {
 	public java.util.Map<String, java.util.List<String>> getResourceRoles(
 		long companyId, java.lang.String name, int scope,
 		java.lang.String primKey) throws com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.Role getRole(long roleId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Role getRole(long companyId,
 		java.lang.String name)

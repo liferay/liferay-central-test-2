@@ -92,6 +92,14 @@ public class OrgLaborLocalServiceUtil {
 		return orgLaborLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portal.model.OrgLabor getOrgLabor(long orgLaborId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
+		return orgLaborLocalService.getOrgLabor(orgLaborId);
+	}
+
 	public static com.liferay.portal.model.OrgLabor updateOrgLabor(
 		com.liferay.portal.model.OrgLabor orgLabor)
 		throws com.liferay.portal.SystemException {
@@ -112,14 +120,6 @@ public class OrgLaborLocalServiceUtil {
 		return orgLaborLocalService.addOrgLabor(organizationId, typeId,
 			sunOpen, sunClose, monOpen, monClose, tueOpen, tueClose, wedOpen,
 			wedClose, thuOpen, thuClose, friOpen, friClose, satOpen, satClose);
-	}
-
-	public static com.liferay.portal.model.OrgLabor getOrgLabor(long orgLaborId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
-
-		return orgLaborLocalService.getOrgLabor(orgLaborId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.OrgLabor> getOrgLabors(

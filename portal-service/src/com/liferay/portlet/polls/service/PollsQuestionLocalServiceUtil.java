@@ -93,6 +93,15 @@ public class PollsQuestionLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portlet.polls.model.PollsQuestion getPollsQuestion(
+		long questionId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
+		return pollsQuestionLocalService.getPollsQuestion(questionId);
+	}
+
 	public static com.liferay.portlet.polls.model.PollsQuestion updatePollsQuestion(
 		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion)
 		throws com.liferay.portal.SystemException {

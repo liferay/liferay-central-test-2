@@ -135,6 +135,11 @@ public abstract class JournalTemplateLocalServiceBaseImpl
 			start, end);
 	}
 
+	public JournalTemplate getJournalTemplate(long id)
+		throws PortalException, SystemException {
+		return journalTemplatePersistence.findByPrimaryKey(id);
+	}
+
 	public JournalTemplate updateJournalTemplate(
 		JournalTemplate journalTemplate) throws SystemException {
 		journalTemplate.setNew(false);

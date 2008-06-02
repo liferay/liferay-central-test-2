@@ -93,6 +93,15 @@ public class MembershipRequestLocalServiceUtil {
 			start, end);
 	}
 
+	public static com.liferay.portal.model.MembershipRequest getMembershipRequest(
+		long membershipRequestId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
+
+		return membershipRequestLocalService.getMembershipRequest(membershipRequestId);
+	}
+
 	public static com.liferay.portal.model.MembershipRequest updateMembershipRequest(
 		com.liferay.portal.model.MembershipRequest membershipRequest)
 		throws com.liferay.portal.SystemException {
@@ -109,15 +118,6 @@ public class MembershipRequestLocalServiceUtil {
 
 		return membershipRequestLocalService.addMembershipRequest(userId,
 			groupId, comments);
-	}
-
-	public static com.liferay.portal.model.MembershipRequest getMembershipRequest(
-		long membershipRequestId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		return membershipRequestLocalService.getMembershipRequest(membershipRequestId);
 	}
 
 	public static void deleteMembershipRequests(long groupId)

@@ -93,6 +93,15 @@ public class DLFileShortcutLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut getDLFileShortcut(
+		long fileShortcutId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
+		return dlFileShortcutLocalService.getDLFileShortcut(fileShortcutId);
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut updateDLFileShortcut(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut)
 		throws com.liferay.portal.SystemException {

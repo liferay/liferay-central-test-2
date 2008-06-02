@@ -118,6 +118,10 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 			end);
 	}
 
+	public MBBan getMBBan(long banId) throws PortalException, SystemException {
+		return mbBanPersistence.findByPrimaryKey(banId);
+	}
+
 	public MBBan updateMBBan(MBBan mbBan) throws SystemException {
 		mbBan.setNew(false);
 

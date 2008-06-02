@@ -93,6 +93,15 @@ public class RatingsStatsLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portlet.ratings.model.RatingsStats getRatingsStats(
+		long statsId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		RatingsStatsLocalService ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getService();
+
+		return ratingsStatsLocalService.getRatingsStats(statsId);
+	}
+
 	public static com.liferay.portlet.ratings.model.RatingsStats updateRatingsStats(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats)
 		throws com.liferay.portal.SystemException {

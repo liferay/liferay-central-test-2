@@ -91,19 +91,19 @@ public class ContactLocalServiceUtil {
 		return contactLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
-	public static com.liferay.portal.model.Contact updateContact(
-		com.liferay.portal.model.Contact contact)
-		throws com.liferay.portal.SystemException {
-		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
-
-		return contactLocalService.updateContact(contact);
-	}
-
 	public static com.liferay.portal.model.Contact getContact(long contactId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
 
 		return contactLocalService.getContact(contactId);
+	}
+
+	public static com.liferay.portal.model.Contact updateContact(
+		com.liferay.portal.model.Contact contact)
+		throws com.liferay.portal.SystemException {
+		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
+		return contactLocalService.updateContact(contact);
 	}
 }

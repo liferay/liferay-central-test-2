@@ -92,6 +92,15 @@ public class TagsSourceLocalServiceUtil {
 		return tagsSourceLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portlet.tags.model.TagsSource getTagsSource(
+		long sourceId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+
+		return tagsSourceLocalService.getTagsSource(sourceId);
+	}
+
 	public static com.liferay.portlet.tags.model.TagsSource updateTagsSource(
 		com.liferay.portlet.tags.model.TagsSource tagsSource)
 		throws com.liferay.portal.SystemException {

@@ -93,6 +93,15 @@ public class ShoppingOrderItemLocalServiceUtil {
 			start, end);
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingOrderItem getShoppingOrderItem(
+		long orderItemId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
+
+		return shoppingOrderItemLocalService.getShoppingOrderItem(orderItemId);
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingOrderItem updateShoppingOrderItem(
 		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem)
 		throws com.liferay.portal.SystemException {

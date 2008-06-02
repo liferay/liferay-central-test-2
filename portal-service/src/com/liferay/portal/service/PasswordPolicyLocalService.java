@@ -70,6 +70,11 @@ public interface PasswordPolicyLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.PasswordPolicy getPasswordPolicy(
+		long passwordPolicyId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portal.model.PasswordPolicy updatePasswordPolicy(
 		com.liferay.portal.model.PasswordPolicy passwordPolicy)
 		throws com.liferay.portal.SystemException;
@@ -91,11 +96,6 @@ public interface PasswordPolicyLocalService {
 
 	public com.liferay.portal.model.PasswordPolicy getDefaultPasswordPolicy(
 		long companyId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portal.model.PasswordPolicy getPasswordPolicy(
-		long passwordPolicyId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

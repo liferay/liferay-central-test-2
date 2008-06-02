@@ -70,6 +70,11 @@ public interface EmailAddressLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.EmailAddress getEmailAddress(
+		long emailAddressId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portal.model.EmailAddress updateEmailAddress(
 		com.liferay.portal.model.EmailAddress emailAddress)
 		throws com.liferay.portal.SystemException;
@@ -83,11 +88,6 @@ public interface EmailAddressLocalService {
 	public void deleteEmailAddresses(long companyId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.EmailAddress getEmailAddress(
-		long emailAddressId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.EmailAddress> getEmailAddresses()
 		throws com.liferay.portal.SystemException;

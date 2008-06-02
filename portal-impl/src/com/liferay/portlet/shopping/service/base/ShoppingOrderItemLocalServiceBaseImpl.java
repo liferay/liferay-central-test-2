@@ -114,6 +114,11 @@ public abstract class ShoppingOrderItemLocalServiceBaseImpl
 			start, end);
 	}
 
+	public ShoppingOrderItem getShoppingOrderItem(long orderItemId)
+		throws PortalException, SystemException {
+		return shoppingOrderItemPersistence.findByPrimaryKey(orderItemId);
+	}
+
 	public ShoppingOrderItem updateShoppingOrderItem(
 		ShoppingOrderItem shoppingOrderItem) throws SystemException {
 		shoppingOrderItem.setNew(false);

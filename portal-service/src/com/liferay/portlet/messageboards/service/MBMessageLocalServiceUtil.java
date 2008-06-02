@@ -92,6 +92,15 @@ public class MBMessageLocalServiceUtil {
 		return mbMessageLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMessage getMBMessage(
+		long messageId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getMBMessage(messageId);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMBMessage(
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage)
 		throws com.liferay.portal.SystemException {

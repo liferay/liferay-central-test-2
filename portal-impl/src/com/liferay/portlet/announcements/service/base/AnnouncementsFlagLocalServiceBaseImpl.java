@@ -91,6 +91,11 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 			start, end);
 	}
 
+	public AnnouncementsFlag getAnnouncementsFlag(long flagId)
+		throws PortalException, SystemException {
+		return announcementsFlagPersistence.findByPrimaryKey(flagId);
+	}
+
 	public AnnouncementsFlag updateAnnouncementsFlag(
 		AnnouncementsFlag announcementsFlag) throws SystemException {
 		announcementsFlag.setNew(false);

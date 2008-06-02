@@ -95,6 +95,11 @@ public abstract class ExpandoRowLocalServiceBaseImpl
 			start, end);
 	}
 
+	public ExpandoRow getExpandoRow(long rowId)
+		throws PortalException, SystemException {
+		return expandoRowPersistence.findByPrimaryKey(rowId);
+	}
+
 	public ExpandoRow updateExpandoRow(ExpandoRow expandoRow)
 		throws SystemException {
 		expandoRow.setNew(false);

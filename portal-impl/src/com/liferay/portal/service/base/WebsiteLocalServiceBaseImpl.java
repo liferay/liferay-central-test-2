@@ -307,6 +307,11 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 			end);
 	}
 
+	public Website getWebsite(long websiteId)
+		throws PortalException, SystemException {
+		return websitePersistence.findByPrimaryKey(websiteId);
+	}
+
 	public Website updateWebsite(Website website) throws SystemException {
 		website.setNew(false);
 

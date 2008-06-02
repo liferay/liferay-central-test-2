@@ -99,6 +99,11 @@ public abstract class SocialActivityLocalServiceBaseImpl
 			start, end);
 	}
 
+	public SocialActivity getSocialActivity(long activityId)
+		throws PortalException, SystemException {
+		return socialActivityPersistence.findByPrimaryKey(activityId);
+	}
+
 	public SocialActivity updateSocialActivity(SocialActivity socialActivity)
 		throws SystemException {
 		socialActivity.setNew(false);

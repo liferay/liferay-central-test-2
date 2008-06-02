@@ -306,6 +306,10 @@ public abstract class PortletLocalServiceBaseImpl implements PortletLocalService
 			end);
 	}
 
+	public Portlet getPortlet(long id) throws PortalException, SystemException {
+		return portletPersistence.findByPrimaryKey(id);
+	}
+
 	public Portlet updatePortlet(Portlet portlet) throws SystemException {
 		portlet.setNew(false);
 

@@ -95,6 +95,11 @@ public abstract class ExpandoColumnLocalServiceBaseImpl
 			start, end);
 	}
 
+	public ExpandoColumn getExpandoColumn(long columnId)
+		throws PortalException, SystemException {
+		return expandoColumnPersistence.findByPrimaryKey(columnId);
+	}
+
 	public ExpandoColumn updateExpandoColumn(ExpandoColumn expandoColumn)
 		throws SystemException {
 		expandoColumn.setNew(false);

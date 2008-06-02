@@ -91,6 +91,14 @@ public class PhoneLocalServiceUtil {
 		return phoneLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portal.model.Phone getPhone(long phoneId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
+		return phoneLocalService.getPhone(phoneId);
+	}
+
 	public static com.liferay.portal.model.Phone updatePhone(
 		com.liferay.portal.model.Phone phone)
 		throws com.liferay.portal.SystemException {
@@ -115,14 +123,6 @@ public class PhoneLocalServiceUtil {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
 
 		phoneLocalService.deletePhones(companyId, className, classPK);
-	}
-
-	public static com.liferay.portal.model.Phone getPhone(long phoneId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		return phoneLocalService.getPhone(phoneId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Phone> getPhones()

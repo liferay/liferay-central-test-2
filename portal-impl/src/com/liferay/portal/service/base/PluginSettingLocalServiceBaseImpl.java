@@ -308,6 +308,11 @@ public abstract class PluginSettingLocalServiceBaseImpl
 			start, end);
 	}
 
+	public PluginSetting getPluginSetting(long pluginSettingId)
+		throws PortalException, SystemException {
+		return pluginSettingPersistence.findByPrimaryKey(pluginSettingId);
+	}
+
 	public PluginSetting updatePluginSetting(PluginSetting pluginSetting)
 		throws SystemException {
 		pluginSetting.setNew(false);

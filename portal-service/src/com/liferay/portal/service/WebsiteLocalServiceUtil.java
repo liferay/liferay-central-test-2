@@ -91,6 +91,14 @@ public class WebsiteLocalServiceUtil {
 		return websiteLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portal.model.Website getWebsite(long websiteId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
+
+		return websiteLocalService.getWebsite(websiteId);
+	}
+
 	public static com.liferay.portal.model.Website updateWebsite(
 		com.liferay.portal.model.Website website)
 		throws com.liferay.portal.SystemException {
@@ -116,14 +124,6 @@ public class WebsiteLocalServiceUtil {
 		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
 
 		websiteLocalService.deleteWebsites(companyId, className, classPK);
-	}
-
-	public static com.liferay.portal.model.Website getWebsite(long websiteId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-
-		return websiteLocalService.getWebsite(websiteId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Website> getWebsites()

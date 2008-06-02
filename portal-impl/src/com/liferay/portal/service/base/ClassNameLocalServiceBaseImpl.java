@@ -308,6 +308,11 @@ public abstract class ClassNameLocalServiceBaseImpl
 			start, end);
 	}
 
+	public ClassName getClassName(long classNameId)
+		throws PortalException, SystemException {
+		return classNamePersistence.findByPrimaryKey(classNameId);
+	}
+
 	public ClassName updateClassName(ClassName className)
 		throws SystemException {
 		className.setNew(false);

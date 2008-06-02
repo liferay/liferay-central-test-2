@@ -91,20 +91,20 @@ public class ImageLocalServiceUtil {
 		return imageLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
-	public static com.liferay.portal.model.Image updateImage(
-		com.liferay.portal.model.Image image)
-		throws com.liferay.portal.SystemException {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		return imageLocalService.updateImage(image);
-	}
-
 	public static com.liferay.portal.model.Image getImage(long imageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
 
 		return imageLocalService.getImage(imageId);
+	}
+
+	public static com.liferay.portal.model.Image updateImage(
+		com.liferay.portal.model.Image image)
+		throws com.liferay.portal.SystemException {
+		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
+
+		return imageLocalService.updateImage(image);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Image> getImages()

@@ -447,6 +447,10 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 			end);
 	}
 
+	public Group getGroup(long groupId) throws PortalException, SystemException {
+		return groupPersistence.findByPrimaryKey(groupId);
+	}
+
 	public Group updateGroup(Group group) throws SystemException {
 		group.setNew(false);
 

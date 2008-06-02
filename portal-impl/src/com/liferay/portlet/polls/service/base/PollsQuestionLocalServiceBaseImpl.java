@@ -105,6 +105,11 @@ public abstract class PollsQuestionLocalServiceBaseImpl
 			start, end);
 	}
 
+	public PollsQuestion getPollsQuestion(long questionId)
+		throws PortalException, SystemException {
+		return pollsQuestionPersistence.findByPrimaryKey(questionId);
+	}
+
 	public PollsQuestion updatePollsQuestion(PollsQuestion pollsQuestion)
 		throws SystemException {
 		pollsQuestion.setNew(false);

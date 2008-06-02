@@ -93,6 +93,15 @@ public class AnnouncementsFlagLocalServiceUtil {
 			start, end);
 	}
 
+	public static com.liferay.portlet.announcements.model.AnnouncementsFlag getAnnouncementsFlag(
+		long flagId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
+
+		return announcementsFlagLocalService.getAnnouncementsFlag(flagId);
+	}
+
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag updateAnnouncementsFlag(
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag)
 		throws com.liferay.portal.SystemException {

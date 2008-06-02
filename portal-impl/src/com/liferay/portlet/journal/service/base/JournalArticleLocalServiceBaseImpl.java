@@ -176,6 +176,11 @@ public abstract class JournalArticleLocalServiceBaseImpl
 			start, end);
 	}
 
+	public JournalArticle getJournalArticle(long id)
+		throws PortalException, SystemException {
+		return journalArticlePersistence.findByPrimaryKey(id);
+	}
+
 	public JournalArticle updateJournalArticle(JournalArticle journalArticle)
 		throws SystemException {
 		journalArticle.setNew(false);

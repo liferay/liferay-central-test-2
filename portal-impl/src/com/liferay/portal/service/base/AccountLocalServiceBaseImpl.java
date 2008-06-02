@@ -302,6 +302,11 @@ public abstract class AccountLocalServiceBaseImpl implements AccountLocalService
 			end);
 	}
 
+	public Account getAccount(long accountId)
+		throws PortalException, SystemException {
+		return accountPersistence.findByPrimaryKey(accountId);
+	}
+
 	public Account updateAccount(Account account) throws SystemException {
 		account.setNew(false);
 

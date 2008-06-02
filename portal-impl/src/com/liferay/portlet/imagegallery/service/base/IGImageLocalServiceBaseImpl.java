@@ -108,6 +108,11 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 			end);
 	}
 
+	public IGImage getIGImage(long imageId)
+		throws PortalException, SystemException {
+		return igImagePersistence.findByPrimaryKey(imageId);
+	}
+
 	public IGImage updateIGImage(IGImage igImage) throws SystemException {
 		igImage.setNew(false);
 

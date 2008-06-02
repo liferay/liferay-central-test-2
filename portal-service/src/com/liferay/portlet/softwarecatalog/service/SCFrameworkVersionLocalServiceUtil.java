@@ -93,6 +93,15 @@ public class SCFrameworkVersionLocalServiceUtil {
 			start, end);
 	}
 
+	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion getSCFrameworkVersion(
+		long frameworkVersionId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
+		return scFrameworkVersionLocalService.getSCFrameworkVersion(frameworkVersionId);
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion updateSCFrameworkVersion(
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion)
 		throws com.liferay.portal.SystemException {

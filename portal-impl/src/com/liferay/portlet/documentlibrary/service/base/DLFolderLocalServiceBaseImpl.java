@@ -137,6 +137,11 @@ public abstract class DLFolderLocalServiceBaseImpl
 			start, end);
 	}
 
+	public DLFolder getDLFolder(long folderId)
+		throws PortalException, SystemException {
+		return dlFolderPersistence.findByPrimaryKey(folderId);
+	}
+
 	public DLFolder updateDLFolder(DLFolder dlFolder) throws SystemException {
 		dlFolder.setNew(false);
 

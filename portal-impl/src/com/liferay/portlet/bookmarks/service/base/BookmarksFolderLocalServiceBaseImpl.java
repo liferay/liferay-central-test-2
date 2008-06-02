@@ -109,6 +109,11 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 			start, end);
 	}
 
+	public BookmarksFolder getBookmarksFolder(long folderId)
+		throws PortalException, SystemException {
+		return bookmarksFolderPersistence.findByPrimaryKey(folderId);
+	}
+
 	public BookmarksFolder updateBookmarksFolder(
 		BookmarksFolder bookmarksFolder) throws SystemException {
 		bookmarksFolder.setNew(false);

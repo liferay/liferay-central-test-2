@@ -111,6 +111,11 @@ public abstract class TagsPropertyLocalServiceBaseImpl
 			start, end);
 	}
 
+	public TagsProperty getTagsProperty(long propertyId)
+		throws PortalException, SystemException {
+		return tagsPropertyPersistence.findByPrimaryKey(propertyId);
+	}
+
 	public TagsProperty updateTagsProperty(TagsProperty tagsProperty)
 		throws SystemException {
 		tagsProperty.setNew(false);

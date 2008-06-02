@@ -310,6 +310,11 @@ public abstract class PasswordTrackerLocalServiceBaseImpl
 			start, end);
 	}
 
+	public PasswordTracker getPasswordTracker(long passwordTrackerId)
+		throws PortalException, SystemException {
+		return passwordTrackerPersistence.findByPrimaryKey(passwordTrackerId);
+	}
+
 	public PasswordTracker updatePasswordTracker(
 		PasswordTracker passwordTracker) throws SystemException {
 		passwordTracker.setNew(false);

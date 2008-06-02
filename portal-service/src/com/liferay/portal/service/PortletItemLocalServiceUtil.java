@@ -92,6 +92,15 @@ public class PortletItemLocalServiceUtil {
 		return portletItemLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portal.model.PortletItem getPortletItem(
+		long portletItemId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
+
+		return portletItemLocalService.getPortletItem(portletItemId);
+	}
+
 	public static com.liferay.portal.model.PortletItem updatePortletItem(
 		com.liferay.portal.model.PortletItem portletItem)
 		throws com.liferay.portal.SystemException {
@@ -109,15 +118,6 @@ public class PortletItemLocalServiceUtil {
 
 		return portletItemLocalService.addPortletItem(userId, groupId, name,
 			portletId, className);
-	}
-
-	public static com.liferay.portal.model.PortletItem getPortletItem(
-		long portletItemId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
-
-		return portletItemLocalService.getPortletItem(portletItemId);
 	}
 
 	public static com.liferay.portal.model.PortletItem getPortletItem(

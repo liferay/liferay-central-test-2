@@ -92,6 +92,15 @@ public class CalEventLocalServiceUtil {
 		return calEventLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portlet.calendar.model.CalEvent getCalEvent(
+		long eventId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
+		return calEventLocalService.getCalEvent(eventId);
+	}
+
 	public static com.liferay.portlet.calendar.model.CalEvent updateCalEvent(
 		com.liferay.portlet.calendar.model.CalEvent calEvent)
 		throws com.liferay.portal.SystemException {

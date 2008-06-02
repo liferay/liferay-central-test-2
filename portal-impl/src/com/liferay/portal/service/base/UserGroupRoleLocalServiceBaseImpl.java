@@ -304,6 +304,11 @@ public abstract class UserGroupRoleLocalServiceBaseImpl
 			start, end);
 	}
 
+	public UserGroupRole getUserGroupRole(UserGroupRolePK userGroupRolePK)
+		throws PortalException, SystemException {
+		return userGroupRolePersistence.findByPrimaryKey(userGroupRolePK);
+	}
+
 	public UserGroupRole updateUserGroupRole(UserGroupRole userGroupRole)
 		throws SystemException {
 		userGroupRole.setNew(false);

@@ -91,6 +91,11 @@ public abstract class PollsChoiceLocalServiceBaseImpl
 			start, end);
 	}
 
+	public PollsChoice getPollsChoice(long choiceId)
+		throws PortalException, SystemException {
+		return pollsChoicePersistence.findByPrimaryKey(choiceId);
+	}
+
 	public PollsChoice updatePollsChoice(PollsChoice pollsChoice)
 		throws SystemException {
 		pollsChoice.setNew(false);

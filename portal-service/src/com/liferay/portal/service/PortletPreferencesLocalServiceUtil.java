@@ -93,6 +93,15 @@ public class PortletPreferencesLocalServiceUtil {
 			start, end);
 	}
 
+	public static com.liferay.portal.model.PortletPreferences getPortletPreferences(
+		long portletPreferencesId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
+		return portletPreferencesLocalService.getPortletPreferences(portletPreferencesId);
+	}
+
 	public static com.liferay.portal.model.PortletPreferences updatePortletPreferences(
 		com.liferay.portal.model.PortletPreferences portletPreferences)
 		throws com.liferay.portal.SystemException {
@@ -139,13 +148,6 @@ public class PortletPreferencesLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferences(
-		long plid) throws com.liferay.portal.SystemException {
-		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
-
-		return portletPreferencesLocalService.getPortletPreferences(plid);
-	}
-
-	public static java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferences(
 		long plid, java.lang.String portletId)
 		throws com.liferay.portal.SystemException {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
@@ -172,6 +174,13 @@ public class PortletPreferencesLocalServiceUtil {
 
 		return portletPreferencesLocalService.getPortletPreferences(ownerId,
 			ownerType, plid, portletId);
+	}
+
+	public static java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferencesByPlid(
+		long plid) throws com.liferay.portal.SystemException {
+		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
+		return portletPreferencesLocalService.getPortletPreferencesByPlid(plid);
 	}
 
 	public static javax.portlet.PortletPreferences getPreferences(

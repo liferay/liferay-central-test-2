@@ -116,6 +116,11 @@ public abstract class IGFolderLocalServiceBaseImpl
 			start, end);
 	}
 
+	public IGFolder getIGFolder(long folderId)
+		throws PortalException, SystemException {
+		return igFolderPersistence.findByPrimaryKey(folderId);
+	}
+
 	public IGFolder updateIGFolder(IGFolder igFolder) throws SystemException {
 		igFolder.setNew(false);
 

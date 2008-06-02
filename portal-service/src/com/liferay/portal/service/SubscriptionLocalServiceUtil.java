@@ -93,6 +93,15 @@ public class SubscriptionLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portal.model.Subscription getSubscription(
+		long subscriptionId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+
+		return subscriptionLocalService.getSubscription(subscriptionId);
+	}
+
 	public static com.liferay.portal.model.Subscription updateSubscription(
 		com.liferay.portal.model.Subscription subscription)
 		throws com.liferay.portal.SystemException {

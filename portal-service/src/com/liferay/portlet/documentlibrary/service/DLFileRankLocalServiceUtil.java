@@ -92,6 +92,15 @@ public class DLFileRankLocalServiceUtil {
 		return dlFileRankLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileRank getDLFileRank(
+		long fileRankId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
+		return dlFileRankLocalService.getDLFileRank(fileRankId);
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank updateDLFileRank(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
 		throws com.liferay.portal.SystemException {

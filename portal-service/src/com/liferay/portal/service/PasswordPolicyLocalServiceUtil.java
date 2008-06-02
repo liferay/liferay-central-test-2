@@ -93,6 +93,15 @@ public class PasswordPolicyLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portal.model.PasswordPolicy getPasswordPolicy(
+		long passwordPolicyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
+
+		return passwordPolicyLocalService.getPasswordPolicy(passwordPolicyId);
+	}
+
 	public static com.liferay.portal.model.PasswordPolicy updatePasswordPolicy(
 		com.liferay.portal.model.PasswordPolicy passwordPolicy)
 		throws com.liferay.portal.SystemException {
@@ -135,15 +144,6 @@ public class PasswordPolicyLocalServiceUtil {
 		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
 
 		return passwordPolicyLocalService.getDefaultPasswordPolicy(companyId);
-	}
-
-	public static com.liferay.portal.model.PasswordPolicy getPasswordPolicy(
-		long passwordPolicyId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
-
-		return passwordPolicyLocalService.getPasswordPolicy(passwordPolicyId);
 	}
 
 	public static com.liferay.portal.model.PasswordPolicy getPasswordPolicy(

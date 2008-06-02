@@ -92,6 +92,15 @@ public class DLFolderLocalServiceUtil {
 		return dlFolderLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFolder getDLFolder(
+		long folderId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		return dlFolderLocalService.getDLFolder(folderId);
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFolder updateDLFolder(
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder)
 		throws com.liferay.portal.SystemException {

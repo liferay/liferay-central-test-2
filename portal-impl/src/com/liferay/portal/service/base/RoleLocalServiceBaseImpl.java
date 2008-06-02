@@ -303,6 +303,10 @@ public abstract class RoleLocalServiceBaseImpl implements RoleLocalService,
 		return rolePersistence.findWithDynamicQuery(queryInitializer, start, end);
 	}
 
+	public Role getRole(long roleId) throws PortalException, SystemException {
+		return rolePersistence.findByPrimaryKey(roleId);
+	}
+
 	public Role updateRole(Role role) throws SystemException {
 		role.setNew(false);
 

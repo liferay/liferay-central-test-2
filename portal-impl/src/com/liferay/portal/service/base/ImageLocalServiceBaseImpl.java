@@ -303,6 +303,10 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService,
 			end);
 	}
 
+	public Image getImage(long imageId) throws PortalException, SystemException {
+		return imagePersistence.findByPrimaryKey(imageId);
+	}
+
 	public Image updateImage(Image image) throws SystemException {
 		image.setNew(false);
 

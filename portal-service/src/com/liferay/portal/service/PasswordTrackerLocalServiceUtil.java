@@ -93,6 +93,15 @@ public class PasswordTrackerLocalServiceUtil {
 			start, end);
 	}
 
+	public static com.liferay.portal.model.PasswordTracker getPasswordTracker(
+		long passwordTrackerId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
+
+		return passwordTrackerLocalService.getPasswordTracker(passwordTrackerId);
+	}
+
 	public static com.liferay.portal.model.PasswordTracker updatePasswordTracker(
 		com.liferay.portal.model.PasswordTracker passwordTracker)
 		throws com.liferay.portal.SystemException {

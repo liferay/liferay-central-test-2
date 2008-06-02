@@ -99,6 +99,11 @@ public abstract class TasksReviewLocalServiceBaseImpl
 			start, end);
 	}
 
+	public TasksReview getTasksReview(long reviewId)
+		throws PortalException, SystemException {
+		return tasksReviewPersistence.findByPrimaryKey(reviewId);
+	}
+
 	public TasksReview updateTasksReview(TasksReview tasksReview)
 		throws SystemException {
 		tasksReview.setNew(false);

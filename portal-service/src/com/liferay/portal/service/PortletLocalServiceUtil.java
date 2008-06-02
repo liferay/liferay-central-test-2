@@ -91,6 +91,14 @@ public class PortletLocalServiceUtil {
 		return portletLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portal.model.Portlet getPortlet(long id)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+
+		return portletLocalService.getPortlet(id);
+	}
+
 	public static com.liferay.portal.model.Portlet updatePortlet(
 		com.liferay.portal.model.Portlet portlet)
 		throws com.liferay.portal.SystemException {

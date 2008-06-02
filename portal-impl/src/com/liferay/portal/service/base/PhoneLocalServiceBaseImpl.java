@@ -306,6 +306,10 @@ public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService,
 			end);
 	}
 
+	public Phone getPhone(long phoneId) throws PortalException, SystemException {
+		return phonePersistence.findByPrimaryKey(phoneId);
+	}
+
 	public Phone updatePhone(Phone phone) throws SystemException {
 		phone.setNew(false);
 

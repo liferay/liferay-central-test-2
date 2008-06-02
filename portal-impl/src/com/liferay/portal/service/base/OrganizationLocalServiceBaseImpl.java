@@ -308,6 +308,11 @@ public abstract class OrganizationLocalServiceBaseImpl
 			start, end);
 	}
 
+	public Organization getOrganization(long organizationId)
+		throws PortalException, SystemException {
+		return organizationPersistence.findByPrimaryKey(organizationId);
+	}
+
 	public Organization updateOrganization(Organization organization)
 		throws SystemException {
 		organization.setNew(false);

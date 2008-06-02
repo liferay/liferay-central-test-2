@@ -92,6 +92,15 @@ public class PollsChoiceLocalServiceUtil {
 		return pollsChoiceLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portlet.polls.model.PollsChoice getPollsChoice(
+		long choiceId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
+
+		return pollsChoiceLocalService.getPollsChoice(choiceId);
+	}
+
 	public static com.liferay.portlet.polls.model.PollsChoice updatePollsChoice(
 		com.liferay.portlet.polls.model.PollsChoice pollsChoice)
 		throws com.liferay.portal.SystemException {

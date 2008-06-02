@@ -97,6 +97,11 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 			start, end);
 	}
 
+	public SCProductScreenshot getSCProductScreenshot(long productScreenshotId)
+		throws PortalException, SystemException {
+		return scProductScreenshotPersistence.findByPrimaryKey(productScreenshotId);
+	}
+
 	public SCProductScreenshot updateSCProductScreenshot(
 		SCProductScreenshot scProductScreenshot) throws SystemException {
 		scProductScreenshot.setNew(false);

@@ -310,6 +310,11 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 			start, end);
 	}
 
+	public ResourceCode getResourceCode(long codeId)
+		throws PortalException, SystemException {
+		return resourceCodePersistence.findByPrimaryKey(codeId);
+	}
+
 	public ResourceCode updateResourceCode(ResourceCode resourceCode)
 		throws SystemException {
 		resourceCode.setNew(false);

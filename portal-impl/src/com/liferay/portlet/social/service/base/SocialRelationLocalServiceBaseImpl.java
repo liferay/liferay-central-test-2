@@ -99,6 +99,11 @@ public abstract class SocialRelationLocalServiceBaseImpl
 			start, end);
 	}
 
+	public SocialRelation getSocialRelation(long relationId)
+		throws PortalException, SystemException {
+		return socialRelationPersistence.findByPrimaryKey(relationId);
+	}
+
 	public SocialRelation updateSocialRelation(SocialRelation socialRelation)
 		throws SystemException {
 		socialRelation.setNew(false);

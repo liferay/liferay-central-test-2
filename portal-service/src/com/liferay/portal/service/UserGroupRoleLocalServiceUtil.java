@@ -94,6 +94,15 @@ public class UserGroupRoleLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portal.model.UserGroupRole getUserGroupRole(
+		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
+
+		return userGroupRoleLocalService.getUserGroupRole(userGroupRolePK);
+	}
+
 	public static com.liferay.portal.model.UserGroupRole updateUserGroupRole(
 		com.liferay.portal.model.UserGroupRole userGroupRole)
 		throws com.liferay.portal.SystemException {

@@ -114,6 +114,11 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 			start, end);
 	}
 
+	public ShoppingItemPrice getShoppingItemPrice(long itemPriceId)
+		throws PortalException, SystemException {
+		return shoppingItemPricePersistence.findByPrimaryKey(itemPriceId);
+	}
+
 	public ShoppingItemPrice updateShoppingItemPrice(
 		ShoppingItemPrice shoppingItemPrice) throws SystemException {
 		shoppingItemPrice.setNew(false);

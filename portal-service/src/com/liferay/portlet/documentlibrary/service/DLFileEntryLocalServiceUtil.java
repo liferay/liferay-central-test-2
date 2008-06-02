@@ -92,6 +92,15 @@ public class DLFileEntryLocalServiceUtil {
 		return dlFileEntryLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getDLFileEntry(
+		long fileEntryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
+		return dlFileEntryLocalService.getDLFileEntry(fileEntryId);
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateDLFileEntry(
 		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry)
 		throws com.liferay.portal.SystemException {

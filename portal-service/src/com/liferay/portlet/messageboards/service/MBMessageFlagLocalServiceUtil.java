@@ -93,6 +93,15 @@ public class MBMessageFlagLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMessageFlag getMBMessageFlag(
+		long messageFlagId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
+		return mbMessageFlagLocalService.getMBMessageFlag(messageFlagId);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag updateMBMessageFlag(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
 		throws com.liferay.portal.SystemException {

@@ -93,6 +93,15 @@ public class ShoppingCouponLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingCoupon getShoppingCoupon(
+		long couponId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+
+		return shoppingCouponLocalService.getShoppingCoupon(couponId);
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon updateShoppingCoupon(
 		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon)
 		throws com.liferay.portal.SystemException {

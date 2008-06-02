@@ -92,6 +92,15 @@ public class TasksReviewLocalServiceUtil {
 		return tasksReviewLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portlet.tasks.model.TasksReview getTasksReview(
+		long reviewId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
+
+		return tasksReviewLocalService.getTasksReview(reviewId);
+	}
+
 	public static com.liferay.portlet.tasks.model.TasksReview updateTasksReview(
 		com.liferay.portlet.tasks.model.TasksReview tasksReview)
 		throws com.liferay.portal.SystemException {

@@ -95,6 +95,11 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 			start, end);
 	}
 
+	public BlogsStatsUser getBlogsStatsUser(long statsUserId)
+		throws PortalException, SystemException {
+		return blogsStatsUserPersistence.findByPrimaryKey(statsUserId);
+	}
+
 	public BlogsStatsUser updateBlogsStatsUser(BlogsStatsUser blogsStatsUser)
 		throws SystemException {
 		blogsStatsUser.setNew(false);

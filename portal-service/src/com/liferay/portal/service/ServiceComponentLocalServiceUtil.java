@@ -93,6 +93,15 @@ public class ServiceComponentLocalServiceUtil {
 			start, end);
 	}
 
+	public static com.liferay.portal.model.ServiceComponent getServiceComponent(
+		long serviceComponentId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
+
+		return serviceComponentLocalService.getServiceComponent(serviceComponentId);
+	}
+
 	public static com.liferay.portal.model.ServiceComponent updateServiceComponent(
 		com.liferay.portal.model.ServiceComponent serviceComponent)
 		throws com.liferay.portal.SystemException {

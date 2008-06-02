@@ -115,6 +115,11 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 			start, end);
 	}
 
+	public MBStatsUser getMBStatsUser(long statsUserId)
+		throws PortalException, SystemException {
+		return mbStatsUserPersistence.findByPrimaryKey(statsUserId);
+	}
+
 	public MBStatsUser updateMBStatsUser(MBStatsUser mbStatsUser)
 		throws SystemException {
 		mbStatsUser.setNew(false);

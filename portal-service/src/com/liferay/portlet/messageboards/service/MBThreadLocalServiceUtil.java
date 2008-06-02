@@ -92,6 +92,15 @@ public class MBThreadLocalServiceUtil {
 		return mbThreadLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBThread getMBThread(
+		long threadId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		return mbThreadLocalService.getMBThread(threadId);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBThread updateMBThread(
 		com.liferay.portlet.messageboards.model.MBThread mbThread)
 		throws com.liferay.portal.SystemException {

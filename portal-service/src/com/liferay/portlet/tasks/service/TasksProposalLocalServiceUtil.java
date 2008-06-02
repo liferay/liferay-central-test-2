@@ -93,6 +93,15 @@ public class TasksProposalLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portlet.tasks.model.TasksProposal getTasksProposal(
+		long proposalId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
+
+		return tasksProposalLocalService.getTasksProposal(proposalId);
+	}
+
 	public static com.liferay.portlet.tasks.model.TasksProposal updateTasksProposal(
 		com.liferay.portlet.tasks.model.TasksProposal tasksProposal)
 		throws com.liferay.portal.SystemException {

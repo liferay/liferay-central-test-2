@@ -127,6 +127,11 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 			start, end);
 	}
 
+	public SCProductEntry getSCProductEntry(long productEntryId)
+		throws PortalException, SystemException {
+		return scProductEntryPersistence.findByPrimaryKey(productEntryId);
+	}
+
 	public SCProductEntry updateSCProductEntry(SCProductEntry scProductEntry)
 		throws SystemException {
 		scProductEntry.setNew(false);

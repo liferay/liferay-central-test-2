@@ -93,6 +93,15 @@ public class DLFileVersionLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion getDLFileVersion(
+		long fileVersionId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+
+		return dlFileVersionLocalService.getDLFileVersion(fileVersionId);
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion updateDLFileVersion(
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion)
 		throws com.liferay.portal.SystemException {

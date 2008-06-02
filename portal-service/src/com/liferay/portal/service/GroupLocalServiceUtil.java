@@ -91,6 +91,14 @@ public class GroupLocalServiceUtil {
 		return groupLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portal.model.Group getGroup(long groupId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getGroup(groupId);
+	}
+
 	public static com.liferay.portal.model.Group updateGroup(
 		com.liferay.portal.model.Group group)
 		throws com.liferay.portal.SystemException {
@@ -154,14 +162,6 @@ public class GroupLocalServiceUtil {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
 		return groupLocalService.getFriendlyURLGroup(companyId, friendlyURL);
-	}
-
-	public static com.liferay.portal.model.Group getGroup(long groupId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
-
-		return groupLocalService.getGroup(groupId);
 	}
 
 	public static com.liferay.portal.model.Group getGroup(long companyId,

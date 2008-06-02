@@ -91,6 +91,14 @@ public class ReleaseLocalServiceUtil {
 		return releaseLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portal.model.Release getRelease(long releaseId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
+
+		return releaseLocalService.getRelease(releaseId);
+	}
+
 	public static com.liferay.portal.model.Release updateRelease(
 		com.liferay.portal.model.Release release)
 		throws com.liferay.portal.SystemException {

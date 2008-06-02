@@ -103,6 +103,11 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 			start, end);
 	}
 
+	public RatingsEntry getRatingsEntry(long entryId)
+		throws PortalException, SystemException {
+		return ratingsEntryPersistence.findByPrimaryKey(entryId);
+	}
+
 	public RatingsEntry updateRatingsEntry(RatingsEntry ratingsEntry)
 		throws SystemException {
 		ratingsEntry.setNew(false);

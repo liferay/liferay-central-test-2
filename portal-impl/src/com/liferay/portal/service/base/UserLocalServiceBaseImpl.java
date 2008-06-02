@@ -361,6 +361,10 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 		return userPersistence.findWithDynamicQuery(queryInitializer, start, end);
 	}
 
+	public User getUser(long userId) throws PortalException, SystemException {
+		return userPersistence.findByPrimaryKey(userId);
+	}
+
 	public User updateUser(User user) throws SystemException {
 		user.setNew(false);
 

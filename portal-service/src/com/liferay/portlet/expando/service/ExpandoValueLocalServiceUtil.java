@@ -93,6 +93,15 @@ public class ExpandoValueLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portlet.expando.model.ExpandoValue getExpandoValue(
+		long valueId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
+
+		return expandoValueLocalService.getExpandoValue(valueId);
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoValue updateExpandoValue(
 		com.liferay.portlet.expando.model.ExpandoValue expandoValue)
 		throws com.liferay.portal.SystemException {

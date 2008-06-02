@@ -115,6 +115,11 @@ public abstract class SCFrameworkVersionLocalServiceBaseImpl
 			start, end);
 	}
 
+	public SCFrameworkVersion getSCFrameworkVersion(long frameworkVersionId)
+		throws PortalException, SystemException {
+		return scFrameworkVersionPersistence.findByPrimaryKey(frameworkVersionId);
+	}
+
 	public SCFrameworkVersion updateSCFrameworkVersion(
 		SCFrameworkVersion scFrameworkVersion) throws SystemException {
 		scFrameworkVersion.setNew(false);

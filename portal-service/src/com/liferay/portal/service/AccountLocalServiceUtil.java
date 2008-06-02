@@ -91,19 +91,19 @@ public class AccountLocalServiceUtil {
 		return accountLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
-	public static com.liferay.portal.model.Account updateAccount(
-		com.liferay.portal.model.Account account)
-		throws com.liferay.portal.SystemException {
-		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
-
-		return accountLocalService.updateAccount(account);
-	}
-
 	public static com.liferay.portal.model.Account getAccount(long accountId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
 
 		return accountLocalService.getAccount(accountId);
+	}
+
+	public static com.liferay.portal.model.Account updateAccount(
+		com.liferay.portal.model.Account account)
+		throws com.liferay.portal.SystemException {
+		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
+
+		return accountLocalService.updateAccount(account);
 	}
 }

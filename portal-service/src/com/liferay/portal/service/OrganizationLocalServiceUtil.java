@@ -93,6 +93,15 @@ public class OrganizationLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portal.model.Organization getOrganization(
+		long organizationId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		return organizationLocalService.getOrganization(organizationId);
+	}
+
 	public static com.liferay.portal.model.Organization updateOrganization(
 		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.SystemException {
@@ -158,15 +167,6 @@ public class OrganizationLocalServiceUtil {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
 		return organizationLocalService.getManageableOrganizations(userId);
-	}
-
-	public static com.liferay.portal.model.Organization getOrganization(
-		long organizationId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.getOrganization(organizationId);
 	}
 
 	public static com.liferay.portal.model.Organization getOrganization(

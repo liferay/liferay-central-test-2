@@ -93,6 +93,15 @@ public class BookmarksFolderLocalServiceUtil {
 			start, end);
 	}
 
+	public static com.liferay.portlet.bookmarks.model.BookmarksFolder getBookmarksFolder(
+		long folderId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
+
+		return bookmarksFolderLocalService.getBookmarksFolder(folderId);
+	}
+
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder updateBookmarksFolder(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder)
 		throws com.liferay.portal.SystemException {

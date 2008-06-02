@@ -308,6 +308,11 @@ public abstract class PermissionLocalServiceBaseImpl
 			start, end);
 	}
 
+	public Permission getPermission(long permissionId)
+		throws PortalException, SystemException {
+		return permissionPersistence.findByPrimaryKey(permissionId);
+	}
+
 	public Permission updatePermission(Permission permission)
 		throws SystemException {
 		permission.setNew(false);

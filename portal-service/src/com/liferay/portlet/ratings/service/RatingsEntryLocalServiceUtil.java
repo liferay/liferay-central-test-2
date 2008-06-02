@@ -93,6 +93,15 @@ public class RatingsEntryLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portlet.ratings.model.RatingsEntry getRatingsEntry(
+		long entryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
+
+		return ratingsEntryLocalService.getRatingsEntry(entryId);
+	}
+
 	public static com.liferay.portlet.ratings.model.RatingsEntry updateRatingsEntry(
 		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry)
 		throws com.liferay.portal.SystemException {

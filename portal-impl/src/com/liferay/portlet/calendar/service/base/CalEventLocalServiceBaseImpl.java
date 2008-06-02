@@ -111,6 +111,11 @@ public abstract class CalEventLocalServiceBaseImpl
 			start, end);
 	}
 
+	public CalEvent getCalEvent(long eventId)
+		throws PortalException, SystemException {
+		return calEventPersistence.findByPrimaryKey(eventId);
+	}
+
 	public CalEvent updateCalEvent(CalEvent calEvent) throws SystemException {
 		calEvent.setNew(false);
 

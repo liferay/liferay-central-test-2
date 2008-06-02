@@ -181,6 +181,11 @@ public abstract class TagsAssetLocalServiceBaseImpl
 			start, end);
 	}
 
+	public TagsAsset getTagsAsset(long assetId)
+		throws PortalException, SystemException {
+		return tagsAssetPersistence.findByPrimaryKey(assetId);
+	}
+
 	public TagsAsset updateTagsAsset(TagsAsset tagsAsset)
 		throws SystemException {
 		tagsAsset.setNew(false);

@@ -92,6 +92,14 @@ public class ResourceLocalServiceUtil {
 		return resourceLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portal.model.Resource getResource(long resourceId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getResource(resourceId);
+	}
+
 	public static com.liferay.portal.model.Resource updateResource(
 		com.liferay.portal.model.Resource resource)
 		throws com.liferay.portal.SystemException {
@@ -201,14 +209,6 @@ public class ResourceLocalServiceUtil {
 		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
 
 		return resourceLocalService.getLatestResourceId();
-	}
-
-	public static com.liferay.portal.model.Resource getResource(long resourceId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
-
-		return resourceLocalService.getResource(resourceId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Resource> getResources()

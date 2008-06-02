@@ -92,6 +92,15 @@ public class TagsAssetLocalServiceUtil {
 		return tagsAssetLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portlet.tags.model.TagsAsset getTagsAsset(
+		long assetId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.getTagsAsset(assetId);
+	}
+
 	public static com.liferay.portlet.tags.model.TagsAsset updateTagsAsset(
 		com.liferay.portlet.tags.model.TagsAsset tagsAsset)
 		throws com.liferay.portal.SystemException {

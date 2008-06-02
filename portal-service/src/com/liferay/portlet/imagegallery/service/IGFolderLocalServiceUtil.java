@@ -92,6 +92,15 @@ public class IGFolderLocalServiceUtil {
 		return igFolderLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGFolder getIGFolder(
+		long folderId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
+		return igFolderLocalService.getIGFolder(folderId);
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGFolder updateIGFolder(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder)
 		throws com.liferay.portal.SystemException {

@@ -93,6 +93,15 @@ public class SocialActivityLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portlet.social.model.SocialActivity getSocialActivity(
+		long activityId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		SocialActivityLocalService socialActivityLocalService = SocialActivityLocalServiceFactory.getService();
+
+		return socialActivityLocalService.getSocialActivity(activityId);
+	}
+
 	public static com.liferay.portlet.social.model.SocialActivity updateSocialActivity(
 		com.liferay.portlet.social.model.SocialActivity socialActivity)
 		throws com.liferay.portal.SystemException {

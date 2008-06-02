@@ -93,6 +93,15 @@ public class JournalContentSearchLocalServiceUtil {
 			start, end);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalContentSearch getJournalContentSearch(
+		long contentSearchId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
+
+		return journalContentSearchLocalService.getJournalContentSearch(contentSearchId);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalContentSearch updateJournalContentSearch(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch)
 		throws com.liferay.portal.SystemException {

@@ -93,6 +93,15 @@ public class ShoppingItemPriceLocalServiceUtil {
 			start, end);
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingItemPrice getShoppingItemPrice(
+		long itemPriceId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ShoppingItemPriceLocalService shoppingItemPriceLocalService = ShoppingItemPriceLocalServiceFactory.getService();
+
+		return shoppingItemPriceLocalService.getShoppingItemPrice(itemPriceId);
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingItemPrice updateShoppingItemPrice(
 		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice)
 		throws com.liferay.portal.SystemException {

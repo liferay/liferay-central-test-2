@@ -143,6 +143,11 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 			start, end);
 	}
 
+	public JournalContentSearch getJournalContentSearch(long contentSearchId)
+		throws PortalException, SystemException {
+		return journalContentSearchPersistence.findByPrimaryKey(contentSearchId);
+	}
+
 	public JournalContentSearch updateJournalContentSearch(
 		JournalContentSearch journalContentSearch) throws SystemException {
 		journalContentSearch.setNew(false);

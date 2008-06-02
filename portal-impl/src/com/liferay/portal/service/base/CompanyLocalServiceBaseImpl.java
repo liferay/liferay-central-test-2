@@ -307,6 +307,11 @@ public abstract class CompanyLocalServiceBaseImpl implements CompanyLocalService
 			end);
 	}
 
+	public Company getCompany(long companyId)
+		throws PortalException, SystemException {
+		return companyPersistence.findByPrimaryKey(companyId);
+	}
+
 	public Company updateCompany(Company company) throws SystemException {
 		company.setNew(false);
 

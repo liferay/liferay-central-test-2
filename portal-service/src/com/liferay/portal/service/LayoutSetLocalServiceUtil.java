@@ -92,6 +92,15 @@ public class LayoutSetLocalServiceUtil {
 		return layoutSetLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portal.model.LayoutSet getLayoutSet(
+		long layoutSetId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
+
+		return layoutSetLocalService.getLayoutSet(layoutSetId);
+	}
+
 	public static com.liferay.portal.model.LayoutSet updateLayoutSet(
 		com.liferay.portal.model.LayoutSet layoutSet)
 		throws com.liferay.portal.SystemException {

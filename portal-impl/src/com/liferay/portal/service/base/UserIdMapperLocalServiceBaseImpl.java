@@ -310,6 +310,11 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 			start, end);
 	}
 
+	public UserIdMapper getUserIdMapper(long userIdMapperId)
+		throws PortalException, SystemException {
+		return userIdMapperPersistence.findByPrimaryKey(userIdMapperId);
+	}
+
 	public UserIdMapper updateUserIdMapper(UserIdMapper userIdMapper)
 		throws SystemException {
 		userIdMapper.setNew(false);

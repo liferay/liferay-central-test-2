@@ -127,6 +127,11 @@ public abstract class ShoppingCartLocalServiceBaseImpl
 			start, end);
 	}
 
+	public ShoppingCart getShoppingCart(long cartId)
+		throws PortalException, SystemException {
+		return shoppingCartPersistence.findByPrimaryKey(cartId);
+	}
+
 	public ShoppingCart updateShoppingCart(ShoppingCart shoppingCart)
 		throws SystemException {
 		shoppingCart.setNew(false);

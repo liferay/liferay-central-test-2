@@ -197,6 +197,11 @@ public abstract class MBMessageLocalServiceBaseImpl
 			start, end);
 	}
 
+	public MBMessage getMBMessage(long messageId)
+		throws PortalException, SystemException {
+		return mbMessagePersistence.findByPrimaryKey(messageId);
+	}
+
 	public MBMessage updateMBMessage(MBMessage mbMessage)
 		throws SystemException {
 		mbMessage.setNew(false);

@@ -92,6 +92,15 @@ public class WebDAVPropsLocalServiceUtil {
 		return webDAVPropsLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portal.model.WebDAVProps getWebDAVProps(
+		long webDavPropsId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		WebDAVPropsLocalService webDAVPropsLocalService = WebDAVPropsLocalServiceFactory.getService();
+
+		return webDAVPropsLocalService.getWebDAVProps(webDavPropsId);
+	}
+
 	public static com.liferay.portal.model.WebDAVProps updateWebDAVProps(
 		com.liferay.portal.model.WebDAVProps webDAVProps)
 		throws com.liferay.portal.SystemException {

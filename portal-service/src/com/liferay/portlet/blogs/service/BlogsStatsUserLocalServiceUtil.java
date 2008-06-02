@@ -93,6 +93,15 @@ public class BlogsStatsUserLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portlet.blogs.model.BlogsStatsUser getBlogsStatsUser(
+		long statsUserId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+
+		return blogsStatsUserLocalService.getBlogsStatsUser(statsUserId);
+	}
+
 	public static com.liferay.portlet.blogs.model.BlogsStatsUser updateBlogsStatsUser(
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser)
 		throws com.liferay.portal.SystemException {

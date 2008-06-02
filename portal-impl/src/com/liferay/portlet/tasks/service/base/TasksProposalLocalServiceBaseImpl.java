@@ -115,6 +115,11 @@ public abstract class TasksProposalLocalServiceBaseImpl
 			start, end);
 	}
 
+	public TasksProposal getTasksProposal(long proposalId)
+		throws PortalException, SystemException {
+		return tasksProposalPersistence.findByPrimaryKey(proposalId);
+	}
+
 	public TasksProposal updateTasksProposal(TasksProposal tasksProposal)
 		throws SystemException {
 		tasksProposal.setNew(false);

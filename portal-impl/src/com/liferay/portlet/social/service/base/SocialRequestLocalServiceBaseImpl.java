@@ -99,6 +99,11 @@ public abstract class SocialRequestLocalServiceBaseImpl
 			start, end);
 	}
 
+	public SocialRequest getSocialRequest(long requestId)
+		throws PortalException, SystemException {
+		return socialRequestPersistence.findByPrimaryKey(requestId);
+	}
+
 	public SocialRequest updateSocialRequest(SocialRequest socialRequest)
 		throws SystemException {
 		socialRequest.setNew(false);

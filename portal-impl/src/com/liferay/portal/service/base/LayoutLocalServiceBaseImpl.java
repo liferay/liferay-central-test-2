@@ -336,6 +336,10 @@ public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService,
 			end);
 	}
 
+	public Layout getLayout(long plid) throws PortalException, SystemException {
+		return layoutPersistence.findByPrimaryKey(plid);
+	}
+
 	public Layout updateLayout(Layout layout) throws SystemException {
 		layout.setNew(false);
 

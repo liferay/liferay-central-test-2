@@ -123,6 +123,11 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 			start, end);
 	}
 
+	public MBMessageFlag getMBMessageFlag(long messageFlagId)
+		throws PortalException, SystemException {
+		return mbMessageFlagPersistence.findByPrimaryKey(messageFlagId);
+	}
+
 	public MBMessageFlag updateMBMessageFlag(MBMessageFlag mbMessageFlag)
 		throws SystemException {
 		mbMessageFlag.setNew(false);

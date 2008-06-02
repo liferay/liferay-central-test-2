@@ -95,6 +95,11 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 			start, end);
 	}
 
+	public ExpandoTable getExpandoTable(long tableId)
+		throws PortalException, SystemException {
+		return expandoTablePersistence.findByPrimaryKey(tableId);
+	}
+
 	public ExpandoTable updateExpandoTable(ExpandoTable expandoTable)
 		throws SystemException {
 		expandoTable.setNew(false);

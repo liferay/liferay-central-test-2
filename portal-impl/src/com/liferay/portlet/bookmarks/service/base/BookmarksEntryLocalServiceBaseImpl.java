@@ -109,6 +109,11 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 			start, end);
 	}
 
+	public BookmarksEntry getBookmarksEntry(long entryId)
+		throws PortalException, SystemException {
+		return bookmarksEntryPersistence.findByPrimaryKey(entryId);
+	}
+
 	public BookmarksEntry updateBookmarksEntry(BookmarksEntry bookmarksEntry)
 		throws SystemException {
 		bookmarksEntry.setNew(false);

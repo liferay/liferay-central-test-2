@@ -69,13 +69,13 @@ public interface ImageLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Image updateImage(
-		com.liferay.portal.model.Image image)
-		throws com.liferay.portal.SystemException;
-
 	public com.liferay.portal.model.Image getImage(long imageId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
+
+	public com.liferay.portal.model.Image updateImage(
+		com.liferay.portal.model.Image image)
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Image> getImages()
 		throws com.liferay.portal.SystemException;

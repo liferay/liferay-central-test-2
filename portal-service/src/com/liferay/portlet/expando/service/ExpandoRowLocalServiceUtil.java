@@ -92,6 +92,15 @@ public class ExpandoRowLocalServiceUtil {
 		return expandoRowLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portlet.expando.model.ExpandoRow getExpandoRow(
+		long rowId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ExpandoRowLocalService expandoRowLocalService = ExpandoRowLocalServiceFactory.getService();
+
+		return expandoRowLocalService.getExpandoRow(rowId);
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoRow updateExpandoRow(
 		com.liferay.portlet.expando.model.ExpandoRow expandoRow)
 		throws com.liferay.portal.SystemException {

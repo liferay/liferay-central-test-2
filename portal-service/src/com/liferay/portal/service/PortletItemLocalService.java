@@ -70,6 +70,11 @@ public interface PortletItemLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.PortletItem getPortletItem(
+		long portletItemId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portal.model.PortletItem updatePortletItem(
 		com.liferay.portal.model.PortletItem portletItem)
 		throws com.liferay.portal.SystemException;
@@ -77,11 +82,6 @@ public interface PortletItemLocalService {
 	public com.liferay.portal.model.PortletItem addPortletItem(long userId,
 		long groupId, java.lang.String name, java.lang.String portletId,
 		java.lang.String className)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portal.model.PortletItem getPortletItem(
-		long portletItemId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

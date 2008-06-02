@@ -310,6 +310,11 @@ public abstract class ServiceComponentLocalServiceBaseImpl
 			start, end);
 	}
 
+	public ServiceComponent getServiceComponent(long serviceComponentId)
+		throws PortalException, SystemException {
+		return serviceComponentPersistence.findByPrimaryKey(serviceComponentId);
+	}
+
 	public ServiceComponent updateServiceComponent(
 		ServiceComponent serviceComponent) throws SystemException {
 		serviceComponent.setNew(false);

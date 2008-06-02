@@ -93,6 +93,15 @@ public class UserTrackerPathLocalServiceUtil {
 			start, end);
 	}
 
+	public static com.liferay.portal.model.UserTrackerPath getUserTrackerPath(
+		long userTrackerPathId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
+		return userTrackerPathLocalService.getUserTrackerPath(userTrackerPathId);
+	}
+
 	public static com.liferay.portal.model.UserTrackerPath updateUserTrackerPath(
 		com.liferay.portal.model.UserTrackerPath userTrackerPath)
 		throws com.liferay.portal.SystemException {

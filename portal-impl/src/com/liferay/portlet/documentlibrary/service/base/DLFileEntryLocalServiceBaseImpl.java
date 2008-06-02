@@ -153,6 +153,11 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 			start, end);
 	}
 
+	public DLFileEntry getDLFileEntry(long fileEntryId)
+		throws PortalException, SystemException {
+		return dlFileEntryPersistence.findByPrimaryKey(fileEntryId);
+	}
+
 	public DLFileEntry updateDLFileEntry(DLFileEntry dlFileEntry)
 		throws SystemException {
 		dlFileEntry.setNew(false);

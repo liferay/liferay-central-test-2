@@ -92,6 +92,15 @@ public class IGImageLocalServiceUtil {
 		return igImageLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGImage getIGImage(
+		long imageId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+
+		return igImageLocalService.getIGImage(imageId);
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGImage updateIGImage(
 		com.liferay.portlet.imagegallery.model.IGImage igImage)
 		throws com.liferay.portal.SystemException {

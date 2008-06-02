@@ -310,6 +310,11 @@ public abstract class WebDAVPropsLocalServiceBaseImpl
 			start, end);
 	}
 
+	public WebDAVProps getWebDAVProps(long webDavPropsId)
+		throws PortalException, SystemException {
+		return webDAVPropsPersistence.findByPrimaryKey(webDavPropsId);
+	}
+
 	public WebDAVProps updateWebDAVProps(WebDAVProps webDAVProps)
 		throws SystemException {
 		webDAVProps.setNew(false);

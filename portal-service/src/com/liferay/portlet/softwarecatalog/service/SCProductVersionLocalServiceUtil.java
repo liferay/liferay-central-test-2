@@ -93,6 +93,15 @@ public class SCProductVersionLocalServiceUtil {
 			start, end);
 	}
 
+	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion getSCProductVersion(
+		long productVersionId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
+
+		return scProductVersionLocalService.getSCProductVersion(productVersionId);
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion updateSCProductVersion(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion)
 		throws com.liferay.portal.SystemException {

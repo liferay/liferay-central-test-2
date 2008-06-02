@@ -148,6 +148,11 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 			start, end);
 	}
 
+	public AnnouncementsEntry getAnnouncementsEntry(long entryId)
+		throws PortalException, SystemException {
+		return announcementsEntryPersistence.findByPrimaryKey(entryId);
+	}
+
 	public AnnouncementsEntry updateAnnouncementsEntry(
 		AnnouncementsEntry announcementsEntry) throws SystemException {
 		announcementsEntry.setNew(false);

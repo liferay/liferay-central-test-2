@@ -101,6 +101,11 @@ public abstract class AnnouncementsDeliveryLocalServiceBaseImpl
 			start, end);
 	}
 
+	public AnnouncementsDelivery getAnnouncementsDelivery(long deliveryId)
+		throws PortalException, SystemException {
+		return announcementsDeliveryPersistence.findByPrimaryKey(deliveryId);
+	}
+
 	public AnnouncementsDelivery updateAnnouncementsDelivery(
 		AnnouncementsDelivery announcementsDelivery) throws SystemException {
 		announcementsDelivery.setNew(false);

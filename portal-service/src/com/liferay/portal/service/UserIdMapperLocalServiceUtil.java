@@ -93,6 +93,15 @@ public class UserIdMapperLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portal.model.UserIdMapper getUserIdMapper(
+		long userIdMapperId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
+		return userIdMapperLocalService.getUserIdMapper(userIdMapperId);
+	}
+
 	public static com.liferay.portal.model.UserIdMapper updateUserIdMapper(
 		com.liferay.portal.model.UserIdMapper userIdMapper)
 		throws com.liferay.portal.SystemException {

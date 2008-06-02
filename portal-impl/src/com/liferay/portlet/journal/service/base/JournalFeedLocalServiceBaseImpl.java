@@ -131,6 +131,11 @@ public abstract class JournalFeedLocalServiceBaseImpl
 			start, end);
 	}
 
+	public JournalFeed getJournalFeed(long id)
+		throws PortalException, SystemException {
+		return journalFeedPersistence.findByPrimaryKey(id);
+	}
+
 	public JournalFeed updateJournalFeed(JournalFeed journalFeed)
 		throws SystemException {
 		journalFeed.setNew(false);

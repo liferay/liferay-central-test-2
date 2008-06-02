@@ -308,6 +308,11 @@ public abstract class EmailAddressLocalServiceBaseImpl
 			start, end);
 	}
 
+	public EmailAddress getEmailAddress(long emailAddressId)
+		throws PortalException, SystemException {
+		return emailAddressPersistence.findByPrimaryKey(emailAddressId);
+	}
+
 	public EmailAddress updateEmailAddress(EmailAddress emailAddress)
 		throws SystemException {
 		emailAddress.setNew(false);

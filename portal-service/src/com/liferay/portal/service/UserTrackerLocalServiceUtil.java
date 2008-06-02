@@ -92,6 +92,15 @@ public class UserTrackerLocalServiceUtil {
 		return userTrackerLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portal.model.UserTracker getUserTracker(
+		long userTrackerId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getUserTracker(userTrackerId);
+	}
+
 	public static com.liferay.portal.model.UserTracker updateUserTracker(
 		com.liferay.portal.model.UserTracker userTracker)
 		throws com.liferay.portal.SystemException {

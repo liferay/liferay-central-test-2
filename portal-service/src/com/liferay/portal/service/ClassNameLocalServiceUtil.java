@@ -92,6 +92,15 @@ public class ClassNameLocalServiceUtil {
 		return classNameLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portal.model.ClassName getClassName(
+		long classNameId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
+
+		return classNameLocalService.getClassName(classNameId);
+	}
+
 	public static com.liferay.portal.model.ClassName updateClassName(
 		com.liferay.portal.model.ClassName className)
 		throws com.liferay.portal.SystemException {
@@ -106,15 +115,6 @@ public class ClassNameLocalServiceUtil {
 		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
 
 		classNameLocalService.checkClassNames();
-	}
-
-	public static com.liferay.portal.model.ClassName getClassName(
-		long classNameId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
-
-		return classNameLocalService.getClassName(classNameId);
 	}
 
 	public static com.liferay.portal.model.ClassName getClassName(

@@ -93,6 +93,15 @@ public class AnnouncementsDeliveryLocalServiceUtil {
 			start, end);
 	}
 
+	public static com.liferay.portlet.announcements.model.AnnouncementsDelivery getAnnouncementsDelivery(
+		long deliveryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getService();
+
+		return announcementsDeliveryLocalService.getAnnouncementsDelivery(deliveryId);
+	}
+
 	public static com.liferay.portlet.announcements.model.AnnouncementsDelivery updateAnnouncementsDelivery(
 		com.liferay.portlet.announcements.model.AnnouncementsDelivery announcementsDelivery)
 		throws com.liferay.portal.SystemException {

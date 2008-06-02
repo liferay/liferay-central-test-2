@@ -69,11 +69,11 @@ public interface AccountLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Account updateAccount(
-		com.liferay.portal.model.Account account)
-		throws com.liferay.portal.SystemException;
-
 	public com.liferay.portal.model.Account getAccount(long accountId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
+
+	public com.liferay.portal.model.Account updateAccount(
+		com.liferay.portal.model.Account account)
+		throws com.liferay.portal.SystemException;
 }

@@ -120,6 +120,11 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 			start, end);
 	}
 
+	public JournalArticleResource getJournalArticleResource(
+		long resourcePrimKey) throws PortalException, SystemException {
+		return journalArticleResourcePersistence.findByPrimaryKey(resourcePrimKey);
+	}
+
 	public JournalArticleResource updateJournalArticleResource(
 		JournalArticleResource journalArticleResource)
 		throws SystemException {

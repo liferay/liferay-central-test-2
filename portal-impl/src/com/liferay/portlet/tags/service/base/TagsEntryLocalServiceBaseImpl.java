@@ -111,6 +111,11 @@ public abstract class TagsEntryLocalServiceBaseImpl
 			start, end);
 	}
 
+	public TagsEntry getTagsEntry(long entryId)
+		throws PortalException, SystemException {
+		return tagsEntryPersistence.findByPrimaryKey(entryId);
+	}
+
 	public TagsEntry updateTagsEntry(TagsEntry tagsEntry)
 		throws SystemException {
 		tagsEntry.setNew(false);

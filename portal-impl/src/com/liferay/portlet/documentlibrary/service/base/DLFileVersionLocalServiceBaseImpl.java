@@ -102,6 +102,11 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 			start, end);
 	}
 
+	public DLFileVersion getDLFileVersion(long fileVersionId)
+		throws PortalException, SystemException {
+		return dlFileVersionPersistence.findByPrimaryKey(fileVersionId);
+	}
+
 	public DLFileVersion updateDLFileVersion(DLFileVersion dlFileVersion)
 		throws SystemException {
 		dlFileVersion.setNew(false);

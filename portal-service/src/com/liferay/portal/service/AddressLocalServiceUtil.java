@@ -91,6 +91,14 @@ public class AddressLocalServiceUtil {
 		return addressLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portal.model.Address getAddress(long addressId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+
+		return addressLocalService.getAddress(addressId);
+	}
+
 	public static com.liferay.portal.model.Address updateAddress(
 		com.liferay.portal.model.Address address)
 		throws com.liferay.portal.SystemException {
@@ -119,14 +127,6 @@ public class AddressLocalServiceUtil {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 
 		addressLocalService.deleteAddresses(companyId, className, classPK);
-	}
-
-	public static com.liferay.portal.model.Address getAddress(long addressId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-
-		return addressLocalService.getAddress(addressId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Address> getAddresses()

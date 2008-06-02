@@ -133,6 +133,11 @@ public abstract class ShoppingCategoryLocalServiceBaseImpl
 			start, end);
 	}
 
+	public ShoppingCategory getShoppingCategory(long categoryId)
+		throws PortalException, SystemException {
+		return shoppingCategoryPersistence.findByPrimaryKey(categoryId);
+	}
+
 	public ShoppingCategory updateShoppingCategory(
 		ShoppingCategory shoppingCategory) throws SystemException {
 		shoppingCategory.setNew(false);

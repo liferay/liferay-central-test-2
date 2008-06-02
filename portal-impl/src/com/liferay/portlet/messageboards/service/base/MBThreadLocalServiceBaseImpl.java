@@ -151,6 +151,11 @@ public abstract class MBThreadLocalServiceBaseImpl
 			start, end);
 	}
 
+	public MBThread getMBThread(long threadId)
+		throws PortalException, SystemException {
+		return mbThreadPersistence.findByPrimaryKey(threadId);
+	}
+
 	public MBThread updateMBThread(MBThread mbThread) throws SystemException {
 		mbThread.setNew(false);
 

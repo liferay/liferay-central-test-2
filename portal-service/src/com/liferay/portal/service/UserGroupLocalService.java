@@ -69,6 +69,10 @@ public interface UserGroupLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.UserGroup getUserGroup(long userGroupId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portal.model.UserGroup updateUserGroup(
 		com.liferay.portal.model.UserGroup userGroup)
 		throws com.liferay.portal.SystemException;
@@ -83,10 +87,6 @@ public interface UserGroupLocalService {
 			com.liferay.portal.PortalException;
 
 	public void clearUserUserGroups(long userId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portal.model.UserGroup getUserGroup(long userGroupId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

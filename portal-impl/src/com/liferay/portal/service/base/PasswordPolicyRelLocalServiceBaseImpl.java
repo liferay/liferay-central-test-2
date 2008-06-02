@@ -310,6 +310,11 @@ public abstract class PasswordPolicyRelLocalServiceBaseImpl
 			start, end);
 	}
 
+	public PasswordPolicyRel getPasswordPolicyRel(long passwordPolicyRelId)
+		throws PortalException, SystemException {
+		return passwordPolicyRelPersistence.findByPrimaryKey(passwordPolicyRelId);
+	}
+
 	public PasswordPolicyRel updatePasswordPolicyRel(
 		PasswordPolicyRel passwordPolicyRel) throws SystemException {
 		passwordPolicyRel.setNew(false);

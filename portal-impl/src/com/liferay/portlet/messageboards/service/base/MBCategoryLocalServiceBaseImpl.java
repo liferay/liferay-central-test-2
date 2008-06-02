@@ -141,6 +141,11 @@ public abstract class MBCategoryLocalServiceBaseImpl
 			start, end);
 	}
 
+	public MBCategory getMBCategory(long categoryId)
+		throws PortalException, SystemException {
+		return mbCategoryPersistence.findByPrimaryKey(categoryId);
+	}
+
 	public MBCategory updateMBCategory(MBCategory mbCategory)
 		throws SystemException {
 		mbCategory.setNew(false);

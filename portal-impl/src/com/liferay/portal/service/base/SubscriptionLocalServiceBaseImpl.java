@@ -310,6 +310,11 @@ public abstract class SubscriptionLocalServiceBaseImpl
 			start, end);
 	}
 
+	public Subscription getSubscription(long subscriptionId)
+		throws PortalException, SystemException {
+		return subscriptionPersistence.findByPrimaryKey(subscriptionId);
+	}
+
 	public Subscription updateSubscription(Subscription subscription)
 		throws SystemException {
 		subscription.setNew(false);

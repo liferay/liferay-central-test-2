@@ -307,6 +307,11 @@ public abstract class OrgLaborLocalServiceBaseImpl
 			start, end);
 	}
 
+	public OrgLabor getOrgLabor(long orgLaborId)
+		throws PortalException, SystemException {
+		return orgLaborPersistence.findByPrimaryKey(orgLaborId);
+	}
+
 	public OrgLabor updateOrgLabor(OrgLabor orgLabor) throws SystemException {
 		orgLabor.setNew(false);
 

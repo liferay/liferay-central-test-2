@@ -93,6 +93,15 @@ public class TagsPropertyLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portlet.tags.model.TagsProperty getTagsProperty(
+		long propertyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+
+		return tagsPropertyLocalService.getTagsProperty(propertyId);
+	}
+
 	public static com.liferay.portlet.tags.model.TagsProperty updateTagsProperty(
 		com.liferay.portlet.tags.model.TagsProperty tagsProperty)
 		throws com.liferay.portal.SystemException {

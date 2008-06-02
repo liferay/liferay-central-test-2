@@ -310,6 +310,11 @@ public abstract class UserTrackerPathLocalServiceBaseImpl
 			start, end);
 	}
 
+	public UserTrackerPath getUserTrackerPath(long userTrackerPathId)
+		throws PortalException, SystemException {
+		return userTrackerPathPersistence.findByPrimaryKey(userTrackerPathId);
+	}
+
 	public UserTrackerPath updateUserTrackerPath(
 		UserTrackerPath userTrackerPath) throws SystemException {
 		userTrackerPath.setNew(false);

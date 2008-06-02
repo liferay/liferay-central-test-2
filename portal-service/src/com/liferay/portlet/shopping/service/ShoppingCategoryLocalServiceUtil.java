@@ -93,6 +93,15 @@ public class ShoppingCategoryLocalServiceUtil {
 			start, end);
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingCategory getShoppingCategory(
+		long categoryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
+		return shoppingCategoryLocalService.getShoppingCategory(categoryId);
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingCategory updateShoppingCategory(
 		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory)
 		throws com.liferay.portal.SystemException {

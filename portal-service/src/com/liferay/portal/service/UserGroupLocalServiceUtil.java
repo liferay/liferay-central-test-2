@@ -92,6 +92,15 @@ public class UserGroupLocalServiceUtil {
 		return userGroupLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portal.model.UserGroup getUserGroup(
+		long userGroupId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
+
+		return userGroupLocalService.getUserGroup(userGroupId);
+	}
+
 	public static com.liferay.portal.model.UserGroup updateUserGroup(
 		com.liferay.portal.model.UserGroup userGroup)
 		throws com.liferay.portal.SystemException {
@@ -124,15 +133,6 @@ public class UserGroupLocalServiceUtil {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
 
 		userGroupLocalService.clearUserUserGroups(userId);
-	}
-
-	public static com.liferay.portal.model.UserGroup getUserGroup(
-		long userGroupId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
-
-		return userGroupLocalService.getUserGroup(userGroupId);
 	}
 
 	public static com.liferay.portal.model.UserGroup getUserGroup(

@@ -308,6 +308,11 @@ public abstract class UserGroupLocalServiceBaseImpl
 			start, end);
 	}
 
+	public UserGroup getUserGroup(long userGroupId)
+		throws PortalException, SystemException {
+		return userGroupPersistence.findByPrimaryKey(userGroupId);
+	}
+
 	public UserGroup updateUserGroup(UserGroup userGroup)
 		throws SystemException {
 		userGroup.setNew(false);

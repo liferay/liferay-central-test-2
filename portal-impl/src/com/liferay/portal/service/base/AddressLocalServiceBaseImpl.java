@@ -307,6 +307,11 @@ public abstract class AddressLocalServiceBaseImpl implements AddressLocalService
 			end);
 	}
 
+	public Address getAddress(long addressId)
+		throws PortalException, SystemException {
+		return addressPersistence.findByPrimaryKey(addressId);
+	}
+
 	public Address updateAddress(Address address) throws SystemException {
 		address.setNew(false);
 

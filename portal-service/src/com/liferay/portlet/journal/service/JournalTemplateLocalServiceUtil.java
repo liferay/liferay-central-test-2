@@ -93,6 +93,15 @@ public class JournalTemplateLocalServiceUtil {
 			start, end);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalTemplate getJournalTemplate(
+		long id)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+
+		return journalTemplateLocalService.getJournalTemplate(id);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalTemplate updateJournalTemplate(
 		com.liferay.portlet.journal.model.JournalTemplate journalTemplate)
 		throws com.liferay.portal.SystemException {

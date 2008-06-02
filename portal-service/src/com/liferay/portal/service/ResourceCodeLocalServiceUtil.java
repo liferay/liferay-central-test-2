@@ -93,14 +93,6 @@ public class ResourceCodeLocalServiceUtil {
 			end);
 	}
 
-	public static com.liferay.portal.model.ResourceCode updateResourceCode(
-		com.liferay.portal.model.ResourceCode resourceCode)
-		throws com.liferay.portal.SystemException {
-		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
-
-		return resourceCodeLocalService.updateResourceCode(resourceCode);
-	}
-
 	public static com.liferay.portal.model.ResourceCode getResourceCode(
 		long codeId)
 		throws com.liferay.portal.PortalException,
@@ -108,6 +100,14 @@ public class ResourceCodeLocalServiceUtil {
 		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
 
 		return resourceCodeLocalService.getResourceCode(codeId);
+	}
+
+	public static com.liferay.portal.model.ResourceCode updateResourceCode(
+		com.liferay.portal.model.ResourceCode resourceCode)
+		throws com.liferay.portal.SystemException {
+		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
+
+		return resourceCodeLocalService.updateResourceCode(resourceCode);
 	}
 
 	public static com.liferay.portal.model.ResourceCode getResourceCode(

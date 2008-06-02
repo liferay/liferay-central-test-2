@@ -308,6 +308,11 @@ public abstract class LayoutSetLocalServiceBaseImpl
 			start, end);
 	}
 
+	public LayoutSet getLayoutSet(long layoutSetId)
+		throws PortalException, SystemException {
+		return layoutSetPersistence.findByPrimaryKey(layoutSetId);
+	}
+
 	public LayoutSet updateLayoutSet(LayoutSet layoutSet)
 		throws SystemException {
 		layoutSet.setNew(false);

@@ -121,6 +121,11 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 			start, end);
 	}
 
+	public DLFileShortcut getDLFileShortcut(long fileShortcutId)
+		throws PortalException, SystemException {
+		return dlFileShortcutPersistence.findByPrimaryKey(fileShortcutId);
+	}
+
 	public DLFileShortcut updateDLFileShortcut(DLFileShortcut dlFileShortcut)
 		throws SystemException {
 		dlFileShortcut.setNew(false);

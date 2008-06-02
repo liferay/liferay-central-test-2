@@ -92,6 +92,15 @@ public class SCLicenseLocalServiceUtil {
 		return scLicenseLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portlet.softwarecatalog.model.SCLicense getSCLicense(
+		long licenseId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
+
+		return scLicenseLocalService.getSCLicense(licenseId);
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense updateSCLicense(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
 		throws com.liferay.portal.SystemException {

@@ -70,6 +70,11 @@ public interface OrganizationLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Organization getOrganization(
+		long organizationId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portal.model.Organization updateOrganization(
 		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.SystemException;
@@ -102,11 +107,6 @@ public interface OrganizationLocalService {
 
 	public java.util.List<com.liferay.portal.model.Organization> getManageableOrganizations(
 		long userId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portal.model.Organization getOrganization(
-		long organizationId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

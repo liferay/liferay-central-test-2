@@ -857,7 +857,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		// Data
 
 		PortletPreferences portletPreferences =
-			portletPreferencesLocalService.getPortletPreferences(plid).get(0);
+			portletPreferencesLocalService.getPortletPreferencesByPlid(
+				plid).get(0);
 
 		javax.portlet.PortletPreferences jxPrefs =
 			portletPreferencesLocalService.getPreferences(
@@ -2367,7 +2368,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		Iterator<PortletPreferences> itr =
-			portletPreferencesLocalService.getPortletPreferences(
+			portletPreferencesLocalService.getPortletPreferencesByPlid(
 				layout.getPlid()).iterator();
 
 		while (itr.hasNext()) {

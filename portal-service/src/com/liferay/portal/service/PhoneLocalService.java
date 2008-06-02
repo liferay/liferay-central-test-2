@@ -69,6 +69,10 @@ public interface PhoneLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Phone getPhone(long phoneId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portal.model.Phone updatePhone(
 		com.liferay.portal.model.Phone phone)
 		throws com.liferay.portal.SystemException;
@@ -81,10 +85,6 @@ public interface PhoneLocalService {
 
 	public void deletePhones(long companyId, java.lang.String className,
 		long classPK) throws com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.Phone getPhone(long phoneId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.Phone> getPhones()
 		throws com.liferay.portal.SystemException;

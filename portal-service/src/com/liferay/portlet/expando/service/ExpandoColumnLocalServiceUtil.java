@@ -93,6 +93,15 @@ public class ExpandoColumnLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portlet.expando.model.ExpandoColumn getExpandoColumn(
+		long columnId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ExpandoColumnLocalService expandoColumnLocalService = ExpandoColumnLocalServiceFactory.getService();
+
+		return expandoColumnLocalService.getExpandoColumn(columnId);
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoColumn updateExpandoColumn(
 		com.liferay.portlet.expando.model.ExpandoColumn expandoColumn)
 		throws com.liferay.portal.SystemException {

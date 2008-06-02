@@ -93,6 +93,15 @@ public class ShoppingCartLocalServiceUtil {
 			end);
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingCart getShoppingCart(
+		long cartId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
+
+		return shoppingCartLocalService.getShoppingCart(cartId);
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingCart updateShoppingCart(
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart)
 		throws com.liferay.portal.SystemException {

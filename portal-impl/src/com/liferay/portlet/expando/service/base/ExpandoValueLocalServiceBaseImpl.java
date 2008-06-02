@@ -95,6 +95,11 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 			start, end);
 	}
 
+	public ExpandoValue getExpandoValue(long valueId)
+		throws PortalException, SystemException {
+		return expandoValuePersistence.findByPrimaryKey(valueId);
+	}
+
 	public ExpandoValue updateExpandoValue(ExpandoValue expandoValue)
 		throws SystemException {
 		expandoValue.setNew(false);

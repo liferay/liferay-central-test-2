@@ -107,6 +107,11 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 			start, end);
 	}
 
+	public SCProductVersion getSCProductVersion(long productVersionId)
+		throws PortalException, SystemException {
+		return scProductVersionPersistence.findByPrimaryKey(productVersionId);
+	}
+
 	public SCProductVersion updateSCProductVersion(
 		SCProductVersion scProductVersion) throws SystemException {
 		scProductVersion.setNew(false);

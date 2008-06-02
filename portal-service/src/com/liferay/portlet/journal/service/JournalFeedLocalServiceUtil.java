@@ -92,6 +92,15 @@ public class JournalFeedLocalServiceUtil {
 		return journalFeedLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalFeed getJournalFeed(
+		long id)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		JournalFeedLocalService journalFeedLocalService = JournalFeedLocalServiceFactory.getService();
+
+		return journalFeedLocalService.getJournalFeed(id);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalFeed updateJournalFeed(
 		com.liferay.portlet.journal.model.JournalFeed journalFeed)
 		throws com.liferay.portal.SystemException {

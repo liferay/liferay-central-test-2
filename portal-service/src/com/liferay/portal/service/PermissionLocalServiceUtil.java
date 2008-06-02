@@ -92,6 +92,15 @@ public class PermissionLocalServiceUtil {
 		return permissionLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portal.model.Permission getPermission(
+		long permissionId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
+		return permissionLocalService.getPermission(permissionId);
+	}
+
 	public static com.liferay.portal.model.Permission updatePermission(
 		com.liferay.portal.model.Permission permission)
 		throws com.liferay.portal.SystemException {

@@ -302,6 +302,11 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 			end);
 	}
 
+	public Contact getContact(long contactId)
+		throws PortalException, SystemException {
+		return contactPersistence.findByPrimaryKey(contactId);
+	}
+
 	public Contact updateContact(Contact contact) throws SystemException {
 		contact.setNew(false);
 

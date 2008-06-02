@@ -307,6 +307,11 @@ public abstract class ResourceLocalServiceBaseImpl
 			start, end);
 	}
 
+	public Resource getResource(long resourceId)
+		throws PortalException, SystemException {
+		return resourcePersistence.findByPrimaryKey(resourceId);
+	}
+
 	public Resource updateResource(Resource resource) throws SystemException {
 		resource.setNew(false);
 

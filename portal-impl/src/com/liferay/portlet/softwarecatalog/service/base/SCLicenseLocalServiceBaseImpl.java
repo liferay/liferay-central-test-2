@@ -99,6 +99,11 @@ public abstract class SCLicenseLocalServiceBaseImpl
 			start, end);
 	}
 
+	public SCLicense getSCLicense(long licenseId)
+		throws PortalException, SystemException {
+		return scLicensePersistence.findByPrimaryKey(licenseId);
+	}
+
 	public SCLicense updateSCLicense(SCLicense scLicense)
 		throws SystemException {
 		scLicense.setNew(false);
