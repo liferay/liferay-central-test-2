@@ -157,7 +157,7 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 		<br /><br />
 	</c:if>
 
-	<input name="<portlet:namespace/>updateFields" type="hidden" value="true" />
+	<input name="<portlet:namespace/>updateFields" type="hidden" value="<%= !fieldsEditingDisabled %>" />
 
 	<%
 	int i = 1;
