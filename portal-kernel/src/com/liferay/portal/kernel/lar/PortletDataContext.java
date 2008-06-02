@@ -180,6 +180,4 @@ public interface PortletDataContext extends Serializable {
 
 	public String toXML(Object object);
 
-	public String toXMLFormatted(Object object) throws SystemException;
-
 }

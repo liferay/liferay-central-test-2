@@ -34,16 +34,38 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
+import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
+import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl;
+import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
+import com.liferay.portlet.calendar.model.impl.CalEventImpl;
+import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
+import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
+import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl;
+import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
+import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
+import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
+import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
+import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
+import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.impl.MBBanImpl;
+import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
+import com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl;
+import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
+import com.liferay.portlet.polls.model.impl.PollsChoiceImpl;
+import com.liferay.portlet.polls.model.impl.PollsQuestionImpl;
+import com.liferay.portlet.polls.model.impl.PollsVoteImpl;
 import com.liferay.portlet.ratings.model.RatingsEntry;
+import com.liferay.portlet.ratings.model.impl.RatingsEntryImpl;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil;
 import com.liferay.portlet.tags.NoSuchAssetException;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
+import com.liferay.portlet.wiki.model.impl.WikiNodeImpl;
+import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 import com.liferay.util.MapUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -84,8 +106,11 @@ public class PortletDataContextImpl implements PortletDataContext {
 			parameterMap, PortletDataHandlerKeys.DATA_STRATEGY,
 			PortletDataHandlerKeys.DATA_STRATEGY_MIRROR);
 		_userIdStrategy = userIdStrategy;
+		_xStream = new XStream();
 		_zipReader = zipReader;
 		_zipWriter = null;
+
+		initXStream();
 	}
 
 	public PortletDataContextImpl(
@@ -103,8 +128,11 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_userIdStrategy = null;
 		_startDate = startDate;
 		_endDate = endDate;
+		_xStream = new XStream();
 		_zipReader = null;
 		_zipWriter = zipWriter;
+
+		initXStream();
 	}
 
 	public void addComments(Class<?> classObj, Object primaryKey)
@@ -228,7 +256,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	public void addZipEntry(String path, Object object) throws SystemException {
-		addZipEntry(path, toXMLFormatted(object));
+		addZipEntry(path, toXML(object));
 	}
 
 	public void addZipEntry(String path, String s) throws SystemException {
@@ -514,17 +542,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _xStream.toXML(object);
 	}
 
-	public String toXMLFormatted(Object object)
-		throws SystemException {
-
-		try {
-			return XMLFormatter.toString(_xStream.toXML(object));
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-	}
-
 	protected String getPrimaryKeyString(Class<?> classObj, Object primaryKey) {
 		return getPrimaryKeyString(classObj.getName(), primaryKey);
 	}
@@ -537,6 +554,32 @@ public class PortletDataContextImpl implements PortletDataContext {
 		sm.append(primaryKey);
 
 		return sm.toString();
+	}
+
+	protected void initXStream() {
+		_xStream.alias("BlogsEntry", BlogsEntryImpl.class);
+		_xStream.alias("BookmarksFolder", BookmarksFolderImpl.class);
+		_xStream.alias("BookmarksEntry", BookmarksEntryImpl.class);
+		_xStream.alias("CalEvent", CalEventImpl.class);
+		_xStream.alias("DLFolder", DLFolderImpl.class);
+		_xStream.alias("DLFileEntry", DLFileEntryImpl.class);
+		_xStream.alias("DLFileShortcut", DLFileShortcutImpl.class);
+		_xStream.alias("DLFileRank", DLFileRankImpl.class);
+		_xStream.alias("IGFolder", IGFolderImpl.class);
+		_xStream.alias("IGImage", IGImageImpl.class);
+		_xStream.alias("JournalArticle", JournalArticleImpl.class);
+		_xStream.alias("JournalStructure", JournalStructureImpl.class);
+		_xStream.alias("JournalTemplate", JournalTemplateImpl.class);
+		_xStream.alias("MBCategory", MBCategoryImpl.class);
+		_xStream.alias("MBMessage", MBMessageImpl.class);
+		_xStream.alias("MBMessageFlag", MBMessageFlagImpl.class);
+		_xStream.alias("MBBan", MBBanImpl.class);
+		_xStream.alias("PollsQuestion", PollsQuestionImpl.class);
+		_xStream.alias("PollsChoice", PollsChoiceImpl.class);
+		_xStream.alias("PollsVote", PollsVoteImpl.class);
+		_xStream.alias("RatingsEntry", RatingsEntryImpl.class);
+		_xStream.alias("WikiNode", WikiNodeImpl.class);
+		_xStream.alias("WikiPage", WikiPageImpl.class);
 	}
 
 	protected void validateDateRange(Date startDate, Date endDate)
@@ -574,7 +617,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private Date _endDate;
 	private ZipReader _zipReader;
 	private ZipWriter _zipWriter;
-	private XStream _xStream = new XStream();
+	private XStream _xStream;
 	private Map _commentsMap = new HashMap();
 	private Map<String, String[]> _parameterMap;
 	private Map _ratingsEntriesMap = new HashMap();
