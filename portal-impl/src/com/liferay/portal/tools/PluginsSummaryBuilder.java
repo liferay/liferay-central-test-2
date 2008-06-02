@@ -25,16 +25,22 @@ package com.liferay.portal.tools;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.FileImpl;
 
 import java.io.File;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
 
 import org.apache.tools.ant.DirectoryScanner;
+
+import org.dom4j.Document;
+import org.dom4j.Element;
 
 /**
  * <a href="PluginsSummaryBuilder.java.html"><b><i>View Source</i></b></a>
@@ -67,7 +73,11 @@ public class PluginsSummaryBuilder {
 		DirectoryScanner ds = new DirectoryScanner();
 
 		ds.setBasedir(pluginsDir);
-		ds.setIncludes(new String[] {"**\\liferay-plugin-package.properties"});
+		ds.setIncludes(
+			new String[] {
+				"**\\liferay-plugin-package.properties",
+				"**\\liferay-plugin-package.xml"
+			});
 
 		ds.scan();
 
@@ -76,61 +86,7 @@ public class PluginsSummaryBuilder {
 		Arrays.sort(files);
 
 		for (String file : files) {
-			int x = file.indexOf(File.separator);
-
-			String type = file.substring(0, x);
-
-			if (type.endsWith("s")) {
-				type = type.substring(0, type.length() - 1);
-			}
-
-			x = file.indexOf(File.separator, x) + 1;
-			int y = file.indexOf(File.separator, x);
-
-			String artifactId = file.substring(x, y);
-
-			Properties props = PropertiesUtil.load(_fileUtil.read(file));
-
-			String name = _getValue(props, "name");
-			String tags = _getValue(props, "tags");
-			String shortDescription = _getValue(props, "short-description");
-			String changeLog = _getValue(props, "change-log");
-			String pageURL = _getValue(props, "page-url");
-			String author = _getValue(props, "author");
-			String licenses = _getValue(props, "licenses");
-
-			_distinctAuthors.add(author);
-			_distinctLicenses.add(licenses);
-
-			sm.append("\t<plugin>\n");
-			sm.append("\t\t<artifact-id>");
-			sm.append(artifactId);
-			sm.append("</artifact-id>\n");
-			sm.append("\t\t<name>");
-			sm.append(name);
-			sm.append("</name>\n");
-			sm.append("\t\t<type>");
-			sm.append(type);
-			sm.append("</type>\n");
-			sm.append("\t\t<tags>");
-			sm.append(tags);
-			sm.append("</tags>\n");
-			sm.append("\t\t<short-description>");
-			sm.append(shortDescription);
-			sm.append("</short-description>\n");
-			sm.append("\t\t<change-log>");
-			sm.append(changeLog);
-			sm.append("</change-log>\n");
-			sm.append("\t\t<page-url>");
-			sm.append(pageURL);
-			sm.append("</page-url>\n");
-			sm.append("\t\t<author>");
-			sm.append(author);
-			sm.append("</author>\n");
-			sm.append("\t\t<licenses>");
-			sm.append(licenses);
-			sm.append("</licenses>\n");
-			sm.append("\t</plugin>\n");
+			_createPluginSummary(file, sm);
 		}
 
 		for (String author : _distinctAuthors) {
@@ -151,7 +107,114 @@ public class PluginsSummaryBuilder {
 			pluginsDir + File.separator + "summary.xml", sm.toString());
 	}
 
-	public String _getValue(Properties props, String key) {
+	public void _createPluginSummary(String file, StringMaker sm)
+		throws Exception {
+
+		String content = _fileUtil.read(file);
+
+		int x = file.indexOf(File.separator);
+
+		String type = file.substring(0, x);
+
+		if (type.endsWith("s")) {
+			type = type.substring(0, type.length() - 1);
+		}
+
+		x = file.indexOf(File.separator, x) + 1;
+		int y = file.indexOf(File.separator, x);
+
+		String artifactId = file.substring(x, y);
+
+		String name = StringPool.BLANK;
+		String tags = StringPool.BLANK;
+		String shortDescription = StringPool.BLANK;
+		String changeLog = StringPool.BLANK;
+		String pageURL = StringPool.BLANK;
+		String author = StringPool.BLANK;
+		String licenses = StringPool.BLANK;
+
+		if (file.endsWith(".properties")) {
+			Properties props = PropertiesUtil.load(content);
+
+			name = _readProperty(props, "name");
+			tags = _readProperty(props, "tags");
+			shortDescription = _readProperty(props, "short-description");
+			changeLog = _readProperty(props, "change-log");
+			pageURL = _readProperty(props, "page-url");
+			author = _readProperty(props, "author");
+			licenses = _readProperty(props, "licenses");
+		}
+		else {
+			Document doc = DocumentUtil.readDocumentFromXML(content);
+
+			Element root = doc.getRootElement();
+
+			name = root.elementText("name");
+			tags = _readList(root.element("tags"), "tag");
+			shortDescription = root.elementText("short-description");
+			changeLog = root.elementText("change-log");
+			pageURL = root.elementText("page-url");
+			author = root.elementText("author");
+			licenses = _readList(root.element("licenses"), "license");
+		}
+
+		_distinctAuthors.add(author);
+		_distinctLicenses.add(licenses);
+
+		sm.append("\t<plugin>\n");
+		sm.append("\t\t<artifact-id>");
+		sm.append(artifactId);
+		sm.append("</artifact-id>\n");
+		sm.append("\t\t<name>");
+		sm.append(name);
+		sm.append("</name>\n");
+		sm.append("\t\t<type>");
+		sm.append(type);
+		sm.append("</type>\n");
+		sm.append("\t\t<tags>");
+		sm.append(tags);
+		sm.append("</tags>\n");
+		sm.append("\t\t<short-description>");
+		sm.append(shortDescription);
+		sm.append("</short-description>\n");
+		sm.append("\t\t<change-log>");
+		sm.append(changeLog);
+		sm.append("</change-log>\n");
+		sm.append("\t\t<page-url>");
+		sm.append(pageURL);
+		sm.append("</page-url>\n");
+		sm.append("\t\t<author>");
+		sm.append(author);
+		sm.append("</author>\n");
+		sm.append("\t\t<licenses>");
+		sm.append(licenses);
+		sm.append("</licenses>\n");
+		sm.append("\t</plugin>\n");
+	}
+
+	private String _readList(Element parentEl, String name) {
+		StringMaker sm = new StringMaker();
+
+		if (parentEl != null) {
+			Iterator<Element> itr = parentEl.elements(name).iterator();
+
+			while (itr.hasNext()) {
+				Element el = itr.next();
+
+				String text = el.getText().trim().toLowerCase();
+
+				sm.append(text);
+
+				if (itr.hasNext()) {
+					sm.append(", ");
+				}
+			}
+		}
+
+		return sm.toString();
+	}
+
+	public String _readProperty(Properties props, String key) {
 		return GetterUtil.getString(props.getProperty(key));
 	}
 
