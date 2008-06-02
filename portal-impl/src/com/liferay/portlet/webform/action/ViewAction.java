@@ -103,6 +103,7 @@ public class ViewAction extends PortletAction {
 			}
 			catch (CaptchaTextException cte) {
 				SessionErrors.add(req, CaptchaTextException.class.getName());
+
 				return;
 			}
 		}
