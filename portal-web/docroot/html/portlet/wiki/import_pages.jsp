@@ -61,7 +61,7 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 
 <br />
 
-<input type="submit" value="<liferay-ui:message key="save" />" />
+<input type="submit" value="<liferay-ui:message key="import" />" />
 
 <input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 
