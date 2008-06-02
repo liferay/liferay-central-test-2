@@ -33,7 +33,11 @@ import java.io.Serializable;
 public class MethodWrapper implements Serializable {
 
 	public MethodWrapper(String className, String methodName) {
-		this(className, methodName, new Object[] {});
+		this(className, methodName, new Object[0]);
+	}
+
+	public MethodWrapper(String className, String methodName, Object arg) {
+		this(className, methodName, new Object[] {arg});
 	}
 
 	public MethodWrapper(String className, String methodName, Object[] args) {

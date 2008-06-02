@@ -1,0 +1,132 @@
+/**
+ * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portal.verify;
+
+import com.liferay.portal.kernel.util.LongWrapper;
+import com.liferay.portal.kernel.util.MethodInvoker;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalFeedLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
+import com.liferay.util.dao.DataAccess;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+/**
+ * <a href="VerifyUUID.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class VerifyUUID extends VerifyProcess {
+
+	public void verify() throws VerifyException {
+		_log.info("Verifying");
+
+		try {
+			verifyUUID();
+		}
+		catch (Exception e) {
+			throw new VerifyException(e);
+		}
+	}
+
+	protected void verifyModel(
+			String serviceClassName, String modelName, String pkColumnName)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = HibernateUtil.getConnection();
+
+			ps = con.prepareStatement(
+				"select " + pkColumnName + " from " + modelName +
+					" where uuid_ is null or uuid_ = ''");
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long pk = rs.getLong(pkColumnName);
+
+				verifyModel(serviceClassName, modelName, pk);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void verifyModel(
+			String serviceClassName, String modelName, long pk)
+		throws Exception {
+
+		Object obj = MethodInvoker.invoke(
+			new MethodWrapper(
+				serviceClassName, "get" + modelName, new LongWrapper(pk)));
+
+		MethodInvoker.invoke(
+			new MethodWrapper(serviceClassName, "update" + modelName, obj));
+	}
+
+	protected void verifyUUID() throws Exception {
+		for (String[] model : _MODELS) {
+			verifyModel(model[0], model[1], model[2]);
+		}
+	}
+
+	private static final String[][] _MODELS = new String[][] {
+		new String[] {
+			JournalArticleLocalServiceUtil.class.getName(),
+			"JournalArticle",
+			"id_"
+		},
+		new String[] {
+			JournalFeedLocalServiceUtil.class.getName(),
+			"JournalFeed",
+			"id_"
+		},
+		new String[] {
+			JournalStructureLocalServiceUtil.class.getName(),
+			"JournalStructure",
+			"id_"
+		},
+		new String[] {
+			JournalTemplateLocalServiceUtil.class.getName(),
+			"JournalTemplate",
+			"id_"
+		}
+	};
+
+	private static Log _log = LogFactory.getLog(VerifyUUID.class);
+
+}
