@@ -86,6 +86,14 @@
 		<label><liferay-ui:message key="pages" /></label>
 	</li>
 
+	<c:if test='<%= tabs4.equals("import") %>'>
+		<li class="tree-item">
+			<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS %>" defaultValue="<%= false %>" />
+
+			<label for="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS %>Checkbox"><liferay-ui:message key="delete-missing-layouts" /></label> <liferay-ui:icon-help message="delete-missing-layouts-help" />
+		</li>
+	</c:if>
+
 	<li class="tree-item">
 		<input checked disabled="disabled" type="checkbox" />
 
