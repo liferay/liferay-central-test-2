@@ -46,6 +46,8 @@ public class PortletKeys {
 
 	public static final String CALENDAR = "8";
 
+	public static final String CHAT = "1_WAR_chatportlet";
+
 	public static final String COMMUNITIES = "29";
 
 	public static final String DOCUMENT_LIBRARY = "20";

@@ -57,8 +57,12 @@ else {
 
 	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, content) %>
 
-	<c:if test="<%= PropsValues.PORTLET_CSS_ENABLED && themeDisplay.isSignedIn() %>">
+	<c:if test="<%= themeDisplay.isSignedIn() && PropsValues.PORTLET_CSS_ENABLED %>">
 		<liferay-portlet:runtime portletName="<%= PortletKeys.PORTLET_CSS %>" />
+	</c:if>
+
+	<c:if test="<%= themeDisplay.isSignedIn() && (PortletLocalServiceUtil.getPortletById(company.getCompanyId(), PortletKeys.CHAT) != null) %>">
+		<liferay-portlet:runtime portletName="<%= PortletKeys.CHAT %>" />
 	</c:if>
 
 <%
