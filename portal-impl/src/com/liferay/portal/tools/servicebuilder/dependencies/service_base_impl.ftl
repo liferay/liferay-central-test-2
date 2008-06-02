@@ -80,6 +80,10 @@ import org.springframework.beans.factory.InitializingBean;
 		return ${entity.varName}Persistence.findWithDynamicQuery(queryInitializer, start, end);
 	}
 
+	public ${entity.name} get${entity.name}(${entity.PKClassName} ${entity.PKVarName}) throws PortalException, SystemException {
+		return ${entity.varName}Persistence.findByPrimaryKey(${entity.PKVarName});
+	}
+
 	public ${entity.name} update${entity.name}(${entity.name} ${entity.varName}) throws SystemException {
 		${entity.varName}.setNew(false);
 
