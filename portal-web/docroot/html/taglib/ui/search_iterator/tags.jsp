@@ -30,11 +30,14 @@
 <%
 TagsSearchEntry entry = (TagsSearchEntry)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW_ENTRY);
 
-for (int i=0; i < entry.getSize(); i++) {
-String tag = entry.getTag(i);
-String tagSearch = Field.TAGS_ENTRIES + ":" +tag;
+String[] tags = StringUtil.split(entry.getTags());
+
+for (String tag : tags) {
+	String keywords = Field.TAGS_ENTRIES + StringPool.COLON + tag;
 %>
-<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/search/search" /><portlet:param name="keywords" value="<%=tagSearch %>" /></portlet:renderURL>"><%=tag%></a>
+
+	<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/search/search" /><portlet:param name="keywords" value="<%= keywords  %>" /></portlet:renderURL>"><%= tag %></a>
+
 <%
 }
 %>

@@ -382,7 +382,7 @@ public class ResultRow {
 		_entries.add(index, new ScoreSearchEntry(score));
 	}
 
-        // Tags
+	// Tags
 
 	public void addTags(String tags) {
 		_entries.add(_entries.size(), new TagsSearchEntry(tags));

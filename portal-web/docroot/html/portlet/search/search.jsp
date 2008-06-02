@@ -184,15 +184,15 @@ for (int i = 0; i < portlets.size(); i++) {
 			sm.append("</a>");
 
 			row.addText(StringUtil.highlight(sm.toString(), keywords));
+
 			String tags = el.elementText("tags");
+
 			row.addTags(tags);
+
 			String rating = el.elementText("rating");
-			try {
-			row.addScore(Float.parseFloat(rating)/5);
-			}catch (Exception le) {
-			row.addText(rating);
-			}
- 
+
+			row.addScore(GetterUtil.getFloat(rating) / 5);
+
 			// Score
 
 			String score = el.elementText(OpenSearchUtil.getQName("score", OpenSearchUtil.RELEVANCE_NAMESPACE));

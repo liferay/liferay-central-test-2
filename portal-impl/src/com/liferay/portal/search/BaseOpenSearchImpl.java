@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
@@ -81,16 +82,18 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 			HttpServletRequest req, String keywords, int startPage,
 			int itemsPerPage)
 		throws SearchException;
-        
-        protected void addSearchResult(
-		Element root, String title, String link, Date updated, String summary, 
-		double score) {
-            this.addSearchResult(root, title, link, updated, summary, null, score, -1.0);
-            
-        }
+
 	protected void addSearchResult(
-		Element root, String title, String link, Date updated, String summary, String[] tags,
-		double score, double rating) {
+		Element root, String title, String link, Date updated,
+		String summary, double score) {
+
+		addSearchResult(
+			root, title, link, updated, summary, new String[0], 0, score);
+	}
+
+	protected void addSearchResult(
+		Element root, String title, String link, Date updated, String summary,
+		String[] tags, double rating, double score) {
 
 		// entry
 
@@ -124,26 +127,19 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 
 		OpenSearchUtil.addElement(
 			entry, "summary", OpenSearchUtil.DEFAULT_NAMESPACE, summary);
-                
-                // tags
-                String tagsStr = "";
-                if (tags != null) {
-                    for (int i=0; i < tags.length; i++) {
-                        tagsStr += tags[i];
-                        if (i + 1 < tags.length) {
-                            tagsStr +=",";
-                        }
-                    }
-                }
- 		OpenSearchUtil.addElement(
-			entry, "tags", OpenSearchUtil.DEFAULT_NAMESPACE, tagsStr);
- 
-		// average rating
+
+		// tags
+
+		OpenSearchUtil.addElement(
+			entry, "tags", OpenSearchUtil.DEFAULT_NAMESPACE,
+			StringUtil.merge(tags));
+
+		// rating
 
 		OpenSearchUtil.addElement(
 			entry, "rating", OpenSearchUtil.DEFAULT_NAMESPACE, rating);
-                
-                // relevance:score
+
+		// relevance:score
 
 		OpenSearchUtil.addElement(
 			entry, "score", OpenSearchUtil.RELEVANCE_NAMESPACE, score);

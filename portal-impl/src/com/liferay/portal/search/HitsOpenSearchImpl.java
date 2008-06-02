@@ -30,13 +30,14 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
-
 import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
+
 import java.util.Date;
 
 import javax.portlet.PortletURL;
@@ -116,22 +117,36 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 				Date modifedDate = DateTools.stringToDate(
 					result.get(Field.MODIFIED));
 				String content = docSummary.getContent();
-				Field tagField = (Field)result.getFields().get(Field.TAGS_ENTRIES);
-				String[] tags = tagField.getValues();
-				double rating = 0.0;
-				try {
-					String entryClassname = result.get(Field.ENTRY_CLASS_NAME);
-					String entryId = result.get(Field.ENTRY_ID);
-					if (entryClassname != null && entryId != null) {
-						RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(entryClassname, GetterUtil.getLong(entryId));
-						rating = stats.getAverageScore();
-					}
-				} catch (Exception e) {
-					rating = 0;
+
+				String[] tags = new String[0];
+
+				Field tagsEntriesField = (Field)result.getFields().get(
+					Field.TAGS_ENTRIES);
+
+				if (tagsEntriesField != null) {
+					tags = tagsEntriesField.getValues();
 				}
+
+				double rating = 0.0;
+
+				String entryClassName = result.get(Field.ENTRY_CLASS_NAME);
+				long entryClassPK = GetterUtil.getLong(
+					result.get(Field.ENTRY_CLASS_PK));
+
+				if ((Validator.isNotNull(entryClassName)) &&
+					(entryClassPK > 0)) {
+
+					RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(
+						entryClassName, entryClassPK);
+
+					rating = stats.getAverageScore();
+				}
+
 				double score = results.score(i);
 
-				addSearchResult(root, title, url, modifedDate, content, tags, score, rating);
+				addSearchResult(
+					root, title, url, modifedDate, content, tags, rating,
+					score);
 			}
 
 			if (_log.isDebugEnabled()) {

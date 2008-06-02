@@ -43,40 +43,15 @@ public class TagsSearchEntry extends SearchEntry {
 	public void setTags(String tags) {
 		_tags = tags;
 	}
-        
-        public int getSize() {
-            if (_tagsArray == null) {
-                getTagArray();
-            }
-            if (_tagsArray == null) {
-                return 0;
-            }
-            return _tagsArray.length;
-        }
-        public String getTag(int i) {
-            if (_tagsArray != null) {
-                return _tagsArray[i];
-            }
-            return "";
-        }
-        
-        public String[] getTagArray() {
-            if (_tags != null) {
-                _tagsArray = _tags.split(",");
-            }
-            return _tagsArray;
-        }
 
 	public void print(PageContext pageContext) throws Exception {
 		pageContext.include("/html/taglib/ui/search_iterator/tags.jsp");
 	}
 
-    @Override
 	public Object clone() {
 		return new TagsSearchEntry(getTags());
 	}
 
 	private String _tags;
-        private String[] _tagsArray = null;
 
 }
