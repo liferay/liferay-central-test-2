@@ -141,8 +141,8 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 				String path = el.attributeValue("path");
 
 				if (context.isPathNotProcessed(path)) {
-					BlogsEntry entry =
-						(BlogsEntry)context.getZipEntryAsObject(path);
+					BlogsEntry entry = (BlogsEntry)context.getZipEntryAsObject(
+						path);
 
 					importEntry(context, entry);
 				}
@@ -163,32 +163,41 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 			PortletDataContext context, Element el, BlogsEntry entry)
 		throws PortalException, SystemException {
 
-		if (context.isWithinDateRange(entry.getModifiedDate())) {
-			String path = getEntryPath(context, entry);
-
-			el.addElement("entry").addAttribute("path", path);
-
-			if (context.isPathNotProcessed(path)) {
-				if (context.getBooleanParameter(_NAMESPACE, "comments")) {
-					context.addComments(
-						BlogsEntry.class, entry.getPrimaryKeyObj());
-				}
-
-				if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
-					context.addRatingsEntries(
-						BlogsEntry.class, entry.getPrimaryKeyObj());
-				}
-
-				if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-					context.addTagsEntries(
-						BlogsEntry.class, entry.getPrimaryKeyObj());
-				}
-
-				entry.setUserUuid(entry.getUserUuid());
-
-				context.addZipEntry(path, entry);
-			}
+		if (!context.isWithinDateRange(entry.getModifiedDate())) {
+			return;
 		}
+
+		String path = getEntryPath(context, entry);
+
+		el.addElement("entry").addAttribute("path", path);
+
+		if (!context.isPathNotProcessed(path)) {
+			return;
+		}
+
+		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
+			context.addComments(BlogsEntry.class, entry.getPrimaryKeyObj());
+		}
+
+		if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
+			context.addRatingsEntries(
+				BlogsEntry.class, entry.getPrimaryKeyObj());
+		}
+
+		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
+			context.addTagsEntries(BlogsEntry.class, entry.getPrimaryKeyObj());
+		}
+
+		entry.setUserUuid(entry.getUserUuid());
+
+		context.addZipEntry(path, entry);
+	}
+
+	protected String getEntryPath(
+		PortletDataContext context, BlogsEntry entry) {
+
+		return context.getPortletPath(PortletKeys.BLOGS) + "/entries/" +
+			entry.getEntryId() + ".xml";
 	}
 
 	protected void importEntry(PortletDataContext context, BlogsEntry entry)
@@ -267,12 +276,6 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 				BlogsEntry.class, entry.getPrimaryKeyObj(),
 				existingEntry.getPrimaryKeyObj());
 		}
-	}
-
-	protected String getEntryPath(
-			PortletDataContext context, BlogsEntry entry) {
-		return context.getPortletPath(PortletKeys.BLOGS) + "/entries/" +
-			entry.getEntryId() + ".xml";
 	}
 
 	private static final String _NAMESPACE = "blogs";
