@@ -643,6 +643,54 @@ public class LayoutServiceHttp {
 
 	public static void importLayouts(HttpPrincipal httpPrincipal, long groupId,
 		boolean privateLayout, java.util.Map<String, String[]> parameterMap,
+		byte[] bytes)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new BooleanWrapper(privateLayout);
+
+			Object paramObj2 = parameterMap;
+
+			if (parameterMap == null) {
+				paramObj2 = new NullWrapper("java.util.Map");
+			}
+
+			Object paramObj3 = bytes;
+
+			if (bytes == null) {
+				paramObj3 = new NullWrapper("[B");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
+					"importLayouts",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static void importLayouts(HttpPrincipal httpPrincipal, long groupId,
+		boolean privateLayout, java.util.Map<String, String[]> parameterMap,
 		java.io.InputStream is)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {

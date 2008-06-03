@@ -23,18 +23,22 @@
 package com.liferay.portlet.messageboards.lar;
 
 import com.liferay.documentlibrary.service.DLServiceUtil;
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.DocumentUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.messageboards.NoSuchCategoryException;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.NoSuchThreadException;
@@ -56,8 +60,9 @@ import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
 import com.liferay.util.MapUtil;
+import com.liferay.util.xml.XMLFormatter;
 
-import com.thoughtworks.xstream.XStream;
+import java.rmi.RemoteException;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -77,6 +82,7 @@ import org.dom4j.Element;
  * <a href="MBPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
+ * @author Raymond Augé
  *
  */
 public class MBPortletDataHandlerImpl implements PortletDataHandler {
@@ -110,8 +116,6 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			XStream xStream = new XStream();
-
 			Document doc = DocumentHelper.createDocument();
 
 			Element root = doc.addElement("message-boards-data");
@@ -120,179 +124,33 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Categories
 
+			Element categoriesEl = root.addElement("categories");
+
+			Element messagesEl = root.addElement("messages");
+
+			Element messageFlagsEl = root.addElement("message-flags");
+
 			List<MBCategory> categories = MBCategoryUtil.findByGroupId(
 				context.getGroupId());
 
-			List<MBMessage> messages = new ArrayList<MBMessage>();
-
-			Iterator<MBCategory> categoriesItr = categories.iterator();
-
-			while (categoriesItr.hasNext()) {
-				MBCategory category = categoriesItr.next();
-
-				if (context.addPrimaryKey(
-						MBCategory.class, category.getPrimaryKeyObj())) {
-
-					categoriesItr.remove();
-				}
-				else {
-					category.setUserUuid(category.getUserUuid());
-
-					List<MBMessage> categoryMessages =
-						MBMessageUtil.findByCategoryId(
-							category.getCategoryId());
-
-					if (context.hasDateRange()) {
-						for (MBMessage message : categoryMessages) {
-							if (context.isWithinDateRange(
-									message.getModifiedDate())) {
-
-								messages.add(message);
-							}
-						}
-
-						if (!context.isWithinDateRange(
-								category.getModifiedDate())) {
-
-							categoriesItr.remove();
-						}
-					}
-					else {
-						messages.addAll(categoryMessages);
-					}
-				}
+			for (MBCategory category : categories) {
+				exportCategory(
+					context, categoriesEl, messagesEl, messageFlagsEl, category);
 			}
-
-			String xml = xStream.toXML(categories);
-
-			Element el = root.addElement("message-board-categories");
-
-			Document tempDoc = DocumentUtil.readDocumentFromXML(xml);
-
-			el.content().add(tempDoc.getRootElement().createCopy());
-
-			// Messages
-
-			List<MBMessageFlag> flags = new ArrayList<MBMessageFlag>();
-
-			Iterator<MBMessage> messagesItr = messages.iterator();
-
-			while (messagesItr.hasNext()) {
-				MBMessage message = messagesItr.next();
-
-				if (context.addPrimaryKey(
-						MBMessage.class, message.getPrimaryKeyObj())) {
-
-					messagesItr.remove();
-				}
-				else {
-					message.setUserUuid(message.getUserUuid());
-					message.setPriority(message.getPriority());
-
-					if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-						context.addTagsEntries(
-							MBMessage.class, message.getPrimaryKeyObj());
-					}
-
-					// Attachments
-
-					if (context.getBooleanParameter(
-							_NAMESPACE, "attachments") &&
-						message.isAttachments()) {
-
-						String[] attachments = message.getAttachmentsFiles();
-
-						for (int i = 0; i < attachments.length; i++) {
-							String attachment = attachments[i];
-
-							byte[] byteArray = DLServiceUtil.getFile(
-								context.getCompanyId(), CompanyConstants.SYSTEM,
-								attachment);
-
-							context.getZipWriter().addEntry(
-								attachment, byteArray);
-						}
-
-						message.setAttachmentsDir(message.getAttachmentsDir());
-					}
-
-					if (context.getBooleanParameter(_NAMESPACE, "flags")) {
-						List<MBMessageFlag> messageFlags =
-							MBMessageFlagUtil.findByMessageId(
-								message.getMessageId());
-
-						flags.addAll(messageFlags);
-					}
-				}
-			}
-
-			xml = xStream.toXML(messages);
-
-			el = root.addElement("message-board-messages");
-
-			tempDoc = DocumentUtil.readDocumentFromXML(xml);
-
-			el.content().add(tempDoc.getRootElement().createCopy());
-
-			// Flags
-
-			Iterator<MBMessageFlag> flagsItr = flags.iterator();
-
-			while (flagsItr.hasNext()) {
-				MBMessageFlag flag = flagsItr.next();
-
-				if (context.addPrimaryKey(
-						MBMessageFlag.class, flag.getPrimaryKeyObj())) {
-
-					flagsItr.remove();
-				}
-				else {
-					flag.setUserUuid(flag.getUserUuid());
-				}
-			}
-
-			xml = xStream.toXML(flags);
-
-			el = root.addElement("message-board-flags");
-
-			tempDoc = DocumentUtil.readDocumentFromXML(xml);
-
-			el.content().add(tempDoc.getRootElement().createCopy());
 
 			// Bans
 
-			List<MBBan> bans = new ArrayList<MBBan>();
+			Element userBansEl = root.addElement("user-bans");
 
 			if (context.getBooleanParameter(_NAMESPACE, "user-bans")) {
-				bans = MBBanUtil.findByGroupId(context.getGroupId());
+				List<MBBan> bans = MBBanUtil.findByGroupId(context.getGroupId());
 
-				Iterator<MBBan> bansItr = bans.iterator();
-
-				while (bansItr.hasNext()) {
-					MBBan ban = bansItr.next();
-
-					if (context.addPrimaryKey(
-							MBBan.class, ban.getPrimaryKeyObj())) {
-
-						bansItr.remove();
-					}
-					else {
-						ban.setBanUserUuid(ban.getBanUserUuid());
-
-						ban.setUserUuid(ban.getUserUuid());
-					}
+				for (MBBan ban : bans) {
+					exportUserBan(context, userBansEl, ban);
 				}
 			}
 
-			xml = xStream.toXML(bans);
-
-			el = root.addElement("message-board-bans");
-
-			tempDoc = DocumentUtil.readDocumentFromXML(xml);
-
-			el.content().add(tempDoc.getRootElement().createCopy());
-
-			return doc.asXML();
+			return XMLFormatter.toString(doc);
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -303,7 +161,8 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		return new PortletDataHandlerControl[] {
-			_categoriesAndMessages, _attachments, _userBans, _flags, _tags
+			_categoriesAndMessages, _attachments, _userBans, _flags, _ratings,
+			_tags
 		};
 	}
 
@@ -311,7 +170,8 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		return new PortletDataHandlerControl[] {
-			_categoriesAndMessages, _attachments, _userBans, _flags, _tags
+			_categoriesAndMessages, _attachments, _userBans, _flags, _ratings,
+			_tags
 		};
 	}
 
@@ -321,83 +181,84 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			XStream xStream = new XStream();
-
 			Document doc = DocumentUtil.readDocumentFromXML(data);
 
 			Element root = doc.getRootElement();
 
 			// Categories
 
-			Element el = root.element(
-				"message-board-categories").element("list");
-
-			Document tempDoc = DocumentHelper.createDocument();
-
-			tempDoc.content().add(el.createCopy());
+			List<Element> categoryEls =
+				root.element("categories").elements("category");
 
 			Map<Long, Long> categoryPKs = context.getNewPrimaryKeysMap(
 				MBCategory.class);
 
-			List<MBCategory> categories = (List<MBCategory>)xStream.fromXML(
-				tempDoc.asXML());
+			for (Element el : categoryEls) {
+				String path = el.attributeValue("path");
 
-			for (MBCategory category : categories) {
-				importCategory(context, categoryPKs, category);
+				if (context.isPathNotProcessed(path)) {
+					MBCategory category =
+						(MBCategory)context.getZipEntryAsObject(path);
+
+					importCategory(context, categoryPKs, category);
+				}
 			}
 
 			// Messages
 
-			el = root.element("message-board-messages").element("list");
-
-			tempDoc = DocumentHelper.createDocument();
-
-			tempDoc.content().add(el.createCopy());
+			List<Element> messageEls =
+				root.element("messages").elements("message");
 
 			Map<Long, Long> threadPKs = context.getNewPrimaryKeysMap(
 				MBThread.class);
 			Map<Long, Long> messagePKs = context.getNewPrimaryKeysMap(
 				MBMessage.class);
 
-			List<MBMessage> messages = (List<MBMessage>)xStream.fromXML(
-				tempDoc.asXML());
+			for (Element el : messageEls) {
+				String path = el.attributeValue("path");
 
-			for (MBMessage message : messages) {
-				importMessage(
-					context, categoryPKs, threadPKs, messagePKs, message);
+				if (context.isPathNotProcessed(path)) {
+					MBMessage message =
+						(MBMessage)context.getZipEntryAsObject(path);
+
+					importMessage(
+						context, categoryPKs, threadPKs, messagePKs, el,
+						message);
+				}
 			}
 
 			// Flags
 
 			if (context.getBooleanParameter(_NAMESPACE, "flags")) {
-				el = root.element("message-board-flags").element("list");
+				List<Element> flagEls =
+					root.element("message-flags").elements("flag");
 
-				tempDoc = DocumentHelper.createDocument();
+				for (Element el : flagEls) {
+					String path = el.attributeValue("path");
 
-				tempDoc.content().add(el.createCopy());
+					if (context.isPathNotProcessed(path)) {
+						MBMessageFlag flag =
+							(MBMessageFlag)context.getZipEntryAsObject(path);
 
-				List<MBMessageFlag> flags =
-					(List<MBMessageFlag>)xStream.fromXML(tempDoc.asXML());
-
-				for (MBMessageFlag flag : flags) {
-					importFlag(context, messagePKs, flag);
+						importFlag(context, messagePKs, flag);
+					}
 				}
 			}
 
 			// Bans
 
 			if (context.getBooleanParameter(_NAMESPACE, "user-bans")) {
-				el = root.element("message-board-bans").element("list");
+				List<Element> banEls = root.element("user-bans").elements("ban");
 
-				tempDoc = DocumentHelper.createDocument();
+				for (Element el : banEls) {
+					String path = el.attributeValue("path");
 
-				tempDoc.content().add(el.createCopy());
+					if (context.isPathNotProcessed(path)) {
+						MBBan ban =
+							(MBBan)context.getZipEntryAsObject(path);
 
-				List<MBBan> bans = (List<MBBan>)xStream.fromXML(
-					tempDoc.asXML());
-
-				for (MBBan ban : bans) {
-					importBan(context, ban);
+						importBan(context, ban);
+					}
 				}
 			}
 
@@ -410,6 +271,168 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 	public boolean isPublishToLiveByDefault() {
 		return false;
+	}
+
+	public static void exportCategory(
+			PortletDataContext context, Element categoriesEl, Element messagesEl,
+			Element messageFlagsEl, MBCategory category)
+		throws PortalException, SystemException {
+
+		if (context.isWithinDateRange(category.getModifiedDate())) {
+			String path = getCategoryPath(context, category);
+
+			categoriesEl.addElement("category").addAttribute("path", path);
+
+			if (context.isPathNotProcessed(path)) {
+				category.setUserUuid(category.getUserUuid());
+
+				context.addZipEntry(path, category);
+			}
+
+			exportParentCategory(
+				context, categoriesEl, category.getParentCategoryId());
+		}
+
+		List<MBMessage> categoryMessages = MBMessageUtil.findByCategoryId(
+				category.getCategoryId());
+
+		for (MBMessage message : categoryMessages) {
+			exportMessage(
+				context, categoriesEl, messagesEl, messageFlagsEl, message);
+		}
+	}
+
+	public static void exportMessage(
+			PortletDataContext context, Element categoriesEl, Element messagesEl,
+			Element messageFlagsEl, MBMessage message)
+		throws PortalException, SystemException {
+
+		if (context.isWithinDateRange(message.getModifiedDate())) {
+			String path = getMessagePath(context, message);
+
+			Element messageEl = messagesEl.addElement("message");
+			messageEl.addAttribute("path", path);
+
+			if (context.isPathNotProcessed(path)) {
+				message.setUserUuid(message.getUserUuid());
+				message.setPriority(message.getPriority());
+
+				if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
+					context.addRatingsEntries(
+						MBMessage.class, message.getPrimaryKeyObj());
+				}
+
+				if (context.getBooleanParameter(_NAMESPACE, "tags")) {
+					context.addTagsEntries(
+						MBMessage.class, message.getPrimaryKeyObj());
+				}
+
+				if (context.getBooleanParameter(_NAMESPACE, "attachments") &&
+						message.isAttachments()) {
+
+					for (String attachment : message.getAttachmentsFiles()) {
+						int lf = attachment.lastIndexOf(CharPool.FORWARD_SLASH);
+
+						String attachementName = attachment.substring(
+							(lf+1), attachment.length());
+
+						String attachementPath = getMessageAttachementBinPath(
+							context, attachementName, message);
+
+						Element attachementEl = messageEl.addElement(
+							"attachement");
+						attachementEl.addAttribute("name", attachementName);
+						attachementEl.addAttribute("bin-path", attachementPath);
+
+						try {
+							byte[] byteArray = DLServiceUtil.getFile(
+								context.getCompanyId(), CompanyConstants.SYSTEM,
+								attachment);
+
+							context.addZipEntry(
+								attachementPath, byteArray);
+						}
+						catch (RemoteException re) {
+						}
+					}
+
+					message.setAttachmentsDir(message.getAttachmentsDir());
+				}
+
+				if (context.getBooleanParameter(_NAMESPACE, "flags")) {
+					List<MBMessageFlag> messageFlags =
+						MBMessageFlagUtil.findByMessageId(
+							message.getMessageId());
+
+					for (MBMessageFlag messageFlag : messageFlags) {
+						exportMessageFlag(context, messageFlagsEl, messageFlag);
+					}
+				}
+
+				context.addZipEntry(path, message);
+			}
+
+			exportParentCategory(
+				context, categoriesEl, message.getCategoryId());
+		}
+	}
+
+	protected static void exportMessageFlag(
+			PortletDataContext context, Element messageFlagsEl,
+			MBMessageFlag messageFlag)
+		throws PortalException, SystemException {
+
+		String path = getMessageFlagPath(context, messageFlag);
+
+		messageFlagsEl.addElement("message-flag").addAttribute("path", path);
+
+		if (context.isPathNotProcessed(path)) {
+			messageFlag.setUserUuid(messageFlag.getUserUuid());
+
+			context.addZipEntry(path, messageFlag);
+		}
+	}
+
+	protected static void exportParentCategory(
+			PortletDataContext context, Element categoriesEl,
+			long categoryId)
+		throws PortalException, SystemException {
+
+		if (context.hasDateRange() &&
+				(categoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
+			MBCategory category = MBCategoryUtil.findByPrimaryKey(categoryId);
+
+			String path = getCategoryPath(context, category);
+
+			categoriesEl.addElement("category").addAttribute("path", path);
+
+			if (context.isPathNotProcessed(path)) {
+				category.setUserUuid(category.getUserUuid());
+
+				context.addZipEntry(path, category);
+			}
+
+			exportParentCategory(
+				context, categoriesEl, category.getParentCategoryId());
+		}
+	}
+
+	public static void exportUserBan(
+			PortletDataContext context, Element userBansEl, MBBan ban)
+		throws PortalException, SystemException {
+
+		if (context.isWithinDateRange(ban.getModifiedDate())) {
+			String path = getUserBanPath(context, ban);
+
+			userBansEl.addElement("ban").addAttribute("path", path);
+
+			if (context.isPathNotProcessed(path)) {
+				ban.setBanUserUuid(ban.getBanUserUuid());
+				ban.setUserUuid(ban.getUserUuid());
+
+				context.addZipEntry(path, ban);
+			}
+		}
 	}
 
 	protected void importBan(PortletDataContext context, MBBan ban)
@@ -517,7 +540,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 	protected void importMessage(
 			PortletDataContext context, Map<Long, Long> categoryPKs,
 			Map<Long, Long> threadPKs, Map<Long, Long> messagePKs,
-			MBMessage message)
+			Element messageEl, MBMessage message)
 		throws Exception {
 
 		long userId = context.getUserId(message.getUserUuid());
@@ -534,17 +557,24 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		List<String> existingFiles = new ArrayList<String>();
 
 		if (context.getBooleanParameter(_NAMESPACE, "attachments") &&
-			message.isAttachments()) {
+				message.isAttachments()) {
 
-			files = context.getZipReader().getFolderEntries().get(
-				message.getAttachmentsDir() + "/");
+			List<Element> attachementEls = messageEl.elements("attachement");
 
-			if (files == null) {
+			for (Element attachementEl : attachementEls) {
+				String name = attachementEl.attributeValue("name");
+				String attachementPath = attachementEl.attributeValue(
+					"bin-path");
+
+				byte[] bytes = context.getZipEntryAsByteArray(attachementPath);
+
+				files.add(new ObjectValuePair<String, byte[]>(name, bytes));
+			}
+
+			if (files.size() <= 0) {
 				_log.error(
 					"Could not find attachments for message " +
 						message.getMessageId());
-
-				files = new ArrayList<ObjectValuePair<String, byte[]>>();
 			}
 		}
 
@@ -609,6 +639,12 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 				new Long(existingMessage.getThreadId()));
 			messagePKs.put(
 				message.getMessageId(), existingMessage.getMessageId());
+
+			if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
+				context.importRatingsEntries(
+					MBMessage.class, message.getPrimaryKeyObj(),
+					existingMessage.getPrimaryKeyObj());
+			}
 		}
 		catch (NoSuchCategoryException nsce) {
 			_log.error(
@@ -627,6 +663,37 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
+	protected static String getMessageAttachementBinPath(
+			PortletDataContext context, String attachment, MBMessage message) {
+		return context.getPortletPath(PortletKeys.MESSAGE_BOARDS) +
+			"/bin/" + message.getMessageId() + CharPool.FORWARD_SLASH +
+				attachment;
+	}
+
+	protected static String getCategoryPath(
+			PortletDataContext context, MBCategory category) {
+		return context.getPortletPath(PortletKeys.MESSAGE_BOARDS) +
+			"/categories/" + category.getCategoryId() + ".xml";
+	}
+
+	protected static String getMessageFlagPath(
+			PortletDataContext context, MBMessageFlag messageFlag) {
+		return context.getPortletPath(PortletKeys.MESSAGE_BOARDS) +
+			"/message-flags/" + messageFlag.getMessageFlagId() + ".xml";
+	}
+
+	protected static String getMessagePath(
+			PortletDataContext context, MBMessage message) {
+		return context.getPortletPath(PortletKeys.MESSAGE_BOARDS) +
+			"/messages/" + message.getMessageId() + ".xml";
+	}
+
+	protected static String getUserBanPath(
+			PortletDataContext context, MBBan ban) {
+		return context.getPortletPath(PortletKeys.MESSAGE_BOARDS) +
+			"/user-bans/" + ban.getBanId() + ".xml";
+	}
+
 	private static final String _NAMESPACE = "message_board";
 
 	private static final PortletDataHandlerBoolean _categoriesAndMessages =
@@ -641,6 +708,9 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 	private static final PortletDataHandlerBoolean _flags =
 		new PortletDataHandlerBoolean(_NAMESPACE, "flags");
+
+	private static final PortletDataHandlerBoolean _ratings =
+		new PortletDataHandlerBoolean(_NAMESPACE, "ratings");
 
 	private static final PortletDataHandlerBoolean _tags =
 		new PortletDataHandlerBoolean(_NAMESPACE, "tags");

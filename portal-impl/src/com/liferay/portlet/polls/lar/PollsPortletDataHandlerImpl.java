@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.polls.lar;
 
+import com.thoughtworks.xstream.XStream;
+
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
@@ -32,6 +34,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.util.DocumentUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.polls.DuplicateVoteException;
 import com.liferay.portlet.polls.NoSuchChoiceException;
 import com.liferay.portlet.polls.NoSuchQuestionException;
@@ -46,13 +49,10 @@ import com.liferay.portlet.polls.service.persistence.PollsChoiceUtil;
 import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
 import com.liferay.portlet.polls.service.persistence.PollsVoteUtil;
 import com.liferay.util.MapUtil;
+import com.liferay.util.xml.XMLFormatter;
 
-import com.thoughtworks.xstream.XStream;
-
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -102,8 +102,6 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			XStream xStream = new XStream();
-
 			Document doc = DocumentHelper.createDocument();
 
 			Element root = doc.addElement("polls-data");
@@ -112,103 +110,20 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Questions
 
+			Element questionsEl = root.addElement("questions");
+
+			Element choicesEl = root.addElement("choices");
+
+			Element votesEl = root.addElement("votes");
+
 			List<PollsQuestion> questions = PollsQuestionUtil.findByGroupId(
 				context.getGroupId());
 
-			List<PollsChoice> choices = new ArrayList<PollsChoice>();
-
-			List<PollsVote> votes = new ArrayList<PollsVote>();
-
-			Iterator<PollsQuestion> questionsItr = questions.iterator();
-
-			while (questionsItr.hasNext()) {
-				PollsQuestion question = questionsItr.next();
-
-				if (context.addPrimaryKey(
-						PollsQuestion.class, question.getPrimaryKeyObj())) {
-
-					questionsItr.remove();
-				}
-				else if (!context.isWithinDateRange(
-							question.getModifiedDate())) {
-
-					questionsItr.remove();
-				}
-				else {
-					List<PollsChoice> questionChoices =
-						PollsChoiceUtil.findByQuestionId(
-							question.getQuestionId());
-
-					choices.addAll(questionChoices);
-
-					if (context.getBooleanParameter(_NAMESPACE, "votes")) {
-						question.setUserUuid(question.getUserUuid());
-
-						List<PollsVote> questionVotes =
-							PollsVoteUtil.findByQuestionId(
-								question.getQuestionId());
-
-						votes.addAll(questionVotes);
-					}
-				}
+			for (PollsQuestion question : questions) {
+				exportQuestion(context, questionsEl, choicesEl, votesEl, question);
 			}
 
-			String xml = xStream.toXML(questions);
-
-			Element el = root.addElement("poll-questions");
-
-			Document tempDoc = DocumentUtil.readDocumentFromXML(xml);
-
-			el.content().add(tempDoc.getRootElement().createCopy());
-
-			// Choices
-
-			Iterator<PollsChoice> choicesItr = choices.iterator();
-
-			while (choicesItr.hasNext()) {
-				PollsChoice choice = choicesItr.next();
-
-				if (context.addPrimaryKey(
-						PollsChoice.class, choice.getPrimaryKeyObj())) {
-
-					choicesItr.remove();
-				}
-			}
-
-			xml = xStream.toXML(choices);
-
-			el = root.addElement("poll-choices");
-
-			tempDoc = DocumentUtil.readDocumentFromXML(xml);
-
-			el.content().add(tempDoc.getRootElement().createCopy());
-
-			// Votes
-
-			Iterator<PollsVote> votesItr = votes.iterator();
-
-			while (votesItr.hasNext()) {
-				PollsVote vote = votesItr.next();
-
-				if (context.addPrimaryKey(
-						PollsVote.class, vote.getPrimaryKeyObj())) {
-
-					votesItr.remove();
-				}
-				else {
-					vote.setUserUuid(vote.getUserUuid());
-				}
-			}
-
-			xml = xStream.toXML(votes);
-
-			el = root.addElement("poll-votes");
-
-			tempDoc = DocumentUtil.readDocumentFromXML(xml);
-
-			el.content().add(tempDoc.getRootElement().createCopy());
-
-			return doc.asXML();
+			return XMLFormatter.toString(doc);
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -241,54 +156,57 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Questions
 
-			Element el = root.element("poll-questions").element("list");
-
-			Document tempDoc = DocumentHelper.createDocument();
-
-			tempDoc.content().add(el.createCopy());
+			List<Element> questionEls =
+				root.element("questions").elements("question");
 
 			Map<Long, Long> questionPKs = context.getNewPrimaryKeysMap(
 				PollsQuestion.class);
 
-			List<PollsQuestion> questions =
-				(List<PollsQuestion>)xStream.fromXML(tempDoc.asXML());
+			for (Element el : questionEls) {
+				String path = el.attributeValue("path");
 
-			for (PollsQuestion question : questions) {
-				importQuestion(context, questionPKs, question);
+				if (context.isPathNotProcessed(path)) {
+					PollsQuestion question =
+						(PollsQuestion)context.getZipEntryAsObject(path);
+
+					importQuestion(context, questionPKs, question);
+				}
 			}
 
 			// Choices
 
-			el = root.element("poll-choices").element("list");
-
-			tempDoc = DocumentHelper.createDocument();
-
-			tempDoc.content().add(el.createCopy());
+			List<Element> choiceEls =
+				root.element("choices").elements("choice");
 
 			Map<Long, Long> choicePKs = context.getNewPrimaryKeysMap(
 				PollsChoice.class);
 
-			List<PollsChoice> choices = (List<PollsChoice>)xStream.fromXML(
-				tempDoc.asXML());
+			for (Element el : choiceEls) {
+				String path = el.attributeValue("path");
 
-			for (PollsChoice choice : choices) {
-				importChoice(context, questionPKs, choicePKs, choice);
+				if (context.isPathNotProcessed(path)) {
+					PollsChoice choice =
+						(PollsChoice)context.getZipEntryAsObject(path);
+
+					importChoice(context, questionPKs, choicePKs, choice);
+				}
 			}
 
 			// Votes
 
 			if (context.getBooleanParameter(_NAMESPACE, "votes")) {
-				el = root.element("poll-votes").element("list");
+				List<Element> voteEls =
+					root.element("votes").elements("vote");
 
-				tempDoc = DocumentHelper.createDocument();
+				for (Element el : voteEls) {
+					String path = el.attributeValue("path");
 
-				tempDoc.content().add(el.createCopy());
+					if (context.isPathNotProcessed(path)) {
+						PollsVote vote =
+							(PollsVote)context.getZipEntryAsObject(path);
 
-				List<PollsVote> votes = (List<PollsVote>)xStream.fromXML(
-					tempDoc.asXML());
-
-				for (PollsVote vote : votes) {
-					importVote(context, questionPKs, choicePKs, vote);
+						importVote(context, questionPKs, choicePKs, vote);
+					}
 				}
 			}
 
@@ -301,6 +219,66 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 	public boolean isPublishToLiveByDefault() {
 		return false;
+	}
+
+	public static void exportChoice(
+			PortletDataContext context, Element questionsEl, PollsChoice choice)
+		throws PortalException, SystemException {
+
+		String path = getChoicePath(context, choice);
+
+		questionsEl.addElement("choice").addAttribute("path", path);
+
+		if (context.isPathNotProcessed(path)) {
+			context.addZipEntry(path, choice);
+		}
+	}
+
+	public static void exportQuestion(
+			PortletDataContext context, Element questionsEl, Element choicesEl,
+			Element votesEl, PollsQuestion question)
+		throws PortalException, SystemException {
+
+		if (context.isWithinDateRange(question.getModifiedDate())) {
+			String path = getQuestionPath(context, question);
+
+			questionsEl.addElement("question").addAttribute("path", path);
+
+			if (context.isPathNotProcessed(path)) {
+				question.setUserUuid(question.getUserUuid());
+
+				List<PollsChoice> choices = PollsChoiceUtil.findByQuestionId(
+					question.getQuestionId());
+
+				for (PollsChoice choice : choices) {
+					exportChoice(context, choicesEl, choice);
+				}
+
+				if (context.getBooleanParameter(_NAMESPACE, "votes")) {
+					List<PollsVote> votes = PollsVoteUtil.findByQuestionId(
+						question.getQuestionId());
+
+					for (PollsVote vote : votes) {
+						exportVote(context, votesEl, vote);
+					}
+				}
+
+				context.addZipEntry(path, question);
+			}
+		}
+	}
+
+	public static void exportVote(
+			PortletDataContext context, Element questionsEl, PollsVote vote)
+		throws PortalException, SystemException {
+
+		String path = getVotePath(context, vote);
+
+		questionsEl.addElement("vote").addAttribute("path", path);
+
+		if (context.isPathNotProcessed(path)) {
+			context.addZipEntry(path, vote);
+		}
 	}
 
 	protected void importChoice(
@@ -446,6 +424,26 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 			_log.error(
 				"Could not find the choice for vote " + vote.getVoteId());
 		}
+	}
+
+	protected static String getChoicePath(
+			PortletDataContext context, PollsChoice choice) {
+		return context.getPortletPath(PortletKeys.POLLS) + "/questions/" +
+			choice.getQuestionId() + "/choices/" + choice.getChoiceId() +
+				".xml";
+	}
+
+	protected static String getQuestionPath(
+			PortletDataContext context, PollsQuestion question) {
+		return context.getPortletPath(PortletKeys.POLLS) + "/questions/" +
+			question.getQuestionId() + ".xml";
+	}
+
+	protected static String getVotePath(
+			PortletDataContext context, PollsVote vote) {
+		return context.getPortletPath(PortletKeys.POLLS) + "/questions/" +
+			vote.getQuestionId() + "/votes/" + vote.getVoteId() +
+				".xml";
 	}
 
 	private static final String _NAMESPACE = "polls";

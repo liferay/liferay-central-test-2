@@ -159,6 +159,15 @@ public class LayoutServiceUtil {
 	}
 
 	public static void importLayouts(long groupId, boolean privateLayout,
+		java.util.Map<String, String[]> parameterMap, byte[] bytes)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		LayoutService layoutService = LayoutServiceFactory.getService();
+
+		layoutService.importLayouts(groupId, privateLayout, parameterMap, bytes);
+	}
+
+	public static void importLayouts(long groupId, boolean privateLayout,
 		java.util.Map<String, String[]> parameterMap, java.io.InputStream is)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
