@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.blogs.lar;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
@@ -31,14 +33,13 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.DocumentUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
-
-import com.thoughtworks.xstream.XStream;
+import com.liferay.util.xml.XMLFormatter;
 
 import java.util.Calendar;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.portlet.PortletPreferences;
@@ -51,6 +52,7 @@ import org.dom4j.Element;
  * <a href="BlogsPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
+ * @author Raymond Augé
  *
  */
 public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
@@ -83,8 +85,6 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			XStream xStream = new XStream();
-
 			Document doc = DocumentHelper.createDocument();
 
 			Element root = doc.addElement("blogs-data");
@@ -96,48 +96,11 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 			List<BlogsEntry> entries = BlogsEntryUtil.findByGroupId(
 				context.getGroupId());
 
-			Iterator<BlogsEntry> itr = entries.iterator();
-
-			while (itr.hasNext()) {
-				BlogsEntry entry = itr.next();
-
-				if (context.addPrimaryKey(
-						BlogsEntry.class, entry.getPrimaryKeyObj())) {
-
-					itr.remove();
-				}
-				else if (!context.isWithinDateRange(entry.getModifiedDate())) {
-					itr.remove();
-				}
-				else {
-					entry.setUserUuid(entry.getUserUuid());
-
-					if (context.getBooleanParameter(_NAMESPACE, "comments")) {
-						context.addComments(
-							BlogsEntry.class, entry.getPrimaryKeyObj());
-					}
-
-					if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
-						context.addRatingsEntries(
-							BlogsEntry.class, entry.getPrimaryKeyObj());
-					}
-
-					if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-						context.addTagsEntries(
-							BlogsEntry.class, entry.getPrimaryKeyObj());
-					}
-				}
+			for (BlogsEntry entry : entries) {
+				exportEntry(context, root, entry);
 			}
 
-			String xml = xStream.toXML(entries);
-
-			Element el = root.addElement("blog-entries");
-
-			Document tempDoc = DocumentUtil.readDocumentFromXML(xml);
-
-			el.content().add(tempDoc.getRootElement().createCopy());
-
-			return doc.asXML();
+			return XMLFormatter.toString(doc);
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -166,29 +129,23 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			XStream xStream = new XStream();
-
 			Document doc = DocumentUtil.readDocumentFromXML(data);
 
 			Element root = doc.getRootElement();
 
 			// Entries
 
-			Element el = root.element("blog-entries").element("list");
+			List<Element> entries = root.elements("entry");
 
-			Document tempDoc = DocumentHelper.createDocument();
+			for (Element el : entries) {
+				String path = el.attributeValue("path");
 
-			tempDoc.content().add(el.createCopy());
+				if (context.isPathNotProcessed(path)) {
+					BlogsEntry entry =
+						(BlogsEntry)context.getZipEntryAsObject(path);
 
-			List<BlogsEntry> entries = (List<BlogsEntry>)xStream.fromXML(
-				tempDoc.asXML());
-
-			Iterator<BlogsEntry> itr = entries.iterator();
-
-			while (itr.hasNext()) {
-				BlogsEntry entry = itr.next();
-
-				importEntry(context, entry);
+					importEntry(context, entry);
+				}
 			}
 
 			return null;
@@ -200,6 +157,38 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 	public boolean isPublishToLiveByDefault() {
 		return false;
+	}
+
+	protected void exportEntry(
+			PortletDataContext context, Element el, BlogsEntry entry)
+		throws PortalException, SystemException {
+
+		if (context.isWithinDateRange(entry.getModifiedDate())) {
+			String path = getEntryPath(context, entry);
+
+			el.addElement("entry").addAttribute("path", path);
+
+			if (context.isPathNotProcessed(path)) {
+				if (context.getBooleanParameter(_NAMESPACE, "comments")) {
+					context.addComments(
+						BlogsEntry.class, entry.getPrimaryKeyObj());
+				}
+
+				if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
+					context.addRatingsEntries(
+						BlogsEntry.class, entry.getPrimaryKeyObj());
+				}
+
+				if (context.getBooleanParameter(_NAMESPACE, "tags")) {
+					context.addTagsEntries(
+						BlogsEntry.class, entry.getPrimaryKeyObj());
+				}
+
+				entry.setUserUuid(entry.getUserUuid());
+
+				context.addZipEntry(path, entry);
+			}
+		}
 	}
 
 	protected void importEntry(PortletDataContext context, BlogsEntry entry)
@@ -278,6 +267,12 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 				BlogsEntry.class, entry.getPrimaryKeyObj(),
 				existingEntry.getPrimaryKeyObj());
 		}
+	}
+
+	protected String getEntryPath(
+			PortletDataContext context, BlogsEntry entry) {
+		return context.getPortletPath(PortletKeys.BLOGS) + "/entries/" +
+			entry.getEntryId() + ".xml";
 	}
 
 	private static final String _NAMESPACE = "blogs";
