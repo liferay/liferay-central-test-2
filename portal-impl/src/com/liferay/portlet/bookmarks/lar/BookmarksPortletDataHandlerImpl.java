@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.bookmarks.lar;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
@@ -29,6 +31,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.util.DocumentUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.bookmarks.NoSuchEntryException;
 import com.liferay.portlet.bookmarks.NoSuchFolderException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
@@ -40,11 +43,8 @@ import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinderUti
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil;
 import com.liferay.util.MapUtil;
+import com.liferay.util.xml.XMLFormatter;
 
-import com.thoughtworks.xstream.XStream;
-
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -63,6 +63,7 @@ import org.dom4j.Element;
  *
  * @author Jorge Ferrer
  * @author Bruno Farache
+ * @author Raymond Augé
  *
  */
 public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
@@ -96,98 +97,24 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			XStream xStream = new XStream();
-
 			Document doc = DocumentHelper.createDocument();
 
 			Element root = doc.addElement("bookmarks-data");
 
 			root.addAttribute("group-id", String.valueOf(context.getGroupId()));
 
-			// Folders
+			Element foldersEl = root.addElement("folders");
+
+			Element entriesEl = root.addElement("entries");
 
 			List<BookmarksFolder> folders = BookmarksFolderUtil.findByGroupId(
 				context.getGroupId());
 
-			List<BookmarksEntry> entries = new ArrayList<BookmarksEntry>();
-
-			Iterator<BookmarksFolder> foldersItr = folders.iterator();
-
-			while (foldersItr.hasNext()) {
-				BookmarksFolder folder = foldersItr.next();
-
-				if (context.addPrimaryKey(
-						BookmarksFolder.class, folder.getPrimaryKeyObj())) {
-
-					foldersItr.remove();
-				}
-				else {
-					folder.setUserUuid(folder.getUserUuid());
-
-					List<BookmarksEntry> folderEntries =
-						BookmarksEntryUtil.findByFolderId(
-								folder.getFolderId());
-
-					if (context.hasDateRange()) {
-						for (BookmarksEntry entry : folderEntries) {
-							if (context.isWithinDateRange(
-									entry.getModifiedDate())) {
-
-								entries.add(entry);
-							}
-						}
-
-						if (!context.isWithinDateRange(
-								folder.getModifiedDate())) {
-
-							foldersItr.remove();
-						}
-					}
-					else {
-						entries.addAll(folderEntries);
-					}
-				}
+			for (BookmarksFolder folder : folders) {
+				exportFolder(context, foldersEl, entriesEl, folder);
 			}
 
-			String xml = xStream.toXML(folders);
-
-			Element el = root.addElement("bookmark-folders");
-
-			Document tempDoc = DocumentUtil.readDocumentFromXML(xml);
-
-			el.content().add(tempDoc.getRootElement().createCopy());
-
-			// Entries
-
-			Iterator<BookmarksEntry> entriesItr = entries.iterator();
-
-			while (entriesItr.hasNext()) {
-				BookmarksEntry entry = entriesItr.next();
-
-				if (context.addPrimaryKey(
-						BookmarksEntry.class, entry.getPrimaryKeyObj())) {
-
-					entriesItr.remove();
-				}
-				else {
-					entry.setUserUuid(entry.getUserUuid());
-
-					if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-						context.addTagsEntries(
-							BookmarksEntry.class, entry.getPrimaryKeyObj());
-					}
-				}
-			}
-
-			xml = xStream.toXML(entries);
-
-			el = root.addElement("bookmark-entries");
-
-			tempDoc = DocumentUtil.readDocumentFromXML(xml);
-
-			el.content().add(tempDoc.getRootElement().createCopy());
-
-			return doc.asXML();
+			return XMLFormatter.toString(doc);
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -212,51 +139,41 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			XStream xStream = new XStream();
-
 			Document doc = DocumentUtil.readDocumentFromXML(data);
 
 			Element root = doc.getRootElement();
 
 			// Folders
 
-			Element el = root.element("bookmark-folders").element("list");
-
-			Document tempDoc = DocumentHelper.createDocument();
-
-			tempDoc.content().add(el.createCopy());
+			List<Element> folderEls = root.element("folders").elements("folder");
 
 			Map<Long, Long> folderPKs = context.getNewPrimaryKeysMap(
 				BookmarksFolder.class);
 
-			List<BookmarksFolder> folders =
-				(List<BookmarksFolder>)xStream.fromXML(tempDoc.asXML());
+			for (Element el : folderEls) {
+				String path = el.attributeValue("path");
 
-			Iterator<BookmarksFolder> foldersItr = folders.iterator();
+				if (context.isPathNotProcessed(path)) {
+					BookmarksFolder folder =
+						(BookmarksFolder)context.getZipEntryAsObject(path);
 
-			while (foldersItr.hasNext()) {
-				BookmarksFolder folder = foldersItr.next();
-
-				importFolder(context, folderPKs, folder);
+					importFolder(context, folderPKs, folder);
+				}
 			}
 
 			// Entries
 
-			el = root.element("bookmark-entries").element("list");
+			List<Element> entryEls = root.element("entries").elements("entry");
 
-			tempDoc = DocumentHelper.createDocument();
+			for (Element el : entryEls) {
+				String path = el.attributeValue("path");
 
-			tempDoc.content().add(el.createCopy());
+				if (context.isPathNotProcessed(path)) {
+					BookmarksEntry entry =
+						(BookmarksEntry)context.getZipEntryAsObject(path);
 
-			List<BookmarksEntry> entries =
-				(List<BookmarksEntry>)xStream.fromXML(tempDoc.asXML());
-
-			Iterator<BookmarksEntry> entriesItr = entries.iterator();
-
-			while (entriesItr.hasNext()) {
-				BookmarksEntry entry = entriesItr.next();
-
-				importEntry(context, folderPKs, entry);
+					importEntry(context, folderPKs, entry);
+				}
 			}
 
 			return null;
@@ -268,6 +185,83 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 	public boolean isPublishToLiveByDefault() {
 		return false;
+	}
+
+	protected void exportEntry(
+			PortletDataContext context, Element foldersEl, Element entriesEl,
+			BookmarksEntry entry)
+		throws PortalException, SystemException {
+
+		if (context.isWithinDateRange(entry.getModifiedDate())) {
+			String path = getEntryPath(context, entry);
+
+			entriesEl.addElement("entry").addAttribute("path", path);
+
+			if (context.isPathNotProcessed(path)) {
+				if (context.getBooleanParameter(_NAMESPACE, "tags")) {
+					context.addTagsEntries(
+						BookmarksEntry.class,
+						new Long(entry.getEntryId()));
+				}
+
+				entry.setUserUuid(entry.getUserUuid());
+
+				context.addZipEntry(path, entry);
+			}
+
+			exportParentFolder(context, foldersEl, entry.getFolderId());
+		}
+	}
+
+	protected void exportFolder(
+			PortletDataContext context, Element foldersEl, Element entriesEl,
+			BookmarksFolder folder)
+		throws PortalException, SystemException {
+
+		if (context.isWithinDateRange(folder.getModifiedDate())) {
+			String path = getFolderPath(context, folder);
+
+			foldersEl.addElement("folder").addAttribute("path", path);
+
+			if (context.isPathNotProcessed(path)) {
+				folder.setUserUuid(folder.getUserUuid());
+
+				context.addZipEntry(path, folder);
+			}
+
+			exportParentFolder(context, foldersEl, folder.getParentFolderId());
+		}
+
+		List<BookmarksEntry> entries =
+			BookmarksEntryUtil.findByFolderId(folder.getFolderId());
+
+		for (BookmarksEntry entry : entries) {
+			exportEntry(context, foldersEl, entriesEl, entry);
+		}
+	}
+
+	protected void exportParentFolder(
+			PortletDataContext context, Element foldersEl,
+			long folderId)
+		throws PortalException, SystemException {
+
+		if (context.hasDateRange() &&
+				(folderId != BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+			BookmarksFolder folder =
+				BookmarksFolderUtil.findByPrimaryKey(folderId);
+
+			String path = getFolderPath(context, folder);
+
+			foldersEl.addElement("folder").addAttribute("path", path);
+
+			if (context.isPathNotProcessed(path)) {
+				folder.setUserUuid(folder.getUserUuid());
+
+				context.addZipEntry(path, folder);
+			}
+
+			exportParentFolder(context, foldersEl, folder.getParentFolderId());
+		}
 	}
 
 	protected void importEntry(
@@ -383,6 +377,18 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 				"Could not find the parent folder for folder " +
 					folder.getFolderId());
 		}
+	}
+
+	protected String getEntryPath(
+			PortletDataContext context, BookmarksEntry entry) {
+		return context.getPortletPath(PortletKeys.BOOKMARKS) + "/entries/" +
+			entry.getEntryId() + ".xml";
+	}
+
+	protected String getFolderPath(
+			PortletDataContext context, BookmarksFolder folder) {
+		return context.getPortletPath(PortletKeys.BOOKMARKS) + "/folders/" +
+			folder.getFolderId() + ".xml";
 	}
 
 	private static final String _NAMESPACE = "bookmarks";
