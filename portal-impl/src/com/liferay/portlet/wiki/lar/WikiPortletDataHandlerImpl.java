@@ -23,16 +23,29 @@
 package com.liferay.portlet.wiki.lar;
 
 import com.liferay.documentlibrary.service.DLServiceUtil;
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.DocumentUtil;
+import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryUtil;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutUtil;
+import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.wiki.DuplicateNodeNameException;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiNode;
@@ -43,6 +56,9 @@ import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPageFinderUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
 import com.liferay.util.MapUtil;
+import com.liferay.util.xml.XMLFormatter;
+
+import java.rmi.RemoteException;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -96,8 +112,6 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			XStream xStream = new XStream();
-
 			Document doc = DocumentHelper.createDocument();
 
 			Element root = doc.addElement("wiki-data");
@@ -106,116 +120,18 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Nodes
 
+			Element nodesEl = root.addElement("nodes");
+
+			Element pagesEl = root.addElement("pages");
+
 			List<WikiNode> nodes = WikiNodeUtil.findByGroupId(
 				context.getGroupId());
 
-			List<WikiPage> pages = new ArrayList<WikiPage>();
-
-			Iterator<WikiNode> nodesItr = nodes.iterator();
-
-			while (nodesItr.hasNext()) {
-				WikiNode node = nodesItr.next();
-
-				if (context.addPrimaryKey(
-						WikiNode.class, node.getPrimaryKeyObj())) {
-
-					nodesItr.remove();
-				}
-				else {
-					node.setUserUuid(node.getUserUuid());
-
-					List<WikiPage> nodePages = WikiPageUtil.findByNodeId(
-						node.getNodeId());
-
-					if (context.hasDateRange()) {
-						for (WikiPage page : nodePages) {
-							if (context.isWithinDateRange(
-									page.getModifiedDate())) {
-
-								pages.add(page);
-							}
-						}
-
-						if (!context.isWithinDateRange(
-								node.getModifiedDate())) {
-
-							nodesItr.remove();
-						}
-					}
-					else {
-						pages.addAll(nodePages);
-					}
-				}
+			for (WikiNode node : nodes) {
+				exportNode(context, nodesEl, pagesEl, node);
 			}
 
-			String xml = xStream.toXML(nodes);
-
-			Element el = root.addElement("wiki-nodes");
-
-			Document tempDoc = DocumentUtil.readDocumentFromXML(xml);
-
-			el.content().add(tempDoc.getRootElement().createCopy());
-
-			// Pages
-
-			Iterator<WikiPage> pagesItr = pages.iterator();
-
-			while (pagesItr.hasNext()) {
-				WikiPage page = pagesItr.next();
-
-				if (context.addPrimaryKey(
-						WikiPage.class, page.getPrimaryKeyObj())) {
-
-					pagesItr.remove();
-				}
-				else {
-					page.setUserUuid(page.getUserUuid());
-
-					if (context.getBooleanParameter(_NAMESPACE, "comments")) {
-						context.addComments(
-							WikiPage.class,
-							new Long(page.getResourcePrimKey()));
-					}
-
-					if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-						context.addTagsEntries(
-							WikiPage.class,
-							new Long(page.getResourcePrimKey()));
-					}
-
-					// Attachments
-
-					if (context.getBooleanParameter(
-							_NAMESPACE, "attachments") && page.isHead()) {
-
-						String[] attachments = page.getAttachmentsFiles();
-
-						for (int i = 0; i < attachments.length; i++) {
-							String attachment = attachments[i];
-
-							byte[] byteArray = DLServiceUtil.getFile(
-								context.getCompanyId(), CompanyConstants.SYSTEM,
-								attachment);
-
-							context.getZipWriter().addEntry(
-								attachment, byteArray);
-						}
-
-						page.setAttachmentsDir(page.getAttachmentsDir());
-					}
-
-				}
-			}
-
-			xml = xStream.toXML(pages);
-
-			el = root.addElement("wiki-pages");
-
-			tempDoc = DocumentUtil.readDocumentFromXML(xml);
-
-			el.content().add(tempDoc.getRootElement().createCopy());
-
-			return doc.asXML();
+			return XMLFormatter.toString(doc);
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -244,51 +160,43 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			XStream xStream = new XStream();
-
 			Document doc = DocumentUtil.readDocumentFromXML(data);
 
 			Element root = doc.getRootElement();
 
 			// Nodes
 
-			Element el = root.element("wiki-nodes").element("list");
-
-			Document tempDoc = DocumentHelper.createDocument();
-
-			tempDoc.content().add(el.createCopy());
+			List<Element> nodeEls =
+				root.element("nodes").elements("node");
 
 			Map<Long, Long> nodePKs = context.getNewPrimaryKeysMap(
 				WikiNode.class);
 
-			List<WikiNode> nodes = (List<WikiNode>)xStream.fromXML(
-				tempDoc.asXML());
+			for (Element el : nodeEls) {
+				String path = el.attributeValue("path");
 
-			Iterator<WikiNode> nodesItr = nodes.iterator();
+				if (context.isPathNotProcessed(path)) {
+					WikiNode node =
+						(WikiNode)context.getZipEntryAsObject(path);
 
-			while (nodesItr.hasNext()) {
-				WikiNode node = nodesItr.next();
-
-				importNode(context, nodePKs, node);
+					importNode(context, nodePKs, node);
+				}
 			}
 
 			// Pages
 
-			el = root.element("wiki-pages").element("list");
+			List<Element> pageEls =
+				root.element("pages").elements("page");
 
-			tempDoc = DocumentHelper.createDocument();
+			for (Element el : pageEls) {
+				String path = el.attributeValue("path");
 
-			tempDoc.content().add(el.createCopy());
+				if (context.isPathNotProcessed(path)) {
+					WikiPage page =
+						(WikiPage)context.getZipEntryAsObject(path);
 
-			List<WikiPage> pages = (List<WikiPage>)xStream.fromXML(
-				tempDoc.asXML());
-
-			Iterator<WikiPage> pagesItr = pages.iterator();
-
-			while (pagesItr.hasNext()) {
-				WikiPage page = pagesItr.next();
-
-				importPage(context, nodePKs, page);
+					importPage(context, nodePKs, el, page);
+				}
 			}
 
 			return null;
@@ -300,6 +208,116 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 
 	public boolean isPublishToLiveByDefault() {
 		return false;
+	}
+
+	protected void exportNode(
+			PortletDataContext context, Element nodesEl, Element pagesEl,
+			WikiNode node)
+		throws PortalException, SystemException {
+
+		if (context.isWithinDateRange(node.getModifiedDate())) {
+			String path = getNodePath(context, node);
+
+			nodesEl.addElement("node").addAttribute("path", path);
+
+			if (context.isPathNotProcessed(path)) {
+				node.setUserUuid(node.getUserUuid());
+
+				context.addZipEntry(path, node);
+			}
+		}
+
+		List<WikiPage> nodePages = WikiPageUtil.findByNodeId(
+			node.getNodeId());
+
+		for (WikiPage page : nodePages) {
+			exportPage(context, nodesEl, pagesEl, page);
+		}
+	}
+
+	protected void exportNode(
+			PortletDataContext context, Element nodesEl, long nodeId)
+		throws PortalException, SystemException {
+
+		if (context.hasDateRange()) {
+			WikiNode node = WikiNodeUtil.findByPrimaryKey(nodeId);
+
+			String path = getNodePath(context, node);
+
+			nodesEl.addElement("node").addAttribute("path", path);
+
+			if (context.isPathNotProcessed(path)) {
+				node.setUserUuid(node.getUserUuid());
+
+				context.addZipEntry(path, node);
+			}
+		}
+	}
+
+	protected void exportPage(
+			PortletDataContext context, Element nodesEl, Element pagesEl,
+			WikiPage page)
+		throws PortalException, SystemException {
+
+		if (context.isWithinDateRange(page.getModifiedDate())) {
+			String path = getPagePath(context, page);
+
+			Element pageEl = pagesEl.addElement("page");
+			pageEl.addAttribute("path", path);
+
+			if (context.isPathNotProcessed(path)) {
+				page.setUserUuid(page.getUserUuid());
+
+				if (context.getBooleanParameter(_NAMESPACE, "comments")) {
+					context.addComments(
+						WikiPage.class,
+						new Long(page.getResourcePrimKey()));
+				}
+
+				if (context.getBooleanParameter(_NAMESPACE, "tags")) {
+					context.addTagsEntries(
+						WikiPage.class,
+						new Long(page.getResourcePrimKey()));
+				}
+
+				// Attachments
+
+				if (context.getBooleanParameter(_NAMESPACE, "attachments") &&
+						page.isHead()) {
+
+					for (String attachment : page.getAttachmentsFiles()) {
+						int lf = attachment.lastIndexOf(CharPool.FORWARD_SLASH);
+
+						String attachementName = attachment.substring(
+							(lf+1), attachment.length());
+
+						String attachementPath = getPageAttachementBinPath(
+							context, attachementName, page);
+
+						Element attachementEl = pageEl.addElement("attachement");
+						attachementEl.addAttribute("name", attachementName);
+						attachementEl.addAttribute("bin-path", attachementPath);
+
+						try {
+							byte[] byteArray = DLServiceUtil.getFile(
+								context.getCompanyId(), CompanyConstants.SYSTEM,
+								attachment);
+
+							context.addZipEntry(
+								attachementPath, byteArray);
+						}
+						catch (RemoteException re) {
+						}
+					}
+
+					page.setAttachmentsDir(page.getAttachmentsDir());
+				}
+
+				context.addZipEntry(path, page);
+			}
+
+			exportNode(context, nodesEl, page.getNodeId());
+		}
 	}
 
 	protected void importNode(
@@ -320,6 +338,17 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 			existingNode = WikiNodeUtil.fetchByUUID_G(
 				node.getUuid(), context.getGroupId());
 
+			String nodeName = PropsUtil.get(PropsUtil.WIKI_INITIAL_NODE_NAME);
+
+			if (existingNode == null && node.getName().equals(nodeName)) {
+				try {
+					WikiNodeUtil.removeByG_N(
+						context.getGroupId(), node.getName());
+				}
+				catch (NoSuchNodeException nsne) {
+				}
+			}
+
 			if (existingNode == null) {
 				existingNode = WikiNodeLocalServiceUtil.addNode(
 					node.getUuid(), userId, plid, node.getName(),
@@ -333,6 +362,17 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 			}
 		}
 		else {
+			String nodeName = PropsUtil.get(PropsUtil.WIKI_INITIAL_NODE_NAME);
+
+			if (node.getName().equals(nodeName)) {
+				try {
+					WikiNodeUtil.removeByG_N(
+						context.getGroupId(), node.getName());
+				}
+				catch (NoSuchNodeException nsne) {
+				}
+			}
+
 			existingNode = WikiNodeLocalServiceUtil.addNode(
 				userId, plid, node.getName(), node.getDescription(),
 				addCommunityPermissions, addGuestPermissions);
@@ -342,7 +382,8 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importPage(
-			PortletDataContext context, Map<Long, Long> nodePKs, WikiPage page)
+			PortletDataContext context, Map<Long, Long> nodePKs, Element pageEl,
+			WikiPage page)
 		throws Exception {
 
 		long userId = context.getUserId(page.getUserUuid());
@@ -353,7 +394,7 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 
 		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
 			tagsEntries = context.getTagsEntries(
-				WikiPage.class, page.getPrimaryKeyObj());
+				WikiPage.class, page.getResourcePrimKey());
 		}
 
 		PortletPreferences prefs = null;
@@ -398,11 +439,23 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 			if (context.getBooleanParameter(_NAMESPACE, "attachments") &&
 				page.isHead()) {
 
-				List<ObjectValuePair<String, byte[]>> files =
-					context.getZipReader().getFolderEntries().get(
-						page.getAttachmentsDir() + "/");
+				List<Element> attachementEls = pageEl.elements("attachement");
 
-				if (files != null) {
+				List<ObjectValuePair<String, byte[]>> files =
+					new ArrayList<ObjectValuePair<String, byte[]>>();
+
+				for (Element attachementEl : attachementEls) {
+					String name = attachementEl.attributeValue("name");
+					String attachementPath = attachementEl.attributeValue(
+						"bin-path");
+
+					byte[] bytes = context.getZipEntryAsByteArray(
+						attachementPath);
+
+					files.add(new ObjectValuePair<String, byte[]>(name, bytes));
+				}
+
+				if (files.size() > 0) {
 					WikiPageLocalServiceUtil.addPageAttachments(
 						nodeId, page.getTitle(), files);
 				}
@@ -426,6 +479,25 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 				"Could not find the node for page " +
 					page.getPageId());
 		}
+	}
+
+	protected String getNodePath(
+			PortletDataContext context, WikiNode node) {
+		return context.getPortletPath(PortletKeys.WIKI) +
+			"/nodes/" + node.getNodeId() + ".xml";
+	}
+
+	protected String getPageAttachementBinPath(
+			PortletDataContext context, String attachment, WikiPage page) {
+		return context.getPortletPath(PortletKeys.WIKI) +
+			"/bin/" + page.getPageId() + CharPool.FORWARD_SLASH +
+				attachment;
+	}
+
+	protected String getPagePath(
+			PortletDataContext context, WikiPage page) {
+		return context.getPortletPath(PortletKeys.WIKI) +
+			"/pages/" + page.getPageId() + ".xml";
 	}
 
 	private static final String _NAMESPACE = "wiki";
