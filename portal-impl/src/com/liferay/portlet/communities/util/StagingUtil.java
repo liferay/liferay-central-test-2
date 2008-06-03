@@ -27,30 +27,41 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
+import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.http.LayoutServiceHttp;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 
+import java.net.InetAddress;
+
 import java.io.ByteArrayInputStream;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.portlet.ActionRequest;
 
@@ -144,6 +155,47 @@ public class StagingUtil {
 
 		LayoutServiceUtil.importLayouts(
 			targetGroupId, privateLayout, parameterMap, bais);
+	}
+
+	public static void copyLayoutsRemote(
+			long sourceGroupId, String remoteAddress, int remotePort,
+			boolean secure, long remoteGroupId, boolean privateLayout,
+			Map<String, String[]> exportParameterMap,
+			Map<String, String[]> importParameterMap, Date startDate,
+			Date enddate)
+		throws Exception {
+
+		byte[] data = LayoutServiceUtil.exportLayouts(
+			sourceGroupId, privateLayout, exportParameterMap, null, null);
+
+		ByteArrayInputStream bais = new ByteArrayInputStream(data);
+
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
+
+		User user = UserLocalServiceUtil.getUser(permissionChecker.getUserId());
+
+		InetAddress inetAddress = InetAddress.getByName(remoteAddress);
+
+		if (inetAddress.isReachable(800)) {
+			StringMaker sm = new StringMaker();
+			sm.append(secure ? Http.HTTPS_WITH_SLASH : Http.HTTP_WITH_SLASH);
+			sm.append(inetAddress.getHostAddress());
+			sm.append(CharPool.COLON);
+			sm.append(remotePort);
+
+			HttpPrincipal httpPrincipal = new HttpPrincipal(
+				sm.toString(), user.getUserId(), user.getPassword(),
+				user.getPasswordEncrypted());
+
+			LayoutServiceHttp.importLayouts(
+				httpPrincipal, remoteGroupId, privateLayout, importParameterMap,
+				bais);
+		}
+		else {
+			throw new SystemException(
+				"Host " + inetAddress.getHostName() + " cannot be reached.");
+		}
 	}
 
 	public static void copyPortlet(
