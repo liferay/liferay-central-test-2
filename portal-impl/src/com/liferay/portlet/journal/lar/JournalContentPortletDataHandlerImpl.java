@@ -35,17 +35,12 @@ import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
-import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
-import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
-import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 import com.liferay.util.MapUtil;
+import com.liferay.util.xml.XMLFormatter;
 
-import com.thoughtworks.xstream.XStream;
-
-import java.util.List;
 import java.util.Map;
 
 import javax.portlet.PortletPreferences;
@@ -80,7 +75,7 @@ import org.dom4j.Element;
  * </p>
  *
  * @author Joel Kozikowski
- * @author Raymond Aug�
+ * @author Raymond Augé
  * @author Bruno Farache
  *
  * @see com.liferay.portal.kernel.lar.PortletDataHandler
@@ -154,25 +149,11 @@ public class JournalContentPortletDataHandlerImpl
 				return StringPool.BLANK;
 			}
 
-			XStream xStream = new XStream();
-
 			Document doc = DocumentHelper.createDocument();
 
 			Element root = doc.addElement("journal-content");
 
-			List<Element> content = root.content();
-
-			if (!context.addPrimaryKey(
-					JournalArticle.class, article.getPrimaryKeyObj())) {
-
-				JournalPortletDataHandlerImpl.exportArticle(context, article);
-
-				String xml = xStream.toXML(article);
-
-				Document tempDoc = DocumentUtil.readDocumentFromXML(xml);
-
-				content.add(tempDoc.getRootElement().createCopy());
-			}
+			JournalPortletDataHandlerImpl.exportArticle(context, root, article);
 
 			String structureId = article.getStructureId();
 
@@ -180,17 +161,8 @@ public class JournalContentPortletDataHandlerImpl
 				JournalStructure structure = JournalStructureUtil.findByG_S(
 					article.getGroupId(), structureId);
 
-				if (!context.addPrimaryKey(
-						JournalStructure.class, structure.getPrimaryKeyObj())) {
-
-					JournalPortletDataHandlerImpl.exportStructure(structure);
-
-					String xml = xStream.toXML(structure);
-
-					Document tempDoc = DocumentUtil.readDocumentFromXML(xml);
-
-					content.add(tempDoc.getRootElement().createCopy());
-				}
+				JournalPortletDataHandlerImpl.exportStructure(
+					context, root, structure);
 			}
 
 			String templateId = article.getTemplateId();
@@ -199,22 +171,11 @@ public class JournalContentPortletDataHandlerImpl
 				JournalTemplate template = JournalTemplateUtil.findByG_T(
 					article.getGroupId(), templateId);
 
-				if (!context.addPrimaryKey(
-						JournalTemplate.class, template.getPrimaryKeyObj())) {
-
-					JournalPortletDataHandlerImpl.exportTemplate(
-						context, template);
-
-					String xml = xStream.toXML(template);
-
-					Document tempDoc = DocumentUtil.readDocumentFromXML(xml);
-
-					content.add(tempDoc.getRootElement().createCopy());
-				}
+				JournalPortletDataHandlerImpl.exportTemplate(
+					context, root, template);
 			}
 
-			return doc.asXML();
-
+			return XMLFormatter.toString(doc);
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -247,61 +208,38 @@ public class JournalContentPortletDataHandlerImpl
 				return null;
 			}
 
-			XStream xStream = new XStream();
-
 			Document doc = DocumentUtil.readDocumentFromXML(data);
 
 			Element root = doc.getRootElement();
 
-			Element el = root.element(JournalStructureImpl.class.getName());
-
-			Document tempDoc = DocumentHelper.createDocument();
+			Element el = root.element("structure");
 
 			Map<String, String> structureIds = context.getNewPrimaryKeysMap(
 				JournalStructure.class);
 
 			if (el != null) {
-				tempDoc.content().add(el.createCopy());
-
-				JournalStructure structure = (JournalStructure)xStream.fromXML(
-					tempDoc.asXML());
-
 				JournalPortletDataHandlerImpl.importStructure(
-					context, structureIds, structure);
+					context, structureIds, el);
 			}
 
-			el = root.element(JournalTemplateImpl.class.getName());
+			el = root.element("template");
 
 			Map<String, String> templateIds = context.getNewPrimaryKeysMap(
 				JournalTemplate.class);
 
 			if (el != null) {
-				tempDoc = DocumentHelper.createDocument();
-
-				tempDoc.content().add(el.createCopy());
-
-				JournalTemplate template = (JournalTemplate)xStream.fromXML(
-					tempDoc.asXML());
-
 				JournalPortletDataHandlerImpl.importTemplate(
-					context, structureIds, templateIds, template);
+					context, structureIds, templateIds, el);
 			}
 
-			el = root.element(JournalArticleImpl.class.getName());
+			el = root.element("article");
 
 			Map<String, String> articleIds = context.getNewPrimaryKeysMap(
 				JournalArticle.class);
 
 			if (el != null) {
-				tempDoc = DocumentHelper.createDocument();
-
-				tempDoc.content().add(el.createCopy());
-
-				JournalArticle article = (JournalArticle)xStream.fromXML(
-					tempDoc.asXML());
-
 				JournalPortletDataHandlerImpl.importArticle(
-					context, structureIds, templateIds, articleIds, article);
+					context, structureIds, templateIds, articleIds, el);
 			}
 
 			String articleId = prefs.getValue("article-id", StringPool.BLANK);
@@ -325,7 +263,12 @@ public class JournalContentPortletDataHandlerImpl
 		return true;
 	}
 
-	private static final String _NAMESPACE = "journal_content";
+	protected String _nsParam(String namespace, String controlName) {
+		return PortletDataHandlerControl.getNamespacedControlName(
+			namespace, controlName);
+	}
+
+	private static final String _NAMESPACE = "journal";
 
 	private static final PortletDataHandlerBoolean _selectedArticles =
 		new PortletDataHandlerBoolean(
