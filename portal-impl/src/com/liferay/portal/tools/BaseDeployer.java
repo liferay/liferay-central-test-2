@@ -1049,9 +1049,9 @@ public class BaseDeployer {
 		String[] files = FileUtil.listFiles(srcDir + "/WEB-INF/");
 
 		for (int i = 0; i < files.length; i++) {
-			String ext = FileUtil.getExtension(files[i]);
+			String ext = GetterUtil.getString(FileUtil.getExtension(files[i]));
 
-			if (ext != null && ext.equalsIgnoreCase("xml")) {
+			if (ext.equalsIgnoreCase("xml")) {
 
 				// Make sure to rewrite any XML files to include external
 				// entities into same file. See LEP-3142.
