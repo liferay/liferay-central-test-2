@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.lar;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataException;
@@ -29,10 +30,12 @@ import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.DocumentUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
@@ -52,13 +55,11 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFin
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
 import com.liferay.util.MapUtil;
+import com.liferay.util.xml.XMLFormatter;
 
-import com.thoughtworks.xstream.XStream;
-
+import java.io.IOException;
 import java.io.InputStream;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -76,6 +77,7 @@ import org.dom4j.Element;
  * <a href="DLPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
+ * @author Raymond Augé
  *
  */
 public class DLPortletDataHandlerImpl implements PortletDataHandler {
@@ -108,195 +110,30 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			XStream xStream = new XStream();
-
 			Document doc = DocumentHelper.createDocument();
 
 			Element root = doc.addElement("documentlibrary-data");
 
 			root.addAttribute("group-id", String.valueOf(context.getGroupId()));
 
-			// Folders
+			Element foldersEl = root.addElement("folders");
+
+			Element entriesEl = root.addElement("entries");
+
+			Element shortcutsEl = root.addElement("shortcuts");
+
+			Element ranksEl = root.addElement("ranks");
 
 			List<DLFolder> folders = DLFolderUtil.findByGroupId(
 				context.getGroupId());
 
-			List<DLFileEntry> entries = new ArrayList<DLFileEntry>();
-
-			List<DLFileShortcut> shortcuts = new ArrayList<DLFileShortcut>();
-
-			Iterator<DLFolder> foldersItr = folders.iterator();
-
-			while (foldersItr.hasNext()) {
-				DLFolder folder = foldersItr.next();
-
-				if (context.addPrimaryKey(
-						DLFolder.class, folder.getPrimaryKeyObj())) {
-
-					foldersItr.remove();
-				}
-				else {
-					folder.setUserUuid(folder.getUserUuid());
-
-					List<DLFileEntry> folderEntries =
-						DLFileEntryUtil.findByFolderId(folder.getFolderId());
-
-					if (context.hasDateRange()) {
-						for (DLFileEntry entry : folderEntries) {
-							if (context.isWithinDateRange(
-									entry.getModifiedDate())) {
-
-								entries.add(entry);
-							}
-						}
-					}
-					else {
-						entries.addAll(folderEntries);
-					}
-
-					if (context.getBooleanParameter(_NAMESPACE, "shortcuts")) {
-						List<DLFileShortcut> folderShortcuts =
-							DLFileShortcutUtil.findByFolderId(
-								folder.getFolderId());
-
-						if (context.hasDateRange()) {
-							for (DLFileShortcut shortcut : folderShortcuts) {
-								if (context.isWithinDateRange(
-										shortcut.getModifiedDate())) {
-
-									shortcuts.add(shortcut);
-								}
-							}
-						}
-						else {
-							shortcuts.addAll(folderShortcuts);
-						}
-					}
-
-					if (!context.isWithinDateRange(
-							folder.getModifiedDate())) {
-
-						foldersItr.remove();
-					}
-				}
+			for (DLFolder folder : folders) {
+				exportFolder(
+					context, foldersEl, entriesEl, shortcutsEl, ranksEl,
+					folder);
 			}
 
-			String xml = xStream.toXML(folders);
-
-			Element el = root.addElement("documentlibrary-folders");
-
-			Document tempDoc = DocumentUtil.readDocumentFromXML(xml);
-
-			el.content().add(tempDoc.getRootElement().createCopy());
-
-			// Entries
-
-			List<DLFileRank> ranks = new ArrayList<DLFileRank>();
-
-			Iterator<DLFileEntry> entriesItr = entries.iterator();
-
-			while (entriesItr.hasNext()) {
-				DLFileEntry entry = entriesItr.next();
-
-				if (context.addPrimaryKey(
-						DLFileEntry.class, entry.getPrimaryKeyObj())) {
-
-					entriesItr.remove();
-				}
-				else {
-					entry.setUserUuid(entry.getUserUuid());
-
-					if (context.getBooleanParameter(_NAMESPACE, "comments")) {
-						context.addComments(
-							DLFileEntry.class, entry.getPrimaryKeyObj());
-					}
-
-					if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
-						context.addRatingsEntries(
-							DLFileEntry.class, entry.getPrimaryKeyObj());
-					}
-
-					if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-						context.addTagsEntries(
-							DLFileEntry.class, entry.getPrimaryKeyObj());
-					}
-
-					InputStream in =
-						DLFileEntryLocalServiceUtil.getFileAsStream(
-							entry.getCompanyId(), entry.getUserId(),
-							entry.getFolderId(), entry.getName());
-
-					context.getZipWriter().addEntry(
-						_ZIP_FOLDER + entry.getName(), FileUtil.getBytes(in));
-
-					if (context.getBooleanParameter(_NAMESPACE, "ranks")) {
-						List<DLFileRank> entryRanks = DLFileRankUtil.findByF_N(
-							entry.getFolderId(), entry.getName());
-
-						ranks.addAll(entryRanks);
-					}
-				}
-			}
-
-			xml = xStream.toXML(entries);
-
-			el = root.addElement("documentlibrary-entries");
-
-			tempDoc = DocumentUtil.readDocumentFromXML(xml);
-
-			el.content().add(tempDoc.getRootElement().createCopy());
-
-			// Shortcuts
-
-			Iterator<DLFileShortcut> shortcutsItr = shortcuts.iterator();
-
-			while (shortcutsItr.hasNext()) {
-				DLFileShortcut shortcut = shortcutsItr.next();
-
-				if (context.addPrimaryKey(
-						DLFileShortcut.class, shortcut.getPrimaryKeyObj())) {
-
-					shortcutsItr.remove();
-				}
-				else {
-					shortcut.setUserUuid(shortcut.getUserUuid());
-				}
-			}
-
-			xml = xStream.toXML(shortcuts);
-
-			el = root.addElement("documentlibrary-shortcuts");
-
-			tempDoc = DocumentUtil.readDocumentFromXML(xml);
-
-			el.content().add(tempDoc.getRootElement().createCopy());
-
-			// Ranks
-
-			Iterator<DLFileRank> ranksItr = ranks.iterator();
-
-			while (ranksItr.hasNext()) {
-				DLFileRank rank = ranksItr.next();
-
-				if (context.addPrimaryKey(
-						DLFileRank.class, rank.getPrimaryKeyObj())) {
-
-					ranksItr.remove();
-				}
-				else {
-					rank.setUserUuid(rank.getUserUuid());
-				}
-			}
-
-			xml = xStream.toXML(ranks);
-
-			el = root.addElement("documentlibrary-ranks");
-
-			tempDoc = DocumentUtil.readDocumentFromXML(xml);
-
-			el.content().add(tempDoc.getRootElement().createCopy());
-
-			return doc.asXML();
+			return XMLFormatter.toString(doc);
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -325,90 +162,80 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			XStream xStream = new XStream();
-
 			Document doc = DocumentUtil.readDocumentFromXML(data);
 
 			Element root = doc.getRootElement();
 
 			// Folders
 
-			Element el = root.element(
-				"documentlibrary-folders").element("list");
+			List<Element> folderEls =
+				root.element("folders").elements("folder");
 
-			Document tempDoc = DocumentHelper.createDocument();
+			Map<Long, Long> folderPKs = context.getNewPrimaryKeysMap(
+				DLFolder.class);
 
-			tempDoc.content().add(el.createCopy());
+			for (Element el : folderEls) {
+				String path = el.attributeValue("path");
 
-			Map folderPKs = context.getNewPrimaryKeysMap(DLFolder.class);
+				if (context.isPathNotProcessed(path)) {
+					DLFolder folder =
+						(DLFolder)context.getZipEntryAsObject(path);
 
-			List folders = (List)xStream.fromXML(tempDoc.asXML());
-
-			Iterator itr = folders.iterator();
-
-			while (itr.hasNext()) {
-				DLFolder folder = (DLFolder)itr.next();
-
-				importFolder(context, folderPKs, folder);
+					importFolder(context, folderPKs, folder);
+				}
 			}
 
 			// Entries
 
-			el = root.element("documentlibrary-entries").element("list");
-
-			tempDoc = DocumentHelper.createDocument();
-
-			tempDoc.content().add(el.createCopy());
+			List<Element> entryEls = root.element("entries").elements("entry");
 
 			Map entryNames = context.getNewPrimaryKeysMap(DLFileEntry.class);
 
-			List entries = (List)xStream.fromXML(tempDoc.asXML());
+			for (Element el : entryEls) {
+				String path = el.attributeValue("path");
+				String binPath = el.attributeValue("bin-path");
 
-			itr = entries.iterator();
+				if (context.isPathNotProcessed(path)) {
+					DLFileEntry entry =
+						(DLFileEntry)context.getZipEntryAsObject(path);
 
-			while (itr.hasNext()) {
-				DLFileEntry entry = (DLFileEntry)itr.next();
-
-				importEntry(context, folderPKs, entryNames, entry);
+					importEntry(context, folderPKs, entryNames, entry, binPath);
+				}
 			}
 
 			// Shortcuts
 
 			if (context.getBooleanParameter(_NAMESPACE, "shortcuts")) {
-				el = root.element("documentlibrary-shortcuts").element("list");
+				List<Element> shortcutEls =
+					root.element("shortcuts").elements("shortcut");
 
-				tempDoc = DocumentHelper.createDocument();
+				for (Element el : shortcutEls) {
+					String path = el.attributeValue("path");
 
-				tempDoc.content().add(el.createCopy());
+					if (context.isPathNotProcessed(path)) {
+						DLFileShortcut shortcut =
+							(DLFileShortcut)context.getZipEntryAsObject(path);
 
-				List shortcuts = (List)xStream.fromXML(tempDoc.asXML());
-
-				itr = shortcuts.iterator();
-
-				while (itr.hasNext()) {
-					DLFileShortcut shortcut = (DLFileShortcut)itr.next();
-
-					importShortcut(context, folderPKs, entryNames, shortcut);
+						importShortcut(context, folderPKs, entryNames, shortcut);
+					}
 				}
 			}
 
 			// Ranks
 
 			if (context.getBooleanParameter(_NAMESPACE, "ranks")) {
-				el = root.element("documentlibrary-ranks").element("list");
+				List<Element> rankEls =
+					root.element("ranks").elements("rank");
 
-				tempDoc = DocumentHelper.createDocument();
+				for (Element el : rankEls) {
+					String path = el.attributeValue("path");
 
-				tempDoc.content().add(el.createCopy());
+					if (context.isPathNotProcessed(path)) {
+						DLFileRank rank =
+							(DLFileRank)context.getZipEntryAsObject(path);
 
-				List ranks = (List)xStream.fromXML(tempDoc.asXML());
-
-				itr = ranks.iterator();
-
-				while (itr.hasNext()) {
-					DLFileRank rank = (DLFileRank)itr.next();
-
-					importRank(context, folderPKs, entryNames, rank);
+						importRank(context, folderPKs, entryNames, rank);
+					}
 				}
 			}
 
@@ -421,6 +248,160 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 	public boolean isPublishToLiveByDefault() {
 		return false;
+	}
+
+	protected void exportEntry(
+			PortletDataContext context, Element foldersEl, Element entriesEl,
+			Element ranksEl, DLFileEntry entry)
+		throws PortalException, SystemException {
+
+		if (context.isWithinDateRange(entry.getModifiedDate())) {
+			String path = getEntryPath(context, entry);
+
+			Element entryEl = entriesEl.addElement("entry");
+			entryEl.addAttribute("path", path);
+			entryEl.addAttribute("bin-path", getEntryBinPath(context, entry));
+
+			if (context.isPathNotProcessed(path)) {
+				entry.setUserUuid(entry.getUserUuid());
+
+				if (context.getBooleanParameter(_NAMESPACE, "comments")) {
+					context.addComments(
+						DLFileEntry.class, entry.getPrimaryKeyObj());
+				}
+
+				if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
+					context.addRatingsEntries(
+						DLFileEntry.class, entry.getPrimaryKeyObj());
+				}
+
+				if (context.getBooleanParameter(_NAMESPACE, "tags")) {
+					context.addTagsEntries(
+						DLFileEntry.class, entry.getPrimaryKeyObj());
+				}
+
+				InputStream in =
+					DLFileEntryLocalServiceUtil.getFileAsStream(
+						entry.getCompanyId(), entry.getUserId(),
+						entry.getFolderId(), entry.getName());
+
+				try {
+					context.addZipEntry(
+						getEntryBinPath(context, entry), FileUtil.getBytes(in));
+				}
+				catch (IOException ioe) {
+					throw new SystemException(ioe);
+				}
+
+				context.addZipEntry(path, entry);
+
+				if (context.getBooleanParameter(_NAMESPACE, "ranks")) {
+					List<DLFileRank> entryRanks = DLFileRankUtil.findByF_N(
+						entry.getFolderId(), entry.getName());
+
+					for (DLFileRank entryRank : entryRanks) {
+						exportRank(context, ranksEl, entryRank);
+					}
+				}
+			}
+
+			exportParentFolder(context, foldersEl, entry.getFolderId());
+		}
+	}
+
+	protected void exportFolder(
+			PortletDataContext context, Element foldersEl, Element entriesEl,
+			Element shortcutsEl, Element ranksEl, DLFolder folder)
+		throws PortalException, SystemException {
+
+		if (context.isWithinDateRange(folder.getModifiedDate())) {
+			String path = getFolderPath(context, folder);
+
+			foldersEl.addElement("folder").addAttribute("path", path);
+
+			if (context.isPathNotProcessed(path)) {
+				folder.setUserUuid(folder.getUserUuid());
+
+				context.addZipEntry(path, folder);
+			}
+
+			exportParentFolder(
+				context, foldersEl, folder.getParentFolderId());
+		}
+
+		List<DLFileEntry> folderEntries =
+			DLFileEntryUtil.findByFolderId(folder.getFolderId());
+
+		for (DLFileEntry entry : folderEntries) {
+			exportEntry(context, foldersEl, entriesEl, ranksEl, entry);
+		}
+
+		if (context.getBooleanParameter(_NAMESPACE, "shortcuts")) {
+			List<DLFileShortcut> folderShortcuts =
+				DLFileShortcutUtil.findByFolderId(
+					folder.getFolderId());
+
+			for (DLFileShortcut shortcut : folderShortcuts) {
+				exportShortcut(context, foldersEl, shortcutsEl, shortcut);
+			}
+		}
+	}
+
+	protected void exportShortcut(
+			PortletDataContext context, Element foldersEl, Element ranksEl,
+			DLFileShortcut shortcut)
+		throws PortalException, SystemException {
+
+		String path = getShortcutPath(context, shortcut);
+
+		ranksEl.addElement("shortcut").addAttribute("path", path);
+
+		if (context.isPathNotProcessed(path)) {
+			shortcut.setUserUuid(shortcut.getUserUuid());
+
+			context.addZipEntry(path, shortcut);
+		}
+
+		exportParentFolder(context, foldersEl, shortcut.getFolderId());
+	}
+
+	protected void exportRank(
+			PortletDataContext context, Element ranksEl, DLFileRank entryRank)
+		throws PortalException, SystemException {
+
+		String path = getRankPath(context, entryRank);
+
+		ranksEl.addElement("rank").addAttribute("path", path);
+
+		if (context.isPathNotProcessed(path)) {
+			entryRank.setUserUuid(entryRank.getUserUuid());
+
+			context.addZipEntry(path, entryRank);
+		}
+	}
+
+	protected void exportParentFolder(
+			PortletDataContext context, Element foldersEl,
+			long folderId)
+		throws PortalException, SystemException {
+
+		if (context.hasDateRange() &&
+				(folderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+			DLFolder folder = DLFolderUtil.findByPrimaryKey(folderId);
+
+			String path = getFolderPath(context, folder);
+
+			foldersEl.addElement("folder").addAttribute("path", path);
+
+			if (context.isPathNotProcessed(path)) {
+				folder.setUserUuid(folder.getUserUuid());
+
+				context.addZipEntry(path, folder);
+			}
+
+			exportParentFolder(
+				context, foldersEl, folder.getParentFolderId());
+		}
 	}
 
 	protected String getFolderName(
@@ -457,7 +438,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 	protected void importEntry(
 			PortletDataContext context, Map folderPKs, Map entryNames,
-			DLFileEntry entry)
+			DLFileEntry entry, String binPath)
 		throws Exception {
 
 		long userId = context.getUserId(entry.getUserUuid());
@@ -474,8 +455,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
 
-		byte[] byteArray = context.getZipReader().getEntryAsByteArray(
-			_ZIP_FOLDER + entry.getName());
+		byte[] byteArray = context.getZipEntryAsByteArray(binPath);
 
 		DLFileEntry existingEntry = null;
 
@@ -670,6 +650,40 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 				"Could not find the folder for shortcut " +
 					shortcut.getFileShortcutId());
 		}
+	}
+
+	protected String getEntryBinPath(
+			PortletDataContext context, DLFileEntry entry) {
+		return context.getPortletPath(PortletKeys.DOCUMENT_LIBRARY) +
+			"/bin/" + entry.getFileEntryId() + CharPool.FORWARD_SLASH +
+				entry.getVersion() + CharPool.FORWARD_SLASH +
+					entry.getTitleWithExtension();
+	}
+
+	protected String getEntryPath(
+			PortletDataContext context, DLFileEntry entry) {
+		return context.getPortletPath(PortletKeys.DOCUMENT_LIBRARY) +
+			"/entries/" + entry.getFileEntryId() + CharPool.FORWARD_SLASH +
+				entry.getVersion() + CharPool.FORWARD_SLASH +
+					entry.getFileEntryId() + ".xml";
+	}
+
+	protected String getFolderPath(
+			PortletDataContext context, DLFolder folder) {
+		return context.getPortletPath(PortletKeys.DOCUMENT_LIBRARY) +
+			"/folders/" + folder.getFolderId() + ".xml";
+	}
+
+	protected String getRankPath(
+			PortletDataContext context, DLFileRank entryRank) {
+		return context.getPortletPath(PortletKeys.DOCUMENT_LIBRARY) +
+			"/ranks/" + entryRank.getFileRankId() + ".xml";
+	}
+
+	protected String getShortcutPath(
+			PortletDataContext context, DLFileShortcut shortcut) {
+		return context.getPortletPath(PortletKeys.DOCUMENT_LIBRARY) +
+			"/shortcut/" + shortcut.getFileShortcutId() + ".xml";
 	}
 
 	private static final String _NAMESPACE = "document_library";
