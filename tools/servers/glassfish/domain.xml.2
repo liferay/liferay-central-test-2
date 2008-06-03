@@ -36,6 +36,7 @@
     <!-- Start Liferay Resources -->
 
     <!-- Hypersonic -->
+
     <jdbc-connection-pool allow-non-component-callers="false" associate-with-thread="false" connection-creation-retry-attempts="0" connection-creation-retry-interval-in-seconds="10" connection-leak-reclaim="false" connection-leak-timeout-in-seconds="0" connection-validation-method="auto-commit" datasource-classname="org.hsqldb.jdbc.jdbcDataSource" fail-all-connections="false" idle-timeout-in-seconds="300" is-connection-validation-required="false" is-isolation-level-guaranteed="false" lazy-connection-association="false" lazy-connection-enlistment="false" match-connections="false" max-connection-usage-count="0" max-pool-size="32" max-wait-time-in-millis="60000" name="LiferayPool" non-transactional-connections="false" pool-resize-quantity="2" res-type="javax.sql.DataSource" statement-timeout-in-seconds="-1" steady-pool-size="8" validate-atmost-once-period-in-seconds="0" wrap-jdbc-objects="false">
       <property name="database" value="jdbc:hsqldb:lportal"/>
       <property name="username" value="sa"/>
@@ -43,6 +44,7 @@
     </jdbc-connection-pool>
 
     <!-- MySQL -->
+
     <!--<jdbc-connection-pool allow-non-component-callers="false" associate-with-thread="false" connection-creation-retry-attempts="0" connection-creation-retry-interval-in-seconds="10" connection-leak-reclaim="false" connection-leak-timeout-in-seconds="0" connection-validation-method="auto-commit" datasource-classname="com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource" fail-all-connections="false" idle-timeout-in-seconds="300" is-connection-validation-required="false" is-isolation-level-guaranteed="true" lazy-connection-association="false" lazy-connection-enlistment="false" match-connections="false" max-connection-usage-count="0" max-pool-size="32" max-wait-time-in-millis="60000" name="LiferayPool" non-transactional-connections="false" pool-resize-quantity="2" res-type="javax.sql.DataSource" statement-timeout-in-seconds="-1" steady-pool-size="8" validate-atmost-once-period-in-seconds="0" wrap-jdbc-objects="false">
       <property name="Password" value=""/>
       <property name="User" value="root"/>
@@ -196,7 +198,8 @@
         <!-- various required jvm-options -->
 
         <!-- Start Liferay Tuning -->
-        <jvm-options>-server</jvm-options>
+
+	<jvm-options>-server</jvm-options>
         <jvm-options>-Xms512m</jvm-options>
         <jvm-options>-Xmx1024m</jvm-options>
         <jvm-options>-XX:MaxPermSize=192m</jvm-options>
@@ -206,7 +209,8 @@
         <jvm-options>-XX:PermSize=192M</jvm-options>
         <jvm-options>-XX:MaxPermSize=192M</jvm-options>
         <jvm-options>-Xss1024k</jvm-options>
-        <!-- End Liferay Tuning -->
+
+	<!-- End Liferay Tuning -->
 
         <jvm-options>-Djava.endorsed.dirs=${com.sun.aas.installRoot}/lib/endorsed</jvm-options>
         <jvm-options>-Djava.security.policy=${com.sun.aas.instanceRoot}/config/server.policy</jvm-options>
