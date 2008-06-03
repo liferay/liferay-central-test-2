@@ -26,6 +26,8 @@ import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
+import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalFeedLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
@@ -105,6 +107,16 @@ public class VerifyUUID extends VerifyProcess {
 	}
 
 	private static final String[][] _MODELS = new String[][] {
+		new String[] {
+			IGFolderLocalServiceUtil.class.getName(),
+			"IGFolder",
+			"folderId"
+		},
+		new String[] {
+			IGImageLocalServiceUtil.class.getName(),
+			"IGImage",
+			"imageId"
+		},
 		new String[] {
 			JournalArticleLocalServiceUtil.class.getName(),
 			"JournalArticle",
