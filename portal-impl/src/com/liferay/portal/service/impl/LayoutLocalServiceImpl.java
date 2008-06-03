@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.portal.LARFileException;
 import com.liferay.portal.LARTypeException;
 import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.LayoutHiddenException;
@@ -41,10 +42,12 @@ import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
@@ -88,18 +91,19 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.LayoutPriorityComparator;
 import com.liferay.portal.velocity.VelocityContextPool;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
+import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.util.MapUtil;
 import com.liferay.util.Normalizer;
 import com.liferay.util.Time;
 import com.liferay.util.xml.XMLFormatter;
-
-import com.thoughtworks.xstream.XStream;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -107,7 +111,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -115,6 +118,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
@@ -129,9 +133,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.dom4j.Document;
+import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="LayoutLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -445,7 +449,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				"end-date", String.valueOf(context.getEndDate()));
 		}
 
-		header.addAttribute("type", "layouts");
+		header.addAttribute("type", "layout-set");
 		header.addAttribute("group-id", String.valueOf(groupId));
 		header.addAttribute("private-layout", String.valueOf(privateLayout));
 		header.addAttribute("theme-id", layoutSet.getThemeId());
@@ -453,7 +457,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		// Layouts
 
-		Set<String> portletIds = new LinkedHashSet<String>();
+		Map<String, Long> portletIds = new LinkedHashMap<String, Long>();
 
 		List<Layout> layouts = null;
 
@@ -464,25 +468,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			layouts = getLayouts(groupId, privateLayout, layoutIds);
 		}
 
-		long start = 0;
-		long layoutPermissionsTime = 0;
-		long portletDataTime = 0;
-		long portletSetupTime = 0;
-		long portletUserPreferencesTime = 0;
-		long portletPermissionsTime = 0;
-		long portletPreferencesTime = 0;
-		long portletArchivedSetupsTime = 0;
-		long layoutRolesTime = 0;
-		long portletRolesTime = 0;
-		long commentsTime = 0;
-		long ratingsTime = 0;
-		long tagsTime = 0;
-		long themeTime = 0;
+		Element layoutsEl = root.addElement("layouts");
 
 		for (Layout layout : layouts) {
 			context.setPlid(layout.getPlid());
 
-			Element layoutEl = root.addElement("layout");
+			Document layoutDoc = DocumentHelper.createDocument();
+
+			Element layoutEl = layoutDoc.addElement("layout");
 
 			layoutEl.addAttribute(
 				"layout-id", String.valueOf(layout.getLayoutId()));
@@ -504,21 +497,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			if (layout.isIconImage()) {
 				Image image = ImageLocalUtil.getImage(layout.getIconImageId());
 
-				StringMaker sm = new StringMaker();
+				if (image != null) {
+					String iconPath = getLayoutIconPath(context, layout, image);
 
-				sm.append("/layout/");
-				sm.append(layout.getLayoutId());
-				sm.append("/icon/");
-				sm.append(image.getImageId());
-				sm.append(StringPool.PERIOD);
-				sm.append(image.getType());
+					layoutEl.addElement("icon-image-path").addText(
+						iconPath);
 
-				layoutEl.addElement("icon-image-path").addText(sm.toString());
-
-				try {
-					zipWriter.addEntry(sm.toString(), image.getTextObj());
-				}
-				catch (IOException ioe) {
+					context.addZipEntry(iconPath, image.getTextObj());
 				}
 			}
 
@@ -534,10 +519,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			Element permissionsEl = layoutEl.addElement("permissions");
 
-			if (_log.isInfoEnabled()) {
-				start = stopWatch.getTime();
-			}
-
 			// Layout permissions
 
 			if (exportPermissions) {
@@ -546,121 +527,30 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 					permissionsEl, exportUserPermissions);
 			}
 
-			if (_log.isInfoEnabled()) {
-				layoutPermissionsTime += stopWatch.getTime() - start;
-				start = stopWatch.getTime();
-			}
-
 			if (layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 				LayoutTypePortlet layoutTypePortlet =
 					(LayoutTypePortlet)layout.getLayoutType();
 
-				// The order of the export is important. You must always export
-				// the portlet data first, then the portlet preferences, then
-				// the portlet permissions. The export of the portlet data
-				// process may modify the portlet preferences, and those changes
-				// should be included in the exported LAR.
-
-				// Portlet data
-
-				if (exportPortletData) {
-					exportPortletData(
-						context, layout, layoutTypePortlet, layoutEl);
-				}
-
-				if (_log.isInfoEnabled()) {
-					portletDataTime += stopWatch.getTime() - start;
-					start = stopWatch.getTime();
-				}
-
-				// Portlet preferences
-
-				if (exportPortletSetup) {
-					exportPortletPreferences(
-						PortletKeys.PREFS_OWNER_ID_DEFAULT,
-						PortletKeys.PREFS_OWNER_TYPE_LAYOUT, false,
-						layout.getPlid(), layoutTypePortlet, layoutEl);
-
-					exportPortletPreferences(
-						layout.getGroupId(),
-						PortletKeys.PREFS_OWNER_TYPE_GROUP, false,
-						layout.getPlid(), layoutTypePortlet, layoutEl);
-
-					exportPortletPreferences(
-						layout.getCompanyId(),
-						PortletKeys.PREFS_OWNER_TYPE_COMPANY, false,
-						layout.getPlid(), layoutTypePortlet, layoutEl);
-				}
-
-				if (_log.isInfoEnabled()) {
-					portletSetupTime += stopWatch.getTime() - start;
-					start = stopWatch.getTime();
-				}
-
-				if (exportPortletUserPreferences) {
-					exportPortletPreferences(
-						defaultUserId, PortletKeys.PREFS_OWNER_TYPE_USER,
-						true, layout.getPlid(), layoutTypePortlet,
-						layoutEl);
-				}
-
-				if (_log.isInfoEnabled()) {
-					portletUserPreferencesTime += stopWatch.getTime() - start;
-					start = stopWatch.getTime();
-				}
-
-				// Portlet permissions
-
-				if (exportPermissions) {
-					exportPortletPermissions(
-						layoutCache, companyId, groupId, guestGroup,
-						layout, layoutTypePortlet, portletIds, permissionsEl,
-						exportUserPermissions);
-				}
-
-				if (_log.isInfoEnabled()) {
-					portletPermissionsTime += stopWatch.getTime() - start;
+				for (String portletId : layoutTypePortlet.getPortletIds()) {
+					if (!portletIds.containsKey(portletId)) {
+						portletIds.put(portletId, new Long(layout.getPlid()));
+					}
 				}
 			}
-		}
 
-		if (_log.isInfoEnabled()) {
-			start = stopWatch.getTime();
-		}
+			String layoutPath = context.getLayoutPath(layout.getLayoutId()) +
+				"/layout.xml";
 
-		// Portlet preferences
+			Element el = layoutsEl.addElement("layout");
+			el.addAttribute("layout-id", String.valueOf(layout.getLayoutId()));
+			el.addAttribute("path", layoutPath);
 
-		if (exportPortletUserPreferences) {
-			exportPortletPreferences(
-				groupId, PortletKeys.PREFS_OWNER_TYPE_GROUP,
-				PortletKeys.PREFS_PLID_SHARED, false, root);
-		}
-
-		if (_log.isInfoEnabled()) {
-			portletPreferencesTime += stopWatch.getTime() - start;
-			start = stopWatch.getTime();
-		}
-
-		// Archived setups
-
-		if (exportPortletArchivedSetups) {
-			List<PortletItem> portletItems =
-				portletItemLocalService.getPortletItems(
-					groupId, PortletPreferences.class.getName());
-
-			for (PortletItem portletItem: portletItems) {
-				long ownerId = portletItem.getPortletItemId();
-				int ownerType = PortletKeys.PREFS_OWNER_TYPE_ARCHIVED;
-
-				exportPortletPreferences(
-					ownerId, ownerType, false, null, portletItem.getPortletId(),
-					root);
+			try {
+				context.addZipEntry(
+					layoutPath, XMLFormatter.toString(layoutDoc));
 			}
-		}
-
-		if (_log.isInfoEnabled()) {
-			portletArchivedSetupsTime += stopWatch.getTime() - start;
-			start = stopWatch.getTime();
+			catch (IOException ioe) {
+			}
 		}
 
 		Element rolesEl = root.addElement("roles");
@@ -671,49 +561,35 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			exportLayoutRoles(layoutCache, companyId, groupId, rolesEl);
 		}
 
-		if (_log.isInfoEnabled()) {
-			layoutRolesTime += stopWatch.getTime() - start;
-			start = stopWatch.getTime();
-		}
+		// Export Portlets
 
-		// Portlet roles
+		Element portletsEl = root.addElement("portlets");
 
-		if (exportPermissions) {
-			exportPortletRoles(
-				layoutCache, companyId, groupId, portletIds, rolesEl);
-		}
+		for (Map.Entry<String, Long> portletIdsEntry : portletIds.entrySet()) {
+			Layout layout = layoutPersistence.findByPrimaryKey(
+				portletIdsEntry.getValue().longValue());
 
-		if (_log.isInfoEnabled()) {
-			portletRolesTime += stopWatch.getTime() - start;
-			start = stopWatch.getTime();
+			context.setPlid(layout.getPlid());
+
+			exportPortlet(
+				context, layoutCache, portletIdsEntry.getKey(), layout,
+				portletsEl, defaultUserId, exportPortletData,
+				exportPortletSetup, exportPortletArchivedSetups,
+				exportPortletUserPreferences, exportPermissions,
+				exportUserPermissions);
 		}
 
 		// Comments
 
 		exportComments(context, root);
 
-		if (_log.isInfoEnabled()) {
-			commentsTime += stopWatch.getTime() - start;
-			start = stopWatch.getTime();
-		}
-
 		// Ratings
 
 		exportRatings(context, root);
 
-		if (_log.isInfoEnabled()) {
-			ratingsTime += stopWatch.getTime() - start;
-			start = stopWatch.getTime();
-		}
-
 		// Tags
 
 		exportTags(context, root);
-
-		if (_log.isInfoEnabled()) {
-			tagsTime += stopWatch.getTime() - start;
-			start = stopWatch.getTime();
-		}
 
 		// Look and feel
 
@@ -723,56 +599,26 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			if (exportTheme) {
 				themeZip = exportTheme(layoutSet);
 
-				if (_log.isInfoEnabled()) {
-					themeTime += stopWatch.getTime() - start;
-					start = stopWatch.getTime();
-				}
 			}
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
 		}
 
-		// XML
+		// Log
 
 		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Exporting layoutPermissions takes " + layoutPermissionsTime +
-					" ms");
-			_log.info(
-				"Exporting portletData takes " + portletDataTime + " ms");
-			_log.info(
-				"Exporting portletSetup takes " + portletSetupTime + " ms");
-			_log.info(
-				"Exporting portletUserPreferences takes " +
-					portletUserPreferencesTime + " ms");
-			_log.info(
-				"Exporting portletPermissions takes " + portletPermissionsTime +
-					" ms");
-			_log.info(
-				"Exporting portletPreferences takes " + portletPreferencesTime +
-					" ms");
-			_log.info(
-				"Exporting portletArchivedSetups takes " +
-					portletArchivedSetupsTime + " ms");
-			_log.info("Exporting layoutRoles takes " + layoutRolesTime + " ms");
-			_log.info(
-				"Exporting portletRoles takes " + portletRolesTime + " ms");
-			_log.info("Exporting comments takes " + commentsTime + " ms");
-			_log.info("Exporting ratings takes " + ratingsTime + " ms");
-			_log.info("Exporting tags takes " + tagsTime + " ms");
-			_log.info("Exporting theme takes " + themeTime + " ms");
-
 			_log.info("Exporting layouts takes " + stopWatch.getTime() + " ms");
 		}
 
 		// Zip
 
 		try {
-			zipWriter.addEntry("layouts.xml", XMLFormatter.toString(doc));
+			context.addZipEntry(
+				"/manifest.xml", XMLFormatter.toString(doc));
 
 			if (themeZip != null) {
-				zipWriter.addEntry("theme.zip", themeZip);
+				context.addZipEntry("/theme.zip", themeZip);
 			}
 
 			return zipWriter.finish();
@@ -787,12 +633,30 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			Date startDate, Date endDate)
 		throws PortalException, SystemException {
 
+		boolean exportPermissions = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
+		boolean exportUserPermissions = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.USER_PERMISSIONS);
+		boolean exportPortletData = true;
 		boolean exportPortletSetup = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_SETUP);
 		boolean exportPortletArchivedSetups = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS);
 		boolean exportPortletUserPreferences = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_USER_PREFERENCES);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Export permissions " + exportPermissions);
+			_log.debug("Export user permissions " + exportUserPermissions);
+			_log.debug("Export portlet data " + exportPortletData);
+			_log.debug("Export portlet setup " + exportPortletSetup);
+			_log.debug(
+				"Export portlet archived setups " +
+					exportPortletArchivedSetups);
+			_log.debug(
+				"Export portlet user preferences " +
+					exportPortletUserPreferences);
+		}
 
 		StopWatch stopWatch = null;
 
@@ -801,6 +665,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			stopWatch.start();
 		}
+
+		LayoutCache layoutCache = new LayoutCache();
 
 		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
@@ -854,18 +720,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		header.addAttribute(
 			"root-portlet-id", PortletConstants.getRootPortletId(portletId));
 
-		// Data
+		// Portlet
 
-		PortletPreferences portletPreferences =
-			portletPreferencesLocalService.getPortletPreferencesByPlid(
-				plid).get(0);
-
-		javax.portlet.PortletPreferences jxPrefs =
-			portletPreferencesLocalService.getPreferences(
-				layout.getCompanyId(), portletPreferences.getOwnerId(),
-				portletPreferences.getOwnerType(), plid, portletId);
-
-		exportPortletData(context, portletId, jxPrefs, root);
+		exportPortlet(
+			context, layoutCache, portletId, layout, root, defaultUserId,
+			exportPortletData, exportPortletSetup, exportPortletArchivedSetups,
+			exportPortletUserPreferences, exportPermissions,
+			exportUserPermissions);
 
 		// Comments
 
@@ -879,58 +740,17 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		exportTags(context, root);
 
-		// Portlet preferences
-
-		if (exportPortletSetup) {
-			exportPortletPreferences(
-				PortletKeys.PREFS_OWNER_ID_DEFAULT,
-				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, false, layout, portletId,
-				root);
-
-			exportPortletPreferences(
-				layout.getGroupId(), PortletKeys.PREFS_OWNER_TYPE_GROUP, false,
-				layout, portletId, root);
-
-			exportPortletPreferences(
-				layout.getCompanyId(), PortletKeys.PREFS_OWNER_TYPE_COMPANY,
-				false, layout, portletId, root);
-		}
-
-		if (exportPortletArchivedSetups) {
-			String rootPortletId = PortletConstants.getRootPortletId(portletId);
-
-			List<PortletItem> portletItems =
-				portletItemLocalService.getPortletItems(
-					layout.getGroupId(), rootPortletId,
-					PortletPreferences.class.getName());
-
-			for (PortletItem portletItem: portletItems) {
-				long ownerId = portletItem.getPortletItemId();
-				int ownerType = PortletKeys.PREFS_OWNER_TYPE_ARCHIVED;
-
-				exportPortletPreferences(
-					ownerId, ownerType, false, null, portletItem.getPortletId(),
-					root);
-			}
-		}
-
-		if (exportPortletUserPreferences) {
-			exportPortletPreferences(
-				defaultUserId, PortletKeys.PREFS_OWNER_TYPE_USER,
-				true, layout, portletId, root);
-		}
-
-		// XML
+		// Log
 
 		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Exporting portlet info takes " + stopWatch.getTime() + " ms");
+			_log.info("Exporting portlet took " + stopWatch.getTime() + " ms");
 		}
 
 		// Zip
 
 		try {
-			zipWriter.addEntry("portlet.xml", XMLFormatter.toString(doc));
+			context.addZipEntry(
+				"/manifest.xml", XMLFormatter.toString(doc));
 
 			return zipWriter.finish();
 		}
@@ -1210,26 +1030,17 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		Element root = null;
 		byte[] themeZip = null;
 
+		// Manifest
+
+		String xml = context.getZipEntryAsString("/manifest.xml");
+
 		try {
-
-			// XML
-
-			String xml = zipReader.getEntryAsString("layouts.xml");
-
-			SAXReader reader = new SAXReader();
-
-			Document doc = reader.read(new StringReader(xml));
+			Document doc = DocumentUtil.readDocumentFromXML(xml);
 
 			root = doc.getRootElement();
-
-			// Look and feel
-
-			if (importTheme) {
-				themeZip = zipReader.getEntryAsByteArray("theme.zip");
-			}
 		}
 		catch (Exception e) {
-			throw new SystemException(e);
+			throw new LARFileException(e);
 		}
 
 		// Build compatibility
@@ -1245,6 +1056,28 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			throw new LayoutImportException(
 				"LAR build number " + importBuildNumber + " does not match " +
 					"portal build number " + buildNumber);
+		}
+
+		// Type compatibility
+
+		String larType = header.attributeValue("type");
+
+		if (!larType.equals("layout-set")) {
+			throw new LARTypeException(
+				"Invalid type of LAR file (" + larType + ")");
+		}
+
+		// Import GroupId
+
+		long importGroupId = GetterUtil.getLong(
+			header.attributeValue("group-id"));
+
+		context.setImportGroupId(importGroupId);
+
+		// Look and feel
+
+		if (importTheme) {
+			themeZip = context.getZipEntryAsByteArray("theme.zip");
 		}
 
 		// Look and feel
@@ -1293,19 +1126,37 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		Set<Long> newLayoutIds = new HashSet<Long>();
 
-		Iterator<Element> itr = root.elements("layout").iterator();
+		Map <Long, Long> newLayoutIdPlidMap =
+			context.getNewPrimaryKeysMap(Layout.class);
+
+		List<Element> layoutEls = root.element("layouts").elements("layout");
 
 		if (_log.isDebugEnabled()) {
-			if (itr.hasNext()) {
+			if (layoutEls.size() > 0) {
 				_log.debug("Importing layouts");
 			}
 		}
 
-		while (itr.hasNext()) {
-			Element layoutEl = itr.next();
-
+		for (Element layoutRefEl : layoutEls) {
 			long layoutId = GetterUtil.getInteger(
-				layoutEl.attributeValue("layout-id"));
+				layoutRefEl.attributeValue("layout-id"));
+
+			long oldLayoutId = layoutId;
+
+			String layoutPath = layoutRefEl.attributeValue("path");
+
+			Element layoutEl = null;
+
+			try {
+				Document layoutDoc = DocumentUtil.readDocumentFromXML(
+					context.getZipEntryAsString(layoutPath));
+
+				layoutEl = layoutDoc.getRootElement();
+			}
+			catch (DocumentException de) {
+				throw new SystemException(de);
+			}
+
 			long parentLayoutId = GetterUtil.getInteger(
 				layoutEl.elementText("parent-layout-id"));
 
@@ -1329,9 +1180,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			byte[] iconBytes = null;
 
 			if (iconImage) {
-				String iconImagePath = layoutEl.elementText("icon-image-path");
+				String path = layoutEl.elementText("icon-image-path");
 
-				iconBytes = zipReader.getEntryAsByteArray(iconImagePath);
+				iconBytes = context.getZipEntryAsByteArray(path);
 			}
 
 			if (useThemeZip) {
@@ -1423,6 +1274,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			context.setPlid(layout.getPlid());
 
+			newLayoutIdPlidMap.put(oldLayoutId, layout.getPlid());
+
 			newLayoutIds.add(layoutId);
 
 			Element permissionsEl = layoutEl.element("permissions");
@@ -1434,46 +1287,108 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 					layoutCache, companyId, groupId, guestGroup, layout,
 					permissionsEl, importUserPermissions);
 			}
+		}
+
+		List<Element> portletEls = root.element("portlets").elements("portlet");
+
+		// Delete portlet data
+
+		if (deletePortletData) {
+			if (_log.isDebugEnabled()) {
+				if (portletEls.size() > 0) {
+					_log.debug("Deleting portlet data");
+				}
+			}
+
+			for (Element portletRefEl : portletEls) {
+				String portletId = portletRefEl.attributeValue("portlet-id");
+				long layoutId = GetterUtil.getLong(
+					portletRefEl.attributeValue("layout-id"));
+				long plid = newLayoutIdPlidMap.get(layoutId);
+
+				context.setPlid(plid);
+
+				deletePortletData(context, portletId, plid);
+			}
+		}
+
+		// Import portlets
+
+		if (_log.isDebugEnabled()) {
+			if (portletEls.size() > 0) {
+				_log.debug("Importing portlets");
+			}
+		}
+
+		for (Element portletRefEl : portletEls) {
+			String portletPath = portletRefEl.attributeValue("path");
+			String portletId = portletRefEl.attributeValue("portlet-id");
+			long layoutId = GetterUtil.getLong(
+				portletRefEl.attributeValue("layout-id"));
+			long plid = newLayoutIdPlidMap.get(layoutId);
+
+			Layout layout = layoutPersistence.findByPrimaryKey(plid);
+
+			context.setPlid(plid);
+
+			Element portletEl = null;
+
+			try {
+				Document portletDoc = DocumentUtil.readDocumentFromXML(
+					context.getZipEntryAsString(portletPath));
+
+				portletEl = portletDoc.getRootElement();
+			}
+			catch (DocumentException de) {
+				throw new SystemException(de);
+			}
 
 			// The order of the import is important. You must always import
 			// the portlet preferences first, then the portlet data, then
 			// the portlet permissions. The import of the portlet data
 			// assumes that portlet preferences already exist.
 
-			// Delete portlet data
-
-			if (deletePortletData) {
-				deletePortletData(context, layout, layoutEl);
-			}
-
 			// Portlet preferences
 
 			importPortletPreferences(
 				context, layoutSet.getCompanyId(), layout.getGroupId(),
-				layout.getPlid(), null, layoutEl, importPortletSetup,
+				layout.getPlid(), null, portletEl, importPortletSetup,
 				importPortletArchivedSetups, importPortletUserPreferences);
 
 			// Portlet data
 
 			if (importPortletData) {
-				importPortletData(context, layout, layoutEl);
+				importPortletData(
+					context, portletId, plid, portletEl.element("portlet-data"));
 			}
 
 			// Portlet permissions
+
+			Element permissionsEl = portletEl.element("permissions");
 
 			if (importPermissions) {
 				importPortletPermissions(
 					layoutCache, companyId, groupId, guestGroup, layout,
 					permissionsEl, importUserPermissions);
 			}
+
+			// Archived setups
+
+			importPortletPreferences(
+				context, layoutSet.getCompanyId(), groupId, 0, null, portletEl,
+				importPortletSetup, importPortletArchivedSetups,
+				importPortletUserPreferences);
+
+			// Portlet roles
+
+			Element rolesEl = portletEl.element("roles");
+
+			if (importPermissions) {
+				importPortletRoles(layoutCache, companyId, groupId, portletEl);
+				importPortletRoles(
+					layoutCache, companyId, groupId, portletId, rolesEl);
+			}
 		}
-
-		// Archived setups
-
-		importPortletPreferences(
-			context, layoutSet.getCompanyId(), groupId, 0, null, root,
-			importPortletSetup, importPortletArchivedSetups,
-			importPortletUserPreferences);
 
 		Element rolesEl = root.element("roles");
 
@@ -1481,12 +1396,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		if (importPermissions) {
 			importLayoutRoles(layoutCache, companyId, groupId, rolesEl);
-		}
-
-		// Portlet roles
-
-		if (importPermissions) {
-			importPortletRoles(layoutCache, companyId, groupId, rolesEl);
 		}
 
 		// Delete missing layouts
@@ -1565,27 +1474,18 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		Element root = null;
 
+		// Manifest
+
+		String xml = context.getZipEntryAsString("/manifest.xml");
+
 		try {
+			Document doc = DocumentUtil.readDocumentFromXML(xml);
 
-			// XML
-
-			String xml = zipReader.getEntryAsString("portlet.xml");
-
-			if (xml != null) {
-				SAXReader reader = new SAXReader();
-
-				Document doc = reader.read(new StringReader(xml));
-
-				root = doc.getRootElement();
-			}
+			root = doc.getRootElement();
 		}
 		catch (Exception e) {
-			throw new SystemException(e);
-		}
-
-		if (root == null) {
-			throw new LARTypeException(
-				"The LAR does not contain a portlet.xml file");
+			throw new LARFileException(
+				"Cannot locate a manifest in this LAR file.");
 		}
 
 		// Build compatibility
@@ -1603,12 +1503,16 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 					"portal build number " + buildNumber);
 		}
 
+		// Type compatibility
+
 		String type = header.attributeValue("type");
 
 		if (!type.equals("portlet")) {
 			throw new LARTypeException(
 				"Invalid type of LAR file (" + type + ")");
 		}
+
+		// Portlet compatibility
 
 		String rootPortletId = header.attributeValue("root-portlet-id");
 
@@ -1617,6 +1521,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			throw new PortletIdException("Invalid portlet id " + rootPortletId);
 		}
+
+		// Import GroupId
+
+		long importGroupId = GetterUtil.getLong(
+			header.attributeValue("group-id"));
+
+		context.setImportGroupId(importGroupId);
 
 		// Read comments, ratings, and tags to make them available to the data
 		// handlers through the context
@@ -1632,15 +1543,29 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		if (deletePortletData) {
-			deletePortletData(context, layout, root);
+			deletePortletData(context, portletId, plid);
+		}
+
+		Element portletRefEl = root.element("portlet");
+		Element portletEl = null;
+
+		try {
+			Document portletDoc = DocumentUtil.readDocumentFromXML(
+				context.getZipEntryAsString(
+					portletRefEl.attributeValue("path")));
+
+			portletEl = portletDoc.getRootElement();
+		}
+		catch (DocumentException de) {
+			throw new SystemException(de);
 		}
 
 		// Portlet preferences
 
 		importPortletPreferences(
 			context, layout.getCompanyId(), layout.getGroupId(), plid,
-			portletId, root, importPortletSetup, importPortletArchivedSetups,
-			importUserPreferences);
+			portletId, portletEl, importPortletSetup,
+			importPortletArchivedSetups, importUserPreferences);
 
 		// Portlet data
 
@@ -1649,7 +1574,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		if (importPortletData) {
-			importPortletData(context, layout, root);
+			importPortletData(
+				context, portletId, plid, portletEl.element("portlet-data"));
 		}
 
 		if (_log.isInfoEnabled()) {
@@ -2075,41 +2001,33 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void deletePortletData(
-			PortletDataContext context, Layout layout, Element parentEl)
+			PortletDataContext context, String portletId, long plid)
 		throws PortalException, SystemException {
 
-		Iterator<Element> itr = parentEl.elements("portlet-data").iterator();
+		try {
+			PortletPreferences portletPreferences =
+				portletPreferencesPersistence.findByO_O_P_P(
+					PortletKeys.PREFS_OWNER_ID_DEFAULT,
+					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, plid,
+					portletId);
 
-		while (itr.hasNext()) {
-			Element el = itr.next();
+			String preferences = deletePortletData(
+				context, portletId, portletPreferences);
 
-			String portletId = el.attributeValue("portlet-id");
+			if (preferences != null) {
+				portletPreferences.setPreferences(preferences);
 
-			try {
-				PortletPreferences portletPreferences =
-					portletPreferencesPersistence.findByO_O_P_P(
-						PortletKeys.PREFS_OWNER_ID_DEFAULT,
-						PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
-						portletId);
-
-				String preferences = deletePortletData(
-					context, portletId, portletPreferences, el);
-
-				if (preferences != null) {
-					portletPreferences.setPreferences(preferences);
-
-					portletPreferencesPersistence.update(
-						portletPreferences, false);
-				}
+				portletPreferencesPersistence.update(
+					portletPreferences, false);
 			}
-			catch (NoSuchPortletPreferencesException nsppe) {
-			}
+		}
+		catch (NoSuchPortletPreferencesException nsppe) {
 		}
 	}
 
 	protected String deletePortletData(
 			PortletDataContext context, String portletId,
-			PortletPreferences portletPreferences, Element parentEl)
+			PortletPreferences portletPreferences)
 		throws PortalException, SystemException {
 
 		Portlet portlet = portletLocalService.getPortletById(
@@ -2157,37 +2075,42 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return PortletPreferencesSerializer.toXML(prefsImpl);
 	}
 
-	protected void exportComments(PortletDataContext context, Element root)
+	protected void exportComments(PortletDataContext context, Element parentEl)
 		throws SystemException {
 
 		try {
-			XStream xStream = new XStream();
+			Document doc = DocumentHelper.createDocument();
 
-			Map commentsMap = context.getComments();
+			Element root = doc.addElement("comments");
 
-			Iterator<String> itr = commentsMap.keySet().iterator();
+			Map<String, List> commentsMap = context.getComments();
 
-			while (itr.hasNext()) {
-				String key = itr.next();
+			for (Map.Entry<String, List> entry : commentsMap.entrySet()) {
+				String[] comment = entry.getKey().split(StringPool.POUND);
 
-				String[] comment = key.split(StringPool.POUND);
+				String path = getCommentPath(context, comment[0], comment[1]);
 
-				Element el = root.addElement("comments");
+				Element asset = root.addElement("asset");
+				asset.addAttribute("path", path);
+				asset.addAttribute("class-name", comment[0]);
+				asset.addAttribute("class-pk", comment[1]);
 
-				el.addAttribute("class-name", comment[0]);
-				el.addAttribute("class-pk", comment[1]);
+				List<MBMessage> messages = entry.getValue();
 
-				List messages = (List)commentsMap.get(key);
+				for (MBMessage message : messages) {
+					path = getCommentPath(
+						context, comment[0], comment[1], message);
 
-				String xml = xStream.toXML(messages);
-
-				Document tempDoc = DocumentUtil.readDocumentFromXML(xml);
-
-				el.content().add(tempDoc.getRootElement().createCopy());
+					context.addZipEntry(path, message);
+				}
 			}
+
+			context.addZipEntry(
+				context.getRootPath() + "/comments.xml",
+				XMLFormatter.toString(doc));
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
 		}
 	}
 
@@ -2372,30 +2295,127 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			rolesEl);
 	}
 
-	protected void exportPortletData(
-			PortletDataContext context, Layout layout,
-			LayoutTypePortlet layoutTypePortlet, Element parentEl)
+	protected void exportPortlet(
+			PortletDataContext context, LayoutCache layoutCache,
+			String portletId, Layout layout, Element parentEl,
+			long defaultUserId, boolean exportPortletData,
+			boolean exportPortletSetup, boolean exportPortletArchivedSetups,
+			boolean exportPortletUserPreferences, boolean exportPermissions,
+			boolean exportUserPermissions)
 		throws PortalException, SystemException {
 
-		Iterator<PortletPreferences> itr =
-			portletPreferencesLocalService.getPortletPreferencesByPlid(
-				layout.getPlid()).iterator();
+		long companyId = context.getCompanyId();
+		long groupId = context.getGroupId();
 
-		while (itr.hasNext()) {
-			PortletPreferences portletPreferences = itr.next();
+		Document portletDoc = DocumentHelper.createDocument();
 
-			javax.portlet.PortletPreferences jxPrefs =
-				portletPreferencesLocalService.getPreferences(
-					layout.getCompanyId(), portletPreferences.getOwnerId(),
-					portletPreferences.getOwnerType(),
-					portletPreferences.getPlid(),
-					portletPreferences.getPortletId());
+		Element portletEl = portletDoc.addElement("portlet");
 
-			String portletId = portletPreferences.getPortletId();
+		portletEl.addAttribute("portlet-id", portletId);
+		portletEl.addAttribute(
+			"root-portlet-id", PortletConstants.getRootPortletId(portletId));
 
-			if (layoutTypePortlet.hasPortletId(portletId)) {
-				exportPortletData(context, portletId, jxPrefs, parentEl);
+		// Data
+
+		javax.portlet.PortletPreferences jxPrefs =
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				layout, portletId, StringPool.BLANK);
+
+		if (exportPortletData) {
+			exportPortletData(context, portletId, jxPrefs, portletEl);
+		}
+
+		// Portlet preferences
+
+		if (exportPortletSetup) {
+			exportPortletPreferences(
+				context, PortletKeys.PREFS_OWNER_ID_DEFAULT,
+				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, false, layout, portletId,
+				portletEl);
+
+			exportPortletPreferences(
+				context, groupId, PortletKeys.PREFS_OWNER_TYPE_GROUP, false,
+				layout, portletId, portletEl);
+
+			exportPortletPreferences(
+				context, companyId, PortletKeys.PREFS_OWNER_TYPE_COMPANY, false,
+				layout, portletId, portletEl);
+		}
+
+		// Portlet preferences
+
+		if (exportPortletUserPreferences) {
+			exportPortletPreferences(
+				context, defaultUserId, PortletKeys.PREFS_OWNER_TYPE_USER,
+				true, layout, portletId, portletEl);
+
+			try {
+				PortletPreferences groupPortletPreferences =
+					portletPreferencesLocalService.getPortletPreferences(
+						groupId, PortletKeys.PREFS_OWNER_TYPE_GROUP,
+						PortletKeys.PREFS_PLID_SHARED, portletId);
+
+				exportPortletPreference(
+					context, groupId, PortletKeys.PREFS_OWNER_TYPE_GROUP, false,
+					groupPortletPreferences, portletId,
+					PortletKeys.PREFS_PLID_SHARED, portletEl);
 			}
+			catch (NoSuchPortletPreferencesException nsppe) {
+			}
+		}
+
+		// Archived setups
+
+		if (exportPortletArchivedSetups) {
+			String rootPortletId = PortletConstants.getRootPortletId(portletId);
+
+			List<PortletItem> portletItems =
+				portletItemLocalService.getPortletItems(
+					groupId, rootPortletId, PortletPreferences.class.getName());
+
+			for (PortletItem portletItem: portletItems) {
+				long ownerId = portletItem.getPortletItemId();
+				int ownerType = PortletKeys.PREFS_OWNER_TYPE_ARCHIVED;
+
+				exportPortletPreferences(
+					context, ownerId, ownerType, false, null,
+					portletItem.getPortletId(), portletEl);
+			}
+		}
+
+		Group guestGroup = groupLocalService.getGroup(
+			companyId, GroupImpl.GUEST);
+
+		// Permissions
+
+		if (exportPermissions) {
+			Element permissionsEl = portletEl.addElement("permissions");
+
+			exportPortletPermissions(
+				layoutCache, companyId, groupId, guestGroup, layout.getPlid(),
+				portletId, permissionsEl, exportUserPermissions);
+
+			Element rolesEl = portletEl.addElement("roles");
+
+			exportPortletRoles(
+				layoutCache, companyId, groupId, portletId, rolesEl);
+		}
+
+		// Zip
+
+		String portletPath = context.getPortletPath(portletId) + "/portlet.xml";
+
+		Element el = parentEl.addElement("portlet");
+		el.addAttribute("portlet-id", portletId);
+		el.addAttribute(
+			"layout-id", String.valueOf(layout.getLayoutId()));
+		el.addAttribute("path", portletPath);
+
+		try {
+			context.addZipEntry(portletPath, XMLFormatter.toString(portletDoc));
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
 		}
 	}
 
@@ -2435,7 +2455,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		if (MapUtil.getBoolean(
 				parameterMap,
-				PortletDataHandlerKeys.PORTLET_DATA + "_" + portletId) ||
+				PortletDataHandlerKeys.PORTLET_DATA + "_" +
+					portlet.getRootPortletId()) ||
 			MapUtil.getBoolean(
 				parameterMap, PortletDataHandlerKeys.PORTLET_DATA_ALL)) {
 
@@ -2465,118 +2486,101 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			return;
 		}
 
-		Element el = parentEl.addElement("portlet-data");
+		String portletDataPath = getPortletDataPath(context, portletId);
 
-		el.addAttribute("portlet-id", portletId);
-		el.addCDATA(data);
+		parentEl.addElement("portlet-data").addAttribute(
+			"path", portletDataPath);
+
+		context.addZipEntry(portletDataPath, data);
 	}
 
 	protected void exportPortletPermissions(
 			LayoutCache layoutCache, long companyId, long groupId,
-			Group guestGroup, Layout layout,
-			LayoutTypePortlet layoutTypePortlet, Set<String> portletIds,
+			Group guestGroup, long plid, String portletId,
 			Element permissionsEl, boolean exportUserPermissions)
 		throws PortalException, SystemException {
 
-		for (String portletId : layoutTypePortlet.getPortletIds()) {
-			if (!portletIds.contains(portletId)) {
-				portletIds.add(portletId);
+		String resourceName = PortletConstants.getRootPortletId(portletId);
+		String resourcePrimKey = PortletPermissionUtil.getPrimaryKey(
+			plid, portletId);
+
+		exportGroupPermissions(
+			companyId, groupId, resourceName, resourcePrimKey, permissionsEl,
+			"community-actions");
+
+		if (groupId != guestGroup.getGroupId()) {
+			exportGroupPermissions(
+				companyId, guestGroup.getGroupId(), resourceName,
+				resourcePrimKey, permissionsEl, "guest-actions");
+		}
+
+		if (exportUserPermissions) {
+			exportUserPermissions(
+				layoutCache, companyId, groupId, resourceName, resourcePrimKey,
+				permissionsEl);
+		}
+
+		exportInheritedPermissions(
+			layoutCache, companyId, resourceName, resourcePrimKey,
+			permissionsEl, "organization");
+
+		exportInheritedPermissions(
+			layoutCache, companyId, resourceName, resourcePrimKey,
+			permissionsEl, "location");
+
+		exportInheritedPermissions(
+			layoutCache, companyId, resourceName, resourcePrimKey,
+			permissionsEl, "user-group");
+	}
+
+	protected void exportPortletPreference(
+			PortletDataContext context, long ownerId, int ownerType,
+			boolean defaultUser, PortletPreferences portletPreferences,
+			String portletId, long plid, Element parentEl)
+		throws PortalException, SystemException {
+
+		try {
+			Document prefsDoc = DocumentUtil.readDocumentFromXML(
+				portletPreferences.getPreferences());
+
+			Element root = prefsDoc.getRootElement();
+
+			root.addAttribute("owner-id", String.valueOf(ownerId));
+			root.addAttribute("owner-type", String.valueOf(ownerType));
+			root.addAttribute("default-user", String.valueOf(defaultUser));
+			root.addAttribute("plid", String.valueOf(plid));
+			root.addAttribute("portlet-id", portletId);
+
+			if (ownerType == PortletKeys.PREFS_OWNER_TYPE_ARCHIVED) {
+				PortletItem portletItem =
+					portletItemLocalService.getPortletItem(ownerId);
+
+				User user = userLocalService.getUserById(
+					portletItem.getUserId());
+
+				root.addAttribute("archive-user-uuid", user.getUuid());
+				root.addAttribute("archive-name", portletItem.getName());
 			}
 
-			if (layoutTypePortlet.hasPortletId(portletId)) {
-				String resourceName = PortletConstants.getRootPortletId(
-					portletId);
-				String resourcePrimKey = PortletPermissionUtil.getPrimaryKey(
-					layout.getPlid(), portletId);
+			String path = getPortletPreferencesPath(
+				context, portletId, ownerId, ownerType, plid);
 
-				Element portletEl = permissionsEl.addElement("portlet");
+			parentEl.addElement("portlet-preference").addAttribute("path", path);
 
-				portletEl.addAttribute("portlet-id", portletId);
-
-				exportGroupPermissions(
-					companyId, groupId, resourceName, resourcePrimKey,
-					portletEl, "community-actions");
-
-				if (groupId != guestGroup.getGroupId()) {
-					exportGroupPermissions(
-						companyId, guestGroup.getGroupId(), resourceName,
-						resourcePrimKey, portletEl, "guest-actions");
-				}
-
-				if (exportUserPermissions) {
-					exportUserPermissions(
-						layoutCache, companyId, groupId, resourceName,
-						resourcePrimKey, portletEl);
-				}
-
-				exportInheritedPermissions(
-					layoutCache, companyId, resourceName, resourcePrimKey,
-					portletEl, "organization");
-
-				exportInheritedPermissions(
-					layoutCache, companyId, resourceName, resourcePrimKey,
-					portletEl, "location");
-
-				exportInheritedPermissions(
-					layoutCache, companyId, resourceName, resourcePrimKey,
-					portletEl, "user-group");
+			if (context.isPathNotProcessed(path)) {
+				context.addZipEntry(
+					path, XMLFormatter.toString(prefsDoc));
 			}
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
 		}
 	}
 
 	protected void exportPortletPreferences(
-			long ownerId, int ownerType, long plid, boolean defaultUser,
+			PortletDataContext context, long ownerId, int ownerType,
+			boolean defaultUser, Layout layout, String portletId,
 			Element parentEl)
-		throws PortalException, SystemException {
-
-		exportPortletPreferences(
-			ownerId, ownerType, defaultUser, plid, null, parentEl);
-	}
-
-	protected void exportPortletPreferences(
-			long ownerId, int ownerType, boolean defaultUser, long plid,
-			LayoutTypePortlet layoutTypePortlet, Element parentEl)
-		throws PortalException, SystemException {
-
-		Iterator<PortletPreferences> itr =
-			portletPreferencesLocalService.getPortletPreferences(
-				ownerId, ownerType, plid).iterator();
-
-		while (itr.hasNext()) {
-			PortletPreferences portletPreferences = itr.next();
-
-			String portletId = portletPreferences.getPortletId();
-
-			if ((layoutTypePortlet == null) ||
-				(layoutTypePortlet.hasPortletId(portletId))) {
-
-				Element el = parentEl.addElement("portlet-preferences");
-
-				el.addAttribute("owner-id", String.valueOf(ownerId));
-				el.addAttribute("owner-type", String.valueOf(ownerType));
-				el.addAttribute("default-user", String.valueOf(defaultUser));
-				el.addAttribute("plid", String.valueOf(plid));
-				el.addAttribute("portlet-id", portletId);
-				el.addElement("preferences").addCDATA(
-					portletPreferences.getPreferences());
-
-				if (ownerType == PortletKeys.PREFS_OWNER_TYPE_ARCHIVED) {
-					PortletItem portletItem =
-						portletItemLocalService.getPortletItem(ownerId);
-
-					User user = userLocalService.getUserById(
-						portletItem.getUserId());
-
-					el.addAttribute("archive-user-uuid", user.getUuid());
-					el.addAttribute("archive-name", portletItem.getName());
-				}
-			}
-		}
-	}
-
-	protected void exportPortletPreferences(
-			long ownerId, int ownerType, boolean defaultUser, Layout layout,
-			String portletId, Element parentEl)
 		throws PortalException, SystemException {
 
 		PortletPreferences portletPreferences = null;
@@ -2608,27 +2612,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			if ((layoutTypePortlet == null) ||
 				(layoutTypePortlet.hasPortletId(portletId))) {
 
-				Element el = parentEl.addElement("portlet-preferences");
-
-				el.addAttribute("owner-id", String.valueOf(ownerId));
-				el.addAttribute("owner-type", String.valueOf(ownerType));
-				el.addAttribute("default-user", String.valueOf(defaultUser));
-				el.addAttribute("plid", String.valueOf(plid));
-				el.addAttribute("portlet-id", portletId);
-
-				if (ownerType == PortletKeys.PREFS_OWNER_TYPE_ARCHIVED) {
-					PortletItem portletItem =
-						portletItemLocalService.getPortletItem(ownerId);
-
-					User user = userLocalService.getUserById(
-						portletItem.getUserId());
-
-					el.addAttribute("archive-user-uuid", user.getUuid());
-					el.addAttribute("archive-name", portletItem.getName());
-				}
-
-				el.addElement("preferences").addCDATA(
-					portletPreferences.getPreferences());
+				exportPortletPreference(
+					context, ownerId, ownerType, defaultUser,
+					portletPreferences, portletId, plid, parentEl);
 			}
 		}
 		catch (NoSuchPortletPreferencesException nsppe) {
@@ -2637,38 +2623,37 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	protected void exportPortletRoles(
 			LayoutCache layoutCache, long companyId, long groupId,
-			Set<String> portletIds, Element rolesEl)
+			String portletId, Element rolesEl)
 		throws PortalException, SystemException {
 
-		for (String portletId : portletIds) {
-			String resourceName = PortletConstants.getRootPortletId(portletId);
+		String resourceName = PortletConstants.getRootPortletId(
+			portletId);
 
-			Element portletEl = rolesEl.addElement("portlet");
+		Element portletEl = rolesEl.addElement("portlet");
 
-			portletEl.addAttribute("portlet-id", portletId);
+		portletEl.addAttribute("portlet-id", portletId);
 
-			exportGroupRoles(
-				layoutCache, companyId, groupId, resourceName, "community",
-				portletEl);
+		exportGroupRoles(
+			layoutCache, companyId, groupId, resourceName, "community",
+			portletEl);
 
-			exportUserRoles(
-				layoutCache, companyId, groupId, resourceName, portletEl);
+		exportUserRoles(
+			layoutCache, companyId, groupId, resourceName, portletEl);
 
-			exportInheritedRoles(
-				layoutCache, companyId, groupId, resourceName, "organization",
-				portletEl);
+		exportInheritedRoles(
+			layoutCache, companyId, groupId, resourceName, "organization",
+			portletEl);
 
-			exportInheritedRoles(
-				layoutCache, companyId, groupId, resourceName, "location",
-				portletEl);
+		exportInheritedRoles(
+			layoutCache, companyId, groupId, resourceName, "location",
+			portletEl);
 
-			exportInheritedRoles(
-				layoutCache, companyId, groupId, resourceName, "user-group",
-				portletEl);
+		exportInheritedRoles(
+			layoutCache, companyId, groupId, resourceName, "user-group",
+			portletEl);
 
-			if (portletEl.elements().isEmpty()) {
-				rolesEl.remove(portletEl);
-			}
+		if (portletEl.elements().isEmpty()) {
+			rolesEl.remove(portletEl);
 		}
 	}
 
@@ -2713,56 +2698,72 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return el;
 	}
 
-	protected void exportRatings(PortletDataContext context, Element root)
+	protected void exportRatings(PortletDataContext context, Element parentEl)
 		throws SystemException {
 
 		try {
-			XStream xStream = new XStream();
+			Document doc = DocumentHelper.createDocument();
 
-			Map ratingsEntriesMap = context.getRatingsEntries();
+			Element root = doc.addElement("ratings");
 
-			Iterator<String> itr = ratingsEntriesMap.keySet().iterator();
+			Map<String, List> ratingsEntriesMap = context.getRatingsEntries();
 
-			while (itr.hasNext()) {
-				String key = itr.next();
+			for (Map.Entry<String, List> entry : ratingsEntriesMap.entrySet()) {
+				String[] ratingsEntry = entry.getKey().split(StringPool.POUND);
 
-				String[] ratingsEntry = key.split(StringPool.POUND);
+				String ratingPath = getRatingPath(
+					context, ratingsEntry[0], ratingsEntry[1]);
 
-				Element el = root.addElement("ratings");
+				Element asset = root.addElement("asset");
+				asset.addAttribute("path", ratingPath);
+				asset.addAttribute("class-name", ratingsEntry[0]);
+				asset.addAttribute("class-pk", ratingsEntry[1]);
 
-				el.addAttribute("class-name", ratingsEntry[0]);
-				el.addAttribute("class-pk", ratingsEntry[1]);
+				List<RatingsEntry> ratingsEntries = entry.getValue();
 
-				List ratingsEntries = (List)ratingsEntriesMap.get(key);
+				for (RatingsEntry rating : ratingsEntries) {
+					ratingPath = getRatingPath(
+						context, ratingsEntry[0], ratingsEntry[1], rating);
 
-				String xml = xStream.toXML(ratingsEntries);
-
-				Document tempDoc = DocumentUtil.readDocumentFromXML(xml);
-
-				el.content().add(tempDoc.getRootElement().createCopy());
+					context.addZipEntry(ratingPath, rating);
+				}
 			}
+
+			context.addZipEntry(
+				context.getRootPath() + "/ratings.xml",
+				XMLFormatter.toString(doc));
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 	}
 
-	protected void exportTags(PortletDataContext context, Element root) {
-		Map<String, String[]> tagsEntries = context.getTagsEntries();
+	protected void exportTags(PortletDataContext context, Element parentEl)
+		throws SystemException {
 
-		Iterator<String> itr = tagsEntries.keySet().iterator();
+		try {
+			Document doc = DocumentHelper.createDocument();
 
-		while (itr.hasNext()) {
-			String key = itr.next();
+			Element root = doc.addElement("tags");
 
-			String[] tagsEntry = key.split(StringPool.POUND);
+			Map<String, String[]> tagsEntries = context.getTagsEntries();
 
-			Element el = root.addElement("tags");
+			for (Map.Entry<String, String[]> entry : tagsEntries.entrySet()) {
+				String[] tagsEntry = entry.getKey().split(StringPool.POUND);
 
-			el.addAttribute("class-name", tagsEntry[0]);
-			el.addAttribute("class-pk", tagsEntry[1]);
-			el.addAttribute(
-				"entries", StringUtil.merge(tagsEntries.get(key), ","));
+				Element asset = root.addElement("asset");
+				asset.addAttribute("class-name", tagsEntry[0]);
+				asset.addAttribute("class-pk", tagsEntry[1]);
+				asset.addAttribute(
+					"entries", StringUtil.merge(entry.getValue(), ","));
+			}
+
+			context.addZipEntry(
+				context.getRootPath() + "/tags.xml",
+				XMLFormatter.toString(doc));
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
 		}
 	}
 
@@ -3001,6 +3002,37 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return actions;
 	}
 
+	protected String getCommentPath(
+			PortletDataContext context, String className, String classPK) {
+
+		StringMaker sm = new StringMaker();
+		sm.append(context.getRootPath());
+		sm.append("/comments/");
+		sm.append(PortalUtil.getClassNameId(className));
+		sm.append(CharPool.FORWARD_SLASH);
+		sm.append(classPK);
+		sm.append(CharPool.FORWARD_SLASH);
+
+		return sm.toString();
+	}
+
+	protected String getCommentPath(
+			PortletDataContext context, String className, String classPK,
+			MBMessage message) {
+
+		StringMaker sm = new StringMaker();
+		sm.append(context.getRootPath());
+		sm.append("/comments/");
+		sm.append(PortalUtil.getClassNameId(className));
+		sm.append(CharPool.FORWARD_SLASH);
+		sm.append(classPK);
+		sm.append(CharPool.FORWARD_SLASH);
+		sm.append(message.getMessageId());
+		sm.append(".xml");
+
+		return sm.toString();
+	}
+
 	protected String getFriendlyURL(String friendlyURL) {
 		friendlyURL = GetterUtil.getString(friendlyURL);
 
@@ -3015,6 +3047,19 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		return friendlyURL;
+	}
+
+	protected String getLayoutIconPath(
+			PortletDataContext context, Layout layout, Image image) {
+		StringMaker sm = new StringMaker();
+
+		sm.append(context.getLayoutPath(layout.getLayoutId()));
+		sm.append("/icons/");
+		sm.append(image.getImageId());
+		sm.append(StringPool.PERIOD);
+		sm.append(image.getType());
+
+		return sm.toString();
 	}
 
 	protected long getNextLayoutId(long groupId, boolean privateLayout)
@@ -3070,6 +3115,77 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		return parentLayoutId;
+	}
+
+	protected String getPortletDataPath(
+			PortletDataContext context, String portletId) {
+
+		return context.getPortletPath(portletId) + "/portlet-data.xml";
+	}
+
+	protected String getPortletPreferencesPath(
+			PortletDataContext context, String portletId, long ownerId,
+			int ownerType, long plid) {
+		StringMaker preferencePath = new StringMaker();
+		preferencePath.append(context.getPortletPath(portletId));
+		preferencePath.append("/preferences/");
+
+		switch(ownerType) {
+			case PortletKeys.PREFS_OWNER_TYPE_COMPANY:
+				preferencePath.append("company/");
+				break;
+			case PortletKeys.PREFS_OWNER_TYPE_GROUP:
+				preferencePath.append("group/");
+				break;
+			case PortletKeys.PREFS_OWNER_TYPE_LAYOUT:
+				preferencePath.append("layout/");
+				break;
+			case PortletKeys.PREFS_OWNER_TYPE_USER:
+				preferencePath.append("user/");
+				break;
+			case PortletKeys.PREFS_OWNER_TYPE_ARCHIVED:
+				preferencePath.append("archived/");
+				break;
+		}
+
+		preferencePath.append(ownerId);
+		preferencePath.append(CharPool.FORWARD_SLASH);
+		preferencePath.append(plid);
+		preferencePath.append(CharPool.FORWARD_SLASH);
+		preferencePath.append("portlet-preferences.xml");
+
+		return preferencePath.toString();
+	}
+
+	protected String getRatingPath(
+			PortletDataContext context, String className, String classPK) {
+
+		StringMaker sm = new StringMaker();
+		sm.append(context.getRootPath());
+		sm.append("/ratings/");
+		sm.append(PortalUtil.getClassNameId(className));
+		sm.append(CharPool.FORWARD_SLASH);
+		sm.append(classPK);
+		sm.append(CharPool.FORWARD_SLASH);
+
+		return sm.toString();
+	}
+
+	protected String getRatingPath(
+			PortletDataContext context, String className, String classPK,
+			RatingsEntry rating) {
+
+		StringMaker sm = new StringMaker();
+		sm.append(context.getRootPath());
+		sm.append("/ratings/");
+		sm.append(PortalUtil.getClassNameId(className));
+		sm.append(CharPool.FORWARD_SLASH);
+		sm.append(classPK);
+		sm.append(CharPool.FORWARD_SLASH);
+		sm.append(rating.getEntryId());
+		sm.append(".xml");
+
+		return sm.toString();
 	}
 
 	protected UserIdStrategy getUserIdStrategy(
@@ -3290,31 +3406,39 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			String portletId = el.attributeValue("portlet-id");
 
-			try {
-				PortletPreferences portletPreferences =
-					portletPreferencesPersistence.findByO_O_P_P(
-						PortletKeys.PREFS_OWNER_ID_DEFAULT,
-						PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid(),
-						portletId);
+			importPortletData(context, portletId, layout.getPlid(), parentEl);
+		}
+	}
 
-				String preferences = importPortletData(
-					context, portletId, portletPreferences, el);
+	protected void importPortletData(
+			PortletDataContext context, String portletId, long plid,
+			Element portletDataRefEl)
+		throws PortalException, SystemException {
 
-				if (preferences != null) {
-					portletPreferences.setPreferences(preferences);
+		try {
+			PortletPreferences portletPreferences =
+				portletPreferencesPersistence.findByO_O_P_P(
+					PortletKeys.PREFS_OWNER_ID_DEFAULT,
+					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, plid,
+					portletId);
 
-					portletPreferencesPersistence.update(
-						portletPreferences, false);
-				}
+			String preferences = importPortletData(
+				context, portletId, portletPreferences, portletDataRefEl);
+
+			if (preferences != null) {
+				portletPreferences.setPreferences(preferences);
+
+				portletPreferencesPersistence.update(
+					portletPreferences, false);
 			}
-			catch (NoSuchPortletPreferencesException nsppe) {
-			}
+		}
+		catch (NoSuchPortletPreferencesException nsppe) {
 		}
 	}
 
 	protected String importPortletData(
 			PortletDataContext context, String portletId,
-			PortletPreferences portletPreferences, Element parentEl)
+			PortletPreferences portletPreferences, Element portletDataRefEl)
 		throws PortalException, SystemException {
 
 		Portlet portlet = portletLocalService.getPortletById(
@@ -3352,8 +3476,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			(PortletPreferencesImpl)PortletPreferencesSerializer.fromDefaultXML(
 				portletPreferences.getPreferences());
 
+		String portletData = context.getZipEntryAsString(
+			portletDataRefEl.attributeValue("path"));
+
 		prefsImpl = (PortletPreferencesImpl)portletDataHandler.importData(
-			context, portletId, prefsImpl, parentEl.getText());
+			context, portletId, prefsImpl, portletData);
 
 		if (prefsImpl == null) {
 			return null;
@@ -3430,92 +3557,149 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		long defaultUserId = userLocalService.getDefaultUserId(companyId);
 
-		Iterator<Element> itr = parentEl.elements(
-			"portlet-preferences").iterator();
+		List<Element> prefsEls = parentEl.elements("portlet-preference");
 
-		while (itr.hasNext()) {
-			Element el = itr.next();
+		for (Element prefEl : prefsEls) {
+			String path = prefEl.attributeValue("path");
 
-			long ownerId = GetterUtil.getLong(el.attributeValue("owner-id"));
-			int ownerType = GetterUtil.getInteger(
-				el.attributeValue("owner-type"));
+			if (context.isPathNotProcessed(path)) {
 
-			if (ownerType == PortletKeys.PREFS_OWNER_TYPE_COMPANY) {
-				continue;
+				Element el = null;
+				String preferences = null;
+
+				try {
+					preferences = context.getZipEntryAsString(path);
+
+					Document prefsDoc = DocumentUtil.readDocumentFromXML(
+						preferences);
+
+					el = prefsDoc.getRootElement();
+				}
+				catch (DocumentException de) {
+					throw new SystemException(de);
+				}
+
+				long ownerId = GetterUtil.getLong(el.attributeValue("owner-id"));
+				int ownerType = GetterUtil.getInteger(
+					el.attributeValue("owner-type"));
+
+				if (ownerType == PortletKeys.PREFS_OWNER_TYPE_COMPANY) {
+					continue;
+				}
+
+				if (((ownerType == PortletKeys.PREFS_OWNER_TYPE_GROUP) ||
+					 (ownerType == PortletKeys.PREFS_OWNER_TYPE_LAYOUT)) &&
+					!importPortletSetup) {
+
+					continue;
+				}
+
+				if ((ownerType == PortletKeys.PREFS_OWNER_TYPE_ARCHIVED) &&
+					!importPortletArchivedSetups) {
+
+					continue;
+				}
+
+				if ((ownerType == PortletKeys.PREFS_OWNER_TYPE_USER) &&
+					(ownerId != PortletKeys.PREFS_OWNER_ID_DEFAULT) &&
+					!importUserPreferences) {
+
+					continue;
+				}
+
+				if (ownerType == PortletKeys.PREFS_OWNER_TYPE_GROUP) {
+					plid = PortletKeys.PREFS_PLID_SHARED;
+					ownerId = context.getGroupId();
+				}
+
+				boolean defaultUser = GetterUtil.getBoolean(
+					el.attributeValue("default-user"));
+
+				if (portletId == null) {
+					portletId = el.attributeValue("portlet-id");
+				}
+
+				if (ownerType == PortletKeys.PREFS_OWNER_TYPE_ARCHIVED) {
+					String userUuid = el.attributeValue("archive-user-uuid");
+					String name = el.attributeValue("archive-name");
+
+					long userId = context.getUserId(userUuid);
+
+					PortletItem portletItem =
+						portletItemLocalService.updatePortletItem(
+							userId, groupId, name, portletId,
+							PortletPreferences.class.getName());
+
+					plid = 0;
+					ownerId = portletItem.getPortletItemId();
+				}
+
+				if (defaultUser) {
+					ownerId = defaultUserId;
+				}
+
+				try {
+					portletPreferencesLocalService.deletePortletPreferences(
+						ownerId, ownerType, plid, portletId);
+				}
+				catch (NoSuchPortletPreferencesException nsppe) {
+				}
+
+				long portletPreferencesId = counterLocalService.increment();
+
+				PortletPreferences portletPreferences =
+					portletPreferencesPersistence.create(
+						portletPreferencesId);
+
+				portletPreferences.setOwnerId(ownerId);
+				portletPreferences.setOwnerType(ownerType);
+				portletPreferences.setPlid(plid);
+				portletPreferences.setPortletId(portletId);
+
+				portletPreferences.setPreferences(preferences);
+
+				portletPreferencesPersistence.update(
+					portletPreferences, true);
 			}
+		}
+	}
 
-			if (((ownerType == PortletKeys.PREFS_OWNER_TYPE_GROUP) ||
-				 (ownerType == PortletKeys.PREFS_OWNER_TYPE_LAYOUT)) &&
-				!importPortletSetup) {
+	protected void importPortletRoles(
+			LayoutCache layoutCache, long companyId, long groupId,
+			String portletId, Element rolesEl)
+		throws PortalException, SystemException {
 
-				continue;
+		String resourceName = PortletConstants.getRootPortletId(portletId);
+
+		Portlet portlet = portletLocalService.getPortletById(
+			companyId, resourceName);
+
+		if (portlet == null) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Do not import portlet roles for " + portletId +
+						" because the portlet does not exist");
 			}
+		}
+		else {
+			importGroupRoles(
+				layoutCache, companyId, groupId, resourceName, "community",
+				rolesEl);
 
-			if ((ownerType == PortletKeys.PREFS_OWNER_TYPE_ARCHIVED) &&
-				!importPortletArchivedSetups) {
+			importUserRoles(
+				layoutCache, companyId, groupId, resourceName, rolesEl);
 
-				continue;
-			}
+			importInheritedRoles(
+				layoutCache, companyId, groupId, resourceName,
+				"organization", rolesEl);
 
-			if ((ownerType == PortletKeys.PREFS_OWNER_TYPE_USER) &&
-				(ownerId != PortletKeys.PREFS_OWNER_ID_DEFAULT) &&
-				!importUserPreferences) {
+			importInheritedRoles(
+				layoutCache, companyId, groupId, resourceName, "location",
+				rolesEl);
 
-				continue;
-			}
-
-			if (ownerType == PortletKeys.PREFS_OWNER_TYPE_GROUP) {
-				plid = PortletKeys.PREFS_PLID_SHARED;
-			}
-
-			boolean defaultUser = GetterUtil.getBoolean(
-				el.attributeValue("default-user"));
-
-			if (portletId == null) {
-				portletId = el.attributeValue("portlet-id");
-			}
-
-			String preferences = el.elementText("preferences");
-
-			if (ownerType == PortletKeys.PREFS_OWNER_TYPE_ARCHIVED) {
-				String userUuid = el.attributeValue("archive-user-uuid");
-				String name = el.attributeValue("archive-name");
-
-				long userId = context.getUserId(userUuid);
-
-				PortletItem portletItem =
-					portletItemLocalService.updatePortletItem(
-						userId, groupId, name, portletId,
-						PortletPreferences.class.getName());
-
-				plid = 0;
-				ownerId = portletItem.getPortletItemId();
-			}
-
-			if (defaultUser) {
-				ownerId = defaultUserId;
-			}
-
-			try {
-				portletPreferencesLocalService.deletePortletPreferences(
-					ownerId, ownerType, plid, portletId);
-			}
-			catch (NoSuchPortletPreferencesException nsppe) {
-			}
-
-			long portletPreferencesId = counterLocalService.increment();
-
-			PortletPreferences portletPreferences =
-				portletPreferencesPersistence.create(portletPreferencesId);
-
-			portletPreferences.setOwnerId(ownerId);
-			portletPreferences.setOwnerType(ownerType);
-			portletPreferences.setPlid(plid);
-			portletPreferences.setPortletId(portletId);
-
-			portletPreferences.setPreferences(preferences);
-
-			portletPreferencesPersistence.update(portletPreferences, false);
+			importInheritedRoles(
+				layoutCache, companyId, groupId, resourceName, "user-group",
+				rolesEl);
 		}
 	}
 
@@ -3780,30 +3964,36 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 	}
 
-	protected void readComments(PortletDataContext context, Element root)
+	protected void readComments(PortletDataContext context, Element parentEl)
 		throws PortalException, SystemException {
 
 		try {
-			XStream xStream = new XStream();
+			String xml = context.getZipEntryAsString(
+				context.getImportRootPath() + "/comments.xml");
 
-			Iterator<Element> itr = root.elements("comments").iterator();
+			Document doc = DocumentUtil.readDocumentFromXML(xml);
 
-			while (itr.hasNext()) {
-				Element el = itr.next();
+			Element root = doc.getRootElement();
 
-				String className = GetterUtil.getString(
-					el.attributeValue("class-name"));
+			List<Element> assets = root.elements("asset");
+
+			for (Element asset : assets) {
+				String path = asset.attributeValue("path");
+				String className = asset.attributeValue("class-name");
 				long classPK = GetterUtil.getLong(
-					el.attributeValue("class-pk"));
+					asset.attributeValue("class-pk"));
 
-				Element messagesListEl = el.element("list");
+				List<ObjectValuePair<String, byte[]>> entries =
+					context.getZipFolderEntries(path);
 
-				Document tempDoc = DocumentHelper.createDocument();
+				List<MBMessage> messages = new ArrayList<MBMessage>();
 
-				tempDoc.content().add(messagesListEl.createCopy());
+				for (ObjectValuePair<String, byte[]> entry : entries) {
+					MBMessage message =
+						(MBMessage)context.fromXML(entry.getValue());
 
-				List messages = (List)xStream.fromXML(
-					XMLFormatter.toString(tempDoc));
+					messages.add(message);
+				}
 
 				context.addComments(className, new Long(classPK), messages);
 			}
@@ -3813,33 +4003,38 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 	}
 
-	protected void readRatings(PortletDataContext context, Element root)
+	protected void readRatings(PortletDataContext context, Element parentEl)
 		throws PortalException, SystemException {
 
 		try {
-			XStream xStream = new XStream();
+			String xml = context.getZipEntryAsString(
+				context.getImportRootPath() + "/ratings.xml");
 
-			Iterator<Element> itr = root.elements("ratings").iterator();
+			Document doc = DocumentUtil.readDocumentFromXML(xml);
 
-			while (itr.hasNext()) {
-				Element el = itr.next();
+			Element root = doc.getRootElement();
 
-				String className = GetterUtil.getString(
-					el.attributeValue("class-name"));
+			List<Element> assets = root.elements("asset");
+
+			for (Element asset : assets) {
+				String path = asset.attributeValue("path");
+				String className = asset.attributeValue("class-name");
 				long classPK = GetterUtil.getLong(
-					el.attributeValue("class-pk"));
+					asset.attributeValue("class-pk"));
 
-				Element entriesListEl = el.element("list");
+				List<ObjectValuePair<String, byte[]>> entries =
+					context.getZipFolderEntries(path);
 
-				Document tempDoc = DocumentHelper.createDocument();
+				List<RatingsEntry> ratings = new ArrayList<RatingsEntry>();
 
-				tempDoc.content().add(entriesListEl.createCopy());
+				for (ObjectValuePair<String, byte[]> entry : entries) {
+					RatingsEntry rating =
+						(RatingsEntry)context.fromXML(entry.getValue());
 
-				List entries = (List)xStream.fromXML(
-					XMLFormatter.toString(tempDoc));
+					ratings.add(rating);
+				}
 
-				context.addRatingsEntries(
-					className, new Long(classPK), entries);
+				context.addRatingsEntries(className, new Long(classPK), ratings);
 			}
 		}
 		catch (Exception e) {
@@ -3847,21 +4042,34 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 	}
 
-	protected void readTags(PortletDataContext context, Element root)
+	protected void readTags(PortletDataContext context, Element parentEl)
 		throws PortalException, SystemException {
 
-		Iterator<Element> itr = root.elements("tags").iterator();
+		try {
+			String xml = context.getZipEntryAsString(
+				context.getImportRootPath() + "/tags.xml");
 
-		while (itr.hasNext()) {
-			Element el = itr.next();
+			Document doc = DocumentUtil.readDocumentFromXML(xml);
 
-			String className = GetterUtil.getString(
-				el.attributeValue("class-name"));
-			long classPK = GetterUtil.getLong(el.attributeValue("class-pk"));
-			String entries = GetterUtil.getString(el.attributeValue("entries"));
+			Element root = doc.getRootElement();
 
-			context.addTagsEntries(
-				className, new Long(classPK), StringUtil.split(entries, ","));
+			List<Element> assets = root.elements("asset");
+
+			for (Element asset : assets) {
+				String className = GetterUtil.getString(
+					asset.attributeValue("class-name"));
+				long classPK = GetterUtil.getLong(
+					asset.attributeValue("class-pk"));
+				String entries = GetterUtil.getString(
+					asset.attributeValue("entries"));
+
+				context.addTagsEntries(
+					className, new Long(classPK),
+					StringUtil.split(entries, ","));
+			}
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
 		}
 	}
 
