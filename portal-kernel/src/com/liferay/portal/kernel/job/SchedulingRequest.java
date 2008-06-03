@@ -22,10 +22,9 @@
 
 package com.liferay.portal.kernel.job;
 
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
-
 import java.io.Serializable;
+
+import java.util.Date;
 
 /**
  * <a href="SchedulingRequest.java.html"><b><i>View Source</i></b></a>
@@ -38,26 +37,64 @@ import java.io.Serializable;
  * </p>
  *
  * @author Michael C. Han
+ * @author Bruno Farache
  *
  */
 public class SchedulingRequest implements Serializable {
 
-	public static final String MESSAGE_BODY_FIELD = "messageBody";
+	public static final String PING = "PING";
 
 	public static final String REGISTER_TYPE = "REGISTER";
+
+	public static final String RETRIEVE_TYPE = "RETRIEVE";
 
 	public static final String UNREGISTER_TYPE = "UNREGISTER";
 
 	public SchedulingRequest() {
 	}
 
+	public SchedulingRequest(String type) {
+		this(null, type);
+	}
+
+	public SchedulingRequest(String groupName, String type) {
+		this(groupName, null, type);
+	}
+
+	public SchedulingRequest(String groupName, String jobName, String type) {
+		this(null, null, groupName, jobName, null, null, null, type);
+	}
+
 	public SchedulingRequest(
-    	String cronText, String destinationFilter, String messageBody,
-    	String type) {
+			String cronText, String groupName, String jobName,
+			String messageBody, Date startDate, Date endDate) {
+
+		this(
+			cronText, null, groupName, jobName, messageBody, startDate, endDate,
+			null);
+	}
+
+	public SchedulingRequest(
+	    	String cronText, String destinationName, String groupName,
+	    	String messageBody, Date startDate, Date endDate, String type) {
+
+		this(
+			cronText, destinationName, groupName, null, messageBody, startDate,
+			endDate, type);
+	}
+
+	public SchedulingRequest(
+	    	String cronText, String destinationName, String groupName,
+	    	String jobName, String messageBody, Date startDate, Date endDate,
+	    	String type) {
 
     	_cronText = cronText;
-    	_destinationFilter = destinationFilter;
+    	_destinationName = destinationName;
+    	_groupName = groupName;
+    	_jobName = jobName;
         _messageBody = messageBody;
+        _startDate = startDate;
+        _endDate = endDate;
         _type = type;
     }
 
@@ -69,12 +106,28 @@ public class SchedulingRequest implements Serializable {
     	_cronText = cronText;
     }
 
-    public String getDestinationFilter() {
-    	return _destinationFilter;
+    public String getDestinationName() {
+    	return _destinationName;
     }
 
-	public void setDestinationFilter(String destinationFilter) {
-		_destinationFilter = destinationFilter;
+	public void setDestinationName(String destinationName) {
+		_destinationName = destinationName;
+	}
+
+	public String getGroupName() {
+    	return _groupName;
+    }
+
+	public void setGroupName(String groupName) {
+		_groupName = groupName;
+	}
+
+	public String getJobName() {
+    	return _jobName;
+    }
+
+	public void setJobName(String jobName) {
+		_jobName = jobName;
 	}
 
 	public String getMessageBody() {
@@ -85,6 +138,30 @@ public class SchedulingRequest implements Serializable {
 		_messageBody = messageBody;
 	}
 
+	public String getResponseId() {
+		return _responseId;
+	}
+
+	public void setResponseId(String responseId) {
+		_responseId = responseId;
+	}
+
+	public Date getStartDate() {
+		return _startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		_startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return _endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		_endDate = endDate;
+	}
+
 	public String getType() {
         return _type;
     }
@@ -93,35 +170,14 @@ public class SchedulingRequest implements Serializable {
         _type = type;
     }
 
-	public int hashCode() {
-		return toString().hashCode();
-	}
-
-	public String toString() {
-		StringMaker sm = new StringMaker();
-
-		sm.append("cronText");
-		sm.append(StringPool.EQUAL);
-		sm.append(_cronText);
-
-		sm.append(StringPool.COMMA);
-		sm.append(StringPool.SPACE);
-		sm.append("destinationFilter");
-		sm.append(StringPool.EQUAL);
-		sm.append(_destinationFilter);
-
-		sm.append(StringPool.COMMA);
-		sm.append(StringPool.SPACE);
-		sm.append("messageBody");
-		sm.append(StringPool.EQUAL);
-		sm.append(_messageBody);
-
-		return sm.toString();
-	}
-
 	private String _cronText;
-	private String _destinationFilter;
+	private String _destinationName;
+	private String _groupName;
+	private String _jobName;
 	private String _messageBody;
+	private String _responseId;
+	private Date _startDate;
+	private Date _endDate;
     private String _type;
 
 }
