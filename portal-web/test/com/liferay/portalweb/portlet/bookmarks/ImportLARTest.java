@@ -25,20 +25,20 @@ package com.liferay.portalweb.portlet.bookmarks;
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="SearchEntriesTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="ImportLARTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SearchEntriesTest extends BaseTestCase {
-	public void testSearchEntries() throws Exception {
+public class ImportLARTest extends BaseTestCase {
+	public void testImportLAR() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Return to Full Page")) {
+				if (selenium.isElementPresent("//img[@title='Configuration']")) {
 					break;
 				}
 			}
@@ -48,7 +48,7 @@ public class SearchEntriesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click("//img[@title='Configuration']");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -57,7 +57,7 @@ public class SearchEntriesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_28_keywords1")) {
+				if (selenium.isElementPresent("link=Export / Import")) {
 					break;
 				}
 			}
@@ -67,28 +67,7 @@ public class SearchEntriesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_28_keywords1", "Test");
-		selenium.type("_28_keywords1", "Test");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//input[@value='Search Entries']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		Thread.sleep(10000);
-		selenium.click("//input[@value='Search Entries']");
+		selenium.click("link=Export / Import");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -97,7 +76,7 @@ public class SearchEntriesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Edit")) {
+				if (selenium.isElementPresent("link=Import")) {
 					break;
 				}
 			}
@@ -107,23 +86,7 @@ public class SearchEntriesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Test Bookmark")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=Edit");
+		selenium.click("link=Import");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -132,7 +95,47 @@ public class SearchEntriesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_28_name")) {
+				if (selenium.isElementPresent("_86_importFileName")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_86_importFileName",
+			"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\bookmarks\\Bookmarks-Selenium.portlet.lar");
+		selenium.click("_86_DELETE_PORTLET_DATA");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Import']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//input[@value='Import']");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"Your request processed successfully.")) {
 					break;
 				}
 			}

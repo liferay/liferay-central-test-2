@@ -25,30 +25,18 @@ package com.liferay.portalweb.portlet.bookmarks;
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="SearchEntriesTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="DeleteAllTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SearchEntriesTest extends BaseTestCase {
-	public void testSearchEntries() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Return to Full Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=Return to Full Page");
+public class DeleteAllTest extends BaseTestCase {
+	public void testDeleteAll() throws Exception {
+		selenium.click("link=My Entries");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Recent Entries");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Folders");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -57,7 +45,7 @@ public class SearchEntriesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_28_keywords1")) {
+				if (selenium.isElementPresent("link=Delete")) {
 					break;
 				}
 			}
@@ -67,8 +55,9 @@ public class SearchEntriesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_28_keywords1", "Test");
-		selenium.type("_28_keywords1", "Test");
+		selenium.click("link=Delete");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -76,28 +65,8 @@ public class SearchEntriesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//input[@value='Search Entries']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		Thread.sleep(10000);
-		selenium.click("//input[@value='Search Entries']");
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Edit")) {
+				if (selenium.isTextPresent(
+							"Your request processed successfully.")) {
 					break;
 				}
 			}
@@ -113,26 +82,7 @@ public class SearchEntriesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Test Bookmark")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=Edit");
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_28_name")) {
+				if (!selenium.isElementPresent("//b")) {
 					break;
 				}
 			}

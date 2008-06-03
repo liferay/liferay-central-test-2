@@ -39,6 +39,7 @@ public class AddEntryTest extends BaseTestCase {
 		selenium.typeKeys("_28_name", "Test Bookmark");
 		selenium.type("_28_url", "http://www.liferay.com");
 		selenium.typeKeys("_28_comments", "This is a test bookmark!");
+		selenium.type("_28_comments", "This is a test bookmark!");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

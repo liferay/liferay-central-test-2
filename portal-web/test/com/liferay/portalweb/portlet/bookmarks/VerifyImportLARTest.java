@@ -25,20 +25,20 @@ package com.liferay.portalweb.portlet.bookmarks;
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="SearchEntriesTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="VerifyImportLARTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SearchEntriesTest extends BaseTestCase {
-	public void testSearchEntries() throws Exception {
+public class VerifyImportLARTest extends BaseTestCase {
+	public void testVerifyImportLAR() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Return to Full Page")) {
+				if (selenium.isElementPresent("//b")) {
 					break;
 				}
 			}
@@ -48,7 +48,23 @@ public class SearchEntriesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("This is a test folder!")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//b");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -57,7 +73,7 @@ public class SearchEntriesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_28_keywords1")) {
+				if (selenium.isElementPresent("//b")) {
 					break;
 				}
 			}
@@ -67,28 +83,7 @@ public class SearchEntriesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_28_keywords1", "Test");
-		selenium.type("_28_keywords1", "Test");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//input[@value='Search Entries']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		Thread.sleep(10000);
-		selenium.click("//input[@value='Search Entries']");
+		selenium.click("//b");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -97,7 +92,7 @@ public class SearchEntriesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Edit")) {
+				if (selenium.isElementPresent("link=Another Test Bookmark")) {
 					break;
 				}
 			}
@@ -123,8 +118,21 @@ public class SearchEntriesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Edit");
-		selenium.waitForPageToLoad("30000");
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=exact:http://www.digg.com")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -132,7 +140,8 @@ public class SearchEntriesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_28_name")) {
+				if (selenium.isElementPresent(
+							"link=exact:http://www.liferay.com")) {
 					break;
 				}
 			}
