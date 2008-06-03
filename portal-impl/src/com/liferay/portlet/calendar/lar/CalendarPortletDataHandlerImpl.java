@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.calendar.lar;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
@@ -32,14 +30,15 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.util.DocumentUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 import com.liferay.portlet.calendar.service.persistence.CalEventUtil;
-import com.liferay.util.xml.XMLFormatter;
+
+import com.thoughtworks.xstream.XStream;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.portlet.PortletPreferences;
@@ -53,7 +52,6 @@ import org.dom4j.Element;
  * </a>
  *
  * @author Bruno Farache
- * @author Raymond Augé
  *
  */
 public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
@@ -85,6 +83,8 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
+			XStream xStream = new XStream();
+
 			Document doc = DocumentHelper.createDocument();
 
 			Element root = doc.addElement("calendar-data");
@@ -96,11 +96,33 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 			List<CalEvent> events = CalEventUtil.findByGroupId(
 				context.getGroupId());
 
-			for (CalEvent event : events) {
-				exportEvent(context, root, event);
+			Iterator<CalEvent> itr = events.iterator();
+
+			while (itr.hasNext()) {
+				CalEvent event = itr.next();
+
+				if (context.addPrimaryKey(
+						CalEvent.class, event.getPrimaryKeyObj())) {
+
+					itr.remove();
+				}
+				else if (!context.isWithinDateRange(event.getModifiedDate())) {
+					itr.remove();
+				}
+				else {
+					event.setUserUuid(event.getUserUuid());
+				}
 			}
 
-			return XMLFormatter.toString(doc);
+			String xml = xStream.toXML(events);
+
+			Element el = root.addElement("calendar-events");
+
+			Document tempDoc = DocumentUtil.readDocumentFromXML(xml);
+
+			el.content().add(tempDoc.getRootElement().createCopy());
+
+			return doc.asXML();
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -125,23 +147,29 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
+			XStream xStream = new XStream();
+
 			Document doc = DocumentUtil.readDocumentFromXML(data);
 
 			Element root = doc.getRootElement();
 
 			// Events
 
-			List<Element> events = root.elements("event");
+			Element el = root.element("calendar-events").element("list");
 
-			for (Element el : events) {
-				String path = el.attributeValue("path");
+			Document tempDoc = DocumentHelper.createDocument();
 
-				if (context.isPathNotProcessed(path)) {
-					CalEvent event =
-						(CalEvent)context.getZipEntryAsObject(path);
+			tempDoc.content().add(el.createCopy());
 
-					importEvent(context, event);
-				}
+			List<CalEvent> events = (List<CalEvent>)xStream.fromXML(
+				tempDoc.asXML());
+
+			Iterator<CalEvent> itr = events.iterator();
+
+			while (itr.hasNext()) {
+				CalEvent event = itr.next();
+
+				importEvent(context, event);
 			}
 
 			return null;
@@ -155,24 +183,7 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 		return false;
 	}
 
-	public static void exportEvent(
-			PortletDataContext context, Element el, CalEvent event)
-		throws PortalException, SystemException {
-
-		if (context.isWithinDateRange(event.getModifiedDate())) {
-			String path = getEventPath(context, event);
-
-			el.addElement("event").addAttribute("path", path);
-
-			if (context.isPathNotProcessed(path)) {
-				event.setUserUuid(event.getUserUuid());
-
-				context.addZipEntry(path, event);
-			}
-		}
-	}
-
-	public static void importEvent(PortletDataContext context, CalEvent event)
+	protected void importEvent(PortletDataContext context, CalEvent event)
 		throws Exception {
 
 		long userId = context.getUserId(event.getUserUuid());
@@ -267,12 +278,6 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 				event.getSecondReminder(), addCommunityPermissions,
 				addGuestPermissions);
 		}
-	}
-
-	protected static String getEventPath(
-			PortletDataContext context, CalEvent event) {
-		return context.getPortletPath(PortletKeys.CALENDAR) + "/events/" +
-			event.getEventId() + ".xml";
 	}
 
 	private static final String _NAMESPACE = "calendar";

@@ -198,11 +198,6 @@ public interface LayoutLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public void importLayouts(long userId, long groupId, boolean privateLayout,
-		java.util.Map<String, String[]> parameterMap, byte[] bytes)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public void importLayouts(long userId, long groupId, boolean privateLayout,
 		java.util.Map<String, String[]> parameterMap, java.io.File file)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

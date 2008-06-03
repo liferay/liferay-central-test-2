@@ -344,17 +344,6 @@ public class LayoutLocalServiceUtil {
 
 	public static void importLayouts(long userId, long groupId,
 		boolean privateLayout, java.util.Map<String, String[]> parameterMap,
-		byte[] bytes)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
-
-		layoutLocalService.importLayouts(userId, groupId, privateLayout,
-			parameterMap, bytes);
-	}
-
-	public static void importLayouts(long userId, long groupId,
-		boolean privateLayout, java.util.Map<String, String[]> parameterMap,
 		java.io.File file)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

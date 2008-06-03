@@ -9,9 +9,6 @@
 		<parameter name="className" value="com.liferay.portal.service.http.OrganizationServiceSoap"/>
 		<parameter name="wsdlPortType" value="OrganizationServiceSoap"/>
 		<parameter name="typeMappingVersion" value="1.2"/>
-		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getOrganization" qname="operNS:getOrganization" returnQName="getOrganizationReturn" returnType="rtns:OrganizationSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="organizationId" type="tns:long"></parameter>
-		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getUserOrganizations" qname="operNS:getUserOrganizations" returnQName="getUserOrganizationsReturn" returnType="rtns:ArrayOf_tns2_OrganizationSoap" returnItemType="tns2:OrganizationSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
 		</operation>
@@ -63,7 +60,10 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="statusId" type="tns:int"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="comments" type="tns:string"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="getOrganizationId setGroupOrganizations getUserOrganizations addOrganization updateOrganization addGroupOrganizations unsetGroupOrganizations deleteOrganization addPasswordPolicyOrganizations unsetPasswordPolicyOrganizations getOrganization"/>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getOrganization" qname="operNS:getOrganization" returnQName="getOrganizationReturn" returnType="rtns:OrganizationSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="organizationId" type="tns:long"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="getOrganizationId setGroupOrganizations getUserOrganizations addOrganization updateOrganization addGroupOrganizations unsetGroupOrganizations deleteOrganization addPasswordPolicyOrganizations getOrganization unsetPasswordPolicyOrganizations"/>
 		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_long" type="java:long[]" innerType="cmp-ns:long" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://model.portal.liferay.com" qname="ns:ArrayOf_tns2_OrganizationSoap" type="java:com.liferay.portal.model.OrganizationSoap[]" innerType="cmp-ns:OrganizationSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:OrganizationSoap" type="java:com.liferay.portal.model.OrganizationSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>

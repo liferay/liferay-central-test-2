@@ -107,11 +107,6 @@ public interface LayoutService {
 			com.liferay.portal.PortalException;
 
 	public void importLayouts(long groupId, boolean privateLayout,
-		java.util.Map<String, String[]> parameterMap, byte[] bytes)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public void importLayouts(long groupId, boolean privateLayout,
 		java.util.Map<String, String[]> parameterMap, java.io.InputStream is)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
