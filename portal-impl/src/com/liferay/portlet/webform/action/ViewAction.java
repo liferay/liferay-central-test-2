@@ -86,6 +86,8 @@ public class ViewAction extends PortletAction {
 			prefs.getValue("requireCaptcha", StringPool.BLANK));
 		String successURL = GetterUtil.getString(
 			prefs.getValue("successURL", StringPool.BLANK));
+		String redirect = GetterUtil.getString(
+			prefs.getValue("redirect", StringPool.BLANK));
 		boolean sendAsEmail = GetterUtil.getBoolean(
 			prefs.getValue("sendAsEmail", StringPool.BLANK));
 		boolean saveToDatabase = GetterUtil.getBoolean(
@@ -152,8 +154,13 @@ public class ViewAction extends PortletAction {
 			SessionErrors.add(req, "requiredFieldMissing");
 		}
 
-		if (SessionErrors.isEmpty(req) && Validator.isNotNull(successURL)) {
-	        res.sendRedirect(successURL);
+		if (SessionErrors.isEmpty(req)) {
+			if (Validator.isNotNull(successURL)) {
+		        res.sendRedirect(successURL);
+			}
+			else {
+				sendRedirect(req, res);
+			}
 		}
 	}
 
