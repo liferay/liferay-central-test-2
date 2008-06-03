@@ -144,7 +144,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 		String contextPath = PortalUtil.getPathContext();
 
-		String friendlyURL = httpReq.getRequestURI().toLowerCase();
+		String friendlyURL = httpReq.getRequestURI();
 
 		if ((!contextPath.equals(StringPool.SLASH)) &&
 			(friendlyURL.indexOf(contextPath) != -1)) {
@@ -226,6 +226,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 	}
 
 	protected boolean isValidFriendlyURL(String friendlyURL) {
+		friendlyURL = friendlyURL.toLowerCase();
 		if (PortalInstances.isVirtualHostsIgnorePath(friendlyURL) ||
 			friendlyURL.startsWith(
 				PortalUtil.getPathFriendlyURLPrivateGroup()) ||

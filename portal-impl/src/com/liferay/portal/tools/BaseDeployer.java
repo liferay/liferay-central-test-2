@@ -1051,7 +1051,7 @@ public class BaseDeployer {
 		for (int i = 0; i < files.length; i++) {
 			String ext = FileUtil.getExtension(files[i]);
 
-			if (ext.equalsIgnoreCase("xml")) {
+			if (ext != null && ext.equalsIgnoreCase("xml")) {
 
 				// Make sure to rewrite any XML files to include external
 				// entities into same file. See LEP-3142.
