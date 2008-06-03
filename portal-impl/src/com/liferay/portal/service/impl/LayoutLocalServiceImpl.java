@@ -1110,6 +1110,16 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	public void importLayouts(
 			long userId, long groupId, boolean privateLayout,
+			Map<String, String[]> parameterMap, byte[] bytes)
+		throws PortalException, SystemException {
+
+		importLayouts(
+			userId, groupId, privateLayout, parameterMap,
+			new ByteArrayInputStream(bytes));
+	}
+
+	public void importLayouts(
+			long userId, long groupId, boolean privateLayout,
 			Map<String, String[]> parameterMap, File file)
 		throws PortalException, SystemException {
 
@@ -1175,7 +1185,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			stopWatch.start();
 		}
 
-        LayoutCache layoutCache = new LayoutCache();
+		LayoutCache layoutCache = new LayoutCache();
 
 		LayoutSet layoutSet = layoutSetLocalService.getLayoutSet(
 			groupId, privateLayout);
@@ -2566,7 +2576,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	protected void exportPortletPreferences(
 			long ownerId, int ownerType, boolean defaultUser, Layout layout,
-	        String portletId, Element parentEl)
+			String portletId, Element parentEl)
 		throws PortalException, SystemException {
 
 		PortletPreferences portletPreferences = null;
