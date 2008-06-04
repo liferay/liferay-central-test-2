@@ -1082,6 +1082,7 @@ documents-require-at-least-one-write-role=Los documentos requieren por lo menos 
 documents=Documentos
 domain-controller=Regulardor del dominio
 domain=Dominio
+done=Hecho
 dotted-lines=Líneas punteadas
 down=Abajo
 download-content=Descargar contenido

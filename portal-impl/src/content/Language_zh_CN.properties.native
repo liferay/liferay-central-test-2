@@ -1082,6 +1082,7 @@ documents-require-at-least-one-write-role=文件要求至少一写入的角色�
 documents=文件
 domain-controller=领域控制器
 domain=领域
+done=做
 dotted-lines=虚线
 down=下
 download-content=下载内容

@@ -1082,6 +1082,7 @@ documents-require-at-least-one-write-role=문서는 가장 작은 하나개에 �
 documents=문서
 domain-controller=영역 관제사
 domain=영역
+done=하는
 dotted-lines=점을 찍은 선
 down=아래로
 download-content=다운로드 내용

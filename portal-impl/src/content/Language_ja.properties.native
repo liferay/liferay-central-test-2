@@ -1082,6 +1082,7 @@ documents-require-at-least-one-write-role=文書は少なくとも1 つを書く
 documents=文書
 domain-controller=範囲のコントローラー
 domain=範囲
+done=される
 dotted-lines=点線
 down=
 download-content=ダウンロードの内容
