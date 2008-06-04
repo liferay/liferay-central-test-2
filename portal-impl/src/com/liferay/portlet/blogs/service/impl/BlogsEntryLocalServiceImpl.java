@@ -33,10 +33,12 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
@@ -44,6 +46,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.blogs.EntryContentException;
 import com.liferay.portlet.blogs.EntryDisplayDateException;
 import com.liferay.portlet.blogs.EntryTitleException;
@@ -51,13 +54,21 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.base.BlogsEntryLocalServiceBaseImpl;
 import com.liferay.portlet.blogs.social.BlogsActivityKeys;
 import com.liferay.portlet.blogs.util.Indexer;
+import com.liferay.util.ListUtil;
 import com.liferay.util.Normalizer;
 import com.liferay.util.search.QueryImpl;
 
 import java.io.IOException;
+import java.io.StringReader;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamReader;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -78,6 +89,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			long userId, long plid, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, boolean draft,
+			boolean allowTrackbacks, String[] trackbackUrls,
 			String[] tagsEntries, boolean addCommunityPermissions,
 			boolean addGuestPermissions, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -85,7 +97,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return addEntry(
 			null, userId, plid, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			draft, tagsEntries, Boolean.valueOf(addCommunityPermissions),
+			draft, allowTrackbacks, trackbackUrls, tagsEntries,
+			Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null, themeDisplay);
 	}
 
@@ -100,7 +113,24 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return addEntry(
 			uuid, userId, plid, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			draft, tagsEntries, Boolean.valueOf(addCommunityPermissions),
+			draft, true, null, tagsEntries, addCommunityPermissions,
+			addGuestPermissions, themeDisplay);
+	}
+
+	public BlogsEntry addEntry(
+			String uuid, long userId, long plid, String title, String content,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, boolean draft,
+			boolean allowTrackbacks, String[] trackbackUrls,
+			String[] tagsEntries, boolean addCommunityPermissions,
+			boolean addGuestPermissions, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return addEntry(
+			uuid, userId, plid, title, content, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
+			draft, allowTrackbacks, trackbackUrls, tagsEntries,
+			Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null, themeDisplay);
 	}
 
@@ -123,6 +153,25 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			String uuid, long userId, long plid, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, boolean draft,
+			String[] tagsEntries, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return addEntry(
+			uuid, userId, plid, title, content, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
+			draft, true, null, tagsEntries,
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), communityPermissions,
+			guestPermissions, themeDisplay);
+	}
+
+	public BlogsEntry addEntry(
+			String uuid, long userId, long plid, String title, String content,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, boolean draft,
+			boolean allowTrackbacks, String[] trackbackUrls,
 			String[] tagsEntries, Boolean addCommunityPermissions,
 			Boolean addGuestPermissions, String[] communityPermissions,
 			String[] guestPermissions, ThemeDisplay themeDisplay)
@@ -158,6 +207,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		entry.setContent(content);
 		entry.setDisplayDate(displayDate);
 		entry.setDraft(draft);
+		entry.setAllowTrackbacks(allowTrackbacks);
 
 		blogsEntryPersistence.update(entry, false);
 
@@ -205,10 +255,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			_log.error("Indexing " + entryId, se);
 		}
 
-		// Google
+		// Ping services
 
 		if (!draft) {
 			pingGoogle(entry, themeDisplay);
+			pingTrackback(entry, themeDisplay, trackbackUrls, false);
 		}
 
 		return entry;
@@ -606,6 +657,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			long userId, long entryId, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, boolean draft,
+			boolean allowTrackbacks, String[] trackbackUrls,
 			String[] tagsEntries, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
@@ -625,6 +677,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(entryId);
 
 		boolean oldDraft = entry.isDraft();
+		String oldUrlTitle = entry.getUrlTitle();
 
 		entry.setModifiedDate(now);
 		entry.setTitle(title);
@@ -633,6 +686,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		entry.setContent(content);
 		entry.setDisplayDate(displayDate);
 		entry.setDraft(draft);
+		entry.setAllowTrackbacks(allowTrackbacks);
 
 		blogsEntryPersistence.update(entry, false);
 
@@ -668,10 +722,19 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			_log.error("Indexing " + entryId, se);
 		}
 
-		// Google
+		// Ping services
 
 		if (!draft) {
 			pingGoogle(entry, themeDisplay);
+
+			String urlTitle = entry.getUrlTitle();
+
+			if (!oldDraft && !oldUrlTitle.equals(urlTitle)) {
+				pingTrackback(entry, themeDisplay, trackbackUrls, true);
+			}
+			else {
+				pingTrackback(entry, themeDisplay, trackbackUrls, false);
+			}
 		}
 
 		return entry;
@@ -761,6 +824,124 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		}
 	}
 
+	protected void pingTrackback(
+			BlogsEntry entry, ThemeDisplay themeDisplay, String[] trackbackUrls,
+			boolean pingOldTrackbacks)
+		throws PortalException, SystemException {
+
+		Map<String, String> parts = new HashMap();
+		String excerpt = StringUtil.shorten(
+			HtmlUtil.extractText(entry.getContent()),
+			_TRACKBACK_EXCERPT_LENGTH);
+		String url =
+			themeDisplay.getPortalURL() + PortalUtil.getLayoutURL(themeDisplay)
+				+ "/-/blogs/" + entry.getUrlTitle();
+
+		parts.put("title", entry.getTitle());
+		parts.put("excerpt", excerpt);
+		parts.put("url", url);
+		parts.put("blog_name", entry.getUserName());
+
+		List<String> trackbackUrlsList = null;
+
+		if (Validator.isNotNull(trackbackUrls)) {
+			trackbackUrlsList = ListUtil.fromArray(trackbackUrls);
+		}
+		else {
+			trackbackUrlsList = new ArrayList();
+		}
+
+		if (pingOldTrackbacks) {
+			trackbackUrlsList.addAll(
+				ListUtil.fromArray(StringUtil.split(entry.getTrackbackUrls())));
+
+			entry.setTrackbackUrls(StringPool.BLANK);
+		}
+
+		ListUtil.distinct(trackbackUrlsList);
+
+		List oldTrackbackUrls =
+			ListUtil.fromArray(StringUtil.split(entry.getTrackbackUrls()));
+
+		List validTrackbackUrls = new ArrayList();
+
+		XMLInputFactory inputFactory = XMLInputFactory.newInstance();
+
+		for (String trackbackUrl : trackbackUrlsList) {
+			if (oldTrackbackUrls.contains(trackbackUrl)) {
+				continue;
+			}
+
+			try {
+				String xml =
+					HttpUtil.URLtoString(trackbackUrl, null, parts, true);
+
+				if (_log.isDebugEnabled()) {
+					_log.debug("XML for " + trackbackUrl + " is \n" + xml);
+				}
+
+				XMLStreamReader reader =
+					inputFactory.createXMLStreamReader(new StringReader(xml));
+
+				String errorStr = xml;
+
+				try {
+					reader.nextTag();
+					reader.nextTag();
+
+					String name = reader.getLocalName();
+
+					if (name.equals("error")) {
+						int status =
+							GetterUtil.getInteger(reader.getElementText(), 1);
+
+						if (status == 0) {
+							validTrackbackUrls.add(trackbackUrl);
+							continue;
+						}
+
+						reader.nextTag();
+
+						name = reader.getLocalName();
+
+						if (name.equals("message")) {
+							errorStr = reader.getElementText();
+						}
+					}
+				}
+				finally {
+					if (reader != null) {
+						try {
+							reader.close();
+						}
+						catch (Exception e) {
+						}
+					}
+				}
+
+				_log.error(
+					"Error while pinging trackback at " + trackbackUrl + "\n" +
+						errorStr);
+			}
+			catch (Exception e) {
+				_log.error(
+					"Error while pinging trackback at " + trackbackUrl, e);
+			}
+		}
+
+		if (!validTrackbackUrls.isEmpty()) {
+			String newTrackbackUrls = StringUtil.merge(validTrackbackUrls);
+
+			if (Validator.isNotNull(entry.getTrackbackUrls())) {
+				newTrackbackUrls += StringPool.COMMA + entry.getTrackbackUrls();
+			}
+
+			entry.setTrackbackUrls(newTrackbackUrls);
+
+			blogsEntryPersistence.update(entry, false);
+		}
+	}
+
 	protected void validate(String title, String content)
 		throws PortalException {
 
@@ -775,6 +956,9 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	private static final char[] _URL_TITLE_REPLACE_CHARS = new char[] {
 		' ', '.', ',', '/', '\\', '\'', '\"'
 	};
+
+	private static final int _TRACKBACK_EXCERPT_LENGTH = GetterUtil.getInteger(
+		PropsUtil.get(PropsUtil.BLOGS_TRACKBACK_EXCERPT_LENGTH));
 
 	private static Log _log =
 		LogFactory.getLog(BlogsEntryLocalServiceImpl.class);

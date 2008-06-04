@@ -52,7 +52,8 @@ public interface BlogsEntryService {
 	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(long plid,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, boolean draft, java.lang.String[] tagsEntries,
+		int displayDateMinute, boolean draft, boolean allowTrackbacks,
+		java.lang.String[] trackbackUrls, java.lang.String[] tagsEntries,
 		boolean addCommunityPermissions, boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
@@ -122,6 +123,7 @@ public interface BlogsEntryService {
 		long entryId, java.lang.String title, java.lang.String content,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
 		int displayDateHour, int displayDateMinute, boolean draft,
+		boolean allowTrackbacks, java.lang.String[] trackbackUrls,
 		java.lang.String[] tagsEntries,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,

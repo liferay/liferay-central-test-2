@@ -646,6 +646,10 @@
 		</field>
 		<field name="displayDate" type="Date" />
 		<field name="draft" type="boolean" />
+		<field name="allowTrackbacks" type="boolean" />
+		<field name="trackbackUrls" type="String">
+			<hint-collection name="CLOB" />
+		</field>
 	</model>
 	<model name="com.liferay.portlet.blogs.model.BlogsStatsUser">
 		<field name="statsUserId" type="long" />

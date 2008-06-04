@@ -1,4 +1,7 @@
 alter table BlogsEntry add draft BOOLEAN;
+alter table BlogsEntry add allowTrackbacks BOOLEAN;
+alter table BlogsEntry add trackbackUrls TEXT null;
+update BlogsEntry set allowTrackbacks = TRUE;
 
 COMMIT_TRANSACTION;
 

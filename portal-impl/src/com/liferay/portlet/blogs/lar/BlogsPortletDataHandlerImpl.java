@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -219,6 +220,8 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 			displayDateHour += 12;
 		}
 
+		String[] trackbackUrls = StringUtil.split(entry.getTrackbackUrls());
+
 		String[] tagsEntries = null;
 
 		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
@@ -244,7 +247,8 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 					entry.getUuid(), userId, plid, entry.getTitle(),
 					entry.getContent(), displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
-					entry.isDraft(), tagsEntries, addCommunityPermissions,
+					entry.isDraft(), entry.isAllowTrackbacks(), trackbackUrls,
+					tagsEntries, addCommunityPermissions,
 					addGuestPermissions, themeDisplay);
 			}
 			else {
@@ -252,7 +256,8 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 					userId, existingEntry.getEntryId(), entry.getTitle(),
 					entry.getContent(), displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
-					entry.isDraft(), tagsEntries, themeDisplay);
+					entry.isDraft(), entry.isAllowTrackbacks(),
+					trackbackUrls, tagsEntries,	themeDisplay);
 			}
 		}
 		else {
@@ -260,8 +265,8 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 				userId, plid, entry.getTitle(), entry.getContent(),
 				displayDateMonth, displayDateDay, displayDateYear,
 				displayDateHour, displayDateMinute, entry.isDraft(),
-				tagsEntries, addCommunityPermissions, addGuestPermissions,
-				themeDisplay);
+				entry.isAllowTrackbacks(), trackbackUrls, tagsEntries,
+				addCommunityPermissions, addGuestPermissions, themeDisplay);
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "comments")) {

@@ -499,12 +499,14 @@ public class UserImpl extends UserModelImpl implements User {
 		try {
 			Group group = getGroup();
 
-			int publicLayoutsPageCount = group.getPublicLayoutsPageCount();
+			if (group != null) {
+				int publicLayoutsPageCount = group.getPublicLayoutsPageCount();
 
-			if (publicLayoutsPageCount > 0) {
-				return portalURL + PortalUtil.getPathMain() +
-					"/my_places/view?groupId=" + group.getGroupId() +
-						"&privateLayout=0";
+				if (publicLayoutsPageCount > 0) {
+					return portalURL + PortalUtil.getPathMain() +
+						"/my_places/view?groupId=" + group.getGroupId() +
+							"&privateLayout=0";
+				}
 			}
 		}
 		catch (Exception e) {

@@ -234,9 +234,13 @@ public class EditEntryAction extends PortletAction {
 		}
 
 		boolean draft = ParamUtil.getBoolean(req, "draft");
+		boolean allowTrackbacks = ParamUtil.getBoolean(req, "allowTrackbacks");
 
 		String[] tagsEntries = StringUtil.split(
 			ParamUtil.getString(req, "tagsEntries"));
+
+		String[] trackbackUrls = StringUtil.split(
+			ParamUtil.getString(req, "trackbackUrls"));
 
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
@@ -251,8 +255,9 @@ public class EditEntryAction extends PortletAction {
 			entry = BlogsEntryServiceUtil.addEntry(
 				layout.getPlid(), title, content, displayDateMonth,
 				displayDateDay, displayDateYear, displayDateHour,
-				displayDateMinute, draft, tagsEntries, addCommunityPermissions,
-				addGuestPermissions, themeDisplay);
+				displayDateMinute, draft, allowTrackbacks, trackbackUrls,
+				tagsEntries, addCommunityPermissions, addGuestPermissions,
+				themeDisplay);
 
 			if (!draft) {
 				AssetPublisherUtil.addAndStoreSelection(
@@ -271,7 +276,7 @@ public class EditEntryAction extends PortletAction {
 			entry = BlogsEntryServiceUtil.updateEntry(
 				entryId, title, content, displayDateMonth, displayDateDay,
 				displayDateYear, displayDateHour, displayDateMinute, draft,
-				tagsEntries, themeDisplay);
+				allowTrackbacks, trackbackUrls, tagsEntries, themeDisplay);
 
 			if (!tempOldUrlTitle.equals(entry.getUrlTitle())) {
 				oldUrlTitle = tempOldUrlTitle;

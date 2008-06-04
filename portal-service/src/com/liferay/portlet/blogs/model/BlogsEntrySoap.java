@@ -63,6 +63,8 @@ public class BlogsEntrySoap implements Serializable {
 		soapModel.setContent(model.getContent());
 		soapModel.setDisplayDate(model.getDisplayDate());
 		soapModel.setDraft(model.getDraft());
+		soapModel.setAllowTrackbacks(model.getAllowTrackbacks());
+		soapModel.setTrackbackUrls(model.getTrackbackUrls());
 
 		return soapModel;
 	}
@@ -196,6 +198,26 @@ public class BlogsEntrySoap implements Serializable {
 		_draft = draft;
 	}
 
+	public boolean getAllowTrackbacks() {
+		return _allowTrackbacks;
+	}
+
+	public boolean isAllowTrackbacks() {
+		return _allowTrackbacks;
+	}
+
+	public void setAllowTrackbacks(boolean allowTrackbacks) {
+		_allowTrackbacks = allowTrackbacks;
+	}
+
+	public String getTrackbackUrls() {
+		return _trackbackUrls;
+	}
+
+	public void setTrackbackUrls(String trackbackUrls) {
+		_trackbackUrls = trackbackUrls;
+	}
+
 	private String _uuid;
 	private long _entryId;
 	private long _groupId;
@@ -209,4 +231,6 @@ public class BlogsEntrySoap implements Serializable {
 	private String _content;
 	private Date _displayDate;
 	private boolean _draft;
+	private boolean _allowTrackbacks;
+	private String _trackbackUrls;
 }

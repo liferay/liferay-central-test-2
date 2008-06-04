@@ -60,6 +60,16 @@ TagsAssetLocalServiceUtil.incrementViewCounter(BlogsEntry.class.getName(), entry
 
 	<liferay-ui:tabs names="comments" />
 
+	<c:if test="<%= entry.isAllowTrackbacks() %>">
+		<liferay-ui:message key="trackback-url" />
+
+		<liferay-ui:input-resource
+			url='<%= themeDisplay.getPortalURL() + PortalUtil.getLayoutURL(themeDisplay) + "/-/blogs/trackback/" + entry.getUrlTitle() %>'
+		/>
+
+		<br /><br />
+	</c:if>
+
 	<portlet:actionURL var="discussionURL">
 		<portlet:param name="struts_action" value="/blogs/edit_entry_discussion" />
 	</portlet:actionURL>

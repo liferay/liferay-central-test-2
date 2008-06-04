@@ -101,7 +101,9 @@ create table BlogsEntry (
 	urlTitle VARCHAR(150) null,
 	content TEXT null,
 	displayDate DATE null,
-	draft BOOLEAN
+	draft BOOLEAN,
+	allowTrackbacks BOOLEAN,
+	trackbackUrls TEXT null
 );
 
 create table BlogsStatsUser (

@@ -86,7 +86,14 @@ if (treeWalker.isOdd()) {
 
 		<c:choose>
 			<c:when test="<%= message.isAnonymous() %>">
-				<liferay-ui:message key="anonymous" />
+				<c:choose>
+					<c:when test="<%= Validator.isNull(message.getUserName()) %>">
+						<liferay-ui:message key="anonymous" />
+					</c:when>
+					<c:otherwise>
+						<%= message.getUserName() %>
+					</c:otherwise>
+				</c:choose>
 			</c:when>
 			<c:otherwise>
 				<%= PortalUtil.getUserName(message.getUserId(), message.getUserName()) %>

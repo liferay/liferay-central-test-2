@@ -82,6 +82,8 @@ public class BlogsEntryPersistenceTest extends BasePersistenceTestCase {
 		newBlogsEntry.setContent(randomString());
 		newBlogsEntry.setDisplayDate(nextDate());
 		newBlogsEntry.setDraft(randomBoolean());
+		newBlogsEntry.setAllowTrackbacks(randomBoolean());
+		newBlogsEntry.setTrackbackUrls(randomString());
 
 		_persistence.update(newBlogsEntry, false);
 
@@ -106,6 +108,10 @@ public class BlogsEntryPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingBlogsEntry.getDisplayDate(),
 			newBlogsEntry.getDisplayDate());
 		assertEquals(existingBlogsEntry.getDraft(), newBlogsEntry.getDraft());
+		assertEquals(existingBlogsEntry.getAllowTrackbacks(),
+			newBlogsEntry.getAllowTrackbacks());
+		assertEquals(existingBlogsEntry.getTrackbackUrls(),
+			newBlogsEntry.getTrackbackUrls());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -161,6 +167,8 @@ public class BlogsEntryPersistenceTest extends BasePersistenceTestCase {
 		blogsEntry.setContent(randomString());
 		blogsEntry.setDisplayDate(nextDate());
 		blogsEntry.setDraft(randomBoolean());
+		blogsEntry.setAllowTrackbacks(randomBoolean());
+		blogsEntry.setTrackbackUrls(randomString());
 
 		_persistence.update(blogsEntry, false);
 

@@ -105,5 +105,15 @@ public interface BlogsEntryModel extends BaseModel {
 
 	public void setDraft(boolean draft);
 
+	public boolean getAllowTrackbacks();
+
+	public boolean isAllowTrackbacks();
+
+	public void setAllowTrackbacks(boolean allowTrackbacks);
+
+	public String getTrackbackUrls();
+
+	public void setTrackbackUrls(String trackbackUrls);
+
 	public BlogsEntry toEscapedModel();
 }

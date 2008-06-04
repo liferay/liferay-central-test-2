@@ -30,6 +30,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
@@ -154,6 +155,17 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
+		return addDiscussionMessage(
+			userId, null, groupId, className, classPK, threadId,
+			parentMessageId, subject, body, themeDisplay);
+	}
+
+	public MBMessage addDiscussionMessage(
+			long userId, String userName, long groupId, String className,
+			long classPK, long threadId, long parentMessageId, String subject,
+			String body, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
 		long categoryId = CompanyConstants.SYSTEM;
 
 		if (Validator.isNull(subject)) {
@@ -172,9 +184,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		mbCategoryLocalService.getSystemCategory();
 
 		MBMessage message = addMessage(
-			userId, categoryId, threadId, parentMessageId, subject, body, files,
-			anonymous, priority, tagsEntries, prefs, addCommunityPermissions,
-			addGuestPermissions, themeDisplay);
+			userId, userName, categoryId, threadId, parentMessageId, subject,
+			body, files, anonymous, priority, tagsEntries, prefs,
+			addCommunityPermissions, addGuestPermissions, themeDisplay);
 
 		if ((className.equals(BlogsEntry.class.getName())) &&
 			(themeDisplay != null)) {
@@ -269,6 +281,22 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public MBMessage addMessage(
+			long userId, String userName, long categoryId, long threadId,
+			long parentMessageId, String subject, String body,
+			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
+			double priority, String[] tagsEntries, PortletPreferences prefs,
+			boolean addCommunityPermissions, boolean addGuestPermissions,
+			ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return addMessage(
+			null, userId, userName, categoryId, threadId, parentMessageId,
+			subject, body, files, anonymous, priority, tagsEntries, prefs,
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null, themeDisplay);
+	}
+
+	public MBMessage addMessage(
 			long userId, long categoryId, long threadId, long parentMessageId,
 			String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
@@ -302,6 +330,23 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	public MBMessage addMessage(
 			String uuid, long userId, long categoryId, long threadId,
 			long parentMessageId, String subject, String body,
+			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
+			double priority, String[] tagsEntries, PortletPreferences prefs,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions,
+			ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return addMessage(
+			uuid, userId, null, categoryId, threadId, parentMessageId,
+			subject, body, files, anonymous, priority, tagsEntries, prefs,
+			addCommunityPermissions, addGuestPermissions, communityPermissions,
+			guestPermissions, themeDisplay);
+	}
+
+	public MBMessage addMessage(
+			String uuid, long userId, String userName, long categoryId,
+			long threadId, long parentMessageId, String subject, String body,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
 			double priority, String[] tagsEntries, PortletPreferences prefs,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
@@ -350,7 +395,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setUuid(uuid);
 		message.setCompanyId(user.getCompanyId());
 		message.setUserId(user.getUserId());
-		message.setUserName(user.getFullName());
+		message.setUserName(GetterUtil.get(userName, user.getFullName()));
 		message.setCreateDate(now);
 		message.setModifiedDate(now);
 
