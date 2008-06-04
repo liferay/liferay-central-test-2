@@ -31,16 +31,18 @@ import java.net.URL;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
  * <a href="EhcachePortalCacheManager.java.html"><b><i>View Source</i></b></a>
  *
  * @author Joseph Shum
+ * @author Raymond Augé
  *
  */
 public class EhcachePortalCacheManager
-	implements InitializingBean, PortalCacheManager {
+	implements DisposableBean, InitializingBean, PortalCacheManager {
 
 	public void afterPropertiesSet() {
 		URL url = getClass().getResource(PropsUtil.get(_configPropertyKey));
@@ -50,6 +52,10 @@ public class EhcachePortalCacheManager
 
 	public void clearAll() {
 		_cacheManager.clearAll();
+	}
+
+	public void destroy() throws Exception {
+		_cacheManager.shutdown();
 	}
 
 	public PortalCache getCache(String name) {
