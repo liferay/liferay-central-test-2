@@ -937,6 +937,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 	protected void clearReferralsCache(WikiPage page)
 		throws PortalException, SystemException {
+
 		if (!WikiCacheThreadLocal.isClearCache()) {
 			return;
 		}

@@ -175,7 +175,7 @@ public class MediaWikiImporter implements WikiImporter {
 		long userId, WikiNode node, Element root,
 		List<String> specialNamespaces) {
 
-		ProgressTracker tracker =
+		ProgressTracker progressTracker =
 			ProgressTrackerThreadLocal.getProgressTracker();
 
 		int count = 0;
@@ -198,7 +198,8 @@ public class MediaWikiImporter implements WikiImporter {
 			title = normalizeTitle(title);
 
 			percentage = Math.min(10 + (i * 90) / total, 99);
-			tracker.updateProgress(percentage);
+
+			progressTracker.updateProgress(percentage);
 
 			if (isSpecialMediaWikiPage(title, specialNamespaces)) {
 				continue;
@@ -231,7 +232,7 @@ public class MediaWikiImporter implements WikiImporter {
 			List<String> specialNamespaces)
 		throws PortalException, SystemException {
 
-		ProgressTracker tracker =
+		ProgressTracker progressTracker =
 			ProgressTrackerThreadLocal.getProgressTracker();
 
 		List<Element> pages = root.elements("page");
@@ -283,8 +284,8 @@ public class MediaWikiImporter implements WikiImporter {
 				 _log.error(se, se);
 			}
 
-			if (i % 5 == 0) {
-				tracker.updateProgress((i * 10)/total);
+			if ((i % 5) == 0) {
+				progressTracker.updateProgress((i * 10) / total);
 			}
 		}
 	}

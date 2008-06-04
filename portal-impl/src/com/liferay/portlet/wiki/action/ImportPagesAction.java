@@ -118,26 +118,28 @@ public class ImportPagesAction extends PortletAction {
 		UploadPortletRequest uploadReq =
 			UploadRequestUtil.getUploadPortletRequest(req);
 
-		long nodeId = ParamUtil.getLong(uploadReq, "nodeId");
-		String importProgressId =
-			ParamUtil.getString(uploadReq, "importProgressId");
-
-		File file = uploadReq.getFile("file");
+		String importProgressId = ParamUtil.getString(
+			uploadReq, "importProgressId");
 
 		ProgressTracker progressTracker = new ProgressTracker(
 			req, importProgressId);
 
 		ProgressTrackerThreadLocal.setProgressTracker(progressTracker);
-		NotificationThreadLocal.setNotificationEnabled(false);
-		WikiCacheThreadLocal.setClearCache(false);
 
 		progressTracker.start();
+
+		long nodeId = ParamUtil.getLong(uploadReq, "nodeId");
+
+		File file = uploadReq.getFile("file");
+
+		NotificationThreadLocal.setNotificationEnabled(false);
+		WikiCacheThreadLocal.setClearCache(false);
 
 		WikiNodeServiceUtil.importPages(nodeId, file);
 
 		WikiCacheUtil.clearCache(nodeId);
 
-		progressTracker.start();
+		progressTracker.finish();
 	}
 
 }

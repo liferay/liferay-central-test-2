@@ -29,6 +29,7 @@ import javax.portlet.PortletSession;
  * <a href="ProgressTracker.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class ProgressTracker {
 
@@ -45,15 +46,18 @@ public class ProgressTracker {
 	}
 
 	public void updateProgress(int percentage) {
-		_req.getPortletSession(true).setAttribute(
+		PortletSession ses = _req.getPortletSession(true);
+
+		ses.setAttribute(
 			PERCENT + _progressId, new Integer(percentage),
 			PortletSession.APPLICATION_SCOPE);
 	}
 
 	public void finish() {
-		_req.getPortletSession(true).removeAttribute(
-			PERCENT + _progressId,
-			PortletSession.APPLICATION_SCOPE);
+		PortletSession ses = _req.getPortletSession(true);
+
+		ses.removeAttribute(
+			PERCENT + _progressId, PortletSession.APPLICATION_SCOPE);
 	}
 
 	private PortletRequest _req;

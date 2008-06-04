@@ -68,6 +68,10 @@ public interface WikiPageLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.wiki.model.WikiPage getWikiPage(long pageId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portlet.wiki.model.WikiPage updateWikiPage(
 		com.liferay.portlet.wiki.model.WikiPage wikiPage)
 		throws com.liferay.portal.SystemException;

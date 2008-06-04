@@ -52,7 +52,7 @@ public class WikiCacheUtil {
 	public static final String CACHE_NAME = WikiCacheUtil.class.getName();
 
 	public static void clearCache(long nodeId) {
-		for (String groupKey: _groups.keySet()) {
+		for (String groupKey : _groups.keySet()) {
 			if (groupKey.startsWith(CACHE_NAME + StringPool.POUND + nodeId)) {
 				MultiVMPoolUtil.clearGroup(_groups, groupKey, _cache);
 			}

@@ -68,6 +68,10 @@ public interface WikiNodeLocalService {
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.wiki.model.WikiNode getWikiNode(long nodeId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portlet.wiki.model.WikiNode updateWikiNode(
 		com.liferay.portlet.wiki.model.WikiNode wikiNode)
 		throws com.liferay.portal.SystemException;

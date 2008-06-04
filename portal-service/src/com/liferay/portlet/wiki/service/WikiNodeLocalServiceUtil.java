@@ -91,6 +91,15 @@ public class WikiNodeLocalServiceUtil {
 		return wikiNodeLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiNode getWikiNode(
+		long nodeId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
+		return wikiNodeLocalService.getWikiNode(nodeId);
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiNode updateWikiNode(
 		com.liferay.portlet.wiki.model.WikiNode wikiNode)
 		throws com.liferay.portal.SystemException {

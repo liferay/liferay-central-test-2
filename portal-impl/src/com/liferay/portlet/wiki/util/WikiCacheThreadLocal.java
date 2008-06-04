@@ -42,7 +42,7 @@ public class WikiCacheThreadLocal {
 	}
 
 	public static void setClearCache(boolean clearCache) {
-		_threadLocal.set(new Boolean(clearCache));
+		_threadLocal.set(clearCache);
 	}
 
 	private static ThreadLocal<Boolean> _threadLocal =

@@ -42,7 +42,7 @@ public class NotificationThreadLocal {
 	}
 
 	public static void setNotificationEnabled(boolean enabled) {
-		_threadLocal.set(new Boolean(enabled));
+		_threadLocal.set(enabled);
 	}
 
 	private static ThreadLocal<Boolean> _threadLocal =
