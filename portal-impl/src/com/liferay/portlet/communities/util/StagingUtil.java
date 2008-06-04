@@ -214,11 +214,9 @@ public class StagingUtil {
 			sourceGroupId, privateLayout, exportParameterMap, startDate,
 			endDate);
 
-		ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
-
 		LayoutServiceHttp.importLayouts(
 			httpPrincipal, remoteGroupId, privateLayout, importParameterMap,
-			bais);
+			bytes);
 	}
 
 	public static List<Layout> getMissingParents(
