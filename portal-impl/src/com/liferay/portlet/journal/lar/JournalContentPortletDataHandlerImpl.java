@@ -151,7 +151,7 @@ public class JournalContentPortletDataHandlerImpl
 
 			Document doc = DocumentHelper.createDocument();
 
-			Element root = doc.addElement("journal-content");
+			Element root = doc.addElement("journal-content-data");
 
 			JournalPortletDataHandlerImpl.exportArticle(context, root, article);
 
@@ -212,34 +212,34 @@ public class JournalContentPortletDataHandlerImpl
 
 			Element root = doc.getRootElement();
 
-			Element el = root.element("structure");
+			Element structureEl = root.element("structure");
 
 			Map<String, String> structureIds = context.getNewPrimaryKeysMap(
 				JournalStructure.class);
 
-			if (el != null) {
+			if (structureEl != null) {
 				JournalPortletDataHandlerImpl.importStructure(
-					context, structureIds, el);
+					context, structureIds, structureEl);
 			}
 
-			el = root.element("template");
+			Element templateEl = root.element("template");
 
 			Map<String, String> templateIds = context.getNewPrimaryKeysMap(
 				JournalTemplate.class);
 
-			if (el != null) {
+			if (templateEl != null) {
 				JournalPortletDataHandlerImpl.importTemplate(
-					context, structureIds, templateIds, el);
+					context, structureIds, templateIds, templateEl);
 			}
 
-			el = root.element("article");
+			Element articleEl = root.element("article");
 
 			Map<String, String> articleIds = context.getNewPrimaryKeysMap(
 				JournalArticle.class);
 
-			if (el != null) {
+			if (articleEl != null) {
 				JournalPortletDataHandlerImpl.importArticle(
-					context, structureIds, templateIds, articleIds, el);
+					context, structureIds, templateIds, articleIds, articleEl);
 			}
 
 			String articleId = prefs.getValue("article-id", StringPool.BLANK);
@@ -261,11 +261,6 @@ public class JournalContentPortletDataHandlerImpl
 
 	public boolean isPublishToLiveByDefault() {
 		return true;
-	}
-
-	protected String _nsParam(String namespace, String controlName) {
-		return PortletDataHandlerControl.getNamespacedControlName(
-			namespace, controlName);
 	}
 
 	private static final String _NAMESPACE = "journal";
