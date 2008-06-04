@@ -57,7 +57,7 @@ public interface WikiEngine {
 	 *
 	 * @param		page WikiPage to examine
 	 * @return		a map of links
-	 * @throws      PageContentException
+	 * @throws		PageContentException
 	 */
 	public Map<String, Boolean> getOutgoingLinks(WikiPage page)
 		throws PageContentException;

@@ -75,9 +75,9 @@ public class InformixUtil extends DBUtil {
 		sm.append("create procedure 'lportal'.isnull(test_string varchar)\n");
 		sm.append("returning boolean;\n");
 		sm.append("IF test_string IS NULL THEN\n");
-		sm.append("    RETURN 't';\n");
+		sm.append("\tRETURN 't';\n");
 		sm.append("ELSE\n");
-		sm.append("    RETURN 'f';\n");
+		sm.append("\tRETURN 'f';\n");
 		sm.append("END IF\n");
 		sm.append("end procedure;\n");
 		sm.append("\n\n");

@@ -73,12 +73,12 @@ public class ExportDataAction extends PortletAction {
 			"databaseTableName", StringPool.BLANK);
 		String title = prefs.getValue("title", "no-title");
 
-        StringMaker sm = new StringMaker();
+		StringMaker sm = new StringMaker();
 
 		List<String> fieldLabels = new ArrayList<String>();
 
 		for (int i = 1; i <= WebFormUtil.MAX_FIELDS; i++) {
-            String fieldLabel = prefs.getValue(
+			String fieldLabel = prefs.getValue(
 				"fieldLabel" + i, StringPool.BLANK);
 
 			if (Validator.isNotNull(fieldLabel)) {
@@ -88,10 +88,10 @@ public class ExportDataAction extends PortletAction {
 				sm.append(fieldLabel.replaceAll("\"", "\\\""));
 				sm.append("\";");
 			}
-        }
+		}
 
-        sm.deleteCharAt(sm.length() - 1);
-        sm.append("\n");
+		sm.deleteCharAt(sm.length() - 1);
+		sm.append("\n");
 
 		if (Validator.isNotNull(databaseTableName)) {
 			List<ExpandoRow> rows = ExpandoRowLocalServiceUtil.getRows(

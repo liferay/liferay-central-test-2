@@ -156,7 +156,7 @@ public class ViewAction extends PortletAction {
 
 		if (SessionErrors.isEmpty(req)) {
 			if (Validator.isNotNull(successURL)) {
-		        res.sendRedirect(successURL);
+				res.sendRedirect(successURL);
 			}
 			else {
 				sendRedirect(req, res);

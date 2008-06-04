@@ -43,16 +43,16 @@ import javax.servlet.http.HttpServlet;
 public class PortalDelegateServlet extends HttpServlet {
 
 	public void init(ServletConfig config) throws ServletException {
-        String servletClass = config.getInitParameter("servlet-class");
+		String servletClass = config.getInitParameter("servlet-class");
 
 		_subContext = config.getInitParameter("sub-context");
 
 		if (_subContext == null) {
-            _subContext = getServletName();
-        }
+			_subContext = getServletName();
+		}
 
 		try {
-            ClassLoader contextClassLoader =
+			ClassLoader contextClassLoader =
 				Thread.currentThread().getContextClassLoader();
 
 			HttpServlet servlet = (HttpServlet)contextClassLoader.loadClass(
@@ -61,7 +61,7 @@ public class PortalDelegateServlet extends HttpServlet {
 			servlet.init(config);
 
 			PortalDelegatorServlet.addDelegate(_subContext, servlet);
-        }
+		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}

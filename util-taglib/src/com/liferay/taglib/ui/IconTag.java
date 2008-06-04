@@ -46,7 +46,7 @@ public class IconTag extends IncludeTag {
 		req.setAttribute("liferay-ui:icon:target", _target);
 		req.setAttribute("liferay-ui:icon:label", String.valueOf(_label));
 		req.setAttribute("liferay-ui:icon:toolTip", String.valueOf(_toolTip));
-        req.setAttribute("liferay-ui:icon:cssClass", _cssClass);
+		req.setAttribute("liferay-ui:icon:cssClass", _cssClass);
 
 		return EVAL_BODY_BUFFERED;
 	}

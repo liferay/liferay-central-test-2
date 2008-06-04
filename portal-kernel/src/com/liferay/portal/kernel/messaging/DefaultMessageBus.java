@@ -119,9 +119,9 @@ public class DefaultMessageBus implements MessageBus {
 		}
 	}
 
-    public void shutdown() {
-        shutdown(false);
-    }
+	public void shutdown() {
+		shutdown(false);
+	}
 
 	public synchronized void shutdown(boolean force) {
 		for (Destination destination : _destinations.values()) {

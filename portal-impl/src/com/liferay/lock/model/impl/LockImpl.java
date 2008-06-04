@@ -85,7 +85,7 @@ public class LockImpl implements Lock {
 				return false;
 			}
 		}
-    }
+	}
 
 	public Date getDate() {
 		return _date;

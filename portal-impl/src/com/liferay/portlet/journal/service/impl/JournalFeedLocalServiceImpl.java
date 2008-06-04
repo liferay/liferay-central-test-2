@@ -435,9 +435,9 @@ public class JournalFeedLocalServiceImpl
 
 				Element el = (Element)xpathSelector.selectSingleNode(doc);
 
-		    	if (el != null) {
-		    		return true;
-		    	}
+				if (el != null) {
+					return true;
+				}
 			}
 			catch (Exception e) {
 			}

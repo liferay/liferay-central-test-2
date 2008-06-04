@@ -150,7 +150,7 @@ public class IdReplacer {
 	}
 
 	private static int _getEndPos(char[] charArray, int pos) {
-        while (true) {
+		while (true) {
 			if (pos >= charArray.length) {
 				break;
 			}
@@ -160,7 +160,7 @@ public class IdReplacer {
 			}
 
 			pos++;
-        }
+		}
 
 		return pos;
 	}

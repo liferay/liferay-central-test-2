@@ -36,8 +36,8 @@ public interface Transport {
 
 	public void disconnect() throws IOException;
 
-    public void sendMessage(String message) throws IOException;
+	public void sendMessage(String message) throws IOException;
 
-    public boolean isConnected();
+	public boolean isConnected();
 
 }

@@ -41,14 +41,14 @@ public class CacheResponseStream extends ServletOutputStream {
 	}
 
 	public void close() throws IOException {
-        super.close();
+		super.close();
 
-        _closed = true;
-    }
+		_closed = true;
+	}
 
-    public boolean isClosed() {
-        return _closed;
-    }
+	public boolean isClosed() {
+		return _closed;
+	}
 
 	public void write(int b) throws IOException {
 		_dos.write(b);

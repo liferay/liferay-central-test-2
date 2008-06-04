@@ -378,8 +378,14 @@ public class SourceFormatter {
 					"\n\n");
 			}
 
-			if  (newContent.indexOf("*/\npackage ") != -1) {
+			if (newContent.indexOf("*/\npackage ") != -1) {
 				System.out.println("package: " + files[i]);
+			}
+
+			if (newContent.indexOf("    ") != -1) {
+				if (!files[i].endsWith("StringPool.java")) {
+					System.out.println("tab: " + files[i]);
+				}
 			}
 
 			if (!newContent.endsWith("\n\n}") &&
@@ -495,6 +501,10 @@ public class SourceFormatter {
 				newContent = StringUtil.replace(newContent,
 					"confirm(\"<%= LanguageUtil.",
 					"confirm(\"<%= UnicodeLanguageUtil.");
+			}
+
+			if (newContent.indexOf("    ") != -1) {
+				System.out.println("tab: " + files[i]);
 			}
 
 			_checkXSS(files[i], content);

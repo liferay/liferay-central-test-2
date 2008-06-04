@@ -41,10 +41,10 @@ else if (className.equals(DLFileEntry.class.getName())) {
 		StringMaker sm = new StringMaker();
 
 		sm.append("<img align=\"left\" border=\"0\" src=\"");
-        sm.append(themeDisplay.getPathThemeImages());
-        sm.append("/document_library/");
-        sm.append(DLUtil.getFileExtension(fileEntry.getName()));
-        sm.append(".png\" />");
+		sm.append(themeDisplay.getPathThemeImages());
+		sm.append("/document_library/");
+		sm.append(DLUtil.getFileExtension(fileEntry.getName()));
+		sm.append(".png\" />");
 		sm.append(fileEntry.getTitle());
 
 		title = sm.toString();

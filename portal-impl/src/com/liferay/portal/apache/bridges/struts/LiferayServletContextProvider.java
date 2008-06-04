@@ -70,22 +70,22 @@ public class LiferayServletContextProvider implements ServletContextProvider {
 		if (req instanceof ActionRequestImpl) {
 			httpReq = PortalUtil.getHttpServletRequest(req);
 
-	        String contentType = httpReq.getHeader(HttpHeaders.CONTENT_TYPE);
+			String contentType = httpReq.getHeader(HttpHeaders.CONTENT_TYPE);
 
-	        if ((contentType != null) &&
-	            (contentType.startsWith(ContentTypes.MULTIPART_FORM_DATA))) {
+			if ((contentType != null) &&
+				(contentType.startsWith(ContentTypes.MULTIPART_FORM_DATA))) {
 
-	        	try {
-	        		httpReq = new UploadServletRequest(httpReq);
-	        	}
-	        	catch (IOException ioe) {
-	        	}
+				try {
+					httpReq = new UploadServletRequest(httpReq);
+				}
+				catch (IOException ioe) {
+				}
 
-	        	httpReq = new LiferayStrutsRequestImpl(httpReq);
-	        }
-	        else {
-	        	httpReq = new LiferayStrutsRequestImpl((ActionRequestImpl)req);
-	        }
+				httpReq = new LiferayStrutsRequestImpl(httpReq);
+			}
+			else {
+				httpReq = new LiferayStrutsRequestImpl((ActionRequestImpl)req);
+			}
 		}
 		else {
 			httpReq = new LiferayStrutsRequestImpl((RenderRequestImpl)req);

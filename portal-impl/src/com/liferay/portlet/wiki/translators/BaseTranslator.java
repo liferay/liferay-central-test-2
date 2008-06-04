@@ -67,24 +67,24 @@ public abstract class BaseTranslator {
 	}
 
 	protected String protectText(String content, String markupRegex) {
-	    Matcher matcher = Pattern.compile(
-		    markupRegex, Pattern.MULTILINE | Pattern.DOTALL).matcher(content);
+		Matcher matcher = Pattern.compile(
+			markupRegex, Pattern.MULTILINE | Pattern.DOTALL).matcher(content);
 
-	    StringBuffer sb = new StringBuffer();
+		StringBuffer sb = new StringBuffer();
 
-	    while (matcher.find()) {
-	        String protectedText = matcher.group();
+		while (matcher.find()) {
+			String protectedText = matcher.group();
 
-		    String hash = DigesterUtil.digest(protectedText);
+			String hash = DigesterUtil.digest(protectedText);
 
-		    matcher.appendReplacement(sb, "$1" + hash + "$3");
+			matcher.appendReplacement(sb, "$1" + hash + "$3");
 
-		    _protectedMap.put(hash, matcher.group(2));
-	    }
+			_protectedMap.put(hash, matcher.group(2));
+		}
 
-	    matcher.appendTail(sb);
+		matcher.appendTail(sb);
 
-	    return sb.toString();
+		return sb.toString();
 	}
 
 	protected String runRegexps(String content) {
@@ -117,15 +117,15 @@ public abstract class BaseTranslator {
 	protected String unprotectNowikiText(String content) {
 		List<String> hashList = new ArrayList<String>(_protectedMap.keySet());
 
-	    for (int i = hashList.size() - 1; i >= 0; i--) {
-	        String hash = hashList.get(i);
+		for (int i = hashList.size() - 1; i >= 0; i--) {
+			String hash = hashList.get(i);
 
-	        String protectedMarkup = _protectedMap.get(hash);
+			String protectedMarkup = _protectedMap.get(hash);
 
-		    content = content.replace(hash, protectedMarkup);
-	    }
+			content = content.replace(hash, protectedMarkup);
+		}
 
-	    return content;
+		return content;
 	}
 
 	private String _normalizeLineBreaks(String content) {

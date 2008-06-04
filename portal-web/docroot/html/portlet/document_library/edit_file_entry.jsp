@@ -111,29 +111,29 @@ portletURL.setParameter("name", name);
 				// Enable everything
 
 				rowIds[i].checked = false;
-      			rowIds[i].disabled = false;
-    		}
-    		else if ((found == 0) && (totalChecked == 1)) {
+	  			rowIds[i].disabled = false;
+			}
+			else if ((found == 0) && (totalChecked == 1)) {
 
 				// Disable everything up to the first one
 
 				rowIds[i].checked = false;
-      			rowIds[i].disabled = true;
-    		}
-    		else if ((found == 1) && (totalChecked >= 1)) {
+	  			rowIds[i].disabled = true;
+			}
+			else if ((found == 1) && (totalChecked >= 1)) {
 
 				// Unselect everything after the first one
 
 				rowIds[i].checked = false;
-      			rowIds[i].disabled = false;
-    		}
-    		else if ((found == 2) && (totalChecked >= 2)) {
+	  			rowIds[i].disabled = false;
+			}
+			else if ((found == 2) && (totalChecked >= 2)) {
 
 				// Disable elements after the second one
 
 				rowIds[i].checked = false;
-      			rowIds[i].disabled = true;
-    		}
+	  			rowIds[i].disabled = true;
+			}
 		}
 	}
 

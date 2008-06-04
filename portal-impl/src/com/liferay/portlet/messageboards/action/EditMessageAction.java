@@ -234,7 +234,7 @@ public class EditMessageAction extends PortletAction {
 				message = MBMessageServiceUtil.addMessage(
 					categoryId, subject, body, files, anonymous, priority,
 					tagsEntries, prefs, communityPermissions, guestPermissions,
-				    themeDisplay);
+					themeDisplay);
 			}
 			else {
 

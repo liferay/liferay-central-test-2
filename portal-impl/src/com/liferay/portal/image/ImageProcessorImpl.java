@@ -63,15 +63,15 @@ import org.apache.commons.logging.LogFactory;
 public class ImageProcessorImpl implements ImageProcessor {
 
 	public BufferedImage convertImageType(BufferedImage sourceImage, int type) {
-	    BufferedImage targetImage = new BufferedImage(
-	    	sourceImage.getWidth(), sourceImage.getHeight(), type);
+		BufferedImage targetImage = new BufferedImage(
+			sourceImage.getWidth(), sourceImage.getHeight(), type);
 
-	    Graphics2D graphics = targetImage.createGraphics();
+		Graphics2D graphics = targetImage.createGraphics();
 
-	    graphics.drawRenderedImage(sourceImage, null);
-	    graphics.dispose();
+		graphics.drawRenderedImage(sourceImage, null);
+		graphics.dispose();
 
-	    return targetImage;
+		return targetImage;
 	}
 
 	public void encodeGIF(RenderedImage renderedImage, OutputStream os)

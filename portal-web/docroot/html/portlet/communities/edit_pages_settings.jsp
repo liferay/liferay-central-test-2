@@ -301,7 +301,7 @@ if (!StringUtil.contains(tabs2Names, tabs2)) {
 
 		<div class="portlet-msg-info">
 			<liferay-ui:message key="you-can-configure-the-top-level-pages-of-this-public-website-to-merge-with-the-top-level-pages-of-the-public-guest-community" />
-        </div>
+		</div>
 
 		<table class="lfr-table">
 		<tr>

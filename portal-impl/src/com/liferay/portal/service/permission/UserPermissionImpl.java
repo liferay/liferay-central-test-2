@@ -90,7 +90,7 @@ public class UserPermissionImpl implements UserPermission {
 
 		return contains(
 			permissionChecker, userId, new long[] {organizationId, locationId},
-		    actionId);
+			actionId);
 	}
 
 	public boolean contains(

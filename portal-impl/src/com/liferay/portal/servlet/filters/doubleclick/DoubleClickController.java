@@ -119,7 +119,7 @@ public class DoubleClickController implements Serializable {
 		CacheResponseUtil.write(res, data);
 	}
 
-    private CacheResponse _cacheResponse;
-    private Throwable _throwable;
+	private CacheResponse _cacheResponse;
+	private Throwable _throwable;
 
 }

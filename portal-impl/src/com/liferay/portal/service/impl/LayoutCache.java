@@ -294,18 +294,18 @@ public class LayoutCache  {
 	}
 
 	protected Map<String, Long> entityGroupIdMap = new HashMap<String, Long>();
-    protected Map<String, Map<String, Long>> entityMapMap =
-    	new HashMap<String, Map<String, Long>>();
-    protected Map<Long, List<Role>> groupRolesMap =
-    	new HashMap<Long, List<Role>>();
-    protected Map<Long, List<User>> groupUsersMap =
-    	new HashMap<Long, List<User>>();
-    protected Map<String, Resource> resourcesMap =
-    	new HashMap<String, Resource>();
-    protected Map<String, Role> rolesMap = new HashMap<String, Role>();
-    protected Map<Long, List<Role>> userRolesMap =
-    	new HashMap<Long, List<Role>>();
-    protected Map<String, List<User>> usersMap =
-    	new HashMap<String, List<User>>();
+	protected Map<String, Map<String, Long>> entityMapMap =
+		new HashMap<String, Map<String, Long>>();
+	protected Map<Long, List<Role>> groupRolesMap =
+		new HashMap<Long, List<Role>>();
+	protected Map<Long, List<User>> groupUsersMap =
+		new HashMap<Long, List<User>>();
+	protected Map<String, Resource> resourcesMap =
+		new HashMap<String, Resource>();
+	protected Map<String, Role> rolesMap = new HashMap<String, Role>();
+	protected Map<Long, List<Role>> userRolesMap =
+		new HashMap<Long, List<Role>>();
+	protected Map<String, List<User>> usersMap =
+		new HashMap<String, List<User>>();
 
 }

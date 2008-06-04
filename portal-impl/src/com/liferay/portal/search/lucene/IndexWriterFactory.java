@@ -181,20 +181,20 @@ public class IndexWriterFactory {
 				IndexWriterData writerData = _writerLookup.get(companyId);
 
 				if (writerData == null) {
-                    newWriter = true;
+					newWriter = true;
 
 					acquireLock(companyId, false);
 
-                    IndexWriter writer = new IndexWriter(
-                        LuceneUtil.getLuceneDir(companyId),
-                        LuceneUtil.getAnalyzer(), create);
+					IndexWriter writer = new IndexWriter(
+						LuceneUtil.getLuceneDir(companyId),
+						LuceneUtil.getAnalyzer(), create);
 
-                    writer.setMergeFactor(_MERGE_FACTOR);
+					writer.setMergeFactor(_MERGE_FACTOR);
 
-                    writerData = new IndexWriterData(companyId, writer, 0);
+					writerData = new IndexWriterData(companyId, writer, 0);
 
-                    _writerLookup.put(companyId, writerData);
-                }
+					_writerLookup.put(companyId, writerData);
+				}
 
 				writerData.setCount(writerData.getCount() + 1);
 

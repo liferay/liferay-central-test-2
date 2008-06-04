@@ -137,7 +137,7 @@ if (organizations != null) {
 		var organizationsHTML = '';
 
 		for (var i = 0; i < selectedOrgsIds.length; i++) {
-            var id = selectedOrgsIds[i];
+			var id = selectedOrgsIds[i];
 			var name = selectedOrgsNames[i];
 
 			organizationsHTML += '<span>' + name + '&nbsp;[<a href="javascript: <portlet:namespace />removeOrganization(' + i + ');">x</a>]</span>';

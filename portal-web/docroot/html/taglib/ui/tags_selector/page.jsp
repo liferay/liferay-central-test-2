@@ -96,7 +96,7 @@ if (curTagsParam != null) {
 					contentCallback: function() {
 						return <%= contentCallback %>();
 					}
-                }
+				}
 			);
 
 			jQuery("#<%= randomNamespace %>tags").keyup(

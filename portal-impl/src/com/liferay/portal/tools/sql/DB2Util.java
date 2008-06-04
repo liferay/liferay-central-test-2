@@ -180,11 +180,11 @@ public class DB2Util extends DBUtil {
 
 				callStmt = con.prepareCall(sql);
 
-			    String param = "reorg table " + tableName;
+				String param = "reorg table " + tableName;
 
-			    callStmt.setString(1, param);
+				callStmt.setString(1, param);
 
-			    callStmt.execute();
+				callStmt.execute();
 			}
 		}
 		finally {

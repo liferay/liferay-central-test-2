@@ -66,14 +66,6 @@ public abstract class LastModifiedAction extends Action {
 		// check ensures that the theme and color scheme used is the one passed
 		// to it from the request parameters.
 
-		// See:
-		//     com.liferay.common.taglib.IncludeTag
-		//     com.liferay.portal.events.ServicePreAction
-		//     /c/portal/css
-		//     /c/portal/css_cached
-		//     /c/portal/javascript
-		//     /c/portal/javascript_cached
-
 		if ((theme == null) || (colorScheme == null) ||
 			(!theme.getThemeId().equals(themeId)) ||
 			(!colorScheme.getColorSchemeId().equals(colorSchemeId))) {

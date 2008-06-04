@@ -116,32 +116,32 @@ public class NtlmFilter extends NtlmHttpFilter {
 				String msg = httpReq.getHeader("Authorization");
 
 				if (msg != null && msg.startsWith("NTLM")) {
-				    byte[] src = Base64.decode(msg.substring(5));
+					byte[] src = Base64.decode(msg.substring(5));
 
-				    if (src[8] == 1) {
-				    	UniAddress dc = UniAddress.getByName(
-				    		Config.getProperty("jcifs.http.domainController"),
-				    		true);
+					if (src[8] == 1) {
+						UniAddress dc = UniAddress.getByName(
+							Config.getProperty("jcifs.http.domainController"),
+							true);
 
-				        byte[] challenge = SmbSession.getChallenge(dc);
+						byte[] challenge = SmbSession.getChallenge(dc);
 
-				        Type1Message type1 = new Type1Message(src);
-				        Type2Message type2 = new Type2Message(
-				        	type1, challenge, null);
+						Type1Message type1 = new Type1Message(src);
+						Type2Message type2 = new Type2Message(
+							type1, challenge, null);
 
-				        msg = Base64.encode(type2.toByteArray());
+						msg = Base64.encode(type2.toByteArray());
 
-				        httpRes.setHeader("WWW-Authenticate", "NTLM " + msg);
-				        httpRes.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-				        httpRes.setContentLength(0);
+						httpRes.setHeader("WWW-Authenticate", "NTLM " + msg);
+						httpRes.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+						httpRes.setContentLength(0);
 
-				        httpRes.flushBuffer();
+						httpRes.flushBuffer();
 
-				        // Interrupt filter chain, send response. Browser will
-				        // immediately post a new request.
+						// Interrupt filter chain, send response. Browser will
+						// immediately post a new request.
 
 						return;
-				    }
+					}
 				}
 
 				String path = httpReq.getPathInfo();

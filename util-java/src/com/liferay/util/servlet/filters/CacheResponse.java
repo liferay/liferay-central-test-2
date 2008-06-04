@@ -172,11 +172,11 @@ public class CacheResponse extends HttpServletResponseWrapper {
 		}
 
 		if ((_stream != null) && _stream.isClosed()) {
-            return true;
-        }
+			return true;
+		}
 
-        return super.isCommitted();
-    }
+		return super.isCommitted();
+	}
 
 	public void setContentType(String contentType) {
 		_contentType = contentType;

@@ -56,22 +56,22 @@ public class LiferayURLConstructor implements URLConstructor {
 
 		if (Validator.isNotNull(parameters)) {
 			if (context.equals(WikiContext.ATTACH)) {
-		        parameters = StringPool.QUESTION + parameters;
-		    }
-		    else if (context.equals(WikiContext.NONE)) {
+				parameters = StringPool.QUESTION + parameters;
+			}
+			else if (context.equals(WikiContext.NONE)) {
 				if (name.indexOf(StringPool.QUESTION) != -1) {
 					parameters = "&amp;" + parameters;
 				}
 				else {
 					parameters = StringPool.QUESTION + parameters;
 				}
-		    }
-		    else {
-		        parameters = "&amp;" + parameters;
-		    }
+			}
+			else {
+				parameters = "&amp;" + parameters;
+			}
 		}
 		else {
-		    parameters = StringPool.BLANK;
+			parameters = StringPool.BLANK;
 		}
 
 		String path;

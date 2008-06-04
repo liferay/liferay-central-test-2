@@ -54,7 +54,7 @@ public interface ColorScheme extends Comparable<ColorScheme>, Serializable {
 
 	public void setColorSchemeImagesPath(String colorSchemeImagesPath);
 
-    public String getColorSchemeThumbnailPath();
+	public String getColorSchemeThumbnailPath();
 
 	public String getSettings();
 

@@ -274,14 +274,14 @@ public class SecureFilter extends BasePortalFilter {
 					else {
 						httpRes.setHeader(
 							HttpHeaders.WWW_AUTHENTICATE, _PORTAL_REALM);
-				    	httpRes.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+						httpRes.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
-				    	return;
+						return;
 					}
 				}
 			}
 
-		    processFilter(SecureFilter.class, req, res, chain);
+			processFilter(SecureFilter.class, req, res, chain);
 		}
 	}
 

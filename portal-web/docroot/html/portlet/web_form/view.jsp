@@ -33,7 +33,7 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", 
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/web_form/view" /></portlet:actionURL>" class="uni-form" method="post">
 <c:if test="<%= Validator.isNull(successURL) %>">
-	<input type="hidden" name="<portlet:namespace/>redirect" value="<%= currentURL %>"/>
+	<input type="hidden" name="<portlet:namespace/>redirect" value="<%= currentURL %>" />
 </c:if>
 
 <fieldset class="block-labels">

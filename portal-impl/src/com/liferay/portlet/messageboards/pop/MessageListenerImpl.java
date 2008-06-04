@@ -284,7 +284,7 @@ public class MessageListenerImpl implements MessageListener {
 		long parentMessageId = 0;
 
 		if (parts.length == 2) {
-		    parentMessageId = GetterUtil.getLong(parts[1]);
+			parentMessageId = GetterUtil.getLong(parts[1]);
 		}
 
 		if (parentMessageId > 0) {

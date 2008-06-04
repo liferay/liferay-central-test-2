@@ -42,11 +42,11 @@ public class DynamicFilterConfig implements FilterConfig {
 	public DynamicFilterConfig(FilterConfig config) {
 		Enumeration<String> enu = config.getInitParameterNames();
 
-        while (enu.hasMoreElements()) {
-        	String name = enu.nextElement();
+		while (enu.hasMoreElements()) {
+			String name = enu.nextElement();
 
-            addInitParameter(name, config.getInitParameter(name));
-        }
+			addInitParameter(name, config.getInitParameter(name));
+		}
 	}
 
 	public DynamicFilterConfig(String filterName, ServletContext ctx) {

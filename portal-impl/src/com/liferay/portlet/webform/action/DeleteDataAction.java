@@ -53,7 +53,7 @@ public class DeleteDataAction extends PortletAction {
 		PortletPreferences prefs =
 			PortletPreferencesFactoryUtil.getPortletSetup(req);
 
-        String databaseTableName = prefs.getValue(
+		String databaseTableName = prefs.getValue(
 			"databaseTableName", StringPool.BLANK);
 
 		if (Validator.isNotNull(databaseTableName)) {

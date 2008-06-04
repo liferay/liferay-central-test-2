@@ -266,7 +266,7 @@ public class MediaWikiImporter implements WikiImporter {
 		List<String> tagsEntries = new ArrayList<String>();
 
 		while (matcher.find()) {
-		    String categoryName = matcher.group(1);
+			String categoryName = matcher.group(1);
 
 			categoryName = normalize(categoryName, 75);
 

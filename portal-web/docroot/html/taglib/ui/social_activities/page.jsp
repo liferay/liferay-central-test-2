@@ -103,7 +103,7 @@ DateFormat timeFormatDate = DateFormats.getTime(locale, timeZone);
 			feedXML = RSSUtil.export(syndFeed);
 		}
 		catch (Exception e) {
-		    _log.error(e, e);
+			_log.error(e, e);
 		}
 
 		response.setContentType(ContentTypes.TEXT_XML_UTF8);

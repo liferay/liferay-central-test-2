@@ -41,9 +41,9 @@ import java.net.InetAddress;
 public class MulticastServerTool {
 
 	public static void main(String[] args) {
-        try {
-            int port = GetterUtil.getInteger(args[1]);
-            long interval = GetterUtil.getLong(args[2]);
+		try {
+			int port = GetterUtil.getInteger(args[1]);
+			long interval = GetterUtil.getLong(args[2]);
 
 			DatagramHandler handler = new DatagramHandler() {
 
@@ -61,7 +61,7 @@ public class MulticastServerTool {
 			};
 
 			MulticastTransport transport = new MulticastTransport(
-                handler, args[0], port);
+				handler, args[0], port);
 
 			transport.connect();
 
@@ -72,22 +72,22 @@ public class MulticastServerTool {
 			int i = 0;
 
 			while (true) {
-                transport.sendMessage(msg + i);
+				transport.sendMessage(msg + i);
 
 				i++;
 
 				Thread.sleep(interval);
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
 
 			System.err.println(
 				"Usage: java MulticastServerTool multicastAddress port " +
 					"interval");
 
 			System.exit(1);
-        }
-    }
+		}
+	}
 
 }

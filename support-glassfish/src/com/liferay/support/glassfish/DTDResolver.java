@@ -59,11 +59,11 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public class DTDResolver extends DefaultHandler {
 
-    public DTDResolver(String dtdDir) {
-        _dtdDir = dtdDir;
-    }
+	public DTDResolver(String dtdDir) {
+		_dtdDir = dtdDir;
+	}
 
-    public InputSource resolveEntity(String publicId, String systemId)
+	public InputSource resolveEntity(String publicId, String systemId)
 		throws IOException, SAXException {
 
 		systemId = systemId.trim();
@@ -88,8 +88,8 @@ public class DTDResolver extends DefaultHandler {
 		}
 
 		return inputSource;
-    }
+	}
 
-    private String _dtdDir;
+	private String _dtdDir;
 
 }

@@ -52,9 +52,9 @@ for (int i = 1; i <= maxDayOfMonth; i++) {
 	<td style="padding-right: 10px;" valign="top" width="1%">
 		<div class="calendar-container float-container">
 			<div class="calendar-day">
-		    	<h2 class="day-text"><%= DateUtil.getCurrentDate("EEEE", locale) %></h2>
-		        <h3 class="day-number"><%= curDay %></h3>
-		    </div>
+				<h2 class="day-text"><%= DateUtil.getCurrentDate("EEEE", locale) %></h2>
+				<h3 class="day-number"><%= curDay %></h3>
+			</div>
 
 			<liferay-ui:calendar
 				month="<%= selMonth %>"

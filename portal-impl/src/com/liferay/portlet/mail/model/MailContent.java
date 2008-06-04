@@ -73,7 +73,7 @@ public class MailContent {
 
 			if (Validator.isNotNull(body)) {
 				body = HtmlUtil.escape(body);
-				body = StringUtil.replace(body, "\t", "    ");
+				body = StringUtil.replace(body, "\t", StringPool.FOUR_SPACES);
 				body = StringUtil.replace(body, "  ", " &nbsp;");
 				body = StringUtil.replace(body, "\n", "<BR />");
 				body =

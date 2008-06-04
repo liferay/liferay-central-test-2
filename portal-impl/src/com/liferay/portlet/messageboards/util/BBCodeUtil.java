@@ -133,7 +133,8 @@ public class BBCodeUtil {
 			String preTag = html.substring(0, tag.getStartPos());
 			String postTag = html.substring(tag.getEndPos());
 
-			String code = tag.getElement().replaceAll("\t", "    ");
+			String code = tag.getElement().replaceAll(
+				"\t", StringPool.FOUR_SPACES);
 			String[] lines = code.split("\\n");
 			int digits = String.valueOf(lines.length + 1).length();
 

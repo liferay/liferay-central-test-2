@@ -160,17 +160,17 @@ public class TrackbackAction extends PortletAction {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-	    sb.append("<response>");
+		sb.append("<response>");
 
-	    if (success) {
-		    sb.append("<error>0</error>");
-	    }
-	    else {
-		    sb.append("<error>1</error>");
-	    	sb.append("<message>" + msg + "</message>");
-	    }
+		if (success) {
+			sb.append("<error>0</error>");
+		}
+		else {
+			sb.append("<error>1</error>");
+			sb.append("<message>" + msg + "</message>");
+		}
 
-	    sb.append("</response>");
+		sb.append("</response>");
 
 		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
 

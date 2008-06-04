@@ -61,15 +61,15 @@ public class WebFormUtil {
 	public static ExpandoTable addTable(String tableName)
 		throws PortalException, SystemException {
 
-	    try {
-		    ExpandoTableLocalServiceUtil.deleteTable(
+		try {
+			ExpandoTableLocalServiceUtil.deleteTable(
 				WebFormUtil.class.getName(), tableName);
-	    }
-	    catch (NoSuchTableException nste) {
-	    }
+		}
+		catch (NoSuchTableException nste) {
+		}
 
-	    return ExpandoTableLocalServiceUtil.addTable(
-		    WebFormUtil.class.getName(), tableName);
+		return ExpandoTableLocalServiceUtil.addTable(
+			WebFormUtil.class.getName(), tableName);
 	}
 
 	public static ExpandoTable checkTable(

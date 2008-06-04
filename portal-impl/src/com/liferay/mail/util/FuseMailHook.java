@@ -73,7 +73,7 @@ public class FuseMailHook implements Hook {
 			method.addParameter("alias[0]", emailAddress);
 
 			executeMethod(method);
-        }
+		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
@@ -96,7 +96,7 @@ public class FuseMailHook implements Hook {
 			method.addParameter("alias", user.getEmailAddress());
 
 			executeMethod(method);
-        }
+		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
@@ -112,7 +112,7 @@ public class FuseMailHook implements Hook {
 			method.addParameter("user", mailUserId);
 
 			executeMethod(method);
-        }
+		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
@@ -134,7 +134,7 @@ public class FuseMailHook implements Hook {
 			method.addParameter("alias[0]", emailAddress);
 
 			executeMethod(method);
-        }
+		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
@@ -151,7 +151,7 @@ public class FuseMailHook implements Hook {
 			method.addParameter("password", password);
 
 			executeMethod(method);
-        }
+		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}

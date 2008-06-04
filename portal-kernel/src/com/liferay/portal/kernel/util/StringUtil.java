@@ -48,7 +48,7 @@ import java.util.StringTokenizer;
  */
 public class StringUtil {
 
-    public static String add(String s, String add) {
+	public static String add(String s, String add) {
 		return add(s, add, StringPool.COMMA);
 	}
 

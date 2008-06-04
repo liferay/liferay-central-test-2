@@ -22,6 +22,7 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.FileImpl;
 
@@ -50,9 +51,12 @@ public class CSSFormatter {
 
 			content = StringUtil.replace(
 				content,
-				new String[] {"*/\n", "*/ /*", "*/    /*"},
-				new String[] {"*/\n\n", "*/\n\n/*", "*/\n\n/*"}
-			);
+				new String[] {
+					"*/\n", "*/ /*", "*/" + StringPool.FOUR_SPACES + "/*"
+				},
+				new String[] {
+					"*/\n\n", "*/\n\n/*", "*/\n\n/*"
+				});
 
 			_fileUtil.write(file, content, true);
 		}

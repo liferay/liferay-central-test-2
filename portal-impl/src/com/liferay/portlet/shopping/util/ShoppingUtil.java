@@ -1004,7 +1004,7 @@ public class ShoppingUtil {
 			int stockQuantity = item.getStockQuantity();
 
 			if ((stockQuantity > 0)  &&
-			    (stockQuantity >= orderedQuantity.intValue())) {
+				(stockQuantity >= orderedQuantity.intValue())) {
 
 				return true;
 			}

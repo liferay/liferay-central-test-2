@@ -40,8 +40,8 @@ import java.net.DatagramPacket;
 public class MulticastClientTool {
 
 	public static void main(String[] args) {
-        try {
-            int port = GetterUtil.getInteger(args[1]);
+		try {
+			int port = GetterUtil.getInteger(args[1]);
 
 			DatagramHandler handler = new DatagramHandler() {
 
@@ -58,23 +58,23 @@ public class MulticastClientTool {
 
 			};
 
-            MulticastTransport transport = new MulticastTransport(
+			MulticastTransport transport = new MulticastTransport(
 				handler, args[0], port);
 
 			transport.connect();
 
 			synchronized (transport) {
-                transport.wait();
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
+				transport.wait();
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
 
 			System.err.println(
 				"Usage: java MulticastClientTool multicastAddress port");
 
 			System.exit(1);
-        }
-    }
+		}
+	}
 
 }
