@@ -138,14 +138,6 @@ public class SchedulingRequest implements Serializable {
 		_messageBody = messageBody;
 	}
 
-	public String getResponseId() {
-		return _responseId;
-	}
-
-	public void setResponseId(String responseId) {
-		_responseId = responseId;
-	}
-
 	public Date getStartDate() {
 		return _startDate;
 	}
@@ -175,7 +167,6 @@ public class SchedulingRequest implements Serializable {
 	private String _groupName;
 	private String _jobName;
 	private String _messageBody;
-	private String _responseId;
 	private Date _startDate;
 	private Date _endDate;
     private String _type;
