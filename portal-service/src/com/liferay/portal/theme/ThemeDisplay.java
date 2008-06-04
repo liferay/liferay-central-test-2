@@ -333,6 +333,10 @@ public class ThemeDisplay implements Serializable {
 		return _theme.isWapTheme();
 	}
 
+	public void setWapTheme( boolean wapTheme ) {
+		_theme.setWapTheme( wapTheme );
+	}
+
 	public void setLookAndFeel(Theme theme, ColorScheme colorScheme) {
 		setLookAndFeel(getPathContext(), theme, colorScheme);
 	}
