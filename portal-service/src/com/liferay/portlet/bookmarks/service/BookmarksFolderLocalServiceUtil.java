@@ -69,8 +69,7 @@ public class BookmarksFolderLocalServiceUtil {
 
 	public static void deleteBookmarksFolder(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 
 		bookmarksFolderLocalService.deleteBookmarksFolder(bookmarksFolder);

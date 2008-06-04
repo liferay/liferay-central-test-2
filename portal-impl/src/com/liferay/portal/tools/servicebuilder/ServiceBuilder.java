@@ -1480,7 +1480,7 @@ public class ServiceBuilder {
 		return true;
 	}
 
-	private static String _getPackagePath(File file) throws IOException {
+	private static String _getPackagePath(File file) {
 		String fileName = StringUtil.replace(file.toString(), "\\", "/");
 
 		int x = fileName.indexOf("src/");
@@ -1757,7 +1757,7 @@ public class ServiceBuilder {
 		writeFile(ejbFile, content, _author);
 	}
 
-	private void _createHBM(Entity entity) throws IOException {
+	private void _createHBM(Entity entity) {
 		File ejbFile = new File(
 			_outputPath + "/service/persistence/" + entity.getName() +
 				"HBM.java");
@@ -1769,7 +1769,7 @@ public class ServiceBuilder {
 		}
 	}
 
-	private void _createHBMUtil(Entity entity) throws IOException {
+	private void _createHBMUtil(Entity entity) {
 		File ejbFile = new File(
 			_outputPath + "/service/persistence/" + entity.getName() +
 				"HBMUtil.java");
@@ -2196,7 +2196,7 @@ public class ServiceBuilder {
 		}
 	}
 
-	private void _createPool(Entity entity) throws IOException {
+	private void _createPool(Entity entity) {
 		File ejbFile = new File(
 			_outputPath + "/service/persistence/" + entity.getName() +
 				"Pool.java");
@@ -3198,7 +3198,7 @@ public class ServiceBuilder {
 		return sm.toString().trim();
 	}
 
-	private String _fixSpringXML(String content) throws IOException {
+	private String _fixSpringXML(String content) {
 		return StringUtil.replace(content, ".service.spring.", ".service.");
 	}
 

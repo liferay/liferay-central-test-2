@@ -106,7 +106,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	}
 
 	public long getOrganizationId(long companyId, String name)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return organizationLocalService.getOrganizationId(companyId, name);
 	}

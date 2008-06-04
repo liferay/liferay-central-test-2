@@ -69,8 +69,7 @@ public class DLFolderLocalServiceUtil {
 
 	public static void deleteDLFolder(
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
 		dlFolderLocalService.deleteDLFolder(dlFolder);

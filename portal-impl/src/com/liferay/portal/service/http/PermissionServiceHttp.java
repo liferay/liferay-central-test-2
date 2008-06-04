@@ -118,8 +118,7 @@ public class PermissionServiceHttp {
 
 	public static boolean hasGroupPermission(HttpPrincipal httpPrincipal,
 		long groupId, java.lang.String actionId, long resourceId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
 
@@ -145,10 +144,6 @@ public class PermissionServiceHttp {
 					throw (com.liferay.portal.SystemException)e;
 				}
 
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				throw new com.liferay.portal.SystemException(e);
 			}
 
@@ -163,8 +158,7 @@ public class PermissionServiceHttp {
 
 	public static boolean hasUserPermission(HttpPrincipal httpPrincipal,
 		long userId, java.lang.String actionId, long resourceId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(userId);
 
@@ -190,10 +184,6 @@ public class PermissionServiceHttp {
 					throw (com.liferay.portal.SystemException)e;
 				}
 
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				throw new com.liferay.portal.SystemException(e);
 			}
 
@@ -210,8 +200,7 @@ public class PermissionServiceHttp {
 		long userId, long groupId, java.lang.String actionId,
 		long[] resourceIds,
 		com.liferay.portal.security.permission.PermissionCheckerBag permissionCheckerBag)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(userId);
 
@@ -250,10 +239,6 @@ public class PermissionServiceHttp {
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
-				}
-
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);

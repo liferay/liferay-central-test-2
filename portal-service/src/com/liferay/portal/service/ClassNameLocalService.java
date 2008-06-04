@@ -58,8 +58,7 @@ public interface ClassNameLocalService {
 			com.liferay.portal.PortalException;
 
 	public void deleteClassName(com.liferay.portal.model.ClassName className)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.ClassName> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

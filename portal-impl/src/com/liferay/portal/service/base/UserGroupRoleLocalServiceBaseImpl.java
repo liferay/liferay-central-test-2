@@ -288,7 +288,7 @@ public abstract class UserGroupRoleLocalServiceBaseImpl
 	}
 
 	public void deleteUserGroupRole(UserGroupRole userGroupRole)
-		throws PortalException, SystemException {
+		throws SystemException {
 		userGroupRolePersistence.remove(userGroupRole);
 	}
 

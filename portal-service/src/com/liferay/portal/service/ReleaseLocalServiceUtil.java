@@ -68,8 +68,7 @@ public class ReleaseLocalServiceUtil {
 	}
 
 	public static void deleteRelease(com.liferay.portal.model.Release release)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
 
 		releaseLocalService.deleteRelease(release);

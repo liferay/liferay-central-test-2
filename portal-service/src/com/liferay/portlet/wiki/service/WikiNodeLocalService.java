@@ -58,8 +58,7 @@ public interface WikiNodeLocalService {
 			com.liferay.portal.PortalException;
 
 	public void deleteWikiNode(com.liferay.portlet.wiki.model.WikiNode wikiNode)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiNode> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

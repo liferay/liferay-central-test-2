@@ -294,7 +294,7 @@ public abstract class PasswordTrackerLocalServiceBaseImpl
 	}
 
 	public void deletePasswordTracker(PasswordTracker passwordTracker)
-		throws PortalException, SystemException {
+		throws SystemException {
 		passwordTrackerPersistence.remove(passwordTracker);
 	}
 

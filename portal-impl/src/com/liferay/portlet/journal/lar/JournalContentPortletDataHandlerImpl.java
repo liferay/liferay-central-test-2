@@ -182,17 +182,13 @@ public class JournalContentPortletDataHandlerImpl
 		}
 	}
 
-	public PortletDataHandlerControl[] getExportControls()
-		throws PortletDataException {
-
+	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
 			_selectedArticles, _images, _comments, _ratings, _tags
 		};
 	}
 
-	public PortletDataHandlerControl[] getImportControls()
-		throws PortletDataException {
-
+	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {
 			_selectedArticles, _images, _comments, _ratings, _tags
 		};

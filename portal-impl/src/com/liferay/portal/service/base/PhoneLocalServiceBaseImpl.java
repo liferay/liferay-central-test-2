@@ -290,8 +290,7 @@ public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService,
 		phonePersistence.remove(phoneId);
 	}
 
-	public void deletePhone(Phone phone)
-		throws PortalException, SystemException {
+	public void deletePhone(Phone phone) throws SystemException {
 		phonePersistence.remove(phone);
 	}
 

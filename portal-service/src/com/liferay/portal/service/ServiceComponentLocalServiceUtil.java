@@ -69,8 +69,7 @@ public class ServiceComponentLocalServiceUtil {
 
 	public static void deleteServiceComponent(
 		com.liferay.portal.model.ServiceComponent serviceComponent)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
 
 		serviceComponentLocalService.deleteServiceComponent(serviceComponent);

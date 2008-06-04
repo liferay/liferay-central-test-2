@@ -69,8 +69,7 @@ public class TagsEntryLocalServiceUtil {
 
 	public static void deleteTagsEntry(
 		com.liferay.portlet.tags.model.TagsEntry tagsEntry)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
 
 		tagsEntryLocalService.deleteTagsEntry(tagsEntry);

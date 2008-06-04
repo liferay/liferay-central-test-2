@@ -69,8 +69,7 @@ public class SubscriptionLocalServiceUtil {
 
 	public static void deleteSubscription(
 		com.liferay.portal.model.Subscription subscription)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
 
 		subscriptionLocalService.deleteSubscription(subscription);

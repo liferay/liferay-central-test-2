@@ -54,7 +54,7 @@ public class JournalArticleResourceLocalServiceImpl
 	}
 
 	public long getArticleResourcePrimKey(long groupId, String articleId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		JournalArticleResource articleResource =
 			journalArticleResourcePersistence.fetchByG_A(groupId, articleId);

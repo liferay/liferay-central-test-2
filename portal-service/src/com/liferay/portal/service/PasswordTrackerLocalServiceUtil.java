@@ -69,8 +69,7 @@ public class PasswordTrackerLocalServiceUtil {
 
 	public static void deletePasswordTracker(
 		com.liferay.portal.model.PasswordTracker passwordTracker)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
 
 		passwordTrackerLocalService.deletePasswordTracker(passwordTracker);

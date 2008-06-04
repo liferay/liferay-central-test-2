@@ -108,8 +108,7 @@ public class ClassNameServiceHttp {
 
 	public static com.liferay.portal.model.ClassName getClassName(
 		HttpPrincipal httpPrincipal, java.lang.String value)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = value;
 
@@ -128,10 +127,6 @@ public class ClassNameServiceHttp {
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
-				}
-
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);

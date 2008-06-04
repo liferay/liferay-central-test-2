@@ -59,8 +59,7 @@ public interface ExpandoTableLocalService {
 
 	public void deleteExpandoTable(
 		com.liferay.portlet.expando.model.ExpandoTable expandoTable)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoTable> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

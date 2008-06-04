@@ -72,8 +72,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 		pollsVotePersistence.remove(voteId);
 	}
 
-	public void deletePollsVote(PollsVote pollsVote)
-		throws PortalException, SystemException {
+	public void deletePollsVote(PollsVote pollsVote) throws SystemException {
 		pollsVotePersistence.remove(pollsVote);
 	}
 

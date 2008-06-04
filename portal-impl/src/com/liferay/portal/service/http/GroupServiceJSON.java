@@ -125,8 +125,7 @@ public class GroupServiceJSON {
 
 	public static JSONArray getOrganizationsGroups(
 		java.util.List<com.liferay.portal.model.Organization> organizations)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException {
 		java.util.List<com.liferay.portal.model.Group> returnValue = GroupServiceUtil.getOrganizationsGroups(organizations);
 
 		return GroupJSONSerializer.toJSONArray(returnValue);
@@ -134,8 +133,7 @@ public class GroupServiceJSON {
 
 	public static JSONArray getUserGroupsGroups(
 		java.util.List<com.liferay.portal.model.UserGroup> userGroups)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException {
 		java.util.List<com.liferay.portal.model.Group> returnValue = GroupServiceUtil.getUserGroupsGroups(userGroups);
 
 		return GroupJSONSerializer.toJSONArray(returnValue);

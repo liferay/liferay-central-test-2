@@ -82,7 +82,7 @@ public abstract class TagsSourceLocalServiceBaseImpl
 	}
 
 	public void deleteTagsSource(TagsSource tagsSource)
-		throws PortalException, SystemException {
+		throws SystemException {
 		tagsSourcePersistence.remove(tagsSource);
 	}
 

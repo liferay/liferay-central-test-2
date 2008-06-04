@@ -75,8 +75,7 @@ public interface OrganizationService {
 			com.liferay.portal.PortalException;
 
 	public long getOrganizationId(long companyId, java.lang.String name)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
 		long userId)

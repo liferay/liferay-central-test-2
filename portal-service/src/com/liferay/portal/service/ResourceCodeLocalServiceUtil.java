@@ -69,8 +69,7 @@ public class ResourceCodeLocalServiceUtil {
 
 	public static void deleteResourceCode(
 		com.liferay.portal.model.ResourceCode resourceCode)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
 
 		resourceCodeLocalService.deleteResourceCode(resourceCode);

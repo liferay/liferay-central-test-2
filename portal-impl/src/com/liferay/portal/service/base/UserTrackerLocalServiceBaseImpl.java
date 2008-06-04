@@ -294,7 +294,7 @@ public abstract class UserTrackerLocalServiceBaseImpl
 	}
 
 	public void deleteUserTracker(UserTracker userTracker)
-		throws PortalException, SystemException {
+		throws SystemException {
 		userTrackerPersistence.remove(userTracker);
 	}
 

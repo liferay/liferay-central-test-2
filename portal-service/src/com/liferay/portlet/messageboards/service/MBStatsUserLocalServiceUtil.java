@@ -69,8 +69,7 @@ public class MBStatsUserLocalServiceUtil {
 
 	public static void deleteMBStatsUser(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
 
 		mbStatsUserLocalService.deleteMBStatsUser(mbStatsUser);

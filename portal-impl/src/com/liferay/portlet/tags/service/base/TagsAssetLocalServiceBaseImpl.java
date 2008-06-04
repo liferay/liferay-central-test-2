@@ -164,8 +164,7 @@ public abstract class TagsAssetLocalServiceBaseImpl
 		tagsAssetPersistence.remove(assetId);
 	}
 
-	public void deleteTagsAsset(TagsAsset tagsAsset)
-		throws PortalException, SystemException {
+	public void deleteTagsAsset(TagsAsset tagsAsset) throws SystemException {
 		tagsAssetPersistence.remove(tagsAsset);
 	}
 

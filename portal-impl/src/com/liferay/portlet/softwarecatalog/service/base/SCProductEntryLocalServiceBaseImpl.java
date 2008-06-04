@@ -111,7 +111,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	public void deleteSCProductEntry(SCProductEntry scProductEntry)
-		throws PortalException, SystemException {
+		throws SystemException {
 		scProductEntryPersistence.remove(scProductEntry);
 	}
 

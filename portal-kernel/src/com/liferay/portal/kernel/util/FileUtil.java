@@ -144,19 +144,19 @@ public class FileUtil {
 		return getFile().isAscii(file);
 	}
 
-	public static String[] listDirs(String fileName) throws IOException {
+	public static String[] listDirs(String fileName) {
 		return getFile().listDirs(fileName);
 	}
 
-	public static String[] listDirs(File file) throws IOException {
+	public static String[] listDirs(File file) {
 		return getFile().listDirs(file);
 	}
 
-	public static String[] listFiles(String fileName) throws IOException {
+	public static String[] listFiles(String fileName) {
 		return getFile().listFiles(fileName);
 	}
 
-	public static String[] listFiles(File file) throws IOException {
+	public static String[] listFiles(File file) {
 		return getFile().listFiles(file);
 	}
 

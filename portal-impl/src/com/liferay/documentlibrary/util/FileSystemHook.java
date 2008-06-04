@@ -180,54 +180,43 @@ public class FileSystemHook extends BaseHook {
 
 	public String[] getFileNames(
 			long companyId, long repositoryId, String dirName)
-		throws PortalException, SystemException {
+		throws PortalException {
 
-		try {
-			File dirNameDir = getDirNameDir(companyId, repositoryId, dirName);
+		File dirNameDir = getDirNameDir(companyId, repositoryId, dirName);
 
-			if (!dirNameDir.exists()) {
-				throw new NoSuchDirectoryException();
-			}
-
-			String[] fileNames = FileUtil.listDirs(dirNameDir);
-
-			Arrays.sort(fileNames);
-
-			// Convert /${fileName} to /${dirName}/${fileName}
-
-			for (int i = 0; i < fileNames.length; i++) {
-				fileNames[i] =
-					StringPool.SLASH + dirName + StringPool.SLASH +
-						fileNames[i];
-			}
-
-			return fileNames;
+		if (!dirNameDir.exists()) {
+			throw new NoSuchDirectoryException();
 		}
-		catch (IOException ioe) {
-			throw new SystemException();
+
+		String[] fileNames = FileUtil.listDirs(dirNameDir);
+
+		Arrays.sort(fileNames);
+
+		// Convert /${fileName} to /${dirName}/${fileName}
+
+		for (int i = 0; i < fileNames.length; i++) {
+			fileNames[i] =
+				StringPool.SLASH + dirName + StringPool.SLASH + fileNames[i];
 		}
+
+		return fileNames;
 	}
 
 	public long getFileSize(
 			long companyId, long repositoryId, String fileName)
-		throws PortalException, SystemException {
+		throws PortalException {
 
-		try {
-			double versionNumber = getHeadVersionNumber(
-				companyId, repositoryId, fileName);
+		double versionNumber = getHeadVersionNumber(
+			companyId, repositoryId, fileName);
 
-			File fileNameVersionFile = getFileNameVersionFile(
-				companyId, repositoryId, fileName, versionNumber);
+		File fileNameVersionFile = getFileNameVersionFile(
+			companyId, repositoryId, fileName, versionNumber);
 
-			if (!fileNameVersionFile.exists()) {
-				throw new NoSuchFileException();
-			}
-
-			return fileNameVersionFile.length();
+		if (!fileNameVersionFile.exists()) {
+			throw new NoSuchFileException();
 		}
-		catch (IOException ioe) {
-			throw new SystemException();
-		}
+
+		return fileNameVersionFile.length();
 	}
 
 	public boolean hasFile(
@@ -248,33 +237,28 @@ public class FileSystemHook extends BaseHook {
 	public void move(String srcDir, String destDir) {
 	}
 
-	public void reIndex(String[] ids) throws SearchException {
+	public void reIndex(String[] ids) {
 		long companyId = GetterUtil.getLong(ids[0]);
 		String portletId = ids[1];
 		long groupId = GetterUtil.getLong(ids[2]);
 		long repositoryId = GetterUtil.getLong(ids[3]);
 
-		try {
-			File repistoryDir = getRepositoryDir(companyId, repositoryId);
+		File repistoryDir = getRepositoryDir(companyId, repositoryId);
 
-			String[] fileNames = FileUtil.listDirs(repistoryDir);
+		String[] fileNames = FileUtil.listDirs(repistoryDir);
 
-			for (int i = 0; i < fileNames.length; i++) {
-				String fileName = fileNames[i];
+		for (int i = 0; i < fileNames.length; i++) {
+			String fileName = fileNames[i];
 
-				try {
-					Document doc = Indexer.getFileDocument(
-						companyId, portletId, groupId, repositoryId, fileName);
+			try {
+				Document doc = Indexer.getFileDocument(
+					companyId, portletId, groupId, repositoryId, fileName);
 
-					SearchEngineUtil.addDocument(companyId, doc);
-				}
-				catch (Exception e) {
-					_log.error("Reindexing " + fileName, e);
-				}
+				SearchEngineUtil.addDocument(companyId, doc);
 			}
-		}
-		catch (IOException ioe) {
-			throw new SearchException(ioe);
+			catch (Exception e) {
+				_log.error("Reindexing " + fileName, e);
+			}
 		}
 	}
 
@@ -385,8 +369,7 @@ public class FileSystemHook extends BaseHook {
 	}
 
 	protected double getHeadVersionNumber(
-			long companyId, long repositoryId, String fileName)
-		throws IOException {
+		long companyId, long repositoryId, String fileName) {
 
 		File fileNameDir = getFileNameDir(companyId, repositoryId, fileName);
 

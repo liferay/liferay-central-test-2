@@ -294,7 +294,7 @@ public abstract class PortletItemLocalServiceBaseImpl
 	}
 
 	public void deletePortletItem(PortletItem portletItem)
-		throws PortalException, SystemException {
+		throws SystemException {
 		portletItemPersistence.remove(portletItem);
 	}
 

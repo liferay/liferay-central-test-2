@@ -79,7 +79,7 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 	}
 
 	public void deleteExpandoValue(ExpandoValue expandoValue)
-		throws PortalException, SystemException {
+		throws SystemException {
 		expandoValuePersistence.remove(expandoValue);
 	}
 

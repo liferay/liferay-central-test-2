@@ -155,7 +155,7 @@ public class OrganizationLocalServiceImpl
 
 	public void addPasswordPolicyOrganizations(
 			long passwordPolicyId, long[] organizationIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		passwordPolicyRelLocalService.addPasswordPolicyRels(
 			passwordPolicyId, Organization.class.getName(), organizationIds);
@@ -166,12 +166,6 @@ public class OrganizationLocalServiceImpl
 
 		Organization organization = organizationPersistence.findByPrimaryKey(
 			organizationId);
-
-		deleteOrganization(organization);
-	}
-
-	public void deleteOrganization(Organization organization)
-		throws PortalException, SystemException {
 
 		if ((userLocalService.getOrganizationUsersCount(
 				organization.getOrganizationId(), true) > 0) ||
@@ -215,7 +209,7 @@ public class OrganizationLocalServiceImpl
 
 		Group group = organization.getGroup();
 
-		groupLocalService.deleteGroup(group.getGroupId());
+		groupLocalService.deleteGroup(group);
 
 		// Resources
 
@@ -232,7 +226,7 @@ public class OrganizationLocalServiceImpl
 
 		// Organization
 
-		organizationPersistence.remove(organization.getOrganizationId());
+		organizationPersistence.remove(organization);
 
 		// Permission cache
 
@@ -386,7 +380,7 @@ public class OrganizationLocalServiceImpl
 
 	public boolean hasPasswordPolicyOrganization(
 			long passwordPolicyId, long organizationId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return passwordPolicyRelLocalService.hasPasswordPolicyRel(
 			passwordPolicyId, Organization.class.getName(), organizationId);
@@ -519,7 +513,7 @@ public class OrganizationLocalServiceImpl
 
 	public void unsetPasswordPolicyOrganizations(
 			long passwordPolicyId, long[] organizationIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		passwordPolicyRelLocalService.deletePasswordPolicyRels(
 			passwordPolicyId, Organization.class.getName(), organizationIds);

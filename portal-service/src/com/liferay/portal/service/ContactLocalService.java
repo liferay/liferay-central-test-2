@@ -58,8 +58,7 @@ public interface ContactLocalService {
 			com.liferay.portal.PortalException;
 
 	public void deleteContact(com.liferay.portal.model.Contact contact)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Contact> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

@@ -69,8 +69,7 @@ public class SCProductScreenshotLocalServiceUtil {
 
 	public static void deleteSCProductScreenshot(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
 
 		scProductScreenshotLocalService.deleteSCProductScreenshot(scProductScreenshot);

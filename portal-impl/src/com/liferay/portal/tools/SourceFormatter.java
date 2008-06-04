@@ -582,7 +582,7 @@ public class SourceFormatter {
 		return newContent;
 	}
 
-	private static String[] _getPluginJavaFiles() throws IOException {
+	private static String[] _getPluginJavaFiles() {
 		String basedir = "../";
 
 		List<File> list = new ArrayList<File>();
@@ -617,7 +617,7 @@ public class SourceFormatter {
 		return list.toArray(new String[list.size()]);
 	}
 
-	private static String[] _getPortalJavaFiles() throws IOException {
+	private static String[] _getPortalJavaFiles() {
 		String basedir = "../";
 
 		List<File> list = new ArrayList<File>();

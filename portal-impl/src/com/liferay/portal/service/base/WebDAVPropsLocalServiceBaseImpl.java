@@ -294,7 +294,7 @@ public abstract class WebDAVPropsLocalServiceBaseImpl
 	}
 
 	public void deleteWebDAVProps(WebDAVProps webDAVProps)
-		throws PortalException, SystemException {
+		throws SystemException {
 		webDAVPropsPersistence.remove(webDAVProps);
 	}
 

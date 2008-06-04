@@ -49,7 +49,7 @@ public class IGImagePermission {
 
 	public static void check(
 			PermissionChecker permissionChecker, IGImage image, String actionId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		if (!contains(permissionChecker, image, actionId)) {
 			throw new PrincipalException();
@@ -66,8 +66,7 @@ public class IGImagePermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, IGImage image, String actionId)
-		throws PortalException, SystemException {
+		PermissionChecker permissionChecker, IGImage image, String actionId) {
 
 		IGFolder folder = image.getFolder();
 

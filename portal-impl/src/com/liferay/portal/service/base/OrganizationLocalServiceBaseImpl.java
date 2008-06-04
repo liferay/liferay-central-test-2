@@ -292,7 +292,7 @@ public abstract class OrganizationLocalServiceBaseImpl
 	}
 
 	public void deleteOrganization(Organization organization)
-		throws PortalException, SystemException {
+		throws SystemException {
 		organizationPersistence.remove(organization);
 	}
 

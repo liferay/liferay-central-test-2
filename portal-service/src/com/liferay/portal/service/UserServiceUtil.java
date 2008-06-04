@@ -199,16 +199,14 @@ public class UserServiceUtil {
 	}
 
 	public static boolean hasGroupUser(long groupId, long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
 		return userService.hasGroupUser(groupId, userId);
 	}
 
 	public static boolean hasRoleUser(long roleId, long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
 
 		return userService.hasRoleUser(roleId, userId);

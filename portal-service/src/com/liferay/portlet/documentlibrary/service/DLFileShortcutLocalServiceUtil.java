@@ -69,8 +69,7 @@ public class DLFileShortcutLocalServiceUtil {
 
 	public static void deleteDLFileShortcut(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
 
 		dlFileShortcutLocalService.deleteDLFileShortcut(dlFileShortcut);

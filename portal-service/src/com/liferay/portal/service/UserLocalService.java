@@ -58,8 +58,7 @@ public interface UserLocalService {
 			com.liferay.portal.PortalException;
 
 	public void deleteUser(com.liferay.portal.model.User user)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -86,8 +85,7 @@ public interface UserLocalService {
 			com.liferay.portal.PortalException;
 
 	public void addPasswordPolicyUsers(long passwordPolicyId, long[] userIds)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public void addRoleUsers(long roleId, long[] userIds)
 		throws com.liferay.portal.SystemException,
@@ -175,8 +173,7 @@ public interface UserLocalService {
 			com.liferay.portal.PortalException;
 
 	public void deletePasswordPolicyUser(long passwordPolicyId, long userId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public void deleteRoleUser(long roleId, long userId)
 		throws com.liferay.portal.SystemException,
@@ -343,8 +340,7 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public boolean hasPasswordPolicyUser(long passwordPolicyId, long userId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public boolean hasRoleUser(long roleId, long userId)
 		throws com.liferay.portal.SystemException;
@@ -409,8 +405,7 @@ public interface UserLocalService {
 			com.liferay.portal.PortalException;
 
 	public void unsetPasswordPolicyUsers(long passwordPolicyId, long[] userIds)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public void unsetRoleUsers(long roleId, long[] userIds)
 		throws com.liferay.portal.SystemException,

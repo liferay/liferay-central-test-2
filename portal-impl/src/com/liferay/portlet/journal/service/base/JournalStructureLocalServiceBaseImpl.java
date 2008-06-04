@@ -119,7 +119,7 @@ public abstract class JournalStructureLocalServiceBaseImpl
 	}
 
 	public void deleteJournalStructure(JournalStructure journalStructure)
-		throws PortalException, SystemException {
+		throws SystemException {
 		journalStructurePersistence.remove(journalStructure);
 	}
 

@@ -58,8 +58,7 @@ public interface LayoutSetLocalService {
 			com.liferay.portal.PortalException;
 
 	public void deleteLayoutSet(com.liferay.portal.model.LayoutSet layoutSet)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.LayoutSet> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

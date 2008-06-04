@@ -91,7 +91,7 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 	}
 
 	public void deleteSCProductVersion(SCProductVersion scProductVersion)
-		throws PortalException, SystemException {
+		throws SystemException {
 		scProductVersionPersistence.remove(scProductVersion);
 	}
 

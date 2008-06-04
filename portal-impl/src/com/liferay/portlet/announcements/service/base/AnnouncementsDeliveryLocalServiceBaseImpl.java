@@ -84,8 +84,7 @@ public abstract class AnnouncementsDeliveryLocalServiceBaseImpl
 	}
 
 	public void deleteAnnouncementsDelivery(
-		AnnouncementsDelivery announcementsDelivery)
-		throws PortalException, SystemException {
+		AnnouncementsDelivery announcementsDelivery) throws SystemException {
 		announcementsDeliveryPersistence.remove(announcementsDelivery);
 	}
 

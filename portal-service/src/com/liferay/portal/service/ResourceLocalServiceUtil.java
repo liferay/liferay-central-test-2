@@ -69,8 +69,7 @@ public class ResourceLocalServiceUtil {
 
 	public static void deleteResource(
 		com.liferay.portal.model.Resource resource)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
 
 		resourceLocalService.deleteResource(resource);
@@ -134,9 +133,7 @@ public class ResourceLocalServiceUtil {
 
 	public static com.liferay.portal.model.Resource addResource(
 		long companyId, java.lang.String name, int scope,
-		java.lang.String primKey)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		java.lang.String primKey) throws com.liferay.portal.SystemException {
 		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
 
 		return resourceLocalService.addResource(companyId, name, scope, primKey);

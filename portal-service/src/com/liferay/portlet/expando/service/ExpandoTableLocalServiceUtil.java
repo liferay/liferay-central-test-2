@@ -69,8 +69,7 @@ public class ExpandoTableLocalServiceUtil {
 
 	public static void deleteExpandoTable(
 		com.liferay.portlet.expando.model.ExpandoTable expandoTable)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
 
 		expandoTableLocalService.deleteExpandoTable(expandoTable);

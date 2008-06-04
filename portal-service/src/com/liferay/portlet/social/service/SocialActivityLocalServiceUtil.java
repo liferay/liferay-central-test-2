@@ -69,8 +69,7 @@ public class SocialActivityLocalServiceUtil {
 
 	public static void deleteSocialActivity(
 		com.liferay.portlet.social.model.SocialActivity socialActivity)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		SocialActivityLocalService socialActivityLocalService = SocialActivityLocalServiceFactory.getService();
 
 		socialActivityLocalService.deleteSocialActivity(socialActivity);

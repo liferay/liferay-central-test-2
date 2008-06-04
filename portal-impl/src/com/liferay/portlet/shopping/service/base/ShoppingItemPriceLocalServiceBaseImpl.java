@@ -98,7 +98,7 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 	}
 
 	public void deleteShoppingItemPrice(ShoppingItemPrice shoppingItemPrice)
-		throws PortalException, SystemException {
+		throws SystemException {
 		shoppingItemPricePersistence.remove(shoppingItemPrice);
 	}
 

@@ -59,8 +59,7 @@ public interface JournalFeedLocalService {
 
 	public void deleteJournalFeed(
 		com.liferay.portlet.journal.model.JournalFeed journalFeed)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalFeed> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

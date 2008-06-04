@@ -69,8 +69,7 @@ public class TasksProposalLocalServiceUtil {
 
 	public static void deleteTasksProposal(
 		com.liferay.portlet.tasks.model.TasksProposal tasksProposal)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
 
 		tasksProposalLocalService.deleteTasksProposal(tasksProposal);

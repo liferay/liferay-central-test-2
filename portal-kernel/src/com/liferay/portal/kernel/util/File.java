@@ -85,13 +85,13 @@ public interface File {
 
 	public boolean isAscii(java.io.File file) throws IOException;
 
-	public String[] listDirs(String fileName) throws IOException;
+	public String[] listDirs(String fileName);
 
-	public String[] listDirs(java.io.File file) throws IOException;
+	public String[] listDirs(java.io.File file);
 
-	public String[] listFiles(String fileName) throws IOException;
+	public String[] listFiles(String fileName);
 
-	public String[] listFiles(java.io.File file) throws IOException;
+	public String[] listFiles(java.io.File file);
 
 	public void mkdirs(String pathName);
 

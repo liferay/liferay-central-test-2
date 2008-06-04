@@ -134,8 +134,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 		wikiPagePersistence.remove(pageId);
 	}
 
-	public void deleteWikiPage(WikiPage wikiPage)
-		throws PortalException, SystemException {
+	public void deleteWikiPage(WikiPage wikiPage) throws SystemException {
 		wikiPagePersistence.remove(wikiPage);
 	}
 

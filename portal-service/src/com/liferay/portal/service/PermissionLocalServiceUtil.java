@@ -69,8 +69,7 @@ public class PermissionLocalServiceUtil {
 
 	public static void deletePermission(
 		com.liferay.portal.model.Permission permission)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
 
 		permissionLocalService.deletePermission(permission);
@@ -228,8 +227,7 @@ public class PermissionLocalServiceUtil {
 
 	public static boolean hasRolePermission(long roleId, long companyId,
 		java.lang.String name, int scope, java.lang.String actionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
 
 		return permissionLocalService.hasRolePermission(roleId, companyId,
@@ -238,9 +236,7 @@ public class PermissionLocalServiceUtil {
 
 	public static boolean hasRolePermission(long roleId, long companyId,
 		java.lang.String name, int scope, java.lang.String primKey,
-		java.lang.String actionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		java.lang.String actionId) throws com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
 
 		return permissionLocalService.hasRolePermission(roleId, companyId,

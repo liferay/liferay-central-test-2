@@ -69,8 +69,7 @@ public class ShoppingItemFieldLocalServiceUtil {
 
 	public static void deleteShoppingItemField(
 		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		ShoppingItemFieldLocalService shoppingItemFieldLocalService = ShoppingItemFieldLocalServiceFactory.getService();
 
 		shoppingItemFieldLocalService.deleteShoppingItemField(shoppingItemField);

@@ -431,8 +431,7 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 		groupPersistence.remove(groupId);
 	}
 
-	public void deleteGroup(Group group)
-		throws PortalException, SystemException {
+	public void deleteGroup(Group group) throws SystemException {
 		groupPersistence.remove(group);
 	}
 

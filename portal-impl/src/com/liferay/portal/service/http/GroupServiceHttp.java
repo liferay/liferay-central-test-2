@@ -347,8 +347,7 @@ public class GroupServiceHttp {
 	public static java.util.List<com.liferay.portal.model.Group> getOrganizationsGroups(
 		HttpPrincipal httpPrincipal,
 		java.util.List<com.liferay.portal.model.Organization> organizations)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = organizations;
 
@@ -365,14 +364,6 @@ public class GroupServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				throw new com.liferay.portal.SystemException(e);
 			}
 
@@ -388,8 +379,7 @@ public class GroupServiceHttp {
 	public static java.util.List<com.liferay.portal.model.Group> getUserGroupsGroups(
 		HttpPrincipal httpPrincipal,
 		java.util.List<com.liferay.portal.model.UserGroup> userGroups)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = userGroups;
 
@@ -406,14 +396,6 @@ public class GroupServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				throw new com.liferay.portal.SystemException(e);
 			}
 

@@ -23,7 +23,6 @@
 package com.liferay.portal.security.auth;
 
 import com.liferay.portal.NoSuchUserException;
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -113,7 +112,7 @@ public class CASAutoLogin implements AutoLogin {
 	}
 
 	protected User addUser(long companyId, String screenName)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		try {
 			String baseDN = PrefsPropsUtil.getString(

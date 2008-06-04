@@ -69,8 +69,7 @@ public class LayoutSetLocalServiceUtil {
 
 	public static void deleteLayoutSet(
 		com.liferay.portal.model.LayoutSet layoutSet)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
 
 		layoutSetLocalService.deleteLayoutSet(layoutSet);

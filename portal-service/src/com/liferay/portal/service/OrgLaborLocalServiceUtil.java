@@ -69,8 +69,7 @@ public class OrgLaborLocalServiceUtil {
 
 	public static void deleteOrgLabor(
 		com.liferay.portal.model.OrgLabor orgLabor)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
 
 		orgLaborLocalService.deleteOrgLabor(orgLabor);

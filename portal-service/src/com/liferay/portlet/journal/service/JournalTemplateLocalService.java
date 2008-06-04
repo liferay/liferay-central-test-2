@@ -59,8 +59,7 @@ public interface JournalTemplateLocalService {
 
 	public void deleteJournalTemplate(
 		com.liferay.portlet.journal.model.JournalTemplate journalTemplate)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalTemplate> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

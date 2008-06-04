@@ -69,8 +69,7 @@ public class ExpandoColumnLocalServiceUtil {
 
 	public static void deleteExpandoColumn(
 		com.liferay.portlet.expando.model.ExpandoColumn expandoColumn)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		ExpandoColumnLocalService expandoColumnLocalService = ExpandoColumnLocalServiceFactory.getService();
 
 		expandoColumnLocalService.deleteExpandoColumn(expandoColumn);

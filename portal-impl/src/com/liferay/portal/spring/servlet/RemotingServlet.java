@@ -33,8 +33,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.util.spring.context.LazyWebApplicationContext;
 
-import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -74,7 +72,7 @@ public class RemotingServlet extends DispatcherServlet {
 	}
 
 	public void service(HttpServletRequest req, HttpServletResponse res)
-		throws IOException, ServletException {
+		throws ServletException {
 
 		PermissionCheckerImpl permissionChecker = null;
 

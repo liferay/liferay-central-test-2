@@ -141,7 +141,7 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 	}
 
 	public void deleteBlogsEntry(BlogsEntry blogsEntry)
-		throws PortalException, SystemException {
+		throws SystemException {
 		blogsEntryPersistence.remove(blogsEntry);
 	}
 

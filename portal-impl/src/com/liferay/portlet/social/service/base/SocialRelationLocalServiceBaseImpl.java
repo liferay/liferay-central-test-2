@@ -83,7 +83,7 @@ public abstract class SocialRelationLocalServiceBaseImpl
 	}
 
 	public void deleteSocialRelation(SocialRelation socialRelation)
-		throws PortalException, SystemException {
+		throws SystemException {
 		socialRelationPersistence.remove(socialRelation);
 	}
 

@@ -157,21 +157,16 @@ public interface Portal {
 
 	public String getLayoutViewPage(Layout layout);
 
-	public String getLayoutURL(ThemeDisplay themeDisplay)
-		throws PortalException, SystemException;
+	public String getLayoutURL(ThemeDisplay themeDisplay);
 
-	public String getLayoutURL(Layout layout, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException;
+	public String getLayoutURL(Layout layout, ThemeDisplay themeDisplay);
 
 	public String getLayoutURL(
-			Layout layout, ThemeDisplay themeDisplay, boolean doAsUser)
-		throws PortalException, SystemException;
+		Layout layout, ThemeDisplay themeDisplay, boolean doAsUser);
 
-	public String getLayoutActualURL(Layout layout)
-		throws PortalException, SystemException;
+	public String getLayoutActualURL(Layout layout);
 
-	public String getLayoutActualURL(Layout layout, String mainPath)
-		throws PortalException, SystemException;
+	public String getLayoutActualURL(Layout layout, String mainPath);
 
 	public String getLayoutActualURL(
 			long groupId, boolean privateLayout, String mainPath,
@@ -183,8 +178,8 @@ public interface Portal {
 			String friendlyURL, Map<String, String[]> params)
 		throws PortalException, SystemException;
 
-	public String getLayoutFriendlyURL(Layout layout, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException;
+	public String getLayoutFriendlyURL(
+		Layout layout, ThemeDisplay themeDisplay);
 
 	public String getLayoutSetFriendlyURL(
 			LayoutSet layoutSet, ThemeDisplay themeDisplay)
@@ -359,8 +354,7 @@ public interface Portal {
 	public String getUserValue(long userId, String param, String defaultValue)
 		throws SystemException;
 
-	public String getWidgetURL(Portlet portlet, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException;
+	public String getWidgetURL(Portlet portlet, ThemeDisplay themeDisplay);
 
 	public boolean isMethodGet(PortletRequest req);
 
@@ -452,13 +446,11 @@ public interface Portal {
 	public String transformCustomSQL(String sql);
 
 	public PortletMode updatePortletMode(
-			String portletId, User user, Layout layout, PortletMode portletMode,
-			HttpServletRequest req)
-		throws PortalException, RemoteException, SystemException;
+		String portletId, User user, Layout layout, PortletMode portletMode,
+		HttpServletRequest req);
 
 	public WindowState updateWindowState(
-			String portletId, User user, Layout layout, WindowState windowState,
-			HttpServletRequest req)
-		throws PortalException, RemoteException, SystemException;
+		String portletId, User user, Layout layout, WindowState windowState,
+		HttpServletRequest req);
 
 }

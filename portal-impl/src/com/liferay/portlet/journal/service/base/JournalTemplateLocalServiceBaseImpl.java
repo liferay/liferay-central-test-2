@@ -119,7 +119,7 @@ public abstract class JournalTemplateLocalServiceBaseImpl
 	}
 
 	public void deleteJournalTemplate(JournalTemplate journalTemplate)
-		throws PortalException, SystemException {
+		throws SystemException {
 		journalTemplatePersistence.remove(journalTemplate);
 	}
 

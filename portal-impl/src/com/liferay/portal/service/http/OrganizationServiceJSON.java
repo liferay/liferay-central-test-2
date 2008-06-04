@@ -113,8 +113,7 @@ public class OrganizationServiceJSON {
 	}
 
 	public static long getOrganizationId(long companyId, java.lang.String name)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		long returnValue = OrganizationServiceUtil.getOrganizationId(companyId,
 				name);
 

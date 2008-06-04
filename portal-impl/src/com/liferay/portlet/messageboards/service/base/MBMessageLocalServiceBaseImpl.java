@@ -180,8 +180,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 		mbMessagePersistence.remove(messageId);
 	}
 
-	public void deleteMBMessage(MBMessage mbMessage)
-		throws PortalException, SystemException {
+	public void deleteMBMessage(MBMessage mbMessage) throws SystemException {
 		mbMessagePersistence.remove(mbMessage);
 	}
 

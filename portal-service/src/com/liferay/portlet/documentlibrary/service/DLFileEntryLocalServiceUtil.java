@@ -69,8 +69,7 @@ public class DLFileEntryLocalServiceUtil {
 
 	public static void deleteDLFileEntry(
 		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
 		dlFileEntryLocalService.deleteDLFileEntry(dlFileEntry);

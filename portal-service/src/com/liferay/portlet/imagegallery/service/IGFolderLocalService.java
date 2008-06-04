@@ -59,8 +59,7 @@ public interface IGFolderLocalService {
 
 	public void deleteIGFolder(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

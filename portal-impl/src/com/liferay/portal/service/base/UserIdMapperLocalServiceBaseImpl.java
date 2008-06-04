@@ -294,7 +294,7 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 	}
 
 	public void deleteUserIdMapper(UserIdMapper userIdMapper)
-		throws PortalException, SystemException {
+		throws SystemException {
 		userIdMapperPersistence.remove(userIdMapper);
 	}
 

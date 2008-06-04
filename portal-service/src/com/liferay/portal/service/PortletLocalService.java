@@ -58,8 +58,7 @@ public interface PortletLocalService {
 			com.liferay.portal.PortalException;
 
 	public void deletePortlet(com.liferay.portal.model.Portlet portlet)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Portlet> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

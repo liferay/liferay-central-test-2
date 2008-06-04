@@ -5,8 +5,6 @@ package ${springUtilPackage};
 
 import ${propsUtilPackage}.PropsUtil;
 
-import java.io.IOException;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -32,7 +30,7 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
 public class LazyClassPathApplicationContext extends XmlWebApplicationContext {
 
 	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader)
-		throws BeansException, IOException {
+		throws BeansException {
 
 		try {
 			super.loadBeanDefinitions(reader);

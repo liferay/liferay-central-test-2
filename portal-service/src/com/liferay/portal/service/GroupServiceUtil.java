@@ -108,8 +108,7 @@ public class GroupServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.Group> getOrganizationsGroups(
 		java.util.List<com.liferay.portal.model.Organization> organizations)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
 
 		return groupService.getOrganizationsGroups(organizations);
@@ -117,8 +116,7 @@ public class GroupServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.Group> getUserGroupsGroups(
 		java.util.List<com.liferay.portal.model.UserGroup> userGroups)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
 
 		return groupService.getUserGroupsGroups(userGroups);

@@ -69,8 +69,7 @@ public class AnnouncementsFlagLocalServiceUtil {
 
 	public static void deleteAnnouncementsFlag(
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
 
 		announcementsFlagLocalService.deleteAnnouncementsFlag(announcementsFlag);

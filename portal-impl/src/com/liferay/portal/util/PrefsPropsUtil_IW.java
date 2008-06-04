@@ -313,9 +313,7 @@ public class PrefsPropsUtil_IW {
 
 	public java.lang.String[] getStringArray(
 		javax.portlet.PortletPreferences prefs, long companyId,
-		java.lang.String name, java.lang.String delimiter)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		java.lang.String name, java.lang.String delimiter) {
 		return PrefsPropsUtil.getStringArray(prefs, companyId, name, delimiter);
 	}
 
@@ -338,9 +336,7 @@ public class PrefsPropsUtil_IW {
 	public java.lang.String[] getStringArray(
 		javax.portlet.PortletPreferences prefs, long companyId,
 		java.lang.String name, java.lang.String delimiter,
-		java.lang.String[] defaultValue)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		java.lang.String[] defaultValue) {
 		return PrefsPropsUtil.getStringArray(prefs, companyId, name, delimiter,
 			defaultValue);
 	}

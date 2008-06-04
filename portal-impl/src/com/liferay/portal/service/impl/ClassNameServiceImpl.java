@@ -41,9 +41,7 @@ public class ClassNameServiceImpl extends ClassNameServiceBaseImpl {
 		return classNameLocalService.getClassName(classNameId);
 	}
 
-	public ClassName getClassName(String value)
-		throws PortalException, SystemException {
-
+	public ClassName getClassName(String value) throws SystemException {
 		return classNameLocalService.getClassName(value);
 	}
 

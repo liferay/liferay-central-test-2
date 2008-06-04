@@ -59,8 +59,7 @@ public interface MBCategoryLocalService {
 
 	public void deleteMBCategory(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

@@ -75,7 +75,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	}
 
 	public void deleteAnnouncementsFlag(AnnouncementsFlag announcementsFlag)
-		throws PortalException, SystemException {
+		throws SystemException {
 		announcementsFlagPersistence.remove(announcementsFlag);
 	}
 

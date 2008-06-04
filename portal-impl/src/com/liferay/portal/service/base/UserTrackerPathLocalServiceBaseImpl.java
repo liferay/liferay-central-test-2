@@ -294,7 +294,7 @@ public abstract class UserTrackerPathLocalServiceBaseImpl
 	}
 
 	public void deleteUserTrackerPath(UserTrackerPath userTrackerPath)
-		throws PortalException, SystemException {
+		throws SystemException {
 		userTrackerPathPersistence.remove(userTrackerPath);
 	}
 

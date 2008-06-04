@@ -291,8 +291,7 @@ public abstract class ClassNameLocalServiceBaseImpl
 		classNamePersistence.remove(classNameId);
 	}
 
-	public void deleteClassName(ClassName className)
-		throws PortalException, SystemException {
+	public void deleteClassName(ClassName className) throws SystemException {
 		classNamePersistence.remove(className);
 	}
 

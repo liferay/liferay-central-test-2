@@ -75,7 +75,7 @@ public abstract class PollsChoiceLocalServiceBaseImpl
 	}
 
 	public void deletePollsChoice(PollsChoice pollsChoice)
-		throws PortalException, SystemException {
+		throws SystemException {
 		pollsChoicePersistence.remove(pollsChoice);
 	}
 

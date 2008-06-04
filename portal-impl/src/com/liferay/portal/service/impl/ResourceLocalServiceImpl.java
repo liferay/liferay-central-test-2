@@ -167,7 +167,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 	public Resource addResource(
 			long companyId, String name, int scope, String primKey)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		ResourceCode resourceCode = resourceCodeLocalService.getResourceCode(
 			companyId, name, scope);
@@ -303,9 +303,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		}
 	}
 
-	public void deleteResource(long resourceId)
-		throws PortalException, SystemException {
-
+	public void deleteResource(long resourceId) throws SystemException {
 		try {
 			Resource resource = resourcePersistence.findByPrimaryKey(
 				resourceId);
@@ -317,8 +315,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		}
 	}
 
-	public void deleteResource(Resource resource)
-		throws PortalException, SystemException {
+	public void deleteResource(Resource resource) throws SystemException {
 
 		// Permissions
 
@@ -334,7 +331,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		// Resource
 
-		resourcePersistence.remove(resource.getResourceId());
+		resourcePersistence.remove(resource);
 	}
 
 	public void deleteResource(
@@ -358,9 +355,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		}
 	}
 
-	public void deleteResources(String name)
-		throws PortalException, SystemException {
-
+	public void deleteResources(String name) throws SystemException {
 		List<Resource> resources = resourceFinder.findByName(name);
 
 		for (Resource resource : resources) {

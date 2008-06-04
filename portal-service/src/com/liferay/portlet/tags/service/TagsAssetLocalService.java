@@ -59,8 +59,7 @@ public interface TagsAssetLocalService {
 
 	public void deleteTagsAsset(
 		com.liferay.portlet.tags.model.TagsAsset tagsAsset)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

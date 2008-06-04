@@ -59,8 +59,7 @@ public interface PortletPreferencesLocalService {
 
 	public void deletePortletPreferences(
 		com.liferay.portal.model.PortletPreferences portletPreferences)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.PortletPreferences> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

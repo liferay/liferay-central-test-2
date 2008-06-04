@@ -282,9 +282,7 @@ public class JournalUtil {
 		return xml;
 	}
 
-	public static String formatXML(Document doc)
-		throws DocumentException, IOException {
-
+	public static String formatXML(Document doc) throws IOException {
 		return XMLFormatter.toString(doc, XML_INDENT);
 	}
 
@@ -354,8 +352,7 @@ public class JournalUtil {
 	}
 
 	public static String getEmailArticleApprovalDeniedBody(
-			PortletPreferences prefs)
-		throws IOException {
+		PortletPreferences prefs) {
 
 		String emailArticleApprovalDeniedBody = prefs.getValue(
 			"email-article-approval-denied-body", StringPool.BLANK);
@@ -370,8 +367,7 @@ public class JournalUtil {
 	}
 
 	public static String getEmailArticleApprovalDeniedSubject(
-			PortletPreferences prefs)
-		throws IOException {
+		PortletPreferences prefs) {
 
 		String emailArticleApprovalDeniedSubject = prefs.getValue(
 			"email-article-approval-denied-subject", StringPool.BLANK);
@@ -401,8 +397,7 @@ public class JournalUtil {
 	}
 
 	public static String getEmailArticleApprovalGrantedBody(
-			PortletPreferences prefs)
-		throws IOException {
+		PortletPreferences prefs) {
 
 		String emailArticleApprovalGrantedBody = prefs.getValue(
 			"email-article-approval-granted-body", StringPool.BLANK);
@@ -417,8 +412,7 @@ public class JournalUtil {
 	}
 
 	public static String getEmailArticleApprovalGrantedSubject(
-			PortletPreferences prefs)
-		throws IOException {
+		PortletPreferences prefs) {
 
 		String emailArticleApprovalGrantedSubject = prefs.getValue(
 			"email-article-approval-granted-subject", StringPool.BLANK);
@@ -448,8 +442,7 @@ public class JournalUtil {
 	}
 
 	public static String getEmailArticleApprovalRequestedBody(
-			PortletPreferences prefs)
-		throws IOException {
+		PortletPreferences prefs) {
 
 		String emailArticleApprovalRequestedBody = prefs.getValue(
 			"email-article-approval-requested-body", StringPool.BLANK);
@@ -464,8 +457,7 @@ public class JournalUtil {
 	}
 
 	public static String getEmailArticleApprovalRequestedSubject(
-			PortletPreferences prefs)
-		throws IOException {
+		PortletPreferences prefs) {
 
 		String emailArticleApprovalRequestedSubject = prefs.getValue(
 			"email-article-approval-requested-subject", StringPool.BLANK);
@@ -494,9 +486,7 @@ public class JournalUtil {
 		}
 	}
 
-	public static String getEmailArticleReviewBody(PortletPreferences prefs)
-		throws IOException {
-
+	public static String getEmailArticleReviewBody(PortletPreferences prefs) {
 		String emailArticleReviewBody = prefs.getValue(
 			"email-article-review-body", StringPool.BLANK);
 
@@ -509,8 +499,8 @@ public class JournalUtil {
 		}
 	}
 
-	public static String getEmailArticleReviewSubject(PortletPreferences prefs)
-		throws IOException {
+	public static String getEmailArticleReviewSubject(
+		PortletPreferences prefs) {
 
 		String emailArticleReviewSubject = prefs.getValue(
 			"email-article-review-subject", StringPool.BLANK);
@@ -600,9 +590,8 @@ public class JournalUtil {
 	}
 
 	public static String getTemplateScript(
-			JournalTemplate template, Map<String, String> tokens,
-			String languageId, boolean transform)
-		throws PortalException, SystemException {
+		JournalTemplate template, Map<String, String> tokens, String languageId,
+		boolean transform) {
 
 		String script = template.getXsl();
 

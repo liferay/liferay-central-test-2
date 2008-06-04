@@ -30,7 +30,7 @@ package com.liferay.portal.upgrade;
  */
 public class UpgradePause extends UpgradeProcess {
 
-	public void upgrade() throws UpgradeException {
+	public void upgrade() {
 		System.exit(0);
 	}
 

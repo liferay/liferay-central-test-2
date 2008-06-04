@@ -58,8 +58,7 @@ public interface ReleaseLocalService {
 			com.liferay.portal.PortalException;
 
 	public void deleteRelease(com.liferay.portal.model.Release release)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Release> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

@@ -89,7 +89,7 @@ public abstract class PollsQuestionLocalServiceBaseImpl
 	}
 
 	public void deletePollsQuestion(PollsQuestion pollsQuestion)
-		throws PortalException, SystemException {
+		throws SystemException {
 		pollsQuestionPersistence.remove(pollsQuestion);
 	}
 

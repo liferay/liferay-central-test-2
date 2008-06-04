@@ -53,8 +53,7 @@ public class SAPUtil extends DBUtil {
 	protected SAPUtil() {
 	}
 
-	protected void buildCreateFile(String databaseName, boolean minimal)
-		throws IOException {
+	protected void buildCreateFile(String databaseName, boolean minimal) {
 	}
 
 	protected String getServerName() {

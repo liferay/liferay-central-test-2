@@ -80,8 +80,7 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 	}
 
 	public void deleteSCProductScreenshot(
-		SCProductScreenshot scProductScreenshot)
-		throws PortalException, SystemException {
+		SCProductScreenshot scProductScreenshot) throws SystemException {
 		scProductScreenshotPersistence.remove(scProductScreenshot);
 	}
 

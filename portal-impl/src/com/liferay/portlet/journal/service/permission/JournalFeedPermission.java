@@ -59,7 +59,7 @@ public class JournalFeedPermission {
 	public static void check(
 			PermissionChecker permissionChecker, JournalFeed feed,
 			String actionId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		if (!contains(permissionChecker, feed, actionId)) {
 			throw new PrincipalException();
@@ -86,9 +86,8 @@ public class JournalFeedPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, JournalFeed feed,
-			String actionId)
-		throws PortalException, SystemException {
+		PermissionChecker permissionChecker, JournalFeed feed,
+		String actionId) {
 
 		return permissionChecker.hasPermission(
 			feed.getGroupId(), JournalFeed.class.getName(), feed.getId(),

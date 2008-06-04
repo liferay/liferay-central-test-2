@@ -69,8 +69,7 @@ public class CalEventLocalServiceUtil {
 
 	public static void deleteCalEvent(
 		com.liferay.portlet.calendar.model.CalEvent calEvent)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
 		calEventLocalService.deleteCalEvent(calEvent);

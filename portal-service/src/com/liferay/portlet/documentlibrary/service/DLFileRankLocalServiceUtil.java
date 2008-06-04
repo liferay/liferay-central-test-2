@@ -69,8 +69,7 @@ public class DLFileRankLocalServiceUtil {
 
 	public static void deleteDLFileRank(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
 
 		dlFileRankLocalService.deleteDLFileRank(dlFileRank);

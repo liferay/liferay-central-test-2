@@ -101,8 +101,7 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 	}
 
 	public void deleteJournalArticleImage(
-		JournalArticleImage journalArticleImage)
-		throws PortalException, SystemException {
+		JournalArticleImage journalArticleImage) throws SystemException {
 		journalArticleImagePersistence.remove(journalArticleImage);
 	}
 

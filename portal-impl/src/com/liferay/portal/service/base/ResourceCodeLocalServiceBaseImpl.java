@@ -294,7 +294,7 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 	}
 
 	public void deleteResourceCode(ResourceCode resourceCode)
-		throws PortalException, SystemException {
+		throws SystemException {
 		resourceCodePersistence.remove(resourceCode);
 	}
 

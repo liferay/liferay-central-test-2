@@ -59,8 +59,7 @@ public interface ShoppingCartLocalService {
 
 	public void deleteShoppingCart(
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCart> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

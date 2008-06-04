@@ -23,7 +23,6 @@
 package com.liferay.portal.security.pwd;
 
 import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.PasswordPolicy;
@@ -55,7 +54,7 @@ public class RegExpToolkit extends BasicToolkit {
 	public void validate(
 			long userId, String password1, String password2,
 			PasswordPolicy passwordPolicy)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		boolean value = password1.matches(_pattern);
 

@@ -68,8 +68,7 @@ public class WebsiteLocalServiceUtil {
 	}
 
 	public static void deleteWebsite(com.liferay.portal.model.Website website)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
 
 		websiteLocalService.deleteWebsite(website);

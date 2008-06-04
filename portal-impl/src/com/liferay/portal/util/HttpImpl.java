@@ -227,9 +227,7 @@ public class HttpImpl implements Http {
 		}
 	}
 
-	public HttpClient getClient(HostConfiguration hostConfig)
-		throws IOException {
-
+	public HttpClient getClient(HostConfiguration hostConfig) {
 		if (isProxyHost(hostConfig.getHost())) {
 			return _proxyClient;
 		}

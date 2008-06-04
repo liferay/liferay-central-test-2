@@ -68,8 +68,7 @@ public class PortletLocalServiceUtil {
 	}
 
 	public static void deletePortlet(com.liferay.portal.model.Portlet portlet)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 
 		portletLocalService.deletePortlet(portlet);

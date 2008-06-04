@@ -69,8 +69,7 @@ public class MBCategoryLocalServiceUtil {
 
 	public static void deleteMBCategory(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 
 		mbCategoryLocalService.deleteMBCategory(mbCategory);

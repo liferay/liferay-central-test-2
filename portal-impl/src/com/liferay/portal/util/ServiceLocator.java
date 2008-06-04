@@ -61,7 +61,7 @@ public class ServiceLocator {
 		return obj;
 	}
 
-	public Object findExceptionSafeService(Class serviceClass) {
+	public Object findExceptionSafeService(Class<?> serviceClass) {
 		Object obj = findService(serviceClass.getName());
 
 		if (obj != null) {

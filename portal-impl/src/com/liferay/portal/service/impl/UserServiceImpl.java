@@ -264,13 +264,13 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	}
 
 	public boolean hasGroupUser(long groupId, long userId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return userLocalService.hasGroupUser(groupId, userId);
 	}
 
 	public boolean hasRoleUser(long roleId, long userId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return userLocalService.hasRoleUser(roleId, userId);
 	}

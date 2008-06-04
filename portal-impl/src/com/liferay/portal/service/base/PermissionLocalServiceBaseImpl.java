@@ -292,7 +292,7 @@ public abstract class PermissionLocalServiceBaseImpl
 	}
 
 	public void deletePermission(Permission permission)
-		throws PortalException, SystemException {
+		throws SystemException {
 		permissionPersistence.remove(permission);
 	}
 

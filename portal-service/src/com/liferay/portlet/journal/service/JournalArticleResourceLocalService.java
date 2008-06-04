@@ -59,8 +59,7 @@ public interface JournalArticleResourceLocalService {
 
 	public void deleteJournalArticleResource(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticleResource> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -89,9 +88,7 @@ public interface JournalArticleResourceLocalService {
 			com.liferay.portal.PortalException;
 
 	public long getArticleResourcePrimKey(long groupId,
-		java.lang.String articleId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		java.lang.String articleId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticleResource> getArticleResources(
 		long groupId) throws com.liferay.portal.SystemException;

@@ -69,8 +69,7 @@ public class WikiPageResourceLocalServiceUtil {
 
 	public static void deleteWikiPageResource(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
 
 		wikiPageResourceLocalService.deleteWikiPageResource(wikiPageResource);

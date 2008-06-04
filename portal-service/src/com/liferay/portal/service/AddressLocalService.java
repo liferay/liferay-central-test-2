@@ -58,8 +58,7 @@ public interface AddressLocalService {
 			com.liferay.portal.PortalException;
 
 	public void deleteAddress(com.liferay.portal.model.Address address)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Address> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

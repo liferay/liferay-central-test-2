@@ -69,8 +69,7 @@ public class UserIdMapperLocalServiceUtil {
 
 	public static void deleteUserIdMapper(
 		com.liferay.portal.model.UserIdMapper userIdMapper)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
 
 		userIdMapperLocalService.deleteUserIdMapper(userIdMapper);

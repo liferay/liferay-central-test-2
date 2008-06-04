@@ -120,8 +120,7 @@ public abstract class DLFolderLocalServiceBaseImpl
 		dlFolderPersistence.remove(folderId);
 	}
 
-	public void deleteDLFolder(DLFolder dlFolder)
-		throws PortalException, SystemException {
+	public void deleteDLFolder(DLFolder dlFolder) throws SystemException {
 		dlFolderPersistence.remove(dlFolder);
 	}
 

@@ -94,8 +94,7 @@ public abstract class CalEventLocalServiceBaseImpl
 		calEventPersistence.remove(eventId);
 	}
 
-	public void deleteCalEvent(CalEvent calEvent)
-		throws PortalException, SystemException {
+	public void deleteCalEvent(CalEvent calEvent) throws SystemException {
 		calEventPersistence.remove(calEvent);
 	}
 

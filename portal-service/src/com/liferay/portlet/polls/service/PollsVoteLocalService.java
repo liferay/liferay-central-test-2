@@ -59,8 +59,7 @@ public interface PollsVoteLocalService {
 
 	public void deletePollsVote(
 		com.liferay.portlet.polls.model.PollsVote pollsVote)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.polls.model.PollsVote> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

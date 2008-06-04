@@ -290,8 +290,7 @@ public abstract class OrgLaborLocalServiceBaseImpl
 		orgLaborPersistence.remove(orgLaborId);
 	}
 
-	public void deleteOrgLabor(OrgLabor orgLabor)
-		throws PortalException, SystemException {
+	public void deleteOrgLabor(OrgLabor orgLabor) throws SystemException {
 		orgLaborPersistence.remove(orgLabor);
 	}
 

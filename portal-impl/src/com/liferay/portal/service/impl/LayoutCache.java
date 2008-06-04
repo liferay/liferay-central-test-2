@@ -57,7 +57,7 @@ public class LayoutCache  {
 
 	protected long getEntityGroupId(
 			long companyId, String entityName, String name)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long entityGroupId = 0;
 
@@ -115,7 +115,7 @@ public class LayoutCache  {
 	}
 
 	protected Map<String, Long> getEntityMap(long companyId, String entityName)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		Map<String, Long> entityMap = entityMapMap.get(entityName);
 

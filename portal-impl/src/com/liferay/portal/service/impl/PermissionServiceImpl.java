@@ -56,7 +56,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 
 	public boolean hasGroupPermission(
 			long groupId, String actionId, long resourceId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return permissionLocalService.hasGroupPermission(
 			groupId, actionId, resourceId);
@@ -64,7 +64,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 
 	public boolean hasUserPermission(
 			long userId, String actionId, long resourceId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return permissionLocalService.hasUserPermission(
 			userId, actionId, resourceId);
@@ -73,7 +73,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 	public boolean hasUserPermissions(
 			long userId, long groupId, String actionId, long[] resourceIds,
 			PermissionCheckerBag permissionCheckerBag)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return permissionLocalService.hasUserPermissions(
 			userId, groupId, actionId, resourceIds, permissionCheckerBag);

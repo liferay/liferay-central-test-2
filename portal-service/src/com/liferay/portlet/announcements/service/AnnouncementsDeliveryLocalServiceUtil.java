@@ -69,8 +69,7 @@ public class AnnouncementsDeliveryLocalServiceUtil {
 
 	public static void deleteAnnouncementsDelivery(
 		com.liferay.portlet.announcements.model.AnnouncementsDelivery announcementsDelivery)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getService();
 
 		announcementsDeliveryLocalService.deleteAnnouncementsDelivery(announcementsDelivery);

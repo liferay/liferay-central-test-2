@@ -69,8 +69,7 @@ public class TasksReviewLocalServiceUtil {
 
 	public static void deleteTasksReview(
 		com.liferay.portlet.tasks.model.TasksReview tasksReview)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
 
 		tasksReviewLocalService.deleteTasksReview(tasksReview);

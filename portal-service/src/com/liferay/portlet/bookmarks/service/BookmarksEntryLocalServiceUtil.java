@@ -69,8 +69,7 @@ public class BookmarksEntryLocalServiceUtil {
 
 	public static void deleteBookmarksEntry(
 		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 
 		bookmarksEntryLocalService.deleteBookmarksEntry(bookmarksEntry);

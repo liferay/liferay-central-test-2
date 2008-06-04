@@ -69,8 +69,7 @@ public class MBBanLocalServiceUtil {
 
 	public static void deleteMBBan(
 		com.liferay.portlet.messageboards.model.MBBan mbBan)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
 
 		mbBanLocalService.deleteMBBan(mbBan);

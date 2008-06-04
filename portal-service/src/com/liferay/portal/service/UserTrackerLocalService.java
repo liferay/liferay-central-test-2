@@ -59,8 +59,7 @@ public interface UserTrackerLocalService {
 
 	public void deleteUserTracker(
 		com.liferay.portal.model.UserTracker userTracker)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserTracker> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

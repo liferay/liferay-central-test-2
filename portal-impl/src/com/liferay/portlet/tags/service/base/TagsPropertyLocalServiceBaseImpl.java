@@ -95,7 +95,7 @@ public abstract class TagsPropertyLocalServiceBaseImpl
 	}
 
 	public void deleteTagsProperty(TagsProperty tagsProperty)
-		throws PortalException, SystemException {
+		throws SystemException {
 		tagsPropertyPersistence.remove(tagsProperty);
 	}
 

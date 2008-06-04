@@ -83,7 +83,7 @@ public abstract class TasksReviewLocalServiceBaseImpl
 	}
 
 	public void deleteTasksReview(TasksReview tasksReview)
-		throws PortalException, SystemException {
+		throws SystemException {
 		tasksReviewPersistence.remove(tasksReview);
 	}
 

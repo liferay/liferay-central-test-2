@@ -87,7 +87,7 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 	}
 
 	public void deleteRatingsEntry(RatingsEntry ratingsEntry)
-		throws PortalException, SystemException {
+		throws SystemException {
 		ratingsEntryPersistence.remove(ratingsEntry);
 	}
 

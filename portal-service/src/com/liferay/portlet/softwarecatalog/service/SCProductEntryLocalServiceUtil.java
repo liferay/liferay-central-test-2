@@ -69,8 +69,7 @@ public class SCProductEntryLocalServiceUtil {
 
 	public static void deleteSCProductEntry(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
 		scProductEntryLocalService.deleteSCProductEntry(scProductEntry);

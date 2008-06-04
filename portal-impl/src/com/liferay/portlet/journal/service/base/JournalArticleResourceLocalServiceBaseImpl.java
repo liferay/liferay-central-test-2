@@ -104,7 +104,7 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 
 	public void deleteJournalArticleResource(
 		JournalArticleResource journalArticleResource)
-		throws PortalException, SystemException {
+		throws SystemException {
 		journalArticleResourcePersistence.remove(journalArticleResource);
 	}
 

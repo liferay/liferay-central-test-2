@@ -289,7 +289,7 @@ public abstract class RoleLocalServiceBaseImpl implements RoleLocalService,
 		rolePersistence.remove(roleId);
 	}
 
-	public void deleteRole(Role role) throws PortalException, SystemException {
+	public void deleteRole(Role role) throws SystemException {
 		rolePersistence.remove(role);
 	}
 

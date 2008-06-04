@@ -57,7 +57,6 @@ import com.liferay.util.MapUtil;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.File;
-import java.io.IOException;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -111,7 +110,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 	public static void exportArticle(
 			PortletDataContext context, Element articlesEl,
 			JournalArticle article)
-		throws IOException, PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		if (!context.isWithinDateRange(article.getModifiedDate())) {
 			return;
@@ -800,17 +799,13 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	public PortletDataHandlerControl[] getExportControls()
-		throws PortletDataException {
-
+	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
 			_articlesStructuresAndTemplates, _images, _comments, _ratings, _tags
 		};
 	}
 
-	public PortletDataHandlerControl[] getImportControls()
-		throws PortletDataException {
-
+	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {
 			_articlesStructuresAndTemplates, _images, _comments, _ratings, _tags
 		};

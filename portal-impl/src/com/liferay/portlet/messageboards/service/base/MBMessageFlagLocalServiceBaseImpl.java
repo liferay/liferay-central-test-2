@@ -107,7 +107,7 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 	}
 
 	public void deleteMBMessageFlag(MBMessageFlag mbMessageFlag)
-		throws PortalException, SystemException {
+		throws SystemException {
 		mbMessageFlagPersistence.remove(mbMessageFlag);
 	}
 

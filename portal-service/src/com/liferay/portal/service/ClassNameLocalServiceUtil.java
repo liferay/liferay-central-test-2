@@ -69,8 +69,7 @@ public class ClassNameLocalServiceUtil {
 
 	public static void deleteClassName(
 		com.liferay.portal.model.ClassName className)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
 
 		classNameLocalService.deleteClassName(className);

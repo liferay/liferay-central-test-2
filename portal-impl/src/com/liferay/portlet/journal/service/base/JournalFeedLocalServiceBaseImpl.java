@@ -115,7 +115,7 @@ public abstract class JournalFeedLocalServiceBaseImpl
 	}
 
 	public void deleteJournalFeed(JournalFeed journalFeed)
-		throws PortalException, SystemException {
+		throws SystemException {
 		journalFeedPersistence.remove(journalFeed);
 	}
 

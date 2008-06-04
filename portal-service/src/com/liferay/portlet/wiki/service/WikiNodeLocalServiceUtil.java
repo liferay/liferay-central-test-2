@@ -69,8 +69,7 @@ public class WikiNodeLocalServiceUtil {
 
 	public static void deleteWikiNode(
 		com.liferay.portlet.wiki.model.WikiNode wikiNode)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
 
 		wikiNodeLocalService.deleteWikiNode(wikiNode);

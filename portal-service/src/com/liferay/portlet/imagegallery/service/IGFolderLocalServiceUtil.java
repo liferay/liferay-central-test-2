@@ -69,8 +69,7 @@ public class IGFolderLocalServiceUtil {
 
 	public static void deleteIGFolder(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 
 		igFolderLocalService.deleteIGFolder(igFolder);

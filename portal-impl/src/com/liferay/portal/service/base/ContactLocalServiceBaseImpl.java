@@ -285,8 +285,7 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 		contactPersistence.remove(contactId);
 	}
 
-	public void deleteContact(Contact contact)
-		throws PortalException, SystemException {
+	public void deleteContact(Contact contact) throws SystemException {
 		contactPersistence.remove(contact);
 	}
 

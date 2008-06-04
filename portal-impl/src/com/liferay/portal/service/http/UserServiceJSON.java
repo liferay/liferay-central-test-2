@@ -207,16 +207,14 @@ public class UserServiceJSON {
 	}
 
 	public static boolean hasGroupUser(long groupId, long userId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		boolean returnValue = UserServiceUtil.hasGroupUser(groupId, userId);
 
 		return returnValue;
 	}
 
 	public static boolean hasRoleUser(long roleId, long userId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		boolean returnValue = UserServiceUtil.hasRoleUser(roleId, userId);
 
 		return returnValue;

@@ -99,7 +99,7 @@ public abstract class DLFileRankLocalServiceBaseImpl
 	}
 
 	public void deleteDLFileRank(DLFileRank dlFileRank)
-		throws PortalException, SystemException {
+		throws SystemException {
 		dlFileRankPersistence.remove(dlFileRank);
 	}
 

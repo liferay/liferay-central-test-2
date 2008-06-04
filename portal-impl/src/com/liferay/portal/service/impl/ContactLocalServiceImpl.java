@@ -54,8 +54,7 @@ public class ContactLocalServiceImpl extends ContactLocalServiceBaseImpl {
 		}
 	}
 
-	public void deleteContact(Contact contact)
-		throws PortalException, SystemException {
+	public void deleteContact(Contact contact) throws SystemException {
 
 		// Addresses
 
@@ -83,7 +82,7 @@ public class ContactLocalServiceImpl extends ContactLocalServiceBaseImpl {
 
 		// Contact
 
-		contactPersistence.remove(contact.getContactId());
+		contactPersistence.remove(contact);
 	}
 
 }

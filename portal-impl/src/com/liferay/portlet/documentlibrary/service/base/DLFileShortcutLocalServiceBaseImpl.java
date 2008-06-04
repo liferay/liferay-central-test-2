@@ -105,7 +105,7 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 	}
 
 	public void deleteDLFileShortcut(DLFileShortcut dlFileShortcut)
-		throws PortalException, SystemException {
+		throws SystemException {
 		dlFileShortcutPersistence.remove(dlFileShortcut);
 	}
 

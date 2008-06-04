@@ -78,7 +78,7 @@ public class PortletLister {
 		PortletCategory portletCategory = (PortletCategory)WebAppPool.get(
 			String.valueOf(user.getCompanyId()), WebKeys.PORTLET_CATEGORY);
 
-		List categories = ListUtil.fromCollection(
+		List<PortletCategory> categories = ListUtil.fromCollection(
 			portletCategory.getCategories());
 
 		_iterateCategories(categories, _nodeId, 0);
@@ -86,7 +86,8 @@ public class PortletLister {
 		return new TreeView(_list, _depth);
 	}
 
-	private void _iterateCategories(List categories, long parentId, int depth)
+	private void _iterateCategories(
+			List<PortletCategory> categories, long parentId, int depth)
 		throws PortalException, SystemException {
 
 		Collections.sort(
@@ -94,10 +95,10 @@ public class PortletLister {
 			new PortletCategoryComparator(
 				_user.getCompanyId(), _user.getLocale()));
 
-		Iterator itr = categories.iterator();
+		Iterator<PortletCategory> itr = categories.iterator();
 
 		for (int i = 0; itr.hasNext(); i++) {
-			PortletCategory portletCategory = (PortletCategory)itr.next();
+			PortletCategory portletCategory = itr.next();
 
 			if (i == 0) {
 				depth++;
@@ -124,7 +125,7 @@ public class PortletLister {
 
 			_list.add(nodeView);
 
-			List subCategories = ListUtil.fromCollection(
+			List<PortletCategory> subCategories = ListUtil.fromCollection(
 				portletCategory.getCategories());
 
 			_iterateCategories(subCategories, _nodeId, depth);

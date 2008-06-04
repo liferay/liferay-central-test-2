@@ -94,8 +94,7 @@ public abstract class TagsEntryLocalServiceBaseImpl
 		tagsEntryPersistence.remove(entryId);
 	}
 
-	public void deleteTagsEntry(TagsEntry tagsEntry)
-		throws PortalException, SystemException {
+	public void deleteTagsEntry(TagsEntry tagsEntry) throws SystemException {
 		tagsEntryPersistence.remove(tagsEntry);
 	}
 

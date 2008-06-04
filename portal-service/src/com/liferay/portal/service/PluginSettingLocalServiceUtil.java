@@ -69,8 +69,7 @@ public class PluginSettingLocalServiceUtil {
 
 	public static void deletePluginSetting(
 		com.liferay.portal.model.PluginSetting pluginSetting)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
 
 		pluginSettingLocalService.deletePluginSetting(pluginSetting);
@@ -125,8 +124,7 @@ public class PluginSettingLocalServiceUtil {
 
 	public static com.liferay.portal.model.PluginSetting getPluginSetting(
 		long companyId, java.lang.String pluginId, java.lang.String pluginType)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
 
 		return pluginSettingLocalService.getPluginSetting(companyId, pluginId,

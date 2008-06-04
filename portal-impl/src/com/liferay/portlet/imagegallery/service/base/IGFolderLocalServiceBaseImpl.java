@@ -99,8 +99,7 @@ public abstract class IGFolderLocalServiceBaseImpl
 		igFolderPersistence.remove(folderId);
 	}
 
-	public void deleteIGFolder(IGFolder igFolder)
-		throws PortalException, SystemException {
+	public void deleteIGFolder(IGFolder igFolder) throws SystemException {
 		igFolderPersistence.remove(igFolder);
 	}
 

@@ -68,8 +68,7 @@ public class ImageLocalServiceUtil {
 	}
 
 	public static void deleteImage(com.liferay.portal.model.Image image)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
 
 		imageLocalService.deleteImage(image);

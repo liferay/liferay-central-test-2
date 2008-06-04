@@ -69,8 +69,7 @@ public class JournalArticleLocalServiceUtil {
 
 	public static void deleteJournalArticle(
 		com.liferay.portlet.journal.model.JournalArticle journalArticle)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
 
 		journalArticleLocalService.deleteJournalArticle(journalArticle);

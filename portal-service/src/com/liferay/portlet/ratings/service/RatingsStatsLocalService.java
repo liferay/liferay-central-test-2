@@ -59,8 +59,7 @@ public interface RatingsStatsLocalService {
 
 	public void deleteRatingsStats(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.ratings.model.RatingsStats> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

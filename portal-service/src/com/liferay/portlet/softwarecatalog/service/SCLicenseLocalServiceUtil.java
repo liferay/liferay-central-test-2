@@ -69,8 +69,7 @@ public class SCLicenseLocalServiceUtil {
 
 	public static void deleteSCLicense(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
 
 		scLicenseLocalService.deleteSCLicense(scLicense);

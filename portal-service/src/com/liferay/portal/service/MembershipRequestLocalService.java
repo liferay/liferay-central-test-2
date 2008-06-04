@@ -59,8 +59,7 @@ public interface MembershipRequestLocalService {
 
 	public void deleteMembershipRequest(
 		com.liferay.portal.model.MembershipRequest membershipRequest)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.MembershipRequest> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

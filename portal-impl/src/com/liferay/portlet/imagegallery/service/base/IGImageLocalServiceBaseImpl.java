@@ -91,8 +91,7 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 		igImagePersistence.remove(imageId);
 	}
 
-	public void deleteIGImage(IGImage igImage)
-		throws PortalException, SystemException {
+	public void deleteIGImage(IGImage igImage) throws SystemException {
 		igImagePersistence.remove(igImage);
 	}
 

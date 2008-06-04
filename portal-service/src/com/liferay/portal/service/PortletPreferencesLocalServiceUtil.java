@@ -69,8 +69,7 @@ public class PortletPreferencesLocalServiceUtil {
 
 	public static void deletePortletPreferences(
 		com.liferay.portal.model.PortletPreferences portletPreferences)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
 
 		portletPreferencesLocalService.deletePortletPreferences(portletPreferences);

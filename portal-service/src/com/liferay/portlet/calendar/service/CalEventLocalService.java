@@ -59,8 +59,7 @@ public interface CalEventLocalService {
 
 	public void deleteCalEvent(
 		com.liferay.portlet.calendar.model.CalEvent calEvent)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

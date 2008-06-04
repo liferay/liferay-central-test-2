@@ -59,8 +59,7 @@ public interface OrganizationLocalService {
 
 	public void deleteOrganization(
 		com.liferay.portal.model.Organization organization)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Organization> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -96,9 +95,7 @@ public interface OrganizationLocalService {
 			com.liferay.portal.PortalException;
 
 	public void addPasswordPolicyOrganizations(long passwordPolicyId,
-		long[] organizationIds)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		long[] organizationIds) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Organization> getGroupOrganizations(
 		long groupId)
@@ -151,9 +148,7 @@ public interface OrganizationLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public boolean hasPasswordPolicyOrganization(long passwordPolicyId,
-		long organizationId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		long organizationId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Organization> search(
 		long companyId, long parentOrganizationId, java.lang.String keywords,
@@ -206,9 +201,7 @@ public interface OrganizationLocalService {
 			com.liferay.portal.PortalException;
 
 	public void unsetPasswordPolicyOrganizations(long passwordPolicyId,
-		long[] organizationIds)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		long[] organizationIds) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Organization updateOrganization(
 		long companyId, long organizationId, long parentOrganizationId,

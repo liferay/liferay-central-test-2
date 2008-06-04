@@ -223,34 +223,27 @@ public class PortalUtil {
 		return getPortal().getLayoutViewPage(layout);
 	}
 
-	public static String getLayoutURL(ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
+	public static String getLayoutURL(ThemeDisplay themeDisplay) {
 		return getPortal().getLayoutURL(themeDisplay);
 	}
 
-	public static String getLayoutURL(Layout layout, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
+	public static String getLayoutURL(
+		Layout layout, ThemeDisplay themeDisplay) {
 
 		return getPortal().getLayoutURL(layout, themeDisplay);
 	}
 
 	public static String getLayoutURL(
-			Layout layout, ThemeDisplay themeDisplay, boolean doAsUser)
-		throws PortalException, SystemException {
+		Layout layout, ThemeDisplay themeDisplay, boolean doAsUser) {
 
 		return getPortal().getLayoutURL(layout, themeDisplay, doAsUser);
 	}
 
-	public static String getLayoutActualURL(Layout layout)
-		throws PortalException, SystemException {
-
+	public static String getLayoutActualURL(Layout layout) {
 		return getPortal().getLayoutActualURL(layout);
 	}
 
-	public static String getLayoutActualURL(Layout layout, String mainPath)
-		throws PortalException, SystemException {
-
+	public static String getLayoutActualURL(Layout layout, String mainPath) {
 		return getPortal().getLayoutActualURL(layout, mainPath);
 	}
 
@@ -273,8 +266,7 @@ public class PortalUtil {
 	}
 
 	public static String getLayoutFriendlyURL(
-			Layout layout, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
+		Layout layout, ThemeDisplay themeDisplay) {
 
 		return getPortal().getLayoutFriendlyURL(layout, themeDisplay);
 	}
@@ -635,8 +627,7 @@ public class PortalUtil {
 	}
 
 	public static String getWidgetURL(
-			Portlet portlet, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
+		Portlet portlet, ThemeDisplay themeDisplay) {
 
 		return getPortal().getWidgetURL(portlet, themeDisplay);
 	}
@@ -796,18 +787,16 @@ public class PortalUtil {
 	}
 
 	public static PortletMode updatePortletMode(
-			String portletId, User user, Layout layout, PortletMode portletMode,
-			HttpServletRequest req)
-		throws PortalException, RemoteException, SystemException {
+		String portletId, User user, Layout layout, PortletMode portletMode,
+		HttpServletRequest req) {
 
 		return getPortal().updatePortletMode(
 			portletId, user, layout, portletMode, req);
 	}
 
 	public static WindowState updateWindowState(
-			String portletId, User user, Layout layout, WindowState windowState,
-			HttpServletRequest req)
-		throws PortalException, RemoteException, SystemException {
+		String portletId, User user, Layout layout, WindowState windowState,
+		HttpServletRequest req) {
 
 		return getPortal().updateWindowState(
 			portletId, user, layout, windowState, req);

@@ -58,8 +58,7 @@ public interface ResourceLocalService {
 			com.liferay.portal.PortalException;
 
 	public void deleteResource(com.liferay.portal.model.Resource resource)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Resource> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -93,8 +92,7 @@ public interface ResourceLocalService {
 
 	public com.liferay.portal.model.Resource addResource(long companyId,
 		java.lang.String name, int scope, java.lang.String primKey)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public void addResources(long companyId, long groupId,
 		java.lang.String name, boolean portletActions)

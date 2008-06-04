@@ -132,7 +132,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	}
 
 	public void deleteAnnouncementsEntry(AnnouncementsEntry announcementsEntry)
-		throws PortalException, SystemException {
+		throws SystemException {
 		announcementsEntryPersistence.remove(announcementsEntry);
 	}
 

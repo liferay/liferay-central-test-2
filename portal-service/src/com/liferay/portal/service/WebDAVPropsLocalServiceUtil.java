@@ -69,8 +69,7 @@ public class WebDAVPropsLocalServiceUtil {
 
 	public static void deleteWebDAVProps(
 		com.liferay.portal.model.WebDAVProps webDAVProps)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		WebDAVPropsLocalService webDAVPropsLocalService = WebDAVPropsLocalServiceFactory.getService();
 
 		webDAVPropsLocalService.deleteWebDAVProps(webDAVProps);

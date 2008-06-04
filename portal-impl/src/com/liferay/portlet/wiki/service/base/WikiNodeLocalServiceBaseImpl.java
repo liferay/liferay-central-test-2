@@ -99,8 +99,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 		wikiNodePersistence.remove(nodeId);
 	}
 
-	public void deleteWikiNode(WikiNode wikiNode)
-		throws PortalException, SystemException {
+	public void deleteWikiNode(WikiNode wikiNode) throws SystemException {
 		wikiNodePersistence.remove(wikiNode);
 	}
 

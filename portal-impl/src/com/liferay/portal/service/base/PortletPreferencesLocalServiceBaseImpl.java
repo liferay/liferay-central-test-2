@@ -292,7 +292,7 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 	}
 
 	public void deletePortletPreferences(PortletPreferences portletPreferences)
-		throws PortalException, SystemException {
+		throws SystemException {
 		portletPreferencesPersistence.remove(portletPreferences);
 	}
 

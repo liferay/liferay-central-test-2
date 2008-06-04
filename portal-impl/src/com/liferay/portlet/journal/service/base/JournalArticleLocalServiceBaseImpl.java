@@ -160,7 +160,7 @@ public abstract class JournalArticleLocalServiceBaseImpl
 	}
 
 	public void deleteJournalArticle(JournalArticle journalArticle)
-		throws PortalException, SystemException {
+		throws SystemException {
 		journalArticlePersistence.remove(journalArticle);
 	}
 

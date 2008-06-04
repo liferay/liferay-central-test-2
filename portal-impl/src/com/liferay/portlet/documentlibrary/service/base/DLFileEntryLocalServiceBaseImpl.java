@@ -137,7 +137,7 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 	}
 
 	public void deleteDLFileEntry(DLFileEntry dlFileEntry)
-		throws PortalException, SystemException {
+		throws SystemException {
 		dlFileEntryPersistence.remove(dlFileEntry);
 	}
 

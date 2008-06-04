@@ -134,8 +134,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 		mbThreadPersistence.remove(threadId);
 	}
 
-	public void deleteMBThread(MBThread mbThread)
-		throws PortalException, SystemException {
+	public void deleteMBThread(MBThread mbThread) throws SystemException {
 		mbThreadPersistence.remove(mbThread);
 	}
 

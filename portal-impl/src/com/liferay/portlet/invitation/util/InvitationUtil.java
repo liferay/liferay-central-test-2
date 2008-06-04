@@ -28,8 +28,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PropsUtil;
 
-import java.io.IOException;
-
 import javax.portlet.PortletPreferences;
 
 /**
@@ -45,9 +43,7 @@ public class InvitationUtil {
 			PropsUtil.INVITATION_EMAIL_MAX_RECIPIENTS));
 	}
 
-	public static String getEmailMessageBody(PortletPreferences prefs)
-		throws IOException {
-
+	public static String getEmailMessageBody(PortletPreferences prefs) {
 		String emailMessageBody = prefs.getValue(
 			"email-message-body", StringPool.BLANK);
 
@@ -60,9 +56,7 @@ public class InvitationUtil {
 		}
 	}
 
-	public static String getEmailMessageSubject(PortletPreferences prefs)
-		throws IOException {
-
+	public static String getEmailMessageSubject(PortletPreferences prefs) {
 		String emailMessageSubject = prefs.getValue(
 			"email-message-subject", StringPool.BLANK);
 

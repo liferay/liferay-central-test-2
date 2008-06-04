@@ -68,8 +68,7 @@ public class PhoneLocalServiceUtil {
 	}
 
 	public static void deletePhone(com.liferay.portal.model.Phone phone)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
 
 		phoneLocalService.deletePhone(phone);

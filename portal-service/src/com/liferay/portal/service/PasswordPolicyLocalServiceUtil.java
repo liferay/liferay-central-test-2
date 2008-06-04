@@ -69,8 +69,7 @@ public class PasswordPolicyLocalServiceUtil {
 
 	public static void deletePasswordPolicy(
 		com.liferay.portal.model.PasswordPolicy passwordPolicy)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
 
 		passwordPolicyLocalService.deletePasswordPolicy(passwordPolicy);

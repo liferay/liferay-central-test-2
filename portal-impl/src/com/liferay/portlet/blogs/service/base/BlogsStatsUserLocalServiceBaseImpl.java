@@ -79,7 +79,7 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 	}
 
 	public void deleteBlogsStatsUser(BlogsStatsUser blogsStatsUser)
-		throws PortalException, SystemException {
+		throws SystemException {
 		blogsStatsUserPersistence.remove(blogsStatsUser);
 	}
 

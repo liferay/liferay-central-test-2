@@ -125,7 +125,7 @@ public abstract class MBCategoryLocalServiceBaseImpl
 	}
 
 	public void deleteMBCategory(MBCategory mbCategory)
-		throws PortalException, SystemException {
+		throws SystemException {
 		mbCategoryPersistence.remove(mbCategory);
 	}
 

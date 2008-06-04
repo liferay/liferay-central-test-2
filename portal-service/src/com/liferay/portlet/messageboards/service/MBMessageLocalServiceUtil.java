@@ -69,8 +69,7 @@ public class MBMessageLocalServiceUtil {
 
 	public static void deleteMBMessage(
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
 		mbMessageLocalService.deleteMBMessage(mbMessage);

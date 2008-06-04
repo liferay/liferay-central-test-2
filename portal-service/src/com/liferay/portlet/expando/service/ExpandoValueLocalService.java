@@ -59,8 +59,7 @@ public interface ExpandoValueLocalService {
 
 	public void deleteExpandoValue(
 		com.liferay.portlet.expando.model.ExpandoValue expandoValue)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

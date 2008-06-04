@@ -68,8 +68,7 @@ public class CompanyLocalServiceUtil {
 	}
 
 	public static void deleteCompany(com.liferay.portal.model.Company company)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
 
 		companyLocalService.deleteCompany(company);

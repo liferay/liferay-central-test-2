@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.journal.model;
 
-import com.liferay.portal.ModelListenerException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
@@ -37,23 +36,23 @@ import com.liferay.portlet.journalcontent.util.JournalContentUtil;
  */
 public class JournalArticleListener implements ModelListener {
 
-	public void onBeforeCreate(BaseModel model) throws ModelListenerException {
+	public void onBeforeCreate(BaseModel model) {
 	}
 
-	public void onAfterCreate(BaseModel model) throws ModelListenerException {
+	public void onAfterCreate(BaseModel model) {
 	}
 
-	public void onBeforeRemove(BaseModel model) throws ModelListenerException {
+	public void onBeforeRemove(BaseModel model) {
 	}
 
-	public void onAfterRemove(BaseModel model) throws ModelListenerException {
+	public void onAfterRemove(BaseModel model) {
 		clearCache(model);
 	}
 
-	public void onBeforeUpdate(BaseModel model) throws ModelListenerException {
+	public void onBeforeUpdate(BaseModel model) {
 	}
 
-	public void onAfterUpdate(BaseModel model) throws ModelListenerException {
+	public void onAfterUpdate(BaseModel model) {
 		clearCache(model);
 	}
 

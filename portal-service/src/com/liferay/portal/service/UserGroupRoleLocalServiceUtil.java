@@ -70,8 +70,7 @@ public class UserGroupRoleLocalServiceUtil {
 
 	public static void deleteUserGroupRole(
 		com.liferay.portal.model.UserGroupRole userGroupRole)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
 
 		userGroupRoleLocalService.deleteUserGroupRole(userGroupRole);

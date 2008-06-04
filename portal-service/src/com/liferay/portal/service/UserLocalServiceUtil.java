@@ -68,8 +68,7 @@ public class UserLocalServiceUtil {
 	}
 
 	public static void deleteUser(com.liferay.portal.model.User user)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		userLocalService.deleteUser(user);
@@ -124,9 +123,7 @@ public class UserLocalServiceUtil {
 	}
 
 	public static void addPasswordPolicyUsers(long passwordPolicyId,
-		long[] userIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		long[] userIds) throws com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		userLocalService.addPasswordPolicyUsers(passwordPolicyId, userIds);
@@ -296,9 +293,7 @@ public class UserLocalServiceUtil {
 	}
 
 	public static void deletePasswordPolicyUser(long passwordPolicyId,
-		long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		long userId) throws com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		userLocalService.deletePasswordPolicyUser(passwordPolicyId, userId);
@@ -626,9 +621,7 @@ public class UserLocalServiceUtil {
 	}
 
 	public static boolean hasPasswordPolicyUser(long passwordPolicyId,
-		long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		long userId) throws com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		return userLocalService.hasPasswordPolicyUser(passwordPolicyId, userId);
@@ -756,9 +749,7 @@ public class UserLocalServiceUtil {
 	}
 
 	public static void unsetPasswordPolicyUsers(long passwordPolicyId,
-		long[] userIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		long[] userIds) throws com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		userLocalService.unsetPasswordPolicyUsers(passwordPolicyId, userIds);

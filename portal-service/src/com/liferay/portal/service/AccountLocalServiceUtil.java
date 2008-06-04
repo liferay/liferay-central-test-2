@@ -68,8 +68,7 @@ public class AccountLocalServiceUtil {
 	}
 
 	public static void deleteAccount(com.liferay.portal.model.Account account)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
 
 		accountLocalService.deleteAccount(account);

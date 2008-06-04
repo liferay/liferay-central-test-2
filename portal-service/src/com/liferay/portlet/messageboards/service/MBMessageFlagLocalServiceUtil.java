@@ -69,8 +69,7 @@ public class MBMessageFlagLocalServiceUtil {
 
 	public static void deleteMBMessageFlag(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
 
 		mbMessageFlagLocalService.deleteMBMessageFlag(mbMessageFlag);

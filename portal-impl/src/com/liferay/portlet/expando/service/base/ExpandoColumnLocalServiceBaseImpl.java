@@ -79,7 +79,7 @@ public abstract class ExpandoColumnLocalServiceBaseImpl
 	}
 
 	public void deleteExpandoColumn(ExpandoColumn expandoColumn)
-		throws PortalException, SystemException {
+		throws SystemException {
 		expandoColumnPersistence.remove(expandoColumn);
 	}
 

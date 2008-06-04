@@ -69,8 +69,7 @@ public class SCFrameworkVersionLocalServiceUtil {
 
 	public static void deleteSCFrameworkVersion(
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
 
 		scFrameworkVersionLocalService.deleteSCFrameworkVersion(scFrameworkVersion);

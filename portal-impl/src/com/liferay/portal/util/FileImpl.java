@@ -485,11 +485,11 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		return ascii;
 	}
 
-	public String[] listDirs(String fileName) throws IOException {
+	public String[] listDirs(String fileName) {
 		return listDirs(new File(fileName));
 	}
 
-	public String[] listDirs(File file) throws IOException {
+	public String[] listDirs(File file) {
 		List<String> dirs = new ArrayList<String>();
 
 		File[] fileArray = file.listFiles();
@@ -503,7 +503,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		return dirs.toArray(new String[dirs.size()]);
 	}
 
-	public String[] listFiles(String fileName) throws IOException {
+	public String[] listFiles(String fileName) {
 		if (Validator.isNull(fileName)) {
 			return new String[0];
 		}
@@ -511,7 +511,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		return listFiles(new File(fileName));
 	}
 
-	public String[] listFiles(File file) throws IOException {
+	public String[] listFiles(File file) {
 		List<String> files = new ArrayList<String>();
 
 		File[] fileArray = file.listFiles();

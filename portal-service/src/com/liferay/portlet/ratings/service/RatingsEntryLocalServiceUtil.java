@@ -69,8 +69,7 @@ public class RatingsEntryLocalServiceUtil {
 
 	public static void deleteRatingsEntry(
 		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
 
 		ratingsEntryLocalService.deleteRatingsEntry(ratingsEntry);

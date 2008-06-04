@@ -294,7 +294,7 @@ public abstract class ServiceComponentLocalServiceBaseImpl
 	}
 
 	public void deleteServiceComponent(ServiceComponent serviceComponent)
-		throws PortalException, SystemException {
+		throws SystemException {
 		serviceComponentPersistence.remove(serviceComponent);
 	}
 

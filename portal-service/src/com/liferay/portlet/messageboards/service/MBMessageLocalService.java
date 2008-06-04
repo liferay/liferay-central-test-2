@@ -59,8 +59,7 @@ public interface MBMessageLocalService {
 
 	public void deleteMBMessage(
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

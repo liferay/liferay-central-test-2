@@ -69,8 +69,7 @@ public class ShoppingItemLocalServiceUtil {
 
 	public static void deleteShoppingItem(
 		com.liferay.portlet.shopping.model.ShoppingItem shoppingItem)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
 
 		shoppingItemLocalService.deleteShoppingItem(shoppingItem);

@@ -69,8 +69,7 @@ public class UserTrackerPathLocalServiceUtil {
 
 	public static void deleteUserTrackerPath(
 		com.liferay.portal.model.UserTrackerPath userTrackerPath)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
 
 		userTrackerPathLocalService.deleteUserTrackerPath(userTrackerPath);

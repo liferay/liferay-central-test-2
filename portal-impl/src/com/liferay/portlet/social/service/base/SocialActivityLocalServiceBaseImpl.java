@@ -83,7 +83,7 @@ public abstract class SocialActivityLocalServiceBaseImpl
 	}
 
 	public void deleteSocialActivity(SocialActivity socialActivity)
-		throws PortalException, SystemException {
+		throws SystemException {
 		socialActivityPersistence.remove(socialActivity);
 	}
 

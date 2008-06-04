@@ -99,7 +99,7 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 	}
 
 	public void deleteMBStatsUser(MBStatsUser mbStatsUser)
-		throws PortalException, SystemException {
+		throws SystemException {
 		mbStatsUserPersistence.remove(mbStatsUser);
 	}
 

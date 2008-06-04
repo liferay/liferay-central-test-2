@@ -59,8 +59,7 @@ public interface SocialRequestLocalService {
 
 	public void deleteSocialRequest(
 		com.liferay.portlet.social.model.SocialRequest socialRequest)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRequest> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

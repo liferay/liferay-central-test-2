@@ -24,7 +24,6 @@ package com.liferay.portlet.journal.job;
 
 import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobExecutionContext;
-import com.liferay.portal.kernel.job.JobExecutionException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
@@ -45,9 +44,7 @@ public class CheckArticleJob implements IntervalJob {
 	public static final long INTERVAL = GetterUtil.getLong(PropsUtil.get(
 		PropsUtil.JOURNAL_ARTICLE_CHECK_INTERVAL)) * Time.MINUTE;
 
-	public void execute(JobExecutionContext context)
-		throws JobExecutionException {
-
+	public void execute(JobExecutionContext context) {
 		try {
 			JournalArticleLocalServiceUtil.checkArticles();
 		}

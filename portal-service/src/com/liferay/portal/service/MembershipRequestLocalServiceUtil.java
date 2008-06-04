@@ -69,8 +69,7 @@ public class MembershipRequestLocalServiceUtil {
 
 	public static void deleteMembershipRequest(
 		com.liferay.portal.model.MembershipRequest membershipRequest)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
 
 		membershipRequestLocalService.deleteMembershipRequest(membershipRequest);

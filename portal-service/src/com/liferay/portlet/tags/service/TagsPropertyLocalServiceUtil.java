@@ -69,8 +69,7 @@ public class TagsPropertyLocalServiceUtil {
 
 	public static void deleteTagsProperty(
 		com.liferay.portlet.tags.model.TagsProperty tagsProperty)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
 
 		tagsPropertyLocalService.deleteTagsProperty(tagsProperty);

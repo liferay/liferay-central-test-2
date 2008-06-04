@@ -50,8 +50,6 @@ import com.liferay.util.ContextReplace;
 import com.liferay.util.ListUtil;
 import com.liferay.util.Version;
 
-import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -411,7 +409,7 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 			String servletContextName, ServletContext ctx, String themesPath,
 			boolean loadFromServletContext, String xml,
 			PluginPackage pluginPackage)
-		throws DocumentException, IOException {
+		throws DocumentException {
 
 		Set<String> themeIds = new HashSet<String>();
 

@@ -109,7 +109,7 @@ public abstract class ShoppingCouponLocalServiceBaseImpl
 	}
 
 	public void deleteShoppingCoupon(ShoppingCoupon shoppingCoupon)
-		throws PortalException, SystemException {
+		throws SystemException {
 		shoppingCouponPersistence.remove(shoppingCoupon);
 	}
 

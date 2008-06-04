@@ -99,7 +99,7 @@ public abstract class TasksProposalLocalServiceBaseImpl
 	}
 
 	public void deleteTasksProposal(TasksProposal tasksProposal)
-		throws PortalException, SystemException {
+		throws SystemException {
 		tasksProposalPersistence.remove(tasksProposal);
 	}
 

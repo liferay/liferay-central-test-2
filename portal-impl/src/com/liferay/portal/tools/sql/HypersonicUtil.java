@@ -54,8 +54,7 @@ public class HypersonicUtil extends DBUtil {
 	protected HypersonicUtil() {
 	}
 
-	protected void buildCreateFile(String databaseName, boolean minimal)
-		throws IOException {
+	protected void buildCreateFile(String databaseName, boolean minimal) {
 	}
 
 	protected String getServerName() {

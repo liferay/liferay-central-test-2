@@ -60,8 +60,7 @@ public interface UserGroupRoleLocalService {
 
 	public void deleteUserGroupRole(
 		com.liferay.portal.model.UserGroupRole userGroupRole)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserGroupRole> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

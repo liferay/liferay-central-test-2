@@ -69,8 +69,7 @@ public class ShoppingCouponLocalServiceUtil {
 
 	public static void deleteShoppingCoupon(
 		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
 
 		shoppingCouponLocalService.deleteShoppingCoupon(shoppingCoupon);

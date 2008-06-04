@@ -93,7 +93,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	public void deleteBookmarksEntry(BookmarksEntry bookmarksEntry)
-		throws PortalException, SystemException {
+		throws SystemException {
 		bookmarksEntryPersistence.remove(bookmarksEntry);
 	}
 

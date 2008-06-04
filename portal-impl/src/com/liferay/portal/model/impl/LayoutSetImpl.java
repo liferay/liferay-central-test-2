@@ -22,8 +22,6 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Theme;
@@ -40,26 +38,22 @@ public class LayoutSetImpl extends LayoutSetModelImpl implements LayoutSet {
 	public LayoutSetImpl() {
 	}
 
-	public Theme getTheme() throws PortalException, SystemException {
+	public Theme getTheme() {
 		return ThemeLocalServiceUtil.getTheme(
 			getCompanyId(), getThemeId(), false);
 	}
 
-	public ColorScheme getColorScheme()
-		throws PortalException, SystemException {
-
+	public ColorScheme getColorScheme() {
 		return ThemeLocalServiceUtil.getColorScheme(
 			getCompanyId(), getTheme().getThemeId(), getColorSchemeId(), false);
 	}
 
-	public Theme getWapTheme() throws PortalException, SystemException {
+	public Theme getWapTheme() {
 		return ThemeLocalServiceUtil.getTheme(
 			getCompanyId(), getWapThemeId(), true);
 	}
 
-	public ColorScheme getWapColorScheme()
-		throws PortalException, SystemException {
-
+	public ColorScheme getWapColorScheme() {
 		return ThemeLocalServiceUtil.getColorScheme(
 			getCompanyId(), getWapTheme().getThemeId(), getWapColorSchemeId(),
 			true);

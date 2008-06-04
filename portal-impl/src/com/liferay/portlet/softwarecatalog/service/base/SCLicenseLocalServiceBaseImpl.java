@@ -82,8 +82,7 @@ public abstract class SCLicenseLocalServiceBaseImpl
 		scLicensePersistence.remove(licenseId);
 	}
 
-	public void deleteSCLicense(SCLicense scLicense)
-		throws PortalException, SystemException {
+	public void deleteSCLicense(SCLicense scLicense) throws SystemException {
 		scLicensePersistence.remove(scLicense);
 	}
 

@@ -50,7 +50,7 @@ public class JournalStructurePermission {
 	public static void check(
 			PermissionChecker permissionChecker, JournalStructure structure,
 			String actionId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		if (!contains(permissionChecker, structure, actionId)) {
 			throw new PrincipalException();
@@ -69,9 +69,8 @@ public class JournalStructurePermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, JournalStructure structure,
-			String actionId)
-		throws PortalException, SystemException {
+		PermissionChecker permissionChecker, JournalStructure structure,
+		String actionId) {
 
 		return permissionChecker.hasPermission(
 			structure.getGroupId(), JournalStructure.class.getName(),

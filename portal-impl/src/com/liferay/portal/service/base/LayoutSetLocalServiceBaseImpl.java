@@ -291,8 +291,7 @@ public abstract class LayoutSetLocalServiceBaseImpl
 		layoutSetPersistence.remove(layoutSetId);
 	}
 
-	public void deleteLayoutSet(LayoutSet layoutSet)
-		throws PortalException, SystemException {
+	public void deleteLayoutSet(LayoutSet layoutSet) throws SystemException {
 		layoutSetPersistence.remove(layoutSet);
 	}
 

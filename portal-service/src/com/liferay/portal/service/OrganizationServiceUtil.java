@@ -100,8 +100,7 @@ public class OrganizationServiceUtil {
 	}
 
 	public static long getOrganizationId(long companyId, java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrganizationService organizationService = OrganizationServiceFactory.getService();
 
 		return organizationService.getOrganizationId(companyId, name);

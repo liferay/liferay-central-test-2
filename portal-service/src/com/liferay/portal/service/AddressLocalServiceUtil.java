@@ -68,8 +68,7 @@ public class AddressLocalServiceUtil {
 	}
 
 	public static void deleteAddress(com.liferay.portal.model.Address address)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 
 		addressLocalService.deleteAddress(address);

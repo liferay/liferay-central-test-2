@@ -58,8 +58,7 @@ public interface CompanyLocalService {
 			com.liferay.portal.PortalException;
 
 	public void deleteCompany(com.liferay.portal.model.Company company)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Company> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

@@ -68,8 +68,7 @@ public class RoleLocalServiceUtil {
 	}
 
 	public static void deleteRole(com.liferay.portal.model.Role role)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
 		roleLocalService.deleteRole(role);

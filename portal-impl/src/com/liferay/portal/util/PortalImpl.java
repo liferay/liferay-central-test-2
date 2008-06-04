@@ -789,21 +789,16 @@ public class PortalImpl implements Portal {
 			PropsUtil.LAYOUT_VIEW_PAGE, Filter.by(layout.getType()));
 	}
 
-	public String getLayoutURL(ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
+	public String getLayoutURL(ThemeDisplay themeDisplay) {
 		return getLayoutURL(themeDisplay.getLayout(), themeDisplay);
 	}
 
-	public String getLayoutURL(Layout layout, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
+	public String getLayoutURL(Layout layout, ThemeDisplay themeDisplay) {
 		return getLayoutURL(layout, themeDisplay, true);
 	}
 
 	public String getLayoutURL(
-			Layout layout, ThemeDisplay themeDisplay, boolean doAsUser)
-		throws PortalException, SystemException {
+		Layout layout, ThemeDisplay themeDisplay, boolean doAsUser) {
 
 		if (layout == null) {
 			return themeDisplay.getPathMain() + PATH_PORTAL_LAYOUT;
@@ -836,15 +831,11 @@ public class PortalImpl implements Portal {
 		return layoutURL;
 	}
 
-	public String getLayoutActualURL(Layout layout)
-		throws PortalException, SystemException {
-
+	public String getLayoutActualURL(Layout layout) {
 		return getLayoutActualURL(layout, getPathMain());
 	}
 
-	public String getLayoutActualURL(Layout layout, String mainPath)
-		throws PortalException, SystemException {
-
+	public String getLayoutActualURL(Layout layout, String mainPath) {
 		Map<Object, Object> vars = new HashMap<Object, Object>();
 
 		vars.put("liferay:mainPath", mainPath);
@@ -906,8 +897,8 @@ public class PortalImpl implements Portal {
 		return layoutActualURL;
 	}
 
-	public String getLayoutFriendlyURL(Layout layout, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
+	public String getLayoutFriendlyURL(
+		Layout layout, ThemeDisplay themeDisplay) {
 
 		if (!isLayoutFriendliable(layout)) {
 			return null;
@@ -1963,9 +1954,7 @@ public class PortalImpl implements Portal {
 		}
 	}
 
-	public String getWidgetURL(Portlet portlet, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
+	public String getWidgetURL(Portlet portlet, ThemeDisplay themeDisplay) {
 		String widgetURL =
 			themeDisplay.getPortalURL() + "/widget" +
 				getLayoutURL(themeDisplay) + "/-/";
@@ -2329,9 +2318,8 @@ public class PortalImpl implements Portal {
 	}
 
 	public PortletMode updatePortletMode(
-			String portletId, User user, Layout layout, PortletMode portletMode,
-			HttpServletRequest req)
-		throws PortalException, RemoteException, SystemException {
+		String portletId, User user, Layout layout, PortletMode portletMode,
+		HttpServletRequest req) {
 
 		LayoutTypePortlet layoutType =
 			(LayoutTypePortlet)layout.getLayoutType();
@@ -2446,9 +2434,8 @@ public class PortalImpl implements Portal {
 	}
 
 	public WindowState updateWindowState(
-			String portletId, User user, Layout layout, WindowState windowState,
-			HttpServletRequest req)
-		throws PortalException, RemoteException, SystemException {
+		String portletId, User user, Layout layout, WindowState windowState,
+		HttpServletRequest req) {
 
 		LayoutTypePortlet layoutType =
 			(LayoutTypePortlet)layout.getLayoutType();

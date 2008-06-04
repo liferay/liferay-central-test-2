@@ -86,7 +86,7 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 	}
 
 	public void deleteDLFileVersion(DLFileVersion dlFileVersion)
-		throws PortalException, SystemException {
+		throws SystemException {
 		dlFileVersionPersistence.remove(dlFileVersion);
 	}
 

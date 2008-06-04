@@ -292,7 +292,7 @@ public abstract class PasswordPolicyLocalServiceBaseImpl
 	}
 
 	public void deletePasswordPolicy(PasswordPolicy passwordPolicy)
-		throws PortalException, SystemException {
+		throws SystemException {
 		passwordPolicyPersistence.remove(passwordPolicy);
 	}
 

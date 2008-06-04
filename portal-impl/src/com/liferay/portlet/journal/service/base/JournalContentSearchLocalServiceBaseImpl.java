@@ -126,8 +126,7 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 	}
 
 	public void deleteJournalContentSearch(
-		JournalContentSearch journalContentSearch)
-		throws PortalException, SystemException {
+		JournalContentSearch journalContentSearch) throws SystemException {
 		journalContentSearchPersistence.remove(journalContentSearch);
 	}
 

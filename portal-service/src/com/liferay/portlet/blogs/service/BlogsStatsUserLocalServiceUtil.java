@@ -69,8 +69,7 @@ public class BlogsStatsUserLocalServiceUtil {
 
 	public static void deleteBlogsStatsUser(
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
 
 		blogsStatsUserLocalService.deleteBlogsStatsUser(blogsStatsUser);

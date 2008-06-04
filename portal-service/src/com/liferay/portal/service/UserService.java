@@ -128,12 +128,10 @@ public interface UserService {
 			com.liferay.portal.PortalException;
 
 	public boolean hasGroupUser(long groupId, long userId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public boolean hasRoleUser(long roleId, long userId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public void setRoleUsers(long roleId, long[] userIds)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,

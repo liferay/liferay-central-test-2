@@ -79,7 +79,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	}
 
 	public void deleteExpandoTable(ExpandoTable expandoTable)
-		throws PortalException, SystemException {
+		throws SystemException {
 		expandoTablePersistence.remove(expandoTable);
 	}
 

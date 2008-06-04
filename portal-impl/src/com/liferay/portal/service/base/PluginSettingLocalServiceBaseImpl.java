@@ -292,7 +292,7 @@ public abstract class PluginSettingLocalServiceBaseImpl
 	}
 
 	public void deletePluginSetting(PluginSetting pluginSetting)
-		throws PortalException, SystemException {
+		throws SystemException {
 		pluginSettingPersistence.remove(pluginSetting);
 	}
 

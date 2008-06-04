@@ -249,7 +249,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	public boolean hasRolePermission(
 			long roleId, long companyId, String name, int scope,
 			String actionId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		ResourceCode resourceCode = resourceCodeLocalService.getResourceCode(
 			companyId, name, scope);
@@ -278,7 +278,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	public boolean hasRolePermission(
 			long roleId, long companyId, String name, int scope, String primKey,
 			String actionId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		try {
 			ResourceCode resourceCode =

@@ -98,7 +98,7 @@ public abstract class ShoppingItemFieldLocalServiceBaseImpl
 	}
 
 	public void deleteShoppingItemField(ShoppingItemField shoppingItemField)
-		throws PortalException, SystemException {
+		throws SystemException {
 		shoppingItemFieldPersistence.remove(shoppingItemField);
 	}
 

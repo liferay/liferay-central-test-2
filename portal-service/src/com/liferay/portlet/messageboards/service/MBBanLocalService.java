@@ -58,8 +58,7 @@ public interface MBBanLocalService {
 			com.liferay.portal.PortalException;
 
 	public void deleteMBBan(com.liferay.portlet.messageboards.model.MBBan mbBan)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBBan> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

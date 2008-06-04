@@ -426,9 +426,8 @@ public class PrefsPropsUtil {
 	}
 
 	public static String[] getStringArray(
-			PortletPreferences prefs, long companyId, String name,
-			String delimiter)
-		throws PortalException, SystemException {
+		PortletPreferences prefs, long companyId, String name,
+		String delimiter) {
 
 		String value = PropsUtil.get(name);
 
@@ -457,9 +456,8 @@ public class PrefsPropsUtil {
 	}
 
 	public static String[] getStringArray(
-			PortletPreferences prefs, long companyId, String name,
-			String delimiter, String[] defaultValue)
-		throws PortalException, SystemException {
+		PortletPreferences prefs, long companyId, String name,
+		String delimiter, String[] defaultValue) {
 
 		String value = prefs.getValue(name, null);
 

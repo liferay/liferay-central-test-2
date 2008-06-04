@@ -291,8 +291,7 @@ public abstract class UserGroupLocalServiceBaseImpl
 		userGroupPersistence.remove(userGroupId);
 	}
 
-	public void deleteUserGroup(UserGroup userGroup)
-		throws PortalException, SystemException {
+	public void deleteUserGroup(UserGroup userGroup) throws SystemException {
 		userGroupPersistence.remove(userGroup);
 	}
 

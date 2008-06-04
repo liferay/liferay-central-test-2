@@ -320,8 +320,7 @@ public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService,
 		layoutPersistence.remove(plid);
 	}
 
-	public void deleteLayout(Layout layout)
-		throws PortalException, SystemException {
+	public void deleteLayout(Layout layout) throws SystemException {
 		layoutPersistence.remove(layout);
 	}
 

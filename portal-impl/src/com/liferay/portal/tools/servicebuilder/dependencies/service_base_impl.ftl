@@ -68,7 +68,7 @@ import org.springframework.beans.factory.InitializingBean;
 		${entity.varName}Persistence.remove(${entity.PKVarName});
 	}
 
-	public void delete${entity.name}(${entity.name} ${entity.varName}) throws PortalException, SystemException {
+	public void delete${entity.name}(${entity.name} ${entity.varName}) throws SystemException {
 		${entity.varName}Persistence.remove(${entity.varName});
 	}
 

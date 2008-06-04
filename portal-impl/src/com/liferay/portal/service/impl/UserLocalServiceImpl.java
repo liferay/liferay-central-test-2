@@ -172,7 +172,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public void addPasswordPolicyUsers(long passwordPolicyId, long[] userIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		passwordPolicyRelLocalService.addPasswordPolicyRels(
 			passwordPolicyId, User.class.getName(), userIds);
@@ -729,7 +729,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public void deletePasswordPolicyUser(long passwordPolicyId, long userId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		passwordPolicyRelLocalService.deletePasswordPolicyRel(
 			passwordPolicyId, User.class.getName(), userId);
@@ -1221,7 +1221,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public boolean hasPasswordPolicyUser(long passwordPolicyId, long userId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return passwordPolicyRelLocalService.hasPasswordPolicyRel(
 			passwordPolicyId, User.class.getName(), userId);
@@ -1402,7 +1402,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	public void unsetPasswordPolicyUsers(
 			long passwordPolicyId, long[] userIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		passwordPolicyRelLocalService.deletePasswordPolicyRels(
 			passwordPolicyId, User.class.getName(), userIds);

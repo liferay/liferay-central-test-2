@@ -66,7 +66,7 @@ public class PluginSettingLocalServiceImpl
 
 	public PluginSetting getPluginSetting(
 			long companyId, String pluginId, String pluginType)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		PluginSetting pluginSetting = pluginSettingPersistence.fetchByC_I_T(
 			companyId, pluginId, pluginType);

@@ -295,7 +295,7 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 	}
 
 	public void deleteMembershipRequest(MembershipRequest membershipRequest)
-		throws PortalException, SystemException {
+		throws SystemException {
 		membershipRequestPersistence.remove(membershipRequest);
 	}
 

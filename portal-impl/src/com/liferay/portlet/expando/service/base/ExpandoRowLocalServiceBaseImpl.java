@@ -79,7 +79,7 @@ public abstract class ExpandoRowLocalServiceBaseImpl
 	}
 
 	public void deleteExpandoRow(ExpandoRow expandoRow)
-		throws PortalException, SystemException {
+		throws SystemException {
 		expandoRowPersistence.remove(expandoRow);
 	}
 

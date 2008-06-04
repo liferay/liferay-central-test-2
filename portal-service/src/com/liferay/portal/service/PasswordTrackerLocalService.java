@@ -59,8 +59,7 @@ public interface PasswordTrackerLocalService {
 
 	public void deletePasswordTracker(
 		com.liferay.portal.model.PasswordTracker passwordTracker)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.PasswordTracker> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

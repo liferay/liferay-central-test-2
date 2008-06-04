@@ -83,7 +83,7 @@ public abstract class SocialRequestLocalServiceBaseImpl
 	}
 
 	public void deleteSocialRequest(SocialRequest socialRequest)
-		throws PortalException, SystemException {
+		throws SystemException {
 		socialRequestPersistence.remove(socialRequest);
 	}
 

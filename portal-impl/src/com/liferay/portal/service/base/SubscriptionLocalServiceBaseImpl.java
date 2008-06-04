@@ -294,7 +294,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	public void deleteSubscription(Subscription subscription)
-		throws PortalException, SystemException {
+		throws SystemException {
 		subscriptionPersistence.remove(subscription);
 	}
 

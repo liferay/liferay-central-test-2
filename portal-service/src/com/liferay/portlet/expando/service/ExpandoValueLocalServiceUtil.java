@@ -69,8 +69,7 @@ public class ExpandoValueLocalServiceUtil {
 
 	public static void deleteExpandoValue(
 		com.liferay.portlet.expando.model.ExpandoValue expandoValue)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
 
 		expandoValueLocalService.deleteExpandoValue(expandoValue);

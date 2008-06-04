@@ -69,8 +69,7 @@ public class PollsQuestionLocalServiceUtil {
 
 	public static void deletePollsQuestion(
 		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
 
 		pollsQuestionLocalService.deletePollsQuestion(pollsQuestion);

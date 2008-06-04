@@ -99,7 +99,7 @@ public abstract class SCFrameworkVersionLocalServiceBaseImpl
 	}
 
 	public void deleteSCFrameworkVersion(SCFrameworkVersion scFrameworkVersion)
-		throws PortalException, SystemException {
+		throws SystemException {
 		scFrameworkVersionPersistence.remove(scFrameworkVersion);
 	}
 

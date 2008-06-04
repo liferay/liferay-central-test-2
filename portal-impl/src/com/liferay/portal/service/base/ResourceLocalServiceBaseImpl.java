@@ -290,8 +290,7 @@ public abstract class ResourceLocalServiceBaseImpl
 		resourcePersistence.remove(resourceId);
 	}
 
-	public void deleteResource(Resource resource)
-		throws PortalException, SystemException {
+	public void deleteResource(Resource resource) throws SystemException {
 		resourcePersistence.remove(resource);
 	}
 

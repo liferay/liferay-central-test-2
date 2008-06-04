@@ -774,9 +774,7 @@ public class UserServiceHttp {
 	}
 
 	public static boolean hasGroupUser(HttpPrincipal httpPrincipal,
-		long groupId, long userId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		long groupId, long userId) throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
 
@@ -795,10 +793,6 @@ public class UserServiceHttp {
 					throw (com.liferay.portal.SystemException)e;
 				}
 
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				throw new com.liferay.portal.SystemException(e);
 			}
 
@@ -812,9 +806,7 @@ public class UserServiceHttp {
 	}
 
 	public static boolean hasRoleUser(HttpPrincipal httpPrincipal, long roleId,
-		long userId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		long userId) throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(roleId);
 
@@ -831,10 +823,6 @@ public class UserServiceHttp {
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
-				}
-
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);

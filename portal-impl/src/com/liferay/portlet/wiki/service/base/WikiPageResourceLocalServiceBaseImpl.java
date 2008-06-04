@@ -75,7 +75,7 @@ public abstract class WikiPageResourceLocalServiceBaseImpl
 	}
 
 	public void deleteWikiPageResource(WikiPageResource wikiPageResource)
-		throws PortalException, SystemException {
+		throws SystemException {
 		wikiPageResourcePersistence.remove(wikiPageResource);
 	}
 

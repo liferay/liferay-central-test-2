@@ -294,7 +294,7 @@ public abstract class PasswordPolicyRelLocalServiceBaseImpl
 	}
 
 	public void deletePasswordPolicyRel(PasswordPolicyRel passwordPolicyRel)
-		throws PortalException, SystemException {
+		throws SystemException {
 		passwordPolicyRelPersistence.remove(passwordPolicyRel);
 	}
 

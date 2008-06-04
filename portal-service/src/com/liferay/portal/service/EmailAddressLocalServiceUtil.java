@@ -69,8 +69,7 @@ public class EmailAddressLocalServiceUtil {
 
 	public static void deleteEmailAddress(
 		com.liferay.portal.model.EmailAddress emailAddress)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
 
 		emailAddressLocalService.deleteEmailAddress(emailAddress);

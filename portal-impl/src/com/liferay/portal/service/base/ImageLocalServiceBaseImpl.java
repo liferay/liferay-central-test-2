@@ -287,8 +287,7 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService,
 		imagePersistence.remove(imageId);
 	}
 
-	public void deleteImage(Image image)
-		throws PortalException, SystemException {
+	public void deleteImage(Image image) throws SystemException {
 		imagePersistence.remove(image);
 	}
 

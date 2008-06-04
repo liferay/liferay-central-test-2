@@ -69,8 +69,7 @@ public class IGImageLocalServiceUtil {
 
 	public static void deleteIGImage(
 		com.liferay.portlet.imagegallery.model.IGImage igImage)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
 
 		igImageLocalService.deleteIGImage(igImage);

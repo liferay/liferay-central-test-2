@@ -55,6 +55,5 @@ public interface ClassNameService {
 
 	public com.liferay.portal.model.ClassName getClassName(
 		java.lang.String value)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 }

@@ -290,8 +290,7 @@ public abstract class CompanyLocalServiceBaseImpl implements CompanyLocalService
 		companyPersistence.remove(companyId);
 	}
 
-	public void deleteCompany(Company company)
-		throws PortalException, SystemException {
+	public void deleteCompany(Company company) throws SystemException {
 		companyPersistence.remove(company);
 	}
 

@@ -93,7 +93,7 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 	}
 
 	public void deleteBookmarksFolder(BookmarksFolder bookmarksFolder)
-		throws PortalException, SystemException {
+		throws SystemException {
 		bookmarksFolderPersistence.remove(bookmarksFolder);
 	}
 

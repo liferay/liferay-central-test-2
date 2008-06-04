@@ -69,8 +69,7 @@ public class OrganizationLocalServiceUtil {
 
 	public static void deleteOrganization(
 		com.liferay.portal.model.Organization organization)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
 		organizationLocalService.deleteOrganization(organization);
@@ -142,9 +141,7 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	public static void addPasswordPolicyOrganizations(long passwordPolicyId,
-		long[] organizationIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		long[] organizationIds) throws com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
 		organizationLocalService.addPasswordPolicyOrganizations(passwordPolicyId,
@@ -253,9 +250,7 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	public static boolean hasPasswordPolicyOrganization(long passwordPolicyId,
-		long organizationId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		long organizationId) throws com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
 		return organizationLocalService.hasPasswordPolicyOrganization(passwordPolicyId,
@@ -357,9 +352,7 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	public static void unsetPasswordPolicyOrganizations(long passwordPolicyId,
-		long[] organizationIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		long[] organizationIds) throws com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
 		organizationLocalService.unsetPasswordPolicyOrganizations(passwordPolicyId,

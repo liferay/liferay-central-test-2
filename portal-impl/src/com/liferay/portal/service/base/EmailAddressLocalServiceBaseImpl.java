@@ -292,7 +292,7 @@ public abstract class EmailAddressLocalServiceBaseImpl
 	}
 
 	public void deleteEmailAddress(EmailAddress emailAddress)
-		throws PortalException, SystemException {
+		throws SystemException {
 		emailAddressPersistence.remove(emailAddress);
 	}
 

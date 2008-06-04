@@ -62,8 +62,7 @@ public class ClassNameServiceUtil {
 
 	public static com.liferay.portal.model.ClassName getClassName(
 		java.lang.String value)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ClassNameService classNameService = ClassNameServiceFactory.getService();
 
 		return classNameService.getClassName(value);

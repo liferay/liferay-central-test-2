@@ -117,7 +117,7 @@ public abstract class ShoppingCategoryLocalServiceBaseImpl
 	}
 
 	public void deleteShoppingCategory(ShoppingCategory shoppingCategory)
-		throws PortalException, SystemException {
+		throws SystemException {
 		shoppingCategoryPersistence.remove(shoppingCategory);
 	}
 

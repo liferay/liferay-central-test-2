@@ -69,8 +69,7 @@ public class UserGroupLocalServiceUtil {
 
 	public static void deleteUserGroup(
 		com.liferay.portal.model.UserGroup userGroup)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
 
 		userGroupLocalService.deleteUserGroup(userGroup);

@@ -59,8 +59,7 @@ public interface WebDAVPropsLocalService {
 
 	public void deleteWebDAVProps(
 		com.liferay.portal.model.WebDAVProps webDAVProps)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.WebDAVProps> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

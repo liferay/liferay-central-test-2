@@ -69,8 +69,7 @@ public class DLFileVersionLocalServiceUtil {
 
 	public static void deleteDLFileVersion(
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
 
 		dlFileVersionLocalService.deleteDLFileVersion(dlFileVersion);

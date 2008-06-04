@@ -69,8 +69,7 @@ public class JournalContentSearchLocalServiceUtil {
 
 	public static void deleteJournalContentSearch(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
 
 		journalContentSearchLocalService.deleteJournalContentSearch(journalContentSearch);

@@ -55,9 +55,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class OpenSSOAutoLogin implements AutoLogin {
 
-	public String[] login(HttpServletRequest req, HttpServletResponse res)
-		throws AutoLoginException {
-
+	public String[] login(HttpServletRequest req, HttpServletResponse res) {
 		String[] credentials = null;
 
 		try {

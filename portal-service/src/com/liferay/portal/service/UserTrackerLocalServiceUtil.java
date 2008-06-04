@@ -69,8 +69,7 @@ public class UserTrackerLocalServiceUtil {
 
 	public static void deleteUserTracker(
 		com.liferay.portal.model.UserTracker userTracker)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
 
 		userTrackerLocalService.deleteUserTracker(userTracker);

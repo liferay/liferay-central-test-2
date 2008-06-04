@@ -69,8 +69,7 @@ public class BlogsEntryLocalServiceUtil {
 
 	public static void deleteBlogsEntry(
 		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
 		blogsEntryLocalService.deleteBlogsEntry(blogsEntry);

@@ -290,8 +290,7 @@ public abstract class AddressLocalServiceBaseImpl implements AddressLocalService
 		addressPersistence.remove(addressId);
 	}
 
-	public void deleteAddress(Address address)
-		throws PortalException, SystemException {
+	public void deleteAddress(Address address) throws SystemException {
 		addressPersistence.remove(address);
 	}
 

@@ -58,8 +58,7 @@ public interface PermissionLocalService {
 			com.liferay.portal.PortalException;
 
 	public void deletePermission(com.liferay.portal.model.Permission permission)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Permission> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -132,14 +131,11 @@ public interface PermissionLocalService {
 
 	public boolean hasRolePermission(long roleId, long companyId,
 		java.lang.String name, int scope, java.lang.String actionId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public boolean hasRolePermission(long roleId, long companyId,
 		java.lang.String name, int scope, java.lang.String primKey,
-		java.lang.String actionId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		java.lang.String actionId) throws com.liferay.portal.SystemException;
 
 	public boolean hasUserPermission(long userId, java.lang.String actionId,
 		long resourceId) throws com.liferay.portal.SystemException;

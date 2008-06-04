@@ -59,8 +59,7 @@ public interface EmailAddressLocalService {
 
 	public void deleteEmailAddress(
 		com.liferay.portal.model.EmailAddress emailAddress)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.EmailAddress> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
