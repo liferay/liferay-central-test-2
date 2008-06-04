@@ -29,15 +29,13 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.DisposableBean;
-
 /**
  * <a href="DefaultMessageBus.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  *
  */
-public class DefaultMessageBus implements DisposableBean, MessageBus {
+public class DefaultMessageBus implements MessageBus {
 
 	public synchronized void addDestination(Destination destination) {
 		_destinations.put(destination.getName(), destination);
@@ -121,18 +119,6 @@ public class DefaultMessageBus implements DisposableBean, MessageBus {
 		}
 	}
 
-	public synchronized boolean unregisterMessageListener(
-		String destination, MessageListener listener) {
-
-		Destination destinationModel = _destinations.get(destination);
-
-		if (destinationModel == null) {
-			return false;
-		}
-
-		return destinationModel.unregister(listener);
-	}
-
     public void shutdown() {
         shutdown(false);
     }
@@ -143,8 +129,16 @@ public class DefaultMessageBus implements DisposableBean, MessageBus {
 		}
 	}
 
-	public void destroy() throws Exception {
-		shutdown(true);
+	public synchronized boolean unregisterMessageListener(
+		String destination, MessageListener listener) {
+
+		Destination destinationModel = _destinations.get(destination);
+
+		if (destinationModel == null) {
+			return false;
+		}
+
+		return destinationModel.unregister(listener);
 	}
 
 	protected String getNextResponseId() {

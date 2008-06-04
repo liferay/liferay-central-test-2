@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.search;
 
+import com.liferay.portal.kernel.util.StringMaker;
+
 /**
  * <a href="IndexWriterMessage.java.html"><b><i>View Source</i></b></a>
  *
