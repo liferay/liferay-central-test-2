@@ -74,11 +74,11 @@ public class ImageProcessorImpl implements ImageProcessor {
 	    return targetImage;
 	}
 
-	public void encodeGIF(RenderedImage renderedImage, OutputStream out)
+	public void encodeGIF(RenderedImage renderedImage, OutputStream os)
 		throws IOException {
 
 		if (JavaProps.isJDK6()) {
-			ImageIO.write(renderedImage, "GIF", out);
+			ImageIO.write(renderedImage, "GIF", os);
 		}
 		else {
 			BufferedImage bufferedImage = getBufferedImage(renderedImage);
@@ -90,11 +90,11 @@ public class ImageProcessorImpl implements ImageProcessor {
 
 			Gif89Encoder encoder = new Gif89Encoder(bufferedImage);
 
-			encoder.encode(out);
+			encoder.encode(os);
 		}
 	}
 
-	public void encodeWBMP(RenderedImage renderedImage, OutputStream out)
+	public void encodeWBMP(RenderedImage renderedImage, OutputStream os)
 		throws InterruptedException, IOException {
 
 		BufferedImage bufferedImage = getBufferedImage(renderedImage);
@@ -117,21 +117,21 @@ public class ImageProcessorImpl implements ImageProcessor {
 			renderedImage = binaryImage;
 		}
 
-		if (!ImageIO.write(renderedImage, "wbmp", out)) {
+		if (!ImageIO.write(renderedImage, "wbmp", os)) {
 
 			// See http://www.jguru.com/faq/view.jsp?EID=127723
 
-			out.write(0);
-			out.write(0);
-			out.write(_toMultiByte(bufferedImage.getWidth()));
-			out.write(_toMultiByte(bufferedImage.getHeight()));
+			os.write(0);
+			os.write(0);
+			os.write(_toMultiByte(bufferedImage.getWidth()));
+			os.write(_toMultiByte(bufferedImage.getHeight()));
 
 			DataBuffer dataBuffer = bufferedImage.getData().getDataBuffer();
 
 			int size = dataBuffer.getSize();
 
 			for (int i = 0; i < size; i++) {
-				out.write((byte)dataBuffer.getElem(i));
+				os.write((byte)dataBuffer.getElem(i));
 			}
 		}
 	}

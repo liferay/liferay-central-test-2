@@ -98,13 +98,13 @@ public class RSSAction extends PortletAction {
 		if (req.getWindowState() == LiferayWindowState.EXCLUSIVE) {
 			res.setContentType(ContentTypes.TEXT_XML_UTF8);
 
-			OutputStream out = res.getPortletOutputStream();
+			OutputStream os = res.getPortletOutputStream();
 
 			try {
-				out.write(getRSS(req));
+				os.write(getRSS(req));
 			}
 			finally {
-				out.close();
+				os.close();
 			}
 		}
 

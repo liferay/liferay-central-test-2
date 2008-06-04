@@ -45,16 +45,16 @@ public class ImageProcessorUtil {
 		return getImageProcessor().convertImageType(sourceImage, type);
 	}
 
-	public static void encodeGIF(RenderedImage renderedImage, OutputStream out)
+	public static void encodeGIF(RenderedImage renderedImage, OutputStream os)
 		throws IOException {
 
-		getImageProcessor().encodeGIF(renderedImage, out);
+		getImageProcessor().encodeGIF(renderedImage, os);
 	}
 
-	public static void encodeWBMP(RenderedImage renderedImage, OutputStream out)
+	public static void encodeWBMP(RenderedImage renderedImage, OutputStream os)
 		throws InterruptedException, IOException {
 
-		getImageProcessor().encodeWBMP(renderedImage, out);
+		getImageProcessor().encodeWBMP(renderedImage, os);
 	}
 
 	public static BufferedImage getBufferedImage(RenderedImage renderedImage) {

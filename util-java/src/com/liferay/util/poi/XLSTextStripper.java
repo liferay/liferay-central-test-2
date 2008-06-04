@@ -43,11 +43,11 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
  */
 public class XLSTextStripper {
 
-	public XLSTextStripper(InputStream in) {
+	public XLSTextStripper(InputStream is) {
 		try {
 			StringMaker sm = new StringMaker();
 
-			HSSFWorkbook workbook = new HSSFWorkbook(in);
+			HSSFWorkbook workbook = new HSSFWorkbook(is);
 
 			int numOfSheets = workbook.getNumberOfSheets();
 

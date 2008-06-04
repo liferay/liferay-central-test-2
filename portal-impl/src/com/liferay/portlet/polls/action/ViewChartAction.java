@@ -111,9 +111,9 @@ public class ViewChartAction extends Action {
 
 			res.setContentType("image/jpeg");
 
-			OutputStream out = res.getOutputStream();
+			OutputStream os = res.getOutputStream();
 
-			ChartUtilities.writeChartAsJPEG(out, chart, 400, 400);
+			ChartUtilities.writeChartAsJPEG(os, chart, 400, 400);
 
 			return null;
 		}

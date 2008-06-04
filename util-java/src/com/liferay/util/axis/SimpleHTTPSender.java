@@ -62,7 +62,7 @@ public class SimpleHTTPSender extends HTTPSender {
 		URL_REGEXP_PATTERN);
 
 	public static String getCurrentCookie() {
-		return (String)_currentCookie.get();
+		return _currentCookie.get();
 	}
 
 	public void invoke(MessageContext ctx) throws AxisFault {
@@ -117,15 +117,15 @@ public class SimpleHTTPSender extends HTTPSender {
 		String contentType = urlc.getContentType();
 		String contentLocation = urlc.getHeaderField("Content-Location");
 
-		InputStream in = ((HttpURLConnection) urlc).getErrorStream();
+		InputStream is = ((HttpURLConnection) urlc).getErrorStream();
 
-		if (in == null) {
-			in = urlc.getInputStream();
+		if (is == null) {
+			is = urlc.getInputStream();
 		}
 
-		in = new BufferedInputStream(in, 8192);
+		is = new BufferedInputStream(is, 8192);
 
-		Message response = new Message(in, false, contentType, contentLocation);
+		Message response = new Message(is, false, contentType, contentLocation);
 
 		response.setMessageType(Message.RESPONSE);
 
@@ -161,12 +161,12 @@ public class SimpleHTTPSender extends HTTPSender {
 			urlc.setRequestProperty("SOAPAction", ctx.getSOAPActionURI());
 		}
 
-		OutputStream out = new BufferedOutputStream(
+		OutputStream os = new BufferedOutputStream(
 			urlc.getOutputStream(), 8192);
 
-		request.writeTo(out);
+		request.writeTo(os);
 
-		out.flush();
+		os.flush();
 	}
 
 	private static ThreadLocal<String> _currentCookie =

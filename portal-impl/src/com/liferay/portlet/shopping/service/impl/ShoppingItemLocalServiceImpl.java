@@ -682,9 +682,11 @@ public class ShoppingItemLocalServiceImpl
 				smallImage = false;
 			}
 			else {
-				OutputStream out = new FileOutputStream(smallFile);
-				out.write(smallBytes);
-				out.close();
+				OutputStream os = new FileOutputStream(smallFile);
+
+				os.write(smallBytes);
+
+				os.close();
 			}
 
 			// Medium image
@@ -703,9 +705,11 @@ public class ShoppingItemLocalServiceImpl
 				mediumImage = false;
 			}
 			else {
-				OutputStream out = new FileOutputStream(mediumFile);
-				out.write(mediumBytes);
-				out.close();
+				OutputStream os = new FileOutputStream(mediumFile);
+
+				os.write(mediumBytes);
+
+				os.close();
 			}
 
 			// Large image
@@ -724,9 +728,11 @@ public class ShoppingItemLocalServiceImpl
 				largeImage = false;
 			}
 			else {
-				OutputStream out = new FileOutputStream(largeFile);
-				out.write(largeBytes);
-				out.close();
+				OutputStream os = new FileOutputStream(largeFile);
+
+				os.write(largeBytes);
+
+				os.close();
 			}
 
 			List<ShoppingItemField> itemFields =

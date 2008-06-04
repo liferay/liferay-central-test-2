@@ -140,23 +140,23 @@ public class EditUserPortraitAction extends PortletAction {
 
 		// Read directly from the portlet input stream
 
-		InputStream in = req.getPortletInputStream();
+		InputStream is = req.getPortletInputStream();
 
-		if (in != null) {
-			ByteArrayMaker out = new ByteArrayMaker();
+		if (is != null) {
+			ByteArrayMaker bam = new ByteArrayMaker();
 
 			int c = -1;
 
 			try {
-				while ((c = in.read()) != -1) {
-					out.write(c);
+				while ((c = is.read()) != -1) {
+					bam.write(c);
 				}
 			}
 			finally {
-				in.close();
+				is.close();
 			}
 
-			byte[] bytes = out.toByteArray();
+			byte[] bytes = bam.toByteArray();
 
 			if (_log.isInfoEnabled()) {
 				_log.info(

@@ -88,18 +88,18 @@ public class LiferayAddonUtil {
 		}
 
 		if (doCopy) {
-			InputStream in = new FileInputStream(sourceFile);
-			OutputStream out = new FileOutputStream(destFile);
+			InputStream is = new FileInputStream(sourceFile);
+			OutputStream os = new FileOutputStream(destFile);
 
-			byte[] buf = new byte[1024];
+			byte[] bytes = new byte[1024];
 			int len = 0;
 
-			while ((len = in.read(buf)) > 0) {
-				out.write(buf, 0, len);
+			while ((len = is.read(bytes)) > 0) {
+				out.write(bytes, 0, len);
 			}
 
-			in.close();
-			out.close();
+			is.close();
+			os.close();
 		}
 	}
 

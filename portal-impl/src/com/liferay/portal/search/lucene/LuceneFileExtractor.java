@@ -70,9 +70,9 @@ public class LuceneFileExtractor {
 	public Field getFile(String field, File file, String fileExt)
 		throws IOException {
 
-		InputStream in = new FileInputStream(file);
+		InputStream is = new FileInputStream(file);
 
-		return getFile(field, in, fileExt);
+		return getFile(field, is, fileExt);
 	}
 
 	protected String regexpStrip(String text) {

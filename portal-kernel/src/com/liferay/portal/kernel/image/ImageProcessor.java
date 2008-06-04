@@ -52,10 +52,10 @@ public interface ImageProcessor {
 	public BufferedImage convertImageType(
 		BufferedImage sourceImage, int type);
 
-	public void encodeGIF(RenderedImage renderedImage, OutputStream out)
+	public void encodeGIF(RenderedImage renderedImage, OutputStream os)
 		throws IOException;
 
-	public void encodeWBMP(RenderedImage renderedImage, OutputStream out)
+	public void encodeWBMP(RenderedImage renderedImage, OutputStream os)
 		throws InterruptedException, IOException;
 
 	public BufferedImage getBufferedImage(RenderedImage renderedImage);
