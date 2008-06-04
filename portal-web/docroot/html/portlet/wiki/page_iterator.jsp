@@ -119,24 +119,36 @@ headerNames.add("revision");
 headerNames.add("user");
 headerNames.add("date");
 
+String strutsAction = "/wiki/view_all_pages";
+
 if (type.equals("history")) {
 	headerNames.add(StringPool.BLANK);
+	strutsAction = "/wiki/view_page_history";
 }
 
 String emptyResultsMessage = null;
 
 if (type.equals("incoming_links")) {
 	emptyResultsMessage = "there-are-no-pages-that-link-to-this-page";
+	strutsAction = "/wiki/view_page_incoming_links";
 }
 else if (type.equals("outgoing_links")) {
 	emptyResultsMessage = "this-page-has-no-links";
+	strutsAction = "/wiki/view_page_outgoing_links";
 }
 else if (type.equals("recent_changes")) {
 	emptyResultsMessage = "there-are-no-recent-changes";
+	strutsAction = "/wiki/view_recent_changes";
 }
 else if (type.equals("tagged_pages")) {
 	emptyResultsMessage = "there-are-no-pages-with-this-tag";
+	strutsAction = "/wiki/view_tagged_pages";
 }
+else if (type.equals("orphan_pages")) {
+	strutsAction = "/wiki/view_orphan_pages";
+}
+
+portletURL.setParameter("struts_action", strutsAction);
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, emptyResultsMessage);
 
