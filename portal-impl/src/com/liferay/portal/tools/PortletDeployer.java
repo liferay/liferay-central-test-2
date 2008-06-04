@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Plugin;
 import com.liferay.portal.util.DocumentUtil;
-import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -60,10 +59,6 @@ import org.dom4j.Element;
  *
  */
 public class PortletDeployer extends BaseDeployer {
-
-	static {
-		InitUtil.init();
-	}
 
 	public static final String JSF_MYFACES =
 		"org.apache.myfaces.portlet.MyFacesGenericPortlet";

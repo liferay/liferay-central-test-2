@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.util.DocumentUtil;
+import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -76,6 +77,10 @@ import org.dom4j.Element;
  *
  */
 public class BaseDeployer {
+
+	static {
+		InitUtil.init();
+	}
 
 	public static final String DEPLOY_TO_PREFIX = "DEPLOY_TO__";
 
