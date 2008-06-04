@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
-import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
@@ -81,9 +80,6 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-
-			// Folders
-
 			if (!context.addPrimaryKey(
 					IGPortletDataHandlerImpl.class, "deleteData")) {
 
@@ -110,14 +106,13 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			root.addAttribute("group-id", String.valueOf(context.getGroupId()));
 
 			Element foldersEl = root.addElement("folders");
-
 			Element imagesEl = root.addElement("images");
 
 			List<IGFolder> folders = IGFolderUtil.findByGroupId(
 				context.getGroupId());
 
-			for (IGFolder igFolder : folders) {
-				exportFolder(context, foldersEl, imagesEl, igFolder);
+			for (IGFolder folder : folders) {
+				exportFolder(context, foldersEl, imagesEl, folder);
 			}
 
 			return XMLFormatter.toString(doc);
@@ -149,38 +144,33 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 			Element root = doc.getRootElement();
 
-			// Folders
-
-			List<Element> folderEls =
-				root.element("folders").elements("folder");
+			List<Element> folderEls = root.element("folders").elements(
+				"folder");
 
 			Map<Long, Long> folderPKs = context.getNewPrimaryKeysMap(
 				IGFolder.class);
 
-			for (Element el : folderEls) {
-				String path = el.attributeValue("path");
+			for (Element folderEl : folderEls) {
+				String path = folderEl.attributeValue("path");
 
 				if (context.isPathNotProcessed(path)) {
-					IGFolder folder =
-						(IGFolder)context.getZipEntryAsObject(path);
+					IGFolder folder = (IGFolder)context.getZipEntryAsObject(
+						path);
 
 					importFolder(context, folderPKs, folder);
 				}
 			}
 
-			// IGImages
+			List<Element> imageEls = root.element("images").elements("image");
 
-			List<Element> entryEls = root.element("images").elements("image");
-
-			for (Element el : entryEls) {
-				String path = el.attributeValue("path");
-				String binPath = el.attributeValue("bin-path");
+			for (Element imageEl : imageEls) {
+				String path = imageEl.attributeValue("path");
+				String binPath = imageEl.attributeValue("bin-path");
 
 				if (context.isPathNotProcessed(path)) {
-					IGImage igImage =
-						(IGImage)context.getZipEntryAsObject(path);
+					IGImage image = (IGImage)context.getZipEntryAsObject(path);
 
-					importImage(context, folderPKs, igImage, binPath);
+					importImage(context, folderPKs, image, binPath);
 				}
 			}
 
@@ -197,79 +187,15 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 	protected void exportFolder(
 			PortletDataContext context, Element foldersEl, Element imagesEl,
-			IGFolder igFolder)
+			IGFolder folder)
 		throws PortalException, SystemException {
 
-		if (context.isWithinDateRange(igFolder.getModifiedDate())) {
-			String path = getFolderPath(context, igFolder);
-
-			foldersEl.addElement("folder").addAttribute("path", path);
-
-			if (context.isPathNotProcessed(path)) {
-				igFolder.setUserUuid(igFolder.getUserUuid());
-
-				context.addZipEntry(path, igFolder);
-			}
-
-			exportParentFolder(
-				context, foldersEl, igFolder.getParentFolderId());
-		}
-
-		List<IGImage> igImages =
-			IGImageUtil.findByFolderId(igFolder.getFolderId());
-
-		for (IGImage igImage : igImages) {
-			exportImage(context, foldersEl, imagesEl, igImage);
-		}
-	}
-
-	protected void exportImage(
-			PortletDataContext context, Element foldersEl, Element imagesEl,
-			IGImage image)
-		throws PortalException, SystemException {
-
-		if (context.isWithinDateRange(image.getModifiedDate())) {
-			String path = getImagePath(context, image);
-
-			Element imageEl = imagesEl.addElement("image");
-			imageEl.addAttribute("path", path);
-			imageEl.addAttribute("bin-path", getImageBinPath(context, image));
-
-			if (context.isPathNotProcessed(path)) {
-				if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-					context.addTagsEntries(
-						IGImage.class, image.getPrimaryKeyObj());
-				}
-
-				image.setUserUuid(image.getUserUuid());
-
-				Image largeImage = ImageUtil.findByPrimaryKey(
-					image.getLargeImageId());
-
-				image.setImageType(largeImage.getType());
-
-				context.addZipEntry(
-					getImageBinPath(context, image), largeImage.getTextObj());
-
-				context.addZipEntry(path, image);
-			}
-
-			exportParentFolder(context, foldersEl, image.getFolderId());
-		}
-	}
-
-	protected void exportParentFolder(
-			PortletDataContext context, Element foldersEl,
-			long folderId)
-		throws PortalException, SystemException {
-
-		if (context.hasDateRange() &&
-				(folderId != IGFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
-			IGFolder folder = IGFolderUtil.findByPrimaryKey(folderId);
-
+		if (context.isWithinDateRange(folder.getModifiedDate())) {
 			String path = getFolderPath(context, folder);
 
-			foldersEl.addElement("folder").addAttribute("path", path);
+			Element folderEl = foldersEl.addElement("folder");
+
+			folderEl.addAttribute("path", path);
 
 			if (context.isPathNotProcessed(path)) {
 				folder.setUserUuid(folder.getUserUuid());
@@ -279,17 +205,87 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 			exportParentFolder(context, foldersEl, folder.getParentFolderId());
 		}
+
+		List<IGImage> images = IGImageUtil.findByFolderId(folder.getFolderId());
+
+		for (IGImage image : images) {
+			exportImage(context, foldersEl, imagesEl, image);
+		}
+	}
+
+	protected void exportImage(
+			PortletDataContext context, Element foldersEl, Element imagesEl,
+			IGImage image)
+		throws PortalException, SystemException {
+
+		if (!context.isWithinDateRange(image.getModifiedDate())) {
+			return;
+		}
+
+		String path = getImagePath(context, image);
+
+		Element imageEl = imagesEl.addElement("image");
+
+		imageEl.addAttribute("path", path);
+		imageEl.addAttribute("bin-path", getImageBinPath(context, image));
+
+		if (context.isPathNotProcessed(path)) {
+			if (context.getBooleanParameter(_NAMESPACE, "tags")) {
+				context.addTagsEntries(IGImage.class, image.getImageId());
+			}
+
+			image.setUserUuid(image.getUserUuid());
+
+			Image largeImage = ImageUtil.findByPrimaryKey(
+				image.getLargeImageId());
+
+			image.setImageType(largeImage.getType());
+
+			context.addZipEntry(
+				getImageBinPath(context, image), largeImage.getTextObj());
+
+			context.addZipEntry(path, image);
+		}
+
+		exportParentFolder(context, foldersEl, image.getFolderId());
+	}
+
+	protected void exportParentFolder(
+			PortletDataContext context, Element foldersEl, long folderId)
+		throws PortalException, SystemException {
+
+		if ((!context.hasDateRange()) ||
+			(folderId == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+
+			return;
+		}
+
+		IGFolder folder = IGFolderUtil.findByPrimaryKey(folderId);
+
+		String path = getFolderPath(context, folder);
+
+		Element folderEl = foldersEl.addElement("folder");
+
+		folderEl.addAttribute("path", path);
+
+		if (context.isPathNotProcessed(path)) {
+			folder.setUserUuid(folder.getUserUuid());
+
+			context.addZipEntry(path, folder);
+		}
+
+		exportParentFolder(context, foldersEl, folder.getParentFolderId());
 	}
 
 	protected void importFolder(
 			PortletDataContext context, Map<Long, Long> folderPKs,
-			IGFolder igFolder)
+			IGFolder folder)
 		throws Exception {
 
-		long userId = context.getUserId(igFolder.getUserUuid());
+		long userId = context.getUserId(folder.getUserUuid());
 		long plid = context.getPlid();
 		long parentFolderId = MapUtil.getLong(
-			folderPKs, igFolder.getParentFolderId(), igFolder.getParentFolderId());
+			folderPKs, folder.getParentFolderId(), folder.getParentFolderId());
 
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
@@ -305,77 +301,77 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
 
 				existingFolder = IGFolderUtil.fetchByUUID_G(
-					igFolder.getUuid(), context.getGroupId());
+					folder.getUuid(), context.getGroupId());
 
 				if (existingFolder == null) {
 					String name = getFolderName(
 						context.getCompanyId(), context.getGroupId(),
-						parentFolderId, igFolder.getName(), 2);
+						parentFolderId, folder.getName(), 2);
 
 					existingFolder = IGFolderLocalServiceUtil.addFolder(
-						igFolder.getUuid(), userId, plid, parentFolderId,
-						name, igFolder.getDescription(), addCommunityPermissions,
+						folder.getUuid(), userId, plid, parentFolderId,
+						name, folder.getDescription(), addCommunityPermissions,
 						addGuestPermissions);
 				}
 				else {
 					existingFolder =
 						IGFolderLocalServiceUtil.updateFolder(
 						existingFolder.getFolderId(), parentFolderId,
-						igFolder.getName(), igFolder.getDescription(),
+						folder.getName(), folder.getDescription(),
 						false);
 				}
 			}
 			else {
 				String name = getFolderName(
 					context.getCompanyId(), context.getGroupId(),
-					parentFolderId, igFolder.getName(), 2);
+					parentFolderId, folder.getName(), 2);
 
 				existingFolder = IGFolderLocalServiceUtil.addFolder(
-					userId, plid, parentFolderId, name, igFolder.getDescription(),
+					userId, plid, parentFolderId, name, folder.getDescription(),
 					addCommunityPermissions, addGuestPermissions);
 			}
 
-			folderPKs.put(igFolder.getFolderId(), existingFolder.getFolderId());
+			folderPKs.put(folder.getFolderId(), existingFolder.getFolderId());
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(
 				"Could not find the parent folder for folder " +
-					igFolder.getFolderId());
+					folder.getFolderId());
 		}
 	}
 
 	protected void importImage(
 			PortletDataContext context, Map<Long, Long> folderPKs,
-			IGImage igImage, String binPath)
+			IGImage image, String binPath)
 		throws Exception {
 
-		long userId = context.getUserId(igImage.getUserUuid());
+		long userId = context.getUserId(image.getUserUuid());
 		long folderId = MapUtil.getLong(
-			folderPKs, igImage.getFolderId(), igImage.getFolderId());
+			folderPKs, image.getFolderId(), image.getFolderId());
 
 		File imageFile = null;
 
-		byte[] byteArray = context.getZipEntryAsByteArray(binPath);
+		byte[] bytes = context.getZipEntryAsByteArray(binPath);
 
-		if (byteArray == null) {
+		if (bytes == null) {
 			_log.error(
-				"Could not find image for IG image " + igImage.getImageId());
+				"Could not find image file for image " + image.getImageId());
 
 			return;
 		}
 		else {
 			imageFile = File.createTempFile(
-				String.valueOf(igImage.getPrimaryKey()),
-				StringPool.PERIOD + igImage.getImageType());
+				String.valueOf(image.getPrimaryKey()),
+				StringPool.PERIOD + image.getImageType());
 
-			FileUtil.write(imageFile, byteArray);
+			FileUtil.write(imageFile, bytes);
 		}
 
 		String[] tagsEntries = null;
 
 		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
 			tagsEntries = context.getTagsEntries(
-				IGImage.class, igImage.getPrimaryKeyObj());
+				IGImage.class, image.getImageId());
 		}
 
 		boolean addCommunityPermissions = true;
@@ -391,32 +387,32 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 				try {
 					existingImage = IGImageFinderUtil.findByUuid_G(
-						igImage.getUuid(), context.getGroupId());
+						image.getUuid(), context.getGroupId());
 
 					IGImageLocalServiceUtil.updateImage(
 						userId, existingImage.getImageId(), folderId,
-						igImage.getName(), igImage.getDescription(), imageFile,
-						igImage.getImageType(), tagsEntries);
+						image.getName(), image.getDescription(), imageFile,
+						image.getImageType(), tagsEntries);
 				}
 				catch (NoSuchImageException nsie) {
 					IGImageLocalServiceUtil.addImage(
-						igImage.getUuid(), userId, folderId,
-						igImage.getName(), igImage.getDescription(), imageFile,
-						igImage.getImageType(), tagsEntries,
+						image.getUuid(), userId, folderId,
+						image.getName(), image.getDescription(), imageFile,
+						image.getImageType(), tagsEntries,
 						addCommunityPermissions, addGuestPermissions);
 				}
 			}
 			else {
 				IGImageLocalServiceUtil.addImage(
-					userId, folderId, igImage.getName(),
-					igImage.getDescription(), imageFile, igImage.getImageType(),
+					userId, folderId, image.getName(),
+					image.getDescription(), imageFile, image.getImageType(),
 					tagsEntries, addCommunityPermissions, addGuestPermissions);
 			}
 		}
 		catch (NoSuchFolderException nsfe) {
 			_log.error(
-				"Could not find the parent folder for IG image " +
-					igImage.getImageId());
+				"Could not find the parent folder for image " +
+					image.getImageId());
 		}
 	}
 
@@ -452,22 +448,43 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected String getFolderPath(
-			PortletDataContext context, IGFolder folder) {
-		return context.getPortletPath(PortletKeys.IMAGE_GALLERY) + "/folders/" +
-			folder.getFolderId() + ".xml";
+		PortletDataContext context, IGFolder folder) {
+
+		StringMaker sm = new StringMaker();
+
+		sm.append(context.getPortletPath(PortletKeys.IMAGE_GALLERY));
+		sm.append("/folders/");
+		sm.append(folder.getFolderId());
+		sm.append(".xml");
+
+		return sm.toString();
 	}
 
 	protected String getImageBinPath(
-			PortletDataContext context, IGImage image) {
-		return context.getPortletPath(PortletKeys.IMAGE_GALLERY) +
-			"/bin/" + image.getImageId() + CharPool.PERIOD +
-				image.getImageType();
+		PortletDataContext context, IGImage image) {
+
+		StringMaker sm = new StringMaker();
+
+		sm.append(context.getPortletPath(PortletKeys.IMAGE_GALLERY));
+		sm.append("/bin/");
+		sm.append(image.getImageId());
+		sm.append(StringPool.PERIOD);
+		sm.append(image.getImageType());
+
+		return sm.toString();
 	}
 
 	protected String getImagePath(
-			PortletDataContext context, IGImage image) {
-		return context.getPortletPath(PortletKeys.IMAGE_GALLERY) + "/images/" +
-			image.getImageId() + ".xml";
+		PortletDataContext context, IGImage image) {
+
+		StringMaker sm = new StringMaker();
+
+		sm.append(context.getPortletPath(PortletKeys.IMAGE_GALLERY));
+		sm.append("/images/");
+		sm.append(image.getImageId());
+		sm.append(".xml");
+
+		return sm.toString();
 	}
 
 	private static final String _NAMESPACE = "image_gallery";
