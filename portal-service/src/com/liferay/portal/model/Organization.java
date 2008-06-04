@@ -74,6 +74,5 @@ public interface Organization extends OrganizationModel {
 	public com.liferay.portal.model.Address getAddress();
 
 	public java.util.List<com.liferay.portal.model.Address> getAddresses()
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 }

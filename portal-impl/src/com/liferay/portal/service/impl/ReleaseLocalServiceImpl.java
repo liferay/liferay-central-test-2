@@ -106,7 +106,7 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 		}
 	}
 
-	public Release getRelease() throws PortalException, SystemException {
+	public Release getRelease() throws SystemException {
 		Release release = null;
 
 		try {
@@ -127,9 +127,7 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 		return release;
 	}
 
-	public Release updateRelease(boolean verified)
-		throws PortalException, SystemException {
-
+	public Release updateRelease(boolean verified) throws SystemException {
 		Release release = getRelease();
 
 		release.setModifiedDate(new Date());

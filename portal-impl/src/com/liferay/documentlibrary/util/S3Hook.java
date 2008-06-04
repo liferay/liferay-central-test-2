@@ -79,15 +79,15 @@ public class S3Hook extends BaseHook {
 		}
 	}
 
-	public void addDirectory(long companyId, long repositoryId, String dirName)
-		throws PortalException, SystemException {
+	public void addDirectory(
+		long companyId, long repositoryId, String dirName) {
 	}
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, String properties, String[] tagsEntries,
 			InputStream is)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		try {
 			S3Object s3Object = new S3Object(
@@ -110,12 +110,12 @@ public class S3Hook extends BaseHook {
 		}
 	}
 
-	public void checkRoot(long companyId) throws SystemException {
+	public void checkRoot(long companyId) {
 	}
 
 	public void deleteDirectory(
 			long companyId, String portletId, long repositoryId, String dirName)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		try {
 			S3Object[] s3Objects = _s3Service.listObjects(
@@ -135,7 +135,7 @@ public class S3Hook extends BaseHook {
 	public void deleteFile(
 			long companyId, String portletId, long repositoryId,
 			String fileName)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		try {
 			S3Object[] s3Objects = _s3Service.listObjects(
@@ -160,7 +160,7 @@ public class S3Hook extends BaseHook {
 	public void deleteFile(
 			long companyId, String portletId, long repositoryId,
 			String fileName, double versionNumber)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		try {
 			_s3Service.deleteObject(
@@ -196,7 +196,7 @@ public class S3Hook extends BaseHook {
 
 	public String[] getFileNames(
 			long companyId, long repositoryId, String dirName)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		try {
 			List<String> list = new ArrayList<String>();
@@ -250,7 +250,7 @@ public class S3Hook extends BaseHook {
 	public boolean hasFile(
 			long companyId, long repositoryId, String fileName,
 			double versionNumber)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		try {
 			S3Object[] s3Objects = _s3Service.listObjects(
@@ -269,7 +269,7 @@ public class S3Hook extends BaseHook {
 		}
 	}
 
-	public void move(String srcDir, String destDir) throws SystemException {
+	public void move(String srcDir, String destDir) {
 	}
 
 	public void reIndex(String[] ids) throws SearchException {
@@ -317,7 +317,7 @@ public class S3Hook extends BaseHook {
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
 			String properties, String[] tagsEntries, InputStream is)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		try {
 			S3Object s3Object = new S3Object(

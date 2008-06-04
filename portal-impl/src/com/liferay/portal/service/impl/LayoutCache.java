@@ -254,7 +254,7 @@ public class LayoutCache  {
 	}
 
 	protected User getUser(long companyId, long groupId, String emailAddress)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<User> users = usersMap.get(emailAddress);
 

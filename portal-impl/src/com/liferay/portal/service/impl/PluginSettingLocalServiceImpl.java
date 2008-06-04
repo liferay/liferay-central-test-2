@@ -129,7 +129,7 @@ public class PluginSettingLocalServiceImpl
 	public PluginSetting updatePluginSetting(
 			long companyId, String pluginId, String pluginType, String roles,
 			boolean active)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		pluginId = PortalUtil.getJsSafePortletId(pluginId);
 

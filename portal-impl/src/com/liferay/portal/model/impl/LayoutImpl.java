@@ -282,7 +282,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 	}
 
-	public List<Layout> getChildren() throws PortalException, SystemException {
+	public List<Layout> getChildren() throws SystemException {
 		return LayoutLocalServiceUtil.getLayouts(
 			getGroupId(), isPrivateLayout(), getLayoutId());
 	}
@@ -538,7 +538,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 	}
 
-	public String getCssText() throws PortalException, SystemException {
+	public String getCssText() {
 		if (isInheritLookAndFeel()) {
 			return getLayoutSet().getCss();
 		}

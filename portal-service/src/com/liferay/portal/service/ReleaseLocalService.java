@@ -82,10 +82,8 @@ public interface ReleaseLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Release getRelease()
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Release updateRelease(boolean verified)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 }

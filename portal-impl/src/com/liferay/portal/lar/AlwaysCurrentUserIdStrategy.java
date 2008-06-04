@@ -22,7 +22,6 @@
 
 package com.liferay.portal.lar;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.model.User;
 
@@ -38,7 +37,7 @@ public class AlwaysCurrentUserIdStrategy implements UserIdStrategy {
 		_user = user;
 	}
 
-	public long getUserId(String userUuid) throws SystemException {
+	public long getUserId(String userUuid) {
 		return _user.getUserId();
 	}
 

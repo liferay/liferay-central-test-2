@@ -504,7 +504,9 @@ public class SourceFormatter {
 			}
 
 			if (newContent.indexOf("    ") != -1) {
-				System.out.println("tab: " + files[i]);
+				if (!files[i].endsWith("template.vm")) {
+					System.out.println("tab: " + files[i]);
+				}
 			}
 
 			_checkXSS(files[i], content);

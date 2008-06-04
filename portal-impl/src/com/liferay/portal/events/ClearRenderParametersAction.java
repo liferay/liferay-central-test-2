@@ -23,7 +23,6 @@
 package com.liferay.portal.events;
 
 import com.liferay.portal.kernel.events.Action;
-import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.util.WebKeys;
 
 import java.util.Map;
@@ -40,8 +39,7 @@ import javax.servlet.http.HttpSession;
  */
 public class ClearRenderParametersAction extends Action {
 
-	public void run(HttpServletRequest req, HttpServletResponse res)
-		throws ActionException {
+	public void run(HttpServletRequest req, HttpServletResponse res) {
 
 		// Some users are confused by the behavior stated in the JSR 168 spec
 		// that render parameters are saved across requests. Set this class to

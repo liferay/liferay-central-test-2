@@ -313,11 +313,10 @@ public class LayoutTemplateLocalServiceImpl
 	}
 
 	public void readLayoutTemplate(
-			String servletContextName, ServletContext ctx,
-			Set<ObjectValuePair<String, Boolean>> layoutTemplateIds,
-			com.liferay.portal.kernel.xml.Element el, boolean standard,
-			String themeId, PluginPackage pluginPackage)
-		throws IOException {
+		String servletContextName, ServletContext ctx,
+		Set<ObjectValuePair<String, Boolean>> layoutTemplateIds,
+		com.liferay.portal.kernel.xml.Element el, boolean standard,
+		String themeId, PluginPackage pluginPackage) {
 
 		Map<String, LayoutTemplate> layoutTemplates = null;
 
@@ -510,7 +509,7 @@ public class LayoutTemplateLocalServiceImpl
 	private Set<ObjectValuePair<String, Boolean>> _readLayoutTemplates(
 			String servletContextName, ServletContext ctx, String xml,
 			PluginPackage pluginPackage)
-		throws DocumentException, IOException {
+		throws DocumentException {
 
 		Set<ObjectValuePair<String, Boolean>> layoutTemplateIds =
 			new HashSet<ObjectValuePair<String, Boolean>>();

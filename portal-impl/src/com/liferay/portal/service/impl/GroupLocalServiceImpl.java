@@ -401,8 +401,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			companyId, classNameId, organizationId);
 	}
 
-	public List<Group> getOrganizationsGroups(List<Organization> organizations)
-		throws PortalException, SystemException {
+	public List<Group> getOrganizationsGroups(
+		List<Organization> organizations) {
 
 		List<Group> organizationGroups = new ArrayList<Group>();
 
@@ -452,9 +452,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return userPersistence.getGroups(userId);
 	}
 
-	public List<Group> getUserGroupsGroups(List<UserGroup> userGroups)
-		throws PortalException, SystemException {
-
+	public List<Group> getUserGroupsGroups(List<UserGroup> userGroups) {
 		List<Group> userGroupGroups = new ArrayList<Group>();
 
 		for (int i = 0; i < userGroups.size(); i++) {
@@ -469,7 +467,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	public boolean hasRoleGroup(long roleId, long groupId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return rolePersistence.containsGroup(roleId, groupId);
 	}

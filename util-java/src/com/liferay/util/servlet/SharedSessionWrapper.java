@@ -77,7 +77,8 @@ public class SharedSessionWrapper implements HttpSession {
 
 	public Enumeration<String> getAttributeNames() {
 		if (_sharedAttributes.size() > 0) {
-			List<String> names = ListUtil.fromEnumeration(_ses.getAttributeNames());
+			List<String> names = ListUtil.fromEnumeration(
+				_ses.getAttributeNames());
 
 			for (String name : _sharedAttributes.keySet()) {
 				names.add(name);

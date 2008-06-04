@@ -281,7 +281,7 @@ public class OrganizationLocalServiceImpl
 	}
 
 	public long getOrganizationId(long companyId, String name)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		try {
 			Organization organization = organizationPersistence.findByC_N(
@@ -344,9 +344,8 @@ public class OrganizationLocalServiceImpl
 	}
 
 	public List<Organization> getSubsetOrganizations(
-			List<Organization> allOrganizations,
-			List<Organization> availableOrganizations)
-		throws PortalException, SystemException {
+		List<Organization> allOrganizations,
+		List<Organization> availableOrganizations) {
 
 		List<Organization> subsetOrganizations = new ArrayList<Organization>();
 
@@ -369,20 +368,18 @@ public class OrganizationLocalServiceImpl
 		return userPersistence.getOrganizations(userId);
 	}
 
-	public int getUserOrganizationsCount(long userId)
-		throws PortalException, SystemException {
-
+	public int getUserOrganizationsCount(long userId) throws SystemException {
 		return userPersistence.getOrganizationsSize(userId);
 	}
 
 	public boolean hasGroupOrganization(long groupId, long organizationId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return groupPersistence.containsOrganization(groupId, organizationId);
 	}
 
 	public boolean hasUserOrganization(long userId, long organizationId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return userPersistence.containsOrganization(userId, organizationId);
 	}
@@ -400,7 +397,7 @@ public class OrganizationLocalServiceImpl
 			int type, Long regionId, Long countryId,
 			LinkedHashMap<String, Object> params,
 			int start, int end)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return search(
 			companyId, parentOrganizationId, keywords, type, regionId,
@@ -413,7 +410,7 @@ public class OrganizationLocalServiceImpl
 			int type, Long regionId, Long countryId,
 			LinkedHashMap<String, Object> params,
 			int start, int end, OrderByComparator obc)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		String parentOrganizationComparator = StringPool.EQUAL;
 
@@ -435,7 +432,7 @@ public class OrganizationLocalServiceImpl
 			Long regionId, Long countryId,
 			LinkedHashMap<String, Object> params, boolean andOperator,
 			int start, int end)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return search(
 			companyId, parentOrganizationId, name, type, street, city, zip,
@@ -448,7 +445,7 @@ public class OrganizationLocalServiceImpl
 			String street, String city, String zip,
 			Long regionId, Long countryId, LinkedHashMap<String, Object> params,
 			boolean andOperator, int start, int end, OrderByComparator obc)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		String parentOrganizationComparator = StringPool.EQUAL;
 
@@ -468,7 +465,7 @@ public class OrganizationLocalServiceImpl
 			long companyId, long parentOrganizationId, String keywords,
 			int type, Long regionId, Long countryId,
 			LinkedHashMap<String, Object> params)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		String parentOrganizationComparator = StringPool.EQUAL;
 
@@ -488,7 +485,7 @@ public class OrganizationLocalServiceImpl
 			String street, String city, String zip,
 			Long regionId, Long countryId, LinkedHashMap<String, Object> params,
 			boolean andOperator)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		String parentOrganizationComparator = StringPool.EQUAL;
 
@@ -587,7 +584,7 @@ public class OrganizationLocalServiceImpl
 
 	protected long getParentOrganizationId(
 			long companyId, long parentOrganizationId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (parentOrganizationId !=
 				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {

@@ -64,7 +64,7 @@ public class FileSystemHook extends BaseHook {
 	}
 
 	public void addDirectory(long companyId, long repositoryId, String dirName)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		File dirNameDir = getDirNameDir(companyId, repositoryId, dirName);
 
@@ -100,12 +100,12 @@ public class FileSystemHook extends BaseHook {
 		}
 	}
 
-	public void checkRoot(long companyId) throws SystemException {
+	public void checkRoot(long companyId) {
 	}
 
 	public void deleteDirectory(
 			long companyId, String portletId, long repositoryId, String dirName)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		File dirNameDir = getDirNameDir(companyId, repositoryId, dirName);
 
@@ -141,7 +141,7 @@ public class FileSystemHook extends BaseHook {
 	public void deleteFile(
 			long companyId, String portletId, long repositoryId,
 			String fileName, double versionNumber)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		File fileNameVersionFile = getFileNameVersionFile(
 			companyId, repositoryId, fileName, versionNumber);
@@ -231,9 +231,8 @@ public class FileSystemHook extends BaseHook {
 	}
 
 	public boolean hasFile(
-			long companyId, long repositoryId, String fileName,
-			double versionNumber)
-		throws PortalException, SystemException {
+		long companyId, long repositoryId, String fileName,
+		double versionNumber) {
 
 		File fileNameVersionFile = getFileNameVersionFile(
 			companyId, repositoryId, fileName, versionNumber);
@@ -246,7 +245,7 @@ public class FileSystemHook extends BaseHook {
 		}
 	}
 
-	public void move(String srcDir, String destDir) throws SystemException {
+	public void move(String srcDir, String destDir) {
 	}
 
 	public void reIndex(String[] ids) throws SearchException {
@@ -307,7 +306,7 @@ public class FileSystemHook extends BaseHook {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			long newRepositoryId, String fileName)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		try {
 			File fileNameDir = getFileNameDir(

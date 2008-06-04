@@ -129,8 +129,7 @@ public class RoleServiceJSON {
 	}
 
 	public static JSONArray getUserGroupRoles(long userId, long groupId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portal.model.Role> returnValue = RoleServiceUtil.getUserGroupRoles(userId,
 				groupId);
 
@@ -139,8 +138,7 @@ public class RoleServiceJSON {
 
 	public static JSONArray getUserRelatedRoles(long userId,
 		java.util.List<com.liferay.portal.model.Group> groups)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portal.model.Role> returnValue = RoleServiceUtil.getUserRelatedRoles(userId,
 				groups);
 

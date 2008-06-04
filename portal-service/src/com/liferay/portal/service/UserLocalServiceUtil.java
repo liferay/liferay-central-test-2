@@ -215,9 +215,7 @@ public class UserLocalServiceUtil {
 	}
 
 	public static boolean authenticateForJAAS(long userId,
-		java.lang.String encPassword)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		java.lang.String encPassword) {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		return userLocalService.authenticateForJAAS(userId, encPassword);
@@ -232,8 +230,7 @@ public class UserLocalServiceUtil {
 	}
 
 	public static void checkLoginFailure(com.liferay.portal.model.User user)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		userLocalService.checkLoginFailure(user);
@@ -401,8 +398,7 @@ public class UserLocalServiceUtil {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String emailAddress,
 		boolean andOperator, int start, int end)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		return userLocalService.getPermissionUsers(companyId, groupId, name,
@@ -415,8 +411,7 @@ public class UserLocalServiceUtil {
 		java.lang.String actionId, java.lang.String firstName,
 		java.lang.String middleName, java.lang.String lastName,
 		java.lang.String emailAddress, boolean andOperator)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		return userLocalService.getPermissionUsersCount(companyId, groupId,
@@ -617,16 +612,14 @@ public class UserLocalServiceUtil {
 	}
 
 	public static boolean hasGroupUser(long groupId, long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		return userLocalService.hasGroupUser(groupId, userId);
 	}
 
 	public static boolean hasOrganizationUser(long organizationId, long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		return userLocalService.hasOrganizationUser(organizationId, userId);
@@ -642,16 +635,14 @@ public class UserLocalServiceUtil {
 	}
 
 	public static boolean hasRoleUser(long roleId, long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		return userLocalService.hasRoleUser(roleId, userId);
 	}
 
 	public static boolean hasUserGroupUser(long userGroupId, long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		return userLocalService.hasUserGroupUser(userGroupId, userId);

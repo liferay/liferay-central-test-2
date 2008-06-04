@@ -148,7 +148,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	}
 
 	public List<UserGroup> getUserGroups(long companyId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return userGroupPersistence.findByCompanyId(companyId);
 	}
@@ -160,7 +160,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	}
 
 	public boolean hasGroupUserGroup(long groupId, long userGroupId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return groupPersistence.containsUserGroup(groupId, userGroupId);
 	}

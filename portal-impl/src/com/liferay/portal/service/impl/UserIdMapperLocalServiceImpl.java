@@ -64,7 +64,7 @@ public class UserIdMapperLocalServiceImpl
 
 	public UserIdMapper updateUserIdMapper(
 			long userId, String type, String description, String externalUserId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		UserIdMapper userIdMapper = userIdMapperPersistence.fetchByU_T(
 			userId, type);

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.events;
 
-import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
 
 /**
@@ -33,7 +32,7 @@ import com.liferay.portal.kernel.events.SimpleAction;
  */
 public class AppShutdownAction extends SimpleAction {
 
-	public void run(String[] ids) throws ActionException {
+	public void run(String[] ids) {
 	}
 
 }

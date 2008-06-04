@@ -216,7 +216,7 @@ public class CounterPersistence extends BasePersistence {
 		}
 	}
 
-	public void reset(String name, long size) throws SystemException {
+	public void reset(String name, long size) {
 		CounterRegister register = createCounterRegister(name, size);
 
 		synchronized (register) {
@@ -224,9 +224,7 @@ public class CounterPersistence extends BasePersistence {
 		}
 	}
 
-	protected synchronized CounterRegister getCounterRegister(String name)
-		throws SystemException {
-
+	protected synchronized CounterRegister getCounterRegister(String name) {
 		CounterRegister register = _registerLookup.get(name);
 
 		if (register == null) {
@@ -238,15 +236,12 @@ public class CounterPersistence extends BasePersistence {
 		return register;
 	}
 
-	protected synchronized CounterRegister createCounterRegister(String name)
-		throws SystemException {
-
+	protected synchronized CounterRegister createCounterRegister(String name) {
 		return createCounterRegister(name, -1);
 	}
 
 	protected synchronized CounterRegister createCounterRegister(
-			String name, long size)
-		throws SystemException {
+		String name, long size) {
 
 		long rangeMin = 0;
 		long rangeMax = 0;

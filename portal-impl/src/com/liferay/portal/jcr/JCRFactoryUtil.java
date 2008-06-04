@@ -35,7 +35,7 @@ import javax.jcr.Session;
  */
 public class JCRFactoryUtil {
 
-	public static JCRFactory getJCRFactory() throws RepositoryException {
+	public static JCRFactory getJCRFactory() {
 		if (_jcrFactory == null) {
 			_jcrFactory = (JCRFactory)BeanLocatorUtil.locate(_JCR_FACTORY);
 		}

@@ -484,9 +484,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return 0;
 	}
 
-	public boolean authenticateForJAAS(long userId, String encPassword)
-		throws PortalException, SystemException {
-
+	public boolean authenticateForJAAS(long userId, String encPassword) {
 		try {
 			User user = userPersistence.findByPrimaryKey(userId);
 
@@ -585,9 +583,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 	}
 
-	public void checkLoginFailure(User user)
-		throws PortalException, SystemException {
-
+	public void checkLoginFailure(User user) throws SystemException {
 		Date now = new Date();
 
 		int failedLoginAttempts = user.getFailedLoginAttempts();
@@ -947,7 +943,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String actionId, String firstName, String middleName,
 			String lastName, String emailAddress, boolean andOperator,
 			int start, int end)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		int orgGroupPermissionsCount =
 			permissionUserFinder.countByOrgGroupPermissions(
@@ -969,7 +965,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			long companyId, long groupId, String name, String primKey,
 			String actionId, String firstName, String middleName,
 			String lastName, String emailAddress, boolean andOperator)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		int orgGroupPermissionsCount =
 			permissionUserFinder.countByOrgGroupPermissions(
@@ -1213,13 +1209,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public boolean hasGroupUser(long groupId, long userId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return groupPersistence.containsUser(groupId, userId);
 	}
 
 	public boolean hasOrganizationUser(long organizationId, long userId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return organizationPersistence.containsUser(organizationId, userId);
 	}
@@ -1232,13 +1228,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public boolean hasRoleUser(long roleId, long userId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return rolePersistence.containsUser(roleId, userId);
 	}
 
 	public boolean hasUserGroupUser(long userGroupId, long userId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return userGroupPersistence.containsUser(userGroupId, userId);
 	}

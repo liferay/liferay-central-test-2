@@ -37,7 +37,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ContactListener implements ModelListener {
 
-	public void onBeforeCreate(BaseModel model) throws ModelListenerException {
+	public void onBeforeCreate(BaseModel model) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("onBeforeCreate");
 		}
@@ -58,19 +58,19 @@ public class ContactListener implements ModelListener {
 		}
 	}
 
-	public void onBeforeRemove(BaseModel model) throws ModelListenerException {
+	public void onBeforeRemove(BaseModel model) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("onBeforeRemove");
 		}
 	}
 
-	public void onAfterRemove(BaseModel model) throws ModelListenerException {
+	public void onAfterRemove(BaseModel model) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("onAfterRemove");
 		}
 	}
 
-	public void onBeforeUpdate(BaseModel model) throws ModelListenerException {
+	public void onBeforeUpdate(BaseModel model) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("onBeforeUpdate");
 		}

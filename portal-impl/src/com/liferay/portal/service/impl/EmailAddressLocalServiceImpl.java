@@ -170,7 +170,7 @@ public class EmailAddressLocalServiceImpl
 	protected void validate(
 			long emailAddressId, long companyId, long classNameId, long classPK,
 			boolean primary)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		// Check to make sure there isn't another emailAddress with the same
 		// company id, class name, and class pk that also has primary set to

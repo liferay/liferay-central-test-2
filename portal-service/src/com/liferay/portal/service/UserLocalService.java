@@ -134,17 +134,14 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public boolean authenticateForJAAS(long userId, java.lang.String encPassword)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+	public boolean authenticateForJAAS(long userId, java.lang.String encPassword);
 
 	public void checkLockout(com.liferay.portal.model.User user)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void checkLoginFailure(com.liferay.portal.model.User user)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public void checkLoginFailureByEmailAddress(long companyId,
 		java.lang.String emailAddress)
@@ -230,16 +227,14 @@ public interface UserLocalService {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String emailAddress,
 		boolean andOperator, int start, int end)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public int getPermissionUsersCount(long companyId, long groupId,
 		java.lang.String name, java.lang.String primKey,
 		java.lang.String actionId, java.lang.String firstName,
 		java.lang.String middleName, java.lang.String lastName,
 		java.lang.String emailAddress, boolean andOperator)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> getRoleUsers(
 		long roleId)
@@ -342,24 +337,20 @@ public interface UserLocalService {
 			com.liferay.portal.PortalException;
 
 	public boolean hasGroupUser(long groupId, long userId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public boolean hasOrganizationUser(long organizationId, long userId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public boolean hasPasswordPolicyUser(long passwordPolicyId, long userId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public boolean hasRoleUser(long roleId, long userId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public boolean hasUserGroupUser(long userGroupId, long userId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public boolean isPasswordExpired(com.liferay.portal.model.User user)
 		throws com.liferay.portal.SystemException,

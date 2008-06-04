@@ -65,7 +65,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 	public Permission addPermission(
 			long companyId, String actionId, long resourceId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		Permission permission = permissionPersistence.fetchByA_R(
 			actionId, resourceId);
@@ -89,7 +89,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	public List<Permission> addPermissions(
 			long companyId, String name, long resourceId,
 			boolean portletActions)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<Permission> permissions = new ArrayList<Permission>();
 
@@ -132,9 +132,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		PermissionCacheUtil.clearCache();
 	}
 
-	public List<String> getActions(List<Permission> permissions)
-		throws SystemException {
-
+	public List<String> getActions(List<Permission> permissions) {
 		List<String> actions = new ArrayList<String>();
 
 		Iterator<Permission> itr = permissions.iterator();
@@ -171,9 +169,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			organizationId, groupId, resourceId);
 	}
 
-	public long getLatestPermissionId()
-		throws PortalException, SystemException {
-
+	public long getLatestPermissionId() throws SystemException {
 		List<Permission> permissions = permissionPersistence.findAll(
 			0, 1, new PermissionComparator());
 
@@ -189,7 +185,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 	public List<Permission> getPermissions(
 			long companyId, String[] actionIds, long resourceId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<Permission> permissions = new ArrayList<Permission>();
 
@@ -231,7 +227,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 	public boolean hasGroupPermission(
 			long groupId, String actionId, long resourceId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		Permission permission = null;
 
@@ -308,7 +304,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 	public boolean hasUserPermission(
 			long userId, String actionId, long resourceId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		Permission permission = null;
 
@@ -330,7 +326,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	public boolean hasUserPermissions(
 			long userId, long groupId, String actionId, long[] resourceIds,
 			PermissionCheckerBag permissionCheckerBag)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		StopWatch stopWatch = null;
 
@@ -734,7 +730,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			long userId, String actionId, long resourceId,
 			List<Permission> permissions, List<Group> groups, long groupId,
 			StopWatch stopWatch, int block)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		// Is the user connected to one of the permissions via group or
 		// organization roles?
@@ -793,7 +789,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			long userId, String actionId, long resourceId,
 			List<Permission> permissions, List<Group> groups, long groupId,
 			StopWatch stopWatch, int block)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		// Call countByGroupsRoles, countByGroupsPermissions, countByUsersRoles,
 		// countByUserGroupRole, and countByUsersPermissions in one method
@@ -813,7 +809,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			long userId, String actionId, long resourceId,
 			List<Permission> permissions, List<Group> groups, List<Role> roles,
 			StopWatch stopWatch, int block)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		// Is the user associated with groups or organizations that are directly
 		// connected to one of the permissions?
@@ -856,7 +852,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			long userId, String actionId, long resourceId,
 			List<Permission> permissions, List<Group> groups, List<Role> roles,
 			StopWatch stopWatch, int block)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		// Call countByGroupsPermissions, countByRolesPermissions, and
 		// countByUsersPermissions in one method

@@ -25,8 +25,6 @@ package com.liferay.portal.im;
 import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.util.PropsUtil;
 
-import java.io.IOException;
-
 import java.lang.reflect.Method;
 
 import org.apache.commons.logging.Log;
@@ -49,7 +47,7 @@ public class YMConnector {
 	}
 
 	public static void send(String to, String msg)
-		throws IllegalStateException, IOException {
+		throws IllegalStateException {
 
 		_instance._send(to, msg);
 	}
@@ -102,9 +100,7 @@ public class YMConnector {
 		}
 	}
 
-	private void _send(String to, String msg)
-		throws IllegalStateException , IOException {
-
+	private void _send(String to, String msg) throws IllegalStateException {
 		try {
 			if (_ym == null) {
 				_connect();

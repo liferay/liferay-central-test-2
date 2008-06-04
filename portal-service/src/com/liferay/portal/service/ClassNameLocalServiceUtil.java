@@ -110,17 +110,14 @@ public class ClassNameLocalServiceUtil {
 	}
 
 	public static void checkClassNames()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
 
 		classNameLocalService.checkClassNames();
 	}
 
 	public static com.liferay.portal.model.ClassName getClassName(
-		java.lang.String value)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		java.lang.String value) throws com.liferay.portal.SystemException {
 		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
 
 		return classNameLocalService.getClassName(value);

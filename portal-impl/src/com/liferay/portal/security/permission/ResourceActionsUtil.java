@@ -222,29 +222,25 @@ public class ResourceActionsUtil {
 	}
 
 	public static List<String> getPortletResourceCommunityDefaultActions(
-			String name)
-		throws SystemException {
+		String name) {
 
 		return _instance._getPortletResourceCommunityDefaultActions(name);
 	}
 
 	public static List<String> getPortletResourceGuestDefaultActions(
-			String name)
-		throws SystemException {
+		String name) {
 
 		return _instance._getPortletResourceGuestDefaultActions(name);
 	}
 
 	public static List<String> getPortletResourceGuestUnsupportedActions(
-			String name)
-		throws SystemException {
+		String name) {
 
 		return _instance._getPortletResourceGuestUnsupportedActions(name);
 	}
 
 	public static List<String> getPortletResourceLayoutManagerActions(
-			String name)
-		throws SystemException {
+		String name) {
 
 		return _instance._getPortletResourceLayoutManagerActions(name);
 	}
@@ -266,8 +262,7 @@ public class ResourceActionsUtil {
 	}
 
 	public static List<String> getResourceGuestUnsupportedActions(
-			String portletResource, String modelResource)
-		throws SystemException {
+		String portletResource, String modelResource) {
 
 		List<String> actions = null;
 
@@ -524,8 +519,8 @@ public class ResourceActionsUtil {
 		return actions;
 	}
 
-	private List<String> _getPortletResourceCommunityDefaultActions(String name)
-		throws SystemException {
+	private List<String> _getPortletResourceCommunityDefaultActions(
+		String name) {
 
 		// This method should always be called only after
 		// _getPortletResourceActions has been called at least once to
@@ -539,25 +534,21 @@ public class ResourceActionsUtil {
 		return _getActions(_portletResourceCommunityDefaultActions, name);
 	}
 
-	private List<String> _getPortletResourceGuestDefaultActions(String name)
-		throws SystemException {
-
+	private List<String> _getPortletResourceGuestDefaultActions(String name) {
 		name = PortletConstants.getRootPortletId(name);
 
 		return _getActions(_portletResourceGuestDefaultActions, name);
 	}
 
-	private List<String> _getPortletResourceGuestUnsupportedActions(String name)
-		throws SystemException {
+	private List<String> _getPortletResourceGuestUnsupportedActions(
+		String name) {
 
 		name = PortletConstants.getRootPortletId(name);
 
 		return _getActions(_portletResourceGuestUnsupportedActions, name);
 	}
 
-	private List<String> _getPortletResourceLayoutManagerActions(String name)
-		throws SystemException {
-
+	private List<String> _getPortletResourceLayoutManagerActions(String name) {
 		name = PortletConstants.getRootPortletId(name);
 
 		List<String> actions = _getActions(

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
@@ -110,9 +109,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		catch (DocumentException de) {
 			throw new SystemException(de);
 		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
 	}
 
 	public PortletCategory getWARDisplay(String servletContextName, String xml)
@@ -123,9 +119,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 		catch (DocumentException de) {
 			throw new SystemException(de);
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
 		}
 	}
 
@@ -401,7 +394,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 	public Portlet updatePortlet(
 			long companyId, String portletId, String roles, boolean active)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		portletId = PortalUtil.getJsSafePortletId(portletId);
 
@@ -476,7 +469,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return portletApp;
 	}
 
-	private String _getPortletId(String securityPath) throws SystemException {
+	private String _getPortletId(String securityPath) {
 		if (_portletIdsByStrutsPath.size() == 0) {
 			Iterator<Portlet> itr = _getPortletsPool().values().iterator();
 
@@ -680,14 +673,14 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	}
 
 	private PortletCategory _readLiferayDisplayXML(String xml)
-		throws DocumentException, IOException {
+		throws DocumentException {
 
 		return _readLiferayDisplayXML(null, xml);
 	}
 
 	private PortletCategory _readLiferayDisplayXML(
 			String servletContextName, String xml)
-		throws DocumentException, IOException {
+		throws DocumentException {
 
 		PortletCategory portletCategory = new PortletCategory();
 
@@ -751,7 +744,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 	private Set<String> _readLiferayPortletXML(
 			String xml, Map<String, Portlet> portletsPool)
-		throws DocumentException, IOException {
+		throws DocumentException {
 
 		return _readLiferayPortletXML(StringPool.BLANK, xml, portletsPool);
 	}
@@ -759,7 +752,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	private Set<String> _readLiferayPortletXML(
 			String servletContextName, String xml,
 			Map<String, Portlet> portletsPool)
-		throws DocumentException, IOException {
+		throws DocumentException {
 
 		Set<String> liferayPortletIds = new HashSet<String>();
 
@@ -1522,9 +1515,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return portletIds;
 	}
 
-	private List<String> _readWebXML(String xml)
-		throws DocumentException, IOException {
-
+	private List<String> _readWebXML(String xml) throws DocumentException {
 		List<String> servletURLPatterns = new ArrayList<String>();
 
 		if (xml == null) {

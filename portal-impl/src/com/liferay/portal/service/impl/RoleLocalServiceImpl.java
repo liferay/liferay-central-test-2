@@ -283,7 +283,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	}
 
 	public boolean hasUserRole(long userId, long roleId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return userPersistence.containsRole(userId, roleId);
 	}

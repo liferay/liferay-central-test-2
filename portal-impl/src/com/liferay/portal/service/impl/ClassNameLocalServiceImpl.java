@@ -42,7 +42,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ClassNameLocalServiceImpl extends ClassNameLocalServiceBaseImpl {
 
-	public void checkClassNames() throws PortalException, SystemException {
+	public void checkClassNames() throws SystemException {
 		List<String> models = ModelHintsUtil.getModels();
 
 		for (int i = 0; i < models.size(); i++) {
@@ -58,9 +58,7 @@ public class ClassNameLocalServiceImpl extends ClassNameLocalServiceBaseImpl {
 		return classNamePersistence.findByPrimaryKey(classNameId);
 	}
 
-	public ClassName getClassName(String value)
-		throws PortalException, SystemException {
-
+	public ClassName getClassName(String value) throws SystemException {
 		if (Validator.isNull(value)) {
 			return _nullClassName;
 		}

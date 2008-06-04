@@ -22,7 +22,6 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Group;
@@ -184,9 +183,7 @@ public class OrganizationImpl
 		return address;
 	}
 
-	public List<Address> getAddresses()
-		throws PortalException, SystemException {
-
+	public List<Address> getAddresses() throws SystemException {
 		return AddressLocalServiceUtil.getAddresses(
 			getCompanyId(), Organization.class.getName(), getOrganizationId());
 	}

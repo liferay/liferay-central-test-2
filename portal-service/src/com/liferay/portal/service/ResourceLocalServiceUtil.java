@@ -204,8 +204,7 @@ public class ResourceLocalServiceUtil {
 	}
 
 	public static long getLatestResourceId()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
 
 		return resourceLocalService.getLatestResourceId();

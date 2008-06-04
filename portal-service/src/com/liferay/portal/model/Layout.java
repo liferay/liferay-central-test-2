@@ -72,8 +72,7 @@ public interface Layout extends LayoutModel {
 	public boolean isRootLayout();
 
 	public java.util.List<com.liferay.portal.model.Layout> getChildren()
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Layout> getAllChildren()
 		throws com.liferay.portal.SystemException,
@@ -143,9 +142,7 @@ public interface Layout extends LayoutModel {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.lang.String getCssText()
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+	public java.lang.String getCssText();
 
 	public java.lang.String getRegularURL(
 		javax.servlet.http.HttpServletRequest req)

@@ -118,7 +118,7 @@ public class UserGroupRoleLocalServiceImpl
 
 	public void deleteUserGroupRoles(
 			long userId, long groupId, long[] roleIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		for (int i = 0; i < roleIds.length; i++) {
 			long roleId = roleIds[i];
@@ -136,7 +136,7 @@ public class UserGroupRoleLocalServiceImpl
 	}
 
 	public void deleteUserGroupRoles(long[] userIds, long groupId, long roleId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		for (int i = 0; i < userIds.length; i++) {
 			long userId = userIds[i];
@@ -178,14 +178,14 @@ public class UserGroupRoleLocalServiceImpl
 	}
 
 	public List<UserGroupRole> getUserGroupRoles(long userId, long groupId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return userGroupRolePersistence.findByU_G(userId, groupId);
 	}
 
 	public List<UserGroupRole> getUserGroupRolesByGroupAndRole(
 			long groupId, long roleId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return userGroupRolePersistence.findByG_R(groupId, roleId);
 	}

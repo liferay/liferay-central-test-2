@@ -77,12 +77,8 @@ public interface ClassNameLocalService {
 		com.liferay.portal.model.ClassName className)
 		throws com.liferay.portal.SystemException;
 
-	public void checkClassNames()
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+	public void checkClassNames() throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ClassName getClassName(
-		java.lang.String value)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		java.lang.String value) throws com.liferay.portal.SystemException;
 }

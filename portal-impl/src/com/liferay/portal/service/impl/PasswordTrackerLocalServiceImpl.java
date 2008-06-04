@@ -113,7 +113,7 @@ public class PasswordTrackerLocalServiceImpl
 	}
 
 	public void trackPassword(long userId, String encPassword)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long passwordTrackerId = counterLocalService.increment();
 

@@ -47,14 +47,14 @@ String src = (String)request.getAttribute("appUrl");
 			winHeight = window.innerHeight;
 		}
 		else if ((document.documentElement) &&
-		         (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
+				 (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
 
 			// IE 6+
 
 			winHeight = document.documentElement.clientHeight;
 		}
 		else if ((document.body) &&
-		         (document.body.clientWidth || document.body.clientHeight)) {
+				 (document.body.clientWidth || document.body.clientHeight)) {
 
 			// IE 4 compatible
 

@@ -344,8 +344,7 @@ public class RoleServiceHttp {
 
 	public static java.util.List<com.liferay.portal.model.Role> getUserGroupRoles(
 		HttpPrincipal httpPrincipal, long userId, long groupId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(userId);
 
@@ -364,10 +363,6 @@ public class RoleServiceHttp {
 					throw (com.liferay.portal.SystemException)e;
 				}
 
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				throw new com.liferay.portal.SystemException(e);
 			}
 
@@ -383,8 +378,7 @@ public class RoleServiceHttp {
 	public static java.util.List<com.liferay.portal.model.Role> getUserRelatedRoles(
 		HttpPrincipal httpPrincipal, long userId,
 		java.util.List<com.liferay.portal.model.Group> groups)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(userId);
 
@@ -405,10 +399,6 @@ public class RoleServiceHttp {
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
-				}
-
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);

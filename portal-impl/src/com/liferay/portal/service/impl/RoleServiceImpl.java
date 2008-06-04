@@ -95,13 +95,13 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 	}
 
 	public List<Role> getUserGroupRoles(long userId, long groupId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return roleLocalService.getUserGroupRoles(userId, groupId);
 	}
 
 	public List<Role> getUserRelatedRoles(long userId, List<Group> groups)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return roleLocalService.getUserRelatedRoles(userId, groups);
 	}
@@ -145,7 +145,7 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 	}
 
 	protected void checkUserRolesPermission(long userId, long[] roleIds)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		for (int i = 0; i < roleIds.length; i++) {
 			RolePermissionUtil.check(

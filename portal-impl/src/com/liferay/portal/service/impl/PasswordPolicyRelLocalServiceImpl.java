@@ -41,7 +41,7 @@ public class PasswordPolicyRelLocalServiceImpl
 
 	public PasswordPolicyRel addPasswordPolicyRel(
 			long passwordPolicyId, String className, long classPK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
@@ -78,7 +78,7 @@ public class PasswordPolicyRelLocalServiceImpl
 
 	public void addPasswordPolicyRels(
 			long passwordPolicyId, String className, long[] classPKs)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		for (int i = 0; i < classPKs.length; i++) {
 			addPasswordPolicyRel(passwordPolicyId, className, classPKs[i]);
@@ -86,7 +86,7 @@ public class PasswordPolicyRelLocalServiceImpl
 	}
 
 	public void deletePasswordPolicyRel(String className, long classPK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		try {
 			long classNameId = PortalUtil.getClassNameId(className);
@@ -99,7 +99,7 @@ public class PasswordPolicyRelLocalServiceImpl
 
 	public void deletePasswordPolicyRel(
 			long passwordPolicyId, String className, long classPK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		try {
 			long classNameId = PortalUtil.getClassNameId(className);
@@ -113,7 +113,7 @@ public class PasswordPolicyRelLocalServiceImpl
 
 	public void deletePasswordPolicyRels(
 			long passwordPolicyId, String className, long[] classPKs)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		for (int i = 0; i < classPKs.length; i++) {
 			deletePasswordPolicyRel(passwordPolicyId, className, classPKs[i]);
@@ -141,7 +141,7 @@ public class PasswordPolicyRelLocalServiceImpl
 
 	public boolean hasPasswordPolicyRel(
 			long passwordPolicyId, String className, long classPK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 

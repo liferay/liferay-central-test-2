@@ -368,9 +368,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		}
 	}
 
-	public long getLatestResourceId()
-		throws PortalException, SystemException {
-
+	public long getLatestResourceId() throws SystemException {
 		List<Resource> resources = resourcePersistence.findAll(
 			0, 1, new ResourceComparator());
 

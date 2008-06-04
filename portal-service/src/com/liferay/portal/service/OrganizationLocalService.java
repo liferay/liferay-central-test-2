@@ -116,8 +116,7 @@ public interface OrganizationLocalService {
 			com.liferay.portal.PortalException;
 
 	public long getOrganizationId(long companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Organization> getOrganizations(
 		long[] organizationIds)
@@ -135,9 +134,7 @@ public interface OrganizationLocalService {
 
 	public java.util.List<com.liferay.portal.model.Organization> getSubsetOrganizations(
 		java.util.List<com.liferay.portal.model.Organization> allOrganizations,
-		java.util.List<com.liferay.portal.model.Organization> availableOrganizations)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		java.util.List<com.liferay.portal.model.Organization> availableOrganizations);
 
 	public java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
 		long userId)
@@ -145,16 +142,13 @@ public interface OrganizationLocalService {
 			com.liferay.portal.PortalException;
 
 	public int getUserOrganizationsCount(long userId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public boolean hasGroupOrganization(long groupId, long organizationId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public boolean hasUserOrganization(long userId, long organizationId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public boolean hasPasswordPolicyOrganization(long passwordPolicyId,
 		long organizationId)
@@ -165,16 +159,14 @@ public interface OrganizationLocalService {
 		long companyId, long parentOrganizationId, java.lang.String keywords,
 		int type, java.lang.Long regionId, java.lang.Long countryId,
 		java.util.LinkedHashMap<String, Object> params, int start, int end)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Organization> search(
 		long companyId, long parentOrganizationId, java.lang.String keywords,
 		int type, java.lang.Long regionId, java.lang.Long countryId,
 		java.util.LinkedHashMap<String, Object> params, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Organization> search(
 		long companyId, long parentOrganizationId, java.lang.String name,
@@ -182,9 +174,7 @@ public interface OrganizationLocalService {
 		java.lang.String zip, java.lang.Long regionId,
 		java.lang.Long countryId,
 		java.util.LinkedHashMap<String, Object> params, boolean andOperator,
-		int start, int end)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Organization> search(
 		long companyId, long parentOrganizationId, java.lang.String name,
@@ -193,22 +183,19 @@ public interface OrganizationLocalService {
 		java.lang.Long countryId,
 		java.util.LinkedHashMap<String, Object> params, boolean andOperator,
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public int searchCount(long companyId, long parentOrganizationId,
 		java.lang.String keywords, int type, java.lang.Long regionId,
 		java.lang.Long countryId, java.util.LinkedHashMap<String, Object> params)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public int searchCount(long companyId, long parentOrganizationId,
 		java.lang.String name, int type, java.lang.String street,
 		java.lang.String city, java.lang.String zip, java.lang.Long regionId,
 		java.lang.Long countryId,
 		java.util.LinkedHashMap<String, Object> params, boolean andOperator)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public void setGroupOrganizations(long groupId, long[] organizationIds)
 		throws com.liferay.portal.SystemException,

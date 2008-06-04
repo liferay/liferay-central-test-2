@@ -65,7 +65,7 @@ public class PortletPreferencesLocalServiceImpl
 	}
 
 	public void deletePortletPreferences(long ownerId, int ownerType, long plid)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		portletPreferencesPersistence.removeByO_O_P(ownerId, ownerType, plid);
 
@@ -108,7 +108,7 @@ public class PortletPreferencesLocalServiceImpl
 
 	public List<PortletPreferences> getPortletPreferences(
 			long ownerId, int ownerType, long plid)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return portletPreferencesPersistence.findByO_O_P(
 			ownerId, ownerType, plid);
@@ -212,7 +212,7 @@ public class PortletPreferencesLocalServiceImpl
 	public PortletPreferences updatePreferences(
 			long ownerId, int ownerType, long plid, String portletId,
 			javax.portlet.PortletPreferences prefs)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		PortletPreferences portletPreferences = null;
 

@@ -201,7 +201,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 	protected void validate(
 			long addressId, long companyId, long classNameId, long classPK,
 			boolean mailing, boolean primary)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		// Check to make sure there isn't another address with the same company
 		// id, class name, and class pk that also has mailing set to true

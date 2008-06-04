@@ -35,7 +35,6 @@ import java.util.Set;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 
 /**
  * <a href="LiferayServletContext.java.html"><b><i>View Source</i></b></a>
@@ -128,7 +127,7 @@ public class LiferayServletContext implements ServletContext {
 		return _ctx.getServerInfo();
 	}
 
-	public Servlet getServlet(String name) throws ServletException {
+	public Servlet getServlet(String name) {
 		return null;
 	}
 

@@ -176,7 +176,7 @@ public class LayoutTemplateImpl
 		return _setWapContent;
 	}
 
-	public String getUncachedWapContent() throws IOException {
+	public String getUncachedWapContent() {
 		if (_ctx == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(

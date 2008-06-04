@@ -240,9 +240,8 @@ public class LayoutTypePortletImpl
 	}
 
 	public List<Portlet> addStaticPortlets(
-			List<Portlet> portlets, List<Portlet> startPortlets,
-			List<Portlet> endPortlets)
-		throws SystemException {
+		List<Portlet> portlets, List<Portlet> startPortlets,
+		List<Portlet> endPortlets) {
 
 		// Return the original array of portlets if no static portlets are
 		// specified

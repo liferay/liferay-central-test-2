@@ -80,9 +80,8 @@ import org.dom4j.Element;
 public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 
 	public ColorScheme getColorScheme(
-			long companyId, String themeId, String colorSchemeId,
-			boolean wapTheme)
-		throws PortalException, SystemException {
+		long companyId, String themeId, String colorSchemeId,
+		boolean wapTheme) {
 
 		colorSchemeId = GetterUtil.getString(colorSchemeId);
 
@@ -123,9 +122,7 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 		return colorScheme;
 	}
 
-	public Theme getTheme(long companyId, String themeId, boolean wapTheme)
-		throws PortalException, SystemException {
-
+	public Theme getTheme(long companyId, String themeId, boolean wapTheme) {
 		themeId = GetterUtil.getString(themeId);
 
 		Theme theme = _getThemes(companyId).get(themeId);
@@ -322,7 +319,7 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 		Map<String, Theme> themes = _themesPool.get(companyId);
 
 		if (themes == null) {
-			themes = new ConcurrentHashMap();
+			themes = new ConcurrentHashMap<String, Theme>();
 
 			Iterator<Map.Entry<String, Theme>> itr =
 				_themes.entrySet().iterator();
@@ -353,9 +350,8 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 	}
 
 	private void _readColorSchemes(
-			Element theme, Map<String, ColorScheme> colorSchemes,
-			ContextReplace themeContextReplace)
-		throws IOException {
+		Element theme, Map<String, ColorScheme> colorSchemes,
+		ContextReplace themeContextReplace) {
 
 		Iterator<Element> itr = theme.elements("color-scheme").iterator();
 

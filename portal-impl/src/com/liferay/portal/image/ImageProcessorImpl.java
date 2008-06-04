@@ -95,7 +95,7 @@ public class ImageProcessorImpl implements ImageProcessor {
 	}
 
 	public void encodeWBMP(RenderedImage renderedImage, OutputStream os)
-		throws InterruptedException, IOException {
+		throws IOException {
 
 		BufferedImage bufferedImage = getBufferedImage(renderedImage);
 
@@ -152,7 +152,7 @@ public class ImageProcessorImpl implements ImageProcessor {
 		return read(FileUtil.getBytes(file));
 	}
 
-	public ImageBag read(byte[] bytes) throws IOException {
+	public ImageBag read(byte[] bytes)  {
 		RenderedImage renderedImage = null;
 		String type = TYPE_NOT_AVAILABLE;
 

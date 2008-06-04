@@ -114,8 +114,7 @@ public class LayoutTemplateLocalServiceUtil {
 		java.util.Set<com.liferay.portal.kernel.util.ObjectValuePair<String, Boolean>> layoutTemplateIds,
 		com.liferay.portal.kernel.xml.Element el, boolean standard,
 		java.lang.String themeId,
-		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage)
-		throws java.io.IOException {
+		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage) {
 		LayoutTemplateLocalService layoutTemplateLocalService = LayoutTemplateLocalServiceFactory.getService();
 
 		layoutTemplateLocalService.readLayoutTemplate(servletContextName, ctx,

@@ -171,7 +171,7 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 	protected void validate(
 			long websiteId, long companyId, long classNameId, long classPK,
 			boolean primary)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		// Check to make sure there isn't another website with the same company
 		// id, class name, and class pk that also has primary set to true

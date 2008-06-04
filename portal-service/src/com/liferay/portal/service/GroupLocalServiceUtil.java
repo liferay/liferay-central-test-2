@@ -190,9 +190,7 @@ public class GroupLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Group> getOrganizationsGroups(
-		java.util.List<com.liferay.portal.model.Organization> organizations)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		java.util.List<com.liferay.portal.model.Organization> organizations) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
 		return groupLocalService.getOrganizationsGroups(organizations);
@@ -244,17 +242,14 @@ public class GroupLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Group> getUserGroupsGroups(
-		java.util.List<com.liferay.portal.model.UserGroup> userGroups)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		java.util.List<com.liferay.portal.model.UserGroup> userGroups) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
 		return groupLocalService.getUserGroupsGroups(userGroups);
 	}
 
 	public static boolean hasRoleGroup(long roleId, long groupId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
 		return groupLocalService.hasRoleGroup(roleId, groupId);

@@ -128,9 +128,7 @@ public interface ResourceLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public long getLatestResourceId()
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+	public long getLatestResourceId() throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Resource> getResources()
 		throws com.liferay.portal.SystemException;

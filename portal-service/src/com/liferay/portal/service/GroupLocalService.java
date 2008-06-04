@@ -122,9 +122,7 @@ public interface GroupLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.Group> getOrganizationsGroups(
-		java.util.List<com.liferay.portal.model.Organization> organizations)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		java.util.List<com.liferay.portal.model.Organization> organizations);
 
 	public java.util.List<com.liferay.portal.model.Group> getRoleGroups(
 		long roleId)
@@ -151,13 +149,10 @@ public interface GroupLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.Group> getUserGroupsGroups(
-		java.util.List<com.liferay.portal.model.UserGroup> userGroups)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		java.util.List<com.liferay.portal.model.UserGroup> userGroups);
 
 	public boolean hasRoleGroup(long roleId, long groupId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public boolean hasUserGroup(long userId, long groupId)
 		throws com.liferay.portal.SystemException;

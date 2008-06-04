@@ -42,7 +42,7 @@ public class WebDAVPropsLocalServiceImpl
 	extends WebDAVPropsLocalServiceBaseImpl {
 
 	public void deleteWebDAVProps(String className, long classPK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
@@ -55,7 +55,7 @@ public class WebDAVPropsLocalServiceImpl
 
 	public WebDAVProps getWebDAVProps(
 			long companyId, String className, long classPK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 

@@ -169,7 +169,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 	protected void validate(
 			long phoneId, long companyId, long classNameId, long classPK,
 			boolean primary)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		// Check to make sure there isn't another phone with the same company
 		// id, class name, and class pk that also has primary set to true

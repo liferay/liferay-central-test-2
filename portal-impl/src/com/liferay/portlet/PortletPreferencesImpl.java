@@ -257,11 +257,6 @@ public class PortletPreferencesImpl
 			PortletPreferencesLocalServiceUtil.updatePreferences(
 				_ownerId, _ownerType, _plid, _portletId, this);
 		}
-		catch (PortalException pe) {
-			_log.error(pe, pe);
-
-			throw new IOException(pe.getMessage());
-		}
 		catch (SystemException se) {
 			throw new IOException(se.getMessage());
 		}
