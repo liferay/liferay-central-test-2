@@ -33,6 +33,7 @@ import com.liferay.portlet.wiki.DuplicateNodeNameException;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NodeNameException;
 import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
+import com.liferay.portlet.wiki.util.WikiCacheThreadLocal;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -120,6 +121,8 @@ public class EditNodeAction extends PortletAction {
 
 	protected void deleteNode(ActionRequest req) throws Exception {
 		long nodeId = ParamUtil.getLong(req, "nodeId");
+
+		WikiCacheThreadLocal.setClearCache(false);
 
 		WikiNodeServiceUtil.deleteNode(nodeId);
 	}
