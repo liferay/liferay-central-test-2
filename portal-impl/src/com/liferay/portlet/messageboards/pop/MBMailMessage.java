@@ -38,8 +38,8 @@ import java.util.List;
  */
 public class MBMailMessage {
 
-	public void addFile(String fileName, byte[] data) {
-		_files.add(new ObjectValuePair<String, byte[]>(fileName, data));
+	public void addFile(String fileName, byte[] bytes) {
+		_files.add(new ObjectValuePair<String, byte[]>(fileName, bytes));
 	}
 
 	public List<ObjectValuePair<String, byte[]>> getFiles() {
