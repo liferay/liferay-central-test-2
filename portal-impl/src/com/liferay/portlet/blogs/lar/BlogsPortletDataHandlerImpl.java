@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -63,9 +64,6 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-
-			// Entries
-
 			if (!context.addPrimaryKey(
 					BlogsPortletDataHandlerImpl.class, "deleteData")) {
 
@@ -90,8 +88,6 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 			Element root = doc.addElement("blogs-data");
 
 			root.addAttribute("group-id", String.valueOf(context.getGroupId()));
-
-			// Entries
 
 			List<BlogsEntry> entries = BlogsEntryUtil.findByGroupId(
 				context.getGroupId());
@@ -133,12 +129,10 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 			Element root = doc.getRootElement();
 
-			// Entries
+			List<Element> entryEls = root.elements("entry");
 
-			List<Element> entries = root.elements("entry");
-
-			for (Element el : entries) {
-				String path = el.attributeValue("path");
+			for (Element entryEl : entryEls) {
+				String path = entryEl.attributeValue("path");
 
 				if (context.isPathNotProcessed(path)) {
 					BlogsEntry entry = (BlogsEntry)context.getZipEntryAsObject(
@@ -160,7 +154,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void exportEntry(
-			PortletDataContext context, Element el, BlogsEntry entry)
+			PortletDataContext context, Element root, BlogsEntry entry)
 		throws PortalException, SystemException {
 
 		if (!context.isWithinDateRange(entry.getModifiedDate())) {
@@ -169,35 +163,40 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 		String path = getEntryPath(context, entry);
 
-		el.addElement("entry").addAttribute("path", path);
+		Element entryEl = root.addElement("entry");
 
-		if (!context.isPathNotProcessed(path)) {
-			return;
+		entryEl.addAttribute("path", path);
+
+		if (context.isPathNotProcessed(path)) {
+			if (context.getBooleanParameter(_NAMESPACE, "comments")) {
+				context.addComments(BlogsEntry.class, entry.getEntryId());
+			}
+
+			if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
+				context.addRatingsEntries(BlogsEntry.class, entry.getEntryId());
+			}
+
+			if (context.getBooleanParameter(_NAMESPACE, "tags")) {
+				context.addTagsEntries(BlogsEntry.class, entry.getEntryId());
+			}
+
+			entry.setUserUuid(entry.getUserUuid());
+
+			context.addZipEntry(path, entry);
 		}
-
-		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
-			context.addComments(BlogsEntry.class, entry.getPrimaryKeyObj());
-		}
-
-		if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
-			context.addRatingsEntries(
-				BlogsEntry.class, entry.getPrimaryKeyObj());
-		}
-
-		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-			context.addTagsEntries(BlogsEntry.class, entry.getPrimaryKeyObj());
-		}
-
-		entry.setUserUuid(entry.getUserUuid());
-
-		context.addZipEntry(path, entry);
 	}
 
 	protected String getEntryPath(
 		PortletDataContext context, BlogsEntry entry) {
 
-		return context.getPortletPath(PortletKeys.BLOGS) + "/entries/" +
-			entry.getEntryId() + ".xml";
+		StringMaker sm = new StringMaker();
+
+		sm.append(context.getPortletPath(PortletKeys.BLOGS));
+		sm.append("/entries/");
+		sm.append(entry.getEntryId());
+		sm.append(".xml");
+
+		return sm.toString();
 	}
 
 	protected void importEntry(PortletDataContext context, BlogsEntry entry)
@@ -224,7 +223,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
 			tagsEntries = context.getTagsEntries(
-				BlogsEntry.class, entry.getPrimaryKeyObj());
+				BlogsEntry.class, entry.getEntryId());
 		}
 
 		boolean addCommunityPermissions = true;
@@ -267,14 +266,14 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
 			context.importComments(
-				BlogsEntry.class, entry.getPrimaryKeyObj(),
-				existingEntry.getPrimaryKeyObj(), context.getGroupId());
+				BlogsEntry.class, entry.getEntryId(),
+				existingEntry.getEntryId(), context.getGroupId());
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
 			context.importRatingsEntries(
-				BlogsEntry.class, entry.getPrimaryKeyObj(),
-				existingEntry.getPrimaryKeyObj());
+				BlogsEntry.class, entry.getEntryId(),
+				existingEntry.getEntryId());
 		}
 	}
 
