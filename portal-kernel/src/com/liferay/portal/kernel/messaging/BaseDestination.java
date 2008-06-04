@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.NamedThreadFactory;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.List;
 
 /**
  * <a href="BaseDestination.java.html"><b><i>View Source</i></b></a>
@@ -53,10 +54,14 @@ public abstract class BaseDestination implements Destination {
 	}
 
 	public synchronized void close() {
-		doClose();
+		close(false);
 	}
 
-	public String getName() {
+    public synchronized void close(boolean force) {
+        doClose(force);
+    }
+
+    public String getName() {
 		return _name;
 	}
 
@@ -64,12 +69,21 @@ public abstract class BaseDestination implements Destination {
 		doOpen();
 	}
 
-	protected void doClose() {
+	protected void doClose(boolean force) {
 		if (!_threadPoolExecutor.isShutdown() &&
 			!_threadPoolExecutor.isTerminating()) {
-
-			_threadPoolExecutor.shutdown();
-		}
+            if (!force) {
+			    _threadPoolExecutor.shutdown();
+            }
+            else {
+                List<Runnable> pendingTasks =_threadPoolExecutor.shutdownNow();
+                if (_log.isInfoEnabled()) {
+                    _log.info("The following " + pendingTasks.size() + "" +
+                        "tasks were not executed due " +
+                            "to shutown: " + pendingTasks);
+                }
+            }
+        }
 	}
 
 	protected void doOpen() {

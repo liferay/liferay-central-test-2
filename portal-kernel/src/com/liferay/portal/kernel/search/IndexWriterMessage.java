@@ -90,7 +90,17 @@ public class IndexWriterMessage {
 		_doc = doc;
 	}
 
-	private String _command;
+
+    public String toString() {
+        return "IndexWriterMessage{" +
+                "_command='" + _command + '\'' +
+                ", _companyId=" + _companyId +
+                ", _id='" + _id + '\'' +
+                ", _doc=" + _doc +
+                '}';
+    }
+
+    private String _command;
 	private long _companyId;
 	private String _id;
 	private Document _doc;

@@ -44,4 +44,7 @@ public interface MessageBus {
 	public boolean unregisterMessageListener(
 		String destination, MessageListener listener);
 
+    public void shutdown();
+
+    public void shutdown(boolean force);
 }
