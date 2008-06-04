@@ -86,8 +86,6 @@ public class ViewAction extends PortletAction {
 			prefs.getValue("requireCaptcha", StringPool.BLANK));
 		String successURL = GetterUtil.getString(
 			prefs.getValue("successURL", StringPool.BLANK));
-		String redirect = GetterUtil.getString(
-			prefs.getValue("redirect", StringPool.BLANK));
 		boolean sendAsEmail = GetterUtil.getBoolean(
 			prefs.getValue("sendAsEmail", StringPool.BLANK));
 		boolean saveToDatabase = GetterUtil.getBoolean(

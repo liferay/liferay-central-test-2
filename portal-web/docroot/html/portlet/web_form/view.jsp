@@ -27,14 +27,11 @@
 <%
 String title = prefs.getValue("title", StringPool.BLANK);
 String description = prefs.getValue("description", StringPool.BLANK);
-String successURL = prefs.getValue("successURL", StringPool.BLANK);
 boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", StringPool.BLANK));
 %>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/web_form/view" /></portlet:actionURL>" class="uni-form" method="post">
-<c:if test="<%= Validator.isNull(successURL) %>">
-	<input type="hidden" name="<portlet:namespace/>redirect" value="<%= currentURL %>" />
-</c:if>
+<input type="hidden" name="<portlet:namespace/>redirect" value="<%= currentURL %>" />
 
 <fieldset class="block-labels">
 	<legend><%= HtmlUtil.escape(title) %></legend>
