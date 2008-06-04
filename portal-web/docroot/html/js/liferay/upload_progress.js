@@ -17,6 +17,8 @@ function UploadProgress(uploadProgressId, redirect) {
 
 function UploadProgress_animateBar(percent) {
 	this.count++
+
+	percent = Math.max(percent, this.currentPercent);
 	this.currentPercent = percent;
 
 	var barContainer = document.getElementById(this.uploadProgressId + "-bar-div");
@@ -29,13 +31,17 @@ function UploadProgress_animateBar(percent) {
 		progressBar.style.width = percent + "%";
 		progressText.innerHTML = Math.round(percent) + "%";
 
-		setTimeout(this.uploadProgressId + ".animateBar(" + (percent + this.currentSpeed) + ")", 100);
+		setTimeout(this.uploadProgressId + ".animateBar(" + percent + ")", 100);
 	}
 	else {
 		progressBar.style.width = "100%";
-		progressText.innerHTML = "Done";
 
-		setTimeout(this.uploadProgressId + ".hideProgress()", 1000);
+		if (Liferay.Language) {
+			progressText.innerHTML = Liferay.Language.get("done");
+		}
+		else {
+			progressText.innerHTML = "Done";
+		}
 	}
 }
 
@@ -66,22 +72,7 @@ function UploadProgress_startProgress() {
 }
 
 function UploadProgress_updateBar(percent, filename) {
-	var barContainer = document.getElementById(this.uploadProgressId + "-bar-div");
-	var timeLeftText = barContainer.getElementsByTagName("span")[0];
-
-	var d = new Date();
-
-	var elapsedTime = d.getTime() - this.startTime;
-	var countLeft = this.count * (100 / percent - 1);
-	var timeLeft = elapsedTime * (100 / percent - 1);
-	var minLeft = Math.floor(timeLeft / 60000);
-
-	if (countLeft > 0) {
-		this.currentSpeed = (100 - percent) / countLeft;
-	}
-	else {
-		this.currentSpeed = 100;
-	}
+	this.currentPercent = percent;
 }
 
 function UploadProgress_updateIFrame(height) {
