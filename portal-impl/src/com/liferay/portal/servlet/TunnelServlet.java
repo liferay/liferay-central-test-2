@@ -43,7 +43,6 @@ import java.io.ObjectOutputStream;
 
 import java.lang.reflect.InvocationTargetException;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -61,7 +60,7 @@ import org.apache.commons.logging.LogFactory;
 public class TunnelServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
-		throws IOException, ServletException {
+		throws IOException {
 
 		PermissionCheckerImpl permissionChecker = null;
 

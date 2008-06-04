@@ -316,24 +316,19 @@ public class OrganizationUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Group> getGroups(
-		long pk)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrganizationException {
+		long pk) throws com.liferay.portal.SystemException {
 		return getPersistence().getGroups(pk);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Group> getGroups(
-		long pk, int start, int end)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrganizationException {
+		long pk, int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().getGroups(pk, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Group> getGroups(
 		long pk, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrganizationException {
+		throws com.liferay.portal.SystemException {
 		return getPersistence().getGroups(pk, start, end, obc);
 	}
 
@@ -353,103 +348,77 @@ public class OrganizationUtil {
 	}
 
 	public static void addGroup(long pk, long groupPK)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchGroupException,
-			com.liferay.portal.NoSuchOrganizationException {
+		throws com.liferay.portal.SystemException {
 		getPersistence().addGroup(pk, groupPK);
 	}
 
 	public static void addGroup(long pk, com.liferay.portal.model.Group group)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchGroupException,
-			com.liferay.portal.NoSuchOrganizationException {
+		throws com.liferay.portal.SystemException {
 		getPersistence().addGroup(pk, group);
 	}
 
 	public static void addGroups(long pk, long[] groupPKs)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchGroupException,
-			com.liferay.portal.NoSuchOrganizationException {
+		throws com.liferay.portal.SystemException {
 		getPersistence().addGroups(pk, groupPKs);
 	}
 
 	public static void addGroups(long pk,
 		java.util.List<com.liferay.portal.model.Group> groups)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchGroupException,
-			com.liferay.portal.NoSuchOrganizationException {
+		throws com.liferay.portal.SystemException {
 		getPersistence().addGroups(pk, groups);
 	}
 
 	public static void clearGroups(long pk)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrganizationException {
+		throws com.liferay.portal.SystemException {
 		getPersistence().clearGroups(pk);
 	}
 
 	public static void removeGroup(long pk, long groupPK)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchGroupException,
-			com.liferay.portal.NoSuchOrganizationException {
+		throws com.liferay.portal.SystemException {
 		getPersistence().removeGroup(pk, groupPK);
 	}
 
 	public static void removeGroup(long pk, com.liferay.portal.model.Group group)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchGroupException,
-			com.liferay.portal.NoSuchOrganizationException {
+		throws com.liferay.portal.SystemException {
 		getPersistence().removeGroup(pk, group);
 	}
 
 	public static void removeGroups(long pk, long[] groupPKs)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchGroupException,
-			com.liferay.portal.NoSuchOrganizationException {
+		throws com.liferay.portal.SystemException {
 		getPersistence().removeGroups(pk, groupPKs);
 	}
 
 	public static void removeGroups(long pk,
 		java.util.List<com.liferay.portal.model.Group> groups)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchGroupException,
-			com.liferay.portal.NoSuchOrganizationException {
+		throws com.liferay.portal.SystemException {
 		getPersistence().removeGroups(pk, groups);
 	}
 
 	public static void setGroups(long pk, long[] groupPKs)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchGroupException,
-			com.liferay.portal.NoSuchOrganizationException {
+		throws com.liferay.portal.SystemException {
 		getPersistence().setGroups(pk, groupPKs);
 	}
 
 	public static void setGroups(long pk,
 		java.util.List<com.liferay.portal.model.Group> groups)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchGroupException,
-			com.liferay.portal.NoSuchOrganizationException {
+		throws com.liferay.portal.SystemException {
 		getPersistence().setGroups(pk, groups);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getUsers(
-		long pk)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrganizationException {
+		long pk) throws com.liferay.portal.SystemException {
 		return getPersistence().getUsers(pk);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getUsers(
-		long pk, int start, int end)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrganizationException {
+		long pk, int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().getUsers(pk, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getUsers(
 		long pk, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrganizationException {
+		throws com.liferay.portal.SystemException {
 		return getPersistence().getUsers(pk, start, end, obc);
 	}
 
@@ -469,81 +438,60 @@ public class OrganizationUtil {
 	}
 
 	public static void addUser(long pk, long userPK)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrganizationException,
-			com.liferay.portal.NoSuchUserException {
+		throws com.liferay.portal.SystemException {
 		getPersistence().addUser(pk, userPK);
 	}
 
 	public static void addUser(long pk, com.liferay.portal.model.User user)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrganizationException,
-			com.liferay.portal.NoSuchUserException {
+		throws com.liferay.portal.SystemException {
 		getPersistence().addUser(pk, user);
 	}
 
 	public static void addUsers(long pk, long[] userPKs)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrganizationException,
-			com.liferay.portal.NoSuchUserException {
+		throws com.liferay.portal.SystemException {
 		getPersistence().addUsers(pk, userPKs);
 	}
 
 	public static void addUsers(long pk,
 		java.util.List<com.liferay.portal.model.User> users)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrganizationException,
-			com.liferay.portal.NoSuchUserException {
+		throws com.liferay.portal.SystemException {
 		getPersistence().addUsers(pk, users);
 	}
 
 	public static void clearUsers(long pk)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrganizationException {
+		throws com.liferay.portal.SystemException {
 		getPersistence().clearUsers(pk);
 	}
 
 	public static void removeUser(long pk, long userPK)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrganizationException,
-			com.liferay.portal.NoSuchUserException {
+		throws com.liferay.portal.SystemException {
 		getPersistence().removeUser(pk, userPK);
 	}
 
 	public static void removeUser(long pk, com.liferay.portal.model.User user)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrganizationException,
-			com.liferay.portal.NoSuchUserException {
+		throws com.liferay.portal.SystemException {
 		getPersistence().removeUser(pk, user);
 	}
 
 	public static void removeUsers(long pk, long[] userPKs)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrganizationException,
-			com.liferay.portal.NoSuchUserException {
+		throws com.liferay.portal.SystemException {
 		getPersistence().removeUsers(pk, userPKs);
 	}
 
 	public static void removeUsers(long pk,
 		java.util.List<com.liferay.portal.model.User> users)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrganizationException,
-			com.liferay.portal.NoSuchUserException {
+		throws com.liferay.portal.SystemException {
 		getPersistence().removeUsers(pk, users);
 	}
 
 	public static void setUsers(long pk, long[] userPKs)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrganizationException,
-			com.liferay.portal.NoSuchUserException {
+		throws com.liferay.portal.SystemException {
 		getPersistence().setUsers(pk, userPKs);
 	}
 
 	public static void setUsers(long pk,
 		java.util.List<com.liferay.portal.model.User> users)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrganizationException,
-			com.liferay.portal.NoSuchUserException {
+		throws com.liferay.portal.SystemException {
 		getPersistence().setUsers(pk, users);
 	}
 

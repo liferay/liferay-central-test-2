@@ -89,7 +89,7 @@ public class LiferayInputStream extends ServletInputStreamWrapper {
 		return bytesRead;
 	}
 
-	public ServletInputStream getCachedInputStream() throws IOException {
+	public ServletInputStream getCachedInputStream() {
 		if (_totalSize < THRESHOLD_SIZE) {
 			return this;
 		}

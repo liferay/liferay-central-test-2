@@ -53,7 +53,7 @@ import java.util.Map;
  * @author Charles May
  *
  */
-public class LayoutCache  {
+public class LayoutCache {
 
 	protected long getEntityGroupId(
 			long companyId, String entityName, String name)

@@ -49,9 +49,7 @@ public class CacheResponseUtil {
 			String headerKey = entry.getKey();
 			List<Header> headerValues = entry.getValue();
 
-			for (int i = 0; i < headerValues.size(); i++) {
-				Header header = (Header)headerValues.get(i);
-
+			for (Header header : headerValues) {
 				int type = header.getType();
 
 				if (type == Header.DATE_TYPE) {

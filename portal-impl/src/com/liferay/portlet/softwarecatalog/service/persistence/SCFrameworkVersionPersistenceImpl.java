@@ -1476,19 +1476,18 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 	}
 
 	public List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> getSCProductVersions(
-		long pk) throws NoSuchFrameworkVersionException, SystemException {
+		long pk) throws SystemException {
 		return getSCProductVersions(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
 	public List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> getSCProductVersions(
-		long pk, int start, int end)
-		throws NoSuchFrameworkVersionException, SystemException {
+		long pk, int start, int end) throws SystemException {
 		return getSCProductVersions(pk, start, end, null);
 	}
 
 	public List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> getSCProductVersions(
 		long pk, int start, int end, OrderByComparator obc)
-		throws NoSuchFrameworkVersionException, SystemException {
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = SCFrameworkVersionModelImpl.CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS;
 
 		String finderClassName = "SCFrameworkVersi_SCProductVers";
@@ -1679,9 +1678,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 	}
 
 	public void addSCProductVersion(long pk, long scProductVersionPK)
-		throws NoSuchFrameworkVersionException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
-			SystemException {
+		throws SystemException {
 		try {
 			addSCProductVersion.add(pk, scProductVersionPK);
 		}
@@ -1695,9 +1692,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 	public void addSCProductVersion(long pk,
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion)
-		throws NoSuchFrameworkVersionException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
-			SystemException {
+		throws SystemException {
 		try {
 			addSCProductVersion.add(pk, scProductVersion.getPrimaryKey());
 		}
@@ -1710,9 +1705,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 	}
 
 	public void addSCProductVersions(long pk, long[] scProductVersionPKs)
-		throws NoSuchFrameworkVersionException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
-			SystemException {
+		throws SystemException {
 		try {
 			for (long scProductVersionPK : scProductVersionPKs) {
 				addSCProductVersion.add(pk, scProductVersionPK);
@@ -1728,9 +1721,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 	public void addSCProductVersions(long pk,
 		List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> scProductVersions)
-		throws NoSuchFrameworkVersionException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
-			SystemException {
+		throws SystemException {
 		try {
 			for (com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion : scProductVersions) {
 				addSCProductVersion.add(pk, scProductVersion.getPrimaryKey());
@@ -1744,8 +1735,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void clearSCProductVersions(long pk)
-		throws NoSuchFrameworkVersionException, SystemException {
+	public void clearSCProductVersions(long pk) throws SystemException {
 		try {
 			clearSCProductVersions.clear(pk);
 		}
@@ -1758,9 +1748,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeSCProductVersion(long pk, long scProductVersionPK)
-		throws NoSuchFrameworkVersionException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
-			SystemException {
+		throws SystemException {
 		try {
 			removeSCProductVersion.remove(pk, scProductVersionPK);
 		}
@@ -1774,9 +1762,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 	public void removeSCProductVersion(long pk,
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion)
-		throws NoSuchFrameworkVersionException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
-			SystemException {
+		throws SystemException {
 		try {
 			removeSCProductVersion.remove(pk, scProductVersion.getPrimaryKey());
 		}
@@ -1789,9 +1775,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeSCProductVersions(long pk, long[] scProductVersionPKs)
-		throws NoSuchFrameworkVersionException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
-			SystemException {
+		throws SystemException {
 		try {
 			for (long scProductVersionPK : scProductVersionPKs) {
 				removeSCProductVersion.remove(pk, scProductVersionPK);
@@ -1807,9 +1791,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 	public void removeSCProductVersions(long pk,
 		List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> scProductVersions)
-		throws NoSuchFrameworkVersionException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
-			SystemException {
+		throws SystemException {
 		try {
 			for (com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion : scProductVersions) {
 				removeSCProductVersion.remove(pk,
@@ -1825,9 +1807,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 	}
 
 	public void setSCProductVersions(long pk, long[] scProductVersionPKs)
-		throws NoSuchFrameworkVersionException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
-			SystemException {
+		throws SystemException {
 		try {
 			clearSCProductVersions.clear(pk);
 
@@ -1845,9 +1825,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 	public void setSCProductVersions(long pk,
 		List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> scProductVersions)
-		throws NoSuchFrameworkVersionException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
-			SystemException {
+		throws SystemException {
 		try {
 			clearSCProductVersions.clear(pk);
 

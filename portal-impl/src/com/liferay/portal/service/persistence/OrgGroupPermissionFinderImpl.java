@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.NoSuchOrgGroupPermissionException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.OrgGroupPermission;
 import com.liferay.portal.model.impl.OrgGroupPermissionImpl;
@@ -49,7 +48,7 @@ public class OrgGroupPermissionFinderImpl implements OrgGroupPermissionFinder {
 
 	public void removeByO_G_R(
 			long organizationId, long groupId, long resourceId)
-		throws NoSuchOrgGroupPermissionException, SystemException {
+		throws SystemException {
 
 		Session session = null;
 

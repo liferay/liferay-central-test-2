@@ -22,8 +22,6 @@
 
 package com.liferay.util.servlet;
 
-import java.io.IOException;
-
 import javax.servlet.ServletOutputStream;
 
 /**
@@ -37,7 +35,7 @@ public class NullServletOutputStream extends ServletOutputStream {
 	public NullServletOutputStream() {
 	}
 
-	public void write(int b) throws IOException {
+	public void write(int b) {
 	}
 
 }

@@ -31,8 +31,6 @@ import com.liferay.portlet.PortletContextImpl;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.util.servlet.UploadServletRequest;
 
-import java.io.IOException;
-
 import javax.portlet.GenericPortlet;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
@@ -75,12 +73,7 @@ public class LiferayServletContextProvider implements ServletContextProvider {
 			if ((contentType != null) &&
 				(contentType.startsWith(ContentTypes.MULTIPART_FORM_DATA))) {
 
-				try {
-					httpReq = new UploadServletRequest(httpReq);
-				}
-				catch (IOException ioe) {
-				}
-
+				httpReq = new UploadServletRequest(httpReq);
 				httpReq = new LiferayStrutsRequestImpl(httpReq);
 			}
 			else {

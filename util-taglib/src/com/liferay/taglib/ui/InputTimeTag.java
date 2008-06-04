@@ -25,7 +25,6 @@ package com.liferay.taglib.ui;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.ServletRequest;
-import javax.servlet.jsp.JspException;
 
 /**
  * <a href="InputTimeTag.java.html"><b><i>View Source</i></b></a>
@@ -35,7 +34,7 @@ import javax.servlet.jsp.JspException;
  */
 public class InputTimeTag extends IncludeTag {
 
-	public int doStartTag() throws JspException {
+	public int doStartTag() {
 		ServletRequest req = pageContext.getRequest();
 
 		req.setAttribute("liferay-ui:input-time:hourParam", _hourParam);

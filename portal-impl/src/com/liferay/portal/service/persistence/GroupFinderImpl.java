@@ -536,8 +536,7 @@ public class GroupFinderImpl implements GroupFinder {
 	}
 
 	protected int countByGroupId(
-			Session session, long groupId, LinkedHashMap<String, Object> params)
-		throws SystemException {
+		Session session, long groupId, LinkedHashMap<String, Object> params) {
 
 		String sql = CustomSQLUtil.get(COUNT_BY_GROUP_ID);
 
@@ -567,9 +566,8 @@ public class GroupFinderImpl implements GroupFinder {
 	}
 
 	protected int countByC_N_D(
-			Session session, long companyId, String name, String description,
-			LinkedHashMap<String, Object> params)
-		throws SystemException {
+		Session session, long companyId, String name, String description,
+		LinkedHashMap<String, Object> params) {
 
 		String sql = CustomSQLUtil.get(COUNT_BY_C_N_D);
 

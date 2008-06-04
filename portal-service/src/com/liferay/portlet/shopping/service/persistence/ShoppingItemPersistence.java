@@ -193,20 +193,15 @@ public interface ShoppingItemPersistence {
 	public int countAll() throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getShoppingItemPrices(
-		long pk)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.shopping.NoSuchItemException;
+		long pk) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getShoppingItemPrices(
-		long pk, int start, int end)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.shopping.NoSuchItemException;
+		long pk, int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getShoppingItemPrices(
 		long pk, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.shopping.NoSuchItemException;
+		throws com.liferay.portal.SystemException;
 
 	public int getShoppingItemPricesSize(long pk)
 		throws com.liferay.portal.SystemException;

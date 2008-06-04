@@ -80,6 +80,10 @@ public class IncludeTag extends ParamAndPropertyAncestorTagImpl {
 
 			LogUtil.log(_log, e);
 
+			if (e instanceof JspException) {
+				throw (JspException)e;
+			}
+
 			return EVAL_PAGE;
 		}
 		finally {

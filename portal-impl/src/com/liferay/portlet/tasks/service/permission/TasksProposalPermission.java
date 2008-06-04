@@ -50,7 +50,7 @@ public class TasksProposalPermission {
 	public static void check(
 			PermissionChecker permissionChecker, TasksProposal proposal,
 			String actionId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		if (!contains(permissionChecker, proposal, actionId)) {
 			throw new PrincipalException();
@@ -69,9 +69,8 @@ public class TasksProposalPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, TasksProposal proposal,
-			String actionId)
-		throws PortalException, SystemException {
+		PermissionChecker permissionChecker, TasksProposal proposal,
+		String actionId) {
 
 		return permissionChecker.hasPermission(
 			proposal.getGroupId(), TasksProposal.class.getName(),

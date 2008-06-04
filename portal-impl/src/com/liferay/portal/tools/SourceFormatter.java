@@ -388,6 +388,10 @@ public class SourceFormatter {
 				}
 			}
 
+			if (newContent.indexOf("  {") != -1) {
+				System.out.println("{:" + files[i]);
+			}
+
 			if (!newContent.endsWith("\n\n}") &&
 				!newContent.endsWith("{\n}")) {
 

@@ -282,7 +282,7 @@ public class PortalUtil {
 		return getPortal().getLayoutTarget(layout);
 	}
 
-	public static String getJsSafePortletId(String portletId)  {
+	public static String getJsSafePortletId(String portletId) {
 		return getPortal().getJsSafePortletId(portletId);
 	}
 

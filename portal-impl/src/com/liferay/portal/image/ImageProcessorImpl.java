@@ -152,7 +152,7 @@ public class ImageProcessorImpl implements ImageProcessor {
 		return read(FileUtil.getBytes(file));
 	}
 
-	public ImageBag read(byte[] bytes)  {
+	public ImageBag read(byte[] bytes) {
 		RenderedImage renderedImage = null;
 		String type = TYPE_NOT_AVAILABLE;
 

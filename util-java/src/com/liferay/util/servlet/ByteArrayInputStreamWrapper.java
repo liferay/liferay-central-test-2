@@ -39,7 +39,7 @@ public class ByteArrayInputStreamWrapper extends ServletInputStream {
 		_is = is;
 	}
 
-	public int available() throws IOException {
+	public int available() {
 		return _is.available();
 	}
 
@@ -55,7 +55,7 @@ public class ByteArrayInputStreamWrapper extends ServletInputStream {
 		return _is.markSupported();
 	}
 
-	public int read() throws IOException {
+	public int read() {
 		return _is.read();
 	}
 
@@ -63,19 +63,19 @@ public class ByteArrayInputStreamWrapper extends ServletInputStream {
 		return _is.read(b);
 	}
 
-	public int read(byte[] b, int off, int len) throws IOException {
+	public int read(byte[] b, int off, int len) {
 		return _is.read(b, off, len);
 	}
 
-	public int readLine(byte[] b, int off, int len) throws IOException {
+	public int readLine(byte[] b, int off, int len) {
 		return _is.read(b, off, len);
 	}
 
-	public void reset() throws IOException {
+	public void reset() {
 		_is.reset();
 	}
 
-	public long skip(long n) throws IOException {
+	public long skip(long n) {
 		return _is.skip(n);
 	}
 

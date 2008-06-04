@@ -113,6 +113,4 @@ public class I18nServlet extends HttpServlet {
 
 	private static Log _log = LogFactory.getLog(I18nServlet.class);
 
-	private String _languageId;
-
 }

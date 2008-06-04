@@ -195,8 +195,7 @@ public class ServletResponseUtil {
 	}
 
 	protected static void setHeaders(
-			HttpServletResponse res, String fileName, String contentType)
-		throws IOException {
+		HttpServletResponse res, String fileName, String contentType) {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Sending file of type " + contentType);

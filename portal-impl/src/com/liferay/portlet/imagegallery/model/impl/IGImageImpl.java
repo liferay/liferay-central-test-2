@@ -84,7 +84,7 @@ public class IGImageImpl extends IGImageModelImpl implements IGImage {
 		return getNameWithExtension(nameWithExtension, type);
 	}
 
-	public String getImageType()  {
+	public String getImageType() {
 		if (_imageType == null) {
 			try {
 				Image largeImage = ImageLocalUtil.getImage(getLargeImageId());

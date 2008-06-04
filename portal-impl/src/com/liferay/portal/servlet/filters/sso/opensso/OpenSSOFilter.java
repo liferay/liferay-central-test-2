@@ -32,10 +32,7 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
-import java.io.IOException;
-
 import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -53,8 +50,7 @@ import javax.servlet.http.HttpSession;
 public class OpenSSOFilter extends BasePortalFilter {
 
 	protected void processFilter(
-			ServletRequest req, ServletResponse res, FilterChain chain)
-		throws IOException, ServletException {
+		ServletRequest req, ServletResponse res, FilterChain chain) {
 
 		try {
 			HttpServletRequest httpReq = (HttpServletRequest)req;

@@ -1139,19 +1139,18 @@ public class SCLicensePersistenceImpl extends BasePersistence
 	}
 
 	public List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getSCProductEntries(
-		long pk) throws NoSuchLicenseException, SystemException {
+		long pk) throws SystemException {
 		return getSCProductEntries(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
 	public List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getSCProductEntries(
-		long pk, int start, int end)
-		throws NoSuchLicenseException, SystemException {
+		long pk, int start, int end) throws SystemException {
 		return getSCProductEntries(pk, start, end, null);
 	}
 
 	public List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getSCProductEntries(
 		long pk, int start, int end, OrderByComparator obc)
-		throws NoSuchLicenseException, SystemException {
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = SCLicenseModelImpl.CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES;
 
 		String finderClassName = "SCLicenses_SCProductEntries";
@@ -1343,9 +1342,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 	}
 
 	public void addSCProductEntry(long pk, long scProductEntryPK)
-		throws NoSuchLicenseException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
-			SystemException {
+		throws SystemException {
 		try {
 			addSCProductEntry.add(pk, scProductEntryPK);
 		}
@@ -1359,9 +1356,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 	public void addSCProductEntry(long pk,
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
-		throws NoSuchLicenseException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
-			SystemException {
+		throws SystemException {
 		try {
 			addSCProductEntry.add(pk, scProductEntry.getPrimaryKey());
 		}
@@ -1374,9 +1369,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 	}
 
 	public void addSCProductEntries(long pk, long[] scProductEntryPKs)
-		throws NoSuchLicenseException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
-			SystemException {
+		throws SystemException {
 		try {
 			for (long scProductEntryPK : scProductEntryPKs) {
 				addSCProductEntry.add(pk, scProductEntryPK);
@@ -1392,9 +1385,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 	public void addSCProductEntries(long pk,
 		List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> scProductEntries)
-		throws NoSuchLicenseException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
-			SystemException {
+		throws SystemException {
 		try {
 			for (com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry : scProductEntries) {
 				addSCProductEntry.add(pk, scProductEntry.getPrimaryKey());
@@ -1408,8 +1399,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void clearSCProductEntries(long pk)
-		throws NoSuchLicenseException, SystemException {
+	public void clearSCProductEntries(long pk) throws SystemException {
 		try {
 			clearSCProductEntries.clear(pk);
 		}
@@ -1422,9 +1412,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 	}
 
 	public void removeSCProductEntry(long pk, long scProductEntryPK)
-		throws NoSuchLicenseException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
-			SystemException {
+		throws SystemException {
 		try {
 			removeSCProductEntry.remove(pk, scProductEntryPK);
 		}
@@ -1438,9 +1426,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 	public void removeSCProductEntry(long pk,
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
-		throws NoSuchLicenseException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
-			SystemException {
+		throws SystemException {
 		try {
 			removeSCProductEntry.remove(pk, scProductEntry.getPrimaryKey());
 		}
@@ -1453,9 +1439,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 	}
 
 	public void removeSCProductEntries(long pk, long[] scProductEntryPKs)
-		throws NoSuchLicenseException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
-			SystemException {
+		throws SystemException {
 		try {
 			for (long scProductEntryPK : scProductEntryPKs) {
 				removeSCProductEntry.remove(pk, scProductEntryPK);
@@ -1471,9 +1455,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 	public void removeSCProductEntries(long pk,
 		List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> scProductEntries)
-		throws NoSuchLicenseException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
-			SystemException {
+		throws SystemException {
 		try {
 			for (com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry : scProductEntries) {
 				removeSCProductEntry.remove(pk, scProductEntry.getPrimaryKey());
@@ -1488,9 +1470,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 	}
 
 	public void setSCProductEntries(long pk, long[] scProductEntryPKs)
-		throws NoSuchLicenseException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
-			SystemException {
+		throws SystemException {
 		try {
 			clearSCProductEntries.clear(pk);
 
@@ -1508,9 +1488,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 	public void setSCProductEntries(long pk,
 		List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> scProductEntries)
-		throws NoSuchLicenseException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
-			SystemException {
+		throws SystemException {
 		try {
 			clearSCProductEntries.clear(pk);
 

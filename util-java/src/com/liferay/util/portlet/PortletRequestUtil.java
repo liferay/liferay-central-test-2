@@ -91,10 +91,10 @@ public class PortletRequestUtil {
 
 		Element parametersEl = reqEl.addElement("parameters");
 
-		Enumeration enu = req.getParameterNames();
+		Enumeration<String> enu = req.getParameterNames();
 
 		while (enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
+			String name = enu.nextElement();
 
 			Element parameterEl = parametersEl.addElement("parameter");
 
@@ -112,7 +112,7 @@ public class PortletRequestUtil {
 		enu = req.getAttributeNames();
 
 		while (enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
+			String name = enu.nextElement();
 
 			if (!_isValidAttributeName(name)) {
 				continue;
@@ -139,7 +139,7 @@ public class PortletRequestUtil {
 		enu = ses.getAttributeNames(PortletSession.PORTLET_SCOPE);
 
 		while (enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
+			String name = enu.nextElement();
 
 			if (!_isValidAttributeName(name)) {
 				continue;
@@ -162,7 +162,7 @@ public class PortletRequestUtil {
 		enu = ses.getAttributeNames(PortletSession.APPLICATION_SCOPE);
 
 		while (enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
+			String name = enu.nextElement();
 
 			if (!_isValidAttributeName(name)) {
 				continue;
@@ -261,7 +261,7 @@ public class PortletRequestUtil {
 			return false;
 		}
 		else if (obj instanceof Collection) {
-			Collection col = (Collection)obj;
+			Collection<?> col = (Collection<?>)obj;
 
 			if (col.size() == 0) {
 				return false;
@@ -271,7 +271,7 @@ public class PortletRequestUtil {
 			}
 		}
 		else if (obj instanceof Map) {
-			Map map = (Map)obj;
+			Map<?, ?> map = (Map<?, ?>)obj;
 
 			if (map.size() == 0) {
 				return false;

@@ -1676,18 +1676,17 @@ public class OrganizationPersistenceImpl extends BasePersistence
 	}
 
 	public List<com.liferay.portal.model.Group> getGroups(long pk)
-		throws NoSuchOrganizationException, SystemException {
+		throws SystemException {
 		return getGroups(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
 	public List<com.liferay.portal.model.Group> getGroups(long pk, int start,
-		int end) throws NoSuchOrganizationException, SystemException {
+		int end) throws SystemException {
 		return getGroups(pk, start, end, null);
 	}
 
 	public List<com.liferay.portal.model.Group> getGroups(long pk, int start,
-		int end, OrderByComparator obc)
-		throws NoSuchOrganizationException, SystemException {
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = OrganizationModelImpl.CACHE_ENABLED_GROUPS_ORGS;
 
 		String finderClassName = "Groups_Orgs";
@@ -1872,9 +1871,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void addGroup(long pk, long groupPK)
-		throws NoSuchOrganizationException,
-			com.liferay.portal.NoSuchGroupException, SystemException {
+	public void addGroup(long pk, long groupPK) throws SystemException {
 		try {
 			addGroup.add(pk, groupPK);
 		}
@@ -1887,8 +1884,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 	}
 
 	public void addGroup(long pk, com.liferay.portal.model.Group group)
-		throws NoSuchOrganizationException,
-			com.liferay.portal.NoSuchGroupException, SystemException {
+		throws SystemException {
 		try {
 			addGroup.add(pk, group.getPrimaryKey());
 		}
@@ -1900,9 +1896,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void addGroups(long pk, long[] groupPKs)
-		throws NoSuchOrganizationException,
-			com.liferay.portal.NoSuchGroupException, SystemException {
+	public void addGroups(long pk, long[] groupPKs) throws SystemException {
 		try {
 			for (long groupPK : groupPKs) {
 				addGroup.add(pk, groupPK);
@@ -1917,8 +1911,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 	}
 
 	public void addGroups(long pk, List<com.liferay.portal.model.Group> groups)
-		throws NoSuchOrganizationException,
-			com.liferay.portal.NoSuchGroupException, SystemException {
+		throws SystemException {
 		try {
 			for (com.liferay.portal.model.Group group : groups) {
 				addGroup.add(pk, group.getPrimaryKey());
@@ -1932,8 +1925,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void clearGroups(long pk)
-		throws NoSuchOrganizationException, SystemException {
+	public void clearGroups(long pk) throws SystemException {
 		try {
 			clearGroups.clear(pk);
 		}
@@ -1945,9 +1937,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeGroup(long pk, long groupPK)
-		throws NoSuchOrganizationException,
-			com.liferay.portal.NoSuchGroupException, SystemException {
+	public void removeGroup(long pk, long groupPK) throws SystemException {
 		try {
 			removeGroup.remove(pk, groupPK);
 		}
@@ -1960,8 +1950,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 	}
 
 	public void removeGroup(long pk, com.liferay.portal.model.Group group)
-		throws NoSuchOrganizationException,
-			com.liferay.portal.NoSuchGroupException, SystemException {
+		throws SystemException {
 		try {
 			removeGroup.remove(pk, group.getPrimaryKey());
 		}
@@ -1974,8 +1963,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 	}
 
 	public void removeGroups(long pk, long[] groupPKs)
-		throws NoSuchOrganizationException,
-			com.liferay.portal.NoSuchGroupException, SystemException {
+		throws SystemException {
 		try {
 			for (long groupPK : groupPKs) {
 				removeGroup.remove(pk, groupPK);
@@ -1990,9 +1978,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 	}
 
 	public void removeGroups(long pk,
-		List<com.liferay.portal.model.Group> groups)
-		throws NoSuchOrganizationException,
-			com.liferay.portal.NoSuchGroupException, SystemException {
+		List<com.liferay.portal.model.Group> groups) throws SystemException {
 		try {
 			for (com.liferay.portal.model.Group group : groups) {
 				removeGroup.remove(pk, group.getPrimaryKey());
@@ -2006,9 +1992,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void setGroups(long pk, long[] groupPKs)
-		throws NoSuchOrganizationException,
-			com.liferay.portal.NoSuchGroupException, SystemException {
+	public void setGroups(long pk, long[] groupPKs) throws SystemException {
 		try {
 			clearGroups.clear(pk);
 
@@ -2025,8 +2009,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 	}
 
 	public void setGroups(long pk, List<com.liferay.portal.model.Group> groups)
-		throws NoSuchOrganizationException,
-			com.liferay.portal.NoSuchGroupException, SystemException {
+		throws SystemException {
 		try {
 			clearGroups.clear(pk);
 
@@ -2043,18 +2026,17 @@ public class OrganizationPersistenceImpl extends BasePersistence
 	}
 
 	public List<com.liferay.portal.model.User> getUsers(long pk)
-		throws NoSuchOrganizationException, SystemException {
+		throws SystemException {
 		return getUsers(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
 	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
-		int end) throws NoSuchOrganizationException, SystemException {
+		int end) throws SystemException {
 		return getUsers(pk, start, end, null);
 	}
 
 	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
-		int end, OrderByComparator obc)
-		throws NoSuchOrganizationException, SystemException {
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = OrganizationModelImpl.CACHE_ENABLED_USERS_ORGS;
 
 		String finderClassName = "Users_Orgs";
@@ -2231,9 +2213,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void addUser(long pk, long userPK)
-		throws NoSuchOrganizationException,
-			com.liferay.portal.NoSuchUserException, SystemException {
+	public void addUser(long pk, long userPK) throws SystemException {
 		try {
 			addUser.add(pk, userPK);
 		}
@@ -2246,8 +2226,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 	}
 
 	public void addUser(long pk, com.liferay.portal.model.User user)
-		throws NoSuchOrganizationException,
-			com.liferay.portal.NoSuchUserException, SystemException {
+		throws SystemException {
 		try {
 			addUser.add(pk, user.getPrimaryKey());
 		}
@@ -2259,9 +2238,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void addUsers(long pk, long[] userPKs)
-		throws NoSuchOrganizationException,
-			com.liferay.portal.NoSuchUserException, SystemException {
+	public void addUsers(long pk, long[] userPKs) throws SystemException {
 		try {
 			for (long userPK : userPKs) {
 				addUser.add(pk, userPK);
@@ -2276,8 +2253,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 	}
 
 	public void addUsers(long pk, List<com.liferay.portal.model.User> users)
-		throws NoSuchOrganizationException,
-			com.liferay.portal.NoSuchUserException, SystemException {
+		throws SystemException {
 		try {
 			for (com.liferay.portal.model.User user : users) {
 				addUser.add(pk, user.getPrimaryKey());
@@ -2291,8 +2267,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void clearUsers(long pk)
-		throws NoSuchOrganizationException, SystemException {
+	public void clearUsers(long pk) throws SystemException {
 		try {
 			clearUsers.clear(pk);
 		}
@@ -2304,9 +2279,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeUser(long pk, long userPK)
-		throws NoSuchOrganizationException,
-			com.liferay.portal.NoSuchUserException, SystemException {
+	public void removeUser(long pk, long userPK) throws SystemException {
 		try {
 			removeUser.remove(pk, userPK);
 		}
@@ -2319,8 +2292,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 	}
 
 	public void removeUser(long pk, com.liferay.portal.model.User user)
-		throws NoSuchOrganizationException,
-			com.liferay.portal.NoSuchUserException, SystemException {
+		throws SystemException {
 		try {
 			removeUser.remove(pk, user.getPrimaryKey());
 		}
@@ -2332,9 +2304,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeUsers(long pk, long[] userPKs)
-		throws NoSuchOrganizationException,
-			com.liferay.portal.NoSuchUserException, SystemException {
+	public void removeUsers(long pk, long[] userPKs) throws SystemException {
 		try {
 			for (long userPK : userPKs) {
 				removeUser.remove(pk, userPK);
@@ -2349,8 +2319,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 	}
 
 	public void removeUsers(long pk, List<com.liferay.portal.model.User> users)
-		throws NoSuchOrganizationException,
-			com.liferay.portal.NoSuchUserException, SystemException {
+		throws SystemException {
 		try {
 			for (com.liferay.portal.model.User user : users) {
 				removeUser.remove(pk, user.getPrimaryKey());
@@ -2364,9 +2333,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void setUsers(long pk, long[] userPKs)
-		throws NoSuchOrganizationException,
-			com.liferay.portal.NoSuchUserException, SystemException {
+	public void setUsers(long pk, long[] userPKs) throws SystemException {
 		try {
 			clearUsers.clear(pk);
 
@@ -2383,8 +2350,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 	}
 
 	public void setUsers(long pk, List<com.liferay.portal.model.User> users)
-		throws NoSuchOrganizationException,
-			com.liferay.portal.NoSuchUserException, SystemException {
+		throws SystemException {
 		try {
 			clearUsers.clear(pk);
 

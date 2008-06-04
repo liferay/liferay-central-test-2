@@ -28,7 +28,6 @@ import com.liferay.taglib.util.IncludeTag;
 import java.util.TimeZone;
 
 import javax.servlet.ServletRequest;
-import javax.servlet.jsp.JspException;
 
 /**
  * <a href="InputTimeZoneTag.java.html"><b><i>View Source</i></b></a>
@@ -38,7 +37,7 @@ import javax.servlet.jsp.JspException;
  */
 public class InputTimeZoneTag extends IncludeTag {
 
-	public int doStartTag() throws JspException {
+	public int doStartTag() {
 		ServletRequest req = pageContext.getRequest();
 
 		req.setAttribute("liferay-ui:input-time-zone:name", _name);

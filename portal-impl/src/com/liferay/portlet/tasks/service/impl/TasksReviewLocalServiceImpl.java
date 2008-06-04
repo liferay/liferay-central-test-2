@@ -114,15 +114,11 @@ public class TasksReviewLocalServiceImpl
 		deleteReview(review);
 	}
 
-	public void deleteReview(TasksReview review)
-		throws PortalException, SystemException {
-
+	public void deleteReview(TasksReview review) throws SystemException {
 		tasksReviewPersistence.remove(review);
 	}
 
-	public void deleteReviews(long proposalId)
-		throws PortalException, SystemException {
-
+	public void deleteReviews(long proposalId) throws SystemException {
 		List<TasksReview> reviews = tasksReviewPersistence.findByProposalId(
 			proposalId);
 
@@ -164,7 +160,7 @@ public class TasksReviewLocalServiceImpl
 
 	public List<TasksReview> getReviews(
 			long proposalId, int stage, boolean completed, boolean rejected)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return tasksReviewPersistence.findByP_S_C_R(
 			proposalId, stage, completed, rejected);

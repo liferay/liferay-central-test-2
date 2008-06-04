@@ -33,11 +33,8 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.RenderParametersPool;
 import com.liferay.portlet.tagscompiler.util.TagsCompilerSessionUtil;
 
-import java.io.IOException;
-
 import java.util.Collection;
 
-import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -54,8 +51,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class TagsCompilerPortlet extends LiferayPortlet {
 
-	public void render(RenderRequest req, RenderResponse res)
-		throws IOException, PortletException {
+	public void render(RenderRequest req, RenderResponse res) {
 
 		// Compile entries
 

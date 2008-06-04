@@ -123,8 +123,7 @@ public interface ResourceLocalService {
 			com.liferay.portal.PortalException;
 
 	public void deleteResources(java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public long getLatestResourceId() throws com.liferay.portal.SystemException;
 

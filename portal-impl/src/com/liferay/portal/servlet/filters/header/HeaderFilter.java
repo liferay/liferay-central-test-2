@@ -22,8 +22,6 @@
 
 package com.liferay.portal.servlet.filters.header;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -120,8 +118,6 @@ public class HeaderFilter extends BasePortalFilter {
 	private static final String _EXPIRES = "Expires";
 
 	private static final String _TIME_ZONE = "GMT";
-
-	private static Log _log = LogFactoryUtil.getLog(HeaderFilter.class);
 
 	private FilterConfig _config;
 	private TimeZone _timeZone;

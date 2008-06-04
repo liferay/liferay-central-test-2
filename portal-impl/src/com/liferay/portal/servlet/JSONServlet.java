@@ -32,9 +32,6 @@ import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -51,9 +48,7 @@ import org.apache.struts.action.Action;
  */
 public class JSONServlet extends HttpServlet {
 
-	public void service(HttpServletRequest req, HttpServletResponse res)
-		throws IOException, ServletException {
-
+	public void service(HttpServletRequest req, HttpServletResponse res) {
 		PermissionCheckerImpl permissionChecker = null;
 
 		try {

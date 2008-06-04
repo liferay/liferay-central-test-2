@@ -64,13 +64,13 @@ public class StripResponse extends HttpServletResponseWrapper {
 		}
 	}
 
-	public ServletOutputStream getOutputStream() throws IOException {
+	public ServletOutputStream getOutputStream() {
 		if (_writer != null) {
 			throw new IllegalStateException();
 		}
 
 		if (_stream == null) {
-			_stream = _createOutputStream();
+			_stream = createOutputStream();
 		}
 
 		return _stream;
@@ -85,7 +85,7 @@ public class StripResponse extends HttpServletResponseWrapper {
 			throw new IllegalStateException();
 		}
 
-		_stream = _createOutputStream();
+		_stream = createOutputStream();
 
 		_writer = new PrintWriter(new OutputStreamWriter(
 			//_stream, _res.getCharacterEncoding()));
@@ -119,7 +119,7 @@ public class StripResponse extends HttpServletResponseWrapper {
 		return _bam.toByteArray();
 	}
 
-	private ServletOutputStream _createOutputStream() throws IOException {
+	protected ServletOutputStream createOutputStream() {
 		return new StripStream(_bam);
 	}
 

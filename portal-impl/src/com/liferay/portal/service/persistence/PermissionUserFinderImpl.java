@@ -403,11 +403,10 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 	}
 
 	protected int countUsers(
-			Session session, String sql, long companyId, long groupId,
-			String name, String primKey, String actionId, String firstName,
-			String middleName, String lastName, String emailAddress,
-			boolean andOperator, int countUsersType)
-		throws SystemException {
+		Session session, String sql, long companyId, long groupId, String name,
+		String primKey, String actionId, String firstName, String middleName,
+		String lastName, String emailAddress, boolean andOperator,
+		int countUsersType) {
 
 		sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 

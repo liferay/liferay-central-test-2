@@ -222,20 +222,15 @@ public interface SCProductEntryPersistence {
 	public int countAll() throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getSCLicenses(
-		long pk)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
+		long pk) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getSCLicenses(
-		long pk, int start, int end)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
+		long pk, int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getSCLicenses(
 		long pk, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
+		throws com.liferay.portal.SystemException;
 
 	public int getSCLicensesSize(long pk)
 		throws com.liferay.portal.SystemException;
@@ -247,61 +242,40 @@ public interface SCProductEntryPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void addSCLicense(long pk, long scLicensePK)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
-			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
+		throws com.liferay.portal.SystemException;
 
 	public void addSCLicense(long pk,
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
-			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
+		throws com.liferay.portal.SystemException;
 
 	public void addSCLicenses(long pk, long[] scLicensePKs)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
-			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
+		throws com.liferay.portal.SystemException;
 
 	public void addSCLicenses(long pk,
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> scLicenses)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
-			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
+		throws com.liferay.portal.SystemException;
 
 	public void clearSCLicenses(long pk)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
+		throws com.liferay.portal.SystemException;
 
 	public void removeSCLicense(long pk, long scLicensePK)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
-			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
+		throws com.liferay.portal.SystemException;
 
 	public void removeSCLicense(long pk,
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
-			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
+		throws com.liferay.portal.SystemException;
 
 	public void removeSCLicenses(long pk, long[] scLicensePKs)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
-			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
+		throws com.liferay.portal.SystemException;
 
 	public void removeSCLicenses(long pk,
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> scLicenses)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
-			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
+		throws com.liferay.portal.SystemException;
 
 	public void setSCLicenses(long pk, long[] scLicensePKs)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
-			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
+		throws com.liferay.portal.SystemException;
 
 	public void setSCLicenses(long pk,
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> scLicenses)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
-			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
+		throws com.liferay.portal.SystemException;
 }

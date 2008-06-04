@@ -32,15 +32,12 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.servlet.filters.DynamicFilterConfig;
 
-import java.io.IOException;
-
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -111,8 +108,7 @@ public class CASFilter extends BaseFilter {
 	}
 
 	protected void processFilter(
-			ServletRequest req, ServletResponse res, FilterChain chain)
-		throws IOException, ServletException {
+		ServletRequest req, ServletResponse res, FilterChain chain) {
 
 		try {
 			HttpServletRequest httpReq = (HttpServletRequest)req;

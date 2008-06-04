@@ -35,7 +35,6 @@ import java.io.IOException;
 
 import java.util.Locale;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,7 +51,7 @@ import org.apache.commons.logging.LogFactory;
 public class LanguageServlet extends HttpServlet {
 
 	public void service(HttpServletRequest req, HttpServletResponse res)
-		throws IOException, ServletException {
+		throws IOException {
 
 		String path = req.getPathInfo();
 

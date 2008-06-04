@@ -22,23 +22,15 @@
 
 package com.liferay.portlet.tags.util;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portlet.tags.TagsEntryException;
-
 /**
- * <a href="BasicTagsAssetValidator.java.html"><b><i>View Source</i></b></a>
+ * <a href="DefaultTagsAssetValidator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BasicTagsAssetValidator extends TagsAssetValidator {
+public class DefaultTagsAssetValidator implements TagsAssetValidator {
 
-	public void validate(String className, String[] entryNames)
-		throws PortalException {
-
-		if (entryNames.length == 0) {
-			throw new TagsEntryException(TagsEntryException.AT_LEAST_ONE_TAG);
-		}
+	public void validate(String className, String[] entryNames) {
 	}
 
 }

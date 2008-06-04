@@ -40,7 +40,7 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
  */
 public class IconMenuTag extends BodyTagSupport {
 
-	public int doStartTag() throws JspException {
+	public int doStartTag() {
 		ServletRequest req = pageContext.getRequest();
 
 		req.setAttribute("liferay-ui:icon-menu:message", _message);

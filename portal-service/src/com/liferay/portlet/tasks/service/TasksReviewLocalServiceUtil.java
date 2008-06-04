@@ -137,16 +137,14 @@ public class TasksReviewLocalServiceUtil {
 
 	public static void deleteReview(
 		com.liferay.portlet.tasks.model.TasksReview review)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
 
 		tasksReviewLocalService.deleteReview(review);
 	}
 
 	public static void deleteReviews(long proposalId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
 
 		tasksReviewLocalService.deleteReviews(proposalId);
@@ -194,8 +192,7 @@ public class TasksReviewLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> getReviews(
 		long proposalId, int stage, boolean completed, boolean rejected)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
 
 		return tasksReviewLocalService.getReviews(proposalId, stage, completed,

@@ -148,20 +148,15 @@ public interface TagsAssetPersistence {
 	public int countAll() throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getTagsEntries(
-		long pk)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchAssetException;
+		long pk) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getTagsEntries(
-		long pk, int start, int end)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchAssetException;
+		long pk, int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getTagsEntries(
 		long pk, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchAssetException;
+		throws com.liferay.portal.SystemException;
 
 	public int getTagsEntriesSize(long pk)
 		throws com.liferay.portal.SystemException;
@@ -173,61 +168,40 @@ public interface TagsAssetPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void addTagsEntry(long pk, long tagsEntryPK)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchAssetException,
-			com.liferay.portlet.tags.NoSuchEntryException;
+		throws com.liferay.portal.SystemException;
 
 	public void addTagsEntry(long pk,
 		com.liferay.portlet.tags.model.TagsEntry tagsEntry)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchAssetException,
-			com.liferay.portlet.tags.NoSuchEntryException;
+		throws com.liferay.portal.SystemException;
 
 	public void addTagsEntries(long pk, long[] tagsEntryPKs)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchAssetException,
-			com.liferay.portlet.tags.NoSuchEntryException;
+		throws com.liferay.portal.SystemException;
 
 	public void addTagsEntries(long pk,
 		java.util.List<com.liferay.portlet.tags.model.TagsEntry> tagsEntries)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchAssetException,
-			com.liferay.portlet.tags.NoSuchEntryException;
+		throws com.liferay.portal.SystemException;
 
 	public void clearTagsEntries(long pk)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchAssetException;
+		throws com.liferay.portal.SystemException;
 
 	public void removeTagsEntry(long pk, long tagsEntryPK)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchAssetException,
-			com.liferay.portlet.tags.NoSuchEntryException;
+		throws com.liferay.portal.SystemException;
 
 	public void removeTagsEntry(long pk,
 		com.liferay.portlet.tags.model.TagsEntry tagsEntry)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchAssetException,
-			com.liferay.portlet.tags.NoSuchEntryException;
+		throws com.liferay.portal.SystemException;
 
 	public void removeTagsEntries(long pk, long[] tagsEntryPKs)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchAssetException,
-			com.liferay.portlet.tags.NoSuchEntryException;
+		throws com.liferay.portal.SystemException;
 
 	public void removeTagsEntries(long pk,
 		java.util.List<com.liferay.portlet.tags.model.TagsEntry> tagsEntries)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchAssetException,
-			com.liferay.portlet.tags.NoSuchEntryException;
+		throws com.liferay.portal.SystemException;
 
 	public void setTagsEntries(long pk, long[] tagsEntryPKs)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchAssetException,
-			com.liferay.portlet.tags.NoSuchEntryException;
+		throws com.liferay.portal.SystemException;
 
 	public void setTagsEntries(long pk,
 		java.util.List<com.liferay.portlet.tags.model.TagsEntry> tagsEntries)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchAssetException,
-			com.liferay.portlet.tags.NoSuchEntryException;
+		throws com.liferay.portal.SystemException;
 }

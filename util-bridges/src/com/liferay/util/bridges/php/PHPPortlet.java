@@ -60,7 +60,7 @@ public class PHPPortlet extends GenericPortlet {
 
 	public static final String PHP_URI_PARAM = "phpURI";
 
-	public void init() throws PortletException {
+	public void init() {
 		editUri = getInitParameter("edit-uri");
 		helpUri = getInitParameter("help-uri");
 		viewUri = getInitParameter("view-uri");
@@ -90,21 +90,15 @@ public class PHPPortlet extends GenericPortlet {
 		}
 	}
 
-	public void doHelp(RenderRequest req, RenderResponse res)
-		throws IOException, PortletException {
-
+	public void doHelp(RenderRequest req, RenderResponse res) {
 		processPHP(helpUri, req, res);
 	}
 
-	public void doView(RenderRequest req, RenderResponse res)
-		throws IOException, PortletException {
-
+	public void doView(RenderRequest req, RenderResponse res) {
 		processPHP(viewUri, req, res);
 	}
 
-	public void processAction(ActionRequest req, ActionResponse res)
-		throws IOException, PortletException {
-
+	public void processAction(ActionRequest req, ActionResponse res) {
 		String phpURI = req.getParameter(PHP_URI_PARAM);
 
 		if (phpURI != null) {
@@ -149,8 +143,7 @@ public class PHPPortlet extends GenericPortlet {
 	}
 
 	protected void processPHP(
-			String phpURI, RenderRequest req, RenderResponse res)
-		throws IOException, PortletException {
+		String phpURI, RenderRequest req, RenderResponse res) {
 
 		try {
 			ServletConfig config = (ServletConfig)req.getAttribute(

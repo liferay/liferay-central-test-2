@@ -20,49 +20,25 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.announcements.service.impl;
+package com.liferay.portlet.tags.util;
 
 import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portlet.announcements.model.AnnouncementsFlag;
-import com.liferay.portlet.announcements.service.base.AnnouncementsFlagServiceBaseImpl;
+import com.liferay.portlet.tags.TagsEntryException;
 
 /**
- * <a href="AnnouncementsFlagServiceImpl.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="MinimalTagsAssetValidator.java.html"><b><i>View Source</i></b></a>
  *
- * @author Thiago Moreira
- * @author Raymond Augé
+ * @author Brian Wing Shun Chan
  *
  */
-public class AnnouncementsFlagServiceImpl
-	extends AnnouncementsFlagServiceBaseImpl {
+public class MinimalTagsAssetValidator implements TagsAssetValidator {
 
-	public void addFlag(long entryId, int value)
-		throws PortalException, SystemException {
+	public void validate(String className, String[] entryNames)
+		throws PortalException {
 
-		announcementsFlagLocalService.addFlag(getUserId(), entryId, value);
-	}
-
-	public AnnouncementsFlag getFlag(long entryId, int value)
-		throws PortalException, SystemException {
-
-		return announcementsFlagLocalService.getFlag(
-			getUserId(), entryId, value);
-	}
-
-	public void deleteFlag(long flagId)
-		throws PortalException, SystemException {
-
-		AnnouncementsFlag flag = announcementsFlagPersistence.findByPrimaryKey(
-			flagId);
-
-		if (flag.getUserId() != getUserId()) {
-			throw new PrincipalException();
+		if (entryNames.length == 0) {
+			throw new TagsEntryException(TagsEntryException.AT_LEAST_ONE_TAG);
 		}
-
-		announcementsFlagLocalService.deleteFlag(flagId);
 	}
 
 }

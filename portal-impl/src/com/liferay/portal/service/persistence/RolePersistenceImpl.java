@@ -1193,18 +1193,17 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public List<com.liferay.portal.model.Group> getGroups(long pk)
-		throws NoSuchRoleException, SystemException {
+		throws SystemException {
 		return getGroups(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
 	public List<com.liferay.portal.model.Group> getGroups(long pk, int start,
-		int end) throws NoSuchRoleException, SystemException {
+		int end) throws SystemException {
 		return getGroups(pk, start, end, null);
 	}
 
 	public List<com.liferay.portal.model.Group> getGroups(long pk, int start,
-		int end, OrderByComparator obc)
-		throws NoSuchRoleException, SystemException {
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = RoleModelImpl.CACHE_ENABLED_GROUPS_ROLES;
 
 		String finderClassName = "Groups_Roles";
@@ -1389,9 +1388,7 @@ public class RolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void addGroup(long pk, long groupPK)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException,
-			SystemException {
+	public void addGroup(long pk, long groupPK) throws SystemException {
 		try {
 			addGroup.add(pk, groupPK);
 		}
@@ -1404,8 +1401,7 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public void addGroup(long pk, com.liferay.portal.model.Group group)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException,
-			SystemException {
+		throws SystemException {
 		try {
 			addGroup.add(pk, group.getPrimaryKey());
 		}
@@ -1417,9 +1413,7 @@ public class RolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void addGroups(long pk, long[] groupPKs)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException,
-			SystemException {
+	public void addGroups(long pk, long[] groupPKs) throws SystemException {
 		try {
 			for (long groupPK : groupPKs) {
 				addGroup.add(pk, groupPK);
@@ -1434,8 +1428,7 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public void addGroups(long pk, List<com.liferay.portal.model.Group> groups)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException,
-			SystemException {
+		throws SystemException {
 		try {
 			for (com.liferay.portal.model.Group group : groups) {
 				addGroup.add(pk, group.getPrimaryKey());
@@ -1449,8 +1442,7 @@ public class RolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void clearGroups(long pk)
-		throws NoSuchRoleException, SystemException {
+	public void clearGroups(long pk) throws SystemException {
 		try {
 			clearGroups.clear(pk);
 		}
@@ -1462,9 +1454,7 @@ public class RolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeGroup(long pk, long groupPK)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException,
-			SystemException {
+	public void removeGroup(long pk, long groupPK) throws SystemException {
 		try {
 			removeGroup.remove(pk, groupPK);
 		}
@@ -1477,8 +1467,7 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public void removeGroup(long pk, com.liferay.portal.model.Group group)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException,
-			SystemException {
+		throws SystemException {
 		try {
 			removeGroup.remove(pk, group.getPrimaryKey());
 		}
@@ -1491,8 +1480,7 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public void removeGroups(long pk, long[] groupPKs)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException,
-			SystemException {
+		throws SystemException {
 		try {
 			for (long groupPK : groupPKs) {
 				removeGroup.remove(pk, groupPK);
@@ -1507,9 +1495,7 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public void removeGroups(long pk,
-		List<com.liferay.portal.model.Group> groups)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException,
-			SystemException {
+		List<com.liferay.portal.model.Group> groups) throws SystemException {
 		try {
 			for (com.liferay.portal.model.Group group : groups) {
 				removeGroup.remove(pk, group.getPrimaryKey());
@@ -1523,9 +1509,7 @@ public class RolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void setGroups(long pk, long[] groupPKs)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException,
-			SystemException {
+	public void setGroups(long pk, long[] groupPKs) throws SystemException {
 		try {
 			clearGroups.clear(pk);
 
@@ -1542,8 +1526,7 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public void setGroups(long pk, List<com.liferay.portal.model.Group> groups)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException,
-			SystemException {
+		throws SystemException {
 		try {
 			clearGroups.clear(pk);
 
@@ -1560,18 +1543,17 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public List<com.liferay.portal.model.Permission> getPermissions(long pk)
-		throws NoSuchRoleException, SystemException {
+		throws SystemException {
 		return getPermissions(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
 	public List<com.liferay.portal.model.Permission> getPermissions(long pk,
-		int start, int end) throws NoSuchRoleException, SystemException {
+		int start, int end) throws SystemException {
 		return getPermissions(pk, start, end, null);
 	}
 
 	public List<com.liferay.portal.model.Permission> getPermissions(long pk,
-		int start, int end, OrderByComparator obc)
-		throws NoSuchRoleException, SystemException {
+		int start, int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = RoleModelImpl.CACHE_ENABLED_ROLES_PERMISSIONS;
 
 		String finderClassName = "Roles_Permissions";
@@ -1751,8 +1733,7 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public void addPermission(long pk, long permissionPK)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchPermissionException,
-			SystemException {
+		throws SystemException {
 		try {
 			addPermission.add(pk, permissionPK);
 		}
@@ -1766,8 +1747,7 @@ public class RolePersistenceImpl extends BasePersistence
 
 	public void addPermission(long pk,
 		com.liferay.portal.model.Permission permission)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchPermissionException,
-			SystemException {
+		throws SystemException {
 		try {
 			addPermission.add(pk, permission.getPrimaryKey());
 		}
@@ -1780,8 +1760,7 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public void addPermissions(long pk, long[] permissionPKs)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchPermissionException,
-			SystemException {
+		throws SystemException {
 		try {
 			for (long permissionPK : permissionPKs) {
 				addPermission.add(pk, permissionPK);
@@ -1797,8 +1776,7 @@ public class RolePersistenceImpl extends BasePersistence
 
 	public void addPermissions(long pk,
 		List<com.liferay.portal.model.Permission> permissions)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchPermissionException,
-			SystemException {
+		throws SystemException {
 		try {
 			for (com.liferay.portal.model.Permission permission : permissions) {
 				addPermission.add(pk, permission.getPrimaryKey());
@@ -1812,8 +1790,7 @@ public class RolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void clearPermissions(long pk)
-		throws NoSuchRoleException, SystemException {
+	public void clearPermissions(long pk) throws SystemException {
 		try {
 			clearPermissions.clear(pk);
 		}
@@ -1826,8 +1803,7 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public void removePermission(long pk, long permissionPK)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchPermissionException,
-			SystemException {
+		throws SystemException {
 		try {
 			removePermission.remove(pk, permissionPK);
 		}
@@ -1841,8 +1817,7 @@ public class RolePersistenceImpl extends BasePersistence
 
 	public void removePermission(long pk,
 		com.liferay.portal.model.Permission permission)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchPermissionException,
-			SystemException {
+		throws SystemException {
 		try {
 			removePermission.remove(pk, permission.getPrimaryKey());
 		}
@@ -1855,8 +1830,7 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public void removePermissions(long pk, long[] permissionPKs)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchPermissionException,
-			SystemException {
+		throws SystemException {
 		try {
 			for (long permissionPK : permissionPKs) {
 				removePermission.remove(pk, permissionPK);
@@ -1872,8 +1846,7 @@ public class RolePersistenceImpl extends BasePersistence
 
 	public void removePermissions(long pk,
 		List<com.liferay.portal.model.Permission> permissions)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchPermissionException,
-			SystemException {
+		throws SystemException {
 		try {
 			for (com.liferay.portal.model.Permission permission : permissions) {
 				removePermission.remove(pk, permission.getPrimaryKey());
@@ -1888,8 +1861,7 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public void setPermissions(long pk, long[] permissionPKs)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchPermissionException,
-			SystemException {
+		throws SystemException {
 		try {
 			clearPermissions.clear(pk);
 
@@ -1907,8 +1879,7 @@ public class RolePersistenceImpl extends BasePersistence
 
 	public void setPermissions(long pk,
 		List<com.liferay.portal.model.Permission> permissions)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchPermissionException,
-			SystemException {
+		throws SystemException {
 		try {
 			clearPermissions.clear(pk);
 
@@ -1925,18 +1896,17 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public List<com.liferay.portal.model.User> getUsers(long pk)
-		throws NoSuchRoleException, SystemException {
+		throws SystemException {
 		return getUsers(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
 	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
-		int end) throws NoSuchRoleException, SystemException {
+		int end) throws SystemException {
 		return getUsers(pk, start, end, null);
 	}
 
 	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
-		int end, OrderByComparator obc)
-		throws NoSuchRoleException, SystemException {
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = RoleModelImpl.CACHE_ENABLED_USERS_ROLES;
 
 		String finderClassName = "Users_Roles";
@@ -2113,9 +2083,7 @@ public class RolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void addUser(long pk, long userPK)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException,
-			SystemException {
+	public void addUser(long pk, long userPK) throws SystemException {
 		try {
 			addUser.add(pk, userPK);
 		}
@@ -2128,8 +2096,7 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public void addUser(long pk, com.liferay.portal.model.User user)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException,
-			SystemException {
+		throws SystemException {
 		try {
 			addUser.add(pk, user.getPrimaryKey());
 		}
@@ -2141,9 +2108,7 @@ public class RolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void addUsers(long pk, long[] userPKs)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException,
-			SystemException {
+	public void addUsers(long pk, long[] userPKs) throws SystemException {
 		try {
 			for (long userPK : userPKs) {
 				addUser.add(pk, userPK);
@@ -2158,8 +2123,7 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public void addUsers(long pk, List<com.liferay.portal.model.User> users)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException,
-			SystemException {
+		throws SystemException {
 		try {
 			for (com.liferay.portal.model.User user : users) {
 				addUser.add(pk, user.getPrimaryKey());
@@ -2173,7 +2137,7 @@ public class RolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void clearUsers(long pk) throws NoSuchRoleException, SystemException {
+	public void clearUsers(long pk) throws SystemException {
 		try {
 			clearUsers.clear(pk);
 		}
@@ -2185,9 +2149,7 @@ public class RolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeUser(long pk, long userPK)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException,
-			SystemException {
+	public void removeUser(long pk, long userPK) throws SystemException {
 		try {
 			removeUser.remove(pk, userPK);
 		}
@@ -2200,8 +2162,7 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public void removeUser(long pk, com.liferay.portal.model.User user)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException,
-			SystemException {
+		throws SystemException {
 		try {
 			removeUser.remove(pk, user.getPrimaryKey());
 		}
@@ -2213,9 +2174,7 @@ public class RolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeUsers(long pk, long[] userPKs)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException,
-			SystemException {
+	public void removeUsers(long pk, long[] userPKs) throws SystemException {
 		try {
 			for (long userPK : userPKs) {
 				removeUser.remove(pk, userPK);
@@ -2230,8 +2189,7 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public void removeUsers(long pk, List<com.liferay.portal.model.User> users)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException,
-			SystemException {
+		throws SystemException {
 		try {
 			for (com.liferay.portal.model.User user : users) {
 				removeUser.remove(pk, user.getPrimaryKey());
@@ -2245,9 +2203,7 @@ public class RolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void setUsers(long pk, long[] userPKs)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException,
-			SystemException {
+	public void setUsers(long pk, long[] userPKs) throws SystemException {
 		try {
 			clearUsers.clear(pk);
 
@@ -2264,8 +2220,7 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public void setUsers(long pk, List<com.liferay.portal.model.User> users)
-		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException,
-			SystemException {
+		throws SystemException {
 		try {
 			clearUsers.clear(pk);
 

@@ -206,9 +206,7 @@ public class SoftwareCatalogServlet extends HttpServlet {
 		return repoSettings;
 	}
 
-	protected String getVersion(HttpServletRequest req)
-		throws PortalException, SystemException {
-
+	protected String getVersion(HttpServletRequest req) {
 		String version = ParamUtil.getString(req, "version");
 
 		String prefix =

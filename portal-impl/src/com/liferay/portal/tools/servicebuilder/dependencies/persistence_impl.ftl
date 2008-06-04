@@ -1428,15 +1428,15 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 		<#if column.isCollection() && (column.isMappingManyToMany() || column.isMappingOneToMany())>
 			<#assign tempEntity = serviceBuilder.getEntity(column.getEJBName())>
 
-			public List<${tempEntity.packagePath}.model.${tempEntity.name}> get${tempEntity.names}(${entity.PKClassName} pk) throws ${noSuchEntity}Exception, SystemException {
+			public List<${tempEntity.packagePath}.model.${tempEntity.name}> get${tempEntity.names}(${entity.PKClassName} pk) throws SystemException {
 				return get${tempEntity.names}(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 			}
 
-			public List<${tempEntity.packagePath}.model.${tempEntity.name}> get${tempEntity.names}(${entity.PKClassName} pk, int start, int end) throws ${noSuchEntity}Exception, SystemException {
+			public List<${tempEntity.packagePath}.model.${tempEntity.name}> get${tempEntity.names}(${entity.PKClassName} pk, int start, int end) throws SystemException {
 				return get${tempEntity.names}(pk, start, end, null);
 			}
 
-			public List<${tempEntity.packagePath}.model.${tempEntity.name}> get${tempEntity.names}(${entity.PKClassName} pk, int start, int end, OrderByComparator obc) throws ${noSuchEntity}Exception, SystemException {
+			public List<${tempEntity.packagePath}.model.${tempEntity.name}> get${tempEntity.names}(${entity.PKClassName} pk, int start, int end, OrderByComparator obc) throws SystemException {
 				boolean finderClassNameCacheEnabled =
 					<#if column.mappingTable??>
 						${entity.name}ModelImpl.CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)}
@@ -1733,7 +1733,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 			<#if column.isMappingManyToMany()>
 				<#assign noSuchTempEntity = serviceBuilder.getNoSuchEntityException(tempEntity)>
 
-				public void add${tempEntity.name}(${entity.PKClassName} pk, ${tempEntity.PKClassName} ${tempEntity.varName}PK) throws ${noSuchEntity}Exception, ${tempEntity.packagePath}.${noSuchTempEntity}Exception, SystemException {
+				public void add${tempEntity.name}(${entity.PKClassName} pk, ${tempEntity.PKClassName} ${tempEntity.varName}PK) throws SystemException {
 					try {
 						add${tempEntity.name}.add(pk, ${tempEntity.varName}PK);
 					}
@@ -1745,7 +1745,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					}
 				}
 
-				public void add${tempEntity.name}(${entity.PKClassName} pk, ${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName}) throws ${noSuchEntity}Exception, ${tempEntity.packagePath}.${noSuchTempEntity}Exception, SystemException {
+				public void add${tempEntity.name}(${entity.PKClassName} pk, ${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName}) throws SystemException {
 					try {
 						add${tempEntity.name}.add(pk, ${tempEntity.varName}.getPrimaryKey());
 					}
@@ -1757,7 +1757,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					}
 				}
 
-				public void add${tempEntity.names}(${entity.PKClassName} pk, ${tempEntity.PKClassName}[] ${tempEntity.varName}PKs) throws ${noSuchEntity}Exception, ${tempEntity.packagePath}.${noSuchTempEntity}Exception, SystemException {
+				public void add${tempEntity.names}(${entity.PKClassName} pk, ${tempEntity.PKClassName}[] ${tempEntity.varName}PKs) throws SystemException {
 					try {
 						for (${tempEntity.PKClassName} ${tempEntity.varName}PK : ${tempEntity.varName}PKs) {
 							add${tempEntity.name}.add(pk, ${tempEntity.varName}PK);
@@ -1771,7 +1771,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					}
 				}
 
-				public void add${tempEntity.names}(${entity.PKClassName} pk, List<${tempEntity.packagePath}.model.${tempEntity.name}> ${tempEntity.varNames}) throws ${noSuchEntity}Exception, ${tempEntity.packagePath}.${noSuchTempEntity}Exception, SystemException {
+				public void add${tempEntity.names}(${entity.PKClassName} pk, List<${tempEntity.packagePath}.model.${tempEntity.name}> ${tempEntity.varNames}) throws SystemException {
 					try {
 						for (${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName} : ${tempEntity.varNames}) {
 							add${tempEntity.name}.add(pk, ${tempEntity.varName}.getPrimaryKey());
@@ -1785,7 +1785,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					}
 				}
 
-				public void clear${tempEntity.names}(${entity.PKClassName} pk) throws ${noSuchEntity}Exception, SystemException {
+				public void clear${tempEntity.names}(${entity.PKClassName} pk) throws SystemException {
 					try {
 						clear${tempEntity.names}.clear(pk);
 					}
@@ -1797,7 +1797,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					}
 				}
 
-				public void remove${tempEntity.name}(${entity.PKClassName} pk, ${tempEntity.PKClassName} ${tempEntity.varName}PK) throws ${noSuchEntity}Exception, ${tempEntity.packagePath}.${noSuchTempEntity}Exception, SystemException {
+				public void remove${tempEntity.name}(${entity.PKClassName} pk, ${tempEntity.PKClassName} ${tempEntity.varName}PK) throws SystemException {
 					try {
 						remove${tempEntity.name}.remove(pk, ${tempEntity.varName}PK);
 					}
@@ -1809,7 +1809,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					}
 				}
 
-				public void remove${tempEntity.name}(${entity.PKClassName} pk, ${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName}) throws ${noSuchEntity}Exception, ${tempEntity.packagePath}.${noSuchTempEntity}Exception, SystemException {
+				public void remove${tempEntity.name}(${entity.PKClassName} pk, ${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName}) throws SystemException {
 					try {
 						remove${tempEntity.name}.remove(pk, ${tempEntity.varName}.getPrimaryKey());
 					}
@@ -1821,7 +1821,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					}
 				}
 
-				public void remove${tempEntity.names}(${entity.PKClassName} pk, ${tempEntity.PKClassName}[] ${tempEntity.varName}PKs) throws ${noSuchEntity}Exception, ${tempEntity.packagePath}.${noSuchTempEntity}Exception, SystemException {
+				public void remove${tempEntity.names}(${entity.PKClassName} pk, ${tempEntity.PKClassName}[] ${tempEntity.varName}PKs) throws SystemException {
 					try {
 						for (${tempEntity.PKClassName} ${tempEntity.varName}PK : ${tempEntity.varName}PKs) {
 							remove${tempEntity.name}.remove(pk, ${tempEntity.varName}PK);
@@ -1835,7 +1835,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					}
 				}
 
-				public void remove${tempEntity.names}(${entity.PKClassName} pk, List<${tempEntity.packagePath}.model.${tempEntity.name}> ${tempEntity.varNames}) throws ${noSuchEntity}Exception, ${tempEntity.packagePath}.${noSuchTempEntity}Exception, SystemException {
+				public void remove${tempEntity.names}(${entity.PKClassName} pk, List<${tempEntity.packagePath}.model.${tempEntity.name}> ${tempEntity.varNames}) throws SystemException {
 					try {
 						for (${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName} : ${tempEntity.varNames}) {
 							remove${tempEntity.name}.remove(pk, ${tempEntity.varName}.getPrimaryKey());
@@ -1849,7 +1849,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					}
 				}
 
-				public void set${tempEntity.names}(${entity.PKClassName} pk, ${tempEntity.PKClassName}[] ${tempEntity.varName}PKs) throws ${noSuchEntity}Exception, ${tempEntity.packagePath}.${noSuchTempEntity}Exception, SystemException {
+				public void set${tempEntity.names}(${entity.PKClassName} pk, ${tempEntity.PKClassName}[] ${tempEntity.varName}PKs) throws SystemException {
 					try {
 						clear${tempEntity.names}.clear(pk);
 
@@ -1865,7 +1865,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					}
 				}
 
-				public void set${tempEntity.names}(${entity.PKClassName} pk, List<${tempEntity.packagePath}.model.${tempEntity.name}> ${tempEntity.varNames}) throws ${noSuchEntity}Exception, ${tempEntity.packagePath}.${noSuchTempEntity}Exception, SystemException {
+				public void set${tempEntity.names}(${entity.PKClassName} pk, List<${tempEntity.packagePath}.model.${tempEntity.name}> ${tempEntity.varNames}) throws SystemException {
 					try {
 						clear${tempEntity.names}.clear(pk);
 

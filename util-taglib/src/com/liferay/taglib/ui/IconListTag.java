@@ -40,7 +40,7 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
  */
 public class IconListTag extends BodyTagSupport {
 
-	public int doStartTag() throws JspException {
+	public int doStartTag() {
 		ServletRequest req = pageContext.getRequest();
 
 		req.setAttribute(

@@ -71,8 +71,7 @@ public class WAIPortlet extends GenericPortlet {
 			portletConfig.getInitParameter("wai.connector"), CONNECTOR_IFRAME);
 	}
 
-	public void processAction(ActionRequest req, ActionResponse res)
-		throws IOException, PortletException {
+	public void processAction(ActionRequest req, ActionResponse res) {
 	}
 
 	public void render(RenderRequest req, RenderResponse res)
@@ -166,7 +165,7 @@ public class WAIPortlet extends GenericPortlet {
 
 	protected void renderNormalWindowState(
 			RenderRequest req, RenderResponse res)
-		throws IOException, PortletException {
+		throws PortletException {
 
 		HttpServletRequest httpReq = (HttpServletRequest)req.getAttribute(
 			PortletServlet.PORTLET_SERVLET_REQUEST);

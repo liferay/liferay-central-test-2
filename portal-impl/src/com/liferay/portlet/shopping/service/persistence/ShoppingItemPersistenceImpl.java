@@ -1482,19 +1482,18 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 	}
 
 	public List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getShoppingItemPrices(
-		long pk) throws NoSuchItemException, SystemException {
+		long pk) throws SystemException {
 		return getShoppingItemPrices(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
 	public List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getShoppingItemPrices(
-		long pk, int start, int end)
-		throws NoSuchItemException, SystemException {
+		long pk, int start, int end) throws SystemException {
 		return getShoppingItemPrices(pk, start, end, null);
 	}
 
 	public List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getShoppingItemPrices(
 		long pk, int start, int end, OrderByComparator obc)
-		throws NoSuchItemException, SystemException {
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = com.liferay.portlet.shopping.model.impl.ShoppingItemPriceModelImpl.CACHE_ENABLED;
 
 		String finderClassName = com.liferay.portlet.shopping.model.ShoppingItemPrice.class.getName();

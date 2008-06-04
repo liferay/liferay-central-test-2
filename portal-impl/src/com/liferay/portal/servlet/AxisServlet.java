@@ -37,9 +37,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.xml.XMLFormatter;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -54,9 +51,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 
-	public void service(HttpServletRequest req, HttpServletResponse res)
-		throws IOException, ServletException {
-
+	public void service(HttpServletRequest req, HttpServletResponse res) {
 		PermissionCheckerImpl permissionChecker = null;
 
 		try {

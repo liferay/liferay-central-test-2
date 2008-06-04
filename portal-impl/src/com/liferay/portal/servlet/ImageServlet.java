@@ -190,7 +190,7 @@ public class ImageServlet extends HttpServlet {
 	}
 
 	protected void writeImage(HttpServletRequest req, HttpServletResponse res)
-		throws IOException, NoSuchImageException, ServletException {
+		throws NoSuchImageException {
 
 		Image image = getImage(req, true);
 

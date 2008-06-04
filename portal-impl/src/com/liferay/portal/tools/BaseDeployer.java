@@ -337,7 +337,7 @@ public class BaseDeployer {
 		copyDependencyXml("web.xml", srcFile + "/WEB-INF");
 	}
 
-	protected void deploy() throws Exception  {
+	protected void deploy() throws Exception {
 		try {
 			File baseDirFile = new File(baseDir);
 

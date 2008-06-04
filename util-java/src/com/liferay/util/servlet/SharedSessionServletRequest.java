@@ -38,7 +38,8 @@ import javax.servlet.http.HttpSession;
 public class SharedSessionServletRequest extends HttpServletRequestWrapper {
 
 	public SharedSessionServletRequest(
-		HttpServletRequest req, Map sharedSessionAttributes, boolean shared) {
+		HttpServletRequest req, Map<String, Object> sharedSessionAttributes,
+		boolean shared) {
 
 		super(req);
 
@@ -70,7 +71,7 @@ public class SharedSessionServletRequest extends HttpServletRequestWrapper {
 	}
 
 	private HttpSession _ses;
-	private Map _sharedSessionAttributes;
+	private Map<String, Object> _sharedSessionAttributes;
 	private boolean _shared;
 
 }

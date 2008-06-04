@@ -363,7 +363,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 	}
 
 	protected String processPath(
-		HttpServletRequest req, HttpServletResponse res)  {
+		HttpServletRequest req, HttpServletResponse res) {
 
 		String path = req.getParameter("struts_action");
 

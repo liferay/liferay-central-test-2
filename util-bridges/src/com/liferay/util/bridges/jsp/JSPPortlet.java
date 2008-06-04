@@ -50,7 +50,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class JSPPortlet extends LiferayPortlet {
 
-	public void init() throws PortletException {
+	public void init() {
 		aboutJSP = getInitParameter("about-jsp");
 		configJSP = getInitParameter("config-jsp");
 		editJSP = getInitParameter("edit-jsp");

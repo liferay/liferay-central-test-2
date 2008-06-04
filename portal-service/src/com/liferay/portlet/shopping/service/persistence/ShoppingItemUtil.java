@@ -275,24 +275,19 @@ public class ShoppingItemUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getShoppingItemPrices(
-		long pk)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.shopping.NoSuchItemException {
+		long pk) throws com.liferay.portal.SystemException {
 		return getPersistence().getShoppingItemPrices(pk);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getShoppingItemPrices(
-		long pk, int start, int end)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.shopping.NoSuchItemException {
+		long pk, int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().getShoppingItemPrices(pk, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getShoppingItemPrices(
 		long pk, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.shopping.NoSuchItemException {
+		throws com.liferay.portal.SystemException {
 		return getPersistence().getShoppingItemPrices(pk, start, end, obc);
 	}
 

@@ -282,8 +282,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 	}
 
 	protected void processFilter(
-			ServletRequest req, ServletResponse res, FilterChain chain)
-		throws IOException, ServletException {
+		ServletRequest req, ServletResponse res, FilterChain chain) {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(VirtualHostFilter.class);

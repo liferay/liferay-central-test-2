@@ -84,7 +84,7 @@ public class ActionURLLogic extends RuntimeLogic {
 			String paramName = root.attributeValue("param-name-" + i);
 			String paramValue = root.attributeValue("param-value-" + i);
 
-			if ((paramName == null) || (paramValue == null))  {
+			if ((paramName == null) || (paramValue == null)) {
 				break;
 			}
 

@@ -30,10 +30,9 @@ import com.liferay.portal.PortalException;
  * @author Brian Wing Shun Chan
  *
  */
-public class TagsAssetValidator {
+public interface TagsAssetValidator {
 
 	public void validate(String className, String[] entryNames)
-		throws PortalException {
-	}
+		throws PortalException;
 
 }

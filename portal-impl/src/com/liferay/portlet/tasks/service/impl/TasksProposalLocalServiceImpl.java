@@ -235,9 +235,7 @@ public class TasksProposalLocalServiceImpl
 		tasksProposalPersistence.remove(proposal);
 	}
 
-	public void deleteProposals(long groupId)
-		throws PortalException, SystemException {
-
+	public void deleteProposals(long groupId) throws SystemException {
 		List<TasksProposal> proposals = tasksProposalPersistence.findByGroupId(
 			groupId);
 

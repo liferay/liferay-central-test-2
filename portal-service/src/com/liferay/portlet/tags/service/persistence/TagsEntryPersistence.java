@@ -113,20 +113,15 @@ public interface TagsEntryPersistence {
 	public int countAll() throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getTagsAssets(
-		long pk)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchEntryException;
+		long pk) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getTagsAssets(
-		long pk, int start, int end)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchEntryException;
+		long pk, int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getTagsAssets(
 		long pk, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchEntryException;
+		throws com.liferay.portal.SystemException;
 
 	public int getTagsAssetsSize(long pk)
 		throws com.liferay.portal.SystemException;
@@ -138,61 +133,40 @@ public interface TagsEntryPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void addTagsAsset(long pk, long tagsAssetPK)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchAssetException,
-			com.liferay.portlet.tags.NoSuchEntryException;
+		throws com.liferay.portal.SystemException;
 
 	public void addTagsAsset(long pk,
 		com.liferay.portlet.tags.model.TagsAsset tagsAsset)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchAssetException,
-			com.liferay.portlet.tags.NoSuchEntryException;
+		throws com.liferay.portal.SystemException;
 
 	public void addTagsAssets(long pk, long[] tagsAssetPKs)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchAssetException,
-			com.liferay.portlet.tags.NoSuchEntryException;
+		throws com.liferay.portal.SystemException;
 
 	public void addTagsAssets(long pk,
 		java.util.List<com.liferay.portlet.tags.model.TagsAsset> tagsAssets)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchAssetException,
-			com.liferay.portlet.tags.NoSuchEntryException;
+		throws com.liferay.portal.SystemException;
 
 	public void clearTagsAssets(long pk)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchEntryException;
+		throws com.liferay.portal.SystemException;
 
 	public void removeTagsAsset(long pk, long tagsAssetPK)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchAssetException,
-			com.liferay.portlet.tags.NoSuchEntryException;
+		throws com.liferay.portal.SystemException;
 
 	public void removeTagsAsset(long pk,
 		com.liferay.portlet.tags.model.TagsAsset tagsAsset)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchAssetException,
-			com.liferay.portlet.tags.NoSuchEntryException;
+		throws com.liferay.portal.SystemException;
 
 	public void removeTagsAssets(long pk, long[] tagsAssetPKs)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchAssetException,
-			com.liferay.portlet.tags.NoSuchEntryException;
+		throws com.liferay.portal.SystemException;
 
 	public void removeTagsAssets(long pk,
 		java.util.List<com.liferay.portlet.tags.model.TagsAsset> tagsAssets)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchAssetException,
-			com.liferay.portlet.tags.NoSuchEntryException;
+		throws com.liferay.portal.SystemException;
 
 	public void setTagsAssets(long pk, long[] tagsAssetPKs)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchAssetException,
-			com.liferay.portlet.tags.NoSuchEntryException;
+		throws com.liferay.portal.SystemException;
 
 	public void setTagsAssets(long pk,
 		java.util.List<com.liferay.portlet.tags.model.TagsAsset> tagsAssets)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchAssetException,
-			com.liferay.portlet.tags.NoSuchEntryException;
+		throws com.liferay.portal.SystemException;
 }

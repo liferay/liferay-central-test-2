@@ -136,7 +136,7 @@ public class CacheResponse extends HttpServletResponseWrapper {
 		return _headers;
 	}
 
-	public ServletOutputStream getOutputStream() throws IOException {
+	public ServletOutputStream getOutputStream() {
 		if (_writer != null) {
 			throw new IllegalStateException();
 		}
@@ -223,7 +223,7 @@ public class CacheResponse extends HttpServletResponseWrapper {
 		values.add(header);
 	}
 
-	protected CacheResponseStream createOutputStream() throws IOException {
+	protected CacheResponseStream createOutputStream() {
 		return new CacheResponseStream(_bam);
 	}
 

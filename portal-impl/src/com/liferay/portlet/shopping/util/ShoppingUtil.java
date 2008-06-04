@@ -1060,7 +1060,7 @@ public class ShoppingUtil {
 
 			if ((temp.getStatus() !=
 					ShoppingItemPriceImpl.STATUS_INACTIVE) &&
-				(count >= minQty) && (count < maxQty || maxQty == 0))  {
+				(count >= minQty) && (count < maxQty || maxQty == 0)) {
 
 				itemPrice = temp;
 			}

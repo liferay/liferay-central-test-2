@@ -42,9 +42,7 @@ public class ContactLocalServiceImpl extends ContactLocalServiceBaseImpl {
 		return contactPersistence.findByPrimaryKey(contactId);
 	}
 
-	public void deleteContact(long contactId)
-		throws PortalException, SystemException {
-
+	public void deleteContact(long contactId) throws SystemException {
 		try {
 			Contact contact = contactPersistence.findByPrimaryKey(contactId);
 

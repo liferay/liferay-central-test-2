@@ -672,19 +672,18 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 	}
 
 	public List<com.liferay.portlet.tags.model.TagsAsset> getTagsAssets(long pk)
-		throws NoSuchEntryException, SystemException {
+		throws SystemException {
 		return getTagsAssets(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
 	public List<com.liferay.portlet.tags.model.TagsAsset> getTagsAssets(
-		long pk, int start, int end)
-		throws NoSuchEntryException, SystemException {
+		long pk, int start, int end) throws SystemException {
 		return getTagsAssets(pk, start, end, null);
 	}
 
 	public List<com.liferay.portlet.tags.model.TagsAsset> getTagsAssets(
 		long pk, int start, int end, OrderByComparator obc)
-		throws NoSuchEntryException, SystemException {
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = TagsEntryModelImpl.CACHE_ENABLED_TAGSASSETS_TAGSENTRIES;
 
 		String finderClassName = "TagsAssets_TagsEntries";
@@ -864,8 +863,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 	}
 
 	public void addTagsAsset(long pk, long tagsAssetPK)
-		throws NoSuchEntryException,
-			com.liferay.portlet.tags.NoSuchAssetException, SystemException {
+		throws SystemException {
 		try {
 			addTagsAsset.add(pk, tagsAssetPK);
 		}
@@ -879,8 +877,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 
 	public void addTagsAsset(long pk,
 		com.liferay.portlet.tags.model.TagsAsset tagsAsset)
-		throws NoSuchEntryException,
-			com.liferay.portlet.tags.NoSuchAssetException, SystemException {
+		throws SystemException {
 		try {
 			addTagsAsset.add(pk, tagsAsset.getPrimaryKey());
 		}
@@ -893,8 +890,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 	}
 
 	public void addTagsAssets(long pk, long[] tagsAssetPKs)
-		throws NoSuchEntryException,
-			com.liferay.portlet.tags.NoSuchAssetException, SystemException {
+		throws SystemException {
 		try {
 			for (long tagsAssetPK : tagsAssetPKs) {
 				addTagsAsset.add(pk, tagsAssetPK);
@@ -910,8 +906,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 
 	public void addTagsAssets(long pk,
 		List<com.liferay.portlet.tags.model.TagsAsset> tagsAssets)
-		throws NoSuchEntryException,
-			com.liferay.portlet.tags.NoSuchAssetException, SystemException {
+		throws SystemException {
 		try {
 			for (com.liferay.portlet.tags.model.TagsAsset tagsAsset : tagsAssets) {
 				addTagsAsset.add(pk, tagsAsset.getPrimaryKey());
@@ -925,8 +920,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void clearTagsAssets(long pk)
-		throws NoSuchEntryException, SystemException {
+	public void clearTagsAssets(long pk) throws SystemException {
 		try {
 			clearTagsAssets.clear(pk);
 		}
@@ -939,8 +933,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 	}
 
 	public void removeTagsAsset(long pk, long tagsAssetPK)
-		throws NoSuchEntryException,
-			com.liferay.portlet.tags.NoSuchAssetException, SystemException {
+		throws SystemException {
 		try {
 			removeTagsAsset.remove(pk, tagsAssetPK);
 		}
@@ -954,8 +947,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 
 	public void removeTagsAsset(long pk,
 		com.liferay.portlet.tags.model.TagsAsset tagsAsset)
-		throws NoSuchEntryException,
-			com.liferay.portlet.tags.NoSuchAssetException, SystemException {
+		throws SystemException {
 		try {
 			removeTagsAsset.remove(pk, tagsAsset.getPrimaryKey());
 		}
@@ -968,8 +960,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 	}
 
 	public void removeTagsAssets(long pk, long[] tagsAssetPKs)
-		throws NoSuchEntryException,
-			com.liferay.portlet.tags.NoSuchAssetException, SystemException {
+		throws SystemException {
 		try {
 			for (long tagsAssetPK : tagsAssetPKs) {
 				removeTagsAsset.remove(pk, tagsAssetPK);
@@ -985,8 +976,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 
 	public void removeTagsAssets(long pk,
 		List<com.liferay.portlet.tags.model.TagsAsset> tagsAssets)
-		throws NoSuchEntryException,
-			com.liferay.portlet.tags.NoSuchAssetException, SystemException {
+		throws SystemException {
 		try {
 			for (com.liferay.portlet.tags.model.TagsAsset tagsAsset : tagsAssets) {
 				removeTagsAsset.remove(pk, tagsAsset.getPrimaryKey());
@@ -1001,8 +991,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 	}
 
 	public void setTagsAssets(long pk, long[] tagsAssetPKs)
-		throws NoSuchEntryException,
-			com.liferay.portlet.tags.NoSuchAssetException, SystemException {
+		throws SystemException {
 		try {
 			clearTagsAssets.clear(pk);
 
@@ -1020,8 +1009,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 
 	public void setTagsAssets(long pk,
 		List<com.liferay.portlet.tags.model.TagsAsset> tagsAssets)
-		throws NoSuchEntryException,
-			com.liferay.portlet.tags.NoSuchAssetException, SystemException {
+		throws SystemException {
 		try {
 			clearTagsAssets.clear(pk);
 

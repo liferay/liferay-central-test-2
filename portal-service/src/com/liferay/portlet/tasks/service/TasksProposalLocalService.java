@@ -149,8 +149,7 @@ public interface TasksProposalLocalService {
 			com.liferay.portal.PortalException;
 
 	public void deleteProposals(long groupId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tasks.model.TasksProposal getProposal(
 		long proposalId)

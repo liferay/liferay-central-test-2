@@ -29,8 +29,6 @@ import com.liferay.portlet.translator.model.Translation;
 import com.liferay.portlet.translator.util.TranslatorUtil;
 import com.liferay.util.bridges.jsp.JSPPortlet;
 
-import java.io.IOException;
-
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
@@ -44,7 +42,7 @@ import javax.portlet.PortletException;
 public class TranslatorPortlet extends JSPPortlet {
 
 	public void processAction(ActionRequest req, ActionResponse res)
-		throws IOException, PortletException {
+		throws PortletException {
 
 		try {
 			String translationId = ParamUtil.getString(req, "id");

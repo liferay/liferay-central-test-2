@@ -42,9 +42,8 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ProgressInputStream extends InputStream {
 
-	public ProgressInputStream(ActionRequest req, InputStream is,
-							   long totalSize, String progressId)
-		throws IOException {
+	public ProgressInputStream(
+		ActionRequest req, InputStream is, long totalSize, String progressId) {
 
 		_ses = req.getPortletSession();
 		_is = is;

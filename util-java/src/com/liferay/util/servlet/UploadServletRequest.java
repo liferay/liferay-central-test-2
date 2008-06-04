@@ -69,9 +69,7 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 				UploadServletRequest.class.getName() + ".temp.dir"),
 			SystemProperties.get(SystemProperties.TMP_DIR)));
 
-	public UploadServletRequest(HttpServletRequest req)
-		throws IOException {
-
+	public UploadServletRequest(HttpServletRequest req) {
 		super(req);
 
 		_params = new LinkedHashMap<String, LiferayFileItem[]>();

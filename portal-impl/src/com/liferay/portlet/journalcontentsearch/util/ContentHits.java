@@ -42,7 +42,7 @@ import java.util.List;
 public class ContentHits {
 
 	public void recordHits(Hits hits, long groupId, boolean privateLayout)
-		throws Exception  {
+		throws Exception {
 
 		// This can later be optimized according to LEP-915.
 

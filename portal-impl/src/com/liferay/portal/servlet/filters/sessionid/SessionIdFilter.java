@@ -22,8 +22,6 @@
 
 package com.liferay.portal.servlet.filters.sessionid;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 
 import java.io.IOException;
@@ -60,7 +58,5 @@ public class SessionIdFilter extends BasePortalFilter {
 
 		processFilter(SessionIdFilter.class, sessionIdReq, httpRes, chain);
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(SessionIdFilter.class);
 
 }
