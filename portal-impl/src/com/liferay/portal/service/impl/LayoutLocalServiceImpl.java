@@ -930,16 +930,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	public void importLayouts(
 			long userId, long groupId, boolean privateLayout,
-			Map<String, String[]> parameterMap, byte[] bytes)
-		throws PortalException, SystemException {
-
-		importLayouts(
-			userId, groupId, privateLayout, parameterMap,
-			new ByteArrayInputStream(bytes));
-	}
-
-	public void importLayouts(
-			long userId, long groupId, boolean privateLayout,
 			Map<String, String[]> parameterMap, File file)
 		throws PortalException, SystemException {
 
@@ -951,6 +941,16 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		catch (FileNotFoundException fnfe) {
 			throw new SystemException(fnfe);
 		}
+	}
+
+	public void importLayouts(
+			long userId, long groupId, boolean privateLayout,
+			Map<String, String[]> parameterMap, byte[] bytes)
+		throws PortalException, SystemException {
+
+		importLayouts(
+			userId, groupId, privateLayout, parameterMap,
+			new ByteArrayInputStream(bytes));
 	}
 
 	public void importLayouts(

@@ -2184,10 +2184,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			long sourceGroupId = userGroup.getGroup().getGroupId();
 			long targetGroupId = user.getGroup().getGroupId();
 
-			byte[] data = layoutLocalService.exportLayouts(
+			byte[] bytes = layoutLocalService.exportLayouts(
 				sourceGroupId, true, parameterMap, null, null);
 
-			ByteArrayInputStream bais = new ByteArrayInputStream(data);
+			ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
 
 			layoutLocalService.importLayouts(
 				userId, targetGroupId, true, parameterMap, bais);
@@ -2197,10 +2197,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			long sourceGroupId = userGroup.getGroup().getGroupId();
 			long targetGroupId = user.getGroup().getGroupId();
 
-			byte[] data = layoutLocalService.exportLayouts(
+			byte[] bytes = layoutLocalService.exportLayouts(
 				sourceGroupId, false, parameterMap, null, null);
 
-			ByteArrayInputStream bais = new ByteArrayInputStream(data);
+			ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
 
 			layoutLocalService.importLayouts(
 				userId, targetGroupId, false, parameterMap, bais);

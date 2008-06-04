@@ -163,18 +163,6 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 	public void importLayouts(
 			long groupId, boolean privateLayout,
-			Map<String, String[]> parameterMap, byte[] bytes)
-		throws PortalException, SystemException {
-
-		GroupPermissionUtil.check(
-			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
-
-		layoutLocalService.importLayouts(
-			getUserId(), groupId, privateLayout, parameterMap, bytes);
-	}
-
-	public void importLayouts(
-			long groupId, boolean privateLayout,
 			Map<String, String[]> parameterMap, File file)
 		throws PortalException, SystemException {
 
@@ -183,6 +171,18 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 		layoutLocalService.importLayouts(
 			getUserId(), groupId, privateLayout, parameterMap, file);
+	}
+
+	public void importLayouts(
+			long groupId, boolean privateLayout,
+			Map<String, String[]> parameterMap, byte[] bytes)
+		throws PortalException, SystemException {
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
+
+		layoutLocalService.importLayouts(
+			getUserId(), groupId, privateLayout, parameterMap, bytes);
 	}
 
 	public void importLayouts(
