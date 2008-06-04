@@ -80,22 +80,15 @@ public interface MBMessageLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
-		long userId, java.lang.String subject, java.lang.String body)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
-		long userId, long groupId, java.lang.String className, long classPK,
-		long threadId, long parentMessageId, java.lang.String subject,
+		long userId, java.lang.String userName, java.lang.String subject,
 		java.lang.String body)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
-		long userId, long groupId, java.lang.String className, long classPK,
-		long threadId, long parentMessageId, java.lang.String subject,
-		java.lang.String body,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		long userId, java.lang.String userName, long groupId,
+		java.lang.String className, long classPK, long threadId,
+		long parentMessageId, java.lang.String subject, java.lang.String body)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -108,8 +101,8 @@ public interface MBMessageLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		long userId, long categoryId, java.lang.String subject,
-		java.lang.String body,
+		long userId, java.lang.String userName, long categoryId,
+		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		javax.portlet.PortletPreferences prefs,
@@ -119,8 +112,8 @@ public interface MBMessageLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		long userId, long categoryId, java.lang.String subject,
-		java.lang.String body,
+		long userId, java.lang.String userName, long categoryId,
+		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		javax.portlet.PortletPreferences prefs,
@@ -131,8 +124,8 @@ public interface MBMessageLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		long userId, long categoryId, java.lang.String subject,
-		java.lang.String body,
+		long userId, java.lang.String userName, long categoryId,
+		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		javax.portlet.PortletPreferences prefs,
@@ -140,17 +133,6 @@ public interface MBMessageLocalService {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		long userId, long categoryId, long threadId, long parentMessageId,
-		java.lang.String subject, java.lang.String body,
-		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		boolean anonymous, double priority, java.lang.String[] tagsEntries,
-		javax.portlet.PortletPreferences prefs,
-		boolean addCommunityPermissions, boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
@@ -167,38 +149,25 @@ public interface MBMessageLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		long userId, long categoryId, long threadId, long parentMessageId,
+		long userId, java.lang.String userName, long categoryId, long threadId,
+		long parentMessageId, java.lang.String subject, java.lang.String body,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences prefs,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		java.lang.String uuid, long userId, java.lang.String userName,
+		long categoryId, long threadId, long parentMessageId,
 		java.lang.String subject, java.lang.String body,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		javax.portlet.PortletPreferences prefs,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		java.lang.String uuid, long userId, long categoryId, long threadId,
-		long parentMessageId, java.lang.String subject, java.lang.String body,
-		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		boolean anonymous, double priority, java.lang.String[] tagsEntries,
-		javax.portlet.PortletPreferences prefs,
 		boolean addCommunityPermissions, boolean addGuestPermissions,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		java.lang.String uuid, long userId, long categoryId, long threadId,
-		long parentMessageId, java.lang.String subject, java.lang.String body,
-		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
-		boolean anonymous, double priority, java.lang.String[] tagsEntries,
-		javax.portlet.PortletPreferences prefs,
-		java.lang.Boolean addCommunityPermissions,
-		java.lang.Boolean addGuestPermissions,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

@@ -1,11 +1,11 @@
 alter table BlogsEntry add draft BOOLEAN;
 alter table BlogsEntry add allowTrackbacks BOOLEAN;
-alter table BlogsEntry add trackbackUrls TEXT null;
-update BlogsEntry set allowTrackbacks = TRUE;
+alter table BlogsEntry add trackbacks TEXT null;
 
 COMMIT_TRANSACTION;
 
 update BlogsEntry set draft = FALSE;
+update BlogsEntry set allowTrackbacks = TRUE;
 
 alter table Contact_ add facebookSn VARCHAR(75) null;
 alter table Contact_ add mySpaceSn VARCHAR(75) null;

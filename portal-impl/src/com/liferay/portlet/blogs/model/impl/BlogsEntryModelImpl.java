@@ -107,9 +107,9 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 			{ "allowTrackbacks", new Integer(Types.BOOLEAN) },
 			
 
-			{ "trackbackUrls", new Integer(Types.CLOB) }
+			{ "trackbacks", new Integer(Types.CLOB) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table BlogsEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(150) null,urlTitle VARCHAR(150) null,content TEXT null,displayDate DATE null,draft BOOLEAN,allowTrackbacks BOOLEAN,trackbackUrls TEXT null)";
+	public static final String TABLE_SQL_CREATE = "create table BlogsEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(150) null,urlTitle VARCHAR(150) null,content TEXT null,displayDate DATE null,draft BOOLEAN,allowTrackbacks BOOLEAN,trackbacks TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table BlogsEntry";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -135,7 +135,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 		model.setDisplayDate(soapModel.getDisplayDate());
 		model.setDraft(soapModel.getDraft());
 		model.setAllowTrackbacks(soapModel.getAllowTrackbacks());
-		model.setTrackbackUrls(soapModel.getTrackbackUrls());
+		model.setTrackbacks(soapModel.getTrackbacks());
 
 		return model;
 	}
@@ -336,16 +336,16 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getTrackbackUrls() {
-		return GetterUtil.getString(_trackbackUrls);
+	public String getTrackbacks() {
+		return GetterUtil.getString(_trackbacks);
 	}
 
-	public void setTrackbackUrls(String trackbackUrls) {
-		if (((trackbackUrls == null) && (_trackbackUrls != null)) ||
-				((trackbackUrls != null) && (_trackbackUrls == null)) ||
-				((trackbackUrls != null) && (_trackbackUrls != null) &&
-				!trackbackUrls.equals(_trackbackUrls))) {
-			_trackbackUrls = trackbackUrls;
+	public void setTrackbacks(String trackbacks) {
+		if (((trackbacks == null) && (_trackbacks != null)) ||
+				((trackbacks != null) && (_trackbacks == null)) ||
+				((trackbacks != null) && (_trackbacks != null) &&
+				!trackbacks.equals(_trackbacks))) {
+			_trackbacks = trackbacks;
 		}
 	}
 
@@ -372,7 +372,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 			model.setDisplayDate(getDisplayDate());
 			model.setDraft(getDraft());
 			model.setAllowTrackbacks(getAllowTrackbacks());
-			model.setTrackbackUrls(HtmlUtil.escape(getTrackbackUrls()));
+			model.setTrackbacks(HtmlUtil.escape(getTrackbacks()));
 
 			model = (BlogsEntry)Proxy.newProxyInstance(BlogsEntry.class.getClassLoader(),
 					new Class[] { BlogsEntry.class },
@@ -399,7 +399,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 		clone.setDisplayDate(getDisplayDate());
 		clone.setDraft(getDraft());
 		clone.setAllowTrackbacks(getAllowTrackbacks());
-		clone.setTrackbackUrls(getTrackbackUrls());
+		clone.setTrackbacks(getTrackbacks());
 
 		return clone;
 	}
@@ -466,5 +466,5 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 	private Date _displayDate;
 	private boolean _draft;
 	private boolean _allowTrackbacks;
-	private String _trackbackUrls;
+	private String _trackbacks;
 }

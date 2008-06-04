@@ -221,8 +221,7 @@ public class MBMessageServiceUtil {
 	}
 
 	public static int getCategoryMessagesCount(long categoryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
 
 		return mbMessageService.getCategoryMessagesCount(categoryId);

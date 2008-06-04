@@ -83,7 +83,7 @@ public interface BlogsEntryLocalService {
 		long plid, java.lang.String title, java.lang.String content,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
 		int displayDateHour, int displayDateMinute, boolean draft,
-		boolean allowTrackbacks, java.lang.String[] trackbackUrls,
+		boolean allowTrackbacks, java.lang.String[] trackbacks,
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
@@ -94,19 +94,9 @@ public interface BlogsEntryLocalService {
 		java.lang.String uuid, long userId, long plid, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean draft, java.lang.String[] tagsEntries,
-		boolean addCommunityPermissions, boolean addGuestPermissions,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		java.lang.String uuid, long userId, long plid, java.lang.String title,
-		java.lang.String content, int displayDateMonth, int displayDateDay,
-		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean draft, boolean allowTrackbacks,
-		java.lang.String[] trackbackUrls, java.lang.String[] tagsEntries,
-		boolean addCommunityPermissions, boolean addGuestPermissions,
+		boolean draft, boolean allowTrackbacks, java.lang.String[] trackbacks,
+		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
+		boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
@@ -115,6 +105,7 @@ public interface BlogsEntryLocalService {
 		long plid, java.lang.String title, java.lang.String content,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
 		int displayDateHour, int displayDateMinute, boolean draft,
+		boolean allowTrackbacks, java.lang.String[] trackbacks,
 		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions,
@@ -126,21 +117,8 @@ public interface BlogsEntryLocalService {
 		java.lang.String uuid, long userId, long plid, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean draft, java.lang.String[] tagsEntries,
-		java.lang.Boolean addCommunityPermissions,
-		java.lang.Boolean addGuestPermissions,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		java.lang.String uuid, long userId, long plid, java.lang.String title,
-		java.lang.String content, int displayDateMonth, int displayDateDay,
-		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean draft, boolean allowTrackbacks,
-		java.lang.String[] trackbackUrls, java.lang.String[] tagsEntries,
+		boolean draft, boolean allowTrackbacks, java.lang.String[] trackbacks,
+		java.lang.String[] tagsEntries,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -289,7 +267,7 @@ public interface BlogsEntryLocalService {
 		long entryId, java.lang.String title, java.lang.String content,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
 		int displayDateHour, int displayDateMinute, boolean draft,
-		boolean allowTrackbacks, java.lang.String[] trackbackUrls,
+		boolean allowTrackbacks, java.lang.String[] trackbacks,
 		java.lang.String[] tagsEntries,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,

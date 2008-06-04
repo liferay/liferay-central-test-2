@@ -177,7 +177,7 @@
 
 		<action path="/blogs/search" forward="portlet.blogs.search" />
 
-		<action path="/blogs/trackback" type="com.liferay.portlet.blogs.action.TrackBackAction" />
+		<action path="/blogs/trackback" type="com.liferay.portlet.blogs.action.TrackbackAction" />
 
 		<action path="/blogs/view" forward="portlet.blogs.view" />
 

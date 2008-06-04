@@ -61,7 +61,7 @@ TagsAssetLocalServiceUtil.incrementViewCounter(BlogsEntry.class.getName(), entry
 	<liferay-ui:tabs names="comments" />
 
 	<c:if test="<%= entry.isAllowTrackbacks() %>">
-		<liferay-ui:message key="trackback-url" />
+		<liferay-ui:message key="trackback-url" />:
 
 		<liferay-ui:input-resource
 			url='<%= themeDisplay.getPortalURL() + PortalUtil.getLayoutURL(themeDisplay) + "/-/blogs/trackback/" + entry.getUrlTitle() %>'

@@ -150,18 +150,14 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	public PortletDataHandlerControl[] getExportControls()
-		throws PortletDataException {
-
+	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
 			_categoriesAndMessages, _attachments, _userBans, _flags, _ratings,
 			_tags
 		};
 	}
 
-	public PortletDataHandlerControl[] getImportControls()
-		throws PortletDataException {
-
+	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {
 			_categoriesAndMessages, _attachments, _userBans, _flags, _ratings,
 			_tags
@@ -366,7 +362,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 	protected void exportMessageFlag(
 			PortletDataContext context, Element messageFlagsEl,
 			MBMessageFlag messageFlag)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		String path = getMessageFlagPath(context, messageFlag);
 
@@ -411,7 +407,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 	protected void exportUserBan(
 			PortletDataContext context, Element userBansEl, MBBan ban)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (!context.isWithinDateRange(ban.getModifiedDate())) {
 			return;
@@ -540,6 +536,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		throws Exception {
 
 		long userId = context.getUserId(message.getUserUuid());
+		String userName = message.getUserName();
 		long categoryId = MapUtil.getLong(
 			categoryPKs, message.getCategoryId(), message.getCategoryId());
 		long threadId = MapUtil.getLong(
@@ -612,8 +609,8 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 				}
 				catch (NoSuchMessageException nsme) {
 					existingMessage = MBMessageLocalServiceUtil.addMessage(
-						message.getUuid(), userId, categoryId, threadId,
-						parentMessageId, message.getSubject(),
+						message.getUuid(), userId, userName, categoryId,
+						threadId, parentMessageId, message.getSubject(),
 						message.getBody(), files, message.getAnonymous(),
 						message.getPriority(), tagsEntries, prefs,
 						addCommunityPermissions, addGuestPermissions,
@@ -622,7 +619,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 			}
 			else {
 				existingMessage = MBMessageLocalServiceUtil.addMessage(
-					userId, categoryId, threadId, parentMessageId,
+					userId, userName, categoryId, threadId, parentMessageId,
 					message.getSubject(), message.getBody(), files,
 					message.getAnonymous(), message.getPriority(), tagsEntries,
 					prefs, addCommunityPermissions, addGuestPermissions,

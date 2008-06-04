@@ -69,7 +69,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			long plid, String title, String content, int displayDateMonth,
 			int displayDateDay, int displayDateYear, int displayDateHour,
 			int displayDateMinute, boolean draft, boolean allowTrackbacks,
-			String[] trackbackUrls, String[] tagsEntries,
+			String[] trackbacks, String[] tagsEntries,
 			boolean addCommunityPermissions, boolean addGuestPermissions,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -81,14 +81,15 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		return blogsEntryLocalService.addEntry(
 			getUserId(), plid, title, content, displayDateMonth, displayDateDay,
 			displayDateYear, displayDateHour, displayDateMinute, draft,
-			allowTrackbacks, trackbackUrls, tagsEntries,
-			addCommunityPermissions, addGuestPermissions, themeDisplay);
+			allowTrackbacks, trackbacks, tagsEntries, addCommunityPermissions,
+			addGuestPermissions, themeDisplay);
 	}
 
 	public BlogsEntry addEntry(
 			long plid, String title, String content, int displayDateMonth,
 			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, boolean draft, String[] tagsEntries,
+			int displayDateMinute, boolean draft, boolean allowTrackbacks,
+			String[] trackbacks, String[] tagsEntries,
 			String[] communityPermissions, String[] guestPermissions,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -100,7 +101,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		return blogsEntryLocalService.addEntry(
 			getUserId(), plid, title, content, displayDateMonth, displayDateDay,
 			displayDateYear, displayDateHour, displayDateMinute, draft,
-			tagsEntries, communityPermissions, guestPermissions, themeDisplay);
+			allowTrackbacks, trackbacks, tagsEntries, communityPermissions,
+			guestPermissions, themeDisplay);
 	}
 
 	public void deleteEntry(long entryId)
@@ -253,7 +255,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			long entryId, String title, String content, int displayDateMonth,
 			int displayDateDay, int displayDateYear, int displayDateHour,
 			int displayDateMinute, boolean draft, boolean allowTrackbacks,
-			String[] trackbackUrls, String[] tagsEntries,
+			String[] trackbacks, String[] tagsEntries,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
@@ -263,7 +265,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		return blogsEntryLocalService.updateEntry(
 			getUserId(), entryId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			draft, allowTrackbacks, trackbackUrls, tagsEntries, themeDisplay);
+			draft, allowTrackbacks, trackbacks, tagsEntries, themeDisplay);
 	}
 
 	protected String exportToRSS(

@@ -450,21 +450,17 @@ public class PortletDataContextImpl implements PortletDataContext {
 			long groupId)
 		throws PortalException, SystemException {
 
-		Map messagePKs = new HashMap();
-		Map threadPKs = new HashMap();
+		Map<Long, Long> messagePKs = new HashMap<Long, Long>();
+		Map<Long, Long> threadPKs = new HashMap<Long, Long>();
 
-		List messages = (List)_commentsMap.get(
+		List<MBMessage> messages = (List<MBMessage>)_commentsMap.get(
 			getPrimaryKeyString(classObj, primaryKey));
 
 		if (messages == null) {
 			return;
 		}
 
-		Iterator itr = messages.iterator();
-
-		while (itr.hasNext()) {
-			MBMessage message = (MBMessage)itr.next();
-
+		for (MBMessage message : messages) {
 			long userId = getUserId(message.getUserUuid());
 			long parentMessageId = MapUtil.getLong(
 				messagePKs, message.getParentMessageId(),
@@ -474,15 +470,12 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 			MBMessage newMessage =
 				MBMessageLocalServiceUtil.addDiscussionMessage(
-					userId, groupId, classObj.getName(),
+					userId, message.getUserName(), groupId, classObj.getName(),
 					((Long)newPrimaryKey).longValue(), threadId,
 					parentMessageId, message.getSubject(), message.getBody());
 
-			messagePKs.put(
-				message.getPrimaryKeyObj(), newMessage.getPrimaryKeyObj());
-			threadPKs.put(
-				new Long(message.getThreadId()),
-				new Long(newMessage.getThreadId()));
+			messagePKs.put(message.getMessageId(), newMessage.getMessageId());
+			threadPKs.put(message.getThreadId(), newMessage.getThreadId());
 		}
 	}
 
@@ -490,18 +483,14 @@ public class PortletDataContextImpl implements PortletDataContext {
 			Class<?> classObj, Object primaryKey, Object newPrimaryKey)
 		throws PortalException, SystemException {
 
-		List entries = (List)_ratingsEntriesMap.get(
+		List<RatingsEntry> entries = (List<RatingsEntry>)_ratingsEntriesMap.get(
 			getPrimaryKeyString(classObj, primaryKey));
 
 		if (entries == null) {
 			return;
 		}
 
-		Iterator itr = entries.iterator();
-
-		while (itr.hasNext()) {
-			RatingsEntry entry = (RatingsEntry)itr.next();
-
+		for (RatingsEntry entry : entries) {
 			long userId = getUserId(entry.getUserUuid());
 
 			RatingsEntryLocalServiceUtil.updateEntry(

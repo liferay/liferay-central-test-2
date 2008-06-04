@@ -149,6 +149,10 @@ public class PropsValues {
 	public static final int BLOGS_PAGE_ABSTRACT_LENGTH = GetterUtil.getInteger(
 		PropsUtil.get(PropsUtil.BLOGS_PAGE_ABSTRACT_LENGTH));
 
+	public static final int BLOGS_TRACKBACK_EXCERPT_LENGTH =
+		GetterUtil.getInteger(PropsUtil.get(PropsUtil.
+			BLOGS_TRACKBACK_EXCERPT_LENGTH));
+
 	public static final boolean CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT));

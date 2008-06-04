@@ -220,7 +220,9 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 			displayDateHour += 12;
 		}
 
-		String[] trackbackUrls = StringUtil.split(entry.getTrackbackUrls());
+		boolean draft = entry.isDraft();
+		boolean allowTrackbacks = entry.isAllowTrackbacks();
+		String[] trackbacks = StringUtil.split(entry.getTrackbacks());
 
 		String[] tagsEntries = null;
 
@@ -247,26 +249,25 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 					entry.getUuid(), userId, plid, entry.getTitle(),
 					entry.getContent(), displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
-					entry.isDraft(), entry.isAllowTrackbacks(), trackbackUrls,
-					tagsEntries, addCommunityPermissions,
-					addGuestPermissions, themeDisplay);
+					draft, allowTrackbacks, trackbacks, tagsEntries,
+					addCommunityPermissions, addGuestPermissions, themeDisplay);
 			}
 			else {
 				existingEntry = BlogsEntryLocalServiceUtil.updateEntry(
 					userId, existingEntry.getEntryId(), entry.getTitle(),
 					entry.getContent(), displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
-					entry.isDraft(), entry.isAllowTrackbacks(),
-					trackbackUrls, tagsEntries,	themeDisplay);
+					draft, allowTrackbacks, trackbacks, tagsEntries,
+					themeDisplay);
 			}
 		}
 		else {
 			existingEntry = BlogsEntryLocalServiceUtil.addEntry(
 				userId, plid, entry.getTitle(), entry.getContent(),
 				displayDateMonth, displayDateDay, displayDateYear,
-				displayDateHour, displayDateMinute, entry.isDraft(),
-				entry.isAllowTrackbacks(), trackbackUrls, tagsEntries,
-				addCommunityPermissions, addGuestPermissions, themeDisplay);
+				displayDateHour, displayDateMinute, draft, allowTrackbacks,
+				trackbacks, tagsEntries, addCommunityPermissions,
+				addGuestPermissions, themeDisplay);
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "comments")) {

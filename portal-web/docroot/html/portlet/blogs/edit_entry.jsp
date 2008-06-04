@@ -33,8 +33,6 @@ BlogsEntry entry = (BlogsEntry)request.getAttribute(WebKeys.BLOGS_ENTRY);
 
 long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 
-boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackbacks", true);
-
 String content = BeanParamUtil.getString(entry, request, "content");
 
 Calendar displayDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
@@ -44,6 +42,8 @@ if (entry != null) {
 		displayDate.setTime(entry.getDisplayDate());
 	}
 }
+
+boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackbacks", true);
 %>
 
 <script type="text/javascript">
@@ -259,12 +259,11 @@ if (entry != null) {
 		<liferay-ui:message key="trackbacks-to-send" />
 	</td>
 	<td>
-		<liferay-ui:input-field model="<%= BlogsEntry.class %>" bean="<%= entry %>" field="trackbackUrls" fieldParam="trackbackUrls" />
+		<liferay-ui:input-field model="<%= BlogsEntry.class %>" bean="<%= entry %>" field="trackbacks" />
 	</td>
 </tr>
-<%
-if (entry != null && Validator.isNotNull(entry.getTrackbackUrls())) {
-%>
+
+<c:if test="<%= (entry != null) && Validator.isNotNull(entry.getTrackbacks()) %>">
 	<tr>
 		<td colspan="2">
 			<br />
@@ -275,20 +274,21 @@ if (entry != null && Validator.isNotNull(entry.getTrackbackUrls())) {
 			<liferay-ui:message key="trackbacks-already-sent" />
 		</td>
 		<td>
+
 			<%
-			for (String trackbackUrl : StringUtil.split(entry.getTrackbackUrls())) {
-				if (Validator.isNotNull(trackbackUrl)) {
+			for (String trackback : StringUtil.split(entry.getTrackbacks())) {
 			%>
-					<%= trackbackUrl %> <br />
+
+				<%= trackback %><br />
+
 			<%
-				}
 			}
 			%>
+
 		</td>
 	</tr>
-<%
-}
-%>
+</c:if>
+
 <tr>
 	<td colspan="2">
 		<br />

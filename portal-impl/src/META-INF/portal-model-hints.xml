@@ -647,7 +647,7 @@
 		<field name="displayDate" type="Date" />
 		<field name="draft" type="boolean" />
 		<field name="allowTrackbacks" type="boolean" />
-		<field name="trackbackUrls" type="String">
+		<field name="trackbacks" type="String">
 			<hint-collection name="CLOB" />
 		</field>
 	</model>

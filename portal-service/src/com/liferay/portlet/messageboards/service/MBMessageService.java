@@ -151,8 +151,7 @@ public interface MBMessageService {
 			com.liferay.portal.PortalException;
 
 	public int getCategoryMessagesCount(long categoryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public java.lang.String getCategoryMessagesRSS(long categoryId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,

@@ -86,8 +86,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			ActionKeys.ADD_DISCUSSION);
 
 		return mbMessageLocalService.addDiscussionMessage(
-			getUserId(), groupId, className, classPK, threadId, parentMessageId,
-			subject, body, themeDisplay);
+			getUserId(), null, groupId, className, classPK, threadId,
+			parentMessageId, subject, body, themeDisplay);
 	}
 
 	public MBMessage addMessage(
@@ -114,8 +114,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 
 		return mbMessageLocalService.addMessage(
-			getGuestOrUserId(), categoryId, subject, body, files, anonymous,
-			priority, tagsEntries, null, addCommunityPermissions,
+			getGuestOrUserId(), null, categoryId, subject, body, files,
+			anonymous, priority, tagsEntries, null, addCommunityPermissions,
 			addGuestPermissions, null);
 	}
 
@@ -143,9 +143,9 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 
 		return mbMessageLocalService.addMessage(
-			getGuestOrUserId(), categoryId, subject, body, files, anonymous,
-			priority, tagsEntries, null, communityPermissions, guestPermissions,
-			null);
+			getGuestOrUserId(), null, categoryId, subject, body, files,
+			anonymous, priority, tagsEntries, null, communityPermissions,
+			guestPermissions, null);
 	}
 
 	public MBMessage addMessage(
@@ -173,8 +173,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 
 		return mbMessageLocalService.addMessage(
-			getGuestOrUserId(), categoryId, subject, body, files, anonymous,
-			priority, tagsEntries, prefs, addCommunityPermissions,
+			getGuestOrUserId(), null, categoryId, subject, body, files,
+			anonymous, priority, tagsEntries, prefs, addCommunityPermissions,
 			addGuestPermissions, themeDisplay);
 	}
 
@@ -203,8 +203,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 
 		return mbMessageLocalService.addMessage(
-			getGuestOrUserId(), categoryId, subject, body, files, anonymous,
-			priority, tagsEntries, prefs, communityPermissions,
+			getGuestOrUserId(), null, categoryId, subject, body, files,
+			anonymous, priority, tagsEntries, prefs, communityPermissions,
 			guestPermissions, themeDisplay);
 	}
 
@@ -232,8 +232,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 
 		return mbMessageLocalService.addMessage(
-			getGuestOrUserId(), categoryId, threadId, parentMessageId, subject,
-			body, files, anonymous, priority, tagsEntries, null,
+			getGuestOrUserId(), null, categoryId, threadId, parentMessageId,
+			subject, body, files, anonymous, priority, tagsEntries, null,
 			addCommunityPermissions, addGuestPermissions, null);
 	}
 
@@ -261,8 +261,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 
 		return mbMessageLocalService.addMessage(
-			getGuestOrUserId(), categoryId, threadId, parentMessageId, subject,
-			body, files, anonymous, priority, tagsEntries, null,
+			getGuestOrUserId(), null, categoryId, threadId, parentMessageId,
+			subject, body, files, anonymous, priority, tagsEntries, null,
 			communityPermissions, guestPermissions, null);
 	}
 
@@ -291,8 +291,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 
 		return mbMessageLocalService.addMessage(
-			getGuestOrUserId(), categoryId, threadId, parentMessageId, subject,
-			body, files, anonymous, priority, tagsEntries, prefs,
+			getGuestOrUserId(), null, categoryId, threadId, parentMessageId,
+			subject, body, files, anonymous, priority, tagsEntries, prefs,
 			addCommunityPermissions, addGuestPermissions, themeDisplay);
 	}
 
@@ -321,8 +321,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 
 		return mbMessageLocalService.addMessage(
-			getGuestOrUserId(), categoryId, threadId, parentMessageId, subject,
-			body, files, anonymous, priority, tagsEntries, prefs,
+			getGuestOrUserId(), null, categoryId, threadId, parentMessageId,
+			subject, body, files, anonymous, priority, tagsEntries, prefs,
 			communityPermissions, guestPermissions, themeDisplay);
 	}
 
@@ -369,7 +369,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	}
 
 	public int getCategoryMessagesCount(long categoryId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return mbMessageLocalService.getCategoryMessagesCount(categoryId);
 	}

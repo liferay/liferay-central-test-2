@@ -109,39 +109,35 @@ public class BlogsFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 			addParam(params, "struts_action", "/blogs/rss");
 		}
-		else if (type.startsWith(_TRACKBACK)) {
+		else if (type.startsWith("trackback/")) {
 			addParam(params, "p_p_lifecycle", "1");
 			addParam(params, "p_p_state", LiferayWindowState.EXCLUSIVE);
 
 			addParam(params, "struts_action", "/blogs/trackback");
 
-			type = type.substring(_TRACKBACK.length());
+			x = type.indexOf("/");
 
-			extractEntry(params, type);
+			type = type.substring(x + 1);
+
+			addParam(params, getEntryIdParam(type), type);
 		}
 		else {
 			addParam(params, "struts_action", "/blogs/view_entry");
 
-			extractEntry(params, type);
+			addParam(params, getEntryIdParam(type), type);
 		}
 	}
 
-	protected void extractEntry(Map<String, String[]> params, String type) {
+	protected String getEntryIdParam(String type) {
 		if (Validator.isNumber(type)) {
-			String entryId = type;
-
-			addParam(params, "entryId", entryId);
+			return "entryId";
 		}
 		else {
-			String urlTitle = type;
-
-			addParam(params, "urlTitle", urlTitle);
+			return "urlTitle";
 		}
 	}
 
 	private static final String _MAPPING = "blogs";
-
-	private static final String _TRACKBACK = "trackback/";
 
 	private static final String _PORTLET_ID = PortletKeys.BLOGS;
 

@@ -29,7 +29,7 @@
 		<column name="displayDate" type="Date" />
 		<column name="draft" type="boolean" />
 		<column name="allowTrackbacks" type="boolean" />
-		<column name="trackbackUrls" type="String" />
+		<column name="trackbacks" type="String" />
 
 		<!-- Order -->
 

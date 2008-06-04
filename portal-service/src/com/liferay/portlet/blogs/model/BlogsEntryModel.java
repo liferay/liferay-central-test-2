@@ -111,9 +111,9 @@ public interface BlogsEntryModel extends BaseModel {
 
 	public void setAllowTrackbacks(boolean allowTrackbacks);
 
-	public String getTrackbackUrls();
+	public String getTrackbacks();
 
-	public void setTrackbackUrls(String trackbackUrls);
+	public void setTrackbacks(String trackbacks);
 
 	public BlogsEntry toEscapedModel();
 }

@@ -79,9 +79,9 @@ public class BlogsEntryServiceHttp {
 		HttpPrincipal httpPrincipal, long plid, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean draft, boolean allowTrackbacks,
-		java.lang.String[] trackbackUrls, java.lang.String[] tagsEntries,
-		boolean addCommunityPermissions, boolean addGuestPermissions,
+		boolean draft, boolean allowTrackbacks, java.lang.String[] trackbacks,
+		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
+		boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -114,9 +114,9 @@ public class BlogsEntryServiceHttp {
 
 			Object paramObj9 = new BooleanWrapper(allowTrackbacks);
 
-			Object paramObj10 = trackbackUrls;
+			Object paramObj10 = trackbacks;
 
-			if (trackbackUrls == null) {
+			if (trackbacks == null) {
 				paramObj10 = new NullWrapper("[Ljava.lang.String;");
 			}
 
@@ -176,7 +176,8 @@ public class BlogsEntryServiceHttp {
 		HttpPrincipal httpPrincipal, long plid, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean draft, java.lang.String[] tagsEntries,
+		boolean draft, boolean allowTrackbacks, java.lang.String[] trackbacks,
+		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
@@ -209,28 +210,36 @@ public class BlogsEntryServiceHttp {
 
 			Object paramObj8 = new BooleanWrapper(draft);
 
-			Object paramObj9 = tagsEntries;
+			Object paramObj9 = new BooleanWrapper(allowTrackbacks);
 
-			if (tagsEntries == null) {
-				paramObj9 = new NullWrapper("[Ljava.lang.String;");
-			}
+			Object paramObj10 = trackbacks;
 
-			Object paramObj10 = communityPermissions;
-
-			if (communityPermissions == null) {
+			if (trackbacks == null) {
 				paramObj10 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj11 = guestPermissions;
+			Object paramObj11 = tagsEntries;
 
-			if (guestPermissions == null) {
+			if (tagsEntries == null) {
 				paramObj11 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj12 = themeDisplay;
+			Object paramObj12 = communityPermissions;
+
+			if (communityPermissions == null) {
+				paramObj12 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj13 = guestPermissions;
+
+			if (guestPermissions == null) {
+				paramObj13 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj14 = themeDisplay;
 
 			if (themeDisplay == null) {
-				paramObj12 = new NullWrapper(
+				paramObj14 = new NullWrapper(
 						"com.liferay.portal.theme.ThemeDisplay");
 			}
 
@@ -239,7 +248,8 @@ public class BlogsEntryServiceHttp {
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12
+						paramObj10, paramObj11, paramObj12, paramObj13,
+						paramObj14
 					});
 
 			Object returnObj = null;
@@ -730,8 +740,8 @@ public class BlogsEntryServiceHttp {
 		HttpPrincipal httpPrincipal, long entryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean draft, boolean allowTrackbacks,
-		java.lang.String[] trackbackUrls, java.lang.String[] tagsEntries,
+		boolean draft, boolean allowTrackbacks, java.lang.String[] trackbacks,
+		java.lang.String[] tagsEntries,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -764,9 +774,9 @@ public class BlogsEntryServiceHttp {
 
 			Object paramObj9 = new BooleanWrapper(allowTrackbacks);
 
-			Object paramObj10 = trackbackUrls;
+			Object paramObj10 = trackbacks;
 
-			if (trackbackUrls == null) {
+			if (trackbacks == null) {
 				paramObj10 = new NullWrapper("[Ljava.lang.String;");
 			}
 

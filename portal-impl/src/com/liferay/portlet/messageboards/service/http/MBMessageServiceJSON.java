@@ -156,8 +156,7 @@ public class MBMessageServiceJSON {
 	}
 
 	public static int getCategoryMessagesCount(long categoryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		int returnValue = MBMessageServiceUtil.getCategoryMessagesCount(categoryId);
 
 		return returnValue;

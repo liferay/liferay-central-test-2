@@ -978,8 +978,8 @@ public class PropsUtil {
 	public static final String BLOGS_PAGE_ABSTRACT_LENGTH = "blogs.page.abstract.length";
 
 	public static final String BLOGS_RSS_ABSTRACT_LENGTH = "blogs.rss.abstract.length";
-	
-	public static final String BLOGS_TRACKBACK_EXCERPT_LENGTH = "blogs.trackback.abstract.length";
+
+	public static final String BLOGS_TRACKBACK_EXCERPT_LENGTH = "blogs.trackback.excerpt.length";
 
 	// Calendar Portlet
 

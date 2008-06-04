@@ -103,7 +103,7 @@ create table BlogsEntry (
 	displayDate DATE null,
 	draft BOOLEAN,
 	allowTrackbacks BOOLEAN,
-	trackbackUrls TEXT null
+	trackbacks TEXT null
 );
 
 create table BlogsStatsUser (
