@@ -63,11 +63,11 @@ public class DocumentImpl implements Document {
 		addText(name, FileUtil.extractText(is, fileExt));
 	}
 
-	public void addFile(String name, byte[] byteArray, String fileExt)
+	public void addFile(String name, byte[] bytes, String fileExt)
 		throws IOException {
 
 		InputStream is = new BufferedInputStream(
-			new ByteArrayInputStream(byteArray));
+			new ByteArrayInputStream(bytes));
 
 		addFile(name, is, fileExt);
 	}

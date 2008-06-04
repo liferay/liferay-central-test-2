@@ -55,13 +55,13 @@ public class ZipWriter implements Serializable {
 		addEntry(name, s.getBytes());
 	}
 
-	public void addEntry(String name, byte[] byteArray) throws IOException {
+	public void addEntry(String name, byte[] bytes) throws IOException {
 		ZipEntry entry = new ZipEntry(name);
 
 		_zos.putNextEntry(entry);
 
 		BufferedInputStream bis = new BufferedInputStream(
-			new ByteArrayInputStream(byteArray), _BUFFER);
+			new ByteArrayInputStream(bytes), _BUFFER);
 
 		int count;
 

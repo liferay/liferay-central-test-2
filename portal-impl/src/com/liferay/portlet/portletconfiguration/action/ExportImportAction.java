@@ -195,14 +195,14 @@ public class ExportImportAction extends EditConfigurationAction {
 					new PortalException());
 			}
 
-			byte[] byteArray = LayoutServiceUtil.exportPortletInfo(
+			byte[] bytes = LayoutServiceUtil.exportPortletInfo(
 				plid, portlet.getPortletId(), req.getParameterMap(), startDate,
 				endDate);
 
 			HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(
 				res);
 
-			ServletResponseUtil.sendFile(httpRes, fileName, byteArray);
+			ServletResponseUtil.sendFile(httpRes, fileName, bytes);
 
 			setForward(req, ActionConstants.COMMON_NULL);
 		}

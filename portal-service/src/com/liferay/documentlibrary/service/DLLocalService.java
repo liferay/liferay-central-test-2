@@ -74,8 +74,7 @@ public interface DLLocalService {
 
 	public void validate(String fileName, File file) throws PortalException;
 
-	public void validate(String fileName, byte[] byteArray)
-		throws PortalException;
+	public void validate(String fileName, byte[] bytes) throws PortalException;
 
 	public void validate(String fileName, InputStream is)
 		throws PortalException;

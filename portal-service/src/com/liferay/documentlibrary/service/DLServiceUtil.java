@@ -61,14 +61,14 @@ public class DLServiceUtil {
 	public static void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, String properties, String[] tagsEntries,
-			byte[] byteArray)
+			byte[] bytes)
 		throws PortalException, RemoteException, SystemException {
 
 		DLService dlService = DLServiceFactory.getService();
 
 		dlService.addFile(
 			companyId, portletId, groupId, repositoryId, fileName, properties,
-			tagsEntries, byteArray);
+			tagsEntries, bytes);
 	}
 
 	public static void deleteDirectory(
@@ -163,14 +163,14 @@ public class DLServiceUtil {
 	public static void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			String properties, String[] tagsEntries, byte[] byteArray)
+			String properties, String[] tagsEntries, byte[] bytes)
 		throws PortalException, RemoteException, SystemException {
 
 		DLService dlService = DLServiceFactory.getService();
 
 		dlService.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
-			versionNumber, sourceFileName, properties, tagsEntries, byteArray);
+			versionNumber, sourceFileName, properties, tagsEntries, bytes);
 	}
 
 	public static void updateFile(

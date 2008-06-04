@@ -60,7 +60,7 @@ public interface DLFileEntryService {
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		long folderId, java.lang.String name, java.lang.String title,
 		java.lang.String description, java.lang.String[] tagsEntries,
-		java.lang.String extraSettings, byte[] byteArray,
+		java.lang.String extraSettings, byte[] bytes,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
@@ -77,7 +77,7 @@ public interface DLFileEntryService {
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		long folderId, java.lang.String name, java.lang.String title,
 		java.lang.String description, java.lang.String[] tagsEntries,
-		java.lang.String extraSettings, byte[] byteArray,
+		java.lang.String extraSettings, byte[] bytes,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
@@ -124,7 +124,7 @@ public interface DLFileEntryService {
 		long folderId, long newFolderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
 		java.lang.String description, java.lang.String[] tagsEntries,
-		java.lang.String extraSettings, byte[] byteArray)
+		java.lang.String extraSettings, byte[] bytes)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

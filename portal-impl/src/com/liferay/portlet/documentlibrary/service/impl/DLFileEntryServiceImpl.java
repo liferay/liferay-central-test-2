@@ -65,7 +65,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 	public DLFileEntry addFileEntry(
 			long folderId, String name, String title, String description,
-			String[] tagsEntries, String extraSettings, byte[] byteArray,
+			String[] tagsEntries, String extraSettings, byte[] bytes,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -74,7 +74,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 		return dlFileEntryLocalService.addFileEntry(
 			getUserId(), folderId, name, title, description, tagsEntries,
-			extraSettings, byteArray, addCommunityPermissions,
+			extraSettings, bytes, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
@@ -94,7 +94,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 	public DLFileEntry addFileEntry(
 			long folderId, String name, String title, String description,
-			String[] tagsEntries, String extraSettings, byte[] byteArray,
+			String[] tagsEntries, String extraSettings, byte[] bytes,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -103,7 +103,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 		return dlFileEntryLocalService.addFileEntry(
 			getUserId(), folderId, name, title, description, tagsEntries,
-			extraSettings, byteArray, communityPermissions, guestPermissions);
+			extraSettings, bytes, communityPermissions, guestPermissions);
 	}
 
 	public void deleteFileEntry(long folderId, String name)
@@ -245,7 +245,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	public DLFileEntry updateFileEntry(
 			long folderId, long newFolderId, String name, String sourceFileName,
 			String title, String description, String[] tagsEntries,
-			String extraSettings, byte[] byteArray)
+			String extraSettings, byte[] bytes)
 		throws PortalException, RemoteException, SystemException {
 
 		User user = getUser();
@@ -269,7 +269,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 		DLFileEntry fileEntry = dlFileEntryLocalService.updateFileEntry(
 			getUserId(), folderId, newFolderId, name, sourceFileName, title,
-			description, tagsEntries, extraSettings, byteArray);
+			description, tagsEntries, extraSettings, bytes);
 
 		if (!alreadyHasLock) {
 

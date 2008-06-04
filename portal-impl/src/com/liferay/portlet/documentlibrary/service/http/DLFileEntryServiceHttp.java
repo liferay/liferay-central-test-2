@@ -162,7 +162,7 @@ public class DLFileEntryServiceHttp {
 		HttpPrincipal httpPrincipal, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
-		byte[] byteArray, boolean addCommunityPermissions,
+		byte[] bytes, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -199,9 +199,9 @@ public class DLFileEntryServiceHttp {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = byteArray;
+			Object paramObj6 = bytes;
 
-			if (byteArray == null) {
+			if (bytes == null) {
 				paramObj6 = new NullWrapper("[B");
 			}
 
@@ -338,7 +338,7 @@ public class DLFileEntryServiceHttp {
 		HttpPrincipal httpPrincipal, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
-		byte[] byteArray, java.lang.String[] communityPermissions,
+		byte[] bytes, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -375,9 +375,9 @@ public class DLFileEntryServiceHttp {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = byteArray;
+			Object paramObj6 = bytes;
 
-			if (byteArray == null) {
+			if (bytes == null) {
 				paramObj6 = new NullWrapper("[B");
 			}
 
@@ -766,7 +766,7 @@ public class DLFileEntryServiceHttp {
 		java.lang.String name, java.lang.String sourceFileName,
 		java.lang.String title, java.lang.String description,
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
-		byte[] byteArray)
+		byte[] bytes)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		try {
@@ -810,9 +810,9 @@ public class DLFileEntryServiceHttp {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = byteArray;
+			Object paramObj8 = bytes;
 
-			if (byteArray == null) {
+			if (bytes == null) {
 				paramObj8 = new NullWrapper("[B");
 			}
 

@@ -128,14 +128,14 @@ public class DLFileEntryLocalServiceUtil {
 		long userId, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
-		byte[] byteArray, boolean addCommunityPermissions,
+		byte[] bytes, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
 		return dlFileEntryLocalService.addFileEntry(userId, folderId, name,
-			title, description, tagsEntries, extraSettings, byteArray,
+			title, description, tagsEntries, extraSettings, bytes,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -143,14 +143,14 @@ public class DLFileEntryLocalServiceUtil {
 		java.lang.String uuid, long userId, long folderId,
 		java.lang.String name, java.lang.String title,
 		java.lang.String description, java.lang.String[] tagsEntries,
-		java.lang.String extraSettings, byte[] byteArray,
+		java.lang.String extraSettings, byte[] bytes,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
 		return dlFileEntryLocalService.addFileEntry(uuid, userId, folderId,
-			name, title, description, tagsEntries, extraSettings, byteArray,
+			name, title, description, tagsEntries, extraSettings, bytes,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -173,14 +173,14 @@ public class DLFileEntryLocalServiceUtil {
 		long userId, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
-		byte[] byteArray, java.lang.String[] communityPermissions,
+		byte[] bytes, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
 		return dlFileEntryLocalService.addFileEntry(userId, folderId, name,
-			title, description, tagsEntries, extraSettings, byteArray,
+			title, description, tagsEntries, extraSettings, bytes,
 			communityPermissions, guestPermissions);
 	}
 
@@ -206,7 +206,7 @@ public class DLFileEntryLocalServiceUtil {
 		java.lang.String uuid, long userId, long folderId,
 		java.lang.String name, java.lang.String title,
 		java.lang.String description, java.lang.String[] tagsEntries,
-		java.lang.String extraSettings, byte[] byteArray,
+		java.lang.String extraSettings, byte[] bytes,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -216,7 +216,7 @@ public class DLFileEntryLocalServiceUtil {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
 		return dlFileEntryLocalService.addFileEntry(uuid, userId, folderId,
-			name, title, description, tagsEntries, extraSettings, byteArray,
+			name, title, description, tagsEntries, extraSettings, bytes,
 			addCommunityPermissions, addGuestPermissions, communityPermissions,
 			guestPermissions);
 	}
@@ -567,14 +567,14 @@ public class DLFileEntryLocalServiceUtil {
 		long userId, long folderId, long newFolderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
 		java.lang.String description, java.lang.String[] tagsEntries,
-		java.lang.String extraSettings, byte[] byteArray)
+		java.lang.String extraSettings, byte[] bytes)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
 		return dlFileEntryLocalService.updateFileEntry(userId, folderId,
 			newFolderId, name, sourceFileName, title, description, tagsEntries,
-			extraSettings, byteArray);
+			extraSettings, bytes);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(

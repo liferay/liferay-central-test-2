@@ -433,13 +433,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					ObjectValuePair<String, byte[]> ovp = files.get(i);
 
 					String fileName = ovp.getKey();
-					byte[] byteArray = ovp.getValue();
+					byte[] bytes = ovp.getValue();
 
 					try {
 						dlService.addFile(
 							companyId, portletId, groupId, repositoryId,
 							dirName + "/" + fileName, StringPool.BLANK,
-							new String[0], byteArray);
+							new String[0], bytes);
 					}
 					catch (DuplicateFileException dfe) {
 					}
@@ -1157,13 +1157,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					ObjectValuePair<String, byte[]> ovp = files.get(i);
 
 					String fileName = ovp.getKey();
-					byte[] byteArray = ovp.getValue();
+					byte[] bytes = ovp.getValue();
 
 					try {
 						dlService.addFile(
 							companyId, portletId, groupId, repositoryId,
 							dirName + "/" + fileName, StringPool.BLANK,
-							new String[0], byteArray);
+							new String[0], bytes);
 					}
 					catch (DuplicateFileException dfe) {
 					}

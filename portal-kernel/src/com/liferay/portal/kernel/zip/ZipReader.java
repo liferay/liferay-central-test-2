@@ -79,9 +79,9 @@ public class ZipReader implements Serializable {
 					bam.write(_data, 0, count);
 				}
 
-				byte[] byteArray = bam.toByteArray();
+				byte[] bytes = bam.toByteArray();
 
-				_entries.put(currentName, byteArray);
+				_entries.put(currentName, bytes);
 
 				int pos = currentName.lastIndexOf(StringPool.SLASH);
 
@@ -103,7 +103,7 @@ public class ZipReader implements Serializable {
 				}
 
 				ObjectValuePair<String, byte[]> ovp =
-					new ObjectValuePair<String, byte[]>(fileName, byteArray);
+					new ObjectValuePair<String, byte[]>(fileName, bytes);
 
 				files.add(ovp);
 			}
@@ -128,10 +128,10 @@ public class ZipReader implements Serializable {
 	}
 
 	public String getEntryAsString(String name) {
-		byte[] byteArray = getEntryAsByteArray(name);
+		byte[] bytes = getEntryAsByteArray(name);
 
-		if (byteArray != null) {
-			return new String(byteArray);
+		if (bytes != null) {
+			return new String(bytes);
 		}
 
 		return null;

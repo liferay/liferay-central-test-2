@@ -146,9 +146,9 @@ public interface File {
 	public void write(java.io.File file, String s, boolean lazy, boolean append)
 		throws IOException;
 
-	public void write(String fileName, byte[] byteArray) throws IOException;
+	public void write(String fileName, byte[] bytes) throws IOException;
 
-	public void write(java.io.File file, byte[] byteArray) throws IOException;
+	public void write(java.io.File file, byte[] bytes) throws IOException;
 
 	public void write(String fileName, InputStream is) throws IOException;
 

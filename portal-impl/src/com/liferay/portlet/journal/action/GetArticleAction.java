@@ -111,9 +111,9 @@ public class GetArticleAction extends Action {
 			}
 
 			String fileName = null;
-			byte[] byteArray = xml.getBytes();
+			byte[] bytes = xml.getBytes();
 
-			ServletResponseUtil.sendFile(res, fileName, byteArray, contentType);
+			ServletResponseUtil.sendFile(res, fileName, bytes, contentType);
 
 			return null;
 		}

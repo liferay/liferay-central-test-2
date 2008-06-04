@@ -408,7 +408,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			String description = fileEntry.getDescription();
 			String[] tagsEntries = null;
 			String extraSettings = fileEntry.getExtraSettings();
-			byte[] byteArray = null;
+			byte[] bytes = null;
 
 			int status = HttpServletResponse.SC_CREATED;
 
@@ -420,7 +420,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			DLFileEntryServiceUtil.updateFileEntry(
 				fileEntry.getFolderId(), parentFolderId, name, sourceFileName,
-				title, description, tagsEntries, extraSettings, byteArray);
+				title, description, tagsEntries, extraSettings, bytes);
 
 			return status;
 		}

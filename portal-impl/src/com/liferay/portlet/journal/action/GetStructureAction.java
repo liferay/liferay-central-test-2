@@ -60,10 +60,10 @@ public class GetStructureAction extends Action {
 					groupId, structureId);
 
 			String fileName = null;
-			byte[] byteArray = structure.getXsd().getBytes();
+			byte[] bytes = structure.getXsd().getBytes();
 
 			ServletResponseUtil.sendFile(
-				res, fileName, byteArray, ContentTypes.TEXT_XML_UTF8);
+				res, fileName, bytes, ContentTypes.TEXT_XML_UTF8);
 
 			return null;
 		}

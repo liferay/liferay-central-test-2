@@ -75,13 +75,13 @@ public class DLFileEntryServiceJSON {
 	public static JSONObject addFileEntry(long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
-		byte[] byteArray, boolean addCommunityPermissions,
+		byte[] bytes, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.addFileEntry(folderId,
-				name, title, description, tagsEntries, extraSettings,
-				byteArray, addCommunityPermissions, addGuestPermissions);
+				name, title, description, tagsEntries, extraSettings, bytes,
+				addCommunityPermissions, addGuestPermissions);
 
 		return DLFileEntryJSONSerializer.toJSONObject(returnValue);
 	}
@@ -89,13 +89,13 @@ public class DLFileEntryServiceJSON {
 	public static JSONObject addFileEntry(long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
-		byte[] byteArray, java.lang.String[] communityPermissions,
+		byte[] bytes, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.addFileEntry(folderId,
-				name, title, description, tagsEntries, extraSettings,
-				byteArray, communityPermissions, guestPermissions);
+				name, title, description, tagsEntries, extraSettings, bytes,
+				communityPermissions, guestPermissions);
 
 		return DLFileEntryJSONSerializer.toJSONObject(returnValue);
 	}
@@ -165,12 +165,12 @@ public class DLFileEntryServiceJSON {
 		java.lang.String name, java.lang.String sourceFileName,
 		java.lang.String title, java.lang.String description,
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
-		byte[] byteArray)
+		byte[] bytes)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.updateFileEntry(folderId,
 				newFolderId, name, sourceFileName, title, description,
-				tagsEntries, extraSettings, byteArray);
+				tagsEntries, extraSettings, bytes);
 
 		return DLFileEntryJSONSerializer.toJSONObject(returnValue);
 	}

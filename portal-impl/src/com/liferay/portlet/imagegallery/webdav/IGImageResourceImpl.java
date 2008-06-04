@@ -74,9 +74,9 @@ public class IGImageResourceImpl extends BaseResourceImpl {
 		try {
 			Image image = ImageLocalUtil.getImage(_image.getLargeImageId());
 
-			byte[] byteArray = image.getTextObj();
+			byte[] bytes = image.getTextObj();
 
-			return new ByteArrayInputStream(byteArray);
+			return new ByteArrayInputStream(bytes);
 		}
 		catch (Exception e) {
 			throw new WebDAVException(e);

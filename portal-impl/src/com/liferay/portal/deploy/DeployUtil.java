@@ -155,12 +155,12 @@ public class DeployUtil {
 			parentFile.mkdirs();
 		}
 
-		byte[] byteArray = FileUtil.getBytes(
+		byte[] bytes = FileUtil.getBytes(
 			getClass().getResourceAsStream("dependencies/" + resource));
 
 		OutputStream os = new FileOutputStream(file);
 
-		os.write(byteArray);
+		os.write(bytes);
 
 		return FileUtil.getAbsolutePath(file);
 	}

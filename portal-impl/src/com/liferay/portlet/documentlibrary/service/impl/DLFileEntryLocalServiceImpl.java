@@ -99,26 +99,26 @@ public class DLFileEntryLocalServiceImpl
 	public DLFileEntry addFileEntry(
 			long userId, long folderId, String name, String title,
 			String description, String[] tagsEntries, String extraSettings,
-			byte[] byteArray, boolean addCommunityPermissions,
+			byte[] bytes, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addFileEntry(
 			null, userId, folderId, name, title, description, tagsEntries,
-			extraSettings, byteArray, Boolean.valueOf(addCommunityPermissions),
+			extraSettings, bytes, Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public DLFileEntry addFileEntry(
 			String uuid, long userId, long folderId, String name, String title,
 			String description, String[] tagsEntries, String extraSettings,
-			byte[] byteArray, boolean addCommunityPermissions,
+			byte[] bytes, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addFileEntry(
 			uuid, userId, folderId, name, title, description, tagsEntries,
-			extraSettings, byteArray, Boolean.valueOf(addCommunityPermissions),
+			extraSettings, bytes, Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
@@ -137,13 +137,13 @@ public class DLFileEntryLocalServiceImpl
 	public DLFileEntry addFileEntry(
 			long userId, long folderId, String name, String title,
 			String description, String[] tagsEntries, String extraSettings,
-			byte[] byteArray, String[] communityPermissions,
+			byte[] bytes, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		return addFileEntry(
 			null, userId, folderId, name, title, description, tagsEntries,
-			extraSettings, byteArray, null, null, communityPermissions,
+			extraSettings, bytes, null, null, communityPermissions,
 			guestPermissions);
 	}
 
@@ -187,20 +187,20 @@ public class DLFileEntryLocalServiceImpl
 	public DLFileEntry addFileEntry(
 			String uuid, long userId, long folderId, String name, String title,
 			String description,	String[] tagsEntries, String extraSettings,
-			byte[] byteArray, Boolean addCommunityPermissions,
+			byte[] bytes, Boolean addCommunityPermissions,
 			Boolean addGuestPermissions, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		if ((byteArray == null) || (byteArray.length == 0)) {
+		if ((bytes == null) || (bytes.length == 0)) {
 			throw new FileSizeException();
 		}
 
-		InputStream is = new ByteArrayInputStream(byteArray);
+		InputStream is = new ByteArrayInputStream(bytes);
 
 		return addFileEntry(
 			uuid, userId, folderId, name, title, description, tagsEntries,
-			extraSettings, is, byteArray.length, addCommunityPermissions,
+			extraSettings, is, bytes.length, addCommunityPermissions,
 			addGuestPermissions, communityPermissions, guestPermissions);
 	}
 
@@ -751,15 +751,15 @@ public class DLFileEntryLocalServiceImpl
 	public DLFileEntry updateFileEntry(
 			long userId, long folderId, long newFolderId, String name,
 			String sourceFileName, String title, String description,
-			String[] tagsEntries, String extraSettings, byte[] byteArray)
+			String[] tagsEntries, String extraSettings, byte[] bytes)
 		throws PortalException, SystemException {
 
 		InputStream is = null;
 		long size = 0;
 
-		if ((byteArray != null) && (byteArray.length > 0)) {
-			is = new ByteArrayInputStream(byteArray);
-			size = byteArray.length;
+		if ((bytes != null) && (bytes.length > 0)) {
+			is = new ByteArrayInputStream(bytes);
+			size = bytes.length;
 		}
 
 		return updateFileEntry(

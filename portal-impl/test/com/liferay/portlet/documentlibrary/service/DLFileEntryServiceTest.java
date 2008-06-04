@@ -47,20 +47,20 @@ public class DLFileEntryServiceTest extends BaseServiceTestCase {
 
 		String content = "Hello World!";
 
-		byte[] byteArray = content.getBytes();
+		byte[] bytes = content.getBytes();
 
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
 
 		DLFileEntryServiceUtil.addFileEntry(
 			_folder.getFolderId(), fileName, fileName, description,
-			tagsEntries, extraSettings, byteArray, addCommunityPermissions,
+			tagsEntries, extraSettings, bytes, addCommunityPermissions,
 			addGuestPermissions);
 
 		try {
 			DLFileEntryServiceUtil.addFileEntry(
 				_folder.getFolderId(), fileName, fileName, description,
-				tagsEntries, extraSettings, byteArray, addCommunityPermissions,
+				tagsEntries, extraSettings, bytes, addCommunityPermissions,
 				addGuestPermissions);
 
 			fail("Able to add two files of the name " + fileName);

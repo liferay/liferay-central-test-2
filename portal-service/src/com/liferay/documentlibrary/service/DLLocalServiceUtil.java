@@ -128,12 +128,12 @@ public class DLLocalServiceUtil {
 		dlLocalService.validate(fileName, file);
 	}
 
-	public static void validate(String fileName, byte[] byteArray)
+	public static void validate(String fileName, byte[] bytes)
 		throws PortalException {
 
 		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
 
-		dlLocalService.validate(fileName, byteArray);
+		dlLocalService.validate(fileName, bytes);
 	}
 
 	public static void validate(String fileName, InputStream is)

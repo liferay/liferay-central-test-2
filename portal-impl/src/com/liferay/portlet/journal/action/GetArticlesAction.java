@@ -83,10 +83,10 @@ public class GetArticlesAction extends Action {
 			List<JournalArticle> articles = getArticles(req);
 
 			String fileName = null;
-			byte[] byteArray = getContent(req, articles);
+			byte[] bytes = getContent(req, articles);
 
 			ServletResponseUtil.sendFile(
-				res, fileName, byteArray, ContentTypes.TEXT_XML_UTF8);
+				res, fileName, bytes, ContentTypes.TEXT_XML_UTF8);
 
 			return null;
 		}

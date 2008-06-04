@@ -61,13 +61,13 @@ public class DigesterImpl implements Digester {
 			_log.error(uee, uee);
 		}
 
-		byte[] byteArray = digester.digest();
+		byte[] bytes = digester.digest();
 
 		if (_BASE_64) {
-			return Base64.encode(byteArray);
+			return Base64.encode(bytes);
 		}
 		else {
-			return new String(Hex.encodeHex(byteArray));
+			return new String(Hex.encodeHex(bytes));
 		}
 	}
 

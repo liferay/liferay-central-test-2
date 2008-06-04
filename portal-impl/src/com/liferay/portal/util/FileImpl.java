@@ -736,18 +736,18 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		bw.close();
 	}
 
-	public void write(String fileName, byte[] byteArray) throws IOException {
-		write(new File(fileName), byteArray);
+	public void write(String fileName, byte[] bytes) throws IOException {
+		write(new File(fileName), bytes);
 	}
 
-	public void write(File file, byte[] byteArray) throws IOException {
+	public void write(File file, byte[] bytes) throws IOException {
 		if (file.getParent() != null) {
 			mkdirs(file.getParent());
 		}
 
 		FileOutputStream fos = new FileOutputStream(file);
 
-		fos.write(byteArray);
+		fos.write(bytes);
 
 		fos.close();
 	}

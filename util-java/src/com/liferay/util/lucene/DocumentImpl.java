@@ -54,7 +54,7 @@ public class DocumentImpl implements Document {
 		throws IOException {
 	}
 
-	public void addFile(String name, byte[] byteArray, String fileExt)
+	public void addFile(String name, byte[] bytes, String fileExt)
 		throws IOException {
 	}
 

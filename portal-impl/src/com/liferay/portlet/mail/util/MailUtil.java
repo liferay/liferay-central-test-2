@@ -1235,9 +1235,9 @@ public class MailUtil {
 			throw new ContentPathException();
 		}
 
-		byte[] byteArray = JavaMailUtil.getBytes(part);
+		byte[] bytes = JavaMailUtil.getBytes(part);
 
-		return new Object[] {byteArray, part.getContentType()};
+		return new Object[] {bytes, part.getContentType()};
 	}
 
 	private static String _getAttachmentURL(HttpServletRequest req) {

@@ -92,7 +92,7 @@ public interface DLFileEntryLocalService {
 		long userId, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
-		byte[] byteArray, boolean addCommunityPermissions,
+		byte[] bytes, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
@@ -101,7 +101,7 @@ public interface DLFileEntryLocalService {
 		java.lang.String uuid, long userId, long folderId,
 		java.lang.String name, java.lang.String title,
 		java.lang.String description, java.lang.String[] tagsEntries,
-		java.lang.String extraSettings, byte[] byteArray,
+		java.lang.String extraSettings, byte[] bytes,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
@@ -119,7 +119,7 @@ public interface DLFileEntryLocalService {
 		long userId, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
-		byte[] byteArray, java.lang.String[] communityPermissions,
+		byte[] bytes, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
@@ -139,7 +139,7 @@ public interface DLFileEntryLocalService {
 		java.lang.String uuid, long userId, long folderId,
 		java.lang.String name, java.lang.String title,
 		java.lang.String description, java.lang.String[] tagsEntries,
-		java.lang.String extraSettings, byte[] byteArray,
+		java.lang.String extraSettings, byte[] bytes,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -325,7 +325,7 @@ public interface DLFileEntryLocalService {
 		long userId, long folderId, long newFolderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
 		java.lang.String description, java.lang.String[] tagsEntries,
-		java.lang.String extraSettings, byte[] byteArray)
+		java.lang.String extraSettings, byte[] bytes)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

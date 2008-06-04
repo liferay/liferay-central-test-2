@@ -64,11 +64,10 @@ public class GetLatestArticleContentAction extends Action {
 					groupId, articleId, Boolean.TRUE);
 
 			String fileName = "content.xml";
-			byte[] byteArray =
-				article.getContentByLocale(languageId).getBytes();
+			byte[] bytes = article.getContentByLocale(languageId).getBytes();
 
 			ServletResponseUtil.sendFile(
-				res, fileName, byteArray, ContentTypes.TEXT_XML_UTF8);
+				res, fileName, bytes, ContentTypes.TEXT_XML_UTF8);
 
 			return null;
 		}

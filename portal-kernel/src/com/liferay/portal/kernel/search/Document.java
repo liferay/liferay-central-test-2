@@ -45,7 +45,7 @@ public interface Document {
 	public void addFile(String name, InputStream is, String fileExt)
 		throws IOException;
 
-	public void addFile(String name, byte[] byteArray, String fileExt)
+	public void addFile(String name, byte[] bytes, String fileExt)
 		throws IOException;
 
 	public void addFile(String name, File file, String fileExt)

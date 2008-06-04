@@ -278,11 +278,11 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 					attachmentEl.addAttribute("bin-path", binPath);
 
 					try {
-						byte[] byteArray = DLServiceUtil.getFile(
+						byte[] bytes = DLServiceUtil.getFile(
 							context.getCompanyId(), CompanyConstants.SYSTEM,
 							attachment);
 
-						context.addZipEntry(binPath, byteArray);
+						context.addZipEntry(binPath, bytes);
 					}
 					catch (RemoteException re) {
 					}

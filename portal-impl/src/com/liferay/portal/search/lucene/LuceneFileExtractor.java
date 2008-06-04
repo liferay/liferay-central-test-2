@@ -58,13 +58,13 @@ public class LuceneFileExtractor {
 		return LuceneFields.getText(field, text);
 	}
 
-	public Field getFile(String field, byte[] byteArray, String fileExt)
+	public Field getFile(String field, byte[] bytes, String fileExt)
 		throws IOException {
 
-		InputStream in = new BufferedInputStream(
-			new ByteArrayInputStream(byteArray));
+		InputStream is = new BufferedInputStream(
+			new ByteArrayInputStream(bytes));
 
-		return getFile(field, in, fileExt);
+		return getFile(field, is, fileExt);
 	}
 
 	public Field getFile(String field, File file, String fileExt)

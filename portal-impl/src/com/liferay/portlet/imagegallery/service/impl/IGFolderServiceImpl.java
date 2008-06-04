@@ -183,9 +183,9 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 				Image image = ImageLocalUtil.getImage(
 					srcImage.getLargeImageId());
 
-				byte[] byteArray = image.getTextObj();
+				byte[] bytes = image.getTextObj();
 
-				FileUtil.write(file, byteArray);
+				FileUtil.write(file, bytes);
 			}
 			catch (Exception e) {
 				_log.error(e, e);

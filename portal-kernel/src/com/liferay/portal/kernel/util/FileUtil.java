@@ -268,14 +268,12 @@ public class FileUtil {
 		getFile().write(file, s, lazy, append);
 	}
 
-	public static void write(String fileName, byte[] byteArray)
-		throws IOException {
-
-		getFile().write(fileName, byteArray);
+	public static void write(String fileName, byte[] bytes) throws IOException {
+		getFile().write(fileName, bytes);
 	}
 
-	public static void write(File file, byte[] byteArray) throws IOException {
-		getFile().write(file, byteArray);
+	public static void write(File file, byte[] bytes) throws IOException {
+		getFile().write(file, bytes);
 	}
 
 	public static void write(String fileName, InputStream is)

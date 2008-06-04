@@ -113,14 +113,14 @@ public class ExportPagesAction extends PortletAction {
 					new PortalException());
 			}
 
-			byte[] byteArray = LayoutServiceUtil.exportLayouts(
+			byte[] bytes = LayoutServiceUtil.exportLayouts(
 				groupId, privateLayout, req.getParameterMap(), startDate,
 				endDate);
 
 			HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(
 				res);
 
-			ServletResponseUtil.sendFile(httpRes, fileName, byteArray);
+			ServletResponseUtil.sendFile(httpRes, fileName, bytes);
 
 			setForward(req, ActionConstants.COMMON_NULL);
 		}

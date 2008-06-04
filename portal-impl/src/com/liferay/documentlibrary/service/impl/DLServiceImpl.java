@@ -92,16 +92,16 @@ public class DLServiceImpl implements DLService {
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, String properties, String[] tagsEntries,
-			byte[] byteArray)
+			byte[] bytes)
 		throws PortalException, SystemException {
 
-		DLLocalServiceUtil.validate(fileName, byteArray);
+		DLLocalServiceUtil.validate(fileName, bytes);
 
 		Hook hook = HookFactory.getInstance();
 
 		hook.addFile(
 			companyId, portletId, groupId, repositoryId, fileName, properties,
-			tagsEntries, byteArray);
+			tagsEntries, bytes);
 	}
 
 	public void deleteDirectory(
@@ -199,16 +199,16 @@ public class DLServiceImpl implements DLService {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, double versionNumber, String sourceFileName,
-			String properties, String[] tagsEntries, byte[] byteArray)
+			String properties, String[] tagsEntries, byte[] bytes)
 		throws PortalException, SystemException {
 
-		DLLocalServiceUtil.validate(fileName, byteArray);
+		DLLocalServiceUtil.validate(fileName, bytes);
 
 		Hook hook = HookFactory.getInstance();
 
 		hook.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
-			versionNumber, sourceFileName, properties, tagsEntries, byteArray);
+			versionNumber, sourceFileName, properties, tagsEntries, bytes);
 	}
 
 	public void updateFile(

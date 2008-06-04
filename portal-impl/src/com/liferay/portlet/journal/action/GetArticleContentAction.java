@@ -55,10 +55,10 @@ public class GetArticleContentAction extends Action {
 			xml = JournalUtil.formatXML(xml);
 
 			String fileName = "content.xml";
-			byte[] byteArray = xml.getBytes();
+			byte[] bytes = xml.getBytes();
 
 			ServletResponseUtil.sendFile(
-				res, fileName, byteArray, ContentTypes.TEXT_XML_UTF8);
+				res, fileName, bytes, ContentTypes.TEXT_XML_UTF8);
 
 			return null;
 		}

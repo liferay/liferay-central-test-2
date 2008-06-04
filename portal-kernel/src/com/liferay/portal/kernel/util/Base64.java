@@ -178,13 +178,13 @@ public class Base64 {
 			return null;
 		}
 
-		byte byteArray[] = decode(s);
+		byte bytes[] = decode(s);
 
-		ByteArrayInputStream bais = new ByteArrayInputStream(byteArray);
+		ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
 
 		try {
-			ObjectInputStream is =
-				new ObjectInputStream(new BufferedInputStream(bais));
+			ObjectInputStream is = new ObjectInputStream(
+				new BufferedInputStream(bais));
 
 			return is.readObject();
 		}

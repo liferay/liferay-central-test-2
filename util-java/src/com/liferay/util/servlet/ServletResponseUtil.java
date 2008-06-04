@@ -96,20 +96,20 @@ public class ServletResponseUtil {
 	}
 
 	public static void sendFile(
-			HttpServletResponse res, String fileName, byte[] byteArray)
+			HttpServletResponse res, String fileName, byte[] bytes)
 		throws IOException {
 
-		sendFile(res, fileName, byteArray, null);
+		sendFile(res, fileName, bytes, null);
 	}
 
 	public static void sendFile(
-			HttpServletResponse res, String fileName, byte[] byteArray,
+			HttpServletResponse res, String fileName, byte[] bytes,
 			String contentType)
 		throws IOException {
 
 		setHeaders(res, fileName, contentType);
 
-		write(res, byteArray);
+		write(res, bytes);
 	}
 
 	public static void sendFile(
@@ -135,14 +135,14 @@ public class ServletResponseUtil {
 		write(res, s.getBytes(StringPool.UTF8));
 	}
 
-	public static void write(HttpServletResponse res, byte[] byteArray)
+	public static void write(HttpServletResponse res, byte[] bytes)
 		throws IOException {
 
-		write(res, byteArray, 0);
+		write(res, bytes, 0);
 	}
 
 	public static void write(
-			HttpServletResponse res, byte[] byteArray, int contentLength)
+			HttpServletResponse res, byte[] bytes, int contentLength)
 		throws IOException {
 
 		OutputStream os = null;
@@ -156,14 +156,14 @@ public class ServletResponseUtil {
 				// LEP-536
 
 				if (contentLength == 0) {
-					contentLength = byteArray.length;
+					contentLength = bytes.length;
 				}
 
 				res.setContentLength(contentLength);
 
 				os = new BufferedOutputStream(res.getOutputStream());
 
-				os.write(byteArray, 0, contentLength);
+				os.write(bytes, 0, contentLength);
 			}
 		}
 		finally {

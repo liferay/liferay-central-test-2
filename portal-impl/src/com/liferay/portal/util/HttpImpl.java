@@ -23,6 +23,7 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.util.ByteArrayMaker;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.StringMaker;
@@ -621,13 +622,13 @@ public class HttpImpl implements Http {
 			boolean post)
 		throws IOException {
 
-		byte[] byteArray = null;
+		byte[] bytes = null;
 
 		HttpMethod method = null;
 
 		try {
 			if (location == null) {
-				return byteArray;
+				return bytes;
 			}
 			else if (!location.startsWith(Http.HTTP_WITH_SLASH) &&
 					 !location.startsWith(Http.HTTPS_WITH_SLASH)) {
@@ -711,22 +712,12 @@ public class HttpImpl implements Http {
 			InputStream is = method.getResponseBodyAsStream();
 
 			if (is != null) {
-				ByteArrayMaker bam = new ByteArrayMaker();
-				byte[] bytes = new byte[512];
-
-				for (int i = is.read(bytes, 0, 512); i != -1;
-						i = is.read(bytes, 0, 512)) {
-
-					bam.write(bytes, 0, i);
-				}
-
-				byteArray = bam.toByteArray();
+				bytes = FileUtil.getBytes(is);
 
 				is.close();
-				bam.close();
 			}
 
-			return byteArray;
+			return bytes;
 		}
 		finally {
 			try {
