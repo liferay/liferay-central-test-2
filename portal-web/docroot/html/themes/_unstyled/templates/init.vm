@@ -138,7 +138,7 @@
 #end
 
 #if ($permissionChecker.isOmniadmin() && $portalUtil.isUpdateAvailable())
-    #set ($update_available_url = $theme_display.getURLUpdateManager())
+	#set ($update_available_url = $theme_display.getURLUpdateManager())
 #end
 
 ## ---------- Page ---------- ##
