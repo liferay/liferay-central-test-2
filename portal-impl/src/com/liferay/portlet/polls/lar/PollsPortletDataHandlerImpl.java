@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.polls.lar;
 
-import com.thoughtworks.xstream.XStream;
-
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
@@ -33,6 +31,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.polls.DuplicateVoteException;
@@ -79,9 +78,6 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-
-			// Questions
-
 			if (!context.addPrimaryKey(
 					PollsPortletDataHandlerImpl.class, "deleteData")) {
 
@@ -108,19 +104,16 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 			root.addAttribute("group-id", String.valueOf(context.getGroupId()));
 
-			// Questions
-
 			Element questionsEl = root.addElement("questions");
-
 			Element choicesEl = root.addElement("choices");
-
 			Element votesEl = root.addElement("votes");
 
 			List<PollsQuestion> questions = PollsQuestionUtil.findByGroupId(
 				context.getGroupId());
 
 			for (PollsQuestion question : questions) {
-				exportQuestion(context, questionsEl, choicesEl, votesEl, question);
+				exportQuestion(
+					context, questionsEl, choicesEl, votesEl, question);
 			}
 
 			return XMLFormatter.toString(doc);
@@ -148,22 +141,18 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			XStream xStream = new XStream();
-
 			Document doc = DocumentUtil.readDocumentFromXML(data);
 
 			Element root = doc.getRootElement();
 
-			// Questions
-
-			List<Element> questionEls =
-				root.element("questions").elements("question");
+			List<Element> questionEls = root.element("questions").elements(
+				"question");
 
 			Map<Long, Long> questionPKs = context.getNewPrimaryKeysMap(
 				PollsQuestion.class);
 
-			for (Element el : questionEls) {
-				String path = el.attributeValue("path");
+			for (Element questionEl : questionEls) {
+				String path = questionEl.attributeValue("path");
 
 				if (context.isPathNotProcessed(path)) {
 					PollsQuestion question =
@@ -173,16 +162,14 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 				}
 			}
 
-			// Choices
-
-			List<Element> choiceEls =
-				root.element("choices").elements("choice");
+			List<Element> choiceEls = root.element("choices").elements(
+				"choice");
 
 			Map<Long, Long> choicePKs = context.getNewPrimaryKeysMap(
 				PollsChoice.class);
 
-			for (Element el : choiceEls) {
-				String path = el.attributeValue("path");
+			for (Element choiceEl : choiceEls) {
+				String path = choiceEl.attributeValue("path");
 
 				if (context.isPathNotProcessed(path)) {
 					PollsChoice choice =
@@ -192,18 +179,15 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 				}
 			}
 
-			// Votes
-
 			if (context.getBooleanParameter(_NAMESPACE, "votes")) {
-				List<Element> voteEls =
-					root.element("votes").elements("vote");
+				List<Element> voteEls = root.element("votes").elements("vote");
 
-				for (Element el : voteEls) {
-					String path = el.attributeValue("path");
+				for (Element voteEl : voteEls) {
+					String path = voteEl.attributeValue("path");
 
 					if (context.isPathNotProcessed(path)) {
-						PollsVote vote =
-							(PollsVote)context.getZipEntryAsObject(path);
+						PollsVote vote = (PollsVote)context.getZipEntryAsObject(
+							path);
 
 						importVote(context, questionPKs, choicePKs, vote);
 					}
@@ -227,7 +211,9 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 		String path = getChoicePath(context, choice);
 
-		questionsEl.addElement("choice").addAttribute("path", path);
+		Element choiceEl = questionsEl.addElement("choice");
+
+		choiceEl.addAttribute("path", path);
 
 		if (context.isPathNotProcessed(path)) {
 			context.addZipEntry(path, choice);
@@ -239,32 +225,36 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 			Element votesEl, PollsQuestion question)
 		throws PortalException, SystemException {
 
-		if (context.isWithinDateRange(question.getModifiedDate())) {
-			String path = getQuestionPath(context, question);
+		if (!context.isWithinDateRange(question.getModifiedDate())) {
+			return;
+		}
 
-			questionsEl.addElement("question").addAttribute("path", path);
+		String path = getQuestionPath(context, question);
 
-			if (context.isPathNotProcessed(path)) {
-				question.setUserUuid(question.getUserUuid());
+		Element questionEl = questionsEl.addElement("question");
 
-				List<PollsChoice> choices = PollsChoiceUtil.findByQuestionId(
+		questionEl.addAttribute("path", path);
+
+		if (context.isPathNotProcessed(path)) {
+			question.setUserUuid(question.getUserUuid());
+
+			List<PollsChoice> choices = PollsChoiceUtil.findByQuestionId(
+				question.getQuestionId());
+
+			for (PollsChoice choice : choices) {
+				exportChoice(context, choicesEl, choice);
+			}
+
+			if (context.getBooleanParameter(_NAMESPACE, "votes")) {
+				List<PollsVote> votes = PollsVoteUtil.findByQuestionId(
 					question.getQuestionId());
 
-				for (PollsChoice choice : choices) {
-					exportChoice(context, choicesEl, choice);
+				for (PollsVote vote : votes) {
+					exportVote(context, votesEl, vote);
 				}
-
-				if (context.getBooleanParameter(_NAMESPACE, "votes")) {
-					List<PollsVote> votes = PollsVoteUtil.findByQuestionId(
-						question.getQuestionId());
-
-					for (PollsVote vote : votes) {
-						exportVote(context, votesEl, vote);
-					}
-				}
-
-				context.addZipEntry(path, question);
 			}
+
+			context.addZipEntry(path, question);
 		}
 	}
 
@@ -274,7 +264,9 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 		String path = getVotePath(context, vote);
 
-		questionsEl.addElement("vote").addAttribute("path", path);
+		Element voteEl = questionsEl.addElement("vote");
+
+		voteEl.addAttribute("path", path);
 
 		if (context.isPathNotProcessed(path)) {
 			context.addZipEntry(path, vote);
@@ -366,6 +358,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 		if (context.getDataStrategy().equals(
 				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR)) {
+
 			existingQuestion =  PollsQuestionUtil.fetchByUUID_G(
 				question.getUuid(), context.getGroupId());
 
@@ -427,23 +420,44 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected String getChoicePath(
-			PortletDataContext context, PollsChoice choice) {
-		return context.getPortletPath(PortletKeys.POLLS) + "/questions/" +
-			choice.getQuestionId() + "/choices/" + choice.getChoiceId() +
-				".xml";
+		PortletDataContext context, PollsChoice choice) {
+
+		StringMaker sm = new StringMaker();
+
+		sm.append(context.getPortletPath(PortletKeys.POLLS));
+		sm.append("/questions/");
+		sm.append(choice.getQuestionId());
+		sm.append("/choices/");
+		sm.append(choice.getChoiceId());
+		sm.append(".xml");
+
+		return sm.toString();
 	}
 
 	protected String getQuestionPath(
-			PortletDataContext context, PollsQuestion question) {
-		return context.getPortletPath(PortletKeys.POLLS) + "/questions/" +
-			question.getQuestionId() + ".xml";
+		PortletDataContext context, PollsQuestion question) {
+
+		StringMaker sm = new StringMaker();
+
+		sm.append(context.getPortletPath(PortletKeys.POLLS));
+		sm.append("/questions/");
+		sm.append(question.getQuestionId());
+		sm.append(".xml");
+
+		return sm.toString();
 	}
 
-	protected String getVotePath(
-			PortletDataContext context, PollsVote vote) {
-		return context.getPortletPath(PortletKeys.POLLS) + "/questions/" +
-			vote.getQuestionId() + "/votes/" + vote.getVoteId() +
-				".xml";
+	protected String getVotePath(PortletDataContext context, PollsVote vote) {
+		StringMaker sm = new StringMaker();
+
+		sm.append(context.getPortletPath(PortletKeys.POLLS));
+		sm.append("/questions/");
+		sm.append(vote.getQuestionId());
+		sm.append("/votes/");
+		sm.append(vote.getVoteId());
+		sm.append(".xml");
+
+		return sm.toString();
 	}
 
 	private static final String _NAMESPACE = "polls";
