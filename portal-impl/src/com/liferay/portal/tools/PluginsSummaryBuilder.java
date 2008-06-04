@@ -201,7 +201,7 @@ public class PluginsSummaryBuilder {
 			while (itr.hasNext()) {
 				Element el = itr.next();
 
-				String text = el.getText().trim().toLowerCase();
+				String text = el.getText().trim();
 
 				sm.append(text);
 
