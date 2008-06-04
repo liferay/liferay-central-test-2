@@ -42,7 +42,7 @@ import java.util.Date;
  */
 public class SchedulingRequest implements Serializable {
 
-	public static final String PING = "PING";
+	public static final String PING_TYPE = "PING";
 
 	public static final String REGISTER_TYPE = "REGISTER";
 
@@ -66,8 +66,8 @@ public class SchedulingRequest implements Serializable {
 	}
 
 	public SchedulingRequest(
-			String cronText, String groupName, String jobName,
-			String messageBody, Date startDate, Date endDate) {
+		String cronText, String groupName, String jobName, String messageBody,
+		Date startDate, Date endDate) {
 
 		this(
 			cronText, null, groupName, jobName, messageBody, startDate, endDate,
@@ -75,8 +75,8 @@ public class SchedulingRequest implements Serializable {
 	}
 
 	public SchedulingRequest(
-			String cronText, String destinationName, String groupName,
-			String messageBody, Date startDate, Date endDate, String type) {
+		String cronText, String destinationName, String groupName,
+		String messageBody, Date startDate, Date endDate, String type) {
 
 		this(
 			cronText, destinationName, groupName, null, messageBody, startDate,
@@ -84,9 +84,9 @@ public class SchedulingRequest implements Serializable {
 	}
 
 	public SchedulingRequest(
-			String cronText, String destinationName, String groupName,
-			String jobName, String messageBody, Date startDate, Date endDate,
-			String type) {
+		String cronText, String destinationName, String groupName,
+		String jobName, String messageBody, Date startDate, Date endDate,
+		String type) {
 
 		_cronText = cronText;
 		_destinationName = destinationName;
