@@ -31,6 +31,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.NotificationThreadLocal;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
@@ -60,6 +61,7 @@ import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 import com.liferay.portlet.wiki.service.base.WikiPageLocalServiceBaseImpl;
 import com.liferay.portlet.wiki.service.jms.WikiPageProducer;
 import com.liferay.portlet.wiki.util.Indexer;
+import com.liferay.portlet.wiki.util.WikiCacheThreadLocal;
 import com.liferay.portlet.wiki.util.WikiCacheUtil;
 import com.liferay.portlet.wiki.util.WikiUtil;
 import com.liferay.portlet.wiki.util.comparator.PageCreateDateComparator;
@@ -169,11 +171,13 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Subscriptions
 
-		try {
-			notifySubscribers(node, page, prefs, themeDisplay, false);
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
+		if (NotificationThreadLocal.isNotificationEnabled()) {
+			try {
+				notifySubscribers(node, page, prefs, themeDisplay, false);
+			}
+			catch (IOException ioe) {
+				throw new SystemException(ioe);
+			}
 		}
 
 		// Tags
@@ -868,11 +872,13 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Subscriptions
 
-		try {
-			notifySubscribers(node, page, prefs, themeDisplay, true);
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
+		if (NotificationThreadLocal.isNotificationEnabled()) {
+			try {
+				notifySubscribers(node, page, prefs, themeDisplay, true);
+			}
+			catch (IOException ioe) {
+				throw new SystemException(ioe);
+			}
 		}
 
 		// Tags
@@ -922,11 +928,18 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	protected void clearPageCache(WikiPage page) {
+		if (!WikiCacheThreadLocal.isClearCache()) {
+			return;
+		}
+
 		WikiCacheUtil.clearCache(page.getNodeId(), page.getTitle());
 	}
 
 	protected void clearReferralsCache(WikiPage page)
 		throws PortalException, SystemException {
+		if (!WikiCacheThreadLocal.isClearCache()) {
+			return;
+		}
 
 		List<WikiPage> links = getIncomingLinks(
 			page.getNodeId(), page.getTitle());

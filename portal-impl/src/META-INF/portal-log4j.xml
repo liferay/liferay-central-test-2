@@ -536,6 +536,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portlet.wiki.importers">
+		<priority value="WARN" />
+	</category>
+
 	<category name="com.liferay.util.JNDIUtil">
 		<priority value="ERROR" />
 	</category>

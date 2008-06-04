@@ -91,11 +91,6 @@ public abstract class WikiPageResourceLocalServiceBaseImpl
 			start, end);
 	}
 
-	public WikiPageResource getWikiPageResource(long resourcePrimKey)
-		throws PortalException, SystemException {
-		return wikiPageResourcePersistence.findByPrimaryKey(resourcePrimKey);
-	}
-
 	public WikiPageResource updateWikiPageResource(
 		WikiPageResource wikiPageResource) throws SystemException {
 		wikiPageResource.setNew(false);

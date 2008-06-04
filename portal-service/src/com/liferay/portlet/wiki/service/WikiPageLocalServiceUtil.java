@@ -92,15 +92,6 @@ public class WikiPageLocalServiceUtil {
 		return wikiPageLocalService.dynamicQuery(queryInitializer, start, end);
 	}
 
-	public static com.liferay.portlet.wiki.model.WikiPage getWikiPage(
-		long pageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
-
-		return wikiPageLocalService.getWikiPage(pageId);
-	}
-
 	public static com.liferay.portlet.wiki.model.WikiPage updateWikiPage(
 		com.liferay.portlet.wiki.model.WikiPage wikiPage)
 		throws com.liferay.portal.SystemException {

@@ -22,6 +22,7 @@
 
 package com.liferay.util.servlet.fileupload;
 
+import com.liferay.portal.kernel.util.ProgressTracker;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.List;
@@ -47,8 +48,7 @@ public class LiferayFileUpload extends ServletFileUpload {
 	public static final String FILE_NAME =
 		LiferayFileUpload.class.getName() + "_FILE_NAME";
 
-	public static final String PERCENT =
-		LiferayFileUpload.class.getName() + "_PERCENT";
+	public static final String PERCENT = ProgressTracker.PERCENT;
 
 	public LiferayFileUpload(FileItemFactory fileItemFactory,
 								 HttpServletRequest req) {

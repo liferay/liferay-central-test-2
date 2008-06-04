@@ -23,7 +23,10 @@
 package com.liferay.portlet.wiki.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.NotificationThreadLocal;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.ProgressTracker;
+import com.liferay.portal.kernel.util.ProgressTrackerThreadLocal;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.UploadRequestUtil;
@@ -31,6 +34,8 @@ import com.liferay.portlet.wiki.DuplicateNodeNameException;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NodeNameException;
 import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
+import com.liferay.portlet.wiki.util.WikiCacheThreadLocal;
+import com.liferay.portlet.wiki.util.WikiCacheUtil;
 import com.liferay.util.servlet.UploadPortletRequest;
 
 import java.io.File;
@@ -114,10 +119,25 @@ public class ImportPagesAction extends PortletAction {
 			UploadRequestUtil.getUploadPortletRequest(req);
 
 		long nodeId = ParamUtil.getLong(uploadReq, "nodeId");
+		String importProgressId =
+			ParamUtil.getString(uploadReq, "importProgressId");
 
 		File file = uploadReq.getFile("file");
 
+		ProgressTracker progressTracker = new ProgressTracker(
+			req, importProgressId);
+
+		ProgressTrackerThreadLocal.setProgressTracker(progressTracker);
+		NotificationThreadLocal.setNotificationEnabled(false);
+		WikiCacheThreadLocal.setClearCache(false);
+
+		progressTracker.start();
+
 		WikiNodeServiceUtil.importPages(nodeId, file);
+
+		WikiCacheUtil.clearCache(nodeId);
+
+		progressTracker.start();
 	}
 
 }

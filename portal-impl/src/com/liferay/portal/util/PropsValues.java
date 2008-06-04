@@ -943,6 +943,9 @@ public class PropsValues {
 	public static final String WIKI_PAGE_TITLES_REGEXP = PropsUtil.get(
 		PropsUtil.WIKI_PAGE_TITLES_REGEXP);
 
+	public static final String WIKI_PAGE_TITLES_REMOVE_REGEXP = PropsUtil.get(
+		PropsUtil.WIKI_PAGE_TITLES_REMOVE_REGEXP);
+
 	static {
 		if (!LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED) {
 			LAYOUT_USER_PRIVATE_LAYOUTS_AUTO_CREATE = false;

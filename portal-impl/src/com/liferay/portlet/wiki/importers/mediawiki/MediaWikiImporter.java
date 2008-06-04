@@ -25,11 +25,14 @@ package com.liferay.portlet.wiki.importers.mediawiki;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ProgressTracker;
+import com.liferay.portal.kernel.util.ProgressTrackerThreadLocal;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.tags.NoSuchEntryException;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
@@ -70,8 +73,6 @@ public class MediaWikiImporter implements WikiImporter {
 	public void importPages(long userId, WikiNode node, File file)
 		throws PortalException, SystemException {
 
-		int count = 0;
-
 		try {
 			SAXReader saxReader = new SAXReader();
 
@@ -81,42 +82,12 @@ public class MediaWikiImporter implements WikiImporter {
 
 			List<String> specialNamespaces = readSpecialNamespaces(root);
 
-			// Category pages
-
-			importCategoryPages(userId, node, root);
-
-			// Regular pages
-
-			Iterator<Element> itr = root.elements("page").iterator();
-
-			while (itr.hasNext()) {
-				Element pageEl = itr.next();
-
-				String author = pageEl.element("revision").element(
-					"contributor").elementText("username");
-				String title = pageEl.elementText("title");
-
-				if (isSpecialMediaWikiPage(title, specialNamespaces)) {
-					continue;
-				}
-
-				List<Element> revisionEls = pageEl.elements("revision");
-
-				Element lastRevisionEl = revisionEls.get(
-					revisionEls.size() - 1);
-
-				String content = lastRevisionEl.elementText("text");
-
-				importPage(userId, author, node, title, content);
-
-				count++;
-			}
+			processSpecialPages(userId, node, root, specialNamespaces);
+			processRegularPages(userId, node, root, specialNamespaces);
 		}
 		catch (DocumentException e) {
 			throw new PortalException(e);
 		}
-
-		_log.info("Imported " + count + " pages into " + node.getName());
 	}
 
 	protected long getUserId(long userId, WikiNode node, String author)
@@ -133,52 +104,6 @@ public class MediaWikiImporter implements WikiImporter {
 		}
 
 		return user.getUserId();
-	}
-
-	protected void importCategoryPages(long userId, WikiNode node, Element root)
-		throws PortalException, SystemException {
-
-		Iterator<Element> itr = root.elements("page").iterator();
-
-		while (itr.hasNext()) {
-			Element page = itr.next();
-
-			String title = page.elementText("title");
-
-			if (!title.startsWith("Category:")) {
-				continue;
-			}
-
-			String categoryName = title.substring("Category:".length());
-
-			categoryName = normalize(categoryName, 75);
-
-			String description = page.element("revision").elementText("text");
-
-			description = normalizeDescription(description);
-
-			try {
-				TagsEntry tagsEntry = null;
-
-				try {
-					tagsEntry = TagsEntryLocalServiceUtil.getEntry(
-						node.getCompanyId(), categoryName);
-				}
-				catch(NoSuchEntryException nsee) {
-					tagsEntry = TagsEntryLocalServiceUtil.addEntry(
-						userId, categoryName);
-
-					if (Validator.isNotNull(description)) {
-						TagsPropertyLocalServiceUtil.addProperty(
-							userId, tagsEntry.getEntryId(), "description",
-							description);
-					}
-				}
-			}
-			catch (SystemException se) {
-				 _log.error(se, se);
-			}
-		}
 	}
 
 	protected void importPage(
@@ -237,6 +162,131 @@ public class MediaWikiImporter implements WikiImporter {
 			_CATEGORIES_REGEXP, StringPool.BLANK);
 
 		return normalize(description, 300);
+	}
+
+	protected String normalizeTitle(String title) {
+		title = title.replaceAll(
+			PropsValues.WIKI_PAGE_TITLES_REMOVE_REGEXP, StringPool.BLANK);
+
+		return StringUtil.shorten(title, 75);
+	}
+
+	protected void processRegularPages(
+		long userId, WikiNode node, Element root,
+		List<String> specialNamespaces) {
+
+		ProgressTracker tracker =
+			ProgressTrackerThreadLocal.getProgressTracker();
+
+		int count = 0;
+
+		List<Element> pages = root.elements("page");
+
+		int total = pages.size();
+
+		Iterator<Element> itr = root.elements("page").iterator();
+
+		int percentage = 10;
+
+		for (int i = 0; itr.hasNext(); i++) {
+			Element pageEl = itr.next();
+
+			String author = pageEl.element("revision").element(
+				"contributor").elementText("username");
+			String title = pageEl.elementText("title");
+
+			title = normalizeTitle(title);
+
+			percentage = Math.min(10 + (i * 90) / total, 99);
+			tracker.updateProgress(percentage);
+
+			if (isSpecialMediaWikiPage(title, specialNamespaces)) {
+				continue;
+			}
+
+			List<Element> revisionEls = pageEl.elements("revision");
+
+			Element lastRevisionEl = revisionEls.get(
+				revisionEls.size() - 1);
+
+			String content = lastRevisionEl.elementText("text");
+
+			try {
+				importPage(userId, author, node, title, content);
+			}
+			catch (Exception e) {
+				_log.warn(
+					"Page with title " + title + " could not be imported",
+					e);
+			}
+
+			count++;
+		}
+
+		_log.info("Imported " + count + " pages into " + node.getName());
+	}
+
+	protected void processSpecialPages(
+			long userId, WikiNode node, Element root,
+			List<String> specialNamespaces)
+		throws PortalException, SystemException {
+
+		ProgressTracker tracker =
+			ProgressTrackerThreadLocal.getProgressTracker();
+
+		List<Element> pages = root.elements("page");
+
+		int total = pages.size();
+
+		Iterator<Element> itr = pages.iterator();
+
+		for (int i = 0; itr.hasNext(); i++) {
+			Element page = itr.next();
+
+			String title = page.elementText("title");
+
+			if (!title.startsWith("Category:")) {
+				if (isSpecialMediaWikiPage(title, specialNamespaces)) {
+					root.remove(page);
+				}
+
+				continue;
+			}
+
+			String categoryName = title.substring("Category:".length());
+
+			categoryName = normalize(categoryName, 75);
+
+			String description = page.element("revision").elementText("text");
+
+			description = normalizeDescription(description);
+
+			try {
+				TagsEntry tagsEntry = null;
+
+				try {
+					tagsEntry = TagsEntryLocalServiceUtil.getEntry(
+						node.getCompanyId(), categoryName);
+				}
+				catch(NoSuchEntryException nsee) {
+					tagsEntry = TagsEntryLocalServiceUtil.addEntry(
+						userId, categoryName);
+				}
+
+				if (Validator.isNotNull(description)) {
+					TagsPropertyLocalServiceUtil.addProperty(
+						userId, tagsEntry.getEntryId(), "description",
+						description);
+				}
+			}
+			catch (SystemException se) {
+				 _log.error(se, se);
+			}
+
+			if (i % 5 == 0) {
+				tracker.updateProgress((i * 10)/total);
+			}
+		}
 	}
 
 	protected List<String> readSpecialNamespaces(Element root) {

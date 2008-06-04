@@ -1315,6 +1315,8 @@ public class PropsUtil {
 
 	public static final String WIKI_PAGE_TITLES_REGEXP = "wiki.page.titles.regexp";
 
+	public static final String WIKI_PAGE_TITLES_REMOVE_REGEXP = "wiki.page.titles.remove.regexp";
+
 	public static final String WIKI_FORMATS = "wiki.formats";
 
 	public static final String WIKI_FORMATS_DEFAULT = "wiki.formats.default";

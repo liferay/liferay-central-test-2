@@ -151,11 +151,6 @@ public abstract class WikiPageLocalServiceBaseImpl
 			start, end);
 	}
 
-	public WikiPage getWikiPage(long pageId)
-		throws PortalException, SystemException {
-		return wikiPagePersistence.findByPrimaryKey(pageId);
-	}
-
 	public WikiPage updateWikiPage(WikiPage wikiPage) throws SystemException {
 		wikiPage.setNew(false);
 

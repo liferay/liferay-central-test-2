@@ -93,15 +93,6 @@ public class WikiPageResourceLocalServiceUtil {
 			start, end);
 	}
 
-	public static com.liferay.portlet.wiki.model.WikiPageResource getWikiPageResource(
-		long resourcePrimKey)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
-
-		return wikiPageResourceLocalService.getWikiPageResource(resourcePrimKey);
-	}
-
 	public static com.liferay.portlet.wiki.model.WikiPageResource updateWikiPageResource(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
 		throws com.liferay.portal.SystemException {
