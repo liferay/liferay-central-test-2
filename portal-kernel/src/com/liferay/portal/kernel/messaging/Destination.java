@@ -30,9 +30,9 @@ package com.liferay.portal.kernel.messaging;
  */
 public interface Destination {
 
-    public void close(boolean force);
+	public void close();
 
-    public void close();
+	public void close(boolean force);
 
 	public String getName();
 

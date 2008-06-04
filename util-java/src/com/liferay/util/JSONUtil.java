@@ -191,7 +191,8 @@ public class JSONUtil {
 		}
 		catch (UnmarshallException ue) {
 			 _log.error(ue, ue);
-            throw new IllegalStateException("Unable to deserialize oject", ue);
+
+			throw new IllegalStateException("Unable to deserialize oject", ue);
 		}
 	}
 
@@ -201,8 +202,9 @@ public class JSONUtil {
 		}
 		catch (MarshallException me) {
 			_log.error(me, me);
-            throw new IllegalStateException("Unable to serialize oject", me);
-        }
+
+			throw new IllegalStateException("Unable to serialize oject", me);
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(JSONUtil.class);

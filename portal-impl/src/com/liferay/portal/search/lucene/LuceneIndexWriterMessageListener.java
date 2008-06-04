@@ -65,7 +65,7 @@ public class LuceneIndexWriterMessageListener implements MessageListener {
 			}
 		}
 		catch (Exception e) {
-			_log.error("Unable to process message" + message, e);
+			_log.error("Unable to process message " + message, e);
 		}
 	}
 

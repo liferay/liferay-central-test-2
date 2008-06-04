@@ -26,10 +26,10 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.NamedThreadFactory;
 
+import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import java.util.List;
 
 /**
  * <a href="BaseDestination.java.html"><b><i>View Source</i></b></a>
@@ -57,11 +57,11 @@ public abstract class BaseDestination implements Destination {
 		close(false);
 	}
 
-    public synchronized void close(boolean force) {
-        doClose(force);
-    }
+	public synchronized void close(boolean force) {
+		doClose(force);
+	}
 
-    public String getName() {
+	public String getName() {
 		return _name;
 	}
 
@@ -72,18 +72,21 @@ public abstract class BaseDestination implements Destination {
 	protected void doClose(boolean force) {
 		if (!_threadPoolExecutor.isShutdown() &&
 			!_threadPoolExecutor.isTerminating()) {
-            if (!force) {
-			    _threadPoolExecutor.shutdown();
-            }
-            else {
-                List<Runnable> pendingTasks =_threadPoolExecutor.shutdownNow();
-                if (_log.isInfoEnabled()) {
-                    _log.info("The following " + pendingTasks.size() + "" +
-                        "tasks were not executed due " +
-                            "to shutown: " + pendingTasks);
-                }
-            }
-        }
+
+			if (!force) {
+				_threadPoolExecutor.shutdown();
+			}
+			else {
+				List<Runnable> pendingTasks = _threadPoolExecutor.shutdownNow();
+
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"The following " + pendingTasks.size() + " tasks " +
+							"were not executed due to shutown: " +
+								pendingTasks);
+				}
+			}
+		}
 	}
 
 	protected void doOpen() {

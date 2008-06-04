@@ -37,8 +37,7 @@ import org.springframework.beans.factory.DisposableBean;
  * @author Michael C. Han
  *
  */
-public class DefaultMessageBus
-        implements MessageBus, DisposableBean {
+public class DefaultMessageBus implements DisposableBean, MessageBus {
 
 	public synchronized void addDestination(Destination destination) {
 		_destinations.put(destination.getName(), destination);
@@ -138,17 +137,17 @@ public class DefaultMessageBus
         shutdown(false);
     }
 
-    public synchronized void shutdown(boolean force) {
-        for (Destination destination : _destinations.values()) {
-            destination.close(force);
-        }
-    }
+	public synchronized void shutdown(boolean force) {
+		for (Destination destination : _destinations.values()) {
+			destination.close(force);
+		}
+	}
 
-    public void destroy() throws Exception {
-        shutdown(true);
-    }
+	public void destroy() throws Exception {
+		shutdown(true);
+	}
 
-    protected String getNextResponseId() {
+	protected String getNextResponseId() {
 		return PortalUUIDUtil.generate();
 	}
 
@@ -157,9 +156,8 @@ public class DefaultMessageBus
 	}
 
 	protected Destination getResponseDestination(Destination destination) {
-
-        return new TempDestination(
-            getResponseDestination(destination.getName()));
+		return new TempDestination(
+			getResponseDestination(destination.getName()));
 	}
 
 	private static final String _RESPONSE_DESTINATION_SUFFIX = "/response";

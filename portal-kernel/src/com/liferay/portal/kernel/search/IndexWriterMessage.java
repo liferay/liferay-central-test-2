@@ -41,7 +41,7 @@ public class IndexWriterMessage {
 	public IndexWriterMessage() {
 	}
 
-    public IndexWriterMessage(String command, long companyId, String id) {
+	public IndexWriterMessage(String command, long companyId, String id) {
 		this(command, companyId, id, null);
 	}
 
@@ -90,17 +90,23 @@ public class IndexWriterMessage {
 		_doc = doc;
 	}
 
+	public String toString() {
+		StringMaker sm = new StringMaker();
 
-    public String toString() {
-        return "IndexWriterMessage{" +
-                "_command='" + _command + '\'' +
-                ", _companyId=" + _companyId +
-                ", _id='" + _id + '\'' +
-                ", _doc=" + _doc +
-                '}';
-    }
+		sm.append("{_command=");
+		sm.append(_command);
+		sm.append(", _companyId=");
+		sm.append(_companyId);
+		sm.append(", _id=");
+		sm.append(_id);
+		sm.append(", _doc=");
+		sm.append(_doc);
+		sm.append("}");
 
-    private String _command;
+		return sm.toString();
+	}
+
+	private String _command;
 	private long _companyId;
 	private String _id;
 	private Document _doc;
