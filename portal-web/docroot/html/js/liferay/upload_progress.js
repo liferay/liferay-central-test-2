@@ -19,6 +19,7 @@ function UploadProgress_animateBar(percent) {
 	this.count++
 
 	percent = Math.max(percent, this.currentPercent);
+
 	this.currentPercent = percent;
 
 	var barContainer = document.getElementById(this.uploadProgressId + "-bar-div");
@@ -35,13 +36,7 @@ function UploadProgress_animateBar(percent) {
 	}
 	else {
 		progressBar.style.width = "100%";
-
-		if (Liferay.Language) {
-			progressText.innerHTML = Liferay.Language.get("done");
-		}
-		else {
-			progressText.innerHTML = "Done";
-		}
+		progressText.innerHTML = Liferay.Language.get("done");
 	}
 }
 
@@ -59,12 +54,12 @@ function UploadProgress_startProgress() {
 	var barContainer = document.getElementById(this.uploadProgressId + "-bar-div");
 	var timeLeftText = barContainer.getElementsByTagName("span")[0];
 
-	var d = new Date();
+	var date = new Date();
 
 	this.count = 0;
 	this.currentPercent = 0;
 	this.currentSpeed = 0.01;
-	this.startTime = d.getTime();
+	this.startTime = date.getTime();
 
 	this.animateBar(0);
 
