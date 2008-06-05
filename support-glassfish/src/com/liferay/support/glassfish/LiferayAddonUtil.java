@@ -95,7 +95,7 @@ public class LiferayAddonUtil {
 			int len = 0;
 
 			while ((len = is.read(bytes)) > 0) {
-				out.write(bytes, 0, len);
+				os.write(bytes, 0, len);
 			}
 
 			is.close();
