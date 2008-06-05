@@ -650,15 +650,6 @@
 		>
 			<arg line="--type js -o ${js.to.file} ${js.from.file}" />
 		</java>
-
-		<!--
-		http://dean.edwards.name/download/#packer
-		http://homepages.nildram.co.uk/~9jack9/download/packer.wsh.zip
-		-->
-
-		<!--<exec executable="cmd">
-			<arg line="/c CScript /nologo ${project.dir}/tools/pack.wsf ${js.from.file} > ${js.to.file}" />
-		</exec>-->
 	</target>
 
 	<target name="build-javascript-portlet-cmd">
