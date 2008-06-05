@@ -319,10 +319,27 @@ public class BaseDeployer {
 				true);
 		}
 
+		if (Validator.isNotNull(portletExtTaglibDTD)) {
+			FileUtil.copyFile(
+				portletExtTaglibDTD,
+				srcFile + "/WEB-INF/tld/liferay-portlet-ext.tld", true);
+		}
+
+		if (Validator.isNotNull(securityTaglibDTD)) {
+			FileUtil.copyFile(
+				securityTaglibDTD,
+				srcFile + "/WEB-INF/tld/liferay-security.tld", true);
+		}
+
 		if (Validator.isNotNull(themeTaglibDTD)) {
 			FileUtil.copyFile(
 				themeTaglibDTD, srcFile + "/WEB-INF/tld/liferay-theme.tld",
 				true);
+		}
+
+		if (Validator.isNotNull(uiTaglibDTD)) {
+			FileUtil.copyFile(
+				uiTaglibDTD, srcFile + "/WEB-INF/tld/liferay-ui.tld", true);
 		}
 
 		if (Validator.isNotNull(utilTaglibDTD)) {
