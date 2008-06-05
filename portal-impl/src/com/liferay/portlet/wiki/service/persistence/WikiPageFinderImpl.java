@@ -52,10 +52,10 @@ import org.hibernate.Session;
  */
 public class WikiPageFinderImpl implements WikiPageFinder {
 
-	public static String COUNT_BY_CREATEDATE =
+	public static String COUNT_BY_CREATE_DATE =
 		WikiPageFinder.class.getName() + ".countByCreateDate";
 
-	public static String FIND_BY_CREATEDATE =
+	public static String FIND_BY_CREATE_DATE =
 		WikiPageFinder.class.getName() + ".findByCreateDate";
 
 	public static String FIND_BY_NO_ASSETS =
@@ -86,7 +86,7 @@ public class WikiPageFinderImpl implements WikiPageFinder {
 				createDateComparator = StringPool.LESS_THAN;
 			}
 
-			String sql = CustomSQLUtil.get(COUNT_BY_CREATEDATE);
+			String sql = CustomSQLUtil.get(COUNT_BY_CREATE_DATE);
 
 			sql = StringUtil.replace(
 				sql, "[$CREATE_DATE_COMPARATOR$]", createDateComparator);
@@ -145,7 +145,7 @@ public class WikiPageFinderImpl implements WikiPageFinder {
 				createDateComparator = StringPool.LESS_THAN;
 			}
 
-			String sql = CustomSQLUtil.get(FIND_BY_CREATEDATE);
+			String sql = CustomSQLUtil.get(FIND_BY_CREATE_DATE);
 
 			sql = StringUtil.replace(
 				sql, "[$CREATE_DATE_COMPARATOR$]", createDateComparator);
