@@ -67,6 +67,7 @@ import java.io.IOException;
 import java.io.StringReader;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -1647,7 +1648,7 @@ public class ServiceBuilder {
 		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
-		context.put("methods", javaClass.getMethods());
+		context.put("methods", _getMethods(javaClass));
 
 		// Content
 
@@ -1696,7 +1697,7 @@ public class ServiceBuilder {
 		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
-		context.put("methods", javaClass.getMethods());
+		context.put("methods", _getMethods(javaClass));
 
 		// Content
 
@@ -1742,7 +1743,7 @@ public class ServiceBuilder {
 		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
-		context.put("methods", javaClass.getMethods());
+		context.put("methods", _getMethods(javaClass));
 
 		// Content
 
@@ -1891,7 +1892,7 @@ public class ServiceBuilder {
 					_outputPath + "/service/http/" + entity.getName() +
 						"ServiceJSON.java");
 
-				JavaMethod[] methods = javaClass.getMethods();
+				JavaMethod[] methods = _getMethods(javaClass);
 
 				Set<String> jsonMethods = new LinkedHashSet<String>();
 
@@ -2098,7 +2099,7 @@ public class ServiceBuilder {
 		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
-		context.put("methods", javaClass.getMethods());
+		context.put("methods", _getMethods(javaClass));
 
 		// Content
 
@@ -2169,7 +2170,7 @@ public class ServiceBuilder {
 		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
-		context.put("methods", javaClass.getMethods());
+		context.put("methods", _getMethods(javaClass));
 
 		// Content
 
@@ -2388,7 +2389,7 @@ public class ServiceBuilder {
 
 		JavaClass javaClass = _getJavaClass(_outputPath + "/service/impl/" + entity.getName() + (sessionType != _SESSION_TYPE_REMOTE ? "Local" : "") + "ServiceImpl.java");
 
-		JavaMethod[] methods = javaClass.getMethods();
+		JavaMethod[] methods = _getMethods(javaClass);
 
 		if (sessionType == _SESSION_TYPE_LOCAL) {
 			if (javaClass.getSuperClass().getValue().endsWith(
@@ -2490,7 +2491,7 @@ public class ServiceBuilder {
 		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
-		context.put("methods", javaClass.getMethods());
+		context.put("methods", _getMethods(javaClass));
 		context.put("hasHttpMethods", new Boolean(_hasHttpMethods(javaClass)));
 
 		// Content
@@ -2541,7 +2542,7 @@ public class ServiceBuilder {
 		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
-		context.put("methods", javaClass.getMethods());
+		context.put("methods", _getMethods(javaClass));
 
 		// Content
 
@@ -2590,7 +2591,7 @@ public class ServiceBuilder {
 		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
-		context.put("methods", javaClass.getMethods());
+		context.put("methods", _getMethods(javaClass));
 
 		// Content
 
@@ -2619,7 +2620,7 @@ public class ServiceBuilder {
 		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
-		context.put("methods", javaClass.getMethods());
+		context.put("methods", _getMethods(javaClass));
 		context.put("sessionTypeName", _getSessionTypeName(sessionType));
 
 		// Content
@@ -3528,6 +3529,16 @@ public class ServiceBuilder {
 		return builder.getClassByName(className);
 	}
 
+	private JavaMethod[] _getMethods(JavaClass javaClass) {
+		JavaMethod[] methods = javaClass.getMethods();
+
+		for (JavaMethod method : methods) {
+			Arrays.sort(method.getExceptions());
+		}
+
+		return methods;
+	}
+
 	private String _getSessionTypeName(int sessionType) {
 		if (sessionType == _SESSION_TYPE_LOCAL) {
 			return "Local";
@@ -3542,7 +3553,7 @@ public class ServiceBuilder {
 	}
 
 	private boolean _hasHttpMethods(JavaClass javaClass) {
-		JavaMethod[] methods = javaClass.getMethods();
+		JavaMethod[] methods = _getMethods(javaClass);
 
 		for (int i = 0; i < methods.length; i++) {
 			JavaMethod javaMethod = methods[i];
