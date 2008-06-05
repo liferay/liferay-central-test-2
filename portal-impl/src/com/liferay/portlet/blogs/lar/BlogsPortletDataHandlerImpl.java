@@ -104,17 +104,13 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	public PortletDataHandlerControl[] getExportControls()
-		throws PortletDataException {
-
+	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
 			_entries, _comments, _ratings, _tags
 		};
 	}
 
-	public PortletDataHandlerControl[] getImportControls()
-		throws PortletDataException {
-
+	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {
 			_entries, _comments, _ratings, _tags
 		};
