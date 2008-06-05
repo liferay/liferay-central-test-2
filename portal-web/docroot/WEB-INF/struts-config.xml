@@ -1312,14 +1312,6 @@
 
 		<action path="/update_manager/view" forward="portlet.update_manager.view" />
 
-		<!-- Weather -->
-
-		<action path="/weather/edit" type="com.liferay.portlet.weather.action.EditPreferencesAction">
-			<forward name="portlet.weather.edit" path="portlet.weather.edit" />
-		</action>
-
-		<action path="/weather/view" forward="portlet.weather.view" />
-
 		<!-- Web Form -->
 
 		<action path="/web_form/captcha" type="com.liferay.portal.captcha.CaptchaPortletAction" />
@@ -1333,10 +1325,6 @@
 		<action path="/web_form/view" type="com.liferay.portlet.webform.action.ViewAction">
 			<forward name="portlet.web_form.view" path="portlet.web_form.view" />
 		</action>
-
-		<!-- Westminster Catechism -->
-
-		<action path="/westminster_catechism/view" forward="portlet.westminster_catechism.view" />
 
 		<!-- Wiki -->
 

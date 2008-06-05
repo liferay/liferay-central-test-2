@@ -851,66 +851,6 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>42</portlet-name>
-		<display-name>Pipeline</display-name>
-		<portlet-class>com.liferay.util.bridges.jsp.JSPPortlet</portlet-class>
-		<init-param>
-			<name>view-jsp</name>
-			<value>/html/portlet/pipeline/view.jsp</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-		</supports>
-		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
-	</portlet>
-	<portlet>
-		<portlet-name>43</portlet-name>
-		<display-name>Top Opportunities</display-name>
-		<portlet-class>com.liferay.util.bridges.jsp.JSPPortlet</portlet-class>
-		<init-param>
-			<name>view-jsp</name>
-			<value>/html/portlet/top_opportunities/view.jsp</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-		</supports>
-		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
-	</portlet>
-	<portlet>
-		<portlet-name>45</portlet-name>
-		<display-name>Westminster Catechism</display-name>
-		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
-		<init-param>
-			<name>view-action</name>
-			<value>/westminster_catechism/view</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-		</supports>
-		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
-	</portlet>
-	<portlet>
 		<description xml:lang="EN">Portlet reusing com.liferay.portlet.iframe.IFramePortlet with set preferences</description>
 		<portlet-name>46</portlet-name>
 		<display-name>Gospel for Asia</display-name>

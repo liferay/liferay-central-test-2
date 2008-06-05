@@ -179,21 +179,6 @@
 		<include>true</include>
 	</portlet>
 	<portlet>
-		<portlet-name>42</portlet-name>
-		<struts-path>pipeline</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
-		<portlet-name>43</portlet-name>
-		<struts-path>top_opportunities</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
-		<portlet-name>45</portlet-name>
-		<struts-path>westminster_catechism</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
 		<portlet-name>46</portlet-name>
 		<struts-path>gospel_for_asia</struts-path>
 		<include>true</include>

@@ -415,36 +415,6 @@
 		<css-class-wrapper>portlet-rss</css-class-wrapper>
 	</portlet>
 	<portlet>
-		<portlet-name>42</portlet-name>
-		<icon>/html/portlet/pipeline/icon.png</icon>
-		<struts-path>pipeline</struts-path>
-		<restore-current-view>false</restore-current-view>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
-		<include>false</include>
-	</portlet>
-	<portlet>
-		<portlet-name>43</portlet-name>
-		<icon>/html/portlet/top_opportunities/icon.png</icon>
-		<struts-path>top_opportunities</struts-path>
-		<restore-current-view>false</restore-current-view>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
-		<include>false</include>
-	</portlet>
-	<portlet>
-		<portlet-name>45</portlet-name>
-		<icon>/html/portlet/westminster_catechism/icon.png</icon>
-		<struts-path>westminster_catechism</struts-path>
-		<use-default-template>false</use-default-template>
-		<restore-current-view>false</restore-current-view>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
-	</portlet>
-	<portlet>
 		<portlet-name>46</portlet-name>
 		<icon>/html/portlet/gospel_for_asia/icon.png</icon>
 		<struts-path>gospel_for_asia</struts-path>

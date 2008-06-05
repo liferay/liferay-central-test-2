@@ -1077,32 +1077,12 @@
 		<put name="portlet_content" value="/portlet/update_manager/view.jsp" />
 	</definition>
 
-	<!-- Weather -->
-
-	<definition name="portlet.weather" extends="portlet" />
-
-	<definition name="portlet.weather.edit" extends="portlet.weather">
-		<put name="portlet_content" value="/portlet/weather/edit.jsp" />
-	</definition>
-
-	<definition name="portlet.weather.view" extends="portlet.weather">
-		<put name="portlet_content" value="/portlet/weather/view.jsp" />
-	</definition>
-
 	<!-- Web Form -->
 
 	<definition name="portlet.web_form" extends="portlet" />
 
 	<definition name="portlet.web_form.view" extends="portlet.web_form">
 		<put name="portlet_content" value="/portlet/web_form/view.jsp" />
-	</definition>
-
-	<!-- Westminster Catechism -->
-
-	<definition name="portlet.westminster_catechism" extends="portlet" />
-
-	<definition name="portlet.westminster_catechism.view" extends="portlet.westminster_catechism">
-		<put name="portlet_content" value="/portlet/westminster_catechism/view.jsp" />
 	</definition>
 
 	<!-- Wiki -->
