@@ -80,15 +80,15 @@ public interface ResourceLocalService {
 		java.lang.String name, long primKey,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void addModelResources(long companyId, long groupId, long userId,
 		java.lang.String name, java.lang.String primKey,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Resource addResource(long companyId,
 		java.lang.String name, int scope, java.lang.String primKey)
@@ -96,31 +96,31 @@ public interface ResourceLocalService {
 
 	public void addResources(long companyId, long groupId,
 		java.lang.String name, boolean portletActions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void addResources(long companyId, long groupId, long userId,
 		java.lang.String name, long primKey, boolean portletActions,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void addResources(long companyId, long groupId, long userId,
 		java.lang.String name, java.lang.String primKey,
 		boolean portletActions, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteResource(long companyId, java.lang.String name,
 		int scope, long primKey)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteResource(long companyId, java.lang.String name,
 		int scope, java.lang.String primKey)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteResources(java.lang.String name)
 		throws com.liferay.portal.SystemException;
@@ -132,6 +132,6 @@ public interface ResourceLocalService {
 
 	public com.liferay.portal.model.Resource getResource(long companyId,
 		java.lang.String name, int scope, java.lang.String primKey)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

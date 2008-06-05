@@ -85,8 +85,8 @@ public interface JournalTemplateLocalService {
 		java.lang.String langType, boolean cacheable, boolean smallImage,
 		java.lang.String smallImageURL, java.io.File smallFile,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		java.lang.String uuid, long userId, java.lang.String templateId,
@@ -96,8 +96,8 @@ public interface JournalTemplateLocalService {
 		boolean cacheable, boolean smallImage, java.lang.String smallImageURL,
 		java.io.File smallFile, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		long userId, java.lang.String templateId, boolean autoTemplateId,
@@ -107,8 +107,8 @@ public interface JournalTemplateLocalService {
 		java.lang.String smallImageURL, java.io.File smallFile,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		java.lang.String uuid, long userId, java.lang.String templateId,
@@ -120,8 +120,8 @@ public interface JournalTemplateLocalService {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalTemplate addTemplateToGroup(
 		java.lang.String uuid, long userId, java.lang.String templateId,
@@ -133,49 +133,49 @@ public interface JournalTemplateLocalService {
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void addTemplateResources(long groupId, java.lang.String templateId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void addTemplateResources(
 		com.liferay.portlet.journal.model.JournalTemplate template,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void addTemplateResources(long groupId, java.lang.String templateId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void addTemplateResources(
 		com.liferay.portlet.journal.model.JournalTemplate template,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void checkNewLine(long groupId, java.lang.String templateId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteTemplate(long groupId, java.lang.String templateId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteTemplate(
 		com.liferay.portlet.journal.model.JournalTemplate template)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteTemplates(long groupId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalTemplate> getStructureTemplates(
 		long groupId, java.lang.String structureId)
@@ -190,18 +190,18 @@ public interface JournalTemplateLocalService {
 
 	public com.liferay.portlet.journal.model.JournalTemplate getTemplate(
 		long id)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalTemplate getTemplate(
 		long groupId, java.lang.String templateId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalTemplate getTemplateBySmallImageId(
 		long smallImageId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalTemplate> getTemplates()
 		throws com.liferay.portal.SystemException;
@@ -250,6 +250,6 @@ public interface JournalTemplateLocalService {
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
 		java.lang.String langType, boolean cacheable, boolean smallImage,
 		java.lang.String smallImageURL, java.io.File smallFile)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

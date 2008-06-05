@@ -32,8 +32,8 @@ public interface ImagePersistence {
 	public com.liferay.portal.model.Image create(long imageId);
 
 	public com.liferay.portal.model.Image remove(long imageId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchImageException;
+		throws com.liferay.portal.NoSuchImageException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Image remove(
 		com.liferay.portal.model.Image image)
@@ -68,8 +68,8 @@ public interface ImagePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Image findByPrimaryKey(long imageId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchImageException;
+		throws com.liferay.portal.NoSuchImageException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Image fetchByPrimaryKey(long imageId)
 		throws com.liferay.portal.SystemException;
@@ -86,19 +86,19 @@ public interface ImagePersistence {
 
 	public com.liferay.portal.model.Image findBySize_First(int size,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchImageException;
+		throws com.liferay.portal.NoSuchImageException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Image findBySize_Last(int size,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchImageException;
+		throws com.liferay.portal.NoSuchImageException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Image[] findBySize_PrevAndNext(
 		long imageId, int size,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchImageException;
+		throws com.liferay.portal.NoSuchImageException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Image> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

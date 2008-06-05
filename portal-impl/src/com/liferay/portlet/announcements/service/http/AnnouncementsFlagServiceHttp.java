@@ -74,8 +74,8 @@ import com.liferay.portlet.announcements.service.AnnouncementsFlagServiceUtil;
 public class AnnouncementsFlagServiceHttp {
 	public static void addFlag(HttpPrincipal httpPrincipal, long entryId,
 		int value)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(entryId);
 
@@ -88,12 +88,12 @@ public class AnnouncementsFlagServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -108,8 +108,8 @@ public class AnnouncementsFlagServiceHttp {
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag getFlag(
 		HttpPrincipal httpPrincipal, long entryId, int value)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(entryId);
 
@@ -124,12 +124,12 @@ public class AnnouncementsFlagServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -145,8 +145,8 @@ public class AnnouncementsFlagServiceHttp {
 	}
 
 	public static void deleteFlag(HttpPrincipal httpPrincipal, long flagId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(flagId);
 
@@ -157,12 +157,12 @@ public class AnnouncementsFlagServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);

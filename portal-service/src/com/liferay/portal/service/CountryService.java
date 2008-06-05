@@ -52,8 +52,8 @@ public interface CountryService {
 	public com.liferay.portal.model.Country addCountry(java.lang.String name,
 		java.lang.String a2, java.lang.String a3, java.lang.String number,
 		java.lang.String idd, boolean active)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Country> getCountries()
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
@@ -63,6 +63,6 @@ public interface CountryService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Country getCountry(long countryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

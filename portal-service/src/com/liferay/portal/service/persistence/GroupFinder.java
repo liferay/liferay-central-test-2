@@ -42,8 +42,8 @@ public interface GroupFinder {
 
 	public com.liferay.portal.model.Group findByC_N(long companyId,
 		java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchGroupException;
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Group> findByC_N_D(
 		long companyId, java.lang.String name, java.lang.String description,

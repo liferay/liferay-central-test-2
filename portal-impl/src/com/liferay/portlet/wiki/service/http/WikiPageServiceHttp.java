@@ -78,8 +78,8 @@ public class WikiPageServiceHttp {
 		HttpPrincipal httpPrincipal, long nodeId, java.lang.String title,
 		javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(nodeId);
 
@@ -112,12 +112,12 @@ public class WikiPageServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -135,8 +135,8 @@ public class WikiPageServiceHttp {
 	public static void addPageAttachments(HttpPrincipal httpPrincipal,
 		long nodeId, java.lang.String title,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(nodeId);
 
@@ -160,12 +160,12 @@ public class WikiPageServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -180,8 +180,8 @@ public class WikiPageServiceHttp {
 
 	public static void deletePage(HttpPrincipal httpPrincipal, long nodeId,
 		java.lang.String title)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(nodeId);
 
@@ -198,12 +198,12 @@ public class WikiPageServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -218,8 +218,8 @@ public class WikiPageServiceHttp {
 
 	public static void deletePageAttachment(HttpPrincipal httpPrincipal,
 		long nodeId, java.lang.String title, java.lang.String fileName)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(nodeId);
 
@@ -243,12 +243,12 @@ public class WikiPageServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -263,8 +263,8 @@ public class WikiPageServiceHttp {
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> getNodePages(
 		HttpPrincipal httpPrincipal, long nodeId, int max)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(nodeId);
 
@@ -279,12 +279,12 @@ public class WikiPageServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -303,8 +303,8 @@ public class WikiPageServiceHttp {
 		HttpPrincipal httpPrincipal, long nodeId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(nodeId);
 
@@ -349,12 +349,12 @@ public class WikiPageServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -371,8 +371,8 @@ public class WikiPageServiceHttp {
 
 	public static com.liferay.portlet.wiki.model.WikiPage getPage(
 		HttpPrincipal httpPrincipal, long nodeId, java.lang.String title)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(nodeId);
 
@@ -391,12 +391,12 @@ public class WikiPageServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -414,8 +414,8 @@ public class WikiPageServiceHttp {
 	public static com.liferay.portlet.wiki.model.WikiPage getPage(
 		HttpPrincipal httpPrincipal, long nodeId, java.lang.String title,
 		double version)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(nodeId);
 
@@ -436,12 +436,12 @@ public class WikiPageServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -461,8 +461,8 @@ public class WikiPageServiceHttp {
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL,
 		java.util.Locale locale)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
 
@@ -521,12 +521,12 @@ public class WikiPageServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -545,8 +545,8 @@ public class WikiPageServiceHttp {
 		java.lang.String title, java.lang.String newTitle,
 		javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(nodeId);
 
@@ -585,12 +585,12 @@ public class WikiPageServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -607,8 +607,8 @@ public class WikiPageServiceHttp {
 		HttpPrincipal httpPrincipal, long nodeId, java.lang.String title,
 		double version, javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(nodeId);
 
@@ -645,12 +645,12 @@ public class WikiPageServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -667,8 +667,8 @@ public class WikiPageServiceHttp {
 
 	public static void subscribePage(HttpPrincipal httpPrincipal, long nodeId,
 		java.lang.String title)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(nodeId);
 
@@ -685,12 +685,12 @@ public class WikiPageServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -705,8 +705,8 @@ public class WikiPageServiceHttp {
 
 	public static void unsubscribePage(HttpPrincipal httpPrincipal,
 		long nodeId, java.lang.String title)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(nodeId);
 
@@ -723,12 +723,12 @@ public class WikiPageServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -747,8 +747,8 @@ public class WikiPageServiceHttp {
 		java.lang.String parentTitle, java.lang.String redirectTitle,
 		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(nodeId);
 
@@ -816,12 +816,12 @@ public class WikiPageServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);

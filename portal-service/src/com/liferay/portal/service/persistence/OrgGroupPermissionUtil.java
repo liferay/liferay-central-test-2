@@ -36,8 +36,8 @@ public class OrgGroupPermissionUtil {
 
 	public static com.liferay.portal.model.OrgGroupPermission remove(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPK orgGroupPermissionPK)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrgGroupPermissionException {
+		throws com.liferay.portal.NoSuchOrgGroupPermissionException,
+			com.liferay.portal.SystemException {
 		return getPersistence().remove(orgGroupPermissionPK);
 	}
 
@@ -83,8 +83,8 @@ public class OrgGroupPermissionUtil {
 
 	public static com.liferay.portal.model.OrgGroupPermission findByPrimaryKey(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPK orgGroupPermissionPK)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrgGroupPermissionException {
+		throws com.liferay.portal.NoSuchOrgGroupPermissionException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByPrimaryKey(orgGroupPermissionPK);
 	}
 
@@ -114,23 +114,23 @@ public class OrgGroupPermissionUtil {
 
 	public static com.liferay.portal.model.OrgGroupPermission findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrgGroupPermissionException {
+		throws com.liferay.portal.NoSuchOrgGroupPermissionException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId_First(groupId, obc);
 	}
 
 	public static com.liferay.portal.model.OrgGroupPermission findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrgGroupPermissionException {
+		throws com.liferay.portal.NoSuchOrgGroupPermissionException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId_Last(groupId, obc);
 	}
 
 	public static com.liferay.portal.model.OrgGroupPermission[] findByGroupId_PrevAndNext(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPK orgGroupPermissionPK,
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrgGroupPermissionException {
+		throws com.liferay.portal.NoSuchOrgGroupPermissionException,
+			com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByGroupId_PrevAndNext(orgGroupPermissionPK, groupId, obc);
 	}
@@ -155,23 +155,23 @@ public class OrgGroupPermissionUtil {
 
 	public static com.liferay.portal.model.OrgGroupPermission findByPermissionId_First(
 		long permissionId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrgGroupPermissionException {
+		throws com.liferay.portal.NoSuchOrgGroupPermissionException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByPermissionId_First(permissionId, obc);
 	}
 
 	public static com.liferay.portal.model.OrgGroupPermission findByPermissionId_Last(
 		long permissionId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrgGroupPermissionException {
+		throws com.liferay.portal.NoSuchOrgGroupPermissionException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByPermissionId_Last(permissionId, obc);
 	}
 
 	public static com.liferay.portal.model.OrgGroupPermission[] findByPermissionId_PrevAndNext(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPK orgGroupPermissionPK,
 		long permissionId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrgGroupPermissionException {
+		throws com.liferay.portal.NoSuchOrgGroupPermissionException,
+			com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByPermissionId_PrevAndNext(orgGroupPermissionPK,
 			permissionId, obc);

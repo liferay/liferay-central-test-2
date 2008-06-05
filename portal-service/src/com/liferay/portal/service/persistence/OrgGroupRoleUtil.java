@@ -36,8 +36,8 @@ public class OrgGroupRoleUtil {
 
 	public static com.liferay.portal.model.OrgGroupRole remove(
 		com.liferay.portal.service.persistence.OrgGroupRolePK orgGroupRolePK)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrgGroupRoleException {
+		throws com.liferay.portal.NoSuchOrgGroupRoleException,
+			com.liferay.portal.SystemException {
 		return getPersistence().remove(orgGroupRolePK);
 	}
 
@@ -83,8 +83,8 @@ public class OrgGroupRoleUtil {
 
 	public static com.liferay.portal.model.OrgGroupRole findByPrimaryKey(
 		com.liferay.portal.service.persistence.OrgGroupRolePK orgGroupRolePK)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrgGroupRoleException {
+		throws com.liferay.portal.NoSuchOrgGroupRoleException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByPrimaryKey(orgGroupRolePK);
 	}
 
@@ -114,23 +114,23 @@ public class OrgGroupRoleUtil {
 
 	public static com.liferay.portal.model.OrgGroupRole findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrgGroupRoleException {
+		throws com.liferay.portal.NoSuchOrgGroupRoleException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId_First(groupId, obc);
 	}
 
 	public static com.liferay.portal.model.OrgGroupRole findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrgGroupRoleException {
+		throws com.liferay.portal.NoSuchOrgGroupRoleException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId_Last(groupId, obc);
 	}
 
 	public static com.liferay.portal.model.OrgGroupRole[] findByGroupId_PrevAndNext(
 		com.liferay.portal.service.persistence.OrgGroupRolePK orgGroupRolePK,
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrgGroupRoleException {
+		throws com.liferay.portal.NoSuchOrgGroupRoleException,
+			com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByGroupId_PrevAndNext(orgGroupRolePK, groupId, obc);
 	}
@@ -155,23 +155,23 @@ public class OrgGroupRoleUtil {
 
 	public static com.liferay.portal.model.OrgGroupRole findByRoleId_First(
 		long roleId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrgGroupRoleException {
+		throws com.liferay.portal.NoSuchOrgGroupRoleException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByRoleId_First(roleId, obc);
 	}
 
 	public static com.liferay.portal.model.OrgGroupRole findByRoleId_Last(
 		long roleId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrgGroupRoleException {
+		throws com.liferay.portal.NoSuchOrgGroupRoleException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByRoleId_Last(roleId, obc);
 	}
 
 	public static com.liferay.portal.model.OrgGroupRole[] findByRoleId_PrevAndNext(
 		com.liferay.portal.service.persistence.OrgGroupRolePK orgGroupRolePK,
 		long roleId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrgGroupRoleException {
+		throws com.liferay.portal.NoSuchOrgGroupRoleException,
+			com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByRoleId_PrevAndNext(orgGroupRolePK, roleId, obc);
 	}

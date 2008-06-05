@@ -34,8 +34,8 @@ public interface MembershipRequestPersistence {
 
 	public com.liferay.portal.model.MembershipRequest remove(
 		long membershipRequestId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchMembershipRequestException;
+		throws com.liferay.portal.NoSuchMembershipRequestException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.MembershipRequest remove(
 		com.liferay.portal.model.MembershipRequest membershipRequest)
@@ -71,8 +71,8 @@ public interface MembershipRequestPersistence {
 
 	public com.liferay.portal.model.MembershipRequest findByPrimaryKey(
 		long membershipRequestId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchMembershipRequestException;
+		throws com.liferay.portal.NoSuchMembershipRequestException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.MembershipRequest fetchByPrimaryKey(
 		long membershipRequestId) throws com.liferay.portal.SystemException;
@@ -91,19 +91,19 @@ public interface MembershipRequestPersistence {
 
 	public com.liferay.portal.model.MembershipRequest findByGroupId_First(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchMembershipRequestException;
+		throws com.liferay.portal.NoSuchMembershipRequestException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.MembershipRequest findByGroupId_Last(
 		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchMembershipRequestException;
+		throws com.liferay.portal.NoSuchMembershipRequestException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.MembershipRequest[] findByGroupId_PrevAndNext(
 		long membershipRequestId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchMembershipRequestException;
+		throws com.liferay.portal.NoSuchMembershipRequestException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.MembershipRequest> findByUserId(
 		long userId) throws com.liferay.portal.SystemException;
@@ -119,19 +119,19 @@ public interface MembershipRequestPersistence {
 
 	public com.liferay.portal.model.MembershipRequest findByUserId_First(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchMembershipRequestException;
+		throws com.liferay.portal.NoSuchMembershipRequestException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.MembershipRequest findByUserId_Last(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchMembershipRequestException;
+		throws com.liferay.portal.NoSuchMembershipRequestException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.MembershipRequest[] findByUserId_PrevAndNext(
 		long membershipRequestId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchMembershipRequestException;
+		throws com.liferay.portal.NoSuchMembershipRequestException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.MembershipRequest> findByG_S(
 		long groupId, int statusId) throws com.liferay.portal.SystemException;
@@ -148,20 +148,20 @@ public interface MembershipRequestPersistence {
 	public com.liferay.portal.model.MembershipRequest findByG_S_First(
 		long groupId, int statusId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchMembershipRequestException;
+		throws com.liferay.portal.NoSuchMembershipRequestException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.MembershipRequest findByG_S_Last(
 		long groupId, int statusId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchMembershipRequestException;
+		throws com.liferay.portal.NoSuchMembershipRequestException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.MembershipRequest[] findByG_S_PrevAndNext(
 		long membershipRequestId, long groupId, int statusId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchMembershipRequestException;
+		throws com.liferay.portal.NoSuchMembershipRequestException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.MembershipRequest> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

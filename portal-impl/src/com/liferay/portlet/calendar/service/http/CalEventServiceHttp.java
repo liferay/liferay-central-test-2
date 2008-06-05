@@ -84,8 +84,8 @@ public class CalEventServiceHttp {
 		com.liferay.portal.kernel.cal.Recurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
 
@@ -171,12 +171,12 @@ public class CalEventServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -202,8 +202,8 @@ public class CalEventServiceHttp {
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
 
@@ -297,12 +297,12 @@ public class CalEventServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -318,8 +318,8 @@ public class CalEventServiceHttp {
 	}
 
 	public static void deleteEvent(HttpPrincipal httpPrincipal, long eventId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(eventId);
 
@@ -330,12 +330,12 @@ public class CalEventServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -350,8 +350,8 @@ public class CalEventServiceHttp {
 
 	public static java.io.File exportEvent(HttpPrincipal httpPrincipal,
 		long eventId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(eventId);
 
@@ -364,12 +364,12 @@ public class CalEventServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -386,8 +386,8 @@ public class CalEventServiceHttp {
 
 	public static java.io.File exportGroupEvents(HttpPrincipal httpPrincipal,
 		long plid, java.lang.String fileName)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
 
@@ -406,12 +406,12 @@ public class CalEventServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -428,8 +428,8 @@ public class CalEventServiceHttp {
 
 	public static com.liferay.portlet.calendar.model.CalEvent getEvent(
 		HttpPrincipal httpPrincipal, long eventId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(eventId);
 
@@ -442,12 +442,12 @@ public class CalEventServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -464,8 +464,8 @@ public class CalEventServiceHttp {
 
 	public static void importICal4j(HttpPrincipal httpPrincipal, long plid,
 		java.io.File file)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
 
@@ -482,12 +482,12 @@ public class CalEventServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -509,8 +509,8 @@ public class CalEventServiceHttp {
 		java.lang.String type, boolean repeating,
 		com.liferay.portal.kernel.cal.Recurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(eventId);
 
@@ -591,12 +591,12 @@ public class CalEventServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);

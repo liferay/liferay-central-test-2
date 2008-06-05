@@ -51,10 +51,10 @@ package com.liferay.portlet.messageboards.service;
 public interface MBBanService {
 	public com.liferay.portlet.messageboards.model.MBBan addBan(long plid,
 		long banUserId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteBan(long plid, long banUserId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

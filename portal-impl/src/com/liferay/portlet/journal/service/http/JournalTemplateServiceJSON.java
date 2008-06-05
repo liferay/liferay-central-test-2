@@ -73,15 +73,15 @@ import org.json.JSONObject;
  */
 public class JournalTemplateServiceJSON {
 	public static void deleteTemplate(long groupId, java.lang.String templateId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		JournalTemplateServiceUtil.deleteTemplate(groupId, templateId);
 	}
 
 	public static JSONArray getStructureTemplates(long groupId,
 		java.lang.String structureId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.journal.model.JournalTemplate> returnValue =
 			JournalTemplateServiceUtil.getStructureTemplates(groupId,
 				structureId);
@@ -91,8 +91,8 @@ public class JournalTemplateServiceJSON {
 
 	public static JSONObject getTemplate(long groupId,
 		java.lang.String templateId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalTemplate returnValue = JournalTemplateServiceUtil.getTemplate(groupId,
 				templateId);
 

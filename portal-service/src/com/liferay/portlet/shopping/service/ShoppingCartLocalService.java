@@ -86,8 +86,8 @@ public interface ShoppingCartLocalService {
 
 	public com.liferay.portlet.shopping.model.ShoppingCart getCart(
 		long userId, long groupId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public java.util.Map<com.liferay.portlet.shopping.model.ShoppingCartItem, Integer> getItems(
 		long groupId, java.lang.String itemIds)
@@ -96,6 +96,6 @@ public interface ShoppingCartLocalService {
 	public com.liferay.portlet.shopping.model.ShoppingCart updateCart(
 		long userId, long groupId, java.lang.String itemIds,
 		java.lang.String couponCodes, int altShipping, boolean insure)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

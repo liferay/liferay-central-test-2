@@ -77,8 +77,8 @@ public class IGFolderServiceHttp {
 		HttpPrincipal httpPrincipal, long plid, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
 
@@ -113,12 +113,12 @@ public class IGFolderServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -138,8 +138,8 @@ public class IGFolderServiceHttp {
 		java.lang.String name, java.lang.String description,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
 
@@ -182,12 +182,12 @@ public class IGFolderServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -207,8 +207,8 @@ public class IGFolderServiceHttp {
 		long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
 
@@ -245,12 +245,12 @@ public class IGFolderServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				if (e instanceof java.rmi.RemoteException) {
@@ -270,8 +270,8 @@ public class IGFolderServiceHttp {
 	}
 
 	public static void deleteFolder(HttpPrincipal httpPrincipal, long folderId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -282,12 +282,12 @@ public class IGFolderServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -302,8 +302,8 @@ public class IGFolderServiceHttp {
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder getFolder(
 		HttpPrincipal httpPrincipal, long folderId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -316,12 +316,12 @@ public class IGFolderServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -339,8 +339,8 @@ public class IGFolderServiceHttp {
 	public static com.liferay.portlet.imagegallery.model.IGFolder getFolder(
 		HttpPrincipal httpPrincipal, long groupId, long parentFolderId,
 		java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
 
@@ -362,12 +362,12 @@ public class IGFolderServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -384,8 +384,8 @@ public class IGFolderServiceHttp {
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> getFolders(
 		HttpPrincipal httpPrincipal, long groupId, long parentFolderId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
 
@@ -400,12 +400,12 @@ public class IGFolderServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -424,8 +424,8 @@ public class IGFolderServiceHttp {
 		HttpPrincipal httpPrincipal, long folderId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		boolean mergeWithParentFolder)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -457,12 +457,12 @@ public class IGFolderServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);

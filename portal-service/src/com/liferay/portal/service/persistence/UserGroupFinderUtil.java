@@ -38,8 +38,8 @@ public class UserGroupFinderUtil {
 
 	public static com.liferay.portal.model.UserGroup findByC_N(long companyId,
 		java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserGroupException {
+		throws com.liferay.portal.NoSuchUserGroupException,
+			com.liferay.portal.SystemException {
 		return getFinder().findByC_N(companyId, name);
 	}
 

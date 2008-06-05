@@ -80,60 +80,60 @@ public interface ExpandoColumnLocalService {
 
 	public com.liferay.portlet.expando.model.ExpandoColumn addColumn(
 		long tableId, java.lang.String name, int type)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteColumn(long columnId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteColumn(long tableId, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteColumn(java.lang.String className,
 		java.lang.String tableName, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteColumn(long classNameId, java.lang.String tableName,
 		java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteColumns(long tableId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteColumns(java.lang.String className,
 		java.lang.String tableName)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteColumns(long classNameId, java.lang.String tableName)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.expando.model.ExpandoColumn getColumn(
 		long columnId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.expando.model.ExpandoColumn getColumn(
 		long tableId, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.expando.model.ExpandoColumn getColumn(
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.expando.model.ExpandoColumn getColumn(
 		long classNameId, java.lang.String tableName, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> getColumns(
 		long tableId) throws com.liferay.portal.SystemException;
@@ -157,13 +157,13 @@ public interface ExpandoColumnLocalService {
 
 	public com.liferay.portlet.expando.model.ExpandoColumn getDefaultTableColumn(
 		java.lang.String className, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.expando.model.ExpandoColumn getDefaultTableColumn(
 		long classNameId, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> getDefaultTableColumns(
 		java.lang.String className) throws com.liferay.portal.SystemException;
@@ -179,6 +179,6 @@ public interface ExpandoColumnLocalService {
 
 	public com.liferay.portlet.expando.model.ExpandoColumn updateColumn(
 		long columnId, java.lang.String name, int type)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

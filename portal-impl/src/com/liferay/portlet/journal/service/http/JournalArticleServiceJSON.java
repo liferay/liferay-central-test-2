@@ -73,8 +73,8 @@ import org.json.JSONObject;
 public class JournalArticleServiceJSON {
 	public static JSONObject getArticle(long groupId,
 		java.lang.String articleId, double version)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.getArticle(groupId,
 				articleId, version);
 
@@ -83,15 +83,15 @@ public class JournalArticleServiceJSON {
 
 	public static void removeArticleLocale(long companyId,
 		java.lang.String languageId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		JournalArticleServiceUtil.removeArticleLocale(companyId, languageId);
 	}
 
 	public static JSONObject removeArticleLocale(long groupId,
 		java.lang.String articleId, double version, java.lang.String languageId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.removeArticleLocale(groupId,
 				articleId, version, languageId);
 
@@ -100,8 +100,8 @@ public class JournalArticleServiceJSON {
 
 	public static JSONObject updateContent(long groupId,
 		java.lang.String articleId, double version, java.lang.String content)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.updateContent(groupId,
 				articleId, version, content);
 

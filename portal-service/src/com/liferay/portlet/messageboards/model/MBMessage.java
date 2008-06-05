@@ -71,16 +71,16 @@ public interface MBMessage extends MBMessageModel {
 	public void setAttachmentsDir(java.lang.String attachmentsDir);
 
 	public java.lang.String[] getAttachmentsFiles()
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public double getPriority()
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void setPriority(double priority);
 
 	public java.lang.String[] getTagsEntries()
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

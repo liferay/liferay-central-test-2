@@ -79,13 +79,13 @@ public interface JournalArticleResourceLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public void deleteArticleResource(long groupId, java.lang.String articleId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalArticleResource getArticleResource(
 		long articleResourcePrimKey)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public long getArticleResourcePrimKey(long groupId,
 		java.lang.String articleId) throws com.liferay.portal.SystemException;

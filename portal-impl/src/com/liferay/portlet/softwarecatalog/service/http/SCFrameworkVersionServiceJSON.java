@@ -76,8 +76,8 @@ public class SCFrameworkVersionServiceJSON {
 		java.lang.String name, java.lang.String url, boolean active,
 		int priority, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion returnValue =
 			SCFrameworkVersionServiceUtil.addFrameworkVersion(plid, name, url,
 				active, priority, addCommunityPermissions, addGuestPermissions);
@@ -89,8 +89,8 @@ public class SCFrameworkVersionServiceJSON {
 		java.lang.String name, java.lang.String url, boolean active,
 		int priority, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion returnValue =
 			SCFrameworkVersionServiceUtil.addFrameworkVersion(plid, name, url,
 				active, priority, communityPermissions, guestPermissions);
@@ -99,14 +99,14 @@ public class SCFrameworkVersionServiceJSON {
 	}
 
 	public static void deleteFrameworkVersion(long frameworkVersionId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		SCFrameworkVersionServiceUtil.deleteFrameworkVersion(frameworkVersionId);
 	}
 
 	public static JSONObject getFrameworkVersion(long frameworkVersionId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion returnValue =
 			SCFrameworkVersionServiceUtil.getFrameworkVersion(frameworkVersionId);
 
@@ -134,8 +134,8 @@ public class SCFrameworkVersionServiceJSON {
 	public static JSONObject updateFrameworkVersion(long frameworkVersionId,
 		java.lang.String name, java.lang.String url, boolean active,
 		int priority)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion returnValue =
 			SCFrameworkVersionServiceUtil.updateFrameworkVersion(frameworkVersionId,
 				name, url, active, priority);

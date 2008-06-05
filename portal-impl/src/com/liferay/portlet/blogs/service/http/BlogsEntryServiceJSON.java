@@ -73,14 +73,14 @@ import org.json.JSONObject;
  */
 public class BlogsEntryServiceJSON {
 	public static void deleteEntry(long entryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		BlogsEntryServiceUtil.deleteEntry(entryId);
 	}
 
 	public static JSONArray getCompanyEntries(long companyId, int max)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> returnValue = BlogsEntryServiceUtil.getCompanyEntries(companyId,
 				max);
 
@@ -88,16 +88,16 @@ public class BlogsEntryServiceJSON {
 	}
 
 	public static JSONObject getEntry(long entryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.getEntry(entryId);
 
 		return BlogsEntryJSONSerializer.toJSONObject(returnValue);
 	}
 
 	public static JSONObject getEntry(long groupId, java.lang.String urlTitle)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.getEntry(groupId,
 				urlTitle);
 
@@ -105,8 +105,8 @@ public class BlogsEntryServiceJSON {
 	}
 
 	public static JSONArray getGroupEntries(long groupId, int max)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> returnValue = BlogsEntryServiceUtil.getGroupEntries(groupId,
 				max);
 
@@ -114,8 +114,8 @@ public class BlogsEntryServiceJSON {
 	}
 
 	public static JSONArray getOrganizationEntries(long organizationId, int max)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> returnValue = BlogsEntryServiceUtil.getOrganizationEntries(organizationId,
 				max);
 

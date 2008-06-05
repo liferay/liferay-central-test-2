@@ -73,8 +73,8 @@ import com.liferay.portlet.polls.service.PollsVoteServiceUtil;
 public class PollsVoteServiceHttp {
 	public static com.liferay.portlet.polls.model.PollsVote addVote(
 		HttpPrincipal httpPrincipal, long questionId, long choiceId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(questionId);
 
@@ -89,12 +89,12 @@ public class PollsVoteServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);

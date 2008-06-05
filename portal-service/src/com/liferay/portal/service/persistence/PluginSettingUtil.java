@@ -36,8 +36,8 @@ public class PluginSettingUtil {
 
 	public static com.liferay.portal.model.PluginSetting remove(
 		long pluginSettingId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPluginSettingException {
+		throws com.liferay.portal.NoSuchPluginSettingException,
+			com.liferay.portal.SystemException {
 		return getPersistence().remove(pluginSettingId);
 	}
 
@@ -83,8 +83,8 @@ public class PluginSettingUtil {
 
 	public static com.liferay.portal.model.PluginSetting findByPrimaryKey(
 		long pluginSettingId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPluginSettingException {
+		throws com.liferay.portal.NoSuchPluginSettingException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByPrimaryKey(pluginSettingId);
 	}
 
@@ -113,31 +113,31 @@ public class PluginSettingUtil {
 
 	public static com.liferay.portal.model.PluginSetting findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPluginSettingException {
+		throws com.liferay.portal.NoSuchPluginSettingException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId_First(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.PluginSetting findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPluginSettingException {
+		throws com.liferay.portal.NoSuchPluginSettingException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId_Last(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.PluginSetting[] findByCompanyId_PrevAndNext(
 		long pluginSettingId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPluginSettingException {
+		throws com.liferay.portal.NoSuchPluginSettingException,
+			com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByCompanyId_PrevAndNext(pluginSettingId, companyId, obc);
 	}
 
 	public static com.liferay.portal.model.PluginSetting findByC_I_T(
 		long companyId, java.lang.String pluginId, java.lang.String pluginType)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPluginSettingException {
+		throws com.liferay.portal.NoSuchPluginSettingException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByC_I_T(companyId, pluginId, pluginType);
 	}
 
@@ -183,8 +183,8 @@ public class PluginSettingUtil {
 
 	public static void removeByC_I_T(long companyId, java.lang.String pluginId,
 		java.lang.String pluginType)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPluginSettingException {
+		throws com.liferay.portal.NoSuchPluginSettingException,
+			com.liferay.portal.SystemException {
 		getPersistence().removeByC_I_T(companyId, pluginId, pluginType);
 	}
 

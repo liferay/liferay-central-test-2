@@ -55,6 +55,6 @@ public interface PollsVote extends PollsVoteModel {
 	public void setUserUuid(java.lang.String userUuid);
 
 	public com.liferay.portlet.polls.model.PollsChoice getChoice()
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

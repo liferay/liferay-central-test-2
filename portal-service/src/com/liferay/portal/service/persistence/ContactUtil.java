@@ -34,8 +34,8 @@ public class ContactUtil {
 	}
 
 	public static com.liferay.portal.model.Contact remove(long contactId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchContactException {
+		throws com.liferay.portal.NoSuchContactException,
+			com.liferay.portal.SystemException {
 		return getPersistence().remove(contactId);
 	}
 
@@ -81,8 +81,8 @@ public class ContactUtil {
 
 	public static com.liferay.portal.model.Contact findByPrimaryKey(
 		long contactId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchContactException {
+		throws com.liferay.portal.NoSuchContactException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByPrimaryKey(contactId);
 	}
 
@@ -111,23 +111,23 @@ public class ContactUtil {
 
 	public static com.liferay.portal.model.Contact findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchContactException {
+		throws com.liferay.portal.NoSuchContactException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId_First(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.Contact findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchContactException {
+		throws com.liferay.portal.NoSuchContactException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId_Last(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.Contact[] findByCompanyId_PrevAndNext(
 		long contactId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchContactException {
+		throws com.liferay.portal.NoSuchContactException,
+			com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByCompanyId_PrevAndNext(contactId, companyId, obc);
 	}

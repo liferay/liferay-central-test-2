@@ -73,8 +73,8 @@ import org.json.JSONObject;
 public class ResourceServiceJSON {
 	public static JSONObject getResource(long companyId, java.lang.String name,
 		int scope, java.lang.String primKey)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Resource returnValue = ResourceServiceUtil.getResource(companyId,
 				name, scope, primKey);
 

@@ -32,8 +32,8 @@ public interface EmailAddressPersistence {
 	public com.liferay.portal.model.EmailAddress create(long emailAddressId);
 
 	public com.liferay.portal.model.EmailAddress remove(long emailAddressId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchEmailAddressException;
+		throws com.liferay.portal.NoSuchEmailAddressException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.EmailAddress remove(
 		com.liferay.portal.model.EmailAddress emailAddress)
@@ -69,8 +69,8 @@ public interface EmailAddressPersistence {
 
 	public com.liferay.portal.model.EmailAddress findByPrimaryKey(
 		long emailAddressId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchEmailAddressException;
+		throws com.liferay.portal.NoSuchEmailAddressException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.EmailAddress fetchByPrimaryKey(
 		long emailAddressId) throws com.liferay.portal.SystemException;
@@ -89,19 +89,19 @@ public interface EmailAddressPersistence {
 
 	public com.liferay.portal.model.EmailAddress findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchEmailAddressException;
+		throws com.liferay.portal.NoSuchEmailAddressException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.EmailAddress findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchEmailAddressException;
+		throws com.liferay.portal.NoSuchEmailAddressException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.EmailAddress[] findByCompanyId_PrevAndNext(
 		long emailAddressId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchEmailAddressException;
+		throws com.liferay.portal.NoSuchEmailAddressException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.EmailAddress> findByUserId(
 		long userId) throws com.liferay.portal.SystemException;
@@ -117,19 +117,19 @@ public interface EmailAddressPersistence {
 
 	public com.liferay.portal.model.EmailAddress findByUserId_First(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchEmailAddressException;
+		throws com.liferay.portal.NoSuchEmailAddressException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.EmailAddress findByUserId_Last(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchEmailAddressException;
+		throws com.liferay.portal.NoSuchEmailAddressException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.EmailAddress[] findByUserId_PrevAndNext(
 		long emailAddressId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchEmailAddressException;
+		throws com.liferay.portal.NoSuchEmailAddressException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.EmailAddress> findByC_C(
 		long companyId, long classNameId)
@@ -147,20 +147,20 @@ public interface EmailAddressPersistence {
 	public com.liferay.portal.model.EmailAddress findByC_C_First(
 		long companyId, long classNameId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchEmailAddressException;
+		throws com.liferay.portal.NoSuchEmailAddressException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.EmailAddress findByC_C_Last(
 		long companyId, long classNameId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchEmailAddressException;
+		throws com.liferay.portal.NoSuchEmailAddressException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.EmailAddress[] findByC_C_PrevAndNext(
 		long emailAddressId, long companyId, long classNameId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchEmailAddressException;
+		throws com.liferay.portal.NoSuchEmailAddressException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.EmailAddress> findByC_C_C(
 		long companyId, long classNameId, long classPK)
@@ -178,20 +178,20 @@ public interface EmailAddressPersistence {
 	public com.liferay.portal.model.EmailAddress findByC_C_C_First(
 		long companyId, long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchEmailAddressException;
+		throws com.liferay.portal.NoSuchEmailAddressException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.EmailAddress findByC_C_C_Last(
 		long companyId, long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchEmailAddressException;
+		throws com.liferay.portal.NoSuchEmailAddressException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.EmailAddress[] findByC_C_C_PrevAndNext(
 		long emailAddressId, long companyId, long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchEmailAddressException;
+		throws com.liferay.portal.NoSuchEmailAddressException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.EmailAddress> findByC_C_C_P(
 		long companyId, long classNameId, long classPK, boolean primary)
@@ -209,20 +209,20 @@ public interface EmailAddressPersistence {
 	public com.liferay.portal.model.EmailAddress findByC_C_C_P_First(
 		long companyId, long classNameId, long classPK, boolean primary,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchEmailAddressException;
+		throws com.liferay.portal.NoSuchEmailAddressException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.EmailAddress findByC_C_C_P_Last(
 		long companyId, long classNameId, long classPK, boolean primary,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchEmailAddressException;
+		throws com.liferay.portal.NoSuchEmailAddressException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.EmailAddress[] findByC_C_C_P_PrevAndNext(
 		long emailAddressId, long companyId, long classNameId, long classPK,
 		boolean primary, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchEmailAddressException;
+		throws com.liferay.portal.NoSuchEmailAddressException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.EmailAddress> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

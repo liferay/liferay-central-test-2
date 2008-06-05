@@ -73,8 +73,8 @@ import org.json.JSONObject;
  */
 public class ListTypeServiceJSON {
 	public static JSONObject getListType(int listTypeId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.ListType returnValue = ListTypeServiceUtil.getListType(listTypeId);
 
 		return ListTypeJSONSerializer.toJSONObject(returnValue);
@@ -88,15 +88,15 @@ public class ListTypeServiceJSON {
 	}
 
 	public static void validate(int listTypeId, java.lang.String type)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		ListTypeServiceUtil.validate(listTypeId, type);
 	}
 
 	public static void validate(int listTypeId, long classNameId,
 		java.lang.String type)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		ListTypeServiceUtil.validate(listTypeId, classNameId, type);
 	}
 }

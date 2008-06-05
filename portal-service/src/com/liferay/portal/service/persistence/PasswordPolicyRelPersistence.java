@@ -34,8 +34,8 @@ public interface PasswordPolicyRelPersistence {
 
 	public com.liferay.portal.model.PasswordPolicyRel remove(
 		long passwordPolicyRelId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPasswordPolicyRelException;
+		throws com.liferay.portal.NoSuchPasswordPolicyRelException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PasswordPolicyRel remove(
 		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel)
@@ -71,16 +71,16 @@ public interface PasswordPolicyRelPersistence {
 
 	public com.liferay.portal.model.PasswordPolicyRel findByPrimaryKey(
 		long passwordPolicyRelId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPasswordPolicyRelException;
+		throws com.liferay.portal.NoSuchPasswordPolicyRelException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PasswordPolicyRel fetchByPrimaryKey(
 		long passwordPolicyRelId) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PasswordPolicyRel findByC_C(
 		long classNameId, long classPK)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPasswordPolicyRelException;
+		throws com.liferay.portal.NoSuchPasswordPolicyRelException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PasswordPolicyRel fetchByC_C(
 		long classNameId, long classPK)
@@ -88,8 +88,8 @@ public interface PasswordPolicyRelPersistence {
 
 	public com.liferay.portal.model.PasswordPolicyRel findByP_C_C(
 		long passwordPolicyId, long classNameId, long classPK)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPasswordPolicyRelException;
+		throws com.liferay.portal.NoSuchPasswordPolicyRelException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PasswordPolicyRel fetchByP_C_C(
 		long passwordPolicyId, long classNameId, long classPK)
@@ -114,13 +114,13 @@ public interface PasswordPolicyRelPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByC_C(long classNameId, long classPK)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPasswordPolicyRelException;
+		throws com.liferay.portal.NoSuchPasswordPolicyRelException,
+			com.liferay.portal.SystemException;
 
 	public void removeByP_C_C(long passwordPolicyId, long classNameId,
 		long classPK)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPasswordPolicyRelException;
+		throws com.liferay.portal.NoSuchPasswordPolicyRelException,
+			com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 

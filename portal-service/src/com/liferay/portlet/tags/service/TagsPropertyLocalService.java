@@ -80,27 +80,27 @@ public interface TagsPropertyLocalService {
 
 	public com.liferay.portlet.tags.model.TagsProperty addProperty(
 		long userId, long entryId, java.lang.String key, java.lang.String value)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsProperty addProperty(
 		long userId, java.lang.String entryName, java.lang.String key,
 		java.lang.String value)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteProperties(long entryId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteProperty(long propertyId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteProperty(
 		com.liferay.portlet.tags.model.TagsProperty property)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> getProperties()
 		throws com.liferay.portal.SystemException;
@@ -110,13 +110,13 @@ public interface TagsPropertyLocalService {
 
 	public com.liferay.portlet.tags.model.TagsProperty getProperty(
 		long propertyId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsProperty getProperty(
 		long entryId, java.lang.String key)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public java.lang.String[] getPropertyKeys(long companyId)
 		throws com.liferay.portal.SystemException;
@@ -127,6 +127,6 @@ public interface TagsPropertyLocalService {
 
 	public com.liferay.portlet.tags.model.TagsProperty updateProperty(
 		long propertyId, java.lang.String key, java.lang.String value)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

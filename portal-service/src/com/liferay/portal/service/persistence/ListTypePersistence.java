@@ -32,8 +32,8 @@ public interface ListTypePersistence {
 	public com.liferay.portal.model.ListType create(int listTypeId);
 
 	public com.liferay.portal.model.ListType remove(int listTypeId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchListTypeException;
+		throws com.liferay.portal.NoSuchListTypeException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ListType remove(
 		com.liferay.portal.model.ListType listType)
@@ -68,8 +68,8 @@ public interface ListTypePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ListType findByPrimaryKey(int listTypeId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchListTypeException;
+		throws com.liferay.portal.NoSuchListTypeException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ListType fetchByPrimaryKey(int listTypeId)
 		throws com.liferay.portal.SystemException;
@@ -89,20 +89,20 @@ public interface ListTypePersistence {
 	public com.liferay.portal.model.ListType findByType_First(
 		java.lang.String type,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchListTypeException;
+		throws com.liferay.portal.NoSuchListTypeException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ListType findByType_Last(
 		java.lang.String type,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchListTypeException;
+		throws com.liferay.portal.NoSuchListTypeException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ListType[] findByType_PrevAndNext(
 		int listTypeId, java.lang.String type,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchListTypeException;
+		throws com.liferay.portal.NoSuchListTypeException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.ListType> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

@@ -80,13 +80,13 @@ public interface MBMessageFlagLocalService {
 
 	public void addReadFlags(long userId,
 		java.util.List<com.liferay.portlet.messageboards.model.MBMessage> messages)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteFlags(long userId)
 		throws com.liferay.portal.SystemException;
 
 	public boolean hasReadFlag(long userId, long messageId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

@@ -69,6 +69,6 @@ public interface WikiPage extends WikiPageModel {
 	public void setAttachmentsDir(java.lang.String attachmentsDir);
 
 	public java.lang.String[] getAttachmentsFiles()
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

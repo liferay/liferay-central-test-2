@@ -74,8 +74,8 @@ public class DLFileShortcutServiceJSON {
 	public static JSONObject addFileShortcut(long folderId, long toFolderId,
 		java.lang.String toName, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut returnValue = DLFileShortcutServiceUtil.addFileShortcut(folderId,
 				toFolderId, toName, addCommunityPermissions, addGuestPermissions);
 
@@ -85,8 +85,8 @@ public class DLFileShortcutServiceJSON {
 	public static JSONObject addFileShortcut(long folderId, long toFolderId,
 		java.lang.String toName, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut returnValue = DLFileShortcutServiceUtil.addFileShortcut(folderId,
 				toFolderId, toName, communityPermissions, guestPermissions);
 
@@ -94,14 +94,14 @@ public class DLFileShortcutServiceJSON {
 	}
 
 	public static void deleteFileShortcut(long fileShortcutId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		DLFileShortcutServiceUtil.deleteFileShortcut(fileShortcutId);
 	}
 
 	public static JSONObject getFileShortcut(long fileShortcutId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut returnValue = DLFileShortcutServiceUtil.getFileShortcut(fileShortcutId);
 
 		return DLFileShortcutJSONSerializer.toJSONObject(returnValue);
@@ -109,8 +109,8 @@ public class DLFileShortcutServiceJSON {
 
 	public static JSONObject updateFileShortcut(long fileShortcutId,
 		long folderId, long toFolderId, java.lang.String toName)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut returnValue = DLFileShortcutServiceUtil.updateFileShortcut(fileShortcutId,
 				folderId, toFolderId, toName);
 

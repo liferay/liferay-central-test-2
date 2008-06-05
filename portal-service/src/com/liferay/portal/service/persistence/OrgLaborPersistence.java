@@ -32,8 +32,8 @@ public interface OrgLaborPersistence {
 	public com.liferay.portal.model.OrgLabor create(long orgLaborId);
 
 	public com.liferay.portal.model.OrgLabor remove(long orgLaborId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrgLaborException;
+		throws com.liferay.portal.NoSuchOrgLaborException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.OrgLabor remove(
 		com.liferay.portal.model.OrgLabor orgLabor)
@@ -68,8 +68,8 @@ public interface OrgLaborPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.OrgLabor findByPrimaryKey(long orgLaborId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrgLaborException;
+		throws com.liferay.portal.NoSuchOrgLaborException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.OrgLabor fetchByPrimaryKey(long orgLaborId)
 		throws com.liferay.portal.SystemException;
@@ -89,20 +89,20 @@ public interface OrgLaborPersistence {
 	public com.liferay.portal.model.OrgLabor findByOrganizationId_First(
 		long organizationId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrgLaborException;
+		throws com.liferay.portal.NoSuchOrgLaborException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.OrgLabor findByOrganizationId_Last(
 		long organizationId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrgLaborException;
+		throws com.liferay.portal.NoSuchOrgLaborException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.OrgLabor[] findByOrganizationId_PrevAndNext(
 		long orgLaborId, long organizationId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrgLaborException;
+		throws com.liferay.portal.NoSuchOrgLaborException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.OrgLabor> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

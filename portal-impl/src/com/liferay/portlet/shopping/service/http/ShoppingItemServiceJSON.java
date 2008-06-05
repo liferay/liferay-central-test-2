@@ -72,20 +72,20 @@ import org.json.JSONObject;
  */
 public class ShoppingItemServiceJSON {
 	public static void addBookItems(long categoryId, java.lang.String[] isbns)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		ShoppingItemServiceUtil.addBookItems(categoryId, isbns);
 	}
 
 	public static void deleteItem(long itemId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		ShoppingItemServiceUtil.deleteItem(itemId);
 	}
 
 	public static JSONObject getItem(long itemId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.shopping.model.ShoppingItem returnValue = ShoppingItemServiceUtil.getItem(itemId);
 
 		return ShoppingItemJSONSerializer.toJSONObject(returnValue);

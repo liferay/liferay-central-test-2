@@ -36,8 +36,8 @@ public class UserTrackerPathUtil {
 
 	public static com.liferay.portal.model.UserTrackerPath remove(
 		long userTrackerPathId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserTrackerPathException {
+		throws com.liferay.portal.NoSuchUserTrackerPathException,
+			com.liferay.portal.SystemException {
 		return getPersistence().remove(userTrackerPathId);
 	}
 
@@ -83,8 +83,8 @@ public class UserTrackerPathUtil {
 
 	public static com.liferay.portal.model.UserTrackerPath findByPrimaryKey(
 		long userTrackerPathId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserTrackerPathException {
+		throws com.liferay.portal.NoSuchUserTrackerPathException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByPrimaryKey(userTrackerPathId);
 	}
 
@@ -114,23 +114,23 @@ public class UserTrackerPathUtil {
 
 	public static com.liferay.portal.model.UserTrackerPath findByUserTrackerId_First(
 		long userTrackerId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserTrackerPathException {
+		throws com.liferay.portal.NoSuchUserTrackerPathException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByUserTrackerId_First(userTrackerId, obc);
 	}
 
 	public static com.liferay.portal.model.UserTrackerPath findByUserTrackerId_Last(
 		long userTrackerId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserTrackerPathException {
+		throws com.liferay.portal.NoSuchUserTrackerPathException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByUserTrackerId_Last(userTrackerId, obc);
 	}
 
 	public static com.liferay.portal.model.UserTrackerPath[] findByUserTrackerId_PrevAndNext(
 		long userTrackerPathId, long userTrackerId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserTrackerPathException {
+		throws com.liferay.portal.NoSuchUserTrackerPathException,
+			com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByUserTrackerId_PrevAndNext(userTrackerPathId,
 			userTrackerId, obc);

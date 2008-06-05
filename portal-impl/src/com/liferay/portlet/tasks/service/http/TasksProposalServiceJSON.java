@@ -75,8 +75,8 @@ public class TasksProposalServiceJSON {
 		java.lang.String className, java.lang.String classPK,
 		java.lang.String name, java.lang.String description, long reviewUserId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.tasks.model.TasksProposal returnValue = TasksProposalServiceUtil.addProposal(groupId,
 				className, classPK, name, description, reviewUserId,
 				addCommunityPermissions, addGuestPermissions);
@@ -89,8 +89,8 @@ public class TasksProposalServiceJSON {
 		java.lang.String name, java.lang.String description, long reviewUserId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.tasks.model.TasksProposal returnValue = TasksProposalServiceUtil.addProposal(groupId,
 				className, classPK, name, description, reviewUserId,
 				communityPermissions, guestPermissions);
@@ -99,16 +99,16 @@ public class TasksProposalServiceJSON {
 	}
 
 	public static void deleteProposal(long proposalId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		TasksProposalServiceUtil.deleteProposal(proposalId);
 	}
 
 	public static JSONObject updateProposal(long proposalId,
 		java.lang.String description, int dueDateMonth, int dueDateDay,
 		int dueDateYear, int dueDateHour, int dueDateMinute)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.tasks.model.TasksProposal returnValue = TasksProposalServiceUtil.updateProposal(proposalId,
 				description, dueDateMonth, dueDateDay, dueDateYear,
 				dueDateHour, dueDateMinute);

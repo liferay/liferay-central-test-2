@@ -80,8 +80,8 @@ public class DLFileEntryServiceHttp {
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
 		java.io.File file, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -138,12 +138,12 @@ public class DLFileEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -164,8 +164,8 @@ public class DLFileEntryServiceHttp {
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
 		byte[] bytes, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -222,12 +222,12 @@ public class DLFileEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -248,8 +248,8 @@ public class DLFileEntryServiceHttp {
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
 		java.io.File file, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -314,12 +314,12 @@ public class DLFileEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -340,8 +340,8 @@ public class DLFileEntryServiceHttp {
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
 		byte[] bytes, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -406,12 +406,12 @@ public class DLFileEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -428,8 +428,8 @@ public class DLFileEntryServiceHttp {
 
 	public static void deleteFileEntry(HttpPrincipal httpPrincipal,
 		long folderId, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -446,12 +446,12 @@ public class DLFileEntryServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				if (e instanceof java.rmi.RemoteException) {
@@ -470,8 +470,8 @@ public class DLFileEntryServiceHttp {
 
 	public static void deleteFileEntry(HttpPrincipal httpPrincipal,
 		long folderId, java.lang.String name, double version)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -491,12 +491,12 @@ public class DLFileEntryServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				if (e instanceof java.rmi.RemoteException) {
@@ -515,8 +515,8 @@ public class DLFileEntryServiceHttp {
 
 	public static void deleteFileEntryByTitle(HttpPrincipal httpPrincipal,
 		long folderId, java.lang.String titleWithExtension)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -534,12 +534,12 @@ public class DLFileEntryServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				if (e instanceof java.rmi.RemoteException) {
@@ -558,8 +558,8 @@ public class DLFileEntryServiceHttp {
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
 		HttpPrincipal httpPrincipal, long folderId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -572,12 +572,12 @@ public class DLFileEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -594,8 +594,8 @@ public class DLFileEntryServiceHttp {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
 		HttpPrincipal httpPrincipal, long folderId, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -614,12 +614,12 @@ public class DLFileEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -637,8 +637,8 @@ public class DLFileEntryServiceHttp {
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByTitle(
 		HttpPrincipal httpPrincipal, long folderId,
 		java.lang.String titleWithExtension)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -657,12 +657,12 @@ public class DLFileEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -679,8 +679,8 @@ public class DLFileEntryServiceHttp {
 
 	public static void lockFileEntry(HttpPrincipal httpPrincipal,
 		long folderId, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -697,12 +697,12 @@ public class DLFileEntryServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				if (e instanceof java.rmi.RemoteException) {
@@ -721,8 +721,8 @@ public class DLFileEntryServiceHttp {
 
 	public static void unlockFileEntry(HttpPrincipal httpPrincipal,
 		long folderId, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -739,12 +739,12 @@ public class DLFileEntryServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				if (e instanceof java.rmi.RemoteException) {
@@ -767,8 +767,8 @@ public class DLFileEntryServiceHttp {
 		java.lang.String title, java.lang.String description,
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
 		byte[] bytes)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -829,12 +829,12 @@ public class DLFileEntryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				if (e instanceof java.rmi.RemoteException) {

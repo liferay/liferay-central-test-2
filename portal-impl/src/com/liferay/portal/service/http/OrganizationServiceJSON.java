@@ -74,15 +74,15 @@ import org.json.JSONObject;
 public class OrganizationServiceJSON {
 	public static void addGroupOrganizations(long groupId,
 		long[] organizationIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		OrganizationServiceUtil.addGroupOrganizations(groupId, organizationIds);
 	}
 
 	public static void addPasswordPolicyOrganizations(long passwordPolicyId,
 		long[] organizationIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		OrganizationServiceUtil.addPasswordPolicyOrganizations(passwordPolicyId,
 			organizationIds);
 	}
@@ -90,8 +90,8 @@ public class OrganizationServiceJSON {
 	public static JSONObject addOrganization(long parentOrganizationId,
 		java.lang.String name, int type, boolean recursable, long regionId,
 		long countryId, int statusId, java.lang.String comments)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.addOrganization(parentOrganizationId,
 				name, type, recursable, regionId, countryId, statusId, comments);
 
@@ -99,14 +99,14 @@ public class OrganizationServiceJSON {
 	}
 
 	public static void deleteOrganization(long organizationId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		OrganizationServiceUtil.deleteOrganization(organizationId);
 	}
 
 	public static JSONObject getOrganization(long organizationId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.getOrganization(organizationId);
 
 		return OrganizationJSONSerializer.toJSONObject(returnValue);
@@ -121,8 +121,8 @@ public class OrganizationServiceJSON {
 	}
 
 	public static JSONArray getUserOrganizations(long userId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portal.model.Organization> returnValue = OrganizationServiceUtil.getUserOrganizations(userId);
 
 		return OrganizationJSONSerializer.toJSONArray(returnValue);
@@ -130,22 +130,22 @@ public class OrganizationServiceJSON {
 
 	public static void setGroupOrganizations(long groupId,
 		long[] organizationIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		OrganizationServiceUtil.setGroupOrganizations(groupId, organizationIds);
 	}
 
 	public static void unsetGroupOrganizations(long groupId,
 		long[] organizationIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		OrganizationServiceUtil.unsetGroupOrganizations(groupId, organizationIds);
 	}
 
 	public static void unsetPasswordPolicyOrganizations(long passwordPolicyId,
 		long[] organizationIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		OrganizationServiceUtil.unsetPasswordPolicyOrganizations(passwordPolicyId,
 			organizationIds);
 	}
@@ -154,8 +154,8 @@ public class OrganizationServiceJSON {
 		long parentOrganizationId, java.lang.String name, int type,
 		boolean recursable, long regionId, long countryId, int statusId,
 		java.lang.String comments)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.updateOrganization(organizationId,
 				parentOrganizationId, name, type, recursable, regionId,
 				countryId, statusId, comments);

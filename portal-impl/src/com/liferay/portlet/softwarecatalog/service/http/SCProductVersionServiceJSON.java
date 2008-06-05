@@ -77,8 +77,8 @@ public class SCProductVersionServiceJSON {
 		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
 		boolean repoStoreArtifact, long[] frameworkVersionIds,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion returnValue = SCProductVersionServiceUtil.addProductVersion(productEntryId,
 				version, changeLog, downloadPageURL, directDownloadURL,
 				repoStoreArtifact, frameworkVersionIds,
@@ -93,8 +93,8 @@ public class SCProductVersionServiceJSON {
 		boolean repoStoreArtifact, long[] frameworkVersionIds,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion returnValue = SCProductVersionServiceUtil.addProductVersion(productEntryId,
 				version, changeLog, downloadPageURL, directDownloadURL,
 				repoStoreArtifact, frameworkVersionIds, communityPermissions,
@@ -104,14 +104,14 @@ public class SCProductVersionServiceJSON {
 	}
 
 	public static void deleteProductVersion(long productVersionId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		SCProductVersionServiceUtil.deleteProductVersion(productVersionId);
 	}
 
 	public static JSONObject getProductVersion(long productVersionId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion returnValue = SCProductVersionServiceUtil.getProductVersion(productVersionId);
 
 		return SCProductVersionJSONSerializer.toJSONObject(returnValue);
@@ -119,8 +119,8 @@ public class SCProductVersionServiceJSON {
 
 	public static JSONArray getProductVersions(long productEntryId, int start,
 		int end)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> returnValue =
 			SCProductVersionServiceUtil.getProductVersions(productEntryId,
 				start, end);
@@ -129,8 +129,8 @@ public class SCProductVersionServiceJSON {
 	}
 
 	public static int getProductVersionsCount(long productEntryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		int returnValue = SCProductVersionServiceUtil.getProductVersionsCount(productEntryId);
 
 		return returnValue;
@@ -140,8 +140,8 @@ public class SCProductVersionServiceJSON {
 		java.lang.String version, java.lang.String changeLog,
 		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
 		boolean repoStoreArtifact, long[] frameworkVersionIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion returnValue = SCProductVersionServiceUtil.updateProductVersion(productVersionId,
 				version, changeLog, downloadPageURL, directDownloadURL,
 				repoStoreArtifact, frameworkVersionIds);

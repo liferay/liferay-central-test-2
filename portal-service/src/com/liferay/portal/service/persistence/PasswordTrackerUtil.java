@@ -36,8 +36,8 @@ public class PasswordTrackerUtil {
 
 	public static com.liferay.portal.model.PasswordTracker remove(
 		long passwordTrackerId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPasswordTrackerException {
+		throws com.liferay.portal.NoSuchPasswordTrackerException,
+			com.liferay.portal.SystemException {
 		return getPersistence().remove(passwordTrackerId);
 	}
 
@@ -83,8 +83,8 @@ public class PasswordTrackerUtil {
 
 	public static com.liferay.portal.model.PasswordTracker findByPrimaryKey(
 		long passwordTrackerId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPasswordTrackerException {
+		throws com.liferay.portal.NoSuchPasswordTrackerException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByPrimaryKey(passwordTrackerId);
 	}
 
@@ -113,23 +113,23 @@ public class PasswordTrackerUtil {
 
 	public static com.liferay.portal.model.PasswordTracker findByUserId_First(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPasswordTrackerException {
+		throws com.liferay.portal.NoSuchPasswordTrackerException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByUserId_First(userId, obc);
 	}
 
 	public static com.liferay.portal.model.PasswordTracker findByUserId_Last(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPasswordTrackerException {
+		throws com.liferay.portal.NoSuchPasswordTrackerException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByUserId_Last(userId, obc);
 	}
 
 	public static com.liferay.portal.model.PasswordTracker[] findByUserId_PrevAndNext(
 		long passwordTrackerId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPasswordTrackerException {
+		throws com.liferay.portal.NoSuchPasswordTrackerException,
+			com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByUserId_PrevAndNext(passwordTrackerId, userId, obc);
 	}

@@ -34,8 +34,8 @@ public class AccountUtil {
 	}
 
 	public static com.liferay.portal.model.Account remove(long accountId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchAccountException {
+		throws com.liferay.portal.NoSuchAccountException,
+			com.liferay.portal.SystemException {
 		return getPersistence().remove(accountId);
 	}
 
@@ -81,8 +81,8 @@ public class AccountUtil {
 
 	public static com.liferay.portal.model.Account findByPrimaryKey(
 		long accountId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchAccountException {
+		throws com.liferay.portal.NoSuchAccountException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByPrimaryKey(accountId);
 	}
 

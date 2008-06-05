@@ -77,8 +77,8 @@ public class DLFileEntryServiceJSON {
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
 		byte[] bytes, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.addFileEntry(folderId,
 				name, title, description, tagsEntries, extraSettings, bytes,
 				addCommunityPermissions, addGuestPermissions);
@@ -91,8 +91,8 @@ public class DLFileEntryServiceJSON {
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
 		byte[] bytes, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.addFileEntry(folderId,
 				name, title, description, tagsEntries, extraSettings, bytes,
 				communityPermissions, guestPermissions);
@@ -101,29 +101,29 @@ public class DLFileEntryServiceJSON {
 	}
 
 	public static void deleteFileEntry(long folderId, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFileEntryServiceUtil.deleteFileEntry(folderId, name);
 	}
 
 	public static void deleteFileEntry(long folderId, java.lang.String name,
 		double version)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFileEntryServiceUtil.deleteFileEntry(folderId, name, version);
 	}
 
 	public static void deleteFileEntryByTitle(long folderId,
 		java.lang.String titleWithExtension)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFileEntryServiceUtil.deleteFileEntryByTitle(folderId,
 			titleWithExtension);
 	}
 
 	public static JSONArray getFileEntries(long folderId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> returnValue =
 			DLFileEntryServiceUtil.getFileEntries(folderId);
 
@@ -131,8 +131,8 @@ public class DLFileEntryServiceJSON {
 	}
 
 	public static JSONObject getFileEntry(long folderId, java.lang.String name)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.getFileEntry(folderId,
 				name);
 
@@ -141,8 +141,8 @@ public class DLFileEntryServiceJSON {
 
 	public static JSONObject getFileEntryByTitle(long folderId,
 		java.lang.String titleWithExtension)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.getFileEntryByTitle(folderId,
 				titleWithExtension);
 
@@ -150,14 +150,14 @@ public class DLFileEntryServiceJSON {
 	}
 
 	public static void lockFileEntry(long folderId, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFileEntryServiceUtil.lockFileEntry(folderId, name);
 	}
 
 	public static void unlockFileEntry(long folderId, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		DLFileEntryServiceUtil.unlockFileEntry(folderId, name);
 	}
 
@@ -166,8 +166,8 @@ public class DLFileEntryServiceJSON {
 		java.lang.String title, java.lang.String description,
 		java.lang.String[] tagsEntries, java.lang.String extraSettings,
 		byte[] bytes)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.updateFileEntry(folderId,
 				newFolderId, name, sourceFileName, title, description,
 				tagsEntries, extraSettings, bytes);

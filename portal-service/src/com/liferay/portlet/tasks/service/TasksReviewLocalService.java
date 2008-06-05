@@ -80,17 +80,17 @@ public interface TasksReviewLocalService {
 
 	public com.liferay.portlet.tasks.model.TasksReview addReview(long userId,
 		long proposalId, long assignedByUserId, int stage)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tasks.model.TasksReview approveReview(
 		long userId, long proposalId, int stage)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteReview(long reviewId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteReview(com.liferay.portlet.tasks.model.TasksReview review)
 		throws com.liferay.portal.SystemException;
@@ -99,13 +99,13 @@ public interface TasksReviewLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tasks.model.TasksReview getReview(long reviewId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tasks.model.TasksReview getReview(long userId,
 		long proposalId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> getReviews(
 		long proposalId) throws com.liferay.portal.SystemException;
@@ -123,11 +123,11 @@ public interface TasksReviewLocalService {
 
 	public com.liferay.portlet.tasks.model.TasksReview rejectReview(
 		long userId, long proposalId, int stage)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void updateReviews(long proposalId, long assignedByUserId,
 		long[][] userIdsPerStage)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

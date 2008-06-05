@@ -34,8 +34,8 @@ public class OrgLaborUtil {
 	}
 
 	public static com.liferay.portal.model.OrgLabor remove(long orgLaborId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrgLaborException {
+		throws com.liferay.portal.NoSuchOrgLaborException,
+			com.liferay.portal.SystemException {
 		return getPersistence().remove(orgLaborId);
 	}
 
@@ -81,8 +81,8 @@ public class OrgLaborUtil {
 
 	public static com.liferay.portal.model.OrgLabor findByPrimaryKey(
 		long orgLaborId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrgLaborException {
+		throws com.liferay.portal.NoSuchOrgLaborException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByPrimaryKey(orgLaborId);
 	}
 
@@ -113,24 +113,24 @@ public class OrgLaborUtil {
 	public static com.liferay.portal.model.OrgLabor findByOrganizationId_First(
 		long organizationId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrgLaborException {
+		throws com.liferay.portal.NoSuchOrgLaborException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByOrganizationId_First(organizationId, obc);
 	}
 
 	public static com.liferay.portal.model.OrgLabor findByOrganizationId_Last(
 		long organizationId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrgLaborException {
+		throws com.liferay.portal.NoSuchOrgLaborException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByOrganizationId_Last(organizationId, obc);
 	}
 
 	public static com.liferay.portal.model.OrgLabor[] findByOrganizationId_PrevAndNext(
 		long orgLaborId, long organizationId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchOrgLaborException {
+		throws com.liferay.portal.NoSuchOrgLaborException,
+			com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByOrganizationId_PrevAndNext(orgLaborId,
 			organizationId, obc);

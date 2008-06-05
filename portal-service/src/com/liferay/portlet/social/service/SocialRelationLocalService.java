@@ -80,29 +80,29 @@ public interface SocialRelationLocalService {
 
 	public com.liferay.portlet.social.model.SocialRelation addRelation(
 		long userId1, long userId2, int type)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteRelation(long relationId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteRelation(long userId1, long userId2, int type)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteRelations(long userId)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.social.model.SocialRelation getRelation(
 		long relationId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.social.model.SocialRelation getRelation(
 		long userId1, long userId2, int type)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialRelation> getRelations(
 		long userId, int type, int start, int end)

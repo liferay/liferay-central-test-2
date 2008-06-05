@@ -32,8 +32,8 @@ public interface UserPersistence {
 	public com.liferay.portal.model.User create(long userId);
 
 	public com.liferay.portal.model.User remove(long userId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserException;
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User remove(
 		com.liferay.portal.model.User user)
@@ -68,8 +68,8 @@ public interface UserPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User findByPrimaryKey(long userId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserException;
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User fetchByPrimaryKey(long userId)
 		throws com.liferay.portal.SystemException;
@@ -89,20 +89,20 @@ public interface UserPersistence {
 	public com.liferay.portal.model.User findByUuid_First(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserException;
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User findByUuid_Last(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserException;
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User[] findByUuid_PrevAndNext(long userId,
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserException;
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> findByCompanyId(
 		long companyId) throws com.liferay.portal.SystemException;
@@ -118,23 +118,23 @@ public interface UserPersistence {
 
 	public com.liferay.portal.model.User findByCompanyId_First(long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserException;
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User findByCompanyId_Last(long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserException;
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User[] findByCompanyId_PrevAndNext(
 		long userId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserException;
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User findByContactId(long contactId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserException;
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User fetchByContactId(long contactId)
 		throws com.liferay.portal.SystemException;
@@ -155,39 +155,39 @@ public interface UserPersistence {
 	public com.liferay.portal.model.User findByEmailAddress_First(
 		java.lang.String emailAddress,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserException;
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User findByEmailAddress_Last(
 		java.lang.String emailAddress,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserException;
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User[] findByEmailAddress_PrevAndNext(
 		long userId, java.lang.String emailAddress,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserException;
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User findByPortraitId(long portraitId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserException;
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User fetchByPortraitId(long portraitId)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User findByC_U(long companyId, long userId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserException;
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User fetchByC_U(long companyId, long userId)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User findByC_DU(long companyId,
 		boolean defaultUser)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserException;
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User fetchByC_DU(long companyId,
 		boolean defaultUser) throws com.liferay.portal.SystemException;
@@ -208,33 +208,33 @@ public interface UserPersistence {
 	public com.liferay.portal.model.User findByC_P_First(long companyId,
 		java.lang.String password,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserException;
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User findByC_P_Last(long companyId,
 		java.lang.String password,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserException;
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User[] findByC_P_PrevAndNext(long userId,
 		long companyId, java.lang.String password,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserException;
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User findByC_SN(long companyId,
 		java.lang.String screenName)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserException;
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User fetchByC_SN(long companyId,
 		java.lang.String screenName) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User findByC_EA(long companyId,
 		java.lang.String emailAddress)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserException;
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User fetchByC_EA(long companyId,
 		java.lang.String emailAddress)
@@ -265,34 +265,34 @@ public interface UserPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByContactId(long contactId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserException;
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
 
 	public void removeByEmailAddress(java.lang.String emailAddress)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByPortraitId(long portraitId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserException;
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
 
 	public void removeByC_U(long companyId, long userId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserException;
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
 
 	public void removeByC_DU(long companyId, boolean defaultUser)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserException;
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
 
 	public void removeByC_P(long companyId, java.lang.String password)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByC_SN(long companyId, java.lang.String screenName)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserException;
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
 
 	public void removeByC_EA(long companyId, java.lang.String emailAddress)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserException;
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 

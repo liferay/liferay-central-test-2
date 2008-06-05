@@ -74,8 +74,8 @@ import org.json.JSONObject;
 public class EmailAddressServiceJSON {
 	public static JSONObject addEmailAddress(java.lang.String className,
 		long classPK, java.lang.String address, int typeId, boolean primary)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.EmailAddress returnValue = EmailAddressServiceUtil.addEmailAddress(className,
 				classPK, address, typeId, primary);
 
@@ -83,14 +83,14 @@ public class EmailAddressServiceJSON {
 	}
 
 	public static void deleteEmailAddress(long emailAddressId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		EmailAddressServiceUtil.deleteEmailAddress(emailAddressId);
 	}
 
 	public static JSONObject getEmailAddress(long emailAddressId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.EmailAddress returnValue = EmailAddressServiceUtil.getEmailAddress(emailAddressId);
 
 		return EmailAddressJSONSerializer.toJSONObject(returnValue);
@@ -98,8 +98,8 @@ public class EmailAddressServiceJSON {
 
 	public static JSONArray getEmailAddresses(java.lang.String className,
 		long classPK)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portal.model.EmailAddress> returnValue = EmailAddressServiceUtil.getEmailAddresses(className,
 				classPK);
 
@@ -108,8 +108,8 @@ public class EmailAddressServiceJSON {
 
 	public static JSONObject updateEmailAddress(long emailAddressId,
 		java.lang.String address, int typeId, boolean primary)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.EmailAddress returnValue = EmailAddressServiceUtil.updateEmailAddress(emailAddressId,
 				address, typeId, primary);
 

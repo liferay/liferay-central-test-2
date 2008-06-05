@@ -50,6 +50,6 @@ package com.liferay.portlet.tags.model;
  */
 public interface TagsAsset extends TagsAssetModel {
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries()
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

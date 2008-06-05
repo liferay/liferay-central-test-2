@@ -74,8 +74,8 @@ import com.liferay.portlet.workflow.service.WorkflowTaskServiceUtil;
 public class WorkflowTaskServiceHttp {
 	public static java.util.Map updateTask(HttpPrincipal httpPrincipal,
 		long taskId, java.lang.String transition, java.util.Map parameterMap)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(taskId);
 
@@ -101,12 +101,12 @@ public class WorkflowTaskServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);

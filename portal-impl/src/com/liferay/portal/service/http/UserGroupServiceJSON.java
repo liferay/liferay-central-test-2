@@ -73,15 +73,15 @@ import org.json.JSONObject;
  */
 public class UserGroupServiceJSON {
 	public static void addGroupUserGroups(long groupId, long[] userGroupIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		UserGroupServiceUtil.addGroupUserGroups(groupId, userGroupIds);
 	}
 
 	public static JSONObject addUserGroup(java.lang.String name,
 		java.lang.String description)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.UserGroup returnValue = UserGroupServiceUtil.addUserGroup(name,
 				description);
 
@@ -89,45 +89,45 @@ public class UserGroupServiceJSON {
 	}
 
 	public static void deleteUserGroup(long userGroupId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		UserGroupServiceUtil.deleteUserGroup(userGroupId);
 	}
 
 	public static JSONObject getUserGroup(long userGroupId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.UserGroup returnValue = UserGroupServiceUtil.getUserGroup(userGroupId);
 
 		return UserGroupJSONSerializer.toJSONObject(returnValue);
 	}
 
 	public static JSONObject getUserGroup(java.lang.String name)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.UserGroup returnValue = UserGroupServiceUtil.getUserGroup(name);
 
 		return UserGroupJSONSerializer.toJSONObject(returnValue);
 	}
 
 	public static JSONArray getUserUserGroups(long userId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portal.model.UserGroup> returnValue = UserGroupServiceUtil.getUserUserGroups(userId);
 
 		return UserGroupJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static void unsetGroupUserGroups(long groupId, long[] userGroupIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		UserGroupServiceUtil.unsetGroupUserGroups(groupId, userGroupIds);
 	}
 
 	public static JSONObject updateUserGroup(long userGroupId,
 		java.lang.String name, java.lang.String description)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.UserGroup returnValue = UserGroupServiceUtil.updateUserGroup(userGroupId,
 				name, description);
 

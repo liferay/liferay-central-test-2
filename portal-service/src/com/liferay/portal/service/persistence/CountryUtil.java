@@ -34,8 +34,8 @@ public class CountryUtil {
 	}
 
 	public static com.liferay.portal.model.Country remove(long countryId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchCountryException {
+		throws com.liferay.portal.NoSuchCountryException,
+			com.liferay.portal.SystemException {
 		return getPersistence().remove(countryId);
 	}
 
@@ -81,8 +81,8 @@ public class CountryUtil {
 
 	public static com.liferay.portal.model.Country findByPrimaryKey(
 		long countryId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchCountryException {
+		throws com.liferay.portal.NoSuchCountryException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByPrimaryKey(countryId);
 	}
 
@@ -111,23 +111,23 @@ public class CountryUtil {
 
 	public static com.liferay.portal.model.Country findByActive_First(
 		boolean active, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchCountryException {
+		throws com.liferay.portal.NoSuchCountryException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByActive_First(active, obc);
 	}
 
 	public static com.liferay.portal.model.Country findByActive_Last(
 		boolean active, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchCountryException {
+		throws com.liferay.portal.NoSuchCountryException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByActive_Last(active, obc);
 	}
 
 	public static com.liferay.portal.model.Country[] findByActive_PrevAndNext(
 		long countryId, boolean active,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchCountryException {
+		throws com.liferay.portal.NoSuchCountryException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByActive_PrevAndNext(countryId, active, obc);
 	}
 

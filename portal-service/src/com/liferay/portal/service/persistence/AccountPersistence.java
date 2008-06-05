@@ -32,8 +32,8 @@ public interface AccountPersistence {
 	public com.liferay.portal.model.Account create(long accountId);
 
 	public com.liferay.portal.model.Account remove(long accountId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchAccountException;
+		throws com.liferay.portal.NoSuchAccountException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Account remove(
 		com.liferay.portal.model.Account account)
@@ -68,8 +68,8 @@ public interface AccountPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Account findByPrimaryKey(long accountId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchAccountException;
+		throws com.liferay.portal.NoSuchAccountException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Account fetchByPrimaryKey(long accountId)
 		throws com.liferay.portal.SystemException;

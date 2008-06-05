@@ -34,8 +34,8 @@ public interface PasswordTrackerPersistence {
 
 	public com.liferay.portal.model.PasswordTracker remove(
 		long passwordTrackerId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPasswordTrackerException;
+		throws com.liferay.portal.NoSuchPasswordTrackerException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PasswordTracker remove(
 		com.liferay.portal.model.PasswordTracker passwordTracker)
@@ -71,8 +71,8 @@ public interface PasswordTrackerPersistence {
 
 	public com.liferay.portal.model.PasswordTracker findByPrimaryKey(
 		long passwordTrackerId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPasswordTrackerException;
+		throws com.liferay.portal.NoSuchPasswordTrackerException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PasswordTracker fetchByPrimaryKey(
 		long passwordTrackerId) throws com.liferay.portal.SystemException;
@@ -91,19 +91,19 @@ public interface PasswordTrackerPersistence {
 
 	public com.liferay.portal.model.PasswordTracker findByUserId_First(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPasswordTrackerException;
+		throws com.liferay.portal.NoSuchPasswordTrackerException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PasswordTracker findByUserId_Last(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPasswordTrackerException;
+		throws com.liferay.portal.NoSuchPasswordTrackerException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PasswordTracker[] findByUserId_PrevAndNext(
 		long passwordTrackerId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPasswordTrackerException;
+		throws com.liferay.portal.NoSuchPasswordTrackerException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.PasswordTracker> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

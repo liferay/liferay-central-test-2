@@ -50,11 +50,11 @@ package com.liferay.portlet.ratings.service;
  */
 public interface RatingsEntryService {
 	public void deleteEntry(java.lang.String className, long classPK)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.ratings.model.RatingsEntry updateEntry(
 		java.lang.String className, long classPK, double score)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

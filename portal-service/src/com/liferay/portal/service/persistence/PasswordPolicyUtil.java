@@ -36,8 +36,8 @@ public class PasswordPolicyUtil {
 
 	public static com.liferay.portal.model.PasswordPolicy remove(
 		long passwordPolicyId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPasswordPolicyException {
+		throws com.liferay.portal.NoSuchPasswordPolicyException,
+			com.liferay.portal.SystemException {
 		return getPersistence().remove(passwordPolicyId);
 	}
 
@@ -83,8 +83,8 @@ public class PasswordPolicyUtil {
 
 	public static com.liferay.portal.model.PasswordPolicy findByPrimaryKey(
 		long passwordPolicyId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPasswordPolicyException {
+		throws com.liferay.portal.NoSuchPasswordPolicyException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByPrimaryKey(passwordPolicyId);
 	}
 
@@ -95,8 +95,8 @@ public class PasswordPolicyUtil {
 
 	public static com.liferay.portal.model.PasswordPolicy findByC_DP(
 		long companyId, boolean defaultPolicy)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPasswordPolicyException {
+		throws com.liferay.portal.NoSuchPasswordPolicyException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByC_DP(companyId, defaultPolicy);
 	}
 
@@ -108,8 +108,8 @@ public class PasswordPolicyUtil {
 
 	public static com.liferay.portal.model.PasswordPolicy findByC_N(
 		long companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPasswordPolicyException {
+		throws com.liferay.portal.NoSuchPasswordPolicyException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByC_N(companyId, name);
 	}
 
@@ -149,14 +149,14 @@ public class PasswordPolicyUtil {
 	}
 
 	public static void removeByC_DP(long companyId, boolean defaultPolicy)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPasswordPolicyException {
+		throws com.liferay.portal.NoSuchPasswordPolicyException,
+			com.liferay.portal.SystemException {
 		getPersistence().removeByC_DP(companyId, defaultPolicy);
 	}
 
 	public static void removeByC_N(long companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPasswordPolicyException {
+		throws com.liferay.portal.NoSuchPasswordPolicyException,
+			com.liferay.portal.SystemException {
 		getPersistence().removeByC_N(companyId, name);
 	}
 

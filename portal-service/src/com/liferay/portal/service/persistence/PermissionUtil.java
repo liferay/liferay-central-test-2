@@ -34,8 +34,8 @@ public class PermissionUtil {
 	}
 
 	public static com.liferay.portal.model.Permission remove(long permissionId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPermissionException {
+		throws com.liferay.portal.NoSuchPermissionException,
+			com.liferay.portal.SystemException {
 		return getPersistence().remove(permissionId);
 	}
 
@@ -81,8 +81,8 @@ public class PermissionUtil {
 
 	public static com.liferay.portal.model.Permission findByPrimaryKey(
 		long permissionId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPermissionException {
+		throws com.liferay.portal.NoSuchPermissionException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByPrimaryKey(permissionId);
 	}
 
@@ -111,31 +111,31 @@ public class PermissionUtil {
 
 	public static com.liferay.portal.model.Permission findByResourceId_First(
 		long resourceId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPermissionException {
+		throws com.liferay.portal.NoSuchPermissionException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByResourceId_First(resourceId, obc);
 	}
 
 	public static com.liferay.portal.model.Permission findByResourceId_Last(
 		long resourceId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPermissionException {
+		throws com.liferay.portal.NoSuchPermissionException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByResourceId_Last(resourceId, obc);
 	}
 
 	public static com.liferay.portal.model.Permission[] findByResourceId_PrevAndNext(
 		long permissionId, long resourceId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPermissionException {
+		throws com.liferay.portal.NoSuchPermissionException,
+			com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByResourceId_PrevAndNext(permissionId, resourceId, obc);
 	}
 
 	public static com.liferay.portal.model.Permission findByA_R(
 		java.lang.String actionId, long resourceId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPermissionException {
+		throws com.liferay.portal.NoSuchPermissionException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByA_R(actionId, resourceId);
 	}
 
@@ -180,8 +180,8 @@ public class PermissionUtil {
 	}
 
 	public static void removeByA_R(java.lang.String actionId, long resourceId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPermissionException {
+		throws com.liferay.portal.NoSuchPermissionException,
+			com.liferay.portal.SystemException {
 		getPersistence().removeByA_R(actionId, resourceId);
 	}
 

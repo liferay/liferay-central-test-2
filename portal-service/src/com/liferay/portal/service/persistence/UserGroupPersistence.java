@@ -32,8 +32,8 @@ public interface UserGroupPersistence {
 	public com.liferay.portal.model.UserGroup create(long userGroupId);
 
 	public com.liferay.portal.model.UserGroup remove(long userGroupId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserGroupException;
+		throws com.liferay.portal.NoSuchUserGroupException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserGroup remove(
 		com.liferay.portal.model.UserGroup userGroup)
@@ -68,8 +68,8 @@ public interface UserGroupPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserGroup findByPrimaryKey(long userGroupId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserGroupException;
+		throws com.liferay.portal.NoSuchUserGroupException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserGroup fetchByPrimaryKey(
 		long userGroupId) throws com.liferay.portal.SystemException;
@@ -88,19 +88,19 @@ public interface UserGroupPersistence {
 
 	public com.liferay.portal.model.UserGroup findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserGroupException;
+		throws com.liferay.portal.NoSuchUserGroupException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserGroup findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserGroupException;
+		throws com.liferay.portal.NoSuchUserGroupException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserGroup[] findByCompanyId_PrevAndNext(
 		long userGroupId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserGroupException;
+		throws com.liferay.portal.NoSuchUserGroupException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserGroup> findByC_P(
 		long companyId, long parentUserGroupId)
@@ -118,25 +118,25 @@ public interface UserGroupPersistence {
 	public com.liferay.portal.model.UserGroup findByC_P_First(long companyId,
 		long parentUserGroupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserGroupException;
+		throws com.liferay.portal.NoSuchUserGroupException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserGroup findByC_P_Last(long companyId,
 		long parentUserGroupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserGroupException;
+		throws com.liferay.portal.NoSuchUserGroupException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserGroup[] findByC_P_PrevAndNext(
 		long userGroupId, long companyId, long parentUserGroupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserGroupException;
+		throws com.liferay.portal.NoSuchUserGroupException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserGroup findByC_N(long companyId,
 		java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserGroupException;
+		throws com.liferay.portal.NoSuchUserGroupException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserGroup fetchByC_N(long companyId,
 		java.lang.String name) throws com.liferay.portal.SystemException;
@@ -166,8 +166,8 @@ public interface UserGroupPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByC_N(long companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchUserGroupException;
+		throws com.liferay.portal.NoSuchUserGroupException,
+			com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 

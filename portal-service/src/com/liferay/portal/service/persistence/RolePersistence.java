@@ -32,8 +32,8 @@ public interface RolePersistence {
 	public com.liferay.portal.model.Role create(long roleId);
 
 	public com.liferay.portal.model.Role remove(long roleId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchRoleException;
+		throws com.liferay.portal.NoSuchRoleException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Role remove(
 		com.liferay.portal.model.Role role)
@@ -68,8 +68,8 @@ public interface RolePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Role findByPrimaryKey(long roleId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchRoleException;
+		throws com.liferay.portal.NoSuchRoleException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Role fetchByPrimaryKey(long roleId)
 		throws com.liferay.portal.SystemException;
@@ -88,32 +88,32 @@ public interface RolePersistence {
 
 	public com.liferay.portal.model.Role findByCompanyId_First(long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchRoleException;
+		throws com.liferay.portal.NoSuchRoleException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Role findByCompanyId_Last(long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchRoleException;
+		throws com.liferay.portal.NoSuchRoleException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Role[] findByCompanyId_PrevAndNext(
 		long roleId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchRoleException;
+		throws com.liferay.portal.NoSuchRoleException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Role findByC_N(long companyId,
 		java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchRoleException;
+		throws com.liferay.portal.NoSuchRoleException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Role fetchByC_N(long companyId,
 		java.lang.String name) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Role findByC_C_C(long companyId,
 		long classNameId, long classPK)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchRoleException;
+		throws com.liferay.portal.NoSuchRoleException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Role fetchByC_C_C(long companyId,
 		long classNameId, long classPK)
@@ -141,12 +141,12 @@ public interface RolePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByC_N(long companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchRoleException;
+		throws com.liferay.portal.NoSuchRoleException,
+			com.liferay.portal.SystemException;
 
 	public void removeByC_C_C(long companyId, long classNameId, long classPK)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchRoleException;
+		throws com.liferay.portal.NoSuchRoleException,
+			com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 

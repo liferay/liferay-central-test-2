@@ -34,8 +34,8 @@ public class WebsiteUtil {
 	}
 
 	public static com.liferay.portal.model.Website remove(long websiteId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchWebsiteException {
+		throws com.liferay.portal.NoSuchWebsiteException,
+			com.liferay.portal.SystemException {
 		return getPersistence().remove(websiteId);
 	}
 
@@ -81,8 +81,8 @@ public class WebsiteUtil {
 
 	public static com.liferay.portal.model.Website findByPrimaryKey(
 		long websiteId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchWebsiteException {
+		throws com.liferay.portal.NoSuchWebsiteException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByPrimaryKey(websiteId);
 	}
 
@@ -111,23 +111,23 @@ public class WebsiteUtil {
 
 	public static com.liferay.portal.model.Website findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchWebsiteException {
+		throws com.liferay.portal.NoSuchWebsiteException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId_First(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.Website findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchWebsiteException {
+		throws com.liferay.portal.NoSuchWebsiteException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId_Last(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.Website[] findByCompanyId_PrevAndNext(
 		long websiteId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchWebsiteException {
+		throws com.liferay.portal.NoSuchWebsiteException,
+			com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByCompanyId_PrevAndNext(websiteId, companyId, obc);
 	}
@@ -152,23 +152,23 @@ public class WebsiteUtil {
 
 	public static com.liferay.portal.model.Website findByUserId_First(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchWebsiteException {
+		throws com.liferay.portal.NoSuchWebsiteException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByUserId_First(userId, obc);
 	}
 
 	public static com.liferay.portal.model.Website findByUserId_Last(
 		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchWebsiteException {
+		throws com.liferay.portal.NoSuchWebsiteException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByUserId_Last(userId, obc);
 	}
 
 	public static com.liferay.portal.model.Website[] findByUserId_PrevAndNext(
 		long websiteId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchWebsiteException {
+		throws com.liferay.portal.NoSuchWebsiteException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByUserId_PrevAndNext(websiteId, userId, obc);
 	}
 
@@ -195,24 +195,24 @@ public class WebsiteUtil {
 	public static com.liferay.portal.model.Website findByC_C_First(
 		long companyId, long classNameId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchWebsiteException {
+		throws com.liferay.portal.NoSuchWebsiteException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByC_C_First(companyId, classNameId, obc);
 	}
 
 	public static com.liferay.portal.model.Website findByC_C_Last(
 		long companyId, long classNameId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchWebsiteException {
+		throws com.liferay.portal.NoSuchWebsiteException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByC_C_Last(companyId, classNameId, obc);
 	}
 
 	public static com.liferay.portal.model.Website[] findByC_C_PrevAndNext(
 		long websiteId, long companyId, long classNameId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchWebsiteException {
+		throws com.liferay.portal.NoSuchWebsiteException,
+			com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByC_C_PrevAndNext(websiteId, companyId, classNameId, obc);
 	}
@@ -241,8 +241,8 @@ public class WebsiteUtil {
 	public static com.liferay.portal.model.Website findByC_C_C_First(
 		long companyId, long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchWebsiteException {
+		throws com.liferay.portal.NoSuchWebsiteException,
+			com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByC_C_C_First(companyId, classNameId, classPK, obc);
 	}
@@ -250,8 +250,8 @@ public class WebsiteUtil {
 	public static com.liferay.portal.model.Website findByC_C_C_Last(
 		long companyId, long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchWebsiteException {
+		throws com.liferay.portal.NoSuchWebsiteException,
+			com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByC_C_C_Last(companyId, classNameId, classPK, obc);
 	}
@@ -259,8 +259,8 @@ public class WebsiteUtil {
 	public static com.liferay.portal.model.Website[] findByC_C_C_PrevAndNext(
 		long websiteId, long companyId, long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchWebsiteException {
+		throws com.liferay.portal.NoSuchWebsiteException,
+			com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByC_C_C_PrevAndNext(websiteId, companyId, classNameId,
 			classPK, obc);
@@ -293,8 +293,8 @@ public class WebsiteUtil {
 	public static com.liferay.portal.model.Website findByC_C_C_P_First(
 		long companyId, long classNameId, long classPK, boolean primary,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchWebsiteException {
+		throws com.liferay.portal.NoSuchWebsiteException,
+			com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByC_C_C_P_First(companyId, classNameId, classPK,
 			primary, obc);
@@ -303,8 +303,8 @@ public class WebsiteUtil {
 	public static com.liferay.portal.model.Website findByC_C_C_P_Last(
 		long companyId, long classNameId, long classPK, boolean primary,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchWebsiteException {
+		throws com.liferay.portal.NoSuchWebsiteException,
+			com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByC_C_C_P_Last(companyId, classNameId, classPK,
 			primary, obc);
@@ -313,8 +313,8 @@ public class WebsiteUtil {
 	public static com.liferay.portal.model.Website[] findByC_C_C_P_PrevAndNext(
 		long websiteId, long companyId, long classNameId, long classPK,
 		boolean primary, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchWebsiteException {
+		throws com.liferay.portal.NoSuchWebsiteException,
+			com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByC_C_C_P_PrevAndNext(websiteId, companyId,
 			classNameId, classPK, primary, obc);

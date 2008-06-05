@@ -56,12 +56,12 @@ public interface User extends UserModel {
 	public boolean hasCompanyMx(java.lang.String emailAddress);
 
 	public java.lang.String getLogin()
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PasswordPolicy getPasswordPolicy()
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public java.lang.String getPasswordUnencrypted();
 

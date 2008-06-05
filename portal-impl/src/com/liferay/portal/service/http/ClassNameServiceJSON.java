@@ -72,8 +72,8 @@ import org.json.JSONObject;
  */
 public class ClassNameServiceJSON {
 	public static JSONObject getClassName(long classNameId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.ClassName returnValue = ClassNameServiceUtil.getClassName(classNameId);
 
 		return ClassNameJSONSerializer.toJSONObject(returnValue);

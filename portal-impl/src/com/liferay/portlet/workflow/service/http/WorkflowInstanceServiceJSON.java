@@ -72,22 +72,22 @@ import org.json.JSONObject;
  */
 public class WorkflowInstanceServiceJSON {
 	public static JSONObject addInstance(long definitionId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.workflow.model.WorkflowInstance returnValue = WorkflowInstanceServiceUtil.addInstance(definitionId);
 
 		return WorkflowInstanceJSONSerializer.toJSONObject(returnValue);
 	}
 
 	public static void signalInstance(long instanceId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		WorkflowInstanceServiceUtil.signalInstance(instanceId);
 	}
 
 	public static void signalToken(long instanceId, long tokenId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		WorkflowInstanceServiceUtil.signalToken(instanceId, tokenId);
 	}
 }

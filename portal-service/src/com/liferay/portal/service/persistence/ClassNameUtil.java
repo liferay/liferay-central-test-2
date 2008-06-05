@@ -34,8 +34,8 @@ public class ClassNameUtil {
 	}
 
 	public static com.liferay.portal.model.ClassName remove(long classNameId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchClassNameException {
+		throws com.liferay.portal.NoSuchClassNameException,
+			com.liferay.portal.SystemException {
 		return getPersistence().remove(classNameId);
 	}
 
@@ -81,8 +81,8 @@ public class ClassNameUtil {
 
 	public static com.liferay.portal.model.ClassName findByPrimaryKey(
 		long classNameId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchClassNameException {
+		throws com.liferay.portal.NoSuchClassNameException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByPrimaryKey(classNameId);
 	}
 
@@ -93,8 +93,8 @@ public class ClassNameUtil {
 
 	public static com.liferay.portal.model.ClassName findByValue(
 		java.lang.String value)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchClassNameException {
+		throws com.liferay.portal.NoSuchClassNameException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByValue(value);
 	}
 
@@ -133,8 +133,8 @@ public class ClassNameUtil {
 	}
 
 	public static void removeByValue(java.lang.String value)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchClassNameException {
+		throws com.liferay.portal.NoSuchClassNameException,
+			com.liferay.portal.SystemException {
 		getPersistence().removeByValue(value);
 	}
 

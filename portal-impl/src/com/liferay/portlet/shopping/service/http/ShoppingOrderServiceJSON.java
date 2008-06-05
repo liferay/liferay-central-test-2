@@ -75,21 +75,21 @@ public class ShoppingOrderServiceJSON {
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
 		double ppPaymentGross, java.lang.String ppReceiverEmail,
 		java.lang.String ppPayerEmail)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		ShoppingOrderServiceUtil.completeOrder(plid, number, ppTxnId,
 			ppPaymentStatus, ppPaymentGross, ppReceiverEmail, ppPayerEmail);
 	}
 
 	public static void deleteOrder(long plid, long orderId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		ShoppingOrderServiceUtil.deleteOrder(plid, orderId);
 	}
 
 	public static JSONObject getOrder(long plid, long orderId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.shopping.model.ShoppingOrder returnValue = ShoppingOrderServiceUtil.getOrder(plid,
 				orderId);
 
@@ -98,8 +98,8 @@ public class ShoppingOrderServiceJSON {
 
 	public static void sendEmail(long plid, long orderId,
 		java.lang.String emailType)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		ShoppingOrderServiceUtil.sendEmail(plid, orderId, emailType);
 	}
 
@@ -118,8 +118,8 @@ public class ShoppingOrderServiceJSON {
 		java.lang.String shippingPhone, java.lang.String ccName,
 		java.lang.String ccType, java.lang.String ccNumber, int ccExpMonth,
 		int ccExpYear, java.lang.String ccVerNumber, java.lang.String comments)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.shopping.model.ShoppingOrder returnValue = ShoppingOrderServiceUtil.updateOrder(plid,
 				orderId, billingFirstName, billingLastName,
 				billingEmailAddress, billingCompany, billingStreet,
@@ -137,8 +137,8 @@ public class ShoppingOrderServiceJSON {
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
 		double ppPaymentGross, java.lang.String ppReceiverEmail,
 		java.lang.String ppPayerEmail)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portlet.shopping.model.ShoppingOrder returnValue = ShoppingOrderServiceUtil.updateOrder(plid,
 				orderId, ppTxnId, ppPaymentStatus, ppPaymentGross,
 				ppReceiverEmail, ppPayerEmail);

@@ -36,8 +36,8 @@ public class PortletItemUtil {
 
 	public static com.liferay.portal.model.PortletItem remove(
 		long portletItemId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPortletItemException {
+		throws com.liferay.portal.NoSuchPortletItemException,
+			com.liferay.portal.SystemException {
 		return getPersistence().remove(portletItemId);
 	}
 
@@ -83,8 +83,8 @@ public class PortletItemUtil {
 
 	public static com.liferay.portal.model.PortletItem findByPrimaryKey(
 		long portletItemId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPortletItemException {
+		throws com.liferay.portal.NoSuchPortletItemException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByPrimaryKey(portletItemId);
 	}
 
@@ -115,24 +115,24 @@ public class PortletItemUtil {
 	public static com.liferay.portal.model.PortletItem findByG_C_First(
 		long groupId, long classNameId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPortletItemException {
+		throws com.liferay.portal.NoSuchPortletItemException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByG_C_First(groupId, classNameId, obc);
 	}
 
 	public static com.liferay.portal.model.PortletItem findByG_C_Last(
 		long groupId, long classNameId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPortletItemException {
+		throws com.liferay.portal.NoSuchPortletItemException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByG_C_Last(groupId, classNameId, obc);
 	}
 
 	public static com.liferay.portal.model.PortletItem[] findByG_C_PrevAndNext(
 		long portletItemId, long groupId, long classNameId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPortletItemException {
+		throws com.liferay.portal.NoSuchPortletItemException,
+			com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByG_C_PrevAndNext(portletItemId, groupId, classNameId,
 			obc);
@@ -162,8 +162,8 @@ public class PortletItemUtil {
 	public static com.liferay.portal.model.PortletItem findByG_P_C_First(
 		long groupId, java.lang.String portletId, long classNameId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPortletItemException {
+		throws com.liferay.portal.NoSuchPortletItemException,
+			com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByG_P_C_First(groupId, portletId, classNameId, obc);
 	}
@@ -171,8 +171,8 @@ public class PortletItemUtil {
 	public static com.liferay.portal.model.PortletItem findByG_P_C_Last(
 		long groupId, java.lang.String portletId, long classNameId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPortletItemException {
+		throws com.liferay.portal.NoSuchPortletItemException,
+			com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByG_P_C_Last(groupId, portletId, classNameId, obc);
 	}
@@ -180,8 +180,8 @@ public class PortletItemUtil {
 	public static com.liferay.portal.model.PortletItem[] findByG_P_C_PrevAndNext(
 		long portletItemId, long groupId, java.lang.String portletId,
 		long classNameId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPortletItemException {
+		throws com.liferay.portal.NoSuchPortletItemException,
+			com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByG_P_C_PrevAndNext(portletItemId, groupId, portletId,
 			classNameId, obc);
@@ -190,8 +190,8 @@ public class PortletItemUtil {
 	public static com.liferay.portal.model.PortletItem findByG_N_P_C(
 		long groupId, java.lang.String name, java.lang.String portletId,
 		long classNameId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPortletItemException {
+		throws com.liferay.portal.NoSuchPortletItemException,
+			com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByG_N_P_C(groupId, name, portletId, classNameId);
 	}
@@ -244,8 +244,8 @@ public class PortletItemUtil {
 
 	public static void removeByG_N_P_C(long groupId, java.lang.String name,
 		java.lang.String portletId, long classNameId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPortletItemException {
+		throws com.liferay.portal.NoSuchPortletItemException,
+			com.liferay.portal.SystemException {
 		getPersistence().removeByG_N_P_C(groupId, name, portletId, classNameId);
 	}
 

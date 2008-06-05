@@ -32,8 +32,8 @@ public interface PermissionPersistence {
 	public com.liferay.portal.model.Permission create(long permissionId);
 
 	public com.liferay.portal.model.Permission remove(long permissionId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPermissionException;
+		throws com.liferay.portal.NoSuchPermissionException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Permission remove(
 		com.liferay.portal.model.Permission permission)
@@ -69,8 +69,8 @@ public interface PermissionPersistence {
 
 	public com.liferay.portal.model.Permission findByPrimaryKey(
 		long permissionId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPermissionException;
+		throws com.liferay.portal.NoSuchPermissionException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Permission fetchByPrimaryKey(
 		long permissionId) throws com.liferay.portal.SystemException;
@@ -89,24 +89,24 @@ public interface PermissionPersistence {
 
 	public com.liferay.portal.model.Permission findByResourceId_First(
 		long resourceId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPermissionException;
+		throws com.liferay.portal.NoSuchPermissionException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Permission findByResourceId_Last(
 		long resourceId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPermissionException;
+		throws com.liferay.portal.NoSuchPermissionException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Permission[] findByResourceId_PrevAndNext(
 		long permissionId, long resourceId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPermissionException;
+		throws com.liferay.portal.NoSuchPermissionException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Permission findByA_R(
 		java.lang.String actionId, long resourceId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPermissionException;
+		throws com.liferay.portal.NoSuchPermissionException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Permission fetchByA_R(
 		java.lang.String actionId, long resourceId)
@@ -134,8 +134,8 @@ public interface PermissionPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByA_R(java.lang.String actionId, long resourceId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPermissionException;
+		throws com.liferay.portal.NoSuchPermissionException,
+			com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 

@@ -70,8 +70,8 @@ import com.liferay.portal.service.PortletPreferencesServiceUtil;
  */
 public class PortletPreferencesServiceJSON {
 	public static void deleteArchivedPreferences(long portletItemId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		PortletPreferencesServiceUtil.deleteArchivedPreferences(portletItemId);
 	}
 }

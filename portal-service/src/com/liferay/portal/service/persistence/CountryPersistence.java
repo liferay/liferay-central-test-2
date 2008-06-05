@@ -32,8 +32,8 @@ public interface CountryPersistence {
 	public com.liferay.portal.model.Country create(long countryId);
 
 	public com.liferay.portal.model.Country remove(long countryId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchCountryException;
+		throws com.liferay.portal.NoSuchCountryException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Country remove(
 		com.liferay.portal.model.Country country)
@@ -68,8 +68,8 @@ public interface CountryPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Country findByPrimaryKey(long countryId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchCountryException;
+		throws com.liferay.portal.NoSuchCountryException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Country fetchByPrimaryKey(long countryId)
 		throws com.liferay.portal.SystemException;
@@ -88,19 +88,19 @@ public interface CountryPersistence {
 
 	public com.liferay.portal.model.Country findByActive_First(boolean active,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchCountryException;
+		throws com.liferay.portal.NoSuchCountryException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Country findByActive_Last(boolean active,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchCountryException;
+		throws com.liferay.portal.NoSuchCountryException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Country[] findByActive_PrevAndNext(
 		long countryId, boolean active,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchCountryException;
+		throws com.liferay.portal.NoSuchCountryException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Country> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)

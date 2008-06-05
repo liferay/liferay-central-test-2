@@ -75,8 +75,8 @@ public class CountryServiceJSON {
 	public static JSONObject addCountry(java.lang.String name,
 		java.lang.String a2, java.lang.String a3, java.lang.String number,
 		java.lang.String idd, boolean active)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Country returnValue = CountryServiceUtil.addCountry(name,
 				a2, a3, number, idd, active);
 
@@ -98,8 +98,8 @@ public class CountryServiceJSON {
 	}
 
 	public static JSONObject getCountry(long countryId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Country returnValue = CountryServiceUtil.getCountry(countryId);
 
 		return CountryJSONSerializer.toJSONObject(returnValue);

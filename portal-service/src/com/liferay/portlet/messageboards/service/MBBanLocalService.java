@@ -78,16 +78,16 @@ public interface MBBanLocalService {
 
 	public com.liferay.portlet.messageboards.model.MBBan addBan(long userId,
 		long plid, long banUserId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void checkBan(long groupId, long banUserId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteBan(long plid, long banUserId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteBansByBanUserId(long banUserId)
 		throws com.liferay.portal.SystemException;

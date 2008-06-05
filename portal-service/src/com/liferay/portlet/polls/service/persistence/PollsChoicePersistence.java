@@ -32,8 +32,8 @@ public interface PollsChoicePersistence {
 	public com.liferay.portlet.polls.model.PollsChoice create(long choiceId);
 
 	public com.liferay.portlet.polls.model.PollsChoice remove(long choiceId)
-		throws com.liferay.portlet.polls.NoSuchChoiceException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.polls.NoSuchChoiceException;
 
 	public com.liferay.portlet.polls.model.PollsChoice remove(
 		com.liferay.portlet.polls.model.PollsChoice pollsChoice)
@@ -69,8 +69,8 @@ public interface PollsChoicePersistence {
 
 	public com.liferay.portlet.polls.model.PollsChoice findByPrimaryKey(
 		long choiceId)
-		throws com.liferay.portlet.polls.NoSuchChoiceException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.polls.NoSuchChoiceException;
 
 	public com.liferay.portlet.polls.model.PollsChoice fetchByPrimaryKey(
 		long choiceId) throws com.liferay.portal.SystemException;
@@ -90,20 +90,20 @@ public interface PollsChoicePersistence {
 	public com.liferay.portlet.polls.model.PollsChoice findByUuid_First(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portlet.polls.NoSuchChoiceException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.polls.NoSuchChoiceException;
 
 	public com.liferay.portlet.polls.model.PollsChoice findByUuid_Last(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portlet.polls.NoSuchChoiceException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.polls.NoSuchChoiceException;
 
 	public com.liferay.portlet.polls.model.PollsChoice[] findByUuid_PrevAndNext(
 		long choiceId, java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portlet.polls.NoSuchChoiceException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.polls.NoSuchChoiceException;
 
 	public java.util.List<com.liferay.portlet.polls.model.PollsChoice> findByQuestionId(
 		long questionId) throws com.liferay.portal.SystemException;
@@ -119,24 +119,24 @@ public interface PollsChoicePersistence {
 
 	public com.liferay.portlet.polls.model.PollsChoice findByQuestionId_First(
 		long questionId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portlet.polls.NoSuchChoiceException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.polls.NoSuchChoiceException;
 
 	public com.liferay.portlet.polls.model.PollsChoice findByQuestionId_Last(
 		long questionId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portlet.polls.NoSuchChoiceException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.polls.NoSuchChoiceException;
 
 	public com.liferay.portlet.polls.model.PollsChoice[] findByQuestionId_PrevAndNext(
 		long choiceId, long questionId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portlet.polls.NoSuchChoiceException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.polls.NoSuchChoiceException;
 
 	public com.liferay.portlet.polls.model.PollsChoice findByQ_N(
 		long questionId, java.lang.String name)
-		throws com.liferay.portlet.polls.NoSuchChoiceException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.polls.NoSuchChoiceException;
 
 	public com.liferay.portlet.polls.model.PollsChoice fetchByQ_N(
 		long questionId, java.lang.String name)
@@ -167,8 +167,8 @@ public interface PollsChoicePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByQ_N(long questionId, java.lang.String name)
-		throws com.liferay.portlet.polls.NoSuchChoiceException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.polls.NoSuchChoiceException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 

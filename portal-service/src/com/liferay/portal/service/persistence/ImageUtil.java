@@ -34,8 +34,8 @@ public class ImageUtil {
 	}
 
 	public static com.liferay.portal.model.Image remove(long imageId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchImageException {
+		throws com.liferay.portal.NoSuchImageException,
+			com.liferay.portal.SystemException {
 		return getPersistence().remove(imageId);
 	}
 
@@ -80,8 +80,8 @@ public class ImageUtil {
 	}
 
 	public static com.liferay.portal.model.Image findByPrimaryKey(long imageId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchImageException {
+		throws com.liferay.portal.NoSuchImageException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByPrimaryKey(imageId);
 	}
 
@@ -109,23 +109,23 @@ public class ImageUtil {
 
 	public static com.liferay.portal.model.Image findBySize_First(int size,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchImageException {
+		throws com.liferay.portal.NoSuchImageException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findBySize_First(size, obc);
 	}
 
 	public static com.liferay.portal.model.Image findBySize_Last(int size,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchImageException {
+		throws com.liferay.portal.NoSuchImageException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findBySize_Last(size, obc);
 	}
 
 	public static com.liferay.portal.model.Image[] findBySize_PrevAndNext(
 		long imageId, int size,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchImageException {
+		throws com.liferay.portal.NoSuchImageException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findBySize_PrevAndNext(imageId, size, obc);
 	}
 

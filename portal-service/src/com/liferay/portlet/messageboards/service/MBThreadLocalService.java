@@ -79,17 +79,17 @@ public interface MBThreadLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public void deleteThread(long threadId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteThread(
 		com.liferay.portlet.messageboards.model.MBThread thread)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteThreads(long categoryId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public int getCategoriesThreadsCount(java.util.List<Long> categoryIds)
 		throws com.liferay.portal.SystemException;
@@ -117,8 +117,8 @@ public interface MBThreadLocalService {
 
 	public com.liferay.portlet.messageboards.model.MBThread getThread(
 		long threadId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> getThreads(
 		long categoryId, int start, int end)
@@ -128,22 +128,22 @@ public interface MBThreadLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public boolean hasReadThread(long userId, long threadId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBThread moveThread(
 		long categoryId, long threadId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBThread splitThread(
 		long messageId, javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBThread updateThread(
 		long threadId, int viewCount)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

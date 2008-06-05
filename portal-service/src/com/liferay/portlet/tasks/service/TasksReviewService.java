@@ -51,15 +51,15 @@ package com.liferay.portlet.tasks.service;
 public interface TasksReviewService {
 	public com.liferay.portlet.tasks.model.TasksReview approveReview(
 		long proposalId, int stage)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tasks.model.TasksReview rejectReview(
 		long proposalId, int stage)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void updateReviews(long proposalId, long[][] userIdsPerStage)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

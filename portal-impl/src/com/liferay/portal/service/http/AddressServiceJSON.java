@@ -77,8 +77,8 @@ public class AddressServiceJSON {
 		java.lang.String street3, java.lang.String city, java.lang.String zip,
 		long regionId, long countryId, int typeId, boolean mailing,
 		boolean primary)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Address returnValue = AddressServiceUtil.addAddress(className,
 				classPK, street1, street2, street3, city, zip, regionId,
 				countryId, typeId, mailing, primary);
@@ -87,14 +87,14 @@ public class AddressServiceJSON {
 	}
 
 	public static void deleteAddress(long addressId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		AddressServiceUtil.deleteAddress(addressId);
 	}
 
 	public static JSONObject getAddress(long addressId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Address returnValue = AddressServiceUtil.getAddress(addressId);
 
 		return AddressJSONSerializer.toJSONObject(returnValue);
@@ -102,8 +102,8 @@ public class AddressServiceJSON {
 
 	public static JSONArray getAddresses(java.lang.String className,
 		long classPK)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portal.model.Address> returnValue = AddressServiceUtil.getAddresses(className,
 				classPK);
 
@@ -115,8 +115,8 @@ public class AddressServiceJSON {
 		java.lang.String street3, java.lang.String city, java.lang.String zip,
 		long regionId, long countryId, int typeId, boolean mailing,
 		boolean primary)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Address returnValue = AddressServiceUtil.updateAddress(addressId,
 				street1, street2, street3, city, zip, regionId, countryId,
 				typeId, mailing, primary);

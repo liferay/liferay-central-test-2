@@ -80,72 +80,72 @@ public interface GroupLocalService {
 		java.lang.String className, long classPK, java.lang.String name,
 		java.lang.String description, int type, java.lang.String friendlyURL,
 		boolean active)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group addGroup(long userId,
 		java.lang.String className, long classPK, long liveGroupId,
 		java.lang.String name, java.lang.String description, int type,
 		java.lang.String friendlyURL, boolean active)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void addRoleGroups(long roleId, long[] groupIds)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void addUserGroups(long userId, long[] groupIds)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void checkSystemGroups(long companyId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group getFriendlyURLGroup(long companyId,
 		java.lang.String friendlyURL)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group getGroup(long companyId,
 		java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Group> getNullFriendlyURLGroups()
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group getOrganizationGroup(long companyId,
 		long organizationId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Group> getOrganizationsGroups(
 		java.util.List<com.liferay.portal.model.Organization> organizations);
 
 	public java.util.List<com.liferay.portal.model.Group> getRoleGroups(
 		long roleId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group getStagingGroup(long liveGroupId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group getUserGroup(long companyId,
 		long userId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group getUserGroupGroup(long companyId,
 		long userGroupId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Group> getUserGroups(
 		long userId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Group> getUserGroupsGroups(
 		java.util.List<com.liferay.portal.model.UserGroup> userGroups);
@@ -173,36 +173,36 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public void setRoleGroups(long roleId, long[] groupIds)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void unsetRoleGroups(long roleId, long[] groupIds)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void unsetUserGroups(long userId, long[] groupIds)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group updateFriendlyURL(long groupId,
 		java.lang.String friendlyURL)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group updateGroup(long groupId,
 		java.lang.String name, java.lang.String description, int type,
 		java.lang.String friendlyURL, boolean active)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group updateGroup(long groupId,
 		java.lang.String typeSettings)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group updateWorkflow(long groupId,
 		boolean workflowEnabled, int workflowStages,
 		java.lang.String workflowRoleNames)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

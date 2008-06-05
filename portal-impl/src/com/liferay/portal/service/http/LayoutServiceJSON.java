@@ -75,8 +75,8 @@ public class LayoutServiceJSON {
 		long parentLayoutId, java.lang.String name, java.lang.String title,
 		java.lang.String description, java.lang.String type, boolean hidden,
 		java.lang.String friendlyURL)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.addLayout(groupId,
 				privateLayout, parentLayoutId, name, title, description, type,
 				hidden, friendlyURL);
@@ -85,22 +85,22 @@ public class LayoutServiceJSON {
 	}
 
 	public static void deleteLayout(long plid)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		LayoutServiceUtil.deleteLayout(plid);
 	}
 
 	public static void deleteLayout(long groupId, boolean privateLayout,
 		long layoutId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		LayoutServiceUtil.deleteLayout(groupId, privateLayout, layoutId);
 	}
 
 	public static java.lang.String getLayoutName(long groupId,
 		boolean privateLayout, long layoutId, java.lang.String languageId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		java.lang.String returnValue = LayoutServiceUtil.getLayoutName(groupId,
 				privateLayout, layoutId, languageId);
 
@@ -119,16 +119,16 @@ public class LayoutServiceJSON {
 
 	public static void setLayouts(long groupId, boolean privateLayout,
 		long parentLayoutId, long[] layoutIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		LayoutServiceUtil.setLayouts(groupId, privateLayout, parentLayoutId,
 			layoutIds);
 	}
 
 	public static JSONObject updateLayout(long groupId, boolean privateLayout,
 		long layoutId, java.lang.String typeSettings)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateLayout(groupId,
 				privateLayout, layoutId, typeSettings);
 
@@ -138,8 +138,8 @@ public class LayoutServiceJSON {
 	public static JSONObject updateLookAndFeel(long groupId,
 		boolean privateLayout, long layoutId, java.lang.String themeId,
 		java.lang.String colorSchemeId, java.lang.String css, boolean wapTheme)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateLookAndFeel(groupId,
 				privateLayout, layoutId, themeId, colorSchemeId, css, wapTheme);
 
@@ -148,8 +148,8 @@ public class LayoutServiceJSON {
 
 	public static JSONObject updateName(long plid, java.lang.String name,
 		java.lang.String languageId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateName(plid,
 				name, languageId);
 
@@ -158,8 +158,8 @@ public class LayoutServiceJSON {
 
 	public static JSONObject updateName(long groupId, boolean privateLayout,
 		long layoutId, java.lang.String name, java.lang.String languageId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateName(groupId,
 				privateLayout, layoutId, name, languageId);
 
@@ -167,8 +167,8 @@ public class LayoutServiceJSON {
 	}
 
 	public static JSONObject updateParentLayoutId(long plid, long parentPlid)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateParentLayoutId(plid,
 				parentPlid);
 
@@ -177,8 +177,8 @@ public class LayoutServiceJSON {
 
 	public static JSONObject updateParentLayoutId(long groupId,
 		boolean privateLayout, long layoutId, long parentLayoutId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateParentLayoutId(groupId,
 				privateLayout, layoutId, parentLayoutId);
 
@@ -186,8 +186,8 @@ public class LayoutServiceJSON {
 	}
 
 	public static JSONObject updatePriority(long plid, int priority)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updatePriority(plid,
 				priority);
 
@@ -196,8 +196,8 @@ public class LayoutServiceJSON {
 
 	public static JSONObject updatePriority(long groupId,
 		boolean privateLayout, long layoutId, int priority)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updatePriority(groupId,
 				privateLayout, layoutId, priority);
 

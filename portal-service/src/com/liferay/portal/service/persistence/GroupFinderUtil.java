@@ -48,8 +48,8 @@ public class GroupFinderUtil {
 
 	public static com.liferay.portal.model.Group findByC_N(long companyId,
 		java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchGroupException {
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.SystemException {
 		return getFinder().findByC_N(companyId, name);
 	}
 

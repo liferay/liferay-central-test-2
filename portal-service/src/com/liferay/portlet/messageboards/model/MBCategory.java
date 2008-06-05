@@ -50,12 +50,12 @@ package com.liferay.portlet.messageboards.model;
  */
 public interface MBCategory extends MBCategoryModel {
 	public java.util.List<Long> getAncestorCategoryIds()
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getAncestors()
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.SystemException;

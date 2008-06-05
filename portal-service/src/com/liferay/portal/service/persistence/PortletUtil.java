@@ -34,8 +34,8 @@ public class PortletUtil {
 	}
 
 	public static com.liferay.portal.model.Portlet remove(long id)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPortletException {
+		throws com.liferay.portal.NoSuchPortletException,
+			com.liferay.portal.SystemException {
 		return getPersistence().remove(id);
 	}
 
@@ -80,8 +80,8 @@ public class PortletUtil {
 	}
 
 	public static com.liferay.portal.model.Portlet findByPrimaryKey(long id)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPortletException {
+		throws com.liferay.portal.NoSuchPortletException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByPrimaryKey(id);
 	}
 
@@ -110,30 +110,30 @@ public class PortletUtil {
 
 	public static com.liferay.portal.model.Portlet findByCompanyId_First(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPortletException {
+		throws com.liferay.portal.NoSuchPortletException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId_First(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.Portlet findByCompanyId_Last(
 		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPortletException {
+		throws com.liferay.portal.NoSuchPortletException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId_Last(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.Portlet[] findByCompanyId_PrevAndNext(
 		long id, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPortletException {
+		throws com.liferay.portal.NoSuchPortletException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId_PrevAndNext(id, companyId, obc);
 	}
 
 	public static com.liferay.portal.model.Portlet findByC_P(long companyId,
 		java.lang.String portletId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPortletException {
+		throws com.liferay.portal.NoSuchPortletException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByC_P(companyId, portletId);
 	}
 
@@ -177,8 +177,8 @@ public class PortletUtil {
 	}
 
 	public static void removeByC_P(long companyId, java.lang.String portletId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchPortletException {
+		throws com.liferay.portal.NoSuchPortletException,
+			com.liferay.portal.SystemException {
 		getPersistence().removeByC_P(companyId, portletId);
 	}
 

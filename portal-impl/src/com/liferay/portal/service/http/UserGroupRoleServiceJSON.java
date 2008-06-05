@@ -71,29 +71,29 @@ import com.liferay.portal.service.UserGroupRoleServiceUtil;
 public class UserGroupRoleServiceJSON {
 	public static void addUserGroupRoles(long userId, long groupId,
 		long[] roleIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		UserGroupRoleServiceUtil.addUserGroupRoles(userId, groupId, roleIds);
 	}
 
 	public static void addUserGroupRoles(long[] userIds, long groupId,
 		long roleId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		UserGroupRoleServiceUtil.addUserGroupRoles(userIds, groupId, roleId);
 	}
 
 	public static void deleteUserGroupRoles(long userId, long groupId,
 		long[] roleIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		UserGroupRoleServiceUtil.deleteUserGroupRoles(userId, groupId, roleIds);
 	}
 
 	public static void deleteUserGroupRoles(long[] userIds, long groupId,
 		long roleId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		UserGroupRoleServiceUtil.deleteUserGroupRoles(userIds, groupId, roleId);
 	}
 }

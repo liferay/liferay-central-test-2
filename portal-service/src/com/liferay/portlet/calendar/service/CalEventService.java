@@ -58,8 +58,8 @@ public interface CalEventService {
 		boolean repeating, com.liferay.portal.kernel.cal.Recurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.calendar.model.CalEvent addEvent(long plid,
 		java.lang.String title, java.lang.String description,
@@ -71,28 +71,28 @@ public interface CalEventService {
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteEvent(long eventId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public java.io.File exportEvent(long eventId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public java.io.File exportGroupEvents(long plid, java.lang.String fileName)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.calendar.model.CalEvent getEvent(long eventId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void importICal4j(long plid, java.io.File file)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.calendar.model.CalEvent updateEvent(
 		long eventId, java.lang.String title, java.lang.String description,
@@ -102,6 +102,6 @@ public interface CalEventService {
 		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
 		boolean repeating, com.liferay.portal.kernel.cal.Recurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

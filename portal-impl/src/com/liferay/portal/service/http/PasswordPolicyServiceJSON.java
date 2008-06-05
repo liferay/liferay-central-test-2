@@ -78,8 +78,8 @@ public class PasswordPolicyServiceJSON {
 		int historyCount, boolean expireable, long maxAge, long warningTime,
 		int graceLimit, boolean lockout, int maxFailure, long lockoutDuration,
 		long resetFailureCount)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.PasswordPolicy returnValue = PasswordPolicyServiceUtil.addPasswordPolicy(name,
 				description, changeable, changeRequired, minAge, checkSyntax,
 				allowDictionaryWords, minLength, history, historyCount,
@@ -90,8 +90,8 @@ public class PasswordPolicyServiceJSON {
 	}
 
 	public static void deletePasswordPolicy(long passwordPolicyId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		PasswordPolicyServiceUtil.deletePasswordPolicy(passwordPolicyId);
 	}
 
@@ -102,8 +102,8 @@ public class PasswordPolicyServiceJSON {
 		boolean history, int historyCount, boolean expireable, long maxAge,
 		long warningTime, int graceLimit, boolean lockout, int maxFailure,
 		long lockoutDuration, long resetFailureCount)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		com.liferay.portal.model.PasswordPolicy returnValue = PasswordPolicyServiceUtil.updatePasswordPolicy(passwordPolicyId,
 				name, description, changeable, changeRequired, minAge,
 				checkSyntax, allowDictionaryWords, minLength, history,

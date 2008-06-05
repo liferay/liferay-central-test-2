@@ -32,8 +32,8 @@ public interface GroupPersistence {
 	public com.liferay.portal.model.Group create(long groupId);
 
 	public com.liferay.portal.model.Group remove(long groupId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchGroupException;
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group remove(
 		com.liferay.portal.model.Group group)
@@ -68,39 +68,39 @@ public interface GroupPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group findByPrimaryKey(long groupId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchGroupException;
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group fetchByPrimaryKey(long groupId)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group findByLiveGroupId(long liveGroupId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchGroupException;
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group fetchByLiveGroupId(long liveGroupId)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group findByC_N(long companyId,
 		java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchGroupException;
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group fetchByC_N(long companyId,
 		java.lang.String name) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group findByC_F(long companyId,
 		java.lang.String friendlyURL)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchGroupException;
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group fetchByC_F(long companyId,
 		java.lang.String friendlyURL) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group findByC_C_C(long companyId,
 		long classNameId, long classPK)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchGroupException;
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group fetchByC_C_C(long companyId,
 		long classNameId, long classPK)
@@ -125,20 +125,20 @@ public interface GroupPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public void removeByLiveGroupId(long liveGroupId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchGroupException;
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.SystemException;
 
 	public void removeByC_N(long companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchGroupException;
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.SystemException;
 
 	public void removeByC_F(long companyId, java.lang.String friendlyURL)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchGroupException;
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.SystemException;
 
 	public void removeByC_C_C(long companyId, long classNameId, long classPK)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchGroupException;
+		throws com.liferay.portal.NoSuchGroupException,
+			com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 

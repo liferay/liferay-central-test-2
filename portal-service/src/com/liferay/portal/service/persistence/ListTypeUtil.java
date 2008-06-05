@@ -34,8 +34,8 @@ public class ListTypeUtil {
 	}
 
 	public static com.liferay.portal.model.ListType remove(int listTypeId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchListTypeException {
+		throws com.liferay.portal.NoSuchListTypeException,
+			com.liferay.portal.SystemException {
 		return getPersistence().remove(listTypeId);
 	}
 
@@ -81,8 +81,8 @@ public class ListTypeUtil {
 
 	public static com.liferay.portal.model.ListType findByPrimaryKey(
 		int listTypeId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchListTypeException {
+		throws com.liferay.portal.NoSuchListTypeException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByPrimaryKey(listTypeId);
 	}
 
@@ -112,24 +112,24 @@ public class ListTypeUtil {
 	public static com.liferay.portal.model.ListType findByType_First(
 		java.lang.String type,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchListTypeException {
+		throws com.liferay.portal.NoSuchListTypeException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByType_First(type, obc);
 	}
 
 	public static com.liferay.portal.model.ListType findByType_Last(
 		java.lang.String type,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchListTypeException {
+		throws com.liferay.portal.NoSuchListTypeException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByType_Last(type, obc);
 	}
 
 	public static com.liferay.portal.model.ListType[] findByType_PrevAndNext(
 		int listTypeId, java.lang.String type,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.NoSuchListTypeException {
+		throws com.liferay.portal.NoSuchListTypeException,
+			com.liferay.portal.SystemException {
 		return getPersistence().findByType_PrevAndNext(listTypeId, type, obc);
 	}
 

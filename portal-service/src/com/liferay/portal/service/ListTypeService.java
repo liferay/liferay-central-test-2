@@ -50,18 +50,18 @@ package com.liferay.portal.service;
  */
 public interface ListTypeService {
 	public com.liferay.portal.model.ListType getListType(int listTypeId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.ListType> getListTypes(
 		java.lang.String type)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public void validate(int listTypeId, java.lang.String type)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void validate(int listTypeId, long classNameId, java.lang.String type)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }
