@@ -25,6 +25,7 @@ package com.liferay.portlet.blogs.action;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
@@ -175,7 +176,7 @@ public class TrackbackAction extends PortletAction {
 		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
 
 		ServletResponseUtil.sendFile(
-			httpRes, null, sb.toString().getBytes(),
+			httpRes, null, sb.toString().getBytes(StringPool.UTF8),
 			ContentTypes.TEXT_XML_UTF8);
 	}
 
