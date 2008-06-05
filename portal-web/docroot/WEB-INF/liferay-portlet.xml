@@ -570,15 +570,6 @@
 		<css-class-wrapper>portlet-recent-documents</css-class-wrapper>
 	</portlet>
 	<portlet>
-		<portlet-name>65</portlet-name>
-		<icon>/html/portlet/analog_clock/icon.png</icon>
-		<struts-path>analog_clock</struts-path>
-		<restore-current-view>false</restore-current-view>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
-	</portlet>
-	<portlet>
 		<portlet-name>66</portlet-name>
 		<icon>/html/portlet/web_proxy/icon.png</icon>
 		<struts-path>web_proxy</struts-path>

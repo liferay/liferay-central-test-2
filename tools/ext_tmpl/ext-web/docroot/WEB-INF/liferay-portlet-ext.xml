@@ -244,11 +244,6 @@
 		<include>true</include>
 	</portlet>
 	<portlet>
-		<portlet-name>65</portlet-name>
-		<struts-path>analog_clock</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
 		<portlet-name>66</portlet-name>
 		<struts-path>web_proxy</struts-path>
 		<include>true</include>

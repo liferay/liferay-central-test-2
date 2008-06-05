@@ -1169,26 +1169,6 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>65</portlet-name>
-		<display-name>Analog Clock</display-name>
-		<portlet-class>com.liferay.util.bridges.jsp.JSPPortlet</portlet-class>
-		<init-param>
-			<name>view-jsp</name>
-			<value>/html/portlet/analog_clock/view.jsp</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-		</supports>
-		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
-	</portlet>
-	<portlet>
 		<portlet-name>66</portlet-name>
 		<display-name>Web Proxy</display-name>
 		<portlet-class>com.liferay.portlet.webproxy.WebProxyPortlet</portlet-class>
