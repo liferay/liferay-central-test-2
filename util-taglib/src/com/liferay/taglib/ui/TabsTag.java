@@ -151,6 +151,15 @@ public class TabsTag extends ParamAndPropertyAncestorTagImpl {
 		try {
 			ServletRequest req = pageContext.getRequest();
 
+			include(getEndPage());
+
+			req.removeAttribute("liferay-ui:tabs:names");
+			req.removeAttribute("liferay-ui:tabs:values");
+			req.removeAttribute("liferay-ui:tabs:formName");
+			req.removeAttribute("liferay-ui:tabs:param");
+			req.removeAttribute("liferay-ui:tabs:value");
+			req.removeAttribute("liferay-ui:tabs:portletURL");
+			req.removeAttribute("liferay-ui:tabs:url");
 			req.removeAttribute("liferay-ui:tabs:url0");
 			req.removeAttribute("liferay-ui:tabs:url1");
 			req.removeAttribute("liferay-ui:tabs:url2");
@@ -161,8 +170,9 @@ public class TabsTag extends ParamAndPropertyAncestorTagImpl {
 			req.removeAttribute("liferay-ui:tabs:url7");
 			req.removeAttribute("liferay-ui:tabs:url8");
 			req.removeAttribute("liferay-ui:tabs:url9");
-
-			include(getEndPage());
+			req.removeAttribute("liferay-ui:tabs:backURL");
+			req.removeAttribute("liferay-ui:tabs:refresh");
+			req.removeAttribute("liferay-ui:tabs:onClick");
 
 			return EVAL_PAGE;
 		}
