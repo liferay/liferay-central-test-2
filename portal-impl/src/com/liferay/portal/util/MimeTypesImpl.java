@@ -22,6 +22,8 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.util.MimeTypes;
+
 import java.io.File;
 
 import javax.activation.MimetypesFileTypeMap;
@@ -30,23 +32,15 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="MimeTypesUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="MimeTypesImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  *
  */
-public class MimeTypesUtil {
+public class MimeTypesImpl implements MimeTypes {
 
-	public static String getContentType(File file) {
-		return _instance._getContentType(file);
-	}
-
-	public static String getContentType(String fileName) {
-		return _instance._getContentType(fileName);
-	}
-
-	private MimeTypesUtil() {
+	public MimeTypesImpl() {
 		_mimeTypes = new MimetypesFileTypeMap();
 
 		String[] customMimeTypes = PropsUtil.getArray(PropsUtil.MIME_TYPES);
@@ -56,7 +50,7 @@ public class MimeTypesUtil {
 		}
 	}
 
-	private String _getContentType(File file) {
+	public String getContentType(File file) {
 		String contentType = _mimeTypes.getContentType(file);
 
 		if (_log.isDebugEnabled()) {
@@ -68,7 +62,7 @@ public class MimeTypesUtil {
 		return contentType;
 	}
 
-	private String _getContentType(String fileName) {
+	public String getContentType(String fileName) {
 		String contentType = _mimeTypes.getContentType(fileName);
 
 		if (_log.isDebugEnabled()) {
@@ -80,9 +74,7 @@ public class MimeTypesUtil {
 		return contentType;
 	}
 
-	private static Log _log = LogFactory.getLog(MimeTypesUtil.class);
-
-	private static MimeTypesUtil _instance = new MimeTypesUtil();
+	private static Log _log = LogFactory.getLog(MimeTypesImpl.class);
 
 	private MimetypesFileTypeMap _mimeTypes;
 

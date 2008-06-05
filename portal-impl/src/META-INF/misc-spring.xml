@@ -182,6 +182,12 @@
 			<ref bean="com.liferay.portal.util.HttpImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.util.MimeTypesImpl" class="com.liferay.portal.util.MimeTypesImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.kernel.util.MimeTypesUtil" class="com.liferay.portal.kernel.util.MimeTypesUtil" lazy-init="true">
+		<property name="mimeTypes">
+			<ref bean="com.liferay.portal.util.MimeTypesImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.util.PortalImpl" class="com.liferay.portal.util.PortalImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.util.PortalUtil" class="com.liferay.portal.util.PortalUtil" lazy-init="true">
 		<property name="portal">
