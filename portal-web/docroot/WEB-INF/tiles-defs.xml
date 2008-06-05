@@ -449,14 +449,6 @@
 		<put name="portlet_content" value="/portlet/enterprise_admin/view.jsp" />
 	</definition>
 
-	<!-- Flash -->
-
-	<definition name="portlet.flash" extends="portlet" />
-
-	<definition name="portlet.flash.view" extends="portlet.flash">
-		<put name="portlet_content" value="/portlet/flash/view.jsp" />
-	</definition>
-
 	<!-- IFrame -->
 
 	<definition name="portlet.iframe" extends="portlet" />

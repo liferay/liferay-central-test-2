@@ -555,12 +555,6 @@
 
 		<action path="/enterprise_admin/view" forward="portlet.enterprise_admin.view" />
 
-		<!-- Flash -->
-
-		<action path="/flash/view" type="com.liferay.portlet.flash.action.ViewAction">
-			<forward name="portlet.flash.view" path="portlet.flash.view" />
-		</action>
-
 		<!-- Global Prayer Digest -->
 
 		<action path="/global_prayer_digest/view" type="com.liferay.portlet.globalprayerdigest.action.ViewAction">

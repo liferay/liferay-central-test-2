@@ -209,11 +209,6 @@
 		<include>true</include>
 	</portlet>
 	<portlet>
-		<portlet-name>53</portlet-name>
-		<struts-path>flash</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
 		<portlet-name>54</portlet-name>
 		<struts-path>wiki_display</struts-path>
 		<include>true</include>

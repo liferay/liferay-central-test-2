@@ -479,18 +479,6 @@
 		<render-weight>1</render-weight>
 	</portlet>
 	<portlet>
-		<portlet-name>53</portlet-name>
-		<icon>/html/portlet/flash/icon.png</icon>
-		<struts-path>flash</struts-path>
-		<configuration-action-class>com.liferay.portlet.flash.action.ConfigurationActionImpl</configuration-action-class>
-		<use-default-template>false</use-default-template>
-		<restore-current-view>false</restore-current-view>
-		<instanceable>true</instanceable>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
-	</portlet>
-	<portlet>
 		<portlet-name>54</portlet-name>
 		<icon>/html/portlet/wiki_display/icon.png</icon>
 		<struts-path>wiki_display</struts-path>
