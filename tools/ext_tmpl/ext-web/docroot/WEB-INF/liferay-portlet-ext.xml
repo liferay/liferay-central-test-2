@@ -104,11 +104,6 @@
 		<include>true</include>
 	</portlet>
 	<portlet>
-		<portlet-name>22</portlet-name>
-		<struts-path>instant_messenger</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
 		<portlet-name>23</portlet-name>
 		<struts-path>dictionary</struts-path>
 		<include>true</include>

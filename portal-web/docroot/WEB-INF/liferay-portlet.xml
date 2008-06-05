@@ -227,17 +227,6 @@
 		<render-weight>0</render-weight>
 	</portlet>
 	<portlet>
-		<portlet-name>22</portlet-name>
-		<icon>/html/portlet/instant_messenger/icon.png</icon>
-		<struts-path>instant_messenger</struts-path>
-		<restore-current-view>false</restore-current-view>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
-		<css-class-wrapper>portlet-instant-messenger</css-class-wrapper>
-		<include>false</include>
-	</portlet>
-	<portlet>
 		<portlet-name>23</portlet-name>
 		<icon>/html/portlet/dictionary/icon.png</icon>
 		<struts-path>dictionary</struts-path>
