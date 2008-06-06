@@ -41,6 +41,12 @@
 				return "<%= themeDisplay.getUserId() %>";
 			},
 
+			<c:if test="<%= themeDisplay.isSignedIn() %>">
+				getUserName: function() {
+					return "<%= UnicodeFormatter.toString(user.getFullName()) %>";
+				},
+			</c:if>
+
 			<c:if test="<%= layout != null %>">
 				getLayoutId: function() {
 					return "<%= layout.getLayoutId() %>";
