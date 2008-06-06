@@ -751,28 +751,6 @@
 			<forward name="portlet.login.view" path="portlet.login.view" />
 		</action>
 
-		<!-- Mail -->
-
-		<action path="/mail/action" type="com.liferay.portlet.mail.action.MailAction" />
-
-		<action path="/mail/edit" type="com.liferay.portlet.mail.action.EditPreferencesAction">
-			<forward name="portlet.mail.edit" path="portlet.mail.edit" />
-		</action>
-
-		<action path="/mail/edit_message" type="com.liferay.portlet.mail.action.EditMessageAction">
-			<forward name="portlet.mail.edit_message" path="portlet.mail.edit_message" />
-		</action>
-
-		<action path="/mail/get_attachment" type="com.liferay.portlet.mail.action.GetAttachmentAction" />
-
-		<action path="/mail/register" type="com.liferay.portlet.mail.action.RegisterAction">
-			<forward name="portlet.mail.register" path="portlet.mail.register" />
-		</action>
-
-		<action path="/mail/view" forward="portlet.mail.view" />
-
-		<action path="/mail/view_message" forward="/portlet/mail/view_message.jsp" />
-
 		<!-- Maps -->
 
 		<action path="/maps/view" forward="portlet.maps.view" name="mapsMapsForm" scope="request" />

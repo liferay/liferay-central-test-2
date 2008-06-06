@@ -622,26 +622,6 @@
 		<put name="portlet_content" value="/portlet/login/view.jsp" />
 	</definition>
 
-	<!-- Mail -->
-
-	<definition name="portlet.mail" extends="portlet" />
-
-	<definition name="portlet.mail.edit" extends="portlet.mail">
-		<put name="portlet_content" value="/portlet/mail/edit.jsp" />
-	</definition>
-
-	<definition name="portlet.mail.edit_message" extends="portlet.mail">
-		<put name="portlet_content" value="/portlet/mail/edit_message.jsp" />
-	</definition>
-
-	<definition name="portlet.mail.register" extends="portlet.mail">
-		<put name="portlet_content" value="/portlet/mail/register.jsp" />
-	</definition>
-
-	<definition name="portlet.mail.view" extends="portlet.mail">
-		<put name="portlet_content" value="/portlet/mail/view.jsp" />
-	</definition>
-
 	<!-- Maps -->
 
 	<definition name="portlet.maps" extends="portlet" />

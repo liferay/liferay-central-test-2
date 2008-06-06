@@ -24,11 +24,6 @@
 
 	<!--
 	<portlet>
-		<portlet-name>1</portlet-name>
-		<struts-path>mail</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
 		<portlet-name>2</portlet-name>
 		<struts-path>my_account</struts-path>
 		<include>true</include>

@@ -3,21 +3,6 @@
 
 <liferay-portlet-app>
 	<portlet>
-		<portlet-name>1</portlet-name>
-		<icon>/html/portlet/mail/icon.png</icon>
-		<struts-path>mail</struts-path>
-		<preferences-unique-per-layout>false</preferences-unique-per-layout>
-		<preferences-owned-by-group>false</preferences-owned-by-group>
-		<use-default-template>false</use-default-template>
-		<restore-current-view>false</restore-current-view>
-		<maximize-edit>true</maximize-edit>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>0</render-weight>
-		<header-portlet-javascript>/html/portlet/mail/packed.js</header-portlet-javascript>
-		<css-class-wrapper>portlet-mail</css-class-wrapper>
-	</portlet>
-	<portlet>
 		<portlet-name>2</portlet-name>
 		<icon>/html/portlet/my_account/icon.png</icon>
 		<struts-path>my_account</struts-path>
