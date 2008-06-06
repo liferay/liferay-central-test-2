@@ -33,7 +33,6 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Theme;
-import com.liferay.portal.model.impl.LayoutTypePortletImpl;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutTemplateLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -44,7 +43,6 @@ import com.liferay.util.UniqueList;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Properties;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -150,12 +148,9 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		List<String> oldColumns = getColumnNames(
 			oldLayoutTemplate.getContent(), portletResource);
 
-		layoutTypePortlet.reorganizePortlets(
-			newColumns, oldColumns);
+		layoutTypePortlet.reorganizePortlets(newColumns, oldColumns);
 
-		Properties props = layout.getTypeSettingsProperties();
-
-		props.setProperty(LayoutTypePortletImpl.STATE_MAX, StringPool.BLANK);
+		layoutTypePortlet.setStateMax(StringPool.BLANK);
 
 		LayoutLocalServiceUtil.updateLayout(
 			layout.getGroupId(), layout.isPrivateLayout(),
