@@ -86,6 +86,16 @@ public class PortletLister {
 		return new TreeView(_list, _depth);
 	}
 
+	public boolean isIncludeInstanceablePortlets() {
+		return _includeInstanceablePortlets;
+	}
+
+	public void setIncludeInstanceablePortlets(
+		boolean includeInstanceablePortlets) {
+
+		_includeInstanceablePortlets = includeInstanceablePortlets;
+	}
+
 	private void _iterateCategories(
 			List<PortletCategory> categories, long parentId, int depth)
 		throws PortalException, SystemException {
@@ -158,6 +168,9 @@ public class PortletLister {
 				}
 				else if (!portlet.isActive()) {
 				}
+				else if (portlet.isInstanceable() &&
+							!_includeInstanceablePortlets) {
+				}
 				else if (
 					!portlet.isInstanceable() &&
 						_layoutTypePortlet.hasPortletId(
@@ -226,5 +239,6 @@ public class PortletLister {
 	private int _nodeId;
 	private List<TreeNodeView> _list;
 	private int _depth;
+	private boolean _includeInstanceablePortlets = false;
 
 }

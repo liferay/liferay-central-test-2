@@ -69,6 +69,8 @@ String panelTreeKey = "panelSelectedPortletsPanelTree";
 	<%
 	PortletLister portletLister = new PortletLister();
 
+	portletLister.setIncludeInstanceablePortlets(false);
+	
 	TreeView treeView = portletLister.getTreeView(layoutTypePortlet, LanguageUtil.get(pageContext, "application"), user, application);
 
 	Iterator itr = treeView.getList().iterator();
