@@ -36,15 +36,11 @@ import com.liferay.portal.PortletIdException;
 import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.comm.CommLink;
-import com.liferay.portal.kernel.job.PublishToLiveEvent;
-import com.liferay.portal.kernel.job.SchedulingRequest;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
-import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -104,7 +100,6 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.ratings.model.RatingsEntry;
-import com.liferay.util.JSONUtil;
 import com.liferay.util.MapUtil;
 import com.liferay.util.Normalizer;
 import com.liferay.util.Time;
@@ -118,7 +113,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -142,9 +136,6 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 /**
  * <a href="LayoutLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -369,23 +360,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		// Layout set
 
 		layoutSetLocalService.updatePageCount(groupId, privateLayout);
-	}
-
-	public void deleteScheduledPublishToLiveEvent(
-			long liveGroupId, String jobName)
-		throws SystemException {
-
-		try {
-			SchedulingRequest sr = new SchedulingRequest(
-				getSchedulerGroupName(liveGroupId), jobName,
-				SchedulingRequest.UNREGISTER_TYPE);
-
-			MessageBusUtil.sendMessage(
-				DestinationNames.SCHEDULER, JSONUtil.serialize(sr));
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
 	}
 
 	public byte[] exportLayouts(
@@ -952,46 +926,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	public List<Layout> getNullFriendlyURLLayouts() throws SystemException {
 		return layoutFinder.findByNullFriendlyURL();
-	}
-
-	public String getScheduledPublishToLiveEventsJSON(long groupId)
-		throws SystemException {
-
-		try {
-			JSONArray events = new JSONArray();
-
-			SchedulingRequest sr = new SchedulingRequest(
-				getSchedulerGroupName(groupId),
-				SchedulingRequest.RETRIEVE_TYPE);
-
-			String message = MessageBusUtil.sendSynchronizedMessage(
-				DestinationNames.SCHEDULER, JSONUtil.serialize(sr));
-
-			if (message != null) {
-				JSONObject jsonObj = new JSONObject(message);
-				String requests = jsonObj.getString("requests");
-
-				Collection<SchedulingRequest> scheduledRequests =
-					(Collection<SchedulingRequest>)JSONUtil.deserialize(
-						requests);
-
-				for (SchedulingRequest schedulingRequest : scheduledRequests) {
-					JSONObject jsonObject = new JSONObject();
-					JSONUtil.put(
-						jsonObject, "description",
-						schedulingRequest.getDescription());
-					JSONUtil.put(
-						jsonObject, "jobName", schedulingRequest.getJobName());
-
-					events.put(jsonObject);
-				}
-			}
-
-			return events.toString();
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
 	}
 
 	public void importLayouts(
@@ -1649,32 +1583,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				"Importing portlet data takes " + stopWatch.getTime() + " ms");
-		}
-	}
-
-	public void schedulePublishToLiveEvent(
-			long userId, long stagingGroupId, long liveGroupId,
-			boolean privateLayout, Map<String, String[]> parameterMap,
-			String cronText, String scope, Map<Long, Boolean> layoutIdMap,
-			Date startDate, Date endDate, String description)
-		throws SystemException {
-
-		try {
-			PublishToLiveEvent event = new PublishToLiveEvent(
-				userId, stagingGroupId, liveGroupId, privateLayout,
-				parameterMap, scope, layoutIdMap);
-
-			SchedulingRequest sr = new SchedulingRequest(
-				cronText, DestinationNames.STAGING,
-				getSchedulerGroupName(liveGroupId),
-				JSONUtil.serialize(event), startDate, endDate,
-				SchedulingRequest.REGISTER_TYPE, description);
-
-			MessageBusUtil.sendMessage(
-				DestinationNames.SCHEDULER, JSONUtil.serialize(sr));
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
 		}
 	}
 
@@ -3280,10 +3188,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		sm.append(".xml");
 
 		return sm.toString();
-	}
-
-	protected String getSchedulerGroupName(long liveGroupId) {
-		return liveGroupId + StringPool.AT + DestinationNames.STAGING;
 	}
 
 	protected UserIdStrategy getUserIdStrategy(

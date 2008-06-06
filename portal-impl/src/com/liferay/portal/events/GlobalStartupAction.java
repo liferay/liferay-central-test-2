@@ -34,12 +34,9 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.jndi.PortalJNDIUtil;
-import com.liferay.portal.kernel.messaging.Destination;
-import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageSender;
-import com.liferay.portal.kernel.messaging.SerialDestination;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
@@ -49,7 +46,6 @@ import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.communities.util.StagingMessageListener;
 
 import java.io.File;
 
@@ -231,16 +227,6 @@ public class GlobalStartupAction extends SimpleAction {
 
 		SearchEngineUtil.init(
 			LuceneSearchEngineUtil.getSearchEngine(), new IndexWriterImpl());
-
-		// Scheduled Staging
-
-		Destination destination = new SerialDestination(
-			DestinationNames.STAGING);
-
-		MessageBusUtil.addDestination(destination);
-
-		MessageBusUtil.registerMessageListener(
-			destination.getName(), new StagingMessageListener());
 	}
 
 	private static Log _log = LogFactory.getLog(GlobalStartupAction.class);

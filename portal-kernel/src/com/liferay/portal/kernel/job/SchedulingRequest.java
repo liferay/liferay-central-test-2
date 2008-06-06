@@ -62,35 +62,33 @@ public class SchedulingRequest implements Serializable {
 	}
 
 	public SchedulingRequest(String groupName, String jobName, String type) {
-		this(null, null, groupName, jobName, null, null, null, type, null);
+		this(null, null, groupName, jobName, null, null, null, type);
 	}
 
 	public SchedulingRequest(
 		String cronText, String groupName, String jobName, String messageBody,
-		Date startDate, Date endDate, String description) {
+		Date startDate, Date endDate) {
 
 		this(
 			cronText, null, groupName, jobName, messageBody, startDate, endDate,
-			null, description);
+			null);
 	}
 
 	public SchedulingRequest(
 		String cronText, String destinationName, String groupName,
-		String messageBody, Date startDate, Date endDate, String type,
-		String description) {
+		String messageBody, Date startDate, Date endDate, String type) {
 
 		this(
 			cronText, destinationName, groupName, null, messageBody, startDate,
-			endDate, type, description);
+			endDate, type);
 	}
 
 	public SchedulingRequest(
 		String cronText, String destinationName, String groupName,
 		String jobName, String messageBody, Date startDate, Date endDate,
-		String type, String description) {
+		String type) {
 
 		_cronText = cronText;
-		_description = description;
 		_destinationName = destinationName;
 		_groupName = groupName;
 		_jobName = jobName;
@@ -106,14 +104,6 @@ public class SchedulingRequest implements Serializable {
 
 	public void setCronText(String cronText) {
 		_cronText = cronText;
-	}
-
-	public String getDescription() {
-		return _description;
-	}
-
-	public void setDescription(String description) {
-		_description = description;
 	}
 
 	public String getDestinationName() {
@@ -173,7 +163,6 @@ public class SchedulingRequest implements Serializable {
 	}
 
 	private String _cronText;
-	private String _description;
 	private String _destinationName;
 	private String _groupName;
 	private String _jobName;

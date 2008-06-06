@@ -27,16 +27,6 @@
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "public-pages");
 
-String message = MessageBusUtil.sendSynchronizedMessage(DestinationNames.SCHEDULER, JSONUtil.serialize(new SchedulingRequest(SchedulingRequest.PING_TYPE)));
-
-boolean isSchedulerEnabled = Validator.isNotNull(message);
-
-String tabNames = "pages,options";
-
-if (isSchedulerEnabled) {
-	tabNames += ",scheduler";
-}
-
 String pagesRedirect = ParamUtil.getString(request, "pagesRedirect");
 
 boolean publish = ParamUtil.getBoolean(request, "publish");
@@ -148,17 +138,15 @@ PortletURL portletURL = renderResponse.createActionURL();
 
 long proposalId = ParamUtil.getLong(request, "proposalId");
 
-String cmd = StringPool.BLANK;
-
 if (proposalId > 0) {
-	cmd = Constants.PUBLISH;
 	portletURL.setParameter("struts_action", "/communities/edit_proposal");
+	portletURL.setParameter(Constants.CMD, Constants.PUBLISH);
 	portletURL.setParameter("groupId", String.valueOf(liveGroupId));
 	portletURL.setParameter("proposalId", String.valueOf(proposalId));
 }
 else {
-	cmd = selGroup.isStagingGroup() ? "publish_to_live" : "copy_from_live";
 	portletURL.setParameter("struts_action", "/communities/edit_pages");
+	portletURL.setParameter(Constants.CMD, selGroup.isStagingGroup() ? "publish_to_live" : "copy_from_live");
 	portletURL.setParameter("groupId", String.valueOf(liveGroupId));
 	portletURL.setParameter("private", String.valueOf(privateLayout));
 }
@@ -194,13 +182,12 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 </style>
 
 <form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />exportPagesFm">
-<input name="<portlet:namespace /><%=  Constants.CMD %>" type="hidden" value="<%= cmd %>">
 <input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escape(tabs1) %>">
 <input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= HtmlUtil.escape(pagesRedirect) %>">
 <input name="<portlet:namespace />stagingGroupId" type="hidden" value="<%= stagingGroupId %>">
 
 <liferay-ui:tabs
-	names="<%= tabNames %>"
+	names="pages,options"
 	refresh="<%= false %>"
 >
 	<liferay-ui:section>
@@ -209,11 +196,6 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 	<liferay-ui:section>
 		<%@ include file="/html/portlet/communities/export_pages_options.jspf" %>
 	</liferay-ui:section>
-	<c:if test="<%= isSchedulerEnabled %>">
-		<liferay-ui:section>
-			<%@ include file="/html/portlet/communities/scheduler.jspf" %>
-		</liferay-ui:section>
-	</c:if>
 </liferay-ui:tabs>
 
 <br />

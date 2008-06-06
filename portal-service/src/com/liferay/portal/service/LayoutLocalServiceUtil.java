@@ -189,14 +189,6 @@ public class LayoutLocalServiceUtil {
 		layoutLocalService.deleteLayouts(groupId, privateLayout);
 	}
 
-	public static void deleteScheduledPublishToLiveEvent(long liveGroupId,
-		java.lang.String jobName) throws com.liferay.portal.SystemException {
-		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
-
-		layoutLocalService.deleteScheduledPublishToLiveEvent(liveGroupId,
-			jobName);
-	}
-
 	public static byte[] exportLayouts(long groupId, boolean privateLayout,
 		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
 		java.util.Date endDate)
@@ -349,13 +341,6 @@ public class LayoutLocalServiceUtil {
 		return layoutLocalService.getNullFriendlyURLLayouts();
 	}
 
-	public static java.lang.String getScheduledPublishToLiveEventsJSON(
-		long groupId) throws com.liferay.portal.SystemException {
-		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
-
-		return layoutLocalService.getScheduledPublishToLiveEventsJSON(groupId);
-	}
-
 	public static void importLayouts(long userId, long groupId,
 		boolean privateLayout, java.util.Map<String, String[]> parameterMap,
 		java.io.File file)
@@ -409,20 +394,6 @@ public class LayoutLocalServiceUtil {
 
 		layoutLocalService.importPortletInfo(userId, plid, portletId,
 			parameterMap, is);
-	}
-
-	public static void schedulePublishToLiveEvent(long userId,
-		long stagingGroupId, long liveGroupId, boolean privateLayout,
-		java.util.Map<String, String[]> parameterMap,
-		java.lang.String cronText, java.lang.String scope,
-		java.util.Map<Long, Boolean> layoutIdMap, java.util.Date startDate,
-		java.util.Date endDate, java.lang.String description)
-		throws com.liferay.portal.SystemException {
-		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
-
-		layoutLocalService.schedulePublishToLiveEvent(userId, stagingGroupId,
-			liveGroupId, privateLayout, parameterMap, cronText, scope,
-			layoutIdMap, startDate, endDate, description);
 	}
 
 	public static void setLayouts(long groupId, boolean privateLayout,

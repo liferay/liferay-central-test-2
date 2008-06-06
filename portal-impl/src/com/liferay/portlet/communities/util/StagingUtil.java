@@ -25,18 +25,12 @@ package com.liferay.portlet.communities.util;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.cal.DayAndPosition;
-import com.liferay.portal.kernel.cal.Duration;
-import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
-import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Http;
-import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
@@ -55,7 +49,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.http.LayoutServiceHttp;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
 import java.io.ByteArrayInputStream;
@@ -63,15 +56,12 @@ import java.io.ByteArrayInputStream;
 import java.net.InetAddress;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map.Entry;
 import java.util.Map;
-import java.util.TimeZone;
 
 import javax.portlet.ActionRequest;
 
@@ -227,21 +217,6 @@ public class StagingUtil {
 		LayoutServiceHttp.importLayouts(
 			httpPrincipal, remoteGroupId, privateLayout, importParameterMap,
 			bytes);
-	}
-
-	public static void deleteScheduledPublishToLiveEvent(ActionRequest req)
-		throws Exception {
-
-		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
-
-		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
-
-		long liveGroupId = stagingGroup.getLiveGroupId();
-
-		String jobName = ParamUtil.getString(req, "jobName");
-
-		LayoutServiceUtil.deleteScheduledPublishToLiveEvent(
-			stagingGroupId, liveGroupId, jobName);
 	}
 
 	public static List<Layout> getMissingParents(
@@ -567,73 +542,6 @@ public class StagingUtil {
 			portlet.getPortletId());
 	}
 
-	public static void schedulePublishToLiveEvent(ActionRequest req)
-		throws Exception {
-
-		String tabs1 = ParamUtil.getString(req, "tabs1");
-
-		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
-
-		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
-
-		long liveGroupId = stagingGroup.getLiveGroupId();
-
-		boolean privateLayout = true;
-
-		if (tabs1.equals("public-pages")) {
-			privateLayout = false;
-		}
-
-		Map<String, String[]> parameterMap = getStagingParameters(req);
-
-		String cronText = ParamUtil.getString(req, "cronText");
-
-		String scope = ParamUtil.getString(req, "scope");
-
-		Map<Long, Boolean> layoutIdMap = new LinkedHashMap<Long, Boolean>();
-
-		if (scope.equals("selected-pages")) {
-			long[] rowIds = ParamUtil.getLongValues(req, "rowIds");
-
-			for (int i = 0; i < rowIds.length; i++) {
-				long selPlid = rowIds[i];
-				boolean includeChildren = ParamUtil.getBoolean(
-					req, "includeChildren_" + selPlid);
-
-				layoutIdMap.put(selPlid, includeChildren);
-			}
-		}
-
-		String description = ParamUtil.getString(req, "description");
-
-		boolean timeZoneSensitive = ParamUtil.getBoolean(
-			req, "timeZoneSensitive");
-
-		int recurrenceType = ParamUtil.getInteger(req, "recurrenceType");
-
-		Calendar startCal = getDate(req, "start", timeZoneSensitive);
-		Calendar endCal = null;
-
-		int endDateType = ParamUtil.getInteger(req, "endDateType");
-
-		if (endDateType == 1) {
-			endCal = getDate(req, "end", timeZoneSensitive);
-		}
-
-		cronText = getCronText(
-			req, startCal, timeZoneSensitive, recurrenceType);
-
-		Date endDate = null;
-
-		if (endCal != null) {
-			endDate = endCal.getTime();
-		}
-
-		LayoutServiceUtil.schedulePublishToLiveEvent(
-			stagingGroupId, liveGroupId, privateLayout, parameterMap, cronText,
-			scope, layoutIdMap, startCal.getTime(), endDate, description);
-	}
-
 	public static void updateStaging(ActionRequest req) throws Exception {
 		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -681,190 +589,6 @@ public class StagingUtil {
 					liveGroup.getGroupId(), stagingGroup.getGroupId(), false,
 					parameterMap);
 			}
-		}
-	}
-
-	protected static String getCronText(
-			ActionRequest req, Calendar startDate, boolean timeZoneSensitive,
-			int recurrenceType)
-		throws Exception {
-
-		Calendar recStartCal = null;
-
-		if (timeZoneSensitive) {
-			recStartCal = CalendarFactoryUtil.getCalendar();
-
-			recStartCal.setTime(startDate.getTime());
-		}
-		else {
-			recStartCal = (Calendar)startDate.clone();
-		}
-
-		Recurrence recurrence = new Recurrence(
-			recStartCal, new Duration(1, 0, 0, 0), recurrenceType);
-
-		recurrence.setWeekStart(Calendar.SUNDAY);
-
-		if (recurrenceType == Recurrence.DAILY) {
-			int dailyType = ParamUtil.getInteger(req, "dailyType");
-
-			if (dailyType == 0) {
-				int dailyInterval = ParamUtil.getInteger(
-					req, "dailyInterval");
-
-				// LEP-3468
-
-				if (dailyInterval <= 0) {
-					dailyInterval = 1;
-				}
-
-				recurrence.setInterval(dailyInterval);
-			}
-			else {
-				DayAndPosition[] dayPos = {
-					new DayAndPosition(Calendar.MONDAY, 0),
-					new DayAndPosition(Calendar.TUESDAY, 0),
-					new DayAndPosition(Calendar.WEDNESDAY, 0),
-					new DayAndPosition(Calendar.THURSDAY, 0),
-					new DayAndPosition(Calendar.FRIDAY, 0)};
-
-				recurrence.setByDay(dayPos);
-			}
-		}
-		else if (recurrenceType == Recurrence.WEEKLY) {
-			int weeklyInterval = ParamUtil.getInteger(
-				req, "weeklyInterval", 1);
-
-			recurrence.setInterval(weeklyInterval);
-
-			List<DayAndPosition> dayPos = new ArrayList<DayAndPosition>();
-
-			_addWeeklyDayPos(req, dayPos, Calendar.SUNDAY);
-			_addWeeklyDayPos(req, dayPos, Calendar.MONDAY);
-			_addWeeklyDayPos(req, dayPos, Calendar.TUESDAY);
-			_addWeeklyDayPos(req, dayPos, Calendar.WEDNESDAY);
-			_addWeeklyDayPos(req, dayPos, Calendar.THURSDAY);
-			_addWeeklyDayPos(req, dayPos, Calendar.FRIDAY);
-			_addWeeklyDayPos(req, dayPos, Calendar.SATURDAY);
-
-			if (dayPos.size() == 0) {
-				dayPos.add(new DayAndPosition(Calendar.MONDAY, 0));
-			}
-
-			recurrence.setByDay(dayPos.toArray(new DayAndPosition[0]));
-		}
-		else if (recurrenceType == Recurrence.MONTHLY) {
-			int monthlyType = ParamUtil.getInteger(req, "monthlyType");
-
-			if (monthlyType == 0) {
-				int monthlyDay = ParamUtil.getInteger(req, "monthlyDay0", 1);
-
-				recurrence.setByMonthDay(new int[] {monthlyDay});
-
-				int monthlyInterval = ParamUtil.getInteger(
-					req, "monthlyInterval0", 1);
-
-				recurrence.setInterval(monthlyInterval);
-			}
-			else {
-				int monthlyPos = ParamUtil.getInteger(req, "monthlyPos");
-				int monthlyDay = ParamUtil.getInteger(req, "monthlyDay1");
-
-				DayAndPosition[] dayPos = {
-					new DayAndPosition(monthlyDay, monthlyPos)};
-
-				recurrence.setByDay(dayPos);
-
-				int monthlyInterval = ParamUtil.getInteger(
-					req, "monthlyInterval1", 1);
-
-				recurrence.setInterval(monthlyInterval);
-			}
-		}
-		else if (recurrenceType == Recurrence.YEARLY) {
-			int yearlyType = ParamUtil.getInteger(req, "yearlyType");
-
-			if (yearlyType == 0) {
-				int yearlyMonth = ParamUtil.getInteger(req, "yearlyMonth0");
-				int yearlyDay = ParamUtil.getInteger(req, "yearlyDay0", 1);
-
-				recurrence.setByMonth(new int[] {yearlyMonth});
-				recurrence.setByMonthDay(new int[] {yearlyDay});
-
-				int yearlyInterval = ParamUtil.getInteger(
-					req, "yearlyInterval0", 1);
-
-				recurrence.setInterval(yearlyInterval);
-			}
-			else {
-				int yearlyPos = ParamUtil.getInteger(req, "yearlyPos");
-				int yearlyDay = ParamUtil.getInteger(req, "yearlyDay1");
-				int yearlyMonth = ParamUtil.getInteger(req, "yearlyMonth1");
-
-				DayAndPosition[] dayPos = {
-					new DayAndPosition(yearlyDay, yearlyPos)};
-
-				recurrence.setByDay(dayPos);
-
-				recurrence.setByMonth(new int[] {yearlyMonth});
-
-				int yearlyInterval = ParamUtil.getInteger(
-					req, "yearlyInterval1", 1);
-
-				recurrence.setInterval(yearlyInterval);
-			}
-		}
-
-		return recurrence.toCronText();
-	}
-
-	protected static Calendar getDate(
-			ActionRequest req, String paramPrefix, boolean timeZoneSensitive)
-		throws Exception {
-
-		int dateMonth = ParamUtil.getInteger(req, paramPrefix + "DateMonth");
-		int dateDay = ParamUtil.getInteger(req, paramPrefix + "DateDay");
-		int dateYear = ParamUtil.getInteger(req, paramPrefix + "DateYear");
-		int dateHour = ParamUtil.getInteger(req, paramPrefix + "DateHour");
-		int dateMinute = ParamUtil.getInteger(req, paramPrefix + "DateMinute");
-		int dateAmPm = ParamUtil.getInteger(req, paramPrefix + "DateAmPm");
-
-		if (dateAmPm == Calendar.PM) {
-			dateHour += 12;
-		}
-
-		Locale locale = null;
-		TimeZone timeZone = null;
-
-		if (timeZoneSensitive) {
-			User user = PortalUtil.getUser(req);
-
-			locale = user.getLocale();
-			timeZone = user.getTimeZone();
-		}
-		else {
-			locale = LocaleUtil.getDefault();
-			timeZone = TimeZoneUtil.getDefault();
-		}
-
-		Calendar cal = CalendarFactoryUtil.getCalendar(timeZone, locale);
-
-		cal.set(Calendar.MONTH, dateMonth);
-		cal.set(Calendar.DATE, dateDay);
-		cal.set(Calendar.YEAR, dateYear);
-		cal.set(Calendar.HOUR_OF_DAY, dateHour);
-		cal.set(Calendar.MINUTE, dateMinute);
-		cal.set(Calendar.SECOND, 0);
-		cal.set(Calendar.MILLISECOND, 0);
-
-		return cal;
-	}
-
-	private static void _addWeeklyDayPos(
-		ActionRequest req, List<DayAndPosition> list, int day) {
-
-		if (ParamUtil.getBoolean(req, "weeklyDayPos" + day)) {
-			list.add(new DayAndPosition(day, 0));
 		}
 	}
 
