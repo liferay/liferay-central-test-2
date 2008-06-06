@@ -46,6 +46,8 @@ public interface LiferayPortletURL
 
 	public String getPortletId();
 
+	public String getResourceID();
+
 	public boolean isAnchor();
 
 	public boolean isCopyCurrentRenderParameters();

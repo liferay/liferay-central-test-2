@@ -40,7 +40,6 @@ import com.liferay.portal.util.WebKeys;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -396,7 +395,23 @@ public abstract class PortletResponseImpl implements PortletResponse {
 	}
 
 	public Map<String, String[]> getProperties() {
-		return _properties;
+		Map<String, String[]> properties =
+			new LinkedHashMap<String, String[]>();
+
+		for (Map.Entry<String, Object> entry : _headers.entrySet()) {
+			String name = entry.getKey();
+			Object[] values = (Object[])entry.getValue();
+
+			String[] valuesString = new String[values.length];
+
+			for (int i = 0; i < values.length; i++) {
+				valuesString[i] = values[i].toString();
+			}
+
+			properties.put(name, valuesString);
+		}
+
+		return properties;
 	}
 
 	public URLEncoder getUrlEncoder() {
@@ -459,11 +474,7 @@ public abstract class PortletResponseImpl implements PortletResponse {
 			throw new IllegalArgumentException();
 		}
 
-		if (_properties == null) {
-			_properties = new HashMap<String, String[]>();
-		}
-
-		_properties.put(key, new String[] {value});
+		setHeader(key, value);
 	}
 
 	public void setURLEncoder(URLEncoder urlEncoder) {
@@ -483,7 +494,7 @@ public abstract class PortletResponseImpl implements PortletResponse {
 						res.addIntHeader(name, value);
 					}
 					else {
-						res.addIntHeader(name, value);
+						res.setIntHeader(name, value);
 					}
 				}
 			}
@@ -495,7 +506,7 @@ public abstract class PortletResponseImpl implements PortletResponse {
 						res.addDateHeader(name, value);
 					}
 					else {
-						res.addDateHeader(name, value);
+						res.setDateHeader(name, value);
 					}
 				}
 			}
@@ -507,7 +518,7 @@ public abstract class PortletResponseImpl implements PortletResponse {
 						res.addHeader(name, value);
 					}
 					else {
-						res.addHeader(name, value);
+						res.setHeader(name, value);
 					}
 				}
 			}
@@ -552,9 +563,7 @@ public abstract class PortletResponseImpl implements PortletResponse {
 	private String _namespace;
 	private long _companyId;
 	private long _plid;
-	private Map<String, String[]> _properties;
 	private URLEncoder _urlEncoder;
-	private LinkedHashMap<String, Object> _headers =
-		new LinkedHashMap<String, Object>();
+	private Map<String, Object> _headers = new LinkedHashMap<String, Object>();
 
 }

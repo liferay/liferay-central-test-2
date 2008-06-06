@@ -35,7 +35,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import javax.servlet.http.HttpServletResponse;
+import javax.portlet.ResourceResponse;
 
 import org.apache.commons.codec.net.URLCodec;
 import org.apache.commons.lang.CharUtils;
@@ -43,64 +43,22 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="ServletResponseUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletResponseUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ServletResponseUtil {
-
-	public static void cleanUp(InputStream is) {
-		try {
-			if (is != null) {
-				is.close();
-			}
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e);
-			}
-		}
-	}
-
-	public static void cleanUp(OutputStream os) {
-		try {
-			if (os != null) {
-				os.flush();
-			}
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e);
-			}
-		}
-
-		try {
-			if (os != null) {
-				os.close();
-			}
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e);
-			}
-		}
-	}
-
-	public static void cleanUp(OutputStream os, InputStream is) {
-		cleanUp(os);
-		cleanUp(is);
-	}
+public class PortletResponseUtil {
 
 	public static void sendFile(
-			HttpServletResponse res, String fileName, byte[] bytes)
+			ResourceResponse res, String fileName, byte[] bytes)
 		throws IOException {
 
 		sendFile(res, fileName, bytes, null);
 	}
 
 	public static void sendFile(
-			HttpServletResponse res, String fileName, byte[] bytes,
+			ResourceResponse res, String fileName, byte[] bytes,
 			String contentType)
 		throws IOException {
 
@@ -110,14 +68,14 @@ public class ServletResponseUtil {
 	}
 
 	public static void sendFile(
-			HttpServletResponse res, String fileName, InputStream is)
+			ResourceResponse res, String fileName, InputStream is)
 		throws IOException {
 
 		sendFile(res, fileName, is, null);
 	}
 
 	public static void sendFile(
-			HttpServletResponse res, String fileName, InputStream is,
+			ResourceResponse res, String fileName, InputStream is,
 			String contentType)
 		throws IOException {
 
@@ -126,20 +84,20 @@ public class ServletResponseUtil {
 		write(res, is);
 	}
 
-	public static void write(HttpServletResponse res, String s)
+	public static void write(ResourceResponse res, String s)
 		throws IOException {
 
 		write(res, s.getBytes(StringPool.UTF8));
 	}
 
-	public static void write(HttpServletResponse res, byte[] bytes)
+	public static void write(ResourceResponse res, byte[] bytes)
 		throws IOException {
 
 		write(res, bytes, 0);
 	}
 
 	public static void write(
-			HttpServletResponse res, byte[] bytes, int contentLength)
+			ResourceResponse res, byte[] bytes, int contentLength)
 		throws IOException {
 
 		OutputStream os = null;
@@ -158,24 +116,24 @@ public class ServletResponseUtil {
 
 				res.setContentLength(contentLength);
 
-				os = new BufferedOutputStream(res.getOutputStream());
+				os = new BufferedOutputStream(res.getPortletOutputStream());
 
 				os.write(bytes, 0, contentLength);
 			}
 		}
 		finally {
-			cleanUp(os);
+			ServletResponseUtil.cleanUp(os);
 		}
 	}
 
-	public static void write(HttpServletResponse res, InputStream is)
+	public static void write(ResourceResponse res, InputStream is)
 		throws IOException {
 
 		OutputStream os = null;
 
 		try {
 			if (!res.isCommitted()) {
-				os = new BufferedOutputStream(res.getOutputStream());
+				os = new BufferedOutputStream(res.getPortletOutputStream());
 
 				int c = is.read();
 
@@ -187,12 +145,12 @@ public class ServletResponseUtil {
 			}
 		}
 		finally {
-			cleanUp(os, is);
+			ServletResponseUtil.cleanUp(os, is);
 		}
 	}
 
 	protected static void setHeaders(
-		HttpServletResponse res, String fileName, String contentType) {
+		ResourceResponse res, String fileName, String contentType) {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Sending file of type " + contentType);
@@ -204,8 +162,8 @@ public class ServletResponseUtil {
 			res.setContentType(contentType);
 		}
 
-		res.setHeader(HttpHeaders.CACHE_CONTROL, HttpHeaders.PUBLIC);
-		res.setHeader(HttpHeaders.PRAGMA, HttpHeaders.PUBLIC);
+		res.setProperty(HttpHeaders.CACHE_CONTROL, HttpHeaders.PUBLIC);
+		res.setProperty(HttpHeaders.PRAGMA, HttpHeaders.PUBLIC);
 
 		if (Validator.isNotNull(fileName)) {
 			String contentDisposition =
@@ -249,10 +207,11 @@ public class ServletResponseUtil {
 					contentDisposition, "attachment; ", "inline; ");
 			}
 
-			res.setHeader(HttpHeaders.CONTENT_DISPOSITION, contentDisposition);
+			res.setProperty(
+				HttpHeaders.CONTENT_DISPOSITION, contentDisposition);
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(ServletResponseUtil.class);
+	private static Log _log = LogFactory.getLog(PortletResponseUtil.class);
 
 }
