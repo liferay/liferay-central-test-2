@@ -95,6 +95,16 @@ public class LayoutServiceUtil {
 		layoutService.deleteLayout(groupId, privateLayout, layoutId);
 	}
 
+	public static void deleteScheduledPublishToLiveEvent(long stagingGroupId,
+		long liveGroupId, java.lang.String jobName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		LayoutService layoutService = LayoutServiceFactory.getService();
+
+		layoutService.deleteScheduledPublishToLiveEvent(stagingGroupId,
+			liveGroupId, jobName);
+	}
+
 	public static java.lang.String getLayoutName(long groupId,
 		boolean privateLayout, long layoutId, java.lang.String languageId)
 		throws com.liferay.portal.PortalException,
@@ -192,6 +202,21 @@ public class LayoutServiceUtil {
 		LayoutService layoutService = LayoutServiceFactory.getService();
 
 		layoutService.importPortletInfo(plid, portletId, parameterMap, is);
+	}
+
+	public static void schedulePublishToLiveEvent(long stagingGroupId,
+		long liveGroupId, boolean privateLayout,
+		java.util.Map<String, String[]> parameterMap,
+		java.lang.String cronText, java.lang.String scope,
+		java.util.Map<Long, Boolean> layoutIdMap, java.util.Date startDate,
+		java.util.Date endDate, java.lang.String description)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		LayoutService layoutService = LayoutServiceFactory.getService();
+
+		layoutService.schedulePublishToLiveEvent(stagingGroupId, liveGroupId,
+			privateLayout, parameterMap, cronText, scope, layoutIdMap,
+			startDate, endDate, description);
 	}
 
 	public static void setLayouts(long groupId, boolean privateLayout,

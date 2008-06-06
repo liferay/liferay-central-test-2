@@ -101,6 +101,20 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		layoutLocalService.deleteLayout(groupId, privateLayout, layoutId);
 	}
 
+	public void deleteScheduledPublishToLiveEvent(
+			long stagingGroupId, long liveGroupId, String jobName)
+		throws PortalException, SystemException {
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), stagingGroupId, ActionKeys.MANAGE_LAYOUTS);
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), liveGroupId, ActionKeys.MANAGE_LAYOUTS);
+
+		layoutLocalService.deleteScheduledPublishToLiveEvent(
+			liveGroupId, jobName);
+	}
+
 	public String getLayoutName(
 			long groupId, boolean privateLayout, long layoutId,
 			String languageId)
@@ -225,6 +239,25 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 		layoutLocalService.importPortletInfo(
 			getUserId(), plid, portletId, parameterMap, is);
+	}
+
+	public void schedulePublishToLiveEvent(
+			long stagingGroupId, long liveGroupId, boolean privateLayout,
+			Map<String, String[]> parameterMap, String cronText, String scope,
+			Map<Long, Boolean> layoutIdMap, Date startDate, Date endDate,
+			String description)
+		throws PortalException, SystemException {
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), stagingGroupId, ActionKeys.MANAGE_LAYOUTS);
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), liveGroupId, ActionKeys.MANAGE_LAYOUTS);
+
+		layoutLocalService.schedulePublishToLiveEvent(
+			getUserId(), stagingGroupId, liveGroupId, privateLayout,
+			parameterMap, cronText, scope, layoutIdMap, startDate, endDate,
+			description);
 	}
 
 	public void setLayouts(

@@ -267,6 +267,13 @@ Liferay.Service.Portal.Layout = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	deleteScheduledPublishToLiveEvent: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteScheduledPublishToLiveEvent";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	getLayoutName: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getLayoutName";

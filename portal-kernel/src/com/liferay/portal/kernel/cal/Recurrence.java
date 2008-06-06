@@ -54,6 +54,7 @@ package com.liferay.portal.kernel.cal;
 
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Serializable;
 
@@ -1252,6 +1253,115 @@ public class Recurrence implements Serializable {
 	 */
 	protected boolean matchesByMonth(Calendar candidate) {
 		return matchesByField(byMonth, Calendar.MONTH, candidate, false);
+	}
+
+	public String toCronText() {
+		String startDateSecond = String.valueOf(dtStart.get(Calendar.SECOND));
+		String startDateMinute = String.valueOf(dtStart.get(Calendar.MINUTE));
+
+		int startDateHour = dtStart.get(Calendar.HOUR);
+
+		if (dtStart.get(Calendar.AM_PM) == Calendar.PM) {
+			startDateHour += 12;
+		}
+
+		String hour = String.valueOf(startDateHour);
+		String dayOfMonth = String.valueOf(dtStart.get(Calendar.DAY_OF_MONTH));
+		String month = String.valueOf(dtStart.get(Calendar.MONTH) + 1);
+		String dayOfWeek = String.valueOf(dtStart.get(Calendar.DAY_OF_WEEK));
+		String year = String.valueOf(dtStart.get(Calendar.YEAR));
+
+		if (frequency == NO_RECURRENCE) {
+			dayOfWeek = StringPool.QUESTION;
+		}
+		else if (frequency == DAILY) {
+			dayOfMonth += StringPool.FORWARD_SLASH + interval;
+			month = StringPool.STAR;
+			dayOfWeek = StringPool.QUESTION;
+			year = StringPool.STAR;
+
+			if (byDay != null) {
+				dayOfMonth = StringPool.QUESTION;
+				dayOfWeek = StringPool.BLANK;
+
+				for (int i = 0; i < byDay.length; i++) {
+					if (i > 0) {
+						dayOfWeek += StringPool.COMMA;
+					}
+
+					dayOfWeek += byDay[i].getDayOfWeek();
+				}
+			}
+		}
+		else if (frequency == WEEKLY) {
+			dayOfMonth = StringPool.QUESTION;
+			month = StringPool.STAR;
+			year = StringPool.STAR;
+
+			if (byDay != null) {
+				dayOfWeek = StringPool.BLANK;
+
+				for (int i = 0; i < byDay.length; i++) {
+					if (i > 0) {
+						dayOfWeek += StringPool.COMMA;
+					}
+
+					dayOfWeek += byDay[i].getDayOfWeek();
+				}
+			}
+
+			dayOfWeek += StringPool.FORWARD_SLASH + interval;
+		}
+		else if (frequency == MONTHLY) {
+			dayOfMonth = StringPool.QUESTION;
+			month += StringPool.FORWARD_SLASH + interval;
+			dayOfWeek = StringPool.QUESTION;
+			year = StringPool.STAR;
+
+			if (byMonthDay != null && byMonthDay.length == 1) {
+				dayOfMonth = String.valueOf(byMonthDay[0]);
+			}
+			else if (byDay != null && byDay.length == 1) {
+				String pos = String.valueOf(byDay[0].getDayPosition());
+
+				if (pos.equals("-1")) {
+					dayOfWeek = byDay[0].getDayOfWeek() + "L";
+				}
+				else {
+					dayOfWeek = byDay[0].getDayOfWeek() + StringPool.POUND +
+						pos;
+				}
+			}
+		}
+		else if (frequency == YEARLY) {
+			dayOfMonth = StringPool.QUESTION;
+			dayOfWeek = StringPool.QUESTION;
+			year += StringPool.FORWARD_SLASH + interval;
+
+			if (byMonth != null && byMonth.length == 1) {
+				month = String.valueOf(byMonth[0] + 1);
+
+				if (byMonthDay != null && byMonthDay.length == 1) {
+					dayOfMonth = String.valueOf(byMonthDay[0]);
+				}
+				else if (byDay != null && byDay.length == 1) {
+					String pos = String.valueOf(byDay[0].getDayPosition());
+
+					if (pos.equals("-1")) {
+						dayOfWeek = byDay[0].getDayOfWeek() + "L";
+					}
+					else {
+						dayOfWeek = byDay[0].getDayOfWeek() + StringPool.POUND +
+							pos;
+					}
+				}
+			}
+		}
+
+		return startDateSecond + StringPool.SPACE + startDateMinute +
+			StringPool.SPACE + hour + StringPool.SPACE + dayOfMonth +
+				StringPool.SPACE + month + StringPool.SPACE + dayOfWeek +
+					StringPool.SPACE + year;
 	}
 
 	/**

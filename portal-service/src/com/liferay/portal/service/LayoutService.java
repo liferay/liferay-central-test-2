@@ -73,6 +73,11 @@ public interface LayoutService {
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public void deleteScheduledPublishToLiveEvent(long stagingGroupId,
+		long liveGroupId, java.lang.String jobName)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public java.lang.String getLayoutName(long groupId, boolean privateLayout,
 		long layoutId, java.lang.String languageId)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
@@ -125,6 +130,15 @@ public interface LayoutService {
 		java.util.Map<String, String[]> parameterMap, java.io.InputStream is)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
+
+	public void schedulePublishToLiveEvent(long stagingGroupId,
+		long liveGroupId, boolean privateLayout,
+		java.util.Map<String, String[]> parameterMap,
+		java.lang.String cronText, java.lang.String scope,
+		java.util.Map<Long, Boolean> layoutIdMap, java.util.Date startDate,
+		java.util.Date endDate, java.lang.String description)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public void setLayouts(long groupId, boolean privateLayout,
 		long parentLayoutId, long[] layoutIds)
