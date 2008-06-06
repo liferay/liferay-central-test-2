@@ -199,13 +199,27 @@ Liferay.Tree = new Class({
 
 			var mainLi =
 				'<li class="toggle-expand"><a href="javascript: ;" id="lfr-expand">' + instance._expandText + '</a> | <a href="javascript: ;" id="lfr-collapse">' + instance._collapseText + '</a></li>' +
-				'<li class="root-container">' +
-					'<a href="' + node.href + '">' +
-						instance.generateImage(icons.root) +
-						'<span>&nbsp;' + node.name + '</span>' +
-					'</a>' +
+					'<li class="root-container">';
+
+			if (instance.nolinks) {
+				mainLi +=
+						'<a name="' + node.id + '">' +
+							instance.generateImage(icons.root) +
+							'<span>&nbsp;' + node.name + '</span>' +
+						'</a>';
+			}
+			else {
+				mainLi +=
+						'<a href="' + node.href + '">' +
+							instance.generateImage(icons.root) +
+							'<span>&nbsp;' + node.name + '</span>' +
+						'</a>';
+			}
+
+			mainLi +=
 					'<ul class="node-open">' + instance.treeHTML + '</ul>' +
 				'</li>';
+
 
 			tree.append(mainLi);
 
