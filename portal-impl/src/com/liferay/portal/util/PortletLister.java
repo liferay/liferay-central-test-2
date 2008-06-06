@@ -169,10 +169,9 @@ public class PortletLister {
 				else if (!portlet.isActive()) {
 				}
 				else if (portlet.isInstanceable() &&
-							!_includeInstanceablePortlets) {
+						 !_includeInstanceablePortlets) {
 				}
-				else if (
-					!portlet.isInstanceable() &&
+				else if (!portlet.isInstanceable() &&
 						_layoutTypePortlet.hasPortletId(
 							portlet.getPortletId())) {
 
@@ -239,6 +238,6 @@ public class PortletLister {
 	private int _nodeId;
 	private List<TreeNodeView> _list;
 	private int _depth;
-	private boolean _includeInstanceablePortlets = false;
+	private boolean _includeInstanceablePortlets;
 
 }
