@@ -4,6 +4,10 @@ Liferay.Tree = new Class({
 
 		instance.className = params.className;
 		instance.icons = params.icons;
+
+		// have to use revers logic, because '|| true' always results in 'true'
+		instance.nolinks = params.nolinks || false;
+
 		instance.nodes = params.nodes;
 		instance.openNodes = params.openNodes || '';
 		instance.outputId = params.outputId || '';
@@ -129,10 +133,18 @@ Liferay.Tree = new Class({
 					}
 				}
 
-				instance.treeHTML += '<a href="' + node.href + '">';
-				instance.treeHTML += instance._pageImage;
-				instance.treeHTML += '<span>' + node.name + '</span>';
-				instance.treeHTML += '</a>';
+				if (instance.nolinks) {
+					instance.treeHTML += '<a name="' + node.id + '">';
+					instance.treeHTML += instance._pageImage;
+					instance.treeHTML += '<span>' + node.name + '</span>';
+					instance.treeHTML += '</a>';
+				}
+				else {
+					instance.treeHTML += '<a href="' + node.href + '">';
+					instance.treeHTML += instance._pageImage;
+					instance.treeHTML += '<span>' + node.name + '</span>';
+					instance.treeHTML += '</a>';
+				}
 
 				// Recurse if node has children
 

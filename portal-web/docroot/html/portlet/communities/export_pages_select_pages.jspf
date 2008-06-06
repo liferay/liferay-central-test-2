@@ -65,6 +65,7 @@
 							{
 								className: "gamma",
 								icons: <portlet:namespace />layoutIcons,
+								nolinks: true,
 								nodes: <portlet:namespace />layoutArray,
 								openNodes: '<%= SessionTreeJSClicks.getOpenNodes(request, treeKey) %>',
 								outputId: '#<%= renderResponse.getNamespace() %>select-tree-output',
