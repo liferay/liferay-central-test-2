@@ -130,6 +130,7 @@ Collections.sort(portletsList, new PortletTitleComparator(application, locale));
 									PortletDataHandlerControl[] controls = portletDataHandler.getImportControls();
 
 									if (controls != null) {
+										String rootPortletId = curPortlet.getRootPortletId();
 										String checked = StringPool.BLANK;
 
 										if (portletDataHandler.isPublishToLiveByDefault()) {
@@ -138,11 +139,11 @@ Collections.sort(portletsList, new PortletTitleComparator(application, locale));
 							%>
 
 										<li class="tree-item">
-											<input <%= checked %> id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA + "_" + curPortlet.getPortletId() %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA + "_" + curPortlet.getPortletId() %>"  onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA + "_" + curPortlet.getPortletId() + "Controls" %>');" type="checkbox" />
+											<input <%= checked %> id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>"  onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>Controls');" type="checkbox" />
 
-											<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA  + "_" + curPortlet.getPortletId() %>"><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %></label>
+											<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>"><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %></label>
 
-											<ul id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA + "_" + curPortlet.getPortletId() + "Controls" %>">
+											<ul id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>Controls">
 												<%= _renderControls(renderResponse.getNamespace(), resourceBundle, controls) %>
 											</ul>
 										</li>
