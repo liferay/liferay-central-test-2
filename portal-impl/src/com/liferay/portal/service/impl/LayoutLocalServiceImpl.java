@@ -1357,9 +1357,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			// Portlet data
 
-			if (importPortletData) {
+			Element portletDataEl = portletEl.element("portlet-data");
+
+			if (importPortletData && portletDataEl != null) {
 				importPortletData(
-					context, portletId, plid, portletEl.element("portlet-data"));
+					context, portletId, plid, portletDataEl);
 			}
 
 			// Portlet permissions
