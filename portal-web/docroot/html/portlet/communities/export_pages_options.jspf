@@ -131,6 +131,7 @@ Collections.sort(portletsList, new PortletTitleComparator(application, locale));
 
 									if (controls != null) {
 										String rootPortletId = curPortlet.getRootPortletId();
+
 										String checked = StringPool.BLANK;
 
 										if (portletDataHandler.isPublishToLiveByDefault()) {
