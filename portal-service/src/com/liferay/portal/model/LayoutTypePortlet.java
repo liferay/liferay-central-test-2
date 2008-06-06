@@ -88,9 +88,6 @@ public interface LayoutTypePortlet extends LayoutType {
 
 	public void setPortletIds(String columnId, String portletIds);
 
-	public void reorganizeNestedColumns(
-		String portletId, List<String> newColumns, List<String> oldColumns);
-
 	public void reorganizePortlets(
 		List<String> newColumns, List<String> oldColumns);
 

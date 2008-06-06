@@ -554,23 +554,6 @@ public class LayoutTypePortletImpl
 		getTypeSettingsProperties().setProperty(columnId, portletIds);
 	}
 
-	public void reorganizeNestedColumns(
-		String portletId, List<String> newColumns, List<String> oldColumns) {
-
-		String nestedColumnIds = getTypeSettingsProperties().getProperty(
-			NESTED_COLUMN_IDS);
-
-		String[] nestedColumnIdsArray = StringUtil.split(nestedColumnIds);
-
-		nestedColumnIdsArray = ArrayUtil.removeByPrefix(
-			nestedColumnIdsArray, portletId);
-
-		getTypeSettingsProperties().setProperty(
-			NESTED_COLUMN_IDS, StringUtil.merge(nestedColumnIdsArray));
-
-		reorganizePortlets(newColumns, oldColumns);
-	}
-
 	public void reorganizePortlets(
 		List<String> newColumns, List<String> oldColumns) {
 
