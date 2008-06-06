@@ -4,10 +4,7 @@ Liferay.Tree = new Class({
 
 		instance.className = params.className;
 		instance.icons = params.icons;
-
-		// have to use revers logic, because '|| true' always results in 'true'
 		instance.nolinks = params.nolinks || false;
-
 		instance.nodes = params.nodes;
 		instance.openNodes = params.openNodes || '';
 		instance.outputId = params.outputId || '';
@@ -208,12 +205,12 @@ Liferay.Tree = new Class({
 				mainLi += '<a href="' + node.href + '">';
 			}
 
-			mainLi +=		instance.generateImage(icons.root) +
-							'<span>&nbsp;' + node.name + '</span>' +
+			mainLi +=
+				instance.generateImage(icons.root) +
+					'<span>&nbsp;' + node.name + '</span>' +
 						'</a>' +
-					'<ul class="node-open">' + instance.treeHTML + '</ul>' +
-				'</li>';
-
+							'<ul class="node-open">' + instance.treeHTML + '</ul>' +
+								'</li>';
 
 			tree.append(mainLi);
 
