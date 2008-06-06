@@ -202,21 +202,15 @@ Liferay.Tree = new Class({
 					'<li class="root-container">';
 
 			if (instance.nolinks) {
-				mainLi +=
-						'<a name="' + node.id + '">' +
-							instance.generateImage(icons.root) +
-							'<span>&nbsp;' + node.name + '</span>' +
-						'</a>';
+				mainLi += '<a name="' + node.id + '">';
 			}
 			else {
-				mainLi +=
-						'<a href="' + node.href + '">' +
-							instance.generateImage(icons.root) +
-							'<span>&nbsp;' + node.name + '</span>' +
-						'</a>';
+				mainLi += '<a href="' + node.href + '">';
 			}
 
-			mainLi +=
+			mainLi +=		instance.generateImage(icons.root) +
+							'<span>&nbsp;' + node.name + '</span>' +
+						'</a>' +
 					'<ul class="node-open">' + instance.treeHTML + '</ul>' +
 				'</li>';
 
