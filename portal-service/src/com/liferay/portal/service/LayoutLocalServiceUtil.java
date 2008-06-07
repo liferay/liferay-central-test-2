@@ -334,6 +334,13 @@ public class LayoutLocalServiceUtil {
 			prefsValue);
 	}
 
+	public static long getNextLayoutId(long groupId, boolean privateLayout)
+		throws com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.getNextLayoutId(groupId, privateLayout);
+	}
+
 	public static java.util.List<com.liferay.portal.model.Layout> getNullFriendlyURLLayouts()
 		throws com.liferay.portal.SystemException {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
@@ -538,8 +545,7 @@ public class LayoutLocalServiceUtil {
 
 	public static com.liferay.portal.model.Layout updatePriority(
 		com.liferay.portal.model.Layout layout, int priority)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
 		return layoutLocalService.updatePriority(layout, priority);
