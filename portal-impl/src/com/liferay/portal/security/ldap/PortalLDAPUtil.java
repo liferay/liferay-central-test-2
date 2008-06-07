@@ -233,8 +233,8 @@ public class PortalLDAPUtil {
 		NamingEnumeration<? extends Attribute> enu = ctx.getAttributes(
 			fullDistinguishedName, attrIds).getAll();
 
-		while (enu.hasMore()) {
-			attrs.put(enu.next());
+		while (enu.hasMoreElements()) {
+			attrs.put(enu.nextElement());
 		}
 
 		return attrs;
@@ -402,8 +402,8 @@ public class PortalLDAPUtil {
 
 		ctx.close();
 
-		if (enu.hasMore()) {
-			Binding binding = enu.next();
+		if (enu.hasMoreElements()) {
+			Binding binding = enu.nextElement();
 
 			return binding;
 		}
@@ -488,8 +488,8 @@ public class PortalLDAPUtil {
 
 				// Loop through all LDAP users
 
-				while (enu.hasMore()) {
-					SearchResult result = enu.next();
+				while (enu.hasMoreElements()) {
+					SearchResult result = enu.nextElement();
 
 					Attributes attrs = getAttributes(
 						ctx, getNameInNamespace(companyId, result));
@@ -504,8 +504,8 @@ public class PortalLDAPUtil {
 
 				// Loop through all LDAP groups
 
-				while (enu.hasMore()) {
-					SearchResult result = enu.next();
+				while (enu.hasMoreElements()) {
+					SearchResult result = enu.nextElement();
 
 					Attributes attrs = getAttributes(
 						ctx, getNameInNamespace(companyId, result));

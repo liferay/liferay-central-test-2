@@ -66,8 +66,8 @@ Properties groupMappings = PropertiesUtil.load(groupMappingsParam);
 <%
 int counter = 0;
 
-while (enu.hasMore()) {
-	SearchResult result = (SearchResult)enu.next();
+while (enu.hasMoreElements()) {
+	SearchResult result = (SearchResult)enu.nextElement();
 
 	Attributes attrs = result.getAttributes();
 

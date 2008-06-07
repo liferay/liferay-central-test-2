@@ -166,12 +166,12 @@ public class LDAPAuth implements Authenticator {
 			NamingEnumeration<SearchResult> enu = ctx.search(
 				baseDN, filter, cons);
 
-			if (enu.hasMore()) {
+			if (enu.hasMoreElements()) {
 				if (_log.isDebugEnabled()) {
 					_log.debug("Search filter returned at least one result");
 				}
 
-				SearchResult result = enu.next();
+				SearchResult result = enu.nextElement();
 
 				String fullUserDN = PortalLDAPUtil.getNameInNamespace(
 					companyId, result);

@@ -150,12 +150,12 @@ public class CASAutoLogin implements AutoLogin {
 			NamingEnumeration<SearchResult> enu = ctx.search(
 				baseDN, filter, cons);
 
-			if (enu.hasMore()) {
+			if (enu.hasMoreElements()) {
 				if (_log.isDebugEnabled()) {
 					_log.debug("Search filter returned at least one result");
 				}
 
-				Binding binding = enu.next();
+				Binding binding = enu.nextElement();
 
 				Attributes attrs = ctx.getAttributes(binding.getName());
 
