@@ -51,10 +51,12 @@ public abstract class ArrayDispatcherDestination extends BaseDestination {
 	}
 
 	public synchronized void register(MessageListener listener) {
+		listener = new MessageListenerWrapper(listener);
+
 		Set<MessageListener> listeners = new HashSet<MessageListener>(
 			Arrays.asList(_listeners));
 
-		listeners.add(new MessageListenerWrapper(listener));
+		listeners.add(listener);
 
 		_listeners = listeners.toArray(
 			new MessageListener[listeners.size()]);
@@ -81,6 +83,8 @@ public abstract class ArrayDispatcherDestination extends BaseDestination {
 	}
 
 	public synchronized boolean unregister(MessageListener listener) {
+		listener = new MessageListenerWrapper(listener);
+
 		List<MessageListener> listeners = Arrays.asList(_listeners);
 
 		boolean value = listeners.remove(listener);

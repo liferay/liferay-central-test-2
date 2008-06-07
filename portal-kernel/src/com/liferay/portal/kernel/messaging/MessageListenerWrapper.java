@@ -46,7 +46,11 @@ public class MessageListenerWrapper implements MessageListener {
 	}
 
 	public boolean equals(Object obj) {
-		return _messageListener.equals(obj);
+		MessageListenerWrapper messageListenerWrapper =
+			(MessageListenerWrapper)obj;
+
+		return _messageListener.equals(
+			messageListenerWrapper.getMessageListener());
 	}
 
 	public int hashCode() {
@@ -64,6 +68,10 @@ public class MessageListenerWrapper implements MessageListener {
 
 		_messageListener = messageListener;
 		_classLoader = classLoader;
+	}
+
+	protected MessageListener getMessageListener() {
+		return _messageListener;
 	}
 
 	private MessageListener _messageListener;

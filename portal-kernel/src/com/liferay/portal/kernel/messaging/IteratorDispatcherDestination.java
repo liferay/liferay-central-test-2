@@ -51,7 +51,9 @@ public abstract class IteratorDispatcherDestination extends BaseDestination {
 	}
 
 	public void register(MessageListener listener) {
-		_listeners.add(new MessageListenerWrapper(listener));
+		listener = new MessageListenerWrapper(listener);
+
+		_listeners.add(listener);
 	}
 
 	public void send(String message) {
@@ -75,6 +77,8 @@ public abstract class IteratorDispatcherDestination extends BaseDestination {
 	}
 
 	public boolean unregister(MessageListener listener) {
+		listener = new MessageListenerWrapper(listener);
+
 		return _listeners.remove(listener);
 	}
 
