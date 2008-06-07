@@ -88,8 +88,7 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public void addRoleUsers(long roleId, long[] userIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public void addUserGroupUsers(long userGroupId, long[] userIds)
 		throws com.liferay.portal.PortalException,
@@ -160,12 +159,10 @@ public interface UserLocalService {
 			com.liferay.portal.SystemException;
 
 	public void clearOrganizationUsers(long organizationId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public void clearUserGroupUsers(long userGroupId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.kernel.util.KeyValuePair decryptUserId(
 		long companyId, java.lang.String name, java.lang.String password)
@@ -176,8 +173,7 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public void deleteRoleUser(long roleId, long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public java.lang.String encryptUserId(java.lang.String name)
 		throws com.liferay.portal.PortalException,
@@ -192,9 +188,7 @@ public interface UserLocalService {
 			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> getGroupUsers(
-		long groupId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		long groupId) throws com.liferay.portal.SystemException;
 
 	public int getGroupUsersCount(long groupId)
 		throws com.liferay.portal.SystemException;
@@ -207,9 +201,7 @@ public interface UserLocalService {
 		java.lang.String type) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> getOrganizationUsers(
-		long organizationId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		long organizationId) throws com.liferay.portal.SystemException;
 
 	public int getOrganizationUsersCount(long organizationId)
 		throws com.liferay.portal.SystemException;
@@ -234,9 +226,7 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> getRoleUsers(
-		long roleId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		long roleId) throws com.liferay.portal.SystemException;
 
 	public int getRoleUsersCount(long roleId)
 		throws com.liferay.portal.SystemException;
@@ -286,9 +276,7 @@ public interface UserLocalService {
 			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.User> getUserGroupUsers(
-		long userGroupId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		long userGroupId) throws com.liferay.portal.SystemException;
 
 	public int getUserGroupUsersCount(long userGroupId)
 		throws com.liferay.portal.SystemException;
@@ -389,16 +377,14 @@ public interface UserLocalService {
 			com.liferay.portal.SystemException;
 
 	public void setRoleUsers(long roleId, long[] userIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public void setUserGroupUsers(long userGroupId, long[] userIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public void unsetGroupUsers(long groupId, long[] userIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public void unsetOrganizationUsers(long organizationId, long[] userIds)
 		throws com.liferay.portal.PortalException,
@@ -408,17 +394,14 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public void unsetRoleUsers(long roleId, long[] userIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public void unsetRoleUsers(long roleId,
 		java.util.List<com.liferay.portal.model.User> users)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public void unsetUserGroupUsers(long userGroupId, long[] userIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User updateActive(long userId,
 		boolean active)

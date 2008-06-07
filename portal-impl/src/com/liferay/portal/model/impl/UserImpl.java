@@ -65,12 +65,6 @@ import org.apache.commons.logging.LogFactory;
  */
 public class UserImpl extends UserModelImpl implements User {
 
-	public static String getFullName(
-		String firstName, String middleName, String lastName) {
-
-		return ContactImpl.getFullName(firstName, middleName, lastName);
-	}
-
 	public UserImpl() {
 	}
 

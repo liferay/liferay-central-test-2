@@ -22,10 +22,8 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.ContactConstants;
 
 /**
  * <a href="ContactImpl.java.html"><b><i>View Source</i></b></a>
@@ -35,32 +33,12 @@ import com.liferay.portal.model.Contact;
  */
 public class ContactImpl extends ContactModelImpl implements Contact {
 
-	public static String getFullName(
-		String firstName, String middleName, String lastName) {
-
-		StringMaker sm = new StringMaker();
-
-		if (Validator.isNull(middleName)) {
-			sm.append(firstName);
-			sm.append(StringPool.SPACE);
-			sm.append(lastName);
-		}
-		else {
-			sm.append(firstName);
-			sm.append(StringPool.SPACE);
-			sm.append(middleName);
-			sm.append(StringPool.SPACE);
-			sm.append(lastName);
-		}
-
-		return sm.toString();
-	}
-
 	public ContactImpl() {
 	}
 
 	public String getFullName() {
-		return getFullName(getFirstName(), getMiddleName(), getLastName());
+		return ContactConstants.getFullName(
+			getFirstName(), getMiddleName(), getLastName());
 	}
 
 }

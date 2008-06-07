@@ -75,7 +75,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.RoleImpl;
-import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.security.auth.AuthPipeline;
 import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -179,7 +178,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public void addRoleUsers(long roleId, long[] userIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		rolePersistence.addUsers(roleId, userIds);
 
@@ -244,7 +243,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		User defaultUser = getDefaultUser(companyId);
 
-		String fullName = UserImpl.getFullName(firstName, middleName, lastName);
+		String fullName = ContactConstants.getFullName(
+			firstName, middleName, lastName);
 
 		String greeting = LanguageUtil.format(
 			companyId, locale, "welcome-x", " " + fullName);
@@ -673,16 +673,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public void clearOrganizationUsers(long organizationId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		organizationPersistence.clearUsers(organizationId);
 
 		PermissionCacheUtil.clearCache();
 	}
 
-	public void clearUserGroupUsers(long userGroupId)
-		throws PortalException, SystemException {
-
+	public void clearUserGroupUsers(long userGroupId) throws SystemException {
 		userGroupPersistence.clearUsers(userGroupId);
 
 		PermissionCacheUtil.clearCache();
@@ -736,7 +734,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public void deleteRoleUser(long roleId, long userId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		rolePersistence.removeUser(roleId, userId);
 
@@ -883,9 +881,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return user.getUserId();
 	}
 
-	public List<User> getGroupUsers(long groupId)
-		throws PortalException, SystemException {
-
+	public List<User> getGroupUsers(long groupId) throws SystemException {
 		return groupPersistence.getUsers(groupId);
 	}
 
@@ -913,7 +909,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public List<User> getOrganizationUsers(long organizationId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return organizationPersistence.getUsers(organizationId);
 	}
@@ -983,9 +979,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 	}
 
-	public List<User> getRoleUsers(long roleId)
-		throws PortalException, SystemException {
-
+	public List<User> getRoleUsers(long roleId) throws SystemException {
 		return rolePersistence.getUsers(roleId);
 	}
 
@@ -1125,7 +1119,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public List<User> getUserGroupUsers(long userGroupId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return userGroupPersistence.getUsers(userGroupId);
 	}
@@ -1356,7 +1350,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public void setRoleUsers(long roleId, long[] userIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		rolePersistence.setUsers(roleId, userIds);
 
@@ -1374,7 +1368,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public void unsetGroupUsers(long groupId, long[] userIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		userGroupRoleLocalService.deleteUserGroupRoles(userIds, groupId);
 
@@ -1409,7 +1403,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public void unsetRoleUsers(long roleId, long[] userIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		rolePersistence.removeUsers(roleId, userIds);
 
@@ -1417,7 +1411,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public void unsetRoleUsers(long roleId, List<User> users)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		rolePersistence.removeUsers(roleId, users);
 
@@ -1425,7 +1419,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public void unsetUserGroupUsers(long userGroupId, long[] userIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		userGroupPersistence.removeUsers(userGroupId, userIds);
 

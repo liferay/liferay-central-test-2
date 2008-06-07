@@ -22,6 +22,10 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+
 /**
  * <a href="ContactConstants.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,5 +35,26 @@ package com.liferay.portal.model;
 public class ContactConstants {
 
 	public static final long DEFAULT_PARENT_CONTACT_ID = 0;
+
+	public static String getFullName(
+		String firstName, String middleName, String lastName) {
+
+		StringMaker sm = new StringMaker();
+
+		if (Validator.isNull(middleName)) {
+			sm.append(firstName);
+			sm.append(StringPool.SPACE);
+			sm.append(lastName);
+		}
+		else {
+			sm.append(firstName);
+			sm.append(StringPool.SPACE);
+			sm.append(middleName);
+			sm.append(StringPool.SPACE);
+			sm.append(lastName);
+		}
+
+		return sm.toString();
+	}
 
 }
