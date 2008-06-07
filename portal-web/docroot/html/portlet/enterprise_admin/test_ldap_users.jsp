@@ -71,8 +71,8 @@ Properties userMappings = PropertiesUtil.load(userMappingsParams);
 <%
 int counter = 0;
 
-while (enu.hasMore()) {
-	SearchResult result = (SearchResult)enu.next();
+while (enu.hasMoreElements()) {
+	SearchResult result = (SearchResult)enu.nextElement();
 
 	Attributes attrs = result.getAttributes();
 
