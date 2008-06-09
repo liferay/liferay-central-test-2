@@ -180,6 +180,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.security.ldap.PortalLDAPUtil">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.security.permission.PermissionCheckerImpl">
 		<priority value="ERROR" />
 	</category>

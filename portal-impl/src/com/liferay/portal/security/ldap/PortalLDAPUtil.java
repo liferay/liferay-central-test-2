@@ -693,8 +693,9 @@ public class PortalLDAPUtil {
 				return user;
 			}
 
-			// Skip import if user fields has been already synced and if
-			// import is part of a scheduled import
+			// User already exists in Liferay database - skip import if user
+			// fields has been already synced, if import is part of a scheduled
+			// import, or if the LDAP entry has never been modified.
 
 			Date ldapUserModifiedDate = null;
 
@@ -702,9 +703,20 @@ public class PortalLDAPUtil {
 				attrs, "modifyTimestamp");
 
 			try {
-				DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+				if (Validator.isNull(modifiedDate)) {
+					if (_log.isInfoEnabled()) {
+						_log.info(
+							"LDAP entry never modified, skipping user " +
+								user.getEmailAddress());
+					}
 
-				ldapUserModifiedDate = dateFormat.parse(modifiedDate);
+					return user;
+				}
+				else {
+					DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+
+					ldapUserModifiedDate = dateFormat.parse(modifiedDate);
+				}
 
 				if (ldapUserModifiedDate.equals(user.getModifiedDate()) &&
 					autoPassword) {
