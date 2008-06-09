@@ -47,6 +47,8 @@
 
 	<c:if test="<%= supportsLAR %>">
 		<li class="tree-item">
+			<input id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT%>" type="hidden" value="false" />
+
 			<c:choose>
 				<c:when test='<%= tabs2.equals("import") || tabs2.equals("staging") %>'>
 					<input name="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" type="checkbox" />
@@ -56,8 +58,6 @@
 					<input checked name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>" onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace />portletDataControls');" type="checkbox" />
 
 					<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>"><liferay-ui:message key="data" /></label>
-
-					<input name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT%>" type="hidden" value="false" />
 				</c:when>
 				<c:otherwise>
 					<input checked name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= selPortlet.getRootPortletId() %>" onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace />portletDataControls');" type="checkbox" />
