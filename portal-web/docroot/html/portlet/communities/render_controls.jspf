@@ -33,6 +33,7 @@ private String _renderControls(String namespace, ResourceBundle resourceBundle, 
 
 		if (controls[i] instanceof PortletDataHandlerBoolean) {
 			PortletDataHandlerBoolean control = (PortletDataHandlerBoolean)controls[i];
+			PortletDataHandlerControl[] children = control.getChildren();
 
 			sm.append("<label class=\"");
 			sm.append(namespace);
@@ -48,14 +49,32 @@ private String _renderControls(String namespace, ResourceBundle resourceBundle, 
 			sm.append(namespace);
 			sm.append(control.getNamespacedControlName());
 			sm.append("\" ");
+			sm.append("id=\"");
+			sm.append(namespace);
+			sm.append(control.getNamespacedControlName());
+			sm.append("\" ");
+
+			if (children != null) {
+				sm.append("onchange=\"");
+				sm.append(namespace);
+				sm.append("toggleChildren(this, '");
+				sm.append(namespace);
+				sm.append(control.getNamespacedControlName());
+				sm.append("Controls");
+				sm.append("');\" ");
+			}
+
 			sm.append("type=\"checkbox\" /> ");
 			sm.append(resourceBundle.getString(control.getControlName()));
 			sm.append("</label>");
 
-			PortletDataHandlerControl[] children = control.getChildren();
-
 			if (children != null) {
+				sm.append("<ul id=\"");
+				sm.append(namespace);
+				sm.append(control.getNamespacedControlName());
+				sm.append("Controls\">");
 				sm.append(_renderControls(namespace, resourceBundle, children));
+				sm.append("</ul>");
 			}
 		}
 		else if (controls[i] instanceof PortletDataHandlerChoice) {
