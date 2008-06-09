@@ -115,6 +115,16 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 		}
 	}
 
+	public void cleanUp() {
+		if ((_params != null) && !_params.isEmpty()) {
+			for (LiferayFileItem[] fileItems : _params.values()) {
+				for (int i = 0; i < fileItems.length; i++) {
+					fileItems[i].delete();
+				}
+			}
+		}
+	}
+
 	public String getContentType(String name) {
 		LiferayFileItem[] fileItems = _params.get(name);
 
@@ -165,6 +175,10 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 
 	public ServletInputStream getInputStream() throws IOException {
 		return _lsr.getInputStream();
+	}
+
+	public Map<String, LiferayFileItem[]> getMultipartParameterMap() {
+		return _params;
 	}
 
 	public String getParameter(String name) {
@@ -244,10 +258,6 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 		}
 	}
 
-	public Map<String, LiferayFileItem[]> getMultipartParameterMap() {
-		return _params;
-	}
-
 	public Boolean isFormField(String name) {
 		LiferayFileItem[] fileItems = _params.get(name);
 
@@ -256,16 +266,6 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 		}
 		else {
 			return null;
-		}
-	}
-
-	public void cleanUp() {
-		if ((_params != null) && !_params.isEmpty()) {
-			for (LiferayFileItem[] fileItems : _params.values()) {
-				for (int i = 0; i < fileItems.length; i++) {
-					fileItems[i].delete();
-				}
-			}
 		}
 	}
 
