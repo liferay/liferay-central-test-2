@@ -24,8 +24,7 @@ package com.liferay.portal.kernel.language;
 
 import java.util.Locale;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -92,9 +91,7 @@ public interface Language {
 
 	public String getCharset(Locale locale);
 
-	public String getLanguageId(ActionRequest req);
-
-	public String getLanguageId(RenderRequest req);
+	public String getLanguageId(PortletRequest req);
 
 	public String getLanguageId(HttpServletRequest req);
 

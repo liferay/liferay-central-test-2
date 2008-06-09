@@ -47,9 +47,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.RenderRequest;
-
+import javax.portlet.PortletRequest;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -320,13 +318,7 @@ public class LanguageImpl implements Language {
 		return _getInstance()._getCharset(locale);
 	}
 
-	public String getLanguageId(ActionRequest req) {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-
-		return getLanguageId(httpReq);
-	}
-
-	public String getLanguageId(RenderRequest req) {
+	public String getLanguageId(PortletRequest req) {
 		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		return getLanguageId(httpReq);

@@ -26,9 +26,7 @@ import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 import java.util.Locale;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.RenderRequest;
-
+import javax.portlet.PortletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
@@ -157,11 +155,7 @@ public class LanguageUtil {
 		return _getUtil()._language;
 	}
 
-	public static String getLanguageId(ActionRequest req) {
-		return getLanguage().getLanguageId(req);
-	}
-
-	public static String getLanguageId(RenderRequest req) {
+	public static String getLanguageId(PortletRequest req) {
 		return getLanguage().getLanguageId(req);
 	}
 
