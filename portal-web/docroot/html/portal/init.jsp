@@ -48,13 +48,13 @@
 <%@ page import="com.liferay.portal.service.permission.GroupPermissionUtil" %>
 <%@ page import="com.liferay.portal.service.permission.OrganizationPermissionUtil" %>
 <%@ page import="com.liferay.portal.struts.PortletRequestProcessor" %>
+<%@ page import="com.liferay.portal.upload.LiferayFileUpload" %>
 <%@ page import="com.liferay.portal.util.LayoutLister" %>
 <%@ page import="com.liferay.portal.util.LayoutView" %>
 <%@ page import="com.liferay.portal.util.OpenIdUtil" %>
 <%@ page import="com.liferay.portlet.journal.TransformException" %>
 <%@ page import="com.liferay.portlet.journalcontent.util.JournalContentUtil" %>
 <%@ page import="com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil" %>
-<%@ page import="com.liferay.util.servlet.fileupload.LiferayFileUpload" %>
 
 <%@ page import="org.apache.struts.action.ActionMapping" %>
 <%@ page import="org.apache.struts.taglib.tiles.ComponentConstants" %>

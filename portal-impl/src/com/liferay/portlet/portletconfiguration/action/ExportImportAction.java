@@ -30,6 +30,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.PortletIdException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Portlet;
@@ -38,11 +39,9 @@ import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.UploadRequestUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.communities.util.StagingUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
-import com.liferay.util.servlet.UploadPortletRequest;
 
 import java.io.File;
 
@@ -215,8 +214,8 @@ public class ExportImportAction extends EditConfigurationAction {
 		throws Exception {
 
 		try {
-			UploadPortletRequest uploadReq =
-				UploadRequestUtil.getUploadPortletRequest(req);
+			UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
+				req);
 
 			long plid = ParamUtil.getLong(uploadReq, "plid");
 			File file = uploadReq.getFile("importFileName");

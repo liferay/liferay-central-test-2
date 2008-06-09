@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.upload.UploadServletRequest;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -42,7 +43,6 @@ import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.PwdGenerator;
-import com.liferay.util.servlet.UploadServletRequest;
 
 import java.io.File;
 import java.io.StringReader;

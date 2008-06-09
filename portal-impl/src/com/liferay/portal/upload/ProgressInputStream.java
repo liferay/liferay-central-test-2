@@ -20,9 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.servlet;
-
-import com.liferay.util.servlet.fileupload.LiferayFileUpload;
+package com.liferay.portal.upload;
 
 import java.io.IOException;
 import java.io.InputStream;

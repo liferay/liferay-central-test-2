@@ -778,17 +778,16 @@ public class SCProductEntryLocalServiceImpl
 			if (productScreenshot == null) {
 				long productScreenshotId = counterLocalService.increment();
 
-				long thumbnailId = counterLocalService.increment();
-				long fullImageId = counterLocalService.increment();
-
 				productScreenshot = scProductScreenshotPersistence.create(
 					productScreenshotId);
 
 				productScreenshot.setCompanyId(productEntry.getCompanyId());
 				productScreenshot.setGroupId(productEntry.getGroupId());
 				productScreenshot.setProductEntryId(productEntryId);
-				productScreenshot.setThumbnailId(thumbnailId);
-				productScreenshot.setFullImageId(fullImageId);
+				productScreenshot.setThumbnailId(
+					counterLocalService.increment());
+				productScreenshot.setFullImageId(
+					counterLocalService.increment());
 				productScreenshot.setPriority(priority);
 
 				scProductScreenshotPersistence.update(productScreenshot, false);

@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.deploy.auto.AutoDeployListener;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -47,15 +48,14 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.tools.BaseDeployer;
+import com.liferay.portal.upload.ProgressInputStream;
 import com.liferay.portal.util.HttpImpl;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.util.UploadRequestUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.servlet.ProgressInputStream;
 import com.liferay.util.servlet.UploadException;
-import com.liferay.util.servlet.UploadPortletRequest;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -248,8 +248,8 @@ public class InstallPluginAction extends PortletAction {
 	}
 
 	protected void localDeploy(ActionRequest req) throws Exception {
-		UploadPortletRequest uploadReq =
-			UploadRequestUtil.getUploadPortletRequest(req);
+		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
+			req);
 
 		String fileName = null;
 

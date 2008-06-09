@@ -23,6 +23,7 @@
 package com.liferay.portlet.journal.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -30,7 +31,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.UploadRequestUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.DuplicateTemplateIdException;
 import com.liferay.portlet.journal.NoSuchTemplateException;
@@ -46,7 +47,6 @@ import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.portlet.journal.service.JournalTemplateServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.JS;
-import com.liferay.util.servlet.UploadPortletRequest;
 
 import java.io.File;
 
@@ -164,8 +164,8 @@ public class EditTemplateAction extends PortletAction {
 	}
 
 	protected void updateTemplate(ActionRequest req) throws Exception {
-		UploadPortletRequest uploadReq =
-			UploadRequestUtil.getUploadPortletRequest(req);
+		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
+			req);
 
 		String cmd = ParamUtil.getString(uploadReq, Constants.CMD);
 

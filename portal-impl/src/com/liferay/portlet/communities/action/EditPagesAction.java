@@ -36,6 +36,7 @@ import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -71,14 +72,12 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.util.UploadRequestUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.communities.util.CommunitiesUtil;
 import com.liferay.portlet.communities.util.StagingUtil;
 import com.liferay.portlet.tasks.NoSuchProposalException;
 import com.liferay.util.servlet.UploadException;
-import com.liferay.util.servlet.UploadPortletRequest;
 
 import java.io.File;
 
@@ -382,8 +381,8 @@ public class EditPagesAction extends PortletAction {
 	protected void updateLayout(ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		UploadPortletRequest uploadReq =
-			UploadRequestUtil.getUploadPortletRequest(req);
+		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
+			req);
 
 		String cmd = ParamUtil.getString(uploadReq, Constants.CMD);
 
@@ -527,8 +526,8 @@ public class EditPagesAction extends PortletAction {
 	}
 
 	protected void updateLogo(ActionRequest req) throws Exception {
-		UploadPortletRequest uploadReq =
-			UploadRequestUtil.getUploadPortletRequest(req);
+		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
+			req);
 
 		long liveGroupId = ParamUtil.getLong(req, "liveGroupId");
 		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");

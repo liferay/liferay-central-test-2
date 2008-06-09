@@ -20,7 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.servlet;
+package com.liferay.portal.upload;
+
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 
 import java.io.File;
 
@@ -34,19 +36,26 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 /**
- * <a href="UploadPortletRequest.java.html"><b><i>View Source</i></b></a>
+ * <a href="UploadPortletRequestImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Harry Mark
  *
  */
-public class UploadPortletRequest extends HttpServletRequestWrapper {
+public class UploadPortletRequestImpl
+	extends HttpServletRequestWrapper implements UploadPortletRequest {
 
-	public UploadPortletRequest(UploadServletRequest req, String namespace) {
+	public UploadPortletRequestImpl(
+		UploadServletRequest req, String namespace) {
+
 		super(req);
 
 		_req = req;
 		_namespace = namespace;
+	}
+
+	public void cleanUp() {
+		_req.cleanUp();
 	}
 
 	public String getContentType(String name) {
@@ -156,10 +165,6 @@ public class UploadPortletRequest extends HttpServletRequestWrapper {
 		else {
 			return formField.booleanValue();
 		}
-	}
-
-	public void cleanUp() {
-		_req.cleanUp();
 	}
 
 	private UploadServletRequest _req;

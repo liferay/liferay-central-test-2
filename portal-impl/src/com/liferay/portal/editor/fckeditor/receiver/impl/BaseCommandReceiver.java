@@ -34,10 +34,10 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.upload.LiferayFileItemFactory;
+import com.liferay.portal.upload.UploadServletRequest;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.dao.hibernate.QueryUtil;
-import com.liferay.util.servlet.UploadServletRequest;
-import com.liferay.util.servlet.fileupload.LiferayFileItemFactory;
 
 import java.io.File;
 import java.io.PrintWriter;

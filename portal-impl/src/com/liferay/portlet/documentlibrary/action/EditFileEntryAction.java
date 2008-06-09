@@ -29,6 +29,7 @@ import com.liferay.documentlibrary.SourceFileNameException;
 import com.liferay.lock.DuplicateLockException;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
@@ -37,7 +38,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.UploadRequestUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
@@ -50,7 +51,6 @@ import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermiss
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
 import com.liferay.portlet.taggedcontent.util.AssetPublisherUtil;
 import com.liferay.portlet.tags.TagsEntryException;
-import com.liferay.util.servlet.UploadPortletRequest;
 
 import java.io.File;
 
@@ -189,8 +189,8 @@ public class EditFileEntryAction extends PortletAction {
 			FileEntryForm fileEntryForm, ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		UploadPortletRequest uploadReq =
-			UploadRequestUtil.getUploadPortletRequest(req);
+		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
+			req);
 
 		String cmd = ParamUtil.getString(uploadReq, Constants.CMD);
 

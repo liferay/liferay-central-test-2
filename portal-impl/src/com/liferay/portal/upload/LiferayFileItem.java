@@ -20,12 +20,12 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.servlet.fileupload;
+package com.liferay.portal.upload;
 
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.SystemProperties;
+import com.liferay.portal.util.PropsUtil;
 
 import java.io.File;
 
@@ -42,15 +42,15 @@ import org.apache.commons.fileupload.disk.DiskFileItem;
 public class LiferayFileItem extends DiskFileItem {
 
 	public static final int THRESHOLD_SIZE = GetterUtil.getInteger(
-		SystemProperties.get(
-			LiferayFileItem.class.getName() + ".threshold.size"));
+		PropsUtil.get(LiferayFileItem.class.getName() + ".threshold.size"));
 
-	public LiferayFileItem(String fieldName, String contentType,
-						   boolean isFormField, String fileName,
-						   int sizeThreshold, File repository) {
+	public LiferayFileItem(
+		String fieldName, String contentType, boolean isFormField,
+		String fileName, int sizeThreshold, File repository) {
 
-		super(fieldName, contentType, isFormField, fileName, sizeThreshold,
-			  repository);
+		super(
+			fieldName, contentType, isFormField, fileName, sizeThreshold,
+			repository);
 
 		_fileName = fileName;
 		_repository = repository;

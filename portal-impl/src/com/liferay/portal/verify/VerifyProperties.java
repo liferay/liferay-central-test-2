@@ -180,6 +180,24 @@ public class VerifyProperties extends VerifyProcess {
 		new String[] {
 			"com.liferay.util.Http.timeout",
 			"com.liferay.portal.util.HttpImpl.timeout"
+		},
+		new String[] {
+			"com.liferay.util.servlet.UploadServletRequest.max.size",
+			"com.liferay.portal.upload.UploadServletRequest.max.size"
+		},
+		new String[] {
+			"com.liferay.util.servlet.UploadServletRequest.temp.dir",
+			"com.liferay.portal.upload.UploadServletRequest.temp.dir"
+		},
+		new String[] {
+			"com.liferay.util.servlet.fileupload.LiferayFileItem." +
+				"threshold.size",
+			"com.liferay.portal.upload.LiferayFileItem.threshold.size"
+		},
+		new String[] {
+			"com.liferay.util.servlet.fileupload.LiferayInputStream." +
+				"threshold.size",
+			"com.liferay.portal.upload.LiferayInputStream.threshold.size"
 		}
 	};
 

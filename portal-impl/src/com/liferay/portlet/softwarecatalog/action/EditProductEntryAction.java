@@ -23,6 +23,7 @@
 package com.liferay.portlet.softwarecatalog.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -33,7 +34,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.UploadRequestUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.softwarecatalog.DuplicateProductEntryModuleIdException;
 import com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
@@ -47,7 +48,6 @@ import com.liferay.portlet.softwarecatalog.ProductEntryTypeException;
 import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceUtil;
 import com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceUtil;
-import com.liferay.util.servlet.UploadPortletRequest;
 
 import java.io.File;
 
@@ -243,8 +243,8 @@ public class EditProductEntryAction extends PortletAction {
 	}
 
 	protected void updateProductEntry(ActionRequest req) throws Exception {
-		UploadPortletRequest uploadReq =
-			UploadRequestUtil.getUploadPortletRequest(req);
+		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
+			req);
 
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 

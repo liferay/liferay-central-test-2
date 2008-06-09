@@ -27,10 +27,10 @@ import com.liferay.portal.LARTypeException;
 import com.liferay.portal.LayoutImportException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
-import com.liferay.portal.util.UploadRequestUtil;
-import com.liferay.util.servlet.UploadPortletRequest;
+import com.liferay.portal.util.PortalUtil;
 
 import java.io.File;
 
@@ -58,8 +58,8 @@ public class ImportPagesAction extends EditPagesAction {
 		throws Exception {
 
 		try {
-			UploadPortletRequest uploadReq =
-				UploadRequestUtil.getUploadPortletRequest(req);
+			UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
+				req);
 
 			long groupId = ParamUtil.getLong(uploadReq, "groupId");
 			boolean privateLayout = ParamUtil.getBoolean(

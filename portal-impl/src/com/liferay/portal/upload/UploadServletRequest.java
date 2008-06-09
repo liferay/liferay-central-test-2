@@ -20,14 +20,11 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.servlet;
+package com.liferay.portal.upload;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.SystemProperties;
-import com.liferay.util.servlet.fileupload.LiferayFileItem;
-import com.liferay.util.servlet.fileupload.LiferayFileItemFactory;
-import com.liferay.util.servlet.fileupload.LiferayFileUpload;
-import com.liferay.util.servlet.fileupload.LiferayServletRequest;
 
 import java.io.File;
 import java.io.IOException;
@@ -60,13 +57,11 @@ import org.apache.commons.logging.LogFactory;
 public class UploadServletRequest extends HttpServletRequestWrapper {
 
 	public static final int DEFAULT_SIZE_MAX = GetterUtil.getInteger(
-		SystemProperties.get(
-			UploadServletRequest.class.getName() + ".max.size"));
+		PropsUtil.get(UploadServletRequest.class.getName() + ".max.size"));
 
 	public static final File DEFAULT_TEMP_DIR = new File(
 		GetterUtil.getString(
-			SystemProperties.get(
-				UploadServletRequest.class.getName() + ".temp.dir"),
+			PropsUtil.get(UploadServletRequest.class.getName() + ".temp.dir"),
 			SystemProperties.get(SystemProperties.TMP_DIR)));
 
 	public UploadServletRequest(HttpServletRequest req) {

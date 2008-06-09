@@ -25,11 +25,11 @@ package com.liferay.portal.apache.bridges.struts;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.ServletContextProvider;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.upload.UploadServletRequest;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.PortletContextImpl;
 import com.liferay.portlet.RenderRequestImpl;
-import com.liferay.util.servlet.UploadServletRequest;
 
 import javax.portlet.GenericPortlet;
 import javax.portlet.PortletRequest;

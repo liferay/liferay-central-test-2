@@ -24,6 +24,7 @@ package com.liferay.portlet.imagegallery.action;
 
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -32,7 +33,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.UploadRequestUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.imagegallery.DuplicateImageNameException;
 import com.liferay.portlet.imagegallery.ImageNameException;
 import com.liferay.portlet.imagegallery.ImageSizeException;
@@ -42,7 +43,6 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
 import com.liferay.portlet.taggedcontent.util.AssetPublisherUtil;
 import com.liferay.portlet.tags.TagsEntryException;
-import com.liferay.util.servlet.UploadPortletRequest;
 
 import java.io.File;
 
@@ -165,8 +165,8 @@ public class EditImageAction extends PortletAction {
 	}
 
 	protected void updateImage(ActionRequest req) throws Exception {
-		UploadPortletRequest uploadReq =
-			UploadRequestUtil.getUploadPortletRequest(req);
+		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
+			req);
 
 		long imageId = ParamUtil.getLong(uploadReq, "imageId");
 

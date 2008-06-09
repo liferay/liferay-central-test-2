@@ -23,14 +23,13 @@
 package com.liferay.portlet.enterpriseadmin.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.CompanyServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.UploadRequestUtil;
 import com.liferay.util.servlet.UploadException;
-import com.liferay.util.servlet.UploadPortletRequest;
 
 import java.io.File;
 
@@ -87,8 +86,8 @@ public class EditCompanyLogoAction extends PortletAction {
 	}
 
 	protected void updateLogo(ActionRequest req) throws Exception {
-		UploadPortletRequest uploadReq =
-			UploadRequestUtil.getUploadPortletRequest(req);
+		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
+			req);
 
 		long companyId = PortalUtil.getCompanyId(req);
 

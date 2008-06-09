@@ -25,6 +25,7 @@ package com.liferay.portlet.enterpriseadmin.action;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.UserPortraitException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.model.User;
@@ -32,9 +33,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.UploadRequestUtil;
 import com.liferay.util.servlet.UploadException;
-import com.liferay.util.servlet.UploadPortletRequest;
 
 import java.io.InputStream;
 
@@ -170,8 +169,8 @@ public class EditUserPortraitAction extends PortletAction {
 
 		//_testRequest(req);
 
-		UploadPortletRequest uploadReq =
-			UploadRequestUtil.getUploadPortletRequest(req);
+		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
+			req);
 
 		User user = PortalUtil.getSelectedUser(uploadReq);
 

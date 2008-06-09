@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
@@ -78,6 +79,10 @@ import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.tools.sql.DBUtil;
+import com.liferay.portal.upload.UploadPortletRequestImpl;
+import com.liferay.portal.upload.UploadServletRequest;
+import com.liferay.portal.upload.UploadServletRequestUtil;
+import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletBag;
 import com.liferay.portlet.PortletBagPool;
@@ -101,6 +106,7 @@ import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.util.BeanUtil;
 import com.liferay.util.Encryptor;
 import com.liferay.util.JS;
+import com.liferay.util.servlet.DynamicServletRequest;
 
 import java.io.IOException;
 
@@ -1714,6 +1720,23 @@ public class PortalImpl implements Portal {
 
 	public String[] getSystemRoles() {
 		return _allSystemRoles;
+	}
+
+	public UploadPortletRequest getUploadPortletRequest(ActionRequest req) {
+		ActionRequestImpl actionReq = (ActionRequestImpl)req;
+
+		DynamicServletRequest dynamicReq =
+			(DynamicServletRequest)actionReq.getHttpServletRequest();
+
+		HttpServletRequestWrapper reqWrapper =
+			(HttpServletRequestWrapper)dynamicReq.getRequest();
+
+		UploadServletRequest uploadReq =
+			UploadServletRequestUtil.getUploadServletRequest(reqWrapper);
+
+		return new UploadPortletRequestImpl(
+			uploadReq,
+			PortalUtil.getPortletNamespace(actionReq.getPortletName()));
 	}
 
 	public Date getUptime() {

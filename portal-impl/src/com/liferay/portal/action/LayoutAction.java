@@ -45,6 +45,7 @@ import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.upload.UploadServletRequest;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
@@ -74,7 +75,6 @@ import com.liferay.portlet.ResourceResponseImpl;
 import com.liferay.portlet.StateAwareResponseImpl;
 import com.liferay.util.MapUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
-import com.liferay.util.servlet.UploadServletRequest;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;

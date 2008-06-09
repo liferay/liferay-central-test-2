@@ -25,6 +25,7 @@ package com.liferay.portal.util;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Layout;
@@ -539,6 +540,12 @@ public class PortalUtil {
 
 	public static String[] getSystemRoles() {
 		return getPortal().getSystemRoles();
+	}
+
+	public static UploadPortletRequest getUploadPortletRequest(
+		ActionRequest req) {
+
+		return getPortal().getUploadPortletRequest(req);
 	}
 
 	public static Date getUptime() {

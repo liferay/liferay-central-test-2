@@ -20,44 +20,18 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.upload;
 
-import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.util.servlet.DynamicServletRequest;
-import com.liferay.util.servlet.UploadPortletRequest;
-import com.liferay.util.servlet.UploadServletRequest;
-
-import javax.portlet.ActionRequest;
-
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 /**
- * <a href="UploadRequestUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="UploadServletRequestUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class UploadRequestUtil {
-
-	public static UploadPortletRequest getUploadPortletRequest(
-		ActionRequest req) {
-
-		ActionRequestImpl actionReq = (ActionRequestImpl)req;
-
-		DynamicServletRequest dynamicReq =
-			(DynamicServletRequest)actionReq.getHttpServletRequest();
-
-		HttpServletRequestWrapper reqWrapper =
-			(HttpServletRequestWrapper)dynamicReq.getRequest();
-
-		UploadServletRequest uploadReq = getUploadServletRequest(reqWrapper);
-
-		return new UploadPortletRequest(
-			uploadReq,
-			PortalUtil.getPortletNamespace(actionReq.getPortletName()));
-	}
+public class UploadServletRequestUtil {
 
 	public static UploadServletRequest getUploadServletRequest(
 		HttpServletRequest httpReq) {
@@ -79,9 +53,16 @@ public class UploadRequestUtil {
 				uploadReq = (UploadServletRequest)httpReqWrapper;
 			}
 			else {
-				ServletRequest req = httpReqWrapper.getRequest();
+				HttpServletRequest req =
+					(HttpServletRequest)httpReqWrapper.getRequest();
 
 				if (!(req instanceof HttpServletRequestWrapper)) {
+
+					// This block should never be reached unless this method is
+					// called from a hot deployable portlet. See LayoutAction.
+
+					uploadReq = new UploadServletRequest(req);
+
 					break;
 				}
 				else {

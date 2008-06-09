@@ -27,6 +27,7 @@ import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.portal.captcha.CaptchaTextException;
 import com.liferay.portal.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
@@ -36,8 +37,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.util.UploadRequestUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.messageboards.MessageBodyException;
@@ -47,7 +48,6 @@ import com.liferay.portlet.messageboards.RequiredMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.portlet.tags.TagsEntryException;
-import com.liferay.util.servlet.UploadPortletRequest;
 
 import java.io.File;
 
@@ -192,8 +192,8 @@ public class EditMessageAction extends PortletAction {
 			new ArrayList<ObjectValuePair<String, byte[]>>();
 
 		if (attachments) {
-			UploadPortletRequest uploadReq =
-				UploadRequestUtil.getUploadPortletRequest(req);
+			UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
+				req);
 
 			for (int i = 1; i <= 5; i++) {
 				File file = uploadReq.getFile("msgFile" + i);

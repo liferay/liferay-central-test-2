@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.servlet.fileupload;
+package com.liferay.portal.upload;
 
 import com.liferay.portal.kernel.util.ProgressTracker;
 import com.liferay.portal.kernel.util.Validator;
@@ -50,8 +50,8 @@ public class LiferayFileUpload extends ServletFileUpload {
 
 	public static final String PERCENT = ProgressTracker.PERCENT;
 
-	public LiferayFileUpload(FileItemFactory fileItemFactory,
-								 HttpServletRequest req) {
+	public LiferayFileUpload(
+		FileItemFactory fileItemFactory, HttpServletRequest req) {
 
 		super(fileItemFactory);
 

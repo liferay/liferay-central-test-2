@@ -23,6 +23,7 @@
 package com.liferay.portlet.mail.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.DateFormats;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -37,7 +38,6 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.UploadRequestUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.mail.RecipientException;
 import com.liferay.portlet.mail.model.MailAttachment;
@@ -47,7 +47,6 @@ import com.liferay.portlet.mail.util.MailUtil;
 import com.liferay.portlet.mail.util.multiaccount.MailAccount;
 import com.liferay.portlet.mail.util.multiaccount.MailAccounts;
 import com.liferay.util.mail.InternetAddressUtil;
-import com.liferay.util.servlet.UploadPortletRequest;
 
 import java.io.File;
 
@@ -333,8 +332,8 @@ public class EditMessageAction extends PortletAction {
 	}
 
 	protected Map getAttachments(ActionRequest req) throws Exception {
-		UploadPortletRequest uploadReq =
-			UploadRequestUtil.getUploadPortletRequest(req);
+		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
+			req);
 
 		Map attachments = new HashMap();
 

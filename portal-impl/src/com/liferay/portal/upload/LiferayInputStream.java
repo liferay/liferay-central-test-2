@@ -20,11 +20,11 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.servlet.fileupload;
+package com.liferay.portal.upload;
 
 import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.util.SystemProperties;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.servlet.ByteArrayInputStreamWrapper;
 import com.liferay.util.servlet.ServletInputStreamWrapper;
 
@@ -49,8 +49,7 @@ import org.apache.commons.logging.LogFactory;
 public class LiferayInputStream extends ServletInputStreamWrapper {
 
 	public static final int THRESHOLD_SIZE = GetterUtil.getInteger(
-		SystemProperties.get(
-			LiferayInputStream.class.getName() + ".threshold.size"));
+		PropsUtil.get(LiferayInputStream.class.getName() + ".threshold.size"));
 
 	public LiferayInputStream(HttpServletRequest req) throws IOException {
 		super(req.getInputStream());

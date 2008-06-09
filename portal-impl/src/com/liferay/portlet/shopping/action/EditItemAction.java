@@ -23,12 +23,13 @@
 package com.liferay.portlet.shopping.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.UploadRequestUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.shopping.DuplicateItemSKUException;
 import com.liferay.portlet.shopping.ItemLargeImageNameException;
 import com.liferay.portlet.shopping.ItemLargeImageSizeException;
@@ -46,7 +47,6 @@ import com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl;
 import com.liferay.portlet.shopping.service.ShoppingItemServiceUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceUtil;
-import com.liferay.util.servlet.UploadPortletRequest;
 
 import java.io.File;
 
@@ -149,8 +149,8 @@ public class EditItemAction extends PortletAction {
 	}
 
 	protected void updateItem(ActionRequest req) throws Exception {
-		UploadPortletRequest uploadReq =
-			UploadRequestUtil.getUploadPortletRequest(req);
+		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
+			req);
 
 		long itemId = ParamUtil.getLong(uploadReq, "itemId");
 
