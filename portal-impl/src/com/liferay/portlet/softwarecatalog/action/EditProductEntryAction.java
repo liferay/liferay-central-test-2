@@ -32,7 +32,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.impl.ImageLocalUtil;
+import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -178,11 +178,11 @@ public class EditProductEntryAction extends PortletAction {
 				Image image = null;
 
 				if (imagePrefix.equals("fullImage")) {
-					image = ImageLocalUtil.getImage(
+					image = ImageLocalServiceUtil.getImage(
 						productScreenshot.getFullImageId());
 				}
 				else {
-					image = ImageLocalUtil.getImage(
+					image = ImageLocalServiceUtil.getImage(
 						productScreenshot.getThumbnailId());
 				}
 

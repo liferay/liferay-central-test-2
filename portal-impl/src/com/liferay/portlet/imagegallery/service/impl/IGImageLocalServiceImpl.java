@@ -36,7 +36,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.imagegallery.DuplicateImageNameException;
@@ -291,8 +290,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 		// Images
 
-		ImageLocalUtil.deleteImage(image.getSmallImageId());
-		ImageLocalUtil.deleteImage(image.getLargeImageId());
+		imageLocalService.deleteImage(image.getSmallImageId());
+		imageLocalService.deleteImage(image.getLargeImageId());
 
 		// Image
 
@@ -504,7 +503,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			long userId, IGImage image, String[] tagsEntries)
 		throws PortalException, SystemException {
 
-		Image largeImage = ImageLocalUtil.getImage(image.getLargeImageId());
+		Image largeImage = imageLocalService.getImage(image.getLargeImageId());
 
 		if (largeImage == null) {
 			return;
@@ -547,7 +546,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			// Image
 
-			ImageLocalUtil.updateImage(largeImageId, bytes);
+			imageLocalService.updateImage(largeImageId, bytes);
 
 			// Thumbnail and custom sizes
 
@@ -606,7 +605,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			encoder.encode(thumbnail);
 		}
 
-		ImageLocalUtil.updateImage(imageId, bam.toByteArray());
+		imageLocalService.updateImage(imageId, bam.toByteArray());
 	}
 
 	protected void validate(byte[] bytes) throws ImageSizeException {

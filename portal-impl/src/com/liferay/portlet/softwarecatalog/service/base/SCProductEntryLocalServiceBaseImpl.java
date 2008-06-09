@@ -30,6 +30,8 @@ import com.liferay.counter.service.CounterServiceFactory;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.service.ImageLocalService;
+import com.liferay.portal.service.ImageLocalServiceFactory;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
@@ -38,6 +40,8 @@ import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserServiceFactory;
+import com.liferay.portal.service.persistence.ImagePersistence;
+import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourceFinderUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
@@ -262,6 +266,22 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
+	public ImageLocalService getImageLocalService() {
+		return imageLocalService;
+	}
+
+	public void setImageLocalService(ImageLocalService imageLocalService) {
+		this.imageLocalService = imageLocalService;
+	}
+
+	public ImagePersistence getImagePersistence() {
+		return imagePersistence;
+	}
+
+	public void setImagePersistence(ImagePersistence imagePersistence) {
+		this.imagePersistence = imagePersistence;
+	}
+
 	public ResourceLocalService getResourceLocalService() {
 		return resourceLocalService;
 	}
@@ -436,6 +456,14 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 			counterService = CounterServiceFactory.getImpl();
 		}
 
+		if (imageLocalService == null) {
+			imageLocalService = ImageLocalServiceFactory.getImpl();
+		}
+
+		if (imagePersistence == null) {
+			imagePersistence = ImageUtil.getPersistence();
+		}
+
 		if (resourceLocalService == null) {
 			resourceLocalService = ResourceLocalServiceFactory.getImpl();
 		}
@@ -507,6 +535,8 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	protected SCProductVersionPersistence scProductVersionPersistence;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;
+	protected ImageLocalService imageLocalService;
+	protected ImagePersistence imagePersistence;
 	protected ResourceLocalService resourceLocalService;
 	protected ResourceService resourceService;
 	protected ResourcePersistence resourcePersistence;

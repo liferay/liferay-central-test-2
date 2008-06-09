@@ -24,7 +24,7 @@ package com.liferay.portlet.imagegallery.webdav;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Image;
-import com.liferay.portal.service.impl.ImageLocalUtil;
+import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portal.webdav.BaseResourceImpl;
 import com.liferay.portal.webdav.WebDAVException;
@@ -72,7 +72,8 @@ public class IGImageResourceImpl extends BaseResourceImpl {
 
 	public InputStream getContentAsStream() throws WebDAVException {
 		try {
-			Image image = ImageLocalUtil.getImage(_image.getLargeImageId());
+			Image image = ImageLocalServiceUtil.getImage(
+				_image.getLargeImageId());
 
 			byte[] bytes = image.getTextObj();
 

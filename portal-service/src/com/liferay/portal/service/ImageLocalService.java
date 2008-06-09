@@ -76,6 +76,27 @@ public interface ImageLocalService {
 		com.liferay.portal.model.Image image)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Image getCompanyLogo(long imageId);
+
+	public com.liferay.portal.model.Image getDefaultCompanyLogo();
+
+	public com.liferay.portal.model.Image getDefaultSpacer();
+
+	public com.liferay.portal.model.Image getDefaultUserFemalePortrait();
+
+	public com.liferay.portal.model.Image getDefaultUserMalePortrait();
+
+	public com.liferay.portal.model.Image getImage(byte[] bytes)
+		throws java.io.IOException;
+
+	public com.liferay.portal.model.Image getImage(java.io.File file)
+		throws java.io.IOException;
+
+	public com.liferay.portal.model.Image getImage(java.io.InputStream is)
+		throws java.io.IOException;
+
+	public com.liferay.portal.model.Image getImageOrDefault(long imageId);
+
 	public java.util.List<com.liferay.portal.model.Image> getImages()
 		throws com.liferay.portal.SystemException;
 
@@ -84,6 +105,17 @@ public interface ImageLocalService {
 
 	public java.util.List<com.liferay.portal.model.Image> getImagesBySize(
 		int size) throws com.liferay.portal.SystemException;
+
+	public boolean isNullOrDefaultSpacer(byte[] bytes);
+
+	public com.liferay.portal.model.Image updateImage(long imageId, byte[] bytes)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Image updateImage(long imageId,
+		java.io.File file) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Image updateImage(long imageId,
+		java.io.InputStream is) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Image updateImage(long imageId,
 		byte[] bytes, java.lang.String type, int height, int width, int size)

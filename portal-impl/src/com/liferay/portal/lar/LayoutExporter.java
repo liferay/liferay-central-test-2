@@ -41,10 +41,10 @@ import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.service.persistence.LayoutUtil;
 import com.liferay.portal.theme.ThemeLoader;
 import com.liferay.portal.theme.ThemeLoaderFactory;
@@ -211,7 +211,8 @@ public class LayoutExporter {
 				String.valueOf(layout.getIconImage()));
 
 			if (layout.isIconImage()) {
-				Image image = ImageLocalUtil.getImage(layout.getIconImageId());
+				Image image = ImageLocalServiceUtil.getImage(
+					layout.getIconImageId());
 
 				if (image != null) {
 					String iconPath = getLayoutIconPath(context, layout, image);

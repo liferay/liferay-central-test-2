@@ -758,7 +758,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Portrait
 
-		ImageLocalUtil.deleteImage(user.getPortraitId());
+		imageLocalService.deleteImage(user.getPortraitId());
 
 		// Password policy relation
 
@@ -1716,7 +1716,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			user.setPortraitId(portraitId);
 		}
 
-		ImageLocalUtil.updateImage(portraitId, bytes);
+		imageLocalService.updateImage(portraitId, bytes);
 	}
 
 	public void updateScreenName(long userId, String screenName)

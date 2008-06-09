@@ -24,7 +24,6 @@ package com.liferay.portlet.softwarecatalog.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
 import com.liferay.portlet.softwarecatalog.service.base.SCProductScreenshotLocalServiceBaseImpl;
 
@@ -41,16 +40,16 @@ public class SCProductScreenshotLocalServiceImpl
 	extends SCProductScreenshotLocalServiceBaseImpl {
 
 	public void deleteProductScreenshot(SCProductScreenshot productScreenshot)
-		throws SystemException {
+		throws PortalException, SystemException {
 
-		ImageLocalUtil.deleteImage(productScreenshot.getThumbnailId());
-		ImageLocalUtil.deleteImage(productScreenshot.getFullImageId());
+		imageLocalService.deleteImage(productScreenshot.getThumbnailId());
+		imageLocalService.deleteImage(productScreenshot.getFullImageId());
 
 		scProductScreenshotPersistence.remove(productScreenshot);
 	}
 
 	public void deleteProductScreenshots(long productEntryId)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		List<SCProductScreenshot> productScreenshots =
 			scProductScreenshotPersistence.findByProductEntryId(productEntryId);

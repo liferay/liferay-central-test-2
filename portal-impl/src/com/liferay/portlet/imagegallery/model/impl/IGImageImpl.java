@@ -26,7 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
-import com.liferay.portal.service.impl.ImageLocalUtil;
+import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
@@ -87,7 +87,8 @@ public class IGImageImpl extends IGImageModelImpl implements IGImage {
 	public String getImageType() {
 		if (_imageType == null) {
 			try {
-				Image largeImage = ImageLocalUtil.getImage(getLargeImageId());
+				Image largeImage = ImageLocalServiceUtil.getImage(
+					getLargeImageId());
 
 				_imageType = largeImage.getType();
 			}
@@ -108,7 +109,8 @@ public class IGImageImpl extends IGImageModelImpl implements IGImage {
 	public int getImageSize() {
 		if (_imageSize == null) {
 			try {
-				Image largeImage = ImageLocalUtil.getImage(getLargeImageId());
+				Image largeImage = ImageLocalServiceUtil.getImage(
+					getLargeImageId());
 
 				_imageSize = new Integer(largeImage.getSize());
 			}

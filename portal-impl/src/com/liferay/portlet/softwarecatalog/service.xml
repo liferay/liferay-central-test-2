@@ -161,6 +161,7 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.portal" entity="Image" />
 		<reference package-path="com.liferay.portal" entity="Resource" />
 		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessage" />
@@ -209,6 +210,10 @@
 			<finder-column name="productEntryId" />
 			<finder-column name="priority" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.portal" entity="Image" />
 	</entity>
 	<entity name="SCProductVersion" local-service="true" remote-service="true">
 

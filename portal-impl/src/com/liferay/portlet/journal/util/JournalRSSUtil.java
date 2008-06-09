@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
-import com.liferay.portal.service.impl.ImageLocalUtil;
+import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.imagegallery.model.IGImage;
@@ -280,7 +280,7 @@ public class JournalRSSUtil {
 					imageId = GetterUtil.getLong(parameters.get("i_id")[0]);
 				}
 
-				image = ImageLocalUtil.getImage(imageId);
+				image = ImageLocalServiceUtil.getImage(imageId);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
@@ -299,7 +299,8 @@ public class JournalRSSUtil {
 					IGImageLocalServiceUtil.getImageByUuidAndGroupId(
 						uuid, groupId);
 
-				image = ImageLocalUtil.getImage(igImage.getLargeImageId());
+				image = ImageLocalServiceUtil.getImage(
+					igImage.getLargeImageId());
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {

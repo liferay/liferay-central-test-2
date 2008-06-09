@@ -27,7 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
@@ -180,7 +179,7 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 			try {
 				file = FileUtil.createTempFile(srcImage.getImageType());
 
-				Image image = ImageLocalUtil.getImage(
+				Image image = imageLocalService.getImage(
 					srcImage.getLargeImageId());
 
 				byte[] bytes = image.getTextObj();

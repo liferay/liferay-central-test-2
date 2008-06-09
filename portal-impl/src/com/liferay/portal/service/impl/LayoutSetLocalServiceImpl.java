@@ -100,7 +100,7 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 
 		// Logo
 
-		ImageLocalUtil.deleteImage(layoutSet.getLogoId());
+		imageLocalService.deleteImage(layoutSet.getLogoId());
 
 		// Layout set
 
@@ -143,10 +143,10 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		layoutSetPersistence.update(layoutSet, false);
 
 		if (logo) {
-			ImageLocalUtil.updateImage(layoutSet.getLogoId(), file);
+			imageLocalService.updateImage(layoutSet.getLogoId(), file);
 		}
 		else {
-			ImageLocalUtil.deleteImage(layoutSet.getLogoId());
+			imageLocalService.deleteImage(layoutSet.getLogoId());
 		}
 	}
 

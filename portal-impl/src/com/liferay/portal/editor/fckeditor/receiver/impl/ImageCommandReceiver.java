@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Image;
-import com.liferay.portal.service.impl.ImageLocalUtil;
+import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
@@ -152,7 +152,8 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 		for (IGImage image : images) {
 			long largeImageId = image.getLargeImageId();
 
-			Image portalImage = ImageLocalUtil.getImageOrDefault(largeImageId);
+			Image portalImage = ImageLocalServiceUtil.getImageOrDefault(
+				largeImageId);
 
 			Element fileEl = doc.createElement("File");
 

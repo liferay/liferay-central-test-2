@@ -34,6 +34,8 @@ import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyLocalServiceFactory;
 import com.liferay.portal.service.CompanyService;
 import com.liferay.portal.service.CompanyServiceFactory;
+import com.liferay.portal.service.ImageLocalService;
+import com.liferay.portal.service.ImageLocalServiceFactory;
 import com.liferay.portal.service.PortletPreferencesLocalService;
 import com.liferay.portal.service.PortletPreferencesLocalServiceFactory;
 import com.liferay.portal.service.PortletPreferencesService;
@@ -49,6 +51,8 @@ import com.liferay.portal.service.UserServiceFactory;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.persistence.CompanyPersistence;
 import com.liferay.portal.service.persistence.CompanyUtil;
+import com.liferay.portal.service.persistence.ImagePersistence;
+import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.service.persistence.PortletPreferencesFinder;
 import com.liferay.portal.service.persistence.PortletPreferencesFinderUtil;
 import com.liferay.portal.service.persistence.PortletPreferencesPersistence;
@@ -377,6 +381,22 @@ public abstract class JournalArticleServiceBaseImpl extends PrincipalBean
 
 	public void setCompanyPersistence(CompanyPersistence companyPersistence) {
 		this.companyPersistence = companyPersistence;
+	}
+
+	public ImageLocalService getImageLocalService() {
+		return imageLocalService;
+	}
+
+	public void setImageLocalService(ImageLocalService imageLocalService) {
+		this.imageLocalService = imageLocalService;
+	}
+
+	public ImagePersistence getImagePersistence() {
+		return imagePersistence;
+	}
+
+	public void setImagePersistence(ImagePersistence imagePersistence) {
+		this.imagePersistence = imagePersistence;
 	}
 
 	public PortletPreferencesLocalService getPortletPreferencesLocalService() {
@@ -709,6 +729,14 @@ public abstract class JournalArticleServiceBaseImpl extends PrincipalBean
 			companyPersistence = CompanyUtil.getPersistence();
 		}
 
+		if (imageLocalService == null) {
+			imageLocalService = ImageLocalServiceFactory.getImpl();
+		}
+
+		if (imagePersistence == null) {
+			imagePersistence = ImageUtil.getPersistence();
+		}
+
 		if (portletPreferencesLocalService == null) {
 			portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getImpl();
 		}
@@ -841,6 +869,8 @@ public abstract class JournalArticleServiceBaseImpl extends PrincipalBean
 	protected CompanyLocalService companyLocalService;
 	protected CompanyService companyService;
 	protected CompanyPersistence companyPersistence;
+	protected ImageLocalService imageLocalService;
+	protected ImagePersistence imagePersistence;
 	protected PortletPreferencesLocalService portletPreferencesLocalService;
 	protected PortletPreferencesService portletPreferencesService;
 	protected PortletPreferencesPersistence portletPreferencesPersistence;

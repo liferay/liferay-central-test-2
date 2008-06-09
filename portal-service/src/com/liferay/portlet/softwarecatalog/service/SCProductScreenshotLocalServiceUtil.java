@@ -111,14 +111,16 @@ public class SCProductScreenshotLocalServiceUtil {
 
 	public static void deleteProductScreenshot(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot productScreenshot)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
 
 		scProductScreenshotLocalService.deleteProductScreenshot(productScreenshot);
 	}
 
 	public static void deleteProductScreenshots(long productEntryId)
-		throws com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
 
 		scProductScreenshotLocalService.deleteProductScreenshots(productEntryId);

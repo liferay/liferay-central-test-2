@@ -34,8 +34,8 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -744,7 +744,7 @@ public class JournalUtil {
 	}
 
 	public static void removeArticleLocale(Element el, String languageId)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		for (Element dynamicEl :
 				(List<Element>)el.elements("dynamic-element")) {
@@ -760,7 +760,7 @@ public class JournalUtil {
 						dynamicContentEl.attributeValue("id"));
 
 					if (id > 0) {
-						ImageLocalUtil.deleteImage(id);
+						ImageLocalServiceUtil.deleteImage(id);
 					}
 
 					dynamicContentEl.detach();
@@ -970,7 +970,7 @@ public class JournalUtil {
 	private static void _mergeLocaleContent(
 			Stack<String> path, Document curDoc, Document newDoc, Element xsdEl,
 			String defaultLocale)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		String elPath = "";
 
@@ -994,7 +994,7 @@ public class JournalUtil {
 	private static void _mergeLocaleContent(
 			Stack<String> path, Document curDoc, Document newDoc, Element xsdEl,
 			String defaultLocale, String elPath)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		String name = xsdEl.attributeValue("name");
 
@@ -1033,7 +1033,7 @@ public class JournalUtil {
 						long id = GetterUtil.getLong(
 							curContentEl.attributeValue("id"));
 
-						ImageLocalUtil.deleteImage(id);
+						ImageLocalServiceUtil.deleteImage(id);
 					}
 
 					curContentEl.detach();

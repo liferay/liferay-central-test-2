@@ -27,6 +27,8 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.service.ImageLocalService;
+import com.liferay.portal.service.ImageLocalServiceFactory;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
@@ -36,6 +38,8 @@ import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserServiceFactory;
 import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.portal.service.persistence.ImagePersistence;
+import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourceFinderUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
@@ -140,6 +144,22 @@ public abstract class IGImageServiceBaseImpl extends PrincipalBean
 
 	public void setCounterService(CounterService counterService) {
 		this.counterService = counterService;
+	}
+
+	public ImageLocalService getImageLocalService() {
+		return imageLocalService;
+	}
+
+	public void setImageLocalService(ImageLocalService imageLocalService) {
+		this.imageLocalService = imageLocalService;
+	}
+
+	public ImagePersistence getImagePersistence() {
+		return imagePersistence;
+	}
+
+	public void setImagePersistence(ImagePersistence imagePersistence) {
+		this.imagePersistence = imagePersistence;
 	}
 
 	public ResourceLocalService getResourceLocalService() {
@@ -274,6 +294,14 @@ public abstract class IGImageServiceBaseImpl extends PrincipalBean
 			counterService = CounterServiceFactory.getImpl();
 		}
 
+		if (imageLocalService == null) {
+			imageLocalService = ImageLocalServiceFactory.getImpl();
+		}
+
+		if (imagePersistence == null) {
+			imagePersistence = ImageUtil.getPersistence();
+		}
+
 		if (resourceLocalService == null) {
 			resourceLocalService = ResourceLocalServiceFactory.getImpl();
 		}
@@ -331,6 +359,8 @@ public abstract class IGImageServiceBaseImpl extends PrincipalBean
 	protected IGImageFinder igImageFinder;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;
+	protected ImageLocalService imageLocalService;
+	protected ImagePersistence imagePersistence;
 	protected ResourceLocalService resourceLocalService;
 	protected ResourceService resourceService;
 	protected ResourcePersistence resourcePersistence;

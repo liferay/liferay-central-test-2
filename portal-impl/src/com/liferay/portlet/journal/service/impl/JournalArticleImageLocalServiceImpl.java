@@ -24,7 +24,6 @@ package com.liferay.portlet.journal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portlet.journal.DuplicateArticleImageIdException;
 import com.liferay.portlet.journal.NoSuchArticleImageException;
 import com.liferay.portlet.journal.model.JournalArticleImage;
@@ -97,13 +96,13 @@ public class JournalArticleImageLocalServiceImpl
 	}
 
 	public void deleteImages(long groupId, String articleId, double version)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		for (JournalArticleImage articleImage :
 				journalArticleImagePersistence.findByG_A_V(
 					groupId, articleId, version)) {
 
-			ImageLocalUtil.deleteImage(articleImage.getArticleImageId());
+			imageLocalService.deleteImage(articleImage.getArticleImageId());
 
 			journalArticleImagePersistence.remove(articleImage);
 		}

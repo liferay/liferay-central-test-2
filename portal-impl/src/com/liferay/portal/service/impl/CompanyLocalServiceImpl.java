@@ -576,7 +576,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			company.setLogoId(logoId);
 		}
 
-		ImageLocalUtil.updateImage(logoId, file);
+		imageLocalService.updateImage(logoId, file);
 	}
 
 	public void updateSecurity(

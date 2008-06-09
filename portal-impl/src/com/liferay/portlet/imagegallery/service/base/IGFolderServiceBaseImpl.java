@@ -27,6 +27,8 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.service.ImageLocalService;
+import com.liferay.portal.service.ImageLocalServiceFactory;
 import com.liferay.portal.service.LayoutLocalService;
 import com.liferay.portal.service.LayoutLocalServiceFactory;
 import com.liferay.portal.service.LayoutService;
@@ -40,6 +42,8 @@ import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserServiceFactory;
 import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.portal.service.persistence.ImagePersistence;
+import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.service.persistence.LayoutFinder;
 import com.liferay.portal.service.persistence.LayoutFinderUtil;
 import com.liferay.portal.service.persistence.LayoutPersistence;
@@ -148,6 +152,22 @@ public abstract class IGFolderServiceBaseImpl extends PrincipalBean
 
 	public void setCounterService(CounterService counterService) {
 		this.counterService = counterService;
+	}
+
+	public ImageLocalService getImageLocalService() {
+		return imageLocalService;
+	}
+
+	public void setImageLocalService(ImageLocalService imageLocalService) {
+		this.imageLocalService = imageLocalService;
+	}
+
+	public ImagePersistence getImagePersistence() {
+		return imagePersistence;
+	}
+
+	public void setImagePersistence(ImagePersistence imagePersistence) {
+		this.imagePersistence = imagePersistence;
 	}
 
 	public LayoutLocalService getLayoutLocalService() {
@@ -314,6 +334,14 @@ public abstract class IGFolderServiceBaseImpl extends PrincipalBean
 			counterService = CounterServiceFactory.getImpl();
 		}
 
+		if (imageLocalService == null) {
+			imageLocalService = ImageLocalServiceFactory.getImpl();
+		}
+
+		if (imagePersistence == null) {
+			imagePersistence = ImageUtil.getPersistence();
+		}
+
 		if (layoutLocalService == null) {
 			layoutLocalService = LayoutLocalServiceFactory.getImpl();
 		}
@@ -387,6 +415,8 @@ public abstract class IGFolderServiceBaseImpl extends PrincipalBean
 	protected IGImageFinder igImageFinder;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;
+	protected ImageLocalService imageLocalService;
+	protected ImagePersistence imagePersistence;
 	protected LayoutLocalService layoutLocalService;
 	protected LayoutService layoutService;
 	protected LayoutPersistence layoutPersistence;

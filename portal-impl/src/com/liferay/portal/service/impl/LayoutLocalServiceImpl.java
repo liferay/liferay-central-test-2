@@ -253,7 +253,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		// Icon
 
-		ImageLocalUtil.deleteImage(layout.getIconImageId());
+		imageLocalService.deleteImage(layout.getIconImageId());
 
 		// Resources
 
@@ -737,10 +737,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		if (iconImage != null) {
 			if (!iconImage.booleanValue()) {
-				ImageLocalUtil.deleteImage(layout.getIconImageId());
+				imageLocalService.deleteImage(layout.getIconImageId());
 			}
 			else if ((iconBytes != null) && (iconBytes.length > 0)) {
-				ImageLocalUtil.updateImage(layout.getIconImageId(), iconBytes);
+				imageLocalService.updateImage(
+					layout.getIconImageId(), iconBytes);
 			}
 		}
 

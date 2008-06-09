@@ -53,11 +53,11 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ColorSchemeImpl;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
-import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.persistence.LayoutUtil;
 import com.liferay.portal.service.persistence.UserUtil;
@@ -422,7 +422,8 @@ public class LayoutImporter {
 			LayoutUtil.update(layout, false);
 
 			if ((iconBytes != null) && (iconBytes.length > 0)) {
-				ImageLocalUtil.updateImage(layout.getIconImageId(), iconBytes);
+				ImageLocalServiceUtil.updateImage(
+					layout.getIconImageId(), iconBytes);
 			}
 
 			context.setPlid(layout.getPlid());

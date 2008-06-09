@@ -65,12 +65,12 @@ import com.liferay.portal.security.permission.PermissionCheckerFactory;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
@@ -865,7 +865,7 @@ public class ServicePreAction extends Action {
 			imagePath + "/company_logo?img_id=" + company.getLogoId() + "&t=" +
 				ImageServletTokenUtil.getToken(company.getLogoId());
 
-		Image companyLogoImage = ImageLocalUtil.getCompanyLogo(
+		Image companyLogoImage = ImageLocalServiceUtil.getCompanyLogo(
 			company.getLogoId());
 
 		int companyLogoHeight = companyLogoImage.getHeight();
@@ -1088,8 +1088,8 @@ public class ServicePreAction extends Action {
 						imagePath + "/layout_set_logo?img_id=" + logoId +
 							"&t=" + ImageServletTokenUtil.getToken(logoId);
 
-					Image layoutSetLogoImage = ImageLocalUtil.getCompanyLogo(
-						logoId);
+					Image layoutSetLogoImage =
+						ImageLocalServiceUtil.getCompanyLogo(logoId);
 
 					companyLogo = layoutSetLogo;
 					companyLogoHeight = layoutSetLogoImage.getHeight();

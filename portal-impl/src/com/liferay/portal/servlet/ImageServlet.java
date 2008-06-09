@@ -23,12 +23,14 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.NoSuchImageException;
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.impl.ImageImpl;
-import com.liferay.portal.service.impl.ImageLocalUtil;
+import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
@@ -80,9 +82,8 @@ public class ImageServlet extends HttpServlet {
 		try {
 			writeImage(req, res);
 		}
-		catch (NoSuchImageException nsie) {
-			PortalUtil.sendError(
-				HttpServletResponse.SC_NOT_FOUND, nsie, req, res);
+		catch (Exception e) {
+			PortalUtil.sendError(HttpServletResponse.SC_NOT_FOUND, e, req, res);
 		}
 	}
 
@@ -92,16 +93,16 @@ public class ImageServlet extends HttpServlet {
 		String path = GetterUtil.getString(req.getPathInfo());
 
 		if (path.startsWith("/company_logo")) {
-			return ImageLocalUtil.getDefaultCompanyLogo();
+			return ImageLocalServiceUtil.getDefaultCompanyLogo();
 		}
 		else if (path.startsWith("/user_female_portrait")) {
-			return ImageLocalUtil.getDefaultUserFemalePortrait();
+			return ImageLocalServiceUtil.getDefaultUserFemalePortrait();
 		}
 		else if (path.startsWith("/user_male_portrait")) {
-			return ImageLocalUtil.getDefaultUserMalePortrait();
+			return ImageLocalServiceUtil.getDefaultUserMalePortrait();
 		}
 		else if (path.startsWith("/user_portrait")) {
-			return ImageLocalUtil.getDefaultUserMalePortrait();
+			return ImageLocalServiceUtil.getDefaultUserMalePortrait();
 		}
 		else {
 			throw new NoSuchImageException(
@@ -110,14 +111,14 @@ public class ImageServlet extends HttpServlet {
 	}
 
 	protected Image getImage(HttpServletRequest req, boolean getDefault)
-		throws NoSuchImageException {
+		throws PortalException, SystemException {
 
 		long imageId = getImageId(req);
 
 		Image image = null;
 
 		if (imageId > 0) {
-			image = ImageLocalUtil.getImage(imageId);
+			image = ImageLocalServiceUtil.getImage(imageId);
 		}
 		else {
 			String uuid = ParamUtil.getString(req, "uuid");
@@ -128,7 +129,8 @@ public class ImageServlet extends HttpServlet {
 					IGImageLocalServiceUtil.getImageByUuidAndGroupId(
 						uuid, groupId);
 
-				image = ImageLocalUtil.getImage(igImage.getLargeImageId());
+				image = ImageLocalServiceUtil.getImage(
+					igImage.getLargeImageId());
 			}
 			catch (Exception e) {
 			}
@@ -190,7 +192,7 @@ public class ImageServlet extends HttpServlet {
 	}
 
 	protected void writeImage(HttpServletRequest req, HttpServletResponse res)
-		throws NoSuchImageException {
+		throws PortalException, SystemException {
 
 		Image image = getImage(req, true);
 

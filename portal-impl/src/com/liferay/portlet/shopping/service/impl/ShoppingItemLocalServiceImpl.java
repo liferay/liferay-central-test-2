@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.amazonrankings.model.AmazonRankings;
 import com.liferay.portlet.amazonrankings.util.AmazonRankingsUtil;
@@ -340,9 +339,9 @@ public class ShoppingItemLocalServiceImpl
 
 		// Images
 
-		ImageLocalUtil.deleteImage(item.getSmallImageId());
-		ImageLocalUtil.deleteImage(item.getMediumImageId());
-		ImageLocalUtil.deleteImage(item.getLargeImageId());
+		imageLocalService.deleteImage(item.getSmallImageId());
+		imageLocalService.deleteImage(item.getMediumImageId());
+		imageLocalService.deleteImage(item.getLargeImageId());
 
 		// Resources
 
@@ -818,39 +817,39 @@ public class ShoppingItemLocalServiceImpl
 			byte[] smallBytes, boolean mediumImage, long mediumImageId,
 			File mediumFile, byte[] mediumBytes, boolean largeImage,
 			long largeImageId, File largeFile, byte[] largeBytes)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		// Small image
 
 		if (smallImage) {
 			if ((smallFile != null) && (smallBytes != null)) {
-				ImageLocalUtil.updateImage(smallImageId, smallBytes);
+				imageLocalService.updateImage(smallImageId, smallBytes);
 			}
 		}
 		else {
-			ImageLocalUtil.deleteImage(smallImageId);
+			imageLocalService.deleteImage(smallImageId);
 		}
 
 		// Medium image
 
 		if (mediumImage) {
 			if ((mediumFile != null) && (mediumBytes != null)) {
-				ImageLocalUtil.updateImage(mediumImageId, mediumBytes);
+				imageLocalService.updateImage(mediumImageId, mediumBytes);
 			}
 		}
 		else {
-			ImageLocalUtil.deleteImage(mediumImageId);
+			imageLocalService.deleteImage(mediumImageId);
 		}
 
 		// Large image
 
 		if (largeImage) {
 			if ((largeFile != null) && (largeBytes != null)) {
-				ImageLocalUtil.updateImage(largeImageId, largeBytes);
+				imageLocalService.updateImage(largeImageId, largeBytes);
 			}
 		}
 		else {
-			ImageLocalUtil.deleteImage(largeImageId);
+			imageLocalService.deleteImage(largeImageId);
 		}
 	}
 

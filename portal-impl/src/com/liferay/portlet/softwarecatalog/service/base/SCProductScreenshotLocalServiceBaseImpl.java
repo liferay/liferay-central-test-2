@@ -25,6 +25,10 @@ package com.liferay.portlet.softwarecatalog.service.base;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.service.ImageLocalService;
+import com.liferay.portal.service.ImageLocalServiceFactory;
+import com.liferay.portal.service.persistence.ImagePersistence;
+import com.liferay.portal.service.persistence.ImageUtil;
 
 import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService;
@@ -224,6 +228,22 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 		this.scProductVersionPersistence = scProductVersionPersistence;
 	}
 
+	public ImageLocalService getImageLocalService() {
+		return imageLocalService;
+	}
+
+	public void setImageLocalService(ImageLocalService imageLocalService) {
+		this.imageLocalService = imageLocalService;
+	}
+
+	public ImagePersistence getImagePersistence() {
+		return imagePersistence;
+	}
+
+	public void setImagePersistence(ImagePersistence imagePersistence) {
+		this.imagePersistence = imagePersistence;
+	}
+
 	public void afterPropertiesSet() {
 		if (scLicenseLocalService == null) {
 			scLicenseLocalService = SCLicenseLocalServiceFactory.getImpl();
@@ -276,6 +296,14 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 		if (scProductVersionPersistence == null) {
 			scProductVersionPersistence = SCProductVersionUtil.getPersistence();
 		}
+
+		if (imageLocalService == null) {
+			imageLocalService = ImageLocalServiceFactory.getImpl();
+		}
+
+		if (imagePersistence == null) {
+			imagePersistence = ImageUtil.getPersistence();
+		}
 	}
 
 	protected SCLicenseLocalService scLicenseLocalService;
@@ -291,4 +319,6 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 	protected SCProductVersionLocalService scProductVersionLocalService;
 	protected SCProductVersionService scProductVersionService;
 	protected SCProductVersionPersistence scProductVersionPersistence;
+	protected ImageLocalService imageLocalService;
+	protected ImagePersistence imagePersistence;
 }

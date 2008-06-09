@@ -38,7 +38,6 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.plugin.ModuleId;
 import com.liferay.portal.search.lucene.LuceneUtil;
-import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.softwarecatalog.DuplicateProductEntryModuleIdException;
 import com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
@@ -746,7 +745,7 @@ public class SCProductEntryLocalServiceImpl
 	protected void saveProductScreenshots(
 			SCProductEntry productEntry, List<byte[]> thumbnails,
 			List<byte[]> fullImages)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		long productEntryId = productEntry.getProductEntryId();
 
@@ -793,9 +792,9 @@ public class SCProductEntryLocalServiceImpl
 				scProductScreenshotPersistence.update(productScreenshot, false);
 			}
 
-			ImageLocalUtil.updateImage(
+			imageLocalService.updateImage(
 				productScreenshot.getThumbnailId(), thumbnail);
-			ImageLocalUtil.updateImage(
+			imageLocalService.updateImage(
 				productScreenshot.getFullImageId(), fullImage);
 		}
 	}

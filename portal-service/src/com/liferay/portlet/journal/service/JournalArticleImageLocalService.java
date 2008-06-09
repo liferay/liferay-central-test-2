@@ -92,7 +92,9 @@ public interface JournalArticleImageLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public void deleteImages(long groupId, java.lang.String articleId,
-		double version) throws com.liferay.portal.SystemException;
+		double version)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalArticleImage getArticleImage(
 		long articleImageId)

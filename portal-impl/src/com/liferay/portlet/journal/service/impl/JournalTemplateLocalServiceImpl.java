@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.DuplicateTemplateIdException;
@@ -315,7 +314,7 @@ public class JournalTemplateLocalServiceImpl
 
 		// Small image
 
-		ImageLocalUtil.deleteImage(template.getSmallImageId());
+		imageLocalService.deleteImage(template.getSmallImageId());
 
 		// WebDAVProps
 
@@ -557,15 +556,15 @@ public class JournalTemplateLocalServiceImpl
 	protected void saveImages(
 			boolean smallImage, long smallImageId, File smallFile,
 			byte[] smallBytes)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		if (smallImage) {
 			if ((smallFile != null) && (smallBytes != null)) {
-				ImageLocalUtil.updateImage(smallImageId, smallBytes);
+				imageLocalService.updateImage(smallImageId, smallBytes);
 			}
 		}
 		else {
-			ImageLocalUtil.deleteImage(smallImageId);
+			imageLocalService.deleteImage(smallImageId);
 		}
 	}
 

@@ -30,6 +30,10 @@ import com.liferay.counter.service.CounterServiceFactory;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.service.ImageLocalService;
+import com.liferay.portal.service.ImageLocalServiceFactory;
+import com.liferay.portal.service.persistence.ImagePersistence;
+import com.liferay.portal.service.persistence.ImageUtil;
 
 import com.liferay.portlet.journal.model.JournalArticleImage;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalService;
@@ -332,6 +336,22 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
+	public ImageLocalService getImageLocalService() {
+		return imageLocalService;
+	}
+
+	public void setImageLocalService(ImageLocalService imageLocalService) {
+		this.imageLocalService = imageLocalService;
+	}
+
+	public ImagePersistence getImagePersistence() {
+		return imagePersistence;
+	}
+
+	public void setImagePersistence(ImagePersistence imagePersistence) {
+		this.imagePersistence = imagePersistence;
+	}
+
 	public void afterPropertiesSet() {
 		if (journalArticleLocalService == null) {
 			journalArticleLocalService = JournalArticleLocalServiceFactory.getImpl();
@@ -424,6 +444,14 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 		if (counterService == null) {
 			counterService = CounterServiceFactory.getImpl();
 		}
+
+		if (imageLocalService == null) {
+			imageLocalService = ImageLocalServiceFactory.getImpl();
+		}
+
+		if (imagePersistence == null) {
+			imagePersistence = ImageUtil.getPersistence();
+		}
 	}
 
 	protected JournalArticleLocalService journalArticleLocalService;
@@ -449,4 +477,6 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 	protected JournalTemplateFinder journalTemplateFinder;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;
+	protected ImageLocalService imageLocalService;
+	protected ImagePersistence imagePersistence;
 }

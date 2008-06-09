@@ -80,10 +80,12 @@ public interface SCProductScreenshotLocalService {
 
 	public void deleteProductScreenshot(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot productScreenshot)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public void deleteProductScreenshots(long productEntryId)
-		throws com.liferay.portal.SystemException;
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot getProductScreenshot(
 		long productEntryId, int priority)

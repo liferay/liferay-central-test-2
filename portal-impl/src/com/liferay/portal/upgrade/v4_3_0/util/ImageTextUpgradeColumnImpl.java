@@ -25,7 +25,7 @@ package com.liferay.portal.upgrade.v4_3_0.util;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.impl.ImageImpl;
-import com.liferay.portal.service.impl.ImageLocalUtil;
+import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 
@@ -57,7 +57,7 @@ public class ImageTextUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		byte[] bytes = (byte[])Base64.stringToObject(text);
 
 		try {
-			Image image = ImageLocalUtil.getImage(bytes);
+			Image image = ImageLocalServiceUtil.getImage(bytes);
 
 			_type = image.getType();
 			_height = new Integer(image.getHeight());

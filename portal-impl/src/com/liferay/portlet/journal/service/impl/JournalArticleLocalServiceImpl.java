@@ -47,7 +47,6 @@ import com.liferay.portal.model.Image;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.search.lucene.LuceneUtil;
-import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -721,7 +720,7 @@ public class JournalArticleLocalServiceImpl
 
 		// Small image
 
-		ImageLocalUtil.deleteImage(article.getSmallImageId());
+		imageLocalService.deleteImage(article.getSmallImageId());
 
 		// Resources
 
@@ -1837,7 +1836,7 @@ public class JournalArticleLocalServiceImpl
 			long groupId, String articleId, double version,
 			boolean incrementVersion, String content, String structureId,
 			Map<String, byte[]> images)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		if (Validator.isNotNull(structureId)) {
 			SAXReader reader = new SAXReader();
@@ -1871,7 +1870,7 @@ public class JournalArticleLocalServiceImpl
 	protected void format(
 			long groupId, String articleId, double version,
 			boolean incrementVersion, Element root, Map<String, byte[]> images)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		for (Element el : (List<Element>)root.elements()) {
 			String elName = el.attributeValue("name", StringPool.BLANK);
@@ -1912,7 +1911,7 @@ public class JournalArticleLocalServiceImpl
 			long groupId, String articleId, double version,
 			boolean incrementVersion, Element el, String elName,
 			Map<String, byte[]> images)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		List<Element> imageContents = el.elements("dynamic-content");
 
@@ -1945,7 +1944,7 @@ public class JournalArticleLocalServiceImpl
 			if (dynamicContent.getText().equals("delete")) {
 				dynamicContent.setText(StringPool.BLANK);
 
-				ImageLocalUtil.deleteImage(imageId);
+				imageLocalService.deleteImage(imageId);
 
 				String defaultElLanguage = "";
 
@@ -1958,7 +1957,7 @@ public class JournalArticleLocalServiceImpl
 					journalArticleImageLocalService.getArticleImageId(
 						groupId, articleId, version, elName, defaultElLanguage);
 
-				ImageLocalUtil.deleteImage(defaultImageId);
+				imageLocalService.deleteImage(defaultImageId);
 
 				continue;
 			}
@@ -1969,7 +1968,7 @@ public class JournalArticleLocalServiceImpl
 				dynamicContent.setText(elContent);
 				dynamicContent.addAttribute("id", String.valueOf(imageId));
 
-				ImageLocalUtil.updateImage(imageId, bytes);
+				imageLocalService.updateImage(imageId, bytes);
 
 				continue;
 			}
@@ -1980,7 +1979,7 @@ public class JournalArticleLocalServiceImpl
 				Image oldImage = null;
 
 				if (oldImageId > 0) {
-					oldImage = ImageLocalUtil.getImage(oldImageId);
+					oldImage = imageLocalService.getImage(oldImageId);
 				}
 
 				if (oldImage != null) {
@@ -1989,13 +1988,13 @@ public class JournalArticleLocalServiceImpl
 
 					bytes = oldImage.getTextObj();
 
-					ImageLocalUtil.updateImage(imageId, bytes);
+					imageLocalService.updateImage(imageId, bytes);
 				}
 
 				continue;
 			}
 
-			Image image = ImageLocalUtil.getImage(imageId);
+			Image image = imageLocalService.getImage(imageId);
 
 			if (image != null) {
 				dynamicContent.setText(elContent);
@@ -2013,7 +2012,7 @@ public class JournalArticleLocalServiceImpl
 			}
 
 			if (contentImageId > 0) {
-				image = ImageLocalUtil.getImage(contentImageId);
+				image = imageLocalService.getImage(contentImageId);
 
 				if (image != null) {
 					dynamicContent.addAttribute(
@@ -2034,7 +2033,7 @@ public class JournalArticleLocalServiceImpl
 				journalArticleImageLocalService.getArticleImageId(
 					groupId, articleId, version, elName, defaultElLanguage);
 
-			Image defaultImage = ImageLocalUtil.getImage(defaultImageId);
+			Image defaultImage = imageLocalService.getImage(defaultImageId);
 
 			if (defaultImage != null) {
 				dynamicContent.setText(elContent);
@@ -2043,7 +2042,7 @@ public class JournalArticleLocalServiceImpl
 
 				bytes = defaultImage.getTextObj();
 
-				ImageLocalUtil.updateImage(defaultImageId, bytes);
+				imageLocalService.updateImage(defaultImageId, bytes);
 
 				continue;
 			}
@@ -2099,15 +2098,15 @@ public class JournalArticleLocalServiceImpl
 	protected void saveImages(
 			boolean smallImage, long smallImageId, File smallFile,
 			byte[] smallBytes)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		if (smallImage) {
 			if ((smallFile != null) && (smallBytes != null)) {
-				ImageLocalUtil.updateImage(smallImageId, smallBytes);
+				imageLocalService.updateImage(smallImageId, smallBytes);
 			}
 		}
 		else {
-			ImageLocalUtil.deleteImage(smallImageId);
+			imageLocalService.deleteImage(smallImageId);
 		}
 	}
 
