@@ -49,4 +49,8 @@ package com.liferay.portlet.journal.model;
  *
  */
 public interface JournalFeed extends JournalFeedModel {
+	public java.lang.String getUserUuid()
+		throws com.liferay.portal.SystemException;
+
+	public void setUserUuid(java.lang.String userUuid);
 }
