@@ -25,7 +25,7 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <%
-List users = UserLocalServiceUtil.search(company.getCompanyId(), null, Boolean.TRUE, null, 0, 10, null);
+List<User> users = UserLocalServiceUtil.search(company.getCompanyId(), null, Boolean.TRUE, null, 0, 10, null);
 
 request.setAttribute("users", users);
 %>
@@ -38,6 +38,7 @@ request.setAttribute("users", users);
 <%
 System.out.println(request.getClass().getName());
 System.out.println("request.getRemoteUser() " + request.getRemoteUser());
+
 PortalServiceUtil.test();
 %>
 
