@@ -52,8 +52,7 @@
 		boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
 		%>
 
-		<form action="<portlet:actionURL secure="<%= secure %>"><portlet:param name="struts_action" value="/login/view" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-		<input name="save_last_path" type="hidden" value="0" />
+		<form action="<portlet:actionURL secure="<%= secure %>"><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/login/view" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 		<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 		<input name="<portlet:namespace />rememberMe" type="hidden" value="<%= rememberMe %>" />
 

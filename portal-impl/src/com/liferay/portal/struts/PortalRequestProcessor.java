@@ -565,7 +565,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			(!_trackerIgnorePaths.contains(path))) {
 
 			boolean saveLastPath = ParamUtil.getBoolean(
-				req, "save_last_path", true);
+				req, "saveLastPath", true);
 
 			// Exclusive and pop up window states should never be set as the
 			// last path

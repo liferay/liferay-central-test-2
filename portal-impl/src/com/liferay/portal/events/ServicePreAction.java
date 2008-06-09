@@ -1303,6 +1303,7 @@ public class ServicePreAction extends Action {
 		createAccountURL.setWindowState(WindowState.MAXIMIZED);
 		createAccountURL.setPortletMode(PortletMode.VIEW);
 
+		createAccountURL.setParameter("saveLastPath", "0");
 		createAccountURL.setParameter(
 			"struts_action", "/my_account/create_account");
 

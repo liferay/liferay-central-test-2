@@ -30,8 +30,6 @@
 
 	<action-mappings>
 
-		<!-- Common -->
-
 		<!-- Portal -->
 
 		<action path="/portal/change_password" type="com.liferay.portal.action.ChangePasswordAction">
