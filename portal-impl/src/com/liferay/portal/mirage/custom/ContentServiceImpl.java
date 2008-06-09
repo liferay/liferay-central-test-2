@@ -24,98 +24,103 @@ package com.liferay.portal.mirage.custom;
 
 import com.sun.portal.cms.mirage.exception.CMSException;
 import com.sun.portal.cms.mirage.exception.TemplateNotFoundException;
-import com.sun.portal.cms.mirage.model.core.User;
 import com.sun.portal.cms.mirage.model.custom.Content;
 import com.sun.portal.cms.mirage.model.custom.VersionableContent;
 import com.sun.portal.cms.mirage.service.custom.ContentService;
 
+import java.io.InputStream;
 import java.util.List;
 
 /**
  * <a href="ContentServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ * @author Prakash Reddy
  *
  */
 public class ContentServiceImpl implements ContentService {
 
-	public void createContent(Content content, String username)
-		throws CMSException, TemplateNotFoundException {
-	}
+    public void checkinContent(Content content) 
+            throws CMSException, TemplateNotFoundException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	public void deleteContent(String contentName, String contentTypeName)
-		throws CMSException {
-	}
+    public VersionableContent checkoutContent(
+                String contentName, String contentTypeUUID) 
+            throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	public Content getContentByNameAndType(
-			String contentName, String contentTypeName, String username)
-		throws CMSException {
+    public void createContent(Content content) 
+            throws CMSException, TemplateNotFoundException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-		return null;
-	}
+    public void deleteContent(String contentName, String contentTypeUUID) 
+            throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	public Content getContentByUUID(String uuid, User user)
-		throws CMSException {
+    public Content getContentByNameAndType(String contentName, String contentTypeUUID) 
+            throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-		return null;
-	}
+    public Content getContentByNameTypeNameAndCategory(
+                String contentName, String contentTypeName, String categoryName)
+            throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	public List<String> getContentNamesByType(String contentTypeName)
-		throws CMSException {
+    public Content getContentByUUID(String uuid) throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-		return null;
-	}
+    public VersionableContent getContentByVersion(
+                String contentName, String contentTypeUUID, String versionName) 
+            throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	public void checkinContent(Content content, String username)
-		throws CMSException, TemplateNotFoundException {
-	}
+    public List<String> getContentNamesByType(String contentTypeUUID) 
+            throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	public VersionableContent checkoutContent(
-			String contentName, String contentTypeName, String username)
-		throws CMSException {
+    public List<Content> getContentsByType(String contentTypeUUID) throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-		return null;
-	}
+    public String getContentURL(String appURL, String UUID) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	public VersionableContent getContentByVersion(
-			String contentName, String contentTypeName, String versionName,
-			User user)
-		throws CMSException {
+    public List<String> getVersionNames(String contentName, String contentTypeUUID) 
+            throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-		return null;
-	}
+    public List<VersionableContent> getVersions(
+                String contentName, String contentTypeUUID) 
+            throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	public String getContentURL(String appURL, String UUID) {
-		return null;
-	}
+    public void unCheckoutContent(String contentName, String contentTypeUUID) 
+            throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	public List<Content> getContentsByType(
-		String contentTypeUUID, String username) throws CMSException {
+    public void updateContent(Content content) 
+            throws CMSException, TemplateNotFoundException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-		return null;
-	}
-
-	public List<String> getVersionNames(
-			String contentName, String contentTypeName, User user)
-		throws CMSException {
-
-		return null;
-	}
-
-	public List<VersionableContent> getVersions(
-			String contentName, String contentTypeName, User user)
-		throws CMSException {
-
-		return null;
-	}
-
-	public void unCheckoutContent(
-			String contentName, String contentTypeName, String user)
-		throws CMSException {
-	}
-
-	public void updateContent(Content content, String username)
-		throws CMSException, TemplateNotFoundException {
-	}
+    public void updateFileField(
+                String contentUUID, String fieldName, 
+                InputStream updatedFileInputStream) 
+            throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
 }

@@ -23,42 +23,28 @@
 package com.liferay.portal.mirage.custom;
 
 import com.sun.portal.cms.mirage.exception.CMSException;
-import com.sun.portal.cms.mirage.model.core.User;
-import com.sun.portal.cms.mirage.service.custom.VersioningService;
-
-import java.util.Collection;
-
-import javax.jcr.Node;
+import com.sun.portal.cms.mirage.exception.SearchNotSupportedForFieldException;
+import com.sun.portal.cms.mirage.model.custom.Content;
+import com.sun.portal.cms.mirage.model.custom.ContentType;
+import com.sun.portal.cms.mirage.model.search.SearchCriteria;
+import com.sun.portal.cms.mirage.service.custom.SearchService;
+import java.util.List;
 
 /**
- * <a href="VersioningServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
+ * <a href="SearchServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * 
  * @author Prakash Reddy
- *
+ * 
  */
-public class VersioningServiceImpl<VersionableContent>
-	implements VersioningService<VersionableContent> {
+public class SearchServiceImpl implements SearchService {
 
-    public void checkinNode(Node node, User user, VersionableContent versionableContent) 
-            throws CMSException {
+    public List<Content> searchContents(
+                ContentType contentType, SearchCriteria searchCriteria) 
+            throws CMSException, SearchNotSupportedForFieldException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void checkoutNode(Node node, User user) throws CMSException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public Collection getAllVersions(Node node) throws CMSException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public void uncheckoutNode(Node node, User user) throws CMSException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public void updateNode(
-                Node node, User user, VersionableContent versionableContent) 
+    public List<Content> searchContents(ContentType contentType, String name) 
             throws CMSException {
         throw new UnsupportedOperationException("Not supported yet.");
     }

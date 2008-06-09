@@ -25,7 +25,6 @@ package com.liferay.portal.mirage.custom;
 import com.sun.portal.cms.mirage.exception.CMSException;
 import com.sun.portal.cms.mirage.exception.TemplateNotFoundException;
 import com.sun.portal.cms.mirage.exception.ValidationException;
-import com.sun.portal.cms.mirage.model.core.User;
 import com.sun.portal.cms.mirage.model.custom.Category;
 import com.sun.portal.cms.mirage.model.custom.ContentType;
 import com.sun.portal.cms.mirage.model.custom.Template;
@@ -37,119 +36,124 @@ import java.util.List;
  * <a href="ContentTypeServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ * @author Prakash Reddy
  *
  */
 public class ContentTypeServiceImpl implements ContentTypeService {
 
-	public void addTemplateToContentType(
-		Template template, ContentType contentType, User user)
-		throws CMSException, ValidationException {
-	}
+    public void addTemplateToContentType(Template template, ContentType contentType) 
+            throws CMSException, ValidationException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	public void assignDefaultTemplate(
-		ContentType contentType, Template template) throws CMSException {
-	}
+    public void assignDefaultTemplate(ContentType contentType, Template template) 
+            throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	public boolean checkContentTypeExists(String contentTypeUUID)
-		throws CMSException {
+    public boolean checkContentTypeExists(String contentTypeUUID) 
+            throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-		return false;
-	}
+    public void checkOutTemplate(Template template, ContentType contentType)
+            throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	public void checkOutTemplate(
-			Template template, ContentType contentType, User user)
-		throws CMSException {
-	}
-	public void createContentType(ContentType contentType) throws CMSException {
+    public void createContentType(ContentType contentType) throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	}
+    public void deleteContentType(ContentType contentType) throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	public void deleteContentType(ContentType contentType) throws CMSException {
-	}
+    public void deleteTemplateOfContentType(ContentType contentType, Template template) 
+            throws CMSException, TemplateNotFoundException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	public void deleteTemplateOfContentType(
-			ContentType contentType, Template template)
-		throws CMSException, TemplateNotFoundException {
-	}
+    public void deleteTemplatesOfContentType(
+                ContentType contentType, Template[] templatesToBeDeleted) 
+            throws CMSException, TemplateNotFoundException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	public void deleteTemplatesOfContentType(
-			ContentType contentType, Template[] templatesToBeDeleted)
-		throws CMSException, TemplateNotFoundException {
-	}
+    public List<Template> getAllVersionsOfTemplate(
+                Template template, ContentType contentType) 
+            throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	public List<Template> getAllVersionsOfTemplate(
-		Template template, ContentType contentType) throws CMSException {
+    public List<String> getAvailableContentTypeNames(Category category) 
+            throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-		return null;
-	}
+    public List<ContentType> getAvailableContentTypes(Category category) 
+            throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	public List<String> getAvailableContentTypeNames(Category category)
-		throws CMSException {
+    public ContentType getContentTypeByNameAndCategory(
+            String contentTypeName, Category category) throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-		return null;
-	}
+    public ContentType getContentTypeByUUID(String contentTypeUUID) 
+            throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	public List<ContentType> getAvailableContentTypes(
-		Category category, User user) throws CMSException {
+    public Template getLatestVersionOfTemplate(
+                Template template, ContentType contentType) 
+            throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-		return null;
-	}
+    public Template getTemplateWithUUID(String templateUUID) 
+            throws TemplateNotFoundException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	public ContentType getContentTypeByUUID(String contentTypeUUID, User user)
-		throws CMSException {
+    public boolean isContentTypeEditable(String contentTypeUUID) 
+            throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-		return null;
-	}
+    public void revertChangesTemplateForTemplate(
+            Template template, ContentType contentType) throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	public Template getLatestVersionOfTemplate(
-		Template template, ContentType contentType) throws CMSException {
+    public void saveNewVersionOfTemplate(Template template, ContentType contentType) 
+            throws CMSException, ValidationException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-		return null;
-	}
+    public void unassignDefaultTemplate(ContentType contentType) 
+            throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	public Template getTemplateWithUUID(String templateUUID)
-		throws TemplateNotFoundException {
+    public void updateCategoryOfContentType(ContentType contentType) 
+            throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-		return null;
-	}
+    public void updateContentType(ContentType contentType) throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-	public boolean isContentTypeEditable(String contentTypeUUID)
-		throws CMSException {
+    public void updateTemplateOfContentType(Template template, ContentType contentType) 
+            throws CMSException, ValidationException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
-		return false;
-	}
-
-	public void revertChangesTemplateForTemplate(
-		Template checkedOutTemplate, ContentType contentType, User user)
-		throws CMSException {
-	}
-
-	public void saveNewVersionOfTemplate(
-		Template newTemplate, ContentType contentType, User user)
-		throws CMSException, ValidationException {
-	}
-
-	public void unassignDefaultTemplate(ContentType contentType)
-		throws CMSException {
-	}
-
-	public void updateCategoryOfContentType(ContentType contentType)
-		throws CMSException {
-	}
-
-	public void updateContentType(ContentType contentType) throws CMSException {
-	}
-
-	public void updateTemplateOfContentType(
-			Template template, ContentType contentType, User user)
-		throws CMSException, ValidationException {
-	}
-
-	public boolean validateTemplate(
-			Template template, ContentType testContentType)
-		throws ValidationException {
-
-		return false;
-	}
+    public boolean validateTemplate(Template template, ContentType contentType) 
+            throws ValidationException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
 }

@@ -23,42 +23,34 @@
 package com.liferay.portal.mirage.custom;
 
 import com.sun.portal.cms.mirage.exception.CMSException;
-import com.sun.portal.cms.mirage.model.core.User;
-import com.sun.portal.cms.mirage.service.custom.VersioningService;
-
-import java.util.Collection;
-
-import javax.jcr.Node;
+import com.sun.portal.cms.mirage.service.custom.WorkflowService;
 
 /**
- * <a href="VersioningServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
+ * <a href="WorkflowServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * 
  * @author Prakash Reddy
- *
+ * 
  */
-public class VersioningServiceImpl<VersionableContent>
-	implements VersioningService<VersionableContent> {
+public class WorkflowServiceImpl implements WorkflowService {
 
-    public void checkinNode(Node node, User user, VersionableContent versionableContent) 
+    public void submitContentToWorkflow(String contentUUID) throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void updateWorkflowCommentsAccepted(String contentUUID) throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void updateWorkflowComplete(String contentUUID) throws CMSException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void updateWorkflowContentRejected(String contentUUID, String comments) 
             throws CMSException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void checkoutNode(Node node, User user) throws CMSException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public Collection getAllVersions(Node node) throws CMSException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public void uncheckoutNode(Node node, User user) throws CMSException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public void updateNode(
-                Node node, User user, VersionableContent versionableContent) 
+    public void updateWorkflowStatus(String contentUUID, String status) 
             throws CMSException {
         throw new UnsupportedOperationException("Not supported yet.");
     }

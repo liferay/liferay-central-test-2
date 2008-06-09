@@ -23,43 +23,24 @@
 package com.liferay.portal.mirage.custom;
 
 import com.sun.portal.cms.mirage.exception.CMSException;
-import com.sun.portal.cms.mirage.model.core.User;
-import com.sun.portal.cms.mirage.service.custom.VersioningService;
-
-import java.util.Collection;
-
-import javax.jcr.Node;
+import com.sun.portal.cms.mirage.service.custom.FeedService;
+import com.sun.syndication.feed.synd.SyndFeed;
+import java.io.Writer;
 
 /**
- * <a href="VersioningServiceImpl.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
+ * <a href="FeedServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * 
  * @author Prakash Reddy
- *
+ * 
  */
-public class VersioningServiceImpl<VersionableContent>
-	implements VersioningService<VersionableContent> {
+public class FeedServiceImpl implements FeedService {
 
-    public void checkinNode(Node node, User user, VersionableContent versionableContent) 
+    public SyndFeed getFeedForAllContentsOfContentType(String contentTypeUUID) 
             throws CMSException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void checkoutNode(Node node, User user) throws CMSException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public Collection getAllVersions(Node node) throws CMSException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public void uncheckoutNode(Node node, User user) throws CMSException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public void updateNode(
-                Node node, User user, VersionableContent versionableContent) 
-            throws CMSException {
+    public boolean writeFeadToWriter(Writer out, SyndFeed feed) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
