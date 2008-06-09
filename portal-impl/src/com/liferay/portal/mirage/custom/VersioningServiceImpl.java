@@ -34,33 +34,29 @@ import javax.jcr.Node;
  * <a href="VersioningServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
- * @author Prakash Reddy
  *
  */
 public class VersioningServiceImpl<VersionableContent>
 	implements VersioningService<VersionableContent> {
 
-    public void checkinNode(Node node, User user, VersionableContent versionableContent) 
-            throws CMSException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+	public void checkoutNode(Node node, User user) throws CMSException {
+	}
 
-    public void checkoutNode(Node node, User user) throws CMSException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+	public void checkinNode(Node node, User user, Object obj)
+		throws CMSException {
+	}
 
-    public Collection getAllVersions(Node node) throws CMSException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+	public Collection<VersionableContent> getAllVersions(Node node)
+		throws CMSException {
 
-    public void uncheckoutNode(Node node, User user) throws CMSException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+		return null;
+	}
 
-    public void updateNode(
-                Node node, User user, VersionableContent versionableContent) 
-            throws CMSException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+	public void uncheckoutNode(Node node, User user) throws CMSException {
+	}
+
+	public void updateNode(Node node, User user, Object obj)
+		throws CMSException {
+	}
 
 }

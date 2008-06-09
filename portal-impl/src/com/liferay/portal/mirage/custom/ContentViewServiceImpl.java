@@ -30,21 +30,22 @@ import com.sun.portal.cms.mirage.service.custom.ContentViewService;
  * <a href="ContentViewServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
- * @author Prakash Reddy
  *
  */
 public class ContentViewServiceImpl implements ContentViewService {
 
-    public String getContentView(Content content, String appContextName) 
-            throws ViewGenerationException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+	public String getContentView(Content content, String appContextName)
+		throws ViewGenerationException {
 
-    public String getContentView(
-                Content content, String version, 
-                String username, String appContextName) 
-            throws ViewGenerationException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+		return null;
+	}
+
+	public String getContentView(
+			Content content, String version, String username,
+			String appContextName)
+		throws ViewGenerationException {
+
+		return null;
+	}
 
 }
