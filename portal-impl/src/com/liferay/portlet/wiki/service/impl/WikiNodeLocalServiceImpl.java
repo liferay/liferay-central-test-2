@@ -344,9 +344,9 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 			if ((nodeIds != null) && (nodeIds.length > 0)) {
 				BooleanQuery nodeIdsQuery = new BooleanQuery();
 
-				for (int i = 0; i < nodeIds.length; i++) {
+				for (long nodeId : nodeIds) {
 					Term term = new Term(
-						Field.ENTRY_CLASS_PK, String.valueOf(nodeIds[i]));
+						Field.ENTRY_CLASS_PK, String.valueOf(nodeId));
 					TermQuery termQuery = new TermQuery(term);
 
 					nodeIdsQuery.add(termQuery, BooleanClause.Occur.SHOULD);
