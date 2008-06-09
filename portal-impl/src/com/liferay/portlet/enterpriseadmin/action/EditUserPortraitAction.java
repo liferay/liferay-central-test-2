@@ -35,6 +35,7 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.servlet.UploadException;
 
+import java.io.File;
 import java.io.InputStream;
 
 import java.util.List;
@@ -174,7 +175,8 @@ public class EditUserPortraitAction extends PortletAction {
 
 		User user = PortalUtil.getSelectedUser(uploadReq);
 
-		byte[] bytes = FileUtil.getBytes(uploadReq.getFile("fileName"));
+		File file = uploadReq.getFile("fileName");
+		byte[] bytes = FileUtil.getBytes(file);
 
 		if ((bytes == null) || (bytes.length == 0)) {
 			throw new UploadException();
