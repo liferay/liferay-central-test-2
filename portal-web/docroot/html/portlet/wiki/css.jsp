@@ -24,6 +24,13 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
+.portlet-wiki pre {
+	border: 1px dashed #2f6fab;
+	padding: 1em 0;
+	background : white;
+	margin: 5px 0px 5px 0px;
+}
+
 .portlet-wiki a.createpage {
 	color: red;
 }
