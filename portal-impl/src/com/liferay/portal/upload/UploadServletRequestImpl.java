@@ -22,6 +22,7 @@
 
 package com.liferay.portal.upload;
 
+import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.SystemProperties;
@@ -47,24 +48,25 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UploadServletRequest.java.html"><b><i>View Source</i></b></a>
+ * <a href="UploadServletRequestImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Zongliang Li
  * @author Harry Mark
  *
  */
-public class UploadServletRequest extends HttpServletRequestWrapper {
+public class UploadServletRequestImpl
+	extends HttpServletRequestWrapper implements UploadServletRequest {
 
 	public static final int DEFAULT_SIZE_MAX = GetterUtil.getInteger(
-		PropsUtil.get(UploadServletRequest.class.getName() + ".max.size"));
+		PropsUtil.get(UploadServletRequestImpl.class.getName() + ".max.size"));
 
 	public static final File DEFAULT_TEMP_DIR = new File(
-		GetterUtil.getString(
-			PropsUtil.get(UploadServletRequest.class.getName() + ".temp.dir"),
-			SystemProperties.get(SystemProperties.TMP_DIR)));
+		GetterUtil.getString(PropsUtil.get(
+			UploadServletRequestImpl.class.getName() + ".temp.dir"),
+		SystemProperties.get(SystemProperties.TMP_DIR)));
 
-	public UploadServletRequest(HttpServletRequest req) {
+	public UploadServletRequestImpl(HttpServletRequest req) {
 		super(req);
 
 		_params = new LinkedHashMap<String, LiferayFileItem[]>();
@@ -264,7 +266,7 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(UploadServletRequest.class);
+	private static Log _log = LogFactory.getLog(UploadServletRequestImpl.class);
 
 	private LiferayServletRequest _lsr;
 	private Map<String, LiferayFileItem[]> _params;

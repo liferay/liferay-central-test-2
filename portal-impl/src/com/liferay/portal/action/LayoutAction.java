@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.portlet.WindowStateFactory;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -45,7 +46,7 @@ import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.upload.UploadServletRequest;
+import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
@@ -574,7 +575,7 @@ public class LayoutAction extends Action {
 					if (!invokerPortlet.getPortletConfig().isWARFile() ||
 						invokerPortlet.isStrutsPortlet()) {
 
-						uploadReq = new UploadServletRequest(req);
+						uploadReq = new UploadServletRequestImpl(req);
 
 						req = uploadReq;
 					}

@@ -25,7 +25,7 @@ package com.liferay.portal.apache.bridges.struts;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.ServletContextProvider;
 import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.portal.upload.UploadServletRequest;
+import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.PortletContextImpl;
@@ -73,7 +73,7 @@ public class LiferayServletContextProvider implements ServletContextProvider {
 			if ((contentType != null) &&
 				(contentType.startsWith(ContentTypes.MULTIPART_FORM_DATA))) {
 
-				httpReq = new UploadServletRequest(httpReq);
+				httpReq = new UploadServletRequestImpl(httpReq);
 				httpReq = new LiferayStrutsRequestImpl(httpReq);
 			}
 			else {

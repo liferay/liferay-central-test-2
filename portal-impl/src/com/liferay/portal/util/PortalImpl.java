@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.portlet.LiferayPortletMode;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
+import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
@@ -80,8 +81,7 @@ import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upload.UploadPortletRequestImpl;
-import com.liferay.portal.upload.UploadServletRequest;
-import com.liferay.portal.upload.UploadServletRequestUtil;
+import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletBag;
@@ -1732,12 +1732,52 @@ public class PortalImpl implements Portal {
 		HttpServletRequestWrapper reqWrapper =
 			(HttpServletRequestWrapper)dynamicReq.getRequest();
 
-		UploadServletRequest uploadReq =
-			UploadServletRequestUtil.getUploadServletRequest(reqWrapper);
+		UploadServletRequest uploadReq = getUploadServletRequest(reqWrapper);
 
 		return new UploadPortletRequestImpl(
 			uploadReq,
 			PortalUtil.getPortletNamespace(actionReq.getPortletName()));
+	}
+
+	public UploadServletRequest getUploadServletRequest(
+		HttpServletRequest req) {
+
+		HttpServletRequestWrapper reqWrapper = null;
+
+		if (req instanceof HttpServletRequestWrapper) {
+			reqWrapper = (HttpServletRequestWrapper)req;
+		}
+
+		UploadServletRequest uploadReq = null;
+
+		while (uploadReq == null) {
+
+			// Find the underlying UploadServletRequest wrapper. For example,
+			// WebSphere wraps all requests with ProtectedServletRequest.
+
+			if (reqWrapper instanceof UploadServletRequest) {
+				uploadReq = (UploadServletRequest)reqWrapper;
+			}
+			else {
+				HttpServletRequest httpReq =
+					(HttpServletRequest)reqWrapper.getRequest();
+
+				if (!(httpReq instanceof HttpServletRequestWrapper)) {
+
+					// This block should never be reached unless this method is
+					// called from a hot deployable portlet. See LayoutAction.
+
+					uploadReq = new UploadServletRequestImpl(httpReq);
+
+					break;
+				}
+				else {
+					reqWrapper = (HttpServletRequestWrapper)httpReq;
+				}
+			}
+		}
+
+		return uploadReq;
 	}
 
 	public Date getUptime() {

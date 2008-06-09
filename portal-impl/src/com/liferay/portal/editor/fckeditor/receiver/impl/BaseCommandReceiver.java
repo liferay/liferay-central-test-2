@@ -35,7 +35,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.upload.LiferayFileItemFactory;
-import com.liferay.portal.upload.UploadServletRequest;
+import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -136,7 +136,8 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 		CommandArgument arg, HttpServletRequest req, HttpServletResponse res) {
 
 		ServletFileUpload upload = new ServletFileUpload(
-			new LiferayFileItemFactory(UploadServletRequest.DEFAULT_TEMP_DIR));
+			new LiferayFileItemFactory(
+				UploadServletRequestImpl.DEFAULT_TEMP_DIR));
 
 		List<FileItem> items = null;
 

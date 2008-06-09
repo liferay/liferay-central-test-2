@@ -25,6 +25,7 @@ package com.liferay.portal.util;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
+import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Layout;
@@ -314,6 +315,8 @@ public interface Portal {
 	public String[] getSystemRoles();
 
 	public UploadPortletRequest getUploadPortletRequest(ActionRequest req);
+
+	public UploadServletRequest getUploadServletRequest(HttpServletRequest req);
 
 	public Date getUptime();
 

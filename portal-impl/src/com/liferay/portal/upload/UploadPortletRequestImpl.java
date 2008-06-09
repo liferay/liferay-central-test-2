@@ -23,6 +23,7 @@
 package com.liferay.portal.upload;
 
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
+import com.liferay.portal.kernel.upload.UploadServletRequest;
 
 import java.io.File;
 

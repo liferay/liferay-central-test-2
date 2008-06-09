@@ -27,12 +27,14 @@ import java.io.File;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="UploadPortletRequest.java.html"><b><i>View Source</i></b></a>
+ * <a href="UploadServletRequest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Zongliang Li
+ * @author Harry Mark
  *
  */
-public interface UploadPortletRequest extends HttpServletRequest {
+public interface UploadServletRequest extends HttpServletRequest {
 
 	public void cleanUp();
 
@@ -44,6 +46,6 @@ public interface UploadPortletRequest extends HttpServletRequest {
 
 	public String getFullFileName(String name);
 
-	public boolean isFormField(String name);
+	public Boolean isFormField(String name);
 
 }

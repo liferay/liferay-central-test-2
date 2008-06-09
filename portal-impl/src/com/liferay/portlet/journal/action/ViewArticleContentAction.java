@@ -24,6 +24,7 @@ package com.liferay.portlet.journal.action;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
+import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -32,7 +33,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.upload.UploadServletRequest;
+import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -95,7 +96,7 @@ public class ViewArticleContentAction extends Action {
 			String output = null;
 
 			if (cmd.equals(Constants.PREVIEW)) {
-				uploadReq = new UploadServletRequest(req);
+				uploadReq = new UploadServletRequestImpl(req);
 
 				String title = ParamUtil.getString(uploadReq, "title");
 				String description = ParamUtil.getString(
