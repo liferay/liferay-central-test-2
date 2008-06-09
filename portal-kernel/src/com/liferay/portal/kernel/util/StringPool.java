@@ -48,8 +48,6 @@ public class StringPool {
 
 	public static final String CLOSE_BRACKET = "]";
 
-	public static final String CLOSE_BRACKET_2 = "]]";
-
 	public static final String CLOSE_CURLY_BRACE = "}";
 
 	public static final String CLOSE_PARENTHESIS = ")";
@@ -63,6 +61,10 @@ public class StringPool {
 	public static final String DASH = "-";
 
 	public static final String DOUBLE_APOSTROPHE = "''";
+
+	public static final String DOUBLE_CLOSE_BRACKET = "]]";
+
+	public static final String DOUBLE_OPEN_BRACKET = "[[";
 
 	public static final String DOUBLE_SLASH = "//";
 
@@ -101,8 +103,6 @@ public class StringPool {
 	public static final String NULL = "null";
 
 	public static final String OPEN_BRACKET = "[";
-
-	public static final String OPEN_BRACKET_2 = "[[";
 
 	public static final String OPEN_CURLY_BRACE = "{";
 

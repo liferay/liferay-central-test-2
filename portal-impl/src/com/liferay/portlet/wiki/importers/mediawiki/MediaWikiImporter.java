@@ -122,8 +122,9 @@ public class MediaWikiImporter implements WikiImporter {
 				content = _translator.translate(content);
 			}
 			else {
-				content = StringPool.OPEN_BRACKET_2 + redirectTitle +
-					StringPool.CLOSE_BRACKET_2;
+				content =
+					StringPool.DOUBLE_OPEN_BRACKET + redirectTitle +
+						StringPool.DOUBLE_CLOSE_BRACKET;
 			}
 
 			WikiPage page = null;
