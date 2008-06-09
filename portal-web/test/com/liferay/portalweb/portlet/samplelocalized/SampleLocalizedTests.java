@@ -33,7 +33,6 @@ import com.liferay.portalweb.portal.BaseTests;
 public class SampleLocalizedTests extends BaseTests {
 
 	public SampleLocalizedTests() {
-		addTestSuite(DownloadPortletTest.class);
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
 	}

@@ -33,7 +33,6 @@ import com.liferay.portalweb.portal.BaseTests;
 public class SampleJSPTests extends BaseTests {
 
 	public SampleJSPTests() {
-		addTestSuite(DownloadPortletTest.class);
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
 	}

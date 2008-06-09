@@ -33,7 +33,6 @@ import com.liferay.portalweb.portal.BaseTests;
 public class GoogleSearchTests extends BaseTests {
 
 	public GoogleSearchTests() {
-		addTestSuite(DownloadPortletTest.class);
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
 		//addTestSuite(VerifyFunctionalityTest.class);

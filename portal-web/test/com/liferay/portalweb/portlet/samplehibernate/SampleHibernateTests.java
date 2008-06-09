@@ -33,7 +33,6 @@ import com.liferay.portalweb.portal.BaseTests;
 public class SampleHibernateTests extends BaseTests {
 
 	public SampleHibernateTests() {
-		addTestSuite(DownloadPortletTest.class);
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
 	}
