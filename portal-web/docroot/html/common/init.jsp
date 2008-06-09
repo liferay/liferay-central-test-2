@@ -237,6 +237,7 @@
 <%@ page import="javax.portlet.PortletURL" %>
 <%@ page import="javax.portlet.RenderRequest" %>
 <%@ page import="javax.portlet.RenderResponse" %>
+<%@ page import="javax.portlet.ResourceURL"%>
 <%@ page import="javax.portlet.UnavailableException" %>
 <%@ page import="javax.portlet.ValidatorException" %>
 <%@ page import="javax.portlet.WindowState" %>
