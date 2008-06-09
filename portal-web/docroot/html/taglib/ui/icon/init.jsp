@@ -68,6 +68,10 @@ boolean label = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:i
 boolean toolTip = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon:toolTip"));
 String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:icon:cssClass"));
 
+if (iconListSingleIcon != null) {
+	label = true;
+}
+
 if ((iconMenuIconCount != null) || (iconMenuSingleIcon != null)) {
 	label = true;
 }
