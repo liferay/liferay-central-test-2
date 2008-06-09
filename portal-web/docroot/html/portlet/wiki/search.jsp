@@ -88,7 +88,7 @@ try {
 
 		// Node and page
 
-		long curNodeId = GetterUtil.getLong(doc.get("nodeId"));
+		long curNodeId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
 		String title = doc.get("title");
 
 		WikiNode curNode = null;

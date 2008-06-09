@@ -615,7 +615,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		String portletId = GetterUtil.getString(doc.get(Field.PORTLET_ID));
 
 		if (portletId.equals(PortletKeys.BLOGS)) {
-			long entryId = GetterUtil.getLong(doc.get("entryId"));
+			long entryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
 
 			long classNameId = PortalUtil.getClassNameId(
 				BlogsEntry.class.getName());
@@ -624,7 +624,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			return tagsAssetPersistence.findByC_C(classNameId, classPK);
 		}
 		else if (portletId.equals(PortletKeys.BOOKMARKS)) {
-			long entryId = GetterUtil.getLong(doc.get("entryId"));
+			long entryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
 
 			long classNameId = PortalUtil.getClassNameId(
 				BookmarksEntry.class.getName());
@@ -646,7 +646,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			return tagsAssetPersistence.findByC_C(classNameId, classPK);
 		}
 		else if (portletId.equals(PortletKeys.IMAGE_GALLERY)) {
-			long imageId = GetterUtil.getLong(doc.get("imageId"));
+			long imageId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
 
 			long classNameId = PortalUtil.getClassNameId(
 				IGImage.class.getName());
@@ -656,7 +656,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		}
 		else if (portletId.equals(PortletKeys.JOURNAL)) {
 			long groupId = GetterUtil.getLong(doc.get(Field.GROUP_ID));
-			String articleId = doc.get("articleId");
+			String articleId = doc.get(Field.ENTRY_CLASS_PK);
 			//double version = GetterUtil.getDouble(doc.get("version"));
 
 			long articleResourcePrimKey =
@@ -670,7 +670,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			return tagsAssetPersistence.findByC_C(classNameId, classPK);
 		}
 		else if (portletId.equals(PortletKeys.MESSAGE_BOARDS)) {
-			long messageId = GetterUtil.getLong(doc.get("messageId"));
+			long messageId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
 
 			long classNameId = PortalUtil.getClassNameId(
 				MBMessage.class.getName());
@@ -679,7 +679,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			return tagsAssetPersistence.findByC_C(classNameId, classPK);
 		}
 		else if (portletId.equals(PortletKeys.WIKI)) {
-			long nodeId = GetterUtil.getLong(doc.get("nodeId"));
+			long nodeId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
 			String title = doc.get(Field.TITLE);
 
 			long pageResourcePrimKey =

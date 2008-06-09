@@ -106,7 +106,7 @@ try {
 
 		// Folder and document
 
-		long entryId = GetterUtil.getLong(doc.get("entryId"));
+		long entryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
 
 		BookmarksEntry entry = null;
 

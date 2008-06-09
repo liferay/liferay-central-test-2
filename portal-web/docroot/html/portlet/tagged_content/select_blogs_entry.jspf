@@ -82,7 +82,7 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 
 				ResultRow row = new ResultRow(doc, i, i);
 
-				long entryId = GetterUtil.getLong(doc.get("entryId"));
+				long entryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
 
 				BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(entryId);
 

@@ -36,7 +36,7 @@ String content = doc.get(Field.CONTENT);
 content = StringUtil.shorten(content, 200);
 content = StringUtil.highlight(content, keywords);
 
-String articleId = doc.get("articleId");
+String articleId = doc.get(Field.ENTRY_CLASS_PK);
 long articleGroupId = GetterUtil.getLong(doc.get(Field.GROUP_ID));
 
 List hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(layout.getGroupId(), layout.isPrivateLayout(), articleId);

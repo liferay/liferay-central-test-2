@@ -52,7 +52,7 @@ public class ContentHits {
 		for (int i = 0; i < hits.getLength(); i++) {
 			Document doc = hits.doc(i);
 
-			String articleId = doc.get("articleId");
+			String articleId = doc.get(Field.ENTRY_CLASS_PK);
 			long articleGroupId = GetterUtil.getLong(doc.get(Field.GROUP_ID));
 
 			if (JournalContentSearchLocalServiceUtil.getLayoutIdsCount(

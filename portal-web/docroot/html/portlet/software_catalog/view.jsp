@@ -153,7 +153,7 @@ portletURL.setParameter("tabs1", tabs1);
 		for (int i = 0; i < results.size(); i++) {
 			Document doc = (Document)results.get(i);
 
-			long productEntryId = GetterUtil.getLong(doc.get("productEntryId"));
+			long productEntryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
 
 			SCProductEntry productEntry = SCProductEntryLocalServiceUtil.getProductEntry(productEntryId);
 

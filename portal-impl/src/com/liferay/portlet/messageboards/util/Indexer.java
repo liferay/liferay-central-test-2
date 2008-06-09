@@ -125,7 +125,6 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		doc.addKeyword("categoryId", categoryId);
 		doc.addKeyword("threadId", threadId);
-		doc.addKeyword("messageId", messageId);
 
 		doc.addKeyword(Field.ENTRY_CLASS_NAME, MBMessage.class.getName());
 		doc.addKeyword(Field.ENTRY_CLASS_PK, messageId);
@@ -171,7 +170,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		// Portlet URL
 
-		String messageId = doc.get("messageId");
+		String messageId = doc.get(Field.ENTRY_CLASS_PK);
 
 		portletURL.setParameter(
 			"struts_action", "/message_boards/view_message");

@@ -100,7 +100,7 @@ public class Indexer
 
 		doc.addModifiedDate();
 
-		doc.addKeyword("productEntryId", productEntryId);
+		doc.addKeyword(Field.ENTRY_CLASS_PK, productEntryId);
 		doc.addDate("modified-date", modifiedDate);
 		doc.addText("version", version);
 		doc.addKeyword("type", type);
@@ -148,7 +148,7 @@ public class Indexer
 
 		// Portlet URL
 
-		String productEntryId = doc.get("productEntryId");
+		String productEntryId = doc.get(Field.ENTRY_CLASS_PK);
 
 		portletURL.setParameter(
 			"struts_action", "/software_catalog/view_product_entry");

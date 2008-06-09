@@ -125,7 +125,7 @@ try {
 
 		long categoryId = GetterUtil.getLong(doc.get("categoryId"));
 		long curThreadId = GetterUtil.getLong(doc.get("threadId"));
-		long messageId = GetterUtil.getLong(doc.get("messageId"));
+		long messageId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
 
 		MBCategory category = null;
 

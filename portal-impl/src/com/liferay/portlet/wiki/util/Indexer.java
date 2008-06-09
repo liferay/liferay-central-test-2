@@ -114,7 +114,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		doc.addModifiedDate();
 
-		doc.addKeyword("nodeId", nodeId);
+		doc.addKeyword(Field.ENTRY_CLASS_PK, nodeId);
 
 		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
@@ -155,7 +155,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		// Portlet URL
 
-		String nodeId = doc.get("nodeId");
+		String nodeId = doc.get(Field.ENTRY_CLASS_PK);
 
 		portletURL.setParameter("struts_action", "/wiki/view");
 		portletURL.setParameter("nodeId", nodeId);

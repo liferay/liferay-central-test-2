@@ -91,7 +91,7 @@ try {
 	for (int i = 0; i < hits.getDocs().length; i++) {
 		Document doc = hits.doc(i);
 
-		long imageId = GetterUtil.getLong(doc.get("imageId"));
+		long imageId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
 
 		try {
 			IGImage image = IGImageLocalServiceUtil.getImage(imageId);

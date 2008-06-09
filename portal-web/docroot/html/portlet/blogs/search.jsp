@@ -78,7 +78,7 @@ try {
 
 		// Entry
 
-		long entryId = GetterUtil.getLong(doc.get("entryId"));
+		long entryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
 
 		BlogsEntry entry = null;
 
