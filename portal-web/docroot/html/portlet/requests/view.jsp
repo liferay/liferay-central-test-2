@@ -80,27 +80,28 @@ List<SocialRequest> requests = (List<SocialRequest>)request.getAttribute(WebKeys
 							<br />
 						</c:if>
 
-						<%
-						portletURL.setParameter("status", String.valueOf(SocialRequestConstants.STATUS_CONFIRM));
-						%>
+						<liferay-ui:icon-list>
 
-						<liferay-ui:icon
-							image="activate"
-							message="confirm"
-							url="<%= portletURL.toString() %>"
-							label="<%= true %>"
-						/>
+							<%
+							portletURL.setParameter("status", String.valueOf(SocialRequestConstants.STATUS_CONFIRM));
+							%>
 
-						<%
-						portletURL.setParameter("status", String.valueOf(SocialRequestConstants.STATUS_IGNORE));
-						%>
+							<liferay-ui:icon
+								image="activate"
+								message="confirm"
+								url="<%= portletURL.toString() %>"
+							/>
 
-						<liferay-ui:icon
-							image="deactivate"
-							message="ignore"
-							url="<%= portletURL.toString() %>"
-							label="<%= true %>"
-						/>
+							<%
+							portletURL.setParameter("status", String.valueOf(SocialRequestConstants.STATUS_IGNORE));
+							%>
+
+							<liferay-ui:icon
+								image="deactivate"
+								message="ignore"
+								url="<%= portletURL.toString() %>"
+							/>
+						</liferay-ui:icon-list>
 					</c:otherwise>
 				</c:choose>
 			</td>
