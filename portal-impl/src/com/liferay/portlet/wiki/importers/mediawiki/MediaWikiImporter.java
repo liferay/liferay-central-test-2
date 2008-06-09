@@ -116,7 +116,15 @@ public class MediaWikiImporter implements WikiImporter {
 
 			String[] tagsEntries = readTagsEntries(userId, node, content);
 
-			content = _translator.translate(content);
+			String redirectTitle = readRedirectTitle(content);
+
+			if (Validator.isNull(redirectTitle)) {
+				content = _translator.translate(content);
+			}
+			else {
+				content = StringPool.OPEN_BRACKET_2 + redirectTitle +
+					StringPool.CLOSE_BRACKET_2;
+			}
 
 			WikiPage page = null;
 
@@ -131,7 +139,7 @@ public class MediaWikiImporter implements WikiImporter {
 
 			WikiPageLocalServiceUtil.updatePage(
 				authorUserId, node.getNodeId(), title, page.getVersion(),
-				content, "creole", StringPool.BLANK, StringPool.BLANK,
+				content, "creole", StringPool.BLANK, redirectTitle,
 				tagsEntries, null, null);
 		}
 		catch (Exception e) {
@@ -290,6 +298,20 @@ public class MediaWikiImporter implements WikiImporter {
 		}
 	}
 
+	protected String readRedirectTitle(String content) {
+		Matcher matcher = _REDIRECT_REGEXP_PATTERN.matcher(content);
+
+		String redirectTitle = StringPool.BLANK;
+
+		if (matcher.find()) {
+			redirectTitle = matcher.group(1);
+
+			redirectTitle = normalizeTitle(redirectTitle);
+		}
+
+		return redirectTitle;
+	}
+
 	protected List<String> readSpecialNamespaces(Element root) {
 		List<String> namespaces = new ArrayList<String>();
 
@@ -311,8 +333,7 @@ public class MediaWikiImporter implements WikiImporter {
 			long userId, WikiNode node, String content)
 		throws PortalException, SystemException {
 
-		Matcher matcher = Pattern.compile(
-			_CATEGORIES_REGEXP).matcher(content);
+		Matcher matcher = _CATEGORIES_REGEXP_PATTERN.matcher(content);
 
 		List<String> tagsEntries = new ArrayList<String>();
 
@@ -340,6 +361,15 @@ public class MediaWikiImporter implements WikiImporter {
 
 	private static final String _CATEGORIES_REGEXP =
 		"\\[\\[[Cc]ategory:([^\\]]*)\\]\\][\\n]*";
+
+	private static final Pattern _CATEGORIES_REGEXP_PATTERN = Pattern.compile(
+		_CATEGORIES_REGEXP);
+
+	private static final String _REDIRECT_REGEXP =
+		"#REDIRECT \\[\\[([^\\]]*)\\]\\]";
+
+	private static final Pattern _REDIRECT_REGEXP_PATTERN = Pattern.compile(
+		_REDIRECT_REGEXP);
 
 	private static Log _log = LogFactory.getLog(MediaWikiImporter.class);
 
