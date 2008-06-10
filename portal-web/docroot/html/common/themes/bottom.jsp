@@ -160,7 +160,7 @@ if ((layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 				footerPortalCssPaths.add(footerPortalCssPath);
 	%>
 
-				<link href="<%= footerPortalCssPath %>" rel="stylesheet" type="text/css" />
+				<link href="<%= footerPortalCssPath %>?t=<%= portlet.getTimestamp() %>" rel="stylesheet" type="text/css" />
 
 	<%
 			}
@@ -179,7 +179,10 @@ if ((layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 				footerPortletCssPaths.add(footerPortletCssPath);
 
 				if (footerPortletCssPath.endsWith(".jsp")) {
-					footerPortletCssPath += "?themeId=" + themeDisplay.getTheme().getThemeId() + "&amp;colorSchemeId=" + themeDisplay.getColorScheme().getColorSchemeId() + "&amp;t=" + theme.getTimestamp();
+					footerPortletCssPath += "?themeId=" + themeDisplay.getTheme().getThemeId() + "&amp;colorSchemeId=" + themeDisplay.getColorScheme().getColorSchemeId() + "&amp;t=" + portlet.getTimestamp();
+				}
+				else {
+					footerPortletCssPath += "?t=" + portlet.getTimestamp();
 				}
 	%>
 
