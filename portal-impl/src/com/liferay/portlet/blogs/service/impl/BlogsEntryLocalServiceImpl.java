@@ -856,6 +856,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
+		if (themeDisplay == null) {
+			return;
+		}
+
 		Map<String, String> parts = new HashMap<String, String>();
 
 		String excerpt = StringUtil.shorten(
