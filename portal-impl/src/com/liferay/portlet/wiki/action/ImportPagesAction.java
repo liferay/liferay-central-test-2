@@ -130,13 +130,13 @@ public class ImportPagesAction extends PortletAction {
 
 		long nodeId = ParamUtil.getLong(uploadReq, "nodeId");
 
-		File file = uploadReq.getFile("file");
-		File emailsFile = uploadReq.getFile("emailsFile");
+		File pagesFile = uploadReq.getFile("pagesFile");
+		File usersFile = uploadReq.getFile("usersFile");
 
 		NotificationThreadLocal.setNotificationEnabled(false);
 		WikiCacheThreadLocal.setClearCache(false);
 
-		WikiNodeServiceUtil.importPages(nodeId, file, emailsFile);
+		WikiNodeServiceUtil.importPages(nodeId, pagesFile, usersFile);
 
 		WikiCacheUtil.clearCache(nodeId);
 

@@ -76,14 +76,15 @@ import org.dom4j.io.SAXReader;
 public class MediaWikiImporter implements WikiImporter {
 
 	public void importPages(
-			long userId, WikiNode node, File file, File emailsFile)
+			long userId, WikiNode node, File pagesFile, File usersFile)
 		throws PortalException, SystemException {
 
 		try {
 			SAXReader saxReader = new SAXReader();
 
-			Document doc = saxReader.read(file);
-			Map<String, String> emailsMap = readEmailsFile(emailsFile);
+			Document doc = saxReader.read(pagesFile);
+
+			Map<String, String> usersMap = readUsersFile(usersFile);
 
 			Element root = doc.getRootElement();
 
@@ -91,7 +92,7 @@ public class MediaWikiImporter implements WikiImporter {
 
 			processSpecialPages(userId, node, root, specialNamespaces);
 			processRegularPages(
-				userId, node, root, specialNamespaces, emailsMap);
+				userId, node, root, specialNamespaces, usersMap);
 		}
 		catch (Exception e) {
 			throw new PortalException(e);
@@ -100,12 +101,12 @@ public class MediaWikiImporter implements WikiImporter {
 
 	protected long getUserId(
 			long userId, WikiNode node, String author,
-			Map<String, String> emailsMap)
+			Map<String, String> usersMap)
 		throws PortalException, SystemException {
 
 		User user = null;
 
-		String emailAddress = emailsMap.get(author);
+		String emailAddress = usersMap.get(author);
 
 		try {
 			if (Validator.isNull(emailAddress)) {
@@ -117,7 +118,7 @@ public class MediaWikiImporter implements WikiImporter {
 					node.getCompanyId(), emailAddress);
 			}
 		}
-		catch (NoSuchUserException e) {
+		catch (NoSuchUserException nsue) {
 			user = UserLocalServiceUtil.getUserById(userId);
 		}
 
@@ -126,11 +127,11 @@ public class MediaWikiImporter implements WikiImporter {
 
 	protected void importPage(
 			long userId, String author, WikiNode node, String title,
-			String content, Map<String, String> emailsMap)
+			String content, Map<String, String> usersMap)
 		throws PortalException, SystemException {
 
 		try {
-			long authorUserId = getUserId(userId, node, author, emailsMap);
+			long authorUserId = getUserId(userId, node, author, usersMap);
 
 			String[] tagsEntries = readTagsEntries(userId, node, content);
 
@@ -200,7 +201,7 @@ public class MediaWikiImporter implements WikiImporter {
 
 	protected void processRegularPages(
 		long userId, WikiNode node, Element root,
-		List<String> specialNamespaces, Map<String, String> emailsMap) {
+		List<String> specialNamespaces, Map<String, String> usersMap) {
 
 		ProgressTracker progressTracker =
 			ProgressTrackerThreadLocal.getProgressTracker();
@@ -240,7 +241,7 @@ public class MediaWikiImporter implements WikiImporter {
 			String content = lastRevisionEl.elementText("text");
 
 			try {
-				importPage(userId, author, node, title, content, emailsMap);
+				importPage(userId, author, node, title, content, usersMap);
 			}
 			catch (Exception e) {
 				_log.warn(
@@ -317,39 +318,6 @@ public class MediaWikiImporter implements WikiImporter {
 		}
 	}
 
-	protected Map<String, String> readEmailsFile(File emailsFile)
-		throws IOException {
-
-		if (emailsFile == null) {
-			return Collections.EMPTY_MAP;
-		}
-
-		Map<String, String> emailsMap = new HashMap<String, String>();
-
-		BufferedReader reader = new BufferedReader(new FileReader(emailsFile));
-
-		String line = reader.readLine();
-
-		while (line != null) {
-
-			String[] array = StringUtil.split(line);
-
-			if ((array.length == 2) && (Validator.isNotNull(array[0])) &&
-					(Validator.isNotNull(array[1]))) {
-				emailsMap.put(array[0], array[1]);
-			}
-			else {
-				_log.info(
-					"Ignoring line " + line + " because it does not contain" +
-						" exactly 2 columns");
-			}
-
-			line = reader.readLine();
-		}
-
-		return emailsMap;
-	}
-
 	protected String readRedirectTitle(String content) {
 		Matcher matcher = _REDIRECT_REGEXP_PATTERN.matcher(content);
 
@@ -409,6 +377,39 @@ public class MediaWikiImporter implements WikiImporter {
 		}
 
 		return tagsEntries.toArray(new String[tagsEntries.size()]);
+	}
+
+	protected Map<String, String> readUsersFile(File usersFile)
+		throws IOException {
+
+		if (usersFile == null) {
+			return Collections.EMPTY_MAP;
+		}
+
+		Map<String, String> usersMap = new HashMap<String, String>();
+
+		BufferedReader reader = new BufferedReader(new FileReader(usersFile));
+
+		String line = reader.readLine();
+
+		while (line != null) {
+			String[] array = StringUtil.split(line);
+
+			if ((array.length == 2) && (Validator.isNotNull(array[0])) &&
+				(Validator.isNotNull(array[1]))) {
+
+				usersMap.put(array[0], array[1]);
+			}
+			else {
+				_log.info(
+					"Ignoring line " + line + " because it does not contain" +
+						" exactly 2 columns");
+			}
+
+			line = reader.readLine();
+		}
+
+		return usersMap;
 	}
 
 	private static final String _CATEGORIES_REGEXP =

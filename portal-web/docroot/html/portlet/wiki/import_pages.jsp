@@ -53,22 +53,22 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 <table class="lfr-table">
 <tr>
 	<td>
-		<liferay-ui:message key="file" />
+		<liferay-ui:message key="pages-file" />
 	</td>
 	<td>
-		<input name="<portlet:namespace />file" type="file" />
+		<input name="<portlet:namespace />pagesFile" type="file" />
 
 		<liferay-ui:icon-help message="import-wiki-pages-help" />
 	</td>
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="user-emails-file" /> (<liferay-ui:message key="optional" />)
+		<liferay-ui:message key="users-file" /> (<liferay-ui:message key="optional" />)
 	</td>
 	<td>
-		<input name="<portlet:namespace />emailsFile" type="file" />
+		<input name="<portlet:namespace />usersFile" type="file" />
 
-		<liferay-ui:icon-help message="import-wiki-emails-file-help" />
+		<liferay-ui:icon-help message="import-wiki-users-help" />
 	</td>
 </tr>
 </table>
