@@ -93,6 +93,7 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 		if (Validator.isNotNull(friendlyURLPath)) {
 			portletURL.addParameterIncludedInPath("p_p_id");
+
 			portletURL.addParameterIncludedInPath("struts_action");
 		}
 

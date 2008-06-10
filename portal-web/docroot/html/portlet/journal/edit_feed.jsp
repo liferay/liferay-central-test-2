@@ -92,16 +92,18 @@ int delta = BeanParamUtil.getInteger(feed, request, "delta", 10);
 String orderByCol = BeanParamUtil.getString(feed, request, "orderByCol");
 String orderByType = BeanParamUtil.getString(feed, request, "orderByType");
 
-ResourceURL feedUrl = null;
+ResourceURL feedURL = null;
 
 if (feed != null) {
 	long targetLayoutPlid = PortalUtil.getPlidFromFriendlyURL(feed.getCompanyId(), feed.getTargetLayoutFriendlyUrl());
 
-	feedUrl = new PortletURLImpl(request, PortletKeys.JOURNAL, targetLayoutPlid, PortletRequest.RESOURCE_PHASE);
-	feedUrl.setCacheability(ResourceURL.FULL);
-	feedUrl.setParameter("struts_action", "/journal/rss");
-	feedUrl.setParameter("groupId", String.valueOf(groupId));
-	feedUrl.setParameter("feedId", String.valueOf(feedId));
+	feedURL = new PortletURLImpl(request, PortletKeys.JOURNAL, targetLayoutPlid, PortletRequest.RESOURCE_PHASE);
+
+	feedURL.setCacheability(ResourceURL.FULL);
+
+	feedURL.setParameter("struts_action", "/journal/rss");
+	feedURL.setParameter("groupId", String.valueOf(groupId));
+	feedURL.setParameter("feedId", String.valueOf(feedId));
 }
 %>
 
@@ -282,9 +284,7 @@ if (feed != null) {
 				<liferay-ui:message key="url" />
 			</td>
 			<td>
-				<liferay-ui:input-resource
-					url='<%= feedUrl.toString() %>'
-				/>
+				<liferay-ui:input-resource url="<%= feedURL.toString() %>" />
 			</td>
 		</tr>
 	</c:otherwise>
@@ -553,7 +553,7 @@ if (feed != null) {
 <input type="submit" value="<liferay-ui:message key="save" />" />
 
 <c:if test="<%= feed != null %>">
-	<input type="button" value="<liferay-ui:message key="preview" />" onClick="window.open('<%= feedUrl.toString() %>', 'feed');" />
+	<input type="button" value="<liferay-ui:message key="preview" />" onClick="window.open('<%= feedURL %>', 'feed');" />
 </c:if>
 
 <input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />

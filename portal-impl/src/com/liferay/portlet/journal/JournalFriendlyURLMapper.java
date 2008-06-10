@@ -24,7 +24,6 @@ package com.liferay.portlet.journal;
 
 import com.liferay.portal.kernel.portlet.BaseFriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
-import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -33,7 +32,6 @@ import com.liferay.portal.util.PortletKeys;
 
 import java.util.Map;
 
-import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
 import javax.portlet.ResourceURL;
 
@@ -66,9 +64,10 @@ public class JournalFriendlyURLMapper extends BaseFriendlyURLMapper {
 		}
 
 		if (Validator.isNotNull(friendlyURLPath)) {
-			portletURL.addParameterIncludedInPath("p_p_cacheability");
 			portletURL.addParameterIncludedInPath("p_p_id");
 			portletURL.addParameterIncludedInPath("p_p_lifecycle");
+			portletURL.addParameterIncludedInPath("p_p_cacheability");
+
 			portletURL.addParameterIncludedInPath("struts_action");
 		}
 
@@ -89,11 +88,9 @@ public class JournalFriendlyURLMapper extends BaseFriendlyURLMapper {
 		String[] parts = StringUtil.split(friendlyURLPath, StringPool.SLASH);
 
 		if ((parts.length >= 4) && parts[2].equals("rss")) {
-			addParam(params, "p_p_cacheability", ResourceURL.FULL);
-
 			addParam(params, "p_p_id", _PORTLET_ID);
-
 			addParam(params, "p_p_lifecycle", "2");
+			addParam(params, "p_p_cacheability", ResourceURL.FULL);
 
 			addParam(params, "struts_action", "/journal/rss");
 

@@ -130,6 +130,7 @@ public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 		if (Validator.isNotNull(friendlyURL)) {
 			portletURL.addParameterIncludedInPath("p_p_id");
+
 			portletURL.addParameterIncludedInPath("struts_action");
 			portletURL.addParameterIncludedInPath("tabs1");
 		}

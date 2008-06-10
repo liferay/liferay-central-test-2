@@ -115,7 +115,9 @@ public class RSSAction extends PortletAction {
 		throws Exception {
 
 		ResourceURL feedURL = res.createResourceURL();
+
 		feedURL.setCacheability(ResourceURL.FULL);
+
 		feedURL.setParameter("struts_action", "/journal/rss");
 		feedURL.setParameter("groupId", String.valueOf(feed.getGroupId()));
 		feedURL.setParameter("feedId", String.valueOf(feed.getFeedId()));
@@ -219,6 +221,7 @@ public class RSSAction extends PortletAction {
 			PortletURL entryURL = new PortletURLImpl(
 				(PortletRequestImpl)req, portletId, plid,
 				PortletRequest.RENDER_PHASE);
+
 			entryURL.setParameter("struts_action", "/journal_content/view");
 			entryURL.setParameter(
 				"groupId", String.valueOf(article.getGroupId()));
