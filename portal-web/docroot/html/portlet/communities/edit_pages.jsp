@@ -458,7 +458,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 
 <c:if test="<%= liveGroup.isUserGroup() %>">
 	<div class="portlet-msg-info">
-		<liferay-ui:message key="the-pages-configured-for-the-user-group-will-be-copied-to-the-personal-community-of-the-users-that-become-members-of-the-group" />
+		<liferay-ui:message key="users-who-belongs-to-this-user-group-will-have-these-pages-added-to-their-user-pages" />
 	</div>
 </c:if>
 

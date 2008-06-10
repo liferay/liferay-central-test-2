@@ -246,7 +246,8 @@ public class GroupImpl extends GroupModelImpl implements Group {
 			else if (isUserGroup()) {
 				long userGroupId = getClassPK();
 
-				UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(userGroupId);
+				UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(
+					userGroupId);
 
 				name = userGroup.getName();
 			}
