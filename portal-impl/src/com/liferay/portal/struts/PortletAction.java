@@ -103,17 +103,17 @@ public class PortletAction extends Action {
 		if ((strutsExecute != null) && strutsExecute.booleanValue()) {
 			return strutsExecute(mapping, form, req, res);
 		}
-		else if (portletRequest instanceof ResourceRequest) {
+		else if (portletRequest instanceof RenderRequest) {
+			return render(
+				mapping, form, portletConfig, (RenderRequest)portletRequest,
+				(RenderResponse)portletResponse);
+		}
+		else {
 			serveResource(
 				mapping, form, portletConfig, (ResourceRequest)portletRequest,
 				(ResourceResponse)portletResponse);
 
 			return mapping.findForward(ActionConstants.COMMON_NULL);
-		}
-		else {
-			return render(
-				mapping, form, portletConfig, (RenderRequest)portletRequest,
-				(RenderResponse)portletResponse);
 		}
 	}
 
