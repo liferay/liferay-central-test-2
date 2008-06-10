@@ -45,6 +45,7 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
+import com.liferay.portlet.journal.model.impl.JournalFeedImpl;
 import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -557,6 +558,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_xStream.alias("IGFolder", IGFolderImpl.class);
 		_xStream.alias("IGImage", IGImageImpl.class);
 		_xStream.alias("JournalArticle", JournalArticleImpl.class);
+		_xStream.alias("JournalFeed", JournalFeedImpl.class);
 		_xStream.alias("JournalStructure", JournalStructureImpl.class);
 		_xStream.alias("JournalTemplate", JournalTemplateImpl.class);
 		_xStream.alias("MBCategory", MBCategoryImpl.class);
