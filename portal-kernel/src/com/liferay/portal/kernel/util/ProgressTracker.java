@@ -25,6 +25,9 @@ package com.liferay.portal.kernel.util;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletSession;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 /**
  * <a href="ProgressTracker.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,8 +39,13 @@ public class ProgressTracker {
 	public static final String PERCENT =
 		ProgressTracker.class.getName() + "_PERCENT";
 
-	public ProgressTracker(PortletRequest req, String progressId) {
-		_req = req;
+	public ProgressTracker(PortletRequest portletReq, String progressId) {
+		_portletReq = portletReq;
+		_progressId = progressId;
+	}
+
+	public ProgressTracker(HttpServletRequest httpReq, String progressId) {
+		_httpReq = httpReq;
 		_progressId = progressId;
 	}
 
@@ -46,21 +54,36 @@ public class ProgressTracker {
 	}
 
 	public void updateProgress(int percentage) {
-		PortletSession ses = _req.getPortletSession(true);
+		if (_portletReq != null) {
+			PortletSession ses = _portletReq.getPortletSession(true);
 
-		ses.setAttribute(
-			PERCENT + _progressId, new Integer(percentage),
-			PortletSession.APPLICATION_SCOPE);
+			ses.setAttribute(
+				PERCENT + _progressId, new Integer(percentage),
+				PortletSession.APPLICATION_SCOPE);
+		}
+		else {
+			HttpSession ses = _httpReq.getSession(true);
+
+			ses.setAttribute(PERCENT + _progressId, new Integer(percentage));
+		}
 	}
 
 	public void finish() {
-		PortletSession ses = _req.getPortletSession(true);
+		if (_portletReq != null) {
+			PortletSession ses = _portletReq.getPortletSession(true);
 
-		ses.removeAttribute(
-			PERCENT + _progressId, PortletSession.APPLICATION_SCOPE);
+			ses.removeAttribute(
+				PERCENT + _progressId, PortletSession.APPLICATION_SCOPE);
+		}
+		else {
+			HttpSession ses = _httpReq.getSession(true);
+
+			ses.removeAttribute(PERCENT + _progressId);
+		}
 	}
 
-	private PortletRequest _req;
+	private HttpServletRequest _httpReq;
+	private PortletRequest _portletReq;
 	private String _progressId;
 
 }

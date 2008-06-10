@@ -178,10 +178,8 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" /></portlet:actionURL>");
 	}
 
-	function <portlet:namespace />exportUsers() {
-		alert("<liferay-ui:message key="please-be-patient-as-this-process-can-take-up-to-several-minutes" />");
-
-		submitForm(document.hrefFm, '<%= themeDisplay.getPathMain() %>/enterprise_admin/export_users');
+	function <portlet:namespace />exportUsers(exportProgressId) {
+		submitForm(document.hrefFm, '<%= themeDisplay.getPathMain() %>/enterprise_admin/export_users?exportProgressId=' + exportProgressId);
 	}
 
 	function <portlet:namespace />getUsersCount(className, ids, active, callback) {

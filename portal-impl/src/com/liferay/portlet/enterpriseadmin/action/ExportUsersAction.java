@@ -23,6 +23,9 @@
 package com.liferay.portlet.enterpriseadmin.action;
 
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.ProgressTracker;
+import com.liferay.portal.kernel.util.ProgressTrackerThreadLocal;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
@@ -35,6 +38,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.util.dao.hibernate.QueryUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -65,7 +69,7 @@ public class ExportUsersAction extends Action {
 			byte[] bytes = csv.getBytes();
 
 			ServletResponseUtil.sendFile(
-				res, fileName, bytes, ContentTypes.TEXT_XML_UTF8);
+				res, fileName, bytes, ContentTypes.TEXT_CSV_UTF8);
 
 			return null;
 		}
@@ -87,18 +91,41 @@ public class ExportUsersAction extends Action {
 			return StringPool.BLANK;
 		}
 
+		String exportProgressId = ParamUtil.getString(
+			req, "exportProgressId");
+
+		ProgressTracker progressTracker = new ProgressTracker(
+			req, exportProgressId);
+
+		progressTracker.start();
+
 		List<User> users = UserLocalServiceUtil.search(
 			themeDisplay.getCompanyId(), null, Boolean.TRUE, null,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
+		int percentage = 10;
+		int total = users.size();
+
+		progressTracker.updateProgress(percentage);
+
 		StringMaker sm = new StringMaker(users.size() * 50);
 
-		for (User user : users) {
+		Iterator<User> itr = users.iterator();
+
+		for (int i = 0; itr.hasNext(); i++) {
+			User user = itr.next();
 			sm.append(user.getFullName());
 			sm.append(StringPool.COMMA);
 			sm.append(user.getEmailAddress());
 			sm.append(StringPool.NEW_LINE);
+			Thread.sleep(50);
+
+			percentage = Math.min(10 + (i * 90) / total, 99);
+
+			progressTracker.updateProgress(percentage);
 		}
+
+		progressTracker.finish();
 
 		return sm.toString();
 	}

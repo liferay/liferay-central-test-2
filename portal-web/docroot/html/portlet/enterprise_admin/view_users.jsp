@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
+String exportProgressId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
+
 PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 
 List manageableOrganizations = null;
@@ -163,7 +165,13 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 		</c:if>
 
 		<c:if test="<%= RoleLocalServiceUtil.hasUserRole(user.getUserId(), user.getCompanyId(), RoleImpl.ADMINISTRATOR, true) %>">
-			<input type="button" value="<liferay-ui:message key="export" />" onClick="<portlet:namespace />exportUsers();" />
+			<input type="button" value="<liferay-ui:message key="export" />" onClick="<%= exportProgressId %>.startProgress(); <portlet:namespace />exportUsers('<%= exportProgressId %>');" />
+
+			<liferay-ui:upload-progress
+				id="<%= exportProgressId %>"
+				message="exporting"
+				redirect="<%= HtmlUtil.escape(currentURL) %>"
+			/>
 		</c:if>
 
 		<br /><br />
