@@ -39,6 +39,8 @@ import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletRequestImpl;
+import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleDisplay;
 import com.liferay.portlet.journal.model.JournalFeed;
@@ -68,8 +70,12 @@ import java.util.List;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
+import javax.portlet.PortletURL;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
+import javax.portlet.ResourceURL;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -99,7 +105,7 @@ public class RSSAction extends PortletAction {
 		OutputStream os = res.getPortletOutputStream();
 
 		try {
-			os.write(getRSS(req));
+			os.write(getRSS(req, res));
 		}
 		finally {
 			os.close();
@@ -107,19 +113,21 @@ public class RSSAction extends PortletAction {
 	}
 
 	protected String exportToRSS(
-			JournalFeed feed, String languageId, Layout layout,
-			ThemeDisplay themeDisplay)
+			ResourceRequest req, ResourceResponse res, JournalFeed feed,
+			String languageId, Layout layout, ThemeDisplay themeDisplay)
 		throws Exception {
 
-		String feedURL =
-			PortalUtil.getLayoutFriendlyURL(layout, themeDisplay) +
-				"/journal/rss/" + feed.getGroupId() + "/" + feed.getFeedId();
+		ResourceURL feedURL = res.createResourceURL();
+		feedURL.setCacheability(ResourceURL.FULL);
+		feedURL.setParameter("struts_action", "/journal/rss");
+		feedURL.setParameter("groupId", String.valueOf(feed.getGroupId()));
+		feedURL.setParameter("feedId", String.valueOf(feed.getFeedId()));
 
 		SyndFeed syndFeed = new SyndFeedImpl();
 
 		syndFeed.setFeedType(feed.getFeedType() + "_" + feed.getFeedVersion());
 		syndFeed.setTitle(feed.getName());
-		syndFeed.setLink(feedURL);
+		syndFeed.setLink(feedURL.toString());
 		syndFeed.setDescription(feed.getDescription());
 
 		List<SyndEntry> entries = new ArrayList<SyndEntry>();
@@ -139,7 +147,7 @@ public class RSSAction extends PortletAction {
 
 			String author = PortalUtil.getUserName(
 				article.getUserId(), article.getUserName());
-			String link = getEntryURL(feed, article, layout, themeDisplay);
+			String link = getEntryURL(req, feed, article, layout, themeDisplay);
 
 			SyndEntry syndEntry = new SyndEntryImpl();
 
@@ -183,11 +191,9 @@ public class RSSAction extends PortletAction {
 	}
 
 	protected String getEntryURL(
-			JournalFeed feed, JournalArticle article, Layout layout,
-			ThemeDisplay themeDisplay)
+			ResourceRequest req, JournalFeed feed, JournalArticle article,
+			Layout layout, ThemeDisplay themeDisplay)
 		throws Exception {
-
-		StringMaker sm = new StringMaker();
 
 		List<Long> hitLayoutIds =
 			JournalContentSearchLocalServiceUtil.getLayoutIds(
@@ -203,37 +209,31 @@ public class RSSAction extends PortletAction {
 
 			return PortalUtil.getLayoutFriendlyURL(hitLayout, themeDisplay);
 		}
-		else if (Validator.isNotNull(feed.getTargetLayoutFriendlyUrl())) {
+		else {
 			long plid = PortalUtil.getPlidFromFriendlyURL(
 				feed.getCompanyId(), feed.getTargetLayoutFriendlyUrl());
 
-			Layout targetLayout = LayoutLocalServiceUtil.getLayout(plid);
+			String portletId = PortletKeys.JOURNAL_CONTENT;
 
-			sm.append(
-				PortalUtil.getLayoutFriendlyURL(targetLayout, themeDisplay));
+			if (Validator.isNotNull(feed.getTargetPortletId())) {
+				portletId = feed.getTargetPortletId();
+			}
+
+			PortletURL entryURL = new PortletURLImpl(
+				(PortletRequestImpl)req, portletId, plid,
+				PortletRequest.RENDER_PHASE);
+			entryURL.setParameter("struts_action", "/journal_content/view");
+			entryURL.setParameter(
+				"groupId", String.valueOf(article.getGroupId()));
+			entryURL.setParameter("articleId", article.getArticleId());
+
+			return entryURL.toString();
 		}
-		else {
-			sm.append(PortalUtil.getLayoutFriendlyURL(layout, themeDisplay));
-		}
-
-		sm.append("/journal_content/");
-
-		if (Validator.isNotNull(feed.getTargetPortletId())) {
-			sm.append(feed.getTargetPortletId());
-		}
-		else {
-			sm.append(PortletKeys.JOURNAL_CONTENT);
-		}
-
-		sm.append(StringPool.SLASH);
-		sm.append(article.getGroupId());
-		sm.append(StringPool.SLASH);
-		sm.append(article.getArticleId());
-
-		return sm.toString();
 	}
 
-	protected byte[] getRSS(PortletRequest req) throws Exception {
+	protected byte[] getRSS(ResourceRequest req, ResourceResponse res)
+		throws Exception {
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -266,7 +266,8 @@ public class RSSAction extends PortletAction {
 			}
 		}
 
-		String rss = exportToRSS(feed, languageId, layout, themeDisplay);
+		String rss = exportToRSS(
+			req, res, feed, languageId, layout, themeDisplay);
 
 		return rss.getBytes(StringPool.UTF8);
 	}
