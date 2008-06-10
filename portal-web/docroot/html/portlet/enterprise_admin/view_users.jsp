@@ -162,6 +162,10 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 			<input type="button" value="<liferay-ui:message key="restore" />" onClick="<portlet:namespace />deleteUsers('<%= Constants.RESTORE %>');" />
 		</c:if>
 
+		<c:if test="<%= RoleLocalServiceUtil.hasUserRole(user.getUserId(), user.getCompanyId(), RoleImpl.ADMINISTRATOR, true) %>">
+			<input type="button" value="<liferay-ui:message key="export" />" onClick="<portlet:namespace />exportUsers();" />
+		</c:if>
+
 		<br /><br />
 	</c:if>
 
