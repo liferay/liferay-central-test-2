@@ -33,17 +33,23 @@ import com.liferay.portal.comm.CommLink;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.model.LayoutTemplate;
+import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.Resource;
@@ -52,10 +58,12 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ColorSchemeImpl;
 import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.model.impl.LayoutTypePortletImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
+import com.liferay.portal.service.LayoutTemplateLocalServiceUtil;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
@@ -66,6 +74,7 @@ import com.liferay.portal.theme.ThemeLoaderFactory;
 import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.util.LocalizationUtil;
 import com.liferay.util.MapUtil;
 import com.liferay.util.Time;
 
@@ -78,6 +87,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
@@ -109,8 +119,6 @@ public class LayoutImporter {
 			Map<String, String[]> parameterMap, InputStream is)
 		throws PortalException, SystemException {
 
-		boolean addAsNewLayouts = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.ADD_AS_NEW_LAYOUTS);
 		boolean deleteMissingLayouts = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
 			Boolean.TRUE.booleanValue());
@@ -130,6 +138,12 @@ public class LayoutImporter {
 			parameterMap, PortletDataHandlerKeys.PORTLET_USER_PREFERENCES);
 		boolean importTheme = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.THEME);
+		String layoutsImportMode = MapUtil.getString(
+			parameterMap, PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE,
+			PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_ID);
+		String portletsMergeMode = MapUtil.getString(
+			parameterMap, PortletDataHandlerKeys.PORTLETS_MERGE_MODE,
+			PortletDataHandlerKeys.PORTLETS_MERGE_MODE_REPLACE);
 		String userIdStrategy = MapUtil.getString(
 			parameterMap, PortletDataHandlerKeys.USER_ID_STRATEGY);
 
@@ -276,6 +290,9 @@ public class LayoutImporter {
 
 		// Layouts
 
+		List<Layout> previousLayouts = LayoutUtil.findByG_P(
+			groupId, privateLayout);
+
 		Set<Long> newLayoutIds = new HashSet<Long>();
 
 		Map <Long, Long> newLayoutIdPlidMap =
@@ -355,10 +372,28 @@ public class LayoutImporter {
 
 			Layout layout = null;
 
-			if (addAsNewLayouts) {
+			if (layoutsImportMode.equals(
+					PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE_ADD_AS_NEW)) {
+
 				layoutId = LayoutLocalServiceUtil.getNextLayoutId(
 					groupId, privateLayout);
 				friendlyURL = StringPool.SLASH + layoutId;
+			}
+			else if (layoutsImportMode.equals(
+					PortletDataHandlerKeys.
+						LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_NAME)) {
+
+				Locale locale = LocaleUtil.getDefault();
+
+				String localizedName = LocalizationUtil.getLocalization(
+					name, LocaleUtil.toLanguageId(locale));
+
+				for (Layout curLayout : previousLayouts) {
+					if (curLayout.getName(locale).equals(localizedName)) {
+						layout = curLayout;
+						break;
+					}
+				}
 			}
 			else {
 				layout = LayoutUtil.fetchByG_P_L(
@@ -396,7 +431,18 @@ public class LayoutImporter {
 			layout.setTitle(title);
 			layout.setDescription(description);
 			layout.setType(type);
-			layout.setTypeSettings(typeSettings);
+
+			if (layout.getType().equals(LayoutConstants.TYPE_PORTLET) &&
+					Validator.isNotNull(layout.getTypeSettings()) &&
+						!portletsMergeMode.equals(
+							PortletDataHandlerKeys.
+								PORTLETS_MERGE_MODE_REPLACE)) {
+				mergePortlets(layout, typeSettings, portletsMergeMode);
+			}
+			else {
+				layout.setTypeSettings(typeSettings);
+			}
+
 			layout.setHidden(hidden);
 			layout.setFriendlyURL(friendlyURL);
 
@@ -557,7 +603,8 @@ public class LayoutImporter {
 		// Delete missing layouts
 
 		if (deleteMissingLayouts) {
-			deleteMissingLayouts(groupId, privateLayout, newLayoutIds);
+			deleteMissingLayouts(
+				groupId, privateLayout, newLayoutIds, previousLayouts);
 		}
 
 		// Page count
@@ -570,7 +617,8 @@ public class LayoutImporter {
 	}
 
 	protected void deleteMissingLayouts(
-			long groupId, boolean privateLayout, Set<Long> newLayoutIds)
+			long groupId, boolean privateLayout, Set<Long> newLayoutIds,
+			List<Layout> previousLayouts)
 		throws PortalException, SystemException {
 
 		// Layouts
@@ -581,9 +629,7 @@ public class LayoutImporter {
 			}
 		}
 
-		List<Layout> layouts = LayoutUtil.findByG_P(groupId, privateLayout);
-
-		for (Layout layout : layouts) {
+		for (Layout layout : previousLayouts) {
 			if (!newLayoutIds.contains(layout.getLayoutId())) {
 				try {
 					LayoutLocalServiceUtil.deleteLayout(layout, false);
@@ -1171,6 +1217,94 @@ public class LayoutImporter {
 					userEl, false);
 			}
 		}
+	}
+
+	protected void mergePortlets(
+		Layout layout, String newTypeSettings, String portletsMergeMode) {
+
+		try {
+			Properties previousProps =
+				layout.getTypeSettingsProperties();
+			LayoutTypePortlet previousLayoutType =
+				(LayoutTypePortlet)layout.getLayoutType();
+			List<String> previousColumns =
+				previousLayoutType.getLayoutTemplate().getColumns();
+
+			Properties newProps = PropertiesUtil.load(newTypeSettings);
+
+			String layoutTemplateId = newProps.getProperty(
+					LayoutTypePortletImpl.LAYOUT_TEMPLATE_ID);
+
+			LayoutTemplate newLayoutTemplate =
+				LayoutTemplateLocalServiceUtil.getLayoutTemplate(
+					layoutTemplateId, false, null);
+
+			String[] lostPortletIds = new String[0];
+
+			for (String columnId : newLayoutTemplate.getColumns()) {
+				String columnValue =
+					newProps.getProperty(columnId);
+
+				String[] portletIds = StringUtil.split(columnValue);
+
+				if (!previousColumns.contains(columnId)) {
+					lostPortletIds = ArrayUtil.append(
+						lostPortletIds, portletIds);
+				}
+				else {
+
+					String[] previousPortletIds = StringUtil.split(
+						previousProps.getProperty(columnId));
+
+					portletIds = appendPortletIds(
+						previousPortletIds, portletIds, portletsMergeMode);
+
+					previousProps.setProperty(
+						columnId, StringUtil.merge(portletIds));
+				}
+			}
+
+			// Add portlets in non-existent column to the first column
+
+			String columnId = previousColumns.get(0);
+
+			String[] portletIds = StringUtil.split(
+				previousProps.getProperty(columnId));
+
+			appendPortletIds(portletIds, lostPortletIds, portletsMergeMode);
+
+			previousProps.setProperty(
+				columnId, StringUtil.merge(portletIds));
+
+			layout.setTypeSettings(PropertiesUtil.toString(previousProps));
+
+		}
+		catch (IOException e) {
+			layout.setTypeSettings(newTypeSettings);
+		}
+	}
+
+	protected String[] appendPortletIds(
+		String[] portletIds, String[] newPortletIds,
+		String portletsMergeMode) {
+
+		for (String portletId : newPortletIds) {
+			if (ArrayUtil.contains(portletIds, portletId)) {
+				continue;
+			}
+
+			if (portletsMergeMode.equals(
+					PortletDataHandlerKeys.PORTLETS_MERGE_MODE_ADD_TO_BOTTOM)) {
+				portletIds = ArrayUtil.append(
+					portletIds, portletId);
+			}
+			else {
+				portletIds = ArrayUtil.append(
+					new String[]{portletId}, portletIds);
+			}
+		}
+
+		return portletIds;
 	}
 
 	private static Log _log = LogFactory.getLog(LayoutImporter.class);

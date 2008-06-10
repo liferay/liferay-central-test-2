@@ -36,6 +36,7 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.GroupNames;
@@ -241,6 +242,13 @@ public class GroupImpl extends GroupModelImpl implements Group {
 				User user = UserLocalServiceUtil.getUserById(userId);
 
 				name = user.getFullName();
+			}
+			else if (isUserGroup()) {
+				long userGroupId = getClassPK();
+
+				UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(userGroupId);
+
+				name = userGroup.getName();
 			}
 		}
 		catch (Exception e) {

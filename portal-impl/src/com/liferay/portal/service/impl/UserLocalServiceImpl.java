@@ -2368,8 +2368,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			PortletDataHandlerKeys.THEME,
 			new String[] {Boolean.FALSE.toString()});
 		parameterMap.put(
-			PortletDataHandlerKeys.ADD_AS_NEW_LAYOUTS,
-			new String[] {Boolean.TRUE.toString()});
+			PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE,
+			new String[] {PortletDataHandlerKeys.
+				LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_NAME});
+		parameterMap.put(
+			PortletDataHandlerKeys.PORTLETS_MERGE_MODE,
+			new String[] {PortletDataHandlerKeys.
+				PORTLETS_MERGE_MODE_ADD_TO_BOTTOM});
 		parameterMap.put(
 			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
 			new String[] {Boolean.FALSE.toString()});

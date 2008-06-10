@@ -421,6 +421,9 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 				<c:when test="<%= liveGroup.isUser() %>">
 					<liferay-ui:message key="edit-pages-for-user" />: <%= user2.getFullName() %>
 				</c:when>
+				<c:when test="<%= liveGroup.isUserGroup() %>">
+					<liferay-ui:message key="edit-pages-for-user-group" />: <%= group.getDescriptiveName() %>
+				</c:when>
 			</c:choose>
 		</div>
 
@@ -451,6 +454,12 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 			backURL="<%= redirect %>"
 		/>
 	</c:if>
+</c:if>
+
+<c:if test="<%= liveGroup.isUserGroup() %>">
+	<div class="portlet-msg-info">
+		<liferay-ui:message key="the-pages-configured-for-the-user-group-will-be-copied-to-the-personal-community-of-the-users-that-become-members-of-the-group" />
+	</div>
 </c:if>
 
 <c:choose>

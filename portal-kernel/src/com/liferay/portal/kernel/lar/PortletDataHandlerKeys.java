@@ -53,8 +53,6 @@ public class PortletDataHandlerKeys {
 
 	public static final String THEME = "THEME";
 
-	public static final String ADD_AS_NEW_LAYOUTS = "ADD_AS_NEW_LAYOUTS";
-
 	public static final String DELETE_MISSING_LAYOUTS =
 		"DELETE_MISSING_LAYOUTS";
 
@@ -68,5 +66,24 @@ public class PortletDataHandlerKeys {
 		"DATA_STRATEGY_COPY_AS_NEW";
 
 	public static final String USER_ID_STRATEGY = "USER_ID_STRATEGY";
+
+	public static final String LAYOUTS_IMPORT_MODE = "LAYOUTS_IMPORT_MODE";
+
+	public static final String LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_NAME =
+		"MERGE_BY_LAYOUT_NAME";
+
+	public static final String LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_ID =
+		"MERGE_BY_LAYOUT_ID";
+
+	public static final String LAYOUTS_IMPORT_MODE_ADD_AS_NEW = "ADD_AS_NEW";
+
+	public static final String PORTLETS_MERGE_MODE = "PORTLETS_MERGE_MODE";
+
+	public static final String PORTLETS_MERGE_MODE_REPLACE = "REPLACE";
+
+	public static final String PORTLETS_MERGE_MODE_ADD_TO_TOP = "ADD_TO_TOP";
+
+	public static final String PORTLETS_MERGE_MODE_ADD_TO_BOTTOM =
+		"ADD_TO_BOTTOM";
 
 }
