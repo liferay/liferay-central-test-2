@@ -61,10 +61,12 @@ else {
 		<liferay-portlet:runtime portletName="<%= PortletKeys.PORTLET_CSS %>" />
 	</c:if>
 
-	<c:if test="<%= themeDisplay.isSignedIn() && PortletLocalServiceUtil.hasPortlet(company.getCompanyId(), PortletKeys.CHAT) %>">
-		<liferay-portlet:runtime portletName="<%= PortletKeys.CHAT %>" />
-	</c:if>
-
 <%
 }
 %>
+
+<c:if test="<%= !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isStatePopUp() && !themeDisplay.isWidget() %>">
+	<c:if test="<%= themeDisplay.isSignedIn() && PortletLocalServiceUtil.hasPortlet(company.getCompanyId(), PortletKeys.CHAT) %>">
+		<liferay-portlet:runtime portletName="<%= PortletKeys.CHAT %>" />
+	</c:if>
+</c:if>
