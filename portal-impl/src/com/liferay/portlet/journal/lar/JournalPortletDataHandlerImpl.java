@@ -613,42 +613,37 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 				feed.getUuid(), context.getGroupId());
 
 			if (existingFeed == null) {
-				existingFeed =
-					JournalFeedLocalServiceUtil.addFeed(
-						feed.getUuid(), userId, plid, feedId, autoFeedId,
-						feed.getName(), feed.getDescription(), feed.getType(),
-						parentStructureId, parentTemplateId,
-						parentRenderTemplateId, feed.getDelta(),
-						feed.getOrderByCol(), feed.getOrderByType(),
-						feed.getTargetLayoutFriendlyUrl(),
-						feed.getTargetPortletId(), feed.getContentField(),
-						feed.getFeedType(), feed.getFeedVersion(),
-						addCommunityPermissions, addGuestPermissions);
-			}
-			else {
-				existingFeed =
-					JournalFeedLocalServiceUtil.updateFeed(
-						existingFeed.getGroupId(), existingFeed.getFeedId(),
-						feed.getName(), feed.getDescription(), feed.getType(),
-						parentStructureId, parentTemplateId,
-						parentRenderTemplateId, feed.getDelta(),
-						feed.getOrderByCol(), feed.getOrderByType(),
-						feed.getTargetLayoutFriendlyUrl(),
-						feed.getTargetPortletId(), feed.getContentField(),
-						feed.getFeedType(), feed.getFeedVersion());
-			}
-		}
-		else {
-			existingFeed =
-				JournalFeedLocalServiceUtil.addFeed(
-					userId, plid, feedId, autoFeedId, feed.getName(),
-					feed.getDescription(), feed.getType(), parentStructureId,
-					parentTemplateId, parentRenderTemplateId, feed.getDelta(),
-					feed.getOrderByCol(), feed.getOrderByType(),
-					feed.getTargetLayoutFriendlyUrl(),
+				existingFeed = JournalFeedLocalServiceUtil.addFeed(
+					feed.getUuid(), userId, plid, feedId, autoFeedId,
+					feed.getName(), feed.getDescription(), feed.getType(),
+					parentStructureId, parentTemplateId, parentRenderTemplateId,
+					feed.getDelta(), feed.getOrderByCol(),
+					feed.getOrderByType(), feed.getTargetLayoutFriendlyUrl(),
 					feed.getTargetPortletId(), feed.getContentField(),
 					feed.getFeedType(), feed.getFeedVersion(),
 					addCommunityPermissions, addGuestPermissions);
+			}
+			else {
+				existingFeed = JournalFeedLocalServiceUtil.updateFeed(
+					existingFeed.getGroupId(), existingFeed.getFeedId(),
+					feed.getName(), feed.getDescription(), feed.getType(),
+					parentStructureId, parentTemplateId, parentRenderTemplateId,
+					feed.getDelta(), feed.getOrderByCol(),
+					feed.getOrderByType(), feed.getTargetLayoutFriendlyUrl(),
+					feed.getTargetPortletId(), feed.getContentField(),
+					feed.getFeedType(), feed.getFeedVersion());
+			}
+		}
+		else {
+			existingFeed = JournalFeedLocalServiceUtil.addFeed(
+				userId, plid, feedId, autoFeedId, feed.getName(),
+				feed.getDescription(), feed.getType(), parentStructureId,
+				parentTemplateId, parentRenderTemplateId, feed.getDelta(),
+				feed.getOrderByCol(), feed.getOrderByType(),
+				feed.getTargetLayoutFriendlyUrl(), feed.getTargetPortletId(),
+				feed.getContentField(), feed.getFeedType(),
+				feed.getFeedVersion(), addCommunityPermissions,
+				addGuestPermissions);
 		}
 
 		feedIds.put(feedId, existingFeed.getFeedId());
@@ -924,11 +919,9 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 				}
 			}
 
-			boolean exportArticles = context.getBooleanParameter(_NAMESPACE, "articles");
-
 			Element articlesEl = root.addElement("articles");
 
-			if (exportArticles) {
+			if (context.getBooleanParameter(_NAMESPACE, "articles")) {
 				List<JournalArticle> articles =
 					JournalArticleUtil.findByGroupId(context.getGroupId());
 
@@ -994,8 +987,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 				JournalFeed.class);
 
 			for (Element feedEl : feedEls) {
-				importFeed(
-					context, structureIds, templateIds, feedIds, feedEl);
+				importFeed(context, structureIds, templateIds, feedIds, feedEl);
 			}
 
 			if (context.getBooleanParameter(_NAMESPACE, "articles")) {
@@ -1075,6 +1067,19 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		return sm.toString();
 	}
 
+	protected static String getArticleSmallImagePath(
+			PortletDataContext context, JournalArticle article)
+		throws PortalException, SystemException {
+
+		StringMaker sm = new StringMaker();
+
+		sm.append(context.getPortletPath(PortletKeys.JOURNAL));
+		sm.append("/articles/thumbnail.");
+		sm.append(article.getSmallImageType());
+
+		return sm.toString();
+	}
+
 	protected static String getFeedPath(
 		PortletDataContext context, JournalFeed feed) {
 
@@ -1097,19 +1102,6 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		sm.append("/templates/");
 		sm.append(template.getTemplateId());
 		sm.append(".xml");
-
-		return sm.toString();
-	}
-
-	protected static String getArticleSmallImagePath(
-			PortletDataContext context, JournalArticle article)
-		throws PortalException, SystemException {
-
-		StringMaker sm = new StringMaker();
-
-		sm.append(context.getPortletPath(PortletKeys.JOURNAL));
-		sm.append("/articles/thumbnail.");
-		sm.append(article.getSmallImageType());
 
 		return sm.toString();
 	}
@@ -1155,7 +1147,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 	private static final PortletDataHandlerBoolean _articles =
 		new PortletDataHandlerBoolean(_NAMESPACE, "articles", true, false,
-		new PortletDataHandlerControl[]{_images, _comments, _ratings, _tags});
+		new PortletDataHandlerControl[] {_images, _comments, _ratings, _tags});
 
 	private static final PortletDataHandlerBoolean
 		_structuresTemplatesAndFeeds = new PortletDataHandlerBoolean(
