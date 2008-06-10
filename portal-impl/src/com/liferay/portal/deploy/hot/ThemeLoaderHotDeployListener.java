@@ -24,7 +24,6 @@ package com.liferay.portal.deploy.hot;
 
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
-import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.theme.ThemeLoaderFactory;
 import com.liferay.portal.velocity.VelocityContextPool;
@@ -41,74 +40,78 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class ThemeLoaderHotDeployListener implements HotDeployListener {
+public class ThemeLoaderHotDeployListener extends BaseHotDeployListener {
 
 	public void invokeDeploy(HotDeployEvent event) throws HotDeployException {
-		String servletContextName = null;
-
 		try {
-			ServletContext ctx = event.getServletContext();
-
-			servletContextName = ctx.getServletContextName();
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("Invoking deploy for " + servletContextName);
-			}
-
-			String[] xmls = new String[] {
-				HttpUtil.URLtoString(
-					ctx.getResource("/WEB-INF/liferay-theme-loader.xml"))
-			};
-
-			if (xmls[0] == null) {
-				return;
-			}
-
-			if (_log.isInfoEnabled()) {
-				_log.info("Registering theme loader for " + servletContextName);
-			}
-
-			ThemeLoaderFactory.init(servletContextName, ctx, xmls);
+			doInvokeDeploy(event);
 		}
 		catch (Exception e) {
-			throw new HotDeployException(
-				"Error registering theme loader for " + servletContextName, e);
+			throwHotDeployException(
+				event, "Error registering theme loader for ", e);
 		}
 	}
 
 	public void invokeUndeploy(HotDeployEvent event) throws HotDeployException {
-		String servletContextName = null;
-
 		try {
-			ServletContext ctx = event.getServletContext();
-
-			servletContextName = ctx.getServletContextName();
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("Invoking undeploy for " + servletContextName);
-			}
-
-			boolean value = ThemeLoaderFactory.destroy(servletContextName);
-
-			if (value) {
-				if (_log.isInfoEnabled()) {
-					_log.info(
-						"Unregistering theme loader for " + servletContextName);
-				}
-
-				VelocityContextPool.remove(servletContextName);
-
-				if (_log.isInfoEnabled()) {
-					_log.info(
-						"Theme loader for " + servletContextName +
-							" unregistered successfully");
-				}
-			}
+			doInvokeUndeploy(event);
 		}
-		catch (Exception e2) {
-			throw new HotDeployException(
-				"Error unregistering theme loader for " + servletContextName,
-				e2);
+		catch (Exception e) {
+			throwHotDeployException(
+				event, "Error unregistering theme loader for ", e);
+		}
+	}
+
+	protected void doInvokeDeploy(HotDeployEvent event) throws Exception {
+		ServletContext ctx = event.getServletContext();
+
+		String servletContextName = ctx.getServletContextName();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Invoking deploy for " + servletContextName);
+		}
+
+		String[] xmls = new String[] {
+			HttpUtil.URLtoString(
+				ctx.getResource("/WEB-INF/liferay-theme-loader.xml"))
+		};
+
+		if (xmls[0] == null) {
+			return;
+		}
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Registering theme loader for " + servletContextName);
+		}
+
+		ThemeLoaderFactory.init(servletContextName, ctx, xmls);
+	}
+
+	protected void doInvokeUndeploy(HotDeployEvent event) throws Exception {
+		ServletContext ctx = event.getServletContext();
+
+		String servletContextName = ctx.getServletContextName();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Invoking undeploy for " + servletContextName);
+		}
+
+		boolean value = ThemeLoaderFactory.destroy(servletContextName);
+
+		if (!value) {
+			return;
+		}
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Unregistering theme loader for " + servletContextName);
+		}
+
+		VelocityContextPool.remove(servletContextName);
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Theme loader for " + servletContextName +
+					" unregistered successfully");
 		}
 	}
 

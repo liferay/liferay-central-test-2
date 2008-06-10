@@ -24,7 +24,6 @@ package com.liferay.portal.deploy.hot;
 
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
-import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
@@ -50,113 +49,115 @@ import org.apache.commons.logging.LogFactory;
  * @author Ivica Cardic
  *
  */
-public class ThemeHotDeployListener implements HotDeployListener {
+public class ThemeHotDeployListener extends BaseHotDeployListener {
 
 	public void invokeDeploy(HotDeployEvent event) throws HotDeployException {
-		String servletContextName = null;
-
 		try {
-			ServletContext ctx = event.getServletContext();
-
-			servletContextName = ctx.getServletContextName();
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("Invoking deploy for " + servletContextName);
-			}
-
-			String[] xmls = new String[] {
-				HttpUtil.URLtoString(
-					ctx.getResource("/WEB-INF/liferay-look-and-feel.xml"))
-			};
-
-			if (xmls[0] == null) {
-				return;
-			}
-
-			if (_log.isInfoEnabled()) {
-				_log.info("Registering themes for " + servletContextName);
-			}
-
-			List<String> themeIds = ThemeLocalServiceUtil.init(
-				servletContextName, ctx, null, true, xmls,
-				event.getPluginPackage());
-
-			VelocityContextPool.put(servletContextName, ctx);
-
-			_vars.put(servletContextName, themeIds);
-
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Themes for " + servletContextName +
-						" registered successfully");
-			}
+			doInvokeDeploy(event);
 		}
 		catch (Exception e) {
-			throw new HotDeployException(
-				"Error registering themes for " + servletContextName, e);
+			throwHotDeployException(event, "Error registering themes for ", e);
 		}
 	}
 
 	public void invokeUndeploy(HotDeployEvent event) throws HotDeployException {
-		String servletContextName = null;
-
 		try {
-			ServletContext ctx = event.getServletContext();
+			doInvokeUndeploy(event);
+		}
+		catch (Exception e) {
+			throwHotDeployException(
+				event, "Error unregistering themes for ", e);
+		}
+	}
 
-			servletContextName = ctx.getServletContextName();
+	protected void doInvokeDeploy(HotDeployEvent event) throws Exception {
+		ServletContext ctx = event.getServletContext();
 
-			if (_log.isDebugEnabled()) {
-				_log.debug("Invoking undeploy for " + servletContextName);
+		String servletContextName = ctx.getServletContextName();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Invoking deploy for " + servletContextName);
+		}
+
+		String[] xmls = new String[] {
+			HttpUtil.URLtoString(
+				ctx.getResource("/WEB-INF/liferay-look-and-feel.xml"))
+		};
+
+		if (xmls[0] == null) {
+			return;
+		}
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Registering themes for " + servletContextName);
+		}
+
+		List<String> themeIds = ThemeLocalServiceUtil.init(
+			servletContextName, ctx, null, true, xmls,
+			event.getPluginPackage());
+
+		VelocityContextPool.put(servletContextName, ctx);
+
+		_vars.put(servletContextName, themeIds);
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Themes for " + servletContextName +
+					" registered successfully");
+		}
+	}
+
+	protected void doInvokeUndeploy(HotDeployEvent event) throws Exception {
+		ServletContext ctx = event.getServletContext();
+
+		String servletContextName = ctx.getServletContextName();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Invoking undeploy for " + servletContextName);
+		}
+
+		List<String> themeIds = _vars.remove(servletContextName);
+
+		if (themeIds != null) {
+			if (_log.isInfoEnabled()) {
+				_log.info("Unregistering themes for " + servletContextName);
 			}
-
-			List<String> themeIds = _vars.remove(servletContextName);
-
-			if (themeIds != null) {
-				if (_log.isInfoEnabled()) {
-					_log.info("Unregistering themes for " + servletContextName);
-				}
-
-				try {
-					ThemeLocalServiceUtil.uninstallThemes(themeIds);
-				}
-				catch (Exception e1) {
-					_log.error(e1.getMessage());
-				}
-			}
-			else {
-				return;
-			}
-
-			// LEP-2057
-
-			ClassLoader contextClassLoader =
-				Thread.currentThread().getContextClassLoader();
 
 			try {
-				Thread.currentThread().setContextClassLoader(
-					PortalClassLoaderUtil.getClassLoader());
-
-				VelocityContextPool.remove(servletContextName);
-
-				LiferayResourceCacheUtil.clear();
-
-				LastModifiedCSS.clear();
-				LastModifiedJavaScript.clear();
+				ThemeLocalServiceUtil.uninstallThemes(themeIds);
 			}
-			finally {
-				Thread.currentThread().setContextClassLoader(
-					contextClassLoader);
-			}
-
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Themes for " + servletContextName +
-						" unregistered successfully");
+			catch (Exception e) {
+				_log.error(e, e);
 			}
 		}
-		catch (Exception e2) {
-			throw new HotDeployException(
-				"Error unregistering themes for " + servletContextName, e2);
+		else {
+			return;
+		}
+
+		// LEP-2057
+
+		ClassLoader contextClassLoader =
+			Thread.currentThread().getContextClassLoader();
+
+		try {
+			Thread.currentThread().setContextClassLoader(
+				PortalClassLoaderUtil.getClassLoader());
+
+			VelocityContextPool.remove(servletContextName);
+
+			LiferayResourceCacheUtil.clear();
+
+			LastModifiedCSS.clear();
+			LastModifiedJavaScript.clear();
+		}
+		finally {
+			Thread.currentThread().setContextClassLoader(contextClassLoader);
+		}
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Themes for " + servletContextName +
+					" unregistered successfully");
 		}
 	}
 

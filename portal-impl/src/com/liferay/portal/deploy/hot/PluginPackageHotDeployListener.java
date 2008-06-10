@@ -24,7 +24,6 @@ package com.liferay.portal.deploy.hot;
 
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
-import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -54,7 +53,7 @@ import org.dom4j.DocumentException;
  * @author Jorge Ferrer
  *
  */
-public class PluginPackageHotDeployListener implements HotDeployListener {
+public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 
 	public static PluginPackage readPluginPackage(ServletContext ctx)
 		throws DocumentException, IOException {
@@ -161,75 +160,79 @@ public class PluginPackageHotDeployListener implements HotDeployListener {
 	}
 
 	public void invokeDeploy(HotDeployEvent event) throws HotDeployException {
-		String servletContextName = null;
-
 		try {
-			ServletContext ctx = event.getServletContext();
-
-			servletContextName = ctx.getServletContextName();
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("Invoking deploy for " + servletContextName);
-			}
-
-			if (ctx.getResource("/WEB-INF/liferay-theme-loader.xml") != null) {
-				return;
-			}
-
-			PluginPackage pluginPackage = readPluginPackage(ctx);
-
-			if (pluginPackage != null) {
-				pluginPackage.setContext(servletContextName);
-
-				event.setPluginPackage(pluginPackage);
-
-				PluginPackageUtil.registerInstalledPluginPackage(pluginPackage);
-
-				if (_log.isInfoEnabled()) {
-					_log.info(
-						"Plugin package " + pluginPackage.getModuleId() +
-							" registered successfully");
-				}
-			}
+			doInvokeDeploy(event);
 		}
 		catch (Exception e) {
-			throw new HotDeployException(
-				"Error registering plugins for " + servletContextName,
-				e);
+			throwHotDeployException(event, "Error registering plugins for ", e);
 		}
 	}
 
 	public void invokeUndeploy(HotDeployEvent event) throws HotDeployException {
-		String servletContextName = null;
-
 		try {
-			ServletContext ctx = event.getServletContext();
-
-			servletContextName = ctx.getServletContextName();
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("Invoking deploy for " + servletContextName);
-			}
-
-			PluginPackage pluginPackage = readPluginPackage(ctx);
-
-			if (pluginPackage != null) {
-				event.setPluginPackage(pluginPackage);
-
-				PluginPackageUtil.unregisterInstalledPluginPackage(
-					pluginPackage);
-
-				if (_log.isInfoEnabled()) {
-					_log.info(
-						"Plugin package " + pluginPackage.getModuleId() +
-							" unregistered successfully");
-				}
-			}
+			doInvokeUndeploy(event);
 		}
 		catch (Exception e) {
-			throw new HotDeployException(
-				"Error unregistering plugins for " + servletContextName,
-				e);
+			throwHotDeployException(
+				event, "Error unregistering plugins for ", e);
+		}
+	}
+
+	protected void doInvokeDeploy(HotDeployEvent event) throws Exception {
+		ServletContext ctx = event.getServletContext();
+
+		String servletContextName = ctx.getServletContextName();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Invoking deploy for " + servletContextName);
+		}
+
+		if (ctx.getResource("/WEB-INF/liferay-theme-loader.xml") != null) {
+			return;
+		}
+
+		PluginPackage pluginPackage = readPluginPackage(ctx);
+
+		if (pluginPackage == null) {
+			return;
+		}
+
+		pluginPackage.setContext(servletContextName);
+
+		event.setPluginPackage(pluginPackage);
+
+		PluginPackageUtil.registerInstalledPluginPackage(pluginPackage);
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Plugin package " + pluginPackage.getModuleId() +
+					" registered successfully");
+		}
+	}
+
+	protected void doInvokeUndeploy(HotDeployEvent event) throws Exception {
+		ServletContext ctx = event.getServletContext();
+
+		String servletContextName = ctx.getServletContextName();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Invoking deploy for " + servletContextName);
+		}
+
+		PluginPackage pluginPackage = readPluginPackage(ctx);
+
+		if (pluginPackage == null) {
+			return;
+		}
+
+		event.setPluginPackage(pluginPackage);
+
+		PluginPackageUtil.unregisterInstalledPluginPackage(pluginPackage);
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Plugin package " + pluginPackage.getModuleId() +
+					" unregistered successfully");
 		}
 	}
 
