@@ -91,6 +91,18 @@ double feedVersion = BeanParamUtil.getDouble(feed, request, "feedVersion", RSSUt
 int delta = BeanParamUtil.getInteger(feed, request, "delta", 10);
 String orderByCol = BeanParamUtil.getString(feed, request, "orderByCol");
 String orderByType = BeanParamUtil.getString(feed, request, "orderByType");
+
+ResourceURL feedUrl = null;
+
+if (feed != null) {
+	long targetLayoutPlid = PortalUtil.getPlidFromFriendlyURL(feed.getCompanyId(), feed.getTargetLayoutFriendlyUrl());
+
+	feedUrl = new PortletURLImpl(request, PortletKeys.JOURNAL, targetLayoutPlid, PortletRequest.RESOURCE_PHASE);
+	feedUrl.setCacheability(ResourceURL.FULL);
+	feedUrl.setParameter("struts_action", "/journal/rss");
+	feedUrl.setParameter("groupId", String.valueOf(groupId));
+	feedUrl.setParameter("feedId", String.valueOf(feedId));
+}
 %>
 
 <script type="text/javascript">
@@ -270,15 +282,8 @@ String orderByType = BeanParamUtil.getString(feed, request, "orderByType");
 				<liferay-ui:message key="url" />
 			</td>
 			<td>
-
-				<%
-				long targetLayoutPlid = PortalUtil.getPlidFromFriendlyURL(feed.getCompanyId(), feed.getTargetLayoutFriendlyUrl());
-
-				Layout targetLayout = LayoutLocalServiceUtil.getLayout(targetLayoutPlid);
-				%>
-
 				<liferay-ui:input-resource
-					url='<%= PortalUtil.getLayoutFriendlyURL(targetLayout, themeDisplay) + "/journal/rss/" + groupId + "/" + feedId %>'
+					url='<%= feedUrl.toString() %>'
 				/>
 			</td>
 		</tr>
@@ -548,7 +553,7 @@ String orderByType = BeanParamUtil.getString(feed, request, "orderByType");
 <input type="submit" value="<liferay-ui:message key="save" />" />
 
 <c:if test="<%= feed != null %>">
-	<input type="button" value="<liferay-ui:message key="preview" />" onClick="window.open('<%= themeDisplay.getPortalURL() + feed.getTargetLayoutFriendlyUrl() + "/journal/rss/" + groupId + "/" + feedId %>', 'feed');" />
+	<input type="button" value="<liferay-ui:message key="preview" />" onClick="window.open('<%= feedUrl.toString() %>', 'feed');" />
 </c:if>
 
 <input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />

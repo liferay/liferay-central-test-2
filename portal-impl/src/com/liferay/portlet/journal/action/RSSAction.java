@@ -25,7 +25,6 @@ package com.liferay.portlet.journal.action;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringMaker;
@@ -68,13 +67,13 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.portlet.PortletConfig;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
+import javax.portlet.PortletRequest;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import org.dom4j.Document;
@@ -85,30 +84,26 @@ import org.dom4j.XPath;
 /**
  * <a href="RSSAction.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Aug�
+ * @author Raymond Augé
  *
  */
 public class RSSAction extends PortletAction {
 
-	public ActionForward render(
+	public void serveResource(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+			ResourceRequest req, ResourceResponse res)
 		throws Exception {
 
-		if (req.getWindowState() == LiferayWindowState.EXCLUSIVE) {
-			res.setContentType(ContentTypes.TEXT_XML_UTF8);
+		res.setContentType(ContentTypes.TEXT_XML_UTF8);
 
-			OutputStream os = res.getPortletOutputStream();
+		OutputStream os = res.getPortletOutputStream();
 
-			try {
-				os.write(getRSS(req));
-			}
-			finally {
-				os.close();
-			}
+		try {
+			os.write(getRSS(req));
 		}
-
-		return null;
+		finally {
+			os.close();
+		}
 	}
 
 	protected String exportToRSS(
@@ -238,7 +233,7 @@ public class RSSAction extends PortletAction {
 		return sm.toString();
 	}
 
-	protected byte[] getRSS(RenderRequest req) throws Exception {
+	protected byte[] getRSS(PortletRequest req) throws Exception {
 		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
 			WebKeys.THEME_DISPLAY);
 

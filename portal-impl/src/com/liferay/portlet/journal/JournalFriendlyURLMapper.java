@@ -35,6 +35,7 @@ import java.util.Map;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
+import javax.portlet.ResourceURL;
 
 /**
  * <a href="JournalFriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
@@ -50,9 +51,8 @@ public class JournalFriendlyURLMapper extends BaseFriendlyURLMapper {
 		String strutsAction = GetterUtil.getString(
 			portletURL.getParameter("struts_action"));
 
-		if ((strutsAction.equals("/journal/rss")) &&
-			(portletURL.getWindowState() == LiferayWindowState.EXCLUSIVE) &&
-			(portletURL.getLifecycle().equals(PortletRequest.RENDER_PHASE))) {
+		if (strutsAction.equals("/journal/rss") &&
+			portletURL.getLifecycle().equals(PortletRequest.RESOURCE_PHASE)) {
 
 			String groupId = portletURL.getParameter("groupId");
 			String feedId = portletURL.getParameter("feedId");
@@ -66,7 +66,9 @@ public class JournalFriendlyURLMapper extends BaseFriendlyURLMapper {
 		}
 
 		if (Validator.isNotNull(friendlyURLPath)) {
+			portletURL.addParameterIncludedInPath("p_p_cacheability");
 			portletURL.addParameterIncludedInPath("p_p_id");
+			portletURL.addParameterIncludedInPath("p_p_lifecycle");
 			portletURL.addParameterIncludedInPath("struts_action");
 		}
 
@@ -87,10 +89,11 @@ public class JournalFriendlyURLMapper extends BaseFriendlyURLMapper {
 		String[] parts = StringUtil.split(friendlyURLPath, StringPool.SLASH);
 
 		if ((parts.length >= 4) && parts[2].equals("rss")) {
+			addParam(params, "p_p_cacheability", ResourceURL.FULL);
+
 			addParam(params, "p_p_id", _PORTLET_ID);
-			addParam(params, "p_p_lifecycle", "0");
-			addParam(params, "p_p_state", LiferayWindowState.EXCLUSIVE);
-			addParam(params, "p_p_mode", PortletMode.VIEW);
+
+			addParam(params, "p_p_lifecycle", "2");
 
 			addParam(params, "struts_action", "/journal/rss");
 
