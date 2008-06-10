@@ -34,7 +34,8 @@ import java.io.File;
  */
 public interface WikiImporter {
 
-	public void importPages(long userId, WikiNode node, File file)
+	public void importPages(
+			long userId, WikiNode node, File file, File emailsFile)
 		throws Exception;
 
 }

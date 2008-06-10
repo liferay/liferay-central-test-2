@@ -305,7 +305,7 @@ public class WikiNodeServiceHttp {
 	}
 
 	public static void importPages(HttpPrincipal httpPrincipal, long nodeId,
-		java.io.File file)
+		java.io.File file, java.io.File emailsFile)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -317,8 +317,15 @@ public class WikiNodeServiceHttp {
 				paramObj1 = new NullWrapper("java.io.File");
 			}
 
+			Object paramObj2 = emailsFile;
+
+			if (emailsFile == null) {
+				paramObj2 = new NullWrapper("java.io.File");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(WikiNodeServiceUtil.class.getName(),
-					"importPages", new Object[] { paramObj0, paramObj1 });
+					"importPages",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);

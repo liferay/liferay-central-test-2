@@ -45,11 +45,17 @@ import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 import com.liferay.portlet.wiki.translators.MediaWikiToCreoleTranslator;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -57,7 +63,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.dom4j.Document;
-import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
@@ -70,34 +75,47 @@ import org.dom4j.io.SAXReader;
  */
 public class MediaWikiImporter implements WikiImporter {
 
-	public void importPages(long userId, WikiNode node, File file)
+	public void importPages(
+			long userId, WikiNode node, File file, File emailsFile)
 		throws PortalException, SystemException {
 
 		try {
 			SAXReader saxReader = new SAXReader();
 
 			Document doc = saxReader.read(file);
+			Map<String, String> emailsMap = readEmailsFile(emailsFile);
 
 			Element root = doc.getRootElement();
 
 			List<String> specialNamespaces = readSpecialNamespaces(root);
 
 			processSpecialPages(userId, node, root, specialNamespaces);
-			processRegularPages(userId, node, root, specialNamespaces);
+			processRegularPages(
+				userId, node, root, specialNamespaces, emailsMap);
 		}
-		catch (DocumentException e) {
+		catch (Exception e) {
 			throw new PortalException(e);
 		}
 	}
 
-	protected long getUserId(long userId, WikiNode node, String author)
+	protected long getUserId(
+			long userId, WikiNode node, String author,
+			Map<String, String> emailsMap)
 		throws PortalException, SystemException {
 
 		User user = null;
 
+		String emailAddress = emailsMap.get(author);
+
 		try {
-			user = UserLocalServiceUtil.getUserByScreenName(
-				node.getCompanyId(), author);
+			if (Validator.isNull(emailAddress)) {
+				user = UserLocalServiceUtil.getUserByScreenName(
+					node.getCompanyId(), author.toLowerCase());
+			}
+			else {
+				user = UserLocalServiceUtil.getUserByEmailAddress(
+					node.getCompanyId(), emailAddress);
+			}
 		}
 		catch (NoSuchUserException e) {
 			user = UserLocalServiceUtil.getUserById(userId);
@@ -108,11 +126,11 @@ public class MediaWikiImporter implements WikiImporter {
 
 	protected void importPage(
 			long userId, String author, WikiNode node, String title,
-			String content)
+			String content, Map<String, String> emailsMap)
 		throws PortalException, SystemException {
 
 		try {
-			long authorUserId = getUserId(userId, node, author);
+			long authorUserId = getUserId(userId, node, author, emailsMap);
 
 			String[] tagsEntries = readTagsEntries(userId, node, content);
 
@@ -182,7 +200,7 @@ public class MediaWikiImporter implements WikiImporter {
 
 	protected void processRegularPages(
 		long userId, WikiNode node, Element root,
-		List<String> specialNamespaces) {
+		List<String> specialNamespaces, Map<String, String> emailsMap) {
 
 		ProgressTracker progressTracker =
 			ProgressTrackerThreadLocal.getProgressTracker();
@@ -222,7 +240,7 @@ public class MediaWikiImporter implements WikiImporter {
 			String content = lastRevisionEl.elementText("text");
 
 			try {
-				importPage(userId, author, node, title, content);
+				importPage(userId, author, node, title, content, emailsMap);
 			}
 			catch (Exception e) {
 				_log.warn(
@@ -297,6 +315,39 @@ public class MediaWikiImporter implements WikiImporter {
 				progressTracker.updateProgress((i * 10) / total);
 			}
 		}
+	}
+
+	protected Map<String, String> readEmailsFile(File emailsFile)
+		throws IOException {
+
+		if (emailsFile == null) {
+			return Collections.EMPTY_MAP;
+		}
+
+		Map<String, String> emailsMap = new HashMap<String, String>();
+
+		BufferedReader reader = new BufferedReader(new FileReader(emailsFile));
+
+		String line = reader.readLine();
+
+		while (line != null) {
+
+			String[] array = StringUtil.split(line);
+
+			if ((array.length == 2) && (Validator.isNotNull(array[0])) &&
+					(Validator.isNotNull(array[1]))) {
+				emailsMap.put(array[0], array[1]);
+			}
+			else {
+				_log.info(
+					"Ignoring line " + line + " because it does not contain" +
+						" exactly 2 columns");
+			}
+
+			line = reader.readLine();
+		}
+
+		return emailsMap;
 	}
 
 	protected String readRedirectTitle(String content) {

@@ -61,6 +61,16 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 		<liferay-ui:icon-help message="import-wiki-pages-help" />
 	</td>
 </tr>
+<tr>
+	<td>
+		<liferay-ui:message key="user-emails-file" /> (<liferay-ui:message key="optional" />)
+	</td>
+	<td>
+		<input name="<portlet:namespace />emailsFile" type="file" />
+
+		<liferay-ui:icon-help message="import-wiki-emails-file-help" />
+	</td>
+</tr>
 </table>
 
 <br />
