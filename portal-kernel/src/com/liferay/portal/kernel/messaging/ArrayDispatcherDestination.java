@@ -51,7 +51,7 @@ public abstract class ArrayDispatcherDestination extends BaseDestination {
 	}
 
 	public synchronized void register(MessageListener listener) {
-		listener = new MessageListenerWrapper(listener);
+		listener = new MessageListenerInvoker(listener);
 
 		Set<MessageListener> listeners = new HashSet<MessageListener>(
 			Arrays.asList(_listeners));
@@ -83,7 +83,7 @@ public abstract class ArrayDispatcherDestination extends BaseDestination {
 	}
 
 	public synchronized boolean unregister(MessageListener listener) {
-		listener = new MessageListenerWrapper(listener);
+		listener = new MessageListenerInvoker(listener);
 
 		List<MessageListener> listeners = Arrays.asList(_listeners);
 

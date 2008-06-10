@@ -23,12 +23,41 @@
 package com.liferay.portal.kernel.messaging;
 
 /**
- * <a href="MessageListenerWrapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="MessageListenerInvoker.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  *
  */
-public class MessageListenerWrapper implements MessageListener {
+public class MessageListenerInvoker implements MessageListener {
+
+	public MessageListenerInvoker(MessageListener messageListener) {
+		this(
+			messageListener,
+			Thread.currentThread().getContextClassLoader());
+	}
+
+	public MessageListenerInvoker(
+		MessageListener messageListener, ClassLoader classLoader) {
+
+		_messageListener = messageListener;
+		_classLoader = classLoader;
+	}
+
+	public boolean equals(Object obj) {
+		MessageListenerInvoker messageListenerInvoker =
+			(MessageListenerInvoker)obj;
+
+		return _messageListener.equals(
+			messageListenerInvoker.getMessageListener());
+	}
+
+	public MessageListener getMessageListener() {
+		return _messageListener;
+	}
+
+	public int hashCode() {
+		return _messageListener.hashCode();
+	}
 
 	public void receive(String message) {
 		ClassLoader contextClassLoader =
@@ -43,35 +72,6 @@ public class MessageListenerWrapper implements MessageListener {
 			Thread.currentThread().setContextClassLoader(
 				contextClassLoader);
 		}
-	}
-
-	public boolean equals(Object obj) {
-		MessageListenerWrapper messageListenerWrapper =
-			(MessageListenerWrapper)obj;
-
-		return _messageListener.equals(
-			messageListenerWrapper.getMessageListener());
-	}
-
-	public int hashCode() {
-		return _messageListener.hashCode();
-	}
-
-	protected MessageListenerWrapper(MessageListener messageListener) {
-		this(
-			messageListener,
-			Thread.currentThread().getContextClassLoader());
-	}
-
-	protected MessageListenerWrapper(
-		MessageListener messageListener, ClassLoader classLoader) {
-
-		_messageListener = messageListener;
-		_classLoader = classLoader;
-	}
-
-	protected MessageListener getMessageListener() {
-		return _messageListener;
 	}
 
 	private MessageListener _messageListener;
