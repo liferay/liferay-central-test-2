@@ -51,7 +51,7 @@ public abstract class IteratorDispatcherDestination extends BaseDestination {
 	}
 
 	public void register(MessageListener listener) {
-		listener = new MessageListenerInvoker(listener);
+		listener = new InvokerMessageListener(listener);
 
 		_listeners.add(listener);
 	}
@@ -77,7 +77,7 @@ public abstract class IteratorDispatcherDestination extends BaseDestination {
 	}
 
 	public boolean unregister(MessageListener listener) {
-		listener = new MessageListenerInvoker(listener);
+		listener = new InvokerMessageListener(listener);
 
 		return _listeners.remove(listener);
 	}

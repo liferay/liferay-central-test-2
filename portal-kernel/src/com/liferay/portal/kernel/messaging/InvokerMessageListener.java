@@ -23,20 +23,20 @@
 package com.liferay.portal.kernel.messaging;
 
 /**
- * <a href="MessageListenerInvoker.java.html"><b><i>View Source</i></b></a>
+ * <a href="InvokerMessageListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  *
  */
-public class MessageListenerInvoker implements MessageListener {
+public class InvokerMessageListener implements MessageListener {
 
-	public MessageListenerInvoker(MessageListener messageListener) {
+	public InvokerMessageListener(MessageListener messageListener) {
 		this(
 			messageListener,
 			Thread.currentThread().getContextClassLoader());
 	}
 
-	public MessageListenerInvoker(
+	public InvokerMessageListener(
 		MessageListener messageListener, ClassLoader classLoader) {
 
 		_messageListener = messageListener;
@@ -44,8 +44,8 @@ public class MessageListenerInvoker implements MessageListener {
 	}
 
 	public boolean equals(Object obj) {
-		MessageListenerInvoker messageListenerInvoker =
-			(MessageListenerInvoker)obj;
+		InvokerMessageListener messageListenerInvoker =
+			(InvokerMessageListener)obj;
 
 		return _messageListener.equals(
 			messageListenerInvoker.getMessageListener());
@@ -69,8 +69,7 @@ public class MessageListenerInvoker implements MessageListener {
 			_messageListener.receive(message);
 		}
 		finally {
-			Thread.currentThread().setContextClassLoader(
-				contextClassLoader);
+			Thread.currentThread().setContextClassLoader(contextClassLoader);
 		}
 	}
 
