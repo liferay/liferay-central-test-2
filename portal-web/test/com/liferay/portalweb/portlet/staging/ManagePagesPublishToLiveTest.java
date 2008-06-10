@@ -144,5 +144,8 @@ public class ManagePagesPublishToLiveTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click("link=View Live Page");
+		selenium.waitForPageToLoad("30000");
 	}
 }

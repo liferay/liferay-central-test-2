@@ -43,5 +43,7 @@ public class LoginTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//a[@id=\"my-community-private-pages\"]");
 		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Enterprise Admin Test Page");
+		selenium.waitForPageToLoad("30000");
 	}
 }

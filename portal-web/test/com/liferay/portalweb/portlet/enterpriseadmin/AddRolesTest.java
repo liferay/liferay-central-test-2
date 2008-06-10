@@ -32,6 +32,22 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class AddRolesTest extends BaseTestCase {
 	public void testAddRoles() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Roles")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=Roles");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add Role']");

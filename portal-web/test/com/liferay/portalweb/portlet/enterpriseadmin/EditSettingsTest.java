@@ -32,6 +32,22 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class EditSettingsTest extends BaseTestCase {
 	public void testEditSettings() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=\u00bb")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=\u00bb");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Settings");

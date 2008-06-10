@@ -32,6 +32,22 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class ApplyUserGroupTest extends BaseTestCase {
 	public void testApplyUserGroup() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Assign Members")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=Assign Members");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Available");

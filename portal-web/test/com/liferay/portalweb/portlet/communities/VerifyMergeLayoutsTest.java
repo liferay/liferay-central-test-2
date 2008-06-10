@@ -225,7 +225,7 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@id=\"banner\"]/div/div/ul/li[6]/ul/li[5]/ul/li[1]/a[1]")) {
+							"//div[@id=\"banner\"]/div[1]/div[2]/ul/li[5]/ul/li[5]/ul/li[1]/a[1]")) {
 					break;
 				}
 			}
@@ -236,7 +236,7 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 		}
 
 		selenium.click(
-			"//div[@id=\"banner\"]/div/div/ul/li[6]/ul/li[5]/ul/li[1]/a[1]");
+			"//div[@id=\"banner\"]/div[1]/div[2]/ul/li[5]/ul/li[5]/ul/li[1]/a[1]");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

@@ -38,25 +38,6 @@ public class ConfirmThirdBlogOnLiveTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=View Live Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=View Live Page");
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
 				if (selenium.isElementPresent(
 							"//input[@value='Add Blog Entry']")) {
 					break;

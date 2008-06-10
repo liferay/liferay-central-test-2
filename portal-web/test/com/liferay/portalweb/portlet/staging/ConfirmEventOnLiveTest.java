@@ -83,7 +83,21 @@ public class ConfirmEventOnLiveTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		verifyTrue(selenium.isTextPresent("Selenium Testing Party"));
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("Selenium Testing Party")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
