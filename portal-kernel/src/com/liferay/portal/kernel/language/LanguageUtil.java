@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import java.util.Locale;
 
 import javax.portlet.PortletRequest;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
