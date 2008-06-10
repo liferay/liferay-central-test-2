@@ -81,7 +81,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.addModifiedDate();
 
 		doc.addKeyword("folderId", folderId);
-		doc.addKeyword("imageId", imageId);
+		doc.addKeyword(Field.ENTRY_CLASS_PK, imageId);
 
 		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
@@ -123,10 +123,10 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		// Portlet URL
 
-		String imageId = doc.get("imageId");
+		String imageId = doc.get(Field.ENTRY_CLASS_PK);
 
 		portletURL.setParameter("struts_action", "/image_gallery/edit_image");
-		portletURL.setParameter("imageId", imageId);
+		portletURL.setParameter(Field.ENTRY_CLASS_PK, imageId);
 
 		return new DocumentSummary(title, content, portletURL);
 	}

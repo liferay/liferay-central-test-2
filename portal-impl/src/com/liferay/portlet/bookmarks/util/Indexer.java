@@ -81,7 +81,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.addModifiedDate();
 
 		doc.addKeyword("folderId", folderId);
-		doc.addKeyword("entryId", entryId);
+		doc.addKeyword(Field.ENTRY_CLASS_PK, entryId);
 
 		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
@@ -121,7 +121,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		// Portlet URL
 
-		String entryId = doc.get("entryId");
+		String entryId = doc.get(Field.ENTRY_CLASS_PK);
 
 		portletURL.setParameter("struts_action", "/bookmarks/edit_entry");
 		portletURL.setParameter("entryId", entryId);

@@ -112,7 +112,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		doc.addModifiedDate();
 
-		doc.addKeyword("articleId", articleId);
+		doc.addKeyword(Field.ENTRY_CLASS_PK, articleId);
 		doc.addKeyword("version", version);
 		doc.addKeyword("type", type);
 		doc.addDate("displayDate", displayDate);
@@ -159,7 +159,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		// Portlet URL
 
 		String groupId = doc.get("groupId");
-		String articleId = doc.get("articleId");
+		String articleId = doc.get(Field.ENTRY_CLASS_PK);
 		String version = doc.get("version");
 
 		portletURL.setParameter("struts_action", "/journal/edit_article");
