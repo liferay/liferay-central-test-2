@@ -39,6 +39,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
@@ -90,10 +91,10 @@ public class PortletAction extends Action {
 		PortletConfig portletConfig = (PortletConfig)req.getAttribute(
 			JavaConstants.JAVAX_PORTLET_CONFIG);
 
-		RenderRequest renderRequest = (RenderRequest)req.getAttribute(
+		PortletRequest portletRequest = (PortletRequest)req.getAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST);
 
-		RenderResponse renderResponse = (RenderResponse)req.getAttribute(
+		PortletResponse portletResponse = (PortletResponse)req.getAttribute(
 			JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 		Boolean strutsExecute = (Boolean)req.getAttribute(
@@ -102,9 +103,17 @@ public class PortletAction extends Action {
 		if ((strutsExecute != null) && strutsExecute.booleanValue()) {
 			return strutsExecute(mapping, form, req, res);
 		}
+		else if (portletRequest instanceof ResourceRequest) {
+			serveResource(
+				mapping, form, portletConfig, (ResourceRequest)portletRequest,
+				(ResourceResponse)portletResponse);
+
+			return mapping.findForward(ActionConstants.COMMON_NULL);
+		}
 		else {
 			return render(
-				mapping, form, portletConfig, renderRequest, renderResponse);
+				mapping, form, portletConfig, (RenderRequest)portletRequest,
+				(RenderResponse)portletResponse);
 		}
 	}
 
@@ -134,16 +143,10 @@ public class PortletAction extends Action {
 		return mapping.findForward(getForward(req));
 	}
 
-	public ActionForward serveResource(
+	public void serveResource(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
 			ResourceRequest req, ResourceResponse res)
 		throws Exception {
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Forward to " + getForward(req));
-		}
-
-		return mapping.findForward(getForward(req));
 	}
 
 	protected String getForward(PortletRequest req) {
