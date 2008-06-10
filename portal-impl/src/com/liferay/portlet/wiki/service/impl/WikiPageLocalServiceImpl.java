@@ -730,8 +730,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		boolean head = true;
 		String parentTitle = page.getParentTitle();
 		String redirectTitle = page.getTitle();
-		String content = StringPool.DOUBLE_OPEN_BRACKET + redirectTitle +
-			StringPool.DOUBLE_CLOSE_BRACKET;
+		String content =
+			StringPool.DOUBLE_OPEN_BRACKET + redirectTitle +
+				StringPool.DOUBLE_CLOSE_BRACKET;
 		String[] tagsEntries = null;
 
 		addPage(
