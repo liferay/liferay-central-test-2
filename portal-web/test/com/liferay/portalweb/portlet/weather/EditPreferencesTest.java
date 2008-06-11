@@ -34,7 +34,24 @@ public class EditPreferencesTest extends BaseTestCase {
 	public void testEditPreferences() throws Exception {
 		selenium.click("//img[@title='Preferences']");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_4_zips",
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_1_WAR_weatherportlet_zips")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_1_WAR_weatherportlet_zips",
 			"Chicago\nFrankfurt/Main\nRome, Italy\nDiamond Bar, California");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");

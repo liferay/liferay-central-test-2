@@ -103,6 +103,7 @@ public class PublishEventToLiveTest extends BaseTestCase {
 		}
 
 		selenium.click("publishBtn");
+		Thread.sleep(4000);
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to publish these pages[\\s\\S]$"));
 	}

@@ -41,7 +41,7 @@ public class BlogsTests extends BaseTests {
 		addTestSuite(AddSecondEntryCommentTest.class);
 		addTestSuite(EditSecondCommentTest.class);
 		addTestSuite(EditSecondEntryTest.class);
-//		addTestSuite(SearchBlogsTest.class);
+		addTestSuite(SearchBlogsTest.class);
 		addTestSuite(DeleteSecondCommentTest.class);
 		addTestSuite(DeleteSecondEntryTest.class);
 		addTestSuite(AddIncorrectEntryTest.class);

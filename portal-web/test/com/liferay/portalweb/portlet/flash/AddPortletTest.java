@@ -40,7 +40,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[@id=\"Sample-Flash\"]")) {
+				if (selenium.isElementPresent("//div[@id=\"CMS-Flash\"]")) {
 					break;
 				}
 			}
@@ -50,8 +50,8 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.mouseDown("//div[@id=\"Sample-Flash\"]/p/a");
-		selenium.mouseUp("//div[@id=\"Sample-Flash\"]/p/a");
+		selenium.mouseDown("//div[@id=\"CMS-Flash\"]/p/a");
+		selenium.mouseUp("//div[@id=\"CMS-Flash\"]/p/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
