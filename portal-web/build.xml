@@ -629,10 +629,6 @@
 		</antcall>
 
 		<antcall target="build-javascript-portlet-cmd">
-			<param name="portlet.name" value="mail" />
-		</antcall>
-
-		<antcall target="build-javascript-portlet-cmd">
 			<param name="portlet.name" value="message_boards" />
 		</antcall>
 
