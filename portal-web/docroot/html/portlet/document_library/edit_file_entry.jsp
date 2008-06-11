@@ -400,7 +400,7 @@ portletURL.setParameter("name", name);
 	<liferay-ui:ratings
 		className="<%= DLFileEntry.class.getName() %>"
 		classPK="<%= fileEntry.getFileEntryId() %>"
-		url='<%= themeDisplay.getPathMain() + "/document_library/rate_file_entry" %>'
+		url='<%= themeDisplay.getPathMain() + "/document_library/rate_entry" %>'
 	/>
 
 	<br />
