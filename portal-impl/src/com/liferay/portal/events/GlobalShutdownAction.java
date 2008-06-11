@@ -33,10 +33,14 @@ import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.job.JobSchedulerUtil;
 import com.liferay.portal.kernel.log.Jdk14LogFactoryImpl;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.scheduler.SchedulerRequest;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.util.JSONUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -110,6 +114,13 @@ public class GlobalShutdownAction extends SimpleAction {
 		if (PropsValues.POP_SERVER_NOTIFICATIONS_ENABLED) {
 			POPServerUtil.stop();
 		}
+
+		// Scheduler Engines
+
+		MessageBusUtil.sendMessage(
+			DestinationNames.SCHEDULER,
+			JSONUtil.serialize(
+				new SchedulerRequest(SchedulerRequest.SHUTDOWN_TYPE)));
 
 		// Scheduler
 

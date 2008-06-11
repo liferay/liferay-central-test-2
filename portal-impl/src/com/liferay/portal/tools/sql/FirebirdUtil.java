@@ -128,8 +128,8 @@ public class FirebirdUtil extends DBUtil {
 	private static String[] _FIREBIRD = {
 		"--", "1", "0",
 		"'01/01/1970'", "current_timestamp",
-		" smallint", " timestamp", " double precision",
-		" integer", " int64",
+		" blob", " smallint", " timestamp",
+		" double precision", " integer", " int64",
 		" varchar(4000)", " blob", " varchar",
 		"", "commit"
 	};

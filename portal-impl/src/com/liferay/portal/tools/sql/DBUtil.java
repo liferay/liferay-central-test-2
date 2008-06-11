@@ -686,8 +686,8 @@ public abstract class DBUtil {
 	protected static String[] TEMPLATE = {
 		"##", "TRUE", "FALSE",
 		"'01/01/1970'", "CURRENT_TIMESTAMP",
-		" BOOLEAN", " DATE", " DOUBLE",
-		" INTEGER", " LONG",
+		" BLOB", " BOOLEAN", " DATE",
+		" DOUBLE", " INTEGER", " LONG",
 		" STRING", " TEXT", " VARCHAR",
 		" IDENTITY", "COMMIT_TRANSACTION"
 	};

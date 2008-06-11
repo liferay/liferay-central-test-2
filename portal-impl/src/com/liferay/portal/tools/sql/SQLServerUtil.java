@@ -133,8 +133,8 @@ public class SQLServerUtil extends DBUtil {
 	private static String[] _SQL_SERVER = {
 		"--", "1", "0",
 		"'19700101'", "GetDate()",
-		" bit", " datetime", " float",
-		" int", " bigint",
+		" image", " bit", " datetime",
+		" float", " int", " bigint",
 		" varchar(2000)", " text", " varchar",
 		"  identity(1,1)", "go"
 	};

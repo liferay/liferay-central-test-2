@@ -20,57 +20,23 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools.sql;
-
-import com.liferay.portal.kernel.util.StringUtil;
-
-import java.io.IOException;
+package com.liferay.portal.kernel.scheduler;
 
 /**
- * <a href="JDataStoreUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="SchedulerException.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
+ * @author Michael C. Han
+ * @author Bruno Farache
  *
  */
-public class JDataStoreUtil extends FirebirdUtil {
+public class SchedulerException extends Exception {
 
-	public static DBUtil getInstance() {
-		return _instance;
+	public SchedulerException(String message) {
+		super(message);
 	}
 
-	public String buildSQL(String template) throws IOException {
-		template = convertTimestamp(template);
-		template = StringUtil.replace(template, TEMPLATE, getTemplate());
-
-		template = reword(template);
-		template = StringUtil.replace(
-			template,
-			new String[] {"\\'", "\\\"", "\\\\",  "\\n", "\\r"},
-			new String[] {"''", "\"", "\\", "\n", "\r"});
-
-		return template;
+	public SchedulerException(String message, Throwable cause) {
+		super(message, cause);
 	}
-
-	protected JDataStoreUtil() {
-	}
-
-	protected String getServerName() {
-		return "jdatastore";
-	}
-
-	protected String[] getTemplate() {
-		return _JDATASTORE;
-	}
-
-	private static String[] _JDATASTORE = {
-		"--", "TRUE", "FALSE",
-		"'1970-01-01'", "current_timestamp",
-		" binary", " boolean", " date",
-		" double", " integer", " bigint",
-		" long varchar", " long varchar", " varchar",
-		"", "commit"
-	};
-
-	private static JDataStoreUtil _instance = new JDataStoreUtil();
 
 }

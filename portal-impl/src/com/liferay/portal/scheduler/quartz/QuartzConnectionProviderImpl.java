@@ -20,57 +20,36 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.tools.sql;
+package com.liferay.portal.scheduler.quartz;
 
-import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.jndi.PortalJNDIUtil;
 
-import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import org.quartz.utils.ConnectionProvider;
 
 /**
- * <a href="JDataStoreUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="QuartzConnectionProviderImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Alexander Chow
+ * @author Bruno Farache
  *
  */
-public class JDataStoreUtil extends FirebirdUtil {
+public class QuartzConnectionProviderImpl implements ConnectionProvider {
 
-	public static DBUtil getInstance() {
-		return _instance;
+	public Connection getConnection() throws SQLException {
+		Connection conn = null;
+
+		try {
+			conn = PortalJNDIUtil.getDataSource().getConnection();
+		}
+		catch (Exception e) {
+		}
+
+		return conn;
 	}
 
-	public String buildSQL(String template) throws IOException {
-		template = convertTimestamp(template);
-		template = StringUtil.replace(template, TEMPLATE, getTemplate());
-
-		template = reword(template);
-		template = StringUtil.replace(
-			template,
-			new String[] {"\\'", "\\\"", "\\\\",  "\\n", "\\r"},
-			new String[] {"''", "\"", "\\", "\n", "\r"});
-
-		return template;
+	public void shutdown() throws SQLException {
 	}
-
-	protected JDataStoreUtil() {
-	}
-
-	protected String getServerName() {
-		return "jdatastore";
-	}
-
-	protected String[] getTemplate() {
-		return _JDATASTORE;
-	}
-
-	private static String[] _JDATASTORE = {
-		"--", "TRUE", "FALSE",
-		"'1970-01-01'", "current_timestamp",
-		" binary", " boolean", " date",
-		" double", " integer", " bigint",
-		" long varchar", " long varchar", " varchar",
-		"", "commit"
-	};
-
-	private static JDataStoreUtil _instance = new JDataStoreUtil();
 
 }

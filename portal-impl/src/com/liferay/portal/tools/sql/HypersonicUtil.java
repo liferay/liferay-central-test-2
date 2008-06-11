@@ -101,8 +101,8 @@ public class HypersonicUtil extends DBUtil {
 	private static String[] _HYPERSONIC = {
 		"//", "true", "false",
 		"'1970-01-01'", "now()",
-		" bit", " timestamp", " double",
-		" int", " bigint",
+		" binary", " bit", " timestamp",
+		" double", " int", " bigint",
 		" longvarchar", " longvarchar", " varchar",
 		"", "commit"
 	};

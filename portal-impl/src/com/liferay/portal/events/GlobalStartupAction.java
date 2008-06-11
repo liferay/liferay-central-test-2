@@ -41,6 +41,7 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.pop.POPServerUtil;
+import com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineUtil;
 import com.liferay.portal.search.IndexWriterImpl;
 import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -221,6 +222,15 @@ public class GlobalStartupAction extends SimpleAction {
 
 		if (PropsValues.POP_SERVER_NOTIFICATIONS_ENABLED) {
 			POPServerUtil.start();
+		}
+
+		// Scheduler Engine
+
+		try {
+			QuartzSchedulerEngineUtil.start();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 
 		// Search Engines

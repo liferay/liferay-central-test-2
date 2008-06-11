@@ -20,14 +20,14 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.job;
+package com.liferay.portal.kernel.scheduler;
 
 import java.io.Serializable;
 
 import java.util.Date;
 
 /**
- * <a href="SchedulingRequest.java.html"><b><i>View Source</i></b></a>
+ * <a href="SchedulerRequest.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * A request to schedule a job for the scheduling engine. You may specify the
@@ -40,32 +40,32 @@ import java.util.Date;
  * @author Bruno Farache
  *
  */
-public class SchedulingRequest implements Serializable {
-
-	public static final String PING_TYPE = "PING";
+public class SchedulerRequest implements Serializable {
 
 	public static final String REGISTER_TYPE = "REGISTER";
 
 	public static final String RETRIEVE_TYPE = "RETRIEVE";
 
+	public static final String SHUTDOWN_TYPE = "SHUTDOWN";
+
 	public static final String UNREGISTER_TYPE = "UNREGISTER";
 
-	public SchedulingRequest() {
+	public SchedulerRequest() {
 	}
 
-	public SchedulingRequest(String type) {
+	public SchedulerRequest(String type) {
 		this(null, type);
 	}
 
-	public SchedulingRequest(String groupName, String type) {
+	public SchedulerRequest(String groupName, String type) {
 		this(groupName, null, type);
 	}
 
-	public SchedulingRequest(String groupName, String jobName, String type) {
+	public SchedulerRequest(String groupName, String jobName, String type) {
 		this(null, null, groupName, jobName, null, null, null, type);
 	}
 
-	public SchedulingRequest(
+	public SchedulerRequest(
 		String cronText, String groupName, String jobName, String messageBody,
 		Date startDate, Date endDate) {
 
@@ -74,7 +74,7 @@ public class SchedulingRequest implements Serializable {
 			null);
 	}
 
-	public SchedulingRequest(
+	public SchedulerRequest(
 		String cronText, String destinationName, String groupName,
 		String messageBody, Date startDate, Date endDate, String type) {
 
@@ -83,7 +83,7 @@ public class SchedulingRequest implements Serializable {
 			endDate, type);
 	}
 
-	public SchedulingRequest(
+	public SchedulerRequest(
 		String cronText, String destinationName, String groupName,
 		String jobName, String messageBody, Date startDate, Date endDate,
 		String type) {
@@ -104,6 +104,14 @@ public class SchedulingRequest implements Serializable {
 
 	public void setCronText(String cronText) {
 		_cronText = cronText;
+	}
+
+	public String getDescription() {
+		return _description;
+	}
+
+	public void setDescription(String description) {
+		_description = description;
 	}
 
 	public String getDestinationName() {
@@ -163,6 +171,7 @@ public class SchedulingRequest implements Serializable {
 	}
 
 	private String _cronText;
+	private String _description;
 	private String _destinationName;
 	private String _groupName;
 	private String _jobName;

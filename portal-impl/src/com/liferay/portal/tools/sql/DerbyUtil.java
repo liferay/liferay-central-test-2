@@ -118,8 +118,8 @@ public class DerbyUtil extends DBUtil {
 	private static String[] _DERBY = {
 		"--", "1", "0",
 		"'1970-01-01-00.00.00.000000'", "current timestamp",
-		" smallint", " timestamp", " double",
-		" integer", " bigint",
+		" blob", " smallint", " timestamp",
+		" double", " integer", " bigint",
 		" long varchar", " clob", " varchar",
 		" generated always as identity", "commit"
 	};

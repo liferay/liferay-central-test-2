@@ -128,8 +128,8 @@ public class MySQLUtil extends DBUtil {
 	private static String[] _MYSQL = {
 		"##", "1", "0",
 		"'1970-01-01'", "now()",
-		" tinyint", " datetime", " double",
-		" integer", " bigint",
+		" blob", " tinyint", " datetime",
+		" double", " integer", " bigint",
 		" longtext", " longtext", " varchar",
 		"  auto_increment", "commit"
 	};

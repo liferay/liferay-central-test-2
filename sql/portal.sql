@@ -14,4 +14,6 @@
 
 @include portal-data-release.sql
 
+@include quartz-tables.sql
+
 COMMIT_TRANSACTION;

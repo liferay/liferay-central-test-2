@@ -157,6 +157,7 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 			dbUtil.runSQLTemplate("portal-data-release.sql", false);
 			dbUtil.runSQLTemplate("indexes.sql", false);
 			dbUtil.runSQLTemplate("sequences.sql", false);
+			dbUtil.runSQLTemplate("quartz-tables.sql", false);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

@@ -175,8 +175,8 @@ public class InformixUtil extends DBUtil {
 	private static String[] _INFORMIX_TEMPLATE = {
 		"--", "'T'", "'F'",
 		"'1970-01-01'", "CURRENT YEAR TO FRACTION",
-		" boolean", " datetime YEAR TO FRACTION", " float",
-		" int", " int8",
+		" byte in table", " boolean", " datetime YEAR TO FRACTION",
+		" float", " int", " int8",
 		" lvarchar", " text", " varchar",
 		"", "commit"
 	};
