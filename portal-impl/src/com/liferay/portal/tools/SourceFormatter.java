@@ -58,7 +58,7 @@ public class SourceFormatter {
 	public static void main(String[] args) {
 		try {
 			_readExclusions();
-			
+
 			_checkPersistenceTestSuite();
 			_checkWebXML();
 			_formatJava();
@@ -369,9 +369,7 @@ public class SourceFormatter {
 				System.out.println("(c): " + files[i]);
 			}
 
-			if ((newContent.indexOf(className + ".java.html") == -1) &&
-					(_exclusions.getProperty(
-							files[i] + StringPool.AT + "Java2HTML") == null)) {
+			if (newContent.indexOf(className + ".java.html") == -1) {
 				System.out.println("Java2HTML: " + files[i]);
 			}
 
@@ -469,10 +467,12 @@ public class SourceFormatter {
 			line = StringUtil.replace(line, "\t", "    ");
 
 			String excluded = _exclusions.getProperty(
-				fileName + StringPool.AT + lineCount);
+				StringUtil.replace(fileName, "\\", "/") + StringPool.AT +
+					lineCount);
 
 			if ((excluded == null) && ((line.length() - 1) > 79) &&
-					!line.startsWith("import ")) {
+				(!line.startsWith("import "))) {
+
 				System.out.println("> 80: " + fileName + " " + lineCount);
 			}
 		}
@@ -724,31 +724,26 @@ public class SourceFormatter {
 		return list.toArray(new String[list.size()]);
 	}
 
-	private static void _readExclusions() {
+	private static void _readExclusions() throws IOException {
 		_exclusions = new Properties();
 
-		System.out.println("Loading exclusions");
 		ClassLoader classLoader = SourceFormatter.class.getClassLoader();
 
-		try {
-			URL url = classLoader.getResource("com/liferay/portal/tools/dependencies/exclusions.properties");
+		URL url = classLoader.getResource(
+			"com/liferay/portal/tools/dependencies/" +
+				"source_formatter_exclusions.properties");
 
-			if (url != null) {
-				InputStream is = url.openStream();
-
-				_exclusions.load(is);
-
-				is.close();
-
-				System.out.println("Loading exclusions from " + url);
-			}
-			else {
-				System.out.println("Dependencies file not found");
-			}
+		if (url == null) {
+			return;
 		}
-		catch (Exception e) {
-			System.out.println("Could not load the exclusion file: " + e);
-		}
+
+		InputStream is = url.openStream();
+
+		_exclusions.load(is);
+
+		is.close();
+
+		System.out.println("Loading exclusions from " + url);
 	}
 
 	private static final Pattern _STRING_PARAM_PATTERN = Pattern.compile(
