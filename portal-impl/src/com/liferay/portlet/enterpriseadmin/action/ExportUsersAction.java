@@ -25,7 +25,6 @@ package com.liferay.portlet.enterpriseadmin.action;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ProgressTracker;
-import com.liferay.portal.kernel.util.ProgressTrackerThreadLocal;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
@@ -114,11 +113,11 @@ public class ExportUsersAction extends Action {
 
 		for (int i = 0; itr.hasNext(); i++) {
 			User user = itr.next();
+
 			sm.append(user.getFullName());
 			sm.append(StringPool.COMMA);
 			sm.append(user.getEmailAddress());
 			sm.append(StringPool.NEW_LINE);
-			Thread.sleep(50);
 
 			percentage = Math.min(10 + (i * 90) / total, 99);
 
