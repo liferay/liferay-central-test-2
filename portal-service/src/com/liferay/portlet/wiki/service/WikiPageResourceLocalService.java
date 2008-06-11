@@ -88,6 +88,5 @@ public interface WikiPageResourceLocalService {
 			com.liferay.portal.SystemException;
 
 	public long getPageResourcePrimKey(long nodeId, java.lang.String title)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 }

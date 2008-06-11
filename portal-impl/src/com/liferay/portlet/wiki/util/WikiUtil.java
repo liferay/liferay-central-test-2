@@ -103,9 +103,7 @@ public class WikiUtil {
 		}
 	}
 
-	public static String getEmailPageAddedBody(PortletPreferences prefs)
-		throws IOException {
-
+	public static String getEmailPageAddedBody(PortletPreferences prefs) {
 		String emailPageAddedBody = prefs.getValue(
 			"email-page-added-body", StringPool.BLANK);
 
@@ -118,9 +116,7 @@ public class WikiUtil {
 		}
 	}
 
-	public static String getEmailPageAddedSignature(PortletPreferences prefs)
-		throws IOException {
-
+	public static String getEmailPageAddedSignature(PortletPreferences prefs) {
 		String emailPageAddedSignature = prefs.getValue(
 			"email-page-added-signature", StringPool.BLANK);
 
@@ -134,8 +130,7 @@ public class WikiUtil {
 	}
 
 	public static String getEmailPageAddedSubjectPrefix(
-			PortletPreferences prefs)
-		throws IOException {
+		PortletPreferences prefs) {
 
 		String emailPageAddedSubjectPrefix = prefs.getValue(
 			"email-page-added-subject-prefix", StringPool.BLANK);
@@ -164,9 +159,7 @@ public class WikiUtil {
 		}
 	}
 
-	public static String getEmailPageUpdatedBody(PortletPreferences prefs)
-		throws IOException {
-
+	public static String getEmailPageUpdatedBody(PortletPreferences prefs) {
 		String emailPageUpdatedBody = prefs.getValue(
 			"email-page-updated-body", StringPool.BLANK);
 
@@ -180,8 +173,7 @@ public class WikiUtil {
 	}
 
 	public static String getEmailPageUpdatedSignature(
-			PortletPreferences prefs)
-		throws IOException {
+		PortletPreferences prefs) {
 
 		String emailPageUpdatedSignature = prefs.getValue(
 			"email-page-updated-signature", StringPool.BLANK);
@@ -196,8 +188,7 @@ public class WikiUtil {
 	}
 
 	public static String getEmailPageUpdatedSubjectPrefix(
-			PortletPreferences prefs)
-		throws IOException {
+		PortletPreferences prefs) {
 
 		String emailPageUpdatedSubject = prefs.getValue(
 			"email-page-updated-subject-prefix", StringPool.BLANK);
@@ -220,13 +211,13 @@ public class WikiUtil {
 	}
 
 	public static Map<String, Boolean> getLinks(WikiPage page)
-		throws PageContentException, WikiFormatException {
+		throws PageContentException {
 
 		return _instance._getLinks(page);
 	}
 
 	public static boolean isLinkedTo(WikiPage page, String title)
-		throws PageContentException, WikiFormatException {
+		throws PageContentException {
 
 		return _instance._isLinkedTo(page, title);
 	}
@@ -361,7 +352,7 @@ public class WikiUtil {
 	}
 
 	private Map<String, Boolean> _getLinks(WikiPage page)
-		throws PageContentException, WikiFormatException{
+		throws PageContentException {
 
 		try {
 			return _getEngine(page.getFormat()).getOutgoingLinks(page);
@@ -372,7 +363,7 @@ public class WikiUtil {
 	}
 
 	private boolean _isLinkedTo(WikiPage page, String targetTitle)
-		throws PageContentException, WikiFormatException {
+		throws PageContentException {
 
 		try {
 			return _getEngine(page.getFormat()).isLinkedTo(page, targetTitle);

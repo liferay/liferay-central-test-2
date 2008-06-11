@@ -141,6 +141,7 @@ public abstract class BaseTranslator {
 		new LinkedHashMap<String, String>();
 	protected List<String> nowikiRegexps = new LinkedList<String>();
 
-	private Map<String, String> _protectedMap = new LinkedHashMap();
+	private Map<String, String> _protectedMap =
+		new LinkedHashMap<String, String>();
 
 }

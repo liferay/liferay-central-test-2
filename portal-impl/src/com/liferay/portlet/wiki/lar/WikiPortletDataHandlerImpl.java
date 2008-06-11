@@ -122,17 +122,13 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	public PortletDataHandlerControl[] getExportControls()
-		throws PortletDataException {
-
+	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
 			_nodesAndPages, _attachments, _comments, _tags
 		};
 	}
 
-	public PortletDataHandlerControl[] getImportControls()
-		throws PortletDataException {
-
+	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {
 			_nodesAndPages, _attachments, _comments, _tags
 		};

@@ -51,7 +51,7 @@ public class WikiPageResourceLocalServiceImpl
 	}
 
 	public long getPageResourcePrimKey(long nodeId, String title)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		WikiPageResource pageResource = wikiPageResourcePersistence.fetchByN_T(
 			nodeId, title);

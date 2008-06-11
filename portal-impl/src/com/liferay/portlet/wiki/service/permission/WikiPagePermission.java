@@ -52,7 +52,7 @@ public class WikiPagePermission {
 
 	public static void check(
 			PermissionChecker permissionChecker, WikiPage page, String actionId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		if (!contains(permissionChecker, page, actionId)) {
 			throw new PrincipalException();
@@ -76,8 +76,7 @@ public class WikiPagePermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, WikiPage page, String actionId)
-		throws PortalException, SystemException {
+		PermissionChecker permissionChecker, WikiPage page, String actionId) {
 
 		WikiNode node = page.getNode();
 

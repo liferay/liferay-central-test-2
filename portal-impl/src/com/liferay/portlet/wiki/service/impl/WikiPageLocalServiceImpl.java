@@ -68,8 +68,6 @@ import com.liferay.portlet.wiki.util.comparator.PageCreateDateComparator;
 import com.liferay.util.MathUtil;
 import com.liferay.util.UniqueList;
 
-import java.io.IOException;
-
 import java.rmi.RemoteException;
 
 import java.util.ArrayList;
@@ -98,14 +96,6 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
-
-	public WikiPage addPage(
-			long userId, long nodeId, String title, PortletPreferences prefs,
-			ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-		return addPage(
-			userId, nodeId, title, null, prefs, themeDisplay);
-	}
 
 	public WikiPage addPage(
 			long userId, long nodeId, String title, String content,
@@ -179,12 +169,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Subscriptions
 
 		if (NotificationThreadLocal.isNotificationEnabled()) {
-			try {
-				notifySubscribers(node, page, prefs, themeDisplay, false);
-			}
-			catch (IOException ioe) {
-				throw new SystemException(ioe);
-			}
+			notifySubscribers(node, page, prefs, themeDisplay, false);
 		}
 
 		// Tags
@@ -433,7 +418,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 	public List<WikiPage> getChildren(
 			long nodeId, boolean head, String parentTitle)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return wikiPagePersistence.findByN_H_P(nodeId, head, parentTitle);
 	}
@@ -882,12 +867,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Subscriptions
 
 		if (NotificationThreadLocal.isNotificationEnabled()) {
-			try {
-				notifySubscribers(node, page, prefs, themeDisplay, true);
-			}
-			catch (IOException ioe) {
-				throw new SystemException(ioe);
-			}
+			notifySubscribers(node, page, prefs, themeDisplay, true);
 		}
 
 		// Tags
@@ -973,7 +953,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	protected void notifySubscribers(
 			WikiNode node, WikiPage page, PortletPreferences prefs,
 			ThemeDisplay themeDisplay, boolean update)
-		throws IOException, PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		if (prefs == null) {
 			long ownerId = node.getGroupId();

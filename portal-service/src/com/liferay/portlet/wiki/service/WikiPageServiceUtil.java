@@ -52,13 +52,15 @@ package com.liferay.portlet.wiki.service;
  */
 public class WikiPageServiceUtil {
 	public static com.liferay.portlet.wiki.model.WikiPage addPage(long nodeId,
-		java.lang.String title, javax.portlet.PortletPreferences prefs,
+		java.lang.String title, java.lang.String content,
+		javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
 
-		return wikiPageService.addPage(nodeId, title, prefs, themeDisplay);
+		return wikiPageService.addPage(nodeId, title, content, prefs,
+			themeDisplay);
 	}
 
 	public static void addPageAttachments(long nodeId, java.lang.String title,

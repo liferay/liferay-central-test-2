@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.wiki.util;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.util.StringMaker;
@@ -66,9 +64,8 @@ public class WikiCacheUtil {
 	}
 
 	public static WikiPageDisplay getDisplay(
-			long nodeId, String title, PortletURL viewPageURL,
-			PortletURL editPageURL, String attachmentURLPrefix)
-		throws PortalException, SystemException {
+		long nodeId, String title, PortletURL viewPageURL,
+		PortletURL editPageURL, String attachmentURLPrefix) {
 
 		StopWatch stopWatch = null;
 

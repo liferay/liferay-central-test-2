@@ -78,7 +78,7 @@ import javax.portlet.PortletPreferences;
 public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 	public WikiPage addPage(
-			long nodeId, String title, PortletPreferences prefs,
+			long nodeId, String title, String content, PortletPreferences prefs,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
@@ -86,7 +86,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			getPermissionChecker(), nodeId, ActionKeys.ADD_PAGE);
 
 		return wikiPageLocalService.addPage(
-			getUserId(), nodeId, title, prefs, themeDisplay);
+			getUserId(), nodeId, title, content, prefs, themeDisplay);
 	}
 
 	public void addPageAttachments(

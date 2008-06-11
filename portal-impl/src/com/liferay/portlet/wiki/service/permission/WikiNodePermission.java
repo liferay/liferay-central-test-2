@@ -58,7 +58,7 @@ public class WikiNodePermission {
 
 	public static void check(
 			PermissionChecker permissionChecker, WikiNode node, String actionId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		if (!contains(permissionChecker, node, actionId)) {
 			throw new PrincipalException();
@@ -85,8 +85,7 @@ public class WikiNodePermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, WikiNode node, String actionId)
-		throws PortalException, SystemException {
+		PermissionChecker permissionChecker, WikiNode node, String actionId) {
 
 		return permissionChecker.hasPermission(
 			node.getGroupId(), WikiNode.class.getName(), node.getNodeId(),

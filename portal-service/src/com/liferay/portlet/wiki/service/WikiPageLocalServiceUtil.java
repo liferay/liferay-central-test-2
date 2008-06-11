@@ -109,18 +109,6 @@ public class WikiPageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage addPage(long userId,
-		long nodeId, java.lang.String title,
-		javax.portlet.PortletPreferences prefs,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
-
-		return wikiPageLocalService.addPage(userId, nodeId, title, prefs,
-			themeDisplay);
-	}
-
-	public static com.liferay.portlet.wiki.model.WikiPage addPage(long userId,
 		long nodeId, java.lang.String title, java.lang.String content,
 		javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
@@ -238,8 +226,7 @@ public class WikiPageLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> getChildren(
 		long nodeId, boolean head, java.lang.String parentTitle)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
 		return wikiPageLocalService.getChildren(nodeId, head, parentTitle);

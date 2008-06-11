@@ -86,7 +86,7 @@ public class MediaWikiImporter implements WikiImporter {
 	public void importPages(
 			long userId, WikiNode node, File pagesFile, File usersFile,
 			File imagesFile)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		try {
 			SAXReader saxReader = new SAXReader();
@@ -138,7 +138,7 @@ public class MediaWikiImporter implements WikiImporter {
 	protected void importPage(
 			long userId, String author, WikiNode node, String title,
 			String content, Map<String, String> usersMap)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		try {
 			long authorUserId = getUserId(userId, node, author, usersMap);
@@ -164,7 +164,7 @@ public class MediaWikiImporter implements WikiImporter {
 			}
 			catch (NoSuchPageException nspe) {
 				page = WikiPageLocalServiceUtil.addPage(
-					authorUserId, node.getNodeId(), title, null, null);
+					authorUserId, node.getNodeId(), title, null, null, null);
 			}
 
 			WikiPageLocalServiceUtil.updatePage(
@@ -195,7 +195,8 @@ public class MediaWikiImporter implements WikiImporter {
 		}
 
 		if ((paths.length > 1) &&
-				(ArrayUtil.contains(_SPECIAL_MEDIA_WIKI_DIRS, paths[1]))) {
+			(ArrayUtil.contains(_SPECIAL_MEDIA_WIKI_DIRS, paths[1]))) {
+
 			return false;
 		}
 
@@ -204,7 +205,7 @@ public class MediaWikiImporter implements WikiImporter {
 		try {
 			DLLocalServiceUtil.validate(fileName, bytes);
 		}
-		catch(PortalException pe) {
+		catch (PortalException pe) {
 			return false;
 		}
 
@@ -261,8 +262,8 @@ public class MediaWikiImporter implements WikiImporter {
 			}
 		}
 
-		List<ObjectValuePair<String,byte[]>> attachments =
-			new ArrayList<ObjectValuePair<String,byte[]>>();
+		List<ObjectValuePair<String, byte[]>> attachments =
+			new ArrayList<ObjectValuePair<String, byte[]>>();
 
 		Iterator<Map.Entry<String, byte[]>> itr = entries.entrySet().iterator();
 
@@ -276,6 +277,7 @@ public class MediaWikiImporter implements WikiImporter {
 
 			if (key.endsWith(StringPool.SLASH)) {
 				_log.info("Ignoring " + key);
+
 				continue;
 			}
 
@@ -283,13 +285,14 @@ public class MediaWikiImporter implements WikiImporter {
 
 			if (!isValidImage(paths, value)) {
 				_log.info("Ignoring " + key);
+
 				continue;
 			}
 
 			String fileName = paths[paths.length - 1];
 
 			attachments.add(
-				new ObjectValuePair<String,byte[]>(fileName, value));
+				new ObjectValuePair<String, byte[]>(fileName, value));
 
 			count++;
 
@@ -381,7 +384,7 @@ public class MediaWikiImporter implements WikiImporter {
 	protected void processSpecialPages(
 			long userId, WikiNode node, Element root,
 			List<String> specialNamespaces)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		ProgressTracker progressTracker =
 			ProgressTrackerThreadLocal.getProgressTracker();
@@ -420,7 +423,7 @@ public class MediaWikiImporter implements WikiImporter {
 					tagsEntry = TagsEntryLocalServiceUtil.getEntry(
 						node.getCompanyId(), categoryName);
 				}
-				catch(NoSuchEntryException nsee) {
+				catch (NoSuchEntryException nsee) {
 					tagsEntry = TagsEntryLocalServiceUtil.addEntry(
 						userId, categoryName);
 				}
@@ -491,7 +494,7 @@ public class MediaWikiImporter implements WikiImporter {
 				tagsEntry = TagsEntryLocalServiceUtil.getEntry(
 					node.getCompanyId(), categoryName);
 			}
-			catch(NoSuchEntryException nsee) {
+			catch (NoSuchEntryException nsee) {
 				tagsEntry = TagsEntryLocalServiceUtil.addEntry(
 					userId, categoryName);
 			}

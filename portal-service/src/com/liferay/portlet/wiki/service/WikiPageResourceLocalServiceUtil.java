@@ -127,9 +127,7 @@ public class WikiPageResourceLocalServiceUtil {
 	}
 
 	public static long getPageResourcePrimKey(long nodeId,
-		java.lang.String title)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		java.lang.String title) throws com.liferay.portal.SystemException {
 		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
 
 		return wikiPageResourceLocalService.getPageResourcePrimKey(nodeId, title);

@@ -50,7 +50,8 @@ package com.liferay.portlet.wiki.service;
  */
 public interface WikiPageService {
 	public com.liferay.portlet.wiki.model.WikiPage addPage(long nodeId,
-		java.lang.String title, javax.portlet.PortletPreferences prefs,
+		java.lang.String title, java.lang.String content,
+		javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
