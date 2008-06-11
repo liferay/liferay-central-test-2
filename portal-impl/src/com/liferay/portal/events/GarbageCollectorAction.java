@@ -22,7 +22,6 @@
 
 package com.liferay.portal.events;
 
-import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SessionAction;
 
 import java.text.NumberFormat;
@@ -40,7 +39,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class GarbageCollectorAction extends SessionAction {
 
-	public void run(HttpSession ses) throws ActionException {
+	public void run(HttpSession ses) {
 		Runtime runtime = Runtime.getRuntime();
 
 		NumberFormat nf = NumberFormat.getInstance();

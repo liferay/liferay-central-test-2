@@ -521,8 +521,7 @@ public class MBMessageLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getMessages(
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
 		return mbMessageLocalService.getMessages(className, classPK);

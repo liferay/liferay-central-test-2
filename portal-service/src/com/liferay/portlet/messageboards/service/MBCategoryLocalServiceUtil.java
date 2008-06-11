@@ -300,8 +300,7 @@ public class MBCategoryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory getSystemCategory()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 
 		return mbCategoryLocalService.getSystemCategory();

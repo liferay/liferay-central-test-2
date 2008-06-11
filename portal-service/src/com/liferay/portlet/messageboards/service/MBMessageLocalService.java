@@ -308,8 +308,7 @@ public interface MBMessageLocalService {
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getMessages(
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
 		long messageId)

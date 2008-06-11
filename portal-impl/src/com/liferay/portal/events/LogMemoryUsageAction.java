@@ -23,7 +23,6 @@
 package com.liferay.portal.events;
 
 import com.liferay.portal.kernel.events.Action;
-import com.liferay.portal.kernel.events.ActionException;
 
 import java.text.NumberFormat;
 
@@ -41,9 +40,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LogMemoryUsageAction extends Action {
 
-	public void run(HttpServletRequest req, HttpServletResponse res)
-		throws ActionException {
-
+	public void run(HttpServletRequest req, HttpServletResponse res) {
 		Runtime runtime = Runtime.getRuntime();
 
 		NumberFormat nf = NumberFormat.getInstance();

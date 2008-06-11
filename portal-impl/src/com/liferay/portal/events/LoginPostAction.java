@@ -25,7 +25,6 @@ package com.liferay.portal.events;
 import com.liferay.portal.kernel.events.Action;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.util.LiveUsers;
-import com.liferay.portal.util.PortalUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -54,7 +53,7 @@ public class LoginPostAction extends Action {
 			HttpSession ses = req.getSession();
 
 			//long companyId = PortalUtil.getCompanyId(req);
-			long userId = PortalUtil.getUserId(req);
+			//long userId = PortalUtil.getUserId(req);
 
 			LiveUsers.signIn(req);
 

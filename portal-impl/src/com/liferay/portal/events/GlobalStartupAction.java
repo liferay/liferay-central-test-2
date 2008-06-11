@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.deploy.auto.AutoDeployListener;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployUtil;
 import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
-import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.jndi.PortalJNDIUtil;
 import com.liferay.portal.kernel.messaging.MessageBus;
@@ -116,7 +115,7 @@ public class GlobalStartupAction extends SimpleAction {
 		return list;
 	}
 
-	public void run(String[] ids) throws ActionException {
+	public void run(String[] ids) {
 
 		// Hot deploy
 

@@ -123,9 +123,7 @@ public class MBStatsUserLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBStatsUser getStatsUser(
-		long groupId, long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		long groupId, long userId) throws com.liferay.portal.SystemException {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
 
 		return mbStatsUserLocalService.getStatsUser(groupId, userId);
@@ -147,8 +145,7 @@ public class MBStatsUserLocalServiceUtil {
 	}
 
 	public static void updateStatsUser(long groupId, long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
 
 		mbStatsUserLocalService.updateStatsUser(groupId, userId);

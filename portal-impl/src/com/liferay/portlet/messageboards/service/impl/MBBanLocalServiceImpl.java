@@ -84,9 +84,7 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 		}
 	}
 
-	public void deleteBan(long plid, long banUserId)
-		throws PortalException, SystemException {
-
+	public void deleteBan(long plid, long banUserId) throws SystemException {
 		long groupId = PortalUtil.getPortletGroupId(plid);
 
 		try {

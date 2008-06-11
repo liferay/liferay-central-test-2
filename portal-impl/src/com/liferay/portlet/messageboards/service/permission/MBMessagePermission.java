@@ -72,7 +72,7 @@ public class MBMessagePermission {
 	public static boolean contains(
 			PermissionChecker permissionChecker, MBMessage message,
 			String actionId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		MBCategory category = message.getCategory();
 

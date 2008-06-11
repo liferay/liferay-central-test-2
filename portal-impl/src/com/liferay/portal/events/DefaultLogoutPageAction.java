@@ -23,7 +23,6 @@
 package com.liferay.portal.events;
 
 import com.liferay.portal.kernel.events.Action;
-import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.struts.LastPath;
@@ -48,9 +47,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class DefaultLogoutPageAction extends Action {
 
-	public void run(HttpServletRequest req, HttpServletResponse res)
-		throws ActionException {
-
+	public void run(HttpServletRequest req, HttpServletResponse res) {
 		String path = PropsValues.DEFAULT_LOGOUT_PAGE_PATH;
 
 		if (_log.isInfoEnabled()) {

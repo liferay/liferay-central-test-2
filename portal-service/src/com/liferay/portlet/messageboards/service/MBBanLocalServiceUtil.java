@@ -126,8 +126,7 @@ public class MBBanLocalServiceUtil {
 	}
 
 	public static void deleteBan(long plid, long banUserId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
 
 		mbBanLocalService.deleteBan(plid, banUserId);

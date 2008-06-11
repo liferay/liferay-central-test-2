@@ -86,8 +86,7 @@ public interface MBBanLocalService {
 			com.liferay.portal.SystemException;
 
 	public void deleteBan(long plid, long banUserId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public void deleteBansByBanUserId(long banUserId)
 		throws com.liferay.portal.SystemException;

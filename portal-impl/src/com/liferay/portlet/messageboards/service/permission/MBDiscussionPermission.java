@@ -51,7 +51,7 @@ public class MBDiscussionPermission {
 	public static boolean contains(
 			PermissionChecker permissionChecker, long groupId, String className,
 			long classPK, String actionId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (MBBanLocalServiceUtil.hasBan(
 				groupId, permissionChecker.getUserId())) {

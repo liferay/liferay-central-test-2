@@ -24,7 +24,6 @@ package com.liferay.portlet.messageboards.job;
 
 import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobExecutionContext;
-import com.liferay.portal.kernel.job.JobExecutionException;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -59,9 +58,7 @@ public class ExpireBanJob implements IntervalJob {
 		}
 	}
 
-	public void execute(JobExecutionContext context)
-		throws JobExecutionException {
-
+	public void execute(JobExecutionContext context) {
 		try {
 			MBBanLocalServiceUtil.expireBans();
 		}

@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.messageboards.service.impl;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
 import com.liferay.portlet.messageboards.service.base.MBStatsUserLocalServiceBaseImpl;
@@ -50,7 +49,7 @@ public class MBStatsUserLocalServiceImpl
 	}
 
 	public MBStatsUser getStatsUser(long groupId, long userId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		MBStatsUser statsUser = mbStatsUserPersistence.fetchByG_U(
 			groupId, userId);
@@ -80,7 +79,7 @@ public class MBStatsUserLocalServiceImpl
 	}
 
 	public void updateStatsUser(long groupId, long userId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		MBStatsUser statsUser = getStatsUser(groupId, userId);
 

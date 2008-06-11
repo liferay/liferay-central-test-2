@@ -310,9 +310,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		return mbCategoryFinder.countByS_G_U(groupId, userId);
 	}
 
-	public MBCategory getSystemCategory()
-		throws PortalException, SystemException {
-
+	public MBCategory getSystemCategory() throws SystemException {
 		long categoryId = CompanyConstants.SYSTEM;
 
 		MBCategory category = mbCategoryPersistence.fetchByPrimaryKey(

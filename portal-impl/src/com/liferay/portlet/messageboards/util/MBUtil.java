@@ -54,8 +54,6 @@ import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.util.LocalizationUtil;
 
-import java.io.IOException;
-
 import java.util.Calendar;
 import java.util.Date;
 
@@ -254,9 +252,7 @@ public class MBUtil {
 		}
 	}
 
-	public static String getEmailMessageAddedBody(PortletPreferences prefs)
-		throws IOException {
-
+	public static String getEmailMessageAddedBody(PortletPreferences prefs) {
 		String emailMessageAddedBody = prefs.getValue(
 			"email-message-added-body", StringPool.BLANK);
 
@@ -269,8 +265,8 @@ public class MBUtil {
 		}
 	}
 
-	public static String getEmailMessageAddedSignature(PortletPreferences prefs)
-		throws IOException {
+	public static String getEmailMessageAddedSignature(
+		PortletPreferences prefs) {
 
 		String emailMessageAddedSignature = prefs.getValue(
 			"email-message-added-signature", StringPool.BLANK);
@@ -285,8 +281,7 @@ public class MBUtil {
 	}
 
 	public static String getEmailMessageAddedSubjectPrefix(
-			PortletPreferences prefs)
-		throws IOException {
+		PortletPreferences prefs) {
 
 		String emailMessageAddedSubjectPrefix = prefs.getValue(
 			"email-message-added-subject-prefix", StringPool.BLANK);
@@ -314,9 +309,7 @@ public class MBUtil {
 		}
 	}
 
-	public static String getEmailMessageUpdatedBody(PortletPreferences prefs)
-		throws IOException {
-
+	public static String getEmailMessageUpdatedBody(PortletPreferences prefs) {
 		String emailMessageUpdatedBody = prefs.getValue(
 			"email-message-updated-body", StringPool.BLANK);
 
@@ -330,8 +323,7 @@ public class MBUtil {
 	}
 
 	public static String getEmailMessageUpdatedSignature(
-			PortletPreferences prefs)
-		throws IOException {
+		PortletPreferences prefs) {
 
 		String emailMessageUpdatedSignature = prefs.getValue(
 			"email-message-updated-signature", StringPool.BLANK);
@@ -346,8 +338,7 @@ public class MBUtil {
 	}
 
 	public static String getEmailMessageUpdatedSubjectPrefix(
-			PortletPreferences prefs)
-		throws IOException {
+		PortletPreferences prefs) {
 
 		String emailMessageUpdatedSubject = prefs.getValue(
 			"email-message-updated-subject-prefix", StringPool.BLANK);

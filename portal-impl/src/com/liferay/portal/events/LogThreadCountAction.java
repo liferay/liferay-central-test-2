@@ -23,7 +23,6 @@
 package com.liferay.portal.events;
 
 import com.liferay.portal.kernel.events.Action;
-import com.liferay.portal.kernel.events.ActionException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,9 +38,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LogThreadCountAction extends Action {
 
-	public void run(HttpServletRequest req, HttpServletResponse res)
-		throws ActionException {
-
+	public void run(HttpServletRequest req, HttpServletResponse res) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Active Threads:\t" + Thread.activeCount());
 		}

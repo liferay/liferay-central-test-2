@@ -24,7 +24,6 @@ package com.liferay.portal.events;
 
 import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
-import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -51,7 +50,7 @@ import org.apache.commons.lang.time.StopWatch;
  */
 public class InitAction extends SimpleAction {
 
-	public void run(String[] ids) throws ActionException {
+	public void run(String[] ids) {
 		StopWatch stopWatch = null;
 
 		if (_PRINT_TIME) {

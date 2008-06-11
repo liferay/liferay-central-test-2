@@ -28,7 +28,6 @@ import com.liferay.portal.im.MSNConnector;
 import com.liferay.portal.im.YMConnector;
 import com.liferay.portal.jcr.JCRFactoryUtil;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
-import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.job.JobSchedulerUtil;
 import com.liferay.portal.kernel.log.Jdk14LogFactoryImpl;
@@ -53,7 +52,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class GlobalShutdownAction extends SimpleAction {
 
-	public void run(String[] ids) throws ActionException {
+	public void run(String[] ids) {
 
 		// Hot deploy
 

@@ -499,12 +499,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Subscriptions
 
-		try {
-			notifySubscribers(category, message, prefs, themeDisplay, false);
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
+		notifySubscribers(category, message, prefs, themeDisplay, false);
 
 		logAddMessage(messageId, stopWatch, 8);
 
@@ -974,7 +969,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public List<MBMessage> getMessages(String className, long classPK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
@@ -1210,12 +1205,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Subscriptions
 
-		try {
-			notifySubscribers(category, message, prefs, themeDisplay, true);
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
+		notifySubscribers(category, message, prefs, themeDisplay, true);
 
 		// Tags
 
@@ -1335,7 +1325,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	protected void notifySubscribers(
 			MBCategory category, MBMessage message, PortletPreferences prefs,
 			ThemeDisplay themeDisplay, boolean update)
-		throws IOException, PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		if (category.isDiscussion()) {
 			return;
