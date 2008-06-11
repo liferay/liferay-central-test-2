@@ -1538,6 +1538,7 @@ import-on-startup-enabled=開始の輸入は可能になった
 import-pages=輸入のページ
 import-search-filter=輸入の調査フィルター
 import-settings=輸入の設定
+import-wiki-images-help=輸入にイメージのZIPファイルを堤出しなさい。 MediaWikiのイメージのホールダーの直接ファスナーを締めることができる(時々it&#039; sは&quotを呼んだ; upload&quot;)。 そう、it&#039; sは&quotと呼ばれた登録簿を取除くことを推薦した; archive&quot; 、&quot; temp&quot; そして&quot; thumbs&quot; 彼らが無視されるのでジッパーのサイズを減らすため。
 import-wiki-pages-help=&quotを通してMediaWikiが輸出するXMLファイルを堤出しなさい; スペシャル: Export&quot; ページ(&quotを見なさい; 特別なpages&quot; 道具箱メニュー)。
 import-wiki-users-help=入口のそれらと一致するためにユーザーの電子メールアドレスのCSVファイルを堤出しなさい。 ファイルに2つのコラムがあるべきである: ユーザ名および電子メールアドレス。 このファイルはMediaWiki&#039からのSQLを使用して直接得ることができる; sのデータベース。
 import=輸入

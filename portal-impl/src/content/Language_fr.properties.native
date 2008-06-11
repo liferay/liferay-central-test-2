@@ -1538,6 +1538,7 @@ import-on-startup-enabled=L'importation au démarrage est activée
 import-pages=Pages d'importation
 import-search-filter=Filtre De Recherche D'Importation
 import-settings=Paramètres d'importation
+import-wiki-images-help=Soumettez un dossier de FERMETURE ÉCLAIR des images à l'importation. Vous pouvez fermer la fermeture éclair le dossier d'images de MediaWiki directement (parfois it&#039 ; s a appelé le &quot ; upload&quot ;). Si vous faites ainsi, it&#039 ; s a recommandé d'enlever les annuaires appelés le &quot ; archive&quot ; , &quot ; temp&quot ; et &quot ; thumbs&quot ; pour réduire la FERMETURE ÉCLAIR classez puisqu'ils seront ignorés.
 import-wiki-pages-help=Soumettez un dossier de XML exporté par MediaWiki par le &quot ; Special : Export&quot ; page (voir le &quot ; Pages&quot spécial ; dans le menu de boîte à outils).
 import-wiki-users-help=Soumettez un dossier de CSV avec les email address des utilisateurs pour assortir avec ceux dans le portail. Le dossier devrait avoir deux colonnes : le nom d'utilisateur et l'email address. Ce dossier peut être obtenu utilisant le SQL directement de MediaWiki&#039 ; base de données de s.
 import=Importation

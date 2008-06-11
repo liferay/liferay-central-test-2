@@ -1538,6 +1538,7 @@ import-on-startup-enabled=A importação na partida permitiu
 import-pages=Páginas da importação
 import-search-filter=Filtro Da Busca Da Importação
 import-settings=Ajustes Da Importação
+import-wiki-images-help=Submeta uma lima de FECHO DE CORRER das imagens à importação. Você pode fechar o dobrador das imagens de MediaWiki diretamente (às vezes it&#039; s chamou o &quot; upload&quot;). Se você faz assim, it&#039; s recomendou remover os diretórios chamados &quot; archive&quot; , &quot; temp&quot; e &quot; thumbs&quot; para reduzir o FECHO DE CORRER faça sob medida desde que serão ignorados.
 import-wiki-pages-help=Submeta uma lima de XML exportada por MediaWiki através do &quot; Special: Export&quot; página (veja o &quot; Pages&quot especial; no menu da caixa de ferramentas).
 import-wiki-users-help=Submeta uma lima de CSV com os email address dos usuários para combinar com os aqueles no portal. A lima deve ter duas colunas: o nome de usuário e o email address. Esta lima pode ser obtida usando o SQL diretamente de MediaWiki&#039; base de dados de s.
 import=Importação

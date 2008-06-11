@@ -1538,6 +1538,7 @@ import-on-startup-enabled=进口在起动使能
 import-pages=进口页
 import-search-filter=进口查寻过滤器
 import-settings=进口设置
+import-wiki-images-help=递交图象的压缩文件给进口。 您能直接地用拉锁拉上MediaWiki图象文件夹(有时it&#039; s叫&quot; upload&quot;)。 如果您如此， it&#039; s推荐去除称&quot的目录; archive&quot;  &quot; temp&quot; 并且&quot; thumbs&quot; 因为他们将被忽略，要减少邮编估量。
 import-wiki-pages-help=递交MediaWiki出口的XML文件通过&quot; 专辑：Export&quot; 页(参见&quot; 特别pages&quot; 在工具箱菜单)。
 import-wiki-users-help=在门户递交与用户的电子邮件的一个CSV文件匹配与那些。 文件应该有二个专栏： 用户名和电子邮件。 使用SQL直接地从MediaWiki&#039，这个文件可以获得; s数据库。
 import=输入

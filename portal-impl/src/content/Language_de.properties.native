@@ -1538,6 +1538,7 @@ import-on-startup-enabled=Import beim Start aktiviert
 import-pages=Import-Seiten
 import-search-filter=Import-Suchfilter
 import-settings=Import-Einstellungen
+import-wiki-images-help=Reichen Sie eine Zip Datei der Bilder beim Import ein. Sie können das Bildfaltblatt von MediaWiki direkt Reißverschluss zumachen (manchmal it&#039; s benannte &quot; upload&quot;). Wenn Sie so tun, it&#039; s empfahl sich, die Verzeichnisse zu entfernen, die &quot genannt wurden; archive&quot; , &quot; temp&quot; und &quot; thumbs&quot; um den REISSVERSCHLUSS zu verringern sortieren Sie da sie ignoriert werden.
 import-wiki-pages-help=Reichen Sie eine XML Akte ein, die von MediaWiki durch das &quot exportiert wird; Special: Export&quot; Seite (sehen Sie &quot; Spezielles pages&quot; im Werkzeugkastenmenü).
 import-wiki-users-help=Reichen Sie eine CSV Akte mit den email address der Benutzer ein, um mit denen im Portal zusammenzupassen. Die Akte sollte zwei Spalten haben: der Benutzername und das email address. Diese Akte kann unter Verwendung SQL direkt von MediaWiki&#039 erreicht werden; s-Datenbank.
 import=Import

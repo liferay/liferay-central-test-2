@@ -1538,6 +1538,7 @@ import-on-startup-enabled=Schakel importeren tijdens het opstarten in
 import-pages=De Pagina's van de invoer
 import-search-filter=Importeer zoekfilter
 import-settings=Importeer instellingen
+import-wiki-images-help=Leg een dossier van het PIT van de beelden aan de invoer voor. U kunt de beeldenomslag van MediaWiki direct snellen (soms it&#039; s geroepen &quot; upload&quot;). Als u dit doet, it&#039; s adviseerde om de folders te verwijderen genoemd &quot; archive&quot; , &quot; temp&quot; en &quot; thumbs&quot; om de grootte van het PIT te verminderen aangezien zij zullen worden genegeerd.
 import-wiki-pages-help=Leg een Xml- dossier voor dat door MediaWiki door &quot wordt uitgevoerd; Speciaal: Export&quot; pagina (zie &quot; Speciale pages&quot; in het toolbox menu).
 import-wiki-users-help=Leg een Csv- dossier met de e-mailadressen van de gebruikers voor om met die in het portaal aan te passen. Het dossier zou twee kolommen moeten hebben: de gebruikersnaam en het e-mailadres. Dit dossier kan direct gebruikend SQL uit MediaWiki&#039 worden verkregen; s- gegevensbestand.
 import=Importeren
