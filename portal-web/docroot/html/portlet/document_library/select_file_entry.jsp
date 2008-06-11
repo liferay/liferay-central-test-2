@@ -47,6 +47,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/document_library/select_file_entry");
 portletURL.setParameter("groupId", String.valueOf(groupId));
+portletURL.setParameter("folderId", String.valueOf(folderId));
 
 List headerNames = new ArrayList();
 
