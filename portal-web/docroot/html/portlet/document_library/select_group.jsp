@@ -65,14 +65,9 @@ for (int i = 0; i < results.size(); i++) {
 
 	ResultRow row = new ResultRow(group, group.getGroupId(), i);
 
-	String groupName = group.getName();
+	String groupName = group.getDescriptiveName();
 
-	if (group.isOrganization()) {
-		Organization organization = OrganizationLocalServiceUtil.getOrganization(group.getClassPK());
-
-		groupName = organization.getName();
-	}
-	else if (group.isUser()) {
+	if (group.isUser()) {
 		groupName = LanguageUtil.get(pageContext, "my-community");
 	}
 
