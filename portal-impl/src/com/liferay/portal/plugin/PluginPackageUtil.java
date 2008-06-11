@@ -313,7 +313,7 @@ public class PluginPackageUtil {
 
 				pluginPackages.addAll(repository.getPluginPackages());
 			}
-			catch(PluginPackageException ppe) {
+			catch (PluginPackageException ppe) {
 				String message = ppe.getMessage();
 
 				if (message.startsWith("Unable to communicate")) {
@@ -1137,7 +1137,7 @@ public class PluginPackageUtil {
 
 				repositoryReport.addSuccess(repositoryURL);
 			}
-			catch(PluginPackageException pe) {
+			catch (PluginPackageException pe) {
 				repositoryReport.addError(repositoryURL, pe);
 
 				_log.error(

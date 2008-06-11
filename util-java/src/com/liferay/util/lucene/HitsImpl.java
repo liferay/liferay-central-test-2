@@ -143,7 +143,7 @@ public class HitsImpl implements Hits {
 				_docs[n] = new DocumentImpl(_hits.doc(n));
 			}
 		}
-		catch(IOException ioe) {
+		catch (IOException ioe) {
 		}
 
 		return _docs[n];

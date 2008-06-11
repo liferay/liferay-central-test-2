@@ -297,7 +297,7 @@ public class LayoutCacheFilter
 				}
 			}
 		}
-		catch(Exception e) {
+		catch (Exception e) {
 			return false;
 		}
 

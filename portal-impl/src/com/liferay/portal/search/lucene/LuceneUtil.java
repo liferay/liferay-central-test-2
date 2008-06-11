@@ -205,7 +205,7 @@ public class LuceneUtil {
 
 				booleanQuery.add(query, BooleanClause.Occur.SHOULD);
 			}
-			catch(ParseException pe) {
+			catch (ParseException pe) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
 						"ParseException thrown, reverting to literal search",

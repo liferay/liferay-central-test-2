@@ -129,7 +129,7 @@ public class LuceneHitsImpl implements Hits {
 				_docs[n] =_getDocument(_hits.doc(n));
 			}
 		}
-		catch(IOException ioe) {
+		catch (IOException ioe) {
 		}
 
 		return _docs[n];

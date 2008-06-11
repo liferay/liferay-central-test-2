@@ -58,7 +58,7 @@ public class CommLink implements MessageListener {
 		try {
 			return Util.objectToByteBuffer(_history);
 		}
-		catch(Exception e) {
+		catch (Exception e) {
 			return null;
 		}
 	}
@@ -67,7 +67,7 @@ public class CommLink implements MessageListener {
 		try {
 			_history = (List<Object>)Util.objectFromByteBuffer(state);
 		}
-		catch(Exception e) {
+		catch (Exception e) {
 			_log.error("Error setting state", e);
 		}
 	}
@@ -88,7 +88,7 @@ public class CommLink implements MessageListener {
 
 			_history.add(obj);
 		}
-		catch(Exception e) {
+		catch (Exception e) {
 			_log.error("Error receiving message", e);
 		}
 	}
@@ -103,7 +103,7 @@ public class CommLink implements MessageListener {
 
 			_channel.send(msg);
 		}
-		catch(Exception e) {
+		catch (Exception e) {
 			_log.error("Error sending message", e);
 		}
 	}
