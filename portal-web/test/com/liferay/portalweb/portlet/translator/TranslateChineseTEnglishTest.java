@@ -45,7 +45,7 @@ public class TranslateChineseTEnglishTest extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent(
-							"My name is the Liferay translator, fluent completely successful 6 correspondences million forms.")) {
+							"My name is the Liferay translator, fluent completely successful 6 correspondence 1,000,000 forms. ")) {
 					break;
 				}
 			}
