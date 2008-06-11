@@ -52,6 +52,7 @@ public class TranslationWebCacheItem implements WebCacheItem {
 			StringMaker url = new StringMaker();
 
 			url.append("http://babelfish.yahoo.com/translate_txt?");
+			url.append("ei=UTF-8&doit=done&fr=bf-res&intl=1&tt=urltext");
 			url.append("&trtext=").append(HttpUtil.encodeURL(_fromText));
 			url.append("&lp=").append(_translationId);
 
