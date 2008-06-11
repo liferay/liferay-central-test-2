@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.wiki.translators;
 
+import com.liferay.portlet.wiki.importers.mediawiki.MediaWikiImporter;
+
 /**
  * <a href="MediaWikiToCreoleTranslator.java.html"><b><i>View Source</i></b></a>
  *
@@ -81,7 +83,9 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 
 		// Images
 
-		regexps.put("\\[{2}Image:([^\\]]*)\\]{2}", "{{SharedImages/$1}}");
+		regexps.put(
+			"\\[{2}Image:([^\\]]*)\\]{2}",
+			"{{" + MediaWikiImporter.SHARED_IMAGES_TITLE + "/$1}}");
 
 		// Normalize URLs
 

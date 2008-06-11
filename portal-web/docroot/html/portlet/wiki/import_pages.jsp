@@ -71,6 +71,16 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 		<liferay-ui:icon-help message="import-wiki-users-help" />
 	</td>
 </tr>
+<tr>
+	<td>
+		<liferay-ui:message key="images-file" /> (<liferay-ui:message key="optional" />)
+	</td>
+	<td>
+		<input name="<portlet:namespace />imagesFile" type="file" />
+
+		<liferay-ui:icon-help message="import-wiki-images-help" />
+	</td>
+</tr>
 </table>
 
 <br />

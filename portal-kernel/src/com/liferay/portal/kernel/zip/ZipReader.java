@@ -51,7 +51,7 @@ import java.util.zip.ZipInputStream;
 public class ZipReader implements Serializable {
 
 	public ZipReader(File file) throws Exception {
-		_zis = new ZipInputStream(new FileInputStream(file));
+		this(new FileInputStream(file));
 	}
 
 	public ZipReader(InputStream stream) {

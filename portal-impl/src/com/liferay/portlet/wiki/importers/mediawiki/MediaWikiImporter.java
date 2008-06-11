@@ -22,14 +22,18 @@
 
 package com.liferay.portlet.wiki.importers.mediawiki;
 
+import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ProgressTracker;
 import com.liferay.portal.kernel.util.ProgressTrackerThreadLocal;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
@@ -75,8 +79,13 @@ import org.dom4j.io.SAXReader;
  */
 public class MediaWikiImporter implements WikiImporter {
 
+	public static final String SHARED_IMAGES_CONTENT = "See attachments";
+
+	public static final String SHARED_IMAGES_TITLE = "SharedImages";
+
 	public void importPages(
-			long userId, WikiNode node, File pagesFile, File usersFile)
+			long userId, WikiNode node, File pagesFile, File usersFile,
+			File imagesFile)
 		throws PortalException, SystemException {
 
 		try {
@@ -92,7 +101,8 @@ public class MediaWikiImporter implements WikiImporter {
 
 			processSpecialPages(userId, node, root, specialNamespaces);
 			processRegularPages(
-				userId, node, root, specialNamespaces, usersMap);
+				userId, node, root, specialNamespaces, usersMap, imagesFile);
+			processImages(userId, node, imagesFile);
 		}
 		catch (Exception e) {
 			throw new PortalException(e);
@@ -179,6 +189,28 @@ public class MediaWikiImporter implements WikiImporter {
 		return false;
 	}
 
+	protected boolean isValidImage(String[] paths, byte[] bytes) {
+		if (ArrayUtil.contains(_SPECIAL_MEDIA_WIKI_DIRS, paths[0])) {
+			return false;
+		}
+
+		if ((paths.length > 1) &&
+				(ArrayUtil.contains(_SPECIAL_MEDIA_WIKI_DIRS, paths[1]))) {
+			return false;
+		}
+
+		String fileName = paths[paths.length - 1];
+
+		try {
+			DLLocalServiceUtil.validate(fileName, bytes);
+		}
+		catch(PortalException pe) {
+			return false;
+		}
+
+		return true;
+	}
+
 	protected String normalize(String categoryName, int length) {
 		categoryName = TagsUtil.toWord(categoryName.trim());
 
@@ -199,9 +231,92 @@ public class MediaWikiImporter implements WikiImporter {
 		return StringUtil.shorten(title, 75);
 	}
 
+	private void processImages(long userId, WikiNode node, File imagesFile)
+		throws Exception {
+
+		if ((imagesFile == null) || (!imagesFile.exists())) {
+			return;
+		}
+
+		ProgressTracker progressTracker =
+			ProgressTrackerThreadLocal.getProgressTracker();
+
+		int count = 0;
+
+		ZipReader zipReader = new ZipReader(imagesFile);
+
+		Map<String, byte[]> entries = zipReader.getEntries();
+
+		int total = entries.size();
+
+		if (total > 0) {
+			try {
+				WikiPageLocalServiceUtil.getPage(
+					node.getNodeId(), SHARED_IMAGES_TITLE);
+			}
+			catch (NoSuchPageException nspe) {
+				WikiPageLocalServiceUtil.addPage(
+					userId, node.getNodeId(), SHARED_IMAGES_TITLE,
+					SHARED_IMAGES_CONTENT, null, null);
+			}
+		}
+
+		List<ObjectValuePair<String,byte[]>> attachments =
+			new ArrayList<ObjectValuePair<String,byte[]>>();
+
+		Iterator<Map.Entry<String, byte[]>> itr = entries.entrySet().iterator();
+
+		int percentage = 50;
+
+		for (int i = 0; itr.hasNext(); i++) {
+			Map.Entry<String, byte[]> entry = itr.next();
+
+			String key = entry.getKey();
+			byte[] value = entry.getValue();
+
+			if (key.endsWith(StringPool.SLASH)) {
+				_log.info("Ignoring " + key);
+				continue;
+			}
+
+			String[] paths = StringUtil.split(key, StringPool.SLASH);
+
+			if (!isValidImage(paths, value)) {
+				_log.info("Ignoring " + key);
+				continue;
+			}
+
+			String fileName = paths[paths.length - 1];
+
+			attachments.add(
+				new ObjectValuePair<String,byte[]>(fileName, value));
+
+			count++;
+
+			if ((i % 5) == 0) {
+				WikiPageLocalServiceUtil.addPageAttachments(
+					node.getNodeId(), SHARED_IMAGES_TITLE, attachments);
+
+				attachments.clear();
+
+				percentage = Math.min(50 + (i * 50) / total, 99);
+
+				progressTracker.updateProgress(percentage);
+			}
+		}
+
+		if (!attachments.isEmpty()) {
+			WikiPageLocalServiceUtil.addPageAttachments(
+				node.getNodeId(), SHARED_IMAGES_TITLE, attachments);
+		}
+
+		_log.info("Imported " + count + " images into " + node.getName());
+	}
+
 	protected void processRegularPages(
 		long userId, WikiNode node, Element root,
-		List<String> specialNamespaces, Map<String, String> usersMap) {
+		List<String> specialNamespaces, Map<String, String> usersMap,
+		File imagesFile) {
 
 		ProgressTracker progressTracker =
 			ProgressTrackerThreadLocal.getProgressTracker();
@@ -215,6 +330,13 @@ public class MediaWikiImporter implements WikiImporter {
 		Iterator<Element> itr = root.elements("page").iterator();
 
 		int percentage = 10;
+		int maxPercentage = 50;
+
+		if ((imagesFile == null) || (!imagesFile.exists())) {
+			maxPercentage = 99;
+		}
+
+		int percentageRange = maxPercentage - percentage;
 
 		for (int i = 0; itr.hasNext(); i++) {
 			Element pageEl = itr.next();
@@ -225,7 +347,8 @@ public class MediaWikiImporter implements WikiImporter {
 
 			title = normalizeTitle(title);
 
-			percentage = Math.min(10 + (i * 90) / total, 99);
+			percentage = Math.min(
+				10 + (i * percentageRange) / total, maxPercentage);
 
 			progressTracker.updateProgress(percentage);
 
@@ -382,7 +505,7 @@ public class MediaWikiImporter implements WikiImporter {
 	protected Map<String, String> readUsersFile(File usersFile)
 		throws IOException {
 
-		if (usersFile == null) {
+		if ((usersFile == null) || (!usersFile.exists())) {
 			return Collections.EMPTY_MAP;
 		}
 
@@ -401,7 +524,7 @@ public class MediaWikiImporter implements WikiImporter {
 				usersMap.put(array[0], array[1]);
 			}
 			else {
-				_log.info(
+				_log.warn(
 					"Ignoring line " + line + " because it does not contain" +
 						" exactly 2 columns");
 			}
@@ -423,6 +546,9 @@ public class MediaWikiImporter implements WikiImporter {
 
 	private static final Pattern _REDIRECT_REGEXP_PATTERN = Pattern.compile(
 		_REDIRECT_REGEXP);
+
+	private static final String[] _SPECIAL_MEDIA_WIKI_DIRS = new String[]{
+		"thumb", "temp", "archive"};
 
 	private static Log _log = LogFactory.getLog(MediaWikiImporter.class);
 

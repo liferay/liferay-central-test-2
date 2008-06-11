@@ -103,10 +103,17 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			long userId, long nodeId, String title, PortletPreferences prefs,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
+		return addPage(
+			userId, nodeId, title, null, prefs, themeDisplay);
+	}
+
+	public WikiPage addPage(
+			long userId, long nodeId, String title, String content,
+			PortletPreferences prefs, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
 
 		String uuid = null;
 		double version = WikiPageImpl.DEFAULT_VERSION;
-		String content = null;
 		String format = WikiPageImpl.DEFAULT_FORMAT;
 		boolean head = true;
 		String parentTitle = null;

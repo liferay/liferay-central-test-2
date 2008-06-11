@@ -159,8 +159,8 @@ public interface WikiNodeLocalService {
 	public int getNodesCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public void importPages(long userId, long nodeId, java.io.File file,
-		java.io.File emailsFile)
+	public void importPages(long userId, long nodeId, java.io.File pagesFile,
+		java.io.File usersFile, java.io.File imagesFile)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
