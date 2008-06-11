@@ -46,15 +46,13 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 <%
 GroupSearchTerms searchTerms = (GroupSearchTerms)searchContainer.getSearchTerms();
 
-LinkedHashMap groupParams = new LinkedHashMap();
+List myPlaces = user.getMyPlaces();
 
-groupParams.put("usersGroups", new Long(user.getUserId()));
-
-int total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams);
+int total = myPlaces.size();
 
 searchContainer.setTotal(total);
 
-List results = GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+List results = myPlaces;
 
 searchContainer.setResults(results);
 
@@ -67,6 +65,17 @@ for (int i = 0; i < results.size(); i++) {
 
 	ResultRow row = new ResultRow(group, group.getGroupId(), i);
 
+	String groupName = group.getName();
+
+	if (group.isOrganization()) {
+		Organization organization = OrganizationLocalServiceUtil.getOrganization(group.getClassPK());
+
+		groupName = organization.getName();
+	}
+	else if (group.isUser()) {
+		groupName = LanguageUtil.get(pageContext, "my-community");
+	}
+
 	StringMaker sm = new StringMaker();
 
 	sm.append("javascript: opener.");
@@ -74,14 +83,14 @@ for (int i = 0; i < results.size(); i++) {
 	sm.append("selectGroup('");
 	sm.append(group.getGroupId());
 	sm.append("', '");
-	sm.append(UnicodeFormatter.toString(group.getName()));
+	sm.append(UnicodeFormatter.toString(groupName));
 	sm.append("'); window.close();");
 
 	String rowHREF = sm.toString();
 
 	// Name
 
-	row.addText(group.getName(), rowHREF);
+	row.addText(groupName, rowHREF);
 
 	// Type
 
