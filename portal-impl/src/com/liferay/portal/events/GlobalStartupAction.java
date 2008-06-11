@@ -224,7 +224,7 @@ public class GlobalStartupAction extends SimpleAction {
 			POPServerUtil.start();
 		}
 
-		// Scheduler Engine
+		// Scheduler
 
 		try {
 			QuartzSchedulerEngineUtil.start();

@@ -23,6 +23,7 @@
 package com.liferay.portal.search.lucene;
 
 import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.IndexWriterMessage;
 import com.liferay.util.JSONUtil;
 
@@ -40,32 +41,33 @@ public class LuceneIndexWriterMessageListener implements MessageListener {
 
 	public void receive(String message) {
 		try {
-			IndexWriterMessage iwm = (IndexWriterMessage)JSONUtil.deserialize(
-				message);
-
-			String command = iwm.getCommand();
-
-			if (command.equals(IndexWriterMessage.ADD)) {
-				LuceneSearchEngineUtil.addDocument(
-					iwm.getCompanyId(), iwm.getDocument());
-			}
-			else if (command.equals(IndexWriterMessage.DELETE)) {
-				LuceneSearchEngineUtil.deleteDocument(
-					iwm.getCompanyId(), iwm.getId());
-			}
-			else if (command.equals(
-						IndexWriterMessage.DELETE_PORTLET_DOCS)) {
-
-				LuceneSearchEngineUtil.deletePortletDocuments(
-					iwm.getCompanyId(), iwm.getId());
-			}
-			else if (command.equals(IndexWriterMessage.UPDATE)) {
-				LuceneSearchEngineUtil.updateDocument(
-					iwm.getCompanyId(), iwm.getId(), iwm.getDocument());
-			}
+			doReceive(message);
 		}
 		catch (Exception e) {
 			_log.error("Unable to process message " + message, e);
+		}
+	}
+
+	protected void doReceive(String message) throws Exception {
+		IndexWriterMessage indexWriterMessage =
+			(IndexWriterMessage)JSONUtil.deserialize(message);
+
+		String command = indexWriterMessage.getCommand();
+		long companyId = indexWriterMessage.getCompanyId();
+		String id = indexWriterMessage.getId();
+		Document doc = indexWriterMessage.getDocument();
+
+		if (command.equals(IndexWriterMessage.ADD)) {
+			LuceneSearchEngineUtil.addDocument(companyId, doc);
+		}
+		else if (command.equals(IndexWriterMessage.DELETE)) {
+			LuceneSearchEngineUtil.deleteDocument(companyId, id);
+		}
+		else if (command.equals(IndexWriterMessage.DELETE_PORTLET_DOCS)) {
+			LuceneSearchEngineUtil.deletePortletDocuments(companyId, id);
+		}
+		else if (command.equals(IndexWriterMessage.UPDATE)) {
+			LuceneSearchEngineUtil.updateDocument(companyId, id, doc);
 		}
 	}
 

@@ -115,13 +115,6 @@ public class GlobalShutdownAction extends SimpleAction {
 			POPServerUtil.stop();
 		}
 
-		// Scheduler Engines
-
-		MessageBusUtil.sendMessage(
-			DestinationNames.SCHEDULER,
-			JSONUtil.serialize(
-				new SchedulerRequest(SchedulerRequest.SHUTDOWN_TYPE)));
-
 		// Scheduler
 
 		try {
@@ -129,6 +122,11 @@ public class GlobalShutdownAction extends SimpleAction {
 		}
 		catch (Exception e) {
 		}
+
+		MessageBusUtil.sendMessage(
+			DestinationNames.SCHEDULER,
+			JSONUtil.serialize(
+				new SchedulerRequest(SchedulerRequest.COMMAND_SHUTDOWN)));
 
 		// Reset log to default JDK 1.4 logger. This will allow WARs dependent
 		// on the portal to still log events after the portal WAR has been

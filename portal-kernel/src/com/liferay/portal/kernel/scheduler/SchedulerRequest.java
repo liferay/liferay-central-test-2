@@ -38,96 +38,48 @@ import java.util.Date;
  *
  * @author Michael C. Han
  * @author Bruno Farache
+ * @author Brian Wing Shun Chan
  *
  */
 public class SchedulerRequest implements Serializable {
 
-	public static final String REGISTER_TYPE = "REGISTER";
+	public static final String COMMAND_REGISTER = "REGISTER";
 
-	public static final String RETRIEVE_TYPE = "RETRIEVE";
+	public static final String COMMAND_RETRIEVE = "RETRIEVE";
 
-	public static final String SHUTDOWN_TYPE = "SHUTDOWN";
+	public static final String COMMAND_SHUTDOWN = "SHUTDOWN";
 
-	public static final String UNREGISTER_TYPE = "UNREGISTER";
+	public static final String COMMAND_UNREGISTER = "UNREGISTER";
 
 	public SchedulerRequest() {
 	}
 
-	public SchedulerRequest(String type) {
-		this(null, type);
-	}
-
-	public SchedulerRequest(String groupName, String type) {
-		this(groupName, null, type);
-	}
-
-	public SchedulerRequest(String groupName, String jobName, String type) {
-		this(null, null, groupName, jobName, null, null, null, type);
+	public SchedulerRequest(String command) {
+		this(command, null, null, null, null, null, null, null, null);
 	}
 
 	public SchedulerRequest(
-		String cronText, String groupName, String jobName, String messageBody,
-		Date startDate, Date endDate) {
+		String command, String jobName, String groupName, String cronText,
+		Date startDate, Date endDate, String description, String destination,
+		String messageBody) {
 
-		this(
-			cronText, null, groupName, jobName, messageBody, startDate, endDate,
-			null);
-	}
-
-	public SchedulerRequest(
-		String cronText, String destinationName, String groupName,
-		String messageBody, Date startDate, Date endDate, String type) {
-
-		this(
-			cronText, destinationName, groupName, null, messageBody, startDate,
-			endDate, type);
-	}
-
-	public SchedulerRequest(
-		String cronText, String destinationName, String groupName,
-		String jobName, String messageBody, Date startDate, Date endDate,
-		String type) {
-
-		_cronText = cronText;
-		_destinationName = destinationName;
-		_groupName = groupName;
+		_command = command;
 		_jobName = jobName;
-		_messageBody = messageBody;
+		_groupName = groupName;
+		_cronText = cronText;
 		_startDate = startDate;
 		_endDate = endDate;
-		_type = type;
-	}
-
-	public String getCronText() {
-		return _cronText;
-	}
-
-	public void setCronText(String cronText) {
-		_cronText = cronText;
-	}
-
-	public String getDescription() {
-		return _description;
-	}
-
-	public void setDescription(String description) {
 		_description = description;
+		_destination = destination;
+		_messageBody = messageBody;
 	}
 
-	public String getDestinationName() {
-		return _destinationName;
+	public String getCommand() {
+		return _command;
 	}
 
-	public void setDestinationName(String destinationName) {
-		_destinationName = destinationName;
-	}
-
-	public String getGroupName() {
-		return _groupName;
-	}
-
-	public void setGroupName(String groupName) {
-		_groupName = groupName;
+	public void setCommand(String command) {
+		_command = command;
 	}
 
 	public String getJobName() {
@@ -138,12 +90,20 @@ public class SchedulerRequest implements Serializable {
 		_jobName = jobName;
 	}
 
-	public String getMessageBody() {
-		return _messageBody;
+	public String getGroupName() {
+		return _groupName;
 	}
 
-	public void setMessageBody(String messageBody) {
-		_messageBody = messageBody;
+	public void setGroupName(String groupName) {
+		_groupName = groupName;
+	}
+
+	public String getCronText() {
+		return _cronText;
+	}
+
+	public void setCronText(String cronText) {
+		_cronText = cronText;
 	}
 
 	public Date getStartDate() {
@@ -162,22 +122,38 @@ public class SchedulerRequest implements Serializable {
 		_endDate = endDate;
 	}
 
-	public String getType() {
-		return _type;
+	public String getDescription() {
+		return _description;
 	}
 
-	public void setType(String type) {
-		_type = type;
+	public void setDescription(String description) {
+		_description = description;
 	}
 
-	private String _cronText;
-	private String _description;
-	private String _destinationName;
-	private String _groupName;
+	public String getDestination() {
+		return _destination;
+	}
+
+	public void setDestination(String destination) {
+		_destination = destination;
+	}
+
+	public String getMessageBody() {
+		return _messageBody;
+	}
+
+	public void setMessageBody(String messageBody) {
+		_messageBody = messageBody;
+	}
+
+	private String _command;
 	private String _jobName;
-	private String _messageBody;
+	private String _groupName;
+	private String _cronText;
 	private Date _startDate;
 	private Date _endDate;
-	private String _type;
+	private String _description;
+	private String _destination;
+	private String _messageBody;
 
 }

@@ -25,7 +25,11 @@ package com.liferay.portal.scheduler.quartz;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import org.quartz.Job;
+import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -43,18 +47,22 @@ public class MessageSenderJob implements Job {
 		throws JobExecutionException {
 
 		try {
-			JobDetail detail = jobExecutionContext.getJobDetail();
+			JobDetail jobDetail = jobExecutionContext.getJobDetail();
 
-			String messageBody = detail.getJobDataMap().getString(
+			JobDataMap jobDataMap = jobDetail.getJobDataMap();
+
+			String destination = jobDataMap.getString(
+				SchedulerEngine.DESTINATION);
+			String messageBody = jobDataMap.getString(
 				SchedulerEngine.MESSAGE_BODY);
-			String destinationName = detail.getJobDataMap().getString(
-				SchedulerEngine.DESTINATION_NAME);
 
-			MessageBusUtil.sendMessage(destinationName, messageBody);
+			MessageBusUtil.sendMessage(destination, messageBody);
 		}
 		catch (Exception e) {
-			throw new JobExecutionException("Unable to send message", e);
+			_log.error(e, e);
 		}
 	}
+
+	private static final Log _log = LogFactory.getLog(MessageSenderJob.class);
 
 }

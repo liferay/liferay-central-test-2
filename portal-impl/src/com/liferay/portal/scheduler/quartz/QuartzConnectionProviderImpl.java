@@ -27,6 +27,9 @@ import com.liferay.portal.kernel.jndi.PortalJNDIUtil;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import org.quartz.utils.ConnectionProvider;
 
 /**
@@ -38,18 +41,21 @@ import org.quartz.utils.ConnectionProvider;
 public class QuartzConnectionProviderImpl implements ConnectionProvider {
 
 	public Connection getConnection() throws SQLException {
-		Connection conn = null;
+		Connection con = null;
 
 		try {
-			conn = PortalJNDIUtil.getDataSource().getConnection();
+			con = PortalJNDIUtil.getDataSource().getConnection();
 		}
 		catch (Exception e) {
+			_log.error(e, e);
 		}
 
-		return conn;
+		return con;
 	}
 
 	public void shutdown() throws SQLException {
 	}
+
+	private Log _log = LogFactory.getLog(QuartzConnectionProviderImpl.class);
 
 }

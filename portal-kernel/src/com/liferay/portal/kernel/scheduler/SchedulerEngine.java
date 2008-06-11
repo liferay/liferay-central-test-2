@@ -38,17 +38,17 @@ public interface SchedulerEngine {
 
 	public static final String DESCRIPTION = "description";
 
-	public static final String DESTINATION_NAME = "destinationName";
+	public static final String DESTINATION = "destination";
 
 	public static final String MESSAGE_BODY = "messageBody";
 
-	public Collection<SchedulerRequest> retrieveScheduledJobs(String groupName)
+	public Collection<SchedulerRequest> getScheduledJobs(String groupName)
 		throws SchedulerException;
 
 	public void schedule(
-			String jobName, String groupName, String cronText,
-			String destinationName, String messageBody, Date startDate,
-			Date endDate, String description)
+			String jobName, String groupName, String cronText, Date startDate,
+			Date endDate, String description, String destinationName,
+			String messageBody)
 		throws SchedulerException;
 
 	public void shutdown() throws SchedulerException;

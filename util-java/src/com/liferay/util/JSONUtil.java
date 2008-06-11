@@ -49,6 +49,10 @@ public class JSONUtil {
 		return _instance._deserialize(json);
 	}
 
+	public static Object deserialize(JSONObject jsonObj) {
+		return _instance._deserialize(jsonObj);
+	}
+
 	public static void put(JSONObject jsonObj, String key, boolean value) {
 		try {
 			jsonObj.put(key, value);
@@ -185,7 +189,7 @@ public class JSONUtil {
 		 }
 	}
 
-	public Object _deserialize(String json) {
+	private Object _deserialize(String json) {
 		try {
 			return _serializer.fromJSON(json);
 		}
@@ -196,9 +200,13 @@ public class JSONUtil {
 		}
 	}
 
+	private Object _deserialize(JSONObject jsonObj) {
+		return _deserialize(jsonObj.toString());
+	}
+
 	private String _serialize(Object obj) {
 		try {
-			return _serializer.toJSON(obj).toString();
+			return _serializer.toJSON(obj);
 		}
 		catch (MarshallException me) {
 			_log.error(me, me);

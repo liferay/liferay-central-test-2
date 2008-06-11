@@ -33,26 +33,27 @@ import java.util.Date;
  * <a href="QuartzSchedulerEngineUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
+ * @author Brian Wing Shun Chan
  *
  */
 public class QuartzSchedulerEngineUtil {
 
-	public static Collection<SchedulerRequest> retrieveScheduledJobs(
+	public static Collection<SchedulerRequest> getScheduledJobs(
 			String groupName)
 		throws SchedulerException {
 
-		return _engine.retrieveScheduledJobs(groupName);
+		return _engine.getScheduledJobs(groupName);
 	}
 
 	public static void schedule(
 			String jobName, String groupName, String cronText,
-			String destinationName, String messageBody, Date startDate,
-			Date endDate, String description)
+			Date startDate, Date endDate, String description,
+			String destination, String messageBody)
 		throws SchedulerException {
 
 		_engine.schedule(
-			jobName, groupName, cronText, destinationName, messageBody,
-			startDate, endDate, description);
+			jobName, groupName, cronText, startDate, endDate, description,
+			destination, messageBody);
 	}
 
 	public static void shutdown() throws SchedulerException {

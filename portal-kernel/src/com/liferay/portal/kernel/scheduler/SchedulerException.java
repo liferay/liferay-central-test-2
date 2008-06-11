@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.scheduler;
 
+import com.liferay.portal.PortalException;
+
 /**
  * <a href="SchedulerException.java.html"><b><i>View Source</i></b></a>
  *
@@ -29,14 +31,22 @@ package com.liferay.portal.kernel.scheduler;
  * @author Bruno Farache
  *
  */
-public class SchedulerException extends Exception {
+public class SchedulerException extends PortalException {
 
-	public SchedulerException(String message) {
-		super(message);
+	public SchedulerException() {
+		super();
 	}
 
-	public SchedulerException(String message, Throwable cause) {
-		super(message, cause);
+	public SchedulerException(String msg) {
+		super(msg);
+	}
+
+	public SchedulerException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public SchedulerException(Throwable cause) {
+		super(cause);
 	}
 
 }

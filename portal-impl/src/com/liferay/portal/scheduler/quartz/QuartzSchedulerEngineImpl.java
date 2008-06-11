@@ -29,13 +29,6 @@ import com.liferay.portal.kernel.messaging.SerialDestination;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.SchedulerRequest;
-import com.liferay.portal.tools.sql.DB2Util;
-import com.liferay.portal.tools.sql.DBUtil;
-import com.liferay.portal.tools.sql.DerbyUtil;
-import com.liferay.portal.tools.sql.HypersonicUtil;
-import com.liferay.portal.tools.sql.PostgreSQLUtil;
-import com.liferay.portal.tools.sql.SQLServerUtil;
-import com.liferay.portal.tools.sql.SybaseUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import java.text.ParseException;
@@ -43,6 +36,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
 
@@ -50,19 +44,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.quartz.CronTrigger;
+import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
 import org.quartz.ObjectAlreadyExistsException;
 import org.quartz.Scheduler;
 import org.quartz.impl.StdSchedulerFactory;
-import org.quartz.impl.jdbcjobstore.CloudscapeDelegate;
-import org.quartz.impl.jdbcjobstore.DB2v7Delegate;
-import org.quartz.impl.jdbcjobstore.HSQLDBDelegate;
-import org.quartz.impl.jdbcjobstore.MSSQLDelegate;
-import org.quartz.impl.jdbcjobstore.PostgreSQLDelegate;
-import org.quartz.impl.jdbcjobstore.StdJDBCDelegate;
 
 /**
- * <a href="QuartzSchedulerEngine.java.html"><b><i>View Source</i></b></a>
+ * <a href="QuartzSchedulerEngineImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  * @author Bruno Farache
@@ -72,7 +61,6 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 	public QuartzSchedulerEngineImpl() {
 		try {
-			// Message Bus registration
 			Destination destination = new SerialDestination(
 				DestinationNames.SCHEDULER);
 
@@ -81,81 +69,55 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			MessageBusUtil.registerMessageListener(
 				destination.getName(), new QuartzMessageListener());
 
-			// Quartz properties
-
 			Properties props = new Properties();
 
-			props.put(
-				StdSchedulerFactory.PROP_SCHED_INSTANCE_ID,
-				StdSchedulerFactory.AUTO_GENERATE_INSTANCE_ID);
-			props.put(
-				StdSchedulerFactory.PROP_THREAD_POOL_CLASS,
-				PropsUtil.get(PropsUtil.QUARTZ_THREAD_POOL_CLASS));
-			props.put(
-				"org.quartz.threadPool.threadCount",
-				PropsUtil.get(PropsUtil.QUARTZ_THREAD_POOL_COUNT));
-			props.put(
-				"org.quartz.threadPool.threadPriority",
-				PropsUtil.get(PropsUtil.QUARTZ_THREAD_POOL_PRIORITY));
-			props.put(
-				"org.quartz.jobStore.misfireThreshold",
-				PropsUtil.get(PropsUtil.QUARTZ_JOBSTORE_MISFIRE_THRESHOLD));
-			props.put(
-				StdSchedulerFactory.PROP_JOB_STORE_CLASS,
-				PropsUtil.get(PropsUtil.QUARTZ_JOBSTORE_CLASS));
-			props.put(
-				"org.quartz.jobStore.isClustered",
-				PropsUtil.get(PropsUtil.QUARTZ_JOBSTORE_CLUSTERED));
-			props.put(
-				StdSchedulerFactory.PROP_JOB_STORE_USE_PROP, "true");
-			props.put(
-				"org.quartz.jobStore.dataSource", "ds");
-			props.put(
-				"org.quartz.dataSource.ds.connectionProvider.class",
-				QuartzConnectionProviderImpl.class.getName());
-			props.put(
-				"org.quartz.jobStore.tablePrefix", "quartz_");
-			props.put(
-				"org.quartz.jobStore.driverDelegateClass",
-				getDriverDelegateClass());
+			Enumeration<Object> enu = PropsUtil.getProperties().keys();
 
-			StdSchedulerFactory factory = new StdSchedulerFactory();
+			while (enu.hasMoreElements()) {
+				String key = (String)enu.nextElement();
 
-			factory.initialize(props);
+				if (key.startsWith("org.quartz.")) {
+					props.setProperty(key, PropsUtil.get(key));
+				}
+			}
 
-			_scheduler = factory.getScheduler();
+			StdSchedulerFactory schedulerFactory = new StdSchedulerFactory();
+
+			schedulerFactory.initialize(props);
+
+			_scheduler = schedulerFactory.getScheduler();
 		}
 		catch (Exception e) {
 			_log.error("Unable to initialize engine", e);
 		}
 	}
 
-	public Collection<SchedulerRequest> retrieveScheduledJobs(String groupName)
+	public Collection<SchedulerRequest> getScheduledJobs(String groupName)
 		throws SchedulerException {
 
 		try {
-			String names[] = _scheduler.getJobNames(groupName);
+			String[] jobNames = _scheduler.getJobNames(groupName);
 
-			List<SchedulerRequest> requests =
-				new ArrayList<SchedulerRequest>();
+			List<SchedulerRequest> requests = new ArrayList<SchedulerRequest>();
 
-			for (int i = 0; i < names.length; i++) {
-				JobDetail detail = _scheduler.getJobDetail(names[i], groupName);
+			for (String jobName : jobNames) {
+				JobDetail jobDetail = _scheduler.getJobDetail(
+					jobName, groupName);
 
-				String description = detail.getJobDataMap().getString(
-					SchedulerEngine.DESCRIPTION);
-				String messageBody = detail.getJobDataMap().getString(
-					SchedulerEngine.MESSAGE_BODY);
+				JobDataMap jobDataMap = jobDetail.getJobDataMap();
 
-				CronTrigger trigger = (CronTrigger)_scheduler.getTrigger(
-					names[i], groupName);
+				String description = jobDataMap.getString(DESCRIPTION);
+				String messageBody = jobDataMap.getString(MESSAGE_BODY);
 
-				SchedulerRequest sr = new SchedulerRequest(
-					trigger.getCronExpression(), groupName, names[i],
-					messageBody, trigger.getStartTime(), trigger.getEndTime(),
-					description);
+				CronTrigger cronTrigger = (CronTrigger)_scheduler.getTrigger(
+					jobName, groupName);
 
-				requests.add(sr);
+				SchedulerRequest schedulerRequest = new SchedulerRequest(
+					null, jobName, groupName, cronTrigger.getCronExpression(),
+					cronTrigger.getStartTime(), cronTrigger.getEndTime(),
+					description, null, messageBody);
+
+				requests.add(schedulerRequest);
 			}
 
 			return requests;
@@ -166,30 +128,33 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 	}
 
 	public void schedule(
-			String jobName, String groupName, String cronText,
-			String destinationName, String messageBody, Date startDate,
-			Date endDate, String description)
+			String jobName, String groupName, String cronText, Date startDate,
+			Date endDate, String description, String destination,
+			String messageBody)
 		throws SchedulerException {
 
 		try {
-			CronTrigger trigger = new CronTrigger(jobName, groupName, cronText);
+			CronTrigger cronTrigger = new CronTrigger(
+				jobName, groupName, cronText);
 
 			if (startDate != null) {
-				trigger.setStartTime(startDate);
+				cronTrigger.setStartTime(startDate);
 			}
 
 			if (endDate != null) {
-				trigger.setEndTime(endDate);
+				cronTrigger.setEndTime(endDate);
 			}
 
-			JobDetail detail = new JobDetail(
+			JobDetail jobDetail = new JobDetail(
 				jobName, groupName, MessageSenderJob.class);
 
-			detail.getJobDataMap().put(DESCRIPTION, description);
-			detail.getJobDataMap().put(DESTINATION_NAME, destinationName);
-			detail.getJobDataMap().put(MESSAGE_BODY, messageBody);
+			JobDataMap jobDataMap = jobDetail.getJobDataMap();
 
-			_scheduler.scheduleJob(detail, trigger);
+			jobDataMap.put(DESCRIPTION, description);
+			jobDataMap.put(DESTINATION, destination);
+			jobDataMap.put(MESSAGE_BODY, messageBody);
+
+			_scheduler.scheduleJob(jobDetail, cronTrigger);
 		}
 		catch (ObjectAlreadyExistsException oare) {
 			if (_log.isInfoEnabled()) {
@@ -230,44 +195,14 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		}
 		catch (org.quartz.SchedulerException se) {
 			throw new SchedulerException(
-				"Unable to unschedule job: " + jobName + "," + groupName , se);
+				"Unable to unschedule job {jobName=" + jobName +
+					", groupName=" + groupName + "}",
+				se);
 		}
-	}
-
-	protected String getDriverDelegateClass() {
-		String driverDelegateClass = StdJDBCDelegate.class.getName();
-
-		DBUtil dbUtil = DBUtil.getInstance();
-
-		if (dbUtil instanceof DB2Util) {
-			driverDelegateClass = DB2v7Delegate.class.getName();
-		}
-		else if (dbUtil instanceof DerbyUtil) {
-			driverDelegateClass = CloudscapeDelegate.class.getName();
-		}
-		else if (dbUtil instanceof HypersonicUtil) {
-			driverDelegateClass = HSQLDBDelegate.class.getName();
-		}
-		else if (dbUtil instanceof PostgreSQLUtil) {
-			driverDelegateClass = PostgreSQLDelegate.class.getName();
-		}
-		else if (dbUtil instanceof SQLServerUtil) {
-			driverDelegateClass = MSSQLDelegate.class.getName();
-		}
-		else if (dbUtil instanceof SybaseUtil) {
-			driverDelegateClass = MSSQLDelegate.class.getName();
-		}
-
-		return driverDelegateClass;
 	}
 
 	private Log _log = LogFactory.getLog(QuartzSchedulerEngineImpl.class);
 
 	private Scheduler _scheduler;
-
-	public static void main(String[] args) {
-		Properties props = new Properties();
-		props.put("oi", "oi");
-	}
 
 }

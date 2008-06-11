@@ -863,20 +863,6 @@ public class PropsUtil {
 
 	public static final String POP_SERVER_SUBDOMAIN = "pop.server.subdomain";
 
-	// Quartz
-	
-	public static final String QUARTZ_THREAD_POOL_CLASS = "quartz.thread.pool.class";
-	
-	public static final String QUARTZ_THREAD_POOL_COUNT = "quartz.thread.pool.count";
-	
-	public static final String QUARTZ_THREAD_POOL_PRIORITY = "quartz.thread.pool.priority";
-	
-	public static final String QUARTZ_JOBSTORE_MISFIRE_THRESHOLD = "quartz.jobStore.misfire.threshold";
-	
-	public static final String QUARTZ_JOBSTORE_CLASS = "quartz.jobStore.class";
-	
-	public static final String QUARTZ_JOBSTORE_CLUSTERED = "quartz.jobStore.clustered";
-	
 	// Scheduler
 
 	public static final String SCHEDULER_ENABLED = "scheduler.enabled";
