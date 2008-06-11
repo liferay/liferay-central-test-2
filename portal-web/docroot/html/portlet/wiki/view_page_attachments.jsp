@@ -58,6 +58,8 @@ searchContainer.setTotal(total);
 
 List results = ListUtil.fromArray(attachments);
 
+results = ListUtil.subList(results, searchContainer.getStart(), searchContainer.getEnd());
+
 searchContainer.setResults(results);
 
 List resultRows = searchContainer.getResultRows();
