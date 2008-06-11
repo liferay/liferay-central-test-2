@@ -27,7 +27,7 @@
 <%
 groupId = ParamUtil.getLong(request, "groupId", groupId);
 
-List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, null, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+List communities = user.getMyPlaces();
 %>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
@@ -51,7 +51,7 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 				group = group.toEscapedModel();
 			%>
 
-				<option <%= groupId == group.getGroupId() ? "selected" : "" %> value="<%= group.getGroupId() %>"><%= group.getName() %></option>
+				<option <%= groupId == group.getGroupId() ? "selected" : "" %> value="<%= group.getGroupId() %>"><%= group.getDescriptiveName() %></option>
 
 			<%
 			}
