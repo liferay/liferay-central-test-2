@@ -742,8 +742,6 @@ public class SourceFormatter {
 		_exclusions.load(is);
 
 		is.close();
-
-		System.out.println("Loading exclusions from " + url);
 	}
 
 	private static final Pattern _STRING_PARAM_PATTERN = Pattern.compile(
