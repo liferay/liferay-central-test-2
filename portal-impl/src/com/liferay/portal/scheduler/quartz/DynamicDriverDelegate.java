@@ -555,7 +555,8 @@ public class DynamicDriverDelegate extends StdJDBCDelegate {
 			Connection conn, long noLaterThan, long noEarlierThan)
 		throws SQLException {
 
-		return _jdbcDelegate.selectTriggerToAcquire(conn, noLaterThan, noEarlierThan);
+		return _jdbcDelegate.selectTriggerToAcquire(
+			conn, noLaterThan, noEarlierThan);
 	}
 
 	public Key[] selectVolatileJobs(Connection arg0) throws SQLException {
@@ -608,7 +609,8 @@ public class DynamicDriverDelegate extends StdJDBCDelegate {
 			Connection conn, String instanceId, long checkInTime)
 		throws SQLException {
 
-		return _jdbcDelegate.updateSchedulerState(conn, instanceId, checkInTime);
+		return _jdbcDelegate.updateSchedulerState(
+			conn, instanceId, checkInTime);
 	}
 
 	public int updateSimpleTrigger(Connection conn, SimpleTrigger trigger)

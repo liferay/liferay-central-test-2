@@ -573,7 +573,6 @@ public class ExportAction extends Action {
 			sm.append("plid, groupId, companyId, privateLayout, layoutId, ");
 			sm.append("parentLayoutId, name, title, type_, typeSettings, ");
 			sm.append("hidden_, friendlyURL, iconImage, iconImageId, ");
-			//sm.append("themeId, colorSchemeId, wapThemeId, wapColorSchemeId, ");
 			sm.append("css, priority");
 			sm.append(") values (");
 			addPKColumn(sm, layout.getPlid());
@@ -590,10 +589,6 @@ public class ExportAction extends Action {
 			addColumn(sm, layout.getFriendlyURL());
 			addColumn(sm, layout.isIconImage());
 			addColumn(sm, layout.getIconImageId());
-			//addColumn(sm, layout.getThemeId());
-			//addColumn(sm, layout.getColorSchemeId());
-			//addColumn(sm, layout.getWapThemeId());
-			//addColumn(sm, layout.getWapColorSchemeId());
 			addColumn(sm, layout.getCss());
 			addColumn(sm, layout.getPriority());
 			removeTrailingComma(sm);

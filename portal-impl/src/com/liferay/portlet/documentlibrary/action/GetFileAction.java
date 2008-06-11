@@ -115,13 +115,15 @@ public class GetFileAction extends PortletAction {
 			String uuid = ParamUtil.getString(req, "uuid");
 			long groupId = ParamUtil.getLong(req, "groupId");
 
-			String targetExtension = ParamUtil.getString(req, "targetExtension");
+			String targetExtension = ParamUtil.getString(
+				req, "targetExtension");
 
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 			HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-			HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
+			HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(
+				res);
 
 			getFile(
 				folderId, name, version, fileShortcutId, uuid, groupId,

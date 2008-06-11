@@ -33,7 +33,8 @@ import org.apache.commons.logging.LogFactory;
 import org.quartz.utils.ConnectionProvider;
 
 /**
- * <a href="QuartzConnectionProviderImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="QuartzConnectionProviderImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Bruno Farache
  *

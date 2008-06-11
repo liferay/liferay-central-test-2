@@ -263,14 +263,16 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		boolean showAvailableLocales = ParamUtil.getBoolean(
 			req, "showAvailableLocales");
 		boolean enableComments = ParamUtil.getBoolean(req, "enableComments");
-		boolean enableCommentRatings = ParamUtil.getBoolean(req, "enableCommentRatings");
+		boolean enableCommentRatings = ParamUtil.getBoolean(
+			req, "enableCommentRatings");
 		boolean enableRatings = ParamUtil.getBoolean(req, "enableRatings");
 
 		prefs.setValue("display-style", displayStyle);
 		prefs.setValue(
 			"show-available-locales", String.valueOf(showAvailableLocales));
 		prefs.setValue("enable-comments", String.valueOf(enableComments));
-		prefs.setValue("enable-comment-ratings", String.valueOf(enableCommentRatings));
+		prefs.setValue(
+			"enable-comment-ratings", String.valueOf(enableCommentRatings));
 		prefs.setValue("enable-ratings", String.valueOf(enableRatings));
 	}
 
