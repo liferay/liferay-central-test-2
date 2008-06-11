@@ -385,9 +385,9 @@ public class PortalInstances {
 
 		try {
 			EventsProcessor.process(
-				PropsUtil.getArray(
-					PropsUtil.APPLICATION_STARTUP_EVENTS),
-					new String[] {String.valueOf(companyId)});
+				PropsUtil.APPLICATION_STARTUP_EVENTS,
+				PropsValues.APPLICATION_STARTUP_EVENTS,
+				new String[] {String.valueOf(companyId)});
 		}
 		catch (Exception e) {
 			_log.error(e, e);

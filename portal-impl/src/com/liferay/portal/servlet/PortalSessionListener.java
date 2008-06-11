@@ -61,8 +61,9 @@ public class PortalSessionListener implements HttpSessionListener {
 		// Process session created events
 
 		try {
-			EventsProcessor.process(PropsUtil.getArray(
-				PropsUtil.SERVLET_SESSION_CREATE_EVENTS), ses);
+			EventsProcessor.process(
+				PropsUtil.SERVLET_SESSION_CREATE_EVENTS,
+				PropsValues.SERVLET_SESSION_CREATE_EVENTS, ses);
 		}
 		catch (ActionException ae) {
 			_log.error(ae, ae);
@@ -111,8 +112,9 @@ public class PortalSessionListener implements HttpSessionListener {
 		// Process session destroyed events
 
 		try {
-			EventsProcessor.process(PropsUtil.getArray(
-				PropsUtil.SERVLET_SESSION_DESTROY_EVENTS), ses);
+			EventsProcessor.process(
+				PropsUtil.SERVLET_SESSION_DESTROY_EVENTS,
+				PropsValues.SERVLET_SESSION_DESTROY_EVENTS, ses);
 		}
 		catch (ActionException ae) {
 			_log.error(ae, ae);

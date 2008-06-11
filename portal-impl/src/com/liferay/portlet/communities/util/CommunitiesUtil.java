@@ -125,7 +125,9 @@ public class CommunitiesUtil {
 					PropsUtil.LAYOUT_CONFIGURATION_ACTION_DELETE,
 					Filter.by(layout.getType())));
 
-			EventsProcessor.process(eventClasses, req, res);
+			EventsProcessor.process(
+				PropsUtil.LAYOUT_CONFIGURATION_ACTION_DELETE, eventClasses, req,
+				res);
 		}
 
 		LayoutServiceUtil.deleteLayout(groupId, privateLayout, layoutId);

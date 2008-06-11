@@ -38,5 +38,4 @@ The role-name designates the name of a security role.
 -->
 <!ELEMENT role-name (#PCDATA)>
 
-
 <!ELEMENT custom (layout-template*)>

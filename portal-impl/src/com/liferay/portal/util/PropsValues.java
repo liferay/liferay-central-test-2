@@ -80,6 +80,12 @@ public class PropsValues {
 	public static final String ANNOUNCEMENTS_EMAIL_BODY =
 		PropsUtil.get(PropsUtil.ANNOUNCEMENTS_EMAIL_BODY);
 
+	public static final String[] APPLICATION_STARTUP_EVENTS =
+		PropsUtil.getArray(PropsUtil.APPLICATION_STARTUP_EVENTS);
+
+	public static final String[] APPLICATION_SHUTDOWN_EVENTS =
+		PropsUtil.getArray(PropsUtil.APPLICATION_SHUTDOWN_EVENTS);
+
 	public static final boolean AUTH_FORWARD_BY_LAST_PATH =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.AUTH_FORWARD_BY_LAST_PATH));
@@ -390,6 +396,12 @@ public class PropsValues {
 			GetterUtil.getBoolean(PropsUtil.get(PropsUtil.
 				FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS));
 
+	public static final String[] GLOBAL_SHUTDOWN_EVENTS =
+		PropsUtil.getArray(PropsUtil.GLOBAL_SHUTDOWN_EVENTS);
+
+	public static final String[] GLOBAL_STARTUP_EVENTS =
+		PropsUtil.getArray(PropsUtil.GLOBAL_STARTUP_EVENTS);
+
 	public static final boolean HOT_UNDEPLOY_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.HOT_UNDEPLOY_ENABLED));
 
@@ -468,6 +480,9 @@ public class PropsValues {
 
 	public static final boolean LAST_MODIFIED_CHECK = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.LAST_MODIFIED_CHECK));
+
+	public static final String[] LAST_MODIFIED_PATHS =
+		PropsUtil.getArray(PropsUtil.LAST_MODIFIED_PATHS);
 
 	public static final String LAYOUT_CLONE_IMPL = PropsUtil.get(
 		PropsUtil.LAYOUT_CLONE_IMPL);
@@ -580,6 +595,12 @@ public class PropsValues {
 
 	public static final String[] LOGIN_EVENTS_PRE =
 		PropsUtil.getArray(PropsUtil.LOGIN_EVENTS_PRE);
+
+	public static final String[] LOGOUT_EVENTS_POST =
+		PropsUtil.getArray(PropsUtil.LOGOUT_EVENTS_POST);
+
+	public static final String[] LOGOUT_EVENTS_PRE =
+		PropsUtil.getArray(PropsUtil.LOGOUT_EVENTS_PRE);
 
 	public static final boolean LOOK_AND_FEEL_MODIFIABLE =
 		GetterUtil.getBoolean(
@@ -821,6 +842,12 @@ public class PropsValues {
 
 	public static final String SERVLET_SERVICE_EVENTS_PRE_ERROR_PAGE =
 		PropsUtil.get(PropsUtil.SERVLET_SERVICE_EVENTS_PRE_ERROR_PAGE);
+
+	public static final String[] SERVLET_SESSION_CREATE_EVENTS =
+		PropsUtil.getArray(PropsUtil.SERVLET_SESSION_CREATE_EVENTS);
+
+	public static final String[] SERVLET_SESSION_DESTROY_EVENTS =
+		PropsUtil.getArray(PropsUtil.SERVLET_SESSION_DESTROY_EVENTS);
 
 	public static final String SESSION_COOKIE_DOMAIN =
 		PropsUtil.get(PropsUtil.SESSION_COOKIE_DOMAIN);

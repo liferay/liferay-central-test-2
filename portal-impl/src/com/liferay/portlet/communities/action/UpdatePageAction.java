@@ -149,7 +149,9 @@ public class UpdatePageAction extends JSONAction {
 				PropsUtil.LAYOUT_CONFIGURATION_ACTION_UPDATE,
 				Filter.by(layout.getType())));
 
-		EventsProcessor.process(eventClasses, req, res);
+		EventsProcessor.process(
+			PropsUtil.LAYOUT_CONFIGURATION_ACTION_UPDATE, eventClasses, req,
+			res);
 
 		String layoutURL = PortalUtil.getLayoutURL(layout, themeDisplay);
 

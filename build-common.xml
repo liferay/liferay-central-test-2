@@ -86,6 +86,7 @@
 		<dtd publicId="-//Liferay//DTD Display 3.5.0//EN" location="${definitions.dir}/liferay-display_3_5_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Display 4.0.0//EN" location="${definitions.dir}/liferay-display_4_0_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Display 5.0.0//EN" location="${definitions.dir}/liferay-display_5_0_0.dtd" />
+		<dtd publicId="-//Liferay//DTD Hook 5.0.0//EN" location="${definitions.dir}/liferay-hook_5_0_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Layout Templates 3.6.0//EN" location="${definitions.dir}/liferay-layout-templates_3_6_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Layout Templates 4.0.0//EN" location="${definitions.dir}/liferay-layout-templates_4_0_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Layout Templates 4.3.0//EN" location="${definitions.dir}/liferay-layout-templates_4_3_0.dtd" />

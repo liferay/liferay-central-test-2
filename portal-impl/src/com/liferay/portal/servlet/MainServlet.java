@@ -145,11 +145,9 @@ public class MainServlet extends ActionServlet {
 		}
 
 		try {
-			EventsProcessor.process(
-				new String[] {
-					StartupAction.class.getName()
-				},
-				true);
+			StartupAction startupAction = new StartupAction();
+
+			startupAction.run(null);
 		}
 		catch (RuntimeException re) {
 			ShutdownUtil.shutdown(0);
@@ -399,11 +397,8 @@ public class MainServlet extends ActionServlet {
 		if (_lastModifiedPaths == null) {
 			_lastModifiedPaths = new HashSet<String>();
 
-			String[] pathsArray = PropsUtil.getArray(
-				PropsUtil.LAST_MODIFIED_PATHS);
-
-			for (int i = 0; i < pathsArray.length; i++) {
-				_lastModifiedPaths.add(pathsArray[i]);
+			for (String lastModifiedPath : PropsValues.LAST_MODIFIED_PATHS) {
+				_lastModifiedPaths.add(lastModifiedPath);
 			}
 		}
 
@@ -414,8 +409,9 @@ public class MainServlet extends ActionServlet {
 		}
 
 		try {
-			EventsProcessor.process(PropsUtil.getArray(
-				PropsUtil.GLOBAL_STARTUP_EVENTS), true);
+			EventsProcessor.process(
+				PropsUtil.GLOBAL_STARTUP_EVENTS,
+				PropsValues.GLOBAL_STARTUP_EVENTS);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -626,7 +622,9 @@ public class MainServlet extends ActionServlet {
 
 				// Pre login events
 
-				EventsProcessor.process(PropsValues.LOGIN_EVENTS_PRE, req, res);
+				EventsProcessor.process(
+					PropsUtil.LOGIN_EVENTS_PRE, PropsValues.LOGIN_EVENTS_PRE,
+					req, res);
 
 				// User
 
@@ -646,7 +644,8 @@ public class MainServlet extends ActionServlet {
 				// Post login events
 
 				EventsProcessor.process(
-					PropsValues.LOGIN_EVENTS_POST, req, res);
+					PropsUtil.LOGIN_EVENTS_POST, PropsValues.LOGIN_EVENTS_POST,
+					req, res);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
@@ -657,6 +656,7 @@ public class MainServlet extends ActionServlet {
 
 		try {
 			EventsProcessor.process(
+				PropsUtil.SERVLET_SERVICE_EVENTS_PRE,
 				PropsValues.SERVLET_SERVICE_EVENTS_PRE, req, res);
 		}
 		catch (Exception e) {
@@ -700,6 +700,7 @@ public class MainServlet extends ActionServlet {
 
 			try {
 				EventsProcessor.process(
+					PropsUtil.SERVLET_SERVICE_EVENTS_POST,
 					PropsValues.SERVLET_SERVICE_EVENTS_POST, req, res);
 			}
 			catch (Exception e) {
@@ -741,8 +742,9 @@ public class MainServlet extends ActionServlet {
 		}
 
 		try {
-			EventsProcessor.process(PropsUtil.getArray(
-				PropsUtil.GLOBAL_SHUTDOWN_EVENTS), true);
+			EventsProcessor.process(
+				PropsUtil.GLOBAL_SHUTDOWN_EVENTS,
+				PropsValues.GLOBAL_SHUTDOWN_EVENTS);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -778,8 +780,9 @@ public class MainServlet extends ActionServlet {
 		}
 
 		try {
-			EventsProcessor.process(PropsUtil.getArray(
-				PropsUtil.APPLICATION_SHUTDOWN_EVENTS),
+			EventsProcessor.process(
+				PropsUtil.APPLICATION_SHUTDOWN_EVENTS,
+				PropsValues.APPLICATION_SHUTDOWN_EVENTS,
 				new String[] {String.valueOf(companyId)});
 		}
 		catch (Exception e) {

@@ -58,208 +58,7 @@ public class StartupAction extends SimpleAction {
 
 	public void run(String[] ids) throws ActionException {
 		try {
-
-			// Print release information
-
-			System.out.println("Starting " + ReleaseInfo.getReleaseInfo());
-
-			// Clear locks
-
-			try {
-				LockServiceUtil.clear();
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
-
-			// Add shutdown hook
-
-			Runtime.getRuntime().addShutdownHook(
-				new Thread(new ShutdownHook()));
-
-			// Velocity
-
-			LiferayResourceLoader.setListeners(PropsUtil.getArray(
-				PropsUtil.VELOCITY_ENGINE_RESOURCE_LISTENERS));
-
-			ExtendedProperties props = new ExtendedProperties();
-
-			props.setProperty(RuntimeConstants.RESOURCE_LOADER, "servlet");
-
-			props.setProperty(
-				"servlet." + RuntimeConstants.RESOURCE_LOADER + ".class",
-				LiferayResourceLoader.class.getName());
-
-			props.setProperty(
-				RuntimeConstants.RESOURCE_MANAGER_CLASS,
-				PropsUtil.get(PropsUtil.VELOCITY_ENGINE_RESOURCE_MANAGER));
-
-			props.setProperty(
-				RuntimeConstants.RESOURCE_MANAGER_CACHE_CLASS,
-				PropsUtil.get(
-					PropsUtil.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE));
-
-			props.setProperty(
-				"velocimacro.library",
-				PropsUtil.get(PropsUtil.VELOCITY_ENGINE_VELOCIMACRO_LIBRARY));
-
-			props.setProperty(
-				RuntimeConstants.RUNTIME_LOG_LOGSYSTEM_CLASS,
-				PropsUtil.get(PropsUtil.VELOCITY_ENGINE_LOGGER));
-
-			props.setProperty(
-				"runtime.log.logsystem.log4j.category",
-				PropsUtil.get(PropsUtil.VELOCITY_ENGINE_LOGGER_CATEGORY));
-
-			Velocity.setExtendedProperties(props);
-
-			try {
-				Velocity.init();
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
-
-			// Disable database caching before upgrade
-
-			CacheRegistry.setActive(false);
-
-			// Upgrade
-
-			int buildNumber = ReleaseLocalServiceUtil.getBuildNumberOrCreate();
-
-			if (buildNumber < ReleaseInfo.RELEASE_4_2_1_BUILD_NUMBER) {
-				String msg = "You must first upgrade to Liferay Portal 4.2.1";
-
-				_log.fatal(msg);
-
-				throw new RuntimeException(msg);
-			}
-
-			boolean ranUpgradeProcess = false;
-
-			String[] upgradeProcesses =
-				PropsUtil.getArray(PropsUtil.UPGRADE_PROCESSES);
-
-			for (int i = 0; i < upgradeProcesses.length; i++) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("Initializing upgrade " + upgradeProcesses[i]);
-				}
-
-				UpgradeProcess upgradeProcess =
-					(UpgradeProcess)InstancePool.get(upgradeProcesses[i]);
-
-				if (upgradeProcess != null) {
-					if ((upgradeProcess.getThreshold() == 0) ||
-						(upgradeProcess.getThreshold() > buildNumber)) {
-
-						if (_log.isInfoEnabled()) {
-							_log.info(
-								"Running upgrade " + upgradeProcesses[i]);
-						}
-
-						upgradeProcess.upgrade();
-
-						if (_log.isInfoEnabled()) {
-							_log.info(
-								"Finished upgrade " + upgradeProcesses[i]);
-						}
-
-						ranUpgradeProcess = true;
-					}
-					else {
-						if (_log.isDebugEnabled()) {
-							_log.debug(
-								"Upgrade threshold " +
-									upgradeProcess.getThreshold() +
-										" will not trigger upgrade");
-
-							_log.debug(
-								"Skipping upgrade " + upgradeProcesses[i]);
-						}
-					}
-				}
-				else {
-					_log.error(upgradeProcesses[i] + " cannot be found");
-				}
-			}
-
-			// Class names
-
-			ClassNameLocalServiceUtil.checkClassNames();
-
-			// Delete temporary images
-
-			deleteTemporaryImages();
-
-			// Update indexes
-
-			if (ranUpgradeProcess) {
-				DBUtil.getInstance().runSQLTemplate("indexes.sql", false);
-			}
-
-			// Enable database caching after upgrade
-
-			CacheRegistry.setActive(true);
-
-			// Clear the caches only if the upgrade process was run
-
-			if (ranUpgradeProcess) {
-				MultiVMPoolUtil.clear();
-			}
-
-			// Verify
-
-			Release release = ReleaseLocalServiceUtil.getRelease();
-
-			int verifyFrequency = GetterUtil.getInteger(
-				PropsUtil.get(PropsUtil.VERIFY_FREQUENCY));
-			boolean verified = release.isVerified();
-
-			if ((verifyFrequency == VerifyProcess.ALWAYS) ||
-				((verifyFrequency == VerifyProcess.ONCE) && !verified) ||
-				(ranUpgradeProcess)) {
-
-				String[] verifyProcesses =
-					PropsUtil.getArray(PropsUtil.VERIFY_PROCESSES);
-
-				for (int i = 0; i < verifyProcesses.length; i++) {
-					if (_log.isDebugEnabled()) {
-						_log.debug(
-							"Initializing verification " + verifyProcesses[i]);
-					}
-
-					try {
-						VerifyProcess verifyProcess =
-							(VerifyProcess)Class.forName(
-								verifyProcesses[i]).newInstance();
-
-						if (_log.isInfoEnabled()) {
-							_log.info(
-								"Running verification " + verifyProcesses[i]);
-						}
-
-						verifyProcess.verify();
-
-						if (_log.isInfoEnabled()) {
-							_log.info(
-								"Finished verification " + verifyProcesses[i]);
-						}
-
-						verified = true;
-					}
-					catch (ClassNotFoundException cnfe) {
-						_log.error(verifyProcesses[i] + " cannot be found");
-					}
-					catch (InstantiationException ie) {
-						_log.error(verifyProcesses[i] + " cannot be initiated");
-					}
-				}
-			}
-
-			// Update release
-
-			ReleaseLocalServiceUtil.updateRelease(verified);
+			doRun(ids);
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -280,6 +79,204 @@ public class StartupAction extends SimpleAction {
 
 		dbUtil.runSQL(_DELETE_TEMP_IMAGES_1);
 		dbUtil.runSQL(_DELETE_TEMP_IMAGES_2);
+	}
+
+	protected void doRun(String[] ids) throws Exception {
+
+		// Print release information
+
+		System.out.println("Starting " + ReleaseInfo.getReleaseInfo());
+
+		// Clear locks
+
+		try {
+			LockServiceUtil.clear();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		// Add shutdown hook
+
+		Runtime.getRuntime().addShutdownHook(new Thread(new ShutdownHook()));
+
+		// Velocity
+
+		LiferayResourceLoader.setListeners(PropsUtil.getArray(
+			PropsUtil.VELOCITY_ENGINE_RESOURCE_LISTENERS));
+
+		ExtendedProperties props = new ExtendedProperties();
+
+		props.setProperty(RuntimeConstants.RESOURCE_LOADER, "servlet");
+
+		props.setProperty(
+			"servlet." + RuntimeConstants.RESOURCE_LOADER + ".class",
+			LiferayResourceLoader.class.getName());
+
+		props.setProperty(
+			RuntimeConstants.RESOURCE_MANAGER_CLASS,
+			PropsUtil.get(PropsUtil.VELOCITY_ENGINE_RESOURCE_MANAGER));
+
+		props.setProperty(
+			RuntimeConstants.RESOURCE_MANAGER_CACHE_CLASS,
+			PropsUtil.get(PropsUtil.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE));
+
+		props.setProperty(
+			"velocimacro.library",
+			PropsUtil.get(PropsUtil.VELOCITY_ENGINE_VELOCIMACRO_LIBRARY));
+
+		props.setProperty(
+			RuntimeConstants.RUNTIME_LOG_LOGSYSTEM_CLASS,
+			PropsUtil.get(PropsUtil.VELOCITY_ENGINE_LOGGER));
+
+		props.setProperty(
+			"runtime.log.logsystem.log4j.category",
+			PropsUtil.get(PropsUtil.VELOCITY_ENGINE_LOGGER_CATEGORY));
+
+		Velocity.setExtendedProperties(props);
+
+		try {
+			Velocity.init();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		// Disable database caching before upgrade
+
+		CacheRegistry.setActive(false);
+
+		// Upgrade
+
+		int buildNumber = ReleaseLocalServiceUtil.getBuildNumberOrCreate();
+
+		if (buildNumber < ReleaseInfo.RELEASE_4_2_1_BUILD_NUMBER) {
+			String msg = "You must first upgrade to Liferay Portal 4.2.1";
+
+			_log.fatal(msg);
+
+			throw new RuntimeException(msg);
+		}
+
+		boolean ranUpgradeProcess = false;
+
+		String[] upgradeProcesses = PropsUtil.getArray(
+			PropsUtil.UPGRADE_PROCESSES);
+
+		for (int i = 0; i < upgradeProcesses.length; i++) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Initializing upgrade " + upgradeProcesses[i]);
+			}
+
+			UpgradeProcess upgradeProcess = (UpgradeProcess)InstancePool.get(
+				upgradeProcesses[i]);
+
+			if (upgradeProcess == null) {
+				_log.error(upgradeProcesses[i] + " cannot be found");
+
+				continue;
+			}
+
+			if ((upgradeProcess.getThreshold() == 0) ||
+				(upgradeProcess.getThreshold() > buildNumber)) {
+
+				if (_log.isInfoEnabled()) {
+					_log.info("Running upgrade " + upgradeProcesses[i]);
+				}
+
+				upgradeProcess.upgrade();
+
+				if (_log.isInfoEnabled()) {
+					_log.info("Finished upgrade " + upgradeProcesses[i]);
+				}
+
+				ranUpgradeProcess = true;
+			}
+			else {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Upgrade threshold " + upgradeProcess.getThreshold() +
+							" will not trigger upgrade");
+
+					_log.debug("Skipping upgrade " + upgradeProcesses[i]);
+				}
+			}
+		}
+
+		// Class names
+
+		ClassNameLocalServiceUtil.checkClassNames();
+
+		// Delete temporary images
+
+		deleteTemporaryImages();
+
+		// Update indexes
+
+		if (ranUpgradeProcess) {
+			DBUtil.getInstance().runSQLTemplate("indexes.sql", false);
+		}
+
+		// Enable database caching after upgrade
+
+		CacheRegistry.setActive(true);
+
+		// Clear the caches only if the upgrade process was run
+
+		if (ranUpgradeProcess) {
+			MultiVMPoolUtil.clear();
+		}
+
+		// Verify
+
+		Release release = ReleaseLocalServiceUtil.getRelease();
+
+		int verifyFrequency = GetterUtil.getInteger(
+			PropsUtil.get(PropsUtil.VERIFY_FREQUENCY));
+		boolean verified = release.isVerified();
+
+		if ((verifyFrequency == VerifyProcess.ALWAYS) ||
+			((verifyFrequency == VerifyProcess.ONCE) && !verified) ||
+			(ranUpgradeProcess)) {
+
+			String[] verifyProcesses = PropsUtil.getArray(
+				PropsUtil.VERIFY_PROCESSES);
+
+			for (int i = 0; i < verifyProcesses.length; i++) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Initializing verification " + verifyProcesses[i]);
+				}
+
+				try {
+					VerifyProcess verifyProcess = (VerifyProcess)Class.forName(
+						verifyProcesses[i]).newInstance();
+
+					if (_log.isInfoEnabled()) {
+						_log.info("Running verification " + verifyProcesses[i]);
+					}
+
+					verifyProcess.verify();
+
+					if (_log.isInfoEnabled()) {
+						_log.info(
+							"Finished verification " + verifyProcesses[i]);
+					}
+
+					verified = true;
+				}
+				catch (ClassNotFoundException cnfe) {
+					_log.error(verifyProcesses[i] + " cannot be found");
+				}
+				catch (InstantiationException ie) {
+					_log.error(verifyProcesses[i] + " cannot be initiated");
+				}
+			}
+		}
+
+		// Update release
+
+		ReleaseLocalServiceUtil.updateRelease(verified);
 	}
 
 	private static final String _DELETE_TEMP_IMAGES_1 =

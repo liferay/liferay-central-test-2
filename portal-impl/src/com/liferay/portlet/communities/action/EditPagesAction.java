@@ -521,7 +521,9 @@ public class EditPagesAction extends PortletAction {
 					PropsUtil.LAYOUT_CONFIGURATION_ACTION_UPDATE,
 					Filter.by(type)));
 
-			EventsProcessor.process(eventClasses, uploadReq, httpRes);
+			EventsProcessor.process(
+				PropsUtil.LAYOUT_CONFIGURATION_ACTION_UPDATE, eventClasses,
+				uploadReq, httpRes);
 		}
 	}
 

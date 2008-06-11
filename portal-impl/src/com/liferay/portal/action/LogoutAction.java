@@ -29,6 +29,7 @@ import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -56,8 +57,9 @@ public class LogoutAction extends Action {
 		try {
 			HttpSession ses = req.getSession();
 
-			EventsProcessor.process(PropsUtil.getArray(
-				PropsUtil.LOGOUT_EVENTS_PRE), req, res);
+			EventsProcessor.process(
+				PropsUtil.LOGOUT_EVENTS_PRE, PropsValues.LOGOUT_EVENTS_PRE, req,
+				res);
 
 			String domain = CookieKeys.getDomain(req);
 
@@ -100,8 +102,9 @@ public class LogoutAction extends Action {
 			catch (Exception e) {
 			}
 
-			EventsProcessor.process(PropsUtil.getArray(
-				PropsUtil.LOGOUT_EVENTS_POST), req, res);
+			EventsProcessor.process(
+				PropsUtil.LOGOUT_EVENTS_POST, PropsValues.LOGOUT_EVENTS_POST,
+				req, res);
 
 			return mapping.findForward(ActionConstants.COMMON_REFERER);
 		}

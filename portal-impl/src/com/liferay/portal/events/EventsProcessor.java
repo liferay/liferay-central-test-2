@@ -29,8 +29,10 @@ import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,121 +49,140 @@ import org.apache.commons.logging.LogFactory;
  */
 public class EventsProcessor {
 
-	public static void process(String[] classes) throws ActionException {
-		_instance._process(classes, null, null, null, null, false);
-	}
-
-	public static void process(String[] classes, String[] ids)
+	public static void process(String key, String[] classes)
 		throws ActionException {
 
-		_instance._process(classes, ids, null, null, null, false);
+		_instance._process(key, classes, null, null, null, null);
 	}
 
-	public static void process(String[] classes, HttpSession ses)
+	public static void process(String key, String[] classes, String[] ids)
 		throws ActionException {
 
-		_instance._process(classes, null, null, null, ses, false);
+		_instance._process(key, classes, ids, null, null, null);
 	}
 
-	public static void process(
-			String[] classes, HttpServletRequest req, HttpServletResponse res)
+	public static void process(String key, String[] classes, HttpSession ses)
 		throws ActionException {
 
-		_instance._process(classes, null, req, res, null, false);
-	}
-
-	public static void process(String[] classes, boolean single)
-		throws ActionException {
-
-		_instance._process(classes, null, null, null, null, single);
+		_instance._process(key, classes, null, null, null, ses);
 	}
 
 	public static void process(
-			String[] classes, HttpSession ses, boolean single)
+			String key, String[] classes, HttpServletRequest req,
+			HttpServletResponse res)
 		throws ActionException {
 
-		_instance._process(classes, null, null, null, ses, single);
+		_instance._process(key, classes, null, req, res, null);
 	}
 
-	public static void process(
-			String[] classes, HttpServletRequest req, HttpServletResponse res,
-			boolean single)
-		throws ActionException {
+	public static void registerEvent(String key, Object event) {
+		_instance._registerEvent(key, event);
+	}
 
-		_instance._process(classes, null, req, res, null, single);
+	public static void unregisterEvent(String key, Object event) {
+		_instance._unregisterEvent(key, event);
 	}
 
 	private EventsProcessor() {
-		_processPool = new HashSet<String>();
+	}
+
+	private List<Object> _getEvents(String key) {
+		List<Object> events = _eventsMap.get(key);
+
+		if (events == null) {
+			events = new ArrayList<Object>();
+
+			_eventsMap.put(key, events);
+		}
+
+		return events;
 	}
 
 	private void _process(
-			String[] classes, String[] ids, HttpServletRequest req,
-			HttpServletResponse res, HttpSession ses, boolean single)
+			String key, String[] classes, String[] ids, HttpServletRequest req,
+			HttpServletResponse res, HttpSession ses)
 		throws ActionException {
 
-		if ((classes == null) || (classes.length == 0)) {
+		for (String className : classes) {
+			if (Validator.isNull(className)) {
+				return;
+			}
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Process event " + className);
+			}
+
+			Object event = InstancePool.get(className);
+
+			_processEvent(event, ids, req, res, ses);
+		}
+
+		if (Validator.isNull(key)) {
 			return;
 		}
 
-		for (String className : classes) {
-			if (Validator.isNotNull(className)) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("Process event " + className);
-				}
+		List<Object> events = _getEvents(key);
 
-				if (single) {
-					synchronized (_processPool) {
-						if (_processPool.contains(className)) {
-							break;
-						}
-						else {
-							_processPool.add(className);
-						}
-					}
-				}
+		for (Object event : events) {
+			_processEvent(event, ids, req, res, ses);
+		}
+	}
 
-				Object obj = InstancePool.get(className);
+	private void _processEvent(
+			Object event, String[] ids, HttpServletRequest req,
+			HttpServletResponse res, HttpSession ses)
+		throws ActionException {
 
-				if (obj instanceof Action) {
-					Action a = (Action)obj;
+		if (event instanceof Action) {
+			Action action = (Action)event;
 
-					try {
-						a.run(req, res);
-					}
-					catch (ActionException ae) {
-						throw ae;
-					}
-					catch (Exception e) {
-						throw new ActionException(e);
-					}
-				}
-				else if (obj instanceof SessionAction) {
-					SessionAction sa = (SessionAction)obj;
-
-					try {
-						sa.run(ses);
-					}
-					catch (ActionException ae) {
-						throw ae;
-					}
-					catch (Exception e) {
-						throw new ActionException(e);
-					}
-				}
-				else if (obj instanceof SimpleAction) {
-					SimpleAction sa = (SimpleAction)obj;
-
-					sa.run(ids);
-				}
+			try {
+				action.run(req, res);
+			}
+			catch (ActionException ae) {
+				throw ae;
+			}
+			catch (Exception e) {
+				throw new ActionException(e);
 			}
 		}
+		else if (event instanceof SessionAction) {
+			SessionAction sessionAction = (SessionAction)event;
+
+			try {
+				sessionAction.run(ses);
+			}
+			catch (ActionException ae) {
+				throw ae;
+			}
+			catch (Exception e) {
+				throw new ActionException(e);
+			}
+		}
+		else if (event instanceof SimpleAction) {
+			SimpleAction simpleAction = (SimpleAction)event;
+
+			simpleAction.run(ids);
+		}
+	}
+
+	private void _registerEvent(String key, Object event) {
+		List<Object> events = _getEvents(key);
+
+		events.add(event);
+	}
+
+	private void _unregisterEvent(String key, Object event) {
+		List<Object> events = _getEvents(key);
+
+		events.remove(event);
 	}
 
 	private static Log _log = LogFactory.getLog(EventsProcessor.class);
 
 	private static EventsProcessor _instance = new EventsProcessor();
 
-	private Set<String> _processPool;
+	private Map<String, List<Object>> _eventsMap =
+		new HashMap<String, List<Object>>();
 
 }
