@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.FileImpl;
 import com.liferay.util.ListUtil;
 
@@ -54,6 +55,7 @@ public class SourceFormatter {
 	public static void main(String[] args) {
 		try {
 			_checkPersistenceTestSuite();
+			_checkWebXML();
 			_formatJava();
 			_formatJSP();
 		}
@@ -170,6 +172,34 @@ public class SourceFormatter {
 		for (String persistenceTest : persistenceTests) {
 			if (persistenceTestSuite.indexOf(persistenceTest) == -1) {
 				System.out.println("PersistenceTestSuite: " + persistenceTest);
+			}
+		}
+	}
+
+	private static void _checkWebXML() throws IOException {
+		String basedir = "../";
+
+		if (_fileUtil.exists(basedir + "portal-impl")) {
+			return;
+		}
+
+		String webXML = ContentUtil.get(
+			"com/liferay/portal/deploy/dependencies/web.xml");
+
+		DirectoryScanner ds = new DirectoryScanner();
+
+		ds.setBasedir(basedir);
+		ds.setIncludes(new String[] {"**\\web.xml"});
+
+		ds.scan();
+
+		String[] files = ds.getIncludedFiles();
+
+		for (String file : files) {
+			String content = _fileUtil.read(basedir + file);
+
+			if (content.equals(webXML)) {
+				System.out.println(file);
 			}
 		}
 	}
@@ -401,7 +431,7 @@ public class SourceFormatter {
 			if ((newContent != null) && !content.equals(newContent)) {
 				_fileUtil.write(file, newContent);
 
-				System.out.println(file.toString());
+				System.out.println(file);
 			}
 		}
 	}
@@ -518,7 +548,7 @@ public class SourceFormatter {
 			if ((newContent != null) && !content.equals(newContent)) {
 				_fileUtil.write(file, newContent);
 
-				System.out.println(file.toString());
+				System.out.println(file);
 			}
 		}
 	}
