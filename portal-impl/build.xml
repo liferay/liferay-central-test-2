@@ -806,6 +806,10 @@ ${exception.message}
 	</target>
 
 	<target name="format-source">
+		<copy todir="classes" overwrite="yes">
+			<fileset dir="src" includes="com/liferay/portal/tools/dependencies/*.properties" />
+		</copy>
+
 		<java
 			classname="com.liferay.portal.tools.SourceFormatter"
 			classpathref="project.classpath"

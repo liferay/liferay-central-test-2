@@ -32,12 +32,15 @@ import com.liferay.util.ListUtil;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStream;
 import java.io.IOException;
 import java.io.StringReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -54,6 +57,8 @@ public class SourceFormatter {
 
 	public static void main(String[] args) {
 		try {
+			_readExclusions();
+			
 			_checkPersistenceTestSuite();
 			_checkWebXML();
 			_formatJava();
@@ -364,7 +369,9 @@ public class SourceFormatter {
 				System.out.println("(c): " + files[i]);
 			}
 
-			if (newContent.indexOf(className + ".java.html") == -1) {
+			if ((newContent.indexOf(className + ".java.html") == -1) &&
+					(_exclusions.getProperty(
+							files[i] + StringPool.AT + "Java2HTML") == null)) {
 				System.out.println("Java2HTML: " + files[i]);
 			}
 
@@ -461,7 +468,11 @@ public class SourceFormatter {
 
 			line = StringUtil.replace(line, "\t", "    ");
 
-			if (((line.length() - 1) > 79) && !line.startsWith("import ")) {
+			String excluded = _exclusions.getProperty(
+				fileName + StringPool.AT + lineCount);
+
+			if ((excluded == null) && ((line.length() - 1) > 79) &&
+					!line.startsWith("import ")) {
 				System.out.println("> 80: " + fileName + " " + lineCount);
 			}
 		}
@@ -713,6 +724,33 @@ public class SourceFormatter {
 		return list.toArray(new String[list.size()]);
 	}
 
+	private static void _readExclusions() {
+		_exclusions = new Properties();
+
+		System.out.println("Loading exclusions");
+		ClassLoader classLoader = SourceFormatter.class.getClassLoader();
+
+		try {
+			URL url = classLoader.getResource("com/liferay/portal/tools/dependencies/exclusions.properties");
+
+			if (url != null) {
+				InputStream is = url.openStream();
+
+				_exclusions.load(is);
+
+				is.close();
+
+				System.out.println("Loading exclusions from " + url);
+			}
+			else {
+				System.out.println("Dependencies file not found");
+			}
+		}
+		catch (Exception e) {
+			System.out.println("Could not load the exclusion file: " + e);
+		}
+	}
+
 	private static final Pattern _STRING_PARAM_PATTERN = Pattern.compile(
 		"String\\s+([^\\s]+)\\s*=\\s*ParamUtil\\.getString\\(");
 
@@ -721,6 +759,8 @@ public class SourceFormatter {
 		"liferay-theme", "liferay-ui", "liferay-util", "portlet", "struts",
 		"tiles"
 	};
+
+	private static Properties _exclusions;
 
 	private static FileImpl _fileUtil = new FileImpl();
 
