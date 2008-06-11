@@ -160,9 +160,7 @@ public class TagsPropertyLocalServiceImpl
 		return property;
 	}
 
-	protected void validate(String key, String value)
-		throws PortalException, SystemException {
-
+	protected void validate(String key, String value) throws PortalException {
 		if (!TagsUtil.isValidWord(key)) {
 			throw new PropertyKeyException();
 		}

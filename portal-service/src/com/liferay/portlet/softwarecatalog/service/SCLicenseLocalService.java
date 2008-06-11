@@ -113,9 +113,7 @@ public interface SCLicenseLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getProductEntryLicenses(
-		long productEntryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		long productEntryId) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCLicense updateLicense(
 		long licenseId, java.lang.String name, java.lang.String url,

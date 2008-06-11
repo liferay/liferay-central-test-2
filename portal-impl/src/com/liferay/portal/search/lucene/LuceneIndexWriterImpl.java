@@ -58,12 +58,7 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 		}
 		finally {
 			if (writer != null) {
-				try {
-					LuceneUtil.write(companyId);
-				}
-				catch (IOException ioe) {
-					throw new SearchException(ioe);
-				}
+				LuceneUtil.write(companyId);
 			}
 		}
 	}

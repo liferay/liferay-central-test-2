@@ -190,9 +190,7 @@ public class ShoppingOrderLocalServiceUtil {
 		java.lang.String shippingFirstName, java.lang.String shippingLastName,
 		java.lang.String shippingEmailAddress,
 		java.lang.String ppPaymentStatus, boolean andOperator, int start,
-		int end)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.SystemException {
 		ShoppingOrderLocalService shoppingOrderLocalService = ShoppingOrderLocalServiceFactory.getService();
 
 		return shoppingOrderLocalService.search(groupId, companyId, userId,
@@ -207,8 +205,7 @@ public class ShoppingOrderLocalServiceUtil {
 		java.lang.String shippingFirstName, java.lang.String shippingLastName,
 		java.lang.String shippingEmailAddress,
 		java.lang.String ppPaymentStatus, boolean andOperator)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		ShoppingOrderLocalService shoppingOrderLocalService = ShoppingOrderLocalServiceFactory.getService();
 
 		return shoppingOrderLocalService.searchCount(groupId, companyId,

@@ -280,7 +280,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 	public TagsAssetDisplay[] getCompanyAssetDisplays(
 			long companyId, int start, int end, String languageId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return getAssetDisplays(
 			getCompanyAssets(companyId, start, end), languageId);
@@ -317,7 +317,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 	}
 
 	public TagsAsset incrementViewCounter(String className, long classPK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (classPK <= 0) {
 			return null;
@@ -393,7 +393,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 	public TagsAssetDisplay[] searchAssetDisplays(
 			long companyId, String portletId, String keywords,
 			String languageId, int start, int end)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<TagsAsset> assets = new ArrayList<TagsAsset>();
 
@@ -698,7 +698,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 	protected TagsAssetDisplay[] getAssetDisplays(
 			List<TagsAsset> assets, String languageId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		TagsAssetDisplay[] assetDisplays = new TagsAssetDisplay[assets.size()];
 

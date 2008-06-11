@@ -382,7 +382,7 @@ public class ShoppingOrderLocalServiceImpl
 			String billingEmailAddress, String shippingFirstName,
 			String shippingLastName, String shippingEmailAddress,
 			String ppPaymentStatus, boolean andOperator, int start, int end)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		OrderDateComparator obc = new OrderDateComparator(false);
 
@@ -399,7 +399,7 @@ public class ShoppingOrderLocalServiceImpl
 			String billingEmailAddress, String shippingFirstName,
 			String shippingLastName, String shippingEmailAddress,
 			String ppPaymentStatus, boolean andOperator)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return shoppingOrderFinder.countByG_C_U_N_PPPS(
 			groupId, companyId, userId, number, billingFirstName,

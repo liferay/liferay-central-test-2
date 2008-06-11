@@ -311,9 +311,7 @@ public class DLFolderLocalServiceUtil {
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
 		long groupId, long[] folderIds, java.lang.String keywords, int start,
-		int end)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		int end) throws com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
 		return dlFolderLocalService.search(companyId, groupId, folderIds,

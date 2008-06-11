@@ -51,7 +51,7 @@ public class BookmarksEntryPermission {
 	public static void check(
 			PermissionChecker permissionChecker, BookmarksEntry entry,
 			String actionId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		if (!contains(permissionChecker, entry, actionId)) {
 			throw new PrincipalException();
@@ -69,9 +69,8 @@ public class BookmarksEntryPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, BookmarksEntry entry,
-			String actionId)
-		throws PortalException, SystemException {
+		PermissionChecker permissionChecker, BookmarksEntry entry,
+		String actionId) {
 
 		BookmarksFolder folder = entry.getFolder();
 

@@ -110,8 +110,7 @@ public class RatingsStatsLocalServiceUtil {
 	}
 
 	public static void deleteStats(java.lang.String className, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		RatingsStatsLocalService ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getService();
 
 		ratingsStatsLocalService.deleteStats(className, classPK);
@@ -128,8 +127,7 @@ public class RatingsStatsLocalServiceUtil {
 
 	public static com.liferay.portlet.ratings.model.RatingsStats getStats(
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		RatingsStatsLocalService ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getService();
 
 		return ratingsStatsLocalService.getStats(className, classPK);

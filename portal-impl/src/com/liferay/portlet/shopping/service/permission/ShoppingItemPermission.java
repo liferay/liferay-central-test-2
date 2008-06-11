@@ -50,7 +50,7 @@ public class ShoppingItemPermission {
 	public static void check(
 			PermissionChecker permissionChecker, ShoppingItem item,
 			String actionId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		if (!contains(permissionChecker, item, actionId)) {
 			throw new PrincipalException();
@@ -67,9 +67,8 @@ public class ShoppingItemPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, ShoppingItem item,
-			String actionId)
-		throws PortalException, SystemException {
+		PermissionChecker permissionChecker, ShoppingItem item,
+		String actionId) {
 
 		ShoppingCategory category = item.getCategory();
 

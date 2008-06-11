@@ -245,11 +245,10 @@ public interface DLFileEntryLocalService {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntriesAndShortcuts(
-		long folderId, int start, int end)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<Object> getFileEntriesAndShortcuts(long folderId,
+		int start, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntriesAndShortcuts(
+	public java.util.List<Object> getFileEntriesAndShortcuts(
 		java.util.List<Long> folderIds, int start, int end)
 		throws com.liferay.portal.SystemException;
 

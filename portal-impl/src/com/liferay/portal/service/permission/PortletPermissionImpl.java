@@ -201,8 +201,7 @@ public class PortletPermissionImpl implements PortletPermission {
 	}
 
 	protected boolean hasLayoutManagerPermissionImpl(
-			String portletId, String actionId)
-		throws SystemException {
+		String portletId, String actionId) {
 
 		portletId = PortletConstants.getRootPortletId(portletId);
 

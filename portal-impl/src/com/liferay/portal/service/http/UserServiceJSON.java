@@ -143,16 +143,14 @@ public class UserServiceJSON {
 	}
 
 	public static JSONArray getGroupUsers(long groupId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portal.model.User> returnValue = UserServiceUtil.getGroupUsers(groupId);
 
 		return UserJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static JSONArray getRoleUsers(long roleId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portal.model.User> returnValue = UserServiceUtil.getRoleUsers(roleId);
 
 		return UserJSONSerializer.toJSONArray(returnValue);

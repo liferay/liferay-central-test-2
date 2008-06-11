@@ -91,8 +91,7 @@ public interface GroupLocalService {
 			com.liferay.portal.SystemException;
 
 	public void addRoleGroups(long roleId, long[] groupIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public void addUserGroups(long userId, long[] groupIds)
 		throws com.liferay.portal.PortalException,
@@ -124,9 +123,7 @@ public interface GroupLocalService {
 		java.util.List<com.liferay.portal.model.Organization> organizations);
 
 	public java.util.List<com.liferay.portal.model.Group> getRoleGroups(
-		long roleId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		long roleId) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group getStagingGroup(long liveGroupId)
 		throws com.liferay.portal.PortalException,
@@ -143,9 +140,7 @@ public interface GroupLocalService {
 			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Group> getUserGroups(
-		long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		long userId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Group> getUserGroupsGroups(
 		java.util.List<com.liferay.portal.model.UserGroup> userGroups);
@@ -173,16 +168,13 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public void setRoleGroups(long roleId, long[] groupIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public void unsetRoleGroups(long roleId, long[] groupIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public void unsetUserGroups(long userId, long[] groupIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group updateFriendlyURL(long groupId,
 		java.lang.String friendlyURL)

@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.documentlibrary.action;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.struts.JSONAction;
@@ -69,7 +68,7 @@ public class GetFoldersAction extends JSONAction {
 	}
 
 	protected JSONArray toJSONArray(List<DLFolder> folders)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		JSONArray jsonArray = new JSONArray();
 
@@ -80,9 +79,7 @@ public class GetFoldersAction extends JSONAction {
 		return jsonArray;
 	}
 
-	protected JSONObject toJSONObject(DLFolder folder)
-		throws PortalException, SystemException {
-
+	protected JSONObject toJSONObject(DLFolder folder) throws SystemException {
 		JSONObject jsonObj = DLFolderJSONSerializer.toJSONObject(folder);
 
 		List<Long> subfolderIds = new ArrayList<Long>();

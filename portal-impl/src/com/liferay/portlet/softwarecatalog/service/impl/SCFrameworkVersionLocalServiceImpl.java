@@ -174,14 +174,12 @@ public class SCFrameworkVersionLocalServiceImpl
 	}
 
 	public void deleteFrameworkVersion(SCFrameworkVersion frameworkVersion)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		scFrameworkVersionPersistence.remove(frameworkVersion);
 	}
 
-	public void deleteFrameworkVersions(long groupId)
-		throws PortalException, SystemException {
-
+	public void deleteFrameworkVersions(long groupId) throws SystemException {
 		List<SCFrameworkVersion> frameworkVersions =
 			scFrameworkVersionPersistence.findByGroupId(groupId);
 
@@ -233,7 +231,7 @@ public class SCFrameworkVersionLocalServiceImpl
 
 	public List<SCFrameworkVersion> getProductVersionFrameworkVersions(
 			long productVersionId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return scProductVersionPersistence.getSCFrameworkVersions(
 			productVersionId);

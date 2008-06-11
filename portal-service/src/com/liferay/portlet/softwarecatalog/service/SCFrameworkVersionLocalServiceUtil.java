@@ -204,16 +204,14 @@ public class SCFrameworkVersionLocalServiceUtil {
 
 	public static void deleteFrameworkVersion(
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion frameworkVersion)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
 
 		scFrameworkVersionLocalService.deleteFrameworkVersion(frameworkVersion);
 	}
 
 	public static void deleteFrameworkVersions(long groupId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
 
 		scFrameworkVersionLocalService.deleteFrameworkVersions(groupId);
@@ -270,9 +268,7 @@ public class SCFrameworkVersionLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getProductVersionFrameworkVersions(
-		long productVersionId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		long productVersionId) throws com.liferay.portal.SystemException {
 		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
 
 		return scFrameworkVersionLocalService.getProductVersionFrameworkVersions(productVersionId);

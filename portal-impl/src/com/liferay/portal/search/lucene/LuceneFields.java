@@ -105,9 +105,7 @@ public class LuceneFields {
 		}
 	}
 
-	public static Field getFile(String field, InputStream is, String fileExt)
-		throws IOException {
-
+	public static Field getFile(String field, InputStream is, String fileExt) {
 		LuceneFileExtractor fileExtractor =
 			(LuceneFileExtractor)InstancePool.get(
 				PropsValues.LUCENE_FILE_EXTRACTOR);

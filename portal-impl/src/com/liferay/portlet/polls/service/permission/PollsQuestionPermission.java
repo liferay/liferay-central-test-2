@@ -50,7 +50,7 @@ public class PollsQuestionPermission {
 	public static void check(
 			PermissionChecker permissionChecker, PollsQuestion question,
 			String actionId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		if (!contains(permissionChecker, question, actionId)) {
 			throw new PrincipalException();
@@ -69,9 +69,8 @@ public class PollsQuestionPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, PollsQuestion question,
-			String actionId)
-		throws PortalException, SystemException {
+		PermissionChecker permissionChecker, PollsQuestion question,
+		String actionId) {
 
 		return permissionChecker.hasPermission(
 			question.getGroupId(), PollsQuestion.class.getName(),

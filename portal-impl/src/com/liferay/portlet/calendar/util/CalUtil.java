@@ -32,8 +32,6 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.util.Time;
 
-import java.io.IOException;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -78,9 +76,7 @@ public class CalUtil {
 		}
 	}
 
-	public static String getEmailEventReminderBody(PortletPreferences prefs)
-		throws IOException {
-
+	public static String getEmailEventReminderBody(PortletPreferences prefs) {
 		String emailEventReminderBody = prefs.getValue(
 			"email-event-reminder-body", StringPool.BLANK);
 
@@ -93,8 +89,8 @@ public class CalUtil {
 		}
 	}
 
-	public static String getEmailEventReminderSubject(PortletPreferences prefs)
-		throws IOException {
+	public static String getEmailEventReminderSubject(
+		PortletPreferences prefs) {
 
 		String emailEventReminderSubject = prefs.getValue(
 			"email-event-reminder-subject", StringPool.BLANK);

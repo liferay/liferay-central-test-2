@@ -52,7 +52,7 @@ public class SCFrameworkVersionPermission {
 	public static void check(
 			PermissionChecker permissionChecker,
 			SCFrameworkVersion frameworkVersion, String actionId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		if (!contains(permissionChecker, frameworkVersion, actionId)) {
 			throw new PrincipalException();
@@ -72,9 +72,8 @@ public class SCFrameworkVersionPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker,
-			SCFrameworkVersion frameworkVersion, String actionId)
-		throws PortalException, SystemException {
+		PermissionChecker permissionChecker,
+		SCFrameworkVersion frameworkVersion, String actionId) {
 
 		return permissionChecker.hasPermission(
 			frameworkVersion.getGroupId(), SCFrameworkVersion.class.getName(),

@@ -159,9 +159,7 @@ public class TagsEntryLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getAssetEntries(
-		long assetId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		long assetId) throws com.liferay.portal.SystemException {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
 
 		return tagsEntryLocalService.getAssetEntries(assetId);
@@ -176,8 +174,7 @@ public class TagsEntryLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
 
 		return tagsEntryLocalService.getEntries(className, classPK);
@@ -185,8 +182,7 @@ public class TagsEntryLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
 		long classNameId, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
 
 		return tagsEntryLocalService.getEntries(classNameId, classPK);
@@ -238,8 +234,7 @@ public class TagsEntryLocalServiceUtil {
 	}
 
 	public static long[] getEntryIds(long companyId, java.lang.String[] names)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
 
 		return tagsEntryLocalService.getEntryIds(companyId, names);
@@ -253,18 +248,14 @@ public class TagsEntryLocalServiceUtil {
 	}
 
 	public static java.lang.String[] getEntryNames(java.lang.String className,
-		long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		long classPK) throws com.liferay.portal.SystemException {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
 
 		return tagsEntryLocalService.getEntryNames(className, classPK);
 	}
 
 	public static java.lang.String[] getEntryNames(long classNameId,
-		long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		long classPK) throws com.liferay.portal.SystemException {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
 
 		return tagsEntryLocalService.getEntryNames(classNameId, classPK);

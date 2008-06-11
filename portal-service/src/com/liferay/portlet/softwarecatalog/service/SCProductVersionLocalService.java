@@ -113,12 +113,10 @@ public interface SCProductVersionLocalService {
 
 	public void deleteProductVersion(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion productVersion)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public void deleteProductVersions(long productEntryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion getProductVersion(
 		long productVersionId)

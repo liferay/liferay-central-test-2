@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.IndexWriter;
 import com.liferay.portal.kernel.search.IndexWriterMessage;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.util.JSONUtil;
 
 /**
@@ -38,9 +37,7 @@ import com.liferay.util.JSONUtil;
  */
 public class IndexWriterImpl implements IndexWriter {
 
-	public void addDocument(long companyId, Document doc)
-		throws SearchException {
-
+	public void addDocument(long companyId, Document doc) {
 		IndexWriterMessage req = new IndexWriterMessage(
 			IndexWriterMessage.ADD, companyId, doc);
 
@@ -48,9 +45,7 @@ public class IndexWriterImpl implements IndexWriter {
 			DestinationNames.SEARCH_INDEX_WRITER, JSONUtil.serialize(req));
 	}
 
-	public void deleteDocument(long companyId, String uid)
-		throws SearchException {
-
+	public void deleteDocument(long companyId, String uid) {
 		IndexWriterMessage req = new IndexWriterMessage(
 			IndexWriterMessage.DELETE, companyId, uid);
 
@@ -58,9 +53,7 @@ public class IndexWriterImpl implements IndexWriter {
 			DestinationNames.SEARCH_INDEX_WRITER, JSONUtil.serialize(req));
 	}
 
-	public void deletePortletDocuments(long companyId, String portletId)
-		throws SearchException {
-
+	public void deletePortletDocuments(long companyId, String portletId) {
 		IndexWriterMessage req = new IndexWriterMessage(
 			IndexWriterMessage.DELETE_PORTLET_DOCS, companyId, portletId);
 
@@ -68,9 +61,7 @@ public class IndexWriterImpl implements IndexWriter {
 			DestinationNames.SEARCH_INDEX_WRITER, JSONUtil.serialize(req));
 	}
 
-	public void updateDocument(long companyId, String uid, Document doc)
-		throws SearchException {
-
+	public void updateDocument(long companyId, String uid, Document doc) {
 		IndexWriterMessage req = new IndexWriterMessage(
 			IndexWriterMessage.UPDATE, companyId, uid, doc);
 

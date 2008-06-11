@@ -129,8 +129,7 @@ public class RatingsEntryLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> getEntries(
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
 
 		return ratingsEntryLocalService.getEntries(className, classPK);

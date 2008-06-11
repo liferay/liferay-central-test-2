@@ -22,7 +22,6 @@
 
 package com.liferay.portal.webdav.methods;
 
-import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
 
 import javax.servlet.http.HttpServletResponse;
@@ -36,7 +35,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class OptionsMethodImpl implements Method {
 
-	public int process(WebDAVRequest webDavReq) throws WebDAVException {
+	public int process(WebDAVRequest webDavReq) {
 		HttpServletResponse res = webDavReq.getHttpServletResponse();
 
 		res.addHeader("DAV", "1");

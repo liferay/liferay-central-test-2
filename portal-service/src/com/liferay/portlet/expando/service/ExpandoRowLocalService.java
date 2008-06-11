@@ -79,9 +79,7 @@ public interface ExpandoRowLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.expando.model.ExpandoRow addRow(long tableId,
-		long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		long classPK) throws com.liferay.portal.SystemException;
 
 	public void deleteRow(long rowId)
 		throws com.liferay.portal.PortalException,
@@ -126,13 +124,11 @@ public interface ExpandoRowLocalService {
 
 	public com.liferay.portlet.expando.model.ExpandoRow getRow(
 		java.lang.String className, java.lang.String tableName, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.expando.model.ExpandoRow getRow(
 		long classNameId, java.lang.String tableName, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getRows(
 		long tableId, int start, int end)

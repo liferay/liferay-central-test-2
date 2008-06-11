@@ -36,9 +36,6 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.webdav.methods.Method;
 import com.liferay.portal.webdav.methods.MethodFactory;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -55,9 +52,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class WebDAVServlet extends HttpServlet {
 
- 	public void service(HttpServletRequest req, HttpServletResponse res)
-		throws IOException, ServletException {
-
+ 	public void service(HttpServletRequest req, HttpServletResponse res) {
 		PermissionCheckerImpl permissionChecker = null;
 
 		int status = HttpServletResponse.SC_NOT_IMPLEMENTED;

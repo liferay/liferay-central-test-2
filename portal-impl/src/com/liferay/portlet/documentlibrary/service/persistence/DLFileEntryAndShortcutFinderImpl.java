@@ -109,7 +109,8 @@ public class DLFileEntryAndShortcutFinderImpl
 		}
 	}
 
-	public List findByFolderIds(List<Long> folderIds, int start, int end)
+	public List<Object> findByFolderIds(
+			List<Long> folderIds, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -147,13 +148,13 @@ public class DLFileEntryAndShortcutFinderImpl
 				qPos.add(folderId);
 			}
 
-			List fileEntriesAndShortcuts = new ArrayList();
+			List<Object> fileEntriesAndShortcuts = new ArrayList<Object>();
 
-			Iterator itr = QueryUtil.iterate(
+			Iterator<Object[]> itr = (Iterator<Object[]>)QueryUtil.iterate(
 				q, HibernateUtil.getDialect(), start, end);
 
 			while (itr.hasNext()) {
-				Object[] array = (Object[])itr.next();
+				Object[] array = itr.next();
 
 				Long folderId = (Long)array[0];
 				String name = (String)array[1];

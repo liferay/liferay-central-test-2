@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.calendar.lar;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataException;
@@ -103,15 +102,11 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	public PortletDataHandlerControl[] getExportControls()
-		throws PortletDataException {
-
+	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {_events};
 	}
 
-	public PortletDataHandlerControl[] getImportControls()
-		throws PortletDataException {
-
+	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {_events};
 	}
 
@@ -151,7 +146,7 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 
 	protected void exportEvent(
 			PortletDataContext context, Element root, CalEvent event)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (!context.isWithinDateRange(event.getModifiedDate())) {
 			return;

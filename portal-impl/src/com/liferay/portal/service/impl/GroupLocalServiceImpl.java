@@ -177,7 +177,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	public void addRoleGroups(long roleId, long[] groupIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		rolePersistence.addGroups(roleId, groupIds);
 
@@ -417,9 +417,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return organizationGroups;
 	}
 
-	public List<Group> getRoleGroups(long roleId)
-		throws PortalException, SystemException {
-
+	public List<Group> getRoleGroups(long roleId) throws SystemException {
 		return rolePersistence.getGroups(roleId);
 	}
 
@@ -446,9 +444,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			companyId, classNameId, userGroupId);
 	}
 
-	public List<Group> getUserGroups(long userId)
-		throws PortalException, SystemException {
-
+	public List<Group> getUserGroups(long userId) throws SystemException {
 		return userPersistence.getGroups(userId);
 	}
 
@@ -515,7 +511,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	public void setRoleGroups(long roleId, long[] groupIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		rolePersistence.setGroups(roleId, groupIds);
 
@@ -523,7 +519,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	public void unsetRoleGroups(long roleId, long[] groupIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		rolePersistence.removeGroups(roleId, groupIds);
 
@@ -531,7 +527,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	public void unsetUserGroups(long userId, long[] groupIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		userGroupRoleLocalService.deleteUserGroupRoles(userId, groupIds);
 

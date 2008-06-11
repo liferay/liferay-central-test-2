@@ -56,29 +56,23 @@ public class SitemapPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	public String exportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences prefs)
-		throws PortletDataException {
+		PortletDataContext context, String portletId,
+		PortletPreferences prefs) {
 
 		return StringPool.BLANK;
 	}
 
-	public PortletDataHandlerControl[] getExportControls()
-		throws PortletDataException {
-
+	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[0];
 	}
 
-	public PortletDataHandlerControl[] getImportControls()
-		throws PortletDataException {
-
+	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[0];
 	}
 
 	public PortletPreferences importData(
-			PortletDataContext context, String portletId,
-			PortletPreferences prefs, String data)
-		throws PortletDataException {
+		PortletDataContext context, String portletId, PortletPreferences prefs,
+		String data)  {
 
 		return prefs;
 	}

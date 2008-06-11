@@ -159,7 +159,5 @@ public interface DLFileShortcutLocalService {
 
 	public void updateFileShortcuts(long oldToFolderId,
 		java.lang.String oldToName, long newToFolderId,
-		java.lang.String newToName)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		java.lang.String newToName) throws com.liferay.portal.SystemException;
 }

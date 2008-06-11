@@ -97,7 +97,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	}
 
 	public void addUserRoles(long userId, long[] roleIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		userPersistence.addRoles(userId, roleIds);
 
@@ -225,9 +225,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return rolePersistence.findByC_C_C(companyId, classNameId, groupId);
 	}
 
-	public List<Role> getGroupRoles(long groupId)
-		throws PortalException, SystemException {
-
+	public List<Role> getGroupRoles(long groupId) throws SystemException {
 		return groupPersistence.getRoles(groupId);
 	}
 
@@ -276,9 +274,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return roleFinder.findByU_G(userId, groups);
 	}
 
-	public List<Role> getUserRoles(long userId)
-		throws PortalException, SystemException {
-
+	public List<Role> getUserRoles(long userId) throws SystemException {
 		return userPersistence.getRoles(userId);
 	}
 
@@ -379,7 +375,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	}
 
 	public void setUserRoles(long userId, long[] roleIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		userPersistence.setRoles(userId, roleIds);
 
@@ -387,7 +383,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	}
 
 	public void unsetUserRoles(long userId, long[] roleIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		userPersistence.removeRoles(userId, roleIds);
 

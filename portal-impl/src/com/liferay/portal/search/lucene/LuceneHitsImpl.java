@@ -25,7 +25,6 @@ package com.liferay.portal.search.lucene;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.util.Time;
 import com.liferay.util.search.DocumentImpl;
 
@@ -117,9 +116,7 @@ public class LuceneHitsImpl implements Hits {
 	/**
 	 * @deprecated
 	 */
-	public Hits closeSearcher(String keywords, Exception e)
-		throws SearchException {
-
+	public Hits closeSearcher(String keywords, Exception e) {
 		return null;
 	}
 
@@ -194,8 +191,7 @@ public class LuceneHitsImpl implements Hits {
 	}
 
 	public void recordHits(
-			org.apache.lucene.search.Hits hits, Searcher searcher)
-		throws IOException {
+		org.apache.lucene.search.Hits hits, Searcher searcher) {
 
 		_hits = hits;
 		_length = hits.length();

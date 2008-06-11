@@ -169,7 +169,7 @@ public class ExpandoTableLocalServiceImpl
 	}
 
 	public List<ExpandoTable> getTables(String className)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
@@ -177,7 +177,7 @@ public class ExpandoTableLocalServiceImpl
 	}
 
 	public List<ExpandoTable> getTables(long classNameId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return expandoTablePersistence.findByClassNameId(classNameId);
 	}

@@ -563,7 +563,7 @@ public class DLFileEntryLocalServiceImpl
 		return dlFileEntryPersistence.findByFolderId(folderId, start, end, obc);
 	}
 
-	public List<DLFileEntry> getFileEntriesAndShortcuts(
+	public List<Object> getFileEntriesAndShortcuts(
 			long folderId, int start, int end)
 		throws SystemException {
 
@@ -575,7 +575,7 @@ public class DLFileEntryLocalServiceImpl
 			folderIds, start, end);
 	}
 
-	public List<DLFileEntry> getFileEntriesAndShortcuts(
+	public List<Object> getFileEntriesAndShortcuts(
 			List<Long> folderIds, int start, int end)
 		throws SystemException {
 
@@ -962,7 +962,7 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	protected long getFolderId(long companyId, long folderId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (folderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 

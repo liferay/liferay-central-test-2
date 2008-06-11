@@ -235,7 +235,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	}
 
 	public void unlockFileEntry(long folderId, String name)
-		throws PortalException, RemoteException, SystemException {
+		throws RemoteException {
 
 		String lockId = DLUtil.getLockId(folderId, name);
 

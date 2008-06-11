@@ -386,7 +386,7 @@ public class ExpandoValueLocalServiceImpl
 	public ExpandoValue addValue(
 			long classNameId, long tableId, long columnId, long classPK,
 			String data)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		ExpandoRow row = expandoRowPersistence.fetchByT_C(tableId, classPK);
 
@@ -469,7 +469,7 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public void deleteValues(String className, long classPK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
@@ -477,7 +477,7 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public void deleteValues(long classNameId, long classPK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		expandoValuePersistence.removeByC_C(classNameId, classPK);
 	}
@@ -920,7 +920,7 @@ public class ExpandoValueLocalServiceImpl
 
 	public ExpandoValue getValue(
 			String className, String tableName, String columnName, long classPK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
@@ -929,7 +929,7 @@ public class ExpandoValueLocalServiceImpl
 
 	public ExpandoValue getValue(
 			long classNameId, String tableName, String columnName, long classPK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return expandoValueFinder.fetchByTC_TN_CN_C(
 			classNameId, tableName, columnName, classPK);

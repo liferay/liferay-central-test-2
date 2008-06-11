@@ -109,8 +109,7 @@ public class UserGroupLocalServiceUtil {
 	}
 
 	public static void addGroupUserGroups(long groupId, long[] userGroupIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
 
 		userGroupLocalService.addGroupUserGroups(groupId, userGroupIds);
@@ -127,8 +126,7 @@ public class UserGroupLocalServiceUtil {
 	}
 
 	public static void clearUserUserGroups(long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
 
 		userGroupLocalService.clearUserUserGroups(userId);
@@ -151,9 +149,7 @@ public class UserGroupLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserGroup> getUserUserGroups(
-		long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		long userId) throws com.liferay.portal.SystemException {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
 
 		return userGroupLocalService.getUserUserGroups(userId);
@@ -188,8 +184,7 @@ public class UserGroupLocalServiceUtil {
 	}
 
 	public static void unsetGroupUserGroups(long groupId, long[] userGroupIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
 
 		userGroupLocalService.unsetGroupUserGroups(groupId, userGroupIds);

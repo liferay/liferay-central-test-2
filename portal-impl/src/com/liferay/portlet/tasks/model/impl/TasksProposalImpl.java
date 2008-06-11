@@ -82,9 +82,7 @@ public class TasksProposalImpl
 			getCompanyId(), locale, status, String.valueOf(stage));
 	}
 
-	protected String getStatus(int stage)
-		throws PortalException, SystemException {
-
+	protected String getStatus(int stage) throws SystemException {
 		List<TasksReview> reviews = TasksReviewLocalServiceUtil.getReviews(
 			getProposalId(), stage);
 

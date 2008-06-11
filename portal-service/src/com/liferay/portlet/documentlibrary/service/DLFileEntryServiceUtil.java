@@ -172,8 +172,7 @@ public class DLFileEntryServiceUtil {
 	}
 
 	public static void unlockFileEntry(long folderId, java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException {
 		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
 
 		dlFileEntryService.unlockFileEntry(folderId, name);

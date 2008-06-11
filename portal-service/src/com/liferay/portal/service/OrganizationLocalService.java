@@ -79,8 +79,7 @@ public interface OrganizationLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public void addGroupOrganizations(long groupId, long[] organizationIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Organization addOrganization(long userId,
 		long parentOrganizationId, java.lang.String name, int type,
@@ -98,14 +97,10 @@ public interface OrganizationLocalService {
 		long[] organizationIds) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Organization> getGroupOrganizations(
-		long groupId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		long groupId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Organization> getManageableOrganizations(
-		long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		long userId) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Organization getOrganization(
 		long companyId, java.lang.String name)
@@ -134,9 +129,7 @@ public interface OrganizationLocalService {
 		java.util.List<com.liferay.portal.model.Organization> availableOrganizations);
 
 	public java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
-		long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		long userId) throws com.liferay.portal.SystemException;
 
 	public int getUserOrganizationsCount(long userId)
 		throws com.liferay.portal.SystemException;
@@ -193,12 +186,10 @@ public interface OrganizationLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public void setGroupOrganizations(long groupId, long[] organizationIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public void unsetGroupOrganizations(long groupId, long[] organizationIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public void unsetPasswordPolicyOrganizations(long passwordPolicyId,
 		long[] organizationIds) throws com.liferay.portal.SystemException;

@@ -405,7 +405,7 @@ public class DLFileEntryLocalServiceUtil {
 		return dlFileEntryLocalService.getFileEntries(folderId, start, end, obc);
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntriesAndShortcuts(
+	public static java.util.List<Object> getFileEntriesAndShortcuts(
 		long folderId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
@@ -414,7 +414,7 @@ public class DLFileEntryLocalServiceUtil {
 			start, end);
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntriesAndShortcuts(
+	public static java.util.List<Object> getFileEntriesAndShortcuts(
 		java.util.List<Long> folderIds, int start, int end)
 		throws com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();

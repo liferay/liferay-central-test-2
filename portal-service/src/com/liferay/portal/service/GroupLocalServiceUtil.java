@@ -131,8 +131,7 @@ public class GroupLocalServiceUtil {
 	}
 
 	public static void addRoleGroups(long roleId, long[] groupIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
 		groupLocalService.addRoleGroups(roleId, groupIds);
@@ -196,9 +195,7 @@ public class GroupLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Group> getRoleGroups(
-		long roleId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		long roleId) throws com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
 		return groupLocalService.getRoleGroups(roleId);
@@ -232,9 +229,7 @@ public class GroupLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Group> getUserGroups(
-		long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		long userId) throws com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
 		return groupLocalService.getUserGroups(userId);
@@ -293,24 +288,21 @@ public class GroupLocalServiceUtil {
 	}
 
 	public static void setRoleGroups(long roleId, long[] groupIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
 		groupLocalService.setRoleGroups(roleId, groupIds);
 	}
 
 	public static void unsetRoleGroups(long roleId, long[] groupIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
 		groupLocalService.unsetRoleGroups(roleId, groupIds);
 	}
 
 	public static void unsetUserGroups(long userId, long[] groupIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
 		groupLocalService.unsetUserGroups(userId, groupIds);

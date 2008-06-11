@@ -376,7 +376,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	public Hits search(
 			long companyId, long groupId, long[] folderIds, String keywords,
 			int start, int end)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return dlLocalService.search(
 			companyId, PortletKeys.DOCUMENT_LIBRARY, groupId, folderIds,

@@ -167,7 +167,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	}
 
 	public List<TagsEntry> getAssetEntries(long assetId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return tagsAssetPersistence.getTagsEntries(assetId);
 	}
@@ -177,7 +177,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	}
 
 	public List<TagsEntry> getEntries(String className, long classPK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
@@ -185,7 +185,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	}
 
 	public List<TagsEntry> getEntries(long classNameId, long classPK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		TagsAsset asset = tagsAssetPersistence.fetchByC_C(classNameId, classPK);
 
@@ -235,7 +235,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	}
 
 	public long[] getEntryIds(long companyId, String[] names)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<TagsEntry> list = new ArrayList<TagsEntry>(names.length);
 
@@ -263,13 +263,13 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	}
 
 	public String[] getEntryNames(String className, long classPK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return getEntryNames(getEntries(className, classPK));
 	}
 
 	public String[] getEntryNames(long classNameId, long classPK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return getEntryNames(getEntries(classNameId, classPK));
 	}
@@ -421,9 +421,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		return StringUtil.split(ListUtil.toString(entries, "name"));
 	}
 
-	protected void validate(String name)
-		throws PortalException, SystemException {
-
+	protected void validate(String name) throws PortalException {
 		if (!TagsUtil.isValidWord(name)) {
 			throw new EntryNameException();
 		}

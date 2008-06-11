@@ -88,8 +88,7 @@ public interface RoleLocalService {
 			com.liferay.portal.SystemException;
 
 	public void addUserRoles(long userId, long[] roleIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public void checkSystemRoles(long companyId)
 		throws com.liferay.portal.PortalException,
@@ -101,9 +100,7 @@ public interface RoleLocalService {
 			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Role> getGroupRoles(
-		long groupId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		long groupId) throws com.liferay.portal.SystemException;
 
 	public java.util.Map<String, java.util.List<String>> getResourceRoles(
 		long companyId, java.lang.String name, int scope,
@@ -131,9 +128,7 @@ public interface RoleLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Role> getUserRoles(
-		long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		long userId) throws com.liferay.portal.SystemException;
 
 	public boolean hasUserRole(long userId, long roleId)
 		throws com.liferay.portal.SystemException;
@@ -170,12 +165,10 @@ public interface RoleLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public void setUserRoles(long userId, long[] roleIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public void unsetUserRoles(long userId, long[] roleIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Role updateRole(long roleId,
 		java.lang.String name, java.lang.String description)

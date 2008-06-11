@@ -162,13 +162,13 @@ public class SCProductVersionLocalServiceImpl
 	}
 
 	public void deleteProductVersion(SCProductVersion productVersion)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		scProductVersionPersistence.remove(productVersion);
 	}
 
 	public void deleteProductVersions(long productEntryId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<SCProductVersion> productVersions =
 			scProductVersionPersistence.findByProductEntryId(productEntryId);

@@ -146,7 +146,7 @@ public class ExpandoColumnLocalServiceImpl
 
 	public ExpandoColumn getColumn(
 			String className, String tableName, String name)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
@@ -155,7 +155,7 @@ public class ExpandoColumnLocalServiceImpl
 
 	public ExpandoColumn getColumn(
 			long classNameId, String tableName, String name)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return expandoColumnFinder.fetchByTC_TN_CN(
 			classNameId, tableName, name);
@@ -200,7 +200,7 @@ public class ExpandoColumnLocalServiceImpl
 	}
 
 	public ExpandoColumn getDefaultTableColumn(String className, String name)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
@@ -209,7 +209,7 @@ public class ExpandoColumnLocalServiceImpl
 	}
 
 	public ExpandoColumn getDefaultTableColumn(long classNameId, String name)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return getColumn(
 			classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME, name);

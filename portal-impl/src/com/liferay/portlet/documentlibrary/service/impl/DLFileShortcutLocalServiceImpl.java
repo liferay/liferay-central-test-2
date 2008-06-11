@@ -258,7 +258,7 @@ public class DLFileShortcutLocalServiceImpl
 	public void updateFileShortcuts(
 			long oldToFolderId, String oldToName, long newToFolderId,
 			String newToName)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<DLFileShortcut> fileShortcuts =
 			dlFileShortcutPersistence.findByTF_TN(oldToFolderId, oldToName);
@@ -272,7 +272,7 @@ public class DLFileShortcutLocalServiceImpl
 	}
 
 	protected long getFolderId(long companyId, long folderId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (folderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 

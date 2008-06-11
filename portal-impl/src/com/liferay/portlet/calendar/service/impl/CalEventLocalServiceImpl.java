@@ -1510,7 +1510,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			int startDateYear, int endDateMonth, int endDateDay,
 			int endDateYear, int durationHour, int durationMinute,
 			boolean allDay)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		if (Validator.isNull(title)) {
 			throw new EventTitleException();

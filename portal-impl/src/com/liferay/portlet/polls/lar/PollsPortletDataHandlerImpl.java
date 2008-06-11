@@ -123,15 +123,11 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	public PortletDataHandlerControl[] getExportControls()
-		throws PortletDataException {
-
+	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {_questions, _votes};
 	}
 
-	public PortletDataHandlerControl[] getImportControls()
-		throws PortletDataException {
-
+	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {_questions, _votes};
 	}
 
@@ -207,7 +203,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 	protected void exportChoice(
 			PortletDataContext context, Element questionsEl, PollsChoice choice)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		String path = getChoicePath(context, choice);
 
@@ -223,7 +219,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 	protected void exportQuestion(
 			PortletDataContext context, Element questionsEl, Element choicesEl,
 			Element votesEl, PollsQuestion question)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (!context.isWithinDateRange(question.getModifiedDate())) {
 			return;
@@ -260,7 +256,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 	protected void exportVote(
 			PortletDataContext context, Element questionsEl, PollsVote vote)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		String path = getVotePath(context, vote);
 

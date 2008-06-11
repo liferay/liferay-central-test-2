@@ -41,7 +41,7 @@ public class AnnouncementsFlagLocalServiceImpl
 	extends AnnouncementsFlagLocalServiceBaseImpl {
 
 	public AnnouncementsFlag addFlag(long userId, long entryId, int value)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long flagId = counterLocalService.increment();
 
@@ -70,9 +70,7 @@ public class AnnouncementsFlagLocalServiceImpl
 		announcementsFlagPersistence.remove(flagId);
 	}
 
-	public void deleteFlags(long entryId)
-		throws PortalException, SystemException {
-
+	public void deleteFlags(long entryId) throws SystemException {
 		announcementsFlagPersistence.removeByEntryId(entryId);
 	}
 

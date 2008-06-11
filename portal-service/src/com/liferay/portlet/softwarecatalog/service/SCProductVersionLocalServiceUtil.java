@@ -170,16 +170,14 @@ public class SCProductVersionLocalServiceUtil {
 
 	public static void deleteProductVersion(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion productVersion)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
 
 		scProductVersionLocalService.deleteProductVersion(productVersion);
 	}
 
 	public static void deleteProductVersions(long productEntryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
 
 		scProductVersionLocalService.deleteProductVersions(productEntryId);

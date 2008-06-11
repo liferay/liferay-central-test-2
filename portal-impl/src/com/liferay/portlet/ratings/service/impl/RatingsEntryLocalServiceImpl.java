@@ -36,9 +36,6 @@ import com.liferay.portlet.ratings.service.base.RatingsEntryLocalServiceBaseImpl
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="RatingsEntryLocalServiceImpl.java.html"><b><i>View Source</i></b>
  * </a>
@@ -97,7 +94,7 @@ public class RatingsEntryLocalServiceImpl
 	}
 
 	public List<RatingsEntry> getEntries(String className, long classPK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
@@ -204,8 +201,5 @@ public class RatingsEntryLocalServiceImpl
 
 		return entry;
 	}
-
-	private static Log _log =
-		LogFactory.getLog(RatingsEntryLocalServiceImpl.class);
 
 }

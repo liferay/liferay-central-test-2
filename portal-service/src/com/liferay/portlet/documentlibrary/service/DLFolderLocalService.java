@@ -188,9 +188,7 @@ public interface DLFolderLocalService {
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
 		long groupId, long[] folderIds, java.lang.String keywords, int start,
-		int end)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,

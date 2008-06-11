@@ -120,7 +120,7 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 
 				String[] tags = new String[0];
 
-				Field tagsEntriesField = (Field)result.getFields().get(
+				Field tagsEntriesField = result.getFields().get(
 					Field.TAGS_ENTRIES);
 
 				if (tagsEntriesField != null) {

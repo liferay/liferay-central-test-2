@@ -125,9 +125,7 @@ public interface ShoppingOrderLocalService {
 		java.lang.String shippingFirstName, java.lang.String shippingLastName,
 		java.lang.String shippingEmailAddress,
 		java.lang.String ppPaymentStatus, boolean andOperator, int start,
-		int end)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		int end) throws com.liferay.portal.SystemException;
 
 	public int searchCount(long groupId, long companyId, long userId,
 		java.lang.String number, java.lang.String billingFirstName,
@@ -135,8 +133,7 @@ public interface ShoppingOrderLocalService {
 		java.lang.String shippingFirstName, java.lang.String shippingLastName,
 		java.lang.String shippingEmailAddress,
 		java.lang.String ppPaymentStatus, boolean andOperator)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public void sendEmail(long orderId, java.lang.String emailType)
 		throws com.liferay.portal.PortalException,

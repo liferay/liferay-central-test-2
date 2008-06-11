@@ -66,7 +66,7 @@ public class OrganizationLocalServiceImpl
 	extends OrganizationLocalServiceBaseImpl {
 
 	public void addGroupOrganizations(long groupId, long[] organizationIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		groupPersistence.addOrganizations(groupId, organizationIds);
 
@@ -234,7 +234,7 @@ public class OrganizationLocalServiceImpl
 	}
 
 	public List<Organization> getGroupOrganizations(long groupId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return groupPersistence.getOrganizations(groupId);
 	}
@@ -248,7 +248,7 @@ public class OrganizationLocalServiceImpl
 	 * @return		a list of organizations
 	 */
 	public List<Organization> getManageableOrganizations(long userId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<Organization> manageableOrganizations =
 			new UniqueList<Organization>();
@@ -357,7 +357,7 @@ public class OrganizationLocalServiceImpl
 	}
 
 	public List<Organization> getUserOrganizations(long userId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return userPersistence.getOrganizations(userId);
 	}
@@ -496,7 +496,7 @@ public class OrganizationLocalServiceImpl
 	}
 
 	public void setGroupOrganizations(long groupId, long[] organizationIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		groupPersistence.setOrganizations(groupId, organizationIds);
 
@@ -504,7 +504,7 @@ public class OrganizationLocalServiceImpl
 	}
 
 	public void unsetGroupOrganizations(long groupId, long[] organizationIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		groupPersistence.removeOrganizations(groupId, organizationIds);
 

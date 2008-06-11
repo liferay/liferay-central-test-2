@@ -232,18 +232,14 @@ public class ExpandoTableLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoTable> getTables(
-		java.lang.String className)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		java.lang.String className) throws com.liferay.portal.SystemException {
 		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
 
 		return expandoTableLocalService.getTables(className);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoTable> getTables(
-		long classNameId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		long classNameId) throws com.liferay.portal.SystemException {
 		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
 
 		return expandoTableLocalService.getTables(classNameId);

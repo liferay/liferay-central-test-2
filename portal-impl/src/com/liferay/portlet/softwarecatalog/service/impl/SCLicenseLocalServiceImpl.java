@@ -108,7 +108,7 @@ public class SCLicenseLocalServiceImpl extends SCLicenseLocalServiceBaseImpl {
 	}
 
 	public List<SCLicense> getProductEntryLicenses(long productEntryId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return scProductEntryPersistence.getSCLicenses(productEntryId);
 	}

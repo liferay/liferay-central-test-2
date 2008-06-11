@@ -176,9 +176,7 @@ public interface ExpandoValueLocalService {
 
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		long classNameId, long tableId, long columnId, long classPK,
-		java.lang.String data)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		java.lang.String data) throws com.liferay.portal.SystemException;
 
 	public void deleteColumnValues(long columnId)
 		throws com.liferay.portal.SystemException;
@@ -208,12 +206,10 @@ public interface ExpandoValueLocalService {
 			com.liferay.portal.SystemException;
 
 	public void deleteValues(java.lang.String className, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public void deleteValues(long classNameId, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
 		long columnId, int start, int end)
@@ -403,12 +399,10 @@ public interface ExpandoValueLocalService {
 	public com.liferay.portlet.expando.model.ExpandoValue getValue(
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.expando.model.ExpandoValue getValue(
 		long classNameId, java.lang.String tableName,
 		java.lang.String columnName, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 }

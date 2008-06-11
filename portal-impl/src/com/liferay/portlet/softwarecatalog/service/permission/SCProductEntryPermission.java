@@ -51,7 +51,7 @@ public class SCProductEntryPermission {
 	public static void check(
 			PermissionChecker permissionChecker, SCProductEntry productEntry,
 			String actionId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		if (!contains(permissionChecker, productEntry, actionId)) {
 			throw new PrincipalException();
@@ -70,9 +70,8 @@ public class SCProductEntryPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, SCProductEntry productEntry,
-			String actionId)
-		throws PortalException, SystemException {
+		PermissionChecker permissionChecker, SCProductEntry productEntry,
+		String actionId) {
 
 		return permissionChecker.hasPermission(
 			productEntry.getGroupId(), SCProductEntry.class.getName(),

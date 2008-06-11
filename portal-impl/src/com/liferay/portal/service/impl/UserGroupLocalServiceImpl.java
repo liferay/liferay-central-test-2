@@ -50,7 +50,7 @@ import java.util.List;
 public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 	public void addGroupUserGroups(long groupId, long[] userGroupIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		groupPersistence.addUserGroups(groupId, userGroupIds);
 
@@ -92,9 +92,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		return userGroup;
 	}
 
-	public void clearUserUserGroups(long userId)
-		throws PortalException, SystemException {
-
+	public void clearUserUserGroups(long userId) throws SystemException {
 		userPersistence.clearUserGroups(userId);
 
 		PermissionCacheUtil.clearCache();
@@ -154,7 +152,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	}
 
 	public List<UserGroup> getUserUserGroups(long userId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return userPersistence.getUserGroups(userId);
 	}
@@ -185,7 +183,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	}
 
 	public void unsetGroupUserGroups(long groupId, long[] userGroupIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		groupPersistence.removeUserGroups(groupId, userGroupIds);
 

@@ -200,7 +200,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public List<Permission> getRolePermissions(long roleId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return rolePersistence.getPermissions(roleId);
 	}
@@ -596,7 +596,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	public void unsetRolePermission(long roleId, long permissionId)
-		throws SystemException, PortalException {
+		throws SystemException {
 
 		try {
 			Permission permission = permissionPersistence.findByPrimaryKey(
@@ -613,7 +613,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	public void unsetRolePermission(
 			long roleId, long companyId, String name, int scope, String primKey,
 			String actionId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		try {
 			ResourceCode resourceCode =
@@ -639,7 +639,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	public void unsetRolePermissions(
 			long roleId, long companyId, String name, int scope,
 			String actionId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		ResourceCode resourceCode = resourceCodeLocalService.getResourceCode(
 			companyId, name, scope);
@@ -663,7 +663,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 	public void unsetUserPermissions(
 			long userId, String[] actionIds, long resourceId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<Permission> permissions = permissionFinder.findByU_A_R(
 			userId, actionIds, resourceId);

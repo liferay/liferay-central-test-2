@@ -24,7 +24,6 @@ package com.liferay.portal.search.lucene;
 
 import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobExecutionContext;
-import com.liferay.portal.kernel.job.JobExecutionException;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.Time;
 import com.liferay.util.ant.DeleteTask;
@@ -44,9 +43,7 @@ public class CleanUpJob implements IntervalJob {
 		_interval = Time.DAY;
 	}
 
-	public void execute(JobExecutionContext context)
-		throws JobExecutionException {
-
+	public void execute(JobExecutionContext context) {
 		try {
 
 			// LEP-2180

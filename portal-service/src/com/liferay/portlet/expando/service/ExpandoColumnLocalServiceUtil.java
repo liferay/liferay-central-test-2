@@ -198,9 +198,7 @@ public class ExpandoColumnLocalServiceUtil {
 
 	public static com.liferay.portlet.expando.model.ExpandoColumn getColumn(
 		java.lang.String className, java.lang.String tableName,
-		java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		java.lang.String name) throws com.liferay.portal.SystemException {
 		ExpandoColumnLocalService expandoColumnLocalService = ExpandoColumnLocalServiceFactory.getService();
 
 		return expandoColumnLocalService.getColumn(className, tableName, name);
@@ -208,8 +206,7 @@ public class ExpandoColumnLocalServiceUtil {
 
 	public static com.liferay.portlet.expando.model.ExpandoColumn getColumn(
 		long classNameId, java.lang.String tableName, java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		ExpandoColumnLocalService expandoColumnLocalService = ExpandoColumnLocalServiceFactory.getService();
 
 		return expandoColumnLocalService.getColumn(classNameId, tableName, name);
@@ -261,8 +258,7 @@ public class ExpandoColumnLocalServiceUtil {
 
 	public static com.liferay.portlet.expando.model.ExpandoColumn getDefaultTableColumn(
 		java.lang.String className, java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		ExpandoColumnLocalService expandoColumnLocalService = ExpandoColumnLocalServiceFactory.getService();
 
 		return expandoColumnLocalService.getDefaultTableColumn(className, name);
@@ -270,8 +266,7 @@ public class ExpandoColumnLocalServiceUtil {
 
 	public static com.liferay.portlet.expando.model.ExpandoColumn getDefaultTableColumn(
 		long classNameId, java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		ExpandoColumnLocalService expandoColumnLocalService = ExpandoColumnLocalServiceFactory.getService();
 
 		return expandoColumnLocalService.getDefaultTableColumn(classNameId, name);

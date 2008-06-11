@@ -52,7 +52,7 @@ public class SCLicensePermission {
 	public static void check(
 			PermissionChecker permissionChecker, SCLicense license,
 			String actionId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		if (!contains(permissionChecker, license, actionId)) {
 			throw new PrincipalException();
@@ -70,9 +70,8 @@ public class SCLicensePermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, SCLicense license,
-			String actionId)
-		throws PortalException, SystemException {
+		PermissionChecker permissionChecker, SCLicense license,
+		String actionId) {
 
 		return permissionChecker.hasPermission(
 			GroupImpl.DEFAULT_PARENT_GROUP_ID, SCLicense.class.getName(),

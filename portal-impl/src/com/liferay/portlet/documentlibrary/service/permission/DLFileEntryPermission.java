@@ -52,7 +52,7 @@ public class DLFileEntryPermission {
 	public static void check(
 			PermissionChecker permissionChecker, DLFileEntry fileEntry,
 			String actionId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		if (!contains(permissionChecker, fileEntry, actionId)) {
 			throw new PrincipalException();
@@ -71,9 +71,8 @@ public class DLFileEntryPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, DLFileEntry fileEntry,
-			String actionId)
-		throws PortalException, SystemException {
+		PermissionChecker permissionChecker, DLFileEntry fileEntry,
+		String actionId) {
 
 		DLFolder folder = fileEntry.getFolder();
 

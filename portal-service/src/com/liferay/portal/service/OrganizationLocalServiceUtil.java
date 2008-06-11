@@ -110,9 +110,7 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	public static void addGroupOrganizations(long groupId,
-		long[] organizationIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		long[] organizationIds) throws com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
 		organizationLocalService.addGroupOrganizations(groupId, organizationIds);
@@ -149,18 +147,14 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> getGroupOrganizations(
-		long groupId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		long groupId) throws com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
 		return organizationLocalService.getGroupOrganizations(groupId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> getManageableOrganizations(
-		long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		long userId) throws com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
 		return organizationLocalService.getManageableOrganizations(userId);
@@ -218,9 +212,7 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
-		long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		long userId) throws com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
 		return organizationLocalService.getUserOrganizations(userId);
@@ -333,18 +325,14 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	public static void setGroupOrganizations(long groupId,
-		long[] organizationIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		long[] organizationIds) throws com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
 		organizationLocalService.setGroupOrganizations(groupId, organizationIds);
 	}
 
 	public static void unsetGroupOrganizations(long groupId,
-		long[] organizationIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		long[] organizationIds) throws com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
 		organizationLocalService.unsetGroupOrganizations(groupId,

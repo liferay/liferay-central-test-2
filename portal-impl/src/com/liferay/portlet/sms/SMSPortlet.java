@@ -34,8 +34,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.jsp.JSPPortlet;
 
-import java.io.IOException;
-
 import javax.mail.internet.InternetAddress;
 
 import javax.portlet.ActionRequest;
@@ -51,7 +49,7 @@ import javax.portlet.PortletException;
 public class SMSPortlet extends JSPPortlet {
 
 	public void processAction(ActionRequest req, ActionResponse res)
-		throws IOException, PortletException {
+		throws PortletException {
 
 		try {
 			String cmd = ParamUtil.getString(req, Constants.CMD);

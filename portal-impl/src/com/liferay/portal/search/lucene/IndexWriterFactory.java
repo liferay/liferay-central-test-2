@@ -231,7 +231,7 @@ public class IndexWriterFactory {
 		}
 	}
 
-	public void write(long companyId) throws IOException {
+	public void write(long companyId) {
 		if (LuceneUtil.INDEX_READ_ONLY) {
 			return;
 		}
@@ -287,7 +287,7 @@ public class IndexWriterFactory {
 		}
 	}
 
-	protected void decrement(IndexWriterData writerData) throws IOException {
+	protected void decrement(IndexWriterData writerData) {
 		if (writerData.getCount() > 0) {
 			writerData.setCount(writerData.getCount() - 1);
 

@@ -106,15 +106,13 @@ public class LuceneUtil {
 	}
 
 	public static void addExactTerm(
-			BooleanQuery booleanQuery, String field, long value)
-		throws ParseException {
+		BooleanQuery booleanQuery, String field, long value) {
 
 		addExactTerm(booleanQuery, field, String.valueOf(value));
 	}
 
 	public static void addExactTerm(
-			BooleanQuery booleanQuery, String field, String text)
-		throws ParseException {
+		BooleanQuery booleanQuery, String field, String text) {
 
 		//text = KeywordsUtil.escape(text);
 
@@ -355,7 +353,7 @@ public class LuceneUtil {
 		_instance._sharedWriter.releaseLock(companyId);
 	}
 
-	public static void write(long companyId) throws IOException {
+	public static void write(long companyId) {
 		_instance._sharedWriter.write(companyId);
 	}
 

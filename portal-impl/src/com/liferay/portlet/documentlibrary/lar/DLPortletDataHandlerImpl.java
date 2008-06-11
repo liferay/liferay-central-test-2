@@ -133,17 +133,13 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	public PortletDataHandlerControl[] getExportControls()
-		throws PortletDataException {
-
+	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
 			_foldersAndDocuments, _shortcuts, _ranks, _comments, _ratings, _tags
 		};
 	}
 
-	public PortletDataHandlerControl[] getImportControls()
-		throws PortletDataException {
-
+	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {
 			_foldersAndDocuments, _shortcuts, _ranks, _comments, _ratings, _tags
 		};
@@ -306,7 +302,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 	protected void exportFileRank(
 			PortletDataContext context, Element fileRanksEl,
 			DLFileRank fileRank)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		String path = getFileRankPath(context, fileRank);
 

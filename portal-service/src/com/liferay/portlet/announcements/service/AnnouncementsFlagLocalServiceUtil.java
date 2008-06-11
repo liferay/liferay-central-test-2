@@ -111,8 +111,7 @@ public class AnnouncementsFlagLocalServiceUtil {
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag addFlag(
 		long userId, long entryId, int value)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
 
 		return announcementsFlagLocalService.addFlag(userId, entryId, value);
@@ -136,8 +135,7 @@ public class AnnouncementsFlagLocalServiceUtil {
 	}
 
 	public static void deleteFlags(long entryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
 
 		announcementsFlagLocalService.deleteFlags(entryId);

@@ -721,8 +721,7 @@ public class DLFileEntryServiceHttp {
 
 	public static void unlockFileEntry(HttpPrincipal httpPrincipal,
 		long folderId, java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
@@ -739,14 +738,6 @@ public class DLFileEntryServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
 				if (e instanceof java.rmi.RemoteException) {
 					throw (java.rmi.RemoteException)e;
 				}

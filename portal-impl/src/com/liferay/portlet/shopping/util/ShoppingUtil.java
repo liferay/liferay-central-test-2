@@ -562,7 +562,7 @@ public class ShoppingUtil {
 	}
 
 	public static double calculateTotal(ShoppingOrder order)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<ShoppingOrderItem> orderItems =
 			ShoppingOrderItemLocalServiceUtil.getOrderItems(order.getOrderId());
@@ -886,9 +886,8 @@ public class ShoppingUtil {
 	}
 
 	public static String getPayPalRedirectURL(
-			ShoppingPreferences prefs, ShoppingOrder order, double total,
-			String returnURL, String notifyURL)
-		throws PortalException, SystemException {
+		ShoppingPreferences prefs, ShoppingOrder order, double total,
+		String returnURL, String notifyURL) {
 
 		String payPalEmailAddress = HttpUtil.encodeURL(
 			prefs.getPayPalEmailAddress());
@@ -959,8 +958,7 @@ public class ShoppingUtil {
 	}
 
 	public static String getPpPaymentStatus(
-			ShoppingOrder order, PageContext pageContext)
-		throws PortalException {
+		ShoppingOrder order, PageContext pageContext) {
 
 		String ppPaymentStatus = order.getPpPaymentStatus();
 

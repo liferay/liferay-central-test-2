@@ -86,7 +86,6 @@ public class VerifySocial extends VerifyProcess {
 
 			rs = ps.executeQuery();
 
-			long activityId = 0;
 			long groupId = 0;
 			long userId = 0;
 			long classNameId = 0;
@@ -115,7 +114,6 @@ public class VerifySocial extends VerifyProcess {
 						curActivityId);
 				}
 				else {
-					activityId = curActivityId;
 					groupId = curGroupId;
 					userId = curUserId;
 					classNameId = curClassNameId;
@@ -161,7 +159,6 @@ public class VerifySocial extends VerifyProcess {
 
 			rs = ps.executeQuery();
 
-			long requestId = 0;
 			long groupId = 0;
 			long userId = 0;
 			long classNameId = 0;
@@ -189,7 +186,6 @@ public class VerifySocial extends VerifyProcess {
 					SocialRequestLocalServiceUtil.deleteRequest(curRequestId);
 				}
 				else {
-					requestId = curRequestId;
 					groupId = curGroupId;
 					userId = curUserId;
 					classNameId = curClassNameId;

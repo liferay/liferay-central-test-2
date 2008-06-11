@@ -325,7 +325,7 @@ public class ShoppingPreferences {
 			String.valueOf(emailOrderConfirmationEnabled));
 	}
 
-	public String getEmailOrderConfirmationBody() throws IOException {
+	public String getEmailOrderConfirmationBody() {
 		String emailOrderConfirmationBody = _prefs.getValue(
 			"email-order-confirmation-body", StringPool.BLANK);
 
@@ -345,7 +345,7 @@ public class ShoppingPreferences {
 			"email-order-confirmation-body", emailOrderConfirmationBody);
 	}
 
-	public String getEmailOrderConfirmationSubject() throws IOException {
+	public String getEmailOrderConfirmationSubject() {
 		String emailOrderConfirmationSubject = _prefs.getValue(
 			"email-order-confirmation-subject", StringPool.BLANK);
 
@@ -387,7 +387,7 @@ public class ShoppingPreferences {
 			String.valueOf(emailOrderShippingEnabled));
 	}
 
-	public String getEmailOrderShippingBody() throws IOException {
+	public String getEmailOrderShippingBody() {
 		String emailOrderShippingBody = _prefs.getValue(
 			"email-order-shipping-body", StringPool.BLANK);
 
@@ -406,7 +406,7 @@ public class ShoppingPreferences {
 		_prefs.setValue("email-order-shipping-body", emailOrderShippingBody);
 	}
 
-	public String getEmailOrderShippingSubject() throws IOException {
+	public String getEmailOrderShippingSubject() {
 		String emailOrderShippingSubject = _prefs.getValue(
 			"email-order-shipping-subject", StringPool.BLANK);
 

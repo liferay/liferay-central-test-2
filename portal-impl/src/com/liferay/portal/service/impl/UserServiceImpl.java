@@ -200,15 +200,11 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		return userLocalService.getDefaultUserId(companyId);
 	}
 
-	public List<User> getGroupUsers(long groupId)
-		throws PortalException, SystemException {
-
+	public List<User> getGroupUsers(long groupId) throws SystemException {
 		return userLocalService.getGroupUsers(groupId);
 	}
 
-	public List<User> getRoleUsers(long roleId)
-		throws PortalException, SystemException {
-
+	public List<User> getRoleUsers(long roleId) throws SystemException {
 		return userLocalService.getRoleUsers(roleId);
 	}
 

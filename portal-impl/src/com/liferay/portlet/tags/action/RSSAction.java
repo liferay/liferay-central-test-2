@@ -42,8 +42,6 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -138,7 +136,5 @@ public class RSSAction extends Action {
 
 		return rss.getBytes(StringPool.UTF8);
 	}
-
-	private static Log _log = LogFactory.getLog(RSSAction.class);
 
 }

@@ -67,9 +67,7 @@ public class SCProductEntryImpl
 			getProductEntryId());
 	}
 
-	public List<SCProductScreenshot> getScreenshots()
-		throws PortalException, SystemException {
-
+	public List<SCProductScreenshot> getScreenshots() throws SystemException {
 		return SCProductScreenshotLocalServiceUtil.getProductScreenshots(
 			getProductEntryId());
 	}

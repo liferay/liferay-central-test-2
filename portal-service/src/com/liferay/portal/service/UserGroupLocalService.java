@@ -77,8 +77,7 @@ public interface UserGroupLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public void addGroupUserGroups(long groupId, long[] userGroupIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserGroup addUserGroup(long userId,
 		long companyId, java.lang.String name, java.lang.String description)
@@ -86,8 +85,7 @@ public interface UserGroupLocalService {
 			com.liferay.portal.SystemException;
 
 	public void clearUserUserGroups(long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserGroup getUserGroup(long companyId,
 		java.lang.String name)
@@ -98,9 +96,7 @@ public interface UserGroupLocalService {
 		long companyId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserGroup> getUserUserGroups(
-		long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		long userId) throws com.liferay.portal.SystemException;
 
 	public boolean hasGroupUserGroup(long groupId, long userGroupId)
 		throws com.liferay.portal.SystemException;
@@ -117,8 +113,7 @@ public interface UserGroupLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public void unsetGroupUserGroups(long groupId, long[] userGroupIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserGroup updateUserGroup(long companyId,
 		long userGroupId, java.lang.String name, java.lang.String description)

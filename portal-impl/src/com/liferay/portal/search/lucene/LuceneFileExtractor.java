@@ -34,8 +34,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.document.Field;
 
 /**
@@ -58,9 +56,7 @@ public class LuceneFileExtractor {
 		return LuceneFields.getText(field, text);
 	}
 
-	public Field getFile(String field, byte[] bytes, String fileExt)
-		throws IOException {
-
+	public Field getFile(String field, byte[] bytes, String fileExt) {
 		InputStream is = new BufferedInputStream(
 			new ByteArrayInputStream(bytes));
 
@@ -88,7 +84,5 @@ public class LuceneFileExtractor {
 
 		return new String(array);
 	}
-
-	private static Log _log = LogFactory.getLog(LuceneFileExtractor.class);
 
 }
