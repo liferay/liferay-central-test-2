@@ -98,8 +98,9 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 	temperatureArray[4] = new Option("4", "Réaumure");
 
 	jQuery(
-		function () {
+		function() {
 			var form = jQuery('#<portlet:namespace />fm');
+
 			form.ajaxForm(
 				{
 					target: form.parent()[0]

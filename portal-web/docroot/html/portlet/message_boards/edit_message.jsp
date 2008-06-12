@@ -451,7 +451,7 @@ if (message != null) {
 			%>
 
 				jQuery("#<portlet:namespace />removeExisting" + <%= i %>).click(
-					function () {
+					function() {
 						var button = jQuery(this);
 						var span = jQuery("#<portlet:namespace />existingFile" + <%= i %>);
 						var file = jQuery("#<portlet:namespace />msgFile" + <%= i %>);

@@ -64,7 +64,7 @@ Liferay.Browser = {
 	compat: function() {
 		var instance = this;
 
-		for (var i in instance._browserVars){
+		for (var i in instance._browserVars) {
 			if (!window[i]) {
 				window[i] = instance._browserVars[i];
 			}

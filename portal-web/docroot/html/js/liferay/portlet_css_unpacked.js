@@ -433,7 +433,7 @@ Liferay.PortletCSS = {
 
 		var backgroundColor = instance._backgroundColor;
 
-		var setColor = function(obj){
+		var setColor = function(obj) {
 			var color = obj.value;
 
 			var cssColor = color;
@@ -1404,7 +1404,7 @@ Liferay.PortletCSS = {
 		// Font family
 
 		fontFamily.unbind().change(
-			function(){
+			function() {
 				var fontFamily = this.options[this.selectedIndex].value;
 
 				portlet.css('font-family', fontFamily);
@@ -1416,9 +1416,9 @@ Liferay.PortletCSS = {
 		// Font style
 
 		fontBold.unbind().click(
-			function(){
+			function() {
 			var style = 'normal';
-				if (this.checked){
+				if (this.checked) {
 					style = 'bold';
 				}
 
@@ -1429,10 +1429,10 @@ Liferay.PortletCSS = {
 		);
 
 		fontItalic.unbind().click(
-			function(){
+			function() {
 				var style = 'normal';
 
-				if (this.checked){
+				if (this.checked) {
 					style = 'italic';
 				}
 
@@ -1445,7 +1445,7 @@ Liferay.PortletCSS = {
 		// Font size
 
 		fontSize.unbind().change(
-			function(){
+			function() {
 				var fontSize = this.options[this.selectedIndex].value;
 
 				portlet.css('font-size', fontSize);
@@ -1456,7 +1456,7 @@ Liferay.PortletCSS = {
 
 		// Font color
 
-		var setColor = function(obj){
+		var setColor = function(obj) {
 			var color = obj.value;
 
 			if (color != '') {
@@ -1485,7 +1485,7 @@ Liferay.PortletCSS = {
 		// Text alignment
 
 		textAlign.unbind().change(
-			function(){
+			function() {
 				var textAlign = this.options[this.selectedIndex].value;
 
 				portlet.css('text-align', textAlign);
@@ -1497,7 +1497,7 @@ Liferay.PortletCSS = {
 		// Text decoration
 
 		textDecoration.unbind().change(
-			function(){
+			function() {
 				var decoration = this.options[this.selectedIndex].value;
 
 				portlet.css('text-decoration', decoration);
@@ -1509,7 +1509,7 @@ Liferay.PortletCSS = {
 		// Word spacing
 
 		wordSpacing.unbind().change(
-			function(){
+			function() {
 				var spacing = this.options[this.selectedIndex].value;
 
 				portlet.css('word-spacing', spacing);
@@ -1521,7 +1521,7 @@ Liferay.PortletCSS = {
 		// Line height
 
 		leading.unbind().change(
-			function(){
+			function() {
 				var leading = this.options[this.selectedIndex].value;
 
 				portlet.css('line-height', leading);
@@ -1533,7 +1533,7 @@ Liferay.PortletCSS = {
 		// Letter spacing
 
 		tracking.unbind().change(
-			function(){
+			function() {
 				var tracking = this.options[this.selectedIndex].value;
 
 				portlet.css('letter-spacing', tracking);

@@ -63,7 +63,7 @@ public class UserGroupChecker extends RowChecker {
 			return UserLocalServiceUtil.hasGroupUser(
 				_group.getGroupId(), user.getUserId());
 		}
-		catch (Exception e){
+		catch (Exception e) {
 			_log.error(e);
 
 			return false;

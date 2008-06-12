@@ -9,6 +9,7 @@
 	min-height: 2.2em;
 	width: 100%;
 }
+
 #navigation ul {
 	margin: 0 auto;
 	min-height: 2em;
@@ -41,7 +42,7 @@
 }
 
 #navigation a {
-	color: #9ebac8;	
+	color: #9EBAC8;
 }
 
 #navigation li a {
@@ -55,7 +56,7 @@
 }
 
 #navigation li.selected a, #navigation li a:hover {
-	background-color: #1e2529;
+	background-color: #1E2529;
 	color: #fff;
 }
 
@@ -164,7 +165,7 @@
 
 .js .interactive-mode h2 span {
 	background: url(../images/dock/left_bg.png) no-repeat 0 0;
-	border-right: 1px solid #34404f;
+	border-right: 1px solid #34404F;
 	color: #fff;
 	display: block;
 	font-size: 1em;
@@ -181,13 +182,13 @@
 .js .interactive-mode ul {
 	background: #fff;
 	border: 1px solid;
-	border-color: #dedede #bfbfbf #bfbfbf #dedede;
+	border-color: #DEDEDE #BFBFBF #BFBFBF #DEDEDE;
 	display: none;
 	float: none;
 }
 
 .js .interactive-mode li {
-	border-top: 1px solid #dedede;
+	border-top: 1px solid #DEDEDE;
 	clear: both;
 	display: block;
 	float: none;
@@ -210,7 +211,7 @@
 }
 
 .js .interactive-mode li a:hover, .js .interactive-mode .my-places li.current a:hover {
-	background-color: #828f95;
+	background-color: #828F95;
 	color: #fff;
 }
 
@@ -232,7 +233,7 @@
 }
 
 .js .interactive-mode .my-places li.current-community {
-	background-color: #d3dadd;
+	background-color: #D3DADD;
 }
 
 .js .interactive-mode .my-places li h3 {
@@ -264,13 +265,13 @@
 }
 
 .js .interactive-mode .my-places li.current a {
-	background: #dff4ff url(../images/dock/my_place_current.png) no-repeat 10px 50%;
+	background: #DFF4FF url(../images/dock/my_place_current.png) no-repeat 10px 50%;
 	margin: 0;
 	padding-left: 35px;
 }
 
 .js .interactive-mode .group-end {
-	border-bottom: 2px solid #dedede;
+	border-bottom: 2px solid #DEDEDE;
 }
 
 .ie6.js .interactive-mode .taglib-my-places li {
@@ -306,7 +307,7 @@
 /* ---------- Add/remove page ---------- */
 
 .js #navigation .enter-page {
-	background-color: #1e2529;
+	background-color: #1E2529;
 	padding: 2px;
 }
 
@@ -319,7 +320,7 @@
 
 .js #navigation .enter-page .save-page {
 	background: url(../images/dock/my_place_current.png) no-repeat 0 50%;
-	margin: 0 10px 0 10px;
+	margin: 0 10px;
 	padding-left: 20px;
 }
 
@@ -349,9 +350,9 @@
 
 .js #add-page {
 	background: #020509;
-	bottom: 100%;
 	border: 1px solid #304049;
 	border-bottom: none;
+	bottom: 100%;
 	font-weight: bold;
 	position: absolute;
 	right: 5%;

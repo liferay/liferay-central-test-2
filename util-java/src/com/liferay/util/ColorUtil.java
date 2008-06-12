@@ -46,7 +46,7 @@ public class ColorUtil {
 		return blended;
 	}
 
-	public static Color blend (Color color1, Color color2, double ratio){
+	public static Color blend (Color color1, Color color2, double ratio) {
 		int[] rgb1 = {color1.getRed(), color1.getGreen(), color1.getBlue()};
 		int[] rgb2 = {color2.getRed(), color2.getGreen(), color2.getBlue()};
 

@@ -108,7 +108,6 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 	<%
 	for (int i = 0; i < values.length; i++) {
 		String curURL = (String)request.getAttribute("liferay-ui:tabs:url" + i);
-		String cssClassName = "";
 
 		if (Validator.isNull(curURL)) {
 			if (values.length == 1) {
@@ -152,6 +151,8 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 
 		boolean selected = (values.length == 1) || value.equals(values[i]);
 
+		String cssClassName = StringPool.BLANK;
+
 		if (selected) {
 			cssClassName = "current";
 		}
@@ -188,6 +189,7 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 							<span>
 						</c:otherwise>
 					</c:choose>
+
 					<%= LanguageUtil.get(pageContext, names[i]) %>
 
 					<c:choose>

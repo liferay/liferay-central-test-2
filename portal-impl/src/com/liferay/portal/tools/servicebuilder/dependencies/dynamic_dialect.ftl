@@ -75,7 +75,7 @@ public class DynamicDialect extends Dialect {
 			if (dbName.equals("ASE") && (dbMajorVersion == 15)) {
 				_dialect = new SybaseDialect();
 			}
-			else if (dbName.startsWith("DB2") && (dbMajorVersion == 9)){
+			else if (dbName.startsWith("DB2") && (dbMajorVersion == 9)) {
 				_dialect = new DB2Dialect();
 			}
 			else {

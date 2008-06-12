@@ -55,8 +55,9 @@ catch (Exception e) {
 
 <script type="text/javascript">
 	jQuery(
-		function () {
+		function() {
 			var form = jQuery('#<portlet:namespace />fm');
+
 			form.ajaxForm(
 				{
 					target: form.parent()[0]

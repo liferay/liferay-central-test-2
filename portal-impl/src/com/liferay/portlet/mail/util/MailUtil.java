@@ -601,7 +601,7 @@ public class MailUtil {
 			for (int i = 0; i < DEFAULT_FOLDERS.length; i++) {
 				ListIterator itr = tempList.listIterator();
 
-				while (itr.hasNext()){
+				while (itr.hasNext()) {
 					MailFolder mailFolder = (MailFolder)itr.next();
 
 					if (DEFAULT_FOLDERS[i].equals(

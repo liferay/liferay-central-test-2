@@ -1,7 +1,7 @@
 Liferay.Portal = {};
 
 Liferay.Portal.Tabs = {
-	show : function (namespace, names, id) {
+	show: function(namespace, names, id) {
 		var tab = jQuery('#' + namespace + id + 'TabsId');
 		var panel = jQuery('#' + namespace + id + 'TabsSection');
 

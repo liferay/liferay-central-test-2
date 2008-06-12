@@ -23,14 +23,14 @@
 %>
 
 function addPortletHTML(options) {
-	var portletBoundary;
+	var portletBoundary = null;
+
 	var url = options.url;
 	var placeHolder = options.placeHolder;
 	var beforePortletLoaded = options.beforePortletLoaded;
 	var onComplete = options.onComplete;
 
 	var addPortletReturn = function(html) {
-
 		var container = placeHolder.parentNode;
 		var jContainer = jQuery(container);
 
@@ -137,6 +137,7 @@ function closePortlet(plid, portletId, doAsUserId, skipConfirm) {
 			);
 
 			var portletsLeft = column.find('.portlet-boundary').length;
+
 			if (!portletsLeft) {
 				column.addClass('empty');
 			}

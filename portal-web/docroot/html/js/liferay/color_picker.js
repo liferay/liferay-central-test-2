@@ -19,18 +19,18 @@ Liferay.ColorPicker = new Class({
 		instance._currentColor = {r:255, g:255, b:255};
 
 		instance._insertImages();
-		
+
 		instance._buildHTML();
 	},
 
 	_buildHTML: function() {
 		var instance = this;
-		
+
 		var baseDiv = jQuery('<div class="lfr-colorpicker" />');
 		var closeButton = jQuery('<div class="ui-colorpicker-close" />')
-		
+
 		baseDiv.append(closeButton);
-		
+
 		baseDiv.appendTo('body');
 
 		closeButton.click(
@@ -38,7 +38,7 @@ Liferay.ColorPicker = new Class({
 				instance._toggle(event, this);
 			}
 		);
-		
+
 		var onChange = function(event, ui) {
 			instance._currentInput.val('#' + ui.hex);
 			instance._currentColor = ui.rgb;
@@ -52,7 +52,7 @@ Liferay.ColorPicker = new Class({
 			{
 				change: onChange,
 				picking: onChange,
-				pick: onChange				
+				pick: onChange
 			}
 		);
 

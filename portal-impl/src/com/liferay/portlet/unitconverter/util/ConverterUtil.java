@@ -80,7 +80,7 @@ public class ConverterUtil {
 		return (fromValue / _VOLUME[fromId]) * _VOLUME[toId];
 	}
 
-	private final static double _fromTemperature(int toId, double fromValue){
+	private final static double _fromTemperature(int toId, double fromValue) {
 		if (toId == 0) {
 			return fromValue;					// Kelvin
 		}

@@ -89,7 +89,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			SessionErrors.add(req, "subjectRequired");
 		}
 
-		if (!sendAsEmail && !saveToDatabase && !saveToFile){
+		if (!sendAsEmail && !saveToDatabase && !saveToFile) {
 			SessionErrors.add(req, "handlingRequired");
 		}
 

@@ -55,19 +55,19 @@ if (curTagsParam != null) {
 
 <input id="<%= namespace %><%= hiddenInput %>" type="hidden" />
 
-		<span class="ui-tags" id="<%= randomNamespace %>tagsSummary"></span>
-			<input class="ui-tags-input" id="<%= randomNamespace %>tags" size="15" type="text" />
+<span class="ui-tags" id="<%= randomNamespace %>tagsSummary"></span>
+	<input class="ui-tags-input" id="<%= randomNamespace %>tags" size="15" type="text" />
 
-			<input disabled id="<%= randomNamespace %>addTag" type="button" value="<liferay-ui:message key="add-tags" />" />
-		</nobr>
+	<input disabled id="<%= randomNamespace %>addTag" type="button" value="<liferay-ui:message key="add-tags" />" />
+</nobr>
 
-		<liferay-ui:message key="or" />
+<liferay-ui:message key="or" />
 
-		<input id="<%= randomNamespace %>selectTag" type="button" value="<liferay-ui:message key="select-tags" />" />
+<input id="<%= randomNamespace %>selectTag" type="button" value="<liferay-ui:message key="select-tags" />" />
 
-		<c:if test="<%= suggestible %>">
-			<input id="<%= randomNamespace %>suggestions" type="button" value="<liferay-ui:message key="suggestions" />" />
-		</c:if>
+<c:if test="<%= suggestible %>">
+	<input id="<%= randomNamespace %>suggestions" type="button" value="<liferay-ui:message key="suggestions" />" />
+</c:if>
 
 <script type="text/javascript">
 	var <%= randomNamespace %> = null;

@@ -55,7 +55,7 @@ public class UserOrganizationChecker extends RowChecker {
 			return UserLocalServiceUtil.hasOrganizationUser(
 				_organization.getOrganizationId(), user.getUserId());
 		}
-		catch (Exception e){
+		catch (Exception e) {
 			_log.error(e);
 
 			return false;

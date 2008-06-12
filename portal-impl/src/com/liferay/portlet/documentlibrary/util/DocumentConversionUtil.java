@@ -111,7 +111,7 @@ public class DocumentConversionUtil {
 
 		if (!PrefsPropsUtil.getBoolean(
 				PropsUtil.OPENOFFICE_SERVER_ENABLED,
-				PropsValues.OPENOFFICE_SERVER_ENABLED)){
+				PropsValues.OPENOFFICE_SERVER_ENABLED)) {
 
 			return null;
 		}

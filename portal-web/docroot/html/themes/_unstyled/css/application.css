@@ -1,5 +1,5 @@
-
 /* ---------- Main ---------- */
+
 .ui-wrapper {
 }
 
@@ -73,7 +73,6 @@
 .js .ui-resizable-disabled .ui-resizable-handle {
 }
 
-
 .js .ui-resizable-autohide .ui-resizable-handle {
 }
 
@@ -136,7 +135,7 @@
 .ie .ui-slider-range {
 }
 
-/* ---------- Tabs ---------- */    
+/* ---------- Tabs ---------- */
 
 .ui-tabs {
 }
@@ -162,7 +161,7 @@
 .ui-tabs li.current:hover, .ui-tabs li.current a:hover {
 }
 
-.ui-tabs .current a,  .ui-tabs .ui-tabs-disabled a {
+.ui-tabs .current a, .ui-tabs .ui-tabs-disabled a {
 }
 
 .ui-tabs-disabled {
@@ -265,7 +264,6 @@ img.ui-datepicker-trigger {
 .ui-datepicker-clear, .ui-datepicker-prev {
 }
 
-
 .ui-datepicker-prev a, .ui-datepicker-next a {
 }
 
@@ -280,7 +278,6 @@ img.ui-datepicker-trigger {
 
 .ui-datepicker-close a {
 }
-
 
 .ui-datepicker-next {
 }

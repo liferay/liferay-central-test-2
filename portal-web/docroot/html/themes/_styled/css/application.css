@@ -1,5 +1,5 @@
-
 /* ---------- Main ---------- */
+
 .ui-wrapper {
 	border: 2px solid #828F95;
 }
@@ -15,18 +15,18 @@
 }
 
 .ie .ui-dialog-overlay {
-	filter:alpha(opacity=80);
+	filter: alpha(opacity=80);
 }
 
 .results-grid {
-	border: 1px solid #dedede;
+	border: 1px solid #DEDEDE;
 	border-left: none;
 	border-right: none;
 	padding: 5px 0;
 }
 
 .results-header {
-	background: #727c81;
+	background: #727C81;
 }
 
 .results-header th {
@@ -39,16 +39,16 @@
 }
 
 .ui-autocomplete-even, .results-row td {
-	background: #f0f5f7;
+	background: #F0F5F7;
 	padding: 5px 10px;
 }
 
 .ui-autocomplete-odd, .results-row.alt td {
-	background: #d3dadd;
+	background: #D3DADD;
 }
 
 .ui-autocomplete-over, .results-row.hover td {
-	background: #a8d6ed;
+	background: #A8D6ED;
 }
 
 /* ---------- Dragging/sorting indicators ---------- */
@@ -58,7 +58,7 @@
 }
 
 #content-wrapper #layout-grid.dragging .lfr-column {
-	border: 3px double #828f95;
+	border: 3px double #828F95;
 }
 
 .drag-proxy-indicator {
@@ -69,7 +69,7 @@
 }
 
 .drop-area {
-	background-color: #d3dadd;
+	background-color: #D3DADD;
 }
 
 .active-area {
@@ -77,10 +77,10 @@
 }
 
 .ui-drag-helper {
-	border: 3px double #828f95;
-	background: #d3dadd;
-	width: 300px;
+	background: #D3DADD;
+	border: 3px double #828F95;
 	height: 200px;
+	width: 300px;
 }
 
 .navigation-sort-helper {
@@ -111,7 +111,6 @@
 .js .ui-resizable-disabled .ui-resizable-handle {
 	display: none;
 }
-
 
 .js .ui-resizable-autohide .ui-resizable-handle {
 	display: none;
@@ -222,16 +221,16 @@
 	filter: alpha(opacity=30);
 }
 
-/* ---------- Tabs ---------- */    
+/* ---------- Tabs ---------- */
 
 .ui-tabs {
-	border-bottom: 1px solid #dedede;
+	border-bottom: 1px solid #DEDEDE;
 	margin: 0 0 18px 0;
 	padding: 0 0 29px 10px;
 }
 
 .ui-tabs li {
-	background: #878f93 url(../images/application/tabs_bg.png) repeat-x 0 100%;
+	background: #878F93 url(../images/application/tabs_bg.png) repeat-x 0 100%;
 	border-right: 1px solid #304049;
 	display: inline;
 	float: left;
@@ -261,7 +260,7 @@
 
 .ui-tabs li.current {
 	background: #fff;
-	border: 1px solid #dedede;
+	border: 1px solid #DEDEDE;
 	border-bottom: none;
 	font-weight: bold;
 	margin-top: 0;
@@ -277,7 +276,7 @@
 	background-color: #fff;
 }
 
-.ui-tabs .current a,  .ui-tabs .ui-tabs-disabled a {
+.ui-tabs .current a, .ui-tabs .ui-tabs-disabled a {
 	cursor: text;
 }
 
@@ -286,7 +285,7 @@
 }
 
 .ie .ui-tabs-disabled {
-	filter: alpha(opacity=40);	
+	filter: alpha(opacity=40);
 }
 
 .ui-tabs .ui-tabs-disabled a:link, .ui-tabs .ui-tabs-disabled a:visited {
@@ -310,7 +309,7 @@
 }
 
 .ui-dialog .ui-dialog-titlebar {
-	background: #1e2529;
+	background: #1E2529;
 	color: #fff;
 	font-size: 14px;
 	font-weight: bold;
@@ -391,9 +390,9 @@
 }
 
 .ui-datepicker-inline {
-	float: left;
-	display: block;
 	border: 0;
+	display: block;
+	float: left;
 }
 
 .ui-datepicker-dialog {
@@ -406,9 +405,9 @@ img.ui-datepicker-trigger {
 }
 
 .ui-datepicker-prompt {
+	color: #000;
 	float: left;
 	padding: 2px;
-	color: #000;
 }
 
 .ie6 .ui-datepicker-prompt {
@@ -422,13 +421,13 @@ img.ui-datepicker-trigger {
 }
 
 .ui-datepicker-control {
-	background: #d3dadd;
-	border-bottom: 1px solid #aeb8bc;
+	background: #D3DADD;
+	border-bottom: 1px solid #AEB8BC;
 	margin-bottom: 2px;
 }
 
 .ui-datepicker-links {
-	background: #727c81;
+	background: #727C81;
 	margin-bottom: 1px;
 	padding: 5px 0;
 }
@@ -452,7 +451,6 @@ img.ui-datepicker-trigger {
 	float: left;
 	width: 34%;
 }
-
 
 .ui-datepicker-prev a, .ui-datepicker-next a {
 	background: url() no-repeat;
@@ -488,23 +486,22 @@ img.ui-datepicker-trigger {
 	width: 16px;
 }
 
-
 .ui-datepicker-next {
 	float: right;
 	text-align: right;
 }
 
 .ui-datepicker-header {
-	border-bottom: 1px solid #dedede;
+	border-bottom: 1px solid #DEDEDE;
 	font-weight: bold;
 	padding: 5px 0 6px;
 	text-align: center;
 }
 
 .ui-datepicker-header select {
-	background: #727c81;
-	color: #fff;
+	background: #727C81;
 	border: 0;
+	color: #fff;
 	font-weight: bold;
 }
 
@@ -530,38 +527,38 @@ img.ui-datepicker-trigger {
 }
 
 .ui-datepicker .ui-datepicker-title-row a {
-	color: #1e2529;
+	color: #1E2529;
 	text-decoration: none;
 }
 
 .ui-datepicker .ui-datepicker-days-row {
 	background: #fff;
-	color: #727c81;
+	color: #727C81;
 }
 
 .ui-datepicker-week-col {
-	color: #b5bfc4;
+	color: #B5BFC4;
 }
 
 .ui-datepicker-days-cell a {
-	background: #f0f5f7;
+	background: #F0F5F7;
 	border: 1px solid #fff;
 }
 
 .ui-datepicker-days-cell a:hover {
-	background-color: #727c81;
+	background-color: #727C81;
 	color: #fff;
 }
 
 .ui-datepicker-current-day a {
 	background-color: #fff;
-	border: 1px solid #727c81;
+	border: 1px solid #727C81;
 	color: #369;
 }
 
 .ui-datepicker-current-day a:hover {
 	background-color: #DFF4FF;
-	border-color: #aeb8bc;
+	border-color: #AEB8BC;
 	color: #06c;
 }
 
@@ -591,13 +588,13 @@ img.ui-datepicker-trigger {
 
 .ie6 .ui-datepicker-cover {
 	display: block;
-	position: absolute;
-	z-index: -1;
 	filter: mask();
-	top: -4px;
-	left: -4px;
-	width: 193px;
 	height: 200px;
+	left: -4px;
+	position: absolute;
+	top: -4px;
+	width: 193px;
+	z-index: -1;
 }
 
 /* ---------- Color picker ---------- */
@@ -647,7 +644,7 @@ img.ui-datepicker-trigger {
 
 .ui-colorpicker-current {
 	background: #fff;
-	border: 2px solid #727c81;
+	border: 2px solid #727C81;
 	height: 60px;
 	position: absolute;
 	right: 10px;
@@ -695,15 +692,15 @@ img.ui-datepicker-trigger {
 
 .ui-autocomplete-results {
 	border: 1px solid;
-	border-color: #bfbfbf #dedede #dedede #bfbfbf;
+	border-color: #BFBFBF #DEDEDE #DEDEDE #BFBFBF;
 	overflow: hidden;
 	padding: 0;
 	z-index: 300;
 }
 
 .ui-autocomplete-results ul {
-	list-style-position: outside;
 	list-style: none;
+	list-style-position: outside;
 	margin: 0;
 	padding: 0;
 	width: 100%;
@@ -749,8 +746,8 @@ img.ui-datepicker-trigger {
 }
 
 .ui-tags .ui-tag {
-	background: #dff4ff;
-	border: 1px solid #a7cedf;
+	background: #DFF4FF;
+	border: 1px solid #A7CEDF;
 	float: left;
 	margin-bottom: 3px;
 	margin-right: 3px;
@@ -760,7 +757,7 @@ img.ui-datepicker-trigger {
 }
 
 .ui-tags .ui-tag:hover {
-	border-color: #aeb8bc;
+	border-color: #AEB8BC;
 }
 
 .ui-tags .ui-tag-delete {

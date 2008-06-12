@@ -4,7 +4,7 @@
 
 .portlet {
 	background: #fff;
-	border: 2px solid #828f95;
+	border: 2px solid #828F95;
 	margin: 0 0 10px;
 	padding: 3px;
 	text-align: left;
@@ -15,8 +15,8 @@
 }
 
 .portlet-topper {
-	background: #d3dadd;
-	border-bottom: 1px solid #aeb8bc;
+	background: #D3DADD;
+	border-bottom: 1px solid #AEB8BC;
 	padding-right: 40px;
 	position: relative;
 }
@@ -70,7 +70,7 @@
 }
 
 .lfr-panel .portlet-topper {
-	border-bottom: 2px solid #828f95;
+	border-bottom: 2px solid #828F95;
 	margin-right: 0;
 	padding-bottom: 5px;
 	padding-right: 0;
@@ -115,7 +115,7 @@
 
 .portlet-msg-info {
 	background: #DFF4FF url(../images/messages/info.png) no-repeat 6px 50%;
-	border: 1px solid #a7cedf;
+	border: 1px solid #A7CEDF;
 	color: #34404F;
 	display: block;
 	font-weight: bold;
@@ -181,7 +181,6 @@
 }
 
 .portlet-section-body td {
-	
 }
 
 /* ---------- Text in every other row in the cell ---------- */
@@ -316,9 +315,9 @@
 /* ---------- Calendar portlet ---------- */
 
 .portlet-calendar .calendar-container {
-	background-repeat: repeat-x;
 	background-position: 0 99%;
-	border: 1px solid #d7d7d7;
+	background-repeat: repeat-x;
+	border: 1px solid #D7D7D7;
 	overflow: hidden;
 }
 
@@ -331,7 +330,7 @@
 }
 
 .portlet-calendar .calendar-day .day-text {
-	background: #727c81;
+	background: #727C81;
 	color: #fff;
 	font-size: 1.6em;
 }
@@ -346,7 +345,7 @@
 
 .portlet-calendar .calendar-container .taglib-calendar {
 	background: #fff;
-	border-left: 1px solid #d7d7d7;
+	border-left: 1px solid #D7D7D7;
 	margin-left: -1px;
 	padding-left: 0;
 }
@@ -356,10 +355,10 @@
 }
 
 .taglib-calendar tr td a {
-	background-color: #f0f5f7;
+	background-color: #F0F5F7;
 	border: 1px solid #fff;
-	border-left: none;
 	border-bottom: none;
+	border-left: none;
 	display: block;
 	height: 15px;
 	padding: 5px 0pt;
@@ -370,16 +369,16 @@
 }
 
 .taglib-calendar tr td a:hover {
-	background-color: #727c81;
+	background-color: #727C81;
 	color: #fff;
 }
 
 .taglib-calendar .calendar-current-day, .taglib-calendar .calendar-current-day a {
-	background-color: #fff;	
+	background-color: #fff;
 }
 
 .taglib-calendar .calendar-current-day a {
-	border: 1px solid #727c81;
+	border: 1px solid #727C81;
 	color: #369;
 	text-decoration: underline;
 }
@@ -400,7 +399,7 @@
 }
 
 .taglib-calendar tr th {
-	border-bottom-color: #d7d7d7;
+	border-bottom-color: #D7D7D7;
 }
 
 .taglib-calendar tr.portlet-section-header th, .taglib-calendar tr td {
@@ -415,7 +414,7 @@
 /* ---------- Miscellaneous portlet styles ---------- */
 
 .journal-template-error .scroll-pane {
-	border: 1px solid #bfbfbf;
+	border: 1px solid #BFBFBF;
 	max-height: 200px;
 	min-height: 50px;
 	overflow: auto;
@@ -436,8 +435,8 @@
 }
 
 .journal-template-error .scroll-pane pre span {
-	background: #b5bfc4;
-	border-right: 1px solid #bfbfbf;
+	background: #B5BFC4;
+	border-right: 1px solid #BFBFBF;
 	display: block;
 	float: left;
 	margin-right: 4px;
@@ -462,7 +461,7 @@
 }
 
 .restricted * {
-	color: #727c81;
+	color: #727C81;
 }
 
 .restricted .col-1 {
@@ -488,7 +487,7 @@
 .lfr-actions, .lfr-actions ul {
 	background: #fff url(../images/forms/button.png) repeat-x 0 100%;
 	border: 1px solid;
-	border-color: #dedede #bfbfbf #bfbfbf #dedede;
+	border-color: #DEDEDE #BFBFBF #BFBFBF #DEDEDE;
 }
 
 .lfr-actions ul {
@@ -509,7 +508,7 @@
 
 .lfr-actions .lfr-trigger li {
 	background: transparent;
-	border-bottom: 1px solid #dedede;
+	border-bottom: 1px solid #DEDEDE;
 	padding: 2px;
 }
 
@@ -518,7 +517,7 @@
 }
 
 .lfr-actions .lfr-trigger li a:hover {
-	background-color: #828f95;
+	background-color: #828F95;
 	color: #fff;
 }
 

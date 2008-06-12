@@ -91,7 +91,7 @@ Liferay.Widget({ url: &#x27;<%= PortalUtil.getWidgetURL(portlet, themeDisplay) %
 
 									<script type="text/javascript">
 										jQuery(
-											function () {
+											function() {
 												jQuery('.<portlet:namespace />expose-as-widget a').click(
 													function(event) {
 														var message = jQuery('#<portlet:namespace />widgetInformation').clone();

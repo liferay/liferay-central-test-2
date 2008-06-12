@@ -243,13 +243,15 @@ if (!window.String.prototype.trim) {
 }
 
 // Fixing IE's lack of an indexOf/lastIndexOf on an Array
+
 if (!window.Array.prototype.indexOf) {
 	window.Array.prototype.indexOf = function(item) {
-		for(var i=0; i<this.length; i++){
-            if(this[i]==item){
+		for (var i=0; i<this.length; i++) {
+            if(this[i]==item) {
                 return i;
             }
         }
+
         return -1;
 	};
 }
@@ -257,6 +259,7 @@ if (!window.Array.prototype.indexOf) {
 if (!window.Array.prototype.lastIndexOf) {
 	window.Array.prototype.lastIndexOf = function(item, fromIndex) {
 		var length = this.length;
+
 		if (fromIndex == null) {
 			fromIndex = length - 1;
 		}
@@ -265,10 +268,11 @@ if (!window.Array.prototype.lastIndexOf) {
 		}
 
 		for (var i = fromIndex; i >= 0; i--) {
-			if (this[i] === item){
-				return i;	
+			if (this[i] === item) {
+				return i;
 			}
 		}
+
 		return -1;
 	};
 }

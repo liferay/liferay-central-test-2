@@ -582,7 +582,7 @@ Liferay.Tree = new Class({
 		// descendents
 
 		droppedLink.parents('li.tree-item').each(
-			function () {
+			function() {
 				if (this == item) {
 					isChild = true;
 					return false;

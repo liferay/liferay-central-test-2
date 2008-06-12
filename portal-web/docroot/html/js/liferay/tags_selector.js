@@ -75,7 +75,7 @@ Liferay.TagsSelector = new Class({
 
 					jQuery.each(
 						newTags,
-						function (i, n) {
+						function(i, n) {
 							n = jQuery.trim(n);
 
 							if (curTags.indexOf(n) == -1) {
@@ -105,6 +105,7 @@ Liferay.TagsSelector = new Class({
 					}
 
 					this._LFR_listShowing = null;
+
 					return false;
 				}
 			}
@@ -165,7 +166,7 @@ Liferay.TagsSelector = new Class({
 				instance._curTags = instance._curTags.length ? instance._curTags : [];
 
 				container.find('input[@type=checkbox]').each(
-					function(){
+					function() {
 						var currentIndex = instance._curTags.indexOf(this.value);
 						if (this.checked) {
 							if (currentIndex == -1) {
@@ -229,7 +230,8 @@ Liferay.TagsSelector = new Class({
 			}
 		);
 
-		return jQuery.map(data, 
+		return jQuery.map(
+			data,
 			function(row) {
 				return {
 					data: row.text,
@@ -414,7 +416,6 @@ Liferay.TagsSelector = new Class({
 				html += '<span class="ui-tag" id="' + instance._ns + 'CurTags' + i + '">';
 				html += curTag;
 				html += '<a class="ui-tag-delete" href="javascript: ' + instance._ns + '.deleteTag(' + i + ');"><span>x</span></a>';
-
 				html += '</span>';
 			}
 		);

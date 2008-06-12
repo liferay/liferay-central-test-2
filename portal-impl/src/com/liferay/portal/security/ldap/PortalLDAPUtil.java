@@ -582,7 +582,7 @@ public class PortalLDAPUtil {
 		if (importGroupMembership && (userGroup != null)) {
 			Attribute attr = attrs.get(groupMappings.getProperty("user"));
 
-			if (attr != null){
+			if (attr != null) {
 				_importUsersAndMembershipFromLDAPGroup(
 					companyId, ctx, userGroup.getUserGroupId(), attr);
 			}
@@ -795,7 +795,7 @@ public class PortalLDAPUtil {
 					birthdayMonth, birthdayDay, birthdayYear, jobTitle,
 					organizationIds, sendEmail);
 			}
-			catch (Exception e){
+			catch (Exception e) {
 				_log.error(
 					"Problem adding user with screen name " + screenName +
 						" and email address " + emailAddress,
@@ -811,7 +811,7 @@ public class PortalLDAPUtil {
 			if (userMappingsGroup != null) {
 				Attribute attr = attrs.get(userMappingsGroup);
 
-				if (attr != null){
+				if (attr != null) {
 					_importGroupsAndMembershipFromLDAPUser(
 						companyId, ctx, user.getUserId(), attr);
 				}

@@ -51,7 +51,7 @@ public class XLSTextStripper {
 
 			int numOfSheets = workbook.getNumberOfSheets();
 
-			for(int i = 0; i < numOfSheets; i++) {
+			for (int i = 0; i < numOfSheets; i++) {
 				HSSFSheet sheet = workbook.getSheetAt(i);
 
 				Iterator<HSSFRow> rowIterator = sheet.rowIterator();

@@ -53,7 +53,7 @@ public class UserRoleChecker extends RowChecker {
 			return UserLocalServiceUtil.hasRoleUser(
 				_role.getRoleId(), user.getUserId());
 		}
-		catch (Exception e){
+		catch (Exception e) {
 			_log.error(e);
 
 			return false;

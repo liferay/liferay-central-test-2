@@ -1,6 +1,7 @@
 Liferay.Dock = {
 	init: function() {
 		var instance = this;
+
 		var dock = jQuery('.lfr-dock');
 
 		if (!dock.is('.interactive-mode')) {
@@ -11,7 +12,7 @@ Liferay.Dock = {
 
 		var dockList = dock.find('.lfr-dock-list');
 
-		if (dockList.length > 0){
+		if (dockList.length > 0) {
 			var myPlaces = jQuery('.my-places', dock);
 
 			Liferay.Util.createFlyouts(
@@ -44,7 +45,7 @@ Liferay.Dock = {
 				position: 'absolute',
 				zIndex: Liferay.zIndex.DOCK
 			};
-			
+
 			instance._setPosition(dock, dockDefaults);
 
 			var dockOver = function(event) {
@@ -70,6 +71,7 @@ Liferay.Dock = {
 			}
 
 			var dockParent = dock.parent();
+
 			var dockParentDefaults = {
 				position: 'relative',
 				zIndex: Liferay.zIndex.DOCK_PARENT
@@ -80,24 +82,26 @@ Liferay.Dock = {
 			instance._handleDebug();
 		}
 	},
-	
+
 	_setPosition: function(obj, defaults) {
 		var instance = this;
-		
+
 		var settings = defaults;
 
 		if (!obj.is('.ignore-position')) {
 			var position = obj.css('position');
 			var zIndex = obj.css('z-index');
 			var isStatic = !/absolute|relative|fixed/.test(position);
-			
+
 			if (zIndex == 'auto' || zIndex == 0) {
 				zIndex = defaults.zIndex;
 			}
 
 			// The position is static, but use top/left positioning as a trigger
+
 			if (isStatic) {
 				position = defaults.position;
+
 				var top = parseInt(obj.css('top'));
 
 				if (!isNaN(top) && top != 0) {

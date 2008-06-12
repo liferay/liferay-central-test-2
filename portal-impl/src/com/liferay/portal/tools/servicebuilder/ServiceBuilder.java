@@ -1092,7 +1092,7 @@ public class ServiceBuilder {
 		return name;
 	}
 
-	public String getCreateTableSQL(Entity entity){
+	public String getCreateTableSQL(Entity entity) {
 		String createTableSQL = _getCreateTableSQL(entity);
 
 		createTableSQL = StringUtil.replace(createTableSQL, "\n", "");
@@ -1255,7 +1255,7 @@ public class ServiceBuilder {
 		}
 	}
 
-	public String getPrimitiveObjValue(String colType){
+	public String getPrimitiveObjValue(String colType) {
 		if (colType.equals("Boolean")) {
 			return ".booleanValue()";
 		}

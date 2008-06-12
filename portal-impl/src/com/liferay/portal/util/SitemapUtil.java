@@ -66,7 +66,7 @@ public class SitemapUtil {
 		return doc.asXML();
 	}
 
-	public static String encodeXML(String input){
+	public static String encodeXML(String input) {
 		return StringUtil.replace(
 			input,
 			new String[] {"&", "<", ">", "'", "\""},

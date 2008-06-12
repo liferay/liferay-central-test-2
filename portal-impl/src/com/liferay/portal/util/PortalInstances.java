@@ -359,7 +359,7 @@ public class PortalInstances {
 				PortalLDAPUtil.importFromLDAP(companyId);
 			}
 		}
-		catch (Exception e){
+		catch (Exception e) {
 			_log.error(e, e);
 		}
 

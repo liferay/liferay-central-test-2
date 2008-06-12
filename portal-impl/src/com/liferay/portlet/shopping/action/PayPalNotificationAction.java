@@ -70,7 +70,7 @@ public class PayPalNotificationAction extends Action {
 
 			Enumeration<String> enu = req.getParameterNames();
 
-			while (enu.hasMoreElements()){
+			while (enu.hasMoreElements()) {
 				String name = enu.nextElement();
 
 				String value = req.getParameter(name);

@@ -424,7 +424,7 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 			if (countUsersType == COUNT_USERS_TYPE_PERMISSION) {
 				qPos.add(primKey);
 			}
-			else if (countUsersType == COUNT_USERS_TYPE_ROLE){
+			else if (countUsersType == COUNT_USERS_TYPE_ROLE) {
 				qPos.add(companyId);
 				qPos.add(groupId);
 			}

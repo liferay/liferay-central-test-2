@@ -123,6 +123,7 @@ String currentURL = PortalUtil.getCurrentURL(request);
 		<script type="text/javascript">
 			function <%= portletDisplay.getNamespace() %>refreshPortlet() {
 				var ns = '<%= portletDisplay.getNamespace() %>';
+
 				jQuery('#p_p_id' + ns).empty().append('<div class="loading-animation" id="p_load' + ns + '"></div>');
 
 				addPortletHTML(
@@ -134,8 +135,9 @@ String currentURL = PortalUtil.getCurrentURL(request);
 			}
 
 			jQuery(window).load(
-				function () {
-					var ns = '<%= portletDisplay.getNamespace() %>'
+				function() {
+					var ns = '<%= portletDisplay.getNamespace() %>';
+
 					addPortletHTML(
 						{
 							url: '<%= url.toString() %>',

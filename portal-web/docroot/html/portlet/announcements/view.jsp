@@ -213,7 +213,7 @@ portletURL.setParameter("tabs1", tabs1);
 				<liferay-ui:message key="distribution-scope" />
 			</td>
 			<td>
-				<select id="<portlet:namespace />distributionScope" name="<portlet:namespace />distributionScope" onChange="<portlet:namespace />selectDistributionScope(this.value);">
+				<select name="<portlet:namespace />distributionScope" onChange="<portlet:namespace />selectDistributionScope(this.value);">
 					<option value=""></option>
 
 					<c:if test="<%= permissionChecker.isOmniadmin() %>">

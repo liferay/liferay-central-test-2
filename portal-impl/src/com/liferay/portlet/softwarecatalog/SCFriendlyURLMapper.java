@@ -74,7 +74,7 @@ public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 				friendlyURL = "/software_catalog/products/new";
 			}
 		}
-		else if (action.equals("/software_catalog/edit_product_version")){
+		else if (action.equals("/software_catalog/edit_product_version")) {
 			String productEntryId = portletURL.getParameter("productEntryId");
 			String productVersionId = portletURL.getParameter(
 				"productVersionId");

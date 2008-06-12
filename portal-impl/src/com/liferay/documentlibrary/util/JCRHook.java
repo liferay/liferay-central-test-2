@@ -283,7 +283,7 @@ public class JCRHook extends BaseHook {
 
 			VersionIterator itr = versionHistory.getAllVersions();
 
-			while (itr.hasNext()){
+			while (itr.hasNext()) {
 				Version version = itr.nextVersion();
 
 				if (itr.getPosition() == itr.getSize()) {

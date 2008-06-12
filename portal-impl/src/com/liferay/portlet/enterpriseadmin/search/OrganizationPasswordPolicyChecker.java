@@ -57,7 +57,7 @@ public class OrganizationPasswordPolicyChecker extends RowChecker {
 				_passwordPolicy.getPasswordPolicyId(),
 				organization.getOrganizationId());
 		}
-		catch (Exception e){
+		catch (Exception e) {
 			_log.error(e);
 
 			return false;

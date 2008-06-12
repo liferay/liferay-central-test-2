@@ -56,6 +56,7 @@ Liferay.Util = {
 		inputs.focus(
 			function(event) {
 				jQuery(this).addClass('focus');
+
 				var value = this.value;
 				var caretPos = value.length;
 
@@ -273,13 +274,13 @@ Liferay.Util = {
 		var removeEvents = defaultEvents;
 
 		if (Liferay.Browser.is_ie) {
-			removeEvents = function(el){
+			removeEvents = function(el) {
 				defaultEvents(el);
 				ieEvents(el);
 			};
 		}
 
-		for (var i = children.length - 1; i >= 0; i--){
+		for (var i = children.length - 1; i >= 0; i--) {
 			var item = children[i];
 			var nodeName = item.nodeName.toLowerCase();
 
@@ -312,7 +313,7 @@ Liferay.Util = {
 		if (!textarea.jquery) {
 			textarea = jQuery(textarea);
 		}
-		
+
 		if (textarea.attr('textareatabs') != 'enabled') {
 			textarea.attr('textareatabs', 'disabled');
 			textarea.unbind('keydown', Liferay.Util.textareaTabs);
@@ -325,7 +326,7 @@ Liferay.Util = {
 		if (!textarea.jquery) {
 			textarea = jQuery(textarea);
 		}
-		
+
 		if (textarea.attr('textareatabs') != 'enabled') {
 			textarea.attr('textareatabs', 'enabled');
 			textarea.keydown(Liferay.Util.textareaTabs);
@@ -340,7 +341,7 @@ Liferay.Util = {
 		var instance = this;
 
 		jQuery(obj).find('script').each(
-			function(){
+			function() {
 				if ( this.src ) {
 					jQuery.getScript( this.src );
 				}
@@ -377,15 +378,14 @@ Liferay.Util = {
 
 	getColumnId: function(str) {
 		var columnId = str.replace(/layout-column_/, '');
-		
+
 		return columnId;
 	},
 
-	getPortletId: function(str) {
-		var portletId = str;
+	getPortletId: function(portletId) {
 		portletId = portletId.replace(/^p_p_id_/i, '');
 		portletId = portletId.replace(/_$/, '');
-		
+
 		return portletId;
 	},
 
@@ -476,6 +476,7 @@ Liferay.Util = {
 				function(event) {
 					if (!clicked) {
 						var form = jQuery([]);
+
 						var popup = Liferay.Popup(
 							{
 								height: 640,
@@ -485,14 +486,17 @@ Liferay.Util = {
 								resize: function(e, ui) {
 									var cssData = ui.size;
 									var dimensions = {};
+
 									if (cssData.height) {
 										dimensions.height = cssData.height - 130;
 									}
+
 									if (cssData.width) {
 										dimensions.width = cssData.width - 20;
 									}
 
 									form.css(dimensions);
+
 									jQuery(document).trigger('popupResize');
 								},
 								onClose: function() {
@@ -825,7 +829,7 @@ Liferay.Util = {
 
 			var form = document.forms[formName];
 
-			for (var i = 0; i < form.length; i++){
+			for (var i = 0; i < form.length; i++) {
 				var e = form.elements[i];
 
 				if (e.type && (e.type.toLowerCase() == "button" || e.type.toLowerCase() == "reset" || e.type.toLowerCase() == "submit")) {
@@ -1009,7 +1013,8 @@ Liferay.Util = {
 						el.setSelectionRange(caretPos, caretPos);
 					}, 0);
 
-			} else {
+			}
+			else {
 				document.selection.createRange().text='\t';
 			}
 
@@ -1049,12 +1054,12 @@ Liferay.Util = {
 		var checkBox = jQuery('#' + checkBoxId);
 		var toggleBox = jQuery('#' + toggleBoxId);
 
-		if (!checkBox.is(':checked')){
+		if (!checkBox.is(':checked')) {
 			toggleBox.hide();
 		}
 
 		checkBox.click(
-			function(){
+			function() {
 				toggleBox.toggle();
 			}
 		);
@@ -1097,7 +1102,7 @@ Liferay.Util = {
 		return jQuery.parseJSON(s);
 	},
 
-	toJSONString: function (s) {
+	toJSONString: function(s) {
 		var rt = s;
 
 		var m = {
@@ -1134,7 +1139,7 @@ Liferay.Util = {
 
 			var x = viewport.width();
 			var y = viewport.height();
-			
+
 			return {x: x, y: y};
 		},
 		page: function() {
@@ -1143,7 +1148,7 @@ Liferay.Util = {
 
 			var x = viewport.width();
 			var y = viewport.height();
-			
+
 			return {x: x, y: y};
 		},
 		scroll: function() {
@@ -1152,7 +1157,7 @@ Liferay.Util = {
 
 			var x = viewport.scrollLeft();
 			var y = viewport.scrollTop();
-			
+
 			return {x: x, y: y};
 		}
 	}

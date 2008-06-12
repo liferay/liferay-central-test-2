@@ -44,7 +44,7 @@ public class SerializableSessionAttributeListener
 	public void attributeAdded(HttpSessionBindingEvent event) {
 		Object obj = event.getValue();
 
-		if (!(obj instanceof Serializable)){
+		if (!(obj instanceof Serializable)) {
 			_log.error(
 				obj.getClass().getName() +
 					" is not serializable and will prevent this session from " +

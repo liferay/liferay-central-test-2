@@ -201,7 +201,8 @@ Liferay.Session = {
 					if (instance._currentTime > 0) {
 						instance._counterText.text(time);
 						document.title = instance.banner.text();
-					} else {
+					}
+					else {
 						instance.banner.html(instance._expiredText);
 						instance.banner.toggleClass('popup-alert-notice').toggleClass('popup-alert-warning');
 
@@ -222,7 +223,8 @@ Liferay.Session = {
 			if (num <= 9) {
 				num = '0' + num;
 			}
-		} else {
+		}
+		else {
 			num = jQuery.map(num, instance._formatNumber);
 		}
 		return num;
@@ -233,7 +235,7 @@ Liferay.Session = {
 
 		var amount = instance._currentTime;
 
-		if(amount <= 0){
+		if (amount <= 0) {
 
 		}
 		else {

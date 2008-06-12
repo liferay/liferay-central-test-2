@@ -1,7 +1,7 @@
 Liferay.Layout = {
 	init: function(options) {
 		var instance = this;
-		
+
 		instance.isFreeForm = options.freeForm;
 
 		var layoutHandler;
@@ -14,10 +14,9 @@ Liferay.Layout = {
 		}
 
 		layoutHandler.init(options);
-		
+
 		instance.layoutHandler = layoutHandler;
 	},
-	
 
 	getGroupId: function(objId) {
 		var instance = this;
@@ -80,7 +79,7 @@ Liferay.Layout = {
 			}
 		);
 	},
-	
+
 	refresh: function(portletBound) {
 		var instance = this;
 
@@ -107,10 +106,12 @@ Liferay.Layout.Columns = {
 
 		instance._activeAreaClass = 'active-area';
 		instance._dropAreaClass = 'drop-area';
-		
+
 		instance._gridColumns = '.lfr-column';
 
-		//This sets whether we're using a clone of the box to sort with, or a plain box
+		// This sets whether we're using a clone of the box to sort with, or a
+		// plain box
+
 		instance._useCloneProxy = options.clonePortlet;
 
 		jQuery(instance._handleSelector).css('cursor', 'move');
@@ -130,8 +131,9 @@ Liferay.Layout.Columns = {
 			distance: 2,
 			scroll: true,
 			scrollSensitivity: 50,
-			
+
 			// Callbacks
+
 			start: function(event, ui) {
 				instance._onStart(event, ui);
 			},
@@ -147,36 +149,35 @@ Liferay.Layout.Columns = {
 			remove: function(event, ui) {
 				instance._onRemove(event, ui);
 			},
-			// These methods are sensitive to performance, so we don't add to the callstack
-			// and instead just do the work inline.
+
+			// These methods are sensitive to performance, so we don't add to
+			// the callstack and instead just do the work inline.
+
 			over: function(event, ui) {
 				jQuery(this).parent(instance._gridColumns).addClass(instance._activeAreaClass);
 				ui.helper.removeClass('not-intersecting');
 			},
-
 			out: function(event, ui) {
 				jQuery(this).parent(instance._gridColumns).removeClass(instance._activeAreaClass);
 				ui.helper.addClass('not-intersecting');
 			},
-
 			activate: function(event, ui) {
 				instance._grid.addClass('dragging');
 				jQuery(this).parent(instance._gridColumns).addClass(instance._dropAreaClass);
 			},
-
 			deactivate: function(event, ui) {
 				jQuery(this).parent(instance._gridColumns).removeClass(instance._dropAreaClass);
 			}
 		};
 
 		instance.sortColumns = jQuery(instance._columns);
-		
+
 		instance.sortColumns.sortable(options);
 	},
 
 	refresh: function(portletBound) {
 		var instance = this;
-		
+
 		if (portletBound) {
 			jQuery(instance._handleSelector, portletBound).css('cursor', 'move');
 		}
@@ -203,7 +204,7 @@ Liferay.Layout.Columns = {
 		var height = obj.height();
 		var div = [];
 
-		if (instance._useCloneProxy) {					
+		if (instance._useCloneProxy) {
 			div = obj.clone();
 		}
 		else {
@@ -249,9 +250,10 @@ Liferay.Layout.Columns = {
 		var instance = this;
 
 		instance.startDragging();
-		
+
 		var sortColumns = instance.sortColumns.data('sortable');
-		if (sortColumns.refreshPositions) {			
+
+		if (sortColumns.refreshPositions) {
 			sortColumns.refreshPositions(true);
 		}
 	},
@@ -266,6 +268,7 @@ Liferay.Layout.Columns = {
 		var instance = this;
 
 		var originalCol = ui.sender || ui.element;
+
 		if (ui.item && ui.item[0].parentNode == ui.element[0]) {
 			var currentCol = ui.element;
 			var portlet = ui.item;
@@ -295,6 +298,7 @@ Liferay.Layout.FreeForm = {
 		var instance = this;
 
 		// Set private variables
+
 		instance._columns = options.columnSelector;
 		instance._portlets = options.boxSelector;
 
@@ -313,7 +317,7 @@ Liferay.Layout.FreeForm = {
 		handle.css('cursor', 'move');
 
 		var jPortlet = jQuery(portlet);
-		
+
 		if (!jPortlet.find('.ui-resizable-handle').length) {
 			jPortlet.append('<div class="ui-resizable-handle ui-resizable-se"></div>');
 		}

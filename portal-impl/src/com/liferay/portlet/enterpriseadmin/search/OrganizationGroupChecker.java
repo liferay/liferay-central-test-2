@@ -53,7 +53,7 @@ public class OrganizationGroupChecker extends RowChecker {
 			return OrganizationLocalServiceUtil.hasGroupOrganization(
 				_group.getGroupId(), organization.getOrganizationId());
 		}
-		catch (Exception e){
+		catch (Exception e) {
 			_log.error(e);
 
 			return false;

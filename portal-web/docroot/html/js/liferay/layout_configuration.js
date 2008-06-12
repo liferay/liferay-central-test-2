@@ -1,15 +1,15 @@
 var LayoutConfiguration = {
-	categories : [],
-	initialized : false,
-	loadingImage : null,
-	menu : null,
-	menuDiv : null,
-	menuIframe : null,
-	portlets : [],
-	showTimer : 0,
+	categories: [],
+	initialized: false,
+	loadingImage: null,
+	menu: null,
+	menuDiv: null,
+	menuIframe: null,
+	portlets: [],
+	showTimer: 0,
 	offsetMenu: true,
 
-	init : function () {
+	init: function() {
 		var instance = this;
 
 		var menu = jQuery('#portal_add_content');
@@ -45,19 +45,20 @@ var LayoutConfiguration = {
 		}
 	},
 
-	toggle: function (ppid) {
+	toggle: function(ppid) {
 		var instance = this;
 
 		var plid = themeDisplay.getPlid();
 		var doAsUserId = themeDisplay.getDoAsUserIdEncoded();
 
 		if (!instance.menu) {
-			var url = themeDisplay.getPathMain() + 
-				'/portal/render_portlet' +  
-				'?p_l_id=' + plid + 
-				'&p_p_id=' + ppid + 
-				'&doAsUserId=' + doAsUserId + 
-				'&p_p_state=exclusive';
+			var url =
+				themeDisplay.getPathMain() +
+				'/portal/render_portlet' +
+				'?p_l_id=' + plid +
+				'&p_p_id=' + ppid +
+				'&p_p_state=exclusive' +
+				'&doAsUserId=' + doAsUserId;
 
 			var popupWidth = 250;
 
@@ -86,7 +87,7 @@ var LayoutConfiguration = {
 			jQuery.ajax(
 				{
 					url: url,
-					success: function(message){
+					success: function(message) {
 						instance._dialog.html(message);
 						instance._loadContent();
 					}
@@ -134,7 +135,7 @@ var LayoutConfiguration = {
 		}
 	},
 
-	startShowTimer : function (event, obj) {
+	startShowTimer: function(event, obj) {
 		var instance = this;
 
 		if (instance.showTimer) {
@@ -155,7 +156,7 @@ var LayoutConfiguration = {
 
 		var portletMetaData = instance._getPortletMetaData(portlet);
 
-		if (!portletMetaData.portletUsed) {		
+		if (!portletMetaData.portletUsed) {
 			var plid = portletMetaData.plid;
 			var portletId = portletMetaData.portletId;
 			var isInstanceable = portletMetaData.instanceable;
@@ -164,26 +165,27 @@ var LayoutConfiguration = {
 				portlet.addClass('lfr-portlet-used');
 				portlet.draggable('disable');
 			}
-			
-			var onComplete, beforePortletLoaded;
-			
-			var placeHolder = jQuery('<div class="loading-animation"></div>');
 
-			if (options) {				
+			var placeHolder = jQuery('<div class="loading-animation"></div>');
+			var onComplete = null;
+			var beforePortletLoaded = null;
+
+			if (options) {
 				var item = options.item;
+
 				options.placeHolder = placeHolder[0];
 				onComplete = options.onComplete;
 				beforePortletLoaded = options.beforePortletLoaded;
-				
+
 				item.after(placeHolder);
 				item.remove();
-			} 
+			}
 			else {
 				if (instance._sortColumns) {
 					instance._sortColumns.filter(':first').prepend(placeHolder);
 				}
 			}
-			
+
 			var portletOptions = {
 				beforePortletLoaded: beforePortletLoaded,
 				onComplete: onComplete,
@@ -193,7 +195,7 @@ var LayoutConfiguration = {
 			}
 
 			var portletPosition = addPortlet(portletOptions);
-			
+
 			instance._loadPortletFiles(portletMetaData);
 		}
 	},
@@ -214,7 +216,7 @@ var LayoutConfiguration = {
 			instance._onDragStop = instance._onFreeFormDragStop;
 		}
 	},
-	
+
 
 	_getPortletMetaData: function(portlet) {
 		var instance = this;
@@ -302,13 +304,15 @@ var LayoutConfiguration = {
 			instance._dragOptions.appendTo = '#column-1';
 		}
 		else {
+
 			// Let's make sure we have all the columns ready
+
 			var sortColumns = instance._sortColumns;
 			var sortableInstance = instance._sortableInstance;
 
 			sortableInstance.refresh();
 
-			sortColumns.bind('sortreceive.sortable', 
+			sortColumns.bind('sortreceive.sortable',
 				function(event, ui) {
 					if (ui.item.is('.lfr-portlet-item') && !sortableInstance.dragging) {
 						var placeholder = ui.item;
@@ -324,9 +328,9 @@ var LayoutConfiguration = {
 					}
 				}
 			);
-			
+
 			sortColumns.bind('sortactivate.sortable',
-				function(event){
+				function(event) {
 					Liferay.Layout.Columns.startDragging();
 					sortableInstance.refreshPositions(true);
 				}
@@ -372,15 +376,15 @@ var LayoutConfiguration = {
 			}
 		);
 	},
-	
+
 	_loadPortletFiles: function(portletMetaData) {
 		var instance = this;
-		
+
 		var headerPortalCssPaths = portletMetaData.portalPaths.header;
 		var footerPortalCssPaths = portletMetaData.portalPaths.footer;
 		var headerPortletCssPaths = portletMetaData.portletPaths.header;
 		var footerPortletCssPaths = portletMetaData.portletPaths.footer;
-		
+
 		var head = jQuery('head');
 		var docBody = jQuery(document.body);
 
@@ -428,7 +432,7 @@ var LayoutConfiguration = {
 			);
 		}
 	},
-	
+
 	_onColumnDrag: function(event, ui, obj) {
 	},
 
@@ -458,7 +462,7 @@ var LayoutConfiguration = {
 
 		ui.helper.removeClass('not-intersecting');
 	},
-	
+
 	_onFreeFormDragStop: function(event, ui, obj) {
 		var instance = this;
 

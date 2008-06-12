@@ -14,7 +14,7 @@ Liferay.Popup = function(options) {
 	var instance = this;
 
 	options = options || {};
-	
+
 	var defaults = {
 		className: 'generic-dialog',
 		draggable: true,
@@ -24,22 +24,25 @@ Liferay.Popup = function(options) {
 		height: 'auto',
 		stack: false
 	};
-	
+
 	var config = jQuery.extend({}, defaults, options);
 
 	var content = '';
 	var message = config.message;
+
 	if (typeof message == 'string') {
-			content = jQuery('<div>' + config.message + '</div>');
-	} else {
+		content = jQuery('<div>' + config.message + '</div>');
+	}
+	else {
 		content = jQuery('<div></div>').append(config.message);
 	}
 
 	var modal = config.modal;
 	var draggable = config.draggable;
 	var position = config.noCenter ? defaults.position : 'center';
+
 	position = config.position || position;
-	
+
 	var top = config.top;
 	var left = config.left;
 
@@ -53,6 +56,7 @@ Liferay.Popup = function(options) {
 
 	if (Liferay.Util.isArray(position)) {
 		var centering = position.indexOf('center');
+
 		if (centering > -1) {
 			var wnd = jQuery(window);
 			var popupWidth = width || 0;
@@ -69,7 +73,7 @@ Liferay.Popup = function(options) {
 	content.appendTo('body');
 
 	content.bind(
-		'dialogclose', 
+		'dialogclose',
 		function(event) {
 			if (config.onClose) {
 				config.onClose();
@@ -102,14 +106,15 @@ jQuery.extend(
 			var instance = this;
 
 			var obj = el;
+
 			if (!el.jQuery) {
 				obj = jQuery(el);
 			}
-			
+
 			if (!obj.is('.ui-dialog-content')) {
 				obj = obj.parents('.ui-dialog-content');
 			}
-			
+
 			obj.trigger('dialogclose');
 		},
 

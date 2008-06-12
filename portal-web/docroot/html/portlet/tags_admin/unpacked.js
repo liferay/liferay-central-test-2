@@ -387,6 +387,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 										if (confirm(mergeText)) {
 											jQuery.data(draggable[0], 'draggable').options.revert = false;
+
 											Liferay.Service.Tags.TagsEntry.mergeEntries(
 												{
 													fromEntryId: fromId,

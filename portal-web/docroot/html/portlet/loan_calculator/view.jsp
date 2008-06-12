@@ -47,9 +47,10 @@ integerFormat.setMinimumFractionDigits(0);
 
 NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 %>
+
 <script type="text/javascript">
 	jQuery(
-		function () {
+		function() {
 			var form = jQuery('#<portlet:namespace />fm');
 			form.ajaxForm(
 				{

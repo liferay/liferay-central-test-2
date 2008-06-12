@@ -71,20 +71,21 @@ Liferay.Navigation = new Class({
 		);
 
 		savePage.click(
-			function(event){
+			function(event) {
 				instance._savePage(event, this, instance);
 				pageParents.unbind('click', pageBlur);
 			}
 		);
 
 		currentInput.keyup(
-			function(event){
+			function(event) {
 				if (event.keyCode == 13) {
 					savePage.trigger('click');
 				}
 				else if (event.keyCode == 27) {
 					cancelPage.trigger('click');
-				} else {
+				}
+				else {
 					return;
 				}
 
@@ -167,7 +168,7 @@ Liferay.Navigation = new Class({
 				var addPage = navList.parent().find('#add-page a');
 
 				addPage.click(
-					function(event){
+					function(event) {
 						instance._addPage(event, this);
 					}
 				);

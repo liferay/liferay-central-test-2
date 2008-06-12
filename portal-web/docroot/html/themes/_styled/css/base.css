@@ -39,7 +39,7 @@ abbr, acronym {
 
 body {
 	background-color: #fff;
-	font: 62.5%/1.6em Arial, Helvetica, Verdana, sans-serif;
+	font: 62.5%/1.6em Arial,Helvetica,Verdana,sans-serif;
 }
 
 html, body {
@@ -246,7 +246,7 @@ body.staging #wrapper {
 .portal-tool-tip {
 	background: #fff url(../images/forms/button.png) repeat-x 0 100%;
 	border: 1px solid;
-	border-color: #dedede #bfbfbf #bfbfbf #dedede;
+	border-color: #DEDEDE #BFBFBF #BFBFBF #DEDEDE;
 	color: #1E2529;
 	font-weight: bold;
 	max-width: 200px;
@@ -265,7 +265,7 @@ body.staging #wrapper {
 /* ---------- Separator ---------- */
 
 hr, .separator {
-	border: 1px dotted #bfbfbf;
+	border: 1px dotted #BFBFBF;
 }
 
 /* ---------- Update Manager ---------- */

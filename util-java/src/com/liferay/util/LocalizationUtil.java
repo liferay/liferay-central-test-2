@@ -164,7 +164,7 @@ public class LocalizationUtil {
 						}
 					}
 				}
-				else if (event == XMLStreamConstants.END_DOCUMENT){
+				else if (event == XMLStreamConstants.END_DOCUMENT) {
 					break;
 				}
 			}

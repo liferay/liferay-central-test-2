@@ -23,7 +23,7 @@
 %>
 
 <script type="text/javascript">
-	function resizeIframe(){
+	function resizeIframe() {
 		var winHeight = 0;
 
 		if (typeof(window.innerWidth) == 'number') {

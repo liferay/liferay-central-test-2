@@ -30,7 +30,7 @@
 	}
 
 	jQuery(
-		function () {
+		function() {
 			<portlet:namespace />bbCode = new Liferay.Editor.bbCode(
 				{
 					textarea: '#<portlet:namespace />textArea'

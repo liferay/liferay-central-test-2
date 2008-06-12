@@ -174,7 +174,7 @@ int weekNumber = 1;
 			if (dayOfWeek == 1) {
 				className += " first";
 			}
-			else if(dayOfWeek == 7) {
+			else if (dayOfWeek == 7) {
 				className += " last";
 			}
 
