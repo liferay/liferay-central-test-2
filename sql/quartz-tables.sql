@@ -103,18 +103,20 @@ create table QUARTZ_LOCKS (
 	LOCK_NAME VARCHAR(40) not null primary key
 );
 
+COMMIT_TRANSACTION;
+
 insert into QUARTZ_LOCKS values('TRIGGER_ACCESS');
 insert into QUARTZ_LOCKS values('JOB_ACCESS');
 insert into QUARTZ_LOCKS values('CALENDAR_ACCESS');
 insert into QUARTZ_LOCKS values('STATE_ACCESS');
 insert into QUARTZ_LOCKS values('MISFIRE_ACCESS');
 
-create index IX_quartz_triggers_state on QUARTZ_TRIGGERS(TRIGGER_STATE);
-create index IX_quartz_triggers_next_fire_time on QUARTZ_TRIGGERS(NEXT_FIRE_TIME);
-create index IX_quartz_triggers_state_next_fire_time on QUARTZ_TRIGGERS(TRIGGER_STATE, NEXT_FIRE_TIME);
-create index IX_quartz_fired_triggers_trigger_name on QUARTZ_FIRED_TRIGGERS(TRIGGER_NAME);
-create index IX_quartz_fired_triggers_trigger_group on QUARTZ_FIRED_TRIGGERS(TRIGGER_GROUP);
-create index IX_quartz_fired_triggers_trigger_name_group on QUARTZ_FIRED_TRIGGERS(TRIGGER_NAME, TRIGGER_GROUP);
-create index IX_quartz_fired_triggers_instance_name on QUARTZ_FIRED_TRIGGERS(INSTANCE_NAME);
-create index IX_quartz_fired_triggers_job_name on QUARTZ_FIRED_TRIGGERS(JOB_NAME);
-create index IX_quartz_fired_triggers_job_group on QUARTZ_FIRED_TRIGGERS(JOB_GROUP);
+create index IX_QUARTZ_TRIGGERS_STATE on QUARTZ_TRIGGERS(TRIGGER_STATE);
+create index IX_QUARTZ_TRIGGERS_NEXT_FIRE_TIME on QUARTZ_TRIGGERS(NEXT_FIRE_TIME);
+create index IX_QUARTZ_TRIGGERS_STATE_NEXT_FIRE_TIME on QUARTZ_TRIGGERS(TRIGGER_STATE, NEXT_FIRE_TIME);
+create index IX_QUARTZ_FIRED_TRIGGERS_TRIGGER_NAME on QUARTZ_FIRED_TRIGGERS(TRIGGER_NAME);
+create index IX_QUARTZ_FIRED_TRIGGERS_TRIGGER_GROUP on QUARTZ_FIRED_TRIGGERS(TRIGGER_GROUP);
+create index IX_QUARTZ_FIRED_TRIGGERS_TRIGGER_NAME_GROUP on QUARTZ_FIRED_TRIGGERS(TRIGGER_NAME, TRIGGER_GROUP);
+create index IX_QUARTZ_FIRED_TRIGGERS_INSTANCE_NAME on QUARTZ_FIRED_TRIGGERS(INSTANCE_NAME);
+create index IX_QUARTZ_FIRED_TRIGGERS_JOB_NAME on QUARTZ_FIRED_TRIGGERS(JOB_NAME);
+create index IX_QUARTZ_FIRED_TRIGGERS_JOB_GROUP on QUARTZ_FIRED_TRIGGERS(JOB_GROUP);

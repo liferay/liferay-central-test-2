@@ -422,7 +422,7 @@ public abstract class DBUtil {
 		String template = FileUtil.read(file);
 
 		if (fileName.equals("portal") || fileName.equals("portal-minimal") ||
-			fileName.equals("update-3.6.0-4.0.0")) {
+			fileName.equals("update-5.0.1-5.0.2")) {
 
 			BufferedReader br = new BufferedReader(new StringReader(template));
 
@@ -455,8 +455,8 @@ public abstract class DBUtil {
 					}
 
 					include = convertTimestamp(include);
-					include =
-						StringUtil.replace(include, TEMPLATE, getTemplate());
+					include = StringUtil.replace(
+						include, TEMPLATE, getTemplate());
 
 					sm.append(include);
 					sm.append("\n\n");
