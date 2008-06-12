@@ -43,6 +43,7 @@ import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 import com.liferay.portlet.calendar.model.impl.CalEventModelImpl;
 
+import com.liferay.util.ListUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -112,7 +113,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 	}
 
 	public CalEvent remove(CalEvent calEvent) throws SystemException {
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onBeforeRemove(calEvent);
 			}
@@ -120,7 +121,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 		calEvent = removeImpl(calEvent);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onAfterRemove(calEvent);
 			}
@@ -180,7 +181,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		throws SystemException {
 		boolean isNew = calEvent.isNew();
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onBeforeCreate(calEvent);
@@ -193,7 +194,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 
 		calEvent = updateImpl(calEvent, merge);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onAfterCreate(calEvent);
@@ -2049,6 +2050,22 @@ public class CalEventPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void registerListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.add(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
+	public void unregisterListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.remove(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
 	protected void initDao() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					PropsUtil.get(
@@ -2072,5 +2089,5 @@ public class CalEventPersistenceImpl extends BasePersistence
 	}
 
 	private static Log _log = LogFactory.getLog(CalEventPersistenceImpl.class);
-	private ModelListener[] _listeners;
+	private ModelListener[] _listeners = new ModelListener[0];
 }

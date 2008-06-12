@@ -41,6 +41,7 @@ import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryImpl;
 import com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryModelImpl;
 
+import com.liferay.util.ListUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -120,7 +121,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 	public SCProductEntry remove(SCProductEntry scProductEntry)
 		throws SystemException {
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onBeforeRemove(scProductEntry);
 			}
@@ -128,7 +129,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 		scProductEntry = removeImpl(scProductEntry);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onAfterRemove(scProductEntry);
 			}
@@ -200,7 +201,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		throws SystemException {
 		boolean isNew = scProductEntry.isNew();
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onBeforeCreate(scProductEntry);
@@ -213,7 +214,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 		scProductEntry = updateImpl(scProductEntry, merge);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onAfterCreate(scProductEntry);
@@ -2044,6 +2045,22 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void registerListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.add(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
+	public void unregisterListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.remove(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
 	protected void initDao() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					PropsUtil.get(
@@ -2170,5 +2187,5 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 	private static final String _SQL_GETSCLICENSESSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM SCLicenses_SCProductEntries WHERE productEntryId = ?";
 	private static final String _SQL_CONTAINSSCLICENSE = "SELECT COUNT(*) AS COUNT_VALUE FROM SCLicenses_SCProductEntries WHERE productEntryId = ? AND licenseId = ?";
 	private static Log _log = LogFactory.getLog(SCProductEntryPersistenceImpl.class);
-	private ModelListener[] _listeners;
+	private ModelListener[] _listeners = new ModelListener[0];
 }

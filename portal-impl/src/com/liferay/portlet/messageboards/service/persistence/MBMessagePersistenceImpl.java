@@ -43,6 +43,7 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.model.impl.MBMessageModelImpl;
 
+import com.liferay.util.ListUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -112,7 +113,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 	}
 
 	public MBMessage remove(MBMessage mbMessage) throws SystemException {
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onBeforeRemove(mbMessage);
 			}
@@ -120,7 +121,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 		mbMessage = removeImpl(mbMessage);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onAfterRemove(mbMessage);
 			}
@@ -181,7 +182,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		throws SystemException {
 		boolean isNew = mbMessage.isNew();
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onBeforeCreate(mbMessage);
@@ -194,7 +195,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 		mbMessage = updateImpl(mbMessage, merge);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onAfterCreate(mbMessage);
@@ -2466,6 +2467,22 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void registerListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.add(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
+	public void unregisterListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.remove(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
 	protected void initDao() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					PropsUtil.get(
@@ -2489,5 +2506,5 @@ public class MBMessagePersistenceImpl extends BasePersistence
 	}
 
 	private static Log _log = LogFactory.getLog(MBMessagePersistenceImpl.class);
-	private ModelListener[] _listeners;
+	private ModelListener[] _listeners = new ModelListener[0];
 }

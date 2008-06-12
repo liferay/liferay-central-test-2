@@ -607,4 +607,10 @@ public interface UserPersistence {
 	public void setUserGroups(long pk,
 		java.util.List<com.liferay.portal.model.UserGroup> userGroups)
 		throws com.liferay.portal.SystemException;
+
+	public void registerListener(
+		com.liferay.portal.model.ModelListener listener);
+
+	public void unregisterListener(
+		com.liferay.portal.model.ModelListener listener);
 }

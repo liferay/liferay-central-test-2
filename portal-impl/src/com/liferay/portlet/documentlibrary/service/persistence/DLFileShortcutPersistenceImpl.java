@@ -43,6 +43,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutModelImpl;
 
+import com.liferay.util.ListUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -114,7 +115,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 	public DLFileShortcut remove(DLFileShortcut dlFileShortcut)
 		throws SystemException {
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onBeforeRemove(dlFileShortcut);
 			}
@@ -122,7 +123,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 		dlFileShortcut = removeImpl(dlFileShortcut);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onAfterRemove(dlFileShortcut);
 			}
@@ -184,7 +185,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		throws SystemException {
 		boolean isNew = dlFileShortcut.isNew();
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onBeforeCreate(dlFileShortcut);
@@ -197,7 +198,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 		dlFileShortcut = updateImpl(dlFileShortcut, merge);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onAfterCreate(dlFileShortcut);
@@ -1449,6 +1450,22 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void registerListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.add(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
+	public void unregisterListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.remove(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
 	protected void initDao() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					PropsUtil.get(
@@ -1472,5 +1489,5 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 	}
 
 	private static Log _log = LogFactory.getLog(DLFileShortcutPersistenceImpl.class);
-	private ModelListener[] _listeners;
+	private ModelListener[] _listeners = new ModelListener[0];
 }

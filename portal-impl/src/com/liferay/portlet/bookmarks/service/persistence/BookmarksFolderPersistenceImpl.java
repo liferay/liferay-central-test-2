@@ -43,6 +43,7 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderModelImpl;
 
+import com.liferay.util.ListUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -114,7 +115,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 
 	public BookmarksFolder remove(BookmarksFolder bookmarksFolder)
 		throws SystemException {
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onBeforeRemove(bookmarksFolder);
 			}
@@ -122,7 +123,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 
 		bookmarksFolder = removeImpl(bookmarksFolder);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onAfterRemove(bookmarksFolder);
 			}
@@ -184,7 +185,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 		throws SystemException {
 		boolean isNew = bookmarksFolder.isNew();
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onBeforeCreate(bookmarksFolder);
@@ -197,7 +198,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 
 		bookmarksFolder = updateImpl(bookmarksFolder, merge);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onAfterCreate(bookmarksFolder);
@@ -2002,6 +2003,22 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void registerListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.add(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
+	public void unregisterListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.remove(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
 	protected void initDao() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					PropsUtil.get(
@@ -2025,5 +2042,5 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 	}
 
 	private static Log _log = LogFactory.getLog(BookmarksFolderPersistenceImpl.class);
-	private ModelListener[] _listeners;
+	private ModelListener[] _listeners = new ModelListener[0];
 }

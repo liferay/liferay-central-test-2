@@ -41,6 +41,7 @@ import com.liferay.portlet.tasks.model.TasksReview;
 import com.liferay.portlet.tasks.model.impl.TasksReviewImpl;
 import com.liferay.portlet.tasks.model.impl.TasksReviewModelImpl;
 
+import com.liferay.util.ListUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -107,7 +108,7 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 
 	public TasksReview remove(TasksReview tasksReview)
 		throws SystemException {
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onBeforeRemove(tasksReview);
 			}
@@ -115,7 +116,7 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 
 		tasksReview = removeImpl(tasksReview);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onAfterRemove(tasksReview);
 			}
@@ -177,7 +178,7 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 		throws SystemException {
 		boolean isNew = tasksReview.isNew();
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onBeforeCreate(tasksReview);
@@ -190,7 +191,7 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 
 		tasksReview = updateImpl(tasksReview, merge);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onAfterCreate(tasksReview);
@@ -2442,6 +2443,22 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void registerListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.add(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
+	public void unregisterListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.remove(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
 	protected void initDao() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					PropsUtil.get(
@@ -2465,5 +2482,5 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 	}
 
 	private static Log _log = LogFactory.getLog(TasksReviewPersistenceImpl.class);
-	private ModelListener[] _listeners;
+	private ModelListener[] _listeners = new ModelListener[0];
 }

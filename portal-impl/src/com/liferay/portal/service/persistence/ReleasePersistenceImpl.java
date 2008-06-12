@@ -38,6 +38,7 @@ import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.ListUtil;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -102,7 +103,7 @@ public class ReleasePersistenceImpl extends BasePersistence
 	}
 
 	public Release remove(Release release) throws SystemException {
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onBeforeRemove(release);
 			}
@@ -110,7 +111,7 @@ public class ReleasePersistenceImpl extends BasePersistence
 
 		release = removeImpl(release);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onAfterRemove(release);
 			}
@@ -170,7 +171,7 @@ public class ReleasePersistenceImpl extends BasePersistence
 		throws SystemException {
 		boolean isNew = release.isNew();
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onBeforeCreate(release);
@@ -183,7 +184,7 @@ public class ReleasePersistenceImpl extends BasePersistence
 
 		release = updateImpl(release, merge);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onAfterCreate(release);
@@ -432,6 +433,22 @@ public class ReleasePersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void registerListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.add(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
+	public void unregisterListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.remove(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
 	protected void initDao() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					PropsUtil.get(
@@ -455,5 +472,5 @@ public class ReleasePersistenceImpl extends BasePersistence
 	}
 
 	private static Log _log = LogFactory.getLog(ReleasePersistenceImpl.class);
-	private ModelListener[] _listeners;
+	private ModelListener[] _listeners = new ModelListener[0];
 }

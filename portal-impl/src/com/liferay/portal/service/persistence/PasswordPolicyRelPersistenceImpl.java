@@ -39,6 +39,7 @@ import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.ListUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -107,7 +108,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 
 	public PasswordPolicyRel remove(PasswordPolicyRel passwordPolicyRel)
 		throws SystemException {
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onBeforeRemove(passwordPolicyRel);
 			}
@@ -115,7 +116,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 
 		passwordPolicyRel = removeImpl(passwordPolicyRel);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onAfterRemove(passwordPolicyRel);
 			}
@@ -177,7 +178,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 		boolean merge) throws SystemException {
 		boolean isNew = passwordPolicyRel.isNew();
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onBeforeCreate(passwordPolicyRel);
@@ -190,7 +191,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 
 		passwordPolicyRel = updateImpl(passwordPolicyRel, merge);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onAfterCreate(passwordPolicyRel);
@@ -840,6 +841,22 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void registerListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.add(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
+	public void unregisterListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.remove(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
 	protected void initDao() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					PropsUtil.get(
@@ -863,5 +880,5 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 	}
 
 	private static Log _log = LogFactory.getLog(PasswordPolicyRelPersistenceImpl.class);
-	private ModelListener[] _listeners;
+	private ModelListener[] _listeners = new ModelListener[0];
 }

@@ -43,6 +43,7 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.model.impl.JournalArticleModelImpl;
 
+import com.liferay.util.ListUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -113,7 +114,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 	public JournalArticle remove(JournalArticle journalArticle)
 		throws SystemException {
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onBeforeRemove(journalArticle);
 			}
@@ -121,7 +122,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 		journalArticle = removeImpl(journalArticle);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onAfterRemove(journalArticle);
 			}
@@ -183,7 +184,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		throws SystemException {
 		boolean isNew = journalArticle.isNew();
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onBeforeCreate(journalArticle);
@@ -196,7 +197,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 		journalArticle = updateImpl(journalArticle, merge);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onAfterCreate(journalArticle);
@@ -3764,6 +3765,22 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void registerListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.add(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
+	public void unregisterListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.remove(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
 	protected void initDao() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					PropsUtil.get(
@@ -3787,5 +3804,5 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 	}
 
 	private static Log _log = LogFactory.getLog(JournalArticlePersistenceImpl.class);
-	private ModelListener[] _listeners;
+	private ModelListener[] _listeners = new ModelListener[0];
 }

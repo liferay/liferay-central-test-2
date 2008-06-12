@@ -39,6 +39,7 @@ import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.ListUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -105,7 +106,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 
 	public ResourceCode remove(ResourceCode resourceCode)
 		throws SystemException {
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onBeforeRemove(resourceCode);
 			}
@@ -113,7 +114,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 
 		resourceCode = removeImpl(resourceCode);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onAfterRemove(resourceCode);
 			}
@@ -175,7 +176,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		throws SystemException {
 		boolean isNew = resourceCode.isNew();
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onBeforeCreate(resourceCode);
@@ -188,7 +189,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 
 		resourceCode = updateImpl(resourceCode, merge);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onAfterCreate(resourceCode);
@@ -1286,6 +1287,22 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void registerListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.add(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
+	public void unregisterListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.remove(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
 	protected void initDao() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					PropsUtil.get(
@@ -1309,5 +1326,5 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 	}
 
 	private static Log _log = LogFactory.getLog(ResourceCodePersistenceImpl.class);
-	private ModelListener[] _listeners;
+	private ModelListener[] _listeners = new ModelListener[0];
 }

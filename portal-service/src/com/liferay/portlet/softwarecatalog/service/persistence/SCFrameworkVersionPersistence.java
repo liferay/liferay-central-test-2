@@ -260,4 +260,10 @@ public interface SCFrameworkVersionPersistence {
 	public void setSCProductVersions(long pk,
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> scProductVersions)
 		throws com.liferay.portal.SystemException;
+
+	public void registerListener(
+		com.liferay.portal.model.ModelListener listener);
+
+	public void unregisterListener(
+		com.liferay.portal.model.ModelListener listener);
 }

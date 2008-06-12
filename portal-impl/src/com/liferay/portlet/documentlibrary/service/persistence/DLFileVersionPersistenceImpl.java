@@ -41,6 +41,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileVersionModelImpl;
 
+import com.liferay.util.ListUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -108,7 +109,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 
 	public DLFileVersion remove(DLFileVersion dlFileVersion)
 		throws SystemException {
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onBeforeRemove(dlFileVersion);
 			}
@@ -116,7 +117,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 
 		dlFileVersion = removeImpl(dlFileVersion);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onAfterRemove(dlFileVersion);
 			}
@@ -178,7 +179,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 		throws SystemException {
 		boolean isNew = dlFileVersion.isNew();
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onBeforeCreate(dlFileVersion);
@@ -191,7 +192,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 
 		dlFileVersion = updateImpl(dlFileVersion, merge);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onAfterCreate(dlFileVersion);
@@ -1070,6 +1071,22 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void registerListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.add(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
+	public void unregisterListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.remove(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
 	protected void initDao() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					PropsUtil.get(
@@ -1093,5 +1110,5 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 	}
 
 	private static Log _log = LogFactory.getLog(DLFileVersionPersistenceImpl.class);
-	private ModelListener[] _listeners;
+	private ModelListener[] _listeners = new ModelListener[0];
 }

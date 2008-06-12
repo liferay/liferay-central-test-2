@@ -322,4 +322,10 @@ public interface OrganizationPersistence {
 	public void setUsers(long pk,
 		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.SystemException;
+
+	public void registerListener(
+		com.liferay.portal.model.ModelListener listener);
+
+	public void unregisterListener(
+		com.liferay.portal.model.ModelListener listener);
 }

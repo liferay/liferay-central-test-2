@@ -41,6 +41,7 @@ import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
 import com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl;
 import com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionModelImpl;
 
+import com.liferay.util.ListUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -121,7 +122,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 	public SCFrameworkVersion remove(SCFrameworkVersion scFrameworkVersion)
 		throws SystemException {
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onBeforeRemove(scFrameworkVersion);
 			}
@@ -129,7 +130,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 		scFrameworkVersion = removeImpl(scFrameworkVersion);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onAfterRemove(scFrameworkVersion);
 			}
@@ -201,7 +202,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		boolean merge) throws SystemException {
 		boolean isNew = scFrameworkVersion.isNew();
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onBeforeCreate(scFrameworkVersion);
@@ -214,7 +215,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 		scFrameworkVersion = updateImpl(scFrameworkVersion, merge);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onAfterCreate(scFrameworkVersion);
@@ -1841,6 +1842,22 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void registerListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.add(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
+	public void unregisterListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.remove(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
 	protected void initDao() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					PropsUtil.get(
@@ -1973,5 +1990,5 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 	private static final String _SQL_GETSCPRODUCTVERSIONSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM SCFrameworkVersi_SCProductVers WHERE frameworkVersionId = ?";
 	private static final String _SQL_CONTAINSSCPRODUCTVERSION = "SELECT COUNT(*) AS COUNT_VALUE FROM SCFrameworkVersi_SCProductVers WHERE frameworkVersionId = ? AND productVersionId = ?";
 	private static Log _log = LogFactory.getLog(SCFrameworkVersionPersistenceImpl.class);
-	private ModelListener[] _listeners;
+	private ModelListener[] _listeners = new ModelListener[0];
 }

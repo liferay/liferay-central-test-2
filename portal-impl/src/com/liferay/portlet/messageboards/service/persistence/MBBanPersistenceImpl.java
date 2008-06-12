@@ -41,6 +41,7 @@ import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.model.impl.MBBanImpl;
 import com.liferay.portlet.messageboards.model.impl.MBBanModelImpl;
 
+import com.liferay.util.ListUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -103,7 +104,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 	}
 
 	public MBBan remove(MBBan mbBan) throws SystemException {
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onBeforeRemove(mbBan);
 			}
@@ -111,7 +112,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 		mbBan = removeImpl(mbBan);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onAfterRemove(mbBan);
 			}
@@ -170,7 +171,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 	public MBBan update(MBBan mbBan, boolean merge) throws SystemException {
 		boolean isNew = mbBan.isNew();
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onBeforeCreate(mbBan);
@@ -183,7 +184,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 
 		mbBan = updateImpl(mbBan, merge);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onAfterCreate(mbBan);
@@ -1504,6 +1505,22 @@ public class MBBanPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void registerListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.add(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
+	public void unregisterListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.remove(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
 	protected void initDao() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					PropsUtil.get(
@@ -1527,5 +1544,5 @@ public class MBBanPersistenceImpl extends BasePersistence
 	}
 
 	private static Log _log = LogFactory.getLog(MBBanPersistenceImpl.class);
-	private ModelListener[] _listeners;
+	private ModelListener[] _listeners = new ModelListener[0];
 }

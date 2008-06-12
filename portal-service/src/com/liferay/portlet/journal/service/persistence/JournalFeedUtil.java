@@ -278,6 +278,16 @@ public class JournalFeedUtil {
 		return getPersistence().countAll();
 	}
 
+	public static void registerListener(
+		com.liferay.portal.model.ModelListener listener) {
+		getPersistence().registerListener(listener);
+	}
+
+	public static void unregisterListener(
+		com.liferay.portal.model.ModelListener listener) {
+		getPersistence().unregisterListener(listener);
+	}
+
 	public static JournalFeedPersistence getPersistence() {
 		return _getUtil()._persistence;
 	}

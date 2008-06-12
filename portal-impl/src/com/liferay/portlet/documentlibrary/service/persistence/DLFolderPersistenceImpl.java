@@ -43,6 +43,7 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderModelImpl;
 
+import com.liferay.util.ListUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -112,7 +113,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 	}
 
 	public DLFolder remove(DLFolder dlFolder) throws SystemException {
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onBeforeRemove(dlFolder);
 			}
@@ -120,7 +121,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 
 		dlFolder = removeImpl(dlFolder);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onAfterRemove(dlFolder);
 			}
@@ -180,7 +181,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		throws SystemException {
 		boolean isNew = dlFolder.isNew();
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onBeforeCreate(dlFolder);
@@ -193,7 +194,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 
 		dlFolder = updateImpl(dlFolder, merge);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onAfterCreate(dlFolder);
@@ -2595,6 +2596,22 @@ public class DLFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void registerListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.add(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
+	public void unregisterListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.remove(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
 	protected void initDao() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					PropsUtil.get(
@@ -2618,5 +2635,5 @@ public class DLFolderPersistenceImpl extends BasePersistence
 	}
 
 	private static Log _log = LogFactory.getLog(DLFolderPersistenceImpl.class);
-	private ModelListener[] _listeners;
+	private ModelListener[] _listeners = new ModelListener[0];
 }

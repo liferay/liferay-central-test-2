@@ -211,4 +211,10 @@ public interface ShoppingItemPersistence {
 
 	public boolean containsShoppingItemPrices(long pk)
 		throws com.liferay.portal.SystemException;
+
+	public void registerListener(
+		com.liferay.portal.model.ModelListener listener);
+
+	public void unregisterListener(
+		com.liferay.portal.model.ModelListener listener);
 }

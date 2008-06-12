@@ -43,6 +43,7 @@ import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.impl.WikiNodeImpl;
 import com.liferay.portlet.wiki.model.impl.WikiNodeModelImpl;
 
+import com.liferay.util.ListUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -112,7 +113,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 	}
 
 	public WikiNode remove(WikiNode wikiNode) throws SystemException {
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onBeforeRemove(wikiNode);
 			}
@@ -120,7 +121,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 
 		wikiNode = removeImpl(wikiNode);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onAfterRemove(wikiNode);
 			}
@@ -180,7 +181,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 		throws SystemException {
 		boolean isNew = wikiNode.isNew();
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onBeforeCreate(wikiNode);
@@ -193,7 +194,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 
 		wikiNode = updateImpl(wikiNode, merge);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onAfterCreate(wikiNode);
@@ -1813,6 +1814,22 @@ public class WikiNodePersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void registerListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.add(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
+	public void unregisterListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.remove(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
 	protected void initDao() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					PropsUtil.get(
@@ -1836,5 +1853,5 @@ public class WikiNodePersistenceImpl extends BasePersistence
 	}
 
 	private static Log _log = LogFactory.getLog(WikiNodePersistenceImpl.class);
-	private ModelListener[] _listeners;
+	private ModelListener[] _listeners = new ModelListener[0];
 }

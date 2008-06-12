@@ -41,6 +41,7 @@ import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.impl.TagsAssetImpl;
 import com.liferay.portlet.tags.model.impl.TagsAssetModelImpl;
 
+import com.liferay.util.ListUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -118,7 +119,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 	}
 
 	public TagsAsset remove(TagsAsset tagsAsset) throws SystemException {
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onBeforeRemove(tagsAsset);
 			}
@@ -126,7 +127,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 
 		tagsAsset = removeImpl(tagsAsset);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onAfterRemove(tagsAsset);
 			}
@@ -197,7 +198,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 		throws SystemException {
 		boolean isNew = tagsAsset.isNew();
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onBeforeCreate(tagsAsset);
@@ -210,7 +211,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 
 		tagsAsset = updateImpl(tagsAsset, merge);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onAfterCreate(tagsAsset);
@@ -1307,6 +1308,22 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void registerListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.add(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
+	public void unregisterListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.remove(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
 	protected void initDao() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					PropsUtil.get(
@@ -1429,5 +1446,5 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 	private static final String _SQL_GETTAGSENTRIESSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM TagsAssets_TagsEntries WHERE assetId = ?";
 	private static final String _SQL_CONTAINSTAGSENTRY = "SELECT COUNT(*) AS COUNT_VALUE FROM TagsAssets_TagsEntries WHERE assetId = ? AND entryId = ?";
 	private static Log _log = LogFactory.getLog(TagsAssetPersistenceImpl.class);
-	private ModelListener[] _listeners;
+	private ModelListener[] _listeners = new ModelListener[0];
 }

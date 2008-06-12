@@ -278,4 +278,10 @@ public interface SCProductEntryPersistence {
 	public void setSCLicenses(long pk,
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> scLicenses)
 		throws com.liferay.portal.SystemException;
+
+	public void registerListener(
+		com.liferay.portal.model.ModelListener listener);
+
+	public void unregisterListener(
+		com.liferay.portal.model.ModelListener listener);
 }

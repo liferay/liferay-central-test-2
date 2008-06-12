@@ -41,6 +41,7 @@ import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingCategoryModelImpl;
 
+import com.liferay.util.ListUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -109,7 +110,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 
 	public ShoppingCategory remove(ShoppingCategory shoppingCategory)
 		throws SystemException {
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onBeforeRemove(shoppingCategory);
 			}
@@ -117,7 +118,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 
 		shoppingCategory = removeImpl(shoppingCategory);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onAfterRemove(shoppingCategory);
 			}
@@ -179,7 +180,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		boolean merge) throws SystemException {
 		boolean isNew = shoppingCategory.isNew();
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onBeforeCreate(shoppingCategory);
@@ -192,7 +193,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 
 		shoppingCategory = updateImpl(shoppingCategory, merge);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onAfterCreate(shoppingCategory);
@@ -1132,6 +1133,22 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void registerListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.add(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
+	public void unregisterListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.remove(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
 	protected void initDao() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					PropsUtil.get(
@@ -1155,5 +1172,5 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 	}
 
 	private static Log _log = LogFactory.getLog(ShoppingCategoryPersistenceImpl.class);
-	private ModelListener[] _listeners;
+	private ModelListener[] _listeners = new ModelListener[0];
 }

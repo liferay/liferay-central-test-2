@@ -41,6 +41,7 @@ import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl;
 
+import com.liferay.util.ListUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -109,7 +110,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistence
 
 	public AnnouncementsDelivery remove(
 		AnnouncementsDelivery announcementsDelivery) throws SystemException {
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onBeforeRemove(announcementsDelivery);
 			}
@@ -117,7 +118,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistence
 
 		announcementsDelivery = removeImpl(announcementsDelivery);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onAfterRemove(announcementsDelivery);
 			}
@@ -180,7 +181,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistence
 		throws SystemException {
 		boolean isNew = announcementsDelivery.isNew();
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onBeforeCreate(announcementsDelivery);
@@ -193,7 +194,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistence
 
 		announcementsDelivery = updateImpl(announcementsDelivery, merge);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onAfterCreate(announcementsDelivery);
@@ -944,6 +945,22 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void registerListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.add(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
+	public void unregisterListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.remove(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
 	protected void initDao() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					PropsUtil.get(
@@ -967,5 +984,5 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistence
 	}
 
 	private static Log _log = LogFactory.getLog(AnnouncementsDeliveryPersistenceImpl.class);
-	private ModelListener[] _listeners;
+	private ModelListener[] _listeners = new ModelListener[0];
 }

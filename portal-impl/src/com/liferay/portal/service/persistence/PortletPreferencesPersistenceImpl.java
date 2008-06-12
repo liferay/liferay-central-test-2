@@ -39,6 +39,7 @@ import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.ListUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -107,7 +108,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 	public PortletPreferences remove(PortletPreferences portletPreferences)
 		throws SystemException {
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onBeforeRemove(portletPreferences);
 			}
@@ -115,7 +116,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 		portletPreferences = removeImpl(portletPreferences);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onAfterRemove(portletPreferences);
 			}
@@ -177,7 +178,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		boolean merge) throws SystemException {
 		boolean isNew = portletPreferences.isNew();
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onBeforeCreate(portletPreferences);
@@ -190,7 +191,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 		portletPreferences = updateImpl(portletPreferences, merge);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onAfterCreate(portletPreferences);
@@ -1728,6 +1729,22 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void registerListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.add(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
+	public void unregisterListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.remove(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
 	protected void initDao() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					PropsUtil.get(
@@ -1751,5 +1768,5 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 	}
 
 	private static Log _log = LogFactory.getLog(PortletPreferencesPersistenceImpl.class);
-	private ModelListener[] _listeners;
+	private ModelListener[] _listeners = new ModelListener[0];
 }

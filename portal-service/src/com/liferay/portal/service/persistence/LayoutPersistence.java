@@ -335,4 +335,10 @@ public interface LayoutPersistence {
 		java.lang.String type) throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;
+
+	public void registerListener(
+		com.liferay.portal.model.ModelListener listener);
+
+	public void unregisterListener(
+		com.liferay.portal.model.ModelListener listener);
 }

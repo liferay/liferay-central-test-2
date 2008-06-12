@@ -41,6 +41,7 @@ import com.liferay.portlet.expando.model.ExpandoRow;
 import com.liferay.portlet.expando.model.impl.ExpandoRowImpl;
 import com.liferay.portlet.expando.model.impl.ExpandoRowModelImpl;
 
+import com.liferay.util.ListUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -106,7 +107,7 @@ public class ExpandoRowPersistenceImpl extends BasePersistence
 	}
 
 	public ExpandoRow remove(ExpandoRow expandoRow) throws SystemException {
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onBeforeRemove(expandoRow);
 			}
@@ -114,7 +115,7 @@ public class ExpandoRowPersistenceImpl extends BasePersistence
 
 		expandoRow = removeImpl(expandoRow);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onAfterRemove(expandoRow);
 			}
@@ -175,7 +176,7 @@ public class ExpandoRowPersistenceImpl extends BasePersistence
 		throws SystemException {
 		boolean isNew = expandoRow.isNew();
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onBeforeCreate(expandoRow);
@@ -188,7 +189,7 @@ public class ExpandoRowPersistenceImpl extends BasePersistence
 
 		expandoRow = updateImpl(expandoRow, merge);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onAfterCreate(expandoRow);
@@ -918,6 +919,22 @@ public class ExpandoRowPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void registerListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.add(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
+	public void unregisterListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.remove(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
 	protected void initDao() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					PropsUtil.get(
@@ -941,5 +958,5 @@ public class ExpandoRowPersistenceImpl extends BasePersistence
 	}
 
 	private static Log _log = LogFactory.getLog(ExpandoRowPersistenceImpl.class);
-	private ModelListener[] _listeners;
+	private ModelListener[] _listeners = new ModelListener[0];
 }
