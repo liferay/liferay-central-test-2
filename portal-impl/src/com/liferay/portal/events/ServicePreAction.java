@@ -692,6 +692,13 @@ public class ServicePreAction extends Action {
 				return true;
 			}
 		}
+		else if (group.isUserGroup()) {
+			if (GroupPermissionUtil.contains(
+				permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS)) {
+
+				return true;
+			}
+		}
 
 		return false;
 	}
@@ -1034,6 +1041,12 @@ public class ServicePreAction extends Action {
 
 				if (!isViewableCommunity) {
 					layout = null;
+
+					_log.warn(
+						"User " + user.getUserId() + " is not allowed to " +
+							"access the " + (layout.isPrivateLayout()?"private":
+								"public") + " pages of group " +
+									layout.getGroupId());
 				}
 				else if (isViewableCommunity &&
 						!LayoutPermissionUtil.contains(
