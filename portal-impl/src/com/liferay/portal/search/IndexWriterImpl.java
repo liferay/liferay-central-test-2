@@ -38,36 +38,36 @@ import com.liferay.util.JSONUtil;
 public class IndexWriterImpl implements IndexWriter {
 
 	public void addDocument(long companyId, Document doc) {
-		SearchEngineRequest req = new SearchEngineRequest(
+		SearchEngineRequest searchEngineRequest = new SearchEngineRequest(
 			SearchEngineRequest.COMMAND_ADD, companyId, doc);
 
 		MessageBusUtil.sendMessage(
-			DestinationNames.SEARCH, JSONUtil.serialize(req));
+			DestinationNames.SEARCH, JSONUtil.serialize(searchEngineRequest));
 	}
 
 	public void deleteDocument(long companyId, String uid) {
-		SearchEngineRequest req = new SearchEngineRequest(
+		SearchEngineRequest searchEngineRequest = new SearchEngineRequest(
 			SearchEngineRequest.COMMAND_DELETE, companyId, uid);
 
 		MessageBusUtil.sendMessage(
-			DestinationNames.SEARCH, JSONUtil.serialize(req));
+			DestinationNames.SEARCH, JSONUtil.serialize(searchEngineRequest));
 	}
 
 	public void deletePortletDocuments(long companyId, String portletId) {
-		SearchEngineRequest req = new SearchEngineRequest(
+		SearchEngineRequest searchEngineRequest = new SearchEngineRequest(
 			SearchEngineRequest.COMMAND_DELETE_PORTLET_DOCS, companyId,
 			portletId);
 
 		MessageBusUtil.sendMessage(
-			DestinationNames.SEARCH, JSONUtil.serialize(req));
+			DestinationNames.SEARCH, JSONUtil.serialize(searchEngineRequest));
 	}
 
 	public void updateDocument(long companyId, String uid, Document doc) {
-		SearchEngineRequest req = new SearchEngineRequest(
+		SearchEngineRequest searchEngineRequest = new SearchEngineRequest(
 			SearchEngineRequest.COMMAND_UPDATE, companyId, uid, doc);
 
 		MessageBusUtil.sendMessage(
-			DestinationNames.SEARCH, JSONUtil.serialize(req));
+			DestinationNames.SEARCH, JSONUtil.serialize(searchEngineRequest));
 	}
 
 }

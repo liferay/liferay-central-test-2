@@ -83,8 +83,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		LuceneUtil.addRequiredTerm(booleanQuery, "threadId", threadId);
 
 		Hits hits = SearchEngineUtil.search(
-			companyId, booleanQuery.toString(),
-			SearchEngineUtil.ALL_POS, SearchEngineUtil.ALL_POS);
+			companyId, booleanQuery.toString(), SearchEngineUtil.ALL_POS,
+			SearchEngineUtil.ALL_POS);
 
 		for (int i = 0; i < hits.getLength(); i++) {
 			Document doc = hits.doc(i);

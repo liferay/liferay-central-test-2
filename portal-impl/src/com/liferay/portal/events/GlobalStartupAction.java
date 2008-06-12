@@ -236,6 +236,7 @@ public class GlobalStartupAction extends SimpleAction {
 		// Search Engines
 
 		LuceneSearchEngineUtil.init();
+
 		SearchEngineUtil.init(new IndexSearcherImpl(), new IndexWriterImpl());
 	}
 

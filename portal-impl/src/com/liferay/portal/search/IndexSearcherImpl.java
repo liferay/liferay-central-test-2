@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.util.JSONUtil;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -52,20 +51,21 @@ public class IndexSearcherImpl implements IndexSearcher {
 			long companyId, String query, Sort sort, int start, int end)
 		throws SearchException {
 
-		SearchEngineRequest req = new SearchEngineRequest(
-			SearchEngineRequest.COMMAND_SEARCH, companyId, query, sort, start,
-			end);
-
-		String json = MessageBusUtil.sendSynchronizedMessage(
-			DestinationNames.SEARCH, JSONUtil.serialize(req));
-
 		try {
-			JSONObject jsonObj = new JSONObject(json);
+			SearchEngineRequest searchEngineRequest = new SearchEngineRequest(
+				SearchEngineRequest.COMMAND_SEARCH, companyId, query, sort,
+				start, end);
+
+			String message = MessageBusUtil.sendSynchronizedMessage(
+				DestinationNames.SEARCH,
+				JSONUtil.serialize(searchEngineRequest));
+
+			JSONObject jsonObj = new JSONObject(message);
 
 			return (Hits)JSONUtil.deserialize(jsonObj.getString("hits"));
 		}
-		catch (JSONException je) {
-			throw new SearchException(je);
+		catch (Exception e) {
+			throw new SearchException(e);
 		}
 	}
 

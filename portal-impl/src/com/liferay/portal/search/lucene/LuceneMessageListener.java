@@ -36,8 +36,7 @@ import org.apache.commons.logging.LogFactory;
 import org.json.JSONObject;
 
 /**
- * <a href="LuceneMessageListener.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="LuceneMessageListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  *
@@ -83,14 +82,14 @@ public class LuceneMessageListener implements MessageListener {
 			LuceneSearchEngineUtil.deletePortletDocuments(companyId, id);
 		}
 		else if (command.equals(SearchEngineRequest.COMMAND_INDEX_ONLY) &&
-				 	Validator.isNotNull(responseDestination) &&
-				 		Validator.isNotNull(responseId)) {
+				 Validator.isNotNull(responseDestination) &&
+				 Validator.isNotNull(responseId)) {
 
 			doCommandIndexOnly(responseDestination, responseId);
 		}
 		else if (command.equals(SearchEngineRequest.COMMAND_SEARCH) &&
-					Validator.isNotNull(responseDestination) &&
-						Validator.isNotNull(responseId)) {
+				 Validator.isNotNull(responseDestination) &&
+				 Validator.isNotNull(responseId)) {
 
 			doCommandSearch(
 				responseDestination, responseId, searchEngineRequest);
@@ -106,13 +105,12 @@ public class LuceneMessageListener implements MessageListener {
 
 		boolean indexOnly = LuceneSearchEngineUtil.isIndexReadOnly();
 
-		JSONObject jsonObject = new JSONObject();
+		JSONObject jsonObj = new JSONObject();
 
-		JSONUtil.put(jsonObject, "lfrResponseId", responseId);
-		JSONUtil.put(
-			jsonObject, "indexOnly", String.valueOf(indexOnly));
+		JSONUtil.put(jsonObj, "lfrResponseId", responseId);
+		JSONUtil.put(jsonObj, "indexOnly", indexOnly);
 
-		MessageBusUtil.sendMessage(responseDestination, jsonObject.toString());
+		MessageBusUtil.sendMessage(responseDestination, jsonObj.toString());
 	}
 
 	protected void doCommandSearch(
@@ -125,15 +123,12 @@ public class LuceneMessageListener implements MessageListener {
 			searchEngineRequest.getSort(), searchEngineRequest.getStart(),
 			searchEngineRequest.getEnd());
 
-		JSONObject jsonObject = new JSONObject();
+		JSONObject jsonObj = new JSONObject();
 
-		JSONUtil.put(jsonObject, "lfrResponseId", responseId);
-		JSONUtil.put(
-			jsonObject, "hits",
-			new JSONObject(JSONUtil.serialize(hits)));
+		JSONUtil.put(jsonObj, "lfrResponseId", responseId);
+		JSONUtil.put(jsonObj, "hits", JSONUtil.serialize(hits));
 
-		MessageBusUtil.sendMessage(
-			responseDestination, jsonObject.toString());
+		MessageBusUtil.sendMessage(responseDestination, jsonObj.toString());
 	}
 
 	private static Log _log = LogFactory.getLog(LuceneMessageListener.class);

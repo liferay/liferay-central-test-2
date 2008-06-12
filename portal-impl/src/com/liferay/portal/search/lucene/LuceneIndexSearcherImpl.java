@@ -86,7 +86,7 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 			org.apache.lucene.search.Hits luceneHits =
 				searcher.search(parser.parse(query), luceneSort);
 
-			hits = _subset(luceneHits, start, end);
+			hits = subset(luceneHits, start, end);
 		}
 		catch (RuntimeException re) {
 
@@ -125,7 +125,35 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 		return hits;
 	}
 
-	private Hits _subset(
+	protected DocumentImpl getDocument(
+		org.apache.lucene.document.Document oldDoc) {
+
+		DocumentImpl newDoc = new DocumentImpl();
+
+		List<org.apache.lucene.document.Field> oldFields = oldDoc.getFields();
+
+		for (org.apache.lucene.document.Field oldField : oldFields) {
+			String[] values = oldDoc.getValues(oldField.name());
+
+			if ((values != null) && (values.length > 1)) {
+				Field newField = new Field(
+					oldField.name(), values, oldField.isTokenized());
+
+				newDoc.add(newField);
+			}
+			else {
+				Field newField = new Field(
+					oldField.name(), oldField.stringValue(),
+					oldField.isTokenized());
+
+				newDoc.add(newField);
+			}
+		}
+
+		return newDoc;
+	}
+
+	protected Hits subset(
 			org.apache.lucene.search.Hits luceneHits, int start, int end)
 		throws IOException {
 
@@ -155,7 +183,7 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 			int j = 0;
 
 			for (int i = start; i < end; i++, j++) {
-				subsetDocs[j] = _getDocument(luceneHits.doc(i));
+				subsetDocs[j] = getDocument(luceneHits.doc(i));
 				subsetScores[j] = luceneHits.score(i);
 			}
 
@@ -171,34 +199,6 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 		}
 
 		return subset;
-	}
-
-	private DocumentImpl _getDocument(
-		org.apache.lucene.document.Document oldDoc) {
-
-		DocumentImpl newDoc = new DocumentImpl();
-
-		List<org.apache.lucene.document.Field> oldFields = oldDoc.getFields();
-
-		for (org.apache.lucene.document.Field oldField : oldFields) {
-			String[] values = oldDoc.getValues(oldField.name());
-
-			if ((values != null) && (values.length > 1)) {
-				Field newField = new Field(
-					oldField.name(), values, oldField.isTokenized());
-
-				newDoc.add(newField);
-			}
-			else {
-				Field newField = new Field(
-					oldField.name(), oldField.stringValue(),
-					oldField.isTokenized());
-
-				newDoc.add(newField);
-			}
-		}
-
-		return newDoc;
 	}
 
 	private static Log _log = LogFactory.getLog(LuceneIndexSearcherImpl.class);

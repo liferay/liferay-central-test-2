@@ -55,8 +55,7 @@ public class SearchEngineUtil {
 	}
 
 	public static void init(
-			IndexSearcher defaultIndexSearcher,
-			IndexWriter defaultIndexWriter) {
+		IndexSearcher defaultIndexSearcher, IndexWriter defaultIndexWriter) {
 
 		_instance._init(defaultIndexSearcher, defaultIndexWriter);
 	}
@@ -106,8 +105,8 @@ public class SearchEngineUtil {
 	}
 
 	private void _init(
-			IndexSearcher messageBusIndexSearcher,
-			IndexWriter messageBusIndexWriter) {
+		IndexSearcher messageBusIndexSearcher,
+		IndexWriter messageBusIndexWriter) {
 
 		_messageBusIndexSearcher = messageBusIndexSearcher;
 		_messageBusIndexWriter = messageBusIndexWriter;
@@ -122,10 +121,10 @@ public class SearchEngineUtil {
 		sm.append(SearchEngineRequest.COMMAND_INDEX_ONLY);
 		sm.append("\"}");
 
-		String json = MessageBusUtil.sendSynchronizedMessage(
+		String message = MessageBusUtil.sendSynchronizedMessage(
 			DestinationNames.SEARCH, sm.toString());
 
-		if (json.indexOf("true") != -1) {
+		if (message.indexOf("true") != -1) {
 			return true;
 		}
 

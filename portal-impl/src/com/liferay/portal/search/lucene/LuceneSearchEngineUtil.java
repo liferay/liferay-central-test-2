@@ -40,17 +40,6 @@ import com.liferay.portal.kernel.search.Sort;
  */
 public class LuceneSearchEngineUtil {
 
-	public static void init() {
-		_engine = new LuceneSearchEngineImpl();
-
-		Destination destination = new SerialDestination(
-			DestinationNames.SEARCH);
-
-		MessageBusUtil.addDestination(destination);
-
-		destination.register(new LuceneMessageListener());
-	}
-
 	public static void addDocument(long companyId, Document doc)
 		throws SearchException {
 
@@ -71,6 +60,21 @@ public class LuceneSearchEngineUtil {
 
 	public static SearchEngine getSearchEngine() {
 		return _engine;
+	}
+
+	public static void init() {
+		if (_engine != null) {
+			return;
+		}
+
+		_engine = new LuceneSearchEngineImpl();
+
+		Destination destination = new SerialDestination(
+			DestinationNames.SEARCH);
+
+		MessageBusUtil.addDestination(destination);
+
+		destination.register(new LuceneMessageListener());
 	}
 
 	public static boolean isIndexReadOnly() {
