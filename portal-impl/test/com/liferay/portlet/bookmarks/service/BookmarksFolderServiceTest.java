@@ -94,7 +94,8 @@ public class BookmarksFolderServiceTest extends BaseBookmarksServiceTestCase {
 
 			assertEquals(folderId, GetterUtil.getLong(doc.get("folderId")));
 			assertEquals(
-				entry.getEntryId(), GetterUtil.getLong(doc.get("entryId")));
+				entry.getEntryId(), GetterUtil.getLong(
+					doc.get(Field.ENTRY_CLASS_PK)));
 		}
 
 		BookmarksFolderLocalServiceUtil.deleteFolder(folderId);
