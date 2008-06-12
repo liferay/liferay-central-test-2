@@ -4,8 +4,13 @@
 
 #navigation {
 }
-
 #navigation ul {
+}
+
+#navigation ul:after {
+}
+
+.ie #navigation ul {
 }
 
 .ie6 #navigation, .ie6 #navigation ul {
@@ -14,25 +19,19 @@
 #navigation li {
 }
 
-#navigation li a {
+#navigation a {
 }
 
-#navigation li a:hover {
+#navigation li a {
 }
 
 #navigation li a span {
 }
 
-#navigation li.selected a {
+#navigation li.selected a, #navigation li a:hover {
 }
 
 #navigation li.selected a span {
-}
-
-#navigation li.selected a:hover {
-}
-
-#navigation li a:hover span {
 }
 
 #navigation .child-menu {
@@ -111,7 +110,10 @@
 .js .interactive-mode li a {
 }
 
-.js .interactive-mode li a:hover {
+.js .interactive-mode li a, .js .interactive-mode li a:hover {
+}
+
+.js .interactive-mode li a:hover, .js .interactive-mode .my-places li.current a:hover {
 }
 
 .js .interactive-mode .lfr-dock-list li.first {
@@ -132,6 +134,9 @@
 .js .interactive-mode .my-places li h3 {
 }
 
+.js .interactive-mode .lfr-flyout.has-children h3 {
+}
+
 .js .lfr-dock.interactive-mode .my-places li h3 a {
 }
 
@@ -150,10 +155,7 @@
 .js .interactive-mode .group-end {
 }
 
-.ie.js .interactive-mode .lfr-flyout.has-children {
-}
-
-.ie.js .interactive-mode .taglib-my-places > li {
+.ie6.js .interactive-mode .taglib-my-places li {
 }
 
 .ie6.js .lfr-dock.interactive-mode {
@@ -174,15 +176,30 @@
 .js .controls-hidden .interactive-mode li.toggle-controls a {
 }
 
-/* ---------- Add/sort/remove page ---------- */
+/* ---------- Add/remove page ---------- */
 
 .js #navigation .enter-page {
 }
 
-.js #navigation .enter-page.editing {
+.js #navigation .enter-page a {
 }
 
-.js #navigation .enter-page a {
+.js #navigation .enter-page .save-page {
+}
+
+.ie.js #navigation .enter-page .save-page {
+}
+
+.js #navigation .enter-page .cancel-page {
+}
+
+.ie.js #navigation .enter-page {
+}
+
+.ie.js #navigation .enter-page input.text {
+}
+
+.js #navigation {
 }
 
 .js #add-page {
@@ -198,11 +215,6 @@
 }
 
 .js .delete-tab {
-}
-
-/*------ Drag/drop menu items ------*/
-
-#navigation ul .sort-helper {
 }
 
 /*------ Navigation portlet ------*/

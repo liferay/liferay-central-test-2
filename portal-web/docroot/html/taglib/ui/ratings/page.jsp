@@ -74,7 +74,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 						<liferay-ui:message key="average" /> (<%= stats.getTotalEntries() %> <%= LanguageUtil.get(pageContext, (stats.getTotalEntries() == 1) ? "vote" : "votes") %>)
 					</div>
 
-					<div id="<%= randomNamespace %>averageRating" onmousemove="ToolTip.show(event, this, '<%= stats.getAverageScore() %> <liferay-ui:message key="stars" />')">
+					<div id="<%= randomNamespace %>averageRating" onmousemove="Liferay.Portal.ToolTip.show(event, this, '<%= stats.getAverageScore() %> <liferay-ui:message key="stars" />')">
 						<img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
 					</div>
 				</td>
@@ -82,7 +82,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 			</table>
 
 			<script type="text/javascript">
-				<%= randomNamespace %>yourRatingObj = new StarRating(
+				<%= randomNamespace %>yourRatingObj = new Liferay.Portal.StarRating(
 					'<%= randomNamespace %>yourRating',
 					{
 						rating: <%= yourScore %>,
@@ -102,7 +102,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 
 										jQuery('#<%= randomNamespace %>averageRating').mousemove(
 											function(event) {
-												Tooltip.show(event, this, message.averageScore.toFixed(1) + ' <liferay-ui:message key="stars" />');
+												Liferay.Portal.Tooltip.show(event, this, message.averageScore.toFixed(1) + ' <liferay-ui:message key="stars" />');
 											}
 										);
 
@@ -113,7 +113,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 						}
 					});
 
-				<%= randomNamespace %>averageRatingObj = new StarRating(
+				<%= randomNamespace %>averageRatingObj = new Liferay.Portal.StarRating(
 					'<%= randomNamespace %>averageRating',
 					{
 						displayOnly: true,
@@ -136,7 +136,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 				<li
 					id="<%= randomNamespace %>yourRating"
 					<c:if test="<%= !themeDisplay.isSignedIn() %>">
-						onmousemove="ToolTip.show(event, this, '<liferay-ui:message key="sign-in-to-vote" />')"
+						onmousemove="Liferay.Portal.ToolTip.show(event, this, '<liferay-ui:message key="sign-in-to-vote" />')"
 					</c:if>
 				>
 					<a class="rating rate-up <%= (yourScore > 0) ? "rated" : "" %>" href="javascript: ;"></a><a class="rating rate-down <%= (yourScore < 0) ? "rated" : "" %>" href="javascript: ;"></a>
@@ -152,7 +152,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 			</ul>
 
 			<script type="text/javascript">
-				<%= randomNamespace %>yourRatingObj = new ThumbRating(
+				<%= randomNamespace %>yourRatingObj = new Liferay.Portal.ThumbRating(
 					{
 						displayOnly: <%= !themeDisplay.isSignedIn() %>,
 						id: '<%= randomNamespace %>yourRating',

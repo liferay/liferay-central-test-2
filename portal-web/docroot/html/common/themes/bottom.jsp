@@ -25,107 +25,63 @@
 <%@ include file="/html/common/init.jsp" %>
 
 <c:if test="<%= themeDisplay.isIncludeCalendarJs() %>">
-	<link href="<%= themeDisplay.getPathJavaScript() %>/calendar/skins/aqua/theme.css" rel="stylesheet" type="text/css" />
-
-	<script src="<%= themeDisplay.getPathJavaScript() %>/calendar/calendar_stripped.js" type="text/javascript"></script>
-
+<%
+Calendar selCal = CalendarFactoryUtil.getCalendar(timeZone, locale);
+%>
 	<script type="text/javascript">
+		jQuery.datepicker.setDefaults(
+			{
+				clearText: '<liferay-ui:message key="clear" />', // Display text for clear link
+				clearStatus: '<liferay-ui:message key="erase-the-current-date" />', // Status text for clear link
+				closeText: '<liferay-ui:message key="close" />', // Display text for close link
+				closeStatus: '<liferay-ui:message key="cancel" />', // Status text for close link
+				prevText: '&#x3c;<liferay-ui:message key="previous" />', // Display text for previous month link
+				prevStatus: '<liferay-ui:message key="previous" />', // Status text for previous month link
+				nextText: '<liferay-ui:message key="next" />&#x3e;', // Display text for next month link
+				nextStatus: '<liferay-ui:message key="next" />', // Status text for next month link
+				currentText: '<liferay-ui:message key="today" />', // Display text for current month link
+				currentStatus: '<liferay-ui:message key="current-month" />', // Status text for current month link
+				<%
+				String[] calendarMonths = CalendarUtil.getMonths(locale);
+				%>
+				monthNames: <%= JS.toScript(calendarMonths) %>, // Names of months for drop-down and formatting
+				<%
+				calendarMonths = CalendarUtil.getMonths(locale, "MMM");
+				%>
+				monthNamesShort: <%= JS.toScript(calendarMonths) %>, // For formatting
+				
+				monthStatus: '<liferay-ui:message key="show-a-different-month" />', // Status text for selecting a month
+				yearStatus: '<liferay-ui:message key="show-a-different-year" />', // Status text for selecting a year
+				weekHeader: '<liferay-ui:message key="week-abbreviation" />', // Header for the week of the year column
+				weekStatus: '<liferay-ui:message key="week-of-the-year" />', // Status text for the week of the year column
+				
+				<%
+				String[] calendarDays = CalendarUtil.getDays(locale, "EEEE");
+				%>
+				dayNames: <%= JS.toScript(calendarDays) %>, // For formatting
+				<%
+				calendarDays = CalendarUtil.getDays(locale, "EEE");
+				%>
+				dayNamesShort: <%= JS.toScript(calendarMonths) %>, // For formatting
+				<%
+				int i = 0;
+				for (String day : calendarDays) {
+					int daysIndex = (selCal.getFirstDayOfWeek() + i - 1) % 7;
+						
+					calendarDays[i] = LanguageUtil.get(pageContext, CalendarUtil.DAYS_ABBREVIATION[daysIndex]);
+					i++;
+				}
+				%>
+				dayNamesMin: <%= JS.toScript(calendarDays) %>, // Column headings for days starting at Sunday
 
-		<%
-		String[] calendarDays = CalendarUtil.getDays(locale, "EEEE");
-		%>
-
-		Calendar._DN = new Array(
-			"<%= calendarDays[0] %>",
-			"<%= calendarDays[1] %>",
-			"<%= calendarDays[2] %>",
-			"<%= calendarDays[3] %>",
-			"<%= calendarDays[4] %>",
-			"<%= calendarDays[5] %>",
-			"<%= calendarDays[6] %>",
-			"<%= calendarDays[0] %>"
+				dayStatus: '', // Status text for the day of the week selection (Set DD as first week day)
+				dateStatus: '', // Status text for the date selection (Select DD, M d)
+				dateFormat: 'mm/dd/yy', // See format options on parseDate
+				firstDay: <%= (selCal.getFirstDayOfWeek() - 1) % 7 %>, // The first day of the week, Sun = 0, Mon = 1, ...
+				initStatus: '<liferay-ui:message key="select-date" />', // Initial Status text on opening
+				isRTL: ('<liferay-ui:message key="lang.dir" />' === 'rtl') // True if right-to-left language, false if left-to-right
+			}
 		);
-
-		<%
-		calendarDays = CalendarUtil.getDays(locale, "EEE");
-		%>
-
-		Calendar._SDN = new Array(
-			"<%= calendarDays[0] %>",
-			"<%= calendarDays[1] %>",
-			"<%= calendarDays[2] %>",
-			"<%= calendarDays[3] %>",
-			"<%= calendarDays[4] %>",
-			"<%= calendarDays[5] %>",
-			"<%= calendarDays[6] %>",
-			"<%= calendarDays[0] %>"
-		);
-
-		<%
-		String[] calendarMonths = CalendarUtil.getMonths(locale);
-		%>
-
-		Calendar._MN = new Array(
-			"<%= calendarMonths[0] %>",
-			"<%= calendarMonths[1] %>",
-			"<%= calendarMonths[2] %>",
-			"<%= calendarMonths[3] %>",
-			"<%= calendarMonths[4] %>",
-			"<%= calendarMonths[5] %>",
-			"<%= calendarMonths[6] %>",
-			"<%= calendarMonths[7] %>",
-			"<%= calendarMonths[8] %>",
-			"<%= calendarMonths[9] %>",
-			"<%= calendarMonths[10] %>",
-			"<%= calendarMonths[11] %>"
-		);
-
-		<%
-		calendarMonths = CalendarUtil.getMonths(locale, "MMM");
-		%>
-
-		Calendar._SMN = new Array(
-			"<%= calendarMonths[0] %>",
-			"<%= calendarMonths[1] %>",
-			"<%= calendarMonths[2] %>",
-			"<%= calendarMonths[3] %>",
-			"<%= calendarMonths[4] %>",
-			"<%= calendarMonths[5] %>",
-			"<%= calendarMonths[6] %>",
-			"<%= calendarMonths[7] %>",
-			"<%= calendarMonths[8] %>",
-			"<%= calendarMonths[9] %>",
-			"<%= calendarMonths[10] %>",
-			"<%= calendarMonths[11] %>"
-		);
-
-		Calendar._TT = {};
-
-		Calendar._TT["ABOUT"] = "<liferay-ui:message key="date-selection" />";
-		Calendar._TT["ABOUT"] = Calendar._TT["ABOUT"].replace("{0}", String.fromCharCode(0x2039));
-		Calendar._TT["ABOUT"] = Calendar._TT["ABOUT"].replace("{1}", String.fromCharCode(0x203a));
-
-		Calendar._TT["ABOUT_TIME"] = "";
-		Calendar._TT["CLOSE"] = "<liferay-ui:message key="close" />";
-		Calendar._TT["DAY_FIRST"] = "Display %s First";
-		Calendar._TT["DRAG_TO_MOVE"] = "";
-		Calendar._TT["GO_TODAY"] = "<liferay-ui:message key="today" />";
-		Calendar._TT["INFO"] = "<liferay-ui:message key="help" />";
-		Calendar._TT["NEXT_MONTH"] = "<liferay-ui:message key="next-month" />";
-		Calendar._TT["NEXT_YEAR"] = "<liferay-ui:message key="next-year" />";
-		Calendar._TT["PART_TODAY"] = "";
-		Calendar._TT["PREV_MONTH"] = "<liferay-ui:message key="previous-month" />";
-		Calendar._TT["PREV_YEAR"] = "<liferay-ui:message key="previous-year" />";
-		Calendar._TT["SEL_DATE"] = "<liferay-ui:message key="select-date" />";
-		Calendar._TT["SUN_FIRST"] = "";
-		Calendar._TT["TIME_PART"] = "";
-		Calendar._TT["TODAY"] = "<liferay-ui:message key="today" />";
-		Calendar._TT["WK"] = "";
-
-		Calendar._TT["DEF_DATE_FORMAT"] = "%Y-%m-%d";
-		Calendar._TT["TT_DATE_FORMAT"] = "%a, %b %e";
-
-		Calendar._TT["WEEKEND"] = "0,6";
 	</script>
 </c:if>
 

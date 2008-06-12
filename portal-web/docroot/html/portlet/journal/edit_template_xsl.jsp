@@ -77,7 +77,7 @@ else {
 			{
 				url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /><portlet:param name="langType" value="<%= langType %>" /><portlet:param name="editorType" value="<%= newEditorType %>" /></portlet:renderURL>',
 				textarea: '<portlet:namespace />xslContent',
-				popup: jQuery(document.<portlet:namespace />editorForm).parents('.popup:first')
+				popup: jQuery(document.<portlet:namespace />editorForm).parents('.ui-dialog-content:first')
 			}
 		);
 	}

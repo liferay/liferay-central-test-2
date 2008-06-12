@@ -60,85 +60,113 @@ else {
 %>
 
 <script type="text/javascript">
-	var <%= randomNamespace %>jsCalendarObj = null;
+	if (!Liferay.DatePicker) {
+		Liferay.DatePicker = new Class({
+			initialize: function(options) {
+				var instance = this;
 
-	jQuery(document).ready(
+				instance._input = jQuery(options.input);
+				instance._monthField = jQuery(options.monthField);
+				instance._dayField = jQuery(options.dayField);
+				instance._yearField = jQuery(options.yearField);
+				instance._monthYearField = jQuery(options.monthAndYearField);
+				instance._combinedMonthYear = options.combinedMonthYear;
+				instance._yearRange = options.yearRange.join(':');
+				instance._firstDay = options.firstDay;
+
+				if (!instance._input.is('.disabled')) {
+					instance._createDatepicker();
+				}
+			},
+			
+			_beforeShow: function() {
+				var instance = this;
+				
+				var month, day, year;
+				
+				if (!instance._combinedMonthYear) {
+					month = instance._monthField.val();
+					year = instance._yearField.val();
+				}
+				else {
+					var value = instance._monthYearField.val();
+					value = value.split('_');
+					month = value[0];
+					year = value[1];
+				}
+				
+				// Offset month +1 because it's starting index is at zero
+				month++;
+
+				day = instance._dayField.val();
+
+				instance._input.val(
+					month + '/' + day + '/' + year
+				);
+
+				return {};
+			},
+			
+			_createDatepicker: function() {
+				var instance = this;
+
+				instance._input.datepicker(
+					{
+						buttonImage: '<%= themeDisplay.getPathThemeImages() %>/common/calendar.png',
+						buttonImageOnly: true,
+						clearText: ' ',
+						firstDay: instance._firstDay,
+						showOn: 'both',
+						showOtherMonths: true,
+						showWeeks: true,
+						yearRange: instance._yearRange,
+						beforeShow: function() {
+							instance._beforeShow();
+						},
+						onSelect: function(date, datepicker) {
+							instance._onSelect(date, datepicker);
+						}
+					}
+				);
+			},
+
+			_onSelect: function(date, datepicker) {
+				var instance = this;
+
+				var day = datepicker._selectedDay;
+				var month = datepicker._selectedMonth;
+				var year = datepicker._selectedYear;
+
+				if (!instance._combinedMonthYear) {
+					instance._monthField.val(month);
+					instance._yearField.val(year);
+				}
+				else {
+					var monthYearValue = month + '_' + year;
+					instance._monthYearField.val(monthYearValue);
+				}
+
+				instance._dayField.val(day);
+			}
+		});
+	}
+
+	jQuery(
 		function() {
-			<%= randomNamespace %>jsCalendarObj = new Calendar(false, null, <%= randomNamespace %>jsOnSelect, <%= randomNamespace %>jsOnClose);
-
-			<%= randomNamespace %>jsCalendarObj.weekNumbers = false;
-			<%= randomNamespace %>jsCalendarObj.firstDayOfWeek = <%= firstDayOfWeek %>;
-			<%= randomNamespace %>jsCalendarObj.setTtDateFormat = "%A, %B %e, %Y";
-			<%= randomNamespace %>jsCalendarObj.setRange(<%= yearRangeStart %>, <%= yearRangeEnd %>);
+			new Liferay.DatePicker(
+				{
+					combinedMonthYear: (!<%= monthAndYearParam.equals(namespace) %>),
+					dayField: '#<%= dayParam %>',
+					firstDay: <%= firstDayOfWeek %>,
+					input: '#<%= imageInputId %>Input',
+					monthField: '#<%= monthParam %>',
+					monthAndYearField: '#<%= monthAndYearParam %>',
+					yearField: '#<%= yearParam %>',
+					yearRange: [<%= yearRangeStart %>, <%= yearRangeEnd %>]
+				}
+			);
 		}
 	);
-
-	function <%= randomNamespace %>jsOnClick(id) {
-		<%= randomNamespace %>jsCalendarObj.create();
-
-		var monthValue = 0;
-		var yearValue = 0;
-
-		<c:choose>
-			<c:when test="<%= monthAndYearParam.equals(namespace) %>">
-				monthValue = document.<%= formName %>.<%= monthParam %>.value;
-				yearValue = document.<%= formName %>.<%= yearParam %>.value;
-			</c:when>
-			<c:otherwise>
-				var monthAndYearValue = document.<%= formName %>.<%= monthAndYearParam %>.value;
-				var monthAndYearPos = monthAndYearValue.indexOf("_");
-
-				if (monthAndYearPos != -1) {
-					monthValue = monthAndYearValue.substring(0, monthAndYearPos);
-					yearValue = monthAndYearValue.substring(monthAndYearPos + 1, monthAndYearValue.length);
-				}
-			</c:otherwise>
-		</c:choose>
-
-		var dayValue = document.<%= formName %>.<%= dayParam %>.value;
-
-		var date = null;
-
-		if ((yearValue == "") || ((dayValue != "") && (monthValue == ""))) {
-			date = new Date();
-		}
-		else {
-			if (monthValue == "") {
-				monthValue = 0;
-			}
-
-			if (dayValue == "") {
-				dayValue = 1;
-			}
-
-			date = new Date(yearValue, monthValue, dayValue);
-		}
-
-		<%= randomNamespace %>jsCalendarObj.setDate(date);
-		<%= randomNamespace %>jsCalendarObj.showAtElement(document.getElementById("<%= imageInputId %>"), "br");
-	}
-
-	function <%= randomNamespace %>jsOnClose(cal) {
-		cal.hide();
-	}
-
-	function <%= randomNamespace %>jsOnSelect(cal) {
-		if (cal.dateClicked) {
-			<c:choose>
-				<c:when test="<%= monthAndYearParam.equals(namespace) %>">
-					Liferay.Util.setSelectedValue(document.<%= formName %>.<%= monthParam %>, cal.date.getMonth());
-					Liferay.Util.setSelectedValue(document.<%= formName %>.<%= yearParam %>, cal.date.getFullYear());
-				</c:when>
-				<c:otherwise>
-					Liferay.Util.setSelectedValue(document.<%= formName %>.<%= monthAndYearParam %>, cal.date.getMonth() + "_" + cal.date.getFullYear());
-				</c:otherwise>
-			</c:choose>
-
-			Liferay.Util.setSelectedValue(document.<%= formName %>.<%= dayParam %>, cal.date.getDate());
-
-			cal.callCloseHandler();
-		}
-	}
 </script>
 
 <c:choose>
@@ -149,7 +177,7 @@ else {
 		String[] months = CalendarUtil.getMonths(locale);
 		%>
 
-		<select <%= disabled ? "disabled" : "" %> name="<%= monthParam %>">
+		<select <%= disabled ? "disabled" : "" %> id="<%= monthParam %>" name="<%= monthParam %>">
 			<c:if test="<%= monthNullable %>">
 				<option value=""></option>
 			</c:if>
@@ -166,7 +194,7 @@ else {
 
 		</select>
 
-		<select <%= disabled ? "disabled" : "" %> name="<%= dayParam %>">
+		<select <%= disabled ? "disabled" : "" %> id="<%= dayParam %>" name="<%= dayParam %>">
 			<c:if test="<%= dayNullable %>">
 				<option value=""></option>
 			</c:if>
@@ -183,7 +211,7 @@ else {
 
 		</select>
 
-		<select <%= disabled ? "disabled" : "" %> name="<%= yearParam %>">
+		<select <%= disabled ? "disabled" : "" %> id="<%= yearParam %>" name="<%= yearParam %>">
 			<c:if test="<%= yearNullable %>">
 				<option value=""></option>
 			</c:if>
@@ -214,7 +242,7 @@ else {
 		String[] months = CalendarUtil.getMonths(locale, "MMM");
 		%>
 
-		<select <%= disabled ? "disabled" : "" %> name="<%= monthAndYearParam %>">
+		<select <%= disabled ? "disabled" : "" %> id="<%= monthAndYearParam %>" name="<%= monthAndYearParam %>">
 			<c:if test="<%= monthAndYearNullable %>">
 				<option value=""></option>
 			</c:if>
@@ -233,7 +261,7 @@ else {
 
 		</select>
 
-		<select <%= disabled ? "disabled" : "" %> name="<%= dayParam %>">
+		<select <%= disabled ? "disabled" : "" %> id="<%= dayParam %>" name="<%= dayParam %>">
 			<c:if test="<%= dayNullable %>">
 				<option value=""></option>
 			</c:if>
@@ -251,10 +279,4 @@ else {
 		</select>
 	</c:otherwise>
 </c:choose>
-
-<img align="absmiddle" border="0" hspace="0" id="<%= imageInputId %>" name="<%= imageInputId %>" src="<%= themeDisplay.getPathThemeImages() %>/common/calendar.png"" vspace="0"
-	onClick="
-		<c:if test="<%= !disabled %>">
-			<%= randomNamespace %>jsOnClick('<%= randomNamespace %>jsCalendarObj');
-		</c:if>"
->
+<input class="<%= disabled ? "disabled" : "" %>" type="hidden" id="<%= imageInputId %>Input" />

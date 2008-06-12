@@ -145,7 +145,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		url += "&<portlet:namespace />principal=" + document.<portlet:namespace />fm.<portlet:namespace />principal.value;
 		url += "&<portlet:namespace />credentials=" + document.<portlet:namespace />fm.<portlet:namespace />credentials.value;
 
-		AjaxUtil.update(url, popup);
+		jQuery(popup).load(url);
 	}
 
 	function <portlet:namespace />updateDefaultLdap() {

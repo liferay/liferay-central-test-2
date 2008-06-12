@@ -4,7 +4,7 @@ Liferay.PortletCSS = {
 
 		var curPortletBoundaryId = 'p_p_id_' + portletId + '_';
 		var obj = jQuery('#' + curPortletBoundaryId);
-		var tabTrigger = 1;
+		var tabTrigger = 0;
 
 		instance._portletId = portletId;
 		instance._curPortlet = obj.find('.portlet');
@@ -19,6 +19,7 @@ Liferay.PortletCSS = {
 		}
 
 		var newPanel = instance._newPanel;
+		var newPanelTabs = newPanel.find('> ul.ui-tabs');
 
 		if (instance._curPortlet.length) {
 			if (!instance._newPanel.is('.instantiated')) {
@@ -124,14 +125,10 @@ Liferay.PortletCSS = {
 				instance._wapInitialWindowStateSelect = jQuery('#lfr-wap-initial-window-state');
 
 				newPanel.show();
-
-				newPanel.tabs({
-					tabStruct: 'form>fieldset',
-					selectedClass: 'current'
-				});
+				newPanelTabs.tabs();
 
 				instance._currentPopup = Liferay.Popup({
-					width: 800,
+					width: 820,
 					message: newPanel[0],
 					modal: false,
 					noCenter: true,
@@ -147,7 +144,7 @@ Liferay.PortletCSS = {
 
 			}
 
-			newPanel.find('.lfr-color-picker-img').remove();
+			newPanel.find('.lfr-colorpicker-img').remove();
 
 			instance._portletMsgResponse = jQuery('#lfr-portlet-css-response');
 			instance._portletMsgResponse.hide();
@@ -318,13 +315,7 @@ Liferay.PortletCSS = {
 			instance._spacingStyles();
 			instance._cssStyles();
 
-			var currentTab = newPanel.find('li.current');
-
-			newPanel.triggerTab(tabTrigger);
-
-			if (currentTab.length > 1) {
-				currentTab.not(':first').removeClass('current');
-			}
+			newPanelTabs.tabs('select', tabTrigger);
 
 			var useForAll = newPanel.find('.lfr-use-for-all');
 
@@ -332,7 +323,7 @@ Liferay.PortletCSS = {
 				var checkBox = jQuery(this);
 				var otherHolders = checkBox.parents('fieldset:first').find('.ctrl-holder:gt(1)');
 				var otherForms = otherHolders.find('input, select');
-				var colorPickerImages = otherHolders.find('.lfr-color-picker-img');
+				var colorPickerImages = otherHolders.find('.lfr-colorpicker-img');
 
 				if (this.checked) {
 					otherHolders.fadeTo('fast', 0.3);
@@ -411,13 +402,14 @@ Liferay.PortletCSS = {
 
 			Liferay.Util.addInputFocus(instance._newPanel[0]);
 
-			jQuery(instance._currentPopup).parents('.popup').ScrollTo(800);
+			jQuery(instance._currentPopup).parents('.ui-dialog').css({top: 20, left: 20});
 		}
 	},
 
 	_assignColorPickers: function() {
 		var instance = this;
-		instance._newPanel.find('.use-color-picker').each(
+
+		instance._newPanel.find('.use-colorpicker').each(
 			function() {
 				new Liferay.ColorPicker(
 					{
@@ -804,7 +796,7 @@ Liferay.PortletCSS = {
 
 		customPortletNote.html(portletInfoText);
 
-		customCSS.EnableTabs();
+		Liferay.Util.enableTextareaTabs(customCSS[0]);
 
 		if (!Liferay.Browser.is_safari) {
 			refreshText = Liferay.Language.get('update-the-styles-on-this-page');

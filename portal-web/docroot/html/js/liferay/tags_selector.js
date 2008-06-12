@@ -25,35 +25,38 @@ Liferay.TagsSelector = new Class({
 
 		var textInput = jQuery('#' + params.textInput);
 
-		textInput.Autocomplete(
+		textInput.autocomplete(
 			{
 				source: instance._getTags,
-				delay: 0,
-				fx: {
-					type: 'slide',
-					duration: 400
+				width: textInput.width() + 20,
+				formatItem: function(row, i, max, term) {
+					return row;
 				},
-				autofill: false,
-				dataSourceType: 'json',
-				helperClass: 'autocomplete-box',
-				selectClass: 'autocomplete-selected',
+				dataType: 'json',
+				delay: 0,
 				multiple: true,
 				mutipleSeparator: ',',
-				minchars: 1,
-				onSelect: function(option) {
+				minChars: 1,
+				hide: function(event, ui) {
+					jQuery(this).removeClass('showing-list');
+				},
+				show: function(event, ui) {
+					jQuery(this).addClass('showing-list');
+					this._LFR_listShowing = true;
+				},
+				result: function(event, ui) {
+					var caretPos = this.value.length;
+
 					if (this.createTextRange) {
-						var value = this.value;
 						var textRange = this.createTextRange();
 
-						textRange.moveStart('character', value.length);
+						textRange.moveStart('character', caretPos);
 						textRange.select();
 					}
-				},
-				onShow: function() {
-					jQuery(this).addClass('showing-list');
-				},
-				onHide: function() {
-					jQuery(this).removeClass('showing-list');
+					else if (this.selectionStart) {
+						this.selectionStart = caretPos;
+						this.selectionEnd = caretPos;
+					}
 				}
 			}
 		);
@@ -68,7 +71,7 @@ Liferay.TagsSelector = new Class({
 		addTagButton.click(
 			function() {
 					var curTags = instance._curTags;
-					var newTags = textInput.val().split(",");
+					var newTags = textInput.val().split(',');
 
 					jQuery.each(
 						newTags,
@@ -96,9 +99,12 @@ Liferay.TagsSelector = new Class({
 
 		textInput.keypress(
 			function(event) {
-				if ((event.keyCode == 13) && !jQuery(this).is('.showing-list')) {
-					addTagButton.trigger('click');
+				if (event.keyCode == 13) {
+					if (!this._LFR_listShowing) {
+						addTagButton.trigger('click');
+					}
 
+					this._LFR_listShowing = null;
 					return false;
 				}
 			}
@@ -185,7 +191,7 @@ Liferay.TagsSelector = new Class({
 			var popup = Liferay.Popup(
 				{
 					modal: false,
-					height: 300,
+					position: 'center',
 					width: 400,
 					message: mainContainer[0],
 					onClose: function() {
@@ -209,19 +215,27 @@ Liferay.TagsSelector = new Class({
 		}
 	},
 
-	_getTags: function(data) {
-		var beginning = data.start || 0;
-		var end = data.end || 20;
+	_getTags: function(term) {
+		var beginning = 0;
+		var end = 20;
 
-		data.value = data.value || '';
-
-		return Liferay.Service.Tags.TagsEntry.searchAutocomplete(
+		var data = Liferay.Service.Tags.TagsEntry.searchAutocomplete(
 			{
 				companyId: themeDisplay.getCompanyId(),
-				name: "%" + data.value + "%",
+				name: "%" + term + "%",
 				properties: "",
 				begin: beginning,
 				end: end
+			}
+		);
+
+		return jQuery.map(data, 
+			function(row) {
+				return {
+					data: row.text,
+					value: row.value,
+					result: row.text
+				}
 			}
 		);
 	},
@@ -397,13 +411,9 @@ Liferay.TagsSelector = new Class({
 
 		jQuery(curTags).each(
 			function(i, curTag) {
-				html += '<span id="' + instance._ns + 'CurTags' + i + '">';
-				html += curTag + ' ';
-				html += '[<a href="javascript: ' + instance._ns + '.deleteTag(' + i + ');">x</a>]';
-
-				if ((i + 1) < curTags.length) {
-					html += ', ';
-				}
+				html += '<span class="ui-tag" id="' + instance._ns + 'CurTags' + i + '">';
+				html += curTag;
+				html += '<a class="ui-tag-delete" href="javascript: ' + instance._ns + '.deleteTag(' + i + ');"><span>x</span></a>';
 
 				html += '</span>';
 			}

@@ -1358,9 +1358,8 @@ public class ServicePreAction extends Action {
 					themeDisplay.setShowLayoutTemplatesIcon(true);
 
 					themeDisplay.setURLAddContent(
-						"LayoutConfiguration.toggle('" + plid + "', '" +
-							PortletKeys.LAYOUT_CONFIGURATION + "', '" +
-								doAsUserId + "');");
+						"LayoutConfiguration.toggle('" +
+							PortletKeys.LAYOUT_CONFIGURATION + "');");
 
 					themeDisplay.setURLLayoutTemplates(
 						"showLayoutTemplates();");

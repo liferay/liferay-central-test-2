@@ -26,7 +26,7 @@
 
 <div id="lfr-look-and-feel">
 	<div id="portlet-set-properties">
-		<ul class="tabs">
+		<ul class="ui-tabs">
 			<li>
 				<a href="#portlet-config"><liferay-ui:message key="portlet-configuration" /></a>
 			</li>

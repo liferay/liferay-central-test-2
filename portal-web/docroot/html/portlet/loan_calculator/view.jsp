@@ -47,8 +47,20 @@ integerFormat.setMinimumFractionDigits(0);
 
 NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 %>
+<script type="text/javascript">
+	jQuery(
+		function () {
+			var form = jQuery('#<portlet:namespace />fm');
+			form.ajaxForm(
+				{
+					target: form.parent()[0]
+				}
+			);
+		}
+	);
+</script>
 
-<form action="<liferay-portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/loan_calculator/view" /></liferay-portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="AjaxUtil.submit(this, {update: this.parentNode}); return false;">
+<form action="<liferay-portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/loan_calculator/view" /></liferay-portlet:renderURL>" id="<portlet:namespace />fm" method="post" name="<portlet:namespace />fm">
 
 <table class="lfr-table">
 <tr>
@@ -104,7 +116,9 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 <br />
 
 <input type="submit" value="<liferay-ui:message key="calculate" />" />
-
+<button class="button submit" onclick="jQuery(this).parents("form").trigger("submit")">
+	Or click me to search for stuff
+</button>
 </form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">

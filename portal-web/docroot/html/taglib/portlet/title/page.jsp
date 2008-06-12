@@ -54,7 +54,11 @@ boolean editable = GetterUtil.getBoolean((String)request.getAttribute("liferay-p
 							"&portletId=<%= portletDisplay.getId() %>" +
 							"&title=" + encodeURIComponent(newText);
 
-						AjaxUtil.request(url);
+						jQuery.ajax(
+							{
+								url: url
+							}
+						);
 					}
 				}
 			});

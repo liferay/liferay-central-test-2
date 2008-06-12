@@ -1,7 +1,6 @@
 Liferay.Dock = {
 	init: function() {
 		var instance = this;
-
 		var dock = jQuery('.lfr-dock');
 
 		if (!dock.is('.interactive-mode')) {
@@ -40,13 +39,13 @@ Liferay.Dock = {
 			dockList.hide();
 			dockList.wrap('<div class="lfr-dock-list-container"></div>');
 
-			dock.css(
-				{
-					cursor: 'pointer',
-					position: 'absolute',
-					zIndex: Liferay.zIndex.DOCK
-				}
-			);
+			var dockDefaults = {
+				cursor: 'pointer',
+				position: 'absolute',
+				zIndex: Liferay.zIndex.DOCK
+			};
+			
+			instance._setPosition(dock, dockDefaults);
 
 			var dockOver = function(event) {
 				instance._setCloser();
@@ -71,16 +70,54 @@ Liferay.Dock = {
 			}
 
 			var dockParent = dock.parent();
+			var dockParentDefaults = {
+				position: 'relative',
+				zIndex: Liferay.zIndex.DOCK_PARENT
+			};
 
-			dockParent.css(
-				{
-					position: 'relative',
-					zIndex: Liferay.zIndex.DOCK_PARENT
-				}
-			);
+			instance._setPosition(dockParent, dockParentDefaults);
 
 			instance._handleDebug();
 		}
+	},
+	
+	_setPosition: function(obj, defaults) {
+		var instance = this;
+		
+		var settings = defaults;
+
+		if (!obj.is('.ignore-position')) {
+			var position = obj.css('position');
+			var zIndex = obj.css('z-index');
+			var isStatic = !/absolute|relative|fixed/.test(position);
+			
+			if (zIndex == 'auto' || zIndex == 0) {
+				zIndex = defaults.zIndex;
+			}
+
+			// The position is static, but use top/left positioning as a trigger
+			if (isStatic) {
+				position = defaults.position;
+				var top = parseInt(obj.css('top'));
+
+				if (!isNaN(top) && top != 0) {
+					position = '';
+					zIndex = '';
+				}
+			}
+
+			settings = jQuery.extend(
+				defaults,
+				{
+					position: position,
+					zIndex: zIndex
+				}
+			);
+		}
+
+		obj.css(settings);
+
+		return settings;
 	},
 
 	_handleDebug: function() {

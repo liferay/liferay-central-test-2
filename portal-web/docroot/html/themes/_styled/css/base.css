@@ -39,14 +39,20 @@ abbr, acronym {
 
 body {
 	background-color: #fff;
-	font: 62.5%/1.6em 'Tahoma','Lucida Sans Unicode','Lucida Grande','Lucida',Arial,Verdana,sans-serif;
+	font: 62.5%/1.6em Arial, Helvetica, Verdana, sans-serif;
 }
 
 html, body {
 	height: 100%;
 }
 
+body {
+	background: transparent url(../images/common/body_bg.png) repeat-x 0 0;
+	font-size: 11px;
+}
+
 body.portal-popup {
+	background: none;
 	padding: 10px;
 }
 
@@ -107,7 +113,7 @@ p {
 /* ---------- Links ---------- */
 
 a {
-	color: #036;
+	color: #369;
 	text-decoration: underline;
 }
 
@@ -167,86 +173,44 @@ code, pre {
 /* ---------- Staging area ---------- */
 
 body.staging #wrapper {
-	border: 10px solid #c00;
+	border: 10px solid #f00;
 	padding: 0px 5px 5px;
 }
 
 /* ---------- Main content body ---------- */
 
 #wrapper {
+	width: 100%;
+}
+
+#content-wrapper {
 	margin: 0 auto;
-	width: 95%;
+	width: 90%;
 }
 
 /* ---------- Banner ---------- */
 
 #banner {
-	background: transparent url(../images/common/banner_bg.png) no-repeat scroll 100% 100%;
-	position: relative;
+	background: transparent url(../images/common/banner_bg.jpg) no-repeat 20% 0;
+	height: 100px;
+	top: -1px;
 }
 
-#banner .logo {
-	background: transparent url(../images/common/banner_bg.png) no-repeat scroll 0 100%;
+#banner h1.logo {
 	display: block;
-	float: left;
 	font-size: 2em;
-	margin: 0;
-	padding: 1.25em 0.6em 1.45em;
+	left: 5%;
+	margin: 25px 0 0;
+	padding: 0;
+	position: absolute;
 }
 
 #banner .logo a {
 	text-decoration: none;
 }
 
-#banner:after {
-	clear: both;
-	content: ".";
-	display: block;
-	height: 0;
-	visibility: hidden;
-}
-
-.ie #banner {
-	height: 1%;
-}
-
 .ie6 #banner .logo {
 	zoom: 1;
-}
-
-/* ---------- Drag Indicators ---------- */
-
-#content-wrapper #layout-grid.dragging {
-	border-collapse: separate;
-}
-
-#content-wrapper #layout-grid.dragging .lfr-column {
-	border: 3px double #ACBED5;
-}
-
-.drag-indicator {
-	border: 2px dashed #036;
-	cursor: move;
-	font-size: 0;
-	position: relative;
-}
-
-.drop-area {
-	background-color: #000;
-	font-size: 0;
-	opacity: .10;
-}
-
-.ie .drop-area {
-	filter: alpha(opacity=10);
-}
-
-.drop-position-top {
-	background: url(../images/arrows/03_up.png) scroll repeat-x top left;
-}
-
-.drop-position-bottom {
-	background: url(../images/arrows/03_down.png) scroll repeat-x bottom left;
 }
 
 /* ---------- Alerts and popups ---------- */
@@ -255,51 +219,13 @@ body.staging #wrapper {
 	background: #000;
 }
 
-.popup {
-	background: #fff;
-	border: 1px solid #777;
-	padding: 0.4em;
-	position: absolute;
-}
-
-.popup-header {
-	background: #EEF0F1 none repeat scroll 0%;
-	border-bottom: 1px solid #aaa;
-	color: #333;
-	cursor: move;
-	padding: 5px;
-	position: relative;
-}
-
-.popup-title {
-	font-size: 1.5em;
-	font-weight: bold;
-	min-height: 1em;
-	white-space: nowrap;
-	width: 90%;
-}
-
-.ie6 .popup-title {
-	height: 1em;
-}
-
-.popup-close {
-	cursor: pointer;
-	position: absolute;
-	right: 0.5em;
-}
-
-.popup-message {
-	padding: 5px;
-}
-
 .popup-alert-notice {
 	background-color: #ffc;
 	border-bottom-color: #fc0;
 }
 
 .popup-alert-warning {
-	background-color: #fcc;
+	background-color: #fdd;
 	border-bottom-color: #f00;
 }
 
@@ -307,7 +233,6 @@ body.staging #wrapper {
 
 .portal-add-content {
 	background: #fff;
-	padding: 8px 4px 0;
 	text-align: left;
 	z-index: 20;
 }
@@ -319,35 +244,13 @@ body.staging #wrapper {
 /* ---------- Portal tool tips ---------- */
 
 .portal-tool-tip {
-	background: #DCDCDC;
-	border: 1px solid #BFBFBF;
-	color: #333;
+	background: #fff url(../images/forms/button.png) repeat-x 0 100%;
+	border: 1px solid;
+	border-color: #dedede #bfbfbf #bfbfbf #dedede;
+	color: #1E2529;
 	font-weight: bold;
 	max-width: 200px;
-	padding: 0.5em 0.3em;
-}
-
-/* ---------- Autocomplete styles ---------- */
-
-.autocomplete-box {
-	background: #E2ECF2;
-	border: 1px solid #ABC6D7;
-	color: #333;
-	min-width: 200px;
-	padding: 0;
-}
-
-.ie6 .autocomplete-box {
-	width: 200px;
-}
-
-.autocomplete-selected {
-	background: #C0D5E3;
-	border-bottom: 1px solid #ABC6D7;
-	border-top: 1px solid #ABC6D7;
-	color: #333;
-	font-weight: bold;
-	padding: 0.5em 0.3em;
+	padding: 6px 4px;
 }
 
 /* ---------- Loading animation ---------- */
@@ -362,7 +265,7 @@ body.staging #wrapper {
 /* ---------- Separator ---------- */
 
 hr, .separator {
-	border: 1px dotted #CCC;
+	border: 1px dotted #bfbfbf;
 }
 
 /* ---------- Update Manager ---------- */

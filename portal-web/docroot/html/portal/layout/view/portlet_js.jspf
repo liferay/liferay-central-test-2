@@ -22,28 +22,24 @@
  */
 %>
 
-var loadingAnimation = new Image();
-
-loadingAnimation.src =  "<%= themeDisplay.getPathThemeImages() %>/progress_bar/loading_animation.gif";
-
-function addPortletHTML(url, placeHolder, returnPortlet) {
+function addPortletHTML(options) {
 	var portletBoundary;
+	var url = options.url;
+	var placeHolder = options.placeHolder;
+	var beforePortletLoaded = options.beforePortletLoaded;
+	var onComplete = options.onComplete;
 
 	var addPortletReturn = function(html) {
+
 		var container = placeHolder.parentNode;
-		var addDiv = document.createElement("div");
+		var jContainer = jQuery(container);
 
-		addDiv.style.display = "none";
-		addDiv.innerHTML = html;
+		if (jContainer.is('.empty')) {
+			jContainer.removeClass('empty');
+		}
 
-		var portletBound = jQuery(".portlet-boundary:first", addDiv).get(0);
-
-		portletBound.parentNode.removeChild(portletBound);
-
-		var portletId = portletBound.id;
-
-		portletId = portletId.replace(/^p_p_id_/,"");
-		portletId = portletId.replace(/_$/,"");
+		var portletBound = jQuery(html)[0];
+		var portletId = Liferay.Util.getPortletId(portletBound.id);
 
 		portletBound.portletId = portletId;
 
@@ -57,12 +53,7 @@ function addPortletHTML(url, placeHolder, returnPortlet) {
 
 		<c:if test="<%= (layout != null) && (LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE)) %>">
 			if (!portletBound.isStatic) {
-				if (themeDisplay.isFreeformLayout()) {
-					Liferay.Freeform.add(portletBound);
-				}
-				else {
-					Liferay.Columns.add(portletBound);
-				}
+				Liferay.Layout.refresh(portletBound);
 			}
 		</c:if>
 
@@ -82,6 +73,10 @@ function addPortletHTML(url, placeHolder, returnPortlet) {
 
 		portletBoundary = portletBound;
 
+		if (onComplete) {
+			onComplete(portletBoundary, portletId);
+		}
+
 		var jContainer = jQuery(container);
 
 		if (jContainer.is('.empty')) {
@@ -91,26 +86,24 @@ function addPortletHTML(url, placeHolder, returnPortlet) {
 		return portletId;
 	};
 
-	var complete = function(xHR) {
-		addPortletReturn(xHR.responseText);
+	if (beforePortletLoaded) {
+		beforePortletLoaded(placeHolder);
 	}
 
 	jQuery.ajax(
 		{
 			url: url,
 			complete: function(xHR) {
-				complete(xHR);
-			},
-			async: !returnPortlet
+				addPortletReturn(xHR.responseText);
+			}
 		}
 	);
-
-	return portletBoundary;
 }
 
 function closePortlet(plid, portletId, doAsUserId, skipConfirm) {
 	if (skipConfirm || confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-remove-this-component") %>')) {
 		var curItem = document.getElementById("p_p_id_" + portletId + "_");
+		var column = jQuery(curItem).parents('.lfr-portlet-column');
 		var parent = curItem.parentNode;
 
 		parent.removeChild(curItem);
@@ -129,7 +122,24 @@ function closePortlet(plid, portletId, doAsUserId, skipConfirm) {
 			location.href = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.DELETE %>&referer=" + encodeURIComponent("<%= themeDisplay.getPathMain() %>/portal/layout?p_l_id=" + plid + "&doAsUserId=" + doAsUserId) + "&refresh=1";
 		}
 		else {
-			loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.DELETE %>");
+			var url = '<%= themeDisplay.getPathMain() %>/portal/update_layout';
+
+			jQuery.ajax(
+				{
+					url: url,
+					data: {
+						p_l_id: plid,
+						p_p_id: portletId,
+						doAsUserId: doAsUserId,
+						'<%= Constants.CMD %>': '<%= Constants.DELETE %>'
+					}
+				}
+			);
+
+			var portletsLeft = column.find('.portlet-boundary').length;
+			if (!portletsLeft) {
+				column.addClass('empty');
+			}
 		}
 
 		Liferay.Portlet.remove(portletId);
@@ -163,23 +173,45 @@ function minimizePortlet(plid, portletId, restore, doAsUserId) {
 		var html = buttonsEl.html();
 
 		if (restore) {
-			portletContentContainer.BlindDown('fast');
+			portletContentContainer.show(
+				'blind',
+				{
+					direction: 'vertical'
+				},
+				'fast'
+			);
 
 			html = html.replace(", true", ", false");
 			html = html.replace("restore.png", "minimize.png");
 			html = html.replace("<liferay-ui:message key="restore" />", "<liferay-ui:message key="minimize" />");
-
-			loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_restore=" + restore + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=minimize");
 		}
 		else {
-			portletContentContainer.BlindUp('fast');
+			portletContentContainer.hide(
+				'blind',
+				{
+					direction: 'vertical'
+				},
+				'fast'
+			);
 
 			html = html.replace(", false", ", true");
 			html = html.replace("minimize.png", "restore.png");
 			html = html.replace("<liferay-ui:message key="minimize" />", "<liferay-ui:message key="restore" />");
 
-			loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_restore=" + restore + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=minimize");
 		}
+
+		jQuery.ajax(
+			{
+				url: '<%= themeDisplay.getPathMain() %>/portal/update_layout',
+				data: {
+					p_l_id: plid,
+					p_p_id: portletId,
+					p_p_restore: restore,
+					doAsUserId: doAsUserId,
+					'<%= Constants.CMD %>': 'minimize'
+				}
+			}
+		);
 
 		buttonsEl.html(html);
 	}

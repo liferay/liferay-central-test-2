@@ -122,13 +122,26 @@ String currentURL = PortalUtil.getCurrentURL(request);
 
 		<script type="text/javascript">
 			function <%= portletDisplay.getNamespace() %>refreshPortlet() {
-				jQuery("#p_p_id<%= portletDisplay.getNamespace() %>").empty().append('<div class="loading-animation" id="p_load<%= portletDisplay.getNamespace() %>"></div>');
-				addPortletHTML("<%= url.toString() %>", jQuery("#p_load<%= portletDisplay.getNamespace() %>")[0]);
+				var ns = '<%= portletDisplay.getNamespace() %>';
+				jQuery('#p_p_id' + ns).empty().append('<div class="loading-animation" id="p_load' + ns + '"></div>');
+
+				addPortletHTML(
+					{
+						url: '<%= url.toString() %>',
+						placeHolder: jQuery('#p_load' + ns + '')[0]
+					}
+				);
 			}
 
 			jQuery(window).load(
 				function () {
-					addPortletHTML("<%= url.toString() %>", jQuery("#p_load<%= portletDisplay.getNamespace() %>")[0]);
+					var ns = '<%= portletDisplay.getNamespace() %>'
+					addPortletHTML(
+						{
+							url: '<%= url.toString() %>',
+							placeHolder: jQuery('#p_load' + ns + '')[0]
+						}
+					);
 				}
 			);
 		</script>

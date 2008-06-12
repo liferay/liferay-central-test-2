@@ -50,7 +50,7 @@ type = ParamUtil.getString(request, "type", type);
 
 <script type="text/javascript">
 	function <portlet:namespace />save() {
-		AjaxUtil.submit(document.<portlet:namespace />fm1);
+		jQuery('#fm1').ajaxSubmit();
 	}
 
 	function <portlet:namespace />selectArticle(articleId) {
@@ -60,7 +60,7 @@ type = ParamUtil.getString(request, "type", type);
 	}
 </script>
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm1">
+<form action="<liferay-portlet:actionURL portletConfiguration="true" />" id="<portlet:namespace />fm1" method="post" name="<portlet:namespace />fm1">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>" />
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />

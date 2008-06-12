@@ -48,5 +48,5 @@ if (Validator.isNull(width)) {
 </div>
 
 <script type="text/javascript">
-	Element.disable("<%= randomNamespace %>");
+	Liferay.Util.disableElements("#<%= randomNamespace %>");
 </script>

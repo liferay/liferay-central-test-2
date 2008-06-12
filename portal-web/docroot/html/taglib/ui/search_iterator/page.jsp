@@ -56,163 +56,82 @@ if (rowChecker != null) {
 		</div>
 	</c:if>
 
-	<table class="taglib-search-iterator">
-	<tr class="portlet-section-header">
+	<div class="results-grid">
+		<table class="taglib-search-iterator">
+		<tr class="portlet-section-header results-header">
 
-	<%
-	for (int i = 0; (headerNames != null) && (i < headerNames.size()); i++) {
-		String headerName = (String)headerNames.get(i);
+		<%
+		for (int i = 0; (headerNames != null) && (i < headerNames.size()); i++) {
+			String headerName = (String)headerNames.get(i);
 
-		String orderKey = null;
-		String orderByType = null;
-		boolean orderCurrentHeader = false;
+			String orderKey = null;
+			String orderByType = null;
+			boolean orderCurrentHeader = false;
 
-		if (orderableHeaders != null) {
-			orderKey = (String)orderableHeaders.get(headerName);
+			if (orderableHeaders != null) {
+				orderKey = (String)orderableHeaders.get(headerName);
 
-			if (orderKey != null) {
-				orderByType = searchContainer.getOrderByType();
+				if (orderKey != null) {
+					orderByType = searchContainer.getOrderByType();
 
-				if (orderKey.equals(searchContainer.getOrderByCol())) {
-					orderCurrentHeader = true;
+					if (orderKey.equals(searchContainer.getOrderByCol())) {
+						orderCurrentHeader = true;
+					}
 				}
 			}
-		}
 
-		if (orderCurrentHeader) {
-			if (orderByType.equals("asc")) {
-				orderByType = "desc";
+			if (orderCurrentHeader) {
+				if (orderByType.equals("asc")) {
+					orderByType = "desc";
+				}
+				else {
+					orderByType = "asc";
+				}
 			}
-			else {
-				orderByType = "asc";
-			}
-		}
-	%>
-
-		<th class="col-<%= i + 1 %>"
-
-			<%--
-
-			// Maximize the width of the second column if and only if the first
-			// column is a row checker and there is only one second column.
-
-			--%>
-
-			<c:if test="<%= (rowChecker != null) && (headerNames.size() == 2) && (i == 1) %>">
-				width="95%"
-			</c:if>
-		>
-			<c:if test="<%= orderKey != null %>">
-				<a href="<%= searchContainer.getIteratorURL().toString() %>&<%= namespace %>orderByCol=<%= orderKey %>&<%= namespace %>orderByType=<%= orderByType %>">
-			</c:if>
-
-			<c:if test="<%= orderCurrentHeader %>">
-				<i>
-			</c:if>
-
-			<%
-			String headerNameValue = LanguageUtil.get(pageContext, headerName);
-			%>
-
-			<c:choose>
-				<c:when test="<%= headerNameValue.equals(StringPool.BLANK) %>">
-					<%= StringPool.NBSP %>
-				</c:when>
-				<c:otherwise>
-					<%= headerNameValue %>
-				</c:otherwise>
-			</c:choose>
-
-			<c:if test="<%= orderCurrentHeader %>">
-				</i>
-			</c:if>
-
-			<c:if test="<%= orderKey != null %>">
-				</a>
-			</c:if>
-		</th>
-
-	<%
-	}
-	%>
-
-	</tr>
-
-	<c:if test="<%= (headerNames != null) && (resultRows.size() == 0) && (emptyResultsMessage != null) %>">
-		<tr class="portlet-section-body">
-			<td align="center" colspan="<%= headerNames.size() %>">
-				<%= LanguageUtil.get(pageContext, emptyResultsMessage) %>
-			</td>
-		</tr>
-	</c:if>
-
-	<%
-	boolean allRowsIsChecked = true;
-
-	for (int i = 0; i < resultRows.size(); i++) {
-		ResultRow row = (ResultRow)resultRows.get(i);
-
-		String className = "portlet-section-alternate";
-		String classHoverName = "portlet-section-alternate-hover";
-
-		if (MathUtil.isEven(i)) {
-			className = "portlet-section-body";
-			classHoverName = "portlet-section-body-hover";
-		}
-
-		if (Validator.isNotNull(row.getClassName())) {
-			className += " " + row.getClassName();
-		}
-
-		if (Validator.isNotNull(row.getClassHoverName())) {
-			classHoverName += " " + row.getClassHoverName();
-		}
-
-		if (row.isRestricted()) {
-			className += " restricted";
-			classHoverName += " restricted";
-		}
-
-		row.setClassName(className);
-		row.setClassHoverName(classHoverName);
-
-		request.setAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW, row);
-
-		List entries = row.getEntries();
-
-		if (rowChecker != null) {
-			boolean rowIsChecked = rowChecker.isChecked(row.getObject());
-
-			if (!rowIsChecked) {
-				allRowsIsChecked = false;
-			}
-
-			row.addText(0, rowChecker.getAlign(), rowChecker.getValign(), rowChecker.getColspan(), rowChecker.getRowCheckBox(rowIsChecked, row.getPrimaryKey()));
-		}
-	%>
-
-		<tr class="<%= className %>"
-			<c:if test="<%= searchContainer.isHover() %>">
-				onmouseover="this.className = '<%= classHoverName %>';" onmouseout="this.className = '<%= className %>';"
-			</c:if>
-		>
-
-		<%
-		for (int j = 0; j < entries.size(); j++) {
-			SearchEntry entry = (SearchEntry)entries.get(j);
-
-			entry.setIndex(j);
-
-			request.setAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW_ENTRY, entry);
 		%>
 
-			<td align="<%= entry.getAlign() %>" class="col-<%= j + 1 %><%= row.isBold() ? " taglib-search-iterator-highlighted" : "" %>" colspan="<%= entry.getColspan() %>" valign="<%= entry.getValign() %>">
+			<th class="col-<%= i + 1 %>"
+
+				<%--
+
+				// Maximize the width of the second column if and only if the first
+				// column is a row checker and there is only one second column.
+
+				--%>
+
+				<c:if test="<%= (rowChecker != null) && (headerNames.size() == 2) && (i == 1) %>">
+					width="95%"
+				</c:if>
+			>
+				<c:if test="<%= orderKey != null %>">
+					<a href="<%= searchContainer.getIteratorURL().toString() %>&<%= namespace %>orderByCol=<%= orderKey %>&<%= namespace %>orderByType=<%= orderByType %>">
+				</c:if>
+
+				<c:if test="<%= orderCurrentHeader %>">
+					<i>
+				</c:if>
 
 				<%
-				entry.print(pageContext);
+				String headerNameValue = LanguageUtil.get(pageContext, headerName);
 				%>
 
-			</td>
+				<c:choose>
+					<c:when test="<%= headerNameValue.equals(StringPool.BLANK) %>">
+						<%= StringPool.NBSP %>
+					</c:when>
+					<c:otherwise>
+						<%= headerNameValue %>
+					</c:otherwise>
+				</c:choose>
+
+				<c:if test="<%= orderCurrentHeader %>">
+					</i>
+				</c:if>
+
+				<c:if test="<%= orderKey != null %>">
+					</a>
+				</c:if>
+			</th>
 
 		<%
 		}
@@ -220,11 +139,94 @@ if (rowChecker != null) {
 
 		</tr>
 
-	<%
-	}
-	%>
+		<c:if test="<%= (headerNames != null) && (resultRows.size() == 0) && (emptyResultsMessage != null) %>">
+			<tr class="portlet-section-body results-row">
+				<td align="center" colspan="<%= headerNames.size() %>">
+					<%= LanguageUtil.get(pageContext, emptyResultsMessage) %>
+				</td>
+			</tr>
+		</c:if>
 
-	</table>
+		<%
+		boolean allRowsIsChecked = true;
+
+		for (int i = 0; i < resultRows.size(); i++) {
+			ResultRow row = (ResultRow)resultRows.get(i);
+
+			String className = "portlet-section-alternate results-row alt";
+			String classHoverName = "portlet-section-alternate-hover results-row alt hover";
+
+			if (MathUtil.isEven(i)) {
+				className = "portlet-section-body results-row";
+				classHoverName = "portlet-section-body-hover results-row hover";
+			}
+
+			if (Validator.isNotNull(row.getClassName())) {
+				className += " " + row.getClassName();
+			}
+
+			if (Validator.isNotNull(row.getClassHoverName())) {
+				classHoverName += " " + row.getClassHoverName();
+			}
+
+			if (row.isRestricted()) {
+				className += " restricted";
+				classHoverName += " restricted";
+			}
+
+			row.setClassName(className);
+			row.setClassHoverName(classHoverName);
+
+			request.setAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW, row);
+
+			List entries = row.getEntries();
+
+			if (rowChecker != null) {
+				boolean rowIsChecked = rowChecker.isChecked(row.getObject());
+
+				if (!rowIsChecked) {
+					allRowsIsChecked = false;
+				}
+
+				row.addText(0, rowChecker.getAlign(), rowChecker.getValign(), rowChecker.getColspan(), rowChecker.getRowCheckBox(rowIsChecked, row.getPrimaryKey()));
+			}
+		%>
+
+			<tr class="<%= className %>"
+				<c:if test="<%= searchContainer.isHover() %>">
+					onmouseover="this.className = '<%= classHoverName %>';" onmouseout="this.className = '<%= className %>';"
+				</c:if>
+			>
+
+			<%
+			for (int j = 0; j < entries.size(); j++) {
+				SearchEntry entry = (SearchEntry)entries.get(j);
+
+				entry.setIndex(j);
+
+				request.setAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW_ENTRY, entry);
+			%>
+
+				<td align="<%= entry.getAlign() %>" class="col-<%= j + 1 %><%= row.isBold() ? " taglib-search-iterator-highlighted" : "" %>" colspan="<%= entry.getColspan() %>" valign="<%= entry.getValign() %>">
+
+					<%
+					entry.print(pageContext);
+					%>
+
+				</td>
+
+			<%
+			}
+			%>
+
+			</tr>
+
+		<%
+		}
+		%>
+
+		</table>
+	</div>	
 
 	<c:if test="<%= (resultRows.size() > 10) && paginate %>">
 		<div class="taglib-search-iterator-page-iterator-bottom">

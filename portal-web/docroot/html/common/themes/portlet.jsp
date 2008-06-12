@@ -137,9 +137,7 @@ containerStyles = sm.toString();
 				</liferay-theme:wrap-portlet>
 
 				<c:if test="<%= freeformPortlet && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
-					<div class="portlet-decorate-resize-container">
-						<div class="portlet-resize-handle"></div>
-					</div>
+					<div class="ui-resizable-handle ui-resizable-se"></div>
 				</c:if>
 			</c:when>
 			<c:otherwise>

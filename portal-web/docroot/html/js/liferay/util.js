@@ -56,13 +56,17 @@ Liferay.Util = {
 		inputs.focus(
 			function(event) {
 				jQuery(this).addClass('focus');
+				var value = this.value;
+				var caretPos = value.length;
 
 				if (this.createTextRange && (this.nodeName.toLowerCase() !== 'textarea')) {
-					var value = this.value;
 					var textRange = this.createTextRange();
 
-					textRange.moveStart('character', value.length);
-					textRange.select();
+					textRange.moveStart('character', caretPos);
+				}
+				else if (this.selectionStart) {
+					this.selectionStart = caretPos;
+					this.selectionEnd = caretPos;
 				}
 			}
 		);
@@ -248,9 +252,83 @@ Liferay.Util = {
 		);
 	},
 
+	disableElements: function(obj) {
+		var el = jQuery(obj);
+		var children = el.find('*');
+
+		var emptyFn = function() { return false; };
+
+		var defaultEvents = function(el) {
+			el.onclick = emptyFn;
+			el.onmouseover = emptyFn;
+			el.onmouseout = emptyFn;
+			jQuery.event.remove(el);
+		};
+
+		var ieEvents = function(el) {
+			el.onmouseenter = emptyFn;
+			el.onmouseleave = emptyFn;
+		};
+
+		var removeEvents = defaultEvents;
+
+		if (Liferay.Browser.is_ie) {
+			removeEvents = function(el){
+				defaultEvents(el);
+				ieEvents(el);
+			};
+		}
+
+		for (var i = children.length - 1; i >= 0; i--){
+			var item = children[i];
+			var nodeName = item.nodeName.toLowerCase();
+
+			item.style.cursor = 'default';
+
+			removeEvents(item);
+
+			if (nodeName == 'a') {
+				item.href = 'javascript: ;';
+			}
+			else if (nodeName == 'input' || nodeName == 'select' || nodeName == 'script') {
+				item.disabled = true;
+			}
+			else if (nodeName == 'form') {
+				item.action = '';
+				item.onsubmit = emptyFn;
+			}
+		};
+	},
+
 	disableEsc: function() {
 		if ((document.all) && (event.keyCode == 27)) {
 			event.returnValue = false;
+		}
+	},
+
+	disableTextareaTabs: function(textarea) {
+		var instance = this;
+
+		if (!textarea.jquery) {
+			textarea = jQuery(textarea);
+		}
+		
+		if (textarea.attr('textareatabs') != 'enabled') {
+			textarea.attr('textareatabs', 'disabled');
+			textarea.unbind('keydown', Liferay.Util.textareaTabs);
+		}
+	},
+
+	enableTextareaTabs: function(textarea) {
+		var instance = this;
+
+		if (!textarea.jquery) {
+			textarea = jQuery(textarea);
+		}
+		
+		if (textarea.attr('textareatabs') != 'enabled') {
+			textarea.attr('textareatabs', 'enabled');
+			textarea.keydown(Liferay.Util.textareaTabs);
 		}
 	},
 
@@ -273,8 +351,9 @@ Liferay.Util = {
 		);
 	},
 
-	focusFormField: function(el) {
+	focusFormField: function(el, caretPosition) {
 		var interacting = false;
+		var eventData = caretPosition ? [caretPosition] : null;
 
 		jQuery(document).one(
 			'click',
@@ -290,10 +369,24 @@ Liferay.Util = {
 
 					jQuery('input').trigger('blur');
 
-					elObj.trigger('focus');
+					elObj.trigger('focus', eventData);
 				}
 			}
 		);
+	},
+
+	getColumnId: function(str) {
+		var columnId = str.replace(/layout-column_/, '');
+		
+		return columnId;
+	},
+
+	getPortletId: function(str) {
+		var portletId = str;
+		portletId = portletId.replace(/^p_p_id_/i, '');
+		portletId = portletId.replace(/_$/, '');
+		
+		return portletId;
 	},
 
 	getSelectedIndex: function(col) {
@@ -382,12 +475,26 @@ Liferay.Util = {
 			editorButton.click(
 				function(event) {
 					if (!clicked) {
+						var form = jQuery([]);
 						var popup = Liferay.Popup(
 							{
 								height: 640,
 								width: 680,
 								noCenter: true,
 								title: '',
+								resize: function(e, ui) {
+									var cssData = ui.size;
+									var dimensions = {};
+									if (cssData.height) {
+										dimensions.height = cssData.height - 130;
+									}
+									if (cssData.width) {
+										dimensions.width = cssData.width - 20;
+									}
+
+									form.css(dimensions);
+									jQuery(document).trigger('popupResize');
+								},
 								onClose: function() {
 									jQuery(document).unbind('popupResize');
 									clicked = false;
@@ -395,60 +502,21 @@ Liferay.Util = {
 							}
 						);
 
-						var jPopup = jQuery(popup);
-						var resizeDiv = '<div class="portlet-resize-handle"></div>';
-
 						jQuery.ajax(
 							{
 								url: url + '&rt=' + Liferay.Util.randomInt(),
 								success: function(message) {
-									jPopup.find('.loading-animation').remove();
-									jPopup.append(message);
-									jPopup.after(resizeDiv);
+									popup.find('.loading-animation').remove();
 
-									var form = jPopup.find('form');
+									popup.append(message);
 
-									form.css(
-										{
-											height: 340,
-											width: 680
-										}
-									);
+									form = popup.find('form');
 
 									if (textarea) {
-										var usingPlainEditor = jPopup.find('.lfr-textarea').length;
+										var usingPlainEditor = popup.find('.lfr-textarea').length;
 
 										Liferay.Util.resizeTextarea(textarea, !usingPlainEditor, true);
 									}
-
-									var handle = jQuery('.portlet-resize-handle')[0];
-
-									var mainPopup = jPopup.parents('.popup:first');
-
-									mainPopup.lResize(
-										{
-											direction: 'horizontal',
-											handle: handle,
-											mode: 'add',
-											onMove: function(settings) {
-												form.css(
-													{
-														height: settings.browserEvent.clientY - 130,
-														width: settings.browserEvent.clientX - 30
-													}
-												);
-												jQuery(document).trigger('popupResize');
-											}
-										}
-									);
-
-									mainPopup.lResize(
-										{
-											handle: handle,
-											direction: "vertical",
-											mode: "add"
-										}
-									);
 								}
 							}
 						);
@@ -575,8 +643,6 @@ Liferay.Util = {
 						);
 					}
 
-					obj[0]._LFR_noDrag = null;
-
 					return cruft + value;
 				},
 				{
@@ -593,7 +659,6 @@ Liferay.Util = {
 
 						value = value.replace(re, '');
 						settings._LFR_.oldText = value;
-						obj[0]._LFR_noDrag = true;
 
 						return value;
 					},
@@ -694,7 +759,7 @@ Liferay.Util = {
 				var pageBody;
 
 				if (resizeToInlinePopup) {
-					pageBody = el.parents('.popup:first');
+					pageBody = el.parents('.ui-dialog:first');
 				}
 				else {
 					pageBody = jQuery('body');
@@ -717,7 +782,7 @@ Liferay.Util = {
 						}
 					}
 
-					var diff = 150;
+					var diff = 170;
 
 					if (!resizeToInlinePopup) {
 						diff = 100;
@@ -898,7 +963,7 @@ Liferay.Util = {
 				popup = jQuery(popup);
 			}
 
-			var popupMessage = popup.find('.popup-message');
+			var popupMessage = popup;
 
 			jQuery.ajax(
 				{
@@ -920,6 +985,38 @@ Liferay.Util = {
 				}
 			);
 		}
+	},
+
+	textareaTabs: function(event) {
+		var el = this;
+		var pressedKey = event.which;
+
+		if(pressedKey == 9 || (Liferay.Browser.is_safari && pressedKey == 25)) {
+			event.preventDefault();
+			event.stopPropagation();
+
+			var oldscroll = el.scrollTop;
+
+			if (el.setSelectionRange) {
+				var caretPos = el.selectionStart + 1;
+				var elValue = el.value;
+
+				el.value = elValue.substring(0, el.selectionStart) + '\t' + elValue.substring(el.selectionEnd, elValue.length);
+
+				setTimeout(
+					function() {
+						el.focus();
+						el.setSelectionRange(caretPos, caretPos);
+					}, 0);
+
+			} else {
+				document.selection.createRange().text='\t';
+			}
+
+	        el.scrollTop = oldscroll;
+
+			return false;
+	    }
 	},
 
 	toggleByIdSpan: function(obj, id) {
@@ -984,7 +1081,14 @@ Liferay.Util = {
 
 				Liferay._editControlsState = (docBody.is('.' + visibleClass) ? 'visible' : 'hidden');
 
-				loadPage(mainPath + "/portal/session_click", "liferay_toggle_controls=" + Liferay._editControlsState);
+				jQuery.ajax(
+					{
+						url: themeDisplay.getPathMain() + '/portal/session_click',
+						data: {
+							'liferay_toggle_controls': Liferay._editControlsState
+						}
+					}
+				);
 			}
 		);
 	},
@@ -1021,113 +1125,37 @@ Liferay.Util = {
 		}
 
 		return rt;
-	}
-};
+	},
 
-Element = {};
+	viewport: {
+		frame: function() {
+			var instance = this;
+			var viewport = jQuery(window);
 
-Element.disable = function(element) {
-	element = jQuery.getOne(element);
+			var x = viewport.width();
+			var y = viewport.height();
+			
+			return {x: x, y: y};
+		},
+		page: function() {
+			var instance = this;
+			var viewport = jQuery(document);
 
-	var items = element.getElementsByTagName("*");
+			var x = viewport.width();
+			var y = viewport.height();
+			
+			return {x: x, y: y};
+		},
+		scroll: function() {
+			var instance = this;
+			var viewport = jQuery(window);
 
-	for (var i = 0; i < items.length; i++) {
-		var item = items[i];
-		var nodeName = item.nodeName.toLowerCase();
-
-		item.onclick = function() {};
-		item.onmouseover = function() {};
-		item.onmouseout = function() {};
-
-		if (Liferay.Browser.is_ie) {
-			item.onmouseenter = function() {};
-			item.onmouseleave = function() {};
-		}
-
-		if (nodeName == "a") {
-			item.href = "javascript: void(0)";
-		}
-		else if (nodeName == "input" || nodeName == "select" || nodeName == "script") {
-			item.disabled = "true";
-		}
-		else if (nodeName == "form") {
-			item.action = "";
-			item.onsubmit = function() { return false; };
-		}
-
-		item.style.cursor = "default";
-	}
-};
-
-Element.remove = function(id) {
-	var obj = jQuery.getOne(id);
-
-	obj.parentNode.removeChild(obj);
-};
-
-function LinkedList() {
-	this.head = null;
-	this.tail = null;
-}
-
-LinkedList.prototype.add = function(obj) {
-	obj.listInfo = {};
-	var tail = this.tail;
-	var head = this.head;
-
-	if (this.head == null) {
-		this.head = obj;
-		this.tail = obj;
-	}
-	else {
-		this.tail.listInfo.next = obj;
-		obj.listInfo.prev = this.tail;
-		this.tail = obj;
-	}
-
-	obj.listInfo.listObj = this;
-};
-
-LinkedList.prototype.remove = function(obj) {
-	if (obj.listInfo.listObj == this && this.head) {
-		var next = obj.listInfo.next;
-		var prev = obj.listInfo.prev;
-
-		if (next) {
-			next.listInfo.prev = prev;
-		}
-		if (prev) {
-			prev.listInfo.next = next;
-		}
-		if (this.head == obj) {
-			this.head = next;
-		}
-		if (this.tail == obj) {
-			this.tail = prev;
+			var x = viewport.scrollLeft();
+			var y = viewport.scrollTop();
+			
+			return {x: x, y: y};
 		}
 	}
-};
-
-LinkedList.prototype.each = function(func) {
-	var cur = this.head;
-	var count = 0;
-
-	while (cur){
-		count++;
-		var next = cur.listInfo.next;
-
-		if (func) {
-			func(cur);
-		}
-
-		cur = next;
-	}
-
-	return count;
-};
-
-LinkedList.prototype.size = function() {
-	return this.each();
 };
 
 function submitForm(form, action, singleSubmit) {
@@ -1162,72 +1190,6 @@ function submitForm(form, action, singleSubmit) {
 		form.submit();
 	}
 }
-
-var Viewport = {
-	frame: function() {
-		var x,y;
-		if (self.innerHeight) // all except Explorer
-		{
-			x = self.innerWidth;
-			y = self.innerHeight;
-		}
-		else if (document.documentElement && document.documentElement.clientHeight)
-			// Explorer 6 Strict Mode
-		{
-			x = document.documentElement.clientWidth;
-			y = document.documentElement.clientHeight;
-		}
-		else if (document.body) // other Explorers
-		{
-			x = document.body.clientWidth;
-			y = document.body.clientHeight;
-		}
-
-		return (new Coordinate(x,y));
-	},
-
-	scroll: function() {
-		var x,y;
-		if (self.pageYOffset) {
-			// all except Explorer
-			x = self.pageXOffset;
-			y = self.pageYOffset;
-		}
-		else if (document.documentElement && document.documentElement.scrollTop) {
-			// Explorer 6 Strict
-			x = document.documentElement.scrollLeft;
-			y = document.documentElement.scrollTop;
-		}
-		else if (document.body) {
-			// all other Explorers
-			x = document.body.scrollLeft;
-			y = document.body.scrollTop;
-		}
-
-		return (new Coordinate(x,y));
-	},
-
-	page: function() {
-		var x,y;
-		var test1 = document.body.scrollHeight;
-		var test2 = document.body.offsetHeight;
-		if (test1 > test2) // all but Explorer Mac
-		{
-			x = document.body.scrollWidth;
-			y = document.body.scrollHeight;
-		}
-		else // Explorer Mac;
-			//would also work in Explorer 6 Strict, Mozilla and Safari
-		{
-			x = document.body.offsetWidth;
-			y = document.body.offsetHeight;
-		}
-
-		return (new Coordinate(x,y));
-	}
-};
-
-String.prototype.trim = jQuery.trim;
 
 // 0-200: Theme Developer
 // 200-400: Portlet Developer

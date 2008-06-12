@@ -300,8 +300,6 @@ Liferay.Navigation = new Class({
 		var navList = navBlock.find('ul:first');
 
 		if (instance._isSortable) {
-			var floatStyle = navList.find('> li').css('float');
-
 			var items = navList.find('li');
 			var anchors = items.find('a');
 
@@ -315,20 +313,17 @@ Liferay.Navigation = new Class({
 
 			items.addClass('sortable-item');
 
-			instance.sortable = navList.Sortable(
+			instance.sortable = navList.sortable(
 				{
-					accept: 'sortable-item',
-					helperclass: 'sort-helper',
-					activeclass: 'sortableactive',
-					hoverclass: 'sortablehover',
+					items: '.sortable-item',
+					placeholder: 'navigation-sort-helper',
 					handle: (instance._isUseHandle ? '.sort-handle' : 'a'),
 					opacity: 0.8,
-					revert:	true,
-					floats:	(floatStyle == 'left' || floatStyle == 'right'),
+					revert:	false,
 					tolerance: 'pointer',
-					snapDistance: 10,
-					onStop: function() {
-						instance._saveSortables(this);
+					distance: 10,
+					stop: function(event, ui) {
+						instance._saveSortables(ui.item[0]);
 
 						Liferay.Publisher.deliver('navigation', this);
 					}
@@ -454,7 +449,9 @@ Liferay.Navigation = new Class({
 				enterPage.before(newTab);
 				enterPage.remove();
 
-				instance.sortable.SortableAddItem(newNavItem[0]);
+				newNavItem.addClass('sortable-item');
+
+				instance.sortable.sortable('refresh');
 				instance._deleteButton(newNavItem);
 
 				Liferay.Publisher.deliver('navigation', newNavItem);

@@ -1,35 +1,4 @@
-$ = null;
-
-Function.prototype.extendNativeFunctionObject = jQuery.extend;
-
-jQuery.getOne = function(s, context) {
-	var rt;
-
-	if (typeof s == 'object') {
-		rt = s;
-	}
-	else if (typeof s == 'string') {
-		if (s.search(/^[#.]/) == -1) {
-			s = '#' + s;
-		}
-
-		if (context == null) {
-			rt = jQuery(s);
-		}
-		else {
-			rt = jQuery(s, context);
-		}
-
-		if (rt.length > 0) {
-			rt = rt.get(0);
-		}
-		else {
-			rt = null;
-		}
-	}
-
-	return rt;
-};
+jQuery.noConflict();
 
 Liferay = function() {
 	var $ = jQuery;
@@ -38,10 +7,6 @@ Liferay = function() {
 }();
 
 Liferay.Editor = {};
-
-jQuery.fn.getOne = function(s) {
-	return jQuery.getOne(s, this);
-};
 
 if (!Liferay._ajaxOld) {
 	Liferay._ajaxOld = jQuery.ajax;
@@ -271,12 +236,39 @@ Liferay.Base64 = {
 jQuery.fn.exactHeight = jQuery.fn.height;
 jQuery.fn.exactWidth = jQuery.fn.width;
 
-jQuery.each(
-	['height', 'width'],
-	function(i, n) {
-	jQuery.fn[n] = function(h) {
-		return h == undefined ?
-			(this.length ? (n == 'height' ? this[0].offsetHeight : this[0].offsetWidth) : null) :
-			this.css(n, h.constructor == String ? h : h + "px");
+if (!window.String.prototype.trim) {
+	String.prototype.trim = function() {
+		return jQuery.trim(this);
 	};
-});
+}
+
+// Fixing IE's lack of an indexOf/lastIndexOf on an Array
+if (!window.Array.prototype.indexOf) {
+	window.Array.prototype.indexOf = function(item) {
+		for(var i=0; i<this.length; i++){
+            if(this[i]==item){
+                return i;
+            }
+        }
+        return -1;
+	};
+}
+
+if (!window.Array.prototype.lastIndexOf) {
+	window.Array.prototype.lastIndexOf = function(item, fromIndex) {
+		var length = this.length;
+		if (fromIndex == null) {
+			fromIndex = length - 1;
+		}
+		else if (fromIndex < 0) {
+			fromIndex = Math.max(0, length + fromIndex);
+		}
+
+		for (var i = fromIndex; i >= 0; i--) {
+			if (this[i] === item){
+				return i;	
+			}
+		}
+		return -1;
+	};
+}

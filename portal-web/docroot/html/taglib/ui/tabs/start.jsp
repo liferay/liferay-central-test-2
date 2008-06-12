@@ -101,13 +101,14 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 		<c:otherwise>
 			<input name="<%= namespace %><%= param %>TabsScroll" type="hidden" />
 
-			<ul class="tabs">
+			<ul class="tabs ui-tabs">
 		</c:otherwise>
 	</c:choose>
 
 	<%
 	for (int i = 0; i < values.length; i++) {
 		String curURL = (String)request.getAttribute("liferay-ui:tabs:url" + i);
+		String cssClassName = "";
 
 		if (Validator.isNull(curURL)) {
 			if (values.length == 1) {
@@ -138,7 +139,7 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 						curURL += "document." + namespace + formName + "." + namespace + param + ".value = '" + names[i] + "';";
 					}
 
-					curURL += "Tabs.show('" + namespace + param + "', " + namesJS + ", '" + names[i] + "');";
+					curURL += "Liferay.Portal.Tabs.show('" + namespace + param + "', " + namesJS + ", '" + names[i] + "');";
 				}
 			}
 		}
@@ -150,6 +151,18 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 		}
 
 		boolean selected = (values.length == 1) || value.equals(values[i]);
+
+		if (selected) {
+			cssClassName = "current";
+		}
+
+		if (i == 0) {
+			cssClassName += " first";
+		}
+
+		if ((i == values.length - 1) && Validator.isNull(backURL)) {
+			cssClassName += " last";
+		}
 	%>
 
 		<c:choose>
@@ -162,7 +175,7 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 				/>
 			</c:when>
 			<c:otherwise>
-				<li <%= selected ? "class=\"current\"" : "" %> id="<%= namespace %><%= param %><%= values[i] %>TabsId">
+				<li class="<%= cssClassName %>" id="<%= namespace %><%= param %><%= values[i] %>TabsId">
 					<c:choose>
 						<c:when test="<%= Validator.isNotNull(curURL) %>">
 							<a href="<%= curURL %>"
@@ -175,7 +188,6 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 							<span>
 						</c:otherwise>
 					</c:choose>
-
 					<%= LanguageUtil.get(pageContext, names[i]) %>
 
 					<c:choose>
@@ -205,7 +217,7 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 				/>
 			</c:when>
 			<c:otherwise>
-				<li class="toggle">
+				<li class="toggle last">
 					<a href="<%= HtmlUtil.escape(backURL) %>" id="<%= namespace %><%= param %>TabsBack">&laquo; <liferay-ui:message key="back" /></a>
 				</li>
 			</c:otherwise>

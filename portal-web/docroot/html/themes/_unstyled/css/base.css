@@ -32,6 +32,9 @@ body {
 html, body {
 }
 
+body {
+}
+
 body.portal-popup {
 }
 
@@ -129,70 +132,26 @@ body.staging #wrapper {
 #wrapper {
 }
 
+#content-wrapper {
+}
+
 /* ---------- Banner ---------- */
 
 #banner {
 }
 
-#banner .logo {
+#banner h1.logo {
 }
 
 #banner .logo a {
 }
 
-#banner:after {
-}
-
-.ie #banner {
-}
-
 .ie6 #banner .logo {
-}
-
-/* ---------- Drag Indicators ---------- */
-
-#content-wrapper #layout-grid.dragging {
-}
-
-#content-wrapper #layout-grid.dragging .lfr-column {
-}
-
-.drag-indicator {
-}
-
-.drop-area {
-}
-
-.ie .drop-area {
-}
-
-.drop-position-top {
-}
-
-.drop-position-bottom {
 }
 
 /* ---------- Alerts and popups ---------- */
 
 .alert-background {
-}
-
-.popup {
-}
-
-.popup-header {
-}
-
-.popup-title {
-}
-
-.ie6 .popup-title {
-}
-
-.popup-close {
-}
-
-.popup-message {
 }
 
 .popup-alert-notice {
@@ -212,17 +171,6 @@ body.staging #wrapper {
 /* ---------- Portal tool tips ---------- */
 
 .portal-tool-tip {
-}
-
-/* ---------- Autocomplete styles ---------- */
-
-.autocomplete-box {
-}
-
-.ie6 .autocomplete-box {
-}
-
-.autocomplete-selected {
 }
 
 /* ---------- Loading animation ---------- */

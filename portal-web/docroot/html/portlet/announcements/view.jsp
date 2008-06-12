@@ -64,7 +64,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 						jQuery(this).remove();
 
-						entries.eq(entries.length - 2).addClass('last');
+						entries.slice(entries.length - 2).addClass('last');
 					}
 				);
 			}
@@ -213,7 +213,7 @@ portletURL.setParameter("tabs1", tabs1);
 				<liferay-ui:message key="distribution-scope" />
 			</td>
 			<td>
-				<select name="<portlet:namespace />distributionScope" onChange="<portlet:namespace />selectDistributionScope(this.value);">
+				<select id="<portlet:namespace />distributionScope" name="<portlet:namespace />distributionScope" onChange="<portlet:namespace />selectDistributionScope(this.value);">
 					<option value=""></option>
 
 					<c:if test="<%= permissionChecker.isOmniadmin() %>">

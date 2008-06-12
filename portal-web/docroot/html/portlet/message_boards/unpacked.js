@@ -174,7 +174,7 @@ if (!Liferay.Editor.bbCode) {
 				},
 
 				fontColor: {
-					className: 'use-color-picker',
+					className: 'use-colorpicker',
 					text: 'font-color',
 					image: 'message_boards/color.png',
 					groupEnd: true
@@ -420,7 +420,7 @@ if (!Liferay.Editor.bbCode) {
 
 			instance._fontColorInput = jQuery('<input type="hidden" val="" />');
 
-			instance._location.find('.use-color-picker').before(instance._fontColorInput);
+			instance._location.find('.use-colorpicker').before(instance._fontColorInput);
 
 			var colorPicker = new Liferay.ColorPicker(
 				{

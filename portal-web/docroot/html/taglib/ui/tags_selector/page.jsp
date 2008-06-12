@@ -55,16 +55,8 @@ if (curTagsParam != null) {
 
 <input id="<%= namespace %><%= hiddenInput %>" type="hidden" />
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<span id="<%= randomNamespace %>tagsSummary"></span>
-	</td>
-</tr>
-<tr>
-	<td>
-		<nobr>
-			<input id="<%= randomNamespace %>tags" size="15" type="text" />
+		<span class="ui-tags" id="<%= randomNamespace %>tagsSummary"></span>
+			<input class="ui-tags-input" id="<%= randomNamespace %>tags" size="15" type="text" />
 
 			<input disabled id="<%= randomNamespace %>addTag" type="button" value="<liferay-ui:message key="add-tags" />" />
 		</nobr>
@@ -76,9 +68,6 @@ if (curTagsParam != null) {
 		<c:if test="<%= suggestible %>">
 			<input id="<%= randomNamespace %>suggestions" type="button" value="<liferay-ui:message key="suggestions" />" />
 		</c:if>
-	</td>
-</tr>
-</table>
 
 <script type="text/javascript">
 	var <%= randomNamespace %> = null;

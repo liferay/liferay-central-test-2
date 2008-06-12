@@ -58,7 +58,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 
 		row.cells[0].innerHTML = "<input name=\"<portlet:namespace />title\" />";
 		row.cells[1].innerHTML = "<input name=\"<portlet:namespace />url\" style=\"width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;\" />";
-		row.cells[2].innerHTML = "<a href=\"javascript: ;\" onclick=\"Element.remove(this.parentNode.parentNode);\"><img src=\"<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png\" /></a>";
+		row.cells[2].innerHTML = "<a href=\"javascript: ;\" onclick=\"jQuery(this.parentNode.parentNode).remove();\"><img src=\"<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png\" /></a>";
 
 		table.appendChild(row);
 	}
@@ -161,7 +161,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 					<input class="lfr-input-text" name="<portlet:namespace />url" type="text" value="<%= urls[i] %>" />
 				</td>
 				<td>
-					<a href="javascript: ;" onclick="Element.remove(this.parentNode.parentNode);"><img src="<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png" /></a>
+					<a href="javascript: ;" onclick="jQuery(this.parentNode.parentNode).remove();"><img src="<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png" /></a>
 				</td>
 			</tr>
 

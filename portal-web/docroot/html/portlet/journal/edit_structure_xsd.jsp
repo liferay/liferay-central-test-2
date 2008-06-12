@@ -56,7 +56,7 @@ boolean useEditorCodepress = editorType.equals("codepress");
 			{
 				url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure_xsd" /><portlet:param name="editorType" value="<%= newEditorType %>" /></portlet:renderURL>',
 				textarea: '<portlet:namespace />xsdContent',
-				popup: jQuery(document.<portlet:namespace />editorForm).parents('.popup:first')
+				popup: jQuery(document.<portlet:namespace />editorForm).parents('.ui-dialog-content:first')
 			}
 		);
 	}

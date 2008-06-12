@@ -44,6 +44,15 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	list-style: none;
 }
 
+#layout-grid.dragging .lfr-column {
+	overflow: hidden;
+}
+
+#layout-grid.dragging .lfr-portlet-column {
+	padding-bottom: 10000px;
+	margin-bottom: -10000px;
+}
+
 /* ---------- Add content styles ---------- */
 
 .portal-add-content-search {
@@ -89,17 +98,21 @@ response.setContentType(ContentTypes.TEXT_CSS);
 .lfr-add-content.expanded h2, .lfr-add-content .lfr-add-content.expanded h2 {
 	background: url(<%= themeDisplay.getPathThemeImages() %>/arrows/01_minus.png) no-repeat 100% 50%;
 }
+
 .lfr-add-content h2 span {
 	background: url(<%= themeDisplay.getPathThemeImages() %>/add_content/portlet_category.png) no-repeat 0 50%;
 	padding-left: 20px;
 }
+
 .lfr-content-category {
 	padding-left: 10px;
 	padding-top: 3px;
 }
+
 .lfr-content-category.hidden {
 	display: none;
 }
+
 .lfr-content-category.visible {
 	border-bottom: 1px solid #ddd;
 	border-top: 1px solid #ddd;
@@ -108,6 +121,10 @@ response.setContentType(ContentTypes.TEXT_CSS);
 
 .ie6 .lfr-content-category.visible {
 	height: 1%;
+}
+
+.lfr-has-sidebar {
+	padding-left: 270px;
 }
 
 /* ---------- Flyout ---------- */
@@ -234,98 +251,6 @@ response.setContentType(ContentTypes.TEXT_CSS);
 
 #layout_configuration_content {
 	width: 95%;
-}
-
-/* ---------- Color picker ---------- */
-
-.lfr-color-picker {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/color_picker/picker_container_bg.png);
-	font: 11px Arial,Helvetica,sans-serif;
-	height: 192px;
-	position: relative;
-	width: 305px;
-}
-
-.lfr-color {
-	background-color: #F00;
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/color_picker/picker_bg.png);
-	background-position: center;
-	background-repeat: no-repeat;
-	height: 184px;
-	left: 8px;
-	position: absolute;
-	top: 5px;
-	width: 184px;
-}
-
-.lfr-color-indic {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/color_picker/select.png);
-	height: 11px;
-	position: absolute;
-	width: 11px;
-}
-
-.lfr-hue {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/color_picker/hue.png);
-	height: 186px;
-	left: 200px;
-	position: absolute;
-	top: 3px;
-	width: 18px;
-}
-
-.lfr-hue-indic {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/color_picker/color_indic.png);
-	height: 7px;
-	position: absolute;
-	width: 18px;
-}
-
-.lfr-current-color {
-	border: 2px solid #999;
-	height: 60px;
-	position: absolute;
-	right: 10px;
-	top: 38px;
-	width: 60px;
-}
-
-.lfr-color-values {
-	left: 240px;
-	position: absolute;
-	top: 80px;
-}
-
-.lfr-color-values input {
-	font-size: 11px;
-	padding: 1px;
-}
-
-.lfr-old-color {
-	background-color: #fff;
-	height: 50%;
-	position: absolute;
-	top: 50%;
-	width: 100%;
-}
-
-.lfr-rgbR, .lfr-rgbG, .lfr-rgbB {
-	width: 20px;
-}
-
-.lfr-hex {
-	width: 40px;
-}
-
-.lfr-color-picker-close {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/color_picker/close.png);
-	cursor: pointer;
-	height: 30px;
-	position: absolute;
-	right: 5px;
-	text-indent: -9999em;
-	top: 0;
-	width: 30px;
 }
 
 /* ---------- Interactive Dock ---------- */
@@ -811,13 +736,12 @@ li.toggle-expand a {
 .lfr-tag-select-container {
 	height: 300px;
 	position: relative;
-	width: 400px;
 }
 
 .lfr-tag-container {
 	height: 260px;
+	margin-bottom: 1em;
 	overflow: auto;
-	width: 395px;
 }
 
 .lfr-tag-container label {
@@ -884,6 +808,10 @@ li.toggle-expand a {
 
 .popup-alert-notice input, .popup-alert-warning input {
 	vertical-align: middle;
+}
+
+body.lfr-has-sidebar {
+	padding-left: 260px;
 }
 
 /* ---------- Portlets ---------- */

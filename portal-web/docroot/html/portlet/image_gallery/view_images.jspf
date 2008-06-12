@@ -26,11 +26,10 @@
 	var maxDimension = <%= PropsValues.IG_IMAGE_THUMBNAIL_MAX_DIMENSION %>;
 
 	function <portlet:namespace />viewImage(id, name, width, height) {
-		var page = Viewport.page();
-		var frame = Viewport.frame();
+		var page = Liferay.Util.viewport.page();
 
-		var maxWidth = Math.max(Math.min(page.x, frame.x) - 150, maxDimension);
-		var maxHeight = Math.max(Math.min(page.y, frame.y) - 150, maxDimension);
+		var maxWidth = Math.max(page.x - 150, maxDimension);
+		var maxHeight = Math.max(page.y - 150, maxDimension);
 
 		var imgWidth = width;
 		var imgHeight = height;

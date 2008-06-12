@@ -80,7 +80,7 @@ String details = StringPool.BLANK;
 
 if (!label) {
 	if (toolTip) {
-		details = "onmousemove=\"ToolTip.show(event, this, '" + UnicodeLanguageUtil.get(pageContext, message) + "')\"";
+		details = "onmousemove=\"Liferay.Portal.ToolTip.show(event, this, '" + UnicodeLanguageUtil.get(pageContext, message) + "')\"";
 	}
 	else {
 		details = "title=\"" + LanguageUtil.get(pageContext, message) + "\"";

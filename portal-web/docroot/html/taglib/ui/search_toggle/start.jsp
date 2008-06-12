@@ -44,7 +44,14 @@
 			advancedSearchObj.val(false);
 		}
 
-		loadPage(mainPath + "/portal/session_click", "<%= id %>=" + <%= id %>curClickValue);
+		jQuery.ajax(
+			{
+				url: 'portal/session_click',
+				data: {
+					'<%= id %>': <%= id %>curClickValue
+				}
+			}
+		);
 	}
 </script>
 

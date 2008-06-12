@@ -133,7 +133,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 		editEntryNameInput.val(name);
 
-		propertiesTable.find('tr').gt(-1).remove();
+		propertiesTable.find('tr').slice(-1).remove();
 
 		Liferay.Service.Tags.TagsProperty.getProperties(
 			{
@@ -348,7 +348,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 							var tags = searchResultsDiv.find('.tag');
 
-							tags.Draggable(
+							tags.draggable(
 								{
 									zIndex: 1000,
 									ghosting: true,
@@ -357,36 +357,44 @@ Liferay.Portlet.TagsAdmin = new Class({
 								}
 							);
 
-							tags.Droppable(
+							tags.droppable(
 								{
-									accept : 'tag',
-									activeclass: 'drop-zone',
-									hoverclass:	'drop-hover',
-									ondrop:	function (drag) {
-										var from = jQuery(drag).find('a.tag-name');
-										var to = jQuery(this).find('a.tag-name');
+									accept : '.tag',
+									activeClass: 'drop-zone',
+									hoverClass:	'drop-hover',
+									tolerance: 'pointer',
+									drop: function (event, ui) {
+										var draggable = ui.draggable;
+										var droppable = jQuery(this);
 
-										var fromName = from.text();
-										var fromId = from.attr('tagId');
+										var from = draggable.find('a.tag-name');
+										var to = droppable.find('a.tag-name');
 
-										var toName = to.text();
-										var toId = to.attr('tagId');
+										var fromId = draggable.attr('tagId');
+										var toId = droppable.attr('tagId');
+
+										var tagText = {
+											SOURCE: from.text(),
+											DESTINATION: to.text()
+										};
 
 										var mergeText = mergeConfirmation.replace(
 											/\{(SOURCE|DESTINATION)\}/gm,
 											function(completeMatch, match, index, str) {
-												return (match == 'SOURCE') ? fromName : toName;
+												return tagText[match];
 											}
 										);
 
-										if ((drag !== this) && confirm(mergeText)) {
+										if (confirm(mergeText)) {
+											jQuery.data(draggable[0], 'draggable').options.revert = false;
 											Liferay.Service.Tags.TagsEntry.mergeEntries(
 												{
 													fromEntryId: fromId,
 													toEntryId: toId
 												},
 												function() {
-													jQuery(drag).remove();
+													draggable.remove();
+													jQuery('div.tag[@tagId=' + fromId + ']').remove();
 												}
 											);
 										}
@@ -562,31 +570,21 @@ Liferay.Portlet.TagsAdmin = new Class({
 	_searchEntries: function(instance) {
 		var params = instance.params;
 
-		if (instance.showTimer) {
-			clearTimeout(instance.showTimer);
-			instance.showTimer = 0;
-		}
+		var keywordsInput = jQuery('#' + params.keywordsInput);
+		var keywords = '%' + keywordsInput.val() + '%';
 
-		instance.showTimer = setTimeout(
-			function() {
-				var keywordsInput = jQuery('#' + params.keywordsInput);
-				var keywords = '%' + keywordsInput.val() + '%';
+		var searchResultsDiv = jQuery('#' + params.searchResultsDiv);
 
-				var searchResultsDiv = jQuery('#' + params.searchResultsDiv);
+		searchResultsDiv.html('');
 
-				searchResultsDiv.html('');
-
-				Liferay.Service.Tags.TagsProperty.getPropertyValues(
-					{
-						companyId: themeDisplay.getCompanyId(),
-						key: "category"
-					},
-					function(properties) {
-						instance._displayEntries(instance, properties, keywords);
-					}
-				);
+		Liferay.Service.Tags.TagsProperty.getPropertyValues(
+			{
+				companyId: themeDisplay.getCompanyId(),
+				key: "category"
 			},
-			250
+			function(properties) {
+				instance._displayEntries(instance, properties, keywords);
+			}
 		);
 	},
 
