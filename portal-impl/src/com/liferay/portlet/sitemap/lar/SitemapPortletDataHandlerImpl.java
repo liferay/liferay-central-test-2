@@ -72,7 +72,7 @@ public class SitemapPortletDataHandlerImpl implements PortletDataHandler {
 
 	public PortletPreferences importData(
 		PortletDataContext context, String portletId, PortletPreferences prefs,
-		String data)  {
+		String data) {
 
 		return prefs;
 	}
