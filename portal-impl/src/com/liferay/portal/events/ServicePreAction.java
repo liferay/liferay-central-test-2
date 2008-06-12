@@ -41,6 +41,7 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.SafeProperties;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -694,7 +695,7 @@ public class ServicePreAction extends Action {
 		}
 		else if (group.isUserGroup()) {
 			if (GroupPermissionUtil.contains(
-				permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS)) {
+					permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS)) {
 
 				return true;
 			}
@@ -1042,11 +1043,16 @@ public class ServicePreAction extends Action {
 				if (!isViewableCommunity) {
 					layout = null;
 
-					_log.warn(
-						"User " + user.getUserId() + " is not allowed to " +
-							"access the " + (layout.isPrivateLayout()?"private":
-								"public") + " pages of group " +
-									layout.getGroupId());
+					StringMaker sm = new StringMaker();
+
+					sm.append("User ");
+					sm.append(user.getUserId());
+					sm.append(" is not allowed to access the ");
+					sm.append(layout.isPrivateLayout() ? "private": "public");
+					sm.append(" pages of group ");
+					sm.append(layout.getGroupId());
+
+					_log.warn(sm.toString());
 				}
 				else if (isViewableCommunity &&
 						!LayoutPermissionUtil.contains(
