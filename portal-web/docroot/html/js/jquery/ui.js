@@ -1,4 +1,4 @@
-﻿/*
+/*
  * jQuery UI @VERSION
  *
  * Copyright (c) 2008 Paul Bakaus (ui.jquery.com)

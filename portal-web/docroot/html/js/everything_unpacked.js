@@ -5566,7 +5566,7 @@ function generate(el, opts, player) {
 
 })(jQuery);
 
-﻿/*
+/*
  * jQuery UI @VERSION
  *
  * Copyright (c) 2008 Paul Bakaus (ui.jquery.com)
@@ -12935,7 +12935,6 @@ $.extend($.ui.tabs.prototype, {
 });
 
 })(jQuery);
-
 ;(function($) {
 
 	$.fn.extend({
