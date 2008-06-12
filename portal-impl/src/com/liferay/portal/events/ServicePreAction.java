@@ -1041,8 +1041,6 @@ public class ServicePreAction extends Action {
 					permissionChecker);
 
 				if (!isViewableCommunity) {
-					layout = null;
-
 					StringMaker sm = new StringMaker();
 
 					sm.append("User ");
@@ -1053,6 +1051,8 @@ public class ServicePreAction extends Action {
 					sm.append(layout.getGroupId());
 
 					_log.warn(sm.toString());
+
+					layout = null;
 				}
 				else if (isViewableCommunity &&
 						!LayoutPermissionUtil.contains(
