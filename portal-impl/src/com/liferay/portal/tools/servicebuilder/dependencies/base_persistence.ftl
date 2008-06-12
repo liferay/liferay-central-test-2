@@ -3,6 +3,7 @@
 
 package ${basePersistencePackage};
 
+import com.liferay.portal.model.ModelListener;
 import ${springHibernatePackage}.HibernateUtil;
 
 import org.apache.commons.logging.Log;
