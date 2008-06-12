@@ -94,6 +94,7 @@ public class ServiceTestSuite extends TestSuite {
 		// Search Engines
 
 		LuceneSearchEngineUtil.init();
+
 		SearchEngineUtil.init(new IndexSearcherImpl(), new IndexWriterImpl());
 
 		addTestSuite(BookmarksFolderServiceTest.class);
