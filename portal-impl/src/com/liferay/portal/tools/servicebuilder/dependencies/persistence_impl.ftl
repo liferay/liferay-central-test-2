@@ -1885,6 +1885,22 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 		</#if>
 	</#list>
 
+	public void registerListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.add(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
+	public void unregisterListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.remove(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
 	protected void initDao() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(PropsUtil.get("value.object.listener.${packagePath}.model.${entity.name}")));
 
@@ -1916,22 +1932,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 				</#if>
 			</#if>
 		</#list>
-	}
-
-	protected void registerListener(ModelListener listener) {
-		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
-
-		listeners.add(listener);
-
-		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
-	}
-
-	protected void unregisterListener(ModelListener listener) {
-		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
-
-		listeners.remove(listener);
-
-		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
 	}
 
 	<#list entity.columnList as column>
