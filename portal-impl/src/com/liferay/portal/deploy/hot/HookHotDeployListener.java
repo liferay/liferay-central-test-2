@@ -23,6 +23,7 @@
 package com.liferay.portal.deploy.hot;
 
 import com.liferay.portal.events.EventsProcessor;
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.events.Action;
@@ -30,8 +31,10 @@ import com.liferay.portal.kernel.events.InvokerAction;
 import com.liferay.portal.kernel.events.InvokerSimpleAction;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.InvokerModelListener;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsUtil;
@@ -129,19 +132,20 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 				"model-listener-class");
 			String modelName = modelListenerEl.elementText("model-name");
 
-			Object obj = initModelListener(
+			ModelListener modelListener = initModelListener(
 				modelListenerClass, modelName, portletClassLoader);
 
-			if (obj != null) {
-				List<Object> modelListeners = _modelListenersMap.get(modelName);
+			if (modelListener != null) {
+				List<ModelListener> modelListeners = _modelListenersMap.get(
+					modelName);
 
 				if (modelListeners == null) {
-					modelListeners = new ArrayList<Object>();
+					modelListeners = new ArrayList<ModelListener>();
 
 					_modelListenersMap.put(modelName, modelListeners);
 				}
 
-				modelListeners.add(obj);
+				modelListeners.add(modelListener);
 			}
 		}
 
@@ -169,13 +173,16 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			}
 		}
 
-		for (Map.Entry<String, List<Object>> entry :
+		for (Map.Entry<String, List<ModelListener>> entry :
 				_modelListenersMap.entrySet()) {
 
 			String modelName = entry.getKey();
-			List<Object> modelListeners = entry.getValue();
+			List<ModelListener> modelListeners = entry.getValue();
 
-			for (Object modelListener : modelListeners) {
+			BasePersistence persistence = getPersistence(modelName);
+
+			for (ModelListener modelListener : modelListeners) {
+				persistence.unregisterListener(modelListener);
 			}
 		}
 
@@ -184,6 +191,20 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 				"Hook for " + servletContextName +
 					" unregistered successfully");
 		}
+	}
+
+	protected BasePersistence getPersistence(String modelName) {
+		int pos = modelName.lastIndexOf(StringPool.PERIOD);
+
+		String entityName = modelName.substring(pos + 1);
+
+		pos = modelName.lastIndexOf(".model.");
+
+		String packagePath = modelName.substring(0, pos);
+
+		return (BasePersistence)BeanLocatorUtil.locate(
+			packagePath + ".service.persistence." + entityName +
+				"Persistence.impl");
 	}
 
 	protected Object initEvent(
@@ -225,16 +246,22 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			ClassLoader portletClassLoader)
 		throws Exception {
 
-		return new InvokerModelListener(
+		InvokerModelListener modelListener = new InvokerModelListener(
 			(ModelListener)portletClassLoader.loadClass(
 				modelListenerClass).newInstance());
+
+		BasePersistence persistence = getPersistence(modelName);
+
+		persistence.registerListener(modelListener);
+
+		return modelListener;
 	}
 
 	private static Log _log = LogFactory.getLog(HookHotDeployListener.class);
 
 	private Map<String, List<Object>> _eventsMap =
 		new HashMap<String, List<Object>>();
-	private Map<String, List<Object>> _modelListenersMap =
-		new HashMap<String, List<Object>>();
+	private Map<String, List<ModelListener>> _modelListenersMap =
+		new HashMap<String, List<ModelListener>>();
 
 }

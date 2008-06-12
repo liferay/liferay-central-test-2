@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import org.apache.commons.logging.Log;
@@ -42,11 +43,13 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
  * @author Brian Wing Shun Chan
  *
  */
-public class BasePersistence extends JdbcDaoSupport {
+public abstract class BasePersistence extends JdbcDaoSupport {
 
 	public SessionFactory getSessionFactory() {
 		return _sessionFactory;
 	}
+
+	public abstract void registerListener(ModelListener listener);
 
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		_sessionFactory = (SessionFactoryImplementor)sessionFactory;
@@ -61,12 +64,14 @@ public class BasePersistence extends JdbcDaoSupport {
 		}
 	}
 
-	protected Dialect getDialect() {
-		return _dialect;
+	public abstract void unregisterListener(ModelListener listener);
+
+	protected void closeSession(Session session) {
+		HibernateUtil.closeSession(session);
 	}
 
-	public void closeSession(Session session) {
-		HibernateUtil.closeSession(session);
+	protected Dialect getDialect() {
+		return _dialect;
 	}
 
 	protected Session openSession() throws HibernateException {
