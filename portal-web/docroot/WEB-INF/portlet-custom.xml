@@ -39,50 +39,6 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>4</portlet-name>
-		<display-name>Weather</display-name>
-		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
-		<init-param>
-			<name>edit-action</name>
-			<value>/weather/edit</value>
-		</init-param>
-		<init-param>
-			<name>edit-guest-action</name>
-			<value>/weather/edit</value>
-		</init-param>
-		<init-param>
-			<name>view-action</name>
-			<value>/weather/view</value>
-		</init-param>
-		<expiration-cache>300</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-			<portlet-mode>edit</portlet-mode>
-			<portlet-mode>edit_guest</portlet-mode>
-		</supports>
-		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<portlet-preferences>
-			<preference>
-				<name>zips</name>
-				<value>90210</value>
-				<value>Chicago</value>
-				<value>Frankfurt, Germany</value>
-				<value>Rome, Italy</value>
-			</preference>
-			<preference>
-				<name>fahrenheit</name>
-				<value>true</value>
-			</preference>
-			<preferences-validator>com.liferay.portlet.weather.WeatherPreferencesValidator</preferences-validator>
-		</portlet-preferences>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
-	</portlet>
-	<portlet>
 		<portlet-name>5</portlet-name>
 		<display-name>News</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
