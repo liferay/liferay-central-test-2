@@ -79,7 +79,6 @@ import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.util.LocalizationUtil;
 import com.liferay.util.MathUtil;
-import com.liferay.util.search.QueryImpl;
 
 import java.io.File;
 import java.io.IOException;
@@ -1444,7 +1443,7 @@ public class JournalArticleLocalServiceImpl
 			Sort sort = new Sort(sortField, true);
 
 			return SearchEngineUtil.search(
-				companyId, new QueryImpl(fullQuery), sort, start, end);
+				companyId, fullQuery.toString(), sort, start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

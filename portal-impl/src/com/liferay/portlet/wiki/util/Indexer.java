@@ -34,7 +34,6 @@ import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.util.search.DocumentImpl;
-import com.liferay.util.search.QueryImpl;
 
 import javax.portlet.PortletURL;
 
@@ -85,7 +84,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		LuceneUtil.addRequiredTerm(booleanQuery, "nodeId", nodeId);
 
 		Hits hits = SearchEngineUtil.search(
-			companyId, new QueryImpl(booleanQuery),
+			companyId, booleanQuery.toString(),
 			SearchEngineUtil.ALL_POS, SearchEngineUtil.ALL_POS);
 
 		for (int i = 0; i < hits.getLength(); i++) {

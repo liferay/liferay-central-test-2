@@ -24,50 +24,49 @@ package com.liferay.portal.search;
 
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.search.Document;
-import com.liferay.portal.kernel.search.IndexWriter;
+import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.IndexSearcher;
 import com.liferay.portal.kernel.search.SearchEngineRequest;
+import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.util.JSONUtil;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
- * <a href="IndexWriterImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="IndexSearcherImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  *
  */
-public class IndexWriterImpl implements IndexWriter {
+public class IndexSearcherImpl implements IndexSearcher {
 
-	public void addDocument(long companyId, Document doc) {
-		SearchEngineRequest req = new SearchEngineRequest(
-			SearchEngineRequest.COMMAND_ADD, companyId, doc);
+	public Hits search(long companyId, String query, int start, int end)
+		throws SearchException {
 
-		MessageBusUtil.sendMessage(
-			DestinationNames.SEARCH, JSONUtil.serialize(req));
+		return search(companyId, query, null, start, end);
 	}
 
-	public void deleteDocument(long companyId, String uid) {
+	public Hits search(
+			long companyId, String query, Sort sort, int start, int end)
+		throws SearchException {
+
 		SearchEngineRequest req = new SearchEngineRequest(
-			SearchEngineRequest.COMMAND_DELETE, companyId, uid);
+			SearchEngineRequest.COMMAND_SEARCH, companyId, query, sort, start,
+			end);
 
-		MessageBusUtil.sendMessage(
+		String json = MessageBusUtil.sendSynchronizedMessage(
 			DestinationNames.SEARCH, JSONUtil.serialize(req));
-	}
 
-	public void deletePortletDocuments(long companyId, String portletId) {
-		SearchEngineRequest req = new SearchEngineRequest(
-			SearchEngineRequest.COMMAND_DELETE_PORTLET_DOCS, companyId,
-			portletId);
+		try {
+			JSONObject jsonObj = new JSONObject(json);
 
-		MessageBusUtil.sendMessage(
-			DestinationNames.SEARCH, JSONUtil.serialize(req));
-	}
-
-	public void updateDocument(long companyId, String uid, Document doc) {
-		SearchEngineRequest req = new SearchEngineRequest(
-			SearchEngineRequest.COMMAND_UPDATE, companyId, uid, doc);
-
-		MessageBusUtil.sendMessage(
-			DestinationNames.SEARCH, JSONUtil.serialize(req));
+			return (Hits)JSONUtil.deserialize(jsonObj.getString("hits"));
+		}
+		catch (JSONException je) {
+			throw new SearchException(je);
+		}
 	}
 
 }

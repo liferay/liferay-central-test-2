@@ -39,7 +39,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.util.search.QueryImpl;
 
 import java.io.File;
 import java.io.IOException;
@@ -163,7 +162,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 			}
 
 			return SearchEngineUtil.search(
-				companyId, new QueryImpl(fullQuery), start, end);
+				companyId, fullQuery.toString(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

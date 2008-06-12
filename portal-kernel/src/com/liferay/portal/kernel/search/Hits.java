@@ -56,16 +56,9 @@ public interface Hits extends Serializable {
 
 	public void setScores(Float[] scores);
 
-	public void closeSearcher();
-
-	public Hits closeSearcher(String keywords, Exception e)
-		throws SearchException;
-
 	public Document doc(int n);
 
 	public float score(int n);
-
-	public Hits subset(int start, int end);
 
 	public List<Document> toList();
 

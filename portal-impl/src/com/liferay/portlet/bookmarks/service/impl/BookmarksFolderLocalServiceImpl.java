@@ -40,7 +40,6 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 import com.liferay.portlet.bookmarks.service.base.BookmarksFolderLocalServiceBaseImpl;
 import com.liferay.portlet.bookmarks.util.Indexer;
-import com.liferay.util.search.QueryImpl;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -369,7 +368,7 @@ public class BookmarksFolderLocalServiceImpl
 			}
 
 			return SearchEngineUtil.search(
-				companyId, new QueryImpl(fullQuery), start, end);
+				companyId, fullQuery.toString(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

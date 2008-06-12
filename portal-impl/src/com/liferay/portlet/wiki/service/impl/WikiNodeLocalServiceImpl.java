@@ -42,7 +42,6 @@ import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.base.WikiNodeLocalServiceBaseImpl;
 import com.liferay.portlet.wiki.util.Indexer;
-import com.liferay.util.search.QueryImpl;
 
 import java.io.File;
 
@@ -374,7 +373,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 			}
 
 			return SearchEngineUtil.search(
-				companyId, new QueryImpl(fullQuery), start, end);
+				companyId, fullQuery.toString(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

@@ -56,7 +56,6 @@ import com.liferay.portlet.blogs.social.BlogsActivityKeys;
 import com.liferay.portlet.blogs.util.Indexer;
 import com.liferay.util.Normalizer;
 import com.liferay.util.SetUtil;
-import com.liferay.util.search.QueryImpl;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -615,7 +614,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			}
 
 			return SearchEngineUtil.search(
-				companyId, new QueryImpl(fullQuery), start, end);
+				companyId, fullQuery.toString(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

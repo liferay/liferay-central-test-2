@@ -43,7 +43,6 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.service.base.IGFolderLocalServiceBaseImpl;
 import com.liferay.portlet.imagegallery.util.Indexer;
-import com.liferay.util.search.QueryImpl;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -394,7 +393,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 			}
 
 			return SearchEngineUtil.search(
-				companyId, new QueryImpl(fullQuery), start, end);
+				companyId, fullQuery.toString(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

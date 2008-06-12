@@ -41,6 +41,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineUtil;
+import com.liferay.portal.search.IndexSearcherImpl;
 import com.liferay.portal.search.IndexWriterImpl;
 import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -234,8 +235,8 @@ public class GlobalStartupAction extends SimpleAction {
 
 		// Search Engines
 
-		SearchEngineUtil.init(
-			LuceneSearchEngineUtil.getSearchEngine(), new IndexWriterImpl());
+		LuceneSearchEngineUtil.init();
+		SearchEngineUtil.init(new IndexSearcherImpl(), new IndexWriterImpl());
 	}
 
 	private static Log _log = LogFactory.getLog(GlobalStartupAction.class);

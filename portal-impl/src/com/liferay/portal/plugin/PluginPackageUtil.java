@@ -52,7 +52,6 @@ import com.liferay.util.License;
 import com.liferay.util.Screenshot;
 import com.liferay.util.Time;
 import com.liferay.util.Version;
-import com.liferay.util.search.QueryImpl;
 
 import java.io.IOException;
 
@@ -1252,7 +1251,7 @@ public class PluginPackageUtil {
 			}
 
 			return SearchEngineUtil.search(
-				CompanyConstants.SYSTEM, new QueryImpl(fullQuery), start, end);
+				CompanyConstants.SYSTEM, fullQuery.toString(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

@@ -30,8 +30,8 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageSender;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.search.IndexSearcherImpl;
 import com.liferay.portal.search.IndexWriterImpl;
-import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.spring.util.SpringUtil;
 import com.liferay.portal.util.TestPropsUtil;
@@ -92,8 +92,7 @@ public class ServiceTestSuite extends TestSuite {
 
 		// Search Engines
 
-		SearchEngineUtil.init(
-			LuceneSearchEngineUtil.getSearchEngine(), new IndexWriterImpl());
+		SearchEngineUtil.init(new IndexSearcherImpl(), new IndexWriterImpl());
 
 		addTestSuite(BookmarksFolderServiceTest.class);
 		addTestSuite(BookmarksEntryServiceTest.class);

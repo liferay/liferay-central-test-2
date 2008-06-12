@@ -22,9 +22,9 @@
 
 package com.liferay.portal.kernel.search;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.util.StringMaker;
 
 /**
  * <a href="SearchEngineUtil.java.html"><b><i>View Source</i></b></a>
@@ -54,49 +54,28 @@ public class SearchEngineUtil {
 		_instance._deletePortletDocuments(companyId, portletId);
 	}
 
-	public static Collection<SearchEngine> getRegisteredSearchEngines() {
-		return _instance._getRegisteredSearchEngines();
-	}
-
 	public static void init(
-		SearchEngine defaultSearchEngine, IndexWriter defaultIndexWriter) {
+			IndexSearcher defaultIndexSearcher,
+			IndexWriter defaultIndexWriter) {
 
-		_instance._init(defaultSearchEngine, defaultIndexWriter);
+		_instance._init(defaultIndexSearcher, defaultIndexWriter);
 	}
 
 	public static boolean isIndexReadOnly() {
 		return _instance._isIndexReadOnly();
 	}
 
-	public static boolean isMessageBusListener() {
-		return _instance._isMessageBusListener();
-	}
-
-	public static void registerSearchEngine(
-		SearchEngine engine, boolean current) {
-
-		_instance._registerSearchEngine(engine, current);
-	}
-
-	public static Hits search(long companyId, Query query, int start, int end)
+	public static Hits search(long companyId, String query, int start, int end)
 		throws SearchException {
 
 		return _instance._search(companyId, query, start, end);
 	}
 
 	public static Hits search(
-			long companyId, Query query, Sort sort, int start, int end)
+			long companyId, String query, Sort sort, int start, int end)
 		throws SearchException {
 
 		return _instance._search(companyId, query, sort, start, end);
-	}
-
-	public static void setCurrentSearchEngine(String name) {
-		_instance._setCurrentSearchEngine(name);
-	}
-
-	public static void unregisterSearchEngine(String name) {
-		_instance._unregisterSearchEngine(name);
 	}
 
 	public static void updateDocument(long companyId, String uid, Document doc)
@@ -111,203 +90,71 @@ public class SearchEngineUtil {
 	private void _addDocument(long companyId, Document doc)
 		throws SearchException {
 
-		ClassLoader contextClassLoader = _getContextClassLoader();
-
-		try {
-			if (_currentSearchEngine.isMessageBusListener()) {
-				_messageBusIndexWriter.addDocument(companyId, doc);
-			}
-			else {
-				_getWriter().addDocument(companyId, doc);
-			}
-		}
-		finally {
-			_setContextClassLoader(contextClassLoader);
-		}
+		_messageBusIndexWriter.addDocument(companyId, doc);
 	}
 
 	private void _deleteDocument(long companyId, String uid)
 		throws SearchException {
 
-		ClassLoader contextClassLoader = _getContextClassLoader();
-
-		try {
-			if (_currentSearchEngine.isMessageBusListener()) {
-				_messageBusIndexWriter.deleteDocument(companyId, uid);
-			}
-			else {
-				_getWriter().deleteDocument(companyId, uid);
-			}
-		}
-		finally {
-			_setContextClassLoader(contextClassLoader);
-		}
+		_messageBusIndexWriter.deleteDocument(companyId, uid);
 	}
 
 	private void _deletePortletDocuments(long companyId, String portletId)
 		throws SearchException {
 
-		ClassLoader contextClassLoader = _getContextClassLoader();
-
-		try {
-			if (_currentSearchEngine.isMessageBusListener()) {
-				_messageBusIndexWriter.deletePortletDocuments(
-					companyId, portletId);
-			}
-			else {
-				_getWriter().deletePortletDocuments(companyId, portletId);
-			}
-		}
-		finally {
-			_setContextClassLoader(contextClassLoader);
-		}
-	}
-
-	private ClassLoader _getContextClassLoader() {
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
-
-		Thread.currentThread().setContextClassLoader(
-			_instance._getCurrentSearchEngineClassLoader());
-
-		return contextClassLoader;
-	}
-
-	private ClassLoader _getCurrentSearchEngineClassLoader() {
-		return _registeredSearchEnginesClassLoaders.get(
-			_currentSearchEngine.getName());
-	}
-
-	private Collection<SearchEngine> _getRegisteredSearchEngines() {
-		return _registeredSearchEngines.values();
-	}
-
-	private IndexSearcher _getSearcher() {
-		return _currentSearchEngine.getSearcher();
-	}
-
-	private IndexWriter _getWriter() {
-		return _currentSearchEngine.getWriter();
+		_messageBusIndexWriter.deletePortletDocuments(companyId, portletId);
 	}
 
 	private void _init(
-		SearchEngine defaultSearchEngine, IndexWriter messageBusIndexWriter) {
+			IndexSearcher messageBusIndexSearcher,
+			IndexWriter messageBusIndexWriter) {
 
-		_defaultSearchEngine = defaultSearchEngine;
+		_messageBusIndexSearcher = messageBusIndexSearcher;
 		_messageBusIndexWriter = messageBusIndexWriter;
-		_registerSearchEngine(_defaultSearchEngine, true);
 	}
 
 	private boolean _isIndexReadOnly() {
-		ClassLoader contextClassLoader = _getContextClassLoader();
+		StringMaker sm = new StringMaker();
 
-		try {
-			return _currentSearchEngine.isIndexReadOnly();
+		sm.append("{\"javaClass\":\"");
+		sm.append(SearchEngineRequest.class.getName());
+		sm.append("\",\"command\":\"");
+		sm.append(SearchEngineRequest.COMMAND_INDEX_ONLY);
+		sm.append("\"}");
+
+		String json = MessageBusUtil.sendSynchronizedMessage(
+			DestinationNames.SEARCH, sm.toString());
+
+		if (json.indexOf("true") != -1) {
+			return true;
 		}
-		finally {
-			_setContextClassLoader(contextClassLoader);
-		}
+
+		return false;
 	}
 
-	private boolean _isMessageBusListener() {
-		ClassLoader contextClassLoader = _getContextClassLoader();
-
-		try {
-			return _currentSearchEngine.isMessageBusListener();
-		}
-		finally {
-			_setContextClassLoader(contextClassLoader);
-		}
-	}
-
-	private void _registerSearchEngine(SearchEngine engine, boolean current) {
-		_registeredSearchEngines.put(engine.getName(), engine);
-		_registeredSearchEnginesClassLoaders.put(
-			engine.getName(), Thread.currentThread().getContextClassLoader());
-
-		if (current) {
-			_setCurrentSearchEngine(engine.getName());
-		}
-	}
-
-	private Hits _search(long companyId, Query query, int start, int end)
+	private Hits _search(long companyId, String query, int start, int end)
 		throws SearchException {
 
-		ClassLoader contextClassLoader = _getContextClassLoader();
-
-		try {
-			return _instance._getSearcher().search(
-				companyId, query, start, end);
-		}
-		finally {
-			_setContextClassLoader(contextClassLoader);
-		}
+		return _messageBusIndexSearcher.search(companyId, query, start, end);
 	}
 
 	private Hits _search(
-			long companyId, Query query, Sort sort, int start, int end)
+			long companyId, String query, Sort sort, int start, int end)
 		throws SearchException {
 
-		ClassLoader contextClassLoader = _getContextClassLoader();
-
-		try {
-			return _instance._getSearcher().search(
-				companyId, query, sort, start, end);
-		}
-		finally {
-			_setContextClassLoader(contextClassLoader);
-		}
-	}
-
-	private void _setContextClassLoader(ClassLoader contextClassLoader) {
-		Thread.currentThread().setContextClassLoader(contextClassLoader);
-	}
-
-	private void _setCurrentSearchEngine(String name) {
-		SearchEngine engine = _registeredSearchEngines.get(name);
-
-		if (engine != null) {
-			_currentSearchEngine = engine;
-		}
-	}
-
-	private void _unregisterSearchEngine(String name) {
-		if (!name.equals(_defaultSearchEngine.getName())) {
-			_registeredSearchEngines.remove(name);
-			_registeredSearchEnginesClassLoaders.remove(name);
-
-			if (_currentSearchEngine.getName().equals(name)) {
-				_currentSearchEngine = _defaultSearchEngine;
-			}
-		}
+		return _messageBusIndexSearcher.search(
+			companyId, query, sort, start, end);
 	}
 
 	private void _updateDocument(long companyId, String uid, Document doc)
 		throws SearchException {
 
-		ClassLoader contextClassLoader = _getContextClassLoader();
-
-		try {
-			if (_currentSearchEngine.isMessageBusListener()) {
-				_messageBusIndexWriter.updateDocument(companyId, uid, doc);
-			}
-			else {
-				_getWriter().updateDocument(companyId, uid, doc);
-			}
-		}
-		finally {
-			_setContextClassLoader(contextClassLoader);
-		}
+		_messageBusIndexWriter.updateDocument(companyId, uid, doc);
 	}
 
 	private static SearchEngineUtil _instance = new SearchEngineUtil();
 
-	private Map<String, SearchEngine> _registeredSearchEngines =
-		new HashMap<String, SearchEngine>();
-	private Map<String, ClassLoader> _registeredSearchEnginesClassLoaders =
-		new HashMap<String, ClassLoader>();
-	private SearchEngine _currentSearchEngine;
-	private SearchEngine _defaultSearchEngine;
+	private IndexSearcher _messageBusIndexSearcher;
 	private IndexWriter _messageBusIndexWriter;
 
 }

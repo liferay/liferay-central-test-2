@@ -22,10 +22,6 @@
 
 package com.liferay.portal.search.lucene;
 
-import com.liferay.portal.kernel.messaging.Destination;
-import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.messaging.SerialDestination;
 import com.liferay.portal.kernel.search.IndexSearcher;
 import com.liferay.portal.kernel.search.IndexWriter;
 import com.liferay.portal.kernel.search.SearchEngine;
@@ -41,14 +37,6 @@ public class LuceneSearchEngineImpl implements SearchEngine {
 	public LuceneSearchEngineImpl() {
 		_searcher = new LuceneIndexSearcherImpl();
 		_writer = new LuceneIndexWriterImpl();
-		_messageBusListener = true;
-
-		Destination destination = new SerialDestination(
-			DestinationNames.SEARCH_INDEX_WRITER);
-
-		MessageBusUtil.addDestination(destination);
-
-		destination.register(new LuceneIndexWriterMessageListener());
 	}
 
 	public String getName() {
@@ -67,14 +55,9 @@ public class LuceneSearchEngineImpl implements SearchEngine {
 		return LuceneUtil.INDEX_READ_ONLY;
 	}
 
-	public boolean isMessageBusListener() {
-		return _messageBusListener;
-	}
-
 	private static final String _NAME = "LUCENE";
 
 	private IndexSearcher _searcher;
 	private IndexWriter _writer;
-	private boolean _messageBusListener;
 
 }

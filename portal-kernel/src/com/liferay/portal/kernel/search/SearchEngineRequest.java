@@ -22,42 +22,63 @@
 
 package com.liferay.portal.kernel.search;
 
-import com.liferay.portal.kernel.util.StringMaker;
-
 /**
- * <a href="IndexWriterMessage.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchEngineRequest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  *
  */
-public class IndexWriterMessage {
+public class SearchEngineRequest {
 
-	public static final String ADD = "add";
+	public static final String COMMAND_ADD = "ADD";
 
-	public static final String DELETE = "delete";
+	public static final String COMMAND_DELETE = "DELETE";
 
-	public static final String DELETE_PORTLET_DOCS = "delete_portlet_docs";
+	public static final String COMMAND_DELETE_PORTLET_DOCS =
+		"DELETE_PORTLET_DOCS";
 
-	public static final String UPDATE = "update";
+	public static final String COMMAND_INDEX_ONLY = "INDEX_ONLY";
 
-	public IndexWriterMessage() {
+	public static final String COMMAND_SEARCH = "SEARCH";
+
+	public static final String COMMAND_UPDATE = "UPDATE";
+
+	public SearchEngineRequest() {
 	}
 
-	public IndexWriterMessage(String command, long companyId, String id) {
+	public SearchEngineRequest(String command, long companyId, String id) {
 		this(command, companyId, id, null);
 	}
 
-	public IndexWriterMessage(String command, long companyId, Document doc) {
+	public SearchEngineRequest(String command, long companyId, Document doc) {
 		this(command, companyId, null, doc);
 	}
 
-	public IndexWriterMessage(
+	public SearchEngineRequest(
 		String command, long companyId, String id, Document doc) {
+
+		this(command, companyId, id, doc, null, null, 0, 0);
+	}
+
+	public SearchEngineRequest(
+		String command, long companyId, String query, Sort sort, int start,
+		int end) {
+
+		this(command, companyId, null, null, query, sort, start, end);
+	}
+
+	public SearchEngineRequest(
+		String command, long companyId, String id, Document doc, String query,
+		Sort sort, int start, int end) {
 
 		_command = command;
 		_companyId = companyId;
 		_id = id;
 		_doc = doc;
+		_query = query;
+		_sort = sort;
+		_start = start;
+		_end = end;
 	}
 
 	public String getCommand() {
@@ -92,25 +113,45 @@ public class IndexWriterMessage {
 		_doc = doc;
 	}
 
-	public String toString() {
-		StringMaker sm = new StringMaker();
+	public String getQuery() {
+		return _query;
+	}
 
-		sm.append("{_command=");
-		sm.append(_command);
-		sm.append(", _companyId=");
-		sm.append(_companyId);
-		sm.append(", _id=");
-		sm.append(_id);
-		sm.append(", _doc=");
-		sm.append(_doc);
-		sm.append("}");
+	public void setQuery(String query) {
+		_query = query;
+	}
 
-		return sm.toString();
+	public Sort getSort() {
+		return _sort;
+	}
+
+	public void setSort(Sort sort) {
+		_sort = sort;
+	}
+
+	public int getStart() {
+		return _start;
+	}
+
+	public void setStart(int start) {
+		_start = start;
+	}
+
+	public int getEnd() {
+		return _end;
+	}
+
+	public void setEnd(int end) {
+		_end = end;
 	}
 
 	private String _command;
 	private long _companyId;
 	private String _id;
 	private Document _doc;
+	private String _query;
+	private Sort _sort;
+	private int _start;
+	private int _end;
 
 }

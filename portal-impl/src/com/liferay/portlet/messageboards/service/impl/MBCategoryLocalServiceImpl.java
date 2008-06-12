@@ -43,7 +43,6 @@ import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.service.base.MBCategoryLocalServiceBaseImpl;
 import com.liferay.portlet.messageboards.util.Indexer;
-import com.liferay.util.search.QueryImpl;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -429,7 +428,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			}
 
 			return SearchEngineUtil.search(
-				companyId, new QueryImpl(fullQuery), start, end);
+				companyId, fullQuery.toString(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

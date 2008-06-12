@@ -95,7 +95,7 @@ public class ResponseMessageListener implements MessageListener {
 
 	private static final String _EMTPY_MESSAGE = "{}";
 
-	private static final int _TIMEOUT = 1000;
+	private static final int _TIMEOUT = 10000;
 
 	private Destination _destination;
 	private Destination _responseDestination;

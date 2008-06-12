@@ -54,7 +54,6 @@ import com.liferay.portlet.tags.util.TagsAssetValidator;
 import com.liferay.portlet.tags.util.TagsUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.util.ListUtil;
-import com.liferay.util.search.QueryImpl;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -383,7 +382,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			}
 
 			return SearchEngineUtil.search(
-				companyId, new QueryImpl(fullQuery), start, end);
+				companyId, fullQuery.toString(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

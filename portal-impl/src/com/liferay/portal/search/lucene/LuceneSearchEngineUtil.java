@@ -22,9 +22,15 @@
 
 package com.liferay.portal.search.lucene;
 
+import com.liferay.portal.kernel.messaging.Destination;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.messaging.SerialDestination;
 import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngine;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Sort;
 
 /**
  * <a href="LuceneSearchEngineUtil.java.html"><b><i>View Source</i></b></a>
@@ -33,6 +39,17 @@ import com.liferay.portal.kernel.search.SearchException;
  *
  */
 public class LuceneSearchEngineUtil {
+
+	public static void init() {
+		_engine = new LuceneSearchEngineImpl();
+
+		Destination destination = new SerialDestination(
+			DestinationNames.SEARCH);
+
+		MessageBusUtil.addDestination(destination);
+
+		destination.register(new LuceneMessageListener());
+	}
 
 	public static void addDocument(long companyId, Document doc)
 		throws SearchException {
@@ -56,12 +73,29 @@ public class LuceneSearchEngineUtil {
 		return _engine;
 	}
 
+	public static boolean isIndexReadOnly() {
+		return _engine.isIndexReadOnly();
+	}
+
+	public static Hits search(long companyId, String query, int start, int end)
+		throws SearchException {
+
+		return _engine.getSearcher().search(companyId, query, start, end);
+	}
+
+	public static Hits search(
+			long companyId, String query, Sort sort, int start, int end)
+		throws SearchException {
+
+		return _engine.getSearcher().search(companyId, query, sort, start, end);
+	}
+
 	public static void updateDocument(long companyId, String uid, Document doc)
 		throws SearchException {
 
 		_engine.getWriter().updateDocument(companyId, uid, doc);
 	}
 
-	private static SearchEngine _engine = new LuceneSearchEngineImpl();
+	private static SearchEngine _engine;
 
 }

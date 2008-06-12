@@ -30,6 +30,9 @@ package com.liferay.portal.kernel.search;
  */
 public class Sort {
 
+	public Sort() {
+	}
+
 	public Sort(String fieldName, boolean reverse) {
 		_fieldName = fieldName;
 		_reverse = reverse;

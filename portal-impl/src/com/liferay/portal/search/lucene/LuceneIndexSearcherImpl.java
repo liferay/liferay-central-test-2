@@ -22,17 +22,22 @@
 
 package com.liferay.portal.search.lucene;
 
+import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.HitsImpl;
 import com.liferay.portal.kernel.search.IndexSearcher;
-import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.search.QueryImpl;
+import com.liferay.util.Time;
+import com.liferay.util.search.DocumentImpl;
 
 import java.io.IOException;
+
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -49,7 +54,7 @@ import org.apache.lucene.search.SortField;
  */
 public class LuceneIndexSearcherImpl implements IndexSearcher {
 
-	public Hits search(long companyId, Query query, int start, int end)
+	public Hits search(long companyId, String query, int start, int end)
 		throws SearchException {
 
 		Sort sort = null;
@@ -58,10 +63,10 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 	}
 
 	public Hits search(
-			long companyId, Query query, Sort sort, int start, int end)
+			long companyId, String query, Sort sort, int start, int end)
 		throws SearchException {
 
-		LuceneHitsImpl hits = new LuceneHitsImpl();
+		Hits hits = null;
 
 		org.apache.lucene.search.IndexSearcher searcher = null;
 
@@ -75,30 +80,13 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 					new SortField(sort.getFieldName(), sort.isReverse()));
 			}
 
-			// LEP-5958
+			QueryParser parser = new QueryParser(
+				StringPool.BLANK, LuceneUtil.getAnalyzer());
 
-			if (query instanceof QueryImpl) {
-				hits.recordHits(
-					searcher.search(((QueryImpl)query).getQuery(), luceneSort),
-					searcher);
-			}
-			else {
-				QueryParser parser = new QueryParser(
-					StringPool.BLANK, LuceneUtil.getAnalyzer());
+			org.apache.lucene.search.Hits luceneHits =
+				searcher.search(parser.parse(query), luceneSort);
 
-				hits.recordHits(
-					searcher.search(parser.parse(query.parse()), luceneSort),
-					searcher);
-			}
-
-			if ((start == SearchEngineUtil.ALL_POS) &&
-				(end == SearchEngineUtil.ALL_POS)) {
-
-				hits = hits.subset(0, hits.getLength());
-			}
-			else {
-				hits = hits.subset(start, end);
-			}
+			hits = _subset(luceneHits, start, end);
 		}
 		catch (RuntimeException re) {
 
@@ -115,9 +103,9 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 			if (e instanceof BooleanQuery.TooManyClauses ||
 				e instanceof ParseException) {
 
-				_log.error("Parsing keywords " + query.parse(), e);
+				_log.error("Parsing keywords " + query, e);
 
-				return new LuceneHitsImpl();
+				return new HitsImpl();
 			}
 			else {
 				throw new SearchException(e);
@@ -127,8 +115,6 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 			try {
 				if (searcher != null) {
 					searcher.close();
-
-					hits.setSearcher(null);
 				}
 			}
 			catch (IOException ioe) {
@@ -139,6 +125,82 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 		return hits;
 	}
 
-	private static Log _log = LogFactory.getLog(LuceneHitsImpl.class);
+	private Hits _subset(
+			org.apache.lucene.search.Hits luceneHits, int start, int end)
+		throws IOException {
+
+		int length = luceneHits.length();
+
+		if ((start == SearchEngineUtil.ALL_POS) &&
+			(end == SearchEngineUtil.ALL_POS)) {
+
+			start = 0;
+			end = length;
+		}
+
+		long startTime = System.currentTimeMillis();
+
+		Hits subset = new HitsImpl();
+
+		if ((start > - 1) && (start <= end)) {
+			if (end > length) {
+				end = length;
+			}
+
+			int subsetTotal = end - start;
+
+			Document[] subsetDocs = new DocumentImpl[subsetTotal];
+			float[] subsetScores = new float[subsetTotal];
+
+			int j = 0;
+
+			for (int i = start; i < end; i++, j++) {
+				subsetDocs[j] = _getDocument(luceneHits.doc(i));
+				subsetScores[j] = luceneHits.score(i);
+			}
+
+			subset.setLength(length);
+			subset.setDocs(subsetDocs);
+			subset.setScores(subsetScores);
+			subset.setStart(startTime);
+
+			float searchTime =
+				(float)(System.currentTimeMillis() - startTime) / Time.SECOND;
+
+			subset.setSearchTime(searchTime);
+		}
+
+		return subset;
+	}
+
+	private DocumentImpl _getDocument(
+		org.apache.lucene.document.Document oldDoc) {
+
+		DocumentImpl newDoc = new DocumentImpl();
+
+		List<org.apache.lucene.document.Field> oldFields = oldDoc.getFields();
+
+		for (org.apache.lucene.document.Field oldField : oldFields) {
+			String[] values = oldDoc.getValues(oldField.name());
+
+			if ((values != null) && (values.length > 1)) {
+				Field newField = new Field(
+					oldField.name(), values, oldField.isTokenized());
+
+				newDoc.add(newField);
+			}
+			else {
+				Field newField = new Field(
+					oldField.name(), oldField.stringValue(),
+					oldField.isTokenized());
+
+				newDoc.add(newField);
+			}
+		}
+
+		return newDoc;
+	}
+
+	private static Log _log = LogFactory.getLog(LuceneIndexSearcherImpl.class);
 
 }

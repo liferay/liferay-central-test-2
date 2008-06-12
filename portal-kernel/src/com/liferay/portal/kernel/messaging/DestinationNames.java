@@ -34,8 +34,7 @@ public interface DestinationNames {
 
 	public static final String SCHEDULER = "liferay/scheduler";
 
-	public static final String SEARCH_INDEX_WRITER =
-		"liferay/search/indexwriter";
+	public static final String SEARCH = "liferay/search";
 
 	public static final String STAGING = "liferay/staging";
 
