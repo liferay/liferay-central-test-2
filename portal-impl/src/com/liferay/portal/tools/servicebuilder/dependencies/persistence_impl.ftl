@@ -22,6 +22,7 @@ import ${basePersistencePackage}.BasePersistence;
 import ${springHibernatePackage}.FinderCache;
 import ${springHibernatePackage}.HibernateUtil;
 import ${propsUtilPackage}.PropsUtil;
+import com.liferay.util.ListUtil;
 import com.liferay.util.cal.CalendarUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -108,7 +109,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 	}
 
 	public ${entity.name} remove(${entity.name} ${entity.varName}) throws SystemException {
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onBeforeRemove(${entity.varName});
 			}
@@ -116,7 +117,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 		${entity.varName} = removeImpl(${entity.varName});
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				listener.onAfterRemove(${entity.varName});
 			}
@@ -190,7 +191,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 	public ${entity.name} update(${entity.name} ${entity.varName}, boolean merge) throws SystemException {
 		boolean isNew = ${entity.varName}.isNew();
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onBeforeCreate(${entity.varName});
@@ -203,7 +204,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 		${entity.varName} = updateImpl(${entity.varName}, merge);
 
-		if (_listeners != null) {
+		if (_listeners.length > 0) {
 			for (ModelListener listener : _listeners) {
 				if (isNew) {
 					listener.onAfterCreate(${entity.varName});
@@ -1917,6 +1918,22 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 		</#list>
 	}
 
+	protected void registerListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.add(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
+	protected void unregisterListener(ModelListener listener) {
+		List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+		listeners.remove(listener);
+
+		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+	}
+
 	<#list entity.columnList as column>
 		<#if column.isCollection() && (column.isMappingManyToMany() || column.isMappingOneToMany())>
 			<#assign tempEntity = serviceBuilder.getEntity(column.getEJBName())>
@@ -2062,6 +2079,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 	private static Log _log = LogFactory.getLog(${entity.name}PersistenceImpl.class);
 
-	private ModelListener[] _listeners;
+	private ModelListener[] _listeners = new ModelListener[0];
 
 }
