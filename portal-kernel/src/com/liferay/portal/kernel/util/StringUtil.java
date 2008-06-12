@@ -754,7 +754,7 @@ public class StringUtil {
 	}
 
 	public static String shorten(String s, int length, String suffix) {
-		if (s == null || suffix == null) {
+		if ((s == null) || (suffix == null)) {
 			return null;
 		}
 
