@@ -128,10 +128,12 @@ portletURL.setParameter("typeSelection", JournalArticle.class.getName());
 					<select name="<portlet:namespace /><%= displayTerms.GROUP_ID %>">
 
 						<%
-						List<Group> communities = user.getMyPlaces();
+						List<Group> myPlaces = user.getMyPlaces();
 
-						for (int i = 0; i < communities.size(); i++) {
-							Group group = communities.get(i);
+						for (int i = 0; i < myPlaces.size(); i++) {
+							Group group = myPlaces.get(i);
+
+							group = group.toEscapedModel();
 
 							String groupName = group.getDescriptiveName();
 
