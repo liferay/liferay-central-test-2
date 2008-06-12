@@ -25,6 +25,7 @@ package com.liferay.portal.language;
 import com.liferay.portal.kernel.language.Language;
 import com.liferay.portal.kernel.language.LanguageWrapper;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -44,12 +45,13 @@ import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -58,6 +60,7 @@ import javax.servlet.jsp.PageContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.Globals;
+import org.apache.struts.taglib.TagUtils;
 import org.apache.struts.util.MessageResources;
 
 /**
@@ -301,14 +304,56 @@ public class LanguageImpl implements Language {
 	public String get(
 		PageContext pageContext, String key, String defaultValue) {
 
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest req = (HttpServletRequest)pageContext.getRequest();
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		return get(
-			themeDisplay.getCompanyId(), themeDisplay.getLocale(), key,
-			defaultValue);
+		if (themeDisplay != null) {
+			return get(
+				themeDisplay.getCompanyId(), themeDisplay.getLocale(), key,
+				defaultValue);
+		}
+
+		if (key == null) {
+			return null;
+		}
+
+		String value = null;
+
+		try {
+			value = TagUtils.getInstance().message(
+				pageContext, null, null, key);
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		if (value == null) {
+
+			// LEP-2849
+
+			PortletConfig portletConfig = (PortletConfig)req.getAttribute(
+				JavaConstants.JAVAX_PORTLET_CONFIG);
+
+			if (portletConfig != null) {
+				Locale locale = req.getLocale();
+
+				ResourceBundle bundle = portletConfig.getResourceBundle(locale);
+
+				try {
+					value = bundle.getString(key);
+				}
+				catch (MissingResourceException mre) {
+				}
+			}
+		}
+
+		if (value == null) {
+			value = defaultValue;
+		}
+
+		return value;
 	}
 
 	public Locale[] getAvailableLocales() {
