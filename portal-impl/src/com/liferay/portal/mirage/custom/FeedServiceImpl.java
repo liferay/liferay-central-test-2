@@ -39,12 +39,12 @@ public class FeedServiceImpl implements FeedService {
 	public SyndFeed getFeedForAllContentsOfContentType(String contentTypeUUID)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public boolean writeFeadToWriter(Writer out, SyndFeed feed) {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 }

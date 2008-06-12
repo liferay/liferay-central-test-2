@@ -42,44 +42,44 @@ public class CategoryServiceImpl implements CategoryService {
 			ContentType contentType, Category category)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void assignSubCategoryToCategory(
 			Category subCategory, Category newParent)
 		throws CMSException, DuplicateCategoryException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void createCategory(Category category)
 		throws CMSException, DuplicateCategoryException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void deleteCategory(Category category)
 		throws CMSException, CategoryNotEmptyException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public Category getCategory(Category category)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public Category getCategory(String selectedCategoryUUID)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void updateCategory(Category category)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 }

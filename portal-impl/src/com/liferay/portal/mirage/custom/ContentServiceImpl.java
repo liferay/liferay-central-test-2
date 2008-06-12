@@ -44,96 +44,96 @@ public class ContentServiceImpl implements ContentService {
 	public void checkinContent(Content content)
 		throws CMSException, TemplateNotFoundException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public VersionableContent checkoutContent(
 			String contentName, String contentTypeUUID)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void createContent(Content content)
 		throws CMSException, TemplateNotFoundException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void deleteContent(String contentName, String contentTypeUUID)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public Content getContentByNameAndType(
 			String contentName, String contentTypeUUID)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public Content getContentByNameTypeNameAndCategory(
 			String contentName, String contentTypeName, String categoryName)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public Content getContentByUUID(String uuid)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public VersionableContent getContentByVersion(
 			String contentName, String contentTypeUUID, String versionName)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public List<String> getContentNamesByType(String contentTypeUUID)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public List<Content> getContentsByType(String contentTypeUUID)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public String getContentURL(String appURL, String UUID) {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public List<String> getVersionNames(
 			String contentName, String contentTypeUUID)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public List<VersionableContent> getVersions(
 			String contentName, String contentTypeUUID)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void unCheckoutContent(String contentName, String contentTypeUUID)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void updateContent(Content content)
 		throws CMSException, TemplateNotFoundException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void updateFileField(
@@ -141,7 +141,7 @@ public class ContentServiceImpl implements ContentService {
 			InputStream updatedFileInputStream)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 }

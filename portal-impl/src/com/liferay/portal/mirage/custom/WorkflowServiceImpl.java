@@ -36,32 +36,32 @@ public class WorkflowServiceImpl implements WorkflowService {
 	public void submitContentToWorkflow(String contentUUID)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void updateWorkflowCommentsAccepted(String contentUUID)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void updateWorkflowComplete(String contentUUID)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void updateWorkflowContentRejected(
 			String contentUUID, String comments)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void updateWorkflowStatus(String contentUUID, String status)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 }

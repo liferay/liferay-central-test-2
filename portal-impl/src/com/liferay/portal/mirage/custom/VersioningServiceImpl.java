@@ -43,32 +43,32 @@ public class VersioningServiceImpl<VersionableContent>
 			Node node, User user, VersionableContent versionableContent)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void checkoutNode(Node node, User user)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public Collection<VersionableContent> getAllVersions(Node node)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void uncheckoutNode(Node node, User user)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public void updateNode(
 			Node node, User user, VersionableContent versionableContent)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 }

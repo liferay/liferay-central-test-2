@@ -43,13 +43,13 @@ public class SearchServiceImpl implements SearchService {
 			ContentType contentType, SearchCriteria searchCriteria)
 		throws CMSException, SearchNotSupportedForFieldException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public List<Content> searchContents(ContentType contentType, String name)
 		throws CMSException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 }

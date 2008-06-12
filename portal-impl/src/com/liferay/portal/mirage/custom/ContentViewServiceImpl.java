@@ -38,7 +38,7 @@ public class ContentViewServiceImpl implements ContentViewService {
 	public String getContentView(Content content, String appContextName)
 		throws ViewGenerationException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 	public String getContentView(
@@ -46,7 +46,7 @@ public class ContentViewServiceImpl implements ContentViewService {
 			String appContextName)
 		throws ViewGenerationException {
 
-		throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException();
 	}
 
 }
