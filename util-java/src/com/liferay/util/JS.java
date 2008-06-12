@@ -108,7 +108,7 @@ public class JS {
 	public static String toScript(String[] array) {
 		StringMaker sm = new StringMaker();
 
-		sm.append("new Array(");
+		sm.append(StringPool.OPEN_BRACKET);
 
 		for (int i = 0; i < array.length; i++) {
 			sm.append("'" + array[i] + "'");
@@ -118,7 +118,7 @@ public class JS {
 			}
 		}
 
-		sm.append(")");
+		sm.append(StringPool.CLOSE_BRACKET);
 
 		return sm.toString();
 	}
