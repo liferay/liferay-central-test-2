@@ -1815,7 +1815,7 @@
 	</library>
 	<library>
 		<file-name>portal/mirage-api.jar</file-name>
-		<version>0.1 (trunk 227)</version>
+		<version>0.1 (trunk 267)</version>
 		<project-name>Mirage</project-name>
 		<project-url>https://mirage.dev.java.net</project-url>
 		<licenses>

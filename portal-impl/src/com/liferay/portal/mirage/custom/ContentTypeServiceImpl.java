@@ -25,7 +25,6 @@ package com.liferay.portal.mirage.custom;
 import com.sun.portal.cms.mirage.exception.CMSException;
 import com.sun.portal.cms.mirage.exception.TemplateNotFoundException;
 import com.sun.portal.cms.mirage.exception.ValidationException;
-import com.sun.portal.cms.mirage.model.core.User;
 import com.sun.portal.cms.mirage.model.custom.Category;
 import com.sun.portal.cms.mirage.model.custom.ContentType;
 import com.sun.portal.cms.mirage.model.custom.Template;
@@ -37,119 +36,157 @@ import java.util.List;
  * <a href="ContentTypeServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ * @author Prakash Reddy
  *
  */
 public class ContentTypeServiceImpl implements ContentTypeService {
 
 	public void addTemplateToContentType(
-		Template template, ContentType contentType, User user)
+			Template template, ContentType contentType)
 		throws CMSException, ValidationException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	public void assignDefaultTemplate(
-		ContentType contentType, Template template) throws CMSException {
+			ContentType contentType, Template template)
+		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	public boolean checkContentTypeExists(String contentTypeUUID)
 		throws CMSException {
 
-		return false;
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
-	public void checkOutTemplate(
-			Template template, ContentType contentType, User user)
+	public void checkOutTemplate(Template template, ContentType contentType)
 		throws CMSException {
-	}
-	public void createContentType(ContentType contentType) throws CMSException {
 
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
-	public void deleteContentType(ContentType contentType) throws CMSException {
+	public void createContentType(ContentType contentType)
+		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public void deleteContentType(ContentType contentType)
+		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	public void deleteTemplateOfContentType(
 			ContentType contentType, Template template)
 		throws CMSException, TemplateNotFoundException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	public void deleteTemplatesOfContentType(
 			ContentType contentType, Template[] templatesToBeDeleted)
 		throws CMSException, TemplateNotFoundException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	public List<Template> getAllVersionsOfTemplate(
-		Template template, ContentType contentType) throws CMSException {
+			Template template, ContentType contentType)
+		throws CMSException {
 
-		return null;
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	public List<String> getAvailableContentTypeNames(Category category)
 		throws CMSException {
 
-		return null;
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
-	public List<ContentType> getAvailableContentTypes(
-		Category category, User user) throws CMSException {
-
-		return null;
-	}
-
-	public ContentType getContentTypeByUUID(String contentTypeUUID, User user)
+	public List<ContentType> getAvailableContentTypes(Category category)
 		throws CMSException {
 
-		return null;
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public ContentType getContentTypeByNameAndCategory(
+			String contentTypeName, Category category)
+		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public ContentType getContentTypeByUUID(String contentTypeUUID)
+		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	public Template getLatestVersionOfTemplate(
-		Template template, ContentType contentType) throws CMSException {
+			Template template, ContentType contentType)
+		throws CMSException {
 
-		return null;
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	public Template getTemplateWithUUID(String templateUUID)
 		throws TemplateNotFoundException {
 
-		return null;
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	public boolean isContentTypeEditable(String contentTypeUUID)
 		throws CMSException {
 
-		return false;
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	public void revertChangesTemplateForTemplate(
-		Template checkedOutTemplate, ContentType contentType, User user)
+			Template template, ContentType contentType)
 		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	public void saveNewVersionOfTemplate(
-		Template newTemplate, ContentType contentType, User user)
+			Template template, ContentType contentType)
 		throws CMSException, ValidationException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	public void unassignDefaultTemplate(ContentType contentType)
 		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	public void updateCategoryOfContentType(ContentType contentType)
 		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
-	public void updateContentType(ContentType contentType) throws CMSException {
+	public void updateContentType(ContentType contentType)
+		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	public void updateTemplateOfContentType(
-			Template template, ContentType contentType, User user)
+			Template template, ContentType contentType)
 		throws CMSException, ValidationException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
-	public boolean validateTemplate(
-			Template template, ContentType testContentType)
+	public boolean validateTemplate(Template template, ContentType contentType)
 		throws ValidationException {
 
-		return false;
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 }

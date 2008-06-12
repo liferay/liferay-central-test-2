@@ -22,29 +22,32 @@
 
 package com.liferay.portal.mirage.custom;
 
-import com.sun.portal.cms.mirage.exception.ViewGenerationException;
+import com.sun.portal.cms.mirage.exception.CMSException;
+import com.sun.portal.cms.mirage.exception.SearchNotSupportedForFieldException;
 import com.sun.portal.cms.mirage.model.custom.Content;
-import com.sun.portal.cms.mirage.service.custom.ContentViewService;
+import com.sun.portal.cms.mirage.model.custom.ContentType;
+import com.sun.portal.cms.mirage.model.search.SearchCriteria;
+import com.sun.portal.cms.mirage.service.custom.SearchService;
+
+import java.util.List;
 
 /**
- * <a href="ContentViewServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
  * @author Prakash Reddy
  *
  */
-public class ContentViewServiceImpl implements ContentViewService {
+public class SearchServiceImpl implements SearchService {
 
-	public String getContentView(Content content, String appContextName)
-		throws ViewGenerationException {
+	public List<Content> searchContents(
+			ContentType contentType, SearchCriteria searchCriteria)
+		throws CMSException, SearchNotSupportedForFieldException {
 
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
-	public String getContentView(
-			Content content, String version, String username,
-			String appContextName)
-		throws ViewGenerationException {
+	public List<Content> searchContents(ContentType contentType, String name)
+		throws CMSException {
 
 		throw new UnsupportedOperationException("Not supported yet.");
 	}

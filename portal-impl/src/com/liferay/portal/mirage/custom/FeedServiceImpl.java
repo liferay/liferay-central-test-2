@@ -22,29 +22,27 @@
 
 package com.liferay.portal.mirage.custom;
 
-import com.sun.portal.cms.mirage.exception.ViewGenerationException;
-import com.sun.portal.cms.mirage.model.custom.Content;
-import com.sun.portal.cms.mirage.service.custom.ContentViewService;
+import com.sun.portal.cms.mirage.exception.CMSException;
+import com.sun.portal.cms.mirage.service.custom.FeedService;
+import com.sun.syndication.feed.synd.SyndFeed;
+
+import java.io.Writer;
 
 /**
- * <a href="ContentViewServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="FeedServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
  * @author Prakash Reddy
  *
  */
-public class ContentViewServiceImpl implements ContentViewService {
+public class FeedServiceImpl implements FeedService {
 
-	public String getContentView(Content content, String appContextName)
-		throws ViewGenerationException {
+	public SyndFeed getFeedForAllContentsOfContentType(String contentTypeUUID)
+		throws CMSException {
 
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
-	public String getContentView(
-			Content content, String version, String username,
-			String appContextName)
-		throws ViewGenerationException {
+	public boolean writeFeadToWriter(Writer out, SyndFeed feed) {
 
 		throw new UnsupportedOperationException("Not supported yet.");
 	}

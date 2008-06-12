@@ -22,29 +22,44 @@
 
 package com.liferay.portal.mirage.custom;
 
-import com.sun.portal.cms.mirage.exception.ViewGenerationException;
-import com.sun.portal.cms.mirage.model.custom.Content;
-import com.sun.portal.cms.mirage.service.custom.ContentViewService;
+import com.sun.portal.cms.mirage.exception.CMSException;
+import com.sun.portal.cms.mirage.service.custom.WorkflowService;
 
 /**
- * <a href="ContentViewServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
  * @author Prakash Reddy
  *
  */
-public class ContentViewServiceImpl implements ContentViewService {
+public class WorkflowServiceImpl implements WorkflowService {
 
-	public String getContentView(Content content, String appContextName)
-		throws ViewGenerationException {
+	public void submitContentToWorkflow(String contentUUID)
+		throws CMSException {
 
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
-	public String getContentView(
-			Content content, String version, String username,
-			String appContextName)
-		throws ViewGenerationException {
+	public void updateWorkflowCommentsAccepted(String contentUUID)
+		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public void updateWorkflowComplete(String contentUUID)
+		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public void updateWorkflowContentRejected(
+			String contentUUID, String comments)
+		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public void updateWorkflowStatus(String contentUUID, String status)
+		throws CMSException {
 
 		throw new UnsupportedOperationException("Not supported yet.");
 	}

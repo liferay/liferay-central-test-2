@@ -25,7 +25,6 @@ package com.liferay.portal.mirage.custom;
 import com.sun.portal.cms.mirage.exception.CMSException;
 import com.sun.portal.cms.mirage.exception.CategoryNotEmptyException;
 import com.sun.portal.cms.mirage.exception.DuplicateCategoryException;
-import com.sun.portal.cms.mirage.model.core.User;
 import com.sun.portal.cms.mirage.model.custom.Category;
 import com.sun.portal.cms.mirage.model.custom.ContentType;
 import com.sun.portal.cms.mirage.service.custom.CategoryService;
@@ -34,39 +33,53 @@ import com.sun.portal.cms.mirage.service.custom.CategoryService;
  * <a href="CategoryServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ * @author Prakash Reddy
  *
  */
 public class CategoryServiceImpl implements CategoryService {
 
 	public void assignContentTypeToCategory(
-		ContentType contentType, Category category) throws CMSException {
+			ContentType contentType, Category category)
+		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	public void assignSubCategoryToCategory(
 			Category subCategory, Category newParent)
 		throws CMSException, DuplicateCategoryException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	public void createCategory(Category category)
 		throws CMSException, DuplicateCategoryException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	public void deleteCategory(Category category)
 		throws CMSException, CategoryNotEmptyException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
-	public Category getCategory(String selectedCategoryUUID, User user)
+	public Category getCategory(Category category)
 		throws CMSException {
 
-		return null;
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
-	public Category getCategory(Category category, User user)
+	public Category getCategory(String selectedCategoryUUID)
 		throws CMSException {
-		return null;
+
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
-	public void updateCategory(Category category) throws CMSException {
+	public void updateCategory(Category category)
+		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 }
