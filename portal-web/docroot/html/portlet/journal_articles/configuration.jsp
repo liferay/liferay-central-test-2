@@ -26,8 +26,6 @@
 
 <%
 groupId = ParamUtil.getLong(request, "groupId", groupId);
-
-List communities = user.getMyPlaces();
 %>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
@@ -45,13 +43,21 @@ List communities = user.getMyPlaces();
 			<option value=""></option>
 
 			<%
-			for (int i = 0; i < communities.size(); i++) {
-				Group group = (Group)communities.get(i);
+			List<Group> myPlaces = user.getMyPlaces();
+
+			for (int i = 0; i < myPlaces.size(); i++) {
+				Group group = myPlaces.get(i);
 
 				group = group.toEscapedModel();
+
+				String groupName = group.getDescriptiveName();
+
+				if (group.isUser()) {
+					groupName = LanguageUtil.get(pageContext, "my-community");
+				}
 			%>
 
-				<option <%= groupId == group.getGroupId() ? "selected" : "" %> value="<%= group.getGroupId() %>"><%= group.getDescriptiveName() %></option>
+				<option <%= groupId == group.getGroupId() ? "selected" : "" %> value="<%= group.getGroupId() %>"><%= groupName %></option>
 
 			<%
 			}
