@@ -46,20 +46,20 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 <%
 GroupSearchTerms searchTerms = (GroupSearchTerms)searchContainer.getSearchTerms();
 
-List myPlaces = user.getMyPlaces();
+List<Group> myPlaces = user.getMyPlaces();
 
 int total = myPlaces.size();
 
 searchContainer.setTotal(total);
 
-List results = myPlaces;
+List<Group> results = myPlaces;
 
 searchContainer.setResults(results);
 
 List resultRows = searchContainer.getResultRows();
 
 for (int i = 0; i < results.size(); i++) {
-	Group group = (Group)results.get(i);
+	Group group = results.get(i);
 
 	group = group.toEscapedModel();
 
