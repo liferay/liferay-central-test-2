@@ -185,7 +185,7 @@
 				var hasStaticPortlet = (firstPortlet.length && firstPortlet[0].isStatic);
 
 				if (!placeHolder) {
-					placeHolder = document.createElement('div');	
+					placeHolder = document.createElement('div');
 					placeHolder.className = 'loading-animation';
 				}
 
@@ -208,12 +208,12 @@
 					currentColumnId = Liferay.Util.getColumnId(column[0].id);
 				}
 
-				var url = '<%= themeDisplay.getPathMain() %>/portal/update_layout?' + 
+				var url = '<%= themeDisplay.getPathMain() %>/portal/update_layout?' +
 									'p_l_id=' + plid +
-									'&p_p_id=' + portletId + 
-									'&p_p_col_id=' + currentColumnId + 
-									'&p_p_col_pos=' + portletPosition + 
-									'&doAsUserId=' + doAsUserId + 
+									'&p_p_id=' + portletId +
+									'&p_p_col_id=' + currentColumnId +
+									'&p_p_col_pos=' + portletPosition +
+									'&doAsUserId=' + doAsUserId +
 									'&<%= Constants.CMD %>=<%= Constants.ADD %>&currentURL=<%= HttpUtil.encodeURL(currentURL) %>';
 
 				return addPortletHTML(
@@ -221,7 +221,7 @@
 						beforePortletLoaded: beforePortletLoaded,
 						url: url,
 						placeHolder: placeHolder,
-						onComplete: onComplete 
+						onComplete: onComplete
 					}
 				);
 			}

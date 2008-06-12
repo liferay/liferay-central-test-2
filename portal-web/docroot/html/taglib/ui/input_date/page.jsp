@@ -78,12 +78,12 @@ else {
 					instance._createDatepicker();
 				}
 			},
-			
+
 			_beforeShow: function() {
 				var instance = this;
-				
+
 				var month, day, year;
-				
+
 				if (!instance._combinedMonthYear) {
 					month = instance._monthField.val();
 					year = instance._yearField.val();
@@ -94,7 +94,7 @@ else {
 					month = value[0];
 					year = value[1];
 				}
-				
+
 				// Offset month +1 because it's starting index is at zero
 				month++;
 
@@ -106,7 +106,7 @@ else {
 
 				return {};
 			},
-			
+
 			_createDatepicker: function() {
 				var instance = this;
 

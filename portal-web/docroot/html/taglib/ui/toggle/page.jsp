@@ -64,7 +64,7 @@ String defaultMessage = (String)request.getAttribute("liferay-ui:toggle:defaultM
 						url: themeDisplay.getPathMain() + '/portal/session_click',
 						data: {
 							'<%= id %>': 'none'
-						} 
+						}
 					}
 				);
 			}
@@ -89,7 +89,7 @@ String defaultMessage = (String)request.getAttribute("liferay-ui:toggle:defaultM
 						url: themeDisplay.getPathMain() + '/portal/session_click',
 						data: {
 							'<%= id %>': ''
-						} 
+						}
 					}
 				);
 			}

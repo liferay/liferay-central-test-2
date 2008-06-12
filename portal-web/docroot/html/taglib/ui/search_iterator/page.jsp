@@ -226,7 +226,7 @@ if (rowChecker != null) {
 		%>
 
 		</table>
-	</div>	
+	</div>
 
 	<c:if test="<%= (resultRows.size() > 10) && paginate %>">
 		<div class="taglib-search-iterator-page-iterator-bottom">

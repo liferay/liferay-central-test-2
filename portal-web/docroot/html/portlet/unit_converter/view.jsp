@@ -96,7 +96,7 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 	temperatureArray[2] = new Option("2", "Fahrenheit");
 	temperatureArray[3] = new Option("3", "Rankine");
 	temperatureArray[4] = new Option("4", "Réaumure");
-	
+
 	jQuery(
 		function () {
 			var form = jQuery('#<portlet:namespace />fm');

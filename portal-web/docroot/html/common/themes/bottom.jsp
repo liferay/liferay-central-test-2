@@ -49,12 +49,12 @@ Calendar selCal = CalendarFactoryUtil.getCalendar(timeZone, locale);
 				calendarMonths = CalendarUtil.getMonths(locale, "MMM");
 				%>
 				monthNamesShort: <%= JS.toScript(calendarMonths) %>, // For formatting
-				
+
 				monthStatus: '<liferay-ui:message key="show-a-different-month" />', // Status text for selecting a month
 				yearStatus: '<liferay-ui:message key="show-a-different-year" />', // Status text for selecting a year
 				weekHeader: '<liferay-ui:message key="week-abbreviation" />', // Header for the week of the year column
 				weekStatus: '<liferay-ui:message key="week-of-the-year" />', // Status text for the week of the year column
-				
+
 				<%
 				String[] calendarDays = CalendarUtil.getDays(locale, "EEEE");
 				%>
@@ -67,7 +67,7 @@ Calendar selCal = CalendarFactoryUtil.getCalendar(timeZone, locale);
 				int i = 0;
 				for (String day : calendarDays) {
 					int daysIndex = (selCal.getFirstDayOfWeek() + i - 1) % 7;
-						
+
 					calendarDays[i] = LanguageUtil.get(pageContext, CalendarUtil.DAYS_ABBREVIATION[daysIndex]);
 					i++;
 				}
