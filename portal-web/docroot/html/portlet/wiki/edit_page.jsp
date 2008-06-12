@@ -49,6 +49,7 @@ String title = BeanParamUtil.getString(wikiPage, request, "title");
 boolean editTitle = ParamUtil.getBoolean(request, "editTitle");
 
 String content = BeanParamUtil.getString(wikiPage, request, "content");
+String summary = BeanParamUtil.getString(wikiPage, request, "summary");
 String format = BeanParamUtil.getString(wikiPage, request, "format", WikiPageImpl.DEFAULT_FORMAT);
 String parentTitle = BeanParamUtil.getString(wikiPage, request, "parentTitle");
 
@@ -321,6 +322,31 @@ if (Validator.isNull(redirect)) {
 				classPK="<%= classPK %>"
 				hiddenInput="tagsEntries"
 			/>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<br />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="summary" />
+		</td>
+		<td>
+			<input name="<portlet:namespace />summary" size="75" type="text" value="<%= summary %>" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<br />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<input name="<portlet:namespace />minorEdit" type="checkbox" />
+
+			<liferay-ui:message key="this-is-a-minor-edit" />
 		</td>
 	</tr>
 	</table>

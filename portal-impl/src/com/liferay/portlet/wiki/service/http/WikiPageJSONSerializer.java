@@ -66,6 +66,7 @@ public class WikiPageJSONSerializer {
 		JSONUtil.put(jsonObj, "title", model.getTitle());
 		JSONUtil.put(jsonObj, "version", model.getVersion());
 		JSONUtil.put(jsonObj, "content", model.getContent());
+		JSONUtil.put(jsonObj, "summary", model.getSummary());
 		JSONUtil.put(jsonObj, "format", model.getFormat());
 		JSONUtil.put(jsonObj, "head", model.getHead());
 		JSONUtil.put(jsonObj, "parentTitle", model.getParentTitle());

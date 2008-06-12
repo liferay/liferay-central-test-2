@@ -1473,6 +1473,7 @@
 		<property name="title" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="version" type="com.liferay.util.dao.hibernate.DoubleType" />
 		<property name="content" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="summary" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="format" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="head" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="parentTitle" type="com.liferay.util.dao.hibernate.StringType" />

@@ -78,7 +78,8 @@ import javax.portlet.PortletPreferences;
 public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 	public WikiPage addPage(
-			long nodeId, String title, String content, PortletPreferences prefs,
+			long nodeId, String title, String content, String summary,
+			boolean minorEdit, PortletPreferences prefs,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
@@ -86,7 +87,8 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			getPermissionChecker(), nodeId, ActionKeys.ADD_PAGE);
 
 		return wikiPageLocalService.addPage(
-			getUserId(), nodeId, title, content, prefs, themeDisplay);
+			getUserId(), nodeId, title, content, summary, minorEdit, prefs,
+			themeDisplay);
 	}
 
 	public void addPageAttachments(
@@ -245,17 +247,18 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 	public WikiPage updatePage(
 			long nodeId, String title, double version, String content,
-			String format, String parentTitle, String redirectTitle,
-			String[] tagsEntries, PortletPreferences prefs,
-			ThemeDisplay themeDisplay)
+			String summary, boolean minorEdit, String format,
+			String parentTitle, String redirectTitle, String[] tagsEntries,
+			PortletPreferences prefs, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		WikiPagePermission.check(
 			getPermissionChecker(), nodeId, title, ActionKeys.UPDATE);
 
 		return wikiPageLocalService.updatePage(
-			getUserId(), nodeId, title, version, content, format, parentTitle,
-			redirectTitle, tagsEntries, prefs, themeDisplay);
+			getUserId(), nodeId, title, version, content, summary, minorEdit,
+			format, parentTitle, redirectTitle, tagsEntries, prefs,
+			themeDisplay);
 	}
 
 	protected String exportToRSS(

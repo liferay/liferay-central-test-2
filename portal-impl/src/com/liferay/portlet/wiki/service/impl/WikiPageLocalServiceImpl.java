@@ -99,7 +99,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 	public WikiPage addPage(
 			long userId, long nodeId, String title, String content,
-			PortletPreferences prefs, ThemeDisplay themeDisplay)
+			String summary, boolean minorEdit, PortletPreferences prefs,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		String uuid = null;
@@ -111,15 +112,17 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String[] tagsEntries = null;
 
 		return addPage(
-			uuid, userId, nodeId, title, version, content, format, head,
-			parentTitle, redirectTitle, tagsEntries, prefs, themeDisplay);
+			uuid, userId, nodeId, title, version, content, summary, minorEdit,
+			format, head, parentTitle, redirectTitle, tagsEntries, prefs,
+			themeDisplay);
 	}
 
 	public WikiPage addPage(
 			String uuid, long userId, long nodeId, String title, double version,
-			String content, String format, boolean head, String parentTitle,
-			String redirectTitle, String[] tagsEntries,
-			PortletPreferences prefs, ThemeDisplay themeDisplay)
+			String content, String summary, boolean minorEdit, String format,
+			boolean head, String parentTitle, String redirectTitle,
+			String[] tagsEntries, PortletPreferences prefs,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		// Page
@@ -149,6 +152,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		page.setTitle(title);
 		page.setVersion(version);
 		page.setContent(content);
+		page.setSummary(summary);
 		page.setFormat(format);
 		page.setHead(head);
 		page.setParentTitle(parentTitle);
@@ -168,7 +172,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Subscriptions
 
-		if (NotificationThreadLocal.isNotificationEnabled()) {
+		if (!minorEdit && NotificationThreadLocal.isNotificationEnabled()) {
 			notifySubscribers(node, page, prefs, themeDisplay, false);
 		}
 
@@ -725,11 +729,13 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String content =
 			StringPool.DOUBLE_OPEN_BRACKET + redirectTitle +
 				StringPool.DOUBLE_CLOSE_BRACKET;
+		String summary = WikiPageImpl.MOVED + " to " + title;
 		String[] tagsEntries = null;
 
 		addPage(
-			uuid, userId, nodeId, title, version, content, format, head,
-			parentTitle, redirectTitle, tagsEntries, prefs, themeDisplay);
+			uuid, userId, nodeId, title, version, content, summary, false,
+			format, head, parentTitle, redirectTitle, tagsEntries, prefs,
+			themeDisplay);
 
 		// Move redirects to point to the page with the new title
 
@@ -766,8 +772,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		WikiPage oldPage = getPage(nodeId, title, version);
 
 		return updatePage(
-			userId, nodeId, title, 0, oldPage.getContent(), oldPage.getFormat(),
-			null, oldPage.getRedirectTitle(), null, prefs, themeDisplay);
+			userId, nodeId, title, 0, oldPage.getContent(),
+			WikiPageImpl.REVERTED + " to " + version, false,
+			oldPage.getFormat(), null, oldPage.getRedirectTitle(), null, prefs,
+			themeDisplay);
 	}
 
 	public void subscribePage(long userId, long nodeId, String title)
@@ -790,8 +798,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 	public WikiPage updatePage(
 			long userId, long nodeId, String title, double version,
-			String content, String format, String parentTitle,
-			String redirectTitle, String[] tagsEntries,
+			String content, String summary, boolean minorEdit, String format,
+			String parentTitle, String redirectTitle, String[] tagsEntries,
 			PortletPreferences prefs, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
@@ -810,8 +818,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		catch (NoSuchPageException nspe) {
 			return addPage(
 				null, userId, nodeId, title, WikiPageImpl.DEFAULT_VERSION,
-				content, format, true, parentTitle, redirectTitle, tagsEntries,
-				prefs, themeDisplay);
+				content, summary, minorEdit, format, true, parentTitle,
+				redirectTitle, tagsEntries, prefs, themeDisplay);
 		}
 
 		double oldVersion = page.getVersion();
@@ -843,6 +851,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		page.setTitle(title);
 		page.setVersion(newVersion);
 		page.setContent(content);
+		page.setSummary(summary);
 		page.setFormat(format);
 		page.setHead(true);
 
@@ -866,7 +875,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Subscriptions
 
-		if (NotificationThreadLocal.isNotificationEnabled()) {
+		if (!minorEdit && NotificationThreadLocal.isNotificationEnabled()) {
 			notifySubscribers(node, page, prefs, themeDisplay, true);
 		}
 

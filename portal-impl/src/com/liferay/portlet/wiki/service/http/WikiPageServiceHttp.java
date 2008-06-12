@@ -24,6 +24,7 @@ package com.liferay.portlet.wiki.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.DoubleWrapper;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
@@ -76,7 +77,8 @@ import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 public class WikiPageServiceHttp {
 	public static com.liferay.portlet.wiki.model.WikiPage addPage(
 		HttpPrincipal httpPrincipal, long nodeId, java.lang.String title,
-		java.lang.String content, javax.portlet.PortletPreferences prefs,
+		java.lang.String content, java.lang.String summary, boolean minorEdit,
+		javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -95,23 +97,32 @@ public class WikiPageServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = prefs;
+			Object paramObj3 = summary;
 
-			if (prefs == null) {
-				paramObj3 = new NullWrapper("javax.portlet.PortletPreferences");
+			if (summary == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = themeDisplay;
+			Object paramObj4 = new BooleanWrapper(minorEdit);
+
+			Object paramObj5 = prefs;
+
+			if (prefs == null) {
+				paramObj5 = new NullWrapper("javax.portlet.PortletPreferences");
+			}
+
+			Object paramObj6 = themeDisplay;
 
 			if (themeDisplay == null) {
-				paramObj4 = new NullWrapper(
+				paramObj6 = new NullWrapper(
 						"com.liferay.portal.theme.ThemeDisplay");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(WikiPageServiceUtil.class.getName(),
 					"addPage",
 					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6
 					});
 
 			Object returnObj = null;
@@ -751,7 +762,8 @@ public class WikiPageServiceHttp {
 
 	public static com.liferay.portlet.wiki.model.WikiPage updatePage(
 		HttpPrincipal httpPrincipal, long nodeId, java.lang.String title,
-		double version, java.lang.String content, java.lang.String format,
+		double version, java.lang.String content, java.lang.String summary,
+		boolean minorEdit, java.lang.String format,
 		java.lang.String parentTitle, java.lang.String redirectTitle,
 		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
@@ -774,40 +786,48 @@ public class WikiPageServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = format;
+			Object paramObj4 = summary;
 
-			if (format == null) {
+			if (summary == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = parentTitle;
+			Object paramObj5 = new BooleanWrapper(minorEdit);
 
-			if (parentTitle == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
+			Object paramObj6 = format;
 
-			Object paramObj6 = redirectTitle;
-
-			if (redirectTitle == null) {
+			if (format == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = tagsEntries;
+			Object paramObj7 = parentTitle;
+
+			if (parentTitle == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = redirectTitle;
+
+			if (redirectTitle == null) {
+				paramObj8 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj9 = tagsEntries;
 
 			if (tagsEntries == null) {
-				paramObj7 = new NullWrapper("[Ljava.lang.String;");
+				paramObj9 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj8 = prefs;
+			Object paramObj10 = prefs;
 
 			if (prefs == null) {
-				paramObj8 = new NullWrapper("javax.portlet.PortletPreferences");
+				paramObj10 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 
-			Object paramObj9 = themeDisplay;
+			Object paramObj11 = themeDisplay;
 
 			if (themeDisplay == null) {
-				paramObj9 = new NullWrapper(
+				paramObj11 = new NullWrapper(
 						"com.liferay.portal.theme.ThemeDisplay");
 			}
 
@@ -815,7 +835,8 @@ public class WikiPageServiceHttp {
 					"updatePage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11
 					});
 
 			Object returnObj = null;

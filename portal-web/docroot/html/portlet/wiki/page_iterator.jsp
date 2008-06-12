@@ -141,6 +141,10 @@ headerNames.add("revision");
 headerNames.add("user");
 headerNames.add("date");
 
+if (type.equals("history") || type.equals("recent_changes")) {
+	headerNames.add("summary");
+}
+
 if (type.equals("history")) {
 	headerNames.add(StringPool.BLANK);
 }
@@ -275,6 +279,17 @@ for (int i = 0; i < results.size(); i++) {
 	}
 	else {
 		row.addText(StringPool.BLANK);
+	}
+
+	// Summary
+
+	if (type.equals("history") || type.equals("recent_changes")) {
+		if (Validator.isNotNull(curWikiPage.getSummary())) {
+			row.addText(curWikiPage.getSummary());
+		}
+		else {
+			row.addText(StringPool.BLANK);
+		}
 	}
 
 	// Action

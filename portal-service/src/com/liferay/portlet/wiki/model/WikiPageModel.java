@@ -99,6 +99,10 @@ public interface WikiPageModel extends BaseModel {
 
 	public void setContent(String content);
 
+	public String getSummary();
+
+	public void setSummary(String summary);
+
 	public String getFormat();
 
 	public void setFormat(String format);

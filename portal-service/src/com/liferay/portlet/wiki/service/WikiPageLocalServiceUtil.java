@@ -110,6 +110,7 @@ public class WikiPageLocalServiceUtil {
 
 	public static com.liferay.portlet.wiki.model.WikiPage addPage(long userId,
 		long nodeId, java.lang.String title, java.lang.String content,
+		java.lang.String summary, boolean minorEdit,
 		javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
@@ -117,13 +118,14 @@ public class WikiPageLocalServiceUtil {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
 		return wikiPageLocalService.addPage(userId, nodeId, title, content,
-			prefs, themeDisplay);
+			summary, minorEdit, prefs, themeDisplay);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage addPage(
 		java.lang.String uuid, long userId, long nodeId,
 		java.lang.String title, double version, java.lang.String content,
-		java.lang.String format, boolean head, java.lang.String parentTitle,
+		java.lang.String summary, boolean minorEdit, java.lang.String format,
+		boolean head, java.lang.String parentTitle,
 		java.lang.String redirectTitle, java.lang.String[] tagsEntries,
 		javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
@@ -132,8 +134,8 @@ public class WikiPageLocalServiceUtil {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
 		return wikiPageLocalService.addPage(uuid, userId, nodeId, title,
-			version, content, format, head, parentTitle, redirectTitle,
-			tagsEntries, prefs, themeDisplay);
+			version, content, summary, minorEdit, format, head, parentTitle,
+			redirectTitle, tagsEntries, prefs, themeDisplay);
 	}
 
 	public static void addPageAttachments(long nodeId, java.lang.String title,
@@ -432,17 +434,18 @@ public class WikiPageLocalServiceUtil {
 
 	public static com.liferay.portlet.wiki.model.WikiPage updatePage(
 		long userId, long nodeId, java.lang.String title, double version,
-		java.lang.String content, java.lang.String format,
-		java.lang.String parentTitle, java.lang.String redirectTitle,
-		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
+		java.lang.String content, java.lang.String summary, boolean minorEdit,
+		java.lang.String format, java.lang.String parentTitle,
+		java.lang.String redirectTitle, java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
 		return wikiPageLocalService.updatePage(userId, nodeId, title, version,
-			content, format, parentTitle, redirectTitle, tagsEntries, prefs,
-			themeDisplay);
+			content, summary, minorEdit, format, parentTitle, redirectTitle,
+			tagsEntries, prefs, themeDisplay);
 	}
 
 	public static void updateTagsAsset(long userId,

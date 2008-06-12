@@ -1497,6 +1497,7 @@ create table WikiPage (
 	title VARCHAR(75) null,
 	version DOUBLE,
 	content TEXT null,
+	summary VARCHAR(75) null,
 	format VARCHAR(75) null,
 	head BOOLEAN,
 	parentTitle VARCHAR(75) null,

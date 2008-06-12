@@ -1613,6 +1613,7 @@
 			<hint name="display-width">99%</hint>
 			<hint name="check-tab">true</hint>
 		</field>
+		<field name="summary" type="String" />
 		<field name="format" type="String" />
 		<field name="head" type="boolean" />
 		<field name="parentTitle" type="String" />

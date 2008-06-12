@@ -62,6 +62,7 @@ public class WikiPageSoap implements Serializable {
 		soapModel.setTitle(model.getTitle());
 		soapModel.setVersion(model.getVersion());
 		soapModel.setContent(model.getContent());
+		soapModel.setSummary(model.getSummary());
 		soapModel.setFormat(model.getFormat());
 		soapModel.setHead(model.getHead());
 		soapModel.setParentTitle(model.getParentTitle());
@@ -187,6 +188,14 @@ public class WikiPageSoap implements Serializable {
 		_content = content;
 	}
 
+	public String getSummary() {
+		return _summary;
+	}
+
+	public void setSummary(String summary) {
+		_summary = summary;
+	}
+
 	public String getFormat() {
 		return _format;
 	}
@@ -235,6 +244,7 @@ public class WikiPageSoap implements Serializable {
 	private String _title;
 	private double _version;
 	private String _content;
+	private String _summary;
 	private String _format;
 	private boolean _head;
 	private String _parentTitle;

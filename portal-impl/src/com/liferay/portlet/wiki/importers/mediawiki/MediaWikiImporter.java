@@ -46,6 +46,7 @@ import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.importers.WikiImporter;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
+import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 import com.liferay.portlet.wiki.translators.MediaWikiToCreoleTranslator;
 
@@ -164,12 +165,13 @@ public class MediaWikiImporter implements WikiImporter {
 			}
 			catch (NoSuchPageException nspe) {
 				page = WikiPageLocalServiceUtil.addPage(
-					authorUserId, node.getNodeId(), title, null, null, null);
+					authorUserId, node.getNodeId(), title, WikiPageImpl.NEW,
+					null, true, null, null);
 			}
 
 			WikiPageLocalServiceUtil.updatePage(
 				authorUserId, node.getNodeId(), title, page.getVersion(),
-				content, "creole", StringPool.BLANK, redirectTitle,
+				content, null, true, "creole", StringPool.BLANK, redirectTitle,
 				tagsEntries, null, null);
 		}
 		catch (Exception e) {
@@ -258,7 +260,7 @@ public class MediaWikiImporter implements WikiImporter {
 			catch (NoSuchPageException nspe) {
 				WikiPageLocalServiceUtil.addPage(
 					userId, node.getNodeId(), SHARED_IMAGES_TITLE,
-					SHARED_IMAGES_CONTENT, null, null);
+					SHARED_IMAGES_CONTENT, null, true, null, null);
 			}
 		}
 

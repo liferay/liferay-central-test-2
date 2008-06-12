@@ -388,25 +388,26 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 
 					existingPage = WikiPageLocalServiceUtil.updatePage(
 						userId, nodeId, existingPage.getTitle(), 0,
-						page.getContent(), page.getFormat(),
-						page.getParentTitle(), page.getRedirectTitle(),
-						tagsEntries, prefs, themeDisplay);
+						page.getContent(), page.getSummary(), true,
+						page.getFormat(), page.getParentTitle(),
+						page.getRedirectTitle(), tagsEntries, prefs,
+						themeDisplay);
 				}
 				catch (NoSuchPageException nspe) {
 					existingPage = WikiPageLocalServiceUtil.addPage(
 						page.getUuid(), userId, nodeId, page.getTitle(),
-						page.getVersion(), page.getContent(), page.getFormat(),
-						page.getHead(), page.getParentTitle(),
-						page.getRedirectTitle(), tagsEntries, prefs,
-						themeDisplay);
+						page.getVersion(), page.getContent(), page.getSummary(),
+						true, page.getFormat(), page.getHead(),
+						page.getParentTitle(), page.getRedirectTitle(),
+						tagsEntries, prefs, themeDisplay);
 				}
 			}
 			else {
 				existingPage = WikiPageLocalServiceUtil.addPage(
 					null, userId, nodeId, page.getTitle(), page.getVersion(),
-					page.getContent(), page.getFormat(), page.getHead(),
-					page.getParentTitle(), page.getRedirectTitle(), tagsEntries,
-					prefs, themeDisplay);
+					page.getContent(), page.getSummary(), true,
+					page.getFormat(), page.getHead(), page.getParentTitle(),
+					page.getRedirectTitle(), tagsEntries, prefs, themeDisplay);
 			}
 
 			if (context.getBooleanParameter(_NAMESPACE, "attachments") &&

@@ -100,6 +100,9 @@ public class WikiPageModelImpl extends BaseModelImpl {
 			{ "content", new Integer(Types.CLOB) },
 			
 
+			{ "summary", new Integer(Types.VARCHAR) },
+			
+
 			{ "format", new Integer(Types.VARCHAR) },
 			
 
@@ -111,7 +114,7 @@ public class WikiPageModelImpl extends BaseModelImpl {
 
 			{ "redirectTitle", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table WikiPage (uuid_ VARCHAR(75) null,pageId LONG not null primary key,resourcePrimKey LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,nodeId LONG,title VARCHAR(75) null,version DOUBLE,content TEXT null,format VARCHAR(75) null,head BOOLEAN,parentTitle VARCHAR(75) null,redirectTitle VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table WikiPage (uuid_ VARCHAR(75) null,pageId LONG not null primary key,resourcePrimKey LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,nodeId LONG,title VARCHAR(75) null,version DOUBLE,content TEXT null,summary VARCHAR(75) null,format VARCHAR(75) null,head BOOLEAN,parentTitle VARCHAR(75) null,redirectTitle VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table WikiPage";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -135,6 +138,7 @@ public class WikiPageModelImpl extends BaseModelImpl {
 		model.setTitle(soapModel.getTitle());
 		model.setVersion(soapModel.getVersion());
 		model.setContent(soapModel.getContent());
+		model.setSummary(soapModel.getSummary());
 		model.setFormat(soapModel.getFormat());
 		model.setHead(soapModel.getHead());
 		model.setParentTitle(soapModel.getParentTitle());
@@ -305,6 +309,19 @@ public class WikiPageModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public String getSummary() {
+		return GetterUtil.getString(_summary);
+	}
+
+	public void setSummary(String summary) {
+		if (((summary == null) && (_summary != null)) ||
+				((summary != null) && (_summary == null)) ||
+				((summary != null) && (_summary != null) &&
+				!summary.equals(_summary))) {
+			_summary = summary;
+		}
+	}
+
 	public String getFormat() {
 		return GetterUtil.getString(_format);
 	}
@@ -379,6 +396,7 @@ public class WikiPageModelImpl extends BaseModelImpl {
 			model.setTitle(HtmlUtil.escape(getTitle()));
 			model.setVersion(getVersion());
 			model.setContent(HtmlUtil.escape(getContent()));
+			model.setSummary(HtmlUtil.escape(getSummary()));
 			model.setFormat(HtmlUtil.escape(getFormat()));
 			model.setHead(getHead());
 			model.setParentTitle(HtmlUtil.escape(getParentTitle()));
@@ -407,6 +425,7 @@ public class WikiPageModelImpl extends BaseModelImpl {
 		clone.setTitle(getTitle());
 		clone.setVersion(getVersion());
 		clone.setContent(getContent());
+		clone.setSummary(getSummary());
 		clone.setFormat(getFormat());
 		clone.setHead(getHead());
 		clone.setParentTitle(getParentTitle());
@@ -502,6 +521,7 @@ public class WikiPageModelImpl extends BaseModelImpl {
 	private String _title;
 	private double _version;
 	private String _content;
+	private String _summary;
 	private String _format;
 	private boolean _head;
 	private String _parentTitle;

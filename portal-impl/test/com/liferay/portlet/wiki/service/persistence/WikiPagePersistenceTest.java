@@ -81,6 +81,7 @@ public class WikiPagePersistenceTest extends BasePersistenceTestCase {
 		newWikiPage.setTitle(randomString());
 		newWikiPage.setVersion(nextDouble());
 		newWikiPage.setContent(randomString());
+		newWikiPage.setSummary(randomString());
 		newWikiPage.setFormat(randomString());
 		newWikiPage.setHead(randomBoolean());
 		newWikiPage.setParentTitle(randomString());
@@ -105,6 +106,7 @@ public class WikiPagePersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingWikiPage.getTitle(), newWikiPage.getTitle());
 		assertEquals(existingWikiPage.getVersion(), newWikiPage.getVersion());
 		assertEquals(existingWikiPage.getContent(), newWikiPage.getContent());
+		assertEquals(existingWikiPage.getSummary(), newWikiPage.getSummary());
 		assertEquals(existingWikiPage.getFormat(), newWikiPage.getFormat());
 		assertEquals(existingWikiPage.getHead(), newWikiPage.getHead());
 		assertEquals(existingWikiPage.getParentTitle(),
@@ -165,6 +167,7 @@ public class WikiPagePersistenceTest extends BasePersistenceTestCase {
 		wikiPage.setTitle(randomString());
 		wikiPage.setVersion(nextDouble());
 		wikiPage.setContent(randomString());
+		wikiPage.setSummary(randomString());
 		wikiPage.setFormat(randomString());
 		wikiPage.setHead(randomBoolean());
 		wikiPage.setParentTitle(randomString());

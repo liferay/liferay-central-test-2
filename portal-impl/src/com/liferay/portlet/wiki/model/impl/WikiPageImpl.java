@@ -65,6 +65,10 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 
 	public static final String MOVED = "Moved";
 
+	public static final String NEW = "New";
+
+	public static final String REVERTED = "Reverted";
+
 	public WikiPageImpl() {
 	}
 

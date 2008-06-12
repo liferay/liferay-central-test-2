@@ -198,7 +198,8 @@ public class EditPageAction extends PortletAction {
 			catch (NoSuchPageException nspe) {
 				if (title.equals(WikiPageImpl.FRONT_PAGE) && (version == 0)) {
 					page = WikiPageServiceUtil.addPage(
-						nodeId, title, null, null, null);
+						nodeId, title, null, WikiPageImpl.NEW, true, null,
+						null);
 				}
 				else {
 					throw nspe;
@@ -284,6 +285,8 @@ public class EditPageAction extends PortletAction {
 		double version = ParamUtil.getDouble(req, "version");
 
 		String content = ParamUtil.getString(req, "content");
+		String summary = ParamUtil.getString(req, "summary");
+		boolean minorEdit = ParamUtil.getBoolean(req, "minorEdit");
 		String format = ParamUtil.getString(req, "format");
 		String parentTitle = ParamUtil.getString(req, "parentTitle");
 		String redirectTitle = null;
@@ -292,8 +295,8 @@ public class EditPageAction extends PortletAction {
 			ParamUtil.getString(req, "tagsEntries"));
 
 		return WikiPageServiceUtil.updatePage(
-			nodeId, title, version, content, format, parentTitle, redirectTitle,
-			tagsEntries, prefs, themeDisplay);
+			nodeId, title, version, content, summary, minorEdit, format,
+			parentTitle, redirectTitle, tagsEntries, prefs, themeDisplay);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {

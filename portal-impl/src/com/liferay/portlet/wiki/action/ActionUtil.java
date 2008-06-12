@@ -117,7 +117,7 @@ public class ActionUtil {
 		catch (NoSuchPageException nspe) {
 			if (title.equals(WikiPageImpl.FRONT_PAGE) && (version == 0)) {
 				page = WikiPageServiceUtil.addPage(
-					nodeId, title, null, null, null);
+					nodeId, title, null, WikiPageImpl.NEW, true, null, null);
 			}
 			else {
 				throw nspe;
