@@ -125,26 +125,22 @@ portletURL.setParameter("typeSelection", JournalArticle.class.getName());
 					</select>
 				</c:when>
 				<c:otherwise>
-
-					<%
-					LinkedHashMap groupParams = new LinkedHashMap();
-
-					groupParams.put("usersGroups", new Long(user.getUserId()));
-
-					List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-					%>
-
 					<select name="<portlet:namespace /><%= displayTerms.GROUP_ID %>">
-						<c:if test="<%= layout.getGroup().isUser() %>">
-							<option <%= displayTerms.getGroupId() == layout.getGroupId() ? "selected" : "" %> value="<%= String.valueOf(layout.getGroupId()) %>"><liferay-ui:message key="my-community" /></option>
-						</c:if>
 
 						<%
+						List<Group> communities = user.getMyPlaces();
+
 						for (int i = 0; i < communities.size(); i++) {
-							Group group = (Group)communities.get(i);
+							Group group = communities.get(i);
+
+							String groupName = group.getDescriptiveName();
+
+							if (group.isUser()) {
+								groupName = LanguageUtil.get(pageContext, "my-community");
+							}
 						%>
 
-							<option <%= displayTerms.getGroupId() == group.getGroupId() ? "selected" : "" %> value="<%= String.valueOf(group.getGroupId()) %>"><%= group.getName() %></option>
+							<option <%= displayTerms.getGroupId() == group.getGroupId() ? "selected" : "" %> value="<%= group.getGroupId() %>"><%= groupName %></option>
 
 						<%
 						}
