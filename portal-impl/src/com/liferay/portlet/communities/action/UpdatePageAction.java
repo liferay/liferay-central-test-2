@@ -36,6 +36,7 @@ import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.struts.JSONAction;
@@ -73,13 +74,29 @@ public class UpdatePageAction extends JSONAction {
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
+		long plid = ParamUtil.getLong(req, "plid");
+
 		long groupId = ParamUtil.getLong(req, "groupId");
 		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
+		long layoutId = ParamUtil.getLong(req, "layoutId");
 		long parentLayoutId = ParamUtil.getLong(req, "parentLayoutId");
 
+		Layout layout = null;
+
+		if (plid > 0) {
+			layout = LayoutLocalServiceUtil.getLayout(plid);
+		}
+		else if (layoutId > 0) {
+			layout = LayoutLocalServiceUtil.getLayout(
+				groupId, privateLayout, layoutId);
+		}
+		else if (parentLayoutId > 0) {
+			layout = LayoutLocalServiceUtil.getLayout(
+				groupId, privateLayout, parentLayoutId);
+		}
+
 		if (!LayoutPermissionUtil.contains(
-				permissionChecker, groupId, privateLayout, parentLayoutId,
-				ActionKeys.UPDATE)) {
+				permissionChecker, layout, ActionKeys.UPDATE)) {
 
 			return null;
 		}
@@ -197,10 +214,11 @@ public class UpdatePageAction extends JSONAction {
 
 		long plid = ParamUtil.getLong(req, "plid");
 
+		long parentPlid = ParamUtil.getLong(req, "parentPlid");
+
 		long groupId = ParamUtil.getLong(req, "groupId");
 		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
 		long layoutId = ParamUtil.getLong(req, "layoutId");
-		long parentPlid = ParamUtil.getLong(req, "parentPlid");
 		long parentLayoutId = ParamUtil.getLong(
 			req, "parentLayoutId", LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
