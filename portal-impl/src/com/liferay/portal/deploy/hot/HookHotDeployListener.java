@@ -27,12 +27,10 @@ import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.events.Action;
-import com.liferay.portal.kernel.events.InvokerAction;
 import com.liferay.portal.kernel.events.InvokerSimpleAction;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.InvokerModelListener;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.util.DocumentUtil;
@@ -230,8 +228,8 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			eventType.equals(PropsUtil.LOGOUT_EVENTS_POST) ||
 			eventType.equals(PropsUtil.LOGOUT_EVENTS_PRE)) {
 
-			Action action = new InvokerAction(
-				(Action)portletClassLoader.loadClass(eventClass).newInstance());
+			Action action = (Action)portletClassLoader.loadClass(
+				eventClass).newInstance();
 
 			EventsProcessor.registerEvent(eventType, action);
 
@@ -246,9 +244,9 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			ClassLoader portletClassLoader)
 		throws Exception {
 
-		InvokerModelListener modelListener = new InvokerModelListener(
+		ModelListener modelListener =
 			(ModelListener)portletClassLoader.loadClass(
-				modelListenerClass).newInstance());
+				modelListenerClass).newInstance();
 
 		BasePersistence persistence = getPersistence(modelName);
 
