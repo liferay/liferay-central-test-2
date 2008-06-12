@@ -25,61 +25,52 @@
 <%@ include file="/html/common/init.jsp" %>
 
 <c:if test="<%= themeDisplay.isIncludeCalendarJs() %>">
-<%
-Calendar selCal = CalendarFactoryUtil.getCalendar(timeZone, locale);
-%>
 	<script type="text/javascript">
 		jQuery.datepicker.setDefaults(
 			{
-				clearText: '<liferay-ui:message key="clear" />', // Display text for clear link
-				clearStatus: '<liferay-ui:message key="erase-the-current-date" />', // Status text for clear link
-				closeText: '<liferay-ui:message key="close" />', // Display text for close link
-				closeStatus: '<liferay-ui:message key="cancel" />', // Status text for close link
-				prevText: '&#x3c;<liferay-ui:message key="previous" />', // Display text for previous month link
-				prevStatus: '<liferay-ui:message key="previous" />', // Status text for previous month link
-				nextText: '<liferay-ui:message key="next" />&#x3e;', // Display text for next month link
-				nextStatus: '<liferay-ui:message key="next" />', // Status text for next month link
-				currentText: '<liferay-ui:message key="today" />', // Display text for current month link
-				currentStatus: '<liferay-ui:message key="current-month" />', // Status text for current month link
-				<%
-				String[] calendarMonths = CalendarUtil.getMonths(locale);
-				%>
-				monthNames: <%= JS.toScript(calendarMonths) %>, // Names of months for drop-down and formatting
-				<%
-				calendarMonths = CalendarUtil.getMonths(locale, "MMM");
-				%>
-				monthNamesShort: <%= JS.toScript(calendarMonths) %>, // For formatting
-
-				monthStatus: '<liferay-ui:message key="show-a-different-month" />', // Status text for selecting a month
-				yearStatus: '<liferay-ui:message key="show-a-different-year" />', // Status text for selecting a year
-				weekHeader: '<liferay-ui:message key="week-abbreviation" />', // Header for the week of the year column
-				weekStatus: '<liferay-ui:message key="week-of-the-year" />', // Status text for the week of the year column
+				clearText: '<liferay-ui:message key="clear" />',
+				clearStatus: '<liferay-ui:message key="erase-the-current-date" />',
+				closeText: '<liferay-ui:message key="close" />',
+				closeStatus: '<liferay-ui:message key="cancel" />',
+				prevText: '&#x3c;<liferay-ui:message key="previous" />',
+				prevStatus: '<liferay-ui:message key="previous" />',
+				nextText: '<liferay-ui:message key="next" />&#x3e;',
+				nextStatus: '<liferay-ui:message key="next" />',
+				currentText: '<liferay-ui:message key="today" />',
+				currentStatus: '<liferay-ui:message key="current-month" />',
+				monthNames: <%= JS.toScript(CalendarUtil.getMonths(locale)) %>,
+				monthNamesShort: <%= JS.toScript(CalendarUtil.getMonths(locale, "MMM")) %>,
+				monthStatus: '<liferay-ui:message key="show-a-different-month" />',
+				yearStatus: '<liferay-ui:message key="show-a-different-year" />',
+				weekHeader: '<liferay-ui:message key="week-abbreviation" />',
+				weekStatus: '<liferay-ui:message key="week-of-the-year" />',
+				dayNames: <%= JS.toScript(CalendarUtil.getDays(locale, "EEEE")) %>,
 
 				<%
 				String[] calendarDays = CalendarUtil.getDays(locale, "EEEE");
 				%>
-				dayNames: <%= JS.toScript(calendarDays) %>, // For formatting
+
+				dayNamesShort: <%= JS.toScript(calendarDays) %>,
+
 				<%
-				calendarDays = CalendarUtil.getDays(locale, "EEE");
-				%>
-				dayNamesShort: <%= JS.toScript(calendarMonths) %>, // For formatting
-				<%
-				int i = 0;
-				for (String day : calendarDays) {
-					int daysIndex = (selCal.getFirstDayOfWeek() + i - 1) % 7;
+				Calendar cal = CalendarFactoryUtil.getCalendar(timeZone, locale);
+
+				for (int i = 0; i < calendarDays.length; i++) {
+					String day = calendarDays[i];
+
+					int daysIndex = (cal.getFirstDayOfWeek() + i - 1) % 7;
 
 					calendarDays[i] = LanguageUtil.get(pageContext, CalendarUtil.DAYS_ABBREVIATION[daysIndex]);
-					i++;
 				}
 				%>
-				dayNamesMin: <%= JS.toScript(calendarDays) %>, // Column headings for days starting at Sunday
 
-				dayStatus: '', // Status text for the day of the week selection (Set DD as first week day)
-				dateStatus: '', // Status text for the date selection (Select DD, M d)
-				dateFormat: 'mm/dd/yy', // See format options on parseDate
-				firstDay: <%= (selCal.getFirstDayOfWeek() - 1) % 7 %>, // The first day of the week, Sun = 0, Mon = 1, ...
-				initStatus: '<liferay-ui:message key="select-date" />', // Initial Status text on opening
-				isRTL: ('<liferay-ui:message key="lang.dir" />' === 'rtl') // True if right-to-left language, false if left-to-right
+				dayNamesMin: <%= JS.toScript(calendarDays) %>,
+				dayStatus: '',
+				dateStatus: '',
+				dateFormat: 'mm/dd/yy',
+				firstDay: <%= (cal.getFirstDayOfWeek() - 1) % 7 %>,
+				initStatus: '<liferay-ui:message key="select-date" />',
+				isRTL: ('<liferay-ui:message key="lang.dir" />' === 'rtl')
 			}
 		);
 	</script>

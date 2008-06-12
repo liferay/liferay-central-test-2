@@ -82,7 +82,9 @@ else {
 			_beforeShow: function() {
 				var instance = this;
 
-				var month, day, year;
+				var month = null;
+				var day = null;
+				var year = null;;
 
 				if (!instance._combinedMonthYear) {
 					month = instance._monthField.val();
@@ -90,12 +92,13 @@ else {
 				}
 				else {
 					var value = instance._monthYearField.val();
+
 					value = value.split('_');
+
 					month = value[0];
 					year = value[1];
 				}
 
-				// Offset month +1 because it's starting index is at zero
 				month++;
 
 				day = instance._dayField.val();
@@ -279,4 +282,5 @@ else {
 		</select>
 	</c:otherwise>
 </c:choose>
-<input class="<%= disabled ? "disabled" : "" %>" type="hidden" id="<%= imageInputId %>Input" />
+
+<input class="<%= disabled ? "disabled" : "" %>" id="<%= imageInputId %>Input" type="hidden" />
