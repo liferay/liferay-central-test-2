@@ -257,12 +257,14 @@ public class LiveUsers {
 		List<UserTracker> userTrackers = _getUserTrackers(userId);
 
 		if (userTrackers != null) {
+			String userSessionId = userTracker.getSessionId();
+
 			Iterator<UserTracker> itr = userTrackers.iterator();
 
 			while (itr.hasNext()) {
 				UserTracker curUserTracker = itr.next();
 
-				if (userTracker.equals(curUserTracker)) {
+				if (userSessionId.equals(curUserTracker.getSessionId())) {
 					itr.remove();
 				}
 			}
