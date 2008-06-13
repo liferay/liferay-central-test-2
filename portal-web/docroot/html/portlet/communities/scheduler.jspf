@@ -32,16 +32,16 @@ getPublishToLiveRequestsURL.setParameter("privateLayout", String.valueOf(private
 
 <script type="text/javascript">
 	function <portlet:namespace />addPublishToLiveRequest() {
-	   document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = "add_publish_to_live_request";
+		document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = "add_publish_to_live_request";
 
-       var addButton = jQuery('#<portlet:namespace />addButton');
-	   addButton.attr("disabled", true);
+		var addButton = jQuery('#<portlet:namespace />addButton');
+		addButton.attr("disabled", true);
 
-       jQuery(document.<portlet:namespace />exportPagesFm).ajaxSubmit({
-           success: function() {
-               <portlet:namespace />updatePublishToLiveRequestsDiv();
-           }
-       });
+		jQuery(document.<portlet:namespace />exportPagesFm).ajaxSubmit({
+			success: function() {
+				<portlet:namespace />updatePublishToLiveRequestsDiv();
+			}
+		});
 	}
 
 	function <portlet:namespace />deletePublishToLiveRequest(jobName) {
@@ -49,10 +49,10 @@ getPublishToLiveRequestsURL.setParameter("privateLayout", String.valueOf(private
 		document.<portlet:namespace />exportPagesFm.<portlet:namespace />jobName.value = jobName;
 
 		jQuery(document.<portlet:namespace />exportPagesFm).ajaxSubmit({
-           success: function() {
-               <portlet:namespace />updatePublishToLiveRequestsDiv();
-           }
-       });
+			success: function() {
+				<portlet:namespace />updatePublishToLiveRequestsDiv();
+			}
+		});
 	}
 
 	function <portlet:namespace />updatePublishToLiveRequestsDiv() {
