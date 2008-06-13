@@ -77,6 +77,14 @@
 			jQuery('#' + parentDivId).find("input").attr("disabled", "disabled");
 		}
 	}
+
+	function <portlet:namespace />hideDateRange() {
+		jQuery("#<portlet:namespace />startEndDate").hide();
+	}
+
+	function <portlet:namespace />showDateRange() {
+		jQuery("#<portlet:namespace />startEndDate").show();
+	}
 </script>
 
 <ul class="gamma lfr-component">
@@ -170,7 +178,7 @@
 					<c:otherwise>
 						<input id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT %>" type="hidden" value="true" />
 
-						<input  checked="checked" id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>" onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace />portletDataList');" type="checkbox" />
+						<input  checked="checked" id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>" onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace />portletDataControls');" type="checkbox" />
 
 						<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>Checkbox"><liferay-ui:message key="data" /></label>
 
@@ -178,54 +186,161 @@
 							<input id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_ALL %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_ALL %>" type="hidden" value="<%= true %>" />
 						</span>
 
-						<div id="<portlet:namespace />portletDataList" style="display: none;">
+						<div id="<portlet:namespace/>portletDataControls">
+
 							<ul>
+								<li class="tree-item">
+									<liferay-ui:message key="date-range" />:
 
-								<%
-								itr1 = portletsList.iterator();
+									<ul>
+										<li>
 
-								while (itr1.hasNext()) {
-									Portlet curPortlet = (Portlet)itr1.next();
-
-									PortletDataHandler portletDataHandler = curPortlet.getPortletDataHandlerInstance();
-
-									PortletConfig curPortletConfig = PortletConfigFactory.create(curPortlet, application);
-
-									ResourceBundle resourceBundle = curPortletConfig.getResourceBundle(locale);
-
-									try {
-										PortletDataHandlerControl[] controls = portletDataHandler.getImportControls();
-
-										if (controls != null) {
-											String rootPortletId = curPortlet.getRootPortletId();
-								%>
-
-											<li class="tree-item">
-												<input checked id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA + "_" + rootPortletId %>"  onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA + "_" + rootPortletId + "Controls" %>');" type="checkbox" />
-
-												<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>"><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %></label>
-
-												<ul id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId + "Controls" %>">
-													<%= _renderControls(renderResponse.getNamespace(), resourceBundle, controls) %>
-												</ul>
-											</li>
-
-								<%
-										}
-									}
-									catch (PortletDataException pde) {
-									%>
-
-										<li class="tree-item">
-											<span class="portlet-msg-error"><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %>: <%= LanguageUtil.get(pageContext, "error-initializing-import-controls") %></span>
+											<input checked id="<portlet:namespace />dateRangeAll" name="<portlet:namespace />dateRange" onClick='<%= renderResponse.getNamespace() + "hideDateRange()" %>' type="radio" value="false" />
+											<label for="<portlet:namespace />dateRangeAll"><liferay-ui:message key="all" /></label>
 										</li>
+										<li>
+											<input id="<portlet:namespace />dateRangeRange" name="<portlet:namespace />dateRange"  onClick='<%= renderResponse.getNamespace() + "showDateRange()" %>' type="radio" value="true" />
+											<label for="<portlet:namespace />dateRangeRange"><liferay-ui:message key="range" /></label> <liferay-ui:icon-help message="export-date-range-help" />
 
-								<%
-									}
-								}
-								%>
+											<%
+											Calendar today = CalendarFactoryUtil.getCalendar(timeZone, locale);
+
+											Calendar yesterday = CalendarFactoryUtil.getCalendar(timeZone, locale);
+
+											yesterday.add(Calendar.DATE, -1);
+											%>
+
+											<br />
+
+											<ul id="<portlet:namespace />startEndDate" style="display: none;">
+												<li>
+													<table class="lfr-table">
+													<tr>
+														<td>
+															<liferay-ui:message key="start-date" />
+														</td>
+														<td>
+															<liferay-ui:input-date
+																monthParam="startDateMonth"
+																monthValue="<%= yesterday.get(Calendar.MONTH) %>"
+																dayParam="startDateDay"
+																dayValue="<%= yesterday.get(Calendar.DATE) %>"
+																yearParam="startDateYear"
+																yearValue="<%= yesterday.get(Calendar.YEAR) %>"
+																yearRangeStart="<%= yesterday.get(Calendar.YEAR) - 100 %>"
+																yearRangeEnd="<%= yesterday.get(Calendar.YEAR) %>"
+																firstDayOfWeek="<%= yesterday.getFirstDayOfWeek() - 1 %>"
+																disabled="<%= false %>"
+															/>
+
+															&nbsp;
+
+															<liferay-ui:input-time
+																hourParam='<%= "startDateHour" %>'
+																hourValue="<%= yesterday.get(Calendar.HOUR) %>"
+																minuteParam='<%= "startDateMinute" %>'
+																minuteValue="<%= yesterday.get(Calendar.MINUTE) %>"
+																minuteInterval="1"
+																amPmParam='<%= "startDateAmPm" %>'
+																amPmValue="<%= yesterday.get(Calendar.AM_PM) %>"
+																disabled="<%= false %>"
+															/>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<liferay-ui:message key="end-date" />
+														</td>
+														<td>
+															<liferay-ui:input-date
+																monthParam="endDateMonth"
+																monthValue="<%= today.get(Calendar.MONTH) %>"
+																dayParam="endDateDay"
+																dayValue="<%= today.get(Calendar.DATE) %>"
+																yearParam="endDateYear"
+																yearValue="<%= today.get(Calendar.YEAR) %>"
+																yearRangeStart="<%= today.get(Calendar.YEAR) - 100 %>"
+																yearRangeEnd="<%= today.get(Calendar.YEAR) %>"
+																firstDayOfWeek="<%= today.getFirstDayOfWeek() - 1 %>"
+																disabled="<%= false %>"
+															/>
+
+															&nbsp;
+
+															<liferay-ui:input-time
+																hourParam='<%= "endDateHour" %>'
+																hourValue="<%= today.get(Calendar.HOUR) %>"
+																minuteParam='<%= "endDateMinute" %>'
+																minuteValue="<%= today.get(Calendar.MINUTE) %>"
+																minuteInterval="1"
+																amPmParam='<%= "endDateAmPm" %>'
+																amPmValue="<%= today.get(Calendar.AM_PM) %>"
+																disabled="<%= false %>"
+															/>
+														</td>
+													</tr>
+													<tr>
+														<td colspan="2">
+															<br />
+														</td>
+													</tr>
+													</table>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
 
 							</ul>
+							<div id="<portlet:namespace />portletDataList" style="display: none;">
+								<ul>
+
+									<%
+									itr1 = portletsList.iterator();
+
+									while (itr1.hasNext()) {
+										Portlet curPortlet = (Portlet)itr1.next();
+
+										PortletDataHandler portletDataHandler = curPortlet.getPortletDataHandlerInstance();
+
+										PortletConfig curPortletConfig = PortletConfigFactory.create(curPortlet, application);
+
+										ResourceBundle resourceBundle = curPortletConfig.getResourceBundle(locale);
+
+										try {
+											PortletDataHandlerControl[] controls = portletDataHandler.getImportControls();
+
+											if (controls != null) {
+												String rootPortletId = curPortlet.getRootPortletId();
+									%>
+
+												<li class="tree-item">
+													<input checked id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA + "_" + rootPortletId %>"  onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA + "_" + rootPortletId + "Controls" %>');" type="checkbox" />
+
+													<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>"><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %></label>
+
+													<ul id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId + "Controls" %>">
+														<%= _renderControls(renderResponse.getNamespace(), resourceBundle, controls) %>
+													</ul>
+												</li>
+
+									<%
+											}
+										}
+										catch (PortletDataException pde) {
+										%>
+
+											<li class="tree-item">
+												<span class="portlet-msg-error"><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %>: <%= LanguageUtil.get(pageContext, "error-initializing-import-controls") %></span>
+											</li>
+
+									<%
+										}
+									}
+									%>
+
+								</ul>
+							</div>
 						</div>
 					</c:otherwise>
 				</c:choose>

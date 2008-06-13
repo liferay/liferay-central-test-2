@@ -22,6 +22,17 @@
  */
 %>
 
+<script type="text/javascript">
+	function <portlet:namespace />hideDateRange() {
+		jQuery("#<portlet:namespace />startEndDate").hide();
+	}
+
+	function <portlet:namespace />showDateRange() {
+		jQuery("#<portlet:namespace />startEndDate").show();
+	}
+</script>
+
+
 <ul class="gamma lfr-component">
 	<c:if test="<%= supportsSetup %>">
 		<li class="tree-item">
@@ -97,38 +108,143 @@
 				}
 				%>
 
-				<c:if test='<%= tabs2.equals("import") %>'>
-					<li class="tree-item">
-						<liferay-ui:message key="data-strategy" />:
+				<c:choose>
+					<c:when test='<%= tabs2.equals("import") %>'>
+						<li class="tree-item">
+							<liferay-ui:message key="data-strategy" />:
 
-						<ul>
-							<li>
-								<input checked id="<portlet:namespace />mirror" name="<portlet:namespace /><%= PortletDataHandlerKeys.DATA_STRATEGY%>" type="radio" value="<%= PortletDataHandlerKeys.DATA_STRATEGY_MIRROR%>" />
-								<label for="<portlet:namespace />mirror"><liferay-ui:message key="mirror" /></label> <liferay-ui:icon-help message="import-data-strategy-mirror-help" />
-							</li>
-							<li>
-								<input id="<portlet:namespace />copy_as_new" name="<portlet:namespace /><%= PortletDataHandlerKeys.DATA_STRATEGY %>" type="radio" value="<%= PortletDataHandlerKeys.DATA_STRATEGY_COPY_AS_NEW%>" />
-								<label for="<portlet:namespace />copy_as_new"><liferay-ui:message key="copy-as-new" /></label> <liferay-ui:icon-help message="import-data-strategy-copy-as-new-help" />
-							</li>
-						</ul>
-					</li>
-					<li class="tree-item">
-						<liferay-ui:message key="user-id-strategy" />:
+							<ul>
+								<li>
+									<input checked id="<portlet:namespace />mirror" name="<portlet:namespace /><%= PortletDataHandlerKeys.DATA_STRATEGY%>" type="radio" value="<%= PortletDataHandlerKeys.DATA_STRATEGY_MIRROR%>" />
+									<label for="<portlet:namespace />mirror"><liferay-ui:message key="mirror" /></label> <liferay-ui:icon-help message="import-data-strategy-mirror-help" />
+								</li>
+								<li>
+									<input id="<portlet:namespace />copy_as_new" name="<portlet:namespace /><%= PortletDataHandlerKeys.DATA_STRATEGY %>" type="radio" value="<%= PortletDataHandlerKeys.DATA_STRATEGY_COPY_AS_NEW%>" />
+									<label for="<portlet:namespace />copy_as_new"><liferay-ui:message key="copy-as-new" /></label> <liferay-ui:icon-help message="import-data-strategy-copy-as-new-help" />
+								</li>
+							</ul>
+						</li>
+						<li class="tree-item">
+							<liferay-ui:message key="user-id-strategy" />:
 
-						<ul>
-							<li>
-								<input checked id="<portlet:namespace />currentUserId" name="<portlet:namespace /><%= PortletDataHandlerKeys.USER_ID_STRATEGY %>" type="radio" value="<%= UserIdStrategy.CURRENT_USER_ID%>" />
+							<ul>
+								<li>
+									<input checked id="<portlet:namespace />currentUserId" name="<portlet:namespace /><%= PortletDataHandlerKeys.USER_ID_STRATEGY %>" type="radio" value="<%= UserIdStrategy.CURRENT_USER_ID%>" />
 
-								<label for="<portlet:namespace />currentUserId"><liferay-ui:message key="if-a-user-id-does-not-exist,-then-use-my-user-id" /></label>
-							</li>
-							<li>
-								<input id="<portlet:namespace />alwaysCurrentUserId" name="<portlet:namespace /><%= PortletDataHandlerKeys.USER_ID_STRATEGY %>" type="radio" value="<%= UserIdStrategy.ALWAYS_CURRENT_USER_ID%>" />
+									<label for="<portlet:namespace />currentUserId"><liferay-ui:message key="if-a-user-id-does-not-exist,-then-use-my-user-id" /></label>
+								</li>
+								<li>
+									<input id="<portlet:namespace />alwaysCurrentUserId" name="<portlet:namespace /><%= PortletDataHandlerKeys.USER_ID_STRATEGY %>" type="radio" value="<%= UserIdStrategy.ALWAYS_CURRENT_USER_ID%>" />
 
-								<label for="<portlet:namespace />alwaysCurrentUserId"><liferay-ui:message key="always-use-my-user-id" /></label>
-							</li>
-						</ul>
-					</li>
-				</c:if>
+									<label for="<portlet:namespace />alwaysCurrentUserId"><liferay-ui:message key="always-use-my-user-id" /></label>
+								</li>
+							</ul>
+						</li>
+					</c:when>
+					<c:otherwise>
+						<li class="tree-item">
+							<liferay-ui:message key="date-range" />:
+
+							<ul>
+								<li>
+
+									<input checked id="<portlet:namespace />dateRangeAll" name="<portlet:namespace />dateRange" onClick='<%= renderResponse.getNamespace() + "hideDateRange()" %>' type="radio" value="false" />
+									<label for="<portlet:namespace />dateRangeAll"><liferay-ui:message key="all" /></label>
+								</li>
+								<li>
+									<input id="<portlet:namespace />dateRangeRange" name="<portlet:namespace />dateRange"  onClick='<%= renderResponse.getNamespace() + "showDateRange()" %>' type="radio" value="true" />
+									<label for="<portlet:namespace />dateRangeRange"><liferay-ui:message key="range" /></label> <liferay-ui:icon-help message="export-date-range-help" />
+
+									<%
+									Calendar today = CalendarFactoryUtil.getCalendar(timeZone, locale);
+
+									Calendar yesterday = CalendarFactoryUtil.getCalendar(timeZone, locale);
+
+									yesterday.add(Calendar.DATE, -1);
+									%>
+
+									<br />
+
+									<ul id="<portlet:namespace />startEndDate" style="display: none;">
+										<li>
+											<table class="lfr-table">
+											<tr>
+												<td>
+													<liferay-ui:message key="start-date" />
+												</td>
+												<td>
+													<liferay-ui:input-date
+														monthParam="startDateMonth"
+														monthValue="<%= yesterday.get(Calendar.MONTH) %>"
+														dayParam="startDateDay"
+														dayValue="<%= yesterday.get(Calendar.DATE) %>"
+														yearParam="startDateYear"
+														yearValue="<%= yesterday.get(Calendar.YEAR) %>"
+														yearRangeStart="<%= yesterday.get(Calendar.YEAR) - 100 %>"
+														yearRangeEnd="<%= yesterday.get(Calendar.YEAR) %>"
+														firstDayOfWeek="<%= yesterday.getFirstDayOfWeek() - 1 %>"
+														disabled="<%= false %>"
+													/>
+
+													&nbsp;
+
+													<liferay-ui:input-time
+														hourParam='<%= "startDateHour" %>'
+														hourValue="<%= yesterday.get(Calendar.HOUR) %>"
+														minuteParam='<%= "startDateMinute" %>'
+														minuteValue="<%= yesterday.get(Calendar.MINUTE) %>"
+														minuteInterval="1"
+														amPmParam='<%= "startDateAmPm" %>'
+														amPmValue="<%= yesterday.get(Calendar.AM_PM) %>"
+														disabled="<%= false %>"
+													/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<liferay-ui:message key="end-date" />
+												</td>
+												<td>
+													<liferay-ui:input-date
+														monthParam="endDateMonth"
+														monthValue="<%= today.get(Calendar.MONTH) %>"
+														dayParam="endDateDay"
+														dayValue="<%= today.get(Calendar.DATE) %>"
+														yearParam="endDateYear"
+														yearValue="<%= today.get(Calendar.YEAR) %>"
+														yearRangeStart="<%= today.get(Calendar.YEAR) - 100 %>"
+														yearRangeEnd="<%= today.get(Calendar.YEAR) %>"
+														firstDayOfWeek="<%= today.getFirstDayOfWeek() - 1 %>"
+														disabled="<%= false %>"
+													/>
+
+													&nbsp;
+
+													<liferay-ui:input-time
+														hourParam='<%= "endDateHour" %>'
+														hourValue="<%= today.get(Calendar.HOUR) %>"
+														minuteParam='<%= "endDateMinute" %>'
+														minuteValue="<%= today.get(Calendar.MINUTE) %>"
+														minuteInterval="1"
+														amPmParam='<%= "endDateAmPm" %>'
+														amPmValue="<%= today.get(Calendar.AM_PM) %>"
+														disabled="<%= false %>"
+													/>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="2">
+													<br />
+												</td>
+											</tr>
+											</table>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</c:otherwise>
+				</c:choose>
 			</ul>
 		</li>
 
