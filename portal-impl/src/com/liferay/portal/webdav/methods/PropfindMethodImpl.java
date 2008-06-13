@@ -105,17 +105,7 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 				// Windows XP does not generate an xml request so the PROPFIND
 				// must be generated manually. See LEP-4920.
 
-				props.add(new Tuple("displayname", WebDAVUtil.DAV_URI));
-				props.add(new Tuple("resourcetype", WebDAVUtil.DAV_URI));
-				props.add(new Tuple("getcontenttype", WebDAVUtil.DAV_URI));
-				props.add(new Tuple("getcontentlength", WebDAVUtil.DAV_URI));
-				props.add(new Tuple("getlastmodified", WebDAVUtil.DAV_URI));
-				props.add(new Tuple("lockdiscovery", WebDAVUtil.DAV_URI));
-				props.add(new Tuple("checked-in", WebDAVUtil.DAV_URI));
-				props.add(new Tuple("checked-out", WebDAVUtil.DAV_URI));
-				props.add(new Tuple("version-name", WebDAVUtil.DAV_URI));
-
-				return props;
+				return generateProps(props);
 			}
 
 			if (_log.isDebugEnabled()) {
@@ -129,6 +119,13 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 			Document doc = reader.read(new StringReader(xml));
 
 			Element root = doc.getRootElement();
+
+			if (!Validator.isNull(root.element("allprop"))) {
+
+				// Generate props if <allprop> tag is used. See LEP-6162.
+
+				return generateProps(props);
+			}
 
 			Element prop = root.element("prop");
 
@@ -160,6 +157,20 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 		catch (Exception e) {
 			throw new InvalidRequestException(e);
 		}
+	}
+
+	protected Set<Tuple> generateProps(Set<Tuple> props) {
+		props.add(new Tuple("displayname", WebDAVUtil.DAV_URI));
+		props.add(new Tuple("resourcetype", WebDAVUtil.DAV_URI));
+		props.add(new Tuple("getcontenttype", WebDAVUtil.DAV_URI));
+		props.add(new Tuple("getcontentlength", WebDAVUtil.DAV_URI));
+		props.add(new Tuple("getlastmodified", WebDAVUtil.DAV_URI));
+		props.add(new Tuple("lockdiscovery", WebDAVUtil.DAV_URI));
+		props.add(new Tuple("checked-in", WebDAVUtil.DAV_URI));
+		props.add(new Tuple("checked-out", WebDAVUtil.DAV_URI));
+		props.add(new Tuple("version-name", WebDAVUtil.DAV_URI));
+
+		return props;
 	}
 
 	private static Log _log = LogFactory.getLog(PropfindMethodImpl.class);
