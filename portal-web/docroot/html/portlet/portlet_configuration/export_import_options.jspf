@@ -32,7 +32,6 @@
 	}
 </script>
 
-
 <ul class="gamma lfr-component">
 	<c:if test="<%= supportsSetup %>">
 		<li class="tree-item">
@@ -147,12 +146,13 @@
 
 							<ul>
 								<li>
-
 									<input checked id="<portlet:namespace />dateRangeAll" name="<portlet:namespace />dateRange" onClick='<%= renderResponse.getNamespace() + "hideDateRange()" %>' type="radio" value="false" />
+
 									<label for="<portlet:namespace />dateRangeAll"><liferay-ui:message key="all" /></label>
 								</li>
 								<li>
-									<input id="<portlet:namespace />dateRangeRange" name="<portlet:namespace />dateRange"  onClick='<%= renderResponse.getNamespace() + "showDateRange()" %>' type="radio" value="true" />
+									<input id="<portlet:namespace />dateRangeRange" name="<portlet:namespace />dateRange" onClick='<%= renderResponse.getNamespace() + "showDateRange()" %>' type="radio" value="true" />
+
 									<label for="<portlet:namespace />dateRangeRange"><liferay-ui:message key="range" /></label> <liferay-ui:icon-help message="export-date-range-help" />
 
 									<%
@@ -230,11 +230,6 @@
 														amPmValue="<%= today.get(Calendar.AM_PM) %>"
 														disabled="<%= false %>"
 													/>
-												</td>
-											</tr>
-											<tr>
-												<td colspan="2">
-													<br />
 												</td>
 											</tr>
 											</table>
