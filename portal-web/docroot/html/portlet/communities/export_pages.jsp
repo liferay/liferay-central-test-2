@@ -74,6 +74,7 @@ Layout selLayout = null;
 
 try {
 	selLayout = LayoutLocalServiceUtil.getLayout(selPlid);
+
 	if (selLayout.isPrivateLayout()) {
 		tabs1 = "private-pages";
 	}
