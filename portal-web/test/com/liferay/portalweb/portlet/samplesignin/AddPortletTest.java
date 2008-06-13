@@ -51,8 +51,7 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.mouseDown("//div[@id=\"Sample-SampleSignIn\"]/p/a");
-		selenium.mouseUp("//div[@id=\"Sample-SampleSignIn\"]/p/a");
+		selenium.click("//div[@id=\"Sample-SampleSignIn\"]/p/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

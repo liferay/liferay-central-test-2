@@ -51,10 +51,7 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		Thread.sleep(3000);
-		selenium.mouseDown(
-			"document.getElementById('News-Announcements').getElementsByTagName('p')[0].getElementsByTagName('a')[0]");
-		selenium.mouseUp(
+		selenium.click(
 			"document.getElementById('News-Announcements').getElementsByTagName('p')[0].getElementsByTagName('a')[0]");
 
 		for (int second = 0;; second++) {

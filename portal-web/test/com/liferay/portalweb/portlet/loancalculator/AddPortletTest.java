@@ -51,8 +51,7 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.mouseDown("//div[@id=\"Finance-LoanCalculator\"]/p/a");
-		selenium.mouseUp("//div[@id=\"Finance-LoanCalculator\"]/p/a");
+		selenium.click("//div[@id=\"Finance-LoanCalculator\"]/p/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

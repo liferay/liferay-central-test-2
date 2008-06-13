@@ -51,8 +51,7 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.mouseDown("//div[@id=\"Collaboration-SMSTextMessenger\"]/p/a");
-		selenium.mouseUp("//div[@id=\"Collaboration-SMSTextMessenger\"]/p/a");
+		selenium.click("//div[@id=\"Collaboration-SMSTextMessenger\"]/p/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

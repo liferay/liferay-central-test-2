@@ -51,9 +51,7 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.mouseDown(
-			"//div[@id=\"Sample-categorylocalized-SampleLocalizedPortlet\"]/p/a");
-		selenium.mouseUp(
+		selenium.click(
 			"//div[@id=\"Sample-categorylocalized-SampleLocalizedPortlet\"]/p/a");
 
 		for (int second = 0;; second++) {

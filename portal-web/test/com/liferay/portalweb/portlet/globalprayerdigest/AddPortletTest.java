@@ -51,9 +51,7 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.mouseDown(
-			"//div[@id=\"Religion-Christianity-GlobalPrayerDigest\"]/p/a");
-		selenium.mouseUp(
+		selenium.click(
 			"//div[@id=\"Religion-Christianity-GlobalPrayerDigest\"]/p/a");
 		verifyTrue(selenium.isTextPresent("Global Prayer Digest"));
 	}

@@ -51,8 +51,7 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.mouseDown("//div[@id=\"Sample-HelloVelocity\"]/p/a");
-		selenium.mouseUp("//div[@id=\"Sample-HelloVelocity\"]/p/a");
+		selenium.click("//div[@id=\"Sample-HelloVelocity\"]/p/a");
 		verifyTrue(selenium.isTextPresent("Hello Velocity"));
 	}
 }

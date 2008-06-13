@@ -51,9 +51,7 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.mouseDown(
-			"document.getElementById('Collaboration-Calendar').getElementsByTagName('p')[0].getElementsByTagName('a')[0]");
-		selenium.mouseUp(
+		selenium.click(
 			"document.getElementById('Collaboration-Calendar').getElementsByTagName('p')[0].getElementsByTagName('a')[0]");
 
 		for (int second = 0;; second++) {
