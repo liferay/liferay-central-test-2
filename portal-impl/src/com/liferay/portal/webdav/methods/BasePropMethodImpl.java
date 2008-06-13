@@ -232,7 +232,7 @@ public abstract class BasePropMethodImpl implements Method {
 			response.remove(successStat);
 		}
 
-		if (hasFailure) {
+		if (!hasSuccess && hasFailure) {
 			DocUtil.add(
 				failureStat, "status", WebDAVUtil.DAV_URI,
 				"HTTP/1.1 404 Not Found");
