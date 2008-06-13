@@ -109,6 +109,14 @@ public interface LayoutLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public void addPublishToLiveRequest(long userId, long stagingGroupId,
+		long liveGroupId, boolean privateLayout,
+		java.util.Map<String, String[]> parameterMap,
+		java.lang.String cronText, java.lang.String scope,
+		java.util.Map<Long, Boolean> layoutIdMap, java.util.Date startDate,
+		java.util.Date endDate, java.lang.String description)
+		throws com.liferay.portal.SystemException;
+
 	public void deleteLayout(long groupId, boolean privateLayout, long layoutId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -121,6 +129,9 @@ public interface LayoutLocalService {
 	public void deleteLayouts(long groupId, boolean privateLayout)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
+
+	public void deletePublishToLiveRequest(long liveGroupId,
+		java.lang.String jobName) throws com.liferay.portal.SystemException;
 
 	public byte[] exportLayouts(long groupId, boolean privateLayout,
 		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
@@ -197,6 +208,9 @@ public interface LayoutLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Layout> getNullFriendlyURLLayouts()
+		throws com.liferay.portal.SystemException;
+
+	public java.lang.String getPublishToLiveRequestsJSON(long groupId)
 		throws com.liferay.portal.SystemException;
 
 	public void importLayouts(long userId, long groupId, boolean privateLayout,

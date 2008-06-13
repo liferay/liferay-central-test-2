@@ -122,6 +122,19 @@ public class LayoutServiceSoap {
 		}
 	}
 
+	public static void deletePublishToLiveRequest(long stagingGroupId,
+		long liveGroupId, java.lang.String jobName) throws RemoteException {
+		try {
+			LayoutServiceUtil.deletePublishToLiveRequest(stagingGroupId,
+				liveGroupId, jobName);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static java.lang.String getLayoutName(long groupId,
 		boolean privateLayout, long layoutId, java.lang.String languageId)
 		throws RemoteException {

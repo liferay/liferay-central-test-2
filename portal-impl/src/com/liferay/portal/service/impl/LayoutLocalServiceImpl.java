@@ -31,7 +31,11 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
+import com.liferay.portal.kernel.scheduler.PublishToLiveRequest;
+import com.liferay.portal.kernel.scheduler.SchedulerRequest;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -57,6 +61,7 @@ import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
+import com.liferay.util.JSONUtil;
 import com.liferay.util.Normalizer;
 
 import java.io.ByteArrayInputStream;
@@ -66,6 +71,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -78,6 +84,9 @@ import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * <a href="LayoutLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -194,6 +203,34 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return layout;
 	}
 
+	public void addPublishToLiveRequest(
+			long userId, long stagingGroupId, long liveGroupId,
+			boolean privateLayout, Map<String, String[]> parameterMap,
+			String cronText, String scope, Map<Long, Boolean> layoutIdMap,
+			Date startDate, Date endDate, String description)
+		throws SystemException {
+
+		try {
+			PublishToLiveRequest publishToLiveRequest =
+				new PublishToLiveRequest(
+					userId, stagingGroupId, liveGroupId, privateLayout,
+					parameterMap, scope, layoutIdMap);
+
+			SchedulerRequest schedulerRequest = new SchedulerRequest(
+				SchedulerRequest.COMMAND_REGISTER, null,
+				getSchedulerGroupName(liveGroupId), cronText, startDate,
+				endDate, description, DestinationNames.STAGING,
+				JSONUtil.serialize(publishToLiveRequest));
+
+			MessageBusUtil.sendMessage(
+				DestinationNames.SCHEDULER,
+				JSONUtil.serialize(schedulerRequest));
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+	}
+
 	public void deleteLayout(long plid)
 		throws PortalException, SystemException {
 
@@ -302,6 +339,24 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		// Layout set
 
 		layoutSetLocalService.updatePageCount(groupId, privateLayout);
+	}
+
+	public void deletePublishToLiveRequest(long liveGroupId, String jobName)
+		throws SystemException {
+
+		try {
+			SchedulerRequest schedulerRequest = new SchedulerRequest(
+				SchedulerRequest.COMMAND_UNREGISTER, jobName,
+				getSchedulerGroupName(liveGroupId), null, null, null, null,
+				null, null);
+
+			MessageBusUtil.sendMessage(
+				DestinationNames.SCHEDULER,
+				JSONUtil.serialize(schedulerRequest));
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	public byte[] exportLayouts(
@@ -522,6 +577,46 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	public List<Layout> getNullFriendlyURLLayouts() throws SystemException {
 		return layoutFinder.findByNullFriendlyURL();
+	}
+
+	public String getPublishToLiveRequestsJSON(long groupId)
+		throws SystemException {
+
+		try {
+			JSONArray jsonArray = new JSONArray();
+
+			SchedulerRequest schedulerRequest = new SchedulerRequest(
+				SchedulerRequest.COMMAND_RETRIEVE, null,
+				getSchedulerGroupName(groupId), null, null, null, null, null,
+				null);
+
+			String message = MessageBusUtil.sendSynchronizedMessage(
+				DestinationNames.SCHEDULER,
+				JSONUtil.serialize(schedulerRequest));
+
+			JSONObject jsonObj = new JSONObject(message);
+
+			Collection<SchedulerRequest> schedulerRequests =
+				(Collection<SchedulerRequest>)JSONUtil.deserialize(
+					jsonObj.getString("schedulerRequests"));
+
+			for (SchedulerRequest publishToLiveRequest : schedulerRequests) {
+				JSONObject jsonObject = new JSONObject();
+
+				JSONUtil.put(
+					jsonObject, "description",
+					publishToLiveRequest.getDescription());
+				JSONUtil.put(
+					jsonObject, "jobName", publishToLiveRequest.getJobName());
+
+				jsonArray.put(jsonObject);
+			}
+
+			return jsonArray.toString();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	public void importLayouts(
@@ -1023,6 +1118,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		return parentLayoutId;
+	}
+
+	protected String getSchedulerGroupName(long liveGroupId) {
+		return DestinationNames.STAGING + StringPool.FORWARD_SLASH +
+			liveGroupId;
 	}
 
 	protected boolean isDescendant(Layout layout, long layoutId)

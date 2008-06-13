@@ -78,6 +78,21 @@ public class LayoutServiceUtil {
 			friendlyURL);
 	}
 
+	public static void addPublishToLiveRequest(long stagingGroupId,
+		long liveGroupId, boolean privateLayout,
+		java.util.Map<String, String[]> parameterMap,
+		java.lang.String cronText, java.lang.String scope,
+		java.util.Map<Long, Boolean> layoutIdMap, java.util.Date startDate,
+		java.util.Date endDate, java.lang.String description)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		LayoutService layoutService = LayoutServiceFactory.getService();
+
+		layoutService.addPublishToLiveRequest(stagingGroupId, liveGroupId,
+			privateLayout, parameterMap, cronText, scope, layoutIdMap,
+			startDate, endDate, description);
+	}
+
 	public static void deleteLayout(long plid)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -93,6 +108,16 @@ public class LayoutServiceUtil {
 		LayoutService layoutService = LayoutServiceFactory.getService();
 
 		layoutService.deleteLayout(groupId, privateLayout, layoutId);
+	}
+
+	public static void deletePublishToLiveRequest(long stagingGroupId,
+		long liveGroupId, java.lang.String jobName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		LayoutService layoutService = LayoutServiceFactory.getService();
+
+		layoutService.deletePublishToLiveRequest(stagingGroupId, liveGroupId,
+			jobName);
 	}
 
 	public static java.lang.String getLayoutName(long groupId,

@@ -232,6 +232,92 @@ public class LayoutServiceHttp {
 		}
 	}
 
+	public static void addPublishToLiveRequest(HttpPrincipal httpPrincipal,
+		long stagingGroupId, long liveGroupId, boolean privateLayout,
+		java.util.Map<String, String[]> parameterMap,
+		java.lang.String cronText, java.lang.String scope,
+		java.util.Map<Long, Boolean> layoutIdMap, java.util.Date startDate,
+		java.util.Date endDate, java.lang.String description)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(stagingGroupId);
+
+			Object paramObj1 = new LongWrapper(liveGroupId);
+
+			Object paramObj2 = new BooleanWrapper(privateLayout);
+
+			Object paramObj3 = parameterMap;
+
+			if (parameterMap == null) {
+				paramObj3 = new NullWrapper("java.util.Map");
+			}
+
+			Object paramObj4 = cronText;
+
+			if (cronText == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = scope;
+
+			if (scope == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = layoutIdMap;
+
+			if (layoutIdMap == null) {
+				paramObj6 = new NullWrapper("java.util.Map");
+			}
+
+			Object paramObj7 = startDate;
+
+			if (startDate == null) {
+				paramObj7 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj8 = endDate;
+
+			if (endDate == null) {
+				paramObj8 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj9 = description;
+
+			if (description == null) {
+				paramObj9 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
+					"addPublishToLiveRequest",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
+					});
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static void deleteLayout(HttpPrincipal httpPrincipal, long plid)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -276,6 +362,47 @@ public class LayoutServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"deleteLayout",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static void deletePublishToLiveRequest(HttpPrincipal httpPrincipal,
+		long stagingGroupId, long liveGroupId, java.lang.String jobName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(stagingGroupId);
+
+			Object paramObj1 = new LongWrapper(liveGroupId);
+
+			Object paramObj2 = jobName;
+
+			if (jobName == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
+					"deletePublishToLiveRequest",
 					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			try {
