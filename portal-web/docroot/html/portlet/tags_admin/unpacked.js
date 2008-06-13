@@ -194,6 +194,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 					else if (json.exception.indexOf('com.liferay.portlet.tags.EntryNameException') > -1) {
 						instance._sendMessage('error', 'one-of-your-fields-contain-invalid-characters');
 					}
+					jQuery('#' + params.addCategoryNameInput).show();
 				}
 			}
 		);
