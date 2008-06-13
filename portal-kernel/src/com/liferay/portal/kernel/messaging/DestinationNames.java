@@ -30,7 +30,7 @@ package com.liferay.portal.kernel.messaging;
  */
 public interface DestinationNames {
 
-	public static final String IP_GEOCODER = "liferay/ipgeocoder";
+	public static final String IP_GEOCODER = "liferay/ip_geocoder";
 
 	public static final String SCHEDULER = "liferay/scheduler";
 
