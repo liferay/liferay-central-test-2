@@ -495,11 +495,13 @@ public class PortletImporter {
 					ownerId = defaultUserId;
 				}
 
-				try {
+				PortletPreferences prefs = 
+					PortletPreferencesUtil.fetchByO_O_P_P(
+						ownerId, ownerType, plid, portletId);
+
+				if (prefs != null) {
 					PortletPreferencesLocalServiceUtil.deletePortletPreferences(
 						ownerId, ownerType, plid, portletId);
-				}
-				catch (NoSuchPortletPreferencesException nsppe) {
 				}
 
 				long portletPreferencesId = CounterLocalServiceUtil.increment();
