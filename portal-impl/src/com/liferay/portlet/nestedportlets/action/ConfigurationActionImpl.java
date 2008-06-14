@@ -100,7 +100,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	protected List<String> getColumnNames(String content, String portletId) {
-		Matcher matcher = _searchColumnsPattern.matcher(content);
+		Matcher matcher = _SEARCH_COLUMNS_PATTERN.matcher(content);
 
 		Set<String> columnIds = new HashSet<String>();
 
@@ -157,7 +157,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			layout.getLayoutId(), layout.getTypeSettings());
 	}
 
-	private static final Pattern _searchColumnsPattern = Pattern.compile(
+	private static final Pattern _SEARCH_COLUMNS_PATTERN = Pattern.compile(
 		"processColumn[(]\"(.*?)\"[)]", Pattern.DOTALL);
 
 }

@@ -96,17 +96,17 @@ public class ViewAction extends PortletAction {
 	protected String renameTemplateColumnsAndIds(
 		String content, Portlet portlet) {
 
-		Matcher m = _searchColumnsAndIdsPattern.matcher(content);
+		Matcher matcher = _SEARCH_COLUMNS_AND_IDS_PATTERN.matcher(content);
 
 		Set<String> columnIds = new HashSet<String>();
 
-		while (m.find()) {
-			if (Validator.isNotNull(m.group(1))) {
-				columnIds.add(m.group(1));
+		while (matcher.find()) {
+			if (Validator.isNotNull(matcher.group(1))) {
+				columnIds.add(matcher.group(1));
 			}
 
-			if (Validator.isNotNull(m.group(2))) {
-				columnIds.add(m.group(2));
+			if (Validator.isNotNull(matcher.group(2))) {
+				columnIds.add(matcher.group(2));
 			}
 		}
 
@@ -120,8 +120,9 @@ public class ViewAction extends PortletAction {
 		return content;
 	}
 
-	private static final Pattern _searchColumnsAndIdsPattern = Pattern.compile(
-		"processColumn[(]\"(.*?)\"[)]|[<].*?id=[\"']([^ ]*?)[\"'].*?[>]",
-		Pattern.DOTALL);
+	private static final Pattern _SEARCH_COLUMNS_AND_IDS_PATTERN =
+		Pattern.compile(
+			"processColumn[(]\"(.*?)\"[)]|[<].*?id=[\"']([^ ]*?)[\"'].*?[>]",
+			Pattern.DOTALL);
 
 }
