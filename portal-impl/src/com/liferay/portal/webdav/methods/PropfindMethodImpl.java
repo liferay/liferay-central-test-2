@@ -120,7 +120,7 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 
 			Element root = doc.getRootElement();
 
-			if (!Validator.isNull(root.element("allprop"))) {
+			if (root.element("allprop") != null) {
 
 				// Generate props if <allprop> tag is used. See LEP-6162.
 
