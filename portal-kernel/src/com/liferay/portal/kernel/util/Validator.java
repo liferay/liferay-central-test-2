@@ -25,6 +25,9 @@ package com.liferay.portal.kernel.util;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * <a href="Validator.java.html"><b><i>View Source</i></b></a>
  *
@@ -270,6 +273,12 @@ public class Validator {
 		return false;
 	}
 
+	public static boolean isIPAddress(String ip){
+		Pattern pattern = Pattern.compile(_IPV4);
+		Matcher matcher = pattern.matcher(ip);
+		return matcher.matches();
+	}
+
 	public static boolean isJulianDate(int month, int day, int year) {
 		if ((month < 0) || (month > 11)) {
 			return false;
@@ -470,6 +479,12 @@ public class Validator {
 		'.', '!', '#', '$', '%', '&', '\'', '*', '+', '-', '/', '=', '?', '^',
 		'_', '`', '{', '|', '}', '~'
 	};
+
+	private static String _IPV4 = "\\b" +
+		"((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\." +
+		"((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\." +
+		"((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\." +
+		"((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\b";
 
 	private static String _VARIABLE_TERM_BEGIN = "[$";
 

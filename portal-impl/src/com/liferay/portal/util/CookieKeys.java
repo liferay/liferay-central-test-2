@@ -158,6 +158,12 @@ public class CookieKeys {
 			return null;
 		}
 
+		// See LEP-5595
+
+		if (Validator.isIPAddress(host)) {
+			return host;
+		}
+
 		int x = host.lastIndexOf(StringPool.PERIOD);
 
 		if (x <= 0) {
