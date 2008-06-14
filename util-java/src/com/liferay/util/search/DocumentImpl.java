@@ -55,6 +55,10 @@ public class DocumentImpl implements Document {
 	}
 
 	public void addDate(String name, Date value) {
+		if (value == null) {
+			return;
+		}
+
 		addKeyword(
 			name, DateTools.dateToString(value, DateTools.Resolution.SECOND));
 	}
