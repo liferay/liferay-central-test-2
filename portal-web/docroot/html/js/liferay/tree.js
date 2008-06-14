@@ -14,11 +14,24 @@ Liferay.Tree = new Class({
 		instance.selectable = params.selectable || false;
 		instance.selectedNodes = params.selectedNodes || '';
 
+		instance._updateURL = themeDisplay.getPathMain() + '/layout_management/update_page';
+
+		instance._originalParentNode = null;
+		instance._wasDropped = false;
+
 		instance._dragOptions = {
-			autoSize: true,
-			ghosting: true,
+			helper: 'clone',
 			handle: 'a',
-			revert: true
+			items: '.tree-item',
+			distance: 1,
+			opacity: 0.5,
+			revert: false,
+			start: function(event, ui) {
+				instance._originalParentNode = ui.item[0].parentNode;
+			},
+			update: function(event, ui) {
+				instance._onUpdate(ui);
+			}
 		};
 
 		instance._onSelect = params.onSelect || instance._onSelect;
@@ -118,7 +131,7 @@ Liferay.Tree = new Class({
 					image = instance._spacerImage;
 				}
 
-				instance.treeHTML += '<li class="tree-item" id="_branchId_' + plid + '" nodeId="' + node.id + '">';
+				instance.treeHTML += '<li branchId="' + plid + '" class="tree-item" id="_branchId_' + plid + '" nodeId="' + node.id + '">';
 				instance.treeHTML += image;
 
 				if (instance.selectable) {
@@ -254,26 +267,28 @@ Liferay.Tree = new Class({
 
 			var droppableLinks = jQuery('li a', treeEl).not('#lfr-collapse, #lfr-expand');
 
-			droppableLinks.Droppable(
+			droppableLinks.droppable(
 				{
-					accept: 'tree-item',
-					activeclass: '',
-					hoverclass: 'tree-item-hover',
+					accept: '.tree-item',
+					activeClass: '',
+					hoverClass: 'tree-item-hover',
 					tolerance: 'pointer',
 
-					ondrop: function(item) {
-						instance._onDrop(item, this);
+					drop: function(event, ui) {
+						instance._onDrop(ui.draggable[0], this);
 					},
 
-					onhover: function(item) {
-						instance._onHover(item, this);
+					over: function(event, ui) {
+						instance._onHover(ui.draggable, this);
 					},
 
-					onout: function() {
+					out: function(event, ui) {
 						instance._onOut(this);
 					}
 				}
 			);
+
+			instance._droppables = droppableLinks;
 
 			// Set draggable items
 
@@ -361,13 +376,7 @@ Liferay.Tree = new Class({
 	isNodeOpen: function(node) {
 		var instance = this;
 
-		for (var i = instance.openNodes.length - 1; i >= 0; i--) {
-			if (instance.openNodes[i] == node) {
-				return true;
-			}
-		}
-
-		return false;
+		return (instance.openNodes.indexOf(',' + node + ',') > -1);
 	},
 
 	isNodeSelected: function(node) {
@@ -393,7 +402,7 @@ Liferay.Tree = new Class({
 
 			var currentLi = obj.parentNode;
 
-			var branchId = currentLi.getAttribute('id').replace(/_branchId_/, '');
+			var branchId = currentLi.getAttribute('branchId');
 
 			if (instance._hasSelectedChildren(currentLi)) {
 				if (obj.getAttribute("src") == icons.checked) {
@@ -428,16 +437,28 @@ Liferay.Tree = new Class({
 	setDraggable: function(parentEl, selector) {
 		var instance = this;
 
-		jQuery(selector || 'ul.node-open > li.tree-item', parentEl).Draggable(instance._dragOptions);
+		if (!instance._initialSortable) {
+			jQuery.extend(instance._dragOptions, {connectTo: 'ul.node-open'})
+			instance._initialSortable = jQuery(parentEl).sortable(instance._dragOptions);
+		}		
+		else {
+			instance._initialSortable.sortable('refresh');
+		}
 	},
 
 	setOpenNodes: function() {
 		var instance = this;
 		var openNodes = instance.openNodes;
 
-		if (openNodes != null) {
-			instance.openNodes = openNodes.split(',');
+		if (openNodes[openNodes.length - 1] != ',') {
+			openNodes += ',';
 		}
+
+		if (openNodes[0] != ',') {
+			openNodes = ',' + openNodes;
+		}
+
+		instance.openNodes = openNodes;
 	},
 
 	setSelectedNodes: function() {
@@ -630,22 +651,20 @@ Liferay.Tree = new Class({
 
 		var idRegEx = /_branchId_/;
 
-		var newParentId = obj.parentNode.id.replace(idRegEx, '');
+		var newParentId = obj.parentNode.getAttribute('branchId');
 
-		var currentId = item.id.replace(idRegEx, '');
+		var currentId = item.getAttribute('branchId');
 
-		jQuery.ajax(
+		instance._saveParentNode(
 			{
-				url: themeDisplay.getPathMain() + '/layout_management/update_page',
-				data: {
-					cmd: 'parent_layout_id',
-					plid: currentId,
-					parentPlid: newParentId
-				}
+				plid: currentId,
+				parentPlid: newParentId
 			}
 		);
 
 		Liferay.Publisher.deliver('tree', item, obj);
+		instance._originalParentNode = null;
+		instance._wasDropped = true;
 	},
 
 	_onHover: function(item, obj) {
@@ -667,13 +686,12 @@ Liferay.Tree = new Class({
 					obj.expanderTime = window.setTimeout(
 						function() {
 							if (!targetBranch.childrenDraggable) {
-								instance.setDraggable(targetBranch, '> li.tree-item')
+								instance.setDraggable(targetBranch, '> li.tree-item');
 								targetBranch.childrenDraggable = true;
 							}
 
 							jQuery(targetBranch).show();
 							jQuery('img.expand-image', targetBranch.parentNode).eq(0).attr('src', icons.minus);
-							jQuery.recallDroppables();
 						},
 						500
 					);
@@ -706,6 +724,70 @@ Liferay.Tree = new Class({
 					openNode: selectedNode,
 					treeId: treeIdSelected
 				}
+			}
+		);
+	},
+
+	_onUpdate: function(ui) {
+		var instance = this;
+
+		var currentNode = ui.item[0];
+		var parent = currentNode.parentNode;
+		var parentNotUpdated = (instance._originalParentNode && instance._originalParentNode != parent && !instance._wasDropped);
+
+		var currentId = currentNode.getAttribute('branchId');
+		var parentId = parent.parentNode.getAttribute('branchId') || '';
+
+		if (parentNotUpdated) {
+			instance._saveParentNode(
+				{
+					plid: currentId,
+					parentPlid: parentId
+				}
+			);
+		}
+
+		var index = jQuery('> li', parent).index(currentNode);
+
+		var data = {
+			cmd: 'priority',
+			plid: currentId,
+			priority: index
+		};
+
+		jQuery.ajax(
+			{
+				data: data,
+				url: instance._updateURL
+			}
+		);
+
+		instance._originalParentNode = null;
+		instance._wasDropped = false;
+	},
+
+	_saveParentNode: function(options) {
+		var instance = this;
+
+		jQuery.ajax(
+			{
+				url: themeDisplay.getPathMain() + '/layout_management/update_page',
+				data: {
+					cmd: 'parent_layout_id',
+					parentPlid: options.parentPlid,
+					plid: options.plid
+				}
+			}
+		);
+	},
+
+	_savePosition: function(options) {
+		var instance = this;
+
+		jQuery.ajax(
+			{
+				url: instance._updateURL,
+				data: options
 			}
 		);
 	}

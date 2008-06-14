@@ -322,7 +322,7 @@ Liferay.Navigation = new Class({
 					opacity: 0.8,
 					revert:	false,
 					tolerance: 'pointer',
-					distance: 10,
+					distance: 5,
 					stop: function(event, ui) {
 						instance._saveSortables(ui.item[0]);
 
@@ -541,7 +541,7 @@ Liferay.Navigation = new Class({
 				}
 			}
 			else if (!newParent.is('.tree-item')) {
-				var newTab = liItems.lt(1).clone();
+				var newTab = liItems.slice(0, 1).clone();
 
 				newTab.removeClass('selected');
 				newTab.find('.child-menu').remove();
