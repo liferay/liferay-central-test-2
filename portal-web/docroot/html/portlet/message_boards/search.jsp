@@ -103,17 +103,16 @@ try {
 
 	ThreadHits threadHits = new ThreadHits();
 
-	threadHits.recordHits(hits);
+	threadHits.recordHits(hits, searchContainer.getStart(), searchContainer.getEnd());
 
-	Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
 	int total = hits.getLength();
 
 	searchContainer.setTotal(total);
 
 	List resultRows = searchContainer.getResultRows();
 
-	for (int i = 0; i < results.getDocs().length; i++) {
-		Document doc = results.doc(i);
+	for (int i = 0; i < hits.getDocs().length; i++) {
+		Document doc = hits.doc(i);
 
 		ResultRow row = new ResultRow(doc, i, i);
 
@@ -181,7 +180,7 @@ try {
 
 		// Score
 
-		row.addScore(results.score(i));
+		row.addScore(hits.score(i));
 
 		// Add result row
 

@@ -41,7 +41,8 @@ import java.util.List;
  */
 public class ContentHits {
 
-	public void recordHits(Hits hits, long groupId, boolean privateLayout)
+	public void recordHits(
+			Hits hits, long groupId, boolean privateLayout, int start, int end)
 		throws Exception {
 
 		// This can later be optimized according to LEP-915.
@@ -67,9 +68,18 @@ public class ContentHits {
 			}
 		}
 
-		hits.setLength(docs.size());
-		hits.setDocs(docs.toArray(new Document[docs.size()]));
-		hits.setScores(scores.toArray(new Float[scores.size()]));
+		int length = docs.size();
+
+		hits.setLength(length);
+
+		if (end > length) {
+			end = length;
+		}
+
+		docs = docs.subList(start, end);
+
+		hits.setDocs(docs.toArray(new Document[length]));
+		hits.setScores(scores.toArray(new Float[length]));
 
 		hits.setSearchTime(
 			(float)(System.currentTimeMillis() - hits.getStart()) /

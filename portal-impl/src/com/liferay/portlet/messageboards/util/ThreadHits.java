@@ -40,7 +40,7 @@ import java.util.Set;
  */
 public class ThreadHits {
 
-	public void recordHits(Hits hits) throws Exception {
+	public void recordHits(Hits hits, int start, int end) throws Exception {
 		Set<Long> threadIds = new HashSet<Long>();
 
 		List<Document> docs = new ArrayList<Document>();
@@ -59,9 +59,18 @@ public class ThreadHits {
 			}
 		}
 
-		hits.setLength(docs.size());
-		hits.setDocs(docs.toArray(new Document[docs.size()]));
-		hits.setScores(scores.toArray(new Float[scores.size()]));
+		int length = docs.size();
+
+		hits.setLength(length);
+
+		if (end > length) {
+			end = length;
+		}
+
+		docs = docs.subList(start, end);
+
+		hits.setDocs(docs.toArray(new Document[length]));
+		hits.setScores(scores.toArray(new Float[length]));
 
 		hits.setSearchTime(
 			(float)(System.currentTimeMillis() - hits.getStart()) /
