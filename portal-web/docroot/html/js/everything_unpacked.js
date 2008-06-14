@@ -14939,21 +14939,6 @@ Liferay.Util = {
 		return (str.lastIndexOf(x) === (str.length - x.length));
 	},
 
-	evalScripts: function(obj) {
-		var instance = this;
-
-		jQuery(obj).find('script').each(
-			function() {
-				if ( this.src ) {
-					jQuery.getScript( this.src );
-				}
-				else {
-					jQuery.globalEval( this.text || this.textContent || this.innerHTML || "" );
-				}
-			}
-		);
-	},
-
 	focusFormField: function(el, caretPosition) {
 		var interacting = false;
 		var eventData = caretPosition ? [caretPosition] : null;
@@ -18140,10 +18125,6 @@ Liferay.LayoutExporter = {
 				url: url,
 				success: function(response) {
 					jQuery(exportLayoutsPopup).html(response);
-
-					if (Liferay.Browser.is_ie) {
-						Liferay.Util.evalScripts(exportLayoutsPopup);
-					}
 				}
 			}
 		);
@@ -18688,7 +18669,7 @@ Liferay.Navigation = new Class({
 					opacity: 0.8,
 					revert:	false,
 					tolerance: 'pointer',
-					distance: 10,
+					distance: 5,
 					stop: function(event, ui) {
 						instance._saveSortables(ui.item[0]);
 
@@ -18907,7 +18888,7 @@ Liferay.Navigation = new Class({
 				}
 			}
 			else if (!newParent.is('.tree-item')) {
-				var newTab = liItems.lt(1).clone();
+				var newTab = liItems.slice(0, 1).clone();
 
 				newTab.removeClass('selected');
 				newTab.find('.child-menu').remove();
