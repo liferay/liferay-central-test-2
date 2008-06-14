@@ -20,33 +20,45 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.scheduler;
+package com.liferay.portlet.communities.messaging;
 
 import java.util.Map;
 
 /**
- * <a href="PublishToLiveRequest.java.html"><b><i>View Source</i></b></a>
+ * <a href="LayoutsPublisherRequest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  *
  */
-public class PublishToLiveRequest {
+public class LayoutsPublisherRequest {
 
-	public PublishToLiveRequest() {
+	public static final String COMMAND_ALL_PAGES = "ALL_PAGES";
+
+	public static final String COMMAND_SELECTED_PAGES = "SELECTED_PAGES";
+
+	public LayoutsPublisherRequest() {
 	}
 
-	public PublishToLiveRequest(
-		long userId, long stagingGroupId, long liveGroupId,
-		boolean privateLayout, Map<String, String[]> parameterMap, String scope,
-		Map<Long, Boolean> layoutIdMap) {
+	public LayoutsPublisherRequest(
+		String command, long userId, long stagingGroupId, long liveGroupId,
+		boolean privateLayout, Map<Long, Boolean> layoutIdMap,
+		Map<String, String[]> parameterMap) {
 
+		_command = command;
 		_userId = userId;
 		_stagingGroupId = stagingGroupId;
 		_liveGroupId = liveGroupId;
 		_privateLayout = privateLayout;
-		_parameterMap = parameterMap;
-		_scope = scope;
 		_layoutIdMap = layoutIdMap;
+		_parameterMap = parameterMap;
+	}
+
+	public String getCommand() {
+		return _command;
+	}
+
+	public void setCommand(String command) {
+		_command = command;
 	}
 
 	public String getCronText() {
@@ -89,22 +101,6 @@ public class PublishToLiveRequest {
 		_privateLayout = privateLayout;
 	}
 
-	public Map<String, String[]> getParameterMap() {
-		return _parameterMap;
-	}
-
-	public void setParameterMap(Map<String, String[]> parameterMap) {
-		_parameterMap = parameterMap;
-	}
-
-	public String getScope() {
-		return _scope;
-	}
-
-	public void setScope(String scope) {
-		_scope = scope;
-	}
-
 	public Map<Long, Boolean> getLayoutIdMap() {
 		return _layoutIdMap;
 	}
@@ -113,13 +109,21 @@ public class PublishToLiveRequest {
 		_layoutIdMap = layoutIdMap;
 	}
 
+	public Map<String, String[]> getParameterMap() {
+		return _parameterMap;
+	}
+
+	public void setParameterMap(Map<String, String[]> parameterMap) {
+		_parameterMap = parameterMap;
+	}
+
+	private String _command;
 	private String _cronText;
 	private long _userId;
 	private long _stagingGroupId;
 	private long _liveGroupId;
 	private boolean _privateLayout;
-	private Map<String, String[]> _parameterMap;
-	private String _scope;
 	private Map<Long, Boolean> _layoutIdMap;
+	private Map<String, String[]> _parameterMap;
 
 }

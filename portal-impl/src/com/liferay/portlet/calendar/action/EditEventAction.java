@@ -131,6 +131,14 @@ public class EditEventAction extends PortletAction {
 			getForward(req, "portlet.calendar.edit_event"));
 	}
 
+	protected void addWeeklyDayPos(
+		ActionRequest req, List<DayAndPosition> list, int day) {
+
+		if (ParamUtil.getBoolean(req, "weeklyDayPos" + day)) {
+			list.add(new DayAndPosition(day, 0));
+		}
+	}
+
 	protected void deleteEvent(ActionRequest req) throws Exception {
 		long eventId = ParamUtil.getLong(req, "eventId");
 
@@ -262,13 +270,13 @@ public class EditEventAction extends PortletAction {
 
 				List<DayAndPosition> dayPos = new ArrayList<DayAndPosition>();
 
-				_addWeeklyDayPos(req, dayPos, Calendar.SUNDAY);
-				_addWeeklyDayPos(req, dayPos, Calendar.MONDAY);
-				_addWeeklyDayPos(req, dayPos, Calendar.TUESDAY);
-				_addWeeklyDayPos(req, dayPos, Calendar.WEDNESDAY);
-				_addWeeklyDayPos(req, dayPos, Calendar.THURSDAY);
-				_addWeeklyDayPos(req, dayPos, Calendar.FRIDAY);
-				_addWeeklyDayPos(req, dayPos, Calendar.SATURDAY);
+				addWeeklyDayPos(req, dayPos, Calendar.SUNDAY);
+				addWeeklyDayPos(req, dayPos, Calendar.MONDAY);
+				addWeeklyDayPos(req, dayPos, Calendar.TUESDAY);
+				addWeeklyDayPos(req, dayPos, Calendar.WEDNESDAY);
+				addWeeklyDayPos(req, dayPos, Calendar.THURSDAY);
+				addWeeklyDayPos(req, dayPos, Calendar.FRIDAY);
+				addWeeklyDayPos(req, dayPos, Calendar.SATURDAY);
 
 				if (dayPos.size() == 0) {
 					dayPos.add(new DayAndPosition(Calendar.MONDAY, 0));
@@ -397,14 +405,6 @@ public class EditEventAction extends PortletAction {
 				endDateDay, endDateYear, durationHour, durationMinute,
 				allDay, timeZoneSensitive, type, repeating, recurrence,
 				remindBy, firstReminder, secondReminder);
-		}
-	}
-
-	private void _addWeeklyDayPos(
-		ActionRequest req, List<DayAndPosition> list, int day) {
-
-		if (ParamUtil.getBoolean(req, "weeklyDayPos" + day)) {
-			list.add(new DayAndPosition(day, 0));
 		}
 	}
 

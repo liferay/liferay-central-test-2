@@ -91,7 +91,7 @@ public class ServiceTestSuite extends TestSuite {
 
 		MessageBusUtil.init(messageBus, messageSender);
 
-		// Search Engines
+		// Search engines
 
 		LuceneSearchEngineUtil.init();
 

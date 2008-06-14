@@ -24,7 +24,7 @@ package com.liferay.portal.scheduler.quartz;
 
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
-import com.liferay.portal.kernel.scheduler.SchedulerRequest;
+import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 import com.liferay.util.JSONUtil;
 
 import java.util.Collection;

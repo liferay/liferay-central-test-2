@@ -24,6 +24,7 @@ package com.liferay.portal.kernel.search;
 
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.search.messaging.SearchRequest;
 import com.liferay.portal.kernel.util.StringMaker;
 
 /**
@@ -116,9 +117,9 @@ public class SearchEngineUtil {
 		StringMaker sm = new StringMaker();
 
 		sm.append("{\"javaClass\":\"");
-		sm.append(SearchEngineRequest.class.getName());
+		sm.append(SearchRequest.class.getName());
 		sm.append("\",\"command\":\"");
-		sm.append(SearchEngineRequest.COMMAND_INDEX_ONLY);
+		sm.append(SearchRequest.COMMAND_INDEX_ONLY);
 		sm.append("\"}");
 
 		String message = MessageBusUtil.sendSynchronizedMessage(

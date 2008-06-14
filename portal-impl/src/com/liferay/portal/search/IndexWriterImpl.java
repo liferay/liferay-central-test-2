@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.IndexWriter;
-import com.liferay.portal.kernel.search.SearchEngineRequest;
+import com.liferay.portal.kernel.search.messaging.SearchRequest;
 import com.liferay.util.JSONUtil;
 
 /**
@@ -38,36 +38,36 @@ import com.liferay.util.JSONUtil;
 public class IndexWriterImpl implements IndexWriter {
 
 	public void addDocument(long companyId, Document doc) {
-		SearchEngineRequest searchEngineRequest = new SearchEngineRequest(
-			SearchEngineRequest.COMMAND_ADD, companyId, doc);
+		SearchRequest searchRequest = new SearchRequest(
+			SearchRequest.COMMAND_ADD, companyId, doc);
 
 		MessageBusUtil.sendMessage(
-			DestinationNames.SEARCH, JSONUtil.serialize(searchEngineRequest));
+			DestinationNames.SEARCH, JSONUtil.serialize(searchRequest));
 	}
 
 	public void deleteDocument(long companyId, String uid) {
-		SearchEngineRequest searchEngineRequest = new SearchEngineRequest(
-			SearchEngineRequest.COMMAND_DELETE, companyId, uid);
+		SearchRequest searchRequest = new SearchRequest(
+			SearchRequest.COMMAND_DELETE, companyId, uid);
 
 		MessageBusUtil.sendMessage(
-			DestinationNames.SEARCH, JSONUtil.serialize(searchEngineRequest));
+			DestinationNames.SEARCH, JSONUtil.serialize(searchRequest));
 	}
 
 	public void deletePortletDocuments(long companyId, String portletId) {
-		SearchEngineRequest searchEngineRequest = new SearchEngineRequest(
-			SearchEngineRequest.COMMAND_DELETE_PORTLET_DOCS, companyId,
+		SearchRequest searchRequest = new SearchRequest(
+			SearchRequest.COMMAND_DELETE_PORTLET_DOCS, companyId,
 			portletId);
 
 		MessageBusUtil.sendMessage(
-			DestinationNames.SEARCH, JSONUtil.serialize(searchEngineRequest));
+			DestinationNames.SEARCH, JSONUtil.serialize(searchRequest));
 	}
 
 	public void updateDocument(long companyId, String uid, Document doc) {
-		SearchEngineRequest searchEngineRequest = new SearchEngineRequest(
-			SearchEngineRequest.COMMAND_UPDATE, companyId, uid, doc);
+		SearchRequest searchRequest = new SearchRequest(
+			SearchRequest.COMMAND_UPDATE, companyId, uid, doc);
 
 		MessageBusUtil.sendMessage(
-			DestinationNames.SEARCH, JSONUtil.serialize(searchEngineRequest));
+			DestinationNames.SEARCH, JSONUtil.serialize(searchRequest));
 	}
 
 }

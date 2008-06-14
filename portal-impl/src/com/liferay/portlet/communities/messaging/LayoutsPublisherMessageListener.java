@@ -20,17 +20,16 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.communities.util;
+package com.liferay.portlet.communities.messaging;
 
-import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.messaging.MessageListener;
-import com.liferay.portal.kernel.scheduler.PublishToLiveRequest;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portlet.communities.util.StagingUtil;
 import com.liferay.util.JSONUtil;
 
 import java.util.Map;
@@ -39,57 +38,65 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="PublishToLiveMessageListener.java.html"><b><i>View Source</i></b>
+ * <a href="LayoutsPublisherMessageListener.java.html"><b><i>View Source</i></b>
  * </a>
  *
  * @author Bruno Farache
  *
  */
-public class PublishToLiveMessageListener implements MessageListener {
+public class LayoutsPublisherMessageListener implements MessageListener {
 
 	public void receive(String message) {
-		try {
-			PublishToLiveRequest publishToLiveRequest =
-				(PublishToLiveRequest)JSONUtil.deserialize(message);
+		PermissionCheckerImpl permissionChecker = null;
 
-			long userId = publishToLiveRequest.getUserId();
-			long stagingGroupId = publishToLiveRequest.getStagingGroupId();
-			long liveGroupId = publishToLiveRequest.getLiveGroupId();
-			boolean privateLayout = publishToLiveRequest.isPrivateLayout();
-			Map<String, String[]> parameterMap =
-				publishToLiveRequest.getParameterMap();
+		try {
+			LayoutsPublisherRequest layoutsPublisherRequest =
+				(LayoutsPublisherRequest)JSONUtil.deserialize(message);
+
+			String command = layoutsPublisherRequest.getCommand();
+
+			long userId = layoutsPublisherRequest.getUserId();
+			long stagingGroupId = layoutsPublisherRequest.getStagingGroupId();
+			long liveGroupId = layoutsPublisherRequest.getLiveGroupId();
+			boolean privateLayout = layoutsPublisherRequest.isPrivateLayout();
 			Map<Long, Boolean> layoutIdMap =
-				publishToLiveRequest.getLayoutIdMap();
+				layoutsPublisherRequest.getLayoutIdMap();
+			Map<String, String[]> parameterMap =
+				layoutsPublisherRequest.getParameterMap();
 
 			PrincipalThreadLocal.setName(userId);
 
 			User user = UserLocalServiceUtil.getUserById(userId);
 
-			PermissionCheckerImpl _permissionChecker =
-				PermissionCheckerFactory.create(user, false);
+			permissionChecker = PermissionCheckerFactory.create(user, false);
 
-			PermissionThreadLocal.setPermissionChecker(_permissionChecker);
+			PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
-			if (publishToLiveRequest.getScope().equals("all-pages")) {
-				StagingUtil.copyLayouts(
+			if (command.equals(LayoutsPublisherRequest.COMMAND_ALL_PAGES)) {
+				StagingUtil.publishLayouts(
 					stagingGroupId, liveGroupId, privateLayout, parameterMap);
 			}
-			else {
+			else if (command.equals(
+				LayoutsPublisherRequest.COMMAND_SELECTED_PAGES)) {
+
 				StagingUtil.publishLayouts(
-					layoutIdMap, stagingGroupId, liveGroupId, privateLayout,
+					stagingGroupId, liveGroupId, privateLayout, layoutIdMap,
 					parameterMap);
 			}
 		}
-		catch(NoSuchUserException nsue) {
-			_log.error("User that created the scheduled publishing doesn't " +
-				"exist anymore");
-		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(e, e);
+		}
+		finally {
+			try {
+				PermissionCheckerFactory.recycle(permissionChecker);
+			}
+			catch (Exception e) {
+			}
 		}
 	}
 
 	private static Log _log =
-		LogFactory.getLog(PublishToLiveMessageListener.class);
+		LogFactory.getLog(LayoutsPublisherMessageListener.class);
 
 }

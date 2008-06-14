@@ -32,10 +32,10 @@ public interface DestinationNames {
 
 	public static final String IP_GEOCODER = "liferay/ip_geocoder";
 
+	public static final String LAYOUTS_PUBLISHER = "liferay/layouts_publisher";
+
 	public static final String SCHEDULER = "liferay/scheduler";
 
 	public static final String SEARCH = "liferay/search";
-
-	public static final String STAGING = "liferay/staging";
 
 }

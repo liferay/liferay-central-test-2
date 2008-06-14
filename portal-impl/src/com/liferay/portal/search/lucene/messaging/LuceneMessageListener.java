@@ -20,14 +20,15 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.search.lucene;
+package com.liferay.portal.search.lucene.messaging;
 
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.search.SearchEngineRequest;
+import com.liferay.portal.kernel.search.messaging.SearchRequest;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
 import com.liferay.util.JSONUtil;
 
 import org.apache.commons.logging.Log;
@@ -62,39 +63,37 @@ public class LuceneMessageListener implements MessageListener {
 		jsonObj.remove("lfrResponseDestination");
 		jsonObj.remove("lfrResponseId");
 
-		SearchEngineRequest searchEngineRequest =
-			(SearchEngineRequest)JSONUtil.deserialize(message);
+		SearchRequest searchRequest =
+			(SearchRequest)JSONUtil.deserialize(message);
 
-		String command = searchEngineRequest.getCommand();
-		long companyId = searchEngineRequest.getCompanyId();
-		String id = searchEngineRequest.getId();
-		Document doc = searchEngineRequest.getDocument();
+		String command = searchRequest.getCommand();
 
-		if (command.equals(SearchEngineRequest.COMMAND_ADD)) {
+		long companyId = searchRequest.getCompanyId();
+		String id = searchRequest.getId();
+		Document doc = searchRequest.getDocument();
+
+		if (command.equals(SearchRequest.COMMAND_ADD)) {
 			LuceneSearchEngineUtil.addDocument(companyId, doc);
 		}
-		else if (command.equals(SearchEngineRequest.COMMAND_DELETE)) {
+		else if (command.equals(SearchRequest.COMMAND_DELETE)) {
 			LuceneSearchEngineUtil.deleteDocument(companyId, id);
 		}
-		else if (command.equals(
-					SearchEngineRequest.COMMAND_DELETE_PORTLET_DOCS)) {
-
+		else if (command.equals(SearchRequest.COMMAND_DELETE_PORTLET_DOCS)) {
 			LuceneSearchEngineUtil.deletePortletDocuments(companyId, id);
 		}
-		else if (command.equals(SearchEngineRequest.COMMAND_INDEX_ONLY) &&
+		else if (command.equals(SearchRequest.COMMAND_INDEX_ONLY) &&
 				 Validator.isNotNull(responseDestination) &&
 				 Validator.isNotNull(responseId)) {
 
 			doCommandIndexOnly(responseDestination, responseId);
 		}
-		else if (command.equals(SearchEngineRequest.COMMAND_SEARCH) &&
+		else if (command.equals(SearchRequest.COMMAND_SEARCH) &&
 				 Validator.isNotNull(responseDestination) &&
 				 Validator.isNotNull(responseId)) {
 
-			doCommandSearch(
-				responseDestination, responseId, searchEngineRequest);
+			doCommandSearch(responseDestination, responseId, searchRequest);
 		}
-		else if (command.equals(SearchEngineRequest.COMMAND_UPDATE)) {
+		else if (command.equals(SearchRequest.COMMAND_UPDATE)) {
 			LuceneSearchEngineUtil.updateDocument(companyId, id, doc);
 		}
 	}
@@ -115,13 +114,13 @@ public class LuceneMessageListener implements MessageListener {
 
 	protected void doCommandSearch(
 			String responseDestination, String responseId,
-			SearchEngineRequest searchEngineRequest)
+			SearchRequest searchRequest)
 		throws Exception {
 
 		Hits hits = LuceneSearchEngineUtil.search(
-			searchEngineRequest.getCompanyId(), searchEngineRequest.getQuery(),
-			searchEngineRequest.getSort(), searchEngineRequest.getStart(),
-			searchEngineRequest.getEnd());
+			searchRequest.getCompanyId(), searchRequest.getQuery(),
+			searchRequest.getSort(), searchRequest.getStart(),
+			searchRequest.getEnd());
 
 		JSONObject jsonObj = new JSONObject();
 

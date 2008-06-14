@@ -24,7 +24,7 @@ package com.liferay.portal.scheduler.quartz;
 
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
-import com.liferay.portal.kernel.scheduler.SchedulerRequest;
+import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 
 import java.util.Collection;
 import java.util.Date;

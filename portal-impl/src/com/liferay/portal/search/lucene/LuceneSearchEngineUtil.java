@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngine;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.search.lucene.messaging.LuceneMessageListener;
 
 /**
  * <a href="LuceneSearchEngineUtil.java.html"><b><i>View Source</i></b></a>

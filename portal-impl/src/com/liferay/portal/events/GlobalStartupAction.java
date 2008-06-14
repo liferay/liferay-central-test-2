@@ -50,7 +50,7 @@ import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.communities.util.PublishToLiveMessageListener;
+import com.liferay.portlet.communities.messaging.LayoutsPublisherMessageListener;
 
 import java.io.File;
 
@@ -237,21 +237,20 @@ public class GlobalStartupAction extends SimpleAction {
 			_log.error(e, e);
 		}
 
-		// Search Engines
+		// Search engines
 
 		LuceneSearchEngineUtil.init();
 
 		SearchEngineUtil.init(new IndexSearcherImpl(), new IndexWriterImpl());
 
-		// Scheduled Staging
+		// Layouts publisher
 
 		Destination destination = new SerialDestination(
-			DestinationNames.STAGING);
+			DestinationNames.LAYOUTS_PUBLISHER);
 
 		MessageBusUtil.addDestination(destination);
 
-		MessageBusUtil.registerMessageListener(
-			destination.getName(), new PublishToLiveMessageListener());
+		destination.register(new LayoutsPublisherMessageListener());
 	}
 
 	private static Log _log = LogFactory.getLog(GlobalStartupAction.class);

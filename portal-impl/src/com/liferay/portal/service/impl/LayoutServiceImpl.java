@@ -82,25 +82,6 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			localeTitlesMap, description, type, hidden, friendlyURL);
 	}
 
-	public void addPublishToLiveRequest(
-			long stagingGroupId, long liveGroupId, boolean privateLayout,
-			Map<String, String[]> parameterMap, String cronText, String scope,
-			Map<Long, Boolean> layoutIdMap, Date startDate, Date endDate,
-			String description)
-		throws PortalException, SystemException {
-
-		GroupPermissionUtil.check(
-			getPermissionChecker(), stagingGroupId, ActionKeys.MANAGE_LAYOUTS);
-
-		GroupPermissionUtil.check(
-			getPermissionChecker(), liveGroupId, ActionKeys.MANAGE_LAYOUTS);
-
-		layoutLocalService.addPublishToLiveRequest(
-			getUserId(), stagingGroupId, liveGroupId, privateLayout,
-			parameterMap, cronText, scope, layoutIdMap, startDate, endDate,
-			description);
-	}
-
 	public void deleteLayout(long plid)
 		throws PortalException, SystemException {
 
@@ -118,19 +99,6 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			ActionKeys.DELETE);
 
 		layoutLocalService.deleteLayout(groupId, privateLayout, layoutId);
-	}
-
-	public void deletePublishToLiveRequest(
-			long stagingGroupId, long liveGroupId, String jobName)
-		throws PortalException, SystemException {
-
-		GroupPermissionUtil.check(
-			getPermissionChecker(), stagingGroupId, ActionKeys.MANAGE_LAYOUTS);
-
-		GroupPermissionUtil.check(
-			getPermissionChecker(), liveGroupId, ActionKeys.MANAGE_LAYOUTS);
-
-		layoutLocalService.deletePublishToLiveRequest(liveGroupId, jobName);
 	}
 
 	public String getLayoutName(
@@ -259,6 +227,25 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			getUserId(), plid, portletId, parameterMap, is);
 	}
 
+	public void schedulePublishToLive(
+			long stagingGroupId, long liveGroupId, boolean privateLayout,
+			Map<Long, Boolean> layoutIdMap, Map<String, String[]> parameterMap,
+			String scope, String cronText, Date startDate, Date endDate,
+			String description)
+		throws PortalException, SystemException {
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), stagingGroupId, ActionKeys.MANAGE_LAYOUTS);
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), liveGroupId, ActionKeys.MANAGE_LAYOUTS);
+
+		layoutLocalService.schedulePublishToLive(
+			getUserId(), stagingGroupId, liveGroupId, privateLayout,
+			layoutIdMap, parameterMap, scope, cronText, startDate, endDate,
+			description);
+	}
+
 	public void setLayouts(
 			long groupId, boolean privateLayout, long parentLayoutId,
 			long[] layoutIds)
@@ -269,6 +256,15 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 		layoutLocalService.setLayouts(
 			groupId, privateLayout, parentLayoutId, layoutIds);
+	}
+
+	public void unschedulePublishToLive(long liveGroupId, String jobName)
+		throws PortalException, SystemException {
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), liveGroupId, ActionKeys.MANAGE_LAYOUTS);
+
+		layoutLocalService.unschedulePublishToLive(liveGroupId, jobName);
 	}
 
 	public Layout updateLayout(

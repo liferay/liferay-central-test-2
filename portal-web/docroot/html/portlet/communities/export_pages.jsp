@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
+String cmd = StringPool.BLANK;
+
 String tabs1 = ParamUtil.getString(request, "tabs1", "public-pages");
 
 String pagesRedirect = ParamUtil.getString(request, "pagesRedirect");
@@ -142,16 +144,16 @@ PortletURL portletURL = renderResponse.createActionURL();
 
 long proposalId = ParamUtil.getLong(request, "proposalId");
 
-String cmd = StringPool.BLANK;
-
 if (proposalId > 0) {
 	cmd = Constants.PUBLISH;
+
 	portletURL.setParameter("struts_action", "/communities/edit_proposal");
 	portletURL.setParameter("groupId", String.valueOf(liveGroupId));
 	portletURL.setParameter("proposalId", String.valueOf(proposalId));
 }
 else {
 	cmd = selGroup.isStagingGroup() ? "publish_to_live" : "copy_from_live";
+
 	portletURL.setParameter("struts_action", "/communities/edit_pages");
 	portletURL.setParameter("groupId", String.valueOf(liveGroupId));
 	portletURL.setParameter("private", String.valueOf(privateLayout));

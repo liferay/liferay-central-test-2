@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.scheduler;
 
+import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
+
 import java.util.Collection;
 import java.util.Date;
 

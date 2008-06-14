@@ -28,6 +28,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.cal.DayAndPosition;
 import com.liferay.portal.kernel.cal.Duration;
 import com.liferay.portal.kernel.cal.Recurrence;
+import com.liferay.portal.kernel.cal.RecurrenceSerializer;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
@@ -87,71 +88,6 @@ import org.apache.commons.logging.LogFactory;
  */
 public class StagingUtil {
 
-	public static void addPublishToLiveRequest(ActionRequest req)
-		throws Exception {
-
-		String tabs1 = ParamUtil.getString(req, "tabs1");
-
-		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
-
-		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
-
-		long liveGroupId = stagingGroup.getLiveGroupId();
-
-		boolean privateLayout = true;
-
-		if (tabs1.equals("public-pages")) {
-			privateLayout = false;
-		}
-
-		Map<String, String[]> parameterMap = getStagingParameters(req);
-
-		String scope = ParamUtil.getString(req, "scope");
-
-		Map<Long, Boolean> layoutIdMap = new LinkedHashMap<Long, Boolean>();
-
-		if (scope.equals("selected-pages")) {
-			long[] rowIds = ParamUtil.getLongValues(req, "rowIds");
-
-			for (int i = 0; i < rowIds.length; i++) {
-				long selPlid = rowIds[i];
-				boolean includeChildren = ParamUtil.getBoolean(
-					req, "includeChildren_" + selPlid);
-
-				layoutIdMap.put(selPlid, includeChildren);
-			}
-		}
-
-		String description = ParamUtil.getString(req, "description");
-
-		boolean timeZoneSensitive = ParamUtil.getBoolean(
-			req, "timeZoneSensitive");
-
-		int recurrenceType = ParamUtil.getInteger(req, "recurrenceType");
-
-		Calendar startCal = getDate(req, "start", timeZoneSensitive);
-		Calendar endCal = null;
-
-		int endDateType = ParamUtil.getInteger(req, "endDateType");
-
-		if (endDateType == 1) {
-			endCal = getDate(req, "end", timeZoneSensitive);
-		}
-
-		String cronText = getCronText(
-			req, startCal, timeZoneSensitive, recurrenceType);
-
-		Date endDate = null;
-
-		if (endCal != null) {
-			endDate = endCal.getTime();
-		}
-
-		LayoutServiceUtil.addPublishToLiveRequest(
-			stagingGroupId, liveGroupId, privateLayout, parameterMap, cronText,
-			scope, layoutIdMap, startCal.getTime(), endDate, description);
-	}
-
 	public static void copyFromLive(ActionRequest req) throws Exception {
 		String tabs1 = ParamUtil.getString(req, "tabs1");
 
@@ -176,7 +112,7 @@ public class StagingUtil {
 		String scope = ParamUtil.getString(req, "scope");
 
 		if (scope.equals("all-pages")) {
-			copyLayouts(
+			publishLayouts(
 				stagingGroup.getLiveGroupId(), stagingGroup.getGroupId(),
 				privateLayout, parameterMap);
 		}
@@ -185,8 +121,7 @@ public class StagingUtil {
 
 			long[] rowIds = ParamUtil.getLongValues(req, "rowIds");
 
-			for (int i = 0; i < rowIds.length; i++) {
-				long selPlid = rowIds[i];
+			for (long selPlid : rowIds) {
 				boolean includeChildren = ParamUtil.getBoolean(
 					req, "includeChildren_" + selPlid);
 
@@ -195,8 +130,8 @@ public class StagingUtil {
 			}
 
 			publishLayouts(
-				layoutIdMap, stagingGroup.getLiveGroupId(),
-				stagingGroup.getGroupId(), privateLayout, parameterMap);
+				stagingGroup.getLiveGroupId(), stagingGroup.getGroupId(),
+				privateLayout, layoutIdMap, parameterMap);
 		}
 	}
 
@@ -217,20 +152,6 @@ public class StagingUtil {
 		copyPortlet(
 			req, sourceLayout.getPlid(), targetLayout.getPlid(),
 			portlet.getPortletId());
-	}
-
-	public static void copyLayouts(
-			long sourceGroupId, long targetGroupId, boolean privateLayout,
-			Map<String, String[]> parameterMap)
-		throws Exception {
-
-		byte[] bytes = LayoutServiceUtil.exportLayouts(
-			sourceGroupId, privateLayout, parameterMap, null, null);
-
-		ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
-
-		LayoutServiceUtil.importLayouts(
-			targetGroupId, privateLayout, parameterMap, bais);
 	}
 
 	public static void copyPortlet(
@@ -293,21 +214,6 @@ public class StagingUtil {
 		LayoutServiceHttp.importLayouts(
 			httpPrincipal, remoteGroupId, privateLayout, importParameterMap,
 			bytes);
-	}
-
-	public static void deleteScheduledPublishToLiveRequest(ActionRequest req)
-		throws Exception {
-
-		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
-
-		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
-
-		long liveGroupId = stagingGroup.getLiveGroupId();
-
-		String jobName = ParamUtil.getString(req, "jobName");
-
-		LayoutServiceUtil.deletePublishToLiveRequest(
-			stagingGroupId, liveGroupId, jobName);
 	}
 
 	public static List<Layout> getMissingParents(
@@ -416,47 +322,6 @@ public class StagingUtil {
 		return parameterMap;
 	}
 
-	public static Map<String, String[]> getStagingParameters() {
-		Map<String, String[]> parameterMap =
-			new LinkedHashMap<String, String[]>();
-
-		parameterMap.put(
-			PortletDataHandlerKeys.PERMISSIONS,
-			new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.USER_PERMISSIONS,
-			new String[] {Boolean.FALSE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_DATA,
-			new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_DATA_ALL,
-			new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_SETUP,
-			new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_USER_PREFERENCES,
-			new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.THEME,
-			new String[] {Boolean.FALSE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
-			new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.DELETE_PORTLET_DATA,
-			new String[] {Boolean.FALSE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.DATA_STRATEGY,
-			new String[] {PortletDataHandlerKeys.DATA_STRATEGY_MIRROR});
-		parameterMap.put(
-			PortletDataHandlerKeys.USER_ID_STRATEGY,
-			new String[] {UserIdStrategy.CURRENT_USER_ID});
-
-		return parameterMap;
-	}
-
 	public static void publishLayout(
 			long plid, long liveGroupId, boolean includeChildren)
 		throws Exception {
@@ -499,10 +364,64 @@ public class StagingUtil {
 			liveGroupId, layout.isPrivateLayout(), parameterMap, bais);
 	}
 
+	public static Map<String, String[]> getStagingParameters() {
+		Map<String, String[]> parameterMap =
+			new LinkedHashMap<String, String[]>();
+
+		parameterMap.put(
+			PortletDataHandlerKeys.PERMISSIONS,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.USER_PERMISSIONS,
+			new String[] {Boolean.FALSE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.PORTLET_DATA,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.PORTLET_DATA_ALL,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.PORTLET_SETUP,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.PORTLET_USER_PREFERENCES,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.THEME,
+			new String[] {Boolean.FALSE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.DELETE_PORTLET_DATA,
+			new String[] {Boolean.FALSE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.DATA_STRATEGY,
+			new String[] {PortletDataHandlerKeys.DATA_STRATEGY_MIRROR});
+		parameterMap.put(
+			PortletDataHandlerKeys.USER_ID_STRATEGY,
+			new String[] {UserIdStrategy.CURRENT_USER_ID});
+
+		return parameterMap;
+	}
+
 	public static void publishLayouts(
-			Map<Long, Boolean> layoutIdMap, long stagingGroupId,
-			long liveGroupId, boolean privateLayout,
+			long sourceGroupId, long targetGroupId, boolean privateLayout,
 			Map<String, String[]> parameterMap)
+		throws Exception {
+
+		byte[] bytes = LayoutServiceUtil.exportLayouts(
+			sourceGroupId, privateLayout, parameterMap, null, null);
+
+		ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+
+		LayoutServiceUtil.importLayouts(
+			targetGroupId, privateLayout, parameterMap, bais);
+	}
+
+	public static void publishLayouts(
+			long sourceGroupId, long targetGroupId, boolean privateLayout,
+			Map<Long, Boolean> layoutIdMap, Map<String, String[]> parameterMap)
 		throws Exception {
 
 		parameterMap.put(
@@ -527,7 +446,7 @@ public class StagingUtil {
 			}
 
 			Iterator<Layout> itr2 = getMissingParents(
-				layout, liveGroupId).iterator();
+				layout, targetGroupId).iterator();
 
 			while (itr2.hasNext()) {
 				Layout parentLayout = itr2.next();
@@ -559,12 +478,12 @@ public class StagingUtil {
 		}
 
 		byte[] bytes = LayoutServiceUtil.exportLayouts(
-			stagingGroupId, privateLayout, layoutIds, parameterMap, null, null);
+			sourceGroupId, privateLayout, layoutIds, parameterMap, null, null);
 
 		ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
 
 		LayoutServiceUtil.importLayouts(
-			liveGroupId, privateLayout, parameterMap, bais);
+			targetGroupId, privateLayout, parameterMap, bais);
 	}
 
 	public static void publishToLive(ActionRequest req) throws Exception {
@@ -591,7 +510,7 @@ public class StagingUtil {
 		Map<String, String[]> parameterMap = getStagingParameters(req);
 
 		if (scope.equals("all-pages")) {
-			copyLayouts(
+			publishLayouts(
 				stagingGroup.getGroupId(), stagingGroup.getLiveGroupId(),
 				privateLayout, parameterMap);
 		}
@@ -600,8 +519,7 @@ public class StagingUtil {
 
 			long[] rowIds = ParamUtil.getLongValues(req, "rowIds");
 
-			for (int i = 0; i < rowIds.length; i++) {
-				long selPlid = rowIds[i];
+			for (long selPlid : rowIds) {
 				boolean includeChildren = ParamUtil.getBoolean(
 					req, "includeChildren_" + selPlid);
 
@@ -609,8 +527,8 @@ public class StagingUtil {
 			}
 
 			publishLayouts(
-				layoutIdMap, stagingGroup.getGroupId(),
-				stagingGroup.getLiveGroupId(), privateLayout, parameterMap);
+				stagingGroup.getGroupId(), stagingGroup.getLiveGroupId(),
+				privateLayout, layoutIdMap, parameterMap);
 		}
 	}
 
@@ -631,6 +549,82 @@ public class StagingUtil {
 		copyPortlet(
 			req, sourceLayout.getPlid(), targetLayout.getPlid(),
 			portlet.getPortletId());
+	}
+
+	public static void schedulePublishToLive(ActionRequest req)
+		throws Exception {
+
+		String tabs1 = ParamUtil.getString(req, "tabs1");
+
+		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
+
+		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
+
+		long liveGroupId = stagingGroup.getLiveGroupId();
+
+		boolean privateLayout = true;
+
+		if (tabs1.equals("public-pages")) {
+			privateLayout = false;
+		}
+
+		String scope = ParamUtil.getString(req, "scope");
+
+		Map<Long, Boolean> layoutIdMap = new LinkedHashMap<Long, Boolean>();
+
+		if (scope.equals("selected-pages")) {
+			long[] rowIds = ParamUtil.getLongValues(req, "rowIds");
+
+			for (long selPlid : rowIds) {
+				boolean includeChildren = ParamUtil.getBoolean(
+					req, "includeChildren_" + selPlid);
+
+				layoutIdMap.put(selPlid, includeChildren);
+			}
+		}
+
+		Map<String, String[]> parameterMap = getStagingParameters(req);
+
+		boolean timeZoneSensitive = ParamUtil.getBoolean(
+			req, "timeZoneSensitive");
+
+		int recurrenceType = ParamUtil.getInteger(req, "recurrenceType");
+
+		Calendar startCal = _getDate(req, "startDate", timeZoneSensitive);
+
+		String cronText = _getCronText(
+			req, startCal, timeZoneSensitive, recurrenceType);
+
+		Date endDate = null;
+
+		int endDateType = ParamUtil.getInteger(req, "endDateType");
+
+		if (endDateType == 1) {
+			Calendar endCal = _getDate(req, "endDate", timeZoneSensitive);
+
+			endDate = endCal.getTime();
+		}
+
+		String description = ParamUtil.getString(req, "description");
+
+		LayoutServiceUtil.schedulePublishToLive(
+			stagingGroupId, liveGroupId, privateLayout, layoutIdMap,
+			parameterMap, scope, cronText, startCal.getTime(), endDate,
+			description);
+	}
+
+	public static void unschedulePublishToLive(ActionRequest req)
+		throws Exception {
+
+		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
+
+		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
+
+		long liveGroupId = stagingGroup.getLiveGroupId();
+
+		String jobName = ParamUtil.getString(req, "jobName");
+
+		LayoutServiceUtil.unschedulePublishToLive(liveGroupId, jobName);
 	}
 
 	public static void updateStaging(ActionRequest req) throws Exception {
@@ -668,7 +662,7 @@ public class StagingUtil {
 			if (liveGroup.hasPrivateLayouts()) {
 				Map<String, String[]> parameterMap = getStagingParameters();
 
-				copyLayouts(
+				publishLayouts(
 					liveGroup.getGroupId(), stagingGroup.getGroupId(), true,
 					parameterMap);
 			}
@@ -676,31 +670,39 @@ public class StagingUtil {
 			if (liveGroup.hasPublicLayouts()) {
 				Map<String, String[]> parameterMap = getStagingParameters();
 
-				copyLayouts(
+				publishLayouts(
 					liveGroup.getGroupId(), stagingGroup.getGroupId(), false,
 					parameterMap);
 			}
 		}
 	}
 
-	protected static String getCronText(
+	private static void _addWeeklyDayPos(
+		ActionRequest req, List<DayAndPosition> list, int day) {
+
+		if (ParamUtil.getBoolean(req, "weeklyDayPos" + day)) {
+			list.add(new DayAndPosition(day, 0));
+		}
+	}
+
+	private static String _getCronText(
 			ActionRequest req, Calendar startDate, boolean timeZoneSensitive,
 			int recurrenceType)
 		throws Exception {
 
-		Calendar recStartCal = null;
+		Calendar startCal = null;
 
 		if (timeZoneSensitive) {
-			recStartCal = CalendarFactoryUtil.getCalendar();
+			startCal = CalendarFactoryUtil.getCalendar();
 
-			recStartCal.setTime(startDate.getTime());
+			startCal.setTime(startDate.getTime());
 		}
 		else {
-			recStartCal = (Calendar)startDate.clone();
+			startCal = (Calendar)startDate.clone();
 		}
 
 		Recurrence recurrence = new Recurrence(
-			recStartCal, new Duration(1, 0, 0, 0), recurrenceType);
+			startCal, new Duration(1, 0, 0, 0), recurrenceType);
 
 		recurrence.setWeekStart(Calendar.SUNDAY);
 
@@ -708,8 +710,7 @@ public class StagingUtil {
 			int dailyType = ParamUtil.getInteger(req, "dailyType");
 
 			if (dailyType == 0) {
-				int dailyInterval = ParamUtil.getInteger(
-					req, "dailyInterval");
+				int dailyInterval = ParamUtil.getInteger(req, "dailyInterval");
 
 				// LEP-3468
 
@@ -738,13 +739,13 @@ public class StagingUtil {
 
 			List<DayAndPosition> dayPos = new ArrayList<DayAndPosition>();
 
-			addWeeklyDayPos(req, dayPos, Calendar.SUNDAY);
-			addWeeklyDayPos(req, dayPos, Calendar.MONDAY);
-			addWeeklyDayPos(req, dayPos, Calendar.TUESDAY);
-			addWeeklyDayPos(req, dayPos, Calendar.WEDNESDAY);
-			addWeeklyDayPos(req, dayPos, Calendar.THURSDAY);
-			addWeeklyDayPos(req, dayPos, Calendar.FRIDAY);
-			addWeeklyDayPos(req, dayPos, Calendar.SATURDAY);
+			_addWeeklyDayPos(req, dayPos, Calendar.SUNDAY);
+			_addWeeklyDayPos(req, dayPos, Calendar.MONDAY);
+			_addWeeklyDayPos(req, dayPos, Calendar.TUESDAY);
+			_addWeeklyDayPos(req, dayPos, Calendar.WEDNESDAY);
+			_addWeeklyDayPos(req, dayPos, Calendar.THURSDAY);
+			_addWeeklyDayPos(req, dayPos, Calendar.FRIDAY);
+			_addWeeklyDayPos(req, dayPos, Calendar.SATURDAY);
 
 			if (dayPos.size() == 0) {
 				dayPos.add(new DayAndPosition(Calendar.MONDAY, 0));
@@ -814,19 +815,19 @@ public class StagingUtil {
 			}
 		}
 
-		return recurrence.toCronText();
+		return RecurrenceSerializer.toCronText(recurrence);
 	}
 
-	protected static Calendar getDate(
+	private static Calendar _getDate(
 			ActionRequest req, String paramPrefix, boolean timeZoneSensitive)
 		throws Exception {
 
-		int dateMonth = ParamUtil.getInteger(req, paramPrefix + "DateMonth");
-		int dateDay = ParamUtil.getInteger(req, paramPrefix + "DateDay");
-		int dateYear = ParamUtil.getInteger(req, paramPrefix + "DateYear");
-		int dateHour = ParamUtil.getInteger(req, paramPrefix + "DateHour");
-		int dateMinute = ParamUtil.getInteger(req, paramPrefix + "DateMinute");
-		int dateAmPm = ParamUtil.getInteger(req, paramPrefix + "DateAmPm");
+		int dateMonth = ParamUtil.getInteger(req, paramPrefix + "Month");
+		int dateDay = ParamUtil.getInteger(req, paramPrefix + "Day");
+		int dateYear = ParamUtil.getInteger(req, paramPrefix + "Year");
+		int dateHour = ParamUtil.getInteger(req, paramPrefix + "Hour");
+		int dateMinute = ParamUtil.getInteger(req, paramPrefix + "Minute");
+		int dateAmPm = ParamUtil.getInteger(req, paramPrefix + "AmPm");
 
 		if (dateAmPm == Calendar.PM) {
 			dateHour += 12;
@@ -857,14 +858,6 @@ public class StagingUtil {
 		cal.set(Calendar.MILLISECOND, 0);
 
 		return cal;
-	}
-
-	protected static void addWeeklyDayPos(
-		ActionRequest req, List<DayAndPosition> list, int day) {
-
-		if (ParamUtil.getBoolean(req, "weeklyDayPos" + day)) {
-			list.add(new DayAndPosition(day, 0));
-		}
 	}
 
 	private static Log _log = LogFactory.getLog(StagingUtil.class);

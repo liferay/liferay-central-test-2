@@ -163,20 +163,6 @@ public class LayoutLocalServiceUtil {
 			hidden, friendlyURL, dlFolderId);
 	}
 
-	public static void addPublishToLiveRequest(long userId,
-		long stagingGroupId, long liveGroupId, boolean privateLayout,
-		java.util.Map<String, String[]> parameterMap,
-		java.lang.String cronText, java.lang.String scope,
-		java.util.Map<Long, Boolean> layoutIdMap, java.util.Date startDate,
-		java.util.Date endDate, java.lang.String description)
-		throws com.liferay.portal.SystemException {
-		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
-
-		layoutLocalService.addPublishToLiveRequest(userId, stagingGroupId,
-			liveGroupId, privateLayout, parameterMap, cronText, scope,
-			layoutIdMap, startDate, endDate, description);
-	}
-
 	public static void deleteLayout(long groupId, boolean privateLayout,
 		long layoutId)
 		throws com.liferay.portal.PortalException,
@@ -201,13 +187,6 @@ public class LayoutLocalServiceUtil {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
 		layoutLocalService.deleteLayouts(groupId, privateLayout);
-	}
-
-	public static void deletePublishToLiveRequest(long liveGroupId,
-		java.lang.String jobName) throws com.liferay.portal.SystemException {
-		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
-
-		layoutLocalService.deletePublishToLiveRequest(liveGroupId, jobName);
 	}
 
 	public static byte[] exportLayouts(long groupId, boolean privateLayout,
@@ -369,13 +348,6 @@ public class LayoutLocalServiceUtil {
 		return layoutLocalService.getNullFriendlyURLLayouts();
 	}
 
-	public static java.lang.String getPublishToLiveRequestsJSON(long groupId)
-		throws com.liferay.portal.SystemException {
-		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
-
-		return layoutLocalService.getPublishToLiveRequestsJSON(groupId);
-	}
-
 	public static void importLayouts(long userId, long groupId,
 		boolean privateLayout, java.util.Map<String, String[]> parameterMap,
 		java.io.File file)
@@ -431,6 +403,20 @@ public class LayoutLocalServiceUtil {
 			parameterMap, is);
 	}
 
+	public static void schedulePublishToLive(long userId, long stagingGroupId,
+		long liveGroupId, boolean privateLayout,
+		java.util.Map<Long, Boolean> layoutIdMap,
+		java.util.Map<String, String[]> parameterMap, java.lang.String scope,
+		java.lang.String cronText, java.util.Date startDate,
+		java.util.Date endDate, java.lang.String description)
+		throws com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		layoutLocalService.schedulePublishToLive(userId, stagingGroupId,
+			liveGroupId, privateLayout, layoutIdMap, parameterMap, scope,
+			cronText, startDate, endDate, description);
+	}
+
 	public static void setLayouts(long groupId, boolean privateLayout,
 		long parentLayoutId, long[] layoutIds)
 		throws com.liferay.portal.PortalException,
@@ -439,6 +425,13 @@ public class LayoutLocalServiceUtil {
 
 		layoutLocalService.setLayouts(groupId, privateLayout, parentLayoutId,
 			layoutIds);
+	}
+
+	public static void unschedulePublishToLive(long liveGroupId,
+		java.lang.String jobName) throws com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		layoutLocalService.unschedulePublishToLive(liveGroupId, jobName);
 	}
 
 	public static com.liferay.portal.model.Layout updateFriendlyURL(long plid,

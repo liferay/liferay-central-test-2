@@ -20,15 +20,18 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.search;
+package com.liferay.portal.kernel.search.messaging;
+
+import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Sort;
 
 /**
- * <a href="SearchEngineRequest.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchRequest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  *
  */
-public class SearchEngineRequest {
+public class SearchRequest {
 
 	public static final String COMMAND_ADD = "ADD";
 
@@ -43,31 +46,31 @@ public class SearchEngineRequest {
 
 	public static final String COMMAND_UPDATE = "UPDATE";
 
-	public SearchEngineRequest() {
+	public SearchRequest() {
 	}
 
-	public SearchEngineRequest(String command, long companyId, String id) {
+	public SearchRequest(String command, long companyId, String id) {
 		this(command, companyId, id, null);
 	}
 
-	public SearchEngineRequest(String command, long companyId, Document doc) {
+	public SearchRequest(String command, long companyId, Document doc) {
 		this(command, companyId, null, doc);
 	}
 
-	public SearchEngineRequest(
+	public SearchRequest(
 		String command, long companyId, String id, Document doc) {
 
 		this(command, companyId, id, doc, null, null, 0, 0);
 	}
 
-	public SearchEngineRequest(
+	public SearchRequest(
 		String command, long companyId, String query, Sort sort, int start,
 		int end) {
 
 		this(command, companyId, null, null, query, sort, start, end);
 	}
 
-	public SearchEngineRequest(
+	public SearchRequest(
 		String command, long companyId, String id, Document doc, String query,
 		Sort sort, int start, int end) {
 

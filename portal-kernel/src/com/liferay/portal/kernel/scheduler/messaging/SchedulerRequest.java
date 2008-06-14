@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.scheduler;
+package com.liferay.portal.kernel.scheduler.messaging;
 
 import java.io.Serializable;
 
@@ -56,6 +56,12 @@ public class SchedulerRequest implements Serializable {
 
 	public SchedulerRequest(String command) {
 		this(command, null, null, null, null, null, null, null, null);
+	}
+
+	public SchedulerRequest(
+		String command, String jobName, String groupName) {
+
+		this(command, jobName, groupName, null, null, null, null, null, null);
 	}
 
 	public SchedulerRequest(

@@ -97,14 +97,6 @@ public class LayoutServiceJSON {
 		LayoutServiceUtil.deleteLayout(groupId, privateLayout, layoutId);
 	}
 
-	public static void deletePublishToLiveRequest(long stagingGroupId,
-		long liveGroupId, java.lang.String jobName)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		LayoutServiceUtil.deletePublishToLiveRequest(stagingGroupId,
-			liveGroupId, jobName);
-	}
-
 	public static java.lang.String getLayoutName(long groupId,
 		boolean privateLayout, long layoutId, java.lang.String languageId)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
@@ -131,6 +123,13 @@ public class LayoutServiceJSON {
 			com.liferay.portal.SystemException {
 		LayoutServiceUtil.setLayouts(groupId, privateLayout, parentLayoutId,
 			layoutIds);
+	}
+
+	public static void unschedulePublishToLive(long liveGroupId,
+		java.lang.String jobName)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		LayoutServiceUtil.unschedulePublishToLive(liveGroupId, jobName);
 	}
 
 	public static JSONObject updateLayout(long groupId, boolean privateLayout,
