@@ -273,15 +273,12 @@ Liferay.Tree = new Class({
 					activeClass: '',
 					hoverClass: 'tree-item-hover',
 					tolerance: 'pointer',
-
 					drop: function(event, ui) {
 						instance._onDrop(ui.draggable[0], this);
 					},
-
 					over: function(event, ui) {
 						instance._onHover(ui.draggable, this);
 					},
-
 					out: function(event, ui) {
 						instance._onOut(this);
 					}
@@ -439,8 +436,9 @@ Liferay.Tree = new Class({
 
 		if (!instance._initialSortable) {
 			jQuery.extend(instance._dragOptions, {connectTo: 'ul.node-open'})
+
 			instance._initialSortable = jQuery(parentEl).sortable(instance._dragOptions);
-		}		
+		}
 		else {
 			instance._initialSortable.sortable('refresh');
 		}
@@ -663,6 +661,7 @@ Liferay.Tree = new Class({
 		);
 
 		Liferay.Publisher.deliver('tree', item, obj);
+
 		instance._originalParentNode = null;
 		instance._wasDropped = true;
 	},
