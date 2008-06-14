@@ -158,7 +158,7 @@ public class CookieKeys {
 			return null;
 		}
 
-		// See LEP-5595
+		// See LEP-5595.
 
 		if (Validator.isIPAddress(host)) {
 			return host;

@@ -273,9 +273,9 @@ public class Validator {
 		return false;
 	}
 
-	public static boolean isIPAddress(String ip){
-		Pattern pattern = Pattern.compile(_IPV4);
-		Matcher matcher = pattern.matcher(ip);
+	public static boolean isIPAddress(String ipAddress){
+		Matcher matcher = _IP_ADDRESS_REGEXP_PATTERN.matcher(ipAddress);
+
 		return matcher.matches();
 	}
 
@@ -480,11 +480,16 @@ public class Validator {
 		'_', '`', '{', '|', '}', '~'
 	};
 
-	private static String _IPV4 = "\\b" +
+	private static String _IP_ADDRESS_REGEXP =
+		"\\b" +
 		"((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\." +
 		"((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\." +
 		"((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\." +
-		"((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\b";
+		"((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])" +
+		"\\b";
+
+	private static final Pattern _IP_ADDRESS_REGEXP_PATTERN = Pattern.compile(
+		_IP_ADDRESS_REGEXP);
 
 	private static String _VARIABLE_TERM_BEGIN = "[$";
 
