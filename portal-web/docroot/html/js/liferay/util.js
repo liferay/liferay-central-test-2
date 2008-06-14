@@ -337,21 +337,6 @@ Liferay.Util = {
 		return (str.lastIndexOf(x) === (str.length - x.length));
 	},
 
-	evalScripts: function(obj) {
-		var instance = this;
-
-		jQuery(obj).find('script').each(
-			function() {
-				if ( this.src ) {
-					jQuery.getScript( this.src );
-				}
-				else {
-					jQuery.globalEval( this.text || this.textContent || this.innerHTML || "" );
-				}
-			}
-		);
-	},
-
 	focusFormField: function(el, caretPosition) {
 		var interacting = false;
 		var eventData = caretPosition ? [caretPosition] : null;

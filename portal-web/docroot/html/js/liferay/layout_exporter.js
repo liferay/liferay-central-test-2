@@ -107,10 +107,6 @@ Liferay.LayoutExporter = {
 				url: url,
 				success: function(response) {
 					jQuery(exportLayoutsPopup).html(response);
-
-					if (Liferay.Browser.is_ie) {
-						Liferay.Util.evalScripts(exportLayoutsPopup);
-					}
 				}
 			}
 		);

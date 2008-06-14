@@ -32,11 +32,6 @@ function addPortletHTML(options) {
 
 	var addPortletReturn = function(html) {
 		var container = placeHolder.parentNode;
-		var jContainer = jQuery(container);
-
-		if (jContainer.is('.empty')) {
-			jContainer.removeClass('empty');
-		}
 
 		var portletBound = jQuery(html)[0];
 		var portletId = Liferay.Util.getPortletId(portletBound.id);
@@ -45,11 +40,7 @@ function addPortletHTML(options) {
 
 		Liferay.Portlet.flagAjax(portletId);
 
-		container.replaceChild(portletBound, placeHolder);
-
-		if (Liferay.Browser.is_ie) {
-			Liferay.Util.evalScripts(portletBound);
-		}
+		jQuery(placeHolder).hide().after(portletBound).remove();
 
 		<c:if test="<%= (layout != null) && (LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE)) %>">
 			if (!portletBound.isStatic) {
