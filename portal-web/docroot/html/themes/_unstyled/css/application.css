@@ -140,6 +140,12 @@
 .ui-tabs {
 }
 
+.ui-tabs:after {
+}
+
+.ie .ui-tabs {
+}
+
 .ui-tabs li {
 }
 
@@ -149,7 +155,7 @@
 .ui-tabs li a, .tabs li span {
 }
 
-.ui-tabs li:hover, .ui-tabs li a:hover {
+.ui-tabs li a:hover, .ui-tabs li span:hover {
 }
 
 .ui-tabs li.current {

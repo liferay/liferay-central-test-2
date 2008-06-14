@@ -226,18 +226,26 @@
 .ui-tabs {
 	border-bottom: 1px solid #DEDEDE;
 	margin: 0 0 18px 0;
-	padding: 0 0 29px 10px;
+	padding: 0 0 0 10px;
+}
+
+.ui-tabs:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+
+.ie .ui-tabs {
+	height: 1%;
 }
 
 .ui-tabs li {
-	background: #878F93 url(../images/application/tabs_bg.png) repeat-x 0 100%;
-	border-right: 1px solid #304049;
 	display: inline;
 	float: left;
-	line-height: 2.25;
-	margin-top: 1px;
+	line-height: 1;
 	padding: 0;
-	position: relative;
 	text-decoration: none;
 }
 
@@ -246,30 +254,31 @@
 }
 
 .ui-tabs li a, .tabs li span {
+	background: #878F93 url(../images/application/tabs_bg.png) repeat-x 0 100%;
+	border-right: 1px solid #304049;
 	color: #fff;
 	display: block;
 	float: left;
-	padding: 2px 10px;
+	padding: 10px;
+	position: relative;
 	text-decoration: none;
+	top: 1px;
 }
 
-.ui-tabs li:hover, .ui-tabs li a:hover {
+.ui-tabs li a:hover, .ui-tabs li span:hover {
 	background: #1E2529;
 	color: #9EBAC8;
 }
 
 .ui-tabs li.current {
-	background: #fff;
-	border: 1px solid #DEDEDE;
-	border-bottom: none;
-	font-weight: bold;
-	margin-top: 0;
-	padding-bottom: 1px;
 }
 
 .ui-tabs li.current a, .ui-tabs li.current span {
+	background: #fff;
+	border: 1px solid #DEDEDE;
+	border-bottom: none;
 	color: #369;
-	padding: 2px 10px 1px;
+	font-weight: bold;
 }
 
 .ui-tabs li.current:hover, .ui-tabs li.current a:hover {
