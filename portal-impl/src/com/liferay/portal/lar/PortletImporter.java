@@ -495,7 +495,7 @@ public class PortletImporter {
 					ownerId = defaultUserId;
 				}
 
-				PortletPreferences prefs = 
+				PortletPreferences prefs =
 					PortletPreferencesUtil.fetchByO_O_P_P(
 						ownerId, ownerType, plid, portletId);
 
