@@ -59,22 +59,22 @@
 			// We need to filter the results with ContentHits first and then
 			// make a subset of the filtered results.
 
-			Hits hits = CompanyLocalServiceUtil.search(company.getCompanyId(), PortletKeys.JOURNAL, 0, type, keywords, SearchEngineUtil.ALL_POS, SearchEngineUtil.ALL_POS);
+			Hits results = CompanyLocalServiceUtil.search(company.getCompanyId(), PortletKeys.JOURNAL, 0, type, keywords, SearchEngineUtil.ALL_POS, SearchEngineUtil.ALL_POS);
 
 			ContentHits contentHits = new ContentHits();
 
 			contentHits.setShowListed(showListed);
 
-			contentHits.recordHits(hits, layout.getGroupId(), layout.isPrivateLayout(), searchContainer.getStart(), searchContainer.getEnd());
+			contentHits.recordHits(results, layout.getGroupId(), layout.isPrivateLayout(), searchContainer.getStart(), searchContainer.getEnd());
 
-			int total = hits.getLength();
+			int total = results.getLength();
 
 			searchContainer.setTotal(total);
 
 			List resultRows = searchContainer.getResultRows();
 
-			for (int i = 0; i < hits.getDocs().length; i++) {
-				Document doc = hits.doc(i);
+			for (int i = 0; i < results.getDocs().length; i++) {
+				Document doc = results.doc(i);
 
 				ResultRow row = new ResultRow(doc, i, i);
 
@@ -96,7 +96,7 @@
 
 				// Score
 
-				row.addScore(hits.score(i));
+				row.addScore(results.score(i));
 
 				// Add result row
 
@@ -112,7 +112,7 @@
 					<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="<liferay-ui:message key="search" />" type="image" />
 				</td>
 				<td align="right">
-					<liferay-ui:search-speed searchContainer="<%= searchContainer %>" hits="<%= hits %>" />
+					<liferay-ui:search-speed searchContainer="<%= searchContainer %>" hits="<%= results %>" />
 				</td>
 			</tr>
 			</table>

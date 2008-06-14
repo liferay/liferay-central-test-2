@@ -99,20 +99,20 @@ try {
 	// to filter the results with ThreadHits first and then make a subset of the
 	// filtered results.
 
-	Hits hits = MBCategoryLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), categoryIdsArray, threadId, keywords, SearchEngineUtil.ALL_POS, SearchEngineUtil.ALL_POS);
+	Hits results = MBCategoryLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), categoryIdsArray, threadId, keywords, SearchEngineUtil.ALL_POS, SearchEngineUtil.ALL_POS);
 
 	ThreadHits threadHits = new ThreadHits();
 
-	threadHits.recordHits(hits, searchContainer.getStart(), searchContainer.getEnd());
+	threadHits.recordHits(results, searchContainer.getStart(), searchContainer.getEnd());
 
-	int total = hits.getLength();
+	int total = results.getLength();
 
 	searchContainer.setTotal(total);
 
 	List resultRows = searchContainer.getResultRows();
 
-	for (int i = 0; i < hits.getDocs().length; i++) {
-		Document doc = hits.doc(i);
+	for (int i = 0; i < results.getDocs().length; i++) {
+		Document doc = results.doc(i);
 
 		ResultRow row = new ResultRow(doc, i, i);
 
@@ -180,7 +180,7 @@ try {
 
 		// Score
 
-		row.addScore(hits.score(i));
+		row.addScore(results.score(i));
 
 		// Add result row
 
