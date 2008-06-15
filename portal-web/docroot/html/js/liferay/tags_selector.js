@@ -422,6 +422,13 @@ Liferay.TagsSelector = new Class({
 
 		var tagsSummary = jQuery('#' + params.summarySpan);
 
+		if (curTags.length) {
+			tagsSummary.removeClass('empty');
+		}
+		else {
+			tagsSummary.addClass('empty');
+		}
+
 		tagsSummary.html(html);
 	}
 });

@@ -754,6 +754,10 @@ img.ui-datepicker-trigger {
 	height: 1%;
 }
 
+.ui-tags.empty {
+	display: none;
+}
+
 .ui-tags .ui-tag {
 	background: #DFF4FF;
 	border: 1px solid #A7CEDF;

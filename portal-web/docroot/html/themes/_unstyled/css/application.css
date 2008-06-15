@@ -411,6 +411,9 @@ img.ui-datepicker-trigger {
 .ie .ui-tags {
 }
 
+.ui-tags.empty {
+}
+
 .ui-tags .ui-tag {
 }
 
