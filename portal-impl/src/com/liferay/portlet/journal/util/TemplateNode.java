@@ -27,58 +27,71 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
  * <a href="TemplateNode.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Raymond Augé
  *
  */
-public class TemplateNode {
+public class TemplateNode extends LinkedHashMap<String, Object> {
 
 	public TemplateNode(String name, String data, String type) {
-		_name = name;
-		_data = data;
-		_type = type;
-		_options = new ArrayList<String>();
-		_children = new ArrayList<TemplateNode>();
+		super();
+
+		put("name", name);
+		put("data", data);
+		put("type", type);
+		put("options", new ArrayList<String>());
+		_children = new LinkedHashMap<String, TemplateNode>();
 	}
 
 	public String getName() {
-		return _name;
+		return (String)get("name");
 	}
 
 	public String getData() {
-		return _data;
+		return (String)get("data");
 	}
 
 	public String getType() {
-		return _type;
+		return (String)get("type");
 	}
 
 	public void appendOption(String option) {
-		_options.add(option);
+		((List<String>)get("options")).add(option);
 	}
 
 	public void appendOptions(List<String> options) {
-		_options.addAll(options);
+		((List<String>)get("options")).addAll(options);
 	}
 
 	public List<String> getOptions() {
-		return _options;
+		return (List<String>)get("options");
 	}
 
 	public void appendChild(TemplateNode child) {
-		_children.add(child);
+		_children.put(child.getName(), child);
+		put(child.getName(), child);
 	}
 
 	public void appendChildren(List<TemplateNode> children) {
-		_children.addAll(children);
+		for (TemplateNode child : children) {
+			_children.put(child.getName(), child);
+			put(child.getName(), child);
+		}
 	}
 
 	public List<TemplateNode> getChildren() {
-		return _children;
+		return new ArrayList<TemplateNode>(_children.values());
+	}
+
+	public TemplateNode getChild(String name) {
+		return _children.get(name);
 	}
 
 	public String getUrl() {
@@ -99,10 +112,6 @@ public class TemplateNode {
 		}
 	}
 
-	private String _name;
-	private String _data;
-	private String _type;
-	private List<String> _options;
-	private List<TemplateNode> _children;
+	private HashMap<String,TemplateNode> _children;
 
 }
