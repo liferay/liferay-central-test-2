@@ -75,7 +75,7 @@ public class JSPWikiEngine implements WikiEngine {
 		if (Validator.isNull(page.getContent())) {
 			return Collections.EMPTY_MAP;
 		}
-		
+
 		try {
 			LiferayJSPWikiEngine engine = getEngine(page.getNodeId());
 

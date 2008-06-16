@@ -22,7 +22,11 @@
 
 package com.liferay.portlet.wiki.translators;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.wiki.importers.mediawiki.MediaWikiImporter;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * <a href="MediaWikiToCreoleTranslator.java.html"><b><i>View Source</i></b></a>
@@ -44,6 +48,7 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 		// Preformat protected
 
 		nowikiRegexps.add("(<nowiki>)(.*?)(</nowiki>)");
+		nowikiRegexps.add("(<pre>)(.*?)(</pre>)");
 
 		// Escape protected
 
@@ -114,9 +119,25 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 		// No wiki
 
 		regexps.put("<nowiki>([^<]*)</nowiki>", "{{{$1}}}");
+
+		// Pre
+
+		regexps.put("<pre>([^<]*)</pre>", "{{{$1}}}");
 	}
 
 	protected String postProcess(String content) {
+		Matcher matcher = Pattern.compile(
+			"\\[{2}([^\\]]*)\\]{2}", Pattern.DOTALL).matcher(content);
+
+		while (matcher.find()) {
+			String linkWithUnderscores = matcher.group(1);
+
+			String link = linkWithUnderscores.replaceAll(
+				StringPool.UNDERLINE, StringPool.SPACE);
+
+			content = content.replaceAll(linkWithUnderscores, link);
+		}
+
 		return TABLE_OF_CONTENTS + super.postProcess(content);
 	}
 
