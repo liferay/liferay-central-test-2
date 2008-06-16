@@ -20,10 +20,8 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.search;
+package com.liferay.portal.kernel.search;
 
-import com.liferay.portal.kernel.search.Document;
-import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -35,11 +33,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.text.SimpleDateFormat;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.apache.lucene.document.DateTools;
 
 /**
  * <a href="DocumentImpl.java.html"><b><i>View Source</i></b></a>
@@ -59,8 +57,9 @@ public class DocumentImpl implements Document {
 			return;
 		}
 
-		addKeyword(
-			name, DateTools.dateToString(value, DateTools.Resolution.SECOND));
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+
+		addKeyword(name, sdf.format(value));
 	}
 
 	public void addFile(String name, InputStream is, String fileExt) {

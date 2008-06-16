@@ -26,6 +26,7 @@ import com.liferay.documentlibrary.service.impl.DLServiceImpl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
@@ -39,7 +40,6 @@ import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
-import com.liferay.util.search.DocumentImpl;
 
 import java.io.IOException;
 import java.io.InputStream;

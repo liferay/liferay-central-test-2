@@ -23,6 +23,7 @@
 package com.liferay.portlet.imagegallery.util;
 
 import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
@@ -30,7 +31,6 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
-import com.liferay.util.search.DocumentImpl;
 
 import javax.portlet.PortletURL;
 
