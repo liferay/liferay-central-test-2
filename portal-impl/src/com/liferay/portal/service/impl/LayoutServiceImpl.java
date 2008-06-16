@@ -24,7 +24,12 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
+import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutReference;
 import com.liferay.portal.model.Plugin;
@@ -32,14 +37,20 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.base.LayoutServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
+import com.liferay.portlet.communities.messaging.LayoutsPublisherRequest;
+import com.liferay.util.JSONUtil;
 
 import java.io.File;
 import java.io.InputStream;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * <a href="LayoutServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -119,6 +130,38 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 		return layoutLocalService.getLayouts(
 			companyId, portletId, prefsKey, prefsValue);
+	}
+
+	public String getScheduledPublishToLiveJSON(long liveGroupId)
+		throws PortalException, SystemException {
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), liveGroupId, ActionKeys.MANAGE_LAYOUTS);
+
+		try {
+			JSONArray jsonArray = new JSONArray();
+
+			Collection<SchedulerRequest> schedulerRequests =
+				SchedulerEngineUtil.getScheduledJobs(
+					getSchedulerGroupName(liveGroupId));
+
+			for (SchedulerRequest schedulerRequest : schedulerRequests) {
+				JSONObject jsonObject = new JSONObject();
+
+				JSONUtil.put(
+					jsonObject, "description",
+					schedulerRequest.getDescription());
+				JSONUtil.put(
+					jsonObject, "jobName", schedulerRequest.getJobName());
+
+				jsonArray.put(jsonObject);
+			}
+
+			return jsonArray.toString();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	public byte[] exportLayouts(
@@ -240,10 +283,24 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), liveGroupId, ActionKeys.MANAGE_LAYOUTS);
 
-		layoutLocalService.schedulePublishToLive(
-			getUserId(), stagingGroupId, liveGroupId, privateLayout,
-			layoutIdMap, parameterMap, scope, cronText, startDate, endDate,
-			description);
+		String command = StringPool.BLANK;
+
+		if (scope.equals("all-pages")) {
+			command = LayoutsPublisherRequest.COMMAND_ALL_PAGES;
+		}
+		else if (scope.equals("selected-pages")) {
+			command = LayoutsPublisherRequest.COMMAND_SELECTED_PAGES;
+		}
+
+		LayoutsPublisherRequest layoutsPublisherRequest =
+			new LayoutsPublisherRequest(
+				command, getUserId(), stagingGroupId, liveGroupId,
+				privateLayout, layoutIdMap, parameterMap);
+
+		SchedulerEngineUtil.schedule(
+			getSchedulerGroupName(liveGroupId), cronText, startDate, endDate,
+			description, DestinationNames.LAYOUTS_PUBLISHER,
+			JSONUtil.serialize(layoutsPublisherRequest));
 	}
 
 	public void setLayouts(
@@ -264,7 +321,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), liveGroupId, ActionKeys.MANAGE_LAYOUTS);
 
-		layoutLocalService.unschedulePublishToLive(liveGroupId, jobName);
+		SchedulerEngineUtil.unschedule(
+			jobName, getSchedulerGroupName(liveGroupId));
 	}
 
 	public Layout updateLayout(
@@ -394,6 +452,16 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 		return layoutLocalService.updatePriority(
 			groupId, privateLayout, layoutId, priority);
+	}
+
+	protected String getSchedulerGroupName(long liveGroupId) {
+		StringMaker sm = new StringMaker();
+
+		sm.append(DestinationNames.LAYOUTS_PUBLISHER);
+		sm.append(StringPool.FORWARD_SLASH);
+		sm.append(liveGroupId);
+
+		return sm.toString();
 	}
 
 }

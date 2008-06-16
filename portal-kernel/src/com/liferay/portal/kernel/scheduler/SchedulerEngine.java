@@ -48,9 +48,8 @@ public interface SchedulerEngine {
 		throws SchedulerException;
 
 	public void schedule(
-			String jobName, String groupName, String cronText, Date startDate,
-			Date endDate, String description, String destinationName,
-			String messageBody)
+			String groupName, String cronText, Date startDate, Date endDate,
+			String description, String destinationName, String messageBody)
 		throws SchedulerException;
 
 	public void shutdown() throws SchedulerException;

@@ -33,16 +33,15 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.jndi.PortalJNDIUtil;
-import com.liferay.portal.kernel.messaging.Destination;
-import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageSender;
-import com.liferay.portal.kernel.messaging.SerialDestination;
+import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.pop.POPServerUtil;
+import com.liferay.portal.scheduler.SchedulerEngineImpl;
 import com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineUtil;
 import com.liferay.portal.search.IndexSearcherImpl;
 import com.liferay.portal.search.IndexWriterImpl;
@@ -50,7 +49,6 @@ import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.communities.messaging.LayoutsPublisherMessageListener;
 
 import java.io.File;
 
@@ -228,14 +226,16 @@ public class GlobalStartupAction extends SimpleAction {
 			POPServerUtil.start();
 		}
 
-		// Scheduler
+		// Scheduler engines
 
 		try {
-			QuartzSchedulerEngineUtil.start();
+			QuartzSchedulerEngineUtil.init();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
+
+		SchedulerEngineUtil.init(new SchedulerEngineImpl());
 
 		// Search engines
 
@@ -243,14 +243,6 @@ public class GlobalStartupAction extends SimpleAction {
 
 		SearchEngineUtil.init(new IndexSearcherImpl(), new IndexWriterImpl());
 
-		// Layouts publisher
-
-		Destination destination = new SerialDestination(
-			DestinationNames.LAYOUTS_PUBLISHER);
-
-		MessageBusUtil.addDestination(destination);
-
-		destination.register(new LayoutsPublisherMessageListener());
 	}
 
 	private static Log _log = LogFactory.getLog(GlobalStartupAction.class);

@@ -281,6 +281,13 @@ Liferay.Service.Portal.Layout = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	getScheduledPublishToLiveJSON: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getScheduledPublishToLiveJSON";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	setLayouts: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "setLayouts";

@@ -83,6 +83,10 @@ public interface LayoutService {
 		java.lang.String prefsValue)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
+	public java.lang.String getScheduledPublishToLiveJSON(long liveGroupId)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public byte[] exportLayouts(long groupId, boolean privateLayout,
 		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
 		java.util.Date endDate)

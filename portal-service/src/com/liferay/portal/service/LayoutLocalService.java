@@ -226,21 +226,10 @@ public interface LayoutLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void schedulePublishToLive(long userId, long stagingGroupId,
-		long liveGroupId, boolean privateLayout,
-		java.util.Map<Long, Boolean> layoutIdMap,
-		java.util.Map<String, String[]> parameterMap, java.lang.String scope,
-		java.lang.String cronText, java.util.Date startDate,
-		java.util.Date endDate, java.lang.String description)
-		throws com.liferay.portal.SystemException;
-
 	public void setLayouts(long groupId, boolean privateLayout,
 		long parentLayoutId, long[] layoutIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
-
-	public void unschedulePublishToLive(long liveGroupId,
-		java.lang.String jobName) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Layout updateFriendlyURL(long plid,
 		java.lang.String friendlyURL)

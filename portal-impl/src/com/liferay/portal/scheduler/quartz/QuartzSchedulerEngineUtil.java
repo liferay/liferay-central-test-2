@@ -22,6 +22,10 @@
 
 package com.liferay.portal.scheduler.quartz;
 
+import com.liferay.portal.kernel.messaging.Destination;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.messaging.SerialDestination;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
@@ -45,25 +49,36 @@ public class QuartzSchedulerEngineUtil {
 		return _engine.getScheduledJobs(groupName);
 	}
 
+	public static void init() throws SchedulerException {
+		if (_engine != null) {
+			return;
+		}
+
+		_engine = new QuartzSchedulerEngineImpl();
+
+		_engine.start();
+
+		Destination destination = new SerialDestination(
+			DestinationNames.SCHEDULER);
+
+		MessageBusUtil.addDestination(destination);
+
+		MessageBusUtil.registerMessageListener(
+			destination.getName(), new QuartzMessageListener());
+	}
+
 	public static void schedule(
-			String jobName, String groupName, String cronText,
-			Date startDate, Date endDate, String description,
-			String destination, String messageBody)
+			String groupName, String cronText, Date startDate, Date endDate,
+			String description, String destination, String messageBody)
 		throws SchedulerException {
 
 		_engine.schedule(
-			jobName, groupName, cronText, startDate, endDate, description,
-			destination, messageBody);
+			groupName, cronText, startDate, endDate, description, destination,
+			messageBody);
 	}
 
 	public static void shutdown() throws SchedulerException {
 		_engine.shutdown();
-	}
-
-	public static void start() throws SchedulerException {
-		_engine = new QuartzSchedulerEngineImpl();
-
-		_engine.start();
 	}
 
 	public static void unschedule(String jobName, String groupName)

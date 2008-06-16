@@ -68,7 +68,6 @@ public class QuartzMessageListener implements MessageListener {
 
 		if (command.equals(SchedulerRequest.COMMAND_REGISTER)) {
 			QuartzSchedulerEngineUtil.schedule(
-				String.valueOf(schedulerRequest.hashCode()),
 				schedulerRequest.getGroupName(), schedulerRequest.getCronText(),
 				schedulerRequest.getStartDate(), schedulerRequest.getEndDate(),
 				schedulerRequest.getDescription(),

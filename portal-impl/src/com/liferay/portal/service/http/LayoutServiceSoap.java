@@ -154,6 +154,20 @@ public class LayoutServiceSoap {
 		}
 	}
 
+	public static java.lang.String getScheduledPublishToLiveJSON(
+		long liveGroupId) throws RemoteException {
+		try {
+			java.lang.String returnValue = LayoutServiceUtil.getScheduledPublishToLiveJSON(liveGroupId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void setLayouts(long groupId, boolean privateLayout,
 		long parentLayoutId, long[] layoutIds) throws RemoteException {
 		try {

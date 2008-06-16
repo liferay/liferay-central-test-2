@@ -22,13 +22,10 @@
 
 package com.liferay.portal.scheduler.quartz;
 
-import com.liferay.portal.kernel.messaging.Destination;
-import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.messaging.SerialDestination;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import java.text.ParseException;
@@ -61,14 +58,6 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 	public QuartzSchedulerEngineImpl() {
 		try {
-			Destination destination = new SerialDestination(
-				DestinationNames.SCHEDULER);
-
-			MessageBusUtil.addDestination(destination);
-
-			MessageBusUtil.registerMessageListener(
-				destination.getName(), new QuartzMessageListener());
-
 			Properties props = new Properties();
 
 			Enumeration<Object> enu = PropsUtil.getProperties().keys();
@@ -128,10 +117,11 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 	}
 
 	public void schedule(
-			String jobName, String groupName, String cronText, Date startDate,
-			Date endDate, String description, String destination,
-			String messageBody)
+			String groupName, String cronText, Date startDate, Date endDate,
+			String description, String destination, String messageBody)
 		throws SchedulerException {
+
+		String jobName = PortalUUIDUtil.generate();
 
 		try {
 			CronTrigger cronTrigger = new CronTrigger(

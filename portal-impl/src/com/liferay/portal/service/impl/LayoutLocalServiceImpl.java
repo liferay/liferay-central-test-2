@@ -31,13 +31,9 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
-import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lar.LayoutExporter;
@@ -57,12 +53,10 @@ import com.liferay.portal.service.base.LayoutLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.comparator.LayoutPriorityComparator;
-import com.liferay.portlet.communities.messaging.LayoutsPublisherRequest;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
-import com.liferay.util.JSONUtil;
 import com.liferay.util.Normalizer;
 
 import java.io.ByteArrayInputStream;
@@ -592,43 +586,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			userId, plid, portletId, parameterMap, is);
 	}
 
-	public void schedulePublishToLive(
-			long userId, long stagingGroupId, long liveGroupId,
-			boolean privateLayout, Map<Long, Boolean> layoutIdMap,
-			Map<String, String[]> parameterMap, String scope, String cronText,
-			Date startDate, Date endDate, String description)
-		throws SystemException {
-
-		try {
-			String command = StringPool.BLANK;
-
-			if (scope.equals("all-pages")) {
-				command = LayoutsPublisherRequest.COMMAND_ALL_PAGES;
-			}
-			else if (scope.equals("selected-pages")) {
-				command = LayoutsPublisherRequest.COMMAND_SELECTED_PAGES;
-			}
-
-			LayoutsPublisherRequest layoutsPublisherRequest =
-				new LayoutsPublisherRequest(
-					command, userId, stagingGroupId, liveGroupId, privateLayout,
-					layoutIdMap, parameterMap);
-
-			SchedulerRequest schedulerRequest = new SchedulerRequest(
-				SchedulerRequest.COMMAND_REGISTER, null,
-				getSchedulerGroupName(liveGroupId), cronText, startDate,
-				endDate, description, DestinationNames.LAYOUTS_PUBLISHER,
-				JSONUtil.serialize(layoutsPublisherRequest));
-
-			MessageBusUtil.sendMessage(
-				DestinationNames.SCHEDULER,
-				JSONUtil.serialize(schedulerRequest));
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-	}
-
 	public void setLayouts(
 			long groupId, boolean privateLayout, long parentLayoutId,
 			long[] layoutIds)
@@ -690,23 +647,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		layoutSetLocalService.updatePageCount(groupId, privateLayout);
-	}
-
-	public void unschedulePublishToLive(long liveGroupId, String jobName)
-		throws SystemException {
-
-		try {
-			SchedulerRequest schedulerRequest = new SchedulerRequest(
-				SchedulerRequest.COMMAND_UNREGISTER, jobName,
-				getSchedulerGroupName(liveGroupId));
-
-			MessageBusUtil.sendMessage(
-				DestinationNames.SCHEDULER,
-				JSONUtil.serialize(schedulerRequest));
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
 	}
 
 	public Layout updateFriendlyURL(long plid, String friendlyURL)
@@ -1083,16 +1023,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		return parentLayoutId;
-	}
-
-	protected String getSchedulerGroupName(long liveGroupId) {
-		StringMaker sm = new StringMaker();
-
-		sm.append(DestinationNames.LAYOUTS_PUBLISHER);
-		sm.append(StringPool.FORWARD_SLASH);
-		sm.append(liveGroupId);
-
-		return sm.toString();
 	}
 
 	protected boolean isDescendant(Layout layout, long layoutId)
