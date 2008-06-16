@@ -129,16 +129,16 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 		Matcher matcher = Pattern.compile(
 			"\\[{2}([^\\]]*)\\]{2}", Pattern.DOTALL).matcher(content);
 
+		StringBuffer sb = new StringBuffer(content);
+
 		while (matcher.find()) {
-			String linkWithUnderscores = matcher.group(1);
-
-			String link = linkWithUnderscores.replaceAll(
+			String link = matcher.group(1).replace(
 				StringPool.UNDERLINE, StringPool.SPACE);
-
-			content = content.replaceAll(linkWithUnderscores, link);
+			
+			sb.replace(matcher.start(1), matcher.end(1), link);
 		}
 
-		return TABLE_OF_CONTENTS + super.postProcess(content);
+		return TABLE_OF_CONTENTS + super.postProcess(sb.toString());
 	}
 
 }
