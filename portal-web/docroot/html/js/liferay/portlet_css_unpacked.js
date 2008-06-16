@@ -337,7 +337,7 @@ Liferay.PortletCSS = {
 				}
 			};
 
-			useForAll.unbind('click', handleForms).click(handleForms);
+			useForAll.unbind('click.liferay', handleForms).bind('click.liferay', handleForms);
 			useForAll.each(handleForms);
 
 			var saveHandler = function(xHR, type) {
@@ -368,7 +368,8 @@ Liferay.PortletCSS = {
 				ajaxResponse.fadeIn('normal');
 			};
 
-			instance._saveButton.unbind().click(
+			instance._saveButton.unbind('click.liferay').bind(
+				'click.liferay',
 				function() {
 					instance._objData.advancedData.customCSS = instance._customCSS.val();
 
@@ -391,7 +392,8 @@ Liferay.PortletCSS = {
 				}
 			);
 
-			instance._resetButton.unbind().click(
+			instance._resetButton.unbind('click.liferay').bind(
+				'click.liferay',
 				function() {
 					instance._curPortlet.attr('style', '');
 					jQuery('#lfr-custom-css-block-' + instance._curPortletWrapperId).remove();
@@ -455,7 +457,8 @@ Liferay.PortletCSS = {
 			}
 		);
 
-		backgroundColor.unbind().blur(
+		backgroundColor.unbind('blur.liferay').bind(
+			'blur.liferay',
 			function() {
 				setColor(this);
 			}
@@ -473,7 +476,8 @@ Liferay.PortletCSS = {
 			bgImageProperties.show();
 		}
 
-		useBgImage.unbind().click(
+		useBgImage.unbind('click.liferay').bind(
+			'click.liferay',
 			function() {
 				bgImageProperties.toggle();
 				bgData.useBgImage = this.checked;
@@ -484,7 +488,8 @@ Liferay.PortletCSS = {
 
 		var bgRepeating = instance._bgRepeating;
 
-		bgRepeating.unbind().change(
+		bgRepeating.unbind('change.liferay').bind(
+			'change.liferay',
 			function() {
 				var backgroundRepeat = this.options[this.selectedIndex].value;
 				portlet.css('background-repeat', backgroundRepeat);
@@ -514,13 +519,13 @@ Liferay.PortletCSS = {
 			bgData.backgroundPosition.left.unit = leftPos.selectBox;
 		};
 
-		bgPosTop.unbind().blur(updatePos);
-		bgPosLeft.unbind().blur(updatePos);
-		bgPosTop.unbind().keyup(updatePos);
-		bgPosLeft.unbind().keyup(updatePos);
+		bgPosTop.unbind('blur.liferay').bind('blur.liferay', updatePos);
+		bgPosLeft.unbind('blur.liferay').bind('blur.liferay', updatePos);
+		bgPosTop.unbind('keyup.liferay').bind('keyup.liferay', updatePos);
+		bgPosLeft.unbind('keyup.liferay').bind('keyup.liferay', updatePos);
 
-		bgPosTopUnit.unbind().change(updatePos);
-		bgPosLeftUnit.unbind().change(updatePos);
+		bgPosTopUnit.unbind('change.liferay').bind('change.liferay', updatePos);
+		bgPosLeftUnit.unbind('change.liferay').bind('change.liferay', updatePos);
 	},
 
 	_borderStyles: function() {
@@ -589,24 +594,24 @@ Liferay.PortletCSS = {
 			changeColor();
 		};
 
-		wTopInt.unbind().blur(changeWidth);
-		wTopInt.unbind().keyup(changeWidth);
+		wTopInt.unbind('blur.liferay').bind('blur.liferay', changeWidth);
+		wTopInt.unbind('keyup.liferay').bind('keyup.liferay', changeWidth);
 
-		wRightInt.unbind().blur(changeWidth);
-		wRightInt.unbind().keyup(changeWidth);
+		wRightInt.unbind('blur.liferay').bind('blur.liferay', changeWidth);
+		wRightInt.unbind('keyup.liferay').bind('keyup.liferay', changeWidth);
 
-		wBottomInt.unbind().blur(changeWidth);
-		wBottomInt.unbind().keyup(changeWidth);
+		wBottomInt.unbind('blur.liferay').bind('blur.liferay', changeWidth);
+		wBottomInt.unbind('keyup.liferay').bind('keyup.liferay', changeWidth);
 
-		wLeftInt.unbind().blur(changeWidth);
-		wLeftInt.unbind().keyup(changeWidth);
+		wLeftInt.unbind('blur.liferay').bind('blur.liferay', changeWidth);
+		wLeftInt.unbind('keyup.liferay').bind('keyup.liferay', changeWidth);
 
-		wTopUnit.unbind().change(changeWidth);
-		wRightUnit.unbind().change(changeWidth);
-		wBottomUnit.unbind().change(changeWidth);
-		wLeftUnit.unbind().change(changeWidth);
+		wTopUnit.unbind('change.liferay').bind('change.liferay', changeWidth);
+		wRightUnit.unbind('change.liferay').bind('change.liferay', changeWidth);
+		wBottomUnit.unbind('change.liferay').bind('change.liferay', changeWidth);
+		wLeftUnit.unbind('change.liferay').bind('change.liferay', changeWidth);
 
-		ufaWidth.unbind().click(changeWidth);
+		ufaWidth.unbind('click.liferay').bind('click.liferay', changeWidth);
 
 		// Border style
 
@@ -651,12 +656,12 @@ Liferay.PortletCSS = {
 			portlet.css(styling);
 		};
 
-		sTopStyle.unbind().change(changeStyle);
-		sRightStyle.unbind().change(changeStyle);
-		sBottomStyle.unbind().change(changeStyle);
-		sLeftStyle.unbind().change(changeStyle);
+		sTopStyle.unbind('change.liferay').bind('change.liferay', changeStyle);
+		sRightStyle.unbind('change.liferay').bind('change.liferay', changeStyle);
+		sBottomStyle.unbind('change.liferay').bind('change.liferay', changeStyle);
+		sLeftStyle.unbind('change.liferay').bind('change.liferay', changeStyle);
 
-		ufaStyle.unbind().click(changeStyle);
+		ufaStyle.unbind('click.liferay').bind('click.liferay', changeStyle);
 
 		// Border color
 
@@ -734,17 +739,17 @@ Liferay.PortletCSS = {
 			}
 		);
 
-		cTopColor.unbind().blur(changeColor);
-		cRightColor.unbind().blur(changeColor);
-		cBottomColor.unbind().blur(changeColor);
-		cLeftColor.unbind().blur(changeColor);
+		cTopColor.unbind('blur.liferay').bind('blur.liferay', changeColor);
+		cRightColor.unbind('blur.liferay').bind('blur.liferay', changeColor);
+		cBottomColor.unbind('blur.liferay').bind('blur.liferay', changeColor);
+		cLeftColor.unbind('blur.liferay').bind('blur.liferay', changeColor);
 
-		cTopColor.unbind().keyup(changeColor);
-		cRightColor.unbind().keyup(changeColor);
-		cBottomColor.unbind().keyup(changeColor);
-		cLeftColor.unbind().keyup(changeColor);
+		cTopColor.unbind('keyup.liferay').bind('keyup.liferay', changeColor);
+		cRightColor.unbind('keyup.liferay').bind('keyup.liferay', changeColor);
+		cBottomColor.unbind('keyup.liferay').bind('keyup.liferay', changeColor);
+		cLeftColor.unbind('keyup.liferay').bind('keyup.liferay', changeColor);
 
-		ufaColor.unbind().click(changeColor);
+		ufaColor.unbind('click.liferay').bind('click.liferay', changeColor);
 
 	},
 
@@ -839,7 +844,7 @@ Liferay.PortletCSS = {
 				}
 			};
 
-			refreshLink.unbind().click(refreshStyles);
+			refreshLink.unbind('click.liferay').bind('click.liferay', refreshStyles);
 
 			customNote.empty().append(refreshLink);
 		}
@@ -877,26 +882,28 @@ Liferay.PortletCSS = {
 			insertContainer.after(customNote);
 		}
 
-		updateOnType.click(
+		updateOnType.bind('click.liferay', 
 			function() {
 				if (this.checked) {
 					customNote.hide();
-					customCSS.keyup(refreshStyles);
+					customCSS.bind('keyup.liferay', refreshStyles);
 				}
 				else {
 					customNote.show();
-					customCSS.unbind('keyup', refreshStyles);
+					customCSS.unbind('keyup.liferay', refreshStyles);
 				}
 			}
 		);
 
-		addIdLink.unbind().click(
+		addIdLink.unbind('click.liferay').bind(
+			'click.liferay', 
 			function() {
 				customCSS[0].value += '\n#' + portletId + '{\n\t\n}\n';
 			}
 		);
 
-		addClassLink.unbind().click(
+		addClassLink.unbind('click.liferay').bind(
+			'click.liferay', 
 			function() {
 				customCSS[0].value += '\n.' + portletClasses.replace(/\s/g, '') + '{\n\t\n}\n';
 			}
@@ -952,7 +959,8 @@ Liferay.PortletCSS = {
 
 		// Use custom title
 
-		customTitleCheckbox.unbind().click(
+		customTitleCheckbox.unbind('click.liferay').bind(
+			'click.liferay', 
 			function() {
 				var title;
 
@@ -982,7 +990,8 @@ Liferay.PortletCSS = {
 			}
 		);
 
-		customTitleInput.unbind().keyup(
+		customTitleInput.unbind('keyup.liferay').bind(
+			'keyup.liferay', 
 			function() {
 				if (!portletData.useCustomTitle || instance._portletLanguage.find('option:selected').val() != instance._currentLanguage) {
 					return;
@@ -996,14 +1005,15 @@ Liferay.PortletCSS = {
 
 		// Show borders
 
-		showBorders.unbind().click(
+		showBorders.unbind('click.liferay').bind(
+			'click.liferay', 
 			function() {
 				borderNote.toggle();
 				portletData.showBorders = this.checked;
 			}
 		);
 
-		language.change(
+		language.bind('change.liferay', 
 			function() {
 				portletData.language = this.options[this.selectedIndex].value;
 
@@ -1017,7 +1027,7 @@ Liferay.PortletCSS = {
 
 		// Point target links to
 
-		portletLinksTarget.change(
+		portletLinksTarget.bind('change.liferay', 
 			function() {
 				portletData.portletLinksTarget = instance._getSafeInteger(this.options[this.selectedIndex].value);
 			}
@@ -1294,22 +1304,22 @@ Liferay.PortletCSS = {
 			portlet.css(styling);
 		};
 
-		pTop.unbind().blur(changePadding);
-		pRight.unbind().blur(changePadding);
-		pBottom.unbind().blur(changePadding);
-		pLeft.unbind().blur(changePadding);
+		pTop.unbind('blur.liferay').bind('blur.liferay', changePadding);
+		pRight.unbind('blur.liferay').bind('blur.liferay', changePadding);
+		pBottom.unbind('blur.liferay').bind('blur.liferay', changePadding);
+		pLeft.unbind('blur.liferay').bind('blur.liferay', changePadding);
 
-		pTop.unbind().keyup(changePadding);
-		pRight.unbind().keyup(changePadding);
-		pBottom.unbind().keyup(changePadding);
-		pLeft.unbind().keyup(changePadding);
+		pTop.unbind('keyup.liferay').bind('keyup.liferay', changePadding);
+		pRight.unbind('keyup.liferay').bind('keyup.liferay', changePadding);
+		pBottom.unbind('keyup.liferay').bind('keyup.liferay', changePadding);
+		pLeft.unbind('keyup.liferay').bind('keyup.liferay', changePadding);
 
-		pTopUnit.unbind().change(changePadding);
-		pRightUnit.unbind().change(changePadding);
-		pBottomUnit.unbind().change(changePadding);
-		pLeftUnit.unbind().change(changePadding);
+		pTopUnit.unbind('change.liferay').bind('change.liferay', changePadding);
+		pRightUnit.unbind('change.liferay').bind('change.liferay', changePadding);
+		pBottomUnit.unbind('change.liferay').bind('change.liferay', changePadding);
+		pLeftUnit.unbind('change.liferay').bind('change.liferay', changePadding);
 
-		ufaPadding.unbind().click(changePadding);
+		ufaPadding.unbind('click.liferay').bind('click.liferay', changePadding);
 
 		// Margin
 
@@ -1364,22 +1374,22 @@ Liferay.PortletCSS = {
 			portlet.css(styling);
 		};
 
-		mTop.unbind().blur(changeMargin);
-		mRight.unbind().blur(changeMargin);
-		mBottom.unbind().blur(changeMargin);
-		mLeft.unbind().blur(changeMargin);
+		mTop.unbind('blur.liferay').bind('blur.liferay', changeMargin);
+		mRight.unbind('blur.liferay').bind('blur.liferay', changeMargin);
+		mBottom.unbind('blur.liferay').bind('blur.liferay', changeMargin);
+		mLeft.unbind('blur.liferay').bind('blur.liferay', changeMargin);
 
-		mTop.unbind().keyup(changeMargin);
-		mRight.unbind().keyup(changeMargin);
-		mBottom.unbind().keyup(changeMargin);
-		mLeft.unbind().keyup(changeMargin);
+		mTop.unbind('keyup.liferay').bind('keyup.liferay', changeMargin);
+		mRight.unbind('keyup.liferay').bind('keyup.liferay', changeMargin);
+		mBottom.unbind('keyup.liferay').bind('keyup.liferay', changeMargin);
+		mLeft.unbind('keyup.liferay').bind('keyup.liferay', changeMargin);
 
-		mTopUnit.unbind().change(changeMargin);
-		mRightUnit.unbind().change(changeMargin);
-		mBottomUnit.unbind().change(changeMargin);
-		mLeftUnit.unbind().change(changeMargin);
+		mTopUnit.unbind('change.liferay').bind('change.liferay', changeMargin);
+		mRightUnit.unbind('change.liferay').bind('change.liferay', changeMargin);
+		mBottomUnit.unbind('change.liferay').bind('change.liferay', changeMargin);
+		mLeftUnit.unbind('change.liferay').bind('change.liferay', changeMargin);
 
-		ufaMargin.unbind().click(changeMargin);
+		ufaMargin.unbind('click.liferay').bind('click.liferay', changeMargin);
 	},
 
 	_textStyles: function() {
@@ -1401,7 +1411,8 @@ Liferay.PortletCSS = {
 
 		// Font family
 
-		fontFamily.unbind().change(
+		fontFamily.unbind('change.liferay').bind(
+			'change.liferay', 
 			function() {
 				var fontFamily = this.options[this.selectedIndex].value;
 
@@ -1413,7 +1424,8 @@ Liferay.PortletCSS = {
 
 		// Font style
 
-		fontBold.unbind().click(
+		fontBold.unbind('click.liferay').bind(
+			'click.liferay', 
 			function() {
 			var style = 'normal';
 				if (this.checked) {
@@ -1426,7 +1438,8 @@ Liferay.PortletCSS = {
 			}
 		);
 
-		fontItalic.unbind().click(
+		fontItalic.unbind('click.liferay').bind(
+			'click.liferay', 
 			function() {
 				var style = 'normal';
 
@@ -1442,7 +1455,8 @@ Liferay.PortletCSS = {
 
 		// Font size
 
-		fontSize.unbind().change(
+		fontSize.unbind('change.liferay').bind(
+			'change.liferay', 
 			function() {
 				var fontSize = this.options[this.selectedIndex].value;
 
@@ -1474,7 +1488,8 @@ Liferay.PortletCSS = {
 			}
 		);
 
-		fontColor.unbind().blur(
+		fontColor.unbind('blur.liferay').bind(
+			'blur.liferay', 
 			function() {
 				setColor(this);
 			}
@@ -1482,7 +1497,8 @@ Liferay.PortletCSS = {
 
 		// Text alignment
 
-		textAlign.unbind().change(
+		textAlign.unbind('change.liferay').bind(
+			'change.liferay', 
 			function() {
 				var textAlign = this.options[this.selectedIndex].value;
 
@@ -1494,7 +1510,8 @@ Liferay.PortletCSS = {
 
 		// Text decoration
 
-		textDecoration.unbind().change(
+		textDecoration.unbind('change.liferay').bind(
+			'change.liferay', 
 			function() {
 				var decoration = this.options[this.selectedIndex].value;
 
@@ -1506,7 +1523,8 @@ Liferay.PortletCSS = {
 
 		// Word spacing
 
-		wordSpacing.unbind().change(
+		wordSpacing.unbind('change.liferay').bind(
+			'change.liferay', 
 			function() {
 				var spacing = this.options[this.selectedIndex].value;
 
@@ -1518,7 +1536,8 @@ Liferay.PortletCSS = {
 
 		// Line height
 
-		leading.unbind().change(
+		leading.unbind('change.liferay').bind(
+			'change.liferay', 
 			function() {
 				var leading = this.options[this.selectedIndex].value;
 
@@ -1530,7 +1549,8 @@ Liferay.PortletCSS = {
 
 		// Letter spacing
 
-		tracking.unbind().change(
+		tracking.unbind('change.liferay').bind(
+			'change.liferay', 
 			function() {
 				var tracking = this.options[this.selectedIndex].value;
 

@@ -61,19 +61,19 @@ Liferay.Navigation = new Class({
 			}
 		};
 
-		pageParents.click(pageBlur);
+		pageParents.bind('click.liferay', pageBlur);
 
 		cancelPage.click(
 			function(event) {
 				instance._cancelAddingPage(event, addBlock);
-				pageParents.unbind('click', pageBlur);
+				pageParents.unbind('click.liferay', pageBlur);
 			}
 		);
 
 		savePage.click(
 			function(event) {
 				instance._savePage(event, this, instance);
-				pageParents.unbind('click', pageBlur);
+				pageParents.unbind('click.liferay', pageBlur);
 			}
 		);
 
@@ -89,7 +89,7 @@ Liferay.Navigation = new Class({
 					return;
 				}
 
-				pageParents.unbind('click', pageBlur);
+				pageParents.unbind('click.liferay', pageBlur);
 			}
 		);
 		blockInput[0].focus();
@@ -149,7 +149,7 @@ Liferay.Navigation = new Class({
 
 		if (instance._isModifiable) {
 			var navList = instance._navBlock.find('ul:first');
-
+			
 			instance._enterPage =
 				'<div class="enter-page">' +
 				'<input type="text" name="new_page" value="" class="text" />' +
@@ -252,8 +252,8 @@ Liferay.Navigation = new Class({
 					savePage.click(
 						function(event) {
 							instance._savePage(event, this, instance, text);
-							pageParents.unbind('blur', pageBlur);
-							pageParents.unbind('click', pageBlur);
+							pageParents.unbind('blur.liferay', pageBlur);
+							pageParents.unbind('click.liferay', pageBlur);
 						}
 					);
 
@@ -264,8 +264,8 @@ Liferay.Navigation = new Class({
 					cancelPage.click(
 						function(event) {
 							instance._cancelPage(event, this, text);
-							pageParents.unbind('blur', pageBlur);
-							pageParents.unbind('click', pageBlur);
+							pageParents.unbind('blur.liferay', pageBlur);
+							pageParents.unbind('click.liferay', pageBlur);
 						}
 					);
 
@@ -273,18 +273,18 @@ Liferay.Navigation = new Class({
 						function(event) {
 							if (event.keyCode == 13) {
 								savePage.trigger('click');
-								pageParents.unbind('blur', pageBlur);
-								pageParents.unbind('click', pageBlur);
+								pageParents.unbind('blur.liferay', pageBlur);
+								pageParents.unbind('click.liferay', pageBlur);
 							}
 							else if (event.keyCode == 27) {
 								cancelPage.trigger('click');
-								pageParents.unbind('blur', pageBlur);
-								pageParents.unbind('click', pageBlur);
+								pageParents.unbind('blur.liferay', pageBlur);
+								pageParents.unbind('click.liferay', pageBlur);
 							}
 						}
 					);
 
-					pageParents.click(pageBlur);
+					pageParents.bind('click.liferay', pageBlur);
 
 					resetCursor();
 

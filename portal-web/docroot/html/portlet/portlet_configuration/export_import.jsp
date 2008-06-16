@@ -296,18 +296,21 @@ boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionCla
 		<script type="text/javascript">
 			jQuery(
 				function() {
-					jQuery(".<portlet:namespace />handler-control input[@type=checkbox]:not([@checked])").parent().parent().parent(".<portlet:namespace />handler-control").children(".<portlet:namespace />handler-control").hide();
+					jQuery('.<portlet:namespace />handler-control input[@type=checkbox]:not([@checked])').parent().parent().parent('.<portlet:namespace />handler-control').children('.<portlet:namespace />handler-control').hide();
 
-					jQuery(".<portlet:namespace />handler-control input[@type=checkbox]").unbind('click').click(function() {
-						var input = jQuery(this).parents(".<portlet:namespace />handler-control:first");
+					jQuery('.<portlet:namespace />handler-control input[@type=checkbox]').unbind('click.liferay').click(
+						'click.liferay',
+						function() {
+							var input = jQuery(this).parents('.<portlet:namespace />handler-control:first');
 
-						if (this.checked) {
-							input.children(".<portlet:namespace />handler-control").show();
+							if (this.checked) {
+								input.children('.<portlet:namespace />handler-control').show();
+							}
+							else {
+								input.children('.<portlet:namespace />handler-control').hide();
+							}
 						}
-						else {
-							input.children(".<portlet:namespace />handler-control").hide();
-						}
-					});
+					);
 				}
 			);
 		</script>

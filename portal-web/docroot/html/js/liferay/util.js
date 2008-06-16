@@ -311,7 +311,7 @@ Liferay.Util = {
 
 		if (textarea.attr('textareatabs') != 'enabled') {
 			textarea.attr('textareatabs', 'disabled');
-			textarea.unbind('keydown', Liferay.Util.textareaTabs);
+			textarea.unbind('keydown.liferay', Liferay.Util.textareaTabs);
 		}
 	},
 
@@ -324,7 +324,7 @@ Liferay.Util = {
 
 		if (textarea.attr('textareatabs') != 'enabled') {
 			textarea.attr('textareatabs', 'enabled');
-			textarea.keydown(Liferay.Util.textareaTabs);
+			textarea.bind('keydown.liferay', Liferay.Util.textareaTabs);
 		}
 	},
 
@@ -480,7 +480,7 @@ Liferay.Util = {
 									jQuery(document).trigger('popupResize');
 								},
 								onClose: function() {
-									jQuery(document).unbind('popupResize');
+									jQuery(document).unbind('popupResize.liferay');
 									clicked = false;
 								}
 							}
@@ -783,7 +783,7 @@ Liferay.Util = {
 				resize();
 
 				if (resizeToInlinePopup) {
-					jQuery(document).bind('popupResize', resize);
+					jQuery(document).bind('popupResize.liferay', resize);
 				}
 				else {
 					jQuery(window).resize(resize);

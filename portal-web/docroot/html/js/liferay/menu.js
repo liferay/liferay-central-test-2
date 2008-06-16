@@ -36,8 +36,8 @@ Liferay.Menu = new Class({
 				parent.addClass('visible');
 			}
 
-			jQuery(document).unbind().one(
-				'click',
+			jQuery(document).unbind('click.liferay').one(
+				'click.liferay',
 				off
 			);
 
@@ -48,6 +48,6 @@ Liferay.Menu = new Class({
 			}
 		};
 
-		instance._trigger.unbind().click(on);
+		instance._trigger.unbind('click.liferay').bind('click.liferay', on);
 	}
 });

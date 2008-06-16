@@ -131,9 +131,10 @@ boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackba
 
 						tabs1BackButton.attr('href', message.redirect);
 
-						cancelButton.unbind();
+						cancelButton.unbind('click.liferay');
 
-						cancelButton.click(
+						cancelButton.bind(
+							'click.liferay',
 							function() {
 								location.href = message.redirect;
 							}
