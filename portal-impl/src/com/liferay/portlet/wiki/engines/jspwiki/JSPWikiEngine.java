@@ -38,6 +38,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -71,6 +72,10 @@ public class JSPWikiEngine implements WikiEngine {
 			com.liferay.portlet.wiki.model.WikiPage page)
 		throws PageContentException {
 
+		if (Validator.isNull(page.getContent())) {
+			return Collections.EMPTY_MAP;
+		}
+		
 		try {
 			LiferayJSPWikiEngine engine = getEngine(page.getNodeId());
 
