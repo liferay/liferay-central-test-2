@@ -216,12 +216,6 @@ public class WikiUtil {
 		return _instance._getLinks(page);
 	}
 
-	public static boolean isLinkedTo(WikiPage page, String title)
-		throws PageContentException {
-
-		return _instance._isLinkedTo(page, title);
-	}
-
 	public static String getMailId(String mx, long nodeId, long pageId) {
 		StringMaker sm = new StringMaker();
 
@@ -359,17 +353,6 @@ public class WikiUtil {
 		}
 		catch (WikiFormatException wfe) {
 			return Collections.EMPTY_MAP;
-		}
-	}
-
-	private boolean _isLinkedTo(WikiPage page, String targetTitle)
-		throws PageContentException {
-
-		try {
-			return _getEngine(page.getFormat()).isLinkedTo(page, targetTitle);
-		}
-		catch (WikiFormatException wfe) {
-			return false;
 		}
 	}
 

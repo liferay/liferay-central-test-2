@@ -63,17 +63,6 @@ public interface WikiEngine {
 		throws PageContentException;
 
 	/**
-	 * Return whether the provided page links to the given title.
-	 *
-	 * @param		page the source page
-	 * @param		targetTitle the title of the target page
-	 * @return		true if the source page has a link to the target
-	 * @throws		PageContentException
-	 */
-	public boolean isLinkedTo(WikiPage page, String targetTitle)
-		 throws PageContentException;
-
-	/**
 	 * Set the configuraton to support quick links to other wikis. The format
 	 * of the configuration is specific to the wiki engine.
 	 *

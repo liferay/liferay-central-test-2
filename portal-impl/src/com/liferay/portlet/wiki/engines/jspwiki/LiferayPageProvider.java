@@ -113,10 +113,10 @@ public class LiferayPageProvider implements WikiPageProvider {
 		List<WikiPage> jspWikiPages = new ArrayList<WikiPage>();
 
 		try {
-			int count = WikiPageLocalServiceUtil.getPagesCount(_nodeId);
+			int count = WikiPageLocalServiceUtil.getPagesCount(_nodeId, true);
 
 			List<com.liferay.portlet.wiki.model.WikiPage> pages =
-				WikiPageLocalServiceUtil.getPages(_nodeId, 0, count);
+				WikiPageLocalServiceUtil.getPages(_nodeId, true, 0, count);
 
 			for (com.liferay.portlet.wiki.model.WikiPage page : pages) {
 				jspWikiPages.add(toJSPWikiPage(page, _engine));

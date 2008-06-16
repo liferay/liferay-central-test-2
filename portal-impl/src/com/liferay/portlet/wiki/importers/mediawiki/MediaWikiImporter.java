@@ -529,7 +529,7 @@ public class MediaWikiImporter implements WikiImporter {
 				usersMap.put(array[0], array[1]);
 			}
 			else {
-				_log.warn(
+				_log.info(
 					"Ignoring line " + line + " because it does not contain" +
 						" exactly 2 columns");
 			}

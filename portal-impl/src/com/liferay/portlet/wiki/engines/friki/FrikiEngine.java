@@ -79,25 +79,6 @@ public class FrikiEngine implements WikiEngine {
 		}
 	}
 
-	public boolean isLinkedTo(WikiPage page, String targetTitle)
-		throws PageContentException {
-
-		NodeFilter filter = getFilter(page.getNodeId());
-
-		try {
-			convert(filter, page.getContent());
-
-			if (filter.getTitles().get(targetTitle) != null) {
-				return true;
-			}
-		}
-		catch (IOException ioe) {
-			throw new PageContentException(ioe);
-		}
-
-		return false;
-	}
-
 	public void setInterWikiConfiguration(String interWikiConfiguration) {
 		_remoteNames = buildRemoteNamesMap(interWikiConfiguration);
 	}

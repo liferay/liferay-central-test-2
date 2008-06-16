@@ -26,6 +26,8 @@ import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portlet.wiki.PageContentException;
+import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.WikiPageDisplay;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 
@@ -75,7 +77,7 @@ public class WikiCacheUtil {
 			stopWatch.start();
 		}
 
-		String key = _encodeKey(nodeId, title, viewPageURL);
+		String key = _encodeKey(nodeId, title, viewPageURL.toString());
 		String groupKey = _encodeGroupKey(nodeId, title);
 
 		WikiPageDisplay pageDisplay = (WikiPageDisplay)MultiVMPoolUtil.get(
@@ -98,12 +100,31 @@ public class WikiCacheUtil {
 		return pageDisplay;
 	}
 
+	public static Map<String, Boolean> getOutgoingLinks(WikiPage page)
+		throws PageContentException {
+
+		String key = _encodeKey(
+			page.getNodeId(), page.getTitle(), _OUTGOING_LINKS);
+		String groupKey = _encodeGroupKey(page.getNodeId(), page.getTitle());
+
+		Map<String, Boolean> links =
+			(Map<String, Boolean>)MultiVMPoolUtil.get(_cache, key);
+
+		if (links == null) {
+			links = WikiUtil.getLinks(page);
+
+			MultiVMPoolUtil.put(_cache, key, _groups, groupKey, links);
+		}
+
+		return links;
+	}
+
 	private static String _encodeGroupKey(long nodeId, String title) {
 		return _encodeKey(nodeId, title, null);
 	}
 
 	private static String _encodeKey(
-		long nodeId, String title, PortletURL viewPageURL) {
+		long nodeId, String title, String postfix) {
 
 		StringMaker sm = new StringMaker();
 
@@ -112,8 +133,9 @@ public class WikiCacheUtil {
 		sm.append(nodeId);
 		sm.append(title);
 
-		if (viewPageURL != null) {
-			sm.append(viewPageURL);
+		if (postfix != null) {
+			sm.append(StringPool.POUND);
+			sm.append(postfix);
 		}
 
 		return sm.toString();
@@ -150,5 +172,7 @@ public class WikiCacheUtil {
 
 	private static Map<String, Set<String>> _groups =
 		new ConcurrentHashMap<String, Set<String>>();
+
+	private static final String _OUTGOING_LINKS = "OUTGOING_LINKS";
 
 }

@@ -51,10 +51,6 @@ public class TextEngine implements WikiEngine {
 		return Collections.EMPTY_MAP;
 	}
 
-	public boolean isLinkedTo(WikiPage page, String targetTitle) {
-		return false;
-	}
-
 	public void setInterWikiConfiguration(String interWikiConfiguration) {
 	}
 

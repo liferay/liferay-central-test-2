@@ -123,22 +123,6 @@ public class JSPWikiEngine implements WikiEngine {
 		}
 	}
 
-	public boolean isLinkedTo(
-			com.liferay.portlet.wiki.model.WikiPage page, String targetTitle)
-		throws PageContentException {
-
-		Map<String, Boolean> links = getOutgoingLinks(page);
-
-		Boolean link = links.get(targetTitle);
-
-		if (link != null) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
 	public void setInterWikiConfiguration(String interWikiConfiguration) {
 	}
 

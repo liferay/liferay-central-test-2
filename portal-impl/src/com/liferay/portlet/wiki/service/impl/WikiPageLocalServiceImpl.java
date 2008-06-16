@@ -435,7 +435,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		List<WikiPage> pages = wikiPagePersistence.findByN_H(nodeId, true);
 
 		for (WikiPage page : pages) {
-			if (WikiUtil.isLinkedTo(page, title)) {
+			if (isLinkedTo(page, title)) {
 				links.add(page);
 			}
 		}
@@ -444,7 +444,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		for (WikiPage referral : referrals) {
 			for (WikiPage page : pages) {
-				if (WikiUtil.isLinkedTo(page, referral.getTitle())) {
+				if (isLinkedTo(page, referral.getTitle())) {
 					links.add(page);
 				}
 			}
@@ -468,7 +468,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		List<WikiPage> pages = wikiPagePersistence.findByN_H(nodeId, true);
 
 		for (WikiPage page : pages) {
-			pageTitles.add(WikiUtil.getLinks(page));
+			pageTitles.add(WikiCacheUtil.getOutgoingLinks(page));
 		}
 
 		Set<WikiPage> notOrphans = new HashSet<WikiPage>();
@@ -503,7 +503,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		List<WikiPage> pages = new UniqueList<WikiPage>();
 
-		Map<String, Boolean> links = WikiUtil.getLinks(page);
+		Map<String, Boolean> links = WikiCacheUtil.getOutgoingLinks(page);
 
 		for (String curTitle : links.keySet()) {
 			Boolean exists = links.get(curTitle);
@@ -945,6 +945,21 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		for (WikiPage curPage : links) {
 			WikiCacheUtil.clearCache(curPage.getNodeId(), curPage.getTitle());
+		}
+	}
+
+	protected boolean isLinkedTo(WikiPage page, String targetTitle)
+		throws PortalException{
+
+		Map<String, Boolean> links = WikiCacheUtil.getOutgoingLinks(page);
+
+		Boolean link = links.get(targetTitle);
+
+		if (link != null) {
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 
