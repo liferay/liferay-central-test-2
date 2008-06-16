@@ -20,8 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
+package com.liferay.portal.bean;
 
+import com.liferay.portal.kernel.bean.BeanProperties;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 import org.apache.commons.beanutils.PropertyUtils;
@@ -29,20 +30,18 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="BeanUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="BeanPropertiesImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BeanUtil {
+public class BeanPropertiesImpl implements BeanProperties {
 
-	public static boolean getBoolean(Object bean, String param) {
+	public boolean getBoolean(Object bean, String param) {
 		return getBoolean(bean, param, GetterUtil.DEFAULT_BOOLEAN);
 	}
 
-	public static boolean getBoolean(
-		Object bean, String param, boolean defaultValue) {
-
+	public boolean getBoolean(Object bean, String param, boolean defaultValue) {
 		Boolean beanValue = null;
 
 		if (bean != null) {
@@ -63,13 +62,11 @@ public class BeanUtil {
 		}
 	}
 
-	public static double getDouble(Object bean, String param) {
+	public double getDouble(Object bean, String param) {
 		return getDouble(bean, param, GetterUtil.DEFAULT_DOUBLE);
 	}
 
-	public static double getDouble(
-		Object bean, String param, double defaultValue) {
-
+	public double getDouble(Object bean, String param, double defaultValue) {
 		Double beanValue = null;
 
 		if (bean != null) {
@@ -90,13 +87,11 @@ public class BeanUtil {
 		}
 	}
 
-	public static int getInteger(Object bean, String param) {
+	public int getInteger(Object bean, String param) {
 		return getInteger(bean, param, GetterUtil.DEFAULT_INTEGER);
 	}
 
-	public static int getInteger(
-		Object bean, String param, int defaultValue) {
-
+	public int getInteger(Object bean, String param, int defaultValue) {
 		Integer beanValue = null;
 
 		if (bean != null) {
@@ -117,13 +112,11 @@ public class BeanUtil {
 		}
 	}
 
-	public static long getLong(Object bean, String param) {
+	public long getLong(Object bean, String param) {
 		return getLong(bean, param, GetterUtil.DEFAULT_LONG);
 	}
 
-	public static long getLong(
-		Object bean, String param, long defaultValue) {
-
+	public long getLong(Object bean, String param, long defaultValue) {
 		Long beanValue = null;
 
 		if (bean != null) {
@@ -144,7 +137,11 @@ public class BeanUtil {
 		}
 	}
 
-	public static Object getObject(Object bean, String param) {
+	public Object getObject(Object bean, String param) {
+		return getObject(bean, param, null);
+	}
+
+	public Object getObject(Object bean, String param, Object defaultValue) {
 		Object beanValue = null;
 
 		if (bean != null) {
@@ -156,16 +153,19 @@ public class BeanUtil {
 			}
 		}
 
-		return beanValue;
+		if (beanValue == null) {
+			return defaultValue;
+		}
+		else {
+			return beanValue;
+		}
 	}
 
-	public static String getString(Object bean, String param) {
+	public String getString(Object bean, String param) {
 		return getString(bean, param, GetterUtil.DEFAULT_STRING);
 	}
 
-	public static String getString(
-		Object bean, String param, String defaultValue) {
-
+	public String getString(Object bean, String param, String defaultValue) {
 		String beanValue = null;
 
 		if (bean != null) {
@@ -186,6 +186,6 @@ public class BeanUtil {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(BeanUtil.class);
+	private static Log _log = LogFactory.getLog(BeanPropertiesImpl.class);
 
 }

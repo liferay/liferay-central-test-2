@@ -218,7 +218,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 	<td>
 
 		<%
-		String toGroupName = BeanUtil.getString(toGroup, "name");
+		String toGroupName = BeanPropertiesUtil.getString(toGroup, "name");
 		%>
 
 		<span id="<portlet:namespace />toGroupName">
@@ -237,7 +237,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 	<td>
 
 		<%
-		String toFileEntryTitle = BeanUtil.getString(toFileEntry, "title");
+		String toFileEntryTitle = BeanPropertiesUtil.getString(toFileEntry, "title");
 		%>
 
 		<span id="<portlet:namespace />toFileEntryTitle">

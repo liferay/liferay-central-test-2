@@ -25,6 +25,7 @@ package com.liferay.portal.util;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
@@ -35,7 +36,6 @@ import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.util.comparator.PortletCategoryComparator;
 import com.liferay.portal.util.comparator.PortletTitleComparator;
 import com.liferay.portlet.PortletConfigFactory;
-import com.liferay.util.ListUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;

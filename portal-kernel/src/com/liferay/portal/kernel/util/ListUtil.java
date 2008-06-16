@@ -20,11 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
+package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -206,7 +204,7 @@ public class ListUtil {
 		for (int i = 0; i < list.size(); i++) {
 			Object bean = list.get(i);
 
-			Object value = BeanUtil.getObject(bean, param);
+			Object value = BeanPropertiesUtil.getObject(bean, param);
 
 			if (value == null) {
 				value = StringPool.BLANK;

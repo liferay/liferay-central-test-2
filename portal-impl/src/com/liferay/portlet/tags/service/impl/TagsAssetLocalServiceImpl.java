@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -53,7 +54,6 @@ import com.liferay.portlet.tags.service.base.TagsAssetLocalServiceBaseImpl;
 import com.liferay.portlet.tags.util.TagsAssetValidator;
 import com.liferay.portlet.tags.util.TagsUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.util.ListUtil;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -2,6 +2,12 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <beans>
+	<bean id="com.liferay.portal.bean.BeanPropertiesImpl" class="com.liferay.portal.bean.BeanPropertiesImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.kernel.bean.BeanPropertiesUtil" class="com.liferay.portal.kernel.bean.BeanPropertiesUtil" lazy-init="true">
+		<property name="beanProperties">
+			<ref bean="com.liferay.portal.bean.BeanPropertiesImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.cache.MultiVMPortalCacheManager" class="com.liferay.portal.cache.EhcachePortalCacheManager" lazy-init="true">
 		<property name="configPropertyKey" value="ehcache.multi.vm.config.location" />
 	</bean>

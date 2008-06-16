@@ -22,8 +22,8 @@
 
 package com.liferay.util.servlet;
 
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.ListUtil;
 import com.liferay.util.PwdGenerator;
 
 import java.util.Collections;

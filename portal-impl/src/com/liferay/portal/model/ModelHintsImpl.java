@@ -23,10 +23,10 @@
 package com.liferay.portal.model;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.xml.ElementImpl;
-import com.liferay.util.ListUtil;
 
 import java.io.StringReader;
 

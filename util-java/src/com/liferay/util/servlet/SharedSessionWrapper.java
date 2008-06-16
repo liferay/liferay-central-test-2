@@ -22,7 +22,7 @@
 
 package com.liferay.util.servlet;
 
-import com.liferay.util.ListUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 
 import java.util.Collections;
 import java.util.Enumeration;

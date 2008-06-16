@@ -28,6 +28,7 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
@@ -103,7 +104,6 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.social.util.FacebookUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.util.BeanUtil;
 import com.liferay.util.Encryptor;
 import com.liferay.util.JS;
 import com.liferay.util.servlet.DynamicServletRequest;
@@ -2010,7 +2010,7 @@ public class PortalImpl implements Portal {
 			try {
 				User user = UserLocalServiceUtil.getUserById(userId);
 
-				return BeanUtil.getString(user, param, defaultValue);
+				return BeanPropertiesUtil.getString(user, param, defaultValue);
 			}
 			catch (PortalException pe) {
 				return StringPool.BLANK;

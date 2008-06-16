@@ -23,12 +23,12 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.ClassUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.FileImpl;
-import com.liferay.util.ListUtil;
 
 import java.io.BufferedReader;
 import java.io.File;

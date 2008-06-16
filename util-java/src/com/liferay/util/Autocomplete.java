@@ -22,6 +22,7 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
@@ -107,13 +108,13 @@ public class Autocomplete {
 		for (int i = 0; i < list.size(); i++) {
 			Object bean = list.get(i);
 
-			Object text = BeanUtil.getObject(bean, textParam);
+			Object text = BeanPropertiesUtil.getObject(bean, textParam);
 
 			if (text == null) {
 				text = StringPool.BLANK;
 			}
 
-			Object value = BeanUtil.getObject(bean, valueParam);
+			Object value = BeanPropertiesUtil.getObject(bean, valueParam);
 
 			if (value == null) {
 				value = StringPool.BLANK;
