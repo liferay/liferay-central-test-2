@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.util.PortletKeys;
 
 import java.util.Map;
@@ -75,7 +76,7 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 				if (Validator.isNotNull(title)) {
 					sm.append(StringPool.SLASH);
-					sm.append(title);
+					sm.append(HttpUtil.encodeURL(title, false));
 
 					portletURL.addParameterIncludedInPath("title");
 
@@ -133,7 +134,7 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 			}
 
 			if (urlFragments.length >= 2) {
-				String title = urlFragments[1];
+				String title = HttpUtil.decodeURL(urlFragments[1]);
 
 				addParam(params, "title", title);
 
