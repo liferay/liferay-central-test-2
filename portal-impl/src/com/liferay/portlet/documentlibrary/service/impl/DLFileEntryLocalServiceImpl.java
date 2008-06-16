@@ -890,12 +890,25 @@ public class DLFileEntryLocalServiceImpl
 
 		// File version
 
-		if (is == null) {
-			return fileEntry;
-		}
-
 		double oldVersion = fileEntry.getVersion();
 		double newVersion = MathUtil.format(oldVersion + 0.1, 1, 1);
+
+		if (Validator.isNull(is)) {
+			fileEntry.setVersion(newVersion);
+
+			dlFileEntryPersistence.update(fileEntry, false);
+
+			is = dlLocalService.getFileAsStream(
+				user.getCompanyId(), folderId, name);
+
+			dlLocalService.updateFile(
+				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
+				folder.getGroupId(), folderId, name, newVersion,
+				sourceFileName, fileEntry.getLuceneProperties(), tagsEntries,
+				is);
+
+			return fileEntry;
+		}
 
 		long fileVersionId = counterLocalService.increment();
 
