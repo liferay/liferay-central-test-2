@@ -56,7 +56,6 @@ function addPortletHTML(options) {
 		}
 
 		Liferay.Util.addInputType(portletBound.id);
-		Liferay.Util.addInputFocus(portletBound.id);
 
 		if (window.location.hash) {
 			window.location.hash = "p_" + portletId;

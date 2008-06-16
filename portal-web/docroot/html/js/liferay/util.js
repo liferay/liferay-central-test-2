@@ -36,46 +36,41 @@ Liferay.Util = {
 		};
 	},
 
-	addInputFocus: function(el) {
-		var item = null;
+	addInputFocus: function() {
+		var inputs = jQuery('input:text, input:text, textarea');
 
-		if (el) {
-			if (typeof el == 'object') {
-				item = jQuery(el);
+		var focusEvent = function(event) {
+			jQuery(this).addClass('focus');
+
+			var value = this.value;
+			var caretPos = value.length;
+
+			if (this.createTextRange && (this.nodeName.toLowerCase() !== 'textarea')) {
+				var textRange = this.createTextRange();
+
+				textRange.moveStart('character', caretPos);
 			}
-			else {
-				item = jQuery('#' + el);
+			else if (this.selectionStart) {
+				this.selectionStart = caretPos;
+				this.selectionEnd = caretPos;
 			}
-		}
-		else {
-			item = document.body;
-		}
+		};
 
-		var inputs = jQuery("input[@type=text], input[@type=password], textarea", item);
+		var blurEvent = function(event) {
+			jQuery(this).removeClass('focus');
+		};
 
-		inputs.focus(
-			function(event) {
-				jQuery(this).addClass('focus');
+		inputs.focus(focusEvent);
+		inputs.blur(blurEvent);
 
-				var value = this.value;
-				var caretPos = value.length;
-
-				if (this.createTextRange && (this.nodeName.toLowerCase() !== 'textarea')) {
-					var textRange = this.createTextRange();
-
-					textRange.moveStart('character', caretPos);
-				}
-				else if (this.selectionStart) {
-					this.selectionStart = caretPos;
-					this.selectionEnd = caretPos;
-				}
-			}
+		inputs.livequery(
+			'focus',
+			focusEvent
 		);
-
-		inputs.blur(
-			function() {
-				jQuery(this).removeClass('focus');
-			}
+		
+		inputs.livequery(
+			'blur',
+			blurEvent
 		);
 	},
 

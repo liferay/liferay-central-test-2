@@ -260,7 +260,6 @@ var LayoutConfiguration = {
 		instance.init();
 
 		Liferay.Util.addInputType();
-		Liferay.Util.addInputFocus();
 
 		Liferay.Publisher.subscribe('closePortlet', instance._onPortletClose, instance);
 
