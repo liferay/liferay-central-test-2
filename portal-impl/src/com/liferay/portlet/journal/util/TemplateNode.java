@@ -27,9 +27,9 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <a href="TemplateNode.java.html"><b><i>View Source</i></b></a>
@@ -47,31 +47,6 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 		put("data", data);
 		put("type", type);
 		put("options", new ArrayList<String>());
-		_children = new LinkedHashMap<String, TemplateNode>();
-	}
-
-	public String getName() {
-		return (String)get("name");
-	}
-
-	public String getData() {
-		return (String)get("data");
-	}
-
-	public String getType() {
-		return (String)get("type");
-	}
-
-	public void appendOption(String option) {
-		((List<String>)get("options")).add(option);
-	}
-
-	public void appendOptions(List<String> options) {
-		((List<String>)get("options")).addAll(options);
-	}
-
-	public List<String> getOptions() {
-		return (List<String>)get("options");
 	}
 
 	public void appendChild(TemplateNode child) {
@@ -81,17 +56,40 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 
 	public void appendChildren(List<TemplateNode> children) {
 		for (TemplateNode child : children) {
-			_children.put(child.getName(), child);
-			put(child.getName(), child);
+			appendChild(child);
 		}
+	}
+
+	public void appendOption(String option) {
+		getOptions().add(option);
+	}
+
+	public void appendOptions(List<String> options) {
+		getOptions().addAll(options);
+	}
+
+	public TemplateNode getChild(String name) {
+		return _children.get(name);
 	}
 
 	public List<TemplateNode> getChildren() {
 		return new ArrayList<TemplateNode>(_children.values());
 	}
 
-	public TemplateNode getChild(String name) {
-		return _children.get(name);
+	public String getData() {
+		return (String)get("data");
+	}
+
+	public String getName() {
+		return (String)get("name");
+	}
+
+	public List<String> getOptions() {
+		return (List<String>)get("options");
+	}
+
+	public String getType() {
+		return (String)get("type");
 	}
 
 	public String getUrl() {
@@ -112,6 +110,7 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 		}
 	}
 
-	private HashMap<String,TemplateNode> _children;
+	private Map<String, TemplateNode> _children =
+		new LinkedHashMap<String, TemplateNode>();
 
 }
