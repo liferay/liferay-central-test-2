@@ -24,11 +24,11 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-wiki pre {
+.portlet-wiki .wiki-body pre {
 	background : white;
 	border: 1px dashed #2f6fab;
 	margin: 5px 0px 5px 0px;
-	padding: 1em 0;
+	padding: 0.5em;
 }
 
 .portlet-wiki a.createpage {
