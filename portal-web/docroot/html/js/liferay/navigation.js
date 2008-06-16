@@ -149,7 +149,7 @@ Liferay.Navigation = new Class({
 
 		if (instance._isModifiable) {
 			var navList = instance._navBlock.find('ul:first');
-			
+
 			instance._enterPage =
 				'<div class="enter-page">' +
 				'<input type="text" name="new_page" value="" class="text" />' +

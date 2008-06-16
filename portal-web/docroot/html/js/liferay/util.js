@@ -67,7 +67,7 @@ Liferay.Util = {
 			'focus',
 			focusEvent
 		);
-		
+
 		inputs.livequery(
 			'blur',
 			blurEvent

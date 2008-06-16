@@ -171,7 +171,7 @@ Liferay.Layout.Columns = {
 		instance.sortColumns = jQuery(instance._columns);
 
 		instance.sortColumns.sortable(options);
-		
+
 		jQuery(instance._boxSelector).find(instance._handleSelector).css('cursor', 'move');
 	},
 
