@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE domain PUBLIC "-//Sun Microsystems Inc.//DTD Application Server 9.1 Domain//EN" "http://www.sun.com/software/appserver/dtds/sun-domain_1_3.dtd">
 <!--
    Copyright 1997-2008 Sun Microsystems, Inc.  All rights reserved.
    Use is subject to license terms.
@@ -7,7 +8,6 @@
 <!-- Avoid manual edits of this file. Run "asadmin verify-domain-xml" otherwise.-->
 
 <domain application-root="${com.sun.aas.instanceRoot}/applications" log-root="${com.sun.aas.instanceRoot}/logs"> 
-<system-applications/>
  <applications>
   <web-module name="adminapp" context-root="/web1" location="${com.sun.aas.installRoot}/lib/install/applications/adminapp/adminapp_war" object-type="system-admin" enabled="true" directory-deployed="true" availability-enabled="false">
   <!-- System Web Module - DO NOT DELETE! -->
@@ -66,21 +66,6 @@
      <property name="connectionAttributes" value=";create=true"/>
    </jdbc-connection-pool>
  </resources>
- <servers>
-  <server name="server" config-ref="server-config" lb-weight="100"> 
-    <application-ref enabled="true" ref="adminapp" virtual-servers="__asadmin" lb-enabled="false" disable-timeout-in-minutes="30"/>
-    <application-ref enabled="true" ref="JBIFramework" lb-enabled="false" disable-timeout-in-minutes="30"/>
-    <application-ref enabled="true" ref="WSTXServices" lb-enabled="false" disable-timeout-in-minutes="30"/>
-    <application-ref enabled="true" ref="WSTCPConnectorLCModule" lb-enabled="false" disable-timeout-in-minutes="30"/> 
-    <resource-ref enabled="true" ref="jdbc/__TimerPool"/>
-    <resource-ref enabled="true" ref="jdbc/__CallFlowPool"/>
-    <resource-ref enabled="true" ref="jdbc/__default"/>
-    <!-- Start Liferay Resources -->
-    <resource-ref enabled="true" ref="jdbc/LiferayPool"/>
-    <resource-ref enabled="true" ref="mail/MailSession"/>
-    <!-- End Liferay Resources -->
-  </server>
- </servers> 
  <configs>
   <config name="server-config" dynamic-reconfiguration-enabled="true">
     <http-service> 
@@ -235,6 +220,7 @@
     <jvm-options>-Djava.ext.dirs=${com.sun.aas.javaRoot}/lib/ext${path.separator}${com.sun.aas.javaRoot}/jre/lib/ext${path.separator}${com.sun.aas.instanceRoot}/lib/ext${path.separator}${com.sun.aas.derbyRoot}/lib</jvm-options>
     <jvm-options>-Djdbc.drivers=org.apache.derby.jdbc.ClientDriver</jvm-options>
     <jvm-options>-Dcom.sun.enterprise.config.config_environment_factory_class=com.sun.enterprise.config.serverbeans.AppserverConfigEnvironmentFactory</jvm-options>
+    <jvm-options>-Djavax.management.builder.initial=com.sun.enterprise.admin.server.core.jmx.AppServerMBeanServerBuilder</jvm-options>
    </java-config>
    <thread-pools>
         <thread-pool thread-pool-id="thread-pool-1" min-thread-pool-size="0" max-thread-pool-size="200" idle-thread-timeout-in-seconds="120" num-work-queues="1"/>
@@ -243,5 +229,20 @@
   </management-rules>
   </config> <!-- config model with name "server-config" ends -->
  </configs>
+ <servers>
+  <server name="server" config-ref="server-config" lb-weight="100"> 
+    <application-ref enabled="true" ref="adminapp" virtual-servers="__asadmin" lb-enabled="false" disable-timeout-in-minutes="30"/>
+    <application-ref enabled="true" ref="JBIFramework" lb-enabled="false" disable-timeout-in-minutes="30"/>
+    <application-ref enabled="true" ref="WSTXServices" lb-enabled="false" disable-timeout-in-minutes="30"/>
+    <application-ref enabled="true" ref="WSTCPConnectorLCModule" lb-enabled="false" disable-timeout-in-minutes="30"/> 
+    <resource-ref enabled="true" ref="jdbc/__TimerPool"/>
+    <resource-ref enabled="true" ref="jdbc/__CallFlowPool"/>
+    <resource-ref enabled="true" ref="jdbc/__default"/>
+    <!-- Start Liferay Resources -->
+    <resource-ref enabled="true" ref="jdbc/LiferayPool"/>
+    <resource-ref enabled="true" ref="mail/MailSession"/>
+    <!-- End Liferay Resources -->
+  </server>
+ </servers> 
  <property name="administrative.domain.name" value="domain1"/>
 </domain>
