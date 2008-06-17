@@ -815,7 +815,7 @@
 		<portlet-class>com.liferay.portlet.VelocityPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/html/portlet/hello_velocity/view.vm</value>
+			<value>/portlet/hello_velocity/view.vm</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
