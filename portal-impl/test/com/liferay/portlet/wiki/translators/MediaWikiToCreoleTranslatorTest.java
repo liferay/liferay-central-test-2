@@ -338,7 +338,7 @@ public class MediaWikiToCreoleTranslatorTest extends TestCase {
 		String expected =
 			MediaWikiToCreoleTranslator.TABLE_OF_CONTENTS +
 				"previous line\n{{{\nmonospace\n''second'' line\n}}}\nnext" +
-				" line";
+					" line";
 		String actual = _translator.translate(content);
 
 		assertEquals(expected, actual);
