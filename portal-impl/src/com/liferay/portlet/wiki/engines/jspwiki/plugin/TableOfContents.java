@@ -23,6 +23,7 @@
 package com.liferay.portlet.wiki.engines.jspwiki.plugin;
 
 import com.ecyrd.jspwiki.WikiContext;
+import com.ecyrd.jspwiki.parser.Heading;
 import com.ecyrd.jspwiki.plugin.PluginException;
 
 import com.liferay.portal.kernel.util.StringMaker;
@@ -41,6 +42,7 @@ import java.util.Map;
  * </p>
  *
  * @author Alexander Chow
+ * @author Jorge Ferrer
  *
  */
 public class TableOfContents extends com.ecyrd.jspwiki.plugin.TableOfContents {
@@ -53,6 +55,10 @@ public class TableOfContents extends com.ecyrd.jspwiki.plugin.TableOfContents {
 		}
 
 		String result = super.execute(context, params);
+
+		if (_count < 2) {
+			return StringPool.BLANK;
+		}
 
 		int x = result.indexOf("<div class=\"collapsebox\">\n");
 
@@ -87,5 +93,13 @@ public class TableOfContents extends com.ecyrd.jspwiki.plugin.TableOfContents {
 
 		return result;
 	}
+
+	public void headingAdded(WikiContext context, Heading hd) {
+		super.headingAdded(context, hd);
+
+		_count++;
+	}
+
+	private int _count;
 
 }
