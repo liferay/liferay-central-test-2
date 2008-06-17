@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.wiki.translators;
 
+import com.liferay.portal.util.InitUtil;
+
 import junit.framework.TestCase;
 
 /**
@@ -32,6 +34,10 @@ import junit.framework.TestCase;
  *
  */
 public class MediaWikiToCreoleTranslatorTest extends TestCase {
+
+	static {
+		InitUtil.init();
+	}
 
 	public MediaWikiToCreoleTranslatorTest() {
 		_translator = new MediaWikiToCreoleTranslator();
@@ -148,7 +154,7 @@ public class MediaWikiToCreoleTranslatorTest extends TestCase {
 		assertEquals(expected, actual);
 	}
 
-	public void testNowikiWithFormat() throws Exception {
+	public void testNowiki() throws Exception {
 		String content =
 			"previous line\n<pre>\nmonospace\nsecond line\n</pre>\nnext line";
 
@@ -311,6 +317,20 @@ public class MediaWikiToCreoleTranslatorTest extends TestCase {
 
 		String expected = "<div>";
 		String actual = _translate(content);
+
+		assertEquals(expected, actual);
+	}
+
+	public void testNowikiWithFormat() throws Exception {
+		String content =
+			"previous line\n<nowiki>\nmonospace\n''second'' " +
+				"line\n</nowiki>\nnext line";
+
+		String expected =
+			MediaWikiToCreoleTranslator.TABLE_OF_CONTENTS +
+				"previous line\n{{{\nmonospace\n''second'' line\n}}}\nnext" +
+				" line";
+		String actual = _translator.translate(content);
 
 		assertEquals(expected, actual);
 	}
