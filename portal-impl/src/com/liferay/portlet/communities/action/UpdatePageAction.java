@@ -37,6 +37,7 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
+import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -93,10 +94,19 @@ public class UpdatePageAction extends JSONAction {
 				groupId, privateLayout, parentLayoutId);
 		}
 
-		if (!LayoutPermissionUtil.contains(
-				permissionChecker, layout, ActionKeys.UPDATE)) {
+		if (layout != null) {
+			if (!LayoutPermissionUtil.contains(
+					permissionChecker, layout, ActionKeys.UPDATE)) {
 
-			return null;
+				return null;
+			}
+		}
+		else {
+			if (!GroupPermissionUtil.contains(
+					permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS)) {
+
+				return null;
+			}
 		}
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
