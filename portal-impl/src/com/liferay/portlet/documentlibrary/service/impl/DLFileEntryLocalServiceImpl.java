@@ -893,7 +893,7 @@ public class DLFileEntryLocalServiceImpl
 		double oldVersion = fileEntry.getVersion();
 		double newVersion = MathUtil.format(oldVersion + 0.1, 1, 1);
 
-		if (Validator.isNull(is)) {
+		if (is == null) {
 			fileEntry.setVersion(newVersion);
 
 			dlFileEntryPersistence.update(fileEntry, false);
