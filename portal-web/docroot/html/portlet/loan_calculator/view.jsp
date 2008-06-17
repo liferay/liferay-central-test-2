@@ -117,9 +117,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 <br />
 
 <input type="submit" value="<liferay-ui:message key="calculate" />" />
-<button class="button submit" onclick="jQuery(this).parents("form").trigger("submit")">
-	Or click me to search for stuff
-</button>
+
 </form>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
