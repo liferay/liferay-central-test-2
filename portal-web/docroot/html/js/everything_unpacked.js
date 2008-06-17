@@ -14924,6 +14924,14 @@ Liferay.Util = {
 			'blur',
 			blurEvent
 		);
+
+		jQuery('input.lfr-auto-focus').livequery(
+			function() {
+				jQuery('input').trigger('blur');
+
+				jQuery(this).trigger('focus');
+			}
+		);
 	},
 
 	addInputType: function(el) {
@@ -17786,7 +17794,6 @@ var LayoutConfiguration = {
 
 			instance.initialized = true;
 
-			jQuery('#layout_configuration_content').trigger('focus').addClass('focus');
 			jQuery('#layout_configuration_content').keyup(
 				function(event) {
 					instance.startShowTimer(event, this);
@@ -18691,7 +18698,6 @@ Liferay.Navigation = new Class({
 				pageParents.unbind('click.liferay', pageBlur);
 			}
 		);
-		blockInput[0].focus();
 	},
 
 	_cancelAddingPage: function(event, obj) {
@@ -18751,7 +18757,7 @@ Liferay.Navigation = new Class({
 
 			instance._enterPage =
 				'<div class="enter-page">' +
-				'<input type="text" name="new_page" value="" class="text" />' +
+				'<input class="lfr-auto-focus" type="text" name="new_page" value="" class="text" />' +
 				'<a class="cancel-page" href="javascript: ;"></a>' +
 				'<a class="save-page" href="javascript: ;">' + Liferay.Language.get('save') + '</a>' +
 				'</div>';
@@ -18987,8 +18993,6 @@ Liferay.Navigation = new Class({
 				};
 
 				onSuccess = function(data) {
-					data = Liferay.Util.toJSONObject(data);
-
 					var currentTab = enterPage.prev();
 					var currentSpan = currentTab.find('span');
 
@@ -19033,8 +19037,6 @@ Liferay.Navigation = new Class({
 			};
 
 			onSuccess = function(data) {
-				data = Liferay.Util.toJSONObject(data);
-
 				var newTab = jQuery('<a href="' + data.url + '"><span>' + name + '</span></a>');
 
 				if (instance._isUseHandle) {
@@ -19061,6 +19063,7 @@ Liferay.Navigation = new Class({
 		jQuery.ajax(
 			{
 				data: data,
+				dataType: 'json',
 				success: onSuccess,
 				url: instance._updateURL
 			}
