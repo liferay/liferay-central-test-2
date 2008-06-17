@@ -78,6 +78,7 @@ public class WikiCacheUtil {
 		}
 
 		String key = _encodeKey(nodeId, title, viewPageURL.toString());
+
 		String groupKey = _encodeGroupKey(nodeId, title);
 
 		WikiPageDisplay pageDisplay = (WikiPageDisplay)MultiVMPoolUtil.get(
@@ -105,10 +106,11 @@ public class WikiCacheUtil {
 
 		String key = _encodeKey(
 			page.getNodeId(), page.getTitle(), _OUTGOING_LINKS);
+
 		String groupKey = _encodeGroupKey(page.getNodeId(), page.getTitle());
 
-		Map<String, Boolean> links =
-			(Map<String, Boolean>)MultiVMPoolUtil.get(_cache, key);
+		Map<String, Boolean> links = (Map<String, Boolean>)MultiVMPoolUtil.get(
+			_cache, key);
 
 		if (links == null) {
 			links = WikiUtil.getLinks(page);
@@ -166,13 +168,13 @@ public class WikiCacheUtil {
 		}
 	}
 
+	private static final String _OUTGOING_LINKS = "OUTGOING_LINKS";
+
 	private static Log _log = LogFactory.getLog(WikiUtil.class);
 
 	private static PortalCache _cache = MultiVMPoolUtil.getCache(CACHE_NAME);
 
 	private static Map<String, Set<String>> _groups =
 		new ConcurrentHashMap<String, Set<String>>();
-
-	private static final String _OUTGOING_LINKS = "OUTGOING_LINKS";
 
 }

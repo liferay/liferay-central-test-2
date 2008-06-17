@@ -949,7 +949,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	protected boolean isLinkedTo(WikiPage page, String targetTitle)
-		throws PortalException{
+		throws PortalException {
 
 		Map<String, Boolean> links = WikiCacheUtil.getOutgoingLinks(page);
 

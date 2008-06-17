@@ -278,7 +278,9 @@ public class MediaWikiImporter implements WikiImporter {
 			byte[] value = entry.getValue();
 
 			if (key.endsWith(StringPool.SLASH)) {
-				_log.info("Ignoring " + key);
+				if (_log.isInfoEnabled()) {
+					_log.info("Ignoring " + key);
+				}
 
 				continue;
 			}
@@ -286,7 +288,9 @@ public class MediaWikiImporter implements WikiImporter {
 			String[] paths = StringUtil.split(key, StringPool.SLASH);
 
 			if (!isValidImage(paths, value)) {
-				_log.info("Ignoring " + key);
+				if (_log.isInfoEnabled()) {
+					_log.info("Ignoring " + key);
+				}
 
 				continue;
 			}
@@ -315,7 +319,9 @@ public class MediaWikiImporter implements WikiImporter {
 				node.getNodeId(), SHARED_IMAGES_TITLE, attachments);
 		}
 
-		_log.info("Imported " + count + " images into " + node.getName());
+		if (_log.isInfoEnabled()) {
+			_log.info("Imported " + count + " images into " + node.getName());
+		}
 	}
 
 	protected void processRegularPages(
@@ -372,15 +378,19 @@ public class MediaWikiImporter implements WikiImporter {
 				importPage(userId, author, node, title, content, usersMap);
 			}
 			catch (Exception e) {
-				_log.warn(
-					"Page with title " + title + " could not be imported",
-					e);
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Page with title " + title + " could not be imported",
+						e);
+				}
 			}
 
 			count++;
 		}
 
-		_log.info("Imported " + count + " pages into " + node.getName());
+		if (_log.isInfoEnabled()) {
+			_log.info("Imported " + count + " pages into " + node.getName());
+		}
 	}
 
 	protected void processSpecialPages(
@@ -529,9 +539,11 @@ public class MediaWikiImporter implements WikiImporter {
 				usersMap.put(array[0], array[1]);
 			}
 			else {
-				_log.info(
-					"Ignoring line " + line + " because it does not contain" +
-						" exactly 2 columns");
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"Ignoring line " + line +
+							" because it does not contain exactly 2 columns");
+				}
 			}
 
 			line = reader.readLine();

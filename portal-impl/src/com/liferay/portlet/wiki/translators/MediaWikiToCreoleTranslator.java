@@ -134,7 +134,7 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 		while (matcher.find()) {
 			String link = matcher.group(1).replace(
 				StringPool.UNDERLINE, StringPool.SPACE);
-			
+
 			sb.replace(matcher.start(1), matcher.end(1), link);
 		}
 
