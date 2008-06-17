@@ -442,6 +442,10 @@ Liferay.Tree = new Class({
 		else {
 			instance._initialSortable.sortable('refresh');
 		}
+
+		if (Liferay.Browser.is_ie) {
+			instance._initialSortable.css('position', 'static');
+		}
 	},
 
 	setOpenNodes: function() {

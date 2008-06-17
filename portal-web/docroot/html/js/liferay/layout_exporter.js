@@ -96,8 +96,7 @@ Liferay.LayoutExporter = {
 				'title': title,
 				modal: true,
 				width: 600,
-				height: 550,
-				overflow: "auto",
+				overflow: 'auto',
 				'messageId': messageId
 			}
 		);
