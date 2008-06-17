@@ -94,8 +94,8 @@ public class TableOfContents extends com.ecyrd.jspwiki.plugin.TableOfContents {
 		return result;
 	}
 
-	public void headingAdded(WikiContext context, Heading hd) {
-		super.headingAdded(context, hd);
+	public void headingAdded(WikiContext context, Heading heading) {
+		super.headingAdded(context, heading);
 
 		_count++;
 	}
