@@ -105,7 +105,6 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		checkGuest = false;
 		omniadmin = null;
 		companyAdmins.clear();
-		bags.clear();
 		resetValues();
 	}
 
@@ -190,7 +189,8 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			_log.error(e, e);
 		}
 
-		PermissionCheckerBag bag = getBag(groupId);
+		PermissionCheckerBag bag = PermissionCacheUtil.getBag(
+			user.getUserId(), groupId);
 
 		if (signedIn && (bag == null)) {
 			try {
@@ -261,14 +261,15 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 					user.getUserId(), userGroups, userOrgs, userOrgGroups,
 					userUserGroupGroups, groups, roles);
 
-				putBag(groupId, bag);
+				PermissionCacheUtil.putBag(
+					user.getUserId(), groupId, bag);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
 			}
 		}
 
-		Boolean value = PermissionCacheUtil.hasPermission(
+		Boolean value = PermissionCacheUtil.getPermission(
 			user.getUserId(), groupId, name, primKey, actionId);
 
 		if (value == null) {
@@ -343,10 +344,6 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 			return false;
 		}
-	}
-
-	protected PermissionCheckerBag getBag(long groupId) {
-		return bags.get(groupId);
 	}
 
 	protected long[] getResourceIds(
@@ -492,7 +489,8 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		long[] resourceIds = getResourceIds(
 			companyId, 0, name, primKey, actionId);
 
-		PermissionCheckerBag bag = getBag(GUEST_GROUP_BAG_ID);
+		PermissionCheckerBag bag = PermissionCacheUtil.getBag(
+			defaultUserId, GUEST_GROUP_BAG_ID);
 
 		if (bag == null) {
 			Group guestGroup = GroupLocalServiceUtil.getGroup(
@@ -506,7 +504,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 				new ArrayList<Organization>(), new ArrayList<Group>(),
 				new ArrayList<Group>(), new ArrayList<Group>(), roles);
 
-			putBag(GUEST_GROUP_BAG_ID, bag);
+			PermissionCacheUtil.putBag(defaultUserId, GUEST_GROUP_BAG_ID, bag);
 		}
 
 		try {
@@ -595,7 +593,8 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		// individual class, then for the group that the class may belong
 		// to, and then for the company that the class belongs to.
 
-		PermissionCheckerBag bag = getBag(groupId);
+		PermissionCheckerBag bag = PermissionCacheUtil.getBag(
+			user.getUserId(), groupId);
 
 		boolean value = PermissionLocalServiceUtil.hasUserPermissions(
 			user.getUserId(), groupId, actionId, resourceIds, bag);
@@ -639,7 +638,8 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			return true;
 		}
 
-		PermissionCheckerBag bag = getBag(groupId);
+		PermissionCheckerBag bag = PermissionCacheUtil.getBag(
+			user.getUserId(), groupId);
 
 		if (bag == null) {
 			_log.error("Bag should never be null");
@@ -668,7 +668,8 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			return true;
 		}
 
-		PermissionCheckerBag bag = getBag(groupId);
+		PermissionCheckerBag bag = PermissionCacheUtil.getBag(
+			user.getUserId(), groupId);
 
 		if (bag == null) {
 			_log.error("Bag should never be null");
@@ -696,10 +697,6 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 					stopWatch.getTime() + " ms");
 	}
 
-	protected void putBag(long groupId, PermissionCheckerBag bag) {
-		bags.put(groupId, bag);
-	}
-
 	protected static final int GUEST_GROUP_BAG_ID = -101;
 
 	protected static final String RESULTS_SEPARATOR = "_RESULTS_SEPARATOR_";
@@ -710,8 +707,6 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 	protected boolean checkGuest;
 	protected Boolean omniadmin;
 	protected Map<Long, Boolean> companyAdmins = new HashMap<Long, Boolean>();
-	protected Map<Long, PermissionCheckerBag> bags =
-		new HashMap<Long, PermissionCheckerBag>();
 
 	private static Log _log = LogFactory.getLog(PermissionCheckerImpl.class);
 

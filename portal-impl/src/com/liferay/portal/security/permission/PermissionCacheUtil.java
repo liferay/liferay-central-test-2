@@ -42,15 +42,31 @@ public class PermissionCacheUtil {
 		_cache.removeAll();
 	}
 
-	public static Boolean hasPermission(
+	public static PermissionCheckerBag getBag(long userId, long groupId) {
+		String key = _encodeKey(userId, groupId);
+
+		return (PermissionCheckerBag)MultiVMPoolUtil.get(_cache, key);
+	}
+
+	public static Boolean getPermission(
 		long userId, long groupId, String name, String primKey,
 		String actionId) {
 
 		String key = _encodeKey(userId, groupId, name, primKey, actionId);
 
-		Boolean value = (Boolean)MultiVMPoolUtil.get(_cache, key);
+		return (Boolean)MultiVMPoolUtil.get(_cache, key);
+	}
 
-		return value;
+	public static PermissionCheckerBag putBag(
+		long userId, long groupId, PermissionCheckerBag bag) {
+
+		if (bag != null) {
+			String key = _encodeKey(userId, groupId);
+
+			MultiVMPoolUtil.put(_cache, key, bag);
+		}
+
+		return bag;
 	}
 
 	public static Boolean putPermission(
@@ -64,6 +80,18 @@ public class PermissionCacheUtil {
 		}
 
 		return value;
+	}
+
+	private static String _encodeKey(long userId, long groupId) {
+		StringMaker sm = new StringMaker();
+
+		sm.append(CACHE_NAME);
+		sm.append(StringPool.POUND);
+		sm.append(userId);
+		sm.append(StringPool.POUND);
+		sm.append(groupId);
+
+		return sm.toString();
 	}
 
 	private static String _encodeKey(
