@@ -63,7 +63,7 @@ public class TrackbackVerifierUtil {
 			String url = (String)tuple.getObject(1);
 			String trackbackUrl = (String)tuple.getObject(2);
 
-			verifyPost(messageId, url, trackbackUrl);
+			_verifyPost(messageId, url, trackbackUrl);
 		}
 	}
 

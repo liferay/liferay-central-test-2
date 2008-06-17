@@ -28,6 +28,9 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.blogs.util.TrackbackVerifierUtil;
 import com.liferay.util.Time;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="TrackbackVerifierJob.java.html"><b><i>View Source</i></b></a>
  *
@@ -53,6 +56,8 @@ public class TrackbackVerifierJob implements IntervalJob {
 	public long getInterval() {
 		return _interval;
 	}
+
+	private static Log _log = LogFactory.getLog(TrackbackVerifierJob.class);
 
 	private long _interval;
 
