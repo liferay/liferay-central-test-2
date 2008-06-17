@@ -177,7 +177,7 @@ public class IndexWriterFactory {
 				releaseLock(companyId);
 			}
 
-			synchronized(this) {
+			synchronized (this) {
 				IndexWriterData writerData = _writerLookup.get(companyId);
 
 				if (writerData == null) {
@@ -255,7 +255,7 @@ public class IndexWriterFactory {
 
 		boolean writerFound = false;
 
-		synchronized(this) {
+		synchronized (this) {
 			if (!_writerLookup.isEmpty()) {
 				for (IndexWriterData writerData : _writerLookup.values()) {
 					if (writerData.getWriter() == writer) {

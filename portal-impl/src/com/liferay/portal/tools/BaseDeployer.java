@@ -702,7 +702,7 @@ public class BaseDeployer {
 				jar);
 
 		if (!file.exists()) {
-			synchronized(this) {
+			synchronized (this) {
 				String url = PropsUtil.get(
 					PropsUtil.LIBRARY_DOWNLOAD_URL + jar);
 
