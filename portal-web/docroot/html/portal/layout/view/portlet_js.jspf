@@ -34,6 +34,7 @@ function addPortletHTML(options) {
 		var container = placeHolder.parentNode;
 
 		var portletBound = jQuery('<div></div>')[0];
+
 		portletBound.innerHTML = html;
 		portletBound = portletBound.firstChild;
 
