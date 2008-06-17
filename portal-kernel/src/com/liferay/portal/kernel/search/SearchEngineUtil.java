@@ -125,10 +125,8 @@ public class SearchEngineUtil {
 		String message = MessageBusUtil.sendSynchronizedMessage(
 			DestinationNames.SEARCH, sm.toString());
 
-		if (message != null) {
-                        if (message.indexOf("true") != -1) {
-                            return true;
-                        }
+		if ((message != null) && (message.indexOf("true") != -1)) {
+			return true;
 		}
 
 		return false;
