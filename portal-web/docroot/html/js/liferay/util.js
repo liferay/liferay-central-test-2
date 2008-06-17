@@ -72,6 +72,14 @@ Liferay.Util = {
 			'blur',
 			blurEvent
 		);
+
+		jQuery('input.lfr-auto-focus').livequery(
+			function() {
+				jQuery('input').trigger('blur');
+
+				jQuery(this).trigger('focus');
+			}
+		);
 	},
 
 	addInputType: function(el) {

@@ -74,7 +74,7 @@
 				<div class="portal-add-content-search">
 					<span id="portal_add_content_title"><liferay-ui:message key="search-content-searches-as-you-type" /></span>
 
-					<input id="layout_configuration_content" type="text" onKeyPress="if (event.keyCode == 13) { return false; }" />
+					<input class="lfr-auto-focus" id="layout_configuration_content" type="text" onKeyPress="if (event.keyCode == 13) { return false; }" />
 				</div>
 			</c:if>
 

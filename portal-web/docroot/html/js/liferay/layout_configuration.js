@@ -30,7 +30,6 @@ var LayoutConfiguration = {
 
 			instance.initialized = true;
 
-			jQuery('#layout_configuration_content').trigger('focus').addClass('focus');
 			jQuery('#layout_configuration_content').keyup(
 				function(event) {
 					instance.startShowTimer(event, this);
