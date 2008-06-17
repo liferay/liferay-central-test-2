@@ -155,6 +155,9 @@
 .ui-tabs li a, .tabs li span {
 }
 
+.ui-tabs li a:hover {
+}
+
 .ui-tabs li a:hover, .ui-tabs li span:hover {
 }
 
@@ -167,7 +170,7 @@
 .ui-tabs li.current:hover, .ui-tabs li.current a:hover {
 }
 
-.ui-tabs .current a, .ui-tabs .ui-tabs-disabled a {
+.ui-tabs .ui-tabs-disabled a {
 }
 
 .ui-tabs-disabled {

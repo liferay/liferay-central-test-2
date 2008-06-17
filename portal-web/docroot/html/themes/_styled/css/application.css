@@ -265,6 +265,10 @@
 	top: 1px;
 }
 
+.ui-tabs li a:hover {
+	text-decoration: underline;
+}
+
 .ui-tabs li a:hover, .ui-tabs li span:hover {
 	background: #1E2529;
 	color: #9EBAC8;
@@ -285,7 +289,7 @@
 	background-color: #fff;
 }
 
-.ui-tabs .current a, .ui-tabs .ui-tabs-disabled a {
+.ui-tabs .ui-tabs-disabled a {
 	cursor: text;
 }
 
