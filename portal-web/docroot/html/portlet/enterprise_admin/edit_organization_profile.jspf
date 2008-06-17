@@ -85,6 +85,18 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 <tr>
 	<td valign="top">
 		<table class="lfr-table">
+
+		<c:if test="<%= organization != null %>">
+			<tr>
+				<td>
+					<liferay-ui:message key="group-id" />
+				</td>
+				<td>
+					<%= organization.getGroup().getGroupId() %>
+				</td>
+			</tr>
+		</c:if>
+
 		<tr>
 			<td>
 				<liferay-ui:message key="name" />
