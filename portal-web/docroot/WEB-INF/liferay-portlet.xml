@@ -320,6 +320,7 @@
 		<configuration-action-class>com.liferay.portlet.blogs.action.ConfigurationActionImpl</configuration-action-class>
 		<indexer-class>com.liferay.portlet.blogs.util.Indexer</indexer-class>
 		<open-search-class>com.liferay.portlet.blogs.util.BlogsOpenSearchImpl</open-search-class>
+		<scheduler-class>com.liferay.portlet.blogs.job.BlogsScheduler</scheduler-class>
 		<friendly-url-mapper-class>com.liferay.portlet.blogs.BlogsFriendlyURLMapper</friendly-url-mapper-class>
 		<portlet-data-handler-class>com.liferay.portlet.blogs.lar.BlogsPortletDataHandlerImpl</portlet-data-handler-class>
 		<social-activity-interpreter-class>com.liferay.portlet.blogs.social.BlogsActivityInterpreter</social-activity-interpreter-class>

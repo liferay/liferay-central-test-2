@@ -106,6 +106,47 @@ public class MBDiscussionUtil {
 		return getPersistence().fetchByC_C(classNameId, classPK);
 	}
 
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBDiscussion> findByClassNameId(
+		long classNameId) throws com.liferay.portal.SystemException {
+		return getPersistence().findByClassNameId(classNameId);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBDiscussion> findByClassNameId(
+		long classNameId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByClassNameId(classNameId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBDiscussion> findByClassNameId(
+		long classNameId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByClassNameId(classNameId, start, end, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBDiscussion findByClassNameId_First(
+		long classNameId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchDiscussionException {
+		return getPersistence().findByClassNameId_First(classNameId, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBDiscussion findByClassNameId_Last(
+		long classNameId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchDiscussionException {
+		return getPersistence().findByClassNameId_Last(classNameId, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBDiscussion[] findByClassNameId_PrevAndNext(
+		long discussionId, long classNameId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchDiscussionException {
+		return getPersistence()
+				   .findByClassNameId_PrevAndNext(discussionId, classNameId, obc);
+	}
+
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBDiscussion> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -141,6 +182,11 @@ public class MBDiscussionUtil {
 		getPersistence().removeByC_C(classNameId, classPK);
 	}
 
+	public static void removeByClassNameId(long classNameId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByClassNameId(classNameId);
+	}
+
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
@@ -148,6 +194,11 @@ public class MBDiscussionUtil {
 	public static int countByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_C(classNameId, classPK);
+	}
+
+	public static int countByClassNameId(long classNameId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByClassNameId(classNameId);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

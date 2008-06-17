@@ -269,6 +269,11 @@ public interface MBMessageLocalService {
 	public int getCompanyMessagesCount(long companyId)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portlet.messageboards.model.MBDiscussion> getDiscussions(
+		java.lang.String className)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.messageboards.model.MBMessageDisplay getDiscussionMessageDisplay(
 		long userId, java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,

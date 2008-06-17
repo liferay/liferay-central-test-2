@@ -25,7 +25,6 @@ package com.liferay.portal.events;
 import com.liferay.portal.comm.CommLink;
 import com.liferay.portal.deploy.DeployUtil;
 import com.liferay.portal.jcr.JCRFactoryUtil;
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployDir;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployListener;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployUtil;
@@ -33,19 +32,12 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.jndi.PortalJNDIUtil;
-import com.liferay.portal.kernel.messaging.MessageBus;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.messaging.MessageSender;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.scheduler.SchedulerEngineImpl;
 import com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineUtil;
-import com.liferay.portal.search.IndexSearcherImpl;
-import com.liferay.portal.search.IndexWriterImpl;
-import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -211,15 +203,6 @@ public class GlobalStartupAction extends SimpleAction {
 			}
 		}
 
-		// Messaging
-
-		MessageBus messageBus = (MessageBus)BeanLocatorUtil.locate(
-			MessageBus.class.getName());
-		MessageSender messageSender = (MessageSender)BeanLocatorUtil.locate(
-			MessageSender.class.getName());
-
-		MessageBusUtil.init(messageBus, messageSender);
-
 		// POP server
 
 		if (PropsValues.POP_SERVER_NOTIFICATIONS_ENABLED) {
@@ -236,12 +219,6 @@ public class GlobalStartupAction extends SimpleAction {
 		}
 
 		SchedulerEngineUtil.init(new SchedulerEngineImpl());
-
-		// Search
-
-		LuceneSearchEngineUtil.init();
-
-		SearchEngineUtil.init(new IndexSearcherImpl(), new IndexWriterImpl());
 	}
 
 	private static Log _log = LogFactory.getLog(GlobalStartupAction.class);

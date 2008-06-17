@@ -86,6 +86,34 @@ public interface MBDiscussionPersistence {
 		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portlet.messageboards.model.MBDiscussion> findByClassNameId(
+		long classNameId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBDiscussion> findByClassNameId(
+		long classNameId, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBDiscussion> findByClassNameId(
+		long classNameId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.messageboards.model.MBDiscussion findByClassNameId_First(
+		long classNameId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchDiscussionException;
+
+	public com.liferay.portlet.messageboards.model.MBDiscussion findByClassNameId_Last(
+		long classNameId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchDiscussionException;
+
+	public com.liferay.portlet.messageboards.model.MBDiscussion[] findByClassNameId_PrevAndNext(
+		long discussionId, long classNameId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchDiscussionException;
+
 	public java.util.List<com.liferay.portlet.messageboards.model.MBDiscussion> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
@@ -108,9 +136,15 @@ public interface MBDiscussionPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchDiscussionException;
 
+	public void removeByClassNameId(long classNameId)
+		throws com.liferay.portal.SystemException;
+
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByC_C(long classNameId, long classPK)
+		throws com.liferay.portal.SystemException;
+
+	public int countByClassNameId(long classNameId)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

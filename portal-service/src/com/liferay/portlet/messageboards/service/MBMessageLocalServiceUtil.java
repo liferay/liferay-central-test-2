@@ -442,6 +442,15 @@ public class MBMessageLocalServiceUtil {
 		return mbMessageLocalService.getCompanyMessagesCount(companyId);
 	}
 
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBDiscussion> getDiscussions(
+		java.lang.String className)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getDiscussions(className);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getDiscussionMessageDisplay(
 		long userId, java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,

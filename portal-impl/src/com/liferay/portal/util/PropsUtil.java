@@ -989,6 +989,8 @@ public class PropsUtil {
 
 	public static final String BLOGS_TRACKBACK_EXCERPT_LENGTH = "blogs.trackback.excerpt.length";
 
+	public static final String BLOGS_TRACKBACK_VERIFIER_JOB_INTERVAL = "blogs.trackback.verifier.job.interval";
+
 	// Calendar Portlet
 
 	public static final String CALENDAR_EVENT_TYPES = "calendar.event.types";

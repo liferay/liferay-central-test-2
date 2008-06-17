@@ -53,6 +53,11 @@ public class VerifyProcessSuite extends VerifyProcess {
 		verify(new VerifyUser());
 		verify(new VerifyWiki());
 
+		// VerifyBlogsTrackbacks looks at every blog comment to see if it is a
+		// trackback and verifies that the source URL is a valid URL.
+
+		//verify(new VerifyBlogsTrackbacks());
+
 		// VerifyImage is very powerful because it removes all images that it
 		// believes is stale. Do not run this unless you are also not managing
 		// images in Liferay's Image service for your custom models.

@@ -159,6 +159,10 @@ public class PropsValues {
 		GetterUtil.getInteger(PropsUtil.get(PropsUtil.
 			BLOGS_TRACKBACK_EXCERPT_LENGTH));
 
+	public static final int BLOGS_TRACKBACK_VERIFIER_JOB_INTERVAL =
+		GetterUtil.getInteger(PropsUtil.get(PropsUtil.
+			BLOGS_TRACKBACK_VERIFIER_JOB_INTERVAL));
+
 	public static final boolean CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT));

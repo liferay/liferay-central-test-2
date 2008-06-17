@@ -23,15 +23,23 @@
 package com.liferay.portal.events;
 
 import com.liferay.lock.service.LockServiceUtil;
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
+import com.liferay.portal.kernel.messaging.MessageBus;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.messaging.MessageSender;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Release;
+import com.liferay.portal.search.IndexSearcherImpl;
+import com.liferay.portal.search.IndexWriterImpl;
+import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.ReleaseLocalServiceUtil;
@@ -226,6 +234,21 @@ public class StartupAction extends SimpleAction {
 		if (ranUpgradeProcess) {
 			MultiVMPoolUtil.clear();
 		}
+
+		// Messaging
+
+		MessageBus messageBus = (MessageBus)BeanLocatorUtil.locate(
+			MessageBus.class.getName());
+		MessageSender messageSender = (MessageSender)BeanLocatorUtil.locate(
+			MessageSender.class.getName());
+
+		MessageBusUtil.init(messageBus, messageSender);
+
+		// Search engines
+
+		LuceneSearchEngineUtil.init();
+
+		SearchEngineUtil.init(new IndexSearcherImpl(), new IndexWriterImpl());
 
 		// Verify
 

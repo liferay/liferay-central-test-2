@@ -117,6 +117,9 @@
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
+		<finder name="ClassNameId" return-type="Collection">
+			<finder-column name="classNameId" />
+		</finder>
 	</entity>
 	<entity name="MBMessage" uuid="true" local-service="true" remote-service="true">
 

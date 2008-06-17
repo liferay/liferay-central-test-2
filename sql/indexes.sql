@@ -203,6 +203,7 @@ create index IX_ED292508 on MBCategory (groupId, parentCategoryId);
 create index IX_C2626EDB on MBCategory (uuid_);
 create index IX_F7D28C2F on MBCategory (uuid_, groupId);
 
+create index IX_79D0120B on MBDiscussion (classNameId);
 create index IX_33A4DE38 on MBDiscussion (classNameId, classPK);
 
 create index IX_3C865EE5 on MBMessage (categoryId);

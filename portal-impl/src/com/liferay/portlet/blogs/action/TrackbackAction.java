@@ -35,6 +35,8 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.blogs.util.TrackbackVerifierUtil;
+import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
@@ -128,9 +130,16 @@ public class TrackbackAction extends PortletAction {
 			"[...] " + excerpt + " [...] [url=" + url + "]" +
 				themeDisplay.translate("read-more") + "[/url]";
 
-		MBMessageLocalServiceUtil.addDiscussionMessage(
+		MBMessage message = MBMessageLocalServiceUtil.addDiscussionMessage(
 			userId, blogName, groupId, className, classPK, threadId,
 			parentMessageId, title, body, themeDisplay);
+
+		String trackbackUrl =
+			themeDisplay.getPortalURL() +
+				PortalUtil.getLayoutURL(themeDisplay) + "/-/blogs/trackback/" +
+					entry.getUrlTitle();
+
+		TrackbackVerifierUtil.addNewPost(message.getMessageId(), url, trackbackUrl);
 
 		sendSuccess(res);
 	}
