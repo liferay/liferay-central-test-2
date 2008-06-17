@@ -114,7 +114,6 @@ public class BrowseServerTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.select("document._9_fm.elements[7]", "label=26");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent("shutdown.programmatically.exit"));
 		selenium.click("link=Shutdown");
 		selenium.waitForPageToLoad("30000");
 

@@ -38,7 +38,7 @@ public class MoveThreadTest extends BaseTestCase {
 		selenium.waitForPopUp("category", "30000");
 		selenium.selectWindow("category");
 		selenium.click(
-			"//div[@id=\"p_p_id_19_\"]/div/form/table/tbody/tr[3]/td[5]/input");
+			"//div[@id=\"p_p_id_19_\"]/div/form/div[3]/table/tbody/tr[3]/td[5]/input");
 		selenium.selectWindow("null");
 		selenium.click("_19_addExplanationPost");
 

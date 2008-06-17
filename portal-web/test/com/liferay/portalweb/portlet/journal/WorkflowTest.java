@@ -51,7 +51,6 @@ public class WorkflowTest extends BaseTestCase {
 		selenium.click("link=Articles");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("Link=Test Journal Article 2");
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -70,6 +69,23 @@ public class WorkflowTest extends BaseTestCase {
 		}
 
 		selenium.click("_15_incrementVersionCheckbox");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

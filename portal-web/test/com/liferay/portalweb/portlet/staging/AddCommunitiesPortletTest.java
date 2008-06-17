@@ -51,8 +51,7 @@ public class AddCommunitiesPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.mouseDown("//div[@id=\"Community-Communities\"]/p/a");
-		selenium.mouseUp("//div[@id=\"Community-Communities\"]/p/a");
+		selenium.click("//div[@id=\"Community-Communities\"]/p/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

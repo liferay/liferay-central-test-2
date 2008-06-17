@@ -123,9 +123,9 @@ public class ManagePagesCopyFromLiveTest extends BaseTestCase {
 		}
 
 		selenium.click("publishBtn");
-		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to copy these pages[\\s\\S]$"));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

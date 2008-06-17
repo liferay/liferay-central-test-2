@@ -67,8 +67,7 @@ public class AddPrivatePortletsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.mouseDown("//div[@id=\"Collaboration-Blogs\"]/p/a");
-		selenium.mouseUp("//div[@id=\"Collaboration-Blogs\"]/p/a");
+		selenium.click("//div[@id=\"Collaboration-Blogs\"]/p/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

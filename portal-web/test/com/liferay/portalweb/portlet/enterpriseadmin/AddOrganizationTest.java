@@ -43,8 +43,58 @@ public class AddOrganizationTest extends BaseTestCase {
 		selenium.selectWindow("organization");
 		selenium.click("link=Liferay, Inc.");
 		selenium.selectWindow("null");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_79_type")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_79_countryId")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_79_regionId")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.select("_79_type", "label=Regular");
 		selenium.select("_79_countryId", "label=United States");
+		Thread.sleep(5000);
 		selenium.select("_79_regionId", "label=California");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");

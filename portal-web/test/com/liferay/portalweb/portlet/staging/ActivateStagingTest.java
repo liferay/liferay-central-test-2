@@ -72,8 +72,26 @@ public class ActivateStagingTest extends BaseTestCase {
 
 		selenium.click("link=Available Communities");
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//div[@id=\"portlet-wrapper-29\"]/div[2]/div/div/form/div[5]/table/tbody/tr[2]/td[5]/ul/li/ul/li[3]/nobr/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(
-			"//div[@id=\"portlet-wrapper-29\"]/div[2]/div/div/form/table/tbody/tr[2]/td[5]/ul/li/ul/li[3]/nobr/a");
+			"//div[@id=\"portlet-wrapper-29\"]/div[2]/div/div/form/div[5]/table/tbody/tr[2]/td[5]/ul/li/ul/li[3]/nobr/a");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

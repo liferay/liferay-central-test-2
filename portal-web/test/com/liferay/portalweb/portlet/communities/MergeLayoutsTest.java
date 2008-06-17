@@ -58,7 +58,7 @@ public class MergeLayoutsTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@id=\"portlet-wrapper-29\"]/div[2]/div/div/form/table/tbody/tr[3]/td[6]/ul/li/ul/li[3]/nobr/a")) {
+							"//div[@id=\"portlet-wrapper-29\"]/div[2]/div/div/form/div[5]/table/tbody/tr[3]/td[6]/ul/li/ul/li[3]/nobr/a")) {
 					break;
 				}
 			}
@@ -69,7 +69,7 @@ public class MergeLayoutsTest extends BaseTestCase {
 		}
 
 		selenium.click(
-			"//div[@id=\"portlet-wrapper-29\"]/div[2]/div/div/form/table/tbody/tr[3]/td[6]/ul/li/ul/li[3]/nobr/a");
+			"//div[@id=\"portlet-wrapper-29\"]/div[2]/div/div/form/div[5]/table/tbody/tr[3]/td[6]/ul/li/ul/li[3]/nobr/a");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Settings");
 		selenium.waitForPageToLoad("30000");
@@ -113,6 +113,23 @@ public class MergeLayoutsTest extends BaseTestCase {
 
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Return to Full Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=Return to Full Page");
 		selenium.waitForPageToLoad("30000");
 	}

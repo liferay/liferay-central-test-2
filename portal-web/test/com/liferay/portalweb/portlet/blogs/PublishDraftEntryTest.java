@@ -49,7 +49,6 @@ public class PublishDraftEntryTest extends BaseTestCase {
 		}
 
 		selenium.click("link=Edit");
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

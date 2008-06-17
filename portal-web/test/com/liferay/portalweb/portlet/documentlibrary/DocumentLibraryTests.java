@@ -37,9 +37,6 @@ public class DocumentLibraryTests extends BaseTests {
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(AddFolderTest.class);
 		addTestSuite(AddSubfolderTest.class);
-
-		// Javascript security prevents automatically uploading files.
-
 		addTestSuite(AddDocumentTest.class);
 		addTestSuite(SearchTest.class);
 		addTestSuite(GetDocumentsTest.class);

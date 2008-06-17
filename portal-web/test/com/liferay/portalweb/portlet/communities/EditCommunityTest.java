@@ -74,7 +74,7 @@ public class EditCommunityTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@id=\"portlet-wrapper-29\"]/div[2]/div/div/form/table/tbody/tr[4]/td[6]/ul/li/ul/li/nobr/a")) {
+							"//div[@id=\"portlet-wrapper-29\"]/div[2]/div/div/form/div[5]/table/tbody/tr[4]/td[6]/ul/li/ul/li/nobr/a")) {
 					break;
 				}
 			}
@@ -85,7 +85,7 @@ public class EditCommunityTest extends BaseTestCase {
 		}
 
 		selenium.click(
-			"//div[@id=\"portlet-wrapper-29\"]/div[2]/div/div/form/table/tbody/tr[4]/td[6]/ul/li/ul/li/nobr/a");
+			"//div[@id=\"portlet-wrapper-29\"]/div[2]/div/div/form/div[5]/table/tbody/tr[4]/td[6]/ul/li/ul/li/nobr/a");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

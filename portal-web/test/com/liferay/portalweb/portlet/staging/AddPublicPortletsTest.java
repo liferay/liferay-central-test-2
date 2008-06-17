@@ -52,8 +52,7 @@ public class AddPublicPortletsTest extends BaseTestCase {
 		}
 
 		Thread.sleep(3000);
-		selenium.mouseDown("//div[@id=\"Collaboration-Calendar\"]/p/a");
-		selenium.mouseUp("//div[@id=\"Collaboration-Calendar\"]/p/a");
+		selenium.click("//div[@id=\"Collaboration-Calendar\"]/p/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -106,8 +105,7 @@ public class AddPublicPortletsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.mouseDown("//div[@id=\"Collaboration-Blogs\"]/p/a");
-		selenium.mouseUp("//div[@id=\"Collaboration-Blogs\"]/p/a");
+		selenium.click("//div[@id=\"Collaboration-Blogs\"]/p/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
