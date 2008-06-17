@@ -458,25 +458,9 @@ public class EditPagesAction extends PortletAction {
 					layout.getLayoutId(), parentLayout.getTypeSettings());
 			}
 			else {
-				Layout layout = LayoutServiceUtil.addLayout(
+				LayoutServiceUtil.addLayout(
 					groupId, privateLayout, parentLayoutId, localeNamesMap,
 					localeTitlesMap, description, type, hidden, friendlyURL);
-
-				if (type.equals(LayoutConstants.TYPE_PORTLET)) {
-					LayoutTypePortlet layoutTypePortlet =
-						(LayoutTypePortlet)layout.getLayoutType();
-
-					if (Validator.isNull(
-							layoutTypePortlet.getLayoutTemplateId())) {
-
-						layoutTypePortlet.setLayoutTemplateId(
-							0, PropsValues.LAYOUT_DEFAULT_TEMPLATE_ID, false);
-
-						LayoutServiceUtil.updateLayout(
-							layout.getGroupId(), layout.isPrivateLayout(),
-							layout.getLayoutId(), layout.getTypeSettings());
-					}
-				}
 			}
 		}
 		else {

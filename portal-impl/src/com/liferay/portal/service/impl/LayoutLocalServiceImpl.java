@@ -52,6 +52,7 @@ import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.base.LayoutLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.LayoutPriorityComparator;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
@@ -178,6 +179,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		layout.setDlFolderId(dlFolderId);
 
 		setLocalizedAttributes(layout, localeNamesMap, localeTitlesMap);
+
+		if (type.equals(LayoutConstants.TYPE_PORTLET)) {
+			LayoutTypePortlet layoutTypePortlet =
+				(LayoutTypePortlet)layout.getLayoutType();
+
+			layoutTypePortlet.setLayoutTemplateId(
+				0, PropsValues.LAYOUT_DEFAULT_TEMPLATE_ID, false);
+		}
 
 		layoutPersistence.update(layout, false);
 
