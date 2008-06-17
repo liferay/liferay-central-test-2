@@ -146,6 +146,9 @@
 .ie .ui-tabs {
 }
 
+.ie6 .ui-tabs {
+}
+
 .ui-tabs li {
 }
 

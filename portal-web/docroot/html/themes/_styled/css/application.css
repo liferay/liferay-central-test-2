@@ -238,6 +238,10 @@
 }
 
 .ie .ui-tabs {
+	overflow: hidden;
+}
+
+.ie6 .ui-tabs {
 	height: 1%;
 }
 
