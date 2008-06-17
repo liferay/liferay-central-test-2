@@ -54,6 +54,10 @@ Liferay.Util = {
 				this.selectionStart = caretPos;
 				this.selectionEnd = caretPos;
 			}
+
+			if (Liferay.Browser.is_ie && (this != document.activeElement)) {
+				this.focus();
+			}
 		};
 
 		var blurEvent = function(event) {
