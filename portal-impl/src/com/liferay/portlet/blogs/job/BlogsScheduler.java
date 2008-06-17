@@ -41,8 +41,7 @@ public class BlogsScheduler implements Scheduler {
 	public void schedule() {
 		if (PropsValues.BLOGS_TRACKBACK_VERIFIER_JOB_INTERVAL <= 0) {
 			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Auto expire of banned message board users is disabled");
+				_log.debug("Verification of blogs trackbacks is disabled");
 			}
 
 			_trackbackVerifier = null;

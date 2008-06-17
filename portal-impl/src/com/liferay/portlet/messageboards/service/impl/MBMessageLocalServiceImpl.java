@@ -864,14 +864,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		return mbMessagePersistence.countByCompanyId(companyId);
 	}
 
-	public List<MBDiscussion> getDiscussions(String className)
-		throws PortalException, SystemException {
-
-		long classNameId = PortalUtil.getClassNameId(className);
-
-		return mbDiscussionPersistence.findByClassNameId(classNameId);
-	}
-
 	public MBMessageDisplay getDiscussionMessageDisplay(
 			long userId, String className, long classPK)
 		throws PortalException, SystemException {
@@ -930,6 +922,14 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		else {
 			return 0;
 		}
+	}
+
+	public List<MBDiscussion> getDiscussions(String className)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return mbDiscussionPersistence.findByClassNameId(classNameId);
 	}
 
 	public List<MBMessage> getGroupMessages(long groupId, int start, int end)

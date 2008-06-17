@@ -28,9 +28,6 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.blogs.util.TrackbackVerifierUtil;
 import com.liferay.util.Time;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="TrackbackVerifierJob.java.html"><b><i>View Source</i></b></a>
  *
@@ -40,18 +37,13 @@ import org.apache.commons.logging.LogFactory;
 public class TrackbackVerifierJob implements IntervalJob {
 
 	public TrackbackVerifierJob() {
-		try {
-			int rawInterval = PropsValues.BLOGS_TRACKBACK_VERIFIER_JOB_INTERVAL;
+		int rawInterval = PropsValues.BLOGS_TRACKBACK_VERIFIER_JOB_INTERVAL;
 
-			if (_log.isDebugEnabled()) {
-				_log.debug("Interval " + rawInterval + " minutes");
-			}
+		if (_log.isDebugEnabled()) {
+			_log.debug("Interval " + rawInterval + " minutes");
+		}
 
-			_interval = rawInterval * Time.MINUTE;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
+		_interval = rawInterval * Time.MINUTE;
 	}
 
 	public void execute(JobExecutionContext context) {
@@ -61,8 +53,6 @@ public class TrackbackVerifierJob implements IntervalJob {
 	public long getInterval() {
 		return _interval;
 	}
-
-	private static Log _log = LogFactory.getLog(TrackbackVerifierJob.class);
 
 	private long _interval;
 

@@ -93,19 +93,6 @@ public class MBDiscussionUtil {
 		return getPersistence().fetchByPrimaryKey(discussionId);
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBDiscussion findByC_C(
-		long classNameId, long classPK)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.messageboards.NoSuchDiscussionException {
-		return getPersistence().findByC_C(classNameId, classPK);
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBDiscussion fetchByC_C(
-		long classNameId, long classPK)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByC_C(classNameId, classPK);
-	}
-
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBDiscussion> findByClassNameId(
 		long classNameId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByClassNameId(classNameId);
@@ -147,6 +134,19 @@ public class MBDiscussionUtil {
 				   .findByClassNameId_PrevAndNext(discussionId, classNameId, obc);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBDiscussion findByC_C(
+		long classNameId, long classPK)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchDiscussionException {
+		return getPersistence().findByC_C(classNameId, classPK);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBDiscussion fetchByC_C(
+		long classNameId, long classPK)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByC_C(classNameId, classPK);
+	}
+
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBDiscussion> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -176,29 +176,29 @@ public class MBDiscussionUtil {
 		return getPersistence().findAll(start, end, obc);
 	}
 
+	public static void removeByClassNameId(long classNameId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByClassNameId(classNameId);
+	}
+
 	public static void removeByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchDiscussionException {
 		getPersistence().removeByC_C(classNameId, classPK);
 	}
 
-	public static void removeByClassNameId(long classNameId)
-		throws com.liferay.portal.SystemException {
-		getPersistence().removeByClassNameId(classNameId);
-	}
-
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
-	}
-
-	public static int countByC_C(long classNameId, long classPK)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().countByC_C(classNameId, classPK);
 	}
 
 	public static int countByClassNameId(long classNameId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByClassNameId(classNameId);
+	}
+
+	public static int countByC_C(long classNameId, long classPK)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByC_C(classNameId, classPK);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

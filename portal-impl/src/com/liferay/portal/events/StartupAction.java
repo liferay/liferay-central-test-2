@@ -244,7 +244,7 @@ public class StartupAction extends SimpleAction {
 
 		MessageBusUtil.init(messageBus, messageSender);
 
-		// Search engines
+		// Search
 
 		LuceneSearchEngineUtil.init();
 

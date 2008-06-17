@@ -60,18 +60,18 @@ public class VerifyBlogsTrackbacks extends VerifyProcess {
 	}
 
 	protected void verifyBlogsTrackbacks() throws Exception {
-		String className = BlogsEntry.class.getName();
-
 		List<MBDiscussion> discussions =
-			MBMessageLocalServiceUtil.getDiscussions(className);
+			MBMessageLocalServiceUtil.getDiscussions(
+				BlogsEntry.class.getName());
 
 		for (MBDiscussion discussion : discussions) {
 			long entryId = discussion.getClassPK();
 			long threadId = discussion.getThreadId();
 
 			try {
-				BlogsEntry entry =
-					BlogsEntryLocalServiceUtil.getBlogsEntry(entryId);
+				BlogsEntry entry = BlogsEntryLocalServiceUtil.getBlogsEntry(
+					entryId);
+
 				List<MBMessage> messages =
 					MBMessageLocalServiceUtil.getThreadMessages(threadId);
 

@@ -71,7 +71,7 @@ public class TrackbackVerifierUtil {
 		throws Exception {
 
 		long messageId = message.getMessageId();
-		String trackbackUrl = "/-/blogs/trackback/" + entry.getUrlTitle();
+		String trackbackURL = "/-/blogs/trackback/" + entry.getUrlTitle();
 		String body = message.getBody();
 		String url = null;
 
@@ -88,24 +88,24 @@ public class TrackbackVerifierUtil {
 		}
 
 		if (Validator.isNotNull(url)) {
-			long userId = message.getUserId();
 			long companyId = message.getCompanyId();
-			long defaultUserId =
-				UserLocalServiceUtil.getDefaultUserId(companyId);
+			long userId = message.getUserId();
+			long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
+				companyId);
 
 			if (userId == defaultUserId) {
-				verifyPost(messageId, url, trackbackUrl);
+				_verifyPost(messageId, url, trackbackURL);
 			}
 		}
 	}
 
-	private static void verifyPost(
-			long messageId, String url, String trackbackUrl) {
+	private static void _verifyPost(
+		long messageId, String url, String trackbackURL) {
 
 		try {
 			String result = HttpUtil.URLtoString(url);
 
-			if (result.contains(trackbackUrl)) {
+			if (result.contains(trackbackURL)) {
 				return;
 			}
 		}
@@ -122,9 +122,9 @@ public class TrackbackVerifierUtil {
 		}
 	}
 
+	private static Log _log = LogFactory.getLog(TrackbackVerifierUtil.class);
+
 	private static List<Tuple> _trackbacks =
 		Collections.synchronizedList(new ArrayList<Tuple>());
-
-	private static Log _log = LogFactory.getLog(TrackbackVerifierUtil.class);
 
 }
