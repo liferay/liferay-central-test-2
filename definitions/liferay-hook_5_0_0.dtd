@@ -6,7 +6,7 @@ This is the DTD for the Hook parameters for Liferay Portal.
 	"http://www.liferay.com/dtd/liferay-hook_5_0_0.dtd">
 -->
 
-<!ELEMENT hook (event*, model-listener*, portal-properties-file?)>
+<!ELEMENT hook (event*, model-listener*, portal-properties?)>
 
 <!ELEMENT event (event-class, event-type)>
 
@@ -20,4 +20,4 @@ This is the DTD for the Hook parameters for Liferay Portal.
 
 <!ELEMENT model-name (#PCDATA)>
 
-<!ELEMENT portal-properties-file (#PCDATA)>
+<!ELEMENT portal-properties (#PCDATA)>

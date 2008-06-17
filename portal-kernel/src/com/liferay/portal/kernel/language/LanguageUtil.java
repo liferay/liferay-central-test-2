@@ -120,6 +120,10 @@ public class LanguageUtil {
 			pageContext, pattern, arguments, translateArguments);
 	}
 
+	public static void init() {
+		getLanguage().init();
+	}
+
 	public static String get(Locale locale, String key) {
 		return getLanguage().get(locale, key);
 	}

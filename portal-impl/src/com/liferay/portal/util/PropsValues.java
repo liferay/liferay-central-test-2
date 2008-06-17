@@ -440,7 +440,7 @@ public class PropsValues {
 	public static final String[] JAVASCRIPT_EVERYTHING_FILES =
 		PropsUtil.getArray(PropsUtil.JAVASCRIPT_EVERYTHING_FILES);
 
-	public static final boolean JAVASCRIPT_FAST_LOAD = GetterUtil.getBoolean(
+	public static boolean JAVASCRIPT_FAST_LOAD = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.JAVASCRIPT_FAST_LOAD));
 
 	public static final boolean JAVASCRIPT_LOG_ENABLED = GetterUtil.getBoolean(
@@ -542,7 +542,7 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.LAYOUT_USER_PRIVATE_LAYOUTS_AUTO_CREATE));
 
-	public static final boolean LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED =
+	public static boolean LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED));
 
@@ -554,7 +554,7 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.LAYOUT_USER_PUBLIC_LAYOUTS_AUTO_CREATE));
 
-	public static final boolean LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED =
+	public static boolean LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED));
 
@@ -587,8 +587,7 @@ public class PropsValues {
 	public static final boolean LOCALE_DEFAULT_REQUEST = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.LOCALE_DEFAULT_REQUEST));
 
-	public static final String[] LOCALES =
-		PropsUtil.getArray(PropsUtil.LOCALES);
+	public static String[] LOCALES = PropsUtil.getArray(PropsUtil.LOCALES);
 
 	public static final String[] LOGIN_EVENTS_POST =
 		PropsUtil.getArray(PropsUtil.LOGIN_EVENTS_POST);
@@ -754,7 +753,7 @@ public class PropsValues {
 	public static final int OPENOFFICE_SERVER_PORT = GetterUtil.getInteger(
 		PropsUtil.get(PropsUtil.OPENOFFICE_SERVER_PORT));
 
-	public static final boolean ORGANIZATIONS_COUNTRY_REQUIRED =
+	public static boolean ORGANIZATIONS_COUNTRY_REQUIRED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.ORGANIZATIONS_COUNTRY_REQUIRED));
 
@@ -763,6 +762,12 @@ public class PropsValues {
 
 	public static final String PASSWORDS_DIGEST_ENCODING =
 		PropsUtil.get(PropsUtil.PASSWORDS_DIGEST_ENCODING);
+
+	public static String PASSWORDS_PASSWORDPOLICYTOOLKIT_GENERATOR =
+		PropsUtil.get(PropsUtil.PASSWORDS_PASSWORDPOLICYTOOLKIT_GENERATOR);
+
+	public static String PASSWORDS_PASSWORDPOLICYTOOLKIT_STATIC =
+		PropsUtil.get(PropsUtil.PASSWORDS_PASSWORDPOLICYTOOLKIT_STATIC);
 
 	public static final String PERMISSIONS_CHECKER =
 		PropsUtil.get(PropsUtil.PERMISSIONS_CHECKER);
@@ -917,7 +922,7 @@ public class PropsValues {
 	public static final boolean TERMS_OF_USE_REQUIRED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.TERMS_OF_USE_REQUIRED));
 
-	public static final boolean THEME_CSS_FAST_LOAD = GetterUtil.getBoolean(
+	public static boolean THEME_CSS_FAST_LOAD = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.THEME_CSS_FAST_LOAD));
 
 	public static final boolean THEME_LOADER_NEW_THEME_ID_ON_IMPORT =

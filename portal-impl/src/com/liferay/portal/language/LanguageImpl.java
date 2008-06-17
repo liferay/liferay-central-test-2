@@ -248,6 +248,10 @@ public class LanguageImpl implements Language {
 		return value;
 	}
 
+	public void init() {
+		_instances.clear();
+	}
+
 	public String get(Locale locale, String key) {
 		long companyId = CompanyThreadLocal.getCompanyId();
 
@@ -459,10 +463,10 @@ public class LanguageImpl implements Language {
 		for (int i = 0; i < localesArray.length; i++) {
 			String languageId = localesArray[i];
 
-			int x = languageId.indexOf(StringPool.UNDERLINE);
+			int pos = languageId.indexOf(StringPool.UNDERLINE);
 
-			String language = languageId.substring(0, x);
-			//String country = languageId.substring(x + 1, languageId.length());
+			String language = languageId.substring(0, pos);
+			//String country = languageId.substring(pos + 1);
 
 			Locale locale = LocaleUtil.fromLanguageId(languageId);
 

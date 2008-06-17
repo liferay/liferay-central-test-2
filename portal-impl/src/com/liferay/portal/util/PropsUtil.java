@@ -22,12 +22,20 @@
 
 package com.liferay.portal.util;
 
-import java.util.Properties;
-
 import com.germinus.easyconf.ComponentProperties;
+
+import com.liferay.portal.kernel.util.OrderedProperties;
+import com.liferay.portal.kernel.util.PropertiesUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.util.ExtPropertiesLoader;
+
+import java.util.Enumeration;
+import java.util.Properties;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PropsUtil.java.html"><b><i>View Source</i></b></a>
@@ -1367,24 +1375,42 @@ public class PropsUtil {
 		return _getInstance(companyId).get(key);
 	}
 
-	public static void set(String key, String value) {
-		_getInstance().set(key, value);
-	}
-
-	public static void set(long companyId, String key, String value) {
-		_getInstance(companyId).set(key, value);
-	}
-
 	public static String[] getArray(String key) {
 		return _getInstance().getArray(key);
+	}
+
+	public static ComponentProperties getComponentProperties() {
+		return _getInstance().getComponentProperties();
 	}
 
 	public static Properties getProperties() {
 		return _getInstance().getProperties();
 	}
 
-	public static ComponentProperties getComponentProperties() {
-		return _getInstance().getComponentProperties();
+	public static Enumeration<String> getOrderedPropertyNames() {
+		if (_orderedProperties == null) {
+			_orderedProperties = new OrderedProperties();
+
+			try {
+				PropertiesUtil.load(
+					_orderedProperties,
+					StringUtil.read(
+						PropsUtil.class.getClassLoader(), "portal.properties"));
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
+
+		return _orderedProperties.propertyNames();
+	}
+
+	public static void set(String key, String value) {
+		_getInstance().set(key, value);
+	}
+
+	public static void set(long companyId, String key, String value) {
+		_getInstance(companyId).set(key, value);
 	}
 
 	private static ExtPropertiesLoader _getInstance() {
@@ -1395,12 +1421,16 @@ public class PropsUtil {
 
 	private static ExtPropertiesLoader _getInstance(long companyId) {
 		if (companyId > CompanyConstants.SYSTEM) {
-			return ExtPropertiesLoader
-					.getInstance(PropsFiles.PORTAL, companyId);
+			return ExtPropertiesLoader.getInstance(
+				PropsFiles.PORTAL, companyId);
 		}
 		else {
 			return ExtPropertiesLoader.getInstance(PropsFiles.PORTAL);
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(PropsUtil.class);
+
+	private static OrderedProperties _orderedProperties;
 
 }

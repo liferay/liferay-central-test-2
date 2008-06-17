@@ -25,12 +25,11 @@ package com.liferay.portal.security.pwd;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.UserPasswordException;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.PasswordTrackerLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.words.util.WordsUtil;
 import com.liferay.util.PwdGenerator;
 
@@ -45,14 +44,10 @@ import java.util.Date;
 public class PasswordPolicyToolkit extends BasicToolkit {
 
 	public String generate() {
-		String generator = GetterUtil.getString(PropsUtil.get(
-			PropsUtil.PASSWORDS_PASSWORDPOLICYTOOLKIT_GENERATOR));
+		if (PropsValues.PASSWORDS_PASSWORDPOLICYTOOLKIT_GENERATOR.equals(
+				"static")) {
 
-		if (generator.equals("static")) {
-			String password = GetterUtil.getString(PropsUtil.get(
-				PropsUtil.PASSWORDS_PASSWORDPOLICYTOOLKIT_STATIC));
-
-			return password;
+			return PropsValues.PASSWORDS_PASSWORDPOLICYTOOLKIT_STATIC;
 		}
 		else {
 			return PwdGenerator.getPassword();

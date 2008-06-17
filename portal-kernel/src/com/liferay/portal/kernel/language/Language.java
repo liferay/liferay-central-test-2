@@ -76,6 +76,8 @@ public interface Language {
 		PageContext pageContext, String pattern, LanguageWrapper[] arguments,
 		boolean translateArguments);
 
+	public void init();
+
 	public String get(Locale locale, String key);
 
 	public String get(long companyId, Locale locale, String key);
