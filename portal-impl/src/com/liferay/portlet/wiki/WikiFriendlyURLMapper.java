@@ -76,7 +76,7 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 				if (Validator.isNotNull(title)) {
 					sm.append(StringPool.SLASH);
-					sm.append(HttpUtil.encodeURL(title, false));
+					sm.append(HttpUtil.encodeURL(title));
 
 					portletURL.addParameterIncludedInPath("title");
 
