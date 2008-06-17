@@ -232,7 +232,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 		<%@ include file="/html/portlet/communities/export_pages_options.jspf" %>
 	</liferay-ui:section>
 	<liferay-ui:section>
-		<%@ include file="/html/portlet/communities/scheduler.jspf" %>
+		<%@ include file="/html/portlet/communities/export_pages_scheduler.jspf" %>
 	</liferay-ui:section>
 </liferay-ui:tabs>
 
