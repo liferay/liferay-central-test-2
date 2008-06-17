@@ -201,6 +201,32 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 >
 	<liferay-ui:section>
 		<%@ include file="/html/portlet/communities/export_pages_select_pages.jspf" %>
+
+		<br />
+
+		<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="selectURL">
+			<portlet:param name="struts_action" value="/communities/export_pages" />
+			<portlet:param name="tabs1" value="<%= tabs1 %>" />
+			<portlet:param name="pagesRedirect" value="<%= pagesRedirect %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(selGroupId) %>" />
+		</portlet:renderURL>
+
+		<c:choose>
+			<c:when test="<%= !publish %>">
+				<input <%= (results.size() == 0)? "style=\"display: none;\"" :"" %> id="selectBtn" type="button" value="<liferay-ui:message key="select" />" onClick="Liferay.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=true');" />
+
+				<input <%= (results.size() > 0)? "style=\"display: none;\"" :"" %> id="publishBtn" type="button" value="<liferay-ui:message key='<%= selGroup.isStagingGroup() ? "publish" : "copy" %>' />" onClick='if (confirm("<liferay-ui:message key='<%= "are-you-sure-you-want-to-" + (selGroup.isStagingGroup() ? "publish" : "copy") + "-these-pages" %>' />")) { submitForm(document.<portlet:namespace />exportPagesFm); }' />
+			</c:when>
+			<c:otherwise>
+				<c:if test="<%= selPlid <= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>">
+					<input id="changeBtn" type="button" value="<liferay-ui:message key="change-selection" />" onClick="Liferay.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=false');" />
+				</c:if>
+
+				<input id="publishBtn" type="button" value="<liferay-ui:message key='<%= selGroup.isStagingGroup() ? "publish" : "copy" %>' />" onClick='if (confirm("<liferay-ui:message key='<%= "are-you-sure-you-want-to-" + (selGroup.isStagingGroup() ? "publish" : "copy") + "-these-pages" %>' />")) { submitForm(document.<portlet:namespace />exportPagesFm); }' />
+			</c:otherwise>
+		</c:choose>
+
+		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="Liferay.Popup.close(this);" />
 	</liferay-ui:section>
 	<liferay-ui:section>
 		<%@ include file="/html/portlet/communities/export_pages_options.jspf" %>
@@ -209,31 +235,5 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 		<%@ include file="/html/portlet/communities/scheduler.jspf" %>
 	</liferay-ui:section>
 </liferay-ui:tabs>
-
-<br />
-
-<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="selectURL">
-	<portlet:param name="struts_action" value="/communities/export_pages" />
-	<portlet:param name="tabs1" value="<%= tabs1 %>" />
-	<portlet:param name="pagesRedirect" value="<%= pagesRedirect %>" />
-	<portlet:param name="groupId" value="<%= String.valueOf(selGroupId) %>" />
-</portlet:renderURL>
-
-<c:choose>
-	<c:when test="<%= !publish %>">
-		<input <%= (results.size() == 0)? "style=\"display: none;\"" :"" %> id="selectBtn" type="button" value="<liferay-ui:message key="select" />" onClick="Liferay.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=true');" />
-
-		<input <%= (results.size() > 0)? "style=\"display: none;\"" :"" %> id="publishBtn" type="button" value="<liferay-ui:message key='<%= selGroup.isStagingGroup() ? "publish" : "copy" %>' />" onClick='if (confirm("<liferay-ui:message key='<%= "are-you-sure-you-want-to-" + (selGroup.isStagingGroup() ? "publish" : "copy") + "-these-pages" %>' />")) { submitForm(document.<portlet:namespace />exportPagesFm); }' />
-	</c:when>
-	<c:otherwise>
-		<c:if test="<%= selPlid <= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>">
-			<input id="changeBtn" type="button" value="<liferay-ui:message key="change-selection" />" onClick="Liferay.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=false');" />
-		</c:if>
-
-		<input id="publishBtn" type="button" value="<liferay-ui:message key='<%= selGroup.isStagingGroup() ? "publish" : "copy" %>' />" onClick='if (confirm("<liferay-ui:message key='<%= "are-you-sure-you-want-to-" + (selGroup.isStagingGroup() ? "publish" : "copy") + "-these-pages" %>' />")) { submitForm(document.<portlet:namespace />exportPagesFm); }' />
-	</c:otherwise>
-</c:choose>
-
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="Liferay.Popup.close(this);" />
 
 </form>

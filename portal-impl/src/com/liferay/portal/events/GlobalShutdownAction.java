@@ -115,7 +115,11 @@ public class GlobalShutdownAction extends SimpleAction {
 
 		try {
 			JobSchedulerUtil.shutdown();
+		}
+		catch (Exception e) {
+		}
 
+		try {
 			SchedulerEngineUtil.shutdown();
 		}
 		catch (Exception e) {

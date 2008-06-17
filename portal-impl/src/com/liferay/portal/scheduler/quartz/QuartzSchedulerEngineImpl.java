@@ -121,9 +121,9 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			String description, String destination, String messageBody)
 		throws SchedulerException {
 
-		String jobName = PortalUUIDUtil.generate();
-
 		try {
+			String jobName = PortalUUIDUtil.generate();
+
 			CronTrigger cronTrigger = new CronTrigger(
 				jobName, groupName, cronText);
 

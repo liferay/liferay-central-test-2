@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
-import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
@@ -43,14 +42,10 @@ import com.liferay.util.JSONUtil;
 import java.io.File;
 import java.io.InputStream;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 /**
  * <a href="LayoutServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -130,38 +125,6 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 		return layoutLocalService.getLayouts(
 			companyId, portletId, prefsKey, prefsValue);
-	}
-
-	public String getScheduledPublishToLiveJSON(long liveGroupId)
-		throws PortalException, SystemException {
-
-		GroupPermissionUtil.check(
-			getPermissionChecker(), liveGroupId, ActionKeys.MANAGE_LAYOUTS);
-
-		try {
-			JSONArray jsonArray = new JSONArray();
-
-			Collection<SchedulerRequest> schedulerRequests =
-				SchedulerEngineUtil.getScheduledJobs(
-					getSchedulerGroupName(liveGroupId));
-
-			for (SchedulerRequest schedulerRequest : schedulerRequests) {
-				JSONObject jsonObject = new JSONObject();
-
-				JSONUtil.put(
-					jsonObject, "description",
-					schedulerRequest.getDescription());
-				JSONUtil.put(
-					jsonObject, "jobName", schedulerRequest.getJobName());
-
-				jsonArray.put(jsonObject);
-			}
-
-			return jsonArray.toString();
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
 	}
 
 	public byte[] exportLayouts(

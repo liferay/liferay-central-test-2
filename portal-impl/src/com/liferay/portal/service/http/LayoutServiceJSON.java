@@ -117,15 +117,6 @@ public class LayoutServiceJSON {
 		return returnValue;
 	}
 
-	public static java.lang.String getScheduledPublishToLiveJSON(
-		long liveGroupId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		java.lang.String returnValue = LayoutServiceUtil.getScheduledPublishToLiveJSON(liveGroupId);
-
-		return returnValue;
-	}
-
 	public static void setLayouts(long groupId, boolean privateLayout,
 		long parentLayoutId, long[] layoutIds)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,

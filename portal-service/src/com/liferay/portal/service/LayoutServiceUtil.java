@@ -115,15 +115,6 @@ public class LayoutServiceUtil {
 			prefsKey, prefsValue);
 	}
 
-	public static java.lang.String getScheduledPublishToLiveJSON(
-		long liveGroupId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		LayoutService layoutService = LayoutServiceFactory.getService();
-
-		return layoutService.getScheduledPublishToLiveJSON(liveGroupId);
-	}
-
 	public static byte[] exportLayouts(long groupId, boolean privateLayout,
 		java.util.Map<String, String[]> parameterMap, java.util.Date startDate,
 		java.util.Date endDate)

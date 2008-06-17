@@ -23,11 +23,11 @@
 %>
 
 <%
-PortletURL getScheduledPublishToLiveURL = renderResponse.createActionURL();
-getScheduledPublishToLiveURL.setParameter("struts_action", "/communities/edit_pages");
-getScheduledPublishToLiveURL.setParameter("cmd", "get_scheduled_publish_to_live");
-getScheduledPublishToLiveURL.setParameter("groupId", String.valueOf(liveGroupId));
-getScheduledPublishToLiveURL.setParameter("privateLayout", String.valueOf(privateLayout));
+ResourceURL scheduledPublishToLiveEventsURL = renderResponse.createResourceURL();
+
+scheduledPublishToLiveEventsURL.setParameter("struts_action", "/communities/edit_pages");
+scheduledPublishToLiveEventsURL.setParameter("groupId", String.valueOf(liveGroupId));
+scheduledPublishToLiveEventsURL.setParameter("privateLayout", String.valueOf(privateLayout));
 %>
 
 <script type="text/javascript">
@@ -35,13 +35,16 @@ getScheduledPublishToLiveURL.setParameter("privateLayout", String.valueOf(privat
 		document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = "schedule_publish_to_live";
 
 		var addButton = jQuery('#<portlet:namespace />addButton');
+
 		addButton.attr("disabled", true);
 
-		jQuery(document.<portlet:namespace />exportPagesFm).ajaxSubmit({
-			success: function() {
-				<portlet:namespace />updateScheduledPublishToLiveDiv();
+		jQuery(document.<portlet:namespace />exportPagesFm).ajaxSubmit(
+			{
+				success: function() {
+					<portlet:namespace />updateScheduledPublishToLiveDiv();
+				}
 			}
-		});
+		);
 	}
 
 	function <portlet:namespace />showTable(id) {
@@ -58,61 +61,43 @@ getScheduledPublishToLiveURL.setParameter("privateLayout", String.valueOf(privat
 		document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = "unschedule_publish_to_live";
 		document.<portlet:namespace />exportPagesFm.<portlet:namespace />jobName.value = jobName;
 
-		jQuery(document.<portlet:namespace />exportPagesFm).ajaxSubmit({
-			success: function() {
-				<portlet:namespace />updateScheduledPublishToLiveDiv();
+		jQuery(document.<portlet:namespace />exportPagesFm).ajaxSubmit(
+			{
+				success: function() {
+					<portlet:namespace />updateScheduledPublishToLiveDiv();
+				}
 			}
-		});
+		);
 	}
 
 	function <portlet:namespace />updateScheduledPublishToLiveDiv() {
 		jQuery.ajax(
 			{
-				url: '<%= getScheduledPublishToLiveURL %>',
+				url: '<%= scheduledPublishToLiveEventsURL %>',
 				dataType: 'json',
-				success: function(message) {
-					var html = '<div class=\"results-grid\">';
-					html += '<table class=\"taglib-search-iterator\">';
-					html += '<tbody>';
-					html += '<tr class=\"portlet-section-header results-header\">';
-					html += '<th class=\"col-1\"><liferay-ui:message key="description" /></th>';
-					html += '<th class=\"col-2\" />';
-					html += '</tr>';
+				success: function(html) {
+					var scheduledPublishToLiveDiv = jQuery('#<portlet:namespace />scheduledPublishToLiveDiv');
 
-					if (message.length == 0) {
-						html += '<tr class=\"portlet-section-body results-row\"><td align=\"center\" colspan=\"2\"> <liferay-ui:message key="there-are-no-scheduled-publish-to-live-events" /> </td></tr>'
-					}
-
-					for (var i = 0; i < message.length; i++) {
-						var style = "class=\"portlet-section-alternate results-row alt\" onmouseover=\"this.className = \'portlet-section-alternate-hover results-row alt hover\';\" onmouseout=\"this.className = \'portlet-section-alternate results-row alt\';\"";
-
-						if (i % 2 == 0) {
-							style = "class=\"portlet-section-body results-row\" onmouseover=\"this.className = \'portlet-section-body-hover results-row hover\';\" onmouseout=\"this.className = \'portlet-section-body results-row\';\"";
-						}
-
-						html += '<tr ' + style + '>';
-						html += '<td align=\"left\" class=\"col-1\" valign=\"middle\">' + message[i].description + '</td>';
-						html += '<td align=\"left\" class=\"col-2\" valign=\"middle\"><a href=\"javascript: <portlet:namespace />unschedulePublishToLive(\'' +  message[i].jobName + '\');\"><liferay-ui:message key="delete" /></a></td>';
-						html += '</tr>';
-					}
-
-					html += '</tbody>';
-					html += '</table>';
-					html += '</div>';
-
-					jQuery('#<portlet:namespace />scheduledPublishToLiveDiv').empty();
-					jQuery('#<portlet:namespace />scheduledPublishToLiveDiv').append(html);
+					scheduledPublishToLiveDiv.empty();
+					scheduledPublishToLiveDiv.append(html);
 
 					var addButton = jQuery('#<portlet:namespace />addButton');
-	   				addButton.attr("disabled", false);
+
+					addButton.attr("disabled", false);
 				}
 			}
 		);
 	}
+
+	jQuery(
+		function() {
+			<portlet:namespace />updateScheduledPublishToLiveDiv();
+		}
+	);
 </script>
 
 <fieldset>
-	<legend><liferay-ui:message key="schedule-publish-to-live-event" /></legend>
+	<legend><liferay-ui:message key="schedule-event" /></legend>
 
 	<table class="lfr-table">
 	<tr>
@@ -135,12 +120,7 @@ getScheduledPublishToLiveURL.setParameter("privateLayout", String.valueOf(privat
 		<td>
 
 			<%
-				Calendar cal = CalendarFactoryUtil.getCalendar(timeZone, locale);
-
-				int[] monthIds = CalendarUtil.getMonthIds();
-				String[] months = CalendarUtil.getMonths(locale);
-
-				String[] days = CalendarUtil.getDays(locale);
+			Calendar cal = CalendarFactoryUtil.getCalendar(timeZone, locale);
 			%>
 
 			<liferay-ui:input-date
@@ -259,6 +239,10 @@ getScheduledPublishToLiveURL.setParameter("privateLayout", String.valueOf(privat
 					<td>
 						<liferay-ui:message key="recur-every" /> <input maxlength="2" name="<portlet:namespace />weeklyInterval" size="2" type="text" /> <liferay-ui:message key="weeks-on" />
 
+						<%
+						String[] days = CalendarUtil.getDays(locale);
+						%>
+
 						<table class="lfr-table">
 						<tr>
 							<td nowrap>
@@ -334,10 +318,13 @@ getScheduledPublishToLiveURL.setParameter("privateLayout", String.valueOf(privat
 						<select name="<portlet:namespace />yearlyMonth0">
 
 						<%
+						int[] monthIds = CalendarUtil.getMonthIds();
+						String[] months = CalendarUtil.getMonths(locale);
+
 						for (int i = 0; i < 12; i++) {
 						%>
 
-								<option value="<%= monthIds[i] %>"><%= months[i] %></option>
+							<option value="<%= monthIds[i] %>"><%= months[i] %></option>
 
 						<%
 						}
@@ -375,7 +362,7 @@ getScheduledPublishToLiveURL.setParameter("privateLayout", String.valueOf(privat
 							for (int i = 0; i < 12; i++) {
 							%>
 
-									<option value="<%= monthIds[i] %>"><%= months[i] %></option>
+								<option value="<%= monthIds[i] %>"><%= months[i] %></option>
 
 							<%
 							}
@@ -391,21 +378,18 @@ getScheduledPublishToLiveURL.setParameter("privateLayout", String.valueOf(privat
 		</td>
 	</tr>
 	</table>
-
-	<br />
-
-	<input id="<portlet:namespace />addButton" type="button" value="<liferay-ui:message key="add" />" onClick="<portlet:namespace />schedulePublishToLive();" />
 </fieldset>
 
+<br />
+
+<input id="<portlet:namespace />addButton" type="button" value="<liferay-ui:message key="add-event" />" onClick="<portlet:namespace />schedulePublishToLive();" />
+
+<br /><br />
+
 <fieldset>
-	<legend><liferay-ui:message key="scheduled-publish-to-live-events" /></legend>
+	<legend><liferay-ui:message key="scheduled-events" /></legend>
 
 	<input name="<portlet:namespace />jobName" type="hidden" />
 
-	<div id="<portlet:namespace />scheduledPublishToLiveDiv">
-	</div>
+	<div id="<portlet:namespace />scheduledPublishToLiveDiv"></div>
 </fieldset>
-
-<script type="text/javascript">
-	<portlet:namespace />updateScheduledPublishToLiveDiv();
-</script>

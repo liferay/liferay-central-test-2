@@ -46,8 +46,6 @@ import org.json.JSONObject;
 public class SchedulerEngineImpl implements SchedulerEngine {
 
 	public SchedulerEngineImpl() {
-		// Layouts publisher
-
 		Destination destination = new SerialDestination(
 			DestinationNames.LAYOUTS_PUBLISHER);
 
@@ -102,7 +100,7 @@ public class SchedulerEngineImpl implements SchedulerEngine {
 	}
 
 	public void unschedule(String jobName, String groupName)
-			throws SchedulerException {
+		throws SchedulerException {
 
 		SchedulerRequest schedulerRequest = new SchedulerRequest(
 			SchedulerRequest.COMMAND_UNREGISTER, jobName, groupName);

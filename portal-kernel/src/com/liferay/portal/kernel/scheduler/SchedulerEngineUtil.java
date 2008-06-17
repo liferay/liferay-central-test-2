@@ -69,11 +69,11 @@ public class SchedulerEngineUtil {
 	private Collection<SchedulerRequest> _getScheduledJobs(String groupName)
 		throws SchedulerException {
 
-		return _messageBusScheduler.getScheduledJobs(groupName);
+		return _schedulerEngine.getScheduledJobs(groupName);
 	}
 
-	private void _init(SchedulerEngine messageBusScheduler) {
-		_messageBusScheduler = messageBusScheduler;
+	private void _init(SchedulerEngine schedulerEngine) {
+		_schedulerEngine = schedulerEngine;
 	}
 
 	private void _schedule(
@@ -81,23 +81,23 @@ public class SchedulerEngineUtil {
 			String description, String destinationName, String messageBody)
 		throws SchedulerException {
 
-		_messageBusScheduler.schedule(
+		_schedulerEngine.schedule(
 			groupName, cronText, startDate, endDate, description,
 			destinationName, messageBody);
 	}
 
 	private void _shutdown() throws SchedulerException {
-		_messageBusScheduler.shutdown();
+		_schedulerEngine.shutdown();
 	}
 
 	private void _unschedule(String jobName, String groupName)
 		throws SchedulerException {
 
-		_messageBusScheduler.unschedule(jobName, groupName);
+		_schedulerEngine.unschedule(jobName, groupName);
 	}
 
 	private static SchedulerEngineUtil _instance = new SchedulerEngineUtil();
 
-	private SchedulerEngine _messageBusScheduler;
+	private SchedulerEngine _schedulerEngine;
 
 }

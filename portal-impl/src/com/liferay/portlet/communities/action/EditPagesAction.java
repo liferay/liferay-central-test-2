@@ -38,7 +38,6 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -67,7 +66,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
-import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -79,12 +77,9 @@ import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.communities.util.CommunitiesUtil;
 import com.liferay.portlet.communities.util.StagingUtil;
 import com.liferay.portlet.tasks.NoSuchProposalException;
-import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.servlet.UploadException;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.InputStream;
 
 import java.util.HashMap;
 import java.util.List;
@@ -97,8 +92,11 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -173,27 +171,9 @@ public class EditPagesAction extends PortletAction {
 				updateWorkflow(req);
 			}
 
-			if (cmd.equals("get_scheduled_publish_to_live")) {
-				HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(
-					res);
+			String redirect = ParamUtil.getString(req, "pagesRedirect");
 
-				long liveGroupId = ParamUtil.getLong(req, "groupId");
-				String json =
-					LayoutServiceUtil.getScheduledPublishToLiveJSON(
-						liveGroupId);
-
-				InputStream is = new ByteArrayInputStream(json.getBytes());
-				String contentType = ContentTypes.TEXT_JAVASCRIPT;
-
-				ServletResponseUtil.sendFile(httpRes, null, is, contentType);
-
-				setForward(req, ActionConstants.COMMON_NULL);
-			}
-			else {
-				String redirect = ParamUtil.getString(req, "pagesRedirect");
-
-				sendRedirect(req, res, redirect);
-			}
+			sendRedirect(req, res, redirect);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchLayoutException ||
@@ -259,6 +239,20 @@ public class EditPagesAction extends PortletAction {
 
 		return mapping.findForward(
 			getForward(req, "portlet.communities.edit_pages"));
+	}
+
+	public void serveResource(
+			ActionMapping mapping, ActionForm form, PortletConfig config,
+			ResourceRequest req, ResourceResponse res)
+		throws Exception {
+
+		String path =
+			"/html/portlet/communities/scheduled_publish_to_live_events.jsp";
+
+		PortletRequestDispatcher prd =
+			config.getPortletContext().getRequestDispatcher(path);
+
+		prd.include(req, res);
 	}
 
 	protected void checkPermissions(PortletRequest req) throws Exception {

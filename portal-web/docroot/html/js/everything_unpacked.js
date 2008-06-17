@@ -18149,7 +18149,7 @@ var LayoutConfiguration = {
 			jQuery.each(
 				headerPortalCssPaths,
 				function(i, n) {
-					head.append('<link href="' + this + '" rel="stylesheet" type="text/css" />');
+					head.prepend('<link href="' + this + '" rel="stylesheet" type="text/css" />');
 				}
 			);
 		}
@@ -18160,7 +18160,15 @@ var LayoutConfiguration = {
 			jQuery.each(
 				headerPortletCssPaths,
 				function(i, n) {
-					head.append('<link href="' + this + '" rel="stylesheet" type="text/css" />');
+					head.prepend('<link href="' + this + '" rel="stylesheet" type="text/css" />');
+				}
+			);
+		}
+
+		if (Liferay.Browser.is_ie) {
+			jQuery('link.lfr-css-file').each(
+				function(i) {
+					document.createStyleSheet(this.href);
 				}
 			);
 		}

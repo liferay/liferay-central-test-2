@@ -226,7 +226,7 @@ public class GlobalStartupAction extends SimpleAction {
 			POPServerUtil.start();
 		}
 
-		// Scheduler engines
+		// Scheduler
 
 		try {
 			QuartzSchedulerEngineUtil.init();
@@ -237,12 +237,11 @@ public class GlobalStartupAction extends SimpleAction {
 
 		SchedulerEngineUtil.init(new SchedulerEngineImpl());
 
-		// Search engines
+		// Search
 
 		LuceneSearchEngineUtil.init();
 
 		SearchEngineUtil.init(new IndexSearcherImpl(), new IndexWriterImpl());
-
 	}
 
 	private static Log _log = LogFactory.getLog(GlobalStartupAction.class);
