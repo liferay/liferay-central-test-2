@@ -321,6 +321,15 @@ public class MediaWikiToCreoleTranslatorTest extends TestCase {
 		assertEquals(expected, actual);
 	}
 
+	public void testUserReference() throws Exception {
+		String content = "--[[User:User name]]";
+
+		String expected = "User name";
+		String actual = _translate(content);
+
+		assertEquals(expected, actual);
+	}
+
 	public void testNowikiWithFormat() throws Exception {
 		String content =
 			"previous line\n<nowiki>\nmonospace\n''second'' " +

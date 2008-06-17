@@ -123,6 +123,10 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 		// Pre
 
 		regexps.put("<pre>([^<]*)</pre>", "{{{$1}}}");
+
+		// User reference
+
+		regexps.put("[-]*\\[{2}User:([^\\]]*)\\]{2}", "$1");
 	}
 
 	protected String postProcess(String content) {
