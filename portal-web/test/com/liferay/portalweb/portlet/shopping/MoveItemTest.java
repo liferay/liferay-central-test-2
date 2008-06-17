@@ -39,7 +39,7 @@ public class MoveItemTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form/table/tbody/tr[2]/td[1]/a")) {
+							"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form/div[3]/table/tbody/tr[2]/td[1]/a")) {
 					break;
 				}
 			}
@@ -50,7 +50,7 @@ public class MoveItemTest extends BaseTestCase {
 		}
 
 		selenium.click(
-			"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form/table/tbody/tr[2]/td[1]/a");
+			"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form/div[3]/table/tbody/tr[2]/td[1]/a");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -77,7 +77,7 @@ public class MoveItemTest extends BaseTestCase {
 		selenium.click("link=Categories");
 		selenium.waitForPageToLoad("30000");
 		selenium.click(
-			"//div[@id=\"p_p_id_34_\"]/div/form/table/tbody/tr[3]/td[4]/input");
+			"//div[@id=\"p_p_id_34_\"]/div/form/div[2]/table/tbody/tr[3]/td[4]/input");
 		selenium.selectWindow("null");
 
 		for (int second = 0;; second++) {
@@ -143,7 +143,7 @@ public class MoveItemTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form/table/tbody/tr[3]/td[1]/a")) {
+							"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form/div[3]/table/tbody/tr[3]/td[1]/a")) {
 					break;
 				}
 			}
@@ -154,7 +154,7 @@ public class MoveItemTest extends BaseTestCase {
 		}
 
 		selenium.click(
-			"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form/table/tbody/tr[3]/td[1]/a");
+			"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form/div[3]/table/tbody/tr[3]/td[1]/a");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -164,7 +164,7 @@ public class MoveItemTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form[2]/table/tbody/tr[2]/td[2]/a")) {
+							"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form[2]/div[3]/table/tbody/tr[2]/td[2]/a")) {
 					break;
 				}
 			}
@@ -206,8 +206,7 @@ public class MoveItemTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id=\"p_p_id_34_\"]/div/form/table/tbody/tr[2]/td[4]/input")) {
+				if (selenium.isElementPresent("//input[@value='Choose']")) {
 					break;
 				}
 			}
@@ -217,8 +216,7 @@ public class MoveItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"//div[@id=\"p_p_id_34_\"]/div/form/table/tbody/tr[2]/td[4]/input");
+		selenium.click("//input[@value='Choose']");
 		selenium.selectWindow("null");
 
 		for (int second = 0;; second++) {
@@ -282,7 +280,7 @@ public class MoveItemTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form/table/tbody/tr[2]/td[1]/a")) {
+							"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form/div[3]/table/tbody/tr[2]/td[1]/a")) {
 					break;
 				}
 			}
@@ -293,7 +291,7 @@ public class MoveItemTest extends BaseTestCase {
 		}
 
 		selenium.click(
-			"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form/table/tbody/tr[2]/td[1]/a");
+			"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form/div[3]/table/tbody/tr[2]/td[1]/a");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

@@ -58,7 +58,7 @@ public class ShoppingTests extends BaseTests {
 		addTestSuite(ConfirmCartTest.class);
 		addTestSuite(RemoveItemFromCartTest.class);
 		addTestSuite(AddSecondItemToCartTest.class);
-//		addTestSuite(UpdateCartQuantityTest.class);
+		//addTestSuite(UpdateCartQuantityTest.class);
 		addTestSuite(CheckoutTest.class);
 		addTestSuite(ConfirmOrderTest.class);
 		addTestSuite(ViewInvoiceTest.class);
@@ -77,7 +77,7 @@ public class ShoppingTests extends BaseTests {
 		addTestSuite(VerifyPercentageInsuranceTest.class);
 		addTestSuite(SaveCurrentSetupTest.class);
 		addTestSuite(ChangeCurrentSetupTest.class);
-//		addTestSuite(RestoreArchivedSetupTest.class);
+		//addTestSuite(RestoreArchivedSetupTest.class);
 	}
 
 }

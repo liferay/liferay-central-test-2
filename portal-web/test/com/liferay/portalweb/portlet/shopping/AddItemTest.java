@@ -55,7 +55,7 @@ public class AddItemTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form/table/tbody/tr[2]/td[1]/a")) {
+							"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form/div[3]/table/tbody/tr[2]/td[1]/a")) {
 					break;
 				}
 			}
@@ -66,7 +66,7 @@ public class AddItemTest extends BaseTestCase {
 		}
 
 		selenium.click(
-			"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form/table/tbody/tr[2]/td[1]/a");
+			"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form/div[3]/table/tbody/tr[2]/td[1]/a");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
