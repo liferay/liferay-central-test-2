@@ -41,16 +41,31 @@
 #content-wrapper #layout-grid.dragging .lfr-column {
 }
 
-.drag-proxy-indicator {
-}
-
 .drop-area {
 }
 
 .active-area {
 }
 
-.ui-drag-helper {
+.ui-proxy {
+}
+
+.ie .ui-proxy {
+}
+
+.ui-proxy.generic-portlet {
+}
+
+.ui-proxy.generic-portlet .portlet-title {
+}
+
+.ui-proxy.not-intersecting .forbidden-action {
+}
+
+.ie .ui-proxy.not-intersecting .forbidden-action {
+}
+
+.ui-resizable-proxy {
 }
 
 .navigation-sort-helper {

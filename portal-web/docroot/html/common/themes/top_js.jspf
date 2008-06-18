@@ -332,11 +332,10 @@
 							layoutOptions = {
 								boxSelector: '.portlet-boundary:not([isStatic])',
 								columnSelector: 'div.lfr-portlet-column',
-								clonePortlet: true,
+								clonePortlet: false,
 								grid: '#layout-grid',
 								handleSelector: '.portlet-title, .portlet-title-default',
-								placeHolderClass: 'portlet-sort-helper',
-								proxyClass: 'drag-proxy-indicator'
+								placeHolderClass: 'portlet-sort-helper'
 							};
 						}
 						else {

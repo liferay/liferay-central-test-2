@@ -10,21 +10,100 @@ Liferay.Popup = function(options) {
 	 * className (string) - a class to add to the specific popup
 	 * stack (boolean) - whether to automatically stack the popup on top of other ones
 	 * handles (string) - comma-separated list (n,ne,e,se,s,sw,w,nw) of the handles for resizing
+	 * resizeHelper - classname that will be attached to resize proxy helper
+	 * dragHelper (string|function) - a jQuery selector or a function that returns a DOM element
+	 * dragStart - (function) a callback that is called when dragging of the dialog starts
+	 * dragStop - (function) a callback that is called when dragging of the dialog stops
 	 */
 	var instance = this;
+	
+	var cacheDialogHelper = function(obj) {
+		if (!obj.jquery) {
+			obj = jQuery(obj);
+		}
+
+		var cache = obj.data('ui-helper-drag');
+
+		if (!cache) {
+			var cachedObj = obj.clone();
+
+			cachedObj.find('.ui-dialog-content').empty();
+			cachedObj.addClass('ui-proxy');
+
+			cache = obj.data('ui-helper-drag', cachedObj);
+		}
+
+		return cache;
+	};
 
 	options = options || {};
+
+	if (options.dragHelper === null) {
+		options.dragHelper = "original";
+	}
 
 	var defaults = {
 		className: 'generic-dialog',
 		draggable: true,
 		handles: 'e,se,s,sw,w',
+		resizeHelper: 'ui-resizable-proxy',
 		message: '<div class="loading-animation"></div>',
 		position: [5,5],
 		height: 'auto',
-		stack: false
-	};
+		stack: false,
 
+		dragHelper: function() {
+			var dialog = jQuery(this);
+			var cache = cacheDialogHelper(dialog);
+
+			var height = dialog.height();
+			var width = dialog.width();
+
+			cache.css(
+				{
+					height: height,
+					width: width
+				}
+			);
+
+			return cache;
+		},
+		
+		dragStart: function(e, ui) {
+			if (!options.dragHelper) {
+				var dialog = jQuery(this).parents('.ui-dialog:first');
+
+				dialog.css('visibility', 'hidden');
+			}
+		},
+
+		dragStop: function(e, ui) {
+			if (!options.dragHelper) {
+				var dialog = jQuery(this).parents('.ui-dialog:first');
+				var helper = ui.helper;
+
+				var left = helper.css('left');
+				var top = helper.css('top');
+
+				dialog.css(
+					{
+						left: left,
+						top: top,
+						visibility: 'visible'
+					}
+				);
+			}
+		},
+
+		open: function(e, ui) {
+			if (!options.dragHelper) {
+				var dialog = jQuery(this).parents('.ui-dialog:first');
+
+				cacheDialogHelper(dialog);
+			}
+		}
+	};
+	
 	var config = jQuery.extend({}, defaults, options);
 
 	var content = '';
@@ -48,11 +127,19 @@ Liferay.Popup = function(options) {
 
 	var className = config.className;
 	var height = config.height;
-	var resizable = config.resizable != null ? config.resizable : config.handles;
+	var dragHelper = config.dragHelper;
+	var dragStart = config.dragStart;
+	var dragStop = config.dragStop;
+	var open = config.open;
+	var resizable = config.resizable;
+	var resizeHelper = config.resizeHelper;
+	var stack = config.stack;
+	var title = config.title;
 	var width = config.width;
 
-	var title = config.title;
-	var stack = config.stack;
+	if (resizable !== false) {
+		resizable = config.handles;
+	}
 
 	if (Liferay.Util.isArray(position)) {
 		var centering = position.indexOf('center');
@@ -92,9 +179,14 @@ Liferay.Popup = function(options) {
 			position: position,
 			modal: modal,
 			resizable: resizable,
+			resizeHelper: resizeHelper,
 			stack: stack,
 			width: width,
-			zIndex: Liferay.zIndex.ALERT // compensate for UI's dialog
+			zIndex: Liferay.zIndex.ALERT, // compensate for UI's dialog
+			dragHelper: dragHelper,
+			dragStart: dragStart,
+			dragStop: dragStop,
+			open: open
 		}
 	);
 };

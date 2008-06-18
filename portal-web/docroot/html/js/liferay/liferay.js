@@ -233,6 +233,10 @@ Liferay.Base64 = {
 	_keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
 };
 
+Liferay.Template = {
+	PORTLET: '<div class="portlet"><div class="portlet-topper"><div class="portlet-title"></div></div><div class="portlet-content"></div><div class="forbidden-action"></div></div>'
+}
+
 jQuery.fn.exactHeight = jQuery.fn.height;
 jQuery.fn.exactWidth = jQuery.fn.width;
 

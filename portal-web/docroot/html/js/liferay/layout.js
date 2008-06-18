@@ -13,6 +13,8 @@ Liferay.Layout = {
 			layoutHandler = instance.FreeForm;
 		}
 
+		instance._useCloneProxy = options.clonePortlet;
+
 		layoutHandler.init(options);
 
 		instance.layoutHandler = layoutHandler;
@@ -102,17 +104,11 @@ Liferay.Layout.Columns = {
 		instance._boxSelector = options.boxSelector;
 		instance._placeHolderClass = options.placeHolderClass;
 		instance._onCompleteCallback = options.onComplete;
-		instance._proxyClass = options.proxyClass;
 
 		instance._activeAreaClass = 'active-area';
 		instance._dropAreaClass = 'drop-area';
 
 		instance._gridColumns = '.lfr-column';
-
-		// This sets whether we're using a clone of the box to sort with, or a
-		// plain box
-
-		instance._useCloneProxy = options.clonePortlet;
 
 		var options = {
 			appendTo: 'body',
@@ -121,14 +117,14 @@ Liferay.Layout.Columns = {
 			handle: instance._handleSelector,
 			items: instance._boxSelector,
 			placeholder: 'portlet-sort-helper',
-			helper: function(event, obj) {
-				return instance._createHelper(event, obj);
-			},
-			opacity: 0.8,
+			helper: instance._createHelper,
+			tolerance: 'touch',
+
 			revert:	false,
 			distance: 2,
 			scroll: true,
 			scrollSensitivity: 50,
+			scrollSpeed: 30,
 
 			// Callbacks
 
@@ -200,23 +196,27 @@ Liferay.Layout.Columns = {
 	_createHelper: function(event, obj) {
 		var instance = this;
 
-		var width = obj.width();
-		var height = obj.height();
+		var width = obj[0].offsetWidth;
+		var height = obj[0].offsetHeight;
 		var div = [];
 
 		if (instance._useCloneProxy) {
 			div = obj.clone();
 		}
 		else {
-			div = jQuery('<div class="' + instance._proxyClass + '"></div>');
-		}
+			div = jQuery(Liferay.Template.PORTLET);
+			div.addClass('ui-proxy');
 
-		div.append('<div class="forbidden-action"></div>');
+			var titleHtml = obj.find('.portlet-title, .portlet-title-default').html();
+
+			div.find('.portlet-title').html(titleHtml);
+		}
 
 		div.css(
 			{
 				width: width,
-				height: height
+				height: height,
+				zIndex: Liferay.zIndex.DRAG_ITEM
 			}
 		);
 
@@ -324,9 +324,35 @@ Liferay.Layout.FreeForm = {
 
 		jPortlet.css('position', 'absolute');
 
+		instance._createHelperCache(portlet);
+
 		jPortlet.draggable(
 			{
 				handle: '.portlet-header-bar, .portlet-title-default, .portlet-topper, .portlet-topper *',
+
+				helper: function(event) {
+					var portlet = jQuery(this);
+					var helper = instance._createHelperCache(this);
+
+					var height = portlet.height();
+					var width = portlet.width();
+					var zIndex = portlet.css('z-index');
+
+					helper.css(
+						{
+							height: height,
+							width: width,
+							zIndex: zIndex + 10
+						}
+					);
+
+					var titleHtml = portlet.find('.portlet-title, .portlet-title-default').html();
+
+					helper.find('.portlet-title').html(titleHtml);
+
+					return helper[0];
+				},
+
 				start: function(event, ui) {
 					instance._moveToTop(this);
 				},
@@ -335,8 +361,9 @@ Liferay.Layout.FreeForm = {
 
 				stop: function(event, ui) {
 					var portlet = this;
-					var left = parseInt(portlet.style.left);
-					var top = parseInt(portlet.style.top);
+
+					var left = parseInt(ui.position.left);
+					var top = parseInt(ui.position.top);
 
 					left = Math.round(left/10) * 10;
 					top = Math.round(top/10) * 10;
@@ -398,6 +425,26 @@ Liferay.Layout.FreeForm = {
 		if (portletBound) {
 			instance.add(portletBound);
 		}
+	},
+
+	_createHelperCache: function(obj) {
+		var instance = this;
+
+		if (!obj.jquery) {
+			obj = jQuery(obj);
+		}
+
+		var cache = obj.data('ui-helper-drag');
+
+		if (!cache) {
+			var cachedObj = jQuery(Liferay.Template.PORTLET);
+
+			cachedObj.addClass('ui-proxy');
+
+			cache = obj.data('ui-helper-drag', cachedObj);
+		}
+
+		return cache;
 	},
 
 	_findPosition: function(portlet) {

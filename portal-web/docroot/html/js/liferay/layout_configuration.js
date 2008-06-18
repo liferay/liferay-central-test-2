@@ -216,7 +216,6 @@ var LayoutConfiguration = {
 		}
 	},
 
-
 	_getPortletMetaData: function(portlet) {
 		var instance = this;
 
@@ -276,7 +275,8 @@ var LayoutConfiguration = {
 
 		var zIndex = instance._dialog.parents('.ui-dialog').css('z-index');
 
-		instance._helper = jQuery('<div class="ui-drag-helper not-intersecting"><div class="forbidden-action"></div></div>').css('z-index', zIndex + 10);
+		instance._helper = jQuery(Liferay.Template.PORTLET).css('z-index', zIndex + 10);
+		instance._helper.addClass('ui-proxy generic-portlet not-intersecting');
 
 		instance._configureGrid();
 
@@ -284,15 +284,24 @@ var LayoutConfiguration = {
 			appendTo: 'body',
 			connectToSortable: '.lfr-portlet-column',
 			distance: 2,
-			helper: function() {
-				return instance._helper.clone()[0];
+
+			helper: function(event) {
+				var helper = instance._helper.clone();
+				var title = this.getAttribute('title');
+
+				helper.find('.portlet-title').text(title);
+
+				return helper[0];
 			},
+
 			start: function(event, ui) {
 				instance._onDragStart(event, ui, this);
 			},
+
 			drag: function(event, ui) {
 				instance._onDrag(event, ui, this);
 			},
+
 			stop: function(event, ui) {
 				instance._onDragStop(event, ui, this);
 			}
