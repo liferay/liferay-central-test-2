@@ -32,6 +32,7 @@ import com.liferay.portal.LayoutSetVirtualHostException;
 import com.liferay.portal.LayoutTypeException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.RemoteExportException;
 import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -140,6 +141,9 @@ public class EditPagesAction extends PortletAction {
 			else if (cmd.equals("display_order")) {
 				updateDisplayOrder(req);
 			}
+			else if (cmd.equals("export_remotely")) {
+				StagingUtil.exportRemotely(req);
+			}
 			else if (cmd.equals("logo")) {
 				updateLogo(req);
 			}
@@ -190,6 +194,7 @@ public class EditPagesAction extends PortletAction {
 					 e instanceof LayoutParentLayoutIdException ||
 					 e instanceof LayoutSetVirtualHostException ||
 					 e instanceof LayoutTypeException ||
+					 e instanceof RemoteExportException ||
 					 e instanceof RequiredLayoutException ||
 					 e instanceof UploadException) {
 

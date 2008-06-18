@@ -1721,6 +1721,7 @@
 		<exception>PortletItemName</exception>
 		<exception>RegionCode</exception>
 		<exception>RegionName</exception>
+		<exception>RemoteExport</exception>
 		<exception>RequiredGroup</exception>
 		<exception>RequiredLayout</exception>
 		<exception>RequiredOrganization</exception>

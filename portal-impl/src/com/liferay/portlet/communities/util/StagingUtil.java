@@ -22,8 +22,10 @@
 
 package com.liferay.portlet.communities.util;
 
+import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.PortalException;
+import com.liferay.portal.RemoteExportException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.cal.DayAndPosition;
 import com.liferay.portal.kernel.cal.Duration;
@@ -38,6 +40,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
@@ -53,6 +56,7 @@ import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.http.GroupServiceHttp;
 import com.liferay.portal.service.http.LayoutServiceHttp;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -60,8 +64,11 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
+import java.net.ConnectException;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -171,18 +178,39 @@ public class StagingUtil {
 	}
 
 	public static void copyRemoteLayouts(
-			long sourceGroupId, String remoteAddress, int remotePort,
-			boolean secure, long remoteGroupId, boolean privateLayout,
-			Map<String, String[]> exportParameterMap,
+			long sourceGroupId, boolean privateLayout,
+			Map<Long, Boolean> layoutIdMap,
+			Map<String, String[]> exportParameterMap, String remoteAddress,
+			int remotePort, boolean secure, long remoteGroupId,
+			boolean remotePrivateLayout,
 			Map<String, String[]> importParameterMap, Date startDate,
 			Date endDate)
 		throws Exception {
 
-		InetAddress inetAddress = InetAddress.getByName(remoteAddress);
+		try {
+			InetAddress inetAddress = InetAddress.getByName(remoteAddress);
 
-		if (!inetAddress.isReachable(800)) {
-			throw new SystemException(
-				"Host " + inetAddress.getHostName() + " cannot be reached");
+			if (!inetAddress.isReachable(800)) {
+				throw new RemoteExportException(
+					"{subject=" + remoteAddress +
+						",exception=UnreachableHostException}");
+			}
+		}
+		catch (UnknownHostException uhe) {
+			throw new RemoteExportException(
+				"{subject=" + remoteAddress +
+					",exception=UnknownHostException}");
+		}
+		catch (IOException ioe) {
+			throw new RemoteExportException(
+				"{subject=" + remoteAddress +
+					",exception=IOException}");
+		}
+
+		if (remotePort <= 0 || remotePort > 65535) {
+			throw new RemoteExportException(
+				"{subject=" + remotePort +
+					",exception=InvalidPortException}");
 		}
 
 		PermissionChecker permissionChecker =
@@ -199,7 +227,7 @@ public class StagingUtil {
 			sm.append(Http.HTTP_WITH_SLASH);
 		}
 
-		sm.append(inetAddress.getHostAddress());
+		sm.append(remoteAddress);
 		sm.append(StringPool.COLON);
 		sm.append(remotePort);
 
@@ -207,13 +235,221 @@ public class StagingUtil {
 			sm.toString(), user.getUserId(), user.getPassword(),
 			user.getPasswordEncrypted());
 
-		byte[] bytes = LayoutServiceUtil.exportLayouts(
-			sourceGroupId, privateLayout, exportParameterMap, startDate,
-			endDate);
+		// Ping remote host and verify that the group exists
+
+		try {
+			GroupServiceHttp.getGroup(httpPrincipal, remoteGroupId);
+		}
+		catch (NoSuchGroupException nsge) {
+			throw new RemoteExportException(
+				"{subject=" + remoteGroupId +
+					",exception=NoSuchGroupException}");
+		}
+		catch (SystemException se) {
+			if (se.getCause() instanceof ConnectException) {
+				throw new RemoteExportException(
+					"{subject=" + sm.toString() +
+						",exception=ConnectException}");
+			}
+		}
+
+		byte[] bytes = null;
+
+		if (layoutIdMap == null) {
+			bytes = LayoutServiceUtil.exportLayouts(
+				sourceGroupId, privateLayout, exportParameterMap, startDate,
+				endDate);
+		}
+		else {
+			List<Layout> layouts = new ArrayList<Layout>();
+
+			Iterator<Map.Entry<Long, Boolean>> itr1 =
+				layoutIdMap.entrySet().iterator();
+
+			while (itr1.hasNext()) {
+				Entry<Long, Boolean> entry = itr1.next();
+
+				long plid = entry.getKey();
+				boolean includeChildren = entry.getValue();
+
+				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+
+				if (!layouts.contains(layout)) {
+					layouts.add(layout);
+				}
+
+				Iterator<Layout> itr2 = getMissingParents(
+					layout, sourceGroupId).iterator();
+
+				while (itr2.hasNext()) {
+					Layout parentLayout = itr2.next();
+
+					if (!layouts.contains(parentLayout)) {
+						layouts.add(parentLayout);
+					}
+				}
+
+				if (includeChildren) {
+					itr2 = layout.getAllChildren().iterator();
+
+					while (itr2.hasNext()) {
+						Layout childLayout = itr2.next();
+
+						if (!layouts.contains(childLayout)) {
+							layouts.add(childLayout);
+						}
+					}
+				}
+			}
+
+			long[] layoutIds = new long[layouts.size()];
+
+			for (int i = 0; i < layouts.size(); i++) {
+				Layout curLayout = layouts.get(i);
+
+				layoutIds[i] = curLayout.getLayoutId();
+			}
+
+			if (layoutIds.length <= 0) {
+				throw new RemoteExportException(
+					"{exception=NoLayoutsSelectedException}");
+			}
+
+			bytes = LayoutServiceUtil.exportLayouts(
+				sourceGroupId, privateLayout, layoutIds, exportParameterMap,
+				null, null);
+		}
 
 		LayoutServiceHttp.importLayouts(
-			httpPrincipal, remoteGroupId, privateLayout, importParameterMap,
-			bytes);
+			httpPrincipal, remoteGroupId, remotePrivateLayout,
+			importParameterMap, bytes);
+	}
+
+	public static void exportRemotely(ActionRequest req) throws Exception {
+		String tabs1 = ParamUtil.getString(req, "tabs1");
+
+		long groupId = ParamUtil.getLong(req, "groupId");
+
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		boolean privateLayout = true;
+
+		if (tabs1.equals("public-pages")) {
+			privateLayout = false;
+		}
+
+		boolean dateRange = ParamUtil.getBoolean(req, "dateRange");
+		Date startDate = null;
+		Date endDate = null;
+
+		if (dateRange) {
+			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+			int startDateMonth = ParamUtil.getInteger(
+				req, "startDateMonth");
+			int startDateDay = ParamUtil.getInteger(req, "startDateDay");
+			int startDateYear = ParamUtil.getInteger(req, "startDateYear");
+			int startDateHour = ParamUtil.getInteger(req, "startDateHour");
+			int startDateMinute = ParamUtil.getInteger(
+				req, "startDateMinute");
+			int startDateAmPm = ParamUtil.getInteger(req, "startDateAmPm");
+
+			if (startDateAmPm == Calendar.PM) {
+				startDateHour += 12;
+			}
+
+			startDate = PortalUtil.getDate(
+				startDateMonth, startDateDay, startDateYear, startDateHour,
+				startDateMinute, themeDisplay.getTimeZone(),
+				new PortalException());
+
+			int endDateMonth = ParamUtil.getInteger(req, "endDateMonth");
+			int endDateDay = ParamUtil.getInteger(req, "endDateDay");
+			int endDateYear = ParamUtil.getInteger(req, "endDateYear");
+			int endDateHour = ParamUtil.getInteger(req, "endDateHour");
+			int endDateMinute = ParamUtil.getInteger(req, "endDateMinute");
+			int endDateAmPm = ParamUtil.getInteger(req, "endDateAmPm");
+
+			if (endDateAmPm == Calendar.PM) {
+				endDateHour += 12;
+			}
+
+			endDate = PortalUtil.getDate(
+				endDateMonth, endDateDay, endDateYear, endDateHour,
+				endDateMinute, themeDisplay.getTimeZone(),
+				new PortalException());
+		}
+
+		long remoteGroupId = ParamUtil.getLong(req, "remoteGroupId");
+		boolean remotePrivateLayout = ParamUtil.getBoolean(
+			req, "remotePrivateLayout");
+		String remoteAddress = ParamUtil.getString(req, "remoteAddress");
+		int remotePort = ParamUtil.getInteger(req, "remotePort");
+		boolean secureConnection = ParamUtil.getBoolean(
+			req, "secureConnection");
+
+		if (_log.isDebugEnabled()) {
+			StringMaker sm = new StringMaker();
+			sm.append("Exporting ");
+			if (privateLayout) {
+				sm.append("private ");
+			}
+			else {
+				sm.append("public ");
+			}
+			sm.append("pages for group ");
+			sm.append(group.getGroupId());
+			sm.append(" remotely to the ");
+			if (remotePrivateLayout) {
+				sm.append("private ");
+			}
+			else {
+				sm.append("public ");
+			}
+			sm.append("pages for group ");
+			sm.append(remoteGroupId);
+			sm.append(" on host ");
+			if (secureConnection) {
+				sm.append(Http.HTTPS_WITH_SLASH);
+			}
+			else {
+				sm.append(Http.HTTP_WITH_SLASH);
+			}
+			sm.append(remoteAddress);
+			sm.append(StringPool.COLON);
+			sm.append(remotePort);
+
+			_log.debug(sm.toString());
+		}
+
+		String scope = ParamUtil.getString(req, "scope");
+
+		if (Validator.isNull(scope)) {
+			scope = "all-pages";
+		}
+
+		Map<String, String[]> parameterMap = req.getParameterMap();
+		Map<Long, Boolean> layoutIdMap = null;
+
+		if (scope.equals("selected-pages")) {
+			layoutIdMap = new LinkedHashMap<Long, Boolean>();
+
+			long[] rowIds = ParamUtil.getLongValues(req, "rowIds");
+
+			for (long selPlid : rowIds) {
+				boolean includeChildren = ParamUtil.getBoolean(
+					req, "includeChildren_" + selPlid);
+
+				layoutIdMap.put(selPlid, includeChildren);
+			}
+		}
+
+		copyRemoteLayouts(
+			groupId, privateLayout, layoutIdMap, parameterMap,
+			remoteAddress, remotePort, secureConnection, remoteGroupId,
+			remotePrivateLayout, getStagingParameters(req),
+			startDate, endDate);
 	}
 
 	public static List<Layout> getMissingParents(

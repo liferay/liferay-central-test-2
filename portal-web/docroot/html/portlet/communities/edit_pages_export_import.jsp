@@ -86,6 +86,39 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 <liferay-ui:error exception="<%= LARFileException.class %>" message="please-specify-a-lar-file-to-import" />
 <liferay-ui:error exception="<%= LARTypeException.class %>" message="please-import-a-lar-file-of-the-correct-type" />
 <liferay-ui:error exception="<%= LayoutImportException.class %>" message="an-unexpected-error-occurred-while-importing-your-file" />
+<liferay-ui:error exception="<%= RemoteExportException.class %>">
+	<%
+	RemoteExportException ree = (RemoteExportException)errorException;
+
+	PKParser pkParser = new PKParser(ree.getMessage());
+
+	String exception = pkParser.getString("exception");
+	String subject = pkParser.getString("subject");
+	%>
+	<c:choose>
+		<c:when test='<%= exception.equals("ConnectException") %>'>
+			<%= LanguageUtil.format(pageContext, "could-not-connect-to-address-x,please-verify-that-the-specified-port-is-correct", "<tt>" + subject + "</tt>") %>
+		</c:when>
+		<c:when test='<%= exception.equals("InvalidPortException") %>'>
+			<%= LanguageUtil.format(pageContext, "x-is-not-a-valid-port,value-must-be-between-0-and-65535", subject) %>
+		</c:when>
+		<c:when test='<%= exception.equals("IOException") %>'>
+			<%= LanguageUtil.format(pageContext, "a-network-error-occured-while-trying-to-reach-x", subject) %>
+		</c:when>
+		<c:when test='<%= exception.equals("NoLayoutsSelectedException") %>'>
+			<%= LanguageUtil.get(pageContext, "no-layouts-are-selected-for-export") %>
+		</c:when>
+		<c:when test='<%= exception.equals("NoSuchGroupException") %>'>
+			<%= LanguageUtil.format(pageContext, "remote-group-with-id-x-does-not-exist", subject) %>
+		</c:when>
+		<c:when test='<%= exception.equals("UnknownHostException") %>'>
+			<%= LanguageUtil.format(pageContext, "remote-address-x-is-unknown", subject) %>
+		</c:when>
+		<c:when test='<%= exception.equals("UnreachableHostException") %>'>
+			<%= LanguageUtil.format(pageContext, "remote-address-x-could-not-be-reached", subject) %>
+		</c:when>
+	</c:choose>
+</liferay-ui:error>
 
 <c:choose>
 	<c:when test='<%= tabs4.equals("export") %>'>
@@ -104,6 +137,79 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 		<br /><br />
 
 		<%@ include file="/html/portlet/communities/edit_pages_export_import_options.jspf" %>
+
+		<br />
+
+		<liferay-ui:toggle-area
+			showMessage="<%= LanguageUtil.get(pageContext, "show-remote-export-options") + " &raquo;" %>"
+			hideMessage="<%= "&laquo; " + LanguageUtil.get(pageContext, "hide-remote-export-options") %>"
+			defaultShowContent="<%= false %>"
+		>
+			<br />
+
+			<liferay-ui:message key="export-the-selected-data-to-the-community-of-a-remote-portal,-or-to-another-community-in-the-same-portal" />
+
+			<br /><br />
+
+			<ul class="gamma lfr-component">
+				<li class="tree-item">
+					<input id="<portlet:namespace />enableRemote" name="<portlet:namespace />enableRemote" type="checkbox" onchange="<portlet:namespace />toggleChildren(this, '<portlet:namespace />remoteExportControls');" />
+
+					<label for="<portlet:namespace />enableRemote"><liferay-ui:message key="enabled" /></label>
+
+					<ul id="<portlet:namespace />remoteExportControls">
+						<li class="tree-item">
+							<table class="lfr-table">
+							<tr>
+								<td>
+									<liferay-ui:message key="remote-host-ip" />
+								</td>
+								<td>
+									<input disabled="disabled" id="<portlet:namespace />remoteAddress" name="<portlet:namespace />remoteAddress" size="20" type="text" value="<%= PortalUtil.getHost(request) %>" />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<liferay-ui:message key="remote-port" />
+								</td>
+								<td>
+									<input disabled="disabled" id="<portlet:namespace />remotePort" name="<portlet:namespace />remotePort" size="10" type="text" value="<%= PortalUtil.getPortalPort() %>" />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<liferay-ui:message key="remote-group-id,organization-or-community" />
+								</td>
+								<td>
+									<input disabled="disabled" id="<portlet:namespace />remoteGroupId" name="<portlet:namespace />remoteGroupId" size="10" type="text" />
+								</td>
+							</tr>
+							</table>
+						</li>
+						<li class="tree-item">
+							<input disabled="disabled" id="<portlet:namespace />remotePrivateLayout" name="<portlet:namespace />remotePrivateLayout" type="checkbox" />
+
+							<label for="<portlet:namespace />remotePrivateLayout"><liferay-ui:message key="remote-private-layout" /></label>
+						</li>
+						<li class="tree-item">
+							<input disabled="disabled" id="<portlet:namespace />secureConnection" name="<portlet:namespace />secureConnection" type="checkbox" />
+
+							<label for="<portlet:namespace />secureConnection"><liferay-ui:message key="use-a-secure-network-connection" /></label>
+						</li>
+						<li class="tree-item">
+							<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS %>" defaultValue="<%= false %>" disabled="<%= true %>" />
+
+							<label for="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS %>Checkbox"><liferay-ui:message key="delete-missing-layouts" /></label> <liferay-ui:icon-help message="delete-missing-layouts-help" />
+						</li>
+						<li class="tree-item">
+							<input disabled="disabled" id="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" type="checkbox" />
+
+							<label for="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>"><liferay-ui:message key="delete-portlet-data-before-importing" /></label> <liferay-ui:icon-help message="delete-portlet-data-help" />
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</liferay-ui:toggle-area>
 
 		<br />
 

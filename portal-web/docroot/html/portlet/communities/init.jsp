@@ -43,6 +43,7 @@
 <%@ page import="com.liferay.portal.NoSuchPortletException" %>
 <%@ page import="com.liferay.portal.NoSuchRegionException" %>
 <%@ page import="com.liferay.portal.NoSuchRoleException" %>
+<%@ page import="com.liferay.portal.RemoteExportException" %>
 <%@ page import="com.liferay.portal.RequiredGroupException" %>
 <%@ page import="com.liferay.portal.RequiredLayoutException" %>
 <%@ page import="com.liferay.portal.kernel.lar.PortletDataException" %>
