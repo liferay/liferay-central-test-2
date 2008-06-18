@@ -45,7 +45,7 @@ public class TranslateGermanEnglishTest extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent(
-							"My name is a translator of Liferay, more flowing into more than 6 million communication forms.")) {
+							"My name is a translator more flowing from Liferay, into more than 6 million communication forms. ")) {
 					break;
 				}
 			}
