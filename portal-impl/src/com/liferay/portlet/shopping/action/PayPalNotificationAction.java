@@ -82,7 +82,7 @@ public class PayPalNotificationAction extends Action {
 				_log.debug("Sending response to PayPal " + query);
 			}
 
-			URL url = new URL("http://www.paypal.com/cgi-bin/webscr");
+			URL url = new URL("https://www.paypal.com/cgi-bin/webscr");
 
 			URLConnection urlc = url.openConnection();
 
