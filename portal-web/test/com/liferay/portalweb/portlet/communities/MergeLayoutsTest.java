@@ -74,7 +74,6 @@ public class MergeLayoutsTest extends BaseTestCase {
 		selenium.click("link=Settings");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Merge Pages");
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -112,7 +111,6 @@ public class MergeLayoutsTest extends BaseTestCase {
 		}
 
 		selenium.click("//input[@value='Save']");
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

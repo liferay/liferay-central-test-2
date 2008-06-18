@@ -67,7 +67,6 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 
 		selenium.click(
 			"//div[@id=\"banner\"]/div/div/ul/li[8]/ul/li[5]/ul/li[1]/a[2]");
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -86,7 +85,6 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 		}
 
 		selenium.click("link=New Page");
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -123,7 +121,6 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 
 		selenium.click(
 			"//div[@id=\"banner\"]/div/div/ul/li[8]/ul/li[4]/ul/li[1]/a[2]");
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -160,7 +157,8 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 
 		selenium.click(
 			"document.getElementById('_branchId_2018').getElementsByTagName('a')[0].getElementsByTagName('span')[0]");
-		selenium.waitForPageToLoad("30000");
+		selenium.click(
+			"document.getElementById('_branchId_2018').getElementsByTagName('a')[0].getElementsByTagName('span')[0]");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -179,7 +177,7 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 		}
 
 		selenium.click("link=Page");
-		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -188,6 +186,23 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent("_88_hiddenCheckbox")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"document.getElementById('_branchId_2018').getElementsByTagName('a')[0].getElementsByTagName('span')[0]")) {
 					break;
 				}
 			}
@@ -215,8 +230,9 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		Thread.sleep(5000);
 		selenium.click("//input[@value='Save']");
-		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -237,7 +253,6 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 
 		selenium.click(
 			"//div[@id=\"banner\"]/div[1]/div[2]/ul/li[5]/ul/li[5]/ul/li[1]/a[1]");
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -246,6 +261,23 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 
 			try {
 				if (!selenium.isElementPresent("link=Stories")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"document.getElementById('my-community-private-pages')")) {
 					break;
 				}
 			}
