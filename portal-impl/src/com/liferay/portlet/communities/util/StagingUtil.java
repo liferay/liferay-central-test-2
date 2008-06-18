@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.kernel.cal.RecurrenceSerializer;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
+import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -600,6 +601,16 @@ public class StagingUtil {
 			liveGroupId, layout.isPrivateLayout(), parameterMap, bais);
 	}
 
+	public static String getSchedulerGroupName(long liveGroupId) {
+		StringMaker sm = new StringMaker();
+
+		sm.append(DestinationNames.LAYOUTS_PUBLISHER);
+		sm.append(StringPool.FORWARD_SLASH);
+		sm.append(liveGroupId);
+
+		return sm.toString();
+	}
+
 	public static Map<String, String[]> getStagingParameters() {
 		Map<String, String[]> parameterMap =
 			new LinkedHashMap<String, String[]>();
@@ -845,8 +856,8 @@ public class StagingUtil {
 
 		LayoutServiceUtil.schedulePublishToLive(
 			stagingGroupId, liveGroupId, privateLayout, layoutIdMap,
-			parameterMap, scope, cronText, startCal.getTime(), endDate,
-			description);
+			parameterMap, scope, getSchedulerGroupName(liveGroupId), cronText,
+			startCal.getTime(), endDate, description);
 	}
 
 	public static void unschedulePublishToLive(ActionRequest req)
@@ -860,7 +871,8 @@ public class StagingUtil {
 
 		String jobName = ParamUtil.getString(req, "jobName");
 
-		LayoutServiceUtil.unschedulePublishToLive(liveGroupId, jobName);
+		LayoutServiceUtil.unschedulePublishToLive(
+			liveGroupId, jobName, getSchedulerGroupName(liveGroupId));
 	}
 
 	public static void updateStaging(ActionRequest req) throws Exception {

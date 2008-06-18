@@ -845,8 +845,9 @@ public class LayoutServiceHttp {
 		long stagingGroupId, long liveGroupId, boolean privateLayout,
 		java.util.Map<Long, Boolean> layoutIdMap,
 		java.util.Map<String, String[]> parameterMap, java.lang.String scope,
-		java.lang.String cronText, java.util.Date startDate,
-		java.util.Date endDate, java.lang.String description)
+		java.lang.String groupName, java.lang.String cronText,
+		java.util.Date startDate, java.util.Date endDate,
+		java.lang.String description)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -874,35 +875,42 @@ public class LayoutServiceHttp {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = cronText;
+			Object paramObj6 = groupName;
 
-			if (cronText == null) {
+			if (groupName == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = startDate;
+			Object paramObj7 = cronText;
 
-			if (startDate == null) {
-				paramObj7 = new NullWrapper("java.util.Date");
+			if (cronText == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = endDate;
+			Object paramObj8 = startDate;
 
-			if (endDate == null) {
+			if (startDate == null) {
 				paramObj8 = new NullWrapper("java.util.Date");
 			}
 
-			Object paramObj9 = description;
+			Object paramObj9 = endDate;
+
+			if (endDate == null) {
+				paramObj9 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj10 = description;
 
 			if (description == null) {
-				paramObj9 = new NullWrapper("java.lang.String");
+				paramObj10 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"schedulePublishToLive",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10
 					});
 
 			try {
@@ -971,7 +979,7 @@ public class LayoutServiceHttp {
 	}
 
 	public static void unschedulePublishToLive(HttpPrincipal httpPrincipal,
-		long liveGroupId, java.lang.String jobName)
+		long liveGroupId, java.lang.String jobName, java.lang.String groupName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -983,9 +991,15 @@ public class LayoutServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj2 = groupName;
+
+			if (groupName == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"unschedulePublishToLive",
-					new Object[] { paramObj0, paramObj1 });
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);

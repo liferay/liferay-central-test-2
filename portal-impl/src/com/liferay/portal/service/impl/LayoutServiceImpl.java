@@ -27,7 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutReference;
@@ -236,8 +235,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	public void schedulePublishToLive(
 			long stagingGroupId, long liveGroupId, boolean privateLayout,
 			Map<Long, Boolean> layoutIdMap, Map<String, String[]> parameterMap,
-			String scope, String cronText, Date startDate, Date endDate,
-			String description)
+			String scope, String groupName, String cronText, Date startDate,
+			Date endDate, String description)
 		throws PortalException, SystemException {
 
 		GroupPermissionUtil.check(
@@ -261,8 +260,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 				privateLayout, layoutIdMap, parameterMap);
 
 		SchedulerEngineUtil.schedule(
-			getSchedulerGroupName(liveGroupId), cronText, startDate, endDate,
-			description, DestinationNames.LAYOUTS_PUBLISHER,
+			groupName, cronText, startDate, endDate, description,
+			DestinationNames.LAYOUTS_PUBLISHER,
 			JSONUtil.serialize(layoutsPublisherRequest));
 	}
 
@@ -278,14 +277,14 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			groupId, privateLayout, parentLayoutId, layoutIds);
 	}
 
-	public void unschedulePublishToLive(long liveGroupId, String jobName)
+	public void unschedulePublishToLive(
+			long liveGroupId, String jobName, String groupName)
 		throws PortalException, SystemException {
 
 		GroupPermissionUtil.check(
 			getPermissionChecker(), liveGroupId, ActionKeys.MANAGE_LAYOUTS);
 
-		SchedulerEngineUtil.unschedule(
-			jobName, getSchedulerGroupName(liveGroupId));
+		SchedulerEngineUtil.unschedule(jobName, groupName);
 	}
 
 	public Layout updateLayout(
@@ -415,16 +414,6 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 		return layoutLocalService.updatePriority(
 			groupId, privateLayout, layoutId, priority);
-	}
-
-	protected String getSchedulerGroupName(long liveGroupId) {
-		StringMaker sm = new StringMaker();
-
-		sm.append(DestinationNames.LAYOUTS_PUBLISHER);
-		sm.append(StringPool.FORWARD_SLASH);
-		sm.append(liveGroupId);
-
-		return sm.toString();
 	}
 
 }

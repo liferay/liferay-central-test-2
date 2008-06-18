@@ -28,6 +28,7 @@ ResourceURL scheduledPublishToLiveEventsURL = renderResponse.createResourceURL()
 scheduledPublishToLiveEventsURL.setParameter("struts_action", "/communities/edit_pages");
 scheduledPublishToLiveEventsURL.setParameter("groupId", String.valueOf(liveGroupId));
 scheduledPublishToLiveEventsURL.setParameter("privateLayout", String.valueOf(privateLayout));
+scheduledPublishToLiveEventsURL.setParameter("namespace", portletDisplay.getNamespace());
 %>
 
 <script type="text/javascript">
@@ -74,7 +75,6 @@ scheduledPublishToLiveEventsURL.setParameter("privateLayout", String.valueOf(pri
 		jQuery.ajax(
 			{
 				url: '<%= scheduledPublishToLiveEventsURL %>',
-				dataType: 'json',
 				success: function(html) {
 					var scheduledPublishToLiveDiv = jQuery('#<portlet:namespace />scheduledPublishToLiveDiv');
 

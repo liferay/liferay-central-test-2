@@ -126,10 +126,11 @@ public class LayoutServiceJSON {
 	}
 
 	public static void unschedulePublishToLive(long liveGroupId,
-		java.lang.String jobName)
+		java.lang.String jobName, java.lang.String groupName)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		LayoutServiceUtil.unschedulePublishToLive(liveGroupId, jobName);
+		LayoutServiceUtil.unschedulePublishToLive(liveGroupId, jobName,
+			groupName);
 	}
 
 	public static JSONObject updateLayout(long groupId, boolean privateLayout,

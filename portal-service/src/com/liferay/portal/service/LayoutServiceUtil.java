@@ -198,15 +198,16 @@ public class LayoutServiceUtil {
 		long liveGroupId, boolean privateLayout,
 		java.util.Map<Long, Boolean> layoutIdMap,
 		java.util.Map<String, String[]> parameterMap, java.lang.String scope,
-		java.lang.String cronText, java.util.Date startDate,
-		java.util.Date endDate, java.lang.String description)
+		java.lang.String groupName, java.lang.String cronText,
+		java.util.Date startDate, java.util.Date endDate,
+		java.lang.String description)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
 
 		layoutService.schedulePublishToLive(stagingGroupId, liveGroupId,
-			privateLayout, layoutIdMap, parameterMap, scope, cronText,
-			startDate, endDate, description);
+			privateLayout, layoutIdMap, parameterMap, scope, groupName,
+			cronText, startDate, endDate, description);
 	}
 
 	public static void setLayouts(long groupId, boolean privateLayout,
@@ -220,12 +221,12 @@ public class LayoutServiceUtil {
 	}
 
 	public static void unschedulePublishToLive(long liveGroupId,
-		java.lang.String jobName)
+		java.lang.String jobName, java.lang.String groupName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
 
-		layoutService.unschedulePublishToLive(liveGroupId, jobName);
+		layoutService.unschedulePublishToLive(liveGroupId, jobName, groupName);
 	}
 
 	public static com.liferay.portal.model.Layout updateLayout(long groupId,
