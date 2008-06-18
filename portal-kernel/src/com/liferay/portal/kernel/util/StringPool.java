@@ -31,6 +31,8 @@ package com.liferay.portal.kernel.util;
 public class StringPool {
 
 	public static final String AMPERSAND = "&";
+	
+	public static final String AMPERSAND_ENCODED = "&amp;";
 
 	public static final String APOSTROPHE = "'";
 

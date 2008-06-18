@@ -2081,14 +2081,24 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/saaj.jar</file-name>
+		<file-name>portal/saaj-api.jar</file-name>
 		<version>1.3</version>
 		<project-name>JSR 67 Java APIs for XML Messaging 1.0 / SOAP with Attachments API for Java (SAAJ)</project-name>
 		<project-url>https://saaj.dev.java.net</project-url>
 		<licenses>
 			<license>
-				<license-name>Sun License for JSR 67 Java APIs for XML Messaging 1.0</license-name>
-				<copyright-notice>Copyright (c) 2006 SUN MICROSYSTEMS, INC.</copyright-notice>
+				<license-name>CDDL v1.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/saaj-impl.jar</file-name>
+		<version>1.3</version>
+		<project-name>SOAP with Attachments API for Java</project-name>
+		<project-url>https://saaj.dev.java.net</project-url>
+		<licenses>
+			<license>
+				<license-name>CDDL v1.0</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -2282,7 +2292,7 @@
 	</library>
 	<library>
 		<file-name>portal/wsdl4j.jar</file-name>
-		<version>1.5.1</version>
+		<version>1.6</version>
 		<project-name>WSDL4J</project-name>
 		<project-url>http://sourceforge.net/projects/wsdl4j</project-url>
 		<licenses>
