@@ -104,10 +104,6 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 
 		regexps.put("\\[((http|ftp)[^ ]*) ([^\\]]*)\\]", "[[$1|$3]]");
 
-		// Monospace
-
-		regexps.put("(^ (.+))(\\n (.+))*", "{{{\n$0\n}}}");
-
 		// Term and definition
 
 		regexps.put("^\\t([\\w]+):\\t(.*)", "**$1**:\n$2");
@@ -116,11 +112,15 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 
 		regexps.put("^\\t:\\t(.*)", "$1");
 
+		// Monospace
+
+		regexps.put("(^ (.+))(\\n (.+))*", "{{{\n$0\n}}}");
+
 		// No wiki
 
 		regexps.put("<nowiki>([^<]*)</nowiki>", "{{{$1}}}");
 
-		// Pre
+		// HTML PRE
 
 		regexps.put("<pre>([^<]*)</pre>", "{{{$1}}}");
 
