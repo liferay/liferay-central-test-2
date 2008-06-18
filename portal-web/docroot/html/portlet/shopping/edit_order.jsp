@@ -350,20 +350,22 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 				<liferay-ui:input-field model="<%= ShoppingOrder.class %>" bean="<%= order %>" field="ppPayerEmail" />
 			</td>
 		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="paypal-order" />:
-			</td>
-			<td>
+		<c:if test="<%= order.getPpPaymentStatus().equals(ShoppingOrderImpl.STATUS_CHECKOUT) %>">
+			<tr>
+				<td>
+					<liferay-ui:message key="paypal-order" />:
+				</td>
+				<td>
 
-				<%
-				String payPalLinkOpen = "<a href=\"" + ShoppingUtil.getPayPalRedirectURL(shoppingPrefs, order, ShoppingUtil.calculateTotal(order), ShoppingUtil.getPayPalReturnURL(renderResponse.createActionURL(), order), ShoppingUtil.getPayPalNotifyURL(themeDisplay)) + "\"><b><u>";
-				String payPalLinkClose = "</u></b></a>";
-				%>
+					<%
+					String payPalLinkOpen = "<a href=\"" + ShoppingUtil.getPayPalRedirectURL(shoppingPrefs, order, ShoppingUtil.calculateTotal(order), ShoppingUtil.getPayPalReturnURL(renderResponse.createActionURL(), order), ShoppingUtil.getPayPalNotifyURL(themeDisplay)) + "\"><b><u>";
+					String payPalLinkClose = "</u></b></a>";
+					%>
 
-				<%= LanguageUtil.format(pageContext, "please-complete-your-order", new Object[] {payPalLinkOpen, payPalLinkClose}, false) %>
-			</td>
-		</tr>
+					<%= LanguageUtil.format(pageContext, "please-complete-your-order", new Object[] {payPalLinkOpen, payPalLinkClose}, false) %>
+				</td>
+			</tr>
+		</c:if>
 		</table>
 	</c:when>
 	<c:otherwise>
