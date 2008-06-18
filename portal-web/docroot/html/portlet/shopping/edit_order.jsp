@@ -85,7 +85,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 		<liferay-ui:message key="order" /> #:
 	</td>
 	<td>
-		<b><%= order.getOrderId() %></b>
+		<b><%= order.getNumber() %></b>
 	</td>
 </tr>
 <tr>

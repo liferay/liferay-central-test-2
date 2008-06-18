@@ -916,9 +916,9 @@ public class ShoppingUtil {
 		sm.append("https://www.paypal.com/cgi-bin/webscr?");
 		sm.append("cmd=_xclick&");
 		sm.append("business=").append(payPalEmailAddress).append("&");
-		sm.append("item_name=").append(order.getOrderId()).append("&");
-		sm.append("item_number=").append(order.getOrderId()).append("&");
-		sm.append("invoice=").append(order.getOrderId()).append("&");
+		sm.append("item_name=").append(order.getNumber()).append("&");
+		sm.append("item_number=").append(order.getNumber()).append("&");
+		sm.append("invoice=").append(order.getNumber()).append("&");
 		sm.append("amount=").append(amount).append("&");
 		sm.append("return=").append(returnURL).append("&");
 		sm.append("notify_url=").append(notifyURL).append("&");
