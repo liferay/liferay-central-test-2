@@ -892,7 +892,8 @@ public class ShoppingUtil {
 		String payPalEmailAddress = HttpUtil.encodeURL(
 			prefs.getPayPalEmailAddress());
 
-		NumberFormat doubleFormat = NumberFormat.getNumberInstance();
+		NumberFormat doubleFormat = NumberFormat.getNumberInstance(
+			java.util.Locale.ENGLISH);
 
 		doubleFormat.setMaximumFractionDigits(2);
 		doubleFormat.setMinimumFractionDigits(2);
@@ -930,7 +931,7 @@ public class ShoppingUtil {
 		sm.append("zip=").append(zip).append("&");
 		sm.append("no_note=1&");
 		sm.append("currency_code=").append(currencyCode).append("");
-
+System.out.println("----- " + sm.toString());
 		return sm.toString();
 	}
 
