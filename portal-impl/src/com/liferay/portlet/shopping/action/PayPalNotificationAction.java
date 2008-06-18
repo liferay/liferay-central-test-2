@@ -108,7 +108,7 @@ public class PayPalNotificationAction extends Action {
 			invoice = ParamUtil.getString(req, "invoice");
 			String txnId = ParamUtil.getString(req, "txn_id");
 			String paymentStatus = ParamUtil.getString(req, "payment_status");
-			double paymentGross = ParamUtil.getDouble(req, "payment_gross");
+			double paymentGross = ParamUtil.getDouble(req, "mc_gross");
 			String receiverEmail = ParamUtil.getString(req, "receiver_email");
 			String payerEmail = ParamUtil.getString(req, "payer_email");
 
