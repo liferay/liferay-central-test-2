@@ -193,25 +193,23 @@ public class StagingUtil {
 
 			if (!inetAddress.isReachable(800)) {
 				throw new RemoteExportException(
-					"{subject=" + remoteAddress +
-						",exception=UnreachableHostException}");
+					"{exception=UnreachableHostException,subject=" +
+						remoteAddress + "}");
 			}
 		}
 		catch (UnknownHostException uhe) {
 			throw new RemoteExportException(
-				"{subject=" + remoteAddress +
-					",exception=UnknownHostException}");
+				"{exception=UnknownHostException,subject=" + remoteAddress +
+					"}");
 		}
 		catch (IOException ioe) {
 			throw new RemoteExportException(
-				"{subject=" + remoteAddress +
-					",exception=IOException}");
+				"{exception=IOException,subject=" + remoteAddress + "}");
 		}
 
-		if (remotePort <= 0 || remotePort > 65535) {
+		if ((remotePort <= 0) || (remotePort > 65535)) {
 			throw new RemoteExportException(
-				"{subject=" + remotePort +
-					",exception=InvalidPortException}");
+				"{exception=InvalidPortException,subject=" + remotePort + "}");
 		}
 
 		PermissionChecker permissionChecker =
@@ -243,14 +241,14 @@ public class StagingUtil {
 		}
 		catch (NoSuchGroupException nsge) {
 			throw new RemoteExportException(
-				"{subject=" + remoteGroupId +
-					",exception=NoSuchGroupException}");
+				"{exception=NoSuchGroupException,subject=" + remoteGroupId +
+					"}");
 		}
 		catch (SystemException se) {
 			if (se.getCause() instanceof ConnectException) {
 				throw new RemoteExportException(
-					"{subject=" + sm.toString() +
-						",exception=ConnectException}");
+					"{exception=ConnectException,subject=" + sm.toString() +
+						"}");
 			}
 		}
 
@@ -339,7 +337,39 @@ public class StagingUtil {
 			privateLayout = false;
 		}
 
+		String scope = ParamUtil.getString(req, "scope");
+
+		if (Validator.isNull(scope)) {
+			scope = "all-pages";
+		}
+
+		Map<Long, Boolean> layoutIdMap = null;
+		Map<String, String[]> parameterMap = req.getParameterMap();
+
+		if (scope.equals("selected-pages")) {
+			layoutIdMap = new LinkedHashMap<Long, Boolean>();
+
+			long[] rowIds = ParamUtil.getLongValues(req, "rowIds");
+
+			for (long selPlid : rowIds) {
+				boolean includeChildren = ParamUtil.getBoolean(
+					req, "includeChildren_" + selPlid);
+
+				layoutIdMap.put(selPlid, includeChildren);
+			}
+		}
+
+		String remoteAddress = ParamUtil.getString(req, "remoteAddress");
+		int remotePort = ParamUtil.getInteger(req, "remotePort");
+		boolean secureConnection = ParamUtil.getBoolean(
+			req, "secureConnection");
+
+		long remoteGroupId = ParamUtil.getLong(req, "remoteGroupId");
+		boolean remotePrivateLayout = ParamUtil.getBoolean(
+			req, "remotePrivateLayout");
+
 		boolean dateRange = ParamUtil.getBoolean(req, "dateRange");
+
 		Date startDate = null;
 		Date endDate = null;
 
@@ -347,13 +377,11 @@ public class StagingUtil {
 			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-			int startDateMonth = ParamUtil.getInteger(
-				req, "startDateMonth");
+			int startDateMonth = ParamUtil.getInteger(req, "startDateMonth");
 			int startDateDay = ParamUtil.getInteger(req, "startDateDay");
 			int startDateYear = ParamUtil.getInteger(req, "startDateYear");
 			int startDateHour = ParamUtil.getInteger(req, "startDateHour");
-			int startDateMinute = ParamUtil.getInteger(
-				req, "startDateMinute");
+			int startDateMinute = ParamUtil.getInteger(req, "startDateMinute");
 			int startDateAmPm = ParamUtil.getInteger(req, "startDateAmPm");
 
 			if (startDateAmPm == Calendar.PM) {
@@ -382,68 +410,45 @@ public class StagingUtil {
 				new PortalException());
 		}
 
-		long remoteGroupId = ParamUtil.getLong(req, "remoteGroupId");
-		boolean remotePrivateLayout = ParamUtil.getBoolean(
-			req, "remotePrivateLayout");
-		String remoteAddress = ParamUtil.getString(req, "remoteAddress");
-		int remotePort = ParamUtil.getInteger(req, "remotePort");
-		boolean secureConnection = ParamUtil.getBoolean(
-			req, "secureConnection");
-
 		if (_log.isDebugEnabled()) {
 			StringMaker sm = new StringMaker();
+
 			sm.append("Exporting ");
+
 			if (privateLayout) {
 				sm.append("private ");
 			}
 			else {
 				sm.append("public ");
 			}
+
 			sm.append("pages for group ");
 			sm.append(group.getGroupId());
 			sm.append(" remotely to the ");
+
 			if (remotePrivateLayout) {
 				sm.append("private ");
 			}
 			else {
 				sm.append("public ");
 			}
+
 			sm.append("pages for group ");
 			sm.append(remoteGroupId);
 			sm.append(" on host ");
+
 			if (secureConnection) {
 				sm.append(Http.HTTPS_WITH_SLASH);
 			}
 			else {
 				sm.append(Http.HTTP_WITH_SLASH);
 			}
+
 			sm.append(remoteAddress);
 			sm.append(StringPool.COLON);
 			sm.append(remotePort);
 
 			_log.debug(sm.toString());
-		}
-
-		String scope = ParamUtil.getString(req, "scope");
-
-		if (Validator.isNull(scope)) {
-			scope = "all-pages";
-		}
-
-		Map<String, String[]> parameterMap = req.getParameterMap();
-		Map<Long, Boolean> layoutIdMap = null;
-
-		if (scope.equals("selected-pages")) {
-			layoutIdMap = new LinkedHashMap<Long, Boolean>();
-
-			long[] rowIds = ParamUtil.getLongValues(req, "rowIds");
-
-			for (long selPlid : rowIds) {
-				boolean includeChildren = ParamUtil.getBoolean(
-					req, "includeChildren_" + selPlid);
-
-				layoutIdMap.put(selPlid, includeChildren);
-			}
 		}
 
 		copyRemoteLayouts(

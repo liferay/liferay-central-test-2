@@ -271,7 +271,6 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	function <portlet:namespace />exportPages() {
 		if (document.<portlet:namespace />fm.<portlet:namespace />enableRemote.checked) {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "export_remotely";
-
 			submitForm(document.<portlet:namespace />fm);
 		}
 		else {

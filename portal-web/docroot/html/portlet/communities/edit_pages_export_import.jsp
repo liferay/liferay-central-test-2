@@ -86,7 +86,9 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 <liferay-ui:error exception="<%= LARFileException.class %>" message="please-specify-a-lar-file-to-import" />
 <liferay-ui:error exception="<%= LARTypeException.class %>" message="please-import-a-lar-file-of-the-correct-type" />
 <liferay-ui:error exception="<%= LayoutImportException.class %>" message="an-unexpected-error-occurred-while-importing-your-file" />
+
 <liferay-ui:error exception="<%= RemoteExportException.class %>">
+
 	<%
 	RemoteExportException ree = (RemoteExportException)errorException;
 
@@ -95,6 +97,7 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 	String exception = pkParser.getString("exception");
 	String subject = pkParser.getString("subject");
 	%>
+
 	<c:choose>
 		<c:when test='<%= exception.equals("ConnectException") %>'>
 			<%= LanguageUtil.format(pageContext, "could-not-connect-to-address-x,please-verify-that-the-specified-port-is-correct", "<tt>" + subject + "</tt>") %>
@@ -106,7 +109,7 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 			<%= LanguageUtil.format(pageContext, "a-network-error-occured-while-trying-to-reach-x", subject) %>
 		</c:when>
 		<c:when test='<%= exception.equals("NoLayoutsSelectedException") %>'>
-			<%= LanguageUtil.get(pageContext, "no-layouts-are-selected-for-export") %>
+			<%= LanguageUtil.get(pageContext, "no-pages-are-selected-for-export") %>
 		</c:when>
 		<c:when test='<%= exception.equals("NoSuchGroupException") %>'>
 			<%= LanguageUtil.format(pageContext, "remote-group-with-id-x-does-not-exist", subject) %>
@@ -141,13 +144,13 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 		<br />
 
 		<liferay-ui:toggle-area
-			showMessage="<%= LanguageUtil.get(pageContext, "show-remote-export-options") + " &raquo;" %>"
-			hideMessage="<%= "&laquo; " + LanguageUtil.get(pageContext, "hide-remote-export-options") %>"
+			showMessage='<%= LanguageUtil.get(pageContext, "show-remote-export-options") + " &raquo;" %>'
+			hideMessage='<%= "&laquo; " + LanguageUtil.get(pageContext, "hide-remote-export-options") %>'
 			defaultShowContent="<%= false %>"
 		>
 			<br />
 
-			<liferay-ui:message key="export-the-selected-data-to-the-community-of-a-remote-portal,-or-to-another-community-in-the-same-portal" />
+			<liferay-ui:message key="export-the-selected-data-to-the-community-of-a-remote-portal-or-to-another-community-in-the-same-portal" />
 
 			<br /><br />
 
@@ -178,7 +181,7 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 							</tr>
 							<tr>
 								<td>
-									<liferay-ui:message key="remote-group-id,organization-or-community" />
+									<liferay-ui:message key="remote-group-id-organization-or-community" />
 								</td>
 								<td>
 									<input disabled="disabled" id="<portlet:namespace />remoteGroupId" name="<portlet:namespace />remoteGroupId" size="10" type="text" />
@@ -189,7 +192,7 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 						<li class="tree-item">
 							<input disabled="disabled" id="<portlet:namespace />remotePrivateLayout" name="<portlet:namespace />remotePrivateLayout" type="checkbox" />
 
-							<label for="<portlet:namespace />remotePrivateLayout"><liferay-ui:message key="remote-private-layout" /></label>
+							<label for="<portlet:namespace />remotePrivateLayout"><liferay-ui:message key="remote-private-page" /></label>
 						</li>
 						<li class="tree-item">
 							<input disabled="disabled" id="<portlet:namespace />secureConnection" name="<portlet:namespace />secureConnection" type="checkbox" />
