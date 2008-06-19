@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobScheduler;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.Time;
+import com.liferay.portal.kernel.util.Time;
 
 import java.util.Date;
 

@@ -25,10 +25,10 @@ package com.liferay.portlet.translator.util;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.translator.model.Translation;
-import com.liferay.util.Time;
 
 import java.net.URL;
 

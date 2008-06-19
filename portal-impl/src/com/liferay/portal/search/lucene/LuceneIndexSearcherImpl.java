@@ -33,7 +33,7 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.Time;
+import com.liferay.portal.kernel.util.Time;
 
 import java.io.IOException;
 

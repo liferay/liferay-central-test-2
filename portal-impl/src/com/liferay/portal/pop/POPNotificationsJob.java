@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.job.JobExecutionException;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.Time;
 import com.liferay.util.mail.MailEngine;
 
 import java.util.Iterator;

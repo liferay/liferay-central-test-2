@@ -25,7 +25,7 @@ package com.liferay.portlet.messageboards.util;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.util.Time;
+import com.liferay.portal.kernel.util.Time;
 
 import java.util.ArrayList;
 import java.util.HashSet;

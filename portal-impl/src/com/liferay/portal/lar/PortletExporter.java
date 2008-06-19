@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
@@ -65,7 +66,6 @@ import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.util.MapUtil;
-import com.liferay.util.Time;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;

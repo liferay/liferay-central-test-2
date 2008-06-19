@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
@@ -53,7 +54,6 @@ import com.liferay.portlet.journal.util.comparator.ArticleModifiedDateComparator
 import com.liferay.portlet.journal.util.comparator.ArticleReviewDateComparator;
 import com.liferay.portlet.journal.util.comparator.ArticleTitleComparator;
 import com.liferay.util.FiniteUniqueStack;
-import com.liferay.util.Time;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;

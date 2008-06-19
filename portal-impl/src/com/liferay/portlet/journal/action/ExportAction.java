@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portal.model.Image;
@@ -73,7 +74,6 @@ import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.service.persistence.JournalContentSearchUtil;
 import com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException;
 import com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceUtil;
-import com.liferay.util.Time;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.util.ArrayList;

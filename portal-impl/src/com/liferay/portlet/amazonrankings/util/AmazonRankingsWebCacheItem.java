@@ -23,10 +23,10 @@
 package com.liferay.portlet.amazonrankings.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.amazonrankings.model.AmazonRankings;
-import com.liferay.util.Time;
 
 import java.net.URL;
 

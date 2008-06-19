@@ -26,8 +26,8 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
-import com.liferay.util.Time;
 
 import java.util.ArrayList;
 import java.util.List;

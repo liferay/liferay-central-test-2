@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
 import com.liferay.portal.lastmodified.LastModifiedJavaScript;
@@ -42,7 +43,6 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.Time;
 
 import java.util.Enumeration;
 import java.util.Map;

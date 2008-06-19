@@ -30,10 +30,10 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.tools.PortletDeployer;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.Time;
 
 import com.sun.portal.portletcontainer.appengine.filter.FilterChainImpl;
 

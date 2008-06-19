@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.cal;
+package com.liferay.util;
 
 import net.fortuna.ical4j.model.ParameterList;
 import net.fortuna.ical4j.model.property.XProperty;

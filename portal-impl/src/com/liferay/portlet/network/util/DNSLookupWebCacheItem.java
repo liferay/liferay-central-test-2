@@ -23,10 +23,10 @@
 package com.liferay.portlet.network.util;
 
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.network.model.DNSLookup;
-import com.liferay.util.Time;
 
 import java.net.InetAddress;
 

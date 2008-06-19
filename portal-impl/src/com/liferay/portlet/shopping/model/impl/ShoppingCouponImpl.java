@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.shopping.model.impl;
 
+import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
-import com.liferay.util.cal.CalendarUtil;
 
 import java.util.Date;
 

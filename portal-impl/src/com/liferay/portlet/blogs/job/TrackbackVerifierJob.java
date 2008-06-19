@@ -24,9 +24,9 @@ package com.liferay.portlet.blogs.job;
 
 import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobExecutionContext;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.blogs.util.TrackbackVerifierUtil;
-import com.liferay.util.Time;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

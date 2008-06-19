@@ -25,10 +25,10 @@ package com.liferay.portal.search.lucene;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.util.comparator.PortletLuceneComparator;
-import com.liferay.util.Time;
 
 import java.io.IOException;
 

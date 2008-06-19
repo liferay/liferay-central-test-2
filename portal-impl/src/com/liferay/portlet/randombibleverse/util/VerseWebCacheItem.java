@@ -25,10 +25,10 @@ package com.liferay.portlet.randombibleverse.util;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.randombibleverse.model.Verse;
-import com.liferay.util.Time;
 
 /**
  * <a href="VerseWebCacheItem.java.html"><b><i>View Source</i></b></a>

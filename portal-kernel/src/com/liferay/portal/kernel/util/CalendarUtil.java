@@ -20,13 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.cal;
-
-import com.liferay.portal.kernel.util.CalendarFactoryUtil;
-import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.TimeZoneUtil;
-import com.liferay.portal.kernel.util.Validator;
+package com.liferay.portal.kernel.util;
 
 import java.sql.Timestamp;
 

@@ -25,9 +25,9 @@ package com.liferay.portlet.reverendfun.util;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringComparator;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
-import com.liferay.util.Time;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

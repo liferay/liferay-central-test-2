@@ -39,7 +39,7 @@ import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.util.SetUtil;
 import com.liferay.util.TextFormatter;
-import com.liferay.util.Time;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.util.log4j.Log4JUtil;
 import com.liferay.util.xml.XMLFormatter;
 

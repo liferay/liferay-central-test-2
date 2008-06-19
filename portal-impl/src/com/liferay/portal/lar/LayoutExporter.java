@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Image;
@@ -51,7 +52,6 @@ import com.liferay.portal.theme.ThemeLoaderFactory;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.util.MapUtil;
-import com.liferay.util.Time;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.File;

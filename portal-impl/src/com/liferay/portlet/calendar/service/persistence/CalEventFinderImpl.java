@@ -23,11 +23,11 @@
 package com.liferay.portlet.calendar.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
-import com.liferay.util.cal.CalendarUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 
 import java.sql.Timestamp;

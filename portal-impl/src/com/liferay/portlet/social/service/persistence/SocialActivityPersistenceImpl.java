@@ -42,7 +42,7 @@ import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.impl.SocialActivityImpl;
 import com.liferay.portlet.social.model.impl.SocialActivityModelImpl;
 
-import com.liferay.util.cal.CalendarUtil;
+import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 

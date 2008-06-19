@@ -24,8 +24,8 @@ package com.liferay.portal.search.lucene;
 
 import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobExecutionContext;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.util.SystemProperties;
-import com.liferay.util.Time;
 import com.liferay.util.ant.DeleteTask;
 
 import org.apache.commons.logging.Log;

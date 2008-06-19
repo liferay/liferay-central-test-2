@@ -20,10 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
-
-import com.liferay.portal.kernel.util.CalendarFactoryUtil;
-import com.liferay.portal.kernel.util.StringPool;
+package com.liferay.portal.kernel.util;
 
 import java.text.SimpleDateFormat;
 

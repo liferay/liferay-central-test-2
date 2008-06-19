@@ -27,11 +27,11 @@ import com.liferay.portal.kernel.cal.DayAndPosition;
 import com.liferay.portal.kernel.cal.Duration;
 import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.kernel.util.Base64;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.calendar.model.CalEvent;
-import com.liferay.util.Time;
 
 /**
  * <a href="CalEventImpl.java.html"><b><i>View Source</i></b></a>

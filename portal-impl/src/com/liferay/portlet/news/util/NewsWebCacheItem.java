@@ -23,11 +23,11 @@
 package com.liferay.portlet.news.util;
 
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.news.model.Article;
 import com.liferay.portlet.news.model.News;
-import com.liferay.util.Time;
 
 import java.io.ByteArrayInputStream;
 

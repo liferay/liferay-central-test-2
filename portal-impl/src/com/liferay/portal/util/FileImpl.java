@@ -28,10 +28,10 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.PwdGenerator;
 import com.liferay.util.SystemProperties;
-import com.liferay.util.Time;
 import com.liferay.util.lucene.JerichoHTMLTextExtractor;
 
 import java.io.BufferedInputStream;

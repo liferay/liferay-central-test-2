@@ -24,10 +24,10 @@ package com.liferay.portal.webcache;
 
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portal.kernel.webcache.WebCachePool;
-import com.liferay.util.Time;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
