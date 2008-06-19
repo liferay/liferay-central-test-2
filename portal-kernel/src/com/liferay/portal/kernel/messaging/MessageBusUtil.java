@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.messaging;
 
+import com.liferay.portal.SystemException;
+
 /**
  * <a href="MessageBusUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -62,10 +64,19 @@ public class MessageBusUtil {
 		_instance._sendMessage(destination, message);
 	}
 
-	public static String sendSynchronizedMessage(
-		String destination, String message) {
+    public static String sendSynchronizedMessage(String destination,
+                                                 String message, long timeout)
+    throws SystemException {
 
-		return _instance._sendSynchronizedMessage(destination, message);
+        return _instance._sendSynchronizedMessage(destination, message, timeout);
+    }
+
+    public static String sendSynchronizedMessage(String destination,
+                                                 String message)
+    throws SystemException {
+
+		return _instance._sendSynchronizedMessage(destination, message,
+                                                  _DEFAULT_TIMEOUT);
 	}
 
 	public static boolean unregisterMessageListener(
@@ -100,10 +111,12 @@ public class MessageBusUtil {
 		_messageBus.sendMessage(destination, message);
 	}
 
-	private String _sendSynchronizedMessage(
-		String destination, String message) {
+	private String _sendSynchronizedMessage(String destination, String message,
+                                            long timeout)
+            throws SystemException {
 
-		return _messageBus.sendSynchronizedMessage(destination, message);
+		return _messageBus.sendSynchronizedMessage(destination, message,
+                                                   timeout);
 	}
 
 	private boolean _unregisterMessageListener(
@@ -116,5 +129,5 @@ public class MessageBusUtil {
 
 	private MessageBus _messageBus;
 	private MessageSender _messageSender;
-
+    private static final long _DEFAULT_TIMEOUT = 1000;
 }

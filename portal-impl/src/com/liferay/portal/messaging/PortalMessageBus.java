@@ -25,6 +25,7 @@ package com.liferay.portal.messaging;
 import com.liferay.portal.kernel.messaging.Destination;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.SystemException;
 
 import org.springframework.beans.factory.DisposableBean;
 
@@ -59,8 +60,10 @@ public class PortalMessageBus implements DisposableBean, MessageBus {
 		_messageBus.sendMessage(destination, message);
 	}
 
-	public String sendSynchronizedMessage(String destination, String message) {
-		return _messageBus.sendSynchronizedMessage(destination, message);
+	public String sendSynchronizedMessage(String destination, String message,
+                                          long timeout)
+            throws SystemException {    
+        return _messageBus.sendSynchronizedMessage(destination, message, timeout);
 	}
 
 	public void setMessageBus(MessageBus messageBus) {

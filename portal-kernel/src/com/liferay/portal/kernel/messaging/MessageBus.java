@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.messaging;
 
+import com.liferay.portal.SystemException;
+
 /**
  * <a href="MessageBus.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,7 +41,9 @@ public interface MessageBus {
 
 	public void sendMessage(String destination, String message);
 
-	public String sendSynchronizedMessage(String destination, String message);
+	public String sendSynchronizedMessage(String destination, String message,
+                                          long timeout)
+            throws SystemException;
 
 	public void shutdown();
 

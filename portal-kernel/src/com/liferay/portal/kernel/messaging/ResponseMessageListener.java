@@ -23,6 +23,7 @@
 package com.liferay.portal.kernel.messaging;
 
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.SystemException;
 
 /**
  * <a href="ResponseMessageListener.java.html"><b><i>View Source</i></b></a>
@@ -34,14 +35,7 @@ public class ResponseMessageListener implements MessageListener {
 
 	public ResponseMessageListener(
 		Destination destination, Destination responseDestination,
-		String responseId) {
-
-		this(destination, responseDestination, responseId, _TIMEOUT);
-	}
-
-	public ResponseMessageListener(
-		Destination destination, Destination responseDestination,
-		String responseId, int timeout) {
+		String responseId, long timeout) {
 
 		_destination = destination;
 		_responseDestination = responseDestination;
@@ -49,8 +43,7 @@ public class ResponseMessageListener implements MessageListener {
 		_timeout = timeout;
 	}
 
-	public synchronized String send(String message)
-		throws InterruptedException {
+	public synchronized String send(String message) throws SystemException {
 
 		if (message.equals(_EMTPY_MESSAGE)) {
 			StringMaker sm = new StringMaker();
@@ -78,9 +71,16 @@ public class ResponseMessageListener implements MessageListener {
 
 		_destination.send(message);
 
-		wait(_timeout);
-
-		return _responseMessage;
+        try {
+            wait(_timeout);
+        } catch (InterruptedException e) {
+            throw new SystemException("Unable to receive response for request.");
+        }
+        if (_responseMessage == null) {
+            throw new SystemException("No reply received for request: " +
+                    message);
+        }
+        return _responseMessage;
 	}
 
 	public synchronized void receive(String message) {
@@ -95,12 +95,10 @@ public class ResponseMessageListener implements MessageListener {
 
 	private static final String _EMTPY_MESSAGE = "{}";
 
-	private static final int _TIMEOUT = 10000;
-
 	private Destination _destination;
 	private Destination _responseDestination;
 	private String _responseId;
-	private int _timeout;
+	private long _timeout;
 	private String _responseMessage;
 
 }
