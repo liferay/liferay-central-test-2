@@ -27,8 +27,6 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.messaging.SearchRequest;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.SystemException;
-import org.apache.commons.logging.LogFactory;
-import org.apache.commons.logging.Log;
 
 /**
  * <a href="SearchEngineUtil.java.html"><b><i>View Source</i></b></a>
@@ -134,9 +132,6 @@ public class SearchEngineUtil {
 
             return false;
         } catch (SystemException e) {
-            if (_log.isErrorEnabled()) {
-                _log.error("Unbale to check index status", e);
-            }
             return false;
         }
 
@@ -163,7 +158,6 @@ public class SearchEngineUtil {
 	}
 
 	private static SearchEngineUtil _instance = new SearchEngineUtil();
-    private static final Log _log = LogFactory.getLog(SearchEngineUtil.class);
 
     private IndexSearcher _messageBusIndexSearcher;
 	private IndexWriter _messageBusIndexWriter;
