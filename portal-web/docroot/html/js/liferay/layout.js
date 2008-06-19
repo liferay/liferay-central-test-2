@@ -325,6 +325,8 @@ Liferay.Layout.FreeForm = {
 
 		instance._createHelperCache(portlet);
 
+		var helperZIndex = instance._maxZIndex + 10;
+
 		jPortlet.draggable(
 			{
 				handle: '.portlet-header-bar, .portlet-title-default, .portlet-topper, .portlet-topper *',
@@ -334,13 +336,12 @@ Liferay.Layout.FreeForm = {
 
 					var height = portlet.height();
 					var width = portlet.width();
-					var zIndex = portlet.css('z-index');
 
 					helper.css(
 						{
 							height: height,
 							width: width,
-							zIndex: zIndex + 10
+							zIndex: helperZIndex
 						}
 					);
 
@@ -378,7 +379,7 @@ Liferay.Layout.FreeForm = {
 					instance._moveToTop(this);
 					instance._savePosition(this, true);
 					instance._current = this;
-					this.style.zIndex = 99;
+					this.style.zIndex = instance._maxZIndex;
 				}
 			}
 		);
@@ -388,21 +389,22 @@ Liferay.Layout.FreeForm = {
 
 		jPortlet.resizable(
 			{
+				proxy: 'ui-resizable-proxy',
 				start: function(event, ui) {
+					ui.helper.css('z-index', helperZIndex);
 					instance._moveToTop(this);
-				},
-				resize: function(event, ui) {
-					var rBoxHeight = parseInt(resizeBox[0].style.height);
-					var portletHeight = ui.size.height;
-
-					var newHeight = Math.round((portletHeight / oldPortletHeight) * rBoxHeight);
-					resizeBox.css('height', newHeight);
-					ui.size.height = 'auto';
-
-					oldPortletHeight = portletHeight;
+					
 				},
 				stop: function(event, ui) {
 					var portlet = this;
+					var rBoxHeight = parseInt(resizeBox[0].style.height);
+					var portletHeight = ui.size.height;
+					var newHeight = Math.round((portletHeight / oldPortletHeight) * rBoxHeight);
+
+					resizeBox.css('height', newHeight);
+					jPortlet.css('height', 'auto');
+
+					oldPortletHeight = portletHeight;
 					instance._savePosition(portlet);
 				}
 			}
@@ -491,5 +493,6 @@ Liferay.Layout.FreeForm = {
 		}
 	},
 
-	_current: null
+	_current: null,
+	_maxZIndex: 99
 };
