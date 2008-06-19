@@ -210,6 +210,10 @@
 					}
 				}
 
+				if (themeDisplay.isFreeformLayout()) {
+					container.prepend(placeHolder);
+				}
+
 				url += '&currentURL=<%= HttpUtil.encodeURL(currentURL) %>';
 
 				return addPortletHTML(
