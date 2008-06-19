@@ -1003,8 +1003,7 @@ public class LayoutTypePortletImpl
 
 		String selector2 = layout.getFriendlyURL();
 
-		return PropsUtil.getArray(
-			position, Filter.by(selector1, selector2));
+		return PropsUtil.getArray(position, Filter.by(selector1, selector2));
 	}
 
 	protected List<Portlet> getStaticPortlets(String position)

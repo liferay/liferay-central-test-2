@@ -51,7 +51,6 @@ else {
 
 <%!
 private String[] _getDisplayStyleDefinition(String displayStyle) {
-	return PropsUtil.getArray(
-		"navigation.display.style", com.germinus.easyconf.Filter.by(displayStyle));
+	return PropsUtil.getArray("navigation.display.style", com.germinus.easyconf.Filter.by(displayStyle));
 }
 %>

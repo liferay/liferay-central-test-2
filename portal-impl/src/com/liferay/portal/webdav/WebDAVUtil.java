@@ -238,9 +238,8 @@ public class WebDAVUtil {
 		String[] tokens = PropsUtil.getArray(PropsUtil.WEBDAV_STORAGE_TOKENS);
 
 		for (String token: tokens) {
-			String className =
-				PropsUtil.get(
-					PropsUtil.WEBDAV_STORAGE_CLASS, Filter.by(token));
+			String className = PropsUtil.get(
+				PropsUtil.WEBDAV_STORAGE_CLASS, Filter.by(token));
 
 			if (Validator.isNotNull(className)) {
 				_storageMap.put(className, token);

@@ -298,9 +298,8 @@ public class WikiUtil {
 
 		if (engine == null) {
 			try {
-				String engineClass =
-					PropsUtil.get(
-						PropsUtil.WIKI_FORMATS_ENGINE, Filter.by(format));
+				String engineClass = PropsUtil.get(
+					PropsUtil.WIKI_FORMATS_ENGINE, Filter.by(format));
 
 				if (engineClass != null) {
 					if (!InstancePool.contains(engineClass)) {

@@ -41,8 +41,30 @@ public class PropsUtil_IW {
 		return PropsUtil.get(key);
 	}
 
+	public java.lang.String get(java.lang.String key,
+		com.germinus.easyconf.Filter filter) {
+		return PropsUtil.get(key, filter);
+	}
+
 	public java.lang.String get(long companyId, java.lang.String key) {
 		return PropsUtil.get(companyId, key);
+	}
+
+	public java.lang.String[] getArray(java.lang.String key) {
+		return PropsUtil.getArray(key);
+	}
+
+	public java.lang.String[] getArray(java.lang.String key,
+		com.germinus.easyconf.Filter filter) {
+		return PropsUtil.getArray(key, filter);
+	}
+
+	public java.util.Properties getProperties() {
+		return PropsUtil.getProperties();
+	}
+
+	public java.util.Enumeration getOrderedPropertyNames() {
+		return PropsUtil.getOrderedPropertyNames();
 	}
 
 	public void set(java.lang.String key, java.lang.String value) {
@@ -51,14 +73,6 @@ public class PropsUtil_IW {
 
 	public void set(long companyId, java.lang.String key, java.lang.String value) {
 		PropsUtil.set(companyId, key, value);
-	}
-
-	public java.lang.String[] getArray(java.lang.String key) {
-		return PropsUtil.getArray(key);
-	}
-
-	public java.util.Properties getProperties() {
-		return PropsUtil.getProperties();
 	}
 
 	private PropsUtil_IW() {
