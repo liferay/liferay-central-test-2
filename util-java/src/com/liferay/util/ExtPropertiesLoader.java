@@ -22,6 +22,7 @@
 
 package com.liferay.util;
 
+import com.germinus.easyconf.AggregatedProperties;
 import com.germinus.easyconf.ComponentConfiguration;
 import com.germinus.easyconf.ComponentProperties;
 import com.germinus.easyconf.EasyConf;
@@ -37,6 +38,9 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
+import org.apache.commons.configuration.Configuration;
+import org.apache.commons.configuration.MapConfiguration;
 
 /**
  * <a href="ExtPropertiesLoader.java.html"><b><i>View Source</i></b></a>
@@ -70,6 +74,12 @@ public class ExtPropertiesLoader {
 		}
 
 		return props;
+	}
+
+	public void addProperties(Properties properties) {
+		AggregatedProperties props =
+			(AggregatedProperties)_conf.getProperties().toConfiguration();
+		props.addConfiguration(new MapConfiguration(properties));
 	}
 
 	public boolean containsKey(String key) {
@@ -149,6 +159,19 @@ public class ExtPropertiesLoader {
 
 	public ComponentProperties getComponentProperties() {
 		return _conf.getProperties();
+	}
+
+	public void removeProperties(Properties properties) {
+		AggregatedProperties props =
+			(AggregatedProperties)_conf.getProperties().toConfiguration();
+
+		for (int i = 0; i < props.getNumberOfConfigurations(); i++) {
+			Configuration curConf = props.getConfiguration(i);
+			if ((curConf instanceof MapConfiguration) &&
+					((MapConfiguration)curConf).getMap() == properties) {
+				props.removeConfiguration(curConf);
+			}
+		}
 	}
 
 	private ExtPropertiesLoader(String name) {
