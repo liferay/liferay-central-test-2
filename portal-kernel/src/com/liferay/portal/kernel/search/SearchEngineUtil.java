@@ -125,10 +125,14 @@ public class SearchEngineUtil {
 		sm.append(SearchRequest.COMMAND_INDEX_ONLY);
 		sm.append("\"}");
 
-        String message = null;
         try {
-            message = MessageBusUtil.sendSynchronizedMessage(
+            String message = MessageBusUtil.sendSynchronizedMessage(
 			DestinationNames.SEARCH, sm.toString());
+            if ((message.indexOf("true") != -1)) {
+                return true;
+            }
+
+            return false;
         } catch (SystemException e) {
             if (_log.isErrorEnabled()) {
                 _log.error("Unbale to check index status", e);
@@ -136,11 +140,6 @@ public class SearchEngineUtil {
             return false;
         }
 
-        if ((message.indexOf("true") != -1)) {
-			return true;
-		}
-
-		return false;
 	}
 
 	private Hits _search(long companyId, String query, int start, int end)
