@@ -85,6 +85,10 @@ public class Validator_IW {
 		return Validator.isHTML(s);
 	}
 
+	public boolean isIPAddress(java.lang.String ipAddress) {
+		return Validator.isIPAddress(ipAddress);
+	}
+
 	public boolean isJulianDate(int month, int day, int year) {
 		return Validator.isJulianDate(month, day, year);
 	}
