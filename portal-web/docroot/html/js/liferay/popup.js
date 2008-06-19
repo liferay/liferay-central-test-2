@@ -51,7 +51,6 @@ Liferay.Popup = function(options) {
 		position: [5,5],
 		height: 'auto',
 		stack: false,
-
 		dragHelper: function() {
 			var dialog = jQuery(this);
 			var cache = cacheDialogHelper(dialog);
@@ -68,7 +67,6 @@ Liferay.Popup = function(options) {
 
 			return cache;
 		},
-
 		dragStart: function(e, ui) {
 			if (!options.dragHelper) {
 				var dialog = jQuery(this).parents('.ui-dialog:first');
@@ -76,7 +74,6 @@ Liferay.Popup = function(options) {
 				dialog.css('visibility', 'hidden');
 			}
 		},
-
 		dragStop: function(e, ui) {
 			if (!options.dragHelper) {
 				var dialog = jQuery(this).parents('.ui-dialog:first');
@@ -94,7 +91,6 @@ Liferay.Popup = function(options) {
 				);
 			}
 		},
-
 		open: function(e, ui) {
 			if (!options.dragHelper) {
 				var dialog = jQuery(this).parents('.ui-dialog:first');

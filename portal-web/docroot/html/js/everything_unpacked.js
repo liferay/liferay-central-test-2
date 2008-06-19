@@ -11839,14 +11839,17 @@ $.widget("ui.dialog", {
 		
 		if ($.fn.draggable) {
 			uiDialog.draggable({
+				helper: options.dragHelper,
 				handle: '.ui-dialog-titlebar',
 				start: function(e, ui) {
 					self.moveToTop();
-					(options.dragStart && options.dragStart.apply(this, arguments));
+					(options.dragStart && options.dragStart.apply(self.element[0], arguments));
 				},
-				drag: options.drag,
+				drag: function(e, ui) {
+					(options.drag && options.drag.apply(self.element[0], arguments));
+				},
 				stop: function(e, ui) {
-					(options.dragStop && options.dragStop.apply(this, arguments));
+					(options.dragStop && options.dragStop.apply(self.element[0], arguments));
 					$.ui.dialog.overlay.resize();
 				}
 			});
@@ -11855,15 +11858,20 @@ $.widget("ui.dialog", {
 		
 		if ($.fn.resizable) {
 			uiDialog.resizable({
+				proxy: options.resizeHelper,
 				maxWidth: options.maxWidth,
 				maxHeight: options.maxHeight,
 				minWidth: options.minWidth,
 				minHeight: options.minHeight,
-				start: options.resizeStart,
-				resize: options.resize,
+				start: function() {
+					(options.resizeStart && options.resizeStart.apply(self.element[0], arguments));
+				},
+				resize: function(e, ui) {
+					(options.resize && options.resize.apply(self.element[0], arguments));
+				},
 				handles: resizeHandles,
 				stop: function(e, ui) {
-					(options.resizeStop && options.resizeStop.apply(this, arguments));
+					(options.resizeStop && options.resizeStop.apply(self.element[0], arguments));
 					$.ui.dialog.overlay.resize();
 				}
 			});
@@ -14713,6 +14721,10 @@ Liferay.Base64 = {
 	_keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
 };
 
+Liferay.Template = {
+	PORTLET: '<div class="portlet"><div class="portlet-topper"><div class="portlet-title"></div></div><div class="portlet-content"></div><div class="forbidden-action"></div></div>'
+}
+
 jQuery.fn.exactHeight = jQuery.fn.height;
 jQuery.fn.exactWidth = jQuery.fn.width;
 
@@ -16106,6 +16118,8 @@ Liferay.Layout = {
 			layoutHandler = instance.FreeForm;
 		}
 
+		instance._useCloneProxy = options.clonePortlet;
+
 		layoutHandler.init(options);
 
 		instance.layoutHandler = layoutHandler;
@@ -16195,17 +16209,11 @@ Liferay.Layout.Columns = {
 		instance._boxSelector = options.boxSelector;
 		instance._placeHolderClass = options.placeHolderClass;
 		instance._onCompleteCallback = options.onComplete;
-		instance._proxyClass = options.proxyClass;
 
 		instance._activeAreaClass = 'active-area';
 		instance._dropAreaClass = 'drop-area';
 
 		instance._gridColumns = '.lfr-column';
-
-		// This sets whether we're using a clone of the box to sort with, or a
-		// plain box
-
-		instance._useCloneProxy = options.clonePortlet;
 
 		var options = {
 			appendTo: 'body',
@@ -16214,14 +16222,13 @@ Liferay.Layout.Columns = {
 			handle: instance._handleSelector,
 			items: instance._boxSelector,
 			placeholder: 'portlet-sort-helper',
-			helper: function(event, obj) {
-				return instance._createHelper(event, obj);
-			},
-			opacity: 0.8,
+			helper: instance._createHelper,
+			tolerance: 'touch',
 			revert:	false,
 			distance: 2,
 			scroll: true,
 			scrollSensitivity: 50,
+			scrollSpeed: 30,
 
 			// Callbacks
 
@@ -16293,23 +16300,27 @@ Liferay.Layout.Columns = {
 	_createHelper: function(event, obj) {
 		var instance = this;
 
-		var width = obj.width();
-		var height = obj.height();
+		var width = obj[0].offsetWidth;
+		var height = obj[0].offsetHeight;
 		var div = [];
 
 		if (instance._useCloneProxy) {
 			div = obj.clone();
 		}
 		else {
-			div = jQuery('<div class="' + instance._proxyClass + '"></div>');
-		}
+			div = jQuery(Liferay.Template.PORTLET);
+			div.addClass('ui-proxy');
 
-		div.append('<div class="forbidden-action"></div>');
+			var titleHtml = obj.find('.portlet-title, .portlet-title-default').html();
+
+			div.find('.portlet-title').html(titleHtml);
+		}
 
 		div.css(
 			{
 				width: width,
-				height: height
+				height: height,
+				zIndex: Liferay.zIndex.DRAG_ITEM
 			}
 		);
 
@@ -16417,19 +16428,42 @@ Liferay.Layout.FreeForm = {
 
 		jPortlet.css('position', 'absolute');
 
+		instance._createHelperCache(portlet);
+
 		jPortlet.draggable(
 			{
 				handle: '.portlet-header-bar, .portlet-title-default, .portlet-topper, .portlet-topper *',
+				helper: function(event) {
+					var portlet = jQuery(this);
+					var helper = instance._createHelperCache(this);
+
+					var height = portlet.height();
+					var width = portlet.width();
+					var zIndex = portlet.css('z-index');
+
+					helper.css(
+						{
+							height: height,
+							width: width,
+							zIndex: zIndex + 10
+						}
+					);
+
+					var titleHtml = portlet.find('.portlet-title, .portlet-title-default').html();
+
+					helper.find('.portlet-title').html(titleHtml);
+
+					return helper[0];
+				},
 				start: function(event, ui) {
 					instance._moveToTop(this);
 				},
-
 				distance: 2,
-
 				stop: function(event, ui) {
 					var portlet = this;
-					var left = parseInt(portlet.style.left);
-					var top = parseInt(portlet.style.top);
+
+					var left = parseInt(ui.position.left);
+					var top = parseInt(ui.position.top);
 
 					left = Math.round(left/10) * 10;
 					top = Math.round(top/10) * 10;
@@ -16491,6 +16525,26 @@ Liferay.Layout.FreeForm = {
 		if (portletBound) {
 			instance.add(portletBound);
 		}
+	},
+
+	_createHelperCache: function(obj) {
+		var instance = this;
+
+		if (!obj.jquery) {
+			obj = jQuery(obj);
+		}
+
+		var cache = obj.data('ui-helper-drag');
+
+		if (!cache) {
+			var cachedObj = jQuery(Liferay.Template.PORTLET);
+
+			cachedObj.addClass('ui-proxy');
+
+			cache = obj.data('ui-helper-drag', cachedObj);
+		}
+
+		return cache;
 	},
 
 	_findPosition: function(portlet) {
@@ -16556,19 +16610,94 @@ Liferay.Popup = function(options) {
 	 * className (string) - a class to add to the specific popup
 	 * stack (boolean) - whether to automatically stack the popup on top of other ones
 	 * handles (string) - comma-separated list (n,ne,e,se,s,sw,w,nw) of the handles for resizing
+	 * resizeHelper - classname that will be attached to resize proxy helper
+	 * dragHelper (string|function) - a jQuery selector or a function that returns a DOM element
+	 * dragStart - (function) a callback that is called when dragging of the dialog starts
+	 * dragStop - (function) a callback that is called when dragging of the dialog stops
 	 */
 	var instance = this;
 
+	var cacheDialogHelper = function(obj) {
+		if (!obj.jquery) {
+			obj = jQuery(obj);
+		}
+
+		var cache = obj.data('ui-helper-drag');
+
+		if (!cache) {
+			var cachedObj = obj.clone();
+
+			cachedObj.find('.ui-dialog-content').empty();
+			cachedObj.addClass('ui-proxy');
+
+			cache = obj.data('ui-helper-drag', cachedObj);
+		}
+
+		return cache;
+	};
+
 	options = options || {};
+
+	if (options.dragHelper === null) {
+		options.dragHelper = "original";
+	}
 
 	var defaults = {
 		className: 'generic-dialog',
 		draggable: true,
 		handles: 'e,se,s,sw,w',
+		resizeHelper: 'ui-resizable-proxy',
 		message: '<div class="loading-animation"></div>',
 		position: [5,5],
 		height: 'auto',
-		stack: false
+		stack: false,
+		dragHelper: function() {
+			var dialog = jQuery(this);
+			var cache = cacheDialogHelper(dialog);
+
+			var height = dialog.height();
+			var width = dialog.width();
+
+			cache.css(
+				{
+					height: height,
+					width: width
+				}
+			);
+
+			return cache;
+		},
+		dragStart: function(e, ui) {
+			if (!options.dragHelper) {
+				var dialog = jQuery(this).parents('.ui-dialog:first');
+
+				dialog.css('visibility', 'hidden');
+			}
+		},
+		dragStop: function(e, ui) {
+			if (!options.dragHelper) {
+				var dialog = jQuery(this).parents('.ui-dialog:first');
+				var helper = ui.helper;
+
+				var left = helper.css('left');
+				var top = helper.css('top');
+
+				dialog.css(
+					{
+						left: left,
+						top: top,
+						visibility: 'visible'
+					}
+				);
+			}
+		},
+		open: function(e, ui) {
+			if (!options.dragHelper) {
+				var dialog = jQuery(this).parents('.ui-dialog:first');
+
+				cacheDialogHelper(dialog);
+			}
+		}
 	};
 
 	var config = jQuery.extend({}, defaults, options);
@@ -16594,11 +16723,19 @@ Liferay.Popup = function(options) {
 
 	var className = config.className;
 	var height = config.height;
-	var resizable = config.resizable != null ? config.resizable : config.handles;
+	var dragHelper = config.dragHelper;
+	var dragStart = config.dragStart;
+	var dragStop = config.dragStop;
+	var open = config.open;
+	var resizable = config.resizable;
+	var resizeHelper = config.resizeHelper;
+	var stack = config.stack;
+	var title = config.title;
 	var width = config.width;
 
-	var title = config.title;
-	var stack = config.stack;
+	if (resizable !== false) {
+		resizable = config.handles;
+	}
 
 	if (Liferay.Util.isArray(position)) {
 		var centering = position.indexOf('center');
@@ -16638,9 +16775,14 @@ Liferay.Popup = function(options) {
 			position: position,
 			modal: modal,
 			resizable: resizable,
+			resizeHelper: resizeHelper,
 			stack: stack,
 			width: width,
-			zIndex: Liferay.zIndex.ALERT // compensate for UI's dialog
+			zIndex: Liferay.zIndex.ALERT, // compensate for UI's dialog
+			dragHelper: dragHelper,
+			dragStart: dragStart,
+			dragStop: dragStop,
+			open: open
 		}
 	);
 };
@@ -17984,7 +18126,6 @@ var LayoutConfiguration = {
 		}
 	},
 
-
 	_getPortletMetaData: function(portlet) {
 		var instance = this;
 
@@ -18044,7 +18185,8 @@ var LayoutConfiguration = {
 
 		var zIndex = instance._dialog.parents('.ui-dialog').css('z-index');
 
-		instance._helper = jQuery('<div class="ui-drag-helper not-intersecting"><div class="forbidden-action"></div></div>').css('z-index', zIndex + 10);
+		instance._helper = jQuery(Liferay.Template.PORTLET).css('z-index', zIndex + 10);
+		instance._helper.addClass('ui-proxy generic-portlet not-intersecting');
 
 		instance._configureGrid();
 
@@ -18052,8 +18194,13 @@ var LayoutConfiguration = {
 			appendTo: 'body',
 			connectToSortable: '.lfr-portlet-column',
 			distance: 2,
-			helper: function() {
-				return instance._helper.clone()[0];
+			helper: function(event) {
+				var helper = instance._helper.clone();
+				var title = this.getAttribute('title');
+
+				helper.find('.portlet-title').text(title);
+
+				return helper[0];
 			},
 			start: function(event, ui) {
 				instance._onDragStart(event, ui, this);

@@ -284,7 +284,6 @@ var LayoutConfiguration = {
 			appendTo: 'body',
 			connectToSortable: '.lfr-portlet-column',
 			distance: 2,
-
 			helper: function(event) {
 				var helper = instance._helper.clone();
 				var title = this.getAttribute('title');
@@ -293,15 +292,12 @@ var LayoutConfiguration = {
 
 				return helper[0];
 			},
-
 			start: function(event, ui) {
 				instance._onDragStart(event, ui, this);
 			},
-
 			drag: function(event, ui) {
 				instance._onDrag(event, ui, this);
 			},
-
 			stop: function(event, ui) {
 				instance._onDragStop(event, ui, this);
 			}

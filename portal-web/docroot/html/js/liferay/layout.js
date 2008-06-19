@@ -119,7 +119,6 @@ Liferay.Layout.Columns = {
 			placeholder: 'portlet-sort-helper',
 			helper: instance._createHelper,
 			tolerance: 'touch',
-
 			revert:	false,
 			distance: 2,
 			scroll: true,
@@ -329,7 +328,6 @@ Liferay.Layout.FreeForm = {
 		jPortlet.draggable(
 			{
 				handle: '.portlet-header-bar, .portlet-title-default, .portlet-topper, .portlet-topper *',
-
 				helper: function(event) {
 					var portlet = jQuery(this);
 					var helper = instance._createHelperCache(this);
@@ -352,13 +350,10 @@ Liferay.Layout.FreeForm = {
 
 					return helper[0];
 				},
-
 				start: function(event, ui) {
 					instance._moveToTop(this);
 				},
-
 				distance: 2,
-
 				stop: function(event, ui) {
 					var portlet = this;
 
