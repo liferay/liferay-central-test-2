@@ -182,13 +182,7 @@
 				currentColumnId = Liferay.Util.getColumnId(column[0].id);
 			}
 
-			var url = '<%= themeDisplay.getPathMain() %>/portal/update_layout?' 
-						+ 'p_l_id=' + plid 
-						+ '&p_p_id=' + portletId 
-						+ '&p_p_col_id=' + currentColumnId 
-						+ '&p_p_col_pos=' + portletPosition 
-						+ '&doAsUserId=' + doAsUserId
-						+ '&<%= Constants.CMD %>=<%= Constants.ADD %>';
+			var url = '<%= themeDisplay.getPathMain() %>/portal/update_layout?' + 'p_l_id=' + plid + '&p_p_id=' + portletId + '&p_p_col_id=' + currentColumnId + '&p_p_col_pos=' + portletPosition + '&doAsUserId=' + doAsUserId + '&<%= Constants.CMD %>=<%= Constants.ADD %>';
 
 			if (refreshPortletList["_" + portletId]) {
 				url += '&referer=<%= HttpUtil.encodeURL(currentURL) %>&refresh=1';
