@@ -228,21 +228,26 @@ public class ExtPropertiesLoader {
 
 		URL url = classLoader.getResource(name + ".properties");
 
-		try {
-			name = new URI(url.getPath()).getPath();
+		// If the resource is located inside of a .jar, then
+		// EasyConf needs the jar:file: prefix appended to
+		// the path.  Use URL.toExternalForm() to achieve that.
+
+		if (url.getProtocol().equals("jar")) {
+			name = url.toExternalForm();
 		}
-		catch (URISyntaxException urise) {
-			name = url.getFile();
+		else {
+			try {
+				name = new URI(url.getPath()).getPath();
+			}
+			catch (URISyntaxException urise) {
+				name = url.getFile();
+			}
 		}
 
 		int pos = name.lastIndexOf(".properties");
 
 		if (pos != -1) {
 			name = name.substring(0, pos);
-		}
-
-		if (name.indexOf(".jar!") != -1) {
-			name = "jar:file:" + name;
 		}
 
 		return name;
