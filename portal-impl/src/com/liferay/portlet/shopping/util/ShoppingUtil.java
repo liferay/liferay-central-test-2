@@ -67,6 +67,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -893,7 +894,7 @@ public class ShoppingUtil {
 			prefs.getPayPalEmailAddress());
 
 		NumberFormat doubleFormat = NumberFormat.getNumberInstance(
-			java.util.Locale.ENGLISH);
+			Locale.ENGLISH);
 
 		doubleFormat.setMaximumFractionDigits(2);
 		doubleFormat.setMinimumFractionDigits(2);
@@ -931,7 +932,7 @@ public class ShoppingUtil {
 		sm.append("zip=").append(zip).append("&");
 		sm.append("no_note=1&");
 		sm.append("currency_code=").append(currencyCode).append("");
-System.out.println("----- " + sm.toString());
+
 		return sm.toString();
 	}
 
