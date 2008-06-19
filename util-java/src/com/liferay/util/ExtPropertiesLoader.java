@@ -77,9 +77,12 @@ public class ExtPropertiesLoader {
 	}
 
 	public void addProperties(Properties properties) {
-		AggregatedProperties props =
-			(AggregatedProperties)_conf.getProperties().toConfiguration();
-		props.addConfiguration(new MapConfiguration(properties));
+		ComponentProperties componentProperties = _conf.getProperties();
+
+		AggregatedProperties aggregatedProperties =
+			(AggregatedProperties)componentProperties.toConfiguration();
+
+		aggregatedProperties.addConfiguration(new MapConfiguration(properties));
 	}
 
 	public boolean containsKey(String key) {
@@ -162,14 +165,25 @@ public class ExtPropertiesLoader {
 	}
 
 	public void removeProperties(Properties properties) {
-		AggregatedProperties props =
-			(AggregatedProperties)_conf.getProperties().toConfiguration();
+		ComponentProperties componentProperties = _conf.getProperties();
 
-		for (int i = 0; i < props.getNumberOfConfigurations(); i++) {
-			Configuration curConf = props.getConfiguration(i);
-			if ((curConf instanceof MapConfiguration) &&
-					((MapConfiguration)curConf).getMap() == properties) {
-				props.removeConfiguration(curConf);
+		AggregatedProperties aggregatedProperties =
+			(AggregatedProperties)componentProperties.toConfiguration();
+
+		for (int i = 0; i < aggregatedProperties.getNumberOfConfigurations();
+				i++) {
+
+			Configuration configuration =
+				aggregatedProperties.getConfiguration(i);
+
+			if (!(configuration instanceof MapConfiguration)) {
+				return;
+			}
+
+			MapConfiguration mapConfiguration = (MapConfiguration)configuration;
+
+			if (mapConfiguration.getMap() == properties) {
+				aggregatedProperties.removeConfiguration(configuration);
 			}
 		}
 	}
