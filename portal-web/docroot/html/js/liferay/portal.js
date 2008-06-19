@@ -4,9 +4,10 @@ Liferay.Portal.Tabs = {
 	show: function(namespace, names, id) {
 		var tab = jQuery('#' + namespace + id + 'TabsId');
 		var panel = jQuery('#' + namespace + id + 'TabsSection');
-		
+
 		tab.siblings().removeClass('current');
 		tab.addClass('current');
+
 		panel.show();
 
 		var index = names.indexOf(id);
