@@ -25,7 +25,6 @@ package com.liferay.portal.kernel.messaging;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
-import com.liferay.portal.SystemException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -81,11 +80,11 @@ public class DefaultMessageBus implements MessageBus {
 		destinationModel.send(message);
 	}
 
-	public String sendSynchronizedMessage(String destination, String message,
-                                          long timeout)
-            throws SystemException {
+	public String sendSynchronizedMessage(
+			String destination, String message, long timeout)
+		throws MessageBusException {
 
-        Destination destinationModel = _destinations.get(destination);
+		Destination destinationModel = _destinations.get(destination);
 
 		if (destinationModel == null) {
 			if (_log.isWarnEnabled()) {
@@ -106,9 +105,9 @@ public class DefaultMessageBus implements MessageBus {
 		}
 
 		ResponseMessageListener responseMessageListener =
-			new ResponseMessageListener(destinationModel,
-                                        responseDestinationModel,
-				                        getNextResponseId(), timeout);
+			new ResponseMessageListener(
+				destinationModel, responseDestinationModel, getNextResponseId(),
+				timeout);
 
 		responseDestinationModel.register(responseMessageListener);
 

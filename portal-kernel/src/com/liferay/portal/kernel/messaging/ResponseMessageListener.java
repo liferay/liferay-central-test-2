@@ -23,7 +23,6 @@
 package com.liferay.portal.kernel.messaging;
 
 import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.SystemException;
 
 /**
  * <a href="ResponseMessageListener.java.html"><b><i>View Source</i></b></a>
@@ -43,8 +42,7 @@ public class ResponseMessageListener implements MessageListener {
 		_timeout = timeout;
 	}
 
-	public synchronized String send(String message) throws SystemException {
-
+	public synchronized String send(String message) throws MessageBusException {
 		if (message.equals(_EMTPY_MESSAGE)) {
 			StringMaker sm = new StringMaker();
 
@@ -71,16 +69,20 @@ public class ResponseMessageListener implements MessageListener {
 
 		_destination.send(message);
 
-        try {
-            wait(_timeout);
-        } catch (InterruptedException e) {
-            throw new SystemException("Unable to receive response for request.");
-        }
-        if (_responseMessage == null) {
-            throw new SystemException("No reply received for request: " +
-                    message);
-        }
-        return _responseMessage;
+		try {
+			wait(_timeout);
+		}
+		catch (InterruptedException ie) {
+			throw new MessageBusException(
+				"Unable to receive response for request", ie);
+		}
+
+		if (_responseMessage == null) {
+			throw new MessageBusException(
+				"No reply received for request: " + message);
+		}
+
+		return _responseMessage;
 	}
 
 	public synchronized void receive(String message) {

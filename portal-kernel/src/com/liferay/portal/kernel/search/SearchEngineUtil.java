@@ -22,11 +22,13 @@
 
 package com.liferay.portal.kernel.search;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBusException;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.messaging.SearchRequest;
 import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.SystemException;
 
 /**
  * <a href="SearchEngineUtil.java.html"><b><i>View Source</i></b></a>
@@ -123,18 +125,23 @@ public class SearchEngineUtil {
 		sm.append(SearchRequest.COMMAND_INDEX_ONLY);
 		sm.append("\"}");
 
-        try {
-            String message = MessageBusUtil.sendSynchronizedMessage(
-			DestinationNames.SEARCH, sm.toString());
-            if ((message.indexOf("true") != -1)) {
-                return true;
-            }
+		try {
+			String message = MessageBusUtil.sendSynchronizedMessage(
+				DestinationNames.SEARCH, sm.toString());
 
-            return false;
-        } catch (SystemException e) {
-            return false;
-        }
+			if ((message.indexOf("true") != -1)) {
+				return true;
+			}
 
+			return false;
+		}
+		catch (MessageBusException mbe) {
+			if (_log.isErrorEnabled()) {
+				_log.error("Unbale to check index status", mbe);
+			}
+
+			return false;
+		}
 	}
 
 	private Hits _search(long companyId, String query, int start, int end)
@@ -157,9 +164,11 @@ public class SearchEngineUtil {
 		_messageBusIndexWriter.updateDocument(companyId, uid, doc);
 	}
 
+	private static Log _log = LogFactoryUtil.getLog(SearchEngineUtil.class);
+
 	private static SearchEngineUtil _instance = new SearchEngineUtil();
 
-    private IndexSearcher _messageBusIndexSearcher;
+	private IndexSearcher _messageBusIndexSearcher;
 	private IndexWriter _messageBusIndexWriter;
 
 }

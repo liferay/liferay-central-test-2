@@ -22,32 +22,30 @@
 
 package com.liferay.portal.kernel.messaging;
 
+import com.liferay.portal.PortalException;
+
 /**
- * <a href="MessageBus.java.html"><b><i>View Source</i></b></a>
+ * <a href="MessageBusException.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  *
  */
-public interface MessageBus {
+public class MessageBusException extends PortalException {
 
-	public void addDestination(Destination destination);
+	public MessageBusException() {
+		super();
+	}
 
-	public void registerMessageListener(
-		String destination, MessageListener listener);
+	public MessageBusException(String msg) {
+		super(msg);
+	}
 
-	public void removeDestination(String destination);
+	public MessageBusException(Throwable cause) {
+		super(cause);
+	}
 
-	public void sendMessage(String destination, String message);
-
-	public String sendSynchronizedMessage(
-			String destination, String message, long timeout)
-		throws MessageBusException;
-
-	public void shutdown();
-
-	public void shutdown(boolean force);
-
-	public boolean unregisterMessageListener(
-		String destination, MessageListener listener);
+	public MessageBusException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
 
 }

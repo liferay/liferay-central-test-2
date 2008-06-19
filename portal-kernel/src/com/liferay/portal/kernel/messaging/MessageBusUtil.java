@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.messaging;
 
-import com.liferay.portal.SystemException;
-
 /**
  * <a href="MessageBusUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -64,19 +62,19 @@ public class MessageBusUtil {
 		_instance._sendMessage(destination, message);
 	}
 
-    public static String sendSynchronizedMessage(String destination,
-                                                 String message, long timeout)
-    throws SystemException {
+	public static String sendSynchronizedMessage(
+			String destination, String message)
+		throws MessageBusException {
 
-        return _instance._sendSynchronizedMessage(destination, message, timeout);
-    }
+		return _instance._sendSynchronizedMessage(destination, message);
+	}
 
-    public static String sendSynchronizedMessage(String destination,
-                                                 String message)
-    throws SystemException {
+	public static String sendSynchronizedMessage(
+			String destination, String message, long timeout)
+		throws MessageBusException {
 
-		return _instance._sendSynchronizedMessage(destination, message,
-                                                  _DEFAULT_TIMEOUT);
+		return _instance._sendSynchronizedMessage(
+			destination, message, timeout);
 	}
 
 	public static boolean unregisterMessageListener(
@@ -111,12 +109,19 @@ public class MessageBusUtil {
 		_messageBus.sendMessage(destination, message);
 	}
 
-	private String _sendSynchronizedMessage(String destination, String message,
-                                            long timeout)
-            throws SystemException {
+	private String _sendSynchronizedMessage(String destination, String message)
+		throws MessageBusException {
 
-		return _messageBus.sendSynchronizedMessage(destination, message,
-                                                   timeout);
+		return _messageBus.sendSynchronizedMessage(
+			destination, message, _DEFAULT_TIMEOUT);
+	}
+
+	private String _sendSynchronizedMessage(
+			String destination, String message, long timeout)
+		throws MessageBusException {
+
+		return _messageBus.sendSynchronizedMessage(
+			destination, message, timeout);
 	}
 
 	private boolean _unregisterMessageListener(
@@ -125,9 +130,11 @@ public class MessageBusUtil {
 		return _messageBus.unregisterMessageListener(destination, listener);
 	}
 
+	private static final long _DEFAULT_TIMEOUT = 10000;
+
 	private static MessageBusUtil _instance = new MessageBusUtil();
 
 	private MessageBus _messageBus;
 	private MessageSender _messageSender;
-    private static final long _DEFAULT_TIMEOUT = 1000;
+
 }
