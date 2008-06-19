@@ -43,7 +43,7 @@ import org.hibernate.cfg.Environment;
 public class HibernateConfiguration extends TransactionAwareConfiguration {
 
 	protected Configuration newConfiguration() {
-		Configuration cfg = new Configuration();
+		Configuration configuration = new Configuration();
 
 		try {
 			ClassLoader classLoader = getClass().getClassLoader();
@@ -56,7 +56,7 @@ public class HibernateConfiguration extends TransactionAwareConfiguration {
 						configs[i]);
 
 					if (is != null) {
-						cfg = cfg.addInputStream(is);
+						configuration = configuration.addInputStream(is);
 
 						is.close();
 					}
@@ -68,16 +68,16 @@ public class HibernateConfiguration extends TransactionAwareConfiguration {
 				}
 			}
 
-			cfg.setProperties(PropsUtil.getProperties());
+			configuration.setProperties(PropsUtil.getProperties());
 		}
 		catch (Exception e2) {
 			_log.error(e2, e2);
 		}
 
-		return cfg;
+		return configuration;
 	}
 
-	protected void postProcessConfiguration(Configuration cfg) {
+	protected void postProcessConfiguration(Configuration configuration) {
 
 		// Make sure that the Hibernate settings from PropsUtil are set. See the
 		// buildSessionFactory implementation in the LocalSessionFactoryBean
@@ -88,7 +88,7 @@ public class HibernateConfiguration extends TransactionAwareConfiguration {
 			Environment.RELEASE_CONNECTIONS);
 
 		if (Validator.isNotNull(connectionReleaseMode)) {
-			cfg.setProperty(
+			configuration.setProperty(
 				Environment.RELEASE_CONNECTIONS, connectionReleaseMode);
 		}
 	}

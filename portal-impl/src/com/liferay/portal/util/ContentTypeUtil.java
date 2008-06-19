@@ -52,7 +52,8 @@ public class ContentTypeUtil {
 	}
 
 	private static ExtPropertiesLoader _getInstance() {
-		return ExtPropertiesLoader.getInstance(CONTENT_TYPES);
+		return ExtPropertiesLoader.getInstance(
+			ContentTypeUtil.class.getClassLoader(), CONTENT_TYPES);
 	}
 
 }

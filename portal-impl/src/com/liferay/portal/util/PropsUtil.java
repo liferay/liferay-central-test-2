@@ -1427,12 +1427,15 @@ public class PropsUtil {
 	}
 
 	private static ExtPropertiesLoader _getInstance(long companyId) {
+		ClassLoader classLoader = PropsUtil.class.getClassLoader();
+
 		if (companyId > CompanyConstants.SYSTEM) {
 			return ExtPropertiesLoader.getInstance(
-				PropsFiles.PORTAL, companyId);
+				classLoader, PropsFiles.PORTAL, companyId);
 		}
 		else {
-			return ExtPropertiesLoader.getInstance(PropsFiles.PORTAL);
+			return ExtPropertiesLoader.getInstance(
+				classLoader, PropsFiles.PORTAL);
 		}
 	}
 

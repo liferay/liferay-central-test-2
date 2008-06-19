@@ -31,6 +31,10 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -50,11 +54,13 @@ import org.apache.commons.configuration.MapConfiguration;
  */
 public class ExtPropertiesLoader {
 
-	public static ExtPropertiesLoader getInstance(String name) {
+	public static ExtPropertiesLoader getInstance(
+		ClassLoader classLoader, String name) {
+
 		ExtPropertiesLoader props = _propsPool.get(name);
 
 		if (props == null) {
-			props = new ExtPropertiesLoader(name);
+			props = new ExtPropertiesLoader(classLoader, name);
 
 			_propsPool.put(name, props);
 		}
@@ -62,13 +68,15 @@ public class ExtPropertiesLoader {
 		return props;
 	}
 
-	public static ExtPropertiesLoader getInstance(String name, long companyId) {
+	public static ExtPropertiesLoader getInstance(
+		ClassLoader classLoader, String name, long companyId) {
+
 		String key = name + _COMPANY_ID_SEPARATOR + companyId;
 
 		ExtPropertiesLoader props = _propsPool.get(key);
 
 		if (props == null) {
-			props = new ExtPropertiesLoader(name, companyId);
+			props = new ExtPropertiesLoader(classLoader, name, companyId);
 
 			_propsPool.put(key, props);
 		}
@@ -188,13 +196,15 @@ public class ExtPropertiesLoader {
 		}
 	}
 
-	private ExtPropertiesLoader(String name) {
-		_conf = EasyConf.getConfiguration(name);
+	private ExtPropertiesLoader(ClassLoader classLoader, String name) {
+		_conf = EasyConf.getConfiguration(_getFileName(classLoader, name));
 
-		_printSources(name);
+		_printSources();
 	}
 
-	private ExtPropertiesLoader(String name, long companyId) {
+	private ExtPropertiesLoader(
+		ClassLoader classLoader, String name, long companyId) {
+
 		String webId = null;
 
 		if (companyId > 0) {
@@ -208,16 +218,36 @@ public class ExtPropertiesLoader {
 			}
 		}
 
-		_conf = EasyConf.getConfiguration(webId, name);
+		_conf = EasyConf.getConfiguration(
+			webId, _getFileName(classLoader, name));
 
-		_printSources(name, companyId, webId);
+		_printSources(companyId, webId);
 	}
 
-	private void _printSources(String name) {
-		_printSources(name, 0, null);
+	private String _getFileName(ClassLoader classLoader, String name) {
+		URL url = classLoader.getResource(name + ".properties");
+
+		try {
+			name = new URI(url.getPath()).getPath();
+		}
+		catch (URISyntaxException urise) {
+			name = url.getFile();
+		}
+
+		int pos = name.lastIndexOf(".properties");
+
+		if (pos != -1) {
+			name = name.substring(0, pos);
+		}
+
+		return name;
 	}
 
-	private void _printSources(String name, long companyId, String webId) {
+	private void _printSources() {
+		_printSources(0, null);
+	}
+
+	private void _printSources(long companyId, String webId) {
 		List<String> sources = getComponentProperties().getLoadedSources();
 
 		for (int i = sources.size() - 1; i >= 0; i--) {

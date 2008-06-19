@@ -51,7 +51,7 @@ public class CaptchaPortalAction extends Action {
 
 	public CaptchaPortalAction() {
 		Properties props =  ExtPropertiesLoader.getInstance(
-			PropsFiles.CAPTCHA).getProperties();
+			getClass().getClassLoader(), PropsFiles.CAPTCHA).getProperties();
 
 		_producer = (CaptchaProducer)Helper.ThingFactory.loadImpl(
 			Helper.ThingFactory.CPROD, props);

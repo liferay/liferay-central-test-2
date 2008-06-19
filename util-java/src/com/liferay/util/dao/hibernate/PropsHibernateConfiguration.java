@@ -47,11 +47,12 @@ public class PropsHibernateConfiguration extends LocalSessionFactoryBean {
 	}
 
 	protected Configuration newConfiguration() {
-		Configuration cfg = new Configuration();
+		Configuration configuration = new Configuration();
 
 		try {
 			ExtPropertiesLoader extPropsLoader =
-				ExtPropertiesLoader.getInstance(_propsName);
+				ExtPropertiesLoader.getInstance(
+					getClass().getClassLoader(), _propsName);
 
 			ClassLoader classLoader = getClass().getClassLoader();
 
@@ -64,7 +65,7 @@ public class PropsHibernateConfiguration extends LocalSessionFactoryBean {
 						classLoader.getResourceAsStream(configs[i]);
 
 					if (is != null) {
-						cfg = cfg.addInputStream(is);
+						configuration = configuration.addInputStream(is);
 
 						is.close();
 					}
@@ -74,13 +75,13 @@ public class PropsHibernateConfiguration extends LocalSessionFactoryBean {
 				}
 			}
 
-			cfg.setProperties(extPropsLoader.getProperties());
+			configuration.setProperties(extPropsLoader.getProperties());
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
 
-		return cfg;
+		return configuration;
 	}
 
 	private static Log _log =
