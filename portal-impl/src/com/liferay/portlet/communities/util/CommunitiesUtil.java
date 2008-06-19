@@ -121,7 +121,7 @@ public class CommunitiesUtil {
 				ActionKeys.DELETE)) {
 
 			String[] eventClasses = StringUtil.split(
-				PropsUtil.getComponentProperties().getString(
+				PropsUtil.get(
 					PropsUtil.LAYOUT_CONFIGURATION_ACTION_DELETE,
 					Filter.by(layout.getType())));
 

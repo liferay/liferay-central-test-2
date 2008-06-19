@@ -289,7 +289,7 @@ public class WikiUtil {
 	}
 
 	private String _getEditPage(String format) {
-		return PropsUtil.getComponentProperties().getString(
+		return PropsUtil.get(
 			PropsUtil.WIKI_FORMATS_EDIT_PAGE, Filter.by(format));
 	}
 
@@ -299,7 +299,7 @@ public class WikiUtil {
 		if (engine == null) {
 			try {
 				String engineClass =
-					PropsUtil.getComponentProperties().getString(
+					PropsUtil.get(
 						PropsUtil.WIKI_FORMATS_ENGINE, Filter.by(format));
 
 				if (engineClass != null) {
@@ -336,12 +336,12 @@ public class WikiUtil {
 	}
 
 	private String _getHelpPage(String format) {
-		return PropsUtil.getComponentProperties().getString(
+		return PropsUtil.get(
 			PropsUtil.WIKI_FORMATS_HELP_PAGE, Filter.by(format));
 	}
 
 	private String _getHelpURL(String format) {
-		return PropsUtil.getComponentProperties().getString(
+		return PropsUtil.get(
 			PropsUtil.WIKI_FORMATS_HELP_URL, Filter.by(format));
 	}
 
@@ -361,7 +361,7 @@ public class WikiUtil {
 
 		ClassLoader classLoader = getClass().getClassLoader();
 
-		String configurationFile = PropsUtil.getComponentProperties().getString(
+		String configurationFile = PropsUtil.get(
 			propertyName, Filter.by(format));
 
 		if (Validator.isNotNull(configurationFile)) {

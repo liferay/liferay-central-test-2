@@ -263,7 +263,7 @@ for (int i = 0; i < PropsValues.LAYOUT_TYPES.length; i++) {
 			request.setAttribute(WebKeys.SEL_LAYOUT, selLayout);
 			%>
 
-			<liferay-util:include page="<%= StrutsUtil.TEXT_HTML_DIR + PropsUtil.getComponentProperties().getString(PropsUtil.LAYOUT_EDIT_PAGE, Filter.by(curLayoutType)) %>" />
+			<liferay-util:include page="<%= StrutsUtil.TEXT_HTML_DIR + PropsUtil.get(PropsUtil.LAYOUT_EDIT_PAGE, Filter.by(curLayoutType)) %>" />
 		</td>
 	</tr>
 

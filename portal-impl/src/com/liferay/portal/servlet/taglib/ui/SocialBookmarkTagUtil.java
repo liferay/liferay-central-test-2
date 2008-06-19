@@ -90,7 +90,7 @@ public class SocialBookmarkTagUtil {
 		vars.put("liferay:social-bookmark:url", url);
 		vars.put("liferay:social-bookmark:title", HttpUtil.encodeURL(title));
 
-		String postUrl = PropsUtil.getComponentProperties().getString(
+		String postUrl = PropsUtil.get(
 			PropsUtil.SOCIAL_BOOKMARK_POST_URL,
 			Filter.by(type).setVariables(vars));
 

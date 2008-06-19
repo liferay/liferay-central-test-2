@@ -239,7 +239,7 @@ public class WebDAVUtil {
 
 		for (String token: tokens) {
 			String className =
-				PropsUtil.getComponentProperties().getString(
+				PropsUtil.get(
 					PropsUtil.WEBDAV_STORAGE_CLASS, Filter.by(token));
 
 			if (Validator.isNotNull(className)) {

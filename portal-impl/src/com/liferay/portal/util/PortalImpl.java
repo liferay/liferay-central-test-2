@@ -787,12 +787,12 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getLayoutEditPage(Layout layout) {
-		return PropsUtil.getComponentProperties().getString(
+		return PropsUtil.get(
 			PropsUtil.LAYOUT_EDIT_PAGE, Filter.by(layout.getType()));
 	}
 
 	public String getLayoutViewPage(Layout layout) {
-		return PropsUtil.getComponentProperties().getString(
+		return PropsUtil.get(
 			PropsUtil.LAYOUT_VIEW_PAGE, Filter.by(layout.getType()));
 	}
 
@@ -849,7 +849,7 @@ public class PortalImpl implements Portal {
 		vars.put("liferay:plid", String.valueOf(layout.getPlid()));
 		vars.putAll(layout.getLayoutType().getTypeSettingsProperties());
 
-		String href = PropsUtil.getComponentProperties().getString(
+		String href = PropsUtil.get(
 			PropsUtil.LAYOUT_URL,
 			Filter.by(layout.getType()).setVariables(vars));
 
@@ -2063,9 +2063,10 @@ public class PortalImpl implements Portal {
 	}
 
 	public boolean isLayoutFriendliable(Layout layout) {
-		return PropsUtil.getComponentProperties().getBoolean(
-			PropsUtil.LAYOUT_URL_FRIENDLIABLE,
-			Filter.by(layout.getType()), true);
+		return GetterUtil.getBoolean(
+			PropsUtil.get(
+				PropsUtil.LAYOUT_URL_FRIENDLIABLE, Filter.by(layout.getType())),
+			true);
 	}
 
 	public boolean isLayoutParentable(Layout layout) {
@@ -2073,8 +2074,8 @@ public class PortalImpl implements Portal {
 	}
 
 	public boolean isLayoutParentable(String type) {
-		return PropsUtil.getComponentProperties().getBoolean(
-			PropsUtil.LAYOUT_PARENTABLE, Filter.by(type), true);
+		return GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.LAYOUT_PARENTABLE, Filter.by(type)), true);
 	}
 
 	public boolean isLayoutSitemapable(Layout layout) {
@@ -2082,8 +2083,8 @@ public class PortalImpl implements Portal {
 			return false;
 		}
 
-		return PropsUtil.getComponentProperties().getBoolean(
-			PropsUtil.LAYOUT_SITEMAPABLE, Filter.by(layout.getType()), true);
+		return GetterUtil.getBoolean(PropsUtil.get(
+			PropsUtil.LAYOUT_SITEMAPABLE, Filter.by(layout.getType())), true);
 	}
 
 	public boolean isReservedParameter(String name) {

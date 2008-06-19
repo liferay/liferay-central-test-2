@@ -529,7 +529,7 @@ public class EditPagesAction extends PortletAction {
 				res);
 
 			String[] eventClasses = StringUtil.split(
-				PropsUtil.getComponentProperties().getString(
+				PropsUtil.get(
 					PropsUtil.LAYOUT_CONFIGURATION_ACTION_UPDATE,
 					Filter.by(type)));
 

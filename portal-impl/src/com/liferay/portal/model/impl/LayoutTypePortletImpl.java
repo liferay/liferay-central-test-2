@@ -1003,7 +1003,7 @@ public class LayoutTypePortletImpl
 
 		String selector2 = layout.getFriendlyURL();
 
-		return PropsUtil.getComponentProperties().getStringArray(
+		return PropsUtil.getArray(
 			position, Filter.by(selector1, selector2));
 	}
 

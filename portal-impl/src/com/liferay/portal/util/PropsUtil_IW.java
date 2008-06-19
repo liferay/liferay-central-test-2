@@ -61,10 +61,6 @@ public class PropsUtil_IW {
 		return PropsUtil.getProperties();
 	}
 
-	public com.germinus.easyconf.ComponentProperties getComponentProperties() {
-		return PropsUtil.getComponentProperties();
-	}
-
 	private PropsUtil_IW() {
 	}
 

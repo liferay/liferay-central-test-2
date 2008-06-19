@@ -22,7 +22,7 @@
 
 package com.liferay.portal.util;
 
-import com.germinus.easyconf.ComponentProperties;
+import com.germinus.easyconf.Filter;
 
 import com.liferay.portal.kernel.util.OrderedProperties;
 import com.liferay.portal.kernel.util.PropertiesUtil;
@@ -1373,6 +1373,10 @@ public class PropsUtil {
 		return _getInstance().get(key);
 	}
 
+	public static String get(String key, Filter filter) {
+		return _getInstance().getComponentProperties().getString(key, filter);
+	}
+
 	public static String get(long companyId, String key) {
 		return _getInstance(companyId).get(key);
 	}
@@ -1381,8 +1385,9 @@ public class PropsUtil {
 		return _getInstance().getArray(key);
 	}
 
-	public static ComponentProperties getComponentProperties() {
-		return _getInstance().getComponentProperties();
+	public static String[] getArray(String key, Filter filter) {
+		return _getInstance().getComponentProperties().getStringArray(
+			key, filter);
 	}
 
 	public static Properties getProperties() {
