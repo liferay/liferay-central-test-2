@@ -25,7 +25,10 @@ package com.liferay.portlet.shopping.action;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.shopping.model.ShoppingOrder;
 import com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceUtil;
+import com.liferay.portlet.shopping.util.ShoppingPreferences;
+import com.liferay.portlet.shopping.util.ShoppingUtil;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -124,7 +127,7 @@ public class PayPalNotificationAction extends Action {
 				_log.debug("Payer email " + payerEmail);
 			}
 
-			if (payPalStatus.equals("VERIFIED")) {
+			if (payPalStatus.equals("VERIFIED") && validate(req)) {
 				ShoppingOrderLocalServiceUtil.completeOrder(
 					invoice, txnId, paymentStatus, paymentGross, receiverEmail,
 					payerEmail, true);
@@ -139,6 +142,66 @@ public class PayPalNotificationAction extends Action {
 
 			return null;
 		}
+	}
+
+	protected boolean validate(HttpServletRequest req) {
+		try {
+			String ppInvoice = ParamUtil.getString(req, "invoice");
+
+			ShoppingOrder order = ShoppingOrderLocalServiceUtil.getOrder(
+				ppInvoice);
+
+			ShoppingPreferences shoppingPrefs = ShoppingPreferences.getInstance(
+				order.getCompanyId(), order.getGroupId());
+
+			// Receiver Email
+
+			String ppReceiverEmail = ParamUtil.getString(
+				req, "receiver_email");
+
+			String payPalEmailAddress = shoppingPrefs.getPayPalEmailAddress();
+
+			if (!payPalEmailAddress.equals(ppReceiverEmail)) {
+				return false;
+			}
+
+			// Payment Gross
+
+			double ppGross = ParamUtil.getDouble(req, "mc_gross");
+
+			double orderTotal = ShoppingUtil.calculateTotal(order);
+
+			if (orderTotal != ppGross) {
+				return false;
+			}
+
+			// Payment Currency
+
+			String ppCurrency = ParamUtil.getString(req, "mc_currency");
+
+			String currencyId = shoppingPrefs.getCurrencyId();
+
+			if (!currencyId.equals(ppCurrency)) {
+				return false;
+			}
+
+			// Transaction ID
+
+			String ppTxnId = ParamUtil.getString(req, "txn_id");
+
+			int ppTxnIdCount =
+				ShoppingOrderLocalServiceUtil.getPayPalTxnIdOrderCount(
+					ppTxnId);
+
+			if (ppTxnIdCount > 0) {
+				return false;
+			}
+		}
+		catch (Exception e) {
+			return false;
+		}
+
+		return true;
 	}
 
 	private static Log _log = LogFactory.getLog(PayPalNotificationAction.class);

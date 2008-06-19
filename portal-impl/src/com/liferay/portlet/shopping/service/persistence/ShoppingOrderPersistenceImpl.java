@@ -615,6 +615,108 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public ShoppingOrder findByPPTxnId(String ppTxnId)
+		throws NoSuchOrderException, SystemException {
+		ShoppingOrder shoppingOrder = fetchByPPTxnId(ppTxnId);
+
+		if (shoppingOrder == null) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No ShoppingOrder exists with the key {");
+
+			msg.append("ppTxnId=" + ppTxnId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchOrderException(msg.toString());
+		}
+
+		return shoppingOrder;
+	}
+
+	public ShoppingOrder fetchByPPTxnId(String ppTxnId)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = ShoppingOrderModelImpl.CACHE_ENABLED;
+		String finderClassName = ShoppingOrder.class.getName();
+		String finderMethodName = "fetchByPPTxnId";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { ppTxnId };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.shopping.model.ShoppingOrder WHERE ");
+
+				if (ppTxnId == null) {
+					query.append("ppTxnId IS NULL");
+				}
+				else {
+					query.append("ppTxnId = ?");
+				}
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("createDate DESC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (ppTxnId != null) {
+					qPos.add(ppTxnId);
+				}
+
+				List<ShoppingOrder> list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List<ShoppingOrder> list = (List<ShoppingOrder>)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return list.get(0);
+			}
+		}
+	}
+
 	public List<ShoppingOrder> findByG_U_PPPS(long groupId, long userId,
 		String ppPaymentStatus) throws SystemException {
 		boolean finderClassNameCacheEnabled = ShoppingOrderModelImpl.CACHE_ENABLED;
@@ -1072,6 +1174,13 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 		remove(shoppingOrder);
 	}
 
+	public void removeByPPTxnId(String ppTxnId)
+		throws NoSuchOrderException, SystemException {
+		ShoppingOrder shoppingOrder = findByPPTxnId(ppTxnId);
+
+		remove(shoppingOrder);
+	}
+
 	public void removeByG_U_PPPS(long groupId, long userId,
 		String ppPaymentStatus) throws SystemException {
 		for (ShoppingOrder shoppingOrder : findByG_U_PPPS(groupId, userId,
@@ -1193,6 +1302,79 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 
 				if (number != null) {
 					qPos.add(number);
+				}
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByPPTxnId(String ppTxnId) throws SystemException {
+		boolean finderClassNameCacheEnabled = ShoppingOrderModelImpl.CACHE_ENABLED;
+		String finderClassName = ShoppingOrder.class.getName();
+		String finderMethodName = "countByPPTxnId";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { ppTxnId };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.shopping.model.ShoppingOrder WHERE ");
+
+				if (ppTxnId == null) {
+					query.append("ppTxnId IS NULL");
+				}
+				else {
+					query.append("ppTxnId = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (ppTxnId != null) {
+					qPos.add(ppTxnId);
 				}
 
 				Long count = null;

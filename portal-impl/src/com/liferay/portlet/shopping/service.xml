@@ -361,6 +361,9 @@
 		<finder name="Number" return-type="ShoppingOrder">
 			<finder-column name="number" />
 		</finder>
+		<finder name="PPTxnId" return-type="ShoppingOrder">
+			<finder-column name="ppTxnId" />
+		</finder>
 		<finder name="G_U_PPPS" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="userId" />

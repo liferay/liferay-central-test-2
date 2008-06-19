@@ -113,6 +113,9 @@ public interface ShoppingOrderLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public int getPayPalTxnIdOrderCount(java.lang.String ppTxnId)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.shopping.model.ShoppingOrder saveLatestOrder(
 		com.liferay.portlet.shopping.model.ShoppingCart cart)
 		throws com.liferay.portal.PortalException,

@@ -145,6 +145,18 @@ public class ShoppingOrderUtil {
 		return getPersistence().fetchByNumber(number);
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingOrder findByPPTxnId(
+		java.lang.String ppTxnId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.shopping.NoSuchOrderException {
+		return getPersistence().findByPPTxnId(ppTxnId);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingOrder fetchByPPTxnId(
+		java.lang.String ppTxnId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPPTxnId(ppTxnId);
+	}
+
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByG_U_PPPS(
 		long groupId, long userId, java.lang.String ppPaymentStatus)
 		throws com.liferay.portal.SystemException {
@@ -236,6 +248,12 @@ public class ShoppingOrderUtil {
 		getPersistence().removeByNumber(number);
 	}
 
+	public static void removeByPPTxnId(java.lang.String ppTxnId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.shopping.NoSuchOrderException {
+		getPersistence().removeByPPTxnId(ppTxnId);
+	}
+
 	public static void removeByG_U_PPPS(long groupId, long userId,
 		java.lang.String ppPaymentStatus)
 		throws com.liferay.portal.SystemException {
@@ -254,6 +272,11 @@ public class ShoppingOrderUtil {
 	public static int countByNumber(java.lang.String number)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByNumber(number);
+	}
+
+	public static int countByPPTxnId(java.lang.String ppTxnId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByPPTxnId(ppTxnId);
 	}
 
 	public static int countByG_U_PPPS(long groupId, long userId,
