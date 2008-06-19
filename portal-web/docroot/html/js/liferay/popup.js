@@ -16,7 +16,7 @@ Liferay.Popup = function(options) {
 	 * dragStop - (function) a callback that is called when dragging of the dialog stops
 	 */
 	var instance = this;
-	
+
 	var cacheDialogHelper = function(obj) {
 		if (!obj.jquery) {
 			obj = jQuery(obj);
@@ -68,7 +68,7 @@ Liferay.Popup = function(options) {
 
 			return cache;
 		},
-		
+
 		dragStart: function(e, ui) {
 			if (!options.dragHelper) {
 				var dialog = jQuery(this).parents('.ui-dialog:first');
@@ -103,7 +103,7 @@ Liferay.Popup = function(options) {
 			}
 		}
 	};
-	
+
 	var config = jQuery.extend({}, defaults, options);
 
 	var content = '';
