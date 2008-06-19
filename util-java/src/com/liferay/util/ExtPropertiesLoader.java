@@ -225,6 +225,7 @@ public class ExtPropertiesLoader {
 	}
 
 	private String _getFileName(ClassLoader classLoader, String name) {
+
 		URL url = classLoader.getResource(name + ".properties");
 
 		try {
@@ -238,6 +239,10 @@ public class ExtPropertiesLoader {
 
 		if (pos != -1) {
 			name = name.substring(0, pos);
+		}
+
+		if (name.indexOf(".jar!") != -1) {
+			name = "jar:file:" + name;
 		}
 
 		return name;
