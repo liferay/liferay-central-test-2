@@ -30,7 +30,10 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.ActionRequestImpl;
+import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.journal.DuplicateStructureIdException;
 import com.liferay.portlet.journal.NoSuchStructureException;
 import com.liferay.portlet.journal.RequiredStructureException;
@@ -45,8 +48,10 @@ import com.liferay.portlet.journal.util.JournalUtil;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.WindowState;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -67,16 +72,30 @@ public class EditStructureAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
+		JournalStructure structure = null;
+
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateStructure(req);
+				structure = updateStructure(req);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteStructures(req);
 			}
 
 			if (Validator.isNotNull(cmd)) {
-				sendRedirect(req, res);
+				String redirect = ParamUtil.getString(req, "redirect");
+
+				if (structure != null) {
+					boolean saveAndContinue = ParamUtil.getBoolean(
+						req, "saveAndContinue");
+
+					if (saveAndContinue) {
+						redirect = getSaveAndContinueRedirect(
+							config, req, structure, redirect);
+					}
+				}
+
+				sendRedirect(req, res, redirect);
 			}
 		}
 		catch (Exception e) {
@@ -155,7 +174,37 @@ public class EditStructureAction extends PortletAction {
 		}
 	}
 
-	protected void updateStructure(ActionRequest req) throws Exception {
+	protected String getSaveAndContinueRedirect(
+			PortletConfig config, ActionRequest req, JournalStructure structure,
+			String redirect)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		String originalRedirect = ParamUtil.getString(req, "originalRedirect");
+
+		PortletURLImpl portletURL = new PortletURLImpl(
+			(ActionRequestImpl)req, config.getPortletName(),
+			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
+
+		portletURL.setWindowState(WindowState.MAXIMIZED);
+
+		portletURL.setParameter("struts_action", "/journal/edit_structure");
+		portletURL.setParameter(Constants.CMD, Constants.UPDATE, false);
+		portletURL.setParameter("redirect", redirect, false);
+		portletURL.setParameter("originalRedirect", originalRedirect, false);
+		portletURL.setParameter(
+			"groupId", String.valueOf(structure.getGroupId()), false);
+		portletURL.setParameter(
+			"structureId", structure.getStructureId(), false);
+
+		return portletURL.toString();
+	}
+
+	protected JournalStructure updateStructure(ActionRequest req)
+		throws Exception {
+
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
@@ -195,6 +244,8 @@ public class EditStructureAction extends PortletAction {
 		// Recent structures
 
 		JournalUtil.addRecentStructure(req, structure);
+
+		return structure;
 	}
 
 }

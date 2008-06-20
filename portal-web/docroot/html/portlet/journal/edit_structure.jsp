@@ -27,6 +27,15 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
+String originalRedirect = ParamUtil.getString(request, "originalRedirect", StringPool.BLANK);
+
+if (originalRedirect.equals(StringPool.BLANK)) {
+	originalRedirect = redirect;
+}
+else {
+	redirect = originalRedirect;
+}
+
 JournalStructure structure = (JournalStructure)request.getAttribute(WebKeys.JOURNAL_STRUCTURE);
 
 long groupId = BeanParamUtil.getLong(structure, request, "groupId", portletGroupId.longValue());
@@ -176,6 +185,11 @@ int tabIndex = 1;
 		submitForm(document.<portlet:namespace />fm);
 	}
 
+	function <portlet:namespace />saveAndContinueStructure() {
+		document.<portlet:namespace />fm.<portlet:namespace />saveAndContinue.value = "1";
+		<portlet:namespace />saveStructure();
+	}
+
 	function <portlet:namespace />saveStructure(addAnother) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= structure == null ? Constants.ADD : Constants.UPDATE %>";
 
@@ -192,10 +206,12 @@ int tabIndex = 1;
 <input name="scroll" type="hidden" value="" />
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
+<input name="<portlet:namespace />originalRedirect" type="hidden" value="<%= HtmlUtil.escape(originalRedirect) %>" />
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
 <input name="<portlet:namespace />structureId" type="hidden" value="<%= structureId %>" />
 <input name="<portlet:namespace />move_up" type="hidden" value="" />
 <input name="<portlet:namespace />move_depth" type="hidden" value="" />
+<input name="<portlet:namespace />saveAndContinue" type="hidden" value="" />
 
 <liferay-ui:tabs
 	names="structure"
@@ -330,6 +346,8 @@ int tabIndex = 1;
 <br />
 
 <input type="submit" value="<liferay-ui:message key="save" />" />
+
+<input name="save-and-continue" type="button" value="<liferay-ui:message key="save-and-continue" />" onClick="<portlet:namespace />saveAndContinueStructure();" />
 
 <input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 

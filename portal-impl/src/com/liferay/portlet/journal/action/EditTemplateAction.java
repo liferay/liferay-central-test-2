@@ -31,8 +31,11 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.ActionRequestImpl;
+import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.journal.DuplicateTemplateIdException;
 import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.RequiredTemplateException;
@@ -53,8 +56,10 @@ import java.io.File;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.WindowState;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -75,15 +80,29 @@ public class EditTemplateAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
+		JournalTemplate template = null;
+
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateTemplate(req);
+				template = updateTemplate(req);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteTemplates(req);
 			}
 
-			sendRedirect(req, res);
+			String redirect = ParamUtil.getString(req, "redirect");
+
+			if (template != null) {
+				boolean saveAndContinue = ParamUtil.getBoolean(
+					req, "saveAndContinue");
+
+				if (saveAndContinue) {
+					redirect = getSaveAndContinueRedirect(
+						config, req, template, redirect);
+				}
+			}
+
+			sendRedirect(req, res, redirect);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchTemplateException ||
@@ -163,7 +182,36 @@ public class EditTemplateAction extends PortletAction {
 		}
 	}
 
-	protected void updateTemplate(ActionRequest req) throws Exception {
+	protected String getSaveAndContinueRedirect(
+			PortletConfig config, ActionRequest req, JournalTemplate template,
+			String redirect)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		String originalRedirect = ParamUtil.getString(req, "originalRedirect");
+
+		PortletURLImpl portletURL = new PortletURLImpl(
+			(ActionRequestImpl)req, config.getPortletName(),
+			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
+
+		portletURL.setWindowState(WindowState.MAXIMIZED);
+
+		portletURL.setParameter("struts_action", "/journal/edit_template");
+		portletURL.setParameter(Constants.CMD, Constants.UPDATE, false);
+		portletURL.setParameter("redirect", redirect, false);
+		portletURL.setParameter("originalRedirect", originalRedirect, false);
+		portletURL.setParameter(
+			"groupId", String.valueOf(template.getGroupId()), false);
+		portletURL.setParameter("templateId", template.getTemplateId(), false);
+
+		return portletURL.toString();
+	}
+
+	protected JournalTemplate updateTemplate(ActionRequest req)
+		throws Exception {
+
 		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
 			req);
 
@@ -229,6 +277,8 @@ public class EditTemplateAction extends PortletAction {
 		// Recent templates
 
 		JournalUtil.addRecentTemplate(req, template);
+
+		return template;
 	}
 
 }
