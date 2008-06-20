@@ -25,6 +25,7 @@ package com.liferay.portlet.shopping.action;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.shopping.NoSuchOrderException;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
 import com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceUtil;
 import com.liferay.portlet.shopping.util.ShoppingPreferences;
@@ -144,61 +145,59 @@ public class PayPalNotificationAction extends Action {
 		}
 	}
 
-	protected boolean validate(HttpServletRequest req) {
-		try {
-			String ppInvoice = ParamUtil.getString(req, "invoice");
+	protected boolean validate(HttpServletRequest req) throws Exception {
 
-			ShoppingOrder order = ShoppingOrderLocalServiceUtil.getOrder(
-				ppInvoice);
+		// Invoice
 
-			ShoppingPreferences shoppingPrefs = ShoppingPreferences.getInstance(
-				order.getCompanyId(), order.getGroupId());
+		String ppInvoice = ParamUtil.getString(req, "invoice");
 
-			// Receiver Email
+		ShoppingOrder order = ShoppingOrderLocalServiceUtil.getOrder(
+			ppInvoice);
 
-			String ppReceiverEmail = ParamUtil.getString(
-				req, "receiver_email");
+		ShoppingPreferences shoppingPrefs = ShoppingPreferences.getInstance(
+			order.getCompanyId(), order.getGroupId());
 
-			String payPalEmailAddress = shoppingPrefs.getPayPalEmailAddress();
+		// Receiver email address
 
-			if (!payPalEmailAddress.equals(ppReceiverEmail)) {
-				return false;
-			}
+		String ppReceiverEmail = ParamUtil.getString(
+			req, "receiver_email");
 
-			// Payment Gross
+		String payPalEmailAddress = shoppingPrefs.getPayPalEmailAddress();
 
-			double ppGross = ParamUtil.getDouble(req, "mc_gross");
-
-			double orderTotal = ShoppingUtil.calculateTotal(order);
-
-			if (orderTotal != ppGross) {
-				return false;
-			}
-
-			// Payment Currency
-
-			String ppCurrency = ParamUtil.getString(req, "mc_currency");
-
-			String currencyId = shoppingPrefs.getCurrencyId();
-
-			if (!currencyId.equals(ppCurrency)) {
-				return false;
-			}
-
-			// Transaction ID
-
-			String ppTxnId = ParamUtil.getString(req, "txn_id");
-
-			int ppTxnIdCount =
-				ShoppingOrderLocalServiceUtil.getPayPalTxnIdOrderCount(
-					ppTxnId);
-
-			if (ppTxnIdCount > 0) {
-				return false;
-			}
-		}
-		catch (Exception e) {
+		if (!payPalEmailAddress.equals(ppReceiverEmail)) {
 			return false;
+		}
+
+		// Payment gross
+
+		double ppGross = ParamUtil.getDouble(req, "mc_gross");
+
+		double orderTotal = ShoppingUtil.calculateTotal(order);
+
+		if (orderTotal != ppGross) {
+			return false;
+		}
+
+		// Payment currency
+
+		String ppCurrency = ParamUtil.getString(req, "mc_currency");
+
+		String currencyId = shoppingPrefs.getCurrencyId();
+
+		if (!currencyId.equals(ppCurrency)) {
+			return false;
+		}
+
+		// Transaction ID
+
+		String ppTxnId = ParamUtil.getString(req, "txn_id");
+
+		try {
+			ShoppingOrderLocalServiceUtil.getPayPalTxnIdOrder(ppTxnId);
+
+			return false;
+		}
+		catch (NoSuchOrderException nsoe) {
 		}
 
 		return true;

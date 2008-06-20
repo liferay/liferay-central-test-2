@@ -174,11 +174,13 @@ public class ShoppingOrderLocalServiceUtil {
 		return shoppingOrderLocalService.getOrder(number);
 	}
 
-	public static int getPayPalTxnIdOrderCount(java.lang.String ppTxnId)
-		throws com.liferay.portal.SystemException {
+	public static com.liferay.portlet.shopping.model.ShoppingOrder getPayPalTxnIdOrder(
+		java.lang.String ppTxnId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
 		ShoppingOrderLocalService shoppingOrderLocalService = ShoppingOrderLocalServiceFactory.getService();
 
-		return shoppingOrderLocalService.getPayPalTxnIdOrderCount(ppTxnId);
+		return shoppingOrderLocalService.getPayPalTxnIdOrder(ppTxnId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder saveLatestOrder(

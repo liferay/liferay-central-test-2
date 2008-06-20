@@ -295,10 +295,10 @@ public class ShoppingOrderLocalServiceImpl
 		return shoppingOrderPersistence.findByNumber(number);
 	}
 
-	public int getPayPalTxnIdOrderCount(String ppTxnId)
-		throws SystemException {
+	public ShoppingOrder getPayPalTxnIdOrder(String ppTxnId)
+		throws PortalException, SystemException {
 
-		return shoppingOrderPersistence.countByPPTxnId(ppTxnId);
+		return shoppingOrderPersistence.findByPPTxnId(ppTxnId);
 	}
 
 	public ShoppingOrder saveLatestOrder(ShoppingCart cart)
