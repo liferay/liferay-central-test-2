@@ -1540,6 +1540,7 @@ import-export=수입품 / 수출
 import-from-within-the-target-community-can-cause-conflicts=표적 지역 사회안에에게서 수입품은 충돌을 일으키는 원인이 될 수 있는다. 다른 지역 사회에게서 지역 사회portlet을 대신 사용하십시요.
 import-interval=수입품 간격
 import-on-startup-enabled=가능하게 하는 개시에 수입품
+import-only-the-latest-version-and-not-the-full-history=최신 버전만 및 가득 차있는 역사를 아닙니다 수입하십시오.
 import-pages=수입품 페이지
 import-search-filter=수입품 수색 여과기
 import-settings=수입품 조정

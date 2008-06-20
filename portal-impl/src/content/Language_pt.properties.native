@@ -1540,6 +1540,7 @@ import-export=Importação/Exportação
 import-from-within-the-target-community-can-cause-conflicts=A importação dentro da comunidade do alvo pode causar conflitos. Use por favor o portlet das comunidades de uma outra comunidade preferivelmente.
 import-interval=Intervalo Da Importação
 import-on-startup-enabled=A importação na partida permitiu
+import-only-the-latest-version-and-not-the-full-history=Importe somente a versão a mais atrasada e não a história cheia.
 import-pages=Páginas da importação
 import-search-filter=Filtro Da Busca Da Importação
 import-settings=Ajustes Da Importação

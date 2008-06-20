@@ -1540,6 +1540,7 @@ import-export=输入/输出
 import-from-within-the-target-community-can-cause-conflicts=进口从目标社区内部可能导致冲突。改为请使用公共portlet 从其它社区。
 import-interval=进口间隔时间
 import-on-startup-enabled=进口在起动使能
+import-only-the-latest-version-and-not-the-full-history=进口仅最新的版本而不是充分的历史。
 import-pages=进口页
 import-search-filter=进口查寻过滤器
 import-settings=进口设置

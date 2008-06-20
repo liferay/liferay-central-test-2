@@ -1540,6 +1540,7 @@ import-export=輸入/ 輸出
 import-from-within-the-target-community-can-cause-conflicts=ターゲットコミュニティ内のからの輸入により対立を引き起こすことができる。もう一人のコミュニティからのコミュニティportlet を代りに使用しなさい。
 import-interval=輸入間隔
 import-on-startup-enabled=開始の輸入は可能になった
+import-only-the-latest-version-and-not-the-full-history=最新バージョンだけおよびない完全な歴史を輸入しなさい。
 import-pages=輸入のページ
 import-search-filter=輸入の調査フィルター
 import-settings=輸入の設定

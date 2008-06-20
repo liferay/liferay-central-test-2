@@ -1540,6 +1540,7 @@ import-export=Importar/Exportar
 import-from-within-the-target-community-can-cause-conflicts=La importación desde la propia comunidad destino puede causar conflictos. Por favor, utilice el portlet de comunidades desde otra comunidad.
 import-interval=Intervalo de la importación
 import-on-startup-enabled=Importación en el arranque permitido
+import-only-the-latest-version-and-not-the-full-history=Importe solamente la última versión y no la historia completa.
 import-pages=Importar páginas
 import-search-filter=Filtro de búsqueda para la importación
 import-settings=Configuación de la importación

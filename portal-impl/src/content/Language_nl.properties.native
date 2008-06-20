@@ -1540,6 +1540,7 @@ import-export=Importeren / Exporteren
 import-from-within-the-target-community-can-cause-conflicts=De invoer vanuit de doel community kan conflicten veroorzaken. Gebruik alstublieft de community portlet in plaats van een andere community.
 import-interval=Importeer interval
 import-on-startup-enabled=Schakel importeren tijdens het opstarten in
+import-only-the-latest-version-and-not-the-full-history=De invoer slechts de recentste versie en niet de volledige geschiedenis.
 import-pages=De Pagina's van de invoer
 import-search-filter=Importeer zoekfilter
 import-settings=Importeer instellingen
