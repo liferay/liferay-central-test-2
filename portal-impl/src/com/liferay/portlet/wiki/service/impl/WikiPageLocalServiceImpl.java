@@ -316,8 +316,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			format, newParentTitle, redirectTitle, tagsEntries, prefs,
 			themeDisplay);
 
-		List<WikiPage> oldPages =
-			wikiPagePersistence.findByN_T_H(nodeId, title, false);
+		List<WikiPage> oldPages = wikiPagePersistence.findByN_T_H(
+			nodeId, title, false);
 
 		for (WikiPage oldPage : oldPages) {
 			oldPage.setParentTitle(originalParentTitle);
