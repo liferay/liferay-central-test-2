@@ -85,6 +85,7 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 		}
 
 		selenium.click("link=New Page");
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -121,6 +122,7 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 
 		selenium.click(
 			"//div[@id=\"banner\"]/div/div/ul/li[8]/ul/li[4]/ul/li[1]/a[2]");
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -155,8 +157,6 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"document.getElementById('_branchId_2018').getElementsByTagName('a')[0].getElementsByTagName('span')[0]");
 		selenium.click(
 			"document.getElementById('_branchId_2018').getElementsByTagName('a')[0].getElementsByTagName('span')[0]");
 
@@ -213,6 +213,8 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 		}
 
 		selenium.click("_88_hiddenCheckbox");
+		Thread.sleep(5000);
+		selenium.click("//input[@value='Save']");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -220,7 +222,8 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
+				if (selenium.isTextPresent(
+							"Your request processed successfully.")) {
 					break;
 				}
 			}
@@ -230,10 +233,6 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		Thread.sleep(5000);
-		selenium.click("//input[@value='Save']");
-		Thread.sleep(5000);
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -241,7 +240,7 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@id=\"banner\"]/div[1]/div[2]/ul/li[5]/ul/li[5]/ul/li[1]/a[1]")) {
+							"//div[@id=\"banner\"]/div[1]/div[2]/ul/li[6]/ul/li[5]/ul/li[1]/a[1]")) {
 					break;
 				}
 			}
@@ -252,7 +251,24 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 		}
 
 		selenium.click(
-			"//div[@id=\"banner\"]/div[1]/div[2]/ul/li[5]/ul/li[5]/ul/li[1]/a[1]");
+			"//div[@id=\"banner\"]/div[1]/div[2]/ul/li[6]/ul/li[5]/ul/li[1]/a[1]");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Home")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
