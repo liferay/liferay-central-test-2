@@ -409,27 +409,6 @@ Liferay.Layout.FreeForm = {
 
 		container.appendChild(portlet);
 	},
-	savePosition: function(portlet) {
-		var currentColumnId = portlet.parentNode.id.replace(/^layout-column_/, '');
-		var index = this.findIndex(portlet);
-		var portletId = portlet.id.replace(/^(p_p_id_)/, '');
-		portletId = portletId.substring(0, portletId.length - 1);
-
-		var url =
-			themeDisplay.getPathMain() + '/portal/update_layout' +
-			'?p_l_id=' + themeDisplay.getPlid() +
-			'&p_p_id=' + portletId +
-			'&p_p_col_id=' + currentColumnId +
-			'&p_p_col_pos=' + index +
-			'&doAsUserId=' + themeDisplay.getDoAsUserIdEncoded() +
-			'&cmd=move';
-
-		jQuery.ajax(
-			{
-				url: url
-			}
-		);
-	},
 
 	_savePosition: function(portlet, wasClicked) {
 		var instance = this;
