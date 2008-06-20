@@ -605,6 +605,10 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 	}
 
 	protected boolean isCompanyAdminImpl(long companyId) throws Exception {
+		if (!signedIn) {
+			return false;
+		}
+
 		if (isOmniadmin()) {
 			return true;
 		}
@@ -624,6 +628,10 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 	}
 
 	protected boolean isCommunityAdminImpl(long groupId) throws Exception {
+		if (!signedIn) {
+			return false;
+		}
+
 		if (isOmniadmin()) {
 			return true;
 		}
@@ -654,6 +662,10 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 	}
 
 	protected boolean isCommunityOwnerImpl(long groupId) throws Exception {
+		if (!signedIn) {
+			return false;
+		}
+
 		if (isOmniadmin()) {
 			return true;
 		}
