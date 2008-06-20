@@ -350,7 +350,6 @@ Liferay.Layout.FreeForm = {
 				start: function(event, ui) {
 					ui.helper.css('z-index', helperZIndex);
 					instance._moveToTop(this);
-					
 				},
 				stop: function(event, ui) {
 					var portlet = this;
@@ -414,6 +413,7 @@ Liferay.Layout.FreeForm = {
 		}
 		else {
 			portlet.style.zIndex = instance._maxZIndex + 5;
+
 			jQuery(portlet).one(
 				'click',
 				function(event) {
@@ -457,7 +457,7 @@ Liferay.Layout.FreeForm = {
 					}
 				);
 			}
-		}		
+		}
 	},
 
 	_current: null,

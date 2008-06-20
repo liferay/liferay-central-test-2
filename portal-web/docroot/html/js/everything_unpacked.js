@@ -16125,77 +16125,37 @@ Liferay.Layout = {
 		instance.layoutHandler = layoutHandler;
 	},
 
-	getGroupId: function(objId) {
-		var instance = this;
-
-		if ((objId != null) &&
-			(objId.indexOf(instance._private) == 0 || objId.indexOf(instance._public) == 0)) {
-
-			return objId.split(instance._separator)[1];
-		}
-
-		return 0;
-	},
-
-	getLayoutId: function(objId) {
-		var instance = this;
-
-		if ((objId != null) &&
-			(objId.indexOf(instance._private) == 0 || objId.indexOf(instance._public) == 0)) {
-
-			return objId.split(instance._separator)[2];
-		}
-
-		return 0;
-	},
-
-	getOwnerId: function(objId) {
-		var instance = this;
-
-		if ((objId != null) &&
-			(objId.indexOf(instance._private) == 0 || objId.indexOf(instance._public) == 0)) {
-
-			var pos = objId.lastIndexOf(instance._separator);
-
-			if (pos != -1) {
-				return objId.substring(0, pos);
-			}
-
-			return null;
-		}
-	},
-
-	/*
-		Options:
-		portletId: current portlet's ID
-		columnId: the id of the column where the portlet sits
-		portletPosition: the indexed position of the portlet
-	*/
-	movePortlet: function(options) {
-		var instance = this;
-
-		jQuery.ajax(
-			{
-				url: themeDisplay.getPathMain() + '/portal/update_layout' +
-				'?p_l_id=' + (options.plid || themeDisplay.getPlid()) +
-				'&p_p_id=' + options.portletId +
-				'&p_p_col_id=' + options.currentColumnId +
-				'&p_p_col_pos=' + options.portletPosition +
-				'&doAsUserId=' + themeDisplay.getDoAsUserIdEncoded() +
-				'&cmd=move'
-			}
-		);
-	},
-
 	refresh: function(portletBound) {
 		var instance = this;
 
 		instance.layoutHandler.refresh(portletBound);
 	},
 
-	_private: 'PRI.',
-	_public: 'PUB.',
-	_separator: '.'
+	_findIndex: function(portlet, parentNode) {
+		var instance = this;
+
+		parentNode = parentNode || portlet.parentNode;
+
+		return jQuery('> .portlet-boundary', parentNode).index(portlet);
+	},
+
+	_saveLayout: function(options) {
+		var instance = this;
+
+		var data = {
+			doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+			p_l_id: themeDisplay.getPlid()
+		};
+
+		jQuery.extend(data, options);
+
+		jQuery.ajax(
+			{
+				url: themeDisplay.getPathMain() + '/portal/update_layout',
+				data: data
+			}
+		);
+	}
 };
 
 Liferay.Layout.Columns = {
@@ -16371,22 +16331,20 @@ Liferay.Layout.Columns = {
 	_onUpdate: function(event, ui) {
 		var instance = this;
 
-		var originalCol = ui.sender || ui.element;
+		var currentCol = ui.element[0];
+		var portlet = (ui.item || [false])[0];
 
-		if (ui.item && ui.item[0].parentNode == ui.element[0]) {
-			var currentCol = ui.element;
-			var portlet = ui.item;
+		if (portlet && portlet.parentNode == currentCol) {
+			var position = Liferay.Layout._findIndex(portlet, currentCol);
+			var currentColumnId = Liferay.Util.getColumnId(currentCol.id);
+			var portletId = Liferay.Util.getPortletId(portlet.id);
 
-			var position = currentCol.find('.portlet-boundary').index(portlet[0]);
-			var currentColumnId = currentCol[0].id.replace(/^layout-column_/, '');
-			var portletId = portlet[0].id.replace(/^(p_p_id_)/, '');
-			portletId = portletId.substring(0, portletId.length - 1);
-
-			Liferay.Layout.movePortlet(
+			Liferay.Layout._saveLayout(
 				{
-					currentColumnId: currentColumnId,
-					portletId: portletId,
-					portletPosition: position
+					cmd: 'move',
+					p_p_col_id: currentColumnId,
+					p_p_col_pos: position,
+					p_p_id: portletId
 				}
 			);
 
@@ -16430,6 +16388,8 @@ Liferay.Layout.FreeForm = {
 
 		instance._createHelperCache(portlet);
 
+		var helperZIndex = instance._maxZIndex + 10;
+
 		jPortlet.draggable(
 			{
 				handle: '.portlet-header-bar, .portlet-title-default, .portlet-topper, .portlet-topper *',
@@ -16439,13 +16399,12 @@ Liferay.Layout.FreeForm = {
 
 					var height = portlet.height();
 					var width = portlet.width();
-					var zIndex = portlet.css('z-index');
 
 					helper.css(
 						{
 							height: height,
 							width: width,
-							zIndex: zIndex + 10
+							zIndex: helperZIndex
 						}
 					);
 
@@ -16471,19 +16430,18 @@ Liferay.Layout.FreeForm = {
 					portlet.style.left = left + 'px';
 					portlet.style.top = top + 'px';
 
-					instance._moveToTop(portlet);
 					instance._savePosition(portlet);
 				}
 			}
 		);
 
 		jPortlet.mousedown(
-			function() {
+			function(event) {
 				if (instance._current != this) {
-					instance._moveToTop(this);
+					instance._moveToTop(this, true);
 					instance._savePosition(this, true);
 					instance._current = this;
-					this.style.zIndex = 99;
+					this.style.zIndex = instance._maxZIndex;
 				}
 			}
 		);
@@ -16493,21 +16451,21 @@ Liferay.Layout.FreeForm = {
 
 		jPortlet.resizable(
 			{
+				proxy: 'ui-resizable-proxy',
 				start: function(event, ui) {
+					ui.helper.css('z-index', helperZIndex);
 					instance._moveToTop(this);
-				},
-				resize: function(event, ui) {
-					var rBoxHeight = parseInt(resizeBox[0].style.height);
-					var portletHeight = ui.size.height;
-
-					var newHeight = Math.round((portletHeight / oldPortletHeight) * rBoxHeight);
-					resizeBox.css('height', newHeight);
-					ui.size.height = 'auto';
-
-					oldPortletHeight = portletHeight;
 				},
 				stop: function(event, ui) {
 					var portlet = this;
+					var rBoxHeight = parseInt(resizeBox[0].style.height);
+					var portletHeight = ui.size.height;
+					var newHeight = Math.round((portletHeight / oldPortletHeight) * rBoxHeight);
+
+					resizeBox.css('height', newHeight);
+					jPortlet.css('height', 'auto');
+
+					oldPortletHeight = portletHeight;
 					instance._savePosition(portlet);
 				}
 			}
@@ -16517,6 +16475,8 @@ Liferay.Layout.FreeForm = {
 			portlet.style.top = (20 * portlet.columnPos) + 'px';
 			portlet.style.left = (20 * portlet.columnPos) + 'px';
 		}
+
+		instance._current = portlet;
 	},
 
 	refresh: function(portletBound) {
@@ -16547,56 +16507,66 @@ Liferay.Layout.FreeForm = {
 		return cache;
 	},
 
-	_findPosition: function(portlet) {
-		var position = -1;
-
-		jQuery('.portlet-boundary', portlet.parentNode).each(function(i) {
-			if (this == portlet) {
-				position = i;
-			}
-		});
-
-		return position;
-	},
-
-	_moveToTop: function(portlet) {
-		var container = portlet.parentNode;
-		portlet.oldPosition = this._findPosition(portlet);
-
-		container.removeChild(portlet);
-		container.appendChild(portlet);
-	},
-
-	_savePosition: function(portlet, wasClicked) {
+	_moveToTop: function(portlet, temporary) {
 		var instance = this;
-		var resizeBox = jQuery(portlet).find('.portlet-content-container, .portlet-borderless-container')[0];
-		var newPosition = Liferay.Portlet.findIndex(portlet);
-		var cmd;
 
-		if (newPosition != portlet.oldPosition) {
-			Liferay.Portlet.savePosition(portlet);
+		var container = portlet.parentNode;
+		portlet.oldPosition = Liferay.Layout._findIndex(portlet);
+
+		if (!temporary) {
+			container.appendChild(portlet);
 		}
+		else {
+			portlet.style.zIndex = instance._maxZIndex + 5;
 
-		if (resizeBox && !wasClicked) {
-			var url = themeDisplay.getPathMain() + '/portal/update_layout' +
-				'?p_l_id=' + themeDisplay.getPlid() +
-				'&height=' + resizeBox.style.height +
-				'&width=' + portlet.style.width +
-				'&top=' + portlet.style.top +
-				'&left=' + portlet.style.left +
-				'&p_p_id=' + portlet.portletId +
-				'&doAsUserId=' + themeDisplay.getDoAsUserIdEncoded() +
-				'&cmd=drag';
-
-			jQuery.ajax(
-				{
-					url: url
+			jQuery(portlet).one(
+				'click',
+				function(event) {
+					instance._moveToTop(this);
 				}
 			);
 		}
 	},
 
-	_current: null
+	_savePosition: function(portlet, wasClicked) {
+		var instance = this;
+		var resizeBox = jQuery(portlet).find('.portlet-content-container, .portlet-borderless-container')[0];
+		var position = Liferay.Layout._findIndex(portlet);
+		var portletId = Liferay.Util.getPortletId(portlet.id);
+		var changedIndex = (position != portlet.oldPosition);
+		var changedPosition = (resizeBox && !wasClicked);
+
+		if (changedIndex || changedPosition) {
+			if (changedIndex) {
+				var currentColumnId = Liferay.Util.getColumnId(portlet.parentNode.id);
+
+				Liferay.Layout._saveLayout(
+					{
+						cmd: 'move',
+						p_p_col_id: currentColumnId,
+						p_p_col_pos: position,
+						p_p_id: portletId
+					}
+				);
+			}
+
+			if (changedPosition) {
+				Liferay.Layout._saveLayout(
+					{
+						cmd: 'drag',
+						height: resizeBox.style.height,
+						left: portlet.style.left,
+						p_p_id: portletId,
+						top: portlet.style.top,
+						width: portlet.style.width
+					}
+				);
+			}
+		}
+	},
+
+	_current: null,
+	_maxZIndex: 99
 };
 Liferay.Popup = function(options) {
 	/*
@@ -17152,77 +17122,6 @@ Liferay.Portlet = {
 
 	last: function(arg1) {
 		this.fnLast.push(arg1);
-	},
-
-	/*
-	 * Helper methods for portlets
-	 */
-	findIndex: function(portlet) {
-		var index = -1;
-
-		jQuery("> .portlet-boundary", portlet.parentNode).each(
-			function(i) {
-				if (this == portlet) {
-					index = i;
-				}
-			}
-		);
-
-		return index;
-	},
-
-	move: function(data) {
-		var portlet = data.portlet;
-		var neighbor = data.neighbor;
-		var quadrant = data.quadrant;
-		var container = data.container;
-
-		if (neighbor && quadrant) {
-			if (quadrant == 1 || quadrant == 2) {
-				jQuery(neighbor).before(portlet);
-			}
-			else {
-				jQuery(neighbor).after(portlet);
-			}
-
-			if (portlet && portlet.originalColumn) {
-				var oColumn = jQuery(portlet.originalColumn);
-				var portlets = oColumn.find('.portlet-boundary:first');
-
-				if (portlets.length == 0) {
-					oColumn.addClass('empty');
-				}
-
-				oColumn = portlet.originalColumn = null;
-			}
-		}
-		else if (container) {
-			jQuery(container).append(portlet).removeClass('empty');
-		}
-
-		this.savePosition(portlet);
-	},
-
-	savePosition: function(portlet) {
-		var currentColumnId = portlet.parentNode.id.replace(/^layout-column_/, '');
-		var index = this.findIndex(portlet);
-		var portletId = portlet.id.replace(/^(p_p_id_)/, '');
-		portletId = portletId.substring(0, portletId.length - 1);
-
-		var url =
-			themeDisplay.getPathMain() + '/portal/update_layout' +
-			'?p_l_id=' + themeDisplay.getPlid() +
-			'&p_p_id=' + portletId +
-			'&p_p_col_id=' + currentColumnId +
-			'&p_p_col_pos=' + index +
-			'&doAsUserId=' + themeDisplay.getDoAsUserIdEncoded() +
-			'&cmd=move';
-
-		jQuery.ajax(
-			{
-				url: url
-			}
-		);
 	}
 };
 
