@@ -374,9 +374,10 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 		List<IGImage> images = igImagePersistence.findByF_N(folderId, name);
 
-		if (images.size() <= 0 && Validator.isNumber(name)) {
-			IGImage image = igImagePersistence.fetchByPrimaryKey(
-				GetterUtil.getLong(name));
+		if ((images.size() <= 0) && Validator.isNumber(name)) {
+			long imageId = GetterUtil.getLong(name);
+
+			IGImage image = igImagePersistence.fetchByPrimaryKey(imageId);
 
 			if (image != null) {
 				images.add(image);
