@@ -138,7 +138,7 @@ public class MainServlet extends ActionServlet {
 
 		super.init();
 
-		// Process startup events
+		// Startup events
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Process startup events");
@@ -166,7 +166,7 @@ public class MainServlet extends ActionServlet {
 
 		VelocityContextPool.put(contextPath, ctx);
 
-		// Initialize plugin package
+		// Plugin package
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Initialize plugin package");
@@ -182,7 +182,7 @@ public class MainServlet extends ActionServlet {
 			_log.error(e, e);
 		}
 
-		// Initialize portlets
+		// Portlets
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Initialize portlets");
@@ -221,7 +221,7 @@ public class MainServlet extends ActionServlet {
 			_log.error(e, e);
 		}
 
-		// Initialize layout templates
+		// Layout templates
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Initialize layout templates");
@@ -241,7 +241,7 @@ public class MainServlet extends ActionServlet {
 			_log.error(e, e);
 		}
 
-		// Initialize look and feel
+		// Look and feel
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Initialize look and feel");
@@ -268,24 +268,13 @@ public class MainServlet extends ActionServlet {
 		}
 
 		try {
-			if (GetterUtil.getBoolean(PropsUtil.get(
-					PropsUtil.SCHEDULER_ENABLED))) {
+			if (PropsValues.SCHEDULER_ENABLED) {
+				for (String className : PropsValues.SCHEDULER_CLASSES) {
+					Scheduler scheduler = (Scheduler)InstancePool.get(
+						className);
 
-				// Non-portlet-based schedulers
-
-				String[] schedulerClasses =
-					PropsUtil.getArray(PropsUtil.SCHEDULER_CLASSES_ON_STARTUP);
-
-				for (String className : schedulerClasses) {
-					if (Validator.isNotNull(className)) {
-						Scheduler scheduler = (Scheduler)InstancePool.get(
-							className);
-
-						scheduler.schedule();
-					}
+					scheduler.schedule();
 				}
-
-				// Portlet-based schedulers
 
 				Iterator<Portlet> itr = portlets.iterator();
 
@@ -418,7 +407,7 @@ public class MainServlet extends ActionServlet {
 			}
 		}
 
-		// Process global startup events
+		// Global startup events
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Process global startup events");
@@ -433,7 +422,7 @@ public class MainServlet extends ActionServlet {
 			_log.error(e, e);
 		}
 
-		// Initialize companies
+		// Companies
 
 		String[] webIds = PortalInstances.getWebIds();
 
@@ -668,7 +657,7 @@ public class MainServlet extends ActionServlet {
 			}
 		}
 
-		// Process pre service events
+		// Pre service events
 
 		try {
 			EventsProcessor.process(
@@ -712,7 +701,7 @@ public class MainServlet extends ActionServlet {
 		}
 		finally {
 
-			// Process post service events
+			// Post service events
 
 			try {
 				EventsProcessor.process(
@@ -737,9 +726,47 @@ public class MainServlet extends ActionServlet {
 	}
 
 	public void destroy() {
+		List<Portlet> portlets = PortletLocalServiceUtil.getPortlets();
+
+		// Scheduler
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Scheduler");
+		}
+
 		try {
-			Iterator<Portlet> itr =
-				PortletLocalServiceUtil.getPortlets().iterator();
+			if (PropsValues.SCHEDULER_ENABLED) {
+				for (String className : PropsValues.SCHEDULER_CLASSES) {
+					Scheduler scheduler = (Scheduler)InstancePool.get(
+						className);
+
+					scheduler.unschedule();
+				}
+
+				Iterator<Portlet> itr = portlets.iterator();
+
+				while (itr.hasNext()) {
+					Portlet portlet = itr.next();
+
+					String className = portlet.getSchedulerClass();
+
+					if (portlet.isActive() && Validator.isNotNull(className)) {
+						Scheduler scheduler = (Scheduler)InstancePool.get(
+							className);
+
+						scheduler.unschedule();
+					}
+				}
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		// Portlets
+
+		try {
+			Iterator<Portlet> itr = portlets.iterator();
 
 			while (itr.hasNext()) {
 				Portlet portlet = itr.next();
@@ -751,10 +778,18 @@ public class MainServlet extends ActionServlet {
 			_log.error(e, e);
 		}
 
+		// Companies
+
 		long[] companyIds = PortalInstances.getCompanyIds();
 
 		for (int i = 0; i < companyIds.length; i++) {
 			destroyCompany(companyIds[i]);
+		}
+
+		// Global shutdown events
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Process global shutdown events");
 		}
 
 		try {

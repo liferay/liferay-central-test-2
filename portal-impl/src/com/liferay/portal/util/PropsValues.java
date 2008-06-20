@@ -843,6 +843,12 @@ public class PropsValues {
 	public static final String RESOURCE_REPOSITORIES_ROOT =
 		PropsUtil.get(PropsUtil.RESOURCE_REPOSITORIES_ROOT);
 
+	public static final String[] SCHEDULER_CLASSES =
+		PropsUtil.getArray(PropsUtil.SCHEDULER_CLASSES);
+
+	public static final boolean SCHEDULER_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.SCHEDULER_ENABLED));
+
 	public static final String[] SERVLET_SERVICE_EVENTS_POST =
 		PropsUtil.getArray(PropsUtil.SERVLET_SERVICE_EVENTS_POST);
 
