@@ -805,10 +805,6 @@ if (portlet.isActive() && access && supportsMimeType) {
 	</c:otherwise>
 </c:choose>
 
-<c:if test="<%= !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() %>">
-	</div>
-</c:if>
-
 <%
 String staticVar = "yes";
 
@@ -827,35 +823,36 @@ else {
 %>
 
 <c:if test="<%= !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() %>">
-	<script type="text/javascript">
-		<c:if test="<%= !runtimePortlet %>">
-			document.getElementById("p_p_id<%= renderResImpl.getNamespace() %>").portletId = "<%= portletDisplay.getId() %>";
-			document.getElementById("p_p_id<%= renderResImpl.getNamespace() %>").columnPos = <%= columnPos %>;
+		<script type="text/javascript">
+			<c:if test="<%= !runtimePortlet %>">
+				document.getElementById("p_p_id<%= renderResImpl.getNamespace() %>").portletId = "<%= portletDisplay.getId() %>";
+				document.getElementById("p_p_id<%= renderResImpl.getNamespace() %>").columnPos = <%= columnPos %>;
 
-			<c:if test='<%= !staticVar.equals("no") %>'>
-				document.getElementById("p_p_id<%= renderResImpl.getNamespace() %>").isStatic = "<%= staticVar %>";
+				<c:if test='<%= !staticVar.equals("no") %>'>
+					document.getElementById("p_p_id<%= renderResImpl.getNamespace() %>").isStatic = "<%= staticVar %>";
+				</c:if>
+
+				if (!Liferay.Portlet.isAjax("<%= portletDisplay.getId() %>")) {
+					Liferay.Portlet.process("<%= portletDisplay.getId() %>");
+				}
 			</c:if>
 
-			if (!Liferay.Portlet.isAjax("<%= portletDisplay.getId() %>")) {
-				Liferay.Portlet.process("<%= portletDisplay.getId() %>");
-			}
-		</c:if>
-
-		<c:if test="<%= showConfigurationIcon %>">
-			jQuery(
-				function() {
-					Liferay.Util.portletTitleEdit(
-						{
-							obj: jQuery("#p_p_id_<%= portletDisplay.getId() %>_"),
-							plid: "<%= layout.getPlid() %>",
-							doAsUserId: "<%= themeDisplay.getDoAsUserId() %>",
-							portletId: "<%= portletDisplay.getId() %>"
-						}
-					);
-				}
-			);
-		</c:if>
-	</script>
+			<c:if test="<%= showConfigurationIcon %>">
+				jQuery(
+					function() {
+						Liferay.Util.portletTitleEdit(
+							{
+								obj: jQuery("#p_p_id_<%= portletDisplay.getId() %>_"),
+								plid: "<%= layout.getPlid() %>",
+								doAsUserId: "<%= themeDisplay.getDoAsUserId() %>",
+								portletId: "<%= portletDisplay.getId() %>"
+							}
+						);
+					}
+				);
+			</c:if>
+		</script>
+	</div>
 </c:if>
 
 <%
