@@ -62,8 +62,8 @@ public class WebAutoDeployer extends BaseDeployer implements AutoDeployer {
 				PropsValues.AUTO_DEPLOY_TOMCAT_LIB_DIR);
 
 			List<String> jars = new ArrayList<String>();
+
 			jars.add(DeployUtil.getResourcePath("util-java.jar"));
-			jars.add(DeployUtil.getResourcePath("util-taglib.jar"));
 
 			this.jars = jars;
 
