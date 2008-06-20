@@ -397,6 +397,19 @@ public class PortletExporter {
 		long companyId = context.getCompanyId();
 		long groupId = context.getGroupId();
 
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(
+			context.getCompanyId(), portletId);
+
+		if (portlet == null) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Do not export portlet " + portletId +
+						" because the portlet does not exist");
+			}
+
+			return;
+		}
+
 		Document portletDoc = DocumentHelper.createDocument();
 
 		Element portletEl = portletDoc.addElement("portlet");
@@ -412,7 +425,7 @@ public class PortletExporter {
 				layout, portletId, StringPool.BLANK);
 
 		if (exportPortletData) {
-			exportPortletData(context, portletId, jxPrefs, portletEl);
+			exportPortletData(context, portlet, jxPrefs, portletEl);
 		}
 
 		// Portlet preferences
@@ -510,23 +523,10 @@ public class PortletExporter {
 	}
 
 	protected void exportPortletData(
-			PortletDataContext context, String portletId,
+			PortletDataContext context, Portlet portlet,
 			javax.portlet.PortletPreferences portletPreferences,
 			Element parentEl)
 		throws PortalException, SystemException {
-
-		Portlet portlet = PortletLocalServiceUtil.getPortletById(
-			context.getCompanyId(), portletId);
-
-		if (portlet == null) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Do not export portlet data for " + portletId +
-						" because the portlet does not exist");
-			}
-
-			return;
-		}
 
 		PortletDataHandler portletDataHandler =
 			portlet.getPortletDataHandlerInstance();
@@ -534,6 +534,8 @@ public class PortletExporter {
 		if (portletDataHandler == null) {
 			return;
 		}
+
+		String portletId = portlet.getPortletId();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Exporting data for " + portletId);
