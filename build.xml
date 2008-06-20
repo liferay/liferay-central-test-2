@@ -357,7 +357,7 @@
 		<antcall target="deploy-properties" />
 
 		<copy todir="${app.server.lib.global.dir}">
-			<fileset dir="lib/development" includes="hsql.jar,mysql.jar,postgresql.jar,ruon-api.jar" />
+			<fileset dir="lib/development" includes="hsql.jar,iweb-api.jar,mysql.jar,postgresql.jar,ruon-api.jar" />
 			<fileset dir="lib/global" />
 		</copy>
 
