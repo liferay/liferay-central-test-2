@@ -63,8 +63,6 @@ public interface Document {
 
 	public void addModifiedDate();
 
-	public void addText(String name, long value);
-
 	public void addText(String name, String value);
 
 	public void addUID(String portletId, long field1);

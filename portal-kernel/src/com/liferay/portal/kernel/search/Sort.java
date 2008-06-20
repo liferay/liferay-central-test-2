@@ -54,6 +54,10 @@ public class Sort {
 		_reverse = reverse;
 	}
 
+	public String toString() {
+		return "{fieldName=" + _fieldName + ", reverse=" + _reverse + "}";
+	}
+
 	private String _fieldName;
 	private boolean _reverse;
 

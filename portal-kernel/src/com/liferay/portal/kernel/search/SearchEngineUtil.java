@@ -137,7 +137,7 @@ public class SearchEngineUtil {
 		}
 		catch (MessageBusException mbe) {
 			if (_log.isErrorEnabled()) {
-				_log.error("Unbale to check index status", mbe);
+				_log.error("Unable to check index status", mbe);
 			}
 
 			return false;

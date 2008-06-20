@@ -104,7 +104,7 @@ public class Field {
 		else {
 			return null;
 		}
-			}
+	}
 
 	public void setValue(String value) {
 		setValues(new String[] {value});
