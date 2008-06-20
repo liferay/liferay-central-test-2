@@ -875,6 +875,8 @@ public class PropsUtil {
 
 	public static final String SCHEDULER_ENABLED = "scheduler.enabled";
 
+	public static final String SCHEDULER_CLASSES_ON_STARTUP = "scheduler.classes.on.startup";
+
 	// Social Bookmarking
 
 	public static final String SOCIAL_BOOKMARK_TYPES = "social.bookmark.types";

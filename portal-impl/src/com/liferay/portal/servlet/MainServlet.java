@@ -271,6 +271,22 @@ public class MainServlet extends ActionServlet {
 			if (GetterUtil.getBoolean(PropsUtil.get(
 					PropsUtil.SCHEDULER_ENABLED))) {
 
+				// Non-portlet-based schedulers
+
+				String[] schedulerClasses =
+					PropsUtil.getArray(PropsUtil.SCHEDULER_CLASSES_ON_STARTUP);
+
+				for (String className : schedulerClasses) {
+					if (Validator.isNotNull(className)) {
+						Scheduler scheduler = (Scheduler)InstancePool.get(
+							className);
+
+						scheduler.schedule();
+					}
+				}
+
+				// Portlet-based schedulers
+
 				Iterator<Portlet> itr = portlets.iterator();
 
 				while (itr.hasNext()) {
