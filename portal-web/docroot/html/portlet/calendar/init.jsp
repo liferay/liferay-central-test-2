@@ -37,6 +37,22 @@
 <%@ page import="com.liferay.portlet.calendar.util.CalUtil" %>
 
 <%
+PortletPreferences prefs = renderRequest.getPreferences();
+
+String portletResource = ParamUtil.getString(request, "portletResource");
+
+if (Validator.isNotNull(portletResource)) {
+	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+}
+
+String tabs1Names = prefs.getValue("display-order-tabs1", "summary,day,week,month,year,events,export-import");
+
+String[] tabs1NamesArray = StringUtil.split(tabs1Names, ",");
+
+String summaryTabOrientation = prefs.getValue("summary-tab-orientation", "horizontal");
+boolean summaryTabShowMiniMonth = GetterUtil.getBoolean(prefs.getValue("summary-tab-show-mini-month", "true"));
+boolean summaryTabShowTodaysEvents = GetterUtil.getBoolean(prefs.getValue("summary-tab-show-todays-events", "true"));
+
 String monthParam = request.getParameter("month");
 String dayParam = request.getParameter("day");
 String yearParam = request.getParameter("year");

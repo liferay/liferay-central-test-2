@@ -41,6 +41,7 @@ import javax.portlet.RenderResponse;
  * <a href="ConfigurationActionImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Arcko Yongming Duan
  *
  */
 public class ConfigurationActionImpl implements ConfigurationAction {
@@ -69,6 +70,12 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		else if (tabs2.equals("event-reminder-email")) {
 			updateEmailEventReminder(req, prefs);
 		}
+		else if (tabs2.equals("display-order")) {
+			updateDisplayOrder(req, prefs);
+		}
+		else if (tabs2.equals("summary-tab")) {
+			updateSummaryTab(req, prefs);
+		}
 
 		if (SessionErrors.isEmpty(req)) {
 			prefs.store();
@@ -82,6 +89,16 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		throws Exception {
 
 		return "/html/portlet/calendar/configuration.jsp";
+	}
+
+	protected void updateDisplayOrder(
+			ActionRequest req, PortletPreferences prefs)
+		throws Exception {
+
+		String displayOrderTabs1 = ParamUtil.getString(
+			req, "displayOrderTabs1");
+
+		prefs.setValue("display-order-tabs1", displayOrderTabs1);
 	}
 
 	protected void updateEmailFrom(ActionRequest req, PortletPreferences prefs)
@@ -127,6 +144,24 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				"email-event-reminder-subject", emailEventReminderSubject);
 			prefs.setValue("email-event-reminder-body", emailEventReminderBody);
 		}
+	}
+
+	protected void updateSummaryTab(
+			ActionRequest req, PortletPreferences prefs)
+		throws Exception {
+
+		String summaryTabOrientation = ParamUtil.getString(
+			req, "summaryTabOrientation");
+		String summaryTabShowMiniMonth = ParamUtil.getString(
+			req, "summaryTabShowMiniMonth");
+		String summaryTabShowTodaysEvents = ParamUtil.getString(
+			req, "summaryTabShowTodaysEvents");
+
+		prefs.setValue("summary-tab-orientation", summaryTabOrientation);
+		prefs.setValue(
+			"summary-tab-show-mini-month", summaryTabShowMiniMonth);
+		prefs.setValue(
+			"summary-tab-show-todays-events", summaryTabShowTodaysEvents);
 	}
 
 }

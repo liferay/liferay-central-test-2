@@ -36,6 +36,6 @@ tabs1URL.setParameter("year", String.valueOf(selYear));
 %>
 
 <liferay-ui:tabs
-	names="summary,day,week,month,year,events,export-import"
+	names="<%= tabs1Names %>"
 	url="<%= tabs1URL.toString() %>"
 />

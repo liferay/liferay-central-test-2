@@ -29,10 +29,6 @@ String tabs2 = ParamUtil.getString(request, "tabs2", "email-from");
 
 String redirect = ParamUtil.getString(request, "redirect");
 
-String portletResource = ParamUtil.getString(request, "portletResource");
-
-PortletPreferences prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
-
 String emailFromName = ParamUtil.getString(request, "emailFromName", CalUtil.getEmailFromName(prefs));
 String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", CalUtil.getEmailFromAddress(prefs));
 
@@ -60,6 +56,9 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 		<c:if test='<%= tabs2.equals("event-reminder-email") %>'>
 			document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = window.<portlet:namespace />editor.getHTML();
 		</c:if>
+		<c:if test='<%= tabs2.equals("display-order") %>'>
+			document.<portlet:namespace />fm.<portlet:namespace />displayOrderTabs1.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />tabs1NamesBox);
+		</c:if>
 
 		submitForm(document.<portlet:namespace />fm);
 	}
@@ -69,9 +68,10 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escape(tabs2) %>" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
+<input name="<portlet:namespace />displayOrderTabs1" type="hidden" value="" />
 
 <liferay-ui:tabs
-	names="email-from,event-reminder-email"
+	names="email-from,event-reminder-email,display-order,summary-tab"
 	param="tabs2"
 	url="<%= portletURL %>"
 />
@@ -211,6 +211,62 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 			</td>
 			<td>
 				The name of the email recipient
+			</td>
+		</tr>
+		</table>
+	</c:when>
+	<c:when test='<%= tabs2.equals("display-order") %>'>
+		<table class="lfr-table">
+			<tr>
+				<td valign="top">
+					<select name="<portlet:namespace />tabs1NamesBox" size="10">
+
+						<%
+						for (int i=0; i < tabs1NamesArray.length; i++) {
+						%>
+
+							<option value="<%= tabs1NamesArray[i] %>"><%= LanguageUtil.get(pageContext, tabs1NamesArray[i]) %></option>
+
+						<%
+						}
+						%>
+
+					</select>
+				</td>
+				<td valign="top">
+					<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />tabs1NamesBox, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" vspace="2" width="16" /></a><br />
+					<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />tabs1NamesBox, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" vspace="2" width="16" /></a><br />
+				</td>
+			</tr>
+		</table>
+	</c:when>
+	<c:when test='<%= tabs2.equals("summary-tab") %>'>
+		<table class="lfr-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="orientation" />
+			</td>
+			<td>
+				<select name="<portlet:namespace />summaryTabOrientation" size="1">
+					<option <%= summaryTabOrientation.equals("horizontal") ? "selected" : "" %>value="horizontal"><liferay-ui:message key="horizontal" /></option>
+					<option <%= summaryTabOrientation.equals("vertical") ? "selected" : "" %> value="vertical"><liferay-ui:message key="vertical" /></option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="show-mini-month" />
+			</td>
+			<td>
+				<liferay-ui:input-checkbox param="summaryTabShowMiniMonth" defaultValue="<%= summaryTabShowMiniMonth %>" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="show-todays-events" />
+			</td>
+			<td>
+				<liferay-ui:input-checkbox param="summaryTabShowTodaysEvents" defaultValue="<%= summaryTabShowTodaysEvents %>" />
 			</td>
 		</tr>
 		</table>

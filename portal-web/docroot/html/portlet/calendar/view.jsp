@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/calendar/init.jsp" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1", "summary");
+String tabs1 = ParamUtil.getString(request, "tabs1", tabs1NamesArray[0]);
 
 String eventType = ParamUtil.getString(request, "eventType");
 
