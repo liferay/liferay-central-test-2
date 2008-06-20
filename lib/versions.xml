@@ -226,22 +226,6 @@
 			</license>
 		</licenses>
 	</library>
-
-	<library>
-		<file-name>development/iweb-api.jar</file-name>
-		<version>0.1</version>
-		<project-name>IWeb</project-name>
-		<project-url>https://iweb.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>CDDL</license-name>
-			</license>
-		</licenses>
-		<comments>
-			For semantically enabling the LR community.
-		</comments>
-	</library>
-
 	<library>
 		<file-name>development/j2h.jar</file-name>
 		<version>1.5</version>
