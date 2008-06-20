@@ -192,6 +192,7 @@ public class DocumentImpl implements Document {
 
 	public String toString() {
 		StringMaker sm = new StringMaker();
+
 		sm.append(StringPool.OPEN_CURLY_BRACE);
 
 		int i = 0;
@@ -202,7 +203,9 @@ public class DocumentImpl implements Document {
 				sm.append(StringPool.SPACE);
 			}
 
-			sm.append(field.getName() + StringPool.EQUAL + field.getValues());
+			sm.append(field.getName());
+			sm.append(StringPool.EQUAL);
+			sm.append(field.getValues());
 		}
 
 		sm.append(StringPool.CLOSE_CURLY_BRACE);
