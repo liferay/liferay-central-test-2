@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.image.ImageProcessorUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -372,6 +373,15 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		String name = FileUtil.stripExtension(nameWithExtension);
 
 		List<IGImage> images = igImagePersistence.findByF_N(folderId, name);
+
+		if (images.size() <= 0 && Validator.isNumber(name)) {
+			IGImage image = igImagePersistence.fetchByPrimaryKey(
+				GetterUtil.getLong(name));
+
+			if (image != null) {
+				images.add(image);
+			}
+		}
 
 		for (IGImage image : images) {
 			if (nameWithExtension.equals(image.getNameWithExtension())) {

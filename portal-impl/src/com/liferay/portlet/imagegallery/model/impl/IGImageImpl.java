@@ -79,6 +79,11 @@ public class IGImageImpl extends IGImageModelImpl implements IGImage {
 
 	public String getNameWithExtension() {
 		String nameWithExtension = getName();
+
+		if (Validator.isNull(nameWithExtension)) {
+			nameWithExtension = String.valueOf(getImageId());
+		}
+
 		String type = getImageType();
 
 		return getNameWithExtension(nameWithExtension, type);
