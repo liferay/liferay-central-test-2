@@ -46,6 +46,7 @@
 <%@ page import="com.liferay.portlet.wiki.PageTitleException" %>
 <%@ page import="com.liferay.portlet.wiki.PageVersionException" %>
 <%@ page import="com.liferay.portlet.wiki.WikiFormatException" %>
+<%@ page import="com.liferay.portlet.wiki.importers.WikiImporterKeys" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiNode" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiPage" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiPageDisplay" %>

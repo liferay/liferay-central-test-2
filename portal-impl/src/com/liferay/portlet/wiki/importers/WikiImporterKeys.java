@@ -22,23 +22,14 @@
 
 package com.liferay.portlet.wiki.importers;
 
-import com.liferay.portlet.wiki.model.WikiNode;
-
-import java.io.File;
-
-import java.util.Map;
-
 /**
- * <a href="WikiImporter.java.html"><b><i>View Source</i></b></a>
+ * <a href="WikiImporterKeys.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
- *
  */
-public interface WikiImporter {
+public class WikiImporterKeys {
 
-	public void importPages(
-		long userId, WikiNode node, File pagesFile, File usersFile,
-		File imagesFile, Map<String, String[]> options)
-		throws Exception;
+	public static final String OPTIONS_IMPORT_LATEST_VERSION =
+		"OPTIONS_IMPORT_LATEST_VERSION";
 
 }

@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ProgressTracker;
 import com.liferay.portal.kernel.util.ProgressTrackerThreadLocal;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -44,11 +45,13 @@ import com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil;
 import com.liferay.portlet.tags.util.TagsUtil;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.importers.WikiImporter;
+import com.liferay.portlet.wiki.importers.WikiImporterKeys;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 import com.liferay.portlet.wiki.translators.MediaWikiToCreoleTranslator;
+import com.liferay.util.MapUtil;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -86,7 +89,7 @@ public class MediaWikiImporter implements WikiImporter {
 
 	public void importPages(
 			long userId, WikiNode node, File pagesFile, File usersFile,
-			File imagesFile)
+			File imagesFile, Map<String, String[]> options)
 		throws PortalException {
 
 		try {
@@ -102,7 +105,8 @@ public class MediaWikiImporter implements WikiImporter {
 
 			processSpecialPages(userId, node, root, specialNamespaces);
 			processRegularPages(
-				userId, node, root, specialNamespaces, usersMap, imagesFile);
+				userId, node, root, specialNamespaces, usersMap, imagesFile,
+				options);
 			processImages(userId, node, imagesFile);
 		}
 		catch (Exception e) {
@@ -171,8 +175,8 @@ public class MediaWikiImporter implements WikiImporter {
 
 			WikiPageLocalServiceUtil.updatePage(
 				authorUserId, node.getNodeId(), title, page.getVersion(),
-				content, null, true, "creole", StringPool.BLANK, redirectTitle,
-				tagsEntries, null, null);
+				content, WikiPageImpl.IMPORTED, true, "creole",
+				StringPool.BLANK, redirectTitle, tagsEntries, null, null);
 		}
 		catch (Exception e) {
 			throw new PortalException("Error importing page " + title, e);
@@ -326,8 +330,11 @@ public class MediaWikiImporter implements WikiImporter {
 
 	protected void processRegularPages(
 		long userId, WikiNode node, Element root,
-		List<String> specialNamespaces, Map<String, String> usersMap,
-		File imagesFile) {
+		List<String> specialNamespaces, Map usersMap,
+		File imagesFile, Map<String, String[]> options) {
+
+		boolean importLatestVersion = MapUtil.getBoolean(
+			options, WikiImporterKeys.OPTIONS_IMPORT_LATEST_VERSION);
 
 		ProgressTracker progressTracker =
 			ProgressTrackerThreadLocal.getProgressTracker();
@@ -352,8 +359,6 @@ public class MediaWikiImporter implements WikiImporter {
 		for (int i = 0; itr.hasNext(); i++) {
 			Element pageEl = itr.next();
 
-			String author = pageEl.element("revision").element(
-				"contributor").elementText("username");
 			String title = pageEl.elementText("title");
 
 			title = normalizeTitle(title);
@@ -369,19 +374,30 @@ public class MediaWikiImporter implements WikiImporter {
 
 			List<Element> revisionEls = pageEl.elements("revision");
 
-			Element lastRevisionEl = revisionEls.get(
-				revisionEls.size() - 1);
-
-			String content = lastRevisionEl.elementText("text");
-
-			try {
-				importPage(userId, author, node, title, content, usersMap);
+			if (importLatestVersion) {
+				Element lastRevisionEl = revisionEls.get(
+					revisionEls.size() - 1);
+				revisionEls = new ArrayList<Element>();
+				revisionEls.add(lastRevisionEl);
 			}
-			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Page with title " + title + " could not be imported",
-						e);
+
+			for (Element curRevisionEl : revisionEls) {
+				String author = curRevisionEl.element(
+					"contributor").elementText("username");
+				String content = curRevisionEl.elementText("text");
+
+				try {
+					importPage(userId, author, node, title, content, usersMap);
+				}
+				catch (Exception e) {
+					if (_log.isWarnEnabled()) {
+						StringMaker sm = new StringMaker();
+						sm.append("Page with title ");
+						sm.append(title);
+						sm.append(" could not be imported");
+
+						_log.warn(sm, e);
+					}
 				}
 			}
 

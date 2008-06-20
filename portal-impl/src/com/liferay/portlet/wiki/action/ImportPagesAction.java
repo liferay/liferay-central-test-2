@@ -138,7 +138,7 @@ public class ImportPagesAction extends PortletAction {
 		WikiCacheThreadLocal.setClearCache(false);
 
 		WikiNodeServiceUtil.importPages(
-			nodeId, pagesFile, usersFile, imagesFile);
+			nodeId, pagesFile, usersFile, imagesFile, req.getParameterMap());
 
 		WikiCacheUtil.clearCache(nodeId);
 

@@ -63,6 +63,8 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 	public static final String[] FORMATS =
 		PropsUtil.getArray(PropsUtil.WIKI_FORMATS);
 
+	public static final String IMPORTED = "Imported";
+
 	public static final String MOVED = "Moved";
 
 	public static final String NEW = "New";

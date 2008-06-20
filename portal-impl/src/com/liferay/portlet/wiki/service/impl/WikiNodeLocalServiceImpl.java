@@ -48,6 +48,7 @@ import java.io.File;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -268,12 +269,13 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 	public void importPages(
 			long userId, long nodeId, File pagesFile, File usersFile,
-			File imagesFile)
+			File imagesFile, Map<String, String[]> options)
 		throws PortalException, SystemException {
 
 		WikiNode node = getNode(nodeId);
 
-		_importer.importPages(userId, node, pagesFile, usersFile, imagesFile);
+		_importer.importPages(
+			userId, node, pagesFile, usersFile, imagesFile, options);
 	}
 
 	public void reIndex(String[] ids) throws SystemException {
