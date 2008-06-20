@@ -608,20 +608,6 @@
 			</license>
 		</licenses>
 	</library>
-		<library>
-		<file-name>development/ruon-api.jar</file-name>
-		<version>0.1</version>
-		<project-name>ruon</project-name>
-		<project-url>http://ruon.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>CDDL 1.0</license-name>
-			</license>
-		</licenses>
-			<comments>
-			Please see the LEP -6356 for more details on ruon api integration. 
-		</comments>
-	</library>
 	<library>
 		<file-name>development/sap.jar</file-name>
 		<version></version>
