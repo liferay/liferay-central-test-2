@@ -102,6 +102,21 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		wikiPageLocalService.addPageAttachments(nodeId, title, files);
 	}
 
+	public void changeParent(
+			long nodeId, String title, String newParentTitle,
+			PortletPreferences prefs, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		WikiNodePermission.check(
+			getPermissionChecker(), nodeId, ActionKeys.ADD_PAGE);
+
+		WikiPagePermission.check(
+			getPermissionChecker(), nodeId, title, ActionKeys.UPDATE);
+
+		wikiPageLocalService.changeParent(
+			getUserId(), nodeId, title, newParentTitle, prefs, themeDisplay);
+	}
+
 	public void deletePage(long nodeId, String title)
 		throws PortalException, SystemException {
 

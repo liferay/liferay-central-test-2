@@ -23,7 +23,9 @@
 package com.liferay.portlet.wiki.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -59,10 +61,19 @@ public class MovePageAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		try {
-			movePage(req);
+		String cmd = ParamUtil.getString(req, Constants.CMD);
 
-			sendRedirect(req, res);
+		try {
+			if (cmd.equals("rename")) {
+				renamePage(req);
+			}
+			else if (cmd.equals("changeParent")) {
+				changeParentPage(req);
+			}
+
+			if (Validator.isNotNull(cmd)) {
+				sendRedirect(req, res);
+			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchNodeException ||
@@ -112,7 +123,7 @@ public class MovePageAction extends PortletAction {
 		return mapping.findForward(getForward(req, "portlet.wiki.move_page"));
 	}
 
-	protected void movePage(ActionRequest req) throws Exception {
+	protected void renamePage(ActionRequest req) throws Exception {
 		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -124,6 +135,20 @@ public class MovePageAction extends PortletAction {
 
 		WikiPageServiceUtil.movePage(
 			nodeId, title, newTitle, prefs, themeDisplay);
+	}
+
+	protected void changeParentPage(ActionRequest req) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		PortletPreferences prefs = req.getPreferences();
+
+		long nodeId = ParamUtil.getLong(req, "nodeId");
+		String title = ParamUtil.getString(req, "title");
+		String newParentTitle = ParamUtil.getString(req, "newParentTitle");
+
+		WikiPageServiceUtil.changeParent(
+			nodeId, title, newParentTitle, prefs, themeDisplay);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {

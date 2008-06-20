@@ -41,38 +41,158 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 
 <%@ include file="/html/portlet/wiki/page_name.jspf" %>
 
-<div class="portlet-msg-info">
-	<liferay-ui:message key="use-the-form-below-to-rename-a-page,-moving-all-of-its-history-to-the-new-name" />
-</div>
+<script type="text/javascript">
+function <portlet:namespace />renamePage() {
+	document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "rename";
+
+	submitForm(document.<portlet:namespace />fm);
+}
+
+function <portlet:namespace />changeParent() {
+	document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "changeParent";
+
+	submitForm(document.<portlet:namespace />fm);
+}
+</script>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/wiki/move_page" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input type="hidden" name="<portlet:namespace />redirect" value="<%= HtmlUtil.escape(redirect) %>" />
 <input type="hidden" name="<portlet:namespace />nodeId" value="<%= node.getNodeId() %>" />
 <input type="hidden" name="<portlet:namespace />title" value="<%= title %>" />
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="current-title" />
-	</td>
-	<td>
-		<%= wikiPage.getTitle() %>
-	</td>
-</tr>
-<tr>
-	<td>
-		<label for="<portlet:namespace />newTitle"><liferay-ui:message key="new-title" /></label>
-	</td>
-	<td>
-		<input type="text" name="<portlet:namespace />newTitle" value="<%= newTitle %>" />
-	</td>
-</tr>
-</table>
+<liferay-ui:tabs
+	names="rename,change-parent"
+	refresh="<%= false %>"
+>
+	<liferay-ui:section>
+		<div class="portlet-msg-info">
+			<liferay-ui:message key="use-the-form-below-to-rename-a-page,-moving-all-of-its-history-to-the-new-name" />
+		</div>
 
-<br />
+		<table class="lfr-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="current-title" />
+			</td>
+			<td>
+				<%= wikiPage.getTitle() %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="<portlet:namespace />newTitle"><liferay-ui:message key="new-title" /></label>
+			</td>
+			<td>
+				<input type="text" name="<portlet:namespace />newTitle" value="<%= newTitle %>" />
+			</td>
+		</tr>
+		</table>
 
-<input type="submit" value="<liferay-ui:message key="move-page" />" />
+		<br />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+		<input type="button" value="<liferay-ui:message key="rename" />" onClick="<portlet:namespace />renamePage()" />
+
+		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+	</liferay-ui:section>
+
+	<liferay-ui:section>
+		<div class="portlet-msg-info">
+			<liferay-ui:message key="use-the-form-below-to-move-a-page-and-all-of-its-history-to-be-the-child-of-a-new-parent-page" />
+		</div>
+
+		<%
+		String parentText = StringPool.BLANK;
+
+		WikiPage parentPage = wikiPage.getParentPage();
+
+		if (parentPage == null) {
+			parentText = StringPool.OPEN_PARENTHESIS + LanguageUtil.get(pageContext, "none") + StringPool.CLOSE_PARENTHESIS;
+		}
+		else {
+			parentText = parentPage.getTitle();
+
+			parentPage = parentPage.getParentPage();
+
+			while (parentPage != null) {
+				parentText = parentPage.getTitle() + " &raquo; " + parentText;
+
+				parentPage = parentPage.getParentPage();
+			}
+		}
+
+		List<WikiPage> childPages = WikiPageLocalServiceUtil.getChildren(node.getNodeId(), true, StringPool.BLANK);
+
+		Collections.sort(childPages);
+		childPages.remove(wikiPage);
+		%>
+
+		<table class="lfr-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="current-parent" />
+			</td>
+			<td>
+
+				<%= parentText %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="new-parent" />
+			</td>
+			<td>
+				<%
+				boolean newParentAvailable = true;
+
+				if (childPages.isEmpty()) {
+					newParentAvailable = false;
+				%>
+
+					<select disabled>
+						<option><liferay-ui:message key="not-available" /></option>
+					</select>
+
+				<%
+				}
+				else {
+				%>
+				<select name="<portlet:namespace />newParentTitle">
+					<option <%= Validator.isNull(wikiPage.getParentTitle()) ? "selected" : "" %> value="">(<liferay-ui:message key="none" />)</option>
+
+					<%
+					for (WikiPage childPage : childPages) {
+						request.setAttribute(WebKeys.WIKI_TREE_WALKER_PARENT, childPage);
+						request.setAttribute(WebKeys.WIKI_TREE_WALKER_PAGE, wikiPage);
+						request.setAttribute(WebKeys.WIKI_TREE_WALKER_DEPTH, 1);
+					%>
+
+						<liferay-util:include page="/html/portlet/wiki/page_tree.jsp" />
+
+					<%
+					}
+					%>
+				</select>
+				<%
+				}
+				%>
+
+			</td>
+		</tr>
+		</table>
+
+		<br />
+
+		<%
+		if (newParentAvailable) {
+		%>
+			<input type="button" value="<liferay-ui:message key="change-parent" />" onClick="<portlet:namespace />changeParent()" />
+		<%
+		}
+		%>
+
+		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+	</liferay-ui:section>
+</liferay-ui:tabs>
 
 </form>

@@ -73,6 +73,18 @@ public class WikiPageServiceUtil {
 		wikiPageService.addPageAttachments(nodeId, title, files);
 	}
 
+	public static void changeParent(long nodeId, java.lang.String title,
+		java.lang.String newParentTitle,
+		javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
+
+		wikiPageService.changeParent(nodeId, title, newParentTitle, prefs,
+			themeDisplay);
+	}
+
 	public static void deletePage(long nodeId, java.lang.String title)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

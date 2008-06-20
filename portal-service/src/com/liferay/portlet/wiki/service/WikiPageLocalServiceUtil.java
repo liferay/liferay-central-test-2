@@ -193,6 +193,18 @@ public class WikiPageLocalServiceUtil {
 			guestPermissions);
 	}
 
+	public static void changeParent(long userId, long nodeId,
+		java.lang.String title, java.lang.String newParentTitle,
+		javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		wikiPageLocalService.changeParent(userId, nodeId, title,
+			newParentTitle, prefs, themeDisplay);
+	}
+
 	public static void deletePage(long nodeId, java.lang.String title)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

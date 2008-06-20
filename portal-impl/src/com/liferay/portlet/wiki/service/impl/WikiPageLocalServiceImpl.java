@@ -293,6 +293,39 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			communityPermissions, guestPermissions);
 	}
 
+	public void changeParent(
+			long userId, long nodeId, String title, String newParentTitle,
+			PortletPreferences prefs, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		WikiPage page = getPage(nodeId, title);
+
+		String originalParentTitle = page.getParentTitle();
+
+		double version = page.getVersion();
+		String content = page.getContent();
+		String summary = themeDisplay.translate(
+			"changed-parent-from-x", originalParentTitle);
+		boolean minorEdit = false;
+		String format = page.getFormat();
+		String redirectTitle = page.getRedirectTitle();
+		String[] tagsEntries = null;
+
+		updatePage(
+			userId, nodeId, title, version, content, summary, minorEdit,
+			format, newParentTitle, redirectTitle, tagsEntries, prefs,
+			themeDisplay);
+
+		List<WikiPage> oldPages =
+			wikiPagePersistence.findByN_T_H(nodeId, title, false);
+
+		for (WikiPage oldPage : oldPages) {
+			oldPage.setParentTitle(originalParentTitle);
+
+			wikiPagePersistence.update(oldPage, false);
+		}
+	}
+
 	public void deletePage(long nodeId, String title)
 		throws PortalException, SystemException {
 
