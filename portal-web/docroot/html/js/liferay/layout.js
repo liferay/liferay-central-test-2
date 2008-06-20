@@ -331,9 +331,9 @@ Liferay.Layout.FreeForm = {
 		);
 
 		jPortlet.mousedown(
-			function() {
+			function(event) {
 				if (instance._current != this) {
-					instance._moveToTop(this);
+					instance._moveToTop(this, true);
 					instance._savePosition(this, true);
 					instance._current = this;
 					this.style.zIndex = instance._maxZIndex;
@@ -371,6 +371,8 @@ Liferay.Layout.FreeForm = {
 			portlet.style.top = (20 * portlet.columnPos) + 'px';
 			portlet.style.left = (20 * portlet.columnPos) + 'px';
 		}
+
+		instance._current = portlet;
 	},
 
 	refresh: function(portletBound) {
@@ -401,13 +403,24 @@ Liferay.Layout.FreeForm = {
 		return cache;
 	},
 
-	_moveToTop: function(portlet) {
+	_moveToTop: function(portlet, temporary) {
 		var instance = this;
 
 		var container = portlet.parentNode;
 		portlet.oldPosition = Liferay.Layout._findIndex(portlet);
 
-		container.appendChild(portlet);
+		if (!temporary) {
+			container.appendChild(portlet);
+		}
+		else {
+			portlet.style.zIndex = instance._maxZIndex + 5;
+			jQuery(portlet).one(
+				'click',
+				function(event) {
+					instance._moveToTop(this);
+				}
+			);
+		}
 	},
 
 	_savePosition: function(portlet, wasClicked) {
