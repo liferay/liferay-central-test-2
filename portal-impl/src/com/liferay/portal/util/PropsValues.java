@@ -976,6 +976,9 @@ public class PropsValues {
 	public static final boolean WEBDAV_LITMUS = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.WEBDAV_LITMUS));
 
+	public static final String[] WIKI_IMPORTERS =
+		PropsUtil.getArray(PropsUtil.WIKI_IMPORTERS);
+
 	public static final String WIKI_PAGE_TITLES_REGEXP = PropsUtil.get(
 		PropsUtil.WIKI_PAGE_TITLES_REGEXP);
 

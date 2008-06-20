@@ -129,6 +129,7 @@ public class ImportPagesAction extends PortletAction {
 		progressTracker.start();
 
 		long nodeId = ParamUtil.getLong(uploadReq, "nodeId");
+
 		int filesCount = ParamUtil.getInteger(uploadReq, "filesCount", 10);
 
 		File[] files = new File[filesCount];
@@ -140,8 +141,7 @@ public class ImportPagesAction extends PortletAction {
 		NotificationThreadLocal.setNotificationEnabled(false);
 		WikiCacheThreadLocal.setClearCache(false);
 
-		WikiNodeServiceUtil.importPages(
-			nodeId, files, req.getParameterMap());
+		WikiNodeServiceUtil.importPages(nodeId, files, req.getParameterMap());
 
 		WikiCacheUtil.clearCache(nodeId);
 

@@ -385,7 +385,9 @@ public class MediaWikiImporter implements WikiImporter {
 			if (importLatestVersion) {
 				Element lastRevisionEl = revisionEls.get(
 					revisionEls.size() - 1);
+
 				revisionEls = new ArrayList<Element>();
+
 				revisionEls.add(lastRevisionEl);
 			}
 
@@ -400,11 +402,12 @@ public class MediaWikiImporter implements WikiImporter {
 				catch (Exception e) {
 					if (_log.isWarnEnabled()) {
 						StringMaker sm = new StringMaker();
+
 						sm.append("Page with title ");
 						sm.append(title);
 						sm.append(" could not be imported");
 
-						_log.warn(sm, e);
+						_log.warn(sm.toString(), e);
 					}
 				}
 			}

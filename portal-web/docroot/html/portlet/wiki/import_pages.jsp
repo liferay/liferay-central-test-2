@@ -36,11 +36,17 @@ WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 
 long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 
-String[] importers = PropsUtil.getArray(PropsUtil.WIKI_IMPORTERS);
+String[] importers = PropsValues.WIKI_IMPORTERS;
 
 if (Validator.isNull(tabs2)) {
 	tabs2 = importers[0];
 }
+
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setParameter("struts_action", "/wiki/import_pages");
+portletURL.setParameter("redirect", redirect);
+portletURL.setParameter("nodeId", String.valueOf(nodeId));
 %>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/wiki/import_pages" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm">
@@ -57,7 +63,7 @@ if (Validator.isNull(tabs2)) {
 <liferay-ui:tabs
 	names="<%= StringUtil.merge(importers) %>"
 	param="tabs2"
-	url="<%= currentURL %>"
+	url="<%= portletURL.toString() %>"
 />
 
 <liferay-util:include page="<%= PropsUtil.get(PropsUtil.WIKI_IMPORTERS_PAGE, Filter.by(tabs2)) %>" />

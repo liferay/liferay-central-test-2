@@ -117,20 +117,13 @@ public class EditPageAttachmentAction extends PortletAction {
 			getForward(req, "portlet.wiki.edit_page_attachment"));
 	}
 
-	protected void deleteAttachment(ActionRequest req) throws Exception {
-		long nodeId = ParamUtil.getLong(req, "nodeId");
-		String title = ParamUtil.getString(req, "title");
-		String attachment = ParamUtil.getString(req, "fileName");
-
-		WikiPageServiceUtil.deletePageAttachment(nodeId, title, attachment);
-	}
-
 	protected void addAttachment(ActionRequest req) throws Exception {
 		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
 			req);
 
 		long nodeId = ParamUtil.getLong(req, "nodeId");
 		String title = ParamUtil.getString(req, "title");
+
 		int numOfFiles = ParamUtil.getInteger(req, "numOfFiles");
 
 		List<ObjectValuePair<String, byte[]>> files =
@@ -172,6 +165,14 @@ public class EditPageAttachmentAction extends PortletAction {
 		}
 
 		WikiPageServiceUtil.addPageAttachments(nodeId, title, files);
+	}
+
+	protected void deleteAttachment(ActionRequest req) throws Exception {
+		long nodeId = ParamUtil.getLong(req, "nodeId");
+		String title = ParamUtil.getString(req, "title");
+		String attachment = ParamUtil.getString(req, "fileName");
+
+		WikiPageServiceUtil.deletePageAttachment(nodeId, title, attachment);
 	}
 
 }

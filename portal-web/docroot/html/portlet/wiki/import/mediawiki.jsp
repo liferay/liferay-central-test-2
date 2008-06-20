@@ -57,11 +57,12 @@
 		<liferay-ui:icon-help message="import-wiki-images-help" />
 	</td>
 </tr>
-<tr>
-	<td colspan="2">
-		<input checked="checked" name="<portlet:namespace /><%= WikiImporterKeys.OPTIONS_IMPORT_LATEST_VERSION %>" type="checkbox" />
-
-		<liferay-ui:message key="import-only-the-latest-version-not-the-full-history" />
-	</td>
-</tr>
 </table>
+
+<br />
+
+<div>
+	<input checked="checked" name="<portlet:namespace /><%= WikiImporterKeys.OPTIONS_IMPORT_LATEST_VERSION %>" type="checkbox" />
+
+	<liferay-ui:message key="import-only-the-latest-version-and-not-the-full-history" />
+</div>
