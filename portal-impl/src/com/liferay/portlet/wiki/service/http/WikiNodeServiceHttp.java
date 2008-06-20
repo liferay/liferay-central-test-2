@@ -305,42 +305,27 @@ public class WikiNodeServiceHttp {
 	}
 
 	public static void importPages(HttpPrincipal httpPrincipal, long nodeId,
-		java.io.File pagesFile, java.io.File usersFile,
-		java.io.File imagesFile, java.util.Map<String, String[]> options)
+		java.io.File[] files, java.util.Map<String, String[]> options)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(nodeId);
 
-			Object paramObj1 = pagesFile;
+			Object paramObj1 = files;
 
-			if (pagesFile == null) {
-				paramObj1 = new NullWrapper("java.io.File");
+			if (files == null) {
+				paramObj1 = new NullWrapper("[Ljava.io.File;");
 			}
 
-			Object paramObj2 = usersFile;
-
-			if (usersFile == null) {
-				paramObj2 = new NullWrapper("java.io.File");
-			}
-
-			Object paramObj3 = imagesFile;
-
-			if (imagesFile == null) {
-				paramObj3 = new NullWrapper("java.io.File");
-			}
-
-			Object paramObj4 = options;
+			Object paramObj2 = options;
 
 			if (options == null) {
-				paramObj4 = new NullWrapper("java.util.Map");
+				paramObj2 = new NullWrapper("java.util.Map");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(WikiNodeServiceUtil.class.getName(),
 					"importPages",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);

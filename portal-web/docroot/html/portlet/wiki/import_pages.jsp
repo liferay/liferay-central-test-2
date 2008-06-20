@@ -28,11 +28,19 @@
 String uploadProgressId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 String importProgressId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 
+String tabs2 = ParamUtil.getString(request, "tabs2");
+
 String redirect = ParamUtil.getString(request, "redirect");
 
 WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 
 long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
+
+String[] importers = PropsUtil.getArray(PropsUtil.WIKI_IMPORTERS);
+
+if (Validator.isNull(tabs2)) {
+	tabs2 = importers[0];
+}
 %>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/wiki/import_pages" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm">
@@ -47,48 +55,12 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 />
 
 <liferay-ui:tabs
-	names="MediaWiki"
+	names="<%= StringUtil.merge(importers) %>"
+	param="tabs2"
+	url="<%= currentURL %>"
 />
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="pages-file" />
-	</td>
-	<td>
-		<input name="<portlet:namespace />pagesFile" type="file" />
-
-		<liferay-ui:icon-help message="import-wiki-pages-help" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="users-file" /> (<liferay-ui:message key="optional" />)
-	</td>
-	<td>
-		<input name="<portlet:namespace />usersFile" type="file" />
-
-		<liferay-ui:icon-help message="import-wiki-users-help" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="images-file" /> (<liferay-ui:message key="optional" />)
-	</td>
-	<td>
-		<input name="<portlet:namespace />imagesFile" type="file" />
-
-		<liferay-ui:icon-help message="import-wiki-images-help" />
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<input checked="checked" name="<portlet:namespace /><%= WikiImporterKeys.OPTIONS_IMPORT_LATEST_VERSION %>" type="checkbox" />
-
-		<liferay-ui:message key="import-only-the-latest-version-not-the-full-history" />
-	</td>
-</tr>
-</table>
+<liferay-util:include page="<%= PropsUtil.get(PropsUtil.WIKI_IMPORTERS_PAGE, Filter.by(tabs2)) %>" />
 
 <br />
 

@@ -1343,6 +1343,10 @@ public class PropsUtil {
 
 	public static final String WIKI_FORMATS_HELP_URL = "wiki.formats.help.url";
 
+	public static final String WIKI_IMPORTERS = "wiki.importers";
+	
+	public static final String WIKI_IMPORTERS_PAGE = "wiki.importers.page";
+
 	public static final String WIKI_EMAIL_FROM_NAME = "wiki.email.from.name";
 
 	public static final String WIKI_EMAIL_FROM_ADDRESS = "wiki.email.from.address";

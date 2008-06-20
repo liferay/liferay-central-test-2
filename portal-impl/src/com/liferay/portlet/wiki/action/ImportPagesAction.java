@@ -129,16 +129,19 @@ public class ImportPagesAction extends PortletAction {
 		progressTracker.start();
 
 		long nodeId = ParamUtil.getLong(uploadReq, "nodeId");
+		int filesCount = ParamUtil.getInteger(uploadReq, "filesCount", 10);
 
-		File pagesFile = uploadReq.getFile("pagesFile");
-		File usersFile = uploadReq.getFile("usersFile");
-		File imagesFile = uploadReq.getFile("imagesFile");
+		File[] files = new File[filesCount];
+
+		for (int i = 0; i < filesCount; i++) {
+			files[i] = uploadReq.getFile("file" + i);
+		}
 
 		NotificationThreadLocal.setNotificationEnabled(false);
 		WikiCacheThreadLocal.setClearCache(false);
 
 		WikiNodeServiceUtil.importPages(
-			nodeId, pagesFile, usersFile, imagesFile, req.getParameterMap());
+			nodeId, files, req.getParameterMap());
 
 		WikiCacheUtil.clearCache(nodeId);
 

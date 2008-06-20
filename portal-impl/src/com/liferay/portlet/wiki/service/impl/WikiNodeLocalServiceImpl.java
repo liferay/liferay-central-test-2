@@ -268,14 +268,13 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 	}
 
 	public void importPages(
-			long userId, long nodeId, File pagesFile, File usersFile,
-			File imagesFile, Map<String, String[]> options)
+			long userId, long nodeId, File[] files,
+			Map<String, String[]> options)
 		throws PortalException, SystemException {
 
 		WikiNode node = getNode(nodeId);
 
-		_importer.importPages(
-			userId, node, pagesFile, usersFile, imagesFile, options);
+		_importer.importPages(userId, node, files, options);
 	}
 
 	public void reIndex(String[] ids) throws SystemException {

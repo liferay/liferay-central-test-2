@@ -88,9 +88,17 @@ public class MediaWikiImporter implements WikiImporter {
 	public static final String SHARED_IMAGES_TITLE = "SharedImages";
 
 	public void importPages(
-			long userId, WikiNode node, File pagesFile, File usersFile,
-			File imagesFile, Map<String, String[]> options)
+			long userId, WikiNode node, File[] files,
+			Map<String, String[]> options)
 		throws PortalException {
+
+		if ((files.length < 1) || (files[0] == null) || (!files[0].exists())) {
+			throw new PortalException("The pages file is mandatory");
+		}
+
+		File pagesFile = files[0];
+		File usersFile = files[1];
+		File imagesFile = files[2];
 
 		try {
 			SAXReader saxReader = new SAXReader();

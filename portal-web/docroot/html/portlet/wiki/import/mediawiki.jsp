@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
@@ -19,26 +20,48 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
-package com.liferay.portlet.wiki.importers;
+<%@ include file="/html/portlet/wiki/init.jsp" %>
 
-import com.liferay.portlet.wiki.model.WikiNode;
+<input name="<portlet:namespace />filesCount" type="hidden" value="3" />
 
-import java.io.File;
+<table class="lfr-table">
+<tr>
+	<td>
+		<liferay-ui:message key="pages-file" />
+	</td>
+	<td>
+		<input name="<portlet:namespace />file0" type="file" />
 
-import java.util.Map;
+		<liferay-ui:icon-help message="import-wiki-pages-help" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="users-file" /> (<liferay-ui:message key="optional" />)
+	</td>
+	<td>
+		<input name="<portlet:namespace />file1" type="file" />
 
-/**
- * <a href="WikiImporter.java.html"><b><i>View Source</i></b></a>
- *
- * @author Jorge Ferrer
- *
- */
-public interface WikiImporter {
+		<liferay-ui:icon-help message="import-wiki-users-help" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="images-file" /> (<liferay-ui:message key="optional" />)
+	</td>
+	<td>
+		<input name="<portlet:namespace />file2" type="file" />
 
-	public void importPages(
-			long userId, WikiNode node, File[] files,
-			Map<String, String[]> options)
-		throws Exception;
+		<liferay-ui:icon-help message="import-wiki-images-help" />
+	</td>
+</tr>
+<tr>
+	<td colspan="2">
+		<input checked="checked" name="<portlet:namespace /><%= WikiImporterKeys.OPTIONS_IMPORT_LATEST_VERSION %>" type="checkbox" />
 
-}
+		<liferay-ui:message key="import-only-the-latest-version-not-the-full-history" />
+	</td>
+</tr>
+</table>
