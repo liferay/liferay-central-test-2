@@ -1,29 +1,36 @@
 Liferay.TagsSelector = new Class({
 
-	/*
-	params.instanceVar: the instance variable for this class
-	params.hiddenInput: the hidden input used to pass in the current tags
-	params.textInput: the text input for users to add tags
-	params.summarySpan: the summary span tos how the current tags
-	params.curTags: comma delimited string of current tags
-	params.focus: true if the text input should be focused
-	params.contentCallback: the callback method to get content used to get suggestible tags
-	*/
-	initialize: function(params) {
+	/**
+	 * OPTIONS
+	 *
+	 * Required
+	 * instanceVar {string}: The instance variable for this class.
+	 * hiddenInput {string}: The hidden input used to pass in the current tags.
+	 * textInput {string}: The text input for users to add tags.
+	 * summarySpan {string}: The summary span to show the current tags.
+	 *
+	 * Optional
+	 * focus {boolean}: Whether the text input should be focused.
+	 *
+	 * Callbacks
+	 * contentCallback {function}: Called to get suggested tags.
+	 */
+
+	initialize: function(options) {
 		var instance = this;
 
 		instance._curTags = [];
 
-		instance.params = params;
-		instance._ns = instance.params.instanceVar || '';
+		instance.options = options;
+		instance._ns = instance.options.instanceVar || '';
 		instance._mainContainer = jQuery('<div class="lfr-tag-select-container"></div>');
 		instance._container = jQuery('<div class="lfr-tag-container"></div>');
 
-		var hiddenInput = jQuery('#' + params.hiddenInput);
+		var hiddenInput = jQuery('#' + options.hiddenInput);
 
 		hiddenInput.attr('name', hiddenInput.attr('id'));
 
-		var textInput = jQuery('#' + params.textInput);
+		var textInput = jQuery('#' + options.textInput);
 
 		textInput.autocomplete(
 			{
@@ -66,7 +73,7 @@ Liferay.TagsSelector = new Class({
 		instance._setupSelectTags();
 		instance._setupSuggestions();
 
-		var addTagButton = jQuery('#' + params.instanceVar + 'addTag');
+		var addTagButton = jQuery('#' + options.instanceVar + 'addTag');
 
 		addTagButton.click(
 			function() {
@@ -111,12 +118,12 @@ Liferay.TagsSelector = new Class({
 			}
 		);
 
-		if (params.focus) {
+		if (options.focus) {
 			textInput.focus();
 		}
 
-		if (params.curTags != '') {
-			instance._curTags = params.curTags.split(',');
+		if (options.curTags != '') {
+			instance._curTags = options.curTags.split(',');
 
 			instance._update();
 		}
@@ -138,7 +145,7 @@ Liferay.TagsSelector = new Class({
 	deleteTag: function(id) {
 		var instance = this;
 
-		var params = instance.params;
+		var options = instance.options;
 		var curTags = instance._curTags;
 
 		jQuery('#' + instance._ns + 'CurTags' + id).remove();
@@ -245,7 +252,7 @@ Liferay.TagsSelector = new Class({
 	_setupSelectTags: function() {
 		var instance = this;
 
-		var params = instance.params;
+		var options = instance.options;
 		var ns = instance._ns;
 
 		var input = jQuery('#' + ns + 'selectTag');
@@ -260,7 +267,7 @@ Liferay.TagsSelector = new Class({
 	_setupSuggestions: function() {
 		var instance = this;
 
-		var params = instance.params;
+		var options = instance.options;
 		var ns = instance._ns;
 
 		var input = jQuery('#' + ns + 'suggestions');
@@ -275,7 +282,7 @@ Liferay.TagsSelector = new Class({
 	_showSelectPopup: function() {
 		var instance = this;
 
-		var params = instance.params;
+		var options = instance.options;
 		var ns = instance._ns;
 		var mainContainer = instance._mainContainer;
 		var container = instance._container;
@@ -334,7 +341,7 @@ Liferay.TagsSelector = new Class({
 	_showSuggestionsPopup: function() {
 		var instance = this;
 
-		var params = instance.params;
+		var options = instance.options;
 		var ns = instance._ns;
 		var mainContainer = instance._mainContainer;
 		var container = instance._container;
@@ -344,8 +351,8 @@ Liferay.TagsSelector = new Class({
 
 		var context = '';
 
-		if (params.contentCallback) {
-			context = params.contentCallback();
+		if (options.contentCallback) {
+			context = options.contentCallback();
 		}
 
 		var url =  "http://search.yahooapis.com/ContentAnalysisService/V1/termExtraction?appid=YahooDemo&output=json&context=" + escape(context);
@@ -395,10 +402,10 @@ Liferay.TagsSelector = new Class({
 	_updateHiddenInput: function() {
 		var instance = this;
 
-		var params = instance.params;
+		var options = instance.options;
 		var curTags = instance._curTags;
 
-		var hiddenInput = jQuery('#' + params.hiddenInput);
+		var hiddenInput = jQuery('#' + options.hiddenInput);
 
 		hiddenInput.val(curTags.join(','));
 	},
@@ -406,7 +413,7 @@ Liferay.TagsSelector = new Class({
 	_updateSummarySpan: function() {
 		var instance = this;
 
-		var params = instance.params;
+		var options = instance.options;
 		var curTags = instance._curTags;
 
 		var html = '';
@@ -420,7 +427,7 @@ Liferay.TagsSelector = new Class({
 			}
 		);
 
-		var tagsSummary = jQuery('#' + params.summarySpan);
+		var tagsSummary = jQuery('#' + options.summarySpan);
 
 		if (curTags.length) {
 			tagsSummary.removeClass('empty');

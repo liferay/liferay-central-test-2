@@ -1,33 +1,42 @@
 Liferay.Notice = new Class({
-	/* Options:
-		closeText: (String) the text to use for the "close" button. Set to false to not have a close button
-		content: (String) the HTML or text to insert into.
-		toggleText: (Object) the text to use for the "hide" and "show" button. Set to false to not have a hide button
-		noticeClass: (String) class to add to the notice toolbar.
-		onClose: (fn) a callback to execute when the toolbar is closed
-		type: (String) either 'notice' or 'warning', depending on the type of the toolbar. Defaults to notice.
-	*/
-	initialize: function(params) {
+
+	/**
+	 * OPTIONS
+	 *
+	 * Required
+	 * content {string}: The content of the toolbar.
+	 *
+	 * Optional
+	 * closeText {string}: Use for the "close" button. Set to false to not have a close button.
+	 * toggleText {object}: The text to use for the "hide" and "show" button. Set to false to not have a hide button.
+	 * noticeClass {string}: A class to add to the notice toolbar.
+	 * type {string}: Either 'notice' or 'warning', depending on the type of the toolbar. Defaults to notice.
+	 *
+	 * Callbacks
+	 * onClose {function}: Called when the toolbar is closed.
+	 */
+
+	initialize: function(options) {
 		var instance = this;
-		params = params || {};
-		instance._noticeType = params.type || 'notice';
+		options = options || {};
+		instance._noticeType = options.type || 'notice';
 		instance._noticeClass = 'popup-alert-notice';
 		instance._useCloseButton = true;
-		instance._onClose = params.onClose;
-		instance._closeText = params.closeText;
+		instance._onClose = options.onClose;
+		instance._closeText = options.closeText;
 		instance._body = jQuery('body');
 
 		instance._useToggleButton = false;
 		instance._hideText = '';
 		instance._showText = '';
 
-		if (params.toggleText !== false) {
+		if (options.toggleText !== false) {
 			instance.toggleText = jQuery.extend(
 				{
 					hide: null,
 					show: null
 				},
-			params.toggleText);
+			options.toggleText);
 
 			instance._useToggleButton = true;
 		}
@@ -36,11 +45,11 @@ Liferay.Notice = new Class({
 			instance._noticeClass = 'popup-alert-warning';
 		}
 
-		if (params.noticeClass) {
-			instance._noticeClass += ' ' + params.noticeClass;
+		if (options.noticeClass) {
+			instance._noticeClass += ' ' + options.noticeClass;
 		}
 
-		instance._content = params.content || '';
+		instance._content = options.content || '';
 
 		instance._createHTML();
 

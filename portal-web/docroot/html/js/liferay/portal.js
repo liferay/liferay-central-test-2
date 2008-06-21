@@ -21,11 +21,20 @@ Liferay.Portal.Tabs = {
 };
 
 Liferay.Portal.StarRating = new Class({
-	/* OPTIONS
-	 * displayOnly: (boolean) non-modifiable display
-	 * onComplete: (function) executes when rating is selected
-	 * rating: rating to initialize to
+
+	/**
+	 * OPTIONS
+	 *
+	 * Required
+	 * displayOnly {boolean}: Whether the display is modifiable.
+	 *
+	 * Optional
+	 * rating {number}: The rating to initialize to.
+	 *
+	 * Callbacks
+	 * onComplete {function}: Called when a rating is selected.
 	 */
+
 	initialize: function(id, options) {
 		this.options = options || {};
 		this.rating = this.options.rating || 0;
@@ -105,11 +114,20 @@ Liferay.Portal.StarRating = new Class({
 });
 
 Liferay.Portal.ThumbRating = new Class({
-	/* OPTIONS
-	 * displayOnly: (boolean) non-modifiable display
-	 * rating: rating to initialize to
-	 * onComplete: (function) executes when rating is selected
+
+	/**
+	 * OPTIONS
+	 *
+	 * Required
+	 * displayOnly {boolean}: Whether the display is modifiable.
+	 *
+	 * Optional
+	 * rating {number}: The rating to initialize to.
+	 *
+	 * Callbacks
+	 * onComplete {function}: Called when a rating is selected.
 	 */
+
 	initialize: function(options) {
 		var instance = this;
 

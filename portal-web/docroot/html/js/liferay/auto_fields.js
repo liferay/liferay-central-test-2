@@ -1,18 +1,24 @@
 Liferay.autoFields = new Class({
-	/*
-	Options
-	html (String) HTML to append to the end of the container
-	container (String) the jQuery selector of the item(s) you wish to append the HTML to
-	addText (String) the text you wish to use for the "Add" link
-	removeText (String) the text you wish to use for the "Remove" link
-	clearText (String) the text you wish to use for the "Clear" link (this link clears all of the added forms except the very first one, a sort of reset button)
-	confirmText (String) the text you wish to use to confirm that the user wishes to clear all of the added buttons (leave empty to not confirm)
-	rowType (String) the html tag for the row of fields (eg. fieldset, div or tr)
-	onAdd (function) a callback that executes after new fields have been added
-	onRemove (function) a callback that executes after fields have been removed
-	onClear (function) a callback that executes after the form fields have been returned
-	init (function) a callback that executes after the class has fully initialized
-	*/
+
+	/**
+	 * OPTIONS
+	 *
+	 * Required
+	 * addText {string}: The text you wish to use for the "Add" link.
+	 * clearText {string}: The text you wish to use for the "Clear" link (this link removes all of the added forms except the very first one).
+	 * container {string|object}: A jQuery selector that specifies where you wish to append the HTML to.
+	 * confirmText {string}: the text you wish to use to confirm that the user wishes to clear all of the added buttons (leave empty to not confirm).
+	 * html {string}: HTML to append to the end of the container.
+	 * removeText {string}: The text you wish to use for the "Remove" link.
+	 * rowType {string}: The html tag for the row of fields (eg. fieldset, div or tr).
+	 *
+	 * Callbacks
+	 * init {function}: Called after the class has fully initialized.
+	 * onAdd {function}: Called after new fields have been added.
+	 * onRemove {function}: Called after fields have been removed.
+	 * onClear {function}: Called after the form fields have been returned.
+	 */
+
 	initialize: function(options) {
 		var instance = this;
 

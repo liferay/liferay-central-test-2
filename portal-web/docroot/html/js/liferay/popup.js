@@ -1,20 +1,27 @@
+/**
+ * OPTIONS
+ *
+ * Required
+ * message {string|object}: The default HTML/object to display.
+ * width {number}: The starting width of the message box.
+ *
+ * Optional
+ * className {string}: A class to add to the specific popup.
+ * dragHelper {string|function}: A jQuery selector or a function that returns a DOM element.
+ * handles {string}: A comma-separated list (n,ne,e,se,s,sw,w,nw) of the handles for resizing.
+ * height {number}: The starting height of the message box.
+ * modal {boolean}: Whether to show shaded background.
+ * noCenter {boolean}: Whether to prevent re-centering.
+ * stack {boolean}: Whether to automatically stack the popup on top of other ones.
+ * resizeHelper {string}: A class that will be attached to resize proxy helper.
+ *
+ * Callbacks
+ * dragStart {function}: Called when dragging of the dialog starts.
+ * dragStop {function}: Called when dragging of the dialog starts.
+ * onClose {function}: Called when a dialog is closed.
+ */
+
 Liferay.Popup = function(options) {
-	/*
-	 * OPTIONS:
-	 * modal (boolean) - show shaded background
-	 * message (string|object) - default HTML/object to display
-	 * noCenter (boolean) - prevent re-centering
-	 * height (int) - starting height of message box
-	 * width (int) - starting width of message box
-	 * onClose (function) - executes after closing
-	 * className (string) - a class to add to the specific popup
-	 * stack (boolean) - whether to automatically stack the popup on top of other ones
-	 * handles (string) - comma-separated list (n,ne,e,se,s,sw,w,nw) of the handles for resizing
-	 * resizeHelper - classname that will be attached to resize proxy helper
-	 * dragHelper (string|function) - a jQuery selector or a function that returns a DOM element
-	 * dragStart - (function) a callback that is called when dragging of the dialog starts
-	 * dragStop - (function) a callback that is called when dragging of the dialog stops
-	 */
 	var instance = this;
 
 	var cacheDialogHelper = function(obj) {

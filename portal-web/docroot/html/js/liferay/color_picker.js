@@ -1,12 +1,20 @@
 Liferay.ColorPicker = new Class({
 
-	/*
-	context (Object): A DOM object which specifies the context in which to search for the item
-	hasImage: (Boolean) If set to true, it uses the "item" param or whatever image has the .use-colorpicker class as the image
-	item: (Object|String): A DOM object or a jQuery Selector string that specifies which field to insert the selected value into
-	onChange (Function): A function that will get called whenever the color changes
-	onClose (Function): A function that will get called when the color picker is closed
-	*/
+	/**
+	 * OPTIONS
+	 *
+	 * Required
+	 * item {string|object}: A jQuery selector or DOM element that specifies which field to insert the selected value into.
+	 *
+	 * Optional
+	 * context {object}: A DOM element which specifies the context in which to search for the item.
+	 * hasImage {boolean}: Whether an image is provided in the DOM or options object (via the item option).
+	 *
+	 * Callbacks
+	 * onChange {function}: Called whenever the color changes.
+	 * onClose {function}: Called when the color picker is closed.
+	 */
+
 	initialize: function(options) {
 		var instance = this;
 

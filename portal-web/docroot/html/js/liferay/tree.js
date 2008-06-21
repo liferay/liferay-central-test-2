@@ -1,18 +1,39 @@
 Liferay.Tree = new Class({
-	initialize: function(params) {
+
+	/**
+	 * OPTIONS
+	 *
+	 * Required
+	 * className {string}: A class to add to the tree.
+	 * icons {object}: An object containing the icons to use in the tree.
+	 * nodes {array}: An array of objects containing the tree nodes.
+	 * openNodes {string}: A comma-separated list of which node ids default to open.
+	 * outputId {string}: A jQuery selector that specifies where the tree should be inserted.
+	 * treeId {string}: A unique id to apply to the tree.
+	 *
+	 * Optional
+	 * nolinks {boolean}: Whether to include hrefs on the nodes.
+	 * selectable {boolean}: Whether the tree nodes can be selected with checkboxes.
+	 * selectedNodes {string}: A comma-separated list of which node ids default to open.
+	 *
+	 * Callbacks
+	 * onSelect {string}: Called when a node is selected (if selectable is true).
+	 */
+
+	initialize: function(options) {
 		var instance = this;
 
-		instance.className = params.className;
-		instance.icons = params.icons;
-		instance.nolinks = params.nolinks || false;
-		instance.nodes = params.nodes;
-		instance.openNodes = params.openNodes || '';
-		instance.outputId = params.outputId || '';
+		instance.className = options.className;
+		instance.icons = options.icons;
+		instance.nolinks = options.nolinks || false;
+		instance.nodes = options.nodes;
+		instance.openNodes = options.openNodes || '';
+		instance.outputId = options.outputId || '';
 		instance.tree = null;
 		instance.treeHTML = '';
-		instance.treeId = params.treeId;
-		instance.selectable = params.selectable || false;
-		instance.selectedNodes = params.selectedNodes || '';
+		instance.treeId = options.treeId;
+		instance.selectable = options.selectable || false;
+		instance.selectedNodes = options.selectedNodes || '';
 
 		instance._updateURL = themeDisplay.getPathMain() + '/layout_management/update_page';
 
@@ -34,7 +55,7 @@ Liferay.Tree = new Class({
 			}
 		};
 
-		instance._onSelect = params.onSelect || instance._onSelect;
+		instance._onSelect = options.onSelect || instance._onSelect;
 
 		instance._expandText = Liferay.Language.get('expand-all');
 		instance._collapseText = Liferay.Language.get('collapse-all');
@@ -340,17 +361,17 @@ Liferay.Tree = new Class({
 		}
 	},
 
-	generateImage: function(params) {
+	generateImage: function(options) {
 		var instance = this;
 
-		var border = params.border || '0';
-		var className = params.className || '';
-		var height = params.height || '20';
-		var hspace = params.hspace || '0';
-		var id = params.id || '';
-		var src = params.src || params;
-		var vspace =  params.vspace || '0';
-		var width = params.width || '19';
+		var border = options.border || '0';
+		var className = options.className || '';
+		var height = options.height || '20';
+		var hspace = options.hspace || '0';
+		var id = options.id || '';
+		var src = options.src || options;
+		var vspace =  options.vspace || '0';
+		var width = options.width || '19';
 
 		border = ' border="' + border + '"';
 		className = ' class="' + className + '"';
@@ -712,12 +733,12 @@ Liferay.Tree = new Class({
 		}
 	},
 
-	_onSelect: function(params) {
+	_onSelect: function(options) {
 		var instance = this;
 
-		var branchId = params.branchId;
-		var selectedNode = params.selectedNode;
-		var treeIdSelected = params.treeId;
+		var branchId = options.branchId;
+		var selectedNode = options.selectedNode;
+		var treeIdSelected = options.treeId;
 
 		jQuery.ajax(
 			{

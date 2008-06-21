@@ -443,16 +443,19 @@ Liferay.Util = {
 		return url + ";jsessionid=" + themeDisplay.getSessionId();
 	},
 
+	/**
+	 * OPTIONS
+	 *
+	 * Required
+	 * button {string|object}: The button that opens the popup when clicked.
+	 * height {number}: The height to set the popup to.
+	 * textarea {string}: the name of the textarea to auto-resize.
+	 * url {string}: The url to open that sets the editor.
+	 * width {number}: The width to set the popup to.
+	 */
+
 	inlineEditor: function(options) {
 		var instance = this;
-
-		/*
-		button (jQuery selector | DOM element): The button that opens the popup when clicked
-		url (String): url to open that sets the editor
-		width (Int): The width to set the popup to
-		height (Int): The height to set the popup to
-		textarea (String): the name of the textarea to auto-resize
-		*/
 
 		if (options.url && options.button) {
 			var url = options.url;
@@ -941,14 +944,17 @@ Liferay.Util = {
 		return (str.indexOf(x) === 0);
 	},
 
+	/**
+	 * OPTIONS
+	 *
+	 * Required
+	 * popup {string|object}: A jQuery selector or DOM element of the popup that contains the editor.
+	 * textarea {string}: the name of the textarea to auto-resize.
+	 * url {string}: The url to open that sets the editor.
+	 */
+
 	switchEditor: function(options) {
 		var instance = this;
-
-		/*
-		url (String): url to open that sets the editor
-		popup (String|DOM|jQuery element): the popup that contains the editor
-		textarea (String): the name of the textarea to auto-resize
-		*/
 
 		if (options.url && options.popup) {
 			var url = options.url;

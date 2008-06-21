@@ -1,13 +1,19 @@
 Liferay.DynamicSelect = new Class({
 
-	/*
-	array: an array of params
-	params.select: a select box
-	params.selectId: JSON object field name for an option value
-	params.selectDesc: JSON object field name for an option description
-	params.selectVal: selected value of the select box
-	params.selectData: function that returns a JSON array to populate the next select box
-	*/
+	/**
+	 * OPTIONS
+	 *
+	 * Required
+	 * array {array}: An array of options.
+	 * array[i].select {string}: An id of a select box.
+	 * array[i].selectId {string}: A JSON object field name for an option value.
+	 * array[i].selectDesc {string}: A JSON object field name for an option description.
+	 * array[i].selectVal {string}: The value that is displayed in an option field.
+	 *
+	 * Callbacks
+	 * array[i].selectData {function}: Returns a JSON array to populate the next select box.
+	 */
+
 	initialize: function(array) {
 		var instance = this;
 
@@ -15,9 +21,9 @@ Liferay.DynamicSelect = new Class({
 
 		jQuery.each(
 			array,
-			function(i, params) {
-				var select = jQuery('#' + params.select);
-				var selectData = params.selectData;
+			function(i, options) {
+				var select = jQuery('#' + options.select);
+				var selectData = options.selectData;
 
 				var prevSelectVal = null;
 
@@ -61,13 +67,13 @@ Liferay.DynamicSelect = new Class({
 	},
 
 	_updateSelect: function(instance, i, list) {
-		var params = instance.array[i];
+		var options = instance.array[i];
 
-		var select = jQuery('#' + params.select);
-		var selectId = params.selectId;
-		var selectDesc = params.selectDesc;
-		var selectVal = params.selectVal;
-		var selectNullable = params.selectNullable || true;
+		var select = jQuery('#' + options.select);
+		var selectId = options.selectId;
+		var selectDesc = options.selectDesc;
+		var selectVal = options.selectVal;
+		var selectNullable = options.selectNullable || true;
 
 		var options = '';
 

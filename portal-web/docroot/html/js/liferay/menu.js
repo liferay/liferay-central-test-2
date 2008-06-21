@@ -1,10 +1,10 @@
 Liferay.Menu = new Class({
-	initialize: function(params) {
+	initialize: function(options) {
 		var instance = this;
 
-		instance._button = jQuery(params.button, params.context || document);
+		instance._button = jQuery(options.button, options.context || document);
 		instance._menu = instance._button.find('ul:first');
-		instance._trigger = instance._button.find(params.trigger);
+		instance._trigger = instance._button.find(options.trigger);
 
 		if (instance._menu.length) {
 			instance._run();

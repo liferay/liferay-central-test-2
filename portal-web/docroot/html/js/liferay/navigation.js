@@ -1,17 +1,22 @@
 Liferay.Navigation = new Class({
 
-	/*
-	params.layoutIds: an array of displayable layout ids
-	params.navBlock: the selector for the navigation block
-	*/
-	initialize: function(params) {
+	/**
+	 * OPTIONS
+	 *
+	 * Required
+	 * hasPermission {boolean}: Whether the current user has permission to modify the navigation
+	 * layoutIds {array}: The displayable layout ids.
+	 * navBlock {string|object}: A jQuery selector or DOM element of the navigation.
+	 */
+
+	initialize: function(options) {
 		var instance = this;
 
-		instance.params = params;
+		instance.options = options;
 
-		instance._navBlock = jQuery(instance.params.navBlock);
+		instance._navBlock = jQuery(instance.options.navBlock);
 
-		instance._hasPermission = instance.params.hasPermission;
+		instance._hasPermission = instance.options.hasPermission;
 		instance._isModifiable = instance._navBlock.is('.modify-pages');
 		instance._isSortable = instance._navBlock.is('.sort-pages') && instance._hasPermission;
 		instance._isUseHandle = instance._navBlock.is('.use-handle');
@@ -22,7 +27,7 @@ Liferay.Navigation = new Class({
 
 		items.each(
 			function(i) {
-				this._LFR_layoutId = instance.params.layoutIds[i];
+				this._LFR_layoutId = instance.options.layoutIds[i];
 			}
 		);
 

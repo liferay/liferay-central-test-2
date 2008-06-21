@@ -1,38 +1,42 @@
 Liferay.Upload = new Class({
-	/*
-	 * PARAMETERS:
-	 * allowedFileTypes (string) *Required - a comma seperated list of allowable filetypes
-	 * container (jQuery Selector | DOM Element) *Required - container where the uploader will be placed
-	 * maxFileSize (int) *Required - the maximum file size that can be uploaded
-	 * uploadFile (string) *Required - the URL to where the file will be uploaded
+
+	/**
+	 * OPTIONS
 	 *
-	 * fallbackContainer (jQuery Selector | DOM Element) *Optional - the container holding a fallback (in case flash is not supported)
-	 * namespace (string) *Optional - A unique string so that the global callback methods don't collide
-	 * fileDescription (string) *Optional - a string describing what files can be uploaded
+	 * Required
+	 * allowedFileTypes {string}: A comma-seperated list of allowable filetypes.
+	 * container {string|object}: The container where the uploader will be placed.
+	 * maxFileSize {number}: The maximum file size that can be uploaded.
+	 * uploadFile {string}: The URL to where the file will be uploaded.
+	 *
+	 * Optional
+	 * fallbackContainer {string|object}: A jQuery selector or DOM element of the container holding a fallback (in case flash is not supported).
+	 * namespace {string}: A unique string so that the global callback methods don't collide.
+	 * fileDescription {string}: A string describing what files can be uploaded.
 	 *
 	 * Callbacks
-	 * NOTE: All callbacks are passed in the file object as it's argument, unless otherwise noted.
-	 * onFileComplete (function) *Optional - Gets called whenever a file is completely uploaded
-	 * onUploadsComplete (function) *Optional - Gets called when all files are finished being uploaded, and is passed no arguments
-	 * onUploadProgress (function) *Optional - Gets called during upload, and is also passed in the number of bytes loaded as it's second argument
-	 * onUploadError (function) *Optional - Gets called when an error in the upload occurs. Gets passed the error number as it's only argument.
+	 * onFileComplete {function}: Called whenever a file is completely uploaded.
+	 * onUploadsComplete {function}: Called when all files are finished being uploaded, and is passed no arguments.
+	 * onUploadProgress {function}: Called during upload, and is also passed in the number of bytes loaded as it's second argument.
+	 * onUploadError {function}: Called when an error in the upload occurs. Gets passed the error number as it's only argument.
 	 */
-	initialize: function(params) {
+
+	initialize: function(options) {
 		var instance = this;
 
-		params = params || {};
+		options = options || {};
 
-		instance._container = jQuery(params.container);
-		instance._fallbackContainer = jQuery(params.fallbackContainer || []);
-		instance._namespaceId = params.namespace || '_liferay_pns_' + Liferay.Util.randomInt() + '_';
-		instance._maxFileSize = params.maxFileSize || 0;
-		instance._allowedFileTypes = params.allowedFileTypes;
-		instance._uploadFile = params.uploadFile;
+		instance._container = jQuery(options.container);
+		instance._fallbackContainer = jQuery(options.fallbackContainer || []);
+		instance._namespaceId = options.namespace || '_liferay_pns_' + Liferay.Util.randomInt() + '_';
+		instance._maxFileSize = options.maxFileSize || 0;
+		instance._allowedFileTypes = options.allowedFileTypes;
+		instance._uploadFile = options.uploadFile;
 
-		instance._onFileComplete = params.onFileComplete;
-		instance._onUploadsComplete = params.onUploadsComplete;
-		instance._onUploadProgress = params.onUploadProgress;
-		instance._onUploadError = params.onUploadError;
+		instance._onFileComplete = options.onFileComplete;
+		instance._onUploadsComplete = options.onUploadsComplete;
+		instance._onUploadProgress = options.onUploadProgress;
+		instance._onUploadError = options.onUploadError;
 
 		instance._classicUploaderParam = 'uploader=classic';
 		instance._newUploaderParam = 'uploader=new';
@@ -59,7 +63,7 @@ Liferay.Upload = new Class({
 		instance._clearRecentUploadsText = Liferay.Language.get('clear-recent-uploads');
 		instance._fileListPendingText = Liferay.Language.get('x-files-ready-to-be-uploaded', '0');
 		instance._fileListText = Liferay.Language.get('file-list');
-		instance._fileTypesDescriptionText = params.fileDescription || instance._allowedFileTypes;
+		instance._fileTypesDescriptionText = options.fileDescription || instance._allowedFileTypes;
 		instance._uploadsCompleteText = Liferay.Language.get('all-uploads-complete');
 		instance._uploadStatusText = Liferay.Language.get('uploading-file-x-of-x', ['[$POS$]','[$TOTAL$]']);
 		instance._uploadFilesText = Liferay.Language.get('upload-files');
