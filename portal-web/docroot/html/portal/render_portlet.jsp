@@ -618,6 +618,7 @@ else if (portletDisplay.isStateMax()) {
 	//}
 
 	urlBack = ParamUtil.getString(renderReqImpl, "returnToFullPageURL");
+	urlBack = HtmlUtil.stripHtml(urlBack);
 
 	if (Validator.isNull(urlBack)) {
 		urlBack = urlMax.toString();
