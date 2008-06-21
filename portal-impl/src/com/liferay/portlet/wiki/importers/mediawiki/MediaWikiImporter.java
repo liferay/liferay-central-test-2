@@ -149,8 +149,8 @@ public class MediaWikiImporter implements WikiImporter {
 	}
 
 	protected void importPage(
-			long userId, String author, WikiNode node, String title,
-			String content, Map<String, String> usersMap)
+		long userId, String author, WikiNode node, String title,
+		String content, String summary, Map<String, String> usersMap)
 		throws PortalException {
 
 		try {
@@ -183,8 +183,8 @@ public class MediaWikiImporter implements WikiImporter {
 
 			WikiPageLocalServiceUtil.updatePage(
 				authorUserId, node.getNodeId(), title, page.getVersion(),
-				content, WikiPageImpl.IMPORTED, true, "creole",
-				StringPool.BLANK, redirectTitle, tagsEntries, null, null);
+				content, summary, true, "creole", StringPool.BLANK,
+				redirectTitle, tagsEntries, null, null);
 		}
 		catch (Exception e) {
 			throw new PortalException("Error importing page " + title, e);
@@ -395,9 +395,12 @@ public class MediaWikiImporter implements WikiImporter {
 				String author = curRevisionEl.element(
 					"contributor").elementText("username");
 				String content = curRevisionEl.elementText("text");
+				String summary = curRevisionEl.elementText("comment");
 
 				try {
-					importPage(userId, author, node, title, content, usersMap);
+					importPage(
+						userId, author, node, title, content, summary,
+						usersMap);
 				}
 				catch (Exception e) {
 					if (_log.isWarnEnabled()) {
