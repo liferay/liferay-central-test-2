@@ -22,13 +22,12 @@
 
 package com.liferay.portal.util;
 
-import com.germinus.easyconf.Filter;
-
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
+import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
@@ -788,12 +787,12 @@ public class PortalImpl implements Portal {
 
 	public String getLayoutEditPage(Layout layout) {
 		return PropsUtil.get(
-			PropsUtil.LAYOUT_EDIT_PAGE, Filter.by(layout.getType()));
+			PropsUtil.LAYOUT_EDIT_PAGE, new Filter(layout.getType()));
 	}
 
 	public String getLayoutViewPage(Layout layout) {
 		return PropsUtil.get(
-			PropsUtil.LAYOUT_VIEW_PAGE, Filter.by(layout.getType()));
+			PropsUtil.LAYOUT_VIEW_PAGE, new Filter(layout.getType()));
 	}
 
 	public String getLayoutURL(ThemeDisplay themeDisplay) {
@@ -843,15 +842,28 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getLayoutActualURL(Layout layout, String mainPath) {
-		Map<Object, Object> vars = new HashMap<Object, Object>();
+		Map<String, String> variables = new HashMap<String, String>();
 
-		vars.put("liferay:mainPath", mainPath);
-		vars.put("liferay:plid", String.valueOf(layout.getPlid()));
-		vars.putAll(layout.getLayoutType().getTypeSettingsProperties());
+		variables.put("liferay:mainPath", mainPath);
+		variables.put("liferay:plid", String.valueOf(layout.getPlid()));
+
+		Properties typeSettingsProperties =
+			layout.getLayoutType().getTypeSettingsProperties();
+
+		Iterator<Map.Entry<Object, Object>> itr =
+			typeSettingsProperties.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry<Object, Object> entry = itr.next();
+
+			String key = (String)entry.getKey();
+			String value = (String)entry.getValue();
+
+			variables.put(key, value);
+		}
 
 		String href = PropsUtil.get(
-			PropsUtil.LAYOUT_URL,
-			Filter.by(layout.getType()).setVariables(vars));
+			PropsUtil.LAYOUT_URL, new Filter(layout.getType(), variables));
 
 		return href;
 	}
@@ -2065,7 +2077,8 @@ public class PortalImpl implements Portal {
 	public boolean isLayoutFriendliable(Layout layout) {
 		return GetterUtil.getBoolean(
 			PropsUtil.get(
-				PropsUtil.LAYOUT_URL_FRIENDLIABLE, Filter.by(layout.getType())),
+				PropsUtil.LAYOUT_URL_FRIENDLIABLE,
+				new Filter(layout.getType())),
 			true);
 	}
 
@@ -2075,7 +2088,7 @@ public class PortalImpl implements Portal {
 
 	public boolean isLayoutParentable(String type) {
 		return GetterUtil.getBoolean(
-			PropsUtil.get(PropsUtil.LAYOUT_PARENTABLE, Filter.by(type)), true);
+			PropsUtil.get(PropsUtil.LAYOUT_PARENTABLE, new Filter(type)), true);
 	}
 
 	public boolean isLayoutSitemapable(Layout layout) {
@@ -2084,7 +2097,7 @@ public class PortalImpl implements Portal {
 		}
 
 		return GetterUtil.getBoolean(PropsUtil.get(
-			PropsUtil.LAYOUT_SITEMAPABLE, Filter.by(layout.getType())), true);
+			PropsUtil.LAYOUT_SITEMAPABLE, new Filter(layout.getType())), true);
 	}
 
 	public boolean isReservedParameter(String name) {

@@ -3,9 +3,7 @@
 
 package ${baseModelImplPackage};
 
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.BaseModel;
-import ${propsUtilPackage}.PropsUtil;
 
 /**
  * <a href="BaseModelImpl.java.html"><b><i>View Source</i></b></a>

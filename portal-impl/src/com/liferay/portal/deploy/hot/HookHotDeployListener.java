@@ -48,7 +48,6 @@ import com.liferay.portal.util.PropsValues;
 import java.lang.reflect.Field;
 
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -90,14 +89,6 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 
 	protected void checkPortalProperties(OrderedProperties portalProperties)
 		throws Exception {
-
-		Enumeration<String> coreEnu = PropsUtil.getOrderedPropertyNames();
-		Enumeration<String> hookEnu = portalProperties.propertyNames();
-
-		while (coreEnu.hasMoreElements() && hookEnu.hasMoreElements()) {
-			String coreKey = (String)coreEnu.nextElement();
-			String hookKey = (String)hookEnu.nextElement();
-		}
 	}
 
 	protected void destroyPortalProperties(Properties portalProperties)

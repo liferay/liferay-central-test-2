@@ -25,11 +25,7 @@ package com.liferay.portal.captcha;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsFiles;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.ExtPropertiesLoader;
-
-import java.util.Properties;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -39,7 +35,6 @@ import javax.portlet.PortletSession;
 import javax.servlet.http.HttpServletResponse;
 
 import nl.captcha.servlet.CaptchaProducer;
-import nl.captcha.util.Helper;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -54,14 +49,6 @@ import org.apache.struts.action.ActionMapping;
  */
 public class CaptchaPortletAction extends PortletAction {
 
-	public CaptchaPortletAction() {
-		Properties props =  ExtPropertiesLoader.getInstance(
-			getClass().getClassLoader(), PropsFiles.CAPTCHA).getProperties();
-
-		_producer = (CaptchaProducer)Helper.ThingFactory.loadImpl(
-			Helper.ThingFactory.CPROD, props);
-	}
-
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
 			ActionRequest req, ActionResponse res)
@@ -70,14 +57,16 @@ public class CaptchaPortletAction extends PortletAction {
 		try {
 			PortletSession ses = req.getPortletSession();
 
-			String captchaText = _producer.createText();
+			CaptchaProducer captchaProducer = CaptchaUtil.getCaptchaProducer();
+
+			String captchaText = captchaProducer.createText();
 
 			ses.setAttribute(WebKeys.CAPTCHA_TEXT, captchaText);
 
 			HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(
 				res);
 
-			_producer.createImage(httpRes.getOutputStream(), captchaText);
+			captchaProducer.createImage(httpRes.getOutputStream(), captchaText);
 
 			setForward(req, ActionConstants.COMMON_NULL);
 		}
@@ -93,7 +82,5 @@ public class CaptchaPortletAction extends PortletAction {
 	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
 
 	private static Log _log = LogFactory.getLog(CaptchaPortletAction.class);
-
-	private CaptchaProducer _producer;
 
 }

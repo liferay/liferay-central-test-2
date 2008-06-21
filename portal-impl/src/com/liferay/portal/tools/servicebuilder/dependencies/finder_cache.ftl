@@ -13,6 +13,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.BaseModel;
+import ${propsUtilPackage}.PropsKeys;
 import ${propsUtilPackage}.PropsUtil;
 
 import java.io.Serializable;
@@ -35,7 +36,7 @@ import org.hibernate.SessionFactory;
 public class FinderCache implements CacheRegistryItem {
 
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(
-		PropsUtil.get(PropsUtil.VALUE_OBJECT_FINDER_CACHE_ENABLED), true);
+		PropsUtil.get(PropsKeys.VALUE_OBJECT_FINDER_CACHE_ENABLED), true);
 
 	public static final String CACHE_NAME = FinderCache.class.getName();
 

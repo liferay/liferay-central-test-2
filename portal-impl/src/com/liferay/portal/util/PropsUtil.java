@@ -22,20 +22,12 @@
 
 package com.liferay.portal.util;
 
-import com.germinus.easyconf.Filter;
+import com.liferay.portal.kernel.configuration.Configuration;
+import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
+import com.liferay.portal.kernel.configuration.Filter;
+import com.liferay.util.SystemProperties;
 
-import com.liferay.portal.kernel.util.OrderedProperties;
-import com.liferay.portal.kernel.util.PropertiesUtil;
-import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.model.CompanyConstants;
-import com.liferay.portal.security.auth.CompanyThreadLocal;
-import com.liferay.util.ExtPropertiesLoader;
-
-import java.util.Enumeration;
 import java.util.Properties;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PropsUtil.java.html"><b><i>View Source</i></b></a>
@@ -326,8 +318,6 @@ public class PropsUtil {
 	public static final String SESSION_TRACKER_IGNORE_PATHS = "session.tracker.ignore.paths";
 
 	// JAAS
-
-	public static final String PORTAL_CONFIGURATION = "portal.configuration";
 
 	public static final String PORTAL_JAAS_ENABLE = "portal.jaas.enable";
 
@@ -1371,82 +1361,91 @@ public class PropsUtil {
 
 	public static final String WIKI_RSS_ABSTRACT_LENGTH = "wiki.rss.abstract.length";
 
-	public static boolean containsKey(String key) {
-		return _getInstance().containsKey(key);
+	public static void addProperties(Properties properties) {
+		_instance._addProperties(properties);
+	}
+
+	public static boolean contains(String key) {
+		return _instance._contains(key);
 	}
 
 	public static String get(String key) {
-		return _getInstance().get(key);
+		return _instance._get(key);
 	}
 
 	public static String get(String key, Filter filter) {
-		return _getInstance().getComponentProperties().getString(key, filter);
-	}
-
-	public static String get(long companyId, String key) {
-		return _getInstance(companyId).get(key);
+		return _instance._get(key, filter);
 	}
 
 	public static String[] getArray(String key) {
-		return _getInstance().getArray(key);
+		return _instance._getArray(key);
 	}
 
 	public static String[] getArray(String key, Filter filter) {
-		return _getInstance().getComponentProperties().getStringArray(
-			key, filter);
+		return _instance._getArray(key, filter);
 	}
 
 	public static Properties getProperties() {
-		return _getInstance().getProperties();
+		return _instance._getProperties();
 	}
 
-	public static Enumeration<String> getOrderedPropertyNames() {
-		if (_orderedProperties == null) {
-			_orderedProperties = new OrderedProperties();
-
-			try {
-				PropertiesUtil.load(
-					_orderedProperties,
-					StringUtil.read(
-						PropsUtil.class.getClassLoader(), "portal.properties"));
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
-		}
-
-		return _orderedProperties.propertyNames();
+	public static void removeProperties(Properties properties) {
+		_instance._removeProperties(properties);
 	}
 
 	public static void set(String key, String value) {
-		_getInstance().set(key, value);
+		_instance._set(key, value);
 	}
 
-	public static void set(long companyId, String key, String value) {
-		_getInstance(companyId).set(key, value);
+	private PropsUtil() {
+		_configuration = ConfigurationFactoryUtil.getConfiguration(
+			PropsUtil.class.getClassLoader(), PropsFiles.PORTAL);
+
+		// Set the portal property "resource.repositories.root" as a system
+		// property as well so it can be referenced by Ehcache.
+
+		SystemProperties.set(
+			RESOURCE_REPOSITORIES_ROOT, _get(RESOURCE_REPOSITORIES_ROOT));
 	}
 
-	private static ExtPropertiesLoader _getInstance() {
-		long companyId = CompanyThreadLocal.getCompanyId();
-
-		return _getInstance(companyId);
+	private void _addProperties(Properties properties) {
+		_configuration.addProperties(properties);
 	}
 
-	private static ExtPropertiesLoader _getInstance(long companyId) {
-		ClassLoader classLoader = PropsUtil.class.getClassLoader();
-
-		if (companyId > CompanyConstants.SYSTEM) {
-			return ExtPropertiesLoader.getInstance(
-				classLoader, PropsFiles.PORTAL, companyId);
-		}
-		else {
-			return ExtPropertiesLoader.getInstance(
-				classLoader, PropsFiles.PORTAL);
-		}
+	private boolean _contains(String key) {
+		return _configuration.contains(key);
 	}
 
-	private static Log _log = LogFactory.getLog(PropsUtil.class);
+	private String _get(String key) {
+		return _configuration.get(key);
+	}
 
-	private static OrderedProperties _orderedProperties;
+	private String _get(String key, Filter filter) {
+		return _configuration.get(key, filter);
+	}
+
+	private String[] _getArray(String key) {
+		return _configuration.getArray(key);
+	}
+
+	private String[] _getArray(String key, Filter filter) {
+		return _configuration.getArray(key, filter);
+	}
+
+	private Properties _getProperties() {
+		return _configuration.getProperties();
+	}
+
+	private void _removeProperties(Properties properties) {
+		_configuration.removeProperties(properties);
+	}
+
+	private void _set(String key, String value) {
+		_configuration.set(key, value);
+	}
+
+	private static PropsUtil _instance = new PropsUtil();
+
+	private Configuration _configuration;
 
 }

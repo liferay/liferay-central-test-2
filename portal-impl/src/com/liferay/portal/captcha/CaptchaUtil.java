@@ -22,8 +22,11 @@
 
 package com.liferay.portal.captcha;
 
+import com.liferay.portal.kernel.configuration.Configuration;
+import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PropsFiles;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
@@ -32,6 +35,9 @@ import javax.portlet.PortletSession;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import nl.captcha.servlet.CaptchaProducer;
+import nl.captcha.util.Helper;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -47,102 +53,127 @@ public class CaptchaUtil {
 	public static void check(HttpServletRequest req)
 		throws CaptchaTextException {
 
-		if (isEnabled(req)) {
-			HttpSession ses = req.getSession();
-
-			String captchaText = (String)ses.getAttribute(WebKeys.CAPTCHA_TEXT);
-
-			if (captchaText != null) {
-				if (!captchaText.equals(
-						ParamUtil.getString(req, "captchaText"))) {
-
-					throw new CaptchaTextException();
-				}
-				else {
-					if (_log.isDebugEnabled()) {
-						_log.debug("Captcha text is valid");
-					}
-
-					ses.removeAttribute(WebKeys.CAPTCHA_TEXT);
-
-					if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
-						(Validator.isNotNull(req.getRemoteUser()))) {
-
-						Integer count = (Integer)ses.getAttribute(
-							WebKeys.CAPTCHA_COUNT);
-
-						if (count == null) {
-							count = new Integer(1);
-						}
-						else {
-							count = new Integer(count.intValue() + 1);
-						}
-
-						ses.setAttribute(WebKeys.CAPTCHA_COUNT, count);
-					}
-				}
-			}
-			else {
-				if (_log.isErrorEnabled()) {
-					_log.error(
-						"Captcha text is null. User " + req.getRemoteUser() +
-							" may be trying to circumvent the captcha.");
-				}
-
-				throw new CaptchaTextException();
-			}
-		}
+		_instance._check(req);
 	}
 
 	public static void check(PortletRequest req) throws CaptchaTextException {
-		if (isEnabled(req)) {
-			PortletSession ses = req.getPortletSession();
+		_instance._check(req);
+	}
 
-			String captchaText = (String)ses.getAttribute(WebKeys.CAPTCHA_TEXT);
-
-			if (captchaText != null) {
-				if (!captchaText.equals(
-						ParamUtil.getString(req, "captchaText"))) {
-
-					throw new CaptchaTextException();
-				}
-				else {
-					if (_log.isDebugEnabled()) {
-						_log.debug("Captcha text is valid");
-					}
-
-					ses.removeAttribute(WebKeys.CAPTCHA_TEXT);
-
-					if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
-						(Validator.isNotNull(req.getRemoteUser()))) {
-
-						Integer count = (Integer)ses.getAttribute(
-							WebKeys.CAPTCHA_COUNT);
-
-						if (count == null) {
-							count = new Integer(1);
-						}
-						else {
-							count = new Integer(count.intValue() + 1);
-						}
-
-						ses.setAttribute(WebKeys.CAPTCHA_COUNT, count);
-					}
-				}
-			}
-			else {
-				if (_log.isErrorEnabled()) {
-					_log.error(
-						"Captcha text is null. User " + req.getRemoteUser() +
-							" may be trying to circumvent the captcha.");
-				}
-
-				throw new CaptchaTextException();
-			}
-		}
+	public static CaptchaProducer getCaptchaProducer() {
+		return _instance._getCaptchaProducer();
 	}
 
 	public static boolean isEnabled(HttpServletRequest req) {
+		return _instance._isEnabled(req);
+	}
+
+	public static boolean isEnabled(PortletRequest req) {
+		return _instance._isEnabled(req);
+	}
+
+	private CaptchaUtil() {
+		_configuration = ConfigurationFactoryUtil.getConfiguration(
+			CaptchaUtil.class.getClassLoader(), PropsFiles.CAPTCHA);
+		_captchaProducer = (CaptchaProducer)Helper.ThingFactory.loadImpl(
+			Helper.ThingFactory.CPROD, _configuration.getProperties());
+	}
+
+	private void _check(HttpServletRequest req) throws CaptchaTextException {
+		if (!_isEnabled(req)) {
+			return;
+		}
+
+		HttpSession ses = req.getSession();
+
+		String captchaText = (String)ses.getAttribute(WebKeys.CAPTCHA_TEXT);
+
+		if (captchaText == null) {
+			if (_log.isErrorEnabled()) {
+				_log.error(
+					"Captcha text is null. User " + req.getRemoteUser() +
+						" may be trying to circumvent the captcha.");
+			}
+
+			throw new CaptchaTextException();
+		}
+
+		if (!captchaText.equals(ParamUtil.getString(req, "captchaText"))) {
+			throw new CaptchaTextException();
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Captcha text is valid");
+		}
+
+		ses.removeAttribute(WebKeys.CAPTCHA_TEXT);
+
+		if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
+			(Validator.isNotNull(req.getRemoteUser()))) {
+
+			Integer count = (Integer)ses.getAttribute(WebKeys.CAPTCHA_COUNT);
+
+			if (count == null) {
+				count = new Integer(1);
+			}
+			else {
+				count = new Integer(count.intValue() + 1);
+			}
+
+			ses.setAttribute(WebKeys.CAPTCHA_COUNT, count);
+		}
+	}
+
+	private void _check(PortletRequest req) throws CaptchaTextException {
+		if (!_isEnabled(req)) {
+			return;
+		}
+
+		PortletSession ses = req.getPortletSession();
+
+		String captchaText = (String)ses.getAttribute(WebKeys.CAPTCHA_TEXT);
+
+		if (captchaText == null) {
+			if (_log.isErrorEnabled()) {
+				_log.error(
+					"Captcha text is null. User " + req.getRemoteUser() +
+						" may be trying to circumvent the captcha.");
+			}
+
+			throw new CaptchaTextException();
+		}
+
+		if (!captchaText.equals(ParamUtil.getString(req, "captchaText"))) {
+			throw new CaptchaTextException();
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Captcha text is valid");
+		}
+
+		ses.removeAttribute(WebKeys.CAPTCHA_TEXT);
+
+		if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
+			(Validator.isNotNull(req.getRemoteUser()))) {
+
+			Integer count = (Integer)ses.getAttribute(WebKeys.CAPTCHA_COUNT);
+
+			if (count == null) {
+				count = new Integer(1);
+			}
+			else {
+				count = new Integer(count.intValue() + 1);
+			}
+
+			ses.setAttribute(WebKeys.CAPTCHA_COUNT, count);
+		}
+	}
+
+	private CaptchaProducer _getCaptchaProducer() {
+		return _captchaProducer;
+	}
+
+	private boolean _isEnabled(HttpServletRequest req) {
 		if (PropsValues.CAPTCHA_MAX_CHALLENGES > 0) {
 			HttpSession ses = req.getSession();
 
@@ -165,7 +196,7 @@ public class CaptchaUtil {
 		}
 	}
 
-	public static boolean isEnabled(PortletRequest req) {
+	private boolean _isEnabled(PortletRequest req) {
 		if (PropsValues.CAPTCHA_MAX_CHALLENGES > 0) {
 			PortletSession ses = req.getPortletSession();
 
@@ -189,5 +220,10 @@ public class CaptchaUtil {
 	}
 
 	private static Log _log = LogFactory.getLog(CaptchaUtil.class);
+
+	private static CaptchaUtil _instance = new CaptchaUtil();
+
+	private Configuration _configuration;
+	private CaptchaProducer _captchaProducer;
 
 }

@@ -22,10 +22,11 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.configuration.Configuration;
+import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.util.ExtPropertiesLoader;
 
 /**
  * <a href="ContentTypeUtil.java.html"><b><i>View Source</i></b></a>
@@ -35,14 +36,21 @@ import com.liferay.util.ExtPropertiesLoader;
  */
 public class ContentTypeUtil {
 
-	public static String CONTENT_TYPES = "content-types";
-
 	public static String getContentType(String fileName) {
+		return _instance._getContentType(fileName);
+	}
+
+	private ContentTypeUtil() {
+		_configuration = ConfigurationFactoryUtil.getConfiguration(
+			ContentTypeUtil.class.getClassLoader(), PropsFiles.CONTENT_TYPES);
+	}
+
+	private String _getContentType(String fileName) {
 		String[] array = StringUtil.split(fileName, StringPool.PERIOD);
 
 		String ext = array[array.length-1];
 
-		String type = _getInstance().get(ext);
+		String type = _configuration.get(ext);
 
 		if (Validator.isNull(type)) {
 			type = "application/octet-stream";
@@ -51,9 +59,8 @@ public class ContentTypeUtil {
 		return type;
 	}
 
-	private static ExtPropertiesLoader _getInstance() {
-		return ExtPropertiesLoader.getInstance(
-			ContentTypeUtil.class.getClassLoader(), CONTENT_TYPES);
-	}
+	private static ContentTypeUtil _instance = new ContentTypeUtil();
+
+	private Configuration _configuration;
 
 }

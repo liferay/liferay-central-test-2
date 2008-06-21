@@ -6,6 +6,7 @@ package ${springHibernatePackage};
 import com.liferay.portal.SystemException;
 import ${beanLocatorUtilPackage}.BeanLocatorUtil;
 import com.liferay.portal.kernel.util.Validator;
+import ${propsUtilPackage}.PropsKeys;
 import ${propsUtilPackage}.PropsUtil;
 import com.liferay.util.dao.hibernate.LiferayClassicSession;
 
@@ -40,10 +41,10 @@ public class HibernateUtil {
 	public static final String COUNT_COLUMN_NAME = "COUNT_VALUE";
 
 	public static final String SPRING_HIBERNATE_DATA_SOURCE =
-		PropsUtil.get(PropsUtil.SPRING_HIBERNATE_DATA_SOURCE);
+		PropsUtil.get(PropsKeys.SPRING_HIBERNATE_DATA_SOURCE);
 
 	public static final String SPRING_HIBERNATE_SESSION_FACTORY =
-		PropsUtil.get(PropsUtil.SPRING_HIBERNATE_SESSION_FACTORY);
+		PropsUtil.get(PropsKeys.SPRING_HIBERNATE_SESSION_FACTORY);
 
 	public static void closeSession(Session session) {
 		try {

@@ -70,7 +70,6 @@
 		<unjar src="${project.dir}/lib/portal/commons-math.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/displaytag.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/dom4j.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/easyconf.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/friki.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/jabsorb.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/jackrabbit-text-extractors.jar" dest="${classpath.jsp}" />

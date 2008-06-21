@@ -23,22 +23,19 @@
 package com.liferay.portal.events;
 
 import com.liferay.portal.bean.BeanLocatorImpl;
+import com.liferay.portal.configuration.ConfigurationFactoryImpl;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaProps;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.log.CommonsLogFactoryImpl;
-import com.liferay.portal.security.jaas.PortalConfiguration;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.log4j.Log4JUtil;
-
-import javax.security.auth.login.Configuration;
 
 import org.apache.commons.lang.time.StopWatch;
 
@@ -107,12 +104,10 @@ public class InitAction extends SimpleAction {
 			e.printStackTrace();
 		}
 
-		// Set the portal property "resource.repositories.root" as a system
-		// property as well so it can be referenced by Ehcache.
+		// Configuration factory
 
-		SystemProperties.set(
-			PropsUtil.RESOURCE_REPOSITORIES_ROOT,
-			PropsUtil.get(PropsUtil.RESOURCE_REPOSITORIES_ROOT));
+		ConfigurationFactoryUtil.setConfigurationFactory(
+			new ConfigurationFactoryImpl());
 
 		// Bean locator
 
@@ -121,19 +116,6 @@ public class InitAction extends SimpleAction {
 		// Java properties
 
 		JavaProps.isJDK5();
-
-		// JAAS
-
-		if ((GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.PORTAL_CONFIGURATION))) &&
-			(ServerDetector.isJBoss() || ServerDetector.isPramati() ||
-			 ServerDetector.isWebLogic())) {
-
-			PortalConfiguration portalConfig = new PortalConfiguration(
-				Configuration.getConfiguration());
-
-			Configuration.setConfiguration(portalConfig);
-		}
 
 		if (_PRINT_TIME) {
 			System.out.println(

@@ -66,7 +66,7 @@ portletURL.setParameter("nodeId", String.valueOf(nodeId));
 	url="<%= portletURL.toString() %>"
 />
 
-<liferay-util:include page="<%= PropsUtil.get(PropsUtil.WIKI_IMPORTERS_PAGE, Filter.by(tabs2)) %>" />
+<liferay-util:include page="<%= PropsUtil.get(PropsUtil.WIKI_IMPORTERS_PAGE, new Filter(tabs2)) %>" />
 
 <br />
 

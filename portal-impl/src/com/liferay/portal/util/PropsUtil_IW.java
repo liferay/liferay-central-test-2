@@ -33,8 +33,12 @@ public class PropsUtil_IW {
 		return _instance;
 	}
 
-	public boolean containsKey(java.lang.String key) {
-		return PropsUtil.containsKey(key);
+	public void addProperties(java.util.Properties properties) {
+		PropsUtil.addProperties(properties);
+	}
+
+	public boolean contains(java.lang.String key) {
+		return PropsUtil.contains(key);
 	}
 
 	public java.lang.String get(java.lang.String key) {
@@ -42,12 +46,8 @@ public class PropsUtil_IW {
 	}
 
 	public java.lang.String get(java.lang.String key,
-		com.germinus.easyconf.Filter filter) {
+		com.liferay.portal.kernel.configuration.Filter filter) {
 		return PropsUtil.get(key, filter);
-	}
-
-	public java.lang.String get(long companyId, java.lang.String key) {
-		return PropsUtil.get(companyId, key);
 	}
 
 	public java.lang.String[] getArray(java.lang.String key) {
@@ -55,7 +55,7 @@ public class PropsUtil_IW {
 	}
 
 	public java.lang.String[] getArray(java.lang.String key,
-		com.germinus.easyconf.Filter filter) {
+		com.liferay.portal.kernel.configuration.Filter filter) {
 		return PropsUtil.getArray(key, filter);
 	}
 
@@ -63,16 +63,12 @@ public class PropsUtil_IW {
 		return PropsUtil.getProperties();
 	}
 
-	public java.util.Enumeration getOrderedPropertyNames() {
-		return PropsUtil.getOrderedPropertyNames();
+	public void removeProperties(java.util.Properties properties) {
+		PropsUtil.removeProperties(properties);
 	}
 
 	public void set(java.lang.String key, java.lang.String value) {
 		PropsUtil.set(key, value);
-	}
-
-	public void set(long companyId, java.lang.String key, java.lang.String value) {
-		PropsUtil.set(companyId, key, value);
 	}
 
 	private PropsUtil_IW() {

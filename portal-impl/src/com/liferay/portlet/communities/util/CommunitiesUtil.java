@@ -22,9 +22,8 @@
 
 package com.liferay.portlet.communities.util;
 
-import com.germinus.easyconf.Filter;
-
 import com.liferay.portal.events.EventsProcessor;
+import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Group;
@@ -123,7 +122,7 @@ public class CommunitiesUtil {
 			String[] eventClasses = StringUtil.split(
 				PropsUtil.get(
 					PropsUtil.LAYOUT_CONFIGURATION_ACTION_DELETE,
-					Filter.by(layout.getType())));
+					new Filter(layout.getType())));
 
 			EventsProcessor.process(
 				PropsUtil.LAYOUT_CONFIGURATION_ACTION_DELETE, eventClasses, req,

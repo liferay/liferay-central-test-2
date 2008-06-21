@@ -20,16 +20,16 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
+package com.liferay.portal.configuration;
 
 import com.germinus.easyconf.AggregatedProperties;
 import com.germinus.easyconf.ComponentConfiguration;
 import com.germinus.easyconf.ComponentProperties;
 import com.germinus.easyconf.EasyConf;
 
+import com.liferay.portal.kernel.configuration.Configuration;
+import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Company;
-import com.liferay.portal.service.CompanyLocalServiceUtil;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -41,51 +41,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.MapConfiguration;
 
 /**
- * <a href="ExtPropertiesLoader.java.html"><b><i>View Source</i></b></a>
+ * <a href="ConfigurationImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ExtPropertiesLoader {
-
-	public static ExtPropertiesLoader getInstance(
-		ClassLoader classLoader, String name) {
-
-		ExtPropertiesLoader props = _propsPool.get(name);
-
-		if (props == null) {
-			props = new ExtPropertiesLoader(classLoader, name);
-
-			_propsPool.put(name, props);
-		}
-
-		return props;
-	}
-
-	public static ExtPropertiesLoader getInstance(
-		ClassLoader classLoader, String name, long companyId) {
-
-		String key = name + _COMPANY_ID_SEPARATOR + companyId;
-
-		ExtPropertiesLoader props = _propsPool.get(key);
-
-		if (props == null) {
-			props = new ExtPropertiesLoader(classLoader, name, companyId);
-
-			_propsPool.put(key, props);
-		}
-
-		return props;
-	}
+public class ConfigurationImpl implements Configuration {
 
 	public void addProperties(Properties properties) {
-		ComponentProperties componentProperties = _conf.getProperties();
+		ComponentProperties componentProperties =
+			_componentConfiguration.getProperties();
 
 		AggregatedProperties aggregatedProperties =
 			(AggregatedProperties)componentProperties.toConfiguration();
@@ -93,14 +62,14 @@ public class ExtPropertiesLoader {
 		aggregatedProperties.addConfiguration(new MapConfiguration(properties));
 	}
 
-	public boolean containsKey(String key) {
+	public boolean contains(String key) {
 		return getComponentProperties().containsKey(key);
 	}
 
 	public String get(String key) {
-		if (_PRINT_DUPLICATE_KEYS) {
+		if (_PRINT_DUPLICATE_CALLS_TO_GET) {
 			if (_keys.contains(key)) {
-				System.out.println("Duplicate key " + key);
+				System.out.println("Duplicate call to get " + key);
 			}
 			else {
 				_keys.add(key);
@@ -110,8 +79,9 @@ public class ExtPropertiesLoader {
 		return getComponentProperties().getString(key);
 	}
 
-	public void set(String key, String value) {
-		getComponentProperties().setProperty(key, value);
+	public String get(String key, Filter filter) {
+		return getComponentProperties().getString(
+			key, getEasyConfFilter(filter));
 	}
 
 	public String[] getArray(String key) {
@@ -139,6 +109,11 @@ public class ExtPropertiesLoader {
 		return array;
 	}
 
+	public String[] getArray(String key, Filter filter) {
+		return getComponentProperties().getStringArray(
+			key, getEasyConfFilter(filter));
+	}
+
 	public Properties getProperties() {
 
 		// For some strange reason, componentProperties.getProperties() returns
@@ -149,12 +124,12 @@ public class ExtPropertiesLoader {
 		// method fixes the weird behavior by returing properties with the
 		// correct values.
 
-		Properties props = new Properties();
+		Properties properties = new Properties();
 
-		ComponentProperties componentProps = getComponentProperties();
+		ComponentProperties componentProperties = getComponentProperties();
 
 		Iterator<Map.Entry<Object, Object>> itr =
-			componentProps.getProperties().entrySet().iterator();
+			componentProperties.getProperties().entrySet().iterator();
 
 		while (itr.hasNext()) {
 			Map.Entry<Object, Object> entry = itr.next();
@@ -162,18 +137,15 @@ public class ExtPropertiesLoader {
 			String key = (String)entry.getKey();
 			String value = (String)entry.getValue();
 
-			props.setProperty(key, value);
+			properties.setProperty(key, value);
 		}
 
-		return props;
-	}
-
-	public ComponentProperties getComponentProperties() {
-		return _conf.getProperties();
+		return properties;
 	}
 
 	public void removeProperties(Properties properties) {
-		ComponentProperties componentProperties = _conf.getProperties();
+		ComponentProperties componentProperties =
+			_componentConfiguration.getProperties();
 
 		AggregatedProperties aggregatedProperties =
 			(AggregatedProperties)componentProperties.toConfiguration();
@@ -181,7 +153,7 @@ public class ExtPropertiesLoader {
 		for (int i = 0; i < aggregatedProperties.getNumberOfConfigurations();
 				i++) {
 
-			Configuration configuration =
+			org.apache.commons.configuration.Configuration configuration =
 				aggregatedProperties.getConfiguration(i);
 
 			if (!(configuration instanceof MapConfiguration)) {
@@ -196,36 +168,33 @@ public class ExtPropertiesLoader {
 		}
 	}
 
-	private ExtPropertiesLoader(ClassLoader classLoader, String name) {
-		_conf = EasyConf.getConfiguration(_getFileName(classLoader, name));
-
-		_printSources();
+	public void set(String key, String value) {
+		getComponentProperties().setProperty(key, value);
 	}
 
-	private ExtPropertiesLoader(
-		ClassLoader classLoader, String name, long companyId) {
+	protected ConfigurationImpl(ClassLoader classLoader, String name) {
+		_componentConfiguration = EasyConf.getConfiguration(
+			getFileName(classLoader, name));
 
-		String webId = null;
+		printSources();
+	}
 
-		if (companyId > 0) {
-			try {
-				Company company = CompanyLocalServiceUtil.getCompanyById(
-					companyId);
+	protected ComponentProperties getComponentProperties() {
+		return _componentConfiguration.getProperties();
+	}
 
-				webId = company.getWebId();
-			}
-			catch (Exception e) {
-			}
+	protected com.germinus.easyconf.Filter getEasyConfFilter(Filter filter) {
+		com.germinus.easyconf.Filter easyConfFilter =
+			com.germinus.easyconf.Filter.by(filter.getSelectors());
+
+		if (filter.getVariables() != null) {
+			easyConfFilter.setVariables(filter.getVariables());
 		}
 
-		_conf = EasyConf.getConfiguration(
-			webId, _getFileName(classLoader, name));
-
-		_printSources(companyId, webId);
+		return easyConfFilter;
 	}
 
-	private String _getFileName(ClassLoader classLoader, String name) {
-
+	protected String getFileName(ClassLoader classLoader, String name) {
 		URL url = classLoader.getResource(name + ".properties");
 
 		// If the resource is located inside of a .jar, then
@@ -253,35 +222,19 @@ public class ExtPropertiesLoader {
 		return name;
 	}
 
-	private void _printSources() {
-		_printSources(0, null);
-	}
-
-	private void _printSources(long companyId, String webId) {
+	protected void printSources() {
 		List<String> sources = getComponentProperties().getLoadedSources();
 
 		for (int i = sources.size() - 1; i >= 0; i--) {
 			String source = sources.get(i);
 
-			String info = "Loading " + source;
-
-			if (companyId > 0) {
-				info +=
-					" for {companyId=" + companyId + ", webId=" + webId + "}";
-			}
-
-			System.out.println(info);
+			System.out.println("Loading " + source);
 		}
 	}
 
-	private static Map<String, ExtPropertiesLoader> _propsPool =
-		new ConcurrentHashMap<String, ExtPropertiesLoader>();
+	private static final boolean _PRINT_DUPLICATE_CALLS_TO_GET = false;
 
-	private static final String _COMPANY_ID_SEPARATOR = "_COMPANY_ID_";
-
-	private static final boolean _PRINT_DUPLICATE_KEYS = false;
-
-	private ComponentConfiguration _conf;
+	private ComponentConfiguration _componentConfiguration;
 	private Set<String> _keys = new HashSet<String>();
 
 }

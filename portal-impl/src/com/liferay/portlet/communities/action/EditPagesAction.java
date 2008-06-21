@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.communities.action;
 
-import com.germinus.easyconf.Filter;
-
 import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.LayoutHiddenException;
 import com.liferay.portal.LayoutNameException;
@@ -35,6 +33,7 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.RemoteExportException;
 import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.events.EventsProcessor;
+import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
@@ -531,7 +530,7 @@ public class EditPagesAction extends PortletAction {
 			String[] eventClasses = StringUtil.split(
 				PropsUtil.get(
 					PropsUtil.LAYOUT_CONFIGURATION_ACTION_UPDATE,
-					Filter.by(type)));
+					new Filter(type)));
 
 			EventsProcessor.process(
 				PropsUtil.LAYOUT_CONFIGURATION_ACTION_UPDATE, eventClasses,

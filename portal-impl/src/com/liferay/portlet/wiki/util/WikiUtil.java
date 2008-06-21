@@ -22,8 +22,7 @@
 
 package com.liferay.portlet.wiki.util;
 
-import com.germinus.easyconf.Filter;
-
+import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -290,7 +289,7 @@ public class WikiUtil {
 
 	private String _getEditPage(String format) {
 		return PropsUtil.get(
-			PropsUtil.WIKI_FORMATS_EDIT_PAGE, Filter.by(format));
+			PropsUtil.WIKI_FORMATS_EDIT_PAGE, new Filter(format));
 	}
 
 	private WikiEngine _getEngine(String format) throws WikiFormatException {
@@ -299,7 +298,7 @@ public class WikiUtil {
 		if (engine == null) {
 			try {
 				String engineClass = PropsUtil.get(
-					PropsUtil.WIKI_FORMATS_ENGINE, Filter.by(format));
+					PropsUtil.WIKI_FORMATS_ENGINE, new Filter(format));
 
 				if (engineClass != null) {
 					if (!InstancePool.contains(engineClass)) {
@@ -336,12 +335,12 @@ public class WikiUtil {
 
 	private String _getHelpPage(String format) {
 		return PropsUtil.get(
-			PropsUtil.WIKI_FORMATS_HELP_PAGE, Filter.by(format));
+			PropsUtil.WIKI_FORMATS_HELP_PAGE, new Filter(format));
 	}
 
 	private String _getHelpURL(String format) {
 		return PropsUtil.get(
-			PropsUtil.WIKI_FORMATS_HELP_URL, Filter.by(format));
+			PropsUtil.WIKI_FORMATS_HELP_URL, new Filter(format));
 	}
 
 	private Map<String, Boolean> _getLinks(WikiPage page)
@@ -361,7 +360,7 @@ public class WikiUtil {
 		ClassLoader classLoader = getClass().getClassLoader();
 
 		String configurationFile = PropsUtil.get(
-			propertyName, Filter.by(format));
+			propertyName, new Filter(format));
 
 		if (Validator.isNotNull(configurationFile)) {
 			return HttpUtil.URLtoString(

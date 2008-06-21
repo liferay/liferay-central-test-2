@@ -22,9 +22,8 @@
 
 package com.liferay.portlet.communities.action;
 
-import com.germinus.easyconf.Filter;
-
 import com.liferay.portal.events.EventsProcessor;
+import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -162,7 +161,7 @@ public class UpdatePageAction extends JSONAction {
 		String[] eventClasses = StringUtil.split(
 			PropsUtil.get(
 				PropsUtil.LAYOUT_CONFIGURATION_ACTION_UPDATE,
-				Filter.by(layout.getType())));
+				new Filter(layout.getType())));
 
 		EventsProcessor.process(
 			PropsUtil.LAYOUT_CONFIGURATION_ACTION_UPDATE, eventClasses, req,

@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
-import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
@@ -338,9 +337,6 @@ public class PortalInstances {
 		}
 
 		if (GetterUtil.getBoolean(PropsUtil.get(
-				CompanyConstants.SYSTEM,
-				PropsUtil.JOURNAL_SYNC_CONTENT_SEARCH_ON_STARTUP)) ||
-			GetterUtil.getBoolean(PropsUtil.get(
 				PropsUtil.JOURNAL_SYNC_CONTENT_SEARCH_ON_STARTUP))) {
 
 			try {

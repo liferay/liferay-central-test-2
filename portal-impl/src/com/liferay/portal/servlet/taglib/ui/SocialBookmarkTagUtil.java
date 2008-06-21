@@ -22,8 +22,7 @@
 
 package com.liferay.portal.servlet.taglib.ui;
 
-import com.germinus.easyconf.Filter;
-
+import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -91,8 +90,7 @@ public class SocialBookmarkTagUtil {
 		vars.put("liferay:social-bookmark:title", HttpUtil.encodeURL(title));
 
 		String postUrl = PropsUtil.get(
-			PropsUtil.SOCIAL_BOOKMARK_POST_URL,
-			Filter.by(type).setVariables(vars));
+			PropsUtil.SOCIAL_BOOKMARK_POST_URL, new Filter(type, vars));
 
 		return postUrl;
 	}

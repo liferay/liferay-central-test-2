@@ -51,8 +51,6 @@
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-<%@ page import="com.germinus.easyconf.Filter" %>
-
 <%@ page import="com.liferay.counter.service.CounterLocalServiceUtil" %>
 <%@ page import="com.liferay.lock.DuplicateLockException" %>
 <%@ page import="com.liferay.lock.model.Lock" %>
@@ -63,6 +61,7 @@
 <%@ page import="com.liferay.portal.captcha.CaptchaTextException" %>
 <%@ page import="com.liferay.portal.kernel.bean.BeanPropertiesUtil" %>
 <%@ page import="com.liferay.portal.kernel.cal.Recurrence" %>
+<%@ page import="com.liferay.portal.kernel.configuration.Filter" %>
 <%@ page import="com.liferay.portal.kernel.dao.DAOParamUtil" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.DisplayTerms" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.ResultRow" %>

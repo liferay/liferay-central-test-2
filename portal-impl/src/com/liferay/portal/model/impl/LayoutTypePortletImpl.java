@@ -22,9 +22,8 @@
 
 package com.liferay.portal.model.impl;
 
-import com.germinus.easyconf.Filter;
-
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -1003,7 +1002,7 @@ public class LayoutTypePortletImpl
 
 		String selector2 = layout.getFriendlyURL();
 
-		return PropsUtil.getArray(position, Filter.by(selector1, selector2));
+		return PropsUtil.getArray(position, new Filter(selector1, selector2));
 	}
 
 	protected List<Portlet> getStaticPortlets(String position)

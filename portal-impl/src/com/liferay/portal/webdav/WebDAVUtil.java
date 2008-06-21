@@ -22,9 +22,8 @@
 
 package com.liferay.portal.webdav;
 
-import com.germinus.easyconf.Filter;
-
 import com.liferay.portal.NoSuchGroupException;
+import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -239,7 +238,7 @@ public class WebDAVUtil {
 
 		for (String token: tokens) {
 			String className = PropsUtil.get(
-				PropsUtil.WEBDAV_STORAGE_CLASS, Filter.by(token));
+				PropsUtil.WEBDAV_STORAGE_CLASS, new Filter(token));
 
 			if (Validator.isNotNull(className)) {
 				_storageMap.put(className, token);

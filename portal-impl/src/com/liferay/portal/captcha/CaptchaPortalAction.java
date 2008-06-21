@@ -23,18 +23,13 @@
 package com.liferay.portal.captcha;
 
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsFiles;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.ExtPropertiesLoader;
-
-import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import nl.captcha.servlet.CaptchaProducer;
-import nl.captcha.util.Helper;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -49,14 +44,6 @@ import org.apache.struts.action.ActionMapping;
  */
 public class CaptchaPortalAction extends Action {
 
-	public CaptchaPortalAction() {
-		Properties props =  ExtPropertiesLoader.getInstance(
-			getClass().getClassLoader(), PropsFiles.CAPTCHA).getProperties();
-
-		_producer = (CaptchaProducer)Helper.ThingFactory.loadImpl(
-			Helper.ThingFactory.CPROD, props);
-	}
-
 	public ActionForward execute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,
 			HttpServletResponse res)
@@ -65,11 +52,13 @@ public class CaptchaPortalAction extends Action {
 		try {
 			HttpSession ses = req.getSession();
 
-			String captchaText = _producer.createText();
+			CaptchaProducer captchaProducer = CaptchaUtil.getCaptchaProducer();
+
+			String captchaText = captchaProducer.createText();
 
 			ses.setAttribute(WebKeys.CAPTCHA_TEXT, captchaText);
 
-			_producer.createImage(res.getOutputStream(), captchaText);
+			captchaProducer.createImage(res.getOutputStream(), captchaText);
 
 			return null;
 		}
@@ -79,7 +68,5 @@ public class CaptchaPortalAction extends Action {
 			return null;
 		}
 	}
-
-	private CaptchaProducer _producer;
 
 }

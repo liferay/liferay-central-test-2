@@ -20,20 +20,34 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.kernel.configuration;
+
+import java.util.Properties;
 
 /**
- * <a href="PropsFiles.java.html"><b><i>View Source</i></b></a>
+ * <a href="Configuration.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PropsFiles {
+public interface Configuration {
 
-	public static final String CAPTCHA = "captcha";
+	public void addProperties(Properties properties);
 
-	public static final String CONTENT_TYPES = "content-types";
+	public boolean contains(String key);
 
-	public static final String PORTAL = "portal";
+	public String get(String key);
+
+	public String get(String key, Filter filter);
+
+	public String[] getArray(String key);
+
+	public String[] getArray(String key, Filter filter);
+
+	public Properties getProperties();
+
+	public void removeProperties(Properties properties);
+
+	public void set(String key, String value);
 
 }

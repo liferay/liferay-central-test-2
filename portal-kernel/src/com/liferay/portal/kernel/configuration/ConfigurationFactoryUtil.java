@@ -20,20 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.kernel.configuration;
 
 /**
- * <a href="PropsFiles.java.html"><b><i>View Source</i></b></a>
+ * <a href="ConfigurationFactoryUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PropsFiles {
+public class ConfigurationFactoryUtil {
 
-	public static final String CAPTCHA = "captcha";
+	public static Configuration getConfiguration(
+		ClassLoader classLoader, String name) {
 
-	public static final String CONTENT_TYPES = "content-types";
+		return getConfigurationFactory().getConfiguration(classLoader, name);
+	}
 
-	public static final String PORTAL = "portal";
+	public static ConfigurationFactory getConfigurationFactory() {
+		return _configurationFactory;
+	}
+
+	public static void setConfigurationFactory(
+		ConfigurationFactory configurationFactory) {
+
+		_configurationFactory = configurationFactory;
+	}
+
+	private static ConfigurationFactory _configurationFactory;
 
 }

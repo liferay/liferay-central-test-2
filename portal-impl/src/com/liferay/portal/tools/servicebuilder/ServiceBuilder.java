@@ -243,6 +243,7 @@ public class ServiceBuilder {
 				"\t-Dservice.tpl.portlet_custom_sql_util=" + _TPL_ROOT + "portlet_custom_sql_util.ftl\n"+
 				"\t-Dservice.tpl.principal_bean=" + _TPL_ROOT + "principal_bean.ftl\n"+
 				"\t-Dservice.tpl.props=" + _TPL_ROOT + "props.ftl\n"+
+				"\t-Dservice.tpl.props_keys=" + _TPL_ROOT + "props_keys.ftl\n"+
 				"\t-Dservice.tpl.props_util=" + _TPL_ROOT + "props_util.ftl\n"+
 				"\t-Dservice.tpl.remoting_xml=" + _TPL_ROOT + "remoting_xml.ftl\n"+
 				"\t-Dservice.tpl.service=" + _TPL_ROOT + "service.ftl\n"+
@@ -497,6 +498,7 @@ public class ServiceBuilder {
 		_tplPrincipalBean = _getTplProperty(
 			"principal_bean", _tplPrincipalBean);
 		_tplProps = _getTplProperty("props", _tplProps);
+		_tplPropsKeys = _getTplProperty("props_keys", _tplPropsKeys);
 		_tplPropsUtil = _getTplProperty("props_util", _tplPropsUtil);
 		_tplRemotingXml = _getTplProperty("remoting_xml", _tplRemotingXml);
 		_tplService = _getTplProperty("service", _tplService);
@@ -1039,6 +1041,7 @@ public class ServiceBuilder {
 				_createPortletCustomSQLUtil();
 				_createPrincipalBean();
 				_createProps();
+				_createPropsKeys();
 				_createPropsUtil();
 				_createSpringDataSourceXML();
 				_createSpringUtil();
@@ -2294,6 +2297,24 @@ public class ServiceBuilder {
 		// Write file
 
 		FileUtil.write(propsFile, content, true);
+	}
+
+	private void _createPropsKeys() throws Exception {
+		if (_propsUtilPackage.equals("com.liferay.portal.util")) {
+			return;
+		}
+
+		// Content
+
+		String content = _processTemplate(_tplPropsKeys);
+
+		// Write file
+
+		File ejbFile = new File(
+			_implDir + "/" + StringUtil.replace(_propsUtilPackage, ".", "/") +
+				"/PropsKeys.java");
+
+		writeFile(ejbFile, content, _author);
 	}
 
 	private void _createPropsUtil() throws Exception {
@@ -3636,6 +3657,7 @@ public class ServiceBuilder {
 		_TPL_ROOT + "portlet_custom_sql_util.ftl";
 	private String _tplPrincipalBean = _TPL_ROOT + "principal_bean.ftl";
 	private String _tplProps = _TPL_ROOT + "props.ftl";
+	private String _tplPropsKeys = _TPL_ROOT + "props_keys.ftl";
 	private String _tplPropsUtil = _TPL_ROOT + "props_util.ftl";
 	private String _tplRemotingXml = _TPL_ROOT + "remoting_xml.ftl";
 	private String _tplService = _TPL_ROOT + "service.ftl";
