@@ -382,7 +382,7 @@ portletDisplay.setURLPortlet(themeDisplay.getCDNHost() + portletIcon);
 
 // URL close
 
-String urlClose = "javascript: closePortlet('" + plid.longValue() + "', '" + portletDisplay.getId() + "', '" + themeDisplay.getDoAsUserId() + "');";
+String urlClose = themeDisplay.getPathMain() + "/portal/update_layout?p_l_id=" + plid.longValue() + "&p_p_id=" + portletDisplay.getId() + "&doAsUserId=" + themeDisplay.getDoAsUserId() + "&" + Constants.CMD + "=" + Constants.DELETE + "&referer=" + HttpUtil.encodeURL(themeDisplay.getPathMain() + "/portal/layout?p_l_id=" + plid.longValue() + "&doAsUserId=" + themeDisplay.getDoAsUserId()) + "&refresh=1";
 
 portletDisplay.setURLClose(urlClose.toString());
 
@@ -406,7 +406,7 @@ urlConfiguration.setParameter("returnToFullPageURL", currentURL);
 urlConfiguration.setParameter("portletResource", portletDisplay.getId());
 urlConfiguration.setParameter("resourcePrimKey", PortletPermissionUtil.getPrimaryKey(plid.longValue(), portlet.getPortletId()));
 
-portletDisplay.setURLConfiguration("javascript: location.href = '" + HttpUtil.encodeURL(urlConfiguration.toString()) + "&" + PortalUtil.getPortletNamespace(PortletKeys.PORTLET_CONFIGURATION) + "previewWidth=' + document.getElementById('p_p_id" + portletDisplay.getNamespace() + "').offsetWidth;");
+portletDisplay.setURLConfiguration(urlConfiguration.toString() + "&" + PortalUtil.getPortletNamespace(PortletKeys.PORTLET_CONFIGURATION));
 
 // URL edit
 
@@ -545,13 +545,13 @@ portletDisplay.setURLMax(urlMax.toString());
 
 // URL min
 
-String urlMin = "javascript: minimizePortlet('" + plid.longValue() + "', '" + portletDisplay.getId() + "', " + portletDisplay.isStateMin() + ", '" + themeDisplay.getDoAsUserId() + "');";
+String urlMin = themeDisplay.getPathMain() + "/portal/update_layout?p_l_id=" + plid.longValue() + "&p_p_id=" + portletDisplay.getId() + "&p_p_restore=" + portletDisplay.isStateMin() + "&doAsUserId=" + themeDisplay.getDoAsUserId() + "&" + Constants.CMD + "=minimize&referer=" + HttpUtil.encodeURL(themeDisplay.getPathMain() + "/portal/layout?p_l_id=" + plid.longValue() + "&doAsUserId=" + themeDisplay.getDoAsUserId()) + "&refresh=1";
 
 portletDisplay.setURLMin(urlMin);
 
 // URL portlet css
 
-String urlPortletCss = "javascript: Liferay.PortletCSS.init('" + portletDisplay.getId() + "');";
+String urlPortletCss = "javascript: ;";
 
 portletDisplay.setURLPortletCss(urlPortletCss.toString());
 
@@ -576,7 +576,7 @@ else {
 
 urlPrint.setEscapeXml(false);
 
-portletDisplay.setURLPrint("javascript: location.href = '" + urlPrint.toString() + "';");
+portletDisplay.setURLPrint(urlPrint.toString());
 
 // URL refresh
 
@@ -825,29 +825,13 @@ else {
 <c:if test="<%= !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() %>">
 		<script type="text/javascript">
 			<c:if test="<%= !runtimePortlet %>">
-				document.getElementById("p_p_id<%= renderResImpl.getNamespace() %>").portletId = "<%= portletDisplay.getId() %>";
-				document.getElementById("p_p_id<%= renderResImpl.getNamespace() %>").columnPos = <%= columnPos %>;
-
-				<c:if test='<%= !staticVar.equals("no") %>'>
-					document.getElementById("p_p_id<%= renderResImpl.getNamespace() %>").isStatic = "<%= staticVar %>";
-				</c:if>
-
-				if (!Liferay.Portlet.isAjax("<%= portletDisplay.getId() %>")) {
-					Liferay.Portlet.process("<%= portletDisplay.getId() %>");
-				}
-			</c:if>
-
-			<c:if test="<%= showConfigurationIcon %>">
-				jQuery(
-					function() {
-						Liferay.Util.portletTitleEdit(
-							{
-								obj: jQuery("#p_p_id_<%= portletDisplay.getId() %>_"),
-								plid: "<%= layout.getPlid() %>",
-								doAsUserId: "<%= themeDisplay.getDoAsUserId() %>",
-								portletId: "<%= portletDisplay.getId() %>"
-							}
-						);
+				Liferay.Portlet.onLoad(
+					{
+						canEditTitle: <%= showConfigurationIcon %>,
+						columnPos: <%= columnPos %>,
+						isStatic: '<%= staticVar %>',
+						namespacedId: 'p_p_id<%= renderResImpl.getNamespace() %>',
+						portletId: '<%= portletDisplay.getId() %>'
 					}
 				);
 			</c:if>

@@ -34,10 +34,8 @@
 		image = "minimize";
 	}
 
-	url = portletDisplay.getURLMin();
+	String iconSrc = themeDisplay.getPathThemeImages() + "/portlet/" + image + ".png";
 	%>
 
-	<span id="p_p_body_<%= portletDisplay.getId() %>_min_buttons">
-	<a href="<%= url %>"><img align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/portlet/<%= image %>.png" title="<%= LanguageUtil.get(pageContext, image) %>" /></a>
-	</span>
+	<liferay-ui:icon message="<%= image %>" src="<%= iconSrc %>" url="<%= portletDisplay.getURLMin() %>" toolTip="<%= false %>" cssClass="portlet-minimize-icon" />
 </c:if>

@@ -53,6 +53,10 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	margin-bottom: -10000px;
 }
 
+.nojs .lfr-js-required {
+	display: none;
+}
+
 /* ---------- Add content styles ---------- */
 
 .portal-add-content-search {

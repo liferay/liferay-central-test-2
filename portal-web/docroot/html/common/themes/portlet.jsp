@@ -147,17 +147,27 @@ containerStyles = sm.toString();
 							<c:if test="<%= tilesPortletDecorateBoolean && portletDisplay.isShowConfigurationIcon() %>">
 								<span class="portlet-title-default"><%= portletDisplay.getTitle() %></span>
 
-								- <a href="<%= portletDisplay.getURLPortletCss() %>"><liferay-ui:message key="look-and-feel" /></a>
+								<span class="portlet-actions">
+									<span class="portlet-css lfr-js-required">
+										- <a href="<%= portletDisplay.getURLPortletCss() %>"><liferay-ui:message key="look-and-feel" /></a>
+									</span>
 
-								- <a href="<%= portletDisplay.getURLConfiguration() %>"><liferay-ui:message key="configuration" /></a>
+									<span class="portlet-configuration">
+										- <a href="<%= portletDisplay.getURLConfiguration() %>"><liferay-ui:message key="configuration" /></a>
+									</span>
 
-								<c:if test="<%= portletDisplay.isShowEditIcon() %>">
-									- <a href="<%= portletDisplay.getURLEdit() %>"><liferay-ui:message key="preferences" /></a>
-								</c:if>
+									<c:if test="<%= portletDisplay.isShowEditIcon() %>">
+										<span class="portlet-edit">
+											- <a href="<%= portletDisplay.getURLEdit() %>"><liferay-ui:message key="preferences" /></a>
+										</span>
+									</c:if>
 
-								<c:if test="<%= portletDisplay.isShowCloseIcon() %>">
-									- <a href="<%= portletDisplay.getURLClose() %>"><liferay-ui:message key="close" /></a>
-								</c:if>
+									<c:if test="<%= portletDisplay.isShowCloseIcon() %>">
+										<span class="portlet-close">
+											- <a href="<%= portletDisplay.getURLClose() %>"><liferay-ui:message key="close" /></a>
+										</span>
+									</c:if>
+								</span>
 							</c:if>
 
 							<c:if test="<%= portletDisplay.isShowBackIcon() %>">

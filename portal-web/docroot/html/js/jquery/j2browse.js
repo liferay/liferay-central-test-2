@@ -60,7 +60,7 @@ jQuery Browser Plugin
 
 		// Define the 'addSelectors' function which adds Browser Selectors to a tag; by default <HTML>.
 		addSelectors: function(e) {
-			jQuery(e || 'html').addClass(o.selectors);
+			jQuery(e || 'html').addClass(o.selectors).removeClass('nojs');
 		},
 
 		// Define the 'removeSelectors' function which removes Browser Selectors to a tag; by default <HTML>.
