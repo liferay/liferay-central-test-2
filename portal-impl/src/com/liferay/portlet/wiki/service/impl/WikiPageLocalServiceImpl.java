@@ -600,8 +600,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		return new WikiPageDisplayImpl(
 			page.getUserId(), page.getNodeId(), page.getTitle(),
 			page.getVersion(), page.getContent(), formattedContent,
-			page.getFormat(), page.getHead(), page.getParentTitle(),
-			page.getRedirectTitle(), page.getAttachmentsFiles());
+			page.getFormat(), page.getHead(), page.getAttachmentsFiles());
 	}
 
 	public List<WikiPage> getPages(long nodeId, int start, int end)
