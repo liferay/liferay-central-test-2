@@ -166,6 +166,8 @@ import com.liferay.portal.service.persistence.AddressPersistence;
 import com.liferay.portal.service.persistence.AddressUtil;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
 import com.liferay.portal.service.persistence.ClassNameUtil;
+import com.liferay.portal.service.persistence.CompanyFinder;
+import com.liferay.portal.service.persistence.CompanyFinderUtil;
 import com.liferay.portal.service.persistence.CompanyPersistence;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.ContactPersistence;
@@ -415,6 +417,14 @@ public abstract class LayoutSetLocalServiceBaseImpl
 
 	public void setCompanyPersistence(CompanyPersistence companyPersistence) {
 		this.companyPersistence = companyPersistence;
+	}
+
+	public CompanyFinder getCompanyFinder() {
+		return companyFinder;
+	}
+
+	public void setCompanyFinder(CompanyFinder companyFinder) {
+		this.companyFinder = companyFinder;
 	}
 
 	public ContactLocalService getContactLocalService() {
@@ -1375,6 +1385,10 @@ public abstract class LayoutSetLocalServiceBaseImpl
 			companyPersistence = CompanyUtil.getPersistence();
 		}
 
+		if (companyFinder == null) {
+			companyFinder = CompanyFinderUtil.getFinder();
+		}
+
 		if (contactLocalService == null) {
 			contactLocalService = ContactLocalServiceFactory.getImpl();
 		}
@@ -1816,6 +1830,7 @@ public abstract class LayoutSetLocalServiceBaseImpl
 	protected CompanyLocalService companyLocalService;
 	protected CompanyService companyService;
 	protected CompanyPersistence companyPersistence;
+	protected CompanyFinder companyFinder;
 	protected ContactLocalService contactLocalService;
 	protected ContactService contactService;
 	protected ContactPersistence contactPersistence;

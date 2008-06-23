@@ -1,6 +1,24 @@
 <?xml version="1.0"?>
 
 <custom-sql>
+	<sql id="com.liferay.portal.service.persistence.CompanyFinder.findByV_A">
+		<![CDATA[
+			SELECT
+				{Company.*}
+			FROM
+				Company
+			WHERE
+				(virtualHost = ?) OR
+				(aliases LIKE ?) OR
+				(
+					(allowWildCard = ?) AND
+					(
+						(virtualHost = ?) OR
+						(aliases LIKE ?)
+					)
+				)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.countByGroupId">
 		<![CDATA[
 			SELECT

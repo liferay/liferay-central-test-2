@@ -4,7 +4,7 @@
 	<service name="Portal_WebsiteService" provider="java:RPC" style="rpc" use="encoded">
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.portal.liferay.com"/>
 		<parameter name="wsdlServiceElement" value="WebsiteServiceSoapService"/>
-		<parameter name="schemaUnqualified" value="urn:http.service.portal.liferay.com,http://model.portal.liferay.com"/>
+		<parameter name="schemaUnqualified" value="http://model.portal.liferay.com,urn:http.service.portal.liferay.com"/>
 		<parameter name="wsdlServicePort" value="Portal_WebsiteService"/>
 		<parameter name="className" value="com.liferay.portal.service.http.WebsiteServiceSoap"/>
 		<parameter name="wsdlPortType" value="WebsiteServiceSoap"/>
@@ -32,8 +32,8 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="typeId" type="tns:int"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="primary" type="tns:boolean"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="getWebsites addWebsite updateWebsite deleteWebsite getWebsite"/>
-		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://model.portal.liferay.com" qname="ns:ArrayOf_tns2_WebsiteSoap" type="java:com.liferay.portal.model.WebsiteSoap[]" innerType="cmp-ns:WebsiteSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<parameter name="allowedMethods" value="deleteWebsite updateWebsite getWebsites addWebsite getWebsite"/>
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:WebsiteSoap" type="java:com.liferay.portal.model.WebsiteSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://model.portal.liferay.com" qname="ns:ArrayOf_tns2_WebsiteSoap" type="java:com.liferay.portal.model.WebsiteSoap[]" innerType="cmp-ns:WebsiteSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 	</service>
 </deployment>

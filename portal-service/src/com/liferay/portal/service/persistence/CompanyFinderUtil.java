@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
@@ -20,30 +19,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/init.jsp" %>
+package com.liferay.portal.service.persistence;
 
-<%@ page import="com.liferay.portal.AccountNameException" %>
-<%@ page import="com.liferay.portal.CompanyAliasException" %>
-<%@ page import="com.liferay.portal.CompanyMxException" %>
-<%@ page import="com.liferay.portal.CompanyVirtualHostException" %>
-<%@ page import="com.liferay.portal.CompanyWebIdException" %>
-<%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %>
-<%@ page import="com.liferay.portal.servlet.PortalSessionContext" %>
+/**
+ * <a href="CompanyFinderUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class CompanyFinderUtil {
+	public static com.liferay.portal.model.Company findByV_A(
+		java.lang.String virtualHost) throws com.liferay.portal.SystemException {
+		return getFinder().findByV_A(virtualHost);
+	}
 
-<%@ page import="java.awt.BasicStroke" %>
-<%@ page import="java.awt.Color" %>
-<%@ page import="java.awt.Font" %>
+	public static CompanyFinder getFinder() {
+		return _getUtil()._finder;
+	}
 
-<%@ page import="org.apache.log4j.Level" %>
-<%@ page import="org.apache.log4j.Logger" %>
-<%@ page import="org.apache.log4j.LogManager" %>
+	public void setFinder(CompanyFinder finder) {
+		_finder = finder;
+	}
 
-<%@ page import="org.jfree.chart.JFreeChart" %>
-<%@ page import="org.jfree.chart.plot.DialShape" %>
-<%@ page import="org.jfree.chart.plot.MeterInterval" %>
-<%@ page import="org.jfree.chart.plot.MeterPlot" %>
-<%@ page import="org.jfree.chart.servlet.ServletUtilities" %>
-<%@ page import="org.jfree.data.Range" %>
-<%@ page import="org.jfree.data.general.DefaultValueDataset" %>
+	private static CompanyFinderUtil _getUtil() {
+		if (_util == null) {
+			_util = (CompanyFinderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static final String _UTIL = CompanyFinderUtil.class.getName();
+	private static CompanyFinderUtil _util;
+	private CompanyFinder _finder;
+}

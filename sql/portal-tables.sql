@@ -182,6 +182,8 @@ create table Company (
 	webId VARCHAR(75) null,
 	key_ TEXT null,
 	virtualHost VARCHAR(75) null,
+	allowWildcard BOOLEAN,
+	aliases STRING null,
 	mx VARCHAR(75) null,
 	logoId LONG
 );

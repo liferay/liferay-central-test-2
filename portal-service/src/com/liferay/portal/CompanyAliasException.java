@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
@@ -20,30 +19,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/init.jsp" %>
+package com.liferay.portal;
 
-<%@ page import="com.liferay.portal.AccountNameException" %>
-<%@ page import="com.liferay.portal.CompanyAliasException" %>
-<%@ page import="com.liferay.portal.CompanyMxException" %>
-<%@ page import="com.liferay.portal.CompanyVirtualHostException" %>
-<%@ page import="com.liferay.portal.CompanyWebIdException" %>
-<%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %>
-<%@ page import="com.liferay.portal.servlet.PortalSessionContext" %>
+/**
+ * <a href="CompanyAliasException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
+ *
+ */
+public class CompanyAliasException extends PortalException {
 
-<%@ page import="java.awt.BasicStroke" %>
-<%@ page import="java.awt.Color" %>
-<%@ page import="java.awt.Font" %>
+	public CompanyAliasException() {
+		super();
+	}
 
-<%@ page import="org.apache.log4j.Level" %>
-<%@ page import="org.apache.log4j.Logger" %>
-<%@ page import="org.apache.log4j.LogManager" %>
+	public CompanyAliasException(String msg) {
+		super(msg);
+	}
 
-<%@ page import="org.jfree.chart.JFreeChart" %>
-<%@ page import="org.jfree.chart.plot.DialShape" %>
-<%@ page import="org.jfree.chart.plot.MeterInterval" %>
-<%@ page import="org.jfree.chart.plot.MeterPlot" %>
-<%@ page import="org.jfree.chart.servlet.ServletUtilities" %>
-<%@ page import="org.jfree.data.Range" %>
-<%@ page import="org.jfree.data.general.DefaultValueDataset" %>
+	public CompanyAliasException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public CompanyAliasException(Throwable cause) {
+		super(cause);
+	}
+
+}

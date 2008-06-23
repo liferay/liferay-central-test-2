@@ -4,7 +4,7 @@
 	<service name="Portal_PhoneService" provider="java:RPC" style="rpc" use="encoded">
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.portal.liferay.com"/>
 		<parameter name="wsdlServiceElement" value="PhoneServiceSoapService"/>
-		<parameter name="schemaUnqualified" value="urn:http.service.portal.liferay.com,http://model.portal.liferay.com"/>
+		<parameter name="schemaUnqualified" value="http://model.portal.liferay.com,urn:http.service.portal.liferay.com"/>
 		<parameter name="wsdlServicePort" value="Portal_PhoneService"/>
 		<parameter name="className" value="com.liferay.portal.service.http.PhoneServiceSoap"/>
 		<parameter name="wsdlPortType" value="PhoneServiceSoap"/>
@@ -34,8 +34,8 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="typeId" type="tns:int"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="primary" type="tns:boolean"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="getPhone deletePhone addPhone updatePhone getPhones"/>
-		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://model.portal.liferay.com" qname="ns:ArrayOf_tns2_PhoneSoap" type="java:com.liferay.portal.model.PhoneSoap[]" innerType="cmp-ns:PhoneSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<parameter name="allowedMethods" value="getPhones getPhone deletePhone updatePhone addPhone"/>
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:PhoneSoap" type="java:com.liferay.portal.model.PhoneSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://model.portal.liferay.com" qname="ns:ArrayOf_tns2_PhoneSoap" type="java:com.liferay.portal.model.PhoneSoap[]" innerType="cmp-ns:PhoneSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 	</service>
 </deployment>

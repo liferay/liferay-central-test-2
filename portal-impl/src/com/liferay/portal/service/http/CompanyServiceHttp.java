@@ -73,7 +73,8 @@ import com.liferay.portal.service.CompanyServiceUtil;
 public class CompanyServiceHttp {
 	public static com.liferay.portal.model.Company addCompany(
 		HttpPrincipal httpPrincipal, java.lang.String webId,
-		java.lang.String virtualHost, java.lang.String mx)
+		java.lang.String virtualHost, boolean allowWildcard,
+		java.lang.String aliases, java.lang.String mx)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -89,15 +90,25 @@ public class CompanyServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = mx;
+			Object paramObj2 = new BooleanWrapper(allowWildcard);
+
+			Object paramObj3 = aliases;
+
+			if (aliases == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = mx;
 
 			if (mx == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
 					"addCompany",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			Object returnObj = null;
 
@@ -127,7 +138,8 @@ public class CompanyServiceHttp {
 
 	public static com.liferay.portal.model.Company updateCompany(
 		HttpPrincipal httpPrincipal, long companyId,
-		java.lang.String virtualHost, java.lang.String mx)
+		java.lang.String virtualHost, boolean allowWildcard,
+		java.lang.String aliases, java.lang.String mx)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -139,15 +151,25 @@ public class CompanyServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = mx;
+			Object paramObj2 = new BooleanWrapper(allowWildcard);
+
+			Object paramObj3 = aliases;
+
+			if (aliases == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = mx;
 
 			if (mx == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
 					"updateCompany",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			Object returnObj = null;
 

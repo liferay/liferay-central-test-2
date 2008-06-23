@@ -30,6 +30,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 Company company2 = (Company)request.getAttribute(WebKeys.SEL_COMPANY);
 
 long companyId = BeanParamUtil.getLong(company2, request, "companyId");
+
+boolean allowWildcard = BeanParamUtil.getBoolean(company2, request, "allowWildcard");
 %>
 
 <script type="text/javascript">
@@ -48,6 +50,20 @@ long companyId = BeanParamUtil.getLong(company2, request, "companyId");
 	names="instance"
 	backURL="<%= redirect %>"
 />
+
+<liferay-ui:error exception="<%= CompanyAliasException.class %>" >
+
+	<%
+	CompanyAliasException cae = (CompanyAliasException)errorException;
+
+	PKParser pkParser = new PKParser(cae.getMessage());
+
+	String subject = pkParser.getString("subject");
+	String webId = pkParser.getString("webId");
+	%>
+
+	<%= LanguageUtil.format(pageContext, "the-alias-x-is-already-in-use-by-company-x", new String[] {subject, webId}) %>
+</liferay-ui:error>
 
 <liferay-ui:error exception="<%= CompanyMxException.class %>" message="please-enter-a-valid-mail-domain" />
 <liferay-ui:error exception="<%= CompanyVirtualHostException.class %>" message="please-enter-a-valid-virtual-host" />
@@ -91,6 +107,22 @@ long companyId = BeanParamUtil.getLong(company2, request, "companyId");
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company2 %>" field="virtualHost" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="allow-wildcard" />
+	</td>
+	<td>
+		<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company2 %>" field="allowWildcard" defaultValue="<%= allowWildcard %>" /> <liferay-ui:icon-help message="allow-wildcard-help" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="aliases" />
+	</td>
+	<td>
+		<liferay-ui:input-field model="<%= Company.class %>" bean="<%= company2 %>" field="aliases" /> <liferay-ui:icon-help message="aliases-help" />
 	</td>
 </tr>
 <tr>

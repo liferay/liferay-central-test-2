@@ -39,24 +39,30 @@ import java.io.File;
  */
 public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 
-	public Company addCompany(String webId, String virtualHost, String mx)
+	public Company addCompany(
+			String webId, String virtualHost, boolean allowWildcard,
+			String aliases, String mx)
 		throws PortalException, SystemException {
 
 		if (!getPermissionChecker().isOmniadmin()) {
 			throw new PrincipalException();
 		}
 
-		return companyLocalService.addCompany(webId, virtualHost, mx);
+		return companyLocalService.addCompany(
+			webId, virtualHost, allowWildcard, aliases, mx);
 	}
 
-	public Company updateCompany(long companyId, String virtualHost, String mx)
+	public Company updateCompany(
+			long companyId, String virtualHost, boolean allowWildcard,
+			String aliases, String mx)
 		throws PortalException, SystemException {
 
 		if (!getPermissionChecker().isOmniadmin()) {
 			throw new PrincipalException();
 		}
 
-		return companyLocalService.updateCompany(companyId, virtualHost, mx);
+		return companyLocalService.updateCompany(
+			companyId, virtualHost, allowWildcard, aliases, mx);
 	}
 
 	public Company updateCompany(

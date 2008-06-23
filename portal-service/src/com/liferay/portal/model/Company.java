@@ -59,6 +59,8 @@ public interface Company extends CompanyModel {
 
 	public com.liferay.portal.model.Account getAccount();
 
+	public java.util.List<String> getAliasesList();
+
 	public java.lang.String getName();
 
 	public java.lang.String getShortName();

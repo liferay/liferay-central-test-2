@@ -54,6 +54,8 @@ public class CompanySoap implements Serializable {
 		soapModel.setWebId(model.getWebId());
 		soapModel.setKey(model.getKey());
 		soapModel.setVirtualHost(model.getVirtualHost());
+		soapModel.setAllowWildcard(model.getAllowWildcard());
+		soapModel.setAliases(model.getAliases());
 		soapModel.setMx(model.getMx());
 		soapModel.setLogoId(model.getLogoId());
 
@@ -121,6 +123,26 @@ public class CompanySoap implements Serializable {
 		_virtualHost = virtualHost;
 	}
 
+	public boolean getAllowWildcard() {
+		return _allowWildcard;
+	}
+
+	public boolean isAllowWildcard() {
+		return _allowWildcard;
+	}
+
+	public void setAllowWildcard(boolean allowWildcard) {
+		_allowWildcard = allowWildcard;
+	}
+
+	public String getAliases() {
+		return _aliases;
+	}
+
+	public void setAliases(String aliases) {
+		_aliases = aliases;
+	}
+
 	public String getMx() {
 		return _mx;
 	}
@@ -142,6 +164,8 @@ public class CompanySoap implements Serializable {
 	private String _webId;
 	private String _key;
 	private String _virtualHost;
+	private boolean _allowWildcard;
+	private String _aliases;
 	private String _mx;
 	private long _logoId;
 }
