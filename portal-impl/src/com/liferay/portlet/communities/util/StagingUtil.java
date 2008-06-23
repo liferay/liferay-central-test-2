@@ -231,7 +231,7 @@ public class StagingUtil {
 		sm.append(remotePort);
 
 		HttpPrincipal httpPrincipal = new HttpPrincipal(
-			sm.toString(), user.getUserId(), user.getPassword(),
+			sm.toString(), user.getEmailAddress(), user.getPassword(),
 			user.getPasswordEncrypted());
 
 		// Ping remote host and verify that the group exists
