@@ -64,17 +64,14 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		String tabs2 = ParamUtil.getString(req, "tabs2");
 
-		if (tabs2.equals("email-from")) {
+		if (tabs2.equals("display-settings")) {
+			updateDisplaySettings(req, prefs);
+		}
+		else if (tabs2.equals("email-from")) {
 			updateEmailFrom(req, prefs);
 		}
 		else if (tabs2.equals("event-reminder-email")) {
 			updateEmailEventReminder(req, prefs);
-		}
-		else if (tabs2.equals("display-order")) {
-			updateDisplayOrder(req, prefs);
-		}
-		else if (tabs2.equals("summary-tab")) {
-			updateSummaryTab(req, prefs);
 		}
 
 		if (SessionErrors.isEmpty(req)) {
@@ -91,14 +88,23 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		return "/html/portlet/calendar/configuration.jsp";
 	}
 
-	protected void updateDisplayOrder(
+	protected void updateDisplaySettings(
 			ActionRequest req, PortletPreferences prefs)
 		throws Exception {
 
-		String displayOrderTabs1 = ParamUtil.getString(
-			req, "displayOrderTabs1");
+		String tabs1Names = ParamUtil.getString(req, "tabs1Names");
+		String summaryTabOrientation = ParamUtil.getString(
+			req, "summaryTabOrientation");
+		String summaryTabShowMiniMonth = ParamUtil.getString(
+			req, "summaryTabShowMiniMonth");
+		String summaryTabShowTodaysEvents = ParamUtil.getString(
+			req, "summaryTabShowTodaysEvents");
 
-		prefs.setValue("display-order-tabs1", displayOrderTabs1);
+		prefs.setValue("tabs1-names", tabs1Names);
+		prefs.setValue("summary-tab-orientation", summaryTabOrientation);
+		prefs.setValue("summary-tab-show-mini-month", summaryTabShowMiniMonth);
+		prefs.setValue(
+			"summary-tab-show-todays-events", summaryTabShowTodaysEvents);
 	}
 
 	protected void updateEmailFrom(ActionRequest req, PortletPreferences prefs)
@@ -144,24 +150,6 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				"email-event-reminder-subject", emailEventReminderSubject);
 			prefs.setValue("email-event-reminder-body", emailEventReminderBody);
 		}
-	}
-
-	protected void updateSummaryTab(
-			ActionRequest req, PortletPreferences prefs)
-		throws Exception {
-
-		String summaryTabOrientation = ParamUtil.getString(
-			req, "summaryTabOrientation");
-		String summaryTabShowMiniMonth = ParamUtil.getString(
-			req, "summaryTabShowMiniMonth");
-		String summaryTabShowTodaysEvents = ParamUtil.getString(
-			req, "summaryTabShowTodaysEvents");
-
-		prefs.setValue("summary-tab-orientation", summaryTabOrientation);
-		prefs.setValue(
-			"summary-tab-show-mini-month", summaryTabShowMiniMonth);
-		prefs.setValue(
-			"summary-tab-show-todays-events", summaryTabShowTodaysEvents);
 	}
 
 }

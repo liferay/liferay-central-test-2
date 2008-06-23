@@ -67,10 +67,12 @@ for (int i = 1; i <= maxDayOfMonth; i++) {
 			</div>
 		</td>
 	</c:if>
+
 	<c:if test='<%= summaryTabOrientation.equals("vertical") %>'>
 		</tr>
 		<tr>
 	</c:if>
+
 	<c:if test='<%= summaryTabShowTodaysEvents %>'>
 		<td valign="top">
 			<%@ include file="/html/portlet/calendar/event_iterator.jspf" %>
