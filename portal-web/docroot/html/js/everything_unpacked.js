@@ -17265,7 +17265,7 @@ Liferay.Portlet = {
 								return false;
 							}
 						);
-						
+
 						jQuery('.portlet-css-icon:first a', portlet).click(
 							function(event) {
 								Liferay.PortletCSS.init(portlet.portletId);
@@ -17349,9 +17349,11 @@ Liferay.Portlet = {
 		if (portlet.refreshURL) {
 			var url = portlet.refreshURL;
 			var id = portlet.id;
+
 			portlet = jQuery(portlet);
 
 			var placeHolder = jQuery('<div class="loading-animation" id="p_load' + id + '" />');
+
 			portlet.before(placeHolder);
 			portlet.remove();
 

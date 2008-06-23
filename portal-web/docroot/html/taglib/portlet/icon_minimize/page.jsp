@@ -33,9 +33,7 @@
 	else {
 		image = "minimize";
 	}
-
-	String iconSrc = themeDisplay.getPathThemeImages() + "/portlet/" + image + ".png";
 	%>
 
-	<liferay-ui:icon message="<%= image %>" src="<%= iconSrc %>" url="<%= portletDisplay.getURLMin() %>" toolTip="<%= false %>" cssClass="portlet-minimize-icon" />
+	<liferay-ui:icon image='<%= "../portlet/" + image %>' message="<%= image %>" url="<%= portletDisplay.getURLMin() %>" toolTip="<%= false %>" cssClass="portlet-minimize-icon" />
 </c:if>
