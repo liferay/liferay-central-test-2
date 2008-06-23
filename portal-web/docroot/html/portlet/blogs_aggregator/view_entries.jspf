@@ -22,18 +22,29 @@
  */
 %>
 
+<c:choose>
+	<c:when test="<%= results.size() == 0 %>">
+		<liferay-ui:message key="there-are-no-blogs" />
+
+		<br /><br />
+	</c:when>
+	<c:otherwise>
+		<%
+		for (int i = 0; i < results.size(); i++) {
+			BlogsEntry entry = (BlogsEntry)results.get(i);
+		%>
+
+			<%@ include file="/html/portlet/blogs_aggregator/view_entry_content.jspf" %>
+
+			<div class="separator"><!-- --></div>
+
+		<%
+		}
+		%>
+	</c:otherwise>
+</c:choose>
+
 <%
-for (int i = 0; i < results.size(); i++) {
-	BlogsEntry entry = (BlogsEntry)results.get(i);
-%>
-
-	<%@ include file="/html/portlet/blogs_aggregator/view_entry_content.jspf" %>
-
-	<div class="separator"><!-- --></div>
-
-<%
-}
-
 StringMaker sm = new StringMaker();
 
 sm.append(themeDisplay.getPathMain());
@@ -49,8 +60,10 @@ else {
 String rssURL = sm.toString();
 %>
 
-<div class="subscribe">
-	<liferay-ui:icon image="rss" message="subscribe-to-this-blog" url="<%= rssURL %>" target="_blank" label="<%= true %>" />
-</div>
+<liferay-ui:icon image="rss" message="subscribe-to-this-blog" url="<%= rssURL %>" target="_blank" label="<%= true %>" />
 
-<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+<c:if test="<%= results.size() != 0 %>">
+	<div class="search-container">
+		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+	</div>
+</c:if>

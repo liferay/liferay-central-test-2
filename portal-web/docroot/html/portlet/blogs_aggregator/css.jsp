@@ -45,6 +45,6 @@
 	font-weight: bold;
 }
 
-.portlet-blogs-aggregator .subscribe {
-	margin-bottom: 1.5em;
+.portlet-blogs-aggregator .search-container {
+	margin-top: 1.5em;
 }

@@ -662,7 +662,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		if (!draft) {
 			blogsStatsUserLocalService.updateStatsUser(
-				entry.getGroupId(), entry.getUserId(), now);
+				entry.getGroupId(), entry.getUserId(), displayDate);
 		}
 
 		// Social

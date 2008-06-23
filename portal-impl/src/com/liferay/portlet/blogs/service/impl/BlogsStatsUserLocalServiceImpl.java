@@ -25,9 +25,12 @@ package com.liferay.portlet.blogs.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
+import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.blogs.service.base.BlogsStatsUserLocalServiceBaseImpl;
+import com.liferay.portlet.blogs.util.comparator.EntryDisplayDateComparator;
 
 import java.util.Date;
 import java.util.List;
@@ -120,7 +123,7 @@ public class BlogsStatsUserLocalServiceImpl
 		updateStatsUser(groupId, userId, null);
 	}
 
-	public void updateStatsUser(long groupId, long userId, Date lastPostDate)
+	public void updateStatsUser(long groupId, long userId, Date displayDate)
 		throws PortalException, SystemException {
 
 		int entryCount = blogsEntryPersistence.countByG_U(groupId, userId);
@@ -129,8 +132,23 @@ public class BlogsStatsUserLocalServiceImpl
 
 		statsUser.setEntryCount(entryCount);
 
-		if (lastPostDate != null) {
-			statsUser.setLastPostDate(lastPostDate);
+		if (Validator.isNotNull(displayDate)) {
+			BlogsEntry blogsEntry = blogsEntryPersistence.findByG_U_First(
+				groupId, userId, new EntryDisplayDateComparator());
+
+			Date lastDisplayDate = blogsEntry.getDisplayDate();
+
+			Date lastPostDate = statsUser.getLastPostDate();
+
+			if (Validator.isNull(lastPostDate)) {
+				statsUser.setLastPostDate(displayDate);
+			}
+			else if (displayDate.after(lastPostDate)) {
+				statsUser.setLastPostDate(displayDate);
+			}
+			else if (lastDisplayDate.before(lastPostDate)) {
+				statsUser.setLastPostDate(lastDisplayDate);
+			}
 		}
 
 		blogsStatsUserPersistence.update(statsUser, false);
