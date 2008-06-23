@@ -657,7 +657,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				Company virtualHostCompany = getCompanyByVirtualHost(
 					virtualHost);
 
-				if (!virtualHostCompany.getWebId().equals(webId)) {
+				if ((virtualHostCompany != null) &&
+					(!virtualHostCompany.getWebId().equals(webId))) {
 					throw new CompanyVirtualHostException();
 				}
 			}
