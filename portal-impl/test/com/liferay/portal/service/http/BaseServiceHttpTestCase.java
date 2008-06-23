@@ -43,7 +43,8 @@ public class BaseServiceHttpTestCase extends BaseTestCase {
 
 		if (authenticated) {
 			httpPrincipal = new HttpPrincipal(
-				TestPropsValues.PORTAL_URL, TestPropsValues.USER_ID,
+				TestPropsValues.PORTAL_URL,
+				String.valueOf(TestPropsValues.USER_ID),
 				TestPropsValues.USER_PASSWORD);
 		}
 		else {
