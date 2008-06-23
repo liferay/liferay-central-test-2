@@ -638,8 +638,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			displayDateMinute, user.getTimeZone(),
 			new EntryDisplayDateException());
 
-		Date now = new Date();
-
 		validate(title, content);
 
 		BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(entryId);
@@ -647,7 +645,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		String oldUrlTitle = entry.getUrlTitle();
 		boolean oldDraft = entry.isDraft();
 
-		entry.setModifiedDate(now);
+		entry.setModifiedDate(new Date());
 		entry.setTitle(title);
 		entry.setUrlTitle(
 			getUniqueUrlTitle(entryId, entry.getGroupId(), title));

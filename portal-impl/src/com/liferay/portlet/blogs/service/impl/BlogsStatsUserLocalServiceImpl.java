@@ -132,7 +132,7 @@ public class BlogsStatsUserLocalServiceImpl
 
 		statsUser.setEntryCount(entryCount);
 
-		if (Validator.isNotNull(displayDate)) {
+		if (displayDate != null) {
 			BlogsEntry blogsEntry = blogsEntryPersistence.findByG_U_First(
 				groupId, userId, new EntryDisplayDateComparator());
 
@@ -140,7 +140,7 @@ public class BlogsStatsUserLocalServiceImpl
 
 			Date lastPostDate = statsUser.getLastPostDate();
 
-			if (Validator.isNull(lastPostDate)) {
+			if (lastPostDate != null) {
 				statsUser.setLastPostDate(displayDate);
 			}
 			else if (displayDate.after(lastPostDate)) {
