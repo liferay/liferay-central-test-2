@@ -61,6 +61,8 @@ public class EditPagesAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
+		String redirect = ParamUtil.getString(req, "redirect");
+
 		long groupId = ParamUtil.getLong(req, "groupId");
 		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
 
@@ -106,6 +108,7 @@ public class EditPagesAction extends PortletAction {
 			portletURL.setParameter(
 				"struts_action", "/layout_management/edit_pages");
 			portletURL.setParameter("tabs1", tabs1);
+			portletURL.setParameter("redirect", redirect);
 			portletURL.setParameter("groupId", String.valueOf(groupId));
 
 			res.sendRedirect(portletURL.toString());
