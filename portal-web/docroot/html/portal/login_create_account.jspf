@@ -93,12 +93,6 @@
 	</span>
 </c:if>
 
-<c:if test='<%= SessionErrors.contains(request, "missingOpenIdUserInformation") %>'>
-	<span class="portlet-msg-error">
-	<liferay-ui:message key="the-openid-provider-did-not-send-the-required-attributes" />
-	</span>
-</c:if>
-
 <div class="lfr-portal-login">
 	<form action="<%= themeDisplay.getPathMain() %>/portal/login" class="uni-form" method="post" name="fm1">
 	<input name="<%= Constants.CMD %>" type="hidden" value="already-registered" />

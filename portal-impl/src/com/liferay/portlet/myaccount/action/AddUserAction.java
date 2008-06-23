@@ -44,10 +44,12 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -62,6 +64,7 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -136,6 +139,9 @@ public class AddUserAction extends PortletAction {
 	protected void addUser(ActionRequest req, ActionResponse res)
 		throws Exception {
 
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+		HttpSession httpSes = httpReq.getSession();
+
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
@@ -160,6 +166,18 @@ public class AddUserAction extends PortletAction {
 		long[] organizationIds = StringUtil.split(
 			ParamUtil.getString(req, "organizationIds"),  0L);
 		boolean sendEmail = true;
+		String openId = ParamUtil.getString(req, "openId");
+		boolean openIdAuth = false;
+
+		Boolean loginPending =
+			(Boolean)httpSes.getAttribute(WebKeys.OPEN_ID_LOGIN_PENDING);
+
+		if ((loginPending != null) && loginPending.booleanValue() &&
+				Validator.isNotNull(openId)) {
+
+			sendEmail = false;
+			openIdAuth = true;
+		}
 
 		if (PropsValues.CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT) {
 			CaptchaUtil.check(req);
@@ -172,13 +190,21 @@ public class AddUserAction extends PortletAction {
 			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationIds,
 			sendEmail);
 
-		// Session messages
+		if (openIdAuth) {
+			UserLocalServiceUtil.updateOpenId(user.getUserId(), openId);
 
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+			httpSes.setAttribute(WebKeys.OPEN_ID_LOGIN, new Long(user.getUserId()));
 
-		SessionMessages.add(httpReq, "user_added", user.getEmailAddress());
-		SessionMessages.add(
-			httpReq, "user_added_password", user.getPasswordUnencrypted());
+			httpSes.removeAttribute(WebKeys.OPEN_ID_LOGIN_PENDING);
+		}
+		else {
+
+			// Session messages
+
+			SessionMessages.add(httpReq, "user_added", user.getEmailAddress());
+			SessionMessages.add(
+				httpReq, "user_added_password", user.getPasswordUnencrypted());
+		}
 
 		// Send redirect
 

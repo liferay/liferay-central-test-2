@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/my_account/init.jsp" %>
 
 <%
+String openId = ParamUtil.getString(request, "openId");
+
 User user2 = null;
 Contact contact2 = null;
 
@@ -39,6 +41,9 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/my_account/create_account" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
+<c:if test='<%= Validator.isNotNull(openId) %>'>
+	<input name="<portlet:namespace />openId" type="hidden" value="<%= HtmlUtil.escape(openId) %>" />
+</c:if>
 
 <liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
 <liferay-ui:error exception="<%= ContactFirstNameException.class %>" message="please-enter-a-valid-first-name" />
@@ -51,6 +56,13 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 <liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
 <liferay-ui:error exception="<%= UserIdException.class %>" message="please-enter-a-valid-user-id" />
 <liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
+
+<c:if test='<%= SessionMessages.contains(request, "missingOpenIdUserInformation") %>'>
+	<span class="portlet-msg-info">
+		<liferay-ui:message key="you-have-been-authenticated-successfully-please-provide-the-following-required-information-to-access-the-portal" />
+	</span>
+</c:if>
+
 
 <table class="lfr-table">
 <tr>

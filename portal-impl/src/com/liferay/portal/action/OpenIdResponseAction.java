@@ -24,6 +24,7 @@ package com.liferay.portal.action;
 
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -38,6 +39,8 @@ import com.liferay.util.PwdGenerator;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+
+import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -86,8 +89,10 @@ public class OpenIdResponseAction extends Action {
 			return null;
 		}
 
+		String redirect = null;
+
 		try {
-			readResponse(themeDisplay, req);
+			redirect = readResponse(themeDisplay, req);
 		}
 		catch (Exception e) {
 			if (e instanceof AssociationException ||
@@ -108,10 +113,12 @@ public class OpenIdResponseAction extends Action {
 			}
 		}
 
-		String loginURL =
-			PortalUtil.getPortalURL(req) + themeDisplay.getURLSignIn();
+		if (Validator.isNull(redirect)) {
+			redirect =
+				PortalUtil.getPortalURL(req) + themeDisplay.getURLSignIn();
+		}
 
-		res.sendRedirect(loginURL);
+		res.sendRedirect(redirect);
 
 		return null;
 	}
@@ -157,7 +164,7 @@ public class OpenIdResponseAction extends Action {
 		return values.get(0);
 	}
 
-	protected User readResponse(
+	protected String readResponse(
 			ThemeDisplay themeDisplay, HttpServletRequest req)
 		throws Exception {
 
@@ -252,13 +259,20 @@ public class OpenIdResponseAction extends Action {
 			if (Validator.isNull(firstName) || Validator.isNull(lastName) ||
 				Validator.isNull(emailAddress)) {
 
-				SessionErrors.add(req, "missingOpenIdUserInformation");
+				SessionMessages.add(req, "missingOpenIdUserInformation");
 
-				_log.error(
+				_log.info(
 					"The OpenID provider did not send the required " +
 						"attributes to create an account");
 
-				return null;
+				PortletURL createAccountURL =
+					themeDisplay.getURLCreateAccount();
+
+				createAccountURL.setParameter("openId", openId);
+
+				ses.setAttribute(WebKeys.OPEN_ID_LOGIN_PENDING, Boolean.TRUE);
+
+				return createAccountURL.toString();
 			}
 
 			user = addUser(
@@ -268,7 +282,7 @@ public class OpenIdResponseAction extends Action {
 
 		ses.setAttribute(WebKeys.OPEN_ID_LOGIN, new Long(user.getUserId()));
 
-		return user;
+		return null;
 	}
 
 	private static Log _log = LogFactory.getLog(OpenIdResponseAction.class);
