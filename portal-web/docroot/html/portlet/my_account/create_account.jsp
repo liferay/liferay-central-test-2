@@ -41,7 +41,8 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="saveLastPath" value="0" /><portlet:param name="struts_action" value="/my_account/create_account" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
-<c:if test='<%= Validator.isNotNull(openId) %>'>
+
+<c:if test="<%= Validator.isNotNull(openId) %>">
 	<input name="<portlet:namespace />openId" type="hidden" value="<%= HtmlUtil.escape(openId) %>" />
 </c:if>
 
@@ -59,10 +60,9 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 
 <c:if test='<%= SessionMessages.contains(request, "missingOpenIdUserInformation") %>'>
 	<span class="portlet-msg-info">
-		<liferay-ui:message key="you-have-been-authenticated-successfully-please-provide-the-following-required-information-to-access-the-portal" />
+		<liferay-ui:message key="you-have-successfully-authenticated-please-provide-the-following-required-information-to-access-the-portal" />
 	</span>
 </c:if>
-
 
 <table class="lfr-table">
 <tr>

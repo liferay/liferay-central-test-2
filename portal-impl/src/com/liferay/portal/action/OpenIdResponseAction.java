@@ -261,9 +261,11 @@ public class OpenIdResponseAction extends Action {
 
 				SessionMessages.add(req, "missingOpenIdUserInformation");
 
-				_log.info(
-					"The OpenID provider did not send the required " +
-						"attributes to create an account");
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"The OpenID provider did not send the required " +
+							"attributes to create an account");
+				}
 
 				PortletURL createAccountURL =
 					themeDisplay.getURLCreateAccount();

@@ -140,6 +140,7 @@ public class AddUserAction extends PortletAction {
 		throws Exception {
 
 		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+
 		HttpSession httpSes = httpReq.getSession();
 
 		ThemeDisplay themeDisplay =
@@ -166,14 +167,15 @@ public class AddUserAction extends PortletAction {
 		long[] organizationIds = StringUtil.split(
 			ParamUtil.getString(req, "organizationIds"),  0L);
 		boolean sendEmail = true;
+
 		String openId = ParamUtil.getString(req, "openId");
 		boolean openIdAuth = false;
 
-		Boolean loginPending =
-			(Boolean)httpSes.getAttribute(WebKeys.OPEN_ID_LOGIN_PENDING);
+		Boolean openIdoginPending = (Boolean)httpSes.getAttribute(
+			WebKeys.OPEN_ID_LOGIN_PENDING);
 
-		if ((loginPending != null) && loginPending.booleanValue() &&
-				Validator.isNotNull(openId)) {
+		if ((openIdoginPending != null) && (openIdoginPending.booleanValue()) &&
+			(Validator.isNotNull(openId))) {
 
 			sendEmail = false;
 			openIdAuth = true;
@@ -193,7 +195,8 @@ public class AddUserAction extends PortletAction {
 		if (openIdAuth) {
 			UserLocalServiceUtil.updateOpenId(user.getUserId(), openId);
 
-			httpSes.setAttribute(WebKeys.OPEN_ID_LOGIN, new Long(user.getUserId()));
+			httpSes.setAttribute(
+				WebKeys.OPEN_ID_LOGIN, new Long(user.getUserId()));
 
 			httpSes.removeAttribute(WebKeys.OPEN_ID_LOGIN_PENDING);
 		}
