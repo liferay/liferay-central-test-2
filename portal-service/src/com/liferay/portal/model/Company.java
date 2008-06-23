@@ -57,9 +57,9 @@ public interface Company extends CompanyModel {
 
 	public void setKeyObj(java.security.Key keyObj);
 
-	public com.liferay.portal.model.Account getAccount();
-
 	public java.util.List<String> getAliasesList();
+
+	public com.liferay.portal.model.Account getAccount();
 
 	public java.lang.String getName();
 

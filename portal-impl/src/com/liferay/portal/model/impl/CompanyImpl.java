@@ -85,6 +85,10 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 		super.setKey(Base64.objectToString(keyObj));
 	}
 
+	public List<String> getAliasesList() {
+		return ListUtil.fromString(getAliases());
+	}
+
 	public Account getAccount() {
 		Account account = null;
 
@@ -98,10 +102,6 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 		}
 
 		return account;
-	}
-
-	public List<String> getAliasesList() {
-		return ListUtil.fromString(super.getAliases());
 	}
 
 	public String getName() {

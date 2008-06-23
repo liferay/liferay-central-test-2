@@ -657,9 +657,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				Company virtualHostCompany = getCompanyByVirtualHost(
 					virtualHost);
 
-				if ((virtualHostCompany != null) &&
-					(!virtualHostCompany.getWebId().equals(webId))) {
-
+				if (!virtualHostCompany.getWebId().equals(webId)) {
 					throw new CompanyVirtualHostException();
 				}
 			}
@@ -677,17 +675,17 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		List<String> aliasList = ListUtil.fromString(aliases);
 
-		if (aliasList.size() > 0) {
-			for (String alias : aliasList) {
+		for (String alias : aliasList) {
+			try {
 				Company virtualHostCompany = getCompanyByVirtualHost(alias);
 
-				if ((virtualHostCompany != null) &&
-					(!virtualHostCompany.getWebId().equals(webId))) {
-
+				if (!virtualHostCompany.getWebId().equals(webId)) {
 					throw new CompanyAliasException(
-						"{subject=" + alias + ",webId=" +
-							virtualHostCompany.getWebId() + "}");
+						"{webId=" + virtualHostCompany.getWebId() + ",alias=" +
+							alias + ",}");
 				}
+			}
+			catch (NoSuchCompanyException nsce) {
 			}
 		}
 

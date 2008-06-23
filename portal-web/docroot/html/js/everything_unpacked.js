@@ -4680,7 +4680,7 @@ jQuery Browser Plugin
 
 		// Define the 'addSelectors' function which adds Browser Selectors to a tag; by default <HTML>.
 		addSelectors: function(e) {
-			jQuery(e || 'html').addClass(o.selectors);
+			jQuery(e || 'html').addClass(o.selectors).removeClass('nojs');
 		},
 
 		// Define the 'removeSelectors' function which removes Browser Selectors to a tag; by default <HTML>.
@@ -15307,16 +15307,19 @@ Liferay.Util = {
 		return url + ";jsessionid=" + themeDisplay.getSessionId();
 	},
 
+	/**
+	 * OPTIONS
+	 *
+	 * Required
+	 * button {string|object}: The button that opens the popup when clicked.
+	 * height {number}: The height to set the popup to.
+	 * textarea {string}: the name of the textarea to auto-resize.
+	 * url {string}: The url to open that sets the editor.
+	 * width {number}: The width to set the popup to.
+	 */
+
 	inlineEditor: function(options) {
 		var instance = this;
-
-		/*
-		button (jQuery selector | DOM element): The button that opens the popup when clicked
-		url (String): url to open that sets the editor
-		width (Int): The width to set the popup to
-		height (Int): The height to set the popup to
-		textarea (String): the name of the textarea to auto-resize
-		*/
 
 		if (options.url && options.button) {
 			var url = options.url;
@@ -15805,14 +15808,17 @@ Liferay.Util = {
 		return (str.indexOf(x) === 0);
 	},
 
+	/**
+	 * OPTIONS
+	 *
+	 * Required
+	 * popup {string|object}: A jQuery selector or DOM element of the popup that contains the editor.
+	 * textarea {string}: the name of the textarea to auto-resize.
+	 * url {string}: The url to open that sets the editor.
+	 */
+
 	switchEditor: function(options) {
 		var instance = this;
-
-		/*
-		url (String): url to open that sets the editor
-		popup (String|DOM|jQuery element): the popup that contains the editor
-		textarea (String): the name of the textarea to auto-resize
-		*/
 
 		if (options.url && options.popup) {
 			var url = options.url;
@@ -16568,23 +16574,30 @@ Liferay.Layout.FreeForm = {
 	_current: null,
 	_maxZIndex: 99
 };
+/**
+ * OPTIONS
+ *
+ * Required
+ * message {string|object}: The default HTML/object to display.
+ * width {number}: The starting width of the message box.
+ *
+ * Optional
+ * className {string}: A class to add to the specific popup.
+ * dragHelper {string|function}: A jQuery selector or a function that returns a DOM element.
+ * handles {string}: A comma-separated list (n,ne,e,se,s,sw,w,nw) of the handles for resizing.
+ * height {number}: The starting height of the message box.
+ * modal {boolean}: Whether to show shaded background.
+ * noCenter {boolean}: Whether to prevent re-centering.
+ * stack {boolean}: Whether to automatically stack the popup on top of other ones.
+ * resizeHelper {string}: A class that will be attached to resize proxy helper.
+ *
+ * Callbacks
+ * dragStart {function}: Called when dragging of the dialog starts.
+ * dragStop {function}: Called when dragging of the dialog starts.
+ * onClose {function}: Called when a dialog is closed.
+ */
+
 Liferay.Popup = function(options) {
-	/*
-	 * OPTIONS:
-	 * modal (boolean) - show shaded background
-	 * message (string|object) - default HTML/object to display
-	 * noCenter (boolean) - prevent re-centering
-	 * height (int) - starting height of message box
-	 * width (int) - starting width of message box
-	 * onClose (function) - executes after closing
-	 * className (string) - a class to add to the specific popup
-	 * stack (boolean) - whether to automatically stack the popup on top of other ones
-	 * handles (string) - comma-separated list (n,ne,e,se,s,sw,w,nw) of the handles for resizing
-	 * resizeHelper - classname that will be attached to resize proxy helper
-	 * dragHelper (string|function) - a jQuery selector or a function that returns a DOM element
-	 * dragStart - (function) a callback that is called when dragging of the dialog starts
-	 * dragStop - (function) a callback that is called when dragging of the dialog stops
-	 */
 	var instance = this;
 
 	var cacheDialogHelper = function(obj) {
@@ -16809,11 +16822,20 @@ Liferay.Portal.Tabs = {
 };
 
 Liferay.Portal.StarRating = new Class({
-	/* OPTIONS
-	 * displayOnly: (boolean) non-modifiable display
-	 * onComplete: (function) executes when rating is selected
-	 * rating: rating to initialize to
+
+	/**
+	 * OPTIONS
+	 *
+	 * Required
+	 * displayOnly {boolean}: Whether the display is modifiable.
+	 *
+	 * Optional
+	 * rating {number}: The rating to initialize to.
+	 *
+	 * Callbacks
+	 * onComplete {function}: Called when a rating is selected.
 	 */
+
 	initialize: function(id, options) {
 		this.options = options || {};
 		this.rating = this.options.rating || 0;
@@ -16893,11 +16915,20 @@ Liferay.Portal.StarRating = new Class({
 });
 
 Liferay.Portal.ThumbRating = new Class({
-	/* OPTIONS
-	 * displayOnly: (boolean) non-modifiable display
-	 * rating: rating to initialize to
-	 * onComplete: (function) executes when rating is selected
+
+	/**
+	 * OPTIONS
+	 *
+	 * Required
+	 * displayOnly {boolean}: Whether the display is modifiable.
+	 *
+	 * Optional
+	 * rating {number}: The rating to initialize to.
+	 *
+	 * Callbacks
+	 * onComplete {function}: Called when a rating is selected.
 	 */
+
 	initialize: function(options) {
 		var instance = this;
 
@@ -17040,12 +17071,210 @@ Liferay.Portlet = {
 	ajaxList: {},
 	list: {},
 
+	close: function(portlet, skipConfirm, options) {
+		var instance = this;
+
+		if (skipConfirm || confirm(Liferay.Language.get('are-you-sure-you-want-to-remove-this-component'))) {
+			options = options || {};
+
+			var plid = options.plid || themeDisplay.getPlid();
+			var doAsUserId = options.doAsUserId || themeDisplay.getDoAsUserIdEncoded();
+
+			var portletId = portlet.portletId;
+			var currentPortlet = jQuery(portlet);
+			var column = currentPortlet.parents('.lfr-portlet-column:first');
+
+			currentPortlet.remove();
+			jQuery('#' + portletId).remove();
+
+			if (LayoutConfiguration) {
+				LayoutConfiguration.initialized = false;
+			}
+
+			var url = themeDisplay.getPathMain() + '/portal/update_layout';
+
+			jQuery.ajax(
+				{
+					url: url,
+					data: {
+						p_l_id: plid,
+						p_p_id: portletId,
+						doAsUserId: doAsUserId,
+						cmd: 'delete'
+					}
+				}
+			);
+
+			var portletsLeft = column.find('.portlet-boundary').length;
+
+			if (!portletsLeft) {
+				column.addClass('empty');
+			}
+
+			instance.remove(portletId);
+
+			Liferay.Publisher.register('closePortlet');
+			Liferay.Publisher.deliver('closePortlet', {plid: plid, portletId: portletId});
+		}
+		else {
+			self.focus();
+		}
+	},
+
 	isAjax: function(id) {
 		return (this.ajaxList[id] == 1);
 	},
 
 	flagAjax: function(id) {
 		this.ajaxList[id] = 1;
+	},
+
+	minimize: function(portlet, el, options) {
+		var instance = this;
+
+		options = options || {};
+
+		var plid = options.plid || themeDisplay.getPlid();
+		var doAsUserId = options.doAsUserId || themeDisplay.getDoAsUserIdEncoded();
+
+		var content = jQuery('.portlet-content-container', portlet);
+		var restore = content.is(':hidden');
+
+		content.toggle(
+			'blind',
+			{
+				direction: 'vertical'
+			},
+			'fast',
+			function() {
+				var action = (restore) ? 'removeClass' : 'addClass';
+				jQuery('.portlet', portlet)[action]('portlet-minimized');
+
+				if (el) {
+					var minimizeKey = Liferay.Language.get('minimize');
+					var restoreKey = Liferay.Language.get('restore');
+					var title = (restore) ? minimizeKey : restoreKey;
+
+					var link = jQuery(el);
+					var img = link.find('img');
+
+					var imgSrc = img.attr('src');
+					if (restore) {
+						imgSrc = imgSrc.replace(/restore.png$/, 'minimize.png');
+					}
+					else {
+						imgSrc = imgSrc.replace(/minimize.png$/, 'restore.png');
+					}
+
+					link.attr('title', title);
+					img.attr('src', imgSrc);
+				}
+			}
+		);
+
+		jQuery.ajax(
+			{
+				url: themeDisplay.getPathMain() + '/portal/update_layout',
+				data: {
+					p_l_id: plid,
+					p_p_id: portlet.portletId,
+					p_p_restore: restore,
+					doAsUserId: doAsUserId,
+					cmd: 'minimize'
+				}
+			}
+		);
+	},
+
+	onLoad: function(options) {
+		var instance = this;
+
+		var canEditTitle = options.canEditTitle;
+		var columnPos = options.columnPos;
+		var isStatic = (options.isStatic == 'no') ? null : options.isStatic;
+		var namespacedId = options.namespacedId;
+		var portletId = options.portletId;
+
+		jQuery(
+			function () {
+				var jPortlet = jQuery('#' + namespacedId);
+				var portlet = jPortlet[0];
+
+				if (!portlet.portletProcessed) {
+					portlet.portletProcessed = true;
+					portlet.portletId = portletId;
+					portlet.columnPos = columnPos;
+					portlet.isStatic = isStatic;
+
+					if (!Liferay.Portlet.isAjax(portletId)) {
+						Liferay.Portlet.process(portletId);
+					}
+
+					// Functions to run on portlet load
+
+					if (canEditTitle) {
+						Liferay.Util.portletTitleEdit(
+							{
+								obj: jPortlet,
+								plid: themeDisplay.getPlid(),
+								doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+								portletId: portletId
+							}
+						);
+					}
+
+					if (!themeDisplay.layoutMaximized) {
+						jQuery('.portlet-configuration-icon:first a', portlet).click(
+							function(event) {
+								location.href = this.href + '&previewWidth=' + portlet.offsetHeight;
+								return false;
+							}
+						);
+
+						jQuery('.portlet-minimize-icon:first a', portlet).click(
+							function(event) {
+								instance.minimize(portlet, this);
+								return false;
+							}
+						);
+
+						jQuery('.portlet-maximize-icon:first a', portlet).click(
+							function(event) {
+								submitForm(document.hrefFm, this.href);
+								return false;
+							}
+						);
+
+						jQuery('.portlet-close-icon:first a', portlet).click(
+							function(event) {
+								instance.close(portlet);
+								return false;
+							}
+						);
+
+						jQuery('.portlet-refresh-icon:first a', portlet).click(
+							function(event) {
+								instance.refresh(portlet);
+								return false;
+							}
+						);
+
+						jQuery('.portlet-print-icon:first a', portlet).click(
+							function(event) {
+								location.href = this.href;
+								return false;
+							}
+						);
+						
+						jQuery('.portlet-css-icon:first a', portlet).click(
+							function(event) {
+								Liferay.PortletCSS.init(portlet.portletId);
+							}
+						)
+					}
+				}
+			}
+		);
 	},
 
 	process: function(id) {
@@ -17111,6 +17340,30 @@ Liferay.Portlet = {
 			}
 
 			this.fn[arg1].push(arg2);
+		}
+	},
+
+	refresh: function(portlet) {
+		var instance = this;
+
+		if (portlet.refreshURL) {
+			var url = portlet.refreshURL;
+			var id = portlet.id;
+			portlet = jQuery(portlet);
+
+			var placeHolder = jQuery('<div class="loading-animation" id="p_load' + id + '" />');
+			portlet.before(placeHolder);
+			portlet.remove();
+
+			addPortletHTML(
+				{
+					url: url,
+					placeHolder: placeHolder[0],
+					onComplete: function(portlet, portletId) {
+						portlet.refreshURL = url;
+					}
+				}
+			);
 		}
 	},
 
@@ -17211,20 +17464,26 @@ Liferay.Publisher = {
 	}
 };
 Liferay.autoFields = new Class({
-	/*
-	Options
-	html (String) HTML to append to the end of the container
-	container (String) the jQuery selector of the item(s) you wish to append the HTML to
-	addText (String) the text you wish to use for the "Add" link
-	removeText (String) the text you wish to use for the "Remove" link
-	clearText (String) the text you wish to use for the "Clear" link (this link clears all of the added forms except the very first one, a sort of reset button)
-	confirmText (String) the text you wish to use to confirm that the user wishes to clear all of the added buttons (leave empty to not confirm)
-	rowType (String) the html tag for the row of fields (eg. fieldset, div or tr)
-	onAdd (function) a callback that executes after new fields have been added
-	onRemove (function) a callback that executes after fields have been removed
-	onClear (function) a callback that executes after the form fields have been returned
-	init (function) a callback that executes after the class has fully initialized
-	*/
+
+	/**
+	 * OPTIONS
+	 *
+	 * Required
+	 * addText {string}: The text you wish to use for the "Add" link.
+	 * clearText {string}: The text you wish to use for the "Clear" link (this link removes all of the added forms except the very first one).
+	 * container {string|object}: A jQuery selector that specifies where you wish to append the HTML to.
+	 * confirmText {string}: the text you wish to use to confirm that the user wishes to clear all of the added buttons (leave empty to not confirm).
+	 * html {string}: HTML to append to the end of the container.
+	 * removeText {string}: The text you wish to use for the "Remove" link.
+	 * rowType {string}: The html tag for the row of fields (eg. fieldset, div or tr).
+	 *
+	 * Callbacks
+	 * init {function}: Called after the class has fully initialized.
+	 * onAdd {function}: Called after new fields have been added.
+	 * onRemove {function}: Called after fields have been removed.
+	 * onClear {function}: Called after the form fields have been returned.
+	 */
+
 	initialize: function(options) {
 		var instance = this;
 
@@ -17373,13 +17632,21 @@ Liferay.autoFields = new Class({
 });
 Liferay.ColorPicker = new Class({
 
-	/*
-	context (Object): A DOM object which specifies the context in which to search for the item
-	hasImage: (Boolean) If set to true, it uses the "item" param or whatever image has the .use-colorpicker class as the image
-	item: (Object|String): A DOM object or a jQuery Selector string that specifies which field to insert the selected value into
-	onChange (Function): A function that will get called whenever the color changes
-	onClose (Function): A function that will get called when the color picker is closed
-	*/
+	/**
+	 * OPTIONS
+	 *
+	 * Required
+	 * item {string|object}: A jQuery selector or DOM element that specifies which field to insert the selected value into.
+	 *
+	 * Optional
+	 * context {object}: A DOM element which specifies the context in which to search for the item.
+	 * hasImage {boolean}: Whether an image is provided in the DOM or options object (via the item option).
+	 *
+	 * Callbacks
+	 * onChange {function}: Called whenever the color changes.
+	 * onClose {function}: Called when the color picker is closed.
+	 */
+
 	initialize: function(options) {
 		var instance = this;
 
@@ -17716,14 +17983,20 @@ Liferay.Dock = {
 };
 Liferay.DynamicSelect = new Class({
 
-	/*
-	array: an array of params
-	params.select: a select box
-	params.selectId: JSON object field name for an option value
-	params.selectDesc: JSON object field name for an option description
-	params.selectVal: selected value of the select box
-	params.selectData: function that returns a JSON array to populate the next select box
-	*/
+	/**
+	 * OPTIONS
+	 *
+	 * Required
+	 * array {array}: An array of options.
+	 * array[i].select {string}: An id of a select box.
+	 * array[i].selectId {string}: A JSON object field name for an option value.
+	 * array[i].selectDesc {string}: A JSON object field name for an option description.
+	 * array[i].selectVal {string}: The value that is displayed in an option field.
+	 *
+	 * Callbacks
+	 * array[i].selectData {function}: Returns a JSON array to populate the next select box.
+	 */
+
 	initialize: function(array) {
 		var instance = this;
 
@@ -17731,9 +18004,9 @@ Liferay.DynamicSelect = new Class({
 
 		jQuery.each(
 			array,
-			function(i, params) {
-				var select = jQuery('#' + params.select);
-				var selectData = params.selectData;
+			function(i, options) {
+				var select = jQuery('#' + options.select);
+				var selectData = options.selectData;
 
 				var prevSelectVal = null;
 
@@ -17777,13 +18050,13 @@ Liferay.DynamicSelect = new Class({
 	},
 
 	_updateSelect: function(instance, i, list) {
-		var params = instance.array[i];
+		var options = instance.array[i];
 
-		var select = jQuery('#' + params.select);
-		var selectId = params.selectId;
-		var selectDesc = params.selectDesc;
-		var selectVal = params.selectVal;
-		var selectNullable = params.selectNullable || true;
+		var select = jQuery('#' + options.select);
+		var selectId = options.selectId;
+		var selectDesc = options.selectDesc;
+		var selectVal = options.selectVal;
+		var selectNullable = options.selectNullable || true;
 
 		var options = '';
 
@@ -18461,12 +18734,12 @@ Liferay.LayoutExporter = {
 	}
 };
 Liferay.Menu = new Class({
-	initialize: function(params) {
+	initialize: function(options) {
 		var instance = this;
 
-		instance._button = jQuery(params.button, params.context || document);
+		instance._button = jQuery(options.button, options.context || document);
 		instance._menu = instance._button.find('ul:first');
-		instance._trigger = instance._button.find(params.trigger);
+		instance._trigger = instance._button.find(options.trigger);
 
 		if (instance._menu.length) {
 			instance._run();
@@ -18514,35 +18787,44 @@ Liferay.Menu = new Class({
 	}
 });
 Liferay.Notice = new Class({
-	/* Options:
-		closeText: (String) the text to use for the "close" button. Set to false to not have a close button
-		content: (String) the HTML or text to insert into.
-		toggleText: (Object) the text to use for the "hide" and "show" button. Set to false to not have a hide button
-		noticeClass: (String) class to add to the notice toolbar.
-		onClose: (fn) a callback to execute when the toolbar is closed
-		type: (String) either 'notice' or 'warning', depending on the type of the toolbar. Defaults to notice.
-	*/
-	initialize: function(params) {
+
+	/**
+	 * OPTIONS
+	 *
+	 * Required
+	 * content {string}: The content of the toolbar.
+	 *
+	 * Optional
+	 * closeText {string}: Use for the "close" button. Set to false to not have a close button.
+	 * toggleText {object}: The text to use for the "hide" and "show" button. Set to false to not have a hide button.
+	 * noticeClass {string}: A class to add to the notice toolbar.
+	 * type {string}: Either 'notice' or 'warning', depending on the type of the toolbar. Defaults to notice.
+	 *
+	 * Callbacks
+	 * onClose {function}: Called when the toolbar is closed.
+	 */
+
+	initialize: function(options) {
 		var instance = this;
-		params = params || {};
-		instance._noticeType = params.type || 'notice';
+		options = options || {};
+		instance._noticeType = options.type || 'notice';
 		instance._noticeClass = 'popup-alert-notice';
 		instance._useCloseButton = true;
-		instance._onClose = params.onClose;
-		instance._closeText = params.closeText;
+		instance._onClose = options.onClose;
+		instance._closeText = options.closeText;
 		instance._body = jQuery('body');
 
 		instance._useToggleButton = false;
 		instance._hideText = '';
 		instance._showText = '';
 
-		if (params.toggleText !== false) {
+		if (options.toggleText !== false) {
 			instance.toggleText = jQuery.extend(
 				{
 					hide: null,
 					show: null
 				},
-			params.toggleText);
+			options.toggleText);
 
 			instance._useToggleButton = true;
 		}
@@ -18551,11 +18833,11 @@ Liferay.Notice = new Class({
 			instance._noticeClass = 'popup-alert-warning';
 		}
 
-		if (params.noticeClass) {
-			instance._noticeClass += ' ' + params.noticeClass;
+		if (options.noticeClass) {
+			instance._noticeClass += ' ' + options.noticeClass;
 		}
 
-		instance._content = params.content || '';
+		instance._content = options.content || '';
 
 		instance._createHTML();
 
@@ -18657,18 +18939,23 @@ Liferay.Notice = new Class({
 });
 Liferay.Navigation = new Class({
 
-	/*
-	params.layoutIds: an array of displayable layout ids
-	params.navBlock: the selector for the navigation block
-	*/
-	initialize: function(params) {
+	/**
+	 * OPTIONS
+	 *
+	 * Required
+	 * hasPermission {boolean}: Whether the current user has permission to modify the navigation
+	 * layoutIds {array}: The displayable layout ids.
+	 * navBlock {string|object}: A jQuery selector or DOM element of the navigation.
+	 */
+
+	initialize: function(options) {
 		var instance = this;
 
-		instance.params = params;
+		instance.options = options;
 
-		instance._navBlock = jQuery(instance.params.navBlock);
+		instance._navBlock = jQuery(instance.options.navBlock);
 
-		instance._hasPermission = instance.params.hasPermission;
+		instance._hasPermission = instance.options.hasPermission;
 		instance._isModifiable = instance._navBlock.is('.modify-pages');
 		instance._isSortable = instance._navBlock.is('.sort-pages') && instance._hasPermission;
 		instance._isUseHandle = instance._navBlock.is('.use-handle');
@@ -18679,7 +18966,7 @@ Liferay.Navigation = new Class({
 
 		items.each(
 			function(i) {
-				this._LFR_layoutId = instance.params.layoutIds[i];
+				this._LFR_layoutId = instance.options.layoutIds[i];
 			}
 		);
 
@@ -19487,30 +19774,37 @@ Liferay.Session = {
 };
 Liferay.TagsSelector = new Class({
 
-	/*
-	params.instanceVar: the instance variable for this class
-	params.hiddenInput: the hidden input used to pass in the current tags
-	params.textInput: the text input for users to add tags
-	params.summarySpan: the summary span tos how the current tags
-	params.curTags: comma delimited string of current tags
-	params.focus: true if the text input should be focused
-	params.contentCallback: the callback method to get content used to get suggestible tags
-	*/
-	initialize: function(params) {
+	/**
+	 * OPTIONS
+	 *
+	 * Required
+	 * instanceVar {string}: The instance variable for this class.
+	 * hiddenInput {string}: The hidden input used to pass in the current tags.
+	 * textInput {string}: The text input for users to add tags.
+	 * summarySpan {string}: The summary span to show the current tags.
+	 *
+	 * Optional
+	 * focus {boolean}: Whether the text input should be focused.
+	 *
+	 * Callbacks
+	 * contentCallback {function}: Called to get suggested tags.
+	 */
+
+	initialize: function(options) {
 		var instance = this;
 
 		instance._curTags = [];
 
-		instance.params = params;
-		instance._ns = instance.params.instanceVar || '';
+		instance.options = options;
+		instance._ns = instance.options.instanceVar || '';
 		instance._mainContainer = jQuery('<div class="lfr-tag-select-container"></div>');
 		instance._container = jQuery('<div class="lfr-tag-container"></div>');
 
-		var hiddenInput = jQuery('#' + params.hiddenInput);
+		var hiddenInput = jQuery('#' + options.hiddenInput);
 
 		hiddenInput.attr('name', hiddenInput.attr('id'));
 
-		var textInput = jQuery('#' + params.textInput);
+		var textInput = jQuery('#' + options.textInput);
 
 		textInput.autocomplete(
 			{
@@ -19553,7 +19847,7 @@ Liferay.TagsSelector = new Class({
 		instance._setupSelectTags();
 		instance._setupSuggestions();
 
-		var addTagButton = jQuery('#' + params.instanceVar + 'addTag');
+		var addTagButton = jQuery('#' + options.instanceVar + 'addTag');
 
 		addTagButton.click(
 			function() {
@@ -19598,12 +19892,12 @@ Liferay.TagsSelector = new Class({
 			}
 		);
 
-		if (params.focus) {
+		if (options.focus) {
 			textInput.focus();
 		}
 
-		if (params.curTags != '') {
-			instance._curTags = params.curTags.split(',');
+		if (options.curTags != '') {
+			instance._curTags = options.curTags.split(',');
 
 			instance._update();
 		}
@@ -19625,7 +19919,7 @@ Liferay.TagsSelector = new Class({
 	deleteTag: function(id) {
 		var instance = this;
 
-		var params = instance.params;
+		var options = instance.options;
 		var curTags = instance._curTags;
 
 		jQuery('#' + instance._ns + 'CurTags' + id).remove();
@@ -19732,7 +20026,7 @@ Liferay.TagsSelector = new Class({
 	_setupSelectTags: function() {
 		var instance = this;
 
-		var params = instance.params;
+		var options = instance.options;
 		var ns = instance._ns;
 
 		var input = jQuery('#' + ns + 'selectTag');
@@ -19747,7 +20041,7 @@ Liferay.TagsSelector = new Class({
 	_setupSuggestions: function() {
 		var instance = this;
 
-		var params = instance.params;
+		var options = instance.options;
 		var ns = instance._ns;
 
 		var input = jQuery('#' + ns + 'suggestions');
@@ -19762,7 +20056,7 @@ Liferay.TagsSelector = new Class({
 	_showSelectPopup: function() {
 		var instance = this;
 
-		var params = instance.params;
+		var options = instance.options;
 		var ns = instance._ns;
 		var mainContainer = instance._mainContainer;
 		var container = instance._container;
@@ -19821,7 +20115,7 @@ Liferay.TagsSelector = new Class({
 	_showSuggestionsPopup: function() {
 		var instance = this;
 
-		var params = instance.params;
+		var options = instance.options;
 		var ns = instance._ns;
 		var mainContainer = instance._mainContainer;
 		var container = instance._container;
@@ -19831,8 +20125,8 @@ Liferay.TagsSelector = new Class({
 
 		var context = '';
 
-		if (params.contentCallback) {
-			context = params.contentCallback();
+		if (options.contentCallback) {
+			context = options.contentCallback();
 		}
 
 		var url =  "http://search.yahooapis.com/ContentAnalysisService/V1/termExtraction?appid=YahooDemo&output=json&context=" + escape(context);
@@ -19882,10 +20176,10 @@ Liferay.TagsSelector = new Class({
 	_updateHiddenInput: function() {
 		var instance = this;
 
-		var params = instance.params;
+		var options = instance.options;
 		var curTags = instance._curTags;
 
-		var hiddenInput = jQuery('#' + params.hiddenInput);
+		var hiddenInput = jQuery('#' + options.hiddenInput);
 
 		hiddenInput.val(curTags.join(','));
 	},
@@ -19893,7 +20187,7 @@ Liferay.TagsSelector = new Class({
 	_updateSummarySpan: function() {
 		var instance = this;
 
-		var params = instance.params;
+		var options = instance.options;
 		var curTags = instance._curTags;
 
 		var html = '';
@@ -19907,7 +20201,7 @@ Liferay.TagsSelector = new Class({
 			}
 		);
 
-		var tagsSummary = jQuery('#' + params.summarySpan);
+		var tagsSummary = jQuery('#' + options.summarySpan);
 
 		if (curTags.length) {
 			tagsSummary.removeClass('empty');
@@ -19920,40 +20214,44 @@ Liferay.TagsSelector = new Class({
 	}
 });
 Liferay.Upload = new Class({
-	/*
-	 * PARAMETERS:
-	 * allowedFileTypes (string) *Required - a comma seperated list of allowable filetypes
-	 * container (jQuery Selector | DOM Element) *Required - container where the uploader will be placed
-	 * maxFileSize (int) *Required - the maximum file size that can be uploaded
-	 * uploadFile (string) *Required - the URL to where the file will be uploaded
+
+	/**
+	 * OPTIONS
 	 *
-	 * fallbackContainer (jQuery Selector | DOM Element) *Optional - the container holding a fallback (in case flash is not supported)
-	 * namespace (string) *Optional - A unique string so that the global callback methods don't collide
-	 * fileDescription (string) *Optional - a string describing what files can be uploaded
+	 * Required
+	 * allowedFileTypes {string}: A comma-seperated list of allowable filetypes.
+	 * container {string|object}: The container where the uploader will be placed.
+	 * maxFileSize {number}: The maximum file size that can be uploaded.
+	 * uploadFile {string}: The URL to where the file will be uploaded.
+	 *
+	 * Optional
+	 * fallbackContainer {string|object}: A jQuery selector or DOM element of the container holding a fallback (in case flash is not supported).
+	 * namespace {string}: A unique string so that the global callback methods don't collide.
+	 * fileDescription {string}: A string describing what files can be uploaded.
 	 *
 	 * Callbacks
-	 * NOTE: All callbacks are passed in the file object as it's argument, unless otherwise noted.
-	 * onFileComplete (function) *Optional - Gets called whenever a file is completely uploaded
-	 * onUploadsComplete (function) *Optional - Gets called when all files are finished being uploaded, and is passed no arguments
-	 * onUploadProgress (function) *Optional - Gets called during upload, and is also passed in the number of bytes loaded as it's second argument
-	 * onUploadError (function) *Optional - Gets called when an error in the upload occurs. Gets passed the error number as it's only argument.
+	 * onFileComplete {function}: Called whenever a file is completely uploaded.
+	 * onUploadsComplete {function}: Called when all files are finished being uploaded, and is passed no arguments.
+	 * onUploadProgress {function}: Called during upload, and is also passed in the number of bytes loaded as it's second argument.
+	 * onUploadError {function}: Called when an error in the upload occurs. Gets passed the error number as it's only argument.
 	 */
-	initialize: function(params) {
+
+	initialize: function(options) {
 		var instance = this;
 
-		params = params || {};
+		options = options || {};
 
-		instance._container = jQuery(params.container);
-		instance._fallbackContainer = jQuery(params.fallbackContainer || []);
-		instance._namespaceId = params.namespace || '_liferay_pns_' + Liferay.Util.randomInt() + '_';
-		instance._maxFileSize = params.maxFileSize || 0;
-		instance._allowedFileTypes = params.allowedFileTypes;
-		instance._uploadFile = params.uploadFile;
+		instance._container = jQuery(options.container);
+		instance._fallbackContainer = jQuery(options.fallbackContainer || []);
+		instance._namespaceId = options.namespace || '_liferay_pns_' + Liferay.Util.randomInt() + '_';
+		instance._maxFileSize = options.maxFileSize || 0;
+		instance._allowedFileTypes = options.allowedFileTypes;
+		instance._uploadFile = options.uploadFile;
 
-		instance._onFileComplete = params.onFileComplete;
-		instance._onUploadsComplete = params.onUploadsComplete;
-		instance._onUploadProgress = params.onUploadProgress;
-		instance._onUploadError = params.onUploadError;
+		instance._onFileComplete = options.onFileComplete;
+		instance._onUploadsComplete = options.onUploadsComplete;
+		instance._onUploadProgress = options.onUploadProgress;
+		instance._onUploadError = options.onUploadError;
 
 		instance._classicUploaderParam = 'uploader=classic';
 		instance._newUploaderParam = 'uploader=new';
@@ -19980,7 +20278,7 @@ Liferay.Upload = new Class({
 		instance._clearRecentUploadsText = Liferay.Language.get('clear-recent-uploads');
 		instance._fileListPendingText = Liferay.Language.get('x-files-ready-to-be-uploaded', '0');
 		instance._fileListText = Liferay.Language.get('file-list');
-		instance._fileTypesDescriptionText = params.fileDescription || instance._allowedFileTypes;
+		instance._fileTypesDescriptionText = options.fileDescription || instance._allowedFileTypes;
 		instance._uploadsCompleteText = Liferay.Language.get('all-uploads-complete');
 		instance._uploadStatusText = Liferay.Language.get('uploading-file-x-of-x', ['[$POS$]','[$TOTAL$]']);
 		instance._uploadFilesText = Liferay.Language.get('upload-files');

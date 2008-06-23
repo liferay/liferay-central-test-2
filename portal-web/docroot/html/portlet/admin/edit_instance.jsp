@@ -58,11 +58,11 @@ boolean allowWildcard = BeanParamUtil.getBoolean(company2, request, "allowWildca
 
 	PKParser pkParser = new PKParser(cae.getMessage());
 
-	String subject = pkParser.getString("subject");
 	String webId = pkParser.getString("webId");
+	String alias = pkParser.getString("alias");
 	%>
 
-	<%= LanguageUtil.format(pageContext, "the-alias-x-is-already-in-use-by-company-x", new String[] {subject, webId}) %>
+	<%= LanguageUtil.format(pageContext, "the-alias-x-is-already-in-use-by-instance-x", new String[] {alias, webId}) %>
 </liferay-ui:error>
 
 <liferay-ui:error exception="<%= CompanyMxException.class %>" message="please-enter-a-valid-mail-domain" />

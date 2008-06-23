@@ -25,7 +25,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="reviewComments" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="statusId" type="tns:int"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="getMembershipRequest updateStatus addMembershipRequest deleteMembershipRequests"/>
+		<parameter name="allowedMethods" value="deleteMembershipRequests updateStatus addMembershipRequest getMembershipRequest"/>
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:MembershipRequestSoap" type="java:com.liferay.portal.model.MembershipRequestSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 	</service>
 </deployment>
