@@ -558,6 +558,15 @@ public class UserLocalServiceUtil {
 		return userLocalService.getUserById(companyId, userId);
 	}
 
+	public static com.liferay.portal.model.User getUserByOpenId(
+		java.lang.String openId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getUserByOpenId(openId);
+	}
+
 	public static com.liferay.portal.model.User getUserByPortraitId(
 		long portraitId)
 		throws com.liferay.portal.PortalException,
@@ -574,15 +583,6 @@ public class UserLocalServiceUtil {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		return userLocalService.getUserByScreenName(companyId, screenName);
-	}
-
-	public static com.liferay.portal.model.User getUserByOpenId(
-		java.lang.String openId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getUserByOpenId(openId);
 	}
 
 	public static long getUserIdByEmailAddress(long companyId,
@@ -856,6 +856,14 @@ public class UserLocalServiceUtil {
 		return userLocalService.updateModifiedDate(userId, modifiedDate);
 	}
 
+	public static void updateOpenId(long userId, java.lang.String openId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		userLocalService.updateOpenId(userId, openId);
+	}
+
 	public static void updateOrganizations(long userId,
 		long[] newOrganizationIds)
 		throws com.liferay.portal.PortalException,
@@ -920,14 +928,6 @@ public class UserLocalServiceUtil {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		userLocalService.updateScreenName(userId, screenName);
-	}
-
-	public static void updateOpenId(long userId, java.lang.String openId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.updateOpenId(userId, openId);
 	}
 
 	public static com.liferay.portal.model.User updateUser(long userId,

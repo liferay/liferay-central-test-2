@@ -88,7 +88,7 @@ public class OpenIdRequestAction extends Action {
 		try {
 			UserLocalServiceUtil.getUserByOpenId(openId);
 		}
-		catch (NoSuchUserException e) {
+		catch (NoSuchUserException nsue1) {
 			String screenName = OpenIdUtil.getScreenName(openId);
 
 			try {
@@ -97,7 +97,7 @@ public class OpenIdRequestAction extends Action {
 
 				UserLocalServiceUtil.updateOpenId(user.getUserId(), openId);
 			}
-			catch (NoSuchUserException nsue) {
+			catch (NoSuchUserException nsue2) {
 				FetchRequest fetch = FetchRequest.createFetchRequest();
 
 				fetch.addAttribute(

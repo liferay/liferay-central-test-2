@@ -266,7 +266,7 @@ request.setAttribute("edit_user.jsp-user2", user2);
 			</liferay-util:include>
 		</liferay-ui:section>
 		<liferay-ui:section>
-			<%@ include file="/html/portlet/enterprise_admin/edit_user_openid.jspf" %>
+			<%@ include file="/html/portlet/enterprise_admin/edit_user_open_id.jspf" %>
 		</liferay-ui:section>
 		<liferay-ui:section>
 			<%@ include file="/html/portlet/enterprise_admin/edit_user_sms.jspf" %>

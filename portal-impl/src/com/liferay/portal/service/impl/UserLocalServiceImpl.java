@@ -1169,6 +1169,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return userPersistence.findByC_U(companyId, userId);
 	}
 
+	public User getUserByOpenId(String openId)
+		throws PortalException, SystemException {
+
+		return userPersistence.findByOpenId(openId);
+	}
+
 	public User getUserByPortraitId(long portraitId)
 		throws PortalException, SystemException {
 
@@ -1181,12 +1187,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		screenName = getScreenName(screenName);
 
 		return userPersistence.findByC_SN(companyId, screenName);
-	}
-
-	public User getUserByOpenId(String openId)
-		throws PortalException, SystemException {
-
-		return userPersistence.findByOpenId(openId);
 	}
 
 	public long getUserIdByEmailAddress(long companyId, String emailAddress)
@@ -1559,6 +1559,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return user;
 	}
 
+	public void updateOpenId(long userId, String openId)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		user.setOpenId(openId);
+
+		userPersistence.update(user, false);
+	}
+
 	public void updateOrganizations(
 			long userId, long[] newOrganizationIds)
 		throws PortalException, SystemException {
@@ -1749,18 +1759,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		group.setFriendlyURL(StringPool.SLASH + screenName);
 
 		groupPersistence.update(group, false);
-	}
-
-	public void updateOpenId(long userId, String openId)
-		throws PortalException, SystemException {
-
-		// User
-
-		User user = userPersistence.findByPrimaryKey(userId);
-
-		user.setOpenId(openId);
-
-		userPersistence.update(user, false);
 	}
 
 	public User updateUser(

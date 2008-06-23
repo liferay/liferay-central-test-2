@@ -302,17 +302,17 @@ public interface UserLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.User getUserByOpenId(
+		java.lang.String openId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.User getUserByPortraitId(long portraitId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User getUserByScreenName(long companyId,
 		java.lang.String screenName)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.User getUserByOpenId(
-		java.lang.String openId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -453,6 +453,10 @@ public interface UserLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public void updateOpenId(long userId, java.lang.String openId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void updateOrganizations(long userId, long[] newOrganizationIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -484,10 +488,6 @@ public interface UserLocalService {
 			com.liferay.portal.SystemException;
 
 	public void updateScreenName(long userId, java.lang.String screenName)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void updateOpenId(long userId, java.lang.String openId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

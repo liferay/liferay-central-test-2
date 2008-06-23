@@ -249,8 +249,9 @@ public class OpenIdResponseAction extends Action {
 			}
 		}
 
-		User user = null;
 		String openId = OpenIdUtil.normalize(authSuccess.getIdentity());
+
+		User user = null;
 
 		try {
 			user = UserLocalServiceUtil.getUserByOpenId(openId);
