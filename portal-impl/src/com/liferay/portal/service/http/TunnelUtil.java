@@ -104,8 +104,8 @@ public class TunnelUtil {
 
 		URL url = null;
 
-		if (Validator.isNotNull(httpPrincipal.getUserId()) ||
-			(httpPrincipal.getPassword() == null)) {
+		if (Validator.isNull(httpPrincipal.getLogin()) ||
+			Validator.isNull(httpPrincipal.getPassword())) {
 
 			url = new URL(httpPrincipal.getUrl() + "/tunnel-web/liferay/do");
 		}
@@ -122,11 +122,11 @@ public class TunnelUtil {
 
 		urlc.setRequestMethod("POST");
 
-		if (Validator.isNotNull(httpPrincipal.getUserId()) &&
-			(httpPrincipal.getPassword() != null)) {
+		if (Validator.isNotNull(httpPrincipal.getLogin()) &&
+			Validator.isNotNull(httpPrincipal.getPassword())) {
 
 			String userNameAndPassword =
-				httpPrincipal.getUserId() + StringPool.COLON +
+				httpPrincipal.getLogin() + StringPool.COLON +
 					httpPrincipal.getPassword();
 
 			urlc.setRequestProperty(

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.servlet;
 
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -83,31 +84,31 @@ public class TunnelServlet extends HttpServlet {
 
 				CompanyThreadLocal.setCompanyId(companyId);
 
-				if (Validator.isNotNull(httpPrincipal.getUserId())) {
+				if (Validator.isNotNull(httpPrincipal.getLogin())) {
 					User user = null;
 
 					try {
-						user = UserLocalServiceUtil.getUserById(
-							GetterUtil.getLong(httpPrincipal.getUserId()));
+						user = UserLocalServiceUtil.getUserByEmailAddress(
+							companyId, httpPrincipal.getLogin());
 					}
-					catch (Exception e) {
+					catch (NoSuchUserException nsue) {
 					}
 
 					if (user == null) {
 						try {
 							user = UserLocalServiceUtil.getUserByScreenName(
-								companyId, httpPrincipal.getUserId());
+								companyId, httpPrincipal.getLogin());
 						}
-						catch (Exception e) {
+						catch (NoSuchUserException nsue) {
 						}
 					}
 
 					if (user == null) {
 						try {
-							user = UserLocalServiceUtil.getUserByEmailAddress(
-								companyId, httpPrincipal.getUserId());
+							user = UserLocalServiceUtil.getUserById(
+								GetterUtil.getLong(httpPrincipal.getLogin()));
 						}
-						catch (Exception e) {
+						catch (NoSuchUserException nsue) {
 						}
 					}
 
