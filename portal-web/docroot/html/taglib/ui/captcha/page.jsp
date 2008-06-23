@@ -31,8 +31,8 @@ String url = (String)request.getAttribute("liferay-ui:captcha:url");
 
 boolean captchaEnabled = false;
 
-if (renderRequest != null) {
-	captchaEnabled = CaptchaUtil.isEnabled(renderRequest);
+if (portletRequest != null) {
+	captchaEnabled = CaptchaUtil.isEnabled(portletRequest);
 }
 else {
 	captchaEnabled = CaptchaUtil.isEnabled(request);

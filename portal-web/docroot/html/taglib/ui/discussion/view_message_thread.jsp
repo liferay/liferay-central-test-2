@@ -55,7 +55,7 @@ if (treeWalker.isOdd()) {
 		</c:if>
 
 		<%
-		String rowHREF = "javascript: " + renderResponse.getNamespace() + "scrollIntoView(" + message.getMessageId() + ");";
+		String rowHREF = "javascript: " + namespace + "scrollIntoView(" + message.getMessageId() + ");";
 		%>
 
 		<a href="<%= rowHREF %>">

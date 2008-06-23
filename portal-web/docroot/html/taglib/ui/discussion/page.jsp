@@ -262,7 +262,7 @@ List messages = treeWalker.getMessages();
 							StringMaker sm = new StringMaker();
 
 							sm.append("<a href=\"javascript: ");
-							sm.append(renderResponse.getNamespace());
+							sm.append(namespace);
 							sm.append("scrollIntoView('");
 							sm.append(parentMessage.getMessageId());
 							sm.append("');\">");
