@@ -49,11 +49,10 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 			var="permissionsURL"
 		/>
 
-		<liferay-ui:icon image="permissions" message="permissions" url="<%= permissionsURL %>" label="<%= true %>" />
+		<liferay-ui:icon image="permissions" message="permissions" url="<%= permissionsURL %>" />
 	</c:if>
 
 	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) && WikiNodePermission.contains(permissionChecker, wikiPage.getNodeId(), ActionKeys.ADD_PAGE) %>">
-
 		<portlet:renderURL var="movePageURL">
 			<portlet:param name="struts_action" value="/wiki/move_page" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -61,7 +60,7 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 			<portlet:param name="title" value="<%= wikiPage.getTitle() %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="forward" message="move" url="<%= movePageURL.toString() %>" label="<%= true %>" />
+		<liferay-ui:icon image="forward" message="move" url="<%= movePageURL.toString() %>" />
 	</c:if>
 
 	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.SUBSCRIBE) %>">
@@ -72,10 +71,10 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNSUBSCRIBE %>" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 					<portlet:param name="nodeId" value="<%= String.valueOf(wikiPage.getNodeId()) %>" />
-					<portlet:param name="title" value="<%= String.valueOf(wikiPage.getTitle()) %>" />
+					<portlet:param name="title" value="<%= wikiPage.getTitle() %>" />
 				</portlet:actionURL>
 
-				<liferay-ui:icon image="unsubscribe" url="<%= unsubscribeURL %>" label="<%= true %>" />
+				<liferay-ui:icon image="unsubscribe" url="<%= unsubscribeURL %>" />
 			</c:when>
 			<c:otherwise>
 				<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="subscribeURL">
@@ -83,10 +82,10 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SUBSCRIBE %>" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 					<portlet:param name="nodeId" value="<%= String.valueOf(wikiPage.getNodeId()) %>" />
-					<portlet:param name="title" value="<%= String.valueOf(wikiPage.getTitle()) %>" />
+					<portlet:param name="title" value="<%= wikiPage.getTitle() %>" />
 				</portlet:actionURL>
 
-				<liferay-ui:icon image="subscribe" url="<%= subscribeURL %>" label="<%= true %>" />
+				<liferay-ui:icon image="subscribe" url="<%= subscribeURL %>" />
 			</c:otherwise>
 		</c:choose>
 	</c:if>
@@ -97,7 +96,7 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="nodeId" value="<%= String.valueOf(wikiPage.getNodeId()) %>" />
-			<portlet:param name="title" value="<%= String.valueOf(wikiPage.getTitle()) %>" />
+			<portlet:param name="title" value="<%= wikiPage.getTitle() %>" />
 		</portlet:actionURL>
 
 		<liferay-ui:icon-delete url="<%= deleteURL %>" />
