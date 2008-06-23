@@ -139,7 +139,7 @@ public class BlogsStatsUserLocalServiceImpl
 
 			Date lastPostDate = statsUser.getLastPostDate();
 
-			if (lastPostDate != null) {
+			if (lastPostDate == null) {
 				statsUser.setLastPostDate(displayDate);
 			}
 			else if (displayDate.after(lastPostDate)) {
