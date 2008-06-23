@@ -25,16 +25,12 @@ package com.liferay.taglib.ui;
 import com.liferay.taglib.util.IncludeTag;
 
 /**
- * <a href="SchedulerTag.java.html"><b><i>View Source</i></b></a>
+ * <a href="InputSchedulerTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  *
  */
-public class SchedulerTag extends IncludeTag {
-
-	public int doStartTag() {
-		return EVAL_BODY_BUFFERED;
-	}
+public class InputSchedulerTag extends IncludeTag {
 
 	public void setAddFunction(String addFunction) {
 		_addFunction = addFunction;
@@ -44,7 +40,8 @@ public class SchedulerTag extends IncludeTag {
 		return _PAGE;
 	}
 
-	private static final String _PAGE = "/html/taglib/ui/scheduler/page.jsp";
+	private static final String _PAGE =
+		"/html/taglib/ui/input_scheduler/page.jsp";
 
 	private String _addFunction;
 

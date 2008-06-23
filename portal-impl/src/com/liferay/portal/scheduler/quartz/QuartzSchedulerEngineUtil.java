@@ -30,8 +30,8 @@ import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="QuartzSchedulerEngineUtil.java.html"><b><i>View Source</i></b></a>
@@ -42,8 +42,7 @@ import java.util.Date;
  */
 public class QuartzSchedulerEngineUtil {
 
-	public static Collection<SchedulerRequest> getScheduledJobs(
-			String groupName)
+	public static List<SchedulerRequest> getScheduledJobs(String groupName)
 		throws SchedulerException {
 
 		return _engine.getScheduledJobs(groupName);

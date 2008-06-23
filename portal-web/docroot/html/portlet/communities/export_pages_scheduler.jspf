@@ -28,7 +28,6 @@ ResourceURL scheduledPublishToLiveEventsURL = renderResponse.createResourceURL()
 scheduledPublishToLiveEventsURL.setParameter("struts_action", "/communities/edit_pages");
 scheduledPublishToLiveEventsURL.setParameter("groupId", String.valueOf(liveGroupId));
 scheduledPublishToLiveEventsURL.setParameter("privateLayout", String.valueOf(privateLayout));
-scheduledPublishToLiveEventsURL.setParameter("namespace", portletDisplay.getNamespace());
 %>
 
 <script type="text/javascript">
@@ -96,7 +95,7 @@ scheduledPublishToLiveEventsURL.setParameter("namespace", portletDisplay.getName
 	);
 </script>
 
-<liferay-ui:scheduler />
+<liferay-ui:input-scheduler />
 
 <br />
 

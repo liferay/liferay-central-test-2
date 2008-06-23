@@ -43,8 +43,10 @@ import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.StrutsUtil;
+import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portal.util.PortalUtil;
@@ -631,6 +633,22 @@ public class LayoutAction extends Action {
 		}
 
 		if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+			PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+
+			String portletPrimaryKey = PortletPermissionUtil.getPrimaryKey(
+				layout.getPlid(), portletId);
+
+			portletDisplay.setId(portletId);
+			portletDisplay.setRootPortletId(portlet.getRootPortletId());
+			portletDisplay.setInstanceId(portlet.getInstanceId());
+			portletDisplay.setResourcePK(portletPrimaryKey);
+			portletDisplay.setPortletName(portletConfig.getPortletName());
+			portletDisplay.setNamespace(
+				PortalUtil.getPortletNamespace(portletId));
+
 			ResourceRequestImpl resourceReqImpl =
 				ResourceRequestFactory.create(
 					req, portlet, invokerPortlet, portletCtx, windowState,

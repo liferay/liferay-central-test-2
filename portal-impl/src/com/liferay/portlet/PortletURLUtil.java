@@ -26,12 +26,11 @@ import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 
 import java.util.Enumeration;
 
+import javax.portlet.MimeResponse;
 import javax.portlet.PortletException;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
 import javax.portlet.WindowState;
 
 /**
@@ -42,7 +41,7 @@ import javax.portlet.WindowState;
  */
 public class PortletURLUtil {
 
-	public static PortletURL getCurrent(RenderRequest req, RenderResponse res) {
+	public static PortletURL getCurrent(PortletRequest req, MimeResponse res) {
 		PortletURL portletURL = res.createRenderURL();
 
 		Enumeration<String> enu = req.getParameterNames();
@@ -71,7 +70,7 @@ public class PortletURLUtil {
 		return portletURL;
 	}
 
-	public static PortletURL clone(PortletURL portletURL, RenderResponse res)
+	public static PortletURL clone(PortletURL portletURL, MimeResponse res)
 		throws PortletException {
 
 		LiferayPortletURL liferayPortletURL = (LiferayPortletURL)portletURL;
@@ -80,7 +79,7 @@ public class PortletURLUtil {
 	}
 
 	public static PortletURL clone(
-			PortletURL portletURL, String lifecycle, RenderResponse res)
+			PortletURL portletURL, String lifecycle, MimeResponse res)
 		throws PortletException {
 
 		LiferayPortletURL liferayPortletURL = (LiferayPortletURL)portletURL;
@@ -90,7 +89,7 @@ public class PortletURLUtil {
 
 	public static PortletURL clone(
 			LiferayPortletURL liferayPortletURL, String lifecycle,
-			RenderResponse res)
+			MimeResponse res)
 		throws PortletException {
 
 		LiferayPortletURL newURLImpl = null;

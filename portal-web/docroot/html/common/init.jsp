@@ -232,6 +232,7 @@
 <%@ page import="javax.portlet.PortletMode" %>
 <%@ page import="javax.portlet.PortletPreferences" %>
 <%@ page import="javax.portlet.PortletRequest" %>
+<%@ page import="javax.portlet.PortletResponse" %>
 <%@ page import="javax.portlet.PortletSession" %>
 <%@ page import="javax.portlet.PortletURL" %>
 <%@ page import="javax.portlet.RenderRequest" %>

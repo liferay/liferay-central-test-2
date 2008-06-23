@@ -66,6 +66,7 @@
 <%@ page import="com.liferay.portlet.communities.search.ExportPageChecker" %>
 <%@ page import="com.liferay.portlet.communities.search.UserGroupRoleRoleChecker" %>
 <%@ page import="com.liferay.portlet.communities.search.UserGroupRoleUserChecker" %>
+<%@ page import="com.liferay.portlet.communities.util.StagingUtil" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupSearch" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupSearchTerms" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationGroupChecker" %>

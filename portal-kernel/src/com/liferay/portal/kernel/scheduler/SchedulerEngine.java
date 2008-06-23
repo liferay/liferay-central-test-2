@@ -24,8 +24,8 @@ package com.liferay.portal.kernel.scheduler;
 
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="SchedulerEngine.java.html"><b><i>View Source</i></b></a>
@@ -44,7 +44,7 @@ public interface SchedulerEngine {
 
 	public static final String MESSAGE_BODY = "messageBody";
 
-	public Collection<SchedulerRequest> getScheduledJobs(String groupName)
+	public List<SchedulerRequest> getScheduledJobs(String groupName)
 		throws SchedulerException;
 
 	public void schedule(

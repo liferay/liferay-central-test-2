@@ -29,8 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
-import javax.portlet.RenderRequest;
 
 /**
  * <a href="SearchContainer.java.html"><b><i>View Source</i></b></a>
@@ -50,7 +50,7 @@ public class SearchContainer {
 	}
 
 	public SearchContainer(
-		RenderRequest req, DisplayTerms displayTerms, DisplayTerms searchTerms,
+		PortletRequest req, DisplayTerms displayTerms, DisplayTerms searchTerms,
 		String curParam, int delta, PortletURL iteratorURL, List headerNames,
 		String emptyResultsMessage) {
 

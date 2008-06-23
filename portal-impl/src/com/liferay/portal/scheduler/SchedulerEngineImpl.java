@@ -32,8 +32,8 @@ import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 import com.liferay.portlet.communities.messaging.LayoutsPublisherMessageListener;
 import com.liferay.util.JSONUtil;
 
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import org.json.JSONObject;
 
@@ -54,7 +54,7 @@ public class SchedulerEngineImpl implements SchedulerEngine {
 		destination.register(new LayoutsPublisherMessageListener());
 	}
 
-	public Collection<SchedulerRequest> getScheduledJobs(String groupName)
+	public List<SchedulerRequest> getScheduledJobs(String groupName)
 		throws SchedulerException {
 
 		try {
@@ -68,7 +68,7 @@ public class SchedulerEngineImpl implements SchedulerEngine {
 
 			JSONObject jsonObj = new JSONObject(message);
 
-			return (Collection<SchedulerRequest>)JSONUtil.deserialize(
+			return (List<SchedulerRequest>)JSONUtil.deserialize(
 				jsonObj.getString("schedulerRequests"));
 		}
 		catch (Exception e) {

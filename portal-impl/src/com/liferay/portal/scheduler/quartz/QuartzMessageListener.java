@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 import com.liferay.util.JSONUtil;
 
-import java.util.Collection;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -92,7 +92,7 @@ public class QuartzMessageListener implements MessageListener {
 			SchedulerRequest schedulerRequest)
 		throws Exception {
 
-		Collection<SchedulerRequest> schedulerRequests =
+		List<SchedulerRequest> schedulerRequests =
 			QuartzSchedulerEngineUtil.getScheduledJobs(
 				schedulerRequest.getGroupName());
 

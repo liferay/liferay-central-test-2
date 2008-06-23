@@ -25,14 +25,14 @@
 <%@ include file="/html/common/init.jsp" %>
 
 <%
-RenderRequest renderRequest = (RenderRequest)request.getAttribute(JavaConstants.JAVAX_PORTLET_REQUEST);
+PortletRequest portletRequest = (PortletRequest)request.getAttribute(JavaConstants.JAVAX_PORTLET_REQUEST);
 
-RenderResponse renderResponse = (RenderResponse)request.getAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE);
+PortletResponse portletResponse = (PortletResponse)request.getAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 String namespace = StringPool.BLANK;
 
-if (renderRequest != null) {
-	namespace = renderResponse.getNamespace();
+if (portletResponse != null) {
+	namespace = portletResponse.getNamespace();
 }
 
 String currentURL = PortalUtil.getCurrentURL(request);

@@ -31,7 +31,6 @@ import com.liferay.portal.util.PropsUtil;
 import java.text.ParseException;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
@@ -81,7 +80,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		}
 	}
 
-	public Collection<SchedulerRequest> getScheduledJobs(String groupName)
+	public List<SchedulerRequest> getScheduledJobs(String groupName)
 		throws SchedulerException {
 
 		try {
