@@ -28,19 +28,20 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 /**
- * <a href="NodeListComparator.java.html"><b><i>View Source</i></b></a>
+ * <a href="VisibleNodesComparator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
-public class NodeListComparator implements Comparator<WikiNode> {
+public class VisibleNodesComparator implements Comparator<WikiNode> {
 
-	public NodeListComparator(String[] visibleNodes) {
+	public VisibleNodesComparator(String[] visibleNodes) {
 		_visibleNodes = visibleNodes;
 	}
 
-	public int compare(WikiNode n1, WikiNode n2) {
-		int pos1 = Arrays.binarySearch(_visibleNodes, n1.getName());
-		int pos2 = Arrays.binarySearch(_visibleNodes, n2.getName());
+	public int compare(WikiNode node1, WikiNode node2) {
+		int pos1 = Arrays.binarySearch(_visibleNodes, node1.getName());
+		int pos2 = Arrays.binarySearch(_visibleNodes, node2.getName());
 
 		if (pos1 < 0) {
 			return 1;

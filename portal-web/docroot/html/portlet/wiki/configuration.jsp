@@ -69,6 +69,11 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 	%>
 
 	function <portlet:namespace />save() {
+		<c:if test='<%= tabs2.equals("display-settings") %>'>
+			document.<portlet:namespace />fm.<portlet:namespace />visibleNodes.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentVisibleNodes);
+			document.<portlet:namespace />fm.<portlet:namespace />hiddenNodes.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />availableVisibleNodes);
+		</c:if>
+
 		submitForm(document.<portlet:namespace />fm);
 	}
 </script>
@@ -424,11 +429,11 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 				<input name="<portlet:namespace />hiddenNodes" type="hidden" value="" />
 
 				<%
-				Set currentVisibleNodes = SetUtil.fromArray(StringUtil.split(allNodes));
+				Set<String> currentVisibleNodes = SetUtil.fromArray(StringUtil.split(allNodes));
 
 				// Left list
 
-				List leftList = new ArrayList();
+				List<KeyValuePair> leftList = new ArrayList<KeyValuePair>();
 
 				for (int i = 0; i < visibleNodes.length; i++) {
 					String folderColumn = visibleNodes[i];
@@ -439,12 +444,10 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 				Arrays.sort(visibleNodes);
 				Arrays.sort(hiddenNodes);
 
-				// Add new nodes not ordered yet
-
-				Iterator itr = currentVisibleNodes.iterator();
+				Iterator<String> itr = currentVisibleNodes.iterator();
 
 				while (itr.hasNext()) {
-					String folderColumn = (String)itr.next();
+					String folderColumn = itr.next();
 
 					if ((Arrays.binarySearch(hiddenNodes, folderColumn) < 0) && (Arrays.binarySearch(visibleNodes, folderColumn) < 0)) {
 						leftList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
@@ -453,7 +456,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 
 				// Right list
 
-				List rightList = new ArrayList();
+				List<KeyValuePair> rightList = new ArrayList<KeyValuePair>();
 
 				for (int i = 0; i < hiddenNodes.length; i++) {
 					String folderColumn = hiddenNodes[i];
@@ -480,19 +483,6 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 			</td>
 		</tr>
 		</table>
-
-		<script type="text/javascript">
-			jQuery(
-				function() {
-					jQuery('#<portlet:namespace />submit').click(
-						function() {
-							document.<portlet:namespace />fm.<portlet:namespace />visibleNodes.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentVisibleNodes);
-							document.<portlet:namespace />fm.<portlet:namespace />hiddenNodes.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />availableVisibleNodes);
-						}
-					)
-				}
-			);
-		</script>
 	</c:when>
 	<c:when test='<%= tabs2.equals("rss") %>'>
 		<table class="lfr-table">
@@ -540,7 +530,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 
 <br />
 
-<input id="<portlet:namespace />submit" type="submit" value="<liferay-ui:message key="save" />" />
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
 <input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 

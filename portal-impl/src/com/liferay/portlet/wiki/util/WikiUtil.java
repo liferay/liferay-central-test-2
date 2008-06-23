@@ -49,7 +49,7 @@ import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
-import com.liferay.portlet.wiki.util.comparator.NodeListComparator;
+import com.liferay.portlet.wiki.util.comparator.VisibleNodesComparator;
 
 import java.io.IOException;
 
@@ -250,8 +250,8 @@ public class WikiUtil {
 	public static List<WikiNode> getNodes(RenderRequest req)
 		throws PortalException, SystemException {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long groupId = themeDisplay.getLayout().getGroupId();
 
@@ -264,32 +264,31 @@ public class WikiUtil {
 			req.getPreferences().getValue("hidden-nodes", StringPool.BLANK));
 
 		return getNodes(
-			groupId, themeDisplay.getPermissionChecker(), visibleNodes,
-			hiddenNodes);
+			groupId, visibleNodes, hiddenNodes,
+			themeDisplay.getPermissionChecker());
 	}
 
 	public static List<WikiNode> getNodes(
-			long groupId, PermissionChecker permissionChecker,
-			String[] visibleNodes, String[] hiddenNodes)
+			long groupId, String[] visibleNodes, String[] hiddenNodes,
+			PermissionChecker permissionChecker)
 		throws PortalException, SystemException {
 
-		List nodes = WikiNodeLocalServiceUtil.getNodes(groupId);
+		List<WikiNode> nodes = WikiNodeLocalServiceUtil.getNodes(groupId);
 
-		Iterator itr = nodes.iterator();
+		Iterator<WikiNode> itr = nodes.iterator();
 
 		while (itr.hasNext()) {
-			WikiNode curNode = (WikiNode)itr.next();
+			WikiNode node = itr.next();
 
-			if (ArrayUtil.contains(hiddenNodes, curNode.getName()) ||
-					!WikiNodePermission.contains(
-						permissionChecker, curNode.getNodeId(),
-						ActionKeys.VIEW)) {
+			if (ArrayUtil.contains(hiddenNodes, node.getName()) ||
+				!WikiNodePermission.contains(
+					permissionChecker, node.getNodeId(), ActionKeys.VIEW)) {
 
 				itr.remove();
 			}
 		}
 
-		Collections.sort(nodes, new NodeListComparator(visibleNodes));
+		Collections.sort(nodes, new VisibleNodesComparator(visibleNodes));
 
 		return nodes;
 	}

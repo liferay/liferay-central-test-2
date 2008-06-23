@@ -35,7 +35,7 @@ boolean print = ParamUtil.getBoolean(request, Constants.PRINT);
 
 	String keywords = ParamUtil.getString(request, "keywords");
 
-	List nodes  = WikiUtil.getNodes(portletGroupId.longValue(), permissionChecker, visibleNodes, hiddenNodes);
+	List nodes  = WikiUtil.getNodes(portletGroupId.longValue(), visibleNodes, hiddenNodes, permissionChecker);
 
 	PortletURL portletURL = renderResponse.createRenderURL();
 

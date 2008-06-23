@@ -62,7 +62,10 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		String tabs2 = ParamUtil.getString(req, "tabs2");
 
-		if (tabs2.equals("email-from")) {
+		if (tabs2.equals("display-settings")) {
+			updateDisplaySettings(req, prefs);
+		}
+		else if (tabs2.equals("email-from")) {
 			updateEmailFrom(req, prefs);
 		}
 		else if (tabs2.equals("page-added-email")) {
@@ -70,9 +73,6 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		}
 		else if (tabs2.equals("page-updated-email")) {
 			updateEmailPageUpdated(req, prefs);
-		}
-		else if (tabs2.equals("display-settings")) {
-			updateDisplaySettings(req, prefs);
 		}
 		else if (tabs2.equals("rss")) {
 			updateRSS(req, prefs);
@@ -90,6 +90,28 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		throws Exception {
 
 		return "/html/portlet/wiki/configuration.jsp";
+	}
+
+	protected void updateDisplaySettings(
+			ActionRequest req, PortletPreferences prefs)
+		throws Exception {
+
+		boolean enableComments = ParamUtil.getBoolean(req, "enableComments");
+		boolean enableCommentRatings = ParamUtil.getBoolean(
+			req, "enableCommentRatings");
+		String visibleNodes = ParamUtil.getString(req, "visibleNodes");
+		String hiddenNodes = ParamUtil.getString(req, "hiddenNodes");
+
+		if (Validator.isNull(visibleNodes)) {
+			SessionErrors.add(req, "visibleNodesCount");
+		}
+		else {
+			prefs.setValue("enable-comments", String.valueOf(enableComments));
+			prefs.setValue(
+				"enable-comment-ratings", String.valueOf(enableCommentRatings));
+			prefs.setValue("visible-nodes", visibleNodes);
+			prefs.setValue("hidden-nodes", hiddenNodes);
+		}
 	}
 
 	protected void updateEmailFrom(ActionRequest req, PortletPreferences prefs)
@@ -172,28 +194,6 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			prefs.setValue("email-page-updated-body", emailPageUpdatedBody);
 			prefs.setValue(
 				"email-page-updated-signature", emailPageUpdatedSignature);
-		}
-	}
-
-	protected void updateDisplaySettings(
-			ActionRequest req, PortletPreferences prefs)
-		throws Exception {
-
-		boolean enableComments = ParamUtil.getBoolean(req, "enableComments");
-		boolean enableCommentRatings = ParamUtil.getBoolean(
-			req, "enableCommentRatings");
-		String visibleNodes = ParamUtil.getString(req, "visibleNodes");
-		String hiddenNodes = ParamUtil.getString(req, "hiddenNodes");
-
-		if (Validator.isNull(visibleNodes)) {
-			SessionErrors.add(req, "visibleNodesCount");
-		}
-		else {
-			prefs.setValue("enable-comments", String.valueOf(enableComments));
-			prefs.setValue(
-				"enable-comment-ratings", String.valueOf(enableCommentRatings));
-			prefs.setValue("visible-nodes", visibleNodes);
-			prefs.setValue("hidden-nodes", hiddenNodes);
 		}
 	}
 
