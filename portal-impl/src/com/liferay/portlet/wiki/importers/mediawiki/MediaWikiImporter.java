@@ -149,8 +149,8 @@ public class MediaWikiImporter implements WikiImporter {
 	}
 
 	protected void importPage(
-		long userId, String author, WikiNode node, String title,
-		String content, String summary, Map<String, String> usersMap)
+			long userId, String author, WikiNode node, String title,
+			String content, String summary, Map<String, String> usersMap)
 		throws PortalException {
 
 		try {
