@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.security.auth.PrincipalException;
 
@@ -103,7 +104,7 @@ public class TunnelUtil {
 
 		URL url = null;
 
-		if ((httpPrincipal.getUserId() <= 0) ||
+		if (Validator.isNotNull(httpPrincipal.getUserId()) ||
 			(httpPrincipal.getPassword() == null)) {
 
 			url = new URL(httpPrincipal.getUrl() + "/tunnel-web/liferay/do");
@@ -121,11 +122,11 @@ public class TunnelUtil {
 
 		urlc.setRequestMethod("POST");
 
-		if ((httpPrincipal.getUserId() > 0) &&
+		if (Validator.isNotNull(httpPrincipal.getUserId()) &&
 			(httpPrincipal.getPassword() != null)) {
 
 			String userNameAndPassword =
-				httpPrincipal.getUserId() + "@uid:" +
+				httpPrincipal.getUserId() + StringPool.COLON +
 					httpPrincipal.getPassword();
 
 			urlc.setRequestProperty(

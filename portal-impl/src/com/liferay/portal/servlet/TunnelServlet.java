@@ -24,9 +24,11 @@ package com.liferay.portal.servlet;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.HttpPrincipal;
@@ -81,17 +83,43 @@ public class TunnelServlet extends HttpServlet {
 
 				CompanyThreadLocal.setCompanyId(companyId);
 
-				if (httpPrincipal.getUserId() > 0) {
-					PrincipalThreadLocal.setName(httpPrincipal.getUserId());
+				if (Validator.isNotNull(httpPrincipal.getUserId())) {
+					User user = null;
 
-					User user = UserLocalServiceUtil.getUserById(
-						httpPrincipal.getUserId());
+					try {
+						user = UserLocalServiceUtil.getUserById(
+							GetterUtil.getLong(httpPrincipal.getUserId()));
+					}
+					catch (Exception e) {
+					}
 
-					permissionChecker =
-						PermissionCheckerFactory.create(user, true);
+					if (user == null) {
+						try {
+							user = UserLocalServiceUtil.getUserByScreenName(
+								companyId, httpPrincipal.getUserId());
+						}
+						catch (Exception e) {
+						}
+					}
 
-					PermissionThreadLocal.setPermissionChecker(
-						permissionChecker);
+					if (user == null) {
+						try {
+							user = UserLocalServiceUtil.getUserByEmailAddress(
+								companyId, httpPrincipal.getUserId());
+						}
+						catch (Exception e) {
+						}
+					}
+
+					if (user != null) {
+						PrincipalThreadLocal.setName(user.getUserId());
+
+						permissionChecker =
+							PermissionCheckerFactory.create(user, true);
+
+						PermissionThreadLocal.setPermissionChecker(
+							permissionChecker);
+					}
 				}
 
 				if (returnObj == null) {
