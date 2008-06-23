@@ -311,6 +311,11 @@ public interface UserLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.User getUserByOpenId(
+		java.lang.String openId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public long getUserIdByEmailAddress(long companyId,
 		java.lang.String emailAddress)
 		throws com.liferay.portal.PortalException,
@@ -479,6 +484,10 @@ public interface UserLocalService {
 			com.liferay.portal.SystemException;
 
 	public void updateScreenName(long userId, java.lang.String screenName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void updateOpenId(long userId, java.lang.String openId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

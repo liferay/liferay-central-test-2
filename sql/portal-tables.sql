@@ -1360,6 +1360,7 @@ create table User_ (
 	graceLoginCount INTEGER,
 	screenName VARCHAR(75) null,
 	emailAddress VARCHAR(75) null,
+	openId VARCHAR(75) null,
 	portraitId LONG,
 	languageId VARCHAR(75) null,
 	timeZoneId VARCHAR(75) null,

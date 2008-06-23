@@ -100,6 +100,8 @@ public class OpenIdResponseAction extends Action {
 				return mapping.findForward("portal.login");
 			}
 			else {
+				_log.error("Error processing OpenID response", e);
+
 				PortalUtil.sendError(e, req, res);
 
 				return null;
@@ -116,14 +118,15 @@ public class OpenIdResponseAction extends Action {
 
 	protected User addUser(
 			long companyId, String firstName, String lastName,
-			String emailAddress, String screenName, Locale locale)
+			String emailAddress, String openId, Locale locale)
 		throws Exception {
 
 		long creatorUserId = 0;
 		boolean autoPassword = false;
 		String password1 = PwdGenerator.getPassword();
 		String password2 = password1;
-		boolean autoScreenName = false;
+		boolean autoScreenName = true;
+		String screenName = StringPool.BLANK;
 		String middleName = StringPool.BLANK;
 		int prefixId = 0;
 		int suffixId = 0;
@@ -135,11 +138,15 @@ public class OpenIdResponseAction extends Action {
 		long[] organizationIds = new long[0];
 		boolean sendEmail = false;
 
-		return UserLocalServiceUtil.addUser(
+		User user = UserLocalServiceUtil.addUser(
 			creatorUserId, companyId, autoPassword, password1, password2,
 			autoScreenName, screenName, emailAddress, locale, firstName,
 			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
 			birthdayDay, birthdayYear, jobTitle, organizationIds, sendEmail);
+
+		UserLocalServiceUtil.updateOpenId(user.getUserId(), openId);
+
+		return user;
 	}
 
 	protected String getFirstValue(List<String> values) {
@@ -235,13 +242,11 @@ public class OpenIdResponseAction extends Action {
 			}
 		}
 
-		String screenName = OpenIdUtil.getScreenName(authSuccess.getIdentity());
-
 		User user = null;
+		String openId = OpenIdUtil.normalize(authSuccess.getIdentity());
 
 		try {
-			user = UserLocalServiceUtil.getUserByScreenName(
-				themeDisplay.getCompanyId(), screenName);
+			user = UserLocalServiceUtil.getUserByOpenId(openId);
 		}
 		catch (NoSuchUserException nsue) {
 			if (Validator.isNull(firstName) || Validator.isNull(lastName) ||
@@ -258,7 +263,7 @@ public class OpenIdResponseAction extends Action {
 
 			user = addUser(
 				themeDisplay.getCompanyId(), firstName, lastName, emailAddress,
-				screenName, themeDisplay.getLocale());
+				openId, themeDisplay.getLocale());
 		}
 
 		ses.setAttribute(WebKeys.OPEN_ID_LOGIN, new Long(user.getUserId()));

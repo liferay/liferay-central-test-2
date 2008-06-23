@@ -64,6 +64,7 @@ public class UserSoap implements Serializable {
 		soapModel.setGraceLoginCount(model.getGraceLoginCount());
 		soapModel.setScreenName(model.getScreenName());
 		soapModel.setEmailAddress(model.getEmailAddress());
+		soapModel.setOpenId(model.getOpenId());
 		soapModel.setPortraitId(model.getPortraitId());
 		soapModel.setLanguageId(model.getLanguageId());
 		soapModel.setTimeZoneId(model.getTimeZoneId());
@@ -228,6 +229,14 @@ public class UserSoap implements Serializable {
 		_emailAddress = emailAddress;
 	}
 
+	public String getOpenId() {
+		return _openId;
+	}
+
+	public void setOpenId(String openId) {
+		_openId = openId;
+	}
+
 	public long getPortraitId() {
 		return _portraitId;
 	}
@@ -374,6 +383,7 @@ public class UserSoap implements Serializable {
 	private int _graceLoginCount;
 	private String _screenName;
 	private String _emailAddress;
+	private String _openId;
 	private long _portraitId;
 	private String _languageId;
 	private String _timeZoneId;

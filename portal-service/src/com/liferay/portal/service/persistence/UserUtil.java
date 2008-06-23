@@ -228,6 +228,18 @@ public class UserUtil {
 				   .findByEmailAddress_PrevAndNext(userId, emailAddress, obc);
 	}
 
+	public static com.liferay.portal.model.User findByOpenId(
+		java.lang.String openId)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException {
+		return getPersistence().findByOpenId(openId);
+	}
+
+	public static com.liferay.portal.model.User fetchByOpenId(
+		java.lang.String openId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByOpenId(openId);
+	}
+
 	public static com.liferay.portal.model.User findByPortraitId(
 		long portraitId)
 		throws com.liferay.portal.NoSuchUserException,
@@ -383,6 +395,12 @@ public class UserUtil {
 		getPersistence().removeByEmailAddress(emailAddress);
 	}
 
+	public static void removeByOpenId(java.lang.String openId)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException {
+		getPersistence().removeByOpenId(openId);
+	}
+
 	public static void removeByPortraitId(long portraitId)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.SystemException {
@@ -441,6 +459,11 @@ public class UserUtil {
 	public static int countByEmailAddress(java.lang.String emailAddress)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByEmailAddress(emailAddress);
+	}
+
+	public static int countByOpenId(java.lang.String openId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByOpenId(openId);
 	}
 
 	public static int countByPortraitId(long portraitId)

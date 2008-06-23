@@ -48,7 +48,7 @@ public class OpenIdUtil {
 	}
 
 	public static String getScreenName(String openId) {
-		String result = openId;
+		String result = normalize(openId);
 
 		if (result.startsWith(Http.HTTP_WITH_SLASH)) {
 			result = result.substring(Http.HTTP_WITH_SLASH.length());
@@ -56,10 +56,6 @@ public class OpenIdUtil {
 
 		if (result.startsWith(Http.HTTPS_WITH_SLASH)) {
 			result = result.substring(Http.HTTPS_WITH_SLASH.length());
-		}
-
-		if (result.endsWith(StringPool.SLASH)) {
-			result = result.substring(0, result.length() - 1);
 		}
 
 		result = StringUtil.replace(
@@ -76,6 +72,16 @@ public class OpenIdUtil {
 		return PrefsPropsUtil.getBoolean(
 			companyId, PropsUtil.OPEN_ID_AUTH_ENABLED,
 			PropsValues.OPEN_ID_AUTH_ENABLED);
+	}
+
+	public static String normalize(String identity) {
+		String result = identity;
+
+		if (result.endsWith(StringPool.SLASH)) {
+			result = result.substring(0, result.length() - 1);
+		}
+
+		return result;
 	}
 
 	private OpenIdUtil() {

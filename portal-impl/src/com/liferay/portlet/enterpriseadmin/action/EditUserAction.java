@@ -269,6 +269,7 @@ public class EditUserAction extends PortletAction {
 		int birthdayDay = ParamUtil.getInteger(req, "birthdayDay");
 		int birthdayYear = ParamUtil.getInteger(req, "birthdayYear");
 		String comments = ParamUtil.getString(req, "comments");
+		String openId = ParamUtil.getString(req, "openId");
 		String smsSn = ParamUtil.getString(req, "smsSn");
 		String aimSn = ParamUtil.getString(req, "aimSn");
 		String facebookSn = ParamUtil.getString(req, "facebookSn");
@@ -319,6 +320,10 @@ public class EditUserAction extends PortletAction {
 				suffixId, male, birthdayMonth, birthdayDay, birthdayYear, smsSn,
 				aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn,
 				twitterSn, ymSn, jobTitle, organizationIds);
+
+			if (!openId.equals(user.getOpenId())) {
+				UserServiceUtil.updateOpenId(user.getUserId(), openId);
+			}
 
 			for (String type : AnnouncementsEntryImpl.TYPES) {
 				boolean email = ParamUtil.getBoolean(

@@ -251,7 +251,7 @@ request.setAttribute("edit_user.jsp-user2", user2);
 	<liferay-ui:error exception="<%= UserSmsException.class %>" message="please-enter-a-sms-id-that-is-a-valid-email-address" />
 
 	<liferay-ui:tabs
-		names="phone-numbers,sms-messenger-id,instant-messenger-ids,social-network-ids,alerts-and-announcements"
+		names="phone-numbers,open-id,sms-messenger-id,instant-messenger-ids,social-network-ids,alerts-and-announcements"
 		formName="fm"
 		param="tabs4"
 		refresh="<%= false %>"
@@ -264,6 +264,9 @@ request.setAttribute("edit_user.jsp-user2", user2);
 				<liferay-util:param name="classPK" value="<%= String.valueOf(contact2.getContactId()) %>" />
 				<liferay-util:param name="organizationIds" value="<%= StringUtil.merge(organizationIdsArray) %>" />
 			</liferay-util:include>
+		</liferay-ui:section>
+		<liferay-ui:section>
+			<%@ include file="/html/portlet/enterprise_admin/edit_user_openid.jspf" %>
 		</liferay-ui:section>
 		<liferay-ui:section>
 			<%@ include file="/html/portlet/enterprise_admin/edit_user_sms.jspf" %>

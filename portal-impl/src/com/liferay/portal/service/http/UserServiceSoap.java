@@ -515,6 +515,18 @@ public class UserServiceSoap {
 		}
 	}
 
+	public static void updateOpenId(long userId, java.lang.String openId)
+		throws RemoteException {
+		try {
+			UserServiceUtil.updateOpenId(userId, openId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portal.model.UserSoap updateUser(long userId,
 		java.lang.String oldPassword, boolean passwordReset,
 		java.lang.String screenName, java.lang.String emailAddress,

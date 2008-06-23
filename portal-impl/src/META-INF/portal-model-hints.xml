@@ -502,6 +502,7 @@
 		<field name="graceLoginCount" type="int" />
 		<field name="screenName" type="String" />
 		<field name="emailAddress" type="String" />
+		<field name="openId" type="String" />
 		<field name="portraitId" type="long" />
 		<field name="languageId" type="String" />
 		<field name="timeZoneId" type="String" />

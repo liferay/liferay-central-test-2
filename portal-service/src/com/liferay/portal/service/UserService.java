@@ -192,6 +192,10 @@ public interface UserService {
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public void updateOpenId(long userId, java.lang.String openId)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.User updateUser(long userId,
 		java.lang.String oldPassword, boolean passwordReset,
 		java.lang.String screenName, java.lang.String emailAddress,

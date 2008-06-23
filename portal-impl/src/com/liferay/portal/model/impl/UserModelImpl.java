@@ -104,6 +104,9 @@ public class UserModelImpl extends BaseModelImpl {
 			{ "emailAddress", new Integer(Types.VARCHAR) },
 			
 
+			{ "openId", new Integer(Types.VARCHAR) },
+			
+
 			{ "portraitId", new Integer(Types.BIGINT) },
 			
 
@@ -148,7 +151,7 @@ public class UserModelImpl extends BaseModelImpl {
 
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table User_ (uuid_ VARCHAR(75) null,userId LONG not null primary key,companyId LONG,createDate DATE null,modifiedDate DATE null,defaultUser BOOLEAN,contactId LONG,password_ VARCHAR(75) null,passwordEncrypted BOOLEAN,passwordReset BOOLEAN,passwordModifiedDate DATE null,graceLoginCount INTEGER,screenName VARCHAR(75) null,emailAddress VARCHAR(75) null,portraitId LONG,languageId VARCHAR(75) null,timeZoneId VARCHAR(75) null,greeting VARCHAR(75) null,comments STRING null,loginDate DATE null,loginIP VARCHAR(75) null,lastLoginDate DATE null,lastLoginIP VARCHAR(75) null,lastFailedLoginDate DATE null,failedLoginAttempts INTEGER,lockout BOOLEAN,lockoutDate DATE null,agreedToTermsOfUse BOOLEAN,active_ BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table User_ (uuid_ VARCHAR(75) null,userId LONG not null primary key,companyId LONG,createDate DATE null,modifiedDate DATE null,defaultUser BOOLEAN,contactId LONG,password_ VARCHAR(75) null,passwordEncrypted BOOLEAN,passwordReset BOOLEAN,passwordModifiedDate DATE null,graceLoginCount INTEGER,screenName VARCHAR(75) null,emailAddress VARCHAR(75) null,openId VARCHAR(75) null,portraitId LONG,languageId VARCHAR(75) null,timeZoneId VARCHAR(75) null,greeting VARCHAR(75) null,comments STRING null,loginDate DATE null,loginIP VARCHAR(75) null,lastLoginDate DATE null,lastLoginIP VARCHAR(75) null,lastFailedLoginDate DATE null,failedLoginAttempts INTEGER,lockout BOOLEAN,lockoutDate DATE null,agreedToTermsOfUse BOOLEAN,active_ BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table User_";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -174,6 +177,7 @@ public class UserModelImpl extends BaseModelImpl {
 		model.setGraceLoginCount(soapModel.getGraceLoginCount());
 		model.setScreenName(soapModel.getScreenName());
 		model.setEmailAddress(soapModel.getEmailAddress());
+		model.setOpenId(soapModel.getOpenId());
 		model.setPortraitId(soapModel.getPortraitId());
 		model.setLanguageId(soapModel.getLanguageId());
 		model.setTimeZoneId(soapModel.getTimeZoneId());
@@ -403,6 +407,19 @@ public class UserModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public String getOpenId() {
+		return GetterUtil.getString(_openId);
+	}
+
+	public void setOpenId(String openId) {
+		if (((openId == null) && (_openId != null)) ||
+				((openId != null) && (_openId == null)) ||
+				((openId != null) && (_openId != null) &&
+				!openId.equals(_openId))) {
+			_openId = openId;
+		}
+	}
+
 	public long getPortraitId() {
 		return _portraitId;
 	}
@@ -620,6 +637,7 @@ public class UserModelImpl extends BaseModelImpl {
 			model.setGraceLoginCount(getGraceLoginCount());
 			model.setScreenName(HtmlUtil.escape(getScreenName()));
 			model.setEmailAddress(HtmlUtil.escape(getEmailAddress()));
+			model.setOpenId(HtmlUtil.escape(getOpenId()));
 			model.setPortraitId(getPortraitId());
 			model.setLanguageId(HtmlUtil.escape(getLanguageId()));
 			model.setTimeZoneId(HtmlUtil.escape(getTimeZoneId()));
@@ -660,6 +678,7 @@ public class UserModelImpl extends BaseModelImpl {
 		clone.setGraceLoginCount(getGraceLoginCount());
 		clone.setScreenName(getScreenName());
 		clone.setEmailAddress(getEmailAddress());
+		clone.setOpenId(getOpenId());
 		clone.setPortraitId(getPortraitId());
 		clone.setLanguageId(getLanguageId());
 		clone.setTimeZoneId(getTimeZoneId());
@@ -741,6 +760,7 @@ public class UserModelImpl extends BaseModelImpl {
 	private int _graceLoginCount;
 	private String _screenName;
 	private String _emailAddress;
+	private String _openId;
 	private long _portraitId;
 	private String _languageId;
 	private String _timeZoneId;

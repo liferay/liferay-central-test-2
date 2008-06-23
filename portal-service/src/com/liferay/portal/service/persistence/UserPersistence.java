@@ -170,6 +170,13 @@ public interface UserPersistence {
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.User findByOpenId(java.lang.String openId)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.User fetchByOpenId(java.lang.String openId)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.User findByPortraitId(long portraitId)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.SystemException;
@@ -271,6 +278,10 @@ public interface UserPersistence {
 	public void removeByEmailAddress(java.lang.String emailAddress)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByOpenId(java.lang.String openId)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.SystemException;
+
 	public void removeByPortraitId(long portraitId)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.SystemException;
@@ -306,6 +317,9 @@ public interface UserPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByEmailAddress(java.lang.String emailAddress)
+		throws com.liferay.portal.SystemException;
+
+	public int countByOpenId(java.lang.String openId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByPortraitId(long portraitId)

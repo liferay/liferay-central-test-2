@@ -1080,6 +1080,13 @@ Liferay.Service.Portal.User = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	updateOpenId: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateOpenId";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	updateUser: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "updateUser";

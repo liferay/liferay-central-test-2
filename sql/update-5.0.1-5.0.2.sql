@@ -72,6 +72,8 @@ create table SocialRequest (
 	status INTEGER
 );
 
+alter table User_ add openId VARCHAR(1024) null;
+
 update User_ set timeZoneId = 'America/Anchorage' where timeZoneId = 'AST';
 update User_ set timeZoneId = 'America/Los_Angeles' where timeZoneId = 'PST';
 update User_ set timeZoneId = 'America/Denver' where timeZoneId = 'MST';

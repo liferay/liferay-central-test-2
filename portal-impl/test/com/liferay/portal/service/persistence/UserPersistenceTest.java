@@ -82,6 +82,7 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 		newUser.setGraceLoginCount(nextInt());
 		newUser.setScreenName(randomString());
 		newUser.setEmailAddress(randomString());
+		newUser.setOpenId(randomString());
 		newUser.setPortraitId(nextLong());
 		newUser.setLanguageId(randomString());
 		newUser.setTimeZoneId(randomString());
@@ -119,6 +120,7 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 			newUser.getGraceLoginCount());
 		assertEquals(existingUser.getScreenName(), newUser.getScreenName());
 		assertEquals(existingUser.getEmailAddress(), newUser.getEmailAddress());
+		assertEquals(existingUser.getOpenId(), newUser.getOpenId());
 		assertEquals(existingUser.getPortraitId(), newUser.getPortraitId());
 		assertEquals(existingUser.getLanguageId(), newUser.getLanguageId());
 		assertEquals(existingUser.getTimeZoneId(), newUser.getTimeZoneId());
@@ -193,6 +195,7 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 		user.setGraceLoginCount(nextInt());
 		user.setScreenName(randomString());
 		user.setEmailAddress(randomString());
+		user.setOpenId(randomString());
 		user.setPortraitId(nextLong());
 		user.setLanguageId(randomString());
 		user.setTimeZoneId(randomString());

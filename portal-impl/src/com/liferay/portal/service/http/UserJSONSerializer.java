@@ -69,6 +69,7 @@ public class UserJSONSerializer {
 		JSONUtil.put(jsonObj, "graceLoginCount", model.getGraceLoginCount());
 		JSONUtil.put(jsonObj, "screenName", model.getScreenName());
 		JSONUtil.put(jsonObj, "emailAddress", model.getEmailAddress());
+		JSONUtil.put(jsonObj, "openId", model.getOpenId());
 		JSONUtil.put(jsonObj, "portraitId", model.getPortraitId());
 		JSONUtil.put(jsonObj, "languageId", model.getLanguageId());
 		JSONUtil.put(jsonObj, "timeZoneId", model.getTimeZoneId());

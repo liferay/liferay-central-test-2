@@ -1130,6 +1130,102 @@ public class UserPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public User findByOpenId(String openId)
+		throws NoSuchUserException, SystemException {
+		User user = fetchByOpenId(openId);
+
+		if (user == null) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No User exists with the key {");
+
+			msg.append("openId=" + openId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchUserException(msg.toString());
+		}
+
+		return user;
+	}
+
+	public User fetchByOpenId(String openId) throws SystemException {
+		boolean finderClassNameCacheEnabled = UserModelImpl.CACHE_ENABLED;
+		String finderClassName = User.class.getName();
+		String finderMethodName = "fetchByOpenId";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { openId };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("FROM com.liferay.portal.model.User WHERE ");
+
+				if (openId == null) {
+					query.append("openId IS NULL");
+				}
+				else {
+					query.append("openId = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (openId != null) {
+					qPos.add(openId);
+				}
+
+				List<User> list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List<User> list = (List<User>)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return list.get(0);
+			}
+		}
+	}
+
 	public User findByPortraitId(long portraitId)
 		throws NoSuchUserException, SystemException {
 		User user = fetchByPortraitId(portraitId);
@@ -2046,6 +2142,13 @@ public class UserPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void removeByOpenId(String openId)
+		throws NoSuchUserException, SystemException {
+		User user = findByOpenId(openId);
+
+		remove(user);
+	}
+
 	public void removeByPortraitId(long portraitId)
 		throws NoSuchUserException, SystemException {
 		User user = findByPortraitId(portraitId);
@@ -2337,6 +2440,78 @@ public class UserPersistenceImpl extends BasePersistence
 
 				if (emailAddress != null) {
 					qPos.add(emailAddress);
+				}
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByOpenId(String openId) throws SystemException {
+		boolean finderClassNameCacheEnabled = UserModelImpl.CACHE_ENABLED;
+		String finderClassName = User.class.getName();
+		String finderMethodName = "countByOpenId";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { openId };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append("FROM com.liferay.portal.model.User WHERE ");
+
+				if (openId == null) {
+					query.append("openId IS NULL");
+				}
+				else {
+					query.append("openId = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (openId != null) {
+					qPos.add(openId);
 				}
 
 				Long count = null;

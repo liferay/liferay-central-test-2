@@ -25,6 +25,7 @@ package com.liferay.portal.action;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.OpenIdUtil;
@@ -84,30 +85,39 @@ public class OpenIdRequestAction extends Action {
 
 		AuthRequest authReq = manager.authenticate(discovered, returnURL);
 
-		String screenName = OpenIdUtil.getScreenName(openId);
-
 		try {
-			UserLocalServiceUtil.getUserByScreenName(
-				themeDisplay.getCompanyId(), screenName);
+			UserLocalServiceUtil.getUserByOpenId(openId);
 		}
-		catch (NoSuchUserException nsue) {
-			FetchRequest fetch = FetchRequest.createFetchRequest();
+		catch (NoSuchUserException e) {
+			String screenName = OpenIdUtil.getScreenName(openId);
 
-			fetch.addAttribute(
-				"email", "http://schema.openid.net/contact/email", true);
-			fetch.addAttribute(
-				"firstName", "http://schema.openid.net/namePerson/first", true);
-			fetch.addAttribute(
-				"lastName", "http://schema.openid.net/namePerson/last", true);
+			try {
+				User user = UserLocalServiceUtil.getUserByScreenName(
+					themeDisplay.getCompanyId(), screenName);
 
-			authReq.addExtension(fetch);
+				UserLocalServiceUtil.updateOpenId(user.getUserId(), openId);
+			}
+			catch (NoSuchUserException nsue) {
+				FetchRequest fetch = FetchRequest.createFetchRequest();
 
-			SRegRequest sregReq = SRegRequest.createFetchRequest();
+				fetch.addAttribute(
+					"email", "http://schema.openid.net/contact/email", true);
+				fetch.addAttribute(
+					"firstName", "http://schema.openid.net/namePerson/first",
+					true);
+				fetch.addAttribute(
+					"lastName", "http://schema.openid.net/namePerson/last",
+					true);
 
-			sregReq.addAttribute("fullname", true);
-			sregReq.addAttribute("email", true);
+				authReq.addExtension(fetch);
 
-			authReq.addExtension(sregReq);
+				SRegRequest sregReq = SRegRequest.createFetchRequest();
+
+				sregReq.addAttribute("fullname", true);
+				sregReq.addAttribute("email", true);
+
+				authReq.addExtension(sregReq);
+			}
 		}
 
 		res.sendRedirect(authReq.getDestinationUrl(true));

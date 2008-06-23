@@ -576,6 +576,15 @@ public class UserLocalServiceUtil {
 		return userLocalService.getUserByScreenName(companyId, screenName);
 	}
 
+	public static com.liferay.portal.model.User getUserByOpenId(
+		java.lang.String openId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getUserByOpenId(openId);
+	}
+
 	public static long getUserIdByEmailAddress(long companyId,
 		java.lang.String emailAddress)
 		throws com.liferay.portal.PortalException,
@@ -911,6 +920,14 @@ public class UserLocalServiceUtil {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		userLocalService.updateScreenName(userId, screenName);
+	}
+
+	public static void updateOpenId(long userId, java.lang.String openId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		userLocalService.updateOpenId(userId, openId);
 	}
 
 	public static com.liferay.portal.model.User updateUser(long userId,

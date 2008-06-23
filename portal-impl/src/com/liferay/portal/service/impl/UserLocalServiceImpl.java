@@ -121,6 +121,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  * @author Scott Lee
  * @author Raymond Augé
+ * @author Jorge Ferrer
  *
  */
 public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
@@ -1182,6 +1183,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return userPersistence.findByC_SN(companyId, screenName);
 	}
 
+	public User getUserByOpenId(String openId)
+		throws PortalException, SystemException {
+
+		return userPersistence.findByOpenId(openId);
+	}
+
 	public long getUserIdByEmailAddress(long companyId, String emailAddress)
 		throws PortalException, SystemException {
 
@@ -1742,6 +1749,18 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		group.setFriendlyURL(StringPool.SLASH + screenName);
 
 		groupPersistence.update(group, false);
+	}
+
+	public void updateOpenId(long userId, String openId)
+		throws PortalException, SystemException {
+
+		// User
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		user.setOpenId(openId);
+
+		userPersistence.update(user, false);
 	}
 
 	public User updateUser(

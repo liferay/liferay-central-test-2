@@ -443,6 +443,7 @@ create index IX_C5806019 on User_ (companyId, screenName);
 create index IX_9782AD88 on User_ (companyId, userId);
 create index IX_5ADBE171 on User_ (contactId);
 create index IX_762F63C6 on User_ (emailAddress);
+create index IX_A9ED7DD3 on User_ (openId);
 create index IX_A18034A4 on User_ (portraitId);
 create index IX_E0422BDA on User_ (uuid_);
 

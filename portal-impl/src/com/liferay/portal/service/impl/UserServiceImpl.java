@@ -440,6 +440,15 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		userLocalService.updateScreenName(userId, screenName);
 	}
 
+	public void updateOpenId(long userId, String openId)
+		throws PortalException, SystemException {
+
+		UserPermissionUtil.check(
+			getPermissionChecker(), userId, ActionKeys.UPDATE);
+
+		userLocalService.updateOpenId(userId, openId);
+	}
+
 	public User updateUser(
 			long userId, String oldPassword, boolean passwordReset,
 			String screenName, String emailAddress, String languageId,
