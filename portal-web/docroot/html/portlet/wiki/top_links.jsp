@@ -35,17 +35,7 @@ boolean print = ParamUtil.getBoolean(request, Constants.PRINT);
 
 	String keywords = ParamUtil.getString(request, "keywords");
 
-	List nodes = WikiNodeLocalServiceUtil.getNodes(portletGroupId.longValue());
-
-	Iterator itr = nodes.iterator();
-
-	while (itr.hasNext()) {
-		WikiNode curNode = (WikiNode)itr.next();
-
-		if (!WikiNodePermission.contains(permissionChecker, curNode.getNodeId(), ActionKeys.VIEW)) {
-			itr.remove();
-		}
-	}
+	List nodes  = WikiUtil.getNodes(portletGroupId.longValue(), permissionChecker, visibleNodes, hiddenNodes);
 
 	PortletURL portletURL = renderResponse.createRenderURL();
 

@@ -71,8 +71,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		else if (tabs2.equals("page-updated-email")) {
 			updateEmailPageUpdated(req, prefs);
 		}
-		else if (tabs2.equals("ratings")) {
-			updateRatings(req, prefs);
+		else if (tabs2.equals("display-settings")) {
+			updateDisplaySettings(req, prefs);
 		}
 		else if (tabs2.equals("rss")) {
 			updateRSS(req, prefs);
@@ -175,16 +175,26 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		}
 	}
 
-	protected void updateRatings(ActionRequest req, PortletPreferences prefs)
+	protected void updateDisplaySettings(
+			ActionRequest req, PortletPreferences prefs)
 		throws Exception {
 
 		boolean enableComments = ParamUtil.getBoolean(req, "enableComments");
 		boolean enableCommentRatings = ParamUtil.getBoolean(
 			req, "enableCommentRatings");
+		String visibleNodes = ParamUtil.getString(req, "visibleNodes");
+		String hiddenNodes = ParamUtil.getString(req, "hiddenNodes");
 
-		prefs.setValue("enable-comments", String.valueOf(enableComments));
-		prefs.setValue(
-			"enable-comment-ratings", String.valueOf(enableCommentRatings));
+		if (Validator.isNull(visibleNodes)) {
+			SessionErrors.add(req, "visibleNodesCount");
+		}
+		else {
+			prefs.setValue("enable-comments", String.valueOf(enableComments));
+			prefs.setValue(
+				"enable-comment-ratings", String.valueOf(enableCommentRatings));
+			prefs.setValue("visible-nodes", visibleNodes);
+			prefs.setValue("hidden-nodes", hiddenNodes);
+		}
 	}
 
 	protected void updateRSS(ActionRequest req, PortletPreferences prefs)

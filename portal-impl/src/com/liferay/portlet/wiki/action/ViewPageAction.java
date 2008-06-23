@@ -36,6 +36,7 @@ import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
+import com.liferay.portlet.wiki.util.WikiUtil;
 
 import java.util.List;
 
@@ -94,8 +95,7 @@ public class ViewPageAction extends PortletAction {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		List<WikiNode> nodes = WikiNodeLocalServiceUtil.getNodes(
-			themeDisplay.getLayout().getGroupId());
+		List<WikiNode> nodes = WikiUtil.getNodes(req);
 
 		if (nodes.size() == 0) {
 			String nodeName = PropsUtil.get(PropsUtil.WIKI_INITIAL_NODE_NAME);

@@ -79,7 +79,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 
 <liferay-ui:tabs
-	names="email-from,page-added-email,page-updated-email,ratings,rss"
+	names="email-from,page-added-email,page-updated-email,display-settings,rss"
 	param="tabs2"
 	url="<%= portletURL %>"
 />
@@ -92,6 +92,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 <liferay-ui:error key="emailPageUpdatedBody" message="please-enter-a-valid-body" />
 <liferay-ui:error key="emailPageUpdatedSignature" message="please-enter-a-valid-signature" />
 <liferay-ui:error key="emailPageUpdatedSubjectPrefix" message="please-enter-a-valid-subject" />
+<liferay-ui:error key="visibleNodesCount" message="please-specify-at-least-one-visible-node" />
 
 <c:choose>
 	<c:when test='<%= tabs2.equals("email-from") %>'>
@@ -389,7 +390,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		</table>
 	</c:when>
-	<c:when test='<%= tabs2.equals("ratings") %>'>
+	<c:when test='<%= tabs2.equals("display-settings") %>'>
 		<table class="lfr-table">
 		<tr>
 			<td>
@@ -408,6 +409,90 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 			</td>
 		</tr>
 		</table>
+
+		<br />
+
+		<table class="lfr-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="visible-wikis" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input name="<portlet:namespace />visibleNodes" type="hidden" value="" />
+				<input name="<portlet:namespace />hiddenNodes" type="hidden" value="" />
+
+				<%
+				Set currentVisibleNodes = SetUtil.fromArray(StringUtil.split(allNodes));
+
+				// Left list
+
+				List leftList = new ArrayList();
+
+				for (int i = 0; i < visibleNodes.length; i++) {
+					String folderColumn = visibleNodes[i];
+
+					leftList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
+				}
+
+				Arrays.sort(visibleNodes);
+				Arrays.sort(hiddenNodes);
+
+				// Add new nodes not ordered yet
+
+				Iterator itr = currentVisibleNodes.iterator();
+
+				while (itr.hasNext()) {
+					String folderColumn = (String)itr.next();
+
+					if ((Arrays.binarySearch(hiddenNodes, folderColumn) < 0) && (Arrays.binarySearch(visibleNodes, folderColumn) < 0)) {
+						leftList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
+					}
+				}
+
+				// Right list
+
+				List rightList = new ArrayList();
+
+				for (int i = 0; i < hiddenNodes.length; i++) {
+					String folderColumn = hiddenNodes[i];
+
+					if (Arrays.binarySearch(visibleNodes, folderColumn) < 0) {
+						rightList.add(new KeyValuePair(folderColumn, LanguageUtil.get(pageContext, folderColumn)));
+					}
+				}
+
+				Collections.sort(rightList, new KeyValuePairComparator(false, true));
+
+				%>
+
+				<liferay-ui:input-move-boxes
+					formName="fm"
+					leftTitle="visible"
+					rightTitle="hidden"
+					leftBoxName="currentVisibleNodes"
+					rightBoxName="availableVisibleNodes"
+					leftReorder="true"
+					leftList="<%= leftList %>"
+					rightList="<%= rightList %>"
+				/>
+			</td>
+		</tr>
+		</table>
+
+		<script type="text/javascript">
+			jQuery(
+				function() {
+					jQuery('#<portlet:namespace />submit').click(
+						function() {
+							document.<portlet:namespace />fm.<portlet:namespace />visibleNodes.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentVisibleNodes);
+							document.<portlet:namespace />fm.<portlet:namespace />hiddenNodes.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />availableVisibleNodes);
+						}
+					)
+				}
+			);
+		</script>
 	</c:when>
 	<c:when test='<%= tabs2.equals("rss") %>'>
 		<table class="lfr-table">
@@ -455,7 +540,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 
 <br />
 
-<input type="submit" value="<liferay-ui:message key="save" />" />
+<input id="<portlet:namespace />submit" type="submit" value="<liferay-ui:message key="save" />" />
 
 <input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 

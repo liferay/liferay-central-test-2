@@ -110,4 +110,9 @@ rssURLRSS20Params.append(RSSUtil.RSS);
 rssURLRSS20Params.append("&version=2.0");
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
+
+String allNodes = ListUtil.toString(WikiNodeLocalServiceUtil.getNodes(portletGroupId.longValue()), "name");
+
+String[] visibleNodes = StringUtil.split(PrefsParamUtil.getString(prefs, request, "visible-nodes", allNodes));
+String[] hiddenNodes = StringUtil.split(PrefsParamUtil.getString(prefs, request, "hidden-nodes", StringPool.BLANK));
 %>

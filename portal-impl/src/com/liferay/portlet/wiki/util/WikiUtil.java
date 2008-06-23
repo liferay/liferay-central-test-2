@@ -22,33 +22,48 @@
 
 package com.liferay.portlet.wiki.util;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.WikiFormatException;
 import com.liferay.portlet.wiki.engines.WikiEngine;
+import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
+import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
+import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
+import com.liferay.portlet.wiki.util.comparator.NodeListComparator;
 
 import java.io.IOException;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
+import javax.portlet.RenderRequest;
 
 /**
  * <a href="WikiUtil.java.html"><b><i>View Source</i></b></a>
@@ -230,6 +245,53 @@ public class WikiUtil {
 		sm.append(StringPool.GREATER_THAN);
 
 		return sm.toString();
+	}
+
+	public static List<WikiNode> getNodes(RenderRequest req)
+		throws PortalException, SystemException {
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		long groupId = themeDisplay.getLayout().getGroupId();
+
+		String allNodes = ListUtil.toString(
+			WikiNodeLocalServiceUtil.getNodes(groupId), "name");
+
+		String[] visibleNodes = StringUtil.split(
+			req.getPreferences().getValue("visible-nodes", allNodes));
+		String[] hiddenNodes = StringUtil.split(
+			req.getPreferences().getValue("hidden-nodes", StringPool.BLANK));
+
+		return getNodes(
+			groupId, themeDisplay.getPermissionChecker(), visibleNodes,
+			hiddenNodes);
+	}
+
+	public static List<WikiNode> getNodes(
+			long groupId, PermissionChecker permissionChecker,
+			String[] visibleNodes, String[] hiddenNodes)
+		throws PortalException, SystemException {
+
+		List nodes = WikiNodeLocalServiceUtil.getNodes(groupId);
+
+		Iterator itr = nodes.iterator();
+
+		while (itr.hasNext()) {
+			WikiNode curNode = (WikiNode)itr.next();
+
+			if (ArrayUtil.contains(hiddenNodes, curNode.getName()) ||
+					!WikiNodePermission.contains(
+						permissionChecker, curNode.getNodeId(),
+						ActionKeys.VIEW)) {
+
+				itr.remove();
+			}
+		}
+
+		Collections.sort(nodes, new NodeListComparator(visibleNodes));
+
+		return nodes;
 	}
 
 	public static String processContent(String content) {
