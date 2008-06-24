@@ -133,11 +133,11 @@
 	<table class="lfr-table">
 	<tr>
 		<td>
-			<input checked name='<%= namespace %>recurrenceType" type="radio" value="<%= Recurrence.NO_RECURRENCE %>' onClick="<%= namespace %>showTable('<%= namespace %>neverTable');"> <liferay-ui:message key="never" /><br />
-			<input name='<%= namespace %>recurrenceType" type="radio" value="<%= Recurrence.DAILY %>' onClick="<%= namespace %>showTable('<%= namespace %>dailyTable');"> <liferay-ui:message key="daily" /><br />
-			<input name='<%= namespace %>recurrenceType" type="radio" value="<%= Recurrence.WEEKLY %>' onClick="<%= namespace %>showTable('<%= namespace %>weeklyTable');"> <liferay-ui:message key="weekly" /><br />
-			<input name='<%= namespace %>recurrenceType" type="radio" value="<%= Recurrence.MONTHLY %>' onClick="<%= namespace %>showTable('<%= namespace %>monthlyTable');"> <liferay-ui:message key="monthly" /><br />
-			<input name='<%= namespace %>recurrenceType" type="radio" value="<%= Recurrence.YEARLY %>' onClick="<%= namespace %>showTable('<%= namespace %>yearlyTable');"> <liferay-ui:message key="yearly" />
+			<input checked name="<%= namespace %>recurrenceType" type="radio" value="<%= Recurrence.NO_RECURRENCE %>" onClick="<%= namespace %>showTable('<%= namespace %>neverTable');"> <liferay-ui:message key="never" /><br />
+			<input name="<%= namespace %>recurrenceType" type="radio" value="<%= Recurrence.DAILY %>" onClick="<%= namespace %>showTable('<%= namespace %>dailyTable');"> <liferay-ui:message key="daily" /><br />
+			<input name="<%= namespace %>recurrenceType" type="radio" value="<%= Recurrence.WEEKLY %>" onClick="<%= namespace %>showTable('<%= namespace %>weeklyTable');"> <liferay-ui:message key="weekly" /><br />
+			<input name="<%= namespace %>recurrenceType" type="radio" value="<%= Recurrence.MONTHLY %>" onClick="<%= namespace %>showTable('<%= namespace %>monthlyTable');"> <liferay-ui:message key="monthly" /><br />
+			<input name="<%= namespace %>recurrenceType" type="radio" value="<%= Recurrence.YEARLY %>" onClick="<%= namespace %>showTable('<%= namespace %>yearlyTable');"> <liferay-ui:message key="yearly" />
 		</td>
 		<td valign="top">
 			<div id="<%= namespace %>neverTable" style="display: none;">
