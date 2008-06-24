@@ -111,6 +111,4 @@ DateFormat dateFormatDate = DateFormats.getDate(locale);
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale);
 DateFormat dateFormatTime = DateFormats.getTime(locale);
 DateFormat dateFormatISO8601 = DateUtil.getISO8601Format();
-
-EventTimeComparator eventTimeComparator = new EventTimeComparator(timeZone, locale);
 %>

@@ -146,7 +146,7 @@ for (int i = 0; i < 7; i++) {
 					<%
 					List events = CalEventLocalServiceUtil.getEvents(portletGroupId.longValue(), cal, eventType);
 
-					Collections.sort(events, eventTimeComparator);
+					Collections.sort(events, new EventTimeComparator(timeZone, locale));
 
 					for (int j = 0; j < events.size(); j++) {
 						CalEvent event = (CalEvent)events.get(j);

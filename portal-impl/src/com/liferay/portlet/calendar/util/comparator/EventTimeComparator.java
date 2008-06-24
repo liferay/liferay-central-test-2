@@ -38,42 +38,39 @@ import java.util.TimeZone;
  * @author Samuel Kong
  *
  */
-public class EventTimeComparator implements Comparator {
+public class EventTimeComparator implements Comparator<CalEvent> {
 
 	public EventTimeComparator(TimeZone timeZone, Locale locale) {
-		this.timeZone = timeZone;
-		this.locale = locale;
+		_timeZone = timeZone;
+		_locale = locale;
 	}
 
-	public int compare(Object o1, Object o2) {
-		CalEvent event1 = (CalEvent) o1;
-		CalEvent event2 = (CalEvent) o2;
+	public int compare(CalEvent event1, CalEvent event2) {
+		boolean allDay1 = CalUtil.isAllDay(event1, _timeZone, _locale);
+		boolean allDay2 = CalUtil.isAllDay(event2, _timeZone, _locale);
 
-		boolean event1IsAllDay = CalUtil.isAllDay(event1, timeZone, locale);
-		boolean event2IsAllDay = CalUtil.isAllDay(event2, timeZone, locale);
-
-		if (event1IsAllDay && event2IsAllDay) {
+		if (allDay1 && allDay2) {
 			return compareTitle(event1, event2);
 		}
-		else if (event1IsAllDay) {
+		else if (allDay1) {
 			return -1;
 		}
-		else if (event2IsAllDay) {
+		else if (allDay2) {
 			return 1;
 		}
 
-		int startDateValue = compareTime(
-			getStartDate(event1, timeZone), getStartDate(event2, timeZone));
+		int value = compareTime(
+			getStartDate(event1, _timeZone), getStartDate(event2, _timeZone));
 
-		if (startDateValue != 0) {
-			return startDateValue;
+		if (value != 0) {
+			return value;
 		}
 
-		int endDateValue = compareTime(
-			getEndDate(event1, timeZone), getEndDate(event2, timeZone));
+		value = compareTime(
+			getEndDate(event1, _timeZone), getEndDate(event2, _timeZone));
 
-		if (endDateValue != 0) {
-			return endDateValue;
+		if (value != 0) {
+			return value;
 		}
 
 		return compareTitle(event1, event2);
@@ -85,21 +82,23 @@ public class EventTimeComparator implements Comparator {
 	}
 
 	protected int compareTime(Date date1, Date date2) {
-		Calendar calendar1 = Calendar.getInstance(timeZone, locale);
-		Calendar calendar2 = Calendar.getInstance(timeZone, locale);
+		Calendar cal1 = Calendar.getInstance(_timeZone, _locale);
 
-		calendar1.setTime(date1);
-		calendar2.setTime(date2);
+		cal1.setTime(date1);
 
-		calendar1.set(Calendar.YEAR, 2000);
-		calendar1.set(Calendar.MONTH, 1);
-		calendar1.set(Calendar.DAY_OF_YEAR, 1);
+		cal1.set(Calendar.YEAR, 1970);
+		cal1.set(Calendar.MONTH, 1);
+		cal1.set(Calendar.DAY_OF_YEAR, 1);
 
-		calendar2.set(Calendar.YEAR, 2000);
-		calendar2.set(Calendar.MONTH, 1);
-		calendar2.set(Calendar.DAY_OF_YEAR, 1);
+		Calendar cal2 = Calendar.getInstance(_timeZone, _locale);
 
-		return calendar1.compareTo(calendar2);
+		cal2.setTime(date2);
+
+		cal2.set(Calendar.YEAR, 1970);
+		cal2.set(Calendar.MONTH, 1);
+		cal2.set(Calendar.DAY_OF_YEAR, 1);
+
+		return cal1.compareTo(cal2);
 	}
 
 	protected Date getEndDate(CalEvent event, TimeZone timeZone) {
@@ -120,7 +119,7 @@ public class EventTimeComparator implements Comparator {
 		}
 	}
 
-	protected TimeZone timeZone;
-	protected Locale locale;
+	private TimeZone _timeZone;
+	private Locale _locale;
 
 }
