@@ -94,15 +94,6 @@ public class TagsEntryServiceUtil {
 		return tagsEntryService.getEntries(groupId, companyId, classNameId, name);
 	}
 
-	public static java.lang.String[] getEntryNames(java.lang.String className,
-		long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
-
-		return tagsEntryService.getEntryNames(className, classPK);
-	}
-
 	public static void mergeEntries(long fromEntryId, long toEntryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

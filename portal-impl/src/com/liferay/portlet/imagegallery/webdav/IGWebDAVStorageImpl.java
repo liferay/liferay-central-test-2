@@ -46,7 +46,7 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.service.IGFolderServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
-import com.liferay.portlet.tags.service.TagsEntryServiceUtil;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 
 import java.io.File;
 import java.io.InputStream;
@@ -440,14 +440,15 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			long parentFolderId = getParentFolderId(pathArray);
 			String name = WebDAVUtil.getResourceName(pathArray);
 			String description = StringPool.BLANK;
-			String contentType = ContentTypeUtil.getContentType(name);
-			String[] tagsEntries = null;
-			boolean addCommunityPermissions = true;
-			boolean addGuestPermissions = true;
 
 			file = FileUtil.createTempFile(FileUtil.getExtension(name));
 
 			FileUtil.write(file, req.getInputStream());
+
+			String contentType = ContentTypeUtil.getContentType(name);
+			String[] tagsEntries = null;
+			boolean addCommunityPermissions = true;
+			boolean addGuestPermissions = true;
 
 			try {
 				IGImage image =
@@ -457,7 +458,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				long imageId = image.getImageId();
 
 				description = image.getDescription();
-				tagsEntries = TagsEntryServiceUtil.getEntryNames(
+				tagsEntries = TagsEntryLocalServiceUtil.getEntryNames(
 					IGImage.class.getName(), imageId);
 
 				IGImageServiceUtil.updateImage(

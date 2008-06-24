@@ -46,7 +46,7 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
-import com.liferay.portlet.tags.service.TagsEntryServiceUtil;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 
 import java.io.File;
 import java.io.InputStream;
@@ -462,7 +462,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 				name = entry.getName();
 				description = entry.getDescription();
-				tagsEntries = TagsEntryServiceUtil.getEntryNames(
+				tagsEntries = TagsEntryLocalServiceUtil.getEntryNames(
 					DLFileEntry.class.getName(), entry.getFileEntryId());
 				extraSettings = entry.getExtraSettings();
 
