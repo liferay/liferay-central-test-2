@@ -527,54 +527,54 @@ response.setContentType(ContentTypes.TEXT_CSS);
 
 /* ---------- Tree ---------- */
 
-ul.gamma {
+.lfr-tree {
 }
 
-ul.gamma .expand-image {
+.lfr-tree .expand-image {
 }
 
-ul.gamma a {
+.lfr-tree a {
 	text-decoration: none;
 }
 
-ul.gamma li {
+.lfr-tree li {
 	margin-bottom: 2px;
 	padding-left: 0;
 }
 
-ul.gamma li ul {
+.lfr-tree li ul {
 }
 
-ul.gamma li ul li, ul.gamma li.tree-item {
+.lfr-tree li ul li, .lfr-tree li.tree-item {
 	padding-left: 0;
 }
 
-ul.gamma img {
+.lfr-tree img {
 	vertical-align: middle;
 }
 
-ul.gamma li.tree-item {
+.lfr-tree li.tree-item {
 	padding-left: 5px;
 }
 
-ul.gamma li.tree-item a img {
+.lfr-tree li.tree-item a img {
 	cursor: move;
 }
 
-ul.gamma li.tree-item li {
+.lfr-tree li.tree-item li {
 	padding-left: 20px;
 }
 
-ul.gamma li.tree-item ul {
+.lfr-tree li.tree-item ul {
 	margin-left: 0;
 	margin-top: 5px;
 }
 
-ul.gamma li.tree-item a, ul.gamma li.tree-item .expand-image {
+.lfr-tree li.tree-item a, .lfr-tree li.tree-item .expand-image {
 	cursor: pointer;
 }
 
-ul.gamma .tree-item-hover {
+.lfr-tree .tree-item-hover {
 	background: #7D93C1;
 	padding: 5px;
 }

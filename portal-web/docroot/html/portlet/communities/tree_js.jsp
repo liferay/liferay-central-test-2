@@ -29,6 +29,9 @@ long groupId = ((Long)request.getAttribute("edit_pages.jsp-groupId")).longValue(
 long selPlid = ((Long)request.getAttribute("edit_pages.jsp-selPlid")).longValue();
 boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
 
+String nodeIds = "";
+String rootNodeName = (String)request.getAttribute("edit_pages.jsp-rootNodeName");
+
 List layoutList = (List)request.getAttribute("edit_pages.jsp-layoutList");
 
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
@@ -49,6 +52,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 	};
 
 	var <portlet:namespace />layoutArray = [];
+	var <portlet:namespace />nodeIds = '';
 
 	<%
 	for (int i = 0; i < layoutList.size(); i++) {
@@ -80,6 +84,10 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 		if (i != 0) {
 			layoutDesc = layoutDesc.substring(0, layoutDesc.length() - 1);
 		}
+
+		if (nodeValues[0] != "0") {
+			nodeIds += nodeValues[0] + ",";
+		}
 	%>
 
 		<portlet:namespace />layoutArray[<%= i %>] = {
@@ -96,7 +104,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 	<%
 	}
 	%>
-
+	<portlet:namespace />nodeIds = '<%= nodeIds %>';
 </script>
 
 <%
@@ -109,8 +117,16 @@ StringMaker sm = new StringMaker();
 _buildLayoutsTreeHTML(groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, new IntegerWrapper(1), openNodes, portletURL, themeDisplay, sm);
 %>
 
-<div style="display: none;">
-	<%= sm %>
+<div class="lfr-tree" id="<portlet:namespace />tree-output">
+	<ul class="lfr-component">
+		<li class="root-container">
+				<a class="community" href="<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>">
+					<img height="20" src="<%= themeDisplay.getPathThemeImages() %>/trees/root.png" width="19" /><span><%= rootNodeName %></span>
+				</a>
+			</span>
+			<%= sm %>
+		</li>
+	</ul>
 </div>
 
 <%!
@@ -118,46 +134,79 @@ private void _buildLayoutsTreeHTML(long groupId, boolean privateLayout, long par
 	PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
 	List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(groupId, privateLayout, parentLayoutId);
-
-	sm.append("<ul ");
-
-	sm.append("class=\"");
+	boolean isNodeClosed = true;
 
 	if (layouts.size() > 0) {
+		sm.append("<ul ");
+
+		sm.append("class=\"");
 		sm.append("has-children ");
+
+		if ((Arrays.binarySearch(openNodes, nodeId.getValue()) >= 0) || nodeId.getValue() == 1) {
+			isNodeClosed = false;
+			sm.append("node-open");
+		}
+
+		sm.append("\"");
+
+		if (isNodeClosed) {
+			sm.append(" style=\"display: none\"");
+		}
+
+		sm.append(">");
+
+		for (Layout layout : layouts) {
+			nodeId.increment();
+			List<Layout> childLayouts = layout.getChildren();
+			String url = portletURL.toString() + "&" + portletDisplay.getNamespace() + "selPlid=" + layout.getPlid();
+			boolean hasChildNode = false;
+			boolean isNodeOpen = false;
+			String image = "spacer.png";
+
+			sm.append("<li branchid=\"");
+			sm.append(layout.getPlid());
+			sm.append("\" ");
+
+			sm.append("class=\"");
+			sm.append("tree-item ");
+
+			if (childLayouts.size() > 0) {
+				image = "plus.png";
+				sm.append("has-children ");
+
+				if (Arrays.binarySearch(openNodes, nodeId.getValue()) >= 0) {
+					image = "minus.png";
+					sm.append("node-open");
+				}
+			}
+
+			sm.append("\"");
+
+			sm.append(" nodeid=\"");
+			sm.append(nodeId.getValue());
+			sm.append("\">");
+			sm.append("<img class=\"expand-image\" height=\"20\" src=\"");
+			sm.append(themeDisplay.getPathThemeImages() + "/trees/" + image);
+			sm.append("\" width=\"19\" />");
+			sm.append("<a ");
+			sm.append("class=\"");
+			sm.append("\"");
+			sm.append("href=\"");
+			sm.append(url);
+			sm.append("\">");
+			sm.append("<img height=\"20\" src=\"");
+			sm.append(themeDisplay.getPathThemeImages() + "/trees/page.png");
+			sm.append("\" width=\"19\" />");
+			sm.append("<span>");
+			sm.append(layout.getName(themeDisplay.getLocale()));
+			sm.append("</span></a>");
+
+			_buildLayoutsTreeHTML(groupId, privateLayout, layout.getLayoutId(), nodeId, openNodes, portletURL, themeDisplay, sm);
+
+			sm.append("</li>");
+		}
+
+		sm.append("</ul>");
 	}
-
-	if (Arrays.binarySearch(openNodes, nodeId.getValue()) >= 0) {
-		sm.append("node-open");
-	}
-
-	sm.append("\"");
-
-	sm.append(">");
-
-	for (Layout layout : layouts) {
-		nodeId.increment();
-
-		sm.append("<li branchid=\"");
-		sm.append(layout.getPlid());
-		sm.append("\" nodeid=\"");
-		sm.append(nodeId.getValue());
-		sm.append("\">");
-		sm.append("<span><a href=\"");
-		sm.append(portletURL.toString());
-		sm.append("&");
-		sm.append(portletDisplay.getNamespace());
-		sm.append("selPlid=");
-		sm.append(layout.getPlid());
-		sm.append("\">");
-		sm.append(layout.getName(themeDisplay.getLocale()));
-		sm.append("</span></a>");
-
-		_buildLayoutsTreeHTML(groupId, privateLayout, layout.getLayoutId(), nodeId, openNodes, portletURL, themeDisplay, sm);
-
-		sm.append("</li>");
-	}
-
-	sm.append("</ul>");
 }
 %>

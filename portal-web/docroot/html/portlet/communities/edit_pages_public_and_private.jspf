@@ -120,8 +120,6 @@
 <table class="lfr-table" width="100%">
 <tr>
 	<td valign="top">
-		<div id="<%= renderResponse.getNamespace() %>tree-output"></div>
-
 		<liferay-util:include page="/html/portlet/communities/tree_js.jsp" />
 
 		<script type="text/javascript">
@@ -129,11 +127,12 @@
 				function() {
 					new Liferay.Tree(
 						{
-							className: "gamma",
 							icons: <portlet:namespace />layoutIcons,
 							nodes: <portlet:namespace />layoutArray,
+							nodeIds: <portlet:namespace />nodeIds,
 							openNodes: '<%= SessionTreeJSClicks.getOpenNodes(request, "layoutsTree") %>',
 							outputId: '#<%= renderResponse.getNamespace() %>tree-output',
+							preRendered: true,
 							treeId: "layoutsTree"
 						}
 					);

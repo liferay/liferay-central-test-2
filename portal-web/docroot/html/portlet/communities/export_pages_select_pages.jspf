@@ -63,7 +63,6 @@
 					function() {
 						new Liferay.Tree(
 							{
-								className: "gamma",
 								icons: <portlet:namespace />layoutIcons,
 								nolinks: true,
 								nodes: <portlet:namespace />layoutArray,
