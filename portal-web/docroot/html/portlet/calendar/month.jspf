@@ -187,6 +187,8 @@ DateFormat timeFormat = new SimpleDateFormat("h:mma", locale);
 			<%
 			List events = CalEventLocalServiceUtil.getEvents(portletGroupId.longValue(), tempCal, eventType);
 
+			Collections.sort(events, eventTimeComparator);
+
 			for (int j = 0; j < events.size(); j++) {
 				CalEvent event = (CalEvent)events.get(j);
 

@@ -35,6 +35,7 @@
 <%@ page import="com.liferay.portlet.calendar.service.CalEventLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.calendar.service.permission.CalEventPermission" %>
 <%@ page import="com.liferay.portlet.calendar.util.CalUtil" %>
+<%@ page import="com.liferay.portlet.calendar.util.comparator.EventTimeComparator" %>
 
 <%
 PortletPreferences prefs = renderRequest.getPreferences();
@@ -110,4 +111,6 @@ DateFormat dateFormatDate = DateFormats.getDate(locale);
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale);
 DateFormat dateFormatTime = DateFormats.getTime(locale);
 DateFormat dateFormatISO8601 = DateUtil.getISO8601Format();
+
+EventTimeComparator eventTimeComparator = new EventTimeComparator(timeZone, locale);
 %>
