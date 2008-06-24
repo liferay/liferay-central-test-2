@@ -25,7 +25,9 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
+long groupId = ((Long)request.getAttribute("edit_pages.jsp-groupId")).longValue();
 long selPlid = ((Long)request.getAttribute("edit_pages.jsp-selPlid")).longValue();
+boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
 
 List layoutList = (List)request.getAttribute("edit_pages.jsp-layoutList");
 
@@ -96,3 +98,66 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 	%>
 
 </script>
+
+<%
+int[] openNodes = StringUtil.split(SessionTreeJSClicks.getOpenNodes(request, "layoutsTree"), 0);
+
+Arrays.sort(openNodes);
+
+StringMaker sm = new StringMaker();
+
+_buildLayoutsTreeHTML(groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, new IntegerWrapper(1), openNodes, portletURL, themeDisplay, sm);
+%>
+
+<div style="display: none;">
+	<%= sm %>
+</div>
+
+<%!
+private void _buildLayoutsTreeHTML(long groupId, boolean privateLayout, long parentLayoutId, IntegerWrapper nodeId, int[] openNodes, PortletURL portletURL, ThemeDisplay themeDisplay, StringMaker sm) throws Exception {
+	PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+
+	List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(groupId, privateLayout, parentLayoutId);
+
+	sm.append("<ul ");
+
+	sm.append("class=\"");
+
+	if (layouts.size() > 0) {
+		sm.append("has-children ");
+	}
+
+	if (Arrays.binarySearch(openNodes, nodeId.getValue()) >= 0) {
+		sm.append("node-open");
+	}
+
+	sm.append("\"");
+
+	sm.append(">");
+
+	for (Layout layout : layouts) {
+		nodeId.increment();
+
+		sm.append("<li branchid=\"");
+		sm.append(layout.getPlid());
+		sm.append("\" nodeid=\"");
+		sm.append(nodeId.getValue());
+		sm.append("\">");
+		sm.append("<span><a href=\"");
+		sm.append(portletURL.toString());
+		sm.append("&");
+		sm.append(portletDisplay.getNamespace());
+		sm.append("selPlid=");
+		sm.append(layout.getPlid());
+		sm.append("\">");
+		sm.append(layout.getName(themeDisplay.getLocale()));
+		sm.append("</span></a>");
+
+		_buildLayoutsTreeHTML(groupId, privateLayout, layout.getLayoutId(), nodeId, openNodes, portletURL, themeDisplay, sm);
+
+		sm.append("</li>");
+	}
+
+	sm.append("</ul>");
+}
+%>
