@@ -221,7 +221,7 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 					<liferay-ui:message key="default-tab" />
 				</td>
 				<td>
-					<select name="<portlet:namespace />tabs1Default" size="1">
+					<select name="<portlet:namespace />tabs1Default">
 
 						<%
 						for (String tabs1Name : tabs1NamesArray) {
