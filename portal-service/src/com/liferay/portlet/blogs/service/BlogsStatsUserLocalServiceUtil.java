@@ -192,11 +192,11 @@ public class BlogsStatsUserLocalServiceUtil {
 	}
 
 	public static void updateStatsUser(long groupId, long userId,
-		java.util.Date lastPostDate)
+		java.util.Date displayDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
 
-		blogsStatsUserLocalService.updateStatsUser(groupId, userId, lastPostDate);
+		blogsStatsUserLocalService.updateStatsUser(groupId, userId, displayDate);
 	}
 }

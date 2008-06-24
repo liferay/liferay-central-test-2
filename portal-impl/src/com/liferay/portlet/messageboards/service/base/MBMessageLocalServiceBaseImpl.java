@@ -60,6 +60,8 @@ import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserServiceFactory;
+import com.liferay.portal.service.persistence.CompanyFinder;
+import com.liferay.portal.service.persistence.CompanyFinderUtil;
 import com.liferay.portal.service.persistence.CompanyPersistence;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.GroupFinder;
@@ -431,6 +433,14 @@ public abstract class MBMessageLocalServiceBaseImpl
 
 	public void setCompanyPersistence(CompanyPersistence companyPersistence) {
 		this.companyPersistence = companyPersistence;
+	}
+
+	public CompanyFinder getCompanyFinder() {
+		return companyFinder;
+	}
+
+	public void setCompanyFinder(CompanyFinder companyFinder) {
+		this.companyFinder = companyFinder;
 	}
 
 	public GroupLocalService getGroupLocalService() {
@@ -840,6 +850,10 @@ public abstract class MBMessageLocalServiceBaseImpl
 			companyPersistence = CompanyUtil.getPersistence();
 		}
 
+		if (companyFinder == null) {
+			companyFinder = CompanyFinderUtil.getFinder();
+		}
+
 		if (groupLocalService == null) {
 			groupLocalService = GroupLocalServiceFactory.getImpl();
 		}
@@ -1008,6 +1022,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	protected CompanyLocalService companyLocalService;
 	protected CompanyService companyService;
 	protected CompanyPersistence companyPersistence;
+	protected CompanyFinder companyFinder;
 	protected GroupLocalService groupLocalService;
 	protected GroupService groupService;
 	protected GroupPersistence groupPersistence;

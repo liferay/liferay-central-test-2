@@ -300,7 +300,7 @@ Liferay.Tree = new Class({
 			}
 
 			// Set draggables and droppables
-			
+
 			instance.setDragDrop(treeEl);
 
 			var allDraggable = false;
@@ -445,7 +445,7 @@ Liferay.Tree = new Class({
 
 		var draggables = jQuery(selector, parentEl);
 		draggables.draggable(instance._dragOptions);
-		
+
 		draggables.find('> a').droppable(instance._dropOptions);
 	},
 

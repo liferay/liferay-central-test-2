@@ -51,6 +51,8 @@ import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserServiceFactory;
+import com.liferay.portal.service.persistence.CompanyFinder;
+import com.liferay.portal.service.persistence.CompanyFinderUtil;
 import com.liferay.portal.service.persistence.CompanyPersistence;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.ImagePersistence;
@@ -418,6 +420,14 @@ public abstract class JournalArticleLocalServiceBaseImpl
 		this.companyPersistence = companyPersistence;
 	}
 
+	public CompanyFinder getCompanyFinder() {
+		return companyFinder;
+	}
+
+	public void setCompanyFinder(CompanyFinder companyFinder) {
+		this.companyFinder = companyFinder;
+	}
+
 	public ImageLocalService getImageLocalService() {
 		return imageLocalService;
 	}
@@ -760,6 +770,10 @@ public abstract class JournalArticleLocalServiceBaseImpl
 			companyPersistence = CompanyUtil.getPersistence();
 		}
 
+		if (companyFinder == null) {
+			companyFinder = CompanyFinderUtil.getFinder();
+		}
+
 		if (imageLocalService == null) {
 			imageLocalService = ImageLocalServiceFactory.getImpl();
 		}
@@ -899,6 +913,7 @@ public abstract class JournalArticleLocalServiceBaseImpl
 	protected CompanyLocalService companyLocalService;
 	protected CompanyService companyService;
 	protected CompanyPersistence companyPersistence;
+	protected CompanyFinder companyFinder;
 	protected ImageLocalService imageLocalService;
 	protected ImagePersistence imagePersistence;
 	protected PortletPreferencesLocalService portletPreferencesLocalService;

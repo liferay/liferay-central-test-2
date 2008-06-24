@@ -118,7 +118,7 @@ public interface BlogsStatsUserLocalService {
 			com.liferay.portal.SystemException;
 
 	public void updateStatsUser(long groupId, long userId,
-		java.util.Date lastPostDate)
+		java.util.Date displayDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

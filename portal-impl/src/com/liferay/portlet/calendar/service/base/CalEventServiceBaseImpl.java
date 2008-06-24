@@ -47,6 +47,8 @@ import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserServiceFactory;
 import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.portal.service.persistence.CompanyFinder;
+import com.liferay.portal.service.persistence.CompanyFinderUtil;
 import com.liferay.portal.service.persistence.CompanyPersistence;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.PortletPreferencesFinder;
@@ -151,6 +153,14 @@ public abstract class CalEventServiceBaseImpl extends PrincipalBean
 
 	public void setCompanyPersistence(CompanyPersistence companyPersistence) {
 		this.companyPersistence = companyPersistence;
+	}
+
+	public CompanyFinder getCompanyFinder() {
+		return companyFinder;
+	}
+
+	public void setCompanyFinder(CompanyFinder companyFinder) {
+		this.companyFinder = companyFinder;
 	}
 
 	public PortletPreferencesLocalService getPortletPreferencesLocalService() {
@@ -291,6 +301,10 @@ public abstract class CalEventServiceBaseImpl extends PrincipalBean
 			companyPersistence = CompanyUtil.getPersistence();
 		}
 
+		if (companyFinder == null) {
+			companyFinder = CompanyFinderUtil.getFinder();
+		}
+
 		if (portletPreferencesLocalService == null) {
 			portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getImpl();
 		}
@@ -349,6 +363,7 @@ public abstract class CalEventServiceBaseImpl extends PrincipalBean
 	protected CompanyLocalService companyLocalService;
 	protected CompanyService companyService;
 	protected CompanyPersistence companyPersistence;
+	protected CompanyFinder companyFinder;
 	protected PortletPreferencesLocalService portletPreferencesLocalService;
 	protected PortletPreferencesService portletPreferencesService;
 	protected PortletPreferencesPersistence portletPreferencesPersistence;

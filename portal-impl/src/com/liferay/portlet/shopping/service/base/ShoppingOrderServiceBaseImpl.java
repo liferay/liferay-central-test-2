@@ -39,6 +39,8 @@ import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserServiceFactory;
 import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.portal.service.persistence.CompanyFinder;
+import com.liferay.portal.service.persistence.CompanyFinderUtil;
 import com.liferay.portal.service.persistence.CompanyPersistence;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.UserFinder;
@@ -353,6 +355,14 @@ public abstract class ShoppingOrderServiceBaseImpl extends PrincipalBean
 		this.companyPersistence = companyPersistence;
 	}
 
+	public CompanyFinder getCompanyFinder() {
+		return companyFinder;
+	}
+
+	public void setCompanyFinder(CompanyFinder companyFinder) {
+		this.companyFinder = companyFinder;
+	}
+
 	public UserLocalService getUserLocalService() {
 		return userLocalService;
 	}
@@ -532,6 +542,10 @@ public abstract class ShoppingOrderServiceBaseImpl extends PrincipalBean
 			companyPersistence = CompanyUtil.getPersistence();
 		}
 
+		if (companyFinder == null) {
+			companyFinder = CompanyFinderUtil.getFinder();
+		}
+
 		if (userLocalService == null) {
 			userLocalService = UserLocalServiceFactory.getImpl();
 		}
@@ -593,6 +607,7 @@ public abstract class ShoppingOrderServiceBaseImpl extends PrincipalBean
 	protected CompanyLocalService companyLocalService;
 	protected CompanyService companyService;
 	protected CompanyPersistence companyPersistence;
+	protected CompanyFinder companyFinder;
 	protected UserLocalService userLocalService;
 	protected UserService userService;
 	protected UserPersistence userPersistence;

@@ -10,6 +10,7 @@ import ${packagePath}.model.impl.${entity.name}ModelImpl;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -23,7 +24,6 @@ import ${basePersistencePackage}.BasePersistence;
 import ${springHibernatePackage}.FinderCache;
 import ${springHibernatePackage}.HibernateUtil;
 import ${propsUtilPackage}.PropsUtil;
-import com.liferay.util.cal.CalendarUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
