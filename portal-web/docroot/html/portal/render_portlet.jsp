@@ -300,6 +300,12 @@ if (portlet.isStatic()) {
 	showMoveIcon = false;
 }
 
+// Deny access to edit mode if you do not have permission
+
+if (portletMode.equals(PortletMode.EDIT) && !PortletPermissionUtil.contains(permissionChecker, plid.longValue(), portletId, ActionKeys.PREFERENCES)) {
+	denyAccess = true;
+}
+
 // Deny access
 
 if (denyAccess) {
@@ -316,12 +322,6 @@ if (denyAccess) {
 	showMoveIcon = false;
 	showPortletCssIcon = false;
 	showPrintIcon = false;
-}
-
-// Deny access to edit mode without permission
-
-if (portletMode.equals(PortletMode.EDIT) && !PortletPermissionUtil.contains(permissionChecker, plid.longValue(), portletId, ActionKeys.PREFERENCES)) {
-	access = false;
 }
 
 portletDisplay.recycle();
