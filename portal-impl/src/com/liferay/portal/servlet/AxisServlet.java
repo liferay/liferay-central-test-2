@@ -78,15 +78,17 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 
 			super.service(req, stringServletRes);
 
-			String xml = stringServletRes.getString();
+			res.setContentType(stringServletRes.getContentType());
 
-			xml = fixXml(xml);
+			String content = stringServletRes.getString();
 
-			res.setContentType(ContentTypes.TEXT_XML_UTF8);
+			if (stringServletRes.getContentType().contains("text/xml")) {
+				content = fixXml(content);
+			}
 
 			ServletResponseUtil.write(
 				new UncommittedServletResponse(res),
-				xml.getBytes(StringPool.UTF8));
+				content.getBytes(StringPool.UTF8));
 		}
 		catch (Exception e) {
 			_log.error(e, e);
