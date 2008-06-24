@@ -40,6 +40,7 @@ import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.License;
@@ -656,7 +657,7 @@ public class BaseDeployer {
 
 		try {
 			undeployOnRedeploy = PrefsPropsUtil.getBoolean(
-				PropsUtil.HOT_UNDEPLOY_ON_REDEPLOY,
+				PropsKeys.HOT_UNDEPLOY_ON_REDEPLOY,
 				PropsValues.HOT_UNDEPLOY_ON_REDEPLOY);
 		}
 		catch (Exception e) {
@@ -704,7 +705,7 @@ public class BaseDeployer {
 		if (!file.exists()) {
 			synchronized (this) {
 				String url = PropsUtil.get(
-					PropsUtil.LIBRARY_DOWNLOAD_URL + jar);
+					PropsKeys.LIBRARY_DOWNLOAD_URL + jar);
 
 				if (_log.isInfoEnabled()) {
 					_log.info("Downloading library from " + url);
@@ -1071,32 +1072,38 @@ public class BaseDeployer {
 		String[] files = FileUtil.listFiles(srcDir + "/WEB-INF/");
 
 		for (int i = 0; i < files.length; i++) {
+			String fileName = GetterUtil.getString(
+				FileUtil.getShortFileName(files[i]));
+
+			// LEP-6145
+
+			if (fileName.equalsIgnoreCase("mule-config.xml")) {
+				continue;
+			}
+
 			String ext = GetterUtil.getString(FileUtil.getExtension(files[i]));
-			
-			String fileName = GetterUtil.getString(FileUtil.getShortFileName(files[i]));
 
-			// dom4j munges the mule-config.xml file. See LEP-6415
-			
-			if (ext.equalsIgnoreCase("xml") && !fileName.equalsIgnoreCase("mule-config.xml")) {
+			if (!ext.equalsIgnoreCase("xml")) {
+				continue;
+			}
 
-				// Make sure to rewrite any XML files to include external
-				// entities into same file. See LEP-3142.
+			// Make sure to rewrite any XML files to include external entities
+			// into same file. See LEP-3142.
 
-				File file = new File(srcDir + "/WEB-INF/" + files[i]);
+			File file = new File(srcDir + "/WEB-INF/" + files[i]);
 
-				try {
-					Document doc = DocumentUtil.readDocumentFromFile(file);
-					
-					String content = XMLFormatter.toString(
-						doc, XMLFormatter.INDENT, false);
+			try {
+				Document doc = DocumentUtil.readDocumentFromFile(file);
 
-					FileUtil.write(file, content);
-				}
-				catch (Exception e) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(
-							"Unable to format " + file + ": " + e.getMessage());
-					}
+				String content = XMLFormatter.toString(
+					doc, XMLFormatter.INDENT, true);
+
+				FileUtil.write(file, content);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Unable to format " + file + ": " + e.getMessage());
 				}
 			}
 		}
