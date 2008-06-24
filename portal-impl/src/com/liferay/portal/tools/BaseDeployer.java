@@ -1076,6 +1076,7 @@ public class BaseDeployer {
 			String fileName = GetterUtil.getString(FileUtil.getShortFileName(files[i]));
 
 			// dom4j munges the mule-config.xml file. See LEP-6415
+			
 			if (ext.equalsIgnoreCase("xml") && !fileName.equalsIgnoreCase("mule-config.xml")) {
 
 				// Make sure to rewrite any XML files to include external
