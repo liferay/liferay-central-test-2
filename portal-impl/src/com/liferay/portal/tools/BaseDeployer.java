@@ -40,7 +40,6 @@ import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.License;
@@ -657,7 +656,7 @@ public class BaseDeployer {
 
 		try {
 			undeployOnRedeploy = PrefsPropsUtil.getBoolean(
-				PropsKeys.HOT_UNDEPLOY_ON_REDEPLOY,
+				PropsUtil.HOT_UNDEPLOY_ON_REDEPLOY,
 				PropsValues.HOT_UNDEPLOY_ON_REDEPLOY);
 		}
 		catch (Exception e) {
@@ -705,7 +704,7 @@ public class BaseDeployer {
 		if (!file.exists()) {
 			synchronized (this) {
 				String url = PropsUtil.get(
-					PropsKeys.LIBRARY_DOWNLOAD_URL + jar);
+					PropsUtil.LIBRARY_DOWNLOAD_URL + jar);
 
 				if (_log.isInfoEnabled()) {
 					_log.info("Downloading library from " + url);
@@ -1073,8 +1072,11 @@ public class BaseDeployer {
 
 		for (int i = 0; i < files.length; i++) {
 			String ext = GetterUtil.getString(FileUtil.getExtension(files[i]));
+			
+			String fileName = GetterUtil.getString(FileUtil.getShortFileName(files[i]));
 
-			if (ext.equalsIgnoreCase("xml")) {
+			// dom4j munges the mule-config.xml file. See LEP-6415
+			if (ext.equalsIgnoreCase("xml") && !fileName.equalsIgnoreCase("mule-config.xml")) {
 
 				// Make sure to rewrite any XML files to include external
 				// entities into same file. See LEP-3142.
@@ -1083,9 +1085,9 @@ public class BaseDeployer {
 
 				try {
 					Document doc = DocumentUtil.readDocumentFromFile(file);
-
+					
 					String content = XMLFormatter.toString(
-						doc, XMLFormatter.INDENT, true);
+						doc, XMLFormatter.INDENT, false);
 
 					FileUtil.write(file, content);
 				}
