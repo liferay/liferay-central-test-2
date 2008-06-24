@@ -52,11 +52,11 @@
 			%>
 
 			<liferay-ui:input-date
-				monthParam="startDateMonth"
+				monthParam="schedulerStartDateMonth"
 				monthValue="<%= cal.get(Calendar.MONTH) %>"
-				dayParam="startDateDay"
+				dayParam="schedulerStartDateDay"
 				dayValue="<%= cal.get(Calendar.DATE) %>"
-				yearParam="startDateYear"
+				yearParam="schedulerStartDateYear"
 				yearValue="<%= cal.get(Calendar.YEAR) %>"
 				yearRangeStart="<%= cal.get(Calendar.YEAR) - 100 %>"
 				yearRangeEnd="<%= cal.get(Calendar.YEAR) %>"
@@ -67,12 +67,12 @@
 			&nbsp;
 
 			<liferay-ui:input-time
-				hourParam="startDateHour"
+				hourParam="schedulerStartDateHour"
 				hourValue="<%= cal.get(Calendar.HOUR) %>"
-				minuteParam="startDateMinute"
+				minuteParam="schedulerStartDateMinute"
 				minuteValue="<%= cal.get(Calendar.MINUTE) %>"
 				minuteInterval="1"
-				amPmParam="startDateAmPm"
+				amPmParam="schedulerStartDateAmPm"
 				amPmValue="<%= cal.get(Calendar.AM_PM) %>"
 			/>
 
@@ -96,11 +96,11 @@
 					<input name="<portlet:namespace />endDateType" type="radio" value="1"> <liferay-ui:message key="end-by" />
 
 					<liferay-ui:input-date
-						monthParam="endDateMonth"
+						monthParam="schedulerEndDateMonth"
 						monthValue="<%= cal.get(Calendar.MONTH) %>"
-						dayParam="endDateDay"
+						dayParam="schedulerEndDateDay"
 						dayValue="<%= cal.get(Calendar.DATE) %>"
-						yearParam="endDateYear"
+						yearParam="schedulerEndDateYear"
 						yearValue="<%= cal.get(Calendar.YEAR) %>"
 						yearRangeStart="<%= cal.get(Calendar.YEAR) - 100 %>"
 						yearRangeEnd="<%= cal.get(Calendar.YEAR) %>"
@@ -111,12 +111,12 @@
 					&nbsp;
 
 					<liferay-ui:input-time
-						hourParam="endDateHour"
+						hourParam="schedulerEndDateHour"
 						hourValue="<%= cal.get(Calendar.HOUR) %>"
-						minuteParam="endDateMinute"
+						minuteParam="schedulerEndDateMinute"
 						minuteValue="<%= cal.get(Calendar.MINUTE) %>"
 						minuteInterval="1"
-						amPmParam="endDateAmPm"
+						amPmParam="schedulerEndDateAmPm"
 						amPmValue="<%= cal.get(Calendar.AM_PM) %>"
 					/>
 				</td>

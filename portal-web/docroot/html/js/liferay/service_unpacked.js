@@ -295,6 +295,13 @@ Liferay.Service.Portal.Layout = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	unscheduleRemoteExport: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "unscheduleRemoteExport";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	updateLayout: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "updateLayout";

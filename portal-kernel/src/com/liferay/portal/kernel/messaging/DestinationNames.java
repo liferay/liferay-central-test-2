@@ -34,6 +34,9 @@ public interface DestinationNames {
 
 	public static final String LAYOUTS_PUBLISHER = "liferay/layouts_publisher";
 
+	public static final String LAYOUTS_REMOTE_EXPORTER =
+		"liferay/layouts_remote_exporter";
+
 	public static final String SCHEDULER = "liferay/scheduler";
 
 	public static final String SEARCH = "liferay/search";

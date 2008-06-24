@@ -359,6 +359,8 @@ public class StagingUtil {
 			}
 		}
 
+		boolean schedule = ParamUtil.getBoolean(req, "schedule");
+
 		String remoteAddress = ParamUtil.getString(req, "remoteAddress");
 		int remotePort = ParamUtil.getInteger(req, "remotePort");
 		boolean secureConnection = ParamUtil.getBoolean(
@@ -451,11 +453,40 @@ public class StagingUtil {
 			_log.debug(sm.toString());
 		}
 
-		copyRemoteLayouts(
-			groupId, privateLayout, layoutIdMap, parameterMap,
-			remoteAddress, remotePort, secureConnection, remoteGroupId,
-			remotePrivateLayout, getStagingParameters(req),
-			startDate, endDate);
+		if (schedule) {
+			int recurrenceType = ParamUtil.getInteger(req, "recurrenceType");
+
+			Calendar startCal = _getDate(req, "schedulerStartDate", false);
+
+			String cronText = _getCronText(
+				req, startCal, false, recurrenceType);
+
+			Date schedulerEndDate = null;
+
+			int endDateType = ParamUtil.getInteger(req, "endDateType");
+
+			if (endDateType == 1) {
+				Calendar endCal = _getDate(req, "schedulerEndDate", false);
+
+				endDate = endCal.getTime();
+			}
+
+			String description = ParamUtil.getString(req, "description");
+
+			LayoutServiceUtil.scheduleRemoteExport(
+				groupId, privateLayout, layoutIdMap, getStagingParameters(req),
+				remoteAddress, remotePort, secureConnection, remoteGroupId,
+				remotePrivateLayout, startDate, endDate,
+				getSchedulerGroupName(groupId, true), cronText,
+				startCal.getTime(), schedulerEndDate, description);
+		}
+		else {
+			copyRemoteLayouts(
+				groupId, privateLayout, layoutIdMap, parameterMap,
+				remoteAddress, remotePort, secureConnection, remoteGroupId,
+				remotePrivateLayout, getStagingParameters(req),
+				startDate, endDate);
+		}
 	}
 
 	public static List<Layout> getMissingParents(
@@ -489,10 +520,18 @@ public class StagingUtil {
 		return missingParents;
 	}
 
-	public static String getSchedulerGroupName(long liveGroupId) {
+	public static String getSchedulerGroupName(
+			long liveGroupId, boolean isRemoteExport) {
+
 		StringMaker sm = new StringMaker();
 
-		sm.append(DestinationNames.LAYOUTS_PUBLISHER);
+		if (isRemoteExport) {
+			sm.append(DestinationNames.LAYOUTS_REMOTE_EXPORTER);
+		}
+		else {
+			sm.append(DestinationNames.LAYOUTS_PUBLISHER);
+		}
+
 		sm.append(StringPool.SLASH);
 		sm.append(liveGroupId);
 
@@ -837,22 +876,18 @@ public class StagingUtil {
 
 		Map<String, String[]> parameterMap = getStagingParameters(req);
 
-		boolean timeZoneSensitive = ParamUtil.getBoolean(
-			req, "timeZoneSensitive");
-
 		int recurrenceType = ParamUtil.getInteger(req, "recurrenceType");
 
-		Calendar startCal = _getDate(req, "startDate", timeZoneSensitive);
+		Calendar startCal = _getDate(req, "schedulerStartDate", false);
 
-		String cronText = _getCronText(
-			req, startCal, timeZoneSensitive, recurrenceType);
+		String cronText = _getCronText(req, startCal, false, recurrenceType);
 
 		Date endDate = null;
 
 		int endDateType = ParamUtil.getInteger(req, "endDateType");
 
 		if (endDateType == 1) {
-			Calendar endCal = _getDate(req, "endDate", timeZoneSensitive);
+			Calendar endCal = _getDate(req, "schedulerEndDate", false);
 
 			endDate = endCal.getTime();
 		}
@@ -861,8 +896,8 @@ public class StagingUtil {
 
 		LayoutServiceUtil.schedulePublishToLive(
 			stagingGroupId, liveGroupId, privateLayout, layoutIdMap,
-			parameterMap, scope, getSchedulerGroupName(liveGroupId), cronText,
-			startCal.getTime(), endDate, description);
+			parameterMap, scope, getSchedulerGroupName(liveGroupId, false),
+			cronText, startCal.getTime(), endDate, description);
 	}
 
 	public static void unschedulePublishToLive(ActionRequest req)
@@ -877,7 +912,18 @@ public class StagingUtil {
 		String jobName = ParamUtil.getString(req, "jobName");
 
 		LayoutServiceUtil.unschedulePublishToLive(
-			liveGroupId, jobName, getSchedulerGroupName(liveGroupId));
+			liveGroupId, jobName, getSchedulerGroupName(liveGroupId, false));
+	}
+
+	public static void unscheduleRemoteExport(ActionRequest req)
+		throws Exception {
+
+		long groupId = ParamUtil.getLong(req, "groupId");
+
+		String jobName = ParamUtil.getString(req, "jobName");
+
+		LayoutServiceUtil.unscheduleRemoteExport(
+			groupId, jobName, getSchedulerGroupName(groupId, true));
 	}
 
 	public static void updateStaging(ActionRequest req) throws Exception {

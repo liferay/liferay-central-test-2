@@ -212,6 +212,58 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 					</ul>
 				</li>
 			</ul>
+
+			<br /><br />
+
+			<liferay-ui:input-scheduler />
+
+			<br />
+
+			<input id="<portlet:namespace />addButton" type="button" value="<liferay-ui:message key="add-event" />" onClick="<portlet:namespace />scheduleRemoteExport();" />
+
+			<%
+			SearchContainer searchContainer = new SearchContainer();
+
+			List headerNames = new ArrayList();
+
+			headerNames.add("description");
+			headerNames.add(StringPool.BLANK);
+
+			searchContainer.setHeaderNames(headerNames);
+			searchContainer.setEmptyResultsMessage("there-are-no-scheduled-events");
+
+			List<SchedulerRequest> results = SchedulerEngineUtil.getScheduledJobs(StagingUtil.getSchedulerGroupName(groupId, true));
+			List resultRows = searchContainer.getResultRows();
+
+			for (int i = 0; i < results.size(); i++) {
+				SchedulerRequest schedulerRequest = results.get(i);
+
+				ResultRow row = new ResultRow(schedulerRequest, schedulerRequest.hashCode(), i);
+
+				// Description
+
+				row.addText(schedulerRequest.getDescription());
+
+				// Action
+
+				StringMaker sm = new StringMaker();
+
+				sm.append("<a href=\"javascript: ");
+				sm.append(portletDisplay.getNamespace());
+				sm.append("unscheduleRemoteExport('");
+				sm.append(schedulerRequest.getJobName());
+				sm.append("');\">");
+				sm.append(LanguageUtil.get(pageContext, "delete"));
+				sm.append("</a>");
+
+				row.addText(sm.toString());
+
+				resultRows.add(row);
+			}
+			%>
+
+			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
+
 		</liferay-ui:toggle-area>
 
 		<br />

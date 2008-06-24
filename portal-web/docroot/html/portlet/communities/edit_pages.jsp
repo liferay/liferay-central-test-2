@@ -314,6 +314,19 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		submitForm(document.<portlet:namespace />fm);
 	}
 
+	function <portlet:namespace />scheduleRemoteExport() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "export_remotely";
+		document.<portlet:namespace />fm.<portlet:namespace />schedule.value = "true";
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />unscheduleRemoteExport(jobName) {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "unschedule_remote_export";
+		document.<portlet:namespace />fm.<portlet:namespace />jobName.value = jobName;
+		submitForm(document.<portlet:namespace />fm);
+	}
+
 	function <portlet:namespace />updateDisplayOrder() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "display_order";
 		document.<portlet:namespace />fm.<portlet:namespace />layoutIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox);
@@ -399,6 +412,8 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 <input name="<portlet:namespace />tabs3" type="hidden" value="<%= HtmlUtil.escape(tabs3) %>" />
 <input name="<portlet:namespace />tabs4" type="hidden" value="<%= HtmlUtil.escape(tabs4) %>" />
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+<input name="<portlet:namespace />schedule" type="hidden" value="false" />
+<input name="<portlet:namespace />jobName" type="hidden" />
 <input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />tabs4=<%= tabs4 %>&<portlet:namespace />selPlid=<%= selPlid %>" />
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
 <input name="<portlet:namespace />liveGroupId" type="hidden" value="<%= liveGroupId %>" />

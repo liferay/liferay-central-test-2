@@ -24,9 +24,6 @@
 
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
-<%@ page import="com.liferay.portal.kernel.scheduler.SchedulerEngineUtil" %>
-<%@ page import="com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest" %>
-
 <%
 long liveGroupId = ParamUtil.getLong(request, "groupId");
 
@@ -40,7 +37,7 @@ headerNames.add(StringPool.BLANK);
 searchContainer.setHeaderNames(headerNames);
 searchContainer.setEmptyResultsMessage("there-are-no-scheduled-events");
 
-List<SchedulerRequest> results = SchedulerEngineUtil.getScheduledJobs(StagingUtil.getSchedulerGroupName(liveGroupId));
+List<SchedulerRequest> results = SchedulerEngineUtil.getScheduledJobs(StagingUtil.getSchedulerGroupName(liveGroupId, false));
 List resultRows = searchContainer.getResultRows();
 
 for (int i = 0; i < results.size(); i++) {

@@ -168,6 +168,9 @@ public class EditPagesAction extends PortletAction {
 			else if (cmd.equals("unschedule_publish_to_live")) {
 				StagingUtil.unschedulePublishToLive(req);
 			}
+			else if (cmd.equals("unschedule_remote_export")) {
+				StagingUtil.unscheduleRemoteExport(req);
+			}
 			else if (cmd.equals("virtual_host")) {
 				updateVirtualHost(req);
 			}

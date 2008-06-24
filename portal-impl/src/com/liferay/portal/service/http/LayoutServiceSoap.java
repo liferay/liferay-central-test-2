@@ -181,6 +181,19 @@ public class LayoutServiceSoap {
 		}
 	}
 
+	public static void unscheduleRemoteExport(long groupId,
+		java.lang.String jobName, java.lang.String groupName)
+		throws RemoteException {
+		try {
+			LayoutServiceUtil.unscheduleRemoteExport(groupId, jobName, groupName);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portal.model.LayoutSoap updateLayout(
 		long groupId, boolean privateLayout, long layoutId,
 		java.lang.String typeSettings) throws RemoteException {

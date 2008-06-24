@@ -265,6 +265,32 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			JSONUtil.serialize(layoutsPublisherRequest));
 	}
 
+	public void scheduleRemoteExport(
+			long sourceGroupId, boolean privateLayout,
+			Map<Long, Boolean> layoutIdMap,
+			Map<String, String[]> parameterMap, String remoteAddress,
+			int remotePort, boolean secure, long remoteGroupId,
+			boolean remotePrivateLayout, Date exportStartDate,
+			Date exportEndDate, String groupName, String cronText,
+			Date startDate, Date endDate, String description)
+		throws PortalException, SystemException {
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), sourceGroupId, ActionKeys.MANAGE_LAYOUTS);
+
+		LayoutsPublisherRequest layoutsPublisherRequest =
+			new LayoutsPublisherRequest(
+				null, getUserId(), sourceGroupId, remoteGroupId,
+				privateLayout, layoutIdMap, parameterMap, remoteAddress,
+				remotePort, secure, exportStartDate, exportEndDate,
+				remotePrivateLayout);
+
+		SchedulerEngineUtil.schedule(
+			groupName, cronText, startDate, endDate, description,
+			DestinationNames.LAYOUTS_REMOTE_EXPORTER,
+			JSONUtil.serialize(layoutsPublisherRequest));
+	}
+
 	public void setLayouts(
 			long groupId, boolean privateLayout, long parentLayoutId,
 			long[] layoutIds)
@@ -283,6 +309,16 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 		GroupPermissionUtil.check(
 			getPermissionChecker(), liveGroupId, ActionKeys.MANAGE_LAYOUTS);
+
+		SchedulerEngineUtil.unschedule(jobName, groupName);
+	}
+
+	public void unscheduleRemoteExport(
+			long groupId, String jobName, String groupName)
+		throws PortalException, SystemException {
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
 		SchedulerEngineUtil.unschedule(jobName, groupName);
 	}

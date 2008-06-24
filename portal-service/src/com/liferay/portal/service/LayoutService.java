@@ -135,6 +135,18 @@ public interface LayoutService {
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public void scheduleRemoteExport(long sourceGroupId, boolean privateLayout,
+		java.util.Map<Long, Boolean> layoutIdMap,
+		java.util.Map<String, String[]> parameterMap,
+		java.lang.String remoteAddress, int remotePort, boolean secure,
+		long remoteGroupId, boolean remotePrivateLayout,
+		java.util.Date exportStartDate, java.util.Date exportEndDate,
+		java.lang.String groupName, java.lang.String cronText,
+		java.util.Date startDate, java.util.Date endDate,
+		java.lang.String description)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void setLayouts(long groupId, boolean privateLayout,
 		long parentLayoutId, long[] layoutIds)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
@@ -142,6 +154,11 @@ public interface LayoutService {
 
 	public void unschedulePublishToLive(long liveGroupId,
 		java.lang.String jobName, java.lang.String groupName)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void unscheduleRemoteExport(long groupId, java.lang.String jobName,
+		java.lang.String groupName)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

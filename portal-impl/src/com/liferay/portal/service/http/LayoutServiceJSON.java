@@ -133,6 +133,13 @@ public class LayoutServiceJSON {
 			groupName);
 	}
 
+	public static void unscheduleRemoteExport(long groupId,
+		java.lang.String jobName, java.lang.String groupName)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		LayoutServiceUtil.unscheduleRemoteExport(groupId, jobName, groupName);
+	}
+
 	public static JSONObject updateLayout(long groupId, boolean privateLayout,
 		long layoutId, java.lang.String typeSettings)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,

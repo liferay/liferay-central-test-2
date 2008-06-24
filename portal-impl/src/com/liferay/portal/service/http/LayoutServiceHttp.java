@@ -935,6 +935,122 @@ public class LayoutServiceHttp {
 		}
 	}
 
+	public static void scheduleRemoteExport(HttpPrincipal httpPrincipal,
+		long sourceGroupId, boolean privateLayout,
+		java.util.Map<Long, Boolean> layoutIdMap,
+		java.util.Map<String, String[]> parameterMap,
+		java.lang.String remoteAddress, int remotePort, boolean secure,
+		long remoteGroupId, boolean remotePrivateLayout,
+		java.util.Date exportStartDate, java.util.Date exportEndDate,
+		java.lang.String groupName, java.lang.String cronText,
+		java.util.Date startDate, java.util.Date endDate,
+		java.lang.String description)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(sourceGroupId);
+
+			Object paramObj1 = new BooleanWrapper(privateLayout);
+
+			Object paramObj2 = layoutIdMap;
+
+			if (layoutIdMap == null) {
+				paramObj2 = new NullWrapper("java.util.Map");
+			}
+
+			Object paramObj3 = parameterMap;
+
+			if (parameterMap == null) {
+				paramObj3 = new NullWrapper("java.util.Map");
+			}
+
+			Object paramObj4 = remoteAddress;
+
+			if (remoteAddress == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = new IntegerWrapper(remotePort);
+
+			Object paramObj6 = new BooleanWrapper(secure);
+
+			Object paramObj7 = new LongWrapper(remoteGroupId);
+
+			Object paramObj8 = new BooleanWrapper(remotePrivateLayout);
+
+			Object paramObj9 = exportStartDate;
+
+			if (exportStartDate == null) {
+				paramObj9 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj10 = exportEndDate;
+
+			if (exportEndDate == null) {
+				paramObj10 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj11 = groupName;
+
+			if (groupName == null) {
+				paramObj11 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj12 = cronText;
+
+			if (cronText == null) {
+				paramObj12 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj13 = startDate;
+
+			if (startDate == null) {
+				paramObj13 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj14 = endDate;
+
+			if (endDate == null) {
+				paramObj14 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj15 = description;
+
+			if (description == null) {
+				paramObj15 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
+					"scheduleRemoteExport",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11, paramObj12, paramObj13,
+						paramObj14, paramObj15
+					});
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static void setLayouts(HttpPrincipal httpPrincipal, long groupId,
 		boolean privateLayout, long parentLayoutId, long[] layoutIds)
 		throws com.liferay.portal.PortalException,
@@ -999,6 +1115,51 @@ public class LayoutServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"unschedulePublishToLive",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static void unscheduleRemoteExport(HttpPrincipal httpPrincipal,
+		long groupId, java.lang.String jobName, java.lang.String groupName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = jobName;
+
+			if (jobName == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = groupName;
+
+			if (groupName == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
+					"unscheduleRemoteExport",
 					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			try {
