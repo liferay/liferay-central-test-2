@@ -177,6 +177,8 @@ create index IX_2857419D on JournalTemplate (uuid_);
 create index IX_62D1B3AD on JournalTemplate (uuid_, groupId);
 
 create index IX_C7FBC998 on Layout (companyId);
+create index IX_66E0FA87 on Layout (companyId, privateLayout, parentLayoutId, junctionPlid);
+create index IX_8B9E82D0 on Layout (companyId, privateLayout, type_);
 create index IX_FAD05595 on Layout (dlFolderId);
 create index IX_C099D61A on Layout (groupId);
 create index IX_705F5AA3 on Layout (groupId, privateLayout);
@@ -185,6 +187,7 @@ create index IX_7162C27C on Layout (groupId, privateLayout, layoutId);
 create index IX_6DE88B06 on Layout (groupId, privateLayout, parentLayoutId);
 create index IX_1A1B61D2 on Layout (groupId, privateLayout, type_);
 create index IX_23922F7D on Layout (iconImageId);
+create index IX_3E3D954F on Layout (junctionPlid);
 
 create index IX_A40B8BEC on LayoutSet (groupId);
 create index IX_48550691 on LayoutSet (groupId, privateLayout);

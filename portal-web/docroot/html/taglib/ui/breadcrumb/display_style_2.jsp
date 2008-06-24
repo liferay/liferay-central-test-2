@@ -27,52 +27,54 @@
 <%
 StringMaker sm = new StringMaker();
 
-_buildBreadcrumb(selLayout, selLayoutParam, portletURL, themeDisplay, true, sm);
+_buildBreadcrumb(selLayout, selLayoutParam, portletURL, true, request, themeDisplay, sm);
 %>
 
 <%= sm.toString() %>
 
 <%!
-private void _buildBreadcrumb(Layout selLayout, String selLayoutParam, PortletURL portletURL, ThemeDisplay themeDisplay, boolean selectedLayout, StringMaker sm) throws Exception {
-	String layoutURL = _getBreadcrumbLayoutURL(selLayout, selLayoutParam, portletURL, themeDisplay);
-	String target = PortalUtil.getLayoutTarget(selLayout);
-	long layoutParentId = selLayout.getParentLayoutId();
+private void _buildBreadcrumb(Layout selLayout, String selLayoutParam, PortletURL portletURL, boolean selectedLayout, HttpServletRequest req, ThemeDisplay themeDisplay, StringMaker sm) throws Exception {
+	String junctionPointURL = null;
 
-	StringMaker breadCrumbSM = new StringMaker();
+	List<Layout> selBranch = selLayout.getJunctionAncestors(req);
 
-	if (selectedLayout) {
-		if (layoutParentId != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
-			breadCrumbSM.append("<br />");
-			breadCrumbSM.append("<br />");
+	for (int i = selBranch.size() - 1; i >= 0; i--) {
+		Layout curLayout = selBranch.get(i);
+
+		String layoutURL = _getBreadcrumbLayoutURL(curLayout, selLayoutParam, portletURL, themeDisplay);
+
+		if (curLayout.getType().equals(LayoutConstants.TYPE_JUNCTION_POINT)) {
+			junctionPointURL = layoutURL;
+
+			continue;
 		}
 
-		breadCrumbSM.append("<div class=\"font-xx-large\" style=\"font-weight: bold;\">");
-		breadCrumbSM.append(selLayout.getName(themeDisplay.getLocale()));
-		breadCrumbSM.append("</div>");
-		breadCrumbSM.append("<br />");
-	}
-	else {
-		breadCrumbSM.append("<a href=\"");
-		breadCrumbSM.append(layoutURL);
-		breadCrumbSM.append("\" ");
-		breadCrumbSM.append(target);
-		breadCrumbSM.append(">");
-		breadCrumbSM.append(selLayout.getName(themeDisplay.getLocale()));
-		breadCrumbSM.append("</a>");
-	}
+		String target = PortalUtil.getLayoutTarget(curLayout);
 
-	Layout layoutParent = null;
+		if (i == 0) {
+			if (curLayout.getParentLayoutId() != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
+				sm.append("<br />");
+				sm.append("<br />");
+			}
 
-	if (layoutParentId != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
-		layoutParent = LayoutLocalServiceUtil.getLayout(selLayout.getGroupId(), selLayout.isPrivateLayout(), layoutParentId);
+			sm.append("<div class=\"font-xx-large\" style=\"font-weight: bold;\">");
+			sm.append(curLayout.getName(themeDisplay.getLocale()));
+			sm.append("</div>");
+			sm.append("<br />");
+		}
+		else {
+			sm.append("<a href=\"");
+			sm.append((junctionPointURL != null) ? junctionPointURL : layoutURL);
+			sm.append("\" ");
+			sm.append(target);
+			sm.append(">");
+			sm.append(curLayout.getName(themeDisplay.getLocale()));
+			sm.append("</a>");
 
-		_buildBreadcrumb(layoutParent, selLayoutParam, portletURL, themeDisplay, false, sm);
+			sm.append(" &raquo; ");
 
-		sm.append(" &raquo; ");
-		sm.append(breadCrumbSM.toString());
-	}
-	else {
-		sm.append(breadCrumbSM.toString());
+			junctionPointURL = null;
+		}
 	}
 }
 

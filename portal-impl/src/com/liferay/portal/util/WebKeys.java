@@ -105,6 +105,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String LAYOUT_DEFAULT = "LAYOUT_DEFAULT";
 
+	public static final String LAYOUT_JUNCTION_ANCESTORS = "LAYOUT_JUNCTION_ANCESTORS";
+
 	public static final String LAYOUT_LISTER_LIST = "LAYOUT_LISTER_LIST";
 
 	public static final String LAYOUT_TEMPLATE_CONTENT = "LAYOUT_TEMPLATE_CONTENT";

@@ -79,3 +79,44 @@
 	</td>
 </tr>
 </table>
+
+<%
+List<Layout> junctionLayouts = null;
+
+if (selLayout.isRootLayout()) {
+	junctionLayouts = LayoutLocalServiceUtil.getJunctionLayouts(company.getCompanyId(), selLayout.isPrivateLayout());
+}
+%>
+
+<c:if test="<%= (junctionLayouts != null) && (junctionLayouts.size() > 0) %>">
+	<br />
+
+	<table class="lfr-table">
+	<tr>
+		<td>
+			<liferay-ui:message key="junction-point" />
+		</td>
+		<td>
+			<select name="<portlet:namespace />junctionPlid">
+				<option value=""></option>
+
+				<%
+				for (Layout junctionLayout : junctionLayouts) {
+					if ((junctionLayout.getPlid() == selLayout.getPlid()) ||
+						(junctionLayout.getAncestorPlid() == selLayout.getPlid())) {
+
+						continue;
+					}
+				%>
+
+					<option <%= (junctionLayout.getPlid() == selLayout.getJunctionPlid()) ? "selected" : "" %> value="<%= junctionLayout.getPlid() %>"><%= junctionLayout.getGroup().getDescriptiveName() %> - <%= junctionLayout.getName(locale) %></option>
+
+				<%
+				}
+				%>
+
+			</select>
+		</td>
+	</tr>
+	</table>
+</c:if>

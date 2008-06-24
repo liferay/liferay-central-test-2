@@ -27,41 +27,43 @@
 <%
 StringMaker sm = new StringMaker();
 
-_buildBreadcrumb(selLayout, selLayoutParam, portletURL, themeDisplay, true, sm);
+_buildBreadcrumb(selLayout, selLayoutParam, portletURL, true, request, themeDisplay, sm);
 %>
 
 <%= sm.toString() %>
 
 <%!
-private void _buildBreadcrumb(Layout selLayout, String selLayoutParam, PortletURL portletURL, ThemeDisplay themeDisplay, boolean selectedLayout, StringMaker sm) throws Exception {
-	String layoutURL = _getBreadcrumbLayoutURL(selLayout, selLayoutParam, portletURL, themeDisplay);
-	String target = PortalUtil.getLayoutTarget(selLayout);
+private void _buildBreadcrumb(Layout selLayout, String selLayoutParam, PortletURL portletURL, boolean selectedLayout, HttpServletRequest req, ThemeDisplay themeDisplay, StringMaker sm) throws Exception {
+	String junctionPointURL = null;
 
-	StringMaker breadCrumbSM = new StringMaker();
+	List<Layout> selBranch = selLayout.getJunctionAncestors(req);
 
-	breadCrumbSM.append("<a href=\"");
-	breadCrumbSM.append(layoutURL);
-	breadCrumbSM.append("\" ");
-	breadCrumbSM.append(target);
-	breadCrumbSM.append(">");
+	for (int i = selBranch.size() - 1; i >= 0; i--) {
+		Layout curLayout = selBranch.get(i);
 
-	breadCrumbSM.append(selLayout.getName(themeDisplay.getLocale()));
+		String layoutURL = _getBreadcrumbLayoutURL(curLayout, selLayoutParam, portletURL, themeDisplay);
 
-	breadCrumbSM.append("</a>");
+		if (curLayout.getType().equals(LayoutConstants.TYPE_JUNCTION_POINT)) {
+			junctionPointURL = layoutURL;
 
-	Layout layoutParent = null;
-	long layoutParentId = selLayout.getParentLayoutId();
+			continue;
+		}
 
-	if (layoutParentId != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
-		layoutParent = LayoutLocalServiceUtil.getLayout(selLayout.getGroupId(), selLayout.isPrivateLayout(), layoutParentId);
+		String target = PortalUtil.getLayoutTarget(curLayout);
 
-		_buildBreadcrumb(layoutParent, selLayoutParam, portletURL, themeDisplay, false, sm);
+		sm.append("<a href=\"");
+		sm.append((junctionPointURL != null) ? junctionPointURL : layoutURL);
+		sm.append("\" ");
+		sm.append(target);
+		sm.append(">");
+		sm.append(curLayout.getName(themeDisplay.getLocale()));
+		sm.append("</a>");
 
-		sm.append(" &raquo; ");
-		sm.append(breadCrumbSM.toString());
-	}
-	else {
-		sm.append(breadCrumbSM.toString());
+		if (i > 0) {
+			sm.append(" &raquo; ");
+		}
+
+		junctionPointURL = null;
 	}
 }
 

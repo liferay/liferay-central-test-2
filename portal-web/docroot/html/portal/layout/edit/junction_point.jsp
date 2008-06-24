@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
@@ -19,33 +20,55 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
-package com.liferay.portal.model;
+<%@ include file="/html/portal/layout/edit/init.jsp" %>
 
-/**
- * <a href="LayoutConstants.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
-public class LayoutConstants {
+<table class="lfr-table">
+<tr>
+	<td>
+		<liferay-ui:message key="deep-history" />
+	</td>
+	<td>
 
-	public static final long DEFAULT_PLID = 0;
+		<%
+		boolean deepHistory = GetterUtil.getBoolean(selLayout.getTypeSettingsProperties().getProperty("deep-history"), selLayout.isRootLayout());
+		%>
 
-	public static final long DEFAULT_PARENT_LAYOUT_ID = 0;
+		<select name="TypeSettingsProperties(deep-history)">
+			<option <%= deepHistory ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
+			<option <%= !deepHistory ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
+		</select>
+	</td>
+</tr>
 
-	public static final String TYPE_PORTLET = "portlet";
+<%
+List<Layout> junctionLayouts = selLayout.getJunctionLayouts();
+%>
 
-	public static final String TYPE_PANEL = "panel";
+<c:if test="<%= junctionLayouts.size() > 0 %>">
+	<tr>
+		<td>
+			<liferay-ui:message key="junction-point-usage" />
+		</td>
+		<td>
+			<ul>
 
-	public static final String TYPE_EMBEDDED = "embedded";
+				<%
+				for (Layout junctionLayout : junctionLayouts) {
+				%>
 
-	public static final String TYPE_ARTICLE = "article";
+					<li>
+						<%= junctionLayout.getGroup().getDescriptiveName() %> - <%= junctionLayout.getName(locale) %>
+					</li>
 
-	public static final String TYPE_URL = "url";
+				<%
+				}
+				%>
 
-	public static final String TYPE_LINK_TO_LAYOUT = "link_to_layout";
+			</ul>
+		</td>
+	</tr>
+</c:if>
 
-	public static final String TYPE_JUNCTION_POINT = "junction_point";
-
-}
+</table>

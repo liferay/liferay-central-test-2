@@ -70,6 +70,7 @@ public class LayoutSoap implements Serializable {
 		soapModel.setWapColorSchemeId(model.getWapColorSchemeId());
 		soapModel.setCss(model.getCss());
 		soapModel.setPriority(model.getPriority());
+		soapModel.setJunctionPlid(model.getJunctionPlid());
 		soapModel.setDlFolderId(model.getDlFolderId());
 
 		return soapModel;
@@ -276,6 +277,14 @@ public class LayoutSoap implements Serializable {
 		_priority = priority;
 	}
 
+	public long getJunctionPlid() {
+		return _junctionPlid;
+	}
+
+	public void setJunctionPlid(long junctionPlid) {
+		_junctionPlid = junctionPlid;
+	}
+
 	public long getDlFolderId() {
 		return _dlFolderId;
 	}
@@ -305,5 +314,6 @@ public class LayoutSoap implements Serializable {
 	private String _wapColorSchemeId;
 	private String _css;
 	private int _priority;
+	private long _junctionPlid;
 	private long _dlFolderId;
 }

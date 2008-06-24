@@ -302,6 +302,13 @@ Liferay.Service.Portal.Layout = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	updateJunctionPlid: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateJunctionPlid";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	updateLayout: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "updateLayout";

@@ -435,6 +435,7 @@
 		<column name="wapColorSchemeId" type="String" />
 		<column name="css" type="String" />
 		<column name="priority" type="int" />
+		<column name="junctionPlid" type="long" />
 		<column name="dlFolderId" type="long" />
 
 		<!-- Order -->
@@ -452,11 +453,14 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
-		<finder name="DLFolderId" return-type="Layout">
-			<finder-column name="dlFolderId" />
-		</finder>
 		<finder name="IconImageId" return-type="Layout">
 			<finder-column name="iconImageId" />
+		</finder>
+		<finder name="JunctionPlid" return-type="Collection">
+			<finder-column name="junctionPlid" />
+		</finder>
+		<finder name="DLFolderId" return-type="Layout">
+			<finder-column name="dlFolderId" />
 		</finder>
 		<finder name="G_P" return-type="Collection">
 			<finder-column name="groupId" />
@@ -481,6 +485,17 @@
 			<finder-column name="groupId" />
 			<finder-column name="privateLayout" />
 			<finder-column name="type" />
+		</finder>
+		<finder name="C_P_T" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="privateLayout" />
+			<finder-column name="type" />
+		</finder>
+		<finder name="C_P_P_J" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="privateLayout" />
+			<finder-column name="parentLayoutId" />
+			<finder-column name="junctionPlid" />
 		</finder>
 
 		<!-- References -->

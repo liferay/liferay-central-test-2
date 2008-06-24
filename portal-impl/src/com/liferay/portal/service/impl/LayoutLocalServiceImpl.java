@@ -233,6 +233,17 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			deleteLayout(childLayout, updateLayoutSet);
 		}
 
+		// Junction layouts
+
+		List<Layout> junctionLayouts = layoutPersistence.findByJunctionPlid(
+			layout.getPlid());
+
+		for (Layout junctionLayout : junctionLayouts) {
+			junctionLayout.setPlid(LayoutConstants.DEFAULT_PLID);
+
+			layoutPersistence.update(junctionLayout, false);
+		}
+
 		// Portlet preferences
 
 		portletPreferencesLocalService.deletePortletPreferences(
@@ -433,6 +444,23 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		return layout;
+	}
+
+	public List<Layout> getJunctionLayouts(
+			long companyId, boolean privateLayout)
+		throws SystemException {
+
+		return layoutPersistence.findByC_P_T(
+			companyId, privateLayout, LayoutConstants.TYPE_JUNCTION_POINT);
+	}
+
+	public List<Layout> getJunctionLayouts(
+			long companyId, boolean privateLayout, long parentLayoutId,
+			long junctionPlid)
+		throws SystemException {
+
+		return layoutPersistence.findByC_P_P_J(
+			companyId, privateLayout, parentLayoutId, junctionPlid);
 	}
 
 	public Layout getLayout(long plid)
@@ -670,6 +698,18 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			friendlyURL);
 
 		layout.setFriendlyURL(friendlyURL);
+
+		layoutPersistence.update(layout, false);
+
+		return layout;
+	}
+
+	public Layout updateJunctionPlid(long plid, long junctionPlid)
+		throws PortalException, SystemException {
+
+		Layout layout = layoutPersistence.findByPrimaryKey(plid);
+
+		layout.setJunctionPlid(junctionPlid);
 
 		layoutPersistence.update(layout, false);
 

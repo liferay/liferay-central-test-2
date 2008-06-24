@@ -150,9 +150,6 @@ public class EditPagesAction extends PortletAction {
 			else if (cmd.equals("look_and_feel")) {
 				updateLookAndFeel(req);
 			}
-			else if (cmd.equals("merge_pages")) {
-				updateMergePages(req);
-			}
 			else if (cmd.equals("monitoring")) {
 				updateMonitoring(req);
 			}
@@ -434,6 +431,8 @@ public class EditPagesAction extends PortletAction {
 
 		long copyLayoutId = ParamUtil.getLong(uploadReq, "copyLayoutId");
 
+		long junctionPlid = ParamUtil.getLong(uploadReq, "junctionPlid");
+
 		Locale[] locales = LanguageUtil.getAvailableLocales();
 
 		Map<Locale, String> localeNamesMap = new HashMap<Locale, String>();
@@ -520,6 +519,9 @@ public class EditPagesAction extends PortletAction {
 						groupId, privateLayout, layoutId,
 						layout.getTypeSettings());
 				}
+
+				LayoutServiceUtil.updateJunctionPlid(
+					layout.getPlid(), junctionPlid);
 			}
 			else {
 				layout.setTypeSettingsProperties(formTypeSettingsProperties);
@@ -615,22 +617,6 @@ public class EditPagesAction extends PortletAction {
 				groupId, privateLayout, layoutId, themeId, colorSchemeId, css,
 				wapTheme);
 		}
-	}
-
-	protected void updateMergePages(ActionRequest req) throws Exception {
-		long liveGroupId = ParamUtil.getLong(req, "liveGroupId");
-
-		boolean mergeGuestPublicPages = ParamUtil.getBoolean(
-			req, "mergeGuestPublicPages");
-
-		Group liveGroup = GroupLocalServiceUtil.getGroup(liveGroupId);
-
-		Properties props = liveGroup.getTypeSettingsProperties();
-
-		props.setProperty(
-			"mergeGuestPublicPages", String.valueOf(mergeGuestPublicPages));
-
-		GroupServiceUtil.updateGroup(liveGroupId, liveGroup.getTypeSettings());
 	}
 
 	protected void updateMonitoring(ActionRequest req) throws Exception {

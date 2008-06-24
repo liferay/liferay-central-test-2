@@ -257,6 +257,15 @@ public class LayoutServiceUtil {
 		layoutService.unscheduleRemoteExport(groupId, jobName, groupName);
 	}
 
+	public static com.liferay.portal.model.Layout updateJunctionPlid(
+		long plid, long junctionPlid)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		LayoutService layoutService = LayoutServiceFactory.getService();
+
+		return layoutService.updateJunctionPlid(plid, junctionPlid);
+	}
+
 	public static com.liferay.portal.model.Layout updateLayout(long groupId,
 		boolean privateLayout, long layoutId, long parentLayoutId,
 		java.util.Map<java.util.Locale, String> localeNamesMap,

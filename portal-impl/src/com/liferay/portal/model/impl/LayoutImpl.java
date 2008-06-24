@@ -23,13 +23,16 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.LayoutFriendlyURLException;
+import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.SafeProperties;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -63,10 +66,12 @@ import com.liferay.util.LocalizationUtil;
 import java.io.IOException;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.portlet.PortletException;
 import javax.portlet.PortletMode;
@@ -74,6 +79,7 @@ import javax.portlet.PortletRequest;
 import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -213,7 +219,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return layoutId;
 	}
 
-	public List<Layout> getAncestors() throws SystemException, PortalException {
+	public List<Layout> getAncestors() throws PortalException, SystemException {
 		List<Layout> layouts = new ArrayList<Layout>();
 
 		Layout layout = this;
@@ -273,9 +279,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	}
 
 	public boolean isRootLayout() {
-		if (this.getParentLayoutId() ==
-				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
-
+		if (getParentLayoutId() == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
 			return true;
 		}
 		else {
@@ -580,6 +584,156 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 
 		return false;
+	}
+
+	public Layout getJunctionAncestor(HttpServletRequest req)
+		throws PortalException, SystemException {
+
+		List<Layout> junctionAncestors = getJunctionAncestors(req);
+
+		return junctionAncestors.get(junctionAncestors.size() - 1);
+	}
+
+	public List<Layout> getJunctionAncestors(HttpServletRequest req)
+		throws PortalException, SystemException {
+
+		List<Layout> junctionAncestors = (List)req.getAttribute(
+			WebKeys.LAYOUT_JUNCTION_ANCESTORS);
+
+		if (junctionAncestors != null) {
+			return junctionAncestors;
+		}
+
+		HttpSession ses = req.getSession();
+
+		junctionAncestors = new ArrayList<Layout>();
+
+		Layout layout = this;
+
+		long junctionPlid = layout.getPlid();
+
+		Set<Long> visitedPlids = new HashSet<Long>();
+
+		while (true) {
+			junctionAncestors.add(layout);
+			junctionAncestors.addAll(layout.getAncestors());
+
+			Layout rootLayout = junctionAncestors.get(
+				junctionAncestors.size() - 1);
+
+			junctionPlid = rootLayout.getJunctionPlid();
+
+			if (junctionPlid <= 0) {
+				break;
+			}
+
+			if (!visitedPlids.add(junctionPlid)) {
+				break;
+			}
+
+			layout = LayoutLocalServiceUtil.getLayout(junctionPlid);
+
+			Long extensionTargetPlid = new Long(rootLayout.getPlid());
+
+			String key = _getJunctionLayoutKey(junctionPlid, false);
+
+			ses.setAttribute(key, rootLayout.getPlid());
+
+			Properties typeSettingsProperties =
+				layout.getTypeSettingsProperties();
+
+			boolean deepHistory = GetterUtil.getBoolean(
+				typeSettingsProperties.getProperty("deep-history"));
+
+			if (deepHistory) {
+				key = _getJunctionLayoutKey(rootLayout.getPlid(), true);
+
+				if (layout.getPlid() != rootLayout.getPlid()) {
+					ses.setAttribute(key, layout.getPlid());
+				}
+				else {
+					ses.removeAttribute(key);
+				}
+			}
+		}
+
+		req.setAttribute(WebKeys.LAYOUT_JUNCTION_ANCESTORS, junctionAncestors);
+
+		return junctionAncestors;
+	}
+
+	public Layout getJunctionLayout(HttpServletRequest req, boolean deepHistory)
+		throws PortalException, SystemException {
+
+		HttpSession ses = req.getSession();
+
+		Layout junctionLayout = this;
+
+		boolean junctionPoint = getType().equals(
+			LayoutConstants.TYPE_JUNCTION_POINT);
+
+		boolean useDeepHistory = deepHistory && !junctionPoint;
+
+		while (junctionPoint || useDeepHistory) {
+			String key = _getJunctionLayoutKey(
+				junctionLayout.getPlid(), !junctionPoint);
+
+			Long junctionPlid = (Long)ses.getAttribute(key);
+
+			if ((junctionPlid == null) && junctionPoint &&
+				(deepHistory || !junctionLayout.getHidden())) {
+
+				List<Layout> junctionLayouts =
+					junctionLayout.getJunctionLayouts();
+
+				if (junctionLayouts.size() == 1) {
+					junctionPlid = new Long((junctionLayouts.get(0)).getPlid());
+
+					ses.setAttribute(key, junctionPlid);
+				}
+				else {
+					ses.setAttribute(key, new Integer(0));
+				}
+			}
+
+			if ((junctionPlid != null) && (junctionPlid.longValue() > 0) &&
+				(junctionPlid.longValue() != junctionLayout.getPlid())) {
+
+				try {
+					junctionLayout = LayoutLocalServiceUtil.getLayout(
+						junctionPlid.longValue());
+
+					junctionPoint = junctionLayout.getType().equals(
+						LayoutConstants.TYPE_JUNCTION_POINT);
+
+					continue;
+				}
+				catch (NoSuchLayoutException nsle) {
+					ses.removeAttribute(key);
+				}
+			}
+
+			break;
+		}
+
+		return junctionLayout;
+	}
+
+	public List<Layout> getJunctionLayouts() throws SystemException {
+		return LayoutLocalServiceUtil.getJunctionLayouts(
+			getCompanyId(), isPrivateLayout(), getParentLayoutId(), getPlid());
+	}
+
+	private String _getJunctionLayoutKey(long plid, boolean deepHistory) {
+		StringMaker sm = new StringMaker();
+
+		sm.append(LayoutImpl.class.getName());
+		sm.append(StringPool.COMMA);
+		sm.append(plid);
+		sm.append(StringPool.COMMA);
+		sm.append(deepHistory);
+
+		return sm.toString();
 	}
 
 	private LayoutTypePortlet _getLayoutTypePortletClone(

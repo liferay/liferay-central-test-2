@@ -75,6 +75,7 @@ public class LayoutJSONSerializer {
 		JSONUtil.put(jsonObj, "wapColorSchemeId", model.getWapColorSchemeId());
 		JSONUtil.put(jsonObj, "css", model.getCss());
 		JSONUtil.put(jsonObj, "priority", model.getPriority());
+		JSONUtil.put(jsonObj, "junctionPlid", model.getJunctionPlid());
 		JSONUtil.put(jsonObj, "dlFolderId", model.getDlFolderId());
 
 		return jsonObj;

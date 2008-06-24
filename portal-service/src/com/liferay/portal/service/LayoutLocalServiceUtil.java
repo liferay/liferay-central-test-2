@@ -264,6 +264,23 @@ public class LayoutLocalServiceUtil {
 			friendlyURL);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Layout> getJunctionLayouts(
+		long companyId, boolean privateLayout)
+		throws com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.getJunctionLayouts(companyId, privateLayout);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Layout> getJunctionLayouts(
+		long companyId, boolean privateLayout, long parentLayoutId,
+		long junctionPlid) throws com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.getJunctionLayouts(companyId, privateLayout,
+			parentLayoutId, junctionPlid);
+	}
+
 	public static com.liferay.portal.model.Layout getLayout(long groupId,
 		boolean privateLayout, long layoutId)
 		throws com.liferay.portal.PortalException,
@@ -420,6 +437,15 @@ public class LayoutLocalServiceUtil {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
 		return layoutLocalService.updateFriendlyURL(plid, friendlyURL);
+	}
+
+	public static com.liferay.portal.model.Layout updateJunctionPlid(
+		long plid, long junctionPlid)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.updateJunctionPlid(plid, junctionPlid);
 	}
 
 	public static com.liferay.portal.model.Layout updateLayout(long groupId,

@@ -138,6 +138,10 @@ public interface LayoutModel extends BaseModel {
 
 	public void setPriority(int priority);
 
+	public long getJunctionPlid();
+
+	public void setJunctionPlid(long junctionPlid);
+
 	public long getDlFolderId();
 
 	public void setDlFolderId(long dlFolderId);
