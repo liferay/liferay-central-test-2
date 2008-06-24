@@ -42,6 +42,8 @@ import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.servlet.NamespaceServletRequest;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.LayoutClone;
+import com.liferay.portal.util.LayoutCloneFactory;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
@@ -142,9 +144,9 @@ public class UpdateLayoutAction extends Action {
 			}
 			else {
 				layoutTypePortlet.addStateMinPortletId(portletId);
-
-				updateLayout = false;
 			}
+
+			updateLayout = false;
 		}
 		else if (cmd.equals("move")) {
 			String columnId = ParamUtil.getString(req, "p_p_col_id");
@@ -182,6 +184,14 @@ public class UpdateLayoutAction extends Action {
 					ResourceConstants.SCOPE_INDIVIDUAL,
 					PortletPermissionUtil.getPrimaryKey(
 						layout.getPlid(), portletId));
+			}
+		}
+		else {
+			LayoutClone layoutClone = LayoutCloneFactory.getInstance();
+
+			if (layoutClone != null) {
+				layoutClone.update(
+					req, layout.getPlid(), layout.getTypeSettings());
 			}
 		}
 
