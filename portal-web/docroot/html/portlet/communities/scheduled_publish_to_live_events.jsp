@@ -64,8 +64,10 @@ for (int i = 0; i < results.size(); i++) {
 	sm.append(LanguageUtil.get(pageContext, "delete"));
 	sm.append("</a>");
 
-	resultRows.add(sm.toString());
+	row.addText(sm.toString());
+
+	resultRows.add(row);
 }
 %>
 
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+<liferay-ui:search-iterator paginate="<%= false %>" searchContainer="<%= searchContainer %>" />
