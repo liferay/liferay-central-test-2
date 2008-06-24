@@ -53,10 +53,6 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 	}
 
 	function <portlet:namespace />saveConfiguration() {
-		<c:if test='<%= tabs2.equals("display-settings") %>'>
-			document.<portlet:namespace />fm.<portlet:namespace />tabs1Names.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />tabs1NamesBox);
-		</c:if>
-
 		<c:if test='<%= tabs2.equals("event-reminder-email") %>'>
 			document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = window.<portlet:namespace />editor.getHTML();
 		</c:if>
@@ -216,32 +212,27 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 		</table>
 	</c:when>
 	<c:when test='<%= tabs2.equals("display-settings") %>'>
-		<input name="<portlet:namespace />tabs1Names" type="hidden" value="" />
-
 		<fieldset>
-			<legend><liferay-ui:message key="tabs-display-order" /></legend>
+			<legend><liferay-ui:message key="default-tab" /></legend>
 
 			<table class="lfr-table">
 			<tr>
-				<td valign="top">
-					<select name="<portlet:namespace />tabs1NamesBox" size="10">
+				<td>
+					<liferay-ui:message key="default-tab" />
+				</td>
+				<td>
+					<select name="<portlet:namespace />tabs1Default" size="1">
 
 						<%
 						for (String tabs1Name : tabs1NamesArray) {
 						%>
 
-							<option value="<%= tabs1Name %>"><%= LanguageUtil.get(pageContext, tabs1Name) %></option>
+							<option <%= tabs1Default.equals(tabs1Name) ? "selected" : "" %> value="<%= tabs1Name %>"><liferay-ui:message key="<%= tabs1Name %>" /></option>
 
 						<%
 						}
 						%>
-
 					</select>
-				</td>
-				<td valign="top">
-					<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />tabs1NamesBox, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" vspace="2" width="16" /></a><br />
-
-					<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />tabs1NamesBox, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" vspace="2" width="16" /></a><br />
 				</td>
 			</tr>
 			</table>

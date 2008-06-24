@@ -33,9 +33,12 @@ tabs1URL.setParameter("struts_action", "/calendar/view");
 tabs1URL.setParameter("month", String.valueOf(selMonth));
 tabs1URL.setParameter("day", String.valueOf(selDay));
 tabs1URL.setParameter("year", String.valueOf(selYear));
+
+String tabs1 = ParamUtil.getString(request, "tabs1", tabs1Default);
 %>
 
 <liferay-ui:tabs
 	names="<%= tabs1Names %>"
 	url="<%= tabs1URL.toString() %>"
+	value="<%= tabs1 %>"
 />

@@ -92,7 +92,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			ActionRequest req, PortletPreferences prefs)
 		throws Exception {
 
-		String tabs1Names = ParamUtil.getString(req, "tabs1Names");
+		String tabs1Default = ParamUtil.getString(req, "tabs1Default");
 		String summaryTabOrientation = ParamUtil.getString(
 			req, "summaryTabOrientation");
 		String summaryTabShowMiniMonth = ParamUtil.getString(
@@ -100,7 +100,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String summaryTabShowTodaysEvents = ParamUtil.getString(
 			req, "summaryTabShowTodaysEvents");
 
-		prefs.setValue("tabs1-names", tabs1Names);
+		prefs.setValue("tabs1-default", tabs1Default);
 		prefs.setValue("summary-tab-orientation", summaryTabOrientation);
 		prefs.setValue("summary-tab-show-mini-month", summaryTabShowMiniMonth);
 		prefs.setValue(

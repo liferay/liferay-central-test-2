@@ -45,9 +45,11 @@ if (Validator.isNotNull(portletResource)) {
 	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-String tabs1Names = prefs.getValue("tabs1-names", "summary,day,week,month,year,events,export-import");
+String tabs1Names = "summary,day,week,month,year,events,export-import";
 
 String[] tabs1NamesArray = StringUtil.split(tabs1Names);
+
+String tabs1Default = prefs.getValue("tabs1-default", "summary");
 
 String summaryTabOrientation = prefs.getValue("summary-tab-orientation", "horizontal");
 boolean summaryTabShowMiniMonth = GetterUtil.getBoolean(prefs.getValue("summary-tab-show-mini-month", "true"));
