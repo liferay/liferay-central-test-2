@@ -696,11 +696,13 @@ public class PortalImpl implements Portal {
 			}
 
 			if ((hour == -1) || (min == -1)) {
-				cal.set(year, month, day);
+				cal.set(year, month, day, 0, 0, 0);
 			}
 			else {
 				cal.set(year, month, day, hour, min, 0);
 			}
+
+			cal.set(Calendar.MILLISECOND, 0);
 
 			Date date = cal.getTime();
 
