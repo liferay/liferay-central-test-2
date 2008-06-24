@@ -78,11 +78,13 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 
 			super.service(req, stringServletRes);
 
-			res.setContentType(stringServletRes.getContentType());
+			String contentType = stringServletRes.getContentType();
+
+			res.setContentType(contentType);
 
 			String content = stringServletRes.getString();
 
-			if (stringServletRes.getContentType().contains("text/xml")) {
+			if (contentType.contains(ContentTypes.TEXT_XML)) {
 				content = fixXml(content);
 			}
 
