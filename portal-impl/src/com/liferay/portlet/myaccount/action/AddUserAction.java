@@ -171,11 +171,12 @@ public class AddUserAction extends PortletAction {
 		String openId = ParamUtil.getString(req, "openId");
 		boolean openIdAuth = false;
 
-		Boolean openIdoginPending = (Boolean)httpSes.getAttribute(
+		Boolean openIdLoginPending = (Boolean)httpSes.getAttribute(
 			WebKeys.OPEN_ID_LOGIN_PENDING);
 
-		if ((openIdoginPending != null) && (openIdoginPending.booleanValue()) &&
-			(Validator.isNotNull(openId))) {
+		if ((openIdLoginPending != null) &&
+				(openIdLoginPending.booleanValue()) &&
+					(Validator.isNotNull(openId))) {
 
 			sendEmail = false;
 			openIdAuth = true;
