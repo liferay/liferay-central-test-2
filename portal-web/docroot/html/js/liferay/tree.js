@@ -30,7 +30,7 @@ Liferay.Tree = new Class({
 		instance.openNodes = options.openNodes || '';
 		instance.outputId = options.outputId || '';
 		instance.tree = null;
-		instance.treeHTML = '';
+		instance.treeHTML = [];
 		instance.treeId = options.treeId;
 		instance.selectable = options.selectable || false;
 		instance.selectedNodes = options.selectedNodes || '';
@@ -42,16 +42,31 @@ Liferay.Tree = new Class({
 
 		instance._dragOptions = {
 			helper: 'clone',
-			handle: 'a',
-			items: '.tree-item',
+			handle: '> a',
 			distance: 1,
 			opacity: 0.5,
 			revert: false,
 			start: function(event, ui) {
-				instance._originalParentNode = ui.item[0].parentNode;
+				instance._originalParentNode = this.parentNode;
 			},
 			update: function(event, ui) {
 				instance._onUpdate(ui);
+			}
+		};
+
+		instance._dropOptions = {
+			accept: '.tree-item',
+			activeClass: '',
+			hoverClass: 'tree-item-hover',
+			tolerance: 'pointer',
+			drop: function(event, ui) {
+				instance._onDrop(ui.draggable[0], this);
+			},
+			over: function(event, ui) {
+				instance._onHover(event, ui, this);
+			},
+			out: function(event, ui) {
+				instance._onOut(this);
 			}
 		};
 
@@ -135,7 +150,6 @@ Liferay.Tree = new Class({
 				plid = node.objId;
 				src = '';
 
-
 				image = '';
 				openClass = '';
 				if (hasChildNode) {
@@ -152,55 +166,56 @@ Liferay.Tree = new Class({
 					image = instance._spacerImage;
 				}
 
-				instance.treeHTML += '<li branchId="' + plid + '" class="tree-item" id="_branchId_' + plid + '" nodeId="' + node.id + '">';
-				instance.treeHTML += image;
+				instance.treeHTML.push('<li branchId="' + plid + '" class="tree-item" id="_branchId_' + plid + '" nodeId="' + node.id + '">');
+				instance.treeHTML.push(image);
 
 				if (instance.selectable) {
 					if (isNodeSelected) {
-						instance.treeHTML += instance._checkedPage;
+						instance.treeHTML.push(instance._checkedPage);
 					}
 					else {
-						instance.treeHTML += instance._checkBoxPage;
+						instance.treeHTML.push(instance._checkBoxPage);
 					}
 				}
 
 				if (instance.nolinks) {
-					instance.treeHTML += '<a name="' + node.id + '">';
-					instance.treeHTML += instance._pageImage;
-					instance.treeHTML += '<span>' + node.name + '</span>';
-					instance.treeHTML += '</a>';
+					instance.treeHTML.push('<a name="' + node.id + '">');
+					instance.treeHTML.push(instance._pageImage);
+					instance.treeHTML.push('<span>' + node.name + '</span>');
+					instance.treeHTML.push('</a>');
 				}
 				else {
-					instance.treeHTML += '<a href="' + node.href + '">';
-					instance.treeHTML += instance._pageImage;
-					instance.treeHTML += '<span>' + node.name + '</span>';
-					instance.treeHTML += '</a>';
+					instance.treeHTML.push('<a href="' + node.href + '">');
+					instance.treeHTML.push(instance._pageImage);
+					instance.treeHTML.push('<span>' + node.name + '</span>');
+					instance.treeHTML.push('</a>');
 				}
 
 				// Recurse if node has children
 
 				if (hasChildNode) {
 					if (!isNodeOpen) {
-						hidden = ' style="display: none;" ';
+						hidden = ' style="display: none;"';
 					}
 					else {
 						hidden = '';
 					}
 
-					instance.treeHTML += '<ul class="' + openClass + '" ' + hidden + 'id="' + instance.treeId + "div" + node.id + '">';
+					instance.treeHTML.push('<ul class="' + openClass + '" ' + hidden + 'id="' + instance.treeId + "div" + node.id + '">');
 
 					instance.addNode(node.id);
 
-					instance.treeHTML += '</ul>';
+					instance.treeHTML.push('</ul>');
 				}
 
-				instance.treeHTML += '</li>';
+				instance.treeHTML.push('</li>');
 			}
 		}
 	},
 
 	create: function() {
 		var instance = this;
+
 		var icons = instance.icons;
 		var openNodes = instance.openNodes;
 		var selectedNodes = instance.selectedNodes;
@@ -243,7 +258,7 @@ Liferay.Tree = new Class({
 				instance.generateImage(icons.root) +
 					'<span>&nbsp;' + node.name + '</span>' +
 						'</a>' +
-							'<ul class="node-open">' + instance.treeHTML + '</ul>' +
+							'<ul class="node-open">' + instance.treeHTML.join('') + '</ul>' +
 								'</li>';
 
 			tree.append(mainLi);
@@ -284,33 +299,9 @@ Liferay.Tree = new Class({
 				);
 			}
 
-			// Set drop zones
-
-			var droppableLinks = jQuery('li a', treeEl).not('#lfr-collapse, #lfr-expand');
-
-			droppableLinks.droppable(
-				{
-					accept: '.tree-item',
-					activeClass: '',
-					hoverClass: 'tree-item-hover',
-					tolerance: 'pointer',
-					drop: function(event, ui) {
-						instance._onDrop(ui.draggable[0], this);
-					},
-					over: function(event, ui) {
-						instance._onHover(ui.draggable, this);
-					},
-					out: function(event, ui) {
-						instance._onOut(this);
-					}
-				}
-			);
-
-			instance._droppables = droppableLinks;
-
-			// Set draggable items
-
-			instance.setDraggable(treeEl);
+			// Set draggables and droppables
+			
+			instance.setDragDrop(treeEl);
 
 			var allDraggable = false;
 
@@ -322,9 +313,12 @@ Liferay.Tree = new Class({
 								this.src = this.src.replace(/plus.png$/, 'minus.png');
 						}
 					);
+
 					if (!allDraggable) {
-						instance.setDraggable(treeEl, 'li.tree-item');
+						instance.setDragDrop(treeEl, 'li.tree-item');
+						allDraggable = true;
 					}
+
 					jQuery.ajax(
 						{
 							url: themeDisplay.getPathMain() + '/portal/session_tree_js_click',
@@ -364,23 +358,14 @@ Liferay.Tree = new Class({
 	generateImage: function(options) {
 		var instance = this;
 
-		var border = options.border || '0';
-		var className = options.className || '';
-		var height = options.height || '20';
-		var hspace = options.hspace || '0';
-		var id = options.id || '';
-		var src = options.src || options;
-		var vspace =  options.vspace || '0';
-		var width = options.width || '19';
-
-		border = ' border="' + border + '"';
-		className = ' class="' + className + '"';
-		height = ' height="' + height + '"';
-		hspace = ' hspace="' + hspace + '"';
-		id = ' id="' + id + '"';
-		src = ' src="' + src + '"';
-		vspace = ' vspace="' + vspace + '"';
-		width = ' width="' + width + '"';
+		var border = ' border="' + (options.border || '0') + '"';
+		var className = ' class="' + (options.className || '') + '"';
+		var height = ' height="' + (options.height || '20') + '"';
+		var hspace = ' hspace="' + (options.hspace || '0') + '"';
+		var id = ' id="' + (options.id || '') + '"';
+		var src = ' src="' + (options.src || options) + '"';
+		var vspace = ' vspace="' + (options.vspace || '0') + '"';
+		var width = ' width="' + (options.width || '19') + '"';
 
 		return '<img' + border + className + height + hspace + id + src + vspace + width + ' />';
 	},
@@ -452,21 +437,16 @@ Liferay.Tree = new Class({
 		}
 	},
 
-	setDraggable: function(parentEl, selector) {
+	setDragDrop: function(parentEl, selector) {
 		var instance = this;
 
-		if (!instance._initialSortable) {
-			jQuery.extend(instance._dragOptions, {connectTo: 'ul.node-open'})
+		selector = selector || 'ul.node-open > li';
+		parentEl = parentEl || instance.tree[0];
 
-			instance._initialSortable = jQuery(parentEl).sortable(instance._dragOptions);
-		}
-		else {
-			instance._initialSortable.sortable('refresh');
-		}
-
-		if (Liferay.Browser.is_ie) {
-			instance._initialSortable.css('position', 'static');
-		}
+		var draggables = jQuery(selector, parentEl);
+		draggables.draggable(instance._dragOptions);
+		
+		draggables.find('> a').droppable(instance._dropOptions);
 	},
 
 	setOpenNodes: function() {
@@ -516,7 +496,8 @@ Liferay.Tree = new Class({
 				openNode = true;
 
 				if (!currentLi.childrenDraggable) {
-					instance.setDraggable(currentLi, '> ul > li.tree-item')
+					subBranch.addClass('node-open');
+					instance.setDragDrop(currentLi);
 					currentLi.childrenDraggable = true;
 				}
 			}
@@ -656,9 +637,9 @@ Liferay.Tree = new Class({
 
 		subBranch.eq(0).append(item);
 
-		var oldBranches = jQuery('li', oldParent);
+		var oldBranches = jQuery('> li', oldParent);
 
-		if (oldBranches.length == 0) {
+		if (oldBranches.length <= 1) {
 			jQuery('img.expand-image', oldParent.parentNode).attr('src', icons.spacer);
 			jQuery(oldParent).remove();
 		}
@@ -671,8 +652,6 @@ Liferay.Tree = new Class({
 				expander.attr('src', icons.minus);
 			}
 		}
-
-		var idRegEx = /_branchId_/;
 
 		var newParentId = obj.parentNode.getAttribute('branchId');
 
@@ -691,8 +670,10 @@ Liferay.Tree = new Class({
 		instance._wasDropped = true;
 	},
 
-	_onHover: function(item, obj) {
+	_onHover: function(event, ui, obj) {
 		var instance = this;
+
+		var item = ui.draggable;
 
 		var icons = instance.icons;
 
@@ -701,21 +682,28 @@ Liferay.Tree = new Class({
 
 			if (subBranches.length > 0) {
 				var subBranch = subBranches.eq(0);
-
+				var draggable = jQuery(item).data('draggable');
+				var droppable = jQuery(obj).data('droppable');
 				obj.expanded = true;
 
 				if (subBranch.is(':hidden')) {
 					var targetBranch = subBranch.get(0);
 					targetBranch.childrenDraggable = false;
+
 					obj.expanderTime = window.setTimeout(
 						function() {
+							var branch = subBranch.eq(0);
+
 							if (!targetBranch.childrenDraggable) {
-								instance.setDraggable(targetBranch, '> li.tree-item');
+								branch.addClass('node-open');
+								instance.setDragDrop(targetBranch.parentNode);
 								targetBranch.childrenDraggable = true;
 							}
 
-							jQuery(targetBranch).show();
-							jQuery('img.expand-image', targetBranch.parentNode).eq(0).attr('src', icons.minus);
+							branch.show();
+
+							jQuery.ui.ddmanager.prepareOffsets(draggable, event);
+							jQuery('img.expand-image:first', targetBranch.parentNode).attr('src', icons.minus);
 						},
 						500
 					);
@@ -801,17 +789,6 @@ Liferay.Tree = new Class({
 					parentPlid: options.parentPlid,
 					plid: options.plid
 				}
-			}
-		);
-	},
-
-	_savePosition: function(options) {
-		var instance = this;
-
-		jQuery.ajax(
-			{
-				url: instance._updateURL,
-				data: options
 			}
 		);
 	}
