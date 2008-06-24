@@ -154,6 +154,21 @@ public class TagsEntryServiceSoap {
 		}
 	}
 
+	public static java.lang.String[] getEntryNames(java.lang.String className,
+		long classPK) throws RemoteException {
+		try {
+			java.lang.String[] returnValue = TagsEntryServiceUtil.getEntryNames(className,
+					classPK);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void mergeEntries(long fromEntryId, long toEntryId)
 		throws RemoteException {
 		try {

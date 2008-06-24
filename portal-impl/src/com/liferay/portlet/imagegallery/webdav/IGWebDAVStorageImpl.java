@@ -46,6 +46,7 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.service.IGFolderServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
+import com.liferay.portlet.tags.service.TagsEntryServiceUtil;
 
 import java.io.File;
 import java.io.InputStream;
@@ -439,19 +440,35 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			long parentFolderId = getParentFolderId(pathArray);
 			String name = WebDAVUtil.getResourceName(pathArray);
 			String description = StringPool.BLANK;
-
-			file = FileUtil.createTempFile(FileUtil.getExtension(name));
-
-			FileUtil.write(file, req.getInputStream());
-
 			String contentType = ContentTypeUtil.getContentType(name);
 			String[] tagsEntries = null;
 			boolean addCommunityPermissions = true;
 			boolean addGuestPermissions = true;
 
-			IGImageServiceUtil.addImage(
-				parentFolderId, name, description, file, contentType,
-				tagsEntries, addCommunityPermissions, addGuestPermissions);
+			file = FileUtil.createTempFile(FileUtil.getExtension(name));
+
+			FileUtil.write(file, req.getInputStream());
+
+			try {
+				IGImage image =
+					IGImageServiceUtil.getImageByFolderIdAndNameWithExtension(
+						parentFolderId, name);
+
+				long imageId = image.getImageId();
+
+				description = image.getDescription();
+				tagsEntries = TagsEntryServiceUtil.getEntryNames(
+					IGImage.class.getName(), imageId);
+
+				IGImageServiceUtil.updateImage(
+					imageId, parentFolderId, name, description, file,
+					contentType, tagsEntries);
+			}
+			catch (NoSuchImageException nsie) {
+				IGImageServiceUtil.addImage(
+					parentFolderId, name, description, file, contentType,
+					tagsEntries, addCommunityPermissions, addGuestPermissions);
+			}
 
 			return HttpServletResponse.SC_CREATED;
 		}

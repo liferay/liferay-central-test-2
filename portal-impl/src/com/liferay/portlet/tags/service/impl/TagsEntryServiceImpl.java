@@ -70,6 +70,12 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 			groupId, companyId, classNameId, name);
 	}
 
+	public String[] getEntryNames(String className, long classPK)
+		throws PortalException, SystemException {
+
+		return tagsEntryLocalService.getEntryNames(className, classPK);
+	}
+
 	public void mergeEntries(long fromEntryId, long toEntryId)
 		throws PortalException, SystemException {
 

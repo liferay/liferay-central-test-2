@@ -114,6 +114,16 @@ public class TagsEntryServiceJSON {
 		return TagsEntryJSONSerializer.toJSONArray(returnValue);
 	}
 
+	public static java.lang.String[] getEntryNames(java.lang.String className,
+		long classPK)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		java.lang.String[] returnValue = TagsEntryServiceUtil.getEntryNames(className,
+				classPK);
+
+		return returnValue;
+	}
+
 	public static void mergeEntries(long fromEntryId, long toEntryId)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

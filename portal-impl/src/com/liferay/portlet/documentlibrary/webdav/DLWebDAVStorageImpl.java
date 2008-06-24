@@ -46,6 +46,7 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
+import com.liferay.portlet.tags.service.TagsEntryServiceUtil;
 
 import java.io.File;
 import java.io.InputStream;
@@ -455,14 +456,31 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			boolean addCommunityPermissions = true;
 			boolean addGuestPermissions = true;
 
-			file = FileUtil.createTempFile(FileUtil.getExtension(name));
+			try {
+				DLFileEntry entry = DLFileEntryServiceUtil.getFileEntryByTitle(
+					parentFolderId, name);
 
-			FileUtil.write(file, req.getInputStream());
+				name = entry.getName();
+				description = entry.getDescription();
+				tagsEntries = TagsEntryServiceUtil.getEntryNames(
+					DLFileEntry.class.getName(), entry.getFileEntryId());
+				extraSettings = entry.getExtraSettings();
 
-			DLFileEntryServiceUtil.addFileEntry(
-				parentFolderId, name, title, description, tagsEntries,
-				extraSettings, file, addCommunityPermissions,
-				addGuestPermissions);
+				DLFileEntryServiceUtil.updateFileEntry(
+					parentFolderId, parentFolderId, name, title, title,
+					description, tagsEntries, extraSettings,
+					FileUtil.getBytes(req.getInputStream()));
+			}
+			catch (NoSuchFileEntryException nsfee) {
+				file = FileUtil.createTempFile(FileUtil.getExtension(name));
+
+				FileUtil.write(file, req.getInputStream());
+
+				DLFileEntryServiceUtil.addFileEntry(
+					parentFolderId, name, title, description, tagsEntries,
+					extraSettings, file, addCommunityPermissions,
+					addGuestPermissions);
+			}
 
 			return HttpServletResponse.SC_CREATED;
 		}
