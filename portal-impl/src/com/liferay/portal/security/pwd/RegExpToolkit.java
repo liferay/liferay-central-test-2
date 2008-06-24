@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.PasswordPolicy;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.PwdGenerator;
 
@@ -41,10 +42,10 @@ import org.apache.commons.logging.LogFactory;
 public class RegExpToolkit extends BasicToolkit {
 
 	public RegExpToolkit() {
-		_pattern = PropsUtil.get(PropsUtil.PASSWORDS_REGEXPTOOLKIT_PATTERN);
-		_charset = PropsUtil.get(PropsUtil.PASSWORDS_REGEXPTOOLKIT_CHARSET);
+		_pattern = PropsUtil.get(PropsKeys.PASSWORDS_REGEXPTOOLKIT_PATTERN);
+		_charset = PropsUtil.get(PropsKeys.PASSWORDS_REGEXPTOOLKIT_CHARSET);
 		_length = GetterUtil.getInteger(
-			PropsUtil.get(PropsUtil.PASSWORDS_REGEXPTOOLKIT_LENGTH));
+			PropsUtil.get(PropsKeys.PASSWORDS_REGEXPTOOLKIT_LENGTH));
 	}
 
 	public String generate() {

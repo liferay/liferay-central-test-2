@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.dao.DataAccess;
@@ -83,7 +84,7 @@ import org.apache.lucene.store.jdbc.support.JdbcTemplate;
 public class LuceneUtil {
 
 	public static boolean INDEX_READ_ONLY = GetterUtil.getBoolean(
-		PropsUtil.get(PropsUtil.INDEX_READ_ONLY));
+		PropsUtil.get(PropsKeys.INDEX_READ_ONLY));
 
 	public static final Pattern TERM_END_PATTERN =
 		Pattern.compile("(\\w{4,}?)\\b");
@@ -330,7 +331,7 @@ public class LuceneUtil {
 	}
 
 	private LuceneUtil() {
-		String analyzerName = PropsUtil.get(PropsUtil.LUCENE_ANALYZER);
+		String analyzerName = PropsUtil.get(PropsKeys.LUCENE_ANALYZER);
 
 		if (Validator.isNotNull(analyzerName)) {
 			try {
@@ -357,7 +358,7 @@ public class LuceneUtil {
 				String urlPrefix = url.substring(x + 1, y);
 
 				String dialectClass = PropsUtil.get(
-					PropsUtil.LUCENE_STORE_JDBC_DIALECT + urlPrefix);
+					PropsKeys.LUCENE_STORE_JDBC_DIALECT + urlPrefix);
 
 				if (dialectClass != null) {
 					if (_log.isDebugEnabled()) {

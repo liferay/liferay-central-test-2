@@ -44,6 +44,7 @@ import com.liferay.portal.service.PluginSettingLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.PwdGenerator;
@@ -230,10 +231,10 @@ public class LayoutTypePortletImpl
 		}
 
 		List<Portlet> startPortlets = getStaticPortlets(
-			PropsUtil.LAYOUT_STATIC_PORTLETS_START + columnId);
+			PropsKeys.LAYOUT_STATIC_PORTLETS_START + columnId);
 
 		List<Portlet> endPortlets = getStaticPortlets(
-			PropsUtil.LAYOUT_STATIC_PORTLETS_END + columnId);
+			PropsKeys.LAYOUT_STATIC_PORTLETS_END + columnId);
 
 		return addStaticPortlets(portlets, startPortlets, endPortlets);
 	}
@@ -1095,10 +1096,10 @@ public class LayoutTypePortletImpl
 
 	protected boolean hasStaticPortletId(String columnId, String portletId) {
 		String[] staticPortletIdsStart = getStaticPortletIds(
-			PropsUtil.LAYOUT_STATIC_PORTLETS_START + columnId);
+			PropsKeys.LAYOUT_STATIC_PORTLETS_START + columnId);
 
 		String[] staticPortletIdsEnd = getStaticPortletIds(
-			PropsUtil.LAYOUT_STATIC_PORTLETS_END + columnId);
+			PropsKeys.LAYOUT_STATIC_PORTLETS_END + columnId);
 
 		String[] staticPortletIds = ArrayUtil.append(
 			staticPortletIdsStart, staticPortletIdsEnd);

@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.DigesterUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.UnsupportedEncodingException;
@@ -52,7 +53,7 @@ public class PwdEncryptor {
 
 	public static final String PASSWORDS_ENCRYPTION_ALGORITHM =
 		GetterUtil.getString(PropsUtil.get(
-			PropsUtil.PASSWORDS_ENCRYPTION_ALGORITHM)).toUpperCase();
+			PropsKeys.PASSWORDS_ENCRYPTION_ALGORITHM)).toUpperCase();
 
 	public static final String TYPE_CRYPT = "CRYPT";
 

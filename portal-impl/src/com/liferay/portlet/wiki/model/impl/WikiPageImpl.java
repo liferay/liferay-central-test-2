@@ -29,6 +29,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
@@ -53,15 +54,15 @@ import org.apache.commons.logging.LogFactory;
 public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 
 	public static final String FRONT_PAGE =
-		PropsUtil.get(PropsUtil.WIKI_FRONT_PAGE_NAME);
+		PropsUtil.get(PropsKeys.WIKI_FRONT_PAGE_NAME);
 
 	public static final double DEFAULT_VERSION = 1.0;
 
 	public static final String DEFAULT_FORMAT =
-		PropsUtil.get(PropsUtil.WIKI_FORMATS_DEFAULT);
+		PropsUtil.get(PropsKeys.WIKI_FORMATS_DEFAULT);
 
 	public static final String[] FORMATS =
-		PropsUtil.getArray(PropsUtil.WIKI_FORMATS);
+		PropsUtil.getArray(PropsKeys.WIKI_FORMATS);
 
 	public static final String MOVED = "Moved";
 

@@ -25,6 +25,7 @@ package com.liferay.portal.comm;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -110,7 +111,7 @@ public class CommLink implements MessageListener {
 
 	private CommLink() {
 		try {
-			String properties = PropsUtil.get(PropsUtil.COMM_LINK_PROPERTIES);
+			String properties = PropsUtil.get(PropsKeys.COMM_LINK_PROPERTIES);
 
 			if (Validator.isNotNull(properties)) {
 				_channel = new JChannel(properties);

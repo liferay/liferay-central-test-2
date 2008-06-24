@@ -106,13 +106,13 @@ public class PortalInstances {
 	private PortalInstances() {
 		_companyIds = new long[0];
 		_autoLoginIgnoreHosts = SetUtil.fromArray(PropsUtil.getArray(
-			PropsUtil.AUTO_LOGIN_IGNORE_HOSTS));
+			PropsKeys.AUTO_LOGIN_IGNORE_HOSTS));
 		_autoLoginIgnorePaths = SetUtil.fromArray(PropsUtil.getArray(
-			PropsUtil.AUTO_LOGIN_IGNORE_PATHS));
+			PropsKeys.AUTO_LOGIN_IGNORE_PATHS));
 		_virtualHostsIgnoreHosts = SetUtil.fromArray(PropsUtil.getArray(
-			PropsUtil.VIRTUAL_HOSTS_IGNORE_HOSTS));
+			PropsKeys.VIRTUAL_HOSTS_IGNORE_HOSTS));
 		_virtualHostsIgnorePaths = SetUtil.fromArray(PropsUtil.getArray(
-			PropsUtil.VIRTUAL_HOSTS_IGNORE_PATHS));
+			PropsKeys.VIRTUAL_HOSTS_IGNORE_PATHS));
 	}
 
 	private void _addCompanyId(long companyId) {
@@ -361,7 +361,7 @@ public class PortalInstances {
 		}
 
 		if (GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.JOURNAL_SYNC_CONTENT_SEARCH_ON_STARTUP))) {
+				PropsKeys.JOURNAL_SYNC_CONTENT_SEARCH_ON_STARTUP))) {
 
 			try {
 				JournalContentSearchLocalServiceUtil.checkContentSearches(
@@ -405,7 +405,7 @@ public class PortalInstances {
 
 		try {
 			EventsProcessor.process(
-				PropsUtil.APPLICATION_STARTUP_EVENTS,
+				PropsKeys.APPLICATION_STARTUP_EVENTS,
 				PropsValues.APPLICATION_STARTUP_EVENTS,
 				new String[] {String.valueOf(companyId)});
 		}

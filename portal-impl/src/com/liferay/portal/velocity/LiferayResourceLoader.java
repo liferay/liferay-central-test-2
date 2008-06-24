@@ -23,6 +23,7 @@
 package com.liferay.portal.velocity;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.InputStream;
@@ -63,9 +64,9 @@ public class LiferayResourceLoader extends ResourceLoader {
 
 	public void init(ExtendedProperties props) {
 		boolean cachingOn = GetterUtil.getBoolean(PropsUtil.get(
-			PropsUtil.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE_ENABLED));
+			PropsKeys.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE_ENABLED));
 		int modificationCheckInterval = GetterUtil.getInteger(PropsUtil.get(
-			PropsUtil.
+			PropsKeys.
 				VELOCITY_ENGINE_RESOURCE_MANAGER_MODIFICATION_CHECK_INTERVAL));
 
 		setCachingOn(cachingOn);

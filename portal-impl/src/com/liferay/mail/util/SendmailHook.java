@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ProcessUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.BufferedReader;
@@ -52,7 +53,7 @@ public class SendmailHook implements Hook {
 
 		try {
 			if (emailAddresses != null) {
-				String home = PropsUtil.get(PropsUtil.MAIL_HOOK_SENDMAIL_HOME);
+				String home = PropsUtil.get(PropsKeys.MAIL_HOOK_SENDMAIL_HOME);
 
 				File file = new File(home + "/" + userId + "/.forward");
 
@@ -85,7 +86,7 @@ public class SendmailHook implements Hook {
 		// Get add user command
 
 		String addUserCmd =
-			PropsUtil.get(PropsUtil.MAIL_HOOK_SENDMAIL_ADD_USER);
+			PropsUtil.get(PropsKeys.MAIL_HOOK_SENDMAIL_ADD_USER);
 
 		// Replace userId
 
@@ -121,7 +122,7 @@ public class SendmailHook implements Hook {
 		// Get delete user command
 
 		String deleteUserCmd =
-			PropsUtil.get(PropsUtil.MAIL_HOOK_SENDMAIL_DELETE_USER);
+			PropsUtil.get(PropsKeys.MAIL_HOOK_SENDMAIL_DELETE_USER);
 
 		// Replace userId
 
@@ -141,7 +142,7 @@ public class SendmailHook implements Hook {
 	}
 
 	public void updateBlocked(long userId, List<String> blocked) {
-		String home = PropsUtil.get(PropsUtil.MAIL_HOOK_SENDMAIL_HOME);
+		String home = PropsUtil.get(PropsKeys.MAIL_HOOK_SENDMAIL_HOME);
 
 		File file = new File(home + "/" + userId + "/.procmailrc");
 
@@ -182,7 +183,7 @@ public class SendmailHook implements Hook {
 	public void updateEmailAddress(long userId, String emailAddress) {
 		try {
 			String virtusertable =
-				PropsUtil.get(PropsUtil.MAIL_HOOK_SENDMAIL_VIRTUSERTABLE);
+				PropsUtil.get(PropsKeys.MAIL_HOOK_SENDMAIL_VIRTUSERTABLE);
 
 			FileReader fr = new FileReader(virtusertable);
 			BufferedReader br = new BufferedReader(fr);
@@ -210,7 +211,7 @@ public class SendmailHook implements Hook {
 
 			String virtusertableRefreshCmd =
 				PropsUtil.get(
-					PropsUtil.MAIL_HOOK_SENDMAIL_VIRTUSERTABLE_REFRESH);
+					PropsKeys.MAIL_HOOK_SENDMAIL_VIRTUSERTABLE_REFRESH);
 
 			Runtime rt = Runtime.getRuntime();
 
@@ -228,7 +229,7 @@ public class SendmailHook implements Hook {
 		// Get change password command
 
 		String changePasswordCmd =
-			PropsUtil.get(PropsUtil.MAIL_HOOK_SENDMAIL_CHANGE_PASSWORD);
+			PropsUtil.get(PropsKeys.MAIL_HOOK_SENDMAIL_CHANGE_PASSWORD);
 
 		// Replace userId
 

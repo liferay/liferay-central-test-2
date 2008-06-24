@@ -84,6 +84,7 @@ import com.liferay.portal.util.LayoutClone;
 import com.liferay.portal.util.LayoutCloneFactory;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
@@ -199,7 +200,7 @@ public class ServicePreAction extends Action {
 		for (int i = 0; i < 10; i++) {
 			String columnId = "column-" + i;
 			String portletIds = PropsUtil.get(
-				PropsUtil.DEFAULT_USER_PRIVATE_LAYOUT_COLUMN + i);
+				PropsKeys.DEFAULT_USER_PRIVATE_LAYOUT_COLUMN + i);
 
 			String[] portletIdsArray = StringUtil.split(portletIds);
 
@@ -301,7 +302,7 @@ public class ServicePreAction extends Action {
 		for (int i = 0; i < 10; i++) {
 			String columnId = "column-" + i;
 			String portletIds = PropsUtil.get(
-				PropsUtil.DEFAULT_USER_PUBLIC_LAYOUT_COLUMN + i);
+				PropsKeys.DEFAULT_USER_PUBLIC_LAYOUT_COLUMN + i);
 
 			String[] portletIdsArray = StringUtil.split(portletIds);
 

@@ -32,6 +32,7 @@ import com.liferay.portal.model.impl.ReleaseImpl;
 import com.liferay.portal.service.base.ReleaseLocalServiceBaseImpl;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.tools.sql.DBUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.dao.DataAccess;
 
@@ -90,7 +91,7 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 		// Create tables and populate with default data
 
 		if (GetterUtil.getBoolean(
-				PropsUtil.get(PropsUtil.SCHEMA_RUN_ENABLED))) {
+				PropsUtil.get(PropsKeys.SCHEMA_RUN_ENABLED))) {
 
 			if (_log.isInfoEnabled()) {
 				_log.info("Create tables and populate with default data");
@@ -149,7 +150,7 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 			dbUtil.runSQLTemplate("portal-data-counter.sql", false);
 
 			if (!GetterUtil.getBoolean(
-					PropsUtil.get(PropsUtil.SCHEMA_RUN_MINIMAL))) {
+					PropsUtil.get(PropsKeys.SCHEMA_RUN_MINIMAL))) {
 
 				dbUtil.runSQLTemplate("portal-data-sample.vm", false);
 			}

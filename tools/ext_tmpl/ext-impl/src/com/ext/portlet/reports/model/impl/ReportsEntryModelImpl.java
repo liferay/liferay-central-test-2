@@ -8,6 +8,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsKeys;
 
 import java.io.Serializable;
 
@@ -44,22 +45,22 @@ public class ReportsEntryModelImpl extends BaseModelImpl {
     public static final String TABLE_NAME = "ReportsEntry";
     public static final Object[][] TABLE_COLUMNS = {
             { "entryId", new Integer(Types.VARCHAR) },
-            
+
 
             { "companyId", new Integer(Types.VARCHAR) },
-            
+
 
             { "userId", new Integer(Types.VARCHAR) },
-            
+
 
             { "userName", new Integer(Types.VARCHAR) },
-            
+
 
             { "createDate", new Integer(Types.TIMESTAMP) },
-            
+
 
             { "modifiedDate", new Integer(Types.TIMESTAMP) },
-            
+
 
             { "name", new Integer(Types.VARCHAR) }
         };

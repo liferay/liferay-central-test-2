@@ -39,7 +39,7 @@ import com.liferay.portal.model.impl.MembershipRequestImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.service.base.MembershipRequestLocalServiceBaseImpl;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.util.UniqueList;
 
 import java.io.IOException;
@@ -149,8 +149,8 @@ public class MembershipRequestLocalServiceImpl
 		try {
 			notify(
 				membershipRequest.getUserId(), membershipRequest,
-				PropsUtil.COMMUNITIES_EMAIL_MEMBERSHIP_REPLY_SUBJECT,
-				PropsUtil.COMMUNITIES_EMAIL_MEMBERSHIP_REPLY_BODY);
+				PropsKeys.COMMUNITIES_EMAIL_MEMBERSHIP_REPLY_SUBJECT,
+				PropsKeys.COMMUNITIES_EMAIL_MEMBERSHIP_REPLY_BODY);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -174,11 +174,11 @@ public class MembershipRequestLocalServiceImpl
 
 		String fromName = PrefsPropsUtil.getString(
 			membershipRequest.getCompanyId(),
-			PropsUtil.COMMUNITIES_EMAIL_FROM_NAME);
+			PropsKeys.COMMUNITIES_EMAIL_FROM_NAME);
 
 		String fromAddress = PrefsPropsUtil.getString(
 			membershipRequest.getCompanyId(),
-			PropsUtil.COMMUNITIES_EMAIL_FROM_ADDRESS);
+			PropsKeys.COMMUNITIES_EMAIL_FROM_ADDRESS);
 
 		String toName = user.getFullName();
 		String toAddress = user.getEmailAddress();
@@ -307,8 +307,8 @@ public class MembershipRequestLocalServiceImpl
 		for (UserGroupRole userGroupRole : admins) {
 			notify(
 				userGroupRole.getUserId(), membershipRequest,
-				PropsUtil.COMMUNITIES_EMAIL_MEMBERSHIP_REQUEST_SUBJECT,
-				PropsUtil.COMMUNITIES_EMAIL_MEMBERSHIP_REQUEST_BODY);
+				PropsKeys.COMMUNITIES_EMAIL_MEMBERSHIP_REQUEST_SUBJECT,
+				PropsKeys.COMMUNITIES_EMAIL_MEMBERSHIP_REQUEST_BODY);
 		}
 	}
 

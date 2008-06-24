@@ -25,6 +25,7 @@ package com.liferay.portlet.mail.util.multiaccount;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.mail.AccountNotFoundException;
@@ -54,7 +55,7 @@ import org.apache.commons.logging.LogFactory;
 public class MailAccounts {
 
 	public static final String ACCOUNT_FINDER_PASSWORD = PropsUtil.get(
-		PropsUtil.MAIL_ACCOUNT_FINDER_PASSWORD);
+		PropsKeys.MAIL_ACCOUNT_FINDER_PASSWORD);
 
 	public static MailAccount getCurrentAccount(HttpServletRequest req)
 		throws MailAccountsException {

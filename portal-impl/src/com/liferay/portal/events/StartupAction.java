@@ -45,6 +45,7 @@ import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.ReleaseLocalServiceUtil;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.velocity.LiferayResourceLoader;
 import com.liferay.portal.verify.VerifyProcess;
@@ -111,7 +112,7 @@ public class StartupAction extends SimpleAction {
 		// Velocity
 
 		LiferayResourceLoader.setListeners(PropsUtil.getArray(
-			PropsUtil.VELOCITY_ENGINE_RESOURCE_LISTENERS));
+			PropsKeys.VELOCITY_ENGINE_RESOURCE_LISTENERS));
 
 		ExtendedProperties props = new ExtendedProperties();
 
@@ -123,23 +124,23 @@ public class StartupAction extends SimpleAction {
 
 		props.setProperty(
 			RuntimeConstants.RESOURCE_MANAGER_CLASS,
-			PropsUtil.get(PropsUtil.VELOCITY_ENGINE_RESOURCE_MANAGER));
+			PropsUtil.get(PropsKeys.VELOCITY_ENGINE_RESOURCE_MANAGER));
 
 		props.setProperty(
 			RuntimeConstants.RESOURCE_MANAGER_CACHE_CLASS,
-			PropsUtil.get(PropsUtil.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE));
+			PropsUtil.get(PropsKeys.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE));
 
 		props.setProperty(
 			"velocimacro.library",
-			PropsUtil.get(PropsUtil.VELOCITY_ENGINE_VELOCIMACRO_LIBRARY));
+			PropsUtil.get(PropsKeys.VELOCITY_ENGINE_VELOCIMACRO_LIBRARY));
 
 		props.setProperty(
 			RuntimeConstants.RUNTIME_LOG_LOGSYSTEM_CLASS,
-			PropsUtil.get(PropsUtil.VELOCITY_ENGINE_LOGGER));
+			PropsUtil.get(PropsKeys.VELOCITY_ENGINE_LOGGER));
 
 		props.setProperty(
 			"runtime.log.logsystem.log4j.category",
-			PropsUtil.get(PropsUtil.VELOCITY_ENGINE_LOGGER_CATEGORY));
+			PropsUtil.get(PropsKeys.VELOCITY_ENGINE_LOGGER_CATEGORY));
 
 		Velocity.setExtendedProperties(props);
 
@@ -169,7 +170,7 @@ public class StartupAction extends SimpleAction {
 		boolean ranUpgradeProcess = false;
 
 		String[] upgradeProcesses = PropsUtil.getArray(
-			PropsUtil.UPGRADE_PROCESSES);
+			PropsKeys.UPGRADE_PROCESSES);
 
 		for (int i = 0; i < upgradeProcesses.length; i++) {
 			if (_log.isDebugEnabled()) {
@@ -255,7 +256,7 @@ public class StartupAction extends SimpleAction {
 		Release release = ReleaseLocalServiceUtil.getRelease();
 
 		int verifyFrequency = GetterUtil.getInteger(
-			PropsUtil.get(PropsUtil.VERIFY_FREQUENCY));
+			PropsUtil.get(PropsKeys.VERIFY_FREQUENCY));
 		boolean verified = release.isVerified();
 
 		if ((verifyFrequency == VerifyProcess.ALWAYS) ||
@@ -263,7 +264,7 @@ public class StartupAction extends SimpleAction {
 			(ranUpgradeProcess)) {
 
 			String[] verifyProcesses = PropsUtil.getArray(
-				PropsUtil.VERIFY_PROCESSES);
+				PropsKeys.VERIFY_PROCESSES);
 
 			for (int i = 0; i < verifyProcesses.length; i++) {
 				if (_log.isDebugEnabled()) {

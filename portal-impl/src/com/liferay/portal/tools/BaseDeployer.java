@@ -40,6 +40,7 @@ import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.License;
@@ -656,7 +657,7 @@ public class BaseDeployer {
 
 		try {
 			undeployOnRedeploy = PrefsPropsUtil.getBoolean(
-				PropsUtil.HOT_UNDEPLOY_ON_REDEPLOY,
+				PropsKeys.HOT_UNDEPLOY_ON_REDEPLOY,
 				PropsValues.HOT_UNDEPLOY_ON_REDEPLOY);
 		}
 		catch (Exception e) {
@@ -704,7 +705,7 @@ public class BaseDeployer {
 		if (!file.exists()) {
 			synchronized (this) {
 				String url = PropsUtil.get(
-					PropsUtil.LIBRARY_DOWNLOAD_URL + jar);
+					PropsKeys.LIBRARY_DOWNLOAD_URL + jar);
 
 				if (_log.isInfoEnabled()) {
 					_log.info("Downloading library from " + url);

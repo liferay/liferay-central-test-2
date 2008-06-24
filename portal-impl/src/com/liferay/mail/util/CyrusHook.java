@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.ProcessUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.File;
@@ -56,7 +57,7 @@ public class CyrusHook implements Hook {
 
 		try {
 			if (emailAddresses != null) {
-				String home = PropsUtil.get(PropsUtil.MAIL_HOOK_CYRUS_HOME);
+				String home = PropsUtil.get(PropsKeys.MAIL_HOOK_CYRUS_HOME);
 
 				File file = new File(home + "/" + userId + ".procmail.forward");
 
@@ -131,7 +132,7 @@ public class CyrusHook implements Hook {
 			// Expect
 
 			String addUserCmd =
-				PropsUtil.get(PropsUtil.MAIL_HOOK_CYRUS_ADD_USER);
+				PropsUtil.get(PropsKeys.MAIL_HOOK_CYRUS_ADD_USER);
 
 			addUserCmd = StringUtil.replace(
 				addUserCmd, "%1%", String.valueOf(userId));
@@ -151,7 +152,7 @@ public class CyrusHook implements Hook {
 		long userId, String emailAddress, String vacationMessage) {
 
 		try {
-			String home = PropsUtil.get(PropsUtil.MAIL_HOOK_CYRUS_HOME);
+			String home = PropsUtil.get(PropsKeys.MAIL_HOOK_CYRUS_HOME);
 
 			// Remove vacation cache
 
@@ -200,7 +201,7 @@ public class CyrusHook implements Hook {
 			// Expect
 
 			String deleteUserCmd =
-				PropsUtil.get(PropsUtil.MAIL_HOOK_CYRUS_DELETE_USER);
+				PropsUtil.get(PropsKeys.MAIL_HOOK_CYRUS_DELETE_USER);
 
 			deleteUserCmd = StringUtil.replace(
 				deleteUserCmd, "%1%", String.valueOf(userId));
@@ -213,7 +214,7 @@ public class CyrusHook implements Hook {
 
 			// Procmail
 
-			String home = PropsUtil.get(PropsUtil.MAIL_HOOK_CYRUS_HOME);
+			String home = PropsUtil.get(PropsKeys.MAIL_HOOK_CYRUS_HOME);
 
 			File file = new File(home + "/" + userId + ".procmail.blocked");
 
@@ -245,7 +246,7 @@ public class CyrusHook implements Hook {
 	}
 
 	public void updateBlocked(long userId, List<String> blocked) {
-		String home = PropsUtil.get(PropsUtil.MAIL_HOOK_CYRUS_HOME);
+		String home = PropsUtil.get(PropsKeys.MAIL_HOOK_CYRUS_HOME);
 
 		File file = new File(home + "/" + userId + ".procmail.blocked");
 

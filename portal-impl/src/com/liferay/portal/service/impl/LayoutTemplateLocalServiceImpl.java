@@ -36,6 +36,7 @@ import com.liferay.portal.model.impl.LayoutTemplateImpl;
 import com.liferay.portal.service.PluginSettingLocalServiceUtil;
 import com.liferay.portal.service.base.LayoutTemplateLocalServiceBaseImpl;
 import com.liferay.portal.util.DocumentUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.xml.ElementImpl;
@@ -260,7 +261,7 @@ public class LayoutTemplateLocalServiceImpl
 		}
 
 		if (GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.LAYOUT_TEMPLATE_CACHE_ENABLED))) {
+				PropsKeys.LAYOUT_TEMPLATE_CACHE_ENABLED))) {
 
 			return layoutTemplate.getWapContent();
 		}

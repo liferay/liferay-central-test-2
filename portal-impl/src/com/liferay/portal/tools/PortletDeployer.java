@@ -32,7 +32,7 @@ import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.TextFormatter;
 import com.liferay.util.xml.XMLFormatter;
@@ -494,7 +494,7 @@ public class PortletDeployer extends BaseDeployer {
 	protected void updateDeployDirectory(File srcFile) throws Exception {
 		try {
 			if (!PrefsPropsUtil.getBoolean(
-					PropsUtil.AUTO_DEPLOY_CUSTOM_PORTLET_XML,
+					PropsKeys.AUTO_DEPLOY_CUSTOM_PORTLET_XML,
 					PropsValues.AUTO_DEPLOY_CUSTOM_PORTLET_XML)) {
 
 				return;

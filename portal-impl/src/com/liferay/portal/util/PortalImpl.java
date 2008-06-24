@@ -254,11 +254,11 @@ public class PortalImpl implements Portal {
 
 		// CDN host
 
-		_cdnHost = PropsUtil.get(PropsUtil.CDN_HOST);
+		_cdnHost = PropsUtil.get(PropsKeys.CDN_HOST);
 
 		// Paths
 
-		_pathContext = PropsUtil.get(PropsUtil.PORTAL_CTX);
+		_pathContext = PropsUtil.get(PropsKeys.PORTAL_CTX);
 
 		if (_pathContext.equals(StringPool.SLASH)) {
 			_pathContext = StringPool.BLANK;
@@ -279,7 +279,7 @@ public class PortalImpl implements Portal {
 		// Groups
 
 		String customSystemGroups[] =
-			PropsUtil.getArray(PropsUtil.SYSTEM_GROUPS);
+			PropsUtil.getArray(PropsKeys.SYSTEM_GROUPS);
 
 		if ((customSystemGroups == null) || (customSystemGroups.length == 0)) {
 			_allSystemGroups = GroupImpl.SYSTEM_GROUPS;
@@ -299,7 +299,7 @@ public class PortalImpl implements Portal {
 
 		// Regular roles
 
-		String customSystemRoles[] = PropsUtil.getArray(PropsUtil.SYSTEM_ROLES);
+		String customSystemRoles[] = PropsUtil.getArray(PropsKeys.SYSTEM_ROLES);
 
 		if ((customSystemRoles == null) || (customSystemRoles.length == 0)) {
 			_allSystemRoles = RoleImpl.SYSTEM_ROLES;
@@ -319,7 +319,7 @@ public class PortalImpl implements Portal {
 		// Community roles
 
 		String customSystemCommunityRoles[] =
-			PropsUtil.getArray(PropsUtil.SYSTEM_COMMUNITY_ROLES);
+			PropsUtil.getArray(PropsKeys.SYSTEM_COMMUNITY_ROLES);
 
 		if ((customSystemCommunityRoles == null) ||
 			(customSystemCommunityRoles.length == 0)) {
@@ -343,7 +343,7 @@ public class PortalImpl implements Portal {
 		// Organization Roles
 
 		String customSystemOrganizationRoles[] =
-			PropsUtil.getArray(PropsUtil.SYSTEM_ORGANIZATION_ROLES);
+			PropsUtil.getArray(PropsKeys.SYSTEM_ORGANIZATION_ROLES);
 
 		if ((customSystemOrganizationRoles == null) ||
 			(customSystemOrganizationRoles.length == 0)) {
@@ -787,12 +787,12 @@ public class PortalImpl implements Portal {
 
 	public String getLayoutEditPage(Layout layout) {
 		return PropsUtil.get(
-			PropsUtil.LAYOUT_EDIT_PAGE, new Filter(layout.getType()));
+			PropsKeys.LAYOUT_EDIT_PAGE, new Filter(layout.getType()));
 	}
 
 	public String getLayoutViewPage(Layout layout) {
 		return PropsUtil.get(
-			PropsUtil.LAYOUT_VIEW_PAGE, new Filter(layout.getType()));
+			PropsKeys.LAYOUT_VIEW_PAGE, new Filter(layout.getType()));
 	}
 
 	public String getLayoutURL(ThemeDisplay themeDisplay) {
@@ -863,7 +863,7 @@ public class PortalImpl implements Portal {
 		}
 
 		String href = PropsUtil.get(
-			PropsUtil.LAYOUT_URL, new Filter(layout.getType(), variables));
+			PropsKeys.LAYOUT_URL, new Filter(layout.getType(), variables));
 
 		return href;
 	}
@@ -1571,7 +1571,7 @@ public class PortalImpl implements Portal {
 		throws PortalException, SystemException {
 
 		if (PrefsPropsUtil.getBoolean(
-				PropsUtil.AUTO_DEPLOY_CUSTOM_PORTLET_XML,
+				PropsKeys.AUTO_DEPLOY_CUSTOM_PORTLET_XML,
 				PropsValues.AUTO_DEPLOY_CUSTOM_PORTLET_XML)) {
 
 			return PORTLET_XML_FILE_NAME_CUSTOM;
@@ -2077,7 +2077,7 @@ public class PortalImpl implements Portal {
 	public boolean isLayoutFriendliable(Layout layout) {
 		return GetterUtil.getBoolean(
 			PropsUtil.get(
-				PropsUtil.LAYOUT_URL_FRIENDLIABLE,
+				PropsKeys.LAYOUT_URL_FRIENDLIABLE,
 				new Filter(layout.getType())),
 			true);
 	}
@@ -2088,7 +2088,7 @@ public class PortalImpl implements Portal {
 
 	public boolean isLayoutParentable(String type) {
 		return GetterUtil.getBoolean(
-			PropsUtil.get(PropsUtil.LAYOUT_PARENTABLE, new Filter(type)), true);
+			PropsUtil.get(PropsKeys.LAYOUT_PARENTABLE, new Filter(type)), true);
 	}
 
 	public boolean isLayoutSitemapable(Layout layout) {
@@ -2097,7 +2097,7 @@ public class PortalImpl implements Portal {
 		}
 
 		return GetterUtil.getBoolean(PropsUtil.get(
-			PropsUtil.LAYOUT_SITEMAPABLE, new Filter(layout.getType())), true);
+			PropsKeys.LAYOUT_SITEMAPABLE, new Filter(layout.getType())), true);
 	}
 
 	public boolean isReservedParameter(String name) {

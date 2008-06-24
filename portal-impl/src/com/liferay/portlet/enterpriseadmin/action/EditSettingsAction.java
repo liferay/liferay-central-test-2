@@ -36,7 +36,7 @@ import com.liferay.portal.servlet.filters.sso.cas.CASFilter;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.util.ldap.LDAPUtil;
 
 import javax.portlet.ActionRequest;
@@ -134,14 +134,14 @@ public class EditSettingsAction extends PortletAction {
 		String validateUrl = ParamUtil.getString(req, "validateUrl");
 
 		prefs.setValue(
-			PropsUtil.CAS_AUTH_ENABLED, String.valueOf(enabled));
+			PropsKeys.CAS_AUTH_ENABLED, String.valueOf(enabled));
 		prefs.setValue(
-			PropsUtil.CAS_IMPORT_FROM_LDAP, String.valueOf(importFromLdap));
-		prefs.setValue(PropsUtil.CAS_LOGIN_URL, loginUrl);
-		prefs.setValue(PropsUtil.CAS_LOGOUT_URL, logoutUrl);
-		prefs.setValue(PropsUtil.CAS_SERVER_NAME, serverName);
-		prefs.setValue(PropsUtil.CAS_SERVICE_URL, serviceUrl);
-		prefs.setValue(PropsUtil.CAS_VALIDATE_URL, validateUrl);
+			PropsKeys.CAS_IMPORT_FROM_LDAP, String.valueOf(importFromLdap));
+		prefs.setValue(PropsKeys.CAS_LOGIN_URL, loginUrl);
+		prefs.setValue(PropsKeys.CAS_LOGOUT_URL, logoutUrl);
+		prefs.setValue(PropsKeys.CAS_SERVER_NAME, serverName);
+		prefs.setValue(PropsKeys.CAS_SERVICE_URL, serviceUrl);
+		prefs.setValue(PropsKeys.CAS_VALIDATE_URL, validateUrl);
 
 		prefs.store();
 
@@ -158,10 +158,10 @@ public class EditSettingsAction extends PortletAction {
 		String defaultUserGroupNames = ParamUtil.getString(
 			req, "defaultUserGroupNames");
 
-		prefs.setValue(PropsUtil.ADMIN_DEFAULT_GROUP_NAMES, defaultGroupNames);
-		prefs.setValue(PropsUtil.ADMIN_DEFAULT_ROLE_NAMES, defaultRoleNames);
+		prefs.setValue(PropsKeys.ADMIN_DEFAULT_GROUP_NAMES, defaultGroupNames);
+		prefs.setValue(PropsKeys.ADMIN_DEFAULT_ROLE_NAMES, defaultRoleNames);
 		prefs.setValue(
-			PropsUtil.ADMIN_DEFAULT_USER_GROUP_NAMES, defaultUserGroupNames);
+			PropsKeys.ADMIN_DEFAULT_USER_GROUP_NAMES, defaultUserGroupNames);
 	}
 
 	protected void updateEmails(
@@ -186,13 +186,13 @@ public class EditSettingsAction extends PortletAction {
 			}
 			else {
 				prefs.setValue(
-					PropsUtil.ADMIN_EMAIL_USER_ADDED_ENABLED,
+					PropsKeys.ADMIN_EMAIL_USER_ADDED_ENABLED,
 					emailUserAddedEnabled);
 				prefs.setValue(
-					PropsUtil.ADMIN_EMAIL_USER_ADDED_SUBJECT,
+					PropsKeys.ADMIN_EMAIL_USER_ADDED_SUBJECT,
 					emailUserAddedSubject);
 				prefs.setValue(
-					PropsUtil.ADMIN_EMAIL_USER_ADDED_BODY, emailUserAddedBody);
+					PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY, emailUserAddedBody);
 			}
 		}
 		else if (tabs3.equals("password-changed-notification")) {
@@ -211,13 +211,13 @@ public class EditSettingsAction extends PortletAction {
 			}
 			else {
 				prefs.setValue(
-					PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_ENABLED,
+					PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_ENABLED,
 					emailPasswordSentEnabled);
 				prefs.setValue(
-					PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT,
+					PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT,
 					emailPasswordSentSubject);
 				prefs.setValue(
-					PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_BODY,
+					PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY,
 					emailPasswordSentBody);
 			}
 		}
@@ -233,9 +233,9 @@ public class EditSettingsAction extends PortletAction {
 				SessionErrors.add(req, "emailFromAddress");
 			}
 			else {
-				prefs.setValue(PropsUtil.ADMIN_EMAIL_FROM_NAME, emailFromName);
+				prefs.setValue(PropsKeys.ADMIN_EMAIL_FROM_NAME, emailFromName);
 				prefs.setValue(
-					PropsUtil.ADMIN_EMAIL_FROM_ADDRESS, emailFromAddress);
+					PropsKeys.ADMIN_EMAIL_FROM_ADDRESS, emailFromAddress);
 			}
 		}
 	}
@@ -299,34 +299,34 @@ public class EditSettingsAction extends PortletAction {
 			return;
 		}
 
-		prefs.setValue(PropsUtil.LDAP_AUTH_ENABLED, String.valueOf(enabled));
-		prefs.setValue(PropsUtil.LDAP_AUTH_REQUIRED, String.valueOf(required));
-		prefs.setValue(PropsUtil.LDAP_BASE_PROVIDER_URL, baseProviderURL);
-		prefs.setValue(PropsUtil.LDAP_BASE_DN, baseDN);
-		prefs.setValue(PropsUtil.LDAP_SECURITY_PRINCIPAL, principal);
-		prefs.setValue(PropsUtil.LDAP_SECURITY_CREDENTIALS, credentials);
-		prefs.setValue(PropsUtil.LDAP_AUTH_SEARCH_FILTER, searchFilter);
+		prefs.setValue(PropsKeys.LDAP_AUTH_ENABLED, String.valueOf(enabled));
+		prefs.setValue(PropsKeys.LDAP_AUTH_REQUIRED, String.valueOf(required));
+		prefs.setValue(PropsKeys.LDAP_BASE_PROVIDER_URL, baseProviderURL);
+		prefs.setValue(PropsKeys.LDAP_BASE_DN, baseDN);
+		prefs.setValue(PropsKeys.LDAP_SECURITY_PRINCIPAL, principal);
+		prefs.setValue(PropsKeys.LDAP_SECURITY_CREDENTIALS, credentials);
+		prefs.setValue(PropsKeys.LDAP_AUTH_SEARCH_FILTER, searchFilter);
 		prefs.setValue(
-			PropsUtil.LDAP_USER_DEFAULT_OBJECT_CLASSES,
+			PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES,
 			userDefaultObjectClasses);
-		prefs.setValue(PropsUtil.LDAP_USER_MAPPINGS, userMappings);
-		prefs.setValue(PropsUtil.LDAP_GROUP_MAPPINGS, groupMappings);
+		prefs.setValue(PropsKeys.LDAP_USER_MAPPINGS, userMappings);
+		prefs.setValue(PropsKeys.LDAP_GROUP_MAPPINGS, groupMappings);
 		prefs.setValue(
-			PropsUtil.LDAP_IMPORT_ENABLED, String.valueOf(importEnabled));
+			PropsKeys.LDAP_IMPORT_ENABLED, String.valueOf(importEnabled));
 		prefs.setValue(
-			PropsUtil.LDAP_IMPORT_ON_STARTUP, String.valueOf(importOnStartup));
+			PropsKeys.LDAP_IMPORT_ON_STARTUP, String.valueOf(importOnStartup));
 		prefs.setValue(
-			PropsUtil.LDAP_IMPORT_INTERVAL, String.valueOf(importInterval));
+			PropsKeys.LDAP_IMPORT_INTERVAL, String.valueOf(importInterval));
 		prefs.setValue(
-			PropsUtil.LDAP_IMPORT_USER_SEARCH_FILTER, importUserSearchFilter);
+			PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER, importUserSearchFilter);
 		prefs.setValue(
-			PropsUtil.LDAP_IMPORT_GROUP_SEARCH_FILTER, importGroupSearchFilter);
+			PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER, importGroupSearchFilter);
 		prefs.setValue(
-			PropsUtil.LDAP_EXPORT_ENABLED, String.valueOf(exportEnabled));
-		prefs.setValue(PropsUtil.LDAP_USERS_DN, usersDN);
-		prefs.setValue(PropsUtil.LDAP_GROUPS_DN, groupsDN);
+			PropsKeys.LDAP_EXPORT_ENABLED, String.valueOf(exportEnabled));
+		prefs.setValue(PropsKeys.LDAP_USERS_DN, usersDN);
+		prefs.setValue(PropsKeys.LDAP_GROUPS_DN, groupsDN);
 		prefs.setValue(
-			PropsUtil.LDAP_PASSWORD_POLICY_ENABLED,
+			PropsKeys.LDAP_PASSWORD_POLICY_ENABLED,
 			String.valueOf(passwordPolicyEnabled));
 
 		prefs.store();
@@ -338,7 +338,7 @@ public class EditSettingsAction extends PortletAction {
 
 		String mailHostNames = ParamUtil.getString(req, "mailHostNames");
 
-		prefs.setValue(PropsUtil.ADMIN_MAIL_HOST_NAMES, mailHostNames);
+		prefs.setValue(PropsKeys.ADMIN_MAIL_HOST_NAMES, mailHostNames);
 	}
 
 	protected void updateNtlm(
@@ -350,9 +350,9 @@ public class EditSettingsAction extends PortletAction {
 		String domain = ParamUtil.getString(req, "domain");
 
 		prefs.setValue(
-			PropsUtil.NTLM_AUTH_ENABLED, String.valueOf(enabled));
-		prefs.setValue(PropsUtil.NTLM_DOMAIN_CONTROLLER, domainController);
-		prefs.setValue(PropsUtil.NTLM_DOMAIN, domain);
+			PropsKeys.NTLM_AUTH_ENABLED, String.valueOf(enabled));
+		prefs.setValue(PropsKeys.NTLM_DOMAIN_CONTROLLER, domainController);
+		prefs.setValue(PropsKeys.NTLM_DOMAIN, domain);
 
 		prefs.store();
 	}
@@ -362,7 +362,7 @@ public class EditSettingsAction extends PortletAction {
 
 		boolean enabled = ParamUtil.getBoolean(req, "enabled");
 
-		prefs.setValue(PropsUtil.OPEN_ID_AUTH_ENABLED, String.valueOf(enabled));
+		prefs.setValue(PropsKeys.OPEN_ID_AUTH_ENABLED, String.valueOf(enabled));
 
 		prefs.store();
 	}
@@ -381,14 +381,14 @@ public class EditSettingsAction extends PortletAction {
 		String lastName = ParamUtil.getString(req, "lastNameAttr");
 
 		prefs.setValue(
-			PropsUtil.OPEN_SSO_AUTH_ENABLED, String.valueOf(enabled));
-		prefs.setValue(PropsUtil.OPEN_SSO_LOGIN_URL, loginUrl);
-		prefs.setValue(PropsUtil.OPEN_SSO_LOGOUT_URL, logoutUrl);
-		prefs.setValue(PropsUtil.OPEN_SSO_SERVICE_URL, serviceUrl);
-		prefs.setValue(PropsUtil.OPEN_SSO_SCREEN_NAME_ATTR, screenName);
-		prefs.setValue(PropsUtil.OPEN_SSO_EMAIL_ADDRESS_ATTR, emailAddress);
-		prefs.setValue(PropsUtil.OPEN_SSO_FIRST_NAME_ATTR, firstName);
-		prefs.setValue(PropsUtil.OPEN_SSO_LAST_NAME_ATTR, lastName);
+			PropsKeys.OPEN_SSO_AUTH_ENABLED, String.valueOf(enabled));
+		prefs.setValue(PropsKeys.OPEN_SSO_LOGIN_URL, loginUrl);
+		prefs.setValue(PropsKeys.OPEN_SSO_LOGOUT_URL, logoutUrl);
+		prefs.setValue(PropsKeys.OPEN_SSO_SERVICE_URL, serviceUrl);
+		prefs.setValue(PropsKeys.OPEN_SSO_SCREEN_NAME_ATTR, screenName);
+		prefs.setValue(PropsKeys.OPEN_SSO_EMAIL_ADDRESS_ATTR, emailAddress);
+		prefs.setValue(PropsKeys.OPEN_SSO_FIRST_NAME_ATTR, firstName);
+		prefs.setValue(PropsKeys.OPEN_SSO_LAST_NAME_ATTR, lastName);
 
 		prefs.store();
 	}
@@ -403,9 +403,9 @@ public class EditSettingsAction extends PortletAction {
 			req, "reservedEmailAddresses");
 
 		prefs.setValue(
-			PropsUtil.ADMIN_RESERVED_SCREEN_NAMES, reservedScreenNames);
+			PropsKeys.ADMIN_RESERVED_SCREEN_NAMES, reservedScreenNames);
 		prefs.setValue(
-			PropsUtil.ADMIN_RESERVED_EMAIL_ADDRESSES, reservedEmailAddresses);
+			PropsKeys.ADMIN_RESERVED_EMAIL_ADDRESSES, reservedEmailAddresses);
 	}
 
 	protected void updateSecurity(ActionRequest req) throws Exception {

@@ -43,7 +43,7 @@ public class MimeTypesImpl implements MimeTypes {
 	public MimeTypesImpl() {
 		_mimeTypes = new MimetypesFileTypeMap();
 
-		String[] customMimeTypes = PropsUtil.getArray(PropsUtil.MIME_TYPES);
+		String[] customMimeTypes = PropsUtil.getArray(PropsKeys.MIME_TYPES);
 
 		for (int i = 0; i < customMimeTypes.length; i++) {
 			_mimeTypes.addMimeTypes(customMimeTypes[i]);

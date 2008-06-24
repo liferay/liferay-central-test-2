@@ -81,7 +81,7 @@
 				<%
 				PortletURL installPluginsURL = null;
 
-				if (PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED, PropsValues.AUTO_DEPLOY_ENABLED)) {
+				if (PrefsPropsUtil.getBoolean(PropsKeys.AUTO_DEPLOY_ENABLED, PropsValues.AUTO_DEPLOY_ENABLED)) {
 					installPluginsURL = ((RenderResponseImpl)renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
 
 					installPluginsURL.setWindowState(WindowState.MAXIMIZED);

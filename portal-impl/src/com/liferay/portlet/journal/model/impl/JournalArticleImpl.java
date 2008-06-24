@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.util.LocaleTransformerListener;
@@ -47,7 +48,7 @@ public class JournalArticleImpl
 	public static final double DEFAULT_VERSION = 1.0;
 
 	public static final String[] TYPES =
-		PropsUtil.getArray(PropsUtil.JOURNAL_ARTICLE_TYPES);
+		PropsUtil.getArray(PropsKeys.JOURNAL_ARTICLE_TYPES);
 
 	public static final String PORTLET = "portlet";
 

@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.ContentUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import javax.portlet.PortletPreferences;
@@ -40,7 +41,7 @@ public class InvitationUtil {
 
 	public static int getEmailMessageMaxRecipients() {
 		return GetterUtil.getInteger(PropsUtil.get(
-			PropsUtil.INVITATION_EMAIL_MAX_RECIPIENTS));
+			PropsKeys.INVITATION_EMAIL_MAX_RECIPIENTS));
 	}
 
 	public static String getEmailMessageBody(PortletPreferences prefs) {
@@ -52,7 +53,7 @@ public class InvitationUtil {
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.INVITATION_EMAIL_MESSAGE_BODY));
+				PropsKeys.INVITATION_EMAIL_MESSAGE_BODY));
 		}
 	}
 
@@ -65,7 +66,7 @@ public class InvitationUtil {
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.INVITATION_EMAIL_MESSAGE_SUBJECT));
+				PropsKeys.INVITATION_EMAIL_MESSAGE_SUBJECT));
 		}
 	}
 

@@ -40,7 +40,7 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebKeys;
 
@@ -253,9 +253,9 @@ public class EditServerAction extends PortletAction {
 		int port = ParamUtil.getInteger(req, "port");
 
 		prefs.setValue(
-			PropsUtil.OPENOFFICE_SERVER_ENABLED, String.valueOf(enabled));
-		prefs.setValue(PropsUtil.OPENOFFICE_SERVER_HOST, host);
-		prefs.setValue(PropsUtil.OPENOFFICE_SERVER_PORT, String.valueOf(port));
+			PropsKeys.OPENOFFICE_SERVER_ENABLED, String.valueOf(enabled));
+		prefs.setValue(PropsKeys.OPENOFFICE_SERVER_HOST, host);
+		prefs.setValue(PropsKeys.OPENOFFICE_SERVER_PORT, String.valueOf(port));
 
 		prefs.store();
 	}

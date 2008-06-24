@@ -56,6 +56,7 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.base.GroupLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.GroupNameComparator;
@@ -670,7 +671,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		for (int i = 0; i < 10; i++) {
 			String columnId = "column-" + i;
 			String portletIds = PropsUtil.get(
-				PropsUtil.DEFAULT_GUEST_PUBLIC_LAYOUT_COLUMN + i);
+				PropsKeys.DEFAULT_GUEST_PUBLIC_LAYOUT_COLUMN + i);
 
 			layoutTypePortlet.addPortletIds(
 				0, StringUtil.split(portletIds), columnId, false);

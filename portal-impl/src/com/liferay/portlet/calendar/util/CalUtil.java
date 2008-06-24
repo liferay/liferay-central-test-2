@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.ContentUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.calendar.model.CalEvent;
 
@@ -49,14 +50,14 @@ public class CalUtil {
 
 	public static String getEmailFromAddress(PortletPreferences prefs) {
 		String emailFromAddress = PropsUtil.get(
-			PropsUtil.CALENDAR_EMAIL_FROM_ADDRESS);
+			PropsKeys.CALENDAR_EMAIL_FROM_ADDRESS);
 
 		return prefs.getValue("email-from-address", emailFromAddress);
 	}
 
 	public static String getEmailFromName(PortletPreferences prefs) {
 		String emailFromName = PropsUtil.get(
-			PropsUtil.CALENDAR_EMAIL_FROM_NAME);
+			PropsKeys.CALENDAR_EMAIL_FROM_NAME);
 
 		return prefs.getValue("email-from-name", emailFromName);
 	}
@@ -72,7 +73,7 @@ public class CalUtil {
 		}
 		else {
 			return GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.CALENDAR_EMAIL_EVENT_REMINDER_ENABLED));
+				PropsKeys.CALENDAR_EMAIL_EVENT_REMINDER_ENABLED));
 		}
 	}
 
@@ -85,7 +86,7 @@ public class CalUtil {
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.CALENDAR_EMAIL_EVENT_REMINDER_BODY));
+				PropsKeys.CALENDAR_EMAIL_EVENT_REMINDER_BODY));
 		}
 	}
 
@@ -100,7 +101,7 @@ public class CalUtil {
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.CALENDAR_EMAIL_EVENT_REMINDER_SUBJECT));
+				PropsKeys.CALENDAR_EMAIL_EVENT_REMINDER_SUBJECT));
 		}
 	}
 

@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import java.util.Map;
@@ -62,7 +63,7 @@ public class SocialBookmarkTagUtil {
 			req.setAttribute("liferay-ui:social-bookmark:target", target);
 
 			String[] socialTypes = PropsUtil.getArray(
-				PropsUtil.SOCIAL_BOOKMARK_TYPES);
+				PropsKeys.SOCIAL_BOOKMARK_TYPES);
 
 			if (!ArrayUtil.contains(socialTypes, type)) {
 				return;
@@ -90,7 +91,7 @@ public class SocialBookmarkTagUtil {
 		vars.put("liferay:social-bookmark:title", HttpUtil.encodeURL(title));
 
 		String postUrl = PropsUtil.get(
-			PropsUtil.SOCIAL_BOOKMARK_POST_URL, new Filter(type, vars));
+			PropsKeys.SOCIAL_BOOKMARK_POST_URL, new Filter(type, vars));
 
 		return postUrl;
 	}

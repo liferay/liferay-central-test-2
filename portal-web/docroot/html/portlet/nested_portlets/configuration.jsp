@@ -40,7 +40,7 @@
 
 	layoutTemplates = PluginUtil.restrictPlugins(layoutTemplates, user);
 
-	List unsupportedLayoutTemplates = ListUtil.fromArray(PropsUtil.getArray(PropsUtil.NESTED_PORTLETS_LAYOUT_TEMPLATE_UNSUPPORTED));
+	List unsupportedLayoutTemplates = ListUtil.fromArray(PropsUtil.getArray(PropsKeys.NESTED_PORTLETS_LAYOUT_TEMPLATE_UNSUPPORTED));
 
 	for (int i = 0; i < layoutTemplates.size(); i++) {
 		LayoutTemplate curLayoutTemplate = (LayoutTemplate)layoutTemplates.get(i);

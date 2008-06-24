@@ -37,6 +37,7 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
@@ -160,9 +161,9 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			(parentFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
 
 			String layoutsSyncPrivateFolder = GetterUtil.getString(
-				PropsUtil.get(PropsUtil.DL_LAYOUTS_SYNC_PRIVATE_FOLDER));
+				PropsUtil.get(PropsKeys.DL_LAYOUTS_SYNC_PRIVATE_FOLDER));
 			String layoutsSyncPublicFolder = GetterUtil.getString(
-				PropsUtil.get(PropsUtil.DL_LAYOUTS_SYNC_PUBLIC_FOLDER));
+				PropsUtil.get(PropsKeys.DL_LAYOUTS_SYNC_PUBLIC_FOLDER));
 
 			if (pathArray[0].equals(layoutsSyncPrivateFolder) ||
 				pathArray[0].equals(layoutsSyncPublicFolder)) {
@@ -404,7 +405,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		if (PropsValues.DL_LAYOUTS_SYNC_ENABLED) {
 			String privateFolder = GetterUtil.getString(PropsUtil.get(
-				PropsUtil.DL_LAYOUTS_SYNC_PRIVATE_FOLDER));
+				PropsKeys.DL_LAYOUTS_SYNC_PRIVATE_FOLDER));
 
 			boolean privateLayout = false;
 

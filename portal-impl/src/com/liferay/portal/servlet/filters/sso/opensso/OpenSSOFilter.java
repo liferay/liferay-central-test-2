@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 
 import javax.servlet.FilterChain;
@@ -59,16 +59,16 @@ public class OpenSSOFilter extends BasePortalFilter {
 			long companyId = PortalUtil.getCompanyId(httpReq);
 
 			boolean enabled = PrefsPropsUtil.getBoolean(
-				companyId, PropsUtil.OPEN_SSO_AUTH_ENABLED,
+				companyId, PropsKeys.OPEN_SSO_AUTH_ENABLED,
 				PropsValues.OPEN_SSO_AUTH_ENABLED);
 			String loginUrl = PrefsPropsUtil.getString(
-				companyId, PropsUtil.OPEN_SSO_LOGIN_URL,
+				companyId, PropsKeys.OPEN_SSO_LOGIN_URL,
 				PropsValues.OPEN_SSO_LOGIN_URL);
 			String logoutUrl = PrefsPropsUtil.getString(
-				companyId, PropsUtil.OPEN_SSO_LOGOUT_URL,
+				companyId, PropsKeys.OPEN_SSO_LOGOUT_URL,
 				PropsValues.OPEN_SSO_LOGOUT_URL);
 			String serviceUrl = PrefsPropsUtil.getString(
-				companyId, PropsUtil.OPEN_SSO_SERVICE_URL,
+				companyId, PropsKeys.OPEN_SSO_SERVICE_URL,
 				PropsValues.OPEN_SSO_SERVICE_URL);
 
 			if (!enabled || Validator.isNull(loginUrl) ||

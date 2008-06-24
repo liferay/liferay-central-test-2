@@ -66,6 +66,7 @@ import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.ShutdownUtil;
@@ -415,7 +416,7 @@ public class MainServlet extends ActionServlet {
 
 		try {
 			EventsProcessor.process(
-				PropsUtil.GLOBAL_STARTUP_EVENTS,
+				PropsKeys.GLOBAL_STARTUP_EVENTS,
 				PropsValues.GLOBAL_STARTUP_EVENTS);
 		}
 		catch (Exception e) {
@@ -628,7 +629,7 @@ public class MainServlet extends ActionServlet {
 				// Pre login events
 
 				EventsProcessor.process(
-					PropsUtil.LOGIN_EVENTS_PRE, PropsValues.LOGIN_EVENTS_PRE,
+					PropsKeys.LOGIN_EVENTS_PRE, PropsValues.LOGIN_EVENTS_PRE,
 					req, res);
 
 				// User
@@ -649,7 +650,7 @@ public class MainServlet extends ActionServlet {
 				// Post login events
 
 				EventsProcessor.process(
-					PropsUtil.LOGIN_EVENTS_POST, PropsValues.LOGIN_EVENTS_POST,
+					PropsKeys.LOGIN_EVENTS_POST, PropsValues.LOGIN_EVENTS_POST,
 					req, res);
 			}
 			catch (Exception e) {
@@ -661,7 +662,7 @@ public class MainServlet extends ActionServlet {
 
 		try {
 			EventsProcessor.process(
-				PropsUtil.SERVLET_SERVICE_EVENTS_PRE,
+				PropsKeys.SERVLET_SERVICE_EVENTS_PRE,
 				PropsValues.SERVLET_SERVICE_EVENTS_PRE, req, res);
 		}
 		catch (Exception e) {
@@ -705,7 +706,7 @@ public class MainServlet extends ActionServlet {
 
 			try {
 				EventsProcessor.process(
-					PropsUtil.SERVLET_SERVICE_EVENTS_POST,
+					PropsKeys.SERVLET_SERVICE_EVENTS_POST,
 					PropsValues.SERVLET_SERVICE_EVENTS_POST, req, res);
 			}
 			catch (Exception e) {
@@ -794,7 +795,7 @@ public class MainServlet extends ActionServlet {
 
 		try {
 			EventsProcessor.process(
-				PropsUtil.GLOBAL_SHUTDOWN_EVENTS,
+				PropsKeys.GLOBAL_SHUTDOWN_EVENTS,
 				PropsValues.GLOBAL_SHUTDOWN_EVENTS);
 		}
 		catch (Exception e) {
@@ -820,7 +821,7 @@ public class MainServlet extends ActionServlet {
 			timeout = GetterUtil.getInteger(sessionTimeout, timeout);
 		}
 
-		PropsUtil.set(PropsUtil.SESSION_TIMEOUT, String.valueOf(timeout));
+		PropsUtil.set(PropsKeys.SESSION_TIMEOUT, String.valueOf(timeout));
 
 		PropsValues.SESSION_TIMEOUT = timeout;
 	}
@@ -832,7 +833,7 @@ public class MainServlet extends ActionServlet {
 
 		try {
 			EventsProcessor.process(
-				PropsUtil.APPLICATION_SHUTDOWN_EVENTS,
+				PropsKeys.APPLICATION_SHUTDOWN_EVENTS,
 				PropsValues.APPLICATION_SHUTDOWN_EVENTS,
 				new String[] {String.valueOf(companyId)});
 		}

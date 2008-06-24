@@ -841,7 +841,7 @@ String[] availableLocales = null;
 				<liferay-ui:error exception="<%= ArticleSmallImageNameException.class %>">
 
 					<%
-					String[] imageExtensions = PropsUtil.getArray(PropsUtil.JOURNAL_IMAGE_EXTENSIONS);
+					String[] imageExtensions = PropsUtil.getArray(PropsKeys.JOURNAL_IMAGE_EXTENSIONS);
 					%>
 
 					<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.

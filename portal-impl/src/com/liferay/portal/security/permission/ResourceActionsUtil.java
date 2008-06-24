@@ -38,6 +38,7 @@ import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.PortletResourceBundles;
 import com.liferay.util.UniqueList;
@@ -328,7 +329,7 @@ public class ResourceActionsUtil {
 			ClassLoader classLoader = getClass().getClassLoader();
 
 			String[] configs = StringUtil.split(
-				PropsUtil.get(PropsUtil.RESOURCE_ACTIONS_CONFIGS));
+				PropsUtil.get(PropsKeys.RESOURCE_ACTIONS_CONFIGS));
 
 			for (int i = 0; i < configs.length; i++) {
 				_read(null, classLoader, configs[i]);

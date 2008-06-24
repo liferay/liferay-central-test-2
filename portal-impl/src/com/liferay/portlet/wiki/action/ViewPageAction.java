@@ -29,6 +29,7 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.wiki.NoSuchNodeException;
@@ -98,7 +99,7 @@ public class ViewPageAction extends PortletAction {
 		List<WikiNode> nodes = WikiUtil.getNodes(req);
 
 		if (nodes.size() == 0) {
-			String nodeName = PropsUtil.get(PropsUtil.WIKI_INITIAL_NODE_NAME);
+			String nodeName = PropsUtil.get(PropsKeys.WIKI_INITIAL_NODE_NAME);
 
 			node = WikiNodeLocalServiceUtil.addNode(
 				themeDisplay.getUserId(), themeDisplay.getPlid(), nodeName,

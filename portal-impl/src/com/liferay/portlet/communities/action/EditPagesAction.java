@@ -70,6 +70,7 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
@@ -529,11 +530,11 @@ public class EditPagesAction extends PortletAction {
 
 			String[] eventClasses = StringUtil.split(
 				PropsUtil.get(
-					PropsUtil.LAYOUT_CONFIGURATION_ACTION_UPDATE,
+					PropsKeys.LAYOUT_CONFIGURATION_ACTION_UPDATE,
 					new Filter(type)));
 
 			EventsProcessor.process(
-				PropsUtil.LAYOUT_CONFIGURATION_ACTION_UPDATE, eventClasses,
+				PropsKeys.LAYOUT_CONFIGURATION_ACTION_UPDATE, eventClasses,
 				uploadReq, httpRes);
 		}
 	}

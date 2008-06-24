@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.servlet.filters.DynamicFilterConfig;
 
@@ -69,13 +69,13 @@ public class CASFilter extends BaseFilter {
 				_filterName, _ctx);
 
 			String serverName = PrefsPropsUtil.getString(
-				companyId, PropsUtil.CAS_SERVER_NAME);
+				companyId, PropsKeys.CAS_SERVER_NAME);
 			String serviceUrl = PrefsPropsUtil.getString(
-				companyId, PropsUtil.CAS_SERVICE_URL);
+				companyId, PropsKeys.CAS_SERVICE_URL);
 
 			config.addInitParameter(
 				edu.yale.its.tp.cas.client.filter.CASFilter.LOGIN_INIT_PARAM,
-				PrefsPropsUtil.getString(companyId, PropsUtil.CAS_LOGIN_URL));
+				PrefsPropsUtil.getString(companyId, PropsKeys.CAS_LOGIN_URL));
 
 			if (Validator.isNotNull(serviceUrl)) {
 				config.addInitParameter(
@@ -93,7 +93,7 @@ public class CASFilter extends BaseFilter {
 			config.addInitParameter(
 				edu.yale.its.tp.cas.client.filter.CASFilter.VALIDATE_INIT_PARAM,
 				PrefsPropsUtil.getString(
-					companyId, PropsUtil.CAS_VALIDATE_URL));
+					companyId, PropsKeys.CAS_VALIDATE_URL));
 
 			casFilter.init(config);
 
@@ -116,7 +116,7 @@ public class CASFilter extends BaseFilter {
 			long companyId = PortalUtil.getCompanyId(httpReq);
 
 			if (PrefsPropsUtil.getBoolean(
-					companyId, PropsUtil.CAS_AUTH_ENABLED,
+					companyId, PropsKeys.CAS_AUTH_ENABLED,
 					PropsValues.CAS_AUTH_ENABLED)) {
 
 				String pathInfo = httpReq.getPathInfo();
@@ -128,7 +128,7 @@ public class CASFilter extends BaseFilter {
 					httpSes.invalidate();
 
 					String logoutUrl = PrefsPropsUtil.getString(
-						companyId, PropsUtil.CAS_LOGOUT_URL);
+						companyId, PropsKeys.CAS_LOGOUT_URL);
 
 					httpRes.sendRedirect(logoutUrl);
 				}

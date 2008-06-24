@@ -102,7 +102,7 @@ if (availablePluginPackage != null) {
 		</c:choose>
 	</c:if>
 
-	<c:if test="<%= PrefsPropsUtil.getBoolean(PropsUtil.HOT_UNDEPLOY_ENABLED, PropsValues.HOT_UNDEPLOY_ENABLED) %>">
+	<c:if test="<%= PrefsPropsUtil.getBoolean(PropsKeys.HOT_UNDEPLOY_ENABLED, PropsValues.HOT_UNDEPLOY_ENABLED) %>">
 		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="uninstallURL">
 			<portlet:param name="struts_action" value="/update_manager/install_plugin" />
 			<portlet:param name="<%= Constants.CMD %>" value="uninstall" />

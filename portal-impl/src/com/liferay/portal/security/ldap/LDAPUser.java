@@ -24,6 +24,7 @@ package com.liferay.portal.security.ldap;
 
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.ldap.DummyDirContext;
 
@@ -65,7 +66,7 @@ public class LDAPUser extends DummyDirContext {
 		Attribute objectClass = new BasicAttribute("objectclass");
 
 		String[] defaultObjectClasses = PropsUtil.getArray(
-			PropsUtil.LDAP_USER_DEFAULT_OBJECT_CLASSES);
+			PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES);
 
 		for (int i = 0; i < defaultObjectClasses.length; i++) {
 			objectClass.add(defaultObjectClasses[i]);

@@ -47,7 +47,7 @@ import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.HttpImpl;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.License;
 import com.liferay.util.Screenshot;
@@ -431,10 +431,10 @@ public class PluginPackageUtil {
 	private String[] _getRepositoryURLs() throws PluginPackageException {
 		try {
 			String[] trusted = PrefsPropsUtil.getStringArray(
-				PropsUtil.PLUGIN_REPOSITORIES_TRUSTED, StringPool.NEW_LINE,
+				PropsKeys.PLUGIN_REPOSITORIES_TRUSTED, StringPool.NEW_LINE,
 				PropsValues.PLUGIN_REPOSITORIES_TRUSTED);
 			String[] untrusted = PrefsPropsUtil.getStringArray(
-				PropsUtil.PLUGIN_REPOSITORIES_UNTRUSTED, StringPool.NEW_LINE,
+				PropsKeys.PLUGIN_REPOSITORIES_UNTRUSTED, StringPool.NEW_LINE,
 				PropsValues.PLUGIN_REPOSITORIES_UNTRUSTED);
 
 			return ArrayUtil.append(trusted, untrusted);
@@ -525,7 +525,7 @@ public class PluginPackageUtil {
 		String packageId = pluginPackage.getPackageId();
 
 		String[] pluginPackagesIgnored = PrefsPropsUtil.getStringArray(
-			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED,
+			PropsKeys.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED,
 			StringPool.NEW_LINE,
 			PropsValues.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED);
 
@@ -566,7 +566,7 @@ public class PluginPackageUtil {
 
 		try {
 			String[] trusted = PrefsPropsUtil.getStringArray(
-				PropsUtil.PLUGIN_REPOSITORIES_TRUSTED, StringPool.NEW_LINE,
+				PropsKeys.PLUGIN_REPOSITORIES_TRUSTED, StringPool.NEW_LINE,
 				PropsValues.PLUGIN_REPOSITORIES_TRUSTED);
 
 			if (ArrayUtil.contains(trusted, repositoryURL)) {
@@ -586,7 +586,7 @@ public class PluginPackageUtil {
 		throws PortalException, SystemException {
 
 		if (!PrefsPropsUtil.getBoolean(
-				PropsUtil.PLUGIN_NOTIFICATIONS_ENABLED,
+				PropsKeys.PLUGIN_NOTIFICATIONS_ENABLED,
 				PropsValues.PLUGIN_NOTIFICATIONS_ENABLED)) {
 
 			return false;

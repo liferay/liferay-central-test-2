@@ -23,6 +23,7 @@
 package com.liferay.portal.security.permission;
 
 import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 /**
@@ -37,7 +38,7 @@ public class PermissionsListFilterFactory {
 	public static PermissionsListFilter getInstance() {
 		if (_permissionsListFilter == null) {
 			_permissionsListFilter = (PermissionsListFilter)InstancePool.get(
-				PropsUtil.get(PropsUtil.PERMISSIONS_LIST_FILTER));
+				PropsUtil.get(PropsKeys.PERMISSIONS_LIST_FILTER));
 		}
 
 		return _permissionsListFilter;

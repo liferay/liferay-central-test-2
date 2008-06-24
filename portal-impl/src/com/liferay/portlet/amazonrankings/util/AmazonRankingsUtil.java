@@ -25,6 +25,7 @@ package com.liferay.portlet.amazonrankings.util;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.amazonrankings.model.AmazonRankings;
 
@@ -54,7 +55,7 @@ public class AmazonRankingsUtil {
 		_amazonLicenseKeys = new Vector<String>();
 
 		for (int i = 0; i < 1000; i++) {
-			String key = PropsUtil.get(PropsUtil.AMAZON_LICENSE + i);
+			String key = PropsUtil.get(PropsKeys.AMAZON_LICENSE + i);
 
 			if (key == null) {
 				break;

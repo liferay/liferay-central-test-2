@@ -53,6 +53,7 @@ import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.LayoutClone;
 import com.liferay.portal.util.LayoutCloneFactory;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
@@ -118,7 +119,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		throws LayoutFriendlyURLException {
 
 		String[] keywords = PropsUtil.getArray(
-			PropsUtil.LAYOUT_FRIENDLY_URL_KEYWORDS);
+			PropsKeys.LAYOUT_FRIENDLY_URL_KEYWORDS);
 
 		for (int i = 0; i < keywords.length; i++) {
 			String keyword = keywords[i];

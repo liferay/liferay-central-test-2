@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.IOException;
@@ -279,7 +280,7 @@ public class ShoppingPreferences {
 
 	public String getEmailFromAddress() {
 		String emailFromAddress = PropsUtil.get(
-			PropsUtil.SHOPPING_EMAIL_FROM_ADDRESS);
+			PropsKeys.SHOPPING_EMAIL_FROM_ADDRESS);
 
 		return _prefs.getValue("email-from-address", emailFromAddress);
 	}
@@ -292,7 +293,7 @@ public class ShoppingPreferences {
 
 	public String getEmailFromName() {
 		String emailFromName = PropsUtil.get(
-			PropsUtil.SHOPPING_EMAIL_FROM_NAME);
+			PropsKeys.SHOPPING_EMAIL_FROM_NAME);
 
 		return _prefs.getValue("email-from-name", emailFromName);
 	}
@@ -312,7 +313,7 @@ public class ShoppingPreferences {
 		}
 		else {
 			return GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.SHOPPING_EMAIL_ORDER_CONFIRMATION_ENABLED));
+				PropsKeys.SHOPPING_EMAIL_ORDER_CONFIRMATION_ENABLED));
 		}
 	}
 
@@ -334,7 +335,7 @@ public class ShoppingPreferences {
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.SHOPPING_EMAIL_ORDER_CONFIRMATION_BODY));
+				PropsKeys.SHOPPING_EMAIL_ORDER_CONFIRMATION_BODY));
 		}
 	}
 
@@ -354,7 +355,7 @@ public class ShoppingPreferences {
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.SHOPPING_EMAIL_ORDER_CONFIRMATION_SUBJECT));
+				PropsKeys.SHOPPING_EMAIL_ORDER_CONFIRMATION_SUBJECT));
 		}
 	}
 
@@ -375,7 +376,7 @@ public class ShoppingPreferences {
 		}
 		else {
 			return GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.SHOPPING_EMAIL_ORDER_SHIPPING_ENABLED));
+				PropsKeys.SHOPPING_EMAIL_ORDER_SHIPPING_ENABLED));
 		}
 	}
 
@@ -396,7 +397,7 @@ public class ShoppingPreferences {
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.SHOPPING_EMAIL_ORDER_SHIPPING_BODY));
+				PropsKeys.SHOPPING_EMAIL_ORDER_SHIPPING_BODY));
 		}
 	}
 
@@ -415,7 +416,7 @@ public class ShoppingPreferences {
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.SHOPPING_EMAIL_ORDER_SHIPPING_SUBJECT));
+				PropsKeys.SHOPPING_EMAIL_ORDER_SHIPPING_SUBJECT));
 		}
 	}
 

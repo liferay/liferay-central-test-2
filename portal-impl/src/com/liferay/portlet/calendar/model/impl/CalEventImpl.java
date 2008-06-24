@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.calendar.model.CalEvent;
 
@@ -42,7 +43,7 @@ import com.liferay.portlet.calendar.model.CalEvent;
 public class CalEventImpl extends CalEventModelImpl implements CalEvent {
 
 	public static final String[] TYPES =
-		PropsUtil.getArray(PropsUtil.CALENDAR_EVENT_TYPES);
+		PropsUtil.getArray(PropsKeys.CALENDAR_EVENT_TYPES);
 
 	public static final String BIRTHDAY = "birthday";
 

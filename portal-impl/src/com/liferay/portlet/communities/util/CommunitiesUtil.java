@@ -37,6 +37,7 @@ import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 
@@ -121,11 +122,11 @@ public class CommunitiesUtil {
 
 			String[] eventClasses = StringUtil.split(
 				PropsUtil.get(
-					PropsUtil.LAYOUT_CONFIGURATION_ACTION_DELETE,
+					PropsKeys.LAYOUT_CONFIGURATION_ACTION_DELETE,
 					new Filter(layout.getType())));
 
 			EventsProcessor.process(
-				PropsUtil.LAYOUT_CONFIGURATION_ACTION_DELETE, eventClasses, req,
+				PropsKeys.LAYOUT_CONFIGURATION_ACTION_DELETE, eventClasses, req,
 				res);
 		}
 

@@ -44,6 +44,7 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.util.UniqueList;
@@ -71,7 +72,7 @@ import org.apache.commons.logging.LogFactory;
 public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 	public static final int USER_CHECK_ALGORITHM = GetterUtil.getInteger(
-		PropsUtil.get(PropsUtil.PERMISSIONS_USER_CHECK_ALGORITHM));
+		PropsUtil.get(PropsKeys.PERMISSIONS_USER_CHECK_ALGORITHM));
 
 	public PermissionCheckerImpl() {
 	}

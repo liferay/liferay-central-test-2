@@ -52,6 +52,7 @@ import com.liferay.portal.upload.ProgressInputStream;
 import com.liferay.portal.util.HttpImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
@@ -161,32 +162,32 @@ public class InstallPluginAction extends PortletAction {
 
 		PortletPreferences prefs = PrefsPropsUtil.getPreferences();
 
-		prefs.setValue(PropsUtil.AUTO_DEPLOY_ENABLED, String.valueOf(enabled));
-		prefs.setValue(PropsUtil.AUTO_DEPLOY_DEPLOY_DIR, deployDir);
-		prefs.setValue(PropsUtil.AUTO_DEPLOY_DEST_DIR, destDir);
+		prefs.setValue(PropsKeys.AUTO_DEPLOY_ENABLED, String.valueOf(enabled));
+		prefs.setValue(PropsKeys.AUTO_DEPLOY_DEPLOY_DIR, deployDir);
+		prefs.setValue(PropsKeys.AUTO_DEPLOY_DEST_DIR, destDir);
 		prefs.setValue(
-			PropsUtil.AUTO_DEPLOY_INTERVAL, String.valueOf(interval));
+			PropsKeys.AUTO_DEPLOY_INTERVAL, String.valueOf(interval));
 		prefs.setValue(
-			PropsUtil.AUTO_DEPLOY_BLACKLIST_THRESHOLD,
+			PropsKeys.AUTO_DEPLOY_BLACKLIST_THRESHOLD,
 			String.valueOf(blacklistThreshold));
 		prefs.setValue(
-			PropsUtil.AUTO_DEPLOY_UNPACK_WAR, String.valueOf(unpackWar));
+			PropsKeys.AUTO_DEPLOY_UNPACK_WAR, String.valueOf(unpackWar));
 		prefs.setValue(
-			PropsUtil.AUTO_DEPLOY_CUSTOM_PORTLET_XML,
+			PropsKeys.AUTO_DEPLOY_CUSTOM_PORTLET_XML,
 			String.valueOf(customPortletXml));
-		prefs.setValue(PropsUtil.AUTO_DEPLOY_JBOSS_PREFIX, jbossPrefix);
-		prefs.setValue(PropsUtil.AUTO_DEPLOY_TOMCAT_CONF_DIR, tomcatConfDir);
-		prefs.setValue(PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_DIR, tomcatLibDir);
+		prefs.setValue(PropsKeys.AUTO_DEPLOY_JBOSS_PREFIX, jbossPrefix);
+		prefs.setValue(PropsKeys.AUTO_DEPLOY_TOMCAT_CONF_DIR, tomcatConfDir);
+		prefs.setValue(PropsKeys.AUTO_DEPLOY_TOMCAT_LIB_DIR, tomcatLibDir);
 		prefs.setValue(
-			PropsUtil.PLUGIN_REPOSITORIES_TRUSTED, pluginRepositoriesTrusted);
+			PropsKeys.PLUGIN_REPOSITORIES_TRUSTED, pluginRepositoriesTrusted);
 		prefs.setValue(
-			PropsUtil.PLUGIN_REPOSITORIES_UNTRUSTED,
+			PropsKeys.PLUGIN_REPOSITORIES_UNTRUSTED,
 			pluginRepositoriesUntrusted);
 		prefs.setValue(
-			PropsUtil.PLUGIN_NOTIFICATIONS_ENABLED,
+			PropsKeys.PLUGIN_NOTIFICATIONS_ENABLED,
 			String.valueOf(pluginNotificationsEnabled));
 		prefs.setValue(
-			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED,
+			PropsKeys.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED,
 			pluginPackagesIgnored);
 
 		prefs.store();
@@ -221,7 +222,7 @@ public class InstallPluginAction extends PortletAction {
 	}
 
 	protected String[] getSourceForgeMirrors() {
-		return PropsUtil.getArray(PropsUtil.SOURCE_FORGE_MIRRORS);
+		return PropsUtil.getArray(PropsKeys.SOURCE_FORGE_MIRRORS);
 	}
 
 	protected void ignorePackages(ActionRequest req) throws Exception {
@@ -229,7 +230,7 @@ public class InstallPluginAction extends PortletAction {
 			req, "pluginPackagesIgnored");
 
 		String oldPluginPackagesIgnored= PrefsPropsUtil.getString(
-			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED);
+			PropsKeys.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED);
 
 		StringMaker sm = new StringMaker();
 
@@ -240,7 +241,7 @@ public class InstallPluginAction extends PortletAction {
 		PortletPreferences prefs = PrefsPropsUtil.getPreferences();
 
 		prefs.setValue(
-			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED, sm.toString());
+			PropsKeys.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED, sm.toString());
 
 		prefs.store();
 
@@ -287,7 +288,7 @@ public class InstallPluginAction extends PortletAction {
 			String source = file.toString();
 
 			String deployDir = PrefsPropsUtil.getString(
-				PropsUtil.AUTO_DEPLOY_DEPLOY_DIR,
+				PropsKeys.AUTO_DEPLOY_DEPLOY_DIR,
 				PropsValues.AUTO_DEPLOY_DEPLOY_DIR);
 
 			String destination = deployDir + StringPool.SLASH + fileName;
@@ -387,7 +388,7 @@ public class InstallPluginAction extends PortletAction {
 				progressId);
 
 			String deployDir = PrefsPropsUtil.getString(
-				PropsUtil.AUTO_DEPLOY_DEPLOY_DIR,
+				PropsKeys.AUTO_DEPLOY_DEPLOY_DIR,
 				PropsValues.AUTO_DEPLOY_DEPLOY_DIR);
 
 			String tmpFilePath =
@@ -495,7 +496,7 @@ public class InstallPluginAction extends PortletAction {
 			StringPool.NEW_LINE);
 
 		String[] pluginPackagesIgnored = PrefsPropsUtil.getStringArray(
-			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED,
+			PropsKeys.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED,
 			StringPool.NEW_LINE,
 			PropsValues.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED);
 
@@ -513,7 +514,7 @@ public class InstallPluginAction extends PortletAction {
 		PortletPreferences prefs = PrefsPropsUtil.getPreferences();
 
 		prefs.setValue(
-			PropsUtil.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED, sm.toString());
+			PropsKeys.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED, sm.toString());
 
 		prefs.store();
 

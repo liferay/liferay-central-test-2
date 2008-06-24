@@ -44,7 +44,7 @@ import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.ldap.LDAPUtil;
 import com.liferay.util.ldap.Modifications;
@@ -246,7 +246,7 @@ public class PortalLDAPUtil {
 		throws PortalException, SystemException {
 
 		String filter = PrefsPropsUtil.getString(
-			companyId, PropsUtil.LDAP_AUTH_SEARCH_FILTER);
+			companyId, PropsKeys.LDAP_AUTH_SEARCH_FILTER);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Search filter before transformation " + filter);
@@ -271,11 +271,11 @@ public class PortalLDAPUtil {
 
 	public static LdapContext getContext(long companyId) throws Exception {
 		String baseProviderURL = PrefsPropsUtil.getString(
-			companyId, PropsUtil.LDAP_BASE_PROVIDER_URL);
+			companyId, PropsKeys.LDAP_BASE_PROVIDER_URL);
 		String pricipal = PrefsPropsUtil.getString(
-			companyId, PropsUtil.LDAP_SECURITY_PRINCIPAL);
+			companyId, PropsKeys.LDAP_SECURITY_PRINCIPAL);
 		String credentials = PrefsPropsUtil.getString(
-			companyId, PropsUtil.LDAP_SECURITY_CREDENTIALS);
+			companyId, PropsKeys.LDAP_SECURITY_CREDENTIALS);
 
 		return getContext(companyId, baseProviderURL, pricipal, credentials);
 	}
@@ -290,13 +290,13 @@ public class PortalLDAPUtil {
 		env.put(
 			Context.INITIAL_CONTEXT_FACTORY,
 			PrefsPropsUtil.getString(
-				companyId, PropsUtil.LDAP_FACTORY_INITIAL));
+				companyId, PropsKeys.LDAP_FACTORY_INITIAL));
 		env.put(Context.PROVIDER_URL, providerURL);
 		env.put(Context.SECURITY_PRINCIPAL, pricipal);
 		env.put(Context.SECURITY_CREDENTIALS, credentials);
 		env.put(
 			Context.REFERRAL,
-			PrefsPropsUtil.getString(companyId, PropsUtil.LDAP_REFERRAL));
+			PrefsPropsUtil.getString(companyId, PropsKeys.LDAP_REFERRAL));
 
 		LogUtil.debug(_log, env);
 
@@ -322,7 +322,7 @@ public class PortalLDAPUtil {
 		throws Exception {
 
 		Properties groupMappings = PropertiesUtil.load(
-			PrefsPropsUtil.getString(companyId, PropsUtil.LDAP_GROUP_MAPPINGS));
+			PrefsPropsUtil.getString(companyId, PropsKeys.LDAP_GROUP_MAPPINGS));
 
 		LogUtil.debug(_log, groupMappings);
 
@@ -334,9 +334,9 @@ public class PortalLDAPUtil {
 		throws Exception {
 
 		String baseDN = PrefsPropsUtil.getString(
-			companyId, PropsUtil.LDAP_BASE_DN);
+			companyId, PropsKeys.LDAP_BASE_DN);
 		String groupFilter = PrefsPropsUtil.getString(
-			companyId, PropsUtil.LDAP_IMPORT_GROUP_SEARCH_FILTER);
+			companyId, PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER);
 
 		return getGroups(companyId, ctx, maxResults, baseDN, groupFilter);
 	}
@@ -356,7 +356,7 @@ public class PortalLDAPUtil {
 		throws Exception {
 
 		String baseDN = PrefsPropsUtil.getString(
-			companyId, PropsUtil.LDAP_BASE_DN);
+			companyId, PropsKeys.LDAP_BASE_DN);
 
 		if (Validator.isNull(baseDN)) {
 			return binding.getName();
@@ -382,7 +382,7 @@ public class PortalLDAPUtil {
 		}
 
 		String baseDN = PrefsPropsUtil.getString(
-			companyId, PropsUtil.LDAP_BASE_DN);
+			companyId, PropsKeys.LDAP_BASE_DN);
 
 		Properties userMappings = getUserMappings(companyId);
 
@@ -414,7 +414,7 @@ public class PortalLDAPUtil {
 
 	public static Properties getUserMappings(long companyId) throws Exception {
 		Properties userMappings = PropertiesUtil.load(
-			PrefsPropsUtil.getString(companyId, PropsUtil.LDAP_USER_MAPPINGS));
+			PrefsPropsUtil.getString(companyId, PropsKeys.LDAP_USER_MAPPINGS));
 
 		LogUtil.debug(_log, userMappings);
 
@@ -426,9 +426,9 @@ public class PortalLDAPUtil {
 		throws Exception {
 
 		String baseDN = PrefsPropsUtil.getString(
-			companyId, PropsUtil.LDAP_BASE_DN);
+			companyId, PropsKeys.LDAP_BASE_DN);
 		String userFilter = PrefsPropsUtil.getString(
-			companyId, PropsUtil.LDAP_IMPORT_USER_SEARCH_FILTER);
+			companyId, PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER);
 
 		return getUsers(companyId, ctx, maxResults, baseDN, userFilter);
 	}
@@ -445,7 +445,7 @@ public class PortalLDAPUtil {
 	}
 
 	public static String getUsersDN(long companyId) throws Exception {
-		return PrefsPropsUtil.getString(companyId, PropsUtil.LDAP_USERS_DN);
+		return PrefsPropsUtil.getString(companyId, PropsKeys.LDAP_USERS_DN);
 	}
 
 	public static boolean hasUser(long companyId, String screenName)
@@ -480,7 +480,7 @@ public class PortalLDAPUtil {
 
 		try {
 			String importMethod = PrefsPropsUtil.getString(
-				companyId, PropsUtil.LDAP_IMPORT_METHOD);
+				companyId, PropsKeys.LDAP_IMPORT_METHOD);
 
 			if (importMethod.equals(IMPORT_BY_USER)) {
 				NamingEnumeration<SearchResult> enu = getUsers(
@@ -675,7 +675,7 @@ public class PortalLDAPUtil {
 			// Find corresponding portal user
 
 			String authType = PrefsPropsUtil.getString(
-				companyId, PropsUtil.COMPANY_SECURITY_AUTH_TYPE,
+				companyId, PropsKeys.COMPANY_SECURITY_AUTH_TYPE,
 				PropsValues.COMPANY_SECURITY_AUTH_TYPE);
 
 			if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
@@ -825,7 +825,7 @@ public class PortalLDAPUtil {
 		throws PortalException, SystemException {
 
 		if (PrefsPropsUtil.getBoolean(
-				companyId, PropsUtil.LDAP_AUTH_ENABLED,
+				companyId, PropsKeys.LDAP_AUTH_ENABLED,
 				PropsValues.LDAP_AUTH_ENABLED)) {
 
 			return true;
@@ -839,7 +839,7 @@ public class PortalLDAPUtil {
 		throws PortalException, SystemException {
 
 		if (PrefsPropsUtil.getBoolean(
-				companyId, PropsUtil.LDAP_EXPORT_ENABLED,
+				companyId, PropsKeys.LDAP_EXPORT_ENABLED,
 				PropsValues.LDAP_EXPORT_ENABLED)) {
 
 			return true;
@@ -853,7 +853,7 @@ public class PortalLDAPUtil {
 		throws PortalException, SystemException {
 
 		if (PrefsPropsUtil.getBoolean(
-				companyId, PropsUtil.LDAP_IMPORT_ENABLED,
+				companyId, PropsKeys.LDAP_IMPORT_ENABLED,
 				PropsValues.LDAP_IMPORT_ENABLED)) {
 
 			return true;
@@ -867,7 +867,7 @@ public class PortalLDAPUtil {
 		throws PortalException, SystemException {
 
 		if (PrefsPropsUtil.getBoolean(
-				companyId, PropsUtil.LDAP_IMPORT_ON_STARTUP)) {
+				companyId, PropsKeys.LDAP_IMPORT_ON_STARTUP)) {
 
 			return true;
 		}
@@ -883,7 +883,7 @@ public class PortalLDAPUtil {
 			return false;
 		}
 
-		if (PrefsPropsUtil.getBoolean(companyId, PropsUtil.NTLM_AUTH_ENABLED)) {
+		if (PrefsPropsUtil.getBoolean(companyId, PropsKeys.NTLM_AUTH_ENABLED)) {
 			return true;
 		}
 		else {
@@ -895,7 +895,7 @@ public class PortalLDAPUtil {
 		throws PortalException, SystemException {
 
 		if (PrefsPropsUtil.getBoolean(
-				companyId, PropsUtil.LDAP_PASSWORD_POLICY_ENABLED,
+				companyId, PropsKeys.LDAP_PASSWORD_POLICY_ENABLED,
 				PropsValues.LDAP_PASSWORD_POLICY_ENABLED)) {
 
 			return true;

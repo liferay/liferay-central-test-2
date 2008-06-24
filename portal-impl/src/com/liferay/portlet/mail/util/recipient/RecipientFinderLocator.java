@@ -23,6 +23,7 @@
 package com.liferay.portlet.mail.util.recipient;
 
 import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ import java.util.List;
 public class RecipientFinderLocator {
 
 	public static List getInstances() {
-		String[] finders = PropsUtil.getArray(PropsUtil.MAIL_RECIPIENT_FINDER);
+		String[] finders = PropsUtil.getArray(PropsKeys.MAIL_RECIPIENT_FINDER);
 
 		List instances = new ArrayList(finders.length);
 

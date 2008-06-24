@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.expando.NoSuchTableException;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
@@ -56,7 +57,7 @@ import javax.portlet.PortletPreferences;
 public class WebFormUtil {
 
 	public static final int MAX_FIELDS = GetterUtil.getInteger(
-		PropsUtil.get(PropsUtil.WEB_FORM_PORTLET_MAX_FIELDS));
+		PropsUtil.get(PropsKeys.WEB_FORM_PORTLET_MAX_FIELDS));
 
 	public static ExpandoTable addTable(String tableName)
 		throws PortalException, SystemException {

@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.SystemProperties;
 
@@ -53,19 +54,19 @@ import org.apache.jackrabbit.core.TransientRepository;
 public class JCRFactoryImpl implements JCRFactory {
 
 	public static final String REPOSITORY_ROOT = PropsUtil.get(
-		PropsUtil.JCR_JACKRABBIT_REPOSITORY_ROOT);
+		PropsKeys.JCR_JACKRABBIT_REPOSITORY_ROOT);
 
 	public static final String CONFIG_FILE_PATH = PropsUtil.get(
-		PropsUtil.JCR_JACKRABBIT_CONFIG_FILE_PATH);
+		PropsKeys.JCR_JACKRABBIT_CONFIG_FILE_PATH);
 
 	public static final String REPOSITORY_HOME = PropsUtil.get(
-		PropsUtil.JCR_JACKRABBIT_REPOSITORY_HOME);
+		PropsKeys.JCR_JACKRABBIT_REPOSITORY_HOME);
 
 	public static final String CREDENTIALS_USERNAME = PropsUtil.get(
-		PropsUtil.JCR_JACKRABBIT_CREDENTIALS_USERNAME);
+		PropsKeys.JCR_JACKRABBIT_CREDENTIALS_USERNAME);
 
 	public static final char[] CREDENTIALS_PASSWORD = GetterUtil.getString(
-		PropsUtil.get(PropsUtil.JCR_JACKRABBIT_CREDENTIALS_PASSWORD)).
+		PropsUtil.get(PropsKeys.JCR_JACKRABBIT_CREDENTIALS_PASSWORD)).
 			toCharArray();
 
 	public Session createSession(String workspaceName)

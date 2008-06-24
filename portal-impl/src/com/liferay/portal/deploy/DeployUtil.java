@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.ant.DeleteTask;
@@ -52,7 +52,7 @@ public class DeployUtil {
 
 	public static String getAutoDeployDestDir() throws Exception {
 		String destDir = PrefsPropsUtil.getString(
-			PropsUtil.AUTO_DEPLOY_DEST_DIR, PropsValues.AUTO_DEPLOY_DEST_DIR);
+			PropsKeys.AUTO_DEPLOY_DEST_DIR, PropsValues.AUTO_DEPLOY_DEST_DIR);
 
 		if (Validator.isNull(destDir)) {
 			destDir = getAutoDeployServerDestDir();
@@ -68,7 +68,7 @@ public class DeployUtil {
 
 		if (serverId.equals(ServerDetector.TOMCAT_ID)) {
 			destDir = PrefsPropsUtil.getString(
-				PropsUtil.AUTO_DEPLOY_TOMCAT_DEST_DIR,
+				PropsKeys.AUTO_DEPLOY_TOMCAT_DEST_DIR,
 				PropsValues.AUTO_DEPLOY_TOMCAT_DEST_DIR);
 		}
 		else {
@@ -78,7 +78,7 @@ public class DeployUtil {
 
 		if (Validator.isNull(destDir)) {
 			destDir = PrefsPropsUtil.getString(
-				PropsUtil.AUTO_DEPLOY_DEFAULT_DEST_DIR,
+				PropsKeys.AUTO_DEPLOY_DEFAULT_DEST_DIR,
 				PropsValues.AUTO_DEPLOY_DEFAULT_DEST_DIR);
 		}
 
@@ -98,7 +98,7 @@ public class DeployUtil {
 		throws Exception {
 
 		boolean undeployEnabled = PrefsPropsUtil.getBoolean(
-			PropsUtil.HOT_UNDEPLOY_ENABLED, PropsValues.HOT_UNDEPLOY_ENABLED);
+			PropsKeys.HOT_UNDEPLOY_ENABLED, PropsValues.HOT_UNDEPLOY_ENABLED);
 
 		if (!undeployEnabled) {
 			return;
@@ -125,7 +125,7 @@ public class DeployUtil {
 		DeleteTask.deleteDirectory(deployDir);
 
 		int undeployInterval = PrefsPropsUtil.getInteger(
-			PropsUtil.HOT_UNDEPLOY_INTERVAL,
+			PropsKeys.HOT_UNDEPLOY_INTERVAL,
 			PropsValues.HOT_UNDEPLOY_INTERVAL);
 
 		if (_log.isInfoEnabled()) {

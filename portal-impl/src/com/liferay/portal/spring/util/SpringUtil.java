@@ -23,6 +23,7 @@
 package com.liferay.portal.spring.util;
 
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.spring.context.LazyClassPathApplicationContext;
 
@@ -47,7 +48,7 @@ public class SpringUtil {
 	public static ApplicationContext getContext() {
 		if (_ctx == null) {
 			_ctx = new LazyClassPathApplicationContext(
-				PropsUtil.getArray(PropsUtil.SPRING_CONFIGS));
+				PropsUtil.getArray(PropsKeys.SPRING_CONFIGS));
 		}
 
 		return _ctx;

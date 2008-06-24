@@ -51,6 +51,7 @@ import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.ArticleContentException;
 import com.liferay.portlet.journal.ArticleDisplayDateException;
@@ -2307,7 +2308,7 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		String[] imageExtensions =
-			PropsUtil.getArray(PropsUtil.JOURNAL_IMAGE_EXTENSIONS);
+			PropsUtil.getArray(PropsKeys.JOURNAL_IMAGE_EXTENSIONS);
 
 		if (smallImage && Validator.isNull(smallImageURL) &&
 			smallFile != null && smallBytes != null) {
@@ -2334,7 +2335,7 @@ public class JournalArticleLocalServiceImpl
 			}
 
 			long smallImageMaxSize = GetterUtil.getLong(
-				PropsUtil.get(PropsUtil.JOURNAL_IMAGE_SMALL_MAX_SIZE));
+				PropsUtil.get(PropsKeys.JOURNAL_IMAGE_SMALL_MAX_SIZE));
 
 			if ((smallImageMaxSize > 0) &&
 				((smallBytes == null) ||
@@ -2346,7 +2347,7 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	private static final String _TOKEN_PAGE_BREAK = PropsUtil.get(
-		PropsUtil.JOURNAL_ARTICLE_TOKEN_PAGE_BREAK);
+		PropsKeys.JOURNAL_ARTICLE_TOKEN_PAGE_BREAK);
 
 	private static Log _log =
 		LogFactory.getLog(JournalArticleLocalServiceImpl.class);

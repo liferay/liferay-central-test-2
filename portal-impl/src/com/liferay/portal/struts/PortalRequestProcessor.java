@@ -54,6 +54,7 @@ import com.liferay.portal.service.persistence.UserTrackerPathUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.LiveUsers;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
@@ -114,7 +115,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		_lastPaths.add(_PATH_PORTAL_LAYOUT);
 
-		addPaths(_lastPaths, PropsUtil.AUTH_FORWARD_LAST_PATHS);
+		addPaths(_lastPaths, PropsKeys.AUTH_FORWARD_LAST_PATHS);
 
 		// auth.public.path.
 
@@ -133,11 +134,11 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		_publicPaths.add(_PATH_PORTAL_RENDER_PORTLET);
 		_publicPaths.add(_PATH_PORTAL_TCK);
 
-		addPaths(_publicPaths, PropsUtil.AUTH_PUBLIC_PATHS);
+		addPaths(_publicPaths, PropsKeys.AUTH_PUBLIC_PATHS);
 
 		_trackerIgnorePaths = new HashSet<String>();
 
-		addPaths(_trackerIgnorePaths, PropsUtil.SESSION_TRACKER_IGNORE_PATHS);
+		addPaths(_trackerIgnorePaths, PropsKeys.SESSION_TRACKER_IGNORE_PATHS);
 	}
 
 	public void process(HttpServletRequest req, HttpServletResponse res)

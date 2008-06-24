@@ -59,7 +59,7 @@ import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.service.base.CompanyLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
@@ -194,9 +194,9 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 				try {
 					prefs.setValue(
-						PropsUtil.ADMIN_EMAIL_FROM_NAME, "Liferay Demo");
+						PropsKeys.ADMIN_EMAIL_FROM_NAME, "Liferay Demo");
 					prefs.setValue(
-						PropsUtil.ADMIN_EMAIL_FROM_ADDRESS, "test@liferay.net");
+						PropsKeys.ADMIN_EMAIL_FROM_ADDRESS, "test@liferay.net");
 
 					prefs.store();
 				}
@@ -597,24 +597,24 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		PortletPreferences prefs = PrefsPropsUtil.getPreferences(companyId);
 
 		try {
-			prefs.setValue(PropsUtil.COMPANY_SECURITY_AUTH_TYPE, authType);
+			prefs.setValue(PropsKeys.COMPANY_SECURITY_AUTH_TYPE, authType);
 			prefs.setValue(
-				PropsUtil.COMPANY_SECURITY_AUTO_LOGIN,
+				PropsKeys.COMPANY_SECURITY_AUTO_LOGIN,
 				String.valueOf(autoLogin));
 			prefs.setValue(
-				PropsUtil.COMPANY_SECURITY_SEND_PASSWORD,
+				PropsKeys.COMPANY_SECURITY_SEND_PASSWORD,
 				String.valueOf(sendPassword));
 			prefs.setValue(
-				PropsUtil.COMPANY_SECURITY_STRANGERS,
+				PropsKeys.COMPANY_SECURITY_STRANGERS,
 				String.valueOf(strangers));
 			prefs.setValue(
-				PropsUtil.COMPANY_SECURITY_STRANGERS_WITH_MX,
+				PropsKeys.COMPANY_SECURITY_STRANGERS_WITH_MX,
 				String.valueOf(strangersWithMx));
 			prefs.setValue(
-				PropsUtil.COMPANY_SECURITY_STRANGERS_VERIFY,
+				PropsKeys.COMPANY_SECURITY_STRANGERS_VERIFY,
 				String.valueOf(strangersVerify));
 			prefs.setValue(
-				PropsUtil.COMPANY_SECURITY_COMMUNITY_LOGO,
+				PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO,
 				String.valueOf(communityLogo));
 
 			prefs.store();

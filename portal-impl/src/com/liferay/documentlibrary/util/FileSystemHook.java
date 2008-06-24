@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.File;
@@ -393,7 +394,7 @@ public class FileSystemHook extends BaseHook {
 	}
 
 	private static final String _ROOT_DIR = PropsUtil.get(
-		PropsUtil.DL_HOOK_FILE_SYSTEM_ROOT_DIR);
+		PropsKeys.DL_HOOK_FILE_SYSTEM_ROOT_DIR);
 
 	private static Log _log = LogFactory.getLog(FileSystemHook.class);
 

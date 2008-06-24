@@ -33,7 +33,7 @@
 		String tabs1Names = "browse-repository,upload-file,download-file,configuration";
 		String tabs1 = ParamUtil.getString(request, "tabs1");
 
-		if (!PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED, PropsValues.AUTO_DEPLOY_ENABLED)) {
+		if (!PrefsPropsUtil.getBoolean(PropsKeys.AUTO_DEPLOY_ENABLED, PropsValues.AUTO_DEPLOY_ENABLED)) {
 			tabs1Names = "configuration";
 			tabs1 = "configuration";
 		}

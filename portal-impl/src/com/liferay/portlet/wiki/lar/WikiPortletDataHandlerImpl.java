@@ -38,6 +38,7 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NoSuchPageException;
@@ -311,7 +312,7 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 			existingNode = WikiNodeUtil.fetchByUUID_G(
 				node.getUuid(), context.getGroupId());
 
-			String nodeName = PropsUtil.get(PropsUtil.WIKI_INITIAL_NODE_NAME);
+			String nodeName = PropsUtil.get(PropsKeys.WIKI_INITIAL_NODE_NAME);
 
 			if (existingNode == null && node.getName().equals(nodeName)) {
 				try {
@@ -335,7 +336,7 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 			}
 		}
 		else {
-			String nodeName = PropsUtil.get(PropsUtil.WIKI_INITIAL_NODE_NAME);
+			String nodeName = PropsUtil.get(PropsKeys.WIKI_INITIAL_NODE_NAME);
 
 			if (node.getName().equals(nodeName)) {
 				try {

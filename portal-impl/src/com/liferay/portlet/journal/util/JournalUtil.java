@@ -39,6 +39,7 @@ import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -324,14 +325,14 @@ public class JournalUtil {
 
 	public static String getEmailFromAddress(PortletPreferences prefs) {
 		String emailFromAddress = PropsUtil.get(
-			PropsUtil.JOURNAL_EMAIL_FROM_ADDRESS);
+			PropsKeys.JOURNAL_EMAIL_FROM_ADDRESS);
 
 		return prefs.getValue("email-from-address", emailFromAddress);
 	}
 
 	public static String getEmailFromName(PortletPreferences prefs) {
 		String emailFromName = PropsUtil.get(
-			PropsUtil.JOURNAL_EMAIL_FROM_NAME);
+			PropsKeys.JOURNAL_EMAIL_FROM_NAME);
 
 		return prefs.getValue("email-from-name", emailFromName);
 	}
@@ -347,7 +348,7 @@ public class JournalUtil {
 		}
 		else {
 			return GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.JOURNAL_EMAIL_ARTICLE_APPROVAL_DENIED_ENABLED));
+				PropsKeys.JOURNAL_EMAIL_ARTICLE_APPROVAL_DENIED_ENABLED));
 		}
 	}
 
@@ -362,7 +363,7 @@ public class JournalUtil {
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.JOURNAL_EMAIL_ARTICLE_APPROVAL_DENIED_BODY));
+				PropsKeys.JOURNAL_EMAIL_ARTICLE_APPROVAL_DENIED_BODY));
 		}
 	}
 
@@ -377,7 +378,7 @@ public class JournalUtil {
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.JOURNAL_EMAIL_ARTICLE_APPROVAL_DENIED_SUBJECT));
+				PropsKeys.JOURNAL_EMAIL_ARTICLE_APPROVAL_DENIED_SUBJECT));
 		}
 	}
 
@@ -392,7 +393,7 @@ public class JournalUtil {
 		}
 		else {
 			return GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.JOURNAL_EMAIL_ARTICLE_APPROVAL_GRANTED_ENABLED));
+				PropsKeys.JOURNAL_EMAIL_ARTICLE_APPROVAL_GRANTED_ENABLED));
 		}
 	}
 
@@ -407,7 +408,7 @@ public class JournalUtil {
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.JOURNAL_EMAIL_ARTICLE_APPROVAL_GRANTED_BODY));
+				PropsKeys.JOURNAL_EMAIL_ARTICLE_APPROVAL_GRANTED_BODY));
 		}
 	}
 
@@ -422,7 +423,7 @@ public class JournalUtil {
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.JOURNAL_EMAIL_ARTICLE_APPROVAL_GRANTED_SUBJECT));
+				PropsKeys.JOURNAL_EMAIL_ARTICLE_APPROVAL_GRANTED_SUBJECT));
 		}
 	}
 
@@ -437,7 +438,7 @@ public class JournalUtil {
 		}
 		else {
 			return GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.JOURNAL_EMAIL_ARTICLE_APPROVAL_REQUESTED_ENABLED));
+				PropsKeys.JOURNAL_EMAIL_ARTICLE_APPROVAL_REQUESTED_ENABLED));
 		}
 	}
 
@@ -452,7 +453,7 @@ public class JournalUtil {
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.JOURNAL_EMAIL_ARTICLE_APPROVAL_REQUESTED_BODY));
+				PropsKeys.JOURNAL_EMAIL_ARTICLE_APPROVAL_REQUESTED_BODY));
 		}
 	}
 
@@ -467,7 +468,7 @@ public class JournalUtil {
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.JOURNAL_EMAIL_ARTICLE_APPROVAL_REQUESTED_SUBJECT));
+				PropsKeys.JOURNAL_EMAIL_ARTICLE_APPROVAL_REQUESTED_SUBJECT));
 		}
 	}
 
@@ -482,7 +483,7 @@ public class JournalUtil {
 		}
 		else {
 			return GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.JOURNAL_EMAIL_ARTICLE_REVIEW_ENABLED));
+				PropsKeys.JOURNAL_EMAIL_ARTICLE_REVIEW_ENABLED));
 		}
 	}
 
@@ -495,7 +496,7 @@ public class JournalUtil {
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.JOURNAL_EMAIL_ARTICLE_REVIEW_BODY));
+				PropsKeys.JOURNAL_EMAIL_ARTICLE_REVIEW_BODY));
 		}
 	}
 
@@ -510,7 +511,7 @@ public class JournalUtil {
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.JOURNAL_EMAIL_ARTICLE_REVIEW_SUBJECT));
+				PropsKeys.JOURNAL_EMAIL_ARTICLE_REVIEW_SUBJECT));
 		}
 	}
 
@@ -600,7 +601,7 @@ public class JournalUtil {
 			// Listeners
 
 			String[] listeners =
-				PropsUtil.getArray(PropsUtil.JOURNAL_TRANSFORMER_LISTENER);
+				PropsUtil.getArray(PropsKeys.JOURNAL_TRANSFORMER_LISTENER);
 
 			for (int i = 0; i < listeners.length; i++) {
 				TransformerListener listener = null;
@@ -874,7 +875,7 @@ public class JournalUtil {
 			new ArrayList<TransformerListener>();
 
 		String[] listeners = PropsUtil.getArray(
-			PropsUtil.JOURNAL_TRANSFORMER_LISTENER);
+			PropsKeys.JOURNAL_TRANSFORMER_LISTENER);
 
 		for (int i = 0; i < listeners.length; i++) {
 			TransformerListener listener = null;

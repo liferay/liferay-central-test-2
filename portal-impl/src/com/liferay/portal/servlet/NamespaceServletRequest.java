@@ -23,6 +23,7 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.servlet.DynamicServletRequest;
 
@@ -61,7 +62,7 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 	}
 
 	public static final String[] CUSTOM_RESERVED_ATTRS = PropsUtil.getArray(
-		PropsUtil.REQUEST_SHARED_ATTRIBUTES);
+		PropsKeys.REQUEST_SHARED_ATTRIBUTES);
 
 	public NamespaceServletRequest(
 		HttpServletRequest req, String attrNamespace, String paramNamespace) {

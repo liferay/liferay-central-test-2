@@ -34,7 +34,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.AccountLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 
 import java.security.Key;
@@ -146,43 +146,43 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 
 	public String getAuthType() throws PortalException, SystemException {
 		return PrefsPropsUtil.getString(
-			getCompanyId(), PropsUtil.COMPANY_SECURITY_AUTH_TYPE,
+			getCompanyId(), PropsKeys.COMPANY_SECURITY_AUTH_TYPE,
 			PropsValues.COMPANY_SECURITY_AUTH_TYPE);
 	}
 
 	public boolean isAutoLogin() throws PortalException, SystemException {
 		return PrefsPropsUtil.getBoolean(
-			getCompanyId(), PropsUtil.COMPANY_SECURITY_AUTO_LOGIN,
+			getCompanyId(), PropsKeys.COMPANY_SECURITY_AUTO_LOGIN,
 			PropsValues.COMPANY_SECURITY_AUTO_LOGIN);
 	}
 
 	public boolean isSendPassword() throws PortalException, SystemException {
 		return PrefsPropsUtil.getBoolean(
-			getCompanyId(), PropsUtil.COMPANY_SECURITY_SEND_PASSWORD,
+			getCompanyId(), PropsKeys.COMPANY_SECURITY_SEND_PASSWORD,
 			PropsValues.COMPANY_SECURITY_SEND_PASSWORD);
 	}
 
 	public boolean isStrangers() throws PortalException, SystemException {
 		return PrefsPropsUtil.getBoolean(
-			getCompanyId(), PropsUtil.COMPANY_SECURITY_STRANGERS,
+			getCompanyId(), PropsKeys.COMPANY_SECURITY_STRANGERS,
 			PropsValues.COMPANY_SECURITY_STRANGERS);
 	}
 
 	public boolean isStrangersWithMx() throws PortalException, SystemException {
 		return PrefsPropsUtil.getBoolean(
-			getCompanyId(), PropsUtil.COMPANY_SECURITY_STRANGERS_WITH_MX,
+			getCompanyId(), PropsKeys.COMPANY_SECURITY_STRANGERS_WITH_MX,
 			PropsValues.COMPANY_SECURITY_STRANGERS_WITH_MX);
 	}
 
 	public boolean isStrangersVerify() throws PortalException, SystemException {
 		return PrefsPropsUtil.getBoolean(
-			getCompanyId(), PropsUtil.COMPANY_SECURITY_STRANGERS_VERIFY,
+			getCompanyId(), PropsKeys.COMPANY_SECURITY_STRANGERS_VERIFY,
 			PropsValues.COMPANY_SECURITY_STRANGERS_VERIFY);
 	}
 
 	public boolean isCommunityLogo() throws PortalException, SystemException {
 		return PrefsPropsUtil.getBoolean(
-			getCompanyId(), PropsUtil.COMPANY_SECURITY_COMMUNITY_LOGO,
+			getCompanyId(), PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO,
 			PropsValues.COMPANY_SECURITY_COMMUNITY_LOGO);
 	}
 
@@ -203,7 +203,7 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 
 		try {
 			String[] mailHostNames = PrefsPropsUtil.getStringArray(
-				getCompanyId(), PropsUtil.ADMIN_MAIL_HOST_NAMES,
+				getCompanyId(), PropsKeys.ADMIN_MAIL_HOST_NAMES,
 				StringPool.NEW_LINE, PropsValues.ADMIN_MAIL_HOST_NAMES);
 
 			for (int i = 0; i < mailHostNames.length; i++) {

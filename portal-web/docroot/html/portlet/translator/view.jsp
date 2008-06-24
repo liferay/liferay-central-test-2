@@ -28,7 +28,7 @@
 Translation translation = (Translation)request.getAttribute(WebKeys.TRANSLATOR_TRANSLATION);
 
 if (translation == null) {
-	translation = new Translation(PropsUtil.get(PropsUtil.TRANSLATOR_DEFAULT_LANGUAGES), StringPool.BLANK, StringPool.BLANK);
+	translation = new Translation(PropsUtil.get(PropsKeys.TRANSLATOR_DEFAULT_LANGUAGES), StringPool.BLANK, StringPool.BLANK);
 }
 %>
 

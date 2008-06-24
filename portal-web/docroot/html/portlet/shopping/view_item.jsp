@@ -174,7 +174,7 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 
 		<br />
 
-		<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.SHOPPING_ITEM_SHOW_AVAILABILITY) %>">
+		<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.SHOPPING_ITEM_SHOW_AVAILABILITY) %>">
 			<c:choose>
 				<c:when test="<%= ShoppingUtil.isInStock(item) %>">
 					<liferay-ui:message key="availability" />: <span class="portlet-msg-success"><liferay-ui:message key="in-stock" /></span><br />

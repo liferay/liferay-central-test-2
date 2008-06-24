@@ -30,6 +30,7 @@ import com.liferay.portal.search.lucene.CleanUpJob;
 import com.liferay.portal.search.lucene.LuceneIndexer;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.util.PortalInstances;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
@@ -61,7 +62,7 @@ public class LuceneServlet extends HttpServlet {
 			long companyId = companyIds[i];
 
 			if (GetterUtil.getBoolean(
-					PropsUtil.get(PropsUtil.INDEX_ON_STARTUP))) {
+					PropsUtil.get(PropsKeys.INDEX_ON_STARTUP))) {
 
 				if (_log.isInfoEnabled()) {
 					_log.info("Indexing Lucene on startup");
@@ -71,7 +72,7 @@ public class LuceneServlet extends HttpServlet {
 				Thread indexerThread = null;
 
 				if (GetterUtil.getBoolean(
-						PropsUtil.get(PropsUtil.INDEX_WITH_THREAD)) ||
+						PropsUtil.get(PropsKeys.INDEX_WITH_THREAD)) ||
 					ServerDetector.isOrion()) {
 
 					indexerThread = new Thread(

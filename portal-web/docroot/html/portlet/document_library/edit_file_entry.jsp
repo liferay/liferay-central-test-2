@@ -46,7 +46,7 @@ String tagsEntries = ParamUtil.getString(renderRequest, "tagsEntries");
 
 String[] conversions = new String[0];
 
-if (PrefsPropsUtil.getBoolean(PropsUtil.OPENOFFICE_SERVER_ENABLED, PropsValues.OPENOFFICE_SERVER_ENABLED)) {
+if (PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.OPENOFFICE_SERVER_ENABLED)) {
 	conversions = (String[])DocumentConversionUtil.getConversions(extension);
 }
 

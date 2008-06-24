@@ -28,6 +28,7 @@ import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 /**
@@ -59,7 +60,7 @@ public class PwdToolkitUtil {
 
 	private PwdToolkitUtil() {
 		_toolkit = (BasicToolkit)InstancePool.get(
-			PropsUtil.get(PropsUtil.PASSWORDS_TOOLKIT));
+			PropsUtil.get(PropsKeys.PASSWORDS_TOOLKIT));
 	}
 
 	private String _generate() {

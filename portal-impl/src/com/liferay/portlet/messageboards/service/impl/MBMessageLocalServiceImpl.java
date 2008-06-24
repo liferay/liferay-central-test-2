@@ -47,7 +47,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.social.BlogsActivityKeys;
@@ -1577,7 +1577,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		long companyId = message.getCompanyId();
 
 		if (!PrefsPropsUtil.getBoolean(
-				companyId, PropsUtil.BLOGS_EMAIL_COMMENTS_ADDED_ENABLED)) {
+				companyId, PropsKeys.BLOGS_EMAIL_COMMENTS_ADDED_ENABLED)) {
 
 			return;
 		}
@@ -1592,17 +1592,17 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		User commentsUser = userPersistence.findByPrimaryKey(userId);
 
 		String fromName = PrefsPropsUtil.getString(
-			companyId, PropsUtil.ADMIN_EMAIL_FROM_NAME);
+			companyId, PropsKeys.ADMIN_EMAIL_FROM_NAME);
 		String fromAddress = PrefsPropsUtil.getString(
-			companyId, PropsUtil.ADMIN_EMAIL_FROM_ADDRESS);
+			companyId, PropsKeys.ADMIN_EMAIL_FROM_ADDRESS);
 
 		String toName = blogsUser.getFullName();
 		String toAddress = blogsUser.getEmailAddress();
 
 		String subject = PrefsPropsUtil.getContent(
-			companyId, PropsUtil.BLOGS_EMAIL_COMMENTS_ADDED_SUBJECT);
+			companyId, PropsKeys.BLOGS_EMAIL_COMMENTS_ADDED_SUBJECT);
 		String body = PrefsPropsUtil.getContent(
-			companyId, PropsUtil.BLOGS_EMAIL_COMMENTS_ADDED_BODY);
+			companyId, PropsKeys.BLOGS_EMAIL_COMMENTS_ADDED_BODY);
 
 		subject = StringUtil.replace(
 			subject,

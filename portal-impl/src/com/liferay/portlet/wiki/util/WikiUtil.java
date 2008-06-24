@@ -39,6 +39,7 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
@@ -91,13 +92,13 @@ public class WikiUtil {
 
 	public static String getEmailFromAddress(PortletPreferences prefs) {
 		String emailFromAddress = PropsUtil.get(
-			PropsUtil.WIKI_EMAIL_FROM_ADDRESS);
+			PropsKeys.WIKI_EMAIL_FROM_ADDRESS);
 
 		return prefs.getValue("email-from-address", emailFromAddress);
 	}
 
 	public static String getEmailFromName(PortletPreferences prefs) {
-		String emailFromName = PropsUtil.get(PropsUtil.WIKI_EMAIL_FROM_NAME);
+		String emailFromName = PropsUtil.get(PropsKeys.WIKI_EMAIL_FROM_NAME);
 
 		return prefs.getValue("email-from-name", emailFromName);
 	}
@@ -113,7 +114,7 @@ public class WikiUtil {
 		}
 		else {
 			return GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.WIKI_EMAIL_PAGE_ADDED_ENABLED));
+				PropsKeys.WIKI_EMAIL_PAGE_ADDED_ENABLED));
 		}
 	}
 
@@ -126,7 +127,7 @@ public class WikiUtil {
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.WIKI_EMAIL_PAGE_ADDED_BODY));
+				PropsKeys.WIKI_EMAIL_PAGE_ADDED_BODY));
 		}
 	}
 
@@ -139,7 +140,7 @@ public class WikiUtil {
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.WIKI_EMAIL_PAGE_ADDED_SIGNATURE));
+				PropsKeys.WIKI_EMAIL_PAGE_ADDED_SIGNATURE));
 		}
 	}
 
@@ -154,7 +155,7 @@ public class WikiUtil {
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.WIKI_EMAIL_PAGE_ADDED_SUBJECT_PREFIX));
+				PropsKeys.WIKI_EMAIL_PAGE_ADDED_SUBJECT_PREFIX));
 		}
 	}
 
@@ -169,7 +170,7 @@ public class WikiUtil {
 		}
 		else {
 			return GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.WIKI_EMAIL_PAGE_UPDATED_ENABLED));
+				PropsKeys.WIKI_EMAIL_PAGE_UPDATED_ENABLED));
 		}
 	}
 
@@ -182,7 +183,7 @@ public class WikiUtil {
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.WIKI_EMAIL_PAGE_UPDATED_BODY));
+				PropsKeys.WIKI_EMAIL_PAGE_UPDATED_BODY));
 		}
 	}
 
@@ -197,7 +198,7 @@ public class WikiUtil {
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.WIKI_EMAIL_PAGE_UPDATED_SIGNATURE));
+				PropsKeys.WIKI_EMAIL_PAGE_UPDATED_SIGNATURE));
 		}
 	}
 
@@ -212,7 +213,7 @@ public class WikiUtil {
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.WIKI_EMAIL_PAGE_UPDATED_SUBJECT_PREFIX));
+				PropsKeys.WIKI_EMAIL_PAGE_UPDATED_SUBJECT_PREFIX));
 		}
 	}
 
@@ -350,7 +351,7 @@ public class WikiUtil {
 
 	private String _getEditPage(String format) {
 		return PropsUtil.get(
-			PropsUtil.WIKI_FORMATS_EDIT_PAGE, new Filter(format));
+			PropsKeys.WIKI_FORMATS_EDIT_PAGE, new Filter(format));
 	}
 
 	private WikiEngine _getEngine(String format) throws WikiFormatException {
@@ -359,7 +360,7 @@ public class WikiUtil {
 		if (engine == null) {
 			try {
 				String engineClass = PropsUtil.get(
-					PropsUtil.WIKI_FORMATS_ENGINE, new Filter(format));
+					PropsKeys.WIKI_FORMATS_ENGINE, new Filter(format));
 
 				if (engineClass != null) {
 					if (!InstancePool.contains(engineClass)) {
@@ -367,12 +368,12 @@ public class WikiUtil {
 
 						engine.setMainConfiguration(
 							_readConfigurationFile(
-								PropsUtil.WIKI_FORMATS_CONFIGURATION_MAIN,
+								PropsKeys.WIKI_FORMATS_CONFIGURATION_MAIN,
 								format));
 
 						engine.setInterWikiConfiguration(
 							_readConfigurationFile(
-								PropsUtil.WIKI_FORMATS_CONFIGURATION_INTERWIKI,
+								PropsKeys.WIKI_FORMATS_CONFIGURATION_INTERWIKI,
 								format));
 					}
 					else {
@@ -396,12 +397,12 @@ public class WikiUtil {
 
 	private String _getHelpPage(String format) {
 		return PropsUtil.get(
-			PropsUtil.WIKI_FORMATS_HELP_PAGE, new Filter(format));
+			PropsKeys.WIKI_FORMATS_HELP_PAGE, new Filter(format));
 	}
 
 	private String _getHelpURL(String format) {
 		return PropsUtil.get(
-			PropsUtil.WIKI_FORMATS_HELP_URL, new Filter(format));
+			PropsKeys.WIKI_FORMATS_HELP_URL, new Filter(format));
 	}
 
 	private Map<String, Boolean> _getLinks(WikiPage page)

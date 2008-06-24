@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.filters.DynamicFilterConfig;
 
@@ -89,10 +89,10 @@ public class NtlmFilter extends NtlmHttpFilter {
 						== null)) {
 
 					String domainController = PrefsPropsUtil.getString(
-						companyId, PropsUtil.NTLM_DOMAIN_CONTROLLER);
+						companyId, PropsKeys.NTLM_DOMAIN_CONTROLLER);
 
 					String domain = PrefsPropsUtil.getString(
-						companyId, PropsUtil.NTLM_DOMAIN);
+						companyId, PropsKeys.NTLM_DOMAIN);
 
 					_config.addInitParameter(
 						"jcifs.http.domainController", domainController);

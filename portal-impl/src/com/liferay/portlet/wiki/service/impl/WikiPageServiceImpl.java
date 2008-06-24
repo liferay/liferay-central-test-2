@@ -35,6 +35,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.velocity.VelocityUtil;
 import com.liferay.portlet.wiki.model.WikiNode;
@@ -404,6 +405,6 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 	private static final int _MAX_END = 200;
 
 	private static final int _RSS_ABSTRACT_LENGTH = GetterUtil.getInteger(
-		PropsUtil.get(PropsUtil.WIKI_RSS_ABSTRACT_LENGTH));
+		PropsUtil.get(PropsKeys.WIKI_RSS_ABSTRACT_LENGTH));
 
 }

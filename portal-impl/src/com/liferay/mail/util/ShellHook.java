@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.ProcessUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import java.util.List;
@@ -43,7 +44,7 @@ import org.apache.commons.logging.LogFactory;
 public class ShellHook implements Hook {
 
 	public static String SHELL_SCRIPT =
-		PropsUtil.get(PropsUtil.MAIL_HOOK_SHELL_SCRIPT);
+		PropsUtil.get(PropsKeys.MAIL_HOOK_SHELL_SCRIPT);
 
 	public void addFilters(long userId, List<String> filters) {
 	}

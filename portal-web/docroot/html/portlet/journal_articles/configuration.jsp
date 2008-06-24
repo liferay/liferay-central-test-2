@@ -107,7 +107,7 @@ groupId = ParamUtil.getLong(request, "groupId", groupId);
 		<select name="<portlet:namespace />pageDelta">
 
 			<%
-			String[] pageDeltaValues = PropsUtil.getArray(PropsUtil.JOURNAL_ARTICLES_PAGE_DELTA_VALUES);
+			String[] pageDeltaValues = PropsUtil.getArray(PropsKeys.JOURNAL_ARTICLES_PAGE_DELTA_VALUES);
 
 			for (int i = 0; i < pageDeltaValues.length; i++) {
 			%>

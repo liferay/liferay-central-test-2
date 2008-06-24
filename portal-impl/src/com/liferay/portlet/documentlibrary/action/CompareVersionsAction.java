@@ -33,7 +33,7 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
@@ -131,7 +131,7 @@ public class CompareVersionsAction extends PortletAction {
 		}
 
 		if (PrefsPropsUtil.getBoolean(
-				PropsUtil.OPENOFFICE_SERVER_ENABLED,
+				PropsKeys.OPENOFFICE_SERVER_ENABLED,
 				PropsValues.OPENOFFICE_SERVER_ENABLED) &&
 			isConvertBeforeCompare(extension)) {
 

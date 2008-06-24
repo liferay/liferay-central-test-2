@@ -23,6 +23,7 @@
 package com.liferay.portal.spring.hibernate;
 
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.spring.hibernate.TransactionAwareConfiguration;
 
@@ -48,7 +49,7 @@ public class HibernateConfiguration extends TransactionAwareConfiguration {
 		try {
 			ClassLoader classLoader = getClass().getClassLoader();
 
-			String[] configs = PropsUtil.getArray(PropsUtil.HIBERNATE_CONFIGS);
+			String[] configs = PropsUtil.getArray(PropsKeys.HIBERNATE_CONFIGS);
 
 			for (int i = 0; i < configs.length; i++) {
 				try {

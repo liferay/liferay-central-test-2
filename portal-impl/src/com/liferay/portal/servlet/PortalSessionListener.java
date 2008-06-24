@@ -29,7 +29,7 @@ import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.LiveUsers;
 import com.liferay.portal.util.PortalInstances;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.mail.util.MailSessionLock;
@@ -62,7 +62,7 @@ public class PortalSessionListener implements HttpSessionListener {
 
 		try {
 			EventsProcessor.process(
-				PropsUtil.SERVLET_SESSION_CREATE_EVENTS,
+				PropsKeys.SERVLET_SESSION_CREATE_EVENTS,
 				PropsValues.SERVLET_SESSION_CREATE_EVENTS, ses);
 		}
 		catch (ActionException ae) {
@@ -113,7 +113,7 @@ public class PortalSessionListener implements HttpSessionListener {
 
 		try {
 			EventsProcessor.process(
-				PropsUtil.SERVLET_SESSION_DESTROY_EVENTS,
+				PropsKeys.SERVLET_SESSION_DESTROY_EVENTS,
 				PropsValues.SERVLET_SESSION_DESTROY_EVENTS, ses);
 		}
 		catch (ActionException ae) {

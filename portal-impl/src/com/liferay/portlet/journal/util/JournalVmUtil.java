@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.util.ContentUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.velocity.VelocityResourceListener;
@@ -69,7 +70,7 @@ public class JournalVmUtil {
 
 	public static final String[] _TEMPLATE_VELOCITY_RESTRICTED_VARIABLES =
 		PropsUtil.getArray(
-			PropsUtil.JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES);
+			PropsKeys.JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES);
 
 	public static String transform(
 			Map<String, String> tokens, String languageId, String xml,

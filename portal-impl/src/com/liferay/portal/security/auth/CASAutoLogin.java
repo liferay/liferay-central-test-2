@@ -31,7 +31,7 @@ import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 
 import edu.yale.its.tp.cas.client.filter.CASFilter;
@@ -68,7 +68,7 @@ public class CASAutoLogin implements AutoLogin {
 			long companyId = PortalUtil.getCompanyId(req);
 
 			if (!PrefsPropsUtil.getBoolean(
-					companyId, PropsUtil.CAS_AUTH_ENABLED,
+					companyId, PropsKeys.CAS_AUTH_ENABLED,
 					PropsValues.CAS_AUTH_ENABLED)) {
 
 				return credentials;
@@ -88,7 +88,7 @@ public class CASAutoLogin implements AutoLogin {
 				}
 				catch (NoSuchUserException nsue) {
 					if (PrefsPropsUtil.getBoolean(
-							companyId, PropsUtil.CAS_IMPORT_FROM_LDAP)) {
+							companyId, PropsKeys.CAS_IMPORT_FROM_LDAP)) {
 
 						user = addUser(companyId, screenName);
 					}
@@ -116,7 +116,7 @@ public class CASAutoLogin implements AutoLogin {
 
 		try {
 			String baseDN = PrefsPropsUtil.getString(
-				companyId, PropsUtil.LDAP_BASE_DN);
+				companyId, PropsKeys.LDAP_BASE_DN);
 
 			LdapContext ctx = PortalLDAPUtil.getContext(companyId);
 
@@ -125,7 +125,7 @@ public class CASAutoLogin implements AutoLogin {
 			}
 
 			String filter = PrefsPropsUtil.getString(
-				companyId, PropsUtil.LDAP_AUTH_SEARCH_FILTER);
+				companyId, PropsKeys.LDAP_AUTH_SEARCH_FILTER);
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Search filter before transformation " + filter);

@@ -36,6 +36,6 @@ if (Validator.isNotNull(types)) {
 	typesArray = StringUtil.split(types);
 }
 else {
-	typesArray = PropsUtil.getArray(PropsUtil.SOCIAL_BOOKMARK_TYPES);
+	typesArray = PropsUtil.getArray(PropsKeys.SOCIAL_BOOKMARK_TYPES);
 }
 %>

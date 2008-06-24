@@ -34,6 +34,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -799,7 +800,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	private static final int _MAX_END = 200;
 
 	private static final int _RSS_ABSTRACT_LENGTH = GetterUtil.getInteger(
-		PropsUtil.get(PropsUtil.MESSAGE_BOARDS_RSS_ABSTRACT_LENGTH));
+		PropsUtil.get(PropsKeys.MESSAGE_BOARDS_RSS_ABSTRACT_LENGTH));
 
 	private static Log _log = LogFactory.getLog(MBMessageServiceImpl.class);
 

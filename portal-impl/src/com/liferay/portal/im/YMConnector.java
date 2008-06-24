@@ -23,6 +23,7 @@
 package com.liferay.portal.im;
 
 import com.liferay.portal.kernel.util.MethodCache;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import java.lang.reflect.Method;
@@ -70,8 +71,8 @@ public class YMConnector {
 
 		try {
 			if (_jYMSGLibraryFound) {
-				String login = PropsUtil.get(PropsUtil.YM_LOGIN);
-				String password = PropsUtil.get(PropsUtil.YM_PASSWORD);
+				String login = PropsUtil.get(PropsKeys.YM_LOGIN);
+				String password = PropsUtil.get(PropsKeys.YM_PASSWORD);
 
 				Method method = MethodCache.get(
 					_SESSION, "login",

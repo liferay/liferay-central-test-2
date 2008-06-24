@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobExecutionContext;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 
@@ -41,7 +42,7 @@ import org.apache.commons.logging.LogFactory;
 public class CheckEventJob implements IntervalJob {
 
 	public static final long INTERVAL = GetterUtil.getLong(PropsUtil.get(
-		PropsUtil.CALENDAR_EVENT_CHECK_INTERVAL)) * Time.MINUTE;
+		PropsKeys.CALENDAR_EVENT_CHECK_INTERVAL)) * Time.MINUTE;
 
 	public void execute(JobExecutionContext context) {
 		try {

@@ -70,7 +70,7 @@ public class OpenIdUtil {
 		throws PortalException, SystemException {
 
 		return PrefsPropsUtil.getBoolean(
-			companyId, PropsUtil.OPEN_ID_AUTH_ENABLED,
+			companyId, PropsKeys.OPEN_ID_AUTH_ENABLED,
 			PropsValues.OPEN_ID_AUTH_ENABLED);
 	}
 

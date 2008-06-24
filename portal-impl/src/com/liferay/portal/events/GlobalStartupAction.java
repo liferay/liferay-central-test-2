@@ -39,6 +39,7 @@ import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.scheduler.SchedulerEngineImpl;
 import com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
@@ -62,7 +63,7 @@ public class GlobalStartupAction extends SimpleAction {
 		List<AutoDeployListener> list = new ArrayList<AutoDeployListener>();
 
 		String[] autoDeployListeners =
-			PropsUtil.getArray(PropsUtil.AUTO_DEPLOY_LISTENERS);
+			PropsUtil.getArray(PropsKeys.AUTO_DEPLOY_LISTENERS);
 
 		for (int i = 0; i < autoDeployListeners.length; i++) {
 			try {
@@ -88,7 +89,7 @@ public class GlobalStartupAction extends SimpleAction {
 		List<HotDeployListener> list = new ArrayList<HotDeployListener>();
 
 		String[] hotDeployListeners =
-			PropsUtil.getArray(PropsUtil.HOT_DEPLOY_LISTENERS);
+			PropsUtil.getArray(PropsKeys.HOT_DEPLOY_LISTENERS);
 
 		for (int i = 0; i < hotDeployListeners.length; i++) {
 			try {
@@ -126,7 +127,7 @@ public class GlobalStartupAction extends SimpleAction {
 
 		try {
 			if (PrefsPropsUtil.getBoolean(
-					PropsUtil.AUTO_DEPLOY_ENABLED,
+					PropsKeys.AUTO_DEPLOY_ENABLED,
 					PropsValues.AUTO_DEPLOY_ENABLED)) {
 
 				if (_log.isInfoEnabled()) {
@@ -135,14 +136,14 @@ public class GlobalStartupAction extends SimpleAction {
 
 				File deployDir = new File(
 					PrefsPropsUtil.getString(
-						PropsUtil.AUTO_DEPLOY_DEPLOY_DIR,
+						PropsKeys.AUTO_DEPLOY_DEPLOY_DIR,
 						PropsValues.AUTO_DEPLOY_DEPLOY_DIR));
 				File destDir = new File(DeployUtil.getAutoDeployDestDir());
 				long interval = PrefsPropsUtil.getLong(
-					PropsUtil.AUTO_DEPLOY_INTERVAL,
+					PropsKeys.AUTO_DEPLOY_INTERVAL,
 					PropsValues.AUTO_DEPLOY_INTERVAL);
 				int blacklistThreshold = PrefsPropsUtil.getInteger(
-					PropsUtil.AUTO_DEPLOY_BLACKLIST_THRESHOLD,
+					PropsKeys.AUTO_DEPLOY_BLACKLIST_THRESHOLD,
 					PropsValues.AUTO_DEPLOY_BLACKLIST_THRESHOLD);
 
 				List<AutoDeployListener> autoDeployListeners =
@@ -170,7 +171,7 @@ public class GlobalStartupAction extends SimpleAction {
 			JCRFactoryUtil.prepare();
 
 			if (GetterUtil.getBoolean(PropsUtil.get(
-					PropsUtil.JCR_INITIALIZE_ON_STARTUP))) {
+					PropsKeys.JCR_INITIALIZE_ON_STARTUP))) {
 
 				JCRFactoryUtil.initialize();
 			}

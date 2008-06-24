@@ -32,7 +32,7 @@ boolean daylight = GetterUtil.getBoolean((String)request.getAttribute("liferay-u
 int displayStyle = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:input-time-zone:displayStyle"));
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-time-zone:disabled"));
 
-String[] timeZones = PropsUtil.getArray(PropsUtil.TIME_ZONES);
+String[] timeZones = PropsUtil.getArray(PropsKeys.TIME_ZONES);
 
 NumberFormat numberFormat = NumberFormat.getInstance(locale);
 numberFormat.setMinimumIntegerDigits(2);

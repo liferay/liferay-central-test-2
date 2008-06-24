@@ -37,6 +37,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.mail.ContentException;
@@ -132,22 +133,22 @@ import org.apache.commons.logging.LogFactory;
 public class MailUtil {
 
 	public static final String MAIL_BOX_STYLE =
-		PropsUtil.get(PropsUtil.MAIL_BOX_STYLE);
+		PropsUtil.get(PropsKeys.MAIL_BOX_STYLE);
 
 	public static final String MAIL_INBOX_NAME =
-		PropsUtil.get(PropsUtil.MAIL_INBOX_NAME);
+		PropsUtil.get(PropsKeys.MAIL_INBOX_NAME);
 
 	public static final String MAIL_DRAFTS_NAME =
-		MAIL_BOX_STYLE + PropsUtil.get(PropsUtil.MAIL_DRAFTS_NAME);
+		MAIL_BOX_STYLE + PropsUtil.get(PropsKeys.MAIL_DRAFTS_NAME);
 
 	public static final String MAIL_SENT_NAME =
-		MAIL_BOX_STYLE + PropsUtil.get(PropsUtil.MAIL_SENT_NAME);
+		MAIL_BOX_STYLE + PropsUtil.get(PropsKeys.MAIL_SENT_NAME);
 
 	public static final String MAIL_SPAM_NAME =
-		MAIL_BOX_STYLE + PropsUtil.get(PropsUtil.MAIL_SPAM_NAME);
+		MAIL_BOX_STYLE + PropsUtil.get(PropsKeys.MAIL_SPAM_NAME);
 
 	public static final String MAIL_TRASH_NAME =
-		MAIL_BOX_STYLE + PropsUtil.get(PropsUtil.MAIL_TRASH_NAME);
+		MAIL_BOX_STYLE + PropsUtil.get(PropsKeys.MAIL_TRASH_NAME);
 
 	public static final String[] DEFAULT_FOLDERS = {
 		MAIL_INBOX_NAME, MAIL_DRAFTS_NAME, MAIL_SPAM_NAME, MAIL_SENT_NAME,

@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -518,13 +519,13 @@ public class S3Hook extends BaseHook {
 	}
 
 	private static final String _ACCESS_KEY = PropsUtil.get(
-		PropsUtil.DL_HOOK_S3_ACCESS_KEY);
+		PropsKeys.DL_HOOK_S3_ACCESS_KEY);
 
 	private static final String _SECRET_KEY = PropsUtil.get(
-		PropsUtil.DL_HOOK_S3_SECRET_KEY);
+		PropsKeys.DL_HOOK_S3_SECRET_KEY);
 
 	private static final String _BUCKET_NAME = PropsUtil.get(
-		PropsUtil.DL_HOOK_S3_BUCKET_NAME);
+		PropsKeys.DL_HOOK_S3_BUCKET_NAME);
 
 	private static Log _log = LogFactory.getLog(S3Hook.class);
 

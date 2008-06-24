@@ -22,6 +22,7 @@
 
 package com.liferay.portal.im;
 
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,8 +51,8 @@ public class MSNConnector {
 	}
 
 	private MSNConnector() {
-		_login = PropsUtil.get(PropsUtil.MSN_LOGIN);
-		_password = PropsUtil.get(PropsUtil.MSN_PASSWORD);
+		_login = PropsUtil.get(PropsKeys.MSN_LOGIN);
+		_password = PropsUtil.get(PropsKeys.MSN_PASSWORD);
 
 		_msn = new MSNMessenger(_login, _password);
 		_msn.setInitialStatus(UserStatus.ONLINE);

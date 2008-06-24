@@ -22,6 +22,7 @@
 
 package com.liferay.portal.jcr;
 
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import javax.jcr.RepositoryException;
@@ -36,10 +37,10 @@ import javax.jcr.Session;
 public interface JCRFactory {
 
 	public static final String WORKSPACE_NAME =
-		PropsUtil.get(PropsUtil.JCR_WORKSPACE_NAME);
+		PropsUtil.get(PropsKeys.JCR_WORKSPACE_NAME);
 
 	public static final String NODE_DOCUMENTLIBRARY =
-		PropsUtil.get(PropsUtil.JCR_NODE_DOCUMENTLIBRARY);
+		PropsUtil.get(PropsKeys.JCR_NODE_DOCUMENTLIBRARY);
 
 	public Session createSession(String workspaceName)
 		throws RepositoryException;

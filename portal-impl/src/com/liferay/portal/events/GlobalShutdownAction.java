@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.pop.POPServerUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
@@ -138,7 +139,7 @@ public class GlobalShutdownAction extends SimpleAction {
 		// Programmatically exit
 
 		if (GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.SHUTDOWN_PROGRAMMATICALLY_EXIT))) {
+				PropsKeys.SHUTDOWN_PROGRAMMATICALLY_EXIT))) {
 
 			Thread thread = Thread.currentThread();
 

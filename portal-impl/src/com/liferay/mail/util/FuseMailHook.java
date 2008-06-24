@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import java.util.List;
@@ -220,19 +221,19 @@ public class FuseMailHook implements Hook {
 	}
 
 	private static final String _URL = PropsUtil.get(
-		PropsUtil.MAIL_HOOK_FUSEMAIL_URL);
+		PropsKeys.MAIL_HOOK_FUSEMAIL_URL);
 
 	private static final String _USERNAME = PropsUtil.get(
-		PropsUtil.MAIL_HOOK_FUSEMAIL_USERNAME);
+		PropsKeys.MAIL_HOOK_FUSEMAIL_USERNAME);
 
 	private static final String _PASSWORD = PropsUtil.get(
-		PropsUtil.MAIL_HOOK_FUSEMAIL_PASSWORD);
+		PropsKeys.MAIL_HOOK_FUSEMAIL_PASSWORD);
 
 	private static final String _ACCOUNT_TYPE = PropsUtil.get(
-		PropsUtil.MAIL_HOOK_FUSEMAIL_ACCOUNT_TYPE);
+		PropsKeys.MAIL_HOOK_FUSEMAIL_ACCOUNT_TYPE);
 
 	private static final String _GROUP_PARENT = PropsUtil.get(
-		PropsUtil.MAIL_HOOK_FUSEMAIL_GROUP_PARENT);
+		PropsKeys.MAIL_HOOK_FUSEMAIL_GROUP_PARENT);
 
 	private static Log _log = LogFactory.getLog(FuseMailHook.class);
 

@@ -328,7 +328,7 @@ numberFormat.setMinimumIntegerDigits(2);
 						<liferay-ui:message key="enabled" />
 					</td>
 					<td>
-						<liferay-ui:input-checkbox param="enabled" defaultValue="<%= PrefsPropsUtil.getBoolean(PropsUtil.OPENOFFICE_SERVER_ENABLED, PropsValues.OPENOFFICE_SERVER_ENABLED) %>" />
+						<liferay-ui:input-checkbox param="enabled" defaultValue="<%= PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.OPENOFFICE_SERVER_ENABLED) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -336,7 +336,7 @@ numberFormat.setMinimumIntegerDigits(2);
 						<liferay-ui:message key="host" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />host" type="text" value="<%= PrefsPropsUtil.getString(PropsUtil.OPENOFFICE_SERVER_HOST) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />host" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.OPENOFFICE_SERVER_HOST) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -344,7 +344,7 @@ numberFormat.setMinimumIntegerDigits(2);
 						<liferay-ui:message key="port" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />port" type="text" value="<%= PrefsPropsUtil.getString(PropsUtil.OPENOFFICE_SERVER_PORT) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />port" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.OPENOFFICE_SERVER_PORT) %>" />
 					</td>
 				</tr>
 				</table>

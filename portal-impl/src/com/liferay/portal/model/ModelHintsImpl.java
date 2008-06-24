@@ -25,6 +25,7 @@ package com.liferay.portal.model;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.xml.ElementImpl;
 
@@ -62,7 +63,7 @@ public class ModelHintsImpl implements ModelHints {
 			ClassLoader classLoader = getClass().getClassLoader();
 
 			String[] configs = StringUtil.split(
-				PropsUtil.get(PropsUtil.MODEL_HINTS_CONFIGS));
+				PropsUtil.get(PropsKeys.MODEL_HINTS_CONFIGS));
 
 			for (int i = 0; i < configs.length; i++) {
 				read(classLoader, configs[i]);

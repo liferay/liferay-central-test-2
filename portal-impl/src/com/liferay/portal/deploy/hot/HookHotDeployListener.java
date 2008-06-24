@@ -42,6 +42,7 @@ import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
 import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortalInstances;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
@@ -153,8 +154,8 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			}
 		}
 
-		if (portalProperties.containsKey(PropsUtil.LOCALES)) {
-			PropsValues.LOCALES = PropsUtil.getArray(PropsUtil.LOCALES);
+		if (portalProperties.containsKey(PropsKeys.LOCALES)) {
+			PropsValues.LOCALES = PropsUtil.getArray(PropsKeys.LOCALES);
 
 			LanguageUtil.init();
 		}
@@ -331,7 +332,7 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			String eventClass, String eventType, ClassLoader portletClassLoader)
 		throws Exception {
 
-		if (eventType.equals(PropsUtil.APPLICATION_STARTUP_EVENTS)) {
+		if (eventType.equals(PropsKeys.APPLICATION_STARTUP_EVENTS)) {
 			SimpleAction simpleAction = new InvokerSimpleAction(
 				(SimpleAction)portletClassLoader.loadClass(
 					eventClass).newInstance());
@@ -345,10 +346,10 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			return null;
 		}
 
-		if (eventType.equals(PropsUtil.LOGIN_EVENTS_POST) ||
-			eventType.equals(PropsUtil.LOGIN_EVENTS_PRE) ||
-			eventType.equals(PropsUtil.LOGOUT_EVENTS_POST) ||
-			eventType.equals(PropsUtil.LOGOUT_EVENTS_PRE)) {
+		if (eventType.equals(PropsKeys.LOGIN_EVENTS_POST) ||
+			eventType.equals(PropsKeys.LOGIN_EVENTS_PRE) ||
+			eventType.equals(PropsKeys.LOGOUT_EVENTS_POST) ||
+			eventType.equals(PropsKeys.LOGOUT_EVENTS_PRE)) {
 
 			Action action = (Action)portletClassLoader.loadClass(
 				eventClass).newInstance();
@@ -440,9 +441,9 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			}
 		}
 
-		if (portalProperties.containsKey(PropsUtil.LOCALES)) {
+		if (portalProperties.containsKey(PropsKeys.LOCALES)) {
 			PropsValues.LOCALES = StringUtil.split(
-				portalProperties.getProperty(PropsUtil.LOCALES));
+				portalProperties.getProperty(PropsKeys.LOCALES));
 
 			LanguageUtil.init();
 		}

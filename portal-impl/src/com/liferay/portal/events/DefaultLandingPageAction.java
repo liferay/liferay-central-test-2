@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.events.Action;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.struts.LastPath;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
@@ -52,7 +52,7 @@ public class DefaultLandingPageAction extends Action {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				PropsUtil.DEFAULT_LANDING_PAGE_PATH + StringPool.EQUAL + path);
+				PropsKeys.DEFAULT_LANDING_PAGE_PATH + StringPool.EQUAL + path);
 		}
 
 		if (Validator.isNotNull(path)) {

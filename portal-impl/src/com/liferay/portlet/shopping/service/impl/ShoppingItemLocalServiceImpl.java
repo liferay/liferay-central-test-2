@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.amazonrankings.model.AmazonRankings;
 import com.liferay.portlet.amazonrankings.util.AmazonRankingsUtil;
@@ -886,7 +887,7 @@ public class ShoppingItemLocalServiceImpl
 		}
 
 		String[] imageExtensions =
-			PropsUtil.getArray(PropsUtil.SHOPPING_IMAGE_EXTENSIONS);
+			PropsUtil.getArray(PropsKeys.SHOPPING_IMAGE_EXTENSIONS);
 
 		// Small image
 
@@ -915,7 +916,7 @@ public class ShoppingItemLocalServiceImpl
 			}
 
 			long smallImageMaxSize = GetterUtil.getLong(
-				PropsUtil.get(PropsUtil.SHOPPING_IMAGE_SMALL_MAX_SIZE));
+				PropsUtil.get(PropsKeys.SHOPPING_IMAGE_SMALL_MAX_SIZE));
 
 			if ((smallImageMaxSize > 0) &&
 				((smallBytes == null) ||
@@ -952,7 +953,7 @@ public class ShoppingItemLocalServiceImpl
 			}
 
 			long mediumImageMaxSize = GetterUtil.getLong(
-				PropsUtil.get(PropsUtil.SHOPPING_IMAGE_MEDIUM_MAX_SIZE));
+				PropsUtil.get(PropsKeys.SHOPPING_IMAGE_MEDIUM_MAX_SIZE));
 
 			if ((mediumImageMaxSize > 0) &&
 				((mediumBytes == null) ||
@@ -989,7 +990,7 @@ public class ShoppingItemLocalServiceImpl
 			}
 
 			long largeImageMaxSize = GetterUtil.getLong(
-				PropsUtil.get(PropsUtil.SHOPPING_IMAGE_LARGE_MAX_SIZE));
+				PropsUtil.get(PropsKeys.SHOPPING_IMAGE_LARGE_MAX_SIZE));
 
 			if ((largeImageMaxSize > 0) &&
 				((largeBytes == null) ||

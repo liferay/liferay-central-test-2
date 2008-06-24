@@ -24,6 +24,7 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Region;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 /**
@@ -35,7 +36,7 @@ import com.liferay.portal.util.PropsUtil;
 public class RegionImpl extends RegionModelImpl implements Region {
 
 	public static final int DEFAULT_REGION_ID =
-		GetterUtil.getInteger(PropsUtil.get(PropsUtil.
+		GetterUtil.getInteger(PropsUtil.get(PropsKeys.
 			SQL_DATA_COM_LIFERAY_PORTAL_MODEL_REGION_REGION_ID));
 
 	public RegionImpl() {

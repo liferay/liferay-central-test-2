@@ -41,6 +41,7 @@ import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.communities.util.CommunitiesUtil;
@@ -160,11 +161,11 @@ public class UpdatePageAction extends JSONAction {
 
 		String[] eventClasses = StringUtil.split(
 			PropsUtil.get(
-				PropsUtil.LAYOUT_CONFIGURATION_ACTION_UPDATE,
+				PropsKeys.LAYOUT_CONFIGURATION_ACTION_UPDATE,
 				new Filter(layout.getType())));
 
 		EventsProcessor.process(
-			PropsUtil.LAYOUT_CONFIGURATION_ACTION_UPDATE, eventClasses, req,
+			PropsKeys.LAYOUT_CONFIGURATION_ACTION_UPDATE, eventClasses, req,
 			res);
 
 		String layoutURL = PortalUtil.getLayoutURL(layout, themeDisplay);

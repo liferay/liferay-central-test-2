@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.File;
@@ -51,7 +51,7 @@ public abstract class BaseExplodedTomcatListener implements AutoDeployListener {
 	public void copyContextFile(File file) throws AutoDeployException {
 		try {
 			String tomcatConfDir = PrefsPropsUtil.getString(
-				PropsUtil.AUTO_DEPLOY_TOMCAT_CONF_DIR,
+				PropsKeys.AUTO_DEPLOY_TOMCAT_CONF_DIR,
 				PropsValues.AUTO_DEPLOY_TOMCAT_CONF_DIR);
 
 			if (_log.isInfoEnabled()) {

@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.DuplicateTemplateIdException;
 import com.liferay.portlet.journal.NoSuchTemplateException;
@@ -612,7 +613,7 @@ public class JournalTemplateLocalServiceImpl
 		}
 
 		String[] imageExtensions =
-			PropsUtil.getArray(PropsUtil.JOURNAL_IMAGE_EXTENSIONS);
+			PropsUtil.getArray(PropsKeys.JOURNAL_IMAGE_EXTENSIONS);
 
 		if (smallImage && Validator.isNull(smallImageURL) &&
 			smallFile != null && smallBytes != null) {
@@ -639,7 +640,7 @@ public class JournalTemplateLocalServiceImpl
 			}
 
 			long smallImageMaxSize = GetterUtil.getLong(
-				PropsUtil.get(PropsUtil.JOURNAL_IMAGE_SMALL_MAX_SIZE));
+				PropsUtil.get(PropsKeys.JOURNAL_IMAGE_SMALL_MAX_SIZE));
 
 			if ((smallImageMaxSize > 0) &&
 				((smallBytes == null) ||

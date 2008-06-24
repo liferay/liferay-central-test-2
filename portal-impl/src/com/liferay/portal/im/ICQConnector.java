@@ -27,6 +27,7 @@ import JOscarLib.Core.OscarConnection;
 import JOscarLib.Tool.OscarInterface;
 
 import com.liferay.portal.kernel.util.KeyValuePair;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import java.util.List;
@@ -71,8 +72,8 @@ public class ICQConnector implements Observer {
 	private void _connect() {
 		_connecting = true;
 
-		String login = PropsUtil.get(PropsUtil.ICQ_LOGIN);
-		String password = PropsUtil.get(PropsUtil.ICQ_PASSWORD);
+		String login = PropsUtil.get(PropsKeys.ICQ_LOGIN);
+		String password = PropsUtil.get(PropsKeys.ICQ_PASSWORD);
 
 		_icq = new OscarConnection("login.icq.com", 5190, login, password);
 

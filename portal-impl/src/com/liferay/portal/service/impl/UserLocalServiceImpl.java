@@ -87,6 +87,7 @@ import com.liferay.portal.security.pwd.PwdToolkitUtil;
 import com.liferay.portal.service.base.UserLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.Encryptor;
@@ -344,7 +345,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Default groups
 
 		String[] defaultGroupNames = PrefsPropsUtil.getStringArray(
-			companyId, PropsUtil.ADMIN_DEFAULT_GROUP_NAMES, StringPool.NEW_LINE,
+			companyId, PropsKeys.ADMIN_DEFAULT_GROUP_NAMES, StringPool.NEW_LINE,
 			PropsValues.ADMIN_DEFAULT_GROUP_NAMES);
 
 		long[] groupIds = new long[defaultGroupNames.length];
@@ -367,7 +368,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		List<Role> roles = new ArrayList<Role>();
 
 		String[] defaultRoleNames = PrefsPropsUtil.getStringArray(
-			companyId, PropsUtil.ADMIN_DEFAULT_ROLE_NAMES, StringPool.NEW_LINE,
+			companyId, PropsKeys.ADMIN_DEFAULT_ROLE_NAMES, StringPool.NEW_LINE,
 			PropsValues.ADMIN_DEFAULT_ROLE_NAMES);
 
 		for (int i = 0; i < defaultRoleNames.length; i++) {
@@ -388,7 +389,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		List<UserGroup> userGroups = new ArrayList<UserGroup>();
 
 		String[] defaultUserGroupNames = PrefsPropsUtil.getStringArray(
-			companyId, PropsUtil.ADMIN_DEFAULT_USER_GROUP_NAMES,
+			companyId, PropsKeys.ADMIN_DEFAULT_USER_GROUP_NAMES,
 			StringPool.NEW_LINE, PropsValues.ADMIN_DEFAULT_USER_GROUP_NAMES);
 
 		for (int i = 0; i < defaultUserGroupNames.length; i++) {
@@ -1661,7 +1662,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 			if (PortalLDAPUtil.isPasswordPolicyEnabled(user.getCompanyId())) {
 				String passwordHistory = PrefsPropsUtil.getString(
-					user.getCompanyId(), PropsUtil.LDAP_ERROR_PASSWORD_HISTORY);
+					user.getCompanyId(), PropsKeys.LDAP_ERROR_PASSWORD_HISTORY);
 
 				if (msg.indexOf(passwordHistory) != -1) {
 					throw new UserPasswordException(
@@ -1717,7 +1718,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		User user = userPersistence.findByPrimaryKey(userId);
 
 		long imageMaxSize = GetterUtil.getLong(
-			PropsUtil.get(PropsUtil.USERS_IMAGE_MAX_SIZE));
+			PropsUtil.get(PropsKeys.USERS_IMAGE_MAX_SIZE));
 
 		if ((imageMaxSize > 0) &&
 			((bytes == null) || (bytes.length > imageMaxSize))) {
@@ -1985,7 +1986,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Pre-authentication pipeline
 
 		String[] authPipelinePre =
-			PropsUtil.getArray(PropsUtil.AUTH_PIPELINE_PRE);
+			PropsUtil.getArray(PropsKeys.AUTH_PIPELINE_PRE);
 
 		if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
 			authResult = AuthPipeline.authenticateByEmailAddress(
@@ -2055,16 +2056,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					authResult = Authenticator.SUCCESS;
 				}
 				else if (GetterUtil.getBoolean(PropsUtil.get(
-							PropsUtil.AUTH_MAC_ALLOW))) {
+							PropsKeys.AUTH_MAC_ALLOW))) {
 
 					try {
 						MessageDigest digester = MessageDigest.getInstance(
-							PropsUtil.get(PropsUtil.AUTH_MAC_ALGORITHM));
+							PropsUtil.get(PropsKeys.AUTH_MAC_ALGORITHM));
 
 						digester.update(login.getBytes("UTF8"));
 
 						String shardKey =
-							PropsUtil.get(PropsUtil.AUTH_MAC_SHARED_KEY);
+							PropsUtil.get(PropsKeys.AUTH_MAC_SHARED_KEY);
 
 						encPassword = Base64.encode(
 							digester.digest(shardKey.getBytes("UTF8")));
@@ -2093,7 +2094,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		if (authResult == Authenticator.SUCCESS) {
 			String[] authPipelinePost =
-				PropsUtil.getArray(PropsUtil.AUTH_PIPELINE_POST);
+				PropsUtil.getArray(PropsKeys.AUTH_PIPELINE_POST);
 
 			if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
 				authResult = AuthPipeline.authenticateByEmailAddress(
@@ -2117,7 +2118,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		if (authResult == Authenticator.FAILURE) {
 			try {
 				String[] authFailure =
-					PropsUtil.getArray(PropsUtil.AUTH_FAILURE);
+					PropsUtil.getArray(PropsKeys.AUTH_FAILURE);
 
 				if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
 					AuthPipeline.onFailureByEmailAddress(
@@ -2147,7 +2148,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 						(maxFailures != 0)) {
 
 						String[] authMaxFailures =
-							PropsUtil.getArray(PropsUtil.AUTH_MAX_FAILURES);
+							PropsUtil.getArray(PropsKeys.AUTH_MAX_FAILURES);
 
 						if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
 							AuthPipeline.onMaxFailuresByEmailAddress(
@@ -2230,9 +2231,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws IOException, PortalException, SystemException {
 
 		if (!PrefsPropsUtil.getBoolean(
-				companyId, PropsUtil.COMPANY_SECURITY_SEND_PASSWORD) ||
+				companyId, PropsKeys.COMPANY_SECURITY_SEND_PASSWORD) ||
 			!PrefsPropsUtil.getBoolean(
-				companyId, PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_ENABLED)) {
+				companyId, PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_ENABLED)) {
 
 			return;
 		}
@@ -2280,17 +2281,17 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		String fromName = PrefsPropsUtil.getString(
-			companyId, PropsUtil.ADMIN_EMAIL_FROM_NAME);
+			companyId, PropsKeys.ADMIN_EMAIL_FROM_NAME);
 		String fromAddress = PrefsPropsUtil.getString(
-			companyId, PropsUtil.ADMIN_EMAIL_FROM_ADDRESS);
+			companyId, PropsKeys.ADMIN_EMAIL_FROM_ADDRESS);
 
 		String toName = user.getFullName();
 		String toAddress = user.getEmailAddress();
 
 		String subject = PrefsPropsUtil.getContent(
-			companyId, PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT);
+			companyId, PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT);
 		String body = PrefsPropsUtil.getContent(
-			companyId, PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_BODY);
+			companyId, PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY);
 
 		subject = StringUtil.replace(
 			subject,
@@ -2417,7 +2418,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		if (!PrefsPropsUtil.getBoolean(
 				user.getCompanyId(),
-				PropsUtil.ADMIN_EMAIL_USER_ADDED_ENABLED)) {
+				PropsKeys.ADMIN_EMAIL_USER_ADDED_ENABLED)) {
 
 			return;
 		}
@@ -2427,17 +2428,17 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		Company company = companyPersistence.findByPrimaryKey(companyId);
 
 		String fromName = PrefsPropsUtil.getString(
-			companyId, PropsUtil.ADMIN_EMAIL_FROM_NAME);
+			companyId, PropsKeys.ADMIN_EMAIL_FROM_NAME);
 		String fromAddress = PrefsPropsUtil.getString(
-			companyId, PropsUtil.ADMIN_EMAIL_FROM_ADDRESS);
+			companyId, PropsKeys.ADMIN_EMAIL_FROM_ADDRESS);
 
 		String toName = user.getFullName();
 		String toAddress = user.getEmailAddress();
 
 		String subject = PrefsPropsUtil.getContent(
-			companyId, PropsUtil.ADMIN_EMAIL_USER_ADDED_SUBJECT);
+			companyId, PropsKeys.ADMIN_EMAIL_USER_ADDED_SUBJECT);
 		String body = PrefsPropsUtil.getContent(
-			companyId, PropsUtil.ADMIN_EMAIL_USER_ADDED_BODY);
+			companyId, PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY);
 
 		subject = StringUtil.replace(
 			subject,
@@ -2521,7 +2522,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 
 			String[] reservedEmailAddresses = PrefsPropsUtil.getStringArray(
-				user.getCompanyId(), PropsUtil.ADMIN_RESERVED_EMAIL_ADDRESSES,
+				user.getCompanyId(), PropsKeys.ADMIN_RESERVED_EMAIL_ADDRESSES,
 				StringPool.NEW_LINE,
 				PropsValues.ADMIN_RESERVED_EMAIL_ADDRESSES);
 
@@ -2576,7 +2577,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		String[] reservedEmailAddresses = PrefsPropsUtil.getStringArray(
-			companyId, PropsUtil.ADMIN_RESERVED_EMAIL_ADDRESSES,
+			companyId, PropsKeys.ADMIN_RESERVED_EMAIL_ADDRESSES,
 			StringPool.NEW_LINE, PropsValues.ADMIN_RESERVED_EMAIL_ADDRESSES);
 
 		for (int i = 0; i < reservedEmailAddresses.length; i++) {
@@ -2688,7 +2689,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		String[] reservedScreenNames = PrefsPropsUtil.getStringArray(
-			companyId, PropsUtil.ADMIN_RESERVED_SCREEN_NAMES,
+			companyId, PropsKeys.ADMIN_RESERVED_SCREEN_NAMES,
 			StringPool.NEW_LINE, PropsValues.ADMIN_RESERVED_SCREEN_NAMES);
 
 		for (int i = 0; i < reservedScreenNames.length; i++) {

@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.service.base.ImageLocalServiceBaseImpl;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import java.awt.image.RenderedImage;
@@ -60,7 +61,7 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 
 		try {
 			InputStream is = classLoader.getResourceAsStream(
-				PropsUtil.get(PropsUtil.IMAGE_DEFAULT_SPACER));
+				PropsUtil.get(PropsKeys.IMAGE_DEFAULT_SPACER));
 
 			if (is == null) {
 				_log.error("Default spacer is not available");
@@ -75,7 +76,7 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 
 		try {
 			InputStream is = classLoader.getResourceAsStream(
-				PropsUtil.get(PropsUtil.IMAGE_DEFAULT_COMPANY_LOGO));
+				PropsUtil.get(PropsKeys.IMAGE_DEFAULT_COMPANY_LOGO));
 
 			if (is == null) {
 				_log.error("Default company logo is not available");
@@ -91,7 +92,7 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 
 		try {
 			InputStream is = classLoader.getResourceAsStream(
-				PropsUtil.get(PropsUtil.IMAGE_DEFAULT_USER_FEMALE_PORTRAIT));
+				PropsUtil.get(PropsKeys.IMAGE_DEFAULT_USER_FEMALE_PORTRAIT));
 
 			if (is == null) {
 				_log.error("Default user female portrait is not available");
@@ -107,7 +108,7 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 
 		try {
 			InputStream is = classLoader.getResourceAsStream(
-				PropsUtil.get(PropsUtil.IMAGE_DEFAULT_USER_MALE_PORTRAIT));
+				PropsUtil.get(PropsKeys.IMAGE_DEFAULT_USER_MALE_PORTRAIT));
 
 			if (is == null) {
 				_log.error("Default user male portrait is not available");

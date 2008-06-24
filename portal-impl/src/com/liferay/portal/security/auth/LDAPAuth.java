@@ -34,7 +34,7 @@ import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.admin.util.OmniadminUtil;
 
@@ -145,7 +145,7 @@ public class LDAPAuth implements Authenticator {
 		}
 
 		String baseDN = PrefsPropsUtil.getString(
-			companyId, PropsUtil.LDAP_BASE_DN);
+			companyId, PropsKeys.LDAP_BASE_DN);
 
 		LdapContext ctx = PortalLDAPUtil.getContext(companyId);
 
@@ -188,13 +188,13 @@ public class LDAPAuth implements Authenticator {
 
 				if (errorMessage != null) {
 					if (errorMessage.indexOf(PrefsPropsUtil.getString(
-							companyId, PropsUtil.LDAP_ERROR_USER_LOCKOUT))
+							companyId, PropsKeys.LDAP_ERROR_USER_LOCKOUT))
 								!= -1) {
 
 						throw new UserLockoutException();
 					}
 					else if (errorMessage.indexOf(PrefsPropsUtil.getString(
-						companyId, PropsUtil.LDAP_ERROR_PASSWORD_EXPIRED))
+						companyId, PropsKeys.LDAP_ERROR_PASSWORD_EXPIRED))
 							!= -1) {
 
 						throw new PasswordExpiredException();
@@ -263,7 +263,7 @@ public class LDAPAuth implements Authenticator {
 		// auth method must be used in order to get the result control codes.
 
 		String authMethod = PrefsPropsUtil.getString(
-			companyId, PropsUtil.LDAP_AUTH_METHOD);
+			companyId, PropsKeys.LDAP_AUTH_METHOD);
 
 		if (authMethod.equals(AUTH_METHOD_BIND)) {
 			try {
@@ -275,7 +275,7 @@ public class LDAPAuth implements Authenticator {
 				env.put(
 					Context.REFERRAL,
 					PrefsPropsUtil.getString(
-						companyId, PropsUtil.LDAP_REFERRAL));
+						companyId, PropsKeys.LDAP_REFERRAL));
 
 				ctx = new InitialLdapContext(env, null);
 
@@ -310,7 +310,7 @@ public class LDAPAuth implements Authenticator {
 
 				String algorithm = PrefsPropsUtil.getString(
 					companyId,
-					PropsUtil.LDAP_AUTH_PASSWORD_ENCRYPTION_ALGORITHM);
+					PropsKeys.LDAP_AUTH_PASSWORD_ENCRYPTION_ALGORITHM);
 
 				if (Validator.isNotNull(algorithm)) {
 					encryptedPassword =
@@ -370,7 +370,7 @@ public class LDAPAuth implements Authenticator {
 		throws Exception {
 
 		if (PrefsPropsUtil.getBoolean(
-				companyId, PropsUtil.LDAP_AUTH_REQUIRED)) {
+				companyId, PropsKeys.LDAP_AUTH_REQUIRED)) {
 
 			return failureCode;
 		}

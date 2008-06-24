@@ -27,6 +27,7 @@ import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 /**
@@ -53,14 +54,14 @@ public class ListTypeImpl extends ListTypeModelImpl implements ListType {
 		Account.class.getName() + ADDRESS;
 
 	public static final int ACCOUNT_ADDRESS_DEFAULT =
-		GetterUtil.getInteger(PropsUtil.get(PropsUtil.
+		GetterUtil.getInteger(PropsUtil.get(PropsKeys.
 			SQL_DATA_COM_LIFERAY_PORTAL_MODEL_LISTTYPE_ACCOUNT_ADDRESS));
 
 	public static final String ACCOUNT_EMAIL_ADDRESS =
 		Account.class.getName() + EMAIL_ADDRESS;
 
 	public static final int ACCOUNT_EMAIL_ADDRESS_DEFAULT =
-		GetterUtil.getInteger(PropsUtil.get(PropsUtil.
+		GetterUtil.getInteger(PropsUtil.get(PropsKeys.
 			SQL_DATA_COM_LIFERAY_PORTAL_MODEL_LISTTYPE_ACCOUNT_EMAIL_ADDRESS));
 
 	public static final String ACCOUNT_PHONE =
@@ -78,7 +79,7 @@ public class ListTypeImpl extends ListTypeModelImpl implements ListType {
 		Contact.class.getName() + EMAIL_ADDRESS;
 
 	public static final int CONTACT_EMAIL_ADDRESS_DEFAULT =
-		GetterUtil.getInteger(PropsUtil.get(PropsUtil.
+		GetterUtil.getInteger(PropsUtil.get(PropsKeys.
 			SQL_DATA_COM_LIFERAY_PORTAL_MODEL_LISTTYPE_CONTACT_EMAIL_ADDRESS));
 
 	public static final String CONTACT_PHONE =
@@ -111,7 +112,7 @@ public class ListTypeImpl extends ListTypeModelImpl implements ListType {
 		Organization.class.getName() + ".status";
 
 	public static final int ORGANIZATION_STATUS_DEFAULT =
-		GetterUtil.getInteger(PropsUtil.get(PropsUtil.
+		GetterUtil.getInteger(PropsUtil.get(PropsKeys.
 			SQL_DATA_COM_LIFERAY_PORTAL_MODEL_LISTTYPE_ORGANIZATION_STATUS));
 
 	public static final String ORGANIZATION_WEBSITE =

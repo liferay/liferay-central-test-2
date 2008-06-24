@@ -28,6 +28,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import java.util.ArrayList;
@@ -291,7 +292,7 @@ public class CounterPersistence extends BasePersistence {
 	private static final int _MINIMUM_INCREMENT_SIZE = 1;
 
 	private static final int _COUNTER_INCREMENT = GetterUtil.getInteger(
-		PropsUtil.get(PropsUtil.COUNTER_INCREMENT), _MINIMUM_INCREMENT_SIZE);
+		PropsUtil.get(PropsKeys.COUNTER_INCREMENT), _MINIMUM_INCREMENT_SIZE);
 
 	private static final String _NAME = Counter.class.getName();
 

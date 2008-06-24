@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.tools.LayoutTemplateDeployer;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.ArrayList;
@@ -49,18 +49,18 @@ public class LayoutTemplateAutoDeployer
 	public LayoutTemplateAutoDeployer() {
 		try {
 			baseDir = PrefsPropsUtil.getString(
-				PropsUtil.AUTO_DEPLOY_DEPLOY_DIR,
+				PropsKeys.AUTO_DEPLOY_DEPLOY_DIR,
 				PropsValues.AUTO_DEPLOY_DEPLOY_DIR);
 			destDir = DeployUtil.getAutoDeployDestDir();
 			appServerType = ServerDetector.getServerId();
 			unpackWar = PrefsPropsUtil.getBoolean(
-				PropsUtil.AUTO_DEPLOY_UNPACK_WAR,
+				PropsKeys.AUTO_DEPLOY_UNPACK_WAR,
 				PropsValues.AUTO_DEPLOY_UNPACK_WAR);
 			jbossPrefix = PrefsPropsUtil.getString(
-				PropsUtil.AUTO_DEPLOY_JBOSS_PREFIX,
+				PropsKeys.AUTO_DEPLOY_JBOSS_PREFIX,
 				PropsValues.AUTO_DEPLOY_JBOSS_PREFIX);
 			unpackWar = PrefsPropsUtil.getBoolean(
-				PropsUtil.AUTO_DEPLOY_UNPACK_WAR,
+				PropsKeys.AUTO_DEPLOY_UNPACK_WAR,
 				PropsValues.AUTO_DEPLOY_UNPACK_WAR);
 
 			List<String> jars = new ArrayList<String>();

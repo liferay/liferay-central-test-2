@@ -56,7 +56,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="enabled" />
 					</td>
 					<td>
-						<liferay-ui:input-checkbox param="enabled" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.CAS_AUTH_ENABLED, PropsValues.CAS_AUTH_ENABLED) %>' />
+						<liferay-ui:input-checkbox param="enabled" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.CAS_AUTH_ENABLED, PropsValues.CAS_AUTH_ENABLED) %>' />
 					</td>
 				</tr>
 				<tr>
@@ -66,7 +66,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:icon-help message="import-cas-users-from-ldap-help" />
 					</td>
 					<td>
-						<liferay-ui:input-checkbox param="importFromLdap" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.CAS_IMPORT_FROM_LDAP) %>' />
+						<liferay-ui:input-checkbox param="importFromLdap" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.CAS_IMPORT_FROM_LDAP) %>' />
 					</td>
 				</tr>
 				<tr>
@@ -74,7 +74,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="login-url" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />loginUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.CAS_LOGIN_URL) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />loginUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_LOGIN_URL) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -82,7 +82,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="logout-url" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />logoutUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.CAS_LOGOUT_URL) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />logoutUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_LOGOUT_URL) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -90,7 +90,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="server-name" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />serverName" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.CAS_SERVER_NAME) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />serverName" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_SERVER_NAME) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -98,7 +98,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="service-url" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />serviceUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.CAS_SERVICE_URL) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />serviceUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_SERVICE_URL) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -106,7 +106,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="validate-url" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />validateUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.CAS_VALIDATE_URL) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />validateUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_VALIDATE_URL) %>" />
 					</td>
 				</tr>
 				</table>
@@ -122,7 +122,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="enabled" />
 					</td>
 					<td>
-						<liferay-ui:input-checkbox param="enabled" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.NTLM_AUTH_ENABLED) %>' />
+						<liferay-ui:input-checkbox param="enabled" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.NTLM_AUTH_ENABLED) %>' />
 					</td>
 				</tr>
 				<tr>
@@ -130,7 +130,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="domain-controller" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />domainController" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.NTLM_DOMAIN_CONTROLLER) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />domainController" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.NTLM_DOMAIN_CONTROLLER) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -138,7 +138,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="domain" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />domain" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.NTLM_DOMAIN) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />domain" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.NTLM_DOMAIN) %>" />
 					</td>
 				</tr>
 				</table>
@@ -154,7 +154,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="enabled" />
 					</td>
 					<td>
-						<liferay-ui:input-checkbox param="enabled" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.OPEN_ID_AUTH_ENABLED, PropsValues.OPEN_ID_AUTH_ENABLED) %>' />
+						<liferay-ui:input-checkbox param="enabled" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.OPEN_ID_AUTH_ENABLED, PropsValues.OPEN_ID_AUTH_ENABLED) %>' />
 					</td>
 				</tr>
 				</table>
@@ -170,7 +170,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="enabled" />
 					</td>
 					<td>
-						<liferay-ui:input-checkbox param="enabled" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.OPEN_SSO_AUTH_ENABLED, PropsValues.OPEN_SSO_AUTH_ENABLED) %>' />
+						<liferay-ui:input-checkbox param="enabled" defaultValue='<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.OPEN_SSO_AUTH_ENABLED, PropsValues.OPEN_SSO_AUTH_ENABLED) %>' />
 					</td>
 				</tr>
 				<tr>
@@ -178,7 +178,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="login-url" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />loginUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_LOGIN_URL, PropsValues.OPEN_SSO_LOGIN_URL) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />loginUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.OPEN_SSO_LOGIN_URL, PropsValues.OPEN_SSO_LOGIN_URL) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -186,7 +186,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="logout-url" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />logoutUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_LOGOUT_URL, PropsValues.OPEN_SSO_LOGOUT_URL) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />logoutUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.OPEN_SSO_LOGOUT_URL, PropsValues.OPEN_SSO_LOGOUT_URL) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -194,7 +194,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="service-url" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />serviceUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_SERVICE_URL, PropsValues.OPEN_SSO_SERVICE_URL) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />serviceUrl" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.OPEN_SSO_SERVICE_URL, PropsValues.OPEN_SSO_SERVICE_URL) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -202,7 +202,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="screen-name-attribute" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />screenNameAttr" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_SCREEN_NAME_ATTR, PropsValues.OPEN_SSO_SCREEN_NAME_ATTR) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />screenNameAttr" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.OPEN_SSO_SCREEN_NAME_ATTR, PropsValues.OPEN_SSO_SCREEN_NAME_ATTR) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -210,7 +210,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="email-address-attribute" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />emailAddressAttr" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_EMAIL_ADDRESS_ATTR, PropsValues.OPEN_SSO_EMAIL_ADDRESS_ATTR) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />emailAddressAttr" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.OPEN_SSO_EMAIL_ADDRESS_ATTR, PropsValues.OPEN_SSO_EMAIL_ADDRESS_ATTR) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -218,7 +218,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="first-name-attribute" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />firstNameAttr" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_FIRST_NAME_ATTR, PropsValues.OPEN_SSO_FIRST_NAME_ATTR) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />firstNameAttr" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.OPEN_SSO_FIRST_NAME_ATTR, PropsValues.OPEN_SSO_FIRST_NAME_ATTR) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -226,7 +226,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						<liferay-ui:message key="last-name-attribute" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />lastNameAttr" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.OPEN_SSO_LAST_NAME_ATTR, PropsValues.OPEN_SSO_LAST_NAME_ATTR) %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />lastNameAttr" type="text" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.OPEN_SSO_LAST_NAME_ATTR, PropsValues.OPEN_SSO_LAST_NAME_ATTR) %>" />
 					</td>
 				</tr>
 				</table>
@@ -312,7 +312,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 
 		<br /><br />
 
-		<textarea class="lfr-textarea" name="<portlet:namespace />defaultGroupNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_GROUP_NAMES) %></textarea>
+		<textarea class="lfr-textarea" name="<portlet:namespace />defaultGroupNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_DEFAULT_GROUP_NAMES) %></textarea>
 
 		<br /><br />
 
@@ -320,7 +320,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 
 		<br /><br />
 
-		<textarea class="lfr-textarea" name="<portlet:namespace />defaultRoleNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_ROLE_NAMES) %></textarea>
+		<textarea class="lfr-textarea" name="<portlet:namespace />defaultRoleNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_DEFAULT_ROLE_NAMES) %></textarea>
 
 		<br /><br />
 
@@ -328,7 +328,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 
 		<br /><br />
 
-		<textarea class="lfr-textarea" name="<portlet:namespace />defaultUserGroupNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_DEFAULT_USER_GROUP_NAMES) %></textarea>
+		<textarea class="lfr-textarea" name="<portlet:namespace />defaultUserGroupNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_DEFAULT_USER_GROUP_NAMES) %></textarea>
 
 		<br /><br />
 
@@ -339,7 +339,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 
 		<br /><br />
 
-		<textarea class="lfr-textarea" name="<portlet:namespace />reservedScreenNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_RESERVED_SCREEN_NAMES) %></textarea>
+		<textarea class="lfr-textarea" name="<portlet:namespace />reservedScreenNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_RESERVED_SCREEN_NAMES) %></textarea>
 
 		<br /><br />
 
@@ -347,7 +347,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 
 		<br /><br />
 
-		<textarea class="lfr-textarea" name="<portlet:namespace />reservedEmailAddresses"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_RESERVED_EMAIL_ADDRESSES) %></textarea>
+		<textarea class="lfr-textarea" name="<portlet:namespace />reservedEmailAddresses"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_RESERVED_EMAIL_ADDRESSES) %></textarea>
 
 		<br /><br />
 
@@ -358,7 +358,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 
 		<br /><br />
 
-		<textarea class="lfr-textarea" name="<portlet:namespace />mailHostNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_MAIL_HOST_NAMES) %></textarea>
+		<textarea class="lfr-textarea" name="<portlet:namespace />mailHostNames"><%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_MAIL_HOST_NAMES) %></textarea>
 
 		<br /><br />
 
@@ -368,14 +368,14 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 		<script type="text/javascript">
 
 			<%
-			String emailFromName = ParamUtil.getString(request, "emailFromName", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_EMAIL_FROM_NAME));
-			String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.ADMIN_EMAIL_FROM_ADDRESS));
+			String emailFromName = ParamUtil.getString(request, "emailFromName", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_NAME));
+			String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_ADDRESS));
 
-			String emailUserAddedSubject = ParamUtil.getString(request, "emailUserAddedSubject", PrefsPropsUtil.getContent(company.getCompanyId(), PropsUtil.ADMIN_EMAIL_USER_ADDED_SUBJECT));
-			String emailUserAddedBody = ParamUtil.getString(request, "emailUserAddedBody", PrefsPropsUtil.getContent(company.getCompanyId(), PropsUtil.ADMIN_EMAIL_USER_ADDED_BODY));
+			String emailUserAddedSubject = ParamUtil.getString(request, "emailUserAddedSubject", PrefsPropsUtil.getContent(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_SUBJECT));
+			String emailUserAddedBody = ParamUtil.getString(request, "emailUserAddedBody", PrefsPropsUtil.getContent(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY));
 
-			String emailPasswordSentSubject = ParamUtil.getString(request, "emailPasswordSentSubject", PrefsPropsUtil.getContent(company.getCompanyId(), PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT));
-			String emailPasswordSentBody = ParamUtil.getString(request, "emailPasswordSentBody", PrefsPropsUtil.getContent(company.getCompanyId(), PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_BODY));
+			String emailPasswordSentSubject = ParamUtil.getString(request, "emailPasswordSentSubject", PrefsPropsUtil.getContent(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT));
+			String emailPasswordSentBody = ParamUtil.getString(request, "emailPasswordSentBody", PrefsPropsUtil.getContent(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY));
 
 			String editorParam = "";
 			String editorContent = "";
@@ -429,10 +429,10 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 					<td>
 						<c:choose>
 							<c:when test='<%= tabs3.equals("account-created-notification") %>'>
-								<liferay-ui:input-checkbox param="emailUserAddedEnabled" defaultValue="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.ADMIN_EMAIL_USER_ADDED_ENABLED) %>" />
+								<liferay-ui:input-checkbox param="emailUserAddedEnabled" defaultValue="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_ENABLED) %>" />
 							</c:when>
 							<c:when test='<%= tabs3.equals("password-changed-notification") %>'>
-								<liferay-ui:input-checkbox param="emailPasswordSentEnabled" defaultValue="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_ENABLED) %>" />
+								<liferay-ui:input-checkbox param="emailPasswordSentEnabled" defaultValue="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_ENABLED) %>" />
 							</c:when>
 						</c:choose>
 					</td>

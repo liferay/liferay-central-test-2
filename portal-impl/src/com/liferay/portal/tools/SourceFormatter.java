@@ -674,7 +674,7 @@ public class SourceFormatter {
 			new String[] {
 				"**\\classes\\*", "**\\jsp\\*", "**\\tmp\\**",
 				"**\\EARXMLBuilder.java", "**\\EJBXMLBuilder.java",
-				"**\\JSMin.java", "**\\PropsUtil.java",
+				"**\\JSMin.java", "**\\PropsKeys.java",
 				"**\\InstanceWrapperBuilder.java",
 				"**\\ServiceBuilder.java", "**\\SourceFormatter.java",
 				"**\\UserAttributes.java", "**\\WebKeys.java",

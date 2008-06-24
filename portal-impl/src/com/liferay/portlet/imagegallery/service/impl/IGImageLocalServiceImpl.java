@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.imagegallery.DuplicateImageNameException;
@@ -651,7 +652,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		boolean validImageExtension = false;
 
 		String[] imageExtensions =
-			PropsUtil.getArray(PropsUtil.IG_IMAGE_EXTENSIONS);
+			PropsUtil.getArray(PropsKeys.IG_IMAGE_EXTENSIONS);
 
 		for (int i = 0; i < imageExtensions.length; i++) {
 			if (StringPool.STAR.equals(imageExtensions[i]) ||

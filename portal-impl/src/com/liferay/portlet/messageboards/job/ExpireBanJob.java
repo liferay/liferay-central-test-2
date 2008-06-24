@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobExecutionContext;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 
@@ -44,7 +44,7 @@ public class ExpireBanJob implements IntervalJob {
 	public ExpireBanJob() {
 		try {
 			long rawInterval = PrefsPropsUtil.getLong(
-				PropsUtil.MESSAGE_BOARDS_EXPIRE_BAN_JOB_INTERVAL,
+				PropsKeys.MESSAGE_BOARDS_EXPIRE_BAN_JOB_INTERVAL,
 				PropsValues.MESSAGE_BOARDS_EXPIRE_BAN_JOB_INTERVAL);
 
 			if (_log.isDebugEnabled()) {

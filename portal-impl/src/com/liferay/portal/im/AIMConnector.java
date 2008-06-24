@@ -22,6 +22,7 @@
 
 package com.liferay.portal.im;
 
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import org.apache.commons.logging.Log;
@@ -55,8 +56,8 @@ public class AIMConnector {
 	}
 
 	private void _connect() {
-		String login = PropsUtil.get(PropsUtil.AIM_LOGIN);
-		String password = PropsUtil.get(PropsUtil.AIM_PASSWORD);
+		String login = PropsUtil.get(PropsKeys.AIM_LOGIN);
+		String password = PropsUtil.get(PropsKeys.AIM_PASSWORD);
 
 		AIMSession ses = new AIMSession();
 

@@ -24,6 +24,7 @@ package com.liferay.portlet.mail.util.multiaccount;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 /**
@@ -45,7 +46,7 @@ public class AccountFinderLocator {
 
 	protected static String getAccountFinderClassName() {
 		return GetterUtil.get(
-			PropsUtil.get(PropsUtil.MAIL_ACCOUNT_FINDER),
+			PropsUtil.get(PropsKeys.MAIL_ACCOUNT_FINDER),
 			SingleAccountFinder.class.getName());
 	}
 

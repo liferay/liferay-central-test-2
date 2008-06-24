@@ -37,7 +37,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.SystemProperties;
 
@@ -110,7 +110,7 @@ public class DocumentConversionUtil {
 		throws IOException, PortalException, SystemException {
 
 		if (!PrefsPropsUtil.getBoolean(
-				PropsUtil.OPENOFFICE_SERVER_ENABLED,
+				PropsKeys.OPENOFFICE_SERVER_ENABLED,
 				PropsValues.OPENOFFICE_SERVER_ENABLED)) {
 
 			return null;
@@ -180,10 +180,10 @@ public class DocumentConversionUtil {
 
 		if ((_connection == null) || (_converter == null)) {
 			String host = PrefsPropsUtil.getString(
-				PropsUtil.OPENOFFICE_SERVER_HOST,
+				PropsKeys.OPENOFFICE_SERVER_HOST,
 				PropsValues.OPENOFFICE_SERVER_HOST);
 			int port = PrefsPropsUtil.getInteger(
-				PropsUtil.OPENOFFICE_SERVER_PORT,
+				PropsKeys.OPENOFFICE_SERVER_PORT,
 				PropsValues.OPENOFFICE_SERVER_PORT);
 
 			_connection = new SocketOpenOfficeConnection(host, port);

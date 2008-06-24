@@ -576,7 +576,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 			</c:when>
 			<c:otherwise>
-				<%= LanguageUtil.format(pageContext, "display-of-live-session-data-is-disabled", PropsUtil.SESSION_TRACKER_MEMORY_ENABLED) %>
+				<%= LanguageUtil.format(pageContext, "display-of-live-session-data-is-disabled", PropsKeys.SESSION_TRACKER_MEMORY_ENABLED) %>
 			</c:otherwise>
 		</c:choose>
 	</c:when>

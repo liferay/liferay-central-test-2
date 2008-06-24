@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.User;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.shopping.CartMinQuantityException;
 import com.liferay.portlet.shopping.CouponActiveException;
@@ -126,7 +127,7 @@ public class ShoppingCartLocalServiceImpl
 		Map<ShoppingCartItem, Integer> items = getItems(groupId, itemIds);
 
 		boolean minQtyMultiple = GetterUtil.getBoolean(PropsUtil.get(
-			PropsUtil.SHOPPING_CART_MIN_QTY_MULTIPLE));
+			PropsKeys.SHOPPING_CART_MIN_QTY_MULTIPLE));
 
 		Iterator<Map.Entry<ShoppingCartItem, Integer>> itr =
 			items.entrySet().iterator();

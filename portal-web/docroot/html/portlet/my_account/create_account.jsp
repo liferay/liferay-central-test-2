@@ -114,7 +114,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 		</tr>
 
 		<c:choose>
-			<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY)) %>">
+			<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY)) %>">
 				<tr>
 					<td>
 						<liferay-ui:message key="birthday" />
@@ -131,7 +131,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 			</c:otherwise>
 		</c:choose>
 
-		<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE)) %>">
+		<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE)) %>">
 			<tr>
 				<td>
 					<liferay-ui:message key="gender" />

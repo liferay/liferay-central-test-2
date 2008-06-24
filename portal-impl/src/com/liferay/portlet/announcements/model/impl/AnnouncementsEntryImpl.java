@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.announcements.model.impl;
 
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 
@@ -35,7 +36,7 @@ public class AnnouncementsEntryImpl
 	extends AnnouncementsEntryModelImpl implements AnnouncementsEntry {
 
 	public static final String[] TYPES =
-		PropsUtil.getArray(PropsUtil.ANNOUNCEMENTS_ENTRY_TYPES);
+		PropsUtil.getArray(PropsKeys.ANNOUNCEMENTS_ENTRY_TYPES);
 
 	public AnnouncementsEntryImpl() {
 	}

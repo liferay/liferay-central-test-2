@@ -34,6 +34,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import java.util.Collection;
@@ -234,11 +235,11 @@ public class WebDAVUtil {
 	private WebDAVUtil() {
 		_storageMap = new HashMap<String, String>();
 
-		String[] tokens = PropsUtil.getArray(PropsUtil.WEBDAV_STORAGE_TOKENS);
+		String[] tokens = PropsUtil.getArray(PropsKeys.WEBDAV_STORAGE_TOKENS);
 
 		for (String token: tokens) {
 			String className = PropsUtil.get(
-				PropsUtil.WEBDAV_STORAGE_CLASS, new Filter(token));
+				PropsKeys.WEBDAV_STORAGE_CLASS, new Filter(token));
 
 			if (Validator.isNotNull(className)) {
 				_storageMap.put(className, token);
