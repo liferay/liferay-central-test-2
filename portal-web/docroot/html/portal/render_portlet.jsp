@@ -318,6 +318,12 @@ if (denyAccess) {
 	showPrintIcon = false;
 }
 
+// Deny access to edit mode without permission
+
+if (portletMode.equals(PortletMode.EDIT) && !PortletPermissionUtil.contains(permissionChecker, plid.longValue(), portletId, ActionKeys.PREFERENCES)) {
+	access = false;
+}
+
 portletDisplay.recycle();
 
 portletDisplay.setId(portletId);
