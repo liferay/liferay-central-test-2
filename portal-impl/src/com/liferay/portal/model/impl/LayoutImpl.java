@@ -684,7 +684,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 					ses.setAttribute(key, junctionPlid);
 				}
 				else {
-					ses.setAttribute(key, new Integer(0));
+					ses.setAttribute(key, new Long(0));
 				}
 			}
 
