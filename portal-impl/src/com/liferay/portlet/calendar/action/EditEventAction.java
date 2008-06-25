@@ -266,6 +266,10 @@ public class EditEventAction extends PortletAction {
 				int weeklyInterval = ParamUtil.getInteger(
 					req, "weeklyInterval");
 
+				if (weeklyInterval <= 0) {
+					weeklyInterval = 1;
+				}
+
 				recurrence.setInterval(weeklyInterval);
 
 				List<DayAndPosition> dayPos = new ArrayList<DayAndPosition>();
@@ -295,6 +299,10 @@ public class EditEventAction extends PortletAction {
 					int monthlyInterval = ParamUtil.getInteger(
 						req, "monthlyInterval0");
 
+					if (monthlyInterval <= 0) {
+						monthlyInterval = 1;
+					}
+
 					recurrence.setInterval(monthlyInterval);
 				}
 				else {
@@ -308,6 +316,10 @@ public class EditEventAction extends PortletAction {
 
 					int monthlyInterval = ParamUtil.getInteger(
 						req, "monthlyInterval1");
+
+					if (monthlyInterval <= 0) {
+						monthlyInterval = 1;
+					}
 
 					recurrence.setInterval(monthlyInterval);
 				}
@@ -325,6 +337,10 @@ public class EditEventAction extends PortletAction {
 					int yearlyInterval = ParamUtil.getInteger(
 						req, "yearlyInterval0");
 
+					if (yearlyInterval <= 0) {
+						yearlyInterval = 1;
+					}
+
 					recurrence.setInterval(yearlyInterval);
 				}
 				else {
@@ -341,6 +357,10 @@ public class EditEventAction extends PortletAction {
 
 					int yearlyInterval = ParamUtil.getInteger(
 						req, "yearlyInterval1");
+
+					if (yearlyInterval <= 0) {
+						yearlyInterval = 1;
+					}
 
 					recurrence.setInterval(yearlyInterval);
 				}

@@ -515,7 +515,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 					// LEP-3468
 
-					if ((recurrence.getFrequency() == Recurrence.DAILY) &&
+					if ((recurrence.getFrequency() != Recurrence.NO_RECURRENCE) &&
 						(recurrence.getInterval() <= 0)) {
 
 						recurrence.setInterval(1);
