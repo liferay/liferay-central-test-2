@@ -25,6 +25,7 @@ package com.liferay.portal.kernel.portlet;
 import java.util.Map;
 
 import javax.portlet.RenderRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="LiferayRenderRequest.java.html"><b><i>View Source</i></b></a>
@@ -33,6 +34,7 @@ import javax.portlet.RenderRequest;
  *
  */
 public interface LiferayRenderRequest extends RenderRequest {
+	public HttpServletRequest getHttpServletRequest();
 
 	public Map<String, String[]> getRenderParameters();
 
