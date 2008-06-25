@@ -87,8 +87,7 @@ public class RoleServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.Role> getGroupRoles(
 		long groupId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		RoleService roleService = RoleServiceFactory.getService();
 
 		return roleService.getGroupRoles(groupId);
@@ -129,8 +128,7 @@ public class RoleServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.Role> getUserRoles(
 		long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		RoleService roleService = RoleServiceFactory.getService();
 
 		return roleService.getUserRoles(userId);

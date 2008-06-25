@@ -79,8 +79,7 @@ public interface OrganizationService {
 
 	public java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
 		long userId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public void setGroupOrganizations(long groupId, long[] organizationIds)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,

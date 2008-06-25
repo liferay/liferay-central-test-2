@@ -112,7 +112,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	}
 
 	public List<Organization> getUserOrganizations(long userId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return organizationLocalService.getUserOrganizations(userId);
 	}

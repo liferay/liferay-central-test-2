@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.wiki.engines.jspwiki;
 
-import com.ecyrd.jspwiki.NoRequiredPropertyException;
 import com.ecyrd.jspwiki.QueryItem;
 import com.ecyrd.jspwiki.WikiEngine;
 import com.ecyrd.jspwiki.WikiPage;
@@ -35,7 +34,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.ArrayList;
@@ -53,20 +51,17 @@ import java.util.Properties;
  */
 public class LiferayAttachmentProvider implements WikiAttachmentProvider {
 
-	public void deleteAttachment(Attachment attachment)
-		throws ProviderException {
+	public void deleteAttachment(Attachment attachment) {
 	}
 
-	public void deleteVersion(Attachment attachment) throws ProviderException {
+	public void deleteVersion(Attachment attachment) {
 	}
 
 	public Collection<Attachment> findAttachments(QueryItem[] query) {
 		return Collections.emptyList();
 	}
 
-	public InputStream getAttachmentData(Attachment attachment)
-		throws IOException, ProviderException {
-
+	public InputStream getAttachmentData(Attachment attachment) {
 		return _EMPTY_STREAM;
 	}
 
@@ -108,31 +103,23 @@ public class LiferayAttachmentProvider implements WikiAttachmentProvider {
 		return history;
 	}
 
-	public void initialize(WikiEngine engine, Properties props)
-		throws IOException, NoRequiredPropertyException {
-
+	public void initialize(WikiEngine engine, Properties props) {
 		_engine = engine;
 		_nodeId = GetterUtil.getLong(props.getProperty("nodeId"));
 	}
 
-	public List<Attachment> listAllChanged(Date timestamp)
-		throws ProviderException {
-
+	public List<Attachment> listAllChanged(Date timestamp) {
 		return Collections.emptyList();
 	}
 
-	public Collection<Attachment> listAttachments(WikiPage page)
-		throws ProviderException {
-
+	public Collection<Attachment> listAttachments(WikiPage page) {
 		return Collections.emptyList();
 	}
 
-	public void moveAttachmentsForPage(String oldParent, String newParent)
-		throws ProviderException {
+	public void moveAttachmentsForPage(String oldParent, String newParent) {
 	}
 
-	public void putAttachmentData(Attachment attachment, InputStream data)
-		throws IOException, ProviderException {
+	public void putAttachmentData(Attachment attachment, InputStream data) {
 	}
 
 	private static final InputStream _EMPTY_STREAM =

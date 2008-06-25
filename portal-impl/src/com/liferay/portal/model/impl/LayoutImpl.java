@@ -484,7 +484,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 	}
 
-	public Theme getTheme() throws PortalException, SystemException {
+	public Theme getTheme() {
 		if (isInheritLookAndFeel()) {
 			return getLayoutSet().getTheme();
 		}
@@ -494,9 +494,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 	}
 
-	public ColorScheme getColorScheme()
-		throws PortalException, SystemException {
-
+	public ColorScheme getColorScheme() {
 		if (isInheritLookAndFeel()) {
 			return getLayoutSet().getColorScheme();
 		}
@@ -518,7 +516,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 	}
 
-	public Theme getWapTheme() throws PortalException, SystemException {
+	public Theme getWapTheme() {
 		if (isInheritWapLookAndFeel()) {
 			return getLayoutSet().getWapTheme();
 		}
@@ -528,9 +526,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 	}
 
-	public ColorScheme getWapColorScheme()
-		throws PortalException, SystemException {
-
+	public ColorScheme getWapColorScheme() {
 		if (isInheritLookAndFeel()) {
 			return getLayoutSet().getWapColorScheme();
 		}
@@ -550,20 +546,18 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 	}
 
-	public String getRegularURL(HttpServletRequest req)
-		throws PortalException, SystemException {
-
+	public String getRegularURL(HttpServletRequest req) throws SystemException {
 		return _getURL(req, false, false);
 	}
 
 	public String getResetMaxStateURL(HttpServletRequest req)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return _getURL(req, true, false);
 	}
 
 	public String getResetLayoutURL(HttpServletRequest req)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return _getURL(req, true, true);
 	}
@@ -597,7 +591,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	public List<Layout> getJunctionAncestors(HttpServletRequest req)
 		throws PortalException, SystemException {
 
-		List<Layout> junctionAncestors = (List)req.getAttribute(
+		List<Layout> junctionAncestors = (List<Layout>)req.getAttribute(
 			WebKeys.LAYOUT_JUNCTION_ANCESTORS);
 
 		if (junctionAncestors != null) {
@@ -632,8 +626,6 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			}
 
 			layout = LayoutLocalServiceUtil.getLayout(junctionPlid);
-
-			Long extensionTargetPlid = new Long(rootLayout.getPlid());
 
 			String key = _getJunctionLayoutKey(junctionPlid, false);
 
@@ -776,7 +768,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	private String _getURL(
 			HttpServletRequest req, boolean resetMaxState,
 			boolean resetRenderParameters)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);

@@ -338,7 +338,7 @@ public class MediaWikiImporter implements WikiImporter {
 
 	protected void processRegularPages(
 		long userId, WikiNode node, Element root,
-		List<String> specialNamespaces, Map usersMap,
+		List<String> specialNamespaces, Map<String, String> usersMap,
 		File imagesFile, Map<String, String[]> options) {
 
 		boolean importLatestVersion = MapUtil.getBoolean(

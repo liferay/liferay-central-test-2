@@ -76,9 +76,7 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 		return roleLocalService.getGroupRole(companyId, groupId);
 	}
 
-	public List<Role> getGroupRoles(long groupId)
-		throws PortalException, SystemException {
-
+	public List<Role> getGroupRoles(long groupId) throws SystemException {
 		return roleLocalService.getGroupRoles(groupId);
 	}
 
@@ -106,9 +104,7 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 		return roleLocalService.getUserRelatedRoles(userId, groups);
 	}
 
-	public List<Role> getUserRoles(long userId)
-		throws PortalException, SystemException {
-
+	public List<Role> getUserRoles(long userId) throws SystemException {
 		return roleLocalService.getUserRoles(userId);
 	}
 

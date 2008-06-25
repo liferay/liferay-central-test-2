@@ -22,13 +22,9 @@
 
 package com.liferay.portlet.wiki.engines.jspwiki;
 
-import com.ecyrd.jspwiki.NoRequiredPropertyException;
 import com.ecyrd.jspwiki.WikiEngine;
 import com.ecyrd.jspwiki.WikiPage;
-import com.ecyrd.jspwiki.providers.ProviderException;
 import com.ecyrd.jspwiki.search.SearchProvider;
-
-import java.io.IOException;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -42,9 +38,7 @@ import java.util.Properties;
  */
 public class LiferaySearchProvider implements SearchProvider {
 
-	public Collection<WikiPage> findPages(String query)
-		throws IOException, ProviderException {
-
+	public Collection<WikiPage> findPages(String query) {
 		return Collections.EMPTY_LIST;
 	}
 
@@ -52,8 +46,7 @@ public class LiferaySearchProvider implements SearchProvider {
 		return LiferaySearchProvider.class.getName();
 	}
 
-	public void initialize(WikiEngine engine, Properties props)
-		throws IOException, NoRequiredPropertyException{
+	public void initialize(WikiEngine engine, Properties props) {
 	}
 
 	public void pageRemoved(WikiPage page) {

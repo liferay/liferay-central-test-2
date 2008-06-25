@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.wiki.engines.jspwiki;
 
-import com.ecyrd.jspwiki.NoRequiredPropertyException;
 import com.ecyrd.jspwiki.QueryItem;
 import com.ecyrd.jspwiki.WikiEngine;
 import com.ecyrd.jspwiki.WikiPage;
@@ -33,8 +32,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
-
-import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -67,15 +64,13 @@ public class LiferayPageProvider implements WikiPageProvider {
 		return jspWikiPage;
 	}
 
-	public void deletePage(String name) throws ProviderException {
+	public void deletePage(String name) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking deletePage(" + name + ")");
 		}
 	}
 
-	public void deleteVersion(String title, int version)
-		throws ProviderException {
-
+	public void deleteVersion(String title, int version) {
 		if (_log.isDebugEnabled()) {
 			_log.debug(
 				"Invoking deleteVersion(" + title + ", " + version + ")");
@@ -189,9 +184,7 @@ public class LiferayPageProvider implements WikiPageProvider {
 		return LiferayPageProvider.class.getName();
 	}
 
-	public List<WikiPage> getVersionHistory(String title)
-		throws ProviderException {
-
+	public List<WikiPage> getVersionHistory(String title) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking getVersionHistory(" + title + ")");
 		}
@@ -199,9 +192,7 @@ public class LiferayPageProvider implements WikiPageProvider {
 		return Collections.EMPTY_LIST;
 	}
 
-	public void initialize(WikiEngine engine, Properties props)
-		throws IOException, NoRequiredPropertyException {
-
+	public void initialize(WikiEngine engine, Properties props) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking initialize(" + engine + ", " + props + ")");
 		}
@@ -210,7 +201,7 @@ public class LiferayPageProvider implements WikiPageProvider {
 		_nodeId = GetterUtil.getLong(props.getProperty("nodeId"));
 	}
 
-	public void movePage(String from, String to) throws ProviderException {
+	public void movePage(String from, String to) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking movePage(" + from + ", " + to + ")");
 		}
@@ -238,9 +229,7 @@ public class LiferayPageProvider implements WikiPageProvider {
 		return false;
 	}
 
-	public void putPageText(com.ecyrd.jspwiki.WikiPage page, String text)
-		throws ProviderException {
-
+	public void putPageText(com.ecyrd.jspwiki.WikiPage page, String text) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking putPageText(" + page + ", " + text + ")");
 		}

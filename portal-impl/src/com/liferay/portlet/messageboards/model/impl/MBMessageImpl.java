@@ -168,7 +168,7 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 		_priority = priority;
 	}
 
-	public String[] getTagsEntries() throws PortalException, SystemException {
+	public String[] getTagsEntries() throws SystemException {
 		return TagsEntryLocalServiceUtil.getEntryNames(
 			MBMessage.class.getName(), getMessageId());
 	}

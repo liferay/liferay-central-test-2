@@ -57,7 +57,7 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 	}
 
 	public List<TagsEntry> getEntries(String className, long classPK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return tagsEntryLocalService.getEntries(className, classPK);
 	}

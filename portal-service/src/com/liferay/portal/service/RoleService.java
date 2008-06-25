@@ -69,8 +69,7 @@ public interface RoleService {
 
 	public java.util.List<com.liferay.portal.model.Role> getGroupRoles(
 		long groupId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Role getRole(long roleId)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
@@ -91,8 +90,7 @@ public interface RoleService {
 
 	public java.util.List<com.liferay.portal.model.Role> getUserRoles(
 		long userId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public boolean hasUserRole(long userId, long companyId,
 		java.lang.String name, boolean inherited)

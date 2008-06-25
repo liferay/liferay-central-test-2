@@ -29,8 +29,6 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.io.IOException;
-
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
@@ -101,8 +99,7 @@ public class LiferayURLConstructor implements URLConstructor {
  	}
 
 	public String parsePage(
-			String context, HttpServletRequest req, String encoding)
-		throws IOException {
+		String context, HttpServletRequest req, String encoding) {
 
 		return "Wiki.jsp";
 	}

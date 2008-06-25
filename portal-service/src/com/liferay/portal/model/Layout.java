@@ -123,40 +123,29 @@ public interface Layout extends LayoutModel {
 
 	public boolean isInheritLookAndFeel();
 
-	public com.liferay.portal.model.Theme getTheme()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+	public com.liferay.portal.model.Theme getTheme();
 
-	public com.liferay.portal.model.ColorScheme getColorScheme()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+	public com.liferay.portal.model.ColorScheme getColorScheme();
 
 	public boolean isInheritWapLookAndFeel();
 
-	public com.liferay.portal.model.Theme getWapTheme()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+	public com.liferay.portal.model.Theme getWapTheme();
 
-	public com.liferay.portal.model.ColorScheme getWapColorScheme()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+	public com.liferay.portal.model.ColorScheme getWapColorScheme();
 
 	public java.lang.String getCssText();
 
 	public java.lang.String getRegularURL(
 		javax.servlet.http.HttpServletRequest req)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public java.lang.String getResetMaxStateURL(
 		javax.servlet.http.HttpServletRequest req)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public java.lang.String getResetLayoutURL(
 		javax.servlet.http.HttpServletRequest req)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public java.lang.String getTarget();
 

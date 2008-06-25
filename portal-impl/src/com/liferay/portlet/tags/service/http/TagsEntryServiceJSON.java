@@ -97,8 +97,7 @@ public class TagsEntryServiceJSON {
 	}
 
 	public static JSONArray getEntries(java.lang.String className, long classPK)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.tags.model.TagsEntry> returnValue = TagsEntryServiceUtil.getEntries(className,
 				classPK);
 

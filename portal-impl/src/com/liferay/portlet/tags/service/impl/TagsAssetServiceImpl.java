@@ -97,7 +97,7 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 
 	public TagsAssetDisplay[] getCompanyAssetDisplays(
 			long companyId, int start, int end, String languageId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return tagsAssetLocalService.getCompanyAssetDisplays(
 			companyId, start, end, languageId);
@@ -129,7 +129,7 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 	}
 
 	public TagsAsset incrementViewCounter(String className, long classPK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return tagsAssetLocalService.incrementViewCounter(className, classPK);
 	}
@@ -137,7 +137,7 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 	public TagsAssetDisplay[] searchAssetDisplays(
 			long companyId, String portletId, String keywords,
 			String languageId, int start, int end)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return tagsAssetLocalService.searchAssetDisplays(
 			companyId, portletId, keywords, languageId, start, end);

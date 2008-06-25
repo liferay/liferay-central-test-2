@@ -96,8 +96,7 @@ public class UserGroupServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.UserGroup> getUserUserGroups(
 		long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserGroupService userGroupService = UserGroupServiceFactory.getService();
 
 		return userGroupService.getUserUserGroups(userId);

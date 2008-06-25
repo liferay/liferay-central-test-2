@@ -22,9 +22,7 @@
 
 package com.liferay.portlet.wiki.engines.jspwiki;
 
-import com.ecyrd.jspwiki.NoRequiredPropertyException;
 import com.ecyrd.jspwiki.WikiEngine;
-import com.ecyrd.jspwiki.auth.WikiSecurityException;
 import com.ecyrd.jspwiki.auth.authorize.Group;
 import com.ecyrd.jspwiki.auth.authorize.GroupDatabase;
 
@@ -40,22 +38,20 @@ import java.util.Properties;
  */
 public class LiferayGroupDatabase  implements GroupDatabase {
 
-	public void commit() throws WikiSecurityException {
+	public void commit() {
 	}
 
-	public void delete(Group group) throws WikiSecurityException {
+	public void delete(Group group) {
 	}
 
-	public Group[] groups() throws WikiSecurityException {
+	public Group[] groups() {
 		return new Group[0];
 	}
 
-	public void initialize(WikiEngine engine, Properties props)
-		throws NoRequiredPropertyException, WikiSecurityException {
+	public void initialize(WikiEngine engine, Properties props) {
 	}
 
-	public void save(Group group, Principal modifier)
-		throws WikiSecurityException {
+	public void save(Group group, Principal modifier) {
 	}
 
 }
