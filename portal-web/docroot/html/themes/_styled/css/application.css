@@ -427,7 +427,7 @@
 
 #ui-datepicker-div {
 	display: none;
-	z-index: 10;
+	z-index: 500;
 }
 
 .ui-datepicker-inline {
