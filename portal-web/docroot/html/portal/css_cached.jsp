@@ -917,6 +917,10 @@ body.lfr-has-sidebar {
 	padding-left: 25px;
 }
 
+.portlet-minimized .portlet-content-container {
+	display: none;
+}
+
 /* ---------- Liferay forms ---------- */
 
 .lfr-input-text {

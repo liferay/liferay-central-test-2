@@ -44,8 +44,16 @@
 	top: 5px;
 }
 
-.portlet-content {
+.portlet-content, .portlet-minimized .portlet-content-container {
 	padding: 10px 5px 25px 15px;
+}
+
+.portlet-minimized .portlet-content {
+	padding: 0;
+}
+
+.portlet-minimized .portlet-topper {
+	border-bottom: 0;
 }
 
 .portlet-icon-back {

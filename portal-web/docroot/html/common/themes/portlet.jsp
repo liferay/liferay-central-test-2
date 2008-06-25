@@ -96,10 +96,6 @@ if (freeformPortlet) {
 	sm.append("overflow: auto;");
 }
 
-if (portletDisplay.isStateMin()) {
-	sm.append("display: none;");
-}
-
 sm.append("\"");
 
 containerStyles = sm.toString();

@@ -23,7 +23,13 @@
 .portlet-icons {
 }
 
-.portlet-content {
+.portlet-content, .portlet-minimized .portlet-content-container {
+}
+
+.portlet-minimized .portlet-content {
+}
+
+.portlet-minimized .portlet-topper {
 }
 
 .portlet-icon-back {
