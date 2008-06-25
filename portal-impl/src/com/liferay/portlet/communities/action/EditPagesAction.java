@@ -185,9 +185,10 @@ public class EditPagesAction extends PortletAction {
 		catch (Exception e) {
 			if (e instanceof NoSuchLayoutException ||
 				e instanceof NoSuchProposalException ||
-				e instanceof PrincipalException) {
+				e instanceof PrincipalException ||
+				e instanceof RemoteExportException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(req, e.getClass().getName(), e);
 
 				setForward(req, "portlet.communities.error");
 			}
@@ -197,7 +198,6 @@ public class EditPagesAction extends PortletAction {
 					 e instanceof LayoutParentLayoutIdException ||
 					 e instanceof LayoutSetVirtualHostException ||
 					 e instanceof LayoutTypeException ||
-					 e instanceof RemoteExportException ||
 					 e instanceof RequiredLayoutException ||
 					 e instanceof UploadException) {
 

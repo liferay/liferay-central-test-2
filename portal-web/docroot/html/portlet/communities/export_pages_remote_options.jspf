@@ -1,0 +1,86 @@
+<%
+/**
+ * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+<liferay-ui:message key="export-the-selected-data-to-the-community-of-a-remote-portal-or-to-another-community-in-the-same-portal" />
+
+<br /><br />
+
+<fieldset>
+	<legend><liferay-ui:message key="remote-options" /></legend>
+
+	<ul class="gamma lfr-component">
+		<li class="tree-item">
+			<ul id="<portlet:namespace />remoteExportControls">
+				<li class="tree-item">
+					<table class="lfr-table">
+					<tr>
+						<td>
+							<liferay-ui:message key="remote-host-ip" />
+						</td>
+						<td>
+							<input id="<portlet:namespace />remoteAddress" name="<portlet:namespace />remoteAddress" size="20" type="text" value="<%= PortalUtil.getHost(request) %>" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<liferay-ui:message key="remote-port" />
+						</td>
+						<td>
+							<input id="<portlet:namespace />remotePort" name="<portlet:namespace />remotePort" size="10" type="text" value="<%= PortalUtil.getPortalPort() %>" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<liferay-ui:message key="remote-group-id-organization-or-community" />
+						</td>
+						<td>
+							<input id="<portlet:namespace />remoteGroupId" name="<portlet:namespace />remoteGroupId" size="10" type="text" />
+						</td>
+					</tr>
+					</table>
+				</li>
+				<li class="tree-item">
+					<input id="<portlet:namespace />remotePrivateLayout" name="<portlet:namespace />remotePrivateLayout" type="checkbox" />
+
+					<label for="<portlet:namespace />remotePrivateLayout"><liferay-ui:message key="remote-private-page" /></label>
+				</li>
+				<li class="tree-item">
+					<input id="<portlet:namespace />secureConnection" name="<portlet:namespace />secureConnection" type="checkbox" />
+
+					<label for="<portlet:namespace />secureConnection"><liferay-ui:message key="use-a-secure-network-connection" /></label>
+				</li>
+				<li class="tree-item">
+					<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS %>" defaultValue="<%= false %>" />
+
+					<label for="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS %>Checkbox"><liferay-ui:message key="delete-missing-layouts" /></label> <liferay-ui:icon-help message="delete-missing-layouts-help" />
+				</li>
+				<li class="tree-item">
+					<input id="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" type="checkbox" />
+
+					<label for="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>"><liferay-ui:message key="delete-portlet-data-before-importing" /></label> <liferay-ui:icon-help message="delete-portlet-data-help" />
+				</li>
+			</ul>
+		</li>
+	</ul>
+</fieldset>

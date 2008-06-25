@@ -32,3 +32,25 @@
 <liferay-ui:error exception="<%= NoSuchReviewException.class %>" message="the-review-could-not-be-found" />
 <liferay-ui:error exception="<%= NoSuchRoleException.class %>" message="the-role-could-not-be-found" />
 <liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />
+
+<liferay-ui:error exception="<%= RemoteExportException.class %>">
+	<%
+	RemoteExportException ree = (RemoteExportException)errorException;
+
+	PKParser pkParser = new PKParser(ree.getMessage());
+
+	String exception = pkParser.getString("exception");
+	String subject = pkParser.getString("subject");
+	%>
+	<c:choose>
+		<c:when test='<%= exception.equals("ConnectException") %>'>
+			<%= LanguageUtil.format(pageContext, "could-not-connect-to-address-x,please-verify-that-the-specified-port-is-correct", "<tt>" + subject + "</tt>") %>
+		</c:when>
+		<c:when test='<%= exception.equals("NoLayoutsSelectedException") %>'>
+			<%= LanguageUtil.get(pageContext, "no-layouts-are-selected-for-export") %>
+		</c:when>
+		<c:when test='<%= exception.equals("NoSuchGroupException") %>'>
+			<%= LanguageUtil.format(pageContext, "remote-group-with-id-x-does-not-exist", subject) %>
+		</c:when>
+	</c:choose>
+</liferay-ui:error>

@@ -91,6 +91,7 @@
 <%@ page import="com.liferay.portlet.tasks.service.TasksReviewLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.tasks.service.permission.TasksProposalPermission" %>
 <%@ page import="com.liferay.portlet.tasks.util.comparator.ReviewUserNameComparator" %>
+<%@ page import="com.liferay.util.PKParser" %>
 
 <%@ page import="org.dom4j.Document" %>
 <%@ page import="org.dom4j.Element" %>

@@ -84,15 +84,28 @@
 					</c:if>
 				</c:when>
 				<c:otherwise>
-					<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="exportLayoutsURL">
-						<portlet:param name="struts_action" value="/communities/export_pages" />
-						<portlet:param name="tabs1" value="<%= tabs1 %>" />
-						<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
-						<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-						<portlet:param name="selPlid" value="<%= String.valueOf(selPlid) %>" />
-					</portlet:renderURL>
+					<%
+					PortletURL exportLayoutsURL = renderResponse.createRenderURL();
+
+					exportLayoutsURL.setWindowState(LiferayWindowState.EXCLUSIVE);
+					exportLayoutsURL.setPortletMode(PortletMode.VIEW);
+
+					exportLayoutsURL.setParameter("struts_action", "/communities/export_pages");
+					exportLayoutsURL.setParameter("tabs1", tabs1);
+					exportLayoutsURL.setParameter("pagesRedirect", portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid);
+					exportLayoutsURL.setParameter("groupId", String.valueOf(groupId));
+					exportLayoutsURL.setParameter("selPlid", String.valueOf(selPlid));
+					exportLayoutsURL.setParameter("localPublishing", String.valueOf(true));
+					%>
 
 					<input type="button" value="<liferay-ui:message key="publish-to-live" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= exportLayoutsURL %>', messageId: 'publish-to-live'});" />
+
+					<%
+					PortletURL publishToRemoteURL = PortletURLUtil.clone(exportLayoutsURL, renderResponse);
+					publishToRemoteURL.setParameter("localPublishing", String.valueOf(false));
+					%>
+
+					<input type="button" value="<liferay-ui:message key="publish-to-remote" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= publishToRemoteURL.toString() %>', messageId: 'publish-to-remote'});" />
 				</c:otherwise>
 			</c:choose>
 		</c:if>

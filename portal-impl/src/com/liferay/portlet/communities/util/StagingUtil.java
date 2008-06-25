@@ -65,11 +65,8 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 
 import java.net.ConnectException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -187,30 +184,6 @@ public class StagingUtil {
 			Map<String, String[]> importParameterMap, Date startDate,
 			Date endDate)
 		throws Exception {
-
-		try {
-			InetAddress inetAddress = InetAddress.getByName(remoteAddress);
-
-			if (!inetAddress.isReachable(800)) {
-				throw new RemoteExportException(
-					"{exception=UnreachableHostException,subject=" +
-						remoteAddress + "}");
-			}
-		}
-		catch (UnknownHostException uhe) {
-			throw new RemoteExportException(
-				"{exception=UnknownHostException,subject=" + remoteAddress +
-					"}");
-		}
-		catch (IOException ioe) {
-			throw new RemoteExportException(
-				"{exception=IOException,subject=" + remoteAddress + "}");
-		}
-
-		if ((remotePort <= 0) || (remotePort > 65535)) {
-			throw new RemoteExportException(
-				"{exception=InvalidPortException,subject=" + remotePort + "}");
-		}
 
 		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
@@ -607,49 +580,7 @@ public class StagingUtil {
 	}
 
 	public static void publishToLive(ActionRequest req) throws Exception {
-		String tabs1 = ParamUtil.getString(req, "tabs1");
-
-		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
-
-		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
-
-		boolean privateLayout = true;
-
-		if (tabs1.equals("public-pages")) {
-			privateLayout = false;
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Copying staging to live for group " +
-					stagingGroup.getLiveGroupId());
-		}
-
-		String scope = ParamUtil.getString(req, "scope");
-
-		Map<String, String[]> parameterMap = getStagingParameters(req);
-
-		if (scope.equals("all-pages")) {
-			publishLayouts(
-				stagingGroup.getGroupId(), stagingGroup.getLiveGroupId(),
-				privateLayout, parameterMap);
-		}
-		else if (scope.equals("selected-pages")) {
-			Map<Long, Boolean> layoutIdMap = new LinkedHashMap<Long, Boolean>();
-
-			long[] rowIds = ParamUtil.getLongValues(req, "rowIds");
-
-			for (long selPlid : rowIds) {
-				boolean includeChildren = ParamUtil.getBoolean(
-					req, "includeChildren_" + selPlid);
-
-				layoutIdMap.put(selPlid, includeChildren);
-			}
-
-			publishLayouts(
-				stagingGroup.getGroupId(), stagingGroup.getLiveGroupId(),
-				privateLayout, layoutIdMap, parameterMap);
-		}
+		_publishToLive(req, false);
 	}
 
 	public static void publishToLive(ActionRequest req, Portlet portlet)
@@ -678,62 +609,7 @@ public class StagingUtil {
 	public static void schedulePublishToLive(ActionRequest req)
 		throws Exception {
 
-		String tabs1 = ParamUtil.getString(req, "tabs1");
-
-		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
-
-		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
-
-		long liveGroupId = stagingGroup.getLiveGroupId();
-
-		boolean privateLayout = true;
-
-		if (tabs1.equals("public-pages")) {
-			privateLayout = false;
-		}
-
-		String scope = ParamUtil.getString(req, "scope");
-
-		Map<Long, Boolean> layoutIdMap = new LinkedHashMap<Long, Boolean>();
-
-		if (scope.equals("selected-pages")) {
-			long[] rowIds = ParamUtil.getLongValues(req, "rowIds");
-
-			for (long selPlid : rowIds) {
-				boolean includeChildren = ParamUtil.getBoolean(
-					req, "includeChildren_" + selPlid);
-
-				layoutIdMap.put(selPlid, includeChildren);
-			}
-		}
-
-		Map<String, String[]> parameterMap = getStagingParameters(req);
-
-		String groupName = getSchedulerGroupName(
-			DestinationNames.LAYOUTS_LOCAL_PUBLISHER, liveGroupId);
-
-		int recurrenceType = ParamUtil.getInteger(req, "recurrenceType");
-
-		Calendar startCal = _getDate(req, "schedulerStartDate", false);
-
-		String cronText = _getCronText(req, startCal, false, recurrenceType);
-
-		Date endDate = null;
-
-		int endDateType = ParamUtil.getInteger(req, "endDateType");
-
-		if (endDateType == 1) {
-			Calendar endCal = _getDate(req, "schedulerEndDate", false);
-
-			endDate = endCal.getTime();
-		}
-
-		String description = ParamUtil.getString(req, "description");
-
-		LayoutServiceUtil.schedulePublishToLive(
-			stagingGroupId, liveGroupId, privateLayout, layoutIdMap,
-			parameterMap, scope, groupName, cronText, startCal.getTime(),
-			endDate, description);
+		_publishToLive(req, true);
 	}
 
 	public static void schedulePublishToRemote(ActionRequest req)
@@ -998,6 +874,88 @@ public class StagingUtil {
 		cal.set(Calendar.MILLISECOND, 0);
 
 		return cal;
+	}
+
+	private static void _publishToLive(ActionRequest req, boolean schedule)
+		throws Exception {
+
+		String tabs1 = ParamUtil.getString(req, "tabs1");
+
+		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
+
+		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
+
+		long liveGroupId = stagingGroup.getLiveGroupId();
+
+		boolean privateLayout = true;
+
+		if (tabs1.equals("public-pages")) {
+			privateLayout = false;
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Copying staging to live for group " +
+					stagingGroup.getLiveGroupId());
+		}
+
+		String scope = ParamUtil.getString(req, "scope");
+
+		Map<String, String[]> parameterMap = getStagingParameters(req);
+
+		Map<Long, Boolean> layoutIdMap = new LinkedHashMap<Long, Boolean>();
+
+		if (scope.equals("selected-pages")) {
+			long[] rowIds = ParamUtil.getLongValues(req, "rowIds");
+
+			for (long selPlid : rowIds) {
+				boolean includeChildren = ParamUtil.getBoolean(
+					req, "includeChildren_" + selPlid);
+
+				layoutIdMap.put(selPlid, includeChildren);
+			}
+		}
+
+		if (schedule) {
+			String groupName = getSchedulerGroupName(
+					DestinationNames.LAYOUTS_LOCAL_PUBLISHER, liveGroupId);
+
+			int recurrenceType = ParamUtil.getInteger(req, "recurrenceType");
+
+			Calendar startCal = _getDate(req, "schedulerStartDate", false);
+
+			String cronText = _getCronText(
+				req, startCal, false, recurrenceType);
+
+			Date endDate = null;
+
+			int endDateType = ParamUtil.getInteger(req, "endDateType");
+
+			if (endDateType == 1) {
+				Calendar endCal = _getDate(req, "schedulerEndDate", false);
+
+				endDate = endCal.getTime();
+			}
+
+			String description = ParamUtil.getString(req, "description");
+
+			LayoutServiceUtil.schedulePublishToLive(
+				stagingGroupId, liveGroupId, privateLayout, layoutIdMap,
+				parameterMap, scope, groupName, cronText, startCal.getTime(),
+				endDate, description);
+		}
+		else {
+			if (scope.equals("all-pages")) {
+				publishLayouts(
+					stagingGroup.getGroupId(), stagingGroup.getLiveGroupId(),
+					privateLayout, parameterMap);
+			}
+			else {
+				publishLayouts(
+					stagingGroup.getGroupId(), stagingGroup.getLiveGroupId(),
+					privateLayout, layoutIdMap, parameterMap);
+			}
+		}
 	}
 
 	private static void _publishToRemote(ActionRequest req, boolean schedule)

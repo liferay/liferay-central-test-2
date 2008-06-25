@@ -27,6 +27,14 @@
 <%
 String cmd = StringPool.BLANK;
 
+boolean localPublishing = ParamUtil.getBoolean(request, "localPublishing", true);
+
+String tabNames = "pages,options,scheduler";
+
+if (!localPublishing) {
+	tabNames = "pages,options,remote-options,scheduler";
+}
+
 String tabs1 = ParamUtil.getString(request, "tabs1", "public-pages");
 
 String pagesRedirect = ParamUtil.getString(request, "pagesRedirect");
@@ -152,7 +160,16 @@ if (proposalId > 0) {
 	portletURL.setParameter("proposalId", String.valueOf(proposalId));
 }
 else {
-	cmd = selGroup.isStagingGroup() ? "publish_to_live" : "copy_from_live";
+	if (selGroup.isStagingGroup()) {
+		cmd = "publish_to_live";
+
+		if (!localPublishing) {
+			cmd = "publish_to_remote";
+		}
+	}
+	else {
+		cmd = "copy_from_live";
+	}
 
 	portletURL.setParameter("struts_action", "/communities/edit_pages");
 	portletURL.setParameter("groupId", String.valueOf(liveGroupId));
@@ -198,7 +215,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 <input name="<portlet:namespace />stagingGroupId" type="hidden" value="<%= stagingGroupId %>">
 
 <liferay-ui:tabs
-	names="pages,options,scheduler"
+	names="<%= tabNames %>"
 	refresh="<%= false %>"
 >
 	<liferay-ui:section>
@@ -233,6 +250,11 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 	<liferay-ui:section>
 		<%@ include file="/html/portlet/communities/export_pages_options.jspf" %>
 	</liferay-ui:section>
+	<c:if test="<%= !localPublishing %>">
+		<liferay-ui:section>
+			<%@ include file="/html/portlet/communities/export_pages_remote_options.jspf" %>
+		</liferay-ui:section>
+	</c:if>
 	<liferay-ui:section>
 		<%@ include file="/html/portlet/communities/export_pages_scheduler.jspf" %>
 	</liferay-ui:section>
