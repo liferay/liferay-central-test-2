@@ -577,6 +577,10 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				saveLastPath = false;
 			}
 
+			if (!req.getMethod().equalsIgnoreCase("GET")) {
+				saveLastPath = false;
+			}
+
 			// Save last path
 
 			if (saveLastPath) {
