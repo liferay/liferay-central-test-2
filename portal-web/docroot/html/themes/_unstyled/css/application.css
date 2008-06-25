@@ -18,10 +18,10 @@
 .results-header {
 }
 
-.results-header th {
+.results-header th, .results-header td {
 }
 
-.results-header th a {
+.results-header th a, .results-header td a {
 }
 
 .ui-autocomplete-even, .results-row td {

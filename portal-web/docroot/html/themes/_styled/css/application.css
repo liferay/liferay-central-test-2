@@ -29,12 +29,12 @@
 	background: #727C81;
 }
 
-.results-header th {
+.results-header th, .results-header td {
 	color: #fff;
 	padding: 5px 10px;
 }
 
-.results-header th a {
+.results-header th a, .results-header td a {
 	color: #fff;
 }
 
