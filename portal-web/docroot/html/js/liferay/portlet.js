@@ -47,8 +47,7 @@ Liferay.Portlet = {
 
 			instance.remove(portletId);
 
-			Liferay.Publisher.register('closePortlet');
-			Liferay.Publisher.deliver('closePortlet', {plid: plid, portletId: portletId});
+			Liferay.trigger('closePortlet', {plid: plid, portletId: portletId});
 		}
 		else {
 			self.focus();

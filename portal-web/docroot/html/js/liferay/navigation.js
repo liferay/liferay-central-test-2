@@ -36,9 +36,7 @@ Liferay.Navigation = new Class({
 		instance._makeSortable();
 		instance._makeEditable();
 
-		Liferay.Publisher.register('navigation');
-
-		Liferay.Publisher.subscribe('tree', instance._treeCallback, instance);
+		Liferay.bind('tree', instance._treeCallback, instance);
 	},
 
 	_addPage: function(event, obj) {
@@ -330,7 +328,12 @@ Liferay.Navigation = new Class({
 					stop: function(event, ui) {
 						instance._saveSortables(ui.item[0]);
 
-						Liferay.Publisher.deliver('navigation', this);
+						Liferay.trigger('navigation', 
+							{
+								item: ui.item[0],
+								type: 'sort'
+							}
+						);
 					}
 				}
 			);
@@ -354,7 +357,12 @@ Liferay.Navigation = new Class({
 				{
 					data: data,
 					success: function() {
-						Liferay.Publisher.deliver('navigation', tab, 'delete');
+						Liferay.trigger('navigation', 
+							{
+								item: tab,
+								type: 'delete'
+							}
+						);
 
 						tab.remove();
 					},
@@ -455,7 +463,12 @@ Liferay.Navigation = new Class({
 				instance.sortable.sortable('refresh');
 				instance._deleteButton(newNavItem);
 
-				Liferay.Publisher.deliver('navigation', newNavItem);
+				Liferay.trigger('navigation',
+					{
+						item: newNavItem,
+						type: 'add'
+					}
+				)
 			}
 		}
 
@@ -472,7 +485,7 @@ Liferay.Navigation = new Class({
 	_saveSortables: function(obj) {
 		var instance = this;
 
-		tabs = jQuery('li', instance._navBlock);
+		var tabs = jQuery('li', instance._navBlock);
 
 		var data = {
 			doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
@@ -491,18 +504,19 @@ Liferay.Navigation = new Class({
 		);
 	},
 
-	_treeCallback: function(item, obj) {
+	_treeCallback: function(event, data) {
 		var instance = this;
 
 		var navigation = instance._navBlock.find('> ul');
+		var droppedItem = jQuery(data.droppedItem);
+		var dropTarget = jQuery(data.dropTarget);
 
 		if (instance._isSortable) {
 			var liItems = navigation.find('> li');
 
-			var droppedItem = jQuery(item);
 			var tree = droppedItem.parent();
 			var droppedName = droppedItem.find('span:first').text();
-			var newParent = jQuery(obj).parents('li:first');
+			var newParent = dropTarget.parents('li:first');
 
 			var liChild = liItems.find('span').not('.delete-tab');
 
@@ -521,7 +535,7 @@ Liferay.Navigation = new Class({
 
 			var treeItems = tree.find('> li');
 
-			var newIndex = treeItems.index(item);
+			var newIndex = treeItems.index(droppedItem);
 
 			if (liChild.length > 0) {
 				var newSibling = liItems.eq(newIndex);

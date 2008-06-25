@@ -259,7 +259,7 @@ var LayoutConfiguration = {
 
 		Liferay.Util.addInputType();
 
-		Liferay.Publisher.subscribe('closePortlet', instance._onPortletClose, instance);
+		Liferay.bind('closePortlet', instance._onPortletClose, instance);
 
 		instance._portletItems = jQuery('div.lfr-portlet-item', instance._dialog);
 		var portlets = instance._portletItems;
@@ -506,7 +506,7 @@ var LayoutConfiguration = {
 		instance._addPortlet(portlet, options);
 	},
 
-	_onPortletClose: function(portletData) {
+	_onPortletClose: function(event, portletData) {
 		var instance = this;
 
 		var popup = jQuery('#portal_add_content');

@@ -64,6 +64,7 @@ Liferay.Tree = new Class({
 			hoverClass: 'tree-item-hover',
 			tolerance: 'pointer',
 			drop: function(event, ui) {
+				ui.helper.remove();
 				instance._onDrop(ui.draggable[0], this);
 			},
 			over: function(event, ui) {
@@ -131,9 +132,7 @@ Liferay.Tree = new Class({
 			);
 		}
 
-		Liferay.Publisher.register('tree');
-
-		Liferay.Publisher.subscribe('navigation', instance._navigationCallback, instance);
+		Liferay.bind('navigation', instance._navigationCallback, instance);
 
 		instance.create();
 	},
@@ -575,17 +574,17 @@ Liferay.Tree = new Class({
 		return false;
 	},
 
-	_navigationCallback: function(obj, type) {
+	_navigationCallback: function(event, data) {
 		var instance = this;
 
-		type = (!type) ? 'update' : type;
+		var type = (!data.type || data.type != 'delete') ? 'update' : data.type;
+		var item = data.item;
 
 		var tree = instance.tree;
 
 		if (tree.length > 0) {
 			if (type == 'update') {
-
-				var droppedName = jQuery('span:eq(0)', obj).text();
+				var droppedName = jQuery('span:eq(0)', item).text();
 				var li = tree.find('> li > ul > li');
 
 				var liChild = li.find('span:first').filter(
@@ -596,7 +595,7 @@ Liferay.Tree = new Class({
 
 				liChild = liChild.parents('li:first');
 
-				var droppedIndex = jQuery(obj).parent().find('> li').index(obj);
+				var droppedIndex = jQuery(item).parent().find('> li').index(item);
 
 				var newSibling = li.eq(droppedIndex);
 
@@ -610,7 +609,7 @@ Liferay.Tree = new Class({
 				}
 			}
 			else if (type == 'delete') {
-				var tabLayoutId = obj[0]._LFR_layoutId;
+				var tabLayoutId = item[0]._LFR_layoutId;
 				var treeBranch = tree.find('li[@nodeId=' + tabLayoutId + ']');
 
 				treeBranch.remove();
@@ -687,7 +686,12 @@ Liferay.Tree = new Class({
 			}
 		);
 
-		Liferay.Publisher.deliver('tree', item, obj);
+		Liferay.trigger('tree', 
+			{
+				droppedItem: item,
+				dropTarget: obj
+			}
+		)
 
 		instance._originalParentNode = null;
 		instance._wasDropped = true;
