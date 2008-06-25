@@ -45,15 +45,11 @@
 }
 
 .portlet-content, .portlet-minimized .portlet-content-container {
-	padding: 10px 5px 25px 15px;
+	padding: 12px 10px 10px;
 }
 
 .portlet-minimized .portlet-content {
 	padding: 0;
-}
-
-.portlet-minimized .portlet-topper {
-	border-bottom: 0;
 }
 
 .portlet-icon-back {
