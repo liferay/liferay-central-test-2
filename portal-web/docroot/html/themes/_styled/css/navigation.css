@@ -211,7 +211,6 @@
 }
 
 .js .interactive-mode li a:hover, .js .interactive-mode .my-places li.current a:hover {
-	background-color: #828F95;
 	color: #fff;
 }
 
@@ -264,10 +263,32 @@
 	background-image: url(../images/dock/my_places_private.png);
 }
 
+.js .interactive-mode .my-places li.current {
+	background-color: #DFF4FF;
+}
+
 .js .interactive-mode .my-places li.current a {
-	background: #DFF4FF url(../images/dock/my_place_current.png) no-repeat 10px 50%;
+	background: url(../images/dock/my_place_current.png) no-repeat 10px 50%;
 	margin: 0;
 	padding-left: 35px;
+}
+
+.js .interactive-mode li:hover, .js .interactive-mode .my-places li:hover {
+	background-color: #828F95;
+}
+
+.js .interactive-mode li:hover a:hover, .js .interactive-mode li:hover > a, .js .interactive-mode li:hover > h3 > a {
+	background-color: #828F95;
+	color: #fff;
+}
+
+.ie6 .js .interactive-mode li a:hover {
+	background-color: #828F95;
+	color: #fff;
+}
+
+.js .interactive-mode .my-places ul li a.add-page {
+	top: 7px;
 }
 
 .js .interactive-mode .group-end {
