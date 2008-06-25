@@ -66,7 +66,7 @@ public class CompanyFinderImpl implements CompanyFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(virtualHost);
-			qPos.add(virtualHost);
+			qPos.add(contains(virtualHost));
 
 			String virtualHostDomain = virtualHost;
 			String[] virtualHostParts = StringUtil.split(
@@ -80,8 +80,8 @@ public class CompanyFinderImpl implements CompanyFinder {
 			}
 
 			qPos.add(Boolean.TRUE);
-			qPos.add(virtualHostDomain);
-			qPos.add(virtualHostDomain);
+			qPos.add(endsWith(virtualHostDomain));
+			qPos.add(contains(virtualHostDomain));
 
 			Iterator<Company> itr = q.list().iterator();
 
@@ -103,6 +103,14 @@ public class CompanyFinderImpl implements CompanyFinder {
 		sm.append("}");
 
 		throw new NoSuchCompanyException(sm.toString());
+	}
+
+	protected String contains(String param) {
+		return StringPool.PERCENT + param + StringPool.PERCENT;
+	}
+
+	protected String endsWith(String param) {
+		return StringPool.PERCENT + param;
 	}
 
 }

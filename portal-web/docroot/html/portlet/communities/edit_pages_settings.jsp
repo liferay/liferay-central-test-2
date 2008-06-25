@@ -118,7 +118,26 @@ if (!StringUtil.contains(tabs2Names, tabs2)) {
 <liferay-ui:error exception="<%= LayoutSetVirtualHostException.class %>">
 	<liferay-ui:message key="please-enter-a-unique-virtual-host" />
 
-	<liferay-ui:message key="virtual-hosts-must-be-valid-domain-names" />
+	<%
+	LayoutSetVirtualHostException lsvhe = (LayoutSetVirtualHostException)errorException;
+
+	PKParser pkParser = new PKParser(lsvhe.getMessage());
+
+	String exception = pkParser.getString("exception");
+	String subject = pkParser.getString("subject");
+	%>
+
+	<c:choose>
+		<c:when test="<%= exception.equals("AlreadyInUseException")  %>">
+			<%= LanguageUtil.format(pageContext, "the-domain-name-x-is-already-in-use", "<tt>" + subject + "</tt>") %>
+		</c:when>
+		<c:when test="<%= exception.equals("DomainNameException") %>">
+			<liferay-ui:message key="virtual-hosts-must-be-valid-domain-names" />
+		</c:when>
+		<c:when test="<%= exception.equals("LayoutSetSubDomainException")  %>">
+			<%= LanguageUtil.format(pageContext, "the-domain-name-x-is-already-handled-by-the-company-instance", "<tt>" + subject + "</tt>") %>
+		</c:when>
+	</c:choose>
 </liferay-ui:error>
 
 <c:choose>

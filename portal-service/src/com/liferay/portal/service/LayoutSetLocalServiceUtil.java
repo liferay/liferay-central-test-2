@@ -143,6 +143,15 @@ public class LayoutSetLocalServiceUtil {
 		return layoutSetLocalService.getLayoutSet(virtualHost);
 	}
 
+	public static com.liferay.portal.model.LayoutSet getLayoutSetByVirtualHost(
+		java.lang.String virtualHost)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
+
+		return layoutSetLocalService.getLayoutSetByVirtualHost(virtualHost);
+	}
+
 	public static void updateLogo(long groupId, boolean privateLayout,
 		boolean logo, java.io.File file)
 		throws com.liferay.portal.PortalException,

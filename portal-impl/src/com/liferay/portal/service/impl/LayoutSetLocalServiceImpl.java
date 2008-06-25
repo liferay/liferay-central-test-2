@@ -28,9 +28,10 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
@@ -119,6 +120,14 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		virtualHost = virtualHost.trim().toLowerCase();
 
 		return layoutSetPersistence.findByVirtualHost(virtualHost);
+	}
+
+	public LayoutSet getLayoutSetByVirtualHost(String virtualHost)
+		throws PortalException, SystemException {
+
+		virtualHost = virtualHost.trim().toLowerCase();
+
+		return layoutSetFinder.findByVirtualHost(virtualHost);
 	}
 
 	public void updateLogo(
@@ -213,10 +222,11 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 
 		virtualHost = virtualHost.trim().toLowerCase();
 
-		if (virtualHost.startsWith(Http.HTTP_WITH_SLASH) ||
-			virtualHost.startsWith(Http.HTTPS_WITH_SLASH)) {
+		if (Validator.isNotNull(virtualHost) &&
+			!Validator.isDomain(virtualHost)) {
 
-			throw new LayoutSetVirtualHostException();
+			throw new LayoutSetVirtualHostException(
+				"{exception=DomainNameException}");
 		}
 
 		LayoutSet layoutSet = layoutSetPersistence.findByG_P(
@@ -224,19 +234,41 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 
 		if (Validator.isNotNull(virtualHost)) {
 			try {
-				LayoutSet virtualHostLayoutSet = getLayoutSet(virtualHost);
+				LayoutSet layoutSetVirtualHost = getLayoutSetByVirtualHost(
+					virtualHost);
 
-				if (!layoutSet.equals(virtualHostLayoutSet)) {
-					throw new LayoutSetVirtualHostException();
+				String[] vhParts = StringUtil.split(
+					virtualHost, StringPool.PERIOD);
+				String[] lsvhParts = StringUtil.split(
+					layoutSetVirtualHost.getVirtualHost(), StringPool.PERIOD);
+
+				if (!layoutSet.equals(layoutSetVirtualHost) &&
+					lsvhParts[0].equals(vhParts[0])) {
+
+					throw new LayoutSetVirtualHostException(
+						"{exception=AlreadyInUseException,subject=" +
+							virtualHost + "}");
 				}
 			}
 			catch (NoSuchLayoutSetException nslse) {
 			}
 
 			try {
-				companyLocalService.getCompanyByVirtualHost(virtualHost);
+				Company company = companyLocalService.getCompanyByVirtualHost(
+					virtualHost);
 
-				throw new LayoutSetVirtualHostException();
+				if (company.getCompanyId() != layoutSet.getCompanyId()) {
+					throw new LayoutSetVirtualHostException(
+						"{exception=AlreadyInUseException,subject=" +
+							virtualHost + "}");
+				}
+				else {
+					if (company.isAllowWildcard()) {
+						throw new LayoutSetVirtualHostException(
+							"{exception=LayoutSetSubDomainException,subject=" +
+								virtualHost + "}");
+					}
+				}
 			}
 			catch (NoSuchCompanyException nsce) {
 			}

@@ -23,6 +23,7 @@
 package com.liferay.portlet.enterpriseadmin.action;
 
 import com.liferay.portal.AccountNameException;
+import com.liferay.portal.CompanyAliasException;
 import com.liferay.portal.CompanyMxException;
 import com.liferay.portal.CompanyVirtualHostException;
 import com.liferay.portal.CompanyWebIdException;
@@ -72,6 +73,7 @@ public class EditCompanyAction extends PortletAction {
 				setForward(req, "portlet.enterprise_admin.error");
 			}
 			else if (e instanceof AccountNameException ||
+					 e instanceof CompanyAliasException ||
 					 e instanceof CompanyMxException ||
 					 e instanceof CompanyVirtualHostException ||
 					 e instanceof CompanyWebIdException) {

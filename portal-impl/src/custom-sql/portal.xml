@@ -13,7 +13,7 @@
 				(
 					(allowWildCard = ?) AND
 					(
-						(virtualHost = ?) OR
+						(virtualHost LIKE ?) OR
 						(aliases LIKE ?)
 					)
 				)
@@ -236,7 +236,18 @@
 				(PortletPreferences.preferences LIKE ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.countByC_PO_N_S_C_Z_R_C">
+	<sql id="com.liferay.portal.service.persistence.LayoutSetFinder.findByVirtualHost">
+		<![CDATA[
+			SELECT
+				{LayoutSet.*}
+			FROM
+				LayoutSet
+			WHERE
+				(virtualHost = ?) OR
+				(virtualHost LIKE ?)
+		]]>
+	</sql>
+		<sql id="com.liferay.portal.service.persistence.OrganizationFinder.countByC_PO_N_S_C_Z_R_C">
 		<![CDATA[
 			SELECT
 				COUNT(DISTINCT Organization_.organizationId) AS COUNT_VALUE
