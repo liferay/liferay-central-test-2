@@ -818,6 +818,10 @@ body.lfr-has-sidebar {
 	padding-left: 260px;
 }
 
+#ui-datepicker-div {
+	z-index: 500;
+}
+
 /* ---------- Portlets ---------- */
 
 /* ---------- Generic styling ---------- */

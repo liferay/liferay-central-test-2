@@ -427,7 +427,6 @@
 
 #ui-datepicker-div {
 	display: none;
-	z-index: 500;
 }
 
 .ui-datepicker-inline {
@@ -557,7 +556,6 @@ img.ui-datepicker-trigger {
 }
 
 .ui-datepicker {
-	margin: 0 5px;
 	text-align: center;
 	width: auto;
 }

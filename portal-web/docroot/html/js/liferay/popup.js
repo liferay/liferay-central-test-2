@@ -42,10 +42,15 @@ Liferay.Popup = function(options) {
 
 		return cache;
 	};
-	
+
 	var checkExternalClick = function(element) {
-		// trigger datepicker external click, close date picker if clicked elsewhere.
-		(jQuery.datepicker && jQuery.datepicker._checkExternalClick({ target: element }));
+		if (jQuery.datepicker) {
+			jQuery.datepicker._checkExternalClick(
+				{
+					target: element
+				}
+			);
+		}
 	};
 
 	options = options || {};
@@ -82,9 +87,8 @@ Liferay.Popup = function(options) {
 		dragStart: function(e, ui) {
 			if (!options.dragHelper) {
 				var dialog = jQuery(this).parents('.ui-dialog:first'), target = jQuery(e.target);
-				
+
 				checkExternalClick(target);
-				
 				dialog.css('visibility', 'hidden');
 			}
 		},
@@ -105,13 +109,13 @@ Liferay.Popup = function(options) {
 				);
 			}
 		},
-		
+
 		close: function() {
 			var target = jQuery(this);
-			
+
 			checkExternalClick(target);
 		},
-		
+
 		open: function(e, ui) {
 			if (!options.dragHelper) {
 				var dialog = jQuery(this).parents('.ui-dialog:first');
