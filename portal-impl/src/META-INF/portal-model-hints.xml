@@ -79,10 +79,6 @@
 			<hint-collection name="CLOB" />
 		</field>
 		<field name="virtualHost" type="String" />
-		<field name="allowWildcard" type="boolean" />
-		<field name="aliases" type="String">
-			<hint-collection name="TEXTAREA" />
-		</field>
 		<field name="mx" type="String" />
 		<field name="logoId" type="long" />
 	</model>

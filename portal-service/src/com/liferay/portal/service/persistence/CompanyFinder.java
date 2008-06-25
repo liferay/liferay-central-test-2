@@ -30,7 +30,5 @@ package com.liferay.portal.service.persistence;
  */
 public interface CompanyFinder {
 	public com.liferay.portal.model.Company findByV_A(
-		java.lang.String virtualHost)
-		throws com.liferay.portal.NoSuchCompanyException,
-			com.liferay.portal.SystemException;
+		java.lang.String virtualHost) throws com.liferay.portal.SystemException;
 }

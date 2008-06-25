@@ -108,13 +108,12 @@ public class CompanyLocalServiceUtil {
 
 	public static com.liferay.portal.model.Company addCompany(
 		java.lang.String webId, java.lang.String virtualHost,
-		boolean allowWildcard, java.lang.String aliases, java.lang.String mx)
+		java.lang.String mx)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
 
-		return companyLocalService.addCompany(webId, virtualHost,
-			allowWildcard, aliases, mx);
+		return companyLocalService.addCompany(webId, virtualHost, mx);
 	}
 
 	public static com.liferay.portal.model.Company checkCompany(
@@ -214,14 +213,12 @@ public class CompanyLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Company updateCompany(
-		long companyId, java.lang.String virtualHost, boolean allowWildcard,
-		java.lang.String aliases, java.lang.String mx)
+		long companyId, java.lang.String virtualHost, java.lang.String mx)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
 
-		return companyLocalService.updateCompany(companyId, virtualHost,
-			allowWildcard, aliases, mx);
+		return companyLocalService.updateCompany(companyId, virtualHost, mx);
 	}
 
 	public static com.liferay.portal.model.Company updateCompany(

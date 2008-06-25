@@ -92,7 +92,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="prefsValue" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="unschedulePublishToLive" qname="operNS:unschedulePublishToLive" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="liveGroupId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="jobName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupName" type="tns:string"></parameter>
 		</operation>

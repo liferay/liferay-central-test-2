@@ -22,9 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.NoSuchCompanyException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
@@ -32,8 +30,6 @@ import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
-
-import java.util.Iterator;
 
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -49,9 +45,7 @@ public class CompanyFinderImpl implements CompanyFinder {
 	public static String FIND_BY_V_A =
 		CompanyFinder.class.getName() + ".findByV_A";
 
-	public Company findByV_A(String virtualHost)
-		throws NoSuchCompanyException, SystemException {
-
+	public Company findByV_A(String virtualHost) throws SystemException {
 		Session session = null;
 
 		try {
@@ -68,26 +62,21 @@ public class CompanyFinderImpl implements CompanyFinder {
 			qPos.add(virtualHost);
 			qPos.add(virtualHost);
 
-			String virtualHostDomain = virtualHost;
+			String vostDomain = virtualHost;
 			String[] virtualHostParts = StringUtil.split(
 				virtualHost, StringPool.PERIOD);
 
 			if (virtualHostParts.length >= 2) {
-				virtualHostDomain =
-					virtualHostParts[virtualHostParts.length - 2] +
-						StringPool.PERIOD +
-							virtualHostParts[virtualHostParts.length - 1];
+				vostDomain = virtualHostParts[virtualHostParts.length - 2];
+				vostDomain += StringPool.PERIOD;
+				vostDomain += virtualHostParts[virtualHostParts.length - 1];
 			}
 
 			qPos.add(Boolean.TRUE);
-			qPos.add(virtualHostDomain);
-			qPos.add(virtualHostDomain);
+			qPos.add(vostDomain);
+			qPos.add(vostDomain);
 
-			Iterator<Company> itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				return itr.next();
-			}
+			return (Company)q.uniqueResult();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -95,14 +84,6 @@ public class CompanyFinderImpl implements CompanyFinder {
 		finally {
 			HibernateUtil.closeSession(session);
 		}
-
-		StringMaker sm = new StringMaker();
-
-		sm.append("No Company exists with the key {virtualHost=");
-		sm.append(virtualHost);
-		sm.append("}");
-
-		throw new NoSuchCompanyException(sm.toString());
 	}
 
 }

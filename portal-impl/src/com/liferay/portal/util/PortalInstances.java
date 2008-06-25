@@ -213,30 +213,6 @@ public class PortalInstances {
 				if (company.getVirtualHost().equals(host)) {
 					return company.getCompanyId();
 				}
-				else if (company.isAllowWildcard()) {
-					String virtualHost = company.getVirtualHost();
-
-					if ((host.length() >= virtualHost.length()) &&
-						(host.endsWith(virtualHost))) {
-
-						return company.getCompanyId();
-					}
-				}
-
-				List<String> aliases = company.getAliasesList();
-
-				for (String alias : aliases) {
-					if (alias.equals(host)) {
-						return company.getCompanyId();
-					}
-					else if (company.isAllowWildcard()) {
-						if ((host.length() >= alias.length()) &&
-							(host.endsWith(alias))) {
-
-							return company.getCompanyId();
-						}
-					}
-				}
 			}
 		}
 		catch (Exception e) {

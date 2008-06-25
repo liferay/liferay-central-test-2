@@ -76,18 +76,12 @@ public class CompanyModelImpl extends BaseModelImpl {
 			{ "virtualHost", new Integer(Types.VARCHAR) },
 			
 
-			{ "allowWildcard", new Integer(Types.BOOLEAN) },
-			
-
-			{ "aliases", new Integer(Types.VARCHAR) },
-			
-
 			{ "mx", new Integer(Types.VARCHAR) },
 			
 
 			{ "logoId", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Company (companyId LONG not null primary key,accountId LONG,webId VARCHAR(75) null,key_ TEXT null,virtualHost VARCHAR(75) null,allowWildcard BOOLEAN,aliases STRING null,mx VARCHAR(75) null,logoId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table Company (companyId LONG not null primary key,accountId LONG,webId VARCHAR(75) null,key_ TEXT null,virtualHost VARCHAR(75) null,mx VARCHAR(75) null,logoId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table Company";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -104,8 +98,6 @@ public class CompanyModelImpl extends BaseModelImpl {
 		model.setWebId(soapModel.getWebId());
 		model.setKey(soapModel.getKey());
 		model.setVirtualHost(soapModel.getVirtualHost());
-		model.setAllowWildcard(soapModel.getAllowWildcard());
-		model.setAliases(soapModel.getAliases());
 		model.setMx(soapModel.getMx());
 		model.setLogoId(soapModel.getLogoId());
 
@@ -197,33 +189,6 @@ public class CompanyModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public boolean getAllowWildcard() {
-		return _allowWildcard;
-	}
-
-	public boolean isAllowWildcard() {
-		return _allowWildcard;
-	}
-
-	public void setAllowWildcard(boolean allowWildcard) {
-		if (allowWildcard != _allowWildcard) {
-			_allowWildcard = allowWildcard;
-		}
-	}
-
-	public String getAliases() {
-		return GetterUtil.getString(_aliases);
-	}
-
-	public void setAliases(String aliases) {
-		if (((aliases == null) && (_aliases != null)) ||
-				((aliases != null) && (_aliases == null)) ||
-				((aliases != null) && (_aliases != null) &&
-				!aliases.equals(_aliases))) {
-			_aliases = aliases;
-		}
-	}
-
 	public String getMx() {
 		return GetterUtil.getString(_mx);
 	}
@@ -259,8 +224,6 @@ public class CompanyModelImpl extends BaseModelImpl {
 			model.setWebId(HtmlUtil.escape(getWebId()));
 			model.setKey(HtmlUtil.escape(getKey()));
 			model.setVirtualHost(HtmlUtil.escape(getVirtualHost()));
-			model.setAllowWildcard(getAllowWildcard());
-			model.setAliases(HtmlUtil.escape(getAliases()));
 			model.setMx(HtmlUtil.escape(getMx()));
 			model.setLogoId(getLogoId());
 
@@ -280,8 +243,6 @@ public class CompanyModelImpl extends BaseModelImpl {
 		clone.setWebId(getWebId());
 		clone.setKey(getKey());
 		clone.setVirtualHost(getVirtualHost());
-		clone.setAllowWildcard(getAllowWildcard());
-		clone.setAliases(getAliases());
 		clone.setMx(getMx());
 		clone.setLogoId(getLogoId());
 
@@ -341,8 +302,6 @@ public class CompanyModelImpl extends BaseModelImpl {
 	private String _webId;
 	private String _key;
 	private String _virtualHost;
-	private boolean _allowWildcard;
-	private String _aliases;
 	private String _mx;
 	private long _logoId;
 }

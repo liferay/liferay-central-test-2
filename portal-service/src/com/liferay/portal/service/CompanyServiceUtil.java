@@ -53,24 +53,21 @@ package com.liferay.portal.service;
 public class CompanyServiceUtil {
 	public static com.liferay.portal.model.Company addCompany(
 		java.lang.String webId, java.lang.String virtualHost,
-		boolean allowWildcard, java.lang.String aliases, java.lang.String mx)
+		java.lang.String mx)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		CompanyService companyService = CompanyServiceFactory.getService();
 
-		return companyService.addCompany(webId, virtualHost, allowWildcard,
-			aliases, mx);
+		return companyService.addCompany(webId, virtualHost, mx);
 	}
 
 	public static com.liferay.portal.model.Company updateCompany(
-		long companyId, java.lang.String virtualHost, boolean allowWildcard,
-		java.lang.String aliases, java.lang.String mx)
+		long companyId, java.lang.String virtualHost, java.lang.String mx)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		CompanyService companyService = CompanyServiceFactory.getService();
 
-		return companyService.updateCompany(companyId, virtualHost,
-			allowWildcard, aliases, mx);
+		return companyService.updateCompany(companyId, virtualHost, mx);
 	}
 
 	public static com.liferay.portal.model.Company updateCompany(

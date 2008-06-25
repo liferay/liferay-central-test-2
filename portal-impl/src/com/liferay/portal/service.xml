@@ -131,8 +131,6 @@
 		<column name="webId" type="String" />
 		<column name="key" type="String" />
 		<column name="virtualHost" type="String" />
-		<column name="allowWildcard" type="boolean" />
-		<column name="aliases" type="String" />
 		<column name="mx" type="String" />
 		<column name="logoId" type="long" />
 
@@ -1696,7 +1694,6 @@
 		<exception>AddressCity</exception>
 		<exception>AddressStreet</exception>
 		<exception>AddressZip</exception>
-		<exception>CompanyAlias</exception>
 		<exception>CompanyMx</exception>
 		<exception>CompanyVirtualHost</exception>
 		<exception>CompanyWebId</exception>

@@ -23,7 +23,6 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.portal.AccountNameException;
-import com.liferay.portal.CompanyAliasException;
 import com.liferay.portal.CompanyMxException;
 import com.liferay.portal.CompanyVirtualHostException;
 import com.liferay.portal.CompanyWebIdException;
@@ -37,7 +36,6 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Account;
@@ -87,9 +85,7 @@ import org.apache.lucene.search.BooleanQuery;
  */
 public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
-	public Company addCompany(
-			String webId, String virtualHost, boolean allowWildcard,
-			String aliases, String mx)
+	public Company addCompany(String webId, String virtualHost, String mx)
 		throws PortalException, SystemException {
 
 		// Company
@@ -103,13 +99,11 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			throw new CompanyWebIdException();
 		}
 
-		validate(webId, virtualHost, aliases, mx);
+		validate(webId, virtualHost, mx);
 
 		Company company = checkCompany(webId, mx);
 
 		company.setVirtualHost(virtualHost);
-		company.setAllowWildcard(allowWildcard);
-		company.setAliases(aliases);
 		company.setMx(mx);
 
 		companyPersistence.update(company, false);
@@ -407,7 +401,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		virtualHost = getVirtualHost(virtualHost);
 
-		return companyFinder.findByV_A(virtualHost);
+		return companyPersistence.findByVirtualHost(virtualHost);
 	}
 
 	public Company getCompanyByWebId(String webId)
@@ -473,20 +467,16 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		}
 	}
 
-	public Company updateCompany(
-			long companyId, String virtualHost, boolean allowWildcard,
-			String aliases, String mx)
+	public Company updateCompany(long companyId, String virtualHost, String mx)
 		throws PortalException, SystemException {
 
 		virtualHost = getVirtualHost(virtualHost);
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
 
-		validate(company.getWebId(), virtualHost, aliases, mx);
+		validate(company.getWebId(), virtualHost, mx);
 
 		company.setVirtualHost(virtualHost);
-		company.setAllowWildcard(allowWildcard);
-		company.setAliases(aliases);
 
 		if (PropsValues.MAIL_MX_UPDATE) {
 			company.setMx(mx);
@@ -510,7 +500,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
 
-		validate(company.getWebId(), virtualHost, null, mx);
+		validate(company.getWebId(), virtualHost, mx);
 		validate(name);
 
 		company.setVirtualHost(virtualHost);
@@ -637,8 +627,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		}
 	}
 
-	protected void validate(
-			String webId, String virtualHost, String aliases, String mx)
+	protected void validate(String webId, String virtualHost, String mx)
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(virtualHost)) {
@@ -657,7 +646,9 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				Company virtualHostCompany = getCompanyByVirtualHost(
 					virtualHost);
 
-				if (!virtualHostCompany.getWebId().equals(webId)) {
+				if ((virtualHostCompany != null) &&
+					(!virtualHostCompany.getWebId().equals(webId))) {
+
 					throw new CompanyVirtualHostException();
 				}
 			}
@@ -670,22 +661,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				throw new CompanyVirtualHostException();
 			}
 			catch (NoSuchLayoutSetException nslse) {
-			}
-		}
-
-		List<String> aliasList = ListUtil.fromString(aliases);
-
-		for (String alias : aliasList) {
-			try {
-				Company virtualHostCompany = getCompanyByVirtualHost(alias);
-
-				if (!virtualHostCompany.getWebId().equals(webId)) {
-					throw new CompanyAliasException(
-						"{webId=" + virtualHostCompany.getWebId() + ",alias=" +
-							alias + ",}");
-				}
-			}
-			catch (NoSuchCompanyException nsce) {
 			}
 		}
 

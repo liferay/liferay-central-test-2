@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.admin.action;
 
-import com.liferay.portal.CompanyAliasException;
 import com.liferay.portal.CompanyMxException;
 import com.liferay.portal.CompanyVirtualHostException;
 import com.liferay.portal.CompanyWebIdException;
@@ -74,12 +73,11 @@ public class EditInstanceAction extends PortletAction {
 
 				setForward(req, "portlet.admin.error");
 			}
-			else if (e instanceof CompanyAliasException ||
-					 e instanceof CompanyMxException ||
+			else if (e instanceof CompanyMxException ||
 					 e instanceof CompanyVirtualHostException ||
 					 e instanceof CompanyWebIdException) {
 
-				SessionErrors.add(req, e.getClass().getName(), e);
+				SessionErrors.add(req, e.getClass().getName());
 			}
 			else {
 				throw e;
@@ -117,8 +115,6 @@ public class EditInstanceAction extends PortletAction {
 
 		String webId = ParamUtil.getString(req, "webId");
 		String virtualHost = ParamUtil.getString(req, "virtualHost");
-		boolean allowWildcard = ParamUtil.getBoolean(req, "allowWildcard");
-		String aliases = ParamUtil.getString(req, "aliases");
 		String mx = ParamUtil.getString(req, "mx");
 
 		if (companyId <= 0) {
@@ -126,7 +122,7 @@ public class EditInstanceAction extends PortletAction {
 			// Add instance
 
 			Company company = CompanyServiceUtil.addCompany(
-				webId, virtualHost, allowWildcard, aliases, mx);
+				webId, virtualHost, mx);
 
 			ServletContext ctx = (ServletContext)req.getAttribute(WebKeys.CTX);
 
@@ -136,8 +132,7 @@ public class EditInstanceAction extends PortletAction {
 
 			// Update instance
 
-			CompanyServiceUtil.updateCompany(
-				companyId, virtualHost, allowWildcard, aliases, mx);
+			CompanyServiceUtil.updateCompany(companyId, virtualHost, mx);
 		}
 	}
 

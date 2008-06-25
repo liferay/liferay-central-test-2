@@ -72,23 +72,21 @@ import org.json.JSONObject;
  */
 public class CompanyServiceJSON {
 	public static JSONObject addCompany(java.lang.String webId,
-		java.lang.String virtualHost, boolean allowWildcard,
-		java.lang.String aliases, java.lang.String mx)
+		java.lang.String virtualHost, java.lang.String mx)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Company returnValue = CompanyServiceUtil.addCompany(webId,
-				virtualHost, allowWildcard, aliases, mx);
+				virtualHost, mx);
 
 		return CompanyJSONSerializer.toJSONObject(returnValue);
 	}
 
 	public static JSONObject updateCompany(long companyId,
-		java.lang.String virtualHost, boolean allowWildcard,
-		java.lang.String aliases, java.lang.String mx)
+		java.lang.String virtualHost, java.lang.String mx)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Company returnValue = CompanyServiceUtil.updateCompany(companyId,
-				virtualHost, allowWildcard, aliases, mx);
+				virtualHost, mx);
 
 		return CompanyJSONSerializer.toJSONObject(returnValue);
 	}

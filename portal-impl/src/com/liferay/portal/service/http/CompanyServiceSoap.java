@@ -82,11 +82,10 @@ import java.rmi.RemoteException;
 public class CompanyServiceSoap {
 	public static com.liferay.portal.model.CompanySoap addCompany(
 		java.lang.String webId, java.lang.String virtualHost,
-		boolean allowWildcard, java.lang.String aliases, java.lang.String mx)
-		throws RemoteException {
+		java.lang.String mx) throws RemoteException {
 		try {
 			com.liferay.portal.model.Company returnValue = CompanyServiceUtil.addCompany(webId,
-					virtualHost, allowWildcard, aliases, mx);
+					virtualHost, mx);
 
 			return com.liferay.portal.model.CompanySoap.toSoapModel(returnValue);
 		}
@@ -98,12 +97,11 @@ public class CompanyServiceSoap {
 	}
 
 	public static com.liferay.portal.model.CompanySoap updateCompany(
-		long companyId, java.lang.String virtualHost, boolean allowWildcard,
-		java.lang.String aliases, java.lang.String mx)
+		long companyId, java.lang.String virtualHost, java.lang.String mx)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.Company returnValue = CompanyServiceUtil.updateCompany(companyId,
-					virtualHost, allowWildcard, aliases, mx);
+					virtualHost, mx);
 
 			return com.liferay.portal.model.CompanySoap.toSoapModel(returnValue);
 		}

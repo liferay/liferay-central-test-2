@@ -25,7 +25,6 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Base64;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Account;
@@ -39,7 +38,6 @@ import com.liferay.portal.util.PropsValues;
 
 import java.security.Key;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -83,10 +81,6 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 		_keyObj = keyObj;
 
 		super.setKey(Base64.objectToString(keyObj));
-	}
-
-	public List<String> getAliasesList() {
-		return ListUtil.fromString(getAliases());
 	}
 
 	public Account getAccount() {

@@ -59,8 +59,6 @@ public class CompanyJSONSerializer {
 		JSONUtil.put(jsonObj, "webId", model.getWebId());
 		JSONUtil.put(jsonObj, "key", model.getKey());
 		JSONUtil.put(jsonObj, "virtualHost", model.getVirtualHost());
-		JSONUtil.put(jsonObj, "allowWildcard", model.getAllowWildcard());
-		JSONUtil.put(jsonObj, "aliases", model.getAliases());
 		JSONUtil.put(jsonObj, "mx", model.getMx());
 		JSONUtil.put(jsonObj, "logoId", model.getLogoId());
 

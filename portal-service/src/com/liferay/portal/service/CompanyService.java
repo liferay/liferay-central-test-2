@@ -50,14 +50,12 @@ package com.liferay.portal.service;
  */
 public interface CompanyService {
 	public com.liferay.portal.model.Company addCompany(java.lang.String webId,
-		java.lang.String virtualHost, boolean allowWildcard,
-		java.lang.String aliases, java.lang.String mx)
+		java.lang.String virtualHost, java.lang.String mx)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Company updateCompany(long companyId,
-		java.lang.String virtualHost, boolean allowWildcard,
-		java.lang.String aliases, java.lang.String mx)
+		java.lang.String virtualHost, java.lang.String mx)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

@@ -68,16 +68,6 @@ public interface CompanyModel extends BaseModel {
 
 	public void setVirtualHost(String virtualHost);
 
-	public boolean getAllowWildcard();
-
-	public boolean isAllowWildcard();
-
-	public void setAllowWildcard(boolean allowWildcard);
-
-	public String getAliases();
-
-	public void setAliases(String aliases);
-
 	public String getMx();
 
 	public void setMx(String mx);
