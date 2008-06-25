@@ -194,8 +194,8 @@ public class LayoutServiceUtil {
 		layoutService.importPortletInfo(plid, portletId, parameterMap, is);
 	}
 
-	public static void schedulePublishToLive(long stagingGroupId,
-		long liveGroupId, boolean privateLayout,
+	public static void schedulePublishToLive(long sourceGroupId,
+		long targetGroupId, boolean privateLayout,
 		java.util.Map<Long, Boolean> layoutIdMap,
 		java.util.Map<String, String[]> parameterMap, java.lang.String scope,
 		java.lang.String groupName, java.lang.String cronText,
@@ -205,28 +205,29 @@ public class LayoutServiceUtil {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
 
-		layoutService.schedulePublishToLive(stagingGroupId, liveGroupId,
+		layoutService.schedulePublishToLive(sourceGroupId, targetGroupId,
 			privateLayout, layoutIdMap, parameterMap, scope, groupName,
 			cronText, startDate, endDate, description);
 	}
 
-	public static void scheduleRemoteExport(long sourceGroupId,
+	public static void schedulePublishToRemote(long sourceGroupId,
 		boolean privateLayout, java.util.Map<Long, Boolean> layoutIdMap,
 		java.util.Map<String, String[]> parameterMap,
-		java.lang.String remoteAddress, int remotePort, boolean secure,
-		long remoteGroupId, boolean remotePrivateLayout,
-		java.util.Date exportStartDate, java.util.Date exportEndDate,
-		java.lang.String groupName, java.lang.String cronText,
-		java.util.Date startDate, java.util.Date endDate,
-		java.lang.String description)
+		java.lang.String remoteAddress, int remotePort,
+		boolean secureConnection, long remoteGroupId,
+		boolean remotePrivateLayout, java.util.Date exportStartDate,
+		java.util.Date exportEndDate, java.lang.String groupName,
+		java.lang.String cronText, java.util.Date startDate,
+		java.util.Date endDate, java.lang.String description)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
 
-		layoutService.scheduleRemoteExport(sourceGroupId, privateLayout,
-			layoutIdMap, parameterMap, remoteAddress, remotePort, secure,
-			remoteGroupId, remotePrivateLayout, exportStartDate, exportEndDate,
-			groupName, cronText, startDate, endDate, description);
+		layoutService.schedulePublishToRemote(sourceGroupId, privateLayout,
+			layoutIdMap, parameterMap, remoteAddress, remotePort,
+			secureConnection, remoteGroupId, remotePrivateLayout,
+			exportStartDate, exportEndDate, groupName, cronText, startDate,
+			endDate, description);
 	}
 
 	public static void setLayouts(long groupId, boolean privateLayout,
@@ -248,13 +249,13 @@ public class LayoutServiceUtil {
 		layoutService.unschedulePublishToLive(liveGroupId, jobName, groupName);
 	}
 
-	public static void unscheduleRemoteExport(long groupId,
+	public static void unschedulePublishToRemote(long groupId,
 		java.lang.String jobName, java.lang.String groupName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
 
-		layoutService.unscheduleRemoteExport(groupId, jobName, groupName);
+		layoutService.unschedulePublishToRemote(groupId, jobName, groupName);
 	}
 
 	public static com.liferay.portal.model.Layout updateJunctionPlid(

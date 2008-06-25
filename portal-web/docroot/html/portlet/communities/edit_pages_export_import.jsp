@@ -148,6 +148,8 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 			hideMessage='<%= "&laquo; " + LanguageUtil.get(pageContext, "hide-remote-export-options") %>'
 			defaultShowContent="<%= false %>"
 		>
+			<input name="<portlet:namespace />jobName" type="hidden" />
+
 			<br />
 
 			<liferay-ui:message key="export-the-selected-data-to-the-community-of-a-remote-portal-or-to-another-community-in-the-same-portal" />
@@ -213,13 +215,15 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 				</li>
 			</ul>
 
-			<br /><br />
+			<br />
 
 			<liferay-ui:input-scheduler />
 
 			<br />
 
-			<input id="<portlet:namespace />addButton" type="button" value="<liferay-ui:message key="add-event" />" onClick="<portlet:namespace />scheduleRemoteExport();" />
+			<input id="<portlet:namespace />addButton" type="button" value="<liferay-ui:message key="add-event" />" onClick="<portlet:namespace />schedulePublishToRemote();" />
+
+			<br /><br />
 
 			<%
 			SearchContainer searchContainer = new SearchContainer();
@@ -232,7 +236,7 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 			searchContainer.setHeaderNames(headerNames);
 			searchContainer.setEmptyResultsMessage("there-are-no-scheduled-events");
 
-			List<SchedulerRequest> results = SchedulerEngineUtil.getScheduledJobs(StagingUtil.getSchedulerGroupName(groupId, true));
+			List<SchedulerRequest> results = SchedulerEngineUtil.getScheduledJobs(StagingUtil.getSchedulerGroupName(DestinationNames.LAYOUTS_REMOTE_PUBLISHER, groupId));
 			List resultRows = searchContainer.getResultRows();
 
 			for (int i = 0; i < results.size(); i++) {
@@ -250,7 +254,7 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 
 				sm.append("<a href=\"javascript: ");
 				sm.append(portletDisplay.getNamespace());
-				sm.append("unscheduleRemoteExport('");
+				sm.append("unschedulePublishToRemote('");
 				sm.append(schedulerRequest.getJobName());
 				sm.append("');\">");
 				sm.append(LanguageUtil.get(pageContext, "delete"));
@@ -263,7 +267,6 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 			%>
 
 			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
-
 		</liferay-ui:toggle-area>
 
 		<br />

@@ -95,6 +95,8 @@ scheduledPublishToLiveEventsURL.setParameter("privateLayout", String.valueOf(pri
 	);
 </script>
 
+<input name="<portlet:namespace />jobName" type="hidden" />
+
 <liferay-ui:input-scheduler />
 
 <br />
@@ -105,8 +107,6 @@ scheduledPublishToLiveEventsURL.setParameter("privateLayout", String.valueOf(pri
 
 <fieldset>
 	<legend><liferay-ui:message key="scheduled-events" /></legend>
-
-	<input name="<portlet:namespace />jobName" type="hidden" />
 
 	<div id="<portlet:namespace />scheduledPublishToLiveDiv"></div>
 </fieldset>

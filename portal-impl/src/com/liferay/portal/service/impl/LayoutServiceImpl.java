@@ -35,7 +35,8 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.base.LayoutServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
-import com.liferay.portlet.communities.messaging.LayoutsPublisherRequest;
+import com.liferay.portlet.communities.messaging.LayoutsLocalPublisherRequest;
+import com.liferay.portlet.communities.messaging.LayoutsRemotePublisherRequest;
 import com.liferay.util.JSONUtil;
 
 import java.io.File;
@@ -233,43 +234,43 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	}
 
 	public void schedulePublishToLive(
-			long stagingGroupId, long liveGroupId, boolean privateLayout,
+			long sourceGroupId, long targetGroupId, boolean privateLayout,
 			Map<Long, Boolean> layoutIdMap, Map<String, String[]> parameterMap,
 			String scope, String groupName, String cronText, Date startDate,
 			Date endDate, String description)
 		throws PortalException, SystemException {
 
 		GroupPermissionUtil.check(
-			getPermissionChecker(), stagingGroupId, ActionKeys.MANAGE_LAYOUTS);
+			getPermissionChecker(), sourceGroupId, ActionKeys.MANAGE_LAYOUTS);
 
 		GroupPermissionUtil.check(
-			getPermissionChecker(), liveGroupId, ActionKeys.MANAGE_LAYOUTS);
+			getPermissionChecker(), targetGroupId, ActionKeys.MANAGE_LAYOUTS);
 
 		String command = StringPool.BLANK;
 
 		if (scope.equals("all-pages")) {
-			command = LayoutsPublisherRequest.COMMAND_ALL_PAGES;
+			command = LayoutsLocalPublisherRequest.COMMAND_ALL_PAGES;
 		}
 		else if (scope.equals("selected-pages")) {
-			command = LayoutsPublisherRequest.COMMAND_SELECTED_PAGES;
+			command = LayoutsLocalPublisherRequest.COMMAND_SELECTED_PAGES;
 		}
 
-		LayoutsPublisherRequest layoutsPublisherRequest =
-			new LayoutsPublisherRequest(
-				command, getUserId(), stagingGroupId, liveGroupId,
+		LayoutsLocalPublisherRequest publisherRequest =
+			new LayoutsLocalPublisherRequest(
+				command, getUserId(), sourceGroupId, targetGroupId,
 				privateLayout, layoutIdMap, parameterMap);
 
 		SchedulerEngineUtil.schedule(
 			groupName, cronText, startDate, endDate, description,
-			DestinationNames.LAYOUTS_PUBLISHER,
-			JSONUtil.serialize(layoutsPublisherRequest));
+			DestinationNames.LAYOUTS_LOCAL_PUBLISHER,
+			JSONUtil.serialize(publisherRequest));
 	}
 
-	public void scheduleRemoteExport(
+	public void schedulePublishToRemote(
 			long sourceGroupId, boolean privateLayout,
 			Map<Long, Boolean> layoutIdMap,
 			Map<String, String[]> parameterMap, String remoteAddress,
-			int remotePort, boolean secure, long remoteGroupId,
+			int remotePort, boolean secureConnection, long remoteGroupId,
 			boolean remotePrivateLayout, Date exportStartDate,
 			Date exportEndDate, String groupName, String cronText,
 			Date startDate, Date endDate, String description)
@@ -278,17 +279,17 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), sourceGroupId, ActionKeys.MANAGE_LAYOUTS);
 
-		LayoutsPublisherRequest layoutsPublisherRequest =
-			new LayoutsPublisherRequest(
-				null, getUserId(), sourceGroupId, remoteGroupId,
-				privateLayout, layoutIdMap, parameterMap, remoteAddress,
-				remotePort, secure, exportStartDate, exportEndDate,
-				remotePrivateLayout);
+		LayoutsRemotePublisherRequest publisherRequest =
+			new LayoutsRemotePublisherRequest(
+				getUserId(), sourceGroupId, privateLayout, layoutIdMap,
+				parameterMap, remoteAddress, remotePort, secureConnection,
+				remoteGroupId, remotePrivateLayout, exportStartDate,
+				exportEndDate);
 
 		SchedulerEngineUtil.schedule(
 			groupName, cronText, startDate, endDate, description,
-			DestinationNames.LAYOUTS_REMOTE_EXPORTER,
-			JSONUtil.serialize(layoutsPublisherRequest));
+			DestinationNames.LAYOUTS_REMOTE_PUBLISHER,
+			JSONUtil.serialize(publisherRequest));
 	}
 
 	public void setLayouts(
@@ -313,7 +314,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		SchedulerEngineUtil.unschedule(jobName, groupName);
 	}
 
-	public void unscheduleRemoteExport(
+	public void unschedulePublishToRemote(
 			long groupId, String jobName, String groupName)
 		throws PortalException, SystemException {
 

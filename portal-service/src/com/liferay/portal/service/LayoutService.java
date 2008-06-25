@@ -126,7 +126,7 @@ public interface LayoutService {
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void schedulePublishToLive(long stagingGroupId, long liveGroupId,
+	public void schedulePublishToLive(long sourceGroupId, long targetGroupId,
 		boolean privateLayout, java.util.Map<Long, Boolean> layoutIdMap,
 		java.util.Map<String, String[]> parameterMap, java.lang.String scope,
 		java.lang.String groupName, java.lang.String cronText,
@@ -135,15 +135,15 @@ public interface LayoutService {
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void scheduleRemoteExport(long sourceGroupId, boolean privateLayout,
-		java.util.Map<Long, Boolean> layoutIdMap,
+	public void schedulePublishToRemote(long sourceGroupId,
+		boolean privateLayout, java.util.Map<Long, Boolean> layoutIdMap,
 		java.util.Map<String, String[]> parameterMap,
-		java.lang.String remoteAddress, int remotePort, boolean secure,
-		long remoteGroupId, boolean remotePrivateLayout,
-		java.util.Date exportStartDate, java.util.Date exportEndDate,
-		java.lang.String groupName, java.lang.String cronText,
-		java.util.Date startDate, java.util.Date endDate,
-		java.lang.String description)
+		java.lang.String remoteAddress, int remotePort,
+		boolean secureConnection, long remoteGroupId,
+		boolean remotePrivateLayout, java.util.Date exportStartDate,
+		java.util.Date exportEndDate, java.lang.String groupName,
+		java.lang.String cronText, java.util.Date startDate,
+		java.util.Date endDate, java.lang.String description)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -157,8 +157,8 @@ public interface LayoutService {
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void unscheduleRemoteExport(long groupId, java.lang.String jobName,
-		java.lang.String groupName)
+	public void unschedulePublishToRemote(long groupId,
+		java.lang.String jobName, java.lang.String groupName)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

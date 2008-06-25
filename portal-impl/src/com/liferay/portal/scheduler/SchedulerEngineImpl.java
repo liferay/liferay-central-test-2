@@ -29,8 +29,8 @@ import com.liferay.portal.kernel.messaging.SerialDestination;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
-import com.liferay.portlet.communities.messaging.LayoutsPublisherMessageListener;
-import com.liferay.portlet.communities.messaging.LayoutsRemoteExporterMessageListener;
+import com.liferay.portlet.communities.messaging.LayoutsLocalPublisherMessageListener;
+import com.liferay.portlet.communities.messaging.LayoutsRemotePublisherMessageListener;
 import com.liferay.util.JSONUtil;
 
 import java.util.Date;
@@ -47,19 +47,21 @@ import org.json.JSONObject;
 public class SchedulerEngineImpl implements SchedulerEngine {
 
 	public SchedulerEngineImpl() {
-		Destination destination = new SerialDestination(
-			DestinationNames.LAYOUTS_PUBLISHER);
+		Destination layoutsLocalPublisherDestination = new SerialDestination(
+			DestinationNames.LAYOUTS_LOCAL_PUBLISHER);
 
-		MessageBusUtil.addDestination(destination);
+		MessageBusUtil.addDestination(layoutsLocalPublisherDestination);
 
-		destination.register(new LayoutsPublisherMessageListener());
+		layoutsLocalPublisherDestination.register(
+			new LayoutsLocalPublisherMessageListener());
 
-		destination = new SerialDestination(
-			DestinationNames.LAYOUTS_REMOTE_EXPORTER);
+		Destination layoutsRemotePublisherDestination = new SerialDestination(
+			DestinationNames.LAYOUTS_REMOTE_PUBLISHER);
 
-		MessageBusUtil.addDestination(destination);
+		MessageBusUtil.addDestination(layoutsRemotePublisherDestination);
 
-		destination.register(new LayoutsRemoteExporterMessageListener());
+		layoutsRemotePublisherDestination.register(
+			new LayoutsRemotePublisherMessageListener());
 	}
 
 	public List<SchedulerRequest> getScheduledJobs(String groupName)

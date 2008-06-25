@@ -26,58 +26,37 @@ import java.util.Date;
 import java.util.Map;
 
 /**
- * <a href="LayoutsPublisherRequest.java.html"><b><i>View Source</i></b></a>
+ * <a href="LayoutsRemotePublisherRequest.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Bruno Farache
  *
  */
-public class LayoutsPublisherRequest {
+public class LayoutsRemotePublisherRequest
+	extends LayoutsLocalPublisherRequest {
 
-	public static final String COMMAND_ALL_PAGES = "ALL_PAGES";
-
-	public static final String COMMAND_SELECTED_PAGES = "SELECTED_PAGES";
-
-	public LayoutsPublisherRequest() {
+	public LayoutsRemotePublisherRequest() {
 	}
 
-	public LayoutsPublisherRequest(
-			String command, long userId, long stagingGroupId, long liveGroupId,
-			boolean privateLayout, Map<Long, Boolean> layoutIdMap,
-			Map<String, String[]> parameterMap) {
+	public LayoutsRemotePublisherRequest(
+		long userId, long sourceGroupId, boolean privateLayout,
+		Map<Long, Boolean> layoutIdMap, Map<String, String[]> parameterMap,
+		String remoteAddress, int remotePort, boolean secureConnection,
+		long remoteGroupId, boolean remotePrivateLayout, Date startDate,
+		Date endDate) {
 
-		this(
-			command, userId, stagingGroupId, liveGroupId, privateLayout,
-			layoutIdMap, parameterMap, null, 0, false, null, null, false);
-	}
-
-	public LayoutsPublisherRequest(
-		String command, long userId, long stagingGroupId, long liveGroupId,
-		boolean privateLayout, Map<Long, Boolean> layoutIdMap,
-		Map<String, String[]> parameterMap, String remoteAddress,
-		int remotePort, boolean secureConnection, Date startDate, Date endDate,
-		boolean remotePrivateLayout) {
-
-		_command = command;
 		_userId = userId;
-		_stagingGroupId = stagingGroupId;
-		_liveGroupId = liveGroupId;
+		_sourceGroupId = sourceGroupId;
 		_privateLayout = privateLayout;
-		_remotePrivateLayout = remotePrivateLayout;
 		_layoutIdMap = layoutIdMap;
 		_parameterMap = parameterMap;
 		_remoteAddress = remoteAddress;
 		_remotePort = remotePort;
 		_secureConnection = secureConnection;
+		_remoteGroupId = remoteGroupId;
+		_remotePrivateLayout = remotePrivateLayout;
 		_startDate = startDate;
 		_endDate = endDate;
-	}
-
-	public String getCommand() {
-		return _command;
-	}
-
-	public void setCommand(String command) {
-		_command = command;
 	}
 
 	public String getCronText() {
@@ -96,20 +75,12 @@ public class LayoutsPublisherRequest {
 		_userId = userId;
 	}
 
-	public long getStagingGroupId() {
-		return _stagingGroupId;
+	public long getSourceGroupId() {
+		return _sourceGroupId;
 	}
 
-	public void setStagingGroupId(long stagingGroupId) {
-		_stagingGroupId = stagingGroupId;
-	}
-
-	public long getLiveGroupId() {
-		return _liveGroupId;
-	}
-
-	public void setLiveGroupId(long liveGroupId) {
-		_liveGroupId = liveGroupId;
+	public void setSourceGroupId(long sourceGroupId) {
+		_sourceGroupId = sourceGroupId;
 	}
 
 	public boolean isPrivateLayout() {
@@ -118,14 +89,6 @@ public class LayoutsPublisherRequest {
 
 	public void setPrivateLayout(boolean privateLayout) {
 		_privateLayout = privateLayout;
-	}
-
-	public boolean isRemotePrivateLayout() {
-		return _remotePrivateLayout;
-	}
-
-	public void setRemotePrivateLayout(boolean remotePrivateLayout) {
-		_remotePrivateLayout = remotePrivateLayout;
 	}
 
 	public Map<Long, Boolean> getLayoutIdMap() {
@@ -168,6 +131,22 @@ public class LayoutsPublisherRequest {
 		_secureConnection = secureConnection;
 	}
 
+	public long getRemoteGroupId() {
+		return _remoteGroupId;
+	}
+
+	public void setRemoteGroupId(long remoteGroupId) {
+		_remoteGroupId = remoteGroupId;
+	}
+
+	public boolean isRemotePrivateLayout() {
+		return _remotePrivateLayout;
+	}
+
+	public void setRemotePrivateLayout(boolean remotePrivateLayout) {
+		_remotePrivateLayout = remotePrivateLayout;
+	}
+
 	public Date getStartDate() {
 		return _startDate;
 	}
@@ -184,18 +163,17 @@ public class LayoutsPublisherRequest {
 		_endDate = endDate;
 	}
 
-	private String _command;
 	private String _cronText;
-	private String _remoteAddress;
-	private int _remotePort;
 	private long _userId;
-	private long _stagingGroupId;
-	private long _liveGroupId;
+	private long _sourceGroupId;
 	private boolean _privateLayout;
-	private boolean _remotePrivateLayout;
-	private boolean _secureConnection;
 	private Map<Long, Boolean> _layoutIdMap;
 	private Map<String, String[]> _parameterMap;
+	private String _remoteAddress;
+	private int _remotePort;
+	private boolean _secureConnection;
+	private long _remoteGroupId;
+	private boolean _remotePrivateLayout;
 	private Date _startDate;
 	private Date _endDate;
 

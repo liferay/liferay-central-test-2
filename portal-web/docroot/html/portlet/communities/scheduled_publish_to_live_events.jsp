@@ -37,7 +37,7 @@ headerNames.add(StringPool.BLANK);
 searchContainer.setHeaderNames(headerNames);
 searchContainer.setEmptyResultsMessage("there-are-no-scheduled-events");
 
-List<SchedulerRequest> results = SchedulerEngineUtil.getScheduledJobs(StagingUtil.getSchedulerGroupName(liveGroupId, false));
+List<SchedulerRequest> results = SchedulerEngineUtil.getScheduledJobs(StagingUtil.getSchedulerGroupName(DestinationNames.LAYOUTS_LOCAL_PUBLISHER, liveGroupId));
 List resultRows = searchContainer.getResultRows();
 
 for (int i = 0; i < results.size(); i++) {

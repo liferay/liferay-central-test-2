@@ -181,11 +181,12 @@ public class LayoutServiceSoap {
 		}
 	}
 
-	public static void unscheduleRemoteExport(long groupId,
+	public static void unschedulePublishToRemote(long groupId,
 		java.lang.String jobName, java.lang.String groupName)
 		throws RemoteException {
 		try {
-			LayoutServiceUtil.unscheduleRemoteExport(groupId, jobName, groupName);
+			LayoutServiceUtil.unschedulePublishToRemote(groupId, jobName,
+				groupName);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

@@ -96,7 +96,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="jobName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupName" type="tns:string"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="unscheduleRemoteExport" qname="operNS:unscheduleRemoteExport" soapAction="">
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="unschedulePublishToRemote" qname="operNS:unschedulePublishToRemote" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="jobName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupName" type="tns:string"></parameter>
@@ -107,7 +107,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="layoutId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="typeSettings" type="tns:string"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="unscheduleRemoteExport updateLayout updateName updatePriority getLayoutName setLayouts deleteLayout addLayout updateLookAndFeel updateParentLayoutId updateJunctionPlid getLayoutReferences unschedulePublishToLive"/>
+		<parameter name="allowedMethods" value="updateLayout updateName updatePriority getLayoutName setLayouts deleteLayout addLayout updateLookAndFeel updateParentLayoutId updateJunctionPlid getLayoutReferences unschedulePublishToRemote unschedulePublishToLive"/>
 		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://model.portal.liferay.com" qname="ns:ArrayOf_tns2_LayoutReference" type="java:com.liferay.portal.model.LayoutReference[]" innerType="cmp-ns:LayoutReference" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:LayoutSoap" type="java:com.liferay.portal.model.LayoutSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_long" type="java:long[]" innerType="cmp-ns:long" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>

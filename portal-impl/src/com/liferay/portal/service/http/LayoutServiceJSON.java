@@ -133,11 +133,11 @@ public class LayoutServiceJSON {
 			groupName);
 	}
 
-	public static void unscheduleRemoteExport(long groupId,
+	public static void unschedulePublishToRemote(long groupId,
 		java.lang.String jobName, java.lang.String groupName)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		LayoutServiceUtil.unscheduleRemoteExport(groupId, jobName, groupName);
+		LayoutServiceUtil.unschedulePublishToRemote(groupId, jobName, groupName);
 	}
 
 	public static JSONObject updateJunctionPlid(long plid, long junctionPlid)

@@ -182,7 +182,7 @@ public class StagingUtil {
 			long sourceGroupId, boolean privateLayout,
 			Map<Long, Boolean> layoutIdMap,
 			Map<String, String[]> exportParameterMap, String remoteAddress,
-			int remotePort, boolean secure, long remoteGroupId,
+			int remotePort, boolean secureConnection, long remoteGroupId,
 			boolean remotePrivateLayout,
 			Map<String, String[]> importParameterMap, Date startDate,
 			Date endDate)
@@ -219,7 +219,7 @@ public class StagingUtil {
 
 		StringMaker sm = new StringMaker();
 
-		if (secure) {
+		if (secureConnection) {
 			sm.append(Http.HTTPS_WITH_SLASH);
 		}
 		else {
@@ -324,171 +324,6 @@ public class StagingUtil {
 			importParameterMap, bytes);
 	}
 
-	public static void exportRemotely(ActionRequest req) throws Exception {
-		String tabs1 = ParamUtil.getString(req, "tabs1");
-
-		long groupId = ParamUtil.getLong(req, "groupId");
-
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-		boolean privateLayout = true;
-
-		if (tabs1.equals("public-pages")) {
-			privateLayout = false;
-		}
-
-		String scope = ParamUtil.getString(req, "scope");
-
-		if (Validator.isNull(scope)) {
-			scope = "all-pages";
-		}
-
-		Map<Long, Boolean> layoutIdMap = null;
-		Map<String, String[]> parameterMap = req.getParameterMap();
-
-		if (scope.equals("selected-pages")) {
-			layoutIdMap = new LinkedHashMap<Long, Boolean>();
-
-			long[] rowIds = ParamUtil.getLongValues(req, "rowIds");
-
-			for (long selPlid : rowIds) {
-				boolean includeChildren = ParamUtil.getBoolean(
-					req, "includeChildren_" + selPlid);
-
-				layoutIdMap.put(selPlid, includeChildren);
-			}
-		}
-
-		boolean schedule = ParamUtil.getBoolean(req, "schedule");
-
-		String remoteAddress = ParamUtil.getString(req, "remoteAddress");
-		int remotePort = ParamUtil.getInteger(req, "remotePort");
-		boolean secureConnection = ParamUtil.getBoolean(
-			req, "secureConnection");
-
-		long remoteGroupId = ParamUtil.getLong(req, "remoteGroupId");
-		boolean remotePrivateLayout = ParamUtil.getBoolean(
-			req, "remotePrivateLayout");
-
-		boolean dateRange = ParamUtil.getBoolean(req, "dateRange");
-
-		Date startDate = null;
-		Date endDate = null;
-
-		if (dateRange) {
-			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
-			int startDateMonth = ParamUtil.getInteger(req, "startDateMonth");
-			int startDateDay = ParamUtil.getInteger(req, "startDateDay");
-			int startDateYear = ParamUtil.getInteger(req, "startDateYear");
-			int startDateHour = ParamUtil.getInteger(req, "startDateHour");
-			int startDateMinute = ParamUtil.getInteger(req, "startDateMinute");
-			int startDateAmPm = ParamUtil.getInteger(req, "startDateAmPm");
-
-			if (startDateAmPm == Calendar.PM) {
-				startDateHour += 12;
-			}
-
-			startDate = PortalUtil.getDate(
-				startDateMonth, startDateDay, startDateYear, startDateHour,
-				startDateMinute, themeDisplay.getTimeZone(),
-				new PortalException());
-
-			int endDateMonth = ParamUtil.getInteger(req, "endDateMonth");
-			int endDateDay = ParamUtil.getInteger(req, "endDateDay");
-			int endDateYear = ParamUtil.getInteger(req, "endDateYear");
-			int endDateHour = ParamUtil.getInteger(req, "endDateHour");
-			int endDateMinute = ParamUtil.getInteger(req, "endDateMinute");
-			int endDateAmPm = ParamUtil.getInteger(req, "endDateAmPm");
-
-			if (endDateAmPm == Calendar.PM) {
-				endDateHour += 12;
-			}
-
-			endDate = PortalUtil.getDate(
-				endDateMonth, endDateDay, endDateYear, endDateHour,
-				endDateMinute, themeDisplay.getTimeZone(),
-				new PortalException());
-		}
-
-		if (_log.isDebugEnabled()) {
-			StringMaker sm = new StringMaker();
-
-			sm.append("Exporting ");
-
-			if (privateLayout) {
-				sm.append("private ");
-			}
-			else {
-				sm.append("public ");
-			}
-
-			sm.append("pages for group ");
-			sm.append(group.getGroupId());
-			sm.append(" remotely to the ");
-
-			if (remotePrivateLayout) {
-				sm.append("private ");
-			}
-			else {
-				sm.append("public ");
-			}
-
-			sm.append("pages for group ");
-			sm.append(remoteGroupId);
-			sm.append(" on host ");
-
-			if (secureConnection) {
-				sm.append(Http.HTTPS_WITH_SLASH);
-			}
-			else {
-				sm.append(Http.HTTP_WITH_SLASH);
-			}
-
-			sm.append(remoteAddress);
-			sm.append(StringPool.COLON);
-			sm.append(remotePort);
-
-			_log.debug(sm.toString());
-		}
-
-		if (schedule) {
-			int recurrenceType = ParamUtil.getInteger(req, "recurrenceType");
-
-			Calendar startCal = _getDate(req, "schedulerStartDate", false);
-
-			String cronText = _getCronText(
-				req, startCal, false, recurrenceType);
-
-			Date schedulerEndDate = null;
-
-			int endDateType = ParamUtil.getInteger(req, "endDateType");
-
-			if (endDateType == 1) {
-				Calendar endCal = _getDate(req, "schedulerEndDate", false);
-
-				endDate = endCal.getTime();
-			}
-
-			String description = ParamUtil.getString(req, "description");
-
-			LayoutServiceUtil.scheduleRemoteExport(
-				groupId, privateLayout, layoutIdMap, getStagingParameters(req),
-				remoteAddress, remotePort, secureConnection, remoteGroupId,
-				remotePrivateLayout, startDate, endDate,
-				getSchedulerGroupName(groupId, true), cronText,
-				startCal.getTime(), schedulerEndDate, description);
-		}
-		else {
-			copyRemoteLayouts(
-				groupId, privateLayout, layoutIdMap, parameterMap,
-				remoteAddress, remotePort, secureConnection, remoteGroupId,
-				remotePrivateLayout, getStagingParameters(req),
-				startDate, endDate);
-		}
-	}
-
 	public static List<Layout> getMissingParents(
 			Layout layout, long liveGroupId)
 		throws PortalException, SystemException {
@@ -521,17 +356,11 @@ public class StagingUtil {
 	}
 
 	public static String getSchedulerGroupName(
-			long liveGroupId, boolean isRemoteExport) {
+		String destinationName, long liveGroupId) {
 
 		StringMaker sm = new StringMaker();
 
-		if (isRemoteExport) {
-			sm.append(DestinationNames.LAYOUTS_REMOTE_EXPORTER);
-		}
-		else {
-			sm.append(DestinationNames.LAYOUTS_PUBLISHER);
-		}
-
+		sm.append(destinationName);
 		sm.append(StringPool.SLASH);
 		sm.append(liveGroupId);
 
@@ -842,6 +671,10 @@ public class StagingUtil {
 			portlet.getPortletId());
 	}
 
+	public static void publishToRemote(ActionRequest req) throws Exception {
+		_publishToRemote(req, false);
+	}
+
 	public static void schedulePublishToLive(ActionRequest req)
 		throws Exception {
 
@@ -876,6 +709,9 @@ public class StagingUtil {
 
 		Map<String, String[]> parameterMap = getStagingParameters(req);
 
+		String groupName = getSchedulerGroupName(
+			DestinationNames.LAYOUTS_LOCAL_PUBLISHER, liveGroupId);
+
 		int recurrenceType = ParamUtil.getInteger(req, "recurrenceType");
 
 		Calendar startCal = _getDate(req, "schedulerStartDate", false);
@@ -896,8 +732,14 @@ public class StagingUtil {
 
 		LayoutServiceUtil.schedulePublishToLive(
 			stagingGroupId, liveGroupId, privateLayout, layoutIdMap,
-			parameterMap, scope, getSchedulerGroupName(liveGroupId, false),
-			cronText, startCal.getTime(), endDate, description);
+			parameterMap, scope, groupName, cronText, startCal.getTime(),
+			endDate, description);
+	}
+
+	public static void schedulePublishToRemote(ActionRequest req)
+		throws Exception {
+
+		_publishToRemote(req, true);
 	}
 
 	public static void unschedulePublishToLive(ActionRequest req)
@@ -910,20 +752,24 @@ public class StagingUtil {
 		long liveGroupId = stagingGroup.getLiveGroupId();
 
 		String jobName = ParamUtil.getString(req, "jobName");
+		String groupName = getSchedulerGroupName(
+			DestinationNames.LAYOUTS_LOCAL_PUBLISHER, liveGroupId);
 
 		LayoutServiceUtil.unschedulePublishToLive(
-			liveGroupId, jobName, getSchedulerGroupName(liveGroupId, false));
+			liveGroupId, jobName, groupName);
 	}
 
-	public static void unscheduleRemoteExport(ActionRequest req)
+	public static void unschedulePublishToRemote(ActionRequest req)
 		throws Exception {
 
 		long groupId = ParamUtil.getLong(req, "groupId");
 
 		String jobName = ParamUtil.getString(req, "jobName");
+		String groupName = getSchedulerGroupName(
+			DestinationNames.LAYOUTS_REMOTE_PUBLISHER, groupId);
 
-		LayoutServiceUtil.unscheduleRemoteExport(
-			groupId, jobName, getSchedulerGroupName(groupId, true));
+		LayoutServiceUtil.unschedulePublishToRemote(
+			groupId, jobName, groupName);
 	}
 
 	public static void updateStaging(ActionRequest req) throws Exception {
@@ -1157,6 +1003,173 @@ public class StagingUtil {
 		cal.set(Calendar.MILLISECOND, 0);
 
 		return cal;
+	}
+
+	private static void _publishToRemote(ActionRequest req, boolean schedule)
+		throws Exception {
+
+		String tabs1 = ParamUtil.getString(req, "tabs1");
+
+		long groupId = ParamUtil.getLong(req, "groupId");
+
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		boolean privateLayout = true;
+
+		if (tabs1.equals("public-pages")) {
+			privateLayout = false;
+		}
+
+		String scope = ParamUtil.getString(req, "scope");
+
+		if (Validator.isNull(scope)) {
+			scope = "all-pages";
+		}
+
+		Map<Long, Boolean> layoutIdMap = null;
+		Map<String, String[]> parameterMap = req.getParameterMap();
+
+		if (scope.equals("selected-pages")) {
+			layoutIdMap = new LinkedHashMap<Long, Boolean>();
+
+			long[] rowIds = ParamUtil.getLongValues(req, "rowIds");
+
+			for (long selPlid : rowIds) {
+				boolean includeChildren = ParamUtil.getBoolean(
+					req, "includeChildren_" + selPlid);
+
+				layoutIdMap.put(selPlid, includeChildren);
+			}
+		}
+
+		String remoteAddress = ParamUtil.getString(req, "remoteAddress");
+		int remotePort = ParamUtil.getInteger(req, "remotePort");
+		boolean secureConnection = ParamUtil.getBoolean(
+			req, "secureConnection");
+
+		long remoteGroupId = ParamUtil.getLong(req, "remoteGroupId");
+		boolean remotePrivateLayout = ParamUtil.getBoolean(
+			req, "remotePrivateLayout");
+
+		boolean dateRange = ParamUtil.getBoolean(req, "dateRange");
+
+		Date startDate = null;
+		Date endDate = null;
+
+		if (dateRange) {
+			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+			int startDateMonth = ParamUtil.getInteger(req, "startDateMonth");
+			int startDateDay = ParamUtil.getInteger(req, "startDateDay");
+			int startDateYear = ParamUtil.getInteger(req, "startDateYear");
+			int startDateHour = ParamUtil.getInteger(req, "startDateHour");
+			int startDateMinute = ParamUtil.getInteger(req, "startDateMinute");
+			int startDateAmPm = ParamUtil.getInteger(req, "startDateAmPm");
+
+			if (startDateAmPm == Calendar.PM) {
+				startDateHour += 12;
+			}
+
+			startDate = PortalUtil.getDate(
+				startDateMonth, startDateDay, startDateYear, startDateHour,
+				startDateMinute, themeDisplay.getTimeZone(),
+				new PortalException());
+
+			int endDateMonth = ParamUtil.getInteger(req, "endDateMonth");
+			int endDateDay = ParamUtil.getInteger(req, "endDateDay");
+			int endDateYear = ParamUtil.getInteger(req, "endDateYear");
+			int endDateHour = ParamUtil.getInteger(req, "endDateHour");
+			int endDateMinute = ParamUtil.getInteger(req, "endDateMinute");
+			int endDateAmPm = ParamUtil.getInteger(req, "endDateAmPm");
+
+			if (endDateAmPm == Calendar.PM) {
+				endDateHour += 12;
+			}
+
+			endDate = PortalUtil.getDate(
+				endDateMonth, endDateDay, endDateYear, endDateHour,
+				endDateMinute, themeDisplay.getTimeZone(),
+				new PortalException());
+		}
+
+		if (_log.isDebugEnabled()) {
+			StringMaker sm = new StringMaker();
+
+			sm.append("Exporting ");
+
+			if (privateLayout) {
+				sm.append("private ");
+			}
+			else {
+				sm.append("public ");
+			}
+
+			sm.append("pages for group ");
+			sm.append(group.getGroupId());
+			sm.append(" remotely to the ");
+
+			if (remotePrivateLayout) {
+				sm.append("private ");
+			}
+			else {
+				sm.append("public ");
+			}
+
+			sm.append("pages for group ");
+			sm.append(remoteGroupId);
+			sm.append(" on host ");
+
+			if (secureConnection) {
+				sm.append(Http.HTTPS_WITH_SLASH);
+			}
+			else {
+				sm.append(Http.HTTP_WITH_SLASH);
+			}
+
+			sm.append(remoteAddress);
+			sm.append(StringPool.COLON);
+			sm.append(remotePort);
+
+			_log.debug(sm.toString());
+		}
+
+		if (schedule) {
+			String groupName = getSchedulerGroupName(
+				DestinationNames.LAYOUTS_REMOTE_PUBLISHER, groupId);
+
+			int recurrenceType = ParamUtil.getInteger(req, "recurrenceType");
+
+			Calendar startCal = _getDate(req, "schedulerStartDate", false);
+
+			String cronText = _getCronText(
+				req, startCal, false, recurrenceType);
+
+			Date schedulerEndDate = null;
+
+			int endDateType = ParamUtil.getInteger(req, "endDateType");
+
+			if (endDateType == 1) {
+				Calendar endCal = _getDate(req, "schedulerEndDate", false);
+
+				endDate = endCal.getTime();
+			}
+
+			String description = ParamUtil.getString(req, "description");
+
+			LayoutServiceUtil.schedulePublishToRemote(
+				groupId, privateLayout, layoutIdMap, getStagingParameters(req),
+				remoteAddress, remotePort, secureConnection, remoteGroupId,
+				remotePrivateLayout, startDate, endDate, groupName, cronText,
+				startCal.getTime(), schedulerEndDate, description);
+		}
+		else {
+			copyRemoteLayouts(
+				groupId, privateLayout, layoutIdMap, parameterMap,
+				remoteAddress, remotePort, secureConnection, remoteGroupId,
+				remotePrivateLayout, getStagingParameters(req),
+				startDate, endDate);
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(StagingUtil.class);

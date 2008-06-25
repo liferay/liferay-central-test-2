@@ -38,31 +38,30 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="LayoutsPublisherMessageListener.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="LayoutsLocalPublisherMessageListener.java.html"><b><i>View Source
+ * </i></b></a>
  *
  * @author Bruno Farache
  *
  */
-public class LayoutsPublisherMessageListener implements MessageListener {
+public class LayoutsLocalPublisherMessageListener implements MessageListener {
 
 	public void receive(String message) {
 		PermissionCheckerImpl permissionChecker = null;
 
 		try {
-			LayoutsPublisherRequest layoutsPublisherRequest =
-				(LayoutsPublisherRequest)JSONUtil.deserialize(message);
+			LayoutsLocalPublisherRequest publisherRequest =
+				(LayoutsLocalPublisherRequest)JSONUtil.deserialize(message);
 
-			String command = layoutsPublisherRequest.getCommand();
+			String command = publisherRequest.getCommand();
 
-			long userId = layoutsPublisherRequest.getUserId();
-			long stagingGroupId = layoutsPublisherRequest.getStagingGroupId();
-			long liveGroupId = layoutsPublisherRequest.getLiveGroupId();
-			boolean privateLayout = layoutsPublisherRequest.isPrivateLayout();
-			Map<Long, Boolean> layoutIdMap =
-				layoutsPublisherRequest.getLayoutIdMap();
+			long userId = publisherRequest.getUserId();
+			long sourceGroupId = publisherRequest.getSourceGroupId();
+			long targetGroupId = publisherRequest.getTargetGroupId();
+			boolean privateLayout = publisherRequest.isPrivateLayout();
+			Map<Long, Boolean> layoutIdMap = publisherRequest.getLayoutIdMap();
 			Map<String, String[]> parameterMap =
-				layoutsPublisherRequest.getParameterMap();
+				publisherRequest.getParameterMap();
 
 			PrincipalThreadLocal.setName(userId);
 
@@ -72,15 +71,17 @@ public class LayoutsPublisherMessageListener implements MessageListener {
 
 			PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
-			if (command.equals(LayoutsPublisherRequest.COMMAND_ALL_PAGES)) {
-				StagingUtil.publishLayouts(
-					stagingGroupId, liveGroupId, privateLayout, parameterMap);
-			}
-			else if (command.equals(
-				LayoutsPublisherRequest.COMMAND_SELECTED_PAGES)) {
+			if (command.equals(
+					LayoutsLocalPublisherRequest.COMMAND_ALL_PAGES)) {
 
 				StagingUtil.publishLayouts(
-					stagingGroupId, liveGroupId, privateLayout, layoutIdMap,
+					sourceGroupId, targetGroupId, privateLayout, parameterMap);
+			}
+			else if (command.equals(
+				LayoutsLocalPublisherRequest.COMMAND_SELECTED_PAGES)) {
+
+				StagingUtil.publishLayouts(
+					sourceGroupId, targetGroupId, privateLayout, layoutIdMap,
 					parameterMap);
 			}
 		}
@@ -97,6 +98,6 @@ public class LayoutsPublisherMessageListener implements MessageListener {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(LayoutsPublisherMessageListener.class);
+		LogFactory.getLog(LayoutsLocalPublisherMessageListener.class);
 
 }

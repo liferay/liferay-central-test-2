@@ -39,37 +39,35 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="LayoutsRemoteExporterMessageListener.java.html"><b><i>View Source
+ * <a href="LayoutsRemotePublisherMessageListener.java.html"><b><i>View Source
  * </i></b></a>
  *
  * @author Bruno Farache
  *
  */
-public class LayoutsRemoteExporterMessageListener implements MessageListener {
+public class LayoutsRemotePublisherMessageListener implements MessageListener {
 
 	public void receive(String message) {
 		PermissionCheckerImpl permissionChecker = null;
 
 		try {
-			LayoutsPublisherRequest layoutsPublisherRequest =
-				(LayoutsPublisherRequest)JSONUtil.deserialize(message);
+			LayoutsRemotePublisherRequest publisherRequest =
+				(LayoutsRemotePublisherRequest)JSONUtil.deserialize(message);
 
-			long userId = layoutsPublisherRequest.getUserId();
-			long stagingGroupId = layoutsPublisherRequest.getStagingGroupId();
-			long liveGroupId = layoutsPublisherRequest.getLiveGroupId();
-			boolean privateLayout = layoutsPublisherRequest.isPrivateLayout();
-			Map<Long, Boolean> layoutIdMap =
-				layoutsPublisherRequest.getLayoutIdMap();
-			boolean remotePrivateLayout =
-				layoutsPublisherRequest.isRemotePrivateLayout();
+			long userId = publisherRequest.getUserId();
+			long sourceGroupId = publisherRequest.getSourceGroupId();
+			boolean privateLayout = publisherRequest.isPrivateLayout();
+			Map<Long, Boolean> layoutIdMap = publisherRequest.getLayoutIdMap();
 			Map<String, String[]> parameterMap =
-				layoutsPublisherRequest.getParameterMap();
-			String remoteAddress = layoutsPublisherRequest.getRemoteAddress();
-			int remotePort = layoutsPublisherRequest.getRemotePort();
-			boolean secureConnection =
-				layoutsPublisherRequest.isSecureConnection();
-			Date startDate = layoutsPublisherRequest.getStartDate();
-			Date endDate = layoutsPublisherRequest.getEndDate();
+				publisherRequest.getParameterMap();
+			String remoteAddress = publisherRequest.getRemoteAddress();
+			int remotePort = publisherRequest.getRemotePort();
+			boolean secureConnection = publisherRequest.isSecureConnection();
+			long remoteGroupId = publisherRequest.getRemoteGroupId();
+			boolean remotePrivateLayout =
+				publisherRequest.isRemotePrivateLayout();
+			Date startDate = publisherRequest.getStartDate();
+			Date endDate = publisherRequest.getEndDate();
 
 			PrincipalThreadLocal.setName(userId);
 
@@ -80,8 +78,8 @@ public class LayoutsRemoteExporterMessageListener implements MessageListener {
 			PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
 			StagingUtil.copyRemoteLayouts(
-				stagingGroupId, privateLayout, layoutIdMap, parameterMap,
-				remoteAddress, remotePort, secureConnection, liveGroupId,
+				sourceGroupId, privateLayout, layoutIdMap, parameterMap,
+				remoteAddress, remotePort, secureConnection, remoteGroupId,
 				remotePrivateLayout, parameterMap, startDate, endDate);
 		}
 		catch (Exception e) {
@@ -97,6 +95,6 @@ public class LayoutsRemoteExporterMessageListener implements MessageListener {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(LayoutsRemoteExporterMessageListener.class);
+		LogFactory.getLog(LayoutsRemotePublisherMessageListener.class);
 
 }

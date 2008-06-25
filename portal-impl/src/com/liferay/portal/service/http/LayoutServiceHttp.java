@@ -842,7 +842,7 @@ public class LayoutServiceHttp {
 	}
 
 	public static void schedulePublishToLive(HttpPrincipal httpPrincipal,
-		long stagingGroupId, long liveGroupId, boolean privateLayout,
+		long sourceGroupId, long targetGroupId, boolean privateLayout,
 		java.util.Map<Long, Boolean> layoutIdMap,
 		java.util.Map<String, String[]> parameterMap, java.lang.String scope,
 		java.lang.String groupName, java.lang.String cronText,
@@ -851,9 +851,9 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(stagingGroupId);
+			Object paramObj0 = new LongWrapper(sourceGroupId);
 
-			Object paramObj1 = new LongWrapper(liveGroupId);
+			Object paramObj1 = new LongWrapper(targetGroupId);
 
 			Object paramObj2 = new BooleanWrapper(privateLayout);
 
@@ -935,16 +935,16 @@ public class LayoutServiceHttp {
 		}
 	}
 
-	public static void scheduleRemoteExport(HttpPrincipal httpPrincipal,
+	public static void schedulePublishToRemote(HttpPrincipal httpPrincipal,
 		long sourceGroupId, boolean privateLayout,
 		java.util.Map<Long, Boolean> layoutIdMap,
 		java.util.Map<String, String[]> parameterMap,
-		java.lang.String remoteAddress, int remotePort, boolean secure,
-		long remoteGroupId, boolean remotePrivateLayout,
-		java.util.Date exportStartDate, java.util.Date exportEndDate,
-		java.lang.String groupName, java.lang.String cronText,
-		java.util.Date startDate, java.util.Date endDate,
-		java.lang.String description)
+		java.lang.String remoteAddress, int remotePort,
+		boolean secureConnection, long remoteGroupId,
+		boolean remotePrivateLayout, java.util.Date exportStartDate,
+		java.util.Date exportEndDate, java.lang.String groupName,
+		java.lang.String cronText, java.util.Date startDate,
+		java.util.Date endDate, java.lang.String description)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -972,7 +972,7 @@ public class LayoutServiceHttp {
 
 			Object paramObj5 = new IntegerWrapper(remotePort);
 
-			Object paramObj6 = new BooleanWrapper(secure);
+			Object paramObj6 = new BooleanWrapper(secureConnection);
 
 			Object paramObj7 = new LongWrapper(remoteGroupId);
 
@@ -1021,7 +1021,7 @@ public class LayoutServiceHttp {
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"scheduleRemoteExport",
+					"schedulePublishToRemote",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
@@ -1139,7 +1139,7 @@ public class LayoutServiceHttp {
 		}
 	}
 
-	public static void unscheduleRemoteExport(HttpPrincipal httpPrincipal,
+	public static void unschedulePublishToRemote(HttpPrincipal httpPrincipal,
 		long groupId, java.lang.String jobName, java.lang.String groupName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -1159,7 +1159,7 @@ public class LayoutServiceHttp {
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"unscheduleRemoteExport",
+					"unschedulePublishToRemote",
 					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			try {

@@ -141,9 +141,6 @@ public class EditPagesAction extends PortletAction {
 			else if (cmd.equals("display_order")) {
 				updateDisplayOrder(req);
 			}
-			else if (cmd.equals("export_remotely")) {
-				StagingUtil.exportRemotely(req);
-			}
 			else if (cmd.equals("logo")) {
 				updateLogo(req);
 			}
@@ -156,8 +153,14 @@ public class EditPagesAction extends PortletAction {
 			else if (cmd.equals("publish_to_live")) {
 				StagingUtil.publishToLive(req);
 			}
+			else if (cmd.equals("publish_to_remote")) {
+				StagingUtil.publishToRemote(req);
+			}
 			else if (cmd.equals("schedule_publish_to_live")) {
 				StagingUtil.schedulePublishToLive(req);
+			}
+			else if (cmd.equals("schedule_publish_to_remote")) {
+				StagingUtil.schedulePublishToRemote(req);
 			}
 			else if (cmd.equals("staging")) {
 				StagingUtil.updateStaging(req);
@@ -165,8 +168,8 @@ public class EditPagesAction extends PortletAction {
 			else if (cmd.equals("unschedule_publish_to_live")) {
 				StagingUtil.unschedulePublishToLive(req);
 			}
-			else if (cmd.equals("unschedule_remote_export")) {
-				StagingUtil.unscheduleRemoteExport(req);
+			else if (cmd.equals("unschedule_publish_to_remote")) {
+				StagingUtil.unschedulePublishToRemote(req);
 			}
 			else if (cmd.equals("virtual_host")) {
 				updateVirtualHost(req);

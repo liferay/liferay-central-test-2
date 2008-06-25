@@ -270,7 +270,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 
 	function <portlet:namespace />exportPages() {
 		if (document.<portlet:namespace />fm.<portlet:namespace />enableRemote.checked) {
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "export_remotely";
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "publish_to_remote";
 			submitForm(document.<portlet:namespace />fm);
 		}
 		else {
@@ -311,15 +311,14 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />scheduleRemoteExport() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "export_remotely";
+	function <portlet:namespace />schedulePublishToRemote() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "schedule_publish_to_remote";
 		document.<portlet:namespace />fm.<portlet:namespace />schedule.value = "true";
-
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />unscheduleRemoteExport(jobName) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "unschedule_remote_export";
+	function <portlet:namespace />unschedulePublishToRemote(jobName) {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "unschedule_publish_to_remote";
 		document.<portlet:namespace />fm.<portlet:namespace />jobName.value = jobName;
 		submitForm(document.<portlet:namespace />fm);
 	}
@@ -409,8 +408,6 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 <input name="<portlet:namespace />tabs3" type="hidden" value="<%= HtmlUtil.escape(tabs3) %>" />
 <input name="<portlet:namespace />tabs4" type="hidden" value="<%= HtmlUtil.escape(tabs4) %>" />
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />schedule" type="hidden" value="false" />
-<input name="<portlet:namespace />jobName" type="hidden" />
 <input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />tabs4=<%= tabs4 %>&<portlet:namespace />selPlid=<%= selPlid %>" />
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
 <input name="<portlet:namespace />liveGroupId" type="hidden" value="<%= liveGroupId %>" />
