@@ -313,7 +313,6 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 
 	function <portlet:namespace />schedulePublishToRemote() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "schedule_publish_to_remote";
-		document.<portlet:namespace />fm.<portlet:namespace />schedule.value = "true";
 		submitForm(document.<portlet:namespace />fm);
 	}
 
