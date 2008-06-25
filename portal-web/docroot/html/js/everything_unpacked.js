@@ -4512,7 +4512,7 @@ $.fn.select = function(select) {
 * to see if the user's mouse has slowed down (beneath the sensitivity
 * threshold) before firing the onMouseOver event.
 * 
-* hoverIntent r5 // 2007.03.27 // jQuery 1.1.2
+* hoverIntent r6 // 2007.04.22 // jQuery 1.2.3+
 * <http://cherne.net/brian/resources/jquery.hoverIntent.html>
 * 
 * hoverIntent is currently available for use in all personal or commercial 
@@ -4524,16 +4524,15 @@ $.fn.select = function(select) {
 * 
 * // advanced usage receives configuration object only
 * $("ul li").hoverIntent({
-*	sensitivity: 2, // number = sensitivity threshold (must be 1 or higher)
-*	interval: 50,   // number = milliseconds of polling interval
+*	sensitivity: 7, // number = sensitivity threshold (must be 1 or higher)
+*	interval: 100,   // number = milliseconds of polling interval
 *	over: showNav,  // function = onMouseOver callback (required)
-*	timeout: 100,   // number = milliseconds delay before onMouseOut function call
+*	timeout: 0,   // number = milliseconds delay before onMouseOut function call
 *	out: hideNav    // function = onMouseOut callback (required)
 * });
 * 
 * @param  f  onMouseOver function || An object with configuration options
 * @param  g  onMouseOut function  || Nothing (use configuration options object)
-* @return    The object (aka "this") that called hoverIntent, and the event object
 * @author    Brian Cherne <brian@cherne.net>
 */
 (function($) {
@@ -4584,11 +4583,6 @@ $.fn.select = function(select) {
 
 		// A private function for handling mouse 'hovering'
 		var handleHover = function(e) {
-			// next three lines copied from jQuery.hover, ignore children onMouseOver/onMouseOut
-			var p = (e.type == "mouseover" ? e.fromElement : e.toElement) || e.relatedTarget;
-			while ( p && p != this ) { try { p = p.parentNode; } catch(e) { p = this; } }
-			if ( p == this ) { return false; }
-
 			// copy objects to be passed into t (required for event object to be passed in IE)
 			var ev = jQuery.extend({},e);
 			var ob = this;
@@ -4596,8 +4590,8 @@ $.fn.select = function(select) {
 			// cancel hoverIntent timer if it exists
 			if (ob.hoverIntent_t) { ob.hoverIntent_t = clearTimeout(ob.hoverIntent_t); }
 
-			// else e.type == "onmouseover"
-			if (e.type == "mouseover") {
+			// if e.type == "mouseenter"
+			if (e.type == "mouseenter") {
 				// set "previous" X and Y position based on initial entry point
 				pX = ev.pageX; pY = ev.pageY;
 				// update "current" X and Y position based on mousemove
@@ -4605,7 +4599,7 @@ $.fn.select = function(select) {
 				// start polling interval (self-calling timeout) to compare mouse coordinates over time
 				if (ob.hoverIntent_s != 1) { ob.hoverIntent_t = setTimeout( function(){compare(ev,ob);} , cfg.interval );}
 
-			// else e.type == "onmouseout"
+			// else e.type == "mouseleave"
 			} else {
 				// unbind expensive mousemove event
 				$(ob).unbind("mousemove",track);
@@ -4615,7 +4609,7 @@ $.fn.select = function(select) {
 		};
 
 		// bind the function to the two event listeners
-		return this.mouseover(handleHover).mouseout(handleHover);
+		return this.bind('mouseenter',handleHover).bind('mouseleave',handleHover);
 	};
 })(jQuery);
 /*

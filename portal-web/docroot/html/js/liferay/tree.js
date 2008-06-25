@@ -79,7 +79,7 @@ Liferay.Tree = new Class({
 		instance._expandText = Liferay.Language.get('expand-all');
 		instance._collapseText = Liferay.Language.get('collapse-all');
 
-		if (!instance.preRendered) {			
+		if (!instance.preRendered) {
 			var icons = instance.icons;
 
 			instance._plusImage = instance.generateImage(
@@ -224,7 +224,7 @@ Liferay.Tree = new Class({
 
 		var outputEl = jQuery(instance.outputId);
 		var mainLi = '<li class="toggle-expand"><a href="javascript: ;" id="lfr-expand">' + instance._expandText + '</a> | <a href="javascript: ;" id="lfr-collapse">' + instance._collapseText + '</a></li>';
-		
+
 		if (!instance.preRendered) {
 			var icons = instance.icons;
 			var openNodes = instance.openNodes;
@@ -252,8 +252,7 @@ Liferay.Tree = new Class({
 
 				instance.addNode(1);
 
-				mainLi +=
-						'<li class="root-container">';
+				mainLi += '<li class="root-container">';
 
 				if (instance.nolinks) {
 					mainLi += '<a name="' + node.id + '">';
