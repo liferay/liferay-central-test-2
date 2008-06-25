@@ -24,7 +24,7 @@ input[type="image"] {
 input[type="submit"], input[type="button"], input[type="reset"] {
 }
 
-input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hover {
+input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:focus, input[type="button"]:focus, input[type="reset"]:focus {
 }
 
 /* ---------- IE6 chokes on attribute selectors in a chain, so we separate them into their own rule ---------- */
