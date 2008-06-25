@@ -6621,7 +6621,7 @@ Liferay.Portlet = {
 			'fast',
 			function() {
 				var action = (restore) ? 'removeClass' : 'addClass';
-				jQuery('.portlet', portlet)[action]('portlet-minimized');
+				jQuery(portlet)[action]('portlet-minimized');
 
 				if (el) {
 					var minimizeKey = Liferay.Language.get('minimize');

@@ -17142,7 +17142,7 @@ Liferay.Portlet = {
 			'fast',
 			function() {
 				var action = (restore) ? 'removeClass' : 'addClass';
-				jQuery('.portlet', portlet)[action]('portlet-minimized');
+				jQuery(portlet)[action]('portlet-minimized');
 
 				if (el) {
 					var minimizeKey = Liferay.Language.get('minimize');
@@ -18494,6 +18494,8 @@ var LayoutConfiguration = {
 		}
 
 		if (Liferay.Browser.is_ie) {
+			jQuery('body link').appendTo('head');
+
 			jQuery('link.lfr-css-file').each(
 				function(i) {
 					document.createStyleSheet(this.href);
