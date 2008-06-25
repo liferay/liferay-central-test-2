@@ -141,6 +141,8 @@ public class ActionKeys {
 
 	public static final String MANAGE = "MANAGE";
 
+	public static final String MANAGE_ANNOUNCEMENTS = "MANAGE_ANNOUNCEMENTS";
+
 	public static final String MANAGE_ARCHIVED_SETUPS =
 		"MANAGE_ARCHIVED_SETUPS";
 

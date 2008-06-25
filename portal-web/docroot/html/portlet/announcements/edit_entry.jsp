@@ -165,7 +165,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 						List<Group> groups = GroupLocalServiceUtil.getUserGroups(user.getUserId());
 
 						for (Group group : groups) {
-							if (group.isCommunity() && GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_MEMBERS)) {
+							if (group.isCommunity() && GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
 						%>
 
 								<option <%= (classPK == group.getGroupId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Group.class) %><%= StringPool.COMMA %><%= group.getGroupId() %>"><%= group.getName() %></option>
@@ -182,7 +182,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 						List<Organization> organizations = OrganizationLocalServiceUtil.getUserOrganizations(user.getUserId());
 
 						for (Organization organization : organizations) {
-							if (OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.ASSIGN_MEMBERS)) {
+							if (OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
 						%>
 
 								<option <%= (classPK == organization.getOrganizationId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Organization.class) %><%= StringPool.COMMA %><%= organization.getOrganizationId() %>"><%= organization.getName() %></option>
@@ -199,7 +199,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 						List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId());
 
 						for (Role role : roles) {
-							if (RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.ASSIGN_MEMBERS)) {
+							if (RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
 						%>
 
 								<option <%= (classPK == role.getRoleId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Role.class) %><%= StringPool.COMMA %><%= role.getRoleId() %>"><%= role.getName() %></option>
@@ -216,7 +216,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 						List<UserGroup> userGroups = UserGroupLocalServiceUtil.getUserGroups(themeDisplay.getCompanyId());
 
 						for (UserGroup userGroup : userGroups) {
-							if (UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.ASSIGN_MEMBERS)) {
+							if (UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
 						%>
 
 								<option <%= (classPK == userGroup.getUserGroupId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(UserGroup.class) %><%= StringPool.COMMA %><%= userGroup.getUserGroupId() %>"><%= userGroup.getName() %></option>

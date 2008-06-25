@@ -78,28 +78,32 @@ public class AnnouncementsEntryServiceImpl
 
 			if (className.equals(Group.class.getName()) &&
 				!GroupPermissionUtil.contains(
-					permissionChecker, classPK, ActionKeys.ASSIGN_MEMBERS)) {
+					permissionChecker, classPK,
+					ActionKeys.MANAGE_ANNOUNCEMENTS)) {
 
 				throw new PrincipalException();
 			}
 
 			if (className.equals(Organization.class.getName()) &&
 				!OrganizationPermissionUtil.contains(
-					permissionChecker, classPK, ActionKeys.ASSIGN_MEMBERS)) {
+					permissionChecker, classPK,
+					ActionKeys.MANAGE_ANNOUNCEMENTS)) {
 
 				throw new PrincipalException();
 			}
 
 			if (className.equals(Role.class.getName()) &&
 				!RolePermissionUtil.contains(
-					permissionChecker, classPK, ActionKeys.ASSIGN_MEMBERS)) {
+					permissionChecker, classPK,
+					ActionKeys.MANAGE_ANNOUNCEMENTS)) {
 
 				throw new PrincipalException();
 			}
 
 			if (className.equals(UserGroup.class.getName()) &&
 				!UserGroupPermissionUtil.contains(
-					permissionChecker, classPK, ActionKeys.ASSIGN_MEMBERS)) {
+					permissionChecker, classPK,
+					ActionKeys.MANAGE_ANNOUNCEMENTS)) {
 
 				throw new PrincipalException();
 			}
