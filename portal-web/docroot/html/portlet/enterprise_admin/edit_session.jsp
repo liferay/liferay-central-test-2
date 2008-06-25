@@ -141,7 +141,7 @@ userTracker = userTracker.toEscapedModel();
 		<br />
 
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
-		<tr class="portlet-section-header">
+		<tr class="portlet-section-header results-header">
 			<td>
 				<b><liferay-ui:message key="accessed-urls" /></b>
 			</td>
@@ -151,7 +151,7 @@ userTracker = userTracker.toEscapedModel();
 				</span>
 			</td>
 		</tr>
-		<tr class="portlet-section-header">
+		<tr class="portlet-section-header results-header">
 			<td colspan="2">
 				<div id="<portlet:namespace />accessedUrls" style="display: none;">
 					<table border="0" cellpadding="4" cellspacing="0" width="100%">
@@ -162,12 +162,12 @@ userTracker = userTracker.toEscapedModel();
 					for (int i = 0; i < paths.size(); i++) {
 						UserTrackerPath userTrackerPath = (UserTrackerPath)paths.get(i);
 
-						String className = "portlet-section-body";
-						String classHoverName = "portlet-section-body-hover";
+						String className = "portlet-section-body results-row";
+						String classHoverName = "portlet-section-body-hover results-row hover";
 
 						if (MathUtil.isEven(i)) {
-							className = "portlet-section-alternate";
-							classHoverName = "portlet-section-alternate-hover";
+							className = "portlet-section-alternate results-row alt";
+							classHoverName = "portlet-section-alternate-hover results-row alt hover";
 						}
 					%>
 
@@ -188,7 +188,7 @@ userTracker = userTracker.toEscapedModel();
 				</div>
 			</td>
 		</tr>
-		<tr class="portlet-section-header">
+		<tr class="portlet-section-header results-header">
 			<td>
 				<b><liferay-ui:message key="session-attributes" /></b>
 			</td>
@@ -227,12 +227,12 @@ userTracker = userTracker.toEscapedModel();
 							while (itr.hasNext()) {
 								String attrName = (String)itr.next();
 
-								String className = "portlet-section-body";
-								String classHoverName = "portlet-section-body-hover";
+								String className = "portlet-section-body results-row";
+								String classHoverName = "portlet-section-body-hover results-row hover";
 
 								if (MathUtil.isEven(counter++)) {
-									className = "portlet-section-alternate";
-									classHoverName = "portlet-section-alternate-hover";
+									className = "portlet-section-alternate results-row alt";
+									classHoverName = "portlet-section-alternate-hover results-row alt hover";
 								}
 					%>
 

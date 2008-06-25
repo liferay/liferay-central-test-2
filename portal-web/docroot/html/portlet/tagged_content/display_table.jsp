@@ -160,7 +160,7 @@ if (Validator.isNotNull(asset.getUrl())) {
 
 <c:if test="<%= assetIndex == 0 %>">
 	<table class="taglib-search-iterator">
-	<tr class="portlet-section-header">
+	<tr class="portlet-section-header results-header">
 		<th>
 			<liferay-ui:message key="title" />
 		</th>
@@ -182,10 +182,10 @@ if (Validator.isNotNull(asset.getUrl())) {
 <c:if test="<%= show %>">
 
 	<%
-	String style = "class=\"portlet-section-body\" onmouseover=\"this.className = 'portlet-section-body-hover';\" onmouseout=\"this.className = 'portlet-section-body';\"";
+	String style = "class=\"portlet-section-body results-row\" onmouseover=\"this.className = 'portlet-section-body-hover results-row hover';\" onmouseout=\"this.className = 'portlet-section-body results-row';\"";
 
 	if (assetIndex % 2 == 0) {
-		style = "class=\"portlet-section-alternate\" onmouseover=\"this.className = 'portlet-section-alternate-hover';\" onmouseout=\"this.className = 'portlet-section-alternate';\"";
+		style = "class=\"portlet-section-alternate results-row alt\" onmouseover=\"this.className = 'portlet-section-alternate-hover results-row alt hover';\" onmouseout=\"this.className = 'portlet-section-alternate results-row alt';\"";
 	}
 	%>
 

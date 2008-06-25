@@ -29,7 +29,7 @@
 	align="right"
 >
 	<table class="journal-edit-article-extra">
-	<tr class="portlet-section-header">
+	<tr class="portlet-section-header results-header">
 		<td>
 			<b><liferay-ui:message key="workflow" /></b>
 		</td>
@@ -110,7 +110,7 @@
 	<br />
 
 	<table class="journal-edit-article-extra">
-	<tr class="portlet-section-header">
+	<tr class="portlet-section-header results-header">
 		<td>
 			<b><liferay-ui:message key="form-and-presentation" /></b>
 		</td>
@@ -194,7 +194,7 @@
 	<br />
 
 	<table class="journal-edit-article-extra">
-	<tr class="portlet-section-header">
+	<tr class="portlet-section-header results-header">
 		<td>
 			<b><liferay-ui:message key="categorization" /></b>
 		</td>
@@ -250,7 +250,7 @@
 	<br />
 
 	<table class="journal-edit-article-extra">
-	<tr class="portlet-section-header">
+	<tr class="portlet-section-header results-header">
 		<td>
 			<b><liferay-ui:message key="schedule" /></b>
 		</td>

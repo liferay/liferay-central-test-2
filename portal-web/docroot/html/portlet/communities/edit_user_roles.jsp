@@ -104,7 +104,7 @@ if (role != null) {
 
 <c:choose>
 	<c:when test="<%= role == null %>">
-		<div class="portlet-section-body" style="border: 1px solid; padding: 5px;">
+		<div class="portlet-section-body results-row" style="border: 1px solid; padding: 5px;">
 			<%= LanguageUtil.format(pageContext, "step-x-of-x", new String[] {"1", "2"}) %>
 
 			<liferay-ui:message key="choose-a-role" />
@@ -187,7 +187,7 @@ if (role != null) {
 		<input name="<portlet:namespace />addUserIds" type="hidden" value="" />
 		<input name="<portlet:namespace />removeUserIds" type="hidden" value="" />
 
-		<div class="portlet-section-body" style="border: 1px solid; padding: 5px;">
+		<div class="portlet-section-body results-row" style="border: 1px solid; padding: 5px;">
 			<%= LanguageUtil.format(pageContext, "step-x-of-x", new String[] {"2", "2"}) %>
 
 			<%= LanguageUtil.get(pageContext, "assign-" + (group.isOrganization() ? "organization" : "community") + "-roles-to-users") %>

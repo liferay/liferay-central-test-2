@@ -101,10 +101,10 @@ for (int i = 0; i < 7; i++) {
 %>
 
 	<tr>
-		<td class="portlet-section-header" colspan="5"></td>
+		<td class="portlet-section-header results-header" colspan="5"></td>
 	</tr>
 	<tr>
-		<td class="portlet-section-header" style="padding-left: 1px;"></td>
+		<td class="portlet-section-header results-header" style="padding-left: 1px;"></td>
 
 		<%
 		String className = "portlet-font";
@@ -113,7 +113,7 @@ for (int i = 0; i < 7; i++) {
 			(cal.get(Calendar.DATE) == curDay) &&
 			(cal.get(Calendar.YEAR) == curYear)) {
 
-			className = "portlet-section-header";
+			className = "portlet-section-header results-header";
 		}
 		%>
 
@@ -136,7 +136,7 @@ for (int i = 0; i < 7; i++) {
 			</tr>
 			</table>
 		</td>
-		<td class="portlet-section-header" style="padding-left: 1px;"></td>
+		<td class="portlet-section-header results-header" style="padding-left: 1px;"></td>
 		<td valign="top" width="99%">
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">
 			<tr>
@@ -153,12 +153,12 @@ for (int i = 0; i < 7; i++) {
 
 						event = event.toEscapedModel();
 
-						className = "portlet-section-body";
-						String classHoverName = "portlet-section-body-hover";
+						className = "portlet-section-body results-row";
+						String classHoverName = "portlet-section-body-hover results-row hover";
 
 						if (MathUtil.isEven(j)) {
-							className = "portlet-section-alternate";
-							classHoverName = "portlet-section-alternate-hover";
+							className = "portlet-section-alternate results-row alt";
+							classHoverName = "portlet-section-alternate-hover results-row alt hover";
 						}
 
 						boolean allDay = CalUtil.isAllDay(event, timeZone, locale);
@@ -211,12 +211,12 @@ for (int i = 0; i < 7; i++) {
 			</tr>
 			</table>
 		</td>
-		<td class="portlet-section-header" style="padding-left: 1px;"></td>
+		<td class="portlet-section-header results-header" style="padding-left: 1px;"></td>
 	</tr>
 
 	<c:if test="<%= i + 1 == 7 %>">
 		<tr>
-			<td class="portlet-section-header" colspan="5"></td>
+			<td class="portlet-section-header results-header" colspan="5"></td>
 		</tr>
 	</c:if>
 

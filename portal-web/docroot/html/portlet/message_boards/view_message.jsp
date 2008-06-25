@@ -220,7 +220,7 @@ else {
 	<div class="clear"></div>
 </div>
 
-<div class="portlet-section-header title">
+<div class="portlet-section-header results-header title">
 	<%= HtmlUtil.escape(message.getSubject()) %>
 </div>
 

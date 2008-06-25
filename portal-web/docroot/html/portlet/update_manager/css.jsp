@@ -24,42 +24,42 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-section-body.status-installation-in-process td {
+.results-row.status-installation-in-process td {
 	background-color: #99CCFF;
 }
 
-.portlet-section-alternate.status-installation-in-process td {
+.results-row.alt.status-installation-in-process td {
 	background-color: #99CCFF;
 }
 
-.portlet-section-body.status-up-to-date td {
+.results-row.status-up-to-date td {
 	background-color: #CCFFCC;
 }
 
-.portlet-section-alternate.status-up-to-date td {
+.results-row.alt.status-up-to-date td {
 	background-color: #CCFFCC;
 }
 
-.portlet-section-body.status-unknown td {
+.results-row.status-unknown td {
 	background-color: #FFFFCC;
 }
 
-.portlet-section-alternate.status-unknown td {
+.results-row.alt.status-unknown td {
 	background-color: #FFFFCC;
 }
 
-.portlet-section-body.status-update-available td {
+.results-row.status-update-available td {
 	background-color: #FF9999;
 }
 
-.portlet-section-alternate.status-update-available td {
+.results-row.alt.status-update-available td {
 	background-color: #FF9999;
 }
 
-.portlet-section-body.status-update-ignored td {
+.results-row.status-update-ignored td {
 	background-color: #99CCFF;
 }
 
-.portlet-section-alternate.status-update-ignored td {
+.results-row.alt.status-update-ignored td {
 	background-color: #99CCFF;
 }

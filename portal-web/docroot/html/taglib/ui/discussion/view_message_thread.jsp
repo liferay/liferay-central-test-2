@@ -32,12 +32,12 @@ MBCategory category = (MBCategory)request.getAttribute(WebKeys.MESSAGE_BOARDS_TR
 boolean lastNode = ((Boolean)request.getAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE)).booleanValue();
 int depth = ((Integer)request.getAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH)).intValue();
 
-String className = "portlet-section-body";
-String classHoverName = "portlet-section-body-hover";
+String className = "portlet-section-body results-row";
+String classHoverName = "portlet-section-body-hover results-row hover";
 
 if (treeWalker.isOdd()) {
-	className = "portlet-section-alternate";
-	classHoverName = "portlet-section-alternate-hover";
+	className = "portlet-section-alternate results-row alt";
+	classHoverName = "portlet-section-alternate-hover results-row alt hover";
 }
 %>
 

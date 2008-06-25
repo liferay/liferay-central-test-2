@@ -831,7 +831,7 @@ String[] availableLocales = null;
 		<br />
 
 		<table class="journal-edit-article-extra">
-		<tr class="portlet-section-header">
+		<tr class="portlet-section-header results-header">
 			<td>
 				<b><liferay-ui:message key="abstract" /></b>
 			</td>

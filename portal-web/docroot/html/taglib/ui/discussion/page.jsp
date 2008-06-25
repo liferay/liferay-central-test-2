@@ -161,7 +161,7 @@ List messages = treeWalker.getMessages();
 	</c:if>
 
 	<table border="0" cellpadding="4" cellspacing="0" class="taglib-discussion" width="100%">
-	<tr class="portlet-section-header" style="font-size: x-small; font-weight: bold;">
+	<tr class="portlet-section-header results-header" style="font-size: x-small; font-weight: bold;">
 		<td>
 			<liferay-ui:message key="threaded-replies" />
 		</td>

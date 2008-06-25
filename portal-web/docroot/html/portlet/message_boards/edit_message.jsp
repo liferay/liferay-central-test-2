@@ -136,8 +136,8 @@ if ((message != null) && message.isAttachments()) {
 
 	int depth = 0;
 
-	String className = "portlet-section-body";
-	String classHoverName = "portlet-section-body-hover";
+	String className = "portlet-section-body results-row";
+	String classHoverName = "portlet-section-body-hover results-row hover";
 	%>
 
 	<%@ include file="/html/portlet/message_boards/view_thread_message.jspf" %>
@@ -430,8 +430,8 @@ if (message != null) {
 
 	int depth = 0;
 
-	String className = "portlet-section-body";
-	String classHoverName = "portlet-section-body-hover";
+	String className = "portlet-section-body results-row";
+	String classHoverName = "portlet-section-body-hover results-row hover";
 	%>
 
 	<%@ include file="/html/portlet/message_boards/view_thread_message.jspf" %>

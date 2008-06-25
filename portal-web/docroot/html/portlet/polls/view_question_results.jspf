@@ -29,9 +29,9 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 
 <table border="0" cellpadding="4" cellspacing="0" width="100%">
 <tr>
-	<td class="portlet-section-header">
+	<td class="portlet-section-header results-header">
 		<table border="0" cellpadding="4" cellspacing="0" width="100%">
-		<tr class="portlet-section-header" style="font-size: x-small; font-weight: bold;">
+		<tr class="portlet-section-header results-header" style="font-size: x-small; font-weight: bold;">
 			<td>
 				%
 			</td>
@@ -48,12 +48,12 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 
 			int choiceVotes = PollsVoteLocalServiceUtil.getChoiceVotesCount(choice.getChoiceId());
 
-			String className = "portlet-section-body";
-			String classHoverName = "portlet-section-body-hover";
+			String className = "portlet-section-body results-row";
+			String classHoverName = "portlet-section-body-hover results-row hover";
 
 			if (MathUtil.isEven(i)) {
-				className = "portlet-section-alternate";
-				classHoverName = "portlet-section-alternate-hover";
+				className = "portlet-section-alternate results-row alt";
+				classHoverName = "portlet-section-alternate-hover results-row alt hover";
 			}
 
 			double votesPercent = 0.0;

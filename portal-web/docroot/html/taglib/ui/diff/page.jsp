@@ -57,7 +57,7 @@ List targetResults = diffResults[1];
 			DiffResult targetResult = (DiffResult)targetItr.next();
 		%>
 
-			<tr class="portlet-section-header">
+			<tr class="portlet-section-header results-header">
 				<th>
 					<liferay-ui:message key="line" /> <%= sourceResult.getLineNumber() %>
 				</th>

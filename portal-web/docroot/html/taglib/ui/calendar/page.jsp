@@ -83,7 +83,7 @@ int weekNumber = 1;
 		</tr>
 	</c:if>
 
-	<tr class="portlet-section-header">
+	<tr class="portlet-section-header results-header">
 
 		<%
 		for (int i = 0; i < 7;  i++) {

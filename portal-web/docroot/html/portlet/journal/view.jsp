@@ -457,7 +457,7 @@ portletURL.setParameter("tabs1", tabs1);
 		<tr>
 			<td valign="top" width="33%">
 				<table border="0" cellpadding="4" cellspacing="0" width="100%">
-				<tr class="portlet-section-header" style="font-size: x-small; font-weight: bold;">
+				<tr class="portlet-section-header results-header" style="font-size: x-small; font-weight: bold;">
 					<td>
 						<%= LanguageUtil.format(pageContext, "last-x-articles", String.valueOf(JournalUtil.MAX_STACK_SIZE), false) %>
 					</td>
@@ -473,12 +473,12 @@ portletURL.setParameter("tabs1", tabs1);
 
 					article = article.toEscapedModel();
 
-					String className = "portlet-section-body";
-					String classHoverName = "portlet-section-body-hover";
+					String className = "portlet-section-body results-row";
+					String classHoverName = "portlet-section-body-hover results-row hover";
 
 					if (MathUtil.isEven(i)) {
-						className = "portlet-section-alternate";
-						classHoverName = "portlet-section-alternate-hover";
+						className = "portlet-section-alternate results-row alt";
+						classHoverName = "portlet-section-alternate-hover results-row alt hover";
 					}
 				%>
 
@@ -496,7 +496,7 @@ portletURL.setParameter("tabs1", tabs1);
 			</td>
 			<td valign="top" width="33%">
 				<table border="0" cellpadding="4" cellspacing="0" width="100%">
-				<tr class="portlet-section-header" style="font-size: x-small; font-weight: bold;">
+				<tr class="portlet-section-header results-header" style="font-size: x-small; font-weight: bold;">
 					<td>
 						<%= LanguageUtil.format(pageContext, "last-x-structures", String.valueOf(JournalUtil.MAX_STACK_SIZE), false) %>
 					</td>
@@ -512,12 +512,12 @@ portletURL.setParameter("tabs1", tabs1);
 
 					structure = structure.toEscapedModel();
 
-					String className = "portlet-section-body";
-					String classHoverName = "portlet-section-body-hover";
+					String className = "portlet-section-body results-row";
+					String classHoverName = "portlet-section-body-hover results-row hover";
 
 					if (MathUtil.isEven(i)) {
-						className = "portlet-section-alternate";
-						classHoverName = "portlet-section-alternate-hover";
+						className = "portlet-section-alternate results-row alt";
+						classHoverName = "portlet-section-alternate-hover results-row alt hover";
 					}
 				%>
 
@@ -535,7 +535,7 @@ portletURL.setParameter("tabs1", tabs1);
 			</td>
 			<td valign="top" width="33%">
 				<table border="0" cellpadding="4" cellspacing="0" width="100%">
-				<tr class="portlet-section-header" style="font-size: x-small; font-weight: bold;">
+				<tr class="portlet-section-header results-header" style="font-size: x-small; font-weight: bold;">
 					<td>
 						<%= LanguageUtil.format(pageContext, "last-x-templates", String.valueOf(JournalUtil.MAX_STACK_SIZE), false) %>
 					</td>
@@ -551,12 +551,12 @@ portletURL.setParameter("tabs1", tabs1);
 
 					template = template.toEscapedModel();
 
-					String className = "portlet-section-body";
-					String classHoverName = "portlet-section-body-hover";
+					String className = "portlet-section-body results-row";
+					String classHoverName = "portlet-section-body-hover results-row hover";
 
 					if (MathUtil.isEven(recentTemplatesSize - i - 1)) {
-						className = "portlet-section-alternate";
-						classHoverName = "portlet-section-alternate-hover";
+						className = "portlet-section-alternate results-row alt";
+						classHoverName = "portlet-section-alternate-hover results-row alt hover";
 					}
 				%>
 
