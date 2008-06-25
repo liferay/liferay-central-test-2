@@ -28,7 +28,7 @@ ResourceURL scheduledPublishToLiveEventsURL = renderResponse.createResourceURL()
 scheduledPublishToLiveEventsURL.setParameter("struts_action", "/communities/edit_pages");
 scheduledPublishToLiveEventsURL.setParameter("groupId", String.valueOf(liveGroupId));
 scheduledPublishToLiveEventsURL.setParameter("privateLayout", String.valueOf(privateLayout));
-scheduledPublishToLiveEventsURL.setParameter("localPublishing", String.valueOf(true));
+scheduledPublishToLiveEventsURL.setParameter("destinationName", DestinationNames.LAYOUTS_REMOTE_PUBLISHER);
 %>
 
 <script type="text/javascript">

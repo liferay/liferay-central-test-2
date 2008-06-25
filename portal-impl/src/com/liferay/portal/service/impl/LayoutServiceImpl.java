@@ -305,11 +305,11 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	}
 
 	public void unschedulePublishToLive(
-			long liveGroupId, String jobName, String groupName)
+			long groupId, String jobName, String groupName)
 		throws PortalException, SystemException {
 
 		GroupPermissionUtil.check(
-			getPermissionChecker(), liveGroupId, ActionKeys.MANAGE_LAYOUTS);
+			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
 		SchedulerEngineUtil.unschedule(jobName, groupName);
 	}

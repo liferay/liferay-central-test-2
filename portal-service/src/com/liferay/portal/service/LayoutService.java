@@ -152,8 +152,8 @@ public interface LayoutService {
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void unschedulePublishToLive(long liveGroupId,
-		java.lang.String jobName, java.lang.String groupName)
+	public void unschedulePublishToLive(long groupId, java.lang.String jobName,
+		java.lang.String groupName)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

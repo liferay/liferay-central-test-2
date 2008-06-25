@@ -26,7 +26,8 @@
 
 <%
 long groupId = ParamUtil.getLong(request, "groupId");
-boolean localPublishing = ParamUtil.getBoolean(request, "localPublishing");
+
+String destinationName = ParamUtil.getString(request, "destinationName");
 
 SearchContainer searchContainer = new SearchContainer();
 
@@ -40,14 +41,7 @@ headerNames.add(StringPool.BLANK);
 searchContainer.setHeaderNames(headerNames);
 searchContainer.setEmptyResultsMessage("there-are-no-scheduled-events");
 
-List<SchedulerRequest> results = new ArrayList();
-
-if (localPublishing) {
-	results = SchedulerEngineUtil.getScheduledJobs(StagingUtil.getSchedulerGroupName(DestinationNames.LAYOUTS_LOCAL_PUBLISHER, groupId));
-}
-else {
-	results = SchedulerEngineUtil.getScheduledJobs(StagingUtil.getSchedulerGroupName(DestinationNames.LAYOUTS_REMOTE_PUBLISHER, groupId));
-}
+List<SchedulerRequest> results = SchedulerEngineUtil.getScheduledJobs(StagingUtil.getSchedulerGroupName(destinationName, groupId));
 
 List resultRows = searchContainer.getResultRows();
 

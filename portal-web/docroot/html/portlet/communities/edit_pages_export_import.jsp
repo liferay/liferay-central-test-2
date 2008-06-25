@@ -40,7 +40,7 @@ ResourceURL scheduledPublishToRemoteEventsURL = renderResponse.createResourceURL
 scheduledPublishToRemoteEventsURL.setParameter("struts_action", "/communities/edit_pages");
 scheduledPublishToRemoteEventsURL.setParameter("groupId", String.valueOf(groupId));
 scheduledPublishToRemoteEventsURL.setParameter("privateLayout", String.valueOf(privateLayout));
-scheduledPublishToRemoteEventsURL.setParameter("localPublishing", String.valueOf(false));
+scheduledPublishToRemoteEventsURL.setParameter("localPublishing", DestinationNames.LAYOUTS_LOCAL_PUBLISHER);
 %>
 
 <script type="text/javascript">

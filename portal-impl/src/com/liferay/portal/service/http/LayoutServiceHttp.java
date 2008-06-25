@@ -1095,11 +1095,11 @@ public class LayoutServiceHttp {
 	}
 
 	public static void unschedulePublishToLive(HttpPrincipal httpPrincipal,
-		long liveGroupId, java.lang.String jobName, java.lang.String groupName)
+		long groupId, java.lang.String jobName, java.lang.String groupName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(liveGroupId);
+			Object paramObj0 = new LongWrapper(groupId);
 
 			Object paramObj1 = jobName;
 

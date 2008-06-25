@@ -167,11 +167,11 @@ public class LayoutServiceSoap {
 		}
 	}
 
-	public static void unschedulePublishToLive(long liveGroupId,
+	public static void unschedulePublishToLive(long groupId,
 		java.lang.String jobName, java.lang.String groupName)
 		throws RemoteException {
 		try {
-			LayoutServiceUtil.unschedulePublishToLive(liveGroupId, jobName,
+			LayoutServiceUtil.unschedulePublishToLive(groupId, jobName,
 				groupName);
 		}
 		catch (Exception e) {
