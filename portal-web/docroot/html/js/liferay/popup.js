@@ -42,6 +42,11 @@ Liferay.Popup = function(options) {
 
 		return cache;
 	};
+	
+	var checkExternalClick = function(element) {
+		// trigger datepicker external click, close date picker if clicked elsewhere.
+		(jQuery.datepicker && jQuery.datepicker._checkExternalClick({ target: element }));
+	};
 
 	options = options || {};
 
@@ -76,8 +81,10 @@ Liferay.Popup = function(options) {
 		},
 		dragStart: function(e, ui) {
 			if (!options.dragHelper) {
-				var dialog = jQuery(this).parents('.ui-dialog:first');
-
+				var dialog = jQuery(this).parents('.ui-dialog:first'), target = jQuery(e.target);
+				
+				checkExternalClick(target);
+				
 				dialog.css('visibility', 'hidden');
 			}
 		},
@@ -98,6 +105,13 @@ Liferay.Popup = function(options) {
 				);
 			}
 		},
+		
+		close: function() {
+			var target = jQuery(this);
+			
+			checkExternalClick(target);
+		},
+		
 		open: function(e, ui) {
 			if (!options.dragHelper) {
 				var dialog = jQuery(this).parents('.ui-dialog:first');
@@ -134,6 +148,7 @@ Liferay.Popup = function(options) {
 	var dragStart = config.dragStart;
 	var dragStop = config.dragStop;
 	var open = config.open;
+	var close = config.close;
 	var resizable = config.resizable;
 	var resizeHelper = config.resizeHelper;
 	var stack = config.stack;
@@ -175,6 +190,7 @@ Liferay.Popup = function(options) {
 
 	return content.dialog(
 		{
+			autoResize: false,
 			dialogClass: className,
 			draggable: draggable,
 			height: height,
@@ -189,7 +205,8 @@ Liferay.Popup = function(options) {
 			dragHelper: dragHelper,
 			dragStart: dragStart,
 			dragStop: dragStop,
-			open: open
+			open: open,
+			close: close
 		}
 	);
 };
