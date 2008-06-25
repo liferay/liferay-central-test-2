@@ -414,6 +414,8 @@ var LayoutConfiguration = {
 		}
 
 		if (Liferay.Browser.is_ie) {
+			jQuery('body link').appendTo('head');
+
 			jQuery('link.lfr-css-file').each(
 				function(i) {
 					document.createStyleSheet(this.href);
