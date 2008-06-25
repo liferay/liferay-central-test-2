@@ -1075,7 +1075,7 @@ public class BaseDeployer {
 			String fileName = GetterUtil.getString(
 				FileUtil.getShortFileName(files[i]));
 
-			// LEP-6145
+			// LEP-6415
 
 			if (fileName.equalsIgnoreCase("mule-config.xml")) {
 				continue;
