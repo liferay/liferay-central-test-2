@@ -25,43 +25,64 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
-long liveGroupId = ParamUtil.getLong(request, "groupId");
+long groupId = ParamUtil.getLong(request, "groupId");
+boolean localPublishing = ParamUtil.getBoolean(request, "localPublishing");
 
 SearchContainer searchContainer = new SearchContainer();
 
 List headerNames = new ArrayList();
 
 headerNames.add("description");
+headerNames.add("start-date");
+headerNames.add("end-date");
 headerNames.add(StringPool.BLANK);
 
 searchContainer.setHeaderNames(headerNames);
 searchContainer.setEmptyResultsMessage("there-are-no-scheduled-events");
 
-List<SchedulerRequest> results = SchedulerEngineUtil.getScheduledJobs(StagingUtil.getSchedulerGroupName(DestinationNames.LAYOUTS_LOCAL_PUBLISHER, liveGroupId));
+List<SchedulerRequest> results = new ArrayList();
+
+if (localPublishing) {
+	results = SchedulerEngineUtil.getScheduledJobs(StagingUtil.getSchedulerGroupName(DestinationNames.LAYOUTS_LOCAL_PUBLISHER, groupId));
+}
+else {
+	results = SchedulerEngineUtil.getScheduledJobs(StagingUtil.getSchedulerGroupName(DestinationNames.LAYOUTS_REMOTE_PUBLISHER, groupId));
+}
+
 List resultRows = searchContainer.getResultRows();
 
 for (int i = 0; i < results.size(); i++) {
 	SchedulerRequest schedulerRequest = results.get(i);
 
-	ResultRow row = new ResultRow(schedulerRequest, schedulerRequest.hashCode(), i);
+	ResultRow row = new ResultRow(schedulerRequest, schedulerRequest.getJobName(), i);
 
 	// Description
 
 	row.addText(schedulerRequest.getDescription());
 
+	// Start date
+
+	row.addText(dateFormatDateTime.format(schedulerRequest.getStartDate()));
+
+	// End date
+
+	if (schedulerRequest.getEndDate() != null) {
+		row.addText(dateFormatDateTime.format(schedulerRequest.getEndDate()));
+	}
+	else {
+		row.addText(LanguageUtil.get(pageContext, "no-end-date"));
+	}
+
 	// Action
 
 	StringMaker sm = new StringMaker();
 
-	sm.append("<a href=\"javascript: ");
 	sm.append(portletDisplay.getNamespace());
-	sm.append("unschedulePublishToLive('");
+	sm.append("unschedulePublishEvent('");
 	sm.append(schedulerRequest.getJobName());
-	sm.append("');\">");
-	sm.append(LanguageUtil.get(pageContext, "delete"));
-	sm.append("</a>");
+	sm.append("');");
 
-	row.addText(sm.toString());
+	row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "delete"), sm.toString());
 
 	resultRows.add(row);
 }

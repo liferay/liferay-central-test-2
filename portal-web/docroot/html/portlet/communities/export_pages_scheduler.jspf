@@ -28,6 +28,7 @@ ResourceURL scheduledPublishToLiveEventsURL = renderResponse.createResourceURL()
 scheduledPublishToLiveEventsURL.setParameter("struts_action", "/communities/edit_pages");
 scheduledPublishToLiveEventsURL.setParameter("groupId", String.valueOf(liveGroupId));
 scheduledPublishToLiveEventsURL.setParameter("privateLayout", String.valueOf(privateLayout));
+scheduledPublishToLiveEventsURL.setParameter("localPublishing", String.valueOf(true));
 %>
 
 <script type="text/javascript">
@@ -47,27 +48,19 @@ scheduledPublishToLiveEventsURL.setParameter("privateLayout", String.valueOf(pri
 		);
 	}
 
-	function <portlet:namespace />showTable(id) {
-		document.getElementById("<portlet:namespace />neverTable").style.display = "none";
-		document.getElementById("<portlet:namespace />dailyTable").style.display = "none";
-		document.getElementById("<portlet:namespace />weeklyTable").style.display = "none";
-		document.getElementById("<portlet:namespace />monthlyTable").style.display = "none";
-		document.getElementById("<portlet:namespace />yearlyTable").style.display = "none";
+	function <portlet:namespace />unschedulePublishEvent(jobName) {
+		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-scheduled-event") %>')) {
+			document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = "unschedule_publish_to_live";
+			document.<portlet:namespace />exportPagesFm.<portlet:namespace />jobName.value = jobName;
 
-		document.getElementById(id).style.display = "block";
-	}
-
-	function <portlet:namespace />unschedulePublishToLive(jobName) {
-		document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = "unschedule_publish_to_live";
-		document.<portlet:namespace />exportPagesFm.<portlet:namespace />jobName.value = jobName;
-
-		jQuery(document.<portlet:namespace />exportPagesFm).ajaxSubmit(
-			{
-				success: function() {
-					<portlet:namespace />updateScheduledPublishToLiveDiv();
+			jQuery(document.<portlet:namespace />exportPagesFm).ajaxSubmit(
+				{
+					success: function() {
+						<portlet:namespace />updateScheduledPublishToLiveDiv();
+					}
 				}
-			}
-		);
+			);
+		}
 	}
 
 	function <portlet:namespace />updateScheduledPublishToLiveDiv() {

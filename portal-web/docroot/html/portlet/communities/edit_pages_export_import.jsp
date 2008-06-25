@@ -34,7 +34,71 @@ boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLa
 String rootNodeName = (String)request.getAttribute("edit_pages.jsp-rootNodeName");
 
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
+
+ResourceURL scheduledPublishToRemoteEventsURL = renderResponse.createResourceURL();
+
+scheduledPublishToRemoteEventsURL.setParameter("struts_action", "/communities/edit_pages");
+scheduledPublishToRemoteEventsURL.setParameter("groupId", String.valueOf(groupId));
+scheduledPublishToRemoteEventsURL.setParameter("privateLayout", String.valueOf(privateLayout));
+scheduledPublishToRemoteEventsURL.setParameter("localPublishing", String.valueOf(false));
 %>
+
+<script type="text/javascript">
+	function <portlet:namespace />schedulePublishToRemote() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "schedule_publish_to_remote";
+
+		var addButton = jQuery('#<portlet:namespace />addButton');
+
+		addButton.attr("disabled", true);
+
+		jQuery(document.<portlet:namespace />fm).ajaxSubmit(
+			{
+				success: function() {
+					<portlet:namespace />updateScheduledPublishToRemoteDiv();
+				}
+			}
+		);
+	}
+
+	function <portlet:namespace />unschedulePublishEvent(jobName) {
+		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-scheduled-event") %>')) {
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "unschedule_publish_to_remote";
+			document.<portlet:namespace />fm.<portlet:namespace />jobName.value = jobName;
+
+			jQuery(document.<portlet:namespace />fm).ajaxSubmit(
+				{
+					success: function() {
+						<portlet:namespace />updateScheduledPublishToRemoteDiv();
+					}
+				}
+			);
+		}
+	}
+
+	function <portlet:namespace />updateScheduledPublishToRemoteDiv() {
+		jQuery.ajax(
+			{
+				url: '<%= scheduledPublishToRemoteEventsURL %>',
+				success: function(html) {
+					var scheduledPublishToRemoteDiv = jQuery('#<portlet:namespace />scheduledPublishToRemoteDiv');
+
+					scheduledPublishToRemoteDiv.empty();
+					scheduledPublishToRemoteDiv.append(html);
+
+					var addButton = jQuery('#<portlet:namespace />addButton');
+
+					addButton.attr("disabled", false);
+				}
+			}
+		);
+	}
+
+	jQuery(
+		function() {
+			<portlet:namespace />updateScheduledPublishToRemoteDiv();
+		}
+	);
+</script>
 
 <liferay-ui:error exception="<%= LayoutImportException.class %>" message="an-unexpected-error-occurred-while-importing-your-file" />
 
@@ -225,48 +289,11 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 
 			<br /><br />
 
-			<%
-			SearchContainer searchContainer = new SearchContainer();
+			<fieldset>
+				<legend><liferay-ui:message key="scheduled-events" /></legend>
 
-			List headerNames = new ArrayList();
-
-			headerNames.add("description");
-			headerNames.add(StringPool.BLANK);
-
-			searchContainer.setHeaderNames(headerNames);
-			searchContainer.setEmptyResultsMessage("there-are-no-scheduled-events");
-
-			List<SchedulerRequest> results = SchedulerEngineUtil.getScheduledJobs(StagingUtil.getSchedulerGroupName(DestinationNames.LAYOUTS_REMOTE_PUBLISHER, groupId));
-			List resultRows = searchContainer.getResultRows();
-
-			for (int i = 0; i < results.size(); i++) {
-				SchedulerRequest schedulerRequest = results.get(i);
-
-				ResultRow row = new ResultRow(schedulerRequest, schedulerRequest.hashCode(), i);
-
-				// Description
-
-				row.addText(schedulerRequest.getDescription());
-
-				// Action
-
-				StringMaker sm = new StringMaker();
-
-				sm.append("<a href=\"javascript: ");
-				sm.append(portletDisplay.getNamespace());
-				sm.append("unschedulePublishToRemote('");
-				sm.append(schedulerRequest.getJobName());
-				sm.append("');\">");
-				sm.append(LanguageUtil.get(pageContext, "delete"));
-				sm.append("</a>");
-
-				row.addText(sm.toString());
-
-				resultRows.add(row);
-			}
-			%>
-
-			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
+				<div id="<portlet:namespace />scheduledPublishToRemoteDiv"></div>
+			</fieldset>
 		</liferay-ui:toggle-area>
 
 		<br />

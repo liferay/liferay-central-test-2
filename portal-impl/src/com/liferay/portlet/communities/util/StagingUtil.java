@@ -356,13 +356,13 @@ public class StagingUtil {
 	}
 
 	public static String getSchedulerGroupName(
-		String destinationName, long liveGroupId) {
+		String destinationName, long groupId) {
 
 		StringMaker sm = new StringMaker();
 
 		sm.append(destinationName);
 		sm.append(StringPool.SLASH);
-		sm.append(liveGroupId);
+		sm.append(groupId);
 
 		return sm.toString();
 	}
@@ -745,18 +745,13 @@ public class StagingUtil {
 	public static void unschedulePublishToLive(ActionRequest req)
 		throws Exception {
 
-		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
-
-		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
-
-		long liveGroupId = stagingGroup.getLiveGroupId();
+		long groupId = ParamUtil.getLong(req, "groupId");
 
 		String jobName = ParamUtil.getString(req, "jobName");
 		String groupName = getSchedulerGroupName(
-			DestinationNames.LAYOUTS_LOCAL_PUBLISHER, liveGroupId);
+			DestinationNames.LAYOUTS_LOCAL_PUBLISHER, groupId);
 
-		LayoutServiceUtil.unschedulePublishToLive(
-			liveGroupId, jobName, groupName);
+		LayoutServiceUtil.unschedulePublishToLive(groupId, jobName, groupName);
 	}
 
 	public static void unschedulePublishToRemote(ActionRequest req)
@@ -1152,7 +1147,7 @@ public class StagingUtil {
 			if (endDateType == 1) {
 				Calendar endCal = _getDate(req, "schedulerEndDate", false);
 
-				endDate = endCal.getTime();
+				schedulerEndDate = endCal.getTime();
 			}
 
 			String description = ParamUtil.getString(req, "description");

@@ -255,7 +255,7 @@ public class EditPagesAction extends PortletAction {
 		throws Exception {
 
 		String path =
-			"/html/portlet/communities/scheduled_publish_to_live_events.jsp";
+			"/html/portlet/communities/scheduled_publishing_events.jsp";
 
 		PortletRequestDispatcher prd =
 			config.getPortletContext().getRequestDispatcher(path);

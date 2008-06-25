@@ -311,17 +311,6 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />schedulePublishToRemote() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "schedule_publish_to_remote";
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />unschedulePublishToRemote(jobName) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "unschedule_publish_to_remote";
-		document.<portlet:namespace />fm.<portlet:namespace />jobName.value = jobName;
-		submitForm(document.<portlet:namespace />fm);
-	}
-
 	function <portlet:namespace />updateDisplayOrder() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "display_order";
 		document.<portlet:namespace />fm.<portlet:namespace />layoutIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox);

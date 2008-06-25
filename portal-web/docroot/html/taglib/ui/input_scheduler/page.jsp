@@ -24,6 +24,18 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
+<script type="text/javascript">
+	function <portlet:namespace />showTable(id) {
+		document.getElementById("<portlet:namespace />neverTable").style.display = "none";
+		document.getElementById("<portlet:namespace />dailyTable").style.display = "none";
+		document.getElementById("<portlet:namespace />weeklyTable").style.display = "none";
+		document.getElementById("<portlet:namespace />monthlyTable").style.display = "none";
+		document.getElementById("<portlet:namespace />yearlyTable").style.display = "none";
+
+		document.getElementById(id).style.display = "block";
+	}
+</script>
+
 <fieldset>
 	<legend><liferay-ui:message key="schedule-event" /></legend>
 
