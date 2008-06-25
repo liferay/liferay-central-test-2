@@ -46,7 +46,6 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.ContactConstants;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.model.Role;
@@ -104,7 +103,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			throw new CompanyWebIdException();
 		}
 
-		validate(webId, virtualHost, aliases, allowWildcard, mx);
+		validate(webId, virtualHost, aliases, mx);
 
 		Company company = checkCompany(webId, mx);
 
@@ -277,6 +276,14 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			contactPersistence.update(defaultContact, false);
 		}
 
+		// System groups
+
+		groupLocalService.checkSystemGroups(companyId);
+
+		// Default password policy
+
+		passwordPolicyLocalService.checkDefaultPasswordPolicy(companyId);
+
 		// System roles
 
 		roleLocalService.checkSystemRoles(companyId);
@@ -287,14 +294,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		roleLocalService.setUserRoles(
 			defaultUser.getUserId(), new long[] {guestRole.getRoleId()});
-
-		// System groups
-
-		groupLocalService.checkSystemGroups(companyId);
-
-		// Default password policy
-
-		passwordPolicyLocalService.checkDefaultPasswordPolicy(companyId);
 
 		// Default admin
 
@@ -483,7 +482,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
 
-		validate(company.getWebId(), virtualHost, aliases, allowWildcard, mx);
+		validate(company.getWebId(), virtualHost, aliases, mx);
 
 		company.setVirtualHost(virtualHost);
 		company.setAllowWildcard(allowWildcard);
@@ -511,7 +510,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
 
-		validate(company.getWebId(), virtualHost, null, false, mx);
+		validate(company.getWebId(), virtualHost, null, mx);
 		validate(name);
 
 		company.setVirtualHost(virtualHost);
@@ -639,11 +638,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	}
 
 	protected void validate(
-			String webId, String virtualHost, String aliases,
-			boolean allowWildcard, String mx)
+			String webId, String virtualHost, String aliases, String mx)
 		throws PortalException, SystemException {
-
-		Company company = getCompanyByWebId(webId);
 
 		if (Validator.isNull(virtualHost)) {
 			throw new CompanyVirtualHostException();
@@ -653,12 +649,44 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			throw new CompanyVirtualHostException();
 		}
+		else if (!Validator.isDomain(virtualHost)) {
+			throw new CompanyVirtualHostException();
+		}
+		else {
+			try {
+				Company virtualHostCompany = getCompanyByVirtualHost(
+					virtualHost);
+
+				if (!virtualHostCompany.getWebId().equals(webId)) {
+					throw new CompanyVirtualHostException();
+				}
+			}
+			catch (NoSuchCompanyException nsce) {
+			}
+
+			try {
+				layoutSetLocalService.getLayoutSet(virtualHost);
+
+				throw new CompanyVirtualHostException();
+			}
+			catch (NoSuchLayoutSetException nslse) {
+			}
+		}
 
 		List<String> aliasList = ListUtil.fromString(aliases);
-		aliasList.add(virtualHost);
 
 		for (String alias : aliasList) {
-			validate(company, alias, allowWildcard);
+			try {
+				Company virtualHostCompany = getCompanyByVirtualHost(alias);
+
+				if (!virtualHostCompany.getWebId().equals(webId)) {
+					throw new CompanyAliasException(
+						"{webId=" + virtualHostCompany.getWebId() + ",alias=" +
+							alias + ",}");
+				}
+			}
+			catch (NoSuchCompanyException nsce) {
+			}
 		}
 
 		if (Validator.isNull(mx)) {
@@ -666,49 +694,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		}
 		else if (!Validator.isDomain(mx)) {
 			throw new CompanyMxException();
-		}
-	}
-
-	protected void validate(
-			Company company, String alias, boolean allowWildcard)
-		throws PortalException, SystemException {
-
-		if (!Validator.isDomain(alias)) {
-			throw new CompanyAliasException(
-				"{exception=DomainNameException,subject=" + alias +
-					",webId=none}");
-		}
-
-		try {
-			Company companyVirtualHost = getCompanyByVirtualHost(alias);
-
-			if (!companyVirtualHost.getWebId().equals(company.getWebId())) {
-				throw new CompanyAliasException(
-					"{exception=CompanyAliasException,subject=" + alias +
-						",webId=" + companyVirtualHost.getWebId() + "}");
-			}
-		}
-		catch (NoSuchCompanyException nsce) {
-		}
-
-		try {
-			LayoutSet layoutSetVirtualHost =
-				layoutSetLocalService.getLayoutSetByVirtualHost(alias);
-
-			if (layoutSetVirtualHost.getCompanyId() != company.getCompanyId()) {
-				throw new CompanyAliasException(
-					"{exception=AlreadyInUseException,subject=" + alias +
-						",webId=none}");
-			}
-			else {
-				if (allowWildcard) {
-					throw new CompanyAliasException(
-						"{exception=LayoutSetSubDomainException,subject=" +
-							alias + ",webId=none}");
-				}
-			}
-		}
-		catch (NoSuchLayoutSetException nslse) {
 		}
 	}
 

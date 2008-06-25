@@ -839,12 +839,6 @@
 			<ref bean="com.liferay.portal.service.persistence.LayoutSetPersistence.impl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.LayoutSetFinder.impl" class="com.liferay.portal.service.persistence.LayoutSetFinderImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.persistence.LayoutSetFinderUtil" class="com.liferay.portal.service.persistence.LayoutSetFinderUtil" lazy-init="true">
-		<property name="finder">
-			<ref bean="com.liferay.portal.service.persistence.LayoutSetFinder.impl" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portal.service.LayoutTemplateLocalService.impl" class="com.liferay.portal.service.impl.LayoutTemplateLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.LayoutTemplateLocalServiceFactory" class="com.liferay.portal.service.LayoutTemplateLocalServiceFactory" lazy-init="true">
 		<property name="service">

@@ -184,8 +184,6 @@ import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.service.persistence.LayoutFinder;
 import com.liferay.portal.service.persistence.LayoutFinderUtil;
 import com.liferay.portal.service.persistence.LayoutPersistence;
-import com.liferay.portal.service.persistence.LayoutSetFinder;
-import com.liferay.portal.service.persistence.LayoutSetFinderUtil;
 import com.liferay.portal.service.persistence.LayoutSetPersistence;
 import com.liferay.portal.service.persistence.LayoutSetUtil;
 import com.liferay.portal.service.persistence.LayoutUtil;
@@ -548,14 +546,6 @@ public abstract class AddressServiceBaseImpl extends PrincipalBean
 	public void setLayoutSetPersistence(
 		LayoutSetPersistence layoutSetPersistence) {
 		this.layoutSetPersistence = layoutSetPersistence;
-	}
-
-	public LayoutSetFinder getLayoutSetFinder() {
-		return layoutSetFinder;
-	}
-
-	public void setLayoutSetFinder(LayoutSetFinder layoutSetFinder) {
-		this.layoutSetFinder = layoutSetFinder;
 	}
 
 	public LayoutTemplateLocalService getLayoutTemplateLocalService() {
@@ -1445,10 +1435,6 @@ public abstract class AddressServiceBaseImpl extends PrincipalBean
 			layoutSetPersistence = LayoutSetUtil.getPersistence();
 		}
 
-		if (layoutSetFinder == null) {
-			layoutSetFinder = LayoutSetFinderUtil.getFinder();
-		}
-
 		if (layoutTemplateLocalService == null) {
 			layoutTemplateLocalService = LayoutTemplateLocalServiceFactory.getImpl();
 		}
@@ -1835,7 +1821,6 @@ public abstract class AddressServiceBaseImpl extends PrincipalBean
 	protected LayoutSetLocalService layoutSetLocalService;
 	protected LayoutSetService layoutSetService;
 	protected LayoutSetPersistence layoutSetPersistence;
-	protected LayoutSetFinder layoutSetFinder;
 	protected LayoutTemplateLocalService layoutTemplateLocalService;
 	protected ListTypeService listTypeService;
 	protected ListTypePersistence listTypePersistence;

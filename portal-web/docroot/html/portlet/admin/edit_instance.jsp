@@ -58,25 +58,11 @@ boolean allowWildcard = BeanParamUtil.getBoolean(company2, request, "allowWildca
 
 	PKParser pkParser = new PKParser(cae.getMessage());
 
-	String exception = pkParser.getString("exception");
-	String subject = pkParser.getString("subject");
 	String webId = pkParser.getString("webId");
+	String alias = pkParser.getString("alias");
 	%>
 
-	<c:choose>
-		<c:when test="<%= exception.equals("AlreadyInUseException") %>">
-			<%= LanguageUtil.format(pageContext, "the-domain-name-x-is-already-in-use", "<tt>" + subject + "</tt>") %>
-		</c:when>
-		<c:when test="<%= exception.equals("CompanyAliasException") %>">
-			<%= LanguageUtil.format(pageContext, "the-domain-name-x-is-already-in-use-by-company-instance-x", new String[] {"<tt>" + subject + "</tt>", "<tt>" + webId + "</tt>"}) %>
-		</c:when>
-		<c:when test="<%= exception.equals("DomainNameException") %>">
-			<%= LanguageUtil.format(pageContext, "x-is-not-a-valid-domain-name", "<tt>" + subject + "</tt>") %>
-		</c:when>
-		<c:when test="<%= exception.equals("LayoutSetSubDomainException") %>">
-			<%= LanguageUtil.format(pageContext, "the-domain-name-or-a-subdomain-of-x-is-already-in-use-by-a-community-virtual-host", "<tt>" + subject + "</tt>") %>
-		</c:when>
-	</c:choose>
+	<%= LanguageUtil.format(pageContext, "the-alias-x-is-already-in-use-by-instance-x", new String[] {alias, webId}) %>
 </liferay-ui:error>
 
 <liferay-ui:error exception="<%= CompanyMxException.class %>" message="please-enter-a-valid-mail-domain" />
