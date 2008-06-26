@@ -314,7 +314,7 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 				</table>
 			</td>
 		</tr>
-		<tr class="gamma">
+		<tr>
 			<c:if test="<%= depth.intValue() > 0 %>">
 				<td></td>
 			</c:if>

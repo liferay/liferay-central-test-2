@@ -87,7 +87,7 @@
 	}
 </script>
 
-<ul class="gamma lfr-component">
+<ul class="lfr-tree lfr-component">
 	<li class="tree-item">
 		<input checked disabled="disabled" type="checkbox" />
 

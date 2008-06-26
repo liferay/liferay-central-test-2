@@ -29,7 +29,7 @@
 <fieldset>
 	<legend><liferay-ui:message key="remote-options" /></legend>
 
-	<ul class="gamma lfr-component">
+	<ul class="lfr-tree lfr-component">
 		<li class="tree-item">
 			<ul id="<portlet:namespace />remoteExportControls">
 				<li class="tree-item">

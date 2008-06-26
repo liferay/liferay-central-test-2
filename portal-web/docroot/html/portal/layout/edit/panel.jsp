@@ -98,7 +98,7 @@ String panelTreeKey = "panelSelectedPortletsPanelTree";
 		function() {
 			new Liferay.Tree(
 				{
-					className: "gamma",
+					className: "lfr-tree",
 					icons: <portlet:namespace />treeIcons,
 					nodes: <portlet:namespace />panelPortletsArray,
 					openNodes: '<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(panelSelectedPortlets)" />',
