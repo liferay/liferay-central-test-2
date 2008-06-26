@@ -14599,11 +14599,7 @@ var SWFObject = deconcept.SWFObject;
 
 jQuery.noConflict();
 
-Liferay = function() {
-	var $ = jQuery;
-
-	return {};
-}();
+Liferay = {};
 
 Liferay.Editor = {};
 
@@ -17312,7 +17308,7 @@ Liferay.Portlet = {
 			p_p_col_id: currentColumnId,
 			p_p_col_pos: portletPosition,
 			doAsUserId: doAsUserId,
-			cmd: Liferay.Constants.ADD
+			cmd: 'add'
 		};
 
 		if (refreshPortletList["_" + portletId]) {
@@ -17455,7 +17451,7 @@ Liferay.Portlet = {
 						p_l_id: plid,
 						p_p_id: portletId,
 						doAsUserId: doAsUserId,
-						cmd: Liferay.Constants.DELETE
+						cmd: 'delete'
 					}
 				}
 			);
