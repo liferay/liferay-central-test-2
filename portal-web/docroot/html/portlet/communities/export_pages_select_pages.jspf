@@ -22,16 +22,37 @@
  */
 %>
 
+<script language="text/javascript">
+	var selectedPages = jQuery('#<portlet:namespace />scope_selected_pages').is(':checked');
+	var publish = <%= publish %>
+
+	if (selectedPages && !publish) {
+		<portlet:namespace />hideTabs();
+	}
+
+	function <portlet:namespace />hideTabs() {
+		jQuery('#<portlet:namespace />tabs2optionsTabsId').hide();
+		jQuery('#<portlet:namespace />tabs2schedulerTabsId').hide();
+		jQuery('#<portlet:namespace />tabs2remote-optionsTabsId').hide();
+	}
+
+	function <portlet:namespace />showTabs() {
+		jQuery('#<portlet:namespace />tabs2optionsTabsId').show();
+		jQuery('#<portlet:namespace />tabs2schedulerTabsId').show();
+		jQuery('#<portlet:namespace />tabs2remote-optionsTabsId').show();
+	}
+</script>
+
 <fieldset <%= (proposalId > 0) ? "style=\"display: none;\"" : "" %>>
 	<legend><liferay-ui:message key="scope" /></legend>
 
 	<c:choose>
 		<c:when test="<%= !publish %>">
-			<input <%= (results.size() == 0) ? "checked":"" %> id="<portlet:namespace />scope_all_pages" name="<portlet:namespace />scope" type="radio" value="all-pages" onClick="Liferay.LayoutExporter.all({pane: '#<portlet:namespace />pane', obj: this, publish: <%= publish %>});">
+			<input <%= (results.size() == 0) ? "checked":"" %> id="<portlet:namespace />scope_all_pages" name="<portlet:namespace />scope" type="radio" value="all-pages" onClick="<portlet:namespace />showTabs(); Liferay.LayoutExporter.all({pane: '#<portlet:namespace />pane', obj: this, publish: <%= publish %>});">
 
 			<label for="<portlet:namespace />scope_all_pages"><liferay-ui:message key="all-pages" /></label><br />
 
-			<input <%= (results.size() > 0) ? "checked" : "" %> id="<portlet:namespace />scope_selected_pages" name="<portlet:namespace />scope" type="radio" value="selected-pages" onClick="Liferay.LayoutExporter.selected({pane: '#<portlet:namespace />pane', obj: this, publish: <%= publish %>});">
+			<input <%= (results.size() > 0) ? "checked" : "" %> id="<portlet:namespace />scope_selected_pages" name="<portlet:namespace />scope" type="radio" value="selected-pages" onClick="<portlet:namespace />hideTabs(); Liferay.LayoutExporter.selected({pane: '#<portlet:namespace />pane', obj: this, publish: <%= publish %>});">
 
 			<label for="<portlet:namespace />scope_selected_pages"><liferay-ui:message key="selected-pages" /></label>
 		</c:when>

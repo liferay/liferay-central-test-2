@@ -33,6 +33,8 @@ String pagesRedirect = ParamUtil.getString(request, "pagesRedirect");
 
 boolean publish = ParamUtil.getBoolean(request, "publish");
 
+boolean localPublishing = ParamUtil.getBoolean(request, "localPublishing", true);
+
 Group selGroup = (Group)request.getAttribute(WebKeys.GROUP);
 
 Group liveGroup = null;
@@ -68,6 +70,10 @@ String treeKey = "liveLayoutsTree";
 if (selGroup.isStagingGroup()) {
 	popupId = "publish-to-live";
 	treeKey = "stageLayoutsTree";
+}
+
+if (!localPublishing) {
+	popupId = "publish-to-remote";
 }
 
 long selPlid = ParamUtil.getLong(request, "selPlid", LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
@@ -139,8 +145,6 @@ LayoutLister layoutLister = new LayoutLister();
 LayoutView layoutView = layoutLister.getLayoutView(selGroupId, privateLayout, rootNodeName, locale);
 
 List layoutList = layoutView.getList();
-
-boolean localPublishing = ParamUtil.getBoolean(request, "localPublishing", true);
 
 PortletURL portletURL = renderResponse.createActionURL();
 
@@ -237,6 +241,7 @@ if (selGroup.isStagingGroup()) {
 			<portlet:param name="tabs1" value="<%= tabs1 %>" />
 			<portlet:param name="pagesRedirect" value="<%= pagesRedirect %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(selGroupId) %>" />
+			<portlet:param name="localPublishing" value="<%= String.valueOf(localPublishing) %>" />
 		</portlet:renderURL>
 
 		<c:choose>
