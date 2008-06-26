@@ -241,13 +241,7 @@ public class EditEventAction extends PortletAction {
 
 				if (dailyType == 0) {
 					int dailyInterval = ParamUtil.getInteger(
-						req, "dailyInterval");
-
-					// LEP-3468
-
-					if (dailyInterval <= 0) {
-						dailyInterval = 1;
-					}
+						req, "dailyInterval", 1);
 
 					recurrence.setInterval(dailyInterval);
 				}
@@ -264,11 +258,7 @@ public class EditEventAction extends PortletAction {
 			}
 			else if (recurrenceType == Recurrence.WEEKLY) {
 				int weeklyInterval = ParamUtil.getInteger(
-					req, "weeklyInterval");
-
-				if (weeklyInterval <= 0) {
-					weeklyInterval = 1;
-				}
+					req, "weeklyInterval", 1);
 
 				recurrence.setInterval(weeklyInterval);
 
@@ -297,11 +287,7 @@ public class EditEventAction extends PortletAction {
 					recurrence.setByMonthDay(new int[] {monthlyDay});
 
 					int monthlyInterval = ParamUtil.getInteger(
-						req, "monthlyInterval0");
-
-					if (monthlyInterval <= 0) {
-						monthlyInterval = 1;
-					}
+						req, "monthlyInterval0", 1);
 
 					recurrence.setInterval(monthlyInterval);
 				}
@@ -315,11 +301,7 @@ public class EditEventAction extends PortletAction {
 					recurrence.setByDay(dayPos);
 
 					int monthlyInterval = ParamUtil.getInteger(
-						req, "monthlyInterval1");
-
-					if (monthlyInterval <= 0) {
-						monthlyInterval = 1;
-					}
+						req, "monthlyInterval1", 1);
 
 					recurrence.setInterval(monthlyInterval);
 				}
@@ -335,11 +317,7 @@ public class EditEventAction extends PortletAction {
 					recurrence.setByMonthDay(new int[] {yearlyDay});
 
 					int yearlyInterval = ParamUtil.getInteger(
-						req, "yearlyInterval0");
-
-					if (yearlyInterval <= 0) {
-						yearlyInterval = 1;
-					}
+						req, "yearlyInterval0", 1);
 
 					recurrence.setInterval(yearlyInterval);
 				}
@@ -356,11 +334,7 @@ public class EditEventAction extends PortletAction {
 					recurrence.setByMonth(new int[] {yearlyMonth});
 
 					int yearlyInterval = ParamUtil.getInteger(
-						req, "yearlyInterval1");
-
-					if (yearlyInterval <= 0) {
-						yearlyInterval = 1;
-					}
+						req, "yearlyInterval1", 1);
 
 					recurrence.setInterval(yearlyInterval);
 				}
