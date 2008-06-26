@@ -52,6 +52,10 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.liferay.portal.deploy.hot.HookHotDeployListener">
+		<priority value="DEBUG" />
+	</category>
+
 	<category name="com.liferay.portal.deploy.hot.PluginPackageHotDeployListener">
 		<priority value="ERROR" />
 	</category>

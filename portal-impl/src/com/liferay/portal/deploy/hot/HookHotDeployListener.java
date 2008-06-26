@@ -24,6 +24,8 @@ package com.liferay.portal.deploy.hot;
 
 import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.configuration.Configuration;
+import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.events.Action;
@@ -32,8 +34,6 @@ import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.OrderedProperties;
-import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -88,12 +88,16 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 		}
 	}
 
-	protected void checkPortalProperties(OrderedProperties portalProperties)
+	protected void destroyPortalPropertiesConfiguration(
+			Configuration portalPropertiesConfiguration)
 		throws Exception {
-	}
 
-	protected void destroyPortalProperties(Properties portalProperties)
-		throws Exception {
+		Properties portalProperties =
+			portalPropertiesConfiguration.getProperties();
+
+		if (portalProperties.size() == 0) {
+			return;
+		}
 
 		for (String fieldName : _PROPS_KEYS_BOOLEAN) {
 			String key = StringUtil.replace(
@@ -237,29 +241,31 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 		String portalPropertiesLocation = root.elementText("portal-properties");
 
 		if (Validator.isNotNull(portalPropertiesLocation)) {
-			OrderedProperties portalProperties = null;
+			Configuration portalPropertiesConfiguration = null;
 
 			try {
-				if (_log.isInfoEnabled()) {
-					_log.info("Reading " + portalPropertiesLocation);
+				String name = portalPropertiesLocation;
+
+				int pos = name.lastIndexOf(".properties");
+
+				if (pos != -1) {
+					name = name.substring(0, pos);
 				}
 
-				String portalPropertiesContent = StringUtil.read(
-					portletClassLoader, portalPropertiesLocation);
-
-				portalProperties = new OrderedProperties();
-
-				PropertiesUtil.load(portalProperties, portalPropertiesContent);
+				portalPropertiesConfiguration =
+					ConfigurationFactoryUtil.getConfiguration(
+						portletClassLoader, name);
 			}
 			catch (Exception e) {
-				_log.error("Unable to read " + portalPropertiesLocation);
+				_log.error("Unable to read " + portalPropertiesLocation, e);
 			}
 
-			if ((portalProperties != null) && (portalProperties.size() > 0)) {
-				_portalPropertiesMap.put(servletContextName, portalProperties);
+			if (portalPropertiesConfiguration != null) {
+				_portalPropertiesConfigurationMap.put(
+					servletContextName, portalPropertiesConfiguration);
 
-				checkPortalProperties(portalProperties);
-				initPortalProperties(portalProperties);
+				initPortalPropertiesConfiguration(
+					portalPropertiesConfiguration);
 			}
 		}
 
@@ -300,11 +306,11 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			}
 		}
 
-		Properties portalProperties = _portalPropertiesMap.get(
-			servletContextName);
+		Configuration portalPropertiesConfiguration =
+			_portalPropertiesConfigurationMap.get(servletContextName);
 
-		if (portalProperties != null) {
-			destroyPortalProperties(portalProperties);
+		if (portalPropertiesConfiguration != null) {
+			destroyPortalPropertiesConfiguration(portalPropertiesConfiguration);
 		}
 
 		if (_log.isInfoEnabled()) {
@@ -378,8 +384,26 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 		return modelListener;
 	}
 
-	protected void initPortalProperties(Properties portalProperties)
+	protected void initPortalPropertiesConfiguration(
+			Configuration portalPropertiesConfiguration)
 		throws Exception {
+
+		Properties portalProperties =
+			portalPropertiesConfiguration.getProperties();
+
+		if (portalProperties.size() == 0) {
+			return;
+		}
+
+		PropsUtil.addProperties(portalProperties);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Expected locales " +
+					portalProperties.getProperty(PropsKeys.LOCALES));
+			_log.debug(
+				"Actual locales " + PropsUtil.get(PropsKeys.LOCALES));
+		}
 
 		for (String fieldName : _PROPS_KEYS_BOOLEAN) {
 			String key = StringUtil.replace(
@@ -480,7 +504,7 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 		new HashMap<String, List<Object>>();
 	private Map<String, List<ModelListener>> _modelListenersMap =
 		new HashMap<String, List<ModelListener>>();
-	private Map<String, Properties> _portalPropertiesMap =
-		new HashMap<String, Properties>();
+	private Map<String, Configuration> _portalPropertiesConfigurationMap =
+		new HashMap<String, Configuration>();
 
 }
