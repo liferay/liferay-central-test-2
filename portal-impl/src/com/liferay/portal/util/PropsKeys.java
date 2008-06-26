@@ -671,17 +671,7 @@ public class PropsKeys {
 
 	public static final String LUCENE_STORE_TYPE = "lucene.store.type";
 
-	public static final String MAIL_ACCOUNT_FINDER = "mail.account.finder";
-
-	public static final String MAIL_ACCOUNT_FINDER_PASSWORD = "mail.account.finder.password";
-
-	public static final String MAIL_ATTACHMENTS_MAX_SIZE = "mail.attachments.max.size";
-
 	public static final String MAIL_AUDIT_TRAIL = "mail.audit.trail";
-
-	public static final String MAIL_BOX_STYLE = "mail.box.style";
-
-	public static final String MAIL_DRAFTS_NAME = "mail.drafts.name";
 
 	public static final String MAIL_HOOK_CYRUS_ADD_USER = "mail.hook.cyrus.add.user";
 
@@ -715,23 +705,9 @@ public class PropsKeys {
 
 	public static final String MAIL_HOOK_SHELL_SCRIPT = "mail.hook.shell.script";
 
-	public static final String MAIL_INBOX_NAME = "mail.inbox.name";
-
-	public static final String MAIL_JUNK_MAIL_WARNING_SIZE = "mail.junk-mail.warning.size";
-
 	public static final String MAIL_MX_UPDATE = "mail.mx.update";
 
-	public static final String MAIL_RECIPIENT_FINDER = "mail.recipient.finder";
-
-	public static final String MAIL_SENT_NAME = "mail.sent.name";
-
 	public static final String MAIL_SMTP_DEBUG = "mail.smtp.debug";
-
-	public static final String MAIL_SPAM_NAME = "mail.spam.name";
-
-	public static final String MAIL_TRASH_NAME = "mail.trash.name";
-
-	public static final String MAIL_TRASH_WARNING_SIZE = "mail.trash.warning.size";
 
 	public static final String MESSAGE_BOARDS_ALLOW_ANONYMOUS_POSTING = "message.boards.anonymous.posting.enabled";
 

@@ -32,7 +32,6 @@ import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.mail.util.MailSessionLock;
 
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
@@ -95,8 +94,6 @@ public class PortalSessionListener implements HttpSessionListener {
 			if (CompanyThreadLocal.getCompanyId() == 0) {
 				setCompanyId(userId);
 			}
-
-			MailSessionLock.cleanUp(ses);
 
 			LiveUsers.signOut(ses.getId(), userId);
 		}
