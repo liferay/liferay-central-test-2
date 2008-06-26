@@ -51,13 +51,7 @@ var LayoutConfiguration = {
 		var doAsUserId = themeDisplay.getDoAsUserIdEncoded();
 
 		if (!instance.menu) {
-			var url =
-				themeDisplay.getPathMain() +
-				'/portal/render_portlet' +
-				'?p_l_id=' + plid +
-				'&p_p_id=' + ppid +
-				'&p_p_state=exclusive' +
-				'&doAsUserId=' + doAsUserId;
+			var url = themeDisplay.getPathMain() + '/portal/render_portlet';
 
 			var popupWidth = 250;
 
@@ -86,6 +80,12 @@ var LayoutConfiguration = {
 			jQuery.ajax(
 				{
 					url: url,
+					data: {
+						doAsUserId: doAsUserId,
+						p_l_id: plid,
+						p_p_id: ppid,
+						p_p_state: 'exclusive'
+					},
 					success: function(message) {
 						instance._dialog.html(message);
 						instance._loadContent();

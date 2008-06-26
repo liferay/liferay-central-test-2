@@ -26,6 +26,7 @@ function addPortletHTML(options) {
 	var portletBoundary = null;
 
 	var url = options.url;
+	var data = options.data;
 	var placeHolder = options.placeHolder;
 	var beforePortletLoaded = options.beforePortletLoaded;
 	var onComplete = options.onComplete;
@@ -87,6 +88,7 @@ function addPortletHTML(options) {
 	jQuery.ajax(
 		{
 			url: url,
+			data: data,
 			complete: function(xHR) {
 				addPortletReturn(xHR.responseText);
 			}
