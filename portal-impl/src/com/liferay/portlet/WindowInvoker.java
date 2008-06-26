@@ -58,7 +58,7 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.Time;
+import com.liferay.portal.kernel.util.Time;
 
 import com.sun.ccpp.ProfileFactoryImpl;
 import com.sun.portal.container.ChannelMode;
