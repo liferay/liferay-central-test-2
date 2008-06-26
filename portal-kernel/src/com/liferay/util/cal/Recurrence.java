@@ -345,7 +345,7 @@ public class Recurrence implements Serializable {
 	 *
 	 */
 	public void setInterval(int intr) {
-		interval = intr;
+		interval = (intr > 0) ? intr : 1;
 	}
 
 	/**
