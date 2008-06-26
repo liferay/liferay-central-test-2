@@ -38,7 +38,7 @@
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
 
-package com.liferay.portlet;
+package com.liferay.portal.portletcontainer;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -54,6 +54,8 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portlet.PortletPreferencesWrapper;
 
 import com.sun.portal.container.EntityID;
 import com.sun.portal.container.PortletLang;

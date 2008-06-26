@@ -38,7 +38,7 @@
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
 
-package com.liferay.portlet;
+package com.liferay.portal.portletcontainer;
 
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.QNameUtil;

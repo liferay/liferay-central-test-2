@@ -25,6 +25,7 @@ package com.liferay.portlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletConstants;
+import com.liferay.portal.portletcontainer.WindowInvoker;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
 

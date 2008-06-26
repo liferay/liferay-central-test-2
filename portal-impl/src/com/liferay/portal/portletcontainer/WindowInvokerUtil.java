@@ -38,66 +38,73 @@
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
 
-package com.liferay.portlet;
+package com.liferay.portal.portletcontainer;
 
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletConstants;
 
-import com.sun.portal.container.ChannelMode;
-import com.sun.portal.container.ChannelState;
-import com.sun.portal.container.ChannelURL;
-import com.sun.portal.container.ChannelURLFactory;
+import com.sun.portal.container.EntityID;
+import com.sun.portal.container.PortletID;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="PortletWindowURLFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="WindowInvokerUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Deepak Gothe
  *
  */
-public class PortletWindowURLFactory implements ChannelURLFactory {
+public class WindowInvokerUtil {
 
-	public PortletWindowURLFactory(HttpServletRequest req,
-			Portlet portletModel, ChannelMode newPortletWindowMode,
-			ChannelState newWindowState, long plid) {
-		_req = req;
-		_portlet = portletModel;
-		_plid = plid;
-		_windowState = newWindowState;
-		_portletMode = newPortletWindowMode;
+	/**
+	 * Creates the EntityID for the given Portlet and portletId.
+	 *
+	 * @param portletModel		The Portlet Object
+	 * @param portletId		the id of the portlet
+	 *
+	 * @return the EntityID for the given Portlet and portletId.
+	 */
+	public static EntityID getEntityID(Portlet portletModel, String portletId) {
+
+		String portletAppName =
+			portletModel.getPortletApp().getServletContextName();
+		String portletName = portletModel.getPortletName();
+		// Sometimes portletAppName or portletName or both are null, in that
+		// case extract them from the portletId. Need to investigate the cause
+		// of them being null
+		// portletId = portletName_WAR_portletAppName_INSTANCE_xyz
+		if (portletName == null || portletAppName == null) {
+			int index = portletId.indexOf(PortletConstants.WAR_SEPARATOR);
+			if (index != -1) {
+				if (portletName == null) {
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+								"Portlet Name is null for the Id:" +
+									portletId);
+					}
+					portletName = portletId.substring(0, index);
+				}
+				if (portletAppName == null) {
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+								"Portlet App Name is null for the Id:" +
+									portletId);
+					}
+					portletAppName = portletId.substring(index + 5);
+					int indexNext = portletAppName.indexOf("_INSTANCE_");
+					if (indexNext != -1) {
+						portletAppName = portletAppName.substring(0, indexNext);
+					}
+				}
+			}
+		}
+
+		EntityID portletEntityId = new EntityID(
+			new PortletID(portletAppName, portletName));
+		portletEntityId.setPortletWindowName(portletId);
+		return portletEntityId;
 	}
 
-	public ChannelURL createChannelURL() {
-		return new PortletWindowURL(
-			_req, _portlet, _portletMode, _windowState, _plid);
-	}
-
-	public String encodeURL(
-			HttpServletRequest req, HttpServletResponse res, String url) {
-		return res.encodeURL(url);
-	}
-
-	public String getRenderTemplate() {
-		throw new RuntimeException("Method not implemented");
-	}
-
-	public String getActionTemplate() {
-		throw new RuntimeException("Method not implemented");
-	}
-
-	public String getResourceTemplate() {
-		throw new RuntimeException("Method not implemented");
-	}
-
-	public String getSecurityErrorURL() {
-		throw new RuntimeException("Method not implemented");
-	}
-
-	private HttpServletRequest _req;
-	private Portlet _portlet;
-	private long _plid;
-	private ChannelState _windowState;
-	private ChannelMode _portletMode;
-
+	private static Log _log = LogFactory.getLog(WindowInvokerUtil.class);
 }

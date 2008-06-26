@@ -39,7 +39,7 @@
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
 
-package com.liferay.portlet;
+package com.liferay.portal.portletcontainer;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -49,6 +49,7 @@ import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.PortletSessionImpl;
 
 import com.sun.portal.container.ChannelMode;
 import com.sun.portal.container.ChannelState;

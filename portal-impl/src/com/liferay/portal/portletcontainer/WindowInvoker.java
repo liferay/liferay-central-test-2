@@ -39,7 +39,7 @@
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
 
-package com.liferay.portlet;
+package com.liferay.portal.portletcontainer;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -59,6 +59,20 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.ActionRequestImpl;
+import com.liferay.portlet.ActionResponseImpl;
+import com.liferay.portlet.CustomUserAttributes;
+import com.liferay.portlet.InvokerPortlet;
+import com.liferay.portlet.InvokerPortletResponse;
+import com.liferay.portlet.PortletConfigImpl;
+import com.liferay.portlet.PortletContextBag;
+import com.liferay.portlet.PortletContextBagPool;
+import com.liferay.portlet.PortletRequestImpl;
+import com.liferay.portlet.RenderRequestImpl;
+import com.liferay.portlet.RenderResponseImpl;
+import com.liferay.portlet.ResourceRequestImpl;
+import com.liferay.portlet.ResourceResponseImpl;
+import com.liferay.portlet.UserAttributes;
 
 import com.sun.ccpp.ProfileFactoryImpl;
 import com.sun.portal.container.ChannelMode;
