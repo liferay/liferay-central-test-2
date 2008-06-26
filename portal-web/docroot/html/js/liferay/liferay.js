@@ -1,10 +1,6 @@
 jQuery.noConflict();
 
-Liferay = function() {
-	var $ = jQuery;
-
-	return {};
-}();
+Liferay = {};
 
 Liferay.Editor = {};
 
