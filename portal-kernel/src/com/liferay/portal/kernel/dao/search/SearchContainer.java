@@ -51,8 +51,8 @@ public class SearchContainer {
 
 	public SearchContainer(
 		PortletRequest req, DisplayTerms displayTerms, DisplayTerms searchTerms,
-		String curParam, int delta, PortletURL iteratorURL, List headerNames,
-		String emptyResultsMessage) {
+		String curParam, int delta, PortletURL iteratorURL,
+		List<String> headerNames, String emptyResultsMessage) {
 
 		_displayTerms = displayTerms;
 		_searchTerms = searchTerms;
@@ -81,7 +81,7 @@ public class SearchContainer {
 				ParamUtil.getBoolean(req, DisplayTerms.AND_OPERATOR, true)));
 
 		if (headerNames != null) {
-			_headerNames = new ArrayList(headerNames.size());
+			_headerNames = new ArrayList<String>(headerNames.size());
 
 			_headerNames.addAll(headerNames);
 		}
@@ -146,15 +146,15 @@ public class SearchContainer {
 		_calculateStartAndEnd();
 	}
 
-	public List getResults() {
+	public List<Object> getResults() {
 		return _results;
 	}
 
-	public void setResults(List results) {
+	public void setResults(List<Object> results) {
 		_results = results;
 	}
 
-	public List getResultRows() {
+	public List<Object> getResultRows() {
 		return _resultRows;
 	}
 
@@ -166,19 +166,19 @@ public class SearchContainer {
 		_iteratorURL = iteratorURL;
 	}
 
-	public List getHeaderNames() {
+	public List<String> getHeaderNames() {
 		return _headerNames;
 	}
 
-	public void setHeaderNames(List headerNames) {
+	public void setHeaderNames(List<String> headerNames) {
 		_headerNames = headerNames;
 	}
 
-	public Map getOrderableHeaders() {
+	public Map<String, String> getOrderableHeaders() {
 		return _orderableHeaders;
 	}
 
-	public void setOrderableHeaders(Map orderableHeaders) {
+	public void setOrderableHeaders(Map<String, String> orderableHeaders) {
 		_orderableHeaders = orderableHeaders;
 	}
 
@@ -250,11 +250,11 @@ public class SearchContainer {
 	private int _end;
 	private int _resultEnd;
 	private int _total;
-	private List _results = new ArrayList();
-	private List _resultRows = new ArrayList();
+	private List<Object> _results = new ArrayList<Object>();
+	private List<Object> _resultRows = new ArrayList<Object>();
 	private PortletURL _iteratorURL;
-	private List _headerNames;
-	private Map _orderableHeaders;
+	private List<String> _headerNames;
+	private Map<String, String> _orderableHeaders;
 	private String _orderByCol;
 	private String _orderByType;
 	private OrderByComparator _orderByComparator;

@@ -58,7 +58,7 @@ public class ResultRow {
 		_primaryKey = primaryKey;
 		_pos = pos;
 		_bold = bold;
-		_entries = new ArrayList();
+		_entries = new ArrayList<Object>();
 	}
 
 	public Object getObject() {
@@ -109,13 +109,13 @@ public class ResultRow {
 		_classHoverName = classHoverName;
 	}
 
-	public List getEntries() {
+	public List<Object> getEntries() {
 		return _entries;
 	}
 
 	public Object getParameter(String param) {
 		if (_params == null) {
-			_params = new HashMap();
+			_params = new HashMap<String, Object>();
 		}
 
 		return _params.get(param);
@@ -123,7 +123,7 @@ public class ResultRow {
 
 	public void setParameter(String param, Object value) {
 		if (_params == null) {
-			_params = new HashMap();
+			_params = new HashMap<String, Object>();
 		}
 
 		_params.put(param, value);
@@ -389,7 +389,7 @@ public class ResultRow {
 	private boolean _restricted;
 	private String _className;
 	private String _classHoverName;
-	private List _entries;
-	private Map _params;
+	private List<Object> _entries;
+	private Map<String, Object> _params;
 
 }

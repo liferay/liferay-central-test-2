@@ -79,13 +79,15 @@ public class XMLMerger {
 		_mergeDuplicateElements(root, getElementComparator());
 	}
 
-	private void _addChildren(Element first, Collection childrenToJoin) {
-		Collection clones = new Vector();
+	private void _addChildren(
+		Element first, Collection<Element> childrenToJoin) {
 
-		Iterator itr = childrenToJoin.iterator();
+		Collection<Element> clones = new Vector<Element>();
+
+		Iterator<Element> itr = childrenToJoin.iterator();
 
 		while (itr.hasNext()) {
-			clones.add(((Element)itr.next()).clone());
+			clones.add((Element)itr.next().clone());
 		}
 
 		first.elements().addAll(clones);
@@ -94,12 +96,12 @@ public class XMLMerger {
 	}
 
 	private boolean _containsObjectEqualTo(
-		Element example, List list, ElementComparator comparator) {
+		Element example, List<Element> list, ElementComparator comparator) {
 
-		Iterator itr = list.iterator();
+		Iterator<Element> itr = list.iterator();
 
 		while (itr.hasNext()) {
-			Element candidate = (Element)itr.next();
+			Element candidate = itr.next();
 
 			if (comparator.compare(example, candidate) == 0) {
 				return true;
@@ -110,12 +112,12 @@ public class XMLMerger {
 	}
 
 	private Element _findObjectEqualTo(
-		Element example, List list, ElementComparator comparator) {
+		Element example, List<Element> list, ElementComparator comparator) {
 
-		Iterator itr = list.iterator();
+		Iterator<Element> itr = list.iterator();
 
 		while (itr.hasNext()) {
-			Element candidate = (Element)itr.next();
+			Element candidate = itr.next();
 
 			if (comparator.compare(example, candidate) == 0) {
 				return candidate;
@@ -129,20 +131,20 @@ public class XMLMerger {
 		Element el, ElementComparator comparator) {
 
 		if (el.elements().size() > 0) {
-			List children = el.elements();
+			List<Element> children = el.elements();
 
-			List originals = new ArrayList();
-			List duplicates = new ArrayList();
+			List<Element> originals = new ArrayList<Element>();
+			List<Element> duplicates = new ArrayList<Element>();
 
 			for (int i = 0; i < children.size(); i++) {
-				Element child = (Element)children.get(i);
+				Element child = children.get(i);
 
 				if (_containsObjectEqualTo(child, originals, comparator)) {
 					if (_descriptor.canJoinChildren(child)) {
 						Element first =
 							_findObjectEqualTo(child, originals, comparator);
 
-						Collection childrenToJoin = child.elements();
+						Collection<Element> childrenToJoin = child.elements();
 
 						_addChildren(first, childrenToJoin);
 					}
@@ -154,16 +156,14 @@ public class XMLMerger {
 				}
 			}
 
-			for (int i = 0; i < duplicates.size(); i++) {
-				Element duplicate = (Element)duplicates.get(i);
-
+			for (Element duplicate : duplicates) {
 				duplicate.detach();
 			}
 
-			Iterator itr = originals.iterator();
+			Iterator<Element> itr = originals.iterator();
 
 			while (itr.hasNext()) {
-				Element child = (Element)itr.next();
+				Element child = itr.next();
 
 				_mergeDuplicateElements(child, comparator);
 			}
@@ -177,15 +177,15 @@ public class XMLMerger {
 			return;
 		}
 
-		List elements = new ArrayList();
+		List<Element> elements = new ArrayList<Element>();
 
 		for (int i = 0; i < orderedChildrenNames.length; i++) {
 			elements.addAll(parent.elements(orderedChildrenNames[i]));
 		}
 
-		for (int i = 0; i < elements.size(); i++) {
-			Element el = (Element)elements.get(i);
+		for (Element el : elements) {
 			el.detach();
+
 			parent.add(el);
 		}
 	}
