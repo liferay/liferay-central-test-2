@@ -114,20 +114,20 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 </script>
 
 <%
-int[] openNodes = StringUtil.split(SessionTreeJSClicks.getOpenNodes(request, treeId), 0);
+long[] openNodes = StringUtil.split(SessionTreeJSClicks.getOpenNodes(request, treeId), 0L);
 
 Arrays.sort(openNodes);
 
-int[] selectedNodes = StringUtil.split(SessionTreeJSClicks.getOpenNodes(request, treeId + "Selected"), 0);
+long[] selectedNodes = StringUtil.split(SessionTreeJSClicks.getOpenNodes(request, treeId + "Selected"), 0L);
 
 Arrays.sort(selectedNodes);
 
 StringMaker sm = new StringMaker();
 
-_buildLayoutsTreeHTML(groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, new IntegerWrapper(1), openNodes, selectableTree, selectedNodes, portletURL, themeDisplay, sm);
+_buildLayoutsTreeHTML(groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, new LongWrapper(1), openNodes, selectableTree, selectedNodes, portletURL, themeDisplay, sm);
 %>
 
-<div class="lfr-tree" id="<portlet:namespace /><%= treeId %>_tree-output">
+<div class="lfr-tree" id="<portlet:namespace /><%= treeId %>Output">
 	<ul class="lfr-component">
 		<li class="root-container">
 			<a class="community" href="<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>"><img height="20" src="<%= themeDisplay.getPathThemeImages() %>/trees/root.png" width="19" /><span><%= rootNodeName %></span></a>
@@ -146,11 +146,9 @@ _buildLayoutsTreeHTML(groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAY
 					nodes: <portlet:namespace />layoutArray,
 					nodeIds: <portlet:namespace />nodeIds,
 					openNodes: '<%= SessionTreeJSClicks.getOpenNodes(request, treeId) %>',
-					outputId: '#<portlet:namespace /><%= treeId %>_tree-output',
+					outputId: '#<portlet:namespace /><%= treeId %>Output',
 					preRendered: true,
-					<c:if test="<%= selectableTree %>">
-						selectable: true,
-					</c:if>
+					selectable: <%= selectableTree %>,
 					treeId: '<%= treeId %>'
 				}
 			);
@@ -159,7 +157,7 @@ _buildLayoutsTreeHTML(groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAY
 </script>
 
 <%!
-private void _buildLayoutsTreeHTML(long groupId, boolean privateLayout, long parentLayoutId, IntegerWrapper nodeId, int[] openNodes, boolean selectableTree, int[] selectedNodes, PortletURL portletURL, ThemeDisplay themeDisplay, StringMaker sm) throws Exception {
+private void _buildLayoutsTreeHTML(long groupId, boolean privateLayout, long parentLayoutId, LongWrapper nodeId, long[] openNodes, boolean selectableTree, long[] selectedNodes, PortletURL portletURL, ThemeDisplay themeDisplay, StringMaker sm) throws Exception {
 	PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
 	List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(groupId, privateLayout, parentLayoutId);
@@ -218,7 +216,7 @@ private void _buildLayoutsTreeHTML(long groupId, boolean privateLayout, long par
 		if (selectableTree && Validator.isNotNull(selectedNodes)) {
 			sm.append("<img class=\"select-state\" height=\"20\" src=\"");
 
-			if (Arrays.binarySearch(selectedNodes, (int)layout.getPlid()) >= 0) {
+			if (Arrays.binarySearch(selectedNodes, layout.getPlid()) >= 0) {
 				sm.append(themeDisplay.getPathThemeImages() + "/trees/checked.png");
 			}
 			else {

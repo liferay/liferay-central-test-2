@@ -54,8 +54,6 @@
 <div id="<portlet:namespace />pane" style="border-color: #CCC; border-style: solid; border-width: 0px 1px 1px 1px; <%= (results.size() == 0) ? "display: none;" : "" %> height: 380px; overflow: auto; padding: 5px;">
 	<c:choose>
 		<c:when test="<%= !publish %>">
-			<div id="<portlet:namespace />select-tree-output" style="margin: 4px;"></div>
-
 			<liferay-util:include page="/html/portlet/communities/tree_js.jsp">
 				<liferay-util:param name="selectableTree" value="1" />
 				<liferay-util:param name="treeId" value="<%= treeKey %>" />

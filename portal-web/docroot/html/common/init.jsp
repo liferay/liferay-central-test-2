@@ -105,6 +105,7 @@
 <%@ page import="com.liferay.portal.kernel.util.KeyValuePairComparator" %>
 <%@ page import="com.liferay.portal.kernel.util.ListUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.LocaleUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.LongWrapper" %>
 <%@ page import="com.liferay.portal.kernel.util.ObjectValuePair" %>
 <%@ page import="com.liferay.portal.kernel.util.ObjectValuePairComparator" %>
 <%@ page import="com.liferay.portal.kernel.util.OrderByComparator" %>
