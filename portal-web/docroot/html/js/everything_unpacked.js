@@ -14635,7 +14635,7 @@ Liferay.Service = {
 
 	classNameSuffix: "ServiceJSON",
 
-	ajax: function(params, callback) {
+	ajax: function(options, callback) {
 		var instance = this;
 
 		var serviceUrl = instance.actionUrl;
@@ -14644,14 +14644,14 @@ Liferay.Service = {
 			serviceUrl = instance.tunnelUrl;
 		}
 
-		params.serviceParameters = Liferay.Service.getParameters(params);
+		options.serviceParameters = Liferay.Service.getParameters(options);
 
 		if (callback) {
 			jQuery.ajax(
 				{
 					type: 'GET',
 					url: serviceUrl,
-					data: params,
+					data: options,
 					dataType: 'json',
 					beforeSend: function(xHR) {
 						if (Liferay.ServiceAuth.header) {
@@ -14666,7 +14666,7 @@ Liferay.Service = {
 			var xHR = jQuery.ajax(
 				{
 					url: serviceUrl,
-					data: params,
+					data: options,
 					dataType: 'json',
 					async: false
 				}
@@ -14676,10 +14676,10 @@ Liferay.Service = {
 		}
 	},
 
-	getParameters: function(params) {
+	getParameters: function(options) {
 		var serviceParameters = "";
 
-		for (var key in params) {
+		for (var key in options) {
 			if ((key != "serviceClassName") && (key != "serviceMethodName") && (key != "serviceParameterTypes")) {
 				serviceParameters += key + ",";
 			}
@@ -15062,28 +15062,37 @@ Liferay.Util = {
 	},
 
 	addInputType: function(el) {
-		var item;
+		var instance = this;
+
+		instance.addInputType = function() {
+		};
 
 		if (Liferay.Browser.is_ie && Liferay.Browser.version() < 7) {
-			if (el) {
-				if (typeof el == 'object') {
-					item = jQuery(el);
+			instance.addInputType = function(el) {
+				var item;
+
+				if (el) {
+					if (typeof el == 'object') {
+						item = jQuery(el);
+					}
+					else {
+						item = jQuery('#' + el);
+					}
 				}
 				else {
-					item = jQuery('#' + el);
+					item = document.body;
 				}
-			}
-			else {
-				item = document.body;
-			}
 
-			jQuery("input", item).each(function() {
-				var current = jQuery(this);
-				var type = this.type || "text";
+				jQuery("input", item).each(function() {
+					var current = jQuery(this);
+					var type = this.type || "text";
 
-				current.addClass(type);
-			});
+					current.addClass(type);
+				});
+			};
 		}
+
+		return instance.addInputType(el);
 	},
 
 	addParams: function(params, url) {
@@ -16248,6 +16257,34 @@ Liferay.Layout = {
 		instance.layoutHandler.refresh(portletBound);
 	},
 
+	showTemplates: function() {
+		var instance = this;
+
+		var url = themeDisplay.getPathMain() + '/layout_configuration/templates';
+
+		jQuery.ajax(
+			{
+				url: url,
+				data: {
+					p_l_id: themeDisplay.getPlid(),
+					doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+					redirect: Liferay.currentURLEncoded
+				},
+				success: function(response) {
+					Liferay.Popup(
+						{
+							width: 700,
+							modal: true,
+							message: response,
+							position: ['center', 100],
+							title: Liferay.Language.get('layout')
+						}
+					);
+				}
+			}
+		);
+	},
+
 	_findIndex: function(portlet, parentNode) {
 		var instance = this;
 
@@ -17235,6 +17272,160 @@ Liferay.Portlet = {
 	ajaxList: {},
 	list: {},
 
+	add: function(options) {
+		var instance = this;
+
+		var plid = options.plid || themeDisplay.getPlid();
+		var portletId = options.portletId;
+		var doAsUserId = options.doAsUserId || themeDisplay.getDoAsUserIdEncoded();
+		var placeHolder = jQuery(options.placeHolder || '<div class="loading-animation" />');
+		var positionOptions = options.positionOptions;
+		var beforePortletLoaded = options.beforePortletLoaded;
+		var onComplete = options.onComplete;
+
+		var refreshPortletList = getRefreshPortletList();
+
+		var container = jQuery('.lfr-portlet-column:first');
+
+		if (!container.length) {
+			return;
+		}
+
+		var portletPosition = 0;
+		var currentColumnId = 'column-1';
+
+		if (options.placeHolder) {
+			var column = placeHolder.parent();
+
+			placeHolder.addClass('portlet-boundary');
+
+			portletPosition = column.find('.portlet-boundary').index(placeHolder[0]);
+
+			currentColumnId = Liferay.Util.getColumnId(column[0].id);
+		}
+
+		var url = themeDisplay.getPathMain() + '/portal/update_layout';
+
+		var data = {
+			p_l_id: plid,
+			p_p_id: portletId,
+			p_p_col_id: currentColumnId,
+			p_p_col_pos: portletPosition,
+			doAsUserId: doAsUserId,
+			cmd: Liferay.Constants.ADD
+		};
+
+		if (refreshPortletList["_" + portletId]) {
+			data.referer = Liferay.currentURLEncoded;
+			data.refresh = 1;
+
+			if (plid) {
+				location.href = url + '?' + jQuery.param(data);
+			}
+		}
+		else {
+			var firstPortlet = container.find('.portlet-boundary:first');
+			var hasStaticPortlet = (firstPortlet.length && firstPortlet[0].isStatic);
+
+			if (!options.placeHolder && !options.plid) {
+				if (!hasStaticPortlet) {
+					container.prepend(placeHolder);
+				}
+				else {
+					firstPortlet.after(placeHolder);
+				}
+			}
+
+			if (themeDisplay.isFreeformLayout()) {
+				container.prepend(placeHolder);
+			}
+
+			data.currentURL = Liferay.currentURLEncoded;
+
+			return instance.addHTML(
+				{
+					beforePortletLoaded: beforePortletLoaded,
+					data: data,
+					url: url,
+					placeHolder: placeHolder[0],
+					onComplete: onComplete
+				}
+			);
+		}
+	},
+
+	addHTML: function(options) {
+		var instance = this;
+
+		var portletBoundary = null;
+
+		var url = options.url;
+		var data = options.data;
+		var placeHolder = options.placeHolder;
+		var beforePortletLoaded = options.beforePortletLoaded;
+		var onComplete = options.onComplete;
+
+		var addPortletReturn = function(html) {
+			var container = placeHolder.parentNode;
+
+			var portletBound = jQuery('<div></div>')[0];
+
+			portletBound.innerHTML = html;
+			portletBound = portletBound.firstChild;
+
+			var portletId = Liferay.Util.getPortletId(portletBound.id);
+
+			portletBound.portletId = portletId;
+
+			instance.flagAjax(portletId);
+
+			jQuery(placeHolder).hide().after(portletBound).remove();
+
+			instance.refreshLayout(portletBound);
+
+			if (Liferay.Browser.is_firefox) {
+				setTimeout("Liferay.Portlet.process(\"" + portletId + "\")", 0);
+			}
+			else {
+				instance.process(portletId);
+			}
+
+			Liferay.Util.addInputType(portletBound.id);
+
+			if (window.location.hash) {
+				window.location.hash = "p_" + portletId;
+			}
+
+			portletBoundary = portletBound;
+
+			if (onComplete) {
+				onComplete(portletBoundary, portletId);
+			}
+
+			var jContainer = jQuery(container);
+
+			if (jContainer.is('.empty')) {
+				jContainer.removeClass('empty');
+			}
+
+			return portletId;
+		};
+
+		if (beforePortletLoaded) {
+			beforePortletLoaded(placeHolder);
+		}
+
+		jQuery.ajax(
+			{
+				url: url,
+				data: data,
+				complete: function(xHR) {
+					addPortletReturn(xHR.responseText);
+				}
+			}
+		);
+	},
+
 	close: function(portlet, skipConfirm, options) {
 		var instance = this;
 
@@ -17264,7 +17455,7 @@ Liferay.Portlet = {
 						p_l_id: plid,
 						p_p_id: portletId,
 						doAsUserId: doAsUserId,
-						cmd: 'delete'
+						cmd: Liferay.Constants.DELETE
 					}
 				}
 			);
@@ -17369,8 +17560,8 @@ Liferay.Portlet = {
 					portlet.columnPos = columnPos;
 					portlet.isStatic = isStatic;
 
-					if (!Liferay.Portlet.isAjax(portletId)) {
-						Liferay.Portlet.process(portletId);
+					if (!instance.isAjax(portletId)) {
+						instance.process(portletId);
 					}
 
 					// Functions to run on portlet load
@@ -17387,49 +17578,49 @@ Liferay.Portlet = {
 					}
 
 					if (!themeDisplay.layoutMaximized) {
-						jQuery('.portlet-configuration-icon:first a', portlet).click(
+						jQuery('.portlet-configuration:first a', portlet).click(
 							function(event) {
 								location.href = this.href + '&previewWidth=' + portlet.offsetHeight;
 								return false;
 							}
 						);
 
-						jQuery('.portlet-minimize-icon:first a', portlet).click(
+						jQuery('.portlet-minimize:first a', portlet).click(
 							function(event) {
 								instance.minimize(portlet, this);
 								return false;
 							}
 						);
 
-						jQuery('.portlet-maximize-icon:first a', portlet).click(
+						jQuery('.portlet-maximize:first a', portlet).click(
 							function(event) {
 								submitForm(document.hrefFm, this.href);
 								return false;
 							}
 						);
 
-						jQuery('.portlet-close-icon:first a', portlet).click(
+						jQuery('.portlet-close:first a', portlet).click(
 							function(event) {
 								instance.close(portlet);
 								return false;
 							}
 						);
 
-						jQuery('.portlet-refresh-icon:first a', portlet).click(
+						jQuery('.portlet-refresh:first a', portlet).click(
 							function(event) {
 								instance.refresh(portlet);
 								return false;
 							}
 						);
 
-						jQuery('.portlet-print-icon:first a', portlet).click(
+						jQuery('.portlet-print:first a', portlet).click(
 							function(event) {
 								location.href = this.href;
 								return false;
 							}
 						);
 
-						jQuery('.portlet-css-icon:first a', portlet).click(
+						jQuery('.portlet-css:first a', portlet).click(
 							function(event) {
 								Liferay.PortletCSS.init(portlet.portletId);
 							}
@@ -17520,7 +17711,7 @@ Liferay.Portlet = {
 			portlet.before(placeHolder);
 			portlet.remove();
 
-			addPortletHTML(
+			instance.addHTML(
 				{
 					url: url,
 					placeHolder: placeHolder[0],
@@ -17530,6 +17721,9 @@ Liferay.Portlet = {
 				}
 			);
 		}
+	},
+
+	refreshLayout: function(portletBound) {
 	},
 
 	remove: function(id) {
@@ -18218,13 +18412,7 @@ var LayoutConfiguration = {
 		var doAsUserId = themeDisplay.getDoAsUserIdEncoded();
 
 		if (!instance.menu) {
-			var url =
-				themeDisplay.getPathMain() +
-				'/portal/render_portlet' +
-				'?p_l_id=' + plid +
-				'&p_p_id=' + ppid +
-				'&p_p_state=exclusive' +
-				'&doAsUserId=' + doAsUserId;
+			var url = themeDisplay.getPathMain() + '/portal/render_portlet';
 
 			var popupWidth = 250;
 
@@ -18253,6 +18441,12 @@ var LayoutConfiguration = {
 			jQuery.ajax(
 				{
 					url: url,
+					data: {
+						p_l_id: plid,
+						p_p_id: ppid,
+						p_p_state: 'exclusive',
+						doAsUserId: doAsUserId,
+					},
 					success: function(message) {
 						instance._dialog.html(message);
 						instance._loadContent();
@@ -18360,7 +18554,7 @@ var LayoutConfiguration = {
 				placeHolder: placeHolder
 			}
 
-			var portletPosition = addPortlet(portletOptions);
+			var portletPosition = Liferay.Portlet.add(portletOptions);
 
 			instance._loadPortletFiles(portletMetaData);
 		}
