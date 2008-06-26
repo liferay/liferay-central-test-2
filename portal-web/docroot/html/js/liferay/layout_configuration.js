@@ -81,10 +81,10 @@ var LayoutConfiguration = {
 				{
 					url: url,
 					data: {
-						doAsUserId: doAsUserId,
 						p_l_id: plid,
 						p_p_id: ppid,
-						p_p_state: 'exclusive'
+						p_p_state: 'exclusive',
+						doAsUserId: doAsUserId,
 					},
 					success: function(message) {
 						instance._dialog.html(message);

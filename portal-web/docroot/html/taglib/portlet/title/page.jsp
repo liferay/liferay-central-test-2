@@ -53,8 +53,8 @@ boolean editable = GetterUtil.getBoolean((String)request.getAttribute("liferay-p
 							{
 								url: url,
 								data: {
-									doAsUserId: '<%= themeDisplay.getDoAsUserId() %>',
 									p_l_id: '<%= layout.getPlid() %>',
+									doAsUserId: '<%= themeDisplay.getDoAsUserId() %>',
 									portletId: '<%= portletDisplay.getId() %>',
 									title: encodeURIComponent(newText)
 								}

@@ -164,9 +164,9 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 								{
 									url: url,
 									data: {
+										p_l_id: '<%= themeDisplay.getPlid() %>',
 										className: '<%= className %>',
 										classPK: '<%= classPK %>',
-										p_l_id: '<%= themeDisplay.getPlid() %>',
 										score: rating
 									},
 									dataType: 'json',
