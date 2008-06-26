@@ -16762,6 +16762,7 @@ Liferay.unbind = Liferay.Events.unbind;
  * dragHelper {string|function}: A jQuery selector or a function that returns a DOM element.
  * handles {string}: A comma-separated list (n,ne,e,se,s,sw,w,nw) of the handles for resizing.
  * height {number}: The starting height of the message box.
+ * messageId {string}: A unique ID to give to a popup's content.
  * modal {boolean}: Whether to show shaded background.
  * noCenter {boolean}: Whether to prevent re-centering.
  * stack {boolean}: Whether to automatically stack the popup on top of other ones.
@@ -16870,8 +16871,10 @@ Liferay.Popup = function(options) {
 
 		open: function(e, ui) {
 			if (!options.dragHelper) {
-				var dialog = jQuery(this).parents('.ui-dialog:first');
+				var dialogContent = jQuery(this);
+				var dialog = dialogContent.parents('.ui-dialog:first');
 
+				dialogContent.attr('id', options.messageId);
 				cacheDialogHelper(dialog);
 			}
 		}
@@ -18970,11 +18973,11 @@ Liferay.LayoutExporter = {
 
 		var exportLayoutsPopup = Liferay.Popup(
 			{
-				'title': title,
+				title: title,
 				modal: true,
 				width: 600,
 				overflow: 'auto',
-				'messageId': messageId
+				messageId: messageId
 			}
 		);
 

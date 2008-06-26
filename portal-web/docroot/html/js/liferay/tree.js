@@ -275,6 +275,7 @@ Liferay.Tree = new Class({
 		else {
 			var tree = outputEl.find('> ul');
 			var treeEl = tree[0];
+
 			tree.prepend(mainLi);
 
 			instance.tree = tree;
@@ -691,7 +692,7 @@ Liferay.Tree = new Class({
 			}
 		);
 
-		Liferay.trigger('tree', 
+		Liferay.trigger('tree',
 			{
 				droppedItem: item,
 				dropTarget: obj
