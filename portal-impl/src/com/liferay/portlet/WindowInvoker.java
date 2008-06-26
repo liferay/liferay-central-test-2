@@ -49,6 +49,7 @@ import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletConstants;
@@ -58,7 +59,6 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portal.kernel.util.Time;
 
 import com.sun.ccpp.ProfileFactoryImpl;
 import com.sun.portal.container.ChannelMode;

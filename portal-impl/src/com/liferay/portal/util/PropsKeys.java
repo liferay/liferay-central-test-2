@@ -881,6 +881,8 @@ public class PropsKeys {
 
 	public static final String PORTLET_URL_ESCAPE_XML = "portlet.url.escape.xml";
 
+	public static final String PORTLET_CONTAINER_IMPL = "portlet.container.impl";
+
 	public static final String PORTLET_VIRTUAL_PATH = "portlet.virtual.path";
 
 	public static final String PREFERENCE_VALIDATE_ON_STARTUP = "preference.validate.on.startup";

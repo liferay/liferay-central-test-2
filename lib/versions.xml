@@ -82,17 +82,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>development/container.jar</file-name>
-		<version>2.0</version>
-		<project-name>Portlet Container</project-name>
-		<project-url>https://portlet-container.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>CDDL 1.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>development/derby.jar</file-name>
 		<version>10.2.2.0</version>
 		<project-name>Derby</project-name>
@@ -741,6 +730,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>global/container.jar</file-name>
+		<version>2.0</version>
+		<project-name>Portlet Container</project-name>
+		<project-url>https://portlet-container.dev.java.net</project-url>
+		<licenses>
+			<license>
+				<license-name>CDDL 1.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>global/portlet.jar</file-name>
 		<version>2.0</version>
 		<project-name>JSR 286 Portlet 2.0 Specification</project-name>
@@ -748,6 +748,17 @@
 		<licenses>
 			<license>
 				<license-name>IBM Java Portlet Specification 2.0 License</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>global/portlet-container.jar</file-name>
+		<version>2.0</version>
+		<project-name>Portlet Container</project-name>
+		<project-url>https://portlet-container.dev.java.net</project-url>
+		<licenses>
+			<license>
+				<license-name>CDDL 1.0</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -2028,17 +2039,6 @@
 			<license>
 				<license-name>Apache License 2.0</license-name>
 				<copyright-notice>Copyright (c) 2001-2004 The Apache Software Foundation.</copyright-notice>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>development/portlet-container.jar</file-name>
-		<version>2.0</version>
-		<project-name>Portlet Container</project-name>
-		<project-url>https://portlet-container.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>CDDL 1.0</license-name>
 			</license>
 		</licenses>
 	</library>

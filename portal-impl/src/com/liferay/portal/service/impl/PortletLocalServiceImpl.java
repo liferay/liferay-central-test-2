@@ -1196,9 +1196,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		while (itr1.hasNext()) {
 			Element portlet = itr1.next();
 
-			String portletId = portlet.elementText("portlet-name");
+			String portletName = portlet.elementText("portlet-name");
 
-			String portletName = portletId;
+			String portletId = portletName;
 
 			if (Validator.isNotNull(servletContextName)) {
 				portletId =
@@ -1223,13 +1223,12 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletsPool.put(portletId, portletModel);
 			}
 
-			portletModel.setPortletName(portletName);
-			portletModel.setPortletWebAppName(servletContextName);
+			portletModel.setTimestamp(System.currentTimeMillis());
+
 			portletModel.setPluginPackage(pluginPackage);
 			portletModel.setPortletApp(portletApp);
 
-			portletModel.setTimestamp(System.currentTimeMillis());
-
+			portletModel.setPortletName(portletName);
 			portletModel.setDisplayName(GetterUtil.getString(
 				portlet.elementText("display-name"),
 				portletModel.getDisplayName()));

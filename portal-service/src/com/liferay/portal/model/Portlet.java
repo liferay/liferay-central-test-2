@@ -87,10 +87,6 @@ public interface Portlet extends PortletModel {
 
 	public void setPortletName(java.lang.String portletName);
 
-	public java.lang.String getPortletWebAppName();
-
-	public void setPortletWebAppName(java.lang.String portletWebAppName);
-
 	public java.lang.String getDisplayName();
 
 	public void setDisplayName(java.lang.String displayName);

@@ -833,6 +833,12 @@ public class PropsValues {
 	public static final boolean PORTLET_URL_ESCAPE_XML = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.PORTLET_URL_ESCAPE_XML));
 
+	public static final String PORTLET_CONTAINER_IMPL =
+		PropsUtil.get(PropsKeys.PORTLET_CONTAINER_IMPL);
+
+	public static final boolean PORTLET_CONTAINER_IMPL_SUN =
+		PORTLET_CONTAINER_IMPL.equals("sun");
+
 	public static final String PORTLET_VIRTUAL_PATH =
 		PropsUtil.get(PropsKeys.PORTLET_VIRTUAL_PATH);
 

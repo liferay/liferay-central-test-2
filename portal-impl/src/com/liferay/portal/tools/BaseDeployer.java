@@ -682,40 +682,48 @@ public class BaseDeployer {
 			return false;
 		}
 
-		String tempDir_str = SystemProperties.get(SystemProperties.TMP_DIR)
-			+ File.separator +	Time.getTimestamp();
+		File tempDir = new File(
+			SystemProperties.get(SystemProperties.TMP_DIR) + File.separator +
+				Time.getTimestamp());
 
-		File tempDir = new File(tempDir_str);
+		if (PropsValues.PORTLET_CONTAINER_IMPL_SUN) {
+			File sunTempDir = new File(
+				SystemProperties.get(SystemProperties.TMP_DIR) +
+					File.separator + "sun" + File.separator +
+						Time.getTimestamp());
 
-		// Updating the war with artifacts required for
-		// OpenPortal Portlet Container
+			Properties props = new Properties();
 
-		String sunWorkDir_str = tempDir_str + "_sun";
+			props.setProperty(PortletWarUpdater.ADD_WEB_XML, "true");
 
-		Properties updateProperties = new Properties();
-		updateProperties.setProperty(
-			PortletWarUpdater.ADD_WEB_XML, "true");
+			PortletWarUpdater warUpdater = new PortletWarUpdater(props);
 
-		PortletWarUpdater warUpdater = new PortletWarUpdater(updateProperties);
+			boolean success = warUpdater.preparePortlet(
+				srcFile, sunTempDir.toString());
 
-		boolean success = warUpdater.preparePortlet(srcFile, sunWorkDir_str);
+			if (success){
+				File sunSrcFile = new File(
+					sunTempDir + File.separator + srcFile.getName());
 
-		if (success){
-			File newSrcFile = new File(
-				sunWorkDir_str + "/" + srcFile.getName());
+				ExpandTask.expand(sunSrcFile, tempDir);
+			}
+			else {
+				ExpandTask.expand(srcFile, tempDir);
+			}
 
-			//Updating the war complete. Pass the new war to ExpandTask
-			ExpandTask.expand(newSrcFile, tempDir);
-		} else {
-			//Updating the war failed. Pass the old war to ExpandTask
-			ExpandTask.expand(srcFile, tempDir);
+			deployDirectory(
+				tempDir, mergeDir, deployDir, displayName, overwrite,
+				pluginPackage);
+
+			DeleteTask.deleteDirectory(sunTempDir);
 		}
+		else {
+			ExpandTask.expand(srcFile, tempDir);
 
-		deployDirectory(
-			tempDir, mergeDir, deployDir, displayName, overwrite,
-			pluginPackage);
-
-		DeleteTask.deleteDirectory(new File(sunWorkDir_str));
+			deployDirectory(
+				tempDir, mergeDir, deployDir, displayName, overwrite,
+				pluginPackage);
+		}
 
 		DeleteTask.deleteDirectory(tempDir);
 

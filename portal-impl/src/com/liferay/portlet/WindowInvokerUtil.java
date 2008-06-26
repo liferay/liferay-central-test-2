@@ -67,7 +67,8 @@ public class WindowInvokerUtil {
 	 */
 	public static EntityID getEntityID(Portlet portletModel, String portletId) {
 
-		String portletAppName = portletModel.getPortletWebAppName();
+		String portletAppName =
+			portletModel.getPortletApp().getServletContextName();
 		String portletName = portletModel.getPortletName();
 		// Sometimes portletAppName or portletName or both are null, in that
 		// case extract them from the portletId. Need to investigate the cause
@@ -77,17 +78,17 @@ public class WindowInvokerUtil {
 			int index = portletId.indexOf(PortletConstants.WAR_SEPARATOR);
 			if (index != -1) {
 				if (portletName == null) {
-					if(_log.isDebugEnabled()) {
+					if (_log.isDebugEnabled()) {
 						_log.debug(
-								"Portlet Name is null for the Id:" + 
+								"Portlet Name is null for the Id:" +
 									portletId);
 					}
 					portletName = portletId.substring(0, index);
 				}
 				if (portletAppName == null) {
-					if(_log.isDebugEnabled()) {
+					if (_log.isDebugEnabled()) {
 						_log.debug(
-								"Portlet App Name is null for the Id:" + 
+								"Portlet App Name is null for the Id:" +
 									portletId);
 					}
 					portletAppName = portletId.substring(index + 5);

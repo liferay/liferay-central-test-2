@@ -708,14 +708,17 @@ public class PortletURLImpl
 		if (!isParameterIncludedInPath("p_p_url_type")) {
 			sm.append("p_p_url_type");
 			sm.append(StringPool.EQUAL);
-			// Use urlType
+
 			if (ChannelURLType.ACTION.equals(_urlType)) {
 				sm.append(processValue(key, "1"));
-			} else if (ChannelURLType.RENDER.equals(_urlType)) {
+			}
+			else if (ChannelURLType.RENDER.equals(_urlType)) {
 				sm.append(processValue(key, "0"));
-			} else if (ChannelURLType.RESOURCE.equals(_urlType)) {
+			}
+			else if (ChannelURLType.RESOURCE.equals(_urlType)) {
 				sm.append(processValue(key, "2"));
-			} else {
+			}
+			else {
 				sm.append(processValue(key, "0"));
 			}
 
@@ -859,8 +862,11 @@ public class PortletURLImpl
 							}
 						}
 					}
+
 					String identifier = name;
+
 					name = QNameUtil.getPublicRenderParameterName(qName);
+
 					QNameUtil.setPublicRenderParameterIdentifier(
 						name, identifier);
 				}

@@ -396,24 +396,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the portlet web application.
-	 *
-	 * @return		the portlet web application
-	 */
-	public String getPortletWebAppName() {
-		return _portletWebAppName;
-	}
-
-	/**
-	 * Sets the name of the portlet web application.
-	 *
-	 * @param		portletWebAppName name of the portlet web application
-	 */
-	public void setPortletWebAppName(String portletWebAppName) {
-		_portletWebAppName = portletWebAppName;
-	}
-
-	/**
 	 * Gets the display name of the portlet.
 	 *
 	 * @return		the display name of the portlet
@@ -2532,11 +2514,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * The name of the portlet.
 	 */
 	private String _portletName;
-
-	/**
-	 * The name of the portlet web application.
-	 */
-	private String _portletWebAppName;
 
 	/**
 	 * The display name of the portlet.

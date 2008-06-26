@@ -143,7 +143,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 		return _req.getAuthType();
 	}
 
-    public Profile getCCPPProfile() {
+	public Profile getCCPPProfile() {
 		if (_profile == null) {
 			ProfileFactory profileFactory = ProfileFactory.getInstance();
 
@@ -181,10 +181,6 @@ public abstract class PortletRequestImpl implements PortletRequest {
 		return _req;
 	}
 
-	public HttpServletRequest getOriginalHttpServletRequest() {
-		return _originalReq;
-	}
-
 	public abstract String getLifecycle();
 
 	public Locale getLocale() {
@@ -207,6 +203,10 @@ public abstract class PortletRequestImpl implements PortletRequest {
 
 	public String getMethod() {
 		return _req.getMethod();
+	}
+
+	public HttpServletRequest getOriginalHttpServletRequest() {
+		return _originalReq;
 	}
 
 	public String getParameter(String name) {
@@ -593,7 +593,6 @@ public abstract class PortletRequestImpl implements PortletRequest {
 
 		_portlet = portlet;
 		_portletName = portlet.getPortletId();
-		_originalReq = req;
 
 		String portletNamespace = PortalUtil.getPortletNamespace(_portletName);
 
@@ -707,6 +706,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 		}
 
 		_req = dynamicReq;
+		_originalReq = req;
 		_wapTheme = BrowserSnifferUtil.is_wap(_req);
 		_portlet = portlet;
 		_portalCtx = new PortalContextImpl();
@@ -845,6 +845,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 		_req.removeAttribute(PortletRequest.LIFECYCLE_PHASE);
 
 		_req = null;
+		_originalReq = null;
 		_wapTheme = false;
 		_portlet = null;
 		_portletName = null;

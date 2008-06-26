@@ -26,6 +26,7 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -132,13 +133,16 @@ public class PortletInstanceFactory {
 				boolean strutsBridgePortlet =
 					rootInvokerPortletInstance.isStrutsBridgePortlet();
 
-//				instanceInvokerPortletInstance = new InvokerPortlet(
-//					portlet, portletInstance, portletConfig, portletCtx,
-//					facesPortlet, strutsPortlet, strutsBridgePortlet);
-
-				instanceInvokerPortletInstance = new WindowInvoker(
-					portlet, portletInstance, portletConfig, portletCtx,
-					facesPortlet, strutsPortlet, strutsBridgePortlet);
+				if (PropsValues.PORTLET_CONTAINER_IMPL_SUN) {
+					instanceInvokerPortletInstance = new WindowInvoker(
+						portlet, portletInstance, portletConfig, portletCtx,
+						facesPortlet, strutsPortlet, strutsBridgePortlet);
+				}
+				else {
+					instanceInvokerPortletInstance = new InvokerPortlet(
+						portlet, portletInstance, portletConfig, portletCtx,
+						facesPortlet, strutsPortlet, strutsBridgePortlet);
+				}
 
 				portletInstances.put(
 					portlet.getPortletId(), instanceInvokerPortletInstance);
@@ -213,11 +217,17 @@ public class PortletInstanceFactory {
 					Class.forName(portlet.getPortletClass()).newInstance();
 			}
 
-//			invokerPortlet = new InvokerPortlet(
-//				portlet, portletInstance, portletConfig.getPortletContext());
+			PortletContext portletCtx = portletConfig.getPortletContext();
 
-			invokerPortlet = new WindowInvoker(
-				portlet, portletInstance, portletConfig.getPortletContext());
+			if (PropsValues.PORTLET_CONTAINER_IMPL_SUN) {
+				invokerPortlet = new WindowInvoker(
+					portlet, portletInstance, portletCtx);
+			}
+			else {
+				invokerPortlet = new InvokerPortlet(
+					portlet, portletInstance, portletCtx);
+			}
+
 			invokerPortlet.init(portletConfig);
 		}
 		catch (ClassNotFoundException cnofe) {

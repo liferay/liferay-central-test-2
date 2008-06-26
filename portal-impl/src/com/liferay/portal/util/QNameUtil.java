@@ -60,6 +60,13 @@ public class QNameUtil {
 		return sm.toString();
 	}
 
+	public static String getPublicRenderParameterIdentifier(
+		String publicRenderParameterName) {
+
+		return _instance._getPublicRenderParameterIdentifier(
+			publicRenderParameterName);
+	}
+
 	public static String getPublicRenderParameterName(QName qName) {
 		return _instance._getPublicRenderParameterName(qName);
 	}
@@ -112,16 +119,10 @@ public class QNameUtil {
 	}
 
 	public static void setPublicRenderParameterIdentifier(
-			String publicRenderParameterName, String identifier) {
+		String publicRenderParameterName, String identifier) {
+
 		_instance._setPublicRenderParameterIdentifier(
-				publicRenderParameterName, identifier);
-	}
-
-	public static String getPublicRenderParameterIdentifier(
-		String publicRenderParameterName) {
-
-		return _instance._getPublicRenderParameterIdentifier(
-			publicRenderParameterName);
+			publicRenderParameterName, identifier);
 	}
 
 	private QNameUtil() {
@@ -129,16 +130,11 @@ public class QNameUtil {
 		_identifiers = new ConcurrentHashMap<String, String>();
 	}
 
-	private void _setPublicRenderParameterIdentifier(
-			String publicRenderParameterName, String identifier) {
-		_identifiers.put(publicRenderParameterName, identifier);
-	}
-
 	private String _getPublicRenderParameterIdentifier(
 		String publicRenderParameterName) {
 
 		if (!publicRenderParameterName.startsWith(
-			QNameUtil.PUBLIC_RENDER_PARAMETER_NAMESPACE)) {
+				QNameUtil.PUBLIC_RENDER_PARAMETER_NAMESPACE)) {
 
 			return null;
 		}
@@ -165,12 +161,18 @@ public class QNameUtil {
 
 	private QName _getQName(String publicRenderParameterName) {
 		if (!publicRenderParameterName.startsWith(
-			QNameUtil.PUBLIC_RENDER_PARAMETER_NAMESPACE)) {
+				QNameUtil.PUBLIC_RENDER_PARAMETER_NAMESPACE)) {
 
 			return null;
 		}
 
 		return _qNames.get(publicRenderParameterName);
+	}
+
+	private void _setPublicRenderParameterIdentifier(
+		String publicRenderParameterName, String identifier) {
+
+		_identifiers.put(publicRenderParameterName, identifier);
 	}
 
 	private static final String _KEY_SEPARATOR = "_KEY_";
@@ -180,7 +182,6 @@ public class QNameUtil {
 	private static QNameUtil _instance = new QNameUtil();
 
 	private Map<String, QName> _qNames;
-
 	private Map<String, String> _identifiers;
 
 }

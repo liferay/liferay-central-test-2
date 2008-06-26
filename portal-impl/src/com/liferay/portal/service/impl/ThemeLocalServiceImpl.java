@@ -528,6 +528,8 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 				_themes.put(themeId, themeModel);
 			}
 
+			themeModel.setTimestamp(System.currentTimeMillis());
+
 			PluginSetting pluginSetting =
 				PluginSettingLocalServiceUtil.getDefaultPluginSetting();
 
@@ -542,8 +544,6 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 			}
 
 			themeModel.setLoadFromServletContext(loadFromServletContext);
-
-			themeModel.setTimestamp(System.currentTimeMillis());
 
 			String name = GetterUtil.getString(
 				theme.attributeValue("name"), themeModel.getName());
