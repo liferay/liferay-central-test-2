@@ -83,9 +83,9 @@
                 </source-folder>
             </folders>
             <ide-actions>
-		<action name="All">
-		    <target>all</target>
-		</action>
+                <action name="All">
+                    <target>all</target>
+                </action>
                 <action name="Build">
                     <target>start</target>
                 </action>
@@ -108,9 +108,6 @@
                 <action name="Test">
                     <target>test</target>
                 </action>
-		<action name="run">
-		    <target>build-dist-tomcat-6.0</target>
-		</action>         
             </ide-actions>
             <view>
                 <items>
@@ -163,7 +160,6 @@
                     </source-file>
                 </items>
                 <context-menu>
-                    <ide-action name="run"/>
                     <ide-action name="All"/>
                     <ide-action name="Build"/>
                     <ide-action name="Clean"/>
