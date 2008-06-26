@@ -33,6 +33,9 @@ String rootNodeName = (String)request.getAttribute("edit_pages.jsp-rootNodeName"
 
 List layoutList = (List)request.getAttribute("edit_pages.jsp-layoutList");
 
+boolean selectableTree = ParamUtil.getBoolean(request, "selectableTree");
+String treeId = ParamUtil.getString(request, "treeId");
+
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
 %>
 
@@ -111,16 +114,20 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 </script>
 
 <%
-int[] openNodes = StringUtil.split(SessionTreeJSClicks.getOpenNodes(request, "layoutsTree"), 0);
+int[] openNodes = StringUtil.split(SessionTreeJSClicks.getOpenNodes(request, treeId), 0);
 
 Arrays.sort(openNodes);
 
+int[] selectedNodes = StringUtil.split(SessionTreeJSClicks.getOpenNodes(request, treeId + "Selected"), 0);
+
+Arrays.sort(selectedNodes);
+
 StringMaker sm = new StringMaker();
 
-_buildLayoutsTreeHTML(groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, new IntegerWrapper(1), openNodes, portletURL, themeDisplay, sm);
+_buildLayoutsTreeHTML(groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, new IntegerWrapper(1), openNodes, selectableTree, selectedNodes, portletURL, themeDisplay, sm);
 %>
 
-<div class="lfr-tree" id="<portlet:namespace />tree-output">
+<div class="lfr-tree" id="<portlet:namespace /><%= treeId %>_tree-output">
 	<ul class="lfr-component">
 		<li class="root-container">
 			<a class="community" href="<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>"><img height="20" src="<%= themeDisplay.getPathThemeImages() %>/trees/root.png" width="19" /><span><%= rootNodeName %></span></a>
@@ -130,8 +137,29 @@ _buildLayoutsTreeHTML(groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAY
 	</ul>
 </div>
 
+<script type="text/javascript">
+	jQuery(
+		function() {
+			new Liferay.Tree(
+				{
+					icons: <portlet:namespace />layoutIcons,
+					nodes: <portlet:namespace />layoutArray,
+					nodeIds: <portlet:namespace />nodeIds,
+					openNodes: '<%= SessionTreeJSClicks.getOpenNodes(request, treeId) %>',
+					outputId: '#<portlet:namespace /><%= treeId %>_tree-output',
+					preRendered: true,
+					<c:if test="<%= selectableTree %>">
+						selectable: true,
+					</c:if>
+					treeId: '<%= treeId %>'
+				}
+			);
+		}
+	);
+</script>
+
 <%!
-private void _buildLayoutsTreeHTML(long groupId, boolean privateLayout, long parentLayoutId, IntegerWrapper nodeId, int[] openNodes, PortletURL portletURL, ThemeDisplay themeDisplay, StringMaker sm) throws Exception {
+private void _buildLayoutsTreeHTML(long groupId, boolean privateLayout, long parentLayoutId, IntegerWrapper nodeId, int[] openNodes, boolean selectableTree, int[] selectedNodes, PortletURL portletURL, ThemeDisplay themeDisplay, StringMaker sm) throws Exception {
 	PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
 	List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(groupId, privateLayout, parentLayoutId);
@@ -186,6 +214,20 @@ private void _buildLayoutsTreeHTML(long groupId, boolean privateLayout, long par
 		sm.append("\"><img class=\"expand-image\" height=\"20\" src=\"");
 		sm.append(themeDisplay.getPathThemeImages() + "/trees/" + image);
 		sm.append("\" width=\"19\" />");
+
+		if (selectableTree && Validator.isNotNull(selectedNodes)) {
+			sm.append("<img class=\"select-state\" height=\"20\" src=\"");
+
+			if (Arrays.binarySearch(selectedNodes, (int)layout.getPlid()) >= 0) {
+				sm.append(themeDisplay.getPathThemeImages() + "/trees/checked.png");
+			}
+			else {
+				sm.append(themeDisplay.getPathThemeImages() + "/trees/checkbox.png");
+			}
+
+			sm.append("\" width=\"19\" />");
+		}
+
 		sm.append("<a href=\"");
 		sm.append(portletURL.toString());
 		sm.append(StringPool.AMPERSAND);
@@ -198,7 +240,7 @@ private void _buildLayoutsTreeHTML(long groupId, boolean privateLayout, long par
 		sm.append(layout.getName(themeDisplay.getLocale()));
 		sm.append("</span></a>");
 
-		_buildLayoutsTreeHTML(groupId, privateLayout, layout.getLayoutId(), nodeId, openNodes, portletURL, themeDisplay, sm);
+		_buildLayoutsTreeHTML(groupId, privateLayout, layout.getLayoutId(), nodeId, openNodes, selectableTree, selectedNodes, portletURL, themeDisplay, sm);
 
 		sm.append("</li>");
 	}

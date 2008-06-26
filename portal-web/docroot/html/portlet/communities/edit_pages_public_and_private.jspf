@@ -151,25 +151,9 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 <table class="lfr-table" width="100%">
 <tr>
 	<td valign="top">
-		<liferay-util:include page="/html/portlet/communities/tree_js.jsp" />
-
-		<script type="text/javascript">
-			jQuery(
-				function() {
-					new Liferay.Tree(
-						{
-							icons: <portlet:namespace />layoutIcons,
-							nodes: <portlet:namespace />layoutArray,
-							nodeIds: <portlet:namespace />nodeIds,
-							openNodes: '<%= SessionTreeJSClicks.getOpenNodes(request, "layoutsTree") %>',
-							outputId: '#<%= renderResponse.getNamespace() %>tree-output',
-							preRendered: true,
-							treeId: "layoutsTree"
-						}
-					);
-				}
-			);
-		</script>
+		<liferay-util:include page="/html/portlet/communities/tree_js.jsp">
+			<liferay-util:param name="treeId" value="layoutsTree" />
+		</liferay-util:include>
 	</td>
 	<td valign="top" width="75%">
 

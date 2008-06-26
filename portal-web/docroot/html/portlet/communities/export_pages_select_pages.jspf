@@ -51,31 +51,15 @@
 	</c:choose>
 </fieldset>
 
-<div id="<portlet:namespace />pane" style="border-color: #CCC; border-style: solid; border-width: 0px 1px 1px 1px; <%= (results.size() == 0) ? "display: none;" : "" %> height: 380px; overflow: auto;">
+<div id="<portlet:namespace />pane" style="border-color: #CCC; border-style: solid; border-width: 0px 1px 1px 1px; <%= (results.size() == 0) ? "display: none;" : "" %> height: 380px; overflow: auto; padding: 5px;">
 	<c:choose>
 		<c:when test="<%= !publish %>">
 			<div id="<portlet:namespace />select-tree-output" style="margin: 4px;"></div>
 
-			<liferay-util:include page="/html/portlet/communities/tree_js.jsp" />
-
-			<script type="text/javascript">
-				jQuery(
-					function() {
-						new Liferay.Tree(
-							{
-								icons: <portlet:namespace />layoutIcons,
-								nolinks: true,
-								nodes: <portlet:namespace />layoutArray,
-								openNodes: '<%= SessionTreeJSClicks.getOpenNodes(request, treeKey) %>',
-								outputId: '#<%= renderResponse.getNamespace() %>select-tree-output',
-								selectable: true,
-								selectedNodes: '<%= SessionTreeJSClicks.getOpenNodes(request, treeKey + "Selected") %>',
-								treeId: '<%= treeKey %>'
-							}
-						);
-					}
-				);
-			</script>
+			<liferay-util:include page="/html/portlet/communities/tree_js.jsp">
+				<liferay-util:param name="selectableTree" value="1" />
+				<liferay-util:param name="treeId" value="<%= treeKey %>" />
+			</liferay-util:include>
 		</c:when>
 		<c:otherwise>
 

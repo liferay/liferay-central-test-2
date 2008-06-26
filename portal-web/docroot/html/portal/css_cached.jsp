@@ -587,11 +587,11 @@ li.toggle-expand a {
 	padding: 2px 0 2px 20px;
 }
 
-#lfr-expand {
+.lfr-expand {
 	background: url(<%= themeDisplay.getPathThemeImages() %>/trees/expand_all.png) no-repeat 0 50%;
 }
 
-#lfr-collapse {
+.lfr-collapse {
 	background: url(<%= themeDisplay.getPathThemeImages() %>/trees/collapse_all.png) no-repeat 0 50%;
 }
 

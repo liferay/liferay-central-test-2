@@ -93,11 +93,11 @@ Liferay.LayoutExporter = {
 
 		var exportLayoutsPopup = Liferay.Popup(
 			{
-				'title': title,
+				title: title,
 				modal: true,
 				width: 600,
 				overflow: 'auto',
-				'messageId': messageId
+				messageId: messageId
 			}
 		);
 

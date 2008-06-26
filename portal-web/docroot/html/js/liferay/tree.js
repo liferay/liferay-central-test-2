@@ -222,7 +222,7 @@ Liferay.Tree = new Class({
 		var instance = this;
 
 		var outputEl = jQuery(instance.outputId);
-		var mainLi = '<li class="toggle-expand"><a href="javascript: ;" id="lfr-expand">' + instance._expandText + '</a> | <a href="javascript: ;" id="lfr-collapse">' + instance._collapseText + '</a></li>';
+		var mainLi = '<li class="toggle-expand"><a class="lfr-expand" href="javascript: ;">' + instance._expandText + '</a> | <a class="lfr-collapse" href="javascript: ;">' + instance._collapseText + '</a></li>';
 
 		if (!instance.preRendered) {
 			var icons = instance.icons;
@@ -323,7 +323,7 @@ Liferay.Tree = new Class({
 
 		var allDraggable = false;
 
-		jQuery('#lfr-expand').click(
+		jQuery('.lfr-expand', treeEl).click(
 			function() {
 				tree.find('.tree-item ul').show();
 				tree.find('.tree-item img').each(
@@ -350,7 +350,7 @@ Liferay.Tree = new Class({
 			}
 		);
 
-		jQuery('#lfr-collapse').click(
+		jQuery('.lfr-collapse', treeEl).click(
 			function() {
 				tree.find('.tree-item ul').hide();
 				tree.find('.tree-item img').each(
