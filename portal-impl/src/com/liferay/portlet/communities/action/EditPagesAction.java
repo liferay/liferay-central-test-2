@@ -185,12 +185,18 @@ public class EditPagesAction extends PortletAction {
 		catch (Exception e) {
 			if (e instanceof NoSuchLayoutException ||
 				e instanceof NoSuchProposalException ||
-				e instanceof PrincipalException ||
-				e instanceof RemoteExportException) {
+				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName(), e);
+				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.communities.error");
+			}
+			else if (e instanceof RemoteExportException) {
+				SessionErrors.add(req, e.getClass().getName(), e);
+
+				String redirect = ParamUtil.getString(req, "pagesRedirect");
+
+				sendRedirect(req, res, redirect);
 			}
 			else if (e instanceof LayoutFriendlyURLException ||
 					 e instanceof LayoutHiddenException ||

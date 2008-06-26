@@ -22,6 +22,20 @@
  */
 %>
 
+<%
+PortletURL publishToRemoteURL = renderResponse.createRenderURL();
+
+publishToRemoteURL.setWindowState(LiferayWindowState.EXCLUSIVE);
+publishToRemoteURL.setPortletMode(PortletMode.VIEW);
+
+publishToRemoteURL.setParameter("struts_action", "/communities/export_pages");
+publishToRemoteURL.setParameter("tabs1", tabs1);
+publishToRemoteURL.setParameter("pagesRedirect", portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid);
+publishToRemoteURL.setParameter("groupId", String.valueOf(groupId));
+publishToRemoteURL.setParameter("selPlid", String.valueOf(selPlid));
+publishToRemoteURL.setParameter("localPublishing", "0");
+%>
+
 <c:choose>
 	<c:when test="<%= stagingGroup != null %>">
 		<div class="portlet-msg-alert">
@@ -86,26 +100,12 @@
 				<c:otherwise>
 
 					<%
-					PortletURL publishToLiveURL = renderResponse.createRenderURL();
+					PortletURL publishToLiveURL = PortletURLUtil.clone(publishToRemoteURL, renderResponse);
 
-					publishToLiveURL.setWindowState(LiferayWindowState.EXCLUSIVE);
-					publishToLiveURL.setPortletMode(PortletMode.VIEW);
-
-					publishToLiveURL.setParameter("struts_action", "/communities/export_pages");
-					publishToLiveURL.setParameter("tabs1", tabs1);
-					publishToLiveURL.setParameter("pagesRedirect", portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid);
-					publishToLiveURL.setParameter("groupId", String.valueOf(groupId));
-					publishToLiveURL.setParameter("selPlid", String.valueOf(selPlid));
 					publishToLiveURL.setParameter("localPublishing", "1");
 					%>
 
 					<input type="button" value="<liferay-ui:message key="publish-to-live" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= publishToLiveURL %>', messageId: 'publish-to-live'});" />
-
-					<%
-					PortletURL publishToRemoteURL = PortletURLUtil.clone(publishToLiveURL, renderResponse);
-
-					publishToRemoteURL.setParameter("localPublishing", "0");
-					%>
 
 					<input type="button" value="<liferay-ui:message key="publish-to-remote" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= publishToRemoteURL %>', messageId: 'publish-to-remote'});" />
 				</c:otherwise>
@@ -127,6 +127,7 @@
 		<c:if test="<%= (portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || selGroup.isStagingGroup()) && (pagesCount > 0) %>">
 			<input type="button" value="<liferay-ui:message key="view-pages" />" onClick="var liveGroupWindow = window.open('<%= viewPagesURL %>'); void(''); liveGroupWindow.focus();" />
 
+			<input type="button" value="<liferay-ui:message key="publish-to-remote" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= publishToRemoteURL %>', messageId: 'publish-to-remote'});" />
 			<br /><br />
 		</c:if>
 	</c:otherwise>

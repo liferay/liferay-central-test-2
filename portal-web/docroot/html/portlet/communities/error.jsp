@@ -32,19 +32,3 @@
 <liferay-ui:error exception="<%= NoSuchReviewException.class %>" message="the-review-could-not-be-found" />
 <liferay-ui:error exception="<%= NoSuchRoleException.class %>" message="the-role-could-not-be-found" />
 <liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />
-
-<liferay-ui:error exception="<%= RemoteExportException.class %>">
-
-	<%
-	RemoteExportException ree = (RemoteExportException)errorException;
-	%>
-
-	<c:choose>
-		<c:when test="<%= ree.getType() == RemoteExportException.BAD_CONNECTION %>">
-		</c:when>
-		<c:when test="<%= ree.getType() == RemoteExportException.NO_GROUP %>">
-		</c:when>
-		<c:when test="<%= ree.getType() == RemoteExportException.NO_LAYOUTS %>">
-		</c:when>
-	</c:choose>
-</liferay-ui:error>
