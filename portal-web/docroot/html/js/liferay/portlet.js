@@ -157,49 +157,49 @@ Liferay.Portlet = {
 					}
 
 					if (!themeDisplay.layoutMaximized) {
-						jQuery('.portlet-configuration-icon:first a', portlet).click(
+						jQuery('.portlet-configuration:first a', portlet).click(
 							function(event) {
 								location.href = this.href + '&previewWidth=' + portlet.offsetHeight;
 								return false;
 							}
 						);
 
-						jQuery('.portlet-minimize-icon:first a', portlet).click(
+						jQuery('.portlet-minimize:first a', portlet).click(
 							function(event) {
 								instance.minimize(portlet, this);
 								return false;
 							}
 						);
 
-						jQuery('.portlet-maximize-icon:first a', portlet).click(
+						jQuery('.portlet-maximize:first a', portlet).click(
 							function(event) {
 								submitForm(document.hrefFm, this.href);
 								return false;
 							}
 						);
 
-						jQuery('.portlet-close-icon:first a', portlet).click(
+						jQuery('.portlet-close:first a', portlet).click(
 							function(event) {
 								instance.close(portlet);
 								return false;
 							}
 						);
 
-						jQuery('.portlet-refresh-icon:first a', portlet).click(
+						jQuery('.portlet-refresh:first a', portlet).click(
 							function(event) {
 								instance.refresh(portlet);
 								return false;
 							}
 						);
 
-						jQuery('.portlet-print-icon:first a', portlet).click(
+						jQuery('.portlet-print:first a', portlet).click(
 							function(event) {
 								location.href = this.href;
 								return false;
 							}
 						);
 
-						jQuery('.portlet-css-icon:first a', portlet).click(
+						jQuery('.portlet-css:first a', portlet).click(
 							function(event) {
 								Liferay.PortletCSS.init(portlet.portletId);
 							}

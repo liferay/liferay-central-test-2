@@ -25,5 +25,5 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <c:if test="<%= portletDisplay.isShowMaxIcon() %>">
-	<liferay-ui:icon image="../portlet/maximize" message="maximize" url="<%= portletDisplay.getURLMax() %>" method="get" toolTip="<%= false %>" cssClass="portlet-maximize-icon" />
+	<liferay-ui:icon image="../portlet/maximize" message="maximize" url="<%= portletDisplay.getURLMax() %>" method="get" toolTip="<%= false %>" cssClass="portlet-maximize portlet-maximize-icon" />
 </c:if>

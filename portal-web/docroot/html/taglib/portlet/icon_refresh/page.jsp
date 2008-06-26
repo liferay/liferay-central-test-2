@@ -26,5 +26,5 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <c:if test="<%= portletDisplay.isShowRefreshIcon() %>">
-	<liferay-ui:icon image="../portlet/refresh" message="refresh" url="<%= portletDisplay.getURLRefresh() %>" toolTip="<%= false %>" cssClass="portlet-refresh-icon" />
+	<liferay-ui:icon image="../portlet/refresh" message="refresh" url="<%= portletDisplay.getURLRefresh() %>" toolTip="<%= false %>" cssClass="portlet-refresh portlet-refresh-icon" />
 </c:if>
