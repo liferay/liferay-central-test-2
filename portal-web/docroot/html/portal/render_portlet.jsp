@@ -586,7 +586,7 @@ portletDisplay.setURLPrint(urlPrint.toString());
 
 // URL refresh
 
-String urlRefresh = "javascript: " + portletDisplay.getNamespace() + "refreshPortlet();";
+String urlRefresh = "javascript: ;";
 
 portletDisplay.setURLRefresh(urlRefresh);
 
