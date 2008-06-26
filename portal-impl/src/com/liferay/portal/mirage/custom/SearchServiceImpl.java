@@ -41,8 +41,6 @@
 
 package com.liferay.portal.mirage.custom;
 
-import com.sun.portal.cms.mirage.exception.CMSException;
-import com.sun.portal.cms.mirage.exception.SearchNotSupportedForFieldException;
 import com.sun.portal.cms.mirage.model.custom.Content;
 import com.sun.portal.cms.mirage.model.custom.ContentType;
 import com.sun.portal.cms.mirage.model.search.SearchCriteria;
@@ -59,15 +57,12 @@ import java.util.List;
 public class SearchServiceImpl implements SearchService {
 
 	public List<Content> searchContents(
-			ContentType contentType, SearchCriteria searchCriteria)
-		throws CMSException, SearchNotSupportedForFieldException {
+		ContentType contentType, SearchCriteria searchCriteria) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public List<Content> searchContents(ContentType contentType, String name)
-		throws CMSException {
-
+	public List<Content> searchContents(ContentType contentType, String name) {
 		throw new UnsupportedOperationException();
 	}
 

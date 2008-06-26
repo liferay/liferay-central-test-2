@@ -41,7 +41,6 @@
 
 package com.liferay.portal.mirage.custom;
 
-import com.sun.portal.cms.mirage.exception.CMSException;
 import com.sun.portal.cms.mirage.model.core.User;
 import com.sun.portal.cms.mirage.service.custom.VersioningService;
 
@@ -59,33 +58,25 @@ public class VersioningServiceImpl<VersionableContent>
 	implements VersioningService<VersionableContent> {
 
 	public void checkinNode(
-			Node node, User user, VersionableContent versionableContent)
-		throws CMSException {
+		Node node, User user, VersionableContent versionableContent) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public void checkoutNode(Node node, User user)
-		throws CMSException {
-
+	public void checkoutNode(Node node, User user) {
 		throw new UnsupportedOperationException();
 	}
 
-	public Collection<VersionableContent> getAllVersions(Node node)
-		throws CMSException {
-
+	public Collection<VersionableContent> getAllVersions(Node node) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void uncheckoutNode(Node node, User user)
-		throws CMSException {
-
+	public void uncheckoutNode(Node node, User user) {
 		throw new UnsupportedOperationException();
 	}
 
 	public void updateNode(
-			Node node, User user, VersionableContent versionableContent)
-		throws CMSException {
+		Node node, User user, VersionableContent versionableContent) {
 
 		throw new UnsupportedOperationException();
 	}

@@ -41,7 +41,6 @@
 
 package com.liferay.portal.mirage.custom;
 
-import com.sun.portal.cms.mirage.exception.ViewGenerationException;
 import com.sun.portal.cms.mirage.model.custom.Content;
 import com.sun.portal.cms.mirage.service.custom.ContentViewService;
 
@@ -54,16 +53,13 @@ import com.sun.portal.cms.mirage.service.custom.ContentViewService;
  */
 public class ContentViewServiceImpl implements ContentViewService {
 
-	public String getContentView(Content content, String appContextName)
-		throws ViewGenerationException {
-
+	public String getContentView(Content content, String appContextName) {
 		throw new UnsupportedOperationException();
 	}
 
 	public String getContentView(
-			Content content, String version, String username,
-			String appContextName)
-		throws ViewGenerationException {
+		Content content, String version, String username,
+		String appContextName) {
 
 		throw new UnsupportedOperationException();
 	}

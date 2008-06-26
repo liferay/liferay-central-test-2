@@ -41,7 +41,6 @@
 
 package com.liferay.portal.mirage.custom;
 
-import com.sun.portal.cms.mirage.exception.CMSException;
 import com.sun.portal.cms.mirage.service.custom.WorkflowService;
 
 /**
@@ -52,34 +51,25 @@ import com.sun.portal.cms.mirage.service.custom.WorkflowService;
  */
 public class WorkflowServiceImpl implements WorkflowService {
 
-	public void submitContentToWorkflow(String contentUUID)
-		throws CMSException {
-
+	public void submitContentToWorkflow(String contentUUID) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void updateWorkflowCommentsAccepted(String contentUUID)
-		throws CMSException {
-
+	public void updateWorkflowCommentsAccepted(String contentUUID) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void updateWorkflowComplete(String contentUUID)
-		throws CMSException {
-
+	public void updateWorkflowComplete(String contentUUID) {
 		throw new UnsupportedOperationException();
 	}
 
 	public void updateWorkflowContentRejected(
-			String contentUUID, String comments)
-		throws CMSException {
+		String contentUUID, String comments) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public void updateWorkflowStatus(String contentUUID, String status)
-		throws CMSException {
-
+	public void updateWorkflowStatus(String contentUUID, String status) {
 		throw new UnsupportedOperationException();
 	}
 

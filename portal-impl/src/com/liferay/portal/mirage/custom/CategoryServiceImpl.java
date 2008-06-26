@@ -41,9 +41,6 @@
 
 package com.liferay.portal.mirage.custom;
 
-import com.sun.portal.cms.mirage.exception.CMSException;
-import com.sun.portal.cms.mirage.exception.CategoryNotEmptyException;
-import com.sun.portal.cms.mirage.exception.DuplicateCategoryException;
 import com.sun.portal.cms.mirage.model.custom.Category;
 import com.sun.portal.cms.mirage.model.custom.ContentType;
 import com.sun.portal.cms.mirage.service.custom.CategoryService;
@@ -58,46 +55,34 @@ import com.sun.portal.cms.mirage.service.custom.CategoryService;
 public class CategoryServiceImpl implements CategoryService {
 
 	public void assignContentTypeToCategory(
-			ContentType contentType, Category category)
-		throws CMSException {
+		ContentType contentType, Category category) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public void assignSubCategoryToCategory(
-			Category subCategory, Category newParent)
-		throws CMSException, DuplicateCategoryException {
+		Category subCategory, Category newParent) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public void createCategory(Category category)
-		throws CMSException, DuplicateCategoryException {
-
+	public void createCategory(Category category) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void deleteCategory(Category category)
-		throws CMSException, CategoryNotEmptyException {
-
+	public void deleteCategory(Category category) {
 		throw new UnsupportedOperationException();
 	}
 
-	public Category getCategory(Category category)
-		throws CMSException {
-
+	public Category getCategory(Category category) {
 		throw new UnsupportedOperationException();
 	}
 
-	public Category getCategory(String selectedCategoryUUID)
-		throws CMSException {
-
+	public Category getCategory(String selectedCategoryUUID) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void updateCategory(Category category)
-		throws CMSException {
-
+	public void updateCategory(Category category) {
 		throw new UnsupportedOperationException();
 	}
 

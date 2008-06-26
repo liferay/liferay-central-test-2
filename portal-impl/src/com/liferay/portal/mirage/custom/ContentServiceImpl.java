@@ -41,8 +41,6 @@
 
 package com.liferay.portal.mirage.custom;
 
-import com.sun.portal.cms.mirage.exception.CMSException;
-import com.sun.portal.cms.mirage.exception.TemplateNotFoundException;
 import com.sun.portal.cms.mirage.model.custom.Content;
 import com.sun.portal.cms.mirage.model.custom.VersionableContent;
 import com.sun.portal.cms.mirage.service.custom.ContentService;
@@ -60,105 +58,81 @@ import java.util.List;
  */
 public class ContentServiceImpl implements ContentService {
 
-	public void checkinContent(Content content)
-		throws CMSException, TemplateNotFoundException {
-
+	public void checkinContent(Content content) {
 		throw new UnsupportedOperationException();
 	}
 
 	public VersionableContent checkoutContent(
-			String contentName, String contentTypeUUID)
-		throws CMSException {
+		String contentName, String contentTypeUUID) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public void createContent(Content content)
-		throws CMSException, TemplateNotFoundException {
-
+	public void createContent(Content content) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void deleteContent(String contentName, String contentTypeUUID)
-		throws CMSException {
-
+	public void deleteContent(String contentName, String contentTypeUUID) {
 		throw new UnsupportedOperationException();
 	}
 
 	public Content getContentByNameAndType(
-			String contentName, String contentTypeUUID)
-		throws CMSException {
+		String contentName, String contentTypeUUID) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public Content getContentByNameTypeNameAndCategory(
-			String contentName, String contentTypeName, String categoryName)
-		throws CMSException {
+		String contentName, String contentTypeName, String categoryName) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public Content getContentByUUID(String uuid)
-		throws CMSException {
-
+	public Content getContentByUUID(String uuid) {
 		throw new UnsupportedOperationException();
 	}
 
 	public VersionableContent getContentByVersion(
-			String contentName, String contentTypeUUID, String versionName)
-		throws CMSException {
+		String contentName, String contentTypeUUID, String versionName) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public List<String> getContentNamesByType(String contentTypeUUID)
-		throws CMSException {
-
+	public List<String> getContentNamesByType(String contentTypeUUID) {
 		throw new UnsupportedOperationException();
 	}
 
-	public List<Content> getContentsByType(String contentTypeUUID)
-		throws CMSException {
-
+	public List<Content> getContentsByType(String contentTypeUUID) {
 		throw new UnsupportedOperationException();
 	}
 
 	public String getContentURL(String appURL, String UUID) {
-
 		throw new UnsupportedOperationException();
 	}
 
 	public List<String> getVersionNames(
-			String contentName, String contentTypeUUID)
-		throws CMSException {
+		String contentName, String contentTypeUUID) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public List<VersionableContent> getVersions(
-			String contentName, String contentTypeUUID)
-		throws CMSException {
+		String contentName, String contentTypeUUID) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public void unCheckoutContent(String contentName, String contentTypeUUID)
-		throws CMSException {
-
+	public void unCheckoutContent(String contentName, String contentTypeUUID) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void updateContent(Content content)
-		throws CMSException, TemplateNotFoundException {
-
+	public void updateContent(Content content) {
 		throw new UnsupportedOperationException();
 	}
 
 	public void updateFileField(
-			String contentUUID, String fieldName,
-			InputStream updatedFileInputStream)
-		throws CMSException {
+		String contentUUID, String fieldName,
+		InputStream updatedFileInputStream) {
 
 		throw new UnsupportedOperationException();
 	}

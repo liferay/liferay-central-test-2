@@ -41,9 +41,6 @@
 
 package com.liferay.portal.mirage.custom;
 
-import com.sun.portal.cms.mirage.exception.CMSException;
-import com.sun.portal.cms.mirage.exception.TemplateNotFoundException;
-import com.sun.portal.cms.mirage.exception.ValidationException;
 import com.sun.portal.cms.mirage.model.custom.Category;
 import com.sun.portal.cms.mirage.model.custom.ContentType;
 import com.sun.portal.cms.mirage.model.custom.Template;
@@ -61,149 +58,115 @@ import java.util.List;
 public class ContentTypeServiceImpl implements ContentTypeService {
 
 	public void addTemplateToContentType(
-			Template template, ContentType contentType)
-		throws CMSException, ValidationException {
+		Template template, ContentType contentType) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public void assignDefaultTemplate(
-			ContentType contentType, Template template)
-		throws CMSException {
+		ContentType contentType, Template template) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public boolean checkContentTypeExists(String contentTypeUUID)
-		throws CMSException {
-
+	public boolean checkContentTypeExists(String contentTypeUUID) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void checkOutTemplate(Template template, ContentType contentType)
-		throws CMSException {
-
+	public void checkOutTemplate(Template template, ContentType contentType) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void createContentType(ContentType contentType)
-		throws CMSException {
-
+	public void createContentType(ContentType contentType) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void deleteContentType(ContentType contentType)
-		throws CMSException {
-
+	public void deleteContentType(ContentType contentType) {
 		throw new UnsupportedOperationException();
 	}
 
 	public void deleteTemplateOfContentType(
-			ContentType contentType, Template template)
-		throws CMSException, TemplateNotFoundException {
+		ContentType contentType, Template template) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public void deleteTemplatesOfContentType(
-			ContentType contentType, Template[] templatesToBeDeleted)
-		throws CMSException, TemplateNotFoundException {
+		ContentType contentType, Template[] templatesToBeDeleted) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public List<Template> getAllVersionsOfTemplate(
-			Template template, ContentType contentType)
-		throws CMSException {
+		Template template, ContentType contentType) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public List<String> getAvailableContentTypeNames(Category category)
-		throws CMSException {
-
+	public List<String> getAvailableContentTypeNames(Category category) {
 		throw new UnsupportedOperationException();
 	}
 
-	public List<ContentType> getAvailableContentTypes(Category category)
-		throws CMSException {
-
+	public List<ContentType> getAvailableContentTypes(Category category) {
 		throw new UnsupportedOperationException();
 	}
 
 	public ContentType getContentTypeByNameAndCategory(
-			String contentTypeName, Category category)
-		throws CMSException {
+		String contentTypeName, Category category) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public ContentType getContentTypeByUUID(String contentTypeUUID)
-		throws CMSException {
-
+	public ContentType getContentTypeByUUID(String contentTypeUUID) {
 		throw new UnsupportedOperationException();
 	}
 
 	public Template getLatestVersionOfTemplate(
-			Template template, ContentType contentType)
-		throws CMSException {
+		Template template, ContentType contentType) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public Template getTemplateWithUUID(String templateUUID)
-		throws TemplateNotFoundException {
-
+	public Template getTemplateWithUUID(String templateUUID) {
 		throw new UnsupportedOperationException();
 	}
 
-	public boolean isContentTypeEditable(String contentTypeUUID)
-		throws CMSException {
-
+	public boolean isContentTypeEditable(String contentTypeUUID) {
 		throw new UnsupportedOperationException();
 	}
 
 	public void revertChangesTemplateForTemplate(
-			Template template, ContentType contentType)
-		throws CMSException {
+		Template template, ContentType contentType) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public void saveNewVersionOfTemplate(
-			Template template, ContentType contentType)
-		throws CMSException, ValidationException {
+		Template template, ContentType contentType) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public void unassignDefaultTemplate(ContentType contentType)
-		throws CMSException {
-
+	public void unassignDefaultTemplate(ContentType contentType) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void updateCategoryOfContentType(ContentType contentType)
-		throws CMSException {
-
+	public void updateCategoryOfContentType(ContentType contentType) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void updateContentType(ContentType contentType)
-		throws CMSException {
-
+	public void updateContentType(ContentType contentType) {
 		throw new UnsupportedOperationException();
 	}
 
 	public void updateTemplateOfContentType(
-			Template template, ContentType contentType)
-		throws CMSException, ValidationException {
+		Template template, ContentType contentType) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public boolean validateTemplate(Template template, ContentType contentType)
-		throws ValidationException {
+	public boolean validateTemplate(
+		Template template, ContentType contentType) {
 
 		throw new UnsupportedOperationException();
 	}

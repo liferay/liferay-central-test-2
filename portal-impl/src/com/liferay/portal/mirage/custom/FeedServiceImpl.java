@@ -41,7 +41,6 @@
 
 package com.liferay.portal.mirage.custom;
 
-import com.sun.portal.cms.mirage.exception.CMSException;
 import com.sun.portal.cms.mirage.service.custom.FeedService;
 import com.sun.syndication.feed.synd.SyndFeed;
 
@@ -55,9 +54,7 @@ import java.io.Writer;
  */
 public class FeedServiceImpl implements FeedService {
 
-	public SyndFeed getFeedForAllContentsOfContentType(String contentTypeUUID)
-		throws CMSException {
-
+	public SyndFeed getFeedForAllContentsOfContentType(String contentTypeUUID) {
 		throw new UnsupportedOperationException();
 	}
 
