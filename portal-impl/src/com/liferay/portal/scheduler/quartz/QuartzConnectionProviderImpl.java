@@ -25,7 +25,6 @@ package com.liferay.portal.scheduler.quartz;
 import com.liferay.portal.kernel.jndi.PortalJNDIUtil;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -41,7 +40,7 @@ import org.quartz.utils.ConnectionProvider;
  */
 public class QuartzConnectionProviderImpl implements ConnectionProvider {
 
-	public Connection getConnection() throws SQLException {
+	public Connection getConnection() {
 		Connection con = null;
 
 		try {
@@ -54,7 +53,7 @@ public class QuartzConnectionProviderImpl implements ConnectionProvider {
 		return con;
 	}
 
-	public void shutdown() throws SQLException {
+	public void shutdown() {
 	}
 
 	private Log _log = LogFactory.getLog(QuartzConnectionProviderImpl.class);

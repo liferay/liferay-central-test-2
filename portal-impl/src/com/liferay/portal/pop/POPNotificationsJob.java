@@ -24,7 +24,6 @@ package com.liferay.portal.pop;
 
 import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobExecutionContext;
-import com.liferay.portal.kernel.job.JobExecutionException;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -60,9 +59,7 @@ public class POPNotificationsJob implements IntervalJob {
 	public static final long INTERVAL = GetterUtil.getLong(PropsUtil.get(
 		PropsKeys.POP_SERVER_NOTIFICATIONS_INTERVAL)) * Time.MINUTE;
 
-	public void execute(JobExecutionContext context)
-		throws JobExecutionException {
-
+	public void execute(JobExecutionContext context) {
 		try {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Executing");

@@ -32,7 +32,6 @@ import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 
 /**
  * <a href="MessageSenderJob.java.html"><b><i>View Source</i></b></a>
@@ -43,9 +42,7 @@ import org.quartz.JobExecutionException;
  */
 public class MessageSenderJob implements Job {
 
-	public void execute(JobExecutionContext jobExecutionContext)
-		throws JobExecutionException {
-
+	public void execute(JobExecutionContext jobExecutionContext) {
 		try {
 			JobDetail jobDetail = jobExecutionContext.getJobDetail();
 

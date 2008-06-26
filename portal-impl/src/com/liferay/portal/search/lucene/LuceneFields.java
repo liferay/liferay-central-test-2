@@ -113,9 +113,7 @@ public class LuceneFields {
 		return fileExtractor.getFile(field, is, fileExt);
 	}
 
-	public static Field getFile(String field, byte[] bytes, String fileExt)
-		throws IOException {
-
+	public static Field getFile(String field, byte[] bytes, String fileExt) {
 		LuceneFileExtractor fileExtractor =
 			(LuceneFileExtractor)InstancePool.get(
 				PropsValues.LUCENE_FILE_EXTRACTOR);

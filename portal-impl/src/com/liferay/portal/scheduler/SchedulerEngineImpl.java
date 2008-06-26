@@ -87,9 +87,8 @@ public class SchedulerEngineImpl implements SchedulerEngine {
 	}
 
 	public void schedule(
-			String groupName, String cronText, Date startDate, Date endDate,
-			String description, String destinationName, String messageBody)
-		throws SchedulerException {
+		String groupName, String cronText, Date startDate, Date endDate,
+		String description, String destinationName, String messageBody) {
 
 		SchedulerRequest schedulerRequest = new SchedulerRequest(
 			SchedulerRequest.COMMAND_REGISTER, null, groupName, cronText,
@@ -99,19 +98,17 @@ public class SchedulerEngineImpl implements SchedulerEngine {
 			DestinationNames.SCHEDULER, JSONUtil.serialize(schedulerRequest));
 	}
 
-	public void shutdown() throws SchedulerException {
+	public void shutdown() {
 		MessageBusUtil.sendMessage(
 			DestinationNames.SCHEDULER,
 			JSONUtil.serialize(
 				new SchedulerRequest(SchedulerRequest.COMMAND_SHUTDOWN)));
 	}
 
-	public void start() throws SchedulerException {
+	public void start() {
 	}
 
-	public void unschedule(String jobName, String groupName)
-		throws SchedulerException {
-
+	public void unschedule(String jobName, String groupName) {
 		SchedulerRequest schedulerRequest = new SchedulerRequest(
 			SchedulerRequest.COMMAND_UNREGISTER, jobName, groupName);
 
