@@ -38,13 +38,14 @@ Liferay.Portlet = {
 		}
 
 		var url = themeDisplay.getPathMain() + '/portal/update_layout';
+
 		var data = {
-			cmd: Liferay.Constants.ADD,
-			doAsUserId: doAsUserId,
 			p_l_id: plid,
 			p_p_id: portletId,
 			p_p_col_id: currentColumnId,
-			p_p_col_pos: portletPosition
+			p_p_col_pos: portletPosition,
+			doAsUserId: doAsUserId,
+			cmd: Liferay.Constants.ADD
 		};
 
 		if (refreshPortletList["_" + portletId]) {

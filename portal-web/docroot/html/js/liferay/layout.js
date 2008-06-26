@@ -25,7 +25,7 @@ Liferay.Layout = {
 
 		instance.layoutHandler.refresh(portletBound);
 	},
-	
+
 	showTemplates: function() {
 		var instance = this;
 
@@ -35,8 +35,8 @@ Liferay.Layout = {
 			{
 				url: url,
 				data: {
-					doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 					p_l_id: themeDisplay.getPlid(),
+					doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 					redirect: Liferay.currentURLEncoded
 				},
 				success: function(response) {
