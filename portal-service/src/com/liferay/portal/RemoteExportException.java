@@ -30,20 +30,38 @@ package com.liferay.portal;
  */
 public class RemoteExportException extends PortalException {
 
-	public RemoteExportException() {
-		super();
+	public static final int BAD_CONNECTION = 1;
+
+	public static final int NO_GROUP = 2;
+
+	public static final int NO_LAYOUTS = 3;
+
+	public RemoteExportException(int type) {
+		_type = type;
 	}
 
-	public RemoteExportException(String msg) {
-		super(msg);
+	public int getType() {
+		return _type;
 	}
 
-	public RemoteExportException(String msg, Throwable cause) {
-		super(msg, cause);
+	public long getGroupId() {
+		return _groupId;
 	}
 
-	public RemoteExportException(Throwable cause) {
-		super(cause);
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
 	}
+
+	public String getURL() {
+		return _url;
+	}
+
+	public void setURL(String url) {
+		_url = url;
+	}
+
+	private int _type;
+	private long _groupId;
+	private String _url;
 
 }

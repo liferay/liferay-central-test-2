@@ -28,29 +28,12 @@ ResourceURL scheduledPublishEventsURL = renderResponse.createResourceURL();
 scheduledPublishEventsURL.setParameter("struts_action", "/communities/edit_pages");
 scheduledPublishEventsURL.setParameter("groupId", String.valueOf(liveGroupId));
 scheduledPublishEventsURL.setParameter("privateLayout", String.valueOf(privateLayout));
-
-if (localPublishing) {
-	scheduledPublishEventsURL.setParameter("destinationName", DestinationNames.LAYOUTS_LOCAL_PUBLISHER);
-}
-else {
-	scheduledPublishEventsURL.setParameter("destinationName", DestinationNames.LAYOUTS_REMOTE_PUBLISHER);
-}
+scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? DestinationNames.LAYOUTS_LOCAL_PUBLISHER : DestinationNames.LAYOUTS_REMOTE_PUBLISHER);
 %>
 
 <script type="text/javascript">
 	function <portlet:namespace />schedulePublishEvent() {
-
-	<%
-	if (localPublishing) { %>
-		document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = "schedule_publish_to_live";
-	<%
-	}
-	else {
-	%>
-		document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = "schedule_publish_to_remote";
-	<%
-	}
-	%>
+		document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= localPublishing ? "schedule_publish_to_live" : "schedule_publish_to_remote" %>';
 
 		var addButton = jQuery('#<portlet:namespace />addButton');
 
@@ -67,19 +50,7 @@ else {
 
 	function <portlet:namespace />unschedulePublishEvent(jobName) {
 		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-scheduled-event") %>')) {
-
-		<%
-		if (localPublishing) { %>
-			document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = "unschedule_publish_to_live";
-		<%
-		}
-		else {
-		%>
-			document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = "unschedule_publish_to_remote";
-		<%
-		}
-		%>
-
+			document.<portlet:namespace />exportPagesFm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= localPublishing ? "unschedule_publish_to_live" : "unschedule_publish_to_remote" %>';
 			document.<portlet:namespace />exportPagesFm.<portlet:namespace />jobName.value = jobName;
 
 			jQuery(document.<portlet:namespace />exportPagesFm).ajaxSubmit(

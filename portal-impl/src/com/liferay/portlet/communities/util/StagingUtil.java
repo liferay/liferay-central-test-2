@@ -66,8 +66,6 @@ import com.liferay.portal.util.WebKeys;
 
 import java.io.ByteArrayInputStream;
 
-import java.net.ConnectException;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -203,8 +201,10 @@ public class StagingUtil {
 		sm.append(StringPool.COLON);
 		sm.append(remotePort);
 
+		String url = sm.toString();
+
 		HttpPrincipal httpPrincipal = new HttpPrincipal(
-			sm.toString(), user.getEmailAddress(), user.getPassword(),
+			url, user.getEmailAddress(), user.getPassword(),
 			user.getPasswordEncrypted());
 
 		// Ping remote host and verify that the group exists
@@ -213,16 +213,20 @@ public class StagingUtil {
 			GroupServiceHttp.getGroup(httpPrincipal, remoteGroupId);
 		}
 		catch (NoSuchGroupException nsge) {
-			throw new RemoteExportException(
-				"{exception=NoSuchGroupException,subject=" + remoteGroupId +
-					"}");
+			RemoteExportException ree = new RemoteExportException(
+				RemoteExportException.NO_GROUP);
+
+			ree.setGroupId(remoteGroupId);
+
+			throw ree;
 		}
 		catch (SystemException se) {
-			if (se.getCause() instanceof ConnectException) {
-				throw new RemoteExportException(
-					"{exception=ConnectException,subject=" + sm.toString() +
-						"}");
-			}
+			RemoteExportException ree = new RemoteExportException(
+				RemoteExportException.BAD_CONNECTION);
+
+			ree.setURL(url);
+
+			throw ree;
 		}
 
 		byte[] bytes = null;
@@ -284,7 +288,7 @@ public class StagingUtil {
 
 			if (layoutIds.length <= 0) {
 				throw new RemoteExportException(
-					"{exception=NoLayoutsSelectedException}");
+					RemoteExportException.NO_LAYOUTS);
 			}
 
 			bytes = LayoutServiceUtil.exportLayouts(
@@ -893,12 +897,6 @@ public class StagingUtil {
 			privateLayout = false;
 		}
 
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Copying staging to live for group " +
-					stagingGroup.getLiveGroupId());
-		}
-
 		String scope = ParamUtil.getString(req, "scope");
 
 		Map<String, String[]> parameterMap = getStagingParameters(req);
@@ -918,7 +916,7 @@ public class StagingUtil {
 
 		if (schedule) {
 			String groupName = getSchedulerGroupName(
-					DestinationNames.LAYOUTS_LOCAL_PUBLISHER, liveGroupId);
+				DestinationNames.LAYOUTS_LOCAL_PUBLISHER, liveGroupId);
 
 			int recurrenceType = ParamUtil.getInteger(req, "recurrenceType");
 
@@ -1044,47 +1042,6 @@ public class StagingUtil {
 				endDateMonth, endDateDay, endDateYear, endDateHour,
 				endDateMinute, themeDisplay.getTimeZone(),
 				new PortalException());
-		}
-
-		if (_log.isDebugEnabled()) {
-			StringMaker sm = new StringMaker();
-
-			sm.append("Exporting ");
-
-			if (privateLayout) {
-				sm.append("private ");
-			}
-			else {
-				sm.append("public ");
-			}
-
-			sm.append("pages for group ");
-			sm.append(group.getGroupId());
-			sm.append(" remotely to the ");
-
-			if (remotePrivateLayout) {
-				sm.append("private ");
-			}
-			else {
-				sm.append("public ");
-			}
-
-			sm.append("pages for group ");
-			sm.append(remoteGroupId);
-			sm.append(" on host ");
-
-			if (secureConnection) {
-				sm.append(Http.HTTPS_WITH_SLASH);
-			}
-			else {
-				sm.append(Http.HTTP_WITH_SLASH);
-			}
-
-			sm.append(remoteAddress);
-			sm.append(StringPool.COLON);
-			sm.append(remotePort);
-
-			_log.debug(sm.toString());
 		}
 
 		if (schedule) {

@@ -84,28 +84,30 @@
 					</c:if>
 				</c:when>
 				<c:otherwise>
-					<%
-					PortletURL exportLayoutsURL = renderResponse.createRenderURL();
-
-					exportLayoutsURL.setWindowState(LiferayWindowState.EXCLUSIVE);
-					exportLayoutsURL.setPortletMode(PortletMode.VIEW);
-
-					exportLayoutsURL.setParameter("struts_action", "/communities/export_pages");
-					exportLayoutsURL.setParameter("tabs1", tabs1);
-					exportLayoutsURL.setParameter("pagesRedirect", portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid);
-					exportLayoutsURL.setParameter("groupId", String.valueOf(groupId));
-					exportLayoutsURL.setParameter("selPlid", String.valueOf(selPlid));
-					exportLayoutsURL.setParameter("localPublishing", String.valueOf(true));
-					%>
-
-					<input type="button" value="<liferay-ui:message key="publish-to-live" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= exportLayoutsURL %>', messageId: 'publish-to-live'});" />
 
 					<%
-					PortletURL publishToRemoteURL = PortletURLUtil.clone(exportLayoutsURL, renderResponse);
-					publishToRemoteURL.setParameter("localPublishing", String.valueOf(false));
+					PortletURL publishToLiveURL = renderResponse.createRenderURL();
+
+					publishToLiveURL.setWindowState(LiferayWindowState.EXCLUSIVE);
+					publishToLiveURL.setPortletMode(PortletMode.VIEW);
+
+					publishToLiveURL.setParameter("struts_action", "/communities/export_pages");
+					publishToLiveURL.setParameter("tabs1", tabs1);
+					publishToLiveURL.setParameter("pagesRedirect", portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid);
+					publishToLiveURL.setParameter("groupId", String.valueOf(groupId));
+					publishToLiveURL.setParameter("selPlid", String.valueOf(selPlid));
+					publishToLiveURL.setParameter("localPublishing", "1");
 					%>
 
-					<input type="button" value="<liferay-ui:message key="publish-to-remote" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= publishToRemoteURL.toString() %>', messageId: 'publish-to-remote'});" />
+					<input type="button" value="<liferay-ui:message key="publish-to-live" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= publishToLiveURL %>', messageId: 'publish-to-live'});" />
+
+					<%
+					PortletURL publishToRemoteURL = PortletURLUtil.clone(publishToLiveURL, renderResponse);
+
+					publishToRemoteURL.setParameter("localPublishing", "0");
+					%>
+
+					<input type="button" value="<liferay-ui:message key="publish-to-remote" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= publishToRemoteURL %>', messageId: 'publish-to-remote'});" />
 				</c:otherwise>
 			</c:choose>
 		</c:if>

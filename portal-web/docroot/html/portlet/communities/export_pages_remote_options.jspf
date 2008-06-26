@@ -29,58 +29,65 @@
 <fieldset>
 	<legend><liferay-ui:message key="remote-options" /></legend>
 
-	<ul class="lfr-tree lfr-component">
-		<li class="tree-item">
-			<ul id="<portlet:namespace />remoteExportControls">
-				<li class="tree-item">
-					<table class="lfr-table">
-					<tr>
-						<td>
-							<liferay-ui:message key="remote-host-ip" />
-						</td>
-						<td>
-							<input id="<portlet:namespace />remoteAddress" name="<portlet:namespace />remoteAddress" size="20" type="text" value="<%= PortalUtil.getHost(request) %>" />
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<liferay-ui:message key="remote-port" />
-						</td>
-						<td>
-							<input id="<portlet:namespace />remotePort" name="<portlet:namespace />remotePort" size="10" type="text" value="<%= PortalUtil.getPortalPort() %>" />
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<liferay-ui:message key="remote-group-id-organization-or-community" />
-						</td>
-						<td>
-							<input id="<portlet:namespace />remoteGroupId" name="<portlet:namespace />remoteGroupId" size="10" type="text" />
-						</td>
-					</tr>
-					</table>
-				</li>
-				<li class="tree-item">
-					<input id="<portlet:namespace />remotePrivateLayout" name="<portlet:namespace />remotePrivateLayout" type="checkbox" />
+	<table class="lfr-table">
+	<tr>
+		<td>
+			<liferay-ui:message key="remote-host-ip" />
+		</td>
+		<td>
+			<input id="<portlet:namespace />remoteAddress" name="<portlet:namespace />remoteAddress" size="20" type="text" value="<%= PortalUtil.getHost(request) %>" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="remote-port" />
+		</td>
+		<td>
+			<input id="<portlet:namespace />remotePort" name="<portlet:namespace />remotePort" size="10" type="text" value="<%= PortalUtil.getPortalPort() %>" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="remote-group-id" />
+		</td>
+		<td>
+			<input id="<portlet:namespace />remoteGroupId" name="<portlet:namespace />remoteGroupId" size="10" type="text" />
 
-					<label for="<portlet:namespace />remotePrivateLayout"><liferay-ui:message key="remote-private-page" /></label>
-				</li>
-				<li class="tree-item">
-					<input id="<portlet:namespace />secureConnection" name="<portlet:namespace />secureConnection" type="checkbox" />
+			(<liferay-ui:message key="organization-or-community" />)
+		</td>
+	</tr>
+	</table>
 
-					<label for="<portlet:namespace />secureConnection"><liferay-ui:message key="use-a-secure-network-connection" /></label>
-				</li>
-				<li class="tree-item">
-					<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS %>" defaultValue="<%= false %>" />
+	<br />
 
-					<label for="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS %>Checkbox"><liferay-ui:message key="delete-missing-layouts" /></label> <liferay-ui:icon-help message="delete-missing-layouts-help" />
-				</li>
-				<li class="tree-item">
-					<input id="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" type="checkbox" />
+	<table class="lfr-table">
+	<tr>
+		<td>
+			<input id="<portlet:namespace />remotePrivateLayout" name="<portlet:namespace />remotePrivateLayout" type="checkbox" />
 
-					<label for="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>"><liferay-ui:message key="delete-portlet-data-before-importing" /></label> <liferay-ui:icon-help message="delete-portlet-data-help" />
-				</li>
-			</ul>
-		</li>
-	</ul>
+			<label for="<portlet:namespace />remotePrivateLayout"><liferay-ui:message key="remote-private-page" /></label>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input id="<portlet:namespace />secureConnection" name="<portlet:namespace />secureConnection" type="checkbox" />
+
+			<label for="<portlet:namespace />secureConnection"><liferay-ui:message key="use-a-secure-network-connection" /></label>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS %>" defaultValue="<%= false %>" />
+
+			<label for="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS %>Checkbox"><liferay-ui:message key="delete-missing-layouts" /></label> <liferay-ui:icon-help message="delete-missing-layouts-help" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input id="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" type="checkbox" />
+
+			<label for="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>"><liferay-ui:message key="delete-portlet-data-before-importing" /></label> <liferay-ui:icon-help message="delete-portlet-data-help" />
+		</td>
+	</tr>
+	</table>
 </fieldset>
