@@ -273,7 +273,6 @@ Liferay.Tree = new Class({
 			}
 		}
 		else {
-
 			var tree = outputEl.find('> ul');
 			var treeEl = tree[0];
 			tree.prepend(mainLi);
@@ -301,25 +300,9 @@ Liferay.Tree = new Class({
 			}
 		);
 
-		// Enable selectable
-
-		if (instance.selectable) {
-			jQuery('img.select-state[@src*=checked]', treeEl).each(
-				function() {
-					instance._fixParentsOfSelected(this.parentNode);
-				}
-			);
-
-			jQuery('img.select-state', treeEl).click(
-				function() {
-					instance.select(this);
-				}
-			);
-		}
-
 		// Set draggables and droppables
 
-		instance.setDragDrop(treeEl);
+		instance.setInteraction(treeEl);
 
 		var allDraggable = false;
 
@@ -333,7 +316,7 @@ Liferay.Tree = new Class({
 				);
 
 				if (!allDraggable) {
-					instance.setDragDrop(treeEl, 'li.tree-item');
+					instance.setInteraction(treeEl, 'li.tree-item');
 					allDraggable = true;
 				}
 
@@ -414,9 +397,13 @@ Liferay.Tree = new Class({
 	select: function(obj) {
 		var instance = this;
 
+		if (obj.tagName.toLowerCase() == 'a') {
+			obj = jQuery('> img.select-state', obj.parentNode)[0];
+		}
+
 		if (obj.src.indexOf('spacer') < 0) {
 			var icons = instance.icons;
-			var treeIdSelected = instance.treeId + "Selected";
+			var treeIdSelected = instance.treeId + 'Selected';
 
 			var selectedNode = false;
 
@@ -425,7 +412,7 @@ Liferay.Tree = new Class({
 			var branchId = currentLi.getAttribute('branchId');
 
 			if (instance._hasSelectedChildren(currentLi)) {
-				if (obj.getAttribute("src") == icons.checked) {
+				if (obj.getAttribute('src') == icons.checked) {
 					obj.src = icons.childChecked;
 				}
 				else {
@@ -433,7 +420,7 @@ Liferay.Tree = new Class({
 					selectedNode = true;
 				}
 			}
-			else if (obj.getAttribute("src") == icons.checked) {
+			else if (obj.getAttribute('src') == icons.checked) {
 				obj.src = icons.checkbox;
 			}
 			else {
@@ -454,20 +441,38 @@ Liferay.Tree = new Class({
 		}
 	},
 
-	setDragDrop: function(parentEl, selector) {
+	setInteraction: function(parentEl, selector) {
 		var instance = this;
 
-		selector = selector || 'ul.node-open > li';
-		parentEl = parentEl || instance.tree[0];
+		var treeEl = instance.tree[0];
 
-		var draggables = jQuery(selector, parentEl);
-		draggables.draggable(instance._dragOptions);
+		if (!instance.selectable) {
+			selector = selector || 'ul.node-open > li';
+			parentEl = parentEl || treeEl;
 
-		draggables.find('> a').droppable(instance._dropOptions);
+			var draggables = jQuery(selector, parentEl);
+			draggables.draggable(instance._dragOptions);
 
-		if (!instance.droppablesSet) {
-			instance.tree.find('a.community').droppable(instance._dropOptions);
-			instance.droppablesSet = true;
+			draggables.find('> a').droppable(instance._dropOptions);
+
+			if (!instance.droppablesSet) {
+				instance.tree.find('a.community').droppable(instance._dropOptions);
+				instance.droppablesSet = true;
+			}
+		}
+		else {
+			jQuery('img.select-state[@src*=checked]', treeEl).each(
+				function(event) {
+					instance._fixParentsOfSelected(this.parentNode);
+				}
+			);
+
+			jQuery('img.select-state, a', treeEl).click(
+				function(event) {
+					instance.select(this);
+					return false;
+				}
+			);
 		}
 	},
 
@@ -519,7 +524,7 @@ Liferay.Tree = new Class({
 
 				if (!currentLi.childrenDraggable) {
 					subBranch.addClass('node-open');
-					instance.setDragDrop(currentLi);
+					instance.setInteraction(currentLi);
 					currentLi.childrenDraggable = true;
 				}
 			}
@@ -723,7 +728,7 @@ Liferay.Tree = new Class({
 
 							if (!targetBranch.childrenDraggable) {
 								branch.addClass('node-open');
-								instance.setDragDrop(targetBranch.parentNode);
+								instance.setInteraction(targetBranch.parentNode);
 								targetBranch.childrenDraggable = true;
 							}
 
