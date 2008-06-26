@@ -24,7 +24,11 @@ package com.liferay.util.xml.descriptor;
 
 import com.liferay.util.xml.ElementIdentifier;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.dom4j.Document;
+import org.dom4j.Element;
 
 /**
  * <a href="WebXML24Descriptor.java.html"><b><i>View Source</i></b></a>
@@ -46,6 +50,17 @@ public class WebXML24Descriptor extends SimpleXMLDescriptor {
 
 	public String[] getRootChildrenOrder() {
 		return _ROOT_ORDERED_CHILDREN;
+	}
+
+	public String[] getChildrenOrder(Element parentElement) {
+
+	String parentName = parentElement.getQName().getName();
+
+		if (_NONROOT_ORDERED_CHILDREN.containsKey(parentName)){
+			return _NONROOT_ORDERED_CHILDREN.get(parentName);
+		}
+
+		return new String[0];
 	}
 
 	public ElementIdentifier[] getElementsIdentifiedByAttribute() {
@@ -96,5 +111,13 @@ public class WebXML24Descriptor extends SimpleXMLDescriptor {
 	private static final String[] _JOINABLE_ELEMENTS = {
 		"welcome-file-list", "jsp-config"
 	};
+
+	private static final Map<String, String[]> _NONROOT_ORDERED_CHILDREN =
+		new HashMap<String, String[]>();
+
+	static{
+		_NONROOT_ORDERED_CHILDREN.put("jsp-config", new String[]{
+			"taglib", "jsp-property-group"});
+	}
 
 }

@@ -95,6 +95,10 @@ public abstract class SimpleXMLDescriptor implements XMLDescriptor {
 		return new String[0];
 	}
 
+	public String[] getChildrenOrder(Element parentElement) {
+		return new String[0];
+	}
+
 	public ElementIdentifier[] getElementsIdentifiedByAttribute() {
 		return new ElementIdentifier[0];
 	}

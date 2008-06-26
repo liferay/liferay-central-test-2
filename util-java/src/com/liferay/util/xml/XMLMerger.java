@@ -89,6 +89,9 @@ public class XMLMerger {
 		}
 
 		first.elements().addAll(clones);
+
+		_orderChildren(first, _descriptor.getChildrenOrder(first));
+
 	}
 
 	private boolean _containsObjectEqualTo(

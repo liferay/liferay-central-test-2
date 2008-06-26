@@ -61,6 +61,10 @@ public class StrictXMLDescriptor implements XMLDescriptor {
 		return _ROOT_ORDERED_CHILDREN;
 	}
 
+	public String[] getChildrenOrder(Element parentElement) {
+		return new String[0];
+	}
+
 	private int _compare(Object obj1, Object obj2) {
 		Element el1 = (Element)obj1;
 		Element el2 = (Element)obj2;

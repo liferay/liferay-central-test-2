@@ -41,4 +41,6 @@ public interface XMLDescriptor {
 
 	String[] getRootChildrenOrder();
 
+	String[] getChildrenOrder(Element parentElement);
+
 }
