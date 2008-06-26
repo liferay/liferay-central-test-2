@@ -102,8 +102,6 @@
 				return "<%= session.getId() %>";
 			}
 		};
-
-		var mainPath = themeDisplay.getPathMain();
 	// ]]>
 </script>
 
