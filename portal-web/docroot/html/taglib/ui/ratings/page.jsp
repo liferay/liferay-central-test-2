@@ -87,11 +87,17 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 					{
 						rating: <%= yourScore %>,
 						onComplete: function(rating) {
-							var url = '<%= url %>?p_l_id=<%= themeDisplay.getPlid() %>&className=<%= className %>&classPK=<%= classPK %>&score=' + rating;
+							var url = '<%= url %>';
 
 							jQuery.ajax(
 								{
 									url: url,
+									data: {
+										p_l_id: '<%= themeDisplay.getPlid() %>',
+										className: '<%= className %>',
+										classPK: '<%= classPK %>',
+										score: rating
+									},
 									dataType: 'json',
 									success: function(message) {
 										var totalEntries = jQuery('#<%= randomNamespace %>totalEntries');
