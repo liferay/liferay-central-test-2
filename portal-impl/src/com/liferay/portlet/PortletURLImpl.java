@@ -54,6 +54,7 @@ import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.MapUtil;
 
+import com.sun.portal.container.ChannelURLType;
 import com.sun.portal.portletcontainer.common.URLHelper;
 
 import java.io.IOException;
@@ -532,6 +533,14 @@ public class PortletURLImpl
 		_toString = null;
 	}
 
+	public void setURLType(ChannelURLType urlType) {
+		_urlType = urlType;
+
+		// Clear cache
+
+		_toString = null;
+	}
+
 	public String toString() {
 		if (_toString != null) {
 			return _toString;
@@ -696,6 +705,23 @@ public class PortletURLImpl
 			sm.append(StringPool.AMPERSAND);
 		}
 
+		if (!isParameterIncludedInPath("p_p_url_type")) {
+			sm.append("p_p_url_type");
+			sm.append(StringPool.EQUAL);
+			// Use urlType
+			if (ChannelURLType.ACTION.equals(_urlType)) {
+				sm.append(processValue(key, "1"));
+			} else if (ChannelURLType.RENDER.equals(_urlType)) {
+				sm.append(processValue(key, "0"));
+			} else if (ChannelURLType.RESOURCE.equals(_urlType)) {
+				sm.append(processValue(key, "2"));
+			} else {
+				sm.append(processValue(key, "0"));
+			}
+
+			sm.append(StringPool.AMPERSAND);
+		}
+
 		if (!isParameterIncludedInPath("p_p_state")) {
 			if (_windowState != null) {
 				sm.append("p_p_state");
@@ -833,8 +859,10 @@ public class PortletURLImpl
 							}
 						}
 					}
-
+					String identifier = name;
 					name = QNameUtil.getPublicRenderParameterName(qName);
+					QNameUtil.setPublicRenderParameterIdentifier(
+						name, identifier);
 				}
 			}
 
@@ -978,6 +1006,7 @@ public class PortletURLImpl
 	private String _resourceID;
 	private boolean _secure;
 	private WindowState _windowState;
+	private ChannelURLType _urlType;
 	private String _toString;
 
 }

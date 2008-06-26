@@ -111,8 +111,39 @@ public class QNameUtil {
 		return new QName(uri, localPart, prefix);
 	}
 
+	public static void setPublicRenderParameterIdentifier(
+			String publicRenderParameterName, String identifier) {
+		_instance._setPublicRenderParameterIdentifier(
+				publicRenderParameterName, identifier);
+	}
+
+	public static String getPublicRenderParameterIdentifier(
+		String publicRenderParameterName) {
+
+		return _instance._getPublicRenderParameterIdentifier(
+			publicRenderParameterName);
+	}
+
 	private QNameUtil() {
 		_qNames = new ConcurrentHashMap<String, QName>();
+		_identifiers = new ConcurrentHashMap<String, String>();
+	}
+
+	private void _setPublicRenderParameterIdentifier(
+			String publicRenderParameterName, String identifier) {
+		_identifiers.put(publicRenderParameterName, identifier);
+	}
+
+	private String _getPublicRenderParameterIdentifier(
+		String publicRenderParameterName) {
+
+		if (!publicRenderParameterName.startsWith(
+			QNameUtil.PUBLIC_RENDER_PARAMETER_NAMESPACE)) {
+
+			return null;
+		}
+
+		return _identifiers.get(publicRenderParameterName);
 	}
 
 	private String _getPublicRenderParameterName(QName qName) {
@@ -149,5 +180,7 @@ public class QNameUtil {
 	private static QNameUtil _instance = new QNameUtil();
 
 	private Map<String, QName> _qNames;
+
+	private Map<String, String> _identifiers;
 
 }

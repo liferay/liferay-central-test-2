@@ -373,6 +373,7 @@ public class PortalImpl implements Portal {
 		_reservedParams.add("p_l_reset");
 		_reservedParams.add("p_p_id");
 		_reservedParams.add("p_p_lifecycle");
+		_reservedParams.add("p_p_url_type");
 		_reservedParams.add("p_p_state");
 		_reservedParams.add("p_p_mode");
 		_reservedParams.add("p_p_resource_id");

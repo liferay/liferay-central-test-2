@@ -82,6 +82,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>development/container.jar</file-name>
+		<version>2.0</version>
+		<project-name>Portlet Container</project-name>
+		<project-url>https://portlet-container.dev.java.net</project-url>
+		<licenses>
+			<license>
+				<license-name>CDDL 1.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>development/derby.jar</file-name>
 		<version>10.2.2.0</version>
 		<project-name>Derby</project-name>
@@ -2021,8 +2032,8 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/portlet-container.jar</file-name>
-		<version>2.0 RC2</version>
+		<file-name>development/portlet-container.jar</file-name>
+		<version>2.0</version>
 		<project-name>Portlet Container</project-name>
 		<project-url>https://portlet-container.dev.java.net</project-url>
 		<licenses>
@@ -2030,9 +2041,6 @@
 				<license-name>CDDL 1.0</license-name>
 			</license>
 		</licenses>
-		<comments>
-			Remove portlet_2_0.tld because it was causing Geronimo 2.1 to break.
-		</comments>
 	</library>
 	<library>
 		<file-name>portal/quartz.jar</file-name>

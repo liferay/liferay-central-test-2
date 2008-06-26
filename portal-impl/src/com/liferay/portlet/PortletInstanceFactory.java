@@ -132,7 +132,11 @@ public class PortletInstanceFactory {
 				boolean strutsBridgePortlet =
 					rootInvokerPortletInstance.isStrutsBridgePortlet();
 
-				instanceInvokerPortletInstance = new InvokerPortlet(
+//				instanceInvokerPortletInstance = new InvokerPortlet(
+//					portlet, portletInstance, portletConfig, portletCtx,
+//					facesPortlet, strutsPortlet, strutsBridgePortlet);
+
+				instanceInvokerPortletInstance = new WindowInvoker(
 					portlet, portletInstance, portletConfig, portletCtx,
 					facesPortlet, strutsPortlet, strutsBridgePortlet);
 
@@ -209,9 +213,11 @@ public class PortletInstanceFactory {
 					Class.forName(portlet.getPortletClass()).newInstance();
 			}
 
-			invokerPortlet = new InvokerPortlet(
-				portlet, portletInstance, portletConfig.getPortletContext());
+//			invokerPortlet = new InvokerPortlet(
+//				portlet, portletInstance, portletConfig.getPortletContext());
 
+			invokerPortlet = new WindowInvoker(
+				portlet, portletInstance, portletConfig.getPortletContext());
 			invokerPortlet.init(portletConfig);
 		}
 		catch (ClassNotFoundException cnofe) {

@@ -1198,6 +1198,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			String portletId = portlet.elementText("portlet-name");
 
+			String portletName = portletId;
+
 			if (Validator.isNotNull(servletContextName)) {
 				portletId =
 					portletId + PortletConstants.WAR_SEPARATOR +
@@ -1221,6 +1223,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletsPool.put(portletId, portletModel);
 			}
 
+			portletModel.setPortletName(portletName);
+			portletModel.setPortletWebAppName(servletContextName);
 			portletModel.setPluginPackage(pluginPackage);
 			portletModel.setPortletApp(portletApp);
 

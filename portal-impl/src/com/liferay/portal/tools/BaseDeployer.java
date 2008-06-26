@@ -52,6 +52,8 @@ import com.liferay.util.ant.UpToDateTask;
 import com.liferay.util.ant.WarTask;
 import com.liferay.util.xml.XMLFormatter;
 
+import com.sun.portal.portletcontainer.warupdater.PortletWarUpdater;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -680,15 +682,40 @@ public class BaseDeployer {
 			return false;
 		}
 
-		File tempDir = new File(
-			SystemProperties.get(SystemProperties.TMP_DIR) + File.separator +
-				Time.getTimestamp());
+		String tempDir_str = SystemProperties.get(SystemProperties.TMP_DIR)
+			+ File.separator +	Time.getTimestamp();
 
-		ExpandTask.expand(srcFile, tempDir);
+		File tempDir = new File(tempDir_str);
+
+		// Updating the war with artifacts required for
+		// OpenPortal Portlet Container
+
+		String sunWorkDir_str = tempDir_str + "_sun";
+
+		Properties updateProperties = new Properties();
+		updateProperties.setProperty(
+			PortletWarUpdater.ADD_WEB_XML, "true");
+
+		PortletWarUpdater warUpdater = new PortletWarUpdater(updateProperties);
+
+		boolean success = warUpdater.preparePortlet(srcFile, sunWorkDir_str);
+
+		if (success){
+			File newSrcFile = new File(
+				sunWorkDir_str + "/" + srcFile.getName());
+
+			//Updating the war complete. Pass the new war to ExpandTask
+			ExpandTask.expand(newSrcFile, tempDir);
+		} else {
+			//Updating the war failed. Pass the old war to ExpandTask
+			ExpandTask.expand(srcFile, tempDir);
+		}
 
 		deployDirectory(
 			tempDir, mergeDir, deployDir, displayName, overwrite,
 			pluginPackage);
+
+		DeleteTask.deleteDirectory(new File(sunWorkDir_str));
 
 		DeleteTask.deleteDirectory(tempDir);
 
