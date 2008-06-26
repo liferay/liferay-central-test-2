@@ -39,6 +39,11 @@ import org.dom4j.Element;
  */
 public class WebXML24Descriptor extends SimpleXMLDescriptor {
 
+	public WebXML24Descriptor() {
+		_orderedChildren.put(
+			"jsp-config", new String[] {"taglib", "jsp-property-group"});
+	}
+
 	public boolean canHandleType(String doctype, Document root) {
 		if (doctype.indexOf("web-app") != -1) {
 			return true;
@@ -53,11 +58,10 @@ public class WebXML24Descriptor extends SimpleXMLDescriptor {
 	}
 
 	public String[] getChildrenOrder(Element parentElement) {
+		String parentName = parentElement.getQName().getName();
 
-	String parentName = parentElement.getQName().getName();
-
-		if (_NONROOT_ORDERED_CHILDREN.containsKey(parentName)){
-			return _NONROOT_ORDERED_CHILDREN.get(parentName);
+		if (_orderedChildren.containsKey(parentName)){
+			return _orderedChildren.get(parentName);
 		}
 
 		return new String[0];
@@ -112,12 +116,7 @@ public class WebXML24Descriptor extends SimpleXMLDescriptor {
 		"welcome-file-list", "jsp-config"
 	};
 
-	private static final Map<String, String[]> _NONROOT_ORDERED_CHILDREN =
+	private Map<String, String[]> _orderedChildren =
 		new HashMap<String, String[]>();
-
-	static{
-		_NONROOT_ORDERED_CHILDREN.put("jsp-config", new String[]{
-			"taglib", "jsp-property-group"});
-	}
 
 }

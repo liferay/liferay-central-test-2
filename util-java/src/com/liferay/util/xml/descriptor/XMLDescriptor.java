@@ -33,14 +33,14 @@ import org.dom4j.Element;
  */
 public interface XMLDescriptor {
 
-	boolean areEqual(Element el1, Element el2);
+	public boolean areEqual(Element el1, Element el2);
 
-	boolean canHandleType(String doctype, Document root);
+	public boolean canHandleType(String doctype, Document root);
 
-	boolean canJoinChildren(Element element);
+	public boolean canJoinChildren(Element element);
 
-	String[] getRootChildrenOrder();
+	public String[] getRootChildrenOrder();
 
-	String[] getChildrenOrder(Element parentElement);
+	public String[] getChildrenOrder(Element parentElement);
 
 }
