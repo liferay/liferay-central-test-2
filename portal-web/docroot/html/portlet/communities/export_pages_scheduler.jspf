@@ -42,7 +42,7 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 		jQuery(document.<portlet:namespace />exportPagesFm).ajaxSubmit(
 			{
 				success: function() {
-					<portlet:namespace />updateScheduledPublishToLiveDiv();
+					<portlet:namespace />updateScheduledPublishEventsDiv();
 				}
 			}
 		);
@@ -56,22 +56,22 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 			jQuery(document.<portlet:namespace />exportPagesFm).ajaxSubmit(
 				{
 					success: function() {
-						<portlet:namespace />updateScheduledPublishToLiveDiv();
+						<portlet:namespace />updateScheduledPublishEventsDiv();
 					}
 				}
 			);
 		}
 	}
 
-	function <portlet:namespace />updateScheduledPublishToLiveDiv() {
+	function <portlet:namespace />updateScheduledPublishEventsDiv() {
 		jQuery.ajax(
 			{
 				url: '<%= scheduledPublishEventsURL %>',
 				success: function(html) {
-					var scheduledPublishToLiveDiv = jQuery('#<portlet:namespace />scheduledPublishToLiveDiv');
+					var scheduledPublishEventsDiv = jQuery('#<portlet:namespace />scheduledPublishEventsDiv');
 
-					scheduledPublishToLiveDiv.empty();
-					scheduledPublishToLiveDiv.append(html);
+					scheduledPublishEventsDiv.empty();
+					scheduledPublishEventsDiv.append(html);
 
 					var addButton = jQuery('#<portlet:namespace />addButton');
 
@@ -83,7 +83,7 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 
 	jQuery(
 		function() {
-			<portlet:namespace />updateScheduledPublishToLiveDiv();
+			<portlet:namespace />updateScheduledPublishEventsDiv();
 		}
 	);
 </script>
@@ -101,5 +101,5 @@ scheduledPublishEventsURL.setParameter("destinationName", localPublishing ? Dest
 <fieldset>
 	<legend><liferay-ui:message key="scheduled-events" /></legend>
 
-	<div id="<portlet:namespace />scheduledPublishToLiveDiv"></div>
+	<div id="<portlet:namespace />scheduledPublishEventsDiv"></div>
 </fieldset>

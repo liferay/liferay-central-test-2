@@ -211,10 +211,14 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 <input name="<portlet:namespace />stagingGroupId" type="hidden" value="<%= stagingGroupId %>">
 
 <%
-String tabs2Names = "pages,options,scheduler";
+String tabs2Names = "pages,options";
 
 if (!localPublishing) {
-	tabs2Names = "pages,options,remote-options,scheduler";
+	tabs2Names += ",remote-options";
+}
+
+if (selGroup.isStagingGroup()) {
+	tabs2Names += ",scheduler";
 }
 %>
 
@@ -262,9 +266,11 @@ if (!localPublishing) {
 		</liferay-ui:section>
 	</c:if>
 
-	<liferay-ui:section>
-		<%@ include file="/html/portlet/communities/export_pages_scheduler.jspf" %>
-	</liferay-ui:section>
+	<c:if test="<%= selGroup.isStagingGroup() %>">
+		<liferay-ui:section>
+			<%@ include file="/html/portlet/communities/export_pages_scheduler.jspf" %>
+		</liferay-ui:section>
+	</c:if>
 </liferay-ui:tabs>
 
 </form>
