@@ -87,28 +87,37 @@ Liferay.Util = {
 	},
 
 	addInputType: function(el) {
-		var item;
+		var instance = this;
+
+		instance.addInputType = function() {
+		};
 
 		if (Liferay.Browser.is_ie && Liferay.Browser.version() < 7) {
-			if (el) {
-				if (typeof el == 'object') {
-					item = jQuery(el);
+			instance.addInputType = function(el) {
+				var item;
+
+				if (el) {
+					if (typeof el == 'object') {
+						item = jQuery(el);
+					}
+					else {
+						item = jQuery('#' + el);
+					}
 				}
 				else {
-					item = jQuery('#' + el);
+					item = document.body;
 				}
-			}
-			else {
-				item = document.body;
-			}
 
-			jQuery("input", item).each(function() {
-				var current = jQuery(this);
-				var type = this.type || "text";
+				jQuery("input", item).each(function() {
+					var current = jQuery(this);
+					var type = this.type || "text";
 
-				current.addClass(type);
-			});
+					current.addClass(type);
+				});
+			};
 		}
+
+		return instance.addInputType(el);
 	},
 
 	addParams: function(params, url) {
