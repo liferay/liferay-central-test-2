@@ -152,110 +152,18 @@
 		String currentURL = PortalUtil.getCurrentURL(request);
 		%>
 
-		function addPortlet(options) {
-			var plid = options.plid || themeDisplay.getPlid();
-			var portletId = options.portletId;
-			var doAsUserId = options.doAsUserId || themeDisplay.getDoAsUserIdEncoded();
-			var placeHolder = jQuery(options.placeHolder || '<div class="loading-animation" />');
-			var positionOptions = options.positionOptions;
-			var beforePortletLoaded = options.beforePortletLoaded;
-			var onComplete = options.onComplete;
+		Liferay.currentURL = '<%= currentURL %>';
+		Liferay.currentURLEncoded = '<%= HttpUtil.encodeURL(currentURL) %>';
 
-			var refreshPortletList = getRefreshPortletList();
-
-			var container = jQuery('.lfr-portlet-column:first');
-
-			if (!container.length) {
-				return;
-			}
-
-			var portletPosition = 0;
-			var currentColumnId = 'column-1';
-
-			if (options.placeHolder) {
-				var column = placeHolder.parent();
-
-				placeHolder.addClass('portlet-boundary');
-
-				portletPosition = column.find('.portlet-boundary').index(placeHolder[0]);
-
-				currentColumnId = Liferay.Util.getColumnId(column[0].id);
-			}
-
-			var url = '<%= themeDisplay.getPathMain() %>/portal/update_layout';
-			var data = {
-				'<%= Constants.CMD %>': '<%= Constants.ADD %>',
-				doAsUserId: doAsUserId,
-				p_l_id: plid,
-				p_p_id: portletId,
-				p_p_col_id: currentColumnId,
-				p_p_col_pos: portletPosition
-			};
-
-			if (refreshPortletList["_" + portletId]) {
-				data.referer = '<%= HttpUtil.encodeURL(currentURL) %>';
-				data.refresh = 1;
-
-				if (plid) {
-					location.href = url + '?' + jQuery.param(data);
-				}
-			}
-			else {
-				var firstPortlet = container.find('.portlet-boundary:first');
-				var hasStaticPortlet = (firstPortlet.length && firstPortlet[0].isStatic);
-
-				if (!options.placeHolder && !options.plid) {
-					if (!hasStaticPortlet) {
-						container.prepend(placeHolder);
-					}
-					else {
-						firstPortlet.after(placeHolder);
-					}
-				}
-
-				if (themeDisplay.isFreeformLayout()) {
-					container.prepend(placeHolder);
-				}
-
-				data.currentURL = '<%= HttpUtil.encodeURL(currentURL) %>'
-
-				return addPortletHTML(
-					{
-						beforePortletLoaded: beforePortletLoaded,
-						data: data,
-						url: url,
-						placeHolder: placeHolder[0],
-						onComplete: onComplete
-					}
-				);
-			}
-		}
-
-		function showLayoutTemplates() {
-			var url = '<%= themeDisplay.getPathMain() %>/layout_configuration/templates';
-
-			jQuery.ajax(
-				{
-					url: url,
-					data: {
-						doAsUserId: '<%= themeDisplay.getDoAsUserId() %>',
-						p_l_id: '<%= plid %>',
-						redirect: '<%= HttpUtil.encodeURL(currentURL) %>'
-					},
-					success: function(response) {
-						Liferay.Popup(
-							{
-								width: 700,
-								modal: true,
-								message: response,
-								position: ['center', 100],
-								title: '<%= UnicodeLanguageUtil.get(pageContext, "layout") %>'
-							}
-						);
-					}
-				}
-			);
-		}
+		Liferay.Constants = {
+			ADD: '<%= Constants.ADD %>',
+			CMD: '<%= Constants.CMD %>',
+			DELETE: '<%= Constants.DELETE %>',
+			RESTORE: '<%= Constants.RESTORE %>',
+			SEARCH: '<%= Constants.SEARCH %>',
+			UNSUBSCRIBE: '<%= Constants.UNSUBSCRIBE %>',
+			UPDATE: '<%= Constants.UPDATE %>'
+		};
 
 		jQuery(
 			function() {

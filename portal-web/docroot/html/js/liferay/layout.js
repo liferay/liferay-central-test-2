@@ -25,6 +25,34 @@ Liferay.Layout = {
 
 		instance.layoutHandler.refresh(portletBound);
 	},
+	
+	showTemplates: function() {
+		var instance = this;
+
+		var url = themeDisplay.getPathMain() + '/layout_configuration/templates';
+
+		jQuery.ajax(
+			{
+				url: url,
+				data: {
+					doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+					p_l_id: themeDisplay.getPlid(),
+					redirect: Liferay.currentURLEncoded
+				},
+				success: function(response) {
+					Liferay.Popup(
+						{
+							width: 700,
+							modal: true,
+							message: response,
+							position: ['center', 100],
+							title: Liferay.Language.get('layout')
+						}
+					);
+				}
+			}
+		);
+	},
 
 	_findIndex: function(portlet, parentNode) {
 		var instance = this;

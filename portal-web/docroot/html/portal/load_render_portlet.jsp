@@ -125,7 +125,7 @@ String currentURL = PortalUtil.getCurrentURL(request);
 				function() {
 					var ns = '<%= portletDisplay.getNamespace() %>';
 
-					addPortletHTML(
+					Liferay.Portlet.addHTML(
 						{
 							url: '<%= url.toString() %>',
 							placeHolder: jQuery('#p_load' + ns + '')[0],

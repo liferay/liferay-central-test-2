@@ -1292,7 +1292,7 @@ public class ServicePreAction extends Action {
 							PortletKeys.LAYOUT_CONFIGURATION + "');");
 
 					themeDisplay.setURLLayoutTemplates(
-						"showLayoutTemplates();");
+						"Liferay.Layout.showTemplates();");
 				}
 			}
 

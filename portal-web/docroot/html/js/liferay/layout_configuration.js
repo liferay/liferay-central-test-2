@@ -193,7 +193,7 @@ var LayoutConfiguration = {
 				placeHolder: placeHolder
 			}
 
-			var portletPosition = addPortlet(portletOptions);
+			var portletPosition = Liferay.Portlet.add(portletOptions);
 
 			instance._loadPortletFiles(portletMetaData);
 		}

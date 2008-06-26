@@ -22,76 +22,10 @@
  */
 %>
 
-function addPortletHTML(options) {
-	var portletBoundary = null;
-
-	var url = options.url;
-	var data = options.data;
-	var placeHolder = options.placeHolder;
-	var beforePortletLoaded = options.beforePortletLoaded;
-	var onComplete = options.onComplete;
-
-	var addPortletReturn = function(html) {
-		var container = placeHolder.parentNode;
-
-		var portletBound = jQuery('<div></div>')[0];
-
-		portletBound.innerHTML = html;
-		portletBound = portletBound.firstChild;
-
-		var portletId = Liferay.Util.getPortletId(portletBound.id);
-
-		portletBound.portletId = portletId;
-
-		Liferay.Portlet.flagAjax(portletId);
-
-		jQuery(placeHolder).hide().after(portletBound).remove();
-
-		<c:if test="<%= (layout != null) && (LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE)) %>">
-			if (!portletBound.isStatic) {
-				Liferay.Layout.refresh(portletBound);
-			}
-		</c:if>
-
-		if (Liferay.Browser.is_firefox) {
-			setTimeout("Liferay.Portlet.process(\"" + portletId + "\")", 0);
+<c:if test="<%= (layout != null) && (LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE)) %>">
+	Liferay.Portlet.refreshLayout = function(portletBound) {
+		if (!portletBound.isStatic) {
+			Liferay.Layout.refresh(portletBound);
 		}
-		else {
-			Liferay.Portlet.process(portletId);
-		}
-
-		Liferay.Util.addInputType(portletBound.id);
-
-		if (window.location.hash) {
-			window.location.hash = "p_" + portletId;
-		}
-
-		portletBoundary = portletBound;
-
-		if (onComplete) {
-			onComplete(portletBoundary, portletId);
-		}
-
-		var jContainer = jQuery(container);
-
-		if (jContainer.is('.empty')) {
-			jContainer.removeClass('empty');
-		}
-
-		return portletId;
 	};
-
-	if (beforePortletLoaded) {
-		beforePortletLoaded(placeHolder);
-	}
-
-	jQuery.ajax(
-		{
-			url: url,
-			data: data,
-			complete: function(xHR) {
-				addPortletReturn(xHR.responseText);
-			}
-		}
-	);
-}
+</c:if>
