@@ -402,6 +402,8 @@ Liferay.Tree = new Class({
 			obj = jQuery('> img.select-state', obj.parentNode)[0];
 		}
 
+		var src = obj.src;
+
 		if (obj.src.indexOf('spacer') < 0) {
 			var icons = instance.icons;
 			var treeIdSelected = instance.treeId + 'Selected';
@@ -413,7 +415,7 @@ Liferay.Tree = new Class({
 			var branchId = currentLi.getAttribute('branchId');
 
 			if (instance._hasSelectedChildren(currentLi)) {
-				if (obj.getAttribute('src') == icons.checked) {
+				if (src.indexOf(icons.checked) > -1) {
 					obj.src = icons.childChecked;
 				}
 				else {
@@ -421,7 +423,7 @@ Liferay.Tree = new Class({
 					selectedNode = true;
 				}
 			}
-			else if (obj.getAttribute('src') == icons.checked) {
+			else if (src.indexOf(icons.checked) > -1) {
 				obj.src = icons.checkbox;
 			}
 			else {
@@ -555,13 +557,14 @@ Liferay.Tree = new Class({
 		if ((parentLi.nodeName == 'LI') && (parentLi.className != 'root-container')) {
 			var icons = instance.icons;
 			var img = jQuery("> img.select-state", parentLi)[0];
+			var src = img.src;
 
 			if (instance._hasSelectedChildren(parentLi)) {
-				if (img.getAttribute("src") == icons.checkbox) {
+				if (src.indexOf(icons.checkbox) > -1) {
 					img.src = icons.childChecked;
 				}
 			}
-			else if (img.getAttribute("src") != icons.checked) {
+			else if (src.indexOf(icons.childChecked) > -1) {
 				img.src = icons.checkbox;
 			}
 
