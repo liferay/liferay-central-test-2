@@ -129,6 +129,7 @@ public interface LayoutService {
 	public void schedulePublishToLive(long sourceGroupId, long targetGroupId,
 		boolean privateLayout, java.util.Map<Long, Boolean> layoutIdMap,
 		java.util.Map<String, String[]> parameterMap, java.lang.String scope,
+		java.util.Date exportStartDate, java.util.Date exportEndDate,
 		java.lang.String groupName, java.lang.String cronText,
 		java.util.Date startDate, java.util.Date endDate,
 		java.lang.String description)

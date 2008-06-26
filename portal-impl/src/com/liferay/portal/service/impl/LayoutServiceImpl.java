@@ -236,8 +236,9 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	public void schedulePublishToLive(
 			long sourceGroupId, long targetGroupId, boolean privateLayout,
 			Map<Long, Boolean> layoutIdMap, Map<String, String[]> parameterMap,
-			String scope, String groupName, String cronText, Date startDate,
-			Date endDate, String description)
+			String scope, Date exportStartDate, Date exportEndDate,
+			String groupName, String cronText, Date startDate, Date endDate,
+			String description)
 		throws PortalException, SystemException {
 
 		GroupPermissionUtil.check(
@@ -258,7 +259,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		LayoutsLocalPublisherRequest publisherRequest =
 			new LayoutsLocalPublisherRequest(
 				command, getUserId(), sourceGroupId, targetGroupId,
-				privateLayout, layoutIdMap, parameterMap);
+				privateLayout, layoutIdMap, parameterMap, exportStartDate,
+				exportEndDate);
 
 		SchedulerEngineUtil.schedule(
 			groupName, cronText, startDate, endDate, description,

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.communities.messaging;
 
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -43,7 +44,7 @@ public class LayoutsLocalPublisherRequest {
 	public LayoutsLocalPublisherRequest(
 		String command, long userId, long sourceGroupId, long targetGroupId,
 		boolean privateLayout, Map<Long, Boolean> layoutIdMap,
-		Map<String, String[]> parameterMap) {
+		Map<String, String[]> parameterMap, Date startDate, Date endDate) {
 
 		_command = command;
 		_userId = userId;
@@ -52,6 +53,8 @@ public class LayoutsLocalPublisherRequest {
 		_privateLayout = privateLayout;
 		_layoutIdMap = layoutIdMap;
 		_parameterMap = parameterMap;
+		_startDate = startDate;
+		_endDate = endDate;
 	}
 
 	public String getCommand() {
@@ -118,6 +121,22 @@ public class LayoutsLocalPublisherRequest {
 		_parameterMap = parameterMap;
 	}
 
+	public Date getStartDate() {
+		return _startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		_startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return _endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		_endDate = endDate;
+	}
+
 	private String _command;
 	private String _cronText;
 	private long _userId;
@@ -126,5 +145,7 @@ public class LayoutsLocalPublisherRequest {
 	private boolean _privateLayout;
 	private Map<Long, Boolean> _layoutIdMap;
 	private Map<String, String[]> _parameterMap;
+	private Date _startDate;
+	private Date _endDate;
 
 }

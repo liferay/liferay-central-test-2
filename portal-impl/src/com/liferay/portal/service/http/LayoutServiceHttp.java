@@ -845,6 +845,7 @@ public class LayoutServiceHttp {
 		long sourceGroupId, long targetGroupId, boolean privateLayout,
 		java.util.Map<Long, Boolean> layoutIdMap,
 		java.util.Map<String, String[]> parameterMap, java.lang.String scope,
+		java.util.Date exportStartDate, java.util.Date exportEndDate,
 		java.lang.String groupName, java.lang.String cronText,
 		java.util.Date startDate, java.util.Date endDate,
 		java.lang.String description)
@@ -875,34 +876,46 @@ public class LayoutServiceHttp {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = groupName;
+			Object paramObj6 = exportStartDate;
+
+			if (exportStartDate == null) {
+				paramObj6 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj7 = exportEndDate;
+
+			if (exportEndDate == null) {
+				paramObj7 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj8 = groupName;
 
 			if (groupName == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
+				paramObj8 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = cronText;
+			Object paramObj9 = cronText;
 
 			if (cronText == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
+				paramObj9 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = startDate;
+			Object paramObj10 = startDate;
 
 			if (startDate == null) {
-				paramObj8 = new NullWrapper("java.util.Date");
+				paramObj10 = new NullWrapper("java.util.Date");
 			}
 
-			Object paramObj9 = endDate;
+			Object paramObj11 = endDate;
 
 			if (endDate == null) {
-				paramObj9 = new NullWrapper("java.util.Date");
+				paramObj11 = new NullWrapper("java.util.Date");
 			}
 
-			Object paramObj10 = description;
+			Object paramObj12 = description;
 
 			if (description == null) {
-				paramObj10 = new NullWrapper("java.lang.String");
+				paramObj12 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
@@ -910,7 +923,7 @@ public class LayoutServiceHttp {
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10
+						paramObj10, paramObj11, paramObj12
 					});
 
 			try {

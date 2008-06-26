@@ -61,7 +61,6 @@ import com.liferay.portal.service.http.GroupServiceHttp;
 import com.liferay.portal.service.http.LayoutServiceHttp;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
 import java.io.ByteArrayInputStream;
@@ -114,10 +113,21 @@ public class StagingUtil {
 
 		String scope = ParamUtil.getString(req, "scope");
 
+		boolean dateRange = ParamUtil.getBoolean(req, "dateRange");
+
+		Date startDate = null;
+		Date endDate = null;
+
+		if (dateRange) {
+			startDate = _getDate(req, "startDate", true).getTime();
+
+			endDate = _getDate(req, "endDate", true).getTime();
+		}
+
 		if (scope.equals("all-pages")) {
 			publishLayouts(
 				stagingGroup.getLiveGroupId(), stagingGroup.getGroupId(),
-				privateLayout, parameterMap);
+				privateLayout, parameterMap, startDate, endDate);
 		}
 		else if (scope.equals("selected-pages")) {
 			Map<Long, Boolean> layoutIdMap = new LinkedHashMap<Long, Boolean>();
@@ -134,7 +144,7 @@ public class StagingUtil {
 
 			publishLayouts(
 				stagingGroup.getLiveGroupId(), stagingGroup.getGroupId(),
-				privateLayout, layoutIdMap, parameterMap);
+				privateLayout, layoutIdMap, parameterMap, startDate, endDate);
 		}
 	}
 
@@ -293,7 +303,7 @@ public class StagingUtil {
 
 			bytes = LayoutServiceUtil.exportLayouts(
 				sourceGroupId, privateLayout, layoutIds, exportParameterMap,
-				null, null);
+				startDate, endDate);
 		}
 
 		LayoutServiceHttp.importLayouts(
@@ -504,11 +514,11 @@ public class StagingUtil {
 
 	public static void publishLayouts(
 			long sourceGroupId, long targetGroupId, boolean privateLayout,
-			Map<String, String[]> parameterMap)
+			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws Exception {
 
 		byte[] bytes = LayoutServiceUtil.exportLayouts(
-			sourceGroupId, privateLayout, parameterMap, null, null);
+			sourceGroupId, privateLayout, parameterMap, startDate, endDate);
 
 		ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
 
@@ -518,7 +528,8 @@ public class StagingUtil {
 
 	public static void publishLayouts(
 			long sourceGroupId, long targetGroupId, boolean privateLayout,
-			Map<Long, Boolean> layoutIdMap, Map<String, String[]> parameterMap)
+			Map<Long, Boolean> layoutIdMap, Map<String, String[]> parameterMap,
+			Date startDate, Date endDate)
 		throws Exception {
 
 		parameterMap.put(
@@ -575,7 +586,8 @@ public class StagingUtil {
 		}
 
 		byte[] bytes = LayoutServiceUtil.exportLayouts(
-			sourceGroupId, privateLayout, layoutIds, parameterMap, null, null);
+			sourceGroupId, privateLayout, layoutIds, parameterMap, startDate,
+			endDate);
 
 		ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
 
@@ -684,7 +696,7 @@ public class StagingUtil {
 
 				publishLayouts(
 					liveGroup.getGroupId(), stagingGroup.getGroupId(), true,
-					parameterMap);
+					parameterMap, null, null);
 			}
 
 			if (liveGroup.hasPublicLayouts()) {
@@ -692,7 +704,7 @@ public class StagingUtil {
 
 				publishLayouts(
 					liveGroup.getGroupId(), stagingGroup.getGroupId(), false,
-					parameterMap);
+					parameterMap, null, null);
 			}
 		}
 	}
@@ -852,10 +864,11 @@ public class StagingUtil {
 		TimeZone timeZone = null;
 
 		if (timeZoneSensitive) {
-			User user = PortalUtil.getUser(req);
+			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
-			locale = user.getLocale();
-			timeZone = user.getTimeZone();
+			locale = themeDisplay.getLocale();
+			timeZone = themeDisplay.getTimeZone();
 		}
 		else {
 			locale = LocaleUtil.getDefault();
@@ -909,6 +922,17 @@ public class StagingUtil {
 			}
 		}
 
+		boolean dateRange = ParamUtil.getBoolean(req, "dateRange");
+
+		Date startDate = null;
+		Date endDate = null;
+
+		if (dateRange) {
+			startDate = _getDate(req, "startDate", true).getTime();
+
+			endDate = _getDate(req, "endDate", true).getTime();
+		}
+
 		if (schedule) {
 			String groupName = getSchedulerGroupName(
 				DestinationNames.LAYOUTS_LOCAL_PUBLISHER, liveGroupId);
@@ -920,33 +944,34 @@ public class StagingUtil {
 			String cronText = _getCronText(
 				req, startCal, false, recurrenceType);
 
-			Date endDate = null;
+			Date schedulerEndDate = null;
 
 			int endDateType = ParamUtil.getInteger(req, "endDateType");
 
 			if (endDateType == 1) {
 				Calendar endCal = _getDate(req, "schedulerEndDate", false);
 
-				endDate = endCal.getTime();
+				schedulerEndDate = endCal.getTime();
 			}
 
 			String description = ParamUtil.getString(req, "description");
 
 			LayoutServiceUtil.schedulePublishToLive(
 				stagingGroupId, liveGroupId, privateLayout, layoutIdMap,
-				parameterMap, scope, groupName, cronText, startCal.getTime(),
-				endDate, description);
+				parameterMap, scope, startDate, endDate, groupName, cronText,
+				startCal.getTime(), schedulerEndDate, description);
 		}
 		else {
 			if (scope.equals("all-pages")) {
 				publishLayouts(
 					stagingGroup.getGroupId(), stagingGroup.getLiveGroupId(),
-					privateLayout, parameterMap);
+					privateLayout, parameterMap, startDate, endDate);
 			}
 			else {
 				publishLayouts(
 					stagingGroup.getGroupId(), stagingGroup.getLiveGroupId(),
-					privateLayout, layoutIdMap, parameterMap);
+					privateLayout, layoutIdMap, parameterMap, startDate,
+					endDate);
 			}
 		}
 	}
@@ -1003,40 +1028,9 @@ public class StagingUtil {
 		Date endDate = null;
 
 		if (dateRange) {
-			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
-				WebKeys.THEME_DISPLAY);
+			startDate = _getDate(req, "startDate", true).getTime();
 
-			int startDateMonth = ParamUtil.getInteger(req, "startDateMonth");
-			int startDateDay = ParamUtil.getInteger(req, "startDateDay");
-			int startDateYear = ParamUtil.getInteger(req, "startDateYear");
-			int startDateHour = ParamUtil.getInteger(req, "startDateHour");
-			int startDateMinute = ParamUtil.getInteger(req, "startDateMinute");
-			int startDateAmPm = ParamUtil.getInteger(req, "startDateAmPm");
-
-			if (startDateAmPm == Calendar.PM) {
-				startDateHour += 12;
-			}
-
-			startDate = PortalUtil.getDate(
-				startDateMonth, startDateDay, startDateYear, startDateHour,
-				startDateMinute, themeDisplay.getTimeZone(),
-				new PortalException());
-
-			int endDateMonth = ParamUtil.getInteger(req, "endDateMonth");
-			int endDateDay = ParamUtil.getInteger(req, "endDateDay");
-			int endDateYear = ParamUtil.getInteger(req, "endDateYear");
-			int endDateHour = ParamUtil.getInteger(req, "endDateHour");
-			int endDateMinute = ParamUtil.getInteger(req, "endDateMinute");
-			int endDateAmPm = ParamUtil.getInteger(req, "endDateAmPm");
-
-			if (endDateAmPm == Calendar.PM) {
-				endDateHour += 12;
-			}
-
-			endDate = PortalUtil.getDate(
-				endDateMonth, endDateDay, endDateYear, endDateHour,
-				endDateMinute, themeDisplay.getTimeZone(),
-				new PortalException());
+			endDate = _getDate(req, "endDate", true).getTime();
 		}
 
 		if (schedule) {

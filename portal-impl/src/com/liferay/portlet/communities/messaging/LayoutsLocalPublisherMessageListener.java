@@ -32,6 +32,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.communities.util.StagingUtil;
 import com.liferay.util.JSONUtil;
 
+import java.util.Date;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -62,6 +63,8 @@ public class LayoutsLocalPublisherMessageListener implements MessageListener {
 			Map<Long, Boolean> layoutIdMap = publisherRequest.getLayoutIdMap();
 			Map<String, String[]> parameterMap =
 				publisherRequest.getParameterMap();
+			Date startDate = publisherRequest.getStartDate();
+			Date endDate = publisherRequest.getEndDate();
 
 			PrincipalThreadLocal.setName(userId);
 
@@ -75,14 +78,15 @@ public class LayoutsLocalPublisherMessageListener implements MessageListener {
 					LayoutsLocalPublisherRequest.COMMAND_ALL_PAGES)) {
 
 				StagingUtil.publishLayouts(
-					sourceGroupId, targetGroupId, privateLayout, parameterMap);
+					sourceGroupId, targetGroupId, privateLayout, parameterMap,
+					startDate, endDate);
 			}
 			else if (command.equals(
 				LayoutsLocalPublisherRequest.COMMAND_SELECTED_PAGES)) {
 
 				StagingUtil.publishLayouts(
 					sourceGroupId, targetGroupId, privateLayout, layoutIdMap,
-					parameterMap);
+					parameterMap, startDate, endDate);
 			}
 		}
 		catch (Exception e) {

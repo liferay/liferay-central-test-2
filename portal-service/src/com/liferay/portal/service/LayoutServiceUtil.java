@@ -198,6 +198,7 @@ public class LayoutServiceUtil {
 		long targetGroupId, boolean privateLayout,
 		java.util.Map<Long, Boolean> layoutIdMap,
 		java.util.Map<String, String[]> parameterMap, java.lang.String scope,
+		java.util.Date exportStartDate, java.util.Date exportEndDate,
 		java.lang.String groupName, java.lang.String cronText,
 		java.util.Date startDate, java.util.Date endDate,
 		java.lang.String description)
@@ -206,8 +207,8 @@ public class LayoutServiceUtil {
 		LayoutService layoutService = LayoutServiceFactory.getService();
 
 		layoutService.schedulePublishToLive(sourceGroupId, targetGroupId,
-			privateLayout, layoutIdMap, parameterMap, scope, groupName,
-			cronText, startDate, endDate, description);
+			privateLayout, layoutIdMap, parameterMap, scope, exportStartDate,
+			exportEndDate, groupName, cronText, startDate, endDate, description);
 	}
 
 	public static void schedulePublishToRemote(long sourceGroupId,
