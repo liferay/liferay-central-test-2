@@ -46,7 +46,7 @@ Liferay.Portlet = {
 			p_p_col_id: currentColumnId,
 			p_p_col_pos: portletPosition
 		};
-		
+
 		if (refreshPortletList["_" + portletId]) {
 			data.referer = Liferay.currentURLEncoded;
 			data.refresh = 1;
