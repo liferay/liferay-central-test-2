@@ -153,16 +153,6 @@
 		Liferay.currentURL = '<%= currentURL %>';
 		Liferay.currentURLEncoded = '<%= HttpUtil.encodeURL(currentURL) %>';
 
-		Liferay.Constants = {
-			ADD: '<%= Constants.ADD %>',
-			CMD: '<%= Constants.CMD %>',
-			DELETE: '<%= Constants.DELETE %>',
-			RESTORE: '<%= Constants.RESTORE %>',
-			SEARCH: '<%= Constants.SEARCH %>',
-			UNSUBSCRIBE: '<%= Constants.UNSUBSCRIBE %>',
-			UPDATE: '<%= Constants.UPDATE %>'
-		};
-
 		jQuery(
 			function() {
 				Liferay.Util.addInputType();
