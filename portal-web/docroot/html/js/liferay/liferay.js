@@ -36,7 +36,7 @@ Liferay.Service = {
 
 	classNameSuffix: "ServiceJSON",
 
-	ajax: function(params, callback) {
+	ajax: function(options, callback) {
 		var instance = this;
 
 		var serviceUrl = instance.actionUrl;
@@ -45,14 +45,14 @@ Liferay.Service = {
 			serviceUrl = instance.tunnelUrl;
 		}
 
-		params.serviceParameters = Liferay.Service.getParameters(params);
+		options.serviceParameters = Liferay.Service.getParameters(options);
 
 		if (callback) {
 			jQuery.ajax(
 				{
 					type: 'GET',
 					url: serviceUrl,
-					data: params,
+					data: options,
 					dataType: 'json',
 					beforeSend: function(xHR) {
 						if (Liferay.ServiceAuth.header) {
@@ -67,7 +67,7 @@ Liferay.Service = {
 			var xHR = jQuery.ajax(
 				{
 					url: serviceUrl,
-					data: params,
+					data: options,
 					dataType: 'json',
 					async: false
 				}
@@ -77,10 +77,10 @@ Liferay.Service = {
 		}
 	},
 
-	getParameters: function(params) {
+	getParameters: function(options) {
 		var serviceParameters = "";
 
-		for (var key in params) {
+		for (var key in options) {
 			if ((key != "serviceClassName") && (key != "serviceMethodName") && (key != "serviceParameterTypes")) {
 				serviceParameters += key + ",";
 			}
