@@ -198,17 +198,18 @@ public class LayoutServiceUtil {
 		long targetGroupId, boolean privateLayout,
 		java.util.Map<Long, Boolean> layoutIdMap,
 		java.util.Map<String, String[]> parameterMap, java.lang.String scope,
-		java.util.Date exportStartDate, java.util.Date exportEndDate,
-		java.lang.String groupName, java.lang.String cronText,
 		java.util.Date startDate, java.util.Date endDate,
+		java.lang.String groupName, java.lang.String cronText,
+		java.util.Date schedulerStartDate, java.util.Date schedulerEndDate,
 		java.lang.String description)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
 
 		layoutService.schedulePublishToLive(sourceGroupId, targetGroupId,
-			privateLayout, layoutIdMap, parameterMap, scope, exportStartDate,
-			exportEndDate, groupName, cronText, startDate, endDate, description);
+			privateLayout, layoutIdMap, parameterMap, scope, startDate,
+			endDate, groupName, cronText, schedulerStartDate, schedulerEndDate,
+			description);
 	}
 
 	public static void schedulePublishToRemote(long sourceGroupId,
@@ -216,19 +217,19 @@ public class LayoutServiceUtil {
 		java.util.Map<String, String[]> parameterMap,
 		java.lang.String remoteAddress, int remotePort,
 		boolean secureConnection, long remoteGroupId,
-		boolean remotePrivateLayout, java.util.Date exportStartDate,
-		java.util.Date exportEndDate, java.lang.String groupName,
-		java.lang.String cronText, java.util.Date startDate,
-		java.util.Date endDate, java.lang.String description)
+		boolean remotePrivateLayout, java.util.Date startDate,
+		java.util.Date endDate, java.lang.String groupName,
+		java.lang.String cronText, java.util.Date schedulerStartDate,
+		java.util.Date schedulerEndDate, java.lang.String description)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
 
 		layoutService.schedulePublishToRemote(sourceGroupId, privateLayout,
 			layoutIdMap, parameterMap, remoteAddress, remotePort,
-			secureConnection, remoteGroupId, remotePrivateLayout,
-			exportStartDate, exportEndDate, groupName, cronText, startDate,
-			endDate, description);
+			secureConnection, remoteGroupId, remotePrivateLayout, startDate,
+			endDate, groupName, cronText, schedulerStartDate, schedulerEndDate,
+			description);
 	}
 
 	public static void setLayouts(long groupId, boolean privateLayout,

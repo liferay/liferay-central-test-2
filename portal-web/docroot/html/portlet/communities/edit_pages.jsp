@@ -384,23 +384,6 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	}
 </script>
 
-<liferay-ui:error exception="<%= RemoteExportException.class %>">
-
-	<%
-	RemoteExportException ree = (RemoteExportException)errorException;
-	%>
-
-	<c:if test="<%= ree.getType() == RemoteExportException.BAD_CONNECTION %>">
-		<%= LanguageUtil.format(pageContext, "could-not-connect-to-address-x,please-verify-that-the-specified-port-is-correct", "<tt>" + ree.getURL() + "</tt>") %>
-	</c:if>
-	<c:if test="<%= ree.getType() == RemoteExportException.NO_GROUP %>">
-		<%= LanguageUtil.format(pageContext, "remote-group-with-id-x-does-not-exist", ree.getGroupId()) %>
-	</c:if>
-	<c:if test="<%= ree.getType() == RemoteExportException.NO_LAYOUTS %>">
-		<liferay-ui:message key="no-layouts-are-selected-for-export" />
-	</c:if>
-</liferay-ui:error>
-
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_pages" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />savePage(); return false;">
 <input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escape(tabs1) %>" />
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escape(tabs2) %>" />

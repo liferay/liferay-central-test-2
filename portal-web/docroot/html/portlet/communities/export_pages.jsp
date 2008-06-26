@@ -174,6 +174,8 @@ request.setAttribute("edit_pages.jsp-groupId", new Long(selGroupId));
 request.setAttribute("edit_pages.jsp-selPlid", new Long(selPlid));
 request.setAttribute("edit_pages.jsp-privateLayout", new Boolean(privateLayout));
 
+request.setAttribute("edit_pages.jsp-rootNodeName", rootNodeName);
+
 request.setAttribute("edit_pages.jsp-layoutList", layoutList);
 
 request.setAttribute("edit_pages.jsp-portletURL", portletURL);

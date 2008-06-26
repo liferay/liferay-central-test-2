@@ -129,9 +129,9 @@ public interface LayoutService {
 	public void schedulePublishToLive(long sourceGroupId, long targetGroupId,
 		boolean privateLayout, java.util.Map<Long, Boolean> layoutIdMap,
 		java.util.Map<String, String[]> parameterMap, java.lang.String scope,
-		java.util.Date exportStartDate, java.util.Date exportEndDate,
-		java.lang.String groupName, java.lang.String cronText,
 		java.util.Date startDate, java.util.Date endDate,
+		java.lang.String groupName, java.lang.String cronText,
+		java.util.Date schedulerStartDate, java.util.Date schedulerEndDate,
 		java.lang.String description)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -141,10 +141,10 @@ public interface LayoutService {
 		java.util.Map<String, String[]> parameterMap,
 		java.lang.String remoteAddress, int remotePort,
 		boolean secureConnection, long remoteGroupId,
-		boolean remotePrivateLayout, java.util.Date exportStartDate,
-		java.util.Date exportEndDate, java.lang.String groupName,
-		java.lang.String cronText, java.util.Date startDate,
-		java.util.Date endDate, java.lang.String description)
+		boolean remotePrivateLayout, java.util.Date startDate,
+		java.util.Date endDate, java.lang.String groupName,
+		java.lang.String cronText, java.util.Date schedulerStartDate,
+		java.util.Date schedulerEndDate, java.lang.String description)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

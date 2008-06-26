@@ -236,8 +236,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	public void schedulePublishToLive(
 			long sourceGroupId, long targetGroupId, boolean privateLayout,
 			Map<Long, Boolean> layoutIdMap, Map<String, String[]> parameterMap,
-			String scope, Date exportStartDate, Date exportEndDate,
-			String groupName, String cronText, Date startDate, Date endDate,
+			String scope, Date startDate, Date endDate, String groupName,
+			String cronText, Date schedulerStartDate, Date schedulerEndDate,
 			String description)
 		throws PortalException, SystemException {
 
@@ -259,12 +259,11 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		LayoutsLocalPublisherRequest publisherRequest =
 			new LayoutsLocalPublisherRequest(
 				command, getUserId(), sourceGroupId, targetGroupId,
-				privateLayout, layoutIdMap, parameterMap, exportStartDate,
-				exportEndDate);
+				privateLayout, layoutIdMap, parameterMap, startDate, endDate);
 
 		SchedulerEngineUtil.schedule(
-			groupName, cronText, startDate, endDate, description,
-			DestinationNames.LAYOUTS_LOCAL_PUBLISHER,
+			groupName, cronText, schedulerStartDate, schedulerEndDate,
+			description, DestinationNames.LAYOUTS_LOCAL_PUBLISHER,
 			JSONUtil.serialize(publisherRequest));
 	}
 
@@ -273,9 +272,9 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			Map<Long, Boolean> layoutIdMap,
 			Map<String, String[]> parameterMap, String remoteAddress,
 			int remotePort, boolean secureConnection, long remoteGroupId,
-			boolean remotePrivateLayout, Date exportStartDate,
-			Date exportEndDate, String groupName, String cronText,
-			Date startDate, Date endDate, String description)
+			boolean remotePrivateLayout, Date startDate, Date endDate,
+			String groupName, String cronText, Date schedulerStartDate,
+			Date schedulerEndDate, String description)
 		throws PortalException, SystemException {
 
 		GroupPermissionUtil.check(
@@ -285,12 +284,11 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			new LayoutsRemotePublisherRequest(
 				getUserId(), sourceGroupId, privateLayout, layoutIdMap,
 				parameterMap, remoteAddress, remotePort, secureConnection,
-				remoteGroupId, remotePrivateLayout, exportStartDate,
-				exportEndDate);
+				remoteGroupId, remotePrivateLayout, startDate, endDate);
 
 		SchedulerEngineUtil.schedule(
-			groupName, cronText, startDate, endDate, description,
-			DestinationNames.LAYOUTS_REMOTE_PUBLISHER,
+			groupName, cronText, schedulerStartDate, schedulerEndDate,
+			description, DestinationNames.LAYOUTS_REMOTE_PUBLISHER,
 			JSONUtil.serialize(publisherRequest));
 	}
 

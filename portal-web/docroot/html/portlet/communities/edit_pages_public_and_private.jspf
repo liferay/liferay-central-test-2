@@ -23,21 +23,42 @@
 %>
 
 <%
-PortletURL publishToRemoteURL = renderResponse.createRenderURL();
+PortletURL publishToLiveURL = renderResponse.createRenderURL();
 
-publishToRemoteURL.setWindowState(LiferayWindowState.EXCLUSIVE);
-publishToRemoteURL.setPortletMode(PortletMode.VIEW);
+publishToLiveURL.setWindowState(LiferayWindowState.EXCLUSIVE);
+publishToLiveURL.setPortletMode(PortletMode.VIEW);
 
-publishToRemoteURL.setParameter("struts_action", "/communities/export_pages");
-publishToRemoteURL.setParameter("tabs1", tabs1);
-publishToRemoteURL.setParameter("pagesRedirect", portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid);
-publishToRemoteURL.setParameter("groupId", String.valueOf(groupId));
-publishToRemoteURL.setParameter("selPlid", String.valueOf(selPlid));
+publishToLiveURL.setParameter("struts_action", "/communities/export_pages");
+publishToLiveURL.setParameter("tabs1", tabs1);
+publishToLiveURL.setParameter("pagesRedirect", portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid);
+publishToLiveURL.setParameter("groupId", String.valueOf(groupId));
+publishToLiveURL.setParameter("selPlid", String.valueOf(selPlid));
+publishToLiveURL.setParameter("localPublishing", "1");
+
+PortletURL publishToRemoteURL = PortletURLUtil.clone(publishToLiveURL, renderResponse);
+
 publishToRemoteURL.setParameter("localPublishing", "0");
 %>
 
 <c:choose>
 	<c:when test="<%= stagingGroup != null %>">
+		<liferay-ui:error exception="<%= RemoteExportException.class %>">
+
+			<%
+			RemoteExportException ree = (RemoteExportException)errorException;
+			%>
+
+			<c:if test="<%= ree.getType() == RemoteExportException.BAD_CONNECTION %>">
+				<%= LanguageUtil.format(pageContext, "could-not-connect-to-address-x,please-verify-that-the-specified-port-is-correct", "<i>" + ree.getURL() + "</i>") %>
+			</c:if>
+			<c:if test="<%= ree.getType() == RemoteExportException.NO_GROUP %>">
+				<%= LanguageUtil.format(pageContext, "remote-group-with-id-x-does-not-exist", ree.getGroupId()) %>
+			</c:if>
+			<c:if test="<%= ree.getType() == RemoteExportException.NO_LAYOUTS %>">
+				<liferay-ui:message key="no-pages-are-selected-for-export" />
+			</c:if>
+		</liferay-ui:error>
+
 		<div class="portlet-msg-alert">
 			<liferay-ui:message key="the-staging-environment-is-activated-changes-have-to-be-published-to-make-them-available-to-end-users" />
 		</div>
@@ -98,13 +119,6 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 					</c:if>
 				</c:when>
 				<c:otherwise>
-
-					<%
-					PortletURL publishToLiveURL = PortletURLUtil.clone(publishToRemoteURL, renderResponse);
-
-					publishToLiveURL.setParameter("localPublishing", "1");
-					%>
-
 					<input type="button" value="<liferay-ui:message key="publish-to-live" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= publishToLiveURL %>', messageId: 'publish-to-live'});" />
 
 					<input type="button" value="<liferay-ui:message key="publish-to-remote" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= publishToRemoteURL %>', messageId: 'publish-to-remote'});" />
@@ -128,6 +142,7 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 			<input type="button" value="<liferay-ui:message key="view-pages" />" onClick="var liveGroupWindow = window.open('<%= viewPagesURL %>'); void(''); liveGroupWindow.focus();" />
 
 			<input type="button" value="<liferay-ui:message key="publish-to-remote" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= publishToRemoteURL %>', messageId: 'publish-to-remote'});" />
+
 			<br /><br />
 		</c:if>
 	</c:otherwise>

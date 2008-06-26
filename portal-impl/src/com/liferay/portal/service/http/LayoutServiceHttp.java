@@ -845,9 +845,9 @@ public class LayoutServiceHttp {
 		long sourceGroupId, long targetGroupId, boolean privateLayout,
 		java.util.Map<Long, Boolean> layoutIdMap,
 		java.util.Map<String, String[]> parameterMap, java.lang.String scope,
-		java.util.Date exportStartDate, java.util.Date exportEndDate,
-		java.lang.String groupName, java.lang.String cronText,
 		java.util.Date startDate, java.util.Date endDate,
+		java.lang.String groupName, java.lang.String cronText,
+		java.util.Date schedulerStartDate, java.util.Date schedulerEndDate,
 		java.lang.String description)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -876,15 +876,15 @@ public class LayoutServiceHttp {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = exportStartDate;
+			Object paramObj6 = startDate;
 
-			if (exportStartDate == null) {
+			if (startDate == null) {
 				paramObj6 = new NullWrapper("java.util.Date");
 			}
 
-			Object paramObj7 = exportEndDate;
+			Object paramObj7 = endDate;
 
-			if (exportEndDate == null) {
+			if (endDate == null) {
 				paramObj7 = new NullWrapper("java.util.Date");
 			}
 
@@ -900,15 +900,15 @@ public class LayoutServiceHttp {
 				paramObj9 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj10 = startDate;
+			Object paramObj10 = schedulerStartDate;
 
-			if (startDate == null) {
+			if (schedulerStartDate == null) {
 				paramObj10 = new NullWrapper("java.util.Date");
 			}
 
-			Object paramObj11 = endDate;
+			Object paramObj11 = schedulerEndDate;
 
-			if (endDate == null) {
+			if (schedulerEndDate == null) {
 				paramObj11 = new NullWrapper("java.util.Date");
 			}
 
@@ -954,10 +954,10 @@ public class LayoutServiceHttp {
 		java.util.Map<String, String[]> parameterMap,
 		java.lang.String remoteAddress, int remotePort,
 		boolean secureConnection, long remoteGroupId,
-		boolean remotePrivateLayout, java.util.Date exportStartDate,
-		java.util.Date exportEndDate, java.lang.String groupName,
-		java.lang.String cronText, java.util.Date startDate,
-		java.util.Date endDate, java.lang.String description)
+		boolean remotePrivateLayout, java.util.Date startDate,
+		java.util.Date endDate, java.lang.String groupName,
+		java.lang.String cronText, java.util.Date schedulerStartDate,
+		java.util.Date schedulerEndDate, java.lang.String description)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -991,15 +991,15 @@ public class LayoutServiceHttp {
 
 			Object paramObj8 = new BooleanWrapper(remotePrivateLayout);
 
-			Object paramObj9 = exportStartDate;
+			Object paramObj9 = startDate;
 
-			if (exportStartDate == null) {
+			if (startDate == null) {
 				paramObj9 = new NullWrapper("java.util.Date");
 			}
 
-			Object paramObj10 = exportEndDate;
+			Object paramObj10 = endDate;
 
-			if (exportEndDate == null) {
+			if (endDate == null) {
 				paramObj10 = new NullWrapper("java.util.Date");
 			}
 
@@ -1015,15 +1015,15 @@ public class LayoutServiceHttp {
 				paramObj12 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj13 = startDate;
+			Object paramObj13 = schedulerStartDate;
 
-			if (startDate == null) {
+			if (schedulerStartDate == null) {
 				paramObj13 = new NullWrapper("java.util.Date");
 			}
 
-			Object paramObj14 = endDate;
+			Object paramObj14 = schedulerEndDate;
 
-			if (endDate == null) {
+			if (schedulerEndDate == null) {
 				paramObj14 = new NullWrapper("java.util.Date");
 			}
 

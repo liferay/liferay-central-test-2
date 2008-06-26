@@ -69,6 +69,10 @@ Collections.sort(portletsList, new PortletTitleComparator(application, locale));
 		jQuery("#<portlet:namespace />startEndDate").hide();
 	}
 
+	function <portlet:namespace />showDateRange() {
+		jQuery("#<portlet:namespace />startEndDate").show();
+	}
+
 	function <portlet:namespace />toggleChildren(checkbox, parentDivId) {
 		if (checkbox.checked) {
 			jQuery('#' + parentDivId).find("input").not(".disabled").removeAttr('disabled');
@@ -76,10 +80,6 @@ Collections.sort(portletsList, new PortletTitleComparator(application, locale));
 		else {
 			jQuery('#' + parentDivId).find("input").attr("disabled", "disabled");
 		}
-	}
-
-	function <portlet:namespace />showDateRange() {
-		jQuery("#<portlet:namespace />startEndDate").show();
 	}
 </script>
 
