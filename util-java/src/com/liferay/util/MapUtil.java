@@ -84,7 +84,7 @@ public class MapUtil {
 	}
 
 	public static short getShort(Map map, String key) {
-		return getShort(map, key, GetterUtil.DEFAULT_INTEGER);
+		return getShort(map, key, GetterUtil.DEFAULT_SHORT);
 	}
 
 	public static short getShort(Map map, String key, short defaultValue) {
