@@ -121,12 +121,12 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	public PortletImpl(
 		String portletId, PluginPackage pluginPackage,
 		PluginSetting pluginSetting, long companyId, long timestamp,
-		String icon, String virtualPath, String strutsPath, String displayName,
-		String portletClass, String configurationActionClass,
-		String indexerClass, String openSearchClass, String schedulerClass,
-		String portletURLClass, String friendlyURLMapperClass,
-		String urlEncoderClass, String portletDataHandlerClass,
-		String portletLayoutListenerClass,
+		String icon, String virtualPath, String strutsPath, String portletName,
+		String displayName, String portletClass,
+		String configurationActionClass, String indexerClass,
+		String openSearchClass, String schedulerClass, String portletURLClass,
+		String friendlyURLMapperClass, String urlEncoderClass,
+		String portletDataHandlerClass, String portletLayoutListenerClass,
 		String popMessageListenerClass, String socialActivityInterpreterClass,
 		String socialRequestInterpreterClass, String defaultPreferences,
 		String prefsValidator, boolean prefsCompanyWide,
@@ -161,6 +161,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_icon = icon;
 		_virtualPath = virtualPath;
 		_strutsPath = strutsPath;
+		_portletName = portletName;
 		_displayName = displayName;
 		_portletClass = portletClass;
 		_configurationActionClass = configurationActionClass;
@@ -2420,8 +2421,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		return new PortletImpl(
 			getPortletId(), getPluginPackage(), getDefaultPluginSetting(),
 			getCompanyId(), getTimestamp(), getIcon(), getVirtualPath(),
-			getStrutsPath(), getDisplayName(), getPortletClass(),
-			getConfigurationActionClass(), getIndexerClass(),
+			getStrutsPath(), getPortletName(), getDisplayName(),
+			getPortletClass(), getConfigurationActionClass(), getIndexerClass(),
 			getOpenSearchClass(), getSchedulerClass(), getPortletURLClass(),
 			getFriendlyURLMapperClass(), getURLEncoderClass(),
 			getPortletDataHandlerClass(), getPortletLayoutListenerClass(),

@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 /**
  * The contents of this file are subject to the terms of the Common Development
  * and Distribution License (the License). You may not use this file except in
@@ -40,6 +41,7 @@
 
 package com.liferay.portal.portletcontainer;
 
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.QNameUtil;
 
@@ -48,7 +50,6 @@ import com.sun.portal.container.ChannelState;
 import com.sun.portal.container.ChannelURLType;
 import com.sun.portal.container.WindowRequestReader;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -58,74 +59,94 @@ import javax.servlet.http.HttpServletRequest;
  * <a href="PortletWindowRequestReader.java.html"><b><i>View Source</i></b></a>
  *
  * @author Deepak Gothe
+ * @author Brian Wing Shun Chan
  *
  */
 public class PortletWindowRequestReader implements WindowRequestReader {
 
-	public ChannelMode readNewPortletWindowMode(HttpServletRequest request) {
-		String newChannelMode = request.getParameter("p_p_mode");
-		if (newChannelMode != null) {
-			return new ChannelMode(newChannelMode);
-		}
-		return null;
+	public String getCacheLevel(HttpServletRequest req) {
+		return req.getParameter("p_p_cacheability");
 	}
 
-	public ChannelState readNewWindowState(HttpServletRequest request) {
-		String newWindowState = request.getParameter("p_p_state");
-		if (newWindowState != null) {
-			return new ChannelState(newWindowState);
-		}
-		return null;
+	public String getResourceID(HttpServletRequest req) {
+		return req.getParameter("p_p_resource_id");
 	}
 
-	public ChannelURLType readURLType(HttpServletRequest request) {
-		String lifecycle = request.getParameter("p_p_url_type");
-		ChannelURLType channelURLType;
-		if ("0".equals(lifecycle)) {
-			channelURLType = ChannelURLType.RENDER;
-		} else if ("1".equals(lifecycle)) {
-			channelURLType = ChannelURLType.ACTION;
-		} else if ("2".equals(lifecycle)) {
-			channelURLType = ChannelURLType.RESOURCE;
-		} else {
-			channelURLType = ChannelURLType.RENDER;
+	public ChannelMode readNewPortletWindowMode(HttpServletRequest req) {
+		String portletMode = req.getParameter("p_p_mode");
+
+		if (portletMode != null) {
+			return new ChannelMode(portletMode);
 		}
-		return channelURLType;
+		else {
+			return null;
+		}
 	}
 
-	public Map<String, String[]> readParameterMap(HttpServletRequest request) {
-		Map<String, String[]> parsedMap = new HashMap<String, String[]>();
-		Map<String, String[]> parameterMap = request.getParameterMap();
-		String portletId = request.getParameter("p_p_id");
+	public ChannelState readNewWindowState(HttpServletRequest req) {
+		String windowState = req.getParameter("p_p_state");
+
+		if (windowState != null) {
+			return new ChannelState(windowState);
+		}
+		else {
+			return null;
+		}
+	}
+
+	public Map<String, String[]> readParameterMap(HttpServletRequest req) {
+		Map<String, String[]> parameterMap = req.getParameterMap();
+
+		String portletId = req.getParameter("p_p_id");
+
 		String namespace = PortalUtil.getPortletNamespace(portletId);
-		Set<Map.Entry<String, String[]>> entries = parameterMap.entrySet();
+
+		Set<Map.Entry<String, String[]>> entries =
+			req.getParameterMap().entrySet();
+
 		for (Map.Entry<String, String[]> mapEntry : entries) {
 			String key = mapEntry.getKey();
-			if (!PortalUtil.isReservedParameter(key)) {
-				if (key.startsWith(namespace)) {
-					// Remove the namespace of the parameter
-					parsedMap.put(key.substring(namespace.length()),
-									mapEntry.getValue());
-				} else if (key.startsWith(
+
+			if (PortalUtil.isReservedParameter(key)) {
+				continue;
+			}
+
+			if (key.startsWith(namespace)) {
+				parameterMap.put(
+					key.substring(namespace.length()), mapEntry.getValue());
+
+			}
+			else if (key.startsWith(
 						QNameUtil.PUBLIC_RENDER_PARAMETER_NAMESPACE)) {
-					String identifier =
-							QNameUtil.getPublicRenderParameterIdentifier(key);
-					// Get the identifier for the PRP
-					parsedMap.put(identifier, mapEntry.getValue());
-				} else {
-					parsedMap.put(key, mapEntry.getValue());
-				}
+
+				String identifier =
+					QNameUtil.getPublicRenderParameterIdentifier(key);
+
+				parameterMap.put(identifier, mapEntry.getValue());
+			}
+			else {
+				parameterMap.put(key, mapEntry.getValue());
 			}
 		}
-		return parsedMap;
+
+		return parameterMap;
 	}
 
-	public String getCacheLevel(HttpServletRequest request) {
-		return request.getParameter("p_p_cacheability");
-	}
+	public ChannelURLType readURLType(HttpServletRequest req) {
+		String urlType = ParamUtil.getString(req, "p_p_url_type");
 
-	public String getResourceID(HttpServletRequest request) {
-		return request.getParameter("p_p_resource_id");
+		if (urlType.equals("0")) {
+			return ChannelURLType.RENDER;
+		}
+		else if (urlType.equals("1")) {
+			return ChannelURLType.ACTION;
+		}
+		else if (urlType.equals("2")) {
+			return ChannelURLType.RESOURCE;
+		}
+		else {
+			return ChannelURLType.RENDER;
+		}
 	}
 
 }

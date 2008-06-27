@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 /**
  * The contents of this file are subject to the terms of the Common Development
  * and Distribution License (the License). You may not use this file except in
@@ -54,50 +55,53 @@ import javax.servlet.http.HttpServletResponse;
  * <a href="PortletWindowURLFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author Deepak Gothe
+ * @author Brian Wing Shun Chan
  *
  */
 public class PortletWindowURLFactory implements ChannelURLFactory {
 
-	public PortletWindowURLFactory(HttpServletRequest req,
-			Portlet portletModel, ChannelMode newPortletWindowMode,
-			ChannelState newWindowState, long plid) {
+	public PortletWindowURLFactory(
+		HttpServletRequest req, Portlet portlet, ChannelState windowState,
+		ChannelMode portletMode, long plid) {
+
 		_req = req;
-		_portlet = portletModel;
+		_portlet = portlet;
+		_windowState = windowState;
+		_portletMode = portletMode;
 		_plid = plid;
-		_windowState = newWindowState;
-		_portletMode = newPortletWindowMode;
 	}
 
 	public ChannelURL createChannelURL() {
 		return new PortletWindowURL(
-			_req, _portlet, _portletMode, _windowState, _plid);
+			_req, _portlet, _windowState, _portletMode, _plid);
 	}
 
 	public String encodeURL(
-			HttpServletRequest req, HttpServletResponse res, String url) {
+		HttpServletRequest req, HttpServletResponse res, String url) {
+
 		return res.encodeURL(url);
 	}
 
-	public String getRenderTemplate() {
-		throw new RuntimeException("Method not implemented");
+	public String getActionTemplate() {
+		throw new UnsupportedOperationException();
 	}
 
-	public String getActionTemplate() {
-		throw new RuntimeException("Method not implemented");
+	public String getRenderTemplate() {
+		throw new UnsupportedOperationException();
 	}
 
 	public String getResourceTemplate() {
-		throw new RuntimeException("Method not implemented");
+		throw new UnsupportedOperationException();
 	}
 
 	public String getSecurityErrorURL() {
-		throw new RuntimeException("Method not implemented");
+		throw new UnsupportedOperationException();
 	}
 
 	private HttpServletRequest _req;
 	private Portlet _portlet;
-	private long _plid;
 	private ChannelState _windowState;
 	private ChannelMode _portletMode;
+	private long _plid;
 
 }

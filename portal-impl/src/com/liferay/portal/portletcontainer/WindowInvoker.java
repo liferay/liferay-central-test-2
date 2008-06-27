@@ -41,17 +41,12 @@
 
 package com.liferay.portal.portletcontainer;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.ccpp.EmptyProfile;
-import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.ccpp.PortalProfileFactory;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
-import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
-import com.liferay.portal.kernel.util.Time;
-import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.PortletApp;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
@@ -61,29 +56,20 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
-import com.liferay.portlet.CustomUserAttributes;
 import com.liferay.portlet.InvokerPortlet;
-import com.liferay.portlet.InvokerPortletResponse;
-import com.liferay.portlet.PortletConfigImpl;
-import com.liferay.portlet.PortletContextBag;
-import com.liferay.portlet.PortletContextBagPool;
-import com.liferay.portlet.PortletRequestImpl;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.RenderResponseImpl;
 import com.liferay.portlet.ResourceRequestImpl;
 import com.liferay.portlet.ResourceResponseImpl;
-import com.liferay.portlet.UserAttributes;
+import com.liferay.portlet.UserInfoFactory;
 
-import com.sun.ccpp.ProfileFactoryImpl;
 import com.sun.portal.container.ChannelMode;
 import com.sun.portal.container.ChannelState;
 import com.sun.portal.container.ChannelURLType;
 import com.sun.portal.container.Container;
-import com.sun.portal.container.ContainerException;
 import com.sun.portal.container.ContainerFactory;
 import com.sun.portal.container.ContainerRequest;
 import com.sun.portal.container.ContainerType;
-import com.sun.portal.container.ContentException;
 import com.sun.portal.container.ExecuteActionRequest;
 import com.sun.portal.container.ExecuteActionResponse;
 import com.sun.portal.container.GetMarkupRequest;
@@ -99,25 +85,20 @@ import java.net.URL;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.ccpp.Profile;
-import javax.ccpp.ProfileFactory;
-import javax.ccpp.ValidationMode;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.EventRequest;
 import javax.portlet.EventResponse;
+import javax.portlet.Portlet;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletException;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
-import javax.portlet.PortletSession;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
@@ -126,7 +107,6 @@ import javax.portlet.ResourceResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -134,571 +114,276 @@ import org.apache.commons.logging.LogFactory;
  * <a href="WindowInvoker.java.html"><b><i>View Source</i></b></a>
  *
  * @author Deepak Gothe
+ * @author Brian Wing Shun Chan
  *
  */
 public class WindowInvoker extends InvokerPortlet {
 
 	public WindowInvoker(
-			com.liferay.portal.model.Portlet portletModel,
-			javax.portlet.Portlet portlet, PortletContext portletCtx)
-			throws PortletException {
+			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
+			PortletContext portletCtx)
+		throws PortletException {
 
 		super(portletModel, portlet, portletCtx);
+
 		_portletModel = portletModel;
-		_container = getContainer();
+		_container = _getContainer();
 	}
 
 	public WindowInvoker(
-			com.liferay.portal.model.Portlet portletModel,
-			javax.portlet.Portlet portlet, PortletConfig portletConfig,
-			PortletContext portletCtx, boolean facesPortlet,
-			boolean strutsPortlet, boolean strutsBridgePortlet)
-			throws PortletException {
+			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
+			PortletConfig portletConfig, PortletContext portletCtx,
+			boolean facesPortlet, boolean strutsPortlet,
+			boolean strutsBridgePortlet)
+		throws PortletException {
 
-		super(portletModel, portlet, portletConfig, portletCtx, facesPortlet,
-				strutsPortlet, strutsBridgePortlet);
+		super(
+			portletModel, portlet, portletConfig, portletCtx, facesPortlet,
+			strutsPortlet, strutsBridgePortlet);
 
 		_portletModel = portletModel;
-		_portletId = ((PortletConfigImpl) portletConfig).getPortletId();
-		_container = getContainer();
-	}
-
-	@Override
-	public void processAction(ActionRequest req, ActionResponse res)
-			throws IOException, PortletException {
-
-		StopWatch stopWatch = null;
-
-		if (_log.isDebugEnabled()) {
-			stopWatch = new StopWatch();
-
-			stopWatch.start();
-		}
-
-		try {
-			invokeAction(req, res);
-		} catch (PortletException pe) {
-			req.setAttribute(_portletId + PortletException.class.getName(), pe);
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("processAction for " + _portletId + " takes "
-					+ stopWatch.getTime() + " ms");
-		}
-	}
-
-	@Override
-	public void processEvent(EventRequest req, EventResponse res)
-			throws IOException, PortletException {
-
-		StopWatch stopWatch = null;
-
-		if (_log.isDebugEnabled()) {
-			stopWatch = new StopWatch();
-
-			stopWatch.start();
-		}
-
-		invokeEvent(req, res);
-
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"processEvent for " + _portletId + " takes " +
-					stopWatch.getTime() + " ms");
-		}
-	}
-
-	@Override
-	public void render(RenderRequest req, RenderResponse res)
-			throws IOException, PortletException {
-
-		PortletException portletException = (PortletException)req.getAttribute(
-			_portletId + PortletException.class.getName());
-
-		if (portletException != null) {
-			throw portletException;
-		}
-
-		StopWatch stopWatch = null;
-
-		if (_log.isDebugEnabled()) {
-			stopWatch = new StopWatch();
-
-			stopWatch.start();
-		}
-
-		String remoteUser = req.getRemoteUser();
-
-		if ((remoteUser == null) || (getExpCache() == null)
-				|| (getExpCache().intValue() == 0)) {
-
-			String title = invokeRender(req, res);
-		} else {
-			RenderResponseImpl resImpl = (RenderResponseImpl) res;
-
-			PortletSession ses = req.getPortletSession();
-
-			long now = System.currentTimeMillis();
-
-			Layout layout = (Layout) req.getAttribute(WebKeys.LAYOUT);
-
-			Map<String, InvokerPortletResponse> sesResponses =
-				getResponses(ses);
-
-			String sesResponseId = encodeResponseKey(
-				layout.getPlid(), _portletId, LanguageUtil.getLanguageId(req));
-
-			InvokerPortletResponse response = sesResponses.get(sesResponseId);
-
-			if (response == null) {
-				String title = invokeRender(req, res);
-
-				StringServletResponse stringServletRes =
-					(StringServletResponse) resImpl.getHttpServletResponse();
-
-				response = new InvokerPortletResponse(
-					title,
-					stringServletRes.getString(),
-					now + Time.SECOND * getExpCache().intValue());
-
-				sesResponses.put(sesResponseId, response);
-			} else if ((response.getTime() < now)
-					&& (getExpCache().intValue() > 0)) {
-
-				String title = invokeRender(req, res);
-				StringServletResponse stringServletRes =
-					(StringServletResponse) resImpl.getHttpServletResponse();
-
-				response.setTitle(title);
-				response.setContent(stringServletRes.getString());
-				response.setTime(now + Time.SECOND * getExpCache().intValue());
-			} else {
-				resImpl.setTitle(response.getTitle());
-				StringServletResponse stringServletRes =
-					(StringServletResponse) resImpl.getHttpServletResponse();
-
-				stringServletRes.getWriter().print(response.getContent());
-			}
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"render for " + _portletId + " takes " + stopWatch.getTime() +
-					" ms");
-		}
-	}
-
-	@Override
-	public void serveResource(ResourceRequest req, ResourceResponse res)
-			throws IOException, PortletException {
-
-		StopWatch stopWatch = null;
-
-		if (_log.isDebugEnabled()) {
-			stopWatch = new StopWatch();
-
-			stopWatch.start();
-		}
-
-		try {
-			invokeResource(req, res);
-		} catch (PortletException pe) {
-			req.setAttribute(_portletId + PortletException.class.getName(), pe);
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"serveResource for " + _portletId + " takes " +
-					stopWatch.getTime() + " ms");
-		}
+		_container = _getContainer();
 	}
 
 	protected void invokeAction(ActionRequest req, ActionResponse res)
-			throws IOException, PortletException {
-		if (isPortletExternal()) {
-			ActionRequestImpl actionReqImpl = (ActionRequestImpl) req;
-			ActionResponseImpl actionResImpl = (ActionResponseImpl) res;
+		throws IOException, PortletException {
 
-			try {
-				HttpServletRequest request =
-					actionReqImpl.getOriginalHttpServletRequest();
-				HttpServletResponse response =
-					actionResImpl.getHttpServletResponse();
+		if (!_isWARFile()) {
+			super.invokeAction(req, res);
 
-				ExecuteActionRequest executeActionRequest =
-					ContainerRequestFactory.createExecuteActionRequest(
-						request,
-							_portletModel,
-								actionReqImpl.getWindowState(),
-									actionReqImpl.getPortletMode(),
-										actionResImpl.getLifecycle(),
-											getPlid(req),
-												_isRemotePortlet);
+			return;
+		}
 
-				populateContainerRequest(
-					request, response, executeActionRequest, actionReqImpl);
+		try {
+			ActionRequestImpl reqImpl = (ActionRequestImpl)req;
+			ActionResponseImpl resImpl = (ActionResponseImpl)res;
 
-				ExecuteActionResponse executeActionResponse =
-					ContainerResponseFactory.createExecuteActionResponse(
-						response);
+			HttpServletRequest httpReq =
+				reqImpl.getOriginalHttpServletRequest();
+			HttpServletResponse httpRes =
+				resImpl.getHttpServletResponse();
 
-				ChannelURLType urlType = executeActionRequest
-						.getWindowRequestReader().readURLType(request);
+			ExecuteActionRequest executeActionRequest =
+				ContainerRequestFactory.createExecuteActionRequest(
+					httpReq, _portletModel, reqImpl.getWindowState(),
+					reqImpl.getPortletMode(), _getPlid(req));
 
-				_container.executeAction(
-						executeActionRequest, executeActionResponse, urlType);
+			_populateContainerRequest(
+				httpReq, httpRes, executeActionRequest, reqImpl);
 
-				URL returnURL = executeActionResponse.getRedirectURL();
-				if (returnURL != null) {
-					actionResImpl.setRedirectLocation(returnURL.toString());
-				}
+			ExecuteActionResponse executeActionResponse =
+				ContainerResponseFactory.createExecuteActionResponse(httpRes);
 
-				ChannelMode newPortletWindowMode =
-					executeActionResponse.getNewChannelMode();
+			ChannelURLType urlType =
+				executeActionRequest.getWindowRequestReader().readURLType(
+					httpReq);
 
-				if (newPortletWindowMode != null) {
-					actionResImpl.setPortletMode(
-						PortletAppEngineUtils.getPortletMode(
-							newPortletWindowMode));
-				}
+			_container.executeAction(
+				executeActionRequest, executeActionResponse, urlType);
 
-				ChannelState newWindowState =
-					executeActionResponse.getNewWindowState();
+			URL redirectURL = executeActionResponse.getRedirectURL();
 
-				if (newWindowState != null) {
-					actionResImpl.setWindowState(
-							PortletAppEngineUtils.getWindowState(
-								newWindowState));
-				}
-			} catch (ContentException ce) {
-				logError(ce);
-				throw new PortletException(ce);
-			} catch (ContainerException ce) {
-				logError(ce);
-				throw new PortletException(ce);
-			} catch (PortalException pe) {
-				logError(pe);
-				throw new PortletException(pe);
-			} catch (SystemException se) {
-				logError(se);
-				throw new PortletException(se);
-			} finally {
-				setPortletAttributes(req, res);
+			if (redirectURL != null) {
+				resImpl.setRedirectLocation(redirectURL.toString());
 			}
-		} else {
-			invoke(req, res, PortletRequest.ACTION_PHASE);
+
+			ChannelState newWindowState =
+				executeActionResponse.getNewWindowState();
+
+			if (newWindowState != null) {
+				resImpl.setWindowState(
+					PortletAppEngineUtils.getWindowState(newWindowState));
+			}
+
+			ChannelMode newPortletMode =
+				executeActionResponse.getNewChannelMode();
+
+			if (newPortletMode != null) {
+				resImpl.setPortletMode(
+					PortletAppEngineUtils.getPortletMode(newPortletMode));
+			}
+		}
+		catch (Exception e) {
+			throw new PortletException(e);
+		}
+		finally {
+			_setPortletAttributes(req, res);
 		}
 	}
 
 	protected void invokeEvent(EventRequest req, EventResponse res)
-			throws IOException, PortletException {
-		if (isPortletExternal()) {
-			// Eventing handled with container.executeAction
-		} else {
-			invoke(req, res, PortletRequest.EVENT_PHASE);
+		throws IOException, PortletException {
+
+		if (!_isWARFile()) {
+			super.invokeEvent(req, res);
 		}
 	}
 
 	protected String invokeRender(RenderRequest req, RenderResponse res)
-			throws IOException, PortletException {
-		String title = null;
-		if (isPortletExternal()) {
-			RenderRequestImpl renderReqImpl = (RenderRequestImpl) req;
-			RenderResponseImpl renderResImpl = (RenderResponseImpl) res;
+		throws IOException, PortletException {
 
-			try {
-				HttpServletRequest request =
-					renderReqImpl.getOriginalHttpServletRequest();
-				HttpServletResponse response =
-					renderResImpl.getHttpServletResponse();
-
-				GetMarkupRequest getMarkupRequest =
-					ContainerRequestFactory.createGetMarkUpRequest(
-						request,
-							_portletModel,
-								renderReqImpl.getWindowState(),
-									renderReqImpl.getPortletMode(),
-										renderResImpl.getLifecycle(),
-											getPlid(req),
-												_isRemotePortlet);
-
-				populateContainerRequest(
-					request, response, getMarkupRequest, renderReqImpl);
-
-				GetMarkupResponse getMarkupResponse =
-					ContainerResponseFactory.createGetMarkUpResponse(
-						response);
-
-				List allowableContentTypes =
-					getMarkupRequest.getAllowableContentTypes();
-
-				if (LiferayWindowState.EXCLUSIVE.equals(req.getWindowState())) {
-					allowableContentTypes.add("*/*");
-				}
-
-				getMarkupRequest.setAllowableContentTypes(
-					allowableContentTypes);
-
-				_container.getMarkup(getMarkupRequest, getMarkupResponse);
-
-				title = getMarkupResponse.getTitle();
-
-				StringBuffer buffer = getMarkupResponse.getMarkup();
-				PrintWriter out = response.getWriter();
-				out.print(buffer);
-
-			} catch (ContentException ce) {
-				logError(ce);
-				throw new PortletException(ce);
-			} catch (ContainerException ce) {
-				logError(ce);
-				throw new PortletException(ce);
-			} catch (PortalException pe) {
-				logError(pe);
-				throw new PortletException(pe);
-			} catch (SystemException se) {
-				logError(se);
-				throw new PortletException(se);
-			} finally {
-				setPortletAttributes(req, res);
-			}
-		} else {
-			invoke(req, res, PortletRequest.RENDER_PHASE);
+		if (!_isWARFile()) {
+			return super.invokeRender(req, res);
 		}
-		return title;
+
+		try {
+			RenderRequestImpl reqImpl = (RenderRequestImpl)req;
+			RenderResponseImpl resImpl = (RenderResponseImpl)res;
+
+			HttpServletRequest httpReq =
+				reqImpl.getOriginalHttpServletRequest();
+			HttpServletResponse httpRes = resImpl.getHttpServletResponse();
+
+			GetMarkupRequest getMarkupRequest =
+				ContainerRequestFactory.createGetMarkUpRequest(
+					httpReq, _portletModel, reqImpl.getWindowState(),
+					reqImpl.getPortletMode(), _getPlid(req));
+
+			_populateContainerRequest(
+				httpReq, httpRes, getMarkupRequest, reqImpl);
+
+			GetMarkupResponse getMarkupResponse =
+				ContainerResponseFactory.createGetMarkUpResponse(httpRes);
+
+			List<String> allowableContentTypes =
+				getMarkupRequest.getAllowableContentTypes();
+
+			if (req.getWindowState().equals(LiferayWindowState.EXCLUSIVE)) {
+				allowableContentTypes.add("*/*");
+			}
+
+			getMarkupRequest.setAllowableContentTypes(allowableContentTypes);
+
+			_container.getMarkup(getMarkupRequest, getMarkupResponse);
+
+			StringBuffer sb = getMarkupResponse.getMarkup();
+
+			PrintWriter pw = httpRes.getWriter();
+
+			pw.print(sb);
+
+			return getMarkupResponse.getTitle();
+
+		}
+		catch (Exception e) {
+			throw new PortletException(e);
+		}
+		finally {
+			_setPortletAttributes(req, res);
+		}
 	}
 
 	protected void invokeResource(ResourceRequest req, ResourceResponse res)
-			throws IOException, PortletException {
-		if (isPortletExternal()) {
-			ResourceRequestImpl resourceReqImpl = (ResourceRequestImpl) req;
-			ResourceResponseImpl resourceResImpl = (ResourceResponseImpl) res;
+		throws IOException, PortletException {
 
-			try {
-				HttpServletRequest request =
-					resourceReqImpl.getOriginalHttpServletRequest();
-				HttpServletResponse response =
-					resourceResImpl.getHttpServletResponse();
+		if (!_isWARFile()) {
+			super.invokeResource(req, res);
 
-				GetResourceRequest getResourceRequest =
-					ContainerRequestFactory.createGetResourceRequest(
-						request,
-							_portletModel,
-								resourceReqImpl.getWindowState(),
-									resourceReqImpl.getPortletMode(),
-										resourceResImpl.getLifecycle(),
-											getPlid(req),
-												_isRemotePortlet);
-
-				populateContainerRequest(
-					request, response, getResourceRequest, resourceReqImpl);
-
-				GetResourceResponse getResourceResponse =
-					ContainerResponseFactory .createGetResourceResponse(
-						response);
-
-				_container.getResources(
-					getResourceRequest, getResourceResponse);
-
-				// Write the buffer/stream to the response
-				String contentType = response.getContentType();
-				if (contentType != null)
-					resourceResImpl.setContentType(contentType);
-				StringBuffer buffer = getResourceResponse.getContentAsBuffer();
-				byte[] bytes = getResourceResponse.getContentAsBytes();
-				if (buffer != null) {
-					response.getWriter().print(buffer);
-
-				} else if (bytes != null && bytes.length > 0) {
-					response.getOutputStream().write(bytes);
-
-				} else {
-					response.getWriter().print("");
-				}
-
-			} catch (ContentException ce) {
-				logError(ce);
-				throw new PortletException(ce);
-			} catch (ContainerException ce) {
-				logError(ce);
-				throw new PortletException(ce);
-			} catch (PortalException pe) {
-				logError(pe);
-				throw new PortletException(pe);
-			} catch (SystemException se) {
-				logError(se);
-				throw new PortletException(se);
-			} finally {
-				setPortletAttributes(req, res);
-			}
-		} else {
-			invoke(req, res, PortletRequest.RESOURCE_PHASE);
+			return;
 		}
-	}
-
-	protected void populateContainerRequest(HttpServletRequest request,
-			HttpServletResponse response, ContainerRequest containerRequest,
-			PortletRequest portletRequest) throws SystemException {
-
-		containerRequest.setRoles(getRoles(request));
-		containerRequest.setUserInfo(getUserInfo(request, portletRequest));
-
-		containerRequest.setAttribute(PortletRequest.CCPP_PROFILE,
-				getCCPPProfile(request));
-	}
-
-	protected Container getContainer() {
-		if (_isRemotePortlet) {
-			return ContainerFactory.getContainer(ContainerType.WSRP_CONSUMER);
-		} else {
-			return ContainerFactory.getContainer(
-				ContainerType.PORTLET_CONTAINER);
-		}
-	}
-
-	protected boolean isPortletExternal() {
-		return getPortletConfig().isWARFile();
-	}
-
-	protected LinkedHashMap<String, String> getUserInfo(
-			HttpServletRequest request, PortletRequest portletReq) {
-
-		if (portletReq.getRemoteUser() == null) {
-			return null;
-		}
-
-		LinkedHashMap<String, String> userInfo =
-			new LinkedHashMap<String, String>();
-
-		PortletApp portletApp = _portletModel.getPortletApp();
-
-		// Liferay user attributes
 
 		try {
-			User user = PortalUtil.getUser(request);
+			ResourceRequestImpl reqImpl = (ResourceRequestImpl)req;
+			ResourceResponseImpl resImpl = (ResourceResponseImpl)res;
 
-			UserAttributes userAttributes = new UserAttributes(user);
+			HttpServletRequest httpReq =
+				reqImpl.getOriginalHttpServletRequest();
+			HttpServletResponse httpRes = resImpl.getHttpServletResponse();
 
-			// Mandatory user attributes
+			GetResourceRequest getResourceRequest =
+				ContainerRequestFactory.createGetResourceRequest(
+					httpReq, _portletModel, reqImpl.getWindowState(),
+					reqImpl.getPortletMode(), _getPlid(req));
 
-			userInfo.put(
-				UserAttributes.LIFERAY_COMPANY_ID,
-				userAttributes.getValue(UserAttributes.LIFERAY_COMPANY_ID));
+			_populateContainerRequest(
+				httpReq, httpRes, getResourceRequest, reqImpl);
 
-			userInfo.put(
-				UserAttributes.LIFERAY_USER_ID,
-				userAttributes.getValue(UserAttributes.LIFERAY_USER_ID));
+			GetResourceResponse getResourceResponse =
+				ContainerResponseFactory .createGetResourceResponse(httpRes);
 
-			// Portlet user attributes
+			_container.getResources(
+				getResourceRequest, getResourceResponse);
 
-			for (String attrName : portletApp.getUserAttributes()) {
-				String attrValue = userAttributes.getValue(attrName);
+			String contentType = httpRes.getContentType();
 
-				if (attrValue != null) {
-					userInfo.put(attrName, attrValue);
-				}
+			if (contentType != null) {
+				resImpl.setContentType(contentType);
 			}
-		} catch (Exception e) {
-			_log.error(e, e);
+
+			StringBuffer sb = getResourceResponse.getContentAsBuffer();
+
+			byte[] bytes = getResourceResponse.getContentAsBytes();
+
+			if (sb != null) {
+				httpRes.getWriter().print(sb);
+			}
+			else if ((bytes != null) && (bytes.length > 0)) {
+				httpRes.getOutputStream().write(bytes);
+			}
+			else {
+				httpRes.getWriter().print(StringPool.BLANK);
+			}
+
 		}
-
-		Map<String, String> unmodifiableUserInfo =
-			Collections.unmodifiableMap(
-				(Map<String, String>) userInfo.clone());
-
-		// Custom user attributes
-
-		Map<String, CustomUserAttributes> cuaInstances =
-			new HashMap<String, CustomUserAttributes>();
-
-		for (Map.Entry<String, String> entry : portletApp
-				.getCustomUserAttributes().entrySet()) {
-
-			String attrName = entry.getKey();
-			String attrCustomClass = entry.getValue();
-
-			CustomUserAttributes cua = cuaInstances.get(attrCustomClass);
-
-			if (cua == null) {
-				if (portletApp.isWARFile()) {
-					PortletContextBag portletContextBag =
-						PortletContextBagPool.get(
-							portletApp.getServletContextName());
-
-					cua = portletContextBag.getCustomUserAttributes().get(
-							attrCustomClass);
-
-					cua = (CustomUserAttributes) cua.clone();
-				} else {
-					try {
-						cua = (CustomUserAttributes) Class.forName(
-								attrCustomClass).newInstance();
-					} catch (Exception e) {
-						_log.error(e, e);
-					}
-				}
-
-				cuaInstances.put(attrCustomClass, cua);
-			}
-
-			if (cua != null) {
-				String attrValue = cua.getValue(attrName, unmodifiableUserInfo);
-
-				if (attrValue != null) {
-					userInfo.put(attrName, attrValue);
-				}
-			}
+		catch (Exception e) {
+			throw new PortletException(e);
 		}
-
-		return userInfo;
+		finally {
+			_setPortletAttributes(req, res);
+		}
 	}
 
-	public Profile getCCPPProfile(HttpServletRequest request) {
+	private Profile _getCCPPProfile(HttpServletRequest req) {
 		if (_profile == null) {
-			ProfileFactory profileFactory = ProfileFactory.getInstance();
-
-			if (profileFactory == null) {
-				profileFactory = ProfileFactoryImpl.getInstance();
-
-				ProfileFactory.setInstance(profileFactory);
-			}
-
-			_profile = profileFactory.newProfile(request,
-					ValidationMode.VALIDATIONMODE_NONE);
-
-			if (_profile == null) {
-				_profile = _EMPTY_PROFILE;
-			}
+			_profile = PortalProfileFactory.getCCPPProfile(req);
 		}
 
 		return _profile;
 	}
 
-	private long getPlid(PortletRequest req) {
-		ThemeDisplay themeDisplay =
-				(ThemeDisplay) req.getAttribute(WebKeys.THEME_DISPLAY);
+	private Container _getContainer() {
+		if (_remotePortlet) {
+			return ContainerFactory.getContainer(ContainerType.WSRP_CONSUMER);
+		}
+		else {
+			return ContainerFactory.getContainer(
+				ContainerType.PORTLET_CONTAINER);
+		}
+	}
+
+	private long _getPlid(PortletRequest req) {
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		return themeDisplay.getPlid();
 	}
 
-	private List<String> getRoles(HttpServletRequest request)
-			throws SystemException {
-		String userPrincipalStrategy = _portletModel.getUserPrincipalStrategy();
-		long userId = PortalUtil.getUserId(request);
+	private List<String> _getRoles(HttpServletRequest req)
+		throws SystemException {
+
+		long userId = PortalUtil.getUserId(req);
+		String remoteUser = req.getRemoteUser();
 		long remoteUserId = 0;
-		String remoteUser = request.getRemoteUser();
+
+		String userPrincipalStrategy = _portletModel.getUserPrincipalStrategy();
+
 		if (userPrincipalStrategy.equals(
 				PortletConstants.USER_PRINCIPAL_STRATEGY_SCREEN_NAME)) {
 
 			try {
-				User user = PortalUtil.getUser(request);
+				User user = PortalUtil.getUser(req);
+
 				remoteUserId = user.getUserId();
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				_log.error(e);
 			}
-		} else {
+		}
+		else {
 			if ((userId > 0) && (remoteUser == null)) {
 				remoteUserId = userId;
-			} else {
+			}
+			else {
 				remoteUserId = GetterUtil.getLong(remoteUser);
 			}
 		}
@@ -707,42 +392,57 @@ public class WindowInvoker extends InvokerPortlet {
 			return Collections.emptyList();
 		}
 
-		long companyId = PortalUtil.getCompanyId(request);
+		long companyId = PortalUtil.getCompanyId(req);
+
 		List<Role> roles = RoleLocalServiceUtil.getRoles(companyId);
-		if (roles == null || roles.isEmpty()) {
-			return Collections.emptyList();
-		} else {
+
+		if (roles.isEmpty()) {
+			return Collections.EMPTY_LIST;
+		}
+		else {
 			List<String> roleNames = new ArrayList<String>(roles.size());
+
 			for (Role role : roles) {
 				roleNames.add(role.getName());
 			}
+
 			return roleNames;
 		}
 	}
 
-	private void logError(Exception ex) {
-		if (_log.isErrorEnabled()) {
-			_log.error("Error in " + _portletModel.getPortletId(), ex);
-		}
+	private boolean _isWARFile() {
+		return getPortletConfig().isWARFile();
 	}
 
-	private void setPortletAttributes(PortletRequest req, PortletResponse res) {
-		HttpServletRequest request =
-				((PortletRequestImpl) req).getHttpServletRequest();
-		request.setAttribute(
-				JavaConstants.JAVAX_PORTLET_CONFIG, getPortletConfig());
-		request.setAttribute(JavaConstants.JAVAX_PORTLET_REQUEST, req);
-		request.setAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE, res);
+	private void _populateContainerRequest(
+			HttpServletRequest req, HttpServletResponse res,
+			ContainerRequest containerReq, PortletRequest portletReq)
+		throws SystemException {
+
+		containerReq.setRoles(_getRoles(req));
+		containerReq.setUserInfo(
+			UserInfoFactory.getUserInfo(req, _portletModel));
+
+		containerReq.setAttribute(
+			PortletRequest.CCPP_PROFILE, _getCCPPProfile(req));
+	}
+
+	private void _setPortletAttributes(
+		PortletRequest req, PortletResponse res) {
+
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+
+		httpReq.setAttribute(
+			JavaConstants.JAVAX_PORTLET_CONFIG, getPortletConfig());
+		httpReq.setAttribute(JavaConstants.JAVAX_PORTLET_REQUEST, req);
+		httpReq.setAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE, res);
 	}
 
 	private static Log _log = LogFactory.getLog(WindowInvoker.class);
 
 	private com.liferay.portal.model.Portlet _portletModel;
-	private String _portletId;
 	private Container _container;
-	private boolean _isRemotePortlet;
+	private boolean _remotePortlet;
 	private Profile _profile;
-
-	private static final Profile _EMPTY_PROFILE = new EmptyProfile();
 
 }

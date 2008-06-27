@@ -41,12 +41,9 @@
 
 package com.liferay.portal.portletcontainer;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletSessionImpl;
@@ -55,7 +52,6 @@ import com.sun.portal.container.ChannelMode;
 import com.sun.portal.container.ChannelState;
 import com.sun.portal.container.ChannelURLFactory;
 import com.sun.portal.container.Container;
-import com.sun.portal.container.ContainerException;
 import com.sun.portal.container.ContainerFactory;
 import com.sun.portal.container.ContainerRequest;
 import com.sun.portal.container.ContainerType;
@@ -70,6 +66,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.portlet.PortletMode;
+import javax.portlet.PortletRequest;
 import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletRequest;
@@ -78,218 +75,146 @@ import javax.servlet.http.HttpServletRequest;
  * <a href="ContainerRequestFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author Deepak Gothe
+ * @author Brian Wing Shun Chan
  *
  */
 public class ContainerRequestFactory {
 
-	static List<ChannelState> allowableWindowStates =
-		new ArrayList<ChannelState>();
-	static List<ChannelMode> allowablePortletWindowModes =
-		new ArrayList<ChannelMode>();
+	static List<ChannelMode> portletModes = new ArrayList<ChannelMode>();
+	static List<ChannelState> windowStates = new ArrayList<ChannelState>();
+	static WindowRequestReader windowRequestReader =
+		new PortletWindowRequestReader();
 
 	static {
-		allowablePortletWindowModes.add(ChannelMode.EDIT);
-		allowablePortletWindowModes.add(ChannelMode.HELP);
-		allowablePortletWindowModes.add(ChannelMode.VIEW);
-		allowablePortletWindowModes.add(new ChannelMode(
-			LiferayPortletMode.ABOUT.toString()));
-		allowablePortletWindowModes.add(new ChannelMode(
-			LiferayPortletMode.CONFIG.toString()));
-		allowablePortletWindowModes.add(new ChannelMode(
-			LiferayPortletMode.EDIT_DEFAULTS.toString()));
-		allowablePortletWindowModes.add(new ChannelMode(
-			LiferayPortletMode.PREVIEW.toString()));
-		allowablePortletWindowModes.add(new ChannelMode(
-			LiferayPortletMode.PRINT.toString()));
+		portletModes.add(ChannelMode.EDIT);
+		portletModes.add(ChannelMode.HELP);
+		portletModes.add(ChannelMode.VIEW);
+		portletModes.add(
+			new ChannelMode(LiferayPortletMode.ABOUT.toString()));
+		portletModes.add(
+			new ChannelMode(LiferayPortletMode.CONFIG.toString()));
+		portletModes.add(
+			new ChannelMode(LiferayPortletMode.EDIT_DEFAULTS.toString()));
+		portletModes.add(
+			new ChannelMode(LiferayPortletMode.PREVIEW.toString()));
+		portletModes.add(
+			new ChannelMode(LiferayPortletMode.PRINT.toString()));
 
-		allowableWindowStates.add(ChannelState.MAXIMIZED);
-		allowableWindowStates.add(ChannelState.MINIMIZED);
-		allowableWindowStates.add(ChannelState.NORMAL);
-		allowableWindowStates.add(new ChannelState(
-			LiferayWindowState.EXCLUSIVE.toString()));
-		allowableWindowStates.add(new ChannelState(
-			LiferayWindowState.POP_UP.toString()));
-	}
-
-	public static GetMarkupRequest createGetMarkUpRequest(
-			HttpServletRequest request, Portlet portletModel,
-			WindowState windowState, PortletMode portletMode, String lifecycle,
-			long plid, boolean isRemotePortlet)
-		throws PortalException, SystemException, ContainerException {
-
-		String portletId = portletModel.getPortletId();
-		EntityID portletEntityId = getEntityID(portletModel, portletId);
-
-		ChannelMode currentPortletWindowMode = new ChannelMode(
-			portletMode.toString());
-
-		ChannelState currentWindowState = new ChannelState(
-			windowState.toString());
-
-		PortletWindowContext portletWindowContext =
-			new PortletWindowContextImpl(
-				request, portletModel, lifecycle);
-
-		ChannelURLFactory channelURLFactory = getPortletWindowURLFactory(
-			request, portletModel, currentPortletWindowMode,
-				currentWindowState, plid, isRemotePortlet);
-
-		GetMarkupRequest getMarkupRequest =
-			getContainer().createGetMarkUpRequest(
-				request, portletEntityId,
-					currentWindowState, currentPortletWindowMode,
-						portletWindowContext, channelURLFactory);
-
-		populateContainerRequest(getMarkupRequest, portletId, plid);
-		// TODO: Need to use pool
-		return getMarkupRequest;
+		windowStates.add(ChannelState.MAXIMIZED);
+		windowStates.add(ChannelState.MINIMIZED);
+		windowStates.add(ChannelState.NORMAL);
+		windowStates.add(
+			new ChannelState(LiferayWindowState.EXCLUSIVE.toString()));
+		windowStates.add(
+			new ChannelState(LiferayWindowState.POP_UP.toString()));
 	}
 
 	public static ExecuteActionRequest createExecuteActionRequest(
-			HttpServletRequest request, Portlet portletModel,
-			WindowState windowState, PortletMode portletMode, String lifecycle,
-			long plid, boolean isRemotePortlet)
-		throws PortalException, SystemException, ContainerException {
+			HttpServletRequest req, Portlet portlet, WindowState windowState,
+			PortletMode portletMode, long plid)
+		throws Exception {
 
-		String portletId = portletModel.getPortletId();
-		EntityID portletEntityId = getEntityID(portletModel, portletId);
+		return (ExecuteActionRequest)_createContainerRequest(
+			req, portlet, windowState, portletMode, PortletRequest.ACTION_PHASE,
+			plid);
+	}
 
-		ChannelMode currentPortletWindowMode = new ChannelMode(
-				portletMode.toString());
+	public static GetMarkupRequest createGetMarkUpRequest(
+			HttpServletRequest req, Portlet portlet, WindowState windowState,
+			PortletMode portletMode, long plid)
+		throws Exception {
 
-		ChannelState currentWindowState = new ChannelState(
-				windowState.toString());
-
-		PortletWindowContext portletWindowContext =
-			new PortletWindowContextImpl(request, portletModel, lifecycle);
-
-		ChannelURLFactory channelURLFactory = getPortletWindowURLFactory(
-			request, portletModel, currentPortletWindowMode,
-				currentWindowState, plid, isRemotePortlet);
-
-		WindowRequestReader windowRequestReader =
-			getWindowRequestReader(isRemotePortlet);
-
-		ChannelState newWindowState =
-			windowRequestReader.readNewWindowState(request);
-
-		ChannelMode newPortletWindowMode =
-			windowRequestReader.readNewPortletWindowMode(request);
-
-		if (newPortletWindowMode != null) {
-			currentPortletWindowMode = newPortletWindowMode;
-		}
-
-		if (newWindowState != null) {
-			currentWindowState = newWindowState;
-		}
-
-		ExecuteActionRequest executeActionRequest =
-			getContainer().createExecuteActionRequest(
-				request, portletEntityId,
-					currentWindowState, currentPortletWindowMode,
-						portletWindowContext, channelURLFactory,
-							windowRequestReader);
-
-		populateContainerRequest(executeActionRequest, portletId, plid);
-
-		return executeActionRequest;
+		return (GetMarkupRequest)_createContainerRequest(
+			req, portlet, windowState, portletMode, PortletRequest.RENDER_PHASE,
+			plid);
 	}
 
 	public static GetResourceRequest createGetResourceRequest(
-			HttpServletRequest request, Portlet portletModel,
-			WindowState windowState, PortletMode portletMode, String lifecycle,
-			long plid, boolean isRemotePortlet)
-		throws PortalException, SystemException, ContainerException {
+			HttpServletRequest req, Portlet portlet, WindowState windowState,
+			PortletMode portletMode, long plid)
+		throws Exception {
 
-		String portletId = portletModel.getPortletId();
-		EntityID portletEntityId = getEntityID(portletModel, portletId);
+		return (GetResourceRequest)_createContainerRequest(
+			req, portlet, windowState, portletMode,
+			PortletRequest.RESOURCE_PHASE, plid);
+	}
 
-		ChannelMode currentPortletWindowMode = new ChannelMode(
-			portletMode.toString());
+	private static ContainerRequest _createContainerRequest(
+			HttpServletRequest req, Portlet portlet, WindowState windowState,
+			PortletMode portletMode, String lifecycle, long plid)
+		throws Exception {
 
-		ChannelState currentWindowState = new ChannelState(
+		EntityID entityID = WindowInvokerUtil.getEntityID(portlet);
+
+		ChannelState channelWindowState = new ChannelState(
 			windowState.toString());
 
+		ChannelMode channelPortletMode = new ChannelMode(
+			portletMode.toString());
+
 		PortletWindowContext portletWindowContext =
-			new PortletWindowContextImpl(request, portletModel, lifecycle);
+			new PortletWindowContextImpl(req, portlet, lifecycle);
 
-		ChannelURLFactory channelURLFactory = getPortletWindowURLFactory(
-			request, portletModel, currentPortletWindowMode,
-				currentWindowState, plid, isRemotePortlet);
+		ChannelURLFactory channelURLFactory = new PortletWindowURLFactory(
+			req, portlet, channelWindowState, channelPortletMode, plid);
 
-		WindowRequestReader windowRequestReader = getWindowRequestReader(
-			isRemotePortlet);
+		if (lifecycle.equals(PortletRequest.ACTION_PHASE) ||
+			lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-		ChannelState newWindowState =
-			windowRequestReader.readNewWindowState(request);
+			ChannelState newWindowState =
+				windowRequestReader.readNewWindowState(req);
 
-		ChannelMode newPortletWindowMode =
-			windowRequestReader.readNewPortletWindowMode(request);
+			if (newWindowState != null) {
+				channelWindowState = newWindowState;
+			}
 
-		if (newPortletWindowMode != null) {
-			currentPortletWindowMode = newPortletWindowMode;
+			ChannelMode newPortletWindowMode =
+				windowRequestReader.readNewPortletWindowMode(req);
+
+			if (newPortletWindowMode != null) {
+				channelPortletMode = newPortletWindowMode;
+			}
 		}
 
-		if (newWindowState != null) {
-			currentWindowState = newWindowState;
+		Container container = ContainerFactory.getContainer(
+			ContainerType.PORTLET_CONTAINER);
+
+		ContainerRequest containerRequest = null;
+
+		if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
+			containerRequest = container.createExecuteActionRequest(
+				req, entityID, channelWindowState, channelPortletMode,
+				portletWindowContext, channelURLFactory, windowRequestReader);
+		}
+		else if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
+			containerRequest = container.createGetMarkUpRequest(
+				req, entityID, channelWindowState, channelPortletMode,
+				portletWindowContext, channelURLFactory);
+		}
+		else if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+			containerRequest = container.createGetResourceRequest(
+				req, entityID, channelWindowState, channelPortletMode,
+				portletWindowContext, channelURLFactory, windowRequestReader);
 		}
 
-		GetResourceRequest getResourceRequest =
-			getContainer().createGetResourceRequest(
-				request, portletEntityId,
-					currentWindowState, currentPortletWindowMode,
-						portletWindowContext, channelURLFactory,
-							windowRequestReader);
+		if (containerRequest != null) {
+			String namespace = PortalUtil.getPortletNamespace(
+				portlet.getPortletId());
 
-		populateContainerRequest(getResourceRequest, portletId, plid);
+			StringBuilder windowID = new StringBuilder();
 
-		return getResourceRequest;
-	}
+			windowID.append(portlet.getPortletId());
+			windowID.append(PortletSessionImpl.LAYOUT_SEPARATOR);
+			windowID.append(plid);
 
-	protected static ChannelURLFactory getPortletWindowURLFactory(
-			HttpServletRequest req, Portlet portletModel,
-			ChannelMode newPortletWindowMode, ChannelState newWindowState,
-			long plid, boolean isRemotePortlet) {
-		return new PortletWindowURLFactory(
-				req, portletModel, newPortletWindowMode, newWindowState, plid);
-	}
+			containerRequest.setAllowableWindowStates(windowStates);
+			containerRequest.setAllowableChannelModes(portletModes);
+			containerRequest.setNamespace(namespace);
+			containerRequest.setPortalInfo(ReleaseInfo.getReleaseInfo());
+			containerRequest.setWindowID(windowID.toString());
+		}
 
-	protected static Container getContainer() {
-		return ContainerFactory.getContainer(ContainerType.PORTLET_CONTAINER);
-	}
-
-	protected static WindowRequestReader getWindowRequestReader(
-			boolean isRemotePortlet) {
-		return new PortletWindowRequestReader();
-	}
-
-	protected static void populateContainerRequest(
-			ContainerRequest containerRequest, String portletId, long plid)
-		throws ContainerException {
-
-		containerRequest.setAllowableWindowStates(allowableWindowStates);
-		containerRequest.setAllowableChannelModes(allowablePortletWindowModes);
-		containerRequest .setNamespace(
-			PortalUtil.getPortletNamespace(portletId));
-		containerRequest.setWindowID(getWindowID(portletId, plid));
-		containerRequest.setPortalInfo(ReleaseInfo.getReleaseInfo());
-	}
-
-	protected static EntityID getEntityID(
-		Portlet portletModel, String portletId) {
-
-		return WindowInvokerUtil.getEntityID(portletModel, portletId);
-	}
-
-	private static String getWindowID(String portletId, long plid) {
-		StringMaker sm = new StringMaker();
-
-		sm.append(portletId);
-		sm.append(PortletSessionImpl.LAYOUT_SEPARATOR);
-		sm.append(plid);
-
-		return sm.toString();
+		return containerRequest;
 	}
 
 }

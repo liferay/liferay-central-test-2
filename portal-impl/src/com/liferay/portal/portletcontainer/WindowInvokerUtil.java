@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 /**
  * The contents of this file are subject to the terms of the Common Development
  * and Distribution License (the License). You may not use this file except in
@@ -41,70 +42,31 @@
 package com.liferay.portal.portletcontainer;
 
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.PortletConstants;
+import com.liferay.portal.model.PortletApp;
 
 import com.sun.portal.container.EntityID;
 import com.sun.portal.container.PortletID;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="WindowInvokerUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Deepak Gothe
+ * @author Brian Wing Shun Chan
  *
  */
 public class WindowInvokerUtil {
 
-	/**
-	 * Creates the EntityID for the given Portlet and portletId.
-	 *
-	 * @param portletModel		The Portlet Object
-	 * @param portletId		the id of the portlet
-	 *
-	 * @return the EntityID for the given Portlet and portletId.
-	 */
-	public static EntityID getEntityID(Portlet portletModel, String portletId) {
+	public static EntityID getEntityID(Portlet portlet) {
+		PortletApp portletApp = portlet.getPortletApp();
 
-		String portletAppName =
-			portletModel.getPortletApp().getServletContextName();
-		String portletName = portletModel.getPortletName();
-		// Sometimes portletAppName or portletName or both are null, in that
-		// case extract them from the portletId. Need to investigate the cause
-		// of them being null
-		// portletId = portletName_WAR_portletAppName_INSTANCE_xyz
-		if (portletName == null || portletAppName == null) {
-			int index = portletId.indexOf(PortletConstants.WAR_SEPARATOR);
-			if (index != -1) {
-				if (portletName == null) {
-					if (_log.isDebugEnabled()) {
-						_log.debug(
-								"Portlet Name is null for the Id:" +
-									portletId);
-					}
-					portletName = portletId.substring(0, index);
-				}
-				if (portletAppName == null) {
-					if (_log.isDebugEnabled()) {
-						_log.debug(
-								"Portlet App Name is null for the Id:" +
-									portletId);
-					}
-					portletAppName = portletId.substring(index + 5);
-					int indexNext = portletAppName.indexOf("_INSTANCE_");
-					if (indexNext != -1) {
-						portletAppName = portletAppName.substring(0, indexNext);
-					}
-				}
-			}
-		}
+		PortletID portletID = new PortletID(
+			portletApp.getServletContextName(), portlet.getPortletName());
 
-		EntityID portletEntityId = new EntityID(
-			new PortletID(portletAppName, portletName));
-		portletEntityId.setPortletWindowName(portletId);
+		EntityID portletEntityId = new EntityID(portletID);
+
+		portletEntityId.setPortletWindowName(portlet.getPortletId());
+
 		return portletEntityId;
 	}
 
-	private static Log _log = LogFactory.getLog(WindowInvokerUtil.class);
 }

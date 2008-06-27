@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 /**
  * The contents of this file are subject to the terms of the Common Development
  * and Distribution License (the License). You may not use this file except in
@@ -45,6 +46,8 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
@@ -93,390 +96,421 @@ import org.apache.commons.logging.LogFactory;
  * <a href="PortletWindowContextImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Deepak Gothe
+ * @author Brian Wing Shun Chan
  *
  */
 public class PortletWindowContextImpl implements PortletWindowContext {
 
-	public PortletWindowContextImpl() {
-	}
-
-	PortletWindowContextImpl(
-			HttpServletRequest request, Portlet portletModel,
-			String lifecycle)
+	public PortletWindowContextImpl(
+			HttpServletRequest req, Portlet portlet, String lifecycle)
 		throws PortalException, SystemException {
-		_request = request;
-		_portletModel = portletModel;
+
+		_req = req;
+		_portlet = portlet;
 		_lifecycle = lifecycle;
-		setUserId(request);
-	}
-
-	public void init(HttpServletRequest request) {
-		_request = request;
-
-	}
-
-	public String getDesktopURL(HttpServletRequest _request) {
-		StringBuffer requestURL = _request.getRequestURL();
-		return requestURL.toString();
-	}
-
-	public String getDesktopURL(HttpServletRequest _request, String query,
-			boolean escape) {
-		StringBuffer urlBuffer = new StringBuffer(getDesktopURL(_request));
-		if (query != null && query.length() != 0) {
-			urlBuffer.append("?").append(query);
-		}
-		String url = urlBuffer.toString();
-		if (escape) {
-			try {
-				url = URLEncoder.encode(url, ENC);
-			} catch (UnsupportedEncodingException ex) {
-				// ignore
-			}
-		}
-		return url;
-	}
-
-	public String getLocaleString() {
-		Locale locale = getLocale();
-		return locale.toString();
-	}
-
-	public Locale getLocale() {
-		Locale locale = _request.getLocale();
-		if (locale == null) {
-			locale = LocaleUtil.getDefault();
-		}
-		return locale;
-	}
-
-	public String getContentType() {
-		boolean isWapTheme = BrowserSnifferUtil.is_wap(_request);
-		if (isWapTheme) {
-			return ContentTypes.XHTML_MP;
-		} else {
-			return ContentTypes.TEXT_HTML;
-		}
+		setUserId(req);
 	}
 
 	public String encodeURL(String url) {
 		try {
-			return URLEncoder.encode(url, ENC);
-		} catch (UnsupportedEncodingException usee) {
+			return URLEncoder.encode(url, StringPool.UTF8);
+		}
+		catch (UnsupportedEncodingException uee) {
 			return url;
 		}
 	}
 
-	public boolean isAuthless(HttpServletRequest request) {
-		return false; // Not Used
-	}
-
 	public String getAuthenticationType() {
-		return _request.getAuthType();
+		return _req.getAuthType();
 	}
 
-	public String getUserID() {
-		// The order in which this is suppose to be done
-		// 1. Check if userID is explicity set , If yes use it always
-		// 2. If user ID is null, Get from _request - getPrincipal
-		// 3. If userID is null, see if wsrp is sending it (in case of resource
-		// URL)
-		// 4. else retun null.
-		if (_userID == null) {
-			Principal principal = _request.getUserPrincipal();
-			if (principal != null) {
-				_userID = principal.getName();
-			} else {
-				_userID = _request.getParameter("wsrp.userID");
+	public String getConsumerID(String portletWindowName) {
+		return null;
+	}
+
+	public String getContentType() {
+		if (BrowserSnifferUtil.is_wap(_req)) {
+			return ContentTypes.XHTML_MP;
+		}
+		else {
+			return ContentTypes.TEXT_HTML;
+		}
+	}
+
+	public String getDescription(String portletName, String desiredLocale) {
+		return null;
+	}
+
+	public String getDesktopURL(HttpServletRequest req) {
+		StringBuffer requestURL = req.getRequestURL();
+
+		return requestURL.toString();
+	}
+
+	public String getDesktopURL(
+		HttpServletRequest req, String query, boolean escape) {
+
+		StringBuilder sb = new StringBuilder(getDesktopURL(req));
+
+		if (Validator.isNotNull(query)) {
+			sb.append(StringPool.QUESTION);
+			sb.append(query);
+		}
+
+		String url = sb.toString();
+
+		if (escape) {
+			try {
+				url = URLEncoder.encode(url, StringPool.UTF8);
+			}
+			catch (UnsupportedEncodingException uee) {
 			}
 		}
-		return _userID;
+
+		return url;
 	}
 
-	public Object getProperty(String name) {
-		Object value = null;
-		if (_request != null) {
-			HttpSession session = _request.getSession(false);
-			if (session != null)
-				value = session.getAttribute(name);
+	public String getDisplayName(String portletName, String desiredLocale) {
+		return null;
+	}
+
+	public EntityID getEntityID(String portletId) {
+		return WindowInvokerUtil.getEntityID(_portlet);
+	}
+
+	public List<String> getKeywords(String portletName, String desiredLocale) {
+		return null;
+	}
+
+	public Locale getLocale() {
+		Locale locale = _req.getLocale();
+
+		if (locale == null) {
+			locale = LocaleUtil.getDefault();
 		}
-		return value;
+
+		return locale;
 	}
 
-	public void setProperty(String name, Object value) {
-		if (_request != null) {
-			_request.getSession(true).setAttribute(name, value);
-		}
+	public String getLocaleString() {
+		return getLocale().toString();
 	}
 
-	public List getRoles() {
-		// TODO
+	public List<String> getMarkupTypes(String portletName) {
 		return Collections.EMPTY_LIST;
 	}
 
-	public Map<String, String> getUserInfo() {
-		// TODO
-		return Collections.EMPTY_MAP;
-	}
-
-	public List getMarkupTypes(String portletName)
-			throws PortletWindowContextException {
-		return Collections.EMPTY_LIST;
-	}
-
-	public String getDescription(String portletName, String desiredLocale)
-			throws PortletWindowContextException {
+	public String getPortletHandle(String portletWindowName) {
 		return null;
 	}
 
-	public String getShortTitle(String portletName, String desiredLocale)
-			throws PortletWindowContextException {
+	public String getPortletID(String portletWindowName) {
 		return null;
 	}
 
-	public String getTitle(String portletName, String desiredLocale)
-			throws PortletWindowContextException {
+	public PortletLang getPortletLang(String portletWindowName) {
 		return null;
 	}
 
-	public List getKeywords(String portletName, String desiredLocale)
-			throws PortletWindowContextException {
-		return null;
-	}
-
-	public String getDisplayName(String portletName, String desiredLocale)
-			throws PortletWindowContextException {
-		return null;
-	}
-
-	public String getPortletName(String portletWindowName)
-			throws PortletWindowContextException {
+	public String getPortletName(String portletWindowName) {
 		return null;
 	}
 
 	public List<EntityID> getPortletWindows(
-			PortletType portletType, DistributionType distributionType)
-			throws PortletWindowContextException {
-		List<EntityID> portletList = new ArrayList();
+		PortletType portletType, DistributionType distributionType) {
+
+		List<EntityID> entityIDs = new ArrayList<EntityID>();
+
 		try {
 			List<Portlet> portlets = null;
-			if (DistributionType.ALL_PORTLETS.equals(distributionType)) {
+
+			if (distributionType.equals(DistributionType.ALL_PORTLETS)) {
 				portlets = getAllPortletWindows(portletType);
+			}
+			else if (distributionType.equals(
+						DistributionType.ALL_PORTLETS_ON_PAGE)) {
 
-			} else if (DistributionType.ALL_PORTLETS_ON_PAGE.equals(
-					distributionType)) {
 				portlets = getAvailablePortletWindows(portletType);
+			}
+			else if (distributionType.equals(
+						DistributionType.VISIBLE_PORTLETS_ON_PAGE)) {
 
-			} else if (DistributionType.VISIBLE_PORTLETS_ON_PAGE.equals(
-					distributionType)) {
 				portlets = getVisiblePortletWindows(portletType);
 			}
+
 			if (portlets != null) {
-				for (Portlet portletModel : portlets) {
-					EntityID entityID = WindowInvokerUtil.getEntityID(
-						portletModel, portletModel.getPortletId());
-					if (entityID != null)
-						portletList.add(entityID);
+				for (Portlet portlet : portlets) {
+					EntityID entityID = WindowInvokerUtil.getEntityID(portlet);
+
+					entityIDs.add(entityID);
 				}
 			}
-		} catch (PortletWindowContextException pre) {
+		}
+		catch (PortletWindowContextException pre) {
 			_log.error(pre);
 		}
-		return portletList;
+
+		return entityIDs;
 	}
 
-	private List<Portlet> getVisiblePortletWindows(PortletType portletType)
-			throws PortletWindowContextException {
-		List<Portlet> portlets = null;
-		Layout layout = (Layout) _request.getAttribute(WebKeys.LAYOUT);
-		if (LayoutConstants.TYPE_PORTLET.equals(layout.getType())) {
-			LayoutTypePortlet layoutTypePortlet =
-					(LayoutTypePortlet) layout.getLayoutType();
-			try {
-				portlets = layoutTypePortlet.getPortlets();
-			} catch (SystemException ex) {
-				throw new PortletWindowContextException(ex);
-			}
-		}
-		return portlets;
+	public String getPortletWindowTitle(
+		String portletWindowName, String locale) {
+
+		return _portlet.getDisplayName();
 	}
 
-	private List<Portlet> getAvailablePortletWindows(PortletType portletType)
-			throws PortletWindowContextException {
-		return getVisiblePortletWindows(portletType);
-	}
+	public PortletPreferences getPreferences(
+			String portletWindowName, ResourceBundle bundle, boolean readOnly)
+		throws PortletWindowContextException {
 
-	private List<Portlet> getAllPortletWindows(PortletType portletType)
-			throws PortletWindowContextException {
-		return getVisiblePortletWindows(portletType);
-	}
-
-	public EntityID getEntityID(String portletId)
-			throws PortletWindowContextException {
-		return WindowInvokerUtil.getEntityID(_portletModel, portletId);
-	}
-
-	public String getPortletWindowTitle(String portletWindowName, String locale)
-			throws PortletWindowContextException {
-		return _portletModel.getDisplayName();
-	}
-
-	public Map getRoleMap(String portletWindowName)
-			throws PortletWindowContextException {
-		return Collections.EMPTY_MAP;
-	}
-
-	public Map getUserInfoMap(String portletWindowName)
-			throws PortletWindowContextException {
-		return Collections.EMPTY_MAP;
-	}
-
-	public PortletPreferences getPreferences(String portletWindowName,
-			ResourceBundle bundle, boolean isReadOnly)
-			throws PortletWindowContextException {
 		try {
 			PortletPreferencesIds portletPreferencesIds =
 				PortletPreferencesFactoryUtil.getPortletPreferencesIds(
-					_request, _portletModel.getPortletId());
+					_req, _portlet.getPortletId());
 
 			PortletPreferences portletPreferences =
 				PortletPreferencesLocalServiceUtil.getPreferences(
 					portletPreferencesIds);
+
 			PortletPreferencesWrapper portletPreferencesWrapper =
 				new PortletPreferencesWrapper(portletPreferences, _lifecycle);
+
 			return portletPreferencesWrapper;
-		} catch (PortalException ex) {
-			throw new PortletWindowContextException(ex);
-		} catch (SystemException ex) {
-			throw new PortletWindowContextException(ex);
+		}
+		catch (Exception e) {
+			throw new PortletWindowContextException(e);
 		}
 	}
 
-	public EventHolder verifySupportedPublishingEvent(EntityID portletEntityId,
-			EventHolder eventHolder) {
-		PortletDescriptorHolder portletDescriptorHolder =
-			getPortletDescriptorHolder();
-		if (portletDescriptorHolder == null)
-			return null;
-		return portletDescriptorHolder.verifySupportedPublishingEvent(
-				portletEntityId, eventHolder);
+	public String getProducerEntityID(String portletWindowName) {
+		return null;
 	}
 
-	public List<EventHolder> getSupportedPublishingEventHolders(
-			EntityID portletEntityId) {
-		PortletDescriptorHolder portletDescriptorHolder =
-			getPortletDescriptorHolder();
-		if (portletDescriptorHolder == null)
-			return null;
-		return portletDescriptorHolder.getSupportedPublishingEventHolders(
-				portletEntityId);
+	public Object getProperty(String name) {
+		Object value = null;
+
+		if (_req != null) {
+			HttpSession ses = _req.getSession(false);
+
+			if (ses != null) {
+				value = ses.getAttribute(name);
+			}
+		}
+
+		return value;
 	}
 
-	public EventHolder verifySupportedProcessingEvent(EntityID portletEntityId,
-			EventHolder eventHolder) {
-		PortletDescriptorHolder portletDescriptorHolder =
-			getPortletDescriptorHolder();
-		if (portletDescriptorHolder == null)
-			return null;
-		return portletDescriptorHolder.verifySupportedProcessingEvent(
-				portletEntityId, eventHolder);
+	public Map<String, String> getRoleMap(String portletWindowName) {
+		return Collections.EMPTY_MAP;
+	}
+
+	public List<String> getRoles() {
+		return Collections.EMPTY_LIST;
+	}
+
+	public String getShortTitle(String portletName, String desiredLocale) {
+		return null;
 	}
 
 	public List<EventHolder> getSupportedProcessingEventHolders(
-			EntityID portletEntityId) {
-		PortletDescriptorHolder portletDescriptorHolder =
-			getPortletDescriptorHolder();
-		if (portletDescriptorHolder == null)
-			return null;
-		return portletDescriptorHolder.getSupportedProcessingEventHolders(
-				portletEntityId);
-	}
+		EntityID entityID) {
 
-	public Map<String, String> verifySupportedPublicRenderParameters(
-			EntityID portletEntityId,
-			List<PublicRenderParameterHolder> publicRenderParameterHolders) {
 		PortletDescriptorHolder portletDescriptorHolder =
 			getPortletDescriptorHolder();
-		if (portletDescriptorHolder == null)
-			return Collections.emptyMap();
-		return portletDescriptorHolder.verifySupportedPublicRenderParameters(
-				portletEntityId, publicRenderParameterHolders);
+
+		if (portletDescriptorHolder == null) {
+			return null;
+		}
+
+		return portletDescriptorHolder.getSupportedProcessingEventHolders(
+			entityID);
 	}
 
 	public List<PublicRenderParameterHolder>
-			getSupportedPublicRenderParameterHolders(
-				EntityID portletEntityId,
-					Map<String, String[]> renderParameters) {
+		getSupportedPublicRenderParameterHolders(
+			EntityID entityID, Map<String, String[]> renderParameters) {
+
 		PortletDescriptorHolder portletDescriptorHolder =
 			getPortletDescriptorHolder();
-		if (portletDescriptorHolder == null)
-			return Collections.emptyList();
-		return portletDescriptorHolder.getSupportedPublicRenderParameterHolders(
-				portletEntityId, renderParameters);
-	}
 
-	private PortletDescriptorHolder getPortletDescriptorHolder() {
-		PortletDescriptorHolder portletDescriptorHolder = null;
-		try {
-			portletDescriptorHolder =
-					PortletDescriptorHolderFactory.getPortletDescriptorHolder();
-		} catch (Exception ex) {
-			_log.error(ex);
+		if (portletDescriptorHolder == null) {
+			return Collections.EMPTY_LIST;
 		}
-		return portletDescriptorHolder;
+
+		return portletDescriptorHolder.getSupportedPublicRenderParameterHolders(
+			entityID, renderParameters);
 	}
 
-	public String getPortletID(String portletWindowName)
-			throws PortletWindowContextException {
+	public List<EventHolder> getSupportedPublishingEventHolders(
+		EntityID entityID) {
+
+		PortletDescriptorHolder portletDescriptorHolder =
+			getPortletDescriptorHolder();
+
+		if (portletDescriptorHolder == null) {
+			return null;
+		}
+
+		return portletDescriptorHolder.getSupportedPublishingEventHolders(
+			entityID);
+	}
+
+	public String getTitle(String portletName, String desiredLocale) {
 		return null;
 	}
 
-	public String getConsumerID(String portletWindowName)
-			throws PortletWindowContextException {
-		return null;
+	public String getUserID() {
+		if (_userId == null) {
+			Principal principal = _req.getUserPrincipal();
+
+			if (principal != null) {
+				_userId = principal.getName();
+			}
+			else {
+				_userId = _req.getParameter("wsrp.userID");
+			}
+		}
+
+		return _userId;
 	}
 
-	public String getPortletHandle(String portletWindowName)
-			throws PortletWindowContextException {
-		return null;
+	public Map<String, String> getUserInfo() {
+		return Collections.EMPTY_MAP;
+	}
+
+	public Map<String, String> getUserInfoMap(String portletWindowName) {
+		return Collections.EMPTY_MAP;
+	}
+
+	public void init(HttpServletRequest req) {
+		_req = req;
+	}
+
+	public boolean isAuthless(HttpServletRequest req) {
+		return false;
 	}
 
 	public void setPortletHandle(
-		String portletWindowName, String portletHandle)
-			throws PortletWindowContextException {
-		// TODO: WSRP integration
+		String portletWindowName, String portletHandle) {
 	}
 
-	public String getProducerEntityID(String portletWindowName)
-			throws PortletWindowContextException {
-		return null;
+	public void setProperty(String name, Object value) {
+		if (_req != null) {
+			HttpSession ses = _req.getSession();
+
+			ses.setAttribute(name, value);
+		}
 	}
 
-	public PortletLang getPortletLang(String portletWindowName)
-			throws PortletWindowContextException {
-		return null;
+	public void store() {
 	}
 
-	// TODO
-	public void store() throws PortletWindowContextException {
+	public EventHolder verifySupportedProcessingEvent(
+		EntityID entityID, EventHolder eventHolder) {
 
+		PortletDescriptorHolder portletDescriptorHolder =
+			getPortletDescriptorHolder();
+
+		if (portletDescriptorHolder == null) {
+			return null;
+		}
+
+		return portletDescriptorHolder.verifySupportedProcessingEvent(
+			entityID, eventHolder);
 	}
 
-	private void setUserId(HttpServletRequest request)
+	public Map<String, String> verifySupportedPublicRenderParameters(
+		EntityID entityID,
+		List<PublicRenderParameterHolder> publicRenderParameterHolders) {
+
+		PortletDescriptorHolder portletDescriptorHolder =
+			getPortletDescriptorHolder();
+
+		if (portletDescriptorHolder == null) {
+			return Collections.EMPTY_MAP;
+		}
+
+		return portletDescriptorHolder.verifySupportedPublicRenderParameters(
+			entityID, publicRenderParameterHolders);
+	}
+
+	public EventHolder verifySupportedPublishingEvent(
+		EntityID entityID, EventHolder eventHolder) {
+
+		PortletDescriptorHolder portletDescriptorHolder =
+			getPortletDescriptorHolder();
+
+		if (portletDescriptorHolder == null) {
+			return null;
+		}
+
+		return portletDescriptorHolder.verifySupportedPublishingEvent(
+			entityID, eventHolder);
+	}
+
+	protected List<Portlet> getAllPortletWindows(PortletType portletType)
+		throws PortletWindowContextException {
+
+		return getVisiblePortletWindows(portletType);
+	}
+
+	protected List<Portlet> getAvailablePortletWindows(PortletType portletType)
+		throws PortletWindowContextException {
+
+		return getVisiblePortletWindows(portletType);
+	}
+
+	protected PortletDescriptorHolder getPortletDescriptorHolder() {
+		PortletDescriptorHolder portletDescriptorHolder = null;
+
+		try {
+			portletDescriptorHolder =
+				PortletDescriptorHolderFactory.getPortletDescriptorHolder();
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		return portletDescriptorHolder;
+	}
+
+	protected List<Portlet> getVisiblePortletWindows(PortletType portletType)
+		throws PortletWindowContextException {
+
+		List<Portlet> portlets = null;
+
+		Layout layout = (Layout)_req.getAttribute(WebKeys.LAYOUT);
+
+		if (layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
+			LayoutTypePortlet layoutTypePortlet =
+				(LayoutTypePortlet)layout.getLayoutType();
+
+			try {
+				portlets = layoutTypePortlet.getPortlets();
+			}
+			catch (SystemException se) {
+				throw new PortletWindowContextException(se);
+			}
+		}
+
+		return portlets;
+	}
+
+	protected void setUserId(HttpServletRequest req)
 		throws PortalException, SystemException {
 
-		User user = PortalUtil.getUser(request);
+		User user = PortalUtil.getUser(req);
+
 		if (user != null) {
-			_userID = user.getLogin();
+			_userId = user.getLogin();
 		}
 	}
 
 	private static Log _log = LogFactory.getLog(PortletWindowContextImpl.class);
 
-	private com.liferay.portal.model.Portlet _portletModel;
-	private HttpServletRequest _request;
-	private String _userID = null;
+	private HttpServletRequest _req;
+	private Portlet _portlet;
 	private String _lifecycle;
-	private static final String ENC = "UTF-8";
+	private String _userId;
 
 }

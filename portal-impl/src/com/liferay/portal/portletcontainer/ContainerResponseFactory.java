@@ -54,36 +54,30 @@ import javax.servlet.http.HttpServletResponse;
  * <a href="ContainerResponseFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author Deepak Gothe
+ * @author Brian Wing Shun Chan
  *
  */
 public class ContainerResponseFactory {
 
-	public static GetMarkupResponse createGetMarkUpResponse(
-			HttpServletResponse response) {
+	public static ExecuteActionResponse createExecuteActionResponse(
+		HttpServletResponse res) {
 
-		GetMarkupResponse getMarkupResponse =
-				getContainer().createGetMarkUpResponse(response);
-		// TODO: Need to use pool
-		return getMarkupResponse;
+		return _getContainer().createExecuteActionResponse(res);
 	}
 
-	public static ExecuteActionResponse createExecuteActionResponse(
-			HttpServletResponse response) {
+	public static GetMarkupResponse createGetMarkUpResponse(
+		HttpServletResponse res) {
 
-		ExecuteActionResponse executeActionResponse =
-				getContainer().createExecuteActionResponse(response);
-		return executeActionResponse;
+		return _getContainer().createGetMarkUpResponse(res);
 	}
 
 	public static GetResourceResponse createGetResourceResponse(
-			HttpServletResponse response) {
+		HttpServletResponse res) {
 
-		GetResourceResponse getResourceResponse =
-				getContainer().createGetResourceResponse(response);
-		return getResourceResponse;
+		return _getContainer().createGetResourceResponse(res);
 	}
 
-	protected static Container getContainer() {
+	private static Container _getContainer() {
 		return ContainerFactory.getContainer(ContainerType.PORTLET_CONTAINER);
 	}
 

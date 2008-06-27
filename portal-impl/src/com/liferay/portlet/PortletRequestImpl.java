@@ -22,7 +22,7 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.ccpp.EmptyProfile;
+import com.liferay.portal.ccpp.PortalProfileFactory;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.ProtectedPrincipal;
@@ -50,8 +50,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.DynamicServletRequest;
 import com.liferay.util.servlet.SharedSessionServletRequest;
 
-import com.sun.ccpp.ProfileFactoryImpl;
-
 import java.security.Principal;
 
 import java.util.ArrayList;
@@ -64,8 +62,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.ccpp.Profile;
-import javax.ccpp.ProfileFactory;
-import javax.ccpp.ValidationMode;
 
 import javax.portlet.PortalContext;
 import javax.portlet.PortletConfig;
@@ -145,20 +141,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 
 	public Profile getCCPPProfile() {
 		if (_profile == null) {
-			ProfileFactory profileFactory = ProfileFactory.getInstance();
-
-			if (profileFactory == null) {
-				profileFactory = ProfileFactoryImpl.getInstance();
-
-				ProfileFactory.setInstance(profileFactory);
-			}
-
-			_profile = profileFactory.newProfile(
-				_req, ValidationMode.VALIDATIONMODE_NONE);
-
-			if (_profile == null) {
-				_profile = _EMPTY_PROFILE;
-			}
+			_profile = PortalProfileFactory.getCCPPProfile(_req);
 		}
 
 		return _profile;
@@ -390,96 +373,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 	}
 
 	public LinkedHashMap<String, String> getUserInfo() {
-		if (getRemoteUser() == null) {
-			return null;
-		}
-
-		LinkedHashMap<String, String> userInfo =
-			new LinkedHashMap<String, String>();
-
-		PortletApp portletApp = _portlet.getPortletApp();
-
-		// Liferay user attributes
-
-		try {
-			User user = PortalUtil.getUser(_req);
-
-			UserAttributes userAttributes = new UserAttributes(user);
-
-			// Mandatory user attributes
-
-			userInfo.put(
-				UserAttributes.LIFERAY_COMPANY_ID,
-				userAttributes.getValue(UserAttributes.LIFERAY_COMPANY_ID));
-
-			userInfo.put(
-				UserAttributes.LIFERAY_USER_ID,
-				userAttributes.getValue(UserAttributes.LIFERAY_USER_ID));
-
-			// Portlet user attributes
-
-			for (String attrName : portletApp.getUserAttributes()) {
-				String attrValue = userAttributes.getValue(attrName);
-
-				if (attrValue != null) {
-					userInfo.put(attrName, attrValue);
-				}
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		Map<String, String> unmodifiableUserInfo =
-			Collections.unmodifiableMap((Map<String, String>)userInfo.clone());
-
-		// Custom user attributes
-
-		Map<String, CustomUserAttributes> cuaInstances =
-			new HashMap<String, CustomUserAttributes>();
-
-		for (Map.Entry<String, String> entry :
-				portletApp.getCustomUserAttributes().entrySet()) {
-
-			String attrName = entry.getKey();
-			String attrCustomClass = entry.getValue();
-
-			CustomUserAttributes cua = cuaInstances.get(attrCustomClass);
-
-			if (cua == null) {
-				if (portletApp.isWARFile()) {
-					PortletContextBag portletContextBag =
-						PortletContextBagPool.get(
-							portletApp.getServletContextName());
-
-					cua = portletContextBag.getCustomUserAttributes().get(
-						attrCustomClass);
-
-					cua = (CustomUserAttributes)cua.clone();
-				}
-				else {
-					try {
-						cua = (CustomUserAttributes)Class.forName(
-							attrCustomClass).newInstance();
-					}
-					catch (Exception e) {
-						_log.error(e, e);
-					}
-				}
-
-				cuaInstances.put(attrCustomClass, cua);
-			}
-
-			if (cua != null) {
-				String attrValue = cua.getValue(attrName, unmodifiableUserInfo);
-
-				if (attrValue != null) {
-					userInfo.put(attrName, attrValue);
-				}
-			}
-		}
-
-		return userInfo;
+		return UserInfoFactory.getUserInfo(_req, _portlet);
 	}
 
 	public Principal getUserPrincipal() {
@@ -884,7 +778,5 @@ public abstract class PortletRequestImpl implements PortletRequest {
 	private Profile _profile;
 	private Locale _locale;
 	private long _plid;
-
-	private static final Profile _EMPTY_PROFILE = new EmptyProfile();
 
 }

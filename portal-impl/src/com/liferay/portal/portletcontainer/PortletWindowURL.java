@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 /**
  * The contents of this file are subject to the terms of the Common Development
  * and Distribution License (the License). You may not use this file except in
@@ -57,7 +58,6 @@ import java.util.Map;
 
 import javax.portlet.PortletModeException;
 import javax.portlet.PortletRequest;
-import javax.portlet.PortletSecurityException;
 import javax.portlet.WindowStateException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -67,45 +67,74 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortletWindowURL.java.html"><b><i>View Source</i></b></a>
- * PortletWindowURL provides the concrete implementation of ChannelURL interface
  *
  * @author Deepak Gothe
+ * @author Brian Wing Shun Chan
  *
  */
 public class PortletWindowURL implements ChannelURL, Serializable {
 
-	public PortletWindowURL(HttpServletRequest req, Portlet portletModel,
-			ChannelMode newPortletWindowMode, ChannelState newWindowState,
-			long plid) {
+	public PortletWindowURL(
+		HttpServletRequest req, Portlet portlet, ChannelState windowState,
+		ChannelMode portletMode, long plid) {
+
 		_portletURLImpl = new PortletURLImpl(
-				req, portletModel.getPortletId(), plid,
-					PortletRequest.RENDER_PHASE);
-		setChannelMode(newPortletWindowMode);
-		setWindowState(newWindowState);
+			req, portlet.getPortletId(), plid, PortletRequest.RENDER_PHASE);
+
+		setWindowState(windowState);
+		setChannelMode(portletMode);
 	}
 
-	public void setChannelMode(ChannelMode newChannelMode) {
+	public void addProperty(String name, String value) {
+		if (name == null) {
+			return;
+		}
+
+		_portletURLImpl.addProperty(name, value);
+	}
+
+	public String getCacheLevel() {
+		return _portletURLImpl.getCacheability();
+	}
+
+	public ChannelMode getChannelMode() {
+		return PortletAppEngineUtils.getPortletMode(
+			_portletURLImpl.getPortletMode());
+	}
+
+	public Map<String, String[]> getParameters() {
+		return _portletURLImpl.getParameterMap();
+	}
+
+	public Map<String, List<String>> getProperties() {
+		return Collections.EMPTY_MAP;
+	}
+
+	public ChannelURLType getURLType() {
+		return _urlType;
+	}
+
+	public ChannelState getWindowState() {
+		return PortletAppEngineUtils.getWindowState(
+			_portletURLImpl.getWindowState());
+	}
+
+	public boolean isSecure() {
+		return _portletURLImpl.isSecure();
+	}
+
+	public void setCacheLevel(String cacheLevel) {
+		_portletURLImpl.setCacheability(cacheLevel);
+	}
+
+	public void setChannelMode(ChannelMode portletMode) {
 		try {
 			_portletURLImpl.setPortletMode(
-					PortletAppEngineUtils.getPortletMode(newChannelMode));
-		} catch (PortletModeException ex) {
-			_log.error(ex);
+				PortletAppEngineUtils.getPortletMode(portletMode));
 		}
-	}
-
-	public void setWindowState(ChannelState newWindowState) {
-		try {
-			_portletURLImpl.setWindowState(
-					PortletAppEngineUtils.getWindowState(newWindowState));
-		} catch (WindowStateException ex) {
-			_log.error(ex);
+		catch (PortletModeException pme) {
+			_log.error(pme);
 		}
-	}
-
-	public void setURLType(ChannelURLType urlType) {
-		_urlType = urlType;
-		_portletURLImpl.setURLType(getURLType());
-		_portletURLImpl.setLifecycle(getLifecycle());
 	}
 
 	public void setParameter(String name, String value) {
@@ -124,84 +153,59 @@ public class PortletWindowURL implements ChannelURL, Serializable {
 		if (name == null) {
 			return;
 		}
+
 		_portletURLImpl.setProperty(name, value);
-	}
-
-	public void addProperty(String name, String value) {
-		if (name == null) {
-			return;
-		}
-		_portletURLImpl.addProperty(name, value);
-	}
-
-	public void setSecure(boolean secure) {
-		try {
-			_portletURLImpl.setSecure(secure);
-		} catch (PortletSecurityException ex) {
-			_log.error(ex);
-		}
-	}
-
-	public void setCacheLevel(String cacheLevel) {
-		_portletURLImpl.setCacheability(cacheLevel);
 	}
 
 	public void setResourceID(String resourceID) {
 		_portletURLImpl.setResourceID(resourceID);
 	}
 
-	public ChannelState getWindowState() {
-		return PortletAppEngineUtils.getWindowState(
-				_portletURLImpl.getWindowState());
+	public void setSecure(boolean secure) {
+		_portletURLImpl.setSecure(secure);
 	}
 
-	public ChannelMode getChannelMode() {
-		return PortletAppEngineUtils.getPortletMode(
-				_portletURLImpl.getPortletMode());
+	public void setURLType(ChannelURLType urlType) {
+		_urlType = urlType;
+
+		_portletURLImpl.setLifecycle(getLifecycle());
+		_portletURLImpl.setURLType(getURLType());
 	}
 
-	public ChannelURLType getURLType() {
-		return _urlType;
+	public void setWindowState(ChannelState windowState) {
+		try {
+			_portletURLImpl.setWindowState(
+				PortletAppEngineUtils.getWindowState(windowState));
+		}
+		catch (WindowStateException wse) {
+			_log.error(wse);
+		}
 	}
-
-	public Map<String, String[]> getParameters() {
-		return _portletURLImpl.getParameterMap();
-	}
-
-	public Map<String, List<String>> getProperties() {
-		// TODO: Implement properties in PortletURLImpl
-		return Collections.EMPTY_MAP;
-	}
-
-	public boolean isSecure() {
-		return _portletURLImpl.isSecure();
-	}
-
-	public String getCacheLevel() {
-		return _portletURLImpl.getCacheability();
-	}
-
-	@Override
 	public String toString() {
 		return _portletURLImpl.toString();
 	}
 
-	private String getLifecycle() {
+	protected String getLifecycle() {
 		if (ChannelURLType.ACTION.equals(getURLType())) {
 			return PortletRequest.ACTION_PHASE;
-		} else if (ChannelURLType.RENDER.equals(getURLType())) {
-			// to force portal to call container.excuteAction
+		}
+		else if (ChannelURLType.RENDER.equals(getURLType())) {
+
+			// Force the portal to call executeAction
+
 			return PortletRequest.ACTION_PHASE;
-		} else if (ChannelURLType.RESOURCE.equals(getURLType())) {
+		}
+		else if (ChannelURLType.RESOURCE.equals(getURLType())) {
 			return PortletRequest.RESOURCE_PHASE;
-		} else {
+		}
+		else {
 			return PortletRequest.RENDER_PHASE;
 		}
 	}
 
 	private static Log _log = LogFactory.getLog(PortletWindowURL.class);
 
-	private ChannelURLType _urlType;
 	private PortletURLImpl _portletURLImpl;
+	private ChannelURLType _urlType;
 
 }

@@ -296,7 +296,7 @@ public class InvokerPortlet
 	}
 
 	public void processAction(ActionRequest req, ActionResponse res)
-		throws IOException, PortletException {
+		throws IOException {
 
 		StopWatch stopWatch = null;
 
@@ -307,7 +307,7 @@ public class InvokerPortlet
 		}
 
 		try {
-			invoke(req, res, PortletRequest.ACTION_PHASE);
+			invokeAction(req, res);
 		}
 		catch (PortletException pe) {
 			req.setAttribute(_portletId + PortletException.class.getName(), pe);
@@ -331,7 +331,7 @@ public class InvokerPortlet
 			stopWatch.start();
 		}
 
-		invoke(req, res, PortletRequest.EVENT_PHASE);
+		invokeEvent(req, res);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
@@ -363,7 +363,7 @@ public class InvokerPortlet
 		if ((remoteUser == null) || (_expCache == null) ||
 			(_expCache.intValue() == 0)) {
 
-			invoke(req, res, PortletRequest.RENDER_PHASE);
+			invokeRender(req, res);
 		}
 		else {
 			RenderResponseImpl resImpl = (RenderResponseImpl)res;
@@ -386,11 +386,10 @@ public class InvokerPortlet
 			InvokerPortletResponse response = sesResponses.get(sesResponseId);
 
 			if (response == null) {
-				invoke(req, res, PortletRequest.RENDER_PHASE);
+				String title = invokeRender(req, res);
 
 				response = new InvokerPortletResponse(
-					resImpl.getTitle(),
-					stringServletRes.getString(),
+					title, stringServletRes.getString(),
 					now + Time.SECOND * _expCache.intValue());
 
 				sesResponses.put(sesResponseId, response);
@@ -398,9 +397,9 @@ public class InvokerPortlet
 			else if ((response.getTime() < now) &&
 					 (_expCache.intValue() > 0)) {
 
-				invoke(req, res, PortletRequest.RENDER_PHASE);
+				String title = invokeRender(req, res);
 
-				response.setTitle(resImpl.getTitle());
+				response.setTitle(title);
 				response.setContent(stringServletRes.getString());
 				response.setTime(now + Time.SECOND * _expCache.intValue());
 			}
@@ -418,7 +417,7 @@ public class InvokerPortlet
 	}
 
 	public void serveResource(ResourceRequest req, ResourceResponse res)
-		throws IOException, PortletException {
+		throws IOException {
 
 		StopWatch stopWatch = null;
 
@@ -429,7 +428,7 @@ public class InvokerPortlet
 		}
 
 		try {
-			invoke(req, res, PortletRequest.RESOURCE_PHASE);
+			invokeResource(req, res);
 		}
 		catch (PortletException pe) {
 			req.setAttribute(_portletId + PortletException.class.getName(), pe);
@@ -628,6 +627,34 @@ public class InvokerPortlet
 				}
 			}
 		}
+	}
+
+	protected void invokeAction(ActionRequest req, ActionResponse res)
+		throws IOException, PortletException {
+
+		invoke(req, res, PortletRequest.ACTION_PHASE);
+	}
+
+	protected void invokeEvent(EventRequest req, EventResponse res)
+		throws IOException, PortletException {
+
+		invoke(req, res, PortletRequest.EVENT_PHASE);
+	}
+
+	protected String invokeRender(RenderRequest req, RenderResponse res)
+		throws IOException, PortletException {
+
+		invoke(req, res, PortletRequest.RENDER_PHASE);
+
+		RenderResponseImpl resImpl = (RenderResponseImpl)res;
+
+		return resImpl.getTitle();
+	}
+
+	protected void invokeResource(ResourceRequest req, ResourceResponse res)
+		throws IOException, PortletException {
+
+		invoke(req, res, PortletRequest.RESOURCE_PHASE);
 	}
 
 	private static Log _log = LogFactory.getLog(InvokerPortlet.class);
