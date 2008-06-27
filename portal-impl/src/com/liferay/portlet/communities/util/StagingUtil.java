@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
@@ -113,15 +114,24 @@ public class StagingUtil {
 
 		String scope = ParamUtil.getString(req, "scope");
 
-		boolean dateRange = ParamUtil.getBoolean(req, "dateRange");
+		String range = ParamUtil.getString(req, "range");
 
 		Date startDate = null;
 		Date endDate = null;
 
-		if (dateRange) {
+		if (range.equals("dateRange")) {
 			startDate = _getDate(req, "startDate", true).getTime();
 
 			endDate = _getDate(req, "endDate", true).getTime();
+		}
+		else if (range.equals("last")) {
+			int last = ParamUtil.getInteger(req, "last");
+
+			Date now = new Date();
+
+			startDate = new Date(now.getTime() - (last * Time.HOUR));
+
+			endDate = now;
 		}
 
 		if (scope.equals("all-pages")) {
@@ -922,15 +932,24 @@ public class StagingUtil {
 			}
 		}
 
-		boolean dateRange = ParamUtil.getBoolean(req, "dateRange");
+		String range = ParamUtil.getString(req, "range");
 
 		Date startDate = null;
 		Date endDate = null;
 
-		if (dateRange) {
+		if (range.equals("dateRange")) {
 			startDate = _getDate(req, "startDate", true).getTime();
 
 			endDate = _getDate(req, "endDate", true).getTime();
+		}
+		else if (range.equals("last")) {
+			int rangeLast = ParamUtil.getInteger(req, "last");
+
+			Date now = new Date();
+
+			startDate = new Date(now.getTime() - (rangeLast * Time.HOUR));
+
+			endDate = now;
 		}
 
 		if (schedule) {
@@ -1022,15 +1041,24 @@ public class StagingUtil {
 		boolean remotePrivateLayout = ParamUtil.getBoolean(
 			req, "remotePrivateLayout");
 
-		boolean dateRange = ParamUtil.getBoolean(req, "dateRange");
+		String range = ParamUtil.getString(req, "range");
 
 		Date startDate = null;
 		Date endDate = null;
 
-		if (dateRange) {
+		if (range.equals("dateRange")) {
 			startDate = _getDate(req, "startDate", true).getTime();
 
 			endDate = _getDate(req, "endDate", true).getTime();
+		}
+		else if (range.equals("last")) {
+			int rangeLast = ParamUtil.getInteger(req, "last");
+
+			Date now = new Date();
+
+			startDate = new Date(now.getTime() - (rangeLast * Time.HOUR));
+
+			endDate = now;
 		}
 
 		if (schedule) {

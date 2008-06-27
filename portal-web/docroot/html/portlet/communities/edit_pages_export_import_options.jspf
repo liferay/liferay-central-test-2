@@ -189,18 +189,18 @@
 						<div id="<portlet:namespace/>portletDataControls">
 							<ul>
 								<li class="tree-item">
-									<liferay-ui:message key="date-range" />:
+									<liferay-ui:message key="range" />:
 
 									<ul>
 										<li>
-											<input checked id="<portlet:namespace />dateRangeAll" name="<portlet:namespace />dateRange" onClick='<%= renderResponse.getNamespace() + "hideDateRange()" %>' type="radio" value="false" />
+											<input checked id="<portlet:namespace />rangeAll" name="<portlet:namespace />range" onClick='<%= renderResponse.getNamespace() + "hideDateRange()" %>' type="radio" value="all" />
 
-											<label for="<portlet:namespace />dateRangeAll"><liferay-ui:message key="all" /></label>
+											<label for="<portlet:namespace />rangeAll"><liferay-ui:message key="all" /></label>
 										</li>
 										<li>
-											<input id="<portlet:namespace />dateRangeRange" name="<portlet:namespace />dateRange" onClick='<%= renderResponse.getNamespace() + "showDateRange()" %>' type="radio" value="true" />
+											<input id="<portlet:namespace />rangeDateRange" name="<portlet:namespace />range" onClick='<%= renderResponse.getNamespace() + "showDateRange()" %>' type="radio" value="dateRange" />
 
-											<label for="<portlet:namespace />dateRangeRange"><liferay-ui:message key="range" /></label> <liferay-ui:icon-help message="export-date-range-help" />
+											<label for="<portlet:namespace />rangeDateRange"><liferay-ui:message key="date-range" /></label> <liferay-ui:icon-help message="export-date-range-help" />
 
 											<%
 											Calendar today = CalendarFactoryUtil.getCalendar(timeZone, locale);
@@ -282,6 +282,18 @@
 													</table>
 												</li>
 											</ul>
+										</li>
+										<li>
+											<input id="<portlet:namespace />rangeLast" name="<portlet:namespace />range" onClick='<%= renderResponse.getNamespace() + "hideDateRange()" %>' type="radio" value="last" />
+
+											<label for="<portlet:namespace />rangeLast"><liferay-ui:message key="last" /></label>
+
+											<select name="<portlet:namespace />last">
+												<option value="12"><%= LanguageUtil.format(pageContext, "x-hours", "12") %></option>
+												<option value="24"><%= LanguageUtil.format(pageContext, "x-hours", "24") %></option>
+												<option value="48"><%= LanguageUtil.format(pageContext, "x-hours", "48") %></option>
+												<option value="2487"><%= LanguageUtil.format(pageContext, "x-days", "7") %></option>
+											</select>
 										</li>
 									</ul>
 								</li>

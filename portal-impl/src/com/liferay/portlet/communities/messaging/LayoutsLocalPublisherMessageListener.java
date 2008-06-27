@@ -23,6 +23,7 @@
 package com.liferay.portlet.communities.messaging;
 
 import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
@@ -31,6 +32,7 @@ import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.communities.util.StagingUtil;
 import com.liferay.util.JSONUtil;
+import com.liferay.util.MapUtil;
 
 import java.util.Date;
 import java.util.Map;
@@ -65,6 +67,22 @@ public class LayoutsLocalPublisherMessageListener implements MessageListener {
 				publisherRequest.getParameterMap();
 			Date startDate = publisherRequest.getStartDate();
 			Date endDate = publisherRequest.getEndDate();
+
+			String range = MapUtil.getString(parameterMap, "range");
+
+			if (range.equals("last")) {
+				int last = MapUtil.getInteger(parameterMap, "last");
+
+				if (last > 0) {
+					Date scheduledFireTime =
+						publisherRequest.getScheduledFireTime();
+
+					startDate = new Date(
+						scheduledFireTime.getTime() - (last * Time.HOUR));
+
+					endDate = scheduledFireTime;
+				}
+			}
 
 			PrincipalThreadLocal.setName(userId);
 
