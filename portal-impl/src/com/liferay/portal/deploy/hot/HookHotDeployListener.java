@@ -99,6 +99,8 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			return;
 		}
 
+		PropsUtil.removeProperties(portalProperties);
+
 		for (String fieldName : _PROPS_KEYS_BOOLEAN) {
 			String key = StringUtil.replace(
 				fieldName.toLowerCase(), StringPool.UNDERLINE,
