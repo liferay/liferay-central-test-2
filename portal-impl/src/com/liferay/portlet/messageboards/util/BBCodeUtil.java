@@ -107,7 +107,8 @@ public class BBCodeUtil {
 			String code = emoticon[1];
 
 			emoticon[0] =
-				"<img alt='emoticon' src='@theme_images_path@/emoticons/" + image + "' />";
+				"<img alt='emoticon' src='@theme_images_path@/emoticons/" +
+					image + "' />";
 			emoticon[1] = HtmlUtil.escape(code);
 		}
 	}
