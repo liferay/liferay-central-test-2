@@ -112,8 +112,6 @@ public class StagingUtil {
 
 		Map<String, String[]> parameterMap = getStagingParameters();
 
-		String scope = ParamUtil.getString(req, "scope");
-
 		String range = ParamUtil.getString(req, "range");
 
 		Date startDate = null;
@@ -133,6 +131,8 @@ public class StagingUtil {
 
 			endDate = now;
 		}
+
+		String scope = ParamUtil.getString(req, "scope");
 
 		if (scope.equals("all-pages")) {
 			publishLayouts(
