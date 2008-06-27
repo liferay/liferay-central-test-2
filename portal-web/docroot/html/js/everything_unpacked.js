@@ -17318,7 +17318,7 @@ Liferay.Portlet = {
 		};
 
 		if (refreshPortletList["_" + portletId]) {
-			data.referer = Liferay.currentURLEncoded;
+			data.referer = Liferay.currentURL;
 			data.refresh = 1;
 
 			if (plid) {
