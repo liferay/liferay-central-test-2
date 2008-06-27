@@ -50,6 +50,7 @@ import com.sun.portal.container.ChannelState;
 import com.sun.portal.container.ChannelURLType;
 import com.sun.portal.container.WindowRequestReader;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -95,7 +96,7 @@ public class PortletWindowRequestReader implements WindowRequestReader {
 	}
 
 	public Map<String, String[]> readParameterMap(HttpServletRequest req) {
-		Map<String, String[]> parameterMap = req.getParameterMap();
+		Map<String, String[]> parameterMap = new HashMap<String,String[]>();
 
 		String portletId = req.getParameter("p_p_id");
 
