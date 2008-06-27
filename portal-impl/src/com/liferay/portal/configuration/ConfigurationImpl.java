@@ -27,7 +27,6 @@ import com.germinus.easyconf.ComponentConfiguration;
 import com.germinus.easyconf.ComponentProperties;
 import com.germinus.easyconf.EasyConf;
 
-import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -45,6 +44,7 @@ import java.util.Properties;
 import java.util.Set;
 
 import org.apache.commons.configuration.CompositeConfiguration;
+import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.MapConfiguration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -55,7 +55,8 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class ConfigurationImpl implements Configuration {
+public class ConfigurationImpl
+	implements com.liferay.portal.kernel.configuration.Configuration {
 
 	public void addProperties(Properties properties) {
 		ComponentProperties componentProperties =
@@ -70,17 +71,18 @@ public class ConfigurationImpl implements Configuration {
 
 			field1.setAccessible(true);
 
-			CompositeConfiguration conf = (CompositeConfiguration)field1.get(
-				aggregatedProperties);
+			CompositeConfiguration compositeConfiguration =
+				(CompositeConfiguration)field1.get(aggregatedProperties);
 
 			Field field2 = CompositeConfiguration.class.getDeclaredField(
 				"configList");
 
 			field2.setAccessible(true);
 
-			List list = (List)field2.get(conf);
+			List<Configuration> configurations =
+				(List<Configuration>)field2.get(compositeConfiguration);
 
-			list.add(0, new MapConfiguration(properties));
+			configurations.add(0, new MapConfiguration(properties));
 		}
 		catch (Exception e) {
 			_log.error("The properties could not be added", e);
@@ -169,33 +171,30 @@ public class ConfigurationImpl implements Configuration {
 	}
 
 	public void removeProperties(Properties properties) {
-
-		AggregatedProperties aggregatedProperties =
-			(AggregatedProperties) _componentConfiguration.getProperties().
-				toConfiguration();
-
 		try {
+			ComponentProperties componentProperties =
+				_componentConfiguration.getProperties();
+
+			AggregatedProperties aggregatedProperties =
+				(AggregatedProperties)componentProperties.toConfiguration();
+
 			Field field1 = aggregatedProperties.getClass().getDeclaredField(
 				"baseConf");
 
 			field1.setAccessible(true);
 
-			CompositeConfiguration conf = (CompositeConfiguration)field1.get(
-				aggregatedProperties);
+			CompositeConfiguration compositeConfiguration =
+				(CompositeConfiguration)field1.get(aggregatedProperties);
 
 			Field field2 = CompositeConfiguration.class.getDeclaredField(
 				"configList");
 
 			field2.setAccessible(true);
 
-			List list = (List)field2.get(conf);
+			List<Configuration> configurations =
+				(List<Configuration>)field2.get(compositeConfiguration);
 
-			Iterator itr = list.iterator();
-
-			while (itr.hasNext()) {
-				org.apache.commons.configuration.Configuration configuration =
-					(org.apache.commons.configuration.Configuration)itr.next();
-
+			for (Configuration configuration : configurations) {
 				if (!(configuration instanceof MapConfiguration)) {
 					return;
 				}
@@ -207,7 +206,6 @@ public class ConfigurationImpl implements Configuration {
 					aggregatedProperties.removeConfiguration(configuration);
 				}
 			}
-
 		}
 		catch (Exception e) {
 			_log.error("The properties could not be removed", e);
