@@ -70,12 +70,6 @@ if (selGroup.isStagingGroup()) {
 	treeKey = "stageLayoutsTree";
 }
 
-boolean localPublishing = ParamUtil.getBoolean(request, "localPublishing", true);
-
-if (!localPublishing) {
-	popupId = "publish-to-remote";
-}
-
 long selPlid = ParamUtil.getLong(request, "selPlid", LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
 Layout selLayout = null;
@@ -108,6 +102,15 @@ for (int i = 0; i < selectedPlids.length; i++) {
 	}
 	catch (NoSuchLayoutException nsle) {
 	}
+}
+
+boolean localPublishing = ParamUtil.getBoolean(request, "localPublishing", true);
+
+if (!localPublishing) {
+	popupId = "publish-to-remote";
+	selGroup = liveGroup;
+	selectedPlids = new long[0];
+	SessionTreeJSClicks.closeNodes(request, treeKey + "Selected");
 }
 
 boolean privateLayout = tabs1.equals("private-pages");
@@ -158,7 +161,7 @@ if (proposalId > 0) {
 	portletURL.setParameter("proposalId", String.valueOf(proposalId));
 }
 else {
-	if (selGroup.isStagingGroup()) {
+	if (selGroup.isStagingGroup() || selGroup.hasStagingGroup()) {
 		cmd = "publish_to_live";
 
 		if (!localPublishing) {
@@ -208,6 +211,12 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 	}
 </style>
 
+<c:if test="<%= selGroup.hasStagingGroup() && !localPublishing %>">
+	<div class="portlet-msg-alert">
+		<liferay-ui:message key="the-staging-environment-is-activated-publish-to-remote-publishes-from-live" />
+	</div>
+</c:if>
+
 <form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />exportPagesFm">
 <input name="<portlet:namespace /><%=  Constants.CMD %>" type="hidden" value="<%= cmd %>">
 <input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escape(tabs1) %>">
@@ -221,8 +230,14 @@ if (!localPublishing) {
 	tabs2Names += ",remote-options";
 }
 
-if (selGroup.isStagingGroup()) {
+if (selGroup.isStagingGroup() || selGroup.hasStagingGroup()) {
 	tabs2Names += ",scheduler";
+}
+
+String actionKey = "copy";
+
+if (selGroup.isStagingGroup() || popupId.equals("publish-to-remote")) {
+	actionKey = "publish";
 }
 %>
 
@@ -248,14 +263,14 @@ if (selGroup.isStagingGroup()) {
 			<c:when test="<%= !publish %>">
 				<input <%= (results.size() == 0)? "style=\"display: none;\"" :"" %> id="selectBtn" type="button" value="<liferay-ui:message key="select" />" onClick="Liferay.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=true');" />
 
-				<input <%= (results.size() > 0)? "style=\"display: none;\"" :"" %> id="publishBtn" type="button" value="<liferay-ui:message key='<%= selGroup.isStagingGroup() ? "publish" : "copy" %>' />" onClick='if (confirm("<liferay-ui:message key='<%= "are-you-sure-you-want-to-" + (selGroup.isStagingGroup() ? "publish" : "copy") + "-these-pages" %>' />")) { submitForm(document.<portlet:namespace />exportPagesFm); }' />
+				<input <%= (results.size() > 0)? "style=\"display: none;\"" :"" %> id="publishBtn" type="button" value="<liferay-ui:message key='<%= actionKey %>' />" onClick='if (confirm("<liferay-ui:message key='<%= "are-you-sure-you-want-to-" + actionKey + "-these-pages" %>' />")) { submitForm(document.<portlet:namespace />exportPagesFm); }' />
 			</c:when>
 			<c:otherwise>
 				<c:if test="<%= selPlid <= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>">
 					<input id="changeBtn" type="button" value="<liferay-ui:message key="change-selection" />" onClick="Liferay.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=false');" />
 				</c:if>
 
-				<input id="publishBtn" type="button" value="<liferay-ui:message key='<%= selGroup.isStagingGroup() ? "publish" : "copy" %>' />" onClick='if (confirm("<liferay-ui:message key='<%= "are-you-sure-you-want-to-" + (selGroup.isStagingGroup() ? "publish" : "copy") + "-these-pages" %>' />")) { submitForm(document.<portlet:namespace />exportPagesFm); }' />
+				<input id="publishBtn" type="button" value="<liferay-ui:message key='<%= actionKey %>' />" onClick='if (confirm("<liferay-ui:message key='<%= "are-you-sure-you-want-to-" + actionKey + "-these-pages" %>' />")) { submitForm(document.<portlet:namespace />exportPagesFm); }' />
 			</c:otherwise>
 		</c:choose>
 
@@ -271,7 +286,7 @@ if (selGroup.isStagingGroup()) {
 		</liferay-ui:section>
 	</c:if>
 
-	<c:if test="<%= selGroup.isStagingGroup() %>">
+	<c:if test="<%= selGroup.isStagingGroup() || selGroup.hasStagingGroup() %>">
 		<liferay-ui:section>
 			<%@ include file="/html/portlet/communities/export_pages_scheduler.jspf" %>
 		</liferay-ui:section>

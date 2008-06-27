@@ -117,6 +117,10 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 
 						<input type="button" value="<liferay-ui:message key="propose-publication" />" onClick="Liferay.LayoutExporter.proposeLayout({url: '<%= proposalURL.toString().replace('"','\'') %>', namespace: '<portlet:namespace />', reviewers: <%= StringUtil.replace(jsonReviewers.toString(), '"', '\'') %>, title: '<liferay-ui:message key="proposal-description" />'});" />
 					</c:if>
+
+					<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING) %>">
+						<input type="button" value="<liferay-ui:message key="publish-to-remote" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= publishToRemoteURL %>', messageId: 'publish-to-remote'});" />
+					</c:if>
 				</c:when>
 				<c:otherwise>
 					<input type="button" value="<liferay-ui:message key="publish-to-live" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= publishToLiveURL %>', messageId: 'publish-to-live'});" />
