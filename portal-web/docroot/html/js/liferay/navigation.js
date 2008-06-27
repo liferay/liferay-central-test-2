@@ -373,7 +373,7 @@ Liferay.Navigation = new Class({
 		}
 	},
 
-	_savePage: function(event, obj oldName) {
+	_savePage: function(event, obj, oldName) {
 		var instance = this;
 
 		if ((event.type == 'keyup') && (event.keyCode !== 13)) {
