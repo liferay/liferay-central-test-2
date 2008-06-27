@@ -260,9 +260,7 @@ public class LayoutTemplateLocalServiceImpl
 			}
 		}
 
-		if (GetterUtil.getBoolean(PropsUtil.get(
-				PropsKeys.LAYOUT_TEMPLATE_CACHE_ENABLED))) {
-
+		if (PropsValues.LAYOUT_TEMPLATE_CACHE_ENABLED) {
 			return layoutTemplate.getWapContent();
 		}
 		else {

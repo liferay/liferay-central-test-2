@@ -93,14 +93,16 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 
 		PropsUtil.removeProperties(portalProperties);
 
-		if (_log.isDebugEnabled()) {
+		if (_log.isDebugEnabled() &&
+			portalProperties.containsKey(PropsKeys.LOCALES)) {
+
 			_log.debug(
 				"Portlet locales " +
 					portalProperties.getProperty(PropsKeys.LOCALES));
 			_log.debug(
 				"Original locales " + PropsUtil.get(PropsKeys.LOCALES));
 			_log.debug(
-				"Original locales as array " +
+				"Original locales array length " +
 					PropsUtil.getArray(PropsKeys.LOCALES).length);
 		}
 
@@ -333,14 +335,16 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 
 		PropsUtil.addProperties(portalProperties);
 
-		if (_log.isDebugEnabled()) {
+		if (_log.isDebugEnabled() &&
+			portalProperties.containsKey(PropsKeys.LOCALES)) {
+
 			_log.debug(
-				"Expected locales " +
+				"Portlet locales " +
 					portalProperties.getProperty(PropsKeys.LOCALES));
 			_log.debug(
-				"Actual locales " + PropsUtil.get(PropsKeys.LOCALES));
+				"Merged locales " + PropsUtil.get(PropsKeys.LOCALES));
 			_log.debug(
-				"Actual locales as array " +
+				"Merged locales array length " +
 					PropsUtil.getArray(PropsKeys.LOCALES).length);
 		}
 
@@ -420,12 +424,19 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 
 	private static final String[] _PROPS_KEYS_BOOLEAN = new String[] {
 		"JAVASCRIPT_FAST_LOAD",
+		"LAYOUT_TEMPLATE_CACHE_ENABLED",
 		"LAYOUT_USER_PRIVATE_LAYOUTS_AUTO_CREATE",
 		"LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED",
 		"LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE",
 		"LAYOUT_USER_PUBLIC_LAYOUTS_AUTO_CREATE",
 		"LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED",
 		"LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE",
+		"MY_PLACES_SHOW_COMMUNITY_PRIVATE_SITES_WITH_NO_LAYOUTS",
+		"MY_PLACES_SHOW_COMMUNITY_PUBLIC_SITES_WITH_NO_LAYOUTS",
+		"MY_PLACES_SHOW_ORGANIZATION_PRIVATE_SITES_WITH_NO_LAYOUTS",
+		"MY_PLACES_SHOW_ORGANIZATION_PUBLIC_SITES_WITH_NO_LAYOUTS",
+		"MY_PLACES_SHOW_USER_PRIVATE_SITES_WITH_NO_LAYOUTS",
+		"MY_PLACES_SHOW_USER_PUBLIC_SITES_WITH_NO_LAYOUTS",
 		"ORGANIZATIONS_COUNTRY_REQUIRED",
 		"THEME_CSS_FAST_LOAD"
 	};

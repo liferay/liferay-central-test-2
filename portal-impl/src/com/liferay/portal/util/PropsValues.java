@@ -684,35 +684,33 @@ public class PropsValues {
 		GetterUtil.getLong(
 			PropsUtil.get(PropsKeys.MESSAGE_BOARDS_EXPIRE_BAN_JOB_INTERVAL));
 
-	public static final boolean
+	public static boolean
 		MY_PLACES_SHOW_COMMUNITY_PRIVATE_SITES_WITH_NO_LAYOUTS =
 			GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
 				MY_PLACES_SHOW_COMMUNITY_PRIVATE_SITES_WITH_NO_LAYOUTS));
 
-	public static final boolean
+	public static boolean
 		MY_PLACES_SHOW_COMMUNITY_PUBLIC_SITES_WITH_NO_LAYOUTS =
 			GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
 				MY_PLACES_SHOW_COMMUNITY_PUBLIC_SITES_WITH_NO_LAYOUTS));
 
-	public static final boolean
+	public static boolean
 		MY_PLACES_SHOW_ORGANIZATION_PRIVATE_SITES_WITH_NO_LAYOUTS =
 			GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
 				MY_PLACES_SHOW_ORGANIZATION_PRIVATE_SITES_WITH_NO_LAYOUTS));
 
-	public static final boolean
+	public static boolean
 		MY_PLACES_SHOW_ORGANIZATION_PUBLIC_SITES_WITH_NO_LAYOUTS =
 			GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
 				MY_PLACES_SHOW_ORGANIZATION_PUBLIC_SITES_WITH_NO_LAYOUTS));
 
-	public static final boolean
-		MY_PLACES_SHOW_USER_PRIVATE_SITES_WITH_NO_LAYOUTS =
-			GetterUtil.getBoolean(PropsUtil.get(
-				PropsKeys.MY_PLACES_SHOW_USER_PRIVATE_SITES_WITH_NO_LAYOUTS));
+	public static boolean MY_PLACES_SHOW_USER_PRIVATE_SITES_WITH_NO_LAYOUTS =
+		GetterUtil.getBoolean(PropsUtil.get(
+			PropsKeys.MY_PLACES_SHOW_USER_PRIVATE_SITES_WITH_NO_LAYOUTS));
 
-	public static final boolean
-		MY_PLACES_SHOW_USER_PUBLIC_SITES_WITH_NO_LAYOUTS =
-			GetterUtil.getBoolean(PropsUtil.get(
-				PropsKeys.MY_PLACES_SHOW_USER_PUBLIC_SITES_WITH_NO_LAYOUTS));
+	public static boolean MY_PLACES_SHOW_USER_PUBLIC_SITES_WITH_NO_LAYOUTS =
+		GetterUtil.getBoolean(PropsUtil.get(
+			PropsKeys.MY_PLACES_SHOW_USER_PUBLIC_SITES_WITH_NO_LAYOUTS));
 
 	public static final String NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT =
 		PropsUtil.get(PropsKeys.NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT);
