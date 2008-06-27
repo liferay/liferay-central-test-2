@@ -58,7 +58,7 @@ public class ResultRow {
 		_primaryKey = primaryKey;
 		_pos = pos;
 		_bold = bold;
-		_entries = new ArrayList<Object>();
+		_entries = new ArrayList<SearchEntry>();
 	}
 
 	public Object getObject() {
@@ -109,7 +109,7 @@ public class ResultRow {
 		_classHoverName = classHoverName;
 	}
 
-	public List<Object> getEntries() {
+	public List<SearchEntry> getEntries() {
 		return _entries;
 	}
 
@@ -389,7 +389,7 @@ public class ResultRow {
 	private boolean _restricted;
 	private String _className;
 	private String _classHoverName;
-	private List<Object> _entries;
+	private List<SearchEntry> _entries;
 	private Map<String, Object> _params;
 
 }
