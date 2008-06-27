@@ -42,12 +42,12 @@ body {
 	font: 62.5%/1.6em Arial,Helvetica,Verdana,sans-serif;
 }
 
-html, body {
+html {
 	height: 100%;
 }
 
 body {
-	background: transparent url(../images/common/body_bg.png) repeat-x 0 0;
+	background: #fff;
 	font-size: 11px;
 }
 
@@ -172,14 +172,14 @@ code, pre {
 
 /* ---------- Staging area ---------- */
 
-body.staging #wrapper {
+body.staging {
 	border: 10px solid #f00;
-	padding: 0px 5px 5px;
 }
 
 /* ---------- Main content body ---------- */
 
 #wrapper {
+	background: transparent url(../images/common/body_bg.png) repeat-x 0 0;
 	width: 100%;
 }
 
