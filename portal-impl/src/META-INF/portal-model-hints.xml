@@ -214,7 +214,6 @@
 			<hint-collection name="TEXTAREA" />
 		</field>
 		<field name="priority" type="int" />
-		<field name="junctionPlid" type="long" />
 		<field name="dlFolderId" type="long" />
 	</model>
 	<model name="com.liferay.portal.model.LayoutSet">

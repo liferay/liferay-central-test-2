@@ -27,43 +27,41 @@
 <%
 StringMaker sm = new StringMaker();
 
-_buildBreadcrumb(selLayout, selLayoutParam, portletURL, true, request, themeDisplay, sm);
+_buildBreadcrumb(selLayout, selLayoutParam, portletURL, themeDisplay, true, sm);
 %>
 
 <%= sm.toString() %>
 
 <%!
-private void _buildBreadcrumb(Layout selLayout, String selLayoutParam, PortletURL portletURL, boolean selectedLayout, HttpServletRequest req, ThemeDisplay themeDisplay, StringMaker sm) throws Exception {
-	String junctionPointURL = null;
+private void _buildBreadcrumb(Layout selLayout, String selLayoutParam, PortletURL portletURL, ThemeDisplay themeDisplay, boolean selectedLayout, StringMaker sm) throws Exception {
+	String layoutURL = _getBreadcrumbLayoutURL(selLayout, selLayoutParam, portletURL, themeDisplay);
+	String target = PortalUtil.getLayoutTarget(selLayout);
 
-	List<Layout> selBranch = selLayout.getJunctionAncestors(req);
+	StringMaker breadCrumbSM = new StringMaker();
 
-	for (int i = selBranch.size() - 1; i >= 0; i--) {
-		Layout curLayout = selBranch.get(i);
+	breadCrumbSM.append("<a href=\"");
+	breadCrumbSM.append(layoutURL);
+	breadCrumbSM.append("\" ");
+	breadCrumbSM.append(target);
+	breadCrumbSM.append(">");
 
-		String layoutURL = _getBreadcrumbLayoutURL(curLayout, selLayoutParam, portletURL, themeDisplay);
+	breadCrumbSM.append(selLayout.getName(themeDisplay.getLocale()));
 
-		if (curLayout.getType().equals(LayoutConstants.TYPE_JUNCTION_POINT)) {
-			junctionPointURL = layoutURL;
+	breadCrumbSM.append("</a>");
 
-			continue;
-		}
+	Layout layoutParent = null;
+	long layoutParentId = selLayout.getParentLayoutId();
 
-		String target = PortalUtil.getLayoutTarget(curLayout);
+	if (layoutParentId != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
+		layoutParent = LayoutLocalServiceUtil.getLayout(selLayout.getGroupId(), selLayout.isPrivateLayout(), layoutParentId);
 
-		sm.append("<a href=\"");
-		sm.append((junctionPointURL != null) ? junctionPointURL : layoutURL);
-		sm.append("\" ");
-		sm.append(target);
-		sm.append(">");
-		sm.append(curLayout.getName(themeDisplay.getLocale()));
-		sm.append("</a>");
+		_buildBreadcrumb(layoutParent, selLayoutParam, portletURL, themeDisplay, false, sm);
 
-		if (i > 0) {
-			sm.append(" &raquo; ");
-		}
-
-		junctionPointURL = null;
+		sm.append(" &raquo; ");
+		sm.append(breadCrumbSM.toString());
+	}
+	else {
+		sm.append(breadCrumbSM.toString());
 	}
 }
 

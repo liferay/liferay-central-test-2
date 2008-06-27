@@ -59,6 +59,12 @@ if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.UPDA
 	if (company.isCommunityLogo()) {
 		tabs2Names += ",logo";
 	}
+
+	Group guestGroup = GroupLocalServiceUtil.getGroup(company.getCompanyId(), GroupImpl.GUEST);
+
+	if (liveGroup.getGroupId() != guestGroup.getGroupId()) {
+		tabs2Names += ",merge-pages";
+	}
 }
 
 if (!StringUtil.contains(tabs2Names, tabs2)) {
@@ -286,5 +292,30 @@ if (!StringUtil.contains(tabs2Names, tabs2)) {
 		<br />
 
 		<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />updateLogo();" />
+	</c:when>
+	<c:when test='<%= tabs2.equals("merge-pages") %>'>
+
+		<%
+		boolean mergeGuestPublicPages = PropertiesParamUtil.getBoolean(groupTypeSettings, request, "mergeGuestPublicPages");
+		%>
+
+		<div class="portlet-msg-info">
+			<liferay-ui:message key="you-can-configure-the-top-level-pages-of-this-public-website-to-merge-with-the-top-level-pages-of-the-public-guest-community" />
+		</div>
+
+		<table class="lfr-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="merge-guest-public-pages" />
+			</td>
+			<td>
+				<liferay-ui:input-checkbox param="mergeGuestPublicPages" defaultValue="<%= mergeGuestPublicPages %>" />
+			</td>
+		</tr>
+		</table>
+
+		<br />
+
+		<input type="submit" value="<liferay-ui:message key="save" />" />
 	</c:when>
 </c:choose>

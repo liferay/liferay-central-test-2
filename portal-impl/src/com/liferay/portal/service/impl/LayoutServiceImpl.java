@@ -324,15 +324,6 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		SchedulerEngineUtil.unschedule(jobName, groupName);
 	}
 
-	public Layout updateJunctionPlid(long plid, long junctionPlid)
-		throws PortalException, SystemException {
-
-		LayoutPermissionUtil.check(
-			getPermissionChecker(), plid, ActionKeys.UPDATE);
-
-		return layoutLocalService.updateJunctionPlid(plid, junctionPlid);
-	}
-
 	public Layout updateLayout(
 			long groupId, boolean privateLayout, long layoutId,
 			long parentLayoutId, Map<Locale, String> localeNamesMap,

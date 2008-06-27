@@ -203,4 +203,29 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 
 		<input type="button" value="<liferay-ui:message key="update-display-order" />" onClick="<portlet:namespace />updateDisplayOrder();" />
 	</c:when>
+	<c:when test='<%= tabs4.equals("merge-pages") %>'>
+
+		<%
+		boolean mergeGuestPublicPages = PropertiesParamUtil.getBoolean(groupTypeSettings, request, "mergeGuestPublicPages");
+		%>
+
+		<liferay-ui:message key="you-can-configure-the-top-level-pages-of-this-public-website-to-merge-with-the-top-level-pages-of-the-public-guest-community" />
+
+		<br /><br />
+
+		<table class="lfr-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="merge-guest-public-pages" />
+			</td>
+			<td>
+				<liferay-ui:input-checkbox param="mergeGuestPublicPages" defaultValue="<%= mergeGuestPublicPages %>" />
+			</td>
+		</tr>
+		</table>
+
+		<br />
+
+		<input type="submit" value="<liferay-ui:message key="save" />" />
+	</c:when>
 </c:choose>

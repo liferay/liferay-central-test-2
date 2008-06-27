@@ -158,14 +158,6 @@ public interface LayoutLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Layout> getJunctionLayouts(
-		long companyId, boolean privateLayout)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portal.model.Layout> getJunctionLayouts(
-		long companyId, boolean privateLayout, long parentLayoutId,
-		long junctionPlid) throws com.liferay.portal.SystemException;
-
 	public com.liferay.portal.model.Layout getLayout(long groupId,
 		boolean privateLayout, long layoutId)
 		throws com.liferay.portal.PortalException,
@@ -241,11 +233,6 @@ public interface LayoutLocalService {
 
 	public com.liferay.portal.model.Layout updateFriendlyURL(long plid,
 		java.lang.String friendlyURL)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.Layout updateJunctionPlid(long plid,
-		long junctionPlid)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

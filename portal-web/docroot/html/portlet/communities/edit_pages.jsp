@@ -287,6 +287,9 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 			<c:when test='<%= tabs2.equals("virtual-host") %>'>
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "virtual_host";
 			</c:when>
+			<c:when test='<%= tabs2.equals("merge-pages") %>'>
+				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "merge_pages";
+			</c:when>
 			<c:otherwise>
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= tabs3.equals("children") ? Constants.ADD : Constants.UPDATE %>';
 			</c:otherwise>

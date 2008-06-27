@@ -577,7 +577,6 @@ create table Layout (
 	wapColorSchemeId VARCHAR(75) null,
 	css STRING null,
 	priority INTEGER,
-	junctionPlid LONG,
 	dlFolderId LONG
 );
 

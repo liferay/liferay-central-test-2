@@ -139,15 +139,6 @@ public class LayoutServiceJSON {
 		LayoutServiceUtil.unschedulePublishToRemote(groupId, jobName, groupName);
 	}
 
-	public static JSONObject updateJunctionPlid(long plid, long junctionPlid)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateJunctionPlid(plid,
-				junctionPlid);
-
-		return LayoutJSONSerializer.toJSONObject(returnValue);
-	}
-
 	public static JSONObject updateLayout(long groupId, boolean privateLayout,
 		long layoutId, java.lang.String typeSettings)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,

@@ -124,12 +124,9 @@ public class LayoutModelImpl extends BaseModelImpl {
 			{ "priority", new Integer(Types.INTEGER) },
 			
 
-			{ "junctionPlid", new Integer(Types.BIGINT) },
-			
-
 			{ "dlFolderId", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Layout (plid LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,layoutId LONG,parentLayoutId LONG,name STRING null,title STRING null,description STRING null,type_ VARCHAR(75) null,typeSettings TEXT null,hidden_ BOOLEAN,friendlyURL VARCHAR(100) null,iconImage BOOLEAN,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,priority INTEGER,junctionPlid LONG,dlFolderId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table Layout (plid LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,layoutId LONG,parentLayoutId LONG,name STRING null,title STRING null,description STRING null,type_ VARCHAR(75) null,typeSettings TEXT null,hidden_ BOOLEAN,friendlyURL VARCHAR(100) null,iconImage BOOLEAN,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,priority INTEGER,dlFolderId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table Layout";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -162,7 +159,6 @@ public class LayoutModelImpl extends BaseModelImpl {
 		model.setWapColorSchemeId(soapModel.getWapColorSchemeId());
 		model.setCss(soapModel.getCss());
 		model.setPriority(soapModel.getPriority());
-		model.setJunctionPlid(soapModel.getJunctionPlid());
 		model.setDlFolderId(soapModel.getDlFolderId());
 
 		return model;
@@ -447,16 +443,6 @@ public class LayoutModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public long getJunctionPlid() {
-		return _junctionPlid;
-	}
-
-	public void setJunctionPlid(long junctionPlid) {
-		if (junctionPlid != _junctionPlid) {
-			_junctionPlid = junctionPlid;
-		}
-	}
-
 	public long getDlFolderId() {
 		return _dlFolderId;
 	}
@@ -497,7 +483,6 @@ public class LayoutModelImpl extends BaseModelImpl {
 			model.setWapColorSchemeId(HtmlUtil.escape(getWapColorSchemeId()));
 			model.setCss(HtmlUtil.escape(getCss()));
 			model.setPriority(getPriority());
-			model.setJunctionPlid(getJunctionPlid());
 			model.setDlFolderId(getDlFolderId());
 
 			model = (Layout)Proxy.newProxyInstance(Layout.class.getClassLoader(),
@@ -531,7 +516,6 @@ public class LayoutModelImpl extends BaseModelImpl {
 		clone.setWapColorSchemeId(getWapColorSchemeId());
 		clone.setCss(getCss());
 		clone.setPriority(getPriority());
-		clone.setJunctionPlid(getJunctionPlid());
 		clone.setDlFolderId(getDlFolderId());
 
 		return clone;
@@ -626,6 +610,5 @@ public class LayoutModelImpl extends BaseModelImpl {
 	private String _wapColorSchemeId;
 	private String _css;
 	private int _priority;
-	private long _junctionPlid;
 	private long _dlFolderId;
 }

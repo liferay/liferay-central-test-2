@@ -22,8 +22,6 @@
 
 package com.liferay.portal.theme;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -78,17 +76,9 @@ public class NavItem implements Serializable {
 	public boolean isSelected() {
 		ThemeDisplay themeDisplay = _vars.getThemeDisplay();
 
-		Layout layout = themeDisplay.getLayout();
-
-		try {
-			layout = layout.getJunctionAncestor(_vars.getRequest());
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
 		return _layout.isSelected(
-			themeDisplay.isTilesSelectable(), layout, _vars.getAncestorPlid());
+			themeDisplay.isTilesSelectable(), themeDisplay.getLayout(),
+			_vars.getAncestorPlid());
 	}
 
 	public String getName() {
@@ -162,8 +152,6 @@ public class NavItem implements Serializable {
 
 	private static final Class<?>[] _VELOCITY_TAGLIB_LAYOUT_ICON_PARAMS =
 		new Class[] {Layout.class};
-
-	private static Log _log = LogFactoryUtil.getLog(NavItem.class);
 
 	private RequestVars _vars;
 	private Layout _layout;

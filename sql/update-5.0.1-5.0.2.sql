@@ -34,8 +34,6 @@ create table ExpandoValue (
 	data_ STRING null
 );
 
-alter table Layout add junctionPlid LONG;
-
 drop table SocialActivity;
 create table SocialActivity (
 	activityId LONG not null primary key,

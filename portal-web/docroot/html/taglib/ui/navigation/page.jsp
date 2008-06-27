@@ -30,11 +30,14 @@
 	Layout rootLayout = null;
 	boolean hidden = false;
 
-	List<Layout> selBranch = layout.getJunctionAncestors(request);
+	List selBranch = new ArrayList();
+
+	selBranch.add(layout);
+	selBranch.addAll(layout.getAncestors());
 
 	if (rootLayoutType.equals("relative")) {
 		if ((rootLayoutLevel >= 0) && (rootLayoutLevel < selBranch.size())) {
-			rootLayout = selBranch.get(rootLayoutLevel);
+			rootLayout = (Layout) selBranch.get(rootLayoutLevel);
 		}
 		else {
 			rootLayout = null;
@@ -44,7 +47,7 @@
 		int ancestorIndex = selBranch.size() - rootLayoutLevel;
 
 		if ((ancestorIndex >= 0) && (ancestorIndex < selBranch.size())) {
-			rootLayout = selBranch.get(ancestorIndex);
+			rootLayout = (Layout) selBranch.get(ancestorIndex);
 		}
 		else if (ancestorIndex == selBranch.size()) {
 			rootLayout = null;
@@ -82,7 +85,7 @@
 		if (!hidden) {
 			StringMaker sm = new StringMaker();
 
-			_buildNavigation(rootLayout, layout, selBranch, 1, includedLayouts, request, themeDisplay, sm);
+			_buildNavigation(rootLayout, layout, selBranch, themeDisplay, 1, includedLayouts, sm);
 
 			out.print(sm.toString());
 		}
@@ -92,27 +95,21 @@
 </c:if>
 
 <%!
-private void _buildNavigation(Layout rootLayout, Layout selLayout, List<Layout> selBranch, int layoutLevel, String includedLayouts, HttpServletRequest req, ThemeDisplay themeDisplay, StringMaker sm) throws Exception {
-	List<Layout> layoutChildren = null;
+private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranch, ThemeDisplay themeDisplay, int layoutLevel, String includedLayouts, StringMaker sm) throws Exception {
+	List layoutChildren = null;
 
 	if (rootLayout != null) {
-		rootLayout = rootLayout.getJunctionLayout(req, false);
-
 		layoutChildren = rootLayout.getChildren();
 	}
 	else {
-		Layout junctionAncestor = selLayout.getJunctionAncestor(req);
-
-		layoutChildren = LayoutLocalServiceUtil.getLayouts(junctionAncestor.getGroupId(), junctionAncestor.isPrivateLayout(), LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
+		layoutChildren = LayoutLocalServiceUtil.getLayouts(selLayout.getGroupId(), selLayout.isPrivateLayout(), LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 	}
 
 	if (layoutChildren.size() > 0) {
 		sm.append("<ul class=\"layouts\">");
 
 		for (int i = 0; i < layoutChildren.size(); i++) {
-			Layout layoutChild = layoutChildren.get(i);
-
-			layoutChild = layoutChild.getJunctionLayout(req, false);
+			Layout layoutChild = (Layout)layoutChildren.get(i);
 
 			if (!layoutChild.isHidden() && LayoutPermissionUtil.contains(themeDisplay.getPermissionChecker(), layoutChild, ActionKeys.VIEW)) {
 				String layoutURL = PortalUtil.getLayoutURL(layoutChild, themeDisplay);
@@ -134,7 +131,7 @@ private void _buildNavigation(Layout rootLayout, Layout selLayout, List<Layout> 
 					className.append("open ");
 				}
 
-				if (selLayout.getPlid() == layoutChild.getPlid()) {
+				if (selLayout.getLayoutId() == layoutChild.getLayoutId()) {
 					className.append("selected ");
 				}
 
@@ -164,7 +161,7 @@ private void _buildNavigation(Layout rootLayout, Layout selLayout, List<Layout> 
 				sm.append("</a>");
 
 				if (open) {
-					_buildNavigation(layoutChild, selLayout, selBranch, layoutLevel + 1, includedLayouts, req, themeDisplay, sm);
+					_buildNavigation(layoutChild, selLayout, selBranch, themeDisplay, layoutLevel + 1, includedLayouts, sm);
 				}
 
 				sm.append("</li>");

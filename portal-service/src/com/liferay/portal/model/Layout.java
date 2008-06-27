@@ -151,22 +151,4 @@ public interface Layout extends LayoutModel {
 
 	public boolean isSelected(boolean selectable,
 		com.liferay.portal.model.Layout layout, long ancestorPlid);
-
-	public com.liferay.portal.model.Layout getJunctionAncestor(
-		javax.servlet.http.HttpServletRequest req)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portal.model.Layout> getJunctionAncestors(
-		javax.servlet.http.HttpServletRequest req)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.Layout getJunctionLayout(
-		javax.servlet.http.HttpServletRequest req, boolean deepHistory)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portal.model.Layout> getJunctionLayouts()
-		throws com.liferay.portal.SystemException;
 }

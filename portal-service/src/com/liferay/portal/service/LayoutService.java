@@ -163,11 +163,6 @@ public interface LayoutService {
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Layout updateJunctionPlid(long plid,
-		long junctionPlid)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public com.liferay.portal.model.Layout updateLayout(long groupId,
 		boolean privateLayout, long layoutId, long parentLayoutId,
 		java.util.Map<java.util.Locale, String> localeNamesMap,
