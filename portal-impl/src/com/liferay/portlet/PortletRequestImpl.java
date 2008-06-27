@@ -23,6 +23,7 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.ccpp.PortalProfileFactory;
+import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.ProtectedPrincipal;
@@ -89,7 +90,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Sergey Ponomarev
  *
  */
-public abstract class PortletRequestImpl implements PortletRequest {
+public abstract class PortletRequestImpl implements LiferayPortletRequest {
 
 	public void defineObjects(
 		PortletConfig portletConfig, PortletResponse res) {

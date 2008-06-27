@@ -22,9 +22,8 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.kernel.portlet.LiferayRenderRequest;
-
 import javax.portlet.PortletRequest;
+import javax.portlet.RenderRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -36,7 +35,7 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class RenderRequestImpl
-	extends PortletRequestImpl implements LiferayRenderRequest {
+	extends PortletRequestImpl implements RenderRequest {
 
 	public String getETag() {
 		return null;

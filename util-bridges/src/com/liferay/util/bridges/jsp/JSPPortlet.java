@@ -23,7 +23,7 @@
 package com.liferay.util.bridges.jsp;
 
 import com.liferay.portal.kernel.portlet.LiferayPortlet;
-import com.liferay.portal.kernel.portlet.LiferayRenderRequest;
+import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.io.IOException;
@@ -188,7 +188,7 @@ public class JSPPortlet extends LiferayPortlet {
 
 		if (clearRequestParameters) {
 			if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
-				((LiferayRenderRequest)req).getRenderParameters().clear();
+				((LiferayPortletRequest)req).getRenderParameters().clear();
 			}
 		}
 	}

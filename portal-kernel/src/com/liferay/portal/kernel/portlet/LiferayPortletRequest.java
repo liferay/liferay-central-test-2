@@ -24,17 +24,17 @@ package com.liferay.portal.kernel.portlet;
 
 import java.util.Map;
 
-import javax.portlet.RenderRequest;
+import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="LiferayRenderRequest.java.html"><b><i>View Source</i></b></a>
+ * <a href="LiferayPortletRequest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface LiferayRenderRequest extends RenderRequest {
+public interface LiferayPortletRequest extends PortletRequest {
 
 	public HttpServletRequest getHttpServletRequest();
 
