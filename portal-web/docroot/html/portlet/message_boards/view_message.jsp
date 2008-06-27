@@ -82,7 +82,7 @@ else {
 
 <table cellpadding="0" cellspacing="0" width="100%">
 <tr>
-	<td width="99%">
+	<td class="stretch">
 		<div class="breadcrumbs">
 			<%= MBUtil.getBreadcrumbs(null, message, pageContext, renderRequest, renderResponse) %>
 		</div>

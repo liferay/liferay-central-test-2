@@ -43,7 +43,7 @@ String scoreString = numberFormat.format(score);
 	</c:when>
 	<c:otherwise>
 		<div id="<%= randomNamespace %>averageRating" onmousemove="Liferay.Portal.ToolTip.show(event, this, '<%= scoreString %> Stars')">
-			<img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
+			<img alt="<%= LanguageUtil.get(pageContext, "star-off") %>" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<%= LanguageUtil.get(pageContext, "star-off") %>" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<%= LanguageUtil.get(pageContext, "star-off") %>" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<%= LanguageUtil.get(pageContext, "star-off") %>" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<%= LanguageUtil.get(pageContext, "star-off") %>" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
 		</div>
 
 		<script type="text/javascript">

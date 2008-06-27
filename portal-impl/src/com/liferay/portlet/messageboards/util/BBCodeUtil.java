@@ -107,7 +107,7 @@ public class BBCodeUtil {
 			String code = emoticon[1];
 
 			emoticon[0] =
-				"<img src='@theme_images_path@/emoticons/" + image + "' />";
+				"<img alt='emoticon' src='@theme_images_path@/emoticons/" + image + "' />";
 			emoticon[1] = HtmlUtil.escape(code);
 		}
 	}
@@ -233,7 +233,7 @@ public class BBCodeUtil {
 
 			sm = new StringMaker(preTag);
 
-			sm.append("<img src='" + tag.getElement().trim() + "' />");
+			sm.append("<img alt='' src='" + tag.getElement().trim() + "' />");
 			sm.append(postTag);
 
 			html = sm.toString();
@@ -412,7 +412,7 @@ public class BBCodeUtil {
 
 	private static final String[] _HTML_TAGS = {
 		"<b>", "</b>", "<i>", "</i>", "<u>", "</u>", "<strike>", "</strike>",
-		"<img src='", "' />",
+		"<img alt='' src='", "' />",
 		"<div style='text-align: left'>", "<div style='text-align: center'>",
 		"<div style='text-align: right'>", "<div style='margin-left: 15px'>",
 		"</div>", "</div>", "</div>", "</div>", "<tt>", "</tt>"

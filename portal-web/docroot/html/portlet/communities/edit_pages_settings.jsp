@@ -259,7 +259,7 @@ if (!StringUtil.contains(tabs2Names, tabs2)) {
 		<br /><br />
 
 		<c:if test="<%= layoutSet.isLogo() %>">
-			<img src="<%= themeDisplay.getPathImage() %>/layout_set_logo?img_id=<%= layoutSet.getLogoId() %>&t=<%= ImageServletTokenUtil.getToken(layoutSet.getLogoId()) %>" />
+			<img alt="<%= LanguageUtil.get(pageContext, "logo") %>" src="<%= themeDisplay.getPathImage() %>/layout_set_logo?img_id=<%= layoutSet.getLogoId() %>&t=<%= ImageServletTokenUtil.getToken(layoutSet.getLogoId()) %>" />
 
 			<br /><br />
 		</c:if>

@@ -61,7 +61,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 
 <c:choose>
 	<c:when test="<%= windowState.equals(LiferayWindowState.POP_UP) %>">
-		<a href="<%= themeDisplay.getURLHome() %>"><img src="<%= themeDisplay.getCompanyLogo() %>" /></a>
+		<a href="<%= themeDisplay.getURLHome() %>"><img alt="<%= LanguageUtil.get(pageContext, "logo") %>" src="<%= themeDisplay.getCompanyLogo() %>" /></a>
 
 		<br /><br />
 

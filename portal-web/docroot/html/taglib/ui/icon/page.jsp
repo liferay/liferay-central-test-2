@@ -44,12 +44,12 @@ if (!target.equals("_self")) {
 
 <c:choose>
 	<c:when test="<%= (iconListIconCount != null) && (iconListSingleIcon == null) %>">
-		<li <%= cssClassHtml %>><nobr><c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>" <%= targetHtml %>></c:if><img align="absmiddle" border="0" src="<%= src %>" <%= details %> /><c:if test="<%= Validator.isNotNull(url) %>"></a></c:if> <c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>" <%= targetHtml %>></c:if><liferay-ui:message key="<%= message %>" /><c:if test="<%= Validator.isNotNull(url) %>"></a></c:if></nobr></li>
+		<li <%= cssClassHtml %>><nobr><c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>" <%= targetHtml %>></c:if><img class="icon" src="<%= src %>" <%= details %> /><c:if test="<%= Validator.isNotNull(url) %>"></a></c:if> <c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>" <%= targetHtml %>></c:if><liferay-ui:message key="<%= message %>" /><c:if test="<%= Validator.isNotNull(url) %>"></a></c:if></nobr></li>
 	</c:when>
 	<c:when test="<%= (iconMenuIconCount != null) && (iconMenuSingleIcon == null) %>">
-		<li <%= cssClassHtml %>><nobr><c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>" <%= targetHtml %>></c:if><img align="absmiddle" border="0" src="<%= src %>" <%= details %> /> <liferay-ui:message key="<%= message %>" /><c:if test="<%= Validator.isNotNull(url) %>"></a></c:if></nobr></li>
+		<li <%= cssClassHtml %>><nobr><c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>" <%= targetHtml %>></c:if><img class="icon" src="<%= src %>" <%= details %> /> <liferay-ui:message key="<%= message %>" /><c:if test="<%= Validator.isNotNull(url) %>"></a></c:if></nobr></li>
 	</c:when>
 	<c:otherwise>
-		<nobr <%= cssClassHtml %>><c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>" <%= targetHtml %>></c:if><img align="absmiddle" border="0" src="<%= src %>" <%= details %> /><c:if test="<%= Validator.isNotNull(url) %>"></a></c:if><c:if test="<%= label %>"> <c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>" <%= targetHtml %>></c:if><liferay-ui:message key="<%= message %>" /><c:if test="<%= Validator.isNotNull(url) %>"></a></c:if></c:if></nobr>
+		<nobr <%= cssClassHtml %>><c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>" <%= targetHtml %>></c:if><img class="icon" src="<%= src %>" <%= details %> /><c:if test="<%= Validator.isNotNull(url) %>"></a></c:if><c:if test="<%= label %>"> <c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>" <%= targetHtml %>></c:if><liferay-ui:message key="<%= message %>" /><c:if test="<%= Validator.isNotNull(url) %>"></a></c:if></c:if></nobr>
 	</c:otherwise>
 </c:choose>

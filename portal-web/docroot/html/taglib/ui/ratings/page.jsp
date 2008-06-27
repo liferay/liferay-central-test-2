@@ -63,7 +63,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 						</div>
 
 						<div id="<%= randomNamespace %>yourRating">
-							<img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
+							<img alt="<%= LanguageUtil.get(pageContext, "star-off") %>"  src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<%= LanguageUtil.get(pageContext, "star-off") %>" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<%= LanguageUtil.get(pageContext, "star-off") %>" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<%= LanguageUtil.get(pageContext, "star-off") %>" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<%= LanguageUtil.get(pageContext, "star-off") %>" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
 						</div>
 					</td>
 					<td style="padding-left: 30px;"></td>
@@ -75,7 +75,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 					</div>
 
 					<div id="<%= randomNamespace %>averageRating" onmousemove="Liferay.Portal.ToolTip.show(event, this, '<%= stats.getAverageScore() %> <liferay-ui:message key="stars" />')">
-						<img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
+						<img alt="<%= LanguageUtil.get(pageContext, "star-off") %>" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<%= LanguageUtil.get(pageContext, "star-off") %>" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<%= LanguageUtil.get(pageContext, "star-off") %>" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<%= LanguageUtil.get(pageContext, "star-off") %>" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<%= LanguageUtil.get(pageContext, "star-off") %>" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
 					</div>
 				</td>
 			</tr>
@@ -139,14 +139,11 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 						</c:otherwise>
 					</c:choose>
 				</li>
-				<li
-					id="<%= randomNamespace %>yourRating"
-					<c:if test="<%= !themeDisplay.isSignedIn() %>">
-						onmousemove="Liferay.Portal.ToolTip.show(event, this, '<liferay-ui:message key="sign-in-to-vote" />')"
-					</c:if>
-				>
-					<a class="rating rate-up <%= (yourScore > 0) ? "rated" : "" %>" href="javascript: ;"></a><a class="rating rate-down <%= (yourScore < 0) ? "rated" : "" %>" href="javascript: ;"></a>
-				</li>
+				<c:if test="<%= themeDisplay.isSignedIn() %>">
+					<li id="<%= randomNamespace %>yourRating">
+						<a class="rating rate-up <%= (yourScore > 0) ? "rated" : "" %>" href="javascript: ;"></a><a class="rating rate-down <%= (yourScore < 0) ? "rated" : "" %>" href="javascript: ;"></a>
+					</li>
+				</c:if>
 				<li
 					class="total-votes" id="<%= randomNamespace %>totalEntries"
 					<c:if test="<%= stats.getTotalEntries() == 0 %>">
@@ -154,65 +151,71 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 					</c:if>
 				>
 					(<%= stats.getTotalEntries() %> <%= LanguageUtil.get(pageContext, (stats.getTotalEntries() == 1) ? "vote" : "votes") %>)
+
+					<c:if test="<%= !themeDisplay.isSignedIn() %>">
+						&nbsp; <a href="<%= themeDisplay.getURLSignIn() %>"><liferay-ui:message key="sign-in-to-vote" /></a>
+					</c:if>
 				</li>
 			</ul>
 
-			<script type="text/javascript">
-				<%= randomNamespace %>yourRatingObj = new Liferay.Portal.ThumbRating(
-					{
-						displayOnly: <%= !themeDisplay.isSignedIn() %>,
-						id: '<%= randomNamespace %>yourRating',
-						rating: <%= yourScore %>,
-						onComplete: function(rating) {
-							var url = '<%= url %>';
+			<c:if test="<%= themeDisplay.isSignedIn() %>">
+				<script type="text/javascript">
+					<%= randomNamespace %>yourRatingObj = new Liferay.Portal.ThumbRating(
+						{
+							displayOnly: <%= !themeDisplay.isSignedIn() %>,
+							id: '<%= randomNamespace %>yourRating',
+							rating: <%= yourScore %>,
+							onComplete: function(rating) {
+								var url = '<%= url %>';
 
-							jQuery.ajax(
-								{
-									url: url,
-									data: {
-										p_l_id: '<%= themeDisplay.getPlid() %>',
-										className: '<%= className %>',
-										classPK: '<%= classPK %>',
-										score: rating
-									},
-									dataType: 'json',
-									success: function(message) {
-										var totalRating = jQuery('#<%= randomNamespace %>totalRating');
-										var totalEntries = jQuery('#<%= randomNamespace %>totalEntries');
+								jQuery.ajax(
+									{
+										url: url,
+										data: {
+											p_l_id: '<%= themeDisplay.getPlid() %>',
+											className: '<%= className %>',
+											classPK: '<%= classPK %>',
+											score: rating
+										},
+										dataType: 'json',
+										success: function(message) {
+											var totalRating = jQuery('#<%= randomNamespace %>totalRating');
+											var totalEntries = jQuery('#<%= randomNamespace %>totalEntries');
 
-										var ratingHtml = '';
-										var entriesHtml = '';
+											var ratingHtml = '';
+											var entriesHtml = '';
 
-										if (message.totalEntries * message.averageScore == 0) {
-											ratingHtml = '<span class="zero-total">&#177;0</span>';
-										}
-										else {
-											var score = Math.round(message.totalEntries * message.averageScore);
-											var className = 'neg-total';
+											if (message.totalEntries * message.averageScore == 0) {
+												ratingHtml = '<span class="zero-total">&#177;0</span>';
+											}
+											else {
+												var score = Math.round(message.totalEntries * message.averageScore);
+												var className = 'neg-total';
 
-											if (message.averageScore > 0) {
- 												className = 'pos-total';
-												score = '+' + score;
+												if (message.averageScore > 0) {
+													className = 'pos-total';
+													score = '+' + score;
+												}
+
+												ratingHtml = '<span class="' + className + '">' + score + '</span>';
 											}
 
-											ratingHtml = '<span class="' + className + '">' + score + '</span>';
-										}
+											if (message.totalEntries == 0) {
+												entriesHtml = '<span class="zero-total">(0 <liferay-ui:message key="votes" />)</span>';
+											}
+											else {
+												entriesHtml = (message.totalEntries == 1) ? '<span class="total-entries">(1 <liferay-ui:message key="vote" />)</span>' : '<span class="total-entries">(' + message.totalEntries + ' <liferay-ui:message key="votes" />)</span>';
+											}
 
-										if (message.totalEntries == 0) {
-											entriesHtml = '<span class="zero-total">(0 <liferay-ui:message key="votes" />)</span>';
+											totalRating.html(ratingHtml);
+											totalEntries.html(entriesHtml);
 										}
-										else {
-											entriesHtml = (message.totalEntries == 1) ? '<span class="total-entries">(1 <liferay-ui:message key="vote" />)</span>' : '<span class="total-entries">(' + message.totalEntries + ' <liferay-ui:message key="votes" />)</span>';
-										}
-
-										totalRating.html(ratingHtml);
-										totalEntries.html(entriesHtml);
 									}
-								}
-							);
-						}
-					});
-			</script>
+								);
+							}
+						});
+				</script>
+			</c:if>
 		</c:when>
 	</c:choose>
 </c:if>

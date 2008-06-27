@@ -24,7 +24,7 @@
 
 <%@ include file="/html/taglib/ui/toggle_area/init.jsp" %>
 
-<div align="<%= align %>">
+<div style="float: <%= align %>">
 	<liferay-ui:toggle
 		id="<%= id %>"
 		showImage="<%= showImage %>"

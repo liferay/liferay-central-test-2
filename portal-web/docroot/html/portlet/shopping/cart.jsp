@@ -536,7 +536,7 @@ String[] ccTypes = shoppingPrefs.getCcTypes();
 if (shoppingPrefs.usePayPal()) {
 %>
 
-	<img src="<%= themeDisplay.getPathThemeImages() %>/shopping/cc_paypal.png" />
+	<img alt="paypal" src="<%= themeDisplay.getPathThemeImages() %>/shopping/cc_paypal.png" />
 
 	<br /><br />
 
@@ -546,7 +546,7 @@ else if (!shoppingPrefs.usePayPal() && (ccTypes.length > 0)) {
 	for (int i = 0; i < ccTypes.length; i++) {
 %>
 
-		<img src="<%= themeDisplay.getPathThemeImages() %>/shopping/cc_<%= ccTypes[i] %>.png" />
+		<img alt="<%= ccTypes[i] %>" src="<%= themeDisplay.getPathThemeImages() %>/shopping/cc_<%= ccTypes[i] %>.png" />
 
 <%
 	}

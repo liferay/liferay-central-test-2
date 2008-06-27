@@ -44,14 +44,14 @@ if (treeWalker.isOdd()) {
 %>
 
 <tr class="<%= className %>" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
-	<td style="padding-left: <%= depth > 0 ? depth * 10 : 5  %>px;" valign="middle" width="90%">
+	<td style="padding-left: <%= depth > 0 ? depth * 10 : 5  %>px; width: 90%;" valign="middle">
 		<c:if test="<%= !message.isRoot() %>">
 			<c:choose>
 				<c:when test="<%= !lastNode %>">
-					<img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/t.png" />
+					<img alt="" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/t.png" />
 				</c:when>
 				<c:otherwise>
-					<img src="<%= themeDisplay.getPathThemeImages() %>/message_boards/l.png" />
+					<img alt="" src="<%= themeDisplay.getPathThemeImages() %>/message_boards/l.png" />
 				</c:otherwise>
 			</c:choose>
 		</c:if>

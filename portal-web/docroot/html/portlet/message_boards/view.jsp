@@ -128,9 +128,9 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				if (subcategories.size() > 0) {
 					int subcategoriesCount = MBCategoryLocalServiceUtil.getCategoriesCount(portletGroupId.longValue(), curCategory.getCategoryId());
 
-					sm.append("<br /><u>");
+					sm.append("<br /><span class=\"subcategories\">");
 					sm.append(LanguageUtil.get(pageContext, "subcategories"));
-					sm.append("</u>: ");
+					sm.append("</span>: ");
 
 					for (int j = 0; j < subcategories.size(); j++) {
 						MBCategory subcategory = (MBCategory)subcategories.get(j);

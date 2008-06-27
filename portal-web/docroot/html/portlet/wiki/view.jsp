@@ -156,7 +156,7 @@ viewAttachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
 			viewPageGeneralURL.setParameter("struts_action", "/wiki/view_page_general");
 			%>
 
-			<liferay-ui:icon image="history" message="properties" url="<%= viewPageGeneralURL.toString() %>" />
+			<liferay-ui:icon image="history" message="properties" method="get" url="<%= viewPageGeneralURL.toString() %>" />
 		</div>
 	</c:if>
 
@@ -197,7 +197,7 @@ viewAttachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
 
 <c:if test="<%= (wikiPage != null) && Validator.isNotNull(formattedContent) && (followRedirect || (redirectPage == null)) %>">
 	<div class="page-actions">
-		<liferay-ui:icon image="clip" message='<%= attachments.length + " " + LanguageUtil.get(pageContext, "attachments") %>' url="<%= viewAttachmentsURL.toString() %>" label="<%= true %>" />
+		<liferay-ui:icon image="clip" message='<%= attachments.length + " " + LanguageUtil.get(pageContext, "attachments") %>' method="get" url="<%= viewAttachmentsURL.toString() %>" label="<%= true %>" />
 	</div>
 
 	<c:if test="<%= (childPages.size() > 0) || WikiNodePermission.contains(permissionChecker, node, ActionKeys.ADD_PAGE) %>">

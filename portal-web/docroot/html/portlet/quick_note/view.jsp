@@ -38,7 +38,7 @@
 
 				<c:if test="<%= portletDisplay.isShowCloseIcon() %>">
 					<td>
-						<a border="0" class="close-note" href="<%= portletDisplay.getURLClose() %>"><img src="<%= themeDisplay.getPathThemeImages() %>/portlet/close.png" /></a>
+						<a border="0" class="close-note" href="<%= portletDisplay.getURLClose() %>"><img alt="<%= LanguageUtil.get(pageContext, "close") %>" src="<%= themeDisplay.getPathThemeImages() %>/portlet/close.png" /></a>
 					</td>
 				</c:if>
 			</tr>

@@ -122,7 +122,9 @@ else if (className.equals(JournalArticle.class.getName())) {
 		StringMaker sm = new StringMaker();
 
 		if (articleDisplay.isSmallImage()) {
-			sm.append("<div style=\"float: left; padding-right: 10px;\"><img src=\"");
+			sm.append("<div style=\"float: left; padding-right: 10px;\"><img alt=\"");
+			sm.append(LanguageUtil.get(pageContext, "article-image"));
+			sm.append("\" src=\"");
 
 			if (Validator.isNotNull(articleDisplay.getSmallImageURL())) {
 				sm.append(articleDisplay.getSmallImageURL());

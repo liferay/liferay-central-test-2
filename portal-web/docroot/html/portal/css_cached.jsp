@@ -1489,3 +1489,23 @@ input[type="text"].openid_login {
 	color: #000;
 	padding-left: 18px;
 }
+
+/* ----------- Accessibility ---------- */
+
+img.label-icon {
+	border: 0px;
+	float: left;
+}
+
+img.icon {
+	border: 0px;
+	float: absmiddle;
+}
+
+img.avatar {
+	border: 0px;
+}
+
+td.stretch {
+	width: 99%;
+}

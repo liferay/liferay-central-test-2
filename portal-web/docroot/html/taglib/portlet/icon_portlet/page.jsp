@@ -25,5 +25,5 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <c:if test="<%= portletDisplay.isShowPortletIcon() %>">
-	<img src="<%= portletDisplay.getURLPortlet() %>" />
+	<img alt="" src="<%= portletDisplay.getURLPortlet() %>" />
 </c:if>

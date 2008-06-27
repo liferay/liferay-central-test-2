@@ -83,7 +83,7 @@ Liferay.ColorPicker = new Class({
 
 		var items = instance._item;
 
-		var colorPickerImgHTML = '<img class="lfr-colorpicker-img" src="' + themeDisplay.getPathThemeImages() + '/color_picker/color_picker.png" />';
+		var colorPickerImgHTML = '<img alt="<%= LanguageUtil.get(pageContext, "color-picker") %>" class="lfr-colorpicker-img" src="' + themeDisplay.getPathThemeImages() + '/color_picker/color_picker.png" />';
 
 		if (items.length == 1) {
 			var colorPickerImg;

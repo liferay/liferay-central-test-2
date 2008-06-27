@@ -94,6 +94,7 @@
 
 td.user-info {
 	border-right: 1px solid #ccc;
+	width: 150px;
 }
 
 .portlet-message-boards .subject {
@@ -166,4 +167,8 @@ td.user-info {
 
 .portlet-message-boards .message-edit-body {
 	width: 750px;
+}
+
+.portlet-message-boards .subcategories {
+	text-decoration: underline;
 }

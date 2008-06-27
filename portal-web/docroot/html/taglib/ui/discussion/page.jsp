@@ -160,6 +160,7 @@ List messages = treeWalker.getMessages();
 		<br />
 	</c:if>
 
+	<a name="<portlet:namespace />messages_top"></a>
 	<table border="0" cellpadding="4" cellspacing="0" class="taglib-discussion" width="100%">
 	<tr class="portlet-section-header results-header" style="font-size: x-small; font-weight: bold;">
 		<td>
@@ -216,6 +217,7 @@ List messages = treeWalker.getMessages();
 
 		<tr>
 			<td colspan="2" id="<%= namespace %>messageScroll<%= message.getMessageId() %>">
+				<a name="<portlet:namespace />message_<%= message.getMessageId() %>"></a>
 				<input name="<%= namespace %>messageId<%= i %>" type="hidden" value="<%= message.getMessageId() %>" />
 				<input name="<%= namespace %>parentMessageId<%= i %>" type="hidden" value="<%= message.getMessageId() %>" />
 			</td>
@@ -228,7 +230,7 @@ List messages = treeWalker.getMessages();
 					displayStyle="<%= 2 %>"
 				/>
 			</td>
-			<td valign="top" width="99%">
+			<td valign="top" class="stretch">
 				<div>
 
 					<%
@@ -261,11 +263,11 @@ List messages = treeWalker.getMessages();
 
 							StringMaker sm = new StringMaker();
 
-							sm.append("<a href=\"javascript: ");
+							sm.append("<a href=\"#");
 							sm.append(namespace);
-							sm.append("scrollIntoView('");
+							sm.append("message_");
 							sm.append(parentMessage.getMessageId());
-							sm.append("');\">");
+							sm.append("\">");
 							sm.append(parentMessage.getUserName());
 							sm.append("</a>");
 							%>
@@ -309,7 +311,7 @@ List messages = treeWalker.getMessages();
 					<c:if test="<%= i > 0 %>">
 
 						<%
-						topHREF = "javascript: " + namespace + "scrollIntoView('0');";
+						topHREF = "#" + namespace + "messages_top";
 						%>
 
 						<td>
