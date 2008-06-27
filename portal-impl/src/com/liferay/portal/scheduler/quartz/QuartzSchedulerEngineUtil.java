@@ -25,7 +25,7 @@ package com.liferay.portal.scheduler.quartz;
 import com.liferay.portal.kernel.messaging.Destination;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.messaging.SerialDestination;
+import com.liferay.portal.kernel.messaging.ParallelDestination;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
@@ -57,7 +57,7 @@ public class QuartzSchedulerEngineUtil {
 
 		_engine.start();
 
-		Destination destination = new SerialDestination(
+		Destination destination = new ParallelDestination(
 			DestinationNames.SCHEDULER);
 
 		MessageBusUtil.addDestination(destination);

@@ -25,7 +25,7 @@ package com.liferay.portal.scheduler;
 import com.liferay.portal.kernel.messaging.Destination;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.messaging.SerialDestination;
+import com.liferay.portal.kernel.messaging.ParallelDestination;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
@@ -47,7 +47,7 @@ import org.json.JSONObject;
 public class SchedulerEngineImpl implements SchedulerEngine {
 
 	public SchedulerEngineImpl() {
-		Destination layoutsLocalPublisherDestination = new SerialDestination(
+		Destination layoutsLocalPublisherDestination = new ParallelDestination(
 			DestinationNames.LAYOUTS_LOCAL_PUBLISHER);
 
 		MessageBusUtil.addDestination(layoutsLocalPublisherDestination);
@@ -55,7 +55,7 @@ public class SchedulerEngineImpl implements SchedulerEngine {
 		layoutsLocalPublisherDestination.register(
 			new LayoutsLocalPublisherMessageListener());
 
-		Destination layoutsRemotePublisherDestination = new SerialDestination(
+		Destination layoutsRemotePublisherDestination = new ParallelDestination(
 			DestinationNames.LAYOUTS_REMOTE_PUBLISHER);
 
 		MessageBusUtil.addDestination(layoutsRemotePublisherDestination);

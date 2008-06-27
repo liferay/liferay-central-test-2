@@ -130,17 +130,21 @@ public class SearchEngineUtil {
 				DestinationNames.SEARCH, sm.toString());
 
 			if ((message.indexOf("true") != -1)) {
-				return true;
+				_cachedIndexReadOnly = true;
+
+				return _cachedIndexReadOnly;
 			}
 
-			return false;
+			_cachedIndexReadOnly = false;
+
+			return _cachedIndexReadOnly;
 		}
 		catch (MessageBusException mbe) {
-			if (_log.isErrorEnabled()) {
-				_log.error("Unable to check index status", mbe);
+			if (_log.isWarnEnabled()) {
+				_log.warn("Unable to check index status", mbe);
 			}
 
-			return false;
+			return _cachedIndexReadOnly;
 		}
 	}
 
@@ -170,5 +174,6 @@ public class SearchEngineUtil {
 
 	private IndexSearcher _messageBusIndexSearcher;
 	private IndexWriter _messageBusIndexWriter;
+	private boolean _cachedIndexReadOnly = false;
 
 }
