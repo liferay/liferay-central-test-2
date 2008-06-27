@@ -92,6 +92,10 @@ DateFormat timeFormatDate = DateFormats.getTime(locale, timeZone);
 			syndContent.setType(RSSUtil.DEFAULT_ENTRY_TYPE);
 			syndContent.setValue(activityFeedEntry.getBody());
 
+			if (Validator.isNotNull(activityFeedEntry.getLink())) {
+				syndEntry.setLink(activityFeedEntry.getLink());
+			}
+
 			syndEntry.setDescription(syndContent);
 
 			entries.add(syndEntry);

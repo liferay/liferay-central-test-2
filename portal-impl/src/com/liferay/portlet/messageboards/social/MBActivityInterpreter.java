@@ -89,7 +89,7 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String body = sm.toString();
 
-		return new SocialActivityFeedEntry(title, body);
+		return new SocialActivityFeedEntry(title, body, messageURL);
 	}
 
 	private static final String[] _CLASS_NAMES = new String[] {

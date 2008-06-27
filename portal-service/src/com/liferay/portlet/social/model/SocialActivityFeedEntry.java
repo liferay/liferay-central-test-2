@@ -31,8 +31,13 @@ package com.liferay.portlet.social.model;
 public class SocialActivityFeedEntry {
 
 	public SocialActivityFeedEntry(String title, String body) {
+		this(title, body, null);
+	}
+
+	public SocialActivityFeedEntry(String title, String body, String link) {
 		_title = title;
 		_body = body;
+		_link = link;
 	}
 
 	public String getPortletId() {
@@ -59,8 +64,17 @@ public class SocialActivityFeedEntry {
 		_body = body;
 	}
 
+	public String getLink() {
+		return _link;
+	}
+
+	public void setLink(String link) {
+		_link = link;
+	}
+
 	private String _portletId;
 	private String _title;
 	private String _body;
+	private String _link;
 
 }

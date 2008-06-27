@@ -113,7 +113,7 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String body = sm.toString();
 
-		return new SocialActivityFeedEntry(title, body);
+		return new SocialActivityFeedEntry(title, body, entryURL);
 	}
 
 	private static final String[] _CLASS_NAMES = new String[] {
