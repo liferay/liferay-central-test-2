@@ -62,8 +62,8 @@
 		</td>
 		<td>
 			<select name="<portlet:namespace />removePrivateLayout">
-				<option <%= tabs1.equals("public-pages") ? "selected=\"selected\"":"" %> value="0"><bean:message key="public-pages"/></option>
-				<option <%= !tabs1.equals("public-pages") ? "selected=\"selected\"":"" %> value="1"><bean:message key="private-pages"/></option>
+				<option <%= tabs1.equals("public-pages") ? "selected=\"selected\"":"" %> value="0"><bean:message key="public-pages" /></option>
+				<option <%= !tabs1.equals("public-pages") ? "selected=\"selected\"":"" %> value="1"><bean:message key="private-pages" /></option>
 			</select>
 		</td>
 	</tr>
