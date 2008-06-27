@@ -127,7 +127,7 @@ StringMaker sm = new StringMaker();
 _buildLayoutsTreeHTML(groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, new LongWrapper(1), openNodes, selectableTree, selectedNodes, portletURL, themeDisplay, sm);
 %>
 
-<div class="lfr-tree" id="<portlet:namespace /><%= treeId %>Output">
+<div class="lfr-tree" id="<portlet:namespace /><%= HtmlUtil.escape(treeId) %>Output">
 	<ul class="lfr-component">
 		<li class="root-container">
 			<a class="community" href="<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>"><img height="20" src="<%= themeDisplay.getPathThemeImages() %>/trees/root.png" width="19" /><span><%= rootNodeName %></span></a>
@@ -146,10 +146,10 @@ _buildLayoutsTreeHTML(groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAY
 					nodes: <portlet:namespace />layoutArray,
 					nodeIds: <portlet:namespace />nodeIds,
 					openNodes: '<%= SessionTreeJSClicks.getOpenNodes(request, treeId) %>',
-					outputId: '#<portlet:namespace /><%= treeId %>Output',
+					outputId: '#<portlet:namespace /><%= HtmlUtil.escape(treeId) %>Output',
 					preRendered: true,
 					selectable: <%= selectableTree %>,
-					treeId: '<%= treeId %>'
+					treeId: '<%= HtmlUtil.escape(treeId) %>'
 				}
 			);
 		}
