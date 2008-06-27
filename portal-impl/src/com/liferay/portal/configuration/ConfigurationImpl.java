@@ -59,13 +59,13 @@ public class ConfigurationImpl
 	implements com.liferay.portal.kernel.configuration.Configuration {
 
 	public void addProperties(Properties properties) {
-		ComponentProperties componentProperties =
-			_componentConfiguration.getProperties();
-
-		AggregatedProperties aggregatedProperties =
-			(AggregatedProperties)componentProperties.toConfiguration();
-
 		try {
+			ComponentProperties componentProperties =
+				_componentConfiguration.getProperties();
+
+			AggregatedProperties aggregatedProperties =
+				(AggregatedProperties)componentProperties.toConfiguration();
+
 			Field field1 = CompositeConfiguration.class.getDeclaredField(
 				"configList");
 
@@ -91,8 +91,8 @@ public class ConfigurationImpl
 			CompositeConfiguration compositeConfiguration =
 				(CompositeConfiguration)field2.get(aggregatedProperties);
 
-			configurations =
-				(List<Configuration>)field1.get(compositeConfiguration);
+			configurations = (List<Configuration>)field1.get(
+				compositeConfiguration);
 
 			configurations.add(0, newConfiguration);
 		}
@@ -220,6 +220,7 @@ public class ConfigurationImpl
 
 				if (mapConfiguration.getMap() == properties) {
 					itr.remove();
+
 					aggregatedProperties.removeConfiguration(configuration);
 				}
 			}
