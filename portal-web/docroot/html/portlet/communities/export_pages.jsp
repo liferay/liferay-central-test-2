@@ -211,17 +211,17 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 	}
 </style>
 
-<c:if test="<%= selGroup.hasStagingGroup() && !localPublishing %>">
-	<div class="portlet-msg-alert">
-		<liferay-ui:message key="the-staging-environment-is-activated-publish-to-remote-publishes-from-live" />
-	</div>
-</c:if>
-
 <form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />exportPagesFm">
 <input name="<portlet:namespace /><%=  Constants.CMD %>" type="hidden" value="<%= cmd %>">
 <input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escape(tabs1) %>">
 <input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= HtmlUtil.escape(pagesRedirect) %>">
 <input name="<portlet:namespace />stagingGroupId" type="hidden" value="<%= stagingGroupId %>">
+
+<c:if test="<%= selGroup.hasStagingGroup() && !localPublishing %>">
+	<div class="portlet-msg-alert">
+		<liferay-ui:message key="the-staging-environment-is-activated-publish-to-remote-publishes-from-the-live-environment" />
+	</div>
+</c:if>
 
 <%
 String tabs2Names = "pages,options";
