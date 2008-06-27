@@ -33,8 +33,6 @@ String pagesRedirect = ParamUtil.getString(request, "pagesRedirect");
 
 boolean publish = ParamUtil.getBoolean(request, "publish");
 
-boolean localPublishing = ParamUtil.getBoolean(request, "localPublishing", true);
-
 Group selGroup = (Group)request.getAttribute(WebKeys.GROUP);
 
 Group liveGroup = null;
@@ -71,6 +69,8 @@ if (selGroup.isStagingGroup()) {
 	popupId = "publish-to-live";
 	treeKey = "stageLayoutsTree";
 }
+
+boolean localPublishing = ParamUtil.getBoolean(request, "localPublishing", true);
 
 if (!localPublishing) {
 	popupId = "publish-to-remote";

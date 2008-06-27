@@ -24,9 +24,8 @@
 
 <script language="text/javascript">
 	var selectedPages = jQuery('#<portlet:namespace />scope_selected_pages').is(':checked');
-	var publish = <%= publish %>
 
-	if (selectedPages && !publish) {
+	if (selectedPages && <%= !publish %>) {
 		<portlet:namespace />hideTabs();
 	}
 
