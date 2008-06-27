@@ -118,7 +118,7 @@ public class SearchEngineUtil {
 
 	private boolean _isIndexReadOnly() {
 		if (_indexReadOnly != null) {
-			return _indexReadOnly;
+			return _indexReadOnly.booleanValue();
 		}
 
 		StringMaker sm = new StringMaker();
@@ -134,14 +134,14 @@ public class SearchEngineUtil {
 				DestinationNames.SEARCH, sm.toString());
 
 			if ((message.indexOf("true") != -1)) {
-				_indexReadOnly = true;
+				_indexReadOnly = Boolean.TRUE;
 
-				return _indexReadOnly;
+				return _indexReadOnly.booleanValue();
 			}
 
-			_indexReadOnly = false;
+			_indexReadOnly = Boolean.FALSE;
 
-			return _indexReadOnly;
+			return _indexReadOnly.booleanValue();
 		}
 		catch (MessageBusException mbe) {
 			if (_log.isWarnEnabled()) {
