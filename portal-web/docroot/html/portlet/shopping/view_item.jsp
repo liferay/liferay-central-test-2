@@ -93,7 +93,7 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 		<br /><br />
 
 		<c:if test="<%= item.isMediumImage() %>">
-			<img alt="<liferay-ui:message key="image" />" src="<%= Validator.isNotNull(item.getMediumImageURL()) ? item.getMediumImageURL() : themeDisplay.getPathImage() + "/shopping/item?img_id=" + item.getMediumImageId() + "&t=" + ImageServletTokenUtil.getToken(item.getMediumImageId()) %>" vspace="0" />
+			<img alt="<liferay-ui:message key="image" />" src='<%= Validator.isNotNull(item.getMediumImageURL()) ? item.getMediumImageURL() : themeDisplay.getPathImage() + "/shopping/item?img_id=" + item.getMediumImageId() + "&t=" + ImageServletTokenUtil.getToken(item.getMediumImageId()) %>' vspace="0" />
 		</c:if>
 
 		<c:if test="<%= item.isLargeImage() %>">

@@ -102,6 +102,6 @@ String defaultMessage = (String)request.getAttribute("liferay-ui:toggle:defaultM
 		<a href="javascript: <%= stateVar %>Toggle();" id="<%= id %>_message"><%= defaultMessage %></a>
 	</c:when>
 	<c:otherwise>
-		<img alt="<liferay-ui:message key="toggle" />" id="<%= id %>_image" src="<%= defaultImage %>" onClick="<%= stateVar %>Toggle();" style="margin: 0px" />
+		<img alt="<liferay-ui:message key="toggle" />" id='<%= id %>_image" src="<%= defaultImage %>' onClick="<%= stateVar %>Toggle();" style="margin: 0px" />
 	</c:otherwise>
 </c:choose>

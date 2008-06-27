@@ -351,7 +351,7 @@ if (organizations != null) {
 
 	<c:if test="<%= user2 != null %>">
 		<td align="center" valign="top">
-			<img alt="<liferay-ui:message key="avatar" />" src="<%= themeDisplay.getPathImage() %>/user_<%= user2.isFemale() ? "female" : "male" %>_portrait?img_id=<%= user2.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(user2.getPortraitId()) %>" width="100" /><br />
+			<img alt="<liferay-ui:message key="avatar" />" src='<%= themeDisplay.getPathImage() %>/user_<%= user2.isFemale() ? "female" : "male" %>_portrait?img_id=<%= user2.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(user2.getPortraitId()) %>' width="100" /><br />
 
 			<c:if test="<%= editable %>">
 				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_portrait" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" /></portlet:renderURL>"><liferay-ui:message key="change" /></a>
