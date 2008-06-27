@@ -38,7 +38,7 @@ import javax.portlet.PortletURL;
  * @author Brian Wing Shun Chan
  *
  */
-public class SearchContainer {
+public class SearchContainer<R> {
 
 	public static final String DEFAULT_CUR_PARAM = "cur";
 
@@ -146,15 +146,15 @@ public class SearchContainer {
 		_calculateStartAndEnd();
 	}
 
-	public List<Object> getResults() {
+	public List<R> getResults() {
 		return _results;
 	}
 
-	public void setResults(List<Object> results) {
+	public void setResults(List<R> results) {
 		_results = results;
 	}
 
-	public List<Object> getResultRows() {
+	public List<ResultRow> getResultRows() {
 		return _resultRows;
 	}
 
@@ -250,8 +250,8 @@ public class SearchContainer {
 	private int _end;
 	private int _resultEnd;
 	private int _total;
-	private List<Object> _results = new ArrayList<Object>();
-	private List<Object> _resultRows = new ArrayList<Object>();
+	private List<R> _results = new ArrayList<R>();
+	private List<ResultRow> _resultRows = new ArrayList<ResultRow>();
 	private PortletURL _iteratorURL;
 	private List<String> _headerNames;
 	private Map<String, String> _orderableHeaders;
