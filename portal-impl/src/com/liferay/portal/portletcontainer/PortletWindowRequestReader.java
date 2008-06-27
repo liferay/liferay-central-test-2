@@ -96,7 +96,7 @@ public class PortletWindowRequestReader implements WindowRequestReader {
 	}
 
 	public Map<String, String[]> readParameterMap(HttpServletRequest req) {
-		Map<String, String[]> parameterMap = new HashMap<String,String[]>();
+		Map<String, String[]> parameterMap = new HashMap<String, String[]>();
 
 		String portletId = req.getParameter("p_p_id");
 
