@@ -117,6 +117,10 @@ public class SearchEngineUtil {
 	}
 
 	private boolean _isIndexReadOnly() {
+		if (_indexReadOnly != null) {
+			return _indexReadOnly;
+		}
+
 		StringMaker sm = new StringMaker();
 
 		sm.append("{\"javaClass\":\"");
@@ -144,7 +148,7 @@ public class SearchEngineUtil {
 				_log.warn("Unable to check index status", mbe);
 			}
 
-			return _indexReadOnly;
+			return false;
 		}
 	}
 
@@ -174,6 +178,6 @@ public class SearchEngineUtil {
 
 	private IndexSearcher _messageBusIndexSearcher;
 	private IndexWriter _messageBusIndexWriter;
-	private boolean _indexReadOnly = false;
+	private Boolean _indexReadOnly;
 
 }
