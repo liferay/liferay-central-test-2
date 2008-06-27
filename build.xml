@@ -511,6 +511,7 @@
 			<equals arg1="${app.server.type}" arg2="tomcat" />
 			<then>
 				<copy file="classes/log4j.properties" todir="${app.server.classes.portal.dir}" />
+				<copy file="classes/logging.properties" todir="${app.server.classes.portal.dir}" />
 
 				<ant dir="support-tomcat" target="deploy" inheritAll="false" />
 

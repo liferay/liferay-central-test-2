@@ -313,6 +313,13 @@ public class BaseDeployer {
 		}
 	}
 
+	protected void copyProperties(File srcFile, PluginPackage pluginPackage)
+		throws Exception {
+
+		copyDependencyXml("log4j.properties", srcFile + "/WEB-INF/classes");
+		copyDependencyXml("logging.properties", srcFile + "/WEB-INF/classes");
+	}
+
 	protected void copyTlds(File srcFile, PluginPackage pluginPackage)
 		throws Exception {
 
@@ -422,6 +429,7 @@ public class BaseDeployer {
 		processPluginPackageProperties(srcFile, displayName, pluginPackage);
 
 		copyJars(srcFile, pluginPackage);
+		copyProperties(srcFile, pluginPackage);
 		copyTlds(srcFile, pluginPackage);
 		copyXmls(srcFile, displayName, pluginPackage);
 		copyPortalDependencies(srcFile);

@@ -14,6 +14,7 @@
 		</copy>
 
 		<copy file="${project.dir}/classes/log4j.properties" todir="docroot/WEB-INF/classes" />
+		<copy file="${project.dir}/classes/logging.properties" todir="docroot/WEB-INF/classes" />
 
 		<antcall target="build-common-web.war" />
 	</target>

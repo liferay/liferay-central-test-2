@@ -77,6 +77,10 @@ ${exception.message}
 
 		<copy todir="${portal-impl.classes.dir}/com/liferay/portal/deploy/dependencies">
 			<fileset
+				dir="${project.dir}/classes"
+				includes="*.properties"
+			/>
+			<fileset
 				dir="${project.dir}/portal-web/docroot/WEB-INF/tld"
 				includes="*.tld"
 			/>
