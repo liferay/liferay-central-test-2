@@ -88,6 +88,15 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 		}
 	}
 
+	protected boolean containsKey(Properties portalProperties, String key) {
+		if (_log.isDebugEnabled()) {
+			return true;
+		}
+		else {
+			return portalProperties.containsKey(key);
+		}
+	}
+
 	protected void destroyPortalProperties(Properties portalProperties)
 		throws Exception {
 
@@ -359,13 +368,21 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 				fieldName.toLowerCase(), StringPool.UNDERLINE,
 				StringPool.PERIOD);
 
-			if (portalProperties.containsKey(key)) {
+			if (!containsKey(portalProperties, key)) {
+				continue;
+			}
+
+			try {
 				Field field = PropsValues.class.getField(fieldName);
 
 				Boolean value = Boolean.valueOf(GetterUtil.getBoolean(
 					PropsUtil.get(key)));
 
 				field.setBoolean(null, value);
+			}
+			catch (Exception e) {
+				_log.error(
+					"Error setting field " + fieldName + ": " + e.getMessage());
 			}
 		}
 
@@ -374,13 +391,21 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 				fieldName.toLowerCase(), StringPool.UNDERLINE,
 				StringPool.PERIOD);
 
-			if (portalProperties.containsKey(key)) {
+			if (!containsKey(portalProperties, key)) {
+				continue;
+			}
+
+			try {
 				Field field = PropsValues.class.getField(fieldName);
 
 				Integer value = Integer.valueOf(GetterUtil.getInteger(
 					PropsUtil.get(key)));
 
 				field.setInt(null, value);
+			}
+			catch (Exception e) {
+				_log.error(
+					"Error setting field " + fieldName + ": " + e.getMessage());
 			}
 		}
 
@@ -389,13 +414,21 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 				fieldName.toLowerCase(), StringPool.UNDERLINE,
 				StringPool.PERIOD);
 
-			if (portalProperties.containsKey(key)) {
+			if (!containsKey(portalProperties, key)) {
+				continue;
+			}
+
+			try {
 				Field field = PropsValues.class.getField(fieldName);
 
 				Long value = Long.valueOf(GetterUtil.getLong(
 					PropsUtil.get(key)));
 
 				field.setLong(null, value);
+			}
+			catch (Exception e) {
+				_log.error(
+					"Error setting field " + fieldName + ": " + e.getMessage());
 			}
 		}
 
@@ -404,16 +437,24 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 				fieldName.toLowerCase(), StringPool.UNDERLINE,
 				StringPool.PERIOD);
 
-			if (portalProperties.containsKey(key)) {
+			if (!containsKey(portalProperties, key)) {
+				continue;
+			}
+
+			try {
 				Field field = PropsValues.class.getField(fieldName);
 
 				String value = GetterUtil.getString(PropsUtil.get(key));
 
 				field.set(null, value);
 			}
+			catch (Exception e) {
+				_log.error(
+					"Error setting field " + fieldName + ": " + e.getMessage());
+			}
 		}
 
-		if (portalProperties.containsKey(PropsKeys.LOCALES)) {
+		if (containsKey(portalProperties, PropsKeys.LOCALES)) {
 			PropsValues.LOCALES = PropsUtil.getArray(PropsKeys.LOCALES);
 
 			LanguageUtil.init();
