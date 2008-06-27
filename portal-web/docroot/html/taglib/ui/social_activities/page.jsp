@@ -85,16 +85,17 @@ DateFormat timeFormatDate = DateFormats.getTime(locale, timeZone);
 			SyndEntry syndEntry = new SyndEntryImpl();
 
 			syndEntry.setTitle(HtmlUtil.extractText(activityFeedEntry.getTitle()));
+
+			if (Validator.isNotNull(activityFeedEntry.getLink())) {
+				syndEntry.setLink(activityFeedEntry.getLink());
+			}
+
 			syndEntry.setPublishedDate(activity.getCreateDate());
 
 			SyndContent syndContent = new SyndContentImpl();
 
 			syndContent.setType(RSSUtil.DEFAULT_ENTRY_TYPE);
 			syndContent.setValue(activityFeedEntry.getBody());
-
-			if (Validator.isNotNull(activityFeedEntry.getLink())) {
-				syndEntry.setLink(activityFeedEntry.getLink());
-			}
 
 			syndEntry.setDescription(syndContent);
 

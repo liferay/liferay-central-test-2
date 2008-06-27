@@ -54,6 +54,16 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		int activityType = activity.getType();
 
+		// Link
+
+		MBMessage message = MBMessageLocalServiceUtil.getMessage(
+			activity.getClassPK());
+
+		String link =
+			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+				"/message_boards/find_message?messageId=" +
+					activity.getClassPK();
+
 		// Title
 
 		String title = StringPool.BLANK;
@@ -70,18 +80,10 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		// Body
 
-		MBMessage message = MBMessageLocalServiceUtil.getMessage(
-			activity.getClassPK());
-
-		String messageURL =
-			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
-				"/message_boards/find_message?messageId=" +
-					activity.getClassPK();
-
 		StringMaker sm = new StringMaker();
 
 		sm.append("<a href=\"");
-		sm.append(messageURL);
+		sm.append(link);
 		sm.append("\">");
 		sm.append(cleanContent(message.getSubject()));
 		sm.append("</a><br />");
@@ -89,7 +91,7 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String body = sm.toString();
 
-		return new SocialActivityFeedEntry(title, body, messageURL);
+		return new SocialActivityFeedEntry(link, title, body);
 	}
 
 	private static final String[] _CLASS_NAMES = new String[] {

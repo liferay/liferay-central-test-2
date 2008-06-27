@@ -65,6 +65,15 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 			extraData = new JSONObject(activity.getExtraData());
 		}
 
+		// Link
+
+		BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(
+			activity.getClassPK());
+
+		String link =
+			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+				"/blogs/find_entry?entryId=" + activity.getClassPK();
+
 		// Title
 
 		String title = StringPool.BLANK;
@@ -81,17 +90,10 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		// Body
 
-		BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(
-			activity.getClassPK());
-
-		String entryURL =
-			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
-				"/blogs/find_entry?entryId=" + activity.getClassPK();
-
 		StringMaker sm = new StringMaker();
 
 		sm.append("<a href=\"");
-		sm.append(entryURL);
+		sm.append(link);
 		sm.append("\">");
 
 		if (activityType == BlogsActivityKeys.ADD_COMMENT) {
@@ -113,7 +115,7 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String body = sm.toString();
 
-		return new SocialActivityFeedEntry(title, body, entryURL);
+		return new SocialActivityFeedEntry(link, title, body);
 	}
 
 	private static final String[] _CLASS_NAMES = new String[] {
