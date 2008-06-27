@@ -60,9 +60,7 @@ public class MapUtil {
 		return getInteger(map, key, GetterUtil.DEFAULT_INTEGER);
 	}
 
-	public static int getInteger(
-		Map map, String key, int defaultValue) {
-
+	public static int getInteger(Map map, String key, int defaultValue) {
 		return GetterUtil.getInteger(
 			getString(map, key, String.valueOf(defaultValue)), defaultValue);
 	}
@@ -83,6 +81,15 @@ public class MapUtil {
 		}
 
 		return defaultValue;
+	}
+
+	public static short getShort(Map map, String key) {
+		return getShort(map, key, GetterUtil.DEFAULT_INTEGER);
+	}
+
+	public static short getShort(Map map, String key, short defaultValue) {
+		return GetterUtil.getShort(
+			getString(map, key, String.valueOf(defaultValue)), defaultValue);
 	}
 
 	public static String getString(Map map, String key) {
