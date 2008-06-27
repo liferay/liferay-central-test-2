@@ -55,7 +55,7 @@ if (treeWalker.isOdd()) {
 		</c:if>
 
 		<%
-		String rowHREF = "#" + namespace + "message_" + message.getMessageId();
+		String rowHREF = "#" + renderResponse.getNamespace() + "message_" + message.getMessageId();
 		%>
 
 		<a href="<%= rowHREF %>">
