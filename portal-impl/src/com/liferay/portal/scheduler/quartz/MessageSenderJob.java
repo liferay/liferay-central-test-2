@@ -24,6 +24,9 @@ package com.liferay.portal.scheduler.quartz;
 
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
+import com.liferay.portal.kernel.util.StringMaker;
+
+import java.util.Date;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -53,7 +56,16 @@ public class MessageSenderJob implements Job {
 			String messageBody = jobDataMap.getString(
 				SchedulerEngine.MESSAGE_BODY);
 
-			MessageBusUtil.sendMessage(destination, messageBody);
+			Date scheduledFireTime = jobExecutionContext.getScheduledFireTime();
+
+			StringMaker sm = new StringMaker();
+
+			sm.append(messageBody.substring(0, messageBody.length() - 1));
+			sm.append(",\"scheduledFireTime\":{\"time\":");
+			sm.append(scheduledFireTime.getTime());
+			sm.append(",\"javaClass\":\"java.util.Date\"}}");
+
+			MessageBusUtil.sendMessage(destination, sm.toString());
 		}
 		catch (Exception e) {
 			_log.error(e, e);

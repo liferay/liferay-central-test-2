@@ -163,6 +163,14 @@ public class LayoutsRemotePublisherRequest
 		_endDate = endDate;
 	}
 
+	public Date getScheduledFireTime() {
+		return _scheduledFireTime;
+	}
+
+	public void setScheduledFireTime(Date scheduledFireTime) {
+		_scheduledFireTime = scheduledFireTime;
+	}
+
 	private String _cronText;
 	private long _userId;
 	private long _sourceGroupId;
@@ -176,5 +184,6 @@ public class LayoutsRemotePublisherRequest
 	private boolean _remotePrivateLayout;
 	private Date _startDate;
 	private Date _endDate;
+	private Date _scheduledFireTime;
 
 }

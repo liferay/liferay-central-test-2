@@ -137,6 +137,14 @@ public class LayoutsLocalPublisherRequest {
 		_endDate = endDate;
 	}
 
+	public Date getScheduledFireTime() {
+		return _scheduledFireTime;
+	}
+
+	public void setScheduledFireTime(Date scheduledFireTime) {
+		_scheduledFireTime = scheduledFireTime;
+	}
+
 	private String _command;
 	private String _cronText;
 	private long _userId;
@@ -147,5 +155,6 @@ public class LayoutsLocalPublisherRequest {
 	private Map<String, String[]> _parameterMap;
 	private Date _startDate;
 	private Date _endDate;
+	private Date _scheduledFireTime;
 
 }
