@@ -34,7 +34,7 @@ import java.util.Map;
  * <a href="MapUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Aug�
+ * @author Raymond Augé
  *
  */
 public class MapUtil {
@@ -53,6 +53,17 @@ public class MapUtil {
 		Map map, String key, boolean defaultValue) {
 
 		return GetterUtil.getBoolean(
+			getString(map, key, String.valueOf(defaultValue)), defaultValue);
+	}
+
+	public static int getInteger(Map map, String key) {
+		return getInteger(map, key, GetterUtil.DEFAULT_INTEGER);
+	}
+
+	public static int getInteger(
+		Map map, String key, int defaultValue) {
+
+		return GetterUtil.getInteger(
 			getString(map, key, String.valueOf(defaultValue)), defaultValue);
 	}
 
