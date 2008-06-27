@@ -81,10 +81,9 @@ Liferay.ColorPicker = new Class({
 
 		var context = instance._context;
 
-		var altText = Liferay.Language.get('color-picker');
 		var items = instance._item;
 
-		var colorPickerImgHTML = '<img alt="' + altText + '" class="lfr-colorpicker-img" src="' + themeDisplay.getPathThemeImages() + '/color_picker/color_picker.png" title="' + altText + '" />';
+		var colorPickerImgHTML = '<img alt="' + Liferay.Language.get('color-picker') + '" class="lfr-colorpicker-img" src="' + themeDisplay.getPathThemeImages() + '/color_picker/color_picker.png" title="' + Liferay.Language.get('color-picker') + '" />';
 
 		if (items.length == 1) {
 			var colorPickerImg;

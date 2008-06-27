@@ -17994,7 +17994,7 @@ Liferay.ColorPicker = new Class({
 
 		var items = instance._item;
 
-		var colorPickerImgHTML = '<img class="lfr-colorpicker-img" src="' + themeDisplay.getPathThemeImages() + '/color_picker/color_picker.png" />';
+		var colorPickerImgHTML = '<img alt="' + Liferay.Language.get('color-picker') + '" class="lfr-colorpicker-img" src="' + themeDisplay.getPathThemeImages() + '/color_picker/color_picker.png" title="' + Liferay.Language.get('color-picker') + '" />';
 
 		if (items.length == 1) {
 			var colorPickerImg;
