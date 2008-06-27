@@ -686,7 +686,9 @@ public class BaseDeployer {
 			SystemProperties.get(SystemProperties.TMP_DIR) + File.separator +
 				Time.getTimestamp());
 
-		if (PropsValues.PORTLET_CONTAINER_IMPL_SUN) {
+		if ((PropsValues.PORTLET_CONTAINER_IMPL_SUN) &&
+			(this instanceof PortletDeployer)) {
+
 			File sunTempDir = new File(
 				SystemProperties.get(SystemProperties.TMP_DIR) +
 					File.separator + "sun" + File.separator +
