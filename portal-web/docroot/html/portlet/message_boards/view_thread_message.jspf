@@ -149,34 +149,32 @@
 					</c:if>
 				</div>
 
-				<c:if test="<%= editable %>">
-					<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_MESSAGE) || MBCategoryPermission.contains(permissionChecker, category, ActionKeys.REPLY_TO_MESSAGE) %>">
-						<ul class="edit-controls lfr-component">
-							<li>
-								<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="replyURL">
-									<portlet:param name="struts_action" value="/message_boards/edit_message" />
-									<portlet:param name="redirect" value="<%= currentURL %>" />
-									<portlet:param name="categoryId" value="<%= String.valueOf(message.getCategoryId()) %>" />
-									<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
-									<portlet:param name="parentMessageId" value="<%= String.valueOf(message.getMessageId()) %>" />
-								</portlet:renderURL>
+				<c:if test="<%= editable && (MBCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_MESSAGE) || MBCategoryPermission.contains(permissionChecker, category, ActionKeys.REPLY_TO_MESSAGE)) %>">
+					<ul class="edit-controls lfr-component">
+						<li>
+							<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="replyURL">
+								<portlet:param name="struts_action" value="/message_boards/edit_message" />
+								<portlet:param name="redirect" value="<%= currentURL %>" />
+								<portlet:param name="categoryId" value="<%= String.valueOf(message.getCategoryId()) %>" />
+								<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
+								<portlet:param name="parentMessageId" value="<%= String.valueOf(message.getMessageId()) %>" />
+							</portlet:renderURL>
 
-								<liferay-ui:icon image="reply" url="<%= replyURL %>" label="<%= true %>" />
-							</li>
-							<li>
-								<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="quoteURL">
-									<portlet:param name="struts_action" value="/message_boards/edit_message" />
-									<portlet:param name="redirect" value="<%= currentURL %>" />
-									<portlet:param name="categoryId" value="<%= String.valueOf(message.getCategoryId()) %>" />
-									<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
-									<portlet:param name="parentMessageId" value="<%= String.valueOf(message.getMessageId()) %>" />
-									<portlet:param name="quote" value="true" />
-								</portlet:renderURL>
+							<liferay-ui:icon image="reply" url="<%= replyURL %>" label="<%= true %>" />
+						</li>
+						<li>
+							<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="quoteURL">
+								<portlet:param name="struts_action" value="/message_boards/edit_message" />
+								<portlet:param name="redirect" value="<%= currentURL %>" />
+								<portlet:param name="categoryId" value="<%= String.valueOf(message.getCategoryId()) %>" />
+								<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
+								<portlet:param name="parentMessageId" value="<%= String.valueOf(message.getMessageId()) %>" />
+								<portlet:param name="quote" value="true" />
+							</portlet:renderURL>
 
-								<liferay-ui:icon image="quote" message="reply-with-quote" url="<%= quoteURL %>" label="<%= true %>" />
-							</li>
-						</ul>
-					</c:if>
+							<liferay-ui:icon image="quote" message="reply-with-quote" url="<%= quoteURL %>" label="<%= true %>" />
+						</li>
+					</ul>
 				</c:if>
 			</div>
 
@@ -342,7 +340,7 @@
 					%>
 
 							<div>
-								<img alt="<%= LanguageUtil.get(pageContext, "attachment") %>" src="<%= themeDisplay.getPathMain() %>/message_boards/get_message_attachment?messageId=<%= message.getMessageId() %>&attachment=<%= HttpUtil.encodeURL(fileName) %>" />
+								<img alt="<liferay-ui:message key="attachment" />" src="<%= themeDisplay.getPathMain() %>/message_boards/get_message_attachment?messageId=<%= message.getMessageId() %>&attachment=<%= HttpUtil.encodeURL(fileName) %>" />
 							</div>
 
 							<br />

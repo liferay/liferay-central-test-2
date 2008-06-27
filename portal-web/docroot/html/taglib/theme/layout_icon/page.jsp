@@ -29,5 +29,5 @@ Layout selLayout = (Layout)request.getAttribute("liferay-theme:layout-icon:layou
 %>
 
 <c:if test="<%= (selLayout != null) && selLayout.isIconImage() %>">
-	<img alt="<%= LanguageUtil.get(pageContext, "page-icon") %>" src="<%= themeDisplay.getPathImage() %>/layout_icon?img_id=<%= selLayout.getIconImageId() %>&t=<%= ImageServletTokenUtil.getToken(selLayout.getIconImageId()) %>" />
+	<img alt="<liferay-ui:message key="page-icon" />" src="<%= themeDisplay.getPathImage() %>/layout_icon?img_id=<%= selLayout.getIconImageId() %>&t=<%= ImageServletTokenUtil.getToken(selLayout.getIconImageId()) %>" />
 </c:if>

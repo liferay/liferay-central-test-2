@@ -63,7 +63,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 						</div>
 
 						<div id="<%= randomNamespace %>yourRating">
-							<img alt="<%= LanguageUtil.get(pageContext, "star-off") %>"  src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<%= LanguageUtil.get(pageContext, "star-off") %>" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<%= LanguageUtil.get(pageContext, "star-off") %>" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<%= LanguageUtil.get(pageContext, "star-off") %>" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<%= LanguageUtil.get(pageContext, "star-off") %>" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
+							<img alt="<liferay-ui:message key="star-off" />"  src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
 						</div>
 					</td>
 					<td style="padding-left: 30px;"></td>
@@ -75,7 +75,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 					</div>
 
 					<div id="<%= randomNamespace %>averageRating" onmousemove="Liferay.Portal.ToolTip.show(event, this, '<%= stats.getAverageScore() %> <liferay-ui:message key="stars" />')">
-						<img alt="<%= LanguageUtil.get(pageContext, "star-off") %>" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<%= LanguageUtil.get(pageContext, "star-off") %>" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<%= LanguageUtil.get(pageContext, "star-off") %>" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<%= LanguageUtil.get(pageContext, "star-off") %>" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<%= LanguageUtil.get(pageContext, "star-off") %>" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
+						<img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
 					</div>
 				</td>
 			</tr>

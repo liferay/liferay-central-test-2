@@ -161,6 +161,7 @@ List messages = treeWalker.getMessages();
 	</c:if>
 
 	<a name="<portlet:namespace />messages_top"></a>
+
 	<table border="0" cellpadding="4" cellspacing="0" class="taglib-discussion" width="100%">
 	<tr class="portlet-section-header results-header" style="font-size: x-small; font-weight: bold;">
 		<td>
@@ -218,6 +219,7 @@ List messages = treeWalker.getMessages();
 		<tr>
 			<td colspan="2" id="<%= namespace %>messageScroll<%= message.getMessageId() %>">
 				<a name="<portlet:namespace />message_<%= message.getMessageId() %>"></a>
+
 				<input name="<%= namespace %>messageId<%= i %>" type="hidden" value="<%= message.getMessageId() %>" />
 				<input name="<%= namespace %>parentMessageId<%= i %>" type="hidden" value="<%= message.getMessageId() %>" />
 			</td>
@@ -230,7 +232,7 @@ List messages = treeWalker.getMessages();
 					displayStyle="<%= 2 %>"
 				/>
 			</td>
-			<td valign="top" class="stretch">
+			<td class="stretch" valign="top">
 				<div>
 
 					<%

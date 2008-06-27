@@ -82,7 +82,7 @@
 			<td colspan="2">
 				<br />
 
-				<img alt="<%= LanguageUtil.get(pageContext, "cartoon") %>" src="http://rev-fun.gospelcom.net/add_toon_info.php?date=<%= date %>" />
+				<img alt="<liferay-ui:message key="cartoon" />" src="http://rev-fun.gospelcom.net/add_toon_info.php?date=<%= date %>" />
 			</td>
 		</tr>
 		</table>

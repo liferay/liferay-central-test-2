@@ -59,9 +59,9 @@ CamelCaseWordsAreLinksToPages
 </h4>
 
 <pre>
-<img alt="<%= LanguageUtil.get(pageContext, "tab") %>"src="<%= themeDisplay.getPathThemeImages() %>/wiki/tab.png" />* Item
-<img alt="<%= LanguageUtil.get(pageContext, "tab") %>" src="<%= themeDisplay.getPathThemeImages() %>/wiki/tab.png" />&nbsp;<img alt="<%= LanguageUtil.get(pageContext, "tab") %>" src="<%= themeDisplay.getPathThemeImages() %>/wiki/tab.png" />* Subitem
+<img alt="<liferay-ui:message key="tab" />"src="<%= themeDisplay.getPathThemeImages() %>/wiki/tab.png" />* Item
+<img alt="<liferay-ui:message key="tab" />" src="<%= themeDisplay.getPathThemeImages() %>/wiki/tab.png" />&nbsp;<img alt="<liferay-ui:message key="tab" />" src="<%= themeDisplay.getPathThemeImages() %>/wiki/tab.png" />* Subitem
 
-<img alt="<%= LanguageUtil.get(pageContext, "tab") %>" src="<%= themeDisplay.getPathThemeImages() %>/wiki/tab.png" />1 Ordered Item
-<img alt="<%= LanguageUtil.get(pageContext, "tab") %>" src="<%= themeDisplay.getPathThemeImages() %>/wiki/tab.png" />&nbsp;<img alt="<%= LanguageUtil.get(pageContext, "tab") %>" src="<%= themeDisplay.getPathThemeImages() %>/wiki/tab.png" />1 Ordered Subitem
+<img alt="<liferay-ui:message key="tab" />" src="<%= themeDisplay.getPathThemeImages() %>/wiki/tab.png" />1 Ordered Item
+<img alt="<liferay-ui:message key="tab" />" src="<%= themeDisplay.getPathThemeImages() %>/wiki/tab.png" />&nbsp;<img alt="<liferay-ui:message key="tab" />" src="<%= themeDisplay.getPathThemeImages() %>/wiki/tab.png" />1 Ordered Subitem
 </pre>

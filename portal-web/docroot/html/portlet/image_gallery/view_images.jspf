@@ -57,7 +57,7 @@
 		}
 
 		var html =
-			"<div style='margin-top: 16px; text-align: center;'><img alt='<%= LanguageUtil.get(pageContext, "image") %>' src='<%= themeDisplay.getPathImage() %>/image_gallery?img_id=" + id + "' style='height: " + imgHeight + "px; width" + imgWidth + "px;' /></div>" +
+			"<div style='margin-top: 16px; text-align: center;'><img alt='<liferay-ui:message key="image" />' src='<%= themeDisplay.getPathImage() %>/image_gallery?img_id=" + id + "' style='height: " + imgHeight + "px; width" + imgWidth + "px;' /></div>" +
 			"<div style='text-align: center;'>" + name + "</div>";
 
 		var messageId = "<portlet:namespace />popup_" + id;
@@ -106,7 +106,7 @@
 
 		<div style="float: left; margin: <%= topMargin %>px <%= sideMargin %>px 0px <%= sideMargin %>px;">
 			<div onClick="<portlet:namespace />viewImage(<%= largeImage.getImageId() %>, '<%= image.getName() %>', <%= largeImage.getWidth() %>, <%= largeImage.getHeight() %>)">
-				<img alt="<%= LanguageUtil.get(pageContext, "image") %>" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= smallImage.getImageId() %>" style="height: <%= smallImage.getHeight() %>; width: <%= smallImage.getWidth() %>;" />
+				<img alt="<liferay-ui:message key="image" />" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= smallImage.getImageId() %>" style="height: <%= smallImage.getHeight() %>; width: <%= smallImage.getWidth() %>;" />
 			</div>
 
 			<div style="text-align: center;">
