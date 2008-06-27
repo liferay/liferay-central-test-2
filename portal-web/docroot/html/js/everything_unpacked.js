@@ -16871,10 +16871,8 @@ Liferay.Popup = function(options) {
 
 		open: function(e, ui) {
 			if (!options.dragHelper) {
-				var dialogContent = jQuery(this);
-				var dialog = dialogContent.parents('.ui-dialog:first');
+				var dialog = jQuery(this).parents('.ui-dialog:first');
 
-				dialogContent.attr('id', options.messageId);
 				cacheDialogHelper(dialog);
 			}
 		}
@@ -16908,6 +16906,7 @@ Liferay.Popup = function(options) {
 	var dragStop = config.dragStop;
 	var open = config.open;
 	var close = config.close;
+	var messageId = config.messageId;
 	var resizable = config.resizable;
 	var resizeHelper = config.resizeHelper;
 	var stack = config.stack;
@@ -16932,6 +16931,10 @@ Liferay.Popup = function(options) {
 
 	if (title) {
 		className += ' has-title';
+	}
+
+	if (messageId) {
+		content.attr('id', messageId);
 	}
 
 	content.appendTo('body');
