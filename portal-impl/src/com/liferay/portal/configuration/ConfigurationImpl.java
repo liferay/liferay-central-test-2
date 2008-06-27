@@ -278,9 +278,9 @@ public class ConfigurationImpl implements Configuration {
 		}
 	}
 
-	private static final Log _log = LogFactory.getLog(ConfigurationImpl.class);
-
 	private static final boolean _PRINT_DUPLICATE_CALLS_TO_GET = false;
+
+	private static Log _log = LogFactory.getLog(ConfigurationImpl.class);
 
 	private ComponentConfiguration _componentConfiguration;
 	private Set<String> _keys = new HashSet<String>();

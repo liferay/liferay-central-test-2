@@ -105,7 +105,6 @@ public class QuartzMessageListener implements MessageListener {
 		MessageBusUtil.sendMessage(responseDestination, jsonObj.toString());
 	}
 
-	private static final Log _log =
-		LogFactory.getLog(QuartzMessageListener.class);
+	private static Log _log = LogFactory.getLog(QuartzMessageListener.class);
 
 }

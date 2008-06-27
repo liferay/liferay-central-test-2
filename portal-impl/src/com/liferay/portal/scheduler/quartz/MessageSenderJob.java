@@ -60,6 +60,6 @@ public class MessageSenderJob implements Job {
 		}
 	}
 
-	private static final Log _log = LogFactory.getLog(MessageSenderJob.class);
+	private static Log _log = LogFactory.getLog(MessageSenderJob.class);
 
 }

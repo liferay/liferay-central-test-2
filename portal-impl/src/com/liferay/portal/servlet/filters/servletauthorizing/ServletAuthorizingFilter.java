@@ -169,7 +169,7 @@ public class ServletAuthorizingFilter extends BasePortalFilter {
 		}
 	}
 
-	private static final Log _log =
+	private static Log _log =
 		LogFactoryUtil.getLog(ServletAuthorizingFilter.class);
 
 }
