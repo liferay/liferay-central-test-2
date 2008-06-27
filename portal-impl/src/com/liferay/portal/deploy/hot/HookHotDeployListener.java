@@ -88,85 +88,23 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 		}
 	}
 
-	protected void destroyPortalPropertiesConfiguration(
-			Configuration portalPropertiesConfiguration)
+	protected void destroyPortalProperties(Properties portalProperties)
 		throws Exception {
-
-		Properties portalProperties =
-			portalPropertiesConfiguration.getProperties();
-
-		if (portalProperties.size() == 0) {
-			return;
-		}
 
 		PropsUtil.removeProperties(portalProperties);
 
-		for (String fieldName : _PROPS_KEYS_BOOLEAN) {
-			String key = StringUtil.replace(
-				fieldName.toLowerCase(), StringPool.UNDERLINE,
-				StringPool.PERIOD);
-
-			if (portalProperties.containsKey(key)) {
-				Field field = PropsValues.class.getField(fieldName);
-
-				Boolean value = Boolean.valueOf(GetterUtil.getBoolean(
-					PropsUtil.get(key)));
-
-				field.setBoolean(null, value);
-			}
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Portlet locales " +
+					portalProperties.getProperty(PropsKeys.LOCALES));
+			_log.debug(
+				"Original locales " + PropsUtil.get(PropsKeys.LOCALES));
+			_log.debug(
+				"Original locales as array " +
+					PropsUtil.getArray(PropsKeys.LOCALES).length);
 		}
 
-		for (String fieldName : _PROPS_KEYS_INTEGER) {
-			String key = StringUtil.replace(
-				fieldName.toLowerCase(), StringPool.UNDERLINE,
-				StringPool.PERIOD);
-
-			if (portalProperties.containsKey(key)) {
-				Field field = PropsValues.class.getField(fieldName);
-
-				Integer value = Integer.valueOf(GetterUtil.getInteger(
-					PropsUtil.get(key)));
-
-				field.setInt(null, value);
-			}
-		}
-
-		for (String fieldName : _PROPS_KEYS_LONG) {
-			String key = StringUtil.replace(
-				fieldName.toLowerCase(), StringPool.UNDERLINE,
-				StringPool.PERIOD);
-
-			if (portalProperties.containsKey(key)) {
-				Field field = PropsValues.class.getField(fieldName);
-
-				Long value = Long.valueOf(GetterUtil.getLong(
-					PropsUtil.get(key)));
-
-				field.setLong(null, value);
-			}
-		}
-
-		for (String fieldName : _PROPS_KEYS_STRING) {
-			String key = StringUtil.replace(
-				fieldName.toLowerCase(), StringPool.UNDERLINE,
-				StringPool.PERIOD);
-
-			if (portalProperties.containsKey(key)) {
-				Field field = PropsValues.class.getField(fieldName);
-
-				String value = GetterUtil.getString(PropsUtil.get(key));
-
-				field.set(null, value);
-			}
-		}
-
-		if (portalProperties.containsKey(PropsKeys.LOCALES)) {
-			PropsValues.LOCALES = PropsUtil.getArray(PropsKeys.LOCALES);
-
-			LanguageUtil.init();
-		}
-
-		LayoutCacheUtil.clearCache();
+		resetPortalProperties(portalProperties);
 	}
 
 	protected void doInvokeDeploy(HotDeployEvent event) throws Exception {
@@ -263,11 +201,15 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			}
 
 			if (portalPropertiesConfiguration != null) {
-				_portalPropertiesConfigurationMap.put(
-					servletContextName, portalPropertiesConfiguration);
+				Properties portalProperties =
+					portalPropertiesConfiguration.getProperties();
 
-				initPortalPropertiesConfiguration(
-					portalPropertiesConfiguration);
+				if (portalProperties.size() > 0) {
+					_portalPropertiesMap.put(
+						servletContextName, portalProperties);
+
+					initPortalProperties(portalProperties);
+				}
 			}
 		}
 
@@ -308,11 +250,11 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			}
 		}
 
-		Configuration portalPropertiesConfiguration =
-			_portalPropertiesConfigurationMap.get(servletContextName);
+		Properties portalProperties = _portalPropertiesMap.get(
+			servletContextName);
 
-		if (portalPropertiesConfiguration != null) {
-			destroyPortalPropertiesConfiguration(portalPropertiesConfiguration);
+		if (portalProperties != null) {
+			destroyPortalProperties(portalProperties);
 		}
 
 		if (_log.isInfoEnabled()) {
@@ -386,16 +328,8 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 		return modelListener;
 	}
 
-	protected void initPortalPropertiesConfiguration(
-			Configuration portalPropertiesConfiguration)
+	protected void initPortalProperties(Properties portalProperties)
 		throws Exception {
-
-		Properties portalProperties =
-			portalPropertiesConfiguration.getProperties();
-
-		if (portalProperties.size() == 0) {
-			return;
-		}
 
 		PropsUtil.addProperties(portalProperties);
 
@@ -405,7 +339,16 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 					portalProperties.getProperty(PropsKeys.LOCALES));
 			_log.debug(
 				"Actual locales " + PropsUtil.get(PropsKeys.LOCALES));
+			_log.debug(
+				"Actual locales as array " +
+					PropsUtil.getArray(PropsKeys.LOCALES).length);
 		}
+
+		resetPortalProperties(portalProperties);
+	}
+
+	protected void resetPortalProperties(Properties portalProperties)
+		throws Exception {
 
 		for (String fieldName : _PROPS_KEYS_BOOLEAN) {
 			String key = StringUtil.replace(
@@ -416,7 +359,7 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 				Field field = PropsValues.class.getField(fieldName);
 
 				Boolean value = Boolean.valueOf(GetterUtil.getBoolean(
-					portalProperties.getProperty(key)));
+					PropsUtil.get(key)));
 
 				field.setBoolean(null, value);
 			}
@@ -431,7 +374,7 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 				Field field = PropsValues.class.getField(fieldName);
 
 				Integer value = Integer.valueOf(GetterUtil.getInteger(
-					portalProperties.getProperty(key)));
+					PropsUtil.get(key)));
 
 				field.setInt(null, value);
 			}
@@ -446,7 +389,7 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 				Field field = PropsValues.class.getField(fieldName);
 
 				Long value = Long.valueOf(GetterUtil.getLong(
-					portalProperties.getProperty(key)));
+					PropsUtil.get(key)));
 
 				field.setLong(null, value);
 			}
@@ -460,16 +403,14 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			if (portalProperties.containsKey(key)) {
 				Field field = PropsValues.class.getField(fieldName);
 
-				String value = GetterUtil.getString(
-					portalProperties.getProperty(key));
+				String value = GetterUtil.getString(PropsUtil.get(key));
 
 				field.set(null, value);
 			}
 		}
 
 		if (portalProperties.containsKey(PropsKeys.LOCALES)) {
-			PropsValues.LOCALES = StringUtil.split(
-				portalProperties.getProperty(PropsKeys.LOCALES));
+			PropsValues.LOCALES = PropsUtil.getArray(PropsKeys.LOCALES);
 
 			LanguageUtil.init();
 		}
@@ -506,7 +447,7 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 		new HashMap<String, List<Object>>();
 	private Map<String, List<ModelListener>> _modelListenersMap =
 		new HashMap<String, List<ModelListener>>();
-	private Map<String, Configuration> _portalPropertiesConfigurationMap =
-		new HashMap<String, Configuration>();
+	private Map<String, Properties> _portalPropertiesMap =
+		new HashMap<String, Properties>();
 
 }
