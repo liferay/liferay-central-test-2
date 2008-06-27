@@ -654,7 +654,7 @@
 			<taglib-location>/WEB-INF/tld/x-rt.tld</taglib-location>
 		</taglib>
 		<taglib>
-			<taglib-uri>http://java.sun.com/portlet</taglib-uri>
+			<taglib-uri>http://java.sun.com/portlet_2_0</taglib-uri>
 			<taglib-location>/WEB-INF/tld/liferay-portlet.tld</taglib-location>
 		</taglib>
 		<taglib>

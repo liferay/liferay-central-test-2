@@ -31,7 +31,7 @@
 <%@ taglib uri="http://java.sun.com/jstl/sql_rt" prefix="sql" %>
 <%@ taglib uri="http://java.sun.com/jstl/xml_rt" prefix="x" %>
 
-<%@ taglib uri="http://java.sun.com/portlet" prefix="portlet" %>
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <%@ taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet" %>
 <%@ taglib uri="http://liferay.com/tld/security" prefix="liferay-security" %>
