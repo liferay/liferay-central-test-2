@@ -31,6 +31,8 @@ import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.lang.reflect.Field;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -42,7 +44,10 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+import org.apache.commons.configuration.CompositeConfiguration;
 import org.apache.commons.configuration.MapConfiguration;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ConfigurationImpl.java.html"><b><i>View Source</i></b></a>
@@ -59,7 +64,27 @@ public class ConfigurationImpl implements Configuration {
 		AggregatedProperties aggregatedProperties =
 			(AggregatedProperties)componentProperties.toConfiguration();
 
-		aggregatedProperties.addConfiguration(new MapConfiguration(properties));
+		try {
+			Field field1 = aggregatedProperties.getClass().getDeclaredField(
+				"baseConf");
+
+			field1.setAccessible(true);
+
+			CompositeConfiguration conf = (CompositeConfiguration)field1.get(
+				aggregatedProperties);
+
+			Field field2 = CompositeConfiguration.class.getDeclaredField(
+				"configList");
+
+			field2.setAccessible(true);
+
+			List list = (List)field2.get(conf);
+
+			list.add(0, new MapConfiguration(properties));
+		}
+		catch (Exception e) {
+			_log.error("The properties could not be added", e);
+		}
 	}
 
 	public boolean contains(String key) {
@@ -144,27 +169,48 @@ public class ConfigurationImpl implements Configuration {
 	}
 
 	public void removeProperties(Properties properties) {
-		ComponentProperties componentProperties =
-			_componentConfiguration.getProperties();
 
 		AggregatedProperties aggregatedProperties =
-			(AggregatedProperties)componentProperties.toConfiguration();
+			(AggregatedProperties) _componentConfiguration.getProperties().
+				toConfiguration();
 
-		for (int i = 0; i < aggregatedProperties.getNumberOfConfigurations();
-				i++) {
+		try {
+			Field field1 = aggregatedProperties.getClass().getDeclaredField(
+				"baseConf");
 
-			org.apache.commons.configuration.Configuration configuration =
-				aggregatedProperties.getConfiguration(i);
+			field1.setAccessible(true);
 
-			if (!(configuration instanceof MapConfiguration)) {
-				return;
+			CompositeConfiguration conf = (CompositeConfiguration)field1.get(
+				aggregatedProperties);
+
+			Field field2 = CompositeConfiguration.class.getDeclaredField(
+				"configList");
+
+			field2.setAccessible(true);
+
+			List list = (List)field2.get(conf);
+
+			Iterator itr = list.iterator();
+
+			while (itr.hasNext()) {
+				org.apache.commons.configuration.Configuration configuration =
+					(org.apache.commons.configuration.Configuration)itr.next();
+
+				if (!(configuration instanceof MapConfiguration)) {
+					return;
+				}
+
+				MapConfiguration mapConfiguration =
+					(MapConfiguration)configuration;
+
+				if (mapConfiguration.getMap() == properties) {
+					aggregatedProperties.removeConfiguration(configuration);
+				}
 			}
 
-			MapConfiguration mapConfiguration = (MapConfiguration)configuration;
-
-			if (mapConfiguration.getMap() == properties) {
-				aggregatedProperties.removeConfiguration(configuration);
-			}
+		}
+		catch (Exception e) {
+			_log.error("The properties could not be removed", e);
 		}
 	}
 
@@ -231,6 +277,8 @@ public class ConfigurationImpl implements Configuration {
 			System.out.println("Loading " + source);
 		}
 	}
+
+	private static final Log _log = LogFactory.getLog(ConfigurationImpl.class);
 
 	private static final boolean _PRINT_DUPLICATE_CALLS_TO_GET = false;
 
