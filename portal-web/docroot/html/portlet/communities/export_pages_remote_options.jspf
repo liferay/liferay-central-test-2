@@ -56,18 +56,22 @@
 			(<liferay-ui:message key="organization-or-community" />)
 		</td>
 	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="remote-pages-set" />
+		</td>
+		<td>
+			<select name="<portlet:namespace />removePrivateLayout">
+				<option <%= tabs1.equals("public-pages") ? "selected=\"selected\"":"" %> value="0"><bean:message key="public-pages"/></option>
+				<option <%= !tabs1.equals("public-pages") ? "selected=\"selected\"":"" %> value="1"><bean:message key="private-pages"/></option>
+			</select>
+		</td>
+	</tr>
 	</table>
 
 	<br />
 
 	<table class="lfr-table">
-	<tr>
-		<td>
-			<input id="<portlet:namespace />remotePrivateLayout" name="<portlet:namespace />remotePrivateLayout" type="checkbox" />
-
-			<label for="<portlet:namespace />remotePrivateLayout"><liferay-ui:message key="remote-private-page" /></label>
-		</td>
-	</tr>
 	<tr>
 		<td>
 			<input id="<portlet:namespace />secureConnection" name="<portlet:namespace />secureConnection" type="checkbox" />
