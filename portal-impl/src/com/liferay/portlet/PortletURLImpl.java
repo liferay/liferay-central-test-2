@@ -704,7 +704,9 @@ public class PortletURLImpl
 			sm.append(StringPool.AMPERSAND);
 		}
 
-		if (!isParameterIncludedInPath("p_p_url_type")) {
+		if (PropsValues.PORTLET_CONTAINER_IMPL_SUN &&
+			!isParameterIncludedInPath("p_p_url_type")) {
+
 			sm.append("p_p_url_type");
 			sm.append(StringPool.EQUAL);
 
