@@ -28,10 +28,14 @@ import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutReference;
 import com.liferay.portal.model.Plugin;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.base.LayoutServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
@@ -241,11 +245,15 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			String description)
 		throws PortalException, SystemException {
 
-		GroupPermissionUtil.check(
-			getPermissionChecker(), sourceGroupId, ActionKeys.MANAGE_LAYOUTS);
+		PermissionChecker permissionChecker = getPermissionChecker();
 
-		GroupPermissionUtil.check(
-			getPermissionChecker(), targetGroupId, ActionKeys.MANAGE_LAYOUTS);
+		if (!GroupPermissionUtil.contains(
+				permissionChecker, targetGroupId, ActionKeys.MANAGE_STAGING) &&
+			!GroupPermissionUtil.contains(
+				permissionChecker, targetGroupId, ActionKeys.PUBLISH_STAGING)) {
+
+			throw new PrincipalException();
+		}
 
 		String command = StringPool.BLANK;
 
@@ -277,8 +285,26 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			Date schedulerEndDate, String description)
 		throws PortalException, SystemException {
 
-		GroupPermissionUtil.check(
-			getPermissionChecker(), sourceGroupId, ActionKeys.MANAGE_LAYOUTS);
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		Group group = GroupLocalServiceUtil.getGroup(sourceGroupId);
+
+		if (group.isStagingGroup()) {
+			group = group.getLiveGroup();
+		}
+
+		if (group.isWorkflowEnabled() &&
+			!GroupPermissionUtil.contains(
+				permissionChecker, sourceGroupId, ActionKeys.MANAGE_STAGING) &&
+			!GroupPermissionUtil.contains(
+				permissionChecker, sourceGroupId, ActionKeys.PUBLISH_STAGING)) {
+
+			throw new PrincipalException();
+		}
+		else {
+			GroupPermissionUtil.check(
+				permissionChecker, sourceGroupId, ActionKeys.MANAGE_LAYOUTS);
+		}
 
 		LayoutsRemotePublisherRequest publisherRequest =
 			new LayoutsRemotePublisherRequest(
@@ -308,8 +334,15 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			long groupId, String jobName, String groupName)
 		throws PortalException, SystemException {
 
-		GroupPermissionUtil.check(
-			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		if (!GroupPermissionUtil.contains(
+				permissionChecker, groupId, ActionKeys.MANAGE_STAGING) &&
+			!GroupPermissionUtil.contains(
+				permissionChecker, groupId, ActionKeys.PUBLISH_STAGING)) {
+
+			throw new PrincipalException();
+		}
 
 		SchedulerEngineUtil.unschedule(jobName, groupName);
 	}
@@ -318,8 +351,26 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			long groupId, String jobName, String groupName)
 		throws PortalException, SystemException {
 
-		GroupPermissionUtil.check(
-			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		if (group.isStagingGroup()) {
+			group = group.getLiveGroup();
+		}
+
+		if (group.isWorkflowEnabled() &&
+			!GroupPermissionUtil.contains(
+				permissionChecker, groupId, ActionKeys.MANAGE_STAGING) &&
+			!GroupPermissionUtil.contains(
+				permissionChecker, groupId, ActionKeys.PUBLISH_STAGING)) {
+
+			throw new PrincipalException();
+		}
+		else {
+			GroupPermissionUtil.check(
+				permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS);
+		}
 
 		SchedulerEngineUtil.unschedule(jobName, groupName);
 	}
