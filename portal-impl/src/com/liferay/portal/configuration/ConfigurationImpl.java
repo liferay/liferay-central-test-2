@@ -66,23 +66,35 @@ public class ConfigurationImpl
 			(AggregatedProperties)componentProperties.toConfiguration();
 
 		try {
-			Field field1 = aggregatedProperties.getClass().getDeclaredField(
-				"baseConf");
+			Field field1 = CompositeConfiguration.class.getDeclaredField(
+				"configList");
 
 			field1.setAccessible(true);
 
-			CompositeConfiguration compositeConfiguration =
-				(CompositeConfiguration)field1.get(aggregatedProperties);
+			// Add to configList of base conf
 
-			Field field2 = CompositeConfiguration.class.getDeclaredField(
-				"configList");
+			List<Configuration> configurations =
+				(List<Configuration>)field1.get(aggregatedProperties);
+
+			MapConfiguration newConfiguration =
+				new MapConfiguration(properties);
+
+			configurations.add(0, newConfiguration);
+
+			// Add to configList of AggregatedProperties itself
+
+			Field field2 = aggregatedProperties.getClass().getDeclaredField(
+				"baseConf");
 
 			field2.setAccessible(true);
 
-			List<Configuration> configurations =
-				(List<Configuration>)field2.get(compositeConfiguration);
+			CompositeConfiguration compositeConfiguration =
+				(CompositeConfiguration)field2.get(aggregatedProperties);
 
-			configurations.add(0, new MapConfiguration(properties));
+			configurations =
+				(List<Configuration>)field1.get(compositeConfiguration);
+
+			configurations.add(0, newConfiguration);
 		}
 		catch (Exception e) {
 			_log.error("The properties could not be added", e);
@@ -194,7 +206,11 @@ public class ConfigurationImpl
 			List<Configuration> configurations =
 				(List<Configuration>)field2.get(compositeConfiguration);
 
-			for (Configuration configuration : configurations) {
+			Iterator<Configuration> itr = configurations.iterator();
+
+			while (itr.hasNext()) {
+				Configuration configuration = itr.next();
+
 				if (!(configuration instanceof MapConfiguration)) {
 					return;
 				}
@@ -203,6 +219,7 @@ public class ConfigurationImpl
 					(MapConfiguration)configuration;
 
 				if (mapConfiguration.getMap() == properties) {
+					itr.remove();
 					aggregatedProperties.removeConfiguration(configuration);
 				}
 			}
