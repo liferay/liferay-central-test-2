@@ -19349,8 +19349,7 @@ Liferay.Navigation = new Class({
 
 		deleteTab.click(
 			function(event) {
-				instance._removePage(this, instance);
-
+				instance._removePage(this);
 			}
 		);
 
@@ -19560,7 +19559,9 @@ Liferay.Navigation = new Class({
 		}
 	},
 
-	_removePage: function(obj, instance) {
+	_removePage: function(obj) {
+		var instance = this;
+
 		var tab = jQuery(obj).parents('li');
 		var tabText = tab.find('a span').html();
 
@@ -19592,7 +19593,9 @@ Liferay.Navigation = new Class({
 		}
 	},
 
-	_savePage: function(event, obj, instance, oldName) {
+	_savePage: function(event, obj, oldName) {
+		var instance = this;
+
 		if ((event.type == 'keyup') && (event.keyCode !== 13)) {
 			return;
 		}
