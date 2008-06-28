@@ -238,9 +238,7 @@ Liferay.Portlet = {
 				jQuery(portlet)[action]('portlet-minimized');
 
 				if (el) {
-					var minimizeKey = Liferay.Language.get('minimize');
-					var restoreKey = Liferay.Language.get('restore');
-					var title = (restore) ? minimizeKey : restoreKey;
+					var title = (restore) ? Liferay.Language.get('minimize') : Liferay.Language.get('restore');
 
 					var link = jQuery(el);
 					var img = link.find('img');
@@ -252,6 +250,9 @@ Liferay.Portlet = {
 					else {
 						imgSrc = imgSrc.replace(/minimize.png$/, 'restore.png');
 					}
+
+					img.attr('alt', title);
+					img.attr('title', title);
 
 					link.attr('title', title);
 					img.attr('src', imgSrc);
