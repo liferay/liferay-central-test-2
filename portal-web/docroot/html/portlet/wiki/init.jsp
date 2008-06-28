@@ -54,6 +54,7 @@
 <%@ page import="com.liferay.portlet.wiki.model.impl.WikiPageImpl" %>
 <%@ page import="com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.wiki.service.WikiPageServiceUtil" %>
 <%@ page import="com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.wiki.service.permission.WikiNodePermission" %>
 <%@ page import="com.liferay.portlet.wiki.service.permission.WikiPagePermission" %>

@@ -245,6 +245,23 @@ int count = 0;
 					<liferay-ui:icon image="forward" message="move" url="<%= movePageURL.toString() %>" label="<%= true %>" />
 				</c:if>
 
+				<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) && WikiNodePermission.contains(permissionChecker, wikiPage.getNodeId(), ActionKeys.ADD_PAGE) %>">
+
+					<%
+					PortletURL copyPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
+
+					copyPageURL.setParameter("struts_action", "/wiki/edit_page");
+					copyPageURL.setParameter("redirect", viewPageURL.toString());
+					copyPageURL.setParameter("nodeId", String.valueOf(wikiPage.getNodeId()));
+					copyPageURL.setParameter("title", StringPool.BLANK);
+					copyPageURL.setParameter("templateNodeId", String.valueOf(wikiPage.getNodeId()));
+					copyPageURL.setParameter("templateTitle", wikiPage.getTitle());
+					copyPageURL.setParameter("editTitle", "1");
+					%>
+
+					<liferay-ui:icon image="copy" message="copy" url="<%= copyPageURL.toString() %>" label="<%= true %>" />
+				</c:if>
+
 				<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.DELETE) %>">
 
 					<%
