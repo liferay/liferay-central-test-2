@@ -123,16 +123,16 @@ public class CalendarUtil {
 			pattern = "EEEE";
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("days_");
-		sm.append(pattern);
-		sm.append("_");
-		sm.append(locale.getLanguage());
-		sm.append("_");
-		sm.append(locale.getCountry());
+		sb.append("days_");
+		sb.append(pattern);
+		sb.append("_");
+		sb.append(locale.getLanguage());
+		sb.append("_");
+		sb.append(locale.getCountry());
 
-		String key = sm.toString();
+		String key = sb.toString();
 
 		String[] days = _calendarPool.get(key);
 
@@ -264,16 +264,16 @@ public class CalendarUtil {
 			pattern = "MMMM";
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("months_");
-		sm.append(pattern);
-		sm.append("_");
-		sm.append(locale.getLanguage());
-		sm.append("_");
-		sm.append(locale.getCountry());
+		sb.append("months_");
+		sb.append(pattern);
+		sb.append("_");
+		sb.append(locale.getLanguage());
+		sb.append("_");
+		sb.append(locale.getCountry());
 
-		String key = sm.toString();
+		String key = sb.toString();
 
 		String[] months = _calendarPool.get(key);
 

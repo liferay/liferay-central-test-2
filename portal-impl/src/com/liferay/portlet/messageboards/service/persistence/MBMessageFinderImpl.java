@@ -24,7 +24,6 @@ package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
@@ -273,15 +272,15 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 			List<MBMessage> list = q.list();
 
 			if (list.size() == 0) {
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
-				sm.append("No MBMessage exists with the key {uuid=");
-				sm.append(uuid);
-				sm.append(", groupId=");
-				sm.append(groupId);
-				sm.append("}");
+				sb.append("No MBMessage exists with the key {uuid=");
+				sb.append(uuid);
+				sb.append(", groupId=");
+				sb.append(groupId);
+				sb.append("}");
 
-				throw new NoSuchMessageException(sm.toString());
+				throw new NoSuchMessageException(sb.toString());
 			}
 			else {
 				return list.get(0);
@@ -369,17 +368,17 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 	}
 
 	protected String getCategoryIds(List<Long> categoryIds) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < categoryIds.size(); i++) {
-			sm.append("categoryId = ? ");
+			sb.append("categoryId = ? ");
 
 			if ((i + 1) != categoryIds.size()) {
-				sm.append("OR ");
+				sb.append("OR ");
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 }

@@ -23,7 +23,6 @@
 package com.liferay.portlet.webform.action;
 
 import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.struts.ActionConstants;
@@ -73,7 +72,7 @@ public class ExportDataAction extends PortletAction {
 			"databaseTableName", StringPool.BLANK);
 		String title = prefs.getValue("title", "no-title");
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		List<String> fieldLabels = new ArrayList<String>();
 
@@ -84,14 +83,14 @@ public class ExportDataAction extends PortletAction {
 			if (Validator.isNotNull(fieldLabel)) {
 				fieldLabels.add(fieldLabel);
 
-				sm.append("\"");
-				sm.append(fieldLabel.replaceAll("\"", "\\\""));
-				sm.append("\";");
+				sb.append("\"");
+				sb.append(fieldLabel.replaceAll("\"", "\\\""));
+				sb.append("\";");
 			}
 		}
 
-		sm.deleteCharAt(sm.length() - 1);
-		sm.append("\n");
+		sb.deleteCharAt(sb.length() - 1);
+		sb.append("\n");
 
 		if (Validator.isNotNull(databaseTableName)) {
 			List<ExpandoRow> rows = ExpandoRowLocalServiceUtil.getRows(
@@ -106,19 +105,19 @@ public class ExportDataAction extends PortletAction {
 
 					data = data.replaceAll("\"", "\\\"");
 
-					sm.append("\"");
-					sm.append(data);
-					sm.append("\";");
+					sb.append("\"");
+					sb.append(data);
+					sb.append("\";");
 				}
 
-				sm.deleteCharAt(sm.length() - 1);
-				sm.append("\n");
+				sb.deleteCharAt(sb.length() - 1);
+				sb.append("\n");
 			}
 		}
 
 		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
 		String fileName = title + ".csv";
-		InputStream is = new ByteArrayInputStream(sm.toString().getBytes());
+		InputStream is = new ByteArrayInputStream(sb.toString().getBytes());
 		String contentType = ContentTypes.APPLICATION_TEXT;
 
 		ServletResponseUtil.sendFile(httpRes, fileName, is, contentType);

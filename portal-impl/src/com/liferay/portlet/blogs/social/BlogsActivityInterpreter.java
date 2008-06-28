@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.blogs.social;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -90,30 +89,30 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		// Body
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("<a href=\"");
-		sm.append(link);
-		sm.append("\">");
+		sb.append("<a href=\"");
+		sb.append(link);
+		sb.append("\">");
 
 		if (activityType == BlogsActivityKeys.ADD_COMMENT) {
 			long messageId = extraData.getInt("messageId");
 
 			MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
 
-			sm.append(cleanContent(message.getBody()));
+			sb.append(cleanContent(message.getBody()));
 		}
 		else if (activityType == BlogsActivityKeys.ADD_ENTRY) {
-			sm.append(entry.getTitle());
+			sb.append(entry.getTitle());
 		}
 
-		sm.append("</a><br />");
+		sb.append("</a><br />");
 
 		if (activityType == BlogsActivityKeys.ADD_ENTRY) {
-			sm.append(cleanContent(entry.getContent()));
+			sb.append(cleanContent(entry.getContent()));
 		}
 
-		String body = sm.toString();
+		String body = sb.toString();
 
 		return new SocialActivityFeedEntry(link, title, body);
 	}

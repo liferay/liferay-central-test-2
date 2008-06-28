@@ -22,8 +22,6 @@
 
 package com.liferay.util.dao.hibernate;
 
-import com.liferay.portal.kernel.util.StringMaker;
-
 /**
  * <a href="DB2Dialect.java.html"><b><i>View Source</i></b></a>
  *
@@ -38,21 +36,21 @@ public class DB2Dialect extends org.hibernate.dialect.DB2Dialect {
 			return super.getLimitString(sql, hasOffset);
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("select cursor1.* from (");
-		sm.append("select rownumber() over() as rownumber_, cursor2.* from (");
-		sm.append(sql);
-		sm.append(") as cursor2) as cursor1 where rownumber_");
+		sb.append("select cursor1.* from (");
+		sb.append("select rownumber() over() as rownumber_, cursor2.* from (");
+		sb.append(sql);
+		sb.append(") as cursor2) as cursor1 where rownumber_");
 
 		if (hasOffset) {
-			sm.append(" between ? + 1 and ?");
+			sb.append(" between ? + 1 and ?");
 		}
 		else {
-			sm.append(" <= ?");
+			sb.append(" <= ?");
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 }

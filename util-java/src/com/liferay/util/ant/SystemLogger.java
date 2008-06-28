@@ -22,8 +22,6 @@
 
 package com.liferay.util.ant;
 
-import com.liferay.portal.kernel.util.StringMaker;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
@@ -45,7 +43,7 @@ public class SystemLogger extends DefaultLogger {
 		int priority = event.getPriority();
 
 		if (priority <= msgOutputLevel) {
-			StringMaker sb = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
 			try {
 				BufferedReader reader = new BufferedReader(

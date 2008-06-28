@@ -43,13 +43,13 @@ catch (Exception e) {
 		<div class="feed">
 
 			<%
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append(HttpUtil.getProtocol(feed.getLink()));
-			sm.append(Http.PROTOCOL_DELIMITER);
-			sm.append(HttpUtil.getDomain(feed.getLink()));
+			sb.append(HttpUtil.getProtocol(feed.getLink()));
+			sb.append(Http.PROTOCOL_DELIMITER);
+			sb.append(HttpUtil.getDomain(feed.getLink()));
 
-			String baseURL = sm.toString();
+			String baseURL = sb.toString();
 
 			Date publishedDate = feed.getPublishedDate();
 			String description = feed.getDescription();

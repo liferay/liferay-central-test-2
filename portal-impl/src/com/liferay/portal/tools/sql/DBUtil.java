@@ -23,7 +23,6 @@
 package com.liferay.portal.tools.sql;
 
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
@@ -324,7 +323,7 @@ public abstract class DBUtil {
 			}
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		BufferedReader br = new BufferedReader(new StringReader(template));
 
@@ -332,12 +331,12 @@ public abstract class DBUtil {
 
 		while ((line = br.readLine()) != null) {
 			if (!line.startsWith("##")) {
-				sm.append(line);
+				sb.append(line);
 
 				if (line.endsWith(";")) {
-					String sql = sm.toString();
+					String sql = sb.toString();
 
-					sm = new StringMaker();
+					sb = new StringBuilder();
 
 					try {
 						if (!sql.equals("COMMIT_TRANSACTION;")) {
@@ -426,7 +425,7 @@ public abstract class DBUtil {
 
 			BufferedReader br = new BufferedReader(new StringReader(template));
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
 			String line = null;
 
@@ -458,18 +457,18 @@ public abstract class DBUtil {
 					include = StringUtil.replace(
 						include, TEMPLATE, getTemplate());
 
-					sm.append(include);
-					sm.append("\n\n");
+					sb.append(include);
+					sb.append("\n\n");
 				}
 				else {
-					sm.append(line);
-					sm.append("\n");
+					sb.append(line);
+					sb.append("\n");
 				}
 			}
 
 			br.close();
 
-			template = sm.toString();
+			template = sb.toString();
 		}
 
 		if (fileName.equals("indexes") && (this instanceof SybaseUtil)) {
@@ -504,20 +503,20 @@ public abstract class DBUtil {
 
 		BufferedReader br = new BufferedReader(new StringReader(template));
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		String line = null;
 
 		while ((line = br.readLine()) != null) {
 			line = line.trim();
 
-			sm.append(line);
-			sm.append("\n");
+			sb.append(line);
+			sb.append("\n");
 		}
 
 		br.close();
 
-		template = sm.toString();
+		template = sb.toString();
 		template = StringUtil.replace(template, "\n\n\n", "\n\n");
 
 		return template;
@@ -542,7 +541,7 @@ public abstract class DBUtil {
 		BufferedReader br = new BufferedReader(
 			new FileReader(new File(fileName)));
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		String line = null;
 
@@ -554,18 +553,18 @@ public abstract class DBUtil {
 					new String[] {"", ""});
 
 				if (line.endsWith(";")) {
-					sm.append(line.substring(0, line.length() - 1));
-					sm.append(eol);
+					sb.append(line.substring(0, line.length() - 1));
+					sb.append(eol);
 				}
 				else {
-					sm.append(line);
+					sb.append(line);
 				}
 			}
 		}
 
 		br.close();
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String removeBooleanIndexes(String data) throws IOException {
@@ -573,7 +572,7 @@ public abstract class DBUtil {
 
 		BufferedReader br = new BufferedReader(new StringReader(data));
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		String line = null;
 
@@ -609,20 +608,20 @@ public abstract class DBUtil {
 			}
 
 			if (append) {
-				sm.append(line);
-				sm.append("\n");
+				sb.append(line);
+				sb.append("\n");
 			}
 		}
 
 		br.close();
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String removeInserts(String data) throws IOException {
 		BufferedReader br = new BufferedReader(new StringReader(data));
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		String line = null;
 
@@ -630,20 +629,20 @@ public abstract class DBUtil {
 			if (!line.startsWith("insert into ") &&
 				!line.startsWith("update ")) {
 
-				sm.append(line);
-				sm.append("\n");
+				sb.append(line);
+				sb.append("\n");
 			}
 		}
 
 		br.close();
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String removeLongInserts(String data) throws IOException {
 		BufferedReader br = new BufferedReader(new StringReader(data));
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		String line = null;
 
@@ -653,14 +652,14 @@ public abstract class DBUtil {
 				!line.startsWith("insert into JournalStructure (") &&
 				!line.startsWith("insert into JournalTemplate (")) {
 
-				sm.append(line);
-				sm.append("\n");
+				sb.append(line);
+				sb.append("\n");
 			}
 		}
 
 		br.close();
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String removeNull(String content) {

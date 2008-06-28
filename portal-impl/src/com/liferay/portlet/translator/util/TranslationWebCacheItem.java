@@ -23,7 +23,6 @@
 package com.liferay.portlet.translator.util;
 
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.webcache.WebCacheException;
@@ -49,7 +48,7 @@ public class TranslationWebCacheItem implements WebCacheItem {
 		Translation translation = new Translation(_translationId, _fromText);
 
 		try {
-			StringMaker url = new StringMaker();
+			StringBuilder url = new StringBuilder();
 
 			url.append("http://babelfish.yahoo.com/translate_txt?");
 			url.append("ei=UTF-8&doit=done&fr=bf-res&intl=1&tt=urltext");

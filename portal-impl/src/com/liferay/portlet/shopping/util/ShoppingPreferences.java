@@ -25,7 +25,6 @@ package com.liferay.portlet.shopping.util;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -201,17 +200,17 @@ public class ShoppingPreferences {
 	public void setAlternativeShipping(String[][] alternativeShipping)
 		throws ReadOnlyException {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < alternativeShipping.length; i++) {
-			sm.append(StringUtil.merge(alternativeShipping[i]));
+			sb.append(StringUtil.merge(alternativeShipping[i]));
 
 			if ((i + 1) < alternativeShipping.length) {
-				sm.append("[$_ARRAY_$]");
+				sb.append("[$_ARRAY_$]");
 			}
 		}
 
-		_prefs.setValue("alternative-shipping", sm.toString());
+		_prefs.setValue("alternative-shipping", sb.toString());
 	}
 
 	public boolean useAlternativeShipping() {

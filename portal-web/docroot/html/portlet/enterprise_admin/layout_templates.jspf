@@ -73,43 +73,43 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Name and thumbnail
 
-	StringMaker sm = new StringMaker();
+	StringBuilder sb = new StringBuilder();
 
 	if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN)) {
-		sm.append("<a href=\"");
-		sm.append(rowURL.toString());
-		sm.append("\">");
+		sb.append("<a href=\"");
+		sb.append(rowURL.toString());
+		sb.append("\">");
 	}
 
-	sm.append("<img align=\"left\" src=\"");
-	sm.append(layoutTemplate.getContextPath());
-	sm.append(layoutTemplate.getThumbnailPath());
-	sm.append("\" style=\"margin-right: 10px\" /><b>");
-	sm.append(layoutTemplate.getName());
-	sm.append("</b>");
+	sb.append("<img align=\"left\" src=\"");
+	sb.append(layoutTemplate.getContextPath());
+	sb.append(layoutTemplate.getThumbnailPath());
+	sb.append("\" style=\"margin-right: 10px\" /><b>");
+	sb.append(layoutTemplate.getName());
+	sb.append("</b>");
 
 	if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN)) {
-		sm.append("</a>");
+		sb.append("</a>");
 	}
 
-	sm.append("<br />");
-	sm.append(LanguageUtil.get(pageContext, "package"));
-	sm.append(": ");
+	sb.append("<br />");
+	sb.append(LanguageUtil.get(pageContext, "package"));
+	sb.append(": ");
 
 	if (pluginPackage == null) {
-		sm.append(LanguageUtil.get(pageContext, "unknown"));
+		sb.append(LanguageUtil.get(pageContext, "unknown"));
 	}
 	else {
-		sm.append(pluginPackage.getName());
+		sb.append(pluginPackage.getName());
 
 		if (pluginPackage.getContext() != null) {
-			sm.append(" (");
-			sm.append(pluginPackage.getContext());
-			sm.append(")");
+			sb.append(" (");
+			sb.append(pluginPackage.getContext());
+			sb.append(")");
 		}
 	}
 
-	row.addText(sm.toString());
+	row.addText(sb.toString());
 
 	// Active
 

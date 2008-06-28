@@ -169,27 +169,27 @@ public class PropertiesUtil {
 			safeProperties = (SafeProperties)p;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		Enumeration enu = p.propertyNames();
 
 		while (enu.hasMoreElements()) {
 			String key = (String)enu.nextElement();
 
-			sm.append(key);
-			sm.append(StringPool.EQUAL);
+			sb.append(key);
+			sb.append(StringPool.EQUAL);
 
 			if (safeProperties != null) {
-				sm.append(safeProperties.getEncodedProperty(key));
+				sb.append(safeProperties.getEncodedProperty(key));
 			}
 			else {
-				sm.append(p.getProperty(key));
+				sb.append(p.getProperty(key));
 			}
 
-			sm.append(StringPool.NEW_LINE);
+			sb.append(StringPool.NEW_LINE);
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public static void trimKeys(Properties p) {

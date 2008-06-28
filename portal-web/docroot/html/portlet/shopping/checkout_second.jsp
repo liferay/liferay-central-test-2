@@ -329,7 +329,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 <%
 boolean showAvailability = PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.SHOPPING_ITEM_SHOW_AVAILABILITY);
 
-StringMaker itemIds = new StringMaker();
+StringBuilder itemIds = new StringBuilder();
 
 SearchContainer searchContainer = new SearchContainer();
 
@@ -389,34 +389,34 @@ for (int i = 0; itr.hasNext(); i++) {
 
 	// Description
 
-	StringMaker sm = new StringMaker();
+	StringBuilder sb = new StringBuilder();
 
-	sm.append(item.getName());
+	sb.append(item.getName());
 
 	if (item.isFields()) {
-		sm.append(" (");
-		sm.append(StringUtil.replace(StringUtil.merge(cartItem.getFieldsArray(), ", "), "=", ": "));
-		sm.append(")");
+		sb.append(" (");
+		sb.append(StringUtil.replace(StringUtil.merge(cartItem.getFieldsArray(), ", "), "=", ": "));
+		sb.append(")");
 	}
 
-	row.addText(sm.toString(), rowURL);
+	row.addText(sb.toString(), rowURL);
 
 	// Availability
 
-	sm = new StringMaker();
+	sb = new StringBuilder();
 
 	if (ShoppingUtil.isInStock(item, itemFields, fieldsArray, count)) {
-		sm.append("<span class=\"portlet-msg-success\">");
-		sm.append(LanguageUtil.get(pageContext, "in-stock"));
-		sm.append("</span>");
+		sb.append("<span class=\"portlet-msg-success\">");
+		sb.append(LanguageUtil.get(pageContext, "in-stock"));
+		sb.append("</span>");
 	}
 	else {
-		sm.append("<span class=\"portlet-msg-error\">");
-		sm.append(LanguageUtil.get(pageContext, "out-of-stock"));
-		sm.append("</span>");
+		sb.append("<span class=\"portlet-msg-error\">");
+		sb.append(LanguageUtil.get(pageContext, "out-of-stock"));
+		sb.append("</span>");
 	}
 
-	row.addText(sm.toString(), rowURL);
+	row.addText(sb.toString(), rowURL);
 
 	// Quantity
 

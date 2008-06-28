@@ -22,7 +22,6 @@
 
 package com.liferay.portal.tools;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.util.FileImpl;
 import com.liferay.portal.util.PropsUtil;
 
@@ -47,18 +46,18 @@ public class JavaScriptBuilder {
 		String jsProperty, String jsDir, String mergedFile) {
 
 		try {
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
 			String[] files = PropsUtil.getArray(jsProperty);
 
 			for (int i = 0; i < files.length; i++) {
 				String content = _fileUtil.read(jsDir + files[i]);
 
-				sm.append(content);
-				sm.append("\n");
+				sb.append(content);
+				sb.append("\n");
 			}
 
-			_fileUtil.write(mergedFile, sm.toString());
+			_fileUtil.write(mergedFile, sb.toString());
 		}
 		catch (Exception e) {
 			e.printStackTrace();

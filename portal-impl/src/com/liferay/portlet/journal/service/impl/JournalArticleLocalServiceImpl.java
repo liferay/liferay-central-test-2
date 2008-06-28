@@ -38,7 +38,6 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -1782,7 +1781,7 @@ public class JournalArticleLocalServiceImpl
 	protected void checkStructureField(Element el, Document contentDoc)
 		throws PortalException {
 
-		StringMaker elPath = new StringMaker();
+		StringBuilder elPath = new StringBuilder();
 
 		elPath.append(el.attributeValue("name"));
 

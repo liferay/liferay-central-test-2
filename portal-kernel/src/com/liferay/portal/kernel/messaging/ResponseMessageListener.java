@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.messaging;
 
-import com.liferay.portal.kernel.util.StringMaker;
-
 /**
  * <a href="ResponseMessageListener.java.html"><b><i>View Source</i></b></a>
  *
@@ -44,27 +42,27 @@ public class ResponseMessageListener implements MessageListener {
 
 	public synchronized String send(String message) throws MessageBusException {
 		if (message.equals(_EMTPY_MESSAGE)) {
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append("{\"lfrResponseDestination\":\"");
-			sm.append(_responseDestination.getName());
-			sm.append("\",\"lfrResponseId\":\"");
-			sm.append(_responseId);
-			sm.append("\"}");
+			sb.append("{\"lfrResponseDestination\":\"");
+			sb.append(_responseDestination.getName());
+			sb.append("\",\"lfrResponseId\":\"");
+			sb.append(_responseId);
+			sb.append("\"}");
 
-			message = sm.toString();
+			message = sb.toString();
 		}
 		else {
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append(message.substring(0, message.length() - 1));
-			sm.append(",\"lfrResponseDestination\":\"");
-			sm.append(_responseDestination.getName());
-			sm.append("\",\"lfrResponseId\":\"");
-			sm.append(_responseId);
-			sm.append("\"}");
+			sb.append(message.substring(0, message.length() - 1));
+			sb.append(",\"lfrResponseDestination\":\"");
+			sb.append(_responseDestination.getName());
+			sb.append("\",\"lfrResponseId\":\"");
+			sb.append(_responseId);
+			sb.append("\"}");
 
-			message = sm.toString();
+			message = sb.toString();
 		}
 
 		_destination.send(message);

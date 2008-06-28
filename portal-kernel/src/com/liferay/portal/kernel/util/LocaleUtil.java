@@ -148,16 +148,16 @@ public class LocaleUtil {
 			locale = _locale;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(locale.getLanguage());
+		sb.append(locale.getLanguage());
 
 		if (Validator.isNotNull(locale.getCountry())) {
-			sm.append(StringPool.UNDERLINE);
-			sm.append(locale.getCountry());
+			sb.append(StringPool.UNDERLINE);
+			sb.append(locale.getCountry());
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private String[] _toLanguageIds(Locale[] locales) {

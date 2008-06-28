@@ -22,7 +22,6 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.Map;
@@ -51,13 +50,13 @@ public class QNameUtil {
 	}
 
 	public static String getKey(String uri, String localPart) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(uri);
-		sm.append(_KEY_SEPARATOR);
-		sm.append(localPart);
+		sb.append(uri);
+		sb.append(_KEY_SEPARATOR);
+		sb.append(localPart);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public static String getPublicRenderParameterIdentifier(
@@ -143,14 +142,14 @@ public class QNameUtil {
 	}
 
 	private String _getPublicRenderParameterName(QName qName) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(PUBLIC_RENDER_PARAMETER_NAMESPACE);
-		sm.append(qName.getNamespaceURI().hashCode());
-		sm.append(StringPool.UNDERLINE);
-		sm.append(qName.getLocalPart());
+		sb.append(PUBLIC_RENDER_PARAMETER_NAMESPACE);
+		sb.append(qName.getNamespaceURI().hashCode());
+		sb.append(StringPool.UNDERLINE);
+		sb.append(qName.getLocalPart());
 
-		String publicRenderParameterName = sm.toString();
+		String publicRenderParameterName = sb.toString();
 
 		if (!_qNames.containsKey(publicRenderParameterName)) {
 			_qNames.put(publicRenderParameterName, qName);

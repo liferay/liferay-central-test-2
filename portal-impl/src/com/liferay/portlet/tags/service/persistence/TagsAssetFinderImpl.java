@@ -24,7 +24,6 @@ package com.liferay.portlet.tags.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.CalendarUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -87,25 +86,25 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append("SELECT COUNT(assetId) AS COUNT_VALUE ");
-			sm.append("FROM TagsAsset WHERE");
-			sm.append(" (1 = 1)");
+			sb.append("SELECT COUNT(assetId) AS COUNT_VALUE ");
+			sb.append("FROM TagsAsset WHERE");
+			sb.append(" (1 = 1)");
 
 			if (excludeZeroViewCount) {
-				sm.append(" AND (TagsAsset.viewCount > 0)");
+				sb.append(" AND (TagsAsset.viewCount > 0)");
 			}
 
-			sm.append("[$DATES$]");
+			sb.append("[$DATES$]");
 
 			if (groupId > 0) {
-				sm.append(" AND (TagsAsset.groupId = ?)");
+				sb.append(" AND (TagsAsset.groupId = ?)");
 			}
 
-			sm.append(getClassNameIds(classNameIds));
+			sb.append(getClassNameIds(classNameIds));
 
-			String sql = sm.toString();
+			String sql = sb.toString();
 
 			sql = getDates(sql, publishDate, expirationDate);
 
@@ -154,63 +153,63 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append("SELECT COUNT(DISTINCT assetId) AS COUNT_VALUE ");
-			sm.append("FROM TagsAsset WHERE");
+			sb.append("SELECT COUNT(DISTINCT assetId) AS COUNT_VALUE ");
+			sb.append("FROM TagsAsset WHERE");
 
 			if (entryIds.length > 0) {
-				sm.append(" TagsAsset.assetId IN (");
+				sb.append(" TagsAsset.assetId IN (");
 
 				for (int i = 0; i < entryIds.length; i++) {
-					sm.append(CustomSQLUtil.get(FIND_BY_AND_ENTRY_IDS));
+					sb.append(CustomSQLUtil.get(FIND_BY_AND_ENTRY_IDS));
 
 					if ((i + 1) < entryIds.length) {
-						sm.append(" AND TagsAsset.assetId IN (");
+						sb.append(" AND TagsAsset.assetId IN (");
 					}
 				}
 
 				for (int i = 0; i < entryIds.length; i++) {
 					if ((i + 1) < entryIds.length) {
-						sm.append(StringPool.CLOSE_PARENTHESIS);
+						sb.append(StringPool.CLOSE_PARENTHESIS);
 					}
 				}
 
 				if (excludeZeroViewCount) {
-					sm.append(" AND (TagsAsset.viewCount > 0)");
+					sb.append(" AND (TagsAsset.viewCount > 0)");
 				}
 
-				sm.append(StringPool.CLOSE_PARENTHESIS);
+				sb.append(StringPool.CLOSE_PARENTHESIS);
 			}
 			else {
-				sm.append(" (1 = 1)");
+				sb.append(" (1 = 1)");
 			}
 
 			if (notEntryIds.length > 0) {
-				sm.append(" AND (");
+				sb.append(" AND (");
 
 				for (int i = 0; i < notEntryIds.length; i++) {
-					sm.append("TagsAsset.assetId NOT IN (");
-					sm.append(CustomSQLUtil.get(FIND_BY_AND_ENTRY_IDS));
-					sm.append(StringPool.CLOSE_PARENTHESIS);
+					sb.append("TagsAsset.assetId NOT IN (");
+					sb.append(CustomSQLUtil.get(FIND_BY_AND_ENTRY_IDS));
+					sb.append(StringPool.CLOSE_PARENTHESIS);
 
 					if ((i + 1) < notEntryIds.length) {
-						sm.append(" OR ");
+						sb.append(" OR ");
 					}
 				}
 
-				sm.append(StringPool.CLOSE_PARENTHESIS);
+				sb.append(StringPool.CLOSE_PARENTHESIS);
 			}
 
-			sm.append("[$DATES$]");
+			sb.append("[$DATES$]");
 
 			if (groupId > 0) {
-				sm.append(" AND (TagsAsset.groupId = ?)");
+				sb.append(" AND (TagsAsset.groupId = ?)");
 			}
 
-			sm.append(getClassNameIds(classNameIds));
+			sb.append(getClassNameIds(classNameIds));
 
-			String sql = sm.toString();
+			String sql = sb.toString();
 
 			sql = getDates(sql, publishDate, expirationDate);
 
@@ -267,24 +266,24 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 				sql, "[$ENTRY_ID$]", getEntryIds(entryIds, StringPool.EQUAL));
 
 			if (notEntryIds.length > 0) {
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
-				sm.append(" AND (");
+				sb.append(" AND (");
 
 				for (int i = 0; i < notEntryIds.length; i++) {
-					sm.append("TagsAsset.assetId NOT IN (");
-					sm.append(CustomSQLUtil.get(FIND_BY_AND_ENTRY_IDS));
-					sm.append(StringPool.CLOSE_PARENTHESIS);
+					sb.append("TagsAsset.assetId NOT IN (");
+					sb.append(CustomSQLUtil.get(FIND_BY_AND_ENTRY_IDS));
+					sb.append(StringPool.CLOSE_PARENTHESIS);
 
 					if ((i + 1) < notEntryIds.length) {
-						sm.append(" AND ");
+						sb.append(" AND ");
 					}
 				}
 
-				sm.append(StringPool.CLOSE_PARENTHESIS);
+				sb.append(StringPool.CLOSE_PARENTHESIS);
 
 				sql = StringUtil.replace(
-					sql, "[$NOT_ENTRY_ID$]", sm.toString());
+					sql, "[$NOT_ENTRY_ID$]", sb.toString());
 			}
 			else {
 				sql = StringUtil.replace(
@@ -356,39 +355,39 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append("SELECT {TagsAsset.*} ");
-			sm.append("FROM TagsAsset WHERE");
-			sm.append(" (1 = 1)");
+			sb.append("SELECT {TagsAsset.*} ");
+			sb.append("FROM TagsAsset WHERE");
+			sb.append(" (1 = 1)");
 
 			if (excludeZeroViewCount) {
-				sm.append(" AND (TagsAsset.viewCount > 0)");
+				sb.append(" AND (TagsAsset.viewCount > 0)");
 			}
 
-			sm.append("[$DATES$]");
+			sb.append("[$DATES$]");
 
 			if (groupId > 0) {
-				sm.append(" AND (TagsAsset.groupId = ?)");
+				sb.append(" AND (TagsAsset.groupId = ?)");
 			}
 
-			sm.append(getClassNameIds(classNameIds));
+			sb.append(getClassNameIds(classNameIds));
 
-			sm.append(" ORDER BY TagsAsset.");
-			sm.append(orderByCol1);
-			sm.append(StringPool.SPACE);
-			sm.append(orderByType1);
+			sb.append(" ORDER BY TagsAsset.");
+			sb.append(orderByCol1);
+			sb.append(StringPool.SPACE);
+			sb.append(orderByType1);
 
 			if (Validator.isNotNull(orderByCol2) &&
 				!orderByCol1.equals(orderByCol2)) {
 
-				sm.append(", TagsAsset.");
-				sm.append(orderByCol2);
-				sm.append(StringPool.SPACE);
-				sm.append(orderByType2);
+				sb.append(", TagsAsset.");
+				sb.append(orderByCol2);
+				sb.append(StringPool.SPACE);
+				sb.append(orderByType2);
 			}
 
-			String sql = sm.toString();
+			String sql = sb.toString();
 
 			sql = getDates(sql, publishDate, expirationDate);
 
@@ -435,77 +434,77 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append("SELECT DISTINCT {TagsAsset.*} ");
-			sm.append("FROM TagsAsset WHERE");
+			sb.append("SELECT DISTINCT {TagsAsset.*} ");
+			sb.append("FROM TagsAsset WHERE");
 
 			if (entryIds.length > 0) {
-				sm.append(" TagsAsset.assetId IN (");
+				sb.append(" TagsAsset.assetId IN (");
 
 				for (int i = 0; i < entryIds.length; i++) {
-					sm.append(CustomSQLUtil.get(FIND_BY_AND_ENTRY_IDS));
+					sb.append(CustomSQLUtil.get(FIND_BY_AND_ENTRY_IDS));
 
 					if ((i + 1) < entryIds.length) {
-						sm.append(" AND TagsAsset.assetId IN (");
+						sb.append(" AND TagsAsset.assetId IN (");
 					}
 				}
 
 				for (int i = 0; i < entryIds.length; i++) {
 					if ((i + 1) < entryIds.length) {
-						sm.append(StringPool.CLOSE_PARENTHESIS);
+						sb.append(StringPool.CLOSE_PARENTHESIS);
 					}
 				}
 
 				if (excludeZeroViewCount) {
-					sm.append(" AND (TagsAsset.viewCount > 0)");
+					sb.append(" AND (TagsAsset.viewCount > 0)");
 				}
 
-				sm.append(StringPool.CLOSE_PARENTHESIS);
+				sb.append(StringPool.CLOSE_PARENTHESIS);
 			}
 			else {
-				sm.append(" (1 = 1)");
+				sb.append(" (1 = 1)");
 			}
 
 			if (notEntryIds.length > 0) {
-				sm.append(" AND (");
+				sb.append(" AND (");
 
 				for (int i = 0; i < notEntryIds.length; i++) {
-					sm.append("TagsAsset.assetId NOT IN (");
-					sm.append(CustomSQLUtil.get(FIND_BY_AND_ENTRY_IDS));
-					sm.append(StringPool.CLOSE_PARENTHESIS);
+					sb.append("TagsAsset.assetId NOT IN (");
+					sb.append(CustomSQLUtil.get(FIND_BY_AND_ENTRY_IDS));
+					sb.append(StringPool.CLOSE_PARENTHESIS);
 
 					if ((i + 1) < notEntryIds.length) {
-						sm.append(" OR ");
+						sb.append(" OR ");
 					}
 				}
 
-				sm.append(StringPool.CLOSE_PARENTHESIS);
+				sb.append(StringPool.CLOSE_PARENTHESIS);
 			}
 
-			sm.append("[$DATES$]");
+			sb.append("[$DATES$]");
 
 			if (groupId > 0) {
-				sm.append(" AND (TagsAsset.groupId = ?)");
+				sb.append(" AND (TagsAsset.groupId = ?)");
 			}
 
-			sm.append(getClassNameIds(classNameIds));
+			sb.append(getClassNameIds(classNameIds));
 
-			sm.append(" ORDER BY TagsAsset.");
-			sm.append(orderByCol1);
-			sm.append(StringPool.SPACE);
-			sm.append(orderByType1);
+			sb.append(" ORDER BY TagsAsset.");
+			sb.append(orderByCol1);
+			sb.append(StringPool.SPACE);
+			sb.append(orderByType1);
 
 			if (Validator.isNotNull(orderByCol2) &&
 				!orderByCol1.equals(orderByCol2)) {
 
-				sm.append(", TagsAsset.");
-				sm.append(orderByCol2);
-				sm.append(StringPool.SPACE);
-				sm.append(orderByType2);
+				sb.append(", TagsAsset.");
+				sb.append(orderByCol2);
+				sb.append(StringPool.SPACE);
+				sb.append(orderByType2);
 			}
 
-			String sql = sm.toString();
+			String sql = sb.toString();
 
 			sql = getDates(sql, publishDate, expirationDate);
 
@@ -571,24 +570,24 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 				sql, "[$ENTRY_ID$]", getEntryIds(entryIds, StringPool.EQUAL));
 
 			if (notEntryIds.length > 0) {
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
-				sm.append(" AND (");
+				sb.append(" AND (");
 
 				for (int i = 0; i < notEntryIds.length; i++) {
-					sm.append("TagsAsset.assetId NOT IN (");
-					sm.append(CustomSQLUtil.get(FIND_BY_AND_ENTRY_IDS));
-					sm.append(StringPool.CLOSE_PARENTHESIS);
+					sb.append("TagsAsset.assetId NOT IN (");
+					sb.append(CustomSQLUtil.get(FIND_BY_AND_ENTRY_IDS));
+					sb.append(StringPool.CLOSE_PARENTHESIS);
 
 					if ((i + 1) < notEntryIds.length) {
-						sm.append(" AND ");
+						sb.append(" AND ");
 					}
 				}
 
-				sm.append(StringPool.CLOSE_PARENTHESIS);
+				sb.append(StringPool.CLOSE_PARENTHESIS);
 
 				sql = StringUtil.replace(
-					sql, "[$NOT_ENTRY_ID$]", sm.toString());
+					sql, "[$NOT_ENTRY_ID$]", sb.toString());
 			}
 			else {
 				sql = StringUtil.replace(
@@ -607,23 +606,23 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 				sql += " AND (TagsAsset.viewCount > 0)";
 			}
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append(" ORDER BY TagsAsset.");
-			sm.append(orderByCol1);
-			sm.append(StringPool.SPACE);
-			sm.append(orderByType1);
+			sb.append(" ORDER BY TagsAsset.");
+			sb.append(orderByCol1);
+			sb.append(StringPool.SPACE);
+			sb.append(orderByType1);
 
 			if (Validator.isNotNull(orderByCol2) &&
 				!orderByCol1.equals(orderByCol2)) {
 
-				sm.append(", TagsAsset.");
-				sm.append(orderByCol2);
-				sm.append(StringPool.SPACE);
-				sm.append(orderByType2);
+				sb.append(", TagsAsset.");
+				sb.append(orderByCol2);
+				sb.append(StringPool.SPACE);
+				sb.append(orderByType2);
 			}
 
-			sql += sm.toString();
+			sql += sb.toString();
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -663,31 +662,31 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 
 			String sql = CustomSQLUtil.get(FIND_BY_VIEW_COUNT);
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
 			for (int i = 0; i < classNameId.length; i++) {
-				sm.append("(TagsAsset.classNameId = ?)");
+				sb.append("(TagsAsset.classNameId = ?)");
 
 				if ((i+1) < classNameId.length) {
-					sm.append(" OR ");
+					sb.append(" OR ");
 				}
 			}
 
 			sql = StringUtil.replace(
-				sql, "(TagsAsset.classNameId = ?)", sm.toString());
+				sql, "(TagsAsset.classNameId = ?)", sb.toString());
 
-			sm = new StringMaker();
+			sb = new StringBuilder();
 
-			sm.append(" ORDER BY TagsAsset.viewCount");
+			sb.append(" ORDER BY TagsAsset.viewCount");
 
 			if (asc) {
-				sm.append(" ASC");
+				sb.append(" ASC");
 			}
 			else {
-				sm.append(" DESC");
+				sb.append(" DESC");
 			}
 
-			sql += sm.toString();
+			sql += sb.toString();
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -739,61 +738,61 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 	}
 
 	protected String getClassNameIds(long[] classNameIds) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		if (classNameIds.length > 0) {
-			sm.append(" AND (");
+			sb.append(" AND (");
 
 			for (int i = 0; i < classNameIds.length; i++) {
-				sm.append("classNameId = ?");
+				sb.append("classNameId = ?");
 
 				if (i > 0) {
-					sm.append(" AND ");
+					sb.append(" AND ");
 				}
 			}
 
-			sm.append(") ");
+			sb.append(") ");
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getDates(
 		String sql, Date publishDate, Date expirationDate) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		if (publishDate != null) {
-			sm.append(" AND (publishDate IS NULL OR publishDate < ?)");
+			sb.append(" AND (publishDate IS NULL OR publishDate < ?)");
 		}
 
 		if (expirationDate != null) {
-			sm.append(" AND (expirationDate IS NULL OR expirationDate > ?)");
+			sb.append(" AND (expirationDate IS NULL OR expirationDate > ?)");
 		}
 
-		sql = StringUtil.replace(sql, "[$DATES$]", sm.toString());
+		sql = StringUtil.replace(sql, "[$DATES$]", sb.toString());
 
 		return sql;
 	}
 
 	protected String getEntryIds(long[] entryIds, String operator) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < entryIds.length; i++) {
-			sm.append("TagsEntry.entryId ");
-			sm.append(operator);
-			sm.append(" ? ");
+			sb.append("TagsEntry.entryId ");
+			sb.append(operator);
+			sb.append(" ? ");
 
 			if ((i + 1) != entryIds.length) {
-				sm.append("OR ");
+				sb.append("OR ");
 			}
 		}
 
-		if (sm.length() == 0) {
-			sm.append("(1 = 1)");
+		if (sb.length() == 0) {
+			sb.append("(1 = 1)");
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected void setClassNamedIds(QueryPos qPos, long[] classNameIds) {

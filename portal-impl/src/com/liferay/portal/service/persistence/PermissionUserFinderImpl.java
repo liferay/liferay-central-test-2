@@ -23,7 +23,6 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.User;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
@@ -253,26 +252,26 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append("(");
-			sm.append(CustomSQLUtil.get(FIND_BY_ADMIN_ROLE));
-			sm.append(") UNION (");
-			sm.append(CustomSQLUtil.get(FIND_BY_USER_PERMISSION));
-			sm.append(") UNION (");
-			sm.append(CustomSQLUtil.get(FIND_BY_GROUP_PERMISSION));
-			sm.append(") UNION (");
-			sm.append(CustomSQLUtil.get(FIND_BY_ORG_PERMISSION));
-			sm.append(") UNION (");
-			sm.append(CustomSQLUtil.get(FIND_BY_USER_ROLE));
-			sm.append(") UNION (");
-			sm.append(CustomSQLUtil.get(FIND_BY_GROUP_ROLE));
-			sm.append(") UNION (");
-			sm.append(CustomSQLUtil.get(FIND_BY_ORG_ROLE));
-			sm.append(") ");
-			sm.append("ORDER BY lastName ASC, firstName ASC, middleName ASC ");
+			sb.append("(");
+			sb.append(CustomSQLUtil.get(FIND_BY_ADMIN_ROLE));
+			sb.append(") UNION (");
+			sb.append(CustomSQLUtil.get(FIND_BY_USER_PERMISSION));
+			sb.append(") UNION (");
+			sb.append(CustomSQLUtil.get(FIND_BY_GROUP_PERMISSION));
+			sb.append(") UNION (");
+			sb.append(CustomSQLUtil.get(FIND_BY_ORG_PERMISSION));
+			sb.append(") UNION (");
+			sb.append(CustomSQLUtil.get(FIND_BY_USER_ROLE));
+			sb.append(") UNION (");
+			sb.append(CustomSQLUtil.get(FIND_BY_GROUP_ROLE));
+			sb.append(") UNION (");
+			sb.append(CustomSQLUtil.get(FIND_BY_ORG_ROLE));
+			sb.append(") ");
+			sb.append("ORDER BY lastName ASC, firstName ASC, middleName ASC ");
 
-			String sql = sm.toString();
+			String sql = sb.toString();
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
@@ -341,18 +340,18 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append("(");
-			sm.append(CustomSQLUtil.get(FIND_BY_ADMIN_ROLE));
-			sm.append(") UNION (");
-			sm.append(CustomSQLUtil.get(FIND_BY_USER_PERMISSION));
-			sm.append(") UNION (");
-			sm.append(CustomSQLUtil.get(FIND_BY_ORG_GROUP_PERMISSION));
-			sm.append(") ");
-			sm.append("ORDER BY lastName ASC, firstName ASC, middleName ASC ");
+			sb.append("(");
+			sb.append(CustomSQLUtil.get(FIND_BY_ADMIN_ROLE));
+			sb.append(") UNION (");
+			sb.append(CustomSQLUtil.get(FIND_BY_USER_PERMISSION));
+			sb.append(") UNION (");
+			sb.append(CustomSQLUtil.get(FIND_BY_ORG_GROUP_PERMISSION));
+			sb.append(") ");
+			sb.append("ORDER BY lastName ASC, firstName ASC, middleName ASC ");
 
-			String sql = sm.toString();
+			String sql = sb.toString();
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 

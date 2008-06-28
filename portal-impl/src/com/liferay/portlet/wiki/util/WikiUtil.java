@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -232,20 +231,20 @@ public class WikiUtil {
 	}
 
 	public static String getMailId(String mx, long nodeId, long pageId) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(StringPool.LESS_THAN);
-		sm.append(POP_PORTLET_PREFIX);
-		sm.append(nodeId);
-		sm.append(StringPool.PERIOD);
-		sm.append(pageId);
-		sm.append(StringPool.AT);
-		sm.append(PropsValues.POP_SERVER_SUBDOMAIN);
-		sm.append(StringPool.PERIOD);
-		sm.append(mx);
-		sm.append(StringPool.GREATER_THAN);
+		sb.append(StringPool.LESS_THAN);
+		sb.append(POP_PORTLET_PREFIX);
+		sb.append(nodeId);
+		sb.append(StringPool.PERIOD);
+		sb.append(pageId);
+		sb.append(StringPool.AT);
+		sb.append(PropsValues.POP_SERVER_SUBDOMAIN);
+		sb.append(StringPool.PERIOD);
+		sb.append(mx);
+		sb.append(StringPool.GREATER_THAN);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public static List<WikiNode> getNodes(RenderRequest req)

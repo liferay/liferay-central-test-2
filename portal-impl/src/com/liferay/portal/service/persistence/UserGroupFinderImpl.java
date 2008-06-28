@@ -25,7 +25,6 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.NoSuchUserGroupException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -234,7 +233,7 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 			return StringPool.BLANK;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 
@@ -245,11 +244,11 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
-				sm.append(getJoin(key));
+				sb.append(getJoin(key));
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getJoin(String key) {
@@ -281,7 +280,7 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 			return StringPool.BLANK;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 
@@ -292,11 +291,11 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
-				sm.append(getWhere(key));
+				sb.append(getWhere(key));
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getWhere(String key) {
@@ -316,12 +315,12 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 			int pos = join.indexOf("WHERE");
 
 			if (pos != -1) {
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
-				sm.append(join.substring(pos + 5, join.length()));
-				sm.append(" AND ");
+				sb.append(join.substring(pos + 5, join.length()));
+				sb.append(" AND ");
 
-				join = sm.toString();
+				join = sb.toString();
 			}
 			else {
 				join = StringPool.BLANK;

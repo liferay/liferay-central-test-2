@@ -23,7 +23,6 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.util.JavaConstants;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
@@ -69,7 +68,7 @@ public class InputPermissionsParamsTag extends TagSupport {
 				ResourceActionsUtil.getModelResourceGuestUnsupportedActions(
 					_modelName);
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
 			for (int i = 0; i < supportedActions.size(); i++) {
 				String action = supportedActions.get(i);
@@ -86,22 +85,22 @@ public class InputPermissionsParamsTag extends TagSupport {
 
 				if (group.isCommunity() || group.isOrganization()) {
 					if (communityChecked) {
-						sm.append(StringPool.AMPERSAND);
-						sm.append(res.getNamespace());
-						sm.append("communityPermissions=");
-						sm.append(action);
+						sb.append(StringPool.AMPERSAND);
+						sb.append(res.getNamespace());
+						sb.append("communityPermissions=");
+						sb.append(action);
 					}
 				}
 
 				if (guestChecked) {
-					sm.append(StringPool.AMPERSAND);
-					sm.append(res.getNamespace());
-					sm.append("guestPermissions=");
-					sm.append(action);
+					sb.append(StringPool.AMPERSAND);
+					sb.append(res.getNamespace());
+					sb.append("guestPermissions=");
+					sb.append(action);
 				}
 			}
 
-			pageContext.getOut().print(sm.toString());
+			pageContext.getOut().print(sb.toString());
 
 			return EVAL_PAGE;
 		}

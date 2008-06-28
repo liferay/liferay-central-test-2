@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.portlet.BaseFriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -57,38 +56,38 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 			String title = portletURL.getParameter("title");
 
 			if (Validator.isNotNull(nodeId) || Validator.isNotNull(nodeName)) {
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
-				sm.append(StringPool.SLASH);
-				sm.append(_MAPPING);
-				sm.append(StringPool.SLASH);
+				sb.append(StringPool.SLASH);
+				sb.append(_MAPPING);
+				sb.append(StringPool.SLASH);
 
 				if (Validator.isNotNull(nodeId)) {
-					sm.append(nodeId);
+					sb.append(nodeId);
 
 					portletURL.addParameterIncludedInPath("nodeId");
 				}
 				else if (Validator.isNotNull(nodeName)) {
-					sm.append(nodeName);
+					sb.append(nodeName);
 
 					portletURL.addParameterIncludedInPath("nodeName");
 				}
 
 				if (Validator.isNotNull(title)) {
-					sm.append(StringPool.SLASH);
-					sm.append(HttpUtil.encodeURL(title));
+					sb.append(StringPool.SLASH);
+					sb.append(HttpUtil.encodeURL(title));
 
 					portletURL.addParameterIncludedInPath("title");
 
 					WindowState windowState = portletURL.getWindowState();
 
 					if (!windowState.equals(WindowState.NORMAL)) {
-						sm.append(StringPool.SLASH);
-						sm.append(windowState);
+						sb.append(StringPool.SLASH);
+						sb.append(windowState);
 					}
 				}
 
-				friendlyURLPath = sm.toString();
+				friendlyURLPath = sb.toString();
 			}
 		}
 

@@ -27,7 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
@@ -689,42 +688,42 @@ public class PortalUtil {
 	}
 
 	public static void renderPage(
-			StringMaker sm, ServletContext ctx, HttpServletRequest req,
+			StringBuilder sb, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, String path)
 		throws IOException, ServletException {
 
-		getPortal().renderPage(sm, ctx, req, res, path);
+		getPortal().renderPage(sb, ctx, req, res, path);
 	}
 
 	public static void renderPortlet(
-			StringMaker sm, ServletContext ctx, HttpServletRequest req,
+			StringBuilder sb, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, Portlet portlet, String queryString)
 		throws IOException, ServletException {
 
 		getPortal().renderPortlet(
-			sm, ctx, req, res, portlet, queryString);
+			sb, ctx, req, res, portlet, queryString);
 	}
 
 	public static void renderPortlet(
-			StringMaker sm, ServletContext ctx, HttpServletRequest req,
+			StringBuilder sb, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, Portlet portlet, String queryString,
 			String columnId, Integer columnPos, Integer columnCount)
 		throws IOException, ServletException {
 
 		getPortal().renderPortlet(
-			sm, ctx, req, res, portlet, queryString, columnId, columnPos,
+			sb, ctx, req, res, portlet, queryString, columnId, columnPos,
 			columnCount);
 	}
 
 	public static void renderPortlet(
-			StringMaker sm, ServletContext ctx, HttpServletRequest req,
+			StringBuilder sb, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, Portlet portlet, String queryString,
 			String columnId, Integer columnPos, Integer columnCount,
 			String path)
 		throws IOException, ServletException {
 
 		getPortal().renderPortlet(
-			sm, ctx, req, res, portlet, queryString, columnId, columnPos,
+			sb, ctx, req, res, portlet, queryString, columnId, columnPos,
 			columnCount, path);
 	}
 

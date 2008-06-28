@@ -23,7 +23,6 @@
 package com.liferay.portal.servlet.taglib.portlet;
 
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -73,7 +72,7 @@ public class RenderURLParamsTagUtil {
 	private static String _toParamsString(PortletURL portletURL)
 		throws Exception {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		String url = portletURL.toString();
 
@@ -98,16 +97,16 @@ public class RenderURLParamsTagUtil {
 
 					value = HttpUtil.decodeURL(value);
 
-					sm.append("<input name=\"");
-					sm.append(key);
-					sm.append("\" type=\"hidden\" value=\"");
-					sm.append(value);
-					sm.append("\" />");
+					sb.append("<input name=\"");
+					sb.append(key);
+					sb.append("\" type=\"hidden\" value=\"");
+					sb.append(value);
+					sb.append("\" />");
 				}
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static Log _log = LogFactory.getLog(ActionURLTagUtil.class);

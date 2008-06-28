@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
@@ -590,13 +589,13 @@ public class LuceneUtil {
 	}
 
 	private String _getPath(long companyId) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(PropsValues.LUCENE_DIR);
-		sm.append(companyId);
-		sm.append(StringPool.SLASH);
+		sb.append(PropsValues.LUCENE_DIR);
+		sb.append(companyId);
+		sb.append(StringPool.SLASH);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private String _getTableName(long companyId) {

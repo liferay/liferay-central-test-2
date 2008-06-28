@@ -23,7 +23,6 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
@@ -69,15 +68,15 @@ public class DLFileShortcutFinderImpl implements DLFileShortcutFinder {
 			List<DLFileShortcut> list = q.list();
 
 			if (list.size() == 0) {
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
-				sm.append("No DLFileShortcut exists with the key {uuid=");
-				sm.append(uuid);
-				sm.append(", groupId=");
-				sm.append(groupId);
-				sm.append("}");
+				sb.append("No DLFileShortcut exists with the key {uuid=");
+				sb.append(uuid);
+				sb.append(", groupId=");
+				sb.append(groupId);
+				sb.append("}");
 
-				throw new NoSuchFileShortcutException(sm.toString());
+				throw new NoSuchFileShortcutException(sb.toString());
 			}
 			else {
 				return list.get(0);

@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.calendar.model.CalEvent;
@@ -166,14 +165,14 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected String getEventPath(PortletDataContext context, CalEvent event) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.CALENDAR));
-		sm.append("/events/");
-		sm.append(event.getEventId());
-		sm.append(".xml");
+		sb.append(context.getPortletPath(PortletKeys.CALENDAR));
+		sb.append("/events/");
+		sb.append(event.getEventId());
+		sb.append(".xml");
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected void importEvent(PortletDataContext context, CalEvent event)

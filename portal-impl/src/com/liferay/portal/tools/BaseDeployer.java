@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
@@ -784,11 +783,11 @@ public class BaseDeployer {
 			double webXmlVersion, File srcFile, String displayName)
 		throws Exception {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("<display-name>");
-		sm.append(displayName);
-		sm.append("</display-name>");
+		sb.append("<display-name>");
+		sb.append(displayName);
+		sb.append("</display-name>");
 
 		boolean hasTaglib = false;
 
@@ -803,121 +802,121 @@ public class BaseDeployer {
 		}
 
 		if (hasTaglib && (webXmlVersion > 2.3)) {
-			sm.append("<jsp-config>");
+			sb.append("<jsp-config>");
 		}
 
 		if (Validator.isNotNull(portletTaglibDTD)) {
-			sm.append("<taglib>");
-			sm.append(
+			sb.append("<taglib>");
+			sb.append(
 				"<taglib-uri>http://java.sun.com/portlet_2_0</taglib-uri>");
-			sm.append("<taglib-location>");
-			sm.append("/WEB-INF/tld/liferay-portlet.tld");
-			sm.append("</taglib-location>");
-			sm.append("</taglib>");
+			sb.append("<taglib-location>");
+			sb.append("/WEB-INF/tld/liferay-portlet.tld");
+			sb.append("</taglib-location>");
+			sb.append("</taglib>");
 		}
 
 		if (Validator.isNotNull(portletExtTaglibDTD)) {
-			sm.append("<taglib>");
-			sm.append("<taglib-uri>");
-			sm.append("http://liferay.com/tld/portlet");
-			sm.append("</taglib-uri>");
-			sm.append("<taglib-location>");
-			sm.append("/WEB-INF/tld/liferay-portlet-ext.tld");
-			sm.append("</taglib-location>");
-			sm.append("</taglib>");
+			sb.append("<taglib>");
+			sb.append("<taglib-uri>");
+			sb.append("http://liferay.com/tld/portlet");
+			sb.append("</taglib-uri>");
+			sb.append("<taglib-location>");
+			sb.append("/WEB-INF/tld/liferay-portlet-ext.tld");
+			sb.append("</taglib-location>");
+			sb.append("</taglib>");
 		}
 
 		if (Validator.isNotNull(securityTaglibDTD)) {
-			sm.append("<taglib>");
-			sm.append("<taglib-uri>");
-			sm.append("http://liferay.com/tld/security");
-			sm.append("</taglib-uri>");
-			sm.append("<taglib-location>");
-			sm.append("/WEB-INF/tld/liferay-security.tld");
-			sm.append("</taglib-location>");
-			sm.append("</taglib>");
+			sb.append("<taglib>");
+			sb.append("<taglib-uri>");
+			sb.append("http://liferay.com/tld/security");
+			sb.append("</taglib-uri>");
+			sb.append("<taglib-location>");
+			sb.append("/WEB-INF/tld/liferay-security.tld");
+			sb.append("</taglib-location>");
+			sb.append("</taglib>");
 		}
 
 		if (Validator.isNotNull(themeTaglibDTD)) {
-			sm.append("<taglib>");
-			sm.append("<taglib-uri>http://liferay.com/tld/theme</taglib-uri>");
-			sm.append("<taglib-location>");
-			sm.append("/WEB-INF/tld/liferay-theme.tld");
-			sm.append("</taglib-location>");
-			sm.append("</taglib>");
+			sb.append("<taglib>");
+			sb.append("<taglib-uri>http://liferay.com/tld/theme</taglib-uri>");
+			sb.append("<taglib-location>");
+			sb.append("/WEB-INF/tld/liferay-theme.tld");
+			sb.append("</taglib-location>");
+			sb.append("</taglib>");
 		}
 
 		if (Validator.isNotNull(uiTaglibDTD)) {
-			sm.append("<taglib>");
-			sm.append("<taglib-uri>http://liferay.com/tld/ui</taglib-uri>");
-			sm.append("<taglib-location>");
-			sm.append("/WEB-INF/tld/liferay-ui.tld");
-			sm.append("</taglib-location>");
-			sm.append("</taglib>");
+			sb.append("<taglib>");
+			sb.append("<taglib-uri>http://liferay.com/tld/ui</taglib-uri>");
+			sb.append("<taglib-location>");
+			sb.append("/WEB-INF/tld/liferay-ui.tld");
+			sb.append("</taglib-location>");
+			sb.append("</taglib>");
 		}
 
 		if (Validator.isNotNull(utilTaglibDTD)) {
-			sm.append("<taglib>");
-			sm.append("<taglib-uri>http://liferay.com/tld/util</taglib-uri>");
-			sm.append("<taglib-location>");
-			sm.append("/WEB-INF/tld/liferay-util.tld");
-			sm.append("</taglib-location>");
-			sm.append("</taglib>");
+			sb.append("<taglib>");
+			sb.append("<taglib-uri>http://liferay.com/tld/util</taglib-uri>");
+			sb.append("<taglib-location>");
+			sb.append("/WEB-INF/tld/liferay-util.tld");
+			sb.append("</taglib-location>");
+			sb.append("</taglib>");
 		}
 
 		if (hasTaglib && (webXmlVersion > 2.3)) {
-			sm.append("</jsp-config>");
+			sb.append("</jsp-config>");
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getPluginPackageLicensesXml(List<License> licenses) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < licenses.size(); i++) {
 			License license = licenses.get(i);
 
 			if (i == 0) {
-				sm.append("\r\n");
+				sb.append("\r\n");
 			}
 
-			sm.append("\t\t<license osi-approved=\"");
-			sm.append(license.isOsiApproved());
-			sm.append("\">");
-			sm.append(license.getName());
-			sm.append("</license>\r\n");
+			sb.append("\t\t<license osi-approved=\"");
+			sb.append(license.isOsiApproved());
+			sb.append("\">");
+			sb.append(license.getName());
+			sb.append("</license>\r\n");
 
 			if ((i + 1) == licenses.size()) {
-				sm.append("\t");
+				sb.append("\t");
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getPluginPackageLiferayVersionsXml(
 		List<String> liferayVersions) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < liferayVersions.size(); i++) {
 			String liferayVersion = liferayVersions.get(i);
 
 			if (i == 0) {
-				sm.append("\r\n");
+				sb.append("\r\n");
 			}
 
-			sm.append("\t\t<liferay-version>");
-			sm.append(liferayVersion);
-			sm.append("</liferay-version>\r\n");
+			sb.append("\t\t<liferay-version>");
+			sb.append(liferayVersion);
+			sb.append("</liferay-version>\r\n");
 
 			if ((i + 1) == liferayVersions.size()) {
-				sm.append("\t");
+				sb.append("\t");
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected Properties getPluginPackageProperties(File srcFile)
@@ -936,25 +935,25 @@ public class BaseDeployer {
 	}
 
 	protected String getPluginPackageTagsXml(List<String> tags) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < tags.size(); i++) {
 			String tag = tags.get(i);
 
 			if (i == 0) {
-				sm.append("\r\n");
+				sb.append("\r\n");
 			}
 
-			sm.append("\t\t<tag>");
-			sm.append(tag);
-			sm.append("</tag>\r\n");
+			sb.append("\t\t<tag>");
+			sb.append(tag);
+			sb.append("</tag>\r\n");
 
 			if ((i + 1) == tags.size()) {
-				sm.append("\t");
+				sb.append("\t");
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected void mergeDirectory(File mergeDir, File targetDir) {

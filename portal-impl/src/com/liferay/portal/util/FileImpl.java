@@ -25,7 +25,6 @@ package com.liferay.portal.util;
 import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.FileComparator;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
@@ -174,19 +173,19 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	}
 
 	public File createTempFile(String extension) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(SystemProperties.get(SystemProperties.TMP_DIR));
-		sm.append(StringPool.SLASH);
-		sm.append(Time.getTimestamp());
-		sm.append(PwdGenerator.getPassword(PwdGenerator.KEY2, 8));
+		sb.append(SystemProperties.get(SystemProperties.TMP_DIR));
+		sb.append(StringPool.SLASH);
+		sb.append(Time.getTimestamp());
+		sb.append(PwdGenerator.getPassword(PwdGenerator.KEY2, 8));
 
 		if (Validator.isNotNull(extension)) {
-			sm.append(StringPool.PERIOD);
-			sm.append(extension);
+			sb.append(StringPool.PERIOD);
+			sb.append(extension);
 		}
 
-		return new File(sm.toString());
+		return new File(sb.toString());
 	}
 
 	public boolean delete(String file) {
@@ -317,7 +316,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 							" for extension " + fileExt);
 				}
 
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
 				BufferedReader reader = new BufferedReader(
 					extractor.extractText(is, contentType, encoding));
@@ -325,12 +324,12 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 				int i;
 
 				while ((i = reader.read()) != -1) {
-					sm.append((char)i);
+					sb.append((char)i);
 				}
 
 				reader.close();
 
-				text = sm.toString();
+				text = sb.toString();
 			}
 			else {
 				if (_log.isInfoEnabled()) {

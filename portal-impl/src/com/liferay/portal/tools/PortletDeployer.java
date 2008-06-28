@@ -25,7 +25,6 @@ package com.liferay.portal.tools;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Plugin;
 import com.liferay.portal.util.DocumentUtil;
@@ -153,7 +152,7 @@ public class PortletDeployer extends BaseDeployer {
 	protected String getServletContent(File portletXML, File webXML)
 		throws Exception {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		// Add wrappers for portlets
 
@@ -170,30 +169,30 @@ public class PortletDeployer extends BaseDeployer {
 				portlet.elementText("portlet-name"));
 			String portletClass = portlet.elementText("portlet-class");
 
-			sm.append("<servlet>");
-			sm.append("<servlet-name>");
-			sm.append(portletName);
-			sm.append("</servlet-name>");
-			sm.append("<servlet-class>");
-			sm.append("com.liferay.portal.kernel.servlet.PortletServlet");
-			sm.append("</servlet-class>");
-			sm.append("<init-param>");
-			sm.append("<param-name>portlet-class</param-name>");
-			sm.append("<param-value>");
-			sm.append(portletClass);
-			sm.append("</param-value>");
-			sm.append("</init-param>");
-			sm.append("<load-on-startup>0</load-on-startup>");
-			sm.append("</servlet>");
+			sb.append("<servlet>");
+			sb.append("<servlet-name>");
+			sb.append(portletName);
+			sb.append("</servlet-name>");
+			sb.append("<servlet-class>");
+			sb.append("com.liferay.portal.kernel.servlet.PortletServlet");
+			sb.append("</servlet-class>");
+			sb.append("<init-param>");
+			sb.append("<param-name>portlet-class</param-name>");
+			sb.append("<param-value>");
+			sb.append(portletClass);
+			sb.append("</param-value>");
+			sb.append("</init-param>");
+			sb.append("<load-on-startup>0</load-on-startup>");
+			sb.append("</servlet>");
 
-			sm.append("<servlet-mapping>");
-			sm.append("<servlet-name>");
-			sm.append(portletName);
-			sm.append("</servlet-name>");
-			sm.append("<url-pattern>/");
-			sm.append(portletName);
-			sm.append("/*</url-pattern>");
-			sm.append("</servlet-mapping>");
+			sb.append("<servlet-mapping>");
+			sb.append("<servlet-name>");
+			sb.append(portletName);
+			sb.append("</servlet-name>");
+			sb.append("<url-pattern>/");
+			sb.append(portletName);
+			sb.append("/*</url-pattern>");
+			sb.append("</servlet-mapping>");
 		}
 
 		// Make sure there is a company id specified
@@ -224,30 +223,30 @@ public class PortletDeployer extends BaseDeployer {
 				(servletClass.equals(
 					"com.liferay.portal.servlet.SharedServletWrapper"))) {
 
-				sm.append("<servlet>");
+				sb.append("<servlet>");
 
 				if (icon != null) {
-					sm.append("<icon>");
-					sm.append(icon);
-					sm.append("</icon>");
+					sb.append("<icon>");
+					sb.append(icon);
+					sb.append("</icon>");
 				}
 
 				if (servletName != null) {
-					sm.append("<servlet-name>");
-					sm.append(servletName);
-					sm.append("</servlet-name>");
+					sb.append("<servlet-name>");
+					sb.append(servletName);
+					sb.append("</servlet-name>");
 				}
 
 				if (displayName != null) {
-					sm.append("<display-name>");
-					sm.append(displayName);
-					sm.append("</display-name>");
+					sb.append("<display-name>");
+					sb.append(displayName);
+					sb.append("</display-name>");
 				}
 
 				if (description != null) {
-					sm.append("<description>");
-					sm.append(description);
-					sm.append("</description>");
+					sb.append("<description>");
+					sb.append(description);
+					sb.append("</description>");
 				}
 
 				Iterator<Element> itr2 = initParams.iterator();
@@ -261,9 +260,9 @@ public class PortletDeployer extends BaseDeployer {
 					if ((paramName != null) &&
 						(paramName.equals("servlet-class"))) {
 
-						sm.append("<servlet-class>");
-						sm.append(paramValue);
-						sm.append("</servlet-class>");
+						sb.append("<servlet-class>");
+						sb.append(paramValue);
+						sb.append("</servlet-class>");
 					}
 				}
 
@@ -279,37 +278,37 @@ public class PortletDeployer extends BaseDeployer {
 					if ((paramName != null) &&
 						(!paramName.equals("servlet-class"))) {
 
-						sm.append("<init-param>");
-						sm.append("<param-name>");
-						sm.append(paramName);
-						sm.append("</param-name>");
+						sb.append("<init-param>");
+						sb.append("<param-name>");
+						sb.append(paramName);
+						sb.append("</param-name>");
 
 						if (paramValue != null) {
-							sm.append("<param-value>");
-							sm.append(paramValue);
-							sm.append("</param-value>");
+							sb.append("<param-value>");
+							sb.append(paramValue);
+							sb.append("</param-value>");
 						}
 
 						if (paramDesc != null) {
-							sm.append("<description>");
-							sm.append(paramDesc);
-							sm.append("</description>");
+							sb.append("<description>");
+							sb.append(paramDesc);
+							sb.append("</description>");
 						}
 
-						sm.append("</init-param>");
+						sb.append("</init-param>");
 					}
 				}
 
 				if (loadOnStartup != null) {
-					sm.append("<load-on-startup>");
-					sm.append(loadOnStartup);
-					sm.append("</load-on-startup>");
+					sb.append("<load-on-startup>");
+					sb.append(loadOnStartup);
+					sb.append("</load-on-startup>");
 				}
 
 				if (runAs != null) {
-					sm.append("<run-as>");
-					sm.append(runAs);
-					sm.append("</run-as>");
+					sb.append("<run-as>");
+					sb.append(runAs);
+					sb.append("</run-as>");
 				}
 
 				itr2 = securityRoleRefs.iterator();
@@ -321,34 +320,34 @@ public class PortletDeployer extends BaseDeployer {
 					String roleName = roleRef.elementText("role-name");
 					String roleLink = roleRef.elementText("role-link");
 
-					sm.append("<security-role-ref>");
+					sb.append("<security-role-ref>");
 
 					if (roleDesc != null) {
-						sm.append("<description>");
-						sm.append(roleDesc);
-						sm.append("</description>");
+						sb.append("<description>");
+						sb.append(roleDesc);
+						sb.append("</description>");
 					}
 
 					if (roleName != null) {
-						sm.append("<role-name>");
-						sm.append(roleName);
-						sm.append("</role-name>");
+						sb.append("<role-name>");
+						sb.append(roleName);
+						sb.append("</role-name>");
 					}
 
 					if (roleLink != null) {
-						sm.append("<role-link>");
-						sm.append(roleLink);
-						sm.append("</role-link>");
+						sb.append("<role-link>");
+						sb.append(roleLink);
+						sb.append("</role-link>");
 					}
 
-					sm.append("</security-role-ref>");
+					sb.append("</security-role-ref>");
 				}
 
-				sm.append("</servlet>");
+				sb.append("</servlet>");
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected void processPluginPackageProperties(

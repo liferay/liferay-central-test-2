@@ -80,25 +80,25 @@ List hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(layout.get
 		<span style="font-size: xx-small;">
 
 		<%
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(PortalUtil.getLayoutFriendlyURL(layout, themeDisplay));
-		sm.append("/journal_content/");
+		sb.append(PortalUtil.getLayoutFriendlyURL(layout, themeDisplay));
+		sb.append("/journal_content/");
 
 		if (Validator.isNotNull(targetPortletId)) {
-			sm.append(targetPortletId);
+			sb.append(targetPortletId);
 		}
 		else {
-			sm.append(PortletKeys.JOURNAL_CONTENT);
+			sb.append(PortletKeys.JOURNAL_CONTENT);
 		}
 
-		sm.append("/");
-		sm.append(String.valueOf(articleGroupId));
-		sm.append("/");
-		sm.append(articleId);
+		sb.append("/");
+		sb.append(String.valueOf(articleGroupId));
+		sb.append("/");
+		sb.append(articleId);
 		%>
 
-		<br /><a href="<%= sm.toString() %>"><%= themeDisplay.getPortalURL() %><%= StringUtil.shorten(sm.toString(), 100) %></a>
+		<br /><a href="<%= sb.toString() %>"><%= themeDisplay.getPortalURL() %><%= StringUtil.shorten(sb.toString(), 100) %></a>
 
 		</span>
 	</c:otherwise>

@@ -23,7 +23,6 @@
 package com.liferay.portal.kernel.search;
 
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -191,26 +190,26 @@ public class DocumentImpl implements Document {
 	}
 
 	public String toString() {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(StringPool.OPEN_CURLY_BRACE);
+		sb.append(StringPool.OPEN_CURLY_BRACE);
 
 		int i = 0;
 
 		for (Field field : _fields.values()) {
 			if (i > 0) {
-				sm.append(StringPool.COMMA);
-				sm.append(StringPool.SPACE);
+				sb.append(StringPool.COMMA);
+				sb.append(StringPool.SPACE);
 			}
 
-			sm.append(field.getName());
-			sm.append(StringPool.EQUAL);
-			sm.append(field.getValues());
+			sb.append(field.getName());
+			sb.append(StringPool.EQUAL);
+			sb.append(field.getValues());
 		}
 
-		sm.append(StringPool.CLOSE_CURLY_BRACE);
+		sb.append(StringPool.CLOSE_CURLY_BRACE);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static final String _UID_PORTLET = "_PORTLET_";

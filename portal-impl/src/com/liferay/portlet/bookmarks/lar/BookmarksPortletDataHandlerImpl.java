@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.bookmarks.NoSuchEntryException;
@@ -265,27 +264,27 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 	protected String getEntryPath(
 		PortletDataContext context, BookmarksEntry entry) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.BOOKMARKS));
-		sm.append("/entries/");
-		sm.append(entry.getEntryId());
-		sm.append(".xml");
+		sb.append(context.getPortletPath(PortletKeys.BOOKMARKS));
+		sb.append("/entries/");
+		sb.append(entry.getEntryId());
+		sb.append(".xml");
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getFolderPath(
 		PortletDataContext context, BookmarksFolder folder) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.BOOKMARKS));
-		sm.append("/folders/");
-		sm.append(folder.getFolderId());
-		sm.append(".xml");
+		sb.append(context.getPortletPath(PortletKeys.BOOKMARKS));
+		sb.append("/folders/");
+		sb.append(folder.getFolderId());
+		sb.append(".xml");
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected void importEntry(

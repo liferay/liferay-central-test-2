@@ -36,7 +36,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
@@ -614,17 +613,17 @@ public class PluginPackageUtil {
 
 		RemotePluginPackageRepository repository = null;
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(repositoryURL);
-		sm.append(StringPool.SLASH);
-		sm.append(REPOSITORY_XML_FILENAME_PREFIX);
-		sm.append(StringPool.DASH);
-		sm.append(ReleaseInfo.getVersion());
-		sm.append(StringPool.PERIOD);
-		sm.append(REPOSITORY_XML_FILENAME_EXTENSION);
+		sb.append(repositoryURL);
+		sb.append(StringPool.SLASH);
+		sb.append(REPOSITORY_XML_FILENAME_PREFIX);
+		sb.append(StringPool.DASH);
+		sb.append(ReleaseInfo.getVersion());
+		sb.append(StringPool.PERIOD);
+		sb.append(REPOSITORY_XML_FILENAME_EXTENSION);
 
-		String pluginsXmlURL = sm.toString();
+		String pluginsXmlURL = sb.toString();
 
 		try {
 			HttpImpl httpImpl = (HttpImpl)HttpUtil.getHttp();
@@ -650,15 +649,15 @@ public class PluginPackageUtil {
 									"Checking general repository");
 					}
 
-					sm = new StringMaker();
+					sb = new StringBuilder();
 
-					sm.append(repositoryURL);
-					sm.append(StringPool.SLASH);
-					sm.append(REPOSITORY_XML_FILENAME_PREFIX);
-					sm.append(StringPool.PERIOD);
-					sm.append(REPOSITORY_XML_FILENAME_EXTENSION);
+					sb.append(repositoryURL);
+					sb.append(StringPool.SLASH);
+					sb.append(REPOSITORY_XML_FILENAME_PREFIX);
+					sb.append(StringPool.PERIOD);
+					sb.append(REPOSITORY_XML_FILENAME_EXTENSION);
 
-					pluginsXmlURL = sm.toString();
+					pluginsXmlURL = sb.toString();
 
 					getFileMethod = new GetMethod(pluginsXmlURL);
 

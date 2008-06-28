@@ -22,7 +22,6 @@
 
 package com.liferay.util.bridges.wai;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.Collections;
@@ -65,17 +64,17 @@ public class WAIHttpServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public String getRequestURI() {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(getContextPath());
-		sm.append(_pathInfo);
+		sb.append(getContextPath());
+		sb.append(_pathInfo);
 
 		if (getQueryString().trim().length() > 0) {
-			sm.append(StringPool.QUESTION);
-			sm.append(getQueryString());
+			sb.append(StringPool.QUESTION);
+			sb.append(getQueryString());
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public StringBuffer getRequestURL() {

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.model;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -39,22 +38,22 @@ public class ContactConstants {
 	public static String getFullName(
 		String firstName, String middleName, String lastName) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		if (Validator.isNull(middleName)) {
-			sm.append(firstName);
-			sm.append(StringPool.SPACE);
-			sm.append(lastName);
+			sb.append(firstName);
+			sb.append(StringPool.SPACE);
+			sb.append(lastName);
 		}
 		else {
-			sm.append(firstName);
-			sm.append(StringPool.SPACE);
-			sm.append(middleName);
-			sm.append(StringPool.SPACE);
-			sm.append(lastName);
+			sb.append(firstName);
+			sb.append(StringPool.SPACE);
+			sb.append(middleName);
+			sb.append(StringPool.SPACE);
+			sb.append(lastName);
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 }

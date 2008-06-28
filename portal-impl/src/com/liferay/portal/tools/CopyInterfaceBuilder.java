@@ -22,7 +22,6 @@
 
 package com.liferay.portal.tools;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.tools.comparator.JavaMethodComparator;
 import com.liferay.portal.tools.servicebuilder.ServiceBuilder;
@@ -78,19 +77,19 @@ public class CopyInterfaceBuilder {
 
 		Arrays.sort(methods, new JavaMethodComparator());
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		// Package
 
-		sm.append("package " + javaClass.getPackage() + ";");
+		sb.append("package " + javaClass.getPackage() + ";");
 
 		// Imports
 
-		sm.append("[$IMPORTS$]");
+		sb.append("[$IMPORTS$]");
 
 		// Class declaration
 
-		sm.append("public class Copy" + javaClass.getName() + " implements " + javaClass.getName() + " {");
+		sb.append("public class Copy" + javaClass.getName() + " implements " + javaClass.getName() + " {");
 
 		String varName = "_" + TextFormatter.format(javaClass.getName(), TextFormatter.I);
 
@@ -108,23 +107,23 @@ public class CopyInterfaceBuilder {
 
 				imports.add(returnValueName);
 
-				sm.append("public " + javaMethod.getReturns().getJavaClass().getName() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
+				sb.append("public " + javaMethod.getReturns().getJavaClass().getName() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
 
 				JavaParameter[] parameters = javaMethod.getParameters();
 
 				for (int j = 0; j < parameters.length; j++) {
 					JavaParameter javaParameter = parameters[j];
 
-					sm.append(javaParameter.getType().getJavaClass().getName() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
+					sb.append(javaParameter.getType().getJavaClass().getName() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
 
 					imports.add(javaParameter.getType().getValue());
 
 					if ((j + 1) != parameters.length) {
-						sm.append(", ");
+						sb.append(", ");
 					}
 				}
 
-				sm.append(")");
+				sb.append(")");
 
 				Type[] thrownExceptions = javaMethod.getExceptions();
 
@@ -139,55 +138,55 @@ public class CopyInterfaceBuilder {
 				}
 
 				if (newExceptions.size() > 0) {
-					sm.append(" throws ");
+					sb.append(" throws ");
 
 					Iterator<String> itr = newExceptions.iterator();
 
 					while (itr.hasNext()) {
-						sm.append(itr.next());
+						sb.append(itr.next());
 
 						if (itr.hasNext()) {
-							sm.append(", ");
+							sb.append(", ");
 						}
 					}
 				}
 
-				sm.append("{");
+				sb.append("{");
 
 				if (!returnValueName.equals("void")) {
-					sm.append("return ");
+					sb.append("return ");
 				}
 
-				sm.append(varName + "." + methodName + "(");
+				sb.append(varName + "." + methodName + "(");
 
 				for (int j = 0; j < parameters.length; j++) {
 					JavaParameter javaParameter = parameters[j];
 
-					sm.append(javaParameter.getName());
+					sb.append(javaParameter.getName());
 
 					if ((j + 1) != parameters.length) {
-						sm.append(", ");
+						sb.append(", ");
 					}
 				}
 
-				sm.append(");");
-				sm.append("}");
+				sb.append(");");
+				sb.append("}");
 			}
 		}
 
 		// Fields
 
-		sm.append("private " + javaClass.getName() + " " + varName + ";");
+		sb.append("private " + javaClass.getName() + " " + varName + ";");
 
 		// Class close brace
 
-		sm.append("}");
+		sb.append("}");
 
 		// Imports
 
-		String content = sm.toString();
+		String content = sb.toString();
 
-		sm = new StringMaker();
+		sb = new StringBuilder();
 
 		Iterator<String> itr = imports.iterator();
 
@@ -195,11 +194,11 @@ public class CopyInterfaceBuilder {
 			String importClass = itr.next();
 
 			if (!importClass.equals("boolean") && !importClass.equals("double") && !importClass.equals("int") && !importClass.equals("long") && !importClass.equals("short") && !importClass.equals("void")) {
-				sm.append("import " + importClass + ";");
+				sb.append("import " + importClass + ";");
 			}
 		}
 
-		content = StringUtil.replace(content, "[$IMPORTS$]", sm.toString());
+		content = StringUtil.replace(content, "[$IMPORTS$]", sb.toString());
 
 		// Write file
 

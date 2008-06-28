@@ -25,7 +25,6 @@ package com.liferay.portlet.enterpriseadmin.action;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ProgressTracker;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.RoleImpl;
@@ -107,17 +106,17 @@ public class ExportUsersAction extends Action {
 
 		progressTracker.updateProgress(percentage);
 
-		StringMaker sm = new StringMaker(users.size() * 50);
+		StringBuilder sb = new StringBuilder(users.size() * 50);
 
 		Iterator<User> itr = users.iterator();
 
 		for (int i = 0; itr.hasNext(); i++) {
 			User user = itr.next();
 
-			sm.append(user.getFullName());
-			sm.append(StringPool.COMMA);
-			sm.append(user.getEmailAddress());
-			sm.append(StringPool.NEW_LINE);
+			sb.append(user.getFullName());
+			sb.append(StringPool.COMMA);
+			sb.append(user.getEmailAddress());
+			sb.append(StringPool.NEW_LINE);
 
 			percentage = Math.min(10 + (i * 90) / total, 99);
 
@@ -126,7 +125,7 @@ public class ExportUsersAction extends Action {
 
 		progressTracker.finish();
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 }

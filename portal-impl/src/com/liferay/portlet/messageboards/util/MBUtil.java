@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -354,37 +353,37 @@ public class MBUtil {
 	}
 
 	public static String getMailId(String mx, long categoryId, long messageId) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(StringPool.LESS_THAN);
-		sm.append(POP_PORTLET_PREFIX);
-		sm.append(categoryId);
-		sm.append(StringPool.PERIOD);
-		sm.append(messageId);
-		sm.append(StringPool.AT);
-		sm.append(PropsValues.POP_SERVER_SUBDOMAIN);
-		sm.append(StringPool.PERIOD);
-		sm.append(mx);
-		sm.append(StringPool.GREATER_THAN);
+		sb.append(StringPool.LESS_THAN);
+		sb.append(POP_PORTLET_PREFIX);
+		sb.append(categoryId);
+		sb.append(StringPool.PERIOD);
+		sb.append(messageId);
+		sb.append(StringPool.AT);
+		sb.append(PropsValues.POP_SERVER_SUBDOMAIN);
+		sb.append(StringPool.PERIOD);
+		sb.append(mx);
+		sb.append(StringPool.GREATER_THAN);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public static String getMailingListAddress(
 		long categoryId, long messageId, String mx) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(POP_PORTLET_PREFIX);
-		sm.append(categoryId);
-		sm.append(StringPool.PERIOD);
-		sm.append(messageId);
-		sm.append(StringPool.AT);
-		sm.append(PropsValues.POP_SERVER_SUBDOMAIN);
-		sm.append(StringPool.PERIOD);
-		sm.append(mx);
+		sb.append(POP_PORTLET_PREFIX);
+		sb.append(categoryId);
+		sb.append(StringPool.PERIOD);
+		sb.append(messageId);
+		sb.append(StringPool.AT);
+		sb.append(PropsValues.POP_SERVER_SUBDOMAIN);
+		sb.append(StringPool.PERIOD);
+		sb.append(mx);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public static long getMessageId(String mailId) {

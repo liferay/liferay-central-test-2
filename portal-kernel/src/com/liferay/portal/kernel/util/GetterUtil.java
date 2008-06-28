@@ -346,7 +346,7 @@ public class GetterUtil {
 		if (value != null) {
 			value = value.trim();
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
 			char[] charArray = value.toCharArray();
 
@@ -357,11 +357,11 @@ public class GetterUtil {
 					(charArray[i] == CharPool.UPPER_CASE_E) ||
 					(charArray[i] == CharPool.LOWER_CASE_E)) {
 
-					sm.append(charArray[i]);
+					sb.append(charArray[i]);
 				}
 			}
 
-			value = sm.toString();
+			value = sb.toString();
 		}
 
 		return value;

@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.SafeProperties;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -101,13 +100,13 @@ public class DLFileEntryImpl
 	}
 
 	public String getTitleWithExtension() {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(getTitle());
-		sm.append(StringPool.PERIOD);
-		sm.append(FileUtil.getExtension(getName()));
+		sb.append(getTitle());
+		sb.append(StringPool.PERIOD);
+		sb.append(FileUtil.getExtension(getName()));
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public String getExtraSettings() {
@@ -149,12 +148,12 @@ public class DLFileEntryImpl
 	}
 
 	public String getLuceneProperties() {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(getTitle());
-		sm.append(StringPool.SPACE);
-		sm.append(getDescription());
-		sm.append(StringPool.SPACE);
+		sb.append(getTitle());
+		sb.append(StringPool.SPACE);
+		sb.append(getDescription());
+		sb.append(StringPool.SPACE);
 
 		Properties extraSettingsProps = getExtraSettingsProperties();
 
@@ -166,10 +165,10 @@ public class DLFileEntryImpl
 
 			String value = GetterUtil.getString((String)entry.getValue());
 
-			sm.append(value);
+			sb.append(value);
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static Log _log = LogFactory.getLog(DLFileEntryImpl.class);

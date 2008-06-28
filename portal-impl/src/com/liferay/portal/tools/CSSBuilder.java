@@ -22,7 +22,6 @@
 
 package com.liferay.portal.tools;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.util.FileImpl;
 
 import java.io.File;
@@ -70,7 +69,7 @@ public class CSSBuilder {
 	}
 
 	public String replaceImports(String cssDir, String s) throws Exception {
-		StringMaker sm = new StringMaker(s.length());
+		StringBuilder sb = new StringBuilder(s.length());
 
 		int pos = 0;
 
@@ -79,12 +78,12 @@ public class CSSBuilder {
 			int y = s.indexOf(_END, x + _BEGIN.length());
 
 			if ((x == -1) || (y == -1)) {
-				sm.append(s.substring(pos, s.length()));
+				sb.append(s.substring(pos, s.length()));
 
 				break;
 			}
 			else {
-				sm.append(s.substring(pos, x));
+				sb.append(s.substring(pos, x));
 
 				String importFile = s.substring(x + _BEGIN.length(), y);
 
@@ -93,13 +92,13 @@ public class CSSBuilder {
 
 				importContent = replaceImports(cssDir, importContent);
 
-				sm.append(importContent);
+				sb.append(importContent);
 
 				pos = y + _END.length();
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static final String _BEGIN = "@import url(";

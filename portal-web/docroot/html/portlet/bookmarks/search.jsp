@@ -125,13 +125,13 @@ try {
 
 		BookmarksFolder folder = entry.getFolder();
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(themeDisplay.getPathMain());
-		sm.append("/bookmarks/open_entry?entryId=");
-		sm.append(entry.getEntryId());
+		sb.append(themeDisplay.getPathMain());
+		sb.append("/bookmarks/open_entry?entryId=");
+		sb.append(entry.getEntryId());
 
-		String rowHREF = sm.toString();
+		String rowHREF = sb.toString();
 
 		TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, folder.getName(), rowHREF, "_blank", entry.getComments());
 

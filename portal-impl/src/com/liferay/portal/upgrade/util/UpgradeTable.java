@@ -22,8 +22,6 @@
 
 package com.liferay.portal.upgrade.util;
 
-import com.liferay.portal.kernel.util.StringMaker;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -36,11 +34,11 @@ import java.sql.ResultSet;
  */
 public interface UpgradeTable {
 
-	public void appendColumn(StringMaker sm, Object value, boolean last)
+	public void appendColumn(StringBuilder sb, Object value, boolean last)
 		throws Exception;
 
 	public void appendColumn(
-			StringMaker sm, ResultSet rs, String name, Integer type,
+			StringBuilder sb, ResultSet rs, String name, Integer type,
 			boolean last)
 		throws Exception;
 

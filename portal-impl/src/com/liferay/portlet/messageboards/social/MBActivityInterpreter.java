@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.messageboards.social;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -80,16 +79,16 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		// Body
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("<a href=\"");
-		sm.append(link);
-		sm.append("\">");
-		sm.append(cleanContent(message.getSubject()));
-		sm.append("</a><br />");
-		sm.append(cleanContent(message.getBody()));
+		sb.append("<a href=\"");
+		sb.append(link);
+		sb.append("\">");
+		sb.append(cleanContent(message.getSubject()));
+		sb.append("</a><br />");
+		sb.append(cleanContent(message.getBody()));
 
-		String body = sm.toString();
+		String body = sb.toString();
 
 		return new SocialActivityFeedEntry(link, title, body);
 	}

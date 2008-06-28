@@ -22,7 +22,6 @@
 
 package com.liferay.portal.upgrade.util;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.tools.comparator.ColumnsComparator;
 import com.liferay.portal.upgrade.StagnantRowException;
@@ -48,73 +47,64 @@ public class DefaultUpgradeTableImpl
 		this(tableName, columns, null);
 	}
 
-	public DefaultUpgradeTableImpl(String tableName, Object[][] columns,
-								   UpgradeColumn upgradeColumn1) {
+	public DefaultUpgradeTableImpl(
+		String tableName, Object[][] columns, UpgradeColumn upgradeColumn1) {
 
 		this(tableName, columns, upgradeColumn1, null);
 	}
 
-	public DefaultUpgradeTableImpl(String tableName, Object[][] columns,
-								   UpgradeColumn upgradeColumn1,
-								   UpgradeColumn upgradeColumn2) {
+	public DefaultUpgradeTableImpl(
+		String tableName, Object[][] columns, UpgradeColumn upgradeColumn1,
+		UpgradeColumn upgradeColumn2) {
 
 		this(tableName, columns, upgradeColumn1, upgradeColumn2, null);
 	}
 
-	public DefaultUpgradeTableImpl(String tableName, Object[][] columns,
-								   UpgradeColumn upgradeColumn1,
-								   UpgradeColumn upgradeColumn2,
-								   UpgradeColumn upgradeColumn3) {
+	public DefaultUpgradeTableImpl(
+		String tableName, Object[][] columns, UpgradeColumn upgradeColumn1,
+		UpgradeColumn upgradeColumn2, UpgradeColumn upgradeColumn3) {
 
 		this(
 			tableName, columns, upgradeColumn1, upgradeColumn2, upgradeColumn3,
 			null);
 	}
 
-	public DefaultUpgradeTableImpl(String tableName, Object[][] columns,
-								   UpgradeColumn upgradeColumn1,
-								   UpgradeColumn upgradeColumn2,
-								   UpgradeColumn upgradeColumn3,
-								   UpgradeColumn upgradeColumn4) {
+	public DefaultUpgradeTableImpl(
+		String tableName, Object[][] columns, UpgradeColumn upgradeColumn1,
+		UpgradeColumn upgradeColumn2, UpgradeColumn upgradeColumn3,
+		UpgradeColumn upgradeColumn4) {
 
 		this(
 			tableName, columns, upgradeColumn1, upgradeColumn2, upgradeColumn3,
 			upgradeColumn4, null);
 	}
 
-	public DefaultUpgradeTableImpl(String tableName, Object[][] columns,
-								   UpgradeColumn upgradeColumn1,
-								   UpgradeColumn upgradeColumn2,
-								   UpgradeColumn upgradeColumn3,
-								   UpgradeColumn upgradeColumn4,
-								   UpgradeColumn upgradeColumn5) {
+	public DefaultUpgradeTableImpl(
+		String tableName, Object[][] columns, UpgradeColumn upgradeColumn1,
+		UpgradeColumn upgradeColumn2, UpgradeColumn upgradeColumn3,
+		UpgradeColumn upgradeColumn4, UpgradeColumn upgradeColumn5) {
 
 		this(
 			tableName, columns, upgradeColumn1, upgradeColumn2, upgradeColumn3,
 			upgradeColumn4, upgradeColumn5, null);
 	}
 
-	public DefaultUpgradeTableImpl(String tableName, Object[][] columns,
-								   UpgradeColumn upgradeColumn1,
-								   UpgradeColumn upgradeColumn2,
-								   UpgradeColumn upgradeColumn3,
-								   UpgradeColumn upgradeColumn4,
-								   UpgradeColumn upgradeColumn5,
-								   UpgradeColumn upgradeColumn6) {
+	public DefaultUpgradeTableImpl(
+		String tableName, Object[][] columns, UpgradeColumn upgradeColumn1,
+		UpgradeColumn upgradeColumn2, UpgradeColumn upgradeColumn3,
+		UpgradeColumn upgradeColumn4, UpgradeColumn upgradeColumn5,
+		UpgradeColumn upgradeColumn6) {
 
 		this(
 			tableName, columns, upgradeColumn1, upgradeColumn2, upgradeColumn3,
 			upgradeColumn4, upgradeColumn5, upgradeColumn6, null);
 	}
 
-	public DefaultUpgradeTableImpl(String tableName, Object[][] columns,
-								   UpgradeColumn upgradeColumn1,
-								   UpgradeColumn upgradeColumn2,
-								   UpgradeColumn upgradeColumn3,
-								   UpgradeColumn upgradeColumn4,
-								   UpgradeColumn upgradeColumn5,
-								   UpgradeColumn upgradeColumn6,
-								   UpgradeColumn upgradeColumn7) {
+	public DefaultUpgradeTableImpl(
+		String tableName, Object[][] columns, UpgradeColumn upgradeColumn1,
+		UpgradeColumn upgradeColumn2, UpgradeColumn upgradeColumn3,
+		UpgradeColumn upgradeColumn4, UpgradeColumn upgradeColumn5,
+		UpgradeColumn upgradeColumn6, UpgradeColumn upgradeColumn7) {
 
 		this(
 			tableName, columns, upgradeColumn1, upgradeColumn2, upgradeColumn3,
@@ -122,15 +112,12 @@ public class DefaultUpgradeTableImpl
 			null);
 	}
 
-	public DefaultUpgradeTableImpl(String tableName, Object[][] columns,
-								   UpgradeColumn upgradeColumn1,
-								   UpgradeColumn upgradeColumn2,
-								   UpgradeColumn upgradeColumn3,
-								   UpgradeColumn upgradeColumn4,
-								   UpgradeColumn upgradeColumn5,
-								   UpgradeColumn upgradeColumn6,
-								   UpgradeColumn upgradeColumn7,
-								   UpgradeColumn upgradeColumn8) {
+	public DefaultUpgradeTableImpl(
+		String tableName, Object[][] columns, UpgradeColumn upgradeColumn1,
+		UpgradeColumn upgradeColumn2, UpgradeColumn upgradeColumn3,
+		UpgradeColumn upgradeColumn4, UpgradeColumn upgradeColumn5,
+		UpgradeColumn upgradeColumn6, UpgradeColumn upgradeColumn7,
+		UpgradeColumn upgradeColumn8) {
 
 		this(
 			tableName, columns, upgradeColumn1, upgradeColumn2, upgradeColumn3,
@@ -138,16 +125,12 @@ public class DefaultUpgradeTableImpl
 			upgradeColumn8, null);
 	}
 
-	public DefaultUpgradeTableImpl(String tableName, Object[][] columns,
-								   UpgradeColumn upgradeColumn1,
-								   UpgradeColumn upgradeColumn2,
-								   UpgradeColumn upgradeColumn3,
-								   UpgradeColumn upgradeColumn4,
-								   UpgradeColumn upgradeColumn5,
-								   UpgradeColumn upgradeColumn6,
-								   UpgradeColumn upgradeColumn7,
-								   UpgradeColumn upgradeColumn8,
-								   UpgradeColumn upgradeColumn9) {
+	public DefaultUpgradeTableImpl(
+		String tableName, Object[][] columns, UpgradeColumn upgradeColumn1,
+		UpgradeColumn upgradeColumn2, UpgradeColumn upgradeColumn3,
+		UpgradeColumn upgradeColumn4, UpgradeColumn upgradeColumn5,
+		UpgradeColumn upgradeColumn6, UpgradeColumn upgradeColumn7,
+		UpgradeColumn upgradeColumn8, UpgradeColumn upgradeColumn9) {
 
 		this(
 			tableName, columns, upgradeColumn1, upgradeColumn2, upgradeColumn3,
@@ -155,17 +138,13 @@ public class DefaultUpgradeTableImpl
 			upgradeColumn8, upgradeColumn9, null);
 	}
 
-	public DefaultUpgradeTableImpl(String tableName, Object[][] columns,
-								   UpgradeColumn upgradeColumn1,
-								   UpgradeColumn upgradeColumn2,
-								   UpgradeColumn upgradeColumn3,
-								   UpgradeColumn upgradeColumn4,
-								   UpgradeColumn upgradeColumn5,
-								   UpgradeColumn upgradeColumn6,
-								   UpgradeColumn upgradeColumn7,
-								   UpgradeColumn upgradeColumn8,
-								   UpgradeColumn upgradeColumn9,
-								   UpgradeColumn upgradeColumn10) {
+	public DefaultUpgradeTableImpl(
+		String tableName, Object[][] columns, UpgradeColumn upgradeColumn1,
+		UpgradeColumn upgradeColumn2, UpgradeColumn upgradeColumn3,
+		UpgradeColumn upgradeColumn4, UpgradeColumn upgradeColumn5,
+		UpgradeColumn upgradeColumn6, UpgradeColumn upgradeColumn7,
+		UpgradeColumn upgradeColumn8, UpgradeColumn upgradeColumn9,
+		UpgradeColumn upgradeColumn10) {
 
 		super(tableName);
 
@@ -210,7 +189,7 @@ public class DefaultUpgradeTableImpl
 	}
 
 	public String getExportedData(ResultSet rs) throws Exception {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		Object[][] columns = getColumns();
 
@@ -223,7 +202,7 @@ public class DefaultUpgradeTableImpl
 
 			if (_upgradeColumns[i] == null) {
 				appendColumn(
-					sm, rs, (String)columns[i][0], (Integer)columns[i][1],
+					sb, rs, (String)columns[i][0], (Integer)columns[i][1],
 					last);
 			}
 			else {
@@ -240,7 +219,7 @@ public class DefaultUpgradeTableImpl
 
 					_upgradeColumns[i].setNewValue(newValue);
 
-					appendColumn(sm, newValue, last);
+					appendColumn(sb, newValue, last);
 				}
 				catch (StagnantRowException sre) {
 					_upgradeColumns[i].setNewValue(null);
@@ -253,7 +232,7 @@ public class DefaultUpgradeTableImpl
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public void setColumn(

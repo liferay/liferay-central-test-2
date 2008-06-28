@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -408,32 +407,32 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 	protected String getFileEntryBinPath(
 		PortletDataContext context, DLFileEntry fileEntry) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.DOCUMENT_LIBRARY));
-		sm.append("/bin/");
-		sm.append(fileEntry.getFileEntryId());
-		sm.append(StringPool.SLASH);
-		sm.append(fileEntry.getVersion());
-		sm.append(StringPool.SLASH);
-		sm.append(fileEntry.getTitleWithExtension());
+		sb.append(context.getPortletPath(PortletKeys.DOCUMENT_LIBRARY));
+		sb.append("/bin/");
+		sb.append(fileEntry.getFileEntryId());
+		sb.append(StringPool.SLASH);
+		sb.append(fileEntry.getVersion());
+		sb.append(StringPool.SLASH);
+		sb.append(fileEntry.getTitleWithExtension());
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getFileEntryPath(
 		PortletDataContext context, DLFileEntry fileEntry) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.DOCUMENT_LIBRARY));
-		sm.append("/entries/");
-		sm.append(fileEntry.getFileEntryId());
-		sm.append(StringPool.SLASH);
-		sm.append(fileEntry.getVersion());
-		sm.append(".xml");
+		sb.append(context.getPortletPath(PortletKeys.DOCUMENT_LIBRARY));
+		sb.append("/entries/");
+		sb.append(fileEntry.getFileEntryId());
+		sb.append(StringPool.SLASH);
+		sb.append(fileEntry.getVersion());
+		sb.append(".xml");
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getFolderName(
@@ -454,15 +453,15 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			name = name.substring(0, pos);
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(name);
-		sm.append(StringPool.SPACE);
-		sm.append(StringPool.OPEN_PARENTHESIS);
-		sm.append(count);
-		sm.append(StringPool.CLOSE_PARENTHESIS);
+		sb.append(name);
+		sb.append(StringPool.SPACE);
+		sb.append(StringPool.OPEN_PARENTHESIS);
+		sb.append(count);
+		sb.append(StringPool.CLOSE_PARENTHESIS);
 
-		name = sm.toString();
+		name = sb.toString();
 
 		return getFolderName(companyId, groupId, parentFolderId, name, ++count);
 	}

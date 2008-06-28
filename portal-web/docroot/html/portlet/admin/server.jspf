@@ -153,31 +153,31 @@ numberFormat.setMinimumIntegerDigits(2);
 
 							// Logger
 
-							StringMaker sm = new StringMaker();
+							StringBuilder sb = new StringBuilder();
 
-							sm.append("<select name=\"");
-							sm.append(renderResponse.getNamespace());
-							sm.append("logLevel");
-							sm.append(name);
-							sm.append("\">");
+							sb.append("<select name=\"");
+							sb.append(renderResponse.getNamespace());
+							sb.append("logLevel");
+							sb.append(name);
+							sb.append("\">");
 
 							for (int j = 0; j < Levels.ALL_LEVELS.length; j++) {
-								sm.append("<option ");
+								sb.append("<option ");
 
 								if (level.equals(Levels.ALL_LEVELS[j])) {
-									sm.append("selected");
+									sb.append("selected");
 								}
 
-								sm.append(" value=\"");
-								sm.append(Levels.ALL_LEVELS[j]);
-								sm.append("\">");
-								sm.append(Levels.ALL_LEVELS[j]);
-								sm.append("</option>");
+								sb.append(" value=\"");
+								sb.append(Levels.ALL_LEVELS[j]);
+								sb.append("\">");
+								sb.append(Levels.ALL_LEVELS[j]);
+								sb.append("</option>");
 							}
 
-							sm.append("</select>");
+							sb.append("</select>");
 
-							row.addText(sm.toString());
+							row.addText(sb.toString());
 
 							// Add result row
 

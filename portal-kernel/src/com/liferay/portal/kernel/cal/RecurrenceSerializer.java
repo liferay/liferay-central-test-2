@@ -22,7 +22,6 @@
 
 package com.liferay.portal.kernel.cal;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.Calendar;
@@ -146,23 +145,23 @@ public class RecurrenceSerializer {
 			}
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(startDateSecond);
-		sm.append(StringPool.SPACE);
-		sm.append(startDateMinute);
-		sm.append(StringPool.SPACE);
-		sm.append(startDateHour);
-		sm.append(StringPool.SPACE);
-		sm.append(dayOfMonth);
-		sm.append(StringPool.SPACE);
-		sm.append(month);
-		sm.append(StringPool.SPACE);
-		sm.append(dayOfWeek);
-		sm.append(StringPool.SPACE);
-		sm.append(year);
+		sb.append(startDateSecond);
+		sb.append(StringPool.SPACE);
+		sb.append(startDateMinute);
+		sb.append(StringPool.SPACE);
+		sb.append(startDateHour);
+		sb.append(StringPool.SPACE);
+		sb.append(dayOfMonth);
+		sb.append(StringPool.SPACE);
+		sb.append(month);
+		sb.append(StringPool.SPACE);
+		sb.append(dayOfWeek);
+		sb.append(StringPool.SPACE);
+		sb.append(year);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 }

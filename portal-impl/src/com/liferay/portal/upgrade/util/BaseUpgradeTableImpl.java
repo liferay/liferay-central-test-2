@@ -25,7 +25,6 @@ package com.liferay.portal.upgrade.util;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -105,44 +104,44 @@ public abstract class BaseUpgradeTableImpl {
 
 	public abstract String getExportedData(ResultSet rs) throws Exception;
 
-	public void appendColumn(StringMaker sm, Object value, boolean last)
+	public void appendColumn(StringBuilder sb, Object value, boolean last)
 		throws Exception {
 
 		if (value == null) {
 			throw new UpgradeException(
 				"Nulls should never be inserted into the database. " +
-					"Attempted to append column to " + sm.toString() + ".");
+					"Attempted to append column to " + sb.toString() + ".");
 		}
 		else if (value instanceof Clob || value instanceof String) {
 			value = StringUtil.replace(
 				(String)value, SAFE_CHARS[0], SAFE_CHARS[1]);
 
-			sm.append(value);
+			sb.append(value);
 		}
 		else if (value instanceof Date) {
 			DateFormat df = DateUtil.getISOFormat();
 
-			sm.append(df.format(value));
+			sb.append(df.format(value));
 		}
 		else {
-			sm.append(value);
+			sb.append(value);
 		}
 
-		sm.append(StringPool.COMMA);
+		sb.append(StringPool.COMMA);
 
 		if (last) {
-			sm.append(StringPool.NEW_LINE);
+			sb.append(StringPool.NEW_LINE);
 		}
 	}
 
 	public void appendColumn(
-			StringMaker sm, ResultSet rs, String name, Integer type,
+			StringBuilder sb, ResultSet rs, String name, Integer type,
 			boolean last)
 		throws Exception {
 
 		Object value = getValue(rs, name, type);
 
-		appendColumn(sm, value, last);
+		appendColumn(sb, value, last);
 	}
 
 	public String getCreateSQL() throws Exception {
@@ -235,19 +234,19 @@ public abstract class BaseUpgradeTableImpl {
 					BufferedReader br = new BufferedReader(
 						clob.getCharacterStream());
 
-					StringMaker sm = new StringMaker();
+					StringBuilder sb = new StringBuilder();
 
 					String line = null;
 
 					while ((line = br.readLine()) != null) {
-						if (sm.length() != 0) {
-							sm.append(SAFE_NEWLINE_CHARACTER);
+						if (sb.length() != 0) {
+							sb.append(SAFE_NEWLINE_CHARACTER);
 						}
 
-						sm.append(line);
+						sb.append(line);
 					}
 
-					value = sm.toString();
+					value = sb.toString();
 				}
 			}
 			catch (Exception e) {

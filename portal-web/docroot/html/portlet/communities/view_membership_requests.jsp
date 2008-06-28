@@ -105,13 +105,13 @@ for (int i = 0; i < results.size(); i++) {
 
 	// User
 
-	StringMaker sm = new StringMaker();
-	sm.append(user2.getFullName());
-	sm.append(" (");
-	sm.append(user2.getEmailAddress());
-	sm.append(")");
+	StringBuilder sb = new StringBuilder();
+	sb.append(user2.getFullName());
+	sb.append(" (");
+	sb.append(user2.getEmailAddress());
+	sb.append(")");
 
-	row.addText(sm.toString());
+	row.addText(sb.toString());
 
 	// Comments
 

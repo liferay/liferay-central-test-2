@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -217,7 +216,7 @@ public class SecureFilter extends BasePortalFilter {
 				_log.debug("Securing " + completeURL);
 			}
 
-			StringMaker redirectURL = new StringMaker();
+			StringBuilder redirectURL = new StringBuilder();
 
 			redirectURL.append(Http.HTTPS_WITH_SLASH);
 			redirectURL.append(httpReq.getServerName());

@@ -132,32 +132,32 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 			}
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = pagesIteratorBegin; i <= pagesIteratorEnd; i++) {
 			if (i == curValue) {
-				sm.append("<b class='journal-article-page-number'>");
+				sb.append("<b class='journal-article-page-number'>");
 			}
 			else {
-				sm.append("<a class='journal-article-page-number' href='");
-				sm.append(_getHREF(formName, curParam, i, jsCall, url, urlAnchor));
-				sm.append("'>");
+				sb.append("<a class='journal-article-page-number' href='");
+				sb.append(_getHREF(formName, curParam, i, jsCall, url, urlAnchor));
+				sb.append("'>");
 			}
 
-			sm.append(i);
+			sb.append(i);
 
 			if (i == curValue) {
-				sm.append("</b>");
+				sb.append("</b>");
 			}
 			else {
-				sm.append("</a>");
+				sb.append("</a>");
 			}
 
-			sm.append("&nbsp;&nbsp;");
+			sb.append("&nbsp;&nbsp;");
 		}
 		%>
 
-		<%= sm.toString() %>
+		<%= sb.toString() %>
 	</div>
 </c:if>
 

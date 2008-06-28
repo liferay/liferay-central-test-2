@@ -22,7 +22,6 @@
 
 package com.liferay.portal.kernel.lar;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 /**
@@ -36,14 +35,14 @@ public class PortletDataHandlerControl {
 	public static String getNamespacedControlName(
 		String namespace, String controlName) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(StringPool.UNDERLINE);
-		sm.append(namespace);
-		sm.append(StringPool.UNDERLINE);
-		sm.append(controlName);
+		sb.append(StringPool.UNDERLINE);
+		sb.append(namespace);
+		sb.append(StringPool.UNDERLINE);
+		sb.append(controlName);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public PortletDataHandlerControl(String namespace, String controlName) {

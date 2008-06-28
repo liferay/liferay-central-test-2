@@ -468,46 +468,46 @@ if (feed != null) {
 		<select name="<portlet:namespace />feedTypeAndVersion">
 
 			<%
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
 			for (int i = 4; i < RSSUtil.RSS_VERSIONS.length; i++) {
-				sm.append("<option ");
+				sb.append("<option ");
 
 				if (feedType.equals(RSSUtil.RSS) && (feedVersion == RSSUtil.RSS_VERSIONS[i])) {
-					sm.append("selected ");
+					sb.append("selected ");
 				}
 
-				sm.append("value=\"");
-				sm.append(RSSUtil.RSS);
-				sm.append(":");
-				sm.append(RSSUtil.RSS_VERSIONS[i]);
-				sm.append("\">");
-				sm.append(LanguageUtil.get(pageContext, RSSUtil.RSS));
-				sm.append(" ");
-				sm.append(RSSUtil.RSS_VERSIONS[i]);
-				sm.append("</option>");
+				sb.append("value=\"");
+				sb.append(RSSUtil.RSS);
+				sb.append(":");
+				sb.append(RSSUtil.RSS_VERSIONS[i]);
+				sb.append("\">");
+				sb.append(LanguageUtil.get(pageContext, RSSUtil.RSS));
+				sb.append(" ");
+				sb.append(RSSUtil.RSS_VERSIONS[i]);
+				sb.append("</option>");
 			}
 
 			for (int i = 1; i < RSSUtil.ATOM_VERSIONS.length; i++) {
-				sm.append("<option ");
+				sb.append("<option ");
 
 				if (feedType.equals(RSSUtil.ATOM) && (feedVersion == RSSUtil.ATOM_VERSIONS[i])) {
-					sm.append("selected ");
+					sb.append("selected ");
 				}
 
-				sm.append("value=\"");
-				sm.append(RSSUtil.ATOM);
-				sm.append(":");
-				sm.append(RSSUtil.ATOM_VERSIONS[i]);
-				sm.append("\">");
-				sm.append(LanguageUtil.get(pageContext, RSSUtil.ATOM));
-				sm.append(" ");
-				sm.append(RSSUtil.ATOM_VERSIONS[i]);
-				sm.append("</option>");
+				sb.append("value=\"");
+				sb.append(RSSUtil.ATOM);
+				sb.append(":");
+				sb.append(RSSUtil.ATOM_VERSIONS[i]);
+				sb.append("\">");
+				sb.append(LanguageUtil.get(pageContext, RSSUtil.ATOM));
+				sb.append(" ");
+				sb.append(RSSUtil.ATOM_VERSIONS[i]);
+				sb.append("</option>");
 			}
 			%>
 
-			<%= sm.toString() %>
+			<%= sb.toString() %>
 		</select>
 	</td>
 </tr>

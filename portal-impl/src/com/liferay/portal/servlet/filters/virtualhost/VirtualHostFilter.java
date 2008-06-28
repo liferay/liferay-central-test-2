@@ -25,7 +25,6 @@ package com.liferay.portal.servlet.filters.virtualhost;
 import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Group;
@@ -180,7 +179,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 				req.setAttribute(WebKeys.LAST_PATH, lastPath);
 
-				StringMaker prefix = new StringMaker();
+				StringBuilder prefix = new StringBuilder();
 
 				if (layoutSet.isPrivateLayout()) {
 					prefix.append(PortalUtil.getPathFriendlyURLPrivateGroup());
@@ -194,7 +193,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 				prefix.append(group.getFriendlyURL());
 
-				StringMaker redirect = new StringMaker();
+				StringBuilder redirect = new StringBuilder();
 
 				redirect.append(prefix);
 				redirect.append(friendlyURL);

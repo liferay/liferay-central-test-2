@@ -22,8 +22,6 @@
 
 package com.liferay.portal.struts;
 
-import com.liferay.portal.kernel.util.StringMaker;
-
 import java.io.Serializable;
 
 import java.util.LinkedHashMap;
@@ -74,15 +72,15 @@ public class LastPath implements Serializable {
 	}
 
 	public String toString() {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("{contextPath=");
-		sm.append(_contextPath);
-		sm.append(", path=");
-		sm.append(_path);
-		sm.append("}");
+		sb.append("{contextPath=");
+		sb.append(_contextPath);
+		sb.append(", path=");
+		sb.append(_path);
+		sb.append("}");
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private String _contextPath;

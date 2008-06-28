@@ -37,7 +37,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -232,16 +231,16 @@ public class InstallPluginAction extends PortletAction {
 		String oldPluginPackagesIgnored= PrefsPropsUtil.getString(
 			PropsKeys.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED);
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(oldPluginPackagesIgnored);
-		sm.append(StringPool.NEW_LINE);
-		sm.append(pluginPackagesIgnored);
+		sb.append(oldPluginPackagesIgnored);
+		sb.append(StringPool.NEW_LINE);
+		sb.append(pluginPackagesIgnored);
 
 		PortletPreferences prefs = PrefsPropsUtil.getPreferences();
 
 		prefs.setValue(
-			PropsKeys.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED, sm.toString());
+			PropsKeys.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED, sb.toString());
 
 		prefs.store();
 
@@ -500,21 +499,21 @@ public class InstallPluginAction extends PortletAction {
 			StringPool.NEW_LINE,
 			PropsValues.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED);
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < pluginPackagesIgnored.length; i++) {
 			String packageId = pluginPackagesIgnored[i];
 
 			if (!ArrayUtil.contains(pluginPackagesUnignored, packageId)) {
-				sm.append(packageId);
-				sm.append(StringPool.NEW_LINE);
+				sb.append(packageId);
+				sb.append(StringPool.NEW_LINE);
 			}
 		}
 
 		PortletPreferences prefs = PrefsPropsUtil.getPreferences();
 
 		prefs.setValue(
-			PropsKeys.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED, sm.toString());
+			PropsKeys.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED, sb.toString());
 
 		prefs.store();
 

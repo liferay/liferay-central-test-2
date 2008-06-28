@@ -22,7 +22,6 @@
 
 package com.liferay.portal.upgrade.v5_0_2;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
@@ -64,16 +63,16 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 	}
 
 	protected long getMessageIdsCount() throws Exception {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("select count(*) from ");
-		sm.append("MBMessage childMessage ");
-		sm.append("inner join MBMessage parentMessage on ");
-		sm.append("childMessage.parentMessageId = parentMessage.messageId ");
-		sm.append("where parentMessage.categoryId != childMessage.categoryId ");
-		sm.append("or parentMessage.threadId != childMessage.threadId");
+		sb.append("select count(*) from ");
+		sb.append("MBMessage childMessage ");
+		sb.append("inner join MBMessage parentMessage on ");
+		sb.append("childMessage.parentMessageId = parentMessage.messageId ");
+		sb.append("where parentMessage.categoryId != childMessage.categoryId ");
+		sb.append("or parentMessage.threadId != childMessage.threadId");
 
-		String sql = sm.toString();
+		String sql = sb.toString();
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -98,17 +97,17 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 	}
 
 	protected void updateMessage() throws Exception {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("select childMessage.messageId, parentMessage.categoryId, ");
-		sm.append("parentMessage.threadId ");
-		sm.append("from MBMessage childMessage ");
-		sm.append("inner join MBMessage parentMessage on ");
-		sm.append("childMessage.parentMessageId = parentMessage.messageId ");
-		sm.append("where parentMessage.categoryId != childMessage.categoryId ");
-		sm.append("or parentMessage.threadId != childMessage.threadId");
+		sb.append("select childMessage.messageId, parentMessage.categoryId, ");
+		sb.append("parentMessage.threadId ");
+		sb.append("from MBMessage childMessage ");
+		sb.append("inner join MBMessage parentMessage on ");
+		sb.append("childMessage.parentMessageId = parentMessage.messageId ");
+		sb.append("where parentMessage.categoryId != childMessage.categoryId ");
+		sb.append("or parentMessage.threadId != childMessage.threadId");
 
-		String sql = sm.toString();
+		String sql = sb.toString();
 
 		Connection con = null;
 		PreparedStatement ps = null;

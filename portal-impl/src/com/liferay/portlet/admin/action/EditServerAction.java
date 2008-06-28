@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
@@ -185,7 +184,8 @@ public class EditServerAction extends PortletAction {
 			System.getProperty("java.vm.name") + " " +
 				System.getProperty("java.vm.version");
 
-		StringMaker sm = new StringMaker("Full thread dump " + jvm + "\n\n");
+		StringBuilder sb = new StringBuilder(
+			"Full thread dump " + jvm + "\n\n");
 
 		Map<Thread, StackTraceElement[]> stackTraces =
 			Thread.getAllStackTraces();
@@ -193,31 +193,31 @@ public class EditServerAction extends PortletAction {
 		for (Thread thread : stackTraces.keySet()) {
 			StackTraceElement[] elements = stackTraces.get(thread);
 
-			sm.append(StringPool.QUOTE);
-			sm.append(thread.getName());
-			sm.append(StringPool.QUOTE);
+			sb.append(StringPool.QUOTE);
+			sb.append(thread.getName());
+			sb.append(StringPool.QUOTE);
 
 			if (thread.getThreadGroup() != null) {
-				sm.append(StringPool.SPACE);
-				sm.append(StringPool.OPEN_PARENTHESIS);
-				sm.append(thread.getThreadGroup().getName());
-				sm.append(StringPool.CLOSE_PARENTHESIS);
+				sb.append(StringPool.SPACE);
+				sb.append(StringPool.OPEN_PARENTHESIS);
+				sb.append(thread.getThreadGroup().getName());
+				sb.append(StringPool.CLOSE_PARENTHESIS);
 			}
 
-			sm.append(", priority=" + thread.getPriority());
-			sm.append(", id=" + thread.getId());
-			sm.append(", state=" + thread.getState());
-			sm.append("\n");
+			sb.append(", priority=" + thread.getPriority());
+			sb.append(", id=" + thread.getId());
+			sb.append(", state=" + thread.getState());
+			sb.append("\n");
 
 			for (int i = 0; i < elements.length; i++) {
-				sm.append("\t" + elements[i] + "\n");
+				sb.append("\t" + elements[i] + "\n");
 			}
 
-			sm.append("\n");
+			sb.append("\n");
 		}
 
 		if (_log.isInfoEnabled()) {
-			_log.info(sm.toString());
+			_log.info(sb.toString());
 		}
 		else {
 			_log.error(

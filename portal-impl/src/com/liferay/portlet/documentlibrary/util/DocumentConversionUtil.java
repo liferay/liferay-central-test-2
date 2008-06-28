@@ -34,7 +34,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
@@ -73,13 +72,13 @@ public class DocumentConversionUtil {
 	}
 
 	public static String getTempFileId(long fileEntryId, double version) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(fileEntryId);
-		sm.append(StringPool.PERIOD);
-		sm.append(version);
+		sb.append(fileEntryId);
+		sb.append(StringPool.PERIOD);
+		sb.append(version);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private DocumentConversionUtil() {
@@ -116,15 +115,15 @@ public class DocumentConversionUtil {
 			return null;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(SystemProperties.get(SystemProperties.TMP_DIR));
-		sm.append("/liferay/document_conversion/");
-		sm.append(id);
-		sm.append(StringPool.PERIOD);
-		sm.append(targetExtension);
+		sb.append(SystemProperties.get(SystemProperties.TMP_DIR));
+		sb.append("/liferay/document_conversion/");
+		sb.append(id);
+		sb.append(StringPool.PERIOD);
+		sb.append(targetExtension);
 
-		String fileName = sm.toString();
+		String fileName = sb.toString();
 
 		File file = new File(fileName);
 

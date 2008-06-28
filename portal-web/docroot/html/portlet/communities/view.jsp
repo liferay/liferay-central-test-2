@@ -154,9 +154,9 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 
 		// Name
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(group.getName());
+		sb.append(group.getName());
 
 		int publicLayoutsPageCount = group.getPublicLayoutsPageCount();
 		int privateLayoutsPageCount = group.getPrivateLayoutsPageCount();
@@ -170,26 +170,26 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 		if ((tabs1.equals("communities-owned") || tabs1.equals("communities-joined")) &&
 			((publicLayoutsPageCount > 0) || (privateLayoutsPageCount > 0))) {
 
-			sm.append("<br />");
+			sb.append("<br />");
 
 			if (publicLayoutsPageCount > 0) {
 				rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 				rowURL.setParameter("privateLayout", Boolean.FALSE.toString());
 
-				sm.append("<a href=\"");
-				sm.append(rowURL.toString());
-				sm.append("\">");
-				sm.append(LanguageUtil.get(pageContext, "public-pages"));
-				sm.append(" - ");
-				sm.append(LanguageUtil.get(pageContext, "live"));
-				sm.append(" (");
-				sm.append(group.getPublicLayoutsPageCount());
-				sm.append(")");
-				sm.append("</a>");
+				sb.append("<a href=\"");
+				sb.append(rowURL.toString());
+				sb.append("\">");
+				sb.append(LanguageUtil.get(pageContext, "public-pages"));
+				sb.append(" - ");
+				sb.append(LanguageUtil.get(pageContext, "live"));
+				sb.append(" (");
+				sb.append(group.getPublicLayoutsPageCount());
+				sb.append(")");
+				sb.append("</a>");
 			}
 			else {
-				sm.append(LanguageUtil.get(pageContext, "public-pages"));
-				sm.append(" (0)");
+				sb.append(LanguageUtil.get(pageContext, "public-pages"));
+				sb.append(" (0)");
 			}
 
 			if ((stagingGroup != null) && GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
@@ -197,35 +197,35 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 				rowURL.setParameter("privateLayout", Boolean.FALSE.toString());
 
 				if (stagingGroup.getPublicLayoutsPageCount() > 0) {
-					sm.append(" / ");
-					sm.append("<a href=\"");
-					sm.append(rowURL.toString());
-					sm.append("\">");
-					sm.append(LanguageUtil.get(pageContext, "staging"));
-					sm.append("</a>");
+					sb.append(" / ");
+					sb.append("<a href=\"");
+					sb.append(rowURL.toString());
+					sb.append("\">");
+					sb.append(LanguageUtil.get(pageContext, "staging"));
+					sb.append("</a>");
 				}
 			}
 
-			sm.append("<br />");
+			sb.append("<br />");
 
 			if (privateLayoutsPageCount > 0) {
 				rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 				rowURL.setParameter("privateLayout", Boolean.TRUE.toString());
 
-				sm.append("<a href=\"");
-				sm.append(rowURL.toString());
-				sm.append("\">");
-				sm.append(LanguageUtil.get(pageContext, "private-pages"));
-				sm.append(" - ");
-				sm.append(LanguageUtil.get(pageContext, "live"));
-				sm.append(" (");
-				sm.append(group.getPrivateLayoutsPageCount());
-				sm.append(")");
-				sm.append("</a>");
+				sb.append("<a href=\"");
+				sb.append(rowURL.toString());
+				sb.append("\">");
+				sb.append(LanguageUtil.get(pageContext, "private-pages"));
+				sb.append(" - ");
+				sb.append(LanguageUtil.get(pageContext, "live"));
+				sb.append(" (");
+				sb.append(group.getPrivateLayoutsPageCount());
+				sb.append(")");
+				sb.append("</a>");
 			}
 			else {
-				sm.append(LanguageUtil.get(pageContext, "private-pages"));
-				sm.append(" (0)");
+				sb.append(LanguageUtil.get(pageContext, "private-pages"));
+				sb.append(" (0)");
 			}
 
 			if ((stagingGroup != null) && GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
@@ -233,17 +233,17 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 				rowURL.setParameter("privateLayout", Boolean.TRUE.toString());
 
 				if (stagingGroup.getPrivateLayoutsPageCount() > 0) {
-					sm.append(" / ");
-					sm.append("<a href=\"");
-					sm.append(rowURL.toString());
-					sm.append("\">");
-					sm.append(LanguageUtil.get(pageContext, "staging"));
-					sm.append("</a>");
+					sb.append(" / ");
+					sb.append("<a href=\"");
+					sb.append(rowURL.toString());
+					sb.append("\">");
+					sb.append(LanguageUtil.get(pageContext, "staging"));
+					sb.append("</a>");
 				}
 			}
 		}
 
-		row.addText(sm.toString());
+		row.addText(sb.toString());
 
 		// Type
 

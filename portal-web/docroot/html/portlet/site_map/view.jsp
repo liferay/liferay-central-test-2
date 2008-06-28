@@ -27,22 +27,22 @@
 <%
 List rootLayouts = LayoutLocalServiceUtil.getLayouts(layout.getGroupId(), layout.isPrivateLayout(), rootLayoutId);
 
-StringMaker sm = new StringMaker();
+StringBuilder sb = new StringBuilder();
 
 _buildSiteMap(rootLayouts, displayDepth, 1, themeDisplay, sm);
 %>
 
-<%= sm.toString() %>
+<%= sb.toString() %>
 
 <%!
-private void _buildSiteMap(List layouts, int displayDepth, int curDepth, ThemeDisplay themeDisplay, StringMaker sm) throws Exception {
+private void _buildSiteMap(List layouts, int displayDepth, int curDepth, ThemeDisplay themeDisplay, StringBuilder sb) throws Exception {
 	if (layouts.size() == 0) {
 		return;
 	}
 
 	PermissionChecker permissionChecker = themeDisplay.getPermissionChecker();
 
-	sm.append("<ul>");
+	sb.append("<ul>");
 
 	for (int i = 0; i < layouts.size(); i++) {
 		Layout layout = (Layout)layouts.get(i);
@@ -51,23 +51,23 @@ private void _buildSiteMap(List layouts, int displayDepth, int curDepth, ThemeDi
 			String layoutURL = PortalUtil.getLayoutURL(layout, themeDisplay);
 			String target = PortalUtil.getLayoutTarget(layout);
 
-			sm.append("<li>");
-			sm.append("<a href=\"");
-			sm.append(layoutURL);
-			sm.append("\" ");
-			sm.append(target);
-			sm.append("> ");
-			sm.append(layout.getName(themeDisplay.getLocale()));
-			sm.append("</a>");
+			sb.append("<li>");
+			sb.append("<a href=\"");
+			sb.append(layoutURL);
+			sb.append("\" ");
+			sb.append(target);
+			sb.append("> ");
+			sb.append(layout.getName(themeDisplay.getLocale()));
+			sb.append("</a>");
 
 			if ((displayDepth == 0) || (displayDepth > curDepth)) {
-				_buildSiteMap(layout.getChildren(), displayDepth, curDepth + 1, themeDisplay, sm);
+				_buildSiteMap(layout.getChildren(), displayDepth, curDepth + 1, themeDisplay, sb);
 			}
 
-			sm.append("</li>");
+			sb.append("</li>");
 		}
 	}
 
-	sm.append("</ul>");
+	sb.append("</ul>");
 }
 %>

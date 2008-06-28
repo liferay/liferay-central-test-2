@@ -24,7 +24,6 @@ package com.liferay.portal.webdav;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
@@ -127,12 +126,12 @@ public class WebDAVServlet extends HttpServlet {
 	}
 
 	protected String getRootPath(HttpServletRequest req) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(WebDAVUtil.fixPath(req.getContextPath()));
-		sm.append(WebDAVUtil.fixPath(req.getServletPath()));
+		sb.append(WebDAVUtil.fixPath(req.getContextPath()));
+		sb.append(WebDAVUtil.fixPath(req.getServletPath()));
 
-		String rootPath = sm.toString();
+		String rootPath = sb.toString();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Root path " + rootPath);

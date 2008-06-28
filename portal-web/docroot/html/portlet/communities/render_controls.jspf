@@ -24,91 +24,91 @@
 
 <%!
 private String _renderControls(String namespace, ResourceBundle resourceBundle, PortletDataHandlerControl[] controls) {
-	StringMaker sm = new StringMaker();
+	StringBuilder sb = new StringBuilder();
 
 	for (int i = 0; i < controls.length; i++) {
-		sm.append("<li class=\"");
-		sm.append(namespace);
-		sm.append("handler-control\">");
+		sb.append("<li class=\"");
+		sb.append(namespace);
+		sb.append("handler-control\">");
 
 		if (controls[i] instanceof PortletDataHandlerBoolean) {
 			PortletDataHandlerBoolean control = (PortletDataHandlerBoolean)controls[i];
 			PortletDataHandlerControl[] children = control.getChildren();
 
-			sm.append("<label class=\"");
-			sm.append(namespace);
-			sm.append("handler-control-label\">");
-			sm.append("<input ");
-			sm.append(control.getDefaultState() ? "checked=\"checked\" " : "");
+			sb.append("<label class=\"");
+			sb.append(namespace);
+			sb.append("handler-control-label\">");
+			sb.append("<input ");
+			sb.append(control.getDefaultState() ? "checked=\"checked\" " : "");
 
 			if (controls[i].isDisabled()) {
-				sm.append(" class=\"disabled\" disabled ");
+				sb.append(" class=\"disabled\" disabled ");
 			}
 
-			sm.append("name=\"");
-			sm.append(namespace);
-			sm.append(control.getNamespacedControlName());
-			sm.append("\" ");
-			sm.append("id=\"");
-			sm.append(namespace);
-			sm.append(control.getNamespacedControlName());
-			sm.append("\" ");
+			sb.append("name=\"");
+			sb.append(namespace);
+			sb.append(control.getNamespacedControlName());
+			sb.append("\" ");
+			sb.append("id=\"");
+			sb.append(namespace);
+			sb.append(control.getNamespacedControlName());
+			sb.append("\" ");
 
 			if (children != null) {
-				sm.append("onchange=\"");
-				sm.append(namespace);
-				sm.append("toggleChildren(this, '");
-				sm.append(namespace);
-				sm.append(control.getNamespacedControlName());
-				sm.append("Controls");
-				sm.append("');\" ");
+				sb.append("onchange=\"");
+				sb.append(namespace);
+				sb.append("toggleChildren(this, '");
+				sb.append(namespace);
+				sb.append(control.getNamespacedControlName());
+				sb.append("Controls");
+				sb.append("');\" ");
 			}
 
-			sm.append("type=\"checkbox\" /> ");
-			sm.append(resourceBundle.getString(control.getControlName()));
-			sm.append("</label>");
+			sb.append("type=\"checkbox\" /> ");
+			sb.append(resourceBundle.getString(control.getControlName()));
+			sb.append("</label>");
 
 			if (children != null) {
-				sm.append("<ul id=\"");
-				sm.append(namespace);
-				sm.append(control.getNamespacedControlName());
-				sm.append("Controls\">");
-				sm.append(_renderControls(namespace, resourceBundle, children));
-				sm.append("</ul>");
+				sb.append("<ul id=\"");
+				sb.append(namespace);
+				sb.append(control.getNamespacedControlName());
+				sb.append("Controls\">");
+				sb.append(_renderControls(namespace, resourceBundle, children));
+				sb.append("</ul>");
 			}
 		}
 		else if (controls[i] instanceof PortletDataHandlerChoice) {
 			PortletDataHandlerChoice control = (PortletDataHandlerChoice)controls[i];
 
-			sm.append("<span class=\"");
-			sm.append(namespace);
-			sm.append("handler-control-label\">");
-			sm.append("<strong>&#9632;</strong> ");
-			sm.append(resourceBundle.getString(control.getControlName()));
-			sm.append("</span>");
+			sb.append("<span class=\"");
+			sb.append(namespace);
+			sb.append("handler-control-label\">");
+			sb.append("<strong>&#9632;</strong> ");
+			sb.append(resourceBundle.getString(control.getControlName()));
+			sb.append("</span>");
 
 			String[] choices = control.getChoices();
 
 			for (int j = 0; j < choices.length; j++) {
-				sm.append("<label class=\"");
-				sm.append(namespace);
-				sm.append("handler-control-label\">");
-				sm.append("<input ");
-				sm.append(control.getDefaultChoiceIndex() == j ? "checked=\"checked\" " : "");
-				sm.append("name=\"");
-				sm.append(namespace);
-				sm.append(control.getNamespacedControlName());
-				sm.append("\" type=\"radio\" value=\"");
-				sm.append(choices[j]);
-				sm.append("\" />");
-				sm.append(resourceBundle.getString(choices[j]));
-				sm.append("</label>");
+				sb.append("<label class=\"");
+				sb.append(namespace);
+				sb.append("handler-control-label\">");
+				sb.append("<input ");
+				sb.append(control.getDefaultChoiceIndex() == j ? "checked=\"checked\" " : "");
+				sb.append("name=\"");
+				sb.append(namespace);
+				sb.append(control.getNamespacedControlName());
+				sb.append("\" type=\"radio\" value=\"");
+				sb.append(choices[j]);
+				sb.append("\" />");
+				sb.append(resourceBundle.getString(choices[j]));
+				sb.append("</label>");
 			}
 		}
 
-		sm.append("</li>");
+		sb.append("</li>");
 	}
 
-	return sm.toString();
+	return sb.toString();
 }
 %>

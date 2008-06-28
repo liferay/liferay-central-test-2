@@ -38,7 +38,6 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
@@ -208,20 +207,20 @@ public class StagingUtil {
 
 		User user = UserLocalServiceUtil.getUser(permissionChecker.getUserId());
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		if (secureConnection) {
-			sm.append(Http.HTTPS_WITH_SLASH);
+			sb.append(Http.HTTPS_WITH_SLASH);
 		}
 		else {
-			sm.append(Http.HTTP_WITH_SLASH);
+			sb.append(Http.HTTP_WITH_SLASH);
 		}
 
-		sm.append(remoteAddress);
-		sm.append(StringPool.COLON);
-		sm.append(remotePort);
+		sb.append(remoteAddress);
+		sb.append(StringPool.COLON);
+		sb.append(remotePort);
 
-		String url = sm.toString();
+		String url = sb.toString();
 
 		HttpPrincipal httpPrincipal = new HttpPrincipal(
 			url, user.getEmailAddress(), user.getPassword(),
@@ -355,13 +354,13 @@ public class StagingUtil {
 	public static String getSchedulerGroupName(
 		String destinationName, long groupId) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(destinationName);
-		sm.append(StringPool.SLASH);
-		sm.append(groupId);
+		sb.append(destinationName);
+		sb.append(StringPool.SLASH);
+		sb.append(groupId);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public static Map<String, String[]> getStagingParameters() {

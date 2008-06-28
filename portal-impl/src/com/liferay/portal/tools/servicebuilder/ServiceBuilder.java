@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.util.ArrayUtil_IW;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.StringUtil_IW;
@@ -1057,38 +1056,38 @@ public class ServiceBuilder {
 		String name = type.getValue();
 
 		if (dimensions > 0) {
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
 			for (int i = 0; i < dimensions; i++) {
-				sm.append("[");
+				sb.append("[");
 			}
 
 			if (name.equals("boolean")) {
-				return sm.toString() + "Z";
+				return sb.toString() + "Z";
 			}
 			else if (name.equals("byte")) {
-				return sm.toString() + "B";
+				return sb.toString() + "B";
 			}
 			else if (name.equals("char")) {
-				return sm.toString() + "C";
+				return sb.toString() + "C";
 			}
 			else if (name.equals("double")) {
-				return sm.toString() + "D";
+				return sb.toString() + "D";
 			}
 			else if (name.equals("float")) {
-				return sm.toString() + "F";
+				return sb.toString() + "F";
 			}
 			else if (name.equals("int")) {
-				return sm.toString() + "I";
+				return sb.toString() + "I";
 			}
 			else if (name.equals("long")) {
-				return sm.toString() + "J";
+				return sb.toString() + "J";
 			}
 			else if (name.equals("short")) {
-				return sm.toString() + "S";
+				return sb.toString() + "S";
 			}
 			else {
-				return sm.toString() + "L" + name + ";";
+				return sb.toString() + "L" + name + ";";
 			}
 		}
 
@@ -1408,33 +1407,33 @@ public class ServiceBuilder {
 	public boolean isDuplicateMethod(
 		JavaMethod method, Map<String, Object> tempMap) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("isDuplicateMethod ");
-		sm.append(method.getReturns().getValue());
-		sm.append(method.getReturnsGenericsName());
-		sm.append(getDimensions(method.getReturns().getDimensions()));
-		sm.append(StringPool.SPACE);
-		sm.append(method.getName());
-		sm.append(StringPool.OPEN_PARENTHESIS);
+		sb.append("isDuplicateMethod ");
+		sb.append(method.getReturns().getValue());
+		sb.append(method.getReturnsGenericsName());
+		sb.append(getDimensions(method.getReturns().getDimensions()));
+		sb.append(StringPool.SPACE);
+		sb.append(method.getName());
+		sb.append(StringPool.OPEN_PARENTHESIS);
 
 		JavaParameter[] parameters = method.getParameters();
 
 		for (int i = 0; i < parameters.length; i++) {
 			JavaParameter javaParameter = parameters[i];
 
-			sm.append(javaParameter.getType().getValue());
-			sm.append(javaParameter.getGenericsName());
-			sm.append(getDimensions(javaParameter.getType().getDimensions()));
+			sb.append(javaParameter.getType().getValue());
+			sb.append(javaParameter.getGenericsName());
+			sb.append(getDimensions(javaParameter.getType().getDimensions()));
 
 			if ((i + 1) != parameters.length) {
-				sm.append(StringPool.COMMA);
+				sb.append(StringPool.COMMA);
 			}
 		}
 
-		sm.append(StringPool.CLOSE_PARENTHESIS);
+		sb.append(StringPool.CLOSE_PARENTHESIS);
 
-		String key = sm.toString();
+		String key = sb.toString();
 
 		if (tempMap.containsKey(key)) {
 			return true;
@@ -1881,7 +1880,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createJSONJS() throws Exception {
-		StringMaker content = new StringMaker();
+		StringBuilder content = new StringBuilder();
 
 		if (_ejbList.size() > 0) {
 			content.append(_processTemplate(_tplJsonJs));
@@ -2336,7 +2335,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createRemotingXML() throws Exception {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		Document doc = DocumentUtil.readDocumentFromFile(
 			new File(_springFileName), true);
@@ -2365,7 +2364,7 @@ public class ServiceBuilder {
 				context.put("serviceName", serviceName);
 				context.put("serviceMapping", serviceMapping);
 
-				sm.append(_processTemplate(_tplRemotingXml, context));
+				sb.append(_processTemplate(_tplRemotingXml, context));
 			}
 		}
 
@@ -2383,14 +2382,14 @@ public class ServiceBuilder {
 
 		if (x != -1) {
 			newContent =
-				content.substring(0, x - 1) + sm.toString() +
+				content.substring(0, x - 1) + sb.toString() +
 					content.substring(y, content.length());
 		}
 		else {
 			x = content.indexOf("</beans>");
 
 			newContent =
-				content.substring(0, x) + sm.toString() +
+				content.substring(0, x) + sb.toString() +
 					content.substring(x, content.length());
 		}
 
@@ -2830,37 +2829,37 @@ public class ServiceBuilder {
 				EntityFinder finder = finderList.get(j);
 
 				if (finder.isDBIndex()) {
-					StringMaker sm = new StringMaker();
+					StringBuilder sb = new StringBuilder();
 
-					sm.append(entity.getTable() + " (");
+					sb.append(entity.getTable() + " (");
 
 					List<EntityColumn> finderColsList = finder.getColumns();
 
 					for (int k = 0; k < finderColsList.size(); k++) {
 						EntityColumn col = finderColsList.get(k);
 
-						sm.append(col.getDBName());
+						sb.append(col.getDBName());
 
 						if ((k + 1) != finderColsList.size()) {
-							sm.append(", ");
+							sb.append(", ");
 						}
 					}
 
-					sm.append(");");
+					sb.append(");");
 
-					String indexSpec = sm.toString();
+					String indexSpec = sb.toString();
 
 					String indexHash =
 						Integer.toHexString(indexSpec.hashCode()).toUpperCase();
 
 					String indexName = "IX_" + indexHash;
 
-					sm = new StringMaker();
+					sb = new StringBuilder();
 
-					sm.append("create index " + indexName + " on ");
-					sm.append(indexSpec);
+					sb.append("create index " + indexName + " on ");
+					sb.append(indexSpec);
 
-					indexSQLs.put(indexSpec, sm.toString());
+					indexSQLs.put(indexSpec, sb.toString());
 
 					String finderName =
 						entity.getTable() + StringPool.PERIOD +
@@ -2871,7 +2870,7 @@ public class ServiceBuilder {
 			}
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		Iterator<String> itr = indexSQLs.values().iterator();
 
@@ -2885,23 +2884,23 @@ public class ServiceBuilder {
 			if ((prevEntityName != null) &&
 				(!prevEntityName.equals(entityName))) {
 
-				sm.append("\n");
+				sb.append("\n");
 			}
 
-			sm.append(indexSQL);
+			sb.append(indexSQL);
 
 			if (itr.hasNext()) {
-				sm.append("\n");
+				sb.append("\n");
 			}
 
 			prevEntityName = entityName;
 		}
 
-		FileUtil.write(sqlFile, sm.toString(), true);
+		FileUtil.write(sqlFile, sb.toString(), true);
 
 		// indexes.properties
 
-		sm = new StringMaker();
+		sb = new StringBuilder();
 
 		itr = indexProps.keySet().iterator();
 
@@ -2917,19 +2916,19 @@ public class ServiceBuilder {
 			if ((prevEntityName != null) &&
 				(!prevEntityName.equals(entityName))) {
 
-				sm.append("\n");
+				sb.append("\n");
 			}
 
-			sm.append(indexName + StringPool.EQUAL + finderName);
+			sb.append(indexName + StringPool.EQUAL + finderName);
 
 			if (itr.hasNext()) {
-				sm.append("\n");
+				sb.append("\n");
 			}
 
 			prevEntityName = entityName;
 		}
 
-		FileUtil.write(propsFile, sm.toString(), true);
+		FileUtil.write(propsFile, sb.toString(), true);
 	}
 
 	private void _createSQLMappingTables(
@@ -2959,7 +2958,7 @@ public class ServiceBuilder {
 			}
 		}
 		else if (addMissingTables) {
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
 			BufferedReader br = new BufferedReader(new StringReader(content));
 
@@ -2974,23 +2973,23 @@ public class ServiceBuilder {
 					String tableName = line.substring(x, y);
 
 					if (tableName.compareTo(entityMapping.getTable()) > 0) {
-						sm.append(newCreateTableString + "\n\n");
+						sb.append(newCreateTableString + "\n\n");
 
 						appendNewTable = false;
 					}
 				}
 
-				sm.append(line);
-				sm.append("\n");
+				sb.append(line);
+				sb.append("\n");
 			}
 
 			if (appendNewTable) {
-				sm.append("\n" + newCreateTableString);
+				sb.append("\n" + newCreateTableString);
 			}
 
 			br.close();
 
-			FileUtil.write(sqlFile, sm.toString(), true);
+			FileUtil.write(sqlFile, sb.toString(), true);
 		}
 	}
 
@@ -3036,7 +3035,7 @@ public class ServiceBuilder {
 				EntityColumn column = columnList.get(j);
 
 				if ("sequence".equals(column.getIdType())) {
-					StringMaker sm = new StringMaker();
+					StringBuilder sb = new StringBuilder();
 
 					String sequenceName = column.getIdParam();
 
@@ -3044,9 +3043,9 @@ public class ServiceBuilder {
 						sequenceName = sequenceName.substring(0, 30);
 					}
 
-					sm.append("create sequence " + sequenceName + ";");
+					sb.append("create sequence " + sequenceName + ";");
 
-					String sequenceSQL = sm.toString();
+					String sequenceSQL = sb.toString();
 
 					if (!sequenceSQLs.contains(sequenceSQL)) {
 						sequenceSQLs.add(sequenceSQL);
@@ -3055,21 +3054,21 @@ public class ServiceBuilder {
 			}
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		Iterator<String> itr = sequenceSQLs.iterator();
 
 		while (itr.hasNext()) {
 			String sequenceSQL = itr.next();
 
-			sm.append(sequenceSQL);
+			sb.append(sequenceSQL);
 
 			if (itr.hasNext()) {
-				sm.append("\n");
+				sb.append("\n");
 			}
 		}
 
-		FileUtil.write(sqlFile, sm.toString(), true);
+		FileUtil.write(sqlFile, sb.toString(), true);
 	}
 
 	private void _createSQLTables() throws IOException {
@@ -3146,7 +3145,7 @@ public class ServiceBuilder {
 			}
 		}
 		else if (addMissingTables) {
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
 			BufferedReader br = new BufferedReader(new StringReader(content));
 
@@ -3161,28 +3160,28 @@ public class ServiceBuilder {
 					String tableName = line.substring(x, y);
 
 					if (tableName.compareTo(entity.getTable()) > 0) {
-						sm.append(newCreateTableString + "\n\n");
+						sb.append(newCreateTableString + "\n\n");
 
 						appendNewTable = false;
 					}
 				}
 
-				sm.append(line);
-				sm.append("\n");
+				sb.append(line);
+				sb.append("\n");
 			}
 
 			if (appendNewTable) {
-				sm.append("\n" + newCreateTableString);
+				sb.append("\n" + newCreateTableString);
 			}
 
 			br.close();
 
-			FileUtil.write(sqlFile, sm.toString(), true);
+			FileUtil.write(sqlFile, sb.toString(), true);
 		}
 	}
 
 	private String _fixHBMXML(String content) throws IOException {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		BufferedReader br = new BufferedReader(new StringReader(content));
 
@@ -3211,13 +3210,13 @@ public class ServiceBuilder {
 				}
 			}
 
-			sm.append(line);
-			sm.append('\n');
+			sb.append(line);
+			sb.append('\n');
 		}
 
 		br.close();
 
-		return sm.toString().trim();
+		return sb.toString().trim();
 	}
 
 	private String _fixSpringXML(String content) {
@@ -3311,9 +3310,9 @@ public class ServiceBuilder {
 			}
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(_SQL_CREATE_TABLE + entityMapping.getTable() + " (\n");
+		sb.append(_SQL_CREATE_TABLE + entityMapping.getTable() + " (\n");
 
 		for (Entity entity : entities) {
 			List<EntityColumn> pkList = entity.getPKList();
@@ -3324,25 +3323,25 @@ public class ServiceBuilder {
 				String colName = col.getName();
 				String colType = col.getType();
 
-				sm.append("\t" + col.getDBName());
-				sm.append(" ");
+				sb.append("\t" + col.getDBName());
+				sb.append(" ");
 
 				if (colType.equalsIgnoreCase("boolean")) {
-					sm.append("BOOLEAN");
+					sb.append("BOOLEAN");
 				}
 				else if (colType.equalsIgnoreCase("double") ||
 						 colType.equalsIgnoreCase("float")) {
 
-					sm.append("DOUBLE");
+					sb.append("DOUBLE");
 				}
 				else if (colType.equals("int") ||
 						 colType.equals("Integer") ||
 						 colType.equalsIgnoreCase("short")) {
 
-					sm.append("INTEGER");
+					sb.append("INTEGER");
 				}
 				else if (colType.equalsIgnoreCase("long")) {
-					sm.append("LONG");
+					sb.append("LONG");
 				}
 				else if (colType.equals("String")) {
 					Map<String, String> hints = ModelHintsUtil.getHints(
@@ -3356,31 +3355,31 @@ public class ServiceBuilder {
 					}
 
 					if (maxLength < 4000) {
-						sm.append("VARCHAR(" + maxLength + ")");
+						sb.append("VARCHAR(" + maxLength + ")");
 					}
 					else if (maxLength == 4000) {
-						sm.append("STRING");
+						sb.append("STRING");
 					}
 					else if (maxLength > 4000) {
-						sm.append("TEXT");
+						sb.append("TEXT");
 					}
 				}
 				else if (colType.equals("Date")) {
-					sm.append("DATE null");
+					sb.append("DATE null");
 				}
 				else {
-					sm.append("invalid");
+					sb.append("invalid");
 				}
 
 				if (col.isPrimary()) {
-					sm.append(" not null");
+					sb.append(" not null");
 				}
 
-				sm.append(",\n");
+				sb.append(",\n");
 			}
 		}
 
-		sm.append("\tprimary key (");
+		sb.append("\tprimary key (");
 
 		for (int i = 0; i < entities.length; i++) {
 			Entity entity = entities[i];
@@ -3393,17 +3392,17 @@ public class ServiceBuilder {
 				String colName = col.getName();
 
 				if ((i != 0) || (j != 0)) {
-					sm.append(", ");
+					sb.append(", ");
 				}
 
-				sm.append(colName);
+				sb.append(colName);
 			}
 		}
 
-		sm.append(")\n");
-		sm.append(");");
+		sb.append(")\n");
+		sb.append(");");
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private String _getCreateTableSQL(Entity entity) {
@@ -3414,9 +3413,9 @@ public class ServiceBuilder {
 			return null;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(_SQL_CREATE_TABLE + entity.getTable() + " (\n");
+		sb.append(_SQL_CREATE_TABLE + entity.getTable() + " (\n");
 
 		for (int i = 0; i < regularColList.size(); i++) {
 			EntityColumn col = regularColList.get(i);
@@ -3425,25 +3424,25 @@ public class ServiceBuilder {
 			String colType = col.getType();
 			String colIdType = col.getIdType();
 
-			sm.append("\t" + col.getDBName());
-			sm.append(" ");
+			sb.append("\t" + col.getDBName());
+			sb.append(" ");
 
 			if (colType.equalsIgnoreCase("boolean")) {
-				sm.append("BOOLEAN");
+				sb.append("BOOLEAN");
 			}
 			else if (colType.equalsIgnoreCase("double") ||
 					 colType.equalsIgnoreCase("float")) {
 
-				sm.append("DOUBLE");
+				sb.append("DOUBLE");
 			}
 			else if (colType.equals("int") ||
 					 colType.equals("Integer") ||
 					 colType.equalsIgnoreCase("short")) {
 
-				sm.append("INTEGER");
+				sb.append("INTEGER");
 			}
 			else if (colType.equalsIgnoreCase("long")) {
-				sm.append("LONG");
+				sb.append("LONG");
 			}
 			else if (colType.equals("String")) {
 				Map<String, String> hints = ModelHintsUtil.getHints(
@@ -3457,67 +3456,67 @@ public class ServiceBuilder {
 				}
 
 				if (maxLength < 4000) {
-					sm.append("VARCHAR(" + maxLength + ")");
+					sb.append("VARCHAR(" + maxLength + ")");
 				}
 				else if (maxLength == 4000) {
-					sm.append("STRING");
+					sb.append("STRING");
 				}
 				else if (maxLength > 4000) {
-					sm.append("TEXT");
+					sb.append("TEXT");
 				}
 			}
 			else if (colType.equals("Date")) {
-				sm.append("DATE null");
+				sb.append("DATE null");
 			}
 			else {
-				sm.append("invalid");
+				sb.append("invalid");
 			}
 
 			if (col.isPrimary()) {
-				sm.append(" not null");
+				sb.append(" not null");
 
 				if (!entity.hasCompoundPK()) {
-					sm.append(" primary key");
+					sb.append(" primary key");
 				}
 			}
 			else if (colType.equals("String")) {
-				sm.append(" null");
+				sb.append(" null");
 			}
 
 			if (Validator.isNotNull(colIdType) &&
 				colIdType.equals("identity")) {
 
-				sm.append(" IDENTITY");
+				sb.append(" IDENTITY");
 			}
 
 			if (((i + 1) != regularColList.size()) ||
 				(entity.hasCompoundPK())) {
 
-				sm.append(",");
+				sb.append(",");
 			}
 
-			sm.append("\n");
+			sb.append("\n");
 		}
 
 		if (entity.hasCompoundPK()) {
-			sm.append("\tprimary key (");
+			sb.append("\tprimary key (");
 
 			for (int j = 0; j < pkList.size(); j++) {
 				EntityColumn pk = pkList.get(j);
 
-				sm.append(pk.getDBName());
+				sb.append(pk.getDBName());
 
 				if ((j + 1) != pkList.size()) {
-					sm.append(", ");
+					sb.append(", ");
 				}
 			}
 
-			sm.append(")\n");
+			sb.append(")\n");
 		}
 
-		sm.append(");");
+		sb.append(");");
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private String _getDimensions(Type type) {

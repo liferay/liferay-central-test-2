@@ -34,7 +34,6 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
@@ -1018,117 +1017,117 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 	protected static String getArticlePath(
 		PortletDataContext context, JournalArticle article) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.JOURNAL));
-		sm.append("/articles/");
-		sm.append(article.getArticleId());
-		sm.append(StringPool.SLASH);
-		sm.append(article.getVersion());
-		sm.append(StringPool.SLASH);
-		sm.append(article.getArticleId());
-		sm.append(".xml");
+		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
+		sb.append("/articles/");
+		sb.append(article.getArticleId());
+		sb.append(StringPool.SLASH);
+		sb.append(article.getVersion());
+		sb.append(StringPool.SLASH);
+		sb.append(article.getArticleId());
+		sb.append(".xml");
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected static String getArticleImagePath(
 		PortletDataContext context, JournalArticle article) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.JOURNAL));
-		sm.append("/articles/");
-		sm.append(article.getArticleId());
-		sm.append(StringPool.SLASH);
-		sm.append(article.getVersion());
-		sm.append(StringPool.SLASH);
+		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
+		sb.append("/articles/");
+		sb.append(article.getArticleId());
+		sb.append(StringPool.SLASH);
+		sb.append(article.getVersion());
+		sb.append(StringPool.SLASH);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected static String getArticleImagePath(
 		PortletDataContext context, JournalArticle article,
 		JournalArticleImage articleImage, Image image) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.JOURNAL));
-		sm.append("/articles/");
-		sm.append(article.getArticleId());
-		sm.append(StringPool.SLASH);
-		sm.append(article.getVersion());
-		sm.append(StringPool.SLASH);
-		sm.append(articleImage.getElName());
-		sm.append(articleImage.getLanguageId());
-		sm.append(StringPool.PERIOD);
-		sm.append(image.getType());
+		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
+		sb.append("/articles/");
+		sb.append(article.getArticleId());
+		sb.append(StringPool.SLASH);
+		sb.append(article.getVersion());
+		sb.append(StringPool.SLASH);
+		sb.append(articleImage.getElName());
+		sb.append(articleImage.getLanguageId());
+		sb.append(StringPool.PERIOD);
+		sb.append(image.getType());
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected static String getArticleSmallImagePath(
 			PortletDataContext context, JournalArticle article)
 		throws PortalException, SystemException {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.JOURNAL));
-		sm.append("/articles/thumbnail.");
-		sm.append(article.getSmallImageType());
+		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
+		sb.append("/articles/thumbnail.");
+		sb.append(article.getSmallImageType());
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected static String getFeedPath(
 		PortletDataContext context, JournalFeed feed) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.JOURNAL));
-		sm.append("/feeds/");
-		sm.append(feed.getFeedId());
-		sm.append(".xml");
+		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
+		sb.append("/feeds/");
+		sb.append(feed.getFeedId());
+		sb.append(".xml");
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected static String getTemplatePath(
 		PortletDataContext context, JournalTemplate template) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.JOURNAL));
-		sm.append("/templates/");
-		sm.append(template.getTemplateId());
-		sm.append(".xml");
+		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
+		sb.append("/templates/");
+		sb.append(template.getTemplateId());
+		sb.append(".xml");
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected static String getTemplateSmallImagePath(
 			PortletDataContext context, JournalTemplate template)
 		throws PortalException, SystemException {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.JOURNAL));
-		sm.append("/templates/thumbnail.");
-		sm.append(template.getSmallImageType());
+		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
+		sb.append("/templates/thumbnail.");
+		sb.append(template.getSmallImageType());
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected static String getStructurePath(
 		PortletDataContext context, JournalStructure structure) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.JOURNAL));
-		sm.append("/structures/");
-		sm.append(structure.getStructureId());
+		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
+		sb.append("/structures/");
+		sb.append(structure.getStructureId());
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static final String _NAMESPACE = "journal";

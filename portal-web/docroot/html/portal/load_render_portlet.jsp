@@ -50,7 +50,7 @@ String currentURL = PortalUtil.getCurrentURL(request);
 		<%
 		String doAsUserId = themeDisplay.getDoAsUserId();
 
-		StringMaker url = new StringMaker();
+		StringBuilder url = new StringBuilder();
 
 		url.append(themeDisplay.getPathMain());
 		url.append("/portal/render_portlet");

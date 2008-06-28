@@ -24,7 +24,6 @@ package com.liferay.portlet.wiki.util;
 
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.model.WikiPage;
@@ -128,19 +127,19 @@ public class WikiCacheUtil {
 	private static String _encodeKey(
 		long nodeId, String title, String postfix) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(CACHE_NAME);
-		sm.append(StringPool.POUND);
-		sm.append(nodeId);
-		sm.append(title);
+		sb.append(CACHE_NAME);
+		sb.append(StringPool.POUND);
+		sb.append(nodeId);
+		sb.append(title);
 
 		if (postfix != null) {
-			sm.append(StringPool.POUND);
-			sm.append(postfix);
+			sb.append(StringPool.POUND);
+			sb.append(postfix);
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static WikiPageDisplay _getPageDisplay(

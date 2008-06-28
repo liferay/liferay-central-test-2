@@ -263,18 +263,18 @@ List messages = treeWalker.getMessages();
 							<%
 							MBMessage parentMessage = MBMessageLocalServiceUtil.getMessage(message.getParentMessageId());
 
-							StringMaker sm = new StringMaker();
+							StringBuilder sb = new StringBuilder();
 
-							sm.append("<a href=\"#");
-							sm.append(namespace);
-							sm.append("message_");
-							sm.append(parentMessage.getMessageId());
-							sm.append("\">");
-							sm.append(parentMessage.getUserName());
-							sm.append("</a>");
+							sb.append("<a href=\"#");
+							sb.append(namespace);
+							sb.append("message_");
+							sb.append(parentMessage.getMessageId());
+							sb.append("\">");
+							sb.append(parentMessage.getUserName());
+							sb.append("</a>");
 							%>
 
-							<%= LanguageUtil.format(pageContext, "posted-on-x-in-reply-to-x", new Object[] {dateFormatDateTime.format(message.getModifiedDate()), sm.toString()}) %>
+							<%= LanguageUtil.format(pageContext, "posted-on-x-in-reply-to-x", new Object[] {dateFormatDateTime.format(message.getModifiedDate()), sb.toString()}) %>
 						</c:otherwise>
 					</c:choose>
 				</div>

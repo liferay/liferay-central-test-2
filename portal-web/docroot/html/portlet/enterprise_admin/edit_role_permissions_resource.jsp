@@ -130,7 +130,7 @@ for (int i = 0; i < curActions.size(); i++) {
 		<td>
 
 			<%
-			StringMaker groupsHTML = new StringMaker();
+			StringBuilder groupsHTML = new StringBuilder();
 
 			String groupIds = ParamUtil.getString(request, "groupIds" + target, null);
 			long[] groupIdsArray = StringUtil.split(groupIds, 0L);

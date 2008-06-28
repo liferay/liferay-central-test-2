@@ -46,7 +46,7 @@
 				}
 			}
 
-			StringMaker portletList = new StringMaker();
+			StringBuilder portletList = new StringBuilder();
 
 			for (int i = 0; i < nonAjaxPortletIds.size(); i++) {
 				portletList.append("_");

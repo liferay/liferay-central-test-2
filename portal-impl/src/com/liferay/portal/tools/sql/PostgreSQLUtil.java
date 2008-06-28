@@ -23,7 +23,6 @@
 package com.liferay.portal.tools.sql;
 
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.BufferedReader;
@@ -64,22 +63,22 @@ public class PostgreSQLUtil extends DBUtil {
 			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
 				"-postgresql.sql");
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("drop database " + databaseName + ";\n");
-		sm.append(
+		sb.append("drop database " + databaseName + ";\n");
+		sb.append(
 			"create database " + databaseName + " encoding = 'UNICODE';\n");
-		sm.append("\\c " + databaseName + ";\n\n");
-		sm.append(
+		sb.append("\\c " + databaseName + ";\n\n");
+		sb.append(
 			FileUtil.read(
 				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
 					"-postgresql.sql"));
-		sm.append("\n\n");
-		sm.append(FileUtil.read("../sql/indexes/indexes-postgresql.sql"));
-		sm.append("\n\n");
-		sm.append(FileUtil.read("../sql/sequences/sequences-postgresql.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/indexes/indexes-postgresql.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/sequences/sequences-postgresql.sql"));
 
-		FileUtil.write(file, sm.toString());
+		FileUtil.write(file, sb.toString());
 	}
 
 	protected String getServerName() {
@@ -93,7 +92,7 @@ public class PostgreSQLUtil extends DBUtil {
 	protected String reword(String data) throws IOException {
 		BufferedReader br = new BufferedReader(new StringReader(data));
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		String line = null;
 
@@ -120,13 +119,13 @@ public class PostgreSQLUtil extends DBUtil {
 					"@table@", tokens[2]);
 			}
 
-			sm.append(line);
-			sm.append("\n");
+			sb.append(line);
+			sb.append("\n");
 		}
 
 		br.close();
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static String[] _POSTGRESQL = {

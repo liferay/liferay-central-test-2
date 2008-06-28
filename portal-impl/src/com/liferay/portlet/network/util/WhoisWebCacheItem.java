@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.network.util;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.webcache.WebCacheException;
@@ -64,7 +63,7 @@ public class WhoisWebCacheItem implements WebCacheItem {
 
 			out.println(_domain);
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 			String line = null;
 
 			while ((line = br.readLine()) != null) {
@@ -72,7 +71,7 @@ public class WhoisWebCacheItem implements WebCacheItem {
 					break;
 				}
 
-				sm.append(line).append("\n");
+				sb.append(line).append("\n");
 			}
 
 			br.close();
@@ -80,7 +79,7 @@ public class WhoisWebCacheItem implements WebCacheItem {
 
 			whois = new Whois(
 				_domain,
-				StringUtil.replace(sm.toString().trim(), "\n\n", "\n"));
+				StringUtil.replace(sb.toString().trim(), "\n\n", "\n"));
 		}
 		catch (Exception e) {
 			throw new WebCacheException(_domain + " " + e.toString());

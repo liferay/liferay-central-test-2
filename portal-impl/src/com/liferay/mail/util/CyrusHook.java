@@ -30,7 +30,6 @@ import com.liferay.mail.service.persistence.CyrusUserUtil;
 import com.liferay.mail.service.persistence.CyrusVirtualUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ProcessUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsKeys;
@@ -64,36 +63,36 @@ public class CyrusHook implements Hook {
 				if ((filters.size() > 0) || (emailAddresses.size() > 0) ||
 					(leaveCopy)) {
 
-					StringMaker sm = new StringMaker();
+					StringBuilder sb = new StringBuilder();
 
 					for (int i = 0; i < filters.size(); i++) {
 						Filter filter = filters.get(i);
 
-						sm.append(":0\n");
-						sm.append("* ^(From|Cc|To).*");
-						sm.append(filter.getEmailAddress());
-						sm.append("\n");
-						sm.append("| $DELIVER -e -a $USER -m user.$USER.");
-						sm.append(filter.getFolder());
-						sm.append("\n\n");
+						sb.append(":0\n");
+						sb.append("* ^(From|Cc|To).*");
+						sb.append(filter.getEmailAddress());
+						sb.append("\n");
+						sb.append("| $DELIVER -e -a $USER -m user.$USER.");
+						sb.append(filter.getFolder());
+						sb.append("\n\n");
 					}
 
 					if (leaveCopy) {
-						sm.append(":0 c\n");
-						sm.append("| $DELIVER -e -a $USER -m user.$USER\n\n");
+						sb.append(":0 c\n");
+						sb.append("| $DELIVER -e -a $USER -m user.$USER\n\n");
 					}
 
 					if (emailAddresses.size() > 0) {
-						sm.append(":0\n");
-						sm.append("!");
+						sb.append(":0\n");
+						sb.append("!");
 
 						for (String emailAddress : emailAddresses) {
-							sm.append(" ");
-							sm.append(emailAddress);
+							sb.append(" ");
+							sb.append(emailAddress);
 						}
 					}
 
-					String content = sm.toString();
+					String content = sb.toString();
 
 					while (content.endsWith("\n")) {
 						content = content.substring(0, content.length() - 1);
@@ -256,22 +255,22 @@ public class CyrusHook implements Hook {
 			return;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < blocked.size(); i++) {
 			String emailAddress = blocked.get(i);
 
-			sm.append("\n");
-			sm.append(":0\n");
-			sm.append("* ^From.*").append(emailAddress).append("\n");
-			sm.append("{\n");
-			sm.append(":0\n");
-			sm.append("/dev/null\n");
-			sm.append("}\n");
+			sb.append("\n");
+			sb.append(":0\n");
+			sb.append("* ^From.*").append(emailAddress).append("\n");
+			sb.append("{\n");
+			sb.append(":0\n");
+			sb.append("/dev/null\n");
+			sb.append("}\n");
 		}
 
 		try {
-			FileUtil.write(file, sm.toString());
+			FileUtil.write(file, sb.toString());
 		}
 		catch (Exception e) {
 			_log.error(e, e);

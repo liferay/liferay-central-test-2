@@ -23,7 +23,6 @@
 package com.liferay.portal.tools.sql;
 
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.dao.DataAccess;
@@ -96,20 +95,20 @@ public class DB2Util extends DBUtil {
 			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
 				"-db2.sql");
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("drop database " + databaseName + ";\n");
-		sm.append("create database " + databaseName + ";\n");
-		sm.append("connect to " + databaseName + ";\n");
-		sm.append(
+		sb.append("drop database " + databaseName + ";\n");
+		sb.append("create database " + databaseName + ";\n");
+		sb.append("connect to " + databaseName + ";\n");
+		sb.append(
 			FileUtil.read("../sql/portal" + minimalSuffix + "/portal" +
 				minimalSuffix + "-db2.sql"));
-		sm.append("\n\n");
-		sm.append(FileUtil.read("../sql/indexes/indexes-db2.sql"));
-		sm.append("\n\n");
-		sm.append(FileUtil.read("../sql/sequences/sequences-db2.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/indexes/indexes-db2.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/sequences/sequences-db2.sql"));
 
-		FileUtil.write(file, sm.toString());
+		FileUtil.write(file, sb.toString());
 	}
 
 	protected String getServerName() {
@@ -123,7 +122,7 @@ public class DB2Util extends DBUtil {
 	protected String reword(String data) throws IOException {
 		BufferedReader br = new BufferedReader(new StringReader(data));
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		String line = null;
 
@@ -147,13 +146,13 @@ public class DB2Util extends DBUtil {
 					REWORD_TEMPLATE, template);
 			}
 
-			sm.append(line);
-			sm.append("\n");
+			sb.append(line);
+			sb.append("\n");
 		}
 
 		br.close();
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private void _reorgTables(String[] templates) throws SQLException {

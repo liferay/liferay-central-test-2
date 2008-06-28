@@ -24,7 +24,6 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -454,20 +453,20 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append("(");
+			sb.append("(");
 
 			if (type == OrganizationConstants.TYPE_LOCATION ||
 				type == OrganizationConstants.TYPE_REGULAR) {
 
-				sm.append(CustomSQLUtil.get(COUNT_BY_C_PO_N_L_S_C_Z_R_C));
+				sb.append(CustomSQLUtil.get(COUNT_BY_C_PO_N_L_S_C_Z_R_C));
 			}
 			else {
-				sm.append(CustomSQLUtil.get(COUNT_BY_C_PO_N_S_C_Z_R_C));
+				sb.append(CustomSQLUtil.get(COUNT_BY_C_PO_N_S_C_Z_R_C));
 			}
 
-			String sql = sm.toString();
+			String sql = sb.toString();
 
 			if (regionId == null) {
 				sql = StringUtil.replace(sql, REGION_ID_SQL, StringPool.BLANK);
@@ -482,22 +481,22 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			sql = StringUtil.replace(
 				sql, "[$WHERE$]", getWhere("groupsPermissions"));
 
-			sm = new StringMaker();
+			sb = new StringBuilder();
 
-			sm.append(sql);
+			sb.append(sql);
 
-			sm.append(") UNION (");
+			sb.append(") UNION (");
 
 			if (type == OrganizationConstants.TYPE_LOCATION ||
 				type == OrganizationConstants.TYPE_REGULAR) {
 
-				sm.append(CustomSQLUtil.get(COUNT_BY_C_PO_N_L_S_C_Z_R_C));
+				sb.append(CustomSQLUtil.get(COUNT_BY_C_PO_N_L_S_C_Z_R_C));
 			}
 			else {
-				sm.append(CustomSQLUtil.get(COUNT_BY_C_PO_N_S_C_Z_R_C));
+				sb.append(CustomSQLUtil.get(COUNT_BY_C_PO_N_S_C_Z_R_C));
 			}
 
-			sql = sm.toString();
+			sql = sb.toString();
 
 			if (regionId == null) {
 				sql = StringUtil.replace(sql, REGION_ID_SQL, StringPool.BLANK);
@@ -516,13 +515,13 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 				parentOrganizationComparator);
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
-			sm = new StringMaker();
+			sb = new StringBuilder();
 
-			sm.append(sql);
+			sb.append(sql);
 
-			sm.append(")");
+			sb.append(")");
 
-			sql = sm.toString();
+			sql = sb.toString();
 
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "lower(Organization_.name)", StringPool.LIKE, false,
@@ -626,20 +625,20 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append("(");
+			sb.append("(");
 
 			if (type == OrganizationConstants.TYPE_LOCATION ||
 				type == OrganizationConstants.TYPE_REGULAR) {
 
-				sm.append(CustomSQLUtil.get(FIND_BY_C_PO_N_L_S_C_Z_R_C));
+				sb.append(CustomSQLUtil.get(FIND_BY_C_PO_N_L_S_C_Z_R_C));
 			}
 			else {
-				sm.append(CustomSQLUtil.get(FIND_BY_C_PO_N_S_C_Z_R_C));
+				sb.append(CustomSQLUtil.get(FIND_BY_C_PO_N_S_C_Z_R_C));
 			}
 
-			String sql = sm.toString();
+			String sql = sb.toString();
 
 			if (regionId == null) {
 				sql = StringUtil.replace(sql, REGION_ID_SQL, StringPool.BLANK);
@@ -654,22 +653,22 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			sql = StringUtil.replace(
 				sql, "[$WHERE$]", getWhere("groupsPermissions"));
 
-			sm = new StringMaker();
+			sb = new StringBuilder();
 
-			sm.append(sql);
+			sb.append(sql);
 
-			sm.append(") UNION (");
+			sb.append(") UNION (");
 
 			if (type == OrganizationConstants.TYPE_LOCATION ||
 				type == OrganizationConstants.TYPE_REGULAR) {
 
-				sm.append(CustomSQLUtil.get(FIND_BY_C_PO_N_L_S_C_Z_R_C));
+				sb.append(CustomSQLUtil.get(FIND_BY_C_PO_N_L_S_C_Z_R_C));
 			}
 			else {
-				sm.append(CustomSQLUtil.get(FIND_BY_C_PO_N_S_C_Z_R_C));
+				sb.append(CustomSQLUtil.get(FIND_BY_C_PO_N_S_C_Z_R_C));
 			}
 
-			sql = sm.toString();
+			sql = sb.toString();
 
 			if (regionId == null) {
 				sql = StringUtil.replace(sql, REGION_ID_SQL, StringPool.BLANK);
@@ -688,13 +687,13 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 				parentOrganizationComparator);
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
-			sm = new StringMaker();
+			sb = new StringBuilder();
 
-			sm.append(sql);
+			sb.append(sql);
 
-			sm.append(") ");
+			sb.append(") ");
 
-			sql = sm.toString();
+			sql = sb.toString();
 
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "lower(Organization_.name)", StringPool.LIKE, false,
@@ -794,7 +793,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			return StringPool.BLANK;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 
@@ -805,11 +804,11 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
-				sm.append(getJoin(key));
+				sb.append(getJoin(key));
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getJoin(String key) {
@@ -850,7 +849,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			return StringPool.BLANK;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 
@@ -861,11 +860,11 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
-				sm.append(getWhere(key, value));
+				sb.append(getWhere(key, value));
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getWhere(String key) {
@@ -881,21 +880,21 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 		else if (key.equals("organizations")) {
 			Long[] organizationIds = (Long[])value;
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append("WHERE (");
+			sb.append("WHERE (");
 
 			for (int i = 0; i < organizationIds.length; i++) {
-				sm.append("(Organization_.organizationId = ?) ");
+				sb.append("(Organization_.organizationId = ?) ");
 
 				if ((i + 1) < organizationIds.length) {
-					sm.append("OR ");
+					sb.append("OR ");
 				}
 			}
 
-			sm.append(")");
+			sb.append(")");
 
-			join = sm.toString();
+			join = sb.toString();
 		}
 		else if (key.equals("organizationsGroups")) {
 			join = CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_GROUPS);
@@ -917,12 +916,12 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			int pos = join.indexOf("WHERE");
 
 			if (pos != -1) {
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
-				sm.append(join.substring(pos + 5, join.length()));
-				sm.append(" AND ");
+				sb.append(join.substring(pos + 5, join.length()));
+				sb.append(" AND ");
 
-				join = sm.toString();
+				join = sb.toString();
 			}
 			else {
 				join = StringPool.BLANK;

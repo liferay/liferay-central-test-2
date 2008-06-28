@@ -23,7 +23,6 @@
 package com.liferay.portal.tools.sql;
 
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.BufferedReader;
@@ -71,31 +70,31 @@ public class SybaseUtil extends DBUtil {
 			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
 				"-sybase.sql");
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm = new StringMaker();
+		sb = new StringBuilder();
 
-		sm.append("use master\n");
-		sm.append(
+		sb.append("use master\n");
+		sb.append(
 			"exec sp_dboption '" + databaseName + "', " +
 				"'allow nulls by default' , true\n");
-		sm.append("go\n\n");
-		sm.append(
+		sb.append("go\n\n");
+		sb.append(
 			"exec sp_dboption '" + databaseName + "', " +
 				"'select into/bulkcopy/pllsort' , true\n");
-		sm.append("go\n\n");
+		sb.append("go\n\n");
 
-		sm.append("use " + databaseName + "\n\n");
-		sm.append(
+		sb.append("use " + databaseName + "\n\n");
+		sb.append(
 			FileUtil.read(
 				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
 					"-sybase.sql"));
-		sm.append("\n\n");
-		sm.append(FileUtil.read("../sql/indexes/indexes-sybase.sql"));
-		sm.append("\n\n");
-		sm.append(FileUtil.read("../sql/sequences/sequences-sybase.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/indexes/indexes-sybase.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/sequences/sequences-sybase.sql"));
 
-		FileUtil.write(file, sm.toString());
+		FileUtil.write(file, sb.toString());
 	}
 
 	protected String getServerName() {
@@ -109,7 +108,7 @@ public class SybaseUtil extends DBUtil {
 	protected String reword(String data) throws IOException {
 		BufferedReader br = new BufferedReader(new StringReader(data));
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		String line = null;
 
@@ -134,13 +133,13 @@ public class SybaseUtil extends DBUtil {
 					REWORD_TEMPLATE, template);
 			}
 
-			sm.append(line);
-			sm.append("\n");
+			sb.append(line);
+			sb.append("\n");
 		}
 
 		br.close();
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected static String DROP_COLUMN = "drop column";

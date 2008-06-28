@@ -23,7 +23,6 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
@@ -184,18 +183,18 @@ public class DLFileEntryAndShortcutFinderImpl
 	}
 
 	protected String getFolderIds(List<Long> folderIds, String table) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < folderIds.size(); i++) {
-			sm.append(table);
-			sm.append(".folderId = ? ");
+			sb.append(table);
+			sb.append(".folderId = ? ");
 
 			if ((i + 1) != folderIds.size()) {
-				sm.append("OR ");
+				sb.append("OR ");
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 }

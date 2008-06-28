@@ -22,7 +22,6 @@
 
 package com.liferay.portal.webdav.methods;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.webdav.Resource;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
@@ -51,10 +50,10 @@ public class CopyMethodImpl implements Method {
 		String destination = WebDAVUtil.getDestination(
 			req, storage.getRootPath());
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		if (_log.isInfoEnabled()) {
-			sm.append("Destination is " + destination);
+			sb.append("Destination is " + destination);
 		}
 
 		int status = HttpServletResponse.SC_FORBIDDEN;
@@ -72,10 +71,10 @@ public class CopyMethodImpl implements Method {
 				long depth = WebDAVUtil.getDepth(req);
 
 				if (_log.isInfoEnabled()) {
-					sm.append(", overwrite is " + overwrite);
-					sm.append(", depth is " + depth);
+					sb.append(", overwrite is " + overwrite);
+					sb.append(", depth is " + depth);
 
-					_log.info(sm.toString());
+					_log.info(sb.toString());
 				}
 
 				status = storage.copyCollectionResource(
@@ -85,9 +84,9 @@ public class CopyMethodImpl implements Method {
 				boolean overwrite = WebDAVUtil.isOverwrite(req);
 
 				if (_log.isInfoEnabled()) {
-					sm.append(", overwrite is " + overwrite);
+					sb.append(", overwrite is " + overwrite);
 
-					_log.info(sm.toString());
+					_log.info(sb.toString());
 				}
 
 				status = storage.copySimpleResource(

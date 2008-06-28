@@ -79,14 +79,14 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Name
 
-	StringMaker sm = new StringMaker();
+	StringBuilder sb = new StringBuilder();
 
-	sm.append("<img align=\"left\" border=\"0\" src=\"");
-	sm.append(themeDisplay.getPathThemeImages());
-	sm.append("/common/folder.png\">");
-	sm.append(curFolder.getName());
+	sb.append("<img align=\"left\" border=\"0\" src=\"");
+	sb.append(themeDisplay.getPathThemeImages());
+	sb.append("/common/folder.png\">");
+	sb.append(curFolder.getName());
 
-	row.addText(sm.toString(), rowURL);
+	row.addText(sb.toString(), rowURL);
 
 	// Statistics
 
@@ -104,17 +104,17 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Action
 
-	sm = new StringMaker();
+	sb = new StringBuilder();
 
-	sm.append("opener.");
-	sm.append(renderResponse.getNamespace());
-	sm.append("selectFolder('");
-	sm.append(curFolder.getFolderId());
-	sm.append("', '");
-	sm.append(UnicodeFormatter.toString(curFolder.getName()));
-	sm.append("'); window.close();");
+	sb.append("opener.");
+	sb.append(renderResponse.getNamespace());
+	sb.append("selectFolder('");
+	sb.append(curFolder.getFolderId());
+	sb.append("', '");
+	sb.append(UnicodeFormatter.toString(curFolder.getName()));
+	sb.append("'); window.close();");
 
-	row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sm.toString());
+	row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sb.toString());
 
 	// Add result row
 

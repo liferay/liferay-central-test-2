@@ -87,14 +87,14 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Name
 
-	StringMaker sm = new StringMaker();
+	StringBuilder sb = new StringBuilder();
 
-	sm.append("<img align=\"left\" border=\"0\" src=\"");
-	sm.append(themeDisplay.getPathThemeImages());
-	sm.append("/common/folder.png\">");
-	sm.append(curFolder.getName());
+	sb.append("<img align=\"left\" border=\"0\" src=\"");
+	sb.append(themeDisplay.getPathThemeImages());
+	sb.append("/common/folder.png\">");
+	sb.append(curFolder.getName());
 
-	row.addText(sm.toString(), rowURL);
+	row.addText(sb.toString(), rowURL);
 
 	// Statistics
 
@@ -149,30 +149,30 @@ for (int i = 0; i < results.size(); i++) {
 
 		ResultRow row = new ResultRow(fileEntry, fileEntry.getFileEntryId(), i);
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(themeDisplay.getPathMain());
-		sm.append("/document_library/get_file?p_l_id=");
-		sm.append(themeDisplay.getPlid());
-		sm.append("&folderId=");
-		sm.append(folder.getFolderId());
-		sm.append("&name=");
-		sm.append(HttpUtil.encodeURL(fileEntry.getName()));
+		sb.append(themeDisplay.getPathMain());
+		sb.append("/document_library/get_file?p_l_id=");
+		sb.append(themeDisplay.getPlid());
+		sb.append("&folderId=");
+		sb.append(folder.getFolderId());
+		sb.append("&name=");
+		sb.append(HttpUtil.encodeURL(fileEntry.getName()));
 
-		String rowHREF = sm.toString();
+		String rowHREF = sb.toString();
 
 		// Title
 
-		sm = new StringMaker();
+		sb = new StringBuilder();
 
-		sm.append("<img align=\"left\" border=\"0\" src=\"");
-		sm.append(themeDisplay.getPathThemeImages());
-		sm.append("/document_library/");
-		sm.append(DLUtil.getFileExtension(fileEntry.getName()));
-		sm.append(".png\">");
-		sm.append(fileEntry.getTitle());
+		sb.append("<img align=\"left\" border=\"0\" src=\"");
+		sb.append(themeDisplay.getPathThemeImages());
+		sb.append("/document_library/");
+		sb.append(DLUtil.getFileExtension(fileEntry.getName()));
+		sb.append(".png\">");
+		sb.append(fileEntry.getTitle());
 
-		row.addText(sm.toString(), rowHREF);
+		row.addText(sb.toString(), rowHREF);
 
 		// Statistics
 
@@ -187,18 +187,18 @@ for (int i = 0; i < results.size(); i++) {
 
 		// Action
 
-		sm = new StringMaker();
+		sb = new StringBuilder();
 
-		sm.append("opener.");
-		sm.append(renderResponse.getNamespace());
-		sm.append("selectDocumentLibrary('");
-		sm.append("@main_path@/document_library/get_file?p_l_id=");
-		sm.append(themeDisplay.getPlid());
-		sm.append("&uuid=");
-		sm.append(fileEntry.getUuid());
-		sm.append("&groupId=@group_id@'); window.close();");
+		sb.append("opener.");
+		sb.append(renderResponse.getNamespace());
+		sb.append("selectDocumentLibrary('");
+		sb.append("@main_path@/document_library/get_file?p_l_id=");
+		sb.append(themeDisplay.getPlid());
+		sb.append("&uuid=");
+		sb.append(fileEntry.getUuid());
+		sb.append("&groupId=@group_id@'); window.close();");
 
-		row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sm.toString());
+		row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sb.toString());
 
 		// Add result row
 

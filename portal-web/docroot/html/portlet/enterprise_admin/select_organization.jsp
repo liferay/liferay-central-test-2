@@ -110,18 +110,18 @@ for (int i = 0; i < results.size(); i++) {
 
 	ResultRow row = new ResultRow(organization, organization.getOrganizationId(), i);
 
-	StringMaker sm = new StringMaker();
+	StringBuilder sb = new StringBuilder();
 
-	sm.append("javascript: opener.");
-	sm.append(renderResponse.getNamespace());
-	sm.append("selectOrganization('");
-	sm.append(organization.getOrganizationId());
-	sm.append("', '");
-	sm.append(UnicodeFormatter.toString(organization.getName()));
-	sm.append("');");
-	sm.append("window.close();");
+	sb.append("javascript: opener.");
+	sb.append(renderResponse.getNamespace());
+	sb.append("selectOrganization('");
+	sb.append(organization.getOrganizationId());
+	sb.append("', '");
+	sb.append(UnicodeFormatter.toString(organization.getName()));
+	sb.append("');");
+	sb.append("window.close();");
 
-	String rowHREF = sm.toString();
+	String rowHREF = sb.toString();
 
 	// Name
 

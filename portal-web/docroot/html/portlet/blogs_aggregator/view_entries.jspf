@@ -47,19 +47,19 @@
 </c:choose>
 
 <%
-StringMaker sm = new StringMaker();
+StringBuilder sb = new StringBuilder();
 
-sm.append(themeDisplay.getPathMain());
-sm.append("/-/blogs/rss?");
+sb.append(themeDisplay.getPathMain());
+sb.append("/-/blogs/rss?");
 
 if (organizationId > 0) {
-	sm.append("organizationId=" + organizationId);
+	sb.append("organizationId=" + organizationId);
 }
 else {
-	sm.append("companyId=" + company.getCompanyId());
+	sb.append("companyId=" + company.getCompanyId());
 }
 
-String rssURL = sm.toString();
+String rssURL = sb.toString();
 %>
 
 <liferay-ui:icon image="rss" message="subscribe-to-this-blog" url="<%= rssURL %>" target="_blank" label="<%= true %>" />

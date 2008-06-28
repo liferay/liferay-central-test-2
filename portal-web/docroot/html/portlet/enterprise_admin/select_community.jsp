@@ -97,19 +97,19 @@ for (int i = 0; i < results.size(); i++) {
 
 	ResultRow row = new ResultRow(group, group.getGroupId(), i);
 
-	StringMaker sm = new StringMaker();
+	StringBuilder sb = new StringBuilder();
 
-	sm.append("javascript: ");
-	sm.append(renderResponse.getNamespace());
-	sm.append("selectGroup('");
-	sm.append(group.getGroupId());
-	sm.append("', '");
-	sm.append(UnicodeFormatter.toString(group.getName()));
-	sm.append("', '");
-	sm.append(target);
-	sm.append("');");
+	sb.append("javascript: ");
+	sb.append(renderResponse.getNamespace());
+	sb.append("selectGroup('");
+	sb.append(group.getGroupId());
+	sb.append("', '");
+	sb.append(UnicodeFormatter.toString(group.getName()));
+	sb.append("', '");
+	sb.append(target);
+	sb.append("');");
 
-	String rowHREF = sm.toString();
+	String rowHREF = sb.toString();
 
 	// Name
 

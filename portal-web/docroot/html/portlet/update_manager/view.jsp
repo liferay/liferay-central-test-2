@@ -136,15 +136,15 @@ List updatablePackageIds = new ArrayList();
 
 						// Name
 
-						StringMaker sm = new StringMaker();
+						StringBuilder sb = new StringBuilder();
 
-						sm.append("<b>");
-						sm.append(pluginPackageName);
-						sm.append("</b>");
-						sm.append("<br />/");
-						sm.append(pluginPackageContext);
+						sb.append("<b>");
+						sb.append(pluginPackageName);
+						sb.append("</b>");
+						sb.append("<br />/");
+						sb.append(pluginPackageContext);
 
-						row.addText(sm.toString());
+						row.addText(sb.toString());
 
 						// Trusted
 
@@ -176,20 +176,20 @@ List updatablePackageIds = new ArrayList();
 							rowURL.setParameter("moduleId", availablePluginPackage.getModuleId());
 							rowURL.setParameter("repositoryURL", availablePluginPackage.getRepositoryURL());
 
-							sm = new StringMaker();
+							sb = new StringBuilder();
 
-							sm.append("<a href=\"");
-							sm.append(rowURL.toString());
-							sm.append("\">");
-							sm.append(availablePluginPackage.getVersion());
-							sm.append("</a>&nbsp;<img align=\"absmiddle\" border=\"0\" src='");
-							sm.append(themeDisplay.getPathThemeImages());
-							sm.append("/document_library/page.png");
-							sm.append("' onmousemove=\"Liferay.Portal.ToolTip.show(event, this, '");
-							sm.append(availablePluginPackage.getChangeLog());
-							sm.append("')\" />");
+							sb.append("<a href=\"");
+							sb.append(rowURL.toString());
+							sb.append("\">");
+							sb.append(availablePluginPackage.getVersion());
+							sb.append("</a>&nbsp;<img align=\"absmiddle\" border=\"0\" src='");
+							sb.append(themeDisplay.getPathThemeImages());
+							sb.append("/document_library/page.png");
+							sb.append("' onmousemove=\"Liferay.Portal.ToolTip.show(event, this, '");
+							sb.append(availablePluginPackage.getChangeLog());
+							sb.append("')\" />");
 
-							row.addText(sm.toString());
+							row.addText(sb.toString());
 						}
 						else {
 							row.addText(StringPool.DASH);

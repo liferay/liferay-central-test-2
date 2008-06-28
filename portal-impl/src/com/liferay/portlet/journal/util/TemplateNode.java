@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.journal.util;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PropsValues;
 
@@ -94,16 +93,16 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 
 	public String getUrl() {
 		if (getType().equals("link_to_layout")) {
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append(
+			sb.append(
 				PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING);
-			sm.append(StringPool.SLASH);
-			sm.append("@group_id@");
-			sm.append(StringPool.SLASH);
-			sm.append(getData());
+			sb.append(StringPool.SLASH);
+			sb.append("@group_id@");
+			sb.append(StringPool.SLASH);
+			sb.append(getData());
 
-			return sm.toString();
+			return sb.toString();
 		}
 		else {
 			return StringPool.BLANK;

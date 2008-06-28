@@ -25,7 +25,6 @@ package com.liferay.portal.util;
 import au.id.jericho.lib.html.Source;
 
 import com.liferay.portal.kernel.util.Html;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -48,80 +47,80 @@ public class HtmlImpl implements Html {
 		// http://www.owasp.org/index.php/Cross_Site_Scripting
 		// #How_to_Protect_Yourself
 
-		StringMaker sm = new StringMaker(text.length());
+		StringBuilder sb = new StringBuilder(text.length());
 
 		for (int i = 0; i < text.length(); i++) {
 			char c = text.charAt(i);
 
 			switch (c) {
 				case '<':
-					sm.append("&lt;");
+					sb.append("&lt;");
 
 					break;
 
 				case '>':
-					sm.append("&gt;");
+					sb.append("&gt;");
 
 					break;
 
 				case '&':
-					sm.append("&amp;");
+					sb.append("&amp;");
 
 					break;
 
 				case '"':
-					sm.append("&#034;");
+					sb.append("&#034;");
 
 					break;
 
 				case '\'':
-					sm.append("&#039;");
+					sb.append("&#039;");
 
 					break;
 
 				case '(':
-					sm.append("&#040;");
+					sb.append("&#040;");
 
 					break;
 
 				case ')':
-					sm.append("&#041;");
+					sb.append("&#041;");
 
 					break;
 
 				case '#':
-					sm.append("&#035;");
+					sb.append("&#035;");
 
 					break;
 
 				case '%':
-					sm.append("&#037;");
+					sb.append("&#037;");
 
 					break;
 
 				case ';':
-					sm.append("&#059;");
+					sb.append("&#059;");
 
 					break;
 
 				case '+':
-					sm.append("&#043;");
+					sb.append("&#043;");
 
 					break;
 
 				case '-':
-					sm.append("&#045;");
+					sb.append("&#045;");
 
 					break;
 
 				default:
-					sm.append(c);
+					sb.append(c);
 
 					break;
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public String extractText(String html) {
@@ -157,14 +156,14 @@ public class HtmlImpl implements Html {
 
 		text = stripComments(text);
 
-		StringMaker sm = new StringMaker(text.length());
+		StringBuilder sb = new StringBuilder(text.length());
 
 		int x = 0;
 		int y = text.indexOf("<");
 
 		while (y != -1) {
-			sm.append(text.substring(x, y));
-			sm.append(StringPool.SPACE);
+			sb.append(text.substring(x, y));
+			sb.append(StringPool.SPACE);
 
 			// Look for text enclosed by <script></script>
 
@@ -229,10 +228,10 @@ public class HtmlImpl implements Html {
 		}
 
 		if (y == -1) {
-			sm.append(text.substring(x, text.length()));
+			sb.append(text.substring(x, text.length()));
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public String toInputSafe(String text) {

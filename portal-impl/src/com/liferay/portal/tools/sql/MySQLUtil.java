@@ -23,7 +23,6 @@
 package com.liferay.portal.tools.sql;
 
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.BufferedReader;
@@ -65,23 +64,23 @@ public class MySQLUtil extends DBUtil {
 			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
 				"-mysql.sql");
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("drop database if exists " + databaseName + ";\n");
-		sm.append("create database " + databaseName + " character set utf8;\n");
-		sm.append("use ");
-		sm.append(databaseName);
-		sm.append(";\n\n");
-		sm.append(
+		sb.append("drop database if exists " + databaseName + ";\n");
+		sb.append("create database " + databaseName + " character set utf8;\n");
+		sb.append("use ");
+		sb.append(databaseName);
+		sb.append(";\n\n");
+		sb.append(
 			FileUtil.read(
 				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
 					"-mysql.sql"));
-		sm.append("\n\n");
-		sm.append(FileUtil.read("../sql/indexes/indexes-mysql.sql"));
-		sm.append("\n\n");
-		sm.append(FileUtil.read("../sql/sequences/sequences-mysql.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/indexes/indexes-mysql.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/sequences/sequences-mysql.sql"));
 
-		FileUtil.write(file, sm.toString());
+		FileUtil.write(file, sb.toString());
 	}
 
 	protected String getServerName() {
@@ -95,7 +94,7 @@ public class MySQLUtil extends DBUtil {
 	protected String reword(String data) throws IOException {
 		BufferedReader br = new BufferedReader(new StringReader(data));
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		String line = null;
 
@@ -116,13 +115,13 @@ public class MySQLUtil extends DBUtil {
 					REWORD_TEMPLATE, template);
 			}
 
-			sm.append(line);
-			sm.append("\n");
+			sb.append(line);
+			sb.append("\n");
 		}
 
 		br.close();
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static String[] _MYSQL = {

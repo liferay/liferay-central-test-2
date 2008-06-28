@@ -23,7 +23,6 @@
 package com.liferay.portal.tools.sql;
 
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.BufferedReader;
@@ -66,21 +65,21 @@ public class FirebirdUtil extends DBUtil {
 			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
 				"-firebird.sql");
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(
+		sb.append(
 			"create database '" + databaseName +
 				".gdb' page_size 8192 user 'sysdba' password 'masterkey';\n");
-		sm.append(
+		sb.append(
 			"connect '" + databaseName +
 				".gdb' user 'sysdba' password 'masterkey';\n");
-		sm.append(
+		sb.append(
 			readSQL(
 				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
 					"-firebird.sql",
 				_FIREBIRD[0], ";\n"));
 
-		FileUtil.write(file, sm.toString());
+		FileUtil.write(file, sb.toString());
 	}
 
 	protected String getServerName() {
@@ -94,7 +93,7 @@ public class FirebirdUtil extends DBUtil {
 	protected String reword(String data) throws IOException {
 		BufferedReader br = new BufferedReader(new StringReader(data));
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		String line = null;
 
@@ -116,13 +115,13 @@ public class FirebirdUtil extends DBUtil {
 					REWORD_TEMPLATE, template);
 			}
 
-			sm.append(line);
-			sm.append("\n");
+			sb.append(line);
+			sb.append("\n");
 		}
 
 		br.close();
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static String[] _FIREBIRD = {

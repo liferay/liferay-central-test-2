@@ -24,7 +24,6 @@ package com.liferay.mail.util;
 
 import com.liferay.mail.model.Filter;
 import com.liferay.portal.kernel.util.ProcessUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PropsKeys;
@@ -143,14 +142,14 @@ public class ShellHook implements Hook {
 			int exitValue = p.exitValue();
 
 			if (exitValue != 0) {
-				StringMaker cmd = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
 				for (int i = 0; i < cmdLine.length; i++) {
-					cmd.append(cmdLine[i]);
-					cmd.append(StringPool.SPACE);
+					sb.append(cmdLine[i]);
+					sb.append(StringPool.SPACE);
 				}
 
-				throw new IllegalArgumentException(cmd.toString());
+				throw new IllegalArgumentException(sb.toString());
 			}
 		}
 		catch (Exception e) {

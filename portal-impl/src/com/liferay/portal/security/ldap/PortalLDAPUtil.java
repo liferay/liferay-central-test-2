@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.LogUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -111,15 +110,15 @@ public class PortalLDAPUtil {
 
 			// Generate full DN based on user DN
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append(userMappings.getProperty("screenName"));
-			sm.append(StringPool.EQUAL);
-			sm.append(user.getScreenName());
-			sm.append(StringPool.COMMA);
-			sm.append(getUsersDN(companyId));
+			sb.append(userMappings.getProperty("screenName"));
+			sb.append(StringPool.EQUAL);
+			sb.append(user.getScreenName());
+			sb.append(StringPool.COMMA);
+			sb.append(getUsersDN(companyId));
 
-			name = sm.toString();
+			name = sb.toString();
 
 			// Create new user in LDAP
 
@@ -172,15 +171,15 @@ public class PortalLDAPUtil {
 
 			// Generate full DN based on user DN
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append(userMappings.getProperty("screenName"));
-			sm.append(StringPool.EQUAL);
-			sm.append(user.getScreenName());
-			sm.append(StringPool.COMMA);
-			sm.append(getUsersDN(companyId));
+			sb.append(userMappings.getProperty("screenName"));
+			sb.append(StringPool.EQUAL);
+			sb.append(user.getScreenName());
+			sb.append(StringPool.COMMA);
+			sb.append(getUsersDN(companyId));
 
-			name = sm.toString();
+			name = sb.toString();
 
 			// Create new user in LDAP
 
@@ -362,13 +361,13 @@ public class PortalLDAPUtil {
 			return binding.getName();
 		}
 		else {
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append(binding.getName());
-			sm.append(StringPool.COMMA);
-			sm.append(baseDN);
+			sb.append(binding.getName());
+			sb.append(StringPool.COMMA);
+			sb.append(baseDN);
 
-			return sm.toString();
+			return sb.toString();
 		}
 	}
 
@@ -386,7 +385,7 @@ public class PortalLDAPUtil {
 
 		Properties userMappings = getUserMappings(companyId);
 
-		StringMaker filter = new StringMaker();
+		StringBuilder filter = new StringBuilder();
 
 		filter.append(StringPool.OPEN_PARENTHESIS);
 		filter.append(userMappings.getProperty("screenName"));

@@ -22,7 +22,6 @@
 
 package com.liferay.util;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -206,26 +205,26 @@ public class Version implements Comparable<Version> {
 	}
 
 	public String toString() {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(_major);
+		sb.append(_major);
 
 		if (Validator.isNotNull(_minor)) {
-			sm.append(_SEPARATOR);
-			sm.append(_minor);
+			sb.append(_SEPARATOR);
+			sb.append(_minor);
 
 			if (Validator.isNotNull(_bugFix)) {
-				sm.append(_SEPARATOR);
-				sm.append(_bugFix);
+				sb.append(_SEPARATOR);
+				sb.append(_bugFix);
 
 				if (Validator.isNotNull(_buildNumber)) {
-					sm.append(_SEPARATOR);
-					sm.append(_buildNumber);
+					sb.append(_SEPARATOR);
+					sb.append(_buildNumber);
 				}
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected Version(String version) {
@@ -241,17 +240,17 @@ public class Version implements Comparable<Version> {
 			_bugFix = st.nextToken();
 		}
 
-		StringMaker buildNumber = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		while (st.hasMoreTokens()) {
-			buildNumber.append(st.nextToken());
+			sb.append(st.nextToken());
 
 			if (st.hasMoreTokens()) {
-				buildNumber.append(_SEPARATOR);
+				sb.append(_SEPARATOR);
 			}
 		}
 
-		_buildNumber = buildNumber.toString();
+		_buildNumber = sb.toString();
 	}
 
 	private boolean _contains(String containerStr, String numberStr) {

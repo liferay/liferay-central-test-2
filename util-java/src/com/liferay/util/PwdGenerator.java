@@ -22,8 +22,6 @@
 
 package com.liferay.util;
 
-import com.liferay.portal.kernel.util.StringMaker;
-
 /**
  * <a href="PwdGenerator.java.html"><b><i>View Source</i></b></a>
  *
@@ -55,13 +53,13 @@ public class PwdGenerator {
 	}
 
 	private static String _getPassword(String key, int length) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < length; i++) {
-			sm.append(key.charAt((int)(Math.random() * key.length())));
+			sb.append(key.charAt((int)(Math.random() * key.length())));
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 }

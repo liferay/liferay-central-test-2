@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.layoutconfiguration.util.velocity;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil;
@@ -65,7 +64,7 @@ public class PortletLogic extends RuntimeLogic {
 		_renderResponse = renderResponse;
 	}
 
-	public void processContent(StringMaker sm, Map<String, String> attributes)
+	public void processContent(StringBuilder sb, Map<String, String> attributes)
 		throws Exception {
 
 		String rootPortletId = attributes.get("name");
@@ -83,7 +82,7 @@ public class PortletLogic extends RuntimeLogic {
 		}
 
 		RuntimePortletUtil.processPortlet(
-			sm, _ctx, _req, _res, _renderRequest, _renderResponse, portletId,
+			sb, _ctx, _req, _res, _renderRequest, _renderResponse, portletId,
 			queryString);
 	}
 

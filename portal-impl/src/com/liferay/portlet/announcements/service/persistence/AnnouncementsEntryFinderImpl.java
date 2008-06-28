@@ -25,7 +25,6 @@ package com.liferay.portlet.announcements.service.persistence;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.CalendarUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
@@ -336,22 +335,22 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 	}
 
 	protected String getClassPKs(long classNameId, long[] classPKs) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("(AnnouncementsEntry.classNameId = ?) AND (");
+		sb.append("(AnnouncementsEntry.classNameId = ?) AND (");
 
 		for (int i = 0; i < classPKs.length; i++) {
-			sm.append("(AnnouncementsEntry.classPK = ?)");
+			sb.append("(AnnouncementsEntry.classPK = ?)");
 
 			if ((i + 1) < classPKs.length) {
-				sm.append(" OR ");
+				sb.append(" OR ");
 			}
 			else {
-				sm.append(")");
+				sb.append(")");
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getClassPKs(LinkedHashMap<Long, long[]> scopes) {
@@ -359,7 +358,7 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 			return StringPool.BLANK;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		Iterator<Map.Entry<Long, long[]>> itr = scopes.entrySet().iterator();
 
@@ -369,16 +368,16 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 			Long classNameId = entry.getKey();
 			long[] classPKs = entry.getValue();
 
-			sm.append("(");
-			sm.append(getClassPKs(classNameId.longValue(), classPKs));
-			sm.append(")");
+			sb.append("(");
+			sb.append(getClassPKs(classNameId.longValue(), classPKs));
+			sb.append(")");
 
 			if (itr.hasNext()) {
-				sm.append(" OR ");
+				sb.append(" OR ");
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected void setClassPKs(

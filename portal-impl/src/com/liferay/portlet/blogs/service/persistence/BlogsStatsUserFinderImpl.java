@@ -24,7 +24,6 @@ package com.liferay.portlet.blogs.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
@@ -163,17 +162,17 @@ public class BlogsStatsUserFinderImpl implements BlogsStatsUserFinder {
 	}
 
 	protected String getOrganizationIds(List<Long> organizationIds) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < organizationIds.size(); i++) {
-			sm.append("Users_Orgs.organizationId = ? ");
+			sb.append("Users_Orgs.organizationId = ? ");
 
 			if ((i + 1) != organizationIds.size()) {
-				sm.append("OR ");
+				sb.append("OR ");
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 }

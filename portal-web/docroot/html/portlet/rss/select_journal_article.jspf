@@ -65,19 +65,19 @@ for (int i = 0; i < results.size(); i++) {
 
 	ResultRow row = new ResultRow(article, article.getArticleId() + EditArticleAction.VERSION_SEPARATOR + article.getVersion(), i);
 
-	StringMaker sm = new StringMaker();
+	StringBuilder sb = new StringBuilder();
 
-	sm.append("javascript: ");
-	sm.append(renderResponse.getNamespace());
-	sm.append("selectAsset('");
-	sm.append(article.getResourcePrimKey());
-	sm.append("', '");
-	sm.append(article.getTitle());
-	sm.append("', '");
-	sm.append(assetOrder);
-	sm.append("');");
+	sb.append("javascript: ");
+	sb.append(renderResponse.getNamespace());
+	sb.append("selectAsset('");
+	sb.append(article.getResourcePrimKey());
+	sb.append("', '");
+	sb.append(article.getTitle());
+	sb.append("', '");
+	sb.append(assetOrder);
+	sb.append("');");
 
-	String rowHREF = sm.toString();
+	String rowHREF = sb.toString();
 
 	// Article id
 

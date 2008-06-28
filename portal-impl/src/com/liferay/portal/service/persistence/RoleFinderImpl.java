@@ -26,7 +26,6 @@ import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -131,19 +130,19 @@ public class RoleFinderImpl implements RoleFinder {
 			try {
 				session = HibernateUtil.openSession();
 
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
-				sm.append("(");
-				sm.append(CustomSQLUtil.get(COUNT_BY_COMMUNITY));
-				sm.append(") UNION (");
-				sm.append(CustomSQLUtil.get(COUNT_BY_ORGANIZATION));
-				sm.append(") UNION (");
-				sm.append(CustomSQLUtil.get(COUNT_BY_USER));
-				sm.append(") UNION (");
-				sm.append(CustomSQLUtil.get(COUNT_BY_USER_GROUP));
-				sm.append(")");
+				sb.append("(");
+				sb.append(CustomSQLUtil.get(COUNT_BY_COMMUNITY));
+				sb.append(") UNION (");
+				sb.append(CustomSQLUtil.get(COUNT_BY_ORGANIZATION));
+				sb.append(") UNION (");
+				sb.append(CustomSQLUtil.get(COUNT_BY_USER));
+				sb.append(") UNION (");
+				sb.append(CustomSQLUtil.get(COUNT_BY_USER_GROUP));
+				sb.append(")");
 
-				SQLQuery q = session.createSQLQuery(sm.toString());
+				SQLQuery q = session.createSQLQuery(sb.toString());
 
 				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
 
@@ -494,18 +493,18 @@ public class RoleFinderImpl implements RoleFinder {
 	}
 
 	protected String getGroupIds(long[] groupIds, String table) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < groupIds.length; i++) {
-			sm.append(table);
-			sm.append(".groupId = ?");
+			sb.append(table);
+			sb.append(".groupId = ?");
 
 			if ((i + 1) < groupIds.length) {
-				sm.append(" OR ");
+				sb.append(" OR ");
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected void setGroupIds(QueryPos qPos, long[] groupIds) {
@@ -519,7 +518,7 @@ public class RoleFinderImpl implements RoleFinder {
 			return StringPool.BLANK;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 
@@ -530,11 +529,11 @@ public class RoleFinderImpl implements RoleFinder {
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
-				sm.append(getJoin(key));
+				sb.append(getJoin(key));
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getJoin(String key) {
@@ -563,7 +562,7 @@ public class RoleFinderImpl implements RoleFinder {
 			return StringPool.BLANK;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 
@@ -574,11 +573,11 @@ public class RoleFinderImpl implements RoleFinder {
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
-				sm.append(getWhere(key));
+				sb.append(getWhere(key));
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getWhere(String key) {
@@ -595,12 +594,12 @@ public class RoleFinderImpl implements RoleFinder {
 			int pos = join.indexOf("WHERE");
 
 			if (pos != -1) {
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
-				sm.append(join.substring(pos + 5, join.length()));
-				sm.append(" AND ");
+				sb.append(join.substring(pos + 5, join.length()));
+				sb.append(" AND ");
 
-				join = sm.toString();
+				join = sb.toString();
 			}
 			else {
 				join = StringPool.BLANK;

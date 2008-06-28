@@ -165,28 +165,28 @@ for (int i = 0; i < portlets.size(); i++) {
 				entryTitle = fileEntry.getTitle();
 			}
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append("<a href=\"");
-			sm.append(entryHref);
-			sm.append("\"");
+			sb.append("<a href=\"");
+			sb.append(entryHref);
+			sb.append("\"");
 
 			if (portlet.getPortletId().equals(PortletKeys.JOURNAL)) {
-				sm.append(" target=\"_blank\"");
+				sb.append(" target=\"_blank\"");
 			}
 
-			sm.append(">");
-			sm.append("<span style=\"font-style: italic;\">");
-			sm.append(entryTitle);
-			sm.append("</span><br />");
-			sm.append(summary);
-			sm.append("</a>");
+			sb.append(">");
+			sb.append("<span style=\"font-style: italic;\">");
+			sb.append(entryTitle);
+			sb.append("</span><br />");
+			sb.append(summary);
+			sb.append("</a>");
 
-			row.addText(StringUtil.highlight(sm.toString(), keywords));
+			row.addText(StringUtil.highlight(sb.toString(), keywords));
 
 			// Tags
 
-			sm = new StringMaker();
+			sb = new StringBuilder();
 
 			String[] tags = StringUtil.split(el.elementText("tags"));
 
@@ -197,18 +197,18 @@ for (int i = 0; i < portlets.size(); i++) {
 
 				tagURL.setParameter("keywords", Field.TAGS_ENTRIES + StringPool.COLON + tag);
 
-				sm.append("<a href=\"");
-				sm.append(tagURL.toString());
-				sm.append("\">");
-				sm.append(tag);
-				sm.append("</a>");
+				sb.append("<a href=\"");
+				sb.append(tagURL.toString());
+				sb.append("\">");
+				sb.append(tag);
+				sb.append("</a>");
 
 				if ((k + 1) < tags.length) {
-					sm.append(", ");
+					sb.append(", ");
 				}
 			}
 
-			row.addText(StringUtil.highlight(sm.toString(), keywords));
+			row.addText(StringUtil.highlight(sb.toString(), keywords));
 
 			// Ratings
 

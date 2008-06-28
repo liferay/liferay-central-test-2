@@ -177,18 +177,18 @@ portletURL.setParameter("tabs1", tabs1);
 
 			// Name and short description
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append("<b>");
-			sm.append(productEntry.getName());
-			sm.append("</b>");
+			sb.append("<b>");
+			sb.append(productEntry.getName());
+			sb.append("</b>");
 
 			if (Validator.isNotNull(productEntry.getShortDescription())) {
-				sm.append("<br />");
-				sm.append(productEntry.getShortDescription());
+				sb.append("<br />");
+				sb.append(productEntry.getShortDescription());
 			}
 
-			row.addText(sm.toString(), rowURL);
+			row.addText(sb.toString(), rowURL);
 
 			// Version
 
@@ -209,7 +209,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			// Licenses
 
-			sm = new StringMaker();
+			sb = new StringBuilder();
 
 			Iterator itr = productEntry.getLicenses().iterator();
 
@@ -218,14 +218,14 @@ portletURL.setParameter("tabs1", tabs1);
 
 				license = license.toEscapedModel();
 
-				sm.append(license.getName());
+				sb.append(license.getName());
 
 				if (itr.hasNext()) {
-					sm.append(", ");
+					sb.append(", ");
 				}
 			}
 
-			row.addText(sm.toString(), rowURL);
+			row.addText(sb.toString(), rowURL);
 
 			// Modified date
 
@@ -362,18 +362,18 @@ portletURL.setParameter("tabs1", tabs1);
 
 			// Name and short description
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append("<b>");
-			sm.append(productEntry.getName());
-			sm.append("</b>");
+			sb.append("<b>");
+			sb.append(productEntry.getName());
+			sb.append("</b>");
 
 			if (Validator.isNotNull(productEntry.getShortDescription())) {
-				sm.append("<br />");
-				sm.append(productEntry.getShortDescription());
+				sb.append("<br />");
+				sb.append(productEntry.getShortDescription());
 			}
 
-			row.addText(sm.toString(), rowURL);
+			row.addText(sb.toString(), rowURL);
 
 			// Version
 
@@ -394,7 +394,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			// Licenses
 
-			sm = new StringMaker();
+			sb = new StringBuilder();
 
 			Iterator itr = productEntry.getLicenses().iterator();
 
@@ -403,14 +403,14 @@ portletURL.setParameter("tabs1", tabs1);
 
 				license = license.toEscapedModel();
 
-				sm.append(license.getName());
+				sb.append(license.getName());
 
 				if (itr.hasNext()) {
-					sm.append(", ");
+					sb.append(", ");
 				}
 			}
 
-			row.addText(sm.toString(), rowURL);
+			row.addText(sb.toString(), rowURL);
 
 			// Modified date
 

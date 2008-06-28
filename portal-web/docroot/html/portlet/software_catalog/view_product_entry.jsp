@@ -305,20 +305,20 @@ List productScreenshots = SCProductScreenshotLocalServiceUtil.getProductScreensh
 
 			// Name and description
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append("<b>");
-			sm.append(curProductVersion.getVersion());
-			sm.append("</b>");
+			sb.append("<b>");
+			sb.append(curProductVersion.getVersion());
+			sb.append("</b>");
 
 			if (Validator.isNotNull(curProductVersion.getChangeLog())) {
-				sm.append("<br />");
-				sm.append(curProductVersion.getChangeLog());
+				sb.append("<br />");
+				sb.append(curProductVersion.getChangeLog());
 			}
 
-			sm.append("</a>");
+			sb.append("</a>");
 
-			row.addText(sm.toString());
+			row.addText(sb.toString());
 
 			row.addText(_getFrameworkVersions(curProductVersion.getFrameworkVersions()));
 			row.addText(dateFormatDateTime.format(curProductVersion.getModifiedDate()));
@@ -341,7 +341,7 @@ List productScreenshots = SCProductScreenshotLocalServiceUtil.getProductScreensh
 public String _getFrameworkVersions(List frameworkVersions) {
 	Iterator itr = frameworkVersions.iterator();
 
-	StringMaker sm = new StringMaker();
+	StringBuilder sb = new StringBuilder();
 
 	while (itr.hasNext()) {
 		SCFrameworkVersion frameworkVersion = (SCFrameworkVersion)itr.next();
@@ -349,21 +349,21 @@ public String _getFrameworkVersions(List frameworkVersions) {
 		frameworkVersion = frameworkVersion.toEscapedModel();
 
 		if (Validator.isNotNull(frameworkVersion.getUrl())) {
-			sm.append("<a href='");
-			sm.append(frameworkVersion.getUrl());
-			sm.append("'>");
-			sm.append(frameworkVersion.getName());
-			sm.append("</a>");
+			sb.append("<a href='");
+			sb.append(frameworkVersion.getUrl());
+			sb.append("'>");
+			sb.append(frameworkVersion.getName());
+			sb.append("</a>");
 		}
 		else {
-			sm.append(frameworkVersion.getName());
+			sb.append(frameworkVersion.getName());
 		}
 
 		if (itr.hasNext()) {
-			sm.append(", ");
+			sb.append(", ");
 		}
 	}
 
-	return sm.toString();
+	return sb.toString();
 }
 %>

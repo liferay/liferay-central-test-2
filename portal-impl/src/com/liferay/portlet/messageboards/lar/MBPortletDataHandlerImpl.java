@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.ObjectValuePair;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
@@ -656,65 +655,65 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 	protected String getCategoryPath(
 		PortletDataContext context, MBCategory category) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.MESSAGE_BOARDS));
-		sm.append("/categories/");
-		sm.append(category.getCategoryId());
-		sm.append(".xml");
+		sb.append(context.getPortletPath(PortletKeys.MESSAGE_BOARDS));
+		sb.append("/categories/");
+		sb.append(category.getCategoryId());
+		sb.append(".xml");
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getMessageAttachementBinPath(
 		PortletDataContext context, MBMessage message, String attachment) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.MESSAGE_BOARDS));
-		sm.append("/bin/");
-		sm.append(message.getMessageId());
-		sm.append(StringPool.SLASH);
-		sm.append(attachment);
+		sb.append(context.getPortletPath(PortletKeys.MESSAGE_BOARDS));
+		sb.append("/bin/");
+		sb.append(message.getMessageId());
+		sb.append(StringPool.SLASH);
+		sb.append(attachment);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getMessageFlagPath(
 		PortletDataContext context, MBMessageFlag messageFlag) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.MESSAGE_BOARDS));
-		sm.append("/message-flags/");
-		sm.append(messageFlag.getMessageFlagId());
-		sm.append(".xml");
+		sb.append(context.getPortletPath(PortletKeys.MESSAGE_BOARDS));
+		sb.append("/message-flags/");
+		sb.append(messageFlag.getMessageFlagId());
+		sb.append(".xml");
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getMessagePath(
 		PortletDataContext context, MBMessage message) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.MESSAGE_BOARDS));
-		sm.append("/messages/");
-		sm.append(message.getMessageId());
-		sm.append(".xml");
+		sb.append(context.getPortletPath(PortletKeys.MESSAGE_BOARDS));
+		sb.append("/messages/");
+		sb.append(message.getMessageId());
+		sb.append(".xml");
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getUserBanPath(PortletDataContext context, MBBan ban) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.MESSAGE_BOARDS));
-		sm.append("/user-bans/");
-		sm.append(ban.getBanId());
-		sm.append(".xml");
+		sb.append(context.getPortletPath(PortletKeys.MESSAGE_BOARDS));
+		sb.append("/user-bans/");
+		sb.append(ban.getBanId());
+		sb.append(".xml");
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static final String _NAMESPACE = "message_board";

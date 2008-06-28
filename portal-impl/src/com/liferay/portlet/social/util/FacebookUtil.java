@@ -24,7 +24,6 @@ package com.liferay.portlet.social.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -51,14 +50,14 @@ public class FacebookUtil {
 		int pos = fbmlPortletURL.indexOf(
 			StringPool.SLASH, Http.HTTPS_WITH_SLASH.length());
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(fbmlPortletURL.substring(0, pos));
-		sm.append(FACEBOOK_SERVLET_PATH);
-		sm.append(facebookCanvasPageURL);
-		sm.append(fbmlPortletURL.substring(pos));
+		sb.append(fbmlPortletURL.substring(0, pos));
+		sb.append(FACEBOOK_SERVLET_PATH);
+		sb.append(facebookCanvasPageURL);
+		sb.append(fbmlPortletURL.substring(pos));
 
-		String callbackURL = sm.toString();
+		String callbackURL = sb.toString();
 
 		if (!callbackURL.endsWith(StringPool.SLASH)) {
 			callbackURL += StringPool.SLASH;

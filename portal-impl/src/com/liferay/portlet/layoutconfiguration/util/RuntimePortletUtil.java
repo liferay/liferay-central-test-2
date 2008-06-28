@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -70,42 +69,42 @@ import org.apache.velocity.app.Velocity;
 public class RuntimePortletUtil {
 
 	public static void processPortlet(
-			StringMaker sm, ServletContext ctx, HttpServletRequest req,
+			StringBuilder sb, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, RenderRequest renderRequest,
 			RenderResponse renderResponse, String portletId, String queryString)
 		throws Exception {
 
 		processPortlet(
-			sm, ctx, req, res, renderRequest, renderResponse, portletId,
+			sb, ctx, req, res, renderRequest, renderResponse, portletId,
 			queryString, null, null, null);
 	}
 
 	public static void processPortlet(
-			StringMaker sm, ServletContext ctx, HttpServletRequest req,
+			StringBuilder sb, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, RenderRequest renderRequest,
 			RenderResponse renderResponse, String portletId, String queryString,
 			String columnId, Integer columnPos, Integer columnCount)
 		throws Exception {
 
 		processPortlet(
-			sm, ctx, req, res, renderRequest, renderResponse, null, portletId,
+			sb, ctx, req, res, renderRequest, renderResponse, null, portletId,
 			queryString, columnId, columnPos, columnCount, null);
 	}
 
 	public static void processPortlet(
-			StringMaker sm, ServletContext ctx, HttpServletRequest req,
+			StringBuilder sb, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, Portlet portlet, String queryString,
 			String columnId, Integer columnPos, Integer columnCount,
 			String path)
 		throws Exception {
 
 		processPortlet(
-			sm, ctx, req, res, null, null, portlet, portlet.getPortletId(),
+			sb, ctx, req, res, null, null, portlet, portlet.getPortletId(),
 			queryString, columnId, columnPos, columnCount, path);
 	}
 
 	public static void processPortlet(
-			StringMaker sm, ServletContext ctx, HttpServletRequest req,
+			StringBuilder sb, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, RenderRequest renderRequest,
 			RenderResponse renderResponse, Portlet portlet, String portletId,
 			String queryString, String columnId, Integer columnPos,
@@ -163,7 +162,7 @@ public class RuntimePortletUtil {
 
 		try {
 			PortalUtil.renderPortlet(
-				sm, ctx, req, res, portlet, queryString, columnId, columnPos,
+				sb, ctx, req, res, portlet, queryString, columnId, columnPos,
 				columnCount, path);
 		}
 		finally {
@@ -266,15 +265,15 @@ public class RuntimePortletUtil {
 			Integer columnPos = (Integer)value[2];
 			Integer columnCount = (Integer)value[3];
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
 			processPortlet(
-				sm, ctx, req, res, portlet, queryString, columnId, columnPos,
+				sb, ctx, req, res, portlet, queryString, columnId, columnPos,
 				columnCount, null);
 
 			output = StringUtil.replace(
 				output, "[$TEMPLATE_PORTLET_" + portlet.getPortletId() + "$]",
-				sm.toString());
+				sb.toString());
 		}
 
 		return output;
@@ -291,13 +290,13 @@ public class RuntimePortletUtil {
 		try {
 			req.setAttribute(WebKeys.RENDER_PORTLET_RESOURCE, Boolean.TRUE);
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
 			int x = 0;
 			int y = content.indexOf(runtimeLogic.getOpenTag());
 
 			while (y != -1) {
-				sm.append(content.substring(x, y));
+				sb.append(content.substring(x, y));
 
 				int close1 = content.indexOf(runtimeLogic.getClose1Tag(), y);
 				int close2 = content.indexOf(runtimeLogic.getClose2Tag(), y);
@@ -309,16 +308,16 @@ public class RuntimePortletUtil {
 					x = close2 + runtimeLogic.getClose2Tag().length();
 				}
 
-				runtimeLogic.processXML(sm, content.substring(y, x));
+				runtimeLogic.processXML(sb, content.substring(y, x));
 
 				y = content.indexOf(runtimeLogic.getOpenTag(), x);
 			}
 
 			if (y == -1) {
-				sm.append(content.substring(x, content.length()));
+				sb.append(content.substring(x, content.length()));
 			}
 
-			return sm.toString();
+			return sb.toString();
 		}
 		finally {
 			req.removeAttribute(WebKeys.RENDER_PORTLET_RESOURCE);

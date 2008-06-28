@@ -38,21 +38,21 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 		row.addJSP(align, valign, "/html/portlet/document_library/file_entry_action.jsp");
 	}
 	else if (fileEntryColumn.equals("document")) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("<img align=\"left\" border=\"0\" src=\"");
-		sm.append(themeDisplay.getPathThemeImages());
-		sm.append("/document_library/");
-		sm.append(DLUtil.getFileExtension(fileEntry.getName()));
-		sm.append(".png\">");
-		sm.append(fileEntry.getTitleWithExtension());
+		sb.append("<img align=\"left\" border=\"0\" src=\"");
+		sb.append(themeDisplay.getPathThemeImages());
+		sb.append("/document_library/");
+		sb.append(DLUtil.getFileExtension(fileEntry.getName()));
+		sb.append(".png\">");
+		sb.append(fileEntry.getTitleWithExtension());
 
 		if (Validator.isNotNull(fileEntry.getDescription())) {
-			sm.append("<br />");
-			sm.append(fileEntry.getDescription());
+			sb.append("<br />");
+			sb.append(fileEntry.getDescription());
 		}
 
-		row.addText(sm.toString(), rowHREF);
+		row.addText(sb.toString(), rowHREF);
 	}
 	else if (fileEntryColumn.equals("downloads")) {
 		row.addText(String.valueOf(fileEntry.getReadCount()), rowHREF);

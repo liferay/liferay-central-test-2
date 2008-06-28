@@ -24,7 +24,6 @@ package com.liferay.portlet.documentlibrary.model.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -62,13 +61,13 @@ public class DLFolderImpl extends DLFolderModelImpl implements DLFolder {
 	}
 
 	public String getPath() throws PortalException, SystemException {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		DLFolder folder = this;
 
 		while (true) {
-			sm.insert(0, folder.getName());
-			sm.insert(0, StringPool.SLASH);
+			sb.insert(0, folder.getName());
+			sb.insert(0, StringPool.SLASH);
 
 			if (folder.getParentFolderId() != DEFAULT_PARENT_FOLDER_ID) {
 				folder = DLFolderLocalServiceUtil.getFolder(
@@ -79,7 +78,7 @@ public class DLFolderImpl extends DLFolderModelImpl implements DLFolder {
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public String[] getPathArray() throws PortalException, SystemException {

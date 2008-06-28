@@ -23,7 +23,6 @@
 package com.liferay.portlet.wiki.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
@@ -215,15 +214,15 @@ public class WikiPageFinderImpl implements WikiPageFinder {
 			List<WikiPage> list = q.list();
 
 			if (list.size() == 0) {
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
-				sm.append("No WikiPage exists with the key {uuid=");
-				sm.append(uuid);
-				sm.append(", groupId=");
-				sm.append(groupId);
-				sm.append("}");
+				sb.append("No WikiPage exists with the key {uuid=");
+				sb.append(uuid);
+				sb.append(", groupId=");
+				sb.append(groupId);
+				sb.append("}");
 
-				throw new NoSuchPageException(sm.toString());
+				throw new NoSuchPageException(sb.toString());
 			}
 			else {
 				return list.get(0);

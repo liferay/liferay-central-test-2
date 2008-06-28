@@ -26,7 +26,6 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsKeys;
@@ -133,12 +132,12 @@ public class WebFormUtil {
 		s = s.trim();
 
 		if (!s.endsWith(delimiter)) {
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append(s);
-			sm.append(delimiter);
+			sb.append(s);
+			sb.append(delimiter);
 
-			s = sm.toString();
+			s = sb.toString();
 		}
 
 		if (s.equals(delimiter)) {

@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.servlet.filters.CacheResponseData;
@@ -88,25 +87,25 @@ public class LayoutCacheUtil {
 	}
 
 	private static String _encodeGroupKey(long companyId) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(CACHE_NAME);
-		sm.append(StringPool.POUND);
-		sm.append(companyId);
+		sb.append(CACHE_NAME);
+		sb.append(StringPool.POUND);
+		sb.append(companyId);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static String _encodeKey(long companyId, String key) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(CACHE_NAME);
-		sm.append(StringPool.POUND);
-		sm.append(companyId);
-		sm.append(StringPool.POUND);
-		sm.append(key);
+		sb.append(CACHE_NAME);
+		sb.append(StringPool.POUND);
+		sb.append(companyId);
+		sb.append(StringPool.POUND);
+		sb.append(key);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LayoutCacheUtil.class);

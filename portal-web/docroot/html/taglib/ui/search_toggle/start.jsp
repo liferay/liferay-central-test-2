@@ -68,36 +68,36 @@
 <div id="<%= id %>advanced" style="display: <%= !clickValue.equals("basic") ? "block" : "none" %>;">
 
 	<%
-	StringMaker sm = new StringMaker();
+	StringBuilder sb = new StringBuilder();
 
-	sm.append("<select name=\"");
-	sm.append(namespace);
-	sm.append(displayTerms.AND_OPERATOR);
-	sm.append("\">");
+	sb.append("<select name=\"");
+	sb.append(namespace);
+	sb.append(displayTerms.AND_OPERATOR);
+	sb.append("\">");
 
-	sm.append("<option ");
+	sb.append("<option ");
 
 	if (displayTerms.isAndOperator()) {
-		sm.append("selected ");
+		sb.append("selected ");
 	}
 
-	sm.append("value=\"1\">");
-	sm.append(LanguageUtil.get(pageContext, "all"));
-	sm.append("</option>");
+	sb.append("value=\"1\">");
+	sb.append(LanguageUtil.get(pageContext, "all"));
+	sb.append("</option>");
 
-	sm.append("<option ");
+	sb.append("<option ");
 
 	if (!displayTerms.isAndOperator()) {
-		sm.append("selected ");
+		sb.append("selected ");
 	}
 
-	sm.append("value=\"0\">");
-	sm.append(LanguageUtil.get(pageContext, "any"));
-	sm.append("</option>");
+	sb.append("value=\"0\">");
+	sb.append(LanguageUtil.get(pageContext, "any"));
+	sb.append("</option>");
 
-	sm.append("</select>");
+	sb.append("</select>");
 	%>
 
-	<%= LanguageUtil.format(pageContext, "match-x-of-the-following-fields", sm.toString()) %>
+	<%= LanguageUtil.format(pageContext, "match-x-of-the-following-fields", sb.toString()) %>
 
 	<br /><br />

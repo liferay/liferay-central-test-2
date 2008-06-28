@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.InstancePool;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -2263,12 +2262,12 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		}
 
 		if (_portletApp.isWARFile()) {
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append(StringPool.SLASH);
-			sm.append(_portletApp.getServletContextName());
+			sb.append(StringPool.SLASH);
+			sb.append(_portletApp.getServletContextName());
 
-			return sm.toString();
+			return sb.toString();
 		}
 		else {
 			return PortalUtil.getPathContext();

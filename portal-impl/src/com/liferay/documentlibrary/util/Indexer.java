@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.search.lucene.LuceneUtil;
@@ -118,12 +117,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 				return null;
 			}
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append(fileEntry.getTitle());
-			sm.append(StringPool.SPACE);
-			sm.append(fileEntry.getDescription());
-			sm.append(StringPool.SPACE);
+			sb.append(fileEntry.getTitle());
+			sb.append(StringPool.SPACE);
+			sb.append(fileEntry.getDescription());
+			sb.append(StringPool.SPACE);
 
 			Properties extraSettingsProps =
 				fileEntry.getExtraSettingsProperties();
@@ -136,10 +135,10 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 				String value = GetterUtil.getString((String)entry.getValue());
 
-				sm.append(value);
+				sb.append(value);
 			}
 
-			String properties = sm.toString();
+			String properties = sb.toString();
 
 			String[] tagsEntries = TagsEntryLocalServiceUtil.getEntryNames(
 				DLFileEntry.class.getName(), fileEntry.getFileEntryId());

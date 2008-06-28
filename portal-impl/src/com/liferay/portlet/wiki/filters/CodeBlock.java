@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.wiki.filters;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.util.regex.Matcher;
@@ -39,18 +38,18 @@ import org.stringtree.factory.AbstractStringFetcher;
 public class CodeBlock extends AbstractStringFetcher {
 
 	public Object getObject(String content) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		Matcher matcher = _pattern.matcher(content);
 
 		if (matcher.matches()) {
-			sm.append("<div class=\"wiki-code\">");
+			sb.append("<div class=\"wiki-code\">");
 
 			String[] lines = matcher.group(1).split("\\n");
 
 			for (int i = 0; i < lines.length; i++) {
 				if (i != 0) {
-					sm.append("<br />");
+					sb.append("<br />");
 				}
 
 				String translation = StringUtil.replace(
@@ -84,16 +83,16 @@ public class CodeBlock extends AbstractStringFetcher {
 					padding += "&#0149;";
 				}
 
-				sm.append("<span class=\"code-lines\">");
-				sm.append(padding + (i + 1));
-				sm.append("</span>");
+				sb.append("<span class=\"code-lines\">");
+				sb.append(padding + (i + 1));
+				sb.append("</span>");
 
-				sm.append(translation);
+				sb.append(translation);
 			}
 
-			sm.append("</div>");
+			sb.append("</div>");
 
-			content = sm.toString();
+			content = sb.toString();
 		}
 
 		return content;

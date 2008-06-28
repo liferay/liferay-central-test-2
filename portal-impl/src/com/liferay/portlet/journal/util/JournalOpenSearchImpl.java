@@ -24,7 +24,6 @@ package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.search.HitsOpenSearchImpl;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
@@ -89,17 +88,17 @@ public class JournalOpenSearchImpl extends HitsOpenSearchImpl {
 			return PortalUtil.getLayoutURL(hitLayout, themeDisplay);
 		}
 		else {
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append(themeDisplay.getPathMain());
-			sm.append("/journal/view_article_content?groupId=");
-			sm.append(groupId);
-			sm.append("&articleId=");
-			sm.append(articleId);
-			sm.append("&version=");
-			sm.append(version);
+			sb.append(themeDisplay.getPathMain());
+			sb.append("/journal/view_article_content?groupId=");
+			sb.append(groupId);
+			sb.append("&articleId=");
+			sb.append(articleId);
+			sb.append("&version=");
+			sb.append(version);
 
-			return sm.toString();
+			return sb.toString();
 		}
 	}
 

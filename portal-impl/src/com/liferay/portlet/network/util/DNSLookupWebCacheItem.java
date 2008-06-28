@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.network.util;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
@@ -61,19 +60,19 @@ public class DNSLookupWebCacheItem implements WebCacheItem {
 			}
 
 			if (results == null) {
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
 				InetAddress[] ia = InetAddress.getAllByName(_domain);
 
 				for (int i = 0; i < ia.length; i++) {
-					sm.append(ia[i].getHostName());
+					sb.append(ia[i].getHostName());
 
 					if (i + 1 <= ia.length) {
-						sm.append(",");
+						sb.append(",");
 					}
 				}
 
-				results = sm.toString();
+				results = sb.toString();
 			}
 
 			dnsLookup = new DNSLookup(_domain, results);

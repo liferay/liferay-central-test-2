@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
@@ -179,17 +178,17 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 			return PortalUtil.getLayoutURL(hitLayout, themeDisplay);
 		}
 		else {
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append(themeDisplay.getPathMain());
-			sm.append("/journal/view_article_content?groupId=");
-			sm.append(groupId);
-			sm.append("&articleId=");
-			sm.append(articleId);
-			sm.append("&version=");
-			sm.append(version);
+			sb.append(themeDisplay.getPathMain());
+			sb.append("/journal/view_article_content?groupId=");
+			sb.append(groupId);
+			sb.append("&articleId=");
+			sb.append(articleId);
+			sb.append("&version=");
+			sb.append(version);
 
-			return sm.toString();
+			return sb.toString();
 		}
 	}
 

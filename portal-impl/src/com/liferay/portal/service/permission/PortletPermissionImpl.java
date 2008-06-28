@@ -24,7 +24,6 @@ package com.liferay.portal.service.permission;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
@@ -178,13 +177,13 @@ public class PortletPermissionImpl implements PortletPermission {
 	}
 
 	public String getPrimaryKey(long plid, String portletId) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(plid);
-		sm.append(PortletConstants.LAYOUT_SEPARATOR);
-		sm.append(portletId);
+		sb.append(plid);
+		sb.append(PortletConstants.LAYOUT_SEPARATOR);
+		sb.append(portletId);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public boolean hasLayoutManagerPermission(

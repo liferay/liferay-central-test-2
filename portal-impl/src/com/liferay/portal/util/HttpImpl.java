@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -456,11 +455,11 @@ public class HttpImpl implements Http {
 	public String parameterMapToString(
 		Map<String, String[]> parameterMap, boolean addQuestion) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		if (parameterMap.size() > 0) {
 			if (addQuestion) {
-				sm.append(StringPool.QUESTION);
+				sb.append(StringPool.QUESTION);
 			}
 
 			for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
@@ -468,17 +467,17 @@ public class HttpImpl implements Http {
 				String[] values = entry.getValue();
 
 				for (String value : values) {
-					sm.append(name);
-					sm.append(StringPool.EQUAL);
-					sm.append(encodeURL(value));
-					sm.append(StringPool.AMPERSAND);
+					sb.append(name);
+					sb.append(StringPool.EQUAL);
+					sb.append(encodeURL(value));
+					sb.append(StringPool.AMPERSAND);
 				}
 			}
 
-			sm.deleteCharAt(sm.length() - 1);
+			sb.deleteCharAt(sb.length() - 1);
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public String protocolize(String url, boolean secure) {
@@ -517,9 +516,9 @@ public class HttpImpl implements Http {
 			return url;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(url.substring(0, pos + 1));
+		sb.append(url.substring(0, pos + 1));
 
 		StringTokenizer st = new StringTokenizer(
 			url.substring(pos + 1, url.length()), StringPool.AMPERSAND);
@@ -539,16 +538,16 @@ public class HttpImpl implements Http {
 				}
 
 				if (!key.equals(name)) {
-					sm.append(key);
-					sm.append(StringPool.EQUAL);
-					sm.append(value);
-					sm.append(StringPool.AMPERSAND);
+					sb.append(key);
+					sb.append(StringPool.EQUAL);
+					sb.append(value);
+					sb.append(StringPool.AMPERSAND);
 				}
 			}
 		}
 
 		url = StringUtil.replace(
-			sm.toString(), StringPool.AMPERSAND + StringPool.AMPERSAND,
+			sb.toString(), StringPool.AMPERSAND + StringPool.AMPERSAND,
 			StringPool.AMPERSAND);
 
 		return url;

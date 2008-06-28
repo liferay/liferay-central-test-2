@@ -60,17 +60,17 @@ for (int i = 0; i < results.size(); i++) {
 
 	ResultRow row = new ResultRow(structure, structure.getId(), i);
 
-	StringMaker sm = new StringMaker();
+	StringBuilder sb = new StringBuilder();
 
-	sm.append("javascript: opener.");
-	sm.append(renderResponse.getNamespace());
-	sm.append("selectStructure('");
-	sm.append(structure.getStructureId());
-	sm.append("', '");
-	sm.append(structure.getName());
-	sm.append("'); window.close();");
+	sb.append("javascript: opener.");
+	sb.append(renderResponse.getNamespace());
+	sb.append("selectStructure('");
+	sb.append(structure.getStructureId());
+	sb.append("', '");
+	sb.append(structure.getName());
+	sb.append("'); window.close();");
 
-	String rowHREF = sm.toString();
+	String rowHREF = sb.toString();
 
 	// Structure id
 
@@ -78,16 +78,16 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Name and description
 
-	sm = new StringMaker();
+	sb = new StringBuilder();
 
-	sm.append(structure.getName());
+	sb.append(structure.getName());
 
 	if (Validator.isNotNull(structure.getDescription())) {
-		sm.append("<br />");
-		sm.append(structure.getDescription());
+		sb.append("<br />");
+		sb.append(structure.getDescription());
 	}
 
-	row.addText(sm.toString(), rowHREF);
+	row.addText(sb.toString(), rowHREF);
 
 	// Add result row
 

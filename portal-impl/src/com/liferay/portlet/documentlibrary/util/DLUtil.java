@@ -25,7 +25,6 @@ package com.liferay.portlet.documentlibrary.util;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsValues;
@@ -189,13 +188,13 @@ public class DLUtil {
 	}
 
 	public static String getLockId(long folderId, String name) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(folderId);
-		sm.append(StringPool.POUND);
-		sm.append(name);
+		sb.append(folderId);
+		sb.append(StringPool.POUND);
+		sb.append(name);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private DLUtil() {

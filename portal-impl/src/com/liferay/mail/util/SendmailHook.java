@@ -25,7 +25,6 @@ package com.liferay.mail.util;
 import com.liferay.mail.model.Filter;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ProcessUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -58,16 +57,16 @@ public class SendmailHook implements Hook {
 				File file = new File(home + "/" + userId + "/.forward");
 
 				if (emailAddresses.size() > 0) {
-					StringMaker sm = new StringMaker();
+					StringBuilder sb = new StringBuilder();
 
 					for (int i = 0; i < emailAddresses.size(); i++) {
 						String emailAddress = emailAddresses.get(i);
 
-						sm.append(emailAddress);
-						sm.append("\n");
+						sb.append(emailAddress);
+						sb.append("\n");
 					}
 
-					FileUtil.write(file, sm.toString());
+					FileUtil.write(file, sb.toString());
 				}
 				else {
 					file.delete();
@@ -152,28 +151,28 @@ public class SendmailHook implements Hook {
 			return;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("ORGMAIL /var/spool/mail/$LOGNAME\n");
-		sm.append("MAILDIR $HOME/\n");
-		sm.append("SENDMAIL /usr/smin/sendmail\n");
+		sb.append("ORGMAIL /var/spool/mail/$LOGNAME\n");
+		sb.append("MAILDIR $HOME/\n");
+		sb.append("SENDMAIL /usr/smin/sendmail\n");
 
 		for (int i = 0; i < blocked.size(); i++) {
 			String emailAddress = blocked.get(i);
 
-			sm.append("\n");
-			sm.append(":0\n");
-			sm.append("* ^From.*");
-			sm.append(emailAddress);
-			sm.append("\n");
-			sm.append("{\n");
-			sm.append(":0\n");
-			sm.append("/dev/null\n");
-			sm.append("}\n");
+			sb.append("\n");
+			sb.append(":0\n");
+			sb.append("* ^From.*");
+			sb.append(emailAddress);
+			sb.append("\n");
+			sb.append("{\n");
+			sb.append(":0\n");
+			sb.append("/dev/null\n");
+			sb.append("}\n");
 		}
 
 		try {
-			FileUtil.write(file, sm.toString());
+			FileUtil.write(file, sb.toString());
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -188,26 +187,26 @@ public class SendmailHook implements Hook {
 			FileReader fr = new FileReader(virtusertable);
 			BufferedReader br = new BufferedReader(fr);
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
 			for (String s = br.readLine(); s != null; s = br.readLine()) {
 				if (!s.endsWith(" " + userId)) {
-					sm.append(s);
-					sm.append('\n');
+					sb.append(s);
+					sb.append('\n');
 				}
 			}
 
 			if ((emailAddress != null) && (!emailAddress.equals(""))) {
-				sm.append(emailAddress);
-				sm.append(" ");
-				sm.append(userId);
-				sm.append('\n');
+				sb.append(emailAddress);
+				sb.append(" ");
+				sb.append(userId);
+				sb.append('\n');
 			}
 
 			br.close();
 			fr.close();
 
-			FileUtil.write(virtusertable, sm.toString());
+			FileUtil.write(virtusertable, sb.toString());
 
 			String virtusertableRefreshCmd =
 				PropsUtil.get(

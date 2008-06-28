@@ -75,20 +75,20 @@ public class MethodKey implements Serializable {
 
 	private String _toString() {
 		if (_toString == null) {
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append(_className);
-			sm.append(_methodName);
+			sb.append(_className);
+			sb.append(_methodName);
 
 			if (_types != null && _types.length > 0) {
-				sm.append("-");
+				sb.append("-");
 
 				for (int i = 0; i < _types.length; i++) {
-					sm.append(_types[i].getClass().getName());
+					sb.append(_types[i].getClass().getName());
 				}
 			}
 
-			_toString = sm.toString();
+			_toString = sb.toString();
 		}
 
 		return _toString;

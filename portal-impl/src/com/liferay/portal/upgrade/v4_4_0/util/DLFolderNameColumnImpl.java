@@ -22,7 +22,6 @@
 
 package com.liferay.portal.upgrade.v4_4_0.util;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
@@ -66,15 +65,15 @@ public class DLFolderNameColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	private String _getKey(String name) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(_groupIdColumn.getOldValue());
-		sm.append(StringPool.UNDERLINE);
-		sm.append(_parentFolderIdColumn.getOldValue());
-		sm.append(StringPool.UNDERLINE);
-		sm.append(name);
+		sb.append(_groupIdColumn.getOldValue());
+		sb.append(StringPool.UNDERLINE);
+		sb.append(_parentFolderIdColumn.getOldValue());
+		sb.append(StringPool.UNDERLINE);
+		sb.append(name);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private UpgradeColumn _groupIdColumn;

@@ -261,16 +261,16 @@ portletURL.setParameter("tabs1", tabs1);
 
 				// Name and description
 
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
-				sm.append(structure.getName());
+				sb.append(structure.getName());
 
 				if (Validator.isNotNull(structure.getDescription())) {
-					sm.append("<br />");
-					sm.append(structure.getDescription());
+					sb.append("<br />");
+					sb.append(structure.getDescription());
 				}
 
-				row.addText(sm.toString(), rowURL);
+				row.addText(sb.toString(), rowURL);
 
 				// Action
 
@@ -424,16 +424,16 @@ portletURL.setParameter("tabs1", tabs1);
 
 				// Name and description
 
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
-				sm.append(feed.getName());
+				sb.append(feed.getName());
 
 				if (Validator.isNotNull(feed.getDescription())) {
-					sm.append("<br />");
-					sm.append(feed.getDescription());
+					sb.append("<br />");
+					sb.append(feed.getDescription());
 				}
 
-				row.addText(sm.toString(), rowURL);
+				row.addText(sb.toString(), rowURL);
 
 				// Action
 

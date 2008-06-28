@@ -24,7 +24,6 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.service.base.ResourceCodeLocalServiceBaseImpl;
 
@@ -81,13 +80,13 @@ public class ResourceCodeLocalServiceImpl
 	}
 
 	protected String encodeKey(long companyId, String name, int scope) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(companyId);
-		sm.append(name);
-		sm.append(scope);
+		sb.append(companyId);
+		sb.append(name);
+		sb.append(scope);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static Map<String, ResourceCode> _resourceCodes =

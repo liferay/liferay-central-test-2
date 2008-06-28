@@ -82,14 +82,14 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Name
 
-	StringMaker sm = new StringMaker();
+	StringBuilder sb = new StringBuilder();
 
-	sm.append("<img align=\"left\" border=\"0\" src=\"");
-	sm.append(themeDisplay.getPathThemeImages());
-	sm.append("/common/folder.png\">");
-	sm.append(curFolder.getName());
+	sb.append("<img align=\"left\" border=\"0\" src=\"");
+	sb.append(themeDisplay.getPathThemeImages());
+	sb.append("/common/folder.png\">");
+	sb.append(curFolder.getName());
 
-	row.addText(sm.toString(), rowURL);
+	row.addText(sb.toString(), rowURL);
 
 	// Statistics
 
@@ -147,37 +147,37 @@ for (int i = 0; i < results.size(); i++) {
 
 		ResultRow row = new ResultRow(fileEntry, fileEntry.getFileEntryId(), i);
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("javascript: opener.");
-		sm.append(renderResponse.getNamespace());
-		sm.append("selectFileEntry('");
-		sm.append(fileEntry.getFolderId());
-		sm.append("', '");
-		sm.append(UnicodeFormatter.toString(fileEntry.getName()));
-		sm.append("', '");
-		sm.append(UnicodeFormatter.toString(fileEntry.getTitleWithExtension()));
-		sm.append("'); window.close();");
+		sb.append("javascript: opener.");
+		sb.append(renderResponse.getNamespace());
+		sb.append("selectFileEntry('");
+		sb.append(fileEntry.getFolderId());
+		sb.append("', '");
+		sb.append(UnicodeFormatter.toString(fileEntry.getName()));
+		sb.append("', '");
+		sb.append(UnicodeFormatter.toString(fileEntry.getTitleWithExtension()));
+		sb.append("'); window.close();");
 
-		String rowHREF = sm.toString();
+		String rowHREF = sb.toString();
 
 		// Title and description
 
-		sm = new StringMaker();
+		sb = new StringBuilder();
 
-		sm.append("<img align=\"left\" border=\"0\" src=\"");
-		sm.append(themeDisplay.getPathThemeImages());
-		sm.append("/document_library/");
-		sm.append(DLUtil.getFileExtension(fileEntry.getName()));
-		sm.append(".png\">");
-		sm.append(fileEntry.getTitleWithExtension());
+		sb.append("<img align=\"left\" border=\"0\" src=\"");
+		sb.append(themeDisplay.getPathThemeImages());
+		sb.append("/document_library/");
+		sb.append(DLUtil.getFileExtension(fileEntry.getName()));
+		sb.append(".png\">");
+		sb.append(fileEntry.getTitleWithExtension());
 
 		if (Validator.isNotNull(fileEntry.getDescription())) {
-			sm.append("<br />");
-			sm.append(fileEntry.getDescription());
+			sb.append("<br />");
+			sb.append(fileEntry.getDescription());
 		}
 
-		row.addText(sm.toString(), rowHREF);
+		row.addText(sb.toString(), rowHREF);
 
 		// Statistics
 

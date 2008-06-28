@@ -69,14 +69,14 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Action
 
-	StringMaker sm = new StringMaker();
+	StringBuilder sb = new StringBuilder();
 
-	sm.append(portletDisplay.getNamespace());
-	sm.append("unschedulePublishEvent('");
-	sm.append(schedulerRequest.getJobName());
-	sm.append("');");
+	sb.append(portletDisplay.getNamespace());
+	sb.append("unschedulePublishEvent('");
+	sb.append(schedulerRequest.getJobName());
+	sb.append("');");
 
-	row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "delete"), sm.toString());
+	row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "delete"), sb.toString());
 
 	resultRows.add(row);
 }

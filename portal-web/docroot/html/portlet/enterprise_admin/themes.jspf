@@ -73,61 +73,61 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Name and thumbnail
 
-	StringMaker sm = new StringMaker();
+	StringBuilder sb = new StringBuilder();
 
 	if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN)) {
-		sm.append("<a href=\"");
-		sm.append(rowURL.toString());
-		sm.append("\">");
+		sb.append("<a href=\"");
+		sb.append(rowURL.toString());
+		sb.append("\">");
 	}
 
-	sm.append("<img align=\"left\" src=\"");
-	sm.append(theme2.getContextPath());
-	sm.append(theme2.getImagesPath());
-	sm.append("/thumbnail.png\" style=\"margin-right: 10px\" /><b>");
-	sm.append(theme2.getName());
-	sm.append("</b>");
+	sb.append("<img align=\"left\" src=\"");
+	sb.append(theme2.getContextPath());
+	sb.append(theme2.getImagesPath());
+	sb.append("/thumbnail.png\" style=\"margin-right: 10px\" /><b>");
+	sb.append(theme2.getName());
+	sb.append("</b>");
 
 	if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN)) {
-		sm.append("</a>");
+		sb.append("</a>");
 	}
 
-	sm.append("<br />");
-	sm.append(LanguageUtil.get(pageContext, "package"));
-	sm.append(": ");
+	sb.append("<br />");
+	sb.append(LanguageUtil.get(pageContext, "package"));
+	sb.append(": ");
 
 	if (pluginPackage == null) {
-		sm.append(LanguageUtil.get(pageContext, "unknown"));
+		sb.append(LanguageUtil.get(pageContext, "unknown"));
 	}
 	else {
-		sm.append(pluginPackage.getName());
+		sb.append(pluginPackage.getName());
 
 		if (pluginPackage.getContext() != null) {
-			sm.append(" (");
-			sm.append(pluginPackage.getContext());
-			sm.append(")");
+			sb.append(" (");
+			sb.append(pluginPackage.getContext());
+			sb.append(")");
 		}
 	}
 
 	List colorSchemes = theme2.getColorSchemes();
 
 	if (colorSchemes.size() > 0) {
-		sm.append("<br />");
-		sm.append(LanguageUtil.get(pageContext, "color-schemes"));
-		sm.append(": ");
+		sb.append("<br />");
+		sb.append(LanguageUtil.get(pageContext, "color-schemes"));
+		sb.append(": ");
 
 		for (int j = 0; j < colorSchemes.size(); j++) {
 			ColorScheme colorScheme2 = (ColorScheme)colorSchemes.get(j);
 
-			sm.append(colorScheme2.getName());
+			sb.append(colorScheme2.getName());
 
 			if ((j + 1) < colorSchemes.size()) {
-				sm.append(", ");
+				sb.append(", ");
 			}
 		}
 	}
 
-	row.addText(sm.toString());
+	row.addText(sb.toString());
 
 	// Active
 

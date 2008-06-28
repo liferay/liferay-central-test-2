@@ -23,7 +23,6 @@
 package com.liferay.util.mail;
 
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -59,21 +58,21 @@ public class JavaMailUtil {
 	}
 
 	public static String toUnicodeString(InternetAddress[] addresses) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		if (addresses != null) {
 			for (int i = 0; i < addresses.length; i++) {
 				if (addresses[i] != null) {
-					sm.append(addresses[i].toUnicodeString());
+					sb.append(addresses[i].toUnicodeString());
 				}
 
 				if ((i + 1) != addresses.length) {
-					sm.append(", ");
+					sb.append(", ");
 				}
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 }

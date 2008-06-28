@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
@@ -949,63 +948,63 @@ public class PortletExporter {
 	protected String getCommentPath(
 			PortletDataContext context, String className, String classPK) {
 
-		StringMaker sm = new StringMaker();
-		sm.append(context.getRootPath());
-		sm.append("/comments/");
-		sm.append(PortalUtil.getClassNameId(className));
-		sm.append(CharPool.FORWARD_SLASH);
-		sm.append(classPK);
-		sm.append(CharPool.FORWARD_SLASH);
+		StringBuilder sb = new StringBuilder();
+		sb.append(context.getRootPath());
+		sb.append("/comments/");
+		sb.append(PortalUtil.getClassNameId(className));
+		sb.append(CharPool.FORWARD_SLASH);
+		sb.append(classPK);
+		sb.append(CharPool.FORWARD_SLASH);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getCommentPath(
 			PortletDataContext context, String className, String classPK,
 			MBMessage message) {
 
-		StringMaker sm = new StringMaker();
-		sm.append(context.getRootPath());
-		sm.append("/comments/");
-		sm.append(PortalUtil.getClassNameId(className));
-		sm.append(CharPool.FORWARD_SLASH);
-		sm.append(classPK);
-		sm.append(CharPool.FORWARD_SLASH);
-		sm.append(message.getMessageId());
-		sm.append(".xml");
+		StringBuilder sb = new StringBuilder();
+		sb.append(context.getRootPath());
+		sb.append("/comments/");
+		sb.append(PortalUtil.getClassNameId(className));
+		sb.append(CharPool.FORWARD_SLASH);
+		sb.append(classPK);
+		sb.append(CharPool.FORWARD_SLASH);
+		sb.append(message.getMessageId());
+		sb.append(".xml");
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getRatingPath(
 			PortletDataContext context, String className, String classPK) {
 
-		StringMaker sm = new StringMaker();
-		sm.append(context.getRootPath());
-		sm.append("/ratings/");
-		sm.append(PortalUtil.getClassNameId(className));
-		sm.append(CharPool.FORWARD_SLASH);
-		sm.append(classPK);
-		sm.append(CharPool.FORWARD_SLASH);
+		StringBuilder sb = new StringBuilder();
+		sb.append(context.getRootPath());
+		sb.append("/ratings/");
+		sb.append(PortalUtil.getClassNameId(className));
+		sb.append(CharPool.FORWARD_SLASH);
+		sb.append(classPK);
+		sb.append(CharPool.FORWARD_SLASH);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getRatingPath(
 			PortletDataContext context, String className, String classPK,
 			RatingsEntry rating) {
 
-		StringMaker sm = new StringMaker();
-		sm.append(context.getRootPath());
-		sm.append("/ratings/");
-		sm.append(PortalUtil.getClassNameId(className));
-		sm.append(CharPool.FORWARD_SLASH);
-		sm.append(classPK);
-		sm.append(CharPool.FORWARD_SLASH);
-		sm.append(rating.getEntryId());
-		sm.append(".xml");
+		StringBuilder sb = new StringBuilder();
+		sb.append(context.getRootPath());
+		sb.append("/ratings/");
+		sb.append(PortalUtil.getClassNameId(className));
+		sb.append(CharPool.FORWARD_SLASH);
+		sb.append(classPK);
+		sb.append(CharPool.FORWARD_SLASH);
+		sb.append(rating.getEntryId());
+		sb.append(".xml");
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getPortletDataPath(
@@ -1015,37 +1014,39 @@ public class PortletExporter {
 	}
 
 	protected String getPortletPreferencesPath(
-			PortletDataContext context, String portletId, long ownerId,
-			int ownerType, long plid) {
-		StringMaker preferencePath = new StringMaker();
-		preferencePath.append(context.getPortletPath(portletId));
-		preferencePath.append("/preferences/");
+		PortletDataContext context, String portletId, long ownerId,
+		int ownerType, long plid) {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(context.getPortletPath(portletId));
+		sb.append("/preferences/");
 
 		switch(ownerType) {
 			case PortletKeys.PREFS_OWNER_TYPE_COMPANY:
-				preferencePath.append("company/");
+				sb.append("company/");
 				break;
 			case PortletKeys.PREFS_OWNER_TYPE_GROUP:
-				preferencePath.append("group/");
+				sb.append("group/");
 				break;
 			case PortletKeys.PREFS_OWNER_TYPE_LAYOUT:
-				preferencePath.append("layout/");
+				sb.append("layout/");
 				break;
 			case PortletKeys.PREFS_OWNER_TYPE_USER:
-				preferencePath.append("user/");
+				sb.append("user/");
 				break;
 			case PortletKeys.PREFS_OWNER_TYPE_ARCHIVED:
-				preferencePath.append("archived/");
+				sb.append("archived/");
 				break;
 		}
 
-		preferencePath.append(ownerId);
-		preferencePath.append(CharPool.FORWARD_SLASH);
-		preferencePath.append(plid);
-		preferencePath.append(CharPool.FORWARD_SLASH);
-		preferencePath.append("portlet-preferences.xml");
+		sb.append(ownerId);
+		sb.append(CharPool.FORWARD_SLASH);
+		sb.append(plid);
+		sb.append(CharPool.FORWARD_SLASH);
+		sb.append("portlet-preferences.xml");
 
-		return preferencePath.toString();
+		return sb.toString();
 	}
 
 	protected boolean hasRole(List<Role> roles, String roleName) {

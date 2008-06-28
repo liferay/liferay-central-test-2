@@ -209,19 +209,19 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							if (assetType.equals(IGImage.class.getName())) {
 								IGImage image = IGImageLocalServiceUtil.getImage(asset.getClassPK());
 
-								StringMaker sm = new StringMaker();
+								StringBuilder sb = new StringBuilder();
 
-								sm.append("<img border=\"1\" src=\"");
-								sm.append(themeDisplay.getPathImage());
-								sm.append("/image_gallery?img_id=");
-								sm.append(image.getSmallImageId());
-								sm.append("&t=");
-								sm.append(ImageServletTokenUtil.getToken(image.getSmallImageId()));
-								sm.append("\" title=\"");
-								sm.append(image.getDescription());
-								sm.append("\" />");
+								sb.append("<img border=\"1\" src=\"");
+								sb.append(themeDisplay.getPathImage());
+								sb.append("/image_gallery?img_id=");
+								sb.append(image.getSmallImageId());
+								sb.append("&t=");
+								sb.append(ImageServletTokenUtil.getToken(image.getSmallImageId()));
+								sb.append("\" title=\"");
+								sb.append(image.getDescription());
+								sb.append("\" />");
 
-								row.addText(sm.toString(), rowURL);
+								row.addText(sb.toString(), rowURL);
 							}
 							else {
 								row.addText(asset.getTitle(), rowURL);

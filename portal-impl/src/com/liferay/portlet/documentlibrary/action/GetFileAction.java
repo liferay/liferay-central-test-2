@@ -25,7 +25,6 @@ package com.liferay.portlet.documentlibrary.action;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -201,13 +200,13 @@ public class GetFileAction extends PortletAction {
 					id, is, sourceExtension, targetExtension);
 
 				if ((convertedIS != null) && (convertedIS != is)) {
-					StringMaker sm = new StringMaker();
+					StringBuilder sb = new StringBuilder();
 
-					sm.append(fileEntry.getTitle());
-					sm.append(StringPool.PERIOD);
-					sm.append(targetExtension);
+					sb.append(fileEntry.getTitle());
+					sb.append(StringPool.PERIOD);
+					sb.append(targetExtension);
 
-					fileName = sm.toString();
+					fileName = sb.toString();
 
 					is = convertedIS;
 				}

@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
@@ -383,23 +382,23 @@ public interface Portal {
 	public boolean isUpdateAvailable() throws PortalException, SystemException;
 
 	public void renderPage(
-			StringMaker sm, ServletContext ctx, HttpServletRequest req,
+			StringBuilder sb, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, String path)
 		throws IOException, ServletException;
 
 	public void renderPortlet(
-			StringMaker sm, ServletContext ctx, HttpServletRequest req,
+			StringBuilder sb, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, Portlet portlet, String queryString)
 		throws IOException, ServletException;
 
 	public void renderPortlet(
-			StringMaker sm, ServletContext ctx, HttpServletRequest req,
+			StringBuilder sb, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, Portlet portlet, String queryString,
 			String columnId, Integer columnPos, Integer columnCount)
 		throws IOException, ServletException;
 
 	public void renderPortlet(
-			StringMaker sm, ServletContext ctx, HttpServletRequest req,
+			StringBuilder sb, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, Portlet portlet, String queryString,
 			String columnId, Integer columnPos, Integer columnCount,
 			String path)

@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -181,7 +180,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	private static String _getIndexableContent(String content) {
 		try {
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
 			SAXReader reader = new SAXReader();
 
@@ -189,9 +188,9 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 			Element root = doc.getRootElement();
 
-			_getIndexableContent(sm, root);
+			_getIndexableContent(sb, root);
 
-			return sm.toString();
+			return sb.toString();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -200,7 +199,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		}
 	}
 
-	private static void _getIndexableContent(StringMaker sm, Element root)
+	private static void _getIndexableContent(StringBuilder sb, Element root)
 		throws Exception {
 
 		for (Element el : (List<Element>)root.elements()) {
@@ -213,17 +212,17 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 				String text = dynamicContent.getText();
 
-				sm.append(text);
-				sm.append(StringPool.BLANK);
+				sb.append(text);
+				sb.append(StringPool.BLANK);
 			}
 			else if (el.getName().equals("static-content")) {
 				String text = el.getText();
 
-				sm.append(text);
-				sm.append(StringPool.BLANK);
+				sb.append(text);
+				sb.append(StringPool.BLANK);
 			}
 
-			_getIndexableContent(sm, el);
+			_getIndexableContent(sb, el);
 		}
 	}
 

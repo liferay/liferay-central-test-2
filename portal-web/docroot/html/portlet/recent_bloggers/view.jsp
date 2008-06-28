@@ -82,14 +82,14 @@ else {
 				if (entries.size() == 1) {
 					BlogsEntry entry = (BlogsEntry)entries.get(0);
 
-					StringMaker sm = new StringMaker();
+					StringBuilder sb = new StringBuilder();
 
-					sm.append(themeDisplay.getPathMain());
-					sm.append("/blogs/find_entry?entryId=");
-					sm.append(entry.getEntryId());
-					sm.append("&showAllEntries=1");
+					sb.append(themeDisplay.getPathMain());
+					sb.append("/blogs/find_entry?entryId=");
+					sb.append(entry.getEntryId());
+					sb.append("&showAllEntries=1");
 
-					String rowHREF = sm.toString();
+					String rowHREF = sb.toString();
 
 					ResultRow row = new ResultRow(new Object[] {statsUser, rowHREF}, statsUser.getStatsUserId(), i);
 

@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.ObjectValuePair;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -452,39 +451,39 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected String getNodePath(PortletDataContext context, WikiNode node) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.WIKI));
-		sm.append("/nodes/");
-		sm.append(node.getNodeId());
-		sm.append(".xml");
+		sb.append(context.getPortletPath(PortletKeys.WIKI));
+		sb.append("/nodes/");
+		sb.append(node.getNodeId());
+		sb.append(".xml");
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getPageAttachementBinPath(
 		PortletDataContext context, WikiPage page, String attachment) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.WIKI));
-		sm.append("/bin/");
-		sm.append(page.getPageId());
-		sm.append(StringPool.SLASH);
-		sm.append(attachment);
+		sb.append(context.getPortletPath(PortletKeys.WIKI));
+		sb.append("/bin/");
+		sb.append(page.getPageId());
+		sb.append(StringPool.SLASH);
+		sb.append(attachment);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getPagePath(PortletDataContext context, WikiPage page) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.WIKI));
-		sm.append("/pages/");
-		sm.append(page.getPageId());
-		sm.append(".xml");
+		sb.append(context.getPortletPath(PortletKeys.WIKI));
+		sb.append("/pages/");
+		sb.append(page.getPageId());
+		sb.append(".xml");
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static final String _NAMESPACE = "wiki";

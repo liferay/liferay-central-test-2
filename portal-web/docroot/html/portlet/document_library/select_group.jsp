@@ -71,17 +71,17 @@ for (int i = 0; i < results.size(); i++) {
 		groupName = LanguageUtil.get(pageContext, "my-community");
 	}
 
-	StringMaker sm = new StringMaker();
+	StringBuilder sb = new StringBuilder();
 
-	sm.append("javascript: opener.");
-	sm.append(renderResponse.getNamespace());
-	sm.append("selectGroup('");
-	sm.append(group.getGroupId());
-	sm.append("', '");
-	sm.append(UnicodeFormatter.toString(groupName));
-	sm.append("'); window.close();");
+	sb.append("javascript: opener.");
+	sb.append(renderResponse.getNamespace());
+	sb.append("selectGroup('");
+	sb.append(group.getGroupId());
+	sb.append("', '");
+	sb.append(UnicodeFormatter.toString(groupName));
+	sb.append("'); window.close();");
 
-	String rowHREF = sm.toString();
+	String rowHREF = sb.toString();
 
 	// Name
 

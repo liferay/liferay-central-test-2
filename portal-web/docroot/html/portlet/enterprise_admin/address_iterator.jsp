@@ -87,21 +87,21 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Street
 
-	StringMaker sm = new StringMaker();
+	StringBuilder sb = new StringBuilder();
 
-	sm.append(address.getStreet1());
+	sb.append(address.getStreet1());
 
 	if (Validator.isNotNull(address.getStreet2())) {
-		sm.append("<br />");
-		sm.append(address.getStreet2());
+		sb.append("<br />");
+		sb.append(address.getStreet2());
 	}
 
 	if (Validator.isNotNull(address.getStreet3())) {
-		sm.append("<br />");
-		sm.append(address.getStreet3());
+		sb.append("<br />");
+		sb.append(address.getStreet3());
 	}
 
-	row.addText(sm.toString());
+	row.addText(sb.toString());
 
 	// Other fields
 

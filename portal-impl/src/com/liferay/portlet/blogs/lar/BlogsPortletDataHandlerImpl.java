@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.DocumentUtil;
@@ -186,14 +185,14 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 	protected String getEntryPath(
 		PortletDataContext context, BlogsEntry entry) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.BLOGS));
-		sm.append("/entries/");
-		sm.append(entry.getEntryId());
-		sm.append(".xml");
+		sb.append(context.getPortletPath(PortletKeys.BLOGS));
+		sb.append("/entries/");
+		sb.append(entry.getEntryId());
+		sb.append(".xml");
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected void importEntry(PortletDataContext context, BlogsEntry entry)

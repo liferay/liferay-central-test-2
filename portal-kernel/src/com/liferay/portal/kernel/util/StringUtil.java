@@ -68,41 +68,41 @@ public class StringUtil {
 		}
 
 		if (allowDuplicates || !contains(s, add, delimiter)) {
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append(s);
+			sb.append(s);
 
 			if (Validator.isNull(s) || s.endsWith(delimiter)) {
-				sm.append(add);
-				sm.append(delimiter);
+				sb.append(add);
+				sb.append(delimiter);
 			}
 			else {
-				sm.append(delimiter);
-				sm.append(add);
-				sm.append(delimiter);
+				sb.append(delimiter);
+				sb.append(add);
+				sb.append(delimiter);
 			}
 
-			s = sm.toString();
+			s = sb.toString();
 		}
 
 		return s;
 	}
 
 	public static String bytesToHexString(byte[] bytes) {
-		StringMaker sm = new StringMaker(bytes.length * 2);
+		StringBuilder sb = new StringBuilder(bytes.length * 2);
 
 		for (int i = 0; i < bytes.length; i++) {
 			String hex = Integer.toHexString(
 				0x0100 + (bytes[i] & 0x00FF)).substring(1);
 
 			if (hex.length() < 2) {
-				sm.append("0");
+				sb.append("0");
 			}
 
-			sm.append(hex);
+			sb.append(hex);
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public static boolean contains(String s, String text) {
@@ -114,34 +114,34 @@ public class StringUtil {
 			return false;
 		}
 
-		StringMaker sm = null;
+		StringBuilder sb = null;
 
 		if (!s.endsWith(delimiter)) {
-			sm = new StringMaker();
+			sb = new StringBuilder();
 
-			sm.append(s);
-			sm.append(delimiter);
+			sb.append(s);
+			sb.append(delimiter);
 
-			s = sm.toString();
+			s = sb.toString();
 		}
 
-		sm = new StringMaker();
+		sb = new StringBuilder();
 
-		sm.append(delimiter);
-		sm.append(text);
-		sm.append(delimiter);
+		sb.append(delimiter);
+		sb.append(text);
+		sb.append(delimiter);
 
-		String dtd = sm.toString();
+		String dtd = sb.toString();
 
 		int pos = s.indexOf(dtd);
 
 		if (pos == -1) {
-			sm = new StringMaker();
+			sb = new StringBuilder();
 
-			sm.append(text);
-			sm.append(delimiter);
+			sb.append(text);
+			sb.append(delimiter);
 
-			String td = sm.toString();
+			String td = sb.toString();
 
 			if (s.startsWith(td)) {
 				return true;
@@ -199,17 +199,17 @@ public class StringUtil {
 			return StringPool.BLANK;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		char[] c = s.toCharArray();
 
 		for (int i = 0; i < c.length; i++) {
 			if (Validator.isChar(c[i])) {
-				sm.append(c[i]);
+				sb.append(c[i]);
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public static String extractDigits(String s) {
@@ -217,17 +217,17 @@ public class StringUtil {
 			return StringPool.BLANK;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		char[] c = s.toCharArray();
 
 		for (int i = 0; i < c.length; i++) {
 			if (Validator.isDigit(c[i])) {
-				sm.append(c[i]);
+				sb.append(c[i]);
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public static String extractFirst(String s, String delimiter) {
@@ -281,7 +281,7 @@ public class StringUtil {
 		//return s.replaceAll(
 		//	"(?i)" + keywords, highlight1 + keywords + highlight2);
 
-		StringMaker sm = new StringMaker(StringPool.SPACE);
+		StringBuilder sb = new StringBuilder(StringPool.SPACE);
 
 		StringTokenizer st = new StringTokenizer(s);
 
@@ -289,20 +289,20 @@ public class StringUtil {
 			String token = st.nextToken();
 
 			if (token.equalsIgnoreCase(keywords)) {
-				sm.append(highlight1);
-				sm.append(token);
-				sm.append(highlight2);
+				sb.append(highlight1);
+				sb.append(token);
+				sb.append(highlight2);
 			}
 			else {
-				sm.append(token);
+				sb.append(token);
 			}
 
 			if (st.hasMoreTokens()) {
-				sm.append(StringPool.SPACE);
+				sb.append(StringPool.SPACE);
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public static String lowerCase(String s) {
@@ -323,17 +323,17 @@ public class StringUtil {
 			return null;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < array.length; i++) {
-			sm.append(String.valueOf(array[i]).trim());
+			sb.append(String.valueOf(array[i]).trim());
 
 			if ((i + 1) != array.length) {
-				sm.append(delimiter);
+				sb.append(delimiter);
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public static String merge(double[] array) {
@@ -345,17 +345,17 @@ public class StringUtil {
 			return null;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < array.length; i++) {
-			sm.append(String.valueOf(array[i]).trim());
+			sb.append(String.valueOf(array[i]).trim());
 
 			if ((i + 1) != array.length) {
-				sm.append(delimiter);
+				sb.append(delimiter);
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public static String merge(float[] array) {
@@ -367,17 +367,17 @@ public class StringUtil {
 			return null;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < array.length; i++) {
-			sm.append(String.valueOf(array[i]).trim());
+			sb.append(String.valueOf(array[i]).trim());
 
 			if ((i + 1) != array.length) {
-				sm.append(delimiter);
+				sb.append(delimiter);
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public static String merge(int[] array) {
@@ -389,17 +389,17 @@ public class StringUtil {
 			return null;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < array.length; i++) {
-			sm.append(String.valueOf(array[i]).trim());
+			sb.append(String.valueOf(array[i]).trim());
 
 			if ((i + 1) != array.length) {
-				sm.append(delimiter);
+				sb.append(delimiter);
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public static String merge(long[] array) {
@@ -411,17 +411,17 @@ public class StringUtil {
 			return null;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < array.length; i++) {
-			sm.append(String.valueOf(array[i]).trim());
+			sb.append(String.valueOf(array[i]).trim());
 
 			if ((i + 1) != array.length) {
-				sm.append(delimiter);
+				sb.append(delimiter);
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public static String merge(short[] array) {
@@ -433,17 +433,17 @@ public class StringUtil {
 			return null;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < array.length; i++) {
-			sm.append(String.valueOf(array[i]).trim());
+			sb.append(String.valueOf(array[i]).trim());
 
 			if ((i + 1) != array.length) {
-				sm.append(delimiter);
+				sb.append(delimiter);
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public static String merge(Collection<?> col) {
@@ -463,17 +463,17 @@ public class StringUtil {
 			return null;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < array.length; i++) {
-			sm.append(String.valueOf(array[i]).trim());
+			sb.append(String.valueOf(array[i]).trim());
 
 			if ((i + 1) != array.length) {
-				sm.append(delimiter);
+				sb.append(delimiter);
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public static String randomize(String s) {
@@ -490,7 +490,7 @@ public class StringUtil {
 		throws IOException {
 
 		if (all) {
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
 			Enumeration<URL> enu = classLoader.getResources(name);
 
@@ -502,14 +502,14 @@ public class StringUtil {
 				String s = read(is);
 
 				if (s != null) {
-					sm.append(s);
-					sm.append(StringPool.NEW_LINE);
+					sb.append(s);
+					sb.append(StringPool.NEW_LINE);
 				}
 
 				is.close();
 			}
 
-			return sm.toString().trim();
+			return sb.toString().trim();
 		}
 		else {
 			InputStream is = classLoader.getResourceAsStream(name);
@@ -523,19 +523,19 @@ public class StringUtil {
 	}
 
 	public static String read(InputStream is) throws IOException {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
 		String line = null;
 
 		while ((line = br.readLine()) != null) {
-			sm.append(line).append('\n');
+			sb.append(line).append('\n');
 		}
 
 		br.close();
 
-		return sm.toString().trim();
+		return sb.toString().trim();
 	}
 
 	public static String remove(String s, String remove) {
@@ -551,20 +551,20 @@ public class StringUtil {
 			s += delimiter;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(delimiter);
-		sm.append(remove);
-		sm.append(delimiter);
+		sb.append(delimiter);
+		sb.append(remove);
+		sb.append(delimiter);
 
-		String drd = sm.toString();
+		String drd = sb.toString();
 
-		sm = new StringMaker();
+		sb = new StringBuilder();
 
-		sm.append(remove);
-		sm.append(delimiter);
+		sb.append(remove);
+		sb.append(delimiter);
 
-		String rd = sm.toString();
+		String rd = sb.toString();
 
 		while (contains(s, remove, delimiter)) {
 			int pos = s.indexOf(drd);
@@ -581,12 +581,12 @@ public class StringUtil {
 				int x = pos + remove.length() + delimiter.length();
 				int y = s.length();
 
-				sm = new StringMaker();
+				sb = new StringBuilder();
 
-				sm.append(s.substring(0, pos));
-				sm.append(s.substring(x, y));
+				sb.append(s.substring(0, pos));
+				sb.append(s.substring(x, y));
 
-				s =  sm.toString();
+				s =  sb.toString();
 			}
 		}
 
@@ -602,20 +602,20 @@ public class StringUtil {
 			return null;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		char[] c = s.toCharArray();
 
 		for (int i = 0; i < c.length; i++) {
 			if (c[i] == oldSub) {
-				sm.append(newSub);
+				sb.append(newSub);
 			}
 			else {
-				sm.append(c[i]);
+				sb.append(c[i]);
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public static String replace(String s, String oldSub, String newSub) {
@@ -626,21 +626,21 @@ public class StringUtil {
 		int y = s.indexOf(oldSub);
 
 		if (y >= 0) {
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
 			int length = oldSub.length();
 			int x = 0;
 
 			while (x <= y) {
-				sm.append(s.substring(x, y));
-				sm.append(newSub);
+				sb.append(s.substring(x, y));
+				sb.append(newSub);
 				x = y + length;
 				y = s.indexOf(oldSub, x);
 			}
 
-			sm.append(s.substring(x));
+			sb.append(s.substring(x));
 
-			return sm.toString();
+			return sb.toString();
 		}
 		else {
 			return s;
@@ -688,7 +688,7 @@ public class StringUtil {
 			return s;
 		}
 
-		StringMaker sm = new StringMaker(s.length());
+		StringBuilder sb = new StringBuilder(s.length());
 
 		int pos = 0;
 
@@ -697,12 +697,12 @@ public class StringUtil {
 			int y = s.indexOf(end, x + begin.length());
 
 			if ((x == -1) || (y == -1)) {
-				sm.append(s.substring(pos, s.length()));
+				sb.append(s.substring(pos, s.length()));
 
 				break;
 			}
 			else {
-				sm.append(s.substring(pos, x + begin.length()));
+				sb.append(s.substring(pos, x + begin.length()));
 
 				String oldValue = s.substring(x + begin.length(), y);
 
@@ -712,13 +712,13 @@ public class StringUtil {
 					newValue = oldValue;
 				}
 
-				sm.append(newValue);
+				sb.append(newValue);
 
 				pos = y;
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public static String reverse(String s) {
@@ -767,12 +767,12 @@ public class StringUtil {
 				}
 			}
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append(s.substring(0, length));
-			sm.append(suffix);
+			sb.append(s.substring(0, length));
+			sb.append(suffix);
 
-			s =  sm.toString();
+			s =  sb.toString();
 		}
 
 		return s;
@@ -790,12 +790,12 @@ public class StringUtil {
 		s = s.trim();
 
 		if (!s.endsWith(delimiter)) {
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append(s);
-			sm.append(delimiter);
+			sb.append(s);
+			sb.append(delimiter);
 
-			s = sm.toString();
+			s = sb.toString();
 		}
 
 		if (s.equals(delimiter)) {
@@ -1030,7 +1030,7 @@ public class StringUtil {
 			return s;
 		}
 
-		StringMaker sm = new StringMaker(s.length());
+		StringBuilder sb = new StringBuilder(s.length());
 
 		int pos = 0;
 
@@ -1039,18 +1039,18 @@ public class StringUtil {
 			int y = s.indexOf(end, x + begin.length());
 
 			if ((x == -1) || (y == -1)) {
-				sm.append(s.substring(pos, s.length()));
+				sb.append(s.substring(pos, s.length()));
 
 				break;
 			}
 			else {
-				sm.append(s.substring(pos, x));
+				sb.append(s.substring(pos, x));
 
 				pos = y + end.length();
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public static String trim(String s) {
@@ -1209,7 +1209,7 @@ public class StringUtil {
 			return null;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		try {
 			BufferedReader br = new BufferedReader(new StringReader(text));
@@ -1218,7 +1218,7 @@ public class StringUtil {
 
 			while ((s = br.readLine()) != null) {
 				if (s.length() == 0) {
-					sm.append(lineSeparator);
+					sb.append(lineSeparator);
 				}
 				else {
 					String[] tokens = s.split(StringPool.SPACE);
@@ -1227,15 +1227,15 @@ public class StringUtil {
 
 					for (int i = 0; i < tokens.length; i++) {
 						if (!firstWord) {
-							sm.append(StringPool.SPACE);
+							sb.append(StringPool.SPACE);
 							curLineLength++;
 						}
 
 						if (firstWord) {
-							sm.append(lineSeparator);
+							sb.append(lineSeparator);
 						}
 
-						sm.append(tokens[i]);
+						sb.append(tokens[i]);
 
 						curLineLength += tokens[i].length();
 
@@ -1254,7 +1254,7 @@ public class StringUtil {
 			_log.error(ioe.getMessage());
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static boolean _isTrimable(char c, char[] exceptions) {

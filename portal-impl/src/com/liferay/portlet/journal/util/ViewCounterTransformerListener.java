@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.journal.util;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -77,18 +76,18 @@ public class ViewCounterTransformerListener extends TransformerListener {
 
 		String counterToken = StringPool.AT + "view_counter" + StringPool.AT;
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("<script type=\"text/javascript\">");
-		sm.append("Liferay.Service.Tags.TagsAsset.incrementViewCounter");
-		sm.append("({className:'");
-		sm.append("com.liferay.portlet.journal.model.JournalArticle', ");
-		sm.append("classPK:");
-		sm.append(articleResourcePK);
-		sm.append("});");
-		sm.append("</script>");
+		sb.append("<script type=\"text/javascript\">");
+		sb.append("Liferay.Service.Tags.TagsAsset.incrementViewCounter");
+		sb.append("({className:'");
+		sb.append("com.liferay.portlet.journal.model.JournalArticle', ");
+		sb.append("classPK:");
+		sb.append(articleResourcePK);
+		sb.append("});");
+		sb.append("</script>");
 
-		s = StringUtil.replace(s, counterToken, sm.toString());
+		s = StringUtil.replace(s, counterToken, sb.toString());
 
 		return s;
 	}

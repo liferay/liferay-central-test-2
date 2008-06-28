@@ -23,7 +23,6 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ColorScheme;
@@ -262,12 +261,12 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		}
 
 		if (isWARFile()) {
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append(StringPool.SLASH);
-			sm.append(getServletContextName());
+			sb.append(StringPool.SLASH);
+			sb.append(getServletContextName());
 
-			return sm.toString();
+			return sb.toString();
 		}
 		else {
 			return PortalUtil.getPathContext();

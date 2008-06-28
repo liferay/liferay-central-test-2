@@ -24,7 +24,6 @@ package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
@@ -309,15 +308,15 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 			List<DLFileEntry> list = q.list();
 
 			if (list.size() == 0) {
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
-				sm.append("No DLFileEntry exists with the key {uuid=");
-				sm.append(uuid);
-				sm.append(", groupId=");
-				sm.append(groupId);
-				sm.append("}");
+				sb.append("No DLFileEntry exists with the key {uuid=");
+				sb.append(uuid);
+				sb.append(", groupId=");
+				sb.append(groupId);
+				sb.append("}");
 
-				throw new NoSuchFileEntryException(sm.toString());
+				throw new NoSuchFileEntryException(sb.toString());
 			}
 			else {
 				return list.get(0);
@@ -335,17 +334,17 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 	}
 
 	protected String getFolderIds(List<Long> folderIds) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < folderIds.size(); i++) {
-			sm.append("folderId = ? ");
+			sb.append("folderId = ? ");
 
 			if ((i + 1) != folderIds.size()) {
-				sm.append("OR ");
+				sb.append("OR ");
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 }

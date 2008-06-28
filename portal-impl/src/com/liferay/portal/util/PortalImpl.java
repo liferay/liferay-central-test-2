@@ -47,7 +47,6 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -1154,15 +1153,15 @@ public class PortalImpl implements Portal {
 
 		long plid = LayoutConstants.DEFAULT_PLID;
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(groupId);
-		sm.append(StringPool.SPACE);
-		sm.append(privateLayout);
-		sm.append(StringPool.SPACE);
-		sm.append(portletId);
+		sb.append(groupId);
+		sb.append(StringPool.SPACE);
+		sb.append(privateLayout);
+		sb.append(StringPool.SPACE);
+		sb.append(portletId);
 
-		String key = sm.toString();
+		String key = sb.toString();
 
 		Long plidObj = _plidToPortletIdCache.get(key);
 
@@ -1249,20 +1248,20 @@ public class PortalImpl implements Portal {
 	public String getPortalURL(
 		String serverName, int serverPort, boolean secure) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		if (secure || Http.HTTPS.equals(PropsValues.WEB_SERVER_PROTOCOL)) {
-			sm.append(Http.HTTPS_WITH_SLASH);
+			sb.append(Http.HTTPS_WITH_SLASH);
 		}
 		else {
-			sm.append(Http.HTTP_WITH_SLASH);
+			sb.append(Http.HTTP_WITH_SLASH);
 		}
 
 		if (Validator.isNull(PropsValues.WEB_SERVER_HOST)) {
-			sm.append(serverName);
+			sb.append(serverName);
 		}
 		else {
-			sm.append(PropsValues.WEB_SERVER_HOST);
+			sb.append(PropsValues.WEB_SERVER_HOST);
 		}
 
 		if (!secure) {
@@ -1270,16 +1269,16 @@ public class PortalImpl implements Portal {
 				if ((serverPort != Http.HTTP_PORT) &&
 					(serverPort != Http.HTTPS_PORT)) {
 
-					sm.append(StringPool.COLON);
-					sm.append(serverPort);
+					sb.append(StringPool.COLON);
+					sb.append(serverPort);
 				}
 			}
 			else {
 				if ((PropsValues.WEB_SERVER_HTTP_PORT != serverPort) ||
 					(PropsValues.WEB_SERVER_HTTP_PORT != Http.HTTP_PORT)) {
 
-					sm.append(StringPool.COLON);
-					sm.append(PropsValues.WEB_SERVER_HTTP_PORT);
+					sb.append(StringPool.COLON);
+					sb.append(PropsValues.WEB_SERVER_HTTP_PORT);
 				}
 			}
 		}
@@ -1289,21 +1288,21 @@ public class PortalImpl implements Portal {
 				if ((serverPort != Http.HTTP_PORT) &&
 					(serverPort != Http.HTTPS_PORT)) {
 
-					sm.append(StringPool.COLON);
-					sm.append(serverPort);
+					sb.append(StringPool.COLON);
+					sb.append(serverPort);
 				}
 			}
 			else {
 				if ((PropsValues.WEB_SERVER_HTTPS_PORT != serverPort) ||
 					(PropsValues.WEB_SERVER_HTTPS_PORT != Http.HTTPS_PORT)) {
 
-					sm.append(StringPool.COLON);
-					sm.append(PropsValues.WEB_SERVER_HTTPS_PORT);
+					sb.append(StringPool.COLON);
+					sb.append(PropsValues.WEB_SERVER_HTTPS_PORT);
 				}
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public Object[] getPortletFriendlyURLMapper(
@@ -1504,13 +1503,13 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getPortletNamespace(String portletId) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(StringPool.UNDERLINE);
-		sm.append(portletId);
-		sm.append(StringPool.UNDERLINE);
+		sb.append(StringPool.UNDERLINE);
+		sb.append(portletId);
+		sb.append(StringPool.UNDERLINE);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public String getPortletTitle(
@@ -1524,24 +1523,24 @@ public class PortalImpl implements Portal {
 	public String getPortletTitle(
 		String portletId, long companyId, Locale locale) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(JavaConstants.JAVAX_PORTLET_TITLE);
-		sm.append(StringPool.PERIOD);
-		sm.append(portletId);
+		sb.append(JavaConstants.JAVAX_PORTLET_TITLE);
+		sb.append(StringPool.PERIOD);
+		sb.append(portletId);
 
-		return LanguageUtil.get(companyId, locale, sm.toString());
+		return LanguageUtil.get(companyId, locale, sb.toString());
 	}
 
 	public String getPortletTitle(String portletId, User user) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(JavaConstants.JAVAX_PORTLET_TITLE);
-		sm.append(StringPool.PERIOD);
-		sm.append(portletId);
+		sb.append(JavaConstants.JAVAX_PORTLET_TITLE);
+		sb.append(StringPool.PERIOD);
+		sb.append(portletId);
 
 		return LanguageUtil.get(
-			user.getCompanyId(), user.getLocale(), sm.toString());
+			user.getCompanyId(), user.getLocale(), sb.toString());
 	}
 
 	public String getPortletTitle(
@@ -1812,14 +1811,14 @@ public class PortalImpl implements Portal {
 		x = url.indexOf(StringPool.QUESTION);
 
 		if (x != -1) {
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append(url.substring(0, x));
-			sm.append(_JSESSIONID);
-			sm.append(sessionId);
-			sm.append(url.substring(x));
+			sb.append(url.substring(0, x));
+			sb.append(_JSESSIONID);
+			sb.append(sessionId);
+			sb.append(url.substring(x));
 
-			return sm.toString();
+			return sb.toString();
 		}
 
 		// In IE6, http://www.abc.com;jsessionid=XYZ does not work,
@@ -1827,22 +1826,22 @@ public class PortalImpl implements Portal {
 
 		x = url.indexOf(StringPool.DOUBLE_SLASH);
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(url);
+		sb.append(url);
 
 		if (x != -1) {
 			int y = url.lastIndexOf(StringPool.SLASH);
 
 			if (x + 1 == y) {
-				sm.append(StringPool.SLASH);
+				sb.append(StringPool.SLASH);
 			}
 		}
 
-		sm.append(_JSESSIONID);
-		sm.append(sessionId);
+		sb.append(_JSESSIONID);
+		sb.append(sessionId);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public User getUser(HttpServletRequest req)
@@ -2166,7 +2165,7 @@ public class PortalImpl implements Portal {
 	}
 
 	public void renderPage(
-			StringMaker sm, ServletContext ctx, HttpServletRequest req,
+			StringBuilder sb, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, String path)
 		throws IOException, ServletException {
 
@@ -2177,31 +2176,31 @@ public class PortalImpl implements Portal {
 
 		rd.include(req, stringServletRes);
 
-		sm.append(stringServletRes.getString());
+		sb.append(stringServletRes.getString());
 	}
 
 	public void renderPortlet(
-			StringMaker sm, ServletContext ctx, HttpServletRequest req,
+			StringBuilder sb, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, Portlet portlet, String queryString)
 		throws IOException, ServletException {
 
 		renderPortlet(
-			sm, ctx, req, res, portlet, queryString, null, null, null);
+			sb, ctx, req, res, portlet, queryString, null, null, null);
 	}
 
 	public void renderPortlet(
-			StringMaker sm, ServletContext ctx, HttpServletRequest req,
+			StringBuilder sb, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, Portlet portlet, String queryString,
 			String columnId, Integer columnPos, Integer columnCount)
 		throws IOException, ServletException {
 
 		renderPortlet(
-			sm, ctx, req, res, portlet, queryString, columnId, columnPos,
+			sb, ctx, req, res, portlet, queryString, columnId, columnPos,
 			columnCount, null);
 	}
 
 	public void renderPortlet(
-			StringMaker sm, ServletContext ctx, HttpServletRequest req,
+			StringBuilder sb, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, Portlet portlet, String queryString,
 			String columnId, Integer columnPos, Integer columnCount,
 			String path)
@@ -2230,13 +2229,13 @@ public class PortalImpl implements Portal {
 
 		RequestDispatcher rd = ctx.getRequestDispatcher(path);
 
-		if (sm != null) {
+		if (sb != null) {
 			StringServletResponse stringServletRes =
 				new StringServletResponse(res);
 
 			rd.include(req, stringServletRes);
 
-			sm.append(stringServletRes.getString());
+			sb.append(stringServletRes.getString());
 		}
 		else {
 
@@ -2328,17 +2327,17 @@ public class PortalImpl implements Portal {
 			int status, Exception e, ActionRequest req, ActionResponse res)
 		throws IOException {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(PATH_MAIN);
-		sm.append("/portal/status?status=");
-		sm.append(status);
-		sm.append("&exception=");
-		sm.append(e.getClass().getName());
-		sm.append("&previousURL=");
-		sm.append(HttpUtil.encodeURL(PortalUtil.getCurrentURL(req)));
+		sb.append(PATH_MAIN);
+		sb.append("/portal/status?status=");
+		sb.append(status);
+		sb.append("&exception=");
+		sb.append(e.getClass().getName());
+		sb.append("&previousURL=");
+		sb.append(HttpUtil.encodeURL(PortalUtil.getCurrentURL(req)));
 
-		res.sendRedirect(sm.toString());
+		res.sendRedirect(sb.toString());
 	}
 
 	/**
@@ -2687,18 +2686,18 @@ public class PortalImpl implements Portal {
 	}
 
 	private String _getCurrentURL(HttpServletRequest req) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		StringBuffer requestURL = req.getRequestURL();
 
 		if (requestURL != null) {
-			sm.append(requestURL.toString());
+			sb.append(requestURL.toString());
 		}
 
 		String queryString = req.getQueryString();
 
 		if (Validator.isNull(queryString)) {
-			return sm.toString();
+			return sb.toString();
 		}
 
 		String portletId = req.getParameter("p_p_id");
@@ -2748,10 +2747,10 @@ public class PortalImpl implements Portal {
 			}
 		}
 
-		sm.append(StringPool.QUESTION);
-		sm.append(queryString);
+		sb.append(StringPool.QUESTION);
+		sb.append(queryString);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private long _getPlidFromPortletId(

@@ -88,21 +88,21 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 
 				TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(BlogsEntry.class.getName(), entry.getEntryId());
 
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
-				sm.append("javascript: ");
-				sm.append(renderResponse.getNamespace());
-				sm.append("selectAsset('");
-				sm.append(asset.getAssetId());
-				sm.append("', '");
-				sm.append(asset.getAssetId());
-				sm.append("', '");
-				sm.append(asset.getTitle());
-				sm.append("', '");
-				sm.append(assetOrder);
-				sm.append("');");
+				sb.append("javascript: ");
+				sb.append(renderResponse.getNamespace());
+				sb.append("selectAsset('");
+				sb.append(asset.getAssetId());
+				sb.append("', '");
+				sb.append(asset.getAssetId());
+				sb.append("', '");
+				sb.append(asset.getTitle());
+				sb.append("', '");
+				sb.append(assetOrder);
+				sb.append("');");
 
-				String rowHREF = sm.toString();
+				String rowHREF = sb.toString();
 
 				// Title
 
@@ -159,21 +159,21 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 
 			TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(BlogsEntry.class.getName(), entry.getEntryId());
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append("javascript: ");
-			sm.append(renderResponse.getNamespace());
-			sm.append("selectAsset('");
-			sm.append(asset.getAssetId());
-			sm.append("', '");
-			sm.append(asset.getAssetId());
-			sm.append("', '");
-			sm.append(asset.getTitle());
-			sm.append("', '");
-			sm.append(assetOrder);
-			sm.append("');");
+			sb.append("javascript: ");
+			sb.append(renderResponse.getNamespace());
+			sb.append("selectAsset('");
+			sb.append(asset.getAssetId());
+			sb.append("', '");
+			sb.append(asset.getAssetId());
+			sb.append("', '");
+			sb.append(asset.getTitle());
+			sb.append("', '");
+			sb.append(assetOrder);
+			sb.append("');");
 
-			String rowHREF = sm.toString();
+			String rowHREF = sb.toString();
 
 			// Title
 

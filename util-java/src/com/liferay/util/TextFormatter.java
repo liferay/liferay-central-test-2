@@ -22,7 +22,6 @@
 
 package com.liferay.util;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -198,21 +197,21 @@ public class TextFormatter {
 	}
 
 	private static String _formatH(String s) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		char[] c = s.toCharArray();
 
 		for (int i = 0; i < c.length; i++) {
 			if (Character.isUpperCase(c[i])) {
-				sm.append(StringPool.SPACE);
-				sm.append(Character.toLowerCase(c[i]));
+				sb.append(StringPool.SPACE);
+				sb.append(Character.toLowerCase(c[i]));
 			}
 			else {
-				sm.append(c[i]);
+				sb.append(c[i]);
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static String _formatI(String s) {
@@ -227,7 +226,7 @@ public class TextFormatter {
 				s.substring(1, s.length());
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		char[] c = s.toCharArray();
 
@@ -235,20 +234,20 @@ public class TextFormatter {
 			if ((i + 1 != c.length) &&
 				(Character.isLowerCase(c[i + 1]))) {
 
-				sm.append(s.substring(i, c.length));
+				sb.append(s.substring(i, c.length));
 
 				break;
 			}
 			else {
-				sm.append(Character.toLowerCase(c[i]));
+				sb.append(Character.toLowerCase(c[i]));
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static String _formatJ(String s) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		s = StringUtil.replace(s, StringPool.DASH, StringPool.SPACE);
 		s = StringUtil.replace(s, StringPool.UNDERLINE, StringPool.SPACE);
@@ -257,14 +256,14 @@ public class TextFormatter {
 
 		for (int i = 0; i < c.length; i++) {
 			if ((i == 0) || (c[i - 1] == ' ')) {
-				sm.append(Character.toUpperCase(c[i]));
+				sb.append(Character.toUpperCase(c[i]));
 			}
 			else {
-				sm.append(Character.toLowerCase(c[i]));
+				sb.append(Character.toLowerCase(c[i]));
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static String _formatK(String s) {

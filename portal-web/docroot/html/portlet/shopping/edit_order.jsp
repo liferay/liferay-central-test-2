@@ -435,7 +435,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 </c:if>
 
 <%
-StringMaker itemIds = new StringMaker();
+StringBuilder itemIds = new StringBuilder();
 
 SearchContainer searchContainer = new SearchContainer();
 
@@ -493,17 +493,17 @@ for (int i = 0; itr.hasNext(); i++) {
 
 	// Description
 
-	StringMaker sm = new StringMaker();
+	StringBuilder sb = new StringBuilder();
 
-	sm.append(orderItem.getName());
+	sb.append(orderItem.getName());
 
 	if (fieldsArray.length > 0) {
-		sm.append(" (");
-		sm.append(StringUtil.replace(StringUtil.merge(fieldsArray, ", "), "=", ": "));
-		sm.append(")");
+		sb.append(" (");
+		sb.append(StringUtil.replace(StringUtil.merge(fieldsArray, ", "), "=", ": "));
+		sb.append(")");
 	}
 
-	row.addText(sm.toString(), rowURL);
+	row.addText(sb.toString(), rowURL);
 
 	// Quantity
 

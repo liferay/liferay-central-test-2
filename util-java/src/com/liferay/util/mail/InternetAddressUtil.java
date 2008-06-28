@@ -22,7 +22,6 @@
 
 package com.liferay.util.mail;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -84,42 +83,42 @@ public class InternetAddressUtil {
 		InternetAddress internetAddress = (InternetAddress)address;
 
 		if (internetAddress != null) {
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
 			String personal = internetAddress.getPersonal();
 			String emailAddress = internetAddress.getAddress();
 
 			if (Validator.isNotNull(personal)) {
-				sm.append(personal + StringPool.SPACE);
-				sm.append(StringPool.LESS_THAN);
-				sm.append(emailAddress);
-				sm.append(StringPool.GREATER_THAN);
+				sb.append(personal + StringPool.SPACE);
+				sb.append(StringPool.LESS_THAN);
+				sb.append(emailAddress);
+				sb.append(StringPool.GREATER_THAN);
 			}
 			else {
-				sm.append(emailAddress);
+				sb.append(emailAddress);
 			}
 
-			return sm.toString();
+			return sb.toString();
 		}
 
 		return StringPool.BLANK;
 	}
 
 	public static String toString(Address[] addresses) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		if (addresses != null) {
 			for (int i = 0; i < addresses.length; i++) {
-				sm.append(toString(addresses[i]));
+				sb.append(toString(addresses[i]));
 
 				if (i < addresses.length - 1) {
-					sm.append(StringPool.COMMA);
-					sm.append(StringPool.NBSP);
+					sb.append(StringPool.COMMA);
+					sb.append(StringPool.NBSP);
 				}
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 }

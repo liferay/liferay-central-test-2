@@ -99,33 +99,33 @@ List scores = null;
 
 			// Name and description
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append("<a href=\"");
-			sm.append(rowURL);
-			sm.append("\">");
-			sm.append("<img align=\"left\" border=\"0\" src=\"");
-			sm.append(themeDisplay.getPathThemeImages());
-			sm.append("/common/folder.png\">");
-			sm.append("<b>");
-			sm.append(curFolder.getName());
-			sm.append("</b>");
+			sb.append("<a href=\"");
+			sb.append(rowURL);
+			sb.append("\">");
+			sb.append("<img align=\"left\" border=\"0\" src=\"");
+			sb.append(themeDisplay.getPathThemeImages());
+			sb.append("/common/folder.png\">");
+			sb.append("<b>");
+			sb.append(curFolder.getName());
+			sb.append("</b>");
 
 			if (Validator.isNotNull(curFolder.getDescription())) {
-				sm.append("<br />");
-				sm.append(curFolder.getDescription());
+				sb.append("<br />");
+				sb.append(curFolder.getDescription());
 			}
 
-			sm.append("</a>");
+			sb.append("</a>");
 
 			List subfolders = IGFolderLocalServiceUtil.getFolders(portletGroupId.longValue(), curFolder.getFolderId(), 0, 5);
 
 			if (subfolders.size() > 0) {
 				int subfoldersCount = IGFolderLocalServiceUtil.getFoldersCount(portletGroupId.longValue(), curFolder.getFolderId());
 
-				sm.append("<br /><u>");
-				sm.append(LanguageUtil.get(pageContext, "subfolders"));
-				sm.append("</u>: ");
+				sb.append("<br /><u>");
+				sb.append(LanguageUtil.get(pageContext, "subfolders"));
+				sb.append("</u>: ");
 
 				for (int j = 0; j < subfolders.size(); j++) {
 					IGFolder subfolder = (IGFolder)subfolders.get(j);
@@ -134,32 +134,32 @@ List scores = null;
 
 					rowURL.setParameter("folderId", String.valueOf(subfolder.getFolderId()));
 
-					sm.append("<a href=\"");
-					sm.append(rowURL);
-					sm.append("\">");
-					sm.append(subfolder.getName());
-					sm.append("</a>");
+					sb.append("<a href=\"");
+					sb.append(rowURL);
+					sb.append("\">");
+					sb.append(subfolder.getName());
+					sb.append("</a>");
 
 					if ((j + 1) < subfolders.size()) {
-						sm.append(", ");
+						sb.append(", ");
 					}
 				}
 
 				if (subfoldersCount > subfolders.size()) {
 					rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 
-					sm.append(", <a href=\"");
-					sm.append(rowURL);
-					sm.append("\">");
-					sm.append(LanguageUtil.get(pageContext, "more"));
-					sm.append(" &raquo;");
-					sm.append("</a>");
+					sb.append(", <a href=\"");
+					sb.append(rowURL);
+					sb.append("\">");
+					sb.append(LanguageUtil.get(pageContext, "more"));
+					sb.append(" &raquo;");
+					sb.append("</a>");
 				}
 
 				rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 			}
 
-			row.addText(sm.toString());
+			row.addText(sb.toString());
 
 			// Statistics
 

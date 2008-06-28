@@ -154,18 +154,18 @@ for (int i = 0; i < results.size(); i++) {
 
 		// Action
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("opener.");
-		sm.append(renderResponse.getNamespace());
-		sm.append("selectImageGallery('");
-		sm.append("@image_path@/image_gallery?uuid=");
-		sm.append(image.getUuid());
-		sm.append("&groupId=@group_id@&t=");
-		sm.append(ImageServletTokenUtil.getToken(image.getLargeImageId()));
-		sm.append("'); window.close();");
+		sb.append("opener.");
+		sb.append(renderResponse.getNamespace());
+		sb.append("selectImageGallery('");
+		sb.append("@image_path@/image_gallery?uuid=");
+		sb.append(image.getUuid());
+		sb.append("&groupId=@group_id@&t=");
+		sb.append(ImageServletTokenUtil.getToken(image.getLargeImageId()));
+		sb.append("'); window.close();");
 
-		row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sm.toString());
+		row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sb.toString());
 
 		// Add result row
 

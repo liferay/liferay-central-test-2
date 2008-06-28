@@ -24,7 +24,6 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -377,7 +376,7 @@ public class UserFinderImpl implements UserFinder {
 			return StringPool.BLANK;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 
@@ -388,11 +387,11 @@ public class UserFinderImpl implements UserFinder {
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
-				sm.append(getJoin(key));
+				sb.append(getJoin(key));
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getJoin(String key) {
@@ -455,7 +454,7 @@ public class UserFinderImpl implements UserFinder {
 			return StringPool.BLANK;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 
@@ -466,11 +465,11 @@ public class UserFinderImpl implements UserFinder {
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
-				sm.append(getWhere(key, value));
+				sb.append(getWhere(key, value));
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getWhere(String key, Object value) {
@@ -494,21 +493,21 @@ public class UserFinderImpl implements UserFinder {
 			if (value instanceof Long[]) {
 				Long[] organizationIds = (Long[])value;
 
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
-				sm.append("WHERE (");
+				sb.append("WHERE (");
 
 				for (int i = 0; i < organizationIds.length; i++) {
-					sm.append("(Users_Orgs.organizationId = ?) ");
+					sb.append("(Users_Orgs.organizationId = ?) ");
 
 					if ((i + 1) < organizationIds.length) {
-						sm.append("OR ");
+						sb.append("OR ");
 					}
 				}
 
-				sm.append(")");
+				sb.append(")");
 
-				join = sm.toString();
+				join = sb.toString();
 			}
 		}
 		else if (key.equals("usersPasswordPolicies")) {
@@ -541,12 +540,12 @@ public class UserFinderImpl implements UserFinder {
 			int pos = join.indexOf("WHERE");
 
 			if (pos != -1) {
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
-				sm.append(join.substring(pos + 5, join.length()));
-				sm.append(" AND ");
+				sb.append(join.substring(pos + 5, join.length()));
+				sb.append(" AND ");
 
-				join = sm.toString();
+				join = sb.toString();
 			}
 			else {
 				join = StringPool.BLANK;

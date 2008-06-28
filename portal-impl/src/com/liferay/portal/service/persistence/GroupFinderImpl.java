@@ -27,7 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -326,15 +325,15 @@ public class GroupFinderImpl implements GroupFinder {
 				HibernateUtil.closeSession(session);
 			}
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append("No Group exists with the key {companyId=");
-			sm.append(companyId);
-			sm.append(", name=");
-			sm.append(name);
-			sm.append("}");
+			sb.append("No Group exists with the key {companyId=");
+			sb.append(companyId);
+			sb.append(", name=");
+			sb.append(name);
+			sb.append("}");
 
-			throw new NoSuchGroupException(sm.toString());
+			throw new NoSuchGroupException(sb.toString());
 		}
 		else {
 			return (Group)result;
@@ -378,54 +377,54 @@ public class GroupFinderImpl implements GroupFinder {
 			params3.put("groupsUserGroups", userId);
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("(");
+		sb.append("(");
 
-		sm.append(CustomSQLUtil.get(FIND_BY_C_N_D));
+		sb.append(CustomSQLUtil.get(FIND_BY_C_N_D));
 
-		String sql = sm.toString();
+		String sql = sb.toString();
 
 		sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params1));
 		sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params1));
 
-		sm = new StringMaker();
+		sb = new StringBuilder();
 
-		sm.append(sql);
+		sb.append(sql);
 
-		sm.append(")");
+		sb.append(")");
 
 		if (Validator.isNotNull(userId)) {
-			sm.append(" UNION (");
+			sb.append(" UNION (");
 
-			sm.append(CustomSQLUtil.get(FIND_BY_C_N_D));
+			sb.append(CustomSQLUtil.get(FIND_BY_C_N_D));
 
-			sql = sm.toString();
+			sql = sb.toString();
 
 			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params2));
 			sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params2));
 
-			sm = new StringMaker();
+			sb = new StringBuilder();
 
-			sm.append(sql);
+			sb.append(sql);
 
-			sm.append(") UNION (");
+			sb.append(") UNION (");
 
-			sm.append(CustomSQLUtil.get(FIND_BY_C_N_D));
+			sb.append(CustomSQLUtil.get(FIND_BY_C_N_D));
 
-			sql = sm.toString();
+			sql = sb.toString();
 
 			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params3));
 			sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params3));
 
-			sm = new StringMaker();
+			sb = new StringBuilder();
 
-			sm.append(sql);
+			sb.append(sql);
 
-			sm.append(")");
+			sb.append(")");
 		}
 
-		sql = sm.toString();
+		sql = sb.toString();
 		sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
 		String finderSQL = sql;
@@ -605,7 +604,7 @@ public class GroupFinderImpl implements GroupFinder {
 			return StringPool.BLANK;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 
@@ -616,11 +615,11 @@ public class GroupFinderImpl implements GroupFinder {
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
-				sm.append(getJoin(key));
+				sb.append(getJoin(key));
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getJoin(String key) {
@@ -667,7 +666,7 @@ public class GroupFinderImpl implements GroupFinder {
 			return StringPool.BLANK;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 
@@ -678,11 +677,11 @@ public class GroupFinderImpl implements GroupFinder {
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
-				sm.append(getWhere(key, value));
+				sb.append(getWhere(key, value));
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getWhere(String key, Object value) {
@@ -718,21 +717,21 @@ public class GroupFinderImpl implements GroupFinder {
 		else if (key.equals("types")) {
 			List<Integer> types = (List<Integer>)value;
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append("WHERE (");
+			sb.append("WHERE (");
 
 			for (int i = 0; i < types.size(); i++) {
-				sm.append("(Group_.type_ = ?) ");
+				sb.append("(Group_.type_ = ?) ");
 
 				if ((i + 1) < types.size()) {
-					sm.append("OR ");
+					sb.append("OR ");
 				}
 			}
 
-			sm.append(")");
+			sb.append(")");
 
-			join = sm.toString();
+			join = sb.toString();
 		}
 		else if (key.equals("userGroupRole")) {
 			join = CustomSQLUtil.get(JOIN_BY_USER_GROUP_ROLE);
@@ -745,12 +744,12 @@ public class GroupFinderImpl implements GroupFinder {
 			int pos = join.indexOf("WHERE");
 
 			if (pos != -1) {
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
-				sm.append(join.substring(pos + 5, join.length()));
-				sm.append(" AND ");
+				sb.append(join.substring(pos + 5, join.length()));
+				sb.append(" AND ");
 
-				join = sm.toString();
+				join = sb.toString();
 			}
 			else {
 				join = StringPool.BLANK;

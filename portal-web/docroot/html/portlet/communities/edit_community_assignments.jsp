@@ -187,7 +187,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 						Iterator itr = userGroupRoles.iterator();
 
-						StringMaker roleNames = new StringMaker();
+						StringBuilder roleNames = new StringBuilder();
 
 						while (itr.hasNext()) {
 							UserGroupRole userGroupRole = (UserGroupRole)itr.next();

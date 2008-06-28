@@ -22,7 +22,6 @@
 
 package com.liferay.util;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -106,21 +105,21 @@ public class JS {
 	}
 
 	public static String toScript(String[] array) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(StringPool.OPEN_BRACKET);
+		sb.append(StringPool.OPEN_BRACKET);
 
 		for (int i = 0; i < array.length; i++) {
-			sm.append("'" + array[i] + "'");
+			sb.append("'" + array[i] + "'");
 
 			if (i + 1 < array.length) {
-				sm.append(",");
+				sb.append(",");
 			}
 		}
 
-		sm.append(StringPool.CLOSE_BRACKET);
+		sb.append(StringPool.CLOSE_BRACKET);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 }

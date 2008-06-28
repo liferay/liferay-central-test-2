@@ -78,13 +78,13 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Name
 
-	StringMaker sm = new StringMaker();
+	StringBuilder sb = new StringBuilder();
 
-	sm.append(proposal.getName());
-	sm.append("<br />");
-	sm.append(proposal.getDescription());
+	sb.append(proposal.getName());
+	sb.append("<br />");
+	sb.append(proposal.getDescription());
 
-	row.addText(sm.toString(), rowURL);
+	row.addText(sb.toString(), rowURL);
 
 	// Type
 

@@ -36,7 +36,7 @@ String elType = el.attributeValue("type", StringPool.BLANK);
 String elContent = StringPool.BLANK;
 String elLanguageId = StringPool.BLANK;
 
-StringMaker elPath = new StringMaker();
+StringBuilder elPath = new StringBuilder();
 
 elPath.append(elName);
 

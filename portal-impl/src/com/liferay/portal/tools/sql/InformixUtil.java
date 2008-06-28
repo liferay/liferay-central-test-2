@@ -23,7 +23,6 @@
 package com.liferay.portal.tools.sql;
 
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -66,31 +65,31 @@ public class InformixUtil extends DBUtil {
 			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
 				"-informix.sql");
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("database sysmaster;\n");
-		sm.append("drop database " + databaseName + ";\n");
-		sm.append("create database " + databaseName + " WITH LOG;\n");
-		sm.append("\n");
-		sm.append("create procedure 'lportal'.isnull(test_string varchar)\n");
-		sm.append("returning boolean;\n");
-		sm.append("IF test_string IS NULL THEN\n");
-		sm.append("\tRETURN 't';\n");
-		sm.append("ELSE\n");
-		sm.append("\tRETURN 'f';\n");
-		sm.append("END IF\n");
-		sm.append("end procedure;\n");
-		sm.append("\n\n");
-		sm.append(
+		sb.append("database sysmaster;\n");
+		sb.append("drop database " + databaseName + ";\n");
+		sb.append("create database " + databaseName + " WITH LOG;\n");
+		sb.append("\n");
+		sb.append("create procedure 'lportal'.isnull(test_string varchar)\n");
+		sb.append("returning boolean;\n");
+		sb.append("IF test_string IS NULL THEN\n");
+		sb.append("\tRETURN 't';\n");
+		sb.append("ELSE\n");
+		sb.append("\tRETURN 'f';\n");
+		sb.append("END IF\n");
+		sb.append("end procedure;\n");
+		sb.append("\n\n");
+		sb.append(
 			FileUtil.read(
 				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
 					"-informix.sql"));
-		sm.append("\n\n");
-		sm.append(FileUtil.read("../sql/indexes/indexes-informix.sql"));
-		sm.append("\n\n");
-		sm.append(FileUtil.read("../sql/sequences/sequences-informix.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/indexes/indexes-informix.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/sequences/sequences-informix.sql"));
 
-		FileUtil.write(file, sm.toString());
+		FileUtil.write(file, sb.toString());
 	}
 
 	protected String getServerName() {
@@ -104,7 +103,7 @@ public class InformixUtil extends DBUtil {
 	protected String reword(String data) throws IOException {
 		BufferedReader br = new BufferedReader(new StringReader(data));
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		String line = null;
 
@@ -163,13 +162,13 @@ public class InformixUtil extends DBUtil {
 				line = StringPool.BLANK;
 			}
 
-			sm.append(line);
-			sm.append("\n");
+			sb.append(line);
+			sb.append("\n");
 		}
 
 		br.close();
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static String[] _INFORMIX_TEMPLATE = {

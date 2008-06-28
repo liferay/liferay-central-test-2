@@ -58,7 +58,7 @@ else {
 
 List organizationNames = new ArrayList();
 
-StringMaker organizationsHTML = new StringMaker();
+StringBuilder organizationsHTML = new StringBuilder();
 
 if (organizations != null) {
 	organizationIdsArray = new long[organizations.size()];

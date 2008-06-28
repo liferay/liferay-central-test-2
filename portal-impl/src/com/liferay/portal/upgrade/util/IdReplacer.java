@@ -23,7 +23,6 @@
 package com.liferay.portal.upgrade.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.upgrade.StagnantRowException;
 
@@ -50,7 +49,7 @@ public class IdReplacer {
 
 		char[] charArray = s.toCharArray();
 
-		StringMaker sm = new StringMaker(s.length());
+		StringBuilder sb = new StringBuilder(s.length());
 
 		int pos = 0;
 
@@ -59,12 +58,12 @@ public class IdReplacer {
 			int y = _getEndPos(charArray, x + begin.length());
 
 			if ((x == -1) || (y == -1)) {
-				sm.append(s.substring(pos, s.length()));
+				sb.append(s.substring(pos, s.length()));
 
 				break;
 			}
 			else {
-				sm.append(s.substring(pos, x + begin.length()));
+				sb.append(s.substring(pos, x + begin.length()));
 
 				String oldString = s.substring(x + begin.length(), y);
 
@@ -86,14 +85,14 @@ public class IdReplacer {
 						newValue = oldValue;
 					}
 
-					sm.append(newValue);
+					sb.append(newValue);
 				}
 
 				pos = y;
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public String replaceLongIds(
@@ -106,7 +105,7 @@ public class IdReplacer {
 			return s;
 		}
 
-		StringMaker sm = new StringMaker(s.length());
+		StringBuilder sb = new StringBuilder(s.length());
 
 		int pos = 0;
 
@@ -115,12 +114,12 @@ public class IdReplacer {
 			int y = s.indexOf(end, x + begin.length());
 
 			if ((x == -1) || (y == -1)) {
-				sm.append(s.substring(pos, s.length()));
+				sb.append(s.substring(pos, s.length()));
 
 				break;
 			}
 			else {
-				sm.append(s.substring(pos, x + begin.length()));
+				sb.append(s.substring(pos, x + begin.length()));
 
 				Long oldValue = new Long(GetterUtil.getLong(
 					s.substring(x + begin.length(), y)));
@@ -140,13 +139,13 @@ public class IdReplacer {
 					newValue = oldValue;
 				}
 
-				sm.append(newValue);
+				sb.append(newValue);
 
 				pos = y;
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static int _getEndPos(char[] charArray, int pos) {

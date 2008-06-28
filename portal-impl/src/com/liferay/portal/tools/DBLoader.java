@@ -22,7 +22,6 @@
 
 package com.liferay.portal.tools;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -96,7 +95,7 @@ public class DBLoader {
 	private void _loadDerby(Connection con, String fileName)
 		throws Exception {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		BufferedReader br = new BufferedReader(
 			new StringReader(_fileUtil.read(fileName)));
@@ -105,10 +104,10 @@ public class DBLoader {
 
 		while ((line = br.readLine()) != null) {
 			if (!line.startsWith("--")) {
-				sm.append(line);
+				sb.append(line);
 
 				if (line.endsWith(";")) {
-					String sql = sm.toString();
+					String sql = sb.toString();
 
 					sql =
 						StringUtil.replace(
@@ -130,7 +129,7 @@ public class DBLoader {
 
 					sql = sql.substring(0, sql.length() - 1);
 
-					sm = new StringMaker();
+					sb = new StringBuilder();
 
 					if (sql.startsWith("commit")) {
 						continue;
@@ -188,7 +187,7 @@ public class DBLoader {
 	private void _loadHypersonic(Connection con, String fileName)
 		throws Exception {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		BufferedReader br = new BufferedReader(
 			new StringReader(_fileUtil.read(fileName)));
@@ -197,10 +196,10 @@ public class DBLoader {
 
 		while ((line = br.readLine()) != null) {
 			if (!line.startsWith("//")) {
-				sm.append(line);
+				sb.append(line);
 
 				if (line.endsWith(";")) {
-					String sql = sm.toString();
+					String sql = sb.toString();
 
 					sql =
 						StringUtil.replace(
@@ -218,7 +217,7 @@ public class DBLoader {
 								"\\u000a"
 							});
 
-					sm = new StringMaker();
+					sb = new StringBuilder();
 
 					PreparedStatement ps = con.prepareStatement(sql);
 

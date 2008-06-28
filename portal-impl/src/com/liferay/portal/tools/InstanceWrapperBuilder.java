@@ -22,7 +22,6 @@
 
 package com.liferay.portal.tools;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.tools.servicebuilder.ServiceBuilder;
 import com.liferay.portal.util.InitUtil;
@@ -107,21 +106,21 @@ public class InstanceWrapperBuilder {
 
 		JavaMethod[] methods = javaClass.getMethods();
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		// Package
 
-		sm.append("package " + javaClass.getPackage() + ";");
+		sb.append("package " + javaClass.getPackage() + ";");
 
 		// Class declaration
 
-		sm.append("public class " + javaClass.getName() + "_IW {");
+		sb.append("public class " + javaClass.getName() + "_IW {");
 
 		// Methods
 
-		sm.append("public static " + javaClass.getName() + "_IW getInstance() {");
-		sm.append("return _instance;");
-		sm.append("}");
+		sb.append("public static " + javaClass.getName() + "_IW getInstance() {");
+		sb.append("return _instance;");
+		sb.append("}");
 
 		for (int i = 0; i < methods.length; i++) {
 			JavaMethod javaMethod = methods[i];
@@ -133,21 +132,21 @@ public class InstanceWrapperBuilder {
 					methodName = "getWrappedInstance";
 				}
 
-				sm.append("public " + javaMethod.getReturns().getValue() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
+				sb.append("public " + javaMethod.getReturns().getValue() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
 
 				JavaParameter[] parameters = javaMethod.getParameters();
 
 				for (int j = 0; j < parameters.length; j++) {
 					JavaParameter javaParameter = parameters[j];
 
-					sm.append(javaParameter.getType().getValue() + javaParameter.getGenericsName() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
+					sb.append(javaParameter.getType().getValue() + javaParameter.getGenericsName() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
 
 					if ((j + 1) != parameters.length) {
-						sm.append(", ");
+						sb.append(", ");
 					}
 				}
 
-				sm.append(")");
+				sb.append(")");
 
 				Type[] thrownExceptions = javaMethod.getExceptions();
 
@@ -160,60 +159,60 @@ public class InstanceWrapperBuilder {
 				}
 
 				if (newExceptions.size() > 0) {
-					sm.append(" throws ");
+					sb.append(" throws ");
 
 					Iterator<String> itr = newExceptions.iterator();
 
 					while (itr.hasNext()) {
-						sm.append(itr.next());
+						sb.append(itr.next());
 
 						if (itr.hasNext()) {
-							sm.append(", ");
+							sb.append(", ");
 						}
 					}
 				}
 
-				sm.append("{");
+				sb.append("{");
 
 				if (!javaMethod.getReturns().getValue().equals("void")) {
-					sm.append("return ");
+					sb.append("return ");
 				}
 
-				sm.append(javaClass.getName() + "." + javaMethod.getName() + "(");
+				sb.append(javaClass.getName() + "." + javaMethod.getName() + "(");
 
 				for (int j = 0; j < parameters.length; j++) {
 					JavaParameter javaParameter = parameters[j];
 
-					sm.append(javaParameter.getName());
+					sb.append(javaParameter.getName());
 
 					if ((j + 1) != parameters.length) {
-						sm.append(", ");
+						sb.append(", ");
 					}
 				}
 
-				sm.append(");");
-				sm.append("}");
+				sb.append(");");
+				sb.append("}");
 			}
 		}
 
 		// Private constructor
 
-		sm.append("private " + javaClass.getName() + "_IW() {");
-		sm.append("}");
+		sb.append("private " + javaClass.getName() + "_IW() {");
+		sb.append("}");
 
 		// Fields
 
-		sm.append("private static " + javaClass.getName() + "_IW _instance = new " + javaClass.getName() + "_IW();");
+		sb.append("private static " + javaClass.getName() + "_IW _instance = new " + javaClass.getName() + "_IW();");
 
 		// Class close brace
 
-		sm.append("}");
+		sb.append("}");
 
 		// Write file
 
 		File file = new File(parentDir + "/" + StringUtil.replace(javaClass.getPackage(), ".", "/") + "/" + javaClass.getName() + "_IW.java");
 
-		ServiceBuilder.writeFile(file, sm.toString());
+		ServiceBuilder.writeFile(file, sb.toString());
 	}
 
 	private String _getDimensions(Type type) {

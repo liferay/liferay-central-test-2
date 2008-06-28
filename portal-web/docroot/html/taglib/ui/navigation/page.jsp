@@ -83,11 +83,11 @@
 
 		<%
 		if (!hidden) {
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			_buildNavigation(rootLayout, layout, selBranch, themeDisplay, 1, includedLayouts, sm);
+			_buildNavigation(rootLayout, layout, selBranch, themeDisplay, 1, includedLayouts, sb);
 
-			out.print(sm.toString());
+			out.print(sb.toString());
 		}
 		%>
 
@@ -95,7 +95,7 @@
 </c:if>
 
 <%!
-private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranch, ThemeDisplay themeDisplay, int layoutLevel, String includedLayouts, StringMaker sm) throws Exception {
+private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranch, ThemeDisplay themeDisplay, int layoutLevel, String includedLayouts, StringBuilder sb) throws Exception {
 	List layoutChildren = null;
 
 	if (rootLayout != null) {
@@ -106,7 +106,7 @@ private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranc
 	}
 
 	if (layoutChildren.size() > 0) {
-		sm.append("<ul class=\"layouts\">");
+		sb.append("<ul class=\"layouts\">");
 
 		for (int i = 0; i < layoutChildren.size(); i++) {
 			Layout layoutChild = (Layout)layoutChildren.get(i);
@@ -125,7 +125,7 @@ private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranc
 					open = true;
 				}
 
-				StringMaker className = new StringMaker();
+				StringBuilder className = new StringBuilder();
 
 				if (open) {
 					className.append("open ");
@@ -135,40 +135,40 @@ private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranc
 					className.append("selected ");
 				}
 
-				sm.append("<li ");
+				sb.append("<li ");
 
 				if (Validator.isNotNull(className)) {
-					sm.append("class=\"");
-					sm.append(className);
-					sm.append("\" ");
+					sb.append("class=\"");
+					sb.append(className);
+					sb.append("\" ");
 				}
 
-				sm.append(">");
-				sm.append("<a ");
+				sb.append(">");
+				sb.append("<a ");
 
 				if (Validator.isNotNull(className)) {
-					sm.append("class=\"");
-					sm.append(className);
-					sm.append("\" ");
+					sb.append("class=\"");
+					sb.append(className);
+					sb.append("\" ");
 				}
 
-				sm.append("href=\"");
-				sm.append(layoutURL);
-				sm.append("\" ");
-				sm.append(target);
-				sm.append("> ");
-				sm.append(layoutChild.getName(themeDisplay.getLocale()));
-				sm.append("</a>");
+				sb.append("href=\"");
+				sb.append(layoutURL);
+				sb.append("\" ");
+				sb.append(target);
+				sb.append("> ");
+				sb.append(layoutChild.getName(themeDisplay.getLocale()));
+				sb.append("</a>");
 
 				if (open) {
-					_buildNavigation(layoutChild, selLayout, selBranch, themeDisplay, layoutLevel + 1, includedLayouts, sm);
+					_buildNavigation(layoutChild, selLayout, selBranch, themeDisplay, layoutLevel + 1, includedLayouts, sb);
 				}
 
-				sm.append("</li>");
+				sb.append("</li>");
 			}
 		}
 
-		sm.append("</ul>");
+		sb.append("</ul>");
 	}
 }
 %>

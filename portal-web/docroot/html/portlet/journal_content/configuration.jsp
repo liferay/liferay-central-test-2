@@ -230,15 +230,15 @@ for (int i = 0; i < results.size(); i++) {
 
 	ResultRow row = new ResultRow(null, curArticle.getArticleId() + EditArticleAction.VERSION_SEPARATOR + curArticle.getVersion(), i);
 
-	StringMaker sm = new StringMaker();
+	StringBuilder sb = new StringBuilder();
 
-	sm.append("javascript: ");
-	sm.append(renderResponse.getNamespace());
-	sm.append("selectArticle('");
-	sm.append(curArticle.getArticleId());
-	sm.append("');");
+	sb.append("javascript: ");
+	sb.append(renderResponse.getNamespace());
+	sb.append("selectArticle('");
+	sb.append(curArticle.getArticleId());
+	sb.append("');");
 
-	String rowHREF = sm.toString();
+	String rowHREF = sb.toString();
 
 	// Article id
 

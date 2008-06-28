@@ -42,7 +42,6 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.SafeProperties;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ColorScheme;
@@ -681,20 +680,20 @@ public class EditPagesAction extends PortletAction {
 		boolean workflowEnabled = ParamUtil.getBoolean(req, "workflowEnabled");
 		int workflowStages = ParamUtil.getInteger(req, "workflowStages");
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 1; i <= workflowStages; i++) {
 			String workflowRoleName = ParamUtil.getString(
 				req, "workflowRoleName_" + i);
 
-			sm.append(workflowRoleName);
+			sb.append(workflowRoleName);
 
 			if ((i + 1) <= workflowStages) {
-				sm.append(",");
+				sb.append(",");
 			}
 		}
 
-		String workflowRoleNames = sm.toString();
+		String workflowRoleNames = sb.toString();
 
 		GroupServiceUtil.updateWorkflow(
 			liveGroupId, workflowEnabled, workflowStages, workflowRoleNames);

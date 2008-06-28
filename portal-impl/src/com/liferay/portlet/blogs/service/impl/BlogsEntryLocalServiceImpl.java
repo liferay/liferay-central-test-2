@@ -36,7 +36,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -759,27 +758,27 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		String layoutURL = PortalUtil.getLayoutURL(themeDisplay);
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		String name = group.getDescriptiveName();
 		String url = portalURL + layoutURL + "/-/blogs";
 		String changesURL = portalURL + layoutURL + "/-/blogs/rss";
 
-		sm.append("http://blogsearch.google.com/ping?name=");
-		sm.append(HttpUtil.encodeURL(name));
-		sm.append("&url=");
-		sm.append(HttpUtil.encodeURL(url));
-		sm.append("&changesURL=");
-		sm.append(HttpUtil.encodeURL(changesURL));
+		sb.append("http://blogsearch.google.com/ping?name=");
+		sb.append(HttpUtil.encodeURL(name));
+		sb.append("&url=");
+		sb.append(HttpUtil.encodeURL(url));
+		sb.append("&changesURL=");
+		sb.append(HttpUtil.encodeURL(changesURL));
 
-		String location = sm.toString();
+		String location = sb.toString();
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Pinging Google at " + location);
 		}
 
 		try {
-			String response = HttpUtil.URLtoString(sm.toString());
+			String response = HttpUtil.URLtoString(sb.toString());
 
 			if (_log.isInfoEnabled()) {
 				_log.info("Google ping response: " + response);

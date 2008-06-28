@@ -38,16 +38,16 @@ else if (className.equals(DLFileEntry.class.getName())) {
 	DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(classPK);
 
 	if (Validator.isNull(title)) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("<img align=\"left\" border=\"0\" src=\"");
-		sm.append(themeDisplay.getPathThemeImages());
-		sm.append("/document_library/");
-		sm.append(DLUtil.getFileExtension(fileEntry.getName()));
-		sm.append(".png\" />");
-		sm.append(fileEntry.getTitle());
+		sb.append("<img align=\"left\" border=\"0\" src=\"");
+		sb.append(themeDisplay.getPathThemeImages());
+		sb.append("/document_library/");
+		sb.append(DLUtil.getFileExtension(fileEntry.getName()));
+		sb.append(".png\" />");
+		sb.append(fileEntry.getTitle());
 
-		title = sm.toString();
+		title = sb.toString();
 	}
 
 	summary = fileEntry.getDescription();

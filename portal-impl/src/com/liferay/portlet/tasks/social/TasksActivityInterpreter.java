@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.tasks.social;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -87,44 +86,44 @@ public class TasksActivityInterpreter extends BaseSocialActivityInterpreter {
 		TasksProposal proposal = TasksProposalLocalServiceUtil.getProposal(
 			activity.getClassPK());
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("<b>");
-		sm.append(proposal.getName());
-		sm.append("</b> (");
-		sm.append(
+		sb.append("<b>");
+		sb.append(proposal.getName());
+		sb.append("</b> (");
+		sb.append(
 			themeDisplay.translate(
 				"model.resource." + proposal.getClassName()));
-		sm.append(")<br />");
-		sm.append(themeDisplay.translate("description"));
-		sm.append(": ");
-		sm.append(proposal.getDescription());
+		sb.append(")<br />");
+		sb.append(themeDisplay.translate("description"));
+		sb.append(": ");
+		sb.append(proposal.getDescription());
 
 		if (activityType != TasksActivityKeys.ADD_PROPOSAL) {
 			int stage = extraData.getInt("stage");
 			boolean completed = extraData.getBoolean("completed");
 			boolean rejected = extraData.getBoolean("rejected");
 
-			sm.append("<br />");
-			sm.append(themeDisplay.translate("stage"));
-			sm.append(": ");
-			sm.append(stage);
-			sm.append("<br />");
-			sm.append(themeDisplay.translate("status"));
-			sm.append(": ");
+			sb.append("<br />");
+			sb.append(themeDisplay.translate("stage"));
+			sb.append(": ");
+			sb.append(stage);
+			sb.append("<br />");
+			sb.append(themeDisplay.translate("status"));
+			sb.append(": ");
 
 			if (completed && rejected) {
-				sm.append(themeDisplay.translate("rejected"));
+				sb.append(themeDisplay.translate("rejected"));
 			}
 			else if (completed && !rejected) {
-				sm.append(themeDisplay.translate("approved"));
+				sb.append(themeDisplay.translate("approved"));
 			}
 			else {
-				sm.append(themeDisplay.translate("awaiting-approval"));
+				sb.append(themeDisplay.translate("awaiting-approval"));
 			}
 		}
 
-		String body = sm.toString();
+		String body = sb.toString();
 
 		return new SocialActivityFeedEntry(title, body);
 	}

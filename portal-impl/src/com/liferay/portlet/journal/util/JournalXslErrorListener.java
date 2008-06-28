@@ -23,7 +23,6 @@
 package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.Locale;
@@ -115,18 +114,18 @@ public class JournalXslErrorListener implements ErrorListener {
 			_lineNumber = locator.getLineNumber();
 			_columnNumber = locator.getColumnNumber();
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append(LanguageUtil.get(_companyId, _locale, "line"));
-			sm.append(" #");
-			sm.append(locator.getLineNumber());
-			sm.append("; ");
-			sm.append(LanguageUtil.get(_companyId, _locale, "column"));
-			sm.append(" #");
-			sm.append(locator.getColumnNumber());
-			sm.append("; ");
+			sb.append(LanguageUtil.get(_companyId, _locale, "line"));
+			sb.append(" #");
+			sb.append(locator.getLineNumber());
+			sb.append("; ");
+			sb.append(LanguageUtil.get(_companyId, _locale, "column"));
+			sb.append(" #");
+			sb.append(locator.getColumnNumber());
+			sb.append("; ");
 
-			_location = sm.toString();
+			_location = sb.toString();
 		}
 		else {
 			_location = StringPool.BLANK;

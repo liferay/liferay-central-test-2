@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsKeys;
@@ -461,46 +460,46 @@ public class S3Hook extends BaseHook {
 	}
 
 	protected String getKey(long companyId, long repositoryId) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(companyId);
-		sm.append(StringPool.SLASH);
-		sm.append(repositoryId);
-		sm.append(StringPool.SLASH);
+		sb.append(companyId);
+		sb.append(StringPool.SLASH);
+		sb.append(repositoryId);
+		sb.append(StringPool.SLASH);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getKey(
 		long companyId, long repositoryId, String fileName) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(companyId);
-		sm.append(StringPool.SLASH);
-		sm.append(repositoryId);
-		sm.append(StringPool.SLASH);
-		sm.append(fileName);
-		sm.append(StringPool.SLASH);
+		sb.append(companyId);
+		sb.append(StringPool.SLASH);
+		sb.append(repositoryId);
+		sb.append(StringPool.SLASH);
+		sb.append(fileName);
+		sb.append(StringPool.SLASH);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getKey(
 		long companyId, long repositoryId, String fileName,
 		double versionNumber) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(companyId);
-		sm.append(StringPool.SLASH);
-		sm.append(repositoryId);
-		sm.append(StringPool.SLASH);
-		sm.append(fileName);
-		sm.append(StringPool.SLASH);
-		sm.append(versionNumber);
+		sb.append(companyId);
+		sb.append(StringPool.SLASH);
+		sb.append(repositoryId);
+		sb.append(StringPool.SLASH);
+		sb.append(fileName);
+		sb.append(StringPool.SLASH);
+		sb.append(versionNumber);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected S3Bucket getS3Bucket() throws S3ServiceException {

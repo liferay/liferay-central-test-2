@@ -24,7 +24,6 @@ package com.liferay.portlet.calendar.service.impl;
 
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.calendar.model.CalEvent;
 
@@ -65,13 +64,13 @@ public class CalEventLocalUtil {
 	}
 
 	private static String _encodeKey(long groupId) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(CACHE_NAME);
-		sm.append(StringPool.POUND);
-		sm.append(groupId);
+		sb.append(CACHE_NAME);
+		sb.append(StringPool.POUND);
+		sb.append(groupId);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static PortalCache _cache = MultiVMPoolUtil.getCache(CACHE_NAME);

@@ -79,7 +79,7 @@ for (String entryName : entries) {
 
 <%
 if (showQueryLogic) {
-	StringMaker tagsText = new StringMaker();
+	StringBuilder tagsText = new StringBuilder();
 
 	if (entries.length > 0) {
 		tagsText.append("( ");

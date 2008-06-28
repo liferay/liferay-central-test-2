@@ -117,21 +117,21 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 
 				TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
-				sm.append("javascript: ");
-				sm.append(renderResponse.getNamespace());
-				sm.append("selectAsset('");
-				sm.append(asset.getAssetId());
-				sm.append("', '");
-				sm.append(asset.getAssetId());
-				sm.append("', '");
-				sm.append(asset.getTitle());
-				sm.append("', '");
-				sm.append(assetOrder);
-				sm.append("');");
+				sb.append("javascript: ");
+				sb.append(renderResponse.getNamespace());
+				sb.append("selectAsset('");
+				sb.append(asset.getAssetId());
+				sb.append("', '");
+				sb.append(asset.getAssetId());
+				sb.append("', '");
+				sb.append(asset.getTitle());
+				sb.append("', '");
+				sb.append(assetOrder);
+				sb.append("');");
 
-				String rowHREF = sm.toString();
+				String rowHREF = sb.toString();
 
 				// Folder and document
 
@@ -194,21 +194,21 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 
 			// Name
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append("<img align=\"left\" border=\"0\" src=\"");
-			sm.append(themeDisplay.getPathThemeImages());
-			sm.append("/common/folder.png\">");
-			sm.append("<b>");
-			sm.append(curFolder.getName());
-			sm.append("</b>");
+			sb.append("<img align=\"left\" border=\"0\" src=\"");
+			sb.append(themeDisplay.getPathThemeImages());
+			sb.append("/common/folder.png\">");
+			sb.append("<b>");
+			sb.append(curFolder.getName());
+			sb.append("</b>");
 
 			if (Validator.isNotNull(curFolder.getDescription())) {
-				sm.append("<br />");
-				sm.append(curFolder.getDescription());
+				sb.append("<br />");
+				sb.append(curFolder.getDescription());
 			}
 
-			row.addText(sm.toString(), rowURL);
+			row.addText(sb.toString(), rowURL);
 
 			// Statistics
 
@@ -264,39 +264,39 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 
 				TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
-				sm.append("javascript: ");
-				sm.append(renderResponse.getNamespace());
-				sm.append("selectAsset('");
-				sm.append(asset.getAssetId());
-				sm.append("', '");
-				sm.append(asset.getAssetId());
-				sm.append("', '");
-				sm.append(asset.getTitle());
-				sm.append("', '");
-				sm.append(assetOrder);
-				sm.append("');");
+				sb.append("javascript: ");
+				sb.append(renderResponse.getNamespace());
+				sb.append("selectAsset('");
+				sb.append(asset.getAssetId());
+				sb.append("', '");
+				sb.append(asset.getAssetId());
+				sb.append("', '");
+				sb.append(asset.getTitle());
+				sb.append("', '");
+				sb.append(assetOrder);
+				sb.append("');");
 
-				String rowHREF = sm.toString();
+				String rowHREF = sb.toString();
 
 				// Title and description
 
-				sm = new StringMaker();
+				sb = new StringBuilder();
 
-				sm.append("<img align=\"left\" border=\"0\" src=\"");
-				sm.append(themeDisplay.getPathThemeImages());
-				sm.append("/document_library/");
-				sm.append(DLUtil.getFileExtension(fileEntry.getName()));
-				sm.append(".png\">");
-				sm.append(fileEntry.getTitle());
+				sb.append("<img align=\"left\" border=\"0\" src=\"");
+				sb.append(themeDisplay.getPathThemeImages());
+				sb.append("/document_library/");
+				sb.append(DLUtil.getFileExtension(fileEntry.getName()));
+				sb.append(".png\">");
+				sb.append(fileEntry.getTitle());
 
 				if (Validator.isNotNull(fileEntry.getDescription())) {
-					sm.append("<br />");
-					sm.append(fileEntry.getDescription());
+					sb.append("<br />");
+					sb.append(fileEntry.getDescription());
 				}
 
-				row.addText(sm.toString(), rowHREF);
+				row.addText(sb.toString(), rowHREF);
 
 				// Statistics
 

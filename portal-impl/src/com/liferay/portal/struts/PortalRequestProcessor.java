@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
@@ -278,7 +277,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		StrutsUtil.include(uri, getServletContext(), req, res);
 	}
 
-	protected StringMaker getFriendlyTrackerPath(
+	protected StringBuilder getFriendlyTrackerPath(
 			String path, ThemeDisplay themeDisplay, HttpServletRequest req)
 		throws Exception {
 
@@ -297,14 +296,14 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		String layoutFriendlyURL = PortalUtil.getLayoutFriendlyURL(
 			layout, themeDisplay);
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(layoutFriendlyURL);
+		sb.append(layoutFriendlyURL);
 
 		String portletId = ParamUtil.getString(req, "p_p_id");
 
 		if (Validator.isNull(portletId)) {
-			return sm;
+			return sb;
 		}
 
 		long companyId = PortalUtil.getCompanyId(req);
@@ -321,10 +320,10 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		}
 
 		if ((portlet == null) || !portlet.isActive()) {
-			sm.append(StringPool.QUESTION);
-			sm.append(req.getQueryString());
+			sb.append(StringPool.QUESTION);
+			sb.append(req.getQueryString());
 
-			return sm;
+			return sb;
 		}
 
 		String namespace = PortalUtil.getPortletNamespace(portletId);
@@ -333,10 +332,10 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			portlet.getFriendlyURLMapperInstance();
 
 		if (friendlyURLMapper == null) {
-			sm.append(StringPool.QUESTION);
-			sm.append(req.getQueryString());
+			sb.append(StringPool.QUESTION);
+			sb.append(req.getQueryString());
 
-			return sm;
+			return sb;
 		}
 
 		PortletURLImpl portletURL = new PortletURLImpl(
@@ -360,14 +359,14 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		String portletFriendlyURL = friendlyURLMapper.buildPath(portletURL);
 
 		if (portletFriendlyURL != null) {
-			sm.append(portletFriendlyURL);
+			sb.append(portletFriendlyURL);
 		}
 		else {
-			sm.append(StringPool.QUESTION);
-			sm.append(req.getQueryString());
+			sb.append(StringPool.QUESTION);
+			sb.append(req.getQueryString());
 		}
 
-		return sm;
+		return sb;
 	}
 
 	protected String getLastPath(HttpServletRequest req) {
@@ -389,11 +388,11 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			portalURL = PortalUtil.getPortalURL(req);
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(portalURL);
-		sm.append(themeDisplay.getPathMain());
-		sm.append(_PATH_PORTAL_LAYOUT);
+		sb.append(portalURL);
+		sb.append(themeDisplay.getPathMain());
+		sb.append(_PATH_PORTAL_LAYOUT);
 
 		if (!PropsValues.AUTH_FORWARD_BY_LAST_PATH) {
 			if (req.getRemoteUser() != null) {
@@ -402,19 +401,19 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				// forward to the user's default layout to prevent a lagging
 				// loop
 
-				sm.append(StringPool.QUESTION);
-				sm.append("p_l_id");
-				sm.append(StringPool.EQUAL);
-				sm.append(LayoutConstants.DEFAULT_PLID);
+				sb.append(StringPool.QUESTION);
+				sb.append("p_l_id");
+				sb.append(StringPool.EQUAL);
+				sb.append(LayoutConstants.DEFAULT_PLID);
 			}
 
-			return sm.toString();
+			return sb.toString();
 		}
 
 		LastPath lastPath = (LastPath)ses.getAttribute(WebKeys.LAST_PATH);
 
 		if (lastPath == null) {
-			return sm.toString();
+			return sb.toString();
 		}
 
 		Map<String, String[]> parameterMap = lastPath.getParameterMap();
@@ -428,18 +427,18 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 					lastPath.getPath());
 
 			if ((mapping == null) || (parameterMap == null)) {
-				return sm.toString();
+				return sb.toString();
 			}
 		}
 
-		StringMaker lastPathSM = new StringMaker();
+		StringBuilder lastPathSB = new StringBuilder();
 
-		lastPathSM.append(portalURL);
-		lastPathSM.append(lastPath.getContextPath());
-		lastPathSM.append(lastPath.getPath());
-		lastPathSM.append(HttpUtil.parameterMapToString(parameterMap));
+		lastPathSB.append(portalURL);
+		lastPathSB.append(lastPath.getContextPath());
+		lastPathSB.append(lastPath.getPath());
+		lastPathSB.append(HttpUtil.parameterMapToString(parameterMap));
 
-		return lastPathSM.toString();
+		return lastPathSB.toString();
 	}
 
 	protected boolean isPortletPath(String path) {
@@ -522,29 +521,29 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			(path.indexOf(_PATH_PORTAL_PROTECTED) == -1) &&
 			(!_trackerIgnorePaths.contains(path))) {
 
-			StringMaker sm = null;
+			StringBuilder sb = null;
 
 			try {
 				if (PropsValues.SESSION_TRACKER_FRIENDLY_PATHS_ENABLED) {
-					sm = getFriendlyTrackerPath(path, themeDisplay, req);
+					sb = getFriendlyTrackerPath(path, themeDisplay, req);
 				}
 			}
 			catch (Exception e) {
 				_log.error(e, e);
 			}
 
-			if (sm == null) {
-				sm = new StringMaker();
+			if (sb == null) {
+				sb = new StringBuilder();
 
-				sm.append(path);
-				sm.append(StringPool.QUESTION);
-				sm.append(req.getQueryString());
+				sb.append(path);
+				sb.append(StringPool.QUESTION);
+				sb.append(req.getQueryString());
 			}
 
 			UserTrackerPath userTrackerPath = UserTrackerPathUtil.create(0);
 
 			userTrackerPath.setUserTrackerId(userTracker.getUserTrackerId());
-			userTrackerPath.setPath(sm.toString());
+			userTrackerPath.setPath(sb.toString());
 			userTrackerPath.setPathDate(new Date());
 
 			userTracker.addPath(userTrackerPath);

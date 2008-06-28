@@ -84,16 +84,16 @@ for (int i = 0; i < results.size(); i++) {
 
 	// File name
 
-	StringMaker sm = new StringMaker();
+	StringBuilder sb = new StringBuilder();
 
-	sm.append("<img align=\"left\" border=\"0\" src=\"");
-	sm.append(themeDisplay.getPathThemeImages());
-	sm.append("/document_library/");
-	sm.append(DLUtil.getFileExtension(shortFileName));
-	sm.append(".png\">&nbsp;");
-	sm.append(shortFileName);
+	sb.append("<img align=\"left\" border=\"0\" src=\"");
+	sb.append(themeDisplay.getPathThemeImages());
+	sb.append("/document_library/");
+	sb.append(DLUtil.getFileExtension(shortFileName));
+	sb.append(".png\">&nbsp;");
+	sb.append(shortFileName);
 
-	row.addText(sm.toString(), rowURL);
+	row.addText(sb.toString(), rowURL);
 
 	// Size
 

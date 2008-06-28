@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalInitable;
 import com.liferay.portal.kernel.util.PortalInitableUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -115,33 +114,33 @@ public class LayoutCacheFilter
 	}
 
 	protected String getCacheKey(HttpServletRequest req) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		// Url
 
-		sm.append(HttpUtil.getProtocol(req));
-		sm.append("://");
-		sm.append(req.getServletPath());
-		sm.append(req.getPathInfo());
-		sm.append(StringPool.QUESTION);
-		sm.append(req.getQueryString());
+		sb.append(HttpUtil.getProtocol(req));
+		sb.append("://");
+		sb.append(req.getServletPath());
+		sb.append(req.getPathInfo());
+		sb.append(StringPool.QUESTION);
+		sb.append(req.getQueryString());
 
 		// Language
 
-		sm.append(StringPool.POUND);
-		sm.append(LanguageUtil.getLanguageId(req));
+		sb.append(StringPool.POUND);
+		sb.append(LanguageUtil.getLanguageId(req));
 
 		// Browser type
 
-		sm.append(StringPool.POUND);
-		sm.append(getBrowserType(req));
+		sb.append(StringPool.POUND);
+		sb.append(getBrowserType(req));
 
 		// Gzip compression
 
-		sm.append(StringPool.POUND);
-		sm.append(BrowserSnifferUtil.acceptsGzip(req));
+		sb.append(StringPool.POUND);
+		sb.append(BrowserSnifferUtil.acceptsGzip(req));
 
-		return sm.toString().trim().toUpperCase();
+		return sb.toString().trim().toUpperCase();
 	}
 
 	protected long getPlid(

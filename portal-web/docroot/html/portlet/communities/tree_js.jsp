@@ -122,7 +122,7 @@ long[] selectedNodes = StringUtil.split(SessionTreeJSClicks.getOpenNodes(request
 
 Arrays.sort(selectedNodes);
 
-StringMaker sm = new StringMaker();
+StringBuilder sb = new StringBuilder();
 
 _buildLayoutsTreeHTML(groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, new LongWrapper(1), openNodes, selectableTree, selectedNodes, portletURL, themeDisplay, sm);
 %>
@@ -157,7 +157,7 @@ _buildLayoutsTreeHTML(groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAY
 </script>
 
 <%!
-private void _buildLayoutsTreeHTML(long groupId, boolean privateLayout, long parentLayoutId, LongWrapper nodeId, long[] openNodes, boolean selectableTree, long[] selectedNodes, PortletURL portletURL, ThemeDisplay themeDisplay, StringMaker sm) throws Exception {
+private void _buildLayoutsTreeHTML(long groupId, boolean privateLayout, long parentLayoutId, LongWrapper nodeId, long[] openNodes, boolean selectableTree, long[] selectedNodes, PortletURL portletURL, ThemeDisplay themeDisplay, StringBuilder sb) throws Exception {
 	PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
 	List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(groupId, privateLayout, parentLayoutId);
@@ -168,21 +168,21 @@ private void _buildLayoutsTreeHTML(long groupId, boolean privateLayout, long par
 
 	boolean nodeOpen = false;
 
-	sm.append("<ul class=\"has-children ");
+	sb.append("<ul class=\"has-children ");
 
 	if ((Arrays.binarySearch(openNodes, nodeId.getValue()) >= 0) || nodeId.getValue() == 1) {
 		nodeOpen = true;
 
-		sm.append("node-open ");
+		sb.append("node-open ");
 	}
 
-	sm.append("\" ");
+	sb.append("\" ");
 
 	if (!nodeOpen) {
-		sm.append("style=\"display: none\" ");
+		sb.append("style=\"display: none\" ");
 	}
 
-	sm.append(">");
+	sb.append(">");
 
 	for (Layout layout : layouts) {
 		nodeId.increment();
@@ -191,58 +191,58 @@ private void _buildLayoutsTreeHTML(long groupId, boolean privateLayout, long par
 
 		String image = "spacer.png";
 
-		sm.append("<li branchid=\"");
-		sm.append(layout.getPlid());
-		sm.append("\" class=\"tree-item ");
+		sb.append("<li branchid=\"");
+		sb.append(layout.getPlid());
+		sb.append("\" class=\"tree-item ");
 
 		if (childLayouts.size() > 0) {
 			image = "plus.png";
 
-			sm.append("has-children ");
+			sb.append("has-children ");
 
 			if (Arrays.binarySearch(openNodes, nodeId.getValue()) >= 0) {
 				image = "minus.png";
 
-				sm.append("node-open ");
+				sb.append("node-open ");
 			}
 		}
 
-		sm.append("\" nodeid=\"");
-		sm.append(nodeId.getValue());
-		sm.append("\"><img class=\"expand-image\" height=\"20\" src=\"");
-		sm.append(themeDisplay.getPathThemeImages() + "/trees/" + image);
-		sm.append("\" width=\"19\" />");
+		sb.append("\" nodeid=\"");
+		sb.append(nodeId.getValue());
+		sb.append("\"><img class=\"expand-image\" height=\"20\" src=\"");
+		sb.append(themeDisplay.getPathThemeImages() + "/trees/" + image);
+		sb.append("\" width=\"19\" />");
 
 		if (selectableTree && Validator.isNotNull(selectedNodes)) {
-			sm.append("<img class=\"select-state\" height=\"20\" src=\"");
+			sb.append("<img class=\"select-state\" height=\"20\" src=\"");
 
 			if (Arrays.binarySearch(selectedNodes, layout.getPlid()) >= 0) {
-				sm.append(themeDisplay.getPathThemeImages() + "/trees/checked.png");
+				sb.append(themeDisplay.getPathThemeImages() + "/trees/checked.png");
 			}
 			else {
-				sm.append(themeDisplay.getPathThemeImages() + "/trees/checkbox.png");
+				sb.append(themeDisplay.getPathThemeImages() + "/trees/checkbox.png");
 			}
 
-			sm.append("\" width=\"19\" />");
+			sb.append("\" width=\"19\" />");
 		}
 
-		sm.append("<a href=\"");
-		sm.append(portletURL.toString());
-		sm.append(StringPool.AMPERSAND);
-		sm.append(portletDisplay.getNamespace());
-		sm.append("selPlid=");
-		sm.append(layout.getPlid());
-		sm.append("\"><img height=\"20\" src=\"");
-		sm.append(themeDisplay.getPathThemeImages() + "/trees/page.png");
-		sm.append("\" width=\"19\" /><span>");
-		sm.append(layout.getName(themeDisplay.getLocale()));
-		sm.append("</span></a>");
+		sb.append("<a href=\"");
+		sb.append(portletURL.toString());
+		sb.append(StringPool.AMPERSAND);
+		sb.append(portletDisplay.getNamespace());
+		sb.append("selPlid=");
+		sb.append(layout.getPlid());
+		sb.append("\"><img height=\"20\" src=\"");
+		sb.append(themeDisplay.getPathThemeImages() + "/trees/page.png");
+		sb.append("\" width=\"19\" /><span>");
+		sb.append(layout.getName(themeDisplay.getLocale()));
+		sb.append("</span></a>");
 
-		_buildLayoutsTreeHTML(groupId, privateLayout, layout.getLayoutId(), nodeId, openNodes, selectableTree, selectedNodes, portletURL, themeDisplay, sm);
+		_buildLayoutsTreeHTML(groupId, privateLayout, layout.getLayoutId(), nodeId, openNodes, selectableTree, selectedNodes, portletURL, themeDisplay, sb);
 
-		sm.append("</li>");
+		sb.append("</li>");
 	}
 
-	sm.append("</ul>");
+	sb.append("</ul>");
 }
 %>

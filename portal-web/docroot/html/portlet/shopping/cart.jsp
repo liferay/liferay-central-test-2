@@ -195,42 +195,42 @@ for (int i = 0; itr.hasNext(); i++) {
 
 	// SKU and small image
 
-	StringMaker sm = new StringMaker();
+	StringBuilder sb = new StringBuilder();
 
 	if (item.isSmallImage()) {
-		sm.append("<br />");
-		sm.append("<img alt=\"");
-		sm.append(item.getSku());
-		sm.append("\" border=\"0\" src=\"");
+		sb.append("<br />");
+		sb.append("<img alt=\"");
+		sb.append(item.getSku());
+		sb.append("\" border=\"0\" src=\"");
 
 		if (Validator.isNotNull(item.getSmallImageURL())) {
-			sm.append(item.getSmallImageURL());
+			sb.append(item.getSmallImageURL());
 		}
 		else {
-			sm.append(themeDisplay.getPathImage());
-			sm.append("/shopping/item?img_id=");
-			sm.append(item.getSmallImageId());
-			sm.append("&t=");
-			sm.append(ImageServletTokenUtil.getToken(item.getSmallImageId()));
+			sb.append(themeDisplay.getPathImage());
+			sb.append("/shopping/item?img_id=");
+			sb.append(item.getSmallImageId());
+			sb.append("&t=");
+			sb.append(ImageServletTokenUtil.getToken(item.getSmallImageId()));
 		}
 
-		sm.append("\">");
+		sb.append("\">");
 	}
 	else {
-		sm.append(item.getSku());
+		sb.append(item.getSku());
 	}
 
-	row.addText(sm.toString(), rowURL);
+	row.addText(sb.toString(), rowURL);
 
 	// Description
 
-	sm = new StringMaker();
+	sb = new StringBuilder();
 
-	sm.append(item.getName());
+	sb.append(item.getName());
 
 	if (Validator.isNotNull(item.getDescription())) {
-		sm.append("<br />");
-		sm.append(item.getDescription());
+		sb.append("<br />");
+		sb.append(item.getDescription());
 	}
 
 	/*Properties props = new OrderedProperties();
@@ -243,37 +243,37 @@ for (int i = 0; itr.hasNext(); i++) {
 		String propsKey = (String)enu.nextElement();
 		String propsValue = props.getProperty(propsKey, StringPool.BLANK);
 
-		sm.append("<br />");
-		sm.append(propsKey);
-		sm.append(": ");
-		sm.append(propsValue);
+		sb.append("<br />");
+		sb.append(propsKey);
+		sb.append(": ");
+		sb.append(propsValue);
 	}*/
 
 	if (PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.SHOPPING_ITEM_SHOW_AVAILABILITY)) {
-		sm.append("<br /><br />");
+		sb.append("<br /><br />");
 
 		if (ShoppingUtil.isInStock(item, itemFields, fieldsArray, count)) {
-			sm.append(LanguageUtil.get(pageContext, "availability"));
-			sm.append(": ");
-			sm.append("<span class=\"portlet-msg-success\">");
-			sm.append(LanguageUtil.get(pageContext, "in-stock"));
-			sm.append("</span>");
+			sb.append(LanguageUtil.get(pageContext, "availability"));
+			sb.append(": ");
+			sb.append("<span class=\"portlet-msg-success\">");
+			sb.append(LanguageUtil.get(pageContext, "in-stock"));
+			sb.append("</span>");
 		}
 		else {
-			sm.append(LanguageUtil.get(pageContext, "availability"));
-			sm.append(": ");
-			sm.append("<span class=\"portlet-msg-error\">");
-			sm.append(LanguageUtil.get(pageContext, "out-of-stock"));
-			sm.append("</span>");
+			sb.append(LanguageUtil.get(pageContext, "availability"));
+			sb.append(": ");
+			sb.append("<span class=\"portlet-msg-error\">");
+			sb.append(LanguageUtil.get(pageContext, "out-of-stock"));
+			sb.append("</span>");
 
-			sm.append("<script type=\"text/javascript\">");
-			sm.append("itemsInStock = false;");
-			sm.append("</script>");
+			sb.append("<script type=\"text/javascript\">");
+			sb.append("itemsInStock = false;");
+			sb.append("</script>");
 		}
 	}
 
 	if (fieldsArray.length > 0) {
-		sm.append("<br />");
+		sb.append("<br />");
 	}
 
 	for (int j = 0; j < fieldsArray.length; j++) {
@@ -282,14 +282,14 @@ for (int i = 0; itr.hasNext(); i++) {
 		String fieldName = fieldsArray[j].substring(0, pos);
 		String fieldValue = fieldsArray[j].substring(pos + 1, fieldsArray[j].length());
 
-		sm.append("<br />");
-		sm.append(fieldName);
-		sm.append(": ");
-		sm.append(fieldValue);
+		sb.append("<br />");
+		sb.append(fieldName);
+		sb.append(": ");
+		sb.append(fieldValue);
 	}
 
 	if (itemPrices.length > 0) {
-		sm.append("<br />");
+		sb.append("<br />");
 	}
 
 	for (int j = 0; j < itemPrices.length; j++) {
@@ -299,88 +299,88 @@ for (int i = 0; itr.hasNext(); i++) {
 			continue;
 		}
 
-		sm.append("<br />");
+		sb.append("<br />");
 
 		if ((itemPrice.getMinQuantity() == 0) && (itemPrice.getMaxQuantity() == 0)) {
-			sm.append(LanguageUtil.get(pageContext, "price"));
-			sm.append(": ");
+			sb.append(LanguageUtil.get(pageContext, "price"));
+			sb.append(": ");
 		}
 		else if (itemPrice.getMaxQuantity() != 0) {
-			sm.append(LanguageUtil.format(pageContext, "price-for-x-to-x-items", new Object[] {"<b>" + new Integer(itemPrice.getMinQuantity()) + "</b>", "<b>" + new Integer(itemPrice.getMaxQuantity()) + "</b>"}, false));
+			sb.append(LanguageUtil.format(pageContext, "price-for-x-to-x-items", new Object[] {"<b>" + new Integer(itemPrice.getMinQuantity()) + "</b>", "<b>" + new Integer(itemPrice.getMaxQuantity()) + "</b>"}, false));
 		}
 		else if (itemPrice.getMaxQuantity() == 0) {
-			sm.append(LanguageUtil.format(pageContext, "price-for-x-items-and-above", "<b>" + new Integer(itemPrice.getMinQuantity()) + "</b>", false));
+			sb.append(LanguageUtil.format(pageContext, "price-for-x-items-and-above", "<b>" + new Integer(itemPrice.getMinQuantity()) + "</b>", false));
 		}
 
 		if (itemPrice.getDiscount() <= 0) {
-			sm.append(currencyFormat.format(itemPrice.getPrice()));
+			sb.append(currencyFormat.format(itemPrice.getPrice()));
 		}
 		else {
-			sm.append("<strike>");
-			sm.append(currencyFormat.format(itemPrice.getPrice()));
-			sm.append("</strike> ");
-			sm.append("<span class=\"portlet-msg-success\">");
-			sm.append(currencyFormat.format(ShoppingUtil.calculateActualPrice(itemPrice)));
-			sm.append("</span> / ");
-			sm.append(LanguageUtil.get(pageContext, "you-save"));
-			sm.append(": ");
-			sm.append("<span class=\"portlet-msg-error\">");
-			sm.append(currencyFormat.format(ShoppingUtil.calculateDiscountPrice(itemPrice)));
-			sm.append(" (");
-			sm.append(percentFormat.format(itemPrice.getDiscount()));
-			sm.append(")");
-			sm.append("</span>");
+			sb.append("<strike>");
+			sb.append(currencyFormat.format(itemPrice.getPrice()));
+			sb.append("</strike> ");
+			sb.append("<span class=\"portlet-msg-success\">");
+			sb.append(currencyFormat.format(ShoppingUtil.calculateActualPrice(itemPrice)));
+			sb.append("</span> / ");
+			sb.append(LanguageUtil.get(pageContext, "you-save"));
+			sb.append(": ");
+			sb.append("<span class=\"portlet-msg-error\">");
+			sb.append(currencyFormat.format(ShoppingUtil.calculateDiscountPrice(itemPrice)));
+			sb.append(" (");
+			sb.append(percentFormat.format(itemPrice.getDiscount()));
+			sb.append(")");
+			sb.append("</span>");
 		}
 	}
 
-	row.addText(sm.toString(), rowURL);
+	row.addText(sb.toString(), rowURL);
 
 	// Quantity
 
-	sm = new StringMaker();
+	sb = new StringBuilder();
 
 	if (minQuantityMultiple && (item.getMinQuantity() > 0)) {
-		sm.append("<select name=\"");
-		sm.append(renderResponse.getNamespace());
-		sm.append("item_");
-		sm.append(item.getItemId());
-		sm.append("_");
-		sm.append(i);
-		sm.append("_count\">");
+		sb.append("<select name=\"");
+		sb.append(renderResponse.getNamespace());
+		sb.append("item_");
+		sb.append(item.getItemId());
+		sb.append("_");
+		sb.append(i);
+		sb.append("_count\">");
 
-		sm.append("<option value=\"0\">0</option>");
+		sb.append("<option value=\"0\">0</option>");
 
 		for (int j = 1; j <= 10; j++) {
 			int curQuantity = item.getMinQuantity() * j;
 
-			sm.append("<option ");
+			sb.append("<option ");
 
 			if (curQuantity == count.intValue()) {
-				sm.append("selected ");
+				sb.append("selected ");
 			}
 
-			sm.append("value=\"");
-			sm.append(curQuantity);
-			sm.append("\">");
-			sm.append(curQuantity);
-			sm.append("</option>");
+			sb.append("value=\"");
+			sb.append(curQuantity);
+			sb.append("\">");
+			sb.append(curQuantity);
+			sb.append("</option>");
 		}
 
-		sm.append("</select>");
+		sb.append("</select>");
 	}
 	else {
-		sm.append("<input name=\"");
-		sm.append(renderResponse.getNamespace());
-		sm.append("item_");
-		sm.append(item.getItemId());
-		sm.append("_");
-		sm.append(i);
-		sm.append("_count\" size=\"2\" type=\"text\" value=\"");
-		sm.append(count);
-		sm.append("\">");
+		sb.append("<input name=\"");
+		sb.append(renderResponse.getNamespace());
+		sb.append("item_");
+		sb.append(item.getItemId());
+		sb.append("_");
+		sb.append(i);
+		sb.append("_count\" size=\"2\" type=\"text\" value=\"");
+		sb.append(count);
+		sb.append("\">");
 	}
 
-	row.addText(sm.toString());
+	row.addText(sb.toString());
 
 	// Price
 

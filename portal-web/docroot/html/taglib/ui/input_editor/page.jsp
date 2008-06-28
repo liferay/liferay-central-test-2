@@ -44,14 +44,14 @@ String onChangeMethod = (String)request.getAttribute("liferay-ui:input-editor:on
 String height = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:height"), "400");
 String width = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:width"), "640");
 
-StringMaker sm = new StringMaker();
+StringBuilder sb = new StringBuilder();
 
-sm.append(themeDisplay.getPathContext());
-sm.append("/html/js/editor/editor.jsp?p_l_id=");
-sm.append(plid);
-sm.append("&p_main_path=");
-sm.append(HttpUtil.encodeURL(themeDisplay.getPathMain()));
-sm.append("&doAsUserId=");
+sb.append(themeDisplay.getPathContext());
+sb.append("/html/js/editor/editor.jsp?p_l_id=");
+sb.append(plid);
+sb.append("&p_main_path=");
+sb.append(HttpUtil.encodeURL(themeDisplay.getPathMain()));
+sb.append("&doAsUserId=");
 
 String doAsUserId = themeDisplay.getDoAsUserId();
 
@@ -59,28 +59,28 @@ if (Validator.isNull(doAsUserId)) {
 	doAsUserId = Encryptor.encrypt(company.getKeyObj(), String.valueOf(themeDisplay.getUserId()));
 }
 
-sm.append(HttpUtil.encodeURL(doAsUserId));
+sb.append(HttpUtil.encodeURL(doAsUserId));
 
-sm.append("&editorImpl=");
-sm.append(editorImpl);
+sb.append("&editorImpl=");
+sb.append(editorImpl);
 
 if (Validator.isNotNull(toolbarSet)) {
-	sm.append("&toolbarSet=");
-	sm.append(toolbarSet);
+	sb.append("&toolbarSet=");
+	sb.append(toolbarSet);
 }
 
 if (Validator.isNotNull(initMethod)) {
-	sm.append("&initMethod=");
-	sm.append(initMethod);
+	sb.append("&initMethod=");
+	sb.append(initMethod);
 }
 
 if (Validator.isNotNull(onChangeMethod)) {
-	sm.append("&onChangeMethod=");
-	sm.append(onChangeMethod);
+	sb.append("&onChangeMethod=");
+	sb.append(onChangeMethod);
 }
 
-sm.append("&cssPath=");
-sm.append(HttpUtil.encodeURL(themeDisplay.getPathThemeCss()));
+sb.append("&cssPath=");
+sb.append(HttpUtil.encodeURL(themeDisplay.getPathThemeCss()));
 
 String cssClasses = "portlet ";
 
@@ -90,10 +90,10 @@ if (portlet != null) {
 	cssClasses += portlet.getCssClassWrapper();
 }
 
-sm.append("&cssClasses=");
-sm.append(HttpUtil.encodeURL(cssClasses));
+sb.append("&cssClasses=");
+sb.append(HttpUtil.encodeURL(cssClasses));
 
-String editorURL = sm.toString();
+String editorURL = sb.toString();
 %>
 
 <iframe frameborder="0" height="<%= height %>" id="<%= name %>" name="<%= name %>" scrolling="no" src="<%= editorURL %>" width="<%= width %>"></iframe>

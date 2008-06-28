@@ -23,7 +23,6 @@
 package com.liferay.portal.upgrade.v4_4_0.util;
 
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
@@ -63,13 +62,13 @@ public class DLFileEntryTitleColumnImpl extends BaseUpgradeColumnImpl {
 		while (_distinctTitles.contains(_getKey(newTitle, extension))) {
 			_counter++;
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append(newTitle);
-			sm.append(StringPool.SPACE);
-			sm.append(_counter);
+			sb.append(newTitle);
+			sb.append(StringPool.SPACE);
+			sb.append(_counter);
 
-			newTitle = sm.toString();
+			newTitle = sb.toString();
 		}
 
 		_distinctTitles.add(_getKey(newTitle, extension));
@@ -78,20 +77,20 @@ public class DLFileEntryTitleColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	private String _getKey(String title, String extension) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(_groupIdColumn.getOldValue());
-		sm.append(StringPool.UNDERLINE);
-		sm.append(_folderIdColumn.getOldValue());
-		sm.append(StringPool.UNDERLINE);
-		sm.append(title);
+		sb.append(_groupIdColumn.getOldValue());
+		sb.append(StringPool.UNDERLINE);
+		sb.append(_folderIdColumn.getOldValue());
+		sb.append(StringPool.UNDERLINE);
+		sb.append(title);
 
 		if (Validator.isNotNull(extension)) {
-			sm.append(StringPool.PERIOD);
-			sm.append(extension);
+			sb.append(StringPool.PERIOD);
+			sb.append(extension);
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private UpgradeColumn _groupIdColumn;

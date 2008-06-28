@@ -75,16 +75,16 @@ else if (className.equals(DLFileEntry.class.getName())) {
 	DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(classPK);
 
 	if (Validator.isNull(title)) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("<img align=\"left\" border=\"0\" src=\"");
-		sm.append(themeDisplay.getPathThemeImages());
-		sm.append("/document_library/");
-		sm.append(DLUtil.getFileExtension(fileEntry.getName()));
-		sm.append(".png\" />");
-		sm.append(fileEntry.getTitle());
+		sb.append("<img align=\"left\" border=\"0\" src=\"");
+		sb.append(themeDisplay.getPathThemeImages());
+		sb.append("/document_library/");
+		sb.append(DLUtil.getFileExtension(fileEntry.getName()));
+		sb.append(".png\" />");
+		sb.append(fileEntry.getTitle());
 
-		title = sm.toString();
+		title = sb.toString();
 	}
 
 	summary = fileEntry.getDescription();
@@ -119,30 +119,30 @@ else if (className.equals(JournalArticle.class.getName())) {
 			title = articleDisplay.getTitle();
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		if (articleDisplay.isSmallImage()) {
-			sm.append("<div style=\"float: left; padding-right: 10px;\"><img alt=\"");
-			sm.append(LanguageUtil.get(pageContext, "article-image"));
-			sm.append("\" src=\"");
+			sb.append("<div style=\"float: left; padding-right: 10px;\"><img alt=\"");
+			sb.append(LanguageUtil.get(pageContext, "article-image"));
+			sb.append("\" src=\"");
 
 			if (Validator.isNotNull(articleDisplay.getSmallImageURL())) {
-				sm.append(articleDisplay.getSmallImageURL());
+				sb.append(articleDisplay.getSmallImageURL());
 			}
 			else {
-				sm.append(themeDisplay.getPathImage());
-				sm.append("/journal/article?img_id=");
-				sm.append(articleDisplay.getSmallImageId());
-				sm.append("&t=");
-				sm.append(ImageServletTokenUtil.getToken(articleDisplay.getSmallImageId()));
+				sb.append(themeDisplay.getPathImage());
+				sb.append("/journal/article?img_id=");
+				sb.append(articleDisplay.getSmallImageId());
+				sb.append("&t=");
+				sb.append(ImageServletTokenUtil.getToken(articleDisplay.getSmallImageId()));
 			}
 
-			sm.append("\" /></div>");
+			sb.append("\" /></div>");
 		}
 
-		sm.append(articleDisplay.getDescription());
+		sb.append(articleDisplay.getDescription());
 
-		summary = sm.toString();
+		summary = sb.toString();
 
 		PortletURL articleURL = renderResponse.createRenderURL();
 

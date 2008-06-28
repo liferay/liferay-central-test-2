@@ -23,7 +23,6 @@
 package com.liferay.mail.util;
 
 import com.liferay.mail.model.Filter;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -169,17 +168,17 @@ public class FuseMailHook implements Hook {
 			NameValuePair[] pairs = method.getParameters();
 
 			if (pairs.length > 0) {
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
-				sm.append("With parameters:\n");
+				sb.append("With parameters:\n");
 
 				for (int i = 0; i < pairs.length; i++) {
-					sm.append("\t");
-					sm.append(pairs[i]);
-					sm.append("\n");
+					sb.append("\t");
+					sb.append(pairs[i]);
+					sb.append("\n");
 				}
 
-				_log.debug(sm.toString());
+				_log.debug(sb.toString());
 			}
 
 			_log.debug("Status: " + status);
@@ -192,13 +191,13 @@ public class FuseMailHook implements Hook {
 	protected String getMailUserId(long userId) throws Exception {
 		User user = UserLocalServiceUtil.getUserById(userId);
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(user.getCompanyMx());
-		sm.append(StringPool.PERIOD);
-		sm.append(user.getUserId());
+		sb.append(user.getCompanyMx());
+		sb.append(StringPool.PERIOD);
+		sb.append(user.getUserId());
 
-		String mailUserId = sm.toString();
+		String mailUserId = sb.toString();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Mail user id " + mailUserId + " for user id " + userId);

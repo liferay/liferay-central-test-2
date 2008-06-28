@@ -24,7 +24,6 @@ package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OSDetector;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.FileImpl;
 
@@ -136,11 +135,11 @@ public class JSPCompiler {
 				BufferedReader br = new BufferedReader(
 					new InputStreamReader(p.getErrorStream()));
 
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 				String line = null;
 
 				while ((line = br.readLine()) != null) {
-					sm.append(line).append("\n");
+					sb.append(line).append("\n");
 				}
 
 				br.close();
@@ -149,7 +148,7 @@ public class JSPCompiler {
 				p.destroy();
 
 				if (!classFile.exists()) {
-					throw new Exception(sm.toString());
+					throw new Exception(sb.toString());
 				}
 			}
 		}

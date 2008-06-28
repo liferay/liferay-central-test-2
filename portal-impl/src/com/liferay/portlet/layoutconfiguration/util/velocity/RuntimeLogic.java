@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.layoutconfiguration.util.velocity;
 
-import com.liferay.portal.kernel.util.StringMaker;
-
 import java.util.Map;
 
 /**
@@ -36,7 +34,7 @@ import java.util.Map;
 public abstract class RuntimeLogic {
 
 	public abstract void processContent(
-			StringMaker sm, Map<String, String> attributes)
+			StringBuilder sb, Map<String, String> attributes)
 		throws Exception;
 
 }

@@ -103,67 +103,67 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			// Name and description
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
 			if (!restricted) {
-				sm.append("<a href=\"");
-				sm.append(rowURL);
-				sm.append("\">");
+				sb.append("<a href=\"");
+				sb.append(rowURL);
+				sb.append("\">");
 			}
 
-			sm.append("<b>");
-			sm.append(curCategory.getName());
-			sm.append("</b>");
+			sb.append("<b>");
+			sb.append(curCategory.getName());
+			sb.append("</b>");
 
 			if (Validator.isNotNull(curCategory.getDescription())) {
-				sm.append("<br />");
-				sm.append(curCategory.getDescription());
+				sb.append("<br />");
+				sb.append(curCategory.getDescription());
 			}
 
 			if (!restricted) {
-				sm.append("</a>");
+				sb.append("</a>");
 
 				List subcategories = MBCategoryLocalServiceUtil.getCategories(portletGroupId.longValue(), curCategory.getCategoryId(), 0, 5);
 
 				if (subcategories.size() > 0) {
 					int subcategoriesCount = MBCategoryLocalServiceUtil.getCategoriesCount(portletGroupId.longValue(), curCategory.getCategoryId());
 
-					sm.append("<br /><span class=\"subcategories\">");
-					sm.append(LanguageUtil.get(pageContext, "subcategories"));
-					sm.append("</span>: ");
+					sb.append("<br /><span class=\"subcategories\">");
+					sb.append(LanguageUtil.get(pageContext, "subcategories"));
+					sb.append("</span>: ");
 
 					for (int j = 0; j < subcategories.size(); j++) {
 						MBCategory subcategory = (MBCategory)subcategories.get(j);
 
 						rowURL.setParameter("categoryId", String.valueOf(subcategory.getCategoryId()));
 
-						sm.append("<a href=\"");
-						sm.append(rowURL);
-						sm.append("\">");
-						sm.append(subcategory.getName());
-						sm.append("</a>");
+						sb.append("<a href=\"");
+						sb.append(rowURL);
+						sb.append("\">");
+						sb.append(subcategory.getName());
+						sb.append("</a>");
 
 						if ((j + 1) < subcategories.size()) {
-							sm.append(", ");
+							sb.append(", ");
 						}
 					}
 
 					if (subcategoriesCount > subcategories.size()) {
 						rowURL.setParameter("categoryId", String.valueOf(curCategory.getCategoryId()));
 
-						sm.append(", <a href=\"");
-						sm.append(rowURL);
-						sm.append("\">");
-						sm.append(LanguageUtil.get(pageContext, "more"));
-						sm.append(" &raquo;");
-						sm.append("</a>");
+						sb.append(", <a href=\"");
+						sb.append(rowURL);
+						sb.append("\">");
+						sb.append(LanguageUtil.get(pageContext, "more"));
+						sb.append(" &raquo;");
+						sb.append("</a>");
 					}
 
 					rowURL.setParameter("categoryId", String.valueOf(curCategory.getCategoryId()));
 				}
 			}
 
-			row.addText(sm.toString());
+			row.addText(sb.toString());
 
 			// Statistics
 
@@ -295,23 +295,23 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 				// Thread
 
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
 				String[] threadPriority = MBUtil.getThreadPriority(prefs, themeDisplay.getLanguageId(), thread.getPriority(), themeDisplay);
 
 				if ((threadPriority != null) && (thread.getPriority() > 0)) {
-					sm.append("<img align=\"left\" alt=\"");
-					sm.append(threadPriority[0]);
-					sm.append("\" border=\"0\" src=\"");
-					sm.append(threadPriority[1]);
-					sm.append("\" title=\"");
-					sm.append(threadPriority[0]);
-					sm.append("\" >");
+					sb.append("<img align=\"left\" alt=\"");
+					sb.append(threadPriority[0]);
+					sb.append("\" border=\"0\" src=\"");
+					sb.append(threadPriority[1]);
+					sb.append("\" title=\"");
+					sb.append(threadPriority[0]);
+					sb.append("\" >");
 				}
 
-				sm.append(message.getSubject());
+				sb.append(message.getSubject());
 
-				row.addText(sm.toString(), rowURL);
+				row.addText(sb.toString(), rowURL);
 
 				// Started by
 
@@ -336,22 +336,22 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 					row.addText(LanguageUtil.get(pageContext, "none"), rowURL);
 				}
 				else {
-					sm = new StringMaker();
+					sb = new StringBuilder();
 
-					sm.append(LanguageUtil.get(pageContext, "date"));
-					sm.append(": ");
-					sm.append(dateFormatDateTime.format(thread.getLastPostDate()));
+					sb.append(LanguageUtil.get(pageContext, "date"));
+					sb.append(": ");
+					sb.append(dateFormatDateTime.format(thread.getLastPostDate()));
 
 					String lastPostByUserName = PortalUtil.getUserName(thread.getLastPostByUserId(), StringPool.BLANK);
 
 					if (Validator.isNotNull(lastPostByUserName)) {
-						sm.append("<br />");
-						sm.append(LanguageUtil.get(pageContext, "by"));
-						sm.append(": ");
-						sm.append(lastPostByUserName);
+						sb.append("<br />");
+						sb.append(LanguageUtil.get(pageContext, "by"));
+						sb.append(": ");
+						sb.append(lastPostByUserName);
 					}
 
-					row.addText(sm.toString(), rowURL);
+					row.addText(sb.toString(), rowURL);
 				}
 
 				// Action
@@ -483,24 +483,24 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 				// Name and description
 
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
 				if (!restricted) {
-					sm.append("<a href=\"");
-					sm.append(rowURL);
-					sm.append("\">");
+					sb.append("<a href=\"");
+					sb.append(rowURL);
+					sb.append("\">");
 				}
 
-				sm.append("<b>");
-				sm.append(curCategory.getName());
-				sm.append("</b>");
+				sb.append("<b>");
+				sb.append(curCategory.getName());
+				sb.append("</b>");
 
 				if (Validator.isNotNull(curCategory.getDescription())) {
-					sm.append("<br />");
-					sm.append(curCategory.getDescription());
+					sb.append("<br />");
+					sb.append(curCategory.getDescription());
 				}
 
-				row.addText(sm.toString());
+				row.addText(sb.toString());
 
 				// Statistics
 
@@ -605,23 +605,23 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			// Thread
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
 			String[] threadPriority = MBUtil.getThreadPriority(prefs, themeDisplay.getLanguageId(), thread.getPriority(), themeDisplay);
 
 			if ((threadPriority != null) && (thread.getPriority() > 0)) {
-				sm.append("<img align=\"left\" alt=\"");
-				sm.append(threadPriority[0]);
-				sm.append("\" border=\"0\" src=\"");
-				sm.append(threadPriority[1]);
-				sm.append("\" title=\"");
-				sm.append(threadPriority[0]);
-				sm.append("\" >");
+				sb.append("<img align=\"left\" alt=\"");
+				sb.append(threadPriority[0]);
+				sb.append("\" border=\"0\" src=\"");
+				sb.append(threadPriority[1]);
+				sb.append("\" title=\"");
+				sb.append(threadPriority[0]);
+				sb.append("\" >");
 			}
 
-			sm.append(message.getSubject());
+			sb.append(message.getSubject());
 
-			row.addText(sm.toString(), rowURL);
+			row.addText(sb.toString(), rowURL);
 
 			// Started by
 
@@ -646,22 +646,22 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				row.addText(LanguageUtil.get(pageContext, "none"), rowURL);
 			}
 			else {
-				sm = new StringMaker();
+				sb = new StringBuilder();
 
-				sm.append(LanguageUtil.get(pageContext, "date"));
-				sm.append(": ");
-				sm.append(dateFormatDateTime.format(thread.getLastPostDate()));
+				sb.append(LanguageUtil.get(pageContext, "date"));
+				sb.append(": ");
+				sb.append(dateFormatDateTime.format(thread.getLastPostDate()));
 
 				String lastPostByUserName = PortalUtil.getUserName(thread.getLastPostByUserId(), StringPool.BLANK);
 
 				if (Validator.isNotNull(lastPostByUserName)) {
-					sm.append("<br />");
-					sm.append(LanguageUtil.get(pageContext, "by"));
-					sm.append(": ");
-					sm.append(lastPostByUserName);
+					sb.append("<br />");
+					sb.append(LanguageUtil.get(pageContext, "by"));
+					sb.append(": ");
+					sb.append(lastPostByUserName);
 				}
 
-				row.addText(sm.toString(), rowURL);
+				row.addText(sb.toString(), rowURL);
 			}
 
 			// Action

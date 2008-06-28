@@ -23,7 +23,6 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
@@ -318,17 +317,17 @@ public class MBThreadFinderImpl implements MBThreadFinder {
 	}
 
 	protected String getCategoryIds(List<Long> categoryIds) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < categoryIds.size(); i++) {
-			sm.append("categoryId = ? ");
+			sb.append("categoryId = ? ");
 
 			if ((i + 1) != categoryIds.size()) {
-				sm.append("OR ");
+				sb.append("OR ");
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 }

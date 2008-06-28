@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.layoutconfiguration.util.velocity;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.util.comparator.PortletRenderWeightComparator;
 
@@ -63,15 +62,15 @@ public class TemplateProcessor {
 
 		PortletColumnLogic logic = new PortletColumnLogic(_ctx, _req, _res);
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		logic.processContent(sm, attributes);
+		logic.processContent(sb, attributes);
 
 		_portletsMap.putAll(logic.getPortletsMap());
 
 		String columnIdPlaceHolder = "[$TEMPLATE_COLUMN_" + columnId + "$]";
 
-		_columnsMap.put(columnIdPlaceHolder, sm.toString());
+		_columnsMap.put(columnIdPlaceHolder, sb.toString());
 
 		return columnIdPlaceHolder;
 	}
@@ -79,21 +78,21 @@ public class TemplateProcessor {
 	public String processMax() throws Exception {
 		RuntimeLogic logic = new PortletLogic(_ctx, _req, _res, _portletId);
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		logic.processContent(sm, new HashMap<String, String>());
+		logic.processContent(sb, new HashMap<String, String>());
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public String processPortlet(String portletId) throws Exception {
 		RuntimeLogic logic = new PortletLogic(_ctx, _req, _res, portletId);
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		logic.processContent(sm, new HashMap<String, String>());
+		logic.processContent(sb, new HashMap<String, String>());
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public Map<String, String> getColumnsMap() {

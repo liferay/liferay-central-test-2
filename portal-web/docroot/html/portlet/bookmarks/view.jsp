@@ -96,35 +96,35 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 			// Name and description
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append("<a href=\"");
-			sm.append(rowURL);
-			sm.append("\">");
-			sm.append("<img alt=\"");
-			sm.append(LanguageUtil.get(pageContext, "folder"));
-			sm.append("\" class=\"label-icon\" src=\"");
-			sm.append(themeDisplay.getPathThemeImages());
-			sm.append("/common/folder.png\">");
-			sm.append("<b>");
-			sm.append(curFolder.getName());
-			sm.append("</b>");
+			sb.append("<a href=\"");
+			sb.append(rowURL);
+			sb.append("\">");
+			sb.append("<img alt=\"");
+			sb.append(LanguageUtil.get(pageContext, "folder"));
+			sb.append("\" class=\"label-icon\" src=\"");
+			sb.append(themeDisplay.getPathThemeImages());
+			sb.append("/common/folder.png\">");
+			sb.append("<b>");
+			sb.append(curFolder.getName());
+			sb.append("</b>");
 
 			if (Validator.isNotNull(curFolder.getDescription())) {
-				sm.append("<br />");
-				sm.append(curFolder.getDescription());
+				sb.append("<br />");
+				sb.append(curFolder.getDescription());
 			}
 
-			sm.append("</a>");
+			sb.append("</a>");
 
 			List subfolders = BookmarksFolderLocalServiceUtil.getFolders(portletGroupId.longValue(), curFolder.getFolderId(), 0, 5);
 
 			if (subfolders.size() > 0) {
 				int subfoldersCount = BookmarksFolderLocalServiceUtil.getFoldersCount(portletGroupId.longValue(), curFolder.getFolderId());
 
-				sm.append("<br /><u>");
-				sm.append(LanguageUtil.get(pageContext, "subfolders"));
-				sm.append("</u>: ");
+				sb.append("<br /><u>");
+				sb.append(LanguageUtil.get(pageContext, "subfolders"));
+				sb.append("</u>: ");
 
 				for (int j = 0; j < subfolders.size(); j++) {
 					BookmarksFolder subfolder = (BookmarksFolder)subfolders.get(j);
@@ -133,32 +133,32 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 					rowURL.setParameter("folderId", String.valueOf(subfolder.getFolderId()));
 
-					sm.append("<a href=\"");
-					sm.append(rowURL);
-					sm.append("\">");
-					sm.append(subfolder.getName());
-					sm.append("</a>");
+					sb.append("<a href=\"");
+					sb.append(rowURL);
+					sb.append("\">");
+					sb.append(subfolder.getName());
+					sb.append("</a>");
 
 					if ((j + 1) < subfolders.size()) {
-						sm.append(", ");
+						sb.append(", ");
 					}
 				}
 
 				if (subfoldersCount > subfolders.size()) {
 					rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 
-					sm.append(", <a href=\"");
-					sm.append(rowURL);
-					sm.append("\">");
-					sm.append(LanguageUtil.get(pageContext, "more"));
-					sm.append(" &raquo;");
-					sm.append("</a>");
+					sb.append(", <a href=\"");
+					sb.append(rowURL);
+					sb.append("\">");
+					sb.append(LanguageUtil.get(pageContext, "more"));
+					sb.append(" &raquo;");
+					sb.append("</a>");
 				}
 
 				rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 			}
 
-			row.addText(sm.toString());
+			row.addText(sb.toString());
 
 			// Statistics
 
@@ -294,13 +294,13 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 				ResultRow row = new ResultRow(entry, entry.getEntryId(), i);
 
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
-				sm.append(themeDisplay.getPathMain());
-				sm.append("/bookmarks/open_entry?entryId=");
-				sm.append(entry.getEntryId());
+				sb.append(themeDisplay.getPathMain());
+				sb.append("/bookmarks/open_entry?entryId=");
+				sb.append(entry.getEntryId());
 
-				String rowHREF = sm.toString();
+				String rowHREF = sb.toString();
 
 				TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, entry.getName(), rowHREF, "_blank", entry.getComments());
 
@@ -429,13 +429,13 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 			ResultRow row = new ResultRow(entry, entry.getEntryId(), i);
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append(themeDisplay.getPathMain());
-			sm.append("/bookmarks/open_entry?entryId=");
-			sm.append(entry.getEntryId());
+			sb.append(themeDisplay.getPathMain());
+			sb.append("/bookmarks/open_entry?entryId=");
+			sb.append(entry.getEntryId());
 
-			String rowHREF = sm.toString();
+			String rowHREF = sb.toString();
 
 			TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, entry.getName(), rowHREF, "_blank", entry.getComments());
 

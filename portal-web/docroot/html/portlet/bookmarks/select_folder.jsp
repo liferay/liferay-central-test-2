@@ -95,17 +95,17 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Action
 
-	StringMaker sm = new StringMaker();
+	StringBuilder sb = new StringBuilder();
 
-	sm.append("opener.");
-	sm.append(renderResponse.getNamespace());
-	sm.append("selectFolder('");
-	sm.append(curFolder.getFolderId());
-	sm.append("', '");
-	sm.append(UnicodeFormatter.toString(curFolder.getName()));
-	sm.append("'); window.close();");
+	sb.append("opener.");
+	sb.append(renderResponse.getNamespace());
+	sb.append("selectFolder('");
+	sb.append(curFolder.getFolderId());
+	sb.append("', '");
+	sb.append(UnicodeFormatter.toString(curFolder.getName()));
+	sb.append("'); window.close();");
 
-	row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sm.toString());
+	row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sb.toString());
 
 	// Add result row
 

@@ -25,7 +25,6 @@ package com.liferay.portlet.journalcontent.util;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -160,27 +159,27 @@ public class JournalContentUtil {
 		long groupId, String articleId, String templateId, String languageId,
 		int page) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(CACHE_NAME);
-		sm.append(StringPool.POUND);
-		sm.append(groupId);
-		sm.append(ARTICLE_SEPARATOR);
-		sm.append(articleId);
-		sm.append(TEMPLATE_SEPARATOR);
-		sm.append(templateId);
+		sb.append(CACHE_NAME);
+		sb.append(StringPool.POUND);
+		sb.append(groupId);
+		sb.append(ARTICLE_SEPARATOR);
+		sb.append(articleId);
+		sb.append(TEMPLATE_SEPARATOR);
+		sb.append(templateId);
 
 		if (Validator.isNotNull(languageId)) {
-			sm.append(LANGUAGE_SEPARATOR);
-			sm.append(languageId);
+			sb.append(LANGUAGE_SEPARATOR);
+			sb.append(languageId);
 		}
 
 		if (page > 0) {
-			sm.append(PAGE_SEPARATOR);
-			sm.append(page);
+			sb.append(PAGE_SEPARATOR);
+			sb.append(page);
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static JournalArticleDisplay _getArticleDisplay(

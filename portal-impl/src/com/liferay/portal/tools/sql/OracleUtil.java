@@ -23,7 +23,6 @@
 package com.liferay.portal.tools.sql;
 
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.BufferedReader;
@@ -57,55 +56,55 @@ public class OracleUtil extends DBUtil {
 
 		BufferedReader br = new BufferedReader(new StringReader(oracle));
 
-		StringMaker imageSM = new StringMaker();
-		StringMaker journalArticleSM = new StringMaker();
-		StringMaker journalStructureSM = new StringMaker();
-		StringMaker journalTemplateSM = new StringMaker();
+		StringBuilder imageSB = new StringBuilder();
+		StringBuilder journalArticleSB = new StringBuilder();
+		StringBuilder journalStructureSB = new StringBuilder();
+		StringBuilder journalTemplateSB = new StringBuilder();
 
 		String line = null;
 
 		while ((line = br.readLine()) != null) {
 			if (line.startsWith("insert into Image")) {
-				_convertToOracleCSV(line, imageSM);
+				_convertToOracleCSV(line, imageSB);
 			}
 			else if (line.startsWith("insert into JournalArticle (")) {
-				_convertToOracleCSV(line, journalArticleSM);
+				_convertToOracleCSV(line, journalArticleSB);
 			}
 			else if (line.startsWith("insert into JournalStructure (")) {
-				_convertToOracleCSV(line, journalStructureSM);
+				_convertToOracleCSV(line, journalStructureSB);
 			}
 			else if (line.startsWith("insert into JournalTemplate (")) {
-				_convertToOracleCSV(line, journalTemplateSM);
+				_convertToOracleCSV(line, journalTemplateSB);
 			}
 		}
 
 		br.close();
 
-		if (imageSM.length() > 0) {
+		if (imageSB.length() > 0) {
 			FileUtil.write(
 				"../sql/" + fileName + "/" + fileName + "-oracle-image.csv",
-				imageSM.toString());
+				imageSB.toString());
 		}
 
-		if (journalArticleSM.length() > 0) {
+		if (journalArticleSB.length() > 0) {
 			FileUtil.write(
 				"../sql/" + fileName + "/" + fileName +
 					"-oracle-journalarticle.csv",
-				journalArticleSM.toString());
+				journalArticleSB.toString());
 		}
 
-		if (journalStructureSM.length() > 0) {
+		if (journalStructureSB.length() > 0) {
 			FileUtil.write(
 				"../sql/" + fileName + "/" + fileName +
 					"-oracle-journalstructure.csv",
-				journalStructureSM.toString());
+				journalStructureSB.toString());
 		}
 
-		if (journalTemplateSM.length() > 0) {
+		if (journalTemplateSB.length() > 0) {
 			FileUtil.write(
 				"../sql/" + fileName + "/" + fileName +
 					"-oracle-journaltemplate.csv",
-				journalTemplateSM.toString());
+				journalTemplateSB.toString());
 		}
 
 		oracle = _postBuildSQL(oracle);
@@ -126,26 +125,26 @@ public class OracleUtil extends DBUtil {
 			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
 				"-oracle.sql");
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("drop user &1 cascade;\n");
-		sm.append("create user &1 identified by &2;\n");
-		sm.append("grant connect,resource to &1;\n");
-		sm.append("connect &1/&2;\n");
-		sm.append("set define off;\n");
-		sm.append("\n");
-		sm.append(
+		sb.append("drop user &1 cascade;\n");
+		sb.append("create user &1 identified by &2;\n");
+		sb.append("grant connect,resource to &1;\n");
+		sb.append("connect &1/&2;\n");
+		sb.append("set define off;\n");
+		sb.append("\n");
+		sb.append(
 			FileUtil.read(
 				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
 					"-oracle.sql"));
-		sm.append("\n\n");
-		sm.append(FileUtil.read("../sql/indexes/indexes-oracle.sql"));
-		sm.append("\n\n");
-		sm.append(FileUtil.read("../sql/sequences/sequences-oracle.sql"));
-		sm.append("\n");
-		sm.append("quit");
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/indexes/indexes-oracle.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/sequences/sequences-oracle.sql"));
+		sb.append("\n");
+		sb.append("quit");
 
-		FileUtil.write(file, sm.toString());
+		FileUtil.write(file, sb.toString());
 	}
 
 	protected String getServerName() {
@@ -159,7 +158,7 @@ public class OracleUtil extends DBUtil {
 	protected String reword(String data) throws IOException {
 		BufferedReader br = new BufferedReader(new StringReader(data));
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		String line = null;
 
@@ -180,16 +179,16 @@ public class OracleUtil extends DBUtil {
 					REWORD_TEMPLATE, template);
 			}
 
-			sm.append(line);
-			sm.append("\n");
+			sb.append(line);
+			sb.append("\n");
 		}
 
 		br.close();
 
-		return sm.toString();
+		return sb.toString();
 	}
 
-	private void _convertToOracleCSV(String line, StringMaker sm) {
+	private void _convertToOracleCSV(String line, StringBuilder sb) {
 		int x = line.indexOf("values (");
 		int y = line.lastIndexOf(");");
 
@@ -197,8 +196,8 @@ public class OracleUtil extends DBUtil {
 
 		line = StringUtil.replace(line, "sysdate, ", "20050101, ");
 
-		sm.append(line);
-		sm.append("\n");
+		sb.append(line);
+		sb.append("\n");
 	}
 
 	private String _preBuildSQL(String template) throws IOException {

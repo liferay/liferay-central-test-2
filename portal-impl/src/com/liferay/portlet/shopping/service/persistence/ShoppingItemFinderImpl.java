@@ -23,7 +23,6 @@
 package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
@@ -103,7 +102,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append("SELECT COUNT(*) AS COUNT_VALUE FROM ShoppingItem ");
 			query.append("INNER JOIN ShoppingCategory ON ");
@@ -173,7 +172,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append("SELECT COUNT(*) AS COUNT_VALUE FROM ShoppingItem ");
 			query.append("INNER JOIN ShoppingCategory ON ");
@@ -246,7 +245,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append("SELECT COUNT(*) AS COUNT_VALUE FROM ShoppingItem ");
 			query.append("INNER JOIN ShoppingCategory ON ");
@@ -318,7 +317,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append("SELECT {ShoppingItem.*} FROM ShoppingItem ");
 			query.append("INNER JOIN ShoppingCategory ON ");
@@ -380,7 +379,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append("SELECT {ShoppingItem.*} FROM ShoppingItem ");
 			query.append("INNER JOIN ShoppingCategory ON ");
@@ -447,7 +446,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append("SELECT {ShoppingItem.*} FROM ShoppingItem ");
 			query.append("INNER JOIN ShoppingCategory ON ");
@@ -500,17 +499,17 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 	}
 
 	protected String getCategoryIds(List<Long> categoryIds) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < categoryIds.size(); i++) {
-			sm.append("categoryId = ? ");
+			sb.append("categoryId = ? ");
 
 			if ((i + 1) != categoryIds.size()) {
-				sm.append("OR ");
+				sb.append("OR ");
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 }

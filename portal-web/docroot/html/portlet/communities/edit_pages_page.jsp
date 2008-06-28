@@ -177,7 +177,7 @@ String friendlyURL = BeanParamUtil.getString(selLayout, request, "friendlyURL");
 				<td colspan="2" nowrap>
 
 					<%
-					StringMaker friendlyURLBase = new StringMaker();
+					StringBuilder friendlyURLBase = new StringBuilder();
 
 					friendlyURLBase.append(themeDisplay.getPortalURL());
 

@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -173,7 +172,7 @@ public class ViewAction extends PortletAction {
 	protected String getMailBody(
 		List<String> fieldValues, PortletPreferences prefs) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		Iterator<String> itr = fieldValues.iterator();
 
@@ -184,14 +183,14 @@ public class ViewAction extends PortletAction {
 				"fieldLabel" + i, StringPool.BLANK);
 
 			if (Validator.isNotNull(fieldLabel)) {
-				sm.append(fieldLabel);
-				sm.append(" : ");
-				sm.append(fieldValue);
-				sm.append("\n");
+				sb.append(fieldLabel);
+				sb.append(" : ");
+				sb.append(fieldValue);
+				sb.append("\n");
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private boolean saveDatabase(
@@ -237,7 +236,7 @@ public class ViewAction extends PortletAction {
 		// quote each entry with double quotes, and escape double quotes in
 		// values a two double quotes.
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		Iterator<String> itr = fieldValues.iterator();
 
@@ -248,13 +247,13 @@ public class ViewAction extends PortletAction {
 				"fieldLabel" + i, StringPool.BLANK);
 
 			if (Validator.isNotNull(fieldLabel)) {
-				sm.append("\"");
-				sm.append(StringUtil.replace(fieldValue, "\"", "\"\""));
-				sm.append("\";");
+				sb.append("\"");
+				sb.append(StringUtil.replace(fieldValue, "\"", "\"\""));
+				sb.append("\";");
 			}
 		}
 
-		String s = sm.substring(0, sm.length() - 1) + "\n";
+		String s = sb.substring(0, sb.length() - 1) + "\n";
 
 		try {
 			FileUtil.write(fileName, s, false, true);

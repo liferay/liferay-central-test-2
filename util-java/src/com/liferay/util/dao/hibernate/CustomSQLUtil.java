@@ -24,7 +24,6 @@ package com.liferay.util.dao.hibernate;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -363,7 +362,7 @@ public abstract class CustomSQLUtil {
 			return sql;
 		}
 
-		StringMaker oldSql = new StringMaker();
+		StringBuilder oldSql = new StringBuilder();
 
 		oldSql.append("(");
 		oldSql.append(field);
@@ -375,7 +374,7 @@ public abstract class CustomSQLUtil {
 			oldSql.append(" [$AND_OR_CONNECTOR$]");
 		}
 
-		StringMaker newSql = new StringMaker();
+		StringBuilder newSql = new StringBuilder();
 
 		newSql.append("(");
 
@@ -415,13 +414,13 @@ public abstract class CustomSQLUtil {
 			return sql;
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(removeOrderBy(sql));
-		sm.append(" ORDER BY ");
-		sm.append(obc.getOrderBy());
+		sb.append(removeOrderBy(sql));
+		sb.append(" ORDER BY ");
+		sb.append(obc.getOrderBy());
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected abstract String[] getConfigs();
@@ -474,7 +473,7 @@ public abstract class CustomSQLUtil {
 	}
 
 	protected String transform(String sql) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		try {
 			BufferedReader br = new BufferedReader(new StringReader(sql));
@@ -482,8 +481,8 @@ public abstract class CustomSQLUtil {
 			String line = null;
 
 			while ((line = br.readLine()) != null) {
-				sm.append(line.trim());
-				sm.append(StringPool.SPACE);
+				sb.append(line.trim());
+				sb.append(StringPool.SPACE);
 			}
 
 			br.close();
@@ -492,7 +491,7 @@ public abstract class CustomSQLUtil {
 			return sql;
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static Log _log = LogFactory.getLog(CustomSQLUtil.class);

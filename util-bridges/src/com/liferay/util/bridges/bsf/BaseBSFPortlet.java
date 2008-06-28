@@ -23,7 +23,6 @@
 package com.liferay.util.bridges.bsf;
 
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -134,12 +133,12 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 			String code, PortletRequest req, PortletResponse res)
 		throws BSFException, IOException {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(getGlobalScript());
-		sm.append(code);
+		sb.append(getGlobalScript());
+		sb.append(code);
 
-		String script = sm.toString();
+		String script = sb.toString();
 
 		PortletConfig portletConfig = getPortletConfig();
 		PortletContext portletContext = getPortletContext();
@@ -181,7 +180,7 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 	}
 
 	protected String getGlobalScript() throws IOException {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < globalFiles.length; i++) {
 			InputStream is = getPortletContext().getResourceAsStream(
@@ -196,8 +195,8 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 
 			try {
 				if (is != null) {
-					sm.append(new String(FileUtil.getBytes(is)));
-					sm.append(StringPool.NEW_LINE);
+					sb.append(new String(FileUtil.getBytes(is)));
+					sb.append(StringPool.NEW_LINE);
 				}
 			}
 			finally {
@@ -205,7 +204,7 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected abstract String getFileParam();

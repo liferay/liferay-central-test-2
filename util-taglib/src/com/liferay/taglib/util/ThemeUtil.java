@@ -24,7 +24,6 @@ package com.liferay.taglib.util;
 
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -148,16 +147,16 @@ public class ThemeUtil {
 
 		int pos = page.lastIndexOf(StringPool.PERIOD);
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(ctxName);
-		sm.append(theme.getVelocityResourceListener());
-		sm.append(theme.getTemplatesPath());
-		sm.append(StringPool.SLASH);
-		sm.append(page.substring(0, pos));
-		sm.append(".vm");
+		sb.append(ctxName);
+		sb.append(theme.getVelocityResourceListener());
+		sb.append(theme.getTemplatesPath());
+		sb.append(StringPool.SLASH);
+		sb.append(page.substring(0, pos));
+		sb.append(".vm");
 
-		String source = sm.toString();
+		String source = sb.toString();
 
 		if (!Velocity.resourceExists(source)) {
 			_log.error(source + " does not exist");

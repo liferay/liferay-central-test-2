@@ -199,7 +199,7 @@ public class ListUtil {
 	}
 
 	public static String toString(List list, String param, String delimiter) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < list.size(); i++) {
 			Object bean = list.get(i);
@@ -210,14 +210,14 @@ public class ListUtil {
 				value = StringPool.BLANK;
 			}
 
-			sm.append(value.toString());
+			sb.append(value.toString());
 
 			if ((i + 1) != list.size()) {
-				sm.append(delimiter);
+				sb.append(delimiter);
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public static List<Boolean> toList(Boolean[] list) {

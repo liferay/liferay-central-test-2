@@ -111,42 +111,42 @@ for (int i = 0; i < results.size(); i++) {
 
 	// SKU and small image
 
-	StringMaker sm = new StringMaker();
+	StringBuilder sb = new StringBuilder();
 
 	if (item.isSmallImage()) {
-		sm.append("<br />");
-		sm.append("<img alt=\"");
-		sm.append(item.getSku());
-		sm.append("\" border=\"0\" src=\"");
+		sb.append("<br />");
+		sb.append("<img alt=\"");
+		sb.append(item.getSku());
+		sb.append("\" border=\"0\" src=\"");
 
 		if (Validator.isNotNull(item.getSmallImageURL())) {
-			sm.append(item.getSmallImageURL());
+			sb.append(item.getSmallImageURL());
 		}
 		else {
-			sm.append(themeDisplay.getPathImage());
-			sm.append("/shopping/item?img_id=");
-			sm.append(item.getSmallImageId());
-			sm.append("&t=");
-			sm.append(ImageServletTokenUtil.getToken(item.getSmallImageId()));
+			sb.append(themeDisplay.getPathImage());
+			sb.append("/shopping/item?img_id=");
+			sb.append(item.getSmallImageId());
+			sb.append("&t=");
+			sb.append(ImageServletTokenUtil.getToken(item.getSmallImageId()));
 		}
 
-		sm.append("\">");
+		sb.append("\">");
 	}
 	else {
-		sm.append(item.getSku());
+		sb.append(item.getSku());
 	}
 
-	row.addText(sm.toString(), rowURL);
+	row.addText(sb.toString(), rowURL);
 
 	// Description
 
-	sm = new StringMaker();
+	sb = new StringBuilder();
 
-	sm.append(item.getName());
+	sb.append(item.getName());
 
 	if (Validator.isNotNull(item.getDescription())) {
-		sm.append("<br />");
-		sm.append(item.getDescription());
+		sb.append("<br />");
+		sb.append(item.getDescription());
 	}
 
 	Properties props = new OrderedProperties();
@@ -159,13 +159,13 @@ for (int i = 0; i < results.size(); i++) {
 		String propsKey = (String)enu.nextElement();
 		String propsValue = props.getProperty(propsKey, StringPool.BLANK);
 
-		sm.append("<br />");
-		sm.append(propsKey);
-		sm.append(": ");
-		sm.append(propsValue);
+		sb.append("<br />");
+		sb.append(propsKey);
+		sb.append(": ");
+		sb.append(propsValue);
 	}
 
-	row.addText(sm.toString(), rowURL);
+	row.addText(sb.toString(), rowURL);
 
 	// Minimum quantity
 

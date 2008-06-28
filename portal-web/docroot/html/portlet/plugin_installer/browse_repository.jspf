@@ -223,12 +223,12 @@ try {
 
 		// Name, screenshots, and short description
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		if (pluginPackage != null) {
-			sm.append("<a href='");
-			sm.append(rowURL.toString());
-			sm.append("'>");
+			sb.append("<a href='");
+			sb.append(rowURL.toString());
+			sb.append("'>");
 
 			if (tabs2.equals("layout-templates") || tabs2.equals("themes")) {
 				List screenshots = pluginPackage.getScreenshots();
@@ -236,32 +236,32 @@ try {
 				if (screenshots.size() > 0) {
 					Screenshot screenshot = (Screenshot)screenshots.get(0);
 
-					sm.append("<img align=\"left\" src=\"");
-					sm.append(screenshot.getThumbnailURL());
-					sm.append("\" style=\"margin-right: 10px\" />");
+					sb.append("<img align=\"left\" src=\"");
+					sb.append(screenshot.getThumbnailURL());
+					sb.append("\" style=\"margin-right: 10px\" />");
 				}
 			}
 		}
 
-		sm.append("<b>");
-		sm.append(pluginPackageName);
-		sm.append("</b> ");
-		sm.append(pluginPackageAvailableVersion);
+		sb.append("<b>");
+		sb.append(pluginPackageName);
+		sb.append("</b> ");
+		sb.append(pluginPackageAvailableVersion);
 
 		if (pluginPackage != null) {
-			sm.append("</a>");
+			sb.append("</a>");
 		}
 
 		if (Validator.isNotNull(pluginPackageShortDescription)) {
-			sm.append("<br />");
-			sm.append(LanguageUtil.get(pageContext, "id"));
-			sm.append(": ");
-			sm.append(pluginPackageModuleId);
-			sm.append("<br />");
-			sm.append(pluginPackageShortDescription);
+			sb.append("<br />");
+			sb.append(LanguageUtil.get(pageContext, "id"));
+			sb.append(": ");
+			sb.append(pluginPackageModuleId);
+			sb.append("<br />");
+			sb.append(pluginPackageShortDescription);
 		}
 
-		row.addText(sm.toString());
+		row.addText(sb.toString());
 
 		// Trusted
 
@@ -289,17 +289,17 @@ try {
 
 		// Available version
 
-		sm = new StringMaker();
+		sb = new StringBuilder();
 
-		sm.append(pluginPackageAvailableVersion);
-		sm.append("&nbsp;<img align=\"absmiddle\" border=\"0\" src='");
-		sm.append(themeDisplay.getPathThemeImages());
-		sm.append("/document_library/page.png");
-		sm.append("' onmousemove=\"Liferay.Portal.ToolTip.show(event, this, '");
-		sm.append(pluginPackageChangeLog);
-		sm.append("')\" />");
+		sb.append(pluginPackageAvailableVersion);
+		sb.append("&nbsp;<img align=\"absmiddle\" border=\"0\" src='");
+		sb.append(themeDisplay.getPathThemeImages());
+		sb.append("/document_library/page.png");
+		sb.append("' onmousemove=\"Liferay.Portal.ToolTip.show(event, this, '");
+		sb.append(pluginPackageChangeLog);
+		sb.append("')\" />");
 
-		row.addText(sm.toString());
+		row.addText(sb.toString());
 
 		// Modified date
 

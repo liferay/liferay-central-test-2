@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.layoutconfiguration.util.xml;
 
-import com.liferay.portal.kernel.util.StringMaker;
-
 /**
  * <a href="RuntimeLogic.java.html"><b><i>View Source</i></b></a>
  *
@@ -42,7 +40,7 @@ public abstract class RuntimeLogic {
 		return CLOSE_2_TAG;
 	}
 
-	public abstract void processXML(StringMaker sm, String xml)
+	public abstract void processXML(StringBuilder sb, String xml)
 		throws Exception;
 
 }

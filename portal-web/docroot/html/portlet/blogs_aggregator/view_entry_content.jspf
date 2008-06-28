@@ -26,19 +26,19 @@
 	<div class="entry-content">
 
 		<%
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(themeDisplay.getPathMain());
-		sm.append("/blogs/find_entry?redirect=");
-		sm.append(HttpUtil.encodeURL(currentURL));
-		sm.append("&entryId=");
-		sm.append(entry.getEntryId());
+		sb.append(themeDisplay.getPathMain());
+		sb.append("/blogs/find_entry?redirect=");
+		sb.append(HttpUtil.encodeURL(currentURL));
+		sb.append("&entryId=");
+		sb.append(entry.getEntryId());
 
-		String viewEntryURL = sm.toString();
+		String viewEntryURL = sb.toString();
 
-		sm.append("&showAllEntries=1");
+		sb.append("&showAllEntries=1");
 
-		String viewAllEntriesURL = sm.toString();
+		String viewAllEntriesURL = sb.toString();
 
 		User user2 = UserLocalServiceUtil.getUserById(entry.getUserId());
 		%>

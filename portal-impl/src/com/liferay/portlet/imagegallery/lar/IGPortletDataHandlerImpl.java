@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.persistence.ImageUtil;
@@ -430,15 +429,15 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			name = name.substring(0, pos);
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(name);
-		sm.append(StringPool.SPACE);
-		sm.append(StringPool.OPEN_PARENTHESIS);
-		sm.append(count);
-		sm.append(StringPool.CLOSE_PARENTHESIS);
+		sb.append(name);
+		sb.append(StringPool.SPACE);
+		sb.append(StringPool.OPEN_PARENTHESIS);
+		sb.append(count);
+		sb.append(StringPool.CLOSE_PARENTHESIS);
 
-		name = sm.toString();
+		name = sb.toString();
 
 		return getFolderName(companyId, groupId, parentFolderId, name, ++count);
 	}
@@ -446,41 +445,41 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 	protected String getFolderPath(
 		PortletDataContext context, IGFolder folder) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.IMAGE_GALLERY));
-		sm.append("/folders/");
-		sm.append(folder.getFolderId());
-		sm.append(".xml");
+		sb.append(context.getPortletPath(PortletKeys.IMAGE_GALLERY));
+		sb.append("/folders/");
+		sb.append(folder.getFolderId());
+		sb.append(".xml");
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getImageBinPath(
 		PortletDataContext context, IGImage image) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.IMAGE_GALLERY));
-		sm.append("/bin/");
-		sm.append(image.getImageId());
-		sm.append(StringPool.PERIOD);
-		sm.append(image.getImageType());
+		sb.append(context.getPortletPath(PortletKeys.IMAGE_GALLERY));
+		sb.append("/bin/");
+		sb.append(image.getImageId());
+		sb.append(StringPool.PERIOD);
+		sb.append(image.getImageType());
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getImagePath(
 		PortletDataContext context, IGImage image) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.IMAGE_GALLERY));
-		sm.append("/images/");
-		sm.append(image.getImageId());
-		sm.append(".xml");
+		sb.append(context.getPortletPath(PortletKeys.IMAGE_GALLERY));
+		sb.append("/images/");
+		sb.append(image.getImageId());
+		sb.append(".xml");
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static final String _NAMESPACE = "image_gallery";

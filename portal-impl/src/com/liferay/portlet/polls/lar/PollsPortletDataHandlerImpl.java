@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.polls.DuplicateVoteException;
@@ -418,42 +417,42 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 	protected String getChoicePath(
 		PortletDataContext context, PollsChoice choice) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.POLLS));
-		sm.append("/questions/");
-		sm.append(choice.getQuestionId());
-		sm.append("/choices/");
-		sm.append(choice.getChoiceId());
-		sm.append(".xml");
+		sb.append(context.getPortletPath(PortletKeys.POLLS));
+		sb.append("/questions/");
+		sb.append(choice.getQuestionId());
+		sb.append("/choices/");
+		sb.append(choice.getChoiceId());
+		sb.append(".xml");
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getQuestionPath(
 		PortletDataContext context, PollsQuestion question) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.POLLS));
-		sm.append("/questions/");
-		sm.append(question.getQuestionId());
-		sm.append(".xml");
+		sb.append(context.getPortletPath(PortletKeys.POLLS));
+		sb.append("/questions/");
+		sb.append(question.getQuestionId());
+		sb.append(".xml");
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected String getVotePath(PortletDataContext context, PollsVote vote) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getPortletPath(PortletKeys.POLLS));
-		sm.append("/questions/");
-		sm.append(vote.getQuestionId());
-		sm.append("/votes/");
-		sm.append(vote.getVoteId());
-		sm.append(".xml");
+		sb.append(context.getPortletPath(PortletKeys.POLLS));
+		sb.append("/questions/");
+		sb.append(vote.getQuestionId());
+		sb.append("/votes/");
+		sb.append(vote.getVoteId());
+		sb.append(".xml");
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static final String _NAMESPACE = "polls";

@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusException;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.messaging.SearchRequest;
-import com.liferay.portal.kernel.util.StringMaker;
 
 /**
  * <a href="SearchEngineUtil.java.html"><b><i>View Source</i></b></a>
@@ -121,17 +120,17 @@ public class SearchEngineUtil {
 			return _indexReadOnly.booleanValue();
 		}
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("{\"javaClass\":\"");
-		sm.append(SearchRequest.class.getName());
-		sm.append("\",\"command\":\"");
-		sm.append(SearchRequest.COMMAND_INDEX_ONLY);
-		sm.append("\"}");
+		sb.append("{\"javaClass\":\"");
+		sb.append(SearchRequest.class.getName());
+		sb.append("\",\"command\":\"");
+		sb.append(SearchRequest.COMMAND_INDEX_ONLY);
+		sb.append("\"}");
 
 		try {
 			String message = MessageBusUtil.sendSynchronizedMessage(
-				DestinationNames.SEARCH, sm.toString());
+				DestinationNames.SEARCH, sb.toString());
 
 			if ((message.indexOf("true") != -1)) {
 				_indexReadOnly = Boolean.TRUE;
