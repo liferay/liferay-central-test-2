@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -281,7 +280,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 		WikiPageResource wikiPageResource = fetchByN_T(nodeId, title);
 
 		if (wikiPageResource == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No WikiPageResource exists with the key {");
 
@@ -325,7 +324,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.wiki.model.WikiPageResource WHERE ");
@@ -461,7 +460,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.wiki.model.WikiPageResource ");
@@ -533,7 +532,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(

@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -278,7 +277,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 		RatingsStats ratingsStats = fetchByC_C(classNameId, classPK);
 
 		if (ratingsStats == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No RatingsStats exists with the key {");
 
@@ -324,7 +323,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.ratings.model.RatingsStats WHERE ");
@@ -453,7 +452,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.ratings.model.RatingsStats ");
@@ -528,7 +527,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(

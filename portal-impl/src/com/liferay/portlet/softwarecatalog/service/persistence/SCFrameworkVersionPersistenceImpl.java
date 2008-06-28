@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -321,7 +320,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
@@ -396,7 +395,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
@@ -450,7 +449,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		List<SCFrameworkVersion> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCFrameworkVersion exists with the key {");
 
@@ -474,7 +473,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 				count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCFrameworkVersion exists with the key {");
 
@@ -501,7 +500,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
@@ -568,7 +567,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
@@ -643,7 +642,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
@@ -697,7 +696,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		List<SCFrameworkVersion> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCFrameworkVersion exists with the key {");
 
@@ -721,7 +720,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 				count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCFrameworkVersion exists with the key {");
 
@@ -748,7 +747,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
@@ -819,7 +818,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
@@ -900,7 +899,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
@@ -960,7 +959,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		List<SCFrameworkVersion> list = findByG_A(groupId, active, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCFrameworkVersion exists with the key {");
 
@@ -987,7 +986,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 				count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCFrameworkVersion exists with the key {");
 
@@ -1017,7 +1016,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion WHERE ");
@@ -1145,7 +1144,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion ");
@@ -1234,7 +1233,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1300,7 +1299,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1371,7 +1370,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1516,22 +1515,22 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			try {
 				session = HibernateUtil.openSession();
 
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
-				sm.append(_SQL_GETSCPRODUCTVERSIONS);
+				sb.append(_SQL_GETSCPRODUCTVERSIONS);
 
 				if (obc != null) {
-					sm.append("ORDER BY ");
-					sm.append(obc.getOrderBy());
+					sb.append("ORDER BY ");
+					sb.append(obc.getOrderBy());
 				}
 
 				else {
-					sm.append("ORDER BY ");
+					sb.append("ORDER BY ");
 
-					sm.append("SCProductVersion.createDate DESC");
+					sb.append("SCProductVersion.createDate DESC");
 				}
 
-				String sql = sm.toString();
+				String sql = sb.toString();
 
 				SQLQuery q = session.createSQLQuery(sql);
 

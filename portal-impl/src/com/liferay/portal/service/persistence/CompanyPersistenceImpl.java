@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
@@ -270,7 +269,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 		Company company = fetchByWebId(webId);
 
 		if (company == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Company exists with the key {");
 
@@ -308,7 +307,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.Company WHERE ");
 
@@ -366,7 +365,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 		Company company = fetchByVirtualHost(virtualHost);
 
 		if (company == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Company exists with the key {");
 
@@ -405,7 +404,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.Company WHERE ");
 
@@ -463,7 +462,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 		Company company = fetchByMx(mx);
 
 		if (company == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Company exists with the key {");
 
@@ -501,7 +500,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.Company WHERE ");
 
@@ -559,7 +558,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 		Company company = fetchByLogoId(logoId);
 
 		if (company == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Company exists with the key {");
 
@@ -597,7 +596,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.Company WHERE ");
 
@@ -718,7 +717,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.Company ");
 
@@ -808,7 +807,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.Company WHERE ");
@@ -880,7 +879,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.Company WHERE ");
@@ -952,7 +951,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.Company WHERE ");
@@ -1024,7 +1023,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.Company WHERE ");

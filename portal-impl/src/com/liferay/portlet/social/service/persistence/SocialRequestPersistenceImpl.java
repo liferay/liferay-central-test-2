@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -307,7 +306,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
@@ -388,7 +387,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
@@ -447,7 +446,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 		List<SocialRequest> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -469,7 +468,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 		List<SocialRequest> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -495,7 +494,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
@@ -552,7 +551,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 		SocialRequest socialRequest = fetchByUUID_G(uuid, groupId);
 
 		if (socialRequest == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -596,7 +595,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
@@ -681,7 +680,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
@@ -755,7 +754,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
@@ -807,7 +806,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 		List<SocialRequest> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -830,7 +829,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 				obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -857,7 +856,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
@@ -923,7 +922,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
@@ -997,7 +996,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
@@ -1049,7 +1048,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 		List<SocialRequest> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -1071,7 +1070,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 		List<SocialRequest> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -1098,7 +1097,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
@@ -1164,7 +1163,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
@@ -1238,7 +1237,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
@@ -1291,7 +1290,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 				obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -1314,7 +1313,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 				count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -1341,7 +1340,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
@@ -1409,7 +1408,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
@@ -1489,7 +1488,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
@@ -1547,7 +1546,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 		List<SocialRequest> list = findByU_S(userId, status, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -1573,7 +1572,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 				obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -1603,7 +1602,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
@@ -1679,7 +1678,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
@@ -1759,7 +1758,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
@@ -1817,7 +1816,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 		List<SocialRequest> list = findByR_S(receiverUserId, status, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -1843,7 +1842,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 				count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -1873,7 +1872,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
@@ -1931,7 +1930,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 				classPK, type, receiverUserId);
 
 		if (socialRequest == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -1988,7 +1987,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
@@ -2090,7 +2089,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
@@ -2193,7 +2192,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
@@ -2271,7 +2270,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 				classPK, type, status, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -2307,7 +2306,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 				classPK, type, status, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -2346,7 +2345,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
@@ -2422,7 +2421,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 				classPK, type, receiverUserId, status);
 
 		if (socialRequest == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SocialRequest exists with the key {");
 
@@ -2484,7 +2483,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.social.model.SocialRequest WHERE ");
@@ -2641,7 +2640,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.social.model.SocialRequest ");
@@ -2781,7 +2780,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -2857,7 +2856,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -2936,7 +2935,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -3002,7 +3001,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -3069,7 +3068,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -3137,7 +3136,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -3214,7 +3213,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -3293,7 +3292,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -3390,7 +3389,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -3488,7 +3487,7 @@ public class SocialRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(

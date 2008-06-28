@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -297,7 +296,7 @@ public class PortletItemPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.PortletItem WHERE ");
 
@@ -372,7 +371,7 @@ public class PortletItemPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.PortletItem WHERE ");
 
@@ -424,7 +423,7 @@ public class PortletItemPersistenceImpl extends BasePersistence
 		List<PortletItem> list = findByG_C(groupId, classNameId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PortletItem exists with the key {");
 
@@ -451,7 +450,7 @@ public class PortletItemPersistenceImpl extends BasePersistence
 				count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PortletItem exists with the key {");
 
@@ -481,7 +480,7 @@ public class PortletItemPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append("FROM com.liferay.portal.model.PortletItem WHERE ");
 
@@ -553,7 +552,7 @@ public class PortletItemPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.PortletItem WHERE ");
 
@@ -645,7 +644,7 @@ public class PortletItemPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.PortletItem WHERE ");
 
@@ -711,7 +710,7 @@ public class PortletItemPersistenceImpl extends BasePersistence
 				0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PortletItem exists with the key {");
 
@@ -741,7 +740,7 @@ public class PortletItemPersistenceImpl extends BasePersistence
 				count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PortletItem exists with the key {");
 
@@ -774,7 +773,7 @@ public class PortletItemPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append("FROM com.liferay.portal.model.PortletItem WHERE ");
 
@@ -838,7 +837,7 @@ public class PortletItemPersistenceImpl extends BasePersistence
 				classNameId);
 
 		if (portletItem == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PortletItem exists with the key {");
 
@@ -895,7 +894,7 @@ public class PortletItemPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.PortletItem WHERE ");
 
@@ -1049,7 +1048,7 @@ public class PortletItemPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.PortletItem ");
 
@@ -1139,7 +1138,7 @@ public class PortletItemPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.PortletItem WHERE ");
@@ -1218,7 +1217,7 @@ public class PortletItemPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.PortletItem WHERE ");
@@ -1312,7 +1311,7 @@ public class PortletItemPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.PortletItem WHERE ");

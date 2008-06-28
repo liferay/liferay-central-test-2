@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -300,7 +299,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
@@ -382,7 +381,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
@@ -442,7 +441,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		List<IGFolder> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGFolder exists with the key {");
 
@@ -464,7 +463,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		List<IGFolder> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGFolder exists with the key {");
 
@@ -490,7 +489,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
@@ -547,7 +546,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		IGFolder igFolder = fetchByUUID_G(uuid, groupId);
 
 		if (igFolder == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGFolder exists with the key {");
 
@@ -591,7 +590,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
@@ -676,7 +675,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
@@ -751,7 +750,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
@@ -804,7 +803,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		List<IGFolder> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGFolder exists with the key {");
 
@@ -826,7 +825,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		List<IGFolder> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGFolder exists with the key {");
 
@@ -852,7 +851,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
@@ -918,7 +917,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
@@ -993,7 +992,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
@@ -1046,7 +1045,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		List<IGFolder> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGFolder exists with the key {");
 
@@ -1068,7 +1067,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		List<IGFolder> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGFolder exists with the key {");
 
@@ -1095,7 +1094,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
@@ -1165,7 +1164,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
@@ -1246,7 +1245,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
@@ -1305,7 +1304,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		List<IGFolder> list = findByG_P(groupId, parentFolderId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGFolder exists with the key {");
 
@@ -1331,7 +1330,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 				count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGFolder exists with the key {");
 
@@ -1361,7 +1360,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
@@ -1417,7 +1416,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		IGFolder igFolder = fetchByG_P_N(groupId, parentFolderId, name);
 
 		if (igFolder == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGFolder exists with the key {");
 
@@ -1469,7 +1468,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
@@ -1615,7 +1614,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGFolder ");
@@ -1724,7 +1723,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1800,7 +1799,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1879,7 +1878,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1945,7 +1944,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -2016,7 +2015,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -2096,7 +2095,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(

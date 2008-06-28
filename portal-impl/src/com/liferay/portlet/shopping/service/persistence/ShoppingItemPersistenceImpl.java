@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -305,7 +304,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
@@ -379,7 +378,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
@@ -431,7 +430,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		List<ShoppingItem> list = findByCategoryId(categoryId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ShoppingItem exists with the key {");
 
@@ -454,7 +453,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 				count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ShoppingItem exists with the key {");
 
@@ -481,7 +480,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
@@ -531,7 +530,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		ShoppingItem shoppingItem = fetchBySmallImageId(smallImageId);
 
 		if (shoppingItem == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ShoppingItem exists with the key {");
 
@@ -570,7 +569,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
@@ -626,7 +625,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		ShoppingItem shoppingItem = fetchByMediumImageId(mediumImageId);
 
 		if (shoppingItem == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ShoppingItem exists with the key {");
 
@@ -665,7 +664,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
@@ -721,7 +720,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		ShoppingItem shoppingItem = fetchByLargeImageId(largeImageId);
 
 		if (shoppingItem == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ShoppingItem exists with the key {");
 
@@ -760,7 +759,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
@@ -816,7 +815,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		ShoppingItem shoppingItem = fetchByC_S(companyId, sku);
 
 		if (shoppingItem == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ShoppingItem exists with the key {");
 
@@ -860,7 +859,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.shopping.model.ShoppingItem WHERE ");
@@ -1000,7 +999,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.shopping.model.ShoppingItem ");
@@ -1103,7 +1102,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1169,7 +1168,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1236,7 +1235,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1302,7 +1301,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1370,7 +1369,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1522,23 +1521,23 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 			try {
 				session = HibernateUtil.openSession();
 
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
-				sm.append(_SQL_GETSHOPPINGITEMPRICES);
+				sb.append(_SQL_GETSHOPPINGITEMPRICES);
 
 				if (obc != null) {
-					sm.append("ORDER BY ");
-					sm.append(obc.getOrderBy());
+					sb.append("ORDER BY ");
+					sb.append(obc.getOrderBy());
 				}
 
 				else {
-					sm.append("ORDER BY ");
+					sb.append("ORDER BY ");
 
-					sm.append("ShoppingItemPrice.itemId ASC, ");
-					sm.append("ShoppingItemPrice.itemPriceId ASC");
+					sb.append("ShoppingItemPrice.itemId ASC, ");
+					sb.append("ShoppingItemPrice.itemPriceId ASC");
 				}
 
-				String sql = sm.toString();
+				String sql = sb.toString();
 
 				SQLQuery q = session.createSQLQuery(sql);
 

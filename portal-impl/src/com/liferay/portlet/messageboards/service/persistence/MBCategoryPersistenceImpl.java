@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -303,7 +302,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
@@ -385,7 +384,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
@@ -445,7 +444,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 		List<MBCategory> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBCategory exists with the key {");
 
@@ -467,7 +466,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 		List<MBCategory> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBCategory exists with the key {");
 
@@ -493,7 +492,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
@@ -551,7 +550,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 		MBCategory mbCategory = fetchByUUID_G(uuid, groupId);
 
 		if (mbCategory == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBCategory exists with the key {");
 
@@ -595,7 +594,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
@@ -681,7 +680,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
@@ -756,7 +755,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
@@ -809,7 +808,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 		List<MBCategory> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBCategory exists with the key {");
 
@@ -831,7 +830,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 		List<MBCategory> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBCategory exists with the key {");
 
@@ -858,7 +857,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
@@ -925,7 +924,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
@@ -1000,7 +999,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
@@ -1053,7 +1052,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 		List<MBCategory> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBCategory exists with the key {");
 
@@ -1075,7 +1074,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 		List<MBCategory> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBCategory exists with the key {");
 
@@ -1102,7 +1101,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
@@ -1173,7 +1172,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
@@ -1254,7 +1253,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
@@ -1313,7 +1312,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 		List<MBCategory> list = findByG_P(groupId, parentCategoryId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBCategory exists with the key {");
 
@@ -1339,7 +1338,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 				count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBCategory exists with the key {");
 
@@ -1369,7 +1368,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBCategory WHERE ");
@@ -1497,7 +1496,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBCategory ");
@@ -1599,7 +1598,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1675,7 +1674,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1754,7 +1753,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1820,7 +1819,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1891,7 +1890,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(

@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -305,7 +304,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
@@ -386,7 +385,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
@@ -445,7 +444,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		List<JournalTemplate> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalTemplate exists with the key {");
 
@@ -467,7 +466,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		List<JournalTemplate> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalTemplate exists with the key {");
 
@@ -493,7 +492,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
@@ -550,7 +549,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		JournalTemplate journalTemplate = fetchByUUID_G(uuid, groupId);
 
 		if (journalTemplate == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalTemplate exists with the key {");
 
@@ -594,7 +593,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
@@ -679,7 +678,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
@@ -753,7 +752,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
@@ -805,7 +804,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		List<JournalTemplate> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalTemplate exists with the key {");
 
@@ -828,7 +827,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 				obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalTemplate exists with the key {");
 
@@ -854,7 +853,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
@@ -920,7 +919,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
@@ -1001,7 +1000,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
@@ -1060,7 +1059,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		List<JournalTemplate> list = findByTemplateId(templateId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalTemplate exists with the key {");
 
@@ -1083,7 +1082,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 				count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalTemplate exists with the key {");
 
@@ -1110,7 +1109,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
@@ -1167,7 +1166,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		JournalTemplate journalTemplate = fetchBySmallImageId(smallImageId);
 
 		if (journalTemplate == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalTemplate exists with the key {");
 
@@ -1206,7 +1205,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
@@ -1262,7 +1261,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		JournalTemplate journalTemplate = fetchByG_T(groupId, templateId);
 
 		if (journalTemplate == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalTemplate exists with the key {");
 
@@ -1306,7 +1305,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
@@ -1393,7 +1392,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
@@ -1482,7 +1481,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
@@ -1547,7 +1546,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		List<JournalTemplate> list = findByG_S(groupId, structureId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalTemplate exists with the key {");
 
@@ -1573,7 +1572,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 				count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalTemplate exists with the key {");
 
@@ -1603,7 +1602,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalTemplate WHERE ");
@@ -1737,7 +1736,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalTemplate ");
@@ -1852,7 +1851,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1928,7 +1927,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -2007,7 +2006,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -2073,7 +2072,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -2146,7 +2145,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -2215,7 +2214,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -2297,7 +2296,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(

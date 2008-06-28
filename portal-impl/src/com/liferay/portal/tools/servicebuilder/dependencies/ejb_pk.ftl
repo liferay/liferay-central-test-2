@@ -1,7 +1,6 @@
 package ${packagePath}.service.persistence;
 
 import com.liferay.portal.kernel.util.DateUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Serializable;
@@ -150,24 +149,24 @@ public class ${entity.PKClassName} implements Comparable<${entity.PKClassName}>,
 	}
 
 	public String toString() {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(StringPool.OPEN_CURLY_BRACE);
+		sb.append(StringPool.OPEN_CURLY_BRACE);
 
 		<#list entity.PKList as column>
-			sm.append("${column.name}");
-			sm.append(StringPool.EQUAL);
-			sm.append(${column.name});
+			sb.append("${column.name}");
+			sb.append(StringPool.EQUAL);
+			sb.append(${column.name});
 
 			<#if column_has_next>
-				sm.append(StringPool.COMMA);
-				sm.append(StringPool.SPACE);
+				sb.append(StringPool.COMMA);
+				sb.append(StringPool.SPACE);
 			</#if>
 		</#list>
 
-		sm.append(StringPool.CLOSE_CURLY_BRACE);
+		sb.append(StringPool.CLOSE_CURLY_BRACE);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 }

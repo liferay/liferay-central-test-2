@@ -25,7 +25,6 @@ package com.liferay.portal.editor.fckeditor.receiver.impl;
 import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import com.liferay.portal.editor.fckeditor.exception.FCKException;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
@@ -163,7 +162,7 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 			fileEl.setAttribute("desc", image.getNameWithExtension());
 			fileEl.setAttribute("size", getSize(portalImage.getSize()));
 
-			StringMaker url = new StringMaker();
+			StringBuilder url = new StringBuilder();
 
 			ThemeDisplay themeDisplay = arg.getThemeDisplay();
 

@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -283,7 +282,7 @@ public class PhonePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
@@ -356,7 +355,7 @@ public class PhonePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
@@ -407,7 +406,7 @@ public class PhonePersistenceImpl extends BasePersistence
 		List<Phone> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
 
@@ -429,7 +428,7 @@ public class PhonePersistenceImpl extends BasePersistence
 		List<Phone> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
 
@@ -455,7 +454,7 @@ public class PhonePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
@@ -518,7 +517,7 @@ public class PhonePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
@@ -591,7 +590,7 @@ public class PhonePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
@@ -642,7 +641,7 @@ public class PhonePersistenceImpl extends BasePersistence
 		List<Phone> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
 
@@ -664,7 +663,7 @@ public class PhonePersistenceImpl extends BasePersistence
 		List<Phone> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
 
@@ -690,7 +689,7 @@ public class PhonePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
@@ -758,7 +757,7 @@ public class PhonePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
@@ -837,7 +836,7 @@ public class PhonePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
@@ -894,7 +893,7 @@ public class PhonePersistenceImpl extends BasePersistence
 		List<Phone> list = findByC_C(companyId, classNameId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
 
@@ -920,7 +919,7 @@ public class PhonePersistenceImpl extends BasePersistence
 				obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
 
@@ -950,7 +949,7 @@ public class PhonePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
@@ -1024,7 +1023,7 @@ public class PhonePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
@@ -1110,7 +1109,7 @@ public class PhonePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
@@ -1175,7 +1174,7 @@ public class PhonePersistenceImpl extends BasePersistence
 				obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
 
@@ -1205,7 +1204,7 @@ public class PhonePersistenceImpl extends BasePersistence
 				count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
 
@@ -1238,7 +1237,7 @@ public class PhonePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
@@ -1320,7 +1319,7 @@ public class PhonePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
@@ -1416,7 +1415,7 @@ public class PhonePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
@@ -1487,7 +1486,7 @@ public class PhonePersistenceImpl extends BasePersistence
 				primary, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
 
@@ -1520,7 +1519,7 @@ public class PhonePersistenceImpl extends BasePersistence
 				primary, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Phone exists with the key {");
 
@@ -1556,7 +1555,7 @@ public class PhonePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append("FROM com.liferay.portal.model.Phone WHERE ");
 
@@ -1692,7 +1691,7 @@ public class PhonePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.Phone ");
 
@@ -1794,7 +1793,7 @@ public class PhonePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.Phone WHERE ");
@@ -1859,7 +1858,7 @@ public class PhonePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.Phone WHERE ");
@@ -1929,7 +1928,7 @@ public class PhonePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.Phone WHERE ");
@@ -2005,7 +2004,7 @@ public class PhonePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.Phone WHERE ");
@@ -2089,7 +2088,7 @@ public class PhonePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.Phone WHERE ");

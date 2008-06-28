@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
@@ -382,13 +381,13 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 	}
 
 	public String getWindowID() {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(_portletName);
-		sm.append(PortletSessionImpl.LAYOUT_SEPARATOR);
-		sm.append(_plid);
+		sb.append(_portletName);
+		sb.append(PortletSessionImpl.LAYOUT_SEPARATOR);
+		sb.append(_plid);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public WindowState getWindowState() {

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Serializable;
@@ -153,28 +152,28 @@ public class UserGroupRolePK implements Comparable<UserGroupRolePK>,
 	}
 
 	public String toString() {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(StringPool.OPEN_CURLY_BRACE);
+		sb.append(StringPool.OPEN_CURLY_BRACE);
 
-		sm.append("userId");
-		sm.append(StringPool.EQUAL);
-		sm.append(userId);
+		sb.append("userId");
+		sb.append(StringPool.EQUAL);
+		sb.append(userId);
 
-		sm.append(StringPool.COMMA);
-		sm.append(StringPool.SPACE);
-		sm.append("groupId");
-		sm.append(StringPool.EQUAL);
-		sm.append(groupId);
+		sb.append(StringPool.COMMA);
+		sb.append(StringPool.SPACE);
+		sb.append("groupId");
+		sb.append(StringPool.EQUAL);
+		sb.append(groupId);
 
-		sm.append(StringPool.COMMA);
-		sm.append(StringPool.SPACE);
-		sm.append("roleId");
-		sm.append(StringPool.EQUAL);
-		sm.append(roleId);
+		sb.append(StringPool.COMMA);
+		sb.append(StringPool.SPACE);
+		sb.append("roleId");
+		sb.append(StringPool.EQUAL);
+		sb.append(roleId);
 
-		sm.append(StringPool.CLOSE_CURLY_BRACE);
+		sb.append(StringPool.CLOSE_CURLY_BRACE);
 
-		return sm.toString();
+		return sb.toString();
 	}
 }

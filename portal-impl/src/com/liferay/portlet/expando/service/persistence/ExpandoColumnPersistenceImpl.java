@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -294,7 +293,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.expando.model.ExpandoColumn WHERE ");
@@ -364,7 +363,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.expando.model.ExpandoColumn WHERE ");
@@ -410,7 +409,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistence
 		List<ExpandoColumn> list = findByTableId(tableId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoColumn exists with the key {");
 
@@ -432,7 +431,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistence
 		List<ExpandoColumn> list = findByTableId(tableId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoColumn exists with the key {");
 
@@ -459,7 +458,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.expando.model.ExpandoColumn WHERE ");
@@ -503,7 +502,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistence
 		ExpandoColumn expandoColumn = fetchByT_N(tableId, name);
 
 		if (expandoColumn == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoColumn exists with the key {");
 
@@ -547,7 +546,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.expando.model.ExpandoColumn WHERE ");
@@ -683,7 +682,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.expando.model.ExpandoColumn ");
@@ -759,7 +758,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -827,7 +826,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(

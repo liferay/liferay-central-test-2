@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -303,7 +302,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
@@ -385,7 +384,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
@@ -445,7 +444,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		List<MBMessage> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -467,7 +466,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		List<MBMessage> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -493,7 +492,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
@@ -567,7 +566,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
@@ -642,7 +641,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
@@ -695,7 +694,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		List<MBMessage> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -717,7 +716,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		List<MBMessage> list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -744,7 +743,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
@@ -811,7 +810,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
@@ -886,7 +885,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
@@ -939,7 +938,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		List<MBMessage> list = findByCategoryId(categoryId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -962,7 +961,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 				obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -989,7 +988,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
@@ -1056,7 +1055,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
@@ -1131,7 +1130,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
@@ -1184,7 +1183,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		List<MBMessage> list = findByThreadId(threadId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -1206,7 +1205,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		List<MBMessage> list = findByThreadId(threadId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -1233,7 +1232,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
@@ -1304,7 +1303,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
@@ -1385,7 +1384,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
@@ -1444,7 +1443,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		List<MBMessage> list = findByC_T(categoryId, threadId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -1470,7 +1469,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 				count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -1500,7 +1499,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
@@ -1577,7 +1576,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
@@ -1658,7 +1657,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
@@ -1717,7 +1716,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		List<MBMessage> list = findByT_P(threadId, parentMessageId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -1743,7 +1742,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 				count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MBMessage exists with the key {");
 
@@ -1773,7 +1772,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.messageboards.model.MBMessage WHERE ");
@@ -1901,7 +1900,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.messageboards.model.MBMessage ");
@@ -2009,7 +2008,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -2082,7 +2081,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -2148,7 +2147,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -2214,7 +2213,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -2285,7 +2284,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -2362,7 +2361,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(

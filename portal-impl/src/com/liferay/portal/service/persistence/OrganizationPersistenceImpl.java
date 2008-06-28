@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -329,7 +328,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portal.model.Organization WHERE ");
@@ -403,7 +402,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portal.model.Organization WHERE ");
@@ -456,7 +455,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		List<Organization> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Organization exists with the key {");
 
@@ -480,7 +479,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Organization exists with the key {");
 
@@ -507,7 +506,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
 
@@ -572,7 +571,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portal.model.Organization WHERE ");
@@ -646,7 +645,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portal.model.Organization WHERE ");
@@ -699,7 +698,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		List<Organization> list = findByLocations(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Organization exists with the key {");
 
@@ -723,7 +722,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Organization exists with the key {");
 
@@ -750,7 +749,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
 
@@ -819,7 +818,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portal.model.Organization WHERE ");
@@ -901,7 +900,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portal.model.Organization WHERE ");
@@ -961,7 +960,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Organization exists with the key {");
 
@@ -988,7 +987,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Organization exists with the key {");
 
@@ -1018,7 +1017,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append("FROM com.liferay.portal.model.Organization WHERE ");
 
@@ -1073,7 +1072,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		Organization organization = fetchByC_N(companyId, name);
 
 		if (organization == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No Organization exists with the key {");
 
@@ -1117,7 +1116,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portal.model.Organization WHERE ");
@@ -1257,7 +1256,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.Organization ");
 
@@ -1352,7 +1351,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1418,7 +1417,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1489,7 +1488,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1564,7 +1563,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1715,22 +1714,22 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			try {
 				session = HibernateUtil.openSession();
 
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
-				sm.append(_SQL_GETGROUPS);
+				sb.append(_SQL_GETGROUPS);
 
 				if (obc != null) {
-					sm.append("ORDER BY ");
-					sm.append(obc.getOrderBy());
+					sb.append("ORDER BY ");
+					sb.append(obc.getOrderBy());
 				}
 
 				else {
-					sm.append("ORDER BY ");
+					sb.append("ORDER BY ");
 
-					sm.append("Group_.name ASC");
+					sb.append("Group_.name ASC");
 				}
 
-				String sql = sm.toString();
+				String sql = sb.toString();
 
 				SQLQuery q = session.createSQLQuery(sql);
 
@@ -2065,16 +2064,16 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			try {
 				session = HibernateUtil.openSession();
 
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
-				sm.append(_SQL_GETUSERS);
+				sb.append(_SQL_GETUSERS);
 
 				if (obc != null) {
-					sm.append("ORDER BY ");
-					sm.append(obc.getOrderBy());
+					sb.append("ORDER BY ");
+					sb.append(obc.getOrderBy());
 				}
 
-				String sql = sm.toString();
+				String sql = sb.toString();
 
 				SQLQuery q = session.createSQLQuery(sql);
 

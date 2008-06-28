@@ -24,7 +24,6 @@ package com.liferay.portlet;
 
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
@@ -141,28 +140,28 @@ public class PortletConfigImpl implements PortletConfig {
 			ResourceBundle bundle = _bundlePool.get(poolId);
 
 			if (bundle == null) {
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
 				try {
 					PortletInfo portletInfo = _portlet.getPortletInfo();
 
-					sm.append(JavaConstants.JAVAX_PORTLET_TITLE);
-					sm.append("=");
-					sm.append(portletInfo.getTitle());
-					sm.append("\n");
+					sb.append(JavaConstants.JAVAX_PORTLET_TITLE);
+					sb.append("=");
+					sb.append(portletInfo.getTitle());
+					sb.append("\n");
 
-					sm.append(JavaConstants.JAVAX_PORTLET_SHORT_TITLE);
-					sm.append("=");
-					sm.append(portletInfo.getShortTitle());
-					sm.append("\n");
+					sb.append(JavaConstants.JAVAX_PORTLET_SHORT_TITLE);
+					sb.append("=");
+					sb.append(portletInfo.getShortTitle());
+					sb.append("\n");
 
-					sm.append(JavaConstants.JAVAX_PORTLET_KEYWORDS);
-					sm.append("=");
-					sm.append(portletInfo.getKeywords());
-					sm.append("\n");
+					sb.append(JavaConstants.JAVAX_PORTLET_KEYWORDS);
+					sb.append("=");
+					sb.append(portletInfo.getKeywords());
+					sb.append("\n");
 
 					bundle = new PropertyResourceBundle(
-						new ByteArrayInputStream(sm.toString().getBytes()));
+						new ByteArrayInputStream(sb.toString().getBytes()));
 				}
 				catch (Exception e) {
 					_log.error(e, e);

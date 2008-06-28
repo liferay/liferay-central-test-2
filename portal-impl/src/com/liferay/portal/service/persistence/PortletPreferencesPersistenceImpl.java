@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -295,7 +294,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
@@ -365,7 +364,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
@@ -411,7 +410,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		List<PortletPreferences> list = findByPlid(plid, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PortletPreferences exists with the key {");
 
@@ -433,7 +432,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		List<PortletPreferences> list = findByPlid(plid, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PortletPreferences exists with the key {");
 
@@ -460,7 +459,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
@@ -522,7 +521,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
@@ -607,7 +606,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
@@ -667,7 +666,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		List<PortletPreferences> list = findByP_P(plid, portletId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PortletPreferences exists with the key {");
 
@@ -694,7 +693,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PortletPreferences exists with the key {");
 
@@ -725,7 +724,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
@@ -803,7 +802,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
@@ -887,7 +886,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
@@ -947,7 +946,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PortletPreferences exists with the key {");
 
@@ -977,7 +976,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PortletPreferences exists with the key {");
 
@@ -1011,7 +1010,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
@@ -1069,7 +1068,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 				ownerType, plid, portletId);
 
 		if (portletPreferences == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PortletPreferences exists with the key {");
 
@@ -1124,7 +1123,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portal.model.PortletPreferences WHERE ");
@@ -1272,7 +1271,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portal.model.PortletPreferences ");
@@ -1365,7 +1364,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1434,7 +1433,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1519,7 +1518,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1605,7 +1604,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(

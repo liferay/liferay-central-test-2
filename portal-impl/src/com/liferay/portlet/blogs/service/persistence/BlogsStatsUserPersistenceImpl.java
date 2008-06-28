@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -295,7 +294,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
@@ -369,7 +368,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
@@ -421,7 +420,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		List<BlogsStatsUser> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsStatsUser exists with the key {");
 
@@ -443,7 +442,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		List<BlogsStatsUser> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsStatsUser exists with the key {");
 
@@ -470,7 +469,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
@@ -536,7 +535,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
@@ -610,7 +609,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
@@ -662,7 +661,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		List<BlogsStatsUser> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsStatsUser exists with the key {");
 
@@ -684,7 +683,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		List<BlogsStatsUser> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsStatsUser exists with the key {");
 
@@ -711,7 +710,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
@@ -761,7 +760,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		BlogsStatsUser blogsStatsUser = fetchByG_U(groupId, userId);
 
 		if (blogsStatsUser == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsStatsUser exists with the key {");
 
@@ -805,7 +804,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
@@ -887,7 +886,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
@@ -967,7 +966,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
@@ -1025,7 +1024,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		List<BlogsStatsUser> list = findByG_E(groupId, entryCount, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsStatsUser exists with the key {");
 
@@ -1051,7 +1050,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 				count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsStatsUser exists with the key {");
 
@@ -1081,7 +1080,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
@@ -1157,7 +1156,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
@@ -1237,7 +1236,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
@@ -1295,7 +1294,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		List<BlogsStatsUser> list = findByC_E(companyId, entryCount, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsStatsUser exists with the key {");
 
@@ -1321,7 +1320,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 				count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No BlogsStatsUser exists with the key {");
 
@@ -1351,7 +1350,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.blogs.model.BlogsStatsUser WHERE ");
@@ -1478,7 +1477,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.blogs.model.BlogsStatsUser ");
@@ -1580,7 +1579,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1646,7 +1645,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1714,7 +1713,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1791,7 +1790,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1868,7 +1867,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(

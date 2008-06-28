@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -299,7 +298,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
@@ -380,7 +379,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
@@ -439,7 +438,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		List<IGImage> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGImage exists with the key {");
 
@@ -461,7 +460,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		List<IGImage> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGImage exists with the key {");
 
@@ -487,7 +486,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
@@ -559,7 +558,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
@@ -633,7 +632,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
@@ -685,7 +684,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		List<IGImage> list = findByFolderId(folderId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGImage exists with the key {");
 
@@ -707,7 +706,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		List<IGImage> list = findByFolderId(folderId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGImage exists with the key {");
 
@@ -733,7 +732,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
@@ -782,7 +781,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		IGImage igImage = fetchBySmallImageId(smallImageId);
 
 		if (igImage == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGImage exists with the key {");
 
@@ -821,7 +820,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
@@ -877,7 +876,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		IGImage igImage = fetchByLargeImageId(largeImageId);
 
 		if (igImage == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGImage exists with the key {");
 
@@ -916,7 +915,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
@@ -972,7 +971,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		IGImage igImage = fetchByCustom1ImageId(custom1ImageId);
 
 		if (igImage == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGImage exists with the key {");
 
@@ -1011,7 +1010,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
@@ -1067,7 +1066,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		IGImage igImage = fetchByCustom2ImageId(custom2ImageId);
 
 		if (igImage == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGImage exists with the key {");
 
@@ -1106,7 +1105,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
@@ -1180,7 +1179,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
@@ -1269,7 +1268,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
@@ -1334,7 +1333,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		List<IGImage> list = findByF_N(folderId, name, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGImage exists with the key {");
 
@@ -1359,7 +1358,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		List<IGImage> list = findByF_N(folderId, name, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No IGImage exists with the key {");
 
@@ -1389,7 +1388,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
@@ -1521,7 +1520,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.imagegallery.model.IGImage ");
@@ -1637,7 +1636,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1710,7 +1709,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1776,7 +1775,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1842,7 +1841,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1909,7 +1908,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1976,7 +1975,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -2044,7 +2043,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(

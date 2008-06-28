@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -320,7 +319,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
@@ -395,7 +394,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
@@ -449,7 +448,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		List<SCProductEntry> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCProductEntry exists with the key {");
 
@@ -471,7 +470,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		List<SCProductEntry> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCProductEntry exists with the key {");
 
@@ -498,7 +497,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
@@ -565,7 +564,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
@@ -640,7 +639,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
@@ -694,7 +693,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		List<SCProductEntry> list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCProductEntry exists with the key {");
 
@@ -718,7 +717,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCProductEntry exists with the key {");
 
@@ -745,7 +744,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
@@ -814,7 +813,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
@@ -895,7 +894,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
@@ -955,7 +954,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		List<SCProductEntry> list = findByG_U(groupId, userId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCProductEntry exists with the key {");
 
@@ -982,7 +981,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCProductEntry exists with the key {");
 
@@ -1012,7 +1011,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
@@ -1069,7 +1068,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		SCProductEntry scProductEntry = fetchByRG_RA(repoGroupId, repoArtifactId);
 
 		if (scProductEntry == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCProductEntry exists with the key {");
 
@@ -1113,7 +1112,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry WHERE ");
@@ -1261,7 +1260,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductEntry ");
@@ -1357,7 +1356,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1423,7 +1422,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1491,7 +1490,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1566,7 +1565,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1725,22 +1724,22 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			try {
 				session = HibernateUtil.openSession();
 
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
-				sm.append(_SQL_GETSCLICENSES);
+				sb.append(_SQL_GETSCLICENSES);
 
 				if (obc != null) {
-					sm.append("ORDER BY ");
-					sm.append(obc.getOrderBy());
+					sb.append("ORDER BY ");
+					sb.append(obc.getOrderBy());
 				}
 
 				else {
-					sm.append("ORDER BY ");
+					sb.append("ORDER BY ");
 
-					sm.append("SCLicense.name ASC");
+					sb.append("SCLicense.name ASC");
 				}
 
-				String sql = sm.toString();
+				String sql = sb.toString();
 
 				SQLQuery q = session.createSQLQuery(sql);
 

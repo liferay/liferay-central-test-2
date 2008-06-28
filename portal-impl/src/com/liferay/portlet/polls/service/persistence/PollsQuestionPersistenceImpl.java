@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -307,7 +306,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.polls.model.PollsQuestion WHERE ");
@@ -388,7 +387,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.polls.model.PollsQuestion WHERE ");
@@ -447,7 +446,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 		List<PollsQuestion> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PollsQuestion exists with the key {");
 
@@ -469,7 +468,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 		List<PollsQuestion> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PollsQuestion exists with the key {");
 
@@ -495,7 +494,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.polls.model.PollsQuestion WHERE ");
@@ -552,7 +551,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 		PollsQuestion pollsQuestion = fetchByUUID_G(uuid, groupId);
 
 		if (pollsQuestion == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PollsQuestion exists with the key {");
 
@@ -596,7 +595,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.polls.model.PollsQuestion WHERE ");
@@ -681,7 +680,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.polls.model.PollsQuestion WHERE ");
@@ -755,7 +754,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.polls.model.PollsQuestion WHERE ");
@@ -807,7 +806,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 		List<PollsQuestion> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PollsQuestion exists with the key {");
 
@@ -829,7 +828,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 		List<PollsQuestion> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No PollsQuestion exists with the key {");
 
@@ -856,7 +855,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.polls.model.PollsQuestion WHERE ");
@@ -977,7 +976,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.polls.model.PollsQuestion ");
@@ -1065,7 +1064,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1141,7 +1140,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1220,7 +1219,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(

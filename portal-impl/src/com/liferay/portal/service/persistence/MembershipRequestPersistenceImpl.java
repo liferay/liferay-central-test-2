@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.MembershipRequest;
@@ -295,7 +294,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
@@ -369,7 +368,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
@@ -422,7 +421,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		List<MembershipRequest> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MembershipRequest exists with the key {");
 
@@ -446,7 +445,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 				obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MembershipRequest exists with the key {");
 
@@ -473,7 +472,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portal.model.MembershipRequest WHERE ");
@@ -539,7 +538,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
@@ -613,7 +612,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
@@ -666,7 +665,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		List<MembershipRequest> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MembershipRequest exists with the key {");
 
@@ -690,7 +689,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 				obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MembershipRequest exists with the key {");
 
@@ -717,7 +716,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portal.model.MembershipRequest WHERE ");
@@ -787,7 +786,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
@@ -867,7 +866,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portal.model.MembershipRequest WHERE ");
@@ -926,7 +925,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		List<MembershipRequest> list = findByG_S(groupId, statusId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MembershipRequest exists with the key {");
 
@@ -953,7 +952,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 				count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No MembershipRequest exists with the key {");
 
@@ -983,7 +982,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portal.model.MembershipRequest WHERE ");
@@ -1110,7 +1109,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.MembershipRequest ");
 
@@ -1197,7 +1196,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1263,7 +1262,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1333,7 +1332,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(

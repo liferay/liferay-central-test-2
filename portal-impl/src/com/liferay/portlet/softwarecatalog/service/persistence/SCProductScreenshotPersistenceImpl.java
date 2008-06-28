@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -297,7 +296,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot WHERE ");
@@ -372,7 +371,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot WHERE ");
@@ -427,7 +426,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 				0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCProductScreenshot exists with the key {");
 
@@ -451,7 +450,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 				count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCProductScreenshot exists with the key {");
 
@@ -478,7 +477,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot WHERE ");
@@ -529,7 +528,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 		SCProductScreenshot scProductScreenshot = fetchByThumbnailId(thumbnailId);
 
 		if (scProductScreenshot == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCProductScreenshot exists with the key {");
 
@@ -568,7 +567,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot WHERE ");
@@ -625,7 +624,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 		SCProductScreenshot scProductScreenshot = fetchByFullImageId(fullImageId);
 
 		if (scProductScreenshot == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCProductScreenshot exists with the key {");
 
@@ -664,7 +663,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot WHERE ");
@@ -722,7 +721,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 				priority);
 
 		if (scProductScreenshot == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No SCProductScreenshot exists with the key {");
 
@@ -768,7 +767,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot WHERE ");
@@ -902,7 +901,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.softwarecatalog.model.SCProductScreenshot ");
@@ -1003,7 +1002,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1069,7 +1068,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1135,7 +1134,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1206,7 +1205,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(

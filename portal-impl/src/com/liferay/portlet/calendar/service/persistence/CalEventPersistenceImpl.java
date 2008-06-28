@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -299,7 +298,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
@@ -381,7 +380,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
@@ -441,7 +440,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		List<CalEvent> list = findByUuid(uuid, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No CalEvent exists with the key {");
 
@@ -463,7 +462,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		List<CalEvent> list = findByUuid(uuid, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No CalEvent exists with the key {");
 
@@ -489,7 +488,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
@@ -546,7 +545,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		CalEvent calEvent = fetchByUUID_G(uuid, groupId);
 
 		if (calEvent == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No CalEvent exists with the key {");
 
@@ -590,7 +589,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
@@ -675,7 +674,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
@@ -750,7 +749,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
@@ -803,7 +802,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		List<CalEvent> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No CalEvent exists with the key {");
 
@@ -825,7 +824,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		List<CalEvent> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No CalEvent exists with the key {");
 
@@ -851,7 +850,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
@@ -919,7 +918,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
@@ -1009,7 +1008,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
@@ -1075,7 +1074,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		List<CalEvent> list = findByG_T(groupId, type, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No CalEvent exists with the key {");
 
@@ -1100,7 +1099,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		List<CalEvent> list = findByG_T(groupId, type, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No CalEvent exists with the key {");
 
@@ -1130,7 +1129,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
@@ -1213,7 +1212,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
@@ -1294,7 +1293,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
@@ -1353,7 +1352,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		List<CalEvent> list = findByG_R(groupId, repeating, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No CalEvent exists with the key {");
 
@@ -1379,7 +1378,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 				obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No CalEvent exists with the key {");
 
@@ -1409,7 +1408,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
@@ -1535,7 +1534,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.calendar.model.CalEvent ");
@@ -1638,7 +1637,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1714,7 +1713,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1793,7 +1792,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1861,7 +1860,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1945,7 +1944,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(

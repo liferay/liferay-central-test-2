@@ -24,7 +24,6 @@ package com.liferay.portlet;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.Enumeration;
@@ -67,13 +66,13 @@ public class StrutsResourceBundle extends ResourceBundle {
 			 key.equals(JavaConstants.JAVAX_PORTLET_SHORT_TITLE) ||
 			 key.equals(JavaConstants.JAVAX_PORTLET_KEYWORDS))) {
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append(key);
-			sm.append(StringPool.PERIOD);
-			sm.append(_portletName);
+			sb.append(key);
+			sb.append(StringPool.PERIOD);
+			sb.append(_portletName);
 
-			key = sm.toString();
+			key = sb.toString();
 		}
 
 		return LanguageUtil.get(_companyId, _locale, key);

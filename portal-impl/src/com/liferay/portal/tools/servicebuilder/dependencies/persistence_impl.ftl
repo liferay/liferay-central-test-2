@@ -14,7 +14,6 @@ import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -366,7 +365,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					try {
 						session = openSession();
 
-						StringMaker query = new StringMaker();
+						StringBuilder query = new StringBuilder();
 
 						query.append("FROM ${packagePath}.model.${entity.name} WHERE ");
 
@@ -526,7 +525,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					try {
 						session = openSession();
 
-						StringMaker query = new StringMaker();
+						StringBuilder query = new StringBuilder();
 
 						query.append("FROM ${packagePath}.model.${entity.name} WHERE ");
 
@@ -642,7 +641,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 				0, 1, obc);
 
 				if (list.size() == 0) {
-					StringMaker msg = new StringMaker();
+					StringBuilder msg = new StringBuilder();
 
 					msg.append("No ${entity.name} exists with the key {");
 
@@ -691,7 +690,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 				count - 1, count, obc);
 
 				if (list.size() == 0) {
-					StringMaker msg = new StringMaker();
+					StringBuilder msg = new StringBuilder();
 
 					msg.append("No ${entity.name} exists with the key {");
 
@@ -738,7 +737,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 				try {
 					session = openSession();
 
-					StringMaker query = new StringMaker();
+					StringBuilder query = new StringBuilder();
 
 					query.append("FROM ${packagePath}.model.${entity.name} WHERE ");
 
@@ -863,7 +862,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 				);
 
 				if ( ${entity.varName} == null) {
-					StringMaker msg = new StringMaker();
+					StringBuilder msg = new StringBuilder();
 
 					msg.append("No ${entity.name} exists with the key {");
 
@@ -944,7 +943,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					try {
 						session = openSession();
 
-						StringMaker query = new StringMaker();
+						StringBuilder query = new StringBuilder();
 
 						query.append("FROM ${packagePath}.model.${entity.name} WHERE ");
 
@@ -1116,7 +1115,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM ${packagePath}.model.${entity.name} ");
 
@@ -1281,7 +1280,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 				try {
 					session = openSession();
 
-					StringMaker query = new StringMaker();
+					StringBuilder query = new StringBuilder();
 
 					query.append("SELECT COUNT(*) ");
 					query.append("FROM ${packagePath}.model.${entity.name} WHERE ");
@@ -1494,28 +1493,28 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					try {
 						session = HibernateUtil.openSession();
 
-						StringMaker sm = new StringMaker();
+						StringBuilder sb = new StringBuilder();
 
-						sm.append(_SQL_GET${tempEntity.names?upper_case});
+						sb.append(_SQL_GET${tempEntity.names?upper_case});
 
 						if (obc != null) {
-							sm.append("ORDER BY ");
-							sm.append(obc.getOrderBy());
+							sb.append("ORDER BY ");
+							sb.append(obc.getOrderBy());
 						}
 
 						<#if tempEntity.getOrder()??>
 							else {
-								sm.append("ORDER BY ");
+								sb.append("ORDER BY ");
 
 								<#assign orderList = tempEntity.getOrder().getColumns()>
 
 								<#list orderList as order>
-									sm.append("${tempEntity.table}.${order.DBName} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
+									sb.append("${tempEntity.table}.${order.DBName} <#if order.isOrderByAscending()>ASC<#else>DESC</#if><#if order_has_next>, </#if>");
 								</#list>
 							}
 						</#if>
 
-						String sql = sm.toString();
+						String sql = sb.toString();
 
 						SQLQuery q = session.createSQLQuery(sql);
 

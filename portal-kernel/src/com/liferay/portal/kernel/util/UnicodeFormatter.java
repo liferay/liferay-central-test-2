@@ -52,7 +52,7 @@ public class UnicodeFormatter {
 	}
 
 	public static String parseString(String hexString) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		char[] array = hexString.toCharArray();
 
@@ -68,7 +68,7 @@ public class UnicodeFormatter {
 			try {
 				char c = (char)Integer.parseInt(s, 16);
 
-				sm.append(c);
+				sb.append(c);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
@@ -77,18 +77,18 @@ public class UnicodeFormatter {
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public static String toString(char[] array) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < array.length; i++) {
-			sm.append("\\u");
-			sm.append(charToHex(array[i]));
+			sb.append("\\u");
+			sb.append(charToHex(array[i]));
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public static String toString(String s) {

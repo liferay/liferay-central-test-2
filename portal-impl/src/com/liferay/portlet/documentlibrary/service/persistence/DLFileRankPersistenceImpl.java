@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -291,7 +290,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
@@ -365,7 +364,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
@@ -417,7 +416,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		List<DLFileRank> list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileRank exists with the key {");
 
@@ -439,7 +438,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		List<DLFileRank> list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileRank exists with the key {");
 
@@ -465,7 +464,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
@@ -533,7 +532,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
@@ -622,7 +621,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
@@ -687,7 +686,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		List<DLFileRank> list = findByF_N(folderId, name, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileRank exists with the key {");
 
@@ -712,7 +711,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		List<DLFileRank> list = findByF_N(folderId, name, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileRank exists with the key {");
 
@@ -742,7 +741,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
@@ -805,7 +804,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 		DLFileRank dlFileRank = fetchByC_U_F_N(companyId, userId, folderId, name);
 
 		if (dlFileRank == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No DLFileRank exists with the key {");
 
@@ -860,7 +859,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileRank WHERE ");
@@ -1012,7 +1011,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.documentlibrary.model.DLFileRank ");
@@ -1101,7 +1100,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1169,7 +1168,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1256,7 +1255,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(

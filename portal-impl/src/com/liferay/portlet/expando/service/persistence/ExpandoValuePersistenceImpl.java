@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -294,7 +293,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
@@ -370,7 +369,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
@@ -424,7 +423,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 		List<ExpandoValue> list = findByTableId(tableId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -446,7 +445,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 		List<ExpandoValue> list = findByTableId(tableId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -472,7 +471,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
@@ -540,7 +539,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
@@ -616,7 +615,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
@@ -670,7 +669,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 		List<ExpandoValue> list = findByColumnId(columnId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -692,7 +691,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 		List<ExpandoValue> list = findByColumnId(columnId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -719,7 +718,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
@@ -786,7 +785,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
@@ -862,7 +861,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
@@ -916,7 +915,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 		List<ExpandoValue> list = findByRowId(rowId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -938,7 +937,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 		List<ExpandoValue> list = findByRowId(rowId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -964,7 +963,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
@@ -1034,7 +1033,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
@@ -1116,7 +1115,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
@@ -1176,7 +1175,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 		List<ExpandoValue> list = findByT_R(tableId, rowId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -1202,7 +1201,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 				obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -1232,7 +1231,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
@@ -1290,7 +1289,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 		ExpandoValue expandoValue = fetchByC_R(columnId, rowId);
 
 		if (expandoValue == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -1334,7 +1333,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
@@ -1418,7 +1417,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
@@ -1500,7 +1499,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
@@ -1560,7 +1559,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 		List<ExpandoValue> list = findByC_C(classNameId, classPK, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -1586,7 +1585,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 				count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -1616,7 +1615,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
@@ -1674,7 +1673,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 		ExpandoValue expandoValue = fetchByT_C_R(tableId, columnId, rowId);
 
 		if (expandoValue == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -1723,7 +1722,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
@@ -1815,7 +1814,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
@@ -1914,7 +1913,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
@@ -1988,7 +1987,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 				classPK, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -2021,7 +2020,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 				classPK, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No ExpandoValue exists with the key {");
 
@@ -2057,7 +2056,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
@@ -2198,7 +2197,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.expando.model.ExpandoValue ");
@@ -2322,7 +2321,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -2388,7 +2387,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -2454,7 +2453,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -2522,7 +2521,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -2596,7 +2595,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -2673,7 +2672,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -2750,7 +2749,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -2835,7 +2834,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(

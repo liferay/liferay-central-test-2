@@ -26,7 +26,6 @@ import com.ecyrd.jspwiki.WikiContext;
 import com.ecyrd.jspwiki.parser.Heading;
 import com.ecyrd.jspwiki.plugin.PluginException;
 
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.PwdGenerator;
 
@@ -69,26 +68,26 @@ public class TableOfContents extends com.ecyrd.jspwiki.plugin.TableOfContents {
 		if ((x != -1) && (y != -1)) {
 			String id = "toc_" + PwdGenerator.getPassword();
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append(result.substring(0, x));
-			sm.append(StringPool.NBSP);
-			sm.append("<span style=\"cursor: pointer;\" ");
-			sm.append("onClick=\"Liferay.Util.toggleByIdSpan(this, '");
-			sm.append(id);
-			sm.append("'); self.focus();\">[");
-			sm.append("<span>-</span>");
-			sm.append("<span style=\"display: none;\">+</span>");
-			sm.append("]</span>\n");
-			sm.append("</h4>");
+			sb.append(result.substring(0, x));
+			sb.append(StringPool.NBSP);
+			sb.append("<span style=\"cursor: pointer;\" ");
+			sb.append("onClick=\"Liferay.Util.toggleByIdSpan(this, '");
+			sb.append(id);
+			sb.append("'); self.focus();\">[");
+			sb.append("<span>-</span>");
+			sb.append("<span style=\"display: none;\">+</span>");
+			sb.append("]</span>\n");
+			sb.append("</h4>");
 
-			sm.append("<div id=\"");
-			sm.append(id);
-			sm.append("\">\n");
-			sm.append(result.substring(y));
-			sm.append("</div>\n");
+			sb.append("<div id=\"");
+			sb.append(id);
+			sb.append("\">\n");
+			sb.append(result.substring(y));
+			sb.append("</div>\n");
 
-			result = sm.toString();
+			result = sb.toString();
 		}
 
 		return result;

@@ -22,8 +22,6 @@
 
 package com.liferay.util.bridges.jsf.sun;
 
-import com.liferay.portal.kernel.util.StringMaker;
-
 import java.io.IOException;
 import java.io.Writer;
 
@@ -51,11 +49,11 @@ public class WriterWrapper extends Writer {
 	}
 
 	public void write(char[] cbuf, int off, int len) throws IOException {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(cbuf, off, len);
+		sb.append(cbuf, off, len);
 
-		_writer.write(sm.toString());
+		_writer.write(sb.toString());
 	}
 
 	public void write(int c) throws IOException {

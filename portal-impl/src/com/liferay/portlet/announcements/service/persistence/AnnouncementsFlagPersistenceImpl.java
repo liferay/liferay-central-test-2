@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -296,7 +295,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.announcements.model.AnnouncementsFlag WHERE ");
@@ -371,7 +370,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.announcements.model.AnnouncementsFlag WHERE ");
@@ -424,7 +423,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistence
 		List<AnnouncementsFlag> list = findByEntryId(entryId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No AnnouncementsFlag exists with the key {");
 
@@ -447,7 +446,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistence
 				obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No AnnouncementsFlag exists with the key {");
 
@@ -474,7 +473,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.announcements.model.AnnouncementsFlag WHERE ");
@@ -526,7 +525,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistence
 				value);
 
 		if (announcementsFlag == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No AnnouncementsFlag exists with the key {");
 
@@ -576,7 +575,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.announcements.model.AnnouncementsFlag WHERE ");
@@ -716,7 +715,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.announcements.model.AnnouncementsFlag ");
@@ -799,7 +798,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -871,7 +870,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(

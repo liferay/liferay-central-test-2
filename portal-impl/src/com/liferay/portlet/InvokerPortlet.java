@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Layout;
@@ -108,15 +107,15 @@ public class InvokerPortlet
 	public static String encodeResponseKey(
 		long plid, String portletId, String languageId) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(plid);
-		sm.append(StringPool.UNDERLINE);
-		sm.append(portletId);
-		sm.append(StringPool.UNDERLINE);
-		sm.append(languageId);
+		sb.append(plid);
+		sb.append(StringPool.UNDERLINE);
+		sb.append(portletId);
+		sb.append(StringPool.UNDERLINE);
+		sb.append(languageId);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public static Map<String, InvokerPortletResponse> getResponses(

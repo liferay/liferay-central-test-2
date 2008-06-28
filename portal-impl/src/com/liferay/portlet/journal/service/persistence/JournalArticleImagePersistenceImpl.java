@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -297,7 +296,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
@@ -367,7 +366,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
@@ -414,7 +413,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		List<JournalArticleImage> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticleImage exists with the key {");
 
@@ -438,7 +437,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticleImage exists with the key {");
 
@@ -465,7 +464,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
@@ -525,7 +524,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
@@ -595,7 +594,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
@@ -642,7 +641,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		List<JournalArticleImage> list = findByTempImage(tempImage, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticleImage exists with the key {");
 
@@ -666,7 +665,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticleImage exists with the key {");
 
@@ -693,7 +692,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
@@ -760,7 +759,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
@@ -854,7 +853,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
@@ -921,7 +920,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				version, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticleImage exists with the key {");
 
@@ -951,7 +950,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				version, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticleImage exists with the key {");
 
@@ -984,7 +983,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
@@ -1049,7 +1048,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 				articleId, version, elName, languageId);
 
 		if (journalArticleImage == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No JournalArticleImage exists with the key {");
 
@@ -1113,7 +1112,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticleImage WHERE ");
@@ -1281,7 +1280,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.journal.model.JournalArticleImage ");
@@ -1374,7 +1373,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1440,7 +1439,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1514,7 +1513,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1612,7 +1611,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(

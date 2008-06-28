@@ -26,7 +26,6 @@ import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import com.liferay.portal.editor.fckeditor.exception.FCKException;
 import com.liferay.portal.editor.fckeditor.receiver.CommandReceiver;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Group;
@@ -352,17 +351,17 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 		String returnValue, HttpServletResponse res) {
 
 		try {
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
 			String newName = StringPool.BLANK;
 
-			sm.append("<script type=\"text/javascript\">");
-			sm.append("window.parent.frames['frmUpload'].OnUploadCompleted(");
-			sm.append(returnValue);
-			sm.append(",'");
-			sm.append(newName);
-			sm.append("');");
-			sm.append("</script>");
+			sb.append("<script type=\"text/javascript\">");
+			sb.append("window.parent.frames['frmUpload'].OnUploadCompleted(");
+			sb.append(returnValue);
+			sb.append(",'");
+			sb.append(newName);
+			sb.append("');");
+			sb.append("</script>");
 
 			res.setContentType("text/html; charset=UTF-8");
 			res.setHeader("Cache-Control", "no-cache");
@@ -371,7 +370,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 
 			out = res.getWriter();
 
-			out.print(sm.toString());
+			out.print(sb.toString());
 
 			out.flush();
 			out.close();

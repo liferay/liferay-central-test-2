@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
@@ -295,7 +294,7 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.tasks.model.TasksProposal WHERE ");
@@ -370,7 +369,7 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.tasks.model.TasksProposal WHERE ");
@@ -423,7 +422,7 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 		List<TasksProposal> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksProposal exists with the key {");
 
@@ -445,7 +444,7 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 		List<TasksProposal> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksProposal exists with the key {");
 
@@ -472,7 +471,7 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.tasks.model.TasksProposal WHERE ");
@@ -541,7 +540,7 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.tasks.model.TasksProposal WHERE ");
@@ -622,7 +621,7 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.tasks.model.TasksProposal WHERE ");
@@ -681,7 +680,7 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 		List<TasksProposal> list = findByG_U(groupId, userId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksProposal exists with the key {");
 
@@ -707,7 +706,7 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 				obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksProposal exists with the key {");
 
@@ -737,7 +736,7 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append(
 				"FROM com.liferay.portlet.tasks.model.TasksProposal WHERE ");
@@ -794,7 +793,7 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 		TasksProposal tasksProposal = fetchByC_C(classNameId, classPK);
 
 		if (tasksProposal == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TasksProposal exists with the key {");
 
@@ -838,7 +837,7 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.tasks.model.TasksProposal WHERE ");
@@ -979,7 +978,7 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append(
 					"FROM com.liferay.portlet.tasks.model.TasksProposal ");
@@ -1069,7 +1068,7 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1137,7 +1136,7 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(
@@ -1212,7 +1211,7 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append(

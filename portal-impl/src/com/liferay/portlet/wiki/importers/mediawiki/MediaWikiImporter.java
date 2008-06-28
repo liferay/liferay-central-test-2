@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ProgressTracker;
 import com.liferay.portal.kernel.util.ProgressTrackerThreadLocal;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -404,13 +403,13 @@ public class MediaWikiImporter implements WikiImporter {
 				}
 				catch (Exception e) {
 					if (_log.isWarnEnabled()) {
-						StringMaker sm = new StringMaker();
+						StringBuilder sb = new StringBuilder();
 
-						sm.append("Page with title ");
-						sm.append(title);
-						sm.append(" could not be imported");
+						sb.append("Page with title ");
+						sb.append(title);
+						sb.append(" could not be imported");
 
-						_log.warn(sm.toString(), e);
+						_log.warn(sb.toString(), e);
 					}
 				}
 			}

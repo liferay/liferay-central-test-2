@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.LayoutSet;
@@ -289,7 +288,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
 
@@ -358,7 +357,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
 
@@ -403,7 +402,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 		List<LayoutSet> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No LayoutSet exists with the key {");
 
@@ -425,7 +424,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 		List<LayoutSet> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No LayoutSet exists with the key {");
 
@@ -452,7 +451,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 		try {
 			session = openSession();
 
-			StringMaker query = new StringMaker();
+			StringBuilder query = new StringBuilder();
 
 			query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
 
@@ -495,7 +494,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 		LayoutSet layoutSet = fetchByVirtualHost(virtualHost);
 
 		if (layoutSet == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No LayoutSet exists with the key {");
 
@@ -534,7 +533,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
 
@@ -592,7 +591,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 		LayoutSet layoutSet = fetchByG_P(groupId, privateLayout);
 
 		if (layoutSet == null) {
-			StringMaker msg = new StringMaker();
+			StringBuilder msg = new StringBuilder();
 
 			msg.append("No LayoutSet exists with the key {");
 
@@ -638,7 +637,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
 
@@ -766,7 +765,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("FROM com.liferay.portal.model.LayoutSet ");
 
@@ -848,7 +847,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
@@ -913,7 +912,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
@@ -990,7 +989,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 			try {
 				session = openSession();
 
-				StringMaker query = new StringMaker();
+				StringBuilder query = new StringBuilder();
 
 				query.append("SELECT COUNT(*) ");
 				query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
