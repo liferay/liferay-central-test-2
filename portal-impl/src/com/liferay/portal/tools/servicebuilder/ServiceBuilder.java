@@ -2329,7 +2329,7 @@ public class ServiceBuilder {
 
 		File ejbFile = new File(
 			_implDir + "/" + StringUtil.replace(_propsUtilPackage, ".", "/") +
-				"/PropsKeys.java");
+				"/PropsUtil.java");
 
 		writeFile(ejbFile, content, _author);
 	}
