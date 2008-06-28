@@ -23,6 +23,8 @@
 package com.liferay.portal.deploy.hot;
 
 import com.liferay.portal.apache.bridges.struts.LiferayServletContextProvider;
+import com.liferay.portal.kernel.configuration.Configuration;
+import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.job.Scheduler;
@@ -41,7 +43,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
-import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
@@ -269,35 +270,11 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		// Portlet properties
 
-		String portletPropsName = ctx.getInitParameter(
-			"portlet_properties");
-
-		if (Validator.isNotNull(portletPropsName)) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Loading portlet properties " + portletPropsName);
-			}
-
-			Properties portletProps = new Properties();
-
-			PropertiesUtil.load(
-				portletProps,
-				StringUtil.read(portletClassLoader, portletPropsName));
-
-			if (_log.isDebugEnabled()) {
-				String portletPropsString = PropertiesUtil.list(
-					portletProps);
-
-				_log.debug(portletPropsString);
-			}
-
-			processProperties(
-				servletContextName, portletClassLoader, portletProps);
-		}
+		processPortletProperties(servletContextName, portletClassLoader);
 
 		// Service builder properties
 
-		processServiceBuilder(ctx, portletClassLoader);
+		processServiceBuilderProperties(ctx, portletClassLoader);
 
 		// Variables
 
@@ -638,12 +615,36 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		}
 	}
 
-	protected void processProperties(
-			String servletContextName, ClassLoader portletClassLoader,
-			Properties portletProps)
+	protected void processPortletProperties(
+			String servletContextName, ClassLoader portletClassLoader)
 		throws Exception {
 
-		String languageBundleName = portletProps.getProperty("language.bundle");
+		Configuration portletPropertiesConfiguration = null;
+
+		try {
+			portletPropertiesConfiguration =
+				ConfigurationFactoryUtil.getConfiguration(
+					portletClassLoader, "portlet");
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Unable to read portlet.properties");
+			}
+		}
+
+		if (portletPropertiesConfiguration == null) {
+			return;
+		}
+
+		Properties portletProperties =
+			portletPropertiesConfiguration.getProperties();
+
+		if (portletProperties.size() == 0) {
+			return;
+		}
+
+		String languageBundleName = portletProperties.getProperty(
+			"language.bundle");
 
 		if (Validator.isNotNull(languageBundleName)) {
 			Locale[] locales = LanguageUtil.getAvailableLocales();
@@ -659,7 +660,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		}
 
 		String[] resourceActionConfigs = StringUtil.split(
-			portletProps.getProperty("resource.actions.configs"));
+			portletProperties.getProperty("resource.actions.configs"));
 
 		for (int i = 0; i < resourceActionConfigs.length; i++) {
 			ResourceActionsUtil.read(
@@ -668,28 +669,40 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		}
 	}
 
-	protected void processServiceBuilder(
+	protected void processServiceBuilderProperties(
 			ServletContext ctx, ClassLoader portletClassLoader)
 		throws Exception {
 
-		if (portletClassLoader.getResourceAsStream(
-				"portlet-service.properties") == null) {
+		Configuration serviceBuilderPropertiesConfiguration = null;
 
+		try {
+			serviceBuilderPropertiesConfiguration =
+				ConfigurationFactoryUtil.getConfiguration(
+					portletClassLoader, "portlet-service");
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Unable to read portlet-service.properties");
+			}
+		}
+
+		if (serviceBuilderPropertiesConfiguration == null) {
 			return;
 		}
 
-		Properties serviceBuilderProps = new Properties();
+		Properties serviceBuilderProperties =
+			serviceBuilderPropertiesConfiguration.getProperties();
 
-		PropertiesUtil.load(
-			serviceBuilderProps,
-			StringUtil.read(portletClassLoader, "portlet-service.properties"));
+		if (serviceBuilderProperties.size() == 0) {
+			return;
+		}
 
 		String buildNamespace = GetterUtil.getString(
-			serviceBuilderProps.getProperty("build.namespace"));
+			serviceBuilderProperties.getProperty("build.namespace"));
 		long buildNumber = GetterUtil.getLong(
-			serviceBuilderProps.getProperty("build.number"));
+			serviceBuilderProperties.getProperty("build.number"));
 		long buildDate = GetterUtil.getLong(
-			serviceBuilderProps.getProperty("build.date"));
+			serviceBuilderProperties.getProperty("build.date"));
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Build namespace " + buildNamespace);
