@@ -207,6 +207,7 @@ are-you-sure-you-want-to-merge-x-into-x=Are you sure you want to merge "{0}" int
 are-you-sure-you-want-to-move-selected-messages-to=Opravdu chcete přesunout zvolené zprávy do 
 are-you-sure-you-want-to-notify-new-users=Opravdu chcete obeslat nové uživatele?
 are-you-sure-you-want-to-remove-this-component=Opravdu chcete odstranit tuto komponentu?
+are-you-sure-you-want-to-remove-x-as-a-friend-x-will-not-be-notified=Are you sure you want to remove {0} as a friend? {0} will not be notified.
 are-you-sure-you-want-to-update-this-order=Opravdu chcete změnit tuto objednávku?
 area=Pole
 article-id=Identifikátor článku

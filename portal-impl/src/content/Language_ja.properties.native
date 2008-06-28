@@ -626,6 +626,7 @@ are-you-sure-you-want-to-publish-to-live-and-overwrite-the-existing-configuratio
 are-you-sure-you-want-to-publish-to-live-and-update-the-existing-portlet-data=住み、既存のportlet データを更新するために確実出版したいと思うであるか。
 are-you-sure-you-want-to-reject-this-proposal=確実この提案を拒絶するであるか。
 are-you-sure-you-want-to-remove-this-component=確実この部品を取除きたいと思うであるか。
+are-you-sure-you-want-to-remove-x-as-a-friend-x-will-not-be-notified=Are you sure you want to remove {0} as a friend? {0} will not be notified.
 are-you-sure-you-want-to-switch-the-languages-view=確実言語眺めを転換したいと思うであるか。行なわれているこの言語への変更は救われない。
 are-you-sure-you-want-to-update-this-order=あなたは確実あなたこの順序を更新したいであるか.
 area=区域
@@ -2533,6 +2534,7 @@ remote-pages-set=遠隔ページは置いた
 remote-port=遠隔港
 remove-all-entries-to-disable-email-forwarding=電子メールの促進を不具にするために記入項目すべてを取除きなさい。
 remove-files=ファイルを取除きなさい
+remove-friend=友人を取除きなさい
 remove-redirect=方向を変える取除きなさい
 remove-screenshot=Screenshot を取除きなさい
 remove-the-last-form-field=最後の形態分野を取除きなさい。

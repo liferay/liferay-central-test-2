@@ -250,6 +250,7 @@ are-you-sure-you-want-to-empty-the-trash=Xóa trống thùng rác ?
 are-you-sure-you-want-to-merge-x-into-x=Are you sure you want to merge "{0}" into "{1}"? This will change all items tagged with "{0}" to instead be tagged with "{1}".
 are-you-sure-you-want-to-move-selected-messages-to=Di chuyển bản tin tới
 are-you-sure-you-want-to-notify-new-users=Bạn có chắc là nhắc nhở người dùng mới?
+are-you-sure-you-want-to-remove-x-as-a-friend-x-will-not-be-notified=Are you sure you want to remove {0} as a friend? {0} will not be notified.
 are-you-sure-you-want-to-update-this-order=Cập nhật đặt hàng này ?
 area=Vùng
 article-id=Định danh bài viết 

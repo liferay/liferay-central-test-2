@@ -626,6 +626,7 @@ are-you-sure-you-want-to-publish-to-live-and-overwrite-the-existing-configuratio
 are-you-sure-you-want-to-publish-to-live-and-update-the-existing-portlet-data=是否確實要出版居住和更新現有的portlet 資料嗎?
 are-you-sure-you-want-to-reject-this-proposal=您是肯定的您reject 這個提案嗎?
 are-you-sure-you-want-to-remove-this-component=是否確實要去除這個組件嗎?
+are-you-sure-you-want-to-remove-x-as-a-friend-x-will-not-be-notified=Are you sure you want to remove {0} as a friend? {0} will not be notified.
 are-you-sure-you-want-to-switch-the-languages-view=是否確實要交換語言看法嗎? 變動做對這種語言不會被保存。
 are-you-sure-you-want-to-update-this-order=是否確實要更新這次序嗎?
 area=區域
@@ -2533,6 +2534,7 @@ remote-pages-set=被設置的遙遠的頁
 remote-port=遙遠的口岸
 remove-all-entries-to-disable-email-forwarding=移除所有項目使電子郵件向前失去能力。
 remove-files=移除文件
+remove-friend=去除朋友
 remove-redirect=去除改方向
 remove-screenshot=去除Screenshot
 remove-the-last-form-field=去除最後形式領域。

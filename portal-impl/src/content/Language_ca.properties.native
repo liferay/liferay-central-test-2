@@ -375,6 +375,7 @@ are-you-sure-you-want-to-move-selected-messages-to=Está segur que desitja moure
 are-you-sure-you-want-to-notify-new-users=Está vosté segur que desitja notificar als usuaris nous?
 are-you-sure-you-want-to-permanently-delete-the-selected-users=Está segur que desitja eliminar permanentment als usuaris seleccionats?
 are-you-sure-you-want-to-remove-this-component=Es vosté segur vosté desitja treure aquest component?
+are-you-sure-you-want-to-remove-x-as-a-friend-x-will-not-be-notified=Are you sure you want to remove {0} as a friend? {0} will not be notified.
 are-you-sure-you-want-to-update-this-order=Está vosté segur que desitja actualitzar aquesta comanda?
 area=área
 article-approval-denied-email=Notificació de denegació d'un article

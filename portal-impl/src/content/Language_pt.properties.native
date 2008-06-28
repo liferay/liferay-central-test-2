@@ -626,6 +626,7 @@ are-you-sure-you-want-to-publish-to-live-and-overwrite-the-existing-configuratio
 are-you-sure-you-want-to-publish-to-live-and-update-the-existing-portlet-data=É você certo você quer publicar para viver e atualizar os dados existentes do portlet?
 are-you-sure-you-want-to-reject-this-proposal=É você certo você para rejeitar esta proposta?
 are-you-sure-you-want-to-remove-this-component=É você certo você quer remover este componente?
+are-you-sure-you-want-to-remove-x-as-a-friend-x-will-not-be-notified=Are you sure you want to remove {0} as a friend? {0} will not be notified.
 are-you-sure-you-want-to-switch-the-languages-view=É você certo você quer comutar a vista da língua? As mudanças feitas a esta língua não serão conservadas.
 are-you-sure-you-want-to-update-this-order=É você certo você quer atualizar esta ordem?
 area=�?rea
@@ -2533,6 +2534,7 @@ remote-pages-set=Páginas remotas ajustadas
 remote-port=Porto remoto
 remove-all-entries-to-disable-email-forwarding=Remova todas as entradas para incapacitar o forwarding do email.
 remove-files=Remova As Limas
+remove-friend=Remova o amigo
 remove-redirect=Remova Dirigem de novo
 remove-screenshot=Remova Screenshot
 remove-the-last-form-field=Remova o último campo do formulário.

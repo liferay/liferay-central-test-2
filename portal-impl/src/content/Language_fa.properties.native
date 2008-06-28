@@ -399,6 +399,7 @@ are-you-sure-you-want-to-move-selected-messages-to=آيا مطمئن هستيد 
 are-you-sure-you-want-to-notify-new-users=آيا مطمئن هستيد که می خواهيد به کاربران جديد اطلاع بدهيد
 are-you-sure-you-want-to-permanently-delete-the-selected-users=آيا مطمئن هستيد که می خواهيد کاربران انتخاب شده را حذف کنيد؟
 are-you-sure-you-want-to-remove-this-component=آيا مطمئن هستيد که می خواهيد اين مولفه را حذف کنيد؟
+are-you-sure-you-want-to-remove-x-as-a-friend-x-will-not-be-notified=Are you sure you want to remove {0} as a friend? {0} will not be notified.
 are-you-sure-you-want-to-update-this-order=آيا مطمئن هستيد که می خواهيد اين سفارش را به روزرسانی کنيد؟
 area=منطقه
 article-approval-denied-email=ايميل ارسال عدم تاييد مقاله

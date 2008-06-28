@@ -626,6 +626,7 @@ are-you-sure-you-want-to-publish-to-live-and-overwrite-the-existing-configuratio
 are-you-sure-you-want-to-publish-to-live-and-update-the-existing-portlet-data=너는 살는가, 기존하는가portlet자료를 새롭게 하는가 위하여 확실한가 너 간행하고는가 싶는가?
 are-you-sure-you-want-to-reject-this-proposal=너는 확실한가 이 계획안을 거절하는가 너?
 are-you-sure-you-want-to-remove-this-component=너는 확실한가 너 이 분대를 제거하고는가 싶는가?
+are-you-sure-you-want-to-remove-x-as-a-friend-x-will-not-be-notified=Are you sure you want to remove {0} as a friend? {0} will not be notified.
 are-you-sure-you-want-to-switch-the-languages-view=너는 확실한가 너 언어 전망을 전환하고는가 싶는가? 수정하는 이 언어에 저장하지 않을 것이다.
 are-you-sure-you-want-to-update-this-order=너는 확실한가 너 이 명령을 새롭게 하고는가?
 area=지역
@@ -2533,6 +2534,7 @@ remote-pages-set=놓이는 먼 페이지
 remote-port=먼 항구
 remove-all-entries-to-disable-email-forwarding=전자 우편 운송을 무능하게 하기 위하여 모든 입장을 제거하십시요.
 remove-files=파일을 제거하십시요
+remove-friend=친구를 제거하십시오
 remove-redirect=방향을 고친다 제거하십시요
 remove-screenshot=Screenshot을 제거하십시요
 remove-the-last-form-field=마지막 모양 분야를 제거하십시요.

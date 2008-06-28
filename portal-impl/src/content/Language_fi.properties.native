@@ -624,6 +624,7 @@ are-you-sure-you-want-to-publish-to-live-and-overwrite-the-existing-configuratio
 are-you-sure-you-want-to-publish-to-live-and-update-the-existing-portlet-data=Oletko varma, että haluat julkaista ja päivittää olemassa olevan portlet datan?
 are-you-sure-you-want-to-reject-this-proposal=Oletko varma, että haluat hylätä tämän ehdotuksen?
 are-you-sure-you-want-to-remove-this-component=Oletko varma, että haluat poistaa tämän komponentin?
+are-you-sure-you-want-to-remove-x-as-a-friend-x-will-not-be-notified=Are you sure you want to remove {0} as a friend? {0} will not be notified.
 are-you-sure-you-want-to-switch-the-languages-view=Oletko varma, että haluat vaihtaa kielinäkymää? Muutoksia tähän kieleen ei tallenneta.
 are-you-sure-you-want-to-update-this-order=Oletko varma, että haluat päivittää tämän tilauksen?
 area=Alue

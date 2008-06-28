@@ -170,6 +170,7 @@ are-you-sure-you-want-to-empty-the-contents-of-the-selected-folder=Bu klasörün
 are-you-sure-you-want-to-empty-the-trash=Çöp kutusunu boşaltmak istediğinize emin misiniz?
 are-you-sure-you-want-to-merge-x-into-x=Are you sure you want to merge "{0}" into "{1}"? This will change all items tagged with "{0}" to instead be tagged with "{1}".
 are-you-sure-you-want-to-move-selected-messages-to=Seçilmiş mesajları taşımak istediğinize emin misiniz?
+are-you-sure-you-want-to-remove-x-as-a-friend-x-will-not-be-notified=Are you sure you want to remove {0} as a friend? {0} will not be notified.
 area=Alan
 attach-to-message=Mesaja Eklenti
 attachments=Eklentiler
