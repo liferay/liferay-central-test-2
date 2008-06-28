@@ -24,7 +24,6 @@ package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.FileImpl;
@@ -66,9 +65,9 @@ public class PluginsSummaryBuilder {
 	}
 
 	public void _createPluginsSummary(File pluginsDir) throws Exception {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("<plugins-summary>\n");
+		sb.append("<plugins-summary>\n");
 
 		DirectoryScanner ds = new DirectoryScanner();
 
@@ -86,28 +85,28 @@ public class PluginsSummaryBuilder {
 		Arrays.sort(files);
 
 		for (String file : files) {
-			_createPluginSummary(file, sm);
+			_createPluginSummary(file, sb);
 		}
 
 		for (String author : _distinctAuthors) {
-			sm.append("\t<author>");
-			sm.append(author);
-			sm.append("</author>\n");
+			sb.append("\t<author>");
+			sb.append(author);
+			sb.append("</author>\n");
 		}
 
 		for (String license : _distinctLicenses) {
-			sm.append("\t<license>");
-			sm.append(license);
-			sm.append("</license>\n");
+			sb.append("\t<license>");
+			sb.append(license);
+			sb.append("</license>\n");
 		}
 
-		sm.append("</plugins-summary>");
+		sb.append("</plugins-summary>");
 
 		_fileUtil.write(
-			pluginsDir + File.separator + "summary.xml", sm.toString());
+			pluginsDir + File.separator + "summary.xml", sb.toString());
 	}
 
-	public void _createPluginSummary(String file, StringMaker sm)
+	public void _createPluginSummary(String file, StringBuilder sb)
 		throws Exception {
 
 		String content = _fileUtil.read(file);
@@ -161,39 +160,39 @@ public class PluginsSummaryBuilder {
 		_distinctAuthors.add(author);
 		_distinctLicenses.add(licenses);
 
-		sm.append("\t<plugin>\n");
-		sm.append("\t\t<artifact-id>");
-		sm.append(artifactId);
-		sm.append("</artifact-id>\n");
-		sm.append("\t\t<name>");
-		sm.append(name);
-		sm.append("</name>\n");
-		sm.append("\t\t<type>");
-		sm.append(type);
-		sm.append("</type>\n");
-		sm.append("\t\t<tags>");
-		sm.append(tags);
-		sm.append("</tags>\n");
-		sm.append("\t\t<short-description>");
-		sm.append(shortDescription);
-		sm.append("</short-description>\n");
-		sm.append("\t\t<change-log>");
-		sm.append(changeLog);
-		sm.append("</change-log>\n");
-		sm.append("\t\t<page-url>");
-		sm.append(pageURL);
-		sm.append("</page-url>\n");
-		sm.append("\t\t<author>");
-		sm.append(author);
-		sm.append("</author>\n");
-		sm.append("\t\t<licenses>");
-		sm.append(licenses);
-		sm.append("</licenses>\n");
-		sm.append("\t</plugin>\n");
+		sb.append("\t<plugin>\n");
+		sb.append("\t\t<artifact-id>");
+		sb.append(artifactId);
+		sb.append("</artifact-id>\n");
+		sb.append("\t\t<name>");
+		sb.append(name);
+		sb.append("</name>\n");
+		sb.append("\t\t<type>");
+		sb.append(type);
+		sb.append("</type>\n");
+		sb.append("\t\t<tags>");
+		sb.append(tags);
+		sb.append("</tags>\n");
+		sb.append("\t\t<short-description>");
+		sb.append(shortDescription);
+		sb.append("</short-description>\n");
+		sb.append("\t\t<change-log>");
+		sb.append(changeLog);
+		sb.append("</change-log>\n");
+		sb.append("\t\t<page-url>");
+		sb.append(pageURL);
+		sb.append("</page-url>\n");
+		sb.append("\t\t<author>");
+		sb.append(author);
+		sb.append("</author>\n");
+		sb.append("\t\t<licenses>");
+		sb.append(licenses);
+		sb.append("</licenses>\n");
+		sb.append("\t</plugin>\n");
 	}
 
 	private String _readList(Element parentEl, String name) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		if (parentEl != null) {
 			Iterator<Element> itr = parentEl.elements(name).iterator();
@@ -203,15 +202,15 @@ public class PluginsSummaryBuilder {
 
 				String text = el.getText().trim();
 
-				sm.append(text);
+				sb.append(text);
 
 				if (itr.hasNext()) {
-					sm.append(", ");
+					sb.append(", ");
 				}
 			}
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	public String _readProperty(Properties props, String key) {

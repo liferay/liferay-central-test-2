@@ -24,7 +24,6 @@ package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.ContentUtil;
@@ -103,7 +102,7 @@ public class SourceFormatter {
 
 		imports = content.substring(x, y);
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		BufferedReader br = new BufferedReader(new StringReader(imports));
 
@@ -121,19 +120,19 @@ public class SourceFormatter {
 				if (!packageDir.equals(importPackage)) {
 					if (!importClass.equals("*")) {
 						if (classes.contains(importClass)) {
-							sm.append(line);
-							sm.append("\n");
+							sb.append(line);
+							sb.append("\n");
 						}
 					}
 					else {
-						sm.append(line);
-						sm.append("\n");
+						sb.append(line);
+						sb.append("\n");
 					}
 				}
 			}
 		}
 
-		imports = _formatImports(sm.toString());
+		imports = _formatImports(sb.toString());
 
 		content =
 			content.substring(0, x) + imports +
@@ -285,7 +284,7 @@ public class SourceFormatter {
 
 		Collections.sort(importsList);
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		String temp = null;
 
@@ -303,16 +302,16 @@ public class SourceFormatter {
 			String packageLevel = s.substring(7, pos);
 
 			if ((i != 0) && (!packageLevel.equals(temp))) {
-				sm.append("\n");
+				sb.append("\n");
 			}
 
 			temp = packageLevel;
 
-			sm.append(s);
-			sm.append("\n");
+			sb.append(s);
+			sb.append("\n");
 		}
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static void _formatJava() throws IOException {
@@ -444,7 +443,7 @@ public class SourceFormatter {
 	private static String _formatJavaContent(String fileName, String content)
 		throws IOException {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		BufferedReader br = new BufferedReader(new StringReader(content));
 
@@ -461,8 +460,8 @@ public class SourceFormatter {
 
 			line = StringUtil.trimTrailing(line);
 
-			sm.append(line);
-			sm.append("\n");
+			sb.append(line);
+			sb.append("\n");
 
 			line = StringUtil.replace(line, "\t", "    ");
 
@@ -479,7 +478,7 @@ public class SourceFormatter {
 
 		br.close();
 
-		String newContent = sm.toString();
+		String newContent = sb.toString();
 
 		if (newContent.endsWith("\n")) {
 			newContent = newContent.substring(0, newContent.length() -1);
@@ -567,7 +566,7 @@ public class SourceFormatter {
 	private static String _formatJSPContent(String fileName, String content)
 		throws IOException {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		BufferedReader br =
 			new BufferedReader(new StringReader(content));
@@ -612,13 +611,13 @@ public class SourceFormatter {
 
 			line = StringUtil.trimTrailing(line);
 
-			sm.append(line);
-			sm.append("\n");
+			sb.append(line);
+			sb.append("\n");
 		}
 
 		br.close();
 
-		String newContent = sm.toString();
+		String newContent = sb.toString();
 
 		if (newContent.endsWith("\n")) {
 			newContent = newContent.substring(0, newContent.length() -1);

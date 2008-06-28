@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.Digester;
 import com.liferay.portal.kernel.util.DigesterUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -185,15 +184,15 @@ public class PwdEncryptor {
 
 				int numSaltChars = saltChars.length;
 
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
 				int x = Math.abs(randomGenerator.nextInt()) % numSaltChars;
 				int y = Math.abs(randomGenerator.nextInt()) % numSaltChars;
 
-				sm.append(saltChars[x]);
-				sm.append(saltChars[y]);
+				sb.append(saltChars[x]);
+				sb.append(saltChars[y]);
 
-				String salt = sm.toString();
+				String salt = sb.toString();
 
 				saltBytes = salt.getBytes(Digester.ENCODING);
 			}

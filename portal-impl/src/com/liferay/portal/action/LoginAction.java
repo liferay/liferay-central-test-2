@@ -41,7 +41,6 @@ import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
@@ -320,12 +319,12 @@ public class LoginAction extends Action {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-			StringMaker sm = new StringMaker();
+			StringBuilder sb = new StringBuilder();
 
-			sm.append(PortalUtil.getPortalURL(req, true));
-			sm.append(themeDisplay.getURLSignIn());
+			sb.append(PortalUtil.getPortalURL(req, true));
+			sb.append(themeDisplay.getURLSignIn());
 
-			res.sendRedirect(sm.toString());
+			res.sendRedirect(sb.toString());
 
 			return null;
 		}

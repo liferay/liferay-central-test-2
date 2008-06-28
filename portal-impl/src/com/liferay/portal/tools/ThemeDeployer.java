@@ -23,7 +23,6 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.plugin.PluginPackage;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Plugin;
@@ -86,126 +85,126 @@ public class ThemeDeployer extends BaseDeployer {
 			double webXmlVersion, File srcFile, String displayName)
 		throws Exception {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		String extraContent = super.getExtraContent(
 			webXmlVersion, srcFile, displayName);
 
-		sm.append(extraContent);
+		sb.append(extraContent);
 
 		// HeaderFilter
 
-		sm.append("<filter>");
-		sm.append("<filter-name>Header Filter</filter-name>");
-		sm.append("<filter-class>");
-		sm.append("com.liferay.portal.kernel.servlet.PortalClassLoaderFilter");
-		sm.append("</filter-class>");
-		sm.append("<init-param>");
-		sm.append("<param-name>filter-class</param-name>");
-		sm.append("<param-value>");
-		sm.append("com.liferay.portal.servlet.filters.header.HeaderFilter");
-		sm.append("</param-value>");
-		sm.append("</init-param>");
-		sm.append("<init-param>");
-		sm.append("<param-name>Cache-Control</param-name>");
-		sm.append("<param-value>max-age=172801, public</param-value>");
-		sm.append("</init-param>");
-		sm.append("<init-param>");
-		sm.append("<param-name>Expires</param-name>");
-		sm.append("<param-value>172801</param-value>");
-		sm.append("</init-param>");
-		sm.append("</filter>");
+		sb.append("<filter>");
+		sb.append("<filter-name>Header Filter</filter-name>");
+		sb.append("<filter-class>");
+		sb.append("com.liferay.portal.kernel.servlet.PortalClassLoaderFilter");
+		sb.append("</filter-class>");
+		sb.append("<init-param>");
+		sb.append("<param-name>filter-class</param-name>");
+		sb.append("<param-value>");
+		sb.append("com.liferay.portal.servlet.filters.header.HeaderFilter");
+		sb.append("</param-value>");
+		sb.append("</init-param>");
+		sb.append("<init-param>");
+		sb.append("<param-name>Cache-Control</param-name>");
+		sb.append("<param-value>max-age=172801, public</param-value>");
+		sb.append("</init-param>");
+		sb.append("<init-param>");
+		sb.append("<param-name>Expires</param-name>");
+		sb.append("<param-value>172801</param-value>");
+		sb.append("</init-param>");
+		sb.append("</filter>");
 
-		sm.append("<filter-mapping>");
-		sm.append("<filter-name>Header Filter</filter-name>");
-		sm.append("<url-pattern>*.css</url-pattern>");
-		sm.append("</filter-mapping>");
-		sm.append("<filter-mapping>");
-		sm.append("<filter-name>Header Filter</filter-name>");
-		sm.append("<url-pattern>*.gif</url-pattern>");
-		sm.append("</filter-mapping>");
-		sm.append("<filter-mapping>");
-		sm.append("<filter-name>Header Filter</filter-name>");
-		sm.append("<url-pattern>*.html</url-pattern>");
-		sm.append("</filter-mapping>");
-		sm.append("<filter-mapping>");
-		sm.append("<filter-name>Header Filter</filter-name>");
-		sm.append("<url-pattern>*.jpg</url-pattern>");
-		sm.append("</filter-mapping>");
-		sm.append("<filter-mapping>");
-		sm.append("<filter-name>Header Filter</filter-name>");
-		sm.append("<url-pattern>*.js</url-pattern>");
-		sm.append("</filter-mapping>");
-		sm.append("<filter-mapping>");
-		sm.append("<filter-name>Header Filter</filter-name>");
-		sm.append("<url-pattern>*.png</url-pattern>");
-		sm.append("</filter-mapping>");
+		sb.append("<filter-mapping>");
+		sb.append("<filter-name>Header Filter</filter-name>");
+		sb.append("<url-pattern>*.css</url-pattern>");
+		sb.append("</filter-mapping>");
+		sb.append("<filter-mapping>");
+		sb.append("<filter-name>Header Filter</filter-name>");
+		sb.append("<url-pattern>*.gif</url-pattern>");
+		sb.append("</filter-mapping>");
+		sb.append("<filter-mapping>");
+		sb.append("<filter-name>Header Filter</filter-name>");
+		sb.append("<url-pattern>*.html</url-pattern>");
+		sb.append("</filter-mapping>");
+		sb.append("<filter-mapping>");
+		sb.append("<filter-name>Header Filter</filter-name>");
+		sb.append("<url-pattern>*.jpg</url-pattern>");
+		sb.append("</filter-mapping>");
+		sb.append("<filter-mapping>");
+		sb.append("<filter-name>Header Filter</filter-name>");
+		sb.append("<url-pattern>*.js</url-pattern>");
+		sb.append("</filter-mapping>");
+		sb.append("<filter-mapping>");
+		sb.append("<filter-name>Header Filter</filter-name>");
+		sb.append("<url-pattern>*.png</url-pattern>");
+		sb.append("</filter-mapping>");
 
 		// CompressionFilter
 
-		sm.append("<filter>");
-		sm.append("<filter-name>Compression Filter</filter-name>");
-		sm.append("<filter-class>");
-		sm.append("com.liferay.portal.kernel.servlet.PortalClassLoaderFilter");
-		sm.append("</filter-class>");
-		sm.append("<init-param>");
-		sm.append("<param-name>filter-class</param-name>");
-		sm.append("<param-value>");
-		sm.append(
+		sb.append("<filter>");
+		sb.append("<filter-name>Compression Filter</filter-name>");
+		sb.append("<filter-class>");
+		sb.append("com.liferay.portal.kernel.servlet.PortalClassLoaderFilter");
+		sb.append("</filter-class>");
+		sb.append("<init-param>");
+		sb.append("<param-name>filter-class</param-name>");
+		sb.append("<param-value>");
+		sb.append(
 			"com.liferay.portal.servlet.filters.compression.CompressionFilter");
-		sm.append("</param-value>");
-		sm.append("</init-param>");
-		sm.append("</filter>");
+		sb.append("</param-value>");
+		sb.append("</init-param>");
+		sb.append("</filter>");
 
-		sm.append("<filter-mapping>");
-		sm.append("<filter-name>Compression Filter</filter-name>");
-		sm.append("<url-pattern>*.css</url-pattern>");
-		sm.append("</filter-mapping>");
-		sm.append("<filter-mapping>");
-		sm.append("<filter-name>Compression Filter</filter-name>");
-		sm.append("<url-pattern>*.js</url-pattern>");
-		sm.append("</filter-mapping>");
+		sb.append("<filter-mapping>");
+		sb.append("<filter-name>Compression Filter</filter-name>");
+		sb.append("<url-pattern>*.css</url-pattern>");
+		sb.append("</filter-mapping>");
+		sb.append("<filter-mapping>");
+		sb.append("<filter-name>Compression Filter</filter-name>");
+		sb.append("<url-pattern>*.js</url-pattern>");
+		sb.append("</filter-mapping>");
 
 		// VelocityFilter
 
-		sm.append("<filter>");
-		sm.append("<filter-name>Velocity Filter</filter-name>");
-		sm.append("<filter-class>");
-		sm.append("com.liferay.portal.kernel.servlet.PortalClassLoaderFilter");
-		sm.append("</filter-class>");
-		sm.append("<init-param>");
-		sm.append("<param-name>filter-class</param-name>");
-		sm.append("<param-value>");
-		sm.append("com.liferay.portal.servlet.filters.velocity.VelocityFilter");
-		sm.append("</param-value>");
-		sm.append("</init-param>");
-		sm.append("<init-param>");
-		sm.append("<param-name>pattern</param-name>");
-		sm.append("<param-value>(.+)/css/main.css(.+)</param-value>");
-		sm.append("</init-param>");
-		sm.append("</filter>");
+		sb.append("<filter>");
+		sb.append("<filter-name>Velocity Filter</filter-name>");
+		sb.append("<filter-class>");
+		sb.append("com.liferay.portal.kernel.servlet.PortalClassLoaderFilter");
+		sb.append("</filter-class>");
+		sb.append("<init-param>");
+		sb.append("<param-name>filter-class</param-name>");
+		sb.append("<param-value>");
+		sb.append("com.liferay.portal.servlet.filters.velocity.VelocityFilter");
+		sb.append("</param-value>");
+		sb.append("</init-param>");
+		sb.append("<init-param>");
+		sb.append("<param-name>pattern</param-name>");
+		sb.append("<param-value>(.+)/css/main.css(.+)</param-value>");
+		sb.append("</init-param>");
+		sb.append("</filter>");
 
-		/*sm.append("<filter-mapping>");
-		sm.append("<filter-name>Velocity Filter</filter-name>");
-		sm.append("<url-pattern>*.css</url-pattern>");
+		/*sb.append("<filter-mapping>");
+		sb.append("<filter-name>Velocity Filter</filter-name>");
+		sb.append("<url-pattern>*.css</url-pattern>");
 
 		if (webXmlVersion > 2.3) {
-			sm.append("<dispatcher>FORWARD</dispatcher>");
-			sm.append("<dispatcher>INCLUDE</dispatcher>");
-			sm.append("<dispatcher>REQUEST</dispatcher>");
+			sb.append("<dispatcher>FORWARD</dispatcher>");
+			sb.append("<dispatcher>INCLUDE</dispatcher>");
+			sb.append("<dispatcher>REQUEST</dispatcher>");
 		}
 
-		sm.append("</filter-mapping>");*/
+		sb.append("</filter-mapping>");*/
 
 		// ThemeContextListener
 
-		sm.append("<listener>");
-		sm.append("<listener-class>");
-		sm.append("com.liferay.portal.kernel.servlet.ThemeContextListener");
-		sm.append("</listener-class>");
-		sm.append("</listener>");
+		sb.append("<listener>");
+		sb.append("<listener-class>");
+		sb.append("com.liferay.portal.kernel.servlet.ThemeContextListener");
+		sb.append("</listener-class>");
+		sb.append("</listener>");
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected void processPluginPackageProperties(

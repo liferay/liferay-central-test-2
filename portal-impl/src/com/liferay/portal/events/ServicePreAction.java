@@ -42,7 +42,6 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.SafeProperties;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -1042,16 +1041,16 @@ public class ServicePreAction extends Action {
 					permissionChecker);
 
 				if (!isViewableCommunity) {
-					StringMaker sm = new StringMaker();
+					StringBuilder sb = new StringBuilder();
 
-					sm.append("User ");
-					sm.append(user.getUserId());
-					sm.append(" is not allowed to access the ");
-					sm.append(layout.isPrivateLayout() ? "private": "public");
-					sm.append(" pages of group ");
-					sm.append(layout.getGroupId());
+					sb.append("User ");
+					sb.append(user.getUserId());
+					sb.append(" is not allowed to access the ");
+					sb.append(layout.isPrivateLayout() ? "private": "public");
+					sb.append(" pages of group ");
+					sb.append(layout.getGroupId());
 
-					_log.warn(sm.toString());
+					_log.warn(sb.toString());
 
 					layout = null;
 				}

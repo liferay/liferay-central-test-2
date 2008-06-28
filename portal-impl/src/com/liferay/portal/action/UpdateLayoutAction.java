@@ -25,7 +25,6 @@ package com.liferay.portal.action;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
@@ -124,14 +123,14 @@ public class UpdateLayoutAction extends Action {
 					PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 						layout, portletId);
 
-				StringMaker sm = new StringMaker();
+				StringBuilder sb = new StringBuilder();
 
-				sm.append("height=" + height + "\n");
-				sm.append("width=" + width + "\n");
-				sm.append("top=" + top + "\n");
-				sm.append("left=" + left + "\n");
+				sb.append("height=" + height + "\n");
+				sb.append("width=" + width + "\n");
+				sb.append("top=" + top + "\n");
+				sb.append("left=" + left + "\n");
 
-				prefs.setValue("portlet-freeform-styles", sm.toString());
+				prefs.setValue("portlet-freeform-styles", sb.toString());
 
 				prefs.store();
 			}

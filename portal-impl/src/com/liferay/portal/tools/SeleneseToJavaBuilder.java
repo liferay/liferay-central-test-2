@@ -23,7 +23,6 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.CharPool;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeFormatter;
@@ -82,7 +81,7 @@ public class SeleneseToJavaBuilder {
 	}
 
 	protected String fixParam(String param) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
 		char[] array = param.toCharArray();
 
@@ -90,25 +89,25 @@ public class SeleneseToJavaBuilder {
 			char c = array[i];
 
 			if (c == CharPool.BACK_SLASH) {
-				sm.append("\\\\");
+				sb.append("\\\\");
 			}
 			else if (c == CharPool.QUOTE) {
-				sm.append("\\\"");
+				sb.append("\\\"");
 			}
 			else if (Character.isWhitespace(c)) {
-				sm.append(c);
+				sb.append(c);
 			}
 			else if ((c < 0x0020) || (c > 0x007e)) {
-				sm.append("\\u");
-				sm.append(UnicodeFormatter.charToHex(c));
+				sb.append("\\u");
+				sb.append(UnicodeFormatter.charToHex(c));
 			}
 			else {
-				sm.append(c);
+				sb.append(c);
 			}
 		}
 
 		return StringUtil.replace(
-			sm.toString(), _FIX_PARAM_OLD_SUBS, _FIX_PARAM_NEW_SUBS);
+			sb.toString(), _FIX_PARAM_OLD_SUBS, _FIX_PARAM_NEW_SUBS);
 	}
 
 	protected String[] getParams(String step) throws Exception {
@@ -142,16 +141,16 @@ public class SeleneseToJavaBuilder {
 			"test" + testName.substring(0, testName.length() - 4);
 		String testFileName = basedir + "/" + file.substring(0, y) + ".java";
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append("package " + testPackagePath + ";\n\n");
+		sb.append("package " + testPackagePath + ";\n\n");
 
-		sm.append("import com.liferay.portal.kernel.util.StringPool;\n");
-		sm.append("import com.liferay.portalweb.portal.BaseTestCase;\n\n");
+		sb.append("import com.liferay.portal.kernel.util.StringPool;\n");
+		sb.append("import com.liferay.portalweb.portal.BaseTestCase;\n\n");
 
-		sm.append("public class " + testName + " extends BaseTestCase {");
+		sb.append("public class " + testName + " extends BaseTestCase {");
 
-		sm.append("public void " + testMethodName + "() throws Exception {");
+		sb.append("public void " + testMethodName + "() throws Exception {");
 
 		String xml = _fileUtil.read(basedir + "/" + file);
 
@@ -191,148 +190,148 @@ public class SeleneseToJavaBuilder {
 			if (param1.equals("assertConfirmation")) {
 				param2 = StringUtil.replace(param2, "?", "[\\\\s\\\\S]");
 
-				sm.append("assertTrue(selenium.getConfirmation().matches(\"^");
-				sm.append(param2);
-				sm.append("$\"));");
+				sb.append("assertTrue(selenium.getConfirmation().matches(\"^");
+				sb.append(param2);
+				sb.append("$\"));");
 			}
 			else if (param1.equals("click") || param1.equals("mouseDown") ||
 					 param1.equals("mouseUp") || param1.equals("open") ||
 					 param1.equals("selectFrame") ||
 					 param1.equals("selectWindow")) {
 
-				sm.append("selenium.");
-				sm.append(param1);
-				sm.append("(\"");
-				sm.append(param2);
-				sm.append("\");");
+				sb.append("selenium.");
+				sb.append(param1);
+				sb.append("(\"");
+				sb.append(param2);
+				sb.append("\");");
 			}
 			else if (param1.equals("clickAndWait")) {
-				sm.append("selenium.click(\"");
-				sm.append(param2);
-				sm.append("\");");
-				sm.append("selenium.waitForPageToLoad(\"30000\");");
+				sb.append("selenium.click(\"");
+				sb.append(param2);
+				sb.append("\");");
+				sb.append("selenium.waitForPageToLoad(\"30000\");");
 			}
 			else if (param1.equals("close")) {
-				sm.append("selenium.");
-				sm.append(param1);
-				sm.append("();");
+				sb.append("selenium.");
+				sb.append(param1);
+				sb.append("();");
 			}
 			else if (param1.equals("pause")) {
-				sm.append("Thread.sleep(");
-				sm.append(param2);
-				sm.append(");");
+				sb.append("Thread.sleep(");
+				sb.append(param2);
+				sb.append(");");
 			}
 			else if (param1.equals("addSelection") || param1.equals("select") ||
 					 param1.equals("type") || param1.equals("typeKeys") ||
 					 param1.equals("waitForPopUp")) {
 
-				sm.append("selenium.");
-				sm.append(param1);
-				sm.append("(\"");
-				sm.append(param2);
-				sm.append("\", \"");
-				sm.append(param3);
-				sm.append("\");");
+				sb.append("selenium.");
+				sb.append(param1);
+				sb.append("(\"");
+				sb.append(param2);
+				sb.append("\", \"");
+				sb.append(param3);
+				sb.append("\");");
 			}
 			else if (param1.equals("selectAndWait")) {
-				sm.append("selenium.select(\"");
-				sm.append(param2);
-				sm.append("\", \"");
-				sm.append(param3);
-				sm.append("\");");
-				sm.append("selenium.waitForPageToLoad(\"30000\");");
+				sb.append("selenium.select(\"");
+				sb.append(param2);
+				sb.append("\", \"");
+				sb.append(param3);
+				sb.append("\");");
+				sb.append("selenium.waitForPageToLoad(\"30000\");");
 			}
 			else if (param1.equals("verifyTextPresent") ||
 					 param1.equals("verifyTextNotPresent")) {
 
 				if (param1.equals("verifyTextPresent")) {
-					sm.append("verifyTrue");
+					sb.append("verifyTrue");
 				}
 				else if (param1.equals("verifyTextNotPresent")) {
-					sm.append("verifyFalse");
+					sb.append("verifyFalse");
 				}
 
-				sm.append("(selenium.isTextPresent(\"");
-				sm.append(param2);
-				sm.append("\"));");
+				sb.append("(selenium.isTextPresent(\"");
+				sb.append(param2);
+				sb.append("\"));");
 			}
 			else if (param1.equals("verifyTitle")) {
-				sm.append("verifyEquals(\"");
-				sm.append(param2);
-				sm.append("\", selenium.getTitle());");
+				sb.append("verifyEquals(\"");
+				sb.append(param2);
+				sb.append("\", selenium.getTitle());");
 			}
 			else if (param1.equals("waitForElementNotPresent") ||
 					 param1.equals("waitForElementPresent") ||
 					 param1.equals("waitForTextNotPresent") ||
 					 param1.equals("waitForTextPresent")) {
 
-				sm.append("for (int second = 0;; second++) {");
-				sm.append("if (second >= 60) {");
-				sm.append("fail(\"timeout\");");
-				sm.append("}");
+				sb.append("for (int second = 0;; second++) {");
+				sb.append("if (second >= 60) {");
+				sb.append("fail(\"timeout\");");
+				sb.append("}");
 
-				sm.append("try {");
-				sm.append("if (");
+				sb.append("try {");
+				sb.append("if (");
 
 				if (param1.equals("waitForElementNotPresent") ||
 					param1.equals("waitForTextNotPresent")) {
 
-					sm.append("!");
+					sb.append("!");
 				}
 
-				sm.append("selenium.");
+				sb.append("selenium.");
 
 				if (param1.equals("waitForElementNotPresent") ||
 					param1.equals("waitForElementPresent")) {
 
-					sm.append("isElementPresent");
+					sb.append("isElementPresent");
 				}
 				else if (param1.equals("waitForTextNotPresent") ||
 						 param1.equals("waitForTextPresent")) {
 
-					sm.append("isTextPresent");
+					sb.append("isTextPresent");
 				}
 
-				sm.append("(\"");
-				sm.append(param2);
-				sm.append("\")) {");
-				sm.append("break;");
-				sm.append("}");
-				sm.append("}");
-				sm.append("catch (Exception e) {");
-				sm.append("}");
+				sb.append("(\"");
+				sb.append(param2);
+				sb.append("\")) {");
+				sb.append("break;");
+				sb.append("}");
+				sb.append("}");
+				sb.append("catch (Exception e) {");
+				sb.append("}");
 
-				sm.append("Thread.sleep(1000);");
-				sm.append("}");
+				sb.append("Thread.sleep(1000);");
+				sb.append("}");
 			}
 			else if (param1.equals("waitForTable")) {
-				sm.append("for (int second = 0;; second++) {");
-				sm.append("if (second >= 60) {");
-				sm.append("fail(\"timeout\");");
-				sm.append("}");
+				sb.append("for (int second = 0;; second++) {");
+				sb.append("if (second >= 60) {");
+				sb.append("fail(\"timeout\");");
+				sb.append("}");
 
-				sm.append("try {");
-				sm.append("if (StringPool.BLANK.equals(selenium.getTable(\"");
-				sm.append(param2);
-				sm.append("\"))) {");
-				sm.append("break;");
-				sm.append("}");
-				sm.append("}");
-				sm.append("catch (Exception e) {");
-				sm.append("}");
+				sb.append("try {");
+				sb.append("if (StringPool.BLANK.equals(selenium.getTable(\"");
+				sb.append(param2);
+				sb.append("\"))) {");
+				sb.append("break;");
+				sb.append("}");
+				sb.append("}");
+				sb.append("catch (Exception e) {");
+				sb.append("}");
 
-				sm.append("Thread.sleep(1000);");
-				sm.append("}");
+				sb.append("Thread.sleep(1000);");
+				sb.append("}");
 			}
 			else {
 				System.out.println(param1 + " was not translated");
 			}
 		}
 
-		sm.append("}");
-		sm.append("}");
+		sb.append("}");
+		sb.append("}");
 
-		String content = sm.toString();
+		String content = sb.toString();
 
 		ServiceBuilder.writeFile(new File(testFileName), content);
 	}

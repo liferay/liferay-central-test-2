@@ -26,7 +26,6 @@ import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
@@ -203,15 +202,15 @@ public class LayoutCache {
 			String resourcePrimKey, boolean portletActions)
 		throws PortalException, SystemException {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(resourceName);
-		sm.append(StringPool.PIPE);
-		sm.append(scope);
-		sm.append(StringPool.PIPE);
-		sm.append(resourcePrimKey);
+		sb.append(resourceName);
+		sb.append(StringPool.PIPE);
+		sb.append(scope);
+		sb.append(StringPool.PIPE);
+		sb.append(resourcePrimKey);
 
-		String key = sm.toString();
+		String key = sb.toString();
 
 		Resource resource = resourcesMap.get(key);
 

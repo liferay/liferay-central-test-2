@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.util.ObjectValuePair;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
@@ -267,9 +266,11 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
-	public void addZipEntry(String path, StringMaker sm) throws SystemException {
+	public void addZipEntry(String path, StringBuilder sb)
+		throws SystemException {
+
 		try {
-			getZipWriter().addEntry(path, sm);
+			getZipWriter().addEntry(path, sb);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -535,13 +536,13 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	protected String getPrimaryKeyString(String className, Object primaryKey) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(className);
-		sm.append(StringPool.POUND);
-		sm.append(primaryKey);
+		sb.append(className);
+		sb.append(StringPool.POUND);
+		sb.append(primaryKey);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	protected void initXStream() {

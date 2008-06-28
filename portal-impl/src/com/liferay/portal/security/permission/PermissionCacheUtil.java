@@ -24,7 +24,6 @@ package com.liferay.portal.security.permission;
 
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 /**
@@ -83,36 +82,36 @@ public class PermissionCacheUtil {
 	}
 
 	private static String _encodeKey(long userId, long groupId) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(CACHE_NAME);
-		sm.append(StringPool.POUND);
-		sm.append(userId);
-		sm.append(StringPool.POUND);
-		sm.append(groupId);
+		sb.append(CACHE_NAME);
+		sb.append(StringPool.POUND);
+		sb.append(userId);
+		sb.append(StringPool.POUND);
+		sb.append(groupId);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static String _encodeKey(
 		long userId, long groupId, String name, String primKey,
 		String actionId) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(CACHE_NAME);
-		sm.append(StringPool.POUND);
-		sm.append(userId);
-		sm.append(StringPool.POUND);
-		sm.append(groupId);
-		sm.append(StringPool.POUND);
-		sm.append(name);
-		sm.append(StringPool.POUND);
-		sm.append(primKey);
-		sm.append(StringPool.POUND);
-		sm.append(actionId);
+		sb.append(CACHE_NAME);
+		sb.append(StringPool.POUND);
+		sb.append(userId);
+		sb.append(StringPool.POUND);
+		sb.append(groupId);
+		sb.append(StringPool.POUND);
+		sb.append(name);
+		sb.append(StringPool.POUND);
+		sb.append(primKey);
+		sb.append(StringPool.POUND);
+		sb.append(actionId);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static PortalCache _cache = MultiVMPoolUtil.getCache(CACHE_NAME);

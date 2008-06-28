@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
@@ -508,15 +507,15 @@ public class LayoutExporter {
 	protected String getLayoutIconPath(
 		PortletDataContext context, Layout layout, Image image) {
 
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(context.getLayoutPath(layout.getLayoutId()));
-		sm.append("/icons/");
-		sm.append(image.getImageId());
-		sm.append(StringPool.PERIOD);
-		sm.append(image.getType());
+		sb.append(context.getLayoutPath(layout.getLayoutId()));
+		sb.append("/icons/");
+		sb.append(image.getImageId());
+		sb.append(StringPool.PERIOD);
+		sb.append(image.getType());
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 	private static Log _log = LogFactory.getLog(LayoutExporter.class);

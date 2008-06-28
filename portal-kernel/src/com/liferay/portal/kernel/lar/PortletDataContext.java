@@ -25,7 +25,6 @@ package com.liferay.portal.kernel.lar;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ObjectValuePair;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
 
@@ -85,7 +84,8 @@ public interface PortletDataContext extends Serializable {
 
 	public void addZipEntry(String path, String s) throws SystemException;
 
-	public void addZipEntry(String name, StringMaker sm) throws SystemException;
+	public void addZipEntry(String name, StringBuilder sb)
+		throws SystemException;
 
 	public Object fromXML(byte[] bytes);
 

@@ -23,7 +23,6 @@
 package com.liferay.portal.kernel.zip;
 
 import com.liferay.portal.kernel.util.ByteArrayMaker;
-import com.liferay.portal.kernel.util.StringMaker;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -47,8 +46,8 @@ public class ZipWriter implements Serializable {
 		_zos = new ZipOutputStream(new BufferedOutputStream(_bam));
 	}
 
-	public void addEntry(String name, StringMaker sm) throws IOException {
-		addEntry(name, sm.toString());
+	public void addEntry(String name, StringBuilder sb) throws IOException {
+		addEntry(name, sb.toString());
 	}
 
 	public void addEntry(String name, String s) throws IOException {

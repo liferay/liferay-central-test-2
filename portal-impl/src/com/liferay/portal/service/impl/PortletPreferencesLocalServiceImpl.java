@@ -25,7 +25,6 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.NoSuchPortletPreferencesException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
@@ -246,13 +245,13 @@ public class PortletPreferencesLocalServiceImpl
 	}
 
 	protected String encodeKey(long plid, String portletId) {
-		StringMaker sm = new StringMaker();
+		StringBuilder sb = new StringBuilder();
 
-		sm.append(plid);
-		sm.append(StringPool.POUND);
-		sm.append(portletId);
+		sb.append(plid);
+		sb.append(StringPool.POUND);
+		sb.append(portletId);
 
-		return sm.toString();
+		return sb.toString();
 	}
 
 }
