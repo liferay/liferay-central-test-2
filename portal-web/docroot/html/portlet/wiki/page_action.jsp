@@ -49,7 +49,7 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 			var="permissionsURL"
 		/>
 
-		<liferay-ui:icon image="permissions" message="permissions" url="<%= permissionsURL %>" />
+		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 	</c:if>
 
 	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) && WikiNodePermission.contains(permissionChecker, wikiPage.getNodeId(), ActionKeys.ADD_PAGE) %>">

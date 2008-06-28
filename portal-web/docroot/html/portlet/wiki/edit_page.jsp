@@ -52,9 +52,6 @@ String content = BeanParamUtil.getString(wikiPage, request, "content");
 String format = BeanParamUtil.getString(wikiPage, request, "format", WikiPageImpl.DEFAULT_FORMAT);
 String parentTitle = BeanParamUtil.getString(wikiPage, request, "parentTitle");
 
-long templateNodeId = ParamUtil.getLong(request, "templateNodeId");
-String templateTitle = ParamUtil.getString(request, "templateTitle");
-
 String[] attachments = new String[0];
 
 boolean preview = ParamUtil.getBoolean(request, "preview");
@@ -92,6 +89,9 @@ else if ((wikiPage == null) && editTitle) {
 	wikiPage.setParentTitle(parentTitle);
 }
 
+long templateNodeId = ParamUtil.getLong(request, "templateNodeId");
+String templateTitle = ParamUtil.getString(request, "templateTitle");
+
 WikiPage templatePage = null;
 
 if ((templateNodeId > 0) && Validator.isNotNull(templateTitle)) {
@@ -102,11 +102,11 @@ if ((templateNodeId > 0) && Validator.isNotNull(templateTitle)) {
 			parentTitle = templatePage.getParentTitle();
 
 			if (wikiPage.isNew()) {
-				wikiPage.setParentTitle(parentTitle);
-				wikiPage.setContent(templatePage.getContent());
-
 				format = templatePage.getFormat();
+
+				wikiPage.setContent(templatePage.getContent());
 				wikiPage.setFormat(format);
+				wikiPage.setParentTitle(parentTitle);
 			}
 		}
 	}

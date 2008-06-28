@@ -230,7 +230,7 @@ int count = 0;
 						var="permissionsURL"
 					/>
 
-					<liferay-ui:icon image="permissions" message="permissions" url="<%= permissionsURL %>" label="<%= true %>" />
+					<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" label="<%= true %>" />
 				</c:if>
 
 				<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) && WikiNodePermission.contains(permissionChecker, wikiPage.getNodeId(), ActionKeys.ADD_PAGE) %>">
@@ -254,12 +254,12 @@ int count = 0;
 					copyPageURL.setParameter("redirect", viewPageURL.toString());
 					copyPageURL.setParameter("nodeId", String.valueOf(wikiPage.getNodeId()));
 					copyPageURL.setParameter("title", StringPool.BLANK);
+					copyPageURL.setParameter("editTitle", "1");
 					copyPageURL.setParameter("templateNodeId", String.valueOf(wikiPage.getNodeId()));
 					copyPageURL.setParameter("templateTitle", wikiPage.getTitle());
-					copyPageURL.setParameter("editTitle", "1");
 					%>
 
-					<liferay-ui:icon image="copy" message="copy" url="<%= copyPageURL.toString() %>" label="<%= true %>" />
+					<liferay-ui:icon image="copy" url="<%= copyPageURL.toString() %>" label="<%= true %>" />
 				</c:if>
 
 				<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.DELETE) %>">
