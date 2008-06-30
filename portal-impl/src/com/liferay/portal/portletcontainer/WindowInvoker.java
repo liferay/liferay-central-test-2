@@ -359,7 +359,6 @@ public class WindowInvoker extends InvokerPortlet {
 
 	private WindowRequestReader _getWindowRequestReader() {
 		if (_remotePortlet) {
-			//return WSRPWindowRequestReader();
 			return null;
 		}
 		else {

@@ -68,7 +68,7 @@ public class PortletWindowRequestReader implements WindowRequestReader {
 	public PortletWindowRequestReader(boolean facesPortlet) {
 		_facesPortlet = facesPortlet;
 	}
-	
+
 	public String getCacheLevel(HttpServletRequest req) {
 		return req.getParameter("p_p_cacheability");
 	}
@@ -117,7 +117,6 @@ public class PortletWindowRequestReader implements WindowRequestReader {
 			}
 
 			if (key.startsWith(namespace) && !_facesPortlet) {
-
 				parameterMap.put(
 					key.substring(namespace.length()), mapEntry.getValue());
 
@@ -156,5 +155,5 @@ public class PortletWindowRequestReader implements WindowRequestReader {
 	}
 
 	private boolean _facesPortlet;
-	
+
 }
