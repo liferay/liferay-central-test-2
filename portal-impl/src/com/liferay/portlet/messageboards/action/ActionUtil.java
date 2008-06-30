@@ -48,30 +48,37 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionUtil {
 
-	public static void getCategory(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getCategory(ActionRequest actionRequest)
+		throws Exception {
 
-		getCategory(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		getCategory(request);
 	}
 
-	public static void getCategory(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getCategory(RenderRequest renderRequest)
+		throws Exception {
 
-		getCategory(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+
+		getCategory(request);
 	}
 
-	public static void getCategory(HttpServletRequest req) throws Exception {
+	public static void getCategory(HttpServletRequest request)
+		throws Exception {
 
 		// Add redundant check here because the JSP does not check permissions
 		// on the initial search container
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		MBBanLocalServiceUtil.checkBan(
 			themeDisplay.getPortletGroupId(), themeDisplay.getUserId());
 
-		long categoryId = ParamUtil.getLong(req, "categoryId");
+		long categoryId = ParamUtil.getLong(request, "categoryId");
 
 		MBCategory category = null;
 
@@ -81,23 +88,29 @@ public class ActionUtil {
 			category = MBCategoryServiceUtil.getCategory(categoryId);
 		}
 
-		req.setAttribute(WebKeys.MESSAGE_BOARDS_CATEGORY, category);
+		request.setAttribute(WebKeys.MESSAGE_BOARDS_CATEGORY, category);
 	}
 
-	public static void getMessage(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getMessage(ActionRequest actionRequest)
+		throws Exception {
 
-		getMessage(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		getMessage(request);
 	}
 
-	public static void getMessage(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getMessage(RenderRequest renderRequest)
+		throws Exception {
 
-		getMessage(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+
+		getMessage(request);
 	}
 
-	public static void getMessage(HttpServletRequest req) throws Exception {
-		long messageId = ParamUtil.getLong(req, "messageId");
+	public static void getMessage(HttpServletRequest request) throws Exception {
+		long messageId = ParamUtil.getLong(request, "messageId");
 
 		MBMessage message = null;
 
@@ -105,25 +118,31 @@ public class ActionUtil {
 			message = MBMessageServiceUtil.getMessage(messageId);
 		}
 
-		req.setAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE, message);
+		request.setAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE, message);
 	}
 
-	public static void getThreadMessage(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-
-		getThreadMessage(httpReq);
-	}
-
-	public static void getThreadMessage(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-
-		getThreadMessage(httpReq);
-	}
-
-	public static void getThreadMessage(HttpServletRequest req)
+	public static void getThreadMessage(ActionRequest actionRequest)
 		throws Exception {
 
-		long threadId = ParamUtil.getLong(req, "threadId");
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		getThreadMessage(request);
+	}
+
+	public static void getThreadMessage(RenderRequest renderRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+
+		getThreadMessage(request);
+	}
+
+	public static void getThreadMessage(HttpServletRequest request)
+		throws Exception {
+
+		long threadId = ParamUtil.getLong(request, "threadId");
 
 		MBMessage message = null;
 
@@ -134,7 +153,7 @@ public class ActionUtil {
 				thread.getRootMessageId());
 		}
 
-		req.setAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE, message);
+		request.setAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE, message);
 	}
 
 }

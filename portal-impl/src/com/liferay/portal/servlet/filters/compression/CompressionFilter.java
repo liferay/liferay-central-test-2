@@ -68,8 +68,8 @@ public class CompressionFilter extends BasePortalFilter {
 		}
 	}
 
-	protected boolean isAlreadyFiltered(HttpServletRequest req) {
-		if (req.getAttribute(SKIP_FILTER) != null) {
+	protected boolean isAlreadyFiltered(HttpServletRequest request) {
+		if (request.getAttribute(SKIP_FILTER) != null) {
 			return true;
 		}
 		else {
@@ -77,8 +77,8 @@ public class CompressionFilter extends BasePortalFilter {
 		}
 	}
 
-	protected boolean isCompress(HttpServletRequest req) {
-		if (!ParamUtil.get(req, _COMPRESS, true)) {
+	protected boolean isCompress(HttpServletRequest request) {
+		if (!ParamUtil.get(request, _COMPRESS, true)) {
 			return false;
 		}
 		else {
@@ -88,7 +88,7 @@ public class CompressionFilter extends BasePortalFilter {
 			// performance because the user will not start downloading the
 			// content until the entire content is compressed.
 
-			String windowState = ParamUtil.getString(req, "p_p_state");
+			String windowState = ParamUtil.getString(request, "p_p_state");
 
 			if (windowState.equals("exclusive")) {
 				return false;
@@ -103,8 +103,8 @@ public class CompressionFilter extends BasePortalFilter {
 		return _filterEnabled;
 	}
 
-	protected boolean isInclude(HttpServletRequest req) {
-		String uri = (String)req.getAttribute(
+	protected boolean isInclude(HttpServletRequest request) {
+		String uri = (String)request.getAttribute(
 			JavaConstants.JAVAX_SERVLET_INCLUDE_REQUEST_URI);
 
 		if (uri == null) {

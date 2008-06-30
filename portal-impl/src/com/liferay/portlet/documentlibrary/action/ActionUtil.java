@@ -48,22 +48,30 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionUtil {
 
-	public static void getFileEntry(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getFileEntry(ActionRequest actionRequest)
+		throws Exception {
 
-		getFileEntry(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		getFileEntry(request);
 	}
 
-	public static void getFileEntry(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getFileEntry(RenderRequest renderRequest)
+		throws Exception {
 
-		getFileEntry(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+
+		getFileEntry(request);
 	}
 
-	public static void getFileEntry(HttpServletRequest req) throws Exception {
-		long folderId = ParamUtil.getLong(req, "folderId");
-		long newFolderId = ParamUtil.getLong(req, "newFolderId");
-		String name = ParamUtil.getString(req, "name");
+	public static void getFileEntry(HttpServletRequest request)
+		throws Exception {
+
+		long folderId = ParamUtil.getLong(request, "folderId");
+		long newFolderId = ParamUtil.getLong(request, "newFolderId");
+		String name = ParamUtil.getString(request, "name");
 
 		DLFileEntry fileEntry = null;
 
@@ -81,25 +89,31 @@ public class ActionUtil {
 			}
 		}
 
-		req.setAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY, fileEntry);
+		request.setAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY, fileEntry);
 	}
 
-	public static void getFileShortcut(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-
-		getFileShortcut(httpReq);
-	}
-
-	public static void getFileShortcut(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-
-		getFileShortcut(httpReq);
-	}
-
-	public static void getFileShortcut(HttpServletRequest req)
+	public static void getFileShortcut(ActionRequest actionRequest)
 		throws Exception {
 
-		long fileShortcutId = ParamUtil.getLong(req, "fileShortcutId");
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		getFileShortcut(request);
+	}
+
+	public static void getFileShortcut(RenderRequest renderRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+
+		getFileShortcut(request);
+	}
+
+	public static void getFileShortcut(HttpServletRequest request)
+		throws Exception {
+
+		long fileShortcutId = ParamUtil.getLong(request, "fileShortcutId");
 
 		DLFileShortcut fileShortcut = null;
 
@@ -108,23 +122,26 @@ public class ActionUtil {
 				fileShortcutId);
 		}
 
-		req.setAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_SHORTCUT, fileShortcut);
+		request.setAttribute(
+			WebKeys.DOCUMENT_LIBRARY_FILE_SHORTCUT, fileShortcut);
 	}
 
-	public static void getFolder(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getFolder(ActionRequest actionRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
 
-		getFolder(httpReq);
+		getFolder(request);
 	}
 
-	public static void getFolder(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getFolder(RenderRequest renderRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
 
-		getFolder(httpReq);
+		getFolder(request);
 	}
 
-	public static void getFolder(HttpServletRequest req) throws Exception {
-		long folderId = ParamUtil.getLong(req, "folderId");
+	public static void getFolder(HttpServletRequest request) throws Exception {
+		long folderId = ParamUtil.getLong(request, "folderId");
 
 		DLFolder folder = null;
 
@@ -134,7 +151,7 @@ public class ActionUtil {
 			folder = DLFolderServiceUtil.getFolder(folderId);
 		}
 
-		req.setAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER, folder);
+		request.setAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER, folder);
 	}
 
 }

@@ -50,26 +50,28 @@ import org.apache.commons.logging.LogFactory;
  */
 public class CaptchaUtil {
 
-	public static void check(HttpServletRequest req)
+	public static void check(HttpServletRequest request)
 		throws CaptchaTextException {
 
-		_instance._check(req);
+		_instance._check(request);
 	}
 
-	public static void check(PortletRequest req) throws CaptchaTextException {
-		_instance._check(req);
+	public static void check(PortletRequest portletRequest)
+		throws CaptchaTextException {
+
+		_instance._check(portletRequest);
 	}
 
 	public static CaptchaProducer getCaptchaProducer() {
 		return _instance._getCaptchaProducer();
 	}
 
-	public static boolean isEnabled(HttpServletRequest req) {
-		return _instance._isEnabled(req);
+	public static boolean isEnabled(HttpServletRequest request) {
+		return _instance._isEnabled(request);
 	}
 
-	public static boolean isEnabled(PortletRequest req) {
-		return _instance._isEnabled(req);
+	public static boolean isEnabled(PortletRequest portletRequest) {
+		return _instance._isEnabled(portletRequest);
 	}
 
 	private CaptchaUtil() {
@@ -79,26 +81,28 @@ public class CaptchaUtil {
 			Helper.ThingFactory.CPROD, _configuration.getProperties());
 	}
 
-	private void _check(HttpServletRequest req) throws CaptchaTextException {
-		if (!_isEnabled(req)) {
+	private void _check(HttpServletRequest request)
+		throws CaptchaTextException {
+
+		if (!_isEnabled(request)) {
 			return;
 		}
 
-		HttpSession ses = req.getSession();
+		HttpSession ses = request.getSession();
 
 		String captchaText = (String)ses.getAttribute(WebKeys.CAPTCHA_TEXT);
 
 		if (captchaText == null) {
 			if (_log.isErrorEnabled()) {
 				_log.error(
-					"Captcha text is null. User " + req.getRemoteUser() +
+					"Captcha text is null. User " + request.getRemoteUser() +
 						" may be trying to circumvent the captcha.");
 			}
 
 			throw new CaptchaTextException();
 		}
 
-		if (!captchaText.equals(ParamUtil.getString(req, "captchaText"))) {
+		if (!captchaText.equals(ParamUtil.getString(request, "captchaText"))) {
 			throw new CaptchaTextException();
 		}
 
@@ -109,7 +113,7 @@ public class CaptchaUtil {
 		ses.removeAttribute(WebKeys.CAPTCHA_TEXT);
 
 		if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
-			(Validator.isNotNull(req.getRemoteUser()))) {
+			(Validator.isNotNull(request.getRemoteUser()))) {
 
 			Integer count = (Integer)ses.getAttribute(WebKeys.CAPTCHA_COUNT);
 
@@ -124,26 +128,32 @@ public class CaptchaUtil {
 		}
 	}
 
-	private void _check(PortletRequest req) throws CaptchaTextException {
-		if (!_isEnabled(req)) {
+	private void _check(PortletRequest portletRequest)
+		throws CaptchaTextException {
+
+		if (!_isEnabled(portletRequest)) {
 			return;
 		}
 
-		PortletSession ses = req.getPortletSession();
+		PortletSession portletSession = portletRequest.getPortletSession();
 
-		String captchaText = (String)ses.getAttribute(WebKeys.CAPTCHA_TEXT);
+		String captchaText = (String)portletSession.getAttribute(
+			WebKeys.CAPTCHA_TEXT);
 
 		if (captchaText == null) {
 			if (_log.isErrorEnabled()) {
 				_log.error(
-					"Captcha text is null. User " + req.getRemoteUser() +
-						" may be trying to circumvent the captcha.");
+					"Captcha text is null. User " +
+						portletRequest.getRemoteUser() +
+							" may be trying to circumvent the captcha.");
 			}
 
 			throw new CaptchaTextException();
 		}
 
-		if (!captchaText.equals(ParamUtil.getString(req, "captchaText"))) {
+		if (!captchaText.equals(
+				ParamUtil.getString(portletRequest, "captchaText"))) {
+
 			throw new CaptchaTextException();
 		}
 
@@ -151,12 +161,13 @@ public class CaptchaUtil {
 			_log.debug("Captcha text is valid");
 		}
 
-		ses.removeAttribute(WebKeys.CAPTCHA_TEXT);
+		portletSession.removeAttribute(WebKeys.CAPTCHA_TEXT);
 
 		if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
-			(Validator.isNotNull(req.getRemoteUser()))) {
+			(Validator.isNotNull(portletRequest.getRemoteUser()))) {
 
-			Integer count = (Integer)ses.getAttribute(WebKeys.CAPTCHA_COUNT);
+			Integer count = (Integer)portletSession.getAttribute(
+				WebKeys.CAPTCHA_COUNT);
 
 			if (count == null) {
 				count = new Integer(1);
@@ -165,7 +176,7 @@ public class CaptchaUtil {
 				count = new Integer(count.intValue() + 1);
 			}
 
-			ses.setAttribute(WebKeys.CAPTCHA_COUNT, count);
+			portletSession.setAttribute(WebKeys.CAPTCHA_COUNT, count);
 		}
 	}
 
@@ -173,11 +184,12 @@ public class CaptchaUtil {
 		return _captchaProducer;
 	}
 
-	private boolean _isEnabled(HttpServletRequest req) {
+	private boolean _isEnabled(HttpServletRequest request) {
 		if (PropsValues.CAPTCHA_MAX_CHALLENGES > 0) {
-			HttpSession ses = req.getSession();
+			HttpSession session = request.getSession();
 
-			Integer count = (Integer)ses.getAttribute(WebKeys.CAPTCHA_COUNT);
+			Integer count = (Integer)session.getAttribute(
+				WebKeys.CAPTCHA_COUNT);
 
 			if ((count != null) &&
 				(PropsValues.CAPTCHA_MAX_CHALLENGES <= count.intValue())) {
@@ -196,11 +208,12 @@ public class CaptchaUtil {
 		}
 	}
 
-	private boolean _isEnabled(PortletRequest req) {
+	private boolean _isEnabled(PortletRequest portletRequest) {
 		if (PropsValues.CAPTCHA_MAX_CHALLENGES > 0) {
-			PortletSession ses = req.getPortletSession();
+			PortletSession portletSession = portletRequest.getPortletSession();
 
-			Integer count = (Integer)ses.getAttribute(WebKeys.CAPTCHA_COUNT);
+			Integer count = (Integer)portletSession.getAttribute(
+				WebKeys.CAPTCHA_COUNT);
 
 			if ((count != null) &&
 				(PropsValues.CAPTCHA_MAX_CHALLENGES <= count.intValue())) {

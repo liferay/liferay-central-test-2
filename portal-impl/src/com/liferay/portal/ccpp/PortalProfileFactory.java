@@ -38,7 +38,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class PortalProfileFactory {
 
-	public static Profile getCCPPProfile(HttpServletRequest req) {
+	public static Profile getCCPPProfile(HttpServletRequest request) {
 		ProfileFactory profileFactory = ProfileFactory.getInstance();
 
 		if (profileFactory == null) {
@@ -48,7 +48,7 @@ public class PortalProfileFactory {
 		}
 
 		Profile profile = profileFactory.newProfile(
-			req, ValidationMode.VALIDATIONMODE_NONE);
+			request, ValidationMode.VALIDATIONMODE_NONE);
 
 		if (profile == null) {
 			profile = _EMPTY_PROFILE;

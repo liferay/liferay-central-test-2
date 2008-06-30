@@ -49,20 +49,28 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionUtil {
 
-	public static void getCategory(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getCategory(ActionRequest actionRequest)
+		throws Exception {
 
-		getCategory(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		getCategory(request);
 	}
 
-	public static void getCategory(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getCategory(RenderRequest renderRequest)
+		throws Exception {
 
-		getCategory(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+
+		getCategory(request);
 	}
 
-	public static void getCategory(HttpServletRequest req) throws Exception {
-		long categoryId = ParamUtil.getLong(req, "categoryId");
+	public static void getCategory(HttpServletRequest request)
+		throws Exception {
+
+		long categoryId = ParamUtil.getLong(request, "categoryId");
 
 		ShoppingCategory category = null;
 
@@ -72,26 +80,28 @@ public class ActionUtil {
 			category = ShoppingCategoryServiceUtil.getCategory(categoryId);
 		}
 
-		req.setAttribute(WebKeys.SHOPPING_CATEGORY, category);
+		request.setAttribute(WebKeys.SHOPPING_CATEGORY, category);
 	}
 
-	public static void getCoupon(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getCoupon(ActionRequest actionRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
 
-		getCoupon(httpReq);
+		getCoupon(request);
 	}
 
-	public static void getCoupon(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getCoupon(RenderRequest renderRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
 
-		getCoupon(httpReq);
+		getCoupon(request);
 	}
 
-	public static void getCoupon(HttpServletRequest req) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+	public static void getCoupon(HttpServletRequest request) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long couponId = ParamUtil.getLong(req, "couponId");
+		long couponId = ParamUtil.getLong(request, "couponId");
 
 		ShoppingCoupon coupon = null;
 
@@ -100,23 +110,25 @@ public class ActionUtil {
 				themeDisplay.getPlid(), couponId);
 		}
 
-		req.setAttribute(WebKeys.SHOPPING_COUPON, coupon);
+		request.setAttribute(WebKeys.SHOPPING_COUPON, coupon);
 	}
 
-	public static void getItem(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getItem(ActionRequest actionRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
 
-		getItem(httpReq);
+		getItem(request);
 	}
 
-	public static void getItem(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getItem(RenderRequest renderRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
 
-		getItem(httpReq);
+		getItem(request);
 	}
 
-	public static void getItem(HttpServletRequest req) throws Exception {
-		long itemId = ParamUtil.getLong(req, "itemId");
+	public static void getItem(HttpServletRequest request) throws Exception {
+		long itemId = ParamUtil.getLong(request, "itemId");
 
 		ShoppingItem item = null;
 
@@ -124,26 +136,28 @@ public class ActionUtil {
 			item = ShoppingItemServiceUtil.getItem(itemId);
 		}
 
-		req.setAttribute(WebKeys.SHOPPING_ITEM, item);
+		request.setAttribute(WebKeys.SHOPPING_ITEM, item);
 	}
 
-	public static void getOrder(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getOrder(ActionRequest actionRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
 
-		getOrder(httpReq);
+		getOrder(request);
 	}
 
-	public static void getOrder(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getOrder(RenderRequest renderRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
 
-		getOrder(httpReq);
+		getOrder(request);
 	}
 
-	public static void getOrder(HttpServletRequest req) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+	public static void getOrder(HttpServletRequest request) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long orderId = ParamUtil.getLong(req, "orderId");
+		long orderId = ParamUtil.getLong(request, "orderId");
 
 		ShoppingOrder order = null;
 
@@ -152,7 +166,7 @@ public class ActionUtil {
 				themeDisplay.getPlid(), orderId);
 		}
 
-		req.setAttribute(WebKeys.SHOPPING_ORDER, order);
+		request.setAttribute(WebKeys.SHOPPING_ORDER, order);
 	}
 
 }

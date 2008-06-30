@@ -540,20 +540,22 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 	}
 
-	public String getRegularURL(HttpServletRequest req) throws SystemException {
-		return _getURL(req, false, false);
-	}
-
-	public String getResetMaxStateURL(HttpServletRequest req)
+	public String getRegularURL(HttpServletRequest request)
 		throws SystemException {
 
-		return _getURL(req, true, false);
+		return _getURL(request, false, false);
 	}
 
-	public String getResetLayoutURL(HttpServletRequest req)
+	public String getResetMaxStateURL(HttpServletRequest request)
 		throws SystemException {
 
-		return _getURL(req, true, true);
+		return _getURL(request, true, false);
+	}
+
+	public String getResetLayoutURL(HttpServletRequest request)
+		throws SystemException {
+
+		return _getURL(request, true, true);
 	}
 
 	public String getTarget() {
@@ -575,7 +577,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	}
 
 	private LayoutTypePortlet _getLayoutTypePortletClone(
-			HttpServletRequest req)
+			HttpServletRequest request)
 		throws IOException {
 
 		LayoutTypePortlet layoutTypePortlet = null;
@@ -583,7 +585,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		LayoutClone layoutClone = LayoutCloneFactory.getInstance();
 
 		if (layoutClone != null) {
-			String typeSettings = layoutClone.get(req, getPlid());
+			String typeSettings = layoutClone.get(request, getPlid());
 
 			if (typeSettings != null) {
 				Properties props = new SafeProperties();

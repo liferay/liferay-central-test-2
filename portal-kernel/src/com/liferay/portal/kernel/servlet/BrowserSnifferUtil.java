@@ -36,84 +36,84 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class BrowserSnifferUtil {
 
-	public static boolean acceptsGzip(HttpServletRequest req) {
-		return getBrowserSniffer().acceptsGzip(req);
+	public static boolean acceptsGzip(HttpServletRequest request) {
+		return getBrowserSniffer().acceptsGzip(request);
 	}
 
 	public static BrowserSniffer getBrowserSniffer() {
 		return _getUtil()._browserSniffer;
 	}
 
-	public static boolean is_ie(HttpServletRequest req) {
-		return getBrowserSniffer().is_ie(req);
+	public static boolean is_ie(HttpServletRequest request) {
+		return getBrowserSniffer().is_ie(request);
 	}
 
-	public static boolean is_ie_4(HttpServletRequest req) {
-		return getBrowserSniffer().is_ie_4(req);
+	public static boolean is_ie_4(HttpServletRequest request) {
+		return getBrowserSniffer().is_ie_4(request);
 	}
 
-	public static boolean is_ie_5(HttpServletRequest req) {
-		return getBrowserSniffer().is_ie_5(req);
+	public static boolean is_ie_5(HttpServletRequest request) {
+		return getBrowserSniffer().is_ie_5(request);
 	}
 
-	public static boolean is_ie_5_5(HttpServletRequest req) {
-		return getBrowserSniffer().is_ie_5_5(req);
+	public static boolean is_ie_5_5(HttpServletRequest request) {
+		return getBrowserSniffer().is_ie_5_5(request);
 	}
 
-	public static boolean is_ie_5_5_up(HttpServletRequest req) {
-		return getBrowserSniffer().is_ie_5_5_up(req);
+	public static boolean is_ie_5_5_up(HttpServletRequest request) {
+		return getBrowserSniffer().is_ie_5_5_up(request);
 	}
 
-	public static boolean is_ie_6(HttpServletRequest req) {
-		return getBrowserSniffer().is_ie_6(req);
+	public static boolean is_ie_6(HttpServletRequest request) {
+		return getBrowserSniffer().is_ie_6(request);
 	}
 
-	public static boolean is_ie_7(HttpServletRequest req) {
-		return getBrowserSniffer().is_ie_7(req);
+	public static boolean is_ie_7(HttpServletRequest request) {
+		return getBrowserSniffer().is_ie_7(request);
 	}
 
-	public static boolean is_linux(HttpServletRequest req) {
-		return getBrowserSniffer().is_linux(req);
+	public static boolean is_linux(HttpServletRequest request) {
+		return getBrowserSniffer().is_linux(request);
 	}
 
-	public static boolean is_mozilla(HttpServletRequest req) {
-		return getBrowserSniffer().is_mozilla(req);
+	public static boolean is_mozilla(HttpServletRequest request) {
+		return getBrowserSniffer().is_mozilla(request);
 	}
 
-	public static boolean is_mozilla_1_3_up(HttpServletRequest req) {
-		return getBrowserSniffer().is_mozilla_1_3_up(req);
+	public static boolean is_mozilla_1_3_up(HttpServletRequest request) {
+		return getBrowserSniffer().is_mozilla_1_3_up(request);
 	}
 
-	public static boolean is_ns_4(HttpServletRequest req) {
-		return getBrowserSniffer().is_ns_4(req);
+	public static boolean is_ns_4(HttpServletRequest request) {
+		return getBrowserSniffer().is_ns_4(request);
 	}
 
-	public static boolean is_rtf(HttpServletRequest req) {
-		return getBrowserSniffer().is_rtf(req);
+	public static boolean is_rtf(HttpServletRequest request) {
+		return getBrowserSniffer().is_rtf(request);
 	}
 
-	public static boolean is_safari(HttpServletRequest req) {
-		return getBrowserSniffer().is_safari(req);
+	public static boolean is_safari(HttpServletRequest request) {
+		return getBrowserSniffer().is_safari(request);
 	}
 
-	public static boolean is_safari_3(HttpServletRequest req) {
-		return getBrowserSniffer().is_safari_3(req);
+	public static boolean is_safari_3(HttpServletRequest request) {
+		return getBrowserSniffer().is_safari_3(request);
 	}
 
-	public static boolean is_safari_mobile(HttpServletRequest req) {
-		return getBrowserSniffer().is_safari_mobile(req);
+	public static boolean is_safari_mobile(HttpServletRequest request) {
+		return getBrowserSniffer().is_safari_mobile(request);
 	}
 
-	public static boolean is_wap(HttpServletRequest req) {
-		return getBrowserSniffer().is_wap(req);
+	public static boolean is_wap(HttpServletRequest request) {
+		return getBrowserSniffer().is_wap(request);
 	}
 
-	public static boolean is_wap_xhtml(HttpServletRequest req) {
-		return getBrowserSniffer().is_wap_xhtml(req);
+	public static boolean is_wap_xhtml(HttpServletRequest request) {
+		return getBrowserSniffer().is_wap_xhtml(request);
 	}
 
-	public static boolean is_wml(HttpServletRequest req) {
-		return getBrowserSniffer().is_wml(req);
+	public static boolean is_wml(HttpServletRequest request) {
+		return getBrowserSniffer().is_wml(request);
 	}
 
 	public void setBrowserSniffer(BrowserSniffer browserSniffer) {

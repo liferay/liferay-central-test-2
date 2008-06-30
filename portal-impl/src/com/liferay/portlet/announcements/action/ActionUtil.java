@@ -41,20 +41,22 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionUtil {
 
-	public static void getEntry(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getEntry(ActionRequest actionRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
 
-		getEntry(httpReq);
+		getEntry(request);
 	}
 
-	public static void getEntry(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getEntry(RenderRequest renderRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
 
-		getEntry(httpReq);
+		getEntry(request);
 	}
 
-	public static void getEntry(HttpServletRequest req) throws Exception {
-		long entryId = ParamUtil.getLong(req, "entryId");
+	public static void getEntry(HttpServletRequest request) throws Exception {
+		long entryId = ParamUtil.getLong(request, "entryId");
 
 		AnnouncementsEntry entry = null;
 
@@ -62,7 +64,7 @@ public class ActionUtil {
 			entry = AnnouncementsEntryLocalServiceUtil.getEntry(entryId);
 		}
 
-		req.setAttribute(WebKeys.ANNOUNCEMENTS_ENTRY, entry);
+		request.setAttribute(WebKeys.ANNOUNCEMENTS_ENTRY, entry);
 	}
 
 }

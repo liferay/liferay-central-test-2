@@ -91,10 +91,13 @@ public class SecureFilter extends BasePortalFilter {
 		}
 	}
 
-	protected long getBasicAuthUserId(HttpServletRequest req) throws Exception {
+	protected long getBasicAuthUserId(HttpServletRequest request)
+		throws Exception {
+
 		long userId = 0;
 
-		String authorizationHeader = req.getHeader(HttpHeaders.AUTHORIZATION);
+		String authorizationHeader = request.getHeader(
+			HttpHeaders.AUTHORIZATION);
 
 		if (Validator.isNull(authorizationHeader)) {
 			return userId;
@@ -109,7 +112,7 @@ public class SecureFilter extends BasePortalFilter {
 			return userId;
 		}
 
-		long companyId = PortalInstances.getCompanyId(req);
+		long companyId = PortalInstances.getCompanyId(request);
 
 		String[] loginAndPassword = StringUtil.split(
 			credentials, StringPool.COLON);
@@ -152,9 +155,9 @@ public class SecureFilter extends BasePortalFilter {
 		return userId;
 	}
 
-	protected boolean isAccessAllowed(HttpServletRequest req) {
-		String remoteAddr = req.getRemoteAddr();
-		String serverIp = req.getServerName();
+	protected boolean isAccessAllowed(HttpServletRequest request) {
+		String remoteAddr = request.getRemoteAddr();
+		String serverIp = request.getServerName();
 
 		if ((_hostsAllowed.size() > 0) &&
 			(!_hostsAllowed.contains(remoteAddr))) {

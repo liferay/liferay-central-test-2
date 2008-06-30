@@ -43,10 +43,10 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MethodFactory {
 
-	public static Method create(HttpServletRequest req)
+	public static Method create(HttpServletRequest request)
 		throws WebDAVException {
 
-		return _instance._create(req);
+		return _instance._create(request);
 	}
 
 	private MethodFactory() {
@@ -68,8 +68,8 @@ public class MethodFactory {
 		_methods.put("PUT", InstancePool.get(_PUT_METHOD_IMPL));
 	}
 
-	private Method _create(HttpServletRequest req) throws WebDAVException {
-		String method = req.getMethod();
+	private Method _create(HttpServletRequest request) throws WebDAVException {
+		String method = request.getMethod();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Get method " + method);

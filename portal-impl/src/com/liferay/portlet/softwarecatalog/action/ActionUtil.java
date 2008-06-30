@@ -47,22 +47,29 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionUtil {
 
-	public static void getFrameworkVersion(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-
-		getFrameworkVersion(httpReq);
-	}
-
-	public static void getFrameworkVersion(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-
-		getFrameworkVersion(httpReq);
-	}
-
-	public static void getFrameworkVersion(HttpServletRequest req)
+	public static void getFrameworkVersion(ActionRequest actionRequest)
 		throws Exception {
 
-		long frameworkVersionId = ParamUtil.getLong(req, "frameworkVersionId");
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		getFrameworkVersion(request);
+	}
+
+	public static void getFrameworkVersion(RenderRequest renderRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+
+		getFrameworkVersion(request);
+	}
+
+	public static void getFrameworkVersion(HttpServletRequest request)
+		throws Exception {
+
+		long frameworkVersionId = ParamUtil.getLong(
+			request, "frameworkVersionId");
 
 		SCFrameworkVersion frameworkVersion = null;
 
@@ -72,24 +79,30 @@ public class ActionUtil {
 					frameworkVersionId);
 		}
 
-		req.setAttribute(
+		request.setAttribute(
 			WebKeys.SOFTWARE_CATALOG_FRAMEWORK_VERSION, frameworkVersion);
 	}
 
-	public static void getLicense(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getLicense(ActionRequest actionRequest)
+		throws Exception {
 
-		getLicense(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		getLicense(request);
 	}
 
-	public static void getLicense(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getLicense(RenderRequest renderRequest)
+		throws Exception {
 
-		getLicense(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+
+		getLicense(request);
 	}
 
-	public static void getLicense(HttpServletRequest req) throws Exception {
-		long licenseId = ParamUtil.getLong(req, "licenseId");
+	public static void getLicense(HttpServletRequest request) throws Exception {
+		long licenseId = ParamUtil.getLong(request, "licenseId");
 
 		SCLicense license = null;
 
@@ -97,25 +110,31 @@ public class ActionUtil {
 			license = SCLicenseServiceUtil.getLicense(licenseId);
 		}
 
-		req.setAttribute(WebKeys.SOFTWARE_CATALOG_LICENSE, license);
+		request.setAttribute(WebKeys.SOFTWARE_CATALOG_LICENSE, license);
 	}
 
-	public static void getProductEntry(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-
-		getProductEntry(httpReq);
-	}
-
-	public static void getProductEntry(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-
-		getProductEntry(httpReq);
-	}
-
-	public static void getProductEntry(HttpServletRequest req)
+	public static void getProductEntry(ActionRequest actionRequest)
 		throws Exception {
 
-		long productEntryId = ParamUtil.getLong(req, "productEntryId");
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		getProductEntry(request);
+	}
+
+	public static void getProductEntry(RenderRequest renderRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+
+		getProductEntry(request);
+	}
+
+	public static void getProductEntry(HttpServletRequest request)
+		throws Exception {
+
+		long productEntryId = ParamUtil.getLong(request, "productEntryId");
 
 		SCProductEntry productEntry = null;
 
@@ -124,28 +143,34 @@ public class ActionUtil {
 				productEntryId);
 		}
 
-		req.setAttribute(
+		request.setAttribute(
 			WebKeys.SOFTWARE_CATALOG_PRODUCT_ENTRY, productEntry);
 	}
 
-	public static void getProductVersion(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-
-		getProductVersion(httpReq);
-	}
-
-	public static void getProductVersion(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-
-		getProductVersion(httpReq);
-	}
-
-	public static void getProductVersion(HttpServletRequest req)
+	public static void getProductVersion(ActionRequest actionRequest)
 		throws Exception {
 
-		long productVersionId = ParamUtil.getLong(req, "productVersionId");
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		getProductVersion(request);
+	}
+
+	public static void getProductVersion(RenderRequest renderRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+
+		getProductVersion(request);
+	}
+
+	public static void getProductVersion(HttpServletRequest request)
+		throws Exception {
+
+		long productVersionId = ParamUtil.getLong(request, "productVersionId");
 		long copyProductVersionId = ParamUtil.getLong(
-			req, "copyProductVersionId");
+			request, "copyProductVersionId");
 
 		SCProductVersion productVersion = null;
 		SCProductEntry productEntry = null;
@@ -157,10 +182,10 @@ public class ActionUtil {
 			productEntry = SCProductEntryServiceUtil.getProductEntry(
 				productVersion.getProductEntryId());
 
-			req.setAttribute(
+			request.setAttribute(
 				WebKeys.SOFTWARE_CATALOG_PRODUCT_VERSION, productVersion);
 
-			req.setAttribute(
+			request.setAttribute(
 				WebKeys.SOFTWARE_CATALOG_PRODUCT_ENTRY, productEntry);
 		}
 		else if (copyProductVersionId > 0) {
@@ -170,14 +195,14 @@ public class ActionUtil {
 			productEntry = SCProductEntryServiceUtil.getProductEntry(
 				productVersion.getProductEntryId());
 
-			req.setAttribute(
+			request.setAttribute(
 				WebKeys.SOFTWARE_CATALOG_PRODUCT_VERSION, productVersion);
 
-			req.setAttribute(
+			request.setAttribute(
 				WebKeys.SOFTWARE_CATALOG_PRODUCT_ENTRY, productEntry);
 		}
 		else {
-			getProductEntry(req);
+			getProductEntry(request);
 		}
 	}
 

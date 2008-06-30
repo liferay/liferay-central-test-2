@@ -42,16 +42,16 @@ public class DisplayTerms {
 
 	public static final String AND_OPERATOR = "andOperator";
 
-	public DisplayTerms(HttpServletRequest req) {
-		keywords = ParamUtil.getString(req, KEYWORDS);
-		advancedSearch = ParamUtil.getBoolean(req, ADVANCED_SEARCH);
-		andOperator = ParamUtil.getBoolean(req, AND_OPERATOR, true);
+	public DisplayTerms(HttpServletRequest request) {
+		keywords = ParamUtil.getString(request, KEYWORDS);
+		advancedSearch = ParamUtil.getBoolean(request, ADVANCED_SEARCH);
+		andOperator = ParamUtil.getBoolean(request, AND_OPERATOR, true);
 	}
 
-	public DisplayTerms(RenderRequest req) {
-		keywords = ParamUtil.getString(req, KEYWORDS);
-		advancedSearch = ParamUtil.getBoolean(req, ADVANCED_SEARCH);
-		andOperator = ParamUtil.getBoolean(req, AND_OPERATOR, true);
+	public DisplayTerms(RenderRequest renderRequest) {
+		keywords = ParamUtil.getString(renderRequest, KEYWORDS);
+		advancedSearch = ParamUtil.getBoolean(renderRequest, ADVANCED_SEARCH);
+		andOperator = ParamUtil.getBoolean(renderRequest, AND_OPERATOR, true);
 	}
 
 	public String getKeywords() {

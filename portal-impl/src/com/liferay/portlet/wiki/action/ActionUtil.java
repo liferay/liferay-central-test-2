@@ -48,24 +48,26 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionUtil {
 
-	public static void getNode(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getNode(ActionRequest actionRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
 
-		getNode(httpReq);
+		getNode(request);
 	}
 
-	public static void getNode(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getNode(RenderRequest renderRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
 
-		getNode(httpReq);
+		getNode(request);
 	}
 
-	public static void getNode(HttpServletRequest req) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+	public static void getNode(HttpServletRequest request) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long nodeId = ParamUtil.getLong(req, "nodeId");
-		String nodeName = ParamUtil.getString(req, "nodeName");
+		long nodeId = ParamUtil.getLong(request, "nodeId");
+		String nodeName = ParamUtil.getString(request, "nodeName");
 
 		WikiNode node = null;
 
@@ -77,28 +79,30 @@ public class ActionUtil {
 				themeDisplay.getPortletGroupId(), nodeName);
 		}
 
-		req.setAttribute(WebKeys.WIKI_NODE, node);
+		request.setAttribute(WebKeys.WIKI_NODE, node);
 	}
 
-	public static void getPage(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getPage(ActionRequest actionRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
 
-		getPage(httpReq);
+		getPage(request);
 	}
 
-	public static void getPage(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getPage(RenderRequest renderRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
 
-		getPage(httpReq);
+		getPage(request);
 	}
 
-	public static void getPage(HttpServletRequest req) throws Exception {
-		long nodeId = ParamUtil.getLong(req, "nodeId");
-		String title = ParamUtil.getString(req, "title");
-		double version = ParamUtil.getDouble(req, "version");
+	public static void getPage(HttpServletRequest request) throws Exception {
+		long nodeId = ParamUtil.getLong(request, "nodeId");
+		String title = ParamUtil.getString(request, "title");
+		double version = ParamUtil.getDouble(request, "version");
 
 		if (nodeId == 0) {
-			WikiNode node = (WikiNode)req.getAttribute(WebKeys.WIKI_NODE);
+			WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 
 			if (node != null) {
 				nodeId = node.getNodeId();
@@ -124,7 +128,7 @@ public class ActionUtil {
 			}
 		}
 
-		req.setAttribute(WebKeys.WIKI_PAGE, page);
+		request.setAttribute(WebKeys.WIKI_PAGE, page);
 	}
 
 }

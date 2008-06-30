@@ -98,14 +98,16 @@ public class LiveUsers {
 		_instance._leaveGroup(userIds, groupId);
 	}
 
-	public static void signIn(HttpServletRequest req) throws SystemException {
-		_instance._signIn(req);
-	}
-
-	public static void signOut(String sesId, long userId)
+	public static void signIn(HttpServletRequest request)
 		throws SystemException {
 
-		_instance._signOut(sesId, userId);
+		_instance._signIn(request);
+	}
+
+	public static void signOut(String sessionId, long userId)
+		throws SystemException {
+
+		_instance._signOut(sessionId, userId);
 	}
 
 	private LiveUsers() {
@@ -183,10 +185,10 @@ public class LiveUsers {
 		return sessionUsers;
 	}
 
-	private UserTracker _getUserTracker(String sesId) {
+	private UserTracker _getUserTracker(String sessionId) {
 		Map<String, UserTracker> sessionUsers = _getSessionUsers();
 
-		return sessionUsers.get(sesId);
+		return sessionUsers.get(sessionId);
 	}
 
 	private List<UserTracker> _getUserTrackers(long userId) {
@@ -278,11 +280,11 @@ public class LiveUsers {
 		}
 	}
 
-	private void _signIn(HttpServletRequest req) throws SystemException {
-		HttpSession ses = req.getSession();
+	private void _signIn(HttpServletRequest request) throws SystemException {
+		HttpSession session = request.getSession();
 
 		long companyId = CompanyThreadLocal.getCompanyId();
-		long userId = GetterUtil.getLong(req.getRemoteUser());
+		long userId = GetterUtil.getLong(request.getRemoteUser());
 
 		_updateGroupStatus(userId, true);
 
@@ -302,7 +304,7 @@ public class LiveUsers {
 			}
 		}
 
-		UserTracker userTracker = sessionUsers.get(ses.getId());
+		UserTracker userTracker = sessionUsers.get(session.getId());
 
 		if ((userTracker == null) &&
 			(PropsValues.SESSION_TRACKER_MEMORY_ENABLED)) {
@@ -312,18 +314,20 @@ public class LiveUsers {
 			userTracker.setCompanyId(companyId);
 			userTracker.setUserId(userId);
 			userTracker.setModifiedDate(new Date());
-			userTracker.setHttpSession(ses);
-			userTracker.setRemoteAddr(req.getRemoteAddr());
-			userTracker.setRemoteHost(req.getRemoteHost());
-			userTracker.setUserAgent(req.getHeader(HttpHeaders.USER_AGENT));
+			userTracker.setHttpSession(session);
+			userTracker.setRemoteAddr(request.getRemoteAddr());
+			userTracker.setRemoteHost(request.getRemoteHost());
+			userTracker.setUserAgent(request.getHeader(HttpHeaders.USER_AGENT));
 
-			sessionUsers.put(ses.getId(), userTracker);
+			sessionUsers.put(session.getId(), userTracker);
 
 			_addUserTracker(userId, userTracker);
 		}
 	}
 
-	private void _signOut(String sesId, long userId) throws SystemException {
+	private void _signOut(String sessionId, long userId)
+		throws SystemException {
+
 		List<UserTracker> userTrackers = _getUserTrackers(userId);
 
 		if ((userTrackers == null) || (userTrackers.size() <= 1)) {
@@ -332,13 +336,13 @@ public class LiveUsers {
 
 		Map<String, UserTracker> sessionUsers = _getSessionUsers();
 
-		UserTracker userTracker = sessionUsers.remove(sesId);
+		UserTracker userTracker = sessionUsers.remove(sessionId);
 
 		if (userTracker != null) {
 			try {
 				UserTrackerLocalServiceUtil.addUserTracker(
 					userTracker.getCompanyId(), userTracker.getUserId(),
-					userTracker.getModifiedDate(), sesId,
+					userTracker.getModifiedDate(), sessionId,
 					userTracker.getRemoteAddr(), userTracker.getRemoteHost(),
 					userTracker.getUserAgent(), userTracker.getPaths());
 			}

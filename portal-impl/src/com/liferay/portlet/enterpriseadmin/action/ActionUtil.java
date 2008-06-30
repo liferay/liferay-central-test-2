@@ -58,20 +58,28 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionUtil {
 
-	public static void getAddress(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getAddress(ActionRequest actionRequest)
+		throws Exception {
 
-		getAddress(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		getAddress(request);
 	}
 
-	public static void getAddress(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getAddress(RenderRequest renderRequest)
+		throws Exception {
 
-		getAddress(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+
+		getAddress(request);
 	}
 
-	public static void getAddress(HttpServletRequest req) throws Exception {
-		long addressId = ParamUtil.getLong(req, "addressId");
+	public static void getAddress(HttpServletRequest request)
+		throws Exception {
+
+		long addressId = ParamUtil.getLong(request, "addressId");
 
 		Address address = null;
 
@@ -79,25 +87,31 @@ public class ActionUtil {
 			address = AddressServiceUtil.getAddress(addressId);
 		}
 
-		req.setAttribute(WebKeys.ADDRESS, address);
+		request.setAttribute(WebKeys.ADDRESS, address);
 	}
 
-	public static void getEmailAddress(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getEmailAddress(ActionRequest actionRequest)
+		throws Exception {
 
-		getEmailAddress(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		getEmailAddress(request);
 	}
 
-	public static void getEmailAddress(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getEmailAddress(RenderRequest renderRequest)
+		throws Exception {
 
-		getEmailAddress(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+
+		getEmailAddress(request);
 	}
 
-	public static void getEmailAddress(
-		HttpServletRequest req) throws Exception {
+	public static void getEmailAddress(HttpServletRequest request)
+		throws Exception {
 
-		long emailAddressId = ParamUtil.getLong(req, "emailAddressId");
+		long emailAddressId = ParamUtil.getLong(request, "emailAddressId");
 
 		EmailAddress emailAddress = null;
 
@@ -106,23 +120,25 @@ public class ActionUtil {
 				EmailAddressServiceUtil.getEmailAddress(emailAddressId);
 		}
 
-		req.setAttribute(WebKeys.EMAIL_ADDRESS, emailAddress);
+		request.setAttribute(WebKeys.EMAIL_ADDRESS, emailAddress);
 	}
 
-	public static void getPhone(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getPhone(ActionRequest actionRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
 
-		getPhone(httpReq);
+		getPhone(request);
 	}
 
-	public static void getPhone(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getPhone(RenderRequest renderRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
 
-		getPhone(httpReq);
+		getPhone(request);
 	}
 
-	public static void getPhone(HttpServletRequest req) throws Exception {
-		long phoneId = ParamUtil.getLong(req, "phoneId");
+	public static void getPhone(HttpServletRequest request) throws Exception {
+		long phoneId = ParamUtil.getLong(request, "phoneId");
 
 		Phone phone = null;
 
@@ -130,25 +146,31 @@ public class ActionUtil {
 			phone = PhoneServiceUtil.getPhone(phoneId);
 		}
 
-		req.setAttribute(WebKeys.PHONE, phone);
+		request.setAttribute(WebKeys.PHONE, phone);
 	}
 
-	public static void getOrganization(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-
-		getOrganization(httpReq);
-	}
-
-	public static void getOrganization(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-
-		getOrganization(httpReq);
-	}
-
-	public static void getOrganization(HttpServletRequest req)
+	public static void getOrganization(ActionRequest actionRequest)
 		throws Exception {
 
-		long organizationId = ParamUtil.getLong(req, "organizationId");
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		getOrganization(request);
+	}
+
+	public static void getOrganization(RenderRequest renderRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+
+		getOrganization(request);
+	}
+
+	public static void getOrganization(HttpServletRequest request)
+		throws Exception {
+
+		long organizationId = ParamUtil.getLong(request, "organizationId");
 
 		Organization organization = null;
 
@@ -157,23 +179,31 @@ public class ActionUtil {
 				OrganizationServiceUtil.getOrganization(organizationId);
 		}
 
-		req.setAttribute(WebKeys.ORGANIZATION, organization);
+		request.setAttribute(WebKeys.ORGANIZATION, organization);
 	}
 
-	public static void getOrgLabor(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getOrgLabor(ActionRequest actionRequest)
+		throws Exception {
 
-		getOrgLabor(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		getOrgLabor(request);
 	}
 
-	public static void getOrgLabor(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getOrgLabor(RenderRequest renderRequest)
+		throws Exception {
 
-		getOrgLabor(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+
+		getOrgLabor(request);
 	}
 
-	public static void getOrgLabor(HttpServletRequest req) throws Exception {
-		long orgLaborId = ParamUtil.getLong(req, "orgLaborId");
+	public static void getOrgLabor(HttpServletRequest request)
+		throws Exception {
+
+		long orgLaborId = ParamUtil.getLong(request, "orgLaborId");
 
 		OrgLabor orgLabor = null;
 
@@ -181,25 +211,31 @@ public class ActionUtil {
 			orgLabor = OrgLaborServiceUtil.getOrgLabor(orgLaborId);
 		}
 
-		req.setAttribute(WebKeys.ORG_LABOR, orgLabor);
+		request.setAttribute(WebKeys.ORG_LABOR, orgLabor);
 	}
 
-	public static void getPasswordPolicy(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-
-		getPasswordPolicy(httpReq);
-	}
-
-	public static void getPasswordPolicy(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-
-		getPasswordPolicy(httpReq);
-	}
-
-	public static void getPasswordPolicy(HttpServletRequest req)
+	public static void getPasswordPolicy(ActionRequest actionRequest)
 		throws Exception {
 
-		long passwordPolicyId = ParamUtil.getLong(req, "passwordPolicyId");
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		getPasswordPolicy(request);
+	}
+
+	public static void getPasswordPolicy(RenderRequest renderRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+
+		getPasswordPolicy(request);
+	}
+
+	public static void getPasswordPolicy(HttpServletRequest request)
+		throws Exception {
+
+		long passwordPolicyId = ParamUtil.getLong(request, "passwordPolicyId");
 
 		PasswordPolicy passwordPolicy = null;
 
@@ -208,25 +244,27 @@ public class ActionUtil {
 				passwordPolicyId);
 		}
 
-		req.setAttribute(WebKeys.PASSWORD_POLICY, passwordPolicy);
+		request.setAttribute(WebKeys.PASSWORD_POLICY, passwordPolicy);
 	}
 
-	public static void getRole(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getRole(ActionRequest actionRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
 
-		getRole(httpReq);
+		getRole(request);
 	}
 
-	public static void getRole(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getRole(RenderRequest renderRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
 
-		getRole(httpReq);
+		getRole(request);
 	}
 
-	public static void getRole(HttpServletRequest req)
+	public static void getRole(HttpServletRequest request)
 		throws Exception {
 
-		long roleId = ParamUtil.getLong(req, "roleId");
+		long roleId = ParamUtil.getLong(request, "roleId");
 
 		Role role = null;
 
@@ -234,25 +272,31 @@ public class ActionUtil {
 			role = RoleServiceUtil.getRole(roleId);
 		}
 
-		req.setAttribute(WebKeys.ROLE, role);
+		request.setAttribute(WebKeys.ROLE, role);
 	}
 
-	public static void getUserGroup(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-
-		getUserGroup(httpReq);
-	}
-
-	public static void getUserGroup(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-
-		getUserGroup(httpReq);
-	}
-
-	public static void getUserGroup(HttpServletRequest req)
+	public static void getUserGroup(ActionRequest actionRequest)
 		throws Exception {
 
-		long userGroupId = ParamUtil.getLong(req, "userGroupId");
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		getUserGroup(request);
+	}
+
+	public static void getUserGroup(RenderRequest renderRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+
+		getUserGroup(request);
+	}
+
+	public static void getUserGroup(HttpServletRequest request)
+		throws Exception {
+
+		long userGroupId = ParamUtil.getLong(request, "userGroupId");
 
 		UserGroup userGroup = null;
 
@@ -260,23 +304,29 @@ public class ActionUtil {
 			userGroup = UserGroupServiceUtil.getUserGroup(userGroupId);
 		}
 
-		req.setAttribute(WebKeys.USER_GROUP, userGroup);
+		request.setAttribute(WebKeys.USER_GROUP, userGroup);
 	}
 
-	public static void getWebsite(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getWebsite(ActionRequest actionRequest)
+		throws Exception {
 
-		getWebsite(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		getWebsite(request);
 	}
 
-	public static void getWebsite(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getWebsite(RenderRequest renderRequest)
+		throws Exception {
 
-		getWebsite(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+
+		getWebsite(request);
 	}
 
-	public static void getWebsite(HttpServletRequest req) throws Exception {
-		long websiteId = ParamUtil.getLong(req, "websiteId");
+	public static void getWebsite(HttpServletRequest request) throws Exception {
+		long websiteId = ParamUtil.getLong(request, "websiteId");
 
 		Website website = null;
 
@@ -284,7 +334,7 @@ public class ActionUtil {
 			website = WebsiteServiceUtil.getWebsite(websiteId);
 		}
 
-		req.setAttribute(WebKeys.WEBSITE, website);
+		request.setAttribute(WebKeys.WEBSITE, website);
 	}
 
 }

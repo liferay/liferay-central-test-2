@@ -37,15 +37,15 @@ import javax.servlet.http.HttpServletRequestWrapper;
  */
 public class LiferayServletRequest extends HttpServletRequestWrapper {
 
-	public LiferayServletRequest(HttpServletRequest req) {
-		super(req);
+	public LiferayServletRequest(HttpServletRequest request) {
+		super(request);
 
-		_req = req;
+		_request = request;
 	}
 
 	public ServletInputStream getInputStream() throws IOException {
 		if (_lis == null) {
-			_lis = new LiferayInputStream(_req);
+			_lis = new LiferayInputStream(_request);
 
 			return _lis;
 		}
@@ -59,7 +59,7 @@ public class LiferayServletRequest extends HttpServletRequestWrapper {
 		}
 	}
 
-	private HttpServletRequest _req;
+	private HttpServletRequest _request;
 	private LiferayInputStream _lis = null;
 
 }

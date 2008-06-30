@@ -153,24 +153,25 @@ public class LiferayStrutsRequestImpl extends HttpServletRequestWrapper {
 		}
 	}
 
-	protected LiferayStrutsRequestImpl(HttpServletRequest req) {
-		super(req);
+	protected LiferayStrutsRequestImpl(HttpServletRequest request) {
+		super(request);
 
-		_strutsAttributes = (Map<String, Object>)req.getAttribute(
+		_strutsAttributes = (Map<String, Object>)request.getAttribute(
 			WebKeys.STRUTS_BRIDGES_ATTRIBUTES);
 
 		if (_strutsAttributes == null) {
 			_strutsAttributes = new HashMap<String, Object>();
 
-			req.setAttribute(
+			request.setAttribute(
 				WebKeys.STRUTS_BRIDGES_ATTRIBUTES, _strutsAttributes);
 		}
 
-		UploadServletRequestImpl uploadReq =
-			(UploadServletRequestImpl)PortalUtil.getUploadServletRequest(req);
+		UploadServletRequestImpl uploadRequest =
+			(UploadServletRequestImpl)PortalUtil.getUploadServletRequest(
+				request);
 
-		if (uploadReq != null) {
-			_multipartParams = uploadReq.getMultipartParameterMap();
+		if (uploadRequest != null) {
+			_multipartParams = uploadRequest.getMultipartParameterMap();
 		}
 	}
 

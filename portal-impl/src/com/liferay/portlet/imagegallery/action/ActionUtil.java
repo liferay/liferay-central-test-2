@@ -44,20 +44,22 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionUtil {
 
-	public static void getFolder(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getFolder(ActionRequest actionRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
 
-		getFolder(httpReq);
+		getFolder(request);
 	}
 
-	public static void getFolder(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getFolder(RenderRequest renderRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
 
-		getFolder(httpReq);
+		getFolder(request);
 	}
 
-	public static void getFolder(HttpServletRequest req) throws Exception {
-		long folderId = ParamUtil.getLong(req, "folderId");
+	public static void getFolder(HttpServletRequest request) throws Exception {
+		long folderId = ParamUtil.getLong(request, "folderId");
 
 		IGFolder folder = null;
 
@@ -67,23 +69,25 @@ public class ActionUtil {
 			folder = IGFolderServiceUtil.getFolder(folderId);
 		}
 
-		req.setAttribute(WebKeys.IMAGE_GALLERY_FOLDER, folder);
+		request.setAttribute(WebKeys.IMAGE_GALLERY_FOLDER, folder);
 	}
 
-	public static void getImage(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getImage(ActionRequest actionRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
 
-		getImage(httpReq);
+		getImage(request);
 	}
 
-	public static void getImage(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getImage(RenderRequest renderRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
 
-		getImage(httpReq);
+		getImage(request);
 	}
 
-	public static void getImage(HttpServletRequest req) throws Exception {
-		long imageId = ParamUtil.getLong(req, "imageId");
+	public static void getImage(HttpServletRequest request) throws Exception {
+		long imageId = ParamUtil.getLong(request, "imageId");
 
 		IGImage image = null;
 
@@ -91,7 +95,7 @@ public class ActionUtil {
 			image = IGImageServiceUtil.getImage(imageId);
 		}
 
-		req.setAttribute(WebKeys.IMAGE_GALLERY_IMAGE, image);
+		request.setAttribute(WebKeys.IMAGE_GALLERY_IMAGE, image);
 	}
 
 }

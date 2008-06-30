@@ -41,20 +41,28 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionUtil {
 
-	public static void getQuestion(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getQuestion(ActionRequest actionRequest)
+		throws Exception {
 
-		getQuestion(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		getQuestion(request);
 	}
 
-	public static void getQuestion(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getQuestion(RenderRequest renderRequest)
+		throws Exception {
 
-		getQuestion(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+
+		getQuestion(request);
 	}
 
-	public static void getQuestion(HttpServletRequest req) throws Exception {
-		long questionId = ParamUtil.getLong(req, "questionId");
+	public static void getQuestion(HttpServletRequest request)
+		throws Exception {
+
+		long questionId = ParamUtil.getLong(request, "questionId");
 
 		PollsQuestion question = null;
 
@@ -62,7 +70,7 @@ public class ActionUtil {
 			question = PollsQuestionServiceUtil.getQuestion(questionId);
 		}
 
-		req.setAttribute(WebKeys.POLLS_QUESTION, question);
+		request.setAttribute(WebKeys.POLLS_QUESTION, question);
 	}
 
 }

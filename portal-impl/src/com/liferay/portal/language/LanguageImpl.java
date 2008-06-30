@@ -368,20 +368,21 @@ public class LanguageImpl implements Language {
 		return _getInstance()._getCharset(locale);
 	}
 
-	public String getLanguageId(PortletRequest req) {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public String getLanguageId(PortletRequest portletRequest) {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
 
-		return getLanguageId(httpReq);
+		return getLanguageId(request);
 	}
 
-	public String getLanguageId(HttpServletRequest req) {
-		String languageId = ParamUtil.getString(req, "languageId");
+	public String getLanguageId(HttpServletRequest request) {
+		String languageId = ParamUtil.getString(request, "languageId");
 
 		if (Validator.isNotNull(languageId)) {
 			return languageId;
 		}
 
-		Locale locale = PortalUtil.getLocale(req);
+		Locale locale = PortalUtil.getLocale(request);
 
 		return getLanguageId(locale);
 	}

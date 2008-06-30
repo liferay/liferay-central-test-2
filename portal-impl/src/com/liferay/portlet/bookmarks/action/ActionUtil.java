@@ -43,20 +43,22 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionUtil {
 
-	public static void getFolder(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getFolder(ActionRequest actionRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
 
-		getFolder(httpReq);
+		getFolder(request);
 	}
 
-	public static void getFolder(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getFolder(RenderRequest renderRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
 
-		getFolder(httpReq);
+		getFolder(request);
 	}
 
-	public static void getFolder(HttpServletRequest req) throws Exception {
-		long folderId = ParamUtil.getLong(req, "folderId");
+	public static void getFolder(HttpServletRequest request) throws Exception {
+		long folderId = ParamUtil.getLong(request, "folderId");
 
 		BookmarksFolder folder = null;
 
@@ -64,23 +66,25 @@ public class ActionUtil {
 			folder = BookmarksFolderServiceUtil.getFolder(folderId);
 		}
 
-		req.setAttribute(WebKeys.BOOKMARKS_FOLDER, folder);
+		request.setAttribute(WebKeys.BOOKMARKS_FOLDER, folder);
 	}
 
-	public static void getEntry(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getEntry(ActionRequest actionRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
 
-		getEntry(httpReq);
+		getEntry(request);
 	}
 
-	public static void getEntry(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getEntry(RenderRequest renderRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
 
-		getEntry(httpReq);
+		getEntry(request);
 	}
 
-	public static void getEntry(HttpServletRequest req) throws Exception {
-		long entryId = ParamUtil.getLong(req, "entryId");
+	public static void getEntry(HttpServletRequest request) throws Exception {
+		long entryId = ParamUtil.getLong(request, "entryId");
 
 		BookmarksEntry entry = null;
 
@@ -88,7 +92,7 @@ public class ActionUtil {
 			entry = BookmarksEntryServiceUtil.getEntry(entryId);
 		}
 
-		req.setAttribute(WebKeys.BOOKMARKS_ENTRY, entry);
+		request.setAttribute(WebKeys.BOOKMARKS_ENTRY, entry);
 	}
 
 }

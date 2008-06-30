@@ -69,16 +69,16 @@ public class PortletWindowRequestReader implements WindowRequestReader {
 		_facesPortlet = facesPortlet;
 	}
 
-	public String getCacheLevel(HttpServletRequest req) {
-		return req.getParameter("p_p_cacheability");
+	public String getCacheLevel(HttpServletRequest request) {
+		return request.getParameter("p_p_cacheability");
 	}
 
-	public String getResourceID(HttpServletRequest req) {
-		return req.getParameter("p_p_resource_id");
+	public String getResourceID(HttpServletRequest request) {
+		return request.getParameter("p_p_resource_id");
 	}
 
-	public ChannelMode readNewPortletWindowMode(HttpServletRequest req) {
-		String portletMode = req.getParameter("p_p_mode");
+	public ChannelMode readNewPortletWindowMode(HttpServletRequest request) {
+		String portletMode = request.getParameter("p_p_mode");
 
 		if (portletMode != null) {
 			return new ChannelMode(portletMode);
@@ -88,8 +88,8 @@ public class PortletWindowRequestReader implements WindowRequestReader {
 		}
 	}
 
-	public ChannelState readNewWindowState(HttpServletRequest req) {
-		String windowState = req.getParameter("p_p_state");
+	public ChannelState readNewWindowState(HttpServletRequest request) {
+		String windowState = request.getParameter("p_p_state");
 
 		if (windowState != null) {
 			return new ChannelState(windowState);
@@ -99,15 +99,15 @@ public class PortletWindowRequestReader implements WindowRequestReader {
 		}
 	}
 
-	public Map<String, String[]> readParameterMap(HttpServletRequest req) {
+	public Map<String, String[]> readParameterMap(HttpServletRequest request) {
 		Map<String, String[]> parameterMap = new HashMap<String, String[]>();
 
-		String portletId = req.getParameter("p_p_id");
+		String portletId = request.getParameter("p_p_id");
 
 		String namespace = PortalUtil.getPortletNamespace(portletId);
 
 		Set<Map.Entry<String, String[]>> entries =
-			req.getParameterMap().entrySet();
+			request.getParameterMap().entrySet();
 
 		for (Map.Entry<String, String[]> mapEntry : entries) {
 			String key = mapEntry.getKey();
@@ -137,8 +137,8 @@ public class PortletWindowRequestReader implements WindowRequestReader {
 		return parameterMap;
 	}
 
-	public ChannelURLType readURLType(HttpServletRequest req) {
-		String urlType = ParamUtil.getString(req, "p_p_url_type");
+	public ChannelURLType readURLType(HttpServletRequest request) {
+		String urlType = ParamUtil.getString(request, "p_p_url_type");
 
 		if (urlType.equals("0")) {
 			return ChannelURLType.RENDER;

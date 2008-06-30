@@ -66,8 +66,8 @@ public class FacebookUtil {
 		return callbackURL;
 	}
 
-	public static String[] getFacebookData(HttpServletRequest req) {
-		String path = GetterUtil.getString(req.getPathInfo());
+	public static String[] getFacebookData(HttpServletRequest request) {
+		String path = GetterUtil.getString(request.getPathInfo());
 
 		if (Validator.isNull(path)) {
 			return null;

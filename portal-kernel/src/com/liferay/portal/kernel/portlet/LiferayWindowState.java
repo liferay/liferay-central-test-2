@@ -38,8 +38,8 @@ public class LiferayWindowState extends WindowState {
 
 	public final static WindowState POP_UP = new WindowState("pop_up");
 
-	public static boolean isExclusive(HttpServletRequest req) {
-		String state = req.getParameter("p_p_state");
+	public static boolean isExclusive(HttpServletRequest request) {
+		String state = request.getParameter("p_p_state");
 
 		if ((state != null) && (state.equals(EXCLUSIVE.toString()))) {
 			return true;
@@ -49,8 +49,8 @@ public class LiferayWindowState extends WindowState {
 		}
 	}
 
-	public static boolean isMaximized(HttpServletRequest req) {
-		String state = req.getParameter("p_p_state");
+	public static boolean isMaximized(HttpServletRequest request) {
+		String state = request.getParameter("p_p_state");
 
 		if ((state != null) &&
 			(state.equals(WindowState.MAXIMIZED.toString()))) {
@@ -62,8 +62,8 @@ public class LiferayWindowState extends WindowState {
 		}
 	}
 
-	public static boolean isPopUp(HttpServletRequest req) {
-		String state = req.getParameter("p_p_state");
+	public static boolean isPopUp(HttpServletRequest request) {
+		String state = request.getParameter("p_p_state");
 
 		if ((state != null) && (state.equals(POP_UP.toString()))) {
 			return true;

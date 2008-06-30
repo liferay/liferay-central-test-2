@@ -41,20 +41,28 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionUtil {
 
-	public static void getDefinition(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getDefinition(ActionRequest actionRequest)
+		throws Exception {
 
-		getDefinition(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		getDefinition(request);
 	}
 
-	public static void getDefinition(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getDefinition(RenderRequest renderRequest)
+		throws Exception {
 
-		getDefinition(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+
+		getDefinition(request);
 	}
 
-	public static void getDefinition(HttpServletRequest req) throws Exception {
-		long definitionId = ParamUtil.getLong(req, "definitionId");
+	public static void getDefinition(HttpServletRequest request)
+		throws Exception {
+
+		long definitionId = ParamUtil.getLong(request, "definitionId");
 
 		WorkflowDefinition definition = null;
 
@@ -63,7 +71,7 @@ public class ActionUtil {
 				definitionId);
 		}
 
-		req.setAttribute(WebKeys.WORKFLOW_DEFINITION, definition);
+		request.setAttribute(WebKeys.WORKFLOW_DEFINITION, definition);
 	}
 
 }

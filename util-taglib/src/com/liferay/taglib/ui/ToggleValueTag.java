@@ -43,7 +43,7 @@ import org.apache.commons.logging.LogFactory;
 public class ToggleValueTag extends TagSupport {
 
 	public static void doTag(
-			String id, PageContext pageContext, HttpServletRequest req)
+			String id, PageContext pageContext, HttpServletRequest request)
 		throws Exception {
 
 		ClassLoader contextClassLoader =
@@ -55,7 +55,7 @@ public class ToggleValueTag extends TagSupport {
 
 			MethodWrapper methodWrapper = new MethodWrapper(
 				_TAG_CLASS, _TAG_DO_END_METHOD,
-				new Object[] {id, pageContext, req});
+				new Object[] {id, pageContext, request});
 
 			MethodInvoker.invoke(methodWrapper);
 		}

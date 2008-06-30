@@ -37,8 +37,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class BrowserSnifferImpl implements BrowserSniffer {
 
-	public boolean acceptsGzip(HttpServletRequest req) {
-		String acceptEncoding = req.getHeader(HttpHeaders.ACCEPT_ENCODING);
+	public boolean acceptsGzip(HttpServletRequest request) {
+		String acceptEncoding = request.getHeader(HttpHeaders.ACCEPT_ENCODING);
 
 		if ((acceptEncoding != null) &&
 			(acceptEncoding.indexOf(_GZIP) != -1)) {
@@ -50,12 +50,12 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		}
 	}
 
-	public boolean is_ie(HttpServletRequest req) {
-		if (req == null) {
+	public boolean is_ie(HttpServletRequest request) {
+		if (request == null) {
 			return false;
 		}
 
-		String agent = req.getHeader(HttpHeaders.USER_AGENT);
+		String agent = request.getHeader(HttpHeaders.USER_AGENT);
 
 		if (agent == null) {
 			return false;
@@ -71,12 +71,12 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		}
 	}
 
-	public boolean is_ie_4(HttpServletRequest req) {
-		if (req == null) {
+	public boolean is_ie_4(HttpServletRequest request) {
+		if (request == null) {
 			return false;
 		}
 
-		String agent = req.getHeader(HttpHeaders.USER_AGENT);
+		String agent = request.getHeader(HttpHeaders.USER_AGENT);
 
 		if (agent == null) {
 			return false;
@@ -84,7 +84,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 
 		agent = agent.toLowerCase();
 
-		if (is_ie(req) && (agent.indexOf("msie 4") != -1)) {
+		if (is_ie(request) && (agent.indexOf("msie 4") != -1)) {
 			return true;
 		}
 		else {
@@ -92,12 +92,12 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		}
 	}
 
-	public boolean is_ie_5(HttpServletRequest req) {
-		if (req == null) {
+	public boolean is_ie_5(HttpServletRequest request) {
+		if (request == null) {
 			return false;
 		}
 
-		String agent = req.getHeader(HttpHeaders.USER_AGENT);
+		String agent = request.getHeader(HttpHeaders.USER_AGENT);
 
 		if (agent == null) {
 			return false;
@@ -105,7 +105,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 
 		agent = agent.toLowerCase();
 
-		if (is_ie(req) && (agent.indexOf("msie 5.0") != -1)) {
+		if (is_ie(request) && (agent.indexOf("msie 5.0") != -1)) {
 			return true;
 		}
 		else {
@@ -113,12 +113,12 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		}
 	}
 
-	public boolean is_ie_5_5(HttpServletRequest req) {
-		if (req == null) {
+	public boolean is_ie_5_5(HttpServletRequest request) {
+		if (request == null) {
 			return false;
 		}
 
-		String agent = req.getHeader(HttpHeaders.USER_AGENT);
+		String agent = request.getHeader(HttpHeaders.USER_AGENT);
 
 		if (agent == null) {
 			return false;
@@ -126,7 +126,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 
 		agent = agent.toLowerCase();
 
-		if (is_ie(req) && (agent.indexOf("msie 5.5") != -1)) {
+		if (is_ie(request) && (agent.indexOf("msie 5.5") != -1)) {
 			return true;
 		}
 		else {
@@ -134,8 +134,8 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		}
 	}
 
-	public boolean is_ie_5_5_up(HttpServletRequest req) {
-		if (is_ie(req) && !is_ie_4(req) && !is_ie_5(req)) {
+	public boolean is_ie_5_5_up(HttpServletRequest request) {
+		if (is_ie(request) && !is_ie_4(request) && !is_ie_5(request)) {
 			return true;
 		}
 		else {
@@ -143,12 +143,12 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		}
 	}
 
-	public boolean is_ie_6(HttpServletRequest req) {
-		if (req == null) {
+	public boolean is_ie_6(HttpServletRequest request) {
+		if (request == null) {
 			return false;
 		}
 
-		String agent = req.getHeader(HttpHeaders.USER_AGENT);
+		String agent = request.getHeader(HttpHeaders.USER_AGENT);
 
 		if (agent == null) {
 			return false;
@@ -156,7 +156,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 
 		agent = agent.toLowerCase();
 
-		if (is_ie(req) && (agent.indexOf("msie 6.0") != -1)) {
+		if (is_ie(request) && (agent.indexOf("msie 6.0") != -1)) {
 			return true;
 		}
 		else {
@@ -164,12 +164,12 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		}
 	}
 
-	public boolean is_ie_7(HttpServletRequest req) {
-		if (req == null) {
+	public boolean is_ie_7(HttpServletRequest request) {
+		if (request == null) {
 			return false;
 		}
 
-		String agent = req.getHeader(HttpHeaders.USER_AGENT);
+		String agent = request.getHeader(HttpHeaders.USER_AGENT);
 
 		if (agent == null) {
 			return false;
@@ -177,7 +177,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 
 		agent = agent.toLowerCase();
 
-		if (is_ie(req) && (agent.indexOf("msie 7.0") != -1)) {
+		if (is_ie(request) && (agent.indexOf("msie 7.0") != -1)) {
 			return true;
 		}
 		else {
@@ -185,8 +185,8 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		}
 	}
 
-	public boolean is_linux(HttpServletRequest req) {
-		String agent = req.getHeader(HttpHeaders.USER_AGENT);
+	public boolean is_linux(HttpServletRequest request) {
+		String agent = request.getHeader(HttpHeaders.USER_AGENT);
 
 		if (agent == null) {
 			return false;
@@ -202,12 +202,12 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		}
 	}
 
-	public boolean is_mozilla(HttpServletRequest req) {
-		if (req == null) {
+	public boolean is_mozilla(HttpServletRequest request) {
+		if (request == null) {
 			return false;
 		}
 
-		String agent = req.getHeader(HttpHeaders.USER_AGENT);
+		String agent = request.getHeader(HttpHeaders.USER_AGENT);
 
 		if (agent == null) {
 			return false;
@@ -229,12 +229,12 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		}
 	}
 
-	public boolean is_mozilla_1_3_up(HttpServletRequest req) {
-		if (req == null) {
+	public boolean is_mozilla_1_3_up(HttpServletRequest request) {
+		if (request == null) {
 			return false;
 		}
 
-		String agent = req.getHeader(HttpHeaders.USER_AGENT);
+		String agent = request.getHeader(HttpHeaders.USER_AGENT);
 
 		if (agent == null) {
 			return false;
@@ -242,7 +242,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 
 		agent = agent.toLowerCase();
 
-		if (is_mozilla(req)) {
+		if (is_mozilla(request)) {
 			int pos = agent.indexOf("gecko/");
 
 			if (pos == -1) {
@@ -260,12 +260,12 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		return false;
 	}
 
-	public boolean is_ns_4(HttpServletRequest req) {
-		if (req == null) {
+	public boolean is_ns_4(HttpServletRequest request) {
+		if (request == null) {
 			return false;
 		}
 
-		String agent = req.getHeader(HttpHeaders.USER_AGENT);
+		String agent = request.getHeader(HttpHeaders.USER_AGENT);
 
 		if (agent == null) {
 			return false;
@@ -273,7 +273,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 
 		agent = agent.toLowerCase();
 
-		if (!is_ie(req) && (agent.indexOf("mozilla/4.") != -1)) {
+		if (!is_ie(request) && (agent.indexOf("mozilla/4.") != -1)) {
 			return true;
 		}
 		else {
@@ -281,9 +281,9 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		}
 	}
 
-	public boolean is_rtf(HttpServletRequest req) {
-		if (is_ie_5_5_up(req) || is_mozilla_1_3_up(req) ||
-			(is_safari_3(req) && !is_safari_mobile(req))) {
+	public boolean is_rtf(HttpServletRequest request) {
+		if (is_ie_5_5_up(request) || is_mozilla_1_3_up(request) ||
+			(is_safari_3(request) && !is_safari_mobile(request))) {
 
 			return true;
 		}
@@ -292,12 +292,12 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		}
 	}
 
-	public boolean is_safari(HttpServletRequest req) {
-		if (req == null) {
+	public boolean is_safari(HttpServletRequest request) {
+		if (request == null) {
 			return false;
 		}
 
-		String agent = req.getHeader(HttpHeaders.USER_AGENT);
+		String agent = request.getHeader(HttpHeaders.USER_AGENT);
 
 		if (agent == null) {
 			return false;
@@ -313,12 +313,12 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		}
 	}
 
-	public boolean is_safari_3(HttpServletRequest req) {
-		if (req == null) {
+	public boolean is_safari_3(HttpServletRequest request) {
+		if (request == null) {
 			return false;
 		}
 
-		String agent = req.getHeader(HttpHeaders.USER_AGENT);
+		String agent = request.getHeader(HttpHeaders.USER_AGENT);
 
 		if (agent == null) {
 			return false;
@@ -326,7 +326,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 
 		agent = agent.toLowerCase();
 
-		if (is_safari(req) && (agent.indexOf("version/3.") != -1)) {
+		if (is_safari(request) && (agent.indexOf("version/3.") != -1)) {
 			return true;
 		}
 		else {
@@ -334,12 +334,12 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		}
 	}
 
-	public boolean is_safari_mobile(HttpServletRequest req) {
-		if (req == null) {
+	public boolean is_safari_mobile(HttpServletRequest request) {
+		if (request == null) {
 			return false;
 		}
 
-		String agent = req.getHeader(HttpHeaders.USER_AGENT);
+		String agent = request.getHeader(HttpHeaders.USER_AGENT);
 
 		if (agent == null) {
 			return false;
@@ -347,7 +347,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 
 		agent = agent.toLowerCase();
 
-		if (is_safari(req) && (agent.indexOf("mobile") != -1)) {
+		if (is_safari(request) && (agent.indexOf("mobile") != -1)) {
 			return true;
 		}
 		else {
@@ -355,16 +355,16 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		}
 	}
 
-	public boolean is_wap(HttpServletRequest req) {
-		return is_wap_xhtml(req);
+	public boolean is_wap(HttpServletRequest request) {
+		return is_wap_xhtml(request);
 	}
 
-	public boolean is_wap_xhtml(HttpServletRequest req) {
-		if (req == null) {
+	public boolean is_wap_xhtml(HttpServletRequest request) {
+		if (request == null) {
 			return false;
 		}
 
-		String accept = req.getHeader(HttpHeaders.ACCEPT);
+		String accept = request.getHeader(HttpHeaders.ACCEPT);
 
 		if (accept == null) {
 			return false;
@@ -380,12 +380,12 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		}
 	}
 
-	public boolean is_wml(HttpServletRequest req) {
-		if (req == null) {
+	public boolean is_wml(HttpServletRequest request) {
+		if (request == null) {
 			return false;
 		}
 
-		String accept = req.getHeader(HttpHeaders.ACCEPT);
+		String accept = request.getHeader(HttpHeaders.ACCEPT);
 
 		if (accept == null) {
 			return false;

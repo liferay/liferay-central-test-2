@@ -67,8 +67,8 @@ public class PortalInstances {
 		_instance._addCompanyId(companyId);
 	}
 
-	public static long getCompanyId(HttpServletRequest req) {
-		return _instance._getCompanyId(req);
+	public static long getCompanyId(HttpServletRequest request) {
+		return _instance._getCompanyId(request);
 	}
 
 	public static long[] getCompanyIds() {
@@ -130,12 +130,12 @@ public class PortalInstances {
 		_companyIds = companyIds;
 	}
 
-	private long _getCompanyId(HttpServletRequest req) {
+	private long _getCompanyId(HttpServletRequest request) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Get company id");
 		}
 
-		Long companyIdObj = (Long)req.getAttribute(WebKeys.COMPANY_ID);
+		Long companyIdObj = (Long)request.getAttribute(WebKeys.COMPANY_ID);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Company id from request " + companyIdObj);
@@ -145,7 +145,7 @@ public class PortalInstances {
 			return companyIdObj.longValue();
 		}
 
-		String host = PortalUtil.getHost(req);
+		String host = PortalUtil.getHost(request);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Host " + host);
@@ -169,13 +169,14 @@ public class PortalInstances {
 							"layout set " + layoutSet.getLayoutSetId());
 				}
 
-				req.setAttribute(WebKeys.VIRTUAL_HOST_LAYOUT_SET, layoutSet);
+				request.setAttribute(
+					WebKeys.VIRTUAL_HOST_LAYOUT_SET, layoutSet);
 			}
 		}
 
 		if (companyId <= 0) {
 			companyId = GetterUtil.getLong(
-				CookieKeys.getCookie(req, CookieKeys.COMPANY_ID));
+				CookieKeys.getCookie(request, CookieKeys.COMPANY_ID));
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Company id from cookie " + companyId);
@@ -194,7 +195,7 @@ public class PortalInstances {
 			_log.debug("Set company id " + companyId);
 		}
 
-		req.setAttribute(WebKeys.COMPANY_ID, new Long(companyId));
+		request.setAttribute(WebKeys.COMPANY_ID, new Long(companyId));
 
 		CompanyThreadLocal.setCompanyId(companyId);
 

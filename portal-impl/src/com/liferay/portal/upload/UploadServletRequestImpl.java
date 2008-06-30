@@ -66,24 +66,24 @@ public class UploadServletRequestImpl
 			UploadServletRequestImpl.class.getName() + ".temp.dir"),
 		SystemProperties.get(SystemProperties.TMP_DIR)));
 
-	public UploadServletRequestImpl(HttpServletRequest req) {
-		super(req);
+	public UploadServletRequestImpl(HttpServletRequest request) {
+		super(request);
 
 		_params = new LinkedHashMap<String, LiferayFileItem[]>();
 
 		try {
 			ServletFileUpload servletFileUpload = new LiferayFileUpload(
-				new LiferayFileItemFactory(DEFAULT_TEMP_DIR), req);
+				new LiferayFileItemFactory(DEFAULT_TEMP_DIR), request);
 
 			servletFileUpload.setSizeMax(DEFAULT_SIZE_MAX);
 
-			_lsr = new LiferayServletRequest(req);
+			_lsr = new LiferayServletRequest(request);
 
 			List<LiferayFileItem> list = servletFileUpload.parseRequest(_lsr);
 
 			for (LiferayFileItem fileItem : list) {
 				if (fileItem.isFormField()) {
-					fileItem.setString(req.getCharacterEncoding());
+					fileItem.setString(request.getCharacterEncoding());
 				}
 
 				LiferayFileItem[] fileItems =

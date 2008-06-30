@@ -34,42 +34,42 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface BrowserSniffer {
 
-	public boolean acceptsGzip(HttpServletRequest req);
+	public boolean acceptsGzip(HttpServletRequest request);
 
-	public boolean is_ie(HttpServletRequest req);
+	public boolean is_ie(HttpServletRequest request);
 
-	public boolean is_ie_4(HttpServletRequest req);
+	public boolean is_ie_4(HttpServletRequest request);
 
-	public boolean is_ie_5(HttpServletRequest req);
+	public boolean is_ie_5(HttpServletRequest request);
 
-	public boolean is_ie_5_5(HttpServletRequest req);
+	public boolean is_ie_5_5(HttpServletRequest request);
 
-	public boolean is_ie_5_5_up(HttpServletRequest req);
+	public boolean is_ie_5_5_up(HttpServletRequest request);
 
-	public boolean is_ie_6(HttpServletRequest req);
+	public boolean is_ie_6(HttpServletRequest request);
 
-	public boolean is_ie_7(HttpServletRequest req);
+	public boolean is_ie_7(HttpServletRequest request);
 
-	public boolean is_linux(HttpServletRequest req);
+	public boolean is_linux(HttpServletRequest request);
 
-	public boolean is_mozilla(HttpServletRequest req);
+	public boolean is_mozilla(HttpServletRequest request);
 
-	public boolean is_mozilla_1_3_up(HttpServletRequest req);
+	public boolean is_mozilla_1_3_up(HttpServletRequest request);
 
-	public boolean is_ns_4(HttpServletRequest req);
+	public boolean is_ns_4(HttpServletRequest request);
 
-	public boolean is_rtf(HttpServletRequest req);
+	public boolean is_rtf(HttpServletRequest request);
 
-	public boolean is_safari(HttpServletRequest req);
+	public boolean is_safari(HttpServletRequest request);
 
-	public boolean is_safari_3(HttpServletRequest req);
+	public boolean is_safari_3(HttpServletRequest request);
 
-	public boolean is_safari_mobile(HttpServletRequest req);
+	public boolean is_safari_mobile(HttpServletRequest request);
 
-	public boolean is_wap(HttpServletRequest req);
+	public boolean is_wap(HttpServletRequest request);
 
-	public boolean is_wap_xhtml(HttpServletRequest req);
+	public boolean is_wap_xhtml(HttpServletRequest request);
 
-	public boolean is_wml(HttpServletRequest req);
+	public boolean is_wml(HttpServletRequest request);
 
 }

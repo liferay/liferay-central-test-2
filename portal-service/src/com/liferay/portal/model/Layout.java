@@ -136,15 +136,15 @@ public interface Layout extends LayoutModel {
 	public java.lang.String getCssText();
 
 	public java.lang.String getRegularURL(
-		javax.servlet.http.HttpServletRequest req)
+		javax.servlet.http.HttpServletRequest request)
 		throws com.liferay.portal.SystemException;
 
 	public java.lang.String getResetMaxStateURL(
-		javax.servlet.http.HttpServletRequest req)
+		javax.servlet.http.HttpServletRequest request)
 		throws com.liferay.portal.SystemException;
 
 	public java.lang.String getResetLayoutURL(
-		javax.servlet.http.HttpServletRequest req)
+		javax.servlet.http.HttpServletRequest request)
 		throws com.liferay.portal.SystemException;
 
 	public java.lang.String getTarget();

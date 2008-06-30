@@ -84,8 +84,8 @@ public class HttpUtil {
 		return getHttp().encodeURL(url, escapeSpaces);
 	}
 
-	public static String getCompleteURL(HttpServletRequest req) {
-		return getHttp().getCompleteURL(req);
+	public static String getCompleteURL(HttpServletRequest request) {
+		return getHttp().getCompleteURL(request);
 	}
 
 	public static String getDomain(String url) {
@@ -118,24 +118,24 @@ public class HttpUtil {
 		return getHttp().getProtocol(url);
 	}
 
-	public static String getProtocol(HttpServletRequest req) {
-		return getHttp().getProtocol(req);
+	public static String getProtocol(HttpServletRequest request) {
+		return getHttp().getProtocol(request);
 	}
 
-	public static String getProtocol(ActionRequest req) {
-		return getHttp().getProtocol(req);
+	public static String getProtocol(ActionRequest actionRequest) {
+		return getHttp().getProtocol(actionRequest);
 	}
 
-	public static String getProtocol(RenderRequest req) {
-		return getHttp().getProtocol(req);
+	public static String getProtocol(RenderRequest renderRequest) {
+		return getHttp().getProtocol(renderRequest);
 	}
 
 	public static String getQueryString(String url) {
 		return getHttp().getQueryString(url);
 	}
 
-	public static String getRequestURL(HttpServletRequest req) {
-		return getHttp().getRequestURL(req);
+	public static String getRequestURL(HttpServletRequest request) {
+		return getHttp().getRequestURL(request);
 	}
 
 	public static boolean hasProxyConfig() {
@@ -172,16 +172,16 @@ public class HttpUtil {
 		return getHttp().protocolize(url, secure);
 	}
 
-	public static String protocolize(String url, HttpServletRequest req) {
-		return getHttp().protocolize(url, req);
+	public static String protocolize(String url, HttpServletRequest request) {
+		return getHttp().protocolize(url, request);
 	}
 
-	public static String protocolize(String url, ActionRequest req) {
-		return getHttp().protocolize(url, req);
+	public static String protocolize(String url, ActionRequest actionRequest) {
+		return getHttp().protocolize(url, actionRequest);
 	}
 
-	public static String protocolize(String url, RenderRequest req) {
-		return getHttp().protocolize(url, req);
+	public static String protocolize(String url, RenderRequest renderRequest) {
+		return getHttp().protocolize(url, renderRequest);
 	}
 
 	public static String removeParameter(String url, String name) {

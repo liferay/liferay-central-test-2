@@ -50,33 +50,39 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionUtil {
 
-	public static void getArticle(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getArticle(ActionRequest actionRequest)
+		throws Exception {
 
-		getArticle(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
 
-		JournalArticle article =
-			(JournalArticle)req.getAttribute(WebKeys.JOURNAL_ARTICLE);
+		getArticle(request);
 
-		JournalUtil.addRecentArticle(req, article);
+		JournalArticle article = (JournalArticle)actionRequest.getAttribute(
+			WebKeys.JOURNAL_ARTICLE);
+
+		JournalUtil.addRecentArticle(actionRequest, article);
 	}
 
-	public static void getArticle(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getArticle(RenderRequest renderRequest)
+		throws Exception {
 
-		getArticle(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
 
-		JournalArticle article =
-			(JournalArticle)req.getAttribute(WebKeys.JOURNAL_ARTICLE);
+		getArticle(request);
 
-		JournalUtil.addRecentArticle(req, article);
+		JournalArticle article = (JournalArticle)renderRequest.getAttribute(
+			WebKeys.JOURNAL_ARTICLE);
+
+		JournalUtil.addRecentArticle(renderRequest, article);
 	}
 
-	public static void getArticle(HttpServletRequest req) throws Exception {
-		long groupId = ParamUtil.getLong(req, "groupId");
-		String articleId = ParamUtil.getString(req, "articleId");
+	public static void getArticle(HttpServletRequest request) throws Exception {
+		long groupId = ParamUtil.getLong(request, "groupId");
+		String articleId = ParamUtil.getString(request, "articleId");
 		double version = ParamUtil.getDouble(
-			req, "version", JournalArticleImpl.DEFAULT_VERSION);
+			request, "version", JournalArticleImpl.DEFAULT_VERSION);
 
 		JournalArticle article = null;
 
@@ -85,24 +91,26 @@ public class ActionUtil {
 				groupId, articleId, version);
 		}
 
-		req.setAttribute(WebKeys.JOURNAL_ARTICLE, article);
+		request.setAttribute(WebKeys.JOURNAL_ARTICLE, article);
 	}
 
-	public static void getFeed(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getFeed(ActionRequest actionRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
 
-		getFeed(httpReq);
+		getFeed(request);
 	}
 
-	public static void getFeed(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getFeed(RenderRequest renderRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
 
-		getFeed(httpReq);
+		getFeed(request);
 	}
 
-	public static void getFeed(HttpServletRequest req) throws Exception {
-		long groupId = ParamUtil.getLong(req, "groupId");
-		String feedId = ParamUtil.getString(req, "feedId");
+	public static void getFeed(HttpServletRequest request) throws Exception {
+		long groupId = ParamUtil.getLong(request, "groupId");
+		String feedId = ParamUtil.getString(request, "feedId");
 
 		JournalFeed feed = null;
 
@@ -110,34 +118,44 @@ public class ActionUtil {
 			feed = JournalFeedServiceUtil.getFeed(groupId, feedId);
 		}
 
-		req.setAttribute(WebKeys.JOURNAL_FEED, feed);
+		request.setAttribute(WebKeys.JOURNAL_FEED, feed);
 	}
 
-	public static void getStructure(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getStructure(ActionRequest actionRequest)
+		throws Exception {
 
-		getStructure(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		getStructure(request);
 
 		JournalStructure structure =
-			(JournalStructure)req.getAttribute(WebKeys.JOURNAL_STRUCTURE);
+			(JournalStructure)actionRequest.getAttribute(
+				WebKeys.JOURNAL_STRUCTURE);
 
-		JournalUtil.addRecentStructure(req, structure);
+		JournalUtil.addRecentStructure(actionRequest, structure);
 	}
 
-	public static void getStructure(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getStructure(RenderRequest renderRequest)
+		throws Exception {
 
-		getStructure(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+
+		getStructure(request);
 
 		JournalStructure structure =
-			(JournalStructure)req.getAttribute(WebKeys.JOURNAL_STRUCTURE);
+			(JournalStructure)renderRequest.getAttribute(
+				WebKeys.JOURNAL_STRUCTURE);
 
-		JournalUtil.addRecentStructure(req, structure);
+		JournalUtil.addRecentStructure(renderRequest, structure);
 	}
 
-	public static void getStructure(HttpServletRequest req) throws Exception {
-		long groupId = ParamUtil.getLong(req, "groupId");
-		String structureId = ParamUtil.getString(req, "structureId");
+	public static void getStructure(HttpServletRequest request)
+		throws Exception {
+
+		long groupId = ParamUtil.getLong(request, "groupId");
+		String structureId = ParamUtil.getString(request, "structureId");
 
 		JournalStructure structure = null;
 
@@ -146,34 +164,42 @@ public class ActionUtil {
 				groupId, structureId);
 		}
 
-		req.setAttribute(WebKeys.JOURNAL_STRUCTURE, structure);
+		request.setAttribute(WebKeys.JOURNAL_STRUCTURE, structure);
 	}
 
-	public static void getTemplate(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getTemplate(ActionRequest actionRequest)
+		throws Exception {
 
-		getTemplate(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
 
-		JournalTemplate template =
-			(JournalTemplate)req.getAttribute(WebKeys.JOURNAL_TEMPLATE);
+		getTemplate(request);
 
-		JournalUtil.addRecentTemplate(req, template);
+		JournalTemplate template = (JournalTemplate)actionRequest.getAttribute(
+			WebKeys.JOURNAL_TEMPLATE);
+
+		JournalUtil.addRecentTemplate(actionRequest, template);
 	}
 
-	public static void getTemplate(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getTemplate(RenderRequest renderRequest)
+		throws Exception {
 
-		getTemplate(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
 
-		JournalTemplate template =
-			(JournalTemplate)req.getAttribute(WebKeys.JOURNAL_TEMPLATE);
+		getTemplate(request);
 
-		JournalUtil.addRecentTemplate(req, template);
+		JournalTemplate template = (JournalTemplate)renderRequest.getAttribute(
+			WebKeys.JOURNAL_TEMPLATE);
+
+		JournalUtil.addRecentTemplate(renderRequest, template);
 	}
 
-	public static void getTemplate(HttpServletRequest req) throws Exception {
-		long groupId = ParamUtil.getLong(req, "groupId");
-		String templateId = ParamUtil.getString(req, "templateId");
+	public static void getTemplate(HttpServletRequest request)
+		throws Exception {
+
+		long groupId = ParamUtil.getLong(request, "groupId");
+		String templateId = ParamUtil.getString(request, "templateId");
 
 		JournalTemplate template = null;
 
@@ -182,7 +208,7 @@ public class ActionUtil {
 				groupId, templateId);
 		}
 
-		req.setAttribute(WebKeys.JOURNAL_TEMPLATE, template);
+		request.setAttribute(WebKeys.JOURNAL_TEMPLATE, template);
 	}
 
 }

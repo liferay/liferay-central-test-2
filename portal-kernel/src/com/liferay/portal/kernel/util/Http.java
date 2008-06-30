@@ -76,7 +76,7 @@ public interface Http {
 
 	public String encodeURL(String url, boolean escapeSpaces);
 
-	public String getCompleteURL(HttpServletRequest req);
+	public String getCompleteURL(HttpServletRequest request);
 
 	public String getDomain(String url);
 
@@ -90,15 +90,15 @@ public interface Http {
 
 	public String getProtocol(String url);
 
-	public String getProtocol(HttpServletRequest req);
+	public String getProtocol(HttpServletRequest request);
 
-	public String getProtocol(ActionRequest req);
+	public String getProtocol(ActionRequest actionRequest);
 
-	public String getProtocol(RenderRequest req);
+	public String getProtocol(RenderRequest renderRequest);
 
 	public String getQueryString(String url);
 
-	public String getRequestURL(HttpServletRequest req);
+	public String getRequestURL(HttpServletRequest request);
 
 	public boolean hasProxyConfig();
 
@@ -115,11 +115,11 @@ public interface Http {
 
 	public String protocolize(String url, boolean secure);
 
-	public String protocolize(String url, HttpServletRequest req);
+	public String protocolize(String url, HttpServletRequest request);
 
-	public String protocolize(String url, ActionRequest req);
+	public String protocolize(String url, ActionRequest actionRequest);
 
-	public String protocolize(String url, RenderRequest req);
+	public String protocolize(String url, RenderRequest renderRequest);
 
 	public String removeParameter(String url, String name);
 

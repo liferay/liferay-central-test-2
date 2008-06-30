@@ -235,16 +235,16 @@ public class HttpImpl implements Http {
 		}
 	}
 
-	public String getCompleteURL(HttpServletRequest req) {
-		StringBuffer completeURL = req.getRequestURL();
+	public String getCompleteURL(HttpServletRequest request) {
+		StringBuffer completeURL = request.getRequestURL();
 
 		if (completeURL == null) {
 			completeURL = new StringBuffer();
 		}
 
-		if (req.getQueryString() != null) {
+		if (request.getQueryString() != null) {
 			completeURL.append(StringPool.QUESTION);
-			completeURL.append(req.getQueryString());
+			completeURL.append(request.getQueryString());
 		}
 
 		return completeURL.toString();
@@ -336,16 +336,16 @@ public class HttpImpl implements Http {
 		}
 	}
 
-	public String getProtocol(HttpServletRequest req) {
-		return getProtocol(req.isSecure());
+	public String getProtocol(HttpServletRequest request) {
+		return getProtocol(request.isSecure());
 	}
 
-	public String getProtocol(ActionRequest req) {
-		return getProtocol(req.isSecure());
+	public String getProtocol(ActionRequest actionRequest) {
+		return getProtocol(actionRequest.isSecure());
 	}
 
-	public String getProtocol(RenderRequest req) {
-		return getProtocol(req.isSecure());
+	public String getProtocol(RenderRequest renderRequest) {
+		return getProtocol(renderRequest.isSecure());
 	}
 
 	public String getQueryString(String url) {
@@ -363,8 +363,8 @@ public class HttpImpl implements Http {
 		}
 	}
 
-	public String getRequestURL(HttpServletRequest req) {
-		return req.getRequestURL().toString();
+	public String getRequestURL(HttpServletRequest request) {
+		return request.getRequestURL().toString();
 	}
 
 	public boolean hasProxyConfig() {
@@ -497,16 +497,16 @@ public class HttpImpl implements Http {
 		return url;
 	}
 
-	public String protocolize(String url, HttpServletRequest req) {
-		return protocolize(url, req.isSecure());
+	public String protocolize(String url, HttpServletRequest request) {
+		return protocolize(url, request.isSecure());
 	}
 
-	public String protocolize(String url, ActionRequest req) {
-		return protocolize(url, req.isSecure());
+	public String protocolize(String url, ActionRequest actionRequest) {
+		return protocolize(url, actionRequest.isSecure());
 	}
 
-	public String protocolize(String url, RenderRequest req) {
-		return protocolize(url, req.isSecure());
+	public String protocolize(String url, RenderRequest renderRequest) {
+		return protocolize(url, renderRequest.isSecure());
 	}
 
 	public String removeParameter(String url, String name) {

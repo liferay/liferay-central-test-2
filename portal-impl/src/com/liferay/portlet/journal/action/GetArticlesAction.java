@@ -97,25 +97,26 @@ public class GetArticlesAction extends Action {
 		}
 	}
 
-	protected List<JournalArticle> getArticles(HttpServletRequest req)
+	protected List<JournalArticle> getArticles(HttpServletRequest request)
 		throws Exception {
 
-		long companyId = PortalUtil.getCompanyId(req);
-		long groupId = DAOParamUtil.getLong(req, "groupId");
+		long companyId = PortalUtil.getCompanyId(request);
+		long groupId = DAOParamUtil.getLong(request, "groupId");
 		String articleId = null;
 		Double version = null;
 		String title = null;
 		String description = null;
 		String content = null;
-		String type = DAOParamUtil.getString(req, "type");
+		String type = DAOParamUtil.getString(request, "type");
 		String[] structureIds = StringUtil.split(
-			DAOParamUtil.getString(req, "structureId"));
+			DAOParamUtil.getString(request, "structureId"));
 		String[] templateIds = StringUtil.split(
-			DAOParamUtil.getString(req, "templateId"));
+			DAOParamUtil.getString(request, "templateId"));
 
 		Date displayDateGT = null;
 
-		String displayDateGTParam = ParamUtil.getString(req, "displayDateGT");
+		String displayDateGTParam = ParamUtil.getString(
+			request, "displayDateGT");
 
 		if (Validator.isNotNull(displayDateGTParam)) {
 			DateFormat displayDateGTFormat = DateUtil.getISOFormat(
@@ -131,7 +132,8 @@ public class GetArticlesAction extends Action {
 
 		Date displayDateLT = null;
 
-		String displayDateLTParam = ParamUtil.getString(req, "displayDateLT");
+		String displayDateLTParam = ParamUtil.getString(
+			request, "displayDateLT");
 
 		if (Validator.isNotNull(displayDateLTParam)) {
 			DateFormat displayDateLTFormat = DateUtil.getISOFormat(
@@ -154,10 +156,10 @@ public class GetArticlesAction extends Action {
 		Date reviewDate = null;
 		boolean andOperator = true;
 		int start = 0;
-		int end = ParamUtil.getInteger(req, "delta", 5);
-		String orderBy = ParamUtil.getString(req, "orderBy");
-		String orderByCol = ParamUtil.getString(req, "orderByCol", orderBy);
-		String orderByType = ParamUtil.getString(req, "orderByType");
+		int end = ParamUtil.getInteger(request, "delta", 5);
+		String orderBy = ParamUtil.getString(request, "orderBy");
+		String orderByCol = ParamUtil.getString(request, "orderByCol", orderBy);
+		String orderByType = ParamUtil.getString(request, "orderByType");
 		boolean orderByAsc = orderByType.equals("asc");
 
 		OrderByComparator obc = new ArticleModifiedDateComparator(orderByAsc);

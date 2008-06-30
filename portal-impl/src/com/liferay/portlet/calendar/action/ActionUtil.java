@@ -41,20 +41,22 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionUtil {
 
-	public static void getEvent(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getEvent(ActionRequest actionRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
 
-		getEvent(httpReq);
+		getEvent(request);
 	}
 
-	public static void getEvent(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getEvent(RenderRequest renderRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
 
-		getEvent(httpReq);
+		getEvent(request);
 	}
 
-	public static void getEvent(HttpServletRequest req) throws Exception {
-		long eventId = ParamUtil.getLong(req, "eventId");
+	public static void getEvent(HttpServletRequest request) throws Exception {
+		long eventId = ParamUtil.getLong(request, "eventId");
 
 		CalEvent event = null;
 
@@ -62,7 +64,7 @@ public class ActionUtil {
 			event = CalEventServiceUtil.getEvent(eventId);
 		}
 
-		req.setAttribute(WebKeys.CALENDAR_EVENT, event);
+		request.setAttribute(WebKeys.CALENDAR_EVENT, event);
 	}
 
 }

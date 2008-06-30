@@ -35,8 +35,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class JavaScriptCachedAction extends LastModifiedAction {
 
-	public String getLastModifiedKey(HttpServletRequest req) {
-		return req.getSession().getId();
+	public String getLastModifiedKey(HttpServletRequest request) {
+		return request.getSession().getId();
 	}
 
 	public String getLastModifiedValue(String key) {

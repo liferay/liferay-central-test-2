@@ -51,8 +51,8 @@ public class StripFilter extends BasePortalFilter {
 	public static final String SKIP_FILTER =
 		StripFilter.class.getName() + "SKIP_FILTER";
 
-	protected boolean isAlreadyFiltered(HttpServletRequest req) {
-		if (req.getAttribute(SKIP_FILTER) != null) {
+	protected boolean isAlreadyFiltered(HttpServletRequest request) {
+		if (request.getAttribute(SKIP_FILTER) != null) {
 			return true;
 		}
 		else {
@@ -60,8 +60,8 @@ public class StripFilter extends BasePortalFilter {
 		}
 	}
 
-	protected boolean isInclude(HttpServletRequest req) {
-		String uri = (String)req.getAttribute(
+	protected boolean isInclude(HttpServletRequest request) {
+		String uri = (String)request.getAttribute(
 			JavaConstants.JAVAX_SERVLET_INCLUDE_REQUEST_URI);
 
 		if (uri == null) {
@@ -72,8 +72,8 @@ public class StripFilter extends BasePortalFilter {
 		}
 	}
 
-	protected boolean isStrip(HttpServletRequest req) {
-		if (!ParamUtil.getBoolean(req, _STRIP, true)) {
+	protected boolean isStrip(HttpServletRequest request) {
+		if (!ParamUtil.getBoolean(request, _STRIP, true)) {
 			return false;
 		}
 		else {
@@ -83,10 +83,10 @@ public class StripFilter extends BasePortalFilter {
 			// performance because the user will not start downloading the
 			// content until the entire content is compressed.
 
-			String lifecycle = ParamUtil.getString(req, "p_p_lifecycle");
+			String lifecycle = ParamUtil.getString(request, "p_p_lifecycle");
 
 			if (lifecycle.equals("1") &&
-				LiferayWindowState.isExclusive(req)) {
+				LiferayWindowState.isExclusive(request)) {
 
 				return false;
 			}

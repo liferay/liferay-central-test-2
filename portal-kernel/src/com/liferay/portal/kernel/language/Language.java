@@ -93,9 +93,9 @@ public interface Language {
 
 	public String getCharset(Locale locale);
 
-	public String getLanguageId(PortletRequest req);
+	public String getLanguageId(PortletRequest portletRequest);
 
-	public String getLanguageId(HttpServletRequest req);
+	public String getLanguageId(HttpServletRequest request);
 
 	public String getLanguageId(Locale locale);
 

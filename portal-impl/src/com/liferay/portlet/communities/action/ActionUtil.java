@@ -44,20 +44,22 @@ import javax.servlet.http.HttpServletRequest;
 public class ActionUtil
 	extends com.liferay.portlet.enterpriseadmin.action.ActionUtil {
 
-	public static void getGroup(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getGroup(ActionRequest actionRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
 
-		getGroup(httpReq);
+		getGroup(request);
 	}
 
-	public static void getGroup(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getGroup(RenderRequest renderRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
 
-		getGroup(httpReq);
+		getGroup(request);
 	}
 
-	public static void getGroup(HttpServletRequest req) throws Exception {
-		long groupId = ParamUtil.getLong(req, "groupId");
+	public static void getGroup(HttpServletRequest request) throws Exception {
+		long groupId = ParamUtil.getLong(request, "groupId");
 
 		Group group = null;
 
@@ -65,30 +67,32 @@ public class ActionUtil
 			group = GroupLocalServiceUtil.getGroup(groupId);
 		}
 
-		req.setAttribute(WebKeys.GROUP, group);
+		request.setAttribute(WebKeys.GROUP, group);
 	}
 
-	public static void getMembershipRequest(ActionRequest req)
+	public static void getMembershipRequest(ActionRequest actionRequest)
 		throws Exception {
 
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
 
-		getMembershipRequest(httpReq);
+		getMembershipRequest(request);
 	}
 
-	public static void getMembershipRequest(RenderRequest req)
+	public static void getMembershipRequest(RenderRequest renderRequest)
 		throws Exception {
 
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
 
-		getMembershipRequest(httpReq);
+		getMembershipRequest(request);
 	}
 
-	public static void getMembershipRequest(HttpServletRequest req)
+	public static void getMembershipRequest(HttpServletRequest request)
 		throws Exception {
 
 		long membershipRequestId =
-			ParamUtil.getLong(req, "membershipRequestId");
+			ParamUtil.getLong(request, "membershipRequestId");
 
 		MembershipRequest membershipRequest = null;
 
@@ -98,7 +102,7 @@ public class ActionUtil
 					membershipRequestId);
 		}
 
-		req.setAttribute(WebKeys.MEMBERSHIP_REQUEST, membershipRequest);
+		request.setAttribute(WebKeys.MEMBERSHIP_REQUEST, membershipRequest);
 	}
 
 }

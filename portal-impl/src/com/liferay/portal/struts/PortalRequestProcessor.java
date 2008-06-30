@@ -190,9 +190,9 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 	}
 
 	protected HttpServletRequest callParentProcessMultipart(
-		HttpServletRequest req) {
+		HttpServletRequest request) {
 
-		return super.processMultipart(req);
+		return super.processMultipart(request);
 	}
 
 	protected String callParentProcessPath(
@@ -502,11 +502,11 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		return mapping;
 	}
 
-	protected HttpServletRequest processMultipart(HttpServletRequest req) {
+	protected HttpServletRequest processMultipart(HttpServletRequest request) {
 
 		// Disable Struts from automatically wrapping a multipart request
 
-		return req;
+		return request;
 	}
 
 	protected String processPath(

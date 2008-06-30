@@ -98,7 +98,7 @@ public interface Portal {
 	public String getCommunityLoginURL(ThemeDisplay themeDisplay)
 		throws PortalException, SystemException;
 
-	public Company getCompany(HttpServletRequest req)
+	public Company getCompany(HttpServletRequest request)
 		throws PortalException, SystemException;
 
 	public Company getCompany(ActionRequest actionRequest)

@@ -41,7 +41,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class LiferayURLConstructor implements URLConstructor {
 
-	public String getForwardPage(HttpServletRequest req) {
+	public String getForwardPage(HttpServletRequest request) {
 		return "Wiki.jsp";
 	}
 

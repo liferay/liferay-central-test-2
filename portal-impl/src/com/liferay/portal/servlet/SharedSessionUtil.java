@@ -40,12 +40,12 @@ import org.apache.commons.logging.LogFactory;
 public class SharedSessionUtil {
 
 	public static Map<String, Object> getSharedSessionAttributes(
-		HttpServletRequest req) {
+		HttpServletRequest request) {
 
-		HttpSession ses = req.getSession();
+		HttpSession session = request.getSession();
 
 		SharedSessionAttributeCache cache =
-			SharedSessionAttributeCache.getInstance(ses);
+			SharedSessionAttributeCache.getInstance(session);
 
 		Map<String, Object> values = cache.getValues();
 

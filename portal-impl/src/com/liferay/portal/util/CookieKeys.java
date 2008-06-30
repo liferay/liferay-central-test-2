@@ -190,8 +190,8 @@ public class CookieKeys {
 		return domain;
 	}
 
-	public static boolean hasSessionId(HttpServletRequest req) {
-		String jsessionid = getCookie(req, JSESSIONID);
+	public static boolean hasSessionId(HttpServletRequest request) {
+		String jsessionid = getCookie(request, JSESSIONID);
 
 		if (jsessionid != null) {
 			return true;

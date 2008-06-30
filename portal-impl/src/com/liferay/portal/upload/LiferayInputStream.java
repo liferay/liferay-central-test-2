@@ -51,11 +51,11 @@ public class LiferayInputStream extends ServletInputStreamWrapper {
 	public static final int THRESHOLD_SIZE = GetterUtil.getInteger(
 		PropsUtil.get(LiferayInputStream.class.getName() + ".threshold.size"));
 
-	public LiferayInputStream(HttpServletRequest req) throws IOException {
-		super(req.getInputStream());
+	public LiferayInputStream(HttpServletRequest request) throws IOException {
+		super(request.getInputStream());
 
-		_ses = req.getSession();
-		_totalSize = req.getContentLength();
+		_session = request.getSession();
+		_totalSize = request.getContentLength();
 	}
 
 	public int read(byte[] b, int off, int len) throws IOException {
@@ -78,11 +78,12 @@ public class LiferayInputStream extends ServletInputStreamWrapper {
 			_cachedBytes.write(b, off, bytesRead);
 		}
 
-		Integer curPercent = (Integer)_ses.getAttribute(
+		Integer curPercent = (Integer)_session.getAttribute(
 			LiferayFileUpload.PERCENT);
 
 		if ((curPercent == null) || (percent - curPercent.intValue() >= 1)) {
-			_ses.setAttribute(LiferayFileUpload.PERCENT, new Integer(percent));
+			_session.setAttribute(
+				LiferayFileUpload.PERCENT, new Integer(percent));
 		}
 
 		return bytesRead;
@@ -100,7 +101,7 @@ public class LiferayInputStream extends ServletInputStreamWrapper {
 
 	private static Log _log = LogFactory.getLog(LiferayInputStream.class);
 
-	private HttpSession _ses;
+	private HttpSession _session;
 	private int _totalRead;
 	private int _totalSize;
 	private ByteArrayMaker _cachedBytes = new ByteArrayMaker();

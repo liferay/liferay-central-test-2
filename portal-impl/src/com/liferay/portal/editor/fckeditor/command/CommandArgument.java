@@ -46,14 +46,14 @@ public class CommandArgument {
 
 	public CommandArgument(
 		String command, String type, String currentFolder, String newFolder,
-		ThemeDisplay themeDisplay, HttpServletRequest req) {
+		ThemeDisplay themeDisplay, HttpServletRequest request) {
 
 		_command = command;
 		_type = type;
 		_currentFolder = currentFolder;
 		_newFolder = newFolder;
 		_themeDisplay = themeDisplay;
-		_req = req;
+		_request = request;
 	}
 
 	public String getCommand() {
@@ -77,7 +77,7 @@ public class CommandArgument {
 	}
 
 	public HttpServletRequest getHttpServletRequest() {
-		return _req;
+		return _request;
 	}
 
 	public long getCompanyId() {
@@ -137,6 +137,6 @@ public class CommandArgument {
 	private String _currentFolder;
 	private String _newFolder;
 	private ThemeDisplay _themeDisplay;
-	private HttpServletRequest _req;
+	private HttpServletRequest _request;
 
 }

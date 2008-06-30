@@ -99,11 +99,11 @@ public class LayoutCacheFilter
 		PortalInitableUtil.init(this);
 	}
 
-	protected String getBrowserType(HttpServletRequest req) {
-		if (BrowserSnifferUtil.is_ie_7(req)) {
+	protected String getBrowserType(HttpServletRequest request) {
+		if (BrowserSnifferUtil.is_ie_7(request)) {
 			return _BROWSER_TYPE_IE_7;
 		}
-		else if (BrowserSnifferUtil.is_ie(req)) {
+		else if (BrowserSnifferUtil.is_ie(request)) {
 			return _BROWSER_TYPE_IE;
 		}
 		else {
@@ -111,32 +111,32 @@ public class LayoutCacheFilter
 		}
 	}
 
-	protected String getCacheKey(HttpServletRequest req) {
+	protected String getCacheKey(HttpServletRequest request) {
 		StringBuilder sb = new StringBuilder();
 
 		// Url
 
-		sb.append(HttpUtil.getProtocol(req));
+		sb.append(HttpUtil.getProtocol(request));
 		sb.append("://");
-		sb.append(req.getServletPath());
-		sb.append(req.getPathInfo());
+		sb.append(request.getServletPath());
+		sb.append(request.getPathInfo());
 		sb.append(StringPool.QUESTION);
-		sb.append(req.getQueryString());
+		sb.append(request.getQueryString());
 
 		// Language
 
 		sb.append(StringPool.POUND);
-		sb.append(LanguageUtil.getLanguageId(req));
+		sb.append(LanguageUtil.getLanguageId(request));
 
 		// Browser type
 
 		sb.append(StringPool.POUND);
-		sb.append(getBrowserType(req));
+		sb.append(getBrowserType(request));
 
 		// Gzip compression
 
 		sb.append(StringPool.POUND);
-		sb.append(BrowserSnifferUtil.acceptsGzip(req));
+		sb.append(BrowserSnifferUtil.acceptsGzip(request));
 
 		return sb.toString().trim().toUpperCase();
 	}
@@ -243,8 +243,8 @@ public class LayoutCacheFilter
 		}
 	}
 
-	protected boolean isAlreadyFiltered(HttpServletRequest req) {
-		if (req.getAttribute(SKIP_FILTER) != null) {
+	protected boolean isAlreadyFiltered(HttpServletRequest request) {
+		if (request.getAttribute(SKIP_FILTER) != null) {
 			return true;
 		}
 		else {
@@ -252,15 +252,15 @@ public class LayoutCacheFilter
 		}
 	}
 
-	protected boolean isCacheable(long companyId, HttpServletRequest req) {
+	protected boolean isCacheable(long companyId, HttpServletRequest request) {
 		if (_pattern == _PATTERN_RESOURCE) {
 			return true;
 		}
 
 		try {
 			long plid = getPlid(
-				companyId, req.getPathInfo(), req.getServletPath(),
-				ParamUtil.getLong(req, "p_l_id"));
+				companyId, request.getPathInfo(), request.getServletPath(),
+				ParamUtil.getLong(request, "p_l_id"));
 
 			if (plid <= 0) {
 				return false;
@@ -301,8 +301,8 @@ public class LayoutCacheFilter
 		return true;
 	}
 
-	protected boolean isInclude(HttpServletRequest req) {
-		String uri = (String)req.getAttribute(
+	protected boolean isInclude(HttpServletRequest request) {
+		String uri = (String)request.getAttribute(
 			JavaConstants.JAVAX_SERVLET_INCLUDE_REQUEST_URI);
 
 		if (uri == null) {
@@ -313,14 +313,14 @@ public class LayoutCacheFilter
 		}
 	}
 
-	protected boolean isLayout(HttpServletRequest req) {
+	protected boolean isLayout(HttpServletRequest request) {
 		if ((_pattern == _PATTERN_FRIENDLY) ||
 			(_pattern == _PATTERN_RESOURCE)) {
 
 			return true;
 		}
 		else {
-			String plid = ParamUtil.getString(req, "p_l_id");
+			String plid = ParamUtil.getString(request, "p_l_id");
 
 			if (Validator.isNotNull(plid)) {
 				return true;
@@ -331,8 +331,8 @@ public class LayoutCacheFilter
 		}
 	}
 
-	protected boolean isPortletRequest(HttpServletRequest req) {
-		String portletId = ParamUtil.getString(req, "p_p_id");
+	protected boolean isPortletRequest(HttpServletRequest request) {
+		String portletId = ParamUtil.getString(request, "p_p_id");
 
 		if (Validator.isNull(portletId)) {
 			return false;
@@ -342,9 +342,9 @@ public class LayoutCacheFilter
 		}
 	}
 
-	protected boolean isSignedIn(HttpServletRequest req) {
-		long userId = PortalUtil.getUserId(req);
-		String remoteUser = req.getRemoteUser();
+	protected boolean isSignedIn(HttpServletRequest request) {
+		long userId = PortalUtil.getUserId(request);
+		String remoteUser = request.getRemoteUser();
 
 		if ((userId <= 0) && (remoteUser == null)) {
 			return false;

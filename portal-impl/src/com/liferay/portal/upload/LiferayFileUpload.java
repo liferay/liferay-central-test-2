@@ -51,20 +51,20 @@ public class LiferayFileUpload extends ServletFileUpload {
 	public static final String PERCENT = ProgressTracker.PERCENT;
 
 	public LiferayFileUpload(
-		FileItemFactory fileItemFactory, HttpServletRequest req) {
+		FileItemFactory fileItemFactory, HttpServletRequest request) {
 
 		super(fileItemFactory);
 
-		_ses = req.getSession();
+		_session = request.getSession();
 	}
 
-	public List parseRequest(HttpServletRequest req)
+	public List parseRequest(HttpServletRequest request)
 		throws FileUploadException {
 
-		_ses.removeAttribute(LiferayFileUpload.FILE_NAME);
-		_ses.removeAttribute(LiferayFileUpload.PERCENT);
+		_session.removeAttribute(LiferayFileUpload.FILE_NAME);
+		_session.removeAttribute(LiferayFileUpload.PERCENT);
 
-		return super.parseRequest(req);
+		return super.parseRequest(request);
 	}
 
 	/**
@@ -79,12 +79,12 @@ public class LiferayFileUpload extends ServletFileUpload {
 		String fileName = item.getFileName();
 
 		if (Validator.isNotNull(fileName)) {
-			_ses.setAttribute(LiferayFileUpload.FILE_NAME, fileName);
+			_session.setAttribute(LiferayFileUpload.FILE_NAME, fileName);
 		}
 
 		return item;
 	}
 
-	private HttpSession _ses;
+	private HttpSession _session;
 
 }

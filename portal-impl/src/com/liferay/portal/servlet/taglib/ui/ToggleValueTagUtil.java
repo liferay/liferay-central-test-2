@@ -41,11 +41,11 @@ import org.apache.commons.logging.LogFactory;
 public class ToggleValueTagUtil {
 
 	public static void doEndTag(
-			String id, PageContext pageContext, HttpServletRequest req)
+			String id, PageContext pageContext, HttpServletRequest request)
 		throws JspException {
 
 		try {
-			String value = SessionClicks.get(req, id, StringPool.BLANK);
+			String value = SessionClicks.get(request, id, StringPool.BLANK);
 
 			if (value.equals(StringPool.BLANK)) {
 				value = "block";

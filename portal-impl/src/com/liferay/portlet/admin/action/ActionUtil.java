@@ -41,20 +41,28 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionUtil {
 
-	public static void getInstance(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getInstance(ActionRequest actionRequest)
+		throws Exception {
 
-		getInstance(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		getInstance(request);
 	}
 
-	public static void getInstance(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getInstance(RenderRequest renderRequest)
+		throws Exception {
 
-		getInstance(httpReq);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+
+		getInstance(request);
 	}
 
-	public static void getInstance(HttpServletRequest req) throws Exception {
-		long companyId = ParamUtil.getLong(req, "companyId");
+	public static void getInstance(HttpServletRequest request)
+		throws Exception {
+
+		long companyId = ParamUtil.getLong(request, "companyId");
 
 		Company company = null;
 
@@ -62,7 +70,7 @@ public class ActionUtil {
 			company = CompanyLocalServiceUtil.getCompanyById(companyId);
 		}
 
-		req.setAttribute(WebKeys.SEL_COMPANY, company);
+		request.setAttribute(WebKeys.SEL_COMPANY, company);
 	}
 
 }

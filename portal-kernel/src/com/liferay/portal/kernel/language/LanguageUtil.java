@@ -160,12 +160,12 @@ public class LanguageUtil {
 		return _getUtil()._language;
 	}
 
-	public static String getLanguageId(PortletRequest req) {
-		return getLanguage().getLanguageId(req);
+	public static String getLanguageId(PortletRequest portletRequest) {
+		return getLanguage().getLanguageId(portletRequest);
 	}
 
-	public static String getLanguageId(HttpServletRequest req) {
-		return getLanguage().getLanguageId(req);
+	public static String getLanguageId(HttpServletRequest request) {
+		return getLanguage().getLanguageId(request);
 	}
 
 	public static String getLanguageId(Locale locale) {

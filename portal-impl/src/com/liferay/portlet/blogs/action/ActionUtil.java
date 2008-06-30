@@ -46,25 +46,27 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionUtil {
 
-	public static void getEntry(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getEntry(ActionRequest actionRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
 
-		getEntry(httpReq);
+		getEntry(request);
 	}
 
-	public static void getEntry(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void getEntry(RenderRequest renderRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
 
-		getEntry(httpReq);
+		getEntry(request);
 	}
 
-	public static void getEntry(HttpServletRequest req) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+	public static void getEntry(HttpServletRequest request) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long entryId = ParamUtil.getLong(req, "entryId");
+		long entryId = ParamUtil.getLong(request, "entryId");
 
-		String urlTitle = ParamUtil.getString(req, "urlTitle");
+		String urlTitle = ParamUtil.getString(request, "urlTitle");
 
 		BlogsEntry entry = null;
 
@@ -94,7 +96,7 @@ public class ActionUtil {
 			}
 		}
 
-		req.setAttribute(WebKeys.BLOGS_ENTRY, entry);
+		request.setAttribute(WebKeys.BLOGS_ENTRY, entry);
 	}
 
 }
