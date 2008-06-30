@@ -236,18 +236,6 @@ int count = 0;
 				<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) && WikiNodePermission.contains(permissionChecker, wikiPage.getNodeId(), ActionKeys.ADD_PAGE) %>">
 
 					<%
-					PortletURL movePageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
-
-					movePageURL.setParameter("struts_action", "/wiki/move_page");
-					movePageURL.setParameter("redirect", viewPageURL.toString());
-					%>
-
-					<liferay-ui:icon image="forward" message="move" url="<%= movePageURL.toString() %>" label="<%= true %>" />
-				</c:if>
-
-				<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) && WikiNodePermission.contains(permissionChecker, wikiPage.getNodeId(), ActionKeys.ADD_PAGE) %>">
-
-					<%
 					PortletURL copyPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
 
 					copyPageURL.setParameter("struts_action", "/wiki/edit_page");
@@ -260,6 +248,18 @@ int count = 0;
 					%>
 
 					<liferay-ui:icon image="copy" url="<%= copyPageURL.toString() %>" label="<%= true %>" />
+				</c:if>
+
+				<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) && WikiNodePermission.contains(permissionChecker, wikiPage.getNodeId(), ActionKeys.ADD_PAGE) %>">
+
+					<%
+					PortletURL movePageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
+
+					movePageURL.setParameter("struts_action", "/wiki/move_page");
+					movePageURL.setParameter("redirect", viewPageURL.toString());
+					%>
+
+					<liferay-ui:icon image="forward" message="move" url="<%= movePageURL.toString() %>" label="<%= true %>" />
 				</c:if>
 
 				<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.DELETE) %>">

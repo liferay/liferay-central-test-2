@@ -53,15 +53,6 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 	</c:if>
 
 	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) && WikiNodePermission.contains(permissionChecker, wikiPage.getNodeId(), ActionKeys.ADD_PAGE) %>">
-		<portlet:renderURL var="movePageURL">
-			<portlet:param name="struts_action" value="/wiki/move_page" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="nodeId" value="<%= String.valueOf(wikiPage.getNodeId()) %>" />
-			<portlet:param name="title" value="<%= wikiPage.getTitle() %>" />
-		</portlet:renderURL>
-
-		<liferay-ui:icon image="forward" message="move" url="<%= movePageURL.toString() %>" />
-
 		<portlet:renderURL var="copyPageURL">
 			<portlet:param name="struts_action" value="/wiki/edit_page" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -73,7 +64,17 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 		</portlet:renderURL>
 
 		<liferay-ui:icon image="copy" url="<%= copyPageURL.toString() %>" />
+
+		<portlet:renderURL var="movePageURL">
+			<portlet:param name="struts_action" value="/wiki/move_page" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="nodeId" value="<%= String.valueOf(wikiPage.getNodeId()) %>" />
+			<portlet:param name="title" value="<%= wikiPage.getTitle() %>" />
+		</portlet:renderURL>
+
+		<liferay-ui:icon image="forward" message="move" url="<%= movePageURL.toString() %>" />
 	</c:if>
+
 	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.SUBSCRIBE) %>">
 		<c:choose>
 			<c:when test="<%= SubscriptionLocalServiceUtil.isSubscribed(user.getCompanyId(), user.getUserId(), WikiPage.class.getName(), wikiPage.getResourcePrimKey()) %>">
