@@ -61,8 +61,19 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 		</portlet:renderURL>
 
 		<liferay-ui:icon image="forward" message="move" url="<%= movePageURL.toString() %>" />
-	</c:if>
 
+		<portlet:renderURL var="copyPageURL">
+			<portlet:param name="struts_action" value="/wiki/edit_page" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="nodeId" value="<%= String.valueOf(wikiPage.getNodeId()) %>" />
+			<portlet:param name="title" value="" />
+			<portlet:param name="editTitle" value="1" />
+			<portlet:param name="templateNodeId" value="<%= String.valueOf(wikiPage.getNodeId()) %>" />
+			<portlet:param name="templateTitle" value="<%= wikiPage.getTitle() %>" />
+		</portlet:renderURL>
+
+		<liferay-ui:icon image="copy" url="<%= copyPageURL.toString() %>" />
+	</c:if>
 	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.SUBSCRIBE) %>">
 		<c:choose>
 			<c:when test="<%= SubscriptionLocalServiceUtil.isSubscribed(user.getCompanyId(), user.getUserId(), WikiPage.class.getName(), wikiPage.getResourcePrimKey()) %>">
