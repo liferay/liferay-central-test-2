@@ -75,16 +75,17 @@ public class ResourceRequestImpl
 	}
 
 	protected void init(
-		HttpServletRequest req, Portlet portlet, InvokerPortlet invokerPortlet,
-		PortletContext portletCtx, WindowState windowState,
-		PortletMode portletMode, PortletPreferences prefs, long plid) {
+		HttpServletRequest request, Portlet portlet,
+		InvokerPortlet invokerPortlet, PortletContext portletContext,
+		WindowState windowState, PortletMode portletMode,
+		PortletPreferences prefs, long plid) {
 
 		super.init(
-			req, portlet, invokerPortlet, portletCtx, windowState, portletMode,
-			prefs, plid);
+			request, portlet, invokerPortlet, portletContext, windowState,
+			portletMode, prefs, plid);
 
-		_cacheablity = ParamUtil.getString(req, "p_p_cacheability");
-		_resourceID = req.getParameter("p_p_resource_id");
+		_cacheablity = ParamUtil.getString(request, "p_p_cacheability");
+		_resourceID = request.getParameter("p_p_resource_id");
 	}
 
 	protected void recycle() {

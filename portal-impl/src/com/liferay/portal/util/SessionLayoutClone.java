@@ -35,14 +35,16 @@ import javax.servlet.http.HttpSession;
  */
 public class SessionLayoutClone implements LayoutClone {
 
-	public String get(HttpServletRequest req, long plid) {
-		HttpSession ses = req.getSession();
+	public String get(HttpServletRequest request, long plid) {
+		HttpSession session = request.getSession();
 
-		return (String)ses.getAttribute(_encodeKey(plid));
+		return (String)session.getAttribute(_encodeKey(plid));
 	}
 
-	public void update(HttpServletRequest req, long plid, String typeSettings) {
-		HttpSession ses = req.getSession();
+	public void update(
+		HttpServletRequest request, long plid, String typeSettings) {
+
+		HttpSession ses = request.getSession();
 
 		ses.setAttribute(_encodeKey(plid), typeSettings);
 	}

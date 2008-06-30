@@ -102,240 +102,258 @@ import org.apache.velocity.tools.generic.SortTool;
 public class VelocityVariables {
 
 	public static void insertHelperUtilities(
-		VelocityContext vc, String[] restrictedVariables) {
+		VelocityContext velocityContext, String[] restrictedVariables) {
 
 		// Array util
 
-		vc.put("arrayUtil", ArrayUtil_IW.getInstance());
+		velocityContext.put("arrayUtil", ArrayUtil_IW.getInstance());
 
 		// Browser sniffer
 
-		vc.put("browserSniffer", BrowserSnifferUtil.getBrowserSniffer());
+		velocityContext.put(
+			"browserSniffer", BrowserSnifferUtil.getBrowserSniffer());
 
 		// Date formats
 
-		vc.put("dateFormats", DateFormats_IW.getInstance());
+		velocityContext.put("dateFormats", DateFormats_IW.getInstance());
 
 		// Date tool
 
-		vc.put("dateTool", new DateTool());
+		velocityContext.put("dateTool", new DateTool());
 
 		// Date util
 
-		vc.put("dateUtil", DateUtil_IW.getInstance());
+		velocityContext.put("dateUtil", DateUtil_IW.getInstance());
 
 		// Escape tool
 
-		vc.put("escapeTool", new EscapeTool());
+		velocityContext.put("escapeTool", new EscapeTool());
 
 		// Expando column service
 
 		ServiceLocator serviceLocator = ServiceLocator.getInstance();
 
-		vc.put(
+		velocityContext.put(
 			"expandoColumnLocalService",
 			serviceLocator.findExceptionSafeService(
 				ExpandoColumnLocalService.class));
 
 		// Expando row service
 
-		vc.put(
+		velocityContext.put(
 			"expandoRowLocalService",
 			serviceLocator.findExceptionSafeService(
 				ExpandoRowLocalService.class));
 
 		// Expando table service
 
-		vc.put(
+		velocityContext.put(
 			"expandoTableLocalService",
 			serviceLocator.findExceptionSafeService(
 				ExpandoTableLocalService.class));
 
 		// Expando value service
 
-		vc.put(
+		velocityContext.put(
 			"expandoValueLocalService",
 			serviceLocator.findExceptionSafeService(
 				ExpandoValueLocalService.class));
 
 		// Getter util
 
-		vc.put("getterUtil", GetterUtil_IW.getInstance());
+		velocityContext.put("getterUtil", GetterUtil_IW.getInstance());
 
 		// Html util
 
-		vc.put("htmlUtil", HtmlUtil.getHtml());
+		velocityContext.put("htmlUtil", HtmlUtil.getHtml());
 
 		// Http util
 
-		vc.put("httpUtil", HttpUtil.getHttp());
+		velocityContext.put("httpUtil", HttpUtil.getHttp());
 
 		// ImageServletToken
 
-		vc.put("imageToken", ImageServletTokenUtil.getImageServletToken());
+		velocityContext.put(
+			"imageToken", ImageServletTokenUtil.getImageServletToken());
 
 		// Iterator tool
 
-		vc.put("iteratorTool", new IteratorTool());
+		velocityContext.put("iteratorTool", new IteratorTool());
 
 		// Language util
 
-		vc.put("languageUtil", LanguageUtil.getLanguage());
-		vc.put("unicodeLanguageUtil", UnicodeLanguageUtil.getUnicodeLanguage());
+		velocityContext.put("languageUtil", LanguageUtil.getLanguage());
+		velocityContext.put(
+			"unicodeLanguageUtil", UnicodeLanguageUtil.getUnicodeLanguage());
 
 		// List tool
 
-		vc.put("listTool", new ListTool());
+		velocityContext.put("listTool", new ListTool());
 
 		// Locale util
 
-		vc.put("localeUtil", LocaleUtil.getInstance());
+		velocityContext.put("localeUtil", LocaleUtil.getInstance());
 
 		// Math tool
 
-		vc.put("mathTool", new MathTool());
+		velocityContext.put("mathTool", new MathTool());
 
 		// Number tool
 
-		vc.put("numberTool", new NumberTool());
+		velocityContext.put("numberTool", new NumberTool());
 
 		// Param util
 
-		vc.put("paramUtil", ParamUtil_IW.getInstance());
+		velocityContext.put("paramUtil", ParamUtil_IW.getInstance());
 
 		// Portal util
 
 		_insertHelperUtility(
-			vc, restrictedVariables, "portalUtil", PortalUtil.getPortal());
+			velocityContext, restrictedVariables, "portalUtil",
+			PortalUtil.getPortal());
 		_insertHelperUtility(
-			vc, restrictedVariables, "portal", PortalUtil.getPortal());
+			velocityContext, restrictedVariables, "portal",
+			PortalUtil.getPortal());
 
 		// Prefs props util
 
 		_insertHelperUtility(
-			vc, restrictedVariables, "prefsPropsUtil",
+			velocityContext, restrictedVariables, "prefsPropsUtil",
 			PrefsPropsUtil_IW.getInstance());
 
 		// Props util
 
 		_insertHelperUtility(
-			vc, restrictedVariables, "propsUtil", PropsUtil_IW.getInstance());
+			velocityContext, restrictedVariables, "propsUtil",
+			PropsUtil_IW.getInstance());
 
 		// Portlet URL factory
 
-		vc.put("portletURLFactory", PortletURLFactory.getInstance());
+		velocityContext.put(
+			"portletURLFactory", PortletURLFactory.getInstance());
 
 		// Portlet preferences
 
 		_insertHelperUtility(
-			vc, restrictedVariables, "velocityPortletPreferences",
+			velocityContext, restrictedVariables, "velocityPortletPreferences",
 			new VelocityPortletPreferences());
 
 		// Randomizer
 
-		vc.put("randomizer", Randomizer_IW.getInstance().getWrappedInstance());
+		velocityContext.put(
+			"randomizer", Randomizer_IW.getInstance().getWrappedInstance());
 
 		// Service locator
 
 		_insertHelperUtility(
-			vc, restrictedVariables, "serviceLocator", serviceLocator);
+			velocityContext, restrictedVariables, "serviceLocator",
+			serviceLocator);
 
 		// Session clicks
 
 		_insertHelperUtility(
-			vc, restrictedVariables, "sessionClicks",
+			velocityContext, restrictedVariables, "sessionClicks",
 			SessionClicks_IW.getInstance());
 
 		// Sort tool
 
-		vc.put("sortTool", new SortTool());
+		velocityContext.put("sortTool", new SortTool());
 
 		// Static field getter
 
-		vc.put("staticFieldGetter", StaticFieldGetter.getInstance());
+		velocityContext.put(
+			"staticFieldGetter", StaticFieldGetter.getInstance());
 
 		// String util
 
-		vc.put("stringUtil", StringUtil_IW.getInstance());
+		velocityContext.put("stringUtil", StringUtil_IW.getInstance());
 
 		// Unicode formatter
 
-		vc.put("unicodeFormatter", UnicodeFormatter_IW.getInstance());
+		velocityContext.put(
+			"unicodeFormatter", UnicodeFormatter_IW.getInstance());
 
 		// Validator
 
-		vc.put("validator", Validator_IW.getInstance());
+		velocityContext.put("validator", Validator_IW.getInstance());
 
 		// Permissions
 
-		vc.put(
+		velocityContext.put(
 			"accountPermission", AccountPermissionUtil.getAccountPermission());
-		vc.put("commonPermission", CommonPermissionUtil.getCommonPermission());
-		vc.put("groupPermission", GroupPermissionUtil.getGroupPermission());
-		vc.put("layoutPermission", LayoutPermissionUtil.getLayoutPermission());
-		vc.put(
+		velocityContext.put(
+			"commonPermission", CommonPermissionUtil.getCommonPermission());
+		velocityContext.put(
+			"groupPermission", GroupPermissionUtil.getGroupPermission());
+		velocityContext.put(
+			"layoutPermission", LayoutPermissionUtil.getLayoutPermission());
+		velocityContext.put(
 			"organizationPermission",
 			OrganizationPermissionUtil.getOrganizationPermission());
-		vc.put(
+		velocityContext.put(
 			"passwordPolicyPermission",
 			PasswordPolicyPermissionUtil.getPasswordPolicyPermission());
-		vc.put("portalPermission", PortalPermissionUtil.getPortalPermission());
-		vc.put(
+		velocityContext.put(
+			"portalPermission", PortalPermissionUtil.getPortalPermission());
+		velocityContext.put(
 			"portletPermission", PortletPermissionUtil.getPortletPermission());
-		vc.put("rolePermission", RolePermissionUtil.getRolePermission());
-		vc.put(
+		velocityContext.put(
+			"rolePermission", RolePermissionUtil.getRolePermission());
+		velocityContext.put(
 			"userGroupPermission",
 			UserGroupPermissionUtil.getUserGroupPermission());
-		vc.put("userPermission", UserPermissionUtil.getUserPermission());
+		velocityContext.put(
+			"userPermission", UserPermissionUtil.getUserPermission());
 
 		// Deprecated permissions
 
-		vc.put(
+		velocityContext.put(
 			"locationPermission",
 			OrganizationPermissionUtil.getOrganizationPermission());
 	}
 
 	public static void insertVariables(
-		VelocityContext vc, HttpServletRequest req) {
+		VelocityContext velocityContext, HttpServletRequest request) {
 
 		// Request
 
-		vc.put("request", req);
+		velocityContext.put("request", request);
 
 		// Portlet config
 
-		PortletConfigImpl portletConfig = (PortletConfigImpl)req.getAttribute(
-			JavaConstants.JAVAX_PORTLET_CONFIG);
+		PortletConfigImpl portletConfigImpl =
+			(PortletConfigImpl)request.getAttribute(
+				JavaConstants.JAVAX_PORTLET_CONFIG);
 
-		if (portletConfig != null) {
-			vc.put("portletConfig", portletConfig);
+		if (portletConfigImpl != null) {
+			velocityContext.put("portletConfig", portletConfigImpl);
 		}
 
 		// Render request
 
-		PortletRequest portletRequest = (PortletRequest)req.getAttribute(
+		PortletRequest portletRequest = (PortletRequest)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST);
 
 		if (portletRequest != null) {
 			if (portletRequest instanceof RenderRequest) {
-				vc.put("renderRequest", portletRequest);
+				velocityContext.put("renderRequest", portletRequest);
 			}
 		}
 
 		// Render response
 
-		PortletResponse portletResponse = (PortletResponse)req.getAttribute(
+		PortletResponse portletResponse = (PortletResponse)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 		if (portletResponse != null) {
 			if (portletResponse instanceof RenderResponse) {
-				vc.put("renderResponse", portletResponse);
+				velocityContext.put("renderResponse", portletResponse);
 			}
 		}
 
 		// Theme display
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		if (themeDisplay != null) {
@@ -344,54 +362,57 @@ public class VelocityVariables {
 			Layout layout = themeDisplay.getLayout();
 			List<Layout> layouts = themeDisplay.getLayouts();
 
-			vc.put("themeDisplay", themeDisplay);
-			vc.put("company", themeDisplay.getCompany());
-			vc.put("user", themeDisplay.getUser());
-			vc.put("realUser", themeDisplay.getRealUser());
-			vc.put("layout", layout);
-			vc.put("layouts", layouts);
-			vc.put("plid", String.valueOf(themeDisplay.getPlid()));
-			vc.put("layoutTypePortlet", themeDisplay.getLayoutTypePortlet());
-			vc.put(
+			velocityContext.put("themeDisplay", themeDisplay);
+			velocityContext.put("company", themeDisplay.getCompany());
+			velocityContext.put("user", themeDisplay.getUser());
+			velocityContext.put("realUser", themeDisplay.getRealUser());
+			velocityContext.put("layout", layout);
+			velocityContext.put("layouts", layouts);
+			velocityContext.put("plid", String.valueOf(themeDisplay.getPlid()));
+			velocityContext.put(
+				"layoutTypePortlet", themeDisplay.getLayoutTypePortlet());
+			velocityContext.put(
 				"portletGroupId", new Long(themeDisplay.getPortletGroupId()));
-			vc.put("permissionChecker", themeDisplay.getPermissionChecker());
-			vc.put("locale", themeDisplay.getLocale());
-			vc.put("timeZone", themeDisplay.getTimeZone());
-			vc.put("theme", theme);
-			vc.put("colorScheme", themeDisplay.getColorScheme());
-			vc.put("portletDisplay", themeDisplay.getPortletDisplay());
+			velocityContext.put(
+				"permissionChecker", themeDisplay.getPermissionChecker());
+			velocityContext.put("locale", themeDisplay.getLocale());
+			velocityContext.put("timeZone", themeDisplay.getTimeZone());
+			velocityContext.put("theme", theme);
+			velocityContext.put("colorScheme", themeDisplay.getColorScheme());
+			velocityContext.put(
+				"portletDisplay", themeDisplay.getPortletDisplay());
 
 			// Navigation items
 
 			if (layout != null) {
 				RequestVars requestVars = new RequestVars(
-					req, themeDisplay, layout.getAncestorPlid(),
+					request, themeDisplay, layout.getAncestorPlid(),
 					layout.getAncestorLayoutId());
 
 				List<NavItem> navItems = NavItem.fromLayouts(
 					requestVars, layouts);
 
-				vc.put("navItems", navItems);
+				velocityContext.put("navItems", navItems);
 			}
 
 			// Full css and templates path
 
-			String ctxName = GetterUtil.getString(
+			String servletContextName = GetterUtil.getString(
 				theme.getServletContextName());
 
-			vc.put(
+			velocityContext.put(
 				"fullCssPath",
-				ctxName + theme.getVelocityResourceListener() +
+				servletContextName + theme.getVelocityResourceListener() +
 					theme.getCssPath());
 
-			vc.put(
+			velocityContext.put(
 				"fullTemplatesPath",
-				ctxName + theme.getVelocityResourceListener() +
+				servletContextName + theme.getVelocityResourceListener() +
 					theme.getTemplatesPath());
 
 			// Init
 
-			vc.put(
+			velocityContext.put(
 				"init",
 				themeDisplay.getPathContext() +
 					VelocityResourceListener.SERVLET_SEPARATOR +
@@ -401,11 +422,11 @@ public class VelocityVariables {
 		// Tiles attributes
 
 		String tilesTitle = _insertTilesVariables(
-			vc, req, "tilesTitle", "title");
+			velocityContext, request, "tilesTitle", "title");
 		String tilesContent = _insertTilesVariables(
-			vc, req, "tilesContent", "content");
+			velocityContext, request, "tilesContent", "content");
 		boolean tilesSelectable = GetterUtil.getBoolean(_insertTilesVariables(
-			vc, req, "tilesSelectable", "selectable"));
+			velocityContext, request, "tilesSelectable", "selectable"));
 
 		if (themeDisplay != null) {
 			themeDisplay.setTilesTitle(tilesTitle);
@@ -415,17 +436,19 @@ public class VelocityVariables {
 
 		// Page title and subtitle
 
-		vc.put("pageTitle", req.getAttribute(WebKeys.PAGE_TITLE));
-		vc.put("pageSubtitle", req.getAttribute(WebKeys.PAGE_SUBTITLE));
+		velocityContext.put(
+			"pageTitle", request.getAttribute(WebKeys.PAGE_TITLE));
+		velocityContext.put(
+			"pageSubtitle", request.getAttribute(WebKeys.PAGE_SUBTITLE));
 
 		// Helper utilities
 
-		insertHelperUtilities(vc, null);
+		insertHelperUtilities(velocityContext, null);
 
 		// Insert custom vm variables
 
-		Map<String, Object> vmVariables = (Map<String, Object>)req.getAttribute(
-			WebKeys.VM_VARIABLES);
+		Map<String, Object> vmVariables =
+			(Map<String, Object>)request.getAttribute(WebKeys.VM_VARIABLES);
 
 		if (vmVariables != null) {
 			for (Map.Entry<String, Object> entry : vmVariables.entrySet()) {
@@ -433,27 +456,28 @@ public class VelocityVariables {
 				Object value = entry.getValue();
 
 				if (Validator.isNotNull(key)) {
-					vc.put(key, value);
+					velocityContext.put(key, value);
 				}
 			}
 		}
 	}
 
 	private static void _insertHelperUtility(
-		VelocityContext vc, String[] restrictedVariables, String key,
-		Object value) {
+		VelocityContext velocityContext, String[] restrictedVariables,
+		String key, Object value) {
 
 		if (!ArrayUtil.contains(restrictedVariables, key)) {
-			vc.put(key, value);
+			velocityContext.put(key, value);
 		}
 	}
 
 	private static String _insertTilesVariables(
-		VelocityContext vc, HttpServletRequest req, String attributeId,
-		String attributeName) {
+		VelocityContext velocityContext, HttpServletRequest request,
+		String attributeId, String attributeName) {
 
-		ComponentContext componentContext = (ComponentContext)req.getAttribute(
-			ComponentConstants.COMPONENT_CONTEXT);
+		ComponentContext componentContext =
+			(ComponentContext)request.getAttribute(
+				ComponentConstants.COMPONENT_CONTEXT);
 
 		String value = null;
 
@@ -461,7 +485,7 @@ public class VelocityVariables {
 			value = (String)componentContext.getAttribute(attributeName);
 
 			if (value != null) {
-				vc.put(attributeId, value);
+				velocityContext.put(attributeId, value);
 			}
 		}
 

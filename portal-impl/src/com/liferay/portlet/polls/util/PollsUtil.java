@@ -72,10 +72,10 @@ public class PollsUtil {
 		return dataset;
 	}
 
-	public static boolean hasVoted(HttpServletRequest req, long questionId)
+	public static boolean hasVoted(HttpServletRequest request, long questionId)
 		throws PortalException, SystemException {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		if (themeDisplay.isSignedIn()) {
@@ -90,9 +90,9 @@ public class PollsUtil {
 			return true;
 		}
 		else {
-			HttpSession ses = req.getSession();
+			HttpSession session = request.getSession();
 
-			Boolean hasVoted = (Boolean)ses.getAttribute(
+			Boolean hasVoted = (Boolean)session.getAttribute(
 				PollsQuestion.class.getName() + "." + questionId);
 
 			if ((hasVoted != null) && (hasVoted.booleanValue())) {
@@ -104,22 +104,24 @@ public class PollsUtil {
 		}
 	}
 
-	public static void saveVote(ActionRequest req, long questionId) {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void saveVote(ActionRequest actionRequest, long questionId) {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
 
-		saveVote(httpReq, questionId);
+		saveVote(request, questionId);
 	}
 
-	public static void saveVote(RenderRequest req, long questionId) {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static void saveVote(RenderRequest renderRequest, long questionId) {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
 
-		saveVote(httpReq, questionId);
+		saveVote(request, questionId);
 	}
 
-	public static void saveVote(HttpServletRequest req, long questionId) {
-		HttpSession ses = req.getSession();
+	public static void saveVote(HttpServletRequest request, long questionId) {
+		HttpSession session = request.getSession();
 
-		ses.setAttribute(
+		session.setAttribute(
 			PollsQuestion.class.getName() + "." + questionId, Boolean.TRUE);
 	}
 

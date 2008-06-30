@@ -51,30 +51,32 @@ import org.apache.commons.logging.LogFactory;
  */
 public class WebDAVServlet extends HttpServlet {
 
- 	public void service(HttpServletRequest req, HttpServletResponse res) {
-		PermissionCheckerImpl permissionChecker = null;
+ 	public void service(
+ 		HttpServletRequest request, HttpServletResponse response) {
+
+ 		PermissionCheckerImpl permissionChecker = null;
 
 		int status = HttpServletResponse.SC_NOT_IMPLEMENTED;
 
 		try {
-			if (isIgnoredResource(req)) {
+			if (isIgnoredResource(request)) {
 				status = HttpServletResponse.SC_NOT_FOUND;
 
 				return;
 			}
 
-			WebDAVStorage storage = getStorage(req);
+			WebDAVStorage storage = getStorage(request);
 
 			// Set the path only if it has not already been set. This works
 			// if and only if the servlet is not mapped to more than one URL.
 
 			if (storage.getRootPath() == null) {
-				storage.setRootPath(getRootPath(req));
+				storage.setRootPath(getRootPath(request));
 			}
 
 			// Permission checker
 
-			String remoteUser = req.getRemoteUser();
+			String remoteUser = request.getRemoteUser();
 
 			if (remoteUser != null) {
 				PrincipalThreadLocal.setName(remoteUser);
@@ -90,17 +92,17 @@ public class WebDAVServlet extends HttpServlet {
 
 			// Get the method instance
 
-			Method method = MethodFactory.create(req);
+			Method method = MethodFactory.create(request);
 
 			// Process the method
 
 			WebDAVRequest webDavReq = new WebDAVRequest(
-				storage, req, res, permissionChecker);
+				storage, request, response, permissionChecker);
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Remote user " + remoteUser + " " + req.getMethod() + " " +
-						req.getRequestURI());
+					"Remote user " + remoteUser + " " + request.getMethod() +
+						" " + request.getRequestURI());
 			}
 
 			status = method.process(webDavReq);
@@ -110,7 +112,7 @@ public class WebDAVServlet extends HttpServlet {
 		}
 		finally {
 			if (status > 0) {
-				res.setStatus(status);
+				response.setStatus(status);
 
 				if (_log.isDebugEnabled()) {
 					_log.debug("Returning status code " + status);
@@ -125,11 +127,11 @@ public class WebDAVServlet extends HttpServlet {
 		}
 	}
 
-	protected String getRootPath(HttpServletRequest req) {
+	protected String getRootPath(HttpServletRequest request) {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(WebDAVUtil.fixPath(req.getContextPath()));
-		sb.append(WebDAVUtil.fixPath(req.getServletPath()));
+		sb.append(WebDAVUtil.fixPath(request.getContextPath()));
+		sb.append(WebDAVUtil.fixPath(request.getServletPath()));
 
 		String rootPath = sb.toString();
 
@@ -140,10 +142,11 @@ public class WebDAVServlet extends HttpServlet {
 		return rootPath;
 	}
 
-	protected WebDAVStorage getStorage(HttpServletRequest req)
+	protected WebDAVStorage getStorage(HttpServletRequest request)
 		throws WebDAVException {
 
-		String[] pathArray = WebDAVUtil.getPathArray(req.getPathInfo(), true);
+		String[] pathArray = WebDAVUtil.getPathArray(
+			request.getPathInfo(), true);
 
 		String storageClass = null;
 
@@ -159,14 +162,15 @@ public class WebDAVServlet extends HttpServlet {
 
 		if (Validator.isNull(storageClass)) {
 			throw new WebDAVException(
-				"Invalid WebDAV path " + req.getPathInfo());
+				"Invalid WebDAV path " + request.getPathInfo());
 		}
 
 		return (WebDAVStorage)InstancePool.get(storageClass);
 	}
 
-	protected boolean isIgnoredResource(HttpServletRequest req) {
-		String[] pathArray = WebDAVUtil.getPathArray(req.getPathInfo(), true);
+	protected boolean isIgnoredResource(HttpServletRequest request) {
+		String[] pathArray = WebDAVUtil.getPathArray(
+			request.getPathInfo(), true);
 		String resourceName = pathArray[pathArray.length - 1];
 
 		for (String ignore : PropsValues.WEBDAV_IGNORE) {

@@ -45,21 +45,22 @@ import javax.servlet.http.HttpServletResponse;
 public class PortletLogic extends RuntimeLogic {
 
 	public PortletLogic(
-		ServletContext ctx, HttpServletRequest req, HttpServletResponse res,
-		String portletId) {
+		ServletContext servletContext, HttpServletRequest request,
+		HttpServletResponse response, String portletId) {
 
-		this(ctx, req, res, null, null);
+		this(servletContext, request, response, null, null);
 
 		_portletId = portletId;
 	}
 
 	public PortletLogic(
-		ServletContext ctx, HttpServletRequest req, HttpServletResponse res,
-		RenderRequest renderRequest, RenderResponse renderResponse) {
+		ServletContext servletContext, HttpServletRequest request,
+		HttpServletResponse response, RenderRequest renderRequest,
+		RenderResponse renderResponse) {
 
-		_ctx = ctx;
-		_req = req;
-		_res = res;
+		_servletContext = servletContext;
+		_request = request;
+		_response = response;
 		_renderRequest = renderRequest;
 		_renderResponse = renderResponse;
 	}
@@ -82,13 +83,13 @@ public class PortletLogic extends RuntimeLogic {
 		}
 
 		RuntimePortletUtil.processPortlet(
-			sb, _ctx, _req, _res, _renderRequest, _renderResponse, portletId,
-			queryString);
+			sb, _servletContext, _request, _response, _renderRequest,
+			_renderResponse, portletId, queryString);
 	}
 
-	private ServletContext _ctx;
-	private HttpServletRequest _req;
-	private HttpServletResponse _res;
+	private ServletContext _servletContext;
+	private HttpServletRequest _request;
+	private HttpServletResponse _response;
 	private RenderRequest _renderRequest;
 	private RenderResponse _renderResponse;
 	private String _portletId;

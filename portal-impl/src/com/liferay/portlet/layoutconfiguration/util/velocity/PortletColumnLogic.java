@@ -51,12 +51,14 @@ import org.apache.commons.logging.LogFactory;
 public class PortletColumnLogic extends RuntimeLogic {
 
 	public PortletColumnLogic(
-		ServletContext ctx, HttpServletRequest req, HttpServletResponse res) {
+		ServletContext servletContext, HttpServletRequest request,
+		HttpServletResponse response) {
 
-		_ctx = ctx;
-		_req = req;
-		_res = res;
-		_themeDisplay = (ThemeDisplay)_req.getAttribute(WebKeys.THEME_DISPLAY);
+		_servletContext = servletContext;
+		_request = request;
+		_response = response;
+		_themeDisplay = (ThemeDisplay)_request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 		_portletsMap = new TreeMap<Portlet, Object[]>(
 			new PortletRenderWeightComparator());
 
@@ -74,7 +76,7 @@ public class PortletColumnLogic extends RuntimeLogic {
 
 		if (_parallelRenderEnable) {
 			Boolean portletParallelRender =
-				(Boolean)req.getAttribute(WebKeys.PORTLET_PARALLEL_RENDER);
+				(Boolean)request.getAttribute(WebKeys.PORTLET_PARALLEL_RENDER);
 
 			if ((portletParallelRender != null) &&
 				(portletParallelRender.booleanValue() == false)) {
@@ -83,7 +85,7 @@ public class PortletColumnLogic extends RuntimeLogic {
 			}
 		}
 		else {
-			req.removeAttribute(WebKeys.PORTLET_PARALLEL_RENDER);
+			request.removeAttribute(WebKeys.PORTLET_PARALLEL_RENDER);
 		}
 	}
 
@@ -130,8 +132,8 @@ public class PortletColumnLogic extends RuntimeLogic {
 			}
 
 			RuntimePortletUtil.processPortlet(
-				sb, _ctx, _req, _res, portlet, queryString, columnId, columnPos,
-				columnCount, path);
+				sb, _servletContext, _request, _response, portlet, queryString,
+				columnId, columnPos, columnCount, path);
 		}
 
 		sb.append("</div>");
@@ -143,9 +145,9 @@ public class PortletColumnLogic extends RuntimeLogic {
 
 	private static Log _log = LogFactory.getLog(PortletColumnLogic.class);
 
-	private ServletContext _ctx;
-	private HttpServletRequest _req;
-	private HttpServletResponse _res;
+	private ServletContext _servletContext;
+	private HttpServletRequest _request;
+	private HttpServletResponse _response;
 	private ThemeDisplay _themeDisplay;
 	private Map<Portlet, Object[]> _portletsMap;
 	private boolean _parallelRenderEnable;

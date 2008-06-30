@@ -140,31 +140,32 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		addPaths(_trackerIgnorePaths, PropsKeys.SESSION_TRACKER_IGNORE_PATHS);
 	}
 
-	public void process(HttpServletRequest req, HttpServletResponse res)
+	public void process(
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
-		String path = super.processPath(req, res);
+		String path = super.processPath(request, response);
 
 		ActionMapping mapping = (ActionMapping)moduleConfig.findActionConfig(
 			path);
 
 		if ((mapping == null) && !path.startsWith(_PATH_WSRP)) {
-			String lastPath = getLastPath(req);
+			String lastPath = getLastPath(request);
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Last path " + lastPath);
 			}
 
-			res.sendRedirect(lastPath);
+			response.sendRedirect(lastPath);
 
 			return;
 		}
 
-		super.process(req, res);
+		super.process(request, response);
 
 		try {
 			if (isPortletPath(path)) {
-				cleanUp(req);
+				cleanUp(request);
 			}
 		}
 		catch (Exception e) {
@@ -181,10 +182,11 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 	}
 
 	protected void callParentDoForward(
-			String uri, HttpServletRequest req, HttpServletResponse res)
+			String uri, HttpServletRequest request,
+			HttpServletResponse response)
 		throws IOException, ServletException {
 
-		super.doForward(uri, req, res);
+		super.doForward(uri, request, response);
 	}
 
 	protected HttpServletRequest callParentProcessMultipart(
@@ -194,98 +196,104 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 	}
 
 	protected String callParentProcessPath(
-			HttpServletRequest req, HttpServletResponse res)
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException {
 
-		return super.processPath(req, res);
+		return super.processPath(request, response);
 	}
 
 	protected boolean callParentProcessRoles(
-			HttpServletRequest req, HttpServletResponse res,
+			HttpServletRequest request, HttpServletResponse response,
 			ActionMapping mapping)
 		throws IOException, ServletException {
 
-		return super.processRoles(req, res, mapping);
+		return super.processRoles(request, response, mapping);
 	}
 
-	protected void cleanUp(HttpServletRequest req) throws Exception {
+	protected void cleanUp(HttpServletRequest request) throws Exception {
 
 		// Clean up portlet objects that may have been created by defineObjects
 		// for portlets that are called directly from a Struts path
 
-		RenderRequestImpl renderReqImpl = (RenderRequestImpl)req.getAttribute(
-			JavaConstants.JAVAX_PORTLET_REQUEST);
+		RenderRequestImpl renderRequestImpl =
+			(RenderRequestImpl)request.getAttribute(
+				JavaConstants.JAVAX_PORTLET_REQUEST);
 
-		if (renderReqImpl != null) {
-			RenderRequestFactory.recycle(renderReqImpl);
+		if (renderRequestImpl != null) {
+			RenderRequestFactory.recycle(renderRequestImpl);
 		}
 
-		RenderResponseImpl renderResImpl = (RenderResponseImpl)req.getAttribute(
-			JavaConstants.JAVAX_PORTLET_RESPONSE);
+		RenderResponseImpl renderResponseImpl =
+			(RenderResponseImpl)request.getAttribute(
+				JavaConstants.JAVAX_PORTLET_RESPONSE);
 
-		if (renderResImpl != null) {
-			RenderResponseFactory.recycle(renderResImpl);
+		if (renderResponseImpl != null) {
+			RenderResponseFactory.recycle(renderResponseImpl);
 		}
 	}
 
 	protected void defineObjects(
-			HttpServletRequest req, HttpServletResponse res, Portlet portlet)
+			HttpServletRequest request, HttpServletResponse response,
+			Portlet portlet)
 		throws Exception {
 
 		String portletId = portlet.getPortletId();
 
-		ServletContext ctx =
-			(ServletContext)req.getAttribute(WebKeys.CTX);
+		ServletContext servletContext = (ServletContext)request.getAttribute(
+			WebKeys.CTX);
 
 		InvokerPortlet invokerPortlet = PortletInstanceFactory.create(
-			portlet, ctx);
+			portlet, servletContext);
 
 		PortletPreferencesIds portletPreferencesIds =
 			PortletPreferencesFactoryUtil.getPortletPreferencesIds(
-				req, portletId);
+				request, portletId);
 
 		PortletPreferences portletPreferences =
 			PortletPreferencesLocalServiceUtil.getPreferences(
 				portletPreferencesIds);
 
-		PortletConfig portletConfig = PortletConfigFactory.create(portlet, ctx);
-		PortletContext portletCtx = portletConfig.getPortletContext();
+		PortletConfig portletConfig = PortletConfigFactory.create(
+			portlet, servletContext);
+		PortletContext portletContext = portletConfig.getPortletContext();
 
 		RenderRequestImpl renderReqImpl = RenderRequestFactory.create(
-			req, portlet, invokerPortlet, portletCtx, WindowState.MAXIMIZED,
-			PortletMode.VIEW, portletPreferences);
+			request, portlet, invokerPortlet, portletContext,
+			WindowState.MAXIMIZED, PortletMode.VIEW, portletPreferences);
 
 		RenderResponseImpl renderResImpl = RenderResponseFactory.create(
-			renderReqImpl, res, portletId, portlet.getCompanyId());
+			renderReqImpl, response, portletId, portlet.getCompanyId());
 
 		renderReqImpl.defineObjects(portletConfig, renderResImpl);
 
-		req.setAttribute(WebKeys.PORTLET_STRUTS_EXECUTE, Boolean.TRUE);
+		request.setAttribute(WebKeys.PORTLET_STRUTS_EXECUTE, Boolean.TRUE);
 	}
 
 	protected void doForward(
-			String uri, HttpServletRequest req, HttpServletResponse res)
+			String uri, HttpServletRequest request,
+			HttpServletResponse response)
 		throws ServletException {
 
-		StrutsUtil.forward(uri, getServletContext(), req, res);
+		StrutsUtil.forward(uri, getServletContext(), request, response);
 	}
 
 	protected void doInclude(
-			String uri, HttpServletRequest req, HttpServletResponse res)
+			String uri, HttpServletRequest request,
+			HttpServletResponse response)
 		throws ServletException {
 
-		StrutsUtil.include(uri, getServletContext(), req, res);
+		StrutsUtil.include(uri, getServletContext(), request, response);
 	}
 
 	protected StringBuilder getFriendlyTrackerPath(
-			String path, ThemeDisplay themeDisplay, HttpServletRequest req)
+			String path, ThemeDisplay themeDisplay, HttpServletRequest request)
 		throws Exception {
 
 		if (!path.equals(_PATH_PORTAL_LAYOUT)) {
 			return null;
 		}
 
-		long plid = ParamUtil.getLong(req, "p_l_id");
+		long plid = ParamUtil.getLong(request, "p_l_id");
 
 		if (plid == 0) {
 			return null;
@@ -300,13 +308,13 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		sb.append(layoutFriendlyURL);
 
-		String portletId = ParamUtil.getString(req, "p_p_id");
+		String portletId = ParamUtil.getString(request, "p_p_id");
 
 		if (Validator.isNull(portletId)) {
 			return sb;
 		}
 
-		long companyId = PortalUtil.getCompanyId(req);
+		long companyId = PortalUtil.getCompanyId(request);
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			companyId, portletId);
@@ -321,7 +329,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		if ((portlet == null) || !portlet.isActive()) {
 			sb.append(StringPool.QUESTION);
-			sb.append(req.getQueryString());
+			sb.append(request.getQueryString());
 
 			return sb;
 		}
@@ -333,16 +341,16 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		if (friendlyURLMapper == null) {
 			sb.append(StringPool.QUESTION);
-			sb.append(req.getQueryString());
+			sb.append(request.getQueryString());
 
 			return sb;
 		}
 
 		PortletURLImpl portletURL = new PortletURLImpl(
-			req, portletId, plid, PortletRequest.RENDER_PHASE);
+			request, portletId, plid, PortletRequest.RENDER_PHASE);
 
 		Iterator<Map.Entry<String, String[]>> itr =
-			req.getParameterMap().entrySet().iterator();
+			request.getParameterMap().entrySet().iterator();
 
 		while (itr.hasNext()) {
 			Entry<String, String[]> entry = itr.next();
@@ -363,16 +371,16 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		}
 		else {
 			sb.append(StringPool.QUESTION);
-			sb.append(req.getQueryString());
+			sb.append(request.getQueryString());
 		}
 
 		return sb;
 	}
 
-	protected String getLastPath(HttpServletRequest req) {
-		HttpSession ses = req.getSession();
+	protected String getLastPath(HttpServletRequest request) {
+		HttpSession ses = request.getSession();
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		Boolean httpsInitial = (Boolean)ses.getAttribute(WebKeys.HTTPS_INITIAL);
@@ -382,10 +390,10 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		if ((PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS) &&
 			(httpsInitial != null) && (!httpsInitial.booleanValue())) {
 
-			portalURL = PortalUtil.getPortalURL(req, false);
+			portalURL = PortalUtil.getPortalURL(request, false);
 		}
 		else {
-			portalURL = PortalUtil.getPortalURL(req);
+			portalURL = PortalUtil.getPortalURL(request);
 		}
 
 		StringBuilder sb = new StringBuilder();
@@ -395,7 +403,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		sb.append(_PATH_PORTAL_LAYOUT);
 
 		if (!PropsValues.AUTH_FORWARD_BY_LAST_PATH) {
-			if (req.getRemoteUser() != null) {
+			if (request.getRemoteUser() != null) {
 
 				// If we do not forward by last path and the user is logged in,
 				// forward to the user's default layout to prevent a lagging
@@ -470,22 +478,23 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 	}
 
 	protected ActionMapping processMapping(
-			HttpServletRequest req, HttpServletResponse res, String path)
+			HttpServletRequest request, HttpServletResponse response,
+			String path)
 		throws IOException {
 
 		if (path == null) {
 			return null;
 		}
 
-		ActionMapping mapping = super.processMapping(req, res, path);
+		ActionMapping mapping = super.processMapping(request, response, path);
 
 		if (mapping == null) {
 			String msg = getInternal().getMessage("processInvalid");
 
-			_log.error("User ID " + req.getRemoteUser());
-			_log.error("Current URL " + PortalUtil.getCurrentURL(req));
-			_log.error("Referer " + req.getHeader("Referer"));
-			_log.error("Remote address " + req.getRemoteAddr());
+			_log.error("User ID " + request.getRemoteUser());
+			_log.error("Current URL " + PortalUtil.getCurrentURL(request));
+			_log.error("Referer " + request.getHeader("Referer"));
+			_log.error("Remote address " + request.getRemoteAddr());
 
 			_log.error(msg + " " + path);
 		}
@@ -501,14 +510,14 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 	}
 
 	protected String processPath(
-			HttpServletRequest req, HttpServletResponse res)
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException {
 
-		String path = super.processPath(req, res);
+		String path = super.processPath(request, response);
 
-		HttpSession ses = req.getSession();
+		HttpSession ses = request.getSession();
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		// Current users
@@ -525,7 +534,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 			try {
 				if (PropsValues.SESSION_TRACKER_FRIENDLY_PATHS_ENABLED) {
-					sb = getFriendlyTrackerPath(path, themeDisplay, req);
+					sb = getFriendlyTrackerPath(path, themeDisplay, request);
 				}
 			}
 			catch (Exception e) {
@@ -537,7 +546,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 				sb.append(path);
 				sb.append(StringPool.QUESTION);
-				sb.append(req.getQueryString());
+				sb.append(request.getQueryString());
 			}
 
 			UserTrackerPath userTrackerPath = UserTrackerPathUtil.create(0);
@@ -549,12 +558,12 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			userTracker.addPath(userTrackerPath);
 		}
 
-		String remoteUser = req.getRemoteUser();
+		String remoteUser = request.getRemoteUser();
 
 		User user = null;
 
 		try {
-			user = PortalUtil.getUser(req);
+			user = PortalUtil.getUser(request);
 		}
 		catch (Exception e) {
 		}
@@ -565,18 +574,18 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			(!_trackerIgnorePaths.contains(path))) {
 
 			boolean saveLastPath = ParamUtil.getBoolean(
-				req, "saveLastPath", true);
+				request, "saveLastPath", true);
 
 			// Exclusive and pop up window states should never be set as the
 			// last path
 
-			if (LiferayWindowState.isExclusive(req) ||
-				LiferayWindowState.isPopUp(req)) {
+			if (LiferayWindowState.isExclusive(request) ||
+				LiferayWindowState.isPopUp(request)) {
 
 				saveLastPath = false;
 			}
 
-			if (!req.getMethod().equalsIgnoreCase("GET")) {
+			if (!request.getMethod().equalsIgnoreCase("GET")) {
 				saveLastPath = false;
 			}
 
@@ -587,13 +596,13 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				// Was a last path set by another servlet that dispatched to
 				// the MainServlet? If so, use that last path instead.
 
-				LastPath lastPath = (LastPath)req.getAttribute(
+				LastPath lastPath = (LastPath)request.getAttribute(
 					WebKeys.LAST_PATH);
 
 				if (lastPath == null) {
 					lastPath = new LastPath(
 						themeDisplay.getPathMain(), path,
-						req.getParameterMap());
+						request.getParameterMap());
 				}
 
 				ses.setAttribute(WebKeys.LAST_PATH, lastPath);
@@ -653,7 +662,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		// Authenticated users must be active
 
 		if ((user != null) && (!user.isActive())) {
-			SessionErrors.add(req, UserActiveException.class.getName());
+			SessionErrors.add(request, UserActiveException.class.getName());
 
 			return _PATH_PORTAL_ERROR;
 		}
@@ -684,7 +693,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 			if ((layouts == null) || (layouts.size() == 0)) {
 				SessionErrors.add(
-					req, RequiredLayoutException.class.getName());
+					request, RequiredLayoutException.class.getName());
 
 				return _PATH_PORTAL_ERROR;
 			}
@@ -694,7 +703,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		if (!isPublicPath(path)) {
 			if (user == null) {
-				SessionErrors.add(req, PrincipalException.class.getName());
+				SessionErrors.add(request, PrincipalException.class.getName());
 
 				return _PATH_PORTAL_LOGIN;
 			}
@@ -719,7 +728,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 				if (false) {
 					SessionErrors.add(
-						req, RequiredRoleException.class.getName());
+						request, RequiredRoleException.class.getName());
 
 					return _PATH_PORTAL_ERROR;
 				}
@@ -735,8 +744,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			try {
 				Portlet portlet = null;
 
-				long companyId = PortalUtil.getCompanyId(req);
-				String portletId = ParamUtil.getString(req, "p_p_id");
+				long companyId = PortalUtil.getCompanyId(request);
+				String portletId = ParamUtil.getString(request, "p_p_id");
 
 				if (Validator.isNotNull(portletId)) {
 					portlet = PortletLocalServiceUtil.getPortletById(
@@ -752,11 +761,11 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				}
 
 				if ((portlet != null) && portlet.isActive()) {
-					defineObjects(req, res, portlet);
+					defineObjects(request, response, portlet);
 				}
 			}
 			catch (Exception e) {
-				req.setAttribute(PageContext.EXCEPTION, e);
+				request.setAttribute(PageContext.EXCEPTION, e);
 
 				path = _PATH_COMMON_ERROR;
 			}
@@ -765,7 +774,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		// Authenticated users must have access to at least one layout
 
 		if (SessionErrors.contains(
-				req, LayoutPermissionException.class.getName())) {
+				request, LayoutPermissionException.class.getName())) {
 
 			return _PATH_PORTAL_ERROR;
 		}
@@ -774,7 +783,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 	}
 
 	protected boolean processRoles(
-			HttpServletRequest req, HttpServletResponse res,
+			HttpServletRequest request, HttpServletResponse response,
 			ActionMapping mapping)
 		throws IOException, ServletException {
 
@@ -789,7 +798,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		User user = null;
 
 		try {
-			user = PortalUtil.getUser(req);
+			user = PortalUtil.getUser(request);
 		}
 		catch (Exception e) {
 		}
@@ -805,7 +814,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 				Portlet portlet = null;
 
-				String portletId = ParamUtil.getString(req, "p_p_id");
+				String portletId = ParamUtil.getString(request, "p_p_id");
 
 				if (Validator.isNotNull(portletId)) {
 					portlet = PortletLocalServiceUtil.getPortletById(
@@ -826,8 +835,9 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				}
 
 				if ((portlet != null) && portlet.isActive()) {
-					ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
-						WebKeys.THEME_DISPLAY);
+					ThemeDisplay themeDisplay =
+						(ThemeDisplay)request.getAttribute(
+							WebKeys.THEME_DISPLAY);
 
 					Layout layout = themeDisplay.getLayout();
 					PermissionChecker permissionChecker =
@@ -842,13 +852,13 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				}
 				else if (portlet != null && !portlet.isActive()) {
 					SessionErrors.add(
-						req, PortletActiveException.class.getName());
+						request, PortletActiveException.class.getName());
 
 					authorized = false;
 				}
 			}
 			catch (Exception e) {
-				SessionErrors.add(req, PrincipalException.class.getName());
+				SessionErrors.add(request, PrincipalException.class.getName());
 
 				authorized = false;
 			}
@@ -858,7 +868,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			ForwardConfig forwardConfig =
 				mapping.findForward(_PATH_PORTAL_ERROR);
 
-			processForwardConfig(req, res, forwardConfig);
+			processForwardConfig(request, response, forwardConfig);
 
 			return false;
 		}

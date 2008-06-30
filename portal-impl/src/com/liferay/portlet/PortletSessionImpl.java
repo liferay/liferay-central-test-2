@@ -75,12 +75,12 @@ public class PortletSessionImpl implements LiferayPortletSession {
 	}
 
 	public PortletSessionImpl(
-		HttpServletRequest req, String portletName, PortletContext ctx,
-		String portalSessionId, long plid) {
+		HttpServletRequest request, String portletName,
+		PortletContext portletContext, String portalSessionId, long plid) {
 
-		_req = req;
+		_request = request;
 		_portletName = portletName;
-		_ctx = ctx;
+		_portletContext = portletContext;
 		_creationTime = System.currentTimeMillis();
 		_lastAccessedTime = _creationTime;
 		_interval = getHttpSession().getMaxInactiveInterval();
@@ -188,11 +188,11 @@ public class PortletSessionImpl implements LiferayPortletSession {
 	}
 
 	public HttpSession getHttpSession() {
-		if (_ses == null) {
-			return _req.getSession();
+		if (_session == null) {
+			return _request.getSession();
 		}
 		else {
-			return _ses;
+			return _session;
 		}
 	}
 
@@ -213,7 +213,7 @@ public class PortletSessionImpl implements LiferayPortletSession {
 	}
 
 	public PortletContext getPortletContext() {
-		return _ctx;
+		return _portletContext;
 	}
 
 	public void invalidate() {
@@ -296,8 +296,8 @@ public class PortletSessionImpl implements LiferayPortletSession {
 		}
 	}
 
-	public void setHttpSession(HttpSession ses) {
-		_ses = ses;
+	public void setHttpSession(HttpSession session) {
+		_session = session;
 	}
 
 	public void setLastAccessedTime(long lastAccessedTime) {
@@ -313,10 +313,10 @@ public class PortletSessionImpl implements LiferayPortletSession {
 		return getPortletScopeName(_portletName, _plid, name);
 	}
 
-	private HttpServletRequest _req;
-	private HttpSession _ses;
+	private HttpServletRequest _request;
+	private HttpSession _session;
 	private String _portletName;
-	private PortletContext _ctx;
+	private PortletContext _portletContext;
 	private long _creationTime;
 	private long _lastAccessedTime;
 	private int _interval;

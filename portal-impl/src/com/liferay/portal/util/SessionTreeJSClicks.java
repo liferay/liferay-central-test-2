@@ -43,11 +43,11 @@ public class SessionTreeJSClicks {
 	public static final String CLASS_NAME = SessionTreeJSClicks.class.getName();
 
 	public static void closeNode(
-		HttpServletRequest req, String treeId, String nodeId) {
+		HttpServletRequest request, String treeId, String nodeId) {
 
 		try {
 			PortalPreferences prefs =
-				PortletPreferencesFactoryUtil.getPortalPreferences(req);
+				PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
 			String openNodesString = prefs.getValue(CLASS_NAME, treeId);
 
@@ -60,10 +60,10 @@ public class SessionTreeJSClicks {
 		}
 	}
 
-	public static void closeNodes(HttpServletRequest req, String treeId) {
+	public static void closeNodes(HttpServletRequest request, String treeId) {
 		try {
 			PortalPreferences prefs =
-				PortletPreferencesFactoryUtil.getPortalPreferences(req);
+				PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
 			String openNodesString = StringPool.BLANK;
 
@@ -74,10 +74,12 @@ public class SessionTreeJSClicks {
 		}
 	}
 
-	public static String getOpenNodes(HttpServletRequest req, String treeId) {
+	public static String getOpenNodes(
+		HttpServletRequest request, String treeId) {
+
 		try {
 			PortalPreferences prefs =
-				PortletPreferencesFactoryUtil.getPortalPreferences(req);
+				PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
 			return prefs.getValue(CLASS_NAME, treeId);
 		}
@@ -89,11 +91,11 @@ public class SessionTreeJSClicks {
 	}
 
 	public static void openNode(
-		HttpServletRequest req, String treeId, String nodeId) {
+		HttpServletRequest request, String treeId, String nodeId) {
 
 		try {
 			PortalPreferences prefs =
-				PortletPreferencesFactoryUtil.getPortalPreferences(req);
+				PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
 			String openNodesString = prefs.getValue(CLASS_NAME, treeId);
 
@@ -107,11 +109,11 @@ public class SessionTreeJSClicks {
 	}
 
 	public static void openNodes(
-		HttpServletRequest req, String treeId, String[] nodeIds) {
+		HttpServletRequest request, String treeId, String[] nodeIds) {
 
 		try {
 			PortalPreferences prefs =
-				PortletPreferencesFactoryUtil.getPortalPreferences(req);
+				PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
 			String openNodesString = prefs.getValue(CLASS_NAME, treeId);
 

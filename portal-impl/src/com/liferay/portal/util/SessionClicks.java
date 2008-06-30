@@ -41,11 +41,11 @@ public class SessionClicks {
 	public static final String CLASS_NAME = SessionClicks.class.getName();
 
 	public static String get(
-		HttpServletRequest req, String key, String defaultValue) {
+		HttpServletRequest request, String key, String defaultValue) {
 
 		try {
 			PortalPreferences prefs =
-				PortletPreferencesFactoryUtil.getPortalPreferences(req);
+				PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
 			return prefs.getValue(CLASS_NAME, key, defaultValue);
 		}
@@ -56,10 +56,12 @@ public class SessionClicks {
 		}
 	}
 
-	public static void put(HttpServletRequest req, String key, String value) {
+	public static void put(
+		HttpServletRequest request, String key, String value) {
+
 		try {
 			PortalPreferences prefs =
-				PortletPreferencesFactoryUtil.getPortalPreferences(req);
+				PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
 			prefs.setValue(CLASS_NAME, key, value);
 		}

@@ -43,12 +43,12 @@ import javax.servlet.http.HttpServletResponse;
 public class TemplateProcessor {
 
 	public TemplateProcessor(
-		ServletContext ctx, HttpServletRequest req, HttpServletResponse res,
-		String portletId) {
+		ServletContext servletContext, HttpServletRequest request,
+		HttpServletResponse response, String portletId) {
 
-		_ctx = ctx;
-		_req = req;
-		_res = res;
+		_servletContext = servletContext;
+		_request = request;
+		_response = response;
 		_portletId = portletId;
 		_columnsMap = new HashMap<String, String>();
 		_portletsMap = new TreeMap<Portlet, Object[]>(
@@ -60,7 +60,8 @@ public class TemplateProcessor {
 
 		attributes.put("id", columnId);
 
-		PortletColumnLogic logic = new PortletColumnLogic(_ctx, _req, _res);
+		PortletColumnLogic logic = new PortletColumnLogic(
+			_servletContext, _request, _response);
 
 		StringBuilder sb = new StringBuilder();
 
@@ -76,7 +77,8 @@ public class TemplateProcessor {
 	}
 
 	public String processMax() throws Exception {
-		RuntimeLogic logic = new PortletLogic(_ctx, _req, _res, _portletId);
+		RuntimeLogic logic = new PortletLogic(
+			_servletContext, _request, _response, _portletId);
 
 		StringBuilder sb = new StringBuilder();
 
@@ -86,7 +88,8 @@ public class TemplateProcessor {
 	}
 
 	public String processPortlet(String portletId) throws Exception {
-		RuntimeLogic logic = new PortletLogic(_ctx, _req, _res, portletId);
+		RuntimeLogic logic = new PortletLogic(
+			_servletContext, _request, _response, portletId);
 
 		StringBuilder sb = new StringBuilder();
 
@@ -103,9 +106,9 @@ public class TemplateProcessor {
 		return _portletsMap;
 	}
 
-	private ServletContext _ctx;
-	private HttpServletRequest _req;
-	private HttpServletResponse _res;
+	private ServletContext _servletContext;
+	private HttpServletRequest _request;
+	private HttpServletResponse _response;
 	private String _portletId;
 	private Map<String, String> _columnsMap;
 	private Map<Portlet, Object[]> _portletsMap;

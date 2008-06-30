@@ -99,7 +99,7 @@ public class LiferayURLConstructor implements URLConstructor {
  	}
 
 	public String parsePage(
-		String context, HttpServletRequest req, String encoding) {
+		String context, HttpServletRequest request, String encoding) {
 
 		return "Wiki.jsp";
 	}

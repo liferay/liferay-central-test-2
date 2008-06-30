@@ -79,10 +79,10 @@ public class PortletPreferencesFactoryImpl
 			portletId);
 	}
 
-	public PortalPreferences getPortalPreferences(HttpServletRequest req)
+	public PortalPreferences getPortalPreferences(HttpServletRequest request)
 		throws PortalException, SystemException {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		long ownerId = themeDisplay.getUserId();
@@ -102,7 +102,7 @@ public class PortletPreferencesFactoryImpl
 				prefsImpl, themeDisplay.isSignedIn());
 		}
 		else {
-			HttpSession ses = req.getSession();
+			HttpSession ses = request.getSession();
 
 			portalPrefs = (PortalPreferences)ses.getAttribute(
 				WebKeys.PORTAL_PREFERENCES);
@@ -125,44 +125,46 @@ public class PortletPreferencesFactoryImpl
 		return portalPrefs;
 	}
 
-	public PortalPreferences getPortalPreferences(ActionRequest req)
+	public PortalPreferences getPortalPreferences(ActionRequest actionRequest)
 		throws PortalException, SystemException {
 
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
 
-		return getPortalPreferences(httpReq);
+		return getPortalPreferences(request);
 	}
 
-	public PortalPreferences getPortalPreferences(RenderRequest req)
+	public PortalPreferences getPortalPreferences(RenderRequest renderRequest)
 		throws PortalException, SystemException {
 
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
 
-		return getPortalPreferences(httpReq);
+		return getPortalPreferences(request);
 	}
 
 	public PortletPreferences getPortletPreferences(
-			HttpServletRequest req, String portletId)
+			HttpServletRequest request, String portletId)
 		throws PortalException, SystemException {
 
 		PortletPreferencesIds portletPreferencesIds = getPortletPreferencesIds(
-			req, portletId);
+			request, portletId);
 
 		return PortletPreferencesLocalServiceUtil.getPreferences(
 			portletPreferencesIds);
 	}
 
 	public PortletPreferencesIds getPortletPreferencesIds(
-			HttpServletRequest req, String portletId)
+			HttpServletRequest request, String portletId)
 		throws PortalException, SystemException {
 
-		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+		Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
 
-		return getPortletPreferencesIds(req, layout, portletId);
+		return getPortletPreferencesIds(request, layout, portletId);
 	}
 
 	public PortletPreferencesIds getPortletPreferencesIds(
-			HttpServletRequest req, Layout selLayout, String portletId)
+			HttpServletRequest request, Layout selLayout, String portletId)
 		throws PortalException, SystemException {
 
 		// Below is a list of  the possible combinations, where we specify the
@@ -186,7 +188,7 @@ public class PortletPreferencesFactoryImpl
 		// PUB.10.USER.liferay.com.1, 3, 56_INSTANCE_abcd, preference is scoped
 		// per portlet, user, and layout
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
@@ -204,7 +206,7 @@ public class PortletPreferencesFactoryImpl
 
 		boolean modeEditGuest = false;
 
-		String portletMode = ParamUtil.getString(req, "p_p_mode");
+		String portletMode = ParamUtil.getString(request, "p_p_mode");
 
 		if (portletMode.equals(LiferayPortletMode.EDIT_GUEST.toString()) ||
 			layoutTypePortlet.hasModeEditGuestPortletId(portletId)) {
@@ -242,7 +244,7 @@ public class PortletPreferencesFactoryImpl
 				if (portlet.isPreferencesOwnedByGroup()) {
 				}
 				else {
-					long userId = PortalUtil.getUserId(req);
+					long userId = PortalUtil.getUserId(request);
 
 					if ((userId <= 0) || modeEditGuest) {
 						userId = UserLocalServiceUtil.getDefaultUserId(
@@ -262,7 +264,7 @@ public class PortletPreferencesFactoryImpl
 					portletId = PortletConstants.getRootPortletId(portletId);
 				}
 				else {
-					long userId = PortalUtil.getUserId(req);
+					long userId = PortalUtil.getUserId(request);
 
 					if ((userId <= 0) || modeEditGuest) {
 						userId = UserLocalServiceUtil.getDefaultUserId(
@@ -331,66 +333,71 @@ public class PortletPreferencesFactoryImpl
 	}
 
 	public PortletPreferences getPortletSetup(
-			HttpServletRequest req, String portletId)
+			HttpServletRequest request, String portletId)
 		throws PortalException, SystemException {
 
-		return getPortletSetup(req, portletId, null);
+		return getPortletSetup(request, portletId, null);
 	}
 
 	public PortletPreferences getPortletSetup(
-			HttpServletRequest req, String portletId, String defaultPreferences)
+			HttpServletRequest request, String portletId,
+			String defaultPreferences)
 		throws PortalException, SystemException {
 
-		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+		Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
 
 		return getPortletSetup(layout, portletId, defaultPreferences);
 	}
 
-	public PortletPreferences getPortletSetup(ActionRequest req)
+	public PortletPreferences getPortletSetup(ActionRequest actionRequest)
 		throws PortalException, SystemException {
 
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-		String portletId = PortalUtil.getPortletId(req);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+		String portletId = PortalUtil.getPortletId(actionRequest);
 
-		return getPortletSetup(httpReq, portletId);
+		return getPortletSetup(request, portletId);
 	}
 
 	public PortletPreferences getPortletSetup(
-			ActionRequest req, String portletId)
+			ActionRequest actionRequest, String portletId)
 		throws PortalException, SystemException {
 
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
 
-		return getPortletSetup(httpReq, portletId);
+		return getPortletSetup(request, portletId);
 	}
 
-	public PortletPreferences getPortletSetup(RenderRequest req)
+	public PortletPreferences getPortletSetup(RenderRequest renderRequest)
 		throws PortalException, SystemException {
 
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-		String portletId = PortalUtil.getPortletId(req);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+		String portletId = PortalUtil.getPortletId(renderRequest);
 
-		return getPortletSetup(httpReq, portletId);
+		return getPortletSetup(request, portletId);
 	}
 
 	public PortletPreferences getPortletSetup(
-			RenderRequest req, String portletId)
+			RenderRequest renderRequest, String portletId)
 		throws PortalException, SystemException {
 
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
 
-		return getPortletSetup(httpReq, portletId);
+		return getPortletSetup(request, portletId);
 	}
 
-	public PortletPreferences getPreferences(HttpServletRequest req) {
-		PortletRequest portletReq = (PortletRequest)req.getAttribute(
+	public PortletPreferences getPreferences(HttpServletRequest request) {
+		PortletRequest portletRequest = (PortletRequest)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST);
 
 		PortletPreferences prefs = null;
 
-		if (portletReq != null) {
+		if (portletRequest != null) {
 			PortletPreferencesWrapper prefsWrapper =
-				(PortletPreferencesWrapper)portletReq.getPreferences();
+				(PortletPreferencesWrapper)portletRequest.getPreferences();
 
 			prefs = prefsWrapper.getPreferencesImpl();
 		}

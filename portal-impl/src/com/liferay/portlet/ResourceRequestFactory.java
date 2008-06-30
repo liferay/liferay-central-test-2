@@ -45,37 +45,37 @@ import org.apache.commons.pool.impl.StackObjectPool;
 public class ResourceRequestFactory {
 
 	public static ResourceRequestImpl create(
-			HttpServletRequest req, Portlet portlet,
-			InvokerPortlet invokerPortlet, PortletContext portletCtx,
+			HttpServletRequest request, Portlet portlet,
+			InvokerPortlet invokerPortlet, PortletContext portletContext,
 			WindowState windowState, PortletMode portletMode,
 			PortletPreferences prefs, long plid)
 		throws Exception {
 
-		ResourceRequestImpl resourceReqImpl = null;
+		ResourceRequestImpl resourceRequestImpl = null;
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
-			resourceReqImpl =
+			resourceRequestImpl =
 				(ResourceRequestImpl)_instance._pool.borrowObject();
 		}
 		else {
-			resourceReqImpl = new ResourceRequestImpl();
+			resourceRequestImpl = new ResourceRequestImpl();
 		}
 
-		resourceReqImpl.init(
-			req, portlet, invokerPortlet, portletCtx, windowState, portletMode,
-			prefs, plid);
+		resourceRequestImpl.init(
+			request, portlet, invokerPortlet, portletContext, windowState,
+			portletMode, prefs, plid);
 
-		return resourceReqImpl;
+		return resourceRequestImpl;
 	}
 
-	public static void recycle(ResourceRequestImpl resourceReqImpl)
+	public static void recycle(ResourceRequestImpl resourceRequestImpl)
 		throws Exception {
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
-			_instance._pool.returnObject(resourceReqImpl);
+			_instance._pool.returnObject(resourceRequestImpl);
 		}
-		else if (resourceReqImpl != null) {
-			resourceReqImpl.recycle();
+		else if (resourceRequestImpl != null) {
+			resourceRequestImpl.recycle();
 		}
 	}
 
@@ -95,9 +95,9 @@ public class ResourceRequestFactory {
 		}
 
 		public void passivateObject(Object obj) {
-			ResourceRequestImpl resourceReqImpl = (ResourceRequestImpl)obj;
+			ResourceRequestImpl resourceRequestImpl = (ResourceRequestImpl)obj;
 
-			resourceReqImpl.recycle();
+			resourceRequestImpl.recycle();
 		}
 
 	}

@@ -54,12 +54,12 @@ public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 	public static final String SEARCH_PATH = "/c/directory/open_search";
 
 	public String search(
-			HttpServletRequest req, String keywords, int startPage,
+			HttpServletRequest request, String keywords, int startPage,
 			int itemsPerPage)
 		throws SearchException {
 
 		try {
-			return _search(req, keywords, startPage, itemsPerPage);
+			return _search(request, keywords, startPage, itemsPerPage);
 		}
 		catch (Exception e) {
 			throw new SearchException(e);
@@ -67,11 +67,11 @@ public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 	}
 
 	private String _search(
-			HttpServletRequest req, String keywords, int startPage,
+			HttpServletRequest request, String keywords, int startPage,
 			int itemsPerPage)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		int start = (startPage * itemsPerPage) - itemsPerPage;
@@ -97,7 +97,7 @@ public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 			//String portletTitle = PortalUtil.getPortletTitle(
 			//	portletId, themeDisplay.getUser());
 
-			PortletURL portletURL = getPortletURL(req, portletId);
+			PortletURL portletURL = getPortletURL(request, portletId);
 
 			String title = user.getFullName();
 			String url = portletURL.toString();

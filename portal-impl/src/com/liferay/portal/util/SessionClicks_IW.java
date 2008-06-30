@@ -33,14 +33,14 @@ public class SessionClicks_IW {
 		return _instance;
 	}
 
-	public java.lang.String get(javax.servlet.http.HttpServletRequest req,
+	public java.lang.String get(javax.servlet.http.HttpServletRequest request,
 		java.lang.String key, java.lang.String defaultValue) {
-		return SessionClicks.get(req, key, defaultValue);
+		return SessionClicks.get(request, key, defaultValue);
 	}
 
-	public void put(javax.servlet.http.HttpServletRequest req,
+	public void put(javax.servlet.http.HttpServletRequest request,
 		java.lang.String key, java.lang.String value) {
-		SessionClicks.put(req, key, value);
+		SessionClicks.put(request, key, value);
 	}
 
 	private SessionClicks_IW() {

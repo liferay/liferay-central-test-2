@@ -47,20 +47,20 @@ import org.apache.commons.pool.impl.StackObjectPool;
 public class RenderRequestFactory {
 
 	public static RenderRequestImpl create(
-			HttpServletRequest req, Portlet portlet,
-			InvokerPortlet invokerPortlet, PortletContext portletCtx,
+			HttpServletRequest request, Portlet portlet,
+			InvokerPortlet invokerPortlet, PortletContext portletContext,
 			WindowState windowState, PortletMode portletMode,
 			PortletPreferences prefs)
 		throws Exception {
 
 		return create(
-			req, portlet, invokerPortlet, portletCtx, windowState, portletMode,
-			prefs, 0);
+			request, portlet, invokerPortlet, portletContext, windowState,
+			portletMode, prefs, 0);
 	}
 
 	public static RenderRequestImpl create(
-			HttpServletRequest req, Portlet portlet,
-			InvokerPortlet invokerPortlet, PortletContext portletCtx,
+			HttpServletRequest request, Portlet portlet,
+			InvokerPortlet invokerPortlet, PortletContext portletContext,
 			WindowState windowState, PortletMode portletMode,
 			PortletPreferences prefs, long plid)
 		throws Exception {
@@ -73,23 +73,24 @@ public class RenderRequestFactory {
 			}
 		}
 
-		RenderRequestImpl renderReqImpl = null;
+		RenderRequestImpl renderRequestImpl = null;
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
-			renderReqImpl = (RenderRequestImpl)_instance._pool.borrowObject();
+			renderRequestImpl =
+				(RenderRequestImpl)_instance._pool.borrowObject();
 		}
 		else {
-			renderReqImpl = new RenderRequestImpl();
+			renderRequestImpl = new RenderRequestImpl();
 		}
 
-		renderReqImpl.init(
-			req, portlet, invokerPortlet, portletCtx, windowState, portletMode,
-			prefs, plid);
+		renderRequestImpl.init(
+			request, portlet, invokerPortlet, portletContext, windowState,
+			portletMode, prefs, plid);
 
-		return renderReqImpl;
+		return renderRequestImpl;
 	}
 
-	public static void recycle(RenderRequestImpl renderReqImpl)
+	public static void recycle(RenderRequestImpl renderRequestImpl)
 		throws Exception {
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
@@ -99,10 +100,10 @@ public class RenderRequestFactory {
 						_instance._pool.getNumActive());
 			}
 
-			_instance._pool.returnObject(renderReqImpl);
+			_instance._pool.returnObject(renderRequestImpl);
 		}
-		else if (renderReqImpl != null) {
-			renderReqImpl.recycle();
+		else if (renderRequestImpl != null) {
+			renderRequestImpl.recycle();
 		}
 	}
 
@@ -124,9 +125,9 @@ public class RenderRequestFactory {
 		}
 
 		public void passivateObject(Object obj) {
-			RenderRequestImpl renderReqImpl = (RenderRequestImpl)obj;
+			RenderRequestImpl renderRequestImpl = (RenderRequestImpl)obj;
 
-			renderReqImpl.recycle();
+			renderRequestImpl.recycle();
 		}
 
 	}

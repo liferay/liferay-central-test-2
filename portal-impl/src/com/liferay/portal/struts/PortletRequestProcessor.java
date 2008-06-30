@@ -48,6 +48,7 @@ import java.lang.reflect.Constructor;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletContext;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -230,35 +231,41 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 	}
 
 	protected void doForward(
-			String uri, HttpServletRequest req, HttpServletResponse res)
+			String uri, HttpServletRequest request,
+			HttpServletResponse response)
 		throws IOException, ServletException {
 
-		doInclude(uri, req, res);
+		doInclude(uri, request, response);
 	}
 
 	protected void doInclude(
-			String uri, HttpServletRequest req, HttpServletResponse res)
+			String uri, HttpServletRequest request,
+			HttpServletResponse response)
 		throws IOException, ServletException {
 
-		PortletConfigImpl portletConfig = (PortletConfigImpl)req.getAttribute(
-			JavaConstants.JAVAX_PORTLET_CONFIG);
+		PortletConfigImpl portletConfig =
+			(PortletConfigImpl)request.getAttribute(
+				JavaConstants.JAVAX_PORTLET_CONFIG);
 
-		RenderRequest renderRequest = (RenderRequest)req.getAttribute(
+		PortletContext portletContext = portletConfig.getPortletContext();
+
+		RenderRequest renderRequest = (RenderRequest)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST);
 
-		RenderResponse renderResponse = (RenderResponse)req.getAttribute(
+		RenderResponse renderResponse = (RenderResponse)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_RESPONSE);
 
-		PortletRequestDispatcherImpl prd = (PortletRequestDispatcherImpl)
-			portletConfig.getPortletContext().getRequestDispatcher(
+		PortletRequestDispatcherImpl portletRequestDispatcher =
+			(PortletRequestDispatcherImpl)portletContext.getRequestDispatcher(
 				StrutsUtil.TEXT_HTML_DIR + uri);
 
 		try {
-			if (prd == null) {
+			if (portletRequestDispatcher == null) {
 				_log.error(uri + " is not a valid include");
 			}
 			else {
-				prd.include(renderRequest, renderResponse, true);
+				portletRequestDispatcher.include(
+					renderRequest, renderResponse, true);
 			}
 		}
 		catch (PortletException pe) {
@@ -274,44 +281,46 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 	}
 
 	protected ActionForm processActionForm(
-		HttpServletRequest req, HttpServletResponse res,
+		HttpServletRequest request, HttpServletResponse response,
 		ActionMapping mapping) {
 
-		ActionForm form = super.processActionForm(req, res, mapping);
+		ActionForm form = super.processActionForm(request, response, mapping);
 
 		if (form instanceof InitializableActionForm) {
 			InitializableActionForm initForm = (InitializableActionForm)form;
 
-			initForm.init(req, res, mapping);
+			initForm.init(request, response, mapping);
 		}
 
 		return form;
 	}
 
 	protected ActionForward processActionPerform(
-			HttpServletRequest req, HttpServletResponse res, Action action,
-			ActionForm form, ActionMapping mapping)
+			HttpServletRequest request, HttpServletResponse response,
+			Action action, ActionForm form, ActionMapping mapping)
 		throws IOException, ServletException {
 
-		PortletConfigImpl portletConfig = (PortletConfigImpl)req.getAttribute(
-			JavaConstants.JAVAX_PORTLET_CONFIG);
+		PortletConfigImpl portletConfig =
+			(PortletConfigImpl)request.getAttribute(
+				JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		String exceptionId =
 			WebKeys.PORTLET_STRUTS_EXCEPTION + StringPool.PERIOD +
 				portletConfig.getPortletId();
 
-		Exception e = (Exception)req.getAttribute(exceptionId);
+		Exception e = (Exception)request.getAttribute(exceptionId);
 
 		if (e != null) {
-			return processException(req, res, e, form, mapping);
+			return processException(request, response, e, form, mapping);
 		}
 		else {
-			return super.processActionPerform(req, res, action, form, mapping);
+			return super.processActionPerform(
+				request, response, action, form, mapping);
 		}
 	}
 
 	protected void processForwardConfig(
-			HttpServletRequest req, HttpServletResponse res,
+			HttpServletRequest request, HttpServletResponse response,
 			ForwardConfig forward)
 		throws IOException, ServletException {
 
@@ -328,26 +337,27 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			}
 		}
 
-		super.processForwardConfig(req, res, forward);
+		super.processForwardConfig(request, response, forward);
 	}
 
 	public ActionMapping processMapping(
-			HttpServletRequest req, HttpServletResponse res, String path)
+			HttpServletRequest request, HttpServletResponse response,
+			String path)
 		throws IOException {
 
 		if (path == null) {
 			return null;
 		}
 
-		ActionMapping mapping = super.processMapping(req, res, path);
+		ActionMapping mapping = super.processMapping(request, response, path);
 
 		if (mapping == null) {
 			String msg = getInternal().getMessage("processInvalid");
 
-			_log.error("User ID " + req.getRemoteUser());
-			_log.error("Current URL " + PortalUtil.getCurrentURL(req));
-			_log.error("Referer " + req.getHeader("Referer"));
-			_log.error("Remote address " + req.getRemoteAddr());
+			_log.error("User ID " + request.getRemoteUser());
+			_log.error("Current URL " + PortalUtil.getCurrentURL(request));
+			_log.error("Referer " + request.getHeader("Referer"));
+			_log.error("Remote address " + request.getRemoteAddr());
 
 			_log.error(msg + " " + path);
 		}
@@ -355,17 +365,17 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		return mapping;
 	}
 
-	protected HttpServletRequest processMultipart(HttpServletRequest req) {
+	protected HttpServletRequest processMultipart(HttpServletRequest request) {
 
 		// Disable Struts from automatically wrapping a multipart request
 
-		return req;
+		return request;
 	}
 
 	protected String processPath(
-		HttpServletRequest req, HttpServletResponse res) {
+		HttpServletRequest request, HttpServletResponse response) {
 
-		String path = req.getParameter("struts_action");
+		String path = request.getParameter("struts_action");
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Getting request parameter path " + path);
@@ -376,12 +386,12 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 				_log.debug("Getting request attribute path " + path);
 			}
 
-			path = (String)req.getAttribute(WebKeys.PORTLET_STRUTS_ACTION);
+			path = (String)request.getAttribute(WebKeys.PORTLET_STRUTS_ACTION);
 		}
 
 		if (path == null) {
 			PortletConfigImpl portletConfig =
-				(PortletConfigImpl)req.getAttribute(
+				(PortletConfigImpl)request.getAttribute(
 					JavaConstants.JAVAX_PORTLET_CONFIG);
 
 			_log.error(
@@ -398,22 +408,22 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 	}
 
 	protected boolean processRoles(
-			HttpServletRequest req, HttpServletResponse res,
+			HttpServletRequest request, HttpServletResponse response,
 			ActionMapping mapping)
 		throws IOException, ServletException {
 
-		return processRoles(req, res, mapping, false);
+		return processRoles(request, response, mapping, false);
 	}
 
 	protected boolean processRoles(
-			HttpServletRequest req, HttpServletResponse res,
+			HttpServletRequest request, HttpServletResponse response,
 			ActionMapping mapping, boolean action)
 		throws IOException, ServletException {
 
 		User user = null;
 
 		try {
-			user = PortalUtil.getUser(req);
+			user = PortalUtil.getUser(request);
 		}
 		catch (Exception e) {
 		}
@@ -426,7 +436,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 
 		try {
 			PortletConfigImpl portletConfig =
-				(PortletConfigImpl)req.getAttribute(
+				(PortletConfigImpl)request.getAttribute(
 					JavaConstants.JAVAX_PORTLET_CONFIG);
 
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
@@ -450,7 +460,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 				throw new PrincipalException();
 			}
 			else if (portlet.isActive()) {
-				ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+				ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 					WebKeys.THEME_DISPLAY);
 
 				Layout layout = themeDisplay.getLayout();
@@ -469,7 +479,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 					mapping.findForward(_PATH_PORTAL_PORTLET_INACTIVE);
 
 				if (!action) {
-					processForwardConfig(req, res, forwardConfig);
+					processForwardConfig(request, response, forwardConfig);
 				}
 
 				return false;
@@ -484,7 +494,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 				mapping.findForward(_PATH_PORTAL_PORTLET_ACCESS_DENIED);
 
 			if (!action) {
-				processForwardConfig(req, res, forwardConfig);
+				processForwardConfig(request, response, forwardConfig);
 			}
 
 			return false;
@@ -494,14 +504,14 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 	}
 
 	protected boolean processValidateAction(
-		HttpServletRequest req, HttpServletResponse res, ActionForm form,
-		ActionMapping mapping) {
+		HttpServletRequest request, HttpServletResponse response,
+		ActionForm form, ActionMapping mapping) {
 
 		if (form == null) {
 			return true;
 		}
 
-		if (req.getAttribute(Globals.CANCEL_KEY) != null) {
+		if (request.getAttribute(Globals.CANCEL_KEY) != null) {
 			return true;
 		}
 
@@ -509,7 +519,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			return true;
 		}
 
-		ActionErrors errors = form.validate(mapping, req);
+		ActionErrors errors = form.validate(mapping, request);
 
 		if ((errors == null) || errors.isEmpty()) {
 			return true;
@@ -527,12 +537,12 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			return false;
 		}
 
-		req.setAttribute(Globals.ERROR_KEY, errors);
+		request.setAttribute(Globals.ERROR_KEY, errors);
 
 		// Struts normally calls internalModuleRelativeForward which breaks
 		// if called inside processAction
 
-		req.setAttribute(PortletAction.getForwardKey(req), input);
+		request.setAttribute(PortletAction.getForwardKey(request), input);
 
 		return false;
 	}

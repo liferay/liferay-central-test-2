@@ -88,8 +88,8 @@ public class WebDAVUtil {
 		}
 	}
 
-	public static long getDepth(HttpServletRequest req) {
-		String value = GetterUtil.getString(req.getHeader("Depth"));
+	public static long getDepth(HttpServletRequest request) {
+		String value = GetterUtil.getString(request.getHeader("Depth"));
 
 		if (_log.isInfoEnabled()) {
 			_log.info("\"Depth\" header is " + value);
@@ -104,9 +104,9 @@ public class WebDAVUtil {
 	}
 
 	public static String getDestination(
-		HttpServletRequest req, String rootPath) {
+		HttpServletRequest request, String rootPath) {
 
-		String headerDestination = req.getHeader("Destination");
+		String headerDestination = request.getHeader("Destination");
 		String[] pathSegments = StringUtil.split(headerDestination, rootPath);
 
 		String destination = pathSegments[pathSegments.length - 1];
@@ -221,8 +221,8 @@ public class WebDAVUtil {
 		return _instance._isEnabled(storageClassName);
 	}
 
-	public static boolean isOverwrite(HttpServletRequest req) {
-		String value = GetterUtil.getString(req.getHeader("Overwrite"));
+	public static boolean isOverwrite(HttpServletRequest request) {
+		String value = GetterUtil.getString(request.getHeader("Overwrite"));
 
 		if (value.equalsIgnoreCase("F") || !GetterUtil.getBoolean(value)) {
 			return false;

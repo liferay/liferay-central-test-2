@@ -38,17 +38,17 @@ import javax.servlet.http.HttpServletResponse;
 public class WebDAVRequest {
 
 	public WebDAVRequest(
-			WebDAVStorage storage, HttpServletRequest req,
-			HttpServletResponse res, PermissionChecker permissionChecker)
+			WebDAVStorage storage, HttpServletRequest request,
+			HttpServletResponse response, PermissionChecker permissionChecker)
 		throws WebDAVException {
 
 		_storage = storage;
-		_req = req;
-		_res = res;
-		_path = WebDAVUtil.fixPath(_req.getPathInfo());
+		_request = request;
+		_response = response;
+		_path = WebDAVUtil.fixPath(_request.getPathInfo());
 		_companyId = WebDAVUtil.getCompanyId(_path);
 		_groupId = WebDAVUtil.getGroupId(_path);
-		_userId = GetterUtil.getLong(_req.getRemoteUser());
+		_userId = GetterUtil.getLong(_request.getRemoteUser());
 		_permissionChecker = permissionChecker;
 	}
 
@@ -57,11 +57,11 @@ public class WebDAVRequest {
 	}
 
 	public HttpServletRequest getHttpServletRequest() {
-		return _req;
+		return _request;
 	}
 
 	public HttpServletResponse getHttpServletResponse() {
-		return _res;
+		return _response;
 	}
 
 	public String getRootPath() {
@@ -93,8 +93,8 @@ public class WebDAVRequest {
 	}
 
 	private WebDAVStorage _storage;
-	private HttpServletRequest _req;
-	private HttpServletResponse _res;
+	private HttpServletRequest _request;
+	private HttpServletResponse _response;
 	private String _path = StringPool.BLANK;
 	private long _companyId;
 	private long _groupId;

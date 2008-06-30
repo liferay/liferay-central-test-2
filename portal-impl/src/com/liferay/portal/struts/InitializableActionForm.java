@@ -36,6 +36,7 @@ import org.apache.struts.action.ActionMapping;
 public interface InitializableActionForm {
 
 	public void init(
-		HttpServletRequest req, HttpServletResponse res, ActionMapping mapping);
+		HttpServletRequest request, HttpServletResponse response,
+		ActionMapping mapping);
 
 }

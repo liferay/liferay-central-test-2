@@ -57,39 +57,45 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class CommunitiesUtil {
 
-	public static void deleteLayout(ActionRequest req, ActionResponse res)
+	public static void deleteLayout(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+		HttpServletResponse response = PortalUtil.getHttpServletResponse(
+			actionResponse);
 
-		deleteLayout(httpReq, httpRes);
-	}
-
-	public static void deleteLayout(RenderRequest req, RenderResponse res)
-		throws Exception {
-
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
-
-		deleteLayout(httpReq, httpRes);
+		deleteLayout(request, response);
 	}
 
 	public static void deleteLayout(
-			HttpServletRequest req, HttpServletResponse res)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+		HttpServletResponse response = PortalUtil.getHttpServletResponse(
+			renderResponse);
+
+		deleteLayout(request, response);
+	}
+
+	public static void deleteLayout(
+			HttpServletRequest request, HttpServletResponse response)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
-		long plid = ParamUtil.getLong(req, "plid");
+		long plid = ParamUtil.getLong(request, "plid");
 
-		long groupId = ParamUtil.getLong(req, "groupId");
-		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
-		long layoutId = ParamUtil.getLong(req, "layoutId");
+		long groupId = ParamUtil.getLong(request, "groupId");
+		boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
+		long layoutId = ParamUtil.getLong(request, "layoutId");
 
 		Layout layout = null;
 
@@ -126,8 +132,8 @@ public class CommunitiesUtil {
 					new Filter(layout.getType())));
 
 			EventsProcessor.process(
-				PropsKeys.LAYOUT_CONFIGURATION_ACTION_DELETE, eventClasses, req,
-				res);
+				PropsKeys.LAYOUT_CONFIGURATION_ACTION_DELETE, eventClasses,
+				request, response);
 		}
 
 		LayoutServiceUtil.deleteLayout(groupId, privateLayout, layoutId);

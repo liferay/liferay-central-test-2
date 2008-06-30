@@ -46,9 +46,9 @@ import org.apache.commons.logging.LogFactory;
 public class UserInfoFactory {
 
 	public static LinkedHashMap<String, String> getUserInfo(
-		HttpServletRequest req, Portlet portlet) {
+		HttpServletRequest request, Portlet portlet) {
 
-		if (req.getRemoteUser() == null) {
+		if (request.getRemoteUser() == null) {
 			return null;
 		}
 
@@ -60,7 +60,7 @@ public class UserInfoFactory {
 		// Liferay user attributes
 
 		try {
-			User user = PortalUtil.getUser(req);
+			User user = PortalUtil.getUser(request);
 
 			UserAttributes userAttributes = new UserAttributes(user);
 

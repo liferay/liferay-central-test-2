@@ -60,8 +60,8 @@ public class StrutsUtil {
 	public static final String TEXT_WAP_DIR = "/wap";
 
 	public static void forward(
-			String uri, ServletContext ctx, HttpServletRequest req,
-			HttpServletResponse res)
+			String uri, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response)
 		throws ServletException {
 
 		if (_log.isDebugEnabled()) {
@@ -72,10 +72,10 @@ public class StrutsUtil {
 			return;
 		}
 
-		if (!res.isCommitted()) {
+		if (!response.isCommitted()) {
 			String path = TEXT_HTML_DIR + uri;
 
-			if (BrowserSnifferUtil.is_wap(req)) {
+			if (BrowserSnifferUtil.is_wap(request)) {
 				path = TEXT_WAP_DIR + uri;
 			}
 
@@ -83,27 +83,27 @@ public class StrutsUtil {
 				_log.debug("Forward path " + path);
 			}
 
-			RequestDispatcher rd = ctx.getRequestDispatcher(path);
+			RequestDispatcher rd = servletContext.getRequestDispatcher(path);
 
 			try {
-				rd.forward(req, res);
+				rd.forward(request, response);
 			}
 			catch (IOException ioe1) {
 				_log.warn(ioe1, ioe1);
 			}
 			catch (ServletException se1) {
-				req.setAttribute(PageContext.EXCEPTION, se1.getRootCause());
+				request.setAttribute(PageContext.EXCEPTION, se1.getRootCause());
 
 				String errorPath = TEXT_HTML_DIR + "/common/error.jsp";
 
-				if (BrowserSnifferUtil.is_wap(req)) {
+				if (BrowserSnifferUtil.is_wap(request)) {
 					path = TEXT_WAP_DIR + "/common/error.jsp";
 				}
 
-				rd = ctx.getRequestDispatcher(errorPath);
+				rd = servletContext.getRequestDispatcher(errorPath);
 
 				try {
-					rd.forward(req, res);
+					rd.forward(request, response);
 				}
 				catch (IOException ioe2) {
 					_log.warn(ioe2, ioe2);
@@ -119,8 +119,8 @@ public class StrutsUtil {
 	}
 
 	public static void include(
-			String uri, ServletContext ctx, HttpServletRequest req,
-			HttpServletResponse res)
+			String uri, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response)
 		throws ServletException {
 
 		if (_log.isDebugEnabled()) {
@@ -129,7 +129,7 @@ public class StrutsUtil {
 
 		String path = TEXT_HTML_DIR + uri;
 
-		if (BrowserSnifferUtil.is_wap(req)) {
+		if (BrowserSnifferUtil.is_wap(request)) {
 			path = TEXT_WAP_DIR + uri;
 		}
 
@@ -137,10 +137,10 @@ public class StrutsUtil {
 			_log.debug("Include path " + path);
 		}
 
-		RequestDispatcher rd = ctx.getRequestDispatcher(path);
+		RequestDispatcher rd = servletContext.getRequestDispatcher(path);
 
 		try {
-			rd.include(req, res);
+			rd.include(request, response);
 		}
 		catch (IOException ioe) {
 			_log.warn(ioe, ioe);

@@ -49,32 +49,35 @@ import javax.servlet.http.HttpServletRequest;
 public class AdminUtil {
 
 	public static String getUpdateUserPassword(
-		HttpServletRequest req, long userId) {
+		HttpServletRequest request, long userId) {
 
-		String password = PortalUtil.getUserPassword(req);
+		String password = PortalUtil.getUserPassword(request);
 
-		if (userId != PortalUtil.getUserId(req)) {
+		if (userId != PortalUtil.getUserId(request)) {
 			password = StringPool.BLANK;
 		}
 
 		return password;
 	}
 
-	public static String getUpdateUserPassword(ActionRequest req, long userId) {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	public static String getUpdateUserPassword(
+		ActionRequest actionRequest, long userId) {
 
-		return getUpdateUserPassword(httpReq, userId);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		return getUpdateUserPassword(request, userId);
 	}
 
 	public static User updateUser(
-			HttpServletRequest req, long userId, String screenName,
+			HttpServletRequest request, long userId, String screenName,
 			String emailAddress, String languageId, String timeZoneId,
 			String greeting, String comments, String smsSn, String aimSn,
 			String facebookSn, String icqSn, String jabberSn, String msnSn,
 			String mySpaceSn, String skypeSn, String twitterSn, String ymSn)
 		throws PortalException, RemoteException, SystemException {
 
-		String password = getUpdateUserPassword(req, userId);
+		String password = getUpdateUserPassword(request, userId);
 
 		User user = UserLocalServiceUtil.getUserById(userId);
 
@@ -99,17 +102,18 @@ public class AdminUtil {
 	}
 
 	public static User updateUser(
-			ActionRequest req, long userId, String screenName,
+			ActionRequest actionRequest, long userId, String screenName,
 			String emailAddress, String languageId, String timeZoneId,
 			String greeting, String comments, String smsSn, String aimSn,
 			String facebookSn, String icqSn, String jabberSn, String msnSn,
 			String mySpaceSn, String skypeSn, String twitterSn, String ymSn)
 		throws PortalException, RemoteException, SystemException {
 
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
 
 		return updateUser(
-			httpReq, userId, screenName, emailAddress, languageId, timeZoneId,
+			request, userId, screenName, emailAddress, languageId, timeZoneId,
 			greeting, comments, smsSn, aimSn, facebookSn, icqSn, jabberSn,
 			msnSn, mySpaceSn, skypeSn, twitterSn, ymSn);
 	}

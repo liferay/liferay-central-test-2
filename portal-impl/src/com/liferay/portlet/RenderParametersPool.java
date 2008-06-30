@@ -39,23 +39,23 @@ import javax.servlet.http.HttpSession;
  */
 public class RenderParametersPool {
 
-	public static void clear(HttpServletRequest req, long plid) {
-		Map<String, Map<String, String[]>> plidPool = get(req, plid);
+	public static void clear(HttpServletRequest request, long plid) {
+		Map<String, Map<String, String[]>> plidPool = get(request, plid);
 
 		plidPool.clear();
 	}
 
 	public static void clear(
-		HttpServletRequest req, long plid, String portletId) {
+		HttpServletRequest request, long plid, String portletId) {
 
-		Map<String, String[]> params = get(req, plid, portletId);
+		Map<String, String[]> params = get(request, plid, portletId);
 
 		params.clear();
 	}
 
 	public static Map<String, Map<String, String[]>> get(
-			HttpServletRequest req, long plid) {
-		HttpSession ses = req.getSession();
+			HttpServletRequest request, long plid) {
+		HttpSession ses = request.getSession();
 
 		if (plid <= 0) {
 			return new ConcurrentHashMap<String, Map<String, String[]>>();
@@ -76,9 +76,9 @@ public class RenderParametersPool {
 	}
 
 	public static Map<String, String[]> get(
-		HttpServletRequest req, long plid, String portletId) {
+		HttpServletRequest request, long plid, String portletId) {
 
-		Map<String, Map<String, String[]>> plidPool = get(req, plid);
+		Map<String, Map<String, String[]>> plidPool = get(request, plid);
 
 		Map<String, String[]> params = plidPool.get(portletId);
 
@@ -92,26 +92,26 @@ public class RenderParametersPool {
 	}
 
 	public static void put(
-		HttpServletRequest req, long plid, String portletId,
+		HttpServletRequest request, long plid, String portletId,
 		Map<String, String[]> params) {
 
-		Map<String, Map<String, String[]>> plidPool = get(req, plid);
+		Map<String, Map<String, String[]>> plidPool = get(request, plid);
 
 		plidPool.put(portletId, params);
 	}
 
 	private static Map<Long, Map<String, Map<String, String[]>>>
-		_getRenderParametersPool(HttpSession ses) {
+		_getRenderParametersPool(HttpSession session) {
 
 		Map<Long, Map<String, Map<String, String[]>>> renderParametersPool =
-			(Map<Long, Map<String, Map<String, String[]>>>)ses.getAttribute(
+			(Map<Long, Map<String, Map<String, String[]>>>)session.getAttribute(
 				WebKeys.PORTLET_RENDER_PARAMETERS);
 
 		if (renderParametersPool == null) {
 			renderParametersPool = new ConcurrentHashMap
 				<Long, Map<String, Map<String, String[]>>>();
 
-			ses.setAttribute(
+			session.setAttribute(
 				WebKeys.PORTLET_RENDER_PARAMETERS, renderParametersPool);
 		}
 

@@ -69,49 +69,54 @@ import org.apache.velocity.app.Velocity;
 public class RuntimePortletUtil {
 
 	public static void processPortlet(
-			StringBuilder sb, ServletContext ctx, HttpServletRequest req,
-			HttpServletResponse res, RenderRequest renderRequest,
-			RenderResponse renderResponse, String portletId, String queryString)
+			StringBuilder sb, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response,
+			RenderRequest renderRequest, RenderResponse renderResponse,
+			String portletId, String queryString)
 		throws Exception {
 
 		processPortlet(
-			sb, ctx, req, res, renderRequest, renderResponse, portletId,
-			queryString, null, null, null);
+			sb, servletContext, request, response, renderRequest,
+			renderResponse, portletId, queryString, null, null, null);
 	}
 
 	public static void processPortlet(
-			StringBuilder sb, ServletContext ctx, HttpServletRequest req,
-			HttpServletResponse res, RenderRequest renderRequest,
-			RenderResponse renderResponse, String portletId, String queryString,
-			String columnId, Integer columnPos, Integer columnCount)
+			StringBuilder sb, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response,
+			RenderRequest renderRequest, RenderResponse renderResponse,
+			String portletId, String queryString, String columnId,
+			Integer columnPos, Integer columnCount)
 		throws Exception {
 
 		processPortlet(
-			sb, ctx, req, res, renderRequest, renderResponse, null, portletId,
-			queryString, columnId, columnPos, columnCount, null);
+			sb, servletContext, request, response, renderRequest,
+			renderResponse, null, portletId, queryString, columnId, columnPos,
+			columnCount, null);
 	}
 
 	public static void processPortlet(
-			StringBuilder sb, ServletContext ctx, HttpServletRequest req,
-			HttpServletResponse res, Portlet portlet, String queryString,
+			StringBuilder sb, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response,
+			Portlet portlet, String queryString, String columnId,
+			Integer columnPos, Integer columnCount, String path)
+		throws Exception {
+
+		processPortlet(
+			sb, servletContext, request, response, null, null, portlet,
+			portlet.getPortletId(), queryString, columnId, columnPos,
+			columnCount, path);
+	}
+
+	public static void processPortlet(
+			StringBuilder sb, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response,
+			RenderRequest renderRequest, RenderResponse renderResponse,
+			Portlet portlet, String portletId, String queryString,
 			String columnId, Integer columnPos, Integer columnCount,
 			String path)
 		throws Exception {
 
-		processPortlet(
-			sb, ctx, req, res, null, null, portlet, portlet.getPortletId(),
-			queryString, columnId, columnPos, columnCount, path);
-	}
-
-	public static void processPortlet(
-			StringBuilder sb, ServletContext ctx, HttpServletRequest req,
-			HttpServletResponse res, RenderRequest renderRequest,
-			RenderResponse renderResponse, Portlet portlet, String portletId,
-			String queryString, String columnId, Integer columnPos,
-			Integer columnCount, String path)
-		throws Exception {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		if (portlet == null) {
@@ -157,13 +162,13 @@ public class RuntimePortletUtil {
 
 		portletDisplay.copyTo(portletDisplayClone);
 
-		PortletConfig portletConfig = (PortletConfig)req.getAttribute(
+		PortletConfig portletConfig = (PortletConfig)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		try {
 			PortalUtil.renderPortlet(
-				sb, ctx, req, res, portlet, queryString, columnId, columnPos,
-				columnCount, path);
+				sb, servletContext, request, response, portlet, queryString,
+				columnId, columnPos, columnCount, path);
 		}
 		finally {
 			portletDisplay.copyFrom(portletDisplayClone);
@@ -176,29 +181,32 @@ public class RuntimePortletUtil {
 			}
 
 			_defineObjects(
-				req, portletConfig, renderRequest, renderResponse);
+				request, portletConfig, renderRequest, renderResponse);
 		}
 	}
 
 	public static String processTemplate(
-			ServletContext ctx, HttpServletRequest req, HttpServletResponse res,
-			PageContext pageContext, String content)
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, PageContext pageContext,
+			String content)
 		throws Exception {
 
-		return processTemplate(ctx, req, res, pageContext, null, content);
+		return processTemplate(
+			servletContext, request, response, pageContext, null, content);
 	}
 
 	public static String processTemplate(
-			ServletContext ctx, HttpServletRequest req, HttpServletResponse res,
-			PageContext pageContext, String portletId, String content)
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, PageContext pageContext,
+			String portletId, String content)
 		throws Exception {
 
 		if (Validator.isNull(content)) {
 			return StringPool.BLANK;
 		}
 
-		TemplateProcessor processor =
-			new TemplateProcessor(ctx, req, res, portletId);
+		TemplateProcessor processor = new TemplateProcessor(
+			servletContext, request, response, portletId);
 
 		VelocityContext vc = new VelocityContext();
 
@@ -206,15 +214,18 @@ public class RuntimePortletUtil {
 
 		// Velocity variables
 
-		VelocityVariables.insertVariables(vc, req);
+		VelocityVariables.insertVariables(vc, request);
 
 		// liferay:include tag library
 
-		StringServletResponse stringServletRes = new StringServletResponse(res);
+		StringServletResponse stringResponse = new StringServletResponse(
+			response);
 
 		MethodWrapper methodWrapper = new MethodWrapper(
 			"com.liferay.taglib.util.VelocityTaglib", "init",
-			new Object[] {ctx, req, stringServletRes, pageContext});
+			new Object[] {
+				servletContext, request, stringResponse, pageContext
+			});
 
 		Object velocityTaglib = MethodInvoker.invoke(methodWrapper);
 
@@ -268,8 +279,8 @@ public class RuntimePortletUtil {
 			StringBuilder sb = new StringBuilder();
 
 			processPortlet(
-				sb, ctx, req, res, portlet, queryString, columnId, columnPos,
-				columnCount, null);
+				sb, servletContext, request, response, portlet, queryString,
+				columnId, columnPos, columnCount, null);
 
 			output = StringUtil.replace(
 				output, "[$TEMPLATE_PORTLET_" + portlet.getPortletId() + "$]",
@@ -280,7 +291,8 @@ public class RuntimePortletUtil {
 	}
 
 	public static String processXML(
-			HttpServletRequest req, String content, RuntimeLogic runtimeLogic)
+			HttpServletRequest request, String content,
+			RuntimeLogic runtimeLogic)
 		throws Exception {
 
 		if (Validator.isNull(content)) {
@@ -288,7 +300,7 @@ public class RuntimePortletUtil {
 		}
 
 		try {
-			req.setAttribute(WebKeys.RENDER_PORTLET_RESOURCE, Boolean.TRUE);
+			request.setAttribute(WebKeys.RENDER_PORTLET_RESOURCE, Boolean.TRUE);
 
 			StringBuilder sb = new StringBuilder();
 
@@ -320,25 +332,26 @@ public class RuntimePortletUtil {
 			return sb.toString();
 		}
 		finally {
-			req.removeAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
+			request.removeAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
 		}
 	}
 
 	private static void _defineObjects(
-		HttpServletRequest req, PortletConfig portletConfig,
+		HttpServletRequest request, PortletConfig portletConfig,
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
 		if (portletConfig != null) {
-			req.setAttribute(JavaConstants.JAVAX_PORTLET_CONFIG, portletConfig);
+			request.setAttribute(
+				JavaConstants.JAVAX_PORTLET_CONFIG, portletConfig);
 		}
 
 		if (renderRequest != null) {
-			req.setAttribute(
+			request.setAttribute(
 				JavaConstants.JAVAX_PORTLET_REQUEST, renderRequest);
 		}
 
 		if (renderResponse != null) {
-			req.setAttribute(
+			request.setAttribute(
 				JavaConstants.JAVAX_PORTLET_RESPONSE, renderResponse);
 		}
 	}

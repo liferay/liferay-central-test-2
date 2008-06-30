@@ -89,7 +89,8 @@ public abstract class BaseFilter implements Filter {
 	}
 
 	protected abstract void processFilter(
-			HttpServletRequest req, HttpServletResponse res, FilterChain chain)
+			HttpServletRequest request, HttpServletResponse response,
+			FilterChain chain)
 		throws IOException, ServletException;
 
 	protected void processFilter(

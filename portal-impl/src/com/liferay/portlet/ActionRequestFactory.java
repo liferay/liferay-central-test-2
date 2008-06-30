@@ -45,8 +45,8 @@ import org.apache.commons.pool.impl.StackObjectPool;
 public class ActionRequestFactory {
 
 	public static ActionRequestImpl create(
-			HttpServletRequest req, Portlet portlet,
-			InvokerPortlet invokerPortlet, PortletContext portletCtx,
+			HttpServletRequest request, Portlet portlet,
+			InvokerPortlet invokerPortlet, PortletContext portletContext,
 			WindowState windowState, PortletMode portletMode,
 			PortletPreferences prefs, long plid)
 		throws Exception {
@@ -61,20 +61,20 @@ public class ActionRequestFactory {
 		}
 
 		actionReqImpl.init(
-			req, portlet, invokerPortlet, portletCtx, windowState, portletMode,
-			prefs, plid);
+			request, portlet, invokerPortlet, portletContext, windowState,
+			portletMode, prefs, plid);
 
 		return actionReqImpl;
 	}
 
-	public static void recycle(ActionRequestImpl actionReqImpl)
+	public static void recycle(ActionRequestImpl actionRequestImpl)
 		throws Exception {
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
-			_instance._pool.returnObject(actionReqImpl);
+			_instance._pool.returnObject(actionRequestImpl);
 		}
-		else if (actionReqImpl != null) {
-			actionReqImpl.recycle();
+		else if (actionRequestImpl != null) {
+			actionRequestImpl.recycle();
 		}
 	}
 
@@ -93,9 +93,9 @@ public class ActionRequestFactory {
 		}
 
 		public void passivateObject(Object obj) {
-			ActionRequestImpl actionReqImpl = (ActionRequestImpl)obj;
+			ActionRequestImpl actionRequestImpl = (ActionRequestImpl)obj;
 
-			actionReqImpl.recycle();
+			actionRequestImpl.recycle();
 		}
 
 	}

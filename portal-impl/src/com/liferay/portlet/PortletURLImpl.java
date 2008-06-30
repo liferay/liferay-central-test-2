@@ -96,23 +96,27 @@ public class PortletURLImpl
 	implements LiferayPortletURL, PortletURL, ResourceURL, Serializable {
 
 	public PortletURLImpl(
-		PortletRequestImpl req, String portletId, long plid, String lifecycle) {
+		PortletRequestImpl portletRequestImpl, String portletId, long plid,
+		String lifecycle) {
 
-		this(req.getHttpServletRequest(), portletId, plid, lifecycle);
+		this(
+			portletRequestImpl.getHttpServletRequest(), portletId, plid,
+			lifecycle);
 
-		_portletReq = req;
+		_portletRequest = portletRequestImpl;
 	}
 
 	public PortletURLImpl(
-		HttpServletRequest req, String portletId, long plid, String lifecycle) {
+		HttpServletRequest request, String portletId, long plid,
+		String lifecycle) {
 
-		_req = req;
+		_request = request;
 		_portletId = portletId;
 		_plid = plid;
 		_lifecycle = lifecycle;
 		_parametersIncludedInPath = new LinkedHashSet<String>();
 		_params = new LinkedHashMap<String, String[]>();
-		_secure = req.isSecure();
+		_secure = request.isSecure();
 
 		Portlet portlet = getPortlet();
 
@@ -141,7 +145,7 @@ public class PortletURLImpl
 	}
 
 	public HttpServletRequest getHttpServletRequest() {
-		return _req;
+		return _request;
 	}
 
 	public String getNamespace() {
@@ -204,7 +208,7 @@ public class PortletURLImpl
 		if (_portlet == null) {
 			try {
 				_portlet = PortletLocalServiceUtil.getPortletById(
-					PortalUtil.getCompanyId(_req), _portletId);
+					PortalUtil.getCompanyId(_request), _portletId);
 			}
 			catch (SystemException se) {
 				_log.error(se.getMessage());
@@ -244,7 +248,7 @@ public class PortletURLImpl
 	}
 
 	public PortletRequest getPortletRequest() {
-		return _portletReq;
+		return _portletRequest;
 	}
 
 	public String getResourceID() {
@@ -313,8 +317,8 @@ public class PortletURLImpl
 					PORTLET + ", or " + PAGE);
 		}
 
-		if (_portletReq instanceof ResourceRequest) {
-			ResourceRequest resourceReq = (ResourceRequest)_portletReq;
+		if (_portletRequest instanceof ResourceRequest) {
+			ResourceRequest resourceReq = (ResourceRequest)_portletRequest;
 
 			String parentCacheability = resourceReq.getCacheability();
 
@@ -472,9 +476,9 @@ public class PortletURLImpl
 	public void setPortletMode(PortletMode portletMode)
 		throws PortletModeException {
 
-		if (_portletReq != null) {
+		if (_portletRequest != null) {
 			if (!getPortlet().hasPortletMode(
-					_portletReq.getResponseContentType(), portletMode)) {
+					_portletRequest.getResponseContentType(), portletMode)) {
 
 				throw new PortletModeException(
 					portletMode.toString(), portletMode);
@@ -513,8 +517,8 @@ public class PortletURLImpl
 	public void setWindowState(WindowState windowState)
 		throws WindowStateException {
 
-		if (_portletReq != null) {
-			if (!_portletReq.isWindowStateAllowed(windowState)) {
+		if (_portletRequest != null) {
+			if (!_portletRequest.isWindowStateAllowed(windowState)) {
 				throw new WindowStateException(
 					windowState.toString(), windowState);
 			}
@@ -566,7 +570,7 @@ public class PortletURLImpl
 	protected String generateToString() {
 		StringBuilder sb = new StringBuilder();
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)_req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
@@ -581,7 +585,7 @@ public class PortletURLImpl
 					themeDisplay.getFacebookCanvasPageURL();
 		}
 		else {
-			portalURL = PortalUtil.getPortalURL(_req, _secure);
+			portalURL = PortalUtil.getPortalURL(_request, _secure);
 		}
 
 		try {
@@ -602,7 +606,7 @@ public class PortletURLImpl
 
 		try {
 			if (_encrypt) {
-				Company company = PortalUtil.getCompany(_req);
+				Company company = PortalUtil.getCompany(_request);
 
 				key = company.getKeyObj();
 			}
@@ -790,7 +794,7 @@ public class PortletURLImpl
 
 		if (_doAsUserId > 0) {
 			try {
-				Company company = PortalUtil.getCompany(_req);
+				Company company = PortalUtil.getCompany(_request);
 
 				sb.append("doAsUserId");
 				sb.append(StringPool.EQUAL);
@@ -813,12 +817,12 @@ public class PortletURLImpl
 		}
 
 		if (_copyCurrentRenderParameters) {
-			Enumeration<String> enu = _req.getParameterNames();
+			Enumeration<String> enu = _request.getParameterNames();
 
 			while (enu.hasMoreElements()) {
 				String name = enu.nextElement();
 
-				String[] oldValues = _req.getParameterValues(name);
+				String[] oldValues = _request.getParameterValues(name);
 				String[] newValues = _params.get(name);
 
 				if (newValues == null) {
@@ -851,7 +855,7 @@ public class PortletURLImpl
 					QName qName = publicRenderParameter.getQName();
 
 					if (!_copyCurrentRenderParameters) {
-						String[] oldValues = _req.getParameterValues(name);
+						String[] oldValues = _request.getParameterValues(name);
 
 						if (oldValues != null) {
 							if (values == null) {
@@ -944,9 +948,9 @@ public class PortletURLImpl
 			}
 		}
 
-		if (!CookieKeys.hasSessionId(_req)) {
+		if (!CookieKeys.hasSessionId(_request)) {
 			result = PortalUtil.getURLWithSessionId(
-				result, _req.getSession().getId());
+				result, _request.getSession().getId());
 		}
 
 		if (_escapeXml) {
@@ -991,8 +995,8 @@ public class PortletURLImpl
 
 	private static Log _log = LogFactory.getLog(PortletURLImpl.class);
 
-	private HttpServletRequest _req;
-	private PortletRequest _portletReq;
+	private HttpServletRequest _request;
+	private PortletRequest _portletRequest;
 	private String _portletId;
 	private Portlet _portlet;
 	private String _namespace;

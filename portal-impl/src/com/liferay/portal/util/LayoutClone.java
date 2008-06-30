@@ -32,8 +32,9 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface LayoutClone {
 
-	public String get(HttpServletRequest req, long plid);
+	public String get(HttpServletRequest request, long plid);
 
-	public void update(HttpServletRequest req, long plid, String typeSettings);
+	public void update(
+		HttpServletRequest request, long plid, String typeSettings);
 
 }

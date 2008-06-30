@@ -108,8 +108,8 @@ public class CookieKeys {
 		addCookie(res, cookieSupportCookie);
 	}
 
-	public static String getCookie(HttpServletRequest req, String name) {
-		String value = CookieUtil.get(req, name);
+	public static String getCookie(HttpServletRequest request, String name) {
+		String value = CookieUtil.get(request, name);
 
 		if ((value != null) && isEncodedCookie(name)) {
 			try {
@@ -137,7 +137,7 @@ public class CookieKeys {
 		return value;
 	}
 
-	public static String getDomain(HttpServletRequest req) {
+	public static String getDomain(HttpServletRequest request) {
 
 		// See LEP-4602 and	LEP-4618.
 
@@ -145,7 +145,7 @@ public class CookieKeys {
 			return PropsValues.SESSION_COOKIE_DOMAIN;
 		}
 
-		String host = req.getServerName();
+		String host = request.getServerName();
 
 		return getDomain(host);
 	}
@@ -212,13 +212,13 @@ public class CookieKeys {
 		}
 	}
 
-	public static void validateSupportCookie(HttpServletRequest req)
+	public static void validateSupportCookie(HttpServletRequest request)
 		throws CookieNotSupportedException {
 
 		if (PropsValues.SESSION_ENABLE_PERSISTENT_COOKIES &&
 			PropsValues.SESSION_TEST_COOKIE_SUPPORT) {
 
-			String cookieSupport = getCookie(req, COOKIE_SUPPORT);
+			String cookieSupport = getCookie(request, COOKIE_SUPPORT);
 
 			if (Validator.isNull(cookieSupport)) {
 				throw new CookieNotSupportedException();

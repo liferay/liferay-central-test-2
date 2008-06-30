@@ -47,8 +47,8 @@ import org.apache.commons.pool.impl.StackObjectPool;
 public class EventRequestFactory {
 
 	public static EventRequestImpl create(
-			HttpServletRequest req, Portlet portlet,
-			InvokerPortlet invokerPortlet, PortletContext portletCtx,
+			HttpServletRequest request, Portlet portlet,
+			InvokerPortlet invokerPortlet, PortletContext portletContext,
 			WindowState windowState, PortletMode portletMode,
 			PortletPreferences prefs, long plid)
 		throws Exception {
@@ -61,23 +61,23 @@ public class EventRequestFactory {
 			}
 		}
 
-		EventRequestImpl eventReqImpl = null;
+		EventRequestImpl eventRequestImpl = null;
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
-			eventReqImpl = (EventRequestImpl)_instance._pool.borrowObject();
+			eventRequestImpl = (EventRequestImpl)_instance._pool.borrowObject();
 		}
 		else {
-			eventReqImpl = new EventRequestImpl();
+			eventRequestImpl = new EventRequestImpl();
 		}
 
-		eventReqImpl.init(
-			req, portlet, invokerPortlet, portletCtx, windowState, portletMode,
-			prefs, plid);
+		eventRequestImpl.init(
+			request, portlet, invokerPortlet, portletContext, windowState,
+			portletMode, prefs, plid);
 
-		return eventReqImpl;
+		return eventRequestImpl;
 	}
 
-	public static void recycle(EventRequestImpl eventReqImpl)
+	public static void recycle(EventRequestImpl eventRequestImpl)
 		throws Exception {
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
@@ -87,10 +87,10 @@ public class EventRequestFactory {
 						_instance._pool.getNumActive());
 			}
 
-			_instance._pool.returnObject(eventReqImpl);
+			_instance._pool.returnObject(eventRequestImpl);
 		}
-		else if (eventReqImpl != null) {
-			eventReqImpl.recycle();
+		else if (eventRequestImpl != null) {
+			eventRequestImpl.recycle();
 		}
 	}
 
@@ -112,9 +112,9 @@ public class EventRequestFactory {
 		}
 
 		public void passivateObject(Object obj) {
-			EventRequestImpl eventReqImpl = (EventRequestImpl)obj;
+			EventRequestImpl eventRequestImpl = (EventRequestImpl)obj;
 
-			eventReqImpl.recycle();
+			eventRequestImpl.recycle();
 		}
 
 	}
