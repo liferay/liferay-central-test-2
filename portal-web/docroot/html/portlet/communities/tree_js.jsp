@@ -124,7 +124,7 @@ Arrays.sort(selectedNodes);
 
 StringBuilder sb = new StringBuilder();
 
-_buildLayoutsTreeHTML(groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, new LongWrapper(1), openNodes, selectableTree, selectedNodes, portletURL, themeDisplay, sm);
+_buildLayoutsTreeHTML(groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, new LongWrapper(1), openNodes, selectableTree, selectedNodes, portletURL, themeDisplay, sb);
 %>
 
 <div class="lfr-tree" id="<portlet:namespace /><%= HtmlUtil.escape(treeId) %>Output">
@@ -132,7 +132,7 @@ _buildLayoutsTreeHTML(groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAY
 		<li class="root-container">
 			<a class="community" href="<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>"><img height="20" src="<%= themeDisplay.getPathThemeImages() %>/trees/root.png" width="19" /><span><%= rootNodeName %></span></a>
 
-			<%= sm %>
+			<%= sb %>
 		</li>
 	</ul>
 </div>

@@ -24,8 +24,6 @@
 
 <%@ taglib uri="http://displaytag.sf.net" prefix="display" %>
 
-<%@ taglib uri="http://easyconf.sourceforge.net/tags-easyconf" prefix="easyconf" %>
-
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jstl/sql_rt" prefix="sql" %>

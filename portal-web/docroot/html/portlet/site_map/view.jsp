@@ -29,7 +29,7 @@ List rootLayouts = LayoutLocalServiceUtil.getLayouts(layout.getGroupId(), layout
 
 StringBuilder sb = new StringBuilder();
 
-_buildSiteMap(rootLayouts, displayDepth, 1, themeDisplay, sm);
+_buildSiteMap(rootLayouts, displayDepth, 1, themeDisplay, sb);
 %>
 
 <%= sb.toString() %>
