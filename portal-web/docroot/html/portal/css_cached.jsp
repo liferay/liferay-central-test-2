@@ -814,10 +814,6 @@ li.toggle-expand a {
 	vertical-align: middle;
 }
 
-body.lfr-has-sidebar {
-	padding-left: 260px;
-}
-
 #ui-datepicker-div {
 	z-index: 500;
 }
