@@ -82,8 +82,6 @@ public class ContainerRequestFactory {
 
 	static List<ChannelMode> portletModes = new ArrayList<ChannelMode>();
 	static List<ChannelState> windowStates = new ArrayList<ChannelState>();
-	static WindowRequestReader windowRequestReader =
-		new PortletWindowRequestReader();
 
 	static {
 		portletModes.add(ChannelMode.EDIT);
@@ -111,37 +109,41 @@ public class ContainerRequestFactory {
 
 	public static ExecuteActionRequest createExecuteActionRequest(
 			HttpServletRequest req, Portlet portlet, WindowState windowState,
-			PortletMode portletMode, long plid)
+			PortletMode portletMode, WindowRequestReader windowRequestReader,
+			long plid)
 		throws Exception {
 
 		return (ExecuteActionRequest)_createContainerRequest(
-			req, portlet, windowState, portletMode, PortletRequest.ACTION_PHASE,
-			plid);
+			req, portlet, windowState, portletMode, windowRequestReader,
+			PortletRequest.ACTION_PHASE, plid);
 	}
 
 	public static GetMarkupRequest createGetMarkUpRequest(
 			HttpServletRequest req, Portlet portlet, WindowState windowState,
-			PortletMode portletMode, long plid)
+			PortletMode portletMode, WindowRequestReader windowRequestReader,
+			long plid)
 		throws Exception {
 
 		return (GetMarkupRequest)_createContainerRequest(
-			req, portlet, windowState, portletMode, PortletRequest.RENDER_PHASE,
-			plid);
+			req, portlet, windowState, portletMode, windowRequestReader,
+			PortletRequest.RENDER_PHASE, plid);
 	}
 
 	public static GetResourceRequest createGetResourceRequest(
 			HttpServletRequest req, Portlet portlet, WindowState windowState,
-			PortletMode portletMode, long plid)
+			PortletMode portletMode, WindowRequestReader windowRequestReader,
+			long plid)
 		throws Exception {
 
 		return (GetResourceRequest)_createContainerRequest(
-			req, portlet, windowState, portletMode,
+			req, portlet, windowState, portletMode, windowRequestReader,
 			PortletRequest.RESOURCE_PHASE, plid);
 	}
 
 	private static ContainerRequest _createContainerRequest(
 			HttpServletRequest req, Portlet portlet, WindowState windowState,
-			PortletMode portletMode, String lifecycle, long plid)
+			PortletMode portletMode, WindowRequestReader windowRequestReader,
+			String lifecycle, long plid)
 		throws Exception {
 
 		EntityID entityID = WindowInvokerUtil.getEntityID(portlet);

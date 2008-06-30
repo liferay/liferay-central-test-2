@@ -76,6 +76,7 @@ import com.sun.portal.container.GetMarkupRequest;
 import com.sun.portal.container.GetMarkupResponse;
 import com.sun.portal.container.GetResourceRequest;
 import com.sun.portal.container.GetResourceResponse;
+import com.sun.portal.container.WindowRequestReader;
 import com.sun.portal.portletcontainer.appengine.PortletAppEngineUtils;
 
 import java.io.IOException;
@@ -128,6 +129,7 @@ public class WindowInvoker extends InvokerPortlet {
 
 		_portletModel = portletModel;
 		_container = _getContainer();
+		_windowRequestReader = _getWindowRequestReader();
 	}
 
 	public WindowInvoker(
@@ -143,6 +145,7 @@ public class WindowInvoker extends InvokerPortlet {
 
 		_portletModel = portletModel;
 		_container = _getContainer();
+		_windowRequestReader = _getWindowRequestReader();
 	}
 
 	protected void invokeAction(ActionRequest req, ActionResponse res)
@@ -166,7 +169,8 @@ public class WindowInvoker extends InvokerPortlet {
 			ExecuteActionRequest executeActionRequest =
 				ContainerRequestFactory.createExecuteActionRequest(
 					httpReq, _portletModel, reqImpl.getWindowState(),
-					reqImpl.getPortletMode(), _getPlid(req));
+					reqImpl.getPortletMode(), _windowRequestReader,
+					_getPlid(req));
 
 			_populateContainerRequest(
 				httpReq, httpRes, executeActionRequest, reqImpl);
@@ -237,7 +241,8 @@ public class WindowInvoker extends InvokerPortlet {
 			GetMarkupRequest getMarkupRequest =
 				ContainerRequestFactory.createGetMarkUpRequest(
 					httpReq, _portletModel, reqImpl.getWindowState(),
-					reqImpl.getPortletMode(), _getPlid(req));
+					reqImpl.getPortletMode(), _windowRequestReader,
+					_getPlid(req));
 
 			_populateContainerRequest(
 				httpReq, httpRes, getMarkupRequest, reqImpl);
@@ -293,7 +298,8 @@ public class WindowInvoker extends InvokerPortlet {
 			GetResourceRequest getResourceRequest =
 				ContainerRequestFactory.createGetResourceRequest(
 					httpReq, _portletModel, reqImpl.getWindowState(),
-					reqImpl.getPortletMode(), _getPlid(req));
+					reqImpl.getPortletMode(), _windowRequestReader,
+					_getPlid(req));
 
 			_populateContainerRequest(
 				httpReq, httpRes, getResourceRequest, reqImpl);
@@ -348,6 +354,16 @@ public class WindowInvoker extends InvokerPortlet {
 		else {
 			return ContainerFactory.getContainer(
 				ContainerType.PORTLET_CONTAINER);
+		}
+	}
+
+	private WindowRequestReader _getWindowRequestReader() {
+		if (_remotePortlet) {
+			//return WSRPWindowRequestReader();
+			return null;
+		}
+		else {
+			return new PortletWindowRequestReader(isFacesPortlet());
 		}
 	}
 
@@ -442,6 +458,7 @@ public class WindowInvoker extends InvokerPortlet {
 
 	private com.liferay.portal.model.Portlet _portletModel;
 	private Container _container;
+	private WindowRequestReader _windowRequestReader;
 	private boolean _remotePortlet;
 	private Profile _profile;
 
