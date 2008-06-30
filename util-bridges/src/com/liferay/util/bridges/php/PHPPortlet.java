@@ -22,7 +22,7 @@
 
 package com.liferay.util.bridges.php;
 
-import com.liferay.portal.kernel.servlet.PortletServlet;
+import com.liferay.portal.kernel.servlet.ServletObjectsFactory;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.util.servlet.DynamicServletConfig;
 
@@ -60,10 +60,18 @@ public class PHPPortlet extends GenericPortlet {
 
 	public static final String PHP_URI_PARAM = "phpURI";
 
-	public void init() {
+	public void init() throws PortletException {
 		editUri = getInitParameter("edit-uri");
 		helpUri = getInitParameter("help-uri");
 		viewUri = getInitParameter("view-uri");
+		String factoryName = getInitParameter("servletObjectsFactory-name");
+		try {
+			Class factoryClass = Class.forName(factoryName);
+			_factory = (ServletObjectsFactory)factoryClass.newInstance();
+		} catch (Exception e) {
+			throw new PortletException(
+					"Unable to instantiate factory" + factoryName);
+		}
 	}
 
 	public void doDispatch(RenderRequest req, RenderResponse res)
@@ -146,15 +154,15 @@ public class PHPPortlet extends GenericPortlet {
 		String phpURI, RenderRequest req, RenderResponse res) {
 
 		try {
-			ServletConfig config = (ServletConfig)req.getAttribute(
-				PortletServlet.PORTLET_SERVLET_CONFIG);
+			ServletConfig config = (ServletConfig)_factory.getServletConfig(
+				getPortletConfig(), req) ;
 
 			initQuercus(config);
 
-			HttpServletRequest httpReq = (HttpServletRequest)req.getAttribute(
-				PortletServlet.PORTLET_SERVLET_REQUEST);
-			HttpServletResponse httpRes = (HttpServletResponse)req.getAttribute(
-				PortletServlet.PORTLET_SERVLET_RESPONSE);
+			HttpServletRequest httpReq =
+				(HttpServletRequest)_factory.getServletRequest(req);
+			HttpServletResponse httpRes =
+				(HttpServletResponse)_factory.getServletResponse(req, res);
 
 			PHPServletRequest phpReq = new PHPServletRequest(
 				httpReq, config, req, res, getPortletConfig(), phpURI);
@@ -169,7 +177,8 @@ public class PHPPortlet extends GenericPortlet {
 				result = rewriteURLs(result, res.createRenderURL());
 			}
 
-			PrintWriter writer = httpRes.getWriter();
+			res.setContentType(phpRes.getContentType());
+			PrintWriter writer = res.getWriter();
 
 			writer.write(result.toCharArray());
 		}
@@ -196,5 +205,6 @@ public class PHPPortlet extends GenericPortlet {
 	protected String helpUri;
 	protected String viewUri;
 	protected HttpServlet quercusServlet;
+	protected ServletObjectsFactory _factory;
 
 }
