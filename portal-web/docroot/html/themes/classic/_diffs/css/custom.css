@@ -3,3 +3,14 @@
 @import url(color_schemes/green.css);
 
 @import url(color_schemes/orange.css);
+
+/* ---------- Special styling for just the Classic theme ---------- */
+
+body.lfr-has-sidebar {
+	padding-left: 0;
+}
+
+.lfr-has-sidebar #content-wrapper {
+	padding-left: 270px;
+	width: auto;
+}
