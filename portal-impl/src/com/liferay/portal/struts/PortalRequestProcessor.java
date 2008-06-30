@@ -372,8 +372,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 	protected String getLastPath(HttpServletRequest req) {
 		HttpSession ses = req.getSession();
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		Boolean httpsInitial = (Boolean)ses.getAttribute(WebKeys.HTTPS_INITIAL);
 
@@ -508,8 +508,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		HttpSession ses = req.getSession();
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		// Current users
 
@@ -826,8 +826,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				}
 
 				if ((portlet != null) && portlet.isActive()) {
-					ThemeDisplay themeDisplay =
-						(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+					ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+						WebKeys.THEME_DISPLAY);
 
 					Layout layout = themeDisplay.getLayout();
 					PermissionChecker permissionChecker =

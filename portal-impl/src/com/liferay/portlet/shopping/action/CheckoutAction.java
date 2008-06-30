@@ -178,8 +178,8 @@ public class CheckoutAction extends CartAction {
 	}
 
 	protected void getLatestOrder(ActionRequest req) throws Exception {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		ShoppingOrder order = ShoppingOrderLocalServiceUtil.getLatestOrder(
 			themeDisplay.getUserId(), themeDisplay.getPortletGroupId());
@@ -201,8 +201,8 @@ public class CheckoutAction extends CartAction {
 	}
 
 	protected void updateLatestOrder(ActionRequest req) throws Exception {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		String billingFirstName = ParamUtil.getString(req, "billingFirstName");
 		String billingLastName = ParamUtil.getString(req, "billingLastName");

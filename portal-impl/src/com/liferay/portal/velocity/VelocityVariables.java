@@ -335,8 +335,8 @@ public class VelocityVariables {
 
 		// Theme display
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		if (themeDisplay != null) {
 			Theme theme = themeDisplay.getTheme();

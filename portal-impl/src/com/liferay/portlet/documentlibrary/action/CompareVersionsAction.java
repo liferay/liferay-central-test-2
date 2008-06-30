@@ -89,17 +89,19 @@ public class CompareVersionsAction extends PortletAction {
 		return mapping.findForward("portlet.document_library.compare_versions");
 	}
 
-	protected void compareVersions(RenderRequest req) throws Exception {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+	protected void compareVersions(RenderRequest renderRequest)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long companyId = themeDisplay.getCompanyId();
 		long userId = themeDisplay.getUserId();
 
-		long fileEntryId = ParamUtil.getLong(req, "fileEntryId");
+		long fileEntryId = ParamUtil.getLong(renderRequest, "fileEntryId");
 
-		long folderId = ParamUtil.getLong(req, "folderId");
-		String name = ParamUtil.getString(req, "name");
+		long folderId = ParamUtil.getLong(renderRequest, "folderId");
+		String name = ParamUtil.getString(renderRequest, "name");
 
 		DLFileEntryPermission.check(
 			themeDisplay.getPermissionChecker(), folderId, name,
@@ -108,10 +110,12 @@ public class CompareVersionsAction extends PortletAction {
 		String extension = FileUtil.getExtension(name);
 
 		String titleWithExtension = ParamUtil.getString(
-			req, "titleWithExtension");
+			renderRequest, "titleWithExtension");
 
-		double sourceVersion = ParamUtil.getDouble(req, "sourceVersion");
-		double targetVersion = ParamUtil.getDouble(req, "targetVersion");
+		double sourceVersion = ParamUtil.getDouble(
+			renderRequest, "sourceVersion");
+		double targetVersion = ParamUtil.getDouble(
+			renderRequest, "targetVersion");
 
 		InputStream sourceIs = DLFileEntryLocalServiceUtil.getFileAsStream(
 			companyId, userId, folderId, name, sourceVersion);
@@ -149,13 +153,13 @@ public class CompareVersionsAction extends PortletAction {
 		List<DiffResult>[] diffResults = DiffUtil.diff(
 			new InputStreamReader(sourceIs), new InputStreamReader(targetIs));
 
-		req.setAttribute(
+		renderRequest.setAttribute(
 			WebKeys.SOURCE_NAME,
 			titleWithExtension + StringPool.SPACE + sourceVersion);
-		req.setAttribute(
+		renderRequest.setAttribute(
 			WebKeys.TARGET_NAME,
 			titleWithExtension + StringPool.SPACE + targetVersion);
-		req.setAttribute(WebKeys.DIFF_RESULTS, diffResults);
+		renderRequest.setAttribute(WebKeys.DIFF_RESULTS, diffResults);
 	}
 
 	protected boolean isConvertBeforeCompare(String extension) {

@@ -126,8 +126,8 @@ public class ViewAction extends PortletAction {
 					"@" + url;
 			}
 			else {
-				ThemeDisplay themeDisplay =
-					(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+				ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+					WebKeys.THEME_DISPLAY);
 
 				String portletId = PortalUtil.getPortletId(req);
 

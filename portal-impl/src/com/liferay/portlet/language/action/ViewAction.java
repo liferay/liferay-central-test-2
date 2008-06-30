@@ -72,8 +72,8 @@ public class ViewAction extends PortletAction {
 		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
 		HttpSession httpSes = httpReq.getSession();
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
 

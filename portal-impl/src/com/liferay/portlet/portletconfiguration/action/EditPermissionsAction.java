@@ -107,8 +107,8 @@ public class EditPermissionsAction extends EditConfigurationAction {
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long groupId = themeDisplay.getPortletGroupId();
 
@@ -167,8 +167,8 @@ public class EditPermissionsAction extends EditConfigurationAction {
 	}
 
 	protected void updateGuestPermissions(ActionRequest req) throws Exception {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long resourceId = ParamUtil.getLong(req, "resourceId");
 		String[] actionIds = StringUtil.split(
@@ -206,8 +206,8 @@ public class EditPermissionsAction extends EditConfigurationAction {
 	protected void updateRolePermissions(ActionRequest req)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long resourceId = ParamUtil.getLong(req, "resourceId");
 		long roleId = ParamUtil.getLong(req, "roleIdsPosValue");
@@ -235,8 +235,8 @@ public class EditPermissionsAction extends EditConfigurationAction {
 	}
 
 	protected void updateUserPermissions(ActionRequest req) throws Exception {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long resourceId = ParamUtil.getLong(req, "resourceId");
 		long userId = ParamUtil.getLong(req, "userIdsPosValue");

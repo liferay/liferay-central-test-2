@@ -75,8 +75,8 @@ public class PollsUtil {
 	public static boolean hasVoted(HttpServletRequest req, long questionId)
 		throws PortalException, SystemException {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		if (themeDisplay.isSignedIn()) {
 			try {

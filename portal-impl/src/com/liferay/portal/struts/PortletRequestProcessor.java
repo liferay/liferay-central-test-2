@@ -450,8 +450,8 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 				throw new PrincipalException();
 			}
 			else if (portlet.isActive()) {
-				ThemeDisplay themeDisplay =
-					(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+				ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+					WebKeys.THEME_DISPLAY);
 
 				Layout layout = themeDisplay.getLayout();
 				PermissionChecker permissionChecker =

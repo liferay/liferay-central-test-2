@@ -57,8 +57,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			return;
 		}
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		ShoppingPreferences prefs = ShoppingPreferences.getInstance(
 			themeDisplay.getCompanyId(), themeDisplay.getPortletGroupId());

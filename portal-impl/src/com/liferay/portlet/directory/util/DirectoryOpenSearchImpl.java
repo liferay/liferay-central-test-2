@@ -71,8 +71,8 @@ public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 			int itemsPerPage)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		int start = (startPage * itemsPerPage) - itemsPerPage;
 		int end = startPage * itemsPerPage;

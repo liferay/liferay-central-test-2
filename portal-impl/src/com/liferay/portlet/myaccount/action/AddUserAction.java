@@ -125,8 +125,8 @@ public class AddUserAction extends PortletAction {
 			throw new PrincipalException();
 		}
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		res.setTitle(
 			LanguageUtil.get(
@@ -143,8 +143,8 @@ public class AddUserAction extends PortletAction {
 
 		HttpSession httpSes = httpReq.getSession();
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		Company company = themeDisplay.getCompany();
 

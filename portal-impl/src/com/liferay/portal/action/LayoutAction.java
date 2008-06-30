@@ -206,8 +206,8 @@ public class LayoutAction extends Action {
 		long plid = LayoutConstants.DEFAULT_PLID;
 		String layoutFriendlyURL = null;
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		if (layout != null) {
 			plid = layout.getPlid();

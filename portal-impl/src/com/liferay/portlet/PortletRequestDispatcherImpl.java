@@ -273,8 +273,8 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 				resImpl.setURLEncoder(urlEncoder);
 			}
 			else if (strutsURLEncoder) {
-				ThemeDisplay themeDisplay =
-					(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+				ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+					WebKeys.THEME_DISPLAY);
 
 				URLEncoder strutsURLEncoderObj = new StrutsURLEncoder(
 					portletServletReq.getContextPath(),

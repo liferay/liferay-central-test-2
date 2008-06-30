@@ -39,8 +39,8 @@ public class DefineObjectsTag extends TagSupport {
 	public int doStartTag() {
 		ServletRequest req = pageContext.getRequest();
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		if (themeDisplay != null) {
 			pageContext.setAttribute("themeDisplay", themeDisplay);

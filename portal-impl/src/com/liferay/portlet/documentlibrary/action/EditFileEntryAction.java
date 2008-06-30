@@ -194,8 +194,8 @@ public class EditFileEntryAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(uploadReq, Constants.CMD);
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long folderId = ParamUtil.getLong(uploadReq, "folderId");
 		long newFolderId = ParamUtil.getLong(uploadReq, "newFolderId");

@@ -119,8 +119,8 @@ public class EditUserAction extends PortletAction {
 					// that references the old screen name no longer points to a
 					// valid screen name and therefore needs to be updated.
 
-					ThemeDisplay themeDisplay =
-						(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+					ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+						WebKeys.THEME_DISPLAY);
 
 					Group group = user.getGroup();
 
@@ -247,8 +247,8 @@ public class EditUserAction extends PortletAction {
 	protected Object[] updateUser(ActionRequest req) throws Exception {
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		boolean autoPassword = ParamUtil.getBoolean(req, "autoPassword", true);
 		String password1 = ParamUtil.getString(req, "password1");

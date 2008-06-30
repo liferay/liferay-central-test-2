@@ -169,8 +169,8 @@ public class EditConfigurationAction extends PortletAction {
 		ServletContext ctx =
 			(ServletContext)req.getAttribute(WebKeys.CTX);
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		PortletPreferences portletSetup =
 			PortletPreferencesFactoryUtil.getPortletSetup(

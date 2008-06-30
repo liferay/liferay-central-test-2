@@ -566,8 +566,8 @@ public class PortletURLImpl
 	protected String generateToString() {
 		StringBuilder sb = new StringBuilder();
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)_req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)_req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 

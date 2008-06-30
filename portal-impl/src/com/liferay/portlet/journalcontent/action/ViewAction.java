@@ -59,8 +59,8 @@ public class ViewAction extends PortletAction {
 
 		PortletPreferences prefs = req.getPreferences();
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long groupId = ParamUtil.getLong(req, "groupId");
 

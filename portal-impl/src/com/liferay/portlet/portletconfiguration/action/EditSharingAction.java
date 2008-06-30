@@ -66,8 +66,8 @@ public class EditSharingAction extends EditConfigurationAction {
 			setForward(req, "portlet.portlet_configuration.error");
 		}
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
 

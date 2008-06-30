@@ -93,8 +93,8 @@ public class ViewPageAction extends PortletAction {
 			return;
 		}
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		List<WikiNode> nodes = WikiUtil.getNodes(req);
 

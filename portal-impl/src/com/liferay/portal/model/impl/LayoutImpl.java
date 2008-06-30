@@ -616,8 +616,8 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			boolean resetRenderParameters)
 		throws SystemException {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		if (resetMaxState) {
 			Layout layout = themeDisplay.getLayout();

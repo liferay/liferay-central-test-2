@@ -64,8 +64,8 @@ public class ViewAction extends PortletAction {
 
 		String cmd = req.getParameter(Constants.CMD);
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		if (req.getRemoteUser() != null) {
 			res.sendRedirect(themeDisplay.getPathMain());

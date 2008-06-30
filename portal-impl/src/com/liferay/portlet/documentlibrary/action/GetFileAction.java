@@ -83,8 +83,8 @@ public class GetFileAction extends PortletAction {
 			String targetExtension = ParamUtil.getString(
 				request, "targetExtension");
 
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 			getFile(
 				folderId, name, version, fileShortcutId, uuid, groupId,

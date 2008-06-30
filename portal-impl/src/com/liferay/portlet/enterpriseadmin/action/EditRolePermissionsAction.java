@@ -124,8 +124,8 @@ public class EditRolePermissionsAction extends PortletAction {
 	protected void deletePermission(ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long roleId = ParamUtil.getLong(req, "roleId");
 		long permissionId = ParamUtil.getLong(req, "permissionId");
@@ -145,8 +145,8 @@ public class EditRolePermissionsAction extends PortletAction {
 	protected void updateActions(ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long roleId = ParamUtil.getLong(req, "roleId");
 

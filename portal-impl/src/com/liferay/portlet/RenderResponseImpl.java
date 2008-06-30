@@ -75,8 +75,8 @@ public class RenderResponseImpl
 
 		// See LEP-2188
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)_req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)_req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 

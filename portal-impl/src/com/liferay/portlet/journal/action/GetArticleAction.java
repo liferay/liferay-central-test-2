@@ -80,8 +80,8 @@ public class GetArticleAction extends Action {
 				JournalArticleLocalServiceUtil.getLatestArticle(
 					groupId, articleId, Boolean.TRUE);
 
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 			Map<String, String> tokens = JournalUtil.getTokens(
 				groupId, themeDisplay);

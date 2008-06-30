@@ -59,8 +59,8 @@ public class PermissionsURLTagUtil extends TagSupport {
 			HttpServletRequest req =
 				(HttpServletRequest)pageContext.getRequest();
 
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 			PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 

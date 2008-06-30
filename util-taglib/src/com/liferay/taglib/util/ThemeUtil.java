@@ -83,8 +83,8 @@ public class ThemeUtil {
 		boolean tilesSelectable = GetterUtil.getBoolean(
 			_getTilesVariables(req, "selectable"));
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		themeDisplay.setTilesTitle(tilesTitle);
 		themeDisplay.setTilesContent(tilesContent);

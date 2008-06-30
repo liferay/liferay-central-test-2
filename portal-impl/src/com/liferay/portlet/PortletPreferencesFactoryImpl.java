@@ -82,8 +82,8 @@ public class PortletPreferencesFactoryImpl
 	public PortalPreferences getPortalPreferences(HttpServletRequest req)
 		throws PortalException, SystemException {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long ownerId = themeDisplay.getUserId();
 		int ownerType = PortletKeys.PREFS_OWNER_TYPE_USER;
@@ -186,8 +186,8 @@ public class PortletPreferencesFactoryImpl
 		// PUB.10.USER.liferay.com.1, 3, 56_INSTANCE_abcd, preference is scoped
 		// per portlet, user, and layout
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
 		LayoutTypePortlet layoutTypePortlet =

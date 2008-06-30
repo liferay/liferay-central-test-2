@@ -120,8 +120,8 @@ public class EditDiscussionAction extends PortletAction {
 	}
 
 	protected MBMessage updateMessage(ActionRequest req) throws Exception {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long groupId = PortalUtil.getPortletGroupId(req);
 		String className = ParamUtil.getString(req, "className");

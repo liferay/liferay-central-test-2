@@ -64,8 +64,8 @@ public class ExportEventsAction extends PortletAction {
 		InputStream is = null;
 
 		try {
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 			long eventId = ParamUtil.getLong(req, "eventId");
 

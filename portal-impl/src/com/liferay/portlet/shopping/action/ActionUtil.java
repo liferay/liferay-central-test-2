@@ -88,8 +88,8 @@ public class ActionUtil {
 	}
 
 	public static void getCoupon(HttpServletRequest req) throws Exception {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long couponId = ParamUtil.getLong(req, "couponId");
 
@@ -140,8 +140,8 @@ public class ActionUtil {
 	}
 
 	public static void getOrder(HttpServletRequest req) throws Exception {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long orderId = ParamUtil.getLong(req, "orderId");
 

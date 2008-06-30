@@ -694,8 +694,8 @@ public class ShoppingUtil {
 
 		PortletSession ses = req.getPortletSession();
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		String sesCartId =
 			ShoppingCart.class.getName() + themeDisplay.getPortletGroupId();

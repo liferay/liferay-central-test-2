@@ -53,8 +53,8 @@ public class DoAsURLTagUtil extends TagSupport {
 			HttpServletRequest req =
 				(HttpServletRequest)pageContext.getRequest();
 
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 			Company company = themeDisplay.getCompany();
 			Layout layout = themeDisplay.getLayout();

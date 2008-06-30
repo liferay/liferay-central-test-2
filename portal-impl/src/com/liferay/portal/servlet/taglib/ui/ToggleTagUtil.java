@@ -54,8 +54,8 @@ public class ToggleTagUtil {
 		throws JspException {
 
 		try {
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 			if (Validator.isNull(showImage) && Validator.isNull(showMessage)) {
 				showImage =

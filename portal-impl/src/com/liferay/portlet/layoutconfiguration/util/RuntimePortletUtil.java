@@ -111,8 +111,8 @@ public class RuntimePortletUtil {
 			Integer columnCount, String path)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		if (portlet == null) {
 			portlet = PortletLocalServiceUtil.getPortletById(
