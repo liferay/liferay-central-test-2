@@ -80,9 +80,10 @@ public interface Portal {
 
 	public static final Date UP_TIME = new Date();
 
-	public void clearRequestParameters(RenderRequest req);
+	public void clearRequestParameters(RenderRequest renderRequest);
 
-	public void copyRequestParameters(ActionRequest req, ActionResponse res);
+	public void copyRequestParameters(
+		ActionRequest actionRequest, ActionResponse actionResponse);
 
 	public String getCDNHost();
 
@@ -100,21 +101,21 @@ public interface Portal {
 	public Company getCompany(HttpServletRequest req)
 		throws PortalException, SystemException;
 
-	public Company getCompany(ActionRequest req)
+	public Company getCompany(ActionRequest actionRequest)
 		throws PortalException, SystemException;
 
-	public Company getCompany(RenderRequest req)
+	public Company getCompany(RenderRequest renderRequest)
 		throws PortalException, SystemException;
 
-	public long getCompanyId(HttpServletRequest req);
+	public long getCompanyId(HttpServletRequest requestuest);
 
-	public long getCompanyId(ActionRequest req);
+	public long getCompanyId(ActionRequest actionRequest);
 
-	public long getCompanyId(PortletRequest req);
+	public long getCompanyId(PortletRequest portletRequest);
 
-	public long getCompanyId(RenderRequest req);
+	public long getCompanyId(RenderRequest renderRequest);
 
-	public long getCompanyIdByWebId(ServletContext ctx);
+	public long getCompanyIdByWebId(ServletContext servletContext);
 
 	public long getCompanyIdByWebId(String webId);
 
@@ -124,9 +125,9 @@ public interface Portal {
 
 	public String getComputerName();
 
-	public String getCurrentURL(HttpServletRequest req);
+	public String getCurrentURL(HttpServletRequest request);
 
-	public String getCurrentURL(PortletRequest req);
+	public String getCurrentURL(PortletRequest portletRequest);
 
 	public Date getDate(int month, int day, int year, PortalException pe)
 		throws PortalException;
@@ -144,15 +145,17 @@ public interface Portal {
 			PortalException pe)
 		throws PortalException;
 
-	public String getHost(HttpServletRequest req);
+	public String getHost(HttpServletRequest request);
 
-	public String getHost(ActionRequest req);
+	public String getHost(ActionRequest actionRequest);
 
-	public String getHost(RenderRequest req);
+	public String getHost(RenderRequest renderRequest);
 
-	public HttpServletRequest getHttpServletRequest(PortletRequest req);
+	public HttpServletRequest getHttpServletRequest(
+		PortletRequest portletRequest);
 
-	public HttpServletResponse getHttpServletResponse(PortletResponse res);
+	public HttpServletResponse getHttpServletResponse(
+		PortletResponse portletResponse);
 
 	public String getLayoutEditPage(Layout layout);
 
@@ -190,12 +193,12 @@ public interface Portal {
 
 	public String getJsSafePortletId(String portletId) ;
 
-	public Locale getLocale(HttpServletRequest req);
+	public Locale getLocale(HttpServletRequest request);
 
-	public Locale getLocale(RenderRequest req);
+	public Locale getLocale(RenderRequest renderRequest);
 
 	public HttpServletRequest getOriginalServletRequest(
-		HttpServletRequest req);
+		HttpServletRequest request);
 
 	public String getPathContext();
 
@@ -220,13 +223,13 @@ public interface Portal {
 
 	public String getPortalURL(ThemeDisplay themeDisplay);
 
-	public String getPortalURL(HttpServletRequest req);
+	public String getPortalURL(HttpServletRequest request);
 
-	public String getPortalURL(HttpServletRequest req, boolean secure);
+	public String getPortalURL(HttpServletRequest request, boolean secure);
 
-	public String getPortalURL(PortletRequest req);
+	public String getPortalURL(PortletRequest portletRequest);
 
-	public String getPortalURL(PortletRequest req, boolean secure);
+	public String getPortalURL(PortletRequest portletRequest, boolean secure);
 
 	public String getPortalURL(
 		String serverName, int serverPort, boolean secure);
@@ -244,17 +247,17 @@ public interface Portal {
 
 	public long getPortletGroupId(Layout layout);
 
-	public long getPortletGroupId(HttpServletRequest req);
+	public long getPortletGroupId(HttpServletRequest request);
 
-	public long getPortletGroupId(ActionRequest req);
+	public long getPortletGroupId(ActionRequest actionRequest);
 
-	public long getPortletGroupId(RenderRequest req);
+	public long getPortletGroupId(RenderRequest renderRequest);
 
-	public String getPortletId(HttpServletRequest req);
+	public String getPortletId(HttpServletRequest request);
 
-	public String getPortletId(ActionRequest req);
+	public String getPortletId(ActionRequest actionRequest);
 
-	public String getPortletId(RenderRequest req);
+	public String getPortletId(RenderRequest renderRequest);
 
 	public String getPortletNamespace(String portletId);
 
@@ -275,35 +278,38 @@ public interface Portal {
 	public String getPortletTitle(Portlet portlet, User user);
 
 	public String getPortletTitle(
-		Portlet portlet, ServletContext ctx, Locale locale);
+		Portlet portlet, ServletContext servletContext, Locale locale);
 
 	public String getPortletXmlFileName()
 		throws PortalException, SystemException;
 
-	public PortletPreferences getPreferences(HttpServletRequest req);
+	public PortletPreferences getPreferences(HttpServletRequest request);
 
 	public PreferencesValidator getPreferencesValidator(
 		Portlet portlet);
 
-	public User getSelectedUser(HttpServletRequest req)
+	public User getSelectedUser(HttpServletRequest request)
 		throws PortalException, RemoteException, SystemException;
 
-	public User getSelectedUser(HttpServletRequest req, boolean checkPermission)
+	public User getSelectedUser(
+			HttpServletRequest request, boolean checkPermission)
 		throws PortalException, RemoteException, SystemException;
 
-	public User getSelectedUser(ActionRequest req)
+	public User getSelectedUser(ActionRequest actionRequest)
 		throws PortalException, RemoteException, SystemException;
 
-	public User getSelectedUser(ActionRequest req, boolean checkPermission)
+	public User getSelectedUser(
+			ActionRequest actionRequest, boolean checkPermission)
 		throws PortalException, RemoteException, SystemException;
 
-	public User getSelectedUser(RenderRequest req)
+	public User getSelectedUser(RenderRequest renderRequest)
 		throws PortalException, RemoteException, SystemException;
 
-	public User getSelectedUser(RenderRequest req, boolean checkPermission)
+	public User getSelectedUser(
+			RenderRequest renderRequest, boolean checkPermission)
 		throws PortalException, RemoteException, SystemException;
 
-	public String getStrutsAction(HttpServletRequest req);
+	public String getStrutsAction(HttpServletRequest request);
 
 	public String[] getSystemCommunityRoles();
 
@@ -313,28 +319,30 @@ public interface Portal {
 
 	public String[] getSystemRoles();
 
-	public UploadPortletRequest getUploadPortletRequest(ActionRequest req);
+	public UploadPortletRequest getUploadPortletRequest(
+		ActionRequest actionRequest);
 
-	public UploadServletRequest getUploadServletRequest(HttpServletRequest req);
+	public UploadServletRequest getUploadServletRequest(
+		HttpServletRequest request);
 
 	public Date getUptime();
 
 	public String getURLWithSessionId(String url, String sessionId);
 
-	public User getUser(HttpServletRequest req)
+	public User getUser(HttpServletRequest request)
 		throws PortalException, SystemException;
 
-	public User getUser(ActionRequest req)
+	public User getUser(ActionRequest actionRequest)
 		throws PortalException, SystemException;
 
-	public User getUser(RenderRequest req)
+	public User getUser(RenderRequest renderRequest)
 		throws PortalException, SystemException;
 
-	public long getUserId(HttpServletRequest req);
+	public long getUserId(HttpServletRequest request);
 
-	public long getUserId(ActionRequest req);
+	public long getUserId(ActionRequest actionRequest);
 
-	public long getUserId(RenderRequest req);
+	public long getUserId(RenderRequest renderRequest);
 
 	public String getUserName(long userId, String defaultUserName);
 
@@ -342,28 +350,28 @@ public interface Portal {
 		long userId, String defaultUserName, String userAttribute);
 
 	public String getUserName(
-		long userId, String defaultUserName, HttpServletRequest req);
+		long userId, String defaultUserName, HttpServletRequest request);
 
 	public String getUserName(
 		long userId, String defaultUserName, String userAttribute,
-		HttpServletRequest req);
+		HttpServletRequest request);
 
 	public String getUserPassword(HttpSession ses);
 
-	public String getUserPassword(HttpServletRequest req);
+	public String getUserPassword(HttpServletRequest request);
 
-	public String getUserPassword(ActionRequest req);
+	public String getUserPassword(ActionRequest actionRequest);
 
-	public String getUserPassword(RenderRequest req);
+	public String getUserPassword(RenderRequest renderRequest);
 
 	public String getUserValue(long userId, String param, String defaultValue)
 		throws SystemException;
 
 	public String getWidgetURL(Portlet portlet, ThemeDisplay themeDisplay);
 
-	public boolean isMethodGet(PortletRequest req);
+	public boolean isMethodGet(PortletRequest portletRequest);
 
-	public boolean isMethodPost(PortletRequest req);
+	public boolean isMethodPost(PortletRequest portletRequest);
 
 	public boolean isLayoutFriendliable(Layout layout);
 
@@ -382,42 +390,49 @@ public interface Portal {
 	public boolean isUpdateAvailable() throws PortalException, SystemException;
 
 	public void renderPage(
-			StringBuilder sb, ServletContext ctx, HttpServletRequest req,
-			HttpServletResponse res, String path)
-		throws IOException, ServletException;
-
-	public void renderPortlet(
-			StringBuilder sb, ServletContext ctx, HttpServletRequest req,
-			HttpServletResponse res, Portlet portlet, String queryString)
-		throws IOException, ServletException;
-
-	public void renderPortlet(
-			StringBuilder sb, ServletContext ctx, HttpServletRequest req,
-			HttpServletResponse res, Portlet portlet, String queryString,
-			String columnId, Integer columnPos, Integer columnCount)
-		throws IOException, ServletException;
-
-	public void renderPortlet(
-			StringBuilder sb, ServletContext ctx, HttpServletRequest req,
-			HttpServletResponse res, Portlet portlet, String queryString,
-			String columnId, Integer columnPos, Integer columnCount,
+			StringBuilder sb, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response,
 			String path)
 		throws IOException, ServletException;
 
-	public void sendError(
-			Exception e, HttpServletRequest req, HttpServletResponse res)
+	public void renderPortlet(
+			StringBuilder sb, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response,
+			Portlet portlet, String queryString)
+		throws IOException, ServletException;
+
+	public void renderPortlet(
+			StringBuilder sb, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response,
+			Portlet portlet, String queryString, String columnId,
+			Integer columnPos, Integer columnCount)
+		throws IOException, ServletException;
+
+	public void renderPortlet(
+			StringBuilder sb, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response,
+			Portlet portlet, String queryString, String columnId,
+			Integer columnPos, Integer columnCount, String path)
 		throws IOException, ServletException;
 
 	public void sendError(
-			int status, Exception e, HttpServletRequest req,
-			HttpServletResponse res)
+			Exception e, HttpServletRequest request,
+			HttpServletResponse response)
 		throws IOException, ServletException;
 
-	public void sendError(Exception e, ActionRequest req, ActionResponse res)
+	public void sendError(
+			int status, Exception e, HttpServletRequest request,
+			HttpServletResponse response)
+		throws IOException, ServletException;
+
+	public void sendError(
+			Exception e, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws IOException;
 
 	public void sendError(
-			int status, Exception e, ActionRequest req, ActionResponse res)
+			int status, Exception e, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws IOException;
 
 	/**
@@ -427,7 +442,7 @@ public interface Portal {
 	 * @param		subtitle the subtitle for a page
 	 * @param		req the HTTP servlet request
 	 */
-	public void setPageSubtitle(String subtitle, HttpServletRequest req);
+	public void setPageSubtitle(String subtitle, HttpServletRequest request);
 
 	/**
 	 * Sets the whole title for a page. This is just a hint and can be
@@ -436,14 +451,14 @@ public interface Portal {
 	 * @param		title the whole title for a page
 	 * @param		req the HTTP servlet request
 	 */
-	public void setPageTitle(String title, HttpServletRequest req);
+	public void setPageTitle(String title, HttpServletRequest request);
 
 	/**
 	 * Sets the port obtained on the first request to the portal.
 	 *
 	 * @param		req the HTTP servlet request
 	 */
-	public void setPortalPort(HttpServletRequest req);
+	public void setPortalPort(HttpServletRequest request);
 
 	public void storePreferences(PortletPreferences prefs)
 		throws IOException, ValidatorException;
@@ -452,10 +467,10 @@ public interface Portal {
 
 	public PortletMode updatePortletMode(
 		String portletId, User user, Layout layout, PortletMode portletMode,
-		HttpServletRequest req);
+		HttpServletRequest request);
 
 	public WindowState updateWindowState(
 		String portletId, User user, Layout layout, WindowState windowState,
-		HttpServletRequest req);
+		HttpServletRequest request);
 
 }

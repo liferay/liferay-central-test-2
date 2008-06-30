@@ -49,19 +49,20 @@ public class ToggleTag extends IncludeTag {
 	public static void doTag(
 			String id, String showImage, String hideImage, String showMessage,
 			String hideMessage, boolean defaultShowContent, String stateVar,
-			ServletContext ctx, HttpServletRequest req, HttpServletResponse res)
+			ServletContext ctx, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		doTag(
 			_PAGE, id, showImage, hideImage, showMessage, hideMessage,
-			defaultShowContent, stateVar, ctx, req, res);
+			defaultShowContent, stateVar, ctx, request, response);
 	}
 
 	public static void doTag(
 			String page, String id, String showImage, String hideImage,
 			String showMessage, String hideMessage, boolean defaultShowContent,
-			String stateVar, ServletContext ctx, HttpServletRequest req,
-			HttpServletResponse res)
+			String stateVar, ServletContext ctx, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		ClassLoader contextClassLoader =
@@ -119,7 +120,7 @@ public class ToggleTag extends IncludeTag {
 					pageWrapper, idWrapper, showImageWrapper, hideImageWrapper,
 					showMessageWrapper, hideMessageWrapper,
 					new BooleanWrapper(defaultShowContent), stateVarWrapper,
-					ctx, req, res
+					ctx, request, response
 				});
 
 			MethodInvoker.invoke(methodWrapper);
@@ -136,15 +137,16 @@ public class ToggleTag extends IncludeTag {
 
 	public int doEndTag() throws JspException {
 		try {
-			ServletContext ctx = getServletContext();
-			HttpServletRequest req = getServletRequest();
-			StringServletResponse res = getServletResponse();
+			ServletContext servletContext = getServletContext();
+			HttpServletRequest request = getServletRequest();
+			StringServletResponse response = getServletResponse();
 
 			doTag(
 				_id, _showImage, _hideImage, _showMessage, _hideMessage,
-				_defaultShowContent, _stateVar, ctx, req, res);
+				_defaultShowContent, _stateVar, servletContext, request,
+				response);
 
-			pageContext.getOut().print(res.getString());
+			pageContext.getOut().print(response.getString());
 
 			return EVAL_PAGE;
 		}

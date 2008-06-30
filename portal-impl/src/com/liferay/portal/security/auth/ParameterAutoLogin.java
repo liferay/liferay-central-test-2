@@ -41,23 +41,24 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ParameterAutoLogin implements AutoLogin {
 
-	public String[] login(HttpServletRequest req, HttpServletResponse res)
+	public String[] login(
+			HttpServletRequest request, HttpServletResponse response)
 		throws AutoLoginException {
 
 		try {
-			String login = ParamUtil.getString(req, getLoginParam());
+			String login = ParamUtil.getString(request, getLoginParam());
 
 			if (Validator.isNull(login)) {
 				return null;
 			}
 
-			String password = ParamUtil.getString(req, getPasswordParam());
+			String password = ParamUtil.getString(request, getPasswordParam());
 
 			if (Validator.isNull(password)) {
 				return null;
 			}
 
-			Company company = PortalUtil.getCompany(req);
+			Company company = PortalUtil.getCompany(request);
 
 			String authType = company.getAuthType();
 

@@ -71,19 +71,20 @@ public class RemotingServlet extends DispatcherServlet {
 		return CONTEXT_CONFIG_LOCATION;
 	}
 
-	public void service(HttpServletRequest req, HttpServletResponse res)
+	public void service(
+			HttpServletRequest request, HttpServletResponse response)
 		throws ServletException {
 
 		PermissionCheckerImpl permissionChecker = null;
 
 		try {
-			String remoteUser = req.getRemoteUser();
+			String remoteUser = request.getRemoteUser();
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Remote user " + remoteUser);
 			}
 
-			long companyId = PortalInstances.getCompanyId(req);
+			long companyId = PortalInstances.getCompanyId(request);
 
 			CompanyThreadLocal.setCompanyId(companyId);
 
@@ -106,7 +107,7 @@ public class RemotingServlet extends DispatcherServlet {
 				}
 			}
 
-			super.service(req, res);
+			super.service(request, response);
 		}
 		catch (Exception e) {
 			throw new ServletException(e);

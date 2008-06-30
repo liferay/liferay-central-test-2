@@ -70,28 +70,32 @@ public class WAIPortlet extends GenericPortlet {
 			portletConfig.getInitParameter("wai.connector"), CONNECTOR_IFRAME);
 	}
 
-	public void processAction(ActionRequest req, ActionResponse res) {
+	public void processAction(
+		ActionRequest actionRequest, ActionResponse actionResponse) {
 	}
 
-	public void render(RenderRequest req, RenderResponse res)
+	public void render(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		if (req.getWindowState().equals(WindowState.MAXIMIZED)) {
-			invokeApplication(req, res);
+		if (renderRequest.getWindowState().equals(WindowState.MAXIMIZED)) {
+			invokeApplication(renderRequest, renderResponse);
 		}
 		else {
-			renderNormalWindowState(req, res);
+			renderNormalWindowState(renderRequest, renderResponse);
 		}
 	}
 
 	protected void forward(
-			HttpServletRequest req, HttpServletResponse res, String path)
+			HttpServletRequest request, HttpServletResponse response,
+			String path)
 		throws PortletException {
 
-		RequestDispatcher rd = req.getRequestDispatcher(path);
+		RequestDispatcher requestDispatcher =
+			request.getRequestDispatcher(path);
 
 		try {
-			rd.forward(req, res);
+			requestDispatcher.forward(request, response);
 		}
 		catch (IOException ioe) {
 			_log.error(ioe, ioe);
@@ -101,17 +105,20 @@ public class WAIPortlet extends GenericPortlet {
 		}
 	}
 
-	protected void invokeApplication(RenderRequest req, RenderResponse res)
+	protected void invokeApplication(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		HttpServletRequest httpReq = (HttpServletRequest)req.getAttribute(
-			PortletServlet.PORTLET_SERVLET_REQUEST);
-		HttpServletResponse httpRes = (HttpServletResponse)req.getAttribute(
-			PortletServlet.PORTLET_SERVLET_RESPONSE);
+		HttpServletRequest request =
+			(HttpServletRequest)renderRequest.getAttribute(
+				PortletServlet.PORTLET_SERVLET_REQUEST);
+		HttpServletResponse response =
+			(HttpServletResponse)renderRequest.getAttribute(
+				PortletServlet.PORTLET_SERVLET_RESPONSE);
 
 		String portletName = getPortletConfig().getPortletName();
 
-		String friendlyURL = (String)httpReq.getAttribute("FRIENDLY_URL");
+		String friendlyURL = (String)request.getAttribute("FRIENDLY_URL");
 
 		int pos = friendlyURL.indexOf(_MAPPING);
 
@@ -126,35 +133,37 @@ public class WAIPortlet extends GenericPortlet {
 		String pathInfo = friendlyURL.substring(pos + portletName.length());
 
 		Map<String, String[]> params = new HashMap<String, String[]>(
-			httpReq.getParameterMap());
+			request.getParameterMap());
 
 		params.remove(_APP_URL);
 
 		String queryString = HttpUtil.parameterMapToString(params, false);
 
-		String appUrl = ParamUtil.getString(req, _APP_URL, StringPool.SLASH);
+		String appUrl = ParamUtil.getString(
+			renderRequest, _APP_URL, StringPool.SLASH);
 
 		if (_connector.equals(CONNECTOR_IFRAME)) {
-			httpReq.setAttribute(_APP_URL, req.getContextPath() + appUrl);
+			request.setAttribute(
+				_APP_URL, renderRequest.getContextPath() + appUrl);
 
 			String iframeExtraHeight = GetterUtil.getString(
 				getPortletConfig().getInitParameter(
 					"wai.connector.iframe.height.extra"),
 				"40");
 
-			req.setAttribute(
+			renderRequest.setAttribute(
 				"wai.connector.iframe.height.extra", iframeExtraHeight);
 
-			forward(httpReq, httpRes, _JSP_IFRAME);
+			forward(request, response, _JSP_IFRAME);
 		}
 		else if (_connector.equals(CONNECTOR_INCLUDE)) {
 			HttpServletRequest waiHttpReq = new WAIHttpServletRequest(
-				httpReq, contextPath.toString(), pathInfo, queryString, params);
+				request, contextPath.toString(), pathInfo, queryString, params);
 
-			RequestDispatcher rd = httpReq.getRequestDispatcher(appUrl);
+			RequestDispatcher rd = request.getRequestDispatcher(appUrl);
 
 			try {
-				rd.forward(waiHttpReq, httpRes);
+				rd.forward(waiHttpReq, response);
 			}
 			catch (ServletException se) {
 				throw new PortletException(se);
@@ -163,21 +172,23 @@ public class WAIPortlet extends GenericPortlet {
 	}
 
 	protected void renderNormalWindowState(
-			RenderRequest req, RenderResponse res)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws PortletException {
 
-		HttpServletRequest httpReq = (HttpServletRequest)req.getAttribute(
-			PortletServlet.PORTLET_SERVLET_REQUEST);
-		HttpServletResponse httpRes = (HttpServletResponse)req.getAttribute(
-			PortletServlet.PORTLET_SERVLET_RESPONSE);
+		HttpServletRequest request =
+			(HttpServletRequest)renderRequest.getAttribute(
+				PortletServlet.PORTLET_SERVLET_REQUEST);
+		HttpServletResponse response =
+			(HttpServletResponse)renderRequest.getAttribute(
+				PortletServlet.PORTLET_SERVLET_RESPONSE);
 
-		PortletURL renderURL = res.createRenderURL();
+		PortletURL renderURL = renderResponse.createRenderURL();
 
 		renderURL.setWindowState(WindowState.MAXIMIZED);
 
-		req.setAttribute("renderURL", renderURL.toString());
+		renderRequest.setAttribute("renderURL", renderURL.toString());
 
-		forward(httpReq, httpRes, _JSP_NORMAL_WINDOW_STATE);
+		forward(request, response, _JSP_NORMAL_WINDOW_STATE);
 	}
 
 	private static final String _MAPPING = "waiapp";

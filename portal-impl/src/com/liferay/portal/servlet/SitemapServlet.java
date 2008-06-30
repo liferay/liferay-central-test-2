@@ -44,7 +44,8 @@ import org.apache.commons.logging.LogFactory;
  */
 public class SitemapServlet extends HttpServlet {
 
-	public void service(HttpServletRequest req, HttpServletResponse res)
+	public void service(
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
 		try {
@@ -55,13 +56,14 @@ public class SitemapServlet extends HttpServlet {
 
 			RequestDispatcher rd = ctx.getRequestDispatcher(redirect);
 
-			rd.forward(req, res);
+			rd.forward(request, response);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 
 			PortalUtil.sendError(
-				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, req, res);
+				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, request,
+				response);
 		}
 	}
 

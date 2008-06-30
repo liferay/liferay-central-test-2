@@ -68,12 +68,12 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 	public static final String SEARCH_PATH = "/c/search/open_search";
 
 	public String search(
-			HttpServletRequest req, String keywords, int startPage,
+			HttpServletRequest request, String keywords, int startPage,
 			int itemsPerPage)
 		throws SearchException {
 
 		try {
-			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
 			int start = (startPage * itemsPerPage) - itemsPerPage;
@@ -111,7 +111,8 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 
 				String title = StringPool.BLANK;
 
-				PortletURL portletURL = getPortletURL(req, portletId, groupId);
+				PortletURL portletURL = getPortletURL(
+					request, portletId, groupId);
 
 				String url = portletURL.toString();
 

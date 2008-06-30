@@ -49,12 +49,12 @@ public class ToggleTagUtil {
 	public static void doEndTag(
 			String page, String id, String showImage, String hideImage,
 			String showMessage, String hideMessage, boolean defaultShowContent,
-			String stateVar, ServletContext ctx, HttpServletRequest req,
-			HttpServletResponse res)
+			String stateVar, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response)
 		throws JspException {
 
 		try {
-			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
 			if (Validator.isNull(showImage) && Validator.isNull(showMessage)) {
@@ -73,7 +73,7 @@ public class ToggleTagUtil {
 			String defaultMessage =
 				defaultShowContent ? hideMessage : showMessage;
 
-			String clickValue = SessionClicks.get(req, id, null);
+			String clickValue = SessionClicks.get(request, id, null);
 
 			if (defaultShowContent) {
 				if ((clickValue != null) && (clickValue.equals("none"))) {
@@ -104,21 +104,22 @@ public class ToggleTagUtil {
 				stateVar = PwdGenerator.getPassword(PwdGenerator.KEY3, 8);
 			}
 
-			req.setAttribute("liferay-ui:toggle:id", id);
-			req.setAttribute("liferay-ui:toggle:showImage", showImage);
-			req.setAttribute("liferay-ui:toggle:hideImage", hideImage);
-			req.setAttribute("liferay-ui:toggle:showMessage", showMessage);
-			req.setAttribute("liferay-ui:toggle:hideMessage", hideMessage);
-			req.setAttribute("liferay-ui:toggle:stateVar", stateVar);
-			req.setAttribute(
+			request.setAttribute("liferay-ui:toggle:id", id);
+			request.setAttribute("liferay-ui:toggle:showImage", showImage);
+			request.setAttribute("liferay-ui:toggle:hideImage", hideImage);
+			request.setAttribute("liferay-ui:toggle:showMessage", showMessage);
+			request.setAttribute("liferay-ui:toggle:hideMessage", hideMessage);
+			request.setAttribute("liferay-ui:toggle:stateVar", stateVar);
+			request.setAttribute(
 				"liferay-ui:toggle:defaultStateValue", defaultStateValue);
-			req.setAttribute("liferay-ui:toggle:defaultImage", defaultImage);
-			req.setAttribute(
+			request.setAttribute(
+				"liferay-ui:toggle:defaultImage", defaultImage);
+			request.setAttribute(
 				"liferay-ui:toggle:defaultMessage", defaultMessage);
 
-			RequestDispatcher rd = ctx.getRequestDispatcher(page);
+			RequestDispatcher rd = servletContext.getRequestDispatcher(page);
 
-			rd.include(req, res);
+			rd.include(request, response);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

@@ -66,17 +66,18 @@ import org.apache.commons.logging.LogFactory;
  */
 public class SoftwareCatalogServlet extends HttpServlet {
 
-	public void service(HttpServletRequest req, HttpServletResponse res)
+	public void service(
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
 		try {
-			long groupId = getGroupId(req);
-			String version = getVersion(req);
-			String baseImageURL = getBaseImageURL(req);
-			Date oldestDate = getOldestDate(req);
+			long groupId = getGroupId(request);
+			String version = getVersion(request);
+			String baseImageURL = getBaseImageURL(request);
+			Date oldestDate = getOldestDate(request);
 			int maxNumOfVersions = ParamUtil.getInteger(
-				req, "maxNumOfVersions");
-			Properties repoSettings = getRepoSettings(req);
+				request, "maxNumOfVersions");
+			Properties repoSettings = getRepoSettings(request);
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Group ID " + groupId);
@@ -91,12 +92,12 @@ public class SoftwareCatalogServlet extends HttpServlet {
 					maxNumOfVersions, repoSettings);
 
 			ServletResponseUtil.sendFile(
-				res, null, repositoryXML.getBytes(StringPool.UTF8),
+				response, null, repositoryXML.getBytes(StringPool.UTF8),
 				ContentTypes.TEXT_XML_UTF8);
 		}
 		catch (NoSuchGroupException nsge) {
 			PortalUtil.sendError(
-				HttpServletResponse.SC_NOT_FOUND, nsge, req, res);
+				HttpServletResponse.SC_NOT_FOUND, nsge, request, response);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -104,15 +105,16 @@ public class SoftwareCatalogServlet extends HttpServlet {
 			}
 
 			PortalUtil.sendError(
-				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, req, res);
+				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, request,
+				response);
 		}
 	}
 
-	protected String getBaseImageURL(HttpServletRequest req) {
-		String host = PortalUtil.getHost(req);
+	protected String getBaseImageURL(HttpServletRequest request) {
+		String host = PortalUtil.getHost(request);
 
 		String portalURL = PortalUtil.getPortalURL(
-			host, req.getServerPort(), req.isSecure());
+			host, request.getServerPort(), request.isSecure());
 
 		String pathImage = PortalUtil.getPathImage();
 
@@ -126,13 +128,13 @@ public class SoftwareCatalogServlet extends HttpServlet {
 		}
 	}
 
-	protected long getGroupId(HttpServletRequest req)
+	protected long getGroupId(HttpServletRequest request)
 		throws SystemException, PortalException {
 
-		long groupId = ParamUtil.getLong(req, "groupId");
+		long groupId = ParamUtil.getLong(request, "groupId");
 
 		if (groupId <= 0) {
-			String path = GetterUtil.getString(req.getPathInfo());
+			String path = GetterUtil.getString(request.getPathInfo());
 
 			path = StringUtil.replace(
 				path, StringPool.DOUBLE_SLASH, StringPool.SLASH);
@@ -149,7 +151,7 @@ public class SoftwareCatalogServlet extends HttpServlet {
 		}
 
 		if (groupId <= 0) {
-			long companyId = PortalInstances.getCompanyId(req);
+			long companyId = PortalInstances.getCompanyId(request);
 
 			Group guestGroup = GroupLocalServiceUtil.getGroup(
 				companyId, GroupImpl.GUEST);
@@ -160,14 +162,14 @@ public class SoftwareCatalogServlet extends HttpServlet {
 		return groupId;
 	}
 
-	protected Date getOldestDate(HttpServletRequest req) {
+	protected Date getOldestDate(HttpServletRequest request) {
 		Date oldestDate = null;
 
 		oldestDate = ParamUtil.getDate(
-			req, "oldestDate", new SimpleDateFormat("yyyy.MM.dd"), null);
+			request, "oldestDate", new SimpleDateFormat("yyyy.MM.dd"), null);
 
 		if (oldestDate == null) {
-			int daysOld = ParamUtil.getInteger(req, "maxAge", -1);
+			int daysOld = ParamUtil.getInteger(request, "maxAge", -1);
 
 			if (daysOld != -1) {
 				Calendar cal = Calendar.getInstance();
@@ -181,12 +183,12 @@ public class SoftwareCatalogServlet extends HttpServlet {
 		return oldestDate;
 	}
 
-	protected Properties getRepoSettings(HttpServletRequest req) {
+	protected Properties getRepoSettings(HttpServletRequest request) {
 		Properties repoSettings = new Properties();
 
 		String prefix = "setting_";
 
-		Enumeration<String> enu = req.getParameterNames();
+		Enumeration<String> enu = request.getParameterNames();
 
 		while (enu.hasMoreElements()) {
 			String name = enu.nextElement();
@@ -195,7 +197,7 @@ public class SoftwareCatalogServlet extends HttpServlet {
 				String settingName = name.substring(
 					prefix.length(), name.length());
 
-				String value = ParamUtil.getString(req, name);
+				String value = ParamUtil.getString(request, name);
 
 				if (Validator.isNotNull(value)) {
 					repoSettings.setProperty(settingName , value);
@@ -206,8 +208,8 @@ public class SoftwareCatalogServlet extends HttpServlet {
 		return repoSettings;
 	}
 
-	protected String getVersion(HttpServletRequest req) {
-		String version = ParamUtil.getString(req, "version");
+	protected String getVersion(HttpServletRequest request) {
+		String version = ParamUtil.getString(request, "version");
 
 		String prefix =
 			PluginPackageUtil.REPOSITORY_XML_FILENAME_PREFIX + StringPool.DASH;
@@ -216,7 +218,7 @@ public class SoftwareCatalogServlet extends HttpServlet {
 				PluginPackageUtil.REPOSITORY_XML_FILENAME_EXTENSION;
 
 		if (Validator.isNull(version)) {
-			String path = GetterUtil.getString(req.getPathInfo());
+			String path = GetterUtil.getString(request.getPathInfo());
 
 			if (Validator.isNotNull(path)) {
 				int x = path.indexOf(prefix);

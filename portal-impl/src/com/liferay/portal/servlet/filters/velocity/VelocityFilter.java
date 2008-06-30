@@ -55,8 +55,6 @@ import java.util.regex.Pattern;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -72,7 +70,7 @@ import org.apache.velocity.app.Velocity;
  */
 public class VelocityFilter extends BasePortalFilter {
 
-	public void init(FilterConfig config) throws ServletException {
+	public void init(FilterConfig config) {
 		super.init(config);
 
 		String pattern = config.getInitParameter("pattern");
@@ -87,13 +85,11 @@ public class VelocityFilter extends BasePortalFilter {
 	}
 
 	protected void processFilter(
-			ServletRequest req, ServletResponse res, FilterChain chain)
+			HttpServletRequest request, HttpServletResponse response,
+			FilterChain chain)
 		throws IOException, ServletException {
 
-		HttpServletRequest httpReq = (HttpServletRequest)req;
-		HttpServletResponse httpRes = (HttpServletResponse)res;
-
-		String completeURL = HttpUtil.getCompleteURL(httpReq);
+		String completeURL = HttpUtil.getCompleteURL(request);
 
 		if (isMatchingURL(completeURL)) {
 			if (_log.isDebugEnabled()) {
@@ -101,9 +97,9 @@ public class VelocityFilter extends BasePortalFilter {
 			}
 
 			CacheResponse cacheResponse = new CacheResponse(
-				httpRes, StringPool.UTF8);
+				response, StringPool.UTF8);
 
-			processFilter(VelocityFilter.class, req, cacheResponse, chain);
+			processFilter(VelocityFilter.class, request, cacheResponse, chain);
 
 			VelocityContext context = new VelocityContext();
 
@@ -117,7 +113,7 @@ public class VelocityFilter extends BasePortalFilter {
 
 				// Company
 
-				long companyId = ParamUtil.getLong(req, "companyId");
+				long companyId = ParamUtil.getLong(request, "companyId");
 
 				Company company = CompanyLocalServiceUtil.getCompanyById(
 					companyId);
@@ -128,17 +124,17 @@ public class VelocityFilter extends BasePortalFilter {
 
 				// Locale
 
-				String languageId = ParamUtil.getString(req, "languageId");
+				String languageId = ParamUtil.getString(request, "languageId");
 
 				Locale locale = LocaleUtil.fromLanguageId(languageId);
 
 				// Theme and color scheme
 
-				String themeId = ParamUtil.getString(req, "themeId");
+				String themeId = ParamUtil.getString(request, "themeId");
 				String colorSchemeId = ParamUtil.getString(
-					req, "colorSchemeId");
+					request, "colorSchemeId");
 
-				boolean wapTheme = BrowserSnifferUtil.is_wap(httpReq);
+				boolean wapTheme = BrowserSnifferUtil.is_wap(request);
 
 				Theme theme = ThemeLocalServiceUtil.getTheme(
 					companyId, themeId, wapTheme);
@@ -154,11 +150,11 @@ public class VelocityFilter extends BasePortalFilter {
 				themeDisplay.setLookAndFeel(contextPath, theme, colorScheme);
 				themeDisplay.setPathContext(contextPath);
 
-				req.setAttribute(WebKeys.THEME_DISPLAY, themeDisplay);
+				request.setAttribute(WebKeys.THEME_DISPLAY, themeDisplay);
 
 				// Velocity variables
 
-				VelocityVariables.insertVariables(context, httpReq);
+				VelocityVariables.insertVariables(context, request);
 
 				// Evaluate template
 
@@ -182,14 +178,14 @@ public class VelocityFilter extends BasePortalFilter {
 				writer.toString().getBytes(StringPool.UTF8),
 				cacheResponse.getContentType(), cacheResponse.getHeaders());
 
-			CacheResponseUtil.write(httpRes, data);
+			CacheResponseUtil.write(response, data);
 		}
 		else {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Not processing " + completeURL);
 			}
 
-			processFilter(VelocityFilter.class, req, res, chain);
+			processFilter(VelocityFilter.class, request, response, chain);
 		}
 	}
 

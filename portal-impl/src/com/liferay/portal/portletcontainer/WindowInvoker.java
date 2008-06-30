@@ -148,39 +148,42 @@ public class WindowInvoker extends InvokerPortlet {
 		_windowRequestReader = _getWindowRequestReader();
 	}
 
-	protected void invokeAction(ActionRequest req, ActionResponse res)
+	protected void invokeAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException, PortletException {
 
 		if (!_isWARFile()) {
-			super.invokeAction(req, res);
+			super.invokeAction(actionRequest, actionResponse);
 
 			return;
 		}
 
 		try {
-			ActionRequestImpl reqImpl = (ActionRequestImpl)req;
-			ActionResponseImpl resImpl = (ActionResponseImpl)res;
+			ActionRequestImpl actionRequestImpl =
+				(ActionRequestImpl)actionRequest;
+			ActionResponseImpl actionResponseImpl =
+				(ActionResponseImpl)actionResponse;
 
-			HttpServletRequest httpReq =
-				reqImpl.getOriginalHttpServletRequest();
-			HttpServletResponse httpRes =
-				resImpl.getHttpServletResponse();
+			HttpServletRequest request =
+				actionRequestImpl.getOriginalHttpServletRequest();
+			HttpServletResponse response =
+				actionResponseImpl.getHttpServletResponse();
 
 			ExecuteActionRequest executeActionRequest =
 				ContainerRequestFactory.createExecuteActionRequest(
-					httpReq, _portletModel, reqImpl.getWindowState(),
-					reqImpl.getPortletMode(), _windowRequestReader,
-					_getPlid(req));
+					request, _portletModel, actionRequestImpl.getWindowState(),
+					actionRequestImpl.getPortletMode(), _windowRequestReader,
+					_getPlid(actionRequest));
 
 			_populateContainerRequest(
-				httpReq, httpRes, executeActionRequest, reqImpl);
+				request, response, executeActionRequest, actionRequestImpl);
 
 			ExecuteActionResponse executeActionResponse =
-				ContainerResponseFactory.createExecuteActionResponse(httpRes);
+				ContainerResponseFactory.createExecuteActionResponse(response);
 
 			ChannelURLType urlType =
 				executeActionRequest.getWindowRequestReader().readURLType(
-					httpReq);
+					request);
 
 			_container.executeAction(
 				executeActionRequest, executeActionResponse, urlType);
@@ -188,14 +191,14 @@ public class WindowInvoker extends InvokerPortlet {
 			URL redirectURL = executeActionResponse.getRedirectURL();
 
 			if (redirectURL != null) {
-				resImpl.setRedirectLocation(redirectURL.toString());
+				actionResponseImpl.setRedirectLocation(redirectURL.toString());
 			}
 
 			ChannelState newWindowState =
 				executeActionResponse.getNewWindowState();
 
 			if (newWindowState != null) {
-				resImpl.setWindowState(
+				actionResponseImpl.setWindowState(
 					PortletAppEngineUtils.getWindowState(newWindowState));
 			}
 
@@ -203,7 +206,7 @@ public class WindowInvoker extends InvokerPortlet {
 				executeActionResponse.getNewChannelMode();
 
 			if (newPortletMode != null) {
-				resImpl.setPortletMode(
+				actionResponseImpl.setPortletMode(
 					PortletAppEngineUtils.getPortletMode(newPortletMode));
 			}
 		}
@@ -211,49 +214,56 @@ public class WindowInvoker extends InvokerPortlet {
 			throw new PortletException(e);
 		}
 		finally {
-			_setPortletAttributes(req, res);
+			_setPortletAttributes(actionRequest, actionResponse);
 		}
 	}
 
-	protected void invokeEvent(EventRequest req, EventResponse res)
+	protected void invokeEvent(
+			EventRequest eventRequest, EventResponse eventResponse)
 		throws IOException, PortletException {
 
 		if (!_isWARFile()) {
-			super.invokeEvent(req, res);
+			super.invokeEvent(eventRequest, eventResponse);
 		}
 	}
 
-	protected String invokeRender(RenderRequest req, RenderResponse res)
+	protected String invokeRender(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
 		if (!_isWARFile()) {
-			return super.invokeRender(req, res);
+			return super.invokeRender(renderRequest, renderResponse);
 		}
 
 		try {
-			RenderRequestImpl reqImpl = (RenderRequestImpl)req;
-			RenderResponseImpl resImpl = (RenderResponseImpl)res;
+			RenderRequestImpl renderRequestImpl =
+				(RenderRequestImpl)renderRequest;
+			RenderResponseImpl renderResponseImpl =
+				(RenderResponseImpl)renderResponse;
 
-			HttpServletRequest httpReq =
-				reqImpl.getOriginalHttpServletRequest();
-			HttpServletResponse httpRes = resImpl.getHttpServletResponse();
+			HttpServletRequest request =
+				renderRequestImpl.getOriginalHttpServletRequest();
+			HttpServletResponse response =
+				renderResponseImpl.getHttpServletResponse();
 
 			GetMarkupRequest getMarkupRequest =
 				ContainerRequestFactory.createGetMarkUpRequest(
-					httpReq, _portletModel, reqImpl.getWindowState(),
-					reqImpl.getPortletMode(), _windowRequestReader,
-					_getPlid(req));
+					request, _portletModel, renderRequestImpl.getWindowState(),
+					renderRequestImpl.getPortletMode(), _windowRequestReader,
+					_getPlid(renderRequest));
 
 			_populateContainerRequest(
-				httpReq, httpRes, getMarkupRequest, reqImpl);
+				request, response, getMarkupRequest, renderRequestImpl);
 
 			GetMarkupResponse getMarkupResponse =
-				ContainerResponseFactory.createGetMarkUpResponse(httpRes);
+				ContainerResponseFactory.createGetMarkUpResponse(response);
 
 			List<String> allowableContentTypes =
 				getMarkupRequest.getAllowableContentTypes();
 
-			if (req.getWindowState().equals(LiferayWindowState.EXCLUSIVE)) {
+			if (renderRequest.getWindowState().equals(
+					LiferayWindowState.EXCLUSIVE)) {
+
 				allowableContentTypes.add("*/*");
 			}
 
@@ -263,7 +273,7 @@ public class WindowInvoker extends InvokerPortlet {
 
 			StringBuffer sb = getMarkupResponse.getMarkup();
 
-			PrintWriter pw = httpRes.getWriter();
+			PrintWriter pw = response.getWriter();
 
 			pw.print(sb);
 
@@ -274,46 +284,51 @@ public class WindowInvoker extends InvokerPortlet {
 			throw new PortletException(e);
 		}
 		finally {
-			_setPortletAttributes(req, res);
+			_setPortletAttributes(renderRequest, renderResponse);
 		}
 	}
 
-	protected void invokeResource(ResourceRequest req, ResourceResponse res)
+	protected void invokeResource(
+			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws IOException, PortletException {
 
 		if (!_isWARFile()) {
-			super.invokeResource(req, res);
+			super.invokeResource(resourceRequest, resourceResponse);
 
 			return;
 		}
 
 		try {
-			ResourceRequestImpl reqImpl = (ResourceRequestImpl)req;
-			ResourceResponseImpl resImpl = (ResourceResponseImpl)res;
+			ResourceRequestImpl resourceRequestImpl =
+				(ResourceRequestImpl)resourceRequest;
+			ResourceResponseImpl resourceResponseImpl =
+				(ResourceResponseImpl)resourceResponse;
 
-			HttpServletRequest httpReq =
-				reqImpl.getOriginalHttpServletRequest();
-			HttpServletResponse httpRes = resImpl.getHttpServletResponse();
+			HttpServletRequest request =
+				resourceRequestImpl.getOriginalHttpServletRequest();
+			HttpServletResponse response =
+				resourceResponseImpl.getHttpServletResponse();
 
 			GetResourceRequest getResourceRequest =
 				ContainerRequestFactory.createGetResourceRequest(
-					httpReq, _portletModel, reqImpl.getWindowState(),
-					reqImpl.getPortletMode(), _windowRequestReader,
-					_getPlid(req));
+					request, _portletModel,
+					resourceRequestImpl.getWindowState(),
+					resourceRequestImpl.getPortletMode(), _windowRequestReader,
+					_getPlid(resourceRequest));
 
 			_populateContainerRequest(
-				httpReq, httpRes, getResourceRequest, reqImpl);
+				request, response, getResourceRequest, resourceRequestImpl);
 
 			GetResourceResponse getResourceResponse =
-				ContainerResponseFactory .createGetResourceResponse(httpRes);
+				ContainerResponseFactory .createGetResourceResponse(response);
 
 			_container.getResources(
 				getResourceRequest, getResourceResponse);
 
-			String contentType = httpRes.getContentType();
+			String contentType = response.getContentType();
 
 			if (contentType != null) {
-				resImpl.setContentType(contentType);
+				resourceResponseImpl.setContentType(contentType);
 			}
 
 			StringBuffer sb = getResourceResponse.getContentAsBuffer();
@@ -321,13 +336,13 @@ public class WindowInvoker extends InvokerPortlet {
 			byte[] bytes = getResourceResponse.getContentAsBytes();
 
 			if (sb != null) {
-				httpRes.getWriter().print(sb);
+				response.getWriter().print(sb);
 			}
 			else if ((bytes != null) && (bytes.length > 0)) {
-				httpRes.getOutputStream().write(bytes);
+				response.getOutputStream().write(bytes);
 			}
 			else {
-				httpRes.getWriter().print(StringPool.BLANK);
+				response.getWriter().print(StringPool.BLANK);
 			}
 
 		}
@@ -335,13 +350,13 @@ public class WindowInvoker extends InvokerPortlet {
 			throw new PortletException(e);
 		}
 		finally {
-			_setPortletAttributes(req, res);
+			_setPortletAttributes(resourceRequest, resourceResponse);
 		}
 	}
 
-	private Profile _getCCPPProfile(HttpServletRequest req) {
+	private Profile _getCCPPProfile(HttpServletRequest request) {
 		if (_profile == null) {
-			_profile = PortalProfileFactory.getCCPPProfile(req);
+			_profile = PortalProfileFactory.getCCPPProfile(request);
 		}
 
 		return _profile;
@@ -366,18 +381,18 @@ public class WindowInvoker extends InvokerPortlet {
 		}
 	}
 
-	private long _getPlid(PortletRequest req) {
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+	private long _getPlid(PortletRequest portletRequest) {
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		return themeDisplay.getPlid();
 	}
 
-	private List<String> _getRoles(HttpServletRequest req)
+	private List<String> _getRoles(HttpServletRequest request)
 		throws SystemException {
 
-		long userId = PortalUtil.getUserId(req);
-		String remoteUser = req.getRemoteUser();
+		long userId = PortalUtil.getUserId(request);
+		String remoteUser = request.getRemoteUser();
 		long remoteUserId = 0;
 
 		String userPrincipalStrategy = _portletModel.getUserPrincipalStrategy();
@@ -386,7 +401,7 @@ public class WindowInvoker extends InvokerPortlet {
 				PortletConstants.USER_PRINCIPAL_STRATEGY_SCREEN_NAME)) {
 
 			try {
-				User user = PortalUtil.getUser(req);
+				User user = PortalUtil.getUser(request);
 
 				remoteUserId = user.getUserId();
 			}
@@ -407,7 +422,7 @@ public class WindowInvoker extends InvokerPortlet {
 			return Collections.emptyList();
 		}
 
-		long companyId = PortalUtil.getCompanyId(req);
+		long companyId = PortalUtil.getCompanyId(request);
 
 		List<Role> roles = RoleLocalServiceUtil.getRoles(companyId);
 
@@ -430,27 +445,30 @@ public class WindowInvoker extends InvokerPortlet {
 	}
 
 	private void _populateContainerRequest(
-			HttpServletRequest req, HttpServletResponse res,
-			ContainerRequest containerReq, PortletRequest portletReq)
+			HttpServletRequest request, HttpServletResponse response,
+			ContainerRequest containerRequest, PortletRequest portletRequest)
 		throws SystemException {
 
-		containerReq.setRoles(_getRoles(req));
-		containerReq.setUserInfo(
-			UserInfoFactory.getUserInfo(req, _portletModel));
+		containerRequest.setRoles(_getRoles(request));
+		containerRequest.setUserInfo(
+			UserInfoFactory.getUserInfo(request, _portletModel));
 
-		containerReq.setAttribute(
-			PortletRequest.CCPP_PROFILE, _getCCPPProfile(req));
+		containerRequest.setAttribute(
+			PortletRequest.CCPP_PROFILE, _getCCPPProfile(request));
 	}
 
 	private void _setPortletAttributes(
-		PortletRequest req, PortletResponse res) {
+		PortletRequest portletRequest, PortletResponse portletResponse) {
 
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
 
-		httpReq.setAttribute(
+		request.setAttribute(
 			JavaConstants.JAVAX_PORTLET_CONFIG, getPortletConfig());
-		httpReq.setAttribute(JavaConstants.JAVAX_PORTLET_REQUEST, req);
-		httpReq.setAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE, res);
+		request.setAttribute(
+			JavaConstants.JAVAX_PORTLET_REQUEST, portletRequest);
+		request.setAttribute(
+			JavaConstants.JAVAX_PORTLET_RESPONSE, portletResponse);
 	}
 
 	private static Log _log = LogFactory.getLog(WindowInvoker.class);

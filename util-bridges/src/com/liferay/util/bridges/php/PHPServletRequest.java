@@ -46,14 +46,15 @@ import javax.servlet.http.HttpServletRequestWrapper;
 public class PHPServletRequest extends HttpServletRequestWrapper {
 
 	public PHPServletRequest(
-		HttpServletRequest req, ServletConfig config, RenderRequest renderReq,
-		RenderResponse renderRes, PortletConfig portletConfig, String phpURI) {
+		HttpServletRequest request, ServletConfig servletConfig,
+		RenderRequest renderRequest, RenderResponse renderResponse,
+		PortletConfig portletConfig, String phpURI) {
 
-		super(req);
+		super(request);
 
-		_config = config;
-		_renderReq = renderReq;
-		_renderRes = renderRes;
+		_servletConfig = servletConfig;
+		_renderRequest = renderRequest;
+		_renderResponse = renderResponse;
 		_portletConfig = portletConfig;
 
 		StringBuilder sb = new StringBuilder();
@@ -75,7 +76,7 @@ public class PHPServletRequest extends HttpServletRequestWrapper {
 			sb.append(StringPool.AMPERSAND);
 			sb.append("portlet_namespace");
 			sb.append(StringPool.EQUAL);
-			sb.append(_renderRes.getNamespace());
+			sb.append(_renderResponse.getNamespace());
 			sb.append(StringPool.AMPERSAND);
 			sb.append("portlet_name");
 			sb.append(StringPool.EQUAL);
@@ -84,13 +85,13 @@ public class PHPServletRequest extends HttpServletRequestWrapper {
 
 		_queryString = sb.toString();
 
-		req.setAttribute(
+		request.setAttribute(
 			JavaConstants.JAVAX_SERVLET_INCLUDE_QUERY_STRING, getQueryString());
-		req.setAttribute(
+		request.setAttribute(
 			JavaConstants.JAVAX_SERVLET_INCLUDE_PATH_INFO, getPathInfo());
-		req.setAttribute(
+		request.setAttribute(
 			JavaConstants.JAVAX_SERVLET_INCLUDE_REQUEST_URI, getRequestURI());
-		req.setAttribute(
+		request.setAttribute(
 			JavaConstants.JAVAX_SERVLET_INCLUDE_SERVLET_PATH, _path);
 	}
 
@@ -99,19 +100,19 @@ public class PHPServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public String getParameter(String name) {
-		return _renderReq.getParameter(name);
+		return _renderRequest.getParameter(name);
 	}
 
 	public Map<String, String[]> getParameterMap() {
-		return _renderReq.getParameterMap();
+		return _renderRequest.getParameterMap();
 	}
 
 	public Enumeration<String> getParameterNames() {
-		return _renderReq.getParameterNames();
+		return _renderRequest.getParameterNames();
 	}
 
 	public String[] getParameterValues(String name) {
-		return _renderReq.getParameterValues(name);
+		return _renderRequest.getParameterValues(name);
 	}
 
 	public String getPathInfo() {
@@ -127,7 +128,7 @@ public class PHPServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public String getRealPath(String path) {
-		return _config.getServletContext().getRealPath(path);
+		return _servletConfig.getServletContext().getRealPath(path);
 	}
 
 	public String getRequestURI() {
@@ -152,10 +153,10 @@ public class PHPServletRequest extends HttpServletRequestWrapper {
 		return _path;
 	}
 
-	private ServletConfig _config;
+	private ServletConfig _servletConfig;
 	private PortletConfig _portletConfig;
-	private RenderRequest _renderReq;
-	private RenderResponse _renderRes;
+	private RenderRequest _renderRequest;
+	private RenderResponse _renderResponse;
 	private String _queryString;
 	private String _path;
 

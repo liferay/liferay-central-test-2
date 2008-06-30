@@ -73,7 +73,8 @@ import org.apache.commons.logging.LogFactory;
  */
 public class BasicAuthHeaderAutoLogin implements AutoLogin {
 
-	public String[] login(HttpServletRequest req, HttpServletResponse res)
+	public String[] login(
+			HttpServletRequest request, HttpServletResponse response)
 		throws AutoLoginException {
 
 		try {
@@ -81,7 +82,7 @@ public class BasicAuthHeaderAutoLogin implements AutoLogin {
 
 			// Get the Authorization header, if one was supplied
 
-			String authorization = req.getHeader("Authorization");
+			String authorization = request.getHeader("Authorization");
 
 			if (authorization == null) {
 				return credentials;

@@ -35,8 +35,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class CookieUtil {
 
-	public static String get(HttpServletRequest req, String name) {
-		Cookie[] cookies = req.getCookies();
+	public static String get(HttpServletRequest request, String name) {
+		Cookie[] cookies = request.getCookies();
 
 		if (cookies == null) {
 			return null;

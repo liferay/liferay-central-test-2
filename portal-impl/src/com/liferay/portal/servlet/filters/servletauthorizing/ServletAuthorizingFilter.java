@@ -43,9 +43,8 @@ import java.io.IOException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts.Globals;
@@ -59,34 +58,33 @@ import org.apache.struts.Globals;
 public class ServletAuthorizingFilter extends BasePortalFilter {
 
 	protected void processFilter(
-			ServletRequest req, ServletResponse res, FilterChain chain)
+			HttpServletRequest request, HttpServletResponse response,
+			FilterChain chain)
 		throws IOException, ServletException {
 
-		HttpServletRequest httpReq = (HttpServletRequest)req;
-
-		HttpSession ses = httpReq.getSession();
+		HttpSession session = request.getSession();
 
 		// Company id
 
-		long companyId = PortalInstances.getCompanyId(httpReq);
+		long companyId = PortalInstances.getCompanyId(request);
 
 		// We need to set the COMPANY_ID request attribute explicitly because
 		// the above does not.
 
-		httpReq.setAttribute(WebKeys.COMPANY_ID, new Long(companyId));
+		request.setAttribute(WebKeys.COMPANY_ID, new Long(companyId));
 
 		// Authorize
 
-		long userId = PortalUtil.getUserId(httpReq);
-		String remoteUser = httpReq.getRemoteUser();
+		long userId = PortalUtil.getUserId(request);
+		String remoteUser = request.getRemoteUser();
 
 		if (!PropsValues.PORTAL_JAAS_ENABLE) {
-			String jRemoteUser = (String)ses.getAttribute("j_remoteuser");
+			String jRemoteUser = (String)session.getAttribute("j_remoteuser");
 
 			if (jRemoteUser != null) {
 				remoteUser = jRemoteUser;
 
-				ses.removeAttribute("j_remoteuser");
+				session.removeAttribute("j_remoteuser");
 			}
 		}
 
@@ -100,7 +98,7 @@ public class ServletAuthorizingFilter extends BasePortalFilter {
 		// authenticated user. We use ProtectedServletRequest to ensure we get
 		// similar behavior across all servers.
 
-		req = new ProtectedServletRequest(httpReq, remoteUser);
+		request = new ProtectedServletRequest(request, remoteUser);
 
 		PermissionCheckerImpl permissionChecker = null;
 
@@ -134,11 +132,11 @@ public class ServletAuthorizingFilter extends BasePortalFilter {
 
 				// User id
 
-				ses.setAttribute(WebKeys.USER_ID, new Long(userId));
+				session.setAttribute(WebKeys.USER_ID, new Long(userId));
 
 				// User locale
 
-				ses.setAttribute(Globals.LOCALE_KEY, user.getLocale());
+				session.setAttribute(Globals.LOCALE_KEY, user.getLocale());
 			}
 			catch (Exception e) {
 				_log.error(e, e);
@@ -146,7 +144,8 @@ public class ServletAuthorizingFilter extends BasePortalFilter {
 		}
 
 		try {
-			processFilter(ServletAuthorizingFilter.class, req, res, chain);
+			processFilter(
+				ServletAuthorizingFilter.class, request, response, chain);
 		}
 		finally {
 			try {

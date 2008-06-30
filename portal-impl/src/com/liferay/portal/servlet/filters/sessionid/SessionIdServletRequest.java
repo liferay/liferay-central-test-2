@@ -41,32 +41,32 @@ import javax.servlet.http.HttpSession;
  */
 public class SessionIdServletRequest extends HttpServletRequestWrapper {
 
-	public SessionIdServletRequest(HttpServletRequest req,
-								   HttpServletResponse res) {
+	public SessionIdServletRequest(
+		HttpServletRequest request, HttpServletResponse response) {
 
-		super(req);
+		super(request);
 
-		_res = res;
+		_res = response;
 	}
 
 	public HttpSession getSession() {
-		HttpSession ses = super.getSession();
+		HttpSession session = super.getSession();
 
-		process(ses);
+		process(session);
 
-		return ses;
+		return session;
 	}
 
 	public HttpSession getSession(boolean create) {
-		HttpSession ses = super.getSession(create);
+		HttpSession session = super.getSession(create);
 
-		process(ses);
+		process(session);
 
-		return ses;
+		return session;
 	}
 
-	protected void process(HttpSession ses) {
-		if ((ses == null) || !ses.isNew() || !isSecure() ||
+	protected void process(HttpSession session) {
+		if ((session == null) || !session.isNew() || !isSecure() ||
 			isRequestedSessionIdFromCookie()) {
 
 			return;
@@ -76,10 +76,10 @@ public class SessionIdServletRequest extends HttpServletRequestWrapper {
 
 		if (jsessionIdAlreadySet == null) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Processing " + ses.getId());
+				_log.debug("Processing " + session.getId());
 			}
 
-			Cookie cookie = new Cookie(_JESSIONID, ses.getId());
+			Cookie cookie = new Cookie(_JESSIONID, session.getId());
 
 			cookie.setMaxAge(-1);
 

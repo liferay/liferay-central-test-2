@@ -39,13 +39,13 @@ import javax.servlet.http.HttpServletResponse;
 public class CreateFolderCommand implements Command {
 
 	public void execute(
-		CommandArgument argument, HttpServletRequest req,
-		HttpServletResponse res) {
+		CommandArgument argument, HttpServletRequest request,
+		HttpServletResponse response) {
 
 		CommandReceiver receiver = CommandReceiverFactory.getCommandReceiver(
 			argument.getType());
 
-		receiver.createFolder(argument, req, res);
+		receiver.createFolder(argument, request, response);
 	}
 
 }

@@ -60,30 +60,30 @@ import javax.servlet.http.HttpServletRequest;
 public class OpenSSOUtil {
 
 	public static Map<String, String> getAttributes(
-			HttpServletRequest req, String serviceUrl)
+			HttpServletRequest request, String serviceUrl)
 		throws AutoLoginException {
 
-		return _instance._getAttributes(req, serviceUrl);
+		return _instance._getAttributes(request, serviceUrl);
 	}
 
 	public static String getSubjectId(
-		HttpServletRequest req, String serviceUrl) {
+		HttpServletRequest request, String serviceUrl) {
 
-		return _instance._getSubjectId(req, serviceUrl);
+		return _instance._getSubjectId(request, serviceUrl);
 	}
 
 	public static boolean isAuthenticated(
-			HttpServletRequest req, String serviceUrl)
+			HttpServletRequest request, String serviceUrl)
 		throws IOException {
 
-		return _instance._isAuthenticated(req, serviceUrl);
+		return _instance._isAuthenticated(request, serviceUrl);
 	}
 
 	private OpenSSOUtil() {
 	}
 
 	private Map<String, String> _getAttributes(
-			HttpServletRequest req, String serviceUrl)
+			HttpServletRequest request, String serviceUrl)
 		throws AutoLoginException {
 
 		Map<String, String> nameValues = new HashMap<String, String>();
@@ -102,7 +102,7 @@ public class OpenSSOUtil {
 
 			String[] cookieNames = _getCookieNames(serviceUrl);
 
-			_setCookieProperty(req, urlc, cookieNames);
+			_setCookieProperty(request, urlc, cookieNames);
 
 			OutputStreamWriter osw = new OutputStreamWriter(
 				urlc.getOutputStream());
@@ -246,13 +246,16 @@ public class OpenSSOUtil {
 		return cookieNames;
 	}
 
-	private String _getSubjectId(HttpServletRequest req, String serviceUrl) {
+	private String _getSubjectId(
+		HttpServletRequest request, String serviceUrl) {
+
 		String cookieName = _getCookieNames(serviceUrl)[0];
 
-		return CookieUtil.get(req, cookieName);
+		return CookieUtil.get(request, cookieName);
 	}
 
-	private boolean _isAuthenticated(HttpServletRequest req, String serviceUrl)
+	private boolean _isAuthenticated(
+			HttpServletRequest request, String serviceUrl)
 		throws IOException {
 
 		boolean authenticated = false;
@@ -270,7 +273,7 @@ public class OpenSSOUtil {
 
 		String[] cookieNames = _getCookieNames(serviceUrl);
 
-		_setCookieProperty(req, urlc, cookieNames);
+		_setCookieProperty(request, urlc, cookieNames);
 
 		OutputStreamWriter osw = new OutputStreamWriter(urlc.getOutputStream());
 
@@ -291,12 +294,13 @@ public class OpenSSOUtil {
 	}
 
 	private void _setCookieProperty(
-		HttpServletRequest req, HttpURLConnection urlc, String[] cookieNames) {
+		HttpServletRequest request, HttpURLConnection urlc,
+		String[] cookieNames) {
 
 		StringBuilder sb = new StringBuilder();
 
 		for (String cookieName : cookieNames) {
-			String cookieValue = CookieUtil.get(req, cookieName);
+			String cookieValue = CookieUtil.get(request, cookieName);
 
 			sb.append(cookieName);
 			sb.append(StringPool.EQUAL);

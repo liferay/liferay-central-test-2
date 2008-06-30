@@ -332,44 +332,51 @@ public class ResultRow {
 	// JSP with portlet context
 
 	public void addJSP(
-		String path, ServletContext ctx, HttpServletRequest req,
-		HttpServletResponse res) {
+		String path, ServletContext servletContext, HttpServletRequest request,
+		HttpServletResponse response) {
 
-		addJSP(_entries.size(), path, ctx, req, res);
+		addJSP(_entries.size(), path, servletContext, request, response);
 	}
 
 	public void addJSP(
-		String align, String valign, String path, ServletContext ctx,
-		HttpServletRequest req, HttpServletResponse res) {
+		String align, String valign, String path, ServletContext servletContext,
+		HttpServletRequest request, HttpServletResponse response) {
 
 		addJSP(
 			_entries.size(), align, valign, SearchEntry.DEFAULT_COLSPAN, path,
-			ctx, req, res);
+			servletContext, request, response);
 	}
 
 	public void addJSP(
 		String align, String valign, int colspan, String path,
-		ServletContext ctx, HttpServletRequest req, HttpServletResponse res) {
+		ServletContext servletContext, HttpServletRequest request,
+		HttpServletResponse response) {
 
-		addJSP(_entries.size(), align, valign, colspan, path, ctx, req, res);
+		addJSP(
+			_entries.size(), align, valign, colspan, path, servletContext,
+			request, response);
 	}
 
 	public void addJSP(
-		int index, String path, ServletContext ctx, HttpServletRequest req,
-		HttpServletResponse res) {
+		int index, String path, ServletContext servletContext,
+		HttpServletRequest request, HttpServletResponse response) {
 
 		addJSP(
 			index, SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN,
-			SearchEntry.DEFAULT_COLSPAN, path, ctx, req, res);
+			SearchEntry.DEFAULT_COLSPAN, path, servletContext, request,
+			response);
 	}
 
 	public void addJSP(
 		int index, String align, String valign, int colspan, String path,
-		ServletContext ctx, HttpServletRequest req, HttpServletResponse res) {
+		ServletContext servletContext, HttpServletRequest request,
+		HttpServletResponse response) {
 
 		_entries.add(
 			index,
-			new JSPSearchEntry(align, valign, colspan, path, ctx, req, res));
+			new JSPSearchEntry(
+				align, valign, colspan, path, servletContext, request,
+				response));
 	}
 
 	// Score

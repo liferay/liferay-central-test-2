@@ -69,7 +69,8 @@ public class FriendlyURLServlet extends HttpServlet {
 		_user = GetterUtil.getBoolean(config.getInitParameter("user"));
 	}
 
-	public void service(HttpServletRequest req, HttpServletResponse res)
+	public void service(
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
 		ServletContext ctx = getServletContext();
@@ -93,27 +94,29 @@ public class FriendlyURLServlet extends HttpServlet {
 			friendlyURLPath = PortalUtil.getPathFriendlyURLPublic();
 		}
 
-		req.setAttribute(
-			WebKeys.FRIENDLY_URL, friendlyURLPath + req.getPathInfo());
+		request.setAttribute(
+			WebKeys.FRIENDLY_URL, friendlyURLPath + request.getPathInfo());
 
 		String redirect = mainPath;
 
 		try {
 			redirect = getRedirect(
-				req, req.getPathInfo(), mainPath, req.getParameterMap());
+				request, request.getPathInfo(), mainPath,
+				request.getParameterMap());
 
-			if (req.getAttribute(WebKeys.LAST_PATH) == null) {
+			if (request.getAttribute(WebKeys.LAST_PATH) == null) {
 				LastPath lastPath = new LastPath(
-					friendlyURLPath, req.getPathInfo(), req.getParameterMap());
+					friendlyURLPath, request.getPathInfo(),
+					request.getParameterMap());
 
-				req.setAttribute(WebKeys.LAST_PATH, lastPath);
+				request.setAttribute(WebKeys.LAST_PATH, lastPath);
 			}
 		}
 		catch (NoSuchLayoutException nsle) {
 			_log.warn(nsle);
 
 			PortalUtil.sendError(
-				HttpServletResponse.SC_NOT_FOUND, nsle, req, res);
+				HttpServletResponse.SC_NOT_FOUND, nsle, request, response);
 
 			return;
 		}
@@ -135,16 +138,16 @@ public class FriendlyURLServlet extends HttpServlet {
 			RequestDispatcher rd = ctx.getRequestDispatcher(redirect);
 
 			if (rd != null) {
-				rd.forward(req, res);
+				rd.forward(request, response);
 			}
 		}
 		else {
-			res.sendRedirect(redirect);
+			response.sendRedirect(redirect);
 		}
 	}
 
 	protected String getRedirect(
-			HttpServletRequest req, String path, String mainPath,
+			HttpServletRequest request, String path, String mainPath,
 			Map<String, String[]> params)
 		throws Exception {
 
@@ -175,7 +178,7 @@ public class FriendlyURLServlet extends HttpServlet {
 			return mainPath;
 		}
 
-		long companyId = PortalInstances.getCompanyId(req);
+		long companyId = PortalInstances.getCompanyId(request);
 
 		Group group = null;
 

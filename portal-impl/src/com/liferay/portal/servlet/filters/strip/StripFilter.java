@@ -36,8 +36,6 @@ import java.io.IOException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -99,26 +97,24 @@ public class StripFilter extends BasePortalFilter {
 	}
 
 	protected void processFilter(
-			ServletRequest req, ServletResponse res, FilterChain chain)
+			HttpServletRequest request, HttpServletResponse response,
+			FilterChain chain)
 		throws IOException, ServletException {
 
-		HttpServletRequest httpReq = (HttpServletRequest)req;
-		HttpServletResponse httpRes = (HttpServletResponse)res;
+		String completeURL = HttpUtil.getCompleteURL(request);
 
-		String completeURL = HttpUtil.getCompleteURL(httpReq);
-
-		if (isStrip(httpReq) && !isInclude(httpReq) &&
-			!isAlreadyFiltered(httpReq)) {
+		if (isStrip(request) && !isInclude(request) &&
+			!isAlreadyFiltered(request)) {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Stripping " + completeURL);
 			}
 
-			httpReq.setAttribute(SKIP_FILTER, Boolean.TRUE);
+			request.setAttribute(SKIP_FILTER, Boolean.TRUE);
 
-			StripResponse stripResponse = new StripResponse(httpRes);
+			StripResponse stripResponse = new StripResponse(response);
 
-			processFilter(StripFilter.class, req, stripResponse, chain);
+			processFilter(StripFilter.class, request, stripResponse, chain);
 
 			String contentType = GetterUtil.getString(
 				stripResponse.getContentType());
@@ -276,7 +272,7 @@ public class StripFilter extends BasePortalFilter {
 				}
 
 				ServletResponseUtil.write(
-					httpRes, newByteArray, newByteArrayPos);
+					response, newByteArray, newByteArrayPos);
 			}
 		}
 		else {
@@ -284,7 +280,7 @@ public class StripFilter extends BasePortalFilter {
 				_log.debug("Not stripping " + completeURL);
 			}
 
-			processFilter(StripFilter.class, req, res, chain);
+			processFilter(StripFilter.class, request, response, chain);
 		}
 	}
 

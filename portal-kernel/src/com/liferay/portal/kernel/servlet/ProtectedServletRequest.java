@@ -35,8 +35,10 @@ import javax.servlet.http.HttpServletRequestWrapper;
  */
 public class ProtectedServletRequest extends HttpServletRequestWrapper {
 
-	public ProtectedServletRequest(HttpServletRequest req, String remoteUser) {
-		super(req);
+	public ProtectedServletRequest(
+		HttpServletRequest request, String remoteUser) {
+
+		super(request);
 
 		_remoteUser = remoteUser;
 

@@ -75,11 +75,11 @@ import org.apache.commons.logging.LogFactory;
 public class PortletWindowURL implements ChannelURL, Serializable {
 
 	public PortletWindowURL(
-		HttpServletRequest req, Portlet portlet, ChannelState windowState,
+		HttpServletRequest request, Portlet portlet, ChannelState windowState,
 		ChannelMode portletMode, long plid) {
 
 		_portletURLImpl = new PortletURLImpl(
-			req, portlet.getPortletId(), plid, PortletRequest.RENDER_PHASE);
+			request, portlet.getPortletId(), plid, PortletRequest.RENDER_PHASE);
 
 		setWindowState(windowState);
 		setChannelMode(portletMode);

@@ -48,11 +48,13 @@ import org.apache.struts.action.Action;
  */
 public class JSONServlet extends HttpServlet {
 
-	public void service(HttpServletRequest req, HttpServletResponse res) {
+	public void service(
+		HttpServletRequest request, HttpServletResponse response) {
+
 		PermissionCheckerImpl permissionChecker = null;
 
 		try {
-			String remoteUser = req.getRemoteUser();
+			String remoteUser = request.getRemoteUser();
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Remote user " + remoteUser);
@@ -73,7 +75,7 @@ public class JSONServlet extends HttpServlet {
 			Action action = (Action)InstancePool.get(
 				JSONServiceAction.class.getName());
 
-			action.execute(null, null, req, res);
+			action.execute(null, null, request, response);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

@@ -45,7 +45,8 @@ import javax.servlet.http.HttpServletResponse;
 public class DoubleClickController implements Serializable {
 
 	public void control(
-			HttpServletRequest req, HttpServletResponse res, FilterChain chain)
+			HttpServletRequest request, HttpServletResponse response,
+			FilterChain chain)
 		throws IOException, ServletException {
 
 		boolean firstRequest = false;
@@ -56,7 +57,7 @@ public class DoubleClickController implements Serializable {
 			if (_cacheResponse == null) {
 				firstRequest = true;
 
-				_cacheResponse = new CacheResponse(res, StringPool.UTF8);
+				_cacheResponse = new CacheResponse(response, StringPool.UTF8);
 				_throwable = null;
 			}
 
@@ -65,7 +66,7 @@ public class DoubleClickController implements Serializable {
 
 		if (firstRequest) {
 			try {
-				chain.doFilter(req, _cacheResponse);
+				chain.doFilter(request, _cacheResponse);
 			}
 			catch (Throwable t) {
 				_throwable = t;
@@ -116,7 +117,7 @@ public class DoubleClickController implements Serializable {
 			cacheResponse.getData(), cacheResponse.getContentType(),
 			cacheResponse.getHeaders());
 
-		CacheResponseUtil.write(res, data);
+		CacheResponseUtil.write(response, data);
 	}
 
 	private CacheResponse _cacheResponse;

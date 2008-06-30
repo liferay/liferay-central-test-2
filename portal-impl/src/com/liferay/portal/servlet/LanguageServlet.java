@@ -50,10 +50,11 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LanguageServlet extends HttpServlet {
 
-	public void service(HttpServletRequest req, HttpServletResponse res)
+	public void service(
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException {
 
-		String path = req.getPathInfo();
+		String path = request.getPathInfo();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Path " + path);
@@ -91,7 +92,7 @@ public class LanguageServlet extends HttpServlet {
 		String value = key;
 
 		try {
-			long companyId = PortalInstances.getCompanyId(req);
+			long companyId = PortalInstances.getCompanyId(request);
 
 			if ((arguments == null) || (arguments.length == 0)) {
 				value = LanguageUtil.get(companyId, locale, key);
@@ -106,9 +107,9 @@ public class LanguageServlet extends HttpServlet {
 			}
 		}
 
-		res.setContentType(ContentTypes.TEXT_PLAIN_UTF8);
+		response.setContentType(ContentTypes.TEXT_PLAIN_UTF8);
 
-		ServletResponseUtil.write(res, value.getBytes(StringPool.UTF8));
+		ServletResponseUtil.write(response, value.getBytes(StringPool.UTF8));
 	}
 
 	private static Log _log = LogFactory.getLog(LanguageServlet.class);

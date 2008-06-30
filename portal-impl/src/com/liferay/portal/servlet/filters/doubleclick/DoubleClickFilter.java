@@ -31,8 +31,6 @@ import java.io.IOException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -50,11 +48,9 @@ import org.apache.commons.lang.time.StopWatch;
 public class DoubleClickFilter extends BasePortalFilter {
 
 	protected void processFilter(
-			ServletRequest req, ServletResponse res, FilterChain chain)
+			HttpServletRequest request, HttpServletResponse response,
+			FilterChain chain)
 		throws IOException, ServletException {
-
-		HttpServletRequest httpReq = (HttpServletRequest)req;
-		HttpServletResponse httpRes = (HttpServletResponse)res;
 
 		StopWatch stopWatch = null;
 
@@ -64,35 +60,35 @@ public class DoubleClickFilter extends BasePortalFilter {
 			stopWatch.start();
 		}
 
-		HttpSession ses = httpReq.getSession(false);
+		HttpSession session = request.getSession(false);
 
-		if (ses == null) {
-			processFilter(DoubleClickFilter.class, req, res, chain);
+		if (session == null) {
+			processFilter(DoubleClickFilter.class, request, response, chain);
 		}
 		else {
 			DoubleClickController controller = null;
 
-			synchronized (ses) {
-				controller = (DoubleClickController)ses.getAttribute(
+			synchronized (session) {
+				controller = (DoubleClickController)session.getAttribute(
 					_CONTROLLER_KEY);
 
 				if (controller == null) {
 					controller = new DoubleClickController();
 
-					ses.setAttribute(_CONTROLLER_KEY, controller);
+					session.setAttribute(_CONTROLLER_KEY, controller);
 				}
 			}
 
 			boolean ok = false;
 
 			try {
-				controller.control(httpReq, httpRes, chain);
+				controller.control(request, response, chain);
 
 				ok = true;
 			}
 			finally {
 				if (_log.isDebugEnabled()) {
-					String completeURL = HttpUtil.getCompleteURL(httpReq);
+					String completeURL = HttpUtil.getCompleteURL(request);
 
 					if (ok) {
 						_log.debug(

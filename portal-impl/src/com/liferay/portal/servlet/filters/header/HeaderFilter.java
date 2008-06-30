@@ -41,8 +41,6 @@ import java.util.TimeZone;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -56,7 +54,7 @@ import javax.servlet.http.HttpSession;
  */
 public class HeaderFilter extends BasePortalFilter {
 
-	public void init(FilterConfig config) throws ServletException {
+	public void init(FilterConfig config) {
 		super.init(config);
 
 		_config = config;
@@ -64,10 +62,9 @@ public class HeaderFilter extends BasePortalFilter {
 	}
 
 	protected void processFilter(
-			ServletRequest req, ServletResponse res, FilterChain chain)
+			HttpServletRequest request, HttpServletResponse response,
+			FilterChain chain)
 		throws IOException, ServletException {
-
-		HttpServletResponse httpRes = (HttpServletResponse)res;
 
 		Enumeration<String> enu = _config.getInitParameterNames();
 
@@ -96,21 +93,19 @@ public class HeaderFilter extends BasePortalFilter {
 			boolean addHeader = true;
 
 			if (name.equalsIgnoreCase(HttpHeaders.CACHE_CONTROL)) {
-				HttpServletRequest httpReq = (HttpServletRequest)req;
+				HttpSession session = request.getSession(false);
 
-				HttpSession ses = httpReq.getSession(false);
-
-				if ((ses == null) || ses.isNew()) {
+				if ((session == null) || session.isNew()) {
 					addHeader = false;
 				}
 			}
 
 			if (addHeader) {
-				httpRes.addHeader(name, value);
+				response.addHeader(name, value);
 			}
 		}
 
-		processFilter(HeaderFilter.class, req, res, chain);
+		processFilter(HeaderFilter.class, request, response, chain);
 	}
 
 	private static final String _DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";

@@ -39,20 +39,21 @@ import javax.servlet.http.HttpServletResponse;
 public class MetaTagsTag extends com.liferay.taglib.util.IncludeTag {
 
 	public static void doTag(
-			ServletContext ctx, HttpServletRequest req, HttpServletResponse res)
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response)
 		throws IOException, ServletException {
 
-		doTag(_PAGE, ctx, req, res);
+		doTag(_PAGE, servletContext, request, response);
 	}
 
 	public static void doTag(
-			String page, ServletContext ctx, HttpServletRequest req,
-			HttpServletResponse res)
+			String page, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
-		RequestDispatcher rd = ctx.getRequestDispatcher(page);
+		RequestDispatcher rd = servletContext.getRequestDispatcher(page);
 
-		rd.include(req, res);
+		rd.include(request, response);
 	}
 
 	public String getDefaultPage() {

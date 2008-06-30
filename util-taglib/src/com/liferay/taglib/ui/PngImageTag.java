@@ -43,36 +43,38 @@ import javax.servlet.jsp.JspException;
 public class PngImageTag extends IncludeTag {
 
 	public static void doTag(
-			String image, String height, String width, ServletContext ctx,
-			HttpServletRequest req, HttpServletResponse res)
+			String image, String height, String width,
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response)
 		throws IOException, ServletException {
 
-		doTag(_PAGE, image, height, width, ctx, req, res);
+		doTag(_PAGE, image, height, width, servletContext, request, response);
 	}
 
 	public static void doTag(
 			String page, String image, String height, String width,
-			ServletContext ctx, HttpServletRequest req, HttpServletResponse res)
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response)
 		throws IOException, ServletException {
 
-		req.setAttribute("liferay-ui:png_image:image", image);
-		req.setAttribute("liferay-ui:png_image:height", height);
-		req.setAttribute("liferay-ui:png_image:width", width);
+		request.setAttribute("liferay-ui:png_image:image", image);
+		request.setAttribute("liferay-ui:png_image:height", height);
+		request.setAttribute("liferay-ui:png_image:width", width);
 
-		RequestDispatcher rd = ctx.getRequestDispatcher(page);
+		RequestDispatcher rd = servletContext.getRequestDispatcher(page);
 
-		rd.include(req, res);
+		rd.include(request, response);
 	}
 
 	public int doEndTag() throws JspException {
 		try {
-			ServletContext ctx = getServletContext();
-			HttpServletRequest req = getServletRequest();
-			StringServletResponse res = getServletResponse();
+			ServletContext servletContext = getServletContext();
+			HttpServletRequest request = getServletRequest();
+			StringServletResponse response = getServletResponse();
 
-			doTag(_image, _height, _width, ctx, req, res);
+			doTag(_image, _height, _width, servletContext, request, response);
 
-			pageContext.getOut().print(res.getString());
+			pageContext.getOut().print(response.getString());
 
 			return EVAL_PAGE;
 		}

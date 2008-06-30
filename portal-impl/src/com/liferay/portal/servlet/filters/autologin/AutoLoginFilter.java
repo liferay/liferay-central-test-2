@@ -44,8 +44,6 @@ import java.io.IOException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -60,8 +58,8 @@ import javax.servlet.http.HttpSession;
 public class AutoLoginFilter extends BasePortalFilter {
 
 	protected String getLoginRemoteUser(
-			HttpServletRequest req, HttpServletResponse res, HttpSession ses,
-			String[] credentials)
+			HttpServletRequest request, HttpServletResponse response,
+			HttpSession session, String[] credentials)
 		throws Exception {
 
 		if ((credentials != null) && (credentials.length == 3)) {
@@ -90,24 +88,24 @@ public class AutoLoginFilter extends BasePortalFilter {
 					return null;
 				}
 
-				ses.setAttribute("j_username", jUsername);
+				session.setAttribute("j_username", jUsername);
 
 				// Not having access to the unencrypted password
 				// will not allow you to connect to external
 				// resources that require it (mail server)
 
 				if (encPassword) {
-					ses.setAttribute("j_password", jPassword);
+					session.setAttribute("j_password", jPassword);
 				}
 				else {
-					ses.setAttribute(
+					session.setAttribute(
 						"j_password", PwdEncryptor.encrypt(jPassword));
 
-					ses.setAttribute(WebKeys.USER_PASSWORD, jPassword);
+					session.setAttribute(WebKeys.USER_PASSWORD, jPassword);
 				}
 
 				if (PropsValues.PORTAL_JAAS_ENABLE) {
-					res.sendRedirect(
+					response.sendRedirect(
 						PortalUtil.getPathMain() + "/portal/touch_protected");
 				}
 
@@ -119,29 +117,27 @@ public class AutoLoginFilter extends BasePortalFilter {
 	}
 
 	protected void processFilter(
-			ServletRequest req, ServletResponse res, FilterChain chain)
+			HttpServletRequest request, HttpServletResponse response,
+			FilterChain chain)
 		throws IOException, ServletException {
 
-		HttpServletRequest httpReq = (HttpServletRequest)req;
-		HttpServletResponse httpRes = (HttpServletResponse)res;
+		HttpSession session = request.getSession();
 
-		HttpSession ses = httpReq.getSession();
-
-		String host = PortalUtil.getHost(httpReq);
+		String host = PortalUtil.getHost(request);
 
 		if (PortalInstances.isAutoLoginIgnoreHost(host)) {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Ignore host " + host);
 			}
 
-			processFilter(AutoLoginFilter.class, req, res, chain);
+			processFilter(AutoLoginFilter.class, request, response, chain);
 
 			return;
 		}
 
 		String contextPath = PortalUtil.getPathContext();
 
-		String path = httpReq.getRequestURI().toLowerCase();
+		String path = request.getRequestURI().toLowerCase();
 
 		if ((!contextPath.equals(StringPool.SLASH)) &&
 			(path.indexOf(contextPath) != -1)) {
@@ -154,13 +150,13 @@ public class AutoLoginFilter extends BasePortalFilter {
 				_log.debug("Ignore path " + path);
 			}
 
-			processFilter(AutoLoginFilter.class, req, res, chain);
+			processFilter(AutoLoginFilter.class, request, response, chain);
 
 			return;
 		}
 
-		String remoteUser = httpReq.getRemoteUser();
-		String jUserName = (String)ses.getAttribute("j_username");
+		String remoteUser = request.getRemoteUser();
+		String jUserName = (String)session.getAttribute("j_username");
 
 		if ((remoteUser == null) && (jUserName == null)) {
 			for (String autoLoginHook : PropsValues.AUTO_LOGIN_HOOKS) {
@@ -168,23 +164,23 @@ public class AutoLoginFilter extends BasePortalFilter {
 					autoLoginHook);
 
 				try {
-					String[] credentials = autoLogin.login(httpReq, httpRes);
+					String[] credentials = autoLogin.login(request, response);
 
-					String redirect = (String)req.getAttribute(
+					String redirect = (String)request.getAttribute(
 						AutoLogin.AUTO_LOGIN_REDIRECT);
 
 					if (redirect != null) {
-						httpRes.sendRedirect(redirect);
+						response.sendRedirect(redirect);
 
 						return;
 					}
 
 					String loginRemoteUser = getLoginRemoteUser(
-						httpReq, httpRes, ses, credentials);
+						request, response, session, credentials);
 
 					if (loginRemoteUser != null) {
-						req = new ProtectedServletRequest(
-							httpReq, loginRemoteUser);
+						request = new ProtectedServletRequest(
+							request, loginRemoteUser);
 
 						if (PropsValues.PORTAL_JAAS_ENABLE) {
 							return;
@@ -198,7 +194,7 @@ public class AutoLoginFilter extends BasePortalFilter {
 			}
 		}
 
-		processFilter(AutoLoginFilter.class, req, res, chain);
+		processFilter(AutoLoginFilter.class, request, response, chain);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(AutoLoginFilter.class);

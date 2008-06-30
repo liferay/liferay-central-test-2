@@ -67,10 +67,11 @@ public class PortalDelegatorServlet extends HttpServlet {
 		_delegates.remove(subContext);
 	}
 
-	public void service(HttpServletRequest req, HttpServletResponse res)
+	public void service(
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
-		String uri = req.getPathInfo();
+		String uri = request.getPathInfo();
 
 		if ((uri == null) || (uri.length() == 0)) {
 			throw new ServletException("Path information is not specified");
@@ -98,7 +99,7 @@ public class PortalDelegatorServlet extends HttpServlet {
 
 			Thread.currentThread().setContextClassLoader(delegateClassLoader);
 
-			delegate.service(req, res);
+			delegate.service(request, response);
 		}
 		finally {
 			Thread.currentThread().setContextClassLoader(contextClassLoader);

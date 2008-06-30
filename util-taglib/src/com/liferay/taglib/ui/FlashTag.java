@@ -49,13 +49,14 @@ public class FlashTag extends IncludeTag {
 			String loop, String menu, String movie, String play, String quality,
 			String salign, String scale, String swliveconnect, String version,
 			String width, String wmode, ServletContext ctx,
-			HttpServletRequest req, HttpServletResponse res)
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
 		doTag(
 			_PAGE, align, allowScriptAccess, base, bgcolor, devicefont,
 			flashvars, height, id, loop, menu, movie, play, quality, salign,
-			scale, swliveconnect, version, width, wmode, ctx, req, res);
+			scale, swliveconnect, version, width, wmode, ctx, request,
+			response);
 	}
 
 	public static void doTag(
@@ -64,33 +65,33 @@ public class FlashTag extends IncludeTag {
 			String id, String loop, String menu, String movie, String play,
 			String quality, String salign, String scale, String swliveconnect,
 			String version, String width, String wmode, ServletContext ctx,
-			HttpServletRequest req, HttpServletResponse res)
+			HttpServletRequest reqquest, HttpServletResponse response)
 		throws IOException, ServletException {
 
-		req.setAttribute("liferay-ui:flash:align", align);
-		req.setAttribute(
+		reqquest.setAttribute("liferay-ui:flash:align", align);
+		reqquest.setAttribute(
 			"liferay-ui:flash:allowScriptAccess", allowScriptAccess);
-		req.setAttribute("liferay-ui:flash:base", base);
-		req.setAttribute("liferay-ui:flash:bgcolor", bgcolor);
-		req.setAttribute("liferay-ui:flash:devicefont", devicefont);
-		req.setAttribute("liferay-ui:flash:flashvars", flashvars);
-		req.setAttribute("liferay-ui:flash:height", height);
-		req.setAttribute("liferay-ui:flash:id", id);
-		req.setAttribute("liferay-ui:flash:loop", loop);
-		req.setAttribute("liferay-ui:flash:menu", menu);
-		req.setAttribute("liferay-ui:flash:movie", movie);
-		req.setAttribute("liferay-ui:flash:play", play);
-		req.setAttribute("liferay-ui:flash:quality", quality);
-		req.setAttribute("liferay-ui:flash:salign", salign);
-		req.setAttribute("liferay-ui:flash:scale", scale);
-		req.setAttribute("liferay-ui:flash:swliveconnect", swliveconnect);
-		req.setAttribute("liferay-ui:flash:version", version);
-		req.setAttribute("liferay-ui:flash:width", width);
-		req.setAttribute("liferay-ui:flash:wmode", wmode);
+		reqquest.setAttribute("liferay-ui:flash:base", base);
+		reqquest.setAttribute("liferay-ui:flash:bgcolor", bgcolor);
+		reqquest.setAttribute("liferay-ui:flash:devicefont", devicefont);
+		reqquest.setAttribute("liferay-ui:flash:flashvars", flashvars);
+		reqquest.setAttribute("liferay-ui:flash:height", height);
+		reqquest.setAttribute("liferay-ui:flash:id", id);
+		reqquest.setAttribute("liferay-ui:flash:loop", loop);
+		reqquest.setAttribute("liferay-ui:flash:menu", menu);
+		reqquest.setAttribute("liferay-ui:flash:movie", movie);
+		reqquest.setAttribute("liferay-ui:flash:play", play);
+		reqquest.setAttribute("liferay-ui:flash:quality", quality);
+		reqquest.setAttribute("liferay-ui:flash:salign", salign);
+		reqquest.setAttribute("liferay-ui:flash:scale", scale);
+		reqquest.setAttribute("liferay-ui:flash:swliveconnect", swliveconnect);
+		reqquest.setAttribute("liferay-ui:flash:version", version);
+		reqquest.setAttribute("liferay-ui:flash:width", width);
+		reqquest.setAttribute("liferay-ui:flash:wmode", wmode);
 
-		RequestDispatcher rd = ctx.getRequestDispatcher(page);
+		RequestDispatcher requestDispatcher = ctx.getRequestDispatcher(page);
 
-		rd.include(req, res);
+		requestDispatcher.include(reqquest, response);
 	}
 
 	public int doEndTag() throws JspException {

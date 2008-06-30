@@ -28,8 +28,6 @@ import java.io.IOException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -47,16 +45,14 @@ import javax.servlet.http.HttpServletResponse;
 public class SessionIdFilter extends BasePortalFilter {
 
 	protected void processFilter(
-			ServletRequest req, ServletResponse res, FilterChain chain)
+			HttpServletRequest request, HttpServletResponse response,
+			FilterChain chain)
 		throws IOException, ServletException {
 
-		HttpServletRequest httpReq = (HttpServletRequest)req;
-		HttpServletResponse httpRes = (HttpServletResponse)res;
+		SessionIdServletRequest sessionIdRequest = new SessionIdServletRequest(
+			request, response);
 
-		SessionIdServletRequest sessionIdReq = new SessionIdServletRequest(
-			httpReq, httpRes);
-
-		processFilter(SessionIdFilter.class, sessionIdReq, httpRes, chain);
+		processFilter(SessionIdFilter.class, sessionIdRequest, response, chain);
 	}
 
 }

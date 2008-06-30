@@ -43,42 +43,44 @@ import javax.servlet.jsp.JspException;
 public class TitleTag extends IconTag {
 
 	public static void doTag(
-			ServletContext ctx, HttpServletRequest req, HttpServletResponse res)
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response)
 		throws IOException, ServletException {
 
-		doTag(_PAGE, _EDITABLE, ctx, req, res);
+		doTag(_PAGE, _EDITABLE, servletContext, request, response);
 	}
 
 	public static void doTag(
-			boolean editable, ServletContext ctx, HttpServletRequest req,
-			HttpServletResponse res)
+			boolean editable, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
-		doTag(_PAGE, editable, ctx, req, res);
+		doTag(_PAGE, editable, servletContext, request, response);
 	}
 
 	public static void doTag(
-			String page, boolean editable, ServletContext ctx,
-			HttpServletRequest req, HttpServletResponse res)
+			String page, boolean editable, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-portlet:title:editable", String.valueOf(editable));
 
-		RequestDispatcher rd = ctx.getRequestDispatcher(page);
+		RequestDispatcher requestDispatcher =
+			servletContext.getRequestDispatcher(page);
 
-		rd.include(req, res);
+		requestDispatcher.include(request, response);
 	}
 
 	public int doEndTag() throws JspException {
 		try {
-			ServletContext ctx = getServletContext();
-			HttpServletRequest req = getServletRequest();
-			StringServletResponse res = getServletResponse();
+			ServletContext servletContext = getServletContext();
+			HttpServletRequest request = getServletRequest();
+			StringServletResponse stringResponse = getServletResponse();
 
-			doTag(_editable, ctx, req, res);
+			doTag(_editable, servletContext, request, stringResponse);
 
-			pageContext.getOut().print(res.getString());
+			pageContext.getOut().print(stringResponse.getString());
 
 			return EVAL_PAGE;
 		}

@@ -29,7 +29,6 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -42,33 +41,36 @@ import javax.servlet.http.HttpServletResponse;
 public class LayoutIconTag extends com.liferay.taglib.util.IncludeTag {
 
 	public static void doTag(
-			Layout layout, ServletContext ctx, HttpServletRequest req,
-			HttpServletResponse res)
+			Layout layout, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
-		doTag(_PAGE, layout, ctx, req, res);
+		doTag(_PAGE, layout, servletContext, request, response);
 	}
 
 	public static void doTag(
-			String page, Layout layout, ServletContext ctx,
-			HttpServletRequest req, HttpServletResponse res)
+			String page, Layout layout, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
-		setRequestAttributes(req, layout);
+		setRequestAttributes(request, layout);
 
-		RequestDispatcher rd = ctx.getRequestDispatcher(page);
+		RequestDispatcher rd = servletContext.getRequestDispatcher(page);
 
-		rd.include(req, res);
+		rd.include(request, response);
 	}
 
-	public static void setRequestAttributes(ServletRequest req, Layout layout) {
-		req.setAttribute("liferay-theme:layout-icon:layout", layout);
+	public static void setRequestAttributes(
+		HttpServletRequest request, Layout layout) {
+
+		request.setAttribute("liferay-theme:layout-icon:layout", layout);
 	}
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		setRequestAttributes(req, _layout);
+		setRequestAttributes(request, _layout);
 
 		return EVAL_BODY_BUFFERED;
 	}

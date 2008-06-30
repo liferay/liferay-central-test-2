@@ -47,25 +47,25 @@ public interface PortletPreferencesFactory {
 			Layout layout, String portletId)
 		throws PortalException, SystemException;
 
-	public PortalPreferences getPortalPreferences(HttpServletRequest req)
+	public PortalPreferences getPortalPreferences(HttpServletRequest request)
 		throws PortalException, SystemException;
 
-	public PortalPreferences getPortalPreferences(ActionRequest req)
+	public PortalPreferences getPortalPreferences(ActionRequest actionRequest)
 		throws PortalException, SystemException;
 
-	public PortalPreferences getPortalPreferences(RenderRequest req)
+	public PortalPreferences getPortalPreferences(RenderRequest renderRequest)
 		throws PortalException, SystemException;
 
 	public PortletPreferences getPortletPreferences(
-			HttpServletRequest req, String portletId)
+			HttpServletRequest request, String portletId)
 		throws PortalException, SystemException;
 
 	public PortletPreferencesIds getPortletPreferencesIds(
-			HttpServletRequest req, String portletId)
+			HttpServletRequest request, String portletId)
 		throws PortalException, SystemException;
 
 	public PortletPreferencesIds getPortletPreferencesIds(
-			HttpServletRequest req, Layout selLayout, String portletId)
+			HttpServletRequest request, Layout selLayout, String portletId)
 		throws PortalException, SystemException;
 
 	public PortletPreferences getPortletSetup(
@@ -73,28 +73,29 @@ public interface PortletPreferencesFactory {
 		throws PortalException, SystemException;
 
 	public PortletPreferences getPortletSetup(
-			HttpServletRequest req, String portletId)
+			HttpServletRequest request, String portletId)
 		throws PortalException, SystemException;
 
 	public PortletPreferences getPortletSetup(
-			HttpServletRequest req, String portletId, String defaultPreferences)
+			HttpServletRequest request, String portletId,
+			String defaultPreferences)
 		throws PortalException, SystemException;
 
-	public PortletPreferences getPortletSetup(ActionRequest req)
-		throws PortalException, SystemException;
-
-	public PortletPreferences getPortletSetup(
-			ActionRequest req, String portletId)
-		throws PortalException, SystemException;
-
-	public PortletPreferences getPortletSetup(RenderRequest req)
+	public PortletPreferences getPortletSetup(ActionRequest actionRequest)
 		throws PortalException, SystemException;
 
 	public PortletPreferences getPortletSetup(
-			RenderRequest req, String portletId)
+			ActionRequest actionRequest, String portletId)
 		throws PortalException, SystemException;
 
-	public PortletPreferences getPreferences(HttpServletRequest req);
+	public PortletPreferences getPortletSetup(RenderRequest renderRequest)
+		throws PortalException, SystemException;
+
+	public PortletPreferences getPortletSetup(
+			RenderRequest renderRequest, String portletId)
+		throws PortalException, SystemException;
+
+	public PortletPreferences getPreferences(HttpServletRequest request);
 
 	public PreferencesValidator getPreferencesValidator(Portlet portlet);
 

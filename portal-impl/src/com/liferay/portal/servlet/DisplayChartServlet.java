@@ -40,14 +40,16 @@ import org.jfree.chart.servlet.DisplayChart;
  */
 public class DisplayChartServlet extends DisplayChart {
 
-	public void service(HttpServletRequest req, HttpServletResponse res)
+	public void service(
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
 		try {
-			super.service(req, res);
+			super.service(request, response);
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(HttpServletResponse.SC_NOT_FOUND, e, req, res);
+			PortalUtil.sendError(
+				HttpServletResponse.SC_NOT_FOUND, e, request, response);
 		}
 	}
 

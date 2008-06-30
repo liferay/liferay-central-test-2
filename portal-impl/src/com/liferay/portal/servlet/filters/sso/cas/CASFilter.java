@@ -38,8 +38,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -108,38 +106,36 @@ public class CASFilter extends BaseFilter {
 	}
 
 	protected void processFilter(
-		ServletRequest req, ServletResponse res, FilterChain chain) {
+		HttpServletRequest request, HttpServletResponse response,
+		FilterChain chain) {
 
 		try {
-			HttpServletRequest httpReq = (HttpServletRequest)req;
-
-			long companyId = PortalUtil.getCompanyId(httpReq);
+			long companyId = PortalUtil.getCompanyId(request);
 
 			if (PrefsPropsUtil.getBoolean(
 					companyId, PropsKeys.CAS_AUTH_ENABLED,
 					PropsValues.CAS_AUTH_ENABLED)) {
 
-				String pathInfo = httpReq.getPathInfo();
+				String pathInfo = request.getPathInfo();
 
 				if (pathInfo.indexOf("/portal/logout") != -1) {
-					HttpServletResponse httpRes = (HttpServletResponse)res;
-					HttpSession httpSes = httpReq.getSession();
+					HttpSession session = request.getSession();
 
-					httpSes.invalidate();
+					session.invalidate();
 
 					String logoutUrl = PrefsPropsUtil.getString(
 						companyId, PropsKeys.CAS_LOGOUT_URL);
 
-					httpRes.sendRedirect(logoutUrl);
+					response.sendRedirect(logoutUrl);
 				}
 				else {
 					Filter casFilter = getCASFilter(companyId);
 
-					casFilter.doFilter(req, res, chain);
+					casFilter.doFilter(request, response, chain);
 				}
 			}
 			else {
-				processFilter(CASFilter.class, req, res, chain);
+				processFilter(CASFilter.class, request, response, chain);
 			}
 		}
 		catch (Exception e) {

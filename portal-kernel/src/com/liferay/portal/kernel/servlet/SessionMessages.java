@@ -45,112 +45,114 @@ public class SessionMessages {
 
 	// Servlet Request
 
-	public static void add(HttpServletRequest req, String key) {
-		add(req.getSession(), key);
+	public static void add(HttpServletRequest request, String key) {
+		add(request.getSession(), key);
 	}
 
-	public static void add(HttpSession ses, String key) {
-		Map messages = _getMessages(ses);
+	public static void add(HttpSession session, String key) {
+		Map<String, Object> messages = _getMessages(session);
 
 		messages.put(key, key);
 	}
 
-	public static void add(HttpServletRequest req, String key, Object value) {
-		add(req.getSession(), key, value);
+	public static void add(
+		HttpServletRequest request, String key, Object value) {
+
+		add(request.getSession(), key, value);
 	}
 
-	public static void add(HttpSession ses, String key, Object value) {
-		Map messages = _getMessages(ses);
+	public static void add(HttpSession session, String key, Object value) {
+		Map<String, Object> messages = _getMessages(session);
 
 		messages.put(key, value);
 	}
 
-	public static void clear(HttpServletRequest req) {
-		clear(req.getSession());
+	public static void clear(HttpServletRequest request) {
+		clear(request.getSession());
 	}
 
-	public static void clear(HttpSession ses) {
-		Map messages = _getMessages(ses);
+	public static void clear(HttpSession session) {
+		Map<String, Object> messages = _getMessages(session);
 
 		messages.clear();
 	}
 
-	public static boolean contains(HttpServletRequest req, String key) {
-		return contains(req.getSession(), key);
+	public static boolean contains(HttpServletRequest request, String key) {
+		return contains(request.getSession(), key);
 	}
 
-	public static boolean contains(HttpSession ses, String key) {
-		Map messages = _getMessages(ses);
+	public static boolean contains(HttpSession session, String key) {
+		Map<String, Object> messages = _getMessages(session);
 
 		return messages.containsKey(key);
 	}
 
-	public static Object get(HttpServletRequest req, String key) {
-		return get(req.getSession(), key);
+	public static Object get(HttpServletRequest request, String key) {
+		return get(request.getSession(), key);
 	}
 
-	public static Object get(HttpSession ses, String key) {
-		Map messages = _getMessages(ses);
+	public static Object get(HttpSession session, String key) {
+		Map<String, Object> messages = _getMessages(session);
 
 		return messages.get(key);
 	}
 
-	public static boolean isEmpty(HttpServletRequest req) {
-		return isEmpty(req.getSession());
+	public static boolean isEmpty(HttpServletRequest request) {
+		return isEmpty(request.getSession());
 	}
 
-	public static boolean isEmpty(HttpSession ses) {
-		Map messages = _getMessages(ses);
+	public static boolean isEmpty(HttpSession session) {
+		Map<String, Object> messages = _getMessages(session);
 
 		return messages.isEmpty();
 	}
 
-	public static Iterator iterator(HttpServletRequest req) {
-		return iterator(req.getSession());
+	public static Iterator<String> iterator(HttpServletRequest request) {
+		return iterator(request.getSession());
 	}
 
-	public static Iterator iterator(HttpSession ses) {
-		Map messages = _getMessages(ses);
+	public static Iterator<String> iterator(HttpSession session) {
+		Map<String, Object> messages = _getMessages(session);
 
 		return Collections.unmodifiableSet(messages.keySet()).iterator();
 	}
 
-	public static void print(HttpServletRequest req) {
-		print(req.getSession());
+	public static void print(HttpServletRequest request) {
+		print(request.getSession());
 	}
 
-	public static void print(HttpSession ses) {
-		Iterator itr = iterator(ses);
+	public static void print(HttpSession session) {
+		Iterator<String> itr = iterator(session);
 
 		while (itr.hasNext()) {
 			System.out.println(itr.next());
 		}
 	}
 
-	public static int size(HttpServletRequest req) {
-		return size(req.getSession());
+	public static int size(HttpServletRequest request) {
+		return size(request.getSession());
 	}
 
-	public static int size(HttpSession ses) {
-		Map messages = _getMessages(ses);
+	public static int size(HttpSession session) {
+		Map<String, Object> messages = _getMessages(session);
 
 		return messages.size();
 	}
 
-	private static Map _getMessages(HttpSession ses) {
-		Map messages = null;
+	private static Map<String, Object> _getMessages(HttpSession session) {
+		Map<String, Object> messages = null;
 
 		try {
-			messages = (Map)ses.getAttribute(KEY);
+			messages = (Map<String, Object>)session.getAttribute(KEY);
 
 			if (messages == null) {
-				messages = new LinkedHashMap();
+				messages = new LinkedHashMap<String, Object>();
 
-				ses.setAttribute(KEY, messages);
+				session.setAttribute(KEY, messages);
 			}
 		}
 		catch (IllegalStateException ise) {
-			messages = new LinkedHashMap();
+			messages = new LinkedHashMap<String, Object>();
 		}
 
 		return messages;
@@ -158,112 +160,118 @@ public class SessionMessages {
 
 	// Portlet Request
 
-	public static void add(PortletRequest req, String key) {
-		add(req.getPortletSession(), key);
+	public static void add(PortletRequest portletRequest, String key) {
+		add(portletRequest.getPortletSession(), key);
 	}
 
-	public static void add(PortletSession ses, String key) {
-		Map messages = _getMessages(ses);
+	public static void add(PortletSession portletSession, String key) {
+		Map<String, Object> messages = _getMessages(portletSession);
 
 		messages.put(key, key);
 	}
 
-	public static void add(PortletRequest req, String key, Object value) {
-		add(req.getPortletSession(), key, value);
+	public static void add(
+		PortletRequest portletRequest, String key, Object value) {
+
+		add(portletRequest.getPortletSession(), key, value);
 	}
 
-	public static void add(PortletSession ses, String key, Object value) {
-		Map messages = _getMessages(ses);
+	public static void add(
+		PortletSession portletSession, String key, Object value) {
+
+		Map<String, Object> messages = _getMessages(portletSession);
 
 		messages.put(key, value);
 	}
 
-	public static void clear(PortletRequest req) {
-		clear(req.getPortletSession());
+	public static void clear(PortletRequest portletRequest) {
+		clear(portletRequest.getPortletSession());
 	}
 
-	public static void clear(PortletSession ses) {
-		Map messages = _getMessages(ses);
+	public static void clear(PortletSession portletSession) {
+		Map<String, Object> messages = _getMessages(portletSession);
 
 		messages.clear();
 	}
 
-	public static boolean contains(PortletRequest req, String key) {
-		return contains(req.getPortletSession(), key);
+	public static boolean contains(PortletRequest portletRequest, String key) {
+		return contains(portletRequest.getPortletSession(), key);
 	}
 
-	public static boolean contains(PortletSession ses, String key) {
-		Map messages = _getMessages(ses);
+	public static boolean contains(PortletSession portletSession, String key) {
+		Map<String, Object> messages = _getMessages(portletSession);
 
 		return messages.containsKey(key);
 	}
 
-	public static Object get(PortletRequest req, String key) {
-		return get(req.getPortletSession(), key);
+	public static Object get(PortletRequest portletRequest, String key) {
+		return get(portletRequest.getPortletSession(), key);
 	}
 
-	public static Object get(PortletSession ses, String key) {
-		Map messages = _getMessages(ses);
+	public static Object get(PortletSession portletSession, String key) {
+		Map<String, Object> messages = _getMessages(portletSession);
 
 		return messages.get(key);
 	}
 
-	public static boolean isEmpty(PortletRequest req) {
-		return isEmpty(req.getPortletSession());
+	public static boolean isEmpty(PortletRequest portletRequest) {
+		return isEmpty(portletRequest.getPortletSession());
 	}
 
-	public static boolean isEmpty(PortletSession ses) {
-		Map messages = _getMessages(ses);
+	public static boolean isEmpty(PortletSession portletSession) {
+		Map<String, Object> messages = _getMessages(portletSession);
 
 		return messages.isEmpty();
 	}
 
-	public static Iterator iterator(PortletRequest req) {
-		return iterator(req.getPortletSession());
+	public static Iterator<String> iterator(PortletRequest portletRequest) {
+		return iterator(portletRequest.getPortletSession());
 	}
 
-	public static Iterator iterator(PortletSession ses) {
-		Map messages = _getMessages(ses);
+	public static Iterator<String> iterator(PortletSession portletSession) {
+		Map<String, Object> messages = _getMessages(portletSession);
 
 		return Collections.unmodifiableSet(messages.keySet()).iterator();
 	}
 
-	public static void print(PortletRequest req) {
-		print(req.getPortletSession());
+	public static void print(PortletRequest portletRequest) {
+		print(portletRequest.getPortletSession());
 	}
 
-	public static void print(PortletSession ses) {
-		Iterator itr = iterator(ses);
+	public static void print(PortletSession portletSession) {
+		Iterator<String> itr = iterator(portletSession);
 
 		while (itr.hasNext()) {
 			System.out.println(itr.next());
 		}
 	}
 
-	public static int size(PortletRequest req) {
-		return size(req.getPortletSession());
+	public static int size(PortletRequest portletRequest) {
+		return size(portletRequest.getPortletSession());
 	}
 
-	public static int size(PortletSession ses) {
-		Map messages = _getMessages(ses);
+	public static int size(PortletSession portletSession) {
+		Map<String, Object> messages = _getMessages(portletSession);
 
 		return messages.size();
 	}
 
-	private static Map _getMessages(PortletSession ses) {
-		Map messages = null;
+	private static Map<String, Object> _getMessages(
+		PortletSession portletSession) {
+
+		Map<String, Object> messages = null;
 
 		try {
-			messages = (Map)ses.getAttribute(KEY);
+			messages = (Map<String, Object>)portletSession.getAttribute(KEY);
 
 			if (messages == null) {
-				messages = new LinkedHashMap();
+				messages = new LinkedHashMap<String, Object>();
 
-				ses.setAttribute(KEY, messages);
+				portletSession.setAttribute(KEY, messages);
 			}
 		}
 		catch (IllegalStateException ise) {
-			messages = new LinkedHashMap();
+			messages = new LinkedHashMap<String, Object>();
 		}
 
 		return messages;

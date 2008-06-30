@@ -49,43 +49,45 @@ import org.apache.commons.logging.LogFactory;
  */
 public class WidgetServlet extends HttpServlet {
 
-	public void service(HttpServletRequest req, HttpServletResponse res)
+	public void service(
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
 		try {
-			String redirect = getRedirect(req);
+			String redirect = getRedirect(request);
 
 			if (redirect == null) {
 				PortalUtil.sendError(
 					HttpServletResponse.SC_NOT_FOUND,
-					new NoSuchLayoutException(), req, res);
+					new NoSuchLayoutException(), request, response);
 			}
 			else {
-				req.setAttribute(WebKeys.WIDGET, Boolean.TRUE);
+				request.setAttribute(WebKeys.WIDGET, Boolean.TRUE);
 
 				ServletContext ctx = getServletContext();
 
 				RequestDispatcher rd = ctx.getRequestDispatcher(redirect);
 
-				rd.forward(req, res);
+				rd.forward(request, response);
 			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 
 			PortalUtil.sendError(
-				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, req, res);
+				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, request,
+				response);
 		}
 	}
 
-	protected String getRedirect(HttpServletRequest req) {
-		String path = GetterUtil.getString(req.getPathInfo());
+	protected String getRedirect(HttpServletRequest request) {
+		String path = GetterUtil.getString(request.getPathInfo());
 
 		if (Validator.isNull(path)) {
 			return null;
 		}
 
-		String ppid = ParamUtil.getString(req, "p_p_id");
+		String ppid = ParamUtil.getString(request, "p_p_id");
 
 		int pos = path.indexOf("/-/");
 

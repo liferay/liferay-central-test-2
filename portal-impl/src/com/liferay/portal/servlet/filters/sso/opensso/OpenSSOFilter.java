@@ -33,8 +33,6 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 
 import javax.servlet.FilterChain;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -50,13 +48,11 @@ import javax.servlet.http.HttpSession;
 public class OpenSSOFilter extends BasePortalFilter {
 
 	protected void processFilter(
-		ServletRequest req, ServletResponse res, FilterChain chain) {
+		HttpServletRequest request, HttpServletResponse response,
+		FilterChain chain) {
 
 		try {
-			HttpServletRequest httpReq = (HttpServletRequest)req;
-			HttpServletResponse httpRes = (HttpServletResponse)res;
-
-			long companyId = PortalUtil.getCompanyId(httpReq);
+			long companyId = PortalUtil.getCompanyId(request);
 
 			boolean enabled = PrefsPropsUtil.getBoolean(
 				companyId, PropsKeys.OPEN_SSO_AUTH_ENABLED,
@@ -74,19 +70,19 @@ public class OpenSSOFilter extends BasePortalFilter {
 			if (!enabled || Validator.isNull(loginUrl) ||
 				Validator.isNull(logoutUrl) || Validator.isNull(serviceUrl)) {
 
-				processFilter(OpenSSOFilter.class, req, res, chain);
+				processFilter(OpenSSOFilter.class, request, response, chain);
 
 				return;
 			}
 
-			String requestURI = GetterUtil.getString(httpReq.getRequestURI());
+			String requestURI = GetterUtil.getString(request.getRequestURI());
 
 			if (requestURI.endsWith("/portal/logout")) {
-				HttpSession httpSes = httpReq.getSession();
+				HttpSession httpSes = request.getSession();
 
 				httpSes.invalidate();
 
-				httpRes.sendRedirect(logoutUrl);
+				response.sendRedirect(logoutUrl);
 			}
 			else {
 				boolean authenticated = false;
@@ -96,12 +92,13 @@ public class OpenSSOFilter extends BasePortalFilter {
 					// LEP-5943
 
 					authenticated = OpenSSOUtil.isAuthenticated(
-						httpReq, serviceUrl);
+						request, serviceUrl);
 				}
 				catch (Exception e) {
 					_log.error(e, e);
 
-					processFilter(OpenSSOFilter.class, req, res, chain);
+					processFilter(
+						OpenSSOFilter.class, request, response, chain);
 
 					return;
 				}
@@ -111,9 +108,9 @@ public class OpenSSOFilter extends BasePortalFilter {
 					// LEP-5943
 
 					String newSubjectId = OpenSSOUtil.getSubjectId(
-						httpReq, serviceUrl);
+						request, serviceUrl);
 
-					HttpSession httpSes = httpReq.getSession();
+					HttpSession httpSes = request.getSession();
 
 					String oldSubjectId = (String)httpSes.getAttribute(
 						_SUBJECT_ID_KEY);
@@ -124,15 +121,16 @@ public class OpenSSOFilter extends BasePortalFilter {
 					else if (!newSubjectId.equals(oldSubjectId)) {
 						httpSes.invalidate();
 
-						httpSes = httpReq.getSession();
+						httpSes = request.getSession();
 
 						httpSes.setAttribute(_SUBJECT_ID_KEY, newSubjectId);
 					}
 
-					processFilter(OpenSSOFilter.class, req, res, chain);
+					processFilter(
+						OpenSSOFilter.class, request, response, chain);
 				}
 				else {
-					httpRes.sendRedirect(loginUrl);
+					response.sendRedirect(loginUrl);
 				}
 			}
 		}

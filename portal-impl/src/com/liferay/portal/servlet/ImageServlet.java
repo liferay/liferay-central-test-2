@@ -57,17 +57,18 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ImageServlet extends HttpServlet {
 
-	public void service(HttpServletRequest req, HttpServletResponse res)
+	public void service(
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
-		long lastModified = getLastModified(req);
+		long lastModified = getLastModified(request);
 
 		if (lastModified > 0) {
 			long ifModifiedSince =
-				req.getDateHeader(HttpHeaders.IF_MODIFIED_SINCE);
+				request.getDateHeader(HttpHeaders.IF_MODIFIED_SINCE);
 
 			if ((ifModifiedSince > 0) && (ifModifiedSince == lastModified)) {
-				res.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+				response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
 
 				return;
 			}
@@ -76,21 +77,22 @@ public class ImageServlet extends HttpServlet {
 		//res.addHeader(HttpHeaders.CACHE_CONTROL, "max-age=0");
 
 		if (lastModified > 0) {
-			res.setDateHeader(HttpHeaders.LAST_MODIFIED, lastModified);
+			response.setDateHeader(HttpHeaders.LAST_MODIFIED, lastModified);
 		}
 
 		try {
-			writeImage(req, res);
+			writeImage(request, response);
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(HttpServletResponse.SC_NOT_FOUND, e, req, res);
+			PortalUtil.sendError(
+				HttpServletResponse.SC_NOT_FOUND, e, request, response);
 		}
 	}
 
-	protected Image getDefaultImage(HttpServletRequest req, long imageId)
+	protected Image getDefaultImage(HttpServletRequest request, long imageId)
 		throws NoSuchImageException {
 
-		String path = GetterUtil.getString(req.getPathInfo());
+		String path = GetterUtil.getString(request.getPathInfo());
 
 		if (path.startsWith("/company_logo")) {
 			return ImageLocalServiceUtil.getDefaultCompanyLogo();
@@ -110,10 +112,10 @@ public class ImageServlet extends HttpServlet {
 		}
 	}
 
-	protected Image getImage(HttpServletRequest req, boolean getDefault)
+	protected Image getImage(HttpServletRequest request, boolean getDefault)
 		throws PortalException, SystemException {
 
-		long imageId = getImageId(req);
+		long imageId = getImageId(request);
 
 		Image image = null;
 
@@ -121,8 +123,8 @@ public class ImageServlet extends HttpServlet {
 			image = ImageLocalServiceUtil.getImage(imageId);
 		}
 		else {
-			String uuid = ParamUtil.getString(req, "uuid");
-			long groupId = ParamUtil.getLong(req, "groupId");
+			String uuid = ParamUtil.getString(request, "uuid");
+			long groupId = ParamUtil.getLong(request, "groupId");
 
 			try {
 				IGImage igImage =
@@ -142,33 +144,33 @@ public class ImageServlet extends HttpServlet {
 					_log.warn("Get a default image for " + imageId);
 				}
 
-				image = getDefaultImage(req, imageId);
+				image = getDefaultImage(request, imageId);
 			}
 		}
 
 		return image;
 	}
 
-	protected long getImageId(HttpServletRequest req) {
+	protected long getImageId(HttpServletRequest request) {
 
 		// The image id may be passed in as image_id, img_id, or i_id
 
-		long imageId = ParamUtil.getLong(req, "image_id");
+		long imageId = ParamUtil.getLong(request, "image_id");
 
 		if (imageId <= 0) {
-			imageId = ParamUtil.getLong(req, "img_id");
+			imageId = ParamUtil.getLong(request, "img_id");
 
 			if (imageId <= 0) {
-				imageId = ParamUtil.getLong(req, "i_id");
+				imageId = ParamUtil.getLong(request, "i_id");
 			}
 		}
 
 		return imageId;
 	}
 
-	protected long getLastModified(HttpServletRequest req) {
+	protected long getLastModified(HttpServletRequest request) {
 		try {
-			Image image = getImage(req, false);
+			Image image = getImage(request, false);
 
 			if (image == null) {
 				return -1;
@@ -191,21 +193,22 @@ public class ImageServlet extends HttpServlet {
 		}
 	}
 
-	protected void writeImage(HttpServletRequest req, HttpServletResponse res)
+	protected void writeImage(
+			HttpServletRequest request, HttpServletResponse response)
 		throws PortalException, SystemException {
 
-		Image image = getImage(req, true);
+		Image image = getImage(request, true);
 
 		if (image == null) {
 			throw new NoSuchImageException("Image is null");
 		}
 		else {
 			if (!image.getType().equals(ImageImpl.TYPE_NOT_AVAILABLE)) {
-				res.setContentType("image/" + image.getType());
+				response.setContentType("image/" + image.getType());
 			}
 
 			try {
-				ServletResponseUtil.write(res, image.getTextObj());
+				ServletResponseUtil.write(response, image.getTextObj());
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {

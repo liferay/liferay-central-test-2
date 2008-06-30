@@ -68,12 +68,12 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 	public abstract String getTitle(String keywords);
 
 	public String search(
-			HttpServletRequest req, String keywords, int startPage,
+			HttpServletRequest request, String keywords, int startPage,
 			int itemsPerPage)
 		throws SearchException {
 
 		try {
-			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
 			int start = (startPage * itemsPerPage) - itemsPerPage;
@@ -104,7 +104,8 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 
 				long groupId = GetterUtil.getLong(result.get(Field.GROUP_ID));
 
-				PortletURL portletURL = getPortletURL(req, portletId, groupId);
+				PortletURL portletURL = getPortletURL(
+					request, portletId, groupId);
 
 				Indexer indexer = (Indexer)InstancePool.get(
 					portlet.getIndexerClass());

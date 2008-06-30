@@ -45,21 +45,22 @@ import org.apache.commons.logging.LogFactory;
  */
 public class RememberMeAutoLogin implements AutoLogin {
 
-	public String[] login(HttpServletRequest req, HttpServletResponse res)
+	public String[] login(
+			HttpServletRequest request, HttpServletResponse response)
 		throws AutoLoginException {
 
 		try {
 			String[] credentials = null;
 
-			String autoUserId = CookieKeys.getCookie(req, CookieKeys.ID);
+			String autoUserId = CookieKeys.getCookie(request, CookieKeys.ID);
 			String autoPassword = CookieKeys.getCookie(
-				req, CookieKeys.PASSWORD);
+				request, CookieKeys.PASSWORD);
 			String rememberMe = CookieKeys.getCookie(
-				req, CookieKeys.REMEMBER_ME);
+				request, CookieKeys.REMEMBER_ME);
 
 			// LEP-5188
 
-			if (!PortalUtil.getPathContext().equals(req.getContextPath())) {
+			if (!PortalUtil.getPathContext().equals(request.getContextPath())) {
 				rememberMe = Boolean.TRUE.toString();
 			}
 
@@ -67,7 +68,7 @@ public class RememberMeAutoLogin implements AutoLogin {
 				Validator.isNotNull(autoPassword) &&
 				Validator.isNotNull(rememberMe)) {
 
-				Company company = PortalUtil.getCompany(req);
+				Company company = PortalUtil.getCompany(request);
 
 				KeyValuePair kvp = null;
 
@@ -93,14 +94,14 @@ public class RememberMeAutoLogin implements AutoLogin {
 			cookie.setMaxAge(0);
 			cookie.setPath(StringPool.SLASH);
 
-			CookieKeys.addCookie(res, cookie);
+			CookieKeys.addCookie(response, cookie);
 
 			cookie = new Cookie(CookieKeys.PASSWORD, StringPool.BLANK);
 
 			cookie.setMaxAge(0);
 			cookie.setPath(StringPool.SLASH);
 
-			CookieKeys.addCookie(res, cookie);
+			CookieKeys.addCookie(response, cookie);
 
 			throw new AutoLoginException(e);
 		}

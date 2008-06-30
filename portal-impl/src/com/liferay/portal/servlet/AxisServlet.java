@@ -51,11 +51,13 @@ import org.apache.commons.logging.LogFactory;
  */
 public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 
-	public void service(HttpServletRequest req, HttpServletResponse res) {
+	public void service(
+		HttpServletRequest request, HttpServletResponse response) {
+
 		PermissionCheckerImpl permissionChecker = null;
 
 		try {
-			String remoteUser = req.getRemoteUser();
+			String remoteUser = request.getRemoteUser();
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Remote user " + remoteUser);
@@ -73,23 +75,23 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 				PermissionThreadLocal.setPermissionChecker(permissionChecker);
 			}
 
-			StringServletResponse stringServletRes = new StringServletResponse(
-				res);
+			StringServletResponse stringResponse = new StringServletResponse(
+				response);
 
-			super.service(req, stringServletRes);
+			super.service(request, stringResponse);
 
-			String contentType = stringServletRes.getContentType();
+			String contentType = stringResponse.getContentType();
 
-			res.setContentType(contentType);
+			response.setContentType(contentType);
 
-			String content = stringServletRes.getString();
+			String content = stringResponse.getString();
 
 			if (contentType.contains(ContentTypes.TEXT_XML)) {
 				content = fixXml(content);
 			}
 
 			ServletResponseUtil.write(
-				new UncommittedServletResponse(res),
+				new UncommittedServletResponse(response),
 				content.getBytes(StringPool.UTF8));
 		}
 		catch (Exception e) {

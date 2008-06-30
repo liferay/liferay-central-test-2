@@ -59,13 +59,14 @@ import org.apache.commons.logging.LogFactory;
  */
 public class CASAutoLogin implements AutoLogin {
 
-	public String[] login(HttpServletRequest req, HttpServletResponse res)
+	public String[] login(
+			HttpServletRequest request, HttpServletResponse response)
 		throws AutoLoginException {
 
 		try {
 			String[] credentials = null;
 
-			long companyId = PortalUtil.getCompanyId(req);
+			long companyId = PortalUtil.getCompanyId(request);
 
 			if (!PrefsPropsUtil.getBoolean(
 					companyId, PropsKeys.CAS_AUTH_ENABLED,
@@ -74,10 +75,10 @@ public class CASAutoLogin implements AutoLogin {
 				return credentials;
 			}
 
-			HttpSession ses = req.getSession();
+			HttpSession session = request.getSession();
 
 			String screenName =
-				(String)ses.getAttribute(CASFilter.CAS_FILTER_USER);
+				(String)session.getAttribute(CASFilter.CAS_FILTER_USER);
 
 			if (screenName != null) {
 				User user = null;

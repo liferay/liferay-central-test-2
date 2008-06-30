@@ -45,8 +45,8 @@ import javax.servlet.http.HttpServletRequestWrapper;
  */
 public class EncryptedServletRequest extends HttpServletRequestWrapper {
 
-	public EncryptedServletRequest(HttpServletRequest req, Key key) {
-		super(req);
+	public EncryptedServletRequest(HttpServletRequest request, Key key) {
+		super(request);
 
 		_params = new HashMap<String, String[]>();
 		_key = key;

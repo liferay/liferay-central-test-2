@@ -46,12 +46,12 @@ import javax.servlet.jsp.PageContext;
 public class WrapPortletTag extends ParamAndPropertyAncestorTagImpl {
 
 	public static String doTag(
-			String wrapPage, String portletPage, ServletContext ctx,
-			HttpServletRequest req, StringServletResponse res,
+			String wrapPage, String portletPage, ServletContext servletContext,
+			HttpServletRequest request, StringServletResponse stringResponse,
 			PageContext pageContext)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		Theme theme = themeDisplay.getTheme();
@@ -59,18 +59,19 @@ public class WrapPortletTag extends ParamAndPropertyAncestorTagImpl {
 
 		// Portlet content
 
-		RequestDispatcher rd = ctx.getRequestDispatcher(portletPage);
+		RequestDispatcher requestDispatcher =
+			servletContext.getRequestDispatcher(portletPage);
 
-		rd.include(req, res);
+		requestDispatcher.include(request, stringResponse);
 
-		portletDisplay.setContent(res.getString());
+		portletDisplay.setContent(stringResponse.getString());
 
 		// Page
 
-		res.recycle();
+		stringResponse.recycle();
 
 		return ThemeUtil.includeVM(
-			ctx, req, pageContext, wrapPage, theme, false);
+			servletContext, request, pageContext, wrapPage, theme, false);
 	}
 
 	public int doStartTag() {

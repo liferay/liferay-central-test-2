@@ -69,14 +69,15 @@ import javax.servlet.http.HttpSession;
  */
 public class VirtualHostFilter extends BasePortalFilter {
 
-	public void init(FilterConfig config) throws ServletException {
+	public void init(FilterConfig config) {
 		super.init(config);
 
 		_ctx = config.getServletContext();
 	}
 
 	public void doFilter(
-			ServletRequest req, ServletResponse res, FilterChain chain)
+			ServletRequest servletRequest, ServletResponse servletResponse,
+			FilterChain chain)
 		throws IOException, ServletException {
 
 		if (_log.isDebugEnabled()) {
@@ -88,35 +89,36 @@ public class VirtualHostFilter extends BasePortalFilter {
 			}
 		}
 
-		HttpServletRequest httpReq = (HttpServletRequest)req;
-		HttpServletResponse httpRes = (HttpServletResponse)res;
+		HttpServletRequest request = (HttpServletRequest)servletRequest;
+		HttpServletResponse response = (HttpServletResponse)servletResponse;
 
-		httpReq.setCharacterEncoding(StringPool.UTF8);
+		request.setCharacterEncoding(StringPool.UTF8);
 		//httpRes.setContentType(ContentTypes.TEXT_HTML_UTF8);
 
 		// Make sure all redirects issued by the portal are absolute
 
-		httpRes = new AbsoluteRedirectsResponse(httpReq, httpRes);
+		response = new AbsoluteRedirectsResponse(request, response);
 
 		// Company id needs to always be called here so that it's properly set
 		// in subsequent calls
 
-		long companyId = PortalInstances.getCompanyId(httpReq);
+		long companyId = PortalInstances.getCompanyId(request);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Company id " + companyId);
 		}
 
-		PortalUtil.getCurrentURL(httpReq);
+		PortalUtil.getCurrentURL(request);
 
-		HttpSession ses = httpReq.getSession();
+		HttpSession session = request.getSession();
 
-		Boolean httpsInitial = (Boolean)ses.getAttribute(WebKeys.HTTPS_INITIAL);
+		Boolean httpsInitial = (Boolean)session.getAttribute(
+			WebKeys.HTTPS_INITIAL);
 
 		if (httpsInitial == null) {
-			httpsInitial = Boolean.valueOf(httpReq.isSecure());
+			httpsInitial = Boolean.valueOf(request.isSecure());
 
-			ses.setAttribute(WebKeys.HTTPS_INITIAL, httpsInitial);
+			session.setAttribute(WebKeys.HTTPS_INITIAL, httpsInitial);
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Setting httpsInitial to " + httpsInitial);
@@ -124,26 +126,26 @@ public class VirtualHostFilter extends BasePortalFilter {
 		}
 
 		if (!isFilterEnabled()) {
-			processFilter(VirtualHostFilter.class, req, httpRes, chain);
+			processFilter(VirtualHostFilter.class, request, response, chain);
 
 			return;
 		}
 
-		StringBuffer requestURL = httpReq.getRequestURL();
+		StringBuffer requestURL = request.getRequestURL();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Received " + requestURL);
 		}
 
 		if (!isValidRequestURL(requestURL)) {
-			processFilter(VirtualHostFilter.class, req, httpRes, chain);
+			processFilter(VirtualHostFilter.class, request, response, chain);
 
 			return;
 		}
 
 		String contextPath = PortalUtil.getPathContext();
 
-		String friendlyURL = httpReq.getRequestURI();
+		String friendlyURL = request.getRequestURI();
 
 		if ((!contextPath.equals(StringPool.SLASH)) &&
 			(friendlyURL.indexOf(contextPath) != -1)) {
@@ -160,12 +162,12 @@ public class VirtualHostFilter extends BasePortalFilter {
 		}
 
 		if (!isValidFriendlyURL(friendlyURL)) {
-			processFilter(VirtualHostFilter.class, req, httpRes, chain);
+			processFilter(VirtualHostFilter.class, request, response, chain);
 
 			return;
 		}
 
-		LayoutSet layoutSet = (LayoutSet)req.getAttribute(
+		LayoutSet layoutSet = (LayoutSet)servletRequest.getAttribute(
 			WebKeys.VIRTUAL_HOST_LAYOUT_SET);
 
 		if (_log.isDebugEnabled()) {
@@ -175,9 +177,10 @@ public class VirtualHostFilter extends BasePortalFilter {
 		if (layoutSet != null) {
 			try {
 				LastPath lastPath = new LastPath(
-					StringPool.BLANK, friendlyURL, req.getParameterMap());
+					StringPool.BLANK, friendlyURL,
+					servletRequest.getParameterMap());
 
-				req.setAttribute(WebKeys.LAST_PATH, lastPath);
+				servletRequest.setAttribute(WebKeys.LAST_PATH, lastPath);
 
 				StringBuilder prefix = new StringBuilder();
 
@@ -198,7 +201,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 				redirect.append(prefix);
 				redirect.append(friendlyURL);
 
-				String query = httpReq.getQueryString();
+				String query = request.getQueryString();
 
 				if (query != null) {
 					redirect.append(StringPool.QUESTION);
@@ -212,7 +215,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 				RequestDispatcher rd =
 					_ctx.getRequestDispatcher(redirect.toString());
 
-				rd.forward(req, httpRes);
+				rd.forward(servletRequest, response);
 
 				return;
 			}
@@ -221,7 +224,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 			}
 		}
 
-		processFilter(VirtualHostFilter.class, req, httpRes, chain);
+		processFilter(VirtualHostFilter.class, request, response, chain);
 	}
 
 	protected boolean isValidFriendlyURL(String friendlyURL) {
@@ -281,7 +284,8 @@ public class VirtualHostFilter extends BasePortalFilter {
 	}
 
 	protected void processFilter(
-		ServletRequest req, ServletResponse res, FilterChain chain) {
+		HttpServletRequest request, HttpServletResponse response,
+		FilterChain chain) {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(VirtualHostFilter.class);

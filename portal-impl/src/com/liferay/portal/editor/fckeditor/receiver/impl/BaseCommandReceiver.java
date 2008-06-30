@@ -77,13 +77,14 @@ import org.w3c.dom.Node;
 public abstract class BaseCommandReceiver implements CommandReceiver {
 
 	public void createFolder(
-		CommandArgument arg, HttpServletRequest req, HttpServletResponse res) {
+		CommandArgument argument, HttpServletRequest request,
+		HttpServletResponse response) {
 
 		Document doc = _createDocument();
 
 		Node root = _createRoot(
-			doc, arg.getCommand(), arg.getType(), arg.getCurrentFolder(),
-			StringPool.BLANK);
+			doc, argument.getCommand(), argument.getType(),
+			argument.getCurrentFolder(), StringPool.BLANK);
 
 		Element errorEl = doc.createElement("Error");
 
@@ -92,7 +93,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 		String returnValue = "0";
 
 		try {
-			returnValue = createFolder(arg);
+			returnValue = createFolder(argument);
 		}
 		catch (FCKException fcke) {
 			returnValue = "110";
@@ -100,39 +101,42 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 
 		errorEl.setAttribute("number", returnValue);
 
-		_writeDocument(doc, res);
+		_writeDocument(doc, response);
 	}
 
 	public void getFolders(
-		CommandArgument arg, HttpServletRequest req, HttpServletResponse res) {
+		CommandArgument argument, HttpServletRequest request,
+		HttpServletResponse response) {
 
 		Document doc = _createDocument();
 
 		Node root = _createRoot(
-			doc, arg.getCommand(), arg.getType(), arg.getCurrentFolder(),
-			getPath(arg));
+			doc, argument.getCommand(), argument.getType(),
+			argument.getCurrentFolder(), getPath(argument));
 
-		getFolders(arg, doc, root);
+		getFolders(argument, doc, root);
 
-		_writeDocument(doc, res);
+		_writeDocument(doc, response);
 	}
 
 	public void getFoldersAndFiles(
-		CommandArgument arg, HttpServletRequest req, HttpServletResponse res) {
+		CommandArgument argument, HttpServletRequest request,
+		HttpServletResponse response) {
 
 		Document doc = _createDocument();
 
 		Node root = _createRoot(
-			doc, arg.getCommand(), arg.getType(), arg.getCurrentFolder(),
-			getPath(arg));
+			doc, argument.getCommand(), argument.getType(),
+			argument.getCurrentFolder(), getPath(argument));
 
-		getFoldersAndFiles(arg, doc, root);
+		getFoldersAndFiles(argument, doc, root);
 
-		_writeDocument(doc, res);
+		_writeDocument(doc, response);
 	}
 
 	public void fileUpload(
-		CommandArgument arg, HttpServletRequest req, HttpServletResponse res) {
+		CommandArgument argument, HttpServletRequest request,
+		HttpServletResponse response) {
 
 		ServletFileUpload upload = new ServletFileUpload(
 			new LiferayFileItemFactory(
@@ -141,7 +145,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 		List<FileItem> items = null;
 
 		try {
-			items = upload.parseRequest(req);
+			items = upload.parseRequest(request);
 		}
 		catch (FileUploadException fue) {
 			throw new FCKException(fue);
@@ -170,7 +174,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 
 		try {
 			returnValue = fileUpload(
-				arg, fileName, fileItem.getStoreLocation(), extension);
+				argument, fileName, fileItem.getStoreLocation(), extension);
 		}
 		catch (FCKException fcke) {
 			Throwable cause = fcke.getCause();
@@ -199,37 +203,37 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 				}
 			}
 
-			_writeUploadResponse(returnValue, res);
+			_writeUploadResponse(returnValue, response);
 		}
 
-		_writeUploadResponse(returnValue, res);
+		_writeUploadResponse(returnValue, response);
 	}
 
-	protected abstract String createFolder(CommandArgument arg);
+	protected abstract String createFolder(CommandArgument argument);
 
 	protected abstract String fileUpload(
-		CommandArgument arg, String fileName, File file, String extension);
+		CommandArgument argument, String fileName, File file, String extension);
 
 	protected abstract void getFolders(
-		CommandArgument arg, Document doc, Node root);
+		CommandArgument argument, Document doc, Node root);
 
 	protected abstract void getFoldersAndFiles(
-		CommandArgument arg, Document doc, Node root);
+		CommandArgument argument, Document doc, Node root);
 
 	protected void getRootFolders(
-			CommandArgument arg, Document doc, Element foldersEl)
+			CommandArgument argument, Document doc, Element foldersEl)
 		throws Exception {
 
 		LinkedHashMap<String, Object> groupParams =
 			new LinkedHashMap<String, Object>();
 
-		groupParams.put("usersGroups", new Long(arg.getUserId()));
+		groupParams.put("usersGroups", new Long(argument.getUserId()));
 
 		List<Group> groups = GroupLocalServiceUtil.search(
-			arg.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS,
+			argument.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS);
 
-		User user = UserLocalServiceUtil.getUserById(arg.getUserId());
+		User user = UserLocalServiceUtil.getUserById(argument.getUserId());
 
 		List<Organization> userOrgs = user.getOrganizations();
 
@@ -256,7 +260,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 		}
 	}
 
-	protected String getPath(CommandArgument arg) {
+	protected String getPath(CommandArgument argument) {
 		return StringPool.BLANK;
 	}
 
@@ -313,7 +317,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 		return fileName.substring(fileName.lastIndexOf(".") + 1);
 	}
 
-	private void _writeDocument(Document doc, HttpServletResponse res) {
+	private void _writeDocument(Document doc, HttpServletResponse response) {
 		try {
 			doc.getDocumentElement().normalize();
 
@@ -330,10 +334,10 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 				transformer.transform(source, result);
 			}
 
-			res.setContentType("text/xml; charset=UTF-8");
-			res.setHeader("Cache-Control", "no-cache");
+			response.setContentType("text/xml; charset=UTF-8");
+			response.setHeader("Cache-Control", "no-cache");
 
-			PrintWriter out = res.getWriter();
+			PrintWriter out = response.getWriter();
 
 			StreamResult result = new StreamResult(out);
 
@@ -348,7 +352,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 	}
 
 	private void _writeUploadResponse(
-		String returnValue, HttpServletResponse res) {
+		String returnValue, HttpServletResponse response) {
 
 		try {
 			StringBuilder sb = new StringBuilder();
@@ -363,12 +367,12 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 			sb.append("');");
 			sb.append("</script>");
 
-			res.setContentType("text/html; charset=UTF-8");
-			res.setHeader("Cache-Control", "no-cache");
+			response.setContentType("text/html; charset=UTF-8");
+			response.setHeader("Cache-Control", "no-cache");
 
 			PrintWriter out = null;
 
-			out = res.getWriter();
+			out = response.getWriter();
 
 			out.print(sb.toString());
 

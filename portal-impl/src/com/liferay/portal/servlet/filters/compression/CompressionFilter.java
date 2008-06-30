@@ -35,8 +35,6 @@ import java.io.IOException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -118,29 +116,27 @@ public class CompressionFilter extends BasePortalFilter {
 	}
 
 	protected void processFilter(
-			ServletRequest req, ServletResponse res, FilterChain chain)
+			HttpServletRequest request, HttpServletResponse response,
+			FilterChain chain)
 		throws IOException, ServletException {
 
-		HttpServletRequest httpReq = (HttpServletRequest)req;
-		HttpServletResponse httpRes = (HttpServletResponse)res;
+		String completeURL = HttpUtil.getCompleteURL(request);
 
-		String completeURL = HttpUtil.getCompleteURL(httpReq);
-
-		if (isCompress(httpReq) && !isInclude(httpReq) &&
-			BrowserSnifferUtil.acceptsGzip(httpReq) &&
-			!isAlreadyFiltered(httpReq)) {
+		if (isCompress(request) && !isInclude(request) &&
+			BrowserSnifferUtil.acceptsGzip(request) &&
+			!isAlreadyFiltered(request)) {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Compressing " + completeURL);
 			}
 
-			httpReq.setAttribute(SKIP_FILTER, Boolean.TRUE);
+			request.setAttribute(SKIP_FILTER, Boolean.TRUE);
 
 			CompressionResponse compressionResponse =
-				new CompressionResponse(httpRes);
+				new CompressionResponse(response);
 
 			processFilter(
-				CompressionFilter.class, req, compressionResponse, chain);
+				CompressionFilter.class, request, compressionResponse, chain);
 
 			compressionResponse.finishResponse();
 		}
@@ -149,7 +145,7 @@ public class CompressionFilter extends BasePortalFilter {
 				_log.debug("Not compressing " + completeURL);
 			}
 
-			processFilter(CompressionFilter.class, req, res, chain);
+			processFilter(CompressionFilter.class, request, response, chain);
 		}
 	}
 

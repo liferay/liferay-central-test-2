@@ -52,46 +52,49 @@ import org.apache.commons.logging.LogFactory;
  */
 public class FacebookServlet extends HttpServlet {
 
-	public void service(HttpServletRequest req, HttpServletResponse res)
+	public void service(
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
 		try {
-			String[] facebookData = FacebookUtil.getFacebookData(req);
+			String[] facebookData = FacebookUtil.getFacebookData(request);
 
 			if (facebookData == null) {
 				PortalUtil.sendError(
 					HttpServletResponse.SC_NOT_FOUND,
-					new NoSuchLayoutException(), req, res);
+					new NoSuchLayoutException(), request, response);
 			}
 			else {
 				String facebookCanvasPageURL = facebookData[0];
 				String redirect = facebookData[1];
 
-				req.setAttribute(
+				request.setAttribute(
 					WebKeys.FACEBOOK_CANVAS_PAGE_URL, facebookCanvasPageURL);
-				req.setAttribute(CompressionFilter.SKIP_FILTER, Boolean.TRUE);
+				request.setAttribute(
+					CompressionFilter.SKIP_FILTER, Boolean.TRUE);
 
 				ServletContext ctx = getServletContext();
 
 				RequestDispatcher rd = ctx.getRequestDispatcher(redirect);
 
-				StringServletResponse stringServletRes =
-					new StringServletResponse(res);
+				StringServletResponse stringResponse =
+					new StringServletResponse(response);
 
-				rd.forward(req, stringServletRes);
+				rd.forward(request, stringResponse);
 
-				String fbml = stringServletRes.getString();
+				String fbml = stringResponse.getString();
 
 				fbml = fixFbml(fbml);
 
-				ServletResponseUtil.write(res, fbml);
+				ServletResponseUtil.write(response, fbml);
 			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 
 			PortalUtil.sendError(
-				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, req, res);
+				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, request,
+				response);
 		}
 	}
 

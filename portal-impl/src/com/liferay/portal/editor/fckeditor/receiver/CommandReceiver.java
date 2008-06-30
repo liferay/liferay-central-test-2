@@ -36,19 +36,19 @@ import javax.servlet.http.HttpServletResponse;
 public interface CommandReceiver {
 
 	public void createFolder(
-		CommandArgument argument, HttpServletRequest req,
-		HttpServletResponse res);
+		CommandArgument argument, HttpServletRequest request,
+		HttpServletResponse response);
 
 	public void fileUpload(
-		CommandArgument argument, HttpServletRequest req,
-		HttpServletResponse res);
+		CommandArgument argument, HttpServletRequest request,
+		HttpServletResponse response);
 
 	public void getFolders(
-		CommandArgument argument, HttpServletRequest req,
-		HttpServletResponse res);
+		CommandArgument argument, HttpServletRequest request,
+		HttpServletResponse response);
 
 	public void getFoldersAndFiles(
-		CommandArgument argument, HttpServletRequest req,
-		HttpServletResponse res);
+		CommandArgument argument, HttpServletRequest request,
+		HttpServletResponse response);
 
 }

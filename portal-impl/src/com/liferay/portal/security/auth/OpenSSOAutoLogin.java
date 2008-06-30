@@ -55,11 +55,13 @@ import org.apache.commons.logging.LogFactory;
  */
 public class OpenSSOAutoLogin implements AutoLogin {
 
-	public String[] login(HttpServletRequest req, HttpServletResponse res) {
+	public String[] login(
+		HttpServletRequest request, HttpServletResponse response) {
+
 		String[] credentials = null;
 
 		try {
-			long companyId = PortalUtil.getCompanyId(req);
+			long companyId = PortalUtil.getCompanyId(request);
 
 			if (!PrefsPropsUtil.getBoolean(
 					companyId, PropsKeys.OPEN_SSO_AUTH_ENABLED,
@@ -71,7 +73,7 @@ public class OpenSSOAutoLogin implements AutoLogin {
 			String serviceUrl = PrefsPropsUtil.getString(
 				companyId, PropsKeys.OPEN_SSO_SERVICE_URL);
 
-			if (!OpenSSOUtil.isAuthenticated(req, serviceUrl)) {
+			if (!OpenSSOUtil.isAuthenticated(request, serviceUrl)) {
 				return credentials;
 			}
 
@@ -89,7 +91,7 @@ public class OpenSSOAutoLogin implements AutoLogin {
 				PropsValues.OPEN_SSO_LAST_NAME_ATTR);
 
 			Map<String, String> nameValues = OpenSSOUtil.getAttributes(
-				req, serviceUrl);
+				request, serviceUrl);
 
 			String screenName = nameValues.get(screenNameAttr);
 			String emailAddress = nameValues.get(emailAddressAttr);
@@ -103,7 +105,7 @@ public class OpenSSOAutoLogin implements AutoLogin {
 					companyId, screenName);
 			}
 			catch (NoSuchUserException nsue) {
-				ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+				ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 					WebKeys.THEME_DISPLAY);
 
 				Locale locale = LocaleUtil.getDefault();

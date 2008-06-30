@@ -43,31 +43,32 @@ import javax.servlet.jsp.JspException;
 public class MyPlacesTag extends IncludeTag {
 
 	public static void doTag(
-			ServletContext ctx, HttpServletRequest req, HttpServletResponse res)
+			ServletContext ctx, HttpServletRequest request,
+			HttpServletResponse response)
 		throws IOException, ServletException {
 
-		doTag(_PAGE, ctx, req, res);
+		doTag(_PAGE, ctx, request, response);
 	}
 
 	public static void doTag(
-			String page, ServletContext ctx, HttpServletRequest req,
-			HttpServletResponse res)
+			String page, ServletContext ctx, HttpServletRequest request,
+			HttpServletResponse response)
 		throws IOException, ServletException {
 
-		RequestDispatcher rd = ctx.getRequestDispatcher(page);
+		RequestDispatcher requestDispatcher = ctx.getRequestDispatcher(page);
 
-		rd.include(req, res);
+		requestDispatcher.include(request, response);
 	}
 
 	public int doEndTag() throws JspException {
 		try {
-			ServletContext ctx = getServletContext();
-			HttpServletRequest req = getServletRequest();
-			StringServletResponse res = getServletResponse();
+			ServletContext servletContext = getServletContext();
+			HttpServletRequest request = getServletRequest();
+			StringServletResponse stringResponse = getServletResponse();
 
-			doTag(ctx, req, res);
+			doTag(servletContext, request, stringResponse);
 
-			pageContext.getOut().print(res.getString());
+			pageContext.getOut().print(stringResponse.getString());
 
 			return EVAL_PAGE;
 		}

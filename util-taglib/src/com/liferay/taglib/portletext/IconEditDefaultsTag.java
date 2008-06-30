@@ -41,20 +41,22 @@ import javax.servlet.http.HttpServletResponse;
 public class IconEditDefaultsTag extends IconTag {
 
 	public static void doTag(
-			ServletContext ctx, HttpServletRequest req, HttpServletResponse res)
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response)
 		throws IOException, ServletException {
 
-		doTag(_PAGE, ctx, req, res);
+		doTag(_PAGE, servletContext, request, response);
 	}
 
 	public static void doTag(
-			String page, ServletContext ctx, HttpServletRequest req,
-			HttpServletResponse res)
+			String page, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
-		RequestDispatcher rd = ctx.getRequestDispatcher(page);
+		RequestDispatcher requestDispatcher =
+			servletContext.getRequestDispatcher(page);
 
-		rd.include(req, res);
+		requestDispatcher.include(request, response);
 	}
 
 	protected String getDefaultPage() {

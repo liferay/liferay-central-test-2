@@ -70,55 +70,58 @@ public class PortletServlet extends HttpServlet {
 	public static final String PORTLET_SERVLET_RESPONSE =
 		"com.liferay.portal.kernel.servlet.PortletServletResponse";
 
-	public void service(HttpServletRequest req, HttpServletResponse res)
+	public void service(
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
-		PortletRequest portletReq = (PortletRequest)req.getAttribute(
+		PortletRequest portletRequest = (PortletRequest)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST);
 
-		PortletResponse portletRes = (PortletResponse)req.getAttribute(
+		PortletResponse portletResponse = (PortletResponse)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_RESPONSE);
 
-		FilterChain filterChain = (FilterChain)req.getAttribute(
+		FilterChain filterChain = (FilterChain)request.getAttribute(
 			PORTLET_SERVLET_FILTER_CHAIN);
 
-		LiferayPortletSession portletSes =
-			(LiferayPortletSession)portletReq.getPortletSession();
+		LiferayPortletSession portletSession =
+			(LiferayPortletSession)portletRequest.getPortletSession();
 
-		portletReq.setAttribute(PORTLET_SERVLET_CONFIG, getServletConfig());
-		portletReq.setAttribute(PORTLET_SERVLET_REQUEST, req);
-		portletReq.setAttribute(PORTLET_SERVLET_RESPONSE, res);
+		portletRequest.setAttribute(PORTLET_SERVLET_CONFIG, getServletConfig());
+		portletRequest.setAttribute(PORTLET_SERVLET_REQUEST, request);
+		portletRequest.setAttribute(PORTLET_SERVLET_RESPONSE, response);
 
-		HttpSession ses = req.getSession();
+		HttpSession session = request.getSession();
 
-		PortletSessionTracker.add(ses);
+		PortletSessionTracker.add(session);
 
-		portletSes.setHttpSession(ses);
+		portletSession.setHttpSession(session);
 
 		try {
-			if (portletReq instanceof ActionRequest) {
-				ActionRequest actionReq = (ActionRequest)portletReq;
-				ActionResponse actionRes = (ActionResponse)portletRes;
+			if (portletRequest instanceof ActionRequest) {
+				ActionRequest actionRequest = (ActionRequest)portletRequest;
+				ActionResponse actionResponse = (ActionResponse)portletResponse;
 
-				filterChain.doFilter(actionReq, actionRes);
+				filterChain.doFilter(actionRequest, actionResponse);
 			}
-			else if (portletReq instanceof EventRequest) {
-				EventRequest eventReq = (EventRequest)portletReq;
-				EventResponse eventRes = (EventResponse)portletRes;
+			else if (portletRequest instanceof EventRequest) {
+				EventRequest eventRequest = (EventRequest)portletRequest;
+				EventResponse eventResponse = (EventResponse)portletResponse;
 
-				filterChain.doFilter(eventReq, eventRes);
+				filterChain.doFilter(eventRequest, eventResponse);
 			}
-			else if (portletReq instanceof RenderRequest) {
-				RenderRequest renderReq = (RenderRequest)portletReq;
-				RenderResponse renderRes = (RenderResponse)portletRes;
+			else if (portletRequest instanceof RenderRequest) {
+				RenderRequest renderRequest = (RenderRequest)portletRequest;
+				RenderResponse renderResponse = (RenderResponse)portletResponse;
 
-				filterChain.doFilter(renderReq, renderRes);
+				filterChain.doFilter(renderRequest, renderResponse);
 			}
-			else if (portletReq instanceof ResourceRequest) {
-				ResourceRequest resourceReq = (ResourceRequest)portletReq;
-				ResourceResponse resourceRes = (ResourceResponse)portletRes;
+			else if (portletRequest instanceof ResourceRequest) {
+				ResourceRequest resourceRequest =
+					(ResourceRequest)portletRequest;
+				ResourceResponse resourceResponse =
+					(ResourceResponse)portletResponse;
 
-				filterChain.doFilter(resourceReq, resourceRes);
+				filterChain.doFilter(resourceRequest, resourceResponse);
 			}
 		}
 		catch (PortletException pe) {

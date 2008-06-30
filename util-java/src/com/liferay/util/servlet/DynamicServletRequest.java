@@ -42,24 +42,25 @@ import javax.servlet.http.HttpServletRequestWrapper;
  */
 public class DynamicServletRequest extends HttpServletRequestWrapper {
 
-	public DynamicServletRequest(HttpServletRequest req) {
-		this(req, new HashMap<String, String[]>(), true);
+	public DynamicServletRequest(HttpServletRequest request) {
+		this(request, new HashMap<String, String[]>(), true);
 	}
 
 	public DynamicServletRequest(
-		HttpServletRequest req, Map<String, String[]> params) {
+		HttpServletRequest request, Map<String, String[]> params) {
 
-		this(req, params, true);
+		this(request, params, true);
 	}
 
-	public DynamicServletRequest(HttpServletRequest req, boolean inherit) {
-		this(req, new HashMap<String, String[]>(), inherit);
+	public DynamicServletRequest(HttpServletRequest request, boolean inherit) {
+		this(request, new HashMap<String, String[]>(), inherit);
 	}
 
 	public DynamicServletRequest(
-		HttpServletRequest req, Map<String, String[]> params, boolean inherit) {
+		HttpServletRequest request, Map<String, String[]> params,
+		boolean inherit) {
 
-		super(req);
+		super(request);
 
 		_params = new HashMap<String, String[]>();
 		_inherit = inherit;
@@ -70,8 +71,8 @@ public class DynamicServletRequest extends HttpServletRequestWrapper {
 			}
 		}
 
-		if (_inherit && (req instanceof DynamicServletRequest)) {
-			DynamicServletRequest dynamicReq = (DynamicServletRequest)req;
+		if (_inherit && (request instanceof DynamicServletRequest)) {
+			DynamicServletRequest dynamicReq = (DynamicServletRequest)request;
 
 			setRequest(dynamicReq.getRequest());
 

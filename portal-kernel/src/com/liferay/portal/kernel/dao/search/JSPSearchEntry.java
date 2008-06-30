@@ -50,14 +50,15 @@ public class JSPSearchEntry extends SearchEntry {
 
 	public JSPSearchEntry(
 		String align, String valign, int colspan, String path,
-		ServletContext ctx, HttpServletRequest req, HttpServletResponse res) {
+		ServletContext ctx, HttpServletRequest request,
+		HttpServletResponse response) {
 
 		super(align, valign, colspan);
 
 		_path = path;
 		_ctx = ctx;
-		_req = req;
-		_res = res;
+		_request = request;
+		_response = response;
 	}
 
 	public String getPath() {
@@ -70,14 +71,15 @@ public class JSPSearchEntry extends SearchEntry {
 
 	public void print(PageContext pageContext) throws Exception {
 		if (_ctx != null) {
-			RequestDispatcher rd = _ctx.getRequestDispatcher(_path);
+			RequestDispatcher requestDispatcher = _ctx.getRequestDispatcher(
+				_path);
 
-			StringServletResponse stringServletRes = new StringServletResponse(
-				_res);
+			StringServletResponse stringResponse = new StringServletResponse(
+				_response);
 
-			rd.include(_req, stringServletRes);
+			requestDispatcher.include(_request, stringResponse);
 
-			pageContext.getOut().print(stringServletRes.getString());
+			pageContext.getOut().print(stringResponse.getString());
 		}
 		else {
 			pageContext.include(_path);
@@ -86,12 +88,13 @@ public class JSPSearchEntry extends SearchEntry {
 
 	public Object clone() {
 		return new JSPSearchEntry(
-			getAlign(), getValign(), getColspan(), getPath(), _ctx, _req, _res);
+			getAlign(), getValign(), getColspan(), getPath(), _ctx, _request,
+			_response);
 	}
 
 	private String _path;
 	private ServletContext _ctx;
-	private HttpServletRequest _req;
-	private HttpServletResponse _res;
+	private HttpServletRequest _request;
+	private HttpServletResponse _response;
 
 }

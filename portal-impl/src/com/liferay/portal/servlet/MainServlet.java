@@ -439,13 +439,14 @@ public class MainServlet extends ActionServlet {
 	}
 
 	public void callParentService(
-			HttpServletRequest req, HttpServletResponse res)
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
-		super.service(req, res);
+		super.service(request, response);
 	}
 
-	public void service(HttpServletRequest req, HttpServletResponse res)
+	public void service(
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
 		if (_log.isDebugEnabled()) {
@@ -453,42 +454,42 @@ public class MainServlet extends ActionServlet {
 		}
 
 		if (ShutdownUtil.isShutdown()) {
-			res.setContentType(ContentTypes.TEXT_HTML_UTF8);
+			response.setContentType(ContentTypes.TEXT_HTML_UTF8);
 
 			String html = ContentUtil.get(
 				"com/liferay/portal/dependencies/shutdown.html");
 
-			res.getOutputStream().print(html);
+			response.getOutputStream().print(html);
 
 			return;
 		}
 
-		HttpSession ses = req.getSession();
+		HttpSession ses = request.getSession();
 
 		// Company id
 
-		long companyId = PortalInstances.getCompanyId(req);
+		long companyId = PortalInstances.getCompanyId(request);
 
 		//CompanyThreadLocal.setCompanyId(companyId);
 
 		// Portal port
 
-		PortalUtil.setPortalPort(req);
+		PortalUtil.setPortalPort(request);
 
 		// CTX
 
-		ServletContext ctx = getServletContext();
+		ServletContext servletContext = getServletContext();
 
-		req.setAttribute(WebKeys.CTX, ctx);
+		request.setAttribute(WebKeys.CTX, servletContext);
 
 		// Struts module config
 
-		ModuleConfig moduleConfig = getModuleConfig(req);
+		ModuleConfig moduleConfig = getModuleConfig(request);
 
 		// Last modified check
 
 		if (PropsValues.LAST_MODIFIED_CHECK) {
-			String path = req.getPathInfo();
+			String path = request.getPathInfo();
 
 			if ((path != null) && _lastModifiedPaths.contains(path)) {
 				ActionMapping mapping =
@@ -497,11 +498,11 @@ public class MainServlet extends ActionServlet {
 				LastModifiedAction lastModifiedAction =
 					(LastModifiedAction)InstancePool.get(mapping.getType());
 
-				String lmKey = lastModifiedAction.getLastModifiedKey(req);
+				String lmKey = lastModifiedAction.getLastModifiedKey(request);
 
 				if (lmKey != null) {
 					long ifModifiedSince =
-						req.getDateHeader(HttpHeaders.IF_MODIFIED_SINCE);
+						request.getDateHeader(HttpHeaders.IF_MODIFIED_SINCE);
 
 					if (ifModifiedSince <= 0) {
 						lastModifiedAction.setLastModifiedValue(lmKey, lmKey);
@@ -511,7 +512,8 @@ public class MainServlet extends ActionServlet {
 							lastModifiedAction.getLastModifiedValue(lmKey);
 
 						if (lmValue != null) {
-							res.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+							response.setStatus(
+								HttpServletResponse.SC_NOT_MODIFIED);
 
 							return;
 						}
@@ -535,39 +537,44 @@ public class MainServlet extends ActionServlet {
 		// Portlet Request Processor
 
 		PortletRequestProcessor portletReqProcessor =
-			(PortletRequestProcessor)ctx.getAttribute(
+			(PortletRequestProcessor)servletContext.getAttribute(
 				WebKeys.PORTLET_STRUTS_PROCESSOR);
 
 		if (portletReqProcessor == null) {
 			portletReqProcessor =
 				PortletRequestProcessor.getInstance(this, moduleConfig);
 
-			ctx.setAttribute(
+			servletContext.setAttribute(
 				WebKeys.PORTLET_STRUTS_PROCESSOR, portletReqProcessor);
 		}
 
 		// Tiles definitions factory
 
-		if (ctx.getAttribute(TilesUtilImpl.DEFINITIONS_FACTORY) == null) {
-			ctx.setAttribute(
+		if (servletContext.getAttribute(
+				TilesUtilImpl.DEFINITIONS_FACTORY) == null) {
+
+			servletContext.setAttribute(
 				TilesUtilImpl.DEFINITIONS_FACTORY,
-				ctx.getAttribute(TilesUtilImpl.DEFINITIONS_FACTORY));
+				servletContext.getAttribute(TilesUtilImpl.DEFINITIONS_FACTORY));
 		}
 
-		Object applicationAssociate = ctx.getAttribute(WebKeys.ASSOCIATE_KEY);
+		Object applicationAssociate = servletContext.getAttribute(
+			WebKeys.ASSOCIATE_KEY);
 
-		if (ctx.getAttribute(WebKeys.ASSOCIATE_KEY) == null) {
-			ctx.setAttribute(WebKeys.ASSOCIATE_KEY, applicationAssociate);
+		if (servletContext.getAttribute(WebKeys.ASSOCIATE_KEY) == null) {
+			servletContext.setAttribute(
+				WebKeys.ASSOCIATE_KEY, applicationAssociate);
 		}
 
 		// Encrypt request
 
-		if (ParamUtil.get(req, WebKeys.ENCRYPT, false)) {
+		if (ParamUtil.get(request, WebKeys.ENCRYPT, false)) {
 			try {
 				Company company = CompanyLocalServiceUtil.getCompanyById(
 					companyId);
 
-				req = new EncryptedServletRequest(req, company.getKeyObj());
+				request = new EncryptedServletRequest(
+					request, company.getKeyObj());
 			}
 			catch (Exception e) {
 			}
@@ -575,12 +582,12 @@ public class MainServlet extends ActionServlet {
 
 		// Current URL
 
-		PortalUtil.getCurrentURL(req);
+		PortalUtil.getCurrentURL(request);
 
 		// Login
 
-		long userId = PortalUtil.getUserId(req);
-		String remoteUser = req.getRemoteUser();
+		long userId = PortalUtil.getUserId(request);
+		String remoteUser = request.getRemoteUser();
 
 		// Is JAAS enabled?
 
@@ -604,7 +611,7 @@ public class MainServlet extends ActionServlet {
 		// authenticated user. We use ProtectedServletRequest to ensure we get
 		// similar behavior across all servers.
 
-		req = new ProtectedServletRequest(req, remoteUser);
+		request = new ProtectedServletRequest(request, remoteUser);
 
 		if ((userId > 0) || (remoteUser != null)) {
 
@@ -630,14 +637,14 @@ public class MainServlet extends ActionServlet {
 
 				EventsProcessor.process(
 					PropsKeys.LOGIN_EVENTS_PRE, PropsValues.LOGIN_EVENTS_PRE,
-					req, res);
+					request, response);
 
 				// User
 
 				User user = UserLocalServiceUtil.getUserById(userId);
 
 				UserLocalServiceUtil.updateLastLogin(
-					userId, req.getRemoteAddr());
+					userId, request.getRemoteAddr());
 
 				// User id
 
@@ -651,7 +658,7 @@ public class MainServlet extends ActionServlet {
 
 				EventsProcessor.process(
 					PropsKeys.LOGIN_EVENTS_POST, PropsValues.LOGIN_EVENTS_POST,
-					req, res);
+					request, response);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
@@ -663,14 +670,14 @@ public class MainServlet extends ActionServlet {
 		try {
 			EventsProcessor.process(
 				PropsKeys.SERVLET_SERVICE_EVENTS_PRE,
-				PropsValues.SERVLET_SERVICE_EVENTS_PRE, req, res);
+				PropsValues.SERVLET_SERVICE_EVENTS_PRE, request, response);
 		}
 		catch (Exception e) {
 			Throwable cause = e.getCause();
 
 			if (cause instanceof NoSuchLayoutException) {
 				DynamicServletRequest dynamicReq = new DynamicServletRequest(
-					req);
+					request);
 
 				// Reset p_l_id or there will be an infinite loop
 
@@ -678,18 +685,18 @@ public class MainServlet extends ActionServlet {
 
 				PortalUtil.sendError(
 					HttpServletResponse.SC_NOT_FOUND,
-					(NoSuchLayoutException)cause, dynamicReq, res);
+					(NoSuchLayoutException)cause, dynamicReq, response);
 
 				return;
 			}
 
 			_log.error(e, e);
 
-			req.setAttribute(PageContext.EXCEPTION, e);
+			request.setAttribute(PageContext.EXCEPTION, e);
 
 			StrutsUtil.forward(
-				PropsValues.SERVLET_SERVICE_EVENTS_PRE_ERROR_PAGE, ctx, req,
-				res);
+				PropsValues.SERVLET_SERVICE_EVENTS_PRE_ERROR_PAGE,
+				servletContext, request, response);
 
 			return;
 		}
@@ -698,7 +705,7 @@ public class MainServlet extends ActionServlet {
 
 			// Struts service
 
-			callParentService(req, res);
+			callParentService(request, response);
 		}
 		finally {
 
@@ -707,13 +714,13 @@ public class MainServlet extends ActionServlet {
 			try {
 				EventsProcessor.process(
 					PropsKeys.SERVLET_SERVICE_EVENTS_POST,
-					PropsValues.SERVLET_SERVICE_EVENTS_POST, req, res);
+					PropsValues.SERVLET_SERVICE_EVENTS_POST, request, response);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
 			}
 
-			res.addHeader(
+			response.addHeader(
 				_LIFERAY_PORTAL_REQUEST_HEADER, ReleaseInfo.getReleaseInfo());
 
 			// Clear the company id associated with this thread
@@ -842,20 +849,21 @@ public class MainServlet extends ActionServlet {
 		}
 	}
 
-	protected void initPortletApp(Portlet portlet, ServletContext ctx)
+	protected void initPortletApp(
+			Portlet portlet, ServletContext servletContext)
 		throws PortletException {
 
 		PortletApp portletApp = portlet.getPortletApp();
 
 		PortletConfig portletConfig = PortletConfigFactory.create(
-			portlet, ctx);
+			portlet, servletContext);
 
-		PortletContext portletCtx = portletConfig.getPortletContext();
+		PortletContext portletContext = portletConfig.getPortletContext();
 
 		Set<PortletFilter> portletFilters = portletApp.getPortletFilters();
 
 		for (PortletFilter portletFilter : portletFilters) {
-			PortletFilterFactory.create(portletFilter, portletCtx);
+			PortletFilterFactory.create(portletFilter, portletContext);
 		}
 
 		Set<PortletURLListener> portletURLListeners =

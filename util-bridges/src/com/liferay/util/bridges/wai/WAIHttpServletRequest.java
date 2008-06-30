@@ -40,10 +40,10 @@ import javax.servlet.http.HttpServletRequestWrapper;
 public class WAIHttpServletRequest extends HttpServletRequestWrapper {
 
 	public WAIHttpServletRequest(
-		HttpServletRequest req, String contextPath, String pathInfo,
+		HttpServletRequest request, String contextPath, String pathInfo,
 		String queryString, Map<String, String[]> params) {
 
-		super(req);
+		super(request);
 
 		_contextPath = contextPath;
 		_pathInfo = pathInfo;

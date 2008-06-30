@@ -56,34 +56,35 @@ import org.apache.velocity.app.Velocity;
 public class ThemeUtil {
 
 	public static void include(
-			ServletContext ctx, HttpServletRequest req, HttpServletResponse res,
-			PageContext pageContext, String page, Theme theme)
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, PageContext pageContext, String page,
+			Theme theme)
 		throws Exception {
 
 		String extension = theme.getTemplateExtension();
 
 		if (extension.equals("vm")) {
-			includeVM(ctx, req, pageContext, page, theme, true);
+			includeVM(servletContext, request, pageContext, page, theme, true);
 		}
 		else {
 			String path =
 				theme.getTemplatesPath() + StringPool.SLASH + page;
 
-			includeJSP(ctx, req, res, path, theme);
+			includeJSP(servletContext, request, response, path, theme);
 		}
 	}
 
 	public static void includeJSP(
-			ServletContext ctx, HttpServletRequest req, HttpServletResponse res,
-			String path, Theme theme)
+			ServletContext ctx, HttpServletRequest request,
+			HttpServletResponse response, String path, Theme theme)
 		throws Exception {
 
-		String tilesTitle = _getTilesVariables(req, "title");
-		String tilesContent = _getTilesVariables(req, "content");
+		String tilesTitle = _getTilesVariables(request, "title");
+		String tilesContent = _getTilesVariables(request, "content");
 		boolean tilesSelectable = GetterUtil.getBoolean(
-			_getTilesVariables(req, "selectable"));
+			_getTilesVariables(request, "selectable"));
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		themeDisplay.setTilesTitle(tilesTitle);
@@ -107,7 +108,7 @@ public class ThemeUtil {
 							path);
 				}
 				else {
-					rd.include(req, res);
+					rd.include(request, response);
 				}
 			}
 		}
@@ -119,14 +120,14 @@ public class ThemeUtil {
 					"Theme " + theme.getThemeId() + " does not have " + path);
 			}
 			else {
-				rd.include(req, res);
+				rd.include(request, response);
 			}
 		}
 	}
 
 	public static String includeVM(
-			ServletContext ctx, HttpServletRequest req, PageContext pageContext,
-			String page, Theme theme, boolean write)
+			ServletContext servletContext, HttpServletRequest request,
+			PageContext pageContext, String page, Theme theme, boolean write)
 		throws Exception {
 
 		// The servlet context name will be null when the theme is deployed to
@@ -142,7 +143,7 @@ public class ThemeUtil {
 			// This should only happen if the Velocity template is the first
 			// page to be accessed in the system
 
-			VelocityContextPool.put(ctxName, ctx);
+			VelocityContextPool.put(ctxName, servletContext);
 		}
 
 		int pos = page.lastIndexOf(StringPool.PERIOD);
@@ -170,7 +171,7 @@ public class ThemeUtil {
 
 		// Velocity variables
 
-		VelocityVariables.insertVariables(vc, req);
+		VelocityVariables.insertVariables(vc, request);
 
 		// liferay:include tag library
 
@@ -178,9 +179,9 @@ public class ThemeUtil {
 			(HttpServletResponse)pageContext.getResponse());
 
 		VelocityTaglib velocityTaglib = new VelocityTaglib(
-			ctx, req, stringServletRes, pageContext);
+			servletContext, request, stringServletRes, pageContext);
 
-		req.setAttribute(WebKeys.VELOCITY_TAGLIB, velocityTaglib);
+		request.setAttribute(WebKeys.VELOCITY_TAGLIB, velocityTaglib);
 
 		vc.put("taglibLiferay", velocityTaglib);
 		vc.put("theme", velocityTaglib);
@@ -204,10 +205,11 @@ public class ThemeUtil {
 	}
 
 	private static String _getTilesVariables(
-		HttpServletRequest req, String attributeName) {
+		HttpServletRequest request, String attributeName) {
 
-		ComponentContext componentContext = (ComponentContext)req.getAttribute(
-			ComponentConstants.COMPONENT_CONTEXT);
+		ComponentContext componentContext =
+			(ComponentContext)request.getAttribute(
+				ComponentConstants.COMPONENT_CONTEXT);
 
 		String value = null;
 

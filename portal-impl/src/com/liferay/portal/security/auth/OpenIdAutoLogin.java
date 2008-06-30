@@ -43,25 +43,27 @@ import org.apache.commons.logging.LogFactory;
  */
 public class OpenIdAutoLogin implements AutoLogin {
 
-	public String[] login(HttpServletRequest req, HttpServletResponse res) {
+	public String[] login(
+		HttpServletRequest request, HttpServletResponse response) {
+
 		String[] credentials = null;
 
 		try {
-			long companyId = PortalUtil.getCompanyId(req);
+			long companyId = PortalUtil.getCompanyId(request);
 
 			if (!OpenIdUtil.isEnabled(companyId)) {
 				return credentials;
 			}
 
-			HttpSession ses = req.getSession();
+			HttpSession session = request.getSession();
 
-			Long userId = (Long)ses.getAttribute(WebKeys.OPEN_ID_LOGIN);
+			Long userId = (Long)session.getAttribute(WebKeys.OPEN_ID_LOGIN);
 
 			if (userId == null) {
 				return credentials;
 			}
 
-			ses.removeAttribute(WebKeys.OPEN_ID_LOGIN);
+			session.removeAttribute(WebKeys.OPEN_ID_LOGIN);
 
 			User user = UserLocalServiceUtil.getUserById(
 				userId.longValue());

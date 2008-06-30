@@ -53,28 +53,33 @@ import org.apache.commons.logging.LogFactory;
 public class RuntimeTag extends TagSupport {
 
 	public static void doTag(
-			String portletName, PageContext pageContext, ServletContext ctx,
-			HttpServletRequest req, HttpServletResponse res)
+			String portletName, PageContext pageContext,
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
-		doTag(portletName, null, pageContext, ctx, req, res);
+		doTag(
+			portletName, null, pageContext, servletContext, request, response);
 	}
 
 	public static void doTag(
 			String portletName, String queryString, PageContext pageContext,
-			ServletContext ctx, HttpServletRequest req, HttpServletResponse res)
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
-		doTag(portletName, null, null, pageContext, ctx, req, res);
+		doTag(
+			portletName, null, null, pageContext, servletContext, request,
+			response);
 	}
 
 	public static void doTag(
 			String portletName, String queryString, String defaultPreferences,
-			PageContext pageContext, ServletContext ctx, HttpServletRequest req,
-			HttpServletResponse res)
+			PageContext pageContext, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
-		PortletRequest portletRequest = (PortletRequest)req.getAttribute(
+		PortletRequest portletRequest = (PortletRequest)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST);
 
 		RenderRequest renderRequest = null;
@@ -85,7 +90,7 @@ public class RuntimeTag extends TagSupport {
 			renderRequest = (RenderRequest)portletRequest;
 		}
 
-		PortletResponse portletResponse = (PortletResponse)req.getAttribute(
+		PortletResponse portletResponse = (PortletResponse)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 		RenderResponse renderResponse = null;
@@ -101,19 +106,19 @@ public class RuntimeTag extends TagSupport {
 		StringBuilder sb = new StringBuilder();
 
 		try {
-			req.setAttribute(WebKeys.RENDER_PORTLET_RESOURCE, Boolean.TRUE);
+			request.setAttribute(WebKeys.RENDER_PORTLET_RESOURCE, Boolean.TRUE);
 
 			if (Validator.isNotNull(defaultPreferences)) {
 				PortletPreferencesFactoryUtil.getPortletSetup(
-					req, portletId, defaultPreferences);
+					request, portletId, defaultPreferences);
 			}
 
 			RuntimePortletUtil.processPortlet(
-				sb, ctx, req, res, renderRequest, renderResponse,
-				portletId, queryString);
+				sb, servletContext, request, response, renderRequest,
+				renderResponse, portletId, queryString);
 		}
 		finally {
-			req.removeAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
+			request.removeAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
 		}
 
 		if (pageContext != null) {
@@ -124,29 +129,30 @@ public class RuntimeTag extends TagSupport {
 			// LEP-1023
 
 			//res.getOutputStream().print(renderPortletSM.toString());
-			res.getWriter().print(sb.toString());
+			response.getWriter().print(sb.toString());
 		}
 	}
 
 	public int doEndTag() throws JspException {
 		try {
-			HttpServletRequest req =
+			HttpServletRequest request =
 				(HttpServletRequest)pageContext.getRequest();
 
-			Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+			Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
 
 			if (layout == null) {
 				return EVAL_PAGE;
 			}
 
-			ServletContext ctx = (ServletContext)req.getAttribute(WebKeys.CTX);
+			ServletContext servletContext =
+				(ServletContext)request.getAttribute(WebKeys.CTX);
 
-			HttpServletResponse res =
+			HttpServletResponse response =
 				(HttpServletResponse)pageContext.getResponse();
 
 			doTag(
 				_portletName, _queryString, _defaultPreferences, pageContext,
-				ctx, req, res);
+				servletContext, request, response);
 
 			return EVAL_PAGE;
 		}

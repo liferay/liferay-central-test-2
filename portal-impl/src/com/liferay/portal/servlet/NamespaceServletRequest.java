@@ -65,16 +65,17 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 		PropsKeys.REQUEST_SHARED_ATTRIBUTES);
 
 	public NamespaceServletRequest(
-		HttpServletRequest req, String attrNamespace, String paramNamespace) {
+		HttpServletRequest request, String attrNamespace,
+		String paramNamespace) {
 
-		this(req, attrNamespace, paramNamespace, true);
+		this(request, attrNamespace, paramNamespace, true);
 	}
 
 	public NamespaceServletRequest(
-		HttpServletRequest req, String attrNamespace, String paramNamespace,
+		HttpServletRequest request, String attrNamespace, String paramNamespace,
 		boolean inherit) {
 
-		super(req, inherit);
+		super(request, inherit);
 
 		_attrNamespace = attrNamespace;
 		_paramNamespace = paramNamespace;

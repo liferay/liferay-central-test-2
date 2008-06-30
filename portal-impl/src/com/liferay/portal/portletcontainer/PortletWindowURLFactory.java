@@ -61,10 +61,10 @@ import javax.servlet.http.HttpServletResponse;
 public class PortletWindowURLFactory implements ChannelURLFactory {
 
 	public PortletWindowURLFactory(
-		HttpServletRequest req, Portlet portlet, ChannelState windowState,
+		HttpServletRequest request, Portlet portlet, ChannelState windowState,
 		ChannelMode portletMode, long plid) {
 
-		_req = req;
+		_request = request;
 		_portlet = portlet;
 		_windowState = windowState;
 		_portletMode = portletMode;
@@ -73,13 +73,13 @@ public class PortletWindowURLFactory implements ChannelURLFactory {
 
 	public ChannelURL createChannelURL() {
 		return new PortletWindowURL(
-			_req, _portlet, _windowState, _portletMode, _plid);
+			_request, _portlet, _windowState, _portletMode, _plid);
 	}
 
 	public String encodeURL(
-		HttpServletRequest req, HttpServletResponse res, String url) {
+		HttpServletRequest request, HttpServletResponse response, String url) {
 
-		return res.encodeURL(url);
+		return response.encodeURL(url);
 	}
 
 	public String getActionTemplate() {
@@ -98,7 +98,7 @@ public class PortletWindowURLFactory implements ChannelURLFactory {
 		throw new UnsupportedOperationException();
 	}
 
-	private HttpServletRequest _req;
+	private HttpServletRequest _request;
 	private Portlet _portlet;
 	private ChannelState _windowState;
 	private ChannelMode _portletMode;

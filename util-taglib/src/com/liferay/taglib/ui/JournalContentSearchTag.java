@@ -39,16 +39,18 @@ import javax.servlet.http.HttpServletResponse;
 public class JournalContentSearchTag extends BoxTag {
 
 	public static void doTag(
-			ServletContext ctx, HttpServletRequest req, HttpServletResponse res)
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response)
 		throws IOException, ServletException {
 
-		RequestDispatcher rd = ctx.getRequestDispatcher(_TOP);
+		RequestDispatcher requestDispatcher =
+			servletContext.getRequestDispatcher(_TOP);
 
-		rd.include(req, res);
+		requestDispatcher.include(request, response);
 
-		rd = ctx.getRequestDispatcher(_BOTTOM);
+		requestDispatcher = servletContext.getRequestDispatcher(_BOTTOM);
 
-		rd.include(req, res);
+		requestDispatcher.include(request, response);
 	}
 
 	public String getTop() {

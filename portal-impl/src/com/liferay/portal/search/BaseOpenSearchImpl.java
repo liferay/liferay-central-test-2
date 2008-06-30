@@ -22,7 +22,6 @@
 
 package com.liferay.portal.search;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.search.OpenSearch;
@@ -64,7 +63,7 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 		return true;
 	}
 
-	public String search(HttpServletRequest req, String url)
+	public String search(HttpServletRequest request, String url)
 		throws SearchException {
 
 		String keywords = GetterUtil.getString(
@@ -75,11 +74,11 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 			HttpUtil.getParameter(url, "c", false),
 			SearchContainer.DEFAULT_DELTA);
 
-		return search(req, keywords, startPage, itemsPerPage);
+		return search(request, keywords, startPage, itemsPerPage);
 	}
 
 	public abstract String search(
-			HttpServletRequest req, String keywords, int startPage,
+			HttpServletRequest request, String keywords, int startPage,
 			int itemsPerPage)
 		throws SearchException;
 
@@ -258,17 +257,16 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 		return new Object[] {doc, root};
 	}
 
-	protected PortletURL getPortletURL(HttpServletRequest req, String portletId)
-		throws PortalException, PortletModeException, SystemException,
-			   WindowStateException {
+	protected PortletURL getPortletURL(
+			HttpServletRequest request, String portletId)
+		throws PortletModeException, SystemException, WindowStateException {
 
-		return getPortletURL(req, portletId, 0);
+		return getPortletURL(request, portletId, 0);
 	}
 
 	protected PortletURL getPortletURL(
-			HttpServletRequest req, String portletId, long groupId)
-		throws PortalException, PortletModeException, SystemException,
-			   WindowStateException {
+			HttpServletRequest request, String portletId, long groupId)
+		throws PortletModeException, SystemException, WindowStateException {
 
 		long plid = LayoutLocalServiceUtil.getDefaultPlid(
 			groupId, false, portletId);
@@ -279,7 +277,7 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 		}
 
 		if (plid == 0) {
-			Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+			Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
 
 			if (layout != null) {
 				plid = layout.getPlid();
@@ -287,7 +285,7 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 		}
 
 		PortletURL portletURL = new PortletURLImpl(
-			req, portletId, plid, PortletRequest.RENDER_PHASE);
+			request, portletId, plid, PortletRequest.RENDER_PHASE);
 
 		portletURL.setWindowState(WindowState.MAXIMIZED);
 		portletURL.setPortletMode(PortletMode.VIEW);

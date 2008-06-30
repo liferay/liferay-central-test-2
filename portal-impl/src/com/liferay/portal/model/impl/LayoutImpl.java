@@ -612,11 +612,11 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	}
 
 	private String _getURL(
-			HttpServletRequest req, boolean resetMaxState,
+			HttpServletRequest request, boolean resetMaxState,
 			boolean resetRenderParameters)
 		throws SystemException {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		if (resetMaxState) {
@@ -629,7 +629,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			}
 			else {
 				try {
-					layoutTypePortlet = _getLayoutTypePortletClone(req);
+					layoutTypePortlet = _getLayoutTypePortletClone(request);
 				}
 				catch (IOException ioe) {
 					_log.error("Unable to clone layout settings", ioe);
@@ -643,7 +643,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 					StringUtil.split(layoutTypePortlet.getStateMax())[0];
 
 				PortletURLImpl portletURLImpl = new PortletURLImpl(
-					req, portletId, getPlid(), PortletRequest.ACTION_PHASE);
+					request, portletId, getPlid(), PortletRequest.ACTION_PHASE);
 
 				try {
 					portletURLImpl.setWindowState(WindowState.NORMAL);
@@ -672,8 +672,9 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 
 		String url = PortalUtil.getLayoutURL(this, themeDisplay);
 
-		if (!CookieKeys.hasSessionId(req)) {
-			url = PortalUtil.getURLWithSessionId(url, req.getSession().getId());
+		if (!CookieKeys.hasSessionId(request)) {
+			url = PortalUtil.getURLWithSessionId(
+				url, request.getSession().getId());
 		}
 
 		if (!resetMaxState && !resetMaxState) {

@@ -34,11 +34,11 @@ public interface OpenSearch {
 
 	public boolean isEnabled();
 
-	public String search(HttpServletRequest req, String url)
+	public String search(HttpServletRequest request, String url)
 		throws SearchException;
 
 	public String search(
-			HttpServletRequest req, String keywords, int startPage,
+			HttpServletRequest request, String keywords, int startPage,
 			int itemsPerPage)
 		throws SearchException;
 

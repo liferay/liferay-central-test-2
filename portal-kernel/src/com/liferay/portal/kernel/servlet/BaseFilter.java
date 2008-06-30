@@ -34,6 +34,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * <a href="BaseFilter.java.html"><b><i>View Source</i></b></a>
@@ -43,12 +44,13 @@ import javax.servlet.http.HttpServletRequest;
  */
 public abstract class BaseFilter implements Filter {
 
-	public void init(FilterConfig config) throws ServletException {
+	public void init(FilterConfig config) {
 		_config = config;
 	}
 
 	public void doFilter(
-			ServletRequest req, ServletResponse res, FilterChain chain)
+			ServletRequest servletRequest, ServletResponse servletResponse,
+			FilterChain chain)
 		throws IOException, ServletException {
 
 		Log log = getLog();
@@ -62,11 +64,14 @@ public abstract class BaseFilter implements Filter {
 			}
 		}
 
+		HttpServletRequest request = (HttpServletRequest)servletRequest;
+		HttpServletResponse response = (HttpServletResponse)servletResponse;
+
 		if (isFilterEnabled()) {
-			processFilter(req, res, chain);
+			processFilter(request, response, chain);
 		}
 		else {
-			processFilter(_filterClass, req, res, chain);
+			processFilter(_filterClass, request, response, chain);
 		}
 	}
 
@@ -84,12 +89,12 @@ public abstract class BaseFilter implements Filter {
 	}
 
 	protected abstract void processFilter(
-			ServletRequest req, ServletResponse res, FilterChain chain)
+			HttpServletRequest req, HttpServletResponse res, FilterChain chain)
 		throws IOException, ServletException;
 
 	protected void processFilter(
-			Class<?> filterClass, ServletRequest req, ServletResponse res,
-			FilterChain chain)
+			Class<?> filterClass, HttpServletRequest request,
+			HttpServletResponse response, FilterChain chain)
 		throws IOException, ServletException {
 
 		long startTime = 0;
@@ -101,13 +106,11 @@ public abstract class BaseFilter implements Filter {
 		Log log = getLog();
 
 		if (log.isDebugEnabled()) {
-			HttpServletRequest httpReq = (HttpServletRequest)req;
-
 			startTime = System.currentTimeMillis();
 
 			threadName = Thread.currentThread().getName();
 
-			depther = (String)req.getAttribute(_DEPTHER);
+			depther = (String)request.getAttribute(_DEPTHER);
 
 			if (depther == null) {
 				depther = StringPool.BLANK;
@@ -116,21 +119,21 @@ public abstract class BaseFilter implements Filter {
 				depther += StringPool.EQUAL;
 			}
 
-			req.setAttribute(_DEPTHER, depther);
+			request.setAttribute(_DEPTHER, depther);
 
-			path = httpReq.getRequestURI();
+			path = request.getRequestURI();
 
 			log.debug(
 				"[" + threadName + "]" + depther + "> " +
 					filterClass.getName() + " " + path);
 		}
 
-		chain.doFilter(req, res);
+		chain.doFilter(request, response);
 
 		if (log.isDebugEnabled()) {
 			long endTime = System.currentTimeMillis();
 
-			depther = (String)req.getAttribute(_DEPTHER);
+			depther = (String)request.getAttribute(_DEPTHER);
 
 			log.debug(
 				"[" + threadName + "]" + depther + "< " +
@@ -141,14 +144,14 @@ public abstract class BaseFilter implements Filter {
 				depther = depther.substring(1);
 			}
 
-			req.setAttribute(_DEPTHER, depther);
+			request.setAttribute(_DEPTHER, depther);
 		}
 	}
 
 	private static final String _DEPTHER = "DEPTHER";
 
 	private FilterConfig _config;
-	private Class _filterClass = getClass();
+	private Class<?> _filterClass = getClass();
 	private boolean _filterEnabled = true;
 
 }

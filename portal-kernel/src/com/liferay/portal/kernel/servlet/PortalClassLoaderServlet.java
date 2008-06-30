@@ -69,13 +69,14 @@ public class PortalClassLoaderServlet
 		}
 	}
 
-	public void init(ServletConfig config) throws ServletException {
+	public void init(ServletConfig config) {
 		_config = config;
 
 		PortalInitableUtil.init(this);
 	}
 
-	public void service(HttpServletRequest req, HttpServletResponse res)
+	public void service(
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
 		ClassLoader contextClassLoader =
@@ -85,7 +86,7 @@ public class PortalClassLoaderServlet
 			Thread.currentThread().setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
-			_servlet.service(req, res);
+			_servlet.service(request, response);
 		}
 		finally {
 			Thread.currentThread().setContextClassLoader(contextClassLoader);

@@ -45,24 +45,26 @@ import org.apache.commons.logging.LogFactory;
  */
 public class NtlmAutoLogin implements AutoLogin {
 
-	public String[] login(HttpServletRequest req, HttpServletResponse res) {
+	public String[] login(
+		HttpServletRequest request, HttpServletResponse response) {
+
 		String[] credentials = null;
 
 		try {
-			long companyId = PortalUtil.getCompanyId(req);
+			long companyId = PortalUtil.getCompanyId(request);
 
 			if (!PortalLDAPUtil.isNtlmEnabled(companyId)) {
 				return credentials;
 			}
 
-			String screenName = (String)req.getAttribute(
+			String screenName = (String)request.getAttribute(
 				WebKeys.NTLM_REMOTE_USER);
 
 			if (screenName == null) {
 				return credentials;
 			}
 
-			req.removeAttribute(WebKeys.NTLM_REMOTE_USER);
+			request.removeAttribute(WebKeys.NTLM_REMOTE_USER);
 
 			User user = getUser(companyId, screenName);
 

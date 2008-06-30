@@ -178,15 +178,15 @@ public class NtlmFilter extends NtlmHttpFilter {
 	}
 
 	public NtlmPasswordAuthentication negotiate(
-			HttpServletRequest req, HttpServletResponse res,
+			HttpServletRequest request, HttpServletResponse response,
 			boolean skipAuthentication)
 		throws IOException, ServletException {
 
 		NtlmPasswordAuthentication ntlm = null;
 
-		HttpSession ses = req.getSession(false);
+		HttpSession session = request.getSession(false);
 
-		String authorizationHeader = req.getHeader("Authorization");
+		String authorizationHeader = request.getHeader("Authorization");
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Authorization header " + authorizationHeader);
@@ -207,22 +207,22 @@ public class NtlmFilter extends NtlmHttpFilter {
 
 			byte[] challenge = SmbSession.getChallenge(uniAddress);
 
-			ntlm = NtlmSsp.authenticate(req, res, challenge);
+			ntlm = NtlmSsp.authenticate(request, response, challenge);
 
-			ses.setAttribute("NtlmHttpAuth", ntlm);
+			session.setAttribute("NtlmHttpAuth", ntlm);
 		}
 		else {
-			if (ses != null) {
-				ntlm = (NtlmPasswordAuthentication)ses.getAttribute(
+			if (session != null) {
+				ntlm = (NtlmPasswordAuthentication)session.getAttribute(
 					"NtlmHttpAuth");
 			}
 
 			if (ntlm == null) {
-				res.setHeader("WWW-Authenticate", "NTLM");
-				res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-				res.setContentLength(0);
+				response.setHeader("WWW-Authenticate", "NTLM");
+				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+				response.setContentLength(0);
 
-				res.flushBuffer();
+				response.flushBuffer();
 
 				return null;
 			}

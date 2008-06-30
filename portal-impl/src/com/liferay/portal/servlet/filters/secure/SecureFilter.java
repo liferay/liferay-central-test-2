@@ -48,8 +48,6 @@ import java.util.Set;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -64,7 +62,7 @@ import javax.servlet.http.HttpSession;
  */
 public class SecureFilter extends BasePortalFilter {
 
-	public void init(FilterConfig config) throws ServletException {
+	public void init(FilterConfig config) {
 		super.init(config);
 
 		_basicAuthEnabled = GetterUtil.getBoolean(
@@ -175,15 +173,13 @@ public class SecureFilter extends BasePortalFilter {
 	}
 
 	protected void processFilter(
-			ServletRequest req, ServletResponse res, FilterChain chain)
+			HttpServletRequest request, HttpServletResponse response,
+			FilterChain chain)
 		throws IOException, ServletException {
 
-		HttpServletRequest httpReq = (HttpServletRequest)req;
-		HttpServletResponse httpRes = (HttpServletResponse)res;
+		String remoteAddr = request.getRemoteAddr();
 
-		String remoteAddr = httpReq.getRemoteAddr();
-
-		if (isAccessAllowed(httpReq)) {
+		if (isAccessAllowed(request)) {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Access allowed for " + remoteAddr);
 			}
@@ -193,7 +189,7 @@ public class SecureFilter extends BasePortalFilter {
 				_log.error("Access denied for " + remoteAddr);
 			}
 
-			httpRes.sendError(
+			response.sendError(
 				HttpServletResponse.SC_FORBIDDEN,
 				"Access denied for " + remoteAddr);
 
@@ -209,9 +205,9 @@ public class SecureFilter extends BasePortalFilter {
 			}
 		}
 
-		String completeURL = HttpUtil.getCompleteURL(httpReq);
+		String completeURL = HttpUtil.getCompleteURL(request);
 
-		if (_httpsRequired && !httpReq.isSecure()) {
+		if (_httpsRequired && !request.isSecure()) {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Securing " + completeURL);
 			}
@@ -219,21 +215,21 @@ public class SecureFilter extends BasePortalFilter {
 			StringBuilder redirectURL = new StringBuilder();
 
 			redirectURL.append(Http.HTTPS_WITH_SLASH);
-			redirectURL.append(httpReq.getServerName());
-			redirectURL.append(httpReq.getServletPath());
+			redirectURL.append(request.getServerName());
+			redirectURL.append(request.getServletPath());
 
-			String queryString = httpReq.getQueryString();
+			String queryString = request.getQueryString();
 
 			if (Validator.isNotNull(queryString)) {
 				redirectURL.append(StringPool.QUESTION);
-				redirectURL.append(httpReq.getQueryString());
+				redirectURL.append(request.getQueryString());
 			}
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Redirect to " + redirectURL);
 			}
 
-			httpRes.sendRedirect(redirectURL.toString());
+			response.sendRedirect(redirectURL.toString());
 		}
 		else {
 			if (_log.isDebugEnabled()) {
@@ -244,19 +240,19 @@ public class SecureFilter extends BasePortalFilter {
 			// web.xml and JAAS is disabled. Make sure to run this once per
 			// session and wrap the request if necessary.
 
-			HttpSession ses = httpReq.getSession();
+			HttpSession ses = request.getSession();
 
 			long userId = GetterUtil.getLong(
 				(String)ses.getAttribute(_AUTHENTICATED_USER));
 
 			if (_basicAuthEnabled && !PropsValues.PORTAL_JAAS_ENABLE) {
 				if (userId > 0) {
-					req = new ProtectedServletRequest(
-						httpReq, String.valueOf(userId));
+					request = new ProtectedServletRequest(
+						request, String.valueOf(userId));
 				}
 				else {
 					try {
-						userId = getBasicAuthUserId(httpReq);
+						userId = getBasicAuthUserId(request);
 					}
 					catch (Exception e) {
 						_log.error(e);
@@ -265,22 +261,22 @@ public class SecureFilter extends BasePortalFilter {
 					if (userId > 0) {
 						String userIdString = String.valueOf(userId);
 
-						req = new ProtectedServletRequest(
-							httpReq, userIdString);
+						request = new ProtectedServletRequest(
+							request, userIdString);
 
 						ses.setAttribute(_AUTHENTICATED_USER, userIdString);
 					}
 					else {
-						httpRes.setHeader(
+						response.setHeader(
 							HttpHeaders.WWW_AUTHENTICATE, _PORTAL_REALM);
-						httpRes.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+						response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
 						return;
 					}
 				}
 			}
 
-			processFilter(SecureFilter.class, req, res, chain);
+			processFilter(SecureFilter.class, request, response, chain);
 		}
 	}
 

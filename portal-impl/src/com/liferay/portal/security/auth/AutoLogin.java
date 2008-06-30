@@ -39,7 +39,8 @@ public interface AutoLogin {
 	 */
 	public static final String AUTO_LOGIN_REDIRECT = "AUTO_LOGIN_REDIRECT";
 
-	public String[] login(HttpServletRequest req, HttpServletResponse res)
+	public String[] login(
+			HttpServletRequest request, HttpServletResponse response)
 		throws AutoLoginException;
 
 }

@@ -62,13 +62,14 @@ import org.apache.commons.logging.LogFactory;
  */
 public class TunnelServlet extends HttpServlet {
 
-	public void doPost(HttpServletRequest req, HttpServletResponse res)
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
 		throws IOException {
 
 		PermissionCheckerImpl permissionChecker = null;
 
 		try {
-			ObjectInputStream ois = new ObjectInputStream(req.getInputStream());
+			ObjectInputStream ois = new ObjectInputStream(
+				request.getInputStream());
 
 			Object returnObj = null;
 
@@ -80,7 +81,7 @@ public class TunnelServlet extends HttpServlet {
 				HttpPrincipal httpPrincipal = ovp.getKey();
 				MethodWrapper methodWrapper = ovp.getValue();
 
-				long companyId = PortalInstances.getCompanyId(req);
+				long companyId = PortalInstances.getCompanyId(request);
 
 				CompanyThreadLocal.setCompanyId(companyId);
 
@@ -142,7 +143,7 @@ public class TunnelServlet extends HttpServlet {
 
 			if (returnObj != null) {
 				ObjectOutputStream oos =
-					new ObjectOutputStream(res.getOutputStream());
+					new ObjectOutputStream(response.getOutputStream());
 
 				oos.writeObject(returnObj);
 

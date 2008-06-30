@@ -52,16 +52,16 @@ public class SessionParameters {
 
 	// Servlet Request
 
-	public static String get(HttpServletRequest req, String parameter) {
-		return get(req.getSession(), parameter);
+	public static String get(HttpServletRequest request, String parameter) {
+		return get(request.getSession(), parameter);
 	}
 
-	public static String get(HttpSession ses, String parameter) {
+	public static String get(HttpSession session, String parameter) {
 		if (!USE_SESSION_PARAMETERS) {
 			return parameter;
 		}
 
-		Map<String, String> parameters = _getParameters(ses);
+		Map<String, String> parameters = _getParameters(session);
 
 		String newParameter = parameters.get(parameter);
 
@@ -75,16 +75,16 @@ public class SessionParameters {
 		return newParameter;
 	}
 
-	private static Map<String, String> _getParameters(HttpSession ses) {
+	private static Map<String, String> _getParameters(HttpSession session) {
 		Map<String, String> parameters = null;
 
 		try {
-			parameters = (Map<String, String>)ses.getAttribute(KEY);
+			parameters = (Map<String, String>)session.getAttribute(KEY);
 
 			if (parameters == null) {
 				parameters = new HashMap<String, String>();
 
-				ses.setAttribute(KEY, parameters);
+				session.setAttribute(KEY, parameters);
 			}
 		}
 		catch (IllegalStateException ise) {
@@ -96,16 +96,16 @@ public class SessionParameters {
 
 	// Portlet Request
 
-	public static String get(PortletRequest req, String parameter) {
-		return get(req.getPortletSession(), parameter);
+	public static String get(PortletRequest portletRequest, String parameter) {
+		return get(portletRequest.getPortletSession(), parameter);
 	}
 
-	public static String get(PortletSession ses, String parameter) {
+	public static String get(PortletSession portletSession, String parameter) {
 		if (!USE_SESSION_PARAMETERS) {
 			return parameter;
 		}
 
-		Map<String, String> parameters = _getParameters(ses);
+		Map<String, String> parameters = _getParameters(portletSession);
 
 		String newParameter = parameters.get(parameter);
 
@@ -119,16 +119,18 @@ public class SessionParameters {
 		return newParameter;
 	}
 
-	private static Map<String, String> _getParameters(PortletSession ses) {
+	private static Map<String, String> _getParameters(
+		PortletSession portletSession) {
+
 		Map<String, String> parameters = null;
 
 		try {
-			parameters = (Map<String, String>)ses.getAttribute(KEY);
+			parameters = (Map<String, String>)portletSession.getAttribute(KEY);
 
 			if (parameters == null) {
 				parameters = new LinkedHashMap<String, String>();
 
-				ses.setAttribute(KEY, parameters);
+				portletSession.setAttribute(KEY, parameters);
 			}
 		}
 		catch (IllegalStateException ise) {

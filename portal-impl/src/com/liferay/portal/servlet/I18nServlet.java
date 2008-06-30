@@ -49,46 +49,48 @@ import org.apache.commons.logging.LogFactory;
  */
 public class I18nServlet extends HttpServlet {
 
-	public void service(HttpServletRequest req, HttpServletResponse res)
+	public void service(
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
 		try {
-			String[] i18nData = getI18nData(req);
+			String[] i18nData = getI18nData(request);
 
 			if (i18nData == null) {
 				PortalUtil.sendError(
 					HttpServletResponse.SC_NOT_FOUND,
-					new NoSuchLayoutException(), req, res);
+					new NoSuchLayoutException(), request, response);
 			}
 			else {
 				String languageId = i18nData[0];
 				String redirect = i18nData[1];
 
-				req.setAttribute(WebKeys.I18N_LANGUAGE_ID, languageId);
+				request.setAttribute(WebKeys.I18N_LANGUAGE_ID, languageId);
 
 				ServletContext ctx = getServletContext();
 
 				RequestDispatcher rd = ctx.getRequestDispatcher(redirect);
 
-				rd.forward(req, res);
+				rd.forward(request, response);
 			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 
 			PortalUtil.sendError(
-				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, req, res);
+				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, request,
+				response);
 		}
 	}
 
-	protected String[] getI18nData(HttpServletRequest req) {
-		String path = GetterUtil.getString(req.getPathInfo());
+	protected String[] getI18nData(HttpServletRequest request) {
+		String path = GetterUtil.getString(request.getPathInfo());
 
 		if (Validator.isNull(path)) {
 			return null;
 		}
 
-		String languageId = req.getServletPath();
+		String languageId = request.getServletPath();
 
 		int pos = languageId.lastIndexOf(StringPool.SLASH);
 

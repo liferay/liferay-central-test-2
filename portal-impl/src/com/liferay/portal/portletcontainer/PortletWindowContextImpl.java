@@ -102,13 +102,13 @@ import org.apache.commons.logging.LogFactory;
 public class PortletWindowContextImpl implements PortletWindowContext {
 
 	public PortletWindowContextImpl(
-			HttpServletRequest req, Portlet portlet, String lifecycle)
+			HttpServletRequest request, Portlet portlet, String lifecycle)
 		throws PortalException, SystemException {
 
-		_req = req;
+		_request = request;
 		_portlet = portlet;
 		_lifecycle = lifecycle;
-		setUserId(req);
+		setUserId(request);
 	}
 
 	public String encodeURL(String url) {
@@ -121,7 +121,7 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 	}
 
 	public String getAuthenticationType() {
-		return _req.getAuthType();
+		return _request.getAuthType();
 	}
 
 	public String getConsumerID(String portletWindowName) {
@@ -129,7 +129,7 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 	}
 
 	public String getContentType() {
-		if (BrowserSnifferUtil.is_wap(_req)) {
+		if (BrowserSnifferUtil.is_wap(_request)) {
 			return ContentTypes.XHTML_MP;
 		}
 		else {
@@ -141,16 +141,16 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 		return null;
 	}
 
-	public String getDesktopURL(HttpServletRequest req) {
-		StringBuffer requestURL = req.getRequestURL();
+	public String getDesktopURL(HttpServletRequest request) {
+		StringBuffer requestURL = request.getRequestURL();
 
 		return requestURL.toString();
 	}
 
 	public String getDesktopURL(
-		HttpServletRequest req, String query, boolean escape) {
+		HttpServletRequest request, String query, boolean escape) {
 
-		StringBuilder sb = new StringBuilder(getDesktopURL(req));
+		StringBuilder sb = new StringBuilder(getDesktopURL(request));
 
 		if (Validator.isNotNull(query)) {
 			sb.append(StringPool.QUESTION);
@@ -183,7 +183,7 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 	}
 
 	public Locale getLocale() {
-		Locale locale = _req.getLocale();
+		Locale locale = _request.getLocale();
 
 		if (locale == null) {
 			locale = LocaleUtil.getDefault();
@@ -266,7 +266,7 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 		try {
 			PortletPreferencesIds portletPreferencesIds =
 				PortletPreferencesFactoryUtil.getPortletPreferencesIds(
-					_req, _portlet.getPortletId());
+					_request, _portlet.getPortletId());
 
 			PortletPreferences portletPreferences =
 				PortletPreferencesLocalServiceUtil.getPreferences(
@@ -289,11 +289,11 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 	public Object getProperty(String name) {
 		Object value = null;
 
-		if (_req != null) {
-			HttpSession ses = _req.getSession(false);
+		if (_request != null) {
+			HttpSession session = _request.getSession(false);
 
-			if (ses != null) {
-				value = ses.getAttribute(name);
+			if (session != null) {
+				value = session.getAttribute(name);
 			}
 		}
 
@@ -361,13 +361,13 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 
 	public String getUserID() {
 		if (_userId == null) {
-			Principal principal = _req.getUserPrincipal();
+			Principal principal = _request.getUserPrincipal();
 
 			if (principal != null) {
 				_userId = principal.getName();
 			}
 			else {
-				_userId = _req.getParameter("wsrp.userID");
+				_userId = _request.getParameter("wsrp.userID");
 			}
 		}
 
@@ -382,11 +382,11 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 		return Collections.EMPTY_MAP;
 	}
 
-	public void init(HttpServletRequest req) {
-		_req = req;
+	public void init(HttpServletRequest request) {
+		_request = request;
 	}
 
-	public boolean isAuthless(HttpServletRequest req) {
+	public boolean isAuthless(HttpServletRequest request) {
 		return false;
 	}
 
@@ -395,8 +395,8 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 	}
 
 	public void setProperty(String name, Object value) {
-		if (_req != null) {
-			HttpSession ses = _req.getSession();
+		if (_request != null) {
+			HttpSession ses = _request.getSession();
 
 			ses.setAttribute(name, value);
 		}
@@ -479,7 +479,7 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 
 		List<Portlet> portlets = null;
 
-		Layout layout = (Layout)_req.getAttribute(WebKeys.LAYOUT);
+		Layout layout = (Layout)_request.getAttribute(WebKeys.LAYOUT);
 
 		if (layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 			LayoutTypePortlet layoutTypePortlet =
@@ -496,10 +496,10 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 		return portlets;
 	}
 
-	protected void setUserId(HttpServletRequest req)
+	protected void setUserId(HttpServletRequest request)
 		throws PortalException, SystemException {
 
-		User user = PortalUtil.getUser(req);
+		User user = PortalUtil.getUser(request);
 
 		if (user != null) {
 			_userId = user.getLogin();
@@ -508,7 +508,7 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 
 	private static Log _log = LogFactory.getLog(PortletWindowContextImpl.class);
 
-	private HttpServletRequest _req;
+	private HttpServletRequest _request;
 	private Portlet _portlet;
 	private String _lifecycle;
 	private String _userId;

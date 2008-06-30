@@ -44,35 +44,43 @@ public class PreviewTag extends IncludeTag {
 
 	public static void doTag(
 			String portletName, String queryString, String width,
-			ServletContext ctx, HttpServletRequest req, HttpServletResponse res)
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response)
 		throws IOException, ServletException {
 
-		doTag(_PAGE, portletName, queryString, width, ctx, req, res);
+		doTag(
+			_PAGE, portletName, queryString, width, servletContext, request,
+			response);
 	}
 
 	public static void doTag(
 			String page, String portletName, String queryString, String width,
-			ServletContext ctx, HttpServletRequest req, HttpServletResponse res)
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response)
 		throws IOException, ServletException {
 
-		req.setAttribute("liferay-portlet:preview:portletName", portletName);
-		req.setAttribute("liferay-portlet:preview:queryString", queryString);
-		req.setAttribute("liferay-portlet:preview:width", width);
+		request.setAttribute(
+			"liferay-portlet:preview:portletName", portletName);
+		request.setAttribute(
+			"liferay-portlet:preview:queryString", queryString);
+		request.setAttribute("liferay-portlet:preview:width", width);
 
-		RequestDispatcher rd = ctx.getRequestDispatcher(page);
+		RequestDispatcher rd = servletContext.getRequestDispatcher(page);
 
-		rd.include(req, res);
+		rd.include(request, response);
 	}
 
 	public int doEndTag() throws JspException {
 		try {
-			ServletContext ctx = getServletContext();
-			HttpServletRequest req = getServletRequest();
-			StringServletResponse res = getServletResponse();
+			ServletContext servletContext = getServletContext();
+			HttpServletRequest request = getServletRequest();
+			StringServletResponse response = getServletResponse();
 
-			doTag(_portletName, _queryString, _width, ctx, req, res);
+			doTag(
+				_portletName, _queryString, _width, servletContext, request,
+				response);
 
-			pageContext.getOut().print(res.getString());
+			pageContext.getOut().print(response.getString());
 
 			return EVAL_PAGE;
 		}

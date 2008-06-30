@@ -42,11 +42,11 @@ import javax.servlet.http.HttpServletResponseWrapper;
 public class AbsoluteRedirectsResponse extends HttpServletResponseWrapper {
 
 	public AbsoluteRedirectsResponse(
-		HttpServletRequest req, HttpServletResponse res) {
+		HttpServletRequest request, HttpServletResponse response) {
 
-		super(res);
+		super(response);
 
-		_req = req;
+		_req = request;
 	}
 
 	public void sendRedirect(String redirect) throws IOException {
