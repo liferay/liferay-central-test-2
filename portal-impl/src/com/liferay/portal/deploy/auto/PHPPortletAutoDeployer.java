@@ -82,9 +82,9 @@ public class PHPPortletAutoDeployer extends PortletAutoDeployer {
 		filterMap.put("init_param_value_0", "/index.php");
 		filterMap.put("init_param_name_1", "add-portlet-params");
 		filterMap.put("init_param_value_1", "true");
-		filterMap.put("init_param_name_2", "servletObjectsFactory-name");
+		filterMap.put("init_param_name_2", "servlet-objects-factory");
 		filterMap.put(
-			"init_param_value_2", 
+			"init_param_value_2",
 			"com.liferay.portal.kernel.servlet.PortletServletObjectsFactory");
 
 		copyDependencyXml(

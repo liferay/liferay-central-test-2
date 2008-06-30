@@ -61,22 +61,25 @@ public class PortletServletObjectsFactory implements ServletObjectsFactory {
 		PortletConfig portletConfig, PortletRequest portletRequest) {
 
 		Object servletConfig = portletConfig.getPortletContext().getAttribute(
-				"javax.portlet.portletc.servletConfig");
+			_PORTLET_CONTAINER_SERVLET_CONFIG);
+
 		if (servletConfig == null) {
 			servletConfig = portletRequest.getAttribute(
 				PortletServlet.PORTLET_SERVLET_CONFIG);
 		}
+
 		return (ServletConfig)servletConfig;
 	}
 
 	public HttpServletRequest getServletRequest(PortletRequest portletRequest) {
-
 		Object request = portletRequest.getAttribute(
-				"javax.portlet.portletc.httpServletRequest");
+			_PORTLET_CONTAINER_SERVLET_REQUEST);
+
 		if (request == null) {
 			request = portletRequest.getAttribute(
 				PortletServlet.PORTLET_SERVLET_REQUEST);
 		}
+
 		return (HttpServletRequest)request;
 	}
 
@@ -84,12 +87,23 @@ public class PortletServletObjectsFactory implements ServletObjectsFactory {
 		PortletRequest portletRequest, PortletResponse portletResponse) {
 
 		Object response = portletRequest.getAttribute(
-				"javax.portlet.portletc.httpServletResponse");
+			_PORTLET_CONTAINER_SERVLET_RESPONSE);
+
 		if (response == null) {
 			response = portletRequest.getAttribute(
 				PortletServlet.PORTLET_SERVLET_RESPONSE);
 		}
+
 		return (HttpServletResponse)response;
 	}
+
+	private static final String _PORTLET_CONTAINER_SERVLET_CONFIG =
+		"javax.portlet.portletc.servletConfig";
+
+	private static final String _PORTLET_CONTAINER_SERVLET_REQUEST =
+		"javax.portlet.portletc.httpServletRequest";
+
+	private static final String _PORTLET_CONTAINER_SERVLET_RESPONSE =
+		"javax.portlet.portletc.httpServletResponse";
 
 }

@@ -58,26 +58,31 @@ import org.apache.portals.bridges.common.ScriptPostProcess;
  */
 public class PHPPortlet extends GenericPortlet {
 
-	public static final String PHP_URI_PARAM = "phpURI";
-
 	public void init() throws PortletException {
 		editUri = getInitParameter("edit-uri");
 		helpUri = getInitParameter("help-uri");
 		viewUri = getInitParameter("view-uri");
-		String factoryName = getInitParameter("servletObjectsFactory-name");
+
+		String servletObjectsFactoryName = getInitParameter(
+			"servlet-objects-factory");
+
 		try {
-			Class factoryClass = Class.forName(factoryName);
-			_factory = (ServletObjectsFactory)factoryClass.newInstance();
-		} catch (Exception e) {
+			Class<?> servletObjectsFactoryClass = Class.forName(
+				servletObjectsFactoryName);
+
+			servletObjectsFactory =
+				(ServletObjectsFactory)servletObjectsFactoryClass.newInstance();
+		}
+		catch (Exception e) {
 			throw new PortletException(
-					"Unable to instantiate factory" + factoryName);
+				"Unable to instantiate factory" + servletObjectsFactoryName, e);
 		}
 	}
 
 	public void doDispatch(RenderRequest req, RenderResponse res)
 		throws IOException, PortletException {
 
-		String phpUri = req.getParameter(PHP_URI_PARAM);
+		String phpUri = req.getParameter(_PHP_URI_PARAM);
 
 		if (phpUri != null) {
 			processPHP(phpUri, req, res);
@@ -107,10 +112,10 @@ public class PHPPortlet extends GenericPortlet {
 	}
 
 	public void processAction(ActionRequest req, ActionResponse res) {
-		String phpURI = req.getParameter(PHP_URI_PARAM);
+		String phpURI = req.getParameter(_PHP_URI_PARAM);
 
 		if (phpURI != null) {
-			res.setRenderParameter(PHP_URI_PARAM, phpURI);
+			res.setRenderParameter(_PHP_URI_PARAM, phpURI);
 		}
 	}
 
@@ -151,34 +156,40 @@ public class PHPPortlet extends GenericPortlet {
 	}
 
 	protected void processPHP(
-		String phpURI, RenderRequest req, RenderResponse res) {
+		String phpURI, RenderRequest renderRequest,
+		RenderResponse renderResponse) {
 
 		try {
-			ServletConfig config = (ServletConfig)_factory.getServletConfig(
-				getPortletConfig(), req) ;
+			ServletConfig servletConfig =
+				servletObjectsFactory.getServletConfig(getPortletConfig(), renderRequest);
 
-			initQuercus(config);
+			initQuercus(servletConfig);
 
-			HttpServletRequest httpReq =
-				(HttpServletRequest)_factory.getServletRequest(req);
-			HttpServletResponse httpRes =
-				(HttpServletResponse)_factory.getServletResponse(req, res);
+			HttpServletRequest httpRequest =
+				servletObjectsFactory.getServletRequest(renderRequest);
+			HttpServletResponse httpResponse =
+				servletObjectsFactory.getServletResponse(
+					renderRequest, renderResponse);
 
-			PHPServletRequest phpReq = new PHPServletRequest(
-				httpReq, config, req, res, getPortletConfig(), phpURI);
+			PHPServletRequest phpRequest = new PHPServletRequest(
+				httpRequest, servletConfig, renderRequest, renderResponse,
+				getPortletConfig(), phpURI);
 
-			StringServletResponse phpRes = new StringServletResponse(httpRes);
+			StringServletResponse stringServletResponse =
+				new StringServletResponse(httpResponse);
 
-			quercusServlet.service(phpReq, phpRes);
+			quercusServlet.service(phpRequest, stringServletResponse);
 
-			String result = phpRes.getString();
+			String result = stringServletResponse.getString();
 
-			if (phpRes.getContentType().startsWith("text/")) {
-				result = rewriteURLs(result, res.createRenderURL());
+			if (stringServletResponse.getContentType().startsWith("text/")) {
+				result = rewriteURLs(result, renderResponse.createRenderURL());
 			}
 
-			res.setContentType(phpRes.getContentType());
-			PrintWriter writer = res.getWriter();
+			renderResponse.setContentType(
+				stringServletResponse.getContentType());
+
+			PrintWriter writer = renderResponse.getWriter();
 
 			writer.write(result.toCharArray());
 		}
@@ -191,10 +202,12 @@ public class PHPPortlet extends GenericPortlet {
 		ScriptPostProcess processor = new ScriptPostProcess();
 
 		processor.setInitalPage(new StringBuffer(page));
-		processor.postProcessPage(portletURL, PHP_URI_PARAM);
+		processor.postProcessPage(portletURL, _PHP_URI_PARAM);
 
 		return processor.getFinalizedPage();
 	}
+
+	private static final String _PHP_URI_PARAM = "phpURI";
 
 	private static final String _QUERCUS_SERVLET =
 		"com.caucho.quercus.servlet.QuercusServlet";
@@ -204,7 +217,7 @@ public class PHPPortlet extends GenericPortlet {
 	protected String editUri;
 	protected String helpUri;
 	protected String viewUri;
+	protected ServletObjectsFactory servletObjectsFactory;
 	protected HttpServlet quercusServlet;
-	protected ServletObjectsFactory _factory;
 
 }
