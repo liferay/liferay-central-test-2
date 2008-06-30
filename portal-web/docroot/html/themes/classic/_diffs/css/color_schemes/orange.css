@@ -1,8 +1,8 @@
 /* This CSS sets the default styles for the base components. */
 
-/* ---------- Body ---------- */
+/* ---------- Wrapper ---------- */
 
-body.orange {
+.orange #wrapper {
 	background-image: url(../../images/color_schemes/orange/common/body_bg.png);
 }
 
