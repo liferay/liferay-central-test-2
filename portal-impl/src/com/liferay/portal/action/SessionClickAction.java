@@ -45,25 +45,25 @@ import org.apache.struts.action.ActionMapping;
 public class SessionClickAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		try {
-			Enumeration<String> enu = req.getParameterNames();
+			Enumeration<String> enu = request.getParameterNames();
 
 			while (enu.hasMoreElements()) {
 				String name = enu.nextElement();
 
-				String value = ParamUtil.getString(req, name);
+				String value = ParamUtil.getString(request, name);
 
-				SessionClicks.put(req, name, value);
+				SessionClicks.put(request, name, value);
 			}
 
 			return null;
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, request, response);
 
 			return null;
 		}

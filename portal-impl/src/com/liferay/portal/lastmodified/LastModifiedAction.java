@@ -48,18 +48,18 @@ import org.apache.struts.action.ActionMapping;
 public abstract class LastModifiedAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		Theme theme = themeDisplay.getTheme();
 		ColorScheme colorScheme = themeDisplay.getColorScheme();
 
-		String themeId = ParamUtil.getString(req, "themeId");
-		String colorSchemeId = ParamUtil.getString(req, "colorSchemeId");
+		String themeId = ParamUtil.getString(request, "themeId");
+		String colorSchemeId = ParamUtil.getString(request, "colorSchemeId");
 
 		// The layout id is not always passed to this request. Therefore,
 		// ServicePreAction could set the wrong theme and color scheme. This
@@ -70,7 +70,7 @@ public abstract class LastModifiedAction extends Action {
 			(!theme.getThemeId().equals(themeId)) ||
 			(!colorScheme.getColorSchemeId().equals(colorSchemeId))) {
 
-			boolean wapTheme = BrowserSnifferUtil.is_wap(req);
+			boolean wapTheme = BrowserSnifferUtil.is_wap(request);
 
 			theme = ThemeLocalServiceUtil.getTheme(
 				themeDisplay.getCompanyId(), themeId, wapTheme);
@@ -79,19 +79,19 @@ public abstract class LastModifiedAction extends Action {
 
 			themeDisplay.setLookAndFeel(theme, colorScheme);
 
-			req.setAttribute(WebKeys.THEME, theme);
-			req.setAttribute(WebKeys.COLOR_SCHEME, colorScheme);
+			request.setAttribute(WebKeys.THEME, theme);
+			request.setAttribute(WebKeys.COLOR_SCHEME, colorScheme);
 		}
 
-		res.addHeader(HttpHeaders.CACHE_CONTROL, "max-age=0");
+		response.addHeader(HttpHeaders.CACHE_CONTROL, "max-age=0");
 
-		res.setDateHeader(
+		response.setDateHeader(
 			HttpHeaders.LAST_MODIFIED, System.currentTimeMillis());
 
 		return mapping.findForward("modified.jsp");
 	}
 
-	public abstract String getLastModifiedKey(HttpServletRequest req);
+	public abstract String getLastModifiedKey(HttpServletRequest request);
 
 	public abstract String getLastModifiedValue(String key);
 

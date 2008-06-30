@@ -51,29 +51,30 @@ import org.apache.struts.action.ActionMapping;
 public class RenderPortletAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
-		ServletContext ctx = (ServletContext)req.getAttribute(WebKeys.CTX);
+		ServletContext servletContext = (ServletContext)request.getAttribute(
+			WebKeys.CTX);
 
-		String ajaxId = req.getParameter("ajax_id");
+		String ajaxId = request.getParameter("ajax_id");
 
-		long companyId = PortalUtil.getCompanyId(req);
-		User user = PortalUtil.getUser(req);
-		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
-		String portletId = ParamUtil.getString(req, "p_p_id");
+		long companyId = PortalUtil.getCompanyId(request);
+		User user = PortalUtil.getUser(request);
+		Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
+		String portletId = ParamUtil.getString(request, "p_p_id");
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			companyId, portletId);
 
 		String queryString = null;
-		String columnId = ParamUtil.getString(req, "p_p_col_id");
-		int columnPos = ParamUtil.getInteger(req, "p_p_col_pos");
-		int columnCount = ParamUtil.getInteger(req, "p_p_col_count");
-		boolean staticPortlet = ParamUtil.getBoolean(req, "p_p_static");
+		String columnId = ParamUtil.getString(request, "p_p_col_id");
+		int columnPos = ParamUtil.getInteger(request, "p_p_col_pos");
+		int columnCount = ParamUtil.getInteger(request, "p_p_col_count");
+		boolean staticPortlet = ParamUtil.getBoolean(request, "p_p_static");
 		boolean staticStartPortlet = ParamUtil.getBoolean(
-			req, "p_p_static_start");
+			request, "p_p_static_start");
 
 		if (staticPortlet) {
 			portlet = (Portlet)portlet.clone();
@@ -83,18 +84,18 @@ public class RenderPortletAction extends Action {
 		}
 
 		if (ajaxId != null) {
-			res.setHeader("Ajax-ID", ajaxId);
+			response.setHeader("Ajax-ID", ajaxId);
 		}
 
 		WindowState windowState = WindowStateFactory.getWindowState(
-			ParamUtil.getString(req, "p_p_state"));
+			ParamUtil.getString(request, "p_p_state"));
 
 		PortalUtil.updateWindowState(
-			portletId, user, layout, windowState, req);
+			portletId, user, layout, windowState, request);
 
 		PortalUtil.renderPortlet(
-			null, ctx, req, res, portlet, queryString, columnId,
-			new Integer(columnPos), new Integer(columnCount));
+			null, servletContext, request, response, portlet, queryString,
+			columnId, new Integer(columnPos), new Integer(columnCount));
 
 		return null;
 	}

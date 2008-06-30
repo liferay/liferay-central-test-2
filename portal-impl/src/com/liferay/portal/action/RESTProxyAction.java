@@ -45,16 +45,16 @@ import org.apache.struts.action.ActionMapping;
 public class RESTProxyAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
-		String url = ParamUtil.getString(req, "url");
+		String url = ParamUtil.getString(request, "url");
 
 		if (Validator.isNotNull(url)) {
 			String content = HttpUtil.URLtoString(url, true);
 
-			ServletResponseUtil.write(res, content);
+			ServletResponseUtil.write(response, content);
 		}
 
 		return null;

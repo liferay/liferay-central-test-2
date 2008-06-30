@@ -129,7 +129,7 @@ public class ServicePreAction extends Action {
 		initImportLARFiles();
 	}
 
-	public void run(HttpServletRequest req, HttpServletResponse res)
+	public void run(HttpServletRequest request, HttpServletResponse response)
 		throws ActionException {
 
 		StopWatch stopWatch = null;
@@ -141,7 +141,7 @@ public class ServicePreAction extends Action {
 		}
 
 		try {
-			servicePre(req, res);
+			servicePre(request, response);
 		}
 		catch (Exception e) {
 			throw new ActionException(e);
@@ -406,12 +406,12 @@ public class ServicePreAction extends Action {
 	}
 
 	protected Object[] getDefaultLayout(
-			HttpServletRequest req, User user, boolean signedIn)
+			HttpServletRequest request, User user, boolean signedIn)
 		throws PortalException, SystemException {
 
 		// Check the virtual host
 
-		LayoutSet layoutSet = (LayoutSet)req.getAttribute(
+		LayoutSet layoutSet = (LayoutSet)request.getAttribute(
 			WebKeys.VIRTUAL_HOST_LAYOUT_SET);
 
 		if (layoutSet != null) {
@@ -508,7 +508,7 @@ public class ServicePreAction extends Action {
 	}
 
 	protected Object[] getViewableLayouts(
-			HttpServletRequest req, User user,
+			HttpServletRequest request, User user,
 			PermissionChecker permissionChecker, Layout layout,
 			List<Layout> layouts)
 		throws PortalException, SystemException {
@@ -545,7 +545,8 @@ public class ServicePreAction extends Action {
 		if (accessibleLayouts.size() == 0) {
 			layouts = null;
 
-			SessionErrors.add(req, LayoutPermissionException.class.getName());
+			SessionErrors.add(
+				request, LayoutPermissionException.class.getName());
 		}
 		else {
 			layouts = accessibleLayouts;
@@ -705,7 +706,7 @@ public class ServicePreAction extends Action {
 	}
 
 	protected List<Layout> mergeAdditionalLayouts(
-			HttpServletRequest req, User user,
+			HttpServletRequest request, User user,
 			PermissionChecker permissionChecker, Layout layout,
 			List<Layout> layouts)
 		throws PortalException, SystemException {
@@ -736,14 +737,14 @@ public class ServicePreAction extends Action {
 				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
 			Object[] viewableLayouts = getViewableLayouts(
-				req, user, permissionChecker, layout, guestLayouts);
+				request, user, permissionChecker, layout, guestLayouts);
 
 			guestLayouts = (List<Layout>)viewableLayouts[1];
 
 			layouts.addAll(0, guestLayouts);
 		}
 		else {
-			HttpSession ses = req.getSession();
+			HttpSession ses = request.getSession();
 
 			Long previousGroupId = (Long)ses.getAttribute(
 				WebKeys.LIFERAY_SHARED_VISITED_GROUP_ID_PREVIOUS);
@@ -780,7 +781,7 @@ public class ServicePreAction extends Action {
 						LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
 				Object[] viewableLayouts = getViewableLayouts(
-					req, user, permissionChecker, layout, previousLayouts);
+					request, user, permissionChecker, layout, previousLayouts);
 
 				previousLayouts = (List<Layout>)viewableLayouts[1];
 
@@ -792,15 +793,15 @@ public class ServicePreAction extends Action {
 	}
 
 	protected void rememberVisitedGroupIds(
-		HttpServletRequest req, long currentGroupId) {
+		HttpServletRequest request, long currentGroupId) {
 
-		String requestURI = GetterUtil.getString(req.getRequestURI());
+		String requestURI = GetterUtil.getString(request.getRequestURI());
 
 		if (!requestURI.endsWith(_PATH_PORTAL_LAYOUT)) {
 			return;
 		}
 
-		HttpSession ses = req.getSession();
+		HttpSession ses = request.getSession();
 
 		Long recentGroupId = (Long)ses.getAttribute(
 			WebKeys.LIFERAY_SHARED_VISITED_GROUP_ID_RECENT);
@@ -836,25 +837,26 @@ public class ServicePreAction extends Action {
 		}
 	}
 
-	protected void servicePre(HttpServletRequest req, HttpServletResponse res)
+	protected void servicePre(
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
-		HttpSession ses = req.getSession();
+		HttpSession session = request.getSession();
 
 		// Company
 
-		Company company = PortalUtil.getCompany(req);
+		Company company = PortalUtil.getCompany(request);
 
 		long companyId = company.getCompanyId();
 
 		// CDN host
 
 		String cdnHost = ParamUtil.getString(
-			req, "cdn_host", PortalUtil.getCDNHost());
+			request, "cdn_host", PortalUtil.getCDNHost());
 
 		// Portal URL
 
-		String portalURL = PortalUtil.getPortalURL(req);
+		String portalURL = PortalUtil.getPortalURL(request);
 
 		// Paths
 
@@ -885,7 +887,7 @@ public class ServicePreAction extends Action {
 
 		// User
 
-		User user = PortalUtil.getUser(req);
+		User user = PortalUtil.getUser(request);
 
 		boolean signedIn = false;
 
@@ -898,7 +900,7 @@ public class ServicePreAction extends Action {
 
 		User realUser = user;
 
-		Long realUserId = (Long)ses.getAttribute(WebKeys.USER_ID);
+		Long realUserId = (Long)session.getAttribute(WebKeys.USER_ID);
 
 		if (realUserId != null) {
 			if (user.getUserId() != realUserId.longValue()) {
@@ -907,7 +909,7 @@ public class ServicePreAction extends Action {
 			}
 		}
 
-		String doAsUserId = ParamUtil.getString(req, "doAsUserId");
+		String doAsUserId = ParamUtil.getString(request, "doAsUserId");
 
 		// Permission checker
 
@@ -918,10 +920,10 @@ public class ServicePreAction extends Action {
 
 		// Locale
 
-		String i18nLanguageId = (String)req.getAttribute(
+		String i18nLanguageId = (String)request.getAttribute(
 			WebKeys.I18N_LANGUAGE_ID);
 
-		Locale locale = (Locale)ses.getAttribute(Globals.LOCALE_KEY);
+		Locale locale = (Locale)session.getAttribute(Globals.LOCALE_KEY);
 
 		if (Validator.isNotNull(i18nLanguageId)) {
 			locale = LocaleUtil.fromLanguageId(i18nLanguageId);
@@ -935,7 +937,7 @@ public class ServicePreAction extends Action {
 				// User previously set their preferred language
 
 				String languageId = CookieKeys.getCookie(
-					req, CookieKeys.GUEST_LANGUAGE_ID);
+					request, CookieKeys.GUEST_LANGUAGE_ID);
 
 				if (Validator.isNotNull(languageId)) {
 					locale = LocaleUtil.fromLanguageId(languageId);
@@ -944,7 +946,7 @@ public class ServicePreAction extends Action {
 				// Get locale from the request
 
 				if ((locale == null) && PropsValues.LOCALE_DEFAULT_REQUEST) {
-					locale = req.getLocale();
+					locale = request.getLocale();
 				}
 
 				// Get locale from the default user
@@ -968,9 +970,9 @@ public class ServicePreAction extends Action {
 				}
 			}
 
-			ses.setAttribute(Globals.LOCALE_KEY, locale);
+			session.setAttribute(Globals.LOCALE_KEY, locale);
 
-			LanguageUtil.updateCookie(res, locale);
+			LanguageUtil.updateCookie(response, locale);
 		}
 
 		// Cookie support
@@ -979,10 +981,10 @@ public class ServicePreAction extends Action {
 
 			// LEP-4069
 
-			CookieKeys.validateSupportCookie(req);
+			CookieKeys.validateSupportCookie(request);
 		}
 		catch (Exception e) {
-			CookieKeys.addSupportCookie(res);
+			CookieKeys.addSupportCookie(response);
 		}
 
 		// Time zone
@@ -1014,15 +1016,16 @@ public class ServicePreAction extends Action {
 		Layout layout = null;
 		List<Layout> layouts = null;
 
-		long plid = ParamUtil.getLong(req, "p_l_id");
+		long plid = ParamUtil.getLong(request, "p_l_id");
 
 		if (plid > 0) {
 			layout = LayoutLocalServiceUtil.getLayout(plid);
 		}
 		else {
-			long groupId = ParamUtil.getLong(req, "groupId");
-			boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
-			long layoutId = ParamUtil.getLong(req, "layoutId");
+			long groupId = ParamUtil.getLong(request, "groupId");
+			boolean privateLayout = ParamUtil.getBoolean(
+				request, "privateLayout");
+			long layoutId = ParamUtil.getLong(request, "layoutId");
 
 			if ((groupId > 0) && layoutId > 0) {
 				layout = LayoutLocalServiceUtil.getLayout(
@@ -1033,7 +1036,7 @@ public class ServicePreAction extends Action {
 		if (layout != null) {
 			try {
 				if (!signedIn && PropsValues.AUTH_FORWARD_BY_REDIRECT) {
-					req.setAttribute(WebKeys.REQUESTED_LAYOUT, layout);
+					request.setAttribute(WebKeys.REQUESTED_LAYOUT, layout);
 				}
 
 				boolean isViewableCommunity = isViewableCommunity(
@@ -1071,16 +1074,16 @@ public class ServicePreAction extends Action {
 		}
 
 		if (layout == null) {
-			Object[] defaultLayout = getDefaultLayout(req, user, signedIn);
+			Object[] defaultLayout = getDefaultLayout(request, user, signedIn);
 
 			layout = (Layout)defaultLayout[0];
 			layouts = (List<Layout>)defaultLayout[1];
 
-			req.setAttribute(WebKeys.LAYOUT_DEFAULT, Boolean.TRUE);
+			request.setAttribute(WebKeys.LAYOUT_DEFAULT, Boolean.TRUE);
 		}
 
 		Object[] viewableLayouts = getViewableLayouts(
-			req, user, permissionChecker, layout, layouts);
+			request, user, permissionChecker, layout, layouts);
 
 		String layoutSetLogo = null;
 
@@ -1091,10 +1094,10 @@ public class ServicePreAction extends Action {
 
 		long portletGroupId = PortalUtil.getPortletGroupId(layout);
 
-		rememberVisitedGroupIds(req, portletGroupId);
+		rememberVisitedGroupIds(request, portletGroupId);
 
 		layouts = mergeAdditionalLayouts(
-			req, user, permissionChecker, layout, layouts);
+			request, user, permissionChecker, layout, layouts);
 
 		if (layout != null) {
 			if (company.isCommunityLogo()) {
@@ -1128,7 +1131,7 @@ public class ServicePreAction extends Action {
 			LayoutClone layoutClone = LayoutCloneFactory.getInstance();
 
 			if (layoutClone != null) {
-				String typeSettings = layoutClone.get(req, plid);
+				String typeSettings = layoutClone.get(request, plid);
 
 				if (typeSettings != null) {
 					Properties props = new SafeProperties();
@@ -1169,8 +1172,8 @@ public class ServicePreAction extends Action {
 				}
 			}
 
-			req.setAttribute(WebKeys.LAYOUT, layout);
-			req.setAttribute(WebKeys.LAYOUTS, layouts);
+			request.setAttribute(WebKeys.LAYOUT, layout);
+			request.setAttribute(WebKeys.LAYOUTS, layouts);
 
 			if (layout.isPrivateLayout()) {
 				permissionChecker.setCheckGuest(false);
@@ -1182,7 +1185,7 @@ public class ServicePreAction extends Action {
 		Theme theme = null;
 		ColorScheme colorScheme = null;
 
-		boolean wapTheme = BrowserSnifferUtil.is_wap(req);
+		boolean wapTheme = BrowserSnifferUtil.is_wap(request);
 
 		if (layout != null) {
 			if (wapTheme) {
@@ -1214,11 +1217,11 @@ public class ServicePreAction extends Action {
 				companyId, theme.getThemeId(), colorSchemeId, wapTheme);
 		}
 
-		req.setAttribute(WebKeys.THEME, theme);
-		req.setAttribute(WebKeys.COLOR_SCHEME, colorScheme);
+		request.setAttribute(WebKeys.THEME, theme);
+		request.setAttribute(WebKeys.COLOR_SCHEME, colorScheme);
 
 		boolean themeCssFastLoad = ParamUtil.getBoolean(
-			req, "css_fast_load", PropsValues.THEME_CSS_FAST_LOAD);
+			request, "css_fast_load", PropsValues.THEME_CSS_FAST_LOAD);
 
 		boolean themeJsBarebone = PropsValues.JAVASCRIPT_BAREBONE_ENABLED;
 
@@ -1229,16 +1232,16 @@ public class ServicePreAction extends Action {
 		}
 
 		boolean themeJsFastLoad = ParamUtil.getBoolean(
-			req, "js_fast_load", PropsValues.JAVASCRIPT_FAST_LOAD);
+			request, "js_fast_load", PropsValues.JAVASCRIPT_FAST_LOAD);
 
-		String lifecycle = ParamUtil.getString(req, "p_p_lifecycle");
+		String lifecycle = ParamUtil.getString(request, "p_p_lifecycle");
 
-		String facebookCanvasPageURL = (String)req.getAttribute(
+		String facebookCanvasPageURL = (String)request.getAttribute(
 			WebKeys.FACEBOOK_CANVAS_PAGE_URL);
 
 		boolean widget = false;
 
-		Boolean widgetObj = (Boolean)req.getAttribute(WebKeys.WIDGET);
+		Boolean widgetObj = (Boolean)request.getAttribute(WebKeys.WIDGET);
 
 		if (widgetObj != null) {
 			widget = widgetObj.booleanValue();
@@ -1282,16 +1285,16 @@ public class ServicePreAction extends Action {
 		themeDisplay.setThemeCssFastLoad(themeCssFastLoad);
 		themeDisplay.setThemeJsBarebone(themeJsBarebone);
 		themeDisplay.setThemeJsFastLoad(themeJsFastLoad);
-		themeDisplay.setServerName(req.getServerName());
-		themeDisplay.setServerPort(req.getServerPort());
-		themeDisplay.setSecure(req.isSecure());
+		themeDisplay.setServerName(request.getServerName());
+		themeDisplay.setServerPort(request.getServerPort());
+		themeDisplay.setSecure(request.isSecure());
 		themeDisplay.setLifecycle(lifecycle);
 		themeDisplay.setLifecycleAction(lifecycle.equals("1"));
 		themeDisplay.setLifecycleRender(lifecycle.equals("0"));
 		themeDisplay.setLifecycleResource(lifecycle.equals("2"));
-		themeDisplay.setStateExclusive(LiferayWindowState.isExclusive(req));
-		themeDisplay.setStateMaximized(LiferayWindowState.isMaximized(req));
-		themeDisplay.setStatePopUp(LiferayWindowState.isPopUp(req));
+		themeDisplay.setStateExclusive(LiferayWindowState.isExclusive(request));
+		themeDisplay.setStateMaximized(LiferayWindowState.isMaximized(request));
+		themeDisplay.setStatePopUp(LiferayWindowState.isPopUp(request));
 		themeDisplay.setPathApplet(contextPath + "/applets");
 		themeDisplay.setPathCms(contextPath + "/cms");
 		themeDisplay.setPathContext(contextPath);
@@ -1317,7 +1320,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setShowStagingIcon(false);
 
 		PortletURL createAccountURL = new PortletURLImpl(
-			req, PortletKeys.MY_ACCOUNT, plid, PortletRequest.ACTION_PHASE);
+			request, PortletKeys.MY_ACCOUNT, plid, PortletRequest.ACTION_PHASE);
 
 		createAccountURL.setWindowState(WindowState.MAXIMIZED);
 		createAccountURL.setPortletMode(PortletMode.VIEW);
@@ -1328,7 +1331,7 @@ public class ServicePreAction extends Action {
 
 		themeDisplay.setURLCreateAccount(createAccountURL);
 
-		String currentURL = PortalUtil.getCurrentURL(req);
+		String currentURL = PortalUtil.getCurrentURL(request);
 
 		themeDisplay.setURLCurrent(currentURL);
 
@@ -1351,7 +1354,7 @@ public class ServicePreAction extends Action {
 						permissionChecker, layout, ActionKeys.UPDATE);
 
 				if (hasUpdateLayoutPermission) {
-					if (!LiferayWindowState.isMaximized(req)) {
+					if (!LiferayWindowState.isMaximized(request)) {
 						themeDisplay.setShowAddContentIcon(true);
 					}
 
@@ -1385,7 +1388,7 @@ public class ServicePreAction extends Action {
 				themeDisplay.setShowPageSettingsIcon(true);
 
 				PortletURL pageSettingsURL = new PortletURLImpl(
-					req, PortletKeys.LAYOUT_MANAGEMENT, plid,
+					request, PortletKeys.LAYOUT_MANAGEMENT, plid,
 					PortletRequest.RENDER_PHASE);
 
 				pageSettingsURL.setWindowState(WindowState.MAXIMIZED);
@@ -1409,7 +1412,7 @@ public class ServicePreAction extends Action {
 				themeDisplay.setURLPageSettings(pageSettingsURL);
 
 				PortletURL publishToLiveURL = new PortletURLImpl(
-					req, PortletKeys.LAYOUT_MANAGEMENT, plid,
+					request, PortletKeys.LAYOUT_MANAGEMENT, plid,
 					PortletRequest.RENDER_PHASE);
 
 				publishToLiveURL.setWindowState(LiferayWindowState.EXCLUSIVE);
@@ -1460,10 +1463,11 @@ public class ServicePreAction extends Action {
 				PortletKeys.MY_ACCOUNT);
 
 			String myAccountRedirect = ParamUtil.getString(
-				req, myAccountNamespace + "backURL", currentURL);
+				request, myAccountNamespace + "backURL", currentURL);
 
 			PortletURL myAccountURL = new PortletURLImpl(
-				req, PortletKeys.MY_ACCOUNT, plid, PortletRequest.RENDER_PHASE);
+				request, PortletKeys.MY_ACCOUNT, plid,
+				PortletRequest.RENDER_PHASE);
 
 			myAccountURL.setWindowState(WindowState.MAXIMIZED);
 			myAccountURL.setPortletMode(PortletMode.VIEW);
@@ -1497,7 +1501,8 @@ public class ServicePreAction extends Action {
 		themeDisplay.setURLSignOut(mainPath + "/portal/logout");
 
 		PortletURL updateManagerURL = new PortletURLImpl(
-			req, PortletKeys.UPDATE_MANAGER, plid, PortletRequest.RENDER_PHASE);
+			request, PortletKeys.UPDATE_MANAGER, plid,
+			PortletRequest.RENDER_PHASE);
 
 		updateManagerURL.setWindowState(WindowState.MAXIMIZED);
 		updateManagerURL.setPortletMode(PortletMode.VIEW);
@@ -1506,7 +1511,7 @@ public class ServicePreAction extends Action {
 
 		themeDisplay.setURLUpdateManager(updateManagerURL);
 
-		req.setAttribute(WebKeys.THEME_DISPLAY, themeDisplay);
+		request.setAttribute(WebKeys.THEME_DISPLAY, themeDisplay);
 
 		// Parallel render
 
@@ -1518,10 +1523,10 @@ public class ServicePreAction extends Action {
 			}
 		}
 
-		Boolean parallelRenderEnableObj = Boolean.valueOf(
-			ParamUtil.getBoolean(req, "p_p_parallel", parallelRenderEnable));
+		Boolean parallelRenderEnableObj = Boolean.valueOf(ParamUtil.getBoolean(
+			request, "p_p_parallel", parallelRenderEnable));
 
-		req.setAttribute(
+		request.setAttribute(
 			WebKeys.PORTLET_PARALLEL_RENDER, parallelRenderEnableObj);
 	}
 

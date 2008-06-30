@@ -39,13 +39,13 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LogSessionIdAction extends Action {
 
-	public void run(HttpServletRequest req, HttpServletResponse res) {
-		HttpSession ses = req.getSession();
+	public void run(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Session id " + ses.getId() + " is " +
-					(!ses.isNew() ? "not " : "") + "new");
+				"Session id " + session.getId() + " is " +
+					(!session.isNew() ? "not " : "") + "new");
 		}
 	}
 

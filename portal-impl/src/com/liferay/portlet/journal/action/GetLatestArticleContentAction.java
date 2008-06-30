@@ -49,15 +49,15 @@ import org.apache.struts.action.ActionMapping;
 public class GetLatestArticleContentAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		try {
-			long groupId = ParamUtil.getLong(req, "groupId");
-			String articleId = ParamUtil.getString(req, "articleId");
+			long groupId = ParamUtil.getLong(request, "groupId");
+			String articleId = ParamUtil.getString(request, "articleId");
 
-			String languageId = LanguageUtil.getLanguageId(req);
+			String languageId = LanguageUtil.getLanguageId(request);
 
 			JournalArticle article =
 				JournalArticleLocalServiceUtil.getLatestArticle(
@@ -67,12 +67,12 @@ public class GetLatestArticleContentAction extends Action {
 			byte[] bytes = article.getContentByLocale(languageId).getBytes();
 
 			ServletResponseUtil.sendFile(
-				res, fileName, bytes, ContentTypes.TEXT_XML_UTF8);
+				response, fileName, bytes, ContentTypes.TEXT_XML_UTF8);
 
 			return null;
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, request, response);
 
 			return null;
 		}

@@ -23,7 +23,6 @@
 package com.liferay.portal.events;
 
 import com.liferay.portal.kernel.events.Action;
-import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
@@ -45,9 +44,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ServicePostAction extends Action {
 
-	public void run(HttpServletRequest req, HttpServletResponse res)
-		throws ActionException {
-
+	public void run(HttpServletRequest request, HttpServletResponse response) {
 		try {
 
 			// Make sure this is called only once per full request, ignore
@@ -69,8 +66,8 @@ public class ServicePostAction extends Action {
 
 			// Clean up the theme display
 
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 			ThemeDisplayFactory.recycle(themeDisplay);
 		}
@@ -78,7 +75,7 @@ public class ServicePostAction extends Action {
 			_log.error(e);
 		}
 
-		req.removeAttribute(WebKeys.THEME_DISPLAY);
+		request.removeAttribute(WebKeys.THEME_DISPLAY);
 
 		try {
 

@@ -45,25 +45,26 @@ import org.apache.struts.action.ActionMapping;
 public class CaptchaPortalAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		try {
-			HttpSession ses = req.getSession();
+			HttpSession session = request.getSession();
 
 			CaptchaProducer captchaProducer = CaptchaUtil.getCaptchaProducer();
 
 			String captchaText = captchaProducer.createText();
 
-			ses.setAttribute(WebKeys.CAPTCHA_TEXT, captchaText);
+			session.setAttribute(WebKeys.CAPTCHA_TEXT, captchaText);
 
-			captchaProducer.createImage(res.getOutputStream(), captchaText);
+			captchaProducer.createImage(
+				response.getOutputStream(), captchaText);
 
 			return null;
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, request, response);
 
 			return null;
 		}

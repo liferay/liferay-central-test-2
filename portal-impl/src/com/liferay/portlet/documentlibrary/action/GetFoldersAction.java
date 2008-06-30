@@ -52,12 +52,12 @@ import org.json.JSONObject;
 public class GetFoldersAction extends JSONAction {
 
 	public String getJSON(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
-		long groupId = ParamUtil.getLong(req, "groupId");
-		long parentFolderId = ParamUtil.getLong(req, "folderId");
+		long groupId = ParamUtil.getLong(request, "groupId");
+		long parentFolderId = ParamUtil.getLong(request, "folderId");
 
 		List<DLFolder> folders = DLFolderLocalServiceUtil.getFolders(
 			groupId, parentFolderId);

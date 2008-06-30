@@ -66,22 +66,22 @@ import org.dom4j.io.SAXReader;
 public class GetArticleAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		try {
-			long groupId = ParamUtil.getLong(req, "groupId");
-			String articleId =  ParamUtil.getString(req, "articleId");
+			long groupId = ParamUtil.getLong(request, "groupId");
+			String articleId =  ParamUtil.getString(request, "articleId");
 
-			String languageId = LanguageUtil.getLanguageId(req);
+			String languageId = LanguageUtil.getLanguageId(request);
 
 			JournalArticle article =
 				JournalArticleLocalServiceUtil.getLatestArticle(
 					groupId, articleId, Boolean.TRUE);
 
 			ThemeDisplay themeDisplay =
-				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+				(ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
 
 			Map<String, String> tokens = JournalUtil.getTokens(
 				groupId, themeDisplay);
@@ -113,12 +113,13 @@ public class GetArticleAction extends Action {
 			String fileName = null;
 			byte[] bytes = xml.getBytes();
 
-			ServletResponseUtil.sendFile(res, fileName, bytes, contentType);
+			ServletResponseUtil.sendFile(
+				response, fileName, bytes, contentType);
 
 			return null;
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, request, response);
 
 			return null;
 		}

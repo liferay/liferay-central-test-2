@@ -59,8 +59,8 @@ import org.apache.struts.action.ActionMapping;
 public class PayPalNotificationAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		String invoice = null;
@@ -72,12 +72,12 @@ public class PayPalNotificationAction extends Action {
 
 			String query = "cmd=_notify-validate";
 
-			Enumeration<String> enu = req.getParameterNames();
+			Enumeration<String> enu = request.getParameterNames();
 
 			while (enu.hasMoreElements()) {
 				String name = enu.nextElement();
 
-				String value = req.getParameter(name);
+				String value = request.getParameter(name);
 
 				query = query + "&" + name + "=" + HttpUtil.encodeURL(value);
 			}
@@ -107,14 +107,16 @@ public class PayPalNotificationAction extends Action {
 
 			br.close();
 
-			String itemName = ParamUtil.getString(req, "item_name");
-			String itemNumber = ParamUtil.getString(req, "item_number");
-			invoice = ParamUtil.getString(req, "invoice");
-			String txnId = ParamUtil.getString(req, "txn_id");
-			String paymentStatus = ParamUtil.getString(req, "payment_status");
-			double paymentGross = ParamUtil.getDouble(req, "mc_gross");
-			String receiverEmail = ParamUtil.getString(req, "receiver_email");
-			String payerEmail = ParamUtil.getString(req, "payer_email");
+			String itemName = ParamUtil.getString(request, "item_name");
+			String itemNumber = ParamUtil.getString(request, "item_number");
+			invoice = ParamUtil.getString(request, "invoice");
+			String txnId = ParamUtil.getString(request, "txn_id");
+			String paymentStatus = ParamUtil.getString(
+				request, "payment_status");
+			double paymentGross = ParamUtil.getDouble(request, "mc_gross");
+			String receiverEmail = ParamUtil.getString(
+				request, "receiver_email");
+			String payerEmail = ParamUtil.getString(request, "payer_email");
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Receiving response from PayPal");
@@ -128,7 +130,7 @@ public class PayPalNotificationAction extends Action {
 				_log.debug("Payer email " + payerEmail);
 			}
 
-			if (payPalStatus.equals("VERIFIED") && validate(req)) {
+			if (payPalStatus.equals("VERIFIED") && validate(request)) {
 				ShoppingOrderLocalServiceUtil.completeOrder(
 					invoice, txnId, paymentStatus, paymentGross, receiverEmail,
 					payerEmail, true);
@@ -139,17 +141,17 @@ public class PayPalNotificationAction extends Action {
 			return null;
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, request, response);
 
 			return null;
 		}
 	}
 
-	protected boolean validate(HttpServletRequest req) throws Exception {
+	protected boolean validate(HttpServletRequest request) throws Exception {
 
 		// Invoice
 
-		String ppInvoice = ParamUtil.getString(req, "invoice");
+		String ppInvoice = ParamUtil.getString(request, "invoice");
 
 		ShoppingOrder order = ShoppingOrderLocalServiceUtil.getOrder(
 			ppInvoice);
@@ -160,7 +162,7 @@ public class PayPalNotificationAction extends Action {
 		// Receiver email address
 
 		String ppReceiverEmail = ParamUtil.getString(
-			req, "receiver_email");
+			request, "receiver_email");
 
 		String payPalEmailAddress = shoppingPrefs.getPayPalEmailAddress();
 
@@ -170,7 +172,7 @@ public class PayPalNotificationAction extends Action {
 
 		// Payment gross
 
-		double ppGross = ParamUtil.getDouble(req, "mc_gross");
+		double ppGross = ParamUtil.getDouble(request, "mc_gross");
 
 		double orderTotal = ShoppingUtil.calculateTotal(order);
 
@@ -180,7 +182,7 @@ public class PayPalNotificationAction extends Action {
 
 		// Payment currency
 
-		String ppCurrency = ParamUtil.getString(req, "mc_currency");
+		String ppCurrency = ParamUtil.getString(request, "mc_currency");
 
 		String currencyId = shoppingPrefs.getCurrencyId();
 
@@ -190,7 +192,7 @@ public class PayPalNotificationAction extends Action {
 
 		// Transaction ID
 
-		String ppTxnId = ParamUtil.getString(req, "txn_id");
+		String ppTxnId = ParamUtil.getString(request, "txn_id");
 
 		try {
 			ShoppingOrderLocalServiceUtil.getPayPalTxnIdOrder(ppTxnId);

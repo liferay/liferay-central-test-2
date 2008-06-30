@@ -50,40 +50,41 @@ import org.apache.struts.action.ActionMapping;
 public class RSSAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		try {
 			ServletResponseUtil.sendFile(
-				res, null, getRSS(req), ContentTypes.TEXT_XML_UTF8);
+				response, null, getRSS(request), ContentTypes.TEXT_XML_UTF8);
 
 			return null;
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, request, response);
 
 			return null;
 		}
 	}
 
-	protected byte[] getRSS(HttpServletRequest req) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+	protected byte[] getRSS(HttpServletRequest request) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String plid = ParamUtil.getString(req, "p_l_id");
-		long companyId = ParamUtil.getLong(req, "companyId");
-		long groupId = ParamUtil.getLong(req, "groupId");
-		long userId = ParamUtil.getLong(req, "userId");
-		long categoryId = ParamUtil.getLong(req, "categoryId");
-		long threadId = ParamUtil.getLong(req, "threadId");
+		String plid = ParamUtil.getString(request, "p_l_id");
+		long companyId = ParamUtil.getLong(request, "companyId");
+		long groupId = ParamUtil.getLong(request, "groupId");
+		long userId = ParamUtil.getLong(request, "userId");
+		long categoryId = ParamUtil.getLong(request, "categoryId");
+		long threadId = ParamUtil.getLong(request, "threadId");
 		int max = ParamUtil.getInteger(
-			req, "max", SearchContainer.DEFAULT_DELTA);
-		String type = ParamUtil.getString(req, "type", RSSUtil.DEFAULT_TYPE);
+			request, "max", SearchContainer.DEFAULT_DELTA);
+		String type = ParamUtil.getString(
+			request, "type", RSSUtil.DEFAULT_TYPE);
 		double version = ParamUtil.getDouble(
-			req, "version", RSSUtil.DEFAULT_VERSION);
+			request, "version", RSSUtil.DEFAULT_VERSION);
 		String displayStyle = ParamUtil.getString(
-			req, "displayStyle", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
+			request, "displayStyle", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
 
 		String entryURL =
 			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +

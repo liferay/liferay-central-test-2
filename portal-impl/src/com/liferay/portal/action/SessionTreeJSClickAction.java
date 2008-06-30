@@ -45,40 +45,40 @@ import org.apache.struts.action.ActionMapping;
 public class SessionTreeJSClickAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		try {
-			String cmd = ParamUtil.getString(req, Constants.CMD);
+			String cmd = ParamUtil.getString(request, Constants.CMD);
 
-			String treeId = ParamUtil.getString(req, "treeId");
+			String treeId = ParamUtil.getString(request, "treeId");
 
 			if (cmd.equals("expand")) {
 				String[] nodeIds = StringUtil.split(
-					ParamUtil.getString(req, "nodeIds"));
+					ParamUtil.getString(request, "nodeIds"));
 
-				SessionTreeJSClicks.openNodes(req, treeId, nodeIds);
+				SessionTreeJSClicks.openNodes(request, treeId, nodeIds);
 			}
 			else if (cmd.equals("collapse")) {
-				SessionTreeJSClicks.closeNodes(req, treeId);
+				SessionTreeJSClicks.closeNodes(request, treeId);
 			}
 			else {
-				String nodeId = ParamUtil.getString(req, "nodeId");
-				boolean openNode = ParamUtil.getBoolean(req, "openNode");
+				String nodeId = ParamUtil.getString(request, "nodeId");
+				boolean openNode = ParamUtil.getBoolean(request, "openNode");
 
 				if (openNode) {
-					SessionTreeJSClicks.openNode(req, treeId, nodeId);
+					SessionTreeJSClicks.openNode(request, treeId, nodeId);
 				}
 				else {
-					SessionTreeJSClicks.closeNode(req, treeId, nodeId);
+					SessionTreeJSClicks.closeNode(request, treeId, nodeId);
 				}
 			}
 
 			return null;
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, request, response);
 
 			return null;
 		}

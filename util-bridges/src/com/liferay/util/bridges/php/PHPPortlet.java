@@ -161,33 +161,33 @@ public class PHPPortlet extends GenericPortlet {
 
 		try {
 			ServletConfig servletConfig =
-				servletObjectsFactory.getServletConfig(getPortletConfig(), renderRequest);
+				servletObjectsFactory.getServletConfig(
+					getPortletConfig(), renderRequest);
 
 			initQuercus(servletConfig);
 
-			HttpServletRequest httpRequest =
+			HttpServletRequest request =
 				servletObjectsFactory.getServletRequest(renderRequest);
-			HttpServletResponse httpResponse =
+			HttpServletResponse response =
 				servletObjectsFactory.getServletResponse(
 					renderRequest, renderResponse);
 
 			PHPServletRequest phpRequest = new PHPServletRequest(
-				httpRequest, servletConfig, renderRequest, renderResponse,
+				request, servletConfig, renderRequest, renderResponse,
 				getPortletConfig(), phpURI);
 
-			StringServletResponse stringServletResponse =
-				new StringServletResponse(httpResponse);
+			StringServletResponse stringResponse = new StringServletResponse(
+				response);
 
-			quercusServlet.service(phpRequest, stringServletResponse);
+			quercusServlet.service(phpRequest, stringResponse);
 
-			String result = stringServletResponse.getString();
+			String result = stringResponse.getString();
 
-			if (stringServletResponse.getContentType().startsWith("text/")) {
+			if (stringResponse.getContentType().startsWith("text/")) {
 				result = rewriteURLs(result, renderResponse.createRenderURL());
 			}
 
-			renderResponse.setContentType(
-				stringServletResponse.getContentType());
+			renderResponse.setContentType(stringResponse.getContentType());
 
 			PrintWriter writer = renderResponse.getWriter();
 

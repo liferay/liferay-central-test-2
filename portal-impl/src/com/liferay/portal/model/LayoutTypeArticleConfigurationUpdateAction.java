@@ -44,13 +44,14 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LayoutTypeArticleConfigurationUpdateAction extends Action {
 
-	public void run(HttpServletRequest req, HttpServletResponse res)
+	public void run(HttpServletRequest request, HttpServletResponse response)
 		throws ActionException {
 
 		try {
-			long groupId = ParamUtil.getLong(req, "groupId");
-			boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
-			long layoutId = ParamUtil.getLong(req, "layoutId");
+			long groupId = ParamUtil.getLong(request, "groupId");
+			boolean privateLayout = ParamUtil.getBoolean(
+				request, "privateLayout");
+			long layoutId = ParamUtil.getLong(request, "layoutId");
 
 			Layout layout = LayoutLocalServiceUtil.getLayout(
 				groupId, privateLayout, layoutId);

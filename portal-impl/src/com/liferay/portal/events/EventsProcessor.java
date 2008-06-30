@@ -61,18 +61,19 @@ public class EventsProcessor {
 		_instance._process(key, classes, ids, null, null, null);
 	}
 
-	public static void process(String key, String[] classes, HttpSession ses)
+	public static void process(
+			String key, String[] classes, HttpSession session)
 		throws ActionException {
 
-		_instance._process(key, classes, null, null, null, ses);
+		_instance._process(key, classes, null, null, null, session);
 	}
 
 	public static void process(
-			String key, String[] classes, HttpServletRequest req,
-			HttpServletResponse res)
+			String key, String[] classes, HttpServletRequest request,
+			HttpServletResponse response)
 		throws ActionException {
 
-		_instance._process(key, classes, null, req, res, null);
+		_instance._process(key, classes, null, request, response, null);
 	}
 
 	public static void registerEvent(String key, Object event) {
@@ -99,8 +100,9 @@ public class EventsProcessor {
 	}
 
 	private void _process(
-			String key, String[] classes, String[] ids, HttpServletRequest req,
-			HttpServletResponse res, HttpSession ses)
+			String key, String[] classes, String[] ids,
+			HttpServletRequest request, HttpServletResponse response,
+			HttpSession session)
 		throws ActionException {
 
 		for (String className : classes) {
@@ -114,7 +116,7 @@ public class EventsProcessor {
 
 			Object event = InstancePool.get(className);
 
-			_processEvent(event, ids, req, res, ses);
+			_processEvent(event, ids, request, response, session);
 		}
 
 		if (Validator.isNull(key)) {
@@ -124,20 +126,20 @@ public class EventsProcessor {
 		List<Object> events = _getEvents(key);
 
 		for (Object event : events) {
-			_processEvent(event, ids, req, res, ses);
+			_processEvent(event, ids, request, response, session);
 		}
 	}
 
 	private void _processEvent(
-			Object event, String[] ids, HttpServletRequest req,
-			HttpServletResponse res, HttpSession ses)
+			Object event, String[] ids, HttpServletRequest request,
+			HttpServletResponse response, HttpSession session)
 		throws ActionException {
 
 		if (event instanceof Action) {
 			Action action = (Action)event;
 
 			try {
-				action.run(req, res);
+				action.run(request, response);
 			}
 			catch (ActionException ae) {
 				throw ae;
@@ -150,7 +152,7 @@ public class EventsProcessor {
 			SessionAction sessionAction = (SessionAction)event;
 
 			try {
-				sessionAction.run(ses);
+				sessionAction.run(session);
 			}
 			catch (ActionException ae) {
 				throw ae;

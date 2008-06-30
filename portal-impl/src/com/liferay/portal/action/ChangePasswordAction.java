@@ -51,15 +51,15 @@ import org.apache.struts.action.ActionMapping;
 public class ChangePasswordAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(request, Constants.CMD);
 
 		if (cmd.equals("password")) {
 			try {
-				updatePassword(req, res);
+				updatePassword(request, response);
 
 				return mapping.findForward(ActionConstants.COMMON_REFERER);
 			}
@@ -67,19 +67,19 @@ public class ChangePasswordAction extends Action {
 				if (e instanceof UserPasswordException) {
 					UserPasswordException upe = (UserPasswordException)e;
 
-					SessionErrors.add(req, e.getClass().getName(), upe);
+					SessionErrors.add(request, e.getClass().getName(), upe);
 
 					return mapping.findForward("portal.change_password");
 				}
 				else if (e instanceof NoSuchUserException ||
 						 e instanceof PrincipalException) {
 
-					SessionErrors.add(req, e.getClass().getName());
+					SessionErrors.add(request, e.getClass().getName());
 
 					return mapping.findForward("portal.error");
 				}
 				else {
-					PortalUtil.sendError(e, req, res);
+					PortalUtil.sendError(e, request, response);
 
 					return null;
 				}
@@ -91,15 +91,15 @@ public class ChangePasswordAction extends Action {
 	}
 
 	protected void updatePassword(
-			HttpServletRequest req, HttpServletResponse res)
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
-		HttpSession ses = req.getSession();
+		HttpSession ses = request.getSession();
 
-		long userId = PortalUtil.getUserId(req);
-		String password1 = ParamUtil.getString(req, "password1");
-		String password2 = ParamUtil.getString(req, "password2");
-		boolean passwordReset = ParamUtil.getBoolean(req, "passwordReset");
+		long userId = PortalUtil.getUserId(request);
+		String password1 = ParamUtil.getString(request, "password1");
+		String password2 = ParamUtil.getString(request, "password2");
+		boolean passwordReset = ParamUtil.getBoolean(request, "passwordReset");
 
 		UserServiceUtil.updatePassword(
 			userId, password1, password2, passwordReset);

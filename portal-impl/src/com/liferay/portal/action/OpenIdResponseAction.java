@@ -78,12 +78,12 @@ import org.openid4java.message.sreg.SRegResponse;
 public class OpenIdResponseAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		if (!OpenIdUtil.isEnabled(themeDisplay.getCompanyId())) {
 			return null;
@@ -92,7 +92,7 @@ public class OpenIdResponseAction extends Action {
 		String redirect = null;
 
 		try {
-			redirect = readResponse(themeDisplay, req);
+			redirect = readResponse(themeDisplay, request);
 		}
 		catch (Exception e) {
 			if (e instanceof AssociationException ||
@@ -100,14 +100,14 @@ public class OpenIdResponseAction extends Action {
 				e instanceof DiscoveryException ||
 				e instanceof MessageException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(request, e.getClass().getName());
 
 				return mapping.findForward("portal.login");
 			}
 			else {
 				_log.error("Error processing OpenID response", e);
 
-				PortalUtil.sendError(e, req, res);
+				PortalUtil.sendError(e, request, response);
 
 				return null;
 			}
@@ -115,10 +115,10 @@ public class OpenIdResponseAction extends Action {
 
 		if (Validator.isNull(redirect)) {
 			redirect =
-				PortalUtil.getPortalURL(req) + themeDisplay.getURLSignIn();
+				PortalUtil.getPortalURL(request) + themeDisplay.getURLSignIn();
 		}
 
-		res.sendRedirect(redirect);
+		response.sendRedirect(redirect);
 
 		return null;
 	}
@@ -165,28 +165,28 @@ public class OpenIdResponseAction extends Action {
 	}
 
 	protected String readResponse(
-			ThemeDisplay themeDisplay, HttpServletRequest req)
+			ThemeDisplay themeDisplay, HttpServletRequest request)
 		throws Exception {
 
-		HttpSession ses = req.getSession();
+		HttpSession session = request.getSession();
 
 		ConsumerManager manager = OpenIdUtil.getConsumerManager();
 
-		ParameterList params = new ParameterList(req.getParameterMap());
+		ParameterList params = new ParameterList(request.getParameterMap());
 
 		DiscoveryInformation discovered =
-			(DiscoveryInformation)ses.getAttribute(WebKeys.OPEN_ID_DISCO);
+			(DiscoveryInformation)session.getAttribute(WebKeys.OPEN_ID_DISCO);
 
 		if (discovered == null) {
 			return null;
 		}
 
-		StringBuffer receivingURL = req.getRequestURL();
-		String queryString = req.getQueryString();
+		StringBuffer receivingURL = request.getRequestURL();
+		String queryString = request.getQueryString();
 
 		if ((queryString != null) && (queryString.length() > 0)) {
 			receivingURL.append(StringPool.QUESTION);
-			receivingURL.append(req.getQueryString());
+			receivingURL.append(request.getQueryString());
 		}
 
 		VerificationResult verification = manager.verify(
@@ -260,7 +260,7 @@ public class OpenIdResponseAction extends Action {
 			if (Validator.isNull(firstName) || Validator.isNull(lastName) ||
 				Validator.isNull(emailAddress)) {
 
-				SessionMessages.add(req, "missingOpenIdUserInformation");
+				SessionMessages.add(request, "missingOpenIdUserInformation");
 
 				if (_log.isInfoEnabled()) {
 					_log.info(
@@ -273,7 +273,8 @@ public class OpenIdResponseAction extends Action {
 
 				createAccountURL.setParameter("openId", openId);
 
-				ses.setAttribute(WebKeys.OPEN_ID_LOGIN_PENDING, Boolean.TRUE);
+				session.setAttribute(
+					WebKeys.OPEN_ID_LOGIN_PENDING, Boolean.TRUE);
 
 				return createAccountURL.toString();
 			}
@@ -283,7 +284,7 @@ public class OpenIdResponseAction extends Action {
 				openId, themeDisplay.getLocale());
 		}
 
-		ses.setAttribute(WebKeys.OPEN_ID_LOGIN, new Long(user.getUserId()));
+		session.setAttribute(WebKeys.OPEN_ID_LOGIN, new Long(user.getUserId()));
 
 		return null;
 	}

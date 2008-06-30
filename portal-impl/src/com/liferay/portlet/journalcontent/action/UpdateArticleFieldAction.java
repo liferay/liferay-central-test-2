@@ -58,31 +58,31 @@ import org.dom4j.io.SAXReader;
 public class UpdateArticleFieldAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		try {
-			updateArticleField(req, res);
+			updateArticleField(request, response);
 
 			return null;
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, request, response);
 
 			return null;
 		}
 	}
 
 	protected void updateArticleField(
-			HttpServletRequest req, HttpServletResponse res)
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
-		long groupId = ParamUtil.getLong(req, "groupId");
-		String articleId = ParamUtil.getString(req, "articleId");
-		double version = ParamUtil.getDouble(req, "version");
+		long groupId = ParamUtil.getLong(request, "groupId");
+		String articleId = ParamUtil.getString(request, "articleId");
+		double version = ParamUtil.getDouble(request, "version");
 
-		String containerId = ParamUtil.getString(req, "containerId");
+		String containerId = ParamUtil.getString(request, "containerId");
 
 		if (Validator.isNotNull(containerId)) {
 			int x = containerId.indexOf("_");
@@ -96,10 +96,10 @@ public class UpdateArticleFieldAction extends Action {
 			}
 		}
 
-		String languageId = LanguageUtil.getLanguageId(req);
+		String languageId = LanguageUtil.getLanguageId(request);
 
-		String fieldName = ParamUtil.getString(req, "fieldName");
-		String fieldData = ParamUtil.getString(req, "fieldData");
+		String fieldName = ParamUtil.getString(request, "fieldName");
+		String fieldData = ParamUtil.getString(request, "fieldData");
 
 		if (fieldName.startsWith("journal-content-field-name-")) {
 			fieldName = fieldName.substring(27, fieldName.length());
@@ -143,7 +143,7 @@ public class UpdateArticleFieldAction extends Action {
 		JournalArticleServiceUtil.updateContent(
 			groupId, articleId, version, content);
 
-		ServletResponseUtil.write(res, fieldData);
+		ServletResponseUtil.write(response, fieldData);
 	}
 
 	private static Log _log = LogFactory.getLog(UpdateArticleFieldAction.class);

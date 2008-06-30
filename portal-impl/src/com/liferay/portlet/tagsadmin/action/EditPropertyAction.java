@@ -44,15 +44,15 @@ import org.apache.struts.action.ActionMapping;
 public class EditPropertyAction extends JSONAction {
 
 	public String getJSON(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(request, Constants.CMD);
 
 		try {
 			if (cmd.equals("addProperty")) {
-				addProperty(req);
+				addProperty(request);
 			}
 		}
 		catch (Exception e) {
@@ -62,10 +62,10 @@ public class EditPropertyAction extends JSONAction {
 		return null;
 	}
 
-	protected void addProperty(HttpServletRequest req) throws Exception {
-		long entryId = ParamUtil.getLong(req, "entryId");
-		String key = ParamUtil.getString(req, "key");
-		String value = ParamUtil.getString(req, "value");
+	protected void addProperty(HttpServletRequest request) throws Exception {
+		long entryId = ParamUtil.getLong(request, "entryId");
+		String key = ParamUtil.getString(request, "key");
+		String value = ParamUtil.getString(request, "value");
 
 		TagsPropertyServiceUtil.addProperty(entryId, key, value);
 	}

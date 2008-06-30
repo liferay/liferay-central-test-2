@@ -23,7 +23,6 @@
 package com.liferay.portal.events;
 
 import com.liferay.portal.kernel.events.Action;
-import com.liferay.portal.kernel.events.ActionException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,21 +36,19 @@ import javax.servlet.http.HttpSession;
  */
 public class SampleServicePreAction extends Action {
 
-	public void run(HttpServletRequest req, HttpServletResponse res)
-		throws ActionException {
-
-		setSharedSessionAttributes(req);
+	public void run(HttpServletRequest request, HttpServletResponse response) {
+		setSharedSessionAttributes(request);
 	}
 
-	public void setSharedSessionAttributes(HttpServletRequest req) {
+	public void setSharedSessionAttributes(HttpServletRequest request) {
 
 		// Modify portal.properties property "session.shared.attributes". Make
 		// sure that "TEST_SHARED_" is also one of the prefixed attributes that
 		// will be shared across all portlets.
 
-		HttpSession ses = req.getSession();
+		HttpSession session = request.getSession();
 
-		ses.setAttribute("TEST_SHARED_HELLO", "world");
+		session.setAttribute("TEST_SHARED_HELLO", "world");
 	}
 
 }

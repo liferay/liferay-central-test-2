@@ -46,18 +46,18 @@ import org.apache.struts.action.ActionMapping;
 public class OpenSearchAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		try {
 			ServletResponseUtil.sendFile(
-				res, null, getXML(req), ContentTypes.TEXT_XML_UTF8);
+				response, null, getXML(request), ContentTypes.TEXT_XML_UTF8);
 
 			return null;
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, request, response);
 
 			return null;
 		}

@@ -56,16 +56,16 @@ import org.json.JSONObject;
 public class JSONServiceAction extends JSONAction {
 
 	public String getJSON(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
-		String className = ParamUtil.getString(req, "serviceClassName");
-		String methodName = ParamUtil.getString(req, "serviceMethodName");
+		String className = ParamUtil.getString(request, "serviceClassName");
+		String methodName = ParamUtil.getString(request, "serviceMethodName");
 		String[] serviceParameters = StringUtil.split(
-			ParamUtil.getString(req, "serviceParameters"));
+			ParamUtil.getString(request, "serviceParameters"));
 		String[] serviceParameterTypes = StringUtil.split(
-			ParamUtil.getString(req, "serviceParameterTypes"));
+			ParamUtil.getString(request, "serviceParameterTypes"));
 
 		Class<?> classObj = Class.forName(className);
 
@@ -79,7 +79,7 @@ public class JSONServiceAction extends JSONAction {
 
 			for (int i = 0; i < serviceParameters.length; i++) {
 				args[i] = getArgValue(
-					req, classObj, methodName, serviceParameters[i],
+					request, classObj, methodName, serviceParameters[i],
 					parameterTypes[i]);
 
 				if (args[i] == null) {
@@ -151,7 +151,7 @@ public class JSONServiceAction extends JSONAction {
 	}
 
 	protected Object getArgValue(
-			HttpServletRequest req, Class<?> classObj, String methodName,
+			HttpServletRequest request, Class<?> classObj, String methodName,
 			String parameter, Class<?> parameterType)
 		throws Exception {
 
@@ -160,36 +160,36 @@ public class JSONServiceAction extends JSONAction {
 		if (parameterTypeName.equals("boolean") ||
 			parameterTypeName.equals(Boolean.class.getName())) {
 
-			return Boolean.valueOf(ParamUtil.getBoolean(req, parameter));
+			return Boolean.valueOf(ParamUtil.getBoolean(request, parameter));
 		}
 		else if (parameterTypeName.equals("double") ||
 				 parameterTypeName.equals(Double.class.getName())) {
 
-			return new Double(ParamUtil.getDouble(req, parameter));
+			return new Double(ParamUtil.getDouble(request, parameter));
 		}
 		else if (parameterTypeName.equals("int") ||
 				 parameterTypeName.equals(Integer.class.getName())) {
 
-			return new Integer(ParamUtil.getInteger(req, parameter));
+			return new Integer(ParamUtil.getInteger(request, parameter));
 		}
 		else if (parameterTypeName.equals("long") ||
 				 parameterTypeName.equals(Long.class.getName())) {
 
-			return new Long(ParamUtil.getLong(req, parameter));
+			return new Long(ParamUtil.getLong(request, parameter));
 		}
 		else if (parameterTypeName.equals("short") ||
 				 parameterTypeName.equals(Short.class.getName())) {
 
-			return new Short(ParamUtil.getShort(req, parameter));
+			return new Short(ParamUtil.getShort(request, parameter));
 		}
 		else if (parameterTypeName.equals(Date.class.getName())) {
-			return new Date(ParamUtil.getLong(req, parameter));
+			return new Date(ParamUtil.getLong(request, parameter));
 		}
 		else if (parameterTypeName.equals(String.class.getName())) {
-			return ParamUtil.getString(req, parameter);
+			return ParamUtil.getString(request, parameter);
 		}
 		else if (parameterTypeName.equals("[Ljava.lang.String;")) {
-			return StringUtil.split(ParamUtil.getString(req, parameter));
+			return StringUtil.split(ParamUtil.getString(request, parameter));
 		}
 		else {
 			_log.error(

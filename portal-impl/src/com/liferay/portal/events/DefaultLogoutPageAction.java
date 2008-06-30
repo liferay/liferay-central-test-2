@@ -47,7 +47,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class DefaultLogoutPageAction extends Action {
 
-	public void run(HttpServletRequest req, HttpServletResponse res) {
+	public void run(HttpServletRequest request, HttpServletResponse response) {
 		String path = PropsValues.DEFAULT_LOGOUT_PAGE_PATH;
 
 		if (_log.isInfoEnabled()) {
@@ -59,7 +59,7 @@ public class DefaultLogoutPageAction extends Action {
 			LastPath lastPath = new LastPath(
 				StringPool.BLANK, path, new HashMap<String, String[]>());
 
-			HttpSession ses = req.getSession();
+			HttpSession ses = request.getSession();
 
 			ses.setAttribute(WebKeys.LAST_PATH, lastPath);
 		}

@@ -67,41 +67,43 @@ import org.apache.struts.util.MessageResources;
  */
 public class PortletAction extends Action {
 
-	public static String getForwardKey(HttpServletRequest req) {
-		PortletConfigImpl portletConfig = (PortletConfigImpl)req.getAttribute(
-			JavaConstants.JAVAX_PORTLET_CONFIG);
+	public static String getForwardKey(HttpServletRequest request) {
+		PortletConfigImpl portletConfig =
+			(PortletConfigImpl)request.getAttribute(
+				JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		return PortalUtil.getPortletNamespace(portletConfig.getPortletId()) +
 			WebKeys.PORTLET_STRUTS_FORWARD;
 	}
 
-	public static String getForwardKey(PortletRequest req) {
-		PortletConfigImpl portletConfig = (PortletConfigImpl)req.getAttribute(
-			JavaConstants.JAVAX_PORTLET_CONFIG);
+	public static String getForwardKey(PortletRequest portletRequest) {
+		PortletConfigImpl portletConfig =
+			(PortletConfigImpl)portletRequest.getAttribute(
+				JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		return PortalUtil.getPortletNamespace(portletConfig.getPortletId()) +
 			WebKeys.PORTLET_STRUTS_FORWARD;
 	}
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
-		PortletConfig portletConfig = (PortletConfig)req.getAttribute(
+		PortletConfig portletConfig = (PortletConfig)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_CONFIG);
 
-		PortletRequest portletRequest = (PortletRequest)req.getAttribute(
+		PortletRequest portletRequest = (PortletRequest)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST);
 
-		PortletResponse portletResponse = (PortletResponse)req.getAttribute(
+		PortletResponse portletResponse = (PortletResponse)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_RESPONSE);
 
-		Boolean strutsExecute = (Boolean)req.getAttribute(
+		Boolean strutsExecute = (Boolean)request.getAttribute(
 			WebKeys.PORTLET_STRUTS_EXECUTE);
 
 		if ((strutsExecute != null) && strutsExecute.booleanValue()) {
-			return strutsExecute(mapping, form, req, res);
+			return strutsExecute(mapping, form, request, response);
 		}
 		else if (portletRequest instanceof RenderRequest) {
 			return render(
@@ -118,43 +120,46 @@ public class PortletAction extends Action {
 	}
 
 	public ActionForward strutsExecute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
-		return super.execute(mapping, form, req, res);
+		return super.execute(mapping, form, request, response);
 	}
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 	}
 
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Forward to " + getForward(req));
+			_log.debug("Forward to " + getForward(renderRequest));
 		}
 
-		return mapping.findForward(getForward(req));
+		return mapping.findForward(getForward(renderRequest));
 	}
 
 	public void serveResource(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ResourceRequest req, ResourceResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 	}
 
-	protected String getForward(PortletRequest req) {
-		return getForward(req, null);
+	protected String getForward(PortletRequest portletRequest) {
+		return getForward(portletRequest, null);
 	}
 
-	protected String getForward(PortletRequest req, String defaultValue) {
-		String forward = (String)req.getAttribute(getForwardKey(req));
+	protected String getForward(
+		PortletRequest portletRequest, String defaultValue) {
+
+		String forward = (String)portletRequest.getAttribute(
+			getForwardKey(portletRequest));
 
 		if (forward == null) {
 			return defaultValue;
@@ -164,25 +169,26 @@ public class PortletAction extends Action {
 		}
 	}
 
-	protected void setForward(PortletRequest req, String forward) {
-		req.setAttribute(getForwardKey(req), forward);
+	protected void setForward(PortletRequest portletRequest, String forward) {
+		portletRequest.setAttribute(getForwardKey(portletRequest), forward);
 	}
 
-	protected ModuleConfig getModuleConfig(PortletRequest req) {
-		return (ModuleConfig)req.getAttribute(Globals.MODULE_KEY);
+	protected ModuleConfig getModuleConfig(PortletRequest portletRequest) {
+		return (ModuleConfig)portletRequest.getAttribute(Globals.MODULE_KEY);
 	}
 
 	protected MessageResources getResources() {
-		ServletContext ctx = getServlet().getServletContext();
+		ServletContext servletContext = getServlet().getServletContext();
 
-		return (MessageResources)ctx.getAttribute(Globals.MESSAGES_KEY);
+		return (MessageResources)servletContext.getAttribute(
+			Globals.MESSAGES_KEY);
 	}
 
-	protected MessageResources getResources(HttpServletRequest req) {
+	protected MessageResources getResources(HttpServletRequest request) {
 		return getResources();
 	}
 
-	protected MessageResources getResources(PortletRequest req) {
+	protected MessageResources getResources(PortletRequest portletRequest) {
 		return getResources();
 	}
 
@@ -190,41 +196,45 @@ public class PortletAction extends Action {
 		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}
 
-	protected void sendRedirect(ActionRequest req, ActionResponse res)
+	protected void sendRedirect(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException {
 
-		sendRedirect(req, res, null);
+		sendRedirect(actionRequest, actionResponse, null);
 	}
 
 	protected void sendRedirect(
-			ActionRequest req, ActionResponse res, String redirect)
+			ActionRequest actionRequest, ActionResponse actionResponse,
+			String redirect)
 		throws IOException {
 
-		if (SessionErrors.isEmpty(req)) {
-			SessionMessages.add(req, "request_processed");
+		if (SessionErrors.isEmpty(actionRequest)) {
+			SessionMessages.add(actionRequest, "request_processed");
 		}
 
 		if (redirect == null) {
-			redirect = ParamUtil.getString(req, "redirect");
+			redirect = ParamUtil.getString(actionRequest, "redirect");
 		}
 
 		if (Validator.isNotNull(redirect)) {
-			res.sendRedirect(redirect);
+			actionResponse.sendRedirect(redirect);
 		}
 	}
 
-	protected boolean redirectToLogin(ActionRequest req, ActionResponse res)
+	protected boolean redirectToLogin(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException {
 
-		if (req.getRemoteUser() == null) {
-			HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+		if (actionRequest.getRemoteUser() == null) {
+			HttpServletRequest request = PortalUtil.getHttpServletRequest(
+				actionRequest);
 
-			SessionErrors.add(httpReq, PrincipalException.class.getName());
+			SessionErrors.add(request, PrincipalException.class.getName());
 
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)httpReq.getAttribute(WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
-			res.sendRedirect(themeDisplay.getURLSignIn());
+			actionResponse.sendRedirect(themeDisplay.getURLSignIn());
 
 			return true;
 		}

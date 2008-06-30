@@ -47,13 +47,13 @@ import org.apache.struts.action.ActionMapping;
 public class GetStructureAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		try {
-			long groupId = ParamUtil.getLong(req, "groupId");
-			String structureId = ParamUtil.getString(req, "structureId");
+			long groupId = ParamUtil.getLong(request, "groupId");
+			String structureId = ParamUtil.getString(request, "structureId");
 
 			JournalStructure structure =
 				JournalStructureLocalServiceUtil.getStructure(
@@ -63,12 +63,12 @@ public class GetStructureAction extends Action {
 			byte[] bytes = structure.getXsd().getBytes();
 
 			ServletResponseUtil.sendFile(
-				res, fileName, bytes, ContentTypes.TEXT_XML_UTF8);
+				response, fileName, bytes, ContentTypes.TEXT_XML_UTF8);
 
 			return null;
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, request, response);
 
 			return null;
 		}

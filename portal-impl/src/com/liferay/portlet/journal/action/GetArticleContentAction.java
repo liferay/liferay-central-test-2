@@ -45,12 +45,12 @@ import org.apache.struts.action.ActionMapping;
 public class GetArticleContentAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		try {
-			String xml = ParamUtil.getString(req, "xml");
+			String xml = ParamUtil.getString(request, "xml");
 
 			xml = JournalUtil.formatXML(xml);
 
@@ -58,12 +58,12 @@ public class GetArticleContentAction extends Action {
 			byte[] bytes = xml.getBytes();
 
 			ServletResponseUtil.sendFile(
-				res, fileName, bytes, ContentTypes.TEXT_XML_UTF8);
+				response, fileName, bytes, ContentTypes.TEXT_XML_UTF8);
 
 			return null;
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, request, response);
 
 			return null;
 		}

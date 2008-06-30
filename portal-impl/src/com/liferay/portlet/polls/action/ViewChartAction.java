@@ -56,17 +56,17 @@ import org.jfree.data.general.PieDataset;
 public class ViewChartAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		try {
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
-			long questionId = ParamUtil.getLong(req, "questionId");
+			long questionId = ParamUtil.getLong(request, "questionId");
 
-			String chartType = ParamUtil.getString(req, "chartType", "pie");
+			String chartType = ParamUtil.getString(request, "chartType", "pie");
 
 			CategoryDataset dataset = PollsUtil.getVotesDataset(questionId);
 
@@ -109,16 +109,16 @@ public class ViewChartAction extends Action {
 					chartName, pieData, true, false, false);
 			}
 
-			res.setContentType("image/jpeg");
+			response.setContentType("image/jpeg");
 
-			OutputStream os = res.getOutputStream();
+			OutputStream os = response.getOutputStream();
 
 			ChartUtilities.writeChartAsJPEG(os, chart, 400, 400);
 
 			return null;
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, request, response);
 
 			return null;
 		}

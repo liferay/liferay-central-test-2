@@ -40,17 +40,19 @@ import javax.servlet.http.HttpServletResponse;
  */
 public abstract class Action {
 
-	public abstract void run(HttpServletRequest req, HttpServletResponse res)
+	public abstract void run(
+			HttpServletRequest request, HttpServletResponse response)
 		throws ActionException;
 
-	public void run(RenderRequest req, RenderResponse res)
+	public void run(RenderRequest renderRequest, RenderResponse renderResponse)
 		throws ActionException {
 
 		try {
-			HttpServletRequest httpReq = _getHttpServletRequest(req);
-			HttpServletResponse httpRes = _getHttpServletResponse(res);
+			HttpServletRequest request = _getHttpServletRequest(renderRequest);
+			HttpServletResponse response = _getHttpServletResponse(
+				renderResponse);
 
-			run(httpReq, httpRes);
+			run(request, response);
 		}
 		catch (ActionException ae) {
 			throw ae;
@@ -60,11 +62,12 @@ public abstract class Action {
 		}
 	}
 
-	private HttpServletRequest _getHttpServletRequest(PortletRequest req)
+	private HttpServletRequest _getHttpServletRequest(
+			PortletRequest portletRequest)
 		throws Exception {
 
 		Object returnObj = PortalClassInvoker.invoke(
-			_CLASS, _METHOD_GETHTTPSERVLETREQUEST, req, false);
+			_CLASS, _METHOD_GETHTTPSERVLETREQUEST, portletRequest, false);
 
 		if (returnObj != null) {
 			return (HttpServletRequest)returnObj;
@@ -74,11 +77,12 @@ public abstract class Action {
 		}
 	}
 
-	private HttpServletResponse _getHttpServletResponse(PortletResponse res)
+	private HttpServletResponse _getHttpServletResponse(
+			PortletResponse portletResponse)
 		throws Exception {
 
 		Object returnObj = PortalClassInvoker.invoke(
-			_CLASS, _METHOD_GETHTTPSERVLETRESPONSE, res, false);
+			_CLASS, _METHOD_GETHTTPSERVLETRESPONSE, portletResponse, false);
 
 		if (returnObj != null) {
 			return (HttpServletResponse)returnObj;

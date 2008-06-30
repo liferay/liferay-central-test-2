@@ -52,21 +52,21 @@ import org.apache.struts.action.ActionMapping;
 public class UpdateTitleAction extends JSONAction {
 
 	public String getJSON(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
-		HttpSession ses = req.getSession();
+		HttpSession session = request.getSession();
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
 
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
-		String portletId = ParamUtil.getString(req, "portletId");
+		String portletId = ParamUtil.getString(request, "portletId");
 
 		if (!PortletPermissionUtil.contains(
 				permissionChecker, themeDisplay.getPlid(), portletId,
@@ -75,8 +75,8 @@ public class UpdateTitleAction extends JSONAction {
 			return null;
 		}
 
-		String languageId = LanguageUtil.getLanguageId(req);
-		String title = ParamUtil.getString(req, "title");
+		String languageId = LanguageUtil.getLanguageId(request);
+		String title = ParamUtil.getString(request, "title");
 
 		PortletPreferences portletSetup =
 			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
@@ -88,8 +88,8 @@ public class UpdateTitleAction extends JSONAction {
 		portletSetup.store();
 
 		InvokerPortlet.clearResponse(
-			ses, layout.getPrimaryKey(), portletId,
-			LanguageUtil.getLanguageId(req));
+			session, layout.getPrimaryKey(), portletId,
+			LanguageUtil.getLanguageId(request));
 
 		return null;
 	}

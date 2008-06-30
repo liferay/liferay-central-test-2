@@ -66,80 +66,82 @@ import org.apache.struts.action.ActionMapping;
 public class GetFileAction extends PortletAction {
 
 	public ActionForward strutsExecute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		try {
-			long folderId = ParamUtil.getLong(req, "folderId");
-			String name = ParamUtil.getString(req, "name");
-			double version = ParamUtil.getDouble(req, "version");
+			long folderId = ParamUtil.getLong(request, "folderId");
+			String name = ParamUtil.getString(request, "name");
+			double version = ParamUtil.getDouble(request, "version");
 
-			long fileShortcutId = ParamUtil.getLong(req, "fileShortcutId");
+			long fileShortcutId = ParamUtil.getLong(request, "fileShortcutId");
 
-			String uuid = ParamUtil.getString(req, "uuid");
-			long groupId = ParamUtil.getLong(req, "groupId");
+			String uuid = ParamUtil.getString(request, "uuid");
+			long groupId = ParamUtil.getLong(request, "groupId");
 
 			String targetExtension = ParamUtil.getString(
-				req, "targetExtension");
+				request, "targetExtension");
 
 			ThemeDisplay themeDisplay =
-				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+				(ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
 
 			getFile(
 				folderId, name, version, fileShortcutId, uuid, groupId,
-				targetExtension, themeDisplay, req, res);
+				targetExtension, themeDisplay, request, response);
 
 			return null;
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, request, response);
 
 			return null;
 		}
 	}
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		try {
-			long folderId = ParamUtil.getLong(req, "folderId");
-			String name = ParamUtil.getString(req, "name");
-			double version = ParamUtil.getDouble(req, "version");
+			long folderId = ParamUtil.getLong(actionRequest, "folderId");
+			String name = ParamUtil.getString(actionRequest, "name");
+			double version = ParamUtil.getDouble(actionRequest, "version");
 
-			long fileShortcutId = ParamUtil.getLong(req, "fileShortcutId");
+			long fileShortcutId = ParamUtil.getLong(
+				actionRequest, "fileShortcutId");
 
-			String uuid = ParamUtil.getString(req, "uuid");
-			long groupId = ParamUtil.getLong(req, "groupId");
+			String uuid = ParamUtil.getString(actionRequest, "uuid");
+			long groupId = ParamUtil.getLong(actionRequest, "groupId");
 
 			String targetExtension = ParamUtil.getString(
-				req, "targetExtension");
+				actionRequest, "targetExtension");
 
 			ThemeDisplay themeDisplay =
-				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
-			HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-			HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(
-				res);
+			HttpServletRequest request = PortalUtil.getHttpServletRequest(
+				actionRequest);
+			HttpServletResponse response = PortalUtil.getHttpServletResponse(
+				actionResponse);
 
 			getFile(
 				folderId, name, version, fileShortcutId, uuid, groupId,
-				targetExtension, themeDisplay, httpReq, httpRes);
+				targetExtension, themeDisplay, request, response);
 
-			setForward(req, ActionConstants.COMMON_NULL);
+			setForward(actionRequest, ActionConstants.COMMON_NULL);
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, actionRequest, actionResponse);
 		}
 	}
 
 	protected void getFile(
 			long folderId, String name, double version, long fileShortcutId,
 			String uuid, long groupId, String targetExtension,
-			ThemeDisplay themeDisplay, HttpServletRequest req,
-			HttpServletResponse res)
+			ThemeDisplay themeDisplay, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		InputStream is = null;
@@ -214,7 +216,7 @@ public class GetFileAction extends PortletAction {
 
 			String contentType = MimeTypesUtil.getContentType(fileName);
 
-			ServletResponseUtil.sendFile(res, fileName, is, contentType);
+			ServletResponseUtil.sendFile(response, fileName, is, contentType);
 		}
 		finally {
 			ServletResponseUtil.cleanUp(is);

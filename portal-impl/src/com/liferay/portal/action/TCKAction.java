@@ -53,8 +53,8 @@ import org.apache.struts.action.ActionMapping;
 public class TCKAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		try {
@@ -62,13 +62,13 @@ public class TCKAction extends Action {
 				throw new PrincipalException();
 			}
 
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
-			String[] portletIds = req.getParameterValues("portletId");
+			String[] portletIds = request.getParameterValues("portletId");
 
 			if (portletIds == null) {
-				portletIds = req.getParameterValues("portletName");
+				portletIds = request.getParameterValues("portletName");
 			}
 
 			for (int i = 0; i < portletIds.length; i++) {
@@ -104,7 +104,7 @@ public class TCKAction extends Action {
 				layout.getGroupId(), layout.isPrivateLayout(),
 				layout.getLayoutId(), layout.getTypeSettings());
 
-			req.setAttribute(
+			request.setAttribute(
 				WebKeys.FORWARD_URL,
 				themeDisplay.getPathMain() + "/portal/layout?p_l_id=" +
 					layout.getPlid());
@@ -112,7 +112,7 @@ public class TCKAction extends Action {
 			return mapping.findForward(ActionConstants.COMMON_FORWARD_JSP);
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, request, response);
 
 			return null;
 		}

@@ -38,7 +38,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LogThreadCountAction extends Action {
 
-	public void run(HttpServletRequest req, HttpServletResponse res) {
+	public void run(HttpServletRequest request, HttpServletResponse response) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Active Threads:\t" + Thread.activeCount());
 		}

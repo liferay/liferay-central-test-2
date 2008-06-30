@@ -46,22 +46,22 @@ import org.apache.struts.action.ActionMapping;
 public class OpenEntryAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		try {
-			long entryId = ParamUtil.getLong(req, "entryId");
+			long entryId = ParamUtil.getLong(request, "entryId");
 
 			BookmarksEntry entry =
 				BookmarksEntryServiceUtil.openEntry(entryId);
 
-			req.setAttribute(WebKeys.FORWARD_URL, entry.getUrl());
+			request.setAttribute(WebKeys.FORWARD_URL, entry.getUrl());
 
 			return mapping.findForward(ActionConstants.COMMON_FORWARD);
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, request, response);
 
 			return null;
 		}

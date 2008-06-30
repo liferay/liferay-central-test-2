@@ -53,7 +53,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class RandomLookAndFeelAction extends Action {
 
-	public void run(HttpServletRequest req, HttpServletResponse res)
+	public void run(HttpServletRequest request, HttpServletResponse response)
 		throws ActionException {
 
 		try {
@@ -64,8 +64,8 @@ public class RandomLookAndFeelAction extends Action {
 
 			// Do not randomize look and feel unless the user is logged in
 
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 			if (!themeDisplay.isSignedIn()) {
 				return;
@@ -74,7 +74,7 @@ public class RandomLookAndFeelAction extends Action {
 			// Do not randomize look and feel unless the user is accessing the
 			// portal
 
-			String requestURI = GetterUtil.getString(req.getRequestURI());
+			String requestURI = GetterUtil.getString(request.getRequestURI());
 
 			if (!requestURI.endsWith("/portal/layout")) {
 				return;
@@ -91,7 +91,7 @@ public class RandomLookAndFeelAction extends Action {
 
 			Randomizer randomizer = Randomizer.getInstance();
 
-			boolean wapTheme = BrowserSnifferUtil.is_wap(req);
+			boolean wapTheme = BrowserSnifferUtil.is_wap(request);
 
 			List<Theme> themes = ThemeLocalServiceUtil.getThemes(
 				themeDisplay.getCompanyId(), themeDisplay.getPortletGroupId(),
@@ -112,8 +112,8 @@ public class RandomLookAndFeelAction extends Action {
 
 				themeDisplay.setLookAndFeel(theme, colorScheme);
 
-				req.setAttribute(WebKeys.THEME, theme);
-				req.setAttribute(WebKeys.COLOR_SCHEME, colorScheme);
+				request.setAttribute(WebKeys.THEME, theme);
+				request.setAttribute(WebKeys.COLOR_SCHEME, colorScheme);
 			}
 		}
 		catch (Exception e) {

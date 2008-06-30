@@ -55,25 +55,25 @@ import org.apache.struts.action.ActionMapping;
 public class GetTemplateAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		try {
-			long groupId = ParamUtil.getLong(req, "groupId");
-			String templateId = getTemplateId(req);
+			long groupId = ParamUtil.getLong(request, "groupId");
+			String templateId = getTemplateId(request);
 
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 			Map<String, String> tokens = JournalUtil.getTokens(
 				groupId, themeDisplay);
 
 			tokens.put("template_id", templateId);
 
-			String languageId = LanguageUtil.getLanguageId(req);
+			String languageId = LanguageUtil.getLanguageId(request);
 
-			boolean transform = ParamUtil.get(req, "transform", true);
+			boolean transform = ParamUtil.get(request, "transform", true);
 
 			JournalTemplate template =
 				JournalTemplateLocalServiceUtil.getTemplate(
@@ -104,24 +104,25 @@ public class GetTemplateAction extends Action {
 				contentType = ContentTypes.TEXT_XML_UTF8;
 			}
 
-			ServletResponseUtil.sendFile(res, fileName, bytes, contentType);
+			ServletResponseUtil.sendFile(
+				response, fileName, bytes, contentType);
 
 			return null;
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, request, response);
 
 			return null;
 		}
 	}
 
-	protected String getTemplateId(HttpServletRequest req) {
-		String templateId = ParamUtil.getString(req, "templateId");
+	protected String getTemplateId(HttpServletRequest request) {
+		String templateId = ParamUtil.getString(request, "templateId");
 
 		// Backwards compatibility
 
 		if (Validator.isNull(templateId)) {
-			templateId = ParamUtil.getString(req, "template_id");
+			templateId = ParamUtil.getString(request, "template_id");
 		}
 
 		return templateId;

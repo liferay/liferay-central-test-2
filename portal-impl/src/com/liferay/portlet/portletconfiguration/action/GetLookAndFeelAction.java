@@ -50,19 +50,19 @@ import org.apache.struts.action.ActionMapping;
 public class GetLookAndFeelAction extends JSONAction {
 
 	public String getJSON(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
 
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
-		String portletId = ParamUtil.getString(req, "portletId");
+		String portletId = ParamUtil.getString(request, "portletId");
 
 		if (!PortletPermissionUtil.contains(
 				permissionChecker, themeDisplay.getPlid(), portletId,

@@ -56,30 +56,30 @@ import org.apache.struts.action.ActionMapping;
 public class ExportUsersAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		try {
-			String csv = getUsersCSV(req);
+			String csv = getUsersCSV(request);
 
 			String fileName = "users.csv";
 			byte[] bytes = csv.getBytes();
 
 			ServletResponseUtil.sendFile(
-				res, fileName, bytes, ContentTypes.TEXT_CSV_UTF8);
+				response, fileName, bytes, ContentTypes.TEXT_CSV_UTF8);
 
 			return null;
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, request, response);
 
 			return null;
 		}
 	}
 
-	protected String getUsersCSV(HttpServletRequest req) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+	protected String getUsersCSV(HttpServletRequest request) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		if (!RoleLocalServiceUtil.hasUserRole(
@@ -90,10 +90,10 @@ public class ExportUsersAction extends Action {
 		}
 
 		String exportProgressId = ParamUtil.getString(
-			req, "exportProgressId");
+			request, "exportProgressId");
 
 		ProgressTracker progressTracker = new ProgressTracker(
-			req, exportProgressId);
+			request, exportProgressId);
 
 		progressTracker.start();
 

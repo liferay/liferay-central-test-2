@@ -57,15 +57,15 @@ import org.apache.struts.action.ActionMapping;
 public class ViewAction extends PortletAction {
 
 	public ActionForward strutsExecute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-		long groupId = ParamUtil.getLong(req, "groupId");
-		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
+		long groupId = ParamUtil.getLong(request, "groupId");
+		boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
 
 		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 			groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, 0,
@@ -79,10 +79,10 @@ public class ViewAction extends PortletAction {
 			redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
 		}
 		else {
-			redirect = ParamUtil.getString(req, "redirect");
+			redirect = ParamUtil.getString(request, "redirect");
 
 			SessionErrors.add(
-				req, NoSuchLayoutSetException.class.getName(),
+				request, NoSuchLayoutSetException.class.getName(),
 				new NoSuchLayoutSetException(
 					"{groupId=" + groupId + ",privateLayout=" + privateLayout +
 						"}"));
@@ -90,21 +90,22 @@ public class ViewAction extends PortletAction {
 
 		// Send redirect
 
-		res.sendRedirect(redirect);
+		response.sendRedirect(redirect);
 
 		return null;
 	}
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-		long groupId = ParamUtil.getLong(req, "groupId");
-		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+		boolean privateLayout = ParamUtil.getBoolean(
+			actionRequest, "privateLayout");
 
 		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 			groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, 0,
@@ -118,10 +119,10 @@ public class ViewAction extends PortletAction {
 			redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
 		}
 		else {
-			redirect = ParamUtil.getString(req, "redirect");
+			redirect = ParamUtil.getString(actionRequest, "redirect");
 
 			SessionErrors.add(
-				req, NoSuchLayoutSetException.class.getName(),
+				actionRequest, NoSuchLayoutSetException.class.getName(),
 				new NoSuchLayoutSetException(
 					"{groupId=" + groupId + ",privateLayout=" + privateLayout +
 						"}"));
@@ -129,12 +130,12 @@ public class ViewAction extends PortletAction {
 
 		// Send redirect
 
-		res.sendRedirect(redirect);
+		actionResponse.sendRedirect(redirect);
 	}
 
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		return mapping.findForward("portlet.my_places.view");

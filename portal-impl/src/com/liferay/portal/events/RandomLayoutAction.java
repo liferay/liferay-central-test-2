@@ -53,7 +53,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class RandomLayoutAction extends Action {
 
-	public void run(HttpServletRequest req, HttpServletResponse res)
+	public void run(HttpServletRequest request, HttpServletResponse response)
 		throws ActionException {
 
 		try {
@@ -64,8 +64,8 @@ public class RandomLayoutAction extends Action {
 
 			// Do not randomize layout unless the user is logged in
 
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 			if (!themeDisplay.isSignedIn()) {
 				return;
@@ -73,7 +73,7 @@ public class RandomLayoutAction extends Action {
 
 			// Do not randomize layout unless the user is accessing the portal
 
-			String requestURI = GetterUtil.getString(req.getRequestURI());
+			String requestURI = GetterUtil.getString(request.getRequestURI());
 
 			if (!requestURI.endsWith("/portal/layout")) {
 				return;
@@ -102,7 +102,7 @@ public class RandomLayoutAction extends Action {
 				themeDisplay.setLayoutTypePortlet(
 					(LayoutTypePortlet)randomLayout.getLayoutType());
 
-				req.setAttribute(WebKeys.LAYOUT, randomLayout);
+				request.setAttribute(WebKeys.LAYOUT, randomLayout);
 			}
 		}
 		catch (Exception e) {

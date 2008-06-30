@@ -47,17 +47,17 @@ import org.apache.struts.action.ActionMapping;
 public abstract class JSONAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
-		String callback = ParamUtil.getString(req, "callback");
-		String instance = ParamUtil.getString(req, "inst");
+		String callback = ParamUtil.getString(request, "callback");
+		String instance = ParamUtil.getString(request, "inst");
 
 		String json = null;
 
 		try {
-			json = getJSON(mapping, form, req, res);
+			json = getJSON(mapping, form, request, response);
 
 			if (Validator.isNotNull(callback)) {
 				json = callback + "(" + json + ");";
@@ -68,16 +68,17 @@ public abstract class JSONAction extends Action {
 		}
 		catch (Exception e) {
 			PortalUtil.sendError(
-				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, req, res);
+				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, request,
+				response);
 
 			return null;
 		}
 
 		if (Validator.isNotNull(json)) {
-			res.setContentType(ContentTypes.TEXT_JAVASCRIPT);
-			res.setHeader(HttpHeaders.CACHE_CONTROL, "no-cache");
+			response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
+			response.setHeader(HttpHeaders.CACHE_CONTROL, "no-cache");
 
-			PrintWriter pw = res.getWriter();
+			PrintWriter pw = response.getWriter();
 
 			pw.write(json);
 
@@ -88,8 +89,8 @@ public abstract class JSONAction extends Action {
 	}
 
 	public abstract String getJSON(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception;
 
 }

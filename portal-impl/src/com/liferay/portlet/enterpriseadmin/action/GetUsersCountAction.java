@@ -47,15 +47,15 @@ import org.apache.struts.action.ActionMapping;
 public class GetUsersCountAction extends AJAXAction {
 
 	public String getText(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
-		long companyId = PortalUtil.getCompanyId(req);
+		long companyId = PortalUtil.getCompanyId(request);
 
-		String className = ParamUtil.getString(req, "className");
-		long[] ids = StringUtil.split(ParamUtil.getString(req, "ids"), 0L);
-		boolean active = ParamUtil.getBoolean(req, "active");
+		String className = ParamUtil.getString(request, "className");
+		long[] ids = StringUtil.split(ParamUtil.getString(request, "ids"), 0L);
+		boolean active = ParamUtil.getBoolean(request, "active");
 
 		int count = 0;
 

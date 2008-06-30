@@ -56,36 +56,37 @@ import org.apache.struts.action.ActionMapping;
 public class RSSAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		try {
 			ServletResponseUtil.sendFile(
-				res, null, getRSS(req), ContentTypes.TEXT_XML_UTF8);
+				response, null, getRSS(request), ContentTypes.TEXT_XML_UTF8);
 
 			return null;
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, request, response);
 
 			return null;
 		}
 	}
 
-	protected byte[] getRSS(HttpServletRequest req) throws Exception {
+	protected byte[] getRSS(HttpServletRequest request) throws Exception {
 		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+			(ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
 
-		long companyId = ParamUtil.getLong(req, "companyId");
-		long groupId = ParamUtil.getLong(req, "groupId");
+		long companyId = ParamUtil.getLong(request, "companyId");
+		long groupId = ParamUtil.getLong(request, "groupId");
 		int max = ParamUtil.getInteger(
-			req, "max", SearchContainer.DEFAULT_DELTA);
-		String type = ParamUtil.getString(req, "type", RSSUtil.DEFAULT_TYPE);
+			request, "max", SearchContainer.DEFAULT_DELTA);
+		String type = ParamUtil.getString(
+			request, "type", RSSUtil.DEFAULT_TYPE);
 		double version = ParamUtil.getDouble(
-			req, "version", RSSUtil.DEFAULT_VERSION);
+			request, "version", RSSUtil.DEFAULT_VERSION);
 		String displayStyle = ParamUtil.getString(
-			req, "displayStyle", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
+			request, "displayStyle", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
 
 		String feedURL = StringPool.BLANK;
 
@@ -107,13 +108,13 @@ public class RSSAction extends Action {
 			long[] classNameIds = new long[0];
 
 			String[] allEntries = StringUtil.split(
-				ParamUtil.getString(req, "tags"));
+				ParamUtil.getString(request, "tags"));
 
 			long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(
 				companyId, allEntries);
 
 			String[] notEntries = StringUtil.split(
-				ParamUtil.getString(req, "noTags"));
+				ParamUtil.getString(request, "noTags"));
 
 			long[] notEntryIds = TagsEntryLocalServiceUtil.getEntryIds(
 				companyId, notEntries);

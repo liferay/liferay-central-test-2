@@ -45,13 +45,13 @@ import org.json.JSONObject;
 public class RateEntryAction extends JSONAction {
 
 	public String getJSON(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
-		String className = getClassName(req);
-		long classPK = getClassPK(req);
-		double score = ParamUtil.getDouble(req, "score");
+		String className = getClassName(request);
+		long classPK = getClassPK(request);
+		double score = ParamUtil.getDouble(request, "score");
 
 		if (score == 0) {
 			RatingsEntryServiceUtil.deleteEntry(className, classPK);
@@ -72,12 +72,12 @@ public class RateEntryAction extends JSONAction {
 		return jsonObj.toString();
 	}
 
-	protected String getClassName(HttpServletRequest req) {
-		return ParamUtil.getString(req, "className");
+	protected String getClassName(HttpServletRequest request) {
+		return ParamUtil.getString(request, "className");
 	}
 
-	protected long getClassPK(HttpServletRequest req) {
-		return ParamUtil.getLong(req, "classPK");
+	protected long getClassPK(HttpServletRequest request) {
+		return ParamUtil.getLong(request, "classPK");
 	}
 
 }

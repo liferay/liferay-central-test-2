@@ -43,11 +43,11 @@ import org.apache.struts.action.ActionMapping;
 public class UpdateTermsOfUseAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
-		long userId = PortalUtil.getUserId(req);
+		long userId = PortalUtil.getUserId(request);
 
 		UserServiceUtil.updateAgreedToTermsOfUse(userId, true);
 

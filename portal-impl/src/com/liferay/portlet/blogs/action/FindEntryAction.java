@@ -60,23 +60,23 @@ import org.apache.struts.action.ActionMapping;
 public class FindEntryAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		try {
-			long plid = ParamUtil.getLong(req, "p_l_id");
-			String redirect = ParamUtil.getString(req, "redirect");
-			long entryId = ParamUtil.getLong(req, "entryId");
+			long plid = ParamUtil.getLong(request, "p_l_id");
+			String redirect = ParamUtil.getString(request, "redirect");
+			long entryId = ParamUtil.getLong(request, "entryId");
 			boolean showAllEntries = ParamUtil.getBoolean(
-				req, "showAllEntries");
+				request, "showAllEntries");
 
 			plid = getPlid(plid, entryId);
 
 			String urlTitle = getUrlTitle(entryId);
 
 			PortletURL portletURL = new PortletURLImpl(
-				req, PortletKeys.BLOGS, plid, PortletRequest.RENDER_PHASE);
+				request, PortletKeys.BLOGS, plid, PortletRequest.RENDER_PHASE);
 
 			portletURL.setWindowState(WindowState.NORMAL);
 			portletURL.setPortletMode(PortletMode.VIEW);
@@ -99,12 +99,12 @@ public class FindEntryAction extends Action {
 				}
 			}
 
-			res.sendRedirect(portletURL.toString());
+			response.sendRedirect(portletURL.toString());
 
 			return null;
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, request, response);
 
 			return null;
 		}

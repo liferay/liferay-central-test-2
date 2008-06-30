@@ -86,14 +86,14 @@ import org.apache.struts.action.ActionMapping;
 public class LoginAction extends Action {
 
 	public static String getLogin(
-			HttpServletRequest req, String paramName, Company company)
+			HttpServletRequest request, String paramName, Company company)
 		throws PortalException, SystemException {
 
-		String login = req.getParameter(paramName);
+		String login = request.getParameter(paramName);
 
 		if ((login == null) || (login.equals(StringPool.NULL))) {
 			login = GetterUtil.getString(
-				CookieKeys.getCookie(req, CookieKeys.LOGIN));
+				CookieKeys.getCookie(request, CookieKeys.LOGIN));
 
 			if (Validator.isNull(login) &&
 				company.getAuthType().equals(CompanyConstants.AUTH_TYPE_EA)) {
@@ -106,28 +106,28 @@ public class LoginAction extends Action {
 	}
 
 	public static void login(
-			HttpServletRequest req, HttpServletResponse res, String login,
-			String password, boolean rememberMe)
+			HttpServletRequest request, HttpServletResponse response,
+			String login, String password, boolean rememberMe)
 		throws Exception {
 
-		CookieKeys.validateSupportCookie(req);
+		CookieKeys.validateSupportCookie(request);
 
-		HttpSession ses = req.getSession();
+		HttpSession ses = request.getSession();
 
 		long userId = GetterUtil.getLong(login);
 
 		int authResult = Authenticator.FAILURE;
 
-		Company company = PortalUtil.getCompany(req);
+		Company company = PortalUtil.getCompany(request);
 
 		Map<String, String[]> headerMap = new HashMap<String, String[]>();
 
-		Enumeration<String> enu1 = req.getHeaderNames();
+		Enumeration<String> enu1 = request.getHeaderNames();
 
 		while (enu1.hasMoreElements()) {
 			String name = enu1.nextElement();
 
-			Enumeration<String> enu2 = req.getHeaders(name);
+			Enumeration<String> enu2 = request.getHeaders(name);
 
 			List<String> headers = new ArrayList<String>();
 
@@ -140,7 +140,7 @@ public class LoginAction extends Action {
 			headerMap.put(name, headers.toArray(new String[headers.size()]));
 		}
 
-		Map<String, String[]> parameterMap = req.getParameterMap();
+		Map<String, String[]> parameterMap = request.getParameterMap();
 
 		if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_EA)) {
 			authResult = UserLocalServiceUtil.authenticateByEmailAddress(
@@ -187,7 +187,7 @@ public class LoginAction extends Action {
 					}
 				}
 
-				ses = req.getSession(true);
+				ses = request.getSession(true);
 
 				if (httpsInitial != null) {
 					ses.setAttribute(WebKeys.HTTPS_INITIAL, httpsInitial);
@@ -200,7 +200,7 @@ public class LoginAction extends Action {
 
 			// Set cookies
 
-			String domain = CookieKeys.getDomain(req);
+			String domain = CookieKeys.getDomain(request);
 
 			User user = UserLocalServiceUtil.getUserById(userId);
 
@@ -296,12 +296,12 @@ public class LoginAction extends Action {
 			screenNameCookie.setMaxAge(loginMaxAge);
 			screenNameCookie.setPath(StringPool.SLASH);
 
-			CookieKeys.addCookie(res, companyIdCookie);
-			CookieKeys.addCookie(res, idCookie);
-			CookieKeys.addCookie(res, passwordCookie);
-			CookieKeys.addCookie(res, rememberMeCookie);
-			CookieKeys.addCookie(res, loginCookie);
-			CookieKeys.addCookie(res, screenNameCookie);
+			CookieKeys.addCookie(response, companyIdCookie);
+			CookieKeys.addCookie(response, idCookie);
+			CookieKeys.addCookie(response, passwordCookie);
+			CookieKeys.addCookie(response, rememberMeCookie);
+			CookieKeys.addCookie(response, loginCookie);
+			CookieKeys.addCookie(response, screenNameCookie);
 		}
 		else {
 			throw new AuthException();
@@ -309,30 +309,30 @@ public class LoginAction extends Action {
 	}
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		if (PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS &&
-			!req.isSecure()) {
+			!request.isSecure()) {
 
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 			StringBuilder sb = new StringBuilder();
 
-			sb.append(PortalUtil.getPortalURL(req, true));
+			sb.append(PortalUtil.getPortalURL(request, true));
 			sb.append(themeDisplay.getURLSignIn());
 
-			res.sendRedirect(sb.toString());
+			response.sendRedirect(sb.toString());
 
 			return null;
 		}
 
-		HttpSession ses = req.getSession();
+		HttpSession ses = request.getSession();
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		if (ses.getAttribute("j_username") != null &&
 			ses.getAttribute("j_password") != null) {
@@ -341,29 +341,29 @@ public class LoginAction extends Action {
 				return mapping.findForward("/portal/touch_protected.jsp");
 			}
 			else {
-				res.sendRedirect(themeDisplay.getPathMain());
+				response.sendRedirect(themeDisplay.getPathMain());
 
 				return null;
 			}
 		}
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(request, Constants.CMD);
 
 		if (cmd.equals("already-registered")) {
 			try {
-				login(req, res);
+				login(request, response);
 
 				if (PropsValues.PORTAL_JAAS_ENABLE) {
 					return mapping.findForward("/portal/touch_protected.jsp");
 				}
 				else {
-					String redirect = ParamUtil.getString(req, "redirect");
+					String redirect = ParamUtil.getString(request, "redirect");
 
 					if (Validator.isNotNull(redirect)) {
-						res.sendRedirect(redirect);
+						response.sendRedirect(redirect);
 					}
 					else {
-						res.sendRedirect(themeDisplay.getPathMain());
+						response.sendRedirect(themeDisplay.getPathMain());
 					}
 
 					return null;
@@ -376,10 +376,10 @@ public class LoginAction extends Action {
 					if (cause instanceof PasswordExpiredException ||
 						cause instanceof UserLockoutException) {
 
-						SessionErrors.add(req, cause.getClass().getName());
+						SessionErrors.add(request, cause.getClass().getName());
 					}
 					else {
-						SessionErrors.add(req, e.getClass().getName());
+						SessionErrors.add(request, e.getClass().getName());
 					}
 
 					return mapping.findForward("portal.login");
@@ -393,12 +393,12 @@ public class LoginAction extends Action {
 						 e instanceof UserPasswordException ||
 						 e instanceof UserScreenNameException) {
 
-					SessionErrors.add(req, e.getClass().getName());
+					SessionErrors.add(request, e.getClass().getName());
 
 					return mapping.findForward("portal.login");
 				}
 				else {
-					PortalUtil.sendError(e, req, res);
+					PortalUtil.sendError(e, request, response);
 
 					return null;
 				}
@@ -406,7 +406,7 @@ public class LoginAction extends Action {
 		}
 		else if (cmd.equals("forgot-password")) {
 			try {
-				sendPassword(req);
+				sendPassword(request);
 
 				return mapping.findForward("portal.login");
 			}
@@ -416,12 +416,12 @@ public class LoginAction extends Action {
 					e instanceof SendPasswordException ||
 					e instanceof UserEmailAddressException) {
 
-					SessionErrors.add(req, e.getClass().getName());
+					SessionErrors.add(request, e.getClass().getName());
 
 					return mapping.findForward("portal.login");
 				}
 				else {
-					PortalUtil.sendError(e, req, res);
+					PortalUtil.sendError(e, request, response);
 
 					return null;
 				}
@@ -435,7 +435,7 @@ public class LoginAction extends Action {
 			}
 
 			if (Validator.isNotNull(authLoginURL)) {
-				res.sendRedirect(authLoginURL);
+				response.sendRedirect(authLoginURL);
 
 				return null;
 			}
@@ -445,20 +445,21 @@ public class LoginAction extends Action {
 		}
 	}
 
-	protected void login(HttpServletRequest req, HttpServletResponse res)
+	protected void login(
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
-		String login = ParamUtil.getString(req, "login").toLowerCase();
+		String login = ParamUtil.getString(request, "login").toLowerCase();
 		String password = ParamUtil.getString(
-			req, SessionParameters.get(req, "password"));
-		boolean rememberMe = ParamUtil.getBoolean(req, "rememberMe");
+			request, SessionParameters.get(request, "password"));
+		boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
 
-		login(req, res, login, password, rememberMe);
+		login(request, response, login, password, rememberMe);
 	}
 
-	protected void sendPassword(HttpServletRequest req) throws Exception {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+	protected void sendPassword(HttpServletRequest request) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		Company company = themeDisplay.getCompany();
 
@@ -467,20 +468,20 @@ public class LoginAction extends Action {
 		}
 
 		if (PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD) {
-			CaptchaUtil.check(req);
+			CaptchaUtil.check(request);
 		}
 
-		String emailAddress = ParamUtil.getString(req, "emailAddress");
+		String emailAddress = ParamUtil.getString(request, "emailAddress");
 
-		String remoteAddr = req.getRemoteAddr();
-		String remoteHost = req.getRemoteHost();
-		String userAgent = req.getHeader(HttpHeaders.USER_AGENT);
+		String remoteAddr = request.getRemoteAddr();
+		String remoteHost = request.getRemoteHost();
+		String userAgent = request.getHeader(HttpHeaders.USER_AGENT);
 
 		UserLocalServiceUtil.sendPassword(
-			PortalUtil.getCompanyId(req), emailAddress, remoteAddr, remoteHost,
-			userAgent);
+			PortalUtil.getCompanyId(request), emailAddress, remoteAddr,
+			remoteHost, userAgent);
 
-		SessionMessages.add(req, "request_processed", emailAddress);
+		SessionMessages.add(request, "request_processed", emailAddress);
 	}
 
 	private static Log _log = LogFactory.getLog(LoginAction.class);

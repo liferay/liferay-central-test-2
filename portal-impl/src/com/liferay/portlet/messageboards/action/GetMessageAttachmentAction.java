@@ -55,48 +55,48 @@ import org.apache.struts.action.ActionMapping;
 public class GetMessageAttachmentAction extends PortletAction {
 
 	public ActionForward strutsExecute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		try {
-			long messageId = ParamUtil.getLong(req, "messageId");
-			String fileName = ParamUtil.getString(req, "attachment");
+			long messageId = ParamUtil.getLong(request, "messageId");
+			String fileName = ParamUtil.getString(request, "attachment");
 
-			getFile(messageId, fileName, res);
+			getFile(messageId, fileName, response);
 
 			return null;
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, request, response);
 
 			return null;
 		}
 	}
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		try {
-			long messageId = ParamUtil.getLong(req, "messageId");
-			String fileName = ParamUtil.getString(req, "attachment");
+			long messageId = ParamUtil.getLong(actionRequest, "messageId");
+			String fileName = ParamUtil.getString(actionRequest, "attachment");
 
-			HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(
-				res);
+			HttpServletResponse response = PortalUtil.getHttpServletResponse(
+				actionResponse);
 
-			getFile(messageId, fileName, httpRes);
+			getFile(messageId, fileName, response);
 
-			setForward(req, ActionConstants.COMMON_NULL);
+			setForward(actionRequest, ActionConstants.COMMON_NULL);
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, actionRequest, actionResponse);
 		}
 	}
 
 	protected void getFile(
-			long messageId, String fileName, HttpServletResponse res)
+			long messageId, String fileName, HttpServletResponse response)
 		throws Exception {
 
 		InputStream is = null;
@@ -110,7 +110,7 @@ public class GetMessageAttachmentAction extends PortletAction {
 
 			String contentType = MimeTypesUtil.getContentType(fileName);
 
-			ServletResponseUtil.sendFile(res, fileName, is, contentType);
+			ServletResponseUtil.sendFile(response, fileName, is, contentType);
 		}
 		finally {
 			ServletResponseUtil.cleanUp(is);

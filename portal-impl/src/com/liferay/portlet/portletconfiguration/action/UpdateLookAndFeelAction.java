@@ -62,21 +62,21 @@ import org.json.JSONObject;
 public class UpdateLookAndFeelAction extends JSONAction {
 
 	public String getJSON(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
-		HttpSession ses = req.getSession();
+		HttpSession session = request.getSession();
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
 
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
-		String portletId = ParamUtil.getString(req, "portletId");
+		String portletId = ParamUtil.getString(request, "portletId");
 
 		if (!PortletPermissionUtil.contains(
 				permissionChecker, themeDisplay.getPlid(), portletId,
@@ -89,7 +89,7 @@ public class UpdateLookAndFeelAction extends JSONAction {
 			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 				layout, portletId);
 
-		String css = ParamUtil.getString(req, "css");
+		String css = ParamUtil.getString(request, "css");
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Updating css " + css);
@@ -157,8 +157,8 @@ public class UpdateLookAndFeelAction extends JSONAction {
 		portletSetup.store();
 
 		InvokerPortlet.clearResponse(
-			ses, layout.getPrimaryKey(), portletId,
-			LanguageUtil.getLanguageId(req));
+			session, layout.getPrimaryKey(), portletId,
+			LanguageUtil.getLanguageId(request));
 
 		return null;
 	}

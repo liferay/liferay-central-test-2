@@ -75,23 +75,23 @@ import org.dom4j.io.SAXReader;
 public class GetArticlesAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		try {
-			List<JournalArticle> articles = getArticles(req);
+			List<JournalArticle> articles = getArticles(request);
 
 			String fileName = null;
-			byte[] bytes = getContent(req, articles);
+			byte[] bytes = getContent(request, articles);
 
 			ServletResponseUtil.sendFile(
-				res, fileName, bytes, ContentTypes.TEXT_XML_UTF8);
+				response, fileName, bytes, ContentTypes.TEXT_XML_UTF8);
 
 			return null;
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, request, response);
 
 			return null;
 		}
@@ -173,15 +173,15 @@ public class GetArticlesAction extends Action {
 	}
 
 	protected byte[] getContent(
-			HttpServletRequest req, List<JournalArticle> articles)
+			HttpServletRequest request, List<JournalArticle> articles)
 		throws Exception {
 
-		long groupId = ParamUtil.getLong(req, "groupId");
+		long groupId = ParamUtil.getLong(request, "groupId");
 
-		String languageId = LanguageUtil.getLanguageId(req);
+		String languageId = LanguageUtil.getLanguageId(request);
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		Map<String, String> tokens = JournalUtil.getTokens(
 			groupId, themeDisplay);

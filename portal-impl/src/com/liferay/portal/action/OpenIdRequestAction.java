@@ -61,18 +61,18 @@ import org.openid4java.message.sreg.SRegRequest;
 public class OpenIdRequestAction extends Action {
 
 	public static void sendOpenIdRequest(
-			ThemeDisplay themeDisplay, HttpServletRequest req,
-			HttpServletResponse res, String openId)
+			ThemeDisplay themeDisplay, HttpServletRequest request,
+			HttpServletResponse response, String openId)
 		throws Exception {
 
 		if (!OpenIdUtil.isEnabled(themeDisplay.getCompanyId())) {
 			return;
 		}
 
-		HttpSession ses = req.getSession();
+		HttpSession ses = request.getSession();
 
 		String returnURL =
-			PortalUtil.getPortalURL(req) + themeDisplay.getPathMain() +
+			PortalUtil.getPortalURL(request) + themeDisplay.getPathMain() +
 				"/portal/open_id_response";
 
 		ConsumerManager manager = OpenIdUtil.getConsumerManager();
@@ -120,37 +120,37 @@ public class OpenIdRequestAction extends Action {
 			}
 		}
 
-		res.sendRedirect(authReq.getDestinationUrl(true));
+		response.sendRedirect(authReq.getDestinationUrl(true));
 	}
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		if (!OpenIdUtil.isEnabled(themeDisplay.getCompanyId())) {
 			return null;
 		}
 
 		try {
-			String openId = ParamUtil.getString(req, "openId");
+			String openId = ParamUtil.getString(request, "openId");
 
-			sendOpenIdRequest(themeDisplay, req, res, openId);
+			sendOpenIdRequest(themeDisplay, request, response, openId);
 		}
 		catch (Exception e) {
 			if (e instanceof ConsumerException ||
 				e instanceof DiscoveryException ||
 				e instanceof MessageException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(request, e.getClass().getName());
 
 				return mapping.findForward("portal.login");
 			}
 			else {
-				PortalUtil.sendError(e, req, res);
+				PortalUtil.sendError(e, request, response);
 
 				return null;
 			}

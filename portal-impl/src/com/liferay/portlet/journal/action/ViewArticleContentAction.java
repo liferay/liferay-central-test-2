@@ -74,33 +74,33 @@ import org.dom4j.io.SAXReader;
 public class ViewArticleContentAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
-		UploadServletRequest uploadReq = null;
+		UploadServletRequest uploadRequest = null;
 
 		try {
-			String cmd = ParamUtil.getString(req, Constants.CMD);
+			String cmd = ParamUtil.getString(request, Constants.CMD);
 
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
-			long groupId = ParamUtil.getLong(req, "groupId");
-			String articleId = ParamUtil.getString(req, "articleId");
+			long groupId = ParamUtil.getLong(request, "groupId");
+			String articleId = ParamUtil.getString(request, "articleId");
 			double version = ParamUtil.getDouble(
-				req, "version", JournalArticleImpl.DEFAULT_VERSION);
+				request, "version", JournalArticleImpl.DEFAULT_VERSION);
 
-			String languageId = LanguageUtil.getLanguageId(req);
+			String languageId = LanguageUtil.getLanguageId(request);
 
 			String output = null;
 
 			if (cmd.equals(Constants.PREVIEW)) {
-				uploadReq = new UploadServletRequestImpl(req);
+				uploadRequest = new UploadServletRequestImpl(request);
 
-				String title = ParamUtil.getString(uploadReq, "title");
+				String title = ParamUtil.getString(uploadRequest, "title");
 				String description = ParamUtil.getString(
-					uploadReq, "description");
+					uploadRequest, "description");
 
 				Date now = new Date();
 
@@ -108,9 +108,9 @@ public class ViewArticleContentAction extends Action {
 				Date modifiedDate = now;
 				Date displayDate = now;
 
-				User user = PortalUtil.getUser(uploadReq);
+				User user = PortalUtil.getUser(uploadRequest);
 
-				String xml = ParamUtil.getString(uploadReq, "xml");
+				String xml = ParamUtil.getString(uploadRequest, "xml");
 
 				SAXReader reader = new SAXReader();
 
@@ -124,7 +124,7 @@ public class ViewArticleContentAction extends Action {
 
 				format(
 					groupId, articleId, version, previewArticleId, root,
-					uploadReq);
+					uploadRequest);
 
 				Map<String, String> tokens = JournalUtil.getTokens(
 					groupId, themeDisplay);
@@ -147,7 +147,7 @@ public class ViewArticleContentAction extends Action {
 				xml = JournalUtil.formatXML(doc);
 
 				String templateId = ParamUtil.getString(
-					uploadReq, "templateId");
+					uploadRequest, "templateId");
 
 				JournalTemplate template =
 					JournalTemplateLocalServiceUtil.getTemplate(
@@ -164,7 +164,7 @@ public class ViewArticleContentAction extends Action {
 					groupId, articleId, version, languageId, themeDisplay);
 			}
 
-			req.setAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT, output);
+			request.setAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT, output);
 
 			if (output.startsWith("<?xml ")) {
 				return mapping.findForward(
@@ -176,20 +176,21 @@ public class ViewArticleContentAction extends Action {
 			}
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, request, response);
 
 			return null;
 		}
 		finally {
-			if (uploadReq != null) {
-				uploadReq.cleanUp();
+			if (uploadRequest != null) {
+				uploadRequest.cleanUp();
 			}
 		}
 	}
 
 	protected void format(
 			long groupId, String articleId, double version,
-			String previewArticleId, Element root, UploadServletRequest req)
+			String previewArticleId, Element root,
+			UploadServletRequest uploadRequest)
 		throws Exception {
 
 		Iterator<Element> itr = root.elements().iterator();
@@ -216,7 +217,7 @@ public class ViewArticleContentAction extends Action {
 			}
 
 			if (elType.equals("image") && Validator.isNull(elContent)) {
-				File file = req.getFile(
+				File file = uploadRequest.getFile(
 					"structure_image_" + elName + elLanguage);
 				byte[] bytes = FileUtil.getBytes(file);
 
@@ -226,9 +227,11 @@ public class ViewArticleContentAction extends Action {
 							groupId, previewArticleId, version, elName,
 							elLanguage, true);
 
+					String token = ImageServletTokenUtil.getToken(imageId);
+
 					dynamicContent.setText(
 						"/image/journal/article?img_id=" + imageId + "&t=" +
-							ImageServletTokenUtil.getToken(imageId));
+							token);
 
 					ImageLocalServiceUtil.updateImage(imageId, bytes);
 				}
@@ -239,15 +242,18 @@ public class ViewArticleContentAction extends Action {
 								groupId, articleId, version, elName,
 								elLanguage);
 
+						String token = ImageServletTokenUtil.getToken(imageId);
+
 						dynamicContent.setText(
-							"/image/journal/article?img_id=" + imageId + "&t=" +
-								ImageServletTokenUtil.getToken(imageId));
+							"/image/journal/article?img_id=" + imageId +
+								"&t=" + token);
 					}
 				}
 			}
 
 			format(
-				groupId, articleId, version, previewArticleId, el, req);
+				groupId, articleId, version, previewArticleId, el,
+				uploadRequest);
 		}
 	}
 

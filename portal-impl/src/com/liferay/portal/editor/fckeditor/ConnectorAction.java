@@ -48,15 +48,15 @@ import org.apache.struts.action.ActionMapping;
 public class ConnectorAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		try {
-			String command = req.getParameter("Command");
-			String type = req.getParameter("Type");
-			String currentFolder = req.getParameter("CurrentFolder");
-			String newFolder = ParamUtil.getString(req, "NewFolderName");
+			String command = request.getParameter("Command");
+			String type = request.getParameter("Type");
+			String currentFolder = request.getParameter("CurrentFolder");
+			String newFolder = ParamUtil.getString(request, "NewFolderName");
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Command " + command);
@@ -65,15 +65,15 @@ public class ConnectorAction extends Action {
 				_log.debug("New folder " + newFolder);
 			}
 
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 			CommandArgument arg = new CommandArgument(
-				command, type, currentFolder, newFolder, themeDisplay, req);
+				command, type, currentFolder, newFolder, themeDisplay, request);
 
 			Command commandObj = CommandFactory.getCommand(command);
 
-			commandObj.execute(arg, req, res);
+			commandObj.execute(arg, request, response);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

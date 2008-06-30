@@ -45,26 +45,27 @@ import org.apache.struts.action.ActionMapping;
 public abstract class AJAXAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		String text = null;
 
 		try {
-			text = getText(mapping, form, req, res);
+			text = getText(mapping, form, request, response);
 		}
 		catch (Exception e) {
 			PortalUtil.sendError(
-				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, req, res);
+				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, request,
+				response);
 
 			return null;
 		}
 
-		res.setContentType(ContentTypes.TEXT_PLAIN_UTF8);
-		res.setHeader(HttpHeaders.CACHE_CONTROL, "no-cache");
+		response.setContentType(ContentTypes.TEXT_PLAIN_UTF8);
+		response.setHeader(HttpHeaders.CACHE_CONTROL, "no-cache");
 
-		PrintWriter pw = res.getWriter();
+		PrintWriter pw = response.getWriter();
 
 		pw.write(text);
 
@@ -74,8 +75,8 @@ public abstract class AJAXAction extends Action {
 	}
 
 	public abstract String getText(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception;
 
 }

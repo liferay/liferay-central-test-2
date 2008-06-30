@@ -40,7 +40,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LogMemoryUsageAction extends Action {
 
-	public void run(HttpServletRequest req, HttpServletResponse res) {
+	public void run(HttpServletRequest request, HttpServletResponse response) {
 		Runtime runtime = Runtime.getRuntime();
 
 		NumberFormat nf = NumberFormat.getInstance();

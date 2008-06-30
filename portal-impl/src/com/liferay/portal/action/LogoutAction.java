@@ -50,18 +50,18 @@ import org.apache.struts.action.ActionMapping;
 public class LogoutAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		try {
-			HttpSession ses = req.getSession();
+			HttpSession ses = request.getSession();
 
 			EventsProcessor.process(
-				PropsKeys.LOGOUT_EVENTS_PRE, PropsValues.LOGOUT_EVENTS_PRE, req,
-				res);
+				PropsKeys.LOGOUT_EVENTS_PRE, PropsValues.LOGOUT_EVENTS_PRE,
+				request, response);
 
-			String domain = CookieKeys.getDomain(req);
+			String domain = CookieKeys.getDomain(request);
 
 			Cookie companyIdCookie = new Cookie(
 				CookieKeys.COMPANY_ID, StringPool.BLANK);
@@ -92,9 +92,9 @@ public class LogoutAction extends Action {
 			passwordCookie.setMaxAge(0);
 			passwordCookie.setPath(StringPool.SLASH);
 
-			CookieKeys.addCookie(res, companyIdCookie);
-			CookieKeys.addCookie(res, idCookie);
-			CookieKeys.addCookie(res, passwordCookie);
+			CookieKeys.addCookie(response, companyIdCookie);
+			CookieKeys.addCookie(response, idCookie);
+			CookieKeys.addCookie(response, passwordCookie);
 
 			try {
 				ses.invalidate();
@@ -104,12 +104,12 @@ public class LogoutAction extends Action {
 
 			EventsProcessor.process(
 				PropsKeys.LOGOUT_EVENTS_POST, PropsValues.LOGOUT_EVENTS_POST,
-				req, res);
+				request, response);
 
 			return mapping.findForward(ActionConstants.COMMON_REFERER);
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, request, response);
 
 			return null;
 		}

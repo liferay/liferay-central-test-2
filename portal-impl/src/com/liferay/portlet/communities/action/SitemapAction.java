@@ -55,16 +55,17 @@ import org.apache.struts.action.ActionMapping;
 public class SitemapAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		try {
-			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-			long groupId = ParamUtil.getLong(req, "groupId");
-			boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
+			long groupId = ParamUtil.getLong(request, "groupId");
+			boolean privateLayout = ParamUtil.getBoolean(
+				request, "privateLayout");
 
 			LayoutSet layoutSet = null;
 
@@ -79,7 +80,7 @@ public class SitemapAction extends Action {
 					groupId, privateLayout);
 			}
 			else {
-				String host = PortalUtil.getHost(req);
+				String host = PortalUtil.getHost(request);
 
 				layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(host);
 			}
@@ -89,12 +90,12 @@ public class SitemapAction extends Action {
 				themeDisplay);
 
 			ServletResponseUtil.sendFile(
-				res, null, sitemap.getBytes(StringPool.UTF8),
+				response, null, sitemap.getBytes(StringPool.UTF8),
 				ContentTypes.TEXT_XML_UTF8);
 		}
 		catch (NoSuchLayoutSetException nslse) {
 			PortalUtil.sendError(
-				HttpServletResponse.SC_NOT_FOUND, nslse, req, res);
+				HttpServletResponse.SC_NOT_FOUND, nslse, request, response);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -102,7 +103,8 @@ public class SitemapAction extends Action {
 			}
 
 			PortalUtil.sendError(
-				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, req, res);
+				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, request,
+				response);
 		}
 
 		return null;

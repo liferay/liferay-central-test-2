@@ -48,24 +48,24 @@ import org.apache.struts.action.ActionMapping;
 public class SaveAction extends JSONAction {
 
 	public String getJSON(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-		String portletId = ParamUtil.getString(req, "portletId");
+		String portletId = ParamUtil.getString(request, "portletId");
 
 		PortletPermissionUtil.check(
 			themeDisplay.getPermissionChecker(), themeDisplay.getPlid(),
 			portletId, ActionKeys.CONFIGURATION);
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletId);
+			PortletPreferencesFactoryUtil.getPortletSetup(request, portletId);
 
-		String color = ParamUtil.getString(req, "color");
-		String data = ParamUtil.getString(req, "data");
+		String color = ParamUtil.getString(request, "color");
+		String data = ParamUtil.getString(request, "data");
 
 		if (Validator.isNotNull(color)) {
 			prefs.setValue("color", color);

@@ -109,20 +109,20 @@ public class ExportAction extends Action {
 	public static final String DEFAULT_USER_NAME = "Joe Bloggs";
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		try {
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 			PermissionChecker permissionChecker =
 				themeDisplay.getPermissionChecker();
 
 			if (permissionChecker.isOmniadmin()) {
 				long groupId = ParamUtil.getLong(
-					req, "groupId", DEFAULT_GROUP_ID);
+					request, "groupId", DEFAULT_GROUP_ID);
 
 				_primaryKeys.clear();
 				_primaryKeyCount = 1500;
@@ -139,13 +139,14 @@ public class ExportAction extends Action {
 
 				String fileName = "journal.zip";
 
-				ServletResponseUtil.sendFile(res, fileName, zipWriter.finish());
+				ServletResponseUtil.sendFile(
+					response, fileName, zipWriter.finish());
 			}
 
 			return null;
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, request, response);
 
 			return null;
 		}

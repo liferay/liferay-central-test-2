@@ -44,15 +44,15 @@ import org.apache.struts.action.ActionMapping;
 public class EditEntryAction extends JSONAction {
 
 	public String getJSON(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(request, Constants.CMD);
 
 		try {
 			if (cmd.equals("addEntry")) {
-				addEntry(req);
+				addEntry(request);
 			}
 		}
 		catch (Exception e) {
@@ -62,8 +62,8 @@ public class EditEntryAction extends JSONAction {
 		return null;
 	}
 
-	protected void addEntry(HttpServletRequest req) throws Exception {
-		String name = ParamUtil.getString(req, "name");
+	protected void addEntry(HttpServletRequest request) throws Exception {
+		String name = ParamUtil.getString(request, "name");
 
 		TagsEntryServiceUtil.addEntry(name);
 	}

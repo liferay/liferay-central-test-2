@@ -42,20 +42,20 @@ import org.apache.struts.Globals;
  */
 public class LoginPostAction extends Action {
 
-	public void run(HttpServletRequest req, HttpServletResponse res)
+	public void run(HttpServletRequest request, HttpServletResponse response)
 		throws ActionException {
 
 		try {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Running " + req.getRemoteUser());
+				_log.debug("Running " + request.getRemoteUser());
 			}
 
-			HttpSession ses = req.getSession();
+			HttpSession ses = request.getSession();
 
 			//long companyId = PortalUtil.getCompanyId(req);
 			//long userId = PortalUtil.getUserId(req);
 
-			LiveUsers.signIn(req);
+			LiveUsers.signIn(request);
 
 			ses.removeAttribute(Globals.LOCALE_KEY);
 		}

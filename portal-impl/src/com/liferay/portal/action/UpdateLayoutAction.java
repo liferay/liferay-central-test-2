@@ -67,11 +67,11 @@ import org.apache.struts.action.ActionMapping;
 public class UpdateLayoutAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		long userId = themeDisplay.getUserId();
@@ -83,9 +83,9 @@ public class UpdateLayoutAction extends Action {
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(request, Constants.CMD);
 
-		String portletId = ParamUtil.getString(req, "p_p_id");
+		String portletId = ParamUtil.getString(request, "p_p_id");
 
 		boolean updateLayout = true;
 		boolean deletePortlet = false;
@@ -93,8 +93,8 @@ public class UpdateLayoutAction extends Action {
 		if (cmd.equals(Constants.ADD)) {
 			portletId = layoutTypePortlet.addPortletId(userId, portletId);
 
-			String columnId = ParamUtil.getString(req, "p_p_col_id");
-			int columnPos = ParamUtil.getInteger(req, "p_p_col_pos");
+			String columnId = ParamUtil.getString(request, "p_p_col_id");
+			int columnPos = ParamUtil.getInteger(request, "p_p_col_pos");
 
 			if (Validator.isNotNull(columnId)) {
 				layoutTypePortlet.movePortletId(
@@ -114,10 +114,10 @@ public class UpdateLayoutAction extends Action {
 					layout.isPrivateLayout(), layout.getLayoutId(),
 					ActionKeys.UPDATE)) {
 
-				String height = ParamUtil.getString(req, "height");
-				String width = ParamUtil.getString(req, "width");
-				String top = ParamUtil.getString(req, "top");
-				String left = ParamUtil.getString(req, "left");
+				String height = ParamUtil.getString(request, "height");
+				String width = ParamUtil.getString(request, "width");
+				String top = ParamUtil.getString(request, "top");
+				String left = ParamUtil.getString(request, "left");
 
 				PortletPreferences prefs =
 					PortletPreferencesFactoryUtil.getLayoutPortletSetup(
@@ -136,7 +136,7 @@ public class UpdateLayoutAction extends Action {
 			}
 		}
 		else if (cmd.equals("minimize")) {
-			boolean restore = ParamUtil.getBoolean(req, "p_p_restore");
+			boolean restore = ParamUtil.getBoolean(request, "p_p_restore");
 
 			if (restore) {
 				layoutTypePortlet.removeStateMinPortletId(portletId);
@@ -148,15 +148,15 @@ public class UpdateLayoutAction extends Action {
 			updateLayout = false;
 		}
 		else if (cmd.equals("move")) {
-			String columnId = ParamUtil.getString(req, "p_p_col_id");
-			int columnPos = ParamUtil.getInteger(req, "p_p_col_pos");
+			String columnId = ParamUtil.getString(request, "p_p_col_id");
+			int columnPos = ParamUtil.getInteger(request, "p_p_col_pos");
 
 			layoutTypePortlet.movePortletId(
 				userId, portletId, columnId, columnPos);
 		}
 		else if (cmd.equals("template")) {
 			String layoutTemplateId = ParamUtil.getString(
-				req, "layoutTemplateId");
+				request, "layoutTemplateId");
 
 			layoutTypePortlet.setLayoutTemplateId(userId, layoutTemplateId);
 		}
@@ -190,11 +190,11 @@ public class UpdateLayoutAction extends Action {
 
 			if (layoutClone != null) {
 				layoutClone.update(
-					req, layout.getPlid(), layout.getTypeSettings());
+					request, layout.getPlid(), layout.getTypeSettings());
 			}
 		}
 
-		if (ParamUtil.getBoolean(req, "refresh")) {
+		if (ParamUtil.getBoolean(request, "refresh")) {
 			return mapping.findForward(ActionConstants.COMMON_REFERER);
 		}
 		else {
@@ -210,7 +210,7 @@ public class UpdateLayoutAction extends Action {
 				// instance id. Namespace the request if necessary. See
 				// LEP-4644.
 
-				long companyId = PortalUtil.getCompanyId(req);
+				long companyId = PortalUtil.getCompanyId(request);
 
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(
 					companyId, portletId);
@@ -222,15 +222,16 @@ public class UpdateLayoutAction extends Action {
 						PortalUtil.getPortletNamespace(portlet.getPortletId());
 
 					dynamicReq = new NamespaceServletRequest(
-						req, portletNamespace, portletNamespace);
+						request, portletNamespace, portletNamespace);
 				}
 				else {
-					dynamicReq = new DynamicServletRequest(req);
+					dynamicReq = new DynamicServletRequest(request);
 				}
 
 				dynamicReq.setParameter("p_p_id", portletId);
 
-				renderPortletAction.execute(mapping, form, dynamicReq, res);
+				renderPortletAction.execute(
+					mapping, form, dynamicReq, response);
 			}
 
 			return null;

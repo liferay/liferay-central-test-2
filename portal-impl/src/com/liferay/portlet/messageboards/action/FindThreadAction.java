@@ -51,18 +51,18 @@ import org.apache.struts.action.ActionMapping;
 public class FindThreadAction extends Action {
 
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		try {
-			long plid = ParamUtil.getLong(req, "p_l_id");
-			long threadId = ParamUtil.getLong(req, "threadId");
+			long plid = ParamUtil.getLong(request, "p_l_id");
+			long threadId = ParamUtil.getLong(request, "threadId");
 
 			MBThread thread = MBThreadLocalServiceUtil.getThread(threadId);
 
 			PortletURL portletURL = new PortletURLImpl(
-				req, PortletKeys.MESSAGE_BOARDS, plid,
+				request, PortletKeys.MESSAGE_BOARDS, plid,
 				PortletRequest.RENDER_PHASE);
 
 			portletURL.setWindowState(WindowState.NORMAL);
@@ -73,12 +73,12 @@ public class FindThreadAction extends Action {
 			portletURL.setParameter(
 				"messageId", String.valueOf(thread.getRootMessageId()));
 
-			res.sendRedirect(portletURL.toString());
+			response.sendRedirect(portletURL.toString());
 
 			return null;
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, request, response);
 
 			return null;
 		}

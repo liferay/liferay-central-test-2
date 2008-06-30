@@ -56,18 +56,18 @@ import org.apache.struts.action.ActionMapping;
 public class RSSAction extends PortletAction {
 
 	public ActionForward strutsExecute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
 		throws Exception {
 
 		try {
 			ServletResponseUtil.sendFile(
-				res, null, getRSS(req), ContentTypes.TEXT_XML_UTF8);
+				response, null, getRSS(request), ContentTypes.TEXT_XML_UTF8);
 
 			return null;
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, request, response);
 
 			return null;
 		}
@@ -75,41 +75,43 @@ public class RSSAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		try {
-			HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-			HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(
-				res);
+			HttpServletRequest request = PortalUtil.getHttpServletRequest(
+				actionRequest);
+			HttpServletResponse response = PortalUtil.getHttpServletResponse(
+				actionResponse);
 
 			ServletResponseUtil.sendFile(
-				httpRes, null, getRSS(httpReq), ContentTypes.TEXT_XML_UTF8);
+				response, null, getRSS(request), ContentTypes.TEXT_XML_UTF8);
 
-			setForward(req, ActionConstants.COMMON_NULL);
+			setForward(actionRequest, ActionConstants.COMMON_NULL);
 		}
 		catch (Exception e) {
-			PortalUtil.sendError(e, req, res);
+			PortalUtil.sendError(e, actionRequest, actionResponse);
 		}
 	}
 
-	protected byte[] getRSS(HttpServletRequest req) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+	protected byte[] getRSS(HttpServletRequest request) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
 
-		long plid = ParamUtil.getLong(req, "p_l_id");
-		long companyId = ParamUtil.getLong(req, "companyId");
-		long groupId = ParamUtil.getLong(req, "groupId");
-		long organizationId = ParamUtil.getLong(req, "organizationId");
+		long plid = ParamUtil.getLong(request, "p_l_id");
+		long companyId = ParamUtil.getLong(request, "companyId");
+		long groupId = ParamUtil.getLong(request, "groupId");
+		long organizationId = ParamUtil.getLong(request, "organizationId");
 		int max = ParamUtil.getInteger(
-			req, "max", SearchContainer.DEFAULT_DELTA);
-		String type = ParamUtil.getString(req, "type", RSSUtil.DEFAULT_TYPE);
+			request, "max", SearchContainer.DEFAULT_DELTA);
+		String type = ParamUtil.getString(
+			request, "type", RSSUtil.DEFAULT_TYPE);
 		double version = ParamUtil.getDouble(
-			req, "version", RSSUtil.DEFAULT_VERSION);
+			request, "version", RSSUtil.DEFAULT_VERSION);
 		String displayStyle = ParamUtil.getString(
-			req, "displayStyle", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
+			request, "displayStyle", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
 
 		String feedURL =
 			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
