@@ -8,7 +8,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.PropsKeys;
 
 import java.io.Serializable;
 
@@ -45,27 +44,30 @@ public class ReportsEntryModelImpl extends BaseModelImpl {
     public static final String TABLE_NAME = "ReportsEntry";
     public static final Object[][] TABLE_COLUMNS = {
             { "entryId", new Integer(Types.VARCHAR) },
-
+            
 
             { "companyId", new Integer(Types.VARCHAR) },
-
+            
 
             { "userId", new Integer(Types.VARCHAR) },
-
+            
 
             { "userName", new Integer(Types.VARCHAR) },
-
+            
 
             { "createDate", new Integer(Types.TIMESTAMP) },
-
+            
 
             { "modifiedDate", new Integer(Types.TIMESTAMP) },
-
+            
 
             { "name", new Integer(Types.VARCHAR) }
         };
     public static final String TABLE_SQL_CREATE = "create table ReportsEntry (entryId VARCHAR(75) not null primary key,companyId VARCHAR(75) null,userId VARCHAR(75) null,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null)";
     public static final String TABLE_SQL_DROP = "drop table ReportsEntry";
+    public static final String DATA_SOURCE = "liferayDataSource";
+    public static final String SESSION_FACTORY = "liferaySessionFactory";
+    public static final String TX_MANAGER = "liferayTransactionManager";
     public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
                 "value.object.finder.cache.enabled.com.ext.portlet.reports.model.ReportsEntry"),
             true);

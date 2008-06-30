@@ -9,6 +9,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQuery;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -17,8 +18,8 @@ import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.PropsKeys;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -36,7 +37,7 @@ import java.util.List;
 public class ReportsEntryPersistenceImpl extends BasePersistence
     implements ReportsEntryPersistence {
     private static Log _log = LogFactory.getLog(ReportsEntryPersistenceImpl.class);
-    private ModelListener[] _listeners;
+    private ModelListener[] _listeners = new ModelListener[0];
 
     public ReportsEntry create(String entryId) {
         ReportsEntry reportsEntry = new ReportsEntryImpl();
@@ -79,7 +80,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
     public ReportsEntry remove(ReportsEntry reportsEntry)
         throws SystemException {
-        if (_listeners != null) {
+        if (_listeners.length > 0) {
             for (ModelListener listener : _listeners) {
                 listener.onBeforeRemove(reportsEntry);
             }
@@ -87,7 +88,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
         reportsEntry = removeImpl(reportsEntry);
 
-        if (_listeners != null) {
+        if (_listeners.length > 0) {
             for (ModelListener listener : _listeners) {
                 listener.onAfterRemove(reportsEntry);
             }
@@ -147,7 +148,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
         throws SystemException {
         boolean isNew = reportsEntry.isNew();
 
-        if (_listeners != null) {
+        if (_listeners.length > 0) {
             for (ModelListener listener : _listeners) {
                 if (isNew) {
                     listener.onBeforeCreate(reportsEntry);
@@ -159,7 +160,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
         reportsEntry = updateImpl(reportsEntry, merge);
 
-        if (_listeners != null) {
+        if (_listeners.length > 0) {
             for (ModelListener listener : _listeners) {
                 if (isNew) {
                     listener.onAfterCreate(reportsEntry);
@@ -274,10 +275,10 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
                 Query q = session.createQuery(query.toString());
 
-                int queryPos = 0;
+                QueryPos qPos = QueryPos.getInstance(q);
 
                 if (companyId != null) {
-                    q.setString(queryPos++, companyId);
+                    qPos.add(companyId);
                 }
 
                 List<ReportsEntry> list = q.list();
@@ -297,26 +298,26 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
         }
     }
 
-    public List<ReportsEntry> findByCompanyId(String companyId, int begin,
+    public List<ReportsEntry> findByCompanyId(String companyId, int start,
         int end) throws SystemException {
-        return findByCompanyId(companyId, begin, end, null);
+        return findByCompanyId(companyId, start, end, null);
     }
 
-    public List<ReportsEntry> findByCompanyId(String companyId, int begin,
+    public List<ReportsEntry> findByCompanyId(String companyId, int start,
         int end, OrderByComparator obc) throws SystemException {
         boolean finderClassNameCacheEnabled = ReportsEntryModelImpl.CACHE_ENABLED;
         String finderClassName = ReportsEntry.class.getName();
         String finderMethodName = "findByCompanyId";
         String[] finderParams = new String[] {
                 String.class.getName(),
-
+                
                 "java.lang.Integer", "java.lang.Integer",
                 "com.liferay.portal.kernel.util.OrderByComparator"
             };
         Object[] finderArgs = new Object[] {
                 companyId,
-
-                String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+                
+                String.valueOf(start), String.valueOf(end), String.valueOf(obc)
             };
 
         Object result = null;
@@ -357,14 +358,14 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
                 Query q = session.createQuery(query.toString());
 
-                int queryPos = 0;
+                QueryPos qPos = QueryPos.getInstance(q);
 
                 if (companyId != null) {
-                    q.setString(queryPos++, companyId);
+                    qPos.add(companyId);
                 }
 
                 List<ReportsEntry> list = (List<ReportsEntry>) QueryUtil.list(q,
-                        getDialect(), begin, end);
+                        getDialect(), start, end);
 
                 FinderCache.putResult(finderClassNameCacheEnabled,
                     finderClassName, finderMethodName, finderParams,
@@ -459,10 +460,10 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
             Query q = session.createQuery(query.toString());
 
-            int queryPos = 0;
+            QueryPos qPos = QueryPos.getInstance(q);
 
             if (companyId != null) {
-                q.setString(queryPos++, companyId);
+                qPos.add(companyId);
             }
 
             Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -522,10 +523,10 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
                 Query q = session.createQuery(query.toString());
 
-                int queryPos = 0;
+                QueryPos qPos = QueryPos.getInstance(q);
 
                 if (userId != null) {
-                    q.setString(queryPos++, userId);
+                    qPos.add(userId);
                 }
 
                 List<ReportsEntry> list = q.list();
@@ -545,26 +546,26 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
         }
     }
 
-    public List<ReportsEntry> findByUserId(String userId, int begin, int end)
+    public List<ReportsEntry> findByUserId(String userId, int start, int end)
         throws SystemException {
-        return findByUserId(userId, begin, end, null);
+        return findByUserId(userId, start, end, null);
     }
 
-    public List<ReportsEntry> findByUserId(String userId, int begin, int end,
+    public List<ReportsEntry> findByUserId(String userId, int start, int end,
         OrderByComparator obc) throws SystemException {
         boolean finderClassNameCacheEnabled = ReportsEntryModelImpl.CACHE_ENABLED;
         String finderClassName = ReportsEntry.class.getName();
         String finderMethodName = "findByUserId";
         String[] finderParams = new String[] {
                 String.class.getName(),
-
+                
                 "java.lang.Integer", "java.lang.Integer",
                 "com.liferay.portal.kernel.util.OrderByComparator"
             };
         Object[] finderArgs = new Object[] {
                 userId,
-
-                String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+                
+                String.valueOf(start), String.valueOf(end), String.valueOf(obc)
             };
 
         Object result = null;
@@ -605,14 +606,14 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
                 Query q = session.createQuery(query.toString());
 
-                int queryPos = 0;
+                QueryPos qPos = QueryPos.getInstance(q);
 
                 if (userId != null) {
-                    q.setString(queryPos++, userId);
+                    qPos.add(userId);
                 }
 
                 List<ReportsEntry> list = (List<ReportsEntry>) QueryUtil.list(q,
-                        getDialect(), begin, end);
+                        getDialect(), start, end);
 
                 FinderCache.putResult(finderClassNameCacheEnabled,
                     finderClassName, finderMethodName, finderParams,
@@ -706,10 +707,10 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
             Query q = session.createQuery(query.toString());
 
-            int queryPos = 0;
+            QueryPos qPos = QueryPos.getInstance(q);
 
             if (userId != null) {
-                q.setString(queryPos++, userId);
+                qPos.add(userId);
             }
 
             Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -747,7 +748,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
     }
 
     public List<ReportsEntry> findWithDynamicQuery(
-        DynamicQueryInitializer queryInitializer, int begin, int end)
+        DynamicQueryInitializer queryInitializer, int start, int end)
         throws SystemException {
         Session session = null;
 
@@ -756,7 +757,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
             DynamicQuery query = queryInitializer.initialize(session);
 
-            query.setLimit(begin, end);
+            query.setLimit(start, end);
 
             return query.list();
         } catch (Exception e) {
@@ -770,12 +771,12 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
         return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
     }
 
-    public List<ReportsEntry> findAll(int begin, int end)
+    public List<ReportsEntry> findAll(int start, int end)
         throws SystemException {
-        return findAll(begin, end, null);
+        return findAll(start, end, null);
     }
 
-    public List<ReportsEntry> findAll(int begin, int end, OrderByComparator obc)
+    public List<ReportsEntry> findAll(int start, int end, OrderByComparator obc)
         throws SystemException {
         boolean finderClassNameCacheEnabled = ReportsEntryModelImpl.CACHE_ENABLED;
         String finderClassName = ReportsEntry.class.getName();
@@ -785,7 +786,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                 "com.liferay.portal.kernel.util.OrderByComparator"
             };
         Object[] finderArgs = new Object[] {
-                String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+                String.valueOf(start), String.valueOf(end), String.valueOf(obc)
             };
 
         Object result = null;
@@ -818,7 +819,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
                 Query q = session.createQuery(query.toString());
 
                 List<ReportsEntry> list = (List<ReportsEntry>) QueryUtil.list(q,
-                        getDialect(), begin, end);
+                        getDialect(), start, end);
 
                 if (obc == null) {
                     Collections.sort(list);
@@ -893,10 +894,10 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
                 Query q = session.createQuery(query.toString());
 
-                int queryPos = 0;
+                QueryPos qPos = QueryPos.getInstance(q);
 
                 if (companyId != null) {
-                    q.setString(queryPos++, companyId);
+                    qPos.add(companyId);
                 }
 
                 Long count = null;
@@ -962,10 +963,10 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
                 Query q = session.createQuery(query.toString());
 
-                int queryPos = 0;
+                QueryPos qPos = QueryPos.getInstance(q);
 
                 if (userId != null) {
-                    q.setString(queryPos++, userId);
+                    qPos.add(userId);
                 }
 
                 Long count = null;
@@ -1043,6 +1044,22 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
         } else {
             return ((Long) result).intValue();
         }
+    }
+
+    public void registerListener(ModelListener listener) {
+        List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+        listeners.add(listener);
+
+        _listeners = listeners.toArray(new ModelListener[listeners.size()]);
+    }
+
+    public void unregisterListener(ModelListener listener) {
+        List<ModelListener> listeners = ListUtil.fromArray(_listeners);
+
+        listeners.remove(listener);
+
+        _listeners = listeners.toArray(new ModelListener[listeners.size()]);
     }
 
     protected void initDao() {

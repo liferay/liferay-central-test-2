@@ -12,8 +12,8 @@ public class ReportsEntryUtil {
 
     public static com.ext.portlet.reports.model.ReportsEntry remove(
         java.lang.String entryId)
-        throws com.liferay.portal.SystemException,
-            com.ext.portlet.reports.NoSuchEntryException {
+        throws com.ext.portlet.reports.NoSuchEntryException,
+            com.liferay.portal.SystemException {
         return getPersistence().remove(entryId);
     }
 
@@ -59,8 +59,8 @@ public class ReportsEntryUtil {
 
     public static com.ext.portlet.reports.model.ReportsEntry findByPrimaryKey(
         java.lang.String entryId)
-        throws com.liferay.portal.SystemException,
-            com.ext.portlet.reports.NoSuchEntryException {
+        throws com.ext.portlet.reports.NoSuchEntryException,
+            com.liferay.portal.SystemException {
         return getPersistence().findByPrimaryKey(entryId);
     }
 
@@ -75,39 +75,39 @@ public class ReportsEntryUtil {
     }
 
     public static java.util.List<com.ext.portlet.reports.model.ReportsEntry> findByCompanyId(
-        java.lang.String companyId, int begin, int end)
+        java.lang.String companyId, int start, int end)
         throws com.liferay.portal.SystemException {
-        return getPersistence().findByCompanyId(companyId, begin, end);
+        return getPersistence().findByCompanyId(companyId, start, end);
     }
 
     public static java.util.List<com.ext.portlet.reports.model.ReportsEntry> findByCompanyId(
-        java.lang.String companyId, int begin, int end,
+        java.lang.String companyId, int start, int end,
         com.liferay.portal.kernel.util.OrderByComparator obc)
         throws com.liferay.portal.SystemException {
-        return getPersistence().findByCompanyId(companyId, begin, end, obc);
+        return getPersistence().findByCompanyId(companyId, start, end, obc);
     }
 
     public static com.ext.portlet.reports.model.ReportsEntry findByCompanyId_First(
         java.lang.String companyId,
         com.liferay.portal.kernel.util.OrderByComparator obc)
-        throws com.liferay.portal.SystemException,
-            com.ext.portlet.reports.NoSuchEntryException {
+        throws com.ext.portlet.reports.NoSuchEntryException,
+            com.liferay.portal.SystemException {
         return getPersistence().findByCompanyId_First(companyId, obc);
     }
 
     public static com.ext.portlet.reports.model.ReportsEntry findByCompanyId_Last(
         java.lang.String companyId,
         com.liferay.portal.kernel.util.OrderByComparator obc)
-        throws com.liferay.portal.SystemException,
-            com.ext.portlet.reports.NoSuchEntryException {
+        throws com.ext.portlet.reports.NoSuchEntryException,
+            com.liferay.portal.SystemException {
         return getPersistence().findByCompanyId_Last(companyId, obc);
     }
 
     public static com.ext.portlet.reports.model.ReportsEntry[] findByCompanyId_PrevAndNext(
         java.lang.String entryId, java.lang.String companyId,
         com.liferay.portal.kernel.util.OrderByComparator obc)
-        throws com.liferay.portal.SystemException,
-            com.ext.portlet.reports.NoSuchEntryException {
+        throws com.ext.portlet.reports.NoSuchEntryException,
+            com.liferay.portal.SystemException {
         return getPersistence()
                    .findByCompanyId_PrevAndNext(entryId, companyId, obc);
     }
@@ -118,39 +118,39 @@ public class ReportsEntryUtil {
     }
 
     public static java.util.List<com.ext.portlet.reports.model.ReportsEntry> findByUserId(
-        java.lang.String userId, int begin, int end)
+        java.lang.String userId, int start, int end)
         throws com.liferay.portal.SystemException {
-        return getPersistence().findByUserId(userId, begin, end);
+        return getPersistence().findByUserId(userId, start, end);
     }
 
     public static java.util.List<com.ext.portlet.reports.model.ReportsEntry> findByUserId(
-        java.lang.String userId, int begin, int end,
+        java.lang.String userId, int start, int end,
         com.liferay.portal.kernel.util.OrderByComparator obc)
         throws com.liferay.portal.SystemException {
-        return getPersistence().findByUserId(userId, begin, end, obc);
+        return getPersistence().findByUserId(userId, start, end, obc);
     }
 
     public static com.ext.portlet.reports.model.ReportsEntry findByUserId_First(
         java.lang.String userId,
         com.liferay.portal.kernel.util.OrderByComparator obc)
-        throws com.liferay.portal.SystemException,
-            com.ext.portlet.reports.NoSuchEntryException {
+        throws com.ext.portlet.reports.NoSuchEntryException,
+            com.liferay.portal.SystemException {
         return getPersistence().findByUserId_First(userId, obc);
     }
 
     public static com.ext.portlet.reports.model.ReportsEntry findByUserId_Last(
         java.lang.String userId,
         com.liferay.portal.kernel.util.OrderByComparator obc)
-        throws com.liferay.portal.SystemException,
-            com.ext.portlet.reports.NoSuchEntryException {
+        throws com.ext.portlet.reports.NoSuchEntryException,
+            com.liferay.portal.SystemException {
         return getPersistence().findByUserId_Last(userId, obc);
     }
 
     public static com.ext.portlet.reports.model.ReportsEntry[] findByUserId_PrevAndNext(
         java.lang.String entryId, java.lang.String userId,
         com.liferay.portal.kernel.util.OrderByComparator obc)
-        throws com.liferay.portal.SystemException,
-            com.ext.portlet.reports.NoSuchEntryException {
+        throws com.ext.portlet.reports.NoSuchEntryException,
+            com.liferay.portal.SystemException {
         return getPersistence().findByUserId_PrevAndNext(entryId, userId, obc);
     }
 
@@ -162,9 +162,9 @@ public class ReportsEntryUtil {
 
     public static java.util.List<com.ext.portlet.reports.model.ReportsEntry> findWithDynamicQuery(
         com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-        int begin, int end) throws com.liferay.portal.SystemException {
+        int start, int end) throws com.liferay.portal.SystemException {
         return getPersistence()
-                   .findWithDynamicQuery(queryInitializer, begin, end);
+                   .findWithDynamicQuery(queryInitializer, start, end);
     }
 
     public static java.util.List<com.ext.portlet.reports.model.ReportsEntry> findAll()
@@ -173,14 +173,14 @@ public class ReportsEntryUtil {
     }
 
     public static java.util.List<com.ext.portlet.reports.model.ReportsEntry> findAll(
-        int begin, int end) throws com.liferay.portal.SystemException {
-        return getPersistence().findAll(begin, end);
+        int start, int end) throws com.liferay.portal.SystemException {
+        return getPersistence().findAll(start, end);
     }
 
     public static java.util.List<com.ext.portlet.reports.model.ReportsEntry> findAll(
-        int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+        int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
         throws com.liferay.portal.SystemException {
-        return getPersistence().findAll(begin, end, obc);
+        return getPersistence().findAll(start, end, obc);
     }
 
     public static void removeByCompanyId(java.lang.String companyId)
@@ -209,6 +209,16 @@ public class ReportsEntryUtil {
 
     public static int countAll() throws com.liferay.portal.SystemException {
         return getPersistence().countAll();
+    }
+
+    public static void registerListener(
+        com.liferay.portal.model.ModelListener listener) {
+        getPersistence().registerListener(listener);
+    }
+
+    public static void unregisterListener(
+        com.liferay.portal.model.ModelListener listener) {
+        getPersistence().unregisterListener(listener);
     }
 
     public static ReportsEntryPersistence getPersistence() {
