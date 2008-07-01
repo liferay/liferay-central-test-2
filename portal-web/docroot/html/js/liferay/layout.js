@@ -374,7 +374,7 @@ Liferay.Layout.FreeForm = {
 
 		jPortlet.resizable(
 			{
-				proxy: 'ui-resizable-proxy',
+				helper: 'ui-resizable-proxy',
 				start: function(event, ui) {
 					ui.helper.css('z-index', helperZIndex);
 					instance._moveToTop(this);
