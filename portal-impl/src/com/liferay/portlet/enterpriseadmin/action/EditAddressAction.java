@@ -56,28 +56,28 @@ public class EditAddressAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateAddress(req);
+				updateAddress(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteAddress(req);
+				deleteAddress(actionRequest);
 			}
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchAddressException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.enterprise_admin.error");
+				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
 			else if (e instanceof AddressCityException  ||
 					 e instanceof AddressStreetException  ||
@@ -86,7 +86,7 @@ public class EditAddressAction extends PortletAction {
 					 e instanceof NoSuchListTypeException ||
 					 e instanceof NoSuchRegionException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
 				throw e;
@@ -119,28 +119,28 @@ public class EditAddressAction extends PortletAction {
 			getForward(renderRequest, "portlet.enterprise_admin.edit_address"));
 	}
 
-	protected void deleteAddress(ActionRequest req) throws Exception {
-		long addressId = ParamUtil.getLong(req, "addressId");
+	protected void deleteAddress(ActionRequest actionRequest) throws Exception {
+		long addressId = ParamUtil.getLong(actionRequest, "addressId");
 
 		AddressServiceUtil.deleteAddress(addressId);
 	}
 
-	protected void updateAddress(ActionRequest req) throws Exception {
-		long addressId = ParamUtil.getLong(req, "addressId");
+	protected void updateAddress(ActionRequest actionRequest) throws Exception {
+		long addressId = ParamUtil.getLong(actionRequest, "addressId");
 
-		String className = ParamUtil.getString(req, "className");
-		long classPK = ParamUtil.getLong(req, "classPK");
+		String className = ParamUtil.getString(actionRequest, "className");
+		long classPK = ParamUtil.getLong(actionRequest, "classPK");
 
-		String street1 = ParamUtil.getString(req, "street1");
-		String street2 = ParamUtil.getString(req, "street2");
-		String street3 = ParamUtil.getString(req, "street3");
-		String city = ParamUtil.getString(req, "city");
-		String zip = ParamUtil.getString(req, "zip");
-		long regionId = ParamUtil.getLong(req, "regionId");
-		long countryId = ParamUtil.getLong(req, "countryId");
-		int typeId = ParamUtil.getInteger(req, "typeId");
-		boolean mailing = ParamUtil.getBoolean(req, "mailing");
-		boolean primary = ParamUtil.getBoolean(req, "primary");
+		String street1 = ParamUtil.getString(actionRequest, "street1");
+		String street2 = ParamUtil.getString(actionRequest, "street2");
+		String street3 = ParamUtil.getString(actionRequest, "street3");
+		String city = ParamUtil.getString(actionRequest, "city");
+		String zip = ParamUtil.getString(actionRequest, "zip");
+		long regionId = ParamUtil.getLong(actionRequest, "regionId");
+		long countryId = ParamUtil.getLong(actionRequest, "countryId");
+		int typeId = ParamUtil.getInteger(actionRequest, "typeId");
+		boolean mailing = ParamUtil.getBoolean(actionRequest, "mailing");
+		boolean primary = ParamUtil.getBoolean(actionRequest, "primary");
 
 		if (addressId <= 0) {
 

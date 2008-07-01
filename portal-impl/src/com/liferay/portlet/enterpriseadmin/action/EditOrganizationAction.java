@@ -59,36 +59,36 @@ public class EditOrganizationAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			Organization organization = null;
 
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				organization = updateOrganization(req);
+				organization = updateOrganization(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteOrganizations(req);
+				deleteOrganizations(actionRequest);
 			}
 
-			String redirect = ParamUtil.getString(req, "redirect");
+			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
 			if (organization != null) {
 				redirect += organization.getOrganizationId();
 			}
 
-			sendRedirect(req, res, redirect);
+			sendRedirect(actionRequest, actionResponse, redirect);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchOrganizationException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.enterprise_admin.error");
+				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
 			else if (e instanceof DuplicateOrganizationException ||
 					 e instanceof NoSuchCountryException ||
@@ -97,10 +97,11 @@ public class EditOrganizationAction extends PortletAction {
 					 e instanceof OrganizationParentException ||
 					 e instanceof RequiredOrganizationException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
 				if (e instanceof RequiredOrganizationException) {
-					res.sendRedirect(ParamUtil.getString(req, "redirect"));
+					actionResponse.sendRedirect(
+						ParamUtil.getString(actionRequest, "redirect"));
 				}
 			}
 			else {
@@ -134,9 +135,11 @@ public class EditOrganizationAction extends PortletAction {
 			renderRequest, "portlet.enterprise_admin.edit_organization"));
 	}
 
-	protected void deleteOrganizations(ActionRequest req) throws Exception {
+	protected void deleteOrganizations(ActionRequest actionRequest)
+		throws Exception {
+
 		long[] deleteOrganizationIds = StringUtil.split(
-			ParamUtil.getString(req, "deleteOrganizationIds"), 0L);
+			ParamUtil.getString(actionRequest, "deleteOrganizationIds"), 0L);
 
 		for (int i = 0; i < deleteOrganizationIds.length; i++) {
 			OrganizationServiceUtil.deleteOrganization(
@@ -144,21 +147,22 @@ public class EditOrganizationAction extends PortletAction {
 		}
 	}
 
-	protected Organization updateOrganization(ActionRequest req)
+	protected Organization updateOrganization(ActionRequest actionRequest)
 		throws Exception {
 
-		long organizationId = ParamUtil.getLong(req, "organizationId");
+		long organizationId = ParamUtil.getLong(
+			actionRequest, "organizationId");
 
 		long parentOrganizationId = ParamUtil.getLong(
-			req, "parentOrganizationId",
+			actionRequest, "parentOrganizationId",
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
-		String name = ParamUtil.getString(req, "name");
-		boolean recursable = ParamUtil.getBoolean(req, "recursable");
-		int statusId = ParamUtil.getInteger(req, "statusId");
-		int type = ParamUtil.getInteger(req, "type");
-		long regionId = ParamUtil.getLong(req, "regionId");
-		long countryId = ParamUtil.getLong(req, "countryId");
-		String comments = ParamUtil.getString(req, "comments");
+		String name = ParamUtil.getString(actionRequest, "name");
+		boolean recursable = ParamUtil.getBoolean(actionRequest, "recursable");
+		int statusId = ParamUtil.getInteger(actionRequest, "statusId");
+		int type = ParamUtil.getInteger(actionRequest, "type");
+		long regionId = ParamUtil.getLong(actionRequest, "regionId");
+		long countryId = ParamUtil.getLong(actionRequest, "countryId");
+		String comments = ParamUtil.getString(actionRequest, "comments");
 
 		Organization organization = null;
 

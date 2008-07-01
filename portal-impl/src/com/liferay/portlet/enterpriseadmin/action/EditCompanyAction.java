@@ -52,33 +52,33 @@ public class EditCompanyAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateCompany(req);
-				updateDisplay(req);
+				updateCompany(actionRequest);
+				updateDisplay(actionRequest);
 			}
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof PrincipalException) {
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.enterprise_admin.error");
+				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
 			else if (e instanceof AccountNameException ||
 					 e instanceof CompanyMxException ||
 					 e instanceof CompanyVirtualHostException ||
 					 e instanceof CompanyWebIdException) {
 
-				SessionErrors.add(req, e.getClass().getName(), e);
+				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 
-				setForward(req, "portlet.enterprise_admin.view");
+				setForward(actionRequest, "portlet.enterprise_admin.view");
 			}
 			else {
 				throw e;
@@ -86,32 +86,34 @@ public class EditCompanyAction extends PortletAction {
 		}
 	}
 
-	protected void updateCompany(ActionRequest req) throws Exception {
-		long companyId = PortalUtil.getCompanyId(req);
+	protected void updateCompany(ActionRequest actionRequest) throws Exception {
+		long companyId = PortalUtil.getCompanyId(actionRequest);
 
-		String virtualHost = ParamUtil.getString(req, "virtualHost");
-		String mx = ParamUtil.getString(req, "mx");
-		String name = ParamUtil.getString(req, "name");
-		String legalName = ParamUtil.getString(req, "legalName");
-		String legalId = ParamUtil.getString(req, "legalId");
-		String legalType = ParamUtil.getString(req, "legalType");
-		String sicCode = ParamUtil.getString(req, "sicCode");
-		String tickerSymbol = ParamUtil.getString(req, "tickerSymbol");
-		String industry = ParamUtil.getString(req, "industry");
-		String type = ParamUtil.getString(req, "type");
-		String size = ParamUtil.getString(req, "size");
+		String virtualHost = ParamUtil.getString(actionRequest, "virtualHost");
+		String mx = ParamUtil.getString(actionRequest, "mx");
+		String name = ParamUtil.getString(actionRequest, "name");
+		String legalName = ParamUtil.getString(actionRequest, "legalName");
+		String legalId = ParamUtil.getString(actionRequest, "legalId");
+		String legalType = ParamUtil.getString(actionRequest, "legalType");
+		String sicCode = ParamUtil.getString(actionRequest, "sicCode");
+		String tickerSymbol = ParamUtil.getString(
+			actionRequest, "tickerSymbol");
+		String industry = ParamUtil.getString(actionRequest, "industry");
+		String type = ParamUtil.getString(actionRequest, "type");
+		String size = ParamUtil.getString(actionRequest, "size");
 
 		CompanyServiceUtil.updateCompany(
 			companyId, virtualHost, mx, name, legalName, legalId, legalType,
 			sicCode, tickerSymbol, industry, type, size);
 	}
 
-	protected void updateDisplay(ActionRequest req) throws Exception {
-		Company company = PortalUtil.getCompany(req);
+	protected void updateDisplay(ActionRequest actionRequest) throws Exception {
+		Company company = PortalUtil.getCompany(actionRequest);
 
-		String languageId = ParamUtil.getString(req, "languageId");
-		String timeZoneId = ParamUtil.getString(req, "timeZoneId");
-		boolean communityLogo = ParamUtil.getBoolean(req, "communityLogo");
+		String languageId = ParamUtil.getString(actionRequest, "languageId");
+		String timeZoneId = ParamUtil.getString(actionRequest, "timeZoneId");
+		boolean communityLogo = ParamUtil.getBoolean(
+			actionRequest, "communityLogo");
 
 		CompanyServiceUtil.updateDisplay(
 			company.getCompanyId(), languageId, timeZoneId);

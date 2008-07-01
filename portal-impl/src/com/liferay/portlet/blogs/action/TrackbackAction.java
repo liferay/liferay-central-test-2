@@ -79,35 +79,42 @@ public class TrackbackAction extends PortletAction {
 		setForward(actionRequest, ActionConstants.COMMON_NULL);
 	}
 
-	protected void addTrackback(ActionRequest req, ActionResponse res)
+	protected void addTrackback(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String title = ParamUtil.getString(req, "title");
-		String excerpt = ParamUtil.getString(req, "excerpt");
-		String url = ParamUtil.getString(req, "url");
-		String blogName = ParamUtil.getString(req, "blog_name");
+		String title = ParamUtil.getString(actionRequest, "title");
+		String excerpt = ParamUtil.getString(actionRequest, "excerpt");
+		String url = ParamUtil.getString(actionRequest, "url");
+		String blogName = ParamUtil.getString(actionRequest, "blog_name");
 
-		if (!isCommentsEnabled(req)) {
-			sendError(res, "Comments have been disabled for this blog entry.");
+		if (!isCommentsEnabled(actionRequest)) {
+			sendError(
+				actionResponse,
+				"Comments have been disabled for this blog entry.");
 
 			return;
 		}
 
 		if (Validator.isNull(url)) {
-			sendError(res, "Trackback requires a valid permanent URL.");
+			sendError(
+				actionResponse, "Trackback requires a valid permanent URL.");
 
 			return;
 		}
 
-		ActionUtil.getEntry(req);
+		ActionUtil.getEntry(actionRequest);
 
-		BlogsEntry entry = (BlogsEntry)req.getAttribute(WebKeys.BLOGS_ENTRY);
+		BlogsEntry entry = (BlogsEntry)actionRequest.getAttribute(
+			WebKeys.BLOGS_ENTRY);
 
 		if (!entry.isAllowTrackbacks()) {
-			sendError(res, "Trackbacks are not enabled on this blog entry.");
+			sendError(
+				actionResponse,
+				"Trackbacks are not enabled on this blog entry.");
 
 			return;
 		}
@@ -142,7 +149,7 @@ public class TrackbackAction extends PortletAction {
 		TrackbackVerifierUtil.addNewPost(
 			message.getMessageId(), url, trackbackUrl);
 
-		sendSuccess(res);
+		sendSuccess(actionResponse);
 	}
 
 	protected boolean isCommentsEnabled(ActionRequest actionRequest)
@@ -195,8 +202,8 @@ public class TrackbackAction extends PortletAction {
 			ContentTypes.TEXT_XML_UTF8);
 	}
 
-	protected void sendSuccess(ActionResponse res) throws Exception {
-		sendResponse(res, null, true);
+	protected void sendSuccess(ActionResponse actionResponse) throws Exception {
+		sendResponse(actionResponse, null, true);
 	}
 
 	private static Log _log = LogFactory.getLog(TrackbackAction.class);

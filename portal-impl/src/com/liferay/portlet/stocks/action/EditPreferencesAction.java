@@ -54,19 +54,19 @@ public class EditPreferencesAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		if (!cmd.equals(Constants.UPDATE)) {
 			return;
 		}
 
-		PortletPreferences prefs = req.getPreferences();
+		PortletPreferences prefs = actionRequest.getPreferences();
 
 		String[] symbols = StringUtil.split(
-			ParamUtil.getString(req, "symbols").toUpperCase(),
+			ParamUtil.getString(actionRequest, "symbols").toUpperCase(),
 			StringPool.SPACE);
 
 		Arrays.sort(symbols);
@@ -77,12 +77,14 @@ public class EditPreferencesAction extends PortletAction {
 			prefs.store();
 		}
 		catch (ValidatorException ve) {
-			SessionErrors.add(req, ValidatorException.class.getName(), ve);
+			SessionErrors.add(
+				actionRequest, ValidatorException.class.getName(), ve);
 
 			return;
 		}
 
-		SessionMessages.add(req, portletConfig.getPortletName() + ".doEdit");
+		SessionMessages.add(
+			actionRequest, portletConfig.getPortletName() + ".doEdit");
 	}
 
 	public ActionForward render(

@@ -52,33 +52,33 @@ public class EditPhoneAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updatePhone(req);
+				updatePhone(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deletePhone(req);
+				deletePhone(actionRequest);
 			}
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchPhoneException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.enterprise_admin.error");
+				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
 			else if (e instanceof NoSuchListTypeException ||
 					 e instanceof PhoneNumberException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
 				throw e;
@@ -111,22 +111,22 @@ public class EditPhoneAction extends PortletAction {
 			getForward(renderRequest, "portlet.enterprise_admin.edit_phone"));
 	}
 
-	protected void deletePhone(ActionRequest req) throws Exception {
-		long phoneId = ParamUtil.getLong(req, "phoneId");
+	protected void deletePhone(ActionRequest actionRequest) throws Exception {
+		long phoneId = ParamUtil.getLong(actionRequest, "phoneId");
 
 		PhoneServiceUtil.deletePhone(phoneId);
 	}
 
-	protected void updatePhone(ActionRequest req) throws Exception {
-		long phoneId = ParamUtil.getLong(req, "phoneId");
+	protected void updatePhone(ActionRequest actionRequest) throws Exception {
+		long phoneId = ParamUtil.getLong(actionRequest, "phoneId");
 
-		String className = ParamUtil.getString(req, "className");
-		long classPK = ParamUtil.getLong(req, "classPK");
+		String className = ParamUtil.getString(actionRequest, "className");
+		long classPK = ParamUtil.getLong(actionRequest, "classPK");
 
-		String number = ParamUtil.getString(req, "number");
-		String extension = ParamUtil.getString(req, "extension");
-		int typeId = ParamUtil.getInteger(req, "typeId");
-		boolean primary = ParamUtil.getBoolean(req, "primary");
+		String number = ParamUtil.getString(actionRequest, "number");
+		String extension = ParamUtil.getString(actionRequest, "extension");
+		int typeId = ParamUtil.getInteger(actionRequest, "typeId");
+		boolean primary = ParamUtil.getBoolean(actionRequest, "primary");
 
 		if (phoneId <= 0) {
 

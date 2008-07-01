@@ -54,36 +54,37 @@ public class EditRoleAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateRole(req);
+				updateRole(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteRole(req);
+				deleteRole(actionRequest);
 			}
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof PrincipalException) {
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.enterprise_admin.error");
+				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
 			else if (e instanceof DuplicateRoleException ||
 					 e instanceof NoSuchRoleException ||
 					 e instanceof RequiredRoleException ||
 					 e instanceof RoleNameException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
 				if (cmd.equals(Constants.DELETE)) {
-					res.sendRedirect(ParamUtil.getString(req, "redirect"));
+					actionResponse.sendRedirect(
+						ParamUtil.getString(actionRequest, "redirect"));
 				}
 			}
 			else {
@@ -117,18 +118,19 @@ public class EditRoleAction extends PortletAction {
 			getForward(renderRequest, "portlet.enterprise_admin.edit_role"));
 	}
 
-	protected void deleteRole(ActionRequest req) throws Exception {
-		long roleId = ParamUtil.getLong(req, "roleId");
+	protected void deleteRole(ActionRequest actionRequest) throws Exception {
+		long roleId = ParamUtil.getLong(actionRequest, "roleId");
 
 		RoleServiceUtil.deleteRole(roleId);
 	}
 
-	protected void updateRole(ActionRequest req) throws Exception {
-		long roleId = ParamUtil.getLong(req, "roleId");
+	protected void updateRole(ActionRequest actionRequest) throws Exception {
+		long roleId = ParamUtil.getLong(actionRequest, "roleId");
 
-		String name = ParamUtil.getString(req, "name");
-		String description = ParamUtil.getString(req, "description");
-		int type = ParamUtil.getInteger(req, "type", RoleImpl.TYPE_REGULAR);
+		String name = ParamUtil.getString(actionRequest, "name");
+		String description = ParamUtil.getString(actionRequest, "description");
+		int type = ParamUtil.getInteger(
+			actionRequest, "type", RoleImpl.TYPE_REGULAR);
 
 		if (roleId <= 0) {
 

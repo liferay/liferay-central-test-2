@@ -58,80 +58,83 @@ public class EditSettingsAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		long companyId = PortalUtil.getCompanyId(req);
-		long userId = PortalUtil.getUserId(req);
+		long companyId = PortalUtil.getCompanyId(actionRequest);
+		long userId = PortalUtil.getUserId(actionRequest);
 
 		if (!RoleLocalServiceUtil.hasUserRole(
 				userId, companyId, RoleImpl.ADMINISTRATOR, true)) {
 
-			SessionErrors.add(req, PrincipalException.class.getName());
+			SessionErrors.add(
+				actionRequest, PrincipalException.class.getName());
 
-			setForward(req, "portlet.enterprise_admin.error");
+			setForward(actionRequest, "portlet.enterprise_admin.error");
 
 			return;
 		}
 
 		PortletPreferences prefs = PrefsPropsUtil.getPreferences(companyId);
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		if (cmd.equals("updateCAS")) {
-			updateCAS(req, companyId, prefs);
+			updateCAS(actionRequest, companyId, prefs);
 		}
 		else if (cmd.equals("updateDefaultGroupsAndRoles")) {
-			updateDefaultGroupsAndRoles(req, prefs);
+			updateDefaultGroupsAndRoles(actionRequest, prefs);
 		}
 		else if (cmd.equals("updateEmails")) {
-			updateEmails(req, prefs);
+			updateEmails(actionRequest, prefs);
 		}
 		else if (cmd.equals("updateLdap")) {
-			updateLdap(req, companyId, prefs);
+			updateLdap(actionRequest, companyId, prefs);
 		}
 		else if (cmd.equals("updateMailHostNames")) {
-			updateMailHostNames(req, prefs);
+			updateMailHostNames(actionRequest, prefs);
 		}
 		else if (cmd.equals("updateNtlm")) {
-			updateNtlm(req, companyId, prefs);
+			updateNtlm(actionRequest, companyId, prefs);
 		}
 		else if (cmd.equals("updateOpenId")) {
-			updateOpenId(req, prefs);
+			updateOpenId(actionRequest, prefs);
 		}
 		else if (cmd.equals("updateOpenSSO")) {
-			updateOpenSSO(req, companyId, prefs);
+			updateOpenSSO(actionRequest, companyId, prefs);
 		}
 		else if (cmd.equals("updateReservedUsers")) {
-			updateReservedUsers(req, prefs);
+			updateReservedUsers(actionRequest, prefs);
 		}
 		else if (cmd.equals("updateSecurity")) {
-			updateSecurity(req);
+			updateSecurity(actionRequest);
 		}
 
-		if (SessionErrors.isEmpty(req)) {
+		if (SessionErrors.isEmpty(actionRequest)) {
 			if (!cmd.equals("updateLdap") && !cmd.equals("updateSecurity")) {
 				prefs.store();
 			}
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		else {
-			setForward(req, "portlet.enterprise_admin.view");
+			setForward(actionRequest, "portlet.enterprise_admin.view");
 		}
 	}
 
 	protected void updateCAS(
-			ActionRequest req, long companyId, PortletPreferences prefs)
+			ActionRequest actionRequest, long companyId,
+			PortletPreferences prefs)
 		throws Exception {
 
-		boolean enabled = ParamUtil.getBoolean(req, "enabled");
-		boolean importFromLdap = ParamUtil.getBoolean(req, "importFromLdap");
-		String loginUrl = ParamUtil.getString(req, "loginUrl");
-		String logoutUrl = ParamUtil.getString(req, "logoutUrl");
-		String serverName = ParamUtil.getString(req, "serverName");
-		String serviceUrl = ParamUtil.getString(req, "serviceUrl");
-		String validateUrl = ParamUtil.getString(req, "validateUrl");
+		boolean enabled = ParamUtil.getBoolean(actionRequest, "enabled");
+		boolean importFromLdap = ParamUtil.getBoolean(
+			actionRequest, "importFromLdap");
+		String loginUrl = ParamUtil.getString(actionRequest, "loginUrl");
+		String logoutUrl = ParamUtil.getString(actionRequest, "logoutUrl");
+		String serverName = ParamUtil.getString(actionRequest, "serverName");
+		String serviceUrl = ParamUtil.getString(actionRequest, "serviceUrl");
+		String validateUrl = ParamUtil.getString(actionRequest, "validateUrl");
 
 		prefs.setValue(
 			PropsKeys.CAS_AUTH_ENABLED, String.valueOf(enabled));
@@ -149,14 +152,15 @@ public class EditSettingsAction extends PortletAction {
 	}
 
 	protected void updateDefaultGroupsAndRoles(
-			ActionRequest req, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
 		String defaultGroupNames = ParamUtil.getString(
-			req, "defaultGroupNames");
-		String defaultRoleNames = ParamUtil.getString(req, "defaultRoleNames");
+			actionRequest, "defaultGroupNames");
+		String defaultRoleNames = ParamUtil.getString(
+			actionRequest, "defaultRoleNames");
 		String defaultUserGroupNames = ParamUtil.getString(
-			req, "defaultUserGroupNames");
+			actionRequest, "defaultUserGroupNames");
 
 		prefs.setValue(PropsKeys.ADMIN_DEFAULT_GROUP_NAMES, defaultGroupNames);
 		prefs.setValue(PropsKeys.ADMIN_DEFAULT_ROLE_NAMES, defaultRoleNames);
@@ -165,24 +169,24 @@ public class EditSettingsAction extends PortletAction {
 	}
 
 	protected void updateEmails(
-			ActionRequest req, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
-		String tabs3 = ParamUtil.getString(req, "tabs3");
+		String tabs3 = ParamUtil.getString(actionRequest, "tabs3");
 
 		if (tabs3.equals("account-created-notification")) {
 			String emailUserAddedEnabled = ParamUtil.getString(
-				req, "emailUserAddedEnabled");
+				actionRequest, "emailUserAddedEnabled");
 			String emailUserAddedSubject = ParamUtil.getString(
-				req, "emailUserAddedSubject");
+				actionRequest, "emailUserAddedSubject");
 			String emailUserAddedBody = ParamUtil.getString(
-				req, "emailUserAddedBody");
+				actionRequest, "emailUserAddedBody");
 
 			if (Validator.isNull(emailUserAddedSubject)) {
-				SessionErrors.add(req, "emailUserAddedSubject");
+				SessionErrors.add(actionRequest, "emailUserAddedSubject");
 			}
 			else if (Validator.isNull(emailUserAddedBody)) {
-				SessionErrors.add(req, "emailUserAddedBody");
+				SessionErrors.add(actionRequest, "emailUserAddedBody");
 			}
 			else {
 				prefs.setValue(
@@ -197,17 +201,17 @@ public class EditSettingsAction extends PortletAction {
 		}
 		else if (tabs3.equals("password-changed-notification")) {
 			String emailPasswordSentEnabled = ParamUtil.getString(
-				req, "emailPasswordSentEnabled");
+				actionRequest, "emailPasswordSentEnabled");
 			String emailPasswordSentSubject = ParamUtil.getString(
-				req, "emailPasswordSentSubject");
+				actionRequest, "emailPasswordSentSubject");
 			String emailPasswordSentBody = ParamUtil.getString(
-				req, "emailPasswordSentBody");
+				actionRequest, "emailPasswordSentBody");
 
 			if (Validator.isNull(emailPasswordSentSubject)) {
-				SessionErrors.add(req, "emailPasswordSentSubject");
+				SessionErrors.add(actionRequest, "emailPasswordSentSubject");
 			}
 			else if (Validator.isNull(emailPasswordSentBody)) {
-				SessionErrors.add(req, "emailPasswordSentBody");
+				SessionErrors.add(actionRequest, "emailPasswordSentBody");
 			}
 			else {
 				prefs.setValue(
@@ -222,15 +226,16 @@ public class EditSettingsAction extends PortletAction {
 			}
 		}
 		else {
-			String emailFromName = ParamUtil.getString(req, "emailFromName");
+			String emailFromName = ParamUtil.getString(
+				actionRequest, "emailFromName");
 			String emailFromAddress = ParamUtil.getString(
-				req, "emailFromAddress");
+				actionRequest, "emailFromAddress");
 
 			if (Validator.isNull(emailFromName)) {
-				SessionErrors.add(req, "emailFromName");
+				SessionErrors.add(actionRequest, "emailFromName");
 			}
 			else if (!Validator.isEmailAddress(emailFromAddress)) {
-				SessionErrors.add(req, "emailFromAddress");
+				SessionErrors.add(actionRequest, "emailFromAddress");
 			}
 			else {
 				prefs.setValue(PropsKeys.ADMIN_EMAIL_FROM_NAME, emailFromName);
@@ -241,48 +246,62 @@ public class EditSettingsAction extends PortletAction {
 	}
 
 	protected void updateLdap(
-			ActionRequest req, long companyId, PortletPreferences prefs)
+			ActionRequest actionRequest, long companyId,
+			PortletPreferences prefs)
 		throws Exception {
 
-		boolean enabled = ParamUtil.getBoolean(req, "enabled");
-		boolean required = ParamUtil.getBoolean(req, "required");
-		String baseProviderURL = ParamUtil.getString(req, "baseProviderURL");
-		String baseDN = ParamUtil.getString(req, "baseDN");
-		String principal = ParamUtil.getString(req, "principal");
-		String credentials = ParamUtil.getString(req, "credentials");
-		String searchFilter = ParamUtil.getString(req, "searchFilter");
+		boolean enabled = ParamUtil.getBoolean(actionRequest, "enabled");
+		boolean required = ParamUtil.getBoolean(actionRequest, "required");
+		String baseProviderURL = ParamUtil.getString(
+			actionRequest, "baseProviderURL");
+		String baseDN = ParamUtil.getString(actionRequest, "baseDN");
+		String principal = ParamUtil.getString(actionRequest, "principal");
+		String credentials = ParamUtil.getString(actionRequest, "credentials");
+		String searchFilter = ParamUtil.getString(
+			actionRequest, "searchFilter");
 		String userDefaultObjectClasses = ParamUtil.getString(
-			req, "userDefaultObjectClasses");
+			actionRequest, "userDefaultObjectClasses");
 
 		String userMappings =
-			"screenName=" + ParamUtil.getString(req, "userMappingScreenName") +
-			"\npassword=" + ParamUtil.getString(req, "userMappingPassword") +
+			"screenName=" +
+				ParamUtil.getString(actionRequest, "userMappingScreenName") +
+			"\npassword=" +
+				ParamUtil.getString(actionRequest, "userMappingPassword") +
 			"\nemailAddress=" +
-				ParamUtil.getString(req, "userMappingEmailAddress") +
-			"\nfullName=" + ParamUtil.getString(req, "userMappingFullName") +
-			"\nfirstName=" + ParamUtil.getString(req, "userMappingFirstName") +
-			"\nlastName=" + ParamUtil.getString(req, "userMappingLastName") +
-			"\njobTitle=" + ParamUtil.getString(req, "userMappingJobTitle") +
-			"\ngroup=" + ParamUtil.getString(req, "userMappingGroup");
+				ParamUtil.getString(actionRequest, "userMappingEmailAddress") +
+			"\nfullName=" +
+				ParamUtil.getString(actionRequest, "userMappingFullName") +
+			"\nfirstName=" +
+				ParamUtil.getString(actionRequest, "userMappingFirstName") +
+			"\nlastName=" +
+				ParamUtil.getString(actionRequest, "userMappingLastName") +
+			"\njobTitle=" +
+				ParamUtil.getString(actionRequest, "userMappingJobTitle") +
+			"\ngroup=" + ParamUtil.getString(actionRequest, "userMappingGroup");
 
 		String groupMappings =
-			"groupName=" + ParamUtil.getString(req, "groupMappingGroupName") +
+			"groupName=" +
+				ParamUtil.getString(actionRequest, "groupMappingGroupName") +
 			"\ndescription=" +
-				ParamUtil.getString(req, "groupMappingDescription") +
-			"\nuser=" + ParamUtil.getString(req, "groupMappingUser");
+				ParamUtil.getString(actionRequest, "groupMappingDescription") +
+			"\nuser=" + ParamUtil.getString(actionRequest, "groupMappingUser");
 
-		boolean importEnabled = ParamUtil.getBoolean(req, "importEnabled");
-		boolean importOnStartup = ParamUtil.getBoolean(req, "importOnStartup");
-		long importInterval = ParamUtil.getLong(req, "importInterval");
+		boolean importEnabled = ParamUtil.getBoolean(
+			actionRequest, "importEnabled");
+		boolean importOnStartup = ParamUtil.getBoolean(
+			actionRequest, "importOnStartup");
+		long importInterval = ParamUtil.getLong(
+			actionRequest, "importInterval");
 		String importUserSearchFilter = ParamUtil.getString(
-			req, "importUserSearchFilter");
+			actionRequest, "importUserSearchFilter");
 		String importGroupSearchFilter = ParamUtil.getString(
-			req, "importGroupSearchFilter");
-		boolean exportEnabled = ParamUtil.getBoolean(req, "exportEnabled");
-		String usersDN = ParamUtil.getString(req, "usersDN");
-		String groupsDN = ParamUtil.getString(req, "groupsDN");
+			actionRequest, "importGroupSearchFilter");
+		boolean exportEnabled = ParamUtil.getBoolean(
+			actionRequest, "exportEnabled");
+		String usersDN = ParamUtil.getString(actionRequest, "usersDN");
+		String groupsDN = ParamUtil.getString(actionRequest, "groupsDN");
 		boolean passwordPolicyEnabled = ParamUtil.getBoolean(
-			req, "passwordPolicyEnabled");
+			actionRequest, "passwordPolicyEnabled");
 
 		try {
 			if (enabled) {
@@ -294,7 +313,7 @@ public class EditSettingsAction extends PortletAction {
 			}
 		}
 		catch (Exception e) {
-			SessionErrors.add(req, "ldapAuthentication");
+			SessionErrors.add(actionRequest, "ldapAuthentication");
 
 			return;
 		}
@@ -333,21 +352,24 @@ public class EditSettingsAction extends PortletAction {
 	}
 
 	protected void updateMailHostNames(
-			ActionRequest req, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
-		String mailHostNames = ParamUtil.getString(req, "mailHostNames");
+		String mailHostNames = ParamUtil.getString(
+			actionRequest, "mailHostNames");
 
 		prefs.setValue(PropsKeys.ADMIN_MAIL_HOST_NAMES, mailHostNames);
 	}
 
 	protected void updateNtlm(
-			ActionRequest req, long companyId, PortletPreferences prefs)
+			ActionRequest actionRequest, long companyId,
+			PortletPreferences prefs)
 		throws Exception {
 
-		boolean enabled = ParamUtil.getBoolean(req, "enabled");
-		String domainController = ParamUtil.getString(req, "domainController");
-		String domain = ParamUtil.getString(req, "domain");
+		boolean enabled = ParamUtil.getBoolean(actionRequest, "enabled");
+		String domainController = ParamUtil.getString(
+			actionRequest, "domainController");
+		String domain = ParamUtil.getString(actionRequest, "domain");
 
 		prefs.setValue(
 			PropsKeys.NTLM_AUTH_ENABLED, String.valueOf(enabled));
@@ -357,10 +379,11 @@ public class EditSettingsAction extends PortletAction {
 		prefs.store();
 	}
 
-	protected void updateOpenId(ActionRequest req, PortletPreferences prefs)
+	protected void updateOpenId(
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
-		boolean enabled = ParamUtil.getBoolean(req, "enabled");
+		boolean enabled = ParamUtil.getBoolean(actionRequest, "enabled");
 
 		prefs.setValue(PropsKeys.OPEN_ID_AUTH_ENABLED, String.valueOf(enabled));
 
@@ -368,17 +391,20 @@ public class EditSettingsAction extends PortletAction {
 	}
 
 	protected void updateOpenSSO(
-			ActionRequest req, long companyId, PortletPreferences prefs)
+			ActionRequest actionRequest, long companyId,
+			PortletPreferences prefs)
 		throws Exception {
 
-		boolean enabled = ParamUtil.getBoolean(req, "enabled");
-		String loginUrl = ParamUtil.getString(req, "loginUrl");
-		String logoutUrl = ParamUtil.getString(req, "logoutUrl");
-		String serviceUrl = ParamUtil.getString(req, "serviceUrl");
-		String screenName = ParamUtil.getString(req, "screenNameAttr");
-		String emailAddress = ParamUtil.getString(req, "emailAddressAttr");
-		String firstName = ParamUtil.getString(req, "firstNameAttr");
-		String lastName = ParamUtil.getString(req, "lastNameAttr");
+		boolean enabled = ParamUtil.getBoolean(actionRequest, "enabled");
+		String loginUrl = ParamUtil.getString(actionRequest, "loginUrl");
+		String logoutUrl = ParamUtil.getString(actionRequest, "logoutUrl");
+		String serviceUrl = ParamUtil.getString(actionRequest, "serviceUrl");
+		String screenName = ParamUtil.getString(
+			actionRequest, "screenNameAttr");
+		String emailAddress = ParamUtil.getString(
+			actionRequest, "emailAddressAttr");
+		String firstName = ParamUtil.getString(actionRequest, "firstNameAttr");
+		String lastName = ParamUtil.getString(actionRequest, "lastNameAttr");
 
 		prefs.setValue(
 			PropsKeys.OPEN_SSO_AUTH_ENABLED, String.valueOf(enabled));
@@ -394,13 +420,13 @@ public class EditSettingsAction extends PortletAction {
 	}
 
 	protected void updateReservedUsers(
-			ActionRequest req, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
 		String reservedScreenNames = ParamUtil.getString(
-			req, "reservedScreenNames");
+			actionRequest, "reservedScreenNames");
 		String reservedEmailAddresses = ParamUtil.getString(
-			req, "reservedEmailAddresses");
+			actionRequest, "reservedEmailAddresses");
 
 		prefs.setValue(
 			PropsKeys.ADMIN_RESERVED_SCREEN_NAMES, reservedScreenNames);
@@ -408,15 +434,20 @@ public class EditSettingsAction extends PortletAction {
 			PropsKeys.ADMIN_RESERVED_EMAIL_ADDRESSES, reservedEmailAddresses);
 	}
 
-	protected void updateSecurity(ActionRequest req) throws Exception {
-		Company company = PortalUtil.getCompany(req);
+	protected void updateSecurity(ActionRequest actionRequest)
+		throws Exception {
 
-		String authType = ParamUtil.getString(req, "authType");
-		boolean autoLogin = ParamUtil.getBoolean(req, "autoLogin");
-		boolean sendPassword = ParamUtil.getBoolean(req, "sendPassword");
-		boolean strangers = ParamUtil.getBoolean(req, "strangers");
-		boolean strangersWithMx = ParamUtil.getBoolean(req, "strangersWithMx");
-		boolean strangersVerify = ParamUtil.getBoolean(req, "strangersVerify");
+		Company company = PortalUtil.getCompany(actionRequest);
+
+		String authType = ParamUtil.getString(actionRequest, "authType");
+		boolean autoLogin = ParamUtil.getBoolean(actionRequest, "autoLogin");
+		boolean sendPassword = ParamUtil.getBoolean(
+			actionRequest, "sendPassword");
+		boolean strangers = ParamUtil.getBoolean(actionRequest, "strangers");
+		boolean strangersWithMx = ParamUtil.getBoolean(
+			actionRequest, "strangersWithMx");
+		boolean strangersVerify = ParamUtil.getBoolean(
+			actionRequest, "strangersVerify");
 
 		CompanyServiceUtil.updateSecurity(
 			company.getCompanyId(), authType, autoLogin, sendPassword,

@@ -52,33 +52,33 @@ public class EditWebsiteAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateWebsite(req);
+				updateWebsite(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteWebsite(req);
+				deleteWebsite(actionRequest);
 			}
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchWebsiteException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.enterprise_admin.error");
+				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
 			else if (e instanceof NoSuchListTypeException ||
 					 e instanceof WebsiteURLException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
 				throw e;
@@ -111,21 +111,21 @@ public class EditWebsiteAction extends PortletAction {
 			getForward(renderRequest, "portlet.enterprise_admin.edit_website"));
 	}
 
-	protected void deleteWebsite(ActionRequest req) throws Exception {
-		long websiteId = ParamUtil.getLong(req, "websiteId");
+	protected void deleteWebsite(ActionRequest actionRequest) throws Exception {
+		long websiteId = ParamUtil.getLong(actionRequest, "websiteId");
 
 		WebsiteServiceUtil.deleteWebsite(websiteId);
 	}
 
-	protected void updateWebsite(ActionRequest req) throws Exception {
-		long websiteId = ParamUtil.getLong(req, "websiteId");
+	protected void updateWebsite(ActionRequest actionRequest) throws Exception {
+		long websiteId = ParamUtil.getLong(actionRequest, "websiteId");
 
-		String className = ParamUtil.getString(req, "className");
-		long classPK = ParamUtil.getLong(req, "classPK");
+		String className = ParamUtil.getString(actionRequest, "className");
+		long classPK = ParamUtil.getLong(actionRequest, "classPK");
 
-		String url = ParamUtil.getString(req, "url");
-		int typeId = ParamUtil.getInteger(req, "typeId");
-		boolean primary = ParamUtil.getBoolean(req, "primary");
+		String url = ParamUtil.getString(actionRequest, "url");
+		int typeId = ParamUtil.getInteger(actionRequest, "typeId");
+		boolean primary = ParamUtil.getBoolean(actionRequest, "primary");
 
 		if (websiteId <= 0) {
 

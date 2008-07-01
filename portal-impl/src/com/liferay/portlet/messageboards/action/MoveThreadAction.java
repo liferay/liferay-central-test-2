@@ -65,25 +65,25 @@ public class MoveThreadAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		try {
-			moveThread(req, res);
+			moveThread(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof PrincipalException ||
 				e instanceof RequiredMessageException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.message_boards.error");
+				setForward(actionRequest, "portlet.message_boards.error");
 			}
 			else if (e instanceof MessageBodyException ||
 					 e instanceof MessageSubjectException ||
 					 e instanceof NoSuchThreadException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
 				throw e;
@@ -116,27 +116,28 @@ public class MoveThreadAction extends PortletAction {
 			getForward(renderRequest, "portlet.message_boards.move_thread"));
 	}
 
-	protected void moveThread(ActionRequest req, ActionResponse res)
+	protected void moveThread(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		PortletPreferences prefs = req.getPreferences();
+		PortletPreferences prefs = actionRequest.getPreferences();
 
-		long categoryId = ParamUtil.getLong(req, "categoryId");
-		long threadId = ParamUtil.getLong(req, "threadId");
+		long categoryId = ParamUtil.getLong(actionRequest, "categoryId");
+		long threadId = ParamUtil.getLong(actionRequest, "threadId");
 
 		MBThread thread = MBThreadLocalServiceUtil.getThread(threadId);
 
 		MBThreadServiceUtil.moveThread(categoryId, threadId);
 
 		boolean addExplanationPost = ParamUtil.getBoolean(
-			req, "addExplanationPost");
+			actionRequest, "addExplanationPost");
 
 		if (addExplanationPost) {
-			String subject = ParamUtil.getString(req, "subject");
-			String body = ParamUtil.getString(req, "body");
+			String subject = ParamUtil.getString(actionRequest, "subject");
+			String body = ParamUtil.getString(actionRequest, "body");
 
 			MBMessageServiceUtil.addMessage(
 				categoryId, threadId, thread.getRootMessageId(), subject, body,
@@ -145,14 +146,15 @@ public class MoveThreadAction extends PortletAction {
 				themeDisplay);
 		}
 
-		PortletURL portletURL = ((ActionResponseImpl)res).createRenderURL();
+		PortletURL portletURL =
+			((ActionResponseImpl)actionResponse).createRenderURL();
 
 		portletURL.setParameter(
 			"struts_action", "/message_boards/view_message");
 		portletURL.setParameter(
 			"messageId", String.valueOf(thread.getRootMessageId()));
 
-		res.sendRedirect(portletURL.toString());
+		actionResponse.sendRedirect(portletURL.toString());
 	}
 
 }

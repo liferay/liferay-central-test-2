@@ -64,28 +64,28 @@ public class EditCouponAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateCoupon(req);
+				updateCoupon(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteCoupons(req);
+				deleteCoupons(actionRequest);
 			}
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchCouponException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.shopping.error");
+				setForward(actionRequest, "portlet.shopping.error");
 			}
 			else if (e instanceof CouponCodeException ||
 					 e instanceof CouponDateException ||
@@ -102,17 +102,19 @@ public class EditCouponAction extends PortletAction {
 						(CouponLimitCategoriesException)e;
 
 					SessionErrors.add(
-						req, e.getClass().getName(), clce.getCategoryIds());
+						actionRequest, e.getClass().getName(),
+						clce.getCategoryIds());
 				}
 				else if (e instanceof CouponLimitSKUsException) {
 					CouponLimitSKUsException clskue =
 						(CouponLimitSKUsException)e;
 
 					SessionErrors.add(
-						req, e.getClass().getName(), clskue.getSkus());
+						actionRequest, e.getClass().getName(),
+						clskue.getSkus());
 				}
 				else {
-					SessionErrors.add(req, e.getClass().getName());
+					SessionErrors.add(actionRequest, e.getClass().getName());
 				}
 			}
 			else {
@@ -146,11 +148,11 @@ public class EditCouponAction extends PortletAction {
 			getForward(renderRequest, "portlet.shopping.edit_coupon"));
 	}
 
-	protected void deleteCoupons(ActionRequest req) throws Exception {
-		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+	protected void deleteCoupons(ActionRequest actionRequest) throws Exception {
+		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
 
 		long[] deleteCouponIds = StringUtil.split(
-			ParamUtil.getString(req, "deleteCouponIds"), 0L);
+			ParamUtil.getString(actionRequest, "deleteCouponIds"), 0L);
 
 		for (int i = 0; i < deleteCouponIds.length; i++) {
 			ShoppingCouponServiceUtil.deleteCoupon(
@@ -158,46 +160,55 @@ public class EditCouponAction extends PortletAction {
 		}
 	}
 
-	protected void updateCoupon(ActionRequest req) throws Exception {
-		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+	protected void updateCoupon(ActionRequest actionRequest) throws Exception {
+		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
 
-		long couponId = ParamUtil.getLong(req, "couponId");
+		long couponId = ParamUtil.getLong(actionRequest, "couponId");
 
-		String code = ParamUtil.getString(req, "code");
-		boolean autoCode = ParamUtil.getBoolean(req, "autoCode");
+		String code = ParamUtil.getString(actionRequest, "code");
+		boolean autoCode = ParamUtil.getBoolean(actionRequest, "autoCode");
 
-		String name = ParamUtil.getString(req, "name");
-		String description = ParamUtil.getString(req, "description");
+		String name = ParamUtil.getString(actionRequest, "name");
+		String description = ParamUtil.getString(actionRequest, "description");
 
-		int startDateMonth = ParamUtil.getInteger(req, "startDateMonth");
-		int startDateDay = ParamUtil.getInteger(req, "startDateDay");
-		int startDateYear = ParamUtil.getInteger(req, "startDateYear");
-		int startDateHour = ParamUtil.getInteger(req, "startDateHour");
-		int startDateMinute = ParamUtil.getInteger(req, "startDateMinute");
-		int startDateAmPm = ParamUtil.getInteger(req, "startDateAmPm");
+		int startDateMonth = ParamUtil.getInteger(
+			actionRequest, "startDateMonth");
+		int startDateDay = ParamUtil.getInteger(actionRequest, "startDateDay");
+		int startDateYear = ParamUtil.getInteger(
+			actionRequest, "startDateYear");
+		int startDateHour = ParamUtil.getInteger(
+			actionRequest, "startDateHour");
+		int startDateMinute = ParamUtil.getInteger(
+			actionRequest, "startDateMinute");
+		int startDateAmPm = ParamUtil.getInteger(
+			actionRequest, "startDateAmPm");
 
 		if (startDateAmPm == Calendar.PM) {
 			startDateHour += 12;
 		}
 
-		int endDateMonth = ParamUtil.getInteger(req, "endDateMonth");
-		int endDateDay = ParamUtil.getInteger(req, "endDateDay");
-		int endDateYear = ParamUtil.getInteger(req, "endDateYear");
-		int endDateHour = ParamUtil.getInteger(req, "endDateHour");
-		int endDateMinute = ParamUtil.getInteger(req, "endDateMinute");
-		int endDateAmPm = ParamUtil.getInteger(req, "endDateAmPm");
-		boolean neverExpire = ParamUtil.getBoolean(req, "neverExpire");
+		int endDateMonth = ParamUtil.getInteger(actionRequest, "endDateMonth");
+		int endDateDay = ParamUtil.getInteger(actionRequest, "endDateDay");
+		int endDateYear = ParamUtil.getInteger(actionRequest, "endDateYear");
+		int endDateHour = ParamUtil.getInteger(actionRequest, "endDateHour");
+		int endDateMinute = ParamUtil.getInteger(
+			actionRequest, "endDateMinute");
+		int endDateAmPm = ParamUtil.getInteger(actionRequest, "endDateAmPm");
+		boolean neverExpire = ParamUtil.getBoolean(
+			actionRequest, "neverExpire");
 
 		if (endDateAmPm == Calendar.PM) {
 			endDateHour += 12;
 		}
 
-		boolean active = ParamUtil.getBoolean(req, "active");
-		String limitCategories = ParamUtil.getString(req, "limitCategories");
-		String limitSkus = ParamUtil.getString(req, "limitSkus");
-		double minOrder = ParamUtil.getDouble(req, "minOrder");
-		double discount = ParamUtil.getDouble(req, "discount");
-		String discountType = ParamUtil.getString(req, "discountType");
+		boolean active = ParamUtil.getBoolean(actionRequest, "active");
+		String limitCategories = ParamUtil.getString(
+			actionRequest, "limitCategories");
+		String limitSkus = ParamUtil.getString(actionRequest, "limitSkus");
+		double minOrder = ParamUtil.getDouble(actionRequest, "minOrder");
+		double discount = ParamUtil.getDouble(actionRequest, "discount");
+		String discountType = ParamUtil.getString(
+			actionRequest, "discountType");
 
 		if (couponId <= 0) {
 

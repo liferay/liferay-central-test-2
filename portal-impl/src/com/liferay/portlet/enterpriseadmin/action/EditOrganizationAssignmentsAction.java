@@ -53,30 +53,30 @@ public class EditOrganizationAssignmentsAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals("organization_users")) {
-				updateOrganizationUsers(req);
+				updateOrganizationUsers(actionRequest);
 			}
 
 			if (Validator.isNotNull(cmd)) {
 				String redirect = ParamUtil.getString(
-					req, "assignmentsRedirect");
+					actionRequest, "assignmentsRedirect");
 
-				sendRedirect(req, res, redirect);
+				sendRedirect(actionRequest, actionResponse, redirect);
 			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchOrganizationException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.enterprise_admin.error");
+				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
 			else {
 				throw e;
@@ -110,13 +110,16 @@ public class EditOrganizationAssignmentsAction extends PortletAction {
 			"portlet.enterprise_admin.edit_organization_assignments"));
 	}
 
-	protected void updateOrganizationUsers(ActionRequest req) throws Exception {
-		long organizationId = ParamUtil.getLong(req, "organizationId");
+	protected void updateOrganizationUsers(ActionRequest actionRequest)
+		throws Exception {
+
+		long organizationId = ParamUtil.getLong(
+			actionRequest, "organizationId");
 
 		long[] addUserIds = StringUtil.split(
-			ParamUtil.getString(req, "addUserIds"), 0L);
+			ParamUtil.getString(actionRequest, "addUserIds"), 0L);
 		long[] removeUserIds = StringUtil.split(
-			ParamUtil.getString(req, "removeUserIds"), 0L);
+			ParamUtil.getString(actionRequest, "removeUserIds"), 0L);
 
 		UserServiceUtil.addOrganizationUsers(organizationId, addUserIds);
 		UserServiceUtil.unsetOrganizationUsers(organizationId, removeUserIds);

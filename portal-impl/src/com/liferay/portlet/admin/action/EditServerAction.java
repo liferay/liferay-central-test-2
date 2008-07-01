@@ -68,29 +68,30 @@ public class EditServerAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
 		if (!permissionChecker.isOmniadmin()) {
-			SessionErrors.add(req, PrincipalException.class.getName());
+			SessionErrors.add(
+				actionRequest, PrincipalException.class.getName());
 
-			setForward(req, "portlet.admin.error");
+			setForward(actionRequest, "portlet.admin.error");
 
 			return;
 		}
 
 		PortletPreferences prefs = PrefsPropsUtil.getPreferences();
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		if (cmd.equals("addLogLevel")) {
-			addLogLevel(req);
+			addLogLevel(actionRequest);
 		}
 		else if (cmd.equals("cacheDb")) {
 			cacheDb();
@@ -108,24 +109,24 @@ public class EditServerAction extends PortletAction {
 			reIndex();
 		}
 		else if (cmd.equals("shutdown")) {
-			shutdown(req);
+			shutdown(actionRequest);
 		}
 		else if (cmd.equals("threadDump")) {
 			threadDump();
 		}
 		else if (cmd.equals("updateLogLevels")) {
-			updateLogLevels(req);
+			updateLogLevels(actionRequest);
 		}
 		else if (cmd.equals("updateOpenOffice")) {
-			updateOpenOffice(req, prefs);
+			updateOpenOffice(actionRequest, prefs);
 		}
 
-		sendRedirect(req, res);
+		sendRedirect(actionRequest, actionResponse);
 	}
 
-	protected void addLogLevel(ActionRequest req) throws Exception {
-		String loggerName = ParamUtil.getString(req, "loggerName");
-		String priority = ParamUtil.getString(req, "priority");
+	protected void addLogLevel(ActionRequest actionRequest) throws Exception {
+		String loggerName = ParamUtil.getString(actionRequest, "loggerName");
+		String priority = ParamUtil.getString(actionRequest, "priority");
 
 		Logger logger = Logger.getLogger(loggerName);
 
@@ -167,9 +168,10 @@ public class EditServerAction extends PortletAction {
 		}
 	}
 
-	protected void shutdown(ActionRequest req) throws Exception {
-		long minutes = ParamUtil.getInteger(req, "minutes") * Time.MINUTE;
-		String message = ParamUtil.getString(req, "message");
+	protected void shutdown(ActionRequest actionRequest) throws Exception {
+		long minutes =
+			ParamUtil.getInteger(actionRequest, "minutes") * Time.MINUTE;
+		String message = ParamUtil.getString(actionRequest, "message");
 
 		if (minutes <= 0) {
 			ShutdownUtil.cancel();
@@ -226,8 +228,10 @@ public class EditServerAction extends PortletAction {
 		}
 	}
 
-	protected void updateLogLevels(ActionRequest req) throws Exception {
-		Enumeration<String> enu = req.getParameterNames();
+	protected void updateLogLevels(ActionRequest actionRequest)
+		throws Exception {
+
+		Enumeration<String> enu = actionRequest.getParameterNames();
 
 		while (enu.hasMoreElements()) {
 			String name = enu.nextElement();
@@ -236,7 +240,7 @@ public class EditServerAction extends PortletAction {
 				String loggerName = name.substring(8, name.length());
 
 				String priority = ParamUtil.getString(
-					req, name, Level.INFO.toString());
+					actionRequest, name, Level.INFO.toString());
 
 				Logger logger = Logger.getLogger(loggerName);
 
@@ -245,12 +249,13 @@ public class EditServerAction extends PortletAction {
 		}
 	}
 
-	protected void updateOpenOffice(ActionRequest req, PortletPreferences prefs)
+	protected void updateOpenOffice(
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
-		boolean enabled = ParamUtil.getBoolean(req, "enabled");
-		String host = ParamUtil.getString(req, "host");
-		int port = ParamUtil.getInteger(req, "port");
+		boolean enabled = ParamUtil.getBoolean(actionRequest, "enabled");
+		String host = ParamUtil.getString(actionRequest, "host");
+		int port = ParamUtil.getInteger(actionRequest, "port");
 
 		prefs.setValue(
 			PropsKeys.OPENOFFICE_SERVER_ENABLED, String.valueOf(enabled));

@@ -53,33 +53,33 @@ public class EditEmailAddressAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateEmailAddress(req);
+				updateEmailAddress(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteEmailAddress(req);
+				deleteEmailAddress(actionRequest);
 			}
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchEmailAddressException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.enterprise_admin.error");
+				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
 			else if (e instanceof EmailAddressException ||
 					 e instanceof NoSuchListTypeException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
 				throw e;
@@ -112,21 +112,27 @@ public class EditEmailAddressAction extends PortletAction {
 			renderRequest, "portlet.enterprise_admin.edit_email_address"));
 	}
 
-	protected void deleteEmailAddress(ActionRequest req) throws Exception {
-		long emailAddressId = ParamUtil.getLong(req, "emailAddressId");
+	protected void deleteEmailAddress(ActionRequest actionRequest)
+		throws Exception {
+
+		long emailAddressId = ParamUtil.getLong(
+			actionRequest, "emailAddressId");
 
 		EmailAddressServiceUtil.deleteEmailAddress(emailAddressId);
 	}
 
-	protected void updateEmailAddress(ActionRequest req) throws Exception {
-		long emailAddressId = ParamUtil.getLong(req, "emailAddressId");
+	protected void updateEmailAddress(ActionRequest actionRequest)
+		throws Exception {
 
-		String className = ParamUtil.getString(req, "className");
-		long classPK = ParamUtil.getLong(req, "classPK");
+		long emailAddressId = ParamUtil.getLong(
+			actionRequest, "emailAddressId");
 
-		String address = ParamUtil.getString(req, "address");
-		int typeId = ParamUtil.getInteger(req, "typeId");
-		boolean primary = ParamUtil.getBoolean(req, "primary");
+		String className = ParamUtil.getString(actionRequest, "className");
+		long classPK = ParamUtil.getLong(actionRequest, "classPK");
+
+		String address = ParamUtil.getString(actionRequest, "address");
+		int typeId = ParamUtil.getInteger(actionRequest, "typeId");
+		boolean primary = ParamUtil.getBoolean(actionRequest, "primary");
 
 		if (emailAddressId <= 0) {
 

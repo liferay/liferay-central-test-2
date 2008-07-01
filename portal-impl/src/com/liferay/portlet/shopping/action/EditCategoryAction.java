@@ -53,31 +53,31 @@ public class EditCategoryAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateCategory(req);
+				updateCategory(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteCategory(req);
+				deleteCategory(actionRequest);
 			}
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchCategoryException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.shopping.error");
+				setForward(actionRequest, "portlet.shopping.error");
 			}
 			else if (e instanceof CategoryNameException) {
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
 				throw e;
@@ -110,27 +110,32 @@ public class EditCategoryAction extends PortletAction {
 			getForward(renderRequest, "portlet.shopping.edit_category"));
 	}
 
-	protected void deleteCategory(ActionRequest req) throws Exception {
-		long categoryId = ParamUtil.getLong(req, "categoryId");
+	protected void deleteCategory(ActionRequest actionRequest)
+		throws Exception {
+
+		long categoryId = ParamUtil.getLong(actionRequest, "categoryId");
 
 		ShoppingCategoryServiceUtil.deleteCategory(categoryId);
 	}
 
-	protected void updateCategory(ActionRequest req) throws Exception {
-		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+	protected void updateCategory(ActionRequest actionRequest)
+		throws Exception {
 
-		long categoryId = ParamUtil.getLong(req, "categoryId");
+		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
 
-		long parentCategoryId = ParamUtil.getLong(req, "parentCategoryId");
-		String name = ParamUtil.getString(req, "name");
-		String description = ParamUtil.getString(req, "description");
+		long categoryId = ParamUtil.getLong(actionRequest, "categoryId");
+
+		long parentCategoryId = ParamUtil.getLong(
+			actionRequest, "parentCategoryId");
+		String name = ParamUtil.getString(actionRequest, "name");
+		String description = ParamUtil.getString(actionRequest, "description");
 
 		boolean mergeWithParentCategory = ParamUtil.getBoolean(
-			req, "mergeWithParentCategory");
+			actionRequest, "mergeWithParentCategory");
 
-		String[] communityPermissions = req.getParameterValues(
+		String[] communityPermissions = actionRequest.getParameterValues(
 			"communityPermissions");
-		String[] guestPermissions = req.getParameterValues(
+		String[] guestPermissions = actionRequest.getParameterValues(
 			"guestPermissions");
 
 		if (categoryId <= 0) {

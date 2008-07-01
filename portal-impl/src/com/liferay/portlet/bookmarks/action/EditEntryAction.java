@@ -59,21 +59,21 @@ public class EditEntryAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateEntry(req);
+				updateEntry(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteEntry(req);
+				deleteEntry(actionRequest);
 			}
 
-			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
-				WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
 			LayoutTypePortlet layoutTypePortlet =
 				themeDisplay.getLayoutTypePortlet();
@@ -81,29 +81,30 @@ public class EditEntryAction extends PortletAction {
 			if (layoutTypePortlet.hasPortletId(
 					portletConfig.getPortletName())) {
 
-				sendRedirect(req, res);
+				sendRedirect(actionRequest, actionResponse);
 			}
 			else {
-				String redirect = ParamUtil.getString(req, "redirect");
+				String redirect = ParamUtil.getString(
+					actionRequest, "redirect");
 
-				res.sendRedirect(redirect);
+				actionResponse.sendRedirect(redirect);
 			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchEntryException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.bookmarks.error");
+				setForward(actionRequest, "portlet.bookmarks.error");
 			}
 			else if (e instanceof EntryURLException ||
 					 e instanceof NoSuchFolderException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else if (e instanceof TagsEntryException) {
-				SessionErrors.add(req, e.getClass().getName(), e);
+				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 			}
 			else {
 				throw e;
@@ -136,26 +137,26 @@ public class EditEntryAction extends PortletAction {
 			getForward(renderRequest, "portlet.bookmarks.edit_entry"));
 	}
 
-	protected void deleteEntry(ActionRequest req) throws Exception {
-		long entryId = ParamUtil.getLong(req, "entryId");
+	protected void deleteEntry(ActionRequest actionRequest) throws Exception {
+		long entryId = ParamUtil.getLong(actionRequest, "entryId");
 
 		BookmarksEntryServiceUtil.deleteEntry(entryId);
 	}
 
-	protected void updateEntry(ActionRequest req) throws Exception {
-		long entryId = ParamUtil.getLong(req, "entryId");
+	protected void updateEntry(ActionRequest actionRequest) throws Exception {
+		long entryId = ParamUtil.getLong(actionRequest, "entryId");
 
-		long folderId = ParamUtil.getLong(req, "folderId");
-		String name = ParamUtil.getString(req, "name");
-		String url = ParamUtil.getString(req, "url");
-		String comments = ParamUtil.getString(req, "comments");
+		long folderId = ParamUtil.getLong(actionRequest, "folderId");
+		String name = ParamUtil.getString(actionRequest, "name");
+		String url = ParamUtil.getString(actionRequest, "url");
+		String comments = ParamUtil.getString(actionRequest, "comments");
 
 		String[] tagsEntries = StringUtil.split(
-			ParamUtil.getString(req, "tagsEntries"));
+			ParamUtil.getString(actionRequest, "tagsEntries"));
 
-		String[] communityPermissions = req.getParameterValues(
+		String[] communityPermissions = actionRequest.getParameterValues(
 			"communityPermissions");
-		String[] guestPermissions = req.getParameterValues(
+		String[] guestPermissions = actionRequest.getParameterValues(
 			"guestPermissions");
 
 		if (entryId <= 0) {
@@ -167,7 +168,8 @@ public class EditEntryAction extends PortletAction {
 				communityPermissions, guestPermissions);
 
 			AssetPublisherUtil.addAndStoreSelection(
-				req, BookmarksEntry.class.getName(), entry.getEntryId(), -1);
+				actionRequest, BookmarksEntry.class.getName(),
+				entry.getEntryId(), -1);
 		}
 		else {
 
@@ -178,7 +180,7 @@ public class EditEntryAction extends PortletAction {
 		}
 
 		AssetPublisherUtil.addRecentFolderId(
-			req, BookmarksEntry.class.getName(), folderId);
+			actionRequest, BookmarksEntry.class.getName(), folderId);
 	}
 
 }

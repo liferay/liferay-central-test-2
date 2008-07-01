@@ -67,7 +67,7 @@ public class ViewAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		List<String> validEmailAddresses = new ArrayList<String>();
@@ -77,7 +77,8 @@ public class ViewAction extends PortletAction {
 			InvitationUtil.getEmailMessageMaxRecipients();
 
 		for (int i = 0; i < emailMessageMaxRecipients; i++) {
-			String emailAddress = ParamUtil.getString(req, "emailAddress" + i);
+			String emailAddress = ParamUtil.getString(
+				actionRequest, "emailAddress" + i);
 
 			if (Validator.isEmailAddress(emailAddress)) {
 				validEmailAddresses.add(emailAddress);
@@ -88,12 +89,13 @@ public class ViewAction extends PortletAction {
 		}
 
 		if (invalidEmailAddresses.size() > 0) {
-			SessionErrors.add(req, "emailAddresses", invalidEmailAddresses);
+			SessionErrors.add(
+				actionRequest, "emailAddresses", invalidEmailAddresses);
 
 			return;
 		}
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		User user = themeDisplay.getUser();
@@ -105,14 +107,14 @@ public class ViewAction extends PortletAction {
 
 		Layout layout = themeDisplay.getLayout();
 
-		String portalURL = PortalUtil.getPortalURL(req);
+		String portalURL = PortalUtil.getPortalURL(actionRequest);
 
 		String pageURL =
 			portalURL + PortalUtil.getLayoutURL(layout, themeDisplay);
 
 		PortletPreferences prefs =
 			PortletPreferencesFactoryUtil.getPortletSetup(
-				req, PortletKeys.INVITATION);
+				actionRequest, PortletKeys.INVITATION);
 
 		String subject = InvitationUtil.getEmailMessageSubject(prefs);
 		String body = InvitationUtil.getEmailMessageBody(prefs);
@@ -156,11 +158,11 @@ public class ViewAction extends PortletAction {
 			MailServiceUtil.sendEmail(message);
 		}
 
-		SessionMessages.add(req, "invitationSent");
+		SessionMessages.add(actionRequest, "invitationSent");
 
-		String redirect = ParamUtil.getString(req, "redirect");
+		String redirect = ParamUtil.getString(actionRequest, "redirect");
 
-		res.sendRedirect(redirect);
+		actionResponse.sendRedirect(redirect);
 	}
 
 	public ActionForward render(

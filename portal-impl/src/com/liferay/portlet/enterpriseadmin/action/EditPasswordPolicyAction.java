@@ -52,35 +52,36 @@ public class EditPasswordPolicyAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updatePasswordPolicy(req);
+				updatePasswordPolicy(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deletePasswordPolicy(req);
+				deletePasswordPolicy(actionRequest);
 			}
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof PrincipalException) {
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.enterprise_admin.error");
+				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
 			else if (e instanceof PasswordPolicyNameException ||
 					 e instanceof NoSuchPasswordPolicyException ||
 					 e instanceof RequiredPasswordPolicyException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
 				if (cmd.equals(Constants.DELETE)) {
-					res.sendRedirect(ParamUtil.getString(req, "redirect"));
+					actionResponse.sendRedirect(
+						ParamUtil.getString(actionRequest, "redirect"));
 				}
 			}
 			else {
@@ -114,34 +115,44 @@ public class EditPasswordPolicyAction extends PortletAction {
 			renderRequest, "portlet.enterprise_admin.edit_password_policy"));
 	}
 
-	protected void deletePasswordPolicy(ActionRequest req) throws Exception {
-		long passwordPolicyId = ParamUtil.getLong(req, "passwordPolicyId");
+	protected void deletePasswordPolicy(ActionRequest actionRequest)
+		throws Exception {
+
+		long passwordPolicyId = ParamUtil.getLong(
+			actionRequest, "passwordPolicyId");
 
 		PasswordPolicyServiceUtil.deletePasswordPolicy(passwordPolicyId);
 	}
 
-	protected void updatePasswordPolicy(ActionRequest req) throws Exception {
-		long passwordPolicyId = ParamUtil.getLong(req, "passwordPolicyId");
+	protected void updatePasswordPolicy(ActionRequest actionRequest)
+		throws Exception {
 
-		String name = ParamUtil.getString(req, "name");
-		String description = ParamUtil.getString(req, "description");
-		boolean changeable = ParamUtil.getBoolean(req, "changeable");
-		boolean changeRequired = ParamUtil.getBoolean(req, "changeRequired");
-		long minAge = ParamUtil.getLong(req, "minAge");
-		boolean checkSyntax = ParamUtil.getBoolean(req, "checkSyntax");
+		long passwordPolicyId = ParamUtil.getLong(
+			actionRequest, "passwordPolicyId");
+
+		String name = ParamUtil.getString(actionRequest, "name");
+		String description = ParamUtil.getString(actionRequest, "description");
+		boolean changeable = ParamUtil.getBoolean(actionRequest, "changeable");
+		boolean changeRequired = ParamUtil.getBoolean(
+			actionRequest, "changeRequired");
+		long minAge = ParamUtil.getLong(actionRequest, "minAge");
+		boolean checkSyntax = ParamUtil.getBoolean(
+			actionRequest, "checkSyntax");
 		boolean allowDictionaryWords = ParamUtil.getBoolean(
-			req, "allowDictionaryWords");
-		int minLength = ParamUtil.getInteger(req, "minLength");
-		boolean history = ParamUtil.getBoolean(req, "history");
-		int historyCount = ParamUtil.getInteger(req, "historyCount");
-		boolean expireable = ParamUtil.getBoolean(req, "expireable");
-		long maxAge = ParamUtil.getLong(req, "maxAge");
-		long warningTime = ParamUtil.getLong(req, "warningTime");
-		int graceLimit = ParamUtil.getInteger(req, "graceLimit");
-		boolean lockout = ParamUtil.getBoolean(req, "lockout");
-		int maxFailure = ParamUtil.getInteger(req, "maxFailure");
-		long lockoutDuration = ParamUtil.getLong(req, "lockoutDuration");
-		long resetFailureCount = ParamUtil.getLong(req, "resetFailureCount");
+			actionRequest, "allowDictionaryWords");
+		int minLength = ParamUtil.getInteger(actionRequest, "minLength");
+		boolean history = ParamUtil.getBoolean(actionRequest, "history");
+		int historyCount = ParamUtil.getInteger(actionRequest, "historyCount");
+		boolean expireable = ParamUtil.getBoolean(actionRequest, "expireable");
+		long maxAge = ParamUtil.getLong(actionRequest, "maxAge");
+		long warningTime = ParamUtil.getLong(actionRequest, "warningTime");
+		int graceLimit = ParamUtil.getInteger(actionRequest, "graceLimit");
+		boolean lockout = ParamUtil.getBoolean(actionRequest, "lockout");
+		int maxFailure = ParamUtil.getInteger(actionRequest, "maxFailure");
+		long lockoutDuration = ParamUtil.getLong(
+			actionRequest, "lockoutDuration");
+		long resetFailureCount = ParamUtil.getLong(
+			actionRequest, "resetFailureCount");
 
 		if (passwordPolicyId <= 0) {
 

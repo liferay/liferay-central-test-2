@@ -57,27 +57,27 @@ public class EditInstanceAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		try {
-			updateInstance(req);
+			updateInstance(actionRequest);
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchCompanyException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.admin.error");
+				setForward(actionRequest, "portlet.admin.error");
 			}
 			else if (e instanceof CompanyMxException ||
 					 e instanceof CompanyVirtualHostException ||
 					 e instanceof CompanyWebIdException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
 				throw e;
@@ -110,12 +110,14 @@ public class EditInstanceAction extends PortletAction {
 			getForward(renderRequest, "portlet.admin.edit_instance"));
 	}
 
-	protected void updateInstance(ActionRequest req) throws Exception {
-		long companyId = ParamUtil.getLong(req, "companyId");
+	protected void updateInstance(ActionRequest actionRequest)
+		throws Exception {
 
-		String webId = ParamUtil.getString(req, "webId");
-		String virtualHost = ParamUtil.getString(req, "virtualHost");
-		String mx = ParamUtil.getString(req, "mx");
+		long companyId = ParamUtil.getLong(actionRequest, "companyId");
+
+		String webId = ParamUtil.getString(actionRequest, "webId");
+		String virtualHost = ParamUtil.getString(actionRequest, "virtualHost");
+		String mx = ParamUtil.getString(actionRequest, "mx");
 
 		if (companyId <= 0) {
 
@@ -124,8 +126,8 @@ public class EditInstanceAction extends PortletAction {
 			Company company = CompanyServiceUtil.addCompany(
 				webId, virtualHost, mx);
 
-			ServletContext servletContext = (ServletContext)req.getAttribute(
-				WebKeys.CTX);
+			ServletContext servletContext =
+				(ServletContext)actionRequest.getAttribute(WebKeys.CTX);
 
 			PortalInstances.initCompany(servletContext, company.getWebId());
 		}

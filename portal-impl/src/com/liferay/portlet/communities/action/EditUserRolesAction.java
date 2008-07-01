@@ -52,23 +52,23 @@ public class EditUserRolesAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals("user_group_role_users")) {
-				updateUserGroupRoleUsers(req);
+				updateUserGroupRoleUsers(actionRequest);
 			}
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof PrincipalException) {
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.communities.error");
+				setForward(actionRequest, "portlet.communities.error");
 			}
 			else {
 				throw e;
@@ -103,16 +103,16 @@ public class EditUserRolesAction extends PortletAction {
 			getForward(renderRequest, "portlet.communities.edit_user_roles"));
 	}
 
-	protected void updateUserGroupRoleUsers(ActionRequest req)
+	protected void updateUserGroupRoleUsers(ActionRequest actionRequest)
 		throws Exception {
 
-		long groupId = ParamUtil.getLong(req, "groupId");
-		long roleId = ParamUtil.getLong(req, "roleId");
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+		long roleId = ParamUtil.getLong(actionRequest, "roleId");
 
 		long[] addUserIds = StringUtil.split(
-			ParamUtil.getString(req, "addUserIds"), 0L);
+			ParamUtil.getString(actionRequest, "addUserIds"), 0L);
 		long[] removeUserIds = StringUtil.split(
-			ParamUtil.getString(req, "removeUserIds"), 0L);
+			ParamUtil.getString(actionRequest, "removeUserIds"), 0L);
 
 		UserGroupRoleServiceUtil.addUserGroupRoles(addUserIds, groupId, roleId);
 		UserGroupRoleServiceUtil.deleteUserGroupRoles(

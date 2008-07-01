@@ -55,28 +55,28 @@ public class EditProductVersionAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateProductVersion(req);
+				updateProductVersion(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteProductVersion(req);
+				deleteProductVersion(actionRequest);
 			}
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchProductVersionException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.software_catalog.error");
+				setForward(actionRequest, "portlet.software_catalog.error");
 			}
 			else if (e instanceof
 						DuplicateProductVersionDirectDownloadURLException ||
@@ -85,7 +85,7 @@ public class EditProductVersionAction extends PortletAction {
 					 e instanceof ProductVersionFrameworkVersionException ||
 					 e instanceof ProductVersionNameException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
 				throw e;
@@ -118,30 +118,38 @@ public class EditProductVersionAction extends PortletAction {
 			renderRequest, "portlet.software_catalog.edit_product_version"));
 	}
 
-	protected void deleteProductVersion(ActionRequest req) throws Exception {
-		long productVersionId = ParamUtil.getLong(req, "productVersionId");
+	protected void deleteProductVersion(ActionRequest actionRequest)
+		throws Exception {
+
+		long productVersionId = ParamUtil.getLong(
+			actionRequest, "productVersionId");
 
 		SCProductVersionServiceUtil.deleteProductVersion(productVersionId);
 	}
 
-	protected void updateProductVersion(ActionRequest req) throws Exception {
-		long productVersionId = ParamUtil.getLong(req, "productVersionId");
+	protected void updateProductVersion(ActionRequest actionRequest)
+		throws Exception {
 
-		long productEntryId = ParamUtil.getLong(req, "productEntryId");
-		String version = ParamUtil.getString(req, "version");
-		String changeLog = ParamUtil.getString(req, "changeLog");
-		String downloadPageURL = ParamUtil.getString(req, "downloadPageURL");
+		long productVersionId = ParamUtil.getLong(
+			actionRequest, "productVersionId");
+
+		long productEntryId = ParamUtil.getLong(
+			actionRequest, "productEntryId");
+		String version = ParamUtil.getString(actionRequest, "version");
+		String changeLog = ParamUtil.getString(actionRequest, "changeLog");
+		String downloadPageURL = ParamUtil.getString(
+			actionRequest, "downloadPageURL");
 		String directDownloadURL = ParamUtil.getString(
-			req, "directDownloadURL");
+			actionRequest, "directDownloadURL");
 		boolean repoStoreArtifact = ParamUtil.getBoolean(
-			req, "repoStoreArtifact");
+			actionRequest, "repoStoreArtifact");
 
 		long[] frameworkVersionIds = ParamUtil.getLongValues(
-			req, "frameworkVersions");
+			actionRequest, "frameworkVersions");
 
-		String[] communityPermissions = req.getParameterValues(
+		String[] communityPermissions = actionRequest.getParameterValues(
 			"communityPermissions");
-		String[] guestPermissions = req.getParameterValues(
+		String[] guestPermissions = actionRequest.getParameterValues(
 			"guestPermissions");
 
 		if (productVersionId <= 0) {

@@ -71,30 +71,30 @@ public class EditQuestionAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateQuestion(req);
+				updateQuestion(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteQuestion(req);
+				deleteQuestion(actionRequest);
 			}
 
 			if (Validator.isNotNull(cmd)) {
-				sendRedirect(req, res);
+				sendRedirect(actionRequest, actionResponse);
 			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchQuestionException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.polls.error");
+				setForward(actionRequest, "portlet.polls.error");
 			}
 			else if (e instanceof DuplicateVoteException ||
 					 e instanceof NoSuchChoiceException ||
@@ -104,7 +104,7 @@ public class EditQuestionAction extends PortletAction {
 
 					 e instanceof QuestionTitleException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else if (e instanceof QuestionExpiredException) {
 			}
@@ -139,33 +139,39 @@ public class EditQuestionAction extends PortletAction {
 			getForward(renderRequest, "portlet.polls.edit_question"));
 	}
 
-	protected void deleteQuestion(ActionRequest req) throws Exception {
-		long questionId = ParamUtil.getLong(req, "questionId");
+	protected void deleteQuestion(ActionRequest actionRequest)
+		throws Exception {
+
+		long questionId = ParamUtil.getLong(actionRequest, "questionId");
 
 		PollsQuestionServiceUtil.deleteQuestion(questionId);
 
 	}
 
-	protected void updateQuestion(ActionRequest req) throws Exception {
-		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+	protected void updateQuestion(ActionRequest actionRequest)
+		throws Exception {
 
-		long questionId = ParamUtil.getLong(req, "questionId");
+		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
 
-		String title = ParamUtil.getString(req, "title");
-		String description = ParamUtil.getString(req, "description");
+		long questionId = ParamUtil.getLong(actionRequest, "questionId");
+
+		String title = ParamUtil.getString(actionRequest, "title");
+		String description = ParamUtil.getString(actionRequest, "description");
 
 		int expirationDateMonth = ParamUtil.getInteger(
-			req, "expirationDateMonth");
-		int expirationDateDay = ParamUtil.getInteger(req, "expirationDateDay");
+			actionRequest, "expirationDateMonth");
+		int expirationDateDay = ParamUtil.getInteger(
+			actionRequest, "expirationDateDay");
 		int expirationDateYear = ParamUtil.getInteger(
-			req, "expirationDateYear");
+			actionRequest, "expirationDateYear");
 		int expirationDateHour = ParamUtil.getInteger(
-			req, "expirationDateHour");
+			actionRequest, "expirationDateHour");
 		int expirationDateMinute = ParamUtil.getInteger(
-			req, "expirationDateMinute");
+			actionRequest, "expirationDateMinute");
 		int expirationDateAmPm = ParamUtil.getInteger(
-			req, "expirationDateAmPm");
-		boolean neverExpire = ParamUtil.getBoolean(req, "neverExpire");
+			actionRequest, "expirationDateAmPm");
+		boolean neverExpire = ParamUtil.getBoolean(
+			actionRequest, "neverExpire");
 
 		if (expirationDateAmPm == Calendar.PM) {
 			expirationDateHour += 12;
@@ -173,7 +179,7 @@ public class EditQuestionAction extends PortletAction {
 
 		List<PollsChoice> choices = new ArrayList<PollsChoice>();
 
-		Enumeration<String> enu = req.getParameterNames();
+		Enumeration<String> enu = actionRequest.getParameterNames();
 
 		while (enu.hasMoreElements()) {
 			String param = enu.nextElement();
@@ -184,8 +190,9 @@ public class EditQuestionAction extends PortletAction {
 						CHOICE_DESCRIPTION_PREFIX.length(), param.length());
 
 					String choiceName = ParamUtil.getString(
-						req, CHOICE_NAME_PREFIX + id);
-					String choiceDescription = ParamUtil.getString(req, param);
+						actionRequest, CHOICE_NAME_PREFIX + id);
+					String choiceDescription = ParamUtil.getString(
+						actionRequest, param);
 
 					PollsChoice choice = PollsChoiceUtil.create(0);
 
@@ -199,9 +206,9 @@ public class EditQuestionAction extends PortletAction {
 			}
 		}
 
-		String[] communityPermissions = req.getParameterValues(
+		String[] communityPermissions = actionRequest.getParameterValues(
 			"communityPermissions");
-		String[] guestPermissions = req.getParameterValues(
+		String[] guestPermissions = actionRequest.getParameterValues(
 			"guestPermissions");
 
 		if (questionId <= 0) {

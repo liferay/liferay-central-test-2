@@ -54,33 +54,33 @@ public class EditFolderAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateFolder(req);
+				updateFolder(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteFolder(req);
+				deleteFolder(actionRequest);
 			}
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchFolderException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.image_gallery.error");
+				setForward(actionRequest, "portlet.image_gallery.error");
 			}
 			else if (e instanceof DuplicateFolderNameException ||
 					 e instanceof FolderNameException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
 				throw e;
@@ -113,27 +113,28 @@ public class EditFolderAction extends PortletAction {
 			getForward(renderRequest, "portlet.image_gallery.edit_folder"));
 	}
 
-	protected void deleteFolder(ActionRequest req) throws Exception {
-		long folderId = ParamUtil.getLong(req, "folderId");
+	protected void deleteFolder(ActionRequest actionRequest) throws Exception {
+		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 
 		IGFolderServiceUtil.deleteFolder(folderId);
 	}
 
-	protected void updateFolder(ActionRequest req) throws Exception {
-		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+	protected void updateFolder(ActionRequest actionRequest) throws Exception {
+		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
 
-		long folderId = ParamUtil.getLong(req, "folderId");
+		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 
-		long parentFolderId = ParamUtil.getLong(req, "parentFolderId");
-		String name = ParamUtil.getString(req, "name");
-		String description = ParamUtil.getString(req, "description");
+		long parentFolderId = ParamUtil.getLong(
+			actionRequest, "parentFolderId");
+		String name = ParamUtil.getString(actionRequest, "name");
+		String description = ParamUtil.getString(actionRequest, "description");
 
 		boolean mergeWithParentFolder = ParamUtil.getBoolean(
-			req, "mergeWithParentFolder");
+			actionRequest, "mergeWithParentFolder");
 
-		String[] communityPermissions = req.getParameterValues(
+		String[] communityPermissions = actionRequest.getParameterValues(
 			"communityPermissions");
-		String[] guestPermissions = req.getParameterValues(
+		String[] guestPermissions = actionRequest.getParameterValues(
 			"guestPermissions");
 
 		if (folderId <= 0) {

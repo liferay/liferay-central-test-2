@@ -67,44 +67,45 @@ public class EditStructureAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		JournalStructure structure = null;
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				structure = updateStructure(req);
+				structure = updateStructure(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteStructures(req);
+				deleteStructures(actionRequest);
 			}
 
 			if (Validator.isNotNull(cmd)) {
-				String redirect = ParamUtil.getString(req, "redirect");
+				String redirect = ParamUtil.getString(
+					actionRequest, "redirect");
 
 				if (structure != null) {
 					boolean saveAndContinue = ParamUtil.getBoolean(
-						req, "saveAndContinue");
+						actionRequest, "saveAndContinue");
 
 					if (saveAndContinue) {
 						redirect = getSaveAndContinueRedirect(
-							portletConfig, req, structure, redirect);
+							portletConfig, actionRequest, structure, redirect);
 					}
 				}
 
-				sendRedirect(req, res, redirect);
+				sendRedirect(actionRequest, actionResponse, redirect);
 			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchStructureException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.journal.error");
+				setForward(actionRequest, "portlet.journal.error");
 			}
 			else if (e instanceof DuplicateStructureIdException ||
 					 e instanceof RequiredStructureException ||
@@ -113,10 +114,11 @@ public class EditStructureAction extends PortletAction {
 					 e instanceof StructureNameException ||
 					 e instanceof StructureXsdException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
 				if (e instanceof RequiredStructureException) {
-					res.sendRedirect(ParamUtil.getString(req, "redirect"));
+					actionResponse.sendRedirect(
+						ParamUtil.getString(actionRequest, "redirect"));
 				}
 			}
 			else {
@@ -160,32 +162,36 @@ public class EditStructureAction extends PortletAction {
 			getForward(renderRequest, "portlet.journal.edit_structure"));
 	}
 
-	protected void deleteStructures(ActionRequest req) throws Exception {
-		long groupId = ParamUtil.getLong(req, "groupId");
+	protected void deleteStructures(ActionRequest actionRequest)
+		throws Exception {
+
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 
 		String[] deleteStructureIds = StringUtil.split(
-			ParamUtil.getString(req, "deleteStructureIds"));
+			ParamUtil.getString(actionRequest, "deleteStructureIds"));
 
 		for (int i = 0; i < deleteStructureIds.length; i++) {
 			JournalStructureServiceUtil.deleteStructure(
 				groupId, deleteStructureIds[i]);
 
-			JournalUtil.removeRecentStructure(req, deleteStructureIds[i]);
+			JournalUtil.removeRecentStructure(
+				actionRequest, deleteStructureIds[i]);
 		}
 	}
 
 	protected String getSaveAndContinueRedirect(
-			PortletConfig portletConfig, ActionRequest req,
+			PortletConfig portletConfig, ActionRequest actionRequest,
 			JournalStructure structure, String redirect)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String originalRedirect = ParamUtil.getString(req, "originalRedirect");
+		String originalRedirect = ParamUtil.getString(
+			actionRequest, "originalRedirect");
 
 		PortletURLImpl portletURL = new PortletURLImpl(
-			(ActionRequestImpl)req, portletConfig.getPortletName(),
+			(ActionRequestImpl)actionRequest, portletConfig.getPortletName(),
 			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
 		portletURL.setWindowState(WindowState.MAXIMIZED);
@@ -202,25 +208,26 @@ public class EditStructureAction extends PortletAction {
 		return portletURL.toString();
 	}
 
-	protected JournalStructure updateStructure(ActionRequest req)
+	protected JournalStructure updateStructure(ActionRequest actionRequest)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
 
-		long groupId = ParamUtil.getLong(req, "groupId");
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 
-		String structureId = ParamUtil.getString(req, "structureId");
-		boolean autoStructureId = ParamUtil.getBoolean(req, "autoStructureId");
+		String structureId = ParamUtil.getString(actionRequest, "structureId");
+		boolean autoStructureId = ParamUtil.getBoolean(
+			actionRequest, "autoStructureId");
 
-		String name = ParamUtil.getString(req, "name");
-		String description = ParamUtil.getString(req, "description");
-		String xsd = ParamUtil.getString(req, "xsd");
+		String name = ParamUtil.getString(actionRequest, "name");
+		String description = ParamUtil.getString(actionRequest, "description");
+		String xsd = ParamUtil.getString(actionRequest, "xsd");
 
-		String[] communityPermissions = req.getParameterValues(
+		String[] communityPermissions = actionRequest.getParameterValues(
 			"communityPermissions");
-		String[] guestPermissions = req.getParameterValues(
+		String[] guestPermissions = actionRequest.getParameterValues(
 			"guestPermissions");
 
 		JournalStructure structure = null;
@@ -243,7 +250,7 @@ public class EditStructureAction extends PortletAction {
 
 		// Recent structures
 
-		JournalUtil.addRecentStructure(req, structure);
+		JournalUtil.addRecentStructure(actionRequest, structure);
 
 		return structure;
 	}

@@ -55,15 +55,16 @@ public class ReplyMembershipRequestAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		try {
 			long membershipRequestId = ParamUtil.getLong(
-				req, "membershipRequestId");
+				actionRequest, "membershipRequestId");
 
-			int statusId = ParamUtil.getInteger(req, "statusId");
-			String replyComments = ParamUtil.getString(req, "replyComments");
+			int statusId = ParamUtil.getInteger(actionRequest, "statusId");
+			String replyComments = ParamUtil.getString(
+				actionRequest, "replyComments");
 
 			MembershipRequest membershipRequest =
 				MembershipRequestServiceUtil.getMembershipRequest(
@@ -78,24 +79,25 @@ public class ReplyMembershipRequestAction extends PortletAction {
 					membershipRequest.getGroupId());
 			}
 
-			SessionMessages.add(req, "membership_reply_sent");
+			SessionMessages.add(actionRequest, "membership_reply_sent");
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchGroupException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.communities.error");
+				setForward(actionRequest, "portlet.communities.error");
 			}
 			else if (e instanceof MembershipRequestCommentsException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
 				setForward(
-					req, "portlet.communities.reply_membership_request");
+					actionRequest,
+					"portlet.communities.reply_membership_request");
 			}
 			else {
 				throw e;

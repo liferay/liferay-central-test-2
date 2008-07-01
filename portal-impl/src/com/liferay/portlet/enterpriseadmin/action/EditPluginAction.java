@@ -55,19 +55,19 @@ public class EditPluginAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		try {
-			updatePluginSetting(req);
+			updatePluginSetting(actionRequest);
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof PrincipalException) {
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.enterprise_admin.error");
+				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
 			else {
 				throw e;
@@ -84,19 +84,21 @@ public class EditPluginAction extends PortletAction {
 			getForward(renderRequest, "portlet.enterprise_admin.edit_plugin"));
 	}
 
-	protected void updatePluginSetting(ActionRequest req) throws Exception {
-		long companyId = PortalUtil.getCompanyId(req);
-		String pluginId = ParamUtil.getString(req, "pluginId");
-		String pluginType = ParamUtil.getString(req, "pluginType");
+	protected void updatePluginSetting(ActionRequest actionRequest)
+		throws Exception {
+
+		long companyId = PortalUtil.getCompanyId(actionRequest);
+		String pluginId = ParamUtil.getString(actionRequest, "pluginId");
+		String pluginType = ParamUtil.getString(actionRequest, "pluginType");
 
 		String[] rolesArray = StringUtil.split(
-			ParamUtil.getString(req, "roles"), "\n");
+			ParamUtil.getString(actionRequest, "roles"), "\n");
 
 		Arrays.sort(rolesArray);
 
 		String roles = StringUtil.merge(rolesArray);
 
-		boolean active = ParamUtil.getBoolean(req, "active");
+		boolean active = ParamUtil.getBoolean(actionRequest, "active");
 
 		if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 			String portletId = pluginId;

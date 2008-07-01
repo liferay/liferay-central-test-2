@@ -69,26 +69,26 @@ public class EditRolePermissionsAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals("actions")) {
-				updateActions(req, res);
+				updateActions(actionRequest, actionResponse);
 			}
 			else if (cmd.equals("delete_permission")) {
-				deletePermission(req, res);
+				deletePermission(actionRequest, actionResponse);
 			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchRoleException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.enterprise_admin.error");
+				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
 			else {
 				throw e;
@@ -121,38 +121,41 @@ public class EditRolePermissionsAction extends PortletAction {
 			renderRequest, "portlet.enterprise_admin.edit_role_permissions"));
 	}
 
-	protected void deletePermission(ActionRequest req, ActionResponse res)
+	protected void deletePermission(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long roleId = ParamUtil.getLong(req, "roleId");
-		long permissionId = ParamUtil.getLong(req, "permissionId");
+		long roleId = ParamUtil.getLong(actionRequest, "roleId");
+		long permissionId = ParamUtil.getLong(actionRequest, "permissionId");
 
 		PermissionServiceUtil.unsetRolePermission(
 			roleId, themeDisplay.getPortletGroupId(), permissionId);
 
 		// Send redirect
 
-		SessionMessages.add(req, "permissionDeleted");
+		SessionMessages.add(actionRequest, "permissionDeleted");
 
-		String redirect = ParamUtil.getString(req, "redirect");
+		String redirect = ParamUtil.getString(actionRequest, "redirect");
 
-		res.sendRedirect(redirect);
+		actionResponse.sendRedirect(redirect);
 	}
 
-	protected void updateActions(ActionRequest req, ActionResponse res)
+	protected void updateActions(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long roleId = ParamUtil.getLong(req, "roleId");
+		long roleId = ParamUtil.getLong(actionRequest, "roleId");
 
-		String portletResource = ParamUtil.getString(req, "portletResource");
+		String portletResource = ParamUtil.getString(
+			actionRequest, "portletResource");
 		String[] modelResources = StringUtil.split(
-			ParamUtil.getString(req, "modelResources"));
+			ParamUtil.getString(actionRequest, "modelResources"));
 
 		Map<String, List<String>> resourceActionsMap =
 			new HashMap<String, List<String>>();
@@ -186,7 +189,7 @@ public class EditRolePermissionsAction extends PortletAction {
 
 			for (String actionId : actions) {
 				int scope = ParamUtil.getInteger(
-					req, "scope" + selResource + actionId);
+					actionRequest, "scope" + selResource + actionId);
 
 				if (scope == ResourceConstants.SCOPE_COMPANY) {
 					PermissionServiceUtil.setRolePermission(
@@ -207,10 +210,13 @@ public class EditRolePermissionsAction extends PortletAction {
 					else {
 						String[] groupIds = StringUtil.split(
 							ParamUtil.getString(
-								req, "groupIds" + selResource + actionId));
+								actionRequest,
+								"groupIds" + selResource + actionId));
 
 						if (groupIds.length == 0) {
-							SessionErrors.add(req, "missingGroupIdsForAction");
+							SessionErrors.add(
+								actionRequest, "missingGroupIdsForAction");
+
 							return;
 						}
 
@@ -250,13 +256,13 @@ public class EditRolePermissionsAction extends PortletAction {
 
 		// Send redirect
 
-		SessionMessages.add(req, "permissionsUpdated");
+		SessionMessages.add(actionRequest, "permissionsUpdated");
 
 		String redirect =
-			ParamUtil.getString(req, "redirect") + "&" + Constants.CMD + "=" +
-				Constants.VIEW;
+			ParamUtil.getString(actionRequest, "redirect") + "&" +
+				Constants.CMD + "=" + Constants.VIEW;
 
-		res.sendRedirect(redirect);
+		actionResponse.sendRedirect(redirect);
 	}
 
 }

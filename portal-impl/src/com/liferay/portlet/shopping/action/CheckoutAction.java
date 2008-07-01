@@ -75,28 +75,28 @@ public class CheckoutAction extends CartAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		if (redirectToLogin(req, res)) {
+		if (redirectToLogin(actionRequest, actionResponse)) {
 			return;
 		}
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-		getLatestOrder(req);
+		getLatestOrder(actionRequest);
 
 		if (cmd.equals(Constants.SAVE)) {
-			updateCart(req);
-			updateLatestOrder(req);
-			saveLatestOrder(req);
-			forwardCheckout(req, res);
+			updateCart(actionRequest);
+			updateLatestOrder(actionRequest);
+			saveLatestOrder(actionRequest);
+			forwardCheckout(actionRequest, actionResponse);
 		}
 		else if (cmd.equals(Constants.UPDATE)) {
 			try {
-				updateLatestOrder(req);
+				updateLatestOrder(actionRequest);
 
-				setForward(req, "portlet.shopping.checkout_second");
+				setForward(actionRequest, "portlet.shopping.checkout_second");
 			}
 			catch (Exception e) {
 				if (e instanceof BillingCityException ||
@@ -122,12 +122,13 @@ public class CheckoutAction extends CartAction {
 					e instanceof ShippingStreetException ||
 					e instanceof ShippingZipException) {
 
-					SessionErrors.add(req, e.getClass().getName());
+					SessionErrors.add(actionRequest, e.getClass().getName());
 
-					setForward(req, "portlet.shopping.checkout_first");
+					setForward(
+						actionRequest, "portlet.shopping.checkout_first");
 				}
 				else if (e instanceof PrincipalException) {
-					setForward(req, "portlet.shopping.error");
+					setForward(actionRequest, "portlet.shopping.error");
 				}
 				else {
 					throw e;
@@ -135,29 +136,30 @@ public class CheckoutAction extends CartAction {
 			}
 		}
 		else if (cmd.equals(Constants.VIEW)) {
-			setForward(req, "portlet.shopping.checkout_third");
+			setForward(actionRequest, "portlet.shopping.checkout_third");
 		}
 		else {
-			setForward(req, "portlet.shopping.checkout_first");
+			setForward(actionRequest, "portlet.shopping.checkout_first");
 		}
 	}
 
-	protected void forwardCheckout(ActionRequest req, ActionResponse res)
+	protected void forwardCheckout(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		ShoppingCart cart = ShoppingUtil.getCart(req);
+		ShoppingCart cart = ShoppingUtil.getCart(actionRequest);
 
-		ShoppingOrder order = (ShoppingOrder)req.getAttribute(
+		ShoppingOrder order = (ShoppingOrder)actionRequest.getAttribute(
 			WebKeys.SHOPPING_ORDER);
 
 		ShoppingPreferences prefs = ShoppingPreferences.getInstance(
 			themeDisplay.getCompanyId(), themeDisplay.getPortletGroupId());
 
 		String returnURL = ShoppingUtil.getPayPalReturnURL(
-			((ActionResponseImpl)res).createActionURL(), order);
+			((ActionResponseImpl)actionResponse).createActionURL(), order);
 		String notifyURL = ShoppingUtil.getPayPalNotifyURL(themeDisplay);
 
 		if (prefs.usePayPal()) {
@@ -168,88 +170,109 @@ public class CheckoutAction extends CartAction {
 			String redirectURL = ShoppingUtil.getPayPalRedirectURL(
 				prefs, order, total, returnURL, notifyURL);
 
-			res.sendRedirect(redirectURL);
+			actionResponse.sendRedirect(redirectURL);
 		}
 		else {
 			ShoppingOrderLocalServiceUtil.sendEmail(order, "confirmation");
 
-			res.sendRedirect(returnURL);
+			actionResponse.sendRedirect(returnURL);
 		}
 	}
 
-	protected void getLatestOrder(ActionRequest req) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+	protected void getLatestOrder(ActionRequest actionRequest)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		ShoppingOrder order = ShoppingOrderLocalServiceUtil.getLatestOrder(
 			themeDisplay.getUserId(), themeDisplay.getPortletGroupId());
 
-		req.setAttribute(WebKeys.SHOPPING_ORDER, order);
+		actionRequest.setAttribute(WebKeys.SHOPPING_ORDER, order);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {
 		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}
 
-	protected void saveLatestOrder(ActionRequest req) throws Exception {
-		ShoppingCart cart = ShoppingUtil.getCart(req);
+	protected void saveLatestOrder(ActionRequest actionRequest)
+		throws Exception {
+
+		ShoppingCart cart = ShoppingUtil.getCart(actionRequest);
 
 		ShoppingOrder order =
 			ShoppingOrderLocalServiceUtil.saveLatestOrder(cart);
 
-		req.setAttribute(WebKeys.SHOPPING_ORDER, order);
+		actionRequest.setAttribute(WebKeys.SHOPPING_ORDER, order);
 	}
 
-	protected void updateLatestOrder(ActionRequest req) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+	protected void updateLatestOrder(ActionRequest actionRequest)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String billingFirstName = ParamUtil.getString(req, "billingFirstName");
-		String billingLastName = ParamUtil.getString(req, "billingLastName");
+		String billingFirstName = ParamUtil.getString(
+			actionRequest, "billingFirstName");
+		String billingLastName = ParamUtil.getString(
+			actionRequest, "billingLastName");
 		String billingEmailAddress = ParamUtil.getString(
-			req, "billingEmailAddress");
-		String billingCompany = ParamUtil.getString(req, "billingCompany");
-		String billingStreet = ParamUtil.getString(req, "billingStreet");
-		String billingCity = ParamUtil.getString(req, "billingCity");
+			actionRequest, "billingEmailAddress");
+		String billingCompany = ParamUtil.getString(
+			actionRequest, "billingCompany");
+		String billingStreet = ParamUtil.getString(
+			actionRequest, "billingStreet");
+		String billingCity = ParamUtil.getString(actionRequest, "billingCity");
 
-		String billingStateSel = ParamUtil.getString(req, "billingStateSel");
+		String billingStateSel = ParamUtil.getString(
+			actionRequest, "billingStateSel");
 		String billingState = billingStateSel;
 		if (Validator.isNull(billingStateSel)) {
-			billingState = ParamUtil.getString(req, "billingState");
+			billingState = ParamUtil.getString(actionRequest, "billingState");
 		}
 
-		String billingZip = ParamUtil.getString(req, "billingZip");
-		String billingCountry = ParamUtil.getString(req, "billingCountry");
-		String billingPhone = ParamUtil.getString(req, "billingPhone");
+		String billingZip = ParamUtil.getString(actionRequest, "billingZip");
+		String billingCountry = ParamUtil.getString(
+			actionRequest, "billingCountry");
+		String billingPhone = ParamUtil.getString(
+			actionRequest, "billingPhone");
 
-		boolean shipToBilling = ParamUtil.getBoolean(req, "shipToBilling");
+		boolean shipToBilling = ParamUtil.getBoolean(
+			actionRequest, "shipToBilling");
 		String shippingFirstName = ParamUtil.getString(
-			req, "shippingFirstName");
-		String shippingLastName = ParamUtil.getString(req, "shippingLastName");
+			actionRequest, "shippingFirstName");
+		String shippingLastName = ParamUtil.getString(
+			actionRequest, "shippingLastName");
 		String shippingEmailAddress = ParamUtil.getString(
-			req, "shippingEmailAddress");
-		String shippingCompany = ParamUtil.getString(req, "shippingCompany");
-		String shippingStreet = ParamUtil.getString(req, "shippingStreet");
-		String shippingCity = ParamUtil.getString(req, "shippingCity");
+			actionRequest, "shippingEmailAddress");
+		String shippingCompany = ParamUtil.getString(
+			actionRequest, "shippingCompany");
+		String shippingStreet = ParamUtil.getString(
+			actionRequest, "shippingStreet");
+		String shippingCity = ParamUtil.getString(
+			actionRequest, "shippingCity");
 
-		String shippingStateSel = ParamUtil.getString(req, "shippingStateSel");
+		String shippingStateSel = ParamUtil.getString(
+			actionRequest, "shippingStateSel");
 		String shippingState = shippingStateSel;
 		if (Validator.isNull(shippingStateSel)) {
-			shippingState = ParamUtil.getString(req, "shippingState");
+			shippingState = ParamUtil.getString(actionRequest, "shippingState");
 		}
 
-		String shippingZip = ParamUtil.getString(req, "shippingZip");
-		String shippingCountry = ParamUtil.getString(req, "shippingCountry");
-		String shippingPhone = ParamUtil.getString(req, "shippingPhone");
+		String shippingZip = ParamUtil.getString(actionRequest, "shippingZip");
+		String shippingCountry = ParamUtil.getString(
+			actionRequest, "shippingCountry");
+		String shippingPhone = ParamUtil.getString(
+			actionRequest, "shippingPhone");
 
-		String ccName = ParamUtil.getString(req, "ccName");
-		String ccType = ParamUtil.getString(req, "ccType");
-		String ccNumber = ParamUtil.getString(req, "ccNumber");
-		int ccExpMonth = ParamUtil.getInteger(req, "ccExpMonth");
-		int ccExpYear = ParamUtil.getInteger(req, "ccExpYear");
-		String ccVerNumber = ParamUtil.getString(req, "ccVerNumber");
+		String ccName = ParamUtil.getString(actionRequest, "ccName");
+		String ccType = ParamUtil.getString(actionRequest, "ccType");
+		String ccNumber = ParamUtil.getString(actionRequest, "ccNumber");
+		int ccExpMonth = ParamUtil.getInteger(actionRequest, "ccExpMonth");
+		int ccExpYear = ParamUtil.getInteger(actionRequest, "ccExpYear");
+		String ccVerNumber = ParamUtil.getString(actionRequest, "ccVerNumber");
 
-		String comments = ParamUtil.getString(req, "comments");
+		String comments = ParamUtil.getString(actionRequest, "comments");
 
 		ShoppingOrder order = ShoppingOrderLocalServiceUtil.updateLatestOrder(
 			themeDisplay.getUserId(), themeDisplay.getPortletGroupId(),
@@ -261,7 +284,7 @@ public class CheckoutAction extends CartAction {
 			shippingZip, shippingCountry, shippingPhone, ccName, ccType,
 			ccNumber, ccExpMonth, ccExpYear, ccVerNumber, comments);
 
-		req.setAttribute(WebKeys.SHOPPING_ORDER, order);
+		actionRequest.setAttribute(WebKeys.SHOPPING_ORDER, order);
 	}
 
 	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;

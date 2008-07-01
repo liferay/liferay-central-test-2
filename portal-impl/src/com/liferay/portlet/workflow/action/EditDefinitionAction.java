@@ -53,32 +53,33 @@ public class EditDefinitionAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD)) {
-				addDefinition(req);
+				addDefinition(actionRequest);
 			}
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchDefinitionException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.workflow.error");
+				setForward(actionRequest, "portlet.workflow.error");
 			}
 			else {
 				_log.error(e, e);
 
-				SessionErrors.add(req, DefinitionXmlException.class.getName());
+				SessionErrors.add(
+					actionRequest, DefinitionXmlException.class.getName());
 
-				setForward(req, "portlet.workflow.edit_definition");
+				setForward(actionRequest, "portlet.workflow.edit_definition");
 			}
 		}
 	}
@@ -108,12 +109,12 @@ public class EditDefinitionAction extends PortletAction {
 			getForward(renderRequest, "portlet.workflow.edit_definition"));
 	}
 
-	protected void addDefinition(ActionRequest req) throws Exception {
-		String xml = ParamUtil.getString(req, "xml");
+	protected void addDefinition(ActionRequest actionRequest) throws Exception {
+		String xml = ParamUtil.getString(actionRequest, "xml");
 
-		String[] communityPermissions = req.getParameterValues(
+		String[] communityPermissions = actionRequest.getParameterValues(
 			"communityPermissions");
-		String[] guestPermissions = req.getParameterValues(
+		String[] guestPermissions = actionRequest.getParameterValues(
 			"guestPermissions");
 
 		WorkflowDefinitionServiceUtil.addDefinition(

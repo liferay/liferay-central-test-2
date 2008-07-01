@@ -58,21 +58,21 @@ public class MovePageAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals("changeParent")) {
-				changeParentPage(req);
+				changeParentPage(actionRequest);
 			}
 			else if (cmd.equals("rename")) {
-				renamePage(req);
+				renamePage(actionRequest);
 			}
 
 			if (Validator.isNotNull(cmd)) {
-				sendRedirect(req, res);
+				sendRedirect(actionRequest, actionResponse);
 			}
 		}
 		catch (Exception e) {
@@ -80,15 +80,15 @@ public class MovePageAction extends PortletAction {
 				e instanceof NoSuchPageException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.wiki.error");
+				setForward(actionRequest, "portlet.wiki.error");
 			}
 			else if (e instanceof DuplicatePageException ||
 					 e instanceof PageContentException ||
 					 e instanceof PageTitleException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
 				throw e;
@@ -124,29 +124,32 @@ public class MovePageAction extends PortletAction {
 			getForward(renderRequest, "portlet.wiki.move_page"));
 	}
 
-	protected void changeParentPage(ActionRequest req) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+	protected void changeParentPage(ActionRequest actionRequest)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		PortletPreferences prefs = req.getPreferences();
+		PortletPreferences prefs = actionRequest.getPreferences();
 
-		long nodeId = ParamUtil.getLong(req, "nodeId");
-		String title = ParamUtil.getString(req, "title");
-		String newParentTitle = ParamUtil.getString(req, "newParentTitle");
+		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
+		String title = ParamUtil.getString(actionRequest, "title");
+		String newParentTitle = ParamUtil.getString(
+			actionRequest, "newParentTitle");
 
 		WikiPageServiceUtil.changeParent(
 			nodeId, title, newParentTitle, prefs, themeDisplay);
 	}
 
-	protected void renamePage(ActionRequest req) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+	protected void renamePage(ActionRequest actionRequest) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		PortletPreferences prefs = req.getPreferences();
+		PortletPreferences prefs = actionRequest.getPreferences();
 
-		long nodeId = ParamUtil.getLong(req, "nodeId");
-		String title = ParamUtil.getString(req, "title");
-		String newTitle = ParamUtil.getString(req, "newTitle");
+		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
+		String title = ParamUtil.getString(actionRequest, "title");
+		String newTitle = ParamUtil.getString(actionRequest, "newTitle");
 
 		WikiPageServiceUtil.movePage(
 			nodeId, title, newTitle, prefs, themeDisplay);

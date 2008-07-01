@@ -57,38 +57,39 @@ public class EditGroupAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateGroup(req);
+				updateGroup(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteGroup(req);
+				deleteGroup(actionRequest);
 			}
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchGroupException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.communities.error");
+				setForward(actionRequest, "portlet.communities.error");
 			}
 			else if (e instanceof DuplicateGroupException ||
 					 e instanceof GroupFriendlyURLException ||
 					 e instanceof GroupNameException ||
 					 e instanceof RequiredGroupException) {
 
-				SessionErrors.add(req, e.getClass().getName(), e);
+				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 
 				if (cmd.equals(Constants.DELETE)) {
-					res.sendRedirect(ParamUtil.getString(req, "redirect"));
+					actionResponse.sendRedirect(
+						ParamUtil.getString(actionRequest, "redirect"));
 				}
 			}
 			else {
@@ -122,24 +123,24 @@ public class EditGroupAction extends PortletAction {
 			getForward(renderRequest, "portlet.communities.edit_community"));
 	}
 
-	protected void deleteGroup(ActionRequest req) throws Exception {
-		long groupId = ParamUtil.getLong(req, "groupId");
+	protected void deleteGroup(ActionRequest actionRequest) throws Exception {
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 
 		GroupServiceUtil.deleteGroup(groupId);
 
 		LiveUsers.deleteGroup(groupId);
 	}
 
-	protected void updateGroup(ActionRequest req) throws Exception {
-		long userId = PortalUtil.getUserId(req);
+	protected void updateGroup(ActionRequest actionRequest) throws Exception {
+		long userId = PortalUtil.getUserId(actionRequest);
 
-		long groupId = ParamUtil.getLong(req, "groupId");
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 
-		String name = ParamUtil.getString(req, "name");
-		String description = ParamUtil.getString(req, "description");
-		int type = ParamUtil.getInteger(req, "type");
-		String friendlyURL = ParamUtil.getString(req, "friendlyURL");
-		boolean active = ParamUtil.getBoolean(req, "active");
+		String name = ParamUtil.getString(actionRequest, "name");
+		String description = ParamUtil.getString(actionRequest, "description");
+		int type = ParamUtil.getInteger(actionRequest, "type");
+		String friendlyURL = ParamUtil.getString(actionRequest, "friendlyURL");
+		boolean active = ParamUtil.getBoolean(actionRequest, "active");
 
 		if (groupId <= 0) {
 

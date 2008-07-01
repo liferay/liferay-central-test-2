@@ -55,26 +55,27 @@ public class EditSessionAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
 		if (!permissionChecker.isOmniadmin()) {
-			SessionErrors.add(req, PrincipalException.class.getName());
+			SessionErrors.add(
+				actionRequest, PrincipalException.class.getName());
 
-			setForward(req, "portlet.enterprise_admin.error");
+			setForward(actionRequest, "portlet.enterprise_admin.error");
 
 			return;
 		}
 
-		invalidateSession(req);
+		invalidateSession(actionRequest);
 
-		sendRedirect(req, res);
+		sendRedirect(actionRequest, actionResponse);
 	}
 
 	public ActionForward render(
@@ -86,14 +87,18 @@ public class EditSessionAction extends PortletAction {
 			getForward(renderRequest, "portlet.enterprise_admin.edit_session"));
 	}
 
-	protected void invalidateSession(ActionRequest req) throws Exception {
-		String sessionId = ParamUtil.getString(req, "sessionId");
+	protected void invalidateSession(ActionRequest actionRequest)
+		throws Exception {
+
+		String sessionId = ParamUtil.getString(actionRequest, "sessionId");
 
 		HttpSession userSession = PortalSessionContext.get(sessionId);
 
 		if (userSession != null) {
 			try {
-				if (!req.getPortletSession().getId().equals(sessionId)) {
+				if (!actionRequest.getPortletSession().getId().equals(
+						sessionId)) {
+
 					userSession.invalidate();
 				}
 			}

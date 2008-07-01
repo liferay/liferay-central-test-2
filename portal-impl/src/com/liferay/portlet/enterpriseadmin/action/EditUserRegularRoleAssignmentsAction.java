@@ -55,25 +55,25 @@ public class EditUserRegularRoleAssignmentsAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (Validator.isNotNull(cmd)) {
-				updateUserRoles(req);
+				updateUserRoles(actionRequest);
 
-				sendRedirect(req, res);
+				sendRedirect(actionRequest, actionResponse);
 			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchUserException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.enterprise_admin.error");
+				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
 			else {
 				throw e;
@@ -107,13 +107,15 @@ public class EditUserRegularRoleAssignmentsAction extends PortletAction {
 			"portlet.enterprise_admin.edit_user_regular_role_assignments"));
 	}
 
-	protected void updateUserRoles(ActionRequest req) throws Exception {
-		User user = PortalUtil.getSelectedUser(req);
+	protected void updateUserRoles(ActionRequest actionRequest)
+		throws Exception {
+
+		User user = PortalUtil.getSelectedUser(actionRequest);
 
 		long[] addRoleIds = StringUtil.split(
-			ParamUtil.getString(req, "addRoleIds"), 0L);
+			ParamUtil.getString(actionRequest, "addRoleIds"), 0L);
 		long[] removeRoleIds = StringUtil.split(
-			ParamUtil.getString(req, "removeRoleIds"), 0L);
+			ParamUtil.getString(actionRequest, "removeRoleIds"), 0L);
 
 		RoleServiceUtil.addUserRoles(user.getUserId(), addRoleIds);
 		RoleServiceUtil.unsetUserRoles(user.getUserId(), removeRoleIds);

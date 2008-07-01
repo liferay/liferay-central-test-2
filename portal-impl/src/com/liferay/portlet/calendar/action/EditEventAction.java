@@ -70,35 +70,35 @@ public class EditEventAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateEvent(req);
+				updateEvent(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteEvent(req);
+				deleteEvent(actionRequest);
 			}
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchEventException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.calendar.error");
+				setForward(actionRequest, "portlet.calendar.error");
 			}
 			else if (e instanceof EventDurationException ||
 					 e instanceof EventEndDateException ||
 					 e instanceof EventStartDateException ||
 					 e instanceof EventTitleException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
 				throw e;
@@ -132,52 +132,59 @@ public class EditEventAction extends PortletAction {
 	}
 
 	protected void addWeeklyDayPos(
-		ActionRequest req, List<DayAndPosition> list, int day) {
+		ActionRequest actionRequest, List<DayAndPosition> list, int day) {
 
-		if (ParamUtil.getBoolean(req, "weeklyDayPos" + day)) {
+		if (ParamUtil.getBoolean(actionRequest, "weeklyDayPos" + day)) {
 			list.add(new DayAndPosition(day, 0));
 		}
 	}
 
-	protected void deleteEvent(ActionRequest req) throws Exception {
-		long eventId = ParamUtil.getLong(req, "eventId");
+	protected void deleteEvent(ActionRequest actionRequest) throws Exception {
+		long eventId = ParamUtil.getLong(actionRequest, "eventId");
 
 		CalEventServiceUtil.deleteEvent(eventId);
 	}
 
-	protected void updateEvent(ActionRequest req) throws Exception {
-		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+	protected void updateEvent(ActionRequest actionRequest) throws Exception {
+		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
 
-		long eventId = ParamUtil.getLong(req, "eventId");
+		long eventId = ParamUtil.getLong(actionRequest, "eventId");
 
-		String title = ParamUtil.getString(req, "title");
-		String description = ParamUtil.getString(req, "description");
+		String title = ParamUtil.getString(actionRequest, "title");
+		String description = ParamUtil.getString(actionRequest, "description");
 
-		int startDateMonth = ParamUtil.getInteger(req, "startDateMonth");
-		int startDateDay = ParamUtil.getInteger(req, "startDateDay");
-		int startDateYear = ParamUtil.getInteger(req, "startDateYear");
-		int startDateHour = ParamUtil.getInteger(req, "startDateHour");
-		int startDateMinute = ParamUtil.getInteger(req, "startDateMinute");
-		int startDateAmPm = ParamUtil.getInteger(req, "startDateAmPm");
+		int startDateMonth = ParamUtil.getInteger(
+			actionRequest, "startDateMonth");
+		int startDateDay = ParamUtil.getInteger(actionRequest, "startDateDay");
+		int startDateYear = ParamUtil.getInteger(
+			actionRequest, "startDateYear");
+		int startDateHour = ParamUtil.getInteger(
+			actionRequest, "startDateHour");
+		int startDateMinute = ParamUtil.getInteger(
+			actionRequest, "startDateMinute");
+		int startDateAmPm = ParamUtil.getInteger(
+			actionRequest, "startDateAmPm");
 
 		if (startDateAmPm == Calendar.PM) {
 			startDateHour += 12;
 		}
 
-		int durationHour = ParamUtil.getInteger(req, "durationHour");
-		int durationMinute = ParamUtil.getInteger(req, "durationMinute");
-		boolean allDay = ParamUtil.getBoolean(req, "allDay");
+		int durationHour = ParamUtil.getInteger(actionRequest, "durationHour");
+		int durationMinute = ParamUtil.getInteger(
+			actionRequest, "durationMinute");
+		boolean allDay = ParamUtil.getBoolean(actionRequest, "allDay");
 		boolean timeZoneSensitive = ParamUtil.getBoolean(
-			req, "timeZoneSensitive");
-		String type = ParamUtil.getString(req, "type");
+			actionRequest, "timeZoneSensitive");
+		String type = ParamUtil.getString(actionRequest, "type");
 
-		int endDateMonth = ParamUtil.getInteger(req, "endDateMonth");
-		int endDateDay = ParamUtil.getInteger(req, "endDateDay");
-		int endDateYear = ParamUtil.getInteger(req, "endDateYear");
+		int endDateMonth = ParamUtil.getInteger(actionRequest, "endDateMonth");
+		int endDateDay = ParamUtil.getInteger(actionRequest, "endDateDay");
+		int endDateYear = ParamUtil.getInteger(actionRequest, "endDateYear");
 
 		boolean repeating = false;
 
-		int recurrenceType = ParamUtil.getInteger(req, "recurrenceType");
+		int recurrenceType = ParamUtil.getInteger(
+			actionRequest, "recurrenceType");
 
 		if (recurrenceType != Recurrence.NO_RECURRENCE) {
 			repeating = true;
@@ -187,7 +194,7 @@ public class EditEventAction extends PortletAction {
 		TimeZone timeZone = null;
 
 		if (timeZoneSensitive) {
-			User user = PortalUtil.getUser(req);
+			User user = PortalUtil.getUser(actionRequest);
 
 			locale = user.getLocale();
 			timeZone = user.getTimeZone();
@@ -237,11 +244,12 @@ public class EditEventAction extends PortletAction {
 			recurrence.setWeekStart(Calendar.SUNDAY);
 
 			if (recurrenceType == Recurrence.DAILY) {
-				int dailyType = ParamUtil.getInteger(req, "dailyType");
+				int dailyType = ParamUtil.getInteger(
+					actionRequest, "dailyType");
 
 				if (dailyType == 0) {
 					int dailyInterval = ParamUtil.getInteger(
-						req, "dailyInterval", 1);
+						actionRequest, "dailyInterval", 1);
 
 					recurrence.setInterval(dailyInterval);
 				}
@@ -258,19 +266,19 @@ public class EditEventAction extends PortletAction {
 			}
 			else if (recurrenceType == Recurrence.WEEKLY) {
 				int weeklyInterval = ParamUtil.getInteger(
-					req, "weeklyInterval", 1);
+					actionRequest, "weeklyInterval", 1);
 
 				recurrence.setInterval(weeklyInterval);
 
 				List<DayAndPosition> dayPos = new ArrayList<DayAndPosition>();
 
-				addWeeklyDayPos(req, dayPos, Calendar.SUNDAY);
-				addWeeklyDayPos(req, dayPos, Calendar.MONDAY);
-				addWeeklyDayPos(req, dayPos, Calendar.TUESDAY);
-				addWeeklyDayPos(req, dayPos, Calendar.WEDNESDAY);
-				addWeeklyDayPos(req, dayPos, Calendar.THURSDAY);
-				addWeeklyDayPos(req, dayPos, Calendar.FRIDAY);
-				addWeeklyDayPos(req, dayPos, Calendar.SATURDAY);
+				addWeeklyDayPos(actionRequest, dayPos, Calendar.SUNDAY);
+				addWeeklyDayPos(actionRequest, dayPos, Calendar.MONDAY);
+				addWeeklyDayPos(actionRequest, dayPos, Calendar.TUESDAY);
+				addWeeklyDayPos(actionRequest, dayPos, Calendar.WEDNESDAY);
+				addWeeklyDayPos(actionRequest, dayPos, Calendar.THURSDAY);
+				addWeeklyDayPos(actionRequest, dayPos, Calendar.FRIDAY);
+				addWeeklyDayPos(actionRequest, dayPos, Calendar.SATURDAY);
 
 				if (dayPos.size() == 0) {
 					dayPos.add(new DayAndPosition(Calendar.MONDAY, 0));
@@ -279,21 +287,25 @@ public class EditEventAction extends PortletAction {
 				recurrence.setByDay(dayPos.toArray(new DayAndPosition[0]));
 			}
 			else if (recurrenceType == Recurrence.MONTHLY) {
-				int monthlyType = ParamUtil.getInteger(req, "monthlyType");
+				int monthlyType = ParamUtil.getInteger(
+					actionRequest, "monthlyType");
 
 				if (monthlyType == 0) {
-					int monthlyDay = ParamUtil.getInteger(req, "monthlyDay0");
+					int monthlyDay = ParamUtil.getInteger(
+						actionRequest, "monthlyDay0");
 
 					recurrence.setByMonthDay(new int[] {monthlyDay});
 
 					int monthlyInterval = ParamUtil.getInteger(
-						req, "monthlyInterval0", 1);
+						actionRequest, "monthlyInterval0", 1);
 
 					recurrence.setInterval(monthlyInterval);
 				}
 				else {
-					int monthlyPos = ParamUtil.getInteger(req, "monthlyPos");
-					int monthlyDay = ParamUtil.getInteger(req, "monthlyDay1");
+					int monthlyPos = ParamUtil.getInteger(
+						actionRequest, "monthlyPos");
+					int monthlyDay = ParamUtil.getInteger(
+						actionRequest, "monthlyDay1");
 
 					DayAndPosition[] dayPos = {
 						new DayAndPosition(monthlyDay, monthlyPos)};
@@ -301,30 +313,36 @@ public class EditEventAction extends PortletAction {
 					recurrence.setByDay(dayPos);
 
 					int monthlyInterval = ParamUtil.getInteger(
-						req, "monthlyInterval1", 1);
+						actionRequest, "monthlyInterval1", 1);
 
 					recurrence.setInterval(monthlyInterval);
 				}
 			}
 			else if (recurrenceType == Recurrence.YEARLY) {
-				int yearlyType = ParamUtil.getInteger(req, "yearlyType");
+				int yearlyType = ParamUtil.getInteger(
+					actionRequest, "yearlyType");
 
 				if (yearlyType == 0) {
-					int yearlyMonth = ParamUtil.getInteger(req, "yearlyMonth0");
-					int yearlyDay = ParamUtil.getInteger(req, "yearlyDay0");
+					int yearlyMonth = ParamUtil.getInteger(
+						actionRequest, "yearlyMonth0");
+					int yearlyDay = ParamUtil.getInteger(
+						actionRequest, "yearlyDay0");
 
 					recurrence.setByMonth(new int[] {yearlyMonth});
 					recurrence.setByMonthDay(new int[] {yearlyDay});
 
 					int yearlyInterval = ParamUtil.getInteger(
-						req, "yearlyInterval0", 1);
+						actionRequest, "yearlyInterval0", 1);
 
 					recurrence.setInterval(yearlyInterval);
 				}
 				else {
-					int yearlyPos = ParamUtil.getInteger(req, "yearlyPos");
-					int yearlyDay = ParamUtil.getInteger(req, "yearlyDay1");
-					int yearlyMonth = ParamUtil.getInteger(req, "yearlyMonth1");
+					int yearlyPos = ParamUtil.getInteger(
+						actionRequest, "yearlyPos");
+					int yearlyDay = ParamUtil.getInteger(
+						actionRequest, "yearlyDay1");
+					int yearlyMonth = ParamUtil.getInteger(
+						actionRequest, "yearlyMonth1");
 
 					DayAndPosition[] dayPos = {
 						new DayAndPosition(yearlyDay, yearlyPos)};
@@ -334,17 +352,18 @@ public class EditEventAction extends PortletAction {
 					recurrence.setByMonth(new int[] {yearlyMonth});
 
 					int yearlyInterval = ParamUtil.getInteger(
-						req, "yearlyInterval1", 1);
+						actionRequest, "yearlyInterval1", 1);
 
 					recurrence.setInterval(yearlyInterval);
 				}
 			}
 
-			int endDateType = ParamUtil.getInteger(req, "endDateType");
+			int endDateType = ParamUtil.getInteger(
+				actionRequest, "endDateType");
 
 			if (endDateType == 1) {
 				int endDateOccurrence = ParamUtil.getInteger(
-					req, "endDateOccurrence");
+					actionRequest, "endDateOccurrence");
 
 				recurrence.setOccurrence(endDateOccurrence);
 			}
@@ -368,13 +387,15 @@ public class EditEventAction extends PortletAction {
 			}
 		}
 
-		String remindBy = ParamUtil.getString(req, "remindBy");
-		int firstReminder = ParamUtil.getInteger(req, "firstReminder");
-		int secondReminder = ParamUtil.getInteger(req, "secondReminder");
+		String remindBy = ParamUtil.getString(actionRequest, "remindBy");
+		int firstReminder = ParamUtil.getInteger(
+			actionRequest, "firstReminder");
+		int secondReminder = ParamUtil.getInteger(
+			actionRequest, "secondReminder");
 
-		String[] communityPermissions = req.getParameterValues(
+		String[] communityPermissions = actionRequest.getParameterValues(
 			"communityPermissions");
-		String[] guestPermissions = req.getParameterValues(
+		String[] guestPermissions = actionRequest.getParameterValues(
 			"guestPermissions");
 
 		if (eventId <= 0) {

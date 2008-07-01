@@ -47,24 +47,24 @@ public class EditInstanceAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD)) {
-				addInstance(req, res);
+				addInstance(actionRequest, actionResponse);
 			}
 			else if (cmd.equals(Constants.SIGNAL)) {
-				signalInstance(req, res);
+				signalInstance(actionRequest, actionResponse);
 			}
 		}
 		catch (Exception e) {
 			if (e instanceof PrincipalException) {
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.workflow.error");
+				setForward(actionRequest, "portlet.workflow.error");
 			}
 			else {
 				throw e;
@@ -72,26 +72,28 @@ public class EditInstanceAction extends PortletAction {
 		}
 	}
 
-	protected void addInstance(ActionRequest req, ActionResponse res)
+	protected void addInstance(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		long definitionId = ParamUtil.getLong(req, "definitionId");
+		long definitionId = ParamUtil.getLong(actionRequest, "definitionId");
 
 		WorkflowInstance instance =
 			WorkflowInstanceServiceUtil.addInstance(definitionId);
 
-		String redirect = ParamUtil.getString(req, "redirect");
+		String redirect = ParamUtil.getString(actionRequest, "redirect");
 
 		redirect += "&instanceId=" + instance.getInstanceId();
 
-		sendRedirect(req, res, redirect);
+		sendRedirect(actionRequest, actionResponse, redirect);
 	}
 
-	protected void signalInstance(ActionRequest req, ActionResponse res)
+	protected void signalInstance(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		long instanceId = ParamUtil.getLong(req, "instanceId");
-		long tokenId = ParamUtil.getLong(req, "tokenId");
+		long instanceId = ParamUtil.getLong(actionRequest, "instanceId");
+		long tokenId = ParamUtil.getLong(actionRequest, "tokenId");
 
 		if (tokenId <= 0) {
 			WorkflowInstanceServiceUtil.signalInstance(instanceId);
@@ -100,7 +102,7 @@ public class EditInstanceAction extends PortletAction {
 			WorkflowInstanceServiceUtil.signalToken(instanceId, tokenId);
 		}
 
-		sendRedirect(req, res);
+		sendRedirect(actionRequest, actionResponse);
 	}
 
 }

@@ -58,22 +58,22 @@ public class EditPreferencesAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		if (!cmd.equals(Constants.UPDATE)) {
 			return;
 		}
 
-		PortletPreferences prefs = req.getPreferences();
+		PortletPreferences prefs = actionRequest.getPreferences();
 
-		String tabs1 = ParamUtil.getString(req, "tabs1");
+		String tabs1 = ParamUtil.getString(actionRequest, "tabs1");
 
 		if (tabs1.equals("news-selections")) {
-			String categoryName = req.getParameter("categoryName");
-			String list = req.getParameter("feeds");
+			String categoryName = actionRequest.getParameter("categoryName");
+			String list = actionRequest.getParameter("feeds");
 
 			Set<Feed> selFeeds = NewsUtil.getSelFeeds(prefs);
 
@@ -112,8 +112,8 @@ public class EditPreferencesAction extends PortletAction {
 			prefs.setValues("sel-feeds", NewsUtil.getSelFeeds(selFeeds));
 		}
 		else if (tabs1.equals("display-settings")) {
-			String list = req.getParameter("feeds");
-			int articlesPerNews = ParamUtil.get(req, "apn", 4);
+			String list = actionRequest.getParameter("feeds");
+			int articlesPerNews = ParamUtil.get(actionRequest, "apn", 4);
 
 			prefs.setValue(
 				"articles-per-news", String.valueOf(articlesPerNews));
@@ -137,7 +137,8 @@ public class EditPreferencesAction extends PortletAction {
 
 		prefs.store();
 
-		SessionMessages.add(req, portletConfig.getPortletName() + ".doEdit");
+		SessionMessages.add(
+			actionRequest, portletConfig.getPortletName() + ".doEdit");
 	}
 
 	public ActionForward render(

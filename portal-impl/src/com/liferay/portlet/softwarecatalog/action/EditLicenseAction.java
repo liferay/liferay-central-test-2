@@ -51,32 +51,32 @@ public class EditLicenseAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateLicense(req);
+				updateLicense(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteLicense(req);
+				deleteLicense(actionRequest);
 			}
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchLicenseException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.software_catalog.error");
+				setForward(actionRequest, "portlet.software_catalog.error");
 			}
 			else if (e instanceof LicenseNameException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
 				throw e;
@@ -109,20 +109,21 @@ public class EditLicenseAction extends PortletAction {
 			getForward(renderRequest, "portlet.software_catalog.edit_license"));
 	}
 
-	protected void deleteLicense(ActionRequest req) throws Exception {
-		long licenseId = ParamUtil.getLong(req, "licenseId");
+	protected void deleteLicense(ActionRequest actionRequest) throws Exception {
+		long licenseId = ParamUtil.getLong(actionRequest, "licenseId");
 
 		SCLicenseServiceUtil.deleteLicense(licenseId);
 	}
 
-	protected void updateLicense(ActionRequest req) throws Exception {
-		long licenseId = ParamUtil.getLong(req, "licenseId");
+	protected void updateLicense(ActionRequest actionRequest) throws Exception {
+		long licenseId = ParamUtil.getLong(actionRequest, "licenseId");
 
-		String name = ParamUtil.getString(req, "name");
-		String url = ParamUtil.getString(req, "url");
-		boolean openSource = ParamUtil.getBoolean(req, "openSource");
-		boolean active = ParamUtil.getBoolean(req, "active");
-		boolean recommended = ParamUtil.getBoolean(req, "recommended");
+		String name = ParamUtil.getString(actionRequest, "name");
+		String url = ParamUtil.getString(actionRequest, "url");
+		boolean openSource = ParamUtil.getBoolean(actionRequest, "openSource");
+		boolean active = ParamUtil.getBoolean(actionRequest, "active");
+		boolean recommended = ParamUtil.getBoolean(
+			actionRequest, "recommended");
 
 		if (licenseId <= 0) {
 

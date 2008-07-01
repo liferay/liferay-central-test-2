@@ -53,33 +53,33 @@ public class EditFileShortcutAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateFileShortcut(req);
+				updateFileShortcut(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteFileShortcut(req);
+				deleteFileShortcut(actionRequest);
 			}
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchFileShortcutException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.document_library.error");
+				setForward(actionRequest, "portlet.document_library.error");
 			}
 			else if (e instanceof FileShortcutPermissionException ||
 					 e instanceof NoSuchFileEntryException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
 				throw e;
@@ -112,22 +112,29 @@ public class EditFileShortcutAction extends PortletAction {
 			renderRequest, "portlet.document_library.edit_file_shortcut"));
 	}
 
-	protected void deleteFileShortcut(ActionRequest req) throws Exception {
-		long fileShortcutId = ParamUtil.getLong(req, "fileShortcutId");
+	protected void deleteFileShortcut(ActionRequest actionRequest)
+		throws Exception {
+
+		long fileShortcutId = ParamUtil.getLong(
+			actionRequest, "fileShortcutId");
 
 		DLFileShortcutServiceUtil.deleteFileShortcut(fileShortcutId);
 	}
 
-	protected void updateFileShortcut(ActionRequest req) throws Exception {
-		long fileShortcutId = ParamUtil.getLong(req, "fileShortcutId");
+	protected void updateFileShortcut(ActionRequest actionRequest)
+		throws Exception {
 
-		long folderId = ParamUtil.getLong(req, "folderId");
-		long toFolderId = ParamUtil.getLong(req, "toFolderId");
-		String toName = HtmlUtil.unescape(ParamUtil.getString(req, "toName"));
+		long fileShortcutId = ParamUtil.getLong(
+			actionRequest, "fileShortcutId");
 
-		String[] communityPermissions = req.getParameterValues(
+		long folderId = ParamUtil.getLong(actionRequest, "folderId");
+		long toFolderId = ParamUtil.getLong(actionRequest, "toFolderId");
+		String toName = HtmlUtil.unescape(
+			ParamUtil.getString(actionRequest, "toName"));
+
+		String[] communityPermissions = actionRequest.getParameterValues(
 			"communityPermissions");
-		String[] guestPermissions = req.getParameterValues(
+		String[] guestPermissions = actionRequest.getParameterValues(
 			"guestPermissions");
 
 		if (fileShortcutId <= 0) {

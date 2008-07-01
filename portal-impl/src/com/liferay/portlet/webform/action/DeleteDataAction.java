@@ -47,11 +47,11 @@ public class DeleteDataAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req);
+			PortletPreferencesFactoryUtil.getPortletSetup(actionRequest);
 
 		String databaseTableName = prefs.getValue(
 			"databaseTableName", StringPool.BLANK);
@@ -61,7 +61,7 @@ public class DeleteDataAction extends PortletAction {
 				WebFormUtil.class.getName(), databaseTableName);
 		}
 
-		sendRedirect(req, res);
+		sendRedirect(actionRequest, actionResponse);
 	}
 
 }

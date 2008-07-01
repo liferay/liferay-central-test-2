@@ -51,31 +51,31 @@ public class EditOrgLaborAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateOrgLabor(req);
+				updateOrgLabor(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteOrgLabor(req);
+				deleteOrgLabor(actionRequest);
 			}
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchOrgLaborException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.enterprise_admin.error");
+				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
 			else if (e instanceof NoSuchListTypeException) {
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
 				throw e;
@@ -108,38 +108,43 @@ public class EditOrgLaborAction extends PortletAction {
 			renderRequest, "portlet.enterprise_admin.edit_org_labor"));
 	}
 
-	protected void deleteOrgLabor(ActionRequest req) throws Exception {
-		long orgLaborId = ParamUtil.getLong(req, "orgLaborId");
+	protected void deleteOrgLabor(ActionRequest actionRequest)
+		throws Exception {
+
+		long orgLaborId = ParamUtil.getLong(actionRequest, "orgLaborId");
 
 		OrgLaborServiceUtil.deleteOrgLabor(orgLaborId);
 	}
 
-	protected void updateOrgLabor(ActionRequest req) throws Exception {
-		long orgLaborId = ParamUtil.getLong(req, "orgLaborId");
+	protected void updateOrgLabor(ActionRequest actionRequest)
+		throws Exception {
 
-		long organizationId = ParamUtil.getLong(req, "organizationId");
-		int typeId = ParamUtil.getInteger(req, "typeId");
+		long orgLaborId = ParamUtil.getLong(actionRequest, "orgLaborId");
 
-		int sunOpen = ParamUtil.getInteger(req, "sunOpen");
-		int sunClose = ParamUtil.getInteger(req, "sunClose");
+		long organizationId = ParamUtil.getLong(
+			actionRequest, "organizationId");
+		int typeId = ParamUtil.getInteger(actionRequest, "typeId");
 
-		int monOpen = ParamUtil.getInteger(req, "monOpen");
-		int monClose = ParamUtil.getInteger(req, "monClose");
+		int sunOpen = ParamUtil.getInteger(actionRequest, "sunOpen");
+		int sunClose = ParamUtil.getInteger(actionRequest, "sunClose");
 
-		int tueOpen = ParamUtil.getInteger(req, "tueOpen");
-		int tueClose = ParamUtil.getInteger(req, "tueClose");
+		int monOpen = ParamUtil.getInteger(actionRequest, "monOpen");
+		int monClose = ParamUtil.getInteger(actionRequest, "monClose");
 
-		int wedOpen = ParamUtil.getInteger(req, "wedOpen");
-		int wedClose = ParamUtil.getInteger(req, "wedClose");
+		int tueOpen = ParamUtil.getInteger(actionRequest, "tueOpen");
+		int tueClose = ParamUtil.getInteger(actionRequest, "tueClose");
 
-		int thuOpen = ParamUtil.getInteger(req, "thuOpen");
-		int thuClose = ParamUtil.getInteger(req, "thuClose");
+		int wedOpen = ParamUtil.getInteger(actionRequest, "wedOpen");
+		int wedClose = ParamUtil.getInteger(actionRequest, "wedClose");
 
-		int friOpen = ParamUtil.getInteger(req, "friOpen");
-		int friClose = ParamUtil.getInteger(req, "friClose");
+		int thuOpen = ParamUtil.getInteger(actionRequest, "thuOpen");
+		int thuClose = ParamUtil.getInteger(actionRequest, "thuClose");
 
-		int satOpen = ParamUtil.getInteger(req, "satOpen");
-		int satClose = ParamUtil.getInteger(req, "satClose");
+		int friOpen = ParamUtil.getInteger(actionRequest, "friOpen");
+		int friClose = ParamUtil.getInteger(actionRequest, "friClose");
+
+		int satOpen = ParamUtil.getInteger(actionRequest, "satOpen");
+		int satClose = ParamUtil.getInteger(actionRequest, "satClose");
 
 		if (orgLaborId <= 0) {
 

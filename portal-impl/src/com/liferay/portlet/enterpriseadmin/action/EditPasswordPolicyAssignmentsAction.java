@@ -54,33 +54,33 @@ public class EditPasswordPolicyAssignmentsAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals("password_policy_organizations")) {
-				updatePasswordPolicyOrganizations(req);
+				updatePasswordPolicyOrganizations(actionRequest);
 			}
 			else if (cmd.equals("password_policy_users")) {
-				updatePasswordPolicyUsers(req);
+				updatePasswordPolicyUsers(actionRequest);
 			}
 
 			if (Validator.isNotNull(cmd)) {
 				String redirect = ParamUtil.getString(
-					req, "assignmentsRedirect");
+					actionRequest, "assignmentsRedirect");
 
-				sendRedirect(req, res, redirect);
+				sendRedirect(actionRequest, actionResponse, redirect);
 			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchPasswordPolicyException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.enterprise_admin.error");
+				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
 			else {
 				throw e;
@@ -114,15 +114,17 @@ public class EditPasswordPolicyAssignmentsAction extends PortletAction {
 			"portlet.enterprise_admin.edit_password_policy_assignments"));
 	}
 
-	protected void updatePasswordPolicyOrganizations(ActionRequest req)
+	protected void updatePasswordPolicyOrganizations(
+			ActionRequest actionRequest)
 		throws Exception {
 
-		long passwordPolicyId = ParamUtil.getLong(req, "passwordPolicyId");
+		long passwordPolicyId = ParamUtil.getLong(
+			actionRequest, "passwordPolicyId");
 
 		long[] addOrganizationIds = StringUtil.split(
-			ParamUtil.getString(req, "addOrganizationIds"), 0L);
+			ParamUtil.getString(actionRequest, "addOrganizationIds"), 0L);
 		long[] removeOrganizationIds = StringUtil.split(
-			ParamUtil.getString(req, "removeOrganizationIds"), 0L);
+			ParamUtil.getString(actionRequest, "removeOrganizationIds"), 0L);
 
 		OrganizationServiceUtil.addPasswordPolicyOrganizations(
 			passwordPolicyId, addOrganizationIds);
@@ -130,15 +132,16 @@ public class EditPasswordPolicyAssignmentsAction extends PortletAction {
 			passwordPolicyId, removeOrganizationIds);
 	}
 
-	protected void updatePasswordPolicyUsers(ActionRequest req)
+	protected void updatePasswordPolicyUsers(ActionRequest actionRequest)
 		throws Exception {
 
-		long passwordPolicyId = ParamUtil.getLong(req, "passwordPolicyId");
+		long passwordPolicyId = ParamUtil.getLong(
+			actionRequest, "passwordPolicyId");
 
 		long[] addUserIds = StringUtil.split(
-			ParamUtil.getString(req, "addUserIds"), 0L);
+			ParamUtil.getString(actionRequest, "addUserIds"), 0L);
 		long[] removeUserIds = StringUtil.split(
-			ParamUtil.getString(req, "removeUserIds"), 0L);
+			ParamUtil.getString(actionRequest, "removeUserIds"), 0L);
 
 		UserServiceUtil.addPasswordPolicyUsers(passwordPolicyId, addUserIds);
 		UserServiceUtil.unsetPasswordPolicyUsers(

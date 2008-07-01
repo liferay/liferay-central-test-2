@@ -70,56 +70,57 @@ public class EditProposalAction extends EditPagesAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		try {
-			checkPermissions(req);
+			checkPermissions(actionRequest);
 		}
 		catch (PrincipalException pe) {
 			return;
 		}
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateProposal(req, res);
+				updateProposal(actionRequest, actionResponse);
 			}
 			else if (cmd.equals(Constants.APPROVE)) {
-				approveReview(req);
+				approveReview(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteProposal(req);
+				deleteProposal(actionRequest);
 			}
 			else if (cmd.equals(Constants.PUBLISH)) {
-				publishProposal(req);
+				publishProposal(actionRequest);
 			}
 			else if (cmd.equals(Constants.REJECT)) {
-				rejectReview(req);
+				rejectReview(actionRequest);
 			}
 
-			String redirect = ParamUtil.getString(req, "pagesRedirect");
+			String redirect = ParamUtil.getString(
+				actionRequest, "pagesRedirect");
 
 			if (Validator.isNull(redirect)) {
-				redirect = ParamUtil.getString(req, "redirect");
+				redirect = ParamUtil.getString(actionRequest, "redirect");
 			}
 
-			sendRedirect(req, res, redirect);
+			sendRedirect(actionRequest, actionResponse, redirect);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchProposalException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.communities.error");
+				setForward(actionRequest, "portlet.communities.error");
 			}
 			else if (e instanceof DuplicateReviewUserIdException ||
 					 e instanceof ProposalDueDateException ||
 					 e instanceof ProposalPublishDateException) {
 
-				SessionErrors.add(req, e.getClass().getName(), e);
+				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 			}
 			else {
 				throw e;
@@ -173,22 +174,26 @@ public class EditProposalAction extends EditPagesAction {
 			getForward(renderRequest, "portlet.communities.edit_proposal"));
 	}
 
-	protected void approveReview(ActionRequest req) throws Exception {
-		long proposalId = ParamUtil.getLong(req, "proposalId");
+	protected void approveReview(ActionRequest actionRequest) throws Exception {
+		long proposalId = ParamUtil.getLong(actionRequest, "proposalId");
 
-		int stage = ParamUtil.getInteger(req, "stage");
+		int stage = ParamUtil.getInteger(actionRequest, "stage");
 
 		TasksReviewServiceUtil.approveReview(proposalId, stage);
 	}
 
-	protected void deleteProposal(ActionRequest req) throws Exception {
-		long proposalId = ParamUtil.getLong(req, "proposalId");
+	protected void deleteProposal(ActionRequest actionRequest)
+		throws Exception {
+
+		long proposalId = ParamUtil.getLong(actionRequest, "proposalId");
 
 		TasksProposalServiceUtil.deleteProposal(proposalId);
 	}
 
-	protected void publishProposal(ActionRequest req) throws Exception {
-		long proposalId = ParamUtil.getLong(req, "proposalId");
+	protected void publishProposal(ActionRequest actionRequest)
+		throws Exception {
+
+		long proposalId = ParamUtil.getLong(actionRequest, "proposalId");
 
 		TasksProposal proposal = TasksProposalLocalServiceUtil.getProposal(
 			proposalId);
@@ -196,7 +201,7 @@ public class EditProposalAction extends EditPagesAction {
 		String className = PortalUtil.getClassName(proposal.getClassNameId());
 
 		if (className.equals(Layout.class.getName())) {
-			StagingUtil.publishToLive(req);
+			StagingUtil.publishToLive(actionRequest);
 		}
 		else if (className.equals(Portlet.class.getName())) {
 			String classPK = proposal.getClassPK();
@@ -208,37 +213,39 @@ public class EditProposalAction extends EditPagesAction {
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				proposal.getCompanyId(), portletId);
 
-			StagingUtil.publishToLive(req, portlet);
+			StagingUtil.publishToLive(actionRequest, portlet);
 		}
 
 		TasksProposalServiceUtil.deleteProposal(proposal.getProposalId());
 	}
 
-	protected void rejectReview(ActionRequest req) throws Exception {
-		long proposalId = ParamUtil.getLong(req, "proposalId");
+	protected void rejectReview(ActionRequest actionRequest) throws Exception {
+		long proposalId = ParamUtil.getLong(actionRequest, "proposalId");
 
-		int stage = ParamUtil.getInteger(req, "stage");
+		int stage = ParamUtil.getInteger(actionRequest, "stage");
 
 		TasksReviewServiceUtil.rejectReview(proposalId, stage);
 	}
 
-	protected void updateProposal(ActionRequest req, ActionResponse res)
+	protected void updateProposal(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long proposalId = ParamUtil.getLong(req, "proposalId");
+		long proposalId = ParamUtil.getLong(actionRequest, "proposalId");
 
-		String description = ParamUtil.getString(req, "description");
+		String description = ParamUtil.getString(actionRequest, "description");
 
 		if (proposalId <= 0) {
-			long groupId = ParamUtil.getLong(req, "groupId");
+			long groupId = ParamUtil.getLong(actionRequest, "groupId");
 
-			long reviewUserId = ParamUtil.getLong(req, "reviewUserId");
+			long reviewUserId = ParamUtil.getLong(
+				actionRequest, "reviewUserId");
 
-			String className = ParamUtil.getString(req, "className");
-			String classPK = ParamUtil.getString(req, "classPK");
+			String className = ParamUtil.getString(actionRequest, "className");
+			String classPK = ParamUtil.getString(actionRequest, "classPK");
 
 			String name = StringPool.BLANK;
 
@@ -267,17 +274,22 @@ public class EditProposalAction extends EditPagesAction {
 				addCommunityPermissions, addGuestPermissions);
 		}
 		else {
-			int dueDateMonth = ParamUtil.getInteger(req, "dueDateMonth");
-			int dueDateDay = ParamUtil.getInteger(req, "dueDateDay");
-			int dueDateYear = ParamUtil.getInteger(req, "dueDateYear");
-			int dueDateHour = ParamUtil.getInteger(req, "dueDateHour");
-			int dueDateMinute = ParamUtil.getInteger(req, "dueDateMinute");
+			int dueDateMonth = ParamUtil.getInteger(
+				actionRequest, "dueDateMonth");
+			int dueDateDay = ParamUtil.getInteger(
+				actionRequest, "dueDateDay");
+			int dueDateYear = ParamUtil.getInteger(
+				actionRequest, "dueDateYear");
+			int dueDateHour = ParamUtil.getInteger(
+				actionRequest, "dueDateHour");
+			int dueDateMinute = ParamUtil.getInteger(
+				actionRequest, "dueDateMinute");
 
 			TasksProposalServiceUtil.updateProposal(
 				proposalId, description, dueDateMonth, dueDateDay, dueDateYear,
 				dueDateHour, dueDateMinute);
 
-			long groupId = ParamUtil.getLong(req, "groupId");
+			long groupId = ParamUtil.getLong(actionRequest, "groupId");
 
 			Group group = GroupLocalServiceUtil.getGroup(groupId);
 
@@ -286,8 +298,8 @@ public class EditProposalAction extends EditPagesAction {
 			long[][] userIdsPerStage = new long[workflowStages][0];
 
 			for (int i = 2; i <= workflowStages; i++) {
-				long[] userIds = StringUtil.split(
-					ParamUtil.getString(req, "reviewUserIds_" + i), 0L);
+				long[] userIds = StringUtil.split(ParamUtil.getString(
+					actionRequest, "reviewUserIds_" + i), 0L);
 
 				userIdsPerStage[i - 2] = userIds;
 			}

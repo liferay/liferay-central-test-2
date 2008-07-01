@@ -54,12 +54,12 @@ public class UpdateRequestAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		try {
-			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
-				WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
 			Group group = GroupLocalServiceUtil.getGroup(
 				themeDisplay.getPortletGroupId());
@@ -77,19 +77,19 @@ public class UpdateRequestAction extends PortletAction {
 				throw new PrincipalException();
 			}
 
-			updateRequest(req);
+			updateRequest(actionRequest);
 
-			String redirect = ParamUtil.getString(req, "redirect");
+			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
-			res.sendRedirect(redirect);
+			actionResponse.sendRedirect(redirect);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchRequestException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.requests.error");
+				setForward(actionRequest, "portlet.requests.error");
 			}
 			else {
 				throw e;
@@ -97,12 +97,12 @@ public class UpdateRequestAction extends PortletAction {
 		}
 	}
 
-	protected void updateRequest(ActionRequest req) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+	protected void updateRequest(ActionRequest actionRequest) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long requestId = ParamUtil.getLong(req, "requestId");
-		int status = ParamUtil.getInteger(req, "status");
+		long requestId = ParamUtil.getLong(actionRequest, "requestId");
+		int status = ParamUtil.getInteger(actionRequest, "status");
 
 		SocialRequestLocalServiceUtil.updateRequest(
 			requestId, status, themeDisplay);

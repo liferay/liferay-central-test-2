@@ -55,39 +55,39 @@ public class EditNodeAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateNode(req);
+				updateNode(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteNode(req);
+				deleteNode(actionRequest);
 			}
 			else if (cmd.equals(Constants.SUBSCRIBE)) {
-				subscribeNode(req);
+				subscribeNode(actionRequest);
 			}
 			else if (cmd.equals(Constants.UNSUBSCRIBE)) {
-				unsubscribeNode(req);
+				unsubscribeNode(actionRequest);
 			}
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchNodeException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.wiki.error");
+				setForward(actionRequest, "portlet.wiki.error");
 			}
 			else if (e instanceof DuplicateNodeNameException ||
 					 e instanceof NodeNameException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
 				throw e;
@@ -120,37 +120,41 @@ public class EditNodeAction extends PortletAction {
 			getForward(renderRequest, "portlet.wiki.edit_node"));
 	}
 
-	protected void deleteNode(ActionRequest req) throws Exception {
-		long nodeId = ParamUtil.getLong(req, "nodeId");
+	protected void deleteNode(ActionRequest actionRequest) throws Exception {
+		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
 
 		WikiCacheThreadLocal.setClearCache(false);
 
 		WikiNodeServiceUtil.deleteNode(nodeId);
 	}
 
-	protected void subscribeNode(ActionRequest req) throws Exception {
-		long nodeId = ParamUtil.getLong(req, "nodeId");
+	protected void subscribeNode(ActionRequest actionRequest)
+		throws Exception {
+
+		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
 
 		WikiNodeServiceUtil.subscribeNode(nodeId);
 	}
 
-	protected void unsubscribeNode(ActionRequest req) throws Exception {
-		long nodeId = ParamUtil.getLong(req, "nodeId");
+	protected void unsubscribeNode(ActionRequest actionRequest)
+		throws Exception {
+
+		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
 
 		WikiNodeServiceUtil.unsubscribeNode(nodeId);
 	}
 
-	protected void updateNode(ActionRequest req) throws Exception {
-		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+	protected void updateNode(ActionRequest actionRequest) throws Exception {
+		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
 
-		long nodeId = ParamUtil.getLong(req, "nodeId");
+		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
 
-		String name = ParamUtil.getString(req, "name");
-		String description = ParamUtil.getString(req, "description");
+		String name = ParamUtil.getString(actionRequest, "name");
+		String description = ParamUtil.getString(actionRequest, "description");
 
-		String[] communityPermissions = req.getParameterValues(
+		String[] communityPermissions = actionRequest.getParameterValues(
 			"communityPermissions");
-		String[] guestPermissions = req.getParameterValues(
+		String[] guestPermissions = actionRequest.getParameterValues(
 			"guestPermissions");
 
 		if (nodeId <= 0) {

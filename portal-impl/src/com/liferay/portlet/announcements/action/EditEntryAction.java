@@ -60,22 +60,22 @@ public class EditEntryAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateEntry(req);
+				updateEntry(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteEntry(req);
+				deleteEntry(actionRequest);
 			}
 
-			String redirect = ParamUtil.getString(req, "redirect");
+			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
-			res.sendRedirect(redirect);
+			actionResponse.sendRedirect(redirect);
 		}
 		catch (Exception e) {
 			if (e instanceof EntryContentException ||
@@ -85,7 +85,7 @@ public class EditEntryAction extends PortletAction {
 				e instanceof NoSuchEntryException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
 				throw e;
@@ -118,20 +118,20 @@ public class EditEntryAction extends PortletAction {
 			getForward(renderRequest, "portlet.announcements.edit_entry"));
 	}
 
-	protected void deleteEntry(ActionRequest req) throws Exception {
-		long entryId = ParamUtil.getLong(req, "entryId");
+	protected void deleteEntry(ActionRequest actionRequest) throws Exception {
+		long entryId = ParamUtil.getLong(actionRequest, "entryId");
 
 		AnnouncementsEntryServiceUtil.deleteEntry(entryId);
 	}
 
-	protected void updateEntry(ActionRequest req) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+	protected void updateEntry(ActionRequest actionRequest) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long entryId = ParamUtil.getLong(req, "entryId");
+		long entryId = ParamUtil.getLong(actionRequest, "entryId");
 
 		String[] distributionScopeParts = StringUtil.split(
-			ParamUtil.getString(req, "distributionScope"));
+			ParamUtil.getString(actionRequest, "distributionScope"));
 
 		long classNameId = 0;
 		long classPK = 0;
@@ -144,40 +144,47 @@ public class EditEntryAction extends PortletAction {
 			}
 		}
 
-		String title = ParamUtil.getString(req, "title");
-		String content = ParamUtil.getString(req, "content");
-		String url = ParamUtil.getString(req, "url");
-		String type = ParamUtil.getString(req, "type");
+		String title = ParamUtil.getString(actionRequest, "title");
+		String content = ParamUtil.getString(actionRequest, "content");
+		String url = ParamUtil.getString(actionRequest, "url");
+		String type = ParamUtil.getString(actionRequest, "type");
 
-		int displayDateMonth = ParamUtil.getInteger(req, "displayDateMonth");
-		int displayDateDay = ParamUtil.getInteger(req, "displayDateDay");
-		int displayDateYear = ParamUtil.getInteger(req, "displayDateYear");
-		int displayDateHour = ParamUtil.getInteger(req, "displayDateHour");
-		int displayDateMinute = ParamUtil.getInteger(req, "displayDateMinute");
-		int displayDateAmPm = ParamUtil.getInteger(req, "displayDateAmPm");
+		int displayDateMonth = ParamUtil.getInteger(
+			actionRequest, "displayDateMonth");
+		int displayDateDay = ParamUtil.getInteger(
+			actionRequest, "displayDateDay");
+		int displayDateYear = ParamUtil.getInteger(
+			actionRequest, "displayDateYear");
+		int displayDateHour = ParamUtil.getInteger(
+			actionRequest, "displayDateHour");
+		int displayDateMinute = ParamUtil.getInteger(
+			actionRequest, "displayDateMinute");
+		int displayDateAmPm = ParamUtil.getInteger(
+			actionRequest, "displayDateAmPm");
 
 		if (displayDateAmPm == Calendar.PM) {
 			displayDateHour += 12;
 		}
 
 		int expirationDateMonth = ParamUtil.getInteger(
-			req, "expirationDateMonth");
-		int expirationDateDay = ParamUtil.getInteger(req, "expirationDateDay");
+			actionRequest, "expirationDateMonth");
+		int expirationDateDay = ParamUtil.getInteger(
+			actionRequest, "expirationDateDay");
 		int expirationDateYear = ParamUtil.getInteger(
-			req, "expirationDateYear");
+			actionRequest, "expirationDateYear");
 		int expirationDateHour = ParamUtil.getInteger(
-			req, "expirationDateHour");
+			actionRequest, "expirationDateHour");
 		int expirationDateMinute = ParamUtil.getInteger(
-			req, "expirationDateMinute");
+			actionRequest, "expirationDateMinute");
 		int expirationDateAmPm = ParamUtil.getInteger(
-			req, "expirationDateAmPm");
+			actionRequest, "expirationDateAmPm");
 
 		if (expirationDateAmPm == Calendar.PM) {
 			expirationDateHour += 12;
 		}
 
-		int priority = ParamUtil.getInteger(req, "priority");
-		boolean alert = ParamUtil.getBoolean(req, "alert");
+		int priority = ParamUtil.getInteger(actionRequest, "priority");
+		boolean alert = ParamUtil.getBoolean(actionRequest, "alert");
 
 		if (entryId <= 0) {
 

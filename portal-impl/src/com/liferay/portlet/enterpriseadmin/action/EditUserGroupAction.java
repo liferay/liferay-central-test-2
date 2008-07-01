@@ -54,36 +54,37 @@ public class EditUserGroupAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateUserGroup(req);
+				updateUserGroup(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteUserGroups(req);
+				deleteUserGroups(actionRequest);
 			}
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof PrincipalException) {
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.enterprise_admin.error");
+				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
 			else if (e instanceof DuplicateUserGroupException ||
 					 e instanceof NoSuchUserGroupException ||
 					 e instanceof RequiredUserGroupException ||
 					 e instanceof UserGroupNameException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
 				if (cmd.equals(Constants.DELETE)) {
-					res.sendRedirect(ParamUtil.getString(req, "redirect"));
+					actionResponse.sendRedirect(
+						ParamUtil.getString(actionRequest, "redirect"));
 				}
 			}
 			else {
@@ -117,20 +118,24 @@ public class EditUserGroupAction extends PortletAction {
 			renderRequest, "portlet.enterprise_admin.edit_user_group"));
 	}
 
-	protected void deleteUserGroups(ActionRequest req) throws Exception {
+	protected void deleteUserGroups(ActionRequest actionRequest)
+		throws Exception {
+
 		long[] deleteUserGroupIds = StringUtil.split(
-			ParamUtil.getString(req, "deleteUserGroupIds"), 0L);
+			ParamUtil.getString(actionRequest, "deleteUserGroupIds"), 0L);
 
 		for (int i = 0; i < deleteUserGroupIds.length; i++) {
 			UserGroupServiceUtil.deleteUserGroup(deleteUserGroupIds[i]);
 		}
 	}
 
-	protected void updateUserGroup(ActionRequest req) throws Exception {
-		long userGroupId = ParamUtil.getLong(req, "userGroupId");
+	protected void updateUserGroup(ActionRequest actionRequest)
+		throws Exception {
 
-		String name = ParamUtil.getString(req, "name");
-		String description = ParamUtil.getString(req, "description");
+		long userGroupId = ParamUtil.getLong(actionRequest, "userGroupId");
+
+		String name = ParamUtil.getString(actionRequest, "name");
+		String description = ParamUtil.getString(actionRequest, "description");
 
 		if (userGroupId <= 0) {
 

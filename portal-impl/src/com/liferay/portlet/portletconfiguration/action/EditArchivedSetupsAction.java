@@ -56,52 +56,55 @@ public class EditArchivedSetupsAction extends EditConfigurationAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		Portlet portlet = null;
 
 		try {
-			portlet = getPortlet(req);
+			portlet = getPortlet(actionRequest);
 		}
 		catch (PrincipalException pe) {
-			SessionErrors.add(req, PrincipalException.class.getName());
+			SessionErrors.add(
+				actionRequest, PrincipalException.class.getName());
 
-			setForward(req, "portlet.portlet_configuration.error");
+			setForward(actionRequest, "portlet.portlet_configuration.error");
 		}
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.SAVE)) {
-				updateSetup(req, portlet);
+				updateSetup(actionRequest, portlet);
 
-				sendRedirect(req, res);
+				sendRedirect(actionRequest, actionResponse);
 			}
 			else if (cmd.equals(Constants.RESTORE)) {
-				restoreSetup(req, portlet);
+				restoreSetup(actionRequest, portlet);
 
-				sendRedirect(req, res);
+				sendRedirect(actionRequest, actionResponse);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteSetup(req);
+				deleteSetup(actionRequest);
 
-				sendRedirect(req, res);
+				sendRedirect(actionRequest, actionResponse);
 			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchPortletItemException ||
 				e instanceof PortletItemNameException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
 				setForward(
-					req, "portlet.portlet_configuration.edit_archived_setups");
+					actionRequest,
+					"portlet.portlet_configuration.edit_archived_setups");
 			}
 			else if (e instanceof PrincipalException) {
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.portlet_configuration.error");
+				setForward(
+					actionRequest, "portlet.portlet_configuration.error");
 			}
 			else {
 				throw e;
@@ -133,38 +136,38 @@ public class EditArchivedSetupsAction extends EditConfigurationAction {
 			"portlet.portlet_configuration.edit_archived_setups"));
 	}
 
-	private void deleteSetup(ActionRequest req) throws Exception {
-		long portletItemId = ParamUtil.getLong(req, "portletItemId");
+	private void deleteSetup(ActionRequest actionRequest) throws Exception {
+		long portletItemId = ParamUtil.getLong(actionRequest, "portletItemId");
 
 		PortletPreferencesServiceUtil.deleteArchivedPreferences(portletItemId);
 	}
 
-	private void restoreSetup(ActionRequest req, Portlet portlet)
+	private void restoreSetup(ActionRequest actionRequest, Portlet portlet)
 		throws Exception {
 
-		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
 
-		String name = ParamUtil.getString(req, "name");
+		String name = ParamUtil.getString(actionRequest, "name");
 
 		PortletPreferences setup =
 			PortletPreferencesFactoryUtil.getPortletSetup(
-				req, portlet.getPortletId());
+				actionRequest, portlet.getPortletId());
 
 		PortletPreferencesServiceUtil.restoreArchivedPreferences(
 			layout.getGroupId(), name, portlet.getRootPortletId(), setup);
 	}
 
-	protected void updateSetup(ActionRequest req, Portlet portlet)
+	protected void updateSetup(ActionRequest actionRequest, Portlet portlet)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String name = ParamUtil.getString(req, "name");
+		String name = ParamUtil.getString(actionRequest, "name");
 
 		PortletPreferences setup =
 			PortletPreferencesFactoryUtil.getPortletSetup(
-				req, portlet.getPortletId());
+				actionRequest, portlet.getPortletId());
 
 		PortletPreferencesServiceUtil.updateArchivePreferences(
 			themeDisplay.getUserId(), themeDisplay.getLayout().getGroupId(),

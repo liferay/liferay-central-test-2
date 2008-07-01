@@ -53,32 +53,32 @@ public class EditFrameworkVersionAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateFrameworkVersion(req);
+				updateFrameworkVersion(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteFrameworkVersion(req);
+				deleteFrameworkVersion(actionRequest);
 			}
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchFrameworkVersionException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.software_catalog.error");
+				setForward(actionRequest, "portlet.software_catalog.error");
 			}
 			else if (e instanceof FrameworkVersionNameException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
 				throw e;
@@ -111,26 +111,32 @@ public class EditFrameworkVersionAction extends PortletAction {
 			renderRequest, "portlet.software_catalog.edit_framework_version"));
 	}
 
-	protected void deleteFrameworkVersion(ActionRequest req) throws Exception {
-		long frameworkVersionId = ParamUtil.getLong(req, "frameworkVersionId");
+	protected void deleteFrameworkVersion(ActionRequest actionRequest)
+		throws Exception {
+
+		long frameworkVersionId = ParamUtil.getLong(
+			actionRequest, "frameworkVersionId");
 
 		SCFrameworkVersionServiceUtil.deleteFrameworkVersion(
 			frameworkVersionId);
 	}
 
-	protected void updateFrameworkVersion(ActionRequest req) throws Exception {
-		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+	protected void updateFrameworkVersion(ActionRequest actionRequest)
+		throws Exception {
 
-		long frameworkVersionId = ParamUtil.getLong(req, "frameworkVersionId");
+		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
 
-		String name = ParamUtil.getString(req, "name");
-		String url = ParamUtil.getString(req, "url");
-		boolean active = ParamUtil.getBoolean(req, "active");
-		int priority = ParamUtil.getInteger(req, "priority");
+		long frameworkVersionId = ParamUtil.getLong(
+			actionRequest, "frameworkVersionId");
 
-		String[] communityPermissions = req.getParameterValues(
+		String name = ParamUtil.getString(actionRequest, "name");
+		String url = ParamUtil.getString(actionRequest, "url");
+		boolean active = ParamUtil.getBoolean(actionRequest, "active");
+		int priority = ParamUtil.getInteger(actionRequest, "priority");
+
+		String[] communityPermissions = actionRequest.getParameterValues(
 			"communityPermissions");
-		String[] guestPermissions = req.getParameterValues(
+		String[] guestPermissions = actionRequest.getParameterValues(
 			"guestPermissions");
 
 		if (frameworkVersionId <= 0) {

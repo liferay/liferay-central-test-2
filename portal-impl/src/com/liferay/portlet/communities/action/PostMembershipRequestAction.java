@@ -51,33 +51,35 @@ public class PostMembershipRequestAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		try {
-			long groupId = ParamUtil.getLong(req, "groupId");
-			String comments = ParamUtil.getString(req, "comments");
+			long groupId = ParamUtil.getLong(actionRequest, "groupId");
+			String comments = ParamUtil.getString(actionRequest, "comments");
 
 			MembershipRequestServiceUtil.addMembershipRequest(
 				groupId, comments);
 
-			SessionMessages.add(req, "membership_request_sent");
+			SessionMessages.add(actionRequest, "membership_request_sent");
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchGroupException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.communities.error");
+				setForward(actionRequest, "portlet.communities.error");
 			}
 			else if (e instanceof MembershipRequestCommentsException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.communities.post_membership_request");
+				setForward(
+					actionRequest,
+					"portlet.communities.post_membership_request");
 			}
 			else {
 				throw e;

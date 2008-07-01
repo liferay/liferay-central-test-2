@@ -68,25 +68,25 @@ public class SplitThreadAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		try {
-			splitThread(req, res);
+			splitThread(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof PrincipalException ||
 				e instanceof RequiredMessageException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.message_boards.error");
+				setForward(actionRequest, "portlet.message_boards.error");
 			}
 			else if (e instanceof MessageBodyException ||
 					 e instanceof MessageSubjectException ||
 					 e instanceof NoSuchThreadException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
 				throw e;
@@ -119,15 +119,16 @@ public class SplitThreadAction extends PortletAction {
 			getForward(renderRequest, "portlet.message_boards.split_thread"));
 	}
 
-	protected void splitThread(ActionRequest req, ActionResponse res)
+	protected void splitThread(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		PortletPreferences prefs = req.getPreferences();
+		PortletPreferences prefs = actionRequest.getPreferences();
 
-		long messageId = ParamUtil.getLong(req, "messageId");
+		long messageId = ParamUtil.getLong(actionRequest, "messageId");
 
 		MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
 
@@ -138,11 +139,11 @@ public class SplitThreadAction extends PortletAction {
 			messageId, prefs, themeDisplay);
 
 		boolean addExplanationPost = ParamUtil.getBoolean(
-			req, "addExplanationPost");
+			actionRequest, "addExplanationPost");
 
 		if (addExplanationPost) {
-			String subject = ParamUtil.getString(req, "subject");
-			String body = ParamUtil.getString(req, "body");
+			String subject = ParamUtil.getString(actionRequest, "subject");
+			String body = ParamUtil.getString(actionRequest, "body");
 
 			String portalURL = PortalUtil.getPortalURL(themeDisplay);
 			String layoutURL = PortalUtil.getLayoutURL(themeDisplay);
@@ -167,14 +168,15 @@ public class SplitThreadAction extends PortletAction {
 				themeDisplay);
 		}
 
-		PortletURL portletURL = ((ActionResponseImpl)res).createRenderURL();
+		PortletURL portletURL =
+			((ActionResponseImpl)actionResponse).createRenderURL();
 
 		portletURL.setParameter(
 			"struts_action", "/message_boards/view_message");
 		portletURL.setParameter(
 			"messageId", String.valueOf(newThread.getRootMessageId()));
 
-		res.sendRedirect(portletURL.toString());
+		actionResponse.sendRedirect(portletURL.toString());
 	}
 
 }

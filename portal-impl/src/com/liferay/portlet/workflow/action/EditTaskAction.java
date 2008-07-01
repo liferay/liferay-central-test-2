@@ -51,32 +51,32 @@ public class EditTaskAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, "taskCmd");
+		String cmd = ParamUtil.getString(actionRequest, "taskCmd");
 
 		try {
 			if (cmd.equals(Constants.UPDATE)) {
-				Map errors = updateTask(req);
+				Map errors = updateTask(actionRequest);
 
 				if (errors.size() > 0) {
 					SessionErrors.add(
-						req, EditTaskAction.class.getName(), errors);
+						actionRequest, EditTaskAction.class.getName(), errors);
 
-					setForward(req, "portlet.workflow.edit_task");
+					setForward(actionRequest, "portlet.workflow.edit_task");
 
 					return;
 				}
 			}
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof PrincipalException) {
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.workflow.error");
+				setForward(actionRequest, "portlet.workflow.error");
 			}
 			else {
 				throw e;
@@ -93,13 +93,14 @@ public class EditTaskAction extends PortletAction {
 			getForward(renderRequest, "portlet.workflow.edit_task"));
 	}
 
-	protected Map updateTask(ActionRequest req) throws Exception {
-		long taskId = ParamUtil.getLong(req, "taskId");
+	protected Map updateTask(ActionRequest actionRequest) throws Exception {
+		long taskId = ParamUtil.getLong(actionRequest, "taskId");
 
-		String transition = ParamUtil.getString(req, "taskTransition");
+		String transition = ParamUtil.getString(
+			actionRequest, "taskTransition");
 
 		return WorkflowTaskServiceUtil.updateTask(
-			taskId, transition, req.getParameterMap());
+			taskId, transition, actionRequest.getParameterMap());
 	}
 
 }

@@ -71,7 +71,7 @@ public class ViewAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		PortletConfigImpl portletConfigImpl = (PortletConfigImpl)portletConfig;
@@ -79,7 +79,8 @@ public class ViewAction extends PortletAction {
 		String portletId = portletConfigImpl.getPortletId();
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletId);
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				actionRequest, portletId);
 
 		boolean requireCaptcha = GetterUtil.getBoolean(
 			prefs.getValue("requireCaptcha", StringPool.BLANK));
@@ -98,10 +99,11 @@ public class ViewAction extends PortletAction {
 
 		if (requireCaptcha) {
 			try {
-				CaptchaUtil.check(req);
+				CaptchaUtil.check(actionRequest);
 			}
 			catch (CaptchaTextException cte) {
-				SessionErrors.add(req, CaptchaTextException.class.getName());
+				SessionErrors.add(
+					actionRequest, CaptchaTextException.class.getName());
 
 				return;
 			}
@@ -110,7 +112,7 @@ public class ViewAction extends PortletAction {
 		List<String> fieldValues = new ArrayList<String>();
 
 		for (int i = 1; i <= WebFormUtil.MAX_FIELDS; i++) {
-			fieldValues.add(req.getParameter("field" + i));
+			fieldValues.add(actionRequest.getParameter("field" + i));
 		}
 
 		if (validate(fieldValues, prefs)) {
@@ -141,22 +143,22 @@ public class ViewAction extends PortletAction {
 			}
 
 			if (emailSuccess && databaseSuccess && fileSuccess) {
-				SessionMessages.add(req, "success");
+				SessionMessages.add(actionRequest, "success");
 			}
 			else {
-				SessionErrors.add(req, "error");
+				SessionErrors.add(actionRequest, "error");
 			}
 		}
 		else {
-			SessionErrors.add(req, "requiredFieldMissing");
+			SessionErrors.add(actionRequest, "requiredFieldMissing");
 		}
 
-		if (SessionErrors.isEmpty(req)) {
+		if (SessionErrors.isEmpty(actionRequest)) {
 			if (Validator.isNotNull(successURL)) {
-				res.sendRedirect(successURL);
+				actionResponse.sendRedirect(successURL);
 			}
 			else {
-				sendRedirect(req, res);
+				sendRedirect(actionRequest, actionResponse);
 			}
 		}
 	}

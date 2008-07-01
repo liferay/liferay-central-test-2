@@ -50,19 +50,19 @@ public class AddBookItemsAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		try {
-			quickAddItems(req);
+			quickAddItems(actionRequest);
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof PrincipalException) {
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.shopping.error");
+				setForward(actionRequest, "portlet.shopping.error");
 			}
 			else {
 				throw e;
@@ -79,10 +79,10 @@ public class AddBookItemsAction extends PortletAction {
 			getForward(renderRequest, "portlet.shopping.add_book_items"));
 	}
 
-	protected void quickAddItems(ActionRequest req) throws Exception {
-		long categoryId = ParamUtil.getLong(req, "categoryId");
+	protected void quickAddItems(ActionRequest actionRequest) throws Exception {
+		long categoryId = ParamUtil.getLong(actionRequest, "categoryId");
 		String[] isbns = StringUtil.split(
-			ParamUtil.getString(req, "isbns").toUpperCase(),
+			ParamUtil.getString(actionRequest, "isbns").toUpperCase(),
 			StringPool.SPACE);
 
 		ShoppingItemServiceUtil.addBookItems(categoryId, isbns);

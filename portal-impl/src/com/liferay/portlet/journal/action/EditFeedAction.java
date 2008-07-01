@@ -64,28 +64,28 @@ public class EditFeedAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateFeed(req);
+				updateFeed(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteFeeds(req);
+				deleteFeeds(actionRequest);
 			}
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchFeedException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.journal.error");
+				setForward(actionRequest, "portlet.journal.error");
 			}
 			else if (e instanceof DuplicateFeedIdException ||
 					 e instanceof FeedContentFieldException ||
@@ -95,7 +95,7 @@ public class EditFeedAction extends PortletAction {
 					 e instanceof FeedTargetLayoutFriendlyUrlException ||
 					 e instanceof FeedTargetPortletIdException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
 				throw e;
@@ -136,47 +136,49 @@ public class EditFeedAction extends PortletAction {
 			getForward(renderRequest, "portlet.journal.edit_feed"));
 	}
 
-	protected void deleteFeeds(ActionRequest req) throws Exception {
-		long groupId = ParamUtil.getLong(req, "groupId");
+	protected void deleteFeeds(ActionRequest actionRequest) throws Exception {
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 
 		String[] deleteFeedIds = StringUtil.split(
-			ParamUtil.getString(req, "deleteFeedIds"));
+			ParamUtil.getString(actionRequest, "deleteFeedIds"));
 
 		for (int i = 0; i < deleteFeedIds.length; i++) {
 			JournalFeedServiceUtil.deleteFeed(groupId, deleteFeedIds[i]);
 		}
 	}
 
-	protected void updateFeed(ActionRequest req) throws Exception {
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+	protected void updateFeed(ActionRequest actionRequest) throws Exception {
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
 
-		long groupId = ParamUtil.getLong(req, "groupId");
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 
-		String feedId = ParamUtil.getString(req, "feedId");
-		boolean autoFeedId = ParamUtil.getBoolean(req, "autoFeedId");
+		String feedId = ParamUtil.getString(actionRequest, "feedId");
+		boolean autoFeedId = ParamUtil.getBoolean(actionRequest, "autoFeedId");
 
-		String name = ParamUtil.getString(req, "name");
-		String description = ParamUtil.getString(req, "description");
-		String type = ParamUtil.getString(req, "type");
-		String structureId = ParamUtil.getString(req, "structureId");
-		String templateId = ParamUtil.getString(req, "templateId");
+		String name = ParamUtil.getString(actionRequest, "name");
+		String description = ParamUtil.getString(actionRequest, "description");
+		String type = ParamUtil.getString(actionRequest, "type");
+		String structureId = ParamUtil.getString(actionRequest, "structureId");
+		String templateId = ParamUtil.getString(actionRequest, "templateId");
 		String rendererTemplateId = ParamUtil.getString(
-			req, "rendererTemplateId");
-		int delta = ParamUtil.getInteger(req, "delta");
-		String orderByCol = ParamUtil.getString(req, "orderByCol");
-		String orderByType = ParamUtil.getString(req, "orderByType");
+			actionRequest, "rendererTemplateId");
+		int delta = ParamUtil.getInteger(actionRequest, "delta");
+		String orderByCol = ParamUtil.getString(actionRequest, "orderByCol");
+		String orderByType = ParamUtil.getString(actionRequest, "orderByType");
 		String targetLayoutFriendlyUrl = ParamUtil.getString(
-			req, "targetLayoutFriendlyUrl");
-		String targetPortletId = ParamUtil.getString(req, "targetPortletId");
-		String contentField = ParamUtil.getString(req, "contentField");
+			actionRequest, "targetLayoutFriendlyUrl");
+		String targetPortletId = ParamUtil.getString(
+			actionRequest, "targetPortletId");
+		String contentField = ParamUtil.getString(
+			actionRequest, "contentField");
 
 		String feedType = RSSUtil.DEFAULT_TYPE;
 		double feedVersion = RSSUtil.DEFAULT_VERSION;
 
 		String feedTypeAndVersion = ParamUtil.getString(
-			req, "feedTypeAndVersion");
+			actionRequest, "feedTypeAndVersion");
 
 		if (Validator.isNotNull(feedTypeAndVersion)) {
 			String[] parts = feedTypeAndVersion.split(StringPool.COLON);
@@ -189,13 +191,14 @@ public class EditFeedAction extends PortletAction {
 			}
 		}
 		else {
-			feedType = ParamUtil.getString(req, "feedType", feedType);
-			feedVersion = ParamUtil.getDouble(req, "feedVersion", feedVersion);
+			feedType = ParamUtil.getString(actionRequest, "feedType", feedType);
+			feedVersion = ParamUtil.getDouble(
+				actionRequest, "feedVersion", feedVersion);
 		}
 
-		String[] communityPermissions = req.getParameterValues(
+		String[] communityPermissions = actionRequest.getParameterValues(
 			"communityPermissions");
-		String[] guestPermissions = req.getParameterValues(
+		String[] guestPermissions = actionRequest.getParameterValues(
 			"guestPermissions");
 
 		if (cmd.equals(Constants.ADD)) {

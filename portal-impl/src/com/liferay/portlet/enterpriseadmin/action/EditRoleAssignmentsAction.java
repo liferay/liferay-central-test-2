@@ -53,33 +53,33 @@ public class EditRoleAssignmentsAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals("role_groups")) {
-				updateRoleGroups(req);
+				updateRoleGroups(actionRequest);
 			}
 			else if (cmd.equals("role_users")) {
-				updateRoleUsers(req);
+				updateRoleUsers(actionRequest);
 			}
 
 			if (Validator.isNotNull(cmd)) {
 				String redirect = ParamUtil.getString(
-					req, "assignmentsRedirect");
+					actionRequest, "assignmentsRedirect");
 
-				sendRedirect(req, res, redirect);
+				sendRedirect(actionRequest, actionResponse, redirect);
 			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchRoleException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.enterprise_admin.error");
+				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
 			else {
 				throw e;
@@ -112,25 +112,29 @@ public class EditRoleAssignmentsAction extends PortletAction {
 			renderRequest, "portlet.enterprise_admin.edit_role_assignments"));
 	}
 
-	protected void updateRoleGroups(ActionRequest req) throws Exception {
-		long roleId = ParamUtil.getLong(req, "roleId");
+	protected void updateRoleGroups(ActionRequest actionRequest)
+		throws Exception {
+
+		long roleId = ParamUtil.getLong(actionRequest, "roleId");
 
 		long[] addGroupIds = StringUtil.split(
-			ParamUtil.getString(req, "addGroupIds"), 0L);
+			ParamUtil.getString(actionRequest, "addGroupIds"), 0L);
 		long[] removeGroupIds = StringUtil.split(
-			ParamUtil.getString(req, "removeGroupIds"), 0L);
+			ParamUtil.getString(actionRequest, "removeGroupIds"), 0L);
 
 		GroupServiceUtil.addRoleGroups(roleId, addGroupIds);
 		GroupServiceUtil.unsetRoleGroups(roleId, removeGroupIds);
 	}
 
-	protected void updateRoleUsers(ActionRequest req) throws Exception {
-		long roleId = ParamUtil.getLong(req, "roleId");
+	protected void updateRoleUsers(ActionRequest actionRequest)
+		throws Exception {
+
+		long roleId = ParamUtil.getLong(actionRequest, "roleId");
 
 		long[] addUserIds = StringUtil.split(
-			ParamUtil.getString(req, "addUserIds"), 0L);
+			ParamUtil.getString(actionRequest, "addUserIds"), 0L);
 		long[] removeUserIds = StringUtil.split(
-			ParamUtil.getString(req, "removeUserIds"), 0L);
+			ParamUtil.getString(actionRequest, "removeUserIds"), 0L);
 
 		UserServiceUtil.addRoleUsers(roleId, addUserIds);
 		UserServiceUtil.unsetRoleUsers(roleId, removeUserIds);

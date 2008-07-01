@@ -61,25 +61,25 @@ public class CartAction extends PortletAction {
 
 public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		try {
-			updateCart(req);
+			updateCart(actionRequest);
 
-			String redirect = ParamUtil.getString(req, "redirect");
+			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
 			if (Validator.isNotNull(redirect)) {
-				res.sendRedirect(redirect);
+				actionResponse.sendRedirect(redirect);
 			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchItemException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.shopping.error");
+				setForward(actionRequest, "portlet.shopping.error");
 			}
 			else if (e instanceof CartMinQuantityException ||
 					 e instanceof CouponActiveException ||
@@ -87,7 +87,7 @@ public void processAction(
 					 e instanceof CouponStartDateException ||
 					 e instanceof NoSuchCouponException) {
 
-				SessionErrors.add(req, e.getClass().getName(), e);
+				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 			}
 			else {
 				throw e;
@@ -104,15 +104,15 @@ public void processAction(
 			getForward(renderRequest, "portlet.shopping.cart"));
 	}
 
-	protected void updateCart(ActionRequest req) throws Exception {
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+	protected void updateCart(ActionRequest actionRequest) throws Exception {
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-		ShoppingCart cart = ShoppingUtil.getCart(req);
+		ShoppingCart cart = ShoppingUtil.getCart(actionRequest);
 
 		if (cmd.equals(Constants.ADD)) {
-			long itemId = ParamUtil.getLong(req, "itemId");
+			long itemId = ParamUtil.getLong(actionRequest, "itemId");
 
-			String fields = ParamUtil.getString(req, "fields");
+			String fields = ParamUtil.getString(actionRequest, "fields");
 
 			if (Validator.isNotNull(fields)) {
 				fields = "|" + fields;
@@ -130,10 +130,12 @@ public void processAction(
 			}
 		}
 		else {
-			String itemIds = ParamUtil.getString(req, "itemIds");
-			String couponCodes = ParamUtil.getString(req, "couponCodes");
-			int altShipping = ParamUtil.getInteger(req, "altShipping");
-			boolean insure = ParamUtil.getBoolean(req, "insure");
+			String itemIds = ParamUtil.getString(actionRequest, "itemIds");
+			String couponCodes = ParamUtil.getString(
+				actionRequest, "couponCodes");
+			int altShipping = ParamUtil.getInteger(
+				actionRequest, "altShipping");
+			boolean insure = ParamUtil.getBoolean(actionRequest, "insure");
 
 			cart.setItemIds(itemIds);
 			cart.setCouponCodes(couponCodes);
@@ -146,7 +148,7 @@ public void processAction(
 			cart.getCouponCodes(), cart.getAltShipping(), cart.isInsure());
 
 		if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-			SessionMessages.add(req, "request_processed");
+			SessionMessages.add(actionRequest, "request_processed");
 		}
 	}
 
