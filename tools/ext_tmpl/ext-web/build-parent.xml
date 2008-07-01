@@ -91,7 +91,7 @@
 		<unjar src="${app.server.deploy.dir}/jbossweb-jetty.sar/commons-el.jar" dest="${classpath.jsp}" />
 
 		<antcall target="compile-common-jsp">
-			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp tmp" />
+			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp ${jsp.precompile.root}" />
 		</antcall>
 	</target>
 
@@ -124,7 +124,7 @@
 		</if>
 
 		<antcall target="compile-common-jsp">
-			<param name="arg.line" value="-classpath ${jspc.classpath} -d ${jspc.classes.dir} -webapp docroot" />
+			<param name="arg.line" value="-classpath ${jspc.classpath} -d ${jspc.classes.dir} -webapp ${jsp.precompile.root}" />
 		</antcall>
 	</target>
 
@@ -137,7 +137,7 @@
 		<unjar src="${app.server.dir}/lib/javax.servlet.jar" dest="${classpath.jsp}" />
 
 		<antcall target="compile-common-jsp">
-			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp tmp" />
+			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp ${jsp.precompile.root}" />
 		</antcall>
 	</target>
 
@@ -151,7 +151,7 @@
 		<unjar src="${app.server.dir}/lib/commons/j2ee/servlet-2_4.jar" dest="${classpath.jsp}" />
 
 		<antcall target="compile-common-jsp">
-			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp tmp" />
+			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp ${jsp.precompile.root}" />
 		</antcall>
 	</target>
 
@@ -165,7 +165,7 @@
 		<unjar src="${app.server.dir}/lib/commons/j2ee/servlet-2_4.jar" dest="${classpath.jsp}" />
 
 		<antcall target="compile-common-jsp">
-			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp tmp" />
+			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp ${jsp.precompile.root}" />
 		</antcall>
 	</target>
 
@@ -236,7 +236,7 @@
 		</if>
 
 		<antcall target="compile-common-jsp">
-			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp docroot" />
+			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp ${jsp.precompile.root}" />
 		</antcall>
 	</target>
 
