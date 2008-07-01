@@ -1007,6 +1007,8 @@ public class PropsKeys {
 
 	public static final String THEME_LOADER_STORAGE_PATH = "theme.loader.storage.path";
 
+	public static final String THEME_PORTLET_DECORATE_DEFAULT = "theme.portlet.decorate.default";
+
 	public static final String THEME_SYNC_ON_GROUP = "theme.sync.on.group";
 
 	public static final String THEME_VIRTUAL_PATH = "theme.virtual.path";

@@ -945,6 +945,10 @@ public class PropsValues {
 	public static final String THEME_LOADER_STORAGE_PATH = PropsUtil.get(
 		PropsKeys.THEME_LOADER_STORAGE_PATH);
 
+	public static final boolean THEME_PORTLET_DECORATE_DEFAULT =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.THEME_PORTLET_DECORATE_DEFAULT));
+
 	public static final boolean THEME_SYNC_ON_GROUP = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.THEME_SYNC_ON_GROUP));
 
