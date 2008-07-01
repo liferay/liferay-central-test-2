@@ -138,7 +138,7 @@ if ((layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 </c:if>
 
 <%@ include file="/html/common/themes/top_js.jspf" %>
-<%@ include file="/html/common/themes/top_js-ext.jsp" %>
+<%@ include file="/html/common/themes/top_js-ext.jspf" %>
 
 <c:if test="<%= portlets != null %>">
 
