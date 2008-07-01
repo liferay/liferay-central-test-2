@@ -51,20 +51,21 @@ public class ActionRequestFactory {
 			PortletPreferences prefs, long plid)
 		throws Exception {
 
-		ActionRequestImpl actionReqImpl = null;
+		ActionRequestImpl actionRequestImpl = null;
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
-			actionReqImpl = (ActionRequestImpl)_instance._pool.borrowObject();
+			actionRequestImpl =
+				(ActionRequestImpl)_instance._pool.borrowObject();
 		}
 		else {
-			actionReqImpl = new ActionRequestImpl();
+			actionRequestImpl = new ActionRequestImpl();
 		}
 
-		actionReqImpl.init(
+		actionRequestImpl.init(
 			request, portlet, invokerPortlet, portletContext, windowState,
 			portletMode, prefs, plid);
 
-		return actionReqImpl;
+		return actionRequestImpl;
 	}
 
 	public static void recycle(ActionRequestImpl actionRequestImpl)

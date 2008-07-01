@@ -46,7 +46,7 @@ public class AbsoluteRedirectsResponse extends HttpServletResponseWrapper {
 
 		super(response);
 
-		_req = request;
+		_request = request;
 	}
 
 	public void sendRedirect(String redirect) throws IOException {
@@ -58,18 +58,18 @@ public class AbsoluteRedirectsResponse extends HttpServletResponseWrapper {
 			redirect = portalURL + redirect;
 		}
 
-		if (!CookieKeys.hasSessionId(_req)) {
+		if (!CookieKeys.hasSessionId(_request)) {
 			redirect = PortalUtil.getURLWithSessionId(
-				redirect, _req.getSession().getId());
+				redirect, _request.getSession().getId());
 		}
 
 		super.sendRedirect(redirect);
 	}
 
 	protected String getPortalURL() {
-		return PortalUtil.getPortalURL(_req);
+		return PortalUtil.getPortalURL(_request);
 	}
 
-	private HttpServletRequest _req;
+	private HttpServletRequest _request;
 
 }

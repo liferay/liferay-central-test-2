@@ -47,20 +47,20 @@ import javax.servlet.http.HttpServletResponseWrapper;
 public class PortletServletResponse extends HttpServletResponseWrapper {
 
 	public PortletServletResponse(
-		HttpServletResponse res, PortletResponseImpl portletRes,
+		HttpServletResponse response, PortletResponseImpl portletResponseImpl,
 		boolean include) {
 
-		super(res);
+		super(response);
 
-		_res = res;
-		_portletRes = portletRes;
+		_response = response;
+		_portletResponseImpl = portletResponseImpl;
 		_include = include;
-		_lifecycle = _portletRes.getLifecycle();
+		_lifecycle = _portletResponseImpl.getLifecycle();
 	}
 
 	public void addCookie(Cookie cookie) {
 		if (!_include) {
-			_portletRes.addProperty(cookie);
+			_portletResponseImpl.addProperty(cookie);
 		}
 	}
 
@@ -73,9 +73,10 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 			if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 				_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-				HttpServletResponse res = _portletRes.getHttpServletResponse();
+				HttpServletResponse response =
+					_portletResponseImpl.getHttpServletResponse();
 
-				res.addHeader(name, value);
+				response.addHeader(name, value);
 			}
 		}
 	}
@@ -97,18 +98,18 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 	}
 
 	public String encodeURL(String url) {
-		return _portletRes.encodeURL(url);
+		return _portletResponseImpl.encodeURL(url);
 	}
 
 	public String encodeUrl(String url) {
-		return _portletRes.encodeURL(url);
+		return _portletResponseImpl.encodeURL(url);
 	}
 
 	public void flushBuffer() throws IOException {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			_res.flushBuffer();
+			_response.flushBuffer();
 		}
 	}
 
@@ -116,7 +117,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			return _res.getBufferSize();
+			return _response.getBufferSize();
 		}
 		else {
 			return 0;
@@ -127,7 +128,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			return _res.getCharacterEncoding();
+			return _response.getCharacterEncoding();
 		}
 		else {
 			return null;
@@ -138,7 +139,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			return ((MimeResponse)_portletRes).getContentType();
+			return ((MimeResponse)_portletResponseImpl).getContentType();
 		}
 		else {
 			return null;
@@ -149,7 +150,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			return _res.getLocale();
+			return _response.getLocale();
 		}
 		else {
 			return null;
@@ -160,7 +161,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			return _res.getOutputStream();
+			return _response.getOutputStream();
 		}
 		else {
 			return new NullServletOutputStream();
@@ -171,7 +172,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			return _res.getWriter();
+			return _response.getWriter();
 		}
 		else {
 			return new PrintWriter(new NullServletOutputStream());
@@ -183,7 +184,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 			if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 				_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-				return _res.isCommitted();
+				return _response.isCommitted();
 			}
 			else {
 				return false;
@@ -193,7 +194,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 			if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 				_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-				return _res.isCommitted();
+				return _response.isCommitted();
 			}
 			else {
 				return true;
@@ -205,7 +206,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			_res.reset();
+			_response.reset();
 		}
 	}
 
@@ -213,20 +214,20 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			_res.resetBuffer();
+			_response.resetBuffer();
 		}
 	}
 
-	public void sendError(int sc) throws IOException {
+	public void sendError(int sc) {
 	}
 
-	public void sendError(int sc, String msg) throws IOException {
+	public void sendError(int sc, String msg) {
 	}
 
 	public void sendRedirect(String location) throws IOException {
 		if (!_include) {
 			if (_lifecycle.equals(PortletRequest.ACTION_PHASE)) {
-				((ActionResponse)_portletRes).sendRedirect(location);
+				((ActionResponse)_portletResponseImpl).sendRedirect(location);
 			}
 		}
 	}
@@ -235,14 +236,14 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			_res.setBufferSize(size);
+			_response.setBufferSize(size);
 		}
 	}
 
 	public void setCharacterEncoding(String encoding) {
 		if (!_include) {
 			if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
-				_res.setCharacterEncoding(encoding);
+				_response.setCharacterEncoding(encoding);
 			}
 		}
 	}
@@ -250,7 +251,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 	public void setContentLength(int length) {
 		if (!_include) {
 			if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
-				_res.setContentLength(length);
+				_response.setContentLength(length);
 			}
 		}
 	}
@@ -260,7 +261,8 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 			if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 				_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-				((MimeResponse)_portletRes).setContentType(contentType);
+				((MimeResponse)_portletResponseImpl).setContentType(
+					contentType);
 			}
 		}
 	}
@@ -274,9 +276,10 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 			if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 				_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-				HttpServletResponse res = _portletRes.getHttpServletResponse();
+				HttpServletResponse response =
+					_portletResponseImpl.getHttpServletResponse();
 
-				res.setHeader(name, value);
+				response.setHeader(name, value);
 			}
 		}
 	}
@@ -288,7 +291,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 	public void setLocale(Locale locale) {
 		if (!_include) {
 			if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
-				_res.setLocale(locale);
+				_response.setLocale(locale);
 			}
 		}
 	}
@@ -296,7 +299,8 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 	public void setStatus(int sc) {
 		if (!_include) {
 			if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
-				_portletRes.setProperty("status.", String.valueOf("sc"));
+				_portletResponseImpl.setProperty(
+					"status.", String.valueOf("sc"));
 			}
 		}
 	}
@@ -305,8 +309,8 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		setStatus(sc);
 	}
 
-	private HttpServletResponse _res;
-	private PortletResponseImpl _portletRes;
+	private HttpServletResponse _response;
+	private PortletResponseImpl _portletResponseImpl;
 	private boolean _include;
 	private String _lifecycle;
 

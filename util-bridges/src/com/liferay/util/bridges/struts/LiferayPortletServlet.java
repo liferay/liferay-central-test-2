@@ -37,17 +37,18 @@ import org.apache.portals.bridges.struts.PortletServlet;
 public class LiferayPortletServlet extends PortletServlet {
 
 	public ServletContext getServletContext() {
-		ServletContext ctx = super.getServletContext();
+		ServletContext servletContext = super.getServletContext();
 
-		ServletContextProvider scp =
-			(ServletContextProvider)ctx.getAttribute(
+		ServletContextProvider servletContextProvider =
+			(ServletContextProvider)servletContext.getAttribute(
 				ServletContextProvider.STRUTS_BRIDGES_CONTEXT_PROVIDER);
 
-		if (scp != null) {
-			ctx = scp.getServletContext(ctx);
+		if (servletContextProvider != null) {
+			servletContext = servletContextProvider.getServletContext(
+				servletContext);
 		}
 
-		return ctx;
+		return servletContext;
 	}
 
 }

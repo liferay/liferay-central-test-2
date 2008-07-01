@@ -50,41 +50,43 @@ import javax.servlet.http.HttpServletResponse;
 public class LiferayServletContextProvider implements ServletContextProvider {
 
 	public ServletContext getServletContext(GenericPortlet portlet) {
-		PortletContextImpl portletCtxImpl =
+		PortletContextImpl portletContextImpl =
 			(PortletContextImpl)portlet.getPortletContext();
 
-		return getServletContext(portletCtxImpl.getServletContext());
+		return getServletContext(portletContextImpl.getServletContext());
 	}
 
-	public ServletContext getServletContext(ServletContext ctx) {
-		return new LiferayServletContext(ctx);
+	public ServletContext getServletContext(ServletContext servletContext) {
+		return new LiferayServletContext(servletContext);
 	}
 
 	public HttpServletRequest getHttpServletRequest(
-		GenericPortlet portlet, PortletRequest req) {
+		GenericPortlet portlet, PortletRequest portletRequest) {
 
-		HttpServletRequest httpReq = null;
+		HttpServletRequest request = null;
 
-		if (req instanceof ActionRequestImpl) {
-			httpReq = PortalUtil.getHttpServletRequest(req);
+		if (portletRequest instanceof ActionRequestImpl) {
+			request = PortalUtil.getHttpServletRequest(portletRequest);
 
-			String contentType = httpReq.getHeader(HttpHeaders.CONTENT_TYPE);
+			String contentType = request.getHeader(HttpHeaders.CONTENT_TYPE);
 
 			if ((contentType != null) &&
 				(contentType.startsWith(ContentTypes.MULTIPART_FORM_DATA))) {
 
-				httpReq = new UploadServletRequestImpl(httpReq);
-				httpReq = new LiferayStrutsRequestImpl(httpReq);
+				request = new UploadServletRequestImpl(request);
+				request = new LiferayStrutsRequestImpl(request);
 			}
 			else {
-				httpReq = new LiferayStrutsRequestImpl((ActionRequestImpl)req);
+				request = new LiferayStrutsRequestImpl(
+					(ActionRequestImpl)portletRequest);
 			}
 		}
 		else {
-			httpReq = new LiferayStrutsRequestImpl((RenderRequestImpl)req);
+			request = new LiferayStrutsRequestImpl(
+				(RenderRequestImpl)portletRequest);
 		}
 
-		return httpReq;
+		return request;
 	}
 
 	public HttpServletResponse getHttpServletResponse(

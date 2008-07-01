@@ -49,20 +49,20 @@ public class ToggleTag extends IncludeTag {
 	public static void doTag(
 			String id, String showImage, String hideImage, String showMessage,
 			String hideMessage, boolean defaultShowContent, String stateVar,
-			ServletContext ctx, HttpServletRequest request,
+			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response)
 		throws Exception {
 
 		doTag(
 			_PAGE, id, showImage, hideImage, showMessage, hideMessage,
-			defaultShowContent, stateVar, ctx, request, response);
+			defaultShowContent, stateVar, servletContext, request, response);
 	}
 
 	public static void doTag(
 			String page, String id, String showImage, String hideImage,
 			String showMessage, String hideMessage, boolean defaultShowContent,
-			String stateVar, ServletContext ctx, HttpServletRequest request,
-			HttpServletResponse response)
+			String stateVar, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		ClassLoader contextClassLoader =
@@ -120,7 +120,7 @@ public class ToggleTag extends IncludeTag {
 					pageWrapper, idWrapper, showImageWrapper, hideImageWrapper,
 					showMessageWrapper, hideMessageWrapper,
 					new BooleanWrapper(defaultShowContent), stateVarWrapper,
-					ctx, request, response
+					servletContext, request, response
 				});
 
 			MethodInvoker.invoke(methodWrapper);

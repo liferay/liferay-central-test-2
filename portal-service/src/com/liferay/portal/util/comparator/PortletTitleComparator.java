@@ -47,8 +47,10 @@ public class PortletTitleComparator
 		_locale = locale;
 	}
 
-	public PortletTitleComparator(ServletContext ctx, Locale locale) {
-		_ctx = ctx;
+	public PortletTitleComparator(
+		ServletContext servletContext, Locale locale) {
+
+		_servletContext = servletContext;
 		_locale = locale;
 	}
 
@@ -56,11 +58,11 @@ public class PortletTitleComparator
 		String portletTitle1 = StringPool.BLANK;
 		String portletTitle2 = StringPool.BLANK;
 
-		if (_ctx != null) {
+		if (_servletContext != null) {
 			portletTitle1 = PortalUtil.getPortletTitle(
-				portlet1, _ctx, _locale);
+				portlet1, _servletContext, _locale);
 			portletTitle2 = PortalUtil.getPortletTitle(
-				portlet2, _ctx, _locale);
+				portlet2, _servletContext, _locale);
 		}
 		else {
 			portletTitle1 = PortalUtil.getPortletTitle(
@@ -73,7 +75,7 @@ public class PortletTitleComparator
 	}
 
 	private long _companyId;
-	private ServletContext _ctx;
+	private ServletContext _servletContext;
 	private Locale _locale;
 
 }

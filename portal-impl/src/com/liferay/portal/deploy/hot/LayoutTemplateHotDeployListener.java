@@ -70,17 +70,17 @@ public class LayoutTemplateHotDeployListener extends BaseHotDeployListener {
 	}
 
 	protected void doInvokeDeploy(HotDeployEvent event) throws Exception {
-		ServletContext ctx = event.getServletContext();
+		ServletContext servletContext = event.getServletContext();
 
-		String servletContextName = ctx.getServletContextName();
+		String servletContextName = servletContext.getServletContextName();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking deploy for " + servletContextName);
 		}
 
 		String[] xmls = new String[] {
-			HttpUtil.URLtoString(
-				ctx.getResource("/WEB-INF/liferay-layout-templates.xml"))
+			HttpUtil.URLtoString(servletContext.getResource(
+				"/WEB-INF/liferay-layout-templates.xml"))
 		};
 
 		if (xmls[0] == null) {
@@ -93,7 +93,8 @@ public class LayoutTemplateHotDeployListener extends BaseHotDeployListener {
 
 		List<ObjectValuePair<String, Boolean>> layoutTemplateIds =
 			LayoutTemplateLocalServiceUtil.init(
-				servletContextName, ctx, xmls, event.getPluginPackage());
+				servletContextName, servletContext, xmls,
+				event.getPluginPackage());
 
 		_vars.put(servletContextName, layoutTemplateIds);
 
@@ -105,9 +106,9 @@ public class LayoutTemplateHotDeployListener extends BaseHotDeployListener {
 	}
 
 	protected void doInvokeUndeploy(HotDeployEvent event) throws Exception {
-		ServletContext ctx = event.getServletContext();
+		ServletContext servletContext = event.getServletContext();
 
-		String servletContextName = ctx.getServletContextName();
+		String servletContextName = servletContext.getServletContextName();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking undeploy for " + servletContextName);

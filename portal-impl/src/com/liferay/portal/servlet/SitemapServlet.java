@@ -52,11 +52,12 @@ public class SitemapServlet extends HttpServlet {
 			String redirect =
 				PortalUtil.getPathMain() + "/layout_management/sitemap";
 
-			ServletContext ctx = getServletContext();
+			ServletContext servletContext = getServletContext();
 
-			RequestDispatcher rd = ctx.getRequestDispatcher(redirect);
+			RequestDispatcher requestDispatcher =
+				servletContext.getRequestDispatcher(redirect);
 
-			rd.forward(request, response);
+			requestDispatcher.forward(request, response);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

@@ -47,10 +47,11 @@ import org.portletbridge.portlet.PortletBridgePortlet;
  */
 public class WebProxyPortlet extends PortletBridgePortlet {
 
-	public void doView(RenderRequest req, RenderResponse res)
+	public void doView(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		PortletPreferences prefs = req.getPreferences();
+		PortletPreferences prefs = renderRequest.getPreferences();
 
 		String initUrl = prefs.getValue("initUrl", StringPool.BLANK);
 
@@ -59,21 +60,22 @@ public class WebProxyPortlet extends PortletBridgePortlet {
 				getPortletContext().getRequestDispatcher(
 					StrutsUtil.TEXT_HTML_DIR + "/portal/portlet_not_setup.jsp");
 
-			prd.include(req, res);
+			prd.include(renderRequest, renderResponse);
 		}
 		else {
-			super.doView(req, res);
+			super.doView(renderRequest, renderResponse);
 
-			RenderResponseImpl resImpl = (RenderResponseImpl)res;
+			RenderResponseImpl renderResponseImpl =
+				(RenderResponseImpl)renderResponse;
 
-			StringServletResponse stringServletRes =
-				(StringServletResponse)resImpl.getHttpServletResponse();
+			StringServletResponse stringResponse = (StringServletResponse)
+				renderResponseImpl.getHttpServletResponse();
 
-			String output = stringServletRes.getString();
+			String output = stringResponse.getString();
 
 			output = StringUtil.replace(output, "//pbhs/", "/pbhs/");
 
-			stringServletRes.setString(output);
+			stringResponse.setString(output);
 		}
 	}
 

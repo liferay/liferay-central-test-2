@@ -59,30 +59,30 @@ import org.apache.struts.action.ActionMapping;
 public class EditPageAttachmentAction extends PortletAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD)) {
-				addAttachment(req);
+				addAttachment(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteAttachment(req);
+				deleteAttachment(actionRequest);
 			}
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchNodeException ||
 				e instanceof NoSuchPageException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.wiki.error");
+				setForward(actionRequest, "portlet.wiki.error");
 			}
 			else {
 				throw e;
@@ -91,20 +91,20 @@ public class EditPageAttachmentAction extends PortletAction {
 	}
 
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getNode(req);
-			ActionUtil.getPage(req);
+			ActionUtil.getNode(renderRequest);
+			ActionUtil.getPage(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchNodeException ||
 				e instanceof NoSuchPageException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.wiki.error");
 			}
@@ -114,24 +114,24 @@ public class EditPageAttachmentAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(req, "portlet.wiki.edit_page_attachment"));
+			getForward(renderRequest, "portlet.wiki.edit_page_attachment"));
 	}
 
-	protected void addAttachment(ActionRequest req) throws Exception {
-		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
-			req);
+	protected void addAttachment(ActionRequest actionRequest) throws Exception {
+		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
+			actionRequest);
 
-		long nodeId = ParamUtil.getLong(req, "nodeId");
-		String title = ParamUtil.getString(req, "title");
+		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
+		String title = ParamUtil.getString(actionRequest, "title");
 
-		int numOfFiles = ParamUtil.getInteger(req, "numOfFiles");
+		int numOfFiles = ParamUtil.getInteger(actionRequest, "numOfFiles");
 
 		List<ObjectValuePair<String, byte[]>> files =
 			new ArrayList<ObjectValuePair<String, byte[]>>();
 
 		if (numOfFiles == 0) {
-			File file = uploadReq.getFile("file");
-			String fileName = uploadReq.getFileName("file");
+			File file = uploadRequest.getFile("file");
+			String fileName = uploadRequest.getFileName("file");
 
 			if (file != null) {
 				byte[] bytes = FileUtil.getBytes(file);
@@ -146,9 +146,9 @@ public class EditPageAttachmentAction extends PortletAction {
 		}
 		else {
 			for (int i = 1; i <= numOfFiles; i++) {
-				File file = uploadReq.getFile("file" + i);
+				File file = uploadRequest.getFile("file" + i);
 
-				String fileName = uploadReq.getFileName("file" + i);
+				String fileName = uploadRequest.getFileName("file" + i);
 
 				if (file != null) {
 					byte[] bytes = FileUtil.getBytes(file);
@@ -167,10 +167,12 @@ public class EditPageAttachmentAction extends PortletAction {
 		WikiPageServiceUtil.addPageAttachments(nodeId, title, files);
 	}
 
-	protected void deleteAttachment(ActionRequest req) throws Exception {
-		long nodeId = ParamUtil.getLong(req, "nodeId");
-		String title = ParamUtil.getString(req, "title");
-		String attachment = ParamUtil.getString(req, "fileName");
+	protected void deleteAttachment(ActionRequest actionRequest)
+		throws Exception {
+
+		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
+		String title = ParamUtil.getString(actionRequest, "title");
+		String attachment = ParamUtil.getString(actionRequest, "fileName");
 
 		WikiPageServiceUtil.deletePageAttachment(nodeId, title, attachment);
 	}

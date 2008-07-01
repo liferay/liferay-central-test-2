@@ -71,50 +71,52 @@ import org.apache.struts.action.ActionMapping;
 public class ExportImportAction extends EditConfigurationAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		Portlet portlet = null;
 
 		try {
-			portlet = getPortlet(req);
+			portlet = getPortlet(actionRequest);
 		}
 		catch (PrincipalException pe) {
-			SessionErrors.add(req, PrincipalException.class.getName());
+			SessionErrors.add(
+				actionRequest, PrincipalException.class.getName());
 
-			setForward(req, "portlet.portlet_configuration.error");
+			setForward(actionRequest, "portlet.portlet_configuration.error");
 		}
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals("copy_from_live")) {
-				StagingUtil.copyFromLive(req, portlet);
+				StagingUtil.copyFromLive(actionRequest, portlet);
 
-				sendRedirect(req, res);
+				sendRedirect(actionRequest, actionResponse);
 			}
 			else if (cmd.equals("export")) {
-				exportData(req, res, portlet);
+				exportData(actionRequest, actionResponse, portlet);
 			}
 			else if (cmd.equals("import")) {
-				importData(req, portlet);
+				importData(actionRequest, portlet);
 
-				sendRedirect(req, res);
+				sendRedirect(actionRequest, actionResponse);
 			}
 			else if (cmd.equals("publish_to_live")) {
-				StagingUtil.publishToLive(req, portlet);
+				StagingUtil.publishToLive(actionRequest, portlet);
 
-				sendRedirect(req, res);
+				sendRedirect(actionRequest, actionResponse);
 			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchLayoutException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.portlet_configuration.error");
+				setForward(
+					actionRequest, "portlet.portlet_configuration.error");
 			}
 			else {
 				throw e;
@@ -123,50 +125,58 @@ public class ExportImportAction extends EditConfigurationAction {
 	}
 
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		Portlet portlet = null;
 
 		try {
-			portlet = getPortlet(req);
+			portlet = getPortlet(renderRequest);
 		}
 		catch (PrincipalException pe) {
-			SessionErrors.add(req, PrincipalException.class.getName());
+			SessionErrors.add(
+				renderRequest, PrincipalException.class.getName());
 
 			return mapping.findForward("portlet.portlet_configuration.error");
 		}
 
-		res.setTitle(getTitle(portlet, req));
+		renderResponse.setTitle(getTitle(portlet, renderRequest));
 
 		return mapping.findForward(getForward(
-			req, "portlet.portlet_configuration.export_import"));
+			renderRequest, "portlet.portlet_configuration.export_import"));
 	}
 
 	protected void exportData(
-			ActionRequest req, ActionResponse res, Portlet portlet)
+			ActionRequest actionRequest, ActionResponse actionResponse,
+			Portlet portlet)
 		throws Exception {
 
 		try {
-			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
-				WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
-			long plid = ParamUtil.getLong(req, "plid");
-			String fileName = ParamUtil.getString(req, "exportFileName");
-			boolean dateRange = ParamUtil.getBoolean(req, "dateRange");
+			long plid = ParamUtil.getLong(actionRequest, "plid");
+			String fileName = ParamUtil.getString(
+				actionRequest, "exportFileName");
+			boolean dateRange = ParamUtil.getBoolean(
+				actionRequest, "dateRange");
 			Date startDate = null;
 			Date endDate = null;
 
 			if (dateRange) {
 				int startDateMonth = ParamUtil.getInteger(
-					req, "startDateMonth");
-				int startDateDay = ParamUtil.getInteger(req, "startDateDay");
-				int startDateYear = ParamUtil.getInteger(req, "startDateYear");
-				int startDateHour = ParamUtil.getInteger(req, "startDateHour");
+					actionRequest, "startDateMonth");
+				int startDateDay = ParamUtil.getInteger(
+					actionRequest, "startDateDay");
+				int startDateYear = ParamUtil.getInteger(
+					actionRequest, "startDateYear");
+				int startDateHour = ParamUtil.getInteger(
+					actionRequest, "startDateHour");
 				int startDateMinute = ParamUtil.getInteger(
-					req, "startDateMinute");
-				int startDateAmPm = ParamUtil.getInteger(req, "startDateAmPm");
+					actionRequest, "startDateMinute");
+				int startDateAmPm = ParamUtil.getInteger(
+					actionRequest, "startDateAmPm");
 
 				if (startDateAmPm == Calendar.PM) {
 					startDateHour += 12;
@@ -177,12 +187,18 @@ public class ExportImportAction extends EditConfigurationAction {
 					startDateMinute, themeDisplay.getTimeZone(),
 					new PortalException());
 
-				int endDateMonth = ParamUtil.getInteger(req, "endDateMonth");
-				int endDateDay = ParamUtil.getInteger(req, "endDateDay");
-				int endDateYear = ParamUtil.getInteger(req, "endDateYear");
-				int endDateHour = ParamUtil.getInteger(req, "endDateHour");
-				int endDateMinute = ParamUtil.getInteger(req, "endDateMinute");
-				int endDateAmPm = ParamUtil.getInteger(req, "endDateAmPm");
+				int endDateMonth = ParamUtil.getInteger(
+					actionRequest, "endDateMonth");
+				int endDateDay = ParamUtil.getInteger(
+					actionRequest, "endDateDay");
+				int endDateYear = ParamUtil.getInteger(
+					actionRequest, "endDateYear");
+				int endDateHour = ParamUtil.getInteger(
+					actionRequest, "endDateHour");
+				int endDateMinute = ParamUtil.getInteger(
+					actionRequest, "endDateMinute");
+				int endDateAmPm = ParamUtil.getInteger(
+					actionRequest, "endDateAmPm");
 
 				if (endDateAmPm == Calendar.PM) {
 					endDateHour += 12;
@@ -195,51 +211,53 @@ public class ExportImportAction extends EditConfigurationAction {
 			}
 
 			byte[] bytes = LayoutServiceUtil.exportPortletInfo(
-				plid, portlet.getPortletId(), req.getParameterMap(), startDate,
-				endDate);
+				plid, portlet.getPortletId(), actionRequest.getParameterMap(),
+				startDate, endDate);
 
-			HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(
-				res);
+			HttpServletResponse response = PortalUtil.getHttpServletResponse(
+				actionResponse);
 
-			ServletResponseUtil.sendFile(httpRes, fileName, bytes);
+			ServletResponseUtil.sendFile(response, fileName, bytes);
 
-			setForward(req, ActionConstants.COMMON_NULL);
+			setForward(actionRequest, ActionConstants.COMMON_NULL);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
 	}
 
-	protected void importData(ActionRequest req, Portlet portlet)
+	protected void importData(ActionRequest actionRequest, Portlet portlet)
 		throws Exception {
 
 		try {
-			UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
-				req);
+			UploadPortletRequest uploadRequest =
+				PortalUtil.getUploadPortletRequest(actionRequest);
 
-			long plid = ParamUtil.getLong(uploadReq, "plid");
-			File file = uploadReq.getFile("importFileName");
+			long plid = ParamUtil.getLong(uploadRequest, "plid");
+			File file = uploadRequest.getFile("importFileName");
 
 			if (!file.exists()) {
 				throw new LARFileException("Import file does not exist");
 			}
 
 			LayoutServiceUtil.importPortletInfo(
-				plid, portlet.getPortletId(), req.getParameterMap(), file);
+				plid, portlet.getPortletId(), actionRequest.getParameterMap(),
+				file);
 
-			SessionMessages.add(req, "request_processed");
+			SessionMessages.add(actionRequest, "request_processed");
 		}
 		catch (Exception e) {
 			if ((e instanceof LARFileException) ||
 				(e instanceof LARTypeException) ||
 				(e instanceof PortletIdException)) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
 				_log.error(e, e);
 
-				SessionErrors.add(req, LayoutImportException.class.getName());
+				SessionErrors.add(
+					actionRequest, LayoutImportException.class.getName());
 			}
 		}
 	}

@@ -42,24 +42,25 @@ import javax.portlet.filter.RenderRequestWrapper;
  */
 public class DynamicRenderRequest extends RenderRequestWrapper {
 
-	public DynamicRenderRequest(RenderRequest req) {
-		this(req, new HashMap<String, String[]>(), true);
+	public DynamicRenderRequest(RenderRequest renderRequest) {
+		this(renderRequest, new HashMap<String, String[]>(), true);
 	}
 
 	public DynamicRenderRequest(
-		RenderRequest req, Map<String, String[]> params) {
+		RenderRequest renderRequest, Map<String, String[]> params) {
 
-		this(req, params, true);
+		this(renderRequest, params, true);
 	}
 
-	public DynamicRenderRequest(RenderRequest req, boolean inherit) {
-		this(req, new HashMap<String, String[]>(), inherit);
+	public DynamicRenderRequest(RenderRequest renderRequest, boolean inherit) {
+		this(renderRequest, new HashMap<String, String[]>(), inherit);
 	}
 
 	public DynamicRenderRequest(
-		RenderRequest req, Map<String, String[]> params, boolean inherit) {
+		RenderRequest renderRequest, Map<String, String[]> params,
+		boolean inherit) {
 
-		super(req);
+		super(renderRequest);
 
 		_params = new HashMap<String, String[]>();
 		_inherit = inherit;
@@ -70,12 +71,13 @@ public class DynamicRenderRequest extends RenderRequestWrapper {
 			}
 		}
 
-		if (_inherit && (req instanceof DynamicRenderRequest)) {
-			DynamicRenderRequest dynamicReq = (DynamicRenderRequest)req;
+		if (_inherit && (renderRequest instanceof DynamicRenderRequest)) {
+			DynamicRenderRequest dynamicRenderRequest =
+				(DynamicRenderRequest)renderRequest;
 
-			setRequest(dynamicReq.getRequest());
+			setRequest(dynamicRenderRequest.getRequest());
 
-			params = dynamicReq.getDynamicParameterMap();
+			params = dynamicRenderRequest.getDynamicParameterMap();
 
 			if (params != null) {
 				for (Map.Entry<String, String[]> entry : params.entrySet()) {

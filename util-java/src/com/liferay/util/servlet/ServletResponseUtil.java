@@ -93,53 +93,53 @@ public class ServletResponseUtil {
 	}
 
 	public static void sendFile(
-			HttpServletResponse res, String fileName, byte[] bytes)
+			HttpServletResponse response, String fileName, byte[] bytes)
 		throws IOException {
 
-		sendFile(res, fileName, bytes, null);
+		sendFile(response, fileName, bytes, null);
 	}
 
 	public static void sendFile(
-			HttpServletResponse res, String fileName, byte[] bytes,
+			HttpServletResponse response, String fileName, byte[] bytes,
 			String contentType)
 		throws IOException {
 
-		setHeaders(res, fileName, contentType);
+		setHeaders(response, fileName, contentType);
 
-		write(res, bytes);
+		write(response, bytes);
 	}
 
 	public static void sendFile(
-			HttpServletResponse res, String fileName, InputStream is)
+			HttpServletResponse response, String fileName, InputStream is)
 		throws IOException {
 
-		sendFile(res, fileName, is, null);
+		sendFile(response, fileName, is, null);
 	}
 
 	public static void sendFile(
-			HttpServletResponse res, String fileName, InputStream is,
+			HttpServletResponse response, String fileName, InputStream is,
 			String contentType)
 		throws IOException {
 
-		setHeaders(res, fileName, contentType);
+		setHeaders(response, fileName, contentType);
 
-		write(res, is);
+		write(response, is);
 	}
 
-	public static void write(HttpServletResponse res, String s)
+	public static void write(HttpServletResponse response, String s)
 		throws IOException {
 
-		write(res, s.getBytes(StringPool.UTF8));
+		write(response, s.getBytes(StringPool.UTF8));
 	}
 
-	public static void write(HttpServletResponse res, byte[] bytes)
+	public static void write(HttpServletResponse response, byte[] bytes)
 		throws IOException {
 
-		write(res, bytes, 0);
+		write(response, bytes, 0);
 	}
 
 	public static void write(
-			HttpServletResponse res, byte[] bytes, int contentLength)
+			HttpServletResponse response, byte[] bytes, int contentLength)
 		throws IOException {
 
 		OutputStream os = null;
@@ -148,7 +148,7 @@ public class ServletResponseUtil {
 
 			// LEP-3122
 
-			if (!res.isCommitted() || ServerDetector.isPramati()) {
+			if (!response.isCommitted() || ServerDetector.isPramati()) {
 
 				// LEP-536
 
@@ -156,9 +156,9 @@ public class ServletResponseUtil {
 					contentLength = bytes.length;
 				}
 
-				res.setContentLength(contentLength);
+				response.setContentLength(contentLength);
 
-				os = new BufferedOutputStream(res.getOutputStream());
+				os = new BufferedOutputStream(response.getOutputStream());
 
 				os.write(bytes, 0, contentLength);
 			}
@@ -168,14 +168,14 @@ public class ServletResponseUtil {
 		}
 	}
 
-	public static void write(HttpServletResponse res, InputStream is)
+	public static void write(HttpServletResponse response, InputStream is)
 		throws IOException {
 
 		OutputStream os = null;
 
 		try {
-			if (!res.isCommitted()) {
-				os = new BufferedOutputStream(res.getOutputStream());
+			if (!response.isCommitted()) {
+				os = new BufferedOutputStream(response.getOutputStream());
 
 				int c = is.read();
 
@@ -192,7 +192,7 @@ public class ServletResponseUtil {
 	}
 
 	protected static void setHeaders(
-		HttpServletResponse res, String fileName, String contentType) {
+		HttpServletResponse response, String fileName, String contentType) {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Sending file of type " + contentType);
@@ -201,11 +201,11 @@ public class ServletResponseUtil {
 		// LEP-2201
 
 		if (Validator.isNotNull(contentType)) {
-			res.setContentType(contentType);
+			response.setContentType(contentType);
 		}
 
-		res.setHeader(HttpHeaders.CACHE_CONTROL, HttpHeaders.PUBLIC);
-		res.setHeader(HttpHeaders.PRAGMA, HttpHeaders.PUBLIC);
+		response.setHeader(HttpHeaders.CACHE_CONTROL, HttpHeaders.PUBLIC);
+		response.setHeader(HttpHeaders.PRAGMA, HttpHeaders.PUBLIC);
 
 		if (Validator.isNotNull(fileName)) {
 			String contentDisposition =
@@ -249,7 +249,8 @@ public class ServletResponseUtil {
 					contentDisposition, "attachment; ", "inline; ");
 			}
 
-			res.setHeader(HttpHeaders.CONTENT_DISPOSITION, contentDisposition);
+			response.setHeader(
+				HttpHeaders.CONTENT_DISPOSITION, contentDisposition);
 		}
 	}
 

@@ -45,8 +45,10 @@ import org.apache.commons.logging.LogFactory;
  */
 public class PortletContextFactory {
 
-	public static PortletContext create(Portlet portlet, ServletContext ctx) {
-		return _instance._create(portlet, ctx);
+	public static PortletContext create(
+		Portlet portlet, ServletContext servletContext) {
+
+		return _instance._create(portlet, servletContext);
 	}
 
 	public static void destroy(Portlet portlet) {
@@ -57,7 +59,9 @@ public class PortletContextFactory {
 		_pool = new ConcurrentHashMap<String, Map<String, PortletContext>>();
 	}
 
-	private PortletContext _create(Portlet portlet, ServletContext ctx) {
+	private PortletContext _create(
+		Portlet portlet, ServletContext servletContext) {
+
 		Map<String, PortletContext> portletContexts = _pool.get(
 			portlet.getRootPortletId());
 
@@ -85,7 +89,7 @@ public class PortletContextFactory {
 
 				//String mainPath = (String)ctx.getAttribute(WebKeys.MAIN_PATH);
 
-				ctx = portletBag.getServletContext();
+				servletContext = portletBag.getServletContext();
 
 				// Context path for the portal must be passed to individual
 				// portlets
@@ -93,10 +97,10 @@ public class PortletContextFactory {
 				//ctx.setAttribute(WebKeys.MAIN_PATH, mainPath);
 			}
 
-			portletContext = new PortletContextImpl(portlet, ctx);
+			portletContext = new PortletContextImpl(portlet, servletContext);
 
 			VelocityContextPool.put(
-				portletContext.getPortletContextName(), ctx);
+				portletContext.getPortletContextName(), servletContext);
 
 			portletContexts.put(portlet.getPortletId(), portletContext);
 		}

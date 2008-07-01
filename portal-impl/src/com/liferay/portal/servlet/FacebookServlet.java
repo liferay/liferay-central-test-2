@@ -73,14 +73,15 @@ public class FacebookServlet extends HttpServlet {
 				request.setAttribute(
 					CompressionFilter.SKIP_FILTER, Boolean.TRUE);
 
-				ServletContext ctx = getServletContext();
+				ServletContext servletContext = getServletContext();
 
-				RequestDispatcher rd = ctx.getRequestDispatcher(redirect);
+				RequestDispatcher requestDispatcher =
+					servletContext.getRequestDispatcher(redirect);
 
 				StringServletResponse stringResponse =
 					new StringServletResponse(response);
 
-				rd.forward(request, stringResponse);
+				requestDispatcher.forward(request, stringResponse);
 
 				String fbml = stringResponse.getString();
 

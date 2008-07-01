@@ -137,7 +137,7 @@ public class LayoutTemplateImpl
 	}
 
 	public String getUncachedContent() throws IOException {
-		if (_ctx == null) {
+		if (_servletContext == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Cannot get latest content for " + _servletContextName +
@@ -155,7 +155,7 @@ public class LayoutTemplateImpl
 		}
 
 		String content = HttpUtil.URLtoString(
-			_ctx.getResource(getTemplatePath()));
+			_servletContext.getResource(getTemplatePath()));
 
 		setContent(content);
 
@@ -177,7 +177,7 @@ public class LayoutTemplateImpl
 	}
 
 	public String getUncachedWapContent() {
-		if (_ctx == null) {
+		if (_servletContext == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Cannot get latest WAP content for " + _servletContextName +
@@ -198,7 +198,7 @@ public class LayoutTemplateImpl
 
 		try {
 			wapContent = HttpUtil.URLtoString(
-				_ctx.getResource(getWapTemplatePath()));
+				_servletContext.getResource(getWapTemplatePath()));
 		}
 		catch (Exception e) {
 			_log.error(
@@ -219,8 +219,8 @@ public class LayoutTemplateImpl
 		_columns = columns;
 	}
 
-	public void setServletContext(ServletContext ctx) {
-		_ctx = ctx;
+	public void setServletContext(ServletContext servletContext) {
+		_servletContext = servletContext;
 	}
 
 	public String getServletContextName() {
@@ -291,7 +291,7 @@ public class LayoutTemplateImpl
 	private String _wapContent;
 	private boolean _setWapContent;
 	private List<String> _columns = new ArrayList<String>();
-	private transient ServletContext _ctx;
+	private transient ServletContext _servletContext;
 	private String _servletContextName;
 	private boolean _warFile;
 

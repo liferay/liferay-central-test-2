@@ -75,8 +75,9 @@ public class RenderResponseImpl
 
 		// See LEP-2188
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)_req.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)_portletRequestImpl.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
@@ -94,12 +95,12 @@ public class RenderResponseImpl
 	}
 
 	protected void init(
-		PortletRequestImpl req, HttpServletResponse res, String portletName,
-		long companyId, long plid) {
+		PortletRequestImpl portletRequestImpl, HttpServletResponse response,
+		String portletName, long companyId, long plid) {
 
-		super.init(req, res, portletName, companyId, plid);
+		super.init(portletRequestImpl, response, portletName, companyId, plid);
 
-		_req = req;
+		_portletRequestImpl = portletRequestImpl;
 	}
 
 	protected void recycle() {
@@ -109,7 +110,7 @@ public class RenderResponseImpl
 
 		super.recycle();
 
-		_req = null;
+		_portletRequestImpl = null;
 		_title = null;
 		_useDefaultTemplate = null;
 		_resourceName = null;
@@ -117,7 +118,7 @@ public class RenderResponseImpl
 
 	private static Log _log = LogFactory.getLog(RenderResponseImpl.class);
 
-	private PortletRequestImpl _req;
+	private PortletRequestImpl _portletRequestImpl;
 	private String _title;
  	private Boolean _useDefaultTemplate;
 	private String _resourceName;

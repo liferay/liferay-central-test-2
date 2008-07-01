@@ -55,7 +55,7 @@ import org.apache.struts.action.ActionMapping;
 public class EditAddressAction extends PortletAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
@@ -95,7 +95,7 @@ public class EditAddressAction extends PortletAction {
 	}
 
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 

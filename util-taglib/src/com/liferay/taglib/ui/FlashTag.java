@@ -48,15 +48,15 @@ public class FlashTag extends IncludeTag {
 			String devicefont, String flashvars, String height, String id,
 			String loop, String menu, String movie, String play, String quality,
 			String salign, String scale, String swliveconnect, String version,
-			String width, String wmode, ServletContext ctx,
+			String width, String wmode, ServletContext servletContext,
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
 		doTag(
 			_PAGE, align, allowScriptAccess, base, bgcolor, devicefont,
 			flashvars, height, id, loop, menu, movie, play, quality, salign,
-			scale, swliveconnect, version, width, wmode, ctx, request,
-			response);
+			scale, swliveconnect, version, width, wmode, servletContext,
+			request, response);
 	}
 
 	public static void doTag(
@@ -64,8 +64,9 @@ public class FlashTag extends IncludeTag {
 			String bgcolor, String devicefont, String flashvars, String height,
 			String id, String loop, String menu, String movie, String play,
 			String quality, String salign, String scale, String swliveconnect,
-			String version, String width, String wmode, ServletContext ctx,
-			HttpServletRequest reqquest, HttpServletResponse response)
+			String version, String width, String wmode,
+			ServletContext servletContext, HttpServletRequest reqquest,
+			HttpServletResponse response)
 		throws IOException, ServletException {
 
 		reqquest.setAttribute("liferay-ui:flash:align", align);
@@ -89,24 +90,25 @@ public class FlashTag extends IncludeTag {
 		reqquest.setAttribute("liferay-ui:flash:width", width);
 		reqquest.setAttribute("liferay-ui:flash:wmode", wmode);
 
-		RequestDispatcher requestDispatcher = ctx.getRequestDispatcher(page);
+		RequestDispatcher requestDispatcher =
+			servletContext.getRequestDispatcher(page);
 
 		requestDispatcher.include(reqquest, response);
 	}
 
 	public int doEndTag() throws JspException {
 		try {
-			ServletContext ctx = getServletContext();
-			HttpServletRequest req = getServletRequest();
-			StringServletResponse res = getServletResponse();
+			ServletContext servletContext = getServletContext();
+			HttpServletRequest request = getServletRequest();
+			StringServletResponse stringResponse = getServletResponse();
 
 			doTag(
 				_align, _allowScriptAccess, _base, _bgcolor, _devicefont,
 				_flashvars, _height, _id, _loop, _menu, _movie, _play, _quality,
-				_salign, _scale, _swliveconnect, _version, _width, _wmode, ctx,
-				req, res);
+				_salign, _scale, _swliveconnect, _version, _width, _wmode,
+				servletContext, request, stringResponse);
 
-			pageContext.getOut().print(res.getString());
+			pageContext.getOut().print(stringResponse.getString());
 
 			return EVAL_PAGE;
 		}

@@ -59,12 +59,12 @@ public class PortletLister {
 
 	public TreeView getTreeView(
 			LayoutTypePortlet layoutTypePortlet, String rootNodeName, User user,
-			ServletContext ctx)
+			ServletContext servletContext)
 		throws PortalException, SystemException {
 
 		_layoutTypePortlet = layoutTypePortlet;
 		_user = user;
-		_ctx = ctx;
+		_servletContext = servletContext;
 		_nodeId = 1;
 
 		_list = new ArrayList<TreeNodeView>();
@@ -188,7 +188,7 @@ public class PortletLister {
 				if (portletApp.isWARFile() &&
 						Validator.isNull(externalPortletCategory)) {
 					PortletConfig portletConfig = PortletConfigFactory.create(
-						portlet, _ctx);
+						portlet, _servletContext);
 
 					ResourceBundle resourceBundle =
 						portletConfig.getResourceBundle(_user.getLocale());
@@ -234,7 +234,7 @@ public class PortletLister {
 
 	private LayoutTypePortlet _layoutTypePortlet;
 	private User _user;
-	private ServletContext _ctx;
+	private ServletContext _servletContext;
 	private int _nodeId;
 	private List<TreeNodeView> _list;
 	private int _depth;

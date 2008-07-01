@@ -61,12 +61,12 @@ import org.apache.struts.action.ActionMapping;
 public class ExportDataAction extends PortletAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req);
+			PortletPreferencesFactoryUtil.getPortletSetup(actionRequest);
 
 		String databaseTableName = prefs.getValue(
 			"databaseTableName", StringPool.BLANK);
@@ -115,14 +115,15 @@ public class ExportDataAction extends PortletAction {
 			}
 		}
 
-		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
+		HttpServletResponse response = PortalUtil.getHttpServletResponse(
+			actionResponse);
 		String fileName = title + ".csv";
 		InputStream is = new ByteArrayInputStream(sb.toString().getBytes());
 		String contentType = ContentTypes.APPLICATION_TEXT;
 
-		ServletResponseUtil.sendFile(httpRes, fileName, is, contentType);
+		ServletResponseUtil.sendFile(response, fileName, is, contentType);
 
-		setForward(req, ActionConstants.COMMON_NULL);
+		setForward(actionRequest, ActionConstants.COMMON_NULL);
 	}
 
 }

@@ -24,7 +24,7 @@ package com.liferay.portal.kernel.util;
 
 import javax.portlet.PortletPreferences;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="PrefsParamUtil.java.html"><b><i>View Source</i></b></a>
@@ -35,13 +35,13 @@ import javax.servlet.ServletRequest;
 public class PrefsParamUtil {
 
 	public static boolean getBoolean(
-		PortletPreferences prefs, ServletRequest req, String param) {
+		PortletPreferences prefs, HttpServletRequest request, String param) {
 
-		return getBoolean(prefs, req, param, GetterUtil.DEFAULT_BOOLEAN);
+		return getBoolean(prefs, request, param, GetterUtil.DEFAULT_BOOLEAN);
 	}
 
 	public static boolean getBoolean(
-		PortletPreferences prefs, ServletRequest req, String param,
+		PortletPreferences prefs, HttpServletRequest request, String param,
 		boolean defaultValue) {
 
 		String prefsValue = prefs.getValue(param, null);
@@ -49,17 +49,17 @@ public class PrefsParamUtil {
 		boolean getterUtilValue = GetterUtil.getBoolean(
 			prefsValue, defaultValue);
 
-		return ParamUtil.get(req, param, getterUtilValue);
+		return ParamUtil.get(request, param, getterUtilValue);
 	}
 
 	public static double getDouble(
-		PortletPreferences prefs, ServletRequest req, String param) {
+		PortletPreferences prefs, HttpServletRequest request, String param) {
 
-		return getDouble(prefs, req, param, GetterUtil.DEFAULT_DOUBLE);
+		return getDouble(prefs, request, param, GetterUtil.DEFAULT_DOUBLE);
 	}
 
 	public static double getDouble(
-		PortletPreferences prefs, ServletRequest req, String param,
+		PortletPreferences prefs, HttpServletRequest request, String param,
 		double defaultValue) {
 
 		String prefsValue = prefs.getValue(param, null);
@@ -67,17 +67,17 @@ public class PrefsParamUtil {
 		double getterUtilValue = GetterUtil.getDouble(
 			prefsValue, defaultValue);
 
-		return ParamUtil.get(req, param, getterUtilValue);
+		return ParamUtil.get(request, param, getterUtilValue);
 	}
 
 	public static int getInteger(
-		PortletPreferences prefs, ServletRequest req, String param) {
+		PortletPreferences prefs, HttpServletRequest request, String param) {
 
-		return getInteger(prefs, req, param, GetterUtil.DEFAULT_INTEGER);
+		return getInteger(prefs, request, param, GetterUtil.DEFAULT_INTEGER);
 	}
 
 	public static int getInteger(
-		PortletPreferences prefs, ServletRequest req, String param,
+		PortletPreferences prefs, HttpServletRequest request, String param,
 		int defaultValue) {
 
 		String prefsValue = prefs.getValue(param, null);
@@ -85,17 +85,17 @@ public class PrefsParamUtil {
 		int getterUtilValue = GetterUtil.getInteger(
 			prefsValue, defaultValue);
 
-		return ParamUtil.get(req, param, getterUtilValue);
+		return ParamUtil.get(request, param, getterUtilValue);
 	}
 
 	public static long getLong(
-		PortletPreferences prefs, ServletRequest req, String param) {
+		PortletPreferences prefs, HttpServletRequest request, String param) {
 
-		return getLong(prefs, req, param, GetterUtil.DEFAULT_LONG);
+		return getLong(prefs, request, param, GetterUtil.DEFAULT_LONG);
 	}
 
 	public static long getLong(
-		PortletPreferences prefs, ServletRequest req, String param,
+		PortletPreferences prefs, HttpServletRequest request, String param,
 		long defaultValue) {
 
 		String prefsValue = prefs.getValue(param, null);
@@ -103,17 +103,17 @@ public class PrefsParamUtil {
 		long getterUtilValue = GetterUtil.getLong(
 			prefsValue, defaultValue);
 
-		return ParamUtil.get(req, param, getterUtilValue);
+		return ParamUtil.get(request, param, getterUtilValue);
 	}
 
 	public static String getString(
-		PortletPreferences prefs, ServletRequest req, String param) {
+		PortletPreferences prefs, HttpServletRequest request, String param) {
 
-		return getString(prefs, req, param, GetterUtil.DEFAULT_STRING);
+		return getString(prefs, request, param, GetterUtil.DEFAULT_STRING);
 	}
 
 	public static String getString(
-		PortletPreferences prefs, ServletRequest req, String param,
+		PortletPreferences prefs, HttpServletRequest request, String param,
 		String defaultValue) {
 
 		String prefsValue = prefs.getValue(param, null);
@@ -121,7 +121,7 @@ public class PrefsParamUtil {
 		String getterUtilValue = GetterUtil.getString(
 			prefsValue, defaultValue);
 
-		return ParamUtil.get(req, param, getterUtilValue);
+		return ParamUtil.get(request, param, getterUtilValue);
 	}
 
 }

@@ -83,10 +83,11 @@ public class StrutsUtil {
 				_log.debug("Forward path " + path);
 			}
 
-			RequestDispatcher rd = servletContext.getRequestDispatcher(path);
+			RequestDispatcher requestDispatcher =
+				servletContext.getRequestDispatcher(path);
 
 			try {
-				rd.forward(request, response);
+				requestDispatcher.forward(request, response);
 			}
 			catch (IOException ioe1) {
 				_log.warn(ioe1, ioe1);
@@ -100,10 +101,11 @@ public class StrutsUtil {
 					path = TEXT_WAP_DIR + "/common/error.jsp";
 				}
 
-				rd = servletContext.getRequestDispatcher(errorPath);
+				requestDispatcher = servletContext.getRequestDispatcher(
+					errorPath);
 
 				try {
-					rd.forward(request, response);
+					requestDispatcher.forward(request, response);
 				}
 				catch (IOException ioe2) {
 					_log.warn(ioe2, ioe2);
@@ -137,10 +139,11 @@ public class StrutsUtil {
 			_log.debug("Include path " + path);
 		}
 
-		RequestDispatcher rd = servletContext.getRequestDispatcher(path);
+		RequestDispatcher requestDispatcher =
+			servletContext.getRequestDispatcher(path);
 
 		try {
-			rd.include(request, response);
+			requestDispatcher.include(request, response);
 		}
 		catch (IOException ioe) {
 			_log.warn(ioe, ioe);

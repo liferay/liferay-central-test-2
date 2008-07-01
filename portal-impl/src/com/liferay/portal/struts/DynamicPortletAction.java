@@ -45,7 +45,7 @@ import org.apache.struts.config.ModuleConfig;
 public class DynamicPortletAction extends PortletAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
@@ -56,11 +56,11 @@ public class DynamicPortletAction extends PortletAction {
 		PortletAction action = (PortletAction)InstancePool.get(
 			mapping.getType());
 
-		action.processAction(mapping, form, config, req, res);
+		action.processAction(mapping, form, portletConfig, req, res);
 	}
 
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
@@ -71,7 +71,7 @@ public class DynamicPortletAction extends PortletAction {
 		PortletAction action = (PortletAction)InstancePool.get(
 			mapping.getType());
 
-		return action.render(mapping, form, config, req, res);
+		return action.render(mapping, form, portletConfig, req, res);
 	}
 
 	protected String getPath(PortletRequest req) throws Exception {

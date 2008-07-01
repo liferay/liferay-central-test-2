@@ -29,11 +29,11 @@ String baseProviderURL = ParamUtil.getString(request, "baseProviderURL");
 String principal = ParamUtil.getString(request, "principal");
 String credentials = ParamUtil.getString(request, "credentials");
 
-LdapContext ctx = PortalLDAPUtil.getContext(themeDisplay.getCompanyId(), baseProviderURL, principal, credentials);
+LdapContext ldapContext = PortalLDAPUtil.getContext(themeDisplay.getCompanyId(), baseProviderURL, principal, credentials);
 %>
 
 <c:choose>
-	<c:when test="<%= ctx != null %>">
+	<c:when test="<%= ldapContext != null %>">
 		<liferay-ui:message key="liferay-has-successfully-connected-to-the-ldap-server" />
 	</c:when>
 	<c:otherwise>
@@ -42,7 +42,7 @@ LdapContext ctx = PortalLDAPUtil.getContext(themeDisplay.getCompanyId(), basePro
 </c:choose>
 
 <%
-if (ctx != null) {
-	ctx.close();
+if (ldapContext != null) {
+	ldapContext.close();
 }
 %>

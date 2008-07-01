@@ -64,7 +64,7 @@ public class CASFilter extends BaseFilter {
 			casFilter = new edu.yale.its.tp.cas.client.filter.CASFilter();
 
 			DynamicFilterConfig config = new DynamicFilterConfig(
-				_filterName, _ctx);
+				_filterName, _servletContext);
 
 			String serverName = PrefsPropsUtil.getString(
 				companyId, PropsKeys.CAS_SERVER_NAME);
@@ -150,6 +150,6 @@ public class CASFilter extends BaseFilter {
 			<Long, edu.yale.its.tp.cas.client.filter.CASFilter>();
 
 	private String _filterName;
-	private ServletContext _ctx;
+	private ServletContext _servletContext;
 
 }

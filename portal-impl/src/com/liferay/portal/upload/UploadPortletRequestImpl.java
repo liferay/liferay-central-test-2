@@ -47,63 +47,63 @@ public class UploadPortletRequestImpl
 	extends HttpServletRequestWrapper implements UploadPortletRequest {
 
 	public UploadPortletRequestImpl(
-		UploadServletRequest req, String namespace) {
+		UploadServletRequest uploadRequest, String namespace) {
 
-		super(req);
+		super(uploadRequest);
 
-		_req = req;
+		_uploadRequest = uploadRequest;
 		_namespace = namespace;
 	}
 
 	public void cleanUp() {
-		_req.cleanUp();
+		_uploadRequest.cleanUp();
 	}
 
 	public String getContentType(String name) {
-		String contentType = _req.getContentType(_namespace + name);
+		String contentType = _uploadRequest.getContentType(_namespace + name);
 
 		if (contentType == null) {
-			contentType = _req.getContentType(name);
+			contentType = _uploadRequest.getContentType(name);
 		}
 
 		return contentType;
 	}
 
 	public File getFile(String name) {
-		File file = _req.getFile(_namespace + name);
+		File file = _uploadRequest.getFile(_namespace + name);
 
 		if (file == null) {
-			file = _req.getFile(name);
+			file = _uploadRequest.getFile(name);
 		}
 
 		return file;
 	}
 
 	public String getFileName(String name) {
-		String fileName = _req.getFileName(_namespace + name);
+		String fileName = _uploadRequest.getFileName(_namespace + name);
 
 		if (fileName == null) {
-			fileName = _req.getFileName(name);
+			fileName = _uploadRequest.getFileName(name);
 		}
 
 		return fileName;
 	}
 
 	public String getFullFileName(String name) {
-		String fullFileName = _req.getFullFileName(_namespace + name);
+		String fullFileName = _uploadRequest.getFullFileName(_namespace + name);
 
 		if (fullFileName == null) {
-			fullFileName = _req.getFullFileName(name);
+			fullFileName = _uploadRequest.getFullFileName(name);
 		}
 
 		return fullFileName;
 	}
 
 	public String getParameter(String name) {
-		String parameter = _req.getParameter(_namespace + name);
+		String parameter = _uploadRequest.getParameter(_namespace + name);
 
 		if (parameter == null) {
-			parameter = _req.getParameter(name);
+			parameter = _uploadRequest.getParameter(name);
 		}
 
 		return parameter;
@@ -126,7 +126,7 @@ public class UploadPortletRequestImpl
 	public Enumeration<String> getParameterNames() {
 		List<String> parameterNames = new ArrayList<String>();
 
-		Enumeration<String> enu = _req.getParameterNames();
+		Enumeration<String> enu = _uploadRequest.getParameterNames();
 
 		while (enu.hasMoreElements()) {
 			String name = enu.nextElement();
@@ -144,20 +144,21 @@ public class UploadPortletRequestImpl
 	}
 
 	public String[] getParameterValues(String name) {
-		String[] parameterValues = _req.getParameterValues(_namespace + name);
+		String[] parameterValues = _uploadRequest.getParameterValues(
+			_namespace + name);
 
 		if (parameterValues == null) {
-			parameterValues = _req.getParameterValues(name);
+			parameterValues = _uploadRequest.getParameterValues(name);
 		}
 
 		return parameterValues;
 	}
 
 	public boolean isFormField(String name) {
-		Boolean formField = _req.isFormField(_namespace + name);
+		Boolean formField = _uploadRequest.isFormField(_namespace + name);
 
 		if (formField == null) {
-			formField = _req.isFormField(name);
+			formField = _uploadRequest.isFormField(name);
 		}
 
 		if (formField == null) {
@@ -168,7 +169,7 @@ public class UploadPortletRequestImpl
 		}
 	}
 
-	private UploadServletRequest _req;
+	private UploadServletRequest _uploadRequest;
 	private String _namespace;
 
 }

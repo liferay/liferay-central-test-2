@@ -67,14 +67,15 @@ public class PortalClassLoaderFilter implements Filter, PortalInitable {
 		}
 	}
 
-	public void init(FilterConfig config) throws ServletException {
+	public void init(FilterConfig config) {
 		_config = config;
 
 		PortalInitableUtil.init(this);
 	}
 
 	public void doFilter(
-			ServletRequest req, ServletResponse res, FilterChain chain)
+			ServletRequest servletRequest, ServletResponse servletResponse,
+			FilterChain chain)
 		throws IOException, ServletException {
 
 		ClassLoader contextClassLoader =
@@ -84,7 +85,7 @@ public class PortalClassLoaderFilter implements Filter, PortalInitable {
 			Thread.currentThread().setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
-			_filter.doFilter(req, res, chain);
+			_filter.doFilter(servletRequest, servletResponse, chain);
 		}
 		finally {
 			Thread.currentThread().setContextClassLoader(contextClassLoader);

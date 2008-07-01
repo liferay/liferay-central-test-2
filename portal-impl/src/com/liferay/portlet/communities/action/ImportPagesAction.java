@@ -53,38 +53,39 @@ import org.apache.struts.action.ActionMapping;
 public class ImportPagesAction extends EditPagesAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		try {
-			UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
-				req);
+			UploadPortletRequest uploadRequest =
+				PortalUtil.getUploadPortletRequest(actionRequest);
 
-			long groupId = ParamUtil.getLong(uploadReq, "groupId");
+			long groupId = ParamUtil.getLong(uploadRequest, "groupId");
 			boolean privateLayout = ParamUtil.getBoolean(
-				uploadReq, "privateLayout");
-			File file = uploadReq.getFile("importFileName");
+				uploadRequest, "privateLayout");
+			File file = uploadRequest.getFile("importFileName");
 
 			if (!file.exists()) {
 				throw new LARFileException("Import file does not exist");
 			}
 
 			LayoutServiceUtil.importLayouts(
-				groupId, privateLayout, req.getParameterMap(), file);
+				groupId, privateLayout, actionRequest.getParameterMap(), file);
 
-			SessionMessages.add(req, "request_processed");
+			SessionMessages.add(actionRequest, "request_processed");
 		}
 		catch (Exception e) {
 			if ((e instanceof LARFileException) ||
 				(e instanceof LARTypeException)) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
 				_log.error(e, e);
 
-				SessionErrors.add(req, LayoutImportException.class.getName());
+				SessionErrors.add(
+					actionRequest, LayoutImportException.class.getName());
 			}
 		}
 	}

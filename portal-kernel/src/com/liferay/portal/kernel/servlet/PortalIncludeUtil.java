@@ -52,19 +52,23 @@ public class PortalIncludeUtil {
 	public static String toString(PageContext pageContext, String path)
 		throws IOException, ServletException {
 
-		HttpServletRequest req = (HttpServletRequest)pageContext.getRequest();
-		HttpServletResponse res =
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
+		HttpServletResponse response =
 			(HttpServletResponse)pageContext.getResponse();
 
-		ServletContext ctx = (ServletContext)req.getAttribute(WebKeys.CTX);
+		ServletContext servletContext = (ServletContext)request.getAttribute(
+			WebKeys.CTX);
 
-		StringServletResponse stringServletRes = new StringServletResponse(res);
+		StringServletResponse stringResponse = new StringServletResponse(
+			response);
 
-		RequestDispatcher rd = ctx.getRequestDispatcher(path);
+		RequestDispatcher requestDispatcher =
+			servletContext.getRequestDispatcher(path);
 
-		rd.include(req, stringServletRes);
+		requestDispatcher.include(request, stringResponse);
 
-		return stringServletRes.getString();
+		return stringResponse.getString();
 	}
 
 }

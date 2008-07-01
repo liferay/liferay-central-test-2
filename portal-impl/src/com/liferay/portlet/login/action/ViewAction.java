@@ -64,21 +64,21 @@ import org.apache.struts.action.ActionMapping;
 public class ViewAction extends PortletAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = req.getParameter(Constants.CMD);
+		String cmd = actionRequest.getParameter(Constants.CMD);
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		if (req.getRemoteUser() != null) {
-			res.sendRedirect(themeDisplay.getPathMain());
+		if (actionRequest.getRemoteUser() != null) {
+			actionResponse.sendRedirect(themeDisplay.getPathMain());
 		}
 		else if (Validator.isNotNull(cmd)) {
 			try {
-				login(themeDisplay, req, res);
+				login(themeDisplay, actionRequest, actionResponse);
 			}
 			catch (Exception e) {
 				if (e instanceof AuthException) {
@@ -87,10 +87,12 @@ public class ViewAction extends PortletAction {
 					if (cause instanceof PasswordExpiredException ||
 						cause instanceof UserLockoutException) {
 
-						SessionErrors.add(req, cause.getClass().getName());
+						SessionErrors.add(
+							actionRequest, cause.getClass().getName());
 					}
 					else {
-						SessionErrors.add(req, e.getClass().getName());
+						SessionErrors.add(
+							actionRequest, e.getClass().getName());
 					}
 				}
 				else if (e instanceof CookieNotSupportedException ||
@@ -102,47 +104,51 @@ public class ViewAction extends PortletAction {
 						 e instanceof UserPasswordException ||
 						 e instanceof UserScreenNameException) {
 
-					SessionErrors.add(req, e.getClass().getName());
+					SessionErrors.add(actionRequest, e.getClass().getName());
 				}
 				else {
-					PortalUtil.sendError(e, req, res);
+					PortalUtil.sendError(e, actionRequest, actionResponse);
 				}
 			}
 		}
 	}
 
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		return mapping.findForward("portlet.login.view");
 	}
 
 	protected void login(
-			ThemeDisplay themeDisplay, ActionRequest req, ActionResponse res)
+			ThemeDisplay themeDisplay, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+		HttpServletResponse response = PortalUtil.getHttpServletResponse(
+			actionResponse);
 
-		String login = ParamUtil.getString(req, "login");
-		String password = ParamUtil.getString(req, "password");
-		boolean rememberMe = ParamUtil.getBoolean(req, "rememberMe");
+		String login = ParamUtil.getString(actionRequest, "login");
+		String password = ParamUtil.getString(actionRequest, "password");
+		boolean rememberMe = ParamUtil.getBoolean(actionRequest, "rememberMe");
 
-		LoginAction.login(httpReq, httpRes, login, password, rememberMe);
+		LoginAction.login(request, response, login, password, rememberMe);
 
 		if (PropsValues.PORTAL_JAAS_ENABLE) {
-			res.sendRedirect(themeDisplay.getPathMain() + "/portal/protected");
+			actionResponse.sendRedirect(
+				themeDisplay.getPathMain() + "/portal/protected");
 		}
 		else {
-			String redirect = ParamUtil.getString(req, "redirect");
+			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
 			if (Validator.isNotNull(redirect)) {
-				res.sendRedirect(redirect);
+				actionResponse.sendRedirect(redirect);
 			}
 			else {
-				res.sendRedirect(themeDisplay.getPathMain());
+				actionResponse.sendRedirect(themeDisplay.getPathMain());
 			}
 		}
 	}

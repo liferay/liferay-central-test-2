@@ -114,91 +114,93 @@ import org.apache.struts.action.ActionMapping;
 public class EditPagesAction extends PortletAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		try {
-			checkPermissions(req);
+			checkPermissions(actionRequest);
 		}
 		catch (PrincipalException pe) {
 			return;
 		}
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateLayout(req, res);
+				updateLayout(actionRequest, actionResponse);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				CommunitiesUtil.deleteLayout(req, res);
+				CommunitiesUtil.deleteLayout(actionRequest, actionResponse);
 			}
 			else if (cmd.equals("copy_from_live")) {
-				StagingUtil.copyFromLive(req);
+				StagingUtil.copyFromLive(actionRequest);
 			}
 			else if (cmd.equals("display_order")) {
-				updateDisplayOrder(req);
+				updateDisplayOrder(actionRequest);
 			}
 			else if (cmd.equals("logo")) {
-				updateLogo(req);
+				updateLogo(actionRequest);
 			}
 			else if (cmd.equals("look_and_feel")) {
-				updateLookAndFeel(req);
+				updateLookAndFeel(actionRequest);
 			}
 			else if (cmd.equals("merge_pages")) {
-				updateMergePages(req);
+				updateMergePages(actionRequest);
 			}
 			else if (cmd.equals("monitoring")) {
-				updateMonitoring(req);
+				updateMonitoring(actionRequest);
 			}
 			else if (cmd.equals("publish_to_live")) {
-				StagingUtil.publishToLive(req);
+				StagingUtil.publishToLive(actionRequest);
 			}
 			else if (cmd.equals("publish_to_remote")) {
-				StagingUtil.publishToRemote(req);
+				StagingUtil.publishToRemote(actionRequest);
 			}
 			else if (cmd.equals("schedule_publish_to_live")) {
-				StagingUtil.schedulePublishToLive(req);
+				StagingUtil.schedulePublishToLive(actionRequest);
 			}
 			else if (cmd.equals("schedule_publish_to_remote")) {
-				StagingUtil.schedulePublishToRemote(req);
+				StagingUtil.schedulePublishToRemote(actionRequest);
 			}
 			else if (cmd.equals("staging")) {
-				StagingUtil.updateStaging(req);
+				StagingUtil.updateStaging(actionRequest);
 			}
 			else if (cmd.equals("unschedule_publish_to_live")) {
-				StagingUtil.unschedulePublishToLive(req);
+				StagingUtil.unschedulePublishToLive(actionRequest);
 			}
 			else if (cmd.equals("unschedule_publish_to_remote")) {
-				StagingUtil.unschedulePublishToRemote(req);
+				StagingUtil.unschedulePublishToRemote(actionRequest);
 			}
 			else if (cmd.equals("virtual_host")) {
-				updateVirtualHost(req);
+				updateVirtualHost(actionRequest);
 			}
 			else if (cmd.equals("workflow")) {
-				updateWorkflow(req);
+				updateWorkflow(actionRequest);
 			}
 
-			String redirect = ParamUtil.getString(req, "pagesRedirect");
+			String redirect = ParamUtil.getString(
+				actionRequest, "pagesRedirect");
 
-			sendRedirect(req, res, redirect);
+			sendRedirect(actionRequest, actionResponse, redirect);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchLayoutException ||
 				e instanceof NoSuchProposalException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.communities.error");
+				setForward(actionRequest, "portlet.communities.error");
 			}
 			else if (e instanceof RemoteExportException) {
-				SessionErrors.add(req, e.getClass().getName(), e);
+				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 
-				String redirect = ParamUtil.getString(req, "pagesRedirect");
+				String redirect = ParamUtil.getString(
+					actionRequest, "pagesRedirect");
 
-				sendRedirect(req, res, redirect);
+				sendRedirect(actionRequest, actionResponse, redirect);
 			}
 			else if (e instanceof LayoutFriendlyURLException ||
 					 e instanceof LayoutHiddenException ||
@@ -211,10 +213,11 @@ public class EditPagesAction extends PortletAction {
 
 				if (e instanceof LayoutFriendlyURLException) {
 					SessionErrors.add(
-						req, LayoutFriendlyURLException.class.getName(), e);
+						actionRequest,
+						LayoutFriendlyURLException.class.getName(), e);
 				}
 				else {
-					SessionErrors.add(req, e.getClass().getName(), e);
+					SessionErrors.add(actionRequest, e.getClass().getName(), e);
 				}
 			}
 			else {
@@ -224,27 +227,28 @@ public class EditPagesAction extends PortletAction {
 	}
 
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			checkPermissions(req);
+			checkPermissions(renderRequest);
 		}
 		catch (PrincipalException pe) {
-			SessionErrors.add(req, PrincipalException.class.getName());
+			SessionErrors.add(
+				renderRequest, PrincipalException.class.getName());
 
 			return mapping.findForward("portlet.communities.error");
 		}
 
 		try {
-			ActionUtil.getGroup(req);
+			ActionUtil.getGroup(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchGroupException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.communities.error");
 			}
@@ -254,35 +258,37 @@ public class EditPagesAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(req, "portlet.communities.edit_pages"));
+			getForward(renderRequest, "portlet.communities.edit_pages"));
 	}
 
 	public void serveResource(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ResourceRequest req, ResourceResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
 		String path =
 			"/html/portlet/communities/scheduled_publishing_events.jsp";
 
 		PortletRequestDispatcher prd =
-			config.getPortletContext().getRequestDispatcher(path);
+			portletConfig.getPortletContext().getRequestDispatcher(path);
 
-		prd.include(req, res);
+		prd.include(resourceRequest, resourceResponse);
 	}
 
-	protected void checkPermissions(PortletRequest req) throws Exception {
+	protected void checkPermissions(PortletRequest portletRequest)
+		throws Exception {
 
 		// LEP-850
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
-		long groupId = ParamUtil.getLong(req, "groupId");
-		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
+		long groupId = ParamUtil.getLong(portletRequest, "groupId");
+		boolean privateLayout = ParamUtil.getBoolean(
+			portletRequest, "privateLayout");
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
@@ -332,7 +338,7 @@ public class EditPagesAction extends PortletAction {
 	}
 
 	protected void copyPreferences(
-			ActionRequest req, Layout layout, Layout copyLayout)
+			ActionRequest actionRequest, Layout layout, Layout copyLayout)
 		throws Exception {
 
 		long companyId = layout.getCompanyId();
@@ -343,20 +349,21 @@ public class EditPagesAction extends PortletAction {
 		List<String> copyPortletIds = copyLayoutTypePortlet.getPortletIds();
 
 		for (String copyPortletId : copyPortletIds) {
-			HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+			HttpServletRequest request = PortalUtil.getHttpServletRequest(
+				actionRequest);
 
 			// Copy preference
 
 			PortletPreferencesIds portletPreferencesIds =
 				PortletPreferencesFactoryUtil.getPortletPreferencesIds(
-					httpReq, layout, copyPortletId);
+					request, layout, copyPortletId);
 
 			PortletPreferencesLocalServiceUtil.getPreferences(
 				portletPreferencesIds);
 
 			PortletPreferencesIds copyPortletPreferencesIds =
 				PortletPreferencesFactoryUtil.getPortletPreferencesIds(
-					httpReq, copyLayout, copyPortletId);
+					request, copyLayout, copyPortletId);
 
 			PortletPreferences copyPrefs =
 				PortletPreferencesLocalServiceUtil.getPreferences(
@@ -388,59 +395,68 @@ public class EditPagesAction extends PortletAction {
 		}
 	}
 
-	protected Properties getTypeSettingsProperties(ActionRequest req) {
+	protected Properties getTypeSettingsProperties(
+		ActionRequest actionRequest) {
+
 		Properties typeSettingsProperties = new SafeProperties();
 
 		String prefix = "TypeSettingsProperties(";
 
-		for (String paramName: req.getParameterMap().keySet()) {
+		for (String paramName: actionRequest.getParameterMap().keySet()) {
 			if (paramName.startsWith(prefix)) {
 				String key = paramName.substring(
 					prefix.length(), paramName.length() - 1);
 
 				typeSettingsProperties.setProperty(
-					key, req.getParameter(paramName));
+					key, actionRequest.getParameter(paramName));
 			}
 		}
 
 		return typeSettingsProperties;
 	}
 
-	protected void updateDisplayOrder(ActionRequest req) throws Exception {
-		long groupId = ParamUtil.getLong(req, "groupId");
-		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
-		long parentLayoutId = ParamUtil.getLong(req, "parentLayoutId");
+	protected void updateDisplayOrder(ActionRequest actionRequest)
+		throws Exception {
+
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+		boolean privateLayout = ParamUtil.getBoolean(
+			actionRequest, "privateLayout");
+		long parentLayoutId = ParamUtil.getLong(
+			actionRequest, "parentLayoutId");
 		long[] layoutIds = StringUtil.split(
-			ParamUtil.getString(req, "layoutIds"), 0L);
+			ParamUtil.getString(actionRequest, "layoutIds"), 0L);
 
 		LayoutServiceUtil.setLayouts(
 			groupId, privateLayout, parentLayoutId, layoutIds);
 	}
 
-	protected void updateLayout(ActionRequest req, ActionResponse res)
+	protected void updateLayout(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
-			req);
+		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
+			actionRequest);
 
-		String cmd = ParamUtil.getString(uploadReq, Constants.CMD);
+		String cmd = ParamUtil.getString(uploadRequest, Constants.CMD);
 
-		long groupId = ParamUtil.getLong(req, "groupId");
-		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
-		long layoutId = ParamUtil.getLong(req, "layoutId");
-		long parentLayoutId = ParamUtil.getLong(uploadReq, "parentLayoutId");
-		String description = ParamUtil.getString(uploadReq, "description");
-		String type = ParamUtil.getString(uploadReq, "type");
-		boolean hidden = ParamUtil.getBoolean(uploadReq, "hidden");
-		String friendlyURL = ParamUtil.getString(uploadReq, "friendlyURL");
-		boolean iconImage = ParamUtil.getBoolean(uploadReq, "iconImage");
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+		boolean privateLayout = ParamUtil.getBoolean(
+			actionRequest, "privateLayout");
+		long layoutId = ParamUtil.getLong(actionRequest, "layoutId");
+		long parentLayoutId = ParamUtil.getLong(
+			uploadRequest, "parentLayoutId");
+		String description = ParamUtil.getString(uploadRequest, "description");
+		String type = ParamUtil.getString(uploadRequest, "type");
+		boolean hidden = ParamUtil.getBoolean(uploadRequest, "hidden");
+		String friendlyURL = ParamUtil.getString(uploadRequest, "friendlyURL");
+		boolean iconImage = ParamUtil.getBoolean(uploadRequest, "iconImage");
 		byte[] iconBytes = FileUtil.getBytes(
-			uploadReq.getFile("iconFileName"));
+			uploadRequest.getFile("iconFileName"));
 
 		boolean inheritFromParentLayoutId = ParamUtil.getBoolean(
-			uploadReq, "inheritFromParentLayoutId");
+			uploadRequest, "inheritFromParentLayoutId");
 
-		long copyLayoutId = ParamUtil.getLong(uploadReq, "copyLayoutId");
+		long copyLayoutId = ParamUtil.getLong(uploadRequest, "copyLayoutId");
 
 		Locale[] locales = LanguageUtil.getAvailableLocales();
 
@@ -451,9 +467,11 @@ public class EditPagesAction extends PortletAction {
 			String languageId = LocaleUtil.toLanguageId(locale);
 
 			localeNamesMap.put(
-				locale, ParamUtil.getString(uploadReq, "name_" + languageId));
+				locale,
+				ParamUtil.getString(uploadRequest, "name_" + languageId));
 			localeTitlesMap.put(
-				locale, ParamUtil.getString(uploadReq, "title_" + languageId));
+				locale,
+				ParamUtil.getString(uploadRequest, "title_" + languageId));
 		}
 
 		if (cmd.equals(Constants.ADD)) {
@@ -492,7 +510,7 @@ public class EditPagesAction extends PortletAction {
 				friendlyURL, Boolean.valueOf(iconImage), iconBytes);
 
 			Properties formTypeSettingsProperties = getTypeSettingsProperties(
-				req);
+				actionRequest);
 
 			if (type.equals(LayoutConstants.TYPE_PORTLET)) {
 				if ((copyLayoutId > 0) &&
@@ -509,7 +527,7 @@ public class EditPagesAction extends PortletAction {
 								groupId, privateLayout, layoutId,
 								copyLayout.getTypeSettings());
 
-							copyPreferences(req, layout, copyLayout);
+							copyPreferences(actionRequest, layout, copyLayout);
 						}
 					}
 					catch (NoSuchLayoutException nsle) {
@@ -536,8 +554,8 @@ public class EditPagesAction extends PortletAction {
 					groupId, privateLayout, layoutId, layout.getTypeSettings());
 			}
 
-			HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(
-				res);
+			HttpServletResponse response = PortalUtil.getHttpServletResponse(
+				actionResponse);
 
 			String[] eventClasses = StringUtil.split(
 				PropsUtil.get(
@@ -546,21 +564,23 @@ public class EditPagesAction extends PortletAction {
 
 			EventsProcessor.process(
 				PropsKeys.LAYOUT_CONFIGURATION_ACTION_UPDATE, eventClasses,
-				uploadReq, httpRes);
+				uploadRequest, response);
 		}
 	}
 
-	protected void updateLogo(ActionRequest req) throws Exception {
-		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
-			req);
+	protected void updateLogo(ActionRequest actionRequest) throws Exception {
+		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
+			actionRequest);
 
-		long liveGroupId = ParamUtil.getLong(req, "liveGroupId");
-		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
+		long liveGroupId = ParamUtil.getLong(actionRequest, "liveGroupId");
+		long stagingGroupId = ParamUtil.getLong(
+			actionRequest, "stagingGroupId");
 
-		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
-		boolean logo = ParamUtil.getBoolean(req, "logo");
+		boolean privateLayout = ParamUtil.getBoolean(
+			actionRequest, "privateLayout");
+		boolean logo = ParamUtil.getBoolean(actionRequest, "logo");
 
-		File file = uploadReq.getFile("logoFileName");
+		File file = uploadRequest.getFile("logoFileName");
 		byte[] bytes = FileUtil.getBytes(file);
 
 		if (logo && ((bytes == null) || (bytes.length == 0))) {
@@ -575,21 +595,26 @@ public class EditPagesAction extends PortletAction {
 		}
 	}
 
-	protected void updateLookAndFeel(ActionRequest req) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+	protected void updateLookAndFeel(ActionRequest actionRequest)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		long companyId = themeDisplay.getCompanyId();
 
-		long liveGroupId = ParamUtil.getLong(req, "liveGroupId");
-		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
+		long liveGroupId = ParamUtil.getLong(actionRequest, "liveGroupId");
+		long stagingGroupId = ParamUtil.getLong(
+			actionRequest, "stagingGroupId");
 
-		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
-		long layoutId = ParamUtil.getLong(req, "layoutId");
-		String themeId = ParamUtil.getString(req, "themeId");
-		String colorSchemeId = ParamUtil.getString(req, "colorSchemeId");
-		String css = ParamUtil.getString(req, "css");
-		boolean wapTheme = ParamUtil.getBoolean(req, "wapTheme");
+		boolean privateLayout = ParamUtil.getBoolean(
+			actionRequest, "privateLayout");
+		long layoutId = ParamUtil.getLong(actionRequest, "layoutId");
+		String themeId = ParamUtil.getString(actionRequest, "themeId");
+		String colorSchemeId = ParamUtil.getString(
+			actionRequest, "colorSchemeId");
+		String css = ParamUtil.getString(actionRequest, "css");
+		boolean wapTheme = ParamUtil.getBoolean(actionRequest, "wapTheme");
 
 		updateLookAndFeel(
 			companyId, liveGroupId, privateLayout, layoutId, themeId,
@@ -625,11 +650,13 @@ public class EditPagesAction extends PortletAction {
 		}
 	}
 
-	protected void updateMergePages(ActionRequest req) throws Exception {
-		long liveGroupId = ParamUtil.getLong(req, "liveGroupId");
+	protected void updateMergePages(ActionRequest actionRequest)
+		throws Exception {
+
+		long liveGroupId = ParamUtil.getLong(actionRequest, "liveGroupId");
 
 		boolean mergeGuestPublicPages = ParamUtil.getBoolean(
-			req, "mergeGuestPublicPages");
+			actionRequest, "mergeGuestPublicPages");
 
 		Group liveGroup = GroupLocalServiceUtil.getGroup(liveGroupId);
 
@@ -641,11 +668,13 @@ public class EditPagesAction extends PortletAction {
 		GroupServiceUtil.updateGroup(liveGroupId, liveGroup.getTypeSettings());
 	}
 
-	protected void updateMonitoring(ActionRequest req) throws Exception {
-		long liveGroupId = ParamUtil.getLong(req, "liveGroupId");
+	protected void updateMonitoring(ActionRequest actionRequest)
+		throws Exception {
+
+		long liveGroupId = ParamUtil.getLong(actionRequest, "liveGroupId");
 
 		String googleAnalyticsId = ParamUtil.getString(
-			req, "googleAnalyticsId");
+			actionRequest, "googleAnalyticsId");
 
 		Group liveGroup = GroupLocalServiceUtil.getGroup(liveGroupId);
 
@@ -656,14 +685,16 @@ public class EditPagesAction extends PortletAction {
 		GroupServiceUtil.updateGroup(liveGroupId, liveGroup.getTypeSettings());
 	}
 
-	protected void updateVirtualHost(ActionRequest req) throws Exception {
-		long liveGroupId = ParamUtil.getLong(req, "liveGroupId");
+	protected void updateVirtualHost(ActionRequest actionRequest)
+		throws Exception {
+
+		long liveGroupId = ParamUtil.getLong(actionRequest, "liveGroupId");
 
 		String publicVirtualHost = ParamUtil.getString(
-			req, "publicVirtualHost");
+			actionRequest, "publicVirtualHost");
 		String privateVirtualHost = ParamUtil.getString(
-			req, "privateVirtualHost");
-		String friendlyURL = ParamUtil.getString(req, "friendlyURL");
+			actionRequest, "privateVirtualHost");
+		String friendlyURL = ParamUtil.getString(actionRequest, "friendlyURL");
 
 		LayoutSetServiceUtil.updateVirtualHost(
 			liveGroupId, false, publicVirtualHost);
@@ -674,17 +705,21 @@ public class EditPagesAction extends PortletAction {
 		GroupServiceUtil.updateFriendlyURL(liveGroupId, friendlyURL);
 	}
 
-	protected void updateWorkflow(ActionRequest req) throws Exception {
-		long liveGroupId = ParamUtil.getLong(req, "liveGroupId");
+	protected void updateWorkflow(ActionRequest actionRequest)
+		throws Exception {
 
-		boolean workflowEnabled = ParamUtil.getBoolean(req, "workflowEnabled");
-		int workflowStages = ParamUtil.getInteger(req, "workflowStages");
+		long liveGroupId = ParamUtil.getLong(actionRequest, "liveGroupId");
+
+		boolean workflowEnabled = ParamUtil.getBoolean(
+			actionRequest, "workflowEnabled");
+		int workflowStages = ParamUtil.getInteger(
+			actionRequest, "workflowStages");
 
 		StringBuilder sb = new StringBuilder();
 
 		for (int i = 1; i <= workflowStages; i++) {
 			String workflowRoleName = ParamUtil.getString(
-				req, "workflowRoleName_" + i);
+				actionRequest, "workflowRoleName_" + i);
 
 			sb.append(workflowRoleName);
 

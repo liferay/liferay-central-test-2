@@ -66,7 +66,7 @@ public class CookieKeys {
 
 	public static final int VERSION = 0;
 
-	public static void addCookie(HttpServletResponse res, Cookie cookie) {
+	public static void addCookie(HttpServletResponse response, Cookie cookie) {
 		if (PropsValues.SESSION_ENABLE_PERSISTENT_COOKIES) {
 			if (!PropsValues.TCK_URL) {
 
@@ -94,18 +94,18 @@ public class CookieKeys {
 				// Setting a cookie will cause the TCK to lose its ability
 				// to track sessions
 
-				res.addCookie(cookie);
+				response.addCookie(cookie);
 			}
 		}
 	}
 
-	public static void addSupportCookie(HttpServletResponse res) {
+	public static void addSupportCookie(HttpServletResponse response) {
 		Cookie cookieSupportCookie = new Cookie(COOKIE_SUPPORT, "true");
 
 		cookieSupportCookie.setPath(StringPool.SLASH);
 		cookieSupportCookie.setMaxAge(MAX_AGE);
 
-		addCookie(res, cookieSupportCookie);
+		addCookie(response, cookieSupportCookie);
 	}
 
 	public static String getCookie(HttpServletRequest request, String name) {

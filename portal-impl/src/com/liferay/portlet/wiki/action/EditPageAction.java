@@ -69,48 +69,49 @@ import org.apache.struts.action.ActionMapping;
 public class EditPageAction extends PortletAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		WikiPage page = null;
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				page = updatePage(req);
+				page = updatePage(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deletePage(req);
+				deletePage(actionRequest);
 			}
 			else if (cmd.equals(Constants.REVERT)) {
-				revertPage(req);
+				revertPage(actionRequest);
 			}
 			else if (cmd.equals(Constants.SUBSCRIBE)) {
-				subscribePage(req);
+				subscribePage(actionRequest);
 			}
 			else if (cmd.equals(Constants.UNSUBSCRIBE)) {
-				unsubscribePage(req);
+				unsubscribePage(actionRequest);
 			}
 
 			if (Validator.isNotNull(cmd)) {
-				String redirect = ParamUtil.getString(req, "redirect");
+				String redirect = ParamUtil.getString(
+					actionRequest, "redirect");
 
 				if (page != null) {
 					boolean saveAndContinue = ParamUtil.getBoolean(
-						req, "saveAndContinue");
+						actionRequest, "saveAndContinue");
 
 					if (saveAndContinue) {
 						redirect = getSaveAndContinueRedirect(
-							config, req, page, redirect);
+							portletConfig, actionRequest, page, redirect);
 					}
 					else if (redirect.endsWith("title=")) {
 						redirect += page.getTitle();
 					}
 				}
 
-				sendRedirect(req, res, redirect);
+				sendRedirect(actionRequest, actionResponse, redirect);
 			}
 		}
 		catch (Exception e) {
@@ -118,18 +119,18 @@ public class EditPageAction extends PortletAction {
 				e instanceof NoSuchPageException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.wiki.error");
+				setForward(actionRequest, "portlet.wiki.error");
 			}
 			else if (e instanceof PageContentException ||
 					 e instanceof PageVersionException ||
 					 e instanceof PageTitleException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else if (e instanceof TagsEntryException) {
-				SessionErrors.add(req, e.getClass().getName(), e);
+				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 			}
 			else {
 				throw e;
@@ -138,20 +139,20 @@ public class EditPageAction extends PortletAction {
 	}
 
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getNode(req);
-			getPage(req);
+			ActionUtil.getNode(renderRequest);
+			getPage(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchNodeException ||
 				e instanceof PageTitleException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.wiki.error");
 			}
@@ -165,24 +166,27 @@ public class EditPageAction extends PortletAction {
 			}
 		}
 
-		return mapping.findForward(getForward(req, "portlet.wiki.edit_page"));
+		return mapping.findForward(
+			getForward(renderRequest, "portlet.wiki.edit_page"));
 	}
 
-	protected void deletePage(ActionRequest req) throws Exception {
-		long nodeId = ParamUtil.getLong(req, "nodeId");
-		String title = ParamUtil.getString(req, "title");
+	protected void deletePage(ActionRequest actionRequest) throws Exception {
+		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
+		String title = ParamUtil.getString(actionRequest, "title");
 
 		WikiPageServiceUtil.deletePage(nodeId, title);
 	}
 
-	protected void getPage(RenderRequest req) throws Exception {
-		long nodeId = ParamUtil.getLong(req, "nodeId");
-		String title = ParamUtil.getString(req, "title");
-		double version = ParamUtil.getDouble(req, "version");
-		boolean removeRedirect = ParamUtil.getBoolean(req, "removeRedirect");
+	protected void getPage(RenderRequest renderRequest) throws Exception {
+		long nodeId = ParamUtil.getLong(renderRequest, "nodeId");
+		String title = ParamUtil.getString(renderRequest, "title");
+		double version = ParamUtil.getDouble(renderRequest, "version");
+		boolean removeRedirect = ParamUtil.getBoolean(
+			renderRequest, "removeRedirect");
 
 		if (nodeId == 0) {
-			WikiNode node = (WikiNode)req.getAttribute(WebKeys.WIKI_NODE);
+			WikiNode node = (WikiNode)renderRequest.getAttribute(
+				WebKeys.WIKI_NODE);
 
 			if (node != null) {
 				nodeId = node.getNodeId();
@@ -212,23 +216,24 @@ public class EditPageAction extends PortletAction {
 			}
 		}
 
-		req.setAttribute(WebKeys.WIKI_PAGE, page);
+		renderRequest.setAttribute(WebKeys.WIKI_PAGE, page);
 	}
 
 	protected String getSaveAndContinueRedirect(
-			PortletConfig config, ActionRequest req, WikiPage page,
-			String redirect)
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			WikiPage page, String redirect)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
 
-		String originalRedirect = ParamUtil.getString(req, "originalRedirect");
+		String originalRedirect = ParamUtil.getString(
+			actionRequest, "originalRedirect");
 
 		PortletURLImpl portletURL = new PortletURLImpl(
-			(ActionRequestImpl)req, config.getPortletName(),
+			(ActionRequestImpl)actionRequest, portletConfig.getPortletName(),
 			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
 		portletURL.setWindowState(WindowState.MAXIMIZED);
@@ -246,53 +251,57 @@ public class EditPageAction extends PortletAction {
 		return portletURL.toString();
 	}
 
-	protected void revertPage(ActionRequest req) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+	protected void revertPage(ActionRequest actionRequest) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		PortletPreferences prefs = req.getPreferences();
+		PortletPreferences prefs = actionRequest.getPreferences();
 
-		long nodeId = ParamUtil.getLong(req, "nodeId");
-		String title = ParamUtil.getString(req, "title");
-		double version = ParamUtil.getDouble(req, "version");
+		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
+		String title = ParamUtil.getString(actionRequest, "title");
+		double version = ParamUtil.getDouble(actionRequest, "version");
 
 		WikiPageServiceUtil.revertPage(
 			nodeId, title, version, prefs, themeDisplay);
 	}
 
-	protected void subscribePage(ActionRequest req) throws Exception {
-		long nodeId = ParamUtil.getLong(req, "nodeId");
-		String title = ParamUtil.getString(req, "title");
+	protected void subscribePage(ActionRequest actionRequest) throws Exception {
+		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
+		String title = ParamUtil.getString(actionRequest, "title");
 
 		WikiPageServiceUtil.subscribePage(nodeId, title);
 	}
 
-	protected void unsubscribePage(ActionRequest req) throws Exception {
-		long nodeId = ParamUtil.getLong(req, "nodeId");
-		String title = ParamUtil.getString(req, "title");
+	protected void unsubscribePage(ActionRequest actionRequest)
+		throws Exception {
+
+		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
+		String title = ParamUtil.getString(actionRequest, "title");
 
 		WikiPageServiceUtil.unsubscribePage(nodeId, title);
 	}
 
-	protected WikiPage updatePage(ActionRequest req) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+	protected WikiPage updatePage(ActionRequest actionRequest)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		PortletPreferences prefs = req.getPreferences();
+		PortletPreferences prefs = actionRequest.getPreferences();
 
-		long nodeId = ParamUtil.getLong(req, "nodeId");
-		String title = ParamUtil.getString(req, "title");
-		double version = ParamUtil.getDouble(req, "version");
+		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
+		String title = ParamUtil.getString(actionRequest, "title");
+		double version = ParamUtil.getDouble(actionRequest, "version");
 
-		String content = ParamUtil.getString(req, "content");
-		String summary = ParamUtil.getString(req, "summary");
-		boolean minorEdit = ParamUtil.getBoolean(req, "minorEdit");
-		String format = ParamUtil.getString(req, "format");
-		String parentTitle = ParamUtil.getString(req, "parentTitle");
+		String content = ParamUtil.getString(actionRequest, "content");
+		String summary = ParamUtil.getString(actionRequest, "summary");
+		boolean minorEdit = ParamUtil.getBoolean(actionRequest, "minorEdit");
+		String format = ParamUtil.getString(actionRequest, "format");
+		String parentTitle = ParamUtil.getString(actionRequest, "parentTitle");
 		String redirectTitle = null;
 
 		String[] tagsEntries = StringUtil.split(
-			ParamUtil.getString(req, "tagsEntries"));
+			ParamUtil.getString(actionRequest, "tagsEntries"));
 
 		return WikiPageServiceUtil.updatePage(
 			nodeId, title, version, content, summary, minorEdit, format,

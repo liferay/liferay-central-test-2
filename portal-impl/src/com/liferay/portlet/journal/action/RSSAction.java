@@ -93,7 +93,7 @@ import org.dom4j.XPath;
 public class RSSAction extends PortletAction {
 
 	public void serveResource(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ResourceRequest req, ResourceResponse res)
 		throws Exception {
 

@@ -49,9 +49,11 @@ public class DynamicFilterConfig implements FilterConfig {
 		}
 	}
 
-	public DynamicFilterConfig(String filterName, ServletContext ctx) {
+	public DynamicFilterConfig(
+		String filterName, ServletContext servletContext) {
+
 		_filterName = filterName;
-		_ctx = ctx;
+		_servletContext = servletContext;
 	}
 
 	public String getFilterName() {
@@ -59,7 +61,7 @@ public class DynamicFilterConfig implements FilterConfig {
 	}
 
 	public ServletContext getServletContext() {
-		return _ctx;
+		return _servletContext;
 	}
 
 	public void addInitParameter(String name, String value) {
@@ -75,7 +77,7 @@ public class DynamicFilterConfig implements FilterConfig {
 	}
 
 	private String _filterName;
-	private ServletContext _ctx;
+	private ServletContext _servletContext;
 	private Map<String, String> _parameters =
 		new LinkedHashMap<String, String>();
 

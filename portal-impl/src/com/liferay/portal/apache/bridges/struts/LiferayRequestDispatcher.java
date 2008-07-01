@@ -51,34 +51,44 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LiferayRequestDispatcher implements RequestDispatcher {
 
-	public LiferayRequestDispatcher(RequestDispatcher rd, String path) {
-		_rd = rd;
+	public LiferayRequestDispatcher(
+		RequestDispatcher requestDispatcher, String path) {
+
+		_requestDispatcher = requestDispatcher;
 		_path = path;
 	}
 
-	public void forward(ServletRequest req, ServletResponse res)
+	public void forward(
+			ServletRequest servletRequest, ServletResponse servletResponse)
 		throws IOException, ServletException {
 
-		if (req.getAttribute(JavaConstants.JAVAX_PORTLET_REQUEST) != null) {
-			invoke(req, res, false);
+		if (servletRequest.getAttribute(JavaConstants.JAVAX_PORTLET_REQUEST) !=
+				null) {
+
+			invoke(servletRequest, servletResponse, false);
 		}
 		else {
-			_rd.forward(req, res);
+			_requestDispatcher.forward(servletRequest, servletResponse);
 		}
 	}
 
-	public void include(ServletRequest req, ServletResponse res)
+	public void include(
+			ServletRequest servletRequest, ServletResponse servletResponse)
 		throws IOException, ServletException {
 
-		if (req.getAttribute(JavaConstants.JAVAX_PORTLET_REQUEST) != null) {
-			invoke(req, res, true);
+		if (servletRequest.getAttribute(JavaConstants.JAVAX_PORTLET_REQUEST) !=
+				null) {
+
+			invoke(servletRequest, servletResponse, true);
 		}
 		else {
-			_rd.include(req, res);
+			_requestDispatcher.include(servletRequest, servletResponse);
 		}
 	}
 
-	public void invoke(ServletRequest req, ServletResponse res, boolean include)
+	public void invoke(
+			ServletRequest servletRequest, ServletResponse servletResponse,
+			boolean include)
 		throws IOException, ServletException {
 
 		String pathInfo = null;
@@ -86,11 +96,13 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 		String requestURI = null;
 		String servletPath = null;
 
-		PortletRequestImpl portletReq = (PortletRequestImpl)req.getAttribute(
-			JavaConstants.JAVAX_PORTLET_REQUEST);
+		PortletRequestImpl portletRequestImpl =
+			(PortletRequestImpl)servletRequest.getAttribute(
+				JavaConstants.JAVAX_PORTLET_REQUEST);
 
-		PortletResponseImpl portletRes = (PortletResponseImpl)req.getAttribute(
-			JavaConstants.JAVAX_PORTLET_RESPONSE);
+		PortletResponseImpl portletResponseImpl =
+			(PortletResponseImpl)servletRequest.getAttribute(
+				JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 		if (_path != null) {
 			String pathNoQueryString = _path;
@@ -102,7 +114,7 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 				queryString = _path.substring(pos + 1, _path.length());
 			}
 
-			Portlet portlet = portletReq.getPortlet();
+			Portlet portlet = portletRequestImpl.getPortlet();
 
 			PortletApp portletApp = portlet.getPortletApp();
 
@@ -129,25 +141,30 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 				servletPath = pathNoQueryString;
 			}
 
-			requestURI = portletReq.getContextPath() + pathNoQueryString;
+			requestURI =
+				portletRequestImpl.getContextPath() + pathNoQueryString;
 		}
 
-		PortletServletRequest portletServletReq = new PortletServletRequest(
-			(HttpServletRequest)req, portletReq, pathInfo, queryString,
-			requestURI, servletPath, false, include);
+		PortletServletRequest portletServletRequest = new PortletServletRequest(
+			(HttpServletRequest)servletRequest, portletRequestImpl, pathInfo,
+			queryString, requestURI, servletPath, false, include);
 
-		PortletServletResponse portletServletRes = new PortletServletResponse(
-			(HttpServletResponse)res, portletRes, include);
+		PortletServletResponse portletServletResponse =
+			new PortletServletResponse(
+				(HttpServletResponse)servletResponse, portletResponseImpl,
+				include);
 
 		if (include) {
-			_rd.include(portletServletReq, portletServletRes);
+			_requestDispatcher.include(
+				portletServletRequest, portletServletResponse);
 		}
 		else {
-			_rd.forward(portletServletReq, portletServletRes);
+			_requestDispatcher.forward(
+				portletServletRequest, portletServletResponse);
 		}
 	}
 
-	private RequestDispatcher _rd;
+	private RequestDispatcher _requestDispatcher;
 	private String _path;
 
 }

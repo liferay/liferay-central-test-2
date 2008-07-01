@@ -215,23 +215,23 @@ public class UpdateLayoutAction extends Action {
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(
 					companyId, portletId);
 
-				DynamicServletRequest dynamicReq = null;
+				DynamicServletRequest dynamicRequest = null;
 
 				if (portlet.isPrivateRequestAttributes()) {
 					String portletNamespace =
 						PortalUtil.getPortletNamespace(portlet.getPortletId());
 
-					dynamicReq = new NamespaceServletRequest(
+					dynamicRequest = new NamespaceServletRequest(
 						request, portletNamespace, portletNamespace);
 				}
 				else {
-					dynamicReq = new DynamicServletRequest(request);
+					dynamicRequest = new DynamicServletRequest(request);
 				}
 
-				dynamicReq.setParameter("p_p_id", portletId);
+				dynamicRequest.setParameter("p_p_id", portletId);
 
 				renderPortletAction.execute(
-					mapping, form, dynamicReq, response);
+					mapping, form, dynamicRequest, response);
 			}
 
 			return null;

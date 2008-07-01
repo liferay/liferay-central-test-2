@@ -52,13 +52,13 @@ public abstract class MimeResponseImpl
 	}
 
 	public void flushBuffer() throws IOException {
-		_res.flushBuffer();
+		_response.flushBuffer();
 
 		_calledFlushBuffer = true;
 	}
 
 	public int getBufferSize() {
-		return _res.getBufferSize();
+		return _response.getBufferSize();
 	}
 
 	public CacheControl getCacheControl() {
@@ -66,7 +66,7 @@ public abstract class MimeResponseImpl
 	}
 
 	public String getCharacterEncoding() {
-		return _res.getCharacterEncoding();
+		return _response.getCharacterEncoding();
 	}
 
 	public String getContentType() {
@@ -74,7 +74,7 @@ public abstract class MimeResponseImpl
 	}
 
 	public Locale getLocale() {
-		return _req.getLocale();
+		return _portletRequestImpl.getLocale();
 	}
 
 	public OutputStream getPortletOutputStream() throws IOException {
@@ -88,7 +88,7 @@ public abstract class MimeResponseImpl
 
 		_calledGetPortletOutputStream = true;
 
-		return _res.getOutputStream();
+		return _response.getOutputStream();
 	}
 
 	public PrintWriter getWriter() throws IOException {
@@ -102,7 +102,7 @@ public abstract class MimeResponseImpl
 
 		_calledGetWriter = true;
 
-		return _res.getWriter();
+		return _response.getWriter();
 	}
 
 	public boolean isCalledGetPortletOutputStream() {
@@ -121,11 +121,11 @@ public abstract class MimeResponseImpl
 	}
 
 	public void resetBuffer() {
-		_res.resetBuffer();
+		_response.resetBuffer();
 	}
 
 	public void setBufferSize(int size) {
-		_res.setBufferSize(size);
+		_response.setBufferSize(size);
 	}
 
 	public void setContentType(String contentType) {
@@ -133,12 +133,13 @@ public abstract class MimeResponseImpl
 			throw new IllegalArgumentException();
 		}
 
-		Enumeration<String> enu = _req.getResponseContentTypes();
+		Enumeration<String> enu = _portletRequestImpl.getResponseContentTypes();
 
 		boolean valid = false;
 
 		if (getLifecycle().equals(PortletRequest.RESOURCE_PHASE) ||
-			_req.getWindowState().equals(LiferayWindowState.EXCLUSIVE)) {
+			_portletRequestImpl.getWindowState().equals(
+				LiferayWindowState.EXCLUSIVE)) {
 
 			valid = true;
 		}
@@ -162,28 +163,28 @@ public abstract class MimeResponseImpl
 	}
 
 	protected void init(
-		PortletRequestImpl req, HttpServletResponse res, String portletName,
-		long companyId, long plid) {
+		PortletRequestImpl portletRequestImpl, HttpServletResponse response,
+		String portletName, long companyId, long plid) {
 
-		super.init(req, res, portletName, companyId, plid);
+		super.init(portletRequestImpl, response, portletName, companyId, plid);
 
-		_req = req;
-		_res = res;
+		_portletRequestImpl = portletRequestImpl;
+		_response = response;
 	}
 
 	protected void recycle() {
 		super.recycle();
 
-		_req = null;
-		_res = null;
+		_portletRequestImpl = null;
+		_response = null;
 		_contentType = null;
 		_calledGetPortletOutputStream = false;
 		_calledGetWriter = false;
 		_calledFlushBuffer = true;
 	}
 
-	private PortletRequestImpl _req;
-	private HttpServletResponse _res;
+	private PortletRequestImpl _portletRequestImpl;
+	private HttpServletResponse _response;
 	private String _contentType;
 	private boolean _calledGetPortletOutputStream;
  	private boolean _calledGetWriter;

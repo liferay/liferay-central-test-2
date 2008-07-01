@@ -30,9 +30,9 @@ String baseDN = ParamUtil.getString(request, "baseDN");
 String principal = ParamUtil.getString(request, "principal");
 String credentials = ParamUtil.getString(request, "credentials");
 
-LdapContext ctx = PortalLDAPUtil.getContext(themeDisplay.getCompanyId(), baseProviderURL, principal, credentials);
+LdapContext ldapContext = PortalLDAPUtil.getContext(themeDisplay.getCompanyId(), baseProviderURL, principal, credentials);
 
-if (ctx == null) {
+if (ldapContext == null) {
 %>
 
 	<liferay-ui:message key="liferay-has-failed-to-connect-to-the-ldap-server" />
@@ -43,7 +43,7 @@ if (ctx == null) {
 
 String groupFilter = ParamUtil.getString(request, "importGroupSearchFilter");
 
-NamingEnumeration enu = PortalLDAPUtil.getGroups(themeDisplay.getCompanyId(), ctx, 20, baseDN, groupFilter);
+NamingEnumeration enu = PortalLDAPUtil.getGroups(themeDisplay.getCompanyId(), ldapContext, 20, baseDN, groupFilter);
 
 String groupMappingsParam =
 	"groupName=" + ParamUtil.getString(request, "groupMappingGroupName") +
@@ -133,7 +133,7 @@ if (counter == 0) {
 </table>
 
 <%
-if (ctx != null) {
-	ctx.close();
+if (ldapContext != null) {
+	ldapContext.close();
 }
 %>

@@ -78,27 +78,27 @@ import org.json.JSONObject;
 public class EditEntryAction extends PortletAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			BlogsEntry entry = null;
 			String oldUrlTitle = StringPool.BLANK;
 
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				Object[] returnValue = updateEntry(req);
+				Object[] returnValue = updateEntry(actionRequest);
 
 				entry = (BlogsEntry)returnValue[0];
 				oldUrlTitle = ((String)returnValue[1]);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteEntry(req);
+				deleteEntry(actionRequest);
 			}
 
-			String redirect = ParamUtil.getString(req, "redirect");
+			String redirect = ParamUtil.getString(actionRequest, "redirect");
 			boolean updateRedirect = false;
 
 			if ((entry != null) && (Validator.isNotNull(oldUrlTitle)) &&
@@ -132,29 +132,32 @@ public class EditEntryAction extends PortletAction {
 				JSONUtil.put(jsonObj, "redirect", redirect);
 				JSONUtil.put(jsonObj, "updateRedirect", updateRedirect);
 
-				HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(
-					res);
+				HttpServletResponse response =
+					PortalUtil.getHttpServletResponse(actionResponse);
 				InputStream is = new ByteArrayInputStream(
 					jsonObj.toString().getBytes());
 				String contentType = ContentTypes.TEXT_JAVASCRIPT;
 
 				ServletResponseUtil.sendFile(
-					httpRes, null, is, contentType);
+					response, null, is, contentType);
 
-				setForward(req, ActionConstants.COMMON_NULL);
+				setForward(actionRequest, ActionConstants.COMMON_NULL);
 			}
 			else {
-				ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
-					WebKeys.THEME_DISPLAY);
+				ThemeDisplay themeDisplay =
+					(ThemeDisplay)actionRequest.getAttribute(
+						WebKeys.THEME_DISPLAY);
 
 				LayoutTypePortlet layoutTypePortlet =
 					themeDisplay.getLayoutTypePortlet();
 
-				if (layoutTypePortlet.hasPortletId(config.getPortletName())) {
-					sendRedirect(req, res, redirect);
+				if (layoutTypePortlet.hasPortletId(
+						portletConfig.getPortletName())) {
+
+					sendRedirect(actionRequest, actionResponse, redirect);
 				}
 				else {
-					res.sendRedirect(redirect);
+					actionResponse.sendRedirect(redirect);
 				}
 			}
 		}
@@ -162,18 +165,18 @@ public class EditEntryAction extends PortletAction {
 			if (e instanceof NoSuchEntryException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.blogs.error");
+				setForward(actionRequest, "portlet.blogs.error");
 			}
 			else if (e instanceof EntryContentException ||
 					 e instanceof EntryDisplayDateException ||
 					 e instanceof EntryTitleException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else if (e instanceof TagsEntryException) {
-				SessionErrors.add(req, e.getClass().getName(), e);
+				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 			}
 			else {
 				throw e;
@@ -182,18 +185,18 @@ public class EditEntryAction extends PortletAction {
 	}
 
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getEntry(req);
+			ActionUtil.getEntry(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchEntryException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.blogs.error");
 			}
@@ -202,44 +205,54 @@ public class EditEntryAction extends PortletAction {
 			}
 		}
 
-		return mapping.findForward(getForward(req, "portlet.blogs.edit_entry"));
+		return mapping.findForward(
+			getForward(renderRequest, "portlet.blogs.edit_entry"));
 	}
 
-	protected void deleteEntry(ActionRequest req) throws Exception {
-		long entryId = ParamUtil.getLong(req, "entryId");
+	protected void deleteEntry(ActionRequest actionRequest) throws Exception {
+		long entryId = ParamUtil.getLong(actionRequest, "entryId");
 
 		BlogsEntryServiceUtil.deleteEntry(entryId);
 	}
 
-	protected Object[] updateEntry(ActionRequest req) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+	protected Object[] updateEntry(ActionRequest actionRequest)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
 
-		long entryId = ParamUtil.getLong(req, "entryId");
+		long entryId = ParamUtil.getLong(actionRequest, "entryId");
 
-		String title = ParamUtil.getString(req, "title");
-		String content = ParamUtil.getString(req, "content");
+		String title = ParamUtil.getString(actionRequest, "title");
+		String content = ParamUtil.getString(actionRequest, "content");
 
-		int displayDateMonth = ParamUtil.getInteger(req, "displayDateMonth");
-		int displayDateDay = ParamUtil.getInteger(req, "displayDateDay");
-		int displayDateYear = ParamUtil.getInteger(req, "displayDateYear");
-		int displayDateHour = ParamUtil.getInteger(req, "displayDateHour");
-		int displayDateMinute = ParamUtil.getInteger(req, "displayDateMinute");
-		int displayDateAmPm = ParamUtil.getInteger(req, "displayDateAmPm");
+		int displayDateMonth = ParamUtil.getInteger(
+			actionRequest, "displayDateMonth");
+		int displayDateDay = ParamUtil.getInteger(
+			actionRequest, "displayDateDay");
+		int displayDateYear = ParamUtil.getInteger(
+			actionRequest, "displayDateYear");
+		int displayDateHour = ParamUtil.getInteger(
+			actionRequest, "displayDateHour");
+		int displayDateMinute = ParamUtil.getInteger(
+			actionRequest, "displayDateMinute");
+		int displayDateAmPm = ParamUtil.getInteger(
+			actionRequest, "displayDateAmPm");
 
 		if (displayDateAmPm == Calendar.PM) {
 			displayDateHour += 12;
 		}
 
-		boolean draft = ParamUtil.getBoolean(req, "draft");
-		boolean allowTrackbacks = ParamUtil.getBoolean(req, "allowTrackbacks");
+		boolean draft = ParamUtil.getBoolean(actionRequest, "draft");
+		boolean allowTrackbacks = ParamUtil.getBoolean(
+			actionRequest, "allowTrackbacks");
 		String[] trackbacks = StringUtil.split(
-			ParamUtil.getString(req, "trackbacks"));
+			ParamUtil.getString(actionRequest, "trackbacks"));
 
 		String[] tagsEntries = StringUtil.split(
-			ParamUtil.getString(req, "tagsEntries"));
+			ParamUtil.getString(actionRequest, "tagsEntries"));
 
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
@@ -260,7 +273,8 @@ public class EditEntryAction extends PortletAction {
 
 			if (!draft) {
 				AssetPublisherUtil.addAndStoreSelection(
-					req, BlogsEntry.class.getName(), entry.getEntryId(), -1);
+					actionRequest, BlogsEntry.class.getName(),
+					entry.getEntryId(), -1);
 			}
 		}
 		else {
@@ -283,7 +297,8 @@ public class EditEntryAction extends PortletAction {
 
 			if (oldDraft && !draft) {
 				AssetPublisherUtil.addAndStoreSelection(
-					req, BlogsEntry.class.getName(), entry.getEntryId(), -1);
+					actionRequest, BlogsEntry.class.getName(),
+					entry.getEntryId(), -1);
 			}
 		}
 

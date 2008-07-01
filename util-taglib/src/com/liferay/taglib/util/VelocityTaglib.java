@@ -77,18 +77,18 @@ public class VelocityTaglib {
 	}
 
 	public VelocityTaglib(
-		ServletContext ctx, HttpServletRequest request,
+		ServletContext servletContext, HttpServletRequest request,
 		StringServletResponse stringResponse, PageContext pageContext) {
 
-		init(ctx, request, stringResponse, pageContext);
+		init(servletContext, request, stringResponse, pageContext);
 	}
 
 	public VelocityTaglib init(
-		ServletContext ctx, HttpServletRequest request,
+		ServletContext servletContext, HttpServletRequest request,
 		StringServletResponse stringResponse, PageContext pageContext) {
 
-		_ctx = ctx;
-		_req = request;
+		_servletContext = servletContext;
+		_request = request;
 		_stringResponse = stringResponse;
 		_pageContext = pageContext;
 
@@ -153,7 +153,7 @@ public class VelocityTaglib {
 	public String iconBack() throws Exception {
 		_stringResponse.recycle();
 
-		IconBackTag.doTag(_ctx, _req, _stringResponse);
+		IconBackTag.doTag(_servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -161,7 +161,7 @@ public class VelocityTaglib {
 	public String iconBack(String page) throws Exception {
 		_stringResponse.recycle();
 
-		IconBackTag.doTag(page, _ctx, _req, _stringResponse);
+		IconBackTag.doTag(page, _servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -169,7 +169,7 @@ public class VelocityTaglib {
 	public String iconClose() throws Exception {
 		_stringResponse.recycle();
 
-		IconCloseTag.doTag(_ctx, _req, _stringResponse);
+		IconCloseTag.doTag(_servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -177,7 +177,7 @@ public class VelocityTaglib {
 	public String iconClose(String page) throws Exception {
 		_stringResponse.recycle();
 
-		IconCloseTag.doTag(page, _ctx, _req, _stringResponse);
+		IconCloseTag.doTag(page, _servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -185,7 +185,7 @@ public class VelocityTaglib {
 	public String iconConfiguration() throws Exception {
 		_stringResponse.recycle();
 
-		IconConfigurationTag.doTag(_ctx, _req, _stringResponse);
+		IconConfigurationTag.doTag(_servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -193,7 +193,8 @@ public class VelocityTaglib {
 	public String iconConfiguration(String page) throws Exception {
 		_stringResponse.recycle();
 
-		IconConfigurationTag.doTag(page, _ctx, _req, _stringResponse);
+		IconConfigurationTag.doTag(
+			page, _servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -201,7 +202,7 @@ public class VelocityTaglib {
 	public String iconEdit() throws Exception {
 		_stringResponse.recycle();
 
-		IconEditTag.doTag(_ctx, _req, _stringResponse);
+		IconEditTag.doTag(_servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -209,7 +210,7 @@ public class VelocityTaglib {
 	public String iconEdit(String page) throws Exception {
 		_stringResponse.recycle();
 
-		IconEditTag.doTag(page, _ctx, _req, _stringResponse);
+		IconEditTag.doTag(page, _servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -217,7 +218,7 @@ public class VelocityTaglib {
 	public String iconEditDefaults() throws Exception {
 		_stringResponse.recycle();
 
-		IconEditDefaultsTag.doTag(_ctx, _req, _stringResponse);
+		IconEditDefaultsTag.doTag(_servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -225,7 +226,7 @@ public class VelocityTaglib {
 	public String iconEditGuest() throws Exception {
 		_stringResponse.recycle();
 
-		IconEditGuestTag.doTag(_ctx, _req, _stringResponse);
+		IconEditGuestTag.doTag(_servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -233,7 +234,8 @@ public class VelocityTaglib {
 	public String iconEditGuest(String page) throws Exception {
 		_stringResponse.recycle();
 
-		IconEditGuestTag.doTag(page, _ctx, _req, _stringResponse);
+		IconEditGuestTag.doTag(
+			page, _servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -241,7 +243,7 @@ public class VelocityTaglib {
 	public String iconHelp() throws Exception {
 		_stringResponse.recycle();
 
-		IconHelpTag.doTag(_ctx, _req, _stringResponse);
+		IconHelpTag.doTag(_servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -249,7 +251,7 @@ public class VelocityTaglib {
 	public String iconHelp(String page) throws Exception {
 		_stringResponse.recycle();
 
-		IconHelpTag.doTag(page, _ctx, _req, _stringResponse);
+		IconHelpTag.doTag(page, _servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -257,7 +259,7 @@ public class VelocityTaglib {
 	public String iconMaximize() throws Exception {
 		_stringResponse.recycle();
 
-		IconMaximizeTag.doTag(_ctx, _req, _stringResponse);
+		IconMaximizeTag.doTag(_servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -265,7 +267,7 @@ public class VelocityTaglib {
 	public String iconMaximize(String page) throws Exception {
 		_stringResponse.recycle();
 
-		IconMaximizeTag.doTag(page, _ctx, _req, _stringResponse);
+		IconMaximizeTag.doTag(page, _servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -273,7 +275,7 @@ public class VelocityTaglib {
 	public String iconMinimize() throws Exception {
 		_stringResponse.recycle();
 
-		IconMinimizeTag.doTag(_ctx, _req, _stringResponse);
+		IconMinimizeTag.doTag(_servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -281,7 +283,7 @@ public class VelocityTaglib {
 	public String iconMinimize(String page) throws Exception {
 		_stringResponse.recycle();
 
-		IconMinimizeTag.doTag(page, _ctx, _req, _stringResponse);
+		IconMinimizeTag.doTag(page, _servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -289,7 +291,7 @@ public class VelocityTaglib {
 	public String iconPortlet() throws Exception {
 		_stringResponse.recycle();
 
-		IconPortletTag.doTag(_ctx, _req, _stringResponse);
+		IconPortletTag.doTag(_servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -297,7 +299,7 @@ public class VelocityTaglib {
 	public String iconPortlet(String page) throws Exception {
 		_stringResponse.recycle();
 
-		IconPortletTag.doTag(page, _ctx, _req, _stringResponse);
+		IconPortletTag.doTag(page, _servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -305,7 +307,7 @@ public class VelocityTaglib {
 	public String iconPortletCss() throws Exception {
 		_stringResponse.recycle();
 
-		IconPortletCssTag.doTag(_ctx, _req, _stringResponse);
+		IconPortletCssTag.doTag(_servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -313,7 +315,8 @@ public class VelocityTaglib {
 	public String iconPortletCss(String page) throws Exception {
 		_stringResponse.recycle();
 
-		IconPortletCssTag.doTag(page, _ctx, _req, _stringResponse);
+		IconPortletCssTag.doTag(
+			page, _servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -321,7 +324,7 @@ public class VelocityTaglib {
 	public String iconPrint() throws Exception {
 		_stringResponse.recycle();
 
-		IconPrintTag.doTag(_ctx, _req, _stringResponse);
+		IconPrintTag.doTag(_servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -329,7 +332,7 @@ public class VelocityTaglib {
 	public String iconPrint(String page) throws Exception {
 		_stringResponse.recycle();
 
-		IconPrintTag.doTag(page, _ctx, _req, _stringResponse);
+		IconPrintTag.doTag(page, _servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -337,7 +340,7 @@ public class VelocityTaglib {
 	public String iconRefresh() throws Exception {
 		_stringResponse.recycle();
 
-		IconRefreshTag.doTag(_ctx, _req, _stringResponse);
+		IconRefreshTag.doTag(_servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -345,7 +348,7 @@ public class VelocityTaglib {
 	public String iconRefresh(String page) throws Exception {
 		_stringResponse.recycle();
 
-		IconRefreshTag.doTag(page, _ctx, _req, _stringResponse);
+		IconRefreshTag.doTag(page, _servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -353,9 +356,10 @@ public class VelocityTaglib {
 	public String include(String page) throws Exception {
 		_stringResponse.recycle();
 
-		RequestDispatcher rd = _ctx.getRequestDispatcher(page);
+		RequestDispatcher requestDispatcher =
+			_servletContext.getRequestDispatcher(page);
 
-		rd.include(_req, _stringResponse);
+		requestDispatcher.include(_request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -363,7 +367,8 @@ public class VelocityTaglib {
 	public String journalContentSearch() throws Exception {
 		_stringResponse.recycle();
 
-		JournalContentSearchTag.doTag(_ctx, _req, _stringResponse);
+		JournalContentSearchTag.doTag(
+			_servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -371,7 +376,7 @@ public class VelocityTaglib {
 	public String language() throws Exception {
 		_stringResponse.recycle();
 
-		LanguageTag.doTag(_ctx, _req, _stringResponse);
+		LanguageTag.doTag(_servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -383,8 +388,8 @@ public class VelocityTaglib {
 		_stringResponse.recycle();
 
 		LanguageTag.doTag(
-			formName, formAction, name, null, displayStyle, _ctx, _req,
-			_stringResponse);
+			formName, formAction, name, null, displayStyle, _servletContext,
+			_request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -397,8 +402,8 @@ public class VelocityTaglib {
 		_stringResponse.recycle();
 
 		LanguageTag.doTag(
-			formName, formAction, name, languageIds, displayStyle, _ctx, _req,
-			_stringResponse);
+			formName, formAction, name, languageIds, displayStyle,
+			_servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -411,8 +416,8 @@ public class VelocityTaglib {
 		_stringResponse.recycle();
 
 		LanguageTag.doTag(
-			page, formName, formAction, name, null, displayStyle, _ctx, _req,
-			_stringResponse);
+			page, formName, formAction, name, null, displayStyle,
+			_servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -425,8 +430,8 @@ public class VelocityTaglib {
 		_stringResponse.recycle();
 
 		LanguageTag.doTag(
-			page, formName, formAction, name, languageIds, displayStyle, _ctx,
-			_req, _stringResponse);
+			page, formName, formAction, name, languageIds, displayStyle,
+			_servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -434,7 +439,7 @@ public class VelocityTaglib {
 	public String layoutIcon(Layout layout) throws Exception {
 		_stringResponse.recycle();
 
-		LayoutIconTag.doTag(layout, _ctx, _req, _stringResponse);
+		LayoutIconTag.doTag(layout, _servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -442,7 +447,7 @@ public class VelocityTaglib {
 	public String metaTags() throws Exception {
 		_stringResponse.recycle();
 
-		MetaTagsTag.doTag(_ctx, _req, _stringResponse);
+		MetaTagsTag.doTag(_servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -450,7 +455,7 @@ public class VelocityTaglib {
 	public String myPlaces() throws Exception {
 		_stringResponse.recycle();
 
-		MyPlacesTag.doTag(_ctx, _req, _stringResponse);
+		MyPlacesTag.doTag(_servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -470,7 +475,8 @@ public class VelocityTaglib {
 
 		_stringResponse.recycle();
 
-		PngImageTag.doTag(image, height, width, _ctx, _req, _stringResponse);
+		PngImageTag.doTag(image, height, width, _servletContext, _request,
+			_stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -538,7 +544,8 @@ public class VelocityTaglib {
 		_stringResponse.recycle();
 
 		RuntimeTag.doTag(
-			portletName, queryString, null, _ctx, _req, _stringResponse);
+			portletName, queryString, null, _servletContext, _request,
+			_stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -550,8 +557,8 @@ public class VelocityTaglib {
 		_stringResponse.recycle();
 
 		RuntimeTag.doTag(
-			portletName, queryString, defaultPreferences, null, _ctx, _req,
-			_stringResponse);
+			portletName, queryString, defaultPreferences, null, _servletContext,
+			_request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -559,7 +566,7 @@ public class VelocityTaglib {
 	public String search() throws Exception {
 		_stringResponse.recycle();
 
-		SearchTag.doTag(_ctx, _req, _stringResponse);
+		SearchTag.doTag(_servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -567,7 +574,7 @@ public class VelocityTaglib {
 	public String staging() throws Exception {
 		_stringResponse.recycle();
 
-		StagingTag.doTag(_ctx, _req, _stringResponse);
+		StagingTag.doTag(_servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -575,7 +582,7 @@ public class VelocityTaglib {
 	public String title() throws Exception {
 		_stringResponse.recycle();
 
-		TitleTag.doTag(_ctx, _req, _stringResponse);
+		TitleTag.doTag(_servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -583,7 +590,7 @@ public class VelocityTaglib {
 	public String title(boolean editable) throws Exception {
 		_stringResponse.recycle();
 
-		TitleTag.doTag(editable, _ctx, _req, _stringResponse);
+		TitleTag.doTag(editable, _servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -597,7 +604,8 @@ public class VelocityTaglib {
 
 		ToggleTag.doTag(
 			id, showImage, hideImage, showMessage, hideMessage,
-			defaultShowContent, null, _ctx, _req, _stringResponse);
+			defaultShowContent, null, _servletContext, _request,
+			_stringResponse);
 
 		return _stringResponse.getString();
 	}
@@ -608,11 +616,12 @@ public class VelocityTaglib {
 		_stringResponse.recycle();
 
 		return WrapPortletTag.doTag(
-			wrapPage, portletPage, _ctx, _req, _stringResponse, _pageContext);
+			wrapPage, portletPage, _servletContext, _request, _stringResponse,
+			_pageContext);
 	}
 
-	private ServletContext _ctx;
-	private HttpServletRequest _req;
+	private ServletContext _servletContext;
+	private HttpServletRequest _request;
 	private StringServletResponse _stringResponse;
 	private PageContext _pageContext;
 

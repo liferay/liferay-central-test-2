@@ -56,7 +56,7 @@ import org.apache.struts.action.ActionMapping;
 public class EditInstanceAction extends PortletAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
@@ -86,7 +86,7 @@ public class EditInstanceAction extends PortletAction {
 	}
 
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
@@ -124,9 +124,10 @@ public class EditInstanceAction extends PortletAction {
 			Company company = CompanyServiceUtil.addCompany(
 				webId, virtualHost, mx);
 
-			ServletContext ctx = (ServletContext)req.getAttribute(WebKeys.CTX);
+			ServletContext servletContext = (ServletContext)req.getAttribute(
+				WebKeys.CTX);
 
-			PortalInstances.initCompany(ctx, company.getWebId());
+			PortalInstances.initCompany(servletContext, company.getWebId());
 		}
 		else {
 

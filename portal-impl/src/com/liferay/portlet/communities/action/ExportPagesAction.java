@@ -62,30 +62,37 @@ import org.apache.struts.action.ActionMapping;
 public class ExportPagesAction extends PortletAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		try {
-			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
-				WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
-			long groupId = ParamUtil.getLong(req, "groupId");
-			boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
-			String fileName = ParamUtil.getString(req, "exportFileName");
-			boolean dateRange = ParamUtil.getBoolean(req, "dateRange");
+			long groupId = ParamUtil.getLong(actionRequest, "groupId");
+			boolean privateLayout = ParamUtil.getBoolean(
+				actionRequest, "privateLayout");
+			String fileName = ParamUtil.getString(
+				actionRequest, "exportFileName");
+			boolean dateRange = ParamUtil.getBoolean(
+				actionRequest, "dateRange");
 			Date startDate = null;
 			Date endDate = null;
 
 			if (dateRange) {
 				int startDateMonth = ParamUtil.getInteger(
-					req, "startDateMonth");
-				int startDateDay = ParamUtil.getInteger(req, "startDateDay");
-				int startDateYear = ParamUtil.getInteger(req, "startDateYear");
-				int startDateHour = ParamUtil.getInteger(req, "startDateHour");
+					actionRequest, "startDateMonth");
+				int startDateDay = ParamUtil.getInteger(
+					actionRequest, "startDateDay");
+				int startDateYear = ParamUtil.getInteger(
+					actionRequest, "startDateYear");
+				int startDateHour = ParamUtil.getInteger(
+					actionRequest, "startDateHour");
 				int startDateMinute = ParamUtil.getInteger(
-					req, "startDateMinute");
-				int startDateAmPm = ParamUtil.getInteger(req, "startDateAmPm");
+					actionRequest, "startDateMinute");
+				int startDateAmPm = ParamUtil.getInteger(
+					actionRequest, "startDateAmPm");
 
 				if (startDateAmPm == Calendar.PM) {
 					startDateHour += 12;
@@ -96,12 +103,18 @@ public class ExportPagesAction extends PortletAction {
 					startDateMinute, themeDisplay.getTimeZone(),
 					new PortalException());
 
-				int endDateMonth = ParamUtil.getInteger(req, "endDateMonth");
-				int endDateDay = ParamUtil.getInteger(req, "endDateDay");
-				int endDateYear = ParamUtil.getInteger(req, "endDateYear");
-				int endDateHour = ParamUtil.getInteger(req, "endDateHour");
-				int endDateMinute = ParamUtil.getInteger(req, "endDateMinute");
-				int endDateAmPm = ParamUtil.getInteger(req, "endDateAmPm");
+				int endDateMonth = ParamUtil.getInteger(
+					actionRequest, "endDateMonth");
+				int endDateDay = ParamUtil.getInteger(
+					actionRequest, "endDateDay");
+				int endDateYear = ParamUtil.getInteger(
+					actionRequest, "endDateYear");
+				int endDateHour = ParamUtil.getInteger(
+					actionRequest, "endDateHour");
+				int endDateMinute = ParamUtil.getInteger(
+					actionRequest, "endDateMinute");
+				int endDateAmPm = ParamUtil.getInteger(
+					actionRequest, "endDateAmPm");
 
 				if (endDateAmPm == Calendar.PM) {
 					endDateHour += 12;
@@ -114,15 +127,15 @@ public class ExportPagesAction extends PortletAction {
 			}
 
 			byte[] bytes = LayoutServiceUtil.exportLayouts(
-				groupId, privateLayout, req.getParameterMap(), startDate,
-				endDate);
+				groupId, privateLayout, actionRequest.getParameterMap(),
+				startDate, endDate);
 
-			HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(
-				res);
+			HttpServletResponse response = PortalUtil.getHttpServletResponse(
+				actionResponse);
 
-			ServletResponseUtil.sendFile(httpRes, fileName, bytes);
+			ServletResponseUtil.sendFile(response, fileName, bytes);
 
-			setForward(req, ActionConstants.COMMON_NULL);
+			setForward(actionRequest, ActionConstants.COMMON_NULL);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -130,18 +143,18 @@ public class ExportPagesAction extends PortletAction {
 	}
 
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getGroup(req);
+			ActionUtil.getGroup(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchGroupException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.communities.error");
 			}
@@ -151,7 +164,7 @@ public class ExportPagesAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(req, "portlet.communities.export_pages"));
+			getForward(renderRequest, "portlet.communities.export_pages"));
 	}
 
 	private static Log _log = LogFactory.getLog(ExportPagesAction.class);

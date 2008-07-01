@@ -122,10 +122,10 @@ public class WindowInvoker extends InvokerPortlet {
 
 	public WindowInvoker(
 			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
-			PortletContext portletCtx)
+			PortletContext portletContext)
 		throws PortletException {
 
-		super(portletModel, portlet, portletCtx);
+		super(portletModel, portlet, portletContext);
 
 		_portletModel = portletModel;
 		_container = _getContainer();
@@ -134,13 +134,13 @@ public class WindowInvoker extends InvokerPortlet {
 
 	public WindowInvoker(
 			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
-			PortletConfig portletConfig, PortletContext portletCtx,
+			PortletConfig portletConfig, PortletContext portletContext,
 			boolean facesPortlet, boolean strutsPortlet,
 			boolean strutsBridgePortlet)
 		throws PortletException {
 
 		super(
-			portletModel, portlet, portletConfig, portletCtx, facesPortlet,
+			portletModel, portlet, portletConfig, portletContext, facesPortlet,
 			strutsPortlet, strutsBridgePortlet);
 
 		_portletModel = portletModel;

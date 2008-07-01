@@ -193,16 +193,18 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 	}
 
 	public List<String> init(
-		ServletContext ctx, String themesPath, boolean loadFromServletContext,
-		String[] xmls, PluginPackage pluginPackage) {
+		ServletContext servletContext, String themesPath,
+		boolean loadFromServletContext, String[] xmls,
+		PluginPackage pluginPackage) {
 
 		return init(
-			null, ctx, themesPath, loadFromServletContext, xmls, pluginPackage);
+			null, servletContext, themesPath, loadFromServletContext, xmls,
+			pluginPackage);
 	}
 
 	public List<String> init(
-		String servletContextName, ServletContext ctx, String themesPath,
-		boolean loadFromServletContext, String[] xmls,
+		String servletContextName, ServletContext servletContext,
+		String themesPath, boolean loadFromServletContext, String[] xmls,
 		PluginPackage pluginPackage) {
 
 		List<String> themeIds = new ArrayList<String>();
@@ -210,8 +212,8 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 		try {
 			for (int i = 0; i < xmls.length; i++) {
 				Set<String> themes = _readThemes(
-					servletContextName, ctx, themesPath, loadFromServletContext,
-					xmls[i], pluginPackage);
+					servletContextName, servletContext, themesPath,
+					loadFromServletContext, xmls[i], pluginPackage);
 
 				Iterator<String> itr = themes.iterator();
 
@@ -406,8 +408,8 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 	}
 
 	private Set<String> _readThemes(
-			String servletContextName, ServletContext ctx, String themesPath,
-			boolean loadFromServletContext, String xml,
+			String servletContextName, ServletContext servletContext,
+			String themesPath, boolean loadFromServletContext, String xml,
 			PluginPackage pluginPackage)
 		throws DocumentException {
 
@@ -650,7 +652,7 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 
 				if (standardEl != null) {
 					LayoutTemplateLocalServiceUtil.readLayoutTemplate(
-						servletContextName, ctx, null,
+						servletContextName, servletContext, null,
 						new ElementImpl(standardEl), true, themeId,
 						pluginPackage);
 				}
@@ -659,7 +661,7 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 
 				if (customEl != null) {
 					LayoutTemplateLocalServiceUtil.readLayoutTemplate(
-						servletContextName, ctx, null,
+						servletContextName, servletContext, null,
 						new ElementImpl(customEl), false, themeId,
 						pluginPackage);
 				}

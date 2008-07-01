@@ -41,10 +41,10 @@ import javax.servlet.http.HttpServletResponseWrapper;
  */
 public class CompressionResponse extends HttpServletResponseWrapper {
 
-	public CompressionResponse(HttpServletResponse res) {
-		super(res);
+	public CompressionResponse(HttpServletResponse response) {
+		super(response);
 
-		_res = res;
+		_response = response;
 	}
 
 	public void finishResponse() {
@@ -97,10 +97,10 @@ public class CompressionResponse extends HttpServletResponseWrapper {
 	}
 
 	private ServletOutputStream _createOutputStream() throws IOException {
-		return new CompressionStream(_res);
+		return new CompressionStream(_response);
 	}
 
-	private HttpServletResponse _res = null;
+	private HttpServletResponse _response = null;
 	private ServletOutputStream _stream = null;
 	private PrintWriter _writer = null;
 

@@ -51,9 +51,10 @@ public class MetaTagsTag extends com.liferay.taglib.util.IncludeTag {
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
-		RequestDispatcher rd = servletContext.getRequestDispatcher(page);
+		RequestDispatcher requestDispatcher =
+			servletContext.getRequestDispatcher(page);
 
-		rd.include(request, response);
+		requestDispatcher.include(request, response);
 	}
 
 	public String getDefaultPage() {

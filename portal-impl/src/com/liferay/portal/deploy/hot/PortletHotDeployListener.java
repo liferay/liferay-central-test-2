@@ -170,9 +170,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		// Servlet context
 
-		ServletContext ctx = event.getServletContext();
+		ServletContext servletContext = event.getServletContext();
 
-		String servletContextName = ctx.getServletContextName();
+		String servletContextName = servletContext.getServletContextName();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking deploy for " + servletContextName);
@@ -185,13 +185,13 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		// Initialize portlets
 
 		String[] xmls = new String[] {
-			HttpUtil.URLtoString(ctx.getResource(
+			HttpUtil.URLtoString(servletContext.getResource(
 				"/WEB-INF/" + Portal.PORTLET_XML_FILE_NAME_STANDARD)),
-			HttpUtil.URLtoString(ctx.getResource(
+			HttpUtil.URLtoString(servletContext.getResource(
 				"/WEB-INF/" + Portal.PORTLET_XML_FILE_NAME_CUSTOM)),
-			HttpUtil.URLtoString(ctx.getResource(
+			HttpUtil.URLtoString(servletContext.getResource(
 				"/WEB-INF/liferay-portlet.xml")),
-			HttpUtil.URLtoString(ctx.getResource("/WEB-INF/web.xml"))
+			HttpUtil.URLtoString(servletContext.getResource("/WEB-INF/web.xml"))
 		};
 
 		if (xmls[0] == null) {
@@ -215,7 +215,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		ClassLoader portletClassLoader = event.getContextClassLoader();
 
-		ctx.setAttribute(
+		servletContext.setAttribute(
 			PortletServlet.PORTLET_CLASS_LOADER, portletClassLoader);
 
 		// Portlet context wrapper
@@ -227,25 +227,27 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		while (portletsItr.hasNext()) {
 			Portlet portlet = portletsItr.next();
 
-			initPortlet(portlet, ctx, portletClassLoader, portletsItr);
+			initPortlet(
+				portlet, servletContext, portletClassLoader, portletsItr);
 		}
 
 		// Struts bridges
 
 		if (!strutsBridges) {
 			strutsBridges = GetterUtil.getBoolean(
-				ctx.getInitParameter("struts-bridges-context-provider"));
+				servletContext.getInitParameter(
+					"struts-bridges-context-provider"));
 		}
 
 		if (strutsBridges) {
-			ctx.setAttribute(
+			servletContext.setAttribute(
 				ServletContextProvider.STRUTS_BRIDGES_CONTEXT_PROVIDER,
 				new LiferayServletContextProvider());
 		}
 
 		// Portlet display
 
-		String xml = HttpUtil.URLtoString(ctx.getResource(
+		String xml = HttpUtil.URLtoString(servletContext.getResource(
 			"/WEB-INF/liferay-display.xml"));
 
 		PortletCategory newPortletCategory =
@@ -274,7 +276,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		// Service builder properties
 
-		processServiceBuilderProperties(ctx, portletClassLoader);
+		processServiceBuilderProperties(servletContext, portletClassLoader);
 
 		// Variables
 
@@ -291,9 +293,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 	}
 
 	protected void doInvokeUndeploy(HotDeployEvent event) throws Exception {
-		ServletContext ctx = event.getServletContext();
+		ServletContext servletContext = event.getServletContext();
 
-		String servletContextName = ctx.getServletContextName();
+		String servletContextName = servletContext.getServletContextName();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking undeploy for " + servletContextName);
@@ -348,8 +350,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 	}
 
 	protected void initPortlet(
-			Portlet portlet, ServletContext ctx, ClassLoader portletClassLoader,
-			Iterator<Portlet> portletsItr)
+			Portlet portlet, ServletContext servletContext,
+			ClassLoader portletClassLoader, Iterator<Portlet> portletsItr)
 		throws Exception {
 
 		Class<?> portletClass = null;
@@ -513,7 +515,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		}
 
 		PortletBag portletBag = new PortletBag(
-			portlet.getPortletId(), ctx, portletInstance,
+			portlet.getPortletId(), servletContext, portletInstance,
 			configurationActionInstance, indexerInstance, schedulerInstance,
 			friendlyURLMapperInstance, urlEncoderInstance,
 			portletDataHandlerInstance, portletLayoutListenerInstance,
@@ -524,11 +526,11 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		PortletBagPool.put(portlet.getPortletId(), portletBag);
 
 		if (!portletsItr.hasNext()) {
-			initPortletApp(portlet, ctx, portletClassLoader);
+			initPortletApp(portlet, servletContext, portletClassLoader);
 		}
 
 		try {
-			PortletInstanceFactory.create(portlet, ctx);
+			PortletInstanceFactory.create(portlet, servletContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -536,15 +538,16 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 	}
 
 	protected void initPortletApp(
-			Portlet portlet, ServletContext ctx, ClassLoader portletClassLoader)
+			Portlet portlet, ServletContext servletContext,
+			ClassLoader portletClassLoader)
 		throws Exception {
 
-		String servletContextName = ctx.getServletContextName();
+		String servletContextName = servletContext.getServletContextName();
 
 		PortletConfig portletConfig = PortletConfigFactory.create(
-			portlet, ctx);
+			portlet, servletContext);
 
-		PortletContext portletCtx = portletConfig.getPortletContext();
+		PortletContext portletContext = portletConfig.getPortletContext();
 
 		PortletContextBag portletContextBag = new PortletContextBag(
 			servletContextName);
@@ -580,7 +583,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			portletContextBag.getPortletFilters().put(
 				portletFilter.getFilterName(), portletFilterInstance);
 
-			PortletFilterFactory.create(portletFilter, portletCtx);
+			PortletFilterFactory.create(portletFilter, portletContext);
 		}
 
 		Set<PortletURLListener> portletURLListeners =
@@ -670,7 +673,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 	}
 
 	protected void processServiceBuilderProperties(
-			ServletContext ctx, ClassLoader portletClassLoader)
+			ServletContext servletContext, ClassLoader portletClassLoader)
 		throws Exception {
 
 		Configuration serviceBuilderPropertiesConfiguration = null;
@@ -711,7 +714,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		}
 
 		ServiceComponentLocalServiceUtil.updateServiceComponent(
-			ctx, portletClassLoader, buildNamespace, buildNumber, buildDate);
+			servletContext, portletClassLoader, buildNamespace, buildNumber,
+			buildDate);
 	}
 
 	protected boolean strutsBridges;

@@ -74,28 +74,28 @@ import org.apache.struts.action.ActionMapping;
 public class EditFileEntryAction extends PortletAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		FileEntryForm fileEntryForm = (FileEntryForm)form;
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateFileEntry(fileEntryForm, req, res);
+				updateFileEntry(fileEntryForm, actionRequest, actionResponse);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteFileEntry(req);
+				deleteFileEntry(actionRequest);
 
-				sendRedirect(req, res);
+				sendRedirect(actionRequest, actionResponse);
 			}
 			else if (cmd.equals(Constants.LOCK)) {
-				lockFileEntry(req);
+				lockFileEntry(actionRequest);
 			}
 			else if (cmd.equals(Constants.UNLOCK)) {
-				unlockFileEntry(req);
+				unlockFileEntry(actionRequest);
 			}
 		}
 		catch (Exception e) {
@@ -107,13 +107,13 @@ public class EditFileEntryAction extends PortletAction {
 					DuplicateLockException dle = (DuplicateLockException)e;
 
 					SessionErrors.add(
-						req, dle.getClass().getName(), dle.getLock());
+						actionRequest, dle.getClass().getName(), dle.getLock());
 				}
 				else {
-					SessionErrors.add(req, e.getClass().getName());
+					SessionErrors.add(actionRequest, e.getClass().getName());
 				}
 
-				setForward(req, "portlet.document_library.error");
+				setForward(actionRequest, "portlet.document_library.error");
 			}
 			else if (e instanceof DuplicateFileException ||
 					 e instanceof DuplicateFolderNameException ||
@@ -122,10 +122,10 @@ public class EditFileEntryAction extends PortletAction {
 					 e instanceof NoSuchFolderException ||
 					 e instanceof SourceFileNameException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else if (e instanceof TagsEntryException) {
-				SessionErrors.add(req, e.getClass().getName(), e);
+				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 			}
 			else {
 				throw e;
@@ -134,18 +134,18 @@ public class EditFileEntryAction extends PortletAction {
 	}
 
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getFileEntry(req);
+			ActionUtil.getFileEntry(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchFileEntryException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.document_library.error");
 			}
@@ -156,66 +156,71 @@ public class EditFileEntryAction extends PortletAction {
 
 		String forward = "portlet.document_library.edit_file_entry";
 
-		if (req.getWindowState().equals(LiferayWindowState.POP_UP)) {
+		if (renderRequest.getWindowState().equals(LiferayWindowState.POP_UP)) {
 			forward = "portlet.document_library.edit_file_entry_form";
 		}
 
-		return mapping.findForward(getForward(req, forward));
+		return mapping.findForward(getForward(renderRequest, forward));
 	}
 
-	protected void deleteFileEntry(ActionRequest req) throws Exception {
-		long folderId = ParamUtil.getLong(req, "folderId");
-		String name = ParamUtil.getString(req, "name");
-		double version = ParamUtil.getDouble(req, "version");
+	protected void deleteFileEntry(ActionRequest actionRequest)
+		throws Exception {
+
+		long folderId = ParamUtil.getLong(actionRequest, "folderId");
+		String name = ParamUtil.getString(actionRequest, "name");
+		double version = ParamUtil.getDouble(actionRequest, "version");
 
 		DLFileEntryServiceUtil.deleteFileEntry(folderId, name, version);
 	}
 
-	protected void lockFileEntry(ActionRequest req) throws Exception {
-		long folderId = ParamUtil.getLong(req, "folderId");
-		String name = ParamUtil.getString(req, "name");
+	protected void lockFileEntry(ActionRequest actionRequest) throws Exception {
+		long folderId = ParamUtil.getLong(actionRequest, "folderId");
+		String name = ParamUtil.getString(actionRequest, "name");
 
 		DLFileEntryServiceUtil.lockFileEntry(folderId, name);
 	}
 
-	protected void unlockFileEntry(ActionRequest req) throws Exception {
-		long folderId = ParamUtil.getLong(req, "folderId");
-		String name = ParamUtil.getString(req, "name");
+	protected void unlockFileEntry(ActionRequest actionRequest)
+		throws Exception {
+
+		long folderId = ParamUtil.getLong(actionRequest, "folderId");
+		String name = ParamUtil.getString(actionRequest, "name");
 
 		DLFileEntryServiceUtil.unlockFileEntry(folderId, name);
 	}
 
 	protected void updateFileEntry(
-			FileEntryForm fileEntryForm, ActionRequest req, ActionResponse res)
+			FileEntryForm fileEntryForm, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
-		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
-			req);
+		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
+			actionRequest);
 
-		String cmd = ParamUtil.getString(uploadReq, Constants.CMD);
+		String cmd = ParamUtil.getString(uploadRequest, Constants.CMD);
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long folderId = ParamUtil.getLong(uploadReq, "folderId");
-		long newFolderId = ParamUtil.getLong(uploadReq, "newFolderId");
-		String name = ParamUtil.getString(uploadReq, "name");
-		String sourceFileName = uploadReq.getFileName("file");
+		long folderId = ParamUtil.getLong(uploadRequest, "folderId");
+		long newFolderId = ParamUtil.getLong(uploadRequest, "newFolderId");
+		String name = ParamUtil.getString(uploadRequest, "name");
+		String sourceFileName = uploadRequest.getFileName("file");
 
-		String title = ParamUtil.getString(uploadReq, "title");
-		String description = ParamUtil.getString(uploadReq, "description");
+		String title = ParamUtil.getString(uploadRequest, "title");
+		String description = ParamUtil.getString(uploadRequest, "description");
 
 		String[] tagsEntries = StringUtil.split(
-			ParamUtil.getString(uploadReq, "tagsEntries"));
+			ParamUtil.getString(uploadRequest, "tagsEntries"));
 
 		String extraSettings = PropertiesUtil.toString(
 			fileEntryForm.getExtraSettingsProperties());
 
-		File file = uploadReq.getFile("file");
+		File file = uploadRequest.getFile("file");
 
-		String[] communityPermissions = req.getParameterValues(
+		String[] communityPermissions = actionRequest.getParameterValues(
 			"communityPermissions");
-		String[] guestPermissions = req.getParameterValues(
+		String[] guestPermissions = actionRequest.getParameterValues(
 			"guestPermissions");
 
 		if (cmd.equals(Constants.ADD)) {
@@ -232,7 +237,8 @@ public class EditFileEntryAction extends PortletAction {
 				communityPermissions, guestPermissions);
 
 			AssetPublisherUtil.addAndStoreSelection(
-				req, DLFileEntry.class.getName(), entry.getFileEntryId(), -1);
+				actionRequest, DLFileEntry.class.getName(),
+				entry.getFileEntryId(), -1);
 		}
 		else {
 
@@ -249,7 +255,7 @@ public class EditFileEntryAction extends PortletAction {
 		}
 
 		AssetPublisherUtil.addRecentFolderId(
-			req, DLFileEntry.class.getName(), folderId);
+			actionRequest, DLFileEntry.class.getName(), folderId);
 	}
 
 }

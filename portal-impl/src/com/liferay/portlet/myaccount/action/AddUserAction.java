@@ -79,15 +79,15 @@ import org.apache.struts.action.ActionMapping;
 public class AddUserAction extends PortletAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD)) {
-				addUser(req, res);
+				addUser(actionRequest, actionResponse);
 			}
 		}
 		catch (Exception e) {
@@ -106,7 +106,7 @@ public class AddUserAction extends PortletAction {
 				e instanceof UserScreenNameException ||
 				e instanceof UserSmsException) {
 
-				SessionErrors.add(req, e.getClass().getName(), e);
+				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 			}
 			else {
 				throw e;
@@ -115,20 +115,20 @@ public class AddUserAction extends PortletAction {
 	}
 
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		Company company = PortalUtil.getCompany(req);
+		Company company = PortalUtil.getCompany(renderRequest);
 
 		if (!company.isStrangers()) {
 			throw new PrincipalException();
 		}
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		res.setTitle(
+		renderResponse.setTitle(
 			LanguageUtil.get(
 				themeDisplay.getCompanyId(), themeDisplay.getLocale(),
 				"create-account"));
@@ -136,14 +136,15 @@ public class AddUserAction extends PortletAction {
 		return mapping.findForward("portlet.my_account.create_account");
 	}
 
-	protected void addUser(ActionRequest req, ActionResponse res)
+	protected void addUser(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+		HttpSession session = request.getSession();
 
-		HttpSession httpSes = httpReq.getSession();
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		Company company = themeDisplay.getCompany();
@@ -152,26 +153,28 @@ public class AddUserAction extends PortletAction {
 		String password1 = null;
 		String password2 = null;
 		boolean autoScreenName = false;
-		String screenName = ParamUtil.getString(req, "screenName");
-		String emailAddress = ParamUtil.getString(req, "emailAddress");
-		String firstName = ParamUtil.getString(req, "firstName");
-		String middleName = ParamUtil.getString(req, "middleName");
-		String lastName = ParamUtil.getString(req, "lastName");
-		int prefixId = ParamUtil.getInteger(req, "prefixId");
-		int suffixId = ParamUtil.getInteger(req, "suffixId");
-		boolean male = ParamUtil.get(req, "male", true);
-		int birthdayMonth = ParamUtil.getInteger(req, "birthdayMonth");
-		int birthdayDay = ParamUtil.getInteger(req, "birthdayDay");
-		int birthdayYear = ParamUtil.getInteger(req, "birthdayYear");
-		String jobTitle = ParamUtil.getString(req, "jobTitle");
+		String screenName = ParamUtil.getString(actionRequest, "screenName");
+		String emailAddress = ParamUtil.getString(
+			actionRequest, "emailAddress");
+		String firstName = ParamUtil.getString(actionRequest, "firstName");
+		String middleName = ParamUtil.getString(actionRequest, "middleName");
+		String lastName = ParamUtil.getString(actionRequest, "lastName");
+		int prefixId = ParamUtil.getInteger(actionRequest, "prefixId");
+		int suffixId = ParamUtil.getInteger(actionRequest, "suffixId");
+		boolean male = ParamUtil.get(actionRequest, "male", true);
+		int birthdayMonth = ParamUtil.getInteger(
+			actionRequest, "birthdayMonth");
+		int birthdayDay = ParamUtil.getInteger(actionRequest, "birthdayDay");
+		int birthdayYear = ParamUtil.getInteger(actionRequest, "birthdayYear");
+		String jobTitle = ParamUtil.getString(actionRequest, "jobTitle");
 		long[] organizationIds = StringUtil.split(
-			ParamUtil.getString(req, "organizationIds"),  0L);
+			ParamUtil.getString(actionRequest, "organizationIds"),  0L);
 		boolean sendEmail = true;
 
-		String openId = ParamUtil.getString(req, "openId");
+		String openId = ParamUtil.getString(actionRequest, "openId");
 		boolean openIdAuth = false;
 
-		Boolean openIdLoginPending = (Boolean)httpSes.getAttribute(
+		Boolean openIdLoginPending = (Boolean)session.getAttribute(
 			WebKeys.OPEN_ID_LOGIN_PENDING);
 
 		if ((openIdLoginPending != null) &&
@@ -183,7 +186,7 @@ public class AddUserAction extends PortletAction {
 		}
 
 		if (PropsValues.CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT) {
-			CaptchaUtil.check(req);
+			CaptchaUtil.check(actionRequest);
 		}
 
 		User user = UserServiceUtil.addUser(
@@ -196,18 +199,18 @@ public class AddUserAction extends PortletAction {
 		if (openIdAuth) {
 			UserLocalServiceUtil.updateOpenId(user.getUserId(), openId);
 
-			httpSes.setAttribute(
+			session.setAttribute(
 				WebKeys.OPEN_ID_LOGIN, new Long(user.getUserId()));
 
-			httpSes.removeAttribute(WebKeys.OPEN_ID_LOGIN_PENDING);
+			session.removeAttribute(WebKeys.OPEN_ID_LOGIN_PENDING);
 		}
 		else {
 
 			// Session messages
 
-			SessionMessages.add(httpReq, "user_added", user.getEmailAddress());
+			SessionMessages.add(request, "user_added", user.getEmailAddress());
 			SessionMessages.add(
-				httpReq, "user_added_password", user.getPasswordUnencrypted());
+				request, "user_added_password", user.getPasswordUnencrypted());
 		}
 
 		// Send redirect
@@ -227,7 +230,7 @@ public class AddUserAction extends PortletAction {
 		String redirect = HttpUtil.addParameter(
 			themeDisplay.getURLSignIn(), "login", login);
 
-		res.sendRedirect(redirect);
+		actionResponse.sendRedirect(redirect);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {

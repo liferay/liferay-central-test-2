@@ -93,7 +93,7 @@ public class EditArticleAction extends PortletAction {
 	public static final String VERSION_SEPARATOR = "_version_";
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
@@ -127,7 +127,7 @@ public class EditArticleAction extends PortletAction {
 
 					if (saveAndContinue) {
 						redirect = getSaveAndContinueRedirect(
-							config, req, article, redirect);
+							portletConfig, req, article, redirect);
 					}
 				}
 
@@ -166,7 +166,7 @@ public class EditArticleAction extends PortletAction {
 	}
 
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
@@ -286,8 +286,8 @@ public class EditArticleAction extends PortletAction {
 	}
 
 	protected String getSaveAndContinueRedirect(
-			PortletConfig config, ActionRequest req, JournalArticle article,
-			String redirect)
+			PortletConfig portletConfig, ActionRequest req,
+			JournalArticle article, String redirect)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
@@ -296,7 +296,7 @@ public class EditArticleAction extends PortletAction {
 		String originalRedirect = ParamUtil.getString(req, "originalRedirect");
 
 		PortletURLImpl portletURL = new PortletURLImpl(
-			(ActionRequestImpl)req, config.getPortletName(),
+			(ActionRequestImpl)req, portletConfig.getPortletName(),
 			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
 		portletURL.setWindowState(WindowState.MAXIMIZED);

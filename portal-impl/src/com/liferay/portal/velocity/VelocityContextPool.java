@@ -46,8 +46,8 @@ public class VelocityContextPool {
 		return _instance._get(name);
 	}
 
-	public static void put(String name, ServletContext ctx) {
-		_instance._put(name, ctx);
+	public static void put(String name, ServletContext servletContext) {
+		_instance._put(name, servletContext);
 	}
 
 	public static ServletContext remove(String name) {
@@ -69,31 +69,31 @@ public class VelocityContextPool {
 	}
 
 	private ServletContext _get(String name) {
-		ServletContext ctx = _pool.get(name);
+		ServletContext servletContext = _pool.get(name);
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Get " + name + " " + ctx);
+			_log.debug("Get " + name + " " + servletContext);
 		}
 
-		return ctx;
+		return servletContext;
 	}
 
-	private void _put(String name, ServletContext ctx) {
+	private void _put(String name, ServletContext servletContext) {
 		if (_log.isDebugEnabled()) {
-			_log.debug("Put " + name + " " + ctx);
+			_log.debug("Put " + name + " " + servletContext);
 		}
 
-		_pool.put(name, ctx);
+		_pool.put(name, servletContext);
 	}
 
 	private ServletContext _remove(String name) {
-		ServletContext ctx = _pool.remove(name);
+		ServletContext servletContext = _pool.remove(name);
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Remove " + name + " " + ctx);
+			_log.debug("Remove " + name + " " + servletContext);
 		}
 
-		return ctx;
+		return servletContext;
 	}
 
 	private static Log _log = LogFactory.getLog(VelocityContextPool.class);

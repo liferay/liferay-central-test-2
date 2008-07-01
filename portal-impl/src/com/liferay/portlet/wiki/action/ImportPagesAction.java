@@ -59,27 +59,27 @@ import org.apache.struts.action.ActionMapping;
 public class ImportPagesAction extends PortletAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		try {
-			importPages(req, res);
+			importPages(actionRequest, actionResponse);
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchNodeException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.wiki.error");
+				setForward(actionRequest, "portlet.wiki.error");
 			}
 			else if (e instanceof DuplicateNodeNameException ||
 					 e instanceof NodeNameException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
 				throw e;
@@ -88,18 +88,18 @@ public class ImportPagesAction extends PortletAction {
 	}
 
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getNode(req);
+			ActionUtil.getNode(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchNodeException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.wiki.error");
 			}
@@ -109,39 +109,41 @@ public class ImportPagesAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(req, "portlet.wiki.import_pages"));
+			getForward(renderRequest, "portlet.wiki.import_pages"));
 	}
 
-	protected void importPages(ActionRequest req, ActionResponse res)
+	protected void importPages(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
-			req);
+		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
+			actionRequest);
 
 		String importProgressId = ParamUtil.getString(
-			uploadReq, "importProgressId");
+			uploadRequest, "importProgressId");
 
 		ProgressTracker progressTracker = new ProgressTracker(
-			req, importProgressId);
+			actionRequest, importProgressId);
 
 		ProgressTrackerThreadLocal.setProgressTracker(progressTracker);
 
 		progressTracker.start();
 
-		long nodeId = ParamUtil.getLong(uploadReq, "nodeId");
+		long nodeId = ParamUtil.getLong(uploadRequest, "nodeId");
 
-		int filesCount = ParamUtil.getInteger(uploadReq, "filesCount", 10);
+		int filesCount = ParamUtil.getInteger(uploadRequest, "filesCount", 10);
 
 		File[] files = new File[filesCount];
 
 		for (int i = 0; i < filesCount; i++) {
-			files[i] = uploadReq.getFile("file" + i);
+			files[i] = uploadRequest.getFile("file" + i);
 		}
 
 		NotificationThreadLocal.setNotificationEnabled(false);
 		WikiCacheThreadLocal.setClearCache(false);
 
-		WikiNodeServiceUtil.importPages(nodeId, files, req.getParameterMap());
+		WikiNodeServiceUtil.importPages(
+			nodeId, files, actionRequest.getParameterMap());
 
 		WikiCacheUtil.clearCache(nodeId);
 

@@ -119,16 +119,16 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 	}
 
 	protected void doInvokeDeploy(HotDeployEvent event) throws Exception {
-		ServletContext ctx = event.getServletContext();
+		ServletContext servletContext = event.getServletContext();
 
-		String servletContextName = ctx.getServletContextName();
+		String servletContextName = servletContext.getServletContextName();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking deploy for " + servletContextName);
 		}
 
 		String xml = HttpUtil.URLtoString(
-			ctx.getResource("/WEB-INF/liferay-hook.xml"));
+			servletContext.getResource("/WEB-INF/liferay-hook.xml"));
 
 		if (xml == null) {
 			return;
@@ -231,9 +231,9 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 	}
 
 	protected void doInvokeUndeploy(HotDeployEvent event) throws Exception {
-		ServletContext ctx = event.getServletContext();
+		ServletContext servletContext = event.getServletContext();
 
-		String servletContextName = ctx.getServletContextName();
+		String servletContextName = servletContext.getServletContextName();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking undeploy for " + servletContextName);

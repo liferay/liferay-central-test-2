@@ -61,9 +61,10 @@ public class PngImageTag extends IncludeTag {
 		request.setAttribute("liferay-ui:png_image:height", height);
 		request.setAttribute("liferay-ui:png_image:width", width);
 
-		RequestDispatcher rd = servletContext.getRequestDispatcher(page);
+		RequestDispatcher requestDispatcher =
+			servletContext.getRequestDispatcher(page);
 
-		rd.include(request, response);
+		requestDispatcher.include(request, response);
 	}
 
 	public int doEndTag() throws JspException {

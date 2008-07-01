@@ -40,7 +40,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class CacheResponseUtil {
 
-	public static void write(HttpServletResponse res, CacheResponseData data)
+	public static void write(
+			HttpServletResponse response, CacheResponseData data)
 		throws IOException {
 
 		Map<String, List<Header>> headers = data.getHeaders();
@@ -53,20 +54,20 @@ public class CacheResponseUtil {
 				int type = header.getType();
 
 				if (type == Header.DATE_TYPE) {
-					res.addDateHeader(headerKey, header.getDateValue());
+					response.addDateHeader(headerKey, header.getDateValue());
 				}
 				else if (type == Header.INTEGER_TYPE) {
-					res.addIntHeader(headerKey, header.getIntValue());
+					response.addIntHeader(headerKey, header.getIntValue());
 				}
 				else if (type == Header.STRING_TYPE) {
-					res.addHeader(headerKey, header.getStringValue());
+					response.addHeader(headerKey, header.getStringValue());
 				}
 			}
 		}
 
-		res.setContentType(data.getContentType());
+		response.setContentType(data.getContentType());
 
-		ServletResponseUtil.write(res, data.getData());
+		ServletResponseUtil.write(response, data.getData());
 	}
 
 }

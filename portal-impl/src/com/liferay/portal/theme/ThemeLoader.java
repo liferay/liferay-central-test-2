@@ -117,10 +117,11 @@ public class ThemeLoader {
 	}
 
 	protected ThemeLoader(
-		String servletContextName, ServletContext ctx, String[] xmls) {
+		String servletContextName, ServletContext servletContext,
+		String[] xmls) {
 
 		_servletContextName = servletContextName;
-		_ctx = ctx;
+		_servletContext = servletContext;
 
 		try {
 			Document doc = DocumentUtil.readDocumentFromXML(xmls[0], true);
@@ -140,7 +141,8 @@ public class ThemeLoader {
 				_loadFromServletContext = false;
 			}
 			else {
-				_fileStorage = new File(ctx.getRealPath(_themesPath));
+				_fileStorage = new File(
+					servletContext.getRealPath(_themesPath));
 				_loadFromServletContext = true;
 			}
 
@@ -176,8 +178,8 @@ public class ThemeLoader {
 			String content = FileUtil.read(liferayLookAndFeelXML);
 
 			ThemeLocalServiceUtil.init(
-				_servletContextName, _ctx, _themesPath, _loadFromServletContext,
-				new String[] {content}, null);
+				_servletContextName, _servletContext, _themesPath,
+				_loadFromServletContext, new String[] {content}, null);
 		}
 		catch (Exception e) {
 			_log.error(
@@ -189,7 +191,7 @@ public class ThemeLoader {
 	private static Log _log = LogFactory.getLog(ThemeLoader.class);
 
 	private String _servletContextName;
-	private ServletContext _ctx;
+	private ServletContext _servletContext;
 	private String _themesPath;
 	private File _fileStorage;
 	private boolean _loadFromServletContext = true;

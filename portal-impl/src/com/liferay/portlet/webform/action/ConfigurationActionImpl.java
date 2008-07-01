@@ -51,7 +51,7 @@ import javax.portlet.RenderResponse;
 public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			PortletConfig config, ActionRequest req, ActionResponse res)
+			PortletConfig portletConfig, ActionRequest req, ActionResponse res)
 		throws Exception {
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
@@ -182,12 +182,13 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		if (SessionErrors.isEmpty(req)) {
 			prefs.store();
 
-			SessionMessages.add(req, config.getPortletName() + ".doConfigure");
+			SessionMessages.add(
+				req, portletConfig.getPortletName() + ".doConfigure");
 		}
 	}
 
 	public String render(
-			PortletConfig config, RenderRequest req, RenderResponse res)
+			PortletConfig portletConfig, RenderRequest req, RenderResponse res)
 		throws Exception {
 
 		return "/html/portlet/web_form/configuration.jsp";

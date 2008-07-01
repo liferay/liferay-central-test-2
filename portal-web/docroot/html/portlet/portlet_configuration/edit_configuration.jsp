@@ -55,12 +55,12 @@ String path = (String)request.getAttribute(WebKeys.CONFIGURATION_ACTION_PATH);
 
 			RequestDispatcher selRd = selPortletCtx.getServletContext().getRequestDispatcher(path);
 
-			StringServletResponse stringServletRes = new StringServletResponse(response);
+			StringServletResponse stringResponse = new StringServletResponse(response);
 
-			selRd.include(request, stringServletRes);
+			selRd.include(request, stringResponse);
 			%>
 
-			<%= stringServletRes.getString() %>
+			<%= stringResponse.getString() %>
 		</c:when>
 		<c:otherwise>
 			<liferay-util:include page="<%= path %>" />

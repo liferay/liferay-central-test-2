@@ -67,16 +67,16 @@ public interface LayoutTemplateLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, Boolean>> init(
-		javax.servlet.ServletContext ctx, java.lang.String[] xmls,
+		javax.servlet.ServletContext servletContext, java.lang.String[] xmls,
 		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage);
 
 	public java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, Boolean>> init(
-		java.lang.String servletContextName, javax.servlet.ServletContext ctx,
-		java.lang.String[] xmls,
+		java.lang.String servletContextName,
+		javax.servlet.ServletContext servletContext, java.lang.String[] xmls,
 		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage);
 
 	public void readLayoutTemplate(java.lang.String servletContextName,
-		javax.servlet.ServletContext ctx,
+		javax.servlet.ServletContext servletContext,
 		java.util.Set<com.liferay.portal.kernel.util.ObjectValuePair<String, Boolean>> layoutTemplateIds,
 		com.liferay.portal.kernel.xml.Element el, boolean standard,
 		java.lang.String themeId,

@@ -64,20 +64,22 @@ import org.apache.struts.action.ActionMapping;
 public class ViewAction extends PortletAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
-		HttpSession httpSes = httpReq.getSession();
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+		HttpServletResponse response = PortalUtil.getHttpServletResponse(
+			actionResponse);
+		HttpSession session = request.getSession();
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
 
-		String languageId = ParamUtil.getString(req, "languageId");
+		String languageId = ParamUtil.getString(actionRequest, "languageId");
 
 		Locale locale = LocaleUtil.fromLanguageId(languageId);
 
@@ -91,7 +93,7 @@ public class ViewAction extends PortletAction {
 				Contact contact = user.getContact();
 
 				AdminUtil.updateUser(
-					req, user.getUserId(), user.getScreenName(),
+					actionRequest, user.getUserId(), user.getScreenName(),
 					user.getEmailAddress(), languageId, user.getTimeZoneId(),
 					user.getGreeting(), user.getComments(), contact.getSmsSn(),
 					contact.getAimSn(), contact.getFacebookSn(),
@@ -101,14 +103,14 @@ public class ViewAction extends PortletAction {
 					contact.getYmSn());
 			}
 
-			httpSes.setAttribute(Globals.LOCALE_KEY, locale);
+			session.setAttribute(Globals.LOCALE_KEY, locale);
 
-			LanguageUtil.updateCookie(httpRes, locale);
+			LanguageUtil.updateCookie(response, locale);
 		}
 
 		// Send redirect
 
-		String redirect = ParamUtil.getString(req, "redirect");
+		String redirect = ParamUtil.getString(actionRequest, "redirect");
 
 		if (Validator.isNull(redirect)) {
 			redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
@@ -120,12 +122,12 @@ public class ViewAction extends PortletAction {
 			}
 		}
 
-		res.sendRedirect(redirect);
+		actionResponse.sendRedirect(redirect);
 	}
 
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		return mapping.findForward("portlet.language.view");

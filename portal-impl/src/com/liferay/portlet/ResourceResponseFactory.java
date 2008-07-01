@@ -41,16 +41,17 @@ import org.apache.commons.pool.impl.StackObjectPool;
 public class ResourceResponseFactory {
 
 	public static ResourceResponseImpl create(
-			ResourceRequestImpl req, HttpServletResponse res,
-			String portletName, long companyId)
+			ResourceRequestImpl resourceRequestImpl,
+			HttpServletResponse response, String portletName, long companyId)
 		throws Exception {
 
-		return create(req, res, portletName, companyId, 0);
+		return create(resourceRequestImpl, response, portletName, companyId, 0);
 	}
 
 	public static ResourceResponseImpl create(
-			ResourceRequestImpl req, HttpServletResponse res,
-			String portletName, long companyId, long plid)
+			ResourceRequestImpl resourceRequestImpl,
+			HttpServletResponse response, String portletName, long companyId,
+			long plid)
 		throws Exception {
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
@@ -61,22 +62,23 @@ public class ResourceResponseFactory {
 			}
 		}
 
-		ResourceResponseImpl resourceResImpl = null;
+		ResourceResponseImpl resourceResponseImpl = null;
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
-			resourceResImpl =
+			resourceResponseImpl =
 				(ResourceResponseImpl)_instance._pool.borrowObject();
 		}
 		else {
-			resourceResImpl = new ResourceResponseImpl();
+			resourceResponseImpl = new ResourceResponseImpl();
 		}
 
-		resourceResImpl.init(req, res, portletName, companyId, plid);
+		resourceResponseImpl.init(
+			resourceRequestImpl, response, portletName, companyId, plid);
 
-		return resourceResImpl;
+		return resourceResponseImpl;
 	}
 
-	public static void recycle(ResourceResponseImpl resourceResImpl)
+	public static void recycle(ResourceResponseImpl resourceResponseImpl)
 		throws Exception {
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
@@ -86,10 +88,10 @@ public class ResourceResponseFactory {
 						_instance._pool.getNumActive());
 			}
 
-			_instance._pool.returnObject(resourceResImpl);
+			_instance._pool.returnObject(resourceResponseImpl);
 		}
-		else if (resourceResImpl != null) {
-			resourceResImpl.recycle();
+		else if (resourceResponseImpl != null) {
+			resourceResponseImpl.recycle();
 		}
 	}
 
@@ -111,9 +113,10 @@ public class ResourceResponseFactory {
 		}
 
 		public void passivateObject(Object obj) {
-			ResourceResponseImpl resourceResImpl = (ResourceResponseImpl)obj;
+			ResourceResponseImpl resourceResponseImpl =
+				(ResourceResponseImpl)obj;
 
-			resourceResImpl.recycle();
+			resourceResponseImpl.recycle();
 		}
 
 	}

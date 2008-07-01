@@ -51,9 +51,9 @@ public class ResourceResponseImpl
 	public PortletURLImpl createPortletURLImpl(
 		String portletName, String lifecycle) {
 
-		ResourceRequest resourceReq = (ResourceRequest)getPortletRequest();
+		ResourceRequest resourceRequest = (ResourceRequest)getPortletRequest();
 
-		String cacheability = resourceReq.getCacheability();
+		String cacheability = resourceRequest.getCacheability();
 
 		if (cacheability.equals(ResourceURL.PAGE)) {
 		}
@@ -88,15 +88,15 @@ public class ResourceResponseImpl
 	}
 
 	public void setCharacterEncoding(String charset) {
-		_res.setCharacterEncoding(charset);
+		_response.setCharacterEncoding(charset);
 	}
 
 	public void setLocale(Locale locale) {
-		_res.setLocale(locale);
+		_response.setLocale(locale);
 	}
 
 	public void setContentLength(int length) {
-		_res.setContentLength(length);
+		_response.setContentLength(length);
 	}
 
 	protected ResourceResponseImpl() {
@@ -106,12 +106,12 @@ public class ResourceResponseImpl
 	}
 
 	protected void init(
-		PortletRequestImpl req, HttpServletResponse res, String portletName,
-		long companyId, long plid) {
+		PortletRequestImpl portletRequestImpl, HttpServletResponse response,
+		String portletName, long companyId, long plid) {
 
-		super.init(req, res, portletName, companyId, plid);
+		super.init(portletRequestImpl, response, portletName, companyId, plid);
 
-		_res = res;
+		_response = response;
 	}
 
 	protected void recycle() {
@@ -121,11 +121,11 @@ public class ResourceResponseImpl
 
 		super.recycle();
 
-		_res = null;
+		_response = null;
 	}
 
 	private static Log _log = LogFactory.getLog(ResourceResponseImpl.class);
 
-	private HttpServletResponse _res;
+	private HttpServletResponse _response;
 
 }

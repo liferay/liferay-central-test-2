@@ -86,11 +86,11 @@ public class WrapPortletTag extends ParamAndPropertyAncestorTagImpl {
 
 	public int doEndTag() throws JspException {
 		try {
-			ServletContext ctx = getServletContext();
-			HttpServletRequest req = getServletRequest();
-			StringServletResponse res = getServletResponse();
+			ServletContext servletContext = getServletContext();
+			HttpServletRequest request = getServletRequest();
+			StringServletResponse stringResponse = getServletResponse();
 
-			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
 			Theme theme = themeDisplay.getTheme();
@@ -102,9 +102,11 @@ public class WrapPortletTag extends ParamAndPropertyAncestorTagImpl {
 
 			// Page
 
-			ThemeUtil.include(ctx, req, res, pageContext, getPage(), theme);
+			ThemeUtil.include(
+				servletContext, request, stringResponse, pageContext, getPage(),
+				theme);
 
-			pageContext.getOut().print(res.getString());
+			pageContext.getOut().print(stringResponse.getString());
 
 			return EVAL_PAGE;
 		}

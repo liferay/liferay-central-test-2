@@ -49,12 +49,12 @@ import javax.servlet.http.HttpServletRequestWrapper;
  */
 public class LiferayStrutsRequestImpl extends HttpServletRequestWrapper {
 
-	public LiferayStrutsRequestImpl(ActionRequestImpl req) {
-		this(req.getHttpServletRequest());
+	public LiferayStrutsRequestImpl(ActionRequestImpl actionRequestImpl) {
+		this(actionRequestImpl.getHttpServletRequest());
 	}
 
-	public LiferayStrutsRequestImpl(RenderRequestImpl req) {
-		this(req.getHttpServletRequest());
+	public LiferayStrutsRequestImpl(RenderRequestImpl renderRequestImpl) {
+		this(renderRequestImpl.getHttpServletRequest());
 	}
 
 	public Object getAttribute(String name) {

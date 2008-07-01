@@ -54,10 +54,11 @@ import org.apache.commons.logging.LogFactory;
  */
 public class PortletContextImpl implements PortletContext {
 
-	public PortletContextImpl(Portlet portlet, ServletContext ctx) {
+	public PortletContextImpl(Portlet portlet, ServletContext servletContext) {
 		_portlet = portlet;
-		_ctx = ctx;
-		_ctxName = GetterUtil.getString(_ctx.getServletContextName());
+		_servletContext = servletContext;
+		_servletContextName = GetterUtil.getString(
+			_servletContext.getServletContextName());
 	}
 
 	public Object getAttribute(String name) {
@@ -65,11 +66,11 @@ public class PortletContextImpl implements PortletContext {
 			throw new IllegalArgumentException();
 		}
 
-		return _ctx.getAttribute(name);
+		return _servletContext.getAttribute(name);
 	}
 
 	public Enumeration<String> getAttributeNames() {
-		return _ctx.getAttributeNames();
+		return _servletContext.getAttributeNames();
 	}
 
 	public Enumeration<String> getContainerRuntimeOptions() {
@@ -81,11 +82,11 @@ public class PortletContextImpl implements PortletContext {
 			throw new IllegalArgumentException();
 		}
 
-		return _ctx.getInitParameter(name);
+		return _servletContext.getInitParameter(name);
 	}
 
 	public Enumeration<String> getInitParameterNames() {
-		return _ctx.getInitParameterNames();
+		return _servletContext.getInitParameterNames();
 	}
 
 	public int getMajorVersion() {
@@ -93,7 +94,7 @@ public class PortletContextImpl implements PortletContext {
 	}
 
 	public String getMimeType(String file) {
-		return _ctx.getMimeType(file);
+		return _servletContext.getMimeType(file);
 	}
 
 	public int getMinorVersion() {
@@ -101,17 +102,18 @@ public class PortletContextImpl implements PortletContext {
 	}
 
 	public PortletRequestDispatcher getNamedDispatcher(String name) {
-		RequestDispatcher rd = null;
+		RequestDispatcher requestDispatcher = null;
 
 		try {
-			rd = _ctx.getNamedDispatcher(name);
+			requestDispatcher = _servletContext.getNamedDispatcher(name);
 		}
 		catch (IllegalArgumentException iae) {
 			return null;
 		}
 
-		if (rd != null) {
-			return new PortletRequestDispatcherImpl(rd, true, this);
+		if (requestDispatcher != null) {
+			return new PortletRequestDispatcherImpl(
+				requestDispatcher, true, this);
 		}
 		else {
 			return null;
@@ -123,18 +125,18 @@ public class PortletContextImpl implements PortletContext {
 	}
 
 	public String getPortletContextName() {
-		return _ctxName;
+		return _servletContextName;
 	}
 
 	public String getRealPath(String path) {
-		return _ctx.getRealPath(path);
+		return _servletContext.getRealPath(path);
 	}
 
 	public PortletRequestDispatcher getRequestDispatcher(String path) {
-		RequestDispatcher rd = null;
+		RequestDispatcher requestDispatcher = null;
 
 		try {
-			rd = _ctx.getRequestDispatcher(path);
+			requestDispatcher = _servletContext.getRequestDispatcher(path);
 		}
 		catch (IllegalArgumentException iae) {
 			return null;
@@ -143,25 +145,26 @@ public class PortletContextImpl implements PortletContext {
 		// Workaround for bug in Jetty that returns the default request
 		// dispatcher instead of null for an invalid path
 
-		if ((rd != null) &&
-			(rd.getClass().getName().equals(
+		if ((requestDispatcher != null) &&
+			(requestDispatcher.getClass().getName().equals(
 				"org.mortbay.jetty.servlet.Dispatcher"))) {
 
 			// Dispatcher[/,default[org.mortbay.jetty.servlet.Default]]
 
-			String rdToString = rd.toString();
+			String rdToString = requestDispatcher.toString();
 
 			String rdPath = rdToString.substring(11, rdToString.indexOf(","));
 
 			if (rdPath.equals(StringPool.SLASH) &&
 				!path.equals(StringPool.SLASH)) {
 
-				rd = null;
+				requestDispatcher = null;
 			}
 		}
 
-		if (rd != null) {
-			return new PortletRequestDispatcherImpl(rd, false, this, path);
+		if (requestDispatcher != null) {
+			return new PortletRequestDispatcherImpl(
+				requestDispatcher, false, this, path);
 		}
 		else {
 			return null;
@@ -173,15 +176,15 @@ public class PortletContextImpl implements PortletContext {
 			throw new MalformedURLException();
 		}
 
-		return _ctx.getResource(path);
+		return _servletContext.getResource(path);
 	}
 
 	public InputStream getResourceAsStream(String path) {
-		return _ctx.getResourceAsStream(path);
+		return _servletContext.getResourceAsStream(path);
 	}
 
 	public Set<String> getResourcePaths(String path) {
-		return _ctx.getResourcePaths(path);
+		return _servletContext.getResourcePaths(path);
 	}
 
 	public String getServerInfo() {
@@ -189,7 +192,7 @@ public class PortletContextImpl implements PortletContext {
 	}
 
 	public ServletContext getServletContext() {
-		return _ctx;
+		return _servletContext;
 	}
 
 	public boolean isWARFile() {
@@ -215,7 +218,7 @@ public class PortletContextImpl implements PortletContext {
 			throw new IllegalArgumentException();
 		}
 
-		_ctx.removeAttribute(name);
+		_servletContext.removeAttribute(name);
 	}
 
 	public void setAttribute(String name, Object obj) {
@@ -223,7 +226,7 @@ public class PortletContextImpl implements PortletContext {
 			throw new IllegalArgumentException();
 		}
 
-		_ctx.setAttribute(name, obj);
+		_servletContext.setAttribute(name, obj);
 	}
 
 	private static int _MAJOR_VERSION = 2;
@@ -233,7 +236,7 @@ public class PortletContextImpl implements PortletContext {
 	private static Log _log = LogFactory.getLog(PortletContextImpl.class);
 
 	private Portlet _portlet;
-	private ServletContext _ctx;
-	private String _ctxName;
+	private ServletContext _servletContext;
+	private String _servletContextName;
 
 }

@@ -30,9 +30,9 @@ String baseDN = ParamUtil.getString(request, "baseDN");
 String principal = ParamUtil.getString(request, "principal");
 String credentials = ParamUtil.getString(request, "credentials");
 
-LdapContext ctx = PortalLDAPUtil.getContext(themeDisplay.getCompanyId(), baseProviderURL, principal, credentials);
+LdapContext ldapContext = PortalLDAPUtil.getContext(themeDisplay.getCompanyId(), baseProviderURL, principal, credentials);
 
-if (ctx == null) {
+if (ldapContext == null) {
 %>
 
 	<liferay-ui:message key="liferay-has-failed-to-connect-to-the-ldap-server" />
@@ -43,7 +43,7 @@ if (ctx == null) {
 
 String userFilter = ParamUtil.getString(request, "importUserSearchFilter");
 
-NamingEnumeration enu = PortalLDAPUtil.getUsers(themeDisplay.getCompanyId(), ctx, 20, baseDN, userFilter);
+NamingEnumeration enu = PortalLDAPUtil.getUsers(themeDisplay.getCompanyId(), ldapContext, 20, baseDN, userFilter);
 
 String userMappingsParams =
 	"screenName=" + ParamUtil.getString(request, "userMappingScreenName") +
@@ -159,7 +159,7 @@ if (counter == 0) {
 </table>
 
 <%
-if (ctx != null) {
-	ctx.close();
+if (ldapContext != null) {
+	ldapContext.close();
 }
 %>

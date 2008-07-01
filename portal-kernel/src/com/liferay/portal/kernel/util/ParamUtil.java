@@ -29,7 +29,7 @@ import java.util.Enumeration;
 
 import javax.portlet.PortletRequest;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="ParamUtil.java.html"><b><i>View Source</i></b></a>
@@ -42,201 +42,215 @@ public class ParamUtil {
 
 	// Servlet Request
 
-	public static boolean getBoolean(ServletRequest req, String param) {
-		return GetterUtil.getBoolean(req.getParameter(param));
+	public static boolean getBoolean(HttpServletRequest request, String param) {
+		return GetterUtil.getBoolean(request.getParameter(param));
 	}
 
 	public static boolean getBoolean(
-		ServletRequest req, String param, boolean defaultValue) {
+		HttpServletRequest request, String param, boolean defaultValue) {
 
-		return get(req, param, defaultValue);
+		return get(request, param, defaultValue);
 	}
 
 	public static boolean[] getBooleanValues(
-		ServletRequest req, String param) {
+		HttpServletRequest request, String param) {
 
-		return getBooleanValues(req, param, new boolean[0]);
+		return getBooleanValues(request, param, new boolean[0]);
 	}
 
 	public static boolean[] getBooleanValues(
-		ServletRequest req, String param, boolean[] defaultValue) {
+		HttpServletRequest request, String param, boolean[] defaultValue) {
 
 		return GetterUtil.getBooleanValues(
-			req.getParameterValues(param), defaultValue);
+			request.getParameterValues(param), defaultValue);
 	}
 
 	public static Date getDate(
-		ServletRequest req, String param, DateFormat df) {
+		HttpServletRequest request, String param, DateFormat df) {
 
-		return GetterUtil.getDate(req.getParameter(param), df);
+		return GetterUtil.getDate(request.getParameter(param), df);
 	}
 
 	public static Date getDate(
-		ServletRequest req, String param, DateFormat df, Date defaultValue) {
+		HttpServletRequest request, String param, DateFormat df,
+		Date defaultValue) {
 
-		return get(req, param, df, defaultValue);
+		return get(request, param, df, defaultValue);
 	}
 
-	public static double getDouble(ServletRequest req, String param) {
-		return GetterUtil.getDouble(req.getParameter(param));
+	public static double getDouble(HttpServletRequest request, String param) {
+		return GetterUtil.getDouble(request.getParameter(param));
 	}
 
 	public static double getDouble(
-		ServletRequest req, String param, double defaultValue) {
+		HttpServletRequest request, String param, double defaultValue) {
 
-		return get(req, param, defaultValue);
-	}
-
-	public static double[] getDoubleValues(ServletRequest req, String param) {
-		return getDoubleValues(req, param, new double[0]);
+		return get(request, param, defaultValue);
 	}
 
 	public static double[] getDoubleValues(
-		ServletRequest req, String param, double[] defaultValue) {
+		HttpServletRequest request, String param) {
 
-		return GetterUtil.getDoubleValues(
-			req.getParameterValues(param), defaultValue);
+		return getDoubleValues(request, param, new double[0]);
 	}
 
-	public static float getFloat(ServletRequest req, String param) {
-		return GetterUtil.getFloat(req.getParameter(param));
+	public static double[] getDoubleValues(
+		HttpServletRequest request, String param, double[] defaultValue) {
+
+		return GetterUtil.getDoubleValues(
+			request.getParameterValues(param), defaultValue);
+	}
+
+	public static float getFloat(HttpServletRequest request, String param) {
+		return GetterUtil.getFloat(request.getParameter(param));
 	}
 
 	public static float getFloat(
-		ServletRequest req, String param, float defaultValue) {
+		HttpServletRequest request, String param, float defaultValue) {
 
-		return get(req, param, defaultValue);
-	}
-
-	public static float[] getFloatValues(ServletRequest req, String param) {
-		return getFloatValues(req, param, new float[0]);
+		return get(request, param, defaultValue);
 	}
 
 	public static float[] getFloatValues(
-		ServletRequest req, String param, float[] defaultValue) {
+		HttpServletRequest request, String param) {
 
-		return GetterUtil.getFloatValues(
-			req.getParameterValues(param), defaultValue);
+		return getFloatValues(request, param, new float[0]);
 	}
 
-	public static int getInteger(ServletRequest req, String param) {
-		return GetterUtil.getInteger(req.getParameter(param));
+	public static float[] getFloatValues(
+		HttpServletRequest request, String param, float[] defaultValue) {
+
+		return GetterUtil.getFloatValues(
+			request.getParameterValues(param), defaultValue);
+	}
+
+	public static int getInteger(HttpServletRequest request, String param) {
+		return GetterUtil.getInteger(request.getParameter(param));
 	}
 
 	public static int getInteger(
-		ServletRequest req, String param, int defaultValue) {
+		HttpServletRequest request, String param, int defaultValue) {
 
-		return get(req, param, defaultValue);
-	}
-
-	public static int[] getIntegerValues(ServletRequest req, String param) {
-		return getIntegerValues(req, param, new int[0]);
+		return get(request, param, defaultValue);
 	}
 
 	public static int[] getIntegerValues(
-		ServletRequest req, String param, int[] defaultValue) {
+		HttpServletRequest request, String param) {
 
-		return GetterUtil.getIntegerValues(
-			req.getParameterValues(param), defaultValue);
+		return getIntegerValues(request, param, new int[0]);
 	}
 
-	public static long getLong(ServletRequest req, String param) {
-		return GetterUtil.getLong(req.getParameter(param));
+	public static int[] getIntegerValues(
+		HttpServletRequest request, String param, int[] defaultValue) {
+
+		return GetterUtil.getIntegerValues(
+			request.getParameterValues(param), defaultValue);
+	}
+
+	public static long getLong(HttpServletRequest request, String param) {
+		return GetterUtil.getLong(request.getParameter(param));
 	}
 
 	public static long getLong(
-		ServletRequest req, String param, long defaultValue) {
+		HttpServletRequest request, String param, long defaultValue) {
 
-		return get(req, param, defaultValue);
-	}
-
-	public static long[] getLongValues(ServletRequest req, String param) {
-		return getLongValues(req, param, new long[0]);
+		return get(request, param, defaultValue);
 	}
 
 	public static long[] getLongValues(
-		ServletRequest req, String param, long[] defaultValue) {
+		HttpServletRequest request, String param) {
 
-		return GetterUtil.getLongValues(
-			req.getParameterValues(param), defaultValue);
+		return getLongValues(request, param, new long[0]);
 	}
 
-	public static short getShort(ServletRequest req, String param) {
-		return GetterUtil.getShort(req.getParameter(param));
+	public static long[] getLongValues(
+		HttpServletRequest request, String param, long[] defaultValue) {
+
+		return GetterUtil.getLongValues(
+			request.getParameterValues(param), defaultValue);
+	}
+
+	public static short getShort(HttpServletRequest request, String param) {
+		return GetterUtil.getShort(request.getParameter(param));
 	}
 
 	public static short getShort(
-		ServletRequest req, String param, short defaultValue) {
+		HttpServletRequest request, String param, short defaultValue) {
 
-		return get(req, param, defaultValue);
-	}
-
-	public static short[] getShortValues(ServletRequest req, String param) {
-		return getShortValues(req, param, new short[0]);
+		return get(request, param, defaultValue);
 	}
 
 	public static short[] getShortValues(
-		ServletRequest req, String param, short[] defaultValue) {
+		HttpServletRequest request, String param) {
 
-		return GetterUtil.getShortValues(
-			req.getParameterValues(param), defaultValue);
+		return getShortValues(request, param, new short[0]);
 	}
 
-	public static String getString(ServletRequest req, String param) {
-		return GetterUtil.getString(req.getParameter(param));
+	public static short[] getShortValues(
+		HttpServletRequest request, String param, short[] defaultValue) {
+
+		return GetterUtil.getShortValues(
+			request.getParameterValues(param), defaultValue);
+	}
+
+	public static String getString(HttpServletRequest request, String param) {
+		return GetterUtil.getString(request.getParameter(param));
 	}
 
 	public static String getString(
-		ServletRequest req, String param, String defaultValue) {
+		HttpServletRequest request, String param, String defaultValue) {
 
-		return get(req, param, defaultValue);
+		return get(request, param, defaultValue);
 	}
 
 	public static boolean get(
-		ServletRequest req, String param, boolean defaultValue) {
+		HttpServletRequest request, String param, boolean defaultValue) {
 
-		return GetterUtil.get(req.getParameter(param), defaultValue);
+		return GetterUtil.get(request.getParameter(param), defaultValue);
 	}
 
 	public static Date get(
-		ServletRequest req, String param, DateFormat df, Date defaultValue) {
+		HttpServletRequest request, String param, DateFormat df,
+		Date defaultValue) {
 
-		return GetterUtil.get(req.getParameter(param), df, defaultValue);
+		return GetterUtil.get(request.getParameter(param), df, defaultValue);
 	}
 
 	public static double get(
-		ServletRequest req, String param, double defaultValue) {
+		HttpServletRequest request, String param, double defaultValue) {
 
-		return GetterUtil.get(req.getParameter(param), defaultValue);
+		return GetterUtil.get(request.getParameter(param), defaultValue);
 	}
 
 	public static float get(
-		ServletRequest req, String param, float defaultValue) {
+		HttpServletRequest request, String param, float defaultValue) {
 
-		return GetterUtil.get(req.getParameter(param), defaultValue);
+		return GetterUtil.get(request.getParameter(param), defaultValue);
 	}
 
-	public static int get(ServletRequest req, String param, int defaultValue) {
-		return GetterUtil.get(req.getParameter(param), defaultValue);
+	public static int get(
+		HttpServletRequest request, String param, int defaultValue) {
+
+		return GetterUtil.get(request.getParameter(param), defaultValue);
 	}
 
 	public static long get(
-		ServletRequest req, String param, long defaultValue) {
+		HttpServletRequest request, String param, long defaultValue) {
 
-		return GetterUtil.get(req.getParameter(param), defaultValue);
+		return GetterUtil.get(request.getParameter(param), defaultValue);
 	}
 
 	public static short get(
-		ServletRequest req, String param, short defaultValue) {
+		HttpServletRequest request, String param, short defaultValue) {
 
-		return GetterUtil.get(req.getParameter(param), defaultValue);
+		return GetterUtil.get(request.getParameter(param), defaultValue);
 	}
 
 	public static String get(
-		ServletRequest req, String param, String defaultValue) {
+		HttpServletRequest request, String param, String defaultValue) {
 
 		String returnValue =
-			GetterUtil.get(req.getParameter(param), defaultValue);
+			GetterUtil.get(request.getParameter(param), defaultValue);
 
 		if (returnValue != null) {
 			return returnValue.trim();
@@ -245,13 +259,13 @@ public class ParamUtil {
 		return null;
 	}
 
-	public static void print(ServletRequest req) {
-		Enumeration<String> enu = req.getParameterNames();
+	public static void print(HttpServletRequest request) {
+		Enumeration<String> enu = request.getParameterNames();
 
 		while (enu.hasMoreElements()) {
 			String param = enu.nextElement();
 
-			String[] values = req.getParameterValues(param);
+			String[] values = request.getParameterValues(param);
 
 			for (int i = 0; i < values.length; i++) {
 				System.out.println(param + "[" + i + "] = " + values[i]);
@@ -261,201 +275,222 @@ public class ParamUtil {
 
 	// Portlet Request
 
-	public static boolean getBoolean(PortletRequest req, String param) {
-		return GetterUtil.getBoolean(req.getParameter(param));
+	public static boolean getBoolean(
+		PortletRequest portletRequest, String param) {
+
+		return GetterUtil.getBoolean(portletRequest.getParameter(param));
 	}
 
 	public static boolean getBoolean(
-		PortletRequest req, String param, boolean defaultValue) {
+		PortletRequest portletRequest, String param, boolean defaultValue) {
 
-		return get(req, param, defaultValue);
+		return get(portletRequest, param, defaultValue);
 	}
 
 	public static boolean[] getBooleanValues(
-		PortletRequest req, String param) {
+		PortletRequest portletRequest, String param) {
 
-		return getBooleanValues(req, param, new boolean[0]);
+		return getBooleanValues(portletRequest, param, new boolean[0]);
 	}
 
 	public static boolean[] getBooleanValues(
-		PortletRequest req, String param, boolean[] defaultValue) {
+		PortletRequest portletRequest, String param, boolean[] defaultValue) {
 
 		return GetterUtil.getBooleanValues(
-			req.getParameterValues(param), defaultValue);
+			portletRequest.getParameterValues(param), defaultValue);
 	}
 
 	public static Date getDate(
-		PortletRequest req, String param, DateFormat df) {
+		PortletRequest portletRequest, String param, DateFormat df) {
 
-		return GetterUtil.getDate(req.getParameter(param), df);
+		return GetterUtil.getDate(portletRequest.getParameter(param), df);
 	}
 
 	public static Date getDate(
-		PortletRequest req, String param, DateFormat df, Date defaultValue) {
+		PortletRequest portletRequest, String param, DateFormat df,
+		Date defaultValue) {
 
-		return get(req, param, df, defaultValue);
-	}
-
-	public static double getDouble(PortletRequest req, String param) {
-		return GetterUtil.getDouble(req.getParameter(param));
+		return get(portletRequest, param, df, defaultValue);
 	}
 
 	public static double getDouble(
-		PortletRequest req, String param, double defaultValue) {
+		PortletRequest portletRequest, String param) {
 
-		return get(req, param, defaultValue);
+		return GetterUtil.getDouble(portletRequest.getParameter(param));
 	}
 
-	public static double[] getDoubleValues(PortletRequest req, String param) {
-		return getDoubleValues(req, param, new double[0]);
+	public static double getDouble(
+		PortletRequest portletRequest, String param, double defaultValue) {
+
+		return get(portletRequest, param, defaultValue);
 	}
 
 	public static double[] getDoubleValues(
-		PortletRequest req, String param, double[] defaultValue) {
+		PortletRequest portletRequest, String param) {
 
-		return GetterUtil.getDoubleValues(
-			req.getParameterValues(param), defaultValue);
+		return getDoubleValues(portletRequest, param, new double[0]);
 	}
 
-	public static float getFloat(PortletRequest req, String param) {
-		return GetterUtil.getFloat(req.getParameter(param));
+	public static double[] getDoubleValues(
+		PortletRequest portletRequest, String param, double[] defaultValue) {
+
+		return GetterUtil.getDoubleValues(
+			portletRequest.getParameterValues(param), defaultValue);
+	}
+
+	public static float getFloat(PortletRequest portletRequest, String param) {
+		return GetterUtil.getFloat(portletRequest.getParameter(param));
 	}
 
 	public static float getFloat(
-		PortletRequest req, String param, float defaultValue) {
+		PortletRequest portletRequest, String param, float defaultValue) {
 
-		return get(req, param, defaultValue);
-	}
-
-	public static float[] getFloatValues(PortletRequest req, String param) {
-		return getFloatValues(req, param, new float[0]);
+		return get(portletRequest, param, defaultValue);
 	}
 
 	public static float[] getFloatValues(
-		PortletRequest req, String param, float[] defaultValue) {
+		PortletRequest portletRequest, String param) {
 
-		return GetterUtil.getFloatValues(
-			req.getParameterValues(param), defaultValue);
+		return getFloatValues(portletRequest, param, new float[0]);
 	}
 
-	public static int getInteger(PortletRequest req, String param) {
-		return GetterUtil.getInteger(req.getParameter(param));
+	public static float[] getFloatValues(
+		PortletRequest portletRequest, String param, float[] defaultValue) {
+
+		return GetterUtil.getFloatValues(
+			portletRequest.getParameterValues(param), defaultValue);
+	}
+
+	public static int getInteger(PortletRequest portletRequest, String param) {
+		return GetterUtil.getInteger(portletRequest.getParameter(param));
 	}
 
 	public static int getInteger(
-		PortletRequest req, String param, int defaultValue) {
+		PortletRequest portletRequest, String param, int defaultValue) {
 
-		return get(req, param, defaultValue);
-	}
-
-	public static int[] getIntegerValues(PortletRequest req, String param) {
-		return getIntegerValues(req, param, new int[0]);
+		return get(portletRequest, param, defaultValue);
 	}
 
 	public static int[] getIntegerValues(
-		PortletRequest req, String param, int[] defaultValue) {
+		PortletRequest portletRequest, String param) {
 
-		return GetterUtil.getIntegerValues(
-			req.getParameterValues(param), defaultValue);
+		return getIntegerValues(portletRequest, param, new int[0]);
 	}
 
-	public static long getLong(PortletRequest req, String param) {
-		return GetterUtil.getLong(req.getParameter(param));
+	public static int[] getIntegerValues(
+		PortletRequest portletRequest, String param, int[] defaultValue) {
+
+		return GetterUtil.getIntegerValues(
+			portletRequest.getParameterValues(param), defaultValue);
+	}
+
+	public static long getLong(PortletRequest portletRequest, String param) {
+		return GetterUtil.getLong(portletRequest.getParameter(param));
 	}
 
 	public static long getLong(
-		PortletRequest req, String param, long defaultValue) {
+		PortletRequest portletRequest, String param, long defaultValue) {
 
-		return get(req, param, defaultValue);
-	}
-
-	public static long[] getLongValues(PortletRequest req, String param) {
-		return getLongValues(req, param, new long[0]);
+		return get(portletRequest, param, defaultValue);
 	}
 
 	public static long[] getLongValues(
-		PortletRequest req, String param, long[] defaultValue) {
+		PortletRequest portletRequest, String param) {
 
-		return GetterUtil.getLongValues(
-			req.getParameterValues(param), defaultValue);
+		return getLongValues(portletRequest, param, new long[0]);
 	}
 
-	public static short getShort(PortletRequest req, String param) {
-		return GetterUtil.getShort(req.getParameter(param));
+	public static long[] getLongValues(
+		PortletRequest portletRequest, String param, long[] defaultValue) {
+
+		return GetterUtil.getLongValues(
+			portletRequest.getParameterValues(param), defaultValue);
+	}
+
+	public static short getShort(PortletRequest portletRequest, String param) {
+		return GetterUtil.getShort(portletRequest.getParameter(param));
 	}
 
 	public static short getShort(
-		PortletRequest req, String param, short defaultValue) {
+		PortletRequest portletRequest, String param, short defaultValue) {
 
-		return get(req, param, defaultValue);
-	}
-
-	public static short[] getShortValues(PortletRequest req, String param) {
-		return getShortValues(req, param, new short[0]);
+		return get(portletRequest, param, defaultValue);
 	}
 
 	public static short[] getShortValues(
-		PortletRequest req, String param, short[] defaultValue) {
+		PortletRequest portletRequest, String param) {
 
-		return GetterUtil.getShortValues(
-			req.getParameterValues(param), defaultValue);
+		return getShortValues(portletRequest, param, new short[0]);
 	}
 
-	public static String getString(PortletRequest req, String param) {
-		return GetterUtil.getString(req.getParameter(param));
+	public static short[] getShortValues(
+		PortletRequest portletRequest, String param, short[] defaultValue) {
+
+		return GetterUtil.getShortValues(
+			portletRequest.getParameterValues(param), defaultValue);
 	}
 
 	public static String getString(
-		PortletRequest req, String param, String defaultValue) {
+		PortletRequest portletRequest, String param) {
 
-		return get(req, param, defaultValue);
+		return GetterUtil.getString(portletRequest.getParameter(param));
+	}
+
+	public static String getString(
+		PortletRequest portletRequest, String param, String defaultValue) {
+
+		return get(portletRequest, param, defaultValue);
 	}
 
 	public static boolean get(
-		PortletRequest req, String param, boolean defaultValue) {
+		PortletRequest portletRequest, String param, boolean defaultValue) {
 
-		return GetterUtil.get(req.getParameter(param), defaultValue);
+		return GetterUtil.get(portletRequest.getParameter(param), defaultValue);
 	}
 
 	public static Date get(
-		PortletRequest req, String param, DateFormat df, Date defaultValue) {
+		PortletRequest portletRequest, String param, DateFormat df,
+		Date defaultValue) {
 
-		return GetterUtil.get(req.getParameter(param), df, defaultValue);
+		return GetterUtil.get(
+			portletRequest.getParameter(param), df, defaultValue);
 	}
 
 	public static double get(
-		PortletRequest req, String param, double defaultValue) {
+		PortletRequest portletRequest, String param, double defaultValue) {
 
-		return GetterUtil.get(req.getParameter(param), defaultValue);
+		return GetterUtil.get(portletRequest.getParameter(param), defaultValue);
 	}
 
 	public static float get(
-		PortletRequest req, String param, float defaultValue) {
+		PortletRequest portletRequest, String param, float defaultValue) {
 
-		return GetterUtil.get(req.getParameter(param), defaultValue);
+		return GetterUtil.get(portletRequest.getParameter(param), defaultValue);
 	}
 
-	public static int get(PortletRequest req, String param, int defaultValue) {
-		return GetterUtil.get(req.getParameter(param), defaultValue);
+	public static int get(
+		PortletRequest portletRequest, String param, int defaultValue) {
+
+		return GetterUtil.get(portletRequest.getParameter(param), defaultValue);
 	}
 
 	public static long get(
-		PortletRequest req, String param, long defaultValue) {
+		PortletRequest portletRequest, String param, long defaultValue) {
 
-		return GetterUtil.get(req.getParameter(param), defaultValue);
+		return GetterUtil.get(portletRequest.getParameter(param), defaultValue);
 	}
 
 	public static short get(
-		PortletRequest req, String param, short defaultValue) {
+		PortletRequest portletRequest, String param, short defaultValue) {
 
-		return GetterUtil.get(req.getParameter(param), defaultValue);
+		return GetterUtil.get(portletRequest.getParameter(param), defaultValue);
 	}
 
 	public static String get(
-		PortletRequest req, String param, String defaultValue) {
+		PortletRequest portletRequest, String param, String defaultValue) {
 
 		String returnValue =
-			GetterUtil.get(req.getParameter(param), defaultValue);
+			GetterUtil.get(portletRequest.getParameter(param), defaultValue);
 
 		if (returnValue != null) {
 			return returnValue.trim();
@@ -464,13 +499,13 @@ public class ParamUtil {
 		return null;
 	}
 
-	public static void print(PortletRequest req) {
-		Enumeration<String> enu = req.getParameterNames();
+	public static void print(PortletRequest portletRequest) {
+		Enumeration<String> enu = portletRequest.getParameterNames();
 
 		while (enu.hasMoreElements()) {
 			String param = enu.nextElement();
 
-			String[] values = req.getParameterValues(param);
+			String[] values = portletRequest.getParameterValues(param);
 
 			for (int i = 0; i < values.length; i++) {
 				System.out.println(param + "[" + i + "] = " + values[i]);

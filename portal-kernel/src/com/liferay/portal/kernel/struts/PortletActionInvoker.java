@@ -38,7 +38,7 @@ import javax.portlet.PortletConfig;
 public class PortletActionInvoker {
 
 	public static void processAction(
-			String className, PortletConfig config, ActionRequest req,
+			String className, PortletConfig portletConfig, ActionRequest req,
 			ActionResponse res)
 		throws Exception {
 
@@ -49,7 +49,7 @@ public class PortletActionInvoker {
 
 		PortalClassInvoker.invoke(
 			className, "processAction",
-			new Object[] {mapping, form, config, req, res});
+			new Object[] {mapping, form, portletConfig, req, res});
 	}
 
 }

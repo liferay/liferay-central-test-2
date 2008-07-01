@@ -163,9 +163,9 @@ public class MainServlet extends ActionServlet {
 
 		String contextPath = PortalUtil.getPathContext();
 
-		ServletContext ctx = getServletContext();
+		ServletContext servletContext = getServletContext();
 
-		VelocityContextPool.put(contextPath, ctx);
+		VelocityContextPool.put(contextPath, servletContext);
 
 		// Plugin package
 
@@ -177,7 +177,8 @@ public class MainServlet extends ActionServlet {
 
 		try {
 			pluginPackage =
-				PluginPackageHotDeployListener.readPluginPackage(ctx);
+				PluginPackageHotDeployListener.readPluginPackage(
+					servletContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -193,15 +194,16 @@ public class MainServlet extends ActionServlet {
 
 		try {
 			String[] xmls = new String[] {
-				HttpUtil.URLtoString(ctx.getResource(
+				HttpUtil.URLtoString(servletContext.getResource(
 					"/WEB-INF/" + Portal.PORTLET_XML_FILE_NAME_CUSTOM)),
-				HttpUtil.URLtoString(ctx.getResource(
+				HttpUtil.URLtoString(servletContext.getResource(
 					"/WEB-INF/portlet-ext.xml")),
-				HttpUtil.URLtoString(ctx.getResource(
+				HttpUtil.URLtoString(servletContext.getResource(
 					"/WEB-INF/liferay-portlet.xml")),
-				HttpUtil.URLtoString(ctx.getResource(
+				HttpUtil.URLtoString(servletContext.getResource(
 					"/WEB-INF/liferay-portlet-ext.xml")),
-				HttpUtil.URLtoString(ctx.getResource("/WEB-INF/web.xml"))
+				HttpUtil.URLtoString(servletContext.getResource(
+					"/WEB-INF/web.xml"))
 			};
 
 			PortletLocalServiceUtil.initEAR(xmls, pluginPackage);
@@ -212,10 +214,10 @@ public class MainServlet extends ActionServlet {
 				Portlet portlet = portlets.get(i);
 
 				if (i == 0) {
-					initPortletApp(portlet, ctx);
+					initPortletApp(portlet, servletContext);
 				}
 
-				PortletInstanceFactory.create(portlet, ctx);
+				PortletInstanceFactory.create(portlet, servletContext);
 			}
 		}
 		catch (Exception e) {
@@ -230,13 +232,14 @@ public class MainServlet extends ActionServlet {
 
 		try {
 			String[] xmls = new String[] {
-				HttpUtil.URLtoString(ctx.getResource(
+				HttpUtil.URLtoString(servletContext.getResource(
 					"/WEB-INF/liferay-layout-templates.xml")),
-				HttpUtil.URLtoString(ctx.getResource(
+				HttpUtil.URLtoString(servletContext.getResource(
 					"/WEB-INF/liferay-layout-templates-ext.xml"))
 			};
 
-			LayoutTemplateLocalServiceUtil.init(ctx, xmls, pluginPackage);
+			LayoutTemplateLocalServiceUtil.init(
+				servletContext, xmls, pluginPackage);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -250,13 +253,14 @@ public class MainServlet extends ActionServlet {
 
 		try {
 			String[] xmls = new String[] {
-				HttpUtil.URLtoString(ctx.getResource(
+				HttpUtil.URLtoString(servletContext.getResource(
 					"/WEB-INF/liferay-look-and-feel.xml")),
-				HttpUtil.URLtoString(ctx.getResource(
+				HttpUtil.URLtoString(servletContext.getResource(
 					"/WEB-INF/liferay-look-and-feel-ext.xml"))
 			};
 
-			ThemeLocalServiceUtil.init(ctx, null, true, xmls, pluginPackage);
+			ThemeLocalServiceUtil.init(
+				servletContext, null, true, xmls, pluginPackage);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -386,7 +390,7 @@ public class MainServlet extends ActionServlet {
 
 		try {
 			String xml = HttpUtil.URLtoString(
-				ctx.getResource("/WEB-INF/web.xml"));
+				servletContext.getResource("/WEB-INF/web.xml"));
 
 			checkWebSettings(xml);
 		}
@@ -428,7 +432,7 @@ public class MainServlet extends ActionServlet {
 		String[] webIds = PortalInstances.getWebIds();
 
 		for (int i = 0; i < webIds.length; i++) {
-			PortalInstances.initCompany(ctx, webIds[i]);
+			PortalInstances.initCompany(servletContext, webIds[i]);
 		}
 
 		// See LEP-2885. Don't flush hot deploy events until after the portal
@@ -676,16 +680,16 @@ public class MainServlet extends ActionServlet {
 			Throwable cause = e.getCause();
 
 			if (cause instanceof NoSuchLayoutException) {
-				DynamicServletRequest dynamicReq = new DynamicServletRequest(
-					request);
+				DynamicServletRequest dynamicRequest =
+					new DynamicServletRequest(request);
 
 				// Reset p_l_id or there will be an infinite loop
 
-				dynamicReq.setParameter("p_l_id", StringPool.BLANK);
+				dynamicRequest.setParameter("p_l_id", StringPool.BLANK);
 
 				PortalUtil.sendError(
 					HttpServletResponse.SC_NOT_FOUND,
-					(NoSuchLayoutException)cause, dynamicReq, response);
+					(NoSuchLayoutException)cause, dynamicRequest, response);
 
 				return;
 			}

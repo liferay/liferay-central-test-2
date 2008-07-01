@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
 
 import java.util.Locale;
 
@@ -43,8 +42,8 @@ import javax.servlet.http.HttpServletResponseWrapper;
  */
 public class StringServletResponse extends HttpServletResponseWrapper {
 
-	public StringServletResponse(HttpServletResponse res) {
-		super(res);
+	public StringServletResponse(HttpServletResponse response) {
+		super(response);
 	}
 
 	public int getBufferSize() {
@@ -73,7 +72,7 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		return _status;
 	}
 
-	public String getString() throws UnsupportedEncodingException {
+	public String getString() {
 		if (_string != null) {
 			return _string;
 		}

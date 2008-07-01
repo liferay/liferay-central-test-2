@@ -74,7 +74,7 @@ import org.apache.struts.action.ActionMapping;
 public class EditTemplateAction extends PortletAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
@@ -98,7 +98,7 @@ public class EditTemplateAction extends PortletAction {
 
 				if (saveAndContinue) {
 					redirect = getSaveAndContinueRedirect(
-						config, req, template, redirect);
+						portletConfig, req, template, redirect);
 				}
 			}
 
@@ -134,7 +134,7 @@ public class EditTemplateAction extends PortletAction {
 	}
 
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
@@ -183,8 +183,8 @@ public class EditTemplateAction extends PortletAction {
 	}
 
 	protected String getSaveAndContinueRedirect(
-			PortletConfig config, ActionRequest req, JournalTemplate template,
-			String redirect)
+			PortletConfig portletConfig, ActionRequest req,
+			JournalTemplate template, String redirect)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
@@ -193,7 +193,7 @@ public class EditTemplateAction extends PortletAction {
 		String originalRedirect = ParamUtil.getString(req, "originalRedirect");
 
 		PortletURLImpl portletURL = new PortletURLImpl(
-			(ActionRequestImpl)req, config.getPortletName(),
+			(ActionRequestImpl)req, portletConfig.getPortletName(),
 			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
 		portletURL.setWindowState(WindowState.MAXIMIZED);

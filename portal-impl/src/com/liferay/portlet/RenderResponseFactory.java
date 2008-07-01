@@ -41,16 +41,16 @@ import org.apache.commons.pool.impl.StackObjectPool;
 public class RenderResponseFactory {
 
 	public static RenderResponseImpl create(
-			RenderRequestImpl req, HttpServletResponse res, String portletName,
-			long companyId)
+			RenderRequestImpl renderRequestImpl, HttpServletResponse response,
+			String portletName, long companyId)
 		throws Exception {
 
-		return create(req, res, portletName, companyId, 0);
+		return create(renderRequestImpl, response, portletName, companyId, 0);
 	}
 
 	public static RenderResponseImpl create(
-			RenderRequestImpl req, HttpServletResponse res, String portletName,
-			long companyId, long plid)
+			RenderRequestImpl renderRequestImpl, HttpServletResponse response,
+			String portletName, long companyId, long plid)
 		throws Exception {
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
@@ -61,21 +61,23 @@ public class RenderResponseFactory {
 			}
 		}
 
-		RenderResponseImpl renderResImpl = null;
+		RenderResponseImpl renderResponseImpl = null;
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
-			renderResImpl = (RenderResponseImpl)_instance._pool.borrowObject();
+			renderResponseImpl =
+				(RenderResponseImpl)_instance._pool.borrowObject();
 		}
 		else {
-			renderResImpl = new RenderResponseImpl();
+			renderResponseImpl = new RenderResponseImpl();
 		}
 
-		renderResImpl.init(req, res, portletName, companyId, plid);
+		renderResponseImpl.init(
+			renderRequestImpl, response, portletName, companyId, plid);
 
-		return renderResImpl;
+		return renderResponseImpl;
 	}
 
-	public static void recycle(RenderResponseImpl renderResImpl)
+	public static void recycle(RenderResponseImpl renderResponseImpl)
 		throws Exception {
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
@@ -85,10 +87,10 @@ public class RenderResponseFactory {
 						_instance._pool.getNumActive());
 			}
 
-			_instance._pool.returnObject(renderResImpl);
+			_instance._pool.returnObject(renderResponseImpl);
 		}
-		else if (renderResImpl != null) {
-			renderResImpl.recycle();
+		else if (renderResponseImpl != null) {
+			renderResponseImpl.recycle();
 		}
 	}
 
@@ -110,9 +112,9 @@ public class RenderResponseFactory {
 		}
 
 		public void passivateObject(Object obj) {
-			RenderResponseImpl renderResImpl = (RenderResponseImpl)obj;
+			RenderResponseImpl renderResponseImpl = (RenderResponseImpl)obj;
 
-			renderResImpl.recycle();
+			renderResponseImpl.recycle();
 		}
 
 	}

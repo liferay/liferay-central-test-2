@@ -55,9 +55,10 @@ public class LayoutIconTag extends com.liferay.taglib.util.IncludeTag {
 
 		setRequestAttributes(request, layout);
 
-		RequestDispatcher rd = servletContext.getRequestDispatcher(page);
+		RequestDispatcher requestDispatcher =
+			servletContext.getRequestDispatcher(page);
 
-		rd.include(request, response);
+		requestDispatcher.include(request, response);
 	}
 
 	public static void setRequestAttributes(

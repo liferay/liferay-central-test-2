@@ -35,7 +35,7 @@ import java.util.Calendar;
 
 import javax.portlet.PortletRequest;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="DAOParamUtil.java.html"><b><i>View Source</i></b></a>
@@ -47,21 +47,21 @@ public class DAOParamUtil {
 
 	// Servlet Request
 
-	public static boolean getBoolean(ServletRequest req, String param) {
-		return GetterUtil.getBoolean(getString(req, param));
+	public static boolean getBoolean(HttpServletRequest request, String param) {
+		return GetterUtil.getBoolean(getString(request, param));
 	}
 
-	public static int getInteger(ServletRequest req, String param) {
-		return GetterUtil.getInteger(getString(req, param));
+	public static int getInteger(HttpServletRequest request, String param) {
+		return GetterUtil.getInteger(getString(request, param));
 	}
 
-	public static String getISODate(ServletRequest req, String param) {
-		int month = ParamUtil.getInteger(req, param + "Month");
-		int day = ParamUtil.getInteger(req, param + "Day");
-		int year = ParamUtil.getInteger(req, param + "Year");
-		int hour = ParamUtil.getInteger(req, param + "Hour", -1);
-		int minute = ParamUtil.getInteger(req, param + "Minute", -1);
-		int amPm = ParamUtil.getInteger(req, param + "AmPm");
+	public static String getISODate(HttpServletRequest request, String param) {
+		int month = ParamUtil.getInteger(request, param + "Month");
+		int day = ParamUtil.getInteger(request, param + "Day");
+		int year = ParamUtil.getInteger(request, param + "Year");
+		int hour = ParamUtil.getInteger(request, param + "Hour", -1);
+		int minute = ParamUtil.getInteger(request, param + "Minute", -1);
+		int amPm = ParamUtil.getInteger(request, param + "AmPm");
 
 		if ((month >= 0) && (day > 0) && (year > 0)) {
 			Calendar cal = CalendarFactoryUtil.getCalendar();
@@ -86,27 +86,27 @@ public class DAOParamUtil {
 		}
 	}
 
-	public static String getLike(ServletRequest req, String param) {
-		return getLike(req, param, null, true);
+	public static String getLike(HttpServletRequest request, String param) {
+		return getLike(request, param, null, true);
 	}
 
 	public static String getLike(
-		ServletRequest req, String param, String defaultValue) {
+		HttpServletRequest request, String param, String defaultValue) {
 
-		return getLike(req, param, defaultValue, true);
+		return getLike(request, param, defaultValue, true);
 	}
 
 	public static String getLike(
-		ServletRequest req, String param, boolean toLowerCase) {
+		HttpServletRequest request, String param, boolean toLowerCase) {
 
-		return getLike(req, param, null, toLowerCase);
+		return getLike(request, param, null, toLowerCase);
 	}
 
 	public static String getLike(
-		ServletRequest req, String param, String defaultValue,
+		HttpServletRequest request, String param, String defaultValue,
 		boolean toLowerCase) {
 
-		String value = req.getParameter(param);
+		String value = request.getParameter(param);
 
 		if (value != null) {
 			value = value.trim();
@@ -126,16 +126,16 @@ public class DAOParamUtil {
 		return value;
 	}
 
-	public static long getLong(ServletRequest req, String param) {
-		return GetterUtil.getLong(getString(req, param));
+	public static long getLong(HttpServletRequest request, String param) {
+		return GetterUtil.getLong(getString(request, param));
 	}
 
-	public static short getShort(ServletRequest req, String param) {
-		return GetterUtil.getShort(getString(req, param));
+	public static short getShort(HttpServletRequest request, String param) {
+		return GetterUtil.getShort(getString(request, param));
 	}
 
-	public static String getString(ServletRequest req, String param) {
-		String value = ParamUtil.getString(req, param);
+	public static String getString(HttpServletRequest request, String param) {
+		String value = ParamUtil.getString(request, param);
 
 		if (Validator.isNull(value)) {
 			return null;
@@ -147,21 +147,25 @@ public class DAOParamUtil {
 
 	// Portlet Request
 
-	public static boolean getBoolean(PortletRequest req, String param) {
-		return GetterUtil.getBoolean(getString(req, param));
+	public static boolean getBoolean(
+		PortletRequest portletRequest, String param) {
+
+		return GetterUtil.getBoolean(getString(portletRequest, param));
 	}
 
-	public static int getInteger(PortletRequest req, String param) {
-		return GetterUtil.getInteger(getString(req, param));
+	public static int getInteger(PortletRequest portletRequest, String param) {
+		return GetterUtil.getInteger(getString(portletRequest, param));
 	}
 
-	public static String getISODate(PortletRequest req, String param) {
-		int month = ParamUtil.getInteger(req, param + "Month");
-		int day = ParamUtil.getInteger(req, param + "Day");
-		int year = ParamUtil.getInteger(req, param + "Year");
-		int hour = ParamUtil.getInteger(req, param + "Hour", -1);
-		int minute = ParamUtil.getInteger(req, param + "Minute", -1);
-		int amPm = ParamUtil.getInteger(req, param + "AmPm");
+	public static String getISODate(
+		PortletRequest portletRequest, String param) {
+
+		int month = ParamUtil.getInteger(portletRequest, param + "Month");
+		int day = ParamUtil.getInteger(portletRequest, param + "Day");
+		int year = ParamUtil.getInteger(portletRequest, param + "Year");
+		int hour = ParamUtil.getInteger(portletRequest, param + "Hour", -1);
+		int minute = ParamUtil.getInteger(portletRequest, param + "Minute", -1);
+		int amPm = ParamUtil.getInteger(portletRequest, param + "AmPm");
 
 		if ((month >= 0) && (day > 0) && (year > 0)) {
 			Calendar cal = CalendarFactoryUtil.getCalendar();
@@ -186,27 +190,27 @@ public class DAOParamUtil {
 		}
 	}
 
-	public static String getLike(PortletRequest req, String param) {
-		return getLike(req, param, null, true);
+	public static String getLike(PortletRequest portletRequest, String param) {
+		return getLike(portletRequest, param, null, true);
 	}
 
 	public static String getLike(
-		PortletRequest req, String param, String defaultValue) {
+		PortletRequest portletRequest, String param, String defaultValue) {
 
-		return getLike(req, param, defaultValue, true);
+		return getLike(portletRequest, param, defaultValue, true);
 	}
 
 	public static String getLike(
-		PortletRequest req, String param, boolean toLowerCase) {
+		PortletRequest portletRequest, String param, boolean toLowerCase) {
 
-		return getLike(req, param, null, toLowerCase);
+		return getLike(portletRequest, param, null, toLowerCase);
 	}
 
 	public static String getLike(
-		PortletRequest req, String param, String defaultValue,
+		PortletRequest portletRequest, String param, String defaultValue,
 		boolean toLowerCase) {
 
-		String value = req.getParameter(param);
+		String value = portletRequest.getParameter(param);
 
 		if (value != null) {
 			value = value.trim();
@@ -226,16 +230,18 @@ public class DAOParamUtil {
 		return value;
 	}
 
-	public static long getLong(PortletRequest req, String param) {
-		return GetterUtil.getLong(getString(req, param));
+	public static long getLong(PortletRequest portletRequest, String param) {
+		return GetterUtil.getLong(getString(portletRequest, param));
 	}
 
-	public static short getShort(PortletRequest req, String param) {
-		return GetterUtil.getShort(getString(req, param));
+	public static short getShort(PortletRequest portletRequest, String param) {
+		return GetterUtil.getShort(getString(portletRequest, param));
 	}
 
-	public static String getString(PortletRequest req, String param) {
-		String value = ParamUtil.getString(req, param);
+	public static String getString(
+		PortletRequest portletRequest, String param) {
+
+		String value = ParamUtil.getString(portletRequest, param);
 
 		if (Validator.isNull(value)) {
 			return null;

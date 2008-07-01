@@ -117,9 +117,10 @@ public class ToggleTagUtil {
 			request.setAttribute(
 				"liferay-ui:toggle:defaultMessage", defaultMessage);
 
-			RequestDispatcher rd = servletContext.getRequestDispatcher(page);
+			RequestDispatcher requestDispatcher =
+				servletContext.getRequestDispatcher(page);
 
-			rd.include(request, response);
+			requestDispatcher.include(request, response);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

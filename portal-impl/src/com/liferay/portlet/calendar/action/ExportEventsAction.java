@@ -57,19 +57,20 @@ import org.apache.struts.action.ActionMapping;
 public class ExportEventsAction extends PortletAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		InputStream is = null;
 
 		try {
-			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
-				WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
-			long eventId = ParamUtil.getLong(req, "eventId");
+			long eventId = ParamUtil.getLong(actionRequest, "eventId");
 
-			String exportFileName = ParamUtil.getString(req, "exportFileName");
+			String exportFileName = ParamUtil.getString(
+				actionRequest, "exportFileName");
 
 			File file = null;
 
@@ -83,12 +84,12 @@ public class ExportEventsAction extends PortletAction {
 
 			is = new BufferedInputStream(new FileInputStream(file));
 
-			HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(
-				res);
+			HttpServletResponse response = PortalUtil.getHttpServletResponse(
+				actionResponse);
 
-			ServletResponseUtil.sendFile(httpRes, file.getName(), is);
+			ServletResponseUtil.sendFile(response, file.getName(), is);
 
-			setForward(req, ActionConstants.COMMON_NULL);
+			setForward(actionRequest, ActionConstants.COMMON_NULL);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

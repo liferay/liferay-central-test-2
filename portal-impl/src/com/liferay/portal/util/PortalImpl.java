@@ -2269,12 +2269,12 @@ public class PortalImpl implements Portal {
 			servletContext.getRequestDispatcher(path);
 
 		if (sb != null) {
-			StringServletResponse stringServletRes =
-				new StringServletResponse(response);
+			StringServletResponse stringResponse = new StringServletResponse(
+				response);
 
-			requestDispatcher.include(request, stringServletRes);
+			requestDispatcher.include(request, stringResponse);
 
-			sb.append(stringServletRes.getString());
+			sb.append(stringResponse.getString());
 		}
 		else {
 

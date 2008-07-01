@@ -32,6 +32,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public interface URLEncoder {
 
-	public String encodeURL(HttpServletResponse res, String path);
+	public String encodeURL(HttpServletResponse response, String path);
 
 }

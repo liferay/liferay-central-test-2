@@ -127,16 +127,16 @@ public abstract class StateAwareResponseImpl
 			throw new IllegalStateException();
 		}
 
-		if (!_req.isPortletModeAllowed(portletMode)) {
+		if (!_portletRequestImpl.isPortletModeAllowed(portletMode)) {
 			throw new PortletModeException(portletMode.toString(), portletMode);
 		}
 
 		try {
 			_portletMode = PortalUtil.updatePortletMode(
 				_portletName, _user, _layout, portletMode,
-				_req.getHttpServletRequest());
+				_portletRequestImpl.getHttpServletRequest());
 
-			_req.setPortletMode(_portletMode);
+			_portletRequestImpl.setPortletMode(_portletMode);
 		}
 		catch (Exception e) {
 			throw new PortletModeException(e, portletMode);
@@ -224,16 +224,16 @@ public abstract class StateAwareResponseImpl
 			throw new IllegalStateException();
 		}
 
-		if (!_req.isWindowStateAllowed(windowState)) {
+		if (!_portletRequestImpl.isWindowStateAllowed(windowState)) {
 			throw new WindowStateException(windowState.toString(), windowState);
 		}
 
 		try {
 			_windowState = PortalUtil.updateWindowState(
 				_portletName, _user, _layout, windowState,
-				_req.getHttpServletRequest());
+				_portletRequestImpl.getHttpServletRequest());
 
-			_req.setWindowState(_windowState);
+			_portletRequestImpl.setWindowState(_windowState);
 		}
 		catch (Exception e) {
 			throw new WindowStateException(e, windowState);
@@ -243,15 +243,16 @@ public abstract class StateAwareResponseImpl
 	}
 
 	protected void init(
-			PortletRequestImpl req, HttpServletResponse res, String portletName,
-			User user, Layout layout, WindowState windowState,
-			PortletMode portletMode)
+			PortletRequestImpl portletRequestImpl, HttpServletResponse response,
+			String portletName, User user, Layout layout,
+			WindowState windowState, PortletMode portletMode)
 		throws PortletModeException, WindowStateException {
 
 		super.init(
-			req, res, portletName, layout.getCompanyId(), layout.getPlid());
+			portletRequestImpl, response, portletName, layout.getCompanyId(),
+			layout.getPlid());
 
-		_req = req;
+		_portletRequestImpl = portletRequestImpl;
 		_portletName = portletName;
 		_user = user;
 		_layout = layout;
@@ -267,7 +268,7 @@ public abstract class StateAwareResponseImpl
 	protected void recycle() {
 		super.recycle();
 
-		_req = null;
+		_portletRequestImpl = null;
 		_portletName = null;
 		_user = null;
 		_layout = null;
@@ -279,7 +280,7 @@ public abstract class StateAwareResponseImpl
 		_calledSetRenderParameter = false;
 	}
 
-	private PortletRequestImpl _req;
+	private PortletRequestImpl _portletRequestImpl;
 	private String _portletName;
 	private User _user;
 	private Layout _layout;

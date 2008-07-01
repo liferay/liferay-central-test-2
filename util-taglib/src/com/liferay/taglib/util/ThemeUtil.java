@@ -75,7 +75,7 @@ public class ThemeUtil {
 	}
 
 	public static void includeJSP(
-			ServletContext ctx, HttpServletRequest request,
+			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response, String path, Theme theme)
 		throws Exception {
 
@@ -92,35 +92,38 @@ public class ThemeUtil {
 		themeDisplay.setTilesSelectable(tilesSelectable);
 
 		if (theme.isWARFile()) {
-			ServletContext themeCtx = ctx.getContext(theme.getContextPath());
+			ServletContext themeServletContext = servletContext.getContext(
+				theme.getContextPath());
 
-			if (themeCtx == null) {
+			if (themeServletContext == null) {
 				_log.error(
 					"Theme " + theme.getThemeId() + " cannot find its " +
 						"servlet context at " + theme.getServletContextName());
 			}
 			else {
-				RequestDispatcher rd = themeCtx.getRequestDispatcher(path);
+				RequestDispatcher requestDispatcher =
+					themeServletContext.getRequestDispatcher(path);
 
-				if (rd == null) {
+				if (requestDispatcher == null) {
 					_log.error(
 						"Theme " + theme.getThemeId() + " does not have " +
 							path);
 				}
 				else {
-					rd.include(request, response);
+					requestDispatcher.include(request, response);
 				}
 			}
 		}
 		else {
-			RequestDispatcher rd = ctx.getRequestDispatcher(path);
+			RequestDispatcher requestDispatcher =
+				servletContext.getRequestDispatcher(path);
 
-			if (rd == null) {
+			if (requestDispatcher == null) {
 				_log.error(
 					"Theme " + theme.getThemeId() + " does not have " + path);
 			}
 			else {
-				rd.include(request, response);
+				requestDispatcher.include(request, response);
 			}
 		}
 	}
@@ -167,28 +170,28 @@ public class ThemeUtil {
 
 		StringWriter sw = new StringWriter();
 
-		VelocityContext vc = new VelocityContext();
+		VelocityContext velocityContext = new VelocityContext();
 
 		// Velocity variables
 
-		VelocityVariables.insertVariables(vc, request);
+		VelocityVariables.insertVariables(velocityContext, request);
 
 		// liferay:include tag library
 
-		StringServletResponse stringServletRes = new StringServletResponse(
+		StringServletResponse stringResponse = new StringServletResponse(
 			(HttpServletResponse)pageContext.getResponse());
 
 		VelocityTaglib velocityTaglib = new VelocityTaglib(
-			servletContext, request, stringServletRes, pageContext);
+			servletContext, request, stringResponse, pageContext);
 
 		request.setAttribute(WebKeys.VELOCITY_TAGLIB, velocityTaglib);
 
-		vc.put("taglibLiferay", velocityTaglib);
-		vc.put("theme", velocityTaglib);
+		velocityContext.put("taglibLiferay", velocityTaglib);
+		velocityContext.put("theme", velocityTaglib);
 
 		// Merge templates
 
-		Velocity.mergeTemplate(source, StringPool.UTF8, vc, sw);
+		Velocity.mergeTemplate(source, StringPool.UTF8, velocityContext, sw);
 
 		// Print output
 

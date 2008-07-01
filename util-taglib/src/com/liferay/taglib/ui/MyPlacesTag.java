@@ -43,19 +43,20 @@ import javax.servlet.jsp.JspException;
 public class MyPlacesTag extends IncludeTag {
 
 	public static void doTag(
-			ServletContext ctx, HttpServletRequest request,
+			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response)
 		throws IOException, ServletException {
 
-		doTag(_PAGE, ctx, request, response);
+		doTag(_PAGE, servletContext, request, response);
 	}
 
 	public static void doTag(
-			String page, ServletContext ctx, HttpServletRequest request,
-			HttpServletResponse response)
+			String page, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
-		RequestDispatcher requestDispatcher = ctx.getRequestDispatcher(page);
+		RequestDispatcher requestDispatcher =
+			servletContext.getRequestDispatcher(page);
 
 		requestDispatcher.include(request, response);
 	}

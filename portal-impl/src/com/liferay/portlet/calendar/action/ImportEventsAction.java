@@ -50,28 +50,28 @@ import org.apache.struts.action.ActionMapping;
 public class ImportEventsAction extends PortletAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		try {
-			UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
-				req);
+			UploadPortletRequest uploadRequest =
+				PortalUtil.getUploadPortletRequest(actionRequest);
 
-			Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+			Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
 
-			File file = uploadReq.getFile("file");
+			File file = uploadRequest.getFile("file");
 
 			CalEventServiceUtil.importICal4j(layout.getPlid(), file);
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 
-			SessionErrors.add(req, e.getClass().getName());
+			SessionErrors.add(actionRequest, e.getClass().getName());
 
-			setForward(req, "portlet.calendar.error");
+			setForward(actionRequest, "portlet.calendar.error");
 		}
 	}
 

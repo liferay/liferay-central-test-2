@@ -54,24 +54,27 @@ public class BoxTag extends ParamAndPropertyAncestorTagImpl {
 
 	public int doEndTag() throws JspException {
 		try {
-			ServletContext ctx = getServletContext();
-			HttpServletRequest req = getServletRequest();
-			StringServletResponse res = getServletResponse();
+			ServletContext servletContext = getServletContext();
+			HttpServletRequest request = getServletRequest();
+			StringServletResponse stringResponse = getServletResponse();
 
-			Theme theme = (Theme)req.getAttribute(WebKeys.THEME);
+			Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
 
 			// Top
 
 			if (isTheme()) {
-				ThemeUtil.include(ctx, req, res, pageContext, getTop(), theme);
+				ThemeUtil.include(
+					servletContext, request, stringResponse, pageContext,
+					getTop(), theme);
 			}
 			else {
-				RequestDispatcher rd = ctx.getRequestDispatcher(getTop());
+				RequestDispatcher requestDispatcher =
+					servletContext.getRequestDispatcher(getTop());
 
-				rd.include(req, res);
+				requestDispatcher.include(request, stringResponse);
 			}
 
-			pageContext.getOut().print(res.getString());
+			pageContext.getOut().print(stringResponse.getString());
 
 			// Body
 
@@ -80,19 +83,21 @@ public class BoxTag extends ParamAndPropertyAncestorTagImpl {
 			// Bottom
 
 			//res = getServletResponse();
-			res.recycle();
+			stringResponse.recycle();
 
 			if (isTheme()) {
 				ThemeUtil.include(
-					ctx, req, res, pageContext, getBottom(), theme);
+					servletContext, request, stringResponse, pageContext,
+					getBottom(), theme);
 			}
 			else {
-				RequestDispatcher rd = ctx.getRequestDispatcher(getBottom());
+				RequestDispatcher requestDispatcher =
+					servletContext.getRequestDispatcher(getBottom());
 
-				rd.include(req, res);
+				requestDispatcher.include(request, stringResponse);
 			}
 
-			pageContext.getOut().print(res.getString());
+			pageContext.getOut().print(stringResponse.getString());
 
 			return EVAL_PAGE;
 		}

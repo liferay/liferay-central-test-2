@@ -33,8 +33,8 @@ import javax.servlet.http.HttpServletResponseWrapper;
  */
 public class UncommittedServletResponse extends HttpServletResponseWrapper {
 
-	public UncommittedServletResponse(HttpServletResponse res) {
-		super(res);
+	public UncommittedServletResponse(HttpServletResponse response) {
+		super(response);
 	}
 
 	public boolean isCommitted() {

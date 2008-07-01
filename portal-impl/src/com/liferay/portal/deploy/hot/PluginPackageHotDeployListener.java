@@ -55,15 +55,15 @@ import org.dom4j.DocumentException;
  */
 public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 
-	public static PluginPackage readPluginPackage(ServletContext ctx)
+	public static PluginPackage readPluginPackage(ServletContext servletContext)
 		throws DocumentException, IOException {
 
 		PluginPackage pluginPackage = null;
 
-		String servletContextName = ctx.getServletContextName();
+		String servletContextName = servletContext.getServletContextName();
 
 		String xml = HttpUtil.URLtoString(
-			ctx.getResource("/WEB-INF/liferay-plugin-package.xml"));
+			servletContext.getResource("/WEB-INF/liferay-plugin-package.xml"));
 
 		if (_log.isInfoEnabled()) {
 			if (servletContextName == null) {
@@ -81,7 +81,8 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 
 			Attributes attributes = null;
 
-			InputStream is = ctx.getResourceAsStream("/META-INF/MANIFEST.MF");
+			InputStream is = servletContext.getResourceAsStream(
+				"/META-INF/MANIFEST.MF");
 
 			if (is != null) {
 				Manifest manifest = new Manifest(is);
@@ -179,19 +180,21 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 	}
 
 	protected void doInvokeDeploy(HotDeployEvent event) throws Exception {
-		ServletContext ctx = event.getServletContext();
+		ServletContext servletContext = event.getServletContext();
 
-		String servletContextName = ctx.getServletContextName();
+		String servletContextName = servletContext.getServletContextName();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking deploy for " + servletContextName);
 		}
 
-		if (ctx.getResource("/WEB-INF/liferay-theme-loader.xml") != null) {
+		if (servletContext.getResource(
+				"/WEB-INF/liferay-theme-loader.xml") != null) {
+
 			return;
 		}
 
-		PluginPackage pluginPackage = readPluginPackage(ctx);
+		PluginPackage pluginPackage = readPluginPackage(servletContext);
 
 		if (pluginPackage == null) {
 			return;
@@ -211,15 +214,15 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 	}
 
 	protected void doInvokeUndeploy(HotDeployEvent event) throws Exception {
-		ServletContext ctx = event.getServletContext();
+		ServletContext servletContext = event.getServletContext();
 
-		String servletContextName = ctx.getServletContextName();
+		String servletContextName = servletContext.getServletContextName();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking deploy for " + servletContextName);
 		}
 
-		PluginPackage pluginPackage = readPluginPackage(ctx);
+		PluginPackage pluginPackage = readPluginPackage(servletContext);
 
 		if (pluginPackage == null) {
 			return;

@@ -64,11 +64,12 @@ public class WidgetServlet extends HttpServlet {
 			else {
 				request.setAttribute(WebKeys.WIDGET, Boolean.TRUE);
 
-				ServletContext ctx = getServletContext();
+				ServletContext servletContext = getServletContext();
 
-				RequestDispatcher rd = ctx.getRequestDispatcher(redirect);
+				RequestDispatcher requestDispatcher =
+					servletContext.getRequestDispatcher(redirect);
 
-				rd.forward(request, response);
+				requestDispatcher.forward(request, response);
 			}
 		}
 		catch (Exception e) {

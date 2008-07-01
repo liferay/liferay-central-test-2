@@ -62,11 +62,12 @@ import org.dom4j.Element;
 public class AssetPublisherUtil {
 
 	public static void addAndStoreSelection(
-			ActionRequest req, String className, long classPK, int assetOrder)
+			ActionRequest actionRequest, String className, long classPK,
+			int assetOrder)
 		throws Exception {
 
 		String referringPortletResource =
-			ParamUtil.getString(req, "referringPortletResource");
+			ParamUtil.getString(actionRequest, "referringPortletResource");
 
 		if (Validator.isNull(referringPortletResource)) {
 			return;
@@ -77,19 +78,20 @@ public class AssetPublisherUtil {
 
 		PortletPreferences prefs =
 			PortletPreferencesFactoryUtil.getPortletSetup(
-				req, referringPortletResource);
+				actionRequest, referringPortletResource);
 
 		addSelection(className, asset.getAssetId(), assetOrder, prefs);
 
 		prefs.store();
 	}
 
-	public static void addSelection(ActionRequest req, PortletPreferences prefs)
+	public static void addSelection(
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
-		String assetType = ParamUtil.getString(req, "assetType");
-		long assetId = ParamUtil.getLong(req, "assetId");
-		int assetOrder = ParamUtil.getInteger(req, "assetOrder");
+		String assetType = ParamUtil.getString(actionRequest, "assetType");
+		long assetId = ParamUtil.getLong(actionRequest, "assetId");
+		int assetOrder = ParamUtil.getInteger(actionRequest, "assetOrder");
 
 		addSelection(assetType, assetId, assetOrder, prefs);
 	}
@@ -115,13 +117,15 @@ public class AssetPublisherUtil {
 	}
 
 	public static void addRecentFolderId(
-		PortletRequest req, String className, long classPK) {
+		PortletRequest portletRequest, String className, long classPK) {
 
-		_getRecentFolderIds(req).put(className, classPK);
+		_getRecentFolderIds(portletRequest).put(className, classPK);
 	}
 
-	public static long getRecentFolderId(PortletRequest req, String className) {
-		Long classPK = _getRecentFolderIds(req).get(className);
+	public static long getRecentFolderId(
+		PortletRequest portletRequest, String className) {
+
+		Long classPK = _getRecentFolderIds(portletRequest).get(className);
 
 		if (classPK == null) {
 			return 0;
@@ -155,25 +159,27 @@ public class AssetPublisherUtil {
 		return xml;
 	}
 
-	private static Map<String, Long> _getRecentFolderIds(PortletRequest req) {
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+	private static Map<String, Long> _getRecentFolderIds(
+		PortletRequest portletRequest) {
 
-		HttpSession ses = httpReq.getSession();
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+		HttpSession session = request.getSession();
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		String key =
 			AssetPublisherUtil.class + "_" + themeDisplay.getPortletGroupId();
 
 		Map<String, Long> recentFolderIds =
-			(Map<String, Long>)ses.getAttribute(key);
+			(Map<String, Long>)session.getAttribute(key);
 
 		if (recentFolderIds == null) {
 			recentFolderIds = new HashMap<String, Long>();
 		}
 
-		ses.setAttribute(key, recentFolderIds);
+		session.setAttribute(key, recentFolderIds);
 
 		return recentFolderIds;
 	}

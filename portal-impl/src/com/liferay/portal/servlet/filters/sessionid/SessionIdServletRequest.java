@@ -46,7 +46,7 @@ public class SessionIdServletRequest extends HttpServletRequestWrapper {
 
 		super(request);
 
-		_res = response;
+		_response = response;
 	}
 
 	public HttpSession getSession() {
@@ -92,7 +92,7 @@ public class SessionIdServletRequest extends HttpServletRequestWrapper {
 				cookie.setPath(StringPool.SLASH);
 			}
 
-			_res.addCookie(cookie);
+			_response.addCookie(cookie);
 
 			setAttribute(_JESSIONID_ALREADY_SET, Boolean.TRUE);
 		}
@@ -106,6 +106,6 @@ public class SessionIdServletRequest extends HttpServletRequestWrapper {
 	private static Log _log =
 		LogFactoryUtil.getLog(SessionIdServletRequest.class);
 
-	private HttpServletResponse _res;
+	private HttpServletResponse _response;
 
 }

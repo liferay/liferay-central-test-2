@@ -257,14 +257,14 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			portlet, servletContext);
 		PortletContext portletContext = portletConfig.getPortletContext();
 
-		RenderRequestImpl renderReqImpl = RenderRequestFactory.create(
+		RenderRequestImpl renderRequestImpl = RenderRequestFactory.create(
 			request, portlet, invokerPortlet, portletContext,
 			WindowState.MAXIMIZED, PortletMode.VIEW, portletPreferences);
 
-		RenderResponseImpl renderResImpl = RenderResponseFactory.create(
-			renderReqImpl, response, portletId, portlet.getCompanyId());
+		RenderResponseImpl renderResponseImpl = RenderResponseFactory.create(
+			renderRequestImpl, response, portletId, portlet.getCompanyId());
 
-		renderReqImpl.defineObjects(portletConfig, renderResImpl);
+		renderRequestImpl.defineObjects(portletConfig, renderResponseImpl);
 
 		request.setAttribute(WebKeys.PORTLET_STRUTS_EXECUTE, Boolean.TRUE);
 	}

@@ -60,21 +60,21 @@ import javax.servlet.http.HttpServletResponse;
 public class ContainerResponseFactory {
 
 	public static ExecuteActionResponse createExecuteActionResponse(
-		HttpServletResponse res) {
+		HttpServletResponse response) {
 
-		return _getContainer().createExecuteActionResponse(res);
+		return _getContainer().createExecuteActionResponse(response);
 	}
 
 	public static GetMarkupResponse createGetMarkUpResponse(
-		HttpServletResponse res) {
+		HttpServletResponse response) {
 
-		return _getContainer().createGetMarkUpResponse(res);
+		return _getContainer().createGetMarkUpResponse(response);
 	}
 
 	public static GetResourceResponse createGetResourceResponse(
-		HttpServletResponse res) {
+		HttpServletResponse response) {
 
-		return _getContainer().createGetResourceResponse(res);
+		return _getContainer().createGetResourceResponse(response);
 	}
 
 	private static Container _getContainer() {

@@ -72,7 +72,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 	public void init(FilterConfig config) {
 		super.init(config);
 
-		_ctx = config.getServletContext();
+		_servletContext = config.getServletContext();
 	}
 
 	public void doFilter(
@@ -93,7 +93,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 		HttpServletResponse response = (HttpServletResponse)servletResponse;
 
 		request.setCharacterEncoding(StringPool.UTF8);
-		//httpRes.setContentType(ContentTypes.TEXT_HTML_UTF8);
+		//response.setContentType(ContentTypes.TEXT_HTML_UTF8);
 
 		// Make sure all redirects issued by the portal are absolute
 
@@ -212,10 +212,10 @@ public class VirtualHostFilter extends BasePortalFilter {
 					_log.debug("Redirect to " + redirect);
 				}
 
-				RequestDispatcher rd =
-					_ctx.getRequestDispatcher(redirect.toString());
+				RequestDispatcher requestDispatcher =
+					_servletContext.getRequestDispatcher(redirect.toString());
 
-				rd.forward(servletRequest, response);
+				requestDispatcher.forward(servletRequest, response);
 
 				return;
 			}
@@ -335,6 +335,6 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 	private static String _PATH_WSRP = "/wsrp/";
 
-	private ServletContext _ctx;
+	private ServletContext _servletContext;
 
 }

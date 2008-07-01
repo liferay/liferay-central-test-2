@@ -64,14 +64,16 @@ public interface ThemeLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public java.util.List<String> init(javax.servlet.ServletContext ctx,
+	public java.util.List<String> init(
+		javax.servlet.ServletContext servletContext,
 		java.lang.String themesPath, boolean loadFromServletContext,
 		java.lang.String[] xmls,
 		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage);
 
 	public java.util.List<String> init(java.lang.String servletContextName,
-		javax.servlet.ServletContext ctx, java.lang.String themesPath,
-		boolean loadFromServletContext, java.lang.String[] xmls,
+		javax.servlet.ServletContext servletContext,
+		java.lang.String themesPath, boolean loadFromServletContext,
+		java.lang.String[] xmls,
 		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage);
 
 	public void uninstallThemes(java.util.List<String> themeIds);

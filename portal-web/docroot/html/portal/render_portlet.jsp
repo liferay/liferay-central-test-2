@@ -174,12 +174,12 @@ else if (modePrint) {
 	portletMode = LiferayPortletMode.PRINT;
 }
 
-HttpServletRequest originalReq = PortalUtil.getOriginalServletRequest(request);
+HttpServletRequest originalRequest = PortalUtil.getOriginalServletRequest(request);
 
-RenderRequestImpl renderReqImpl = RenderRequestFactory.create(originalReq, portlet, invokerPortlet, portletCtx, windowState, portletMode, portletPreferences, plid.longValue());
+RenderRequestImpl renderRequestImpl = RenderRequestFactory.create(originalRequest, portlet, invokerPortlet, portletCtx, windowState, portletMode, portletPreferences, plid.longValue());
 
 if (Validator.isNotNull(queryString)) {
-	DynamicServletRequest dynamicReq = (DynamicServletRequest)renderReqImpl.getHttpServletRequest();
+	DynamicServletRequest dynamicRequest = (DynamicServletRequest)renderRequestImpl.getHttpServletRequest();
 
 	String[] params = StringUtil.split(queryString, StringPool.AMPERSAND);
 
@@ -187,21 +187,21 @@ if (Validator.isNotNull(queryString)) {
 		String[] kvp = StringUtil.split(params[i], StringPool.EQUAL);
 
 		if (kvp.length > 1) {
-			dynamicReq.setParameter(kvp[0], kvp[1]);
+			dynamicRequest.setParameter(kvp[0], kvp[1]);
 		}
 		else {
-			dynamicReq.setParameter(kvp[0], StringPool.BLANK);
+			dynamicRequest.setParameter(kvp[0], StringPool.BLANK);
 		}
 	}
 }
 
-StringServletResponse stringServletRes = new StringServletResponse(response);
+StringServletResponse stringResponse = new StringServletResponse(response);
 
-RenderResponseImpl renderResImpl = RenderResponseFactory.create(renderReqImpl, stringServletRes, portletId, company.getCompanyId(), plid.longValue());
+RenderResponseImpl renderResponseImpl = RenderResponseFactory.create(renderRequestImpl, stringResponse, portletId, company.getCompanyId(), plid.longValue());
 
-renderReqImpl.defineObjects(portletConfig, renderResImpl);
+renderRequestImpl.defineObjects(portletConfig, renderResponseImpl);
 
-String responseContentType = renderReqImpl.getResponseContentType();
+String responseContentType = renderRequestImpl.getResponseContentType();
 
 String currentURL = PortalUtil.getCurrentURL(request);
 
@@ -617,13 +617,13 @@ else if (portletDisplay.isStateMax()) {
 
 		urlBack = urlMax.toString() + "#p_" + portletResource;*/
 
-		//urlBack = ParamUtil.getString(renderReqImpl, "returnToFullPageURL");
+		//urlBack = ParamUtil.getString(renderRequestImpl, "returnToFullPageURL");
 	//}
 	//else {
 	//	urlBack = urlMax.toString();
 	//}
 
-	urlBack = ParamUtil.getString(renderReqImpl, "returnToFullPageURL");
+	urlBack = ParamUtil.getString(renderRequestImpl, "returnToFullPageURL");
 	urlBack = HtmlUtil.stripHtml(urlBack);
 
 	if (Validator.isNull(urlBack)) {
@@ -652,10 +652,10 @@ boolean portletException = false;
 
 if (portlet.isActive() && access && supportsMimeType) {
 	try {
-		invokerPortlet.render(renderReqImpl, renderResImpl);
+		invokerPortlet.render(renderRequestImpl, renderResponseImpl);
 
 		if (themeDisplay.isFacebook() || themeDisplay.isStateExclusive()) {
-			renderReqImpl.setAttribute(WebKeys.STRING_SERVLET_RESPONSE, stringServletRes);
+			renderRequestImpl.setAttribute(WebKeys.STRING_SERVLET_RESPONSE, stringResponse);
 		}
 	}
 	catch (UnavailableException ue) {
@@ -698,7 +698,7 @@ if (portlet.isActive() && access && supportsMimeType) {
 	}
 	%>
 
-	<div id="p_p_id<%= renderResImpl.getNamespace() %>" class="portlet-boundary portlet-boundary<%= PortalUtil.getPortletNamespace(portlet.getRootPortletId()) %> <%= (portletDisplay.isStateMin()) ? "portlet-minimized" : "" %> <%= portlet.getCssClassWrapper() %>" <%= freeformStyles %>>
+	<div id="p_p_id<%= renderResponseImpl.getNamespace() %>" class="portlet-boundary portlet-boundary<%= PortalUtil.getPortletNamespace(portlet.getRootPortletId()) %> <%= (portletDisplay.isStateMin()) ? "portlet-minimized" : "" %> <%= portlet.getCssClassWrapper() %>" <%= freeformStyles %>>
 		<a name="p_<%= portletId %>"></a>
 </c:if>
 
@@ -713,7 +713,7 @@ if (portlet.isActive() && access && supportsMimeType) {
 
 		<%
 		boolean useDefaultTemplate = portlet.isUseDefaultTemplate();
-		Boolean useDefaultTemplateObj = renderResImpl.getUseDefaultTemplate();
+		Boolean useDefaultTemplateObj = renderResponseImpl.getUseDefaultTemplate();
 
 		if (useDefaultTemplateObj != null) {
 			useDefaultTemplate = useDefaultTemplateObj.booleanValue();
@@ -770,7 +770,7 @@ if (portlet.isActive() && access && supportsMimeType) {
 			}
 			else {
 				if (useDefaultTemplate) {
-					renderReqImpl.setAttribute(WebKeys.PORTLET_CONTENT, stringServletRes.getString());
+					renderRequestImpl.setAttribute(WebKeys.PORTLET_CONTENT, stringResponse.getString());
 		%>
 
 					<tiles:insert template='<%= StrutsUtil.TEXT_HTML_DIR + "/common/themes/portlet.jsp" %>' flush="false">
@@ -780,12 +780,12 @@ if (portlet.isActive() && access && supportsMimeType) {
 		<%
 				}
 				else {
-					pageContext.getOut().print(stringServletRes.getString());
+					pageContext.getOut().print(stringResponse.getString());
 				}
 			}
 		}
 		else {
-			renderReqImpl.setAttribute(WebKeys.PORTLET_CONTENT, stringServletRes.getString());
+			renderRequestImpl.setAttribute(WebKeys.PORTLET_CONTENT, stringResponse.getString());
 
 			String portletContent = StringPool.BLANK;
 
@@ -801,7 +801,7 @@ if (portlet.isActive() && access && supportsMimeType) {
 					</tiles:insert>
 				</c:when>
 				<c:otherwise>
-					<%= renderReqImpl.getAttribute(WebKeys.PORTLET_CONTENT) %>
+					<%= renderRequestImpl.getAttribute(WebKeys.PORTLET_CONTENT) %>
 				</c:otherwise>
 			</c:choose>
 
@@ -837,7 +837,7 @@ else {
 						canEditTitle: <%= showConfigurationIcon %>,
 						columnPos: <%= columnPos %>,
 						isStatic: '<%= staticVar %>',
-						namespacedId: 'p_p_id<%= renderResImpl.getNamespace() %>',
+						namespacedId: 'p_p_id<%= renderResponseImpl.getNamespace() %>',
 						portletId: '<%= portletDisplay.getId() %>'
 					}
 				);
@@ -851,16 +851,16 @@ if (showPortletCssIcon) {
 	themeDisplay.setIncludePortletCssJs(true);
 }
 
-SessionMessages.clear(renderReqImpl);
-SessionErrors.clear(renderReqImpl);
+SessionMessages.clear(renderRequestImpl);
+SessionErrors.clear(renderRequestImpl);
 
 if (themeDisplay.isFacebook() || themeDisplay.isStateExclusive()) {
-	request.setAttribute(JavaConstants.JAVAX_PORTLET_REQUEST, renderReqImpl);
-	request.setAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE, renderResImpl);
+	request.setAttribute(JavaConstants.JAVAX_PORTLET_REQUEST, renderRequestImpl);
+	request.setAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE, renderResponseImpl);
 }
 else {
-	RenderRequestFactory.recycle(renderReqImpl);
-	RenderResponseFactory.recycle(renderResImpl);
+	RenderRequestFactory.recycle(renderRequestImpl);
+	RenderResponseFactory.recycle(renderResponseImpl);
 }
 %>
 

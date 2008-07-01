@@ -35,7 +35,7 @@ Portlet portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
 
 PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, portletDisplay.getId());
 
-RenderResponseImpl renderResImpl = (RenderResponseImpl)renderResponse;
+RenderResponseImpl renderResponseImpl = (RenderResponseImpl)renderResponse;
 
 // Portlet decorate
 
@@ -63,7 +63,7 @@ String portletTitle = PortletConfigurationUtil.getPortletTitle(portletSetup, the
 
 if (portletDisplay.isAccess() && portletDisplay.isActive()) {
 	if (Validator.isNull(portletTitle)) {
-		portletTitle = renderResImpl.getTitle();
+		portletTitle = renderResponseImpl.getTitle();
 	}
 }
 

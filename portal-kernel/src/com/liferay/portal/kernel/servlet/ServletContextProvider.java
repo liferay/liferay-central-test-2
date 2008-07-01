@@ -43,12 +43,12 @@ public interface ServletContextProvider {
 
 	public ServletContext getServletContext(GenericPortlet portlet);
 
-	public ServletContext getServletContext(ServletContext ctx);
+	public ServletContext getServletContext(ServletContext servletContext);
 
 	public HttpServletRequest getHttpServletRequest(
-		GenericPortlet portlet, PortletRequest req);
+		GenericPortlet portlet, PortletRequest portletRequest);
 
 	public HttpServletResponse getHttpServletResponse(
-		GenericPortlet portlet, PortletResponse res);
+		GenericPortlet portlet, PortletResponse portletResponse);
 
 }

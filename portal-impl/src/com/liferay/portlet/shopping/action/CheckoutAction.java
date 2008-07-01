@@ -74,7 +74,7 @@ import org.apache.struts.action.ActionMapping;
 public class CheckoutAction extends CartAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 

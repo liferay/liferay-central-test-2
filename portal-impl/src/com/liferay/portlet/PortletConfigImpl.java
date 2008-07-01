@@ -63,7 +63,7 @@ public class PortletConfigImpl implements PortletConfig {
 	public static final String RUNTIME_OPTION_ESCAPE_XML =
 		"javax.portlet.escapeXml";
 
-	public PortletConfigImpl(Portlet portlet, PortletContext portletCtx) {
+	public PortletConfigImpl(Portlet portlet, PortletContext portletContext) {
 		_portletApp = portlet.getPortletApp();
 		_portlet = portlet;
 		_portletName = portlet.getRootPortletId();
@@ -74,7 +74,7 @@ public class PortletConfigImpl implements PortletConfig {
 			_portletName = _portletName.substring(0, pos);
 		}
 
-		_portletCtx = portletCtx;
+		_portletContext = portletContext;
 		_bundlePool = new HashMap<String, ResourceBundle>();
 	}
 
@@ -99,7 +99,7 @@ public class PortletConfigImpl implements PortletConfig {
 	}
 
 	public PortletContext getPortletContext() {
-		return _portletCtx;
+		return _portletContext;
 	}
 
 	public String getPortletId() {
@@ -223,7 +223,7 @@ public class PortletConfigImpl implements PortletConfig {
 	private PortletApp _portletApp;
 	private Portlet _portlet;
 	private String _portletName;
-	private PortletContext _portletCtx;
+	private PortletContext _portletContext;
 	private Map<String, ResourceBundle> _bundlePool;
 
 }

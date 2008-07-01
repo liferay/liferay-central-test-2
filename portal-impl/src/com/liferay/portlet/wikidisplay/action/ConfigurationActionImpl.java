@@ -48,7 +48,7 @@ import javax.portlet.RenderResponse;
 public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			PortletConfig config, ActionRequest req, ActionResponse res)
+			PortletConfig portletConfig, ActionRequest req, ActionResponse res)
 		throws Exception {
 
 		try {
@@ -75,7 +75,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 			prefs.store();
 
-			SessionMessages.add(req, config.getPortletName() + ".doConfigure");
+			SessionMessages.add(
+				req, portletConfig.getPortletName() + ".doConfigure");
 		}
 		catch (NoSuchNodeException nsne) {
 			SessionErrors.add(req, nsne.getClass().getName());
@@ -83,7 +84,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	public String render(
-			PortletConfig config, RenderRequest req, RenderResponse res)
+			PortletConfig portletConfig, RenderRequest req, RenderResponse res)
 		throws Exception {
 
 		return "/html/portlet/wiki_display/configuration.jsp";

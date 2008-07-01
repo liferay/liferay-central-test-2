@@ -63,9 +63,9 @@ public class ThemeLoaderHotDeployListener extends BaseHotDeployListener {
 	}
 
 	protected void doInvokeDeploy(HotDeployEvent event) throws Exception {
-		ServletContext ctx = event.getServletContext();
+		ServletContext servletContext = event.getServletContext();
 
-		String servletContextName = ctx.getServletContextName();
+		String servletContextName = servletContext.getServletContextName();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking deploy for " + servletContextName);
@@ -73,7 +73,7 @@ public class ThemeLoaderHotDeployListener extends BaseHotDeployListener {
 
 		String[] xmls = new String[] {
 			HttpUtil.URLtoString(
-				ctx.getResource("/WEB-INF/liferay-theme-loader.xml"))
+				servletContext.getResource("/WEB-INF/liferay-theme-loader.xml"))
 		};
 
 		if (xmls[0] == null) {
@@ -84,13 +84,13 @@ public class ThemeLoaderHotDeployListener extends BaseHotDeployListener {
 			_log.info("Registering theme loader for " + servletContextName);
 		}
 
-		ThemeLoaderFactory.init(servletContextName, ctx, xmls);
+		ThemeLoaderFactory.init(servletContextName, servletContext, xmls);
 	}
 
 	protected void doInvokeUndeploy(HotDeployEvent event) throws Exception {
-		ServletContext ctx = event.getServletContext();
+		ServletContext servletContext = event.getServletContext();
 
-		String servletContextName = ctx.getServletContextName();
+		String servletContextName = servletContext.getServletContextName();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking undeploy for " + servletContextName);

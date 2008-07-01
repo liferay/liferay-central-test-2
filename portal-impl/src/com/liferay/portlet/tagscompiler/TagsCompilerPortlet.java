@@ -51,11 +51,12 @@ import org.apache.commons.logging.LogFactory;
  */
 public class TagsCompilerPortlet extends LiferayPortlet {
 
-	public void render(RenderRequest req, RenderResponse res) {
+	public void render(
+		RenderRequest renderRequest, RenderResponse renderResponse) {
 
 		// Compile entries
 
-		String entriesFromURL = ParamUtil.getString(req, "entries");
+		String entriesFromURL = ParamUtil.getString(renderRequest, "entries");
 		String[] entriesFromURLArray = StringUtil.split(entriesFromURL);
 
 		if (_log.isDebugEnabled()) {
@@ -63,7 +64,7 @@ public class TagsCompilerPortlet extends LiferayPortlet {
 		}
 
 		Collection<String> entriesFromSession =
-			TagsCompilerSessionUtil.getEntries(req);
+			TagsCompilerSessionUtil.getEntries(renderRequest);
 		String[] entriesFromSessionArray = entriesFromSession.toArray(
 			new String[entriesFromSession.size()]);
 
@@ -76,17 +77,18 @@ public class TagsCompilerPortlet extends LiferayPortlet {
 		String[] entries = ArrayUtil.append(
 			entriesFromURLArray, entriesFromSessionArray);
 
-		req.setAttribute(WebKeys.TAGS_COMPILER_ENTRIES, entries);
+		renderRequest.setAttribute(WebKeys.TAGS_COMPILER_ENTRIES, entries);
 
 		// Clear render parameters cache
 
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		RenderParametersPool.clear(
-			httpReq, themeDisplay.getPlid(), PortletKeys.TAGS_COMPILER);
+			request, themeDisplay.getPlid(), PortletKeys.TAGS_COMPILER);
 	}
 
 	private static Log _log = LogFactory.getLog(TagsCompilerPortlet.class);

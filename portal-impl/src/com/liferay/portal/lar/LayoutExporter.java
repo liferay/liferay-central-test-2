@@ -430,9 +430,10 @@ public class LayoutExporter {
 
 		String servletContextName = theme.getServletContextName();
 
-		ServletContext ctx = VelocityContextPool.get(servletContextName);
+		ServletContext servletContext = VelocityContextPool.get(
+			servletContextName);
 
-		if (ctx == null) {
+		if (servletContext == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Servlet context not found for theme " +
@@ -467,11 +468,11 @@ public class LayoutExporter {
 			}
 		}
 		else {
-			cssPath = new File(ctx.getRealPath(theme.getCssPath()));
-			imagesPath = new File(ctx.getRealPath(theme.getImagesPath()));
+			cssPath = new File(servletContext.getRealPath(theme.getCssPath()));
+			imagesPath = new File(servletContext.getRealPath(theme.getImagesPath()));
 			javaScriptPath = new File(
-				ctx.getRealPath(theme.getJavaScriptPath()));
-			templatesPath = new File(ctx.getRealPath(theme.getTemplatesPath()));
+				servletContext.getRealPath(theme.getJavaScriptPath()));
+			templatesPath = new File(servletContext.getRealPath(theme.getTemplatesPath()));
 		}
 
 		exportThemeFiles("css", cssPath, zipWriter);

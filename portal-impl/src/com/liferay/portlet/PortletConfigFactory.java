@@ -40,8 +40,10 @@ import javax.servlet.ServletContext;
  */
 public class PortletConfigFactory {
 
-	public static PortletConfig create(Portlet portlet, ServletContext ctx) {
-		return _instance._create(portlet, ctx);
+	public static PortletConfig create(
+		Portlet portlet, ServletContext servletContext) {
+
+		return _instance._create(portlet, servletContext);
 	}
 
 	public static void destroy(Portlet portlet) {
@@ -52,7 +54,9 @@ public class PortletConfigFactory {
 		_pool = new ConcurrentHashMap<String, Map<String, PortletConfig>>();
 	}
 
-	private PortletConfig _create(Portlet portlet, ServletContext ctx) {
+	private PortletConfig _create(
+		Portlet portlet, ServletContext servletContext) {
+
 		Map<String, PortletConfig> portletConfigs =
 			_pool.get(portlet.getRootPortletId());
 
@@ -66,10 +70,10 @@ public class PortletConfigFactory {
 			portlet.getPortletId());
 
 		if (portletConfig == null) {
-			PortletContext portletCtx =
-				PortletContextFactory.create(portlet, ctx);
+			PortletContext portletContext =
+				PortletContextFactory.create(portlet, servletContext);
 
-			portletConfig = new PortletConfigImpl(portlet, portletCtx);
+			portletConfig = new PortletConfigImpl(portlet, portletContext);
 
 			portletConfigs.put(portlet.getPortletId(), portletConfig);
 		}

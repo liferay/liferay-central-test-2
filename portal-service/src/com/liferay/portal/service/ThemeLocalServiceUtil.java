@@ -84,24 +84,26 @@ public class ThemeLocalServiceUtil {
 	}
 
 	public static java.util.List<String> init(
-		javax.servlet.ServletContext ctx, java.lang.String themesPath,
-		boolean loadFromServletContext, java.lang.String[] xmls,
-		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage) {
-		ThemeLocalService themeLocalService = ThemeLocalServiceFactory.getService();
-
-		return themeLocalService.init(ctx, themesPath, loadFromServletContext,
-			xmls, pluginPackage);
-	}
-
-	public static java.util.List<String> init(
-		java.lang.String servletContextName, javax.servlet.ServletContext ctx,
+		javax.servlet.ServletContext servletContext,
 		java.lang.String themesPath, boolean loadFromServletContext,
 		java.lang.String[] xmls,
 		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage) {
 		ThemeLocalService themeLocalService = ThemeLocalServiceFactory.getService();
 
-		return themeLocalService.init(servletContextName, ctx, themesPath,
+		return themeLocalService.init(servletContext, themesPath,
 			loadFromServletContext, xmls, pluginPackage);
+	}
+
+	public static java.util.List<String> init(
+		java.lang.String servletContextName,
+		javax.servlet.ServletContext servletContext,
+		java.lang.String themesPath, boolean loadFromServletContext,
+		java.lang.String[] xmls,
+		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage) {
+		ThemeLocalService themeLocalService = ThemeLocalServiceFactory.getService();
+
+		return themeLocalService.init(servletContextName, servletContext,
+			themesPath, loadFromServletContext, xmls, pluginPackage);
 	}
 
 	public static void uninstallThemes(java.util.List<String> themeIds) {

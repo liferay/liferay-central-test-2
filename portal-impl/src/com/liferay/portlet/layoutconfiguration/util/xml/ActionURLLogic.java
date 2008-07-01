@@ -49,8 +49,8 @@ public class ActionURLLogic extends RuntimeLogic {
 
 	public static final String CLOSE_2_TAG = "/>";
 
-	public ActionURLLogic(RenderResponse res) {
-		_res = (RenderResponseImpl)res;
+	public ActionURLLogic(RenderResponse renderResponse) {
+		_renderResponseImpl = (RenderResponseImpl)renderResponse;
 	}
 
 	public String getOpenTag() {
@@ -68,7 +68,7 @@ public class ActionURLLogic extends RuntimeLogic {
 
 		Element root = doc.getRootElement();
 
-		LiferayPortletURL portletURL = _res.createPortletURLImpl(
+		LiferayPortletURL portletURL = _renderResponseImpl.createPortletURLImpl(
 			getLifecycle());
 
 		String portletId = root.attributeValue("portlet-name");
@@ -97,7 +97,7 @@ public class ActionURLLogic extends RuntimeLogic {
 		return _lifecycle;
 	}
 
-	private RenderResponseImpl _res;
+	private RenderResponseImpl _renderResponseImpl;
 	private String _lifecycle = PortletRequest.ACTION_PHASE;
 
 }

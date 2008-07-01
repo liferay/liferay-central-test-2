@@ -83,8 +83,10 @@ public class PortalInstances {
 		return _instance._getWebIds();
 	}
 
-	public static long initCompany(ServletContext ctx, String webId) {
-		return _instance._initCompany(ctx, webId);
+	public static long initCompany(
+		ServletContext servletContext, String webId) {
+
+		return _instance._initCompany(servletContext, webId);
 	}
 
 	public static boolean isAutoLoginIgnoreHost(String host) {
@@ -279,7 +281,7 @@ public class PortalInstances {
 		return _webIds;
 	}
 
-	private long _initCompany(ServletContext ctx, String webId) {
+	private long _initCompany(ServletContext servletContext, String webId) {
 
 		// Begin initializing company
 
@@ -307,7 +309,7 @@ public class PortalInstances {
 		}
 
 		try {
-			String xml = HttpUtil.URLtoString(ctx.getResource(
+			String xml = HttpUtil.URLtoString(servletContext.getResource(
 				"/WEB-INF/liferay-display.xml"));
 
 			PortletCategory portletCategory =
@@ -367,9 +369,10 @@ public class PortalInstances {
 		}
 
 		MultiMessageResources messageResources =
-			(MultiMessageResources)ctx.getAttribute(Globals.MESSAGES_KEY);
+			(MultiMessageResources)servletContext.getAttribute(
+				Globals.MESSAGES_KEY);
 
-		messageResources.setServletContext(ctx);
+		messageResources.setServletContext(servletContext);
 
 		WebAppPool.put(
 			String.valueOf(companyId), Globals.MESSAGES_KEY, messageResources);

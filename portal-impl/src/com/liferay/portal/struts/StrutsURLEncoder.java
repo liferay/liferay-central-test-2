@@ -112,7 +112,7 @@ public class StrutsURLEncoder implements URLEncoder {
 		_portletMode = portletURL.getPortletMode();
 	}
 
-	public String encodeURL(HttpServletResponse res, String path) {
+	public String encodeURL(HttpServletResponse response, String path) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Path " + path);
 			_log.debug("Context path " + _contextPath);

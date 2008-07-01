@@ -65,9 +65,10 @@ public class PreviewTag extends IncludeTag {
 			"liferay-portlet:preview:queryString", queryString);
 		request.setAttribute("liferay-portlet:preview:width", width);
 
-		RequestDispatcher rd = servletContext.getRequestDispatcher(page);
+		RequestDispatcher requestDispatcher =
+			servletContext.getRequestDispatcher(page);
 
-		rd.include(request, response);
+		requestDispatcher.include(request, response);
 	}
 
 	public int doEndTag() throws JspException {

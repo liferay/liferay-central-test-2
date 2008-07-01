@@ -35,17 +35,17 @@ import javax.servlet.ServletContextListener;
 public class TunnelContextListener implements ServletContextListener {
 
 	public static ServletContext getServletContext() {
-		return _ctx;
+		return _servletContext;
 	}
 
 	public void contextInitialized(ServletContextEvent event) {
-		_ctx = event.getServletContext();
+		_servletContext = event.getServletContext();
 	}
 
 	public void contextDestroyed(ServletContextEvent event) {
-		_ctx = null;
+		_servletContext = null;
 	}
 
-	private static ServletContext _ctx;
+	private static ServletContext _servletContext;
 
 }

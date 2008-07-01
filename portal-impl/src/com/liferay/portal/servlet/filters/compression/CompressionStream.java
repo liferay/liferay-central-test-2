@@ -43,11 +43,11 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class CompressionStream extends ServletOutputStream {
 
-	public CompressionStream(HttpServletResponse res) throws IOException {
+	public CompressionStream(HttpServletResponse response) throws IOException {
 		super();
 
-		_res = res;
-		_output = res.getOutputStream();
+		_response = response;
+		_output = response.getOutputStream();
 		_bufferedOutput = new ByteArrayMaker();
 		_closed = false;
 	}
@@ -70,8 +70,8 @@ public class CompressionStream extends ServletOutputStream {
 
 			byte[] compressedBytes = compressedContent.toByteArray();
 
-			_res.setContentLength(compressedBytes.length);
-			_res.addHeader(_CONTENT_ENCODING, _GZIP);
+			_response.setContentLength(compressedBytes.length);
+			_response.addHeader(_CONTENT_ENCODING, _GZIP);
 
 			_output.write(compressedBytes);
 			_output.flush();
@@ -145,7 +145,7 @@ public class CompressionStream extends ServletOutputStream {
 
 	private static Log _log = LogFactoryUtil.getLog(CompressionStream.class);
 
-	private HttpServletResponse _res = null;
+	private HttpServletResponse _response = null;
 	private ServletOutputStream _output = null;
 	private OutputStream _bufferedOutput = null;
 	private boolean _closed = false;

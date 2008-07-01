@@ -272,13 +272,14 @@ public class LayoutTemplateLocalServiceImpl
 	}
 
 	public List<ObjectValuePair<String, Boolean>> init(
-		ServletContext ctx, String[] xmls, PluginPackage pluginPackage) {
+		ServletContext servletContext, String[] xmls,
+		PluginPackage pluginPackage) {
 
-		return init(null, ctx, xmls, pluginPackage);
+		return init(null, servletContext, xmls, pluginPackage);
 	}
 
 	public List<ObjectValuePair<String, Boolean>> init(
-		String servletContextName, ServletContext ctx, String[] xmls,
+		String servletContextName, ServletContext servletContext, String[] xmls,
 		PluginPackage pluginPackage) {
 
 		List<ObjectValuePair<String, Boolean>> layoutTemplateIds =
@@ -288,7 +289,8 @@ public class LayoutTemplateLocalServiceImpl
 			for (int i = 0; i < xmls.length; i++) {
 				Set<ObjectValuePair<String, Boolean>> curLayoutTemplateIds =
 					_readLayoutTemplates(
-						servletContextName, ctx, xmls[i], pluginPackage);
+						servletContextName, servletContext, xmls[i],
+						pluginPackage);
 
 				Iterator<ObjectValuePair<String, Boolean>> itr =
 					curLayoutTemplateIds.iterator();
@@ -310,7 +312,7 @@ public class LayoutTemplateLocalServiceImpl
 	}
 
 	public void readLayoutTemplate(
-		String servletContextName, ServletContext ctx,
+		String servletContextName, ServletContext servletContext,
 		Set<ObjectValuePair<String, Boolean>> layoutTemplateIds,
 		com.liferay.portal.kernel.xml.Element el, boolean standard,
 		String themeId, PluginPackage pluginPackage) {
@@ -371,7 +373,7 @@ public class LayoutTemplateLocalServiceImpl
 				PluginSettingLocalServiceUtil.getDefaultPluginSetting();
 
 			layoutTemplateModel.setPluginPackage(pluginPackage);
-			layoutTemplateModel.setServletContext(ctx);
+			layoutTemplateModel.setServletContext(servletContext);
 
 			if (servletContextName != null) {
 				layoutTemplateModel.setServletContextName(servletContextName);
@@ -394,7 +396,7 @@ public class LayoutTemplateLocalServiceImpl
 			String content = null;
 
 			try {
-				content = HttpUtil.URLtoString(ctx.getResource(
+				content = HttpUtil.URLtoString(servletContext.getResource(
 					layoutTemplateModel.getTemplatePath()));
 			}
 			catch (Exception e) {
@@ -423,8 +425,9 @@ public class LayoutTemplateLocalServiceImpl
 				String wapContent = null;
 
 				try {
-					wapContent = HttpUtil.URLtoString(ctx.getResource(
-						layoutTemplateModel.getWapTemplatePath()));
+					wapContent = HttpUtil.URLtoString(
+						servletContext.getResource(
+							layoutTemplateModel.getWapTemplatePath()));
 				}
 				catch (Exception e) {
 					_log.error(
@@ -504,8 +507,8 @@ public class LayoutTemplateLocalServiceImpl
 	}
 
 	private Set<ObjectValuePair<String, Boolean>> _readLayoutTemplates(
-			String servletContextName, ServletContext ctx, String xml,
-			PluginPackage pluginPackage)
+			String servletContextName, ServletContext servletContext,
+			String xml, PluginPackage pluginPackage)
 		throws DocumentException {
 
 		Set<ObjectValuePair<String, Boolean>> layoutTemplateIds =
@@ -523,7 +526,7 @@ public class LayoutTemplateLocalServiceImpl
 
 		if (standardEl != null) {
 			readLayoutTemplate(
-				servletContextName, ctx, layoutTemplateIds,
+				servletContextName, servletContext, layoutTemplateIds,
 				new ElementImpl(standardEl), true, null, pluginPackage);
 		}
 
@@ -531,7 +534,7 @@ public class LayoutTemplateLocalServiceImpl
 
 		if (customEl != null) {
 			readLayoutTemplate(
-				servletContextName, ctx, layoutTemplateIds,
+				servletContextName, servletContext, layoutTemplateIds,
 				new ElementImpl(customEl), false, null, pluginPackage);
 		}
 

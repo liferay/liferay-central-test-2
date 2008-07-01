@@ -73,7 +73,7 @@ public class FriendlyURLServlet extends HttpServlet {
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
-		ServletContext ctx = getServletContext();
+		ServletContext servletContext = getServletContext();
 
 		// Do not set the entire full main path. See LEP-456.
 
@@ -135,10 +135,11 @@ public class FriendlyURLServlet extends HttpServlet {
 		}
 
 		if (redirect.startsWith(StringPool.SLASH)) {
-			RequestDispatcher rd = ctx.getRequestDispatcher(redirect);
+			RequestDispatcher requestDispatcher =
+				servletContext.getRequestDispatcher(redirect);
 
-			if (rd != null) {
-				rd.forward(request, response);
+			if (requestDispatcher != null) {
+				requestDispatcher.forward(request, response);
 			}
 		}
 		else {

@@ -73,14 +73,15 @@ public class NtlmFilter extends NtlmHttpFilter {
 	}
 
 	public void doFilter(
-			ServletRequest req, ServletResponse res, FilterChain chain)
+			ServletRequest servletRequest, ServletResponse servletResponse,
+			FilterChain chain)
 		throws IOException, ServletException {
 
 		try {
-			HttpServletRequest httpReq = (HttpServletRequest)req;
-			HttpServletResponse httpRes = (HttpServletResponse)res;
+			HttpServletRequest request = (HttpServletRequest)servletRequest;
+			HttpServletResponse response = (HttpServletResponse)servletResponse;
 
-			long companyId = PortalInstances.getCompanyId(httpReq);
+			long companyId = PortalInstances.getCompanyId(request);
 
 			if (PortalLDAPUtil.isNtlmEnabled(companyId)) {
 				if ((_config.getInitParameter("jcifs.http.domainController")
@@ -113,7 +114,7 @@ public class NtlmFilter extends NtlmHttpFilter {
 				// matter whether we're yet logging in or whether it is much
 				// later in the session.
 
-				String msg = httpReq.getHeader("Authorization");
+				String msg = request.getHeader("Authorization");
 
 				if (msg != null && msg.startsWith("NTLM")) {
 					byte[] src = Base64.decode(msg.substring(5));
@@ -131,11 +132,11 @@ public class NtlmFilter extends NtlmHttpFilter {
 
 						msg = Base64.encode(type2.toByteArray());
 
-						httpRes.setHeader("WWW-Authenticate", "NTLM " + msg);
-						httpRes.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-						httpRes.setContentLength(0);
+						response.setHeader("WWW-Authenticate", "NTLM " + msg);
+						response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+						response.setContentLength(0);
 
-						httpRes.flushBuffer();
+						response.flushBuffer();
 
 						// Interrupt filter chain, send response. Browser will
 						// immediately post a new request.
@@ -144,11 +145,11 @@ public class NtlmFilter extends NtlmHttpFilter {
 					}
 				}
 
-				String path = httpReq.getPathInfo();
+				String path = request.getPathInfo();
 
 				if (path != null && path.endsWith("/login")) {
 					NtlmPasswordAuthentication ntlm = negotiate(
-						httpReq, httpRes, false);
+						request, response, false);
 
 					if (ntlm == null) {
 						return;
@@ -166,7 +167,8 @@ public class NtlmFilter extends NtlmHttpFilter {
 						_log.debug("NTLM remote user " + remoteUser);
 					}
 
-					req.setAttribute(WebKeys.NTLM_REMOTE_USER, remoteUser);
+					servletRequest.setAttribute(
+						WebKeys.NTLM_REMOTE_USER, remoteUser);
 				}
 			}
 		}
@@ -174,7 +176,7 @@ public class NtlmFilter extends NtlmHttpFilter {
 			_log.error(e);
 		}
 
-		chain.doFilter(req, res);
+		chain.doFilter(servletRequest, servletResponse);
 	}
 
 	public NtlmPasswordAuthentication negotiate(

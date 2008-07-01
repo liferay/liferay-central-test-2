@@ -50,12 +50,12 @@ import org.apache.struts.action.ActionMapping;
 public class CaptchaPortletAction extends PortletAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		try {
-			PortletSession ses = req.getPortletSession();
+			PortletSession ses = actionRequest.getPortletSession();
 
 			CaptchaProducer captchaProducer = CaptchaUtil.getCaptchaProducer();
 
@@ -63,12 +63,13 @@ public class CaptchaPortletAction extends PortletAction {
 
 			ses.setAttribute(WebKeys.CAPTCHA_TEXT, captchaText);
 
-			HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(
-				res);
+			HttpServletResponse response = PortalUtil.getHttpServletResponse(
+				actionResponse);
 
-			captchaProducer.createImage(httpRes.getOutputStream(), captchaText);
+			captchaProducer.createImage(
+				response.getOutputStream(), captchaText);
 
-			setForward(req, ActionConstants.COMMON_NULL);
+			setForward(actionRequest, ActionConstants.COMMON_NULL);
 		}
 		catch (Exception e) {
 			_log.error(e);

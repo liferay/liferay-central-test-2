@@ -44,34 +44,36 @@ import org.apache.commons.pool.impl.StackObjectPool;
 public class EventResponseFactory {
 
 	public static EventResponseImpl create(
-			EventRequestImpl req, HttpServletResponse res, String portletName,
-			User user, Layout layout, WindowState windowState,
-			PortletMode portletMode)
+			EventRequestImpl eventRequestImpl, HttpServletResponse response,
+			String portletName, User user, Layout layout,
+			WindowState windowState, PortletMode portletMode)
 		throws Exception {
 
-		EventResponseImpl eventResImpl = null;
+		EventResponseImpl eventResponseImpl = null;
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
-			eventResImpl = (EventResponseImpl)_instance._pool.borrowObject();
+			eventResponseImpl =
+				(EventResponseImpl)_instance._pool.borrowObject();
 		}
 		else {
-			eventResImpl = new EventResponseImpl();
+			eventResponseImpl = new EventResponseImpl();
 		}
 
-		eventResImpl.init(
-			req, res, portletName, user, layout, windowState, portletMode);
+		eventResponseImpl.init(
+			eventRequestImpl, response, portletName, user, layout, windowState,
+			portletMode);
 
-		return eventResImpl;
+		return eventResponseImpl;
 	}
 
-	public static void recycle(EventResponseImpl eventResImpl)
+	public static void recycle(EventResponseImpl eventResponseImpl)
 		throws Exception {
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
-			_instance._pool.returnObject(eventResImpl);
+			_instance._pool.returnObject(eventResponseImpl);
 		}
-		else if (eventResImpl != null) {
-			eventResImpl.recycle();
+		else if (eventResponseImpl != null) {
+			eventResponseImpl.recycle();
 		}
 	}
 
@@ -91,9 +93,9 @@ public class EventResponseFactory {
 		}
 
 		public void passivateObject(Object obj) {
-			EventResponseImpl eventResImpl = (EventResponseImpl)obj;
+			EventResponseImpl eventResponseImpl = (EventResponseImpl)obj;
 
-			eventResImpl.recycle();
+			eventResponseImpl.recycle();
 		}
 
 	}

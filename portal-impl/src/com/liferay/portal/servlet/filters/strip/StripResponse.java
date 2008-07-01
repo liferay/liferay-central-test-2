@@ -41,8 +41,8 @@ import javax.servlet.http.HttpServletResponseWrapper;
  */
 public class StripResponse extends HttpServletResponseWrapper {
 
-	public StripResponse(HttpServletResponse res) {
-		super(res);
+	public StripResponse(HttpServletResponse response) {
+		super(response);
 	}
 
 	public void finishResponse() {

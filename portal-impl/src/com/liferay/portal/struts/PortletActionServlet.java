@@ -40,18 +40,19 @@ import org.apache.struts.config.ModuleConfig;
  */
 public class PortletActionServlet extends ActionServlet {
 
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
+	public void init(ServletConfig servletConfig) throws ServletException {
+		super.init(servletConfig);
 
-		ServletContext ctx = getServletContext();
+		ServletContext servletContext = getServletContext();
 
 		ModuleConfig moduleConfig =
-			(ModuleConfig)ctx.getAttribute(Globals.MODULE_KEY);
+			(ModuleConfig)servletContext.getAttribute(Globals.MODULE_KEY);
 
-		PortletRequestProcessor portletReqProcessor =
+		PortletRequestProcessor portletRequestProcessor =
 			PortletRequestProcessor.getInstance(this, moduleConfig);
 
-		ctx.setAttribute(WebKeys.PORTLET_STRUTS_PROCESSOR, portletReqProcessor);
+		servletContext.setAttribute(
+			WebKeys.PORTLET_STRUTS_PROCESSOR, portletRequestProcessor);
 	}
 
 }

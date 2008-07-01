@@ -63,20 +63,20 @@ import org.apache.struts.action.ActionMapping;
 public class TrackbackAction extends PortletAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		try {
-			addTrackback(req, res);
+			addTrackback(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
-			sendError(res, "An unknown error has occurred.");
+			sendError(actionResponse, "An unknown error has occurred.");
 
 			_log.error(e);
 		}
 
-		setForward(req, ActionConstants.COMMON_NULL);
+		setForward(actionRequest, ActionConstants.COMMON_NULL);
 	}
 
 	protected void addTrackback(ActionRequest req, ActionResponse res)
@@ -145,27 +145,31 @@ public class TrackbackAction extends PortletAction {
 		sendSuccess(res);
 	}
 
-	protected boolean isCommentsEnabled(ActionRequest req) throws Exception {
-		PortletPreferences prefs = req.getPreferences();
+	protected boolean isCommentsEnabled(ActionRequest actionRequest)
+		throws Exception {
 
-		String portletResource = ParamUtil.getString(req, "portletResource");
+		PortletPreferences prefs = actionRequest.getPreferences();
+
+		String portletResource = ParamUtil.getString(
+			actionRequest, "portletResource");
 
 		if (Validator.isNotNull(portletResource)) {
 			prefs = PortletPreferencesFactoryUtil.getPortletSetup(
-				req, portletResource);
+				actionRequest, portletResource);
 		}
 
 		return GetterUtil.getBoolean(
 			prefs.getValue("enable-comments", null), true);
 	}
 
-	protected void sendError(ActionResponse res, String msg)
+	protected void sendError(ActionResponse actionResponse, String msg)
 		throws Exception {
 
-		sendResponse(res, msg, false);
+		sendResponse(actionResponse, msg, false);
 	}
 
-	protected void sendResponse(ActionResponse res, String msg, boolean success)
+	protected void sendResponse(
+			ActionResponse actionResponse, String msg, boolean success)
 		throws Exception {
 
 		StringBuilder sb = new StringBuilder();
@@ -183,10 +187,11 @@ public class TrackbackAction extends PortletAction {
 
 		sb.append("</response>");
 
-		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
+		HttpServletResponse response = PortalUtil.getHttpServletResponse(
+			actionResponse);
 
 		ServletResponseUtil.sendFile(
-			httpRes, null, sb.toString().getBytes(StringPool.UTF8),
+			response, null, sb.toString().getBytes(StringPool.UTF8),
 			ContentTypes.TEXT_XML_UTF8);
 	}
 

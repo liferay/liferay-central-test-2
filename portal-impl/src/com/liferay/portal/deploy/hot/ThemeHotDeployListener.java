@@ -71,17 +71,17 @@ public class ThemeHotDeployListener extends BaseHotDeployListener {
 	}
 
 	protected void doInvokeDeploy(HotDeployEvent event) throws Exception {
-		ServletContext ctx = event.getServletContext();
+		ServletContext servletContext = event.getServletContext();
 
-		String servletContextName = ctx.getServletContextName();
+		String servletContextName = servletContext.getServletContextName();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking deploy for " + servletContextName);
 		}
 
 		String[] xmls = new String[] {
-			HttpUtil.URLtoString(
-				ctx.getResource("/WEB-INF/liferay-look-and-feel.xml"))
+			HttpUtil.URLtoString(servletContext.getResource(
+				"/WEB-INF/liferay-look-and-feel.xml"))
 		};
 
 		if (xmls[0] == null) {
@@ -93,10 +93,10 @@ public class ThemeHotDeployListener extends BaseHotDeployListener {
 		}
 
 		List<String> themeIds = ThemeLocalServiceUtil.init(
-			servletContextName, ctx, null, true, xmls,
+			servletContextName, servletContext, null, true, xmls,
 			event.getPluginPackage());
 
-		VelocityContextPool.put(servletContextName, ctx);
+		VelocityContextPool.put(servletContextName, servletContext);
 
 		_vars.put(servletContextName, themeIds);
 
@@ -108,9 +108,9 @@ public class ThemeHotDeployListener extends BaseHotDeployListener {
 	}
 
 	protected void doInvokeUndeploy(HotDeployEvent event) throws Exception {
-		ServletContext ctx = event.getServletContext();
+		ServletContext servletContext = event.getServletContext();
 
-		String servletContextName = ctx.getServletContextName();
+		String servletContextName = servletContext.getServletContextName();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking undeploy for " + servletContextName);

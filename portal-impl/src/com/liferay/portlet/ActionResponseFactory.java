@@ -44,34 +44,36 @@ import org.apache.commons.pool.impl.StackObjectPool;
 public class ActionResponseFactory {
 
 	public static ActionResponseImpl create(
-			ActionRequestImpl req, HttpServletResponse res, String portletName,
-			User user, Layout layout, WindowState windowState,
-			PortletMode portletMode)
+			ActionRequestImpl actionRequestImpl, HttpServletResponse response,
+			String portletName, User user, Layout layout,
+			WindowState windowState, PortletMode portletMode)
 		throws Exception {
 
-		ActionResponseImpl actionResImpl = null;
+		ActionResponseImpl actionResponseImpl = null;
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
-			actionResImpl = (ActionResponseImpl)_instance._pool.borrowObject();
+			actionResponseImpl =
+				(ActionResponseImpl)_instance._pool.borrowObject();
 		}
 		else {
-			actionResImpl = new ActionResponseImpl();
+			actionResponseImpl = new ActionResponseImpl();
 		}
 
-		actionResImpl.init(
-			req, res, portletName, user, layout, windowState, portletMode);
+		actionResponseImpl.init(
+			actionRequestImpl, response, portletName, user, layout, windowState,
+			portletMode);
 
-		return actionResImpl;
+		return actionResponseImpl;
 	}
 
-	public static void recycle(ActionResponseImpl actionResImpl)
+	public static void recycle(ActionResponseImpl actionResponseImpl)
 		throws Exception {
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
-			_instance._pool.returnObject(actionResImpl);
+			_instance._pool.returnObject(actionResponseImpl);
 		}
-		else if (actionResImpl != null) {
-			actionResImpl.recycle();
+		else if (actionResponseImpl != null) {
+			actionResponseImpl.recycle();
 		}
 	}
 
@@ -91,9 +93,9 @@ public class ActionResponseFactory {
 		}
 
 		public void passivateObject(Object obj) {
-			ActionResponseImpl actionResImpl = (ActionResponseImpl)obj;
+			ActionResponseImpl actionResponseImpl = (ActionResponseImpl)obj;
 
-			actionResImpl.recycle();
+			actionResponseImpl.recycle();
 		}
 
 	}

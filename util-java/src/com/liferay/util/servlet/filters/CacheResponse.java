@@ -46,8 +46,8 @@ import javax.servlet.http.HttpServletResponseWrapper;
  */
 public class CacheResponse extends HttpServletResponseWrapper {
 
-	public CacheResponse(HttpServletResponse res, String encoding) {
-		super(res);
+	public CacheResponse(HttpServletResponse response, String encoding) {
+		super(response);
 
 		_encoding = encoding;
 	}

@@ -157,13 +157,14 @@ public class WAIPortlet extends GenericPortlet {
 			forward(request, response, _JSP_IFRAME);
 		}
 		else if (_connector.equals(CONNECTOR_INCLUDE)) {
-			HttpServletRequest waiHttpReq = new WAIHttpServletRequest(
+			HttpServletRequest waiRequest = new WAIHttpServletRequest(
 				request, contextPath.toString(), pathInfo, queryString, params);
 
-			RequestDispatcher rd = request.getRequestDispatcher(appUrl);
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher(
+				appUrl);
 
 			try {
-				rd.forward(waiHttpReq, response);
+				requestDispatcher.forward(waiRequest, response);
 			}
 			catch (ServletException se) {
 				throw new PortletException(se);

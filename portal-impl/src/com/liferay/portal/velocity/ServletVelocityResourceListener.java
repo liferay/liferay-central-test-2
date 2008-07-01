@@ -51,25 +51,26 @@ public class ServletVelocityResourceListener extends VelocityResourceListener {
 		int pos = source.indexOf(SERVLET_SEPARATOR);
 
 		if (pos != -1) {
-			String ctxName = source.substring(0, pos);
+			String servletContextName = source.substring(0, pos);
 
-			if (Validator.isNull(ctxName)) {
-				ctxName = PortalUtil.getPathContext();
+			if (Validator.isNull(servletContextName)) {
+				servletContextName = PortalUtil.getPathContext();
 			}
 
-			ServletContext ctx = VelocityContextPool.get(ctxName);
+			ServletContext servletContext = VelocityContextPool.get(
+				servletContextName);
 
-			if (ctx != null) {
+			if (servletContext != null) {
 				String name =
 					source.substring(pos + SERVLET_SEPARATOR.length());
 
 				if (_log.isDebugEnabled()) {
 					_log.debug(
 						name + " is associated with the servlet context " +
-							ctxName + " " + ctx);
+							servletContextName + " " + servletContext);
 				}
 
-				is = ctx.getResourceAsStream(name);
+				is = servletContext.getResourceAsStream(name);
 
 				if ((is == null) && (name.endsWith("/init_custom.vm"))) {
 					if (_log.isWarnEnabled()) {
@@ -82,7 +83,7 @@ public class ServletVelocityResourceListener extends VelocityResourceListener {
 			}
 			else {
 				_log.error(
-					source + " is not valid because " + ctxName +
+					source + " is not valid because " + servletContextName +
 						" does not map to a servlet context");
 			}
 		}

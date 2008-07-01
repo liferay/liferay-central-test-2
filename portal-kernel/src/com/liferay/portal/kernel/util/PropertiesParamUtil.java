@@ -24,7 +24,7 @@ package com.liferay.portal.kernel.util;
 
 import java.util.Properties;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="PropertiesParamUtil.java.html"><b><i>View Source</i></b></a>
@@ -35,13 +35,13 @@ import javax.servlet.ServletRequest;
 public class PropertiesParamUtil {
 
 	public static boolean getBoolean(
-		Properties props, ServletRequest req, String param) {
+		Properties props, HttpServletRequest request, String param) {
 
-		return getBoolean(props, req, param, GetterUtil.DEFAULT_BOOLEAN);
+		return getBoolean(props, request, param, GetterUtil.DEFAULT_BOOLEAN);
 	}
 
 	public static boolean getBoolean(
-		Properties props, ServletRequest req, String param,
+		Properties props, HttpServletRequest request, String param,
 		boolean defaultValue) {
 
 		String propsValue = props.getProperty(param, null);
@@ -49,17 +49,17 @@ public class PropertiesParamUtil {
 		boolean getterUtilValue = GetterUtil.getBoolean(
 			propsValue, defaultValue);
 
-		return ParamUtil.get(req, param, getterUtilValue);
+		return ParamUtil.get(request, param, getterUtilValue);
 	}
 
 	public static double getDouble(
-		Properties props, ServletRequest req, String param) {
+		Properties props, HttpServletRequest request, String param) {
 
-		return getDouble(props, req, param, GetterUtil.DEFAULT_DOUBLE);
+		return getDouble(props, request, param, GetterUtil.DEFAULT_DOUBLE);
 	}
 
 	public static double getDouble(
-		Properties props, ServletRequest req, String param,
+		Properties props, HttpServletRequest request, String param,
 		double defaultValue) {
 
 		String propsValue = props.getProperty(param, null);
@@ -67,51 +67,53 @@ public class PropertiesParamUtil {
 		double getterUtilValue = GetterUtil.getDouble(
 			propsValue, defaultValue);
 
-		return ParamUtil.get(req, param, getterUtilValue);
+		return ParamUtil.get(request, param, getterUtilValue);
 	}
 
 	public static int getInteger(
-		Properties props, ServletRequest req, String param) {
+		Properties props, HttpServletRequest request, String param) {
 
-		return getInteger(props, req, param, GetterUtil.DEFAULT_INTEGER);
+		return getInteger(props, request, param, GetterUtil.DEFAULT_INTEGER);
 	}
 
 	public static int getInteger(
-		Properties props, ServletRequest req, String param, int defaultValue) {
+		Properties props, HttpServletRequest request, String param,
+		int defaultValue) {
 
 		String propsValue = props.getProperty(param, null);
 
 		int getterUtilValue = GetterUtil.getInteger(
 			propsValue, defaultValue);
 
-		return ParamUtil.get(req, param, getterUtilValue);
+		return ParamUtil.get(request, param, getterUtilValue);
 	}
 
 	public static long getLong(
-		Properties props, ServletRequest req, String param) {
+		Properties props, HttpServletRequest request, String param) {
 
-		return getLong(props, req, param, GetterUtil.DEFAULT_LONG);
+		return getLong(props, request, param, GetterUtil.DEFAULT_LONG);
 	}
 
 	public static long getLong(
-		Properties props, ServletRequest req, String param, long defaultValue) {
+		Properties props, HttpServletRequest request, String param,
+		long defaultValue) {
 
 		String propsValue = props.getProperty(param, null);
 
 		long getterUtilValue = GetterUtil.getLong(
 			propsValue, defaultValue);
 
-		return ParamUtil.get(req, param, getterUtilValue);
+		return ParamUtil.get(request, param, getterUtilValue);
 	}
 
 	public static String getString(
-		Properties props, ServletRequest req, String param) {
+		Properties props, HttpServletRequest request, String param) {
 
-		return getString(props, req, param, GetterUtil.DEFAULT_STRING);
+		return getString(props, request, param, GetterUtil.DEFAULT_STRING);
 	}
 
 	public static String getString(
-		Properties props, ServletRequest req, String param,
+		Properties props, HttpServletRequest request, String param,
 		String defaultValue) {
 
 		String propsValue = props.getProperty(param, null);
@@ -119,7 +121,7 @@ public class PropertiesParamUtil {
 		String getterUtilValue = GetterUtil.getString(
 			propsValue, defaultValue);
 
-		return ParamUtil.get(req, param, getterUtilValue);
+		return ParamUtil.get(request, param, getterUtilValue);
 	}
 
 }

@@ -137,15 +137,16 @@ public class ParamAndPropertyAncestorTagImpl
 	}
 
 	public void include(String path) throws IOException, ServletException {
-		ServletContext ctx = getServletContext();
-		HttpServletRequest req = getServletRequest();
-		StringServletResponse res = getServletResponse();
+		ServletContext servletContext = getServletContext();
+		HttpServletRequest request = getServletRequest();
+		StringServletResponse stringResponse = getServletResponse();
 
-		RequestDispatcher rd = ctx.getRequestDispatcher(path);
+		RequestDispatcher requestDispatcher =
+			servletContext.getRequestDispatcher(path);
 
-		rd.include(req, res);
+		requestDispatcher.include(request, stringResponse);
 
-		pageContext.getOut().print(res.getString());
+		pageContext.getOut().print(stringResponse.getString());
 	}
 
 	private Map<String, String[]> _params;

@@ -56,47 +56,48 @@ import org.apache.struts.action.ActionMapping;
 public class EditDiscussionAction extends PortletAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		ActionResponseImpl resImpl = (ActionResponseImpl)res;
+		ActionResponseImpl actionResponseImpl =
+			(ActionResponseImpl)actionResponse;
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
-			String redirect = ParamUtil.getString(req, "redirect");
+			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				MBMessage message = updateMessage(req);
+				MBMessage message = updateMessage(actionRequest);
 
 				redirect +=
-					"#" + resImpl.getNamespace() + "messageScroll" +
+					"#" + actionResponseImpl.getNamespace() + "messageScroll" +
 						message.getMessageId();
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteMessage(req);
+				deleteMessage(actionRequest);
 			}
 
-			sendRedirect(req, res, redirect);
+			sendRedirect(actionRequest, actionResponse, redirect);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchMessageException ||
 				e instanceof PrincipalException ||
 				e instanceof RequiredMessageException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.message_boards.error");
+				setForward(actionRequest, "portlet.message_boards.error");
 			}
 			else if (e instanceof FileNameException ||
 					 e instanceof FileSizeException ||
 					 e instanceof MessageBodyException ||
 					 e instanceof MessageSubjectException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				sendRedirect(req, res);
+				sendRedirect(actionRequest, actionResponse);
 			}
 			else {
 				throw e;
@@ -104,12 +105,12 @@ public class EditDiscussionAction extends PortletAction {
 		}
 	}
 
-	protected void deleteMessage(ActionRequest req) throws Exception {
-		long groupId = PortalUtil.getPortletGroupId(req);
-		String className = ParamUtil.getString(req, "className");
-		long classPK = ParamUtil.getLong(req, "classPK");
+	protected void deleteMessage(ActionRequest actionRequest) throws Exception {
+		long groupId = PortalUtil.getPortletGroupId(actionRequest);
+		String className = ParamUtil.getString(actionRequest, "className");
+		long classPK = ParamUtil.getLong(actionRequest, "classPK");
 
-		long messageId = ParamUtil.getLong(req, "messageId");
+		long messageId = ParamUtil.getLong(actionRequest, "messageId");
 
 		MBMessageServiceUtil.deleteDiscussionMessage(
 			groupId, className, classPK, messageId);
@@ -119,20 +120,23 @@ public class EditDiscussionAction extends PortletAction {
 		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}
 
-	protected MBMessage updateMessage(ActionRequest req) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+	protected MBMessage updateMessage(ActionRequest actionRequest)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long groupId = PortalUtil.getPortletGroupId(req);
-		String className = ParamUtil.getString(req, "className");
-		long classPK = ParamUtil.getLong(req, "classPK");
+		long groupId = PortalUtil.getPortletGroupId(actionRequest);
+		String className = ParamUtil.getString(actionRequest, "className");
+		long classPK = ParamUtil.getLong(actionRequest, "classPK");
 
-		long messageId = ParamUtil.getLong(req, "messageId");
+		long messageId = ParamUtil.getLong(actionRequest, "messageId");
 
-		long threadId = ParamUtil.getLong(req, "threadId");
-		long parentMessageId = ParamUtil.getLong(req, "parentMessageId");
-		String subject = ParamUtil.getString(req, "subject");
-		String body = ParamUtil.getString(req, "body");
+		long threadId = ParamUtil.getLong(actionRequest, "threadId");
+		long parentMessageId = ParamUtil.getLong(
+			actionRequest, "parentMessageId");
+		String subject = ParamUtil.getString(actionRequest, "subject");
+		String body = ParamUtil.getString(actionRequest, "body");
 
 		MBMessage message = null;
 

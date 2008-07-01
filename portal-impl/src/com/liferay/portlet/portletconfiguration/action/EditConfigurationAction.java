@@ -64,7 +64,7 @@ import org.apache.struts.action.ActionMapping;
 public class EditConfigurationAction extends PortletAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
@@ -83,12 +83,12 @@ public class EditConfigurationAction extends PortletAction {
 			portlet);
 
 		if (configurationAction != null) {
-			configurationAction.processAction(config, req, res);
+			configurationAction.processAction(portletConfig, req, res);
 		}
 	}
 
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
@@ -109,7 +109,7 @@ public class EditConfigurationAction extends PortletAction {
 			portlet);
 
 		if (configurationAction != null) {
-			String path = configurationAction.render(config, req, res);
+			String path = configurationAction.render(portletConfig, req, res);
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Configuration action returned render path " + path);
@@ -166,8 +166,8 @@ public class EditConfigurationAction extends PortletAction {
 	protected String getTitle(Portlet portlet, RenderRequest req)
 		throws Exception {
 
-		ServletContext ctx =
-			(ServletContext)req.getAttribute(WebKeys.CTX);
+		ServletContext servletContext = (ServletContext)req.getAttribute(
+			WebKeys.CTX);
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -181,7 +181,7 @@ public class EditConfigurationAction extends PortletAction {
 
 		if (Validator.isNull(title)) {
 			title = PortalUtil.getPortletTitle(
-				portlet, ctx, themeDisplay.getLocale());
+				portlet, servletContext, themeDisplay.getLocale());
 		}
 
 		return title;

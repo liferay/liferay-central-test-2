@@ -78,8 +78,9 @@ public class LanguageTag extends IncludeTag {
 
 	public static void doTag(
 			String page, String formName, String formAction, String name,
-			String[] languageIds, int displayStyle, ServletContext ctx,
-			HttpServletRequest request, HttpServletResponse response)
+			String[] languageIds, int displayStyle,
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response)
 		throws IOException, ServletException {
 
 		request.setAttribute("liferay-ui:language:formName", formName);
@@ -100,9 +101,10 @@ public class LanguageTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-ui:language:displayStyle", String.valueOf(displayStyle));
 
-		RequestDispatcher rd = ctx.getRequestDispatcher(page);
+		RequestDispatcher requestDispatcher =
+			servletContext.getRequestDispatcher(page);
 
-		rd.include(request, response);
+		requestDispatcher.include(request, response);
 	}
 
 	public int doEndTag() throws JspException {

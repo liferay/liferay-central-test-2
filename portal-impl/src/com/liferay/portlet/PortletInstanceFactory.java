@@ -48,10 +48,11 @@ import javax.servlet.ServletContext;
  */
 public class PortletInstanceFactory {
 
-	public static InvokerPortlet create(Portlet portlet, ServletContext ctx)
+	public static InvokerPortlet create(
+			Portlet portlet, ServletContext servletContext)
 		throws PortletException {
 
-		return _instance._create(portlet, ctx);
+		return _instance._create(portlet, servletContext);
 	}
 
 	public static void destroy(Portlet portlet) {
@@ -62,7 +63,8 @@ public class PortletInstanceFactory {
 		_pool = new ConcurrentHashMap<String, Map<String, InvokerPortlet>>();
 	}
 
-	private InvokerPortlet _create(Portlet portlet, ServletContext ctx)
+	private InvokerPortlet _create(
+			Portlet portlet, ServletContext servletContext)
 		throws PortletException {
 
 		boolean instanceable = false;
@@ -97,7 +99,7 @@ public class PortletInstanceFactory {
 
 			if (rootInvokerPortletInstance == null) {
 				PortletConfig portletConfig =
-					PortletConfigFactory.create(portlet, ctx);
+					PortletConfigFactory.create(portlet, servletContext);
 
 				PortletApp portletApp = portlet.getPortletApp();
 
@@ -124,9 +126,10 @@ public class PortletInstanceFactory {
 					rootInvokerPortletInstance.getPortletInstance();
 
 				PortletConfig portletConfig =
-					PortletConfigFactory.create(portlet, ctx);
+					PortletConfigFactory.create(portlet, servletContext);
 
-				PortletContext portletCtx = portletConfig.getPortletContext();
+				PortletContext portletContext =
+					portletConfig.getPortletContext();
 				boolean facesPortlet =
 					rootInvokerPortletInstance.isFacesPortlet();
 				boolean strutsPortlet =
@@ -136,12 +139,12 @@ public class PortletInstanceFactory {
 
 				if (PropsValues.PORTLET_CONTAINER_IMPL_SUN) {
 					instanceInvokerPortletInstance = new WindowInvoker(
-						portlet, portletInstance, portletConfig, portletCtx,
+						portlet, portletInstance, portletConfig, portletContext,
 						facesPortlet, strutsPortlet, strutsBridgePortlet);
 				}
 				else {
 					instanceInvokerPortletInstance = new InvokerPortlet(
-						portlet, portletInstance, portletConfig, portletCtx,
+						portlet, portletInstance, portletConfig, portletContext,
 						facesPortlet, strutsPortlet, strutsBridgePortlet);
 				}
 
@@ -218,15 +221,15 @@ public class PortletInstanceFactory {
 					Class.forName(portlet.getPortletClass()).newInstance();
 			}
 
-			PortletContext portletCtx = portletConfig.getPortletContext();
+			PortletContext portletContext = portletConfig.getPortletContext();
 
 			if (PropsValues.PORTLET_CONTAINER_IMPL_SUN) {
 				invokerPortlet = new WindowInvoker(
-					portlet, portletInstance, portletCtx);
+					portlet, portletInstance, portletContext);
 			}
 			else {
 				invokerPortlet = new InvokerPortlet(
-					portlet, portletInstance, portletCtx);
+					portlet, portletInstance, portletContext);
 			}
 
 			invokerPortlet.init(portletConfig);

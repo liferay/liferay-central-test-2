@@ -38,10 +38,11 @@ import javax.portlet.filter.FilterConfig;
 public class FilterConfigImpl implements FilterConfig {
 
 	public FilterConfigImpl(
-		String filterName, PortletContext ctx, Map<String, String> params) {
+		String filterName, PortletContext portletContext,
+		Map<String, String> params) {
 
 		_filterName = filterName;
-		_ctx = ctx;
+		_portletContext = portletContext;
 		_params = params;
 	}
 
@@ -62,11 +63,11 @@ public class FilterConfigImpl implements FilterConfig {
 	}
 
 	public PortletContext getPortletContext() {
-		return _ctx;
+		return _portletContext;
 	}
 
 	private String _filterName;
-	private PortletContext _ctx;
+	private PortletContext _portletContext;
 	private Map<String, String> _params;
 
 }

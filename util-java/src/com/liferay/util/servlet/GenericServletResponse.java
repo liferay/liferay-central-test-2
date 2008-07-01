@@ -38,8 +38,8 @@ import javax.servlet.http.HttpServletResponseWrapper;
  */
 public class GenericServletResponse extends HttpServletResponseWrapper {
 
-	public GenericServletResponse(HttpServletResponse res) {
-		super(res);
+	public GenericServletResponse(HttpServletResponse response) {
+		super(response);
 
 		_bam = new ByteArrayMaker();
 	}

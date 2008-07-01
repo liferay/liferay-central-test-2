@@ -44,33 +44,36 @@ import javax.servlet.jsp.JspException;
 public class IncludeTag extends ParamAndPropertyAncestorTagImpl {
 
 	public int doEndTag() throws JspException {
-		HttpServletRequest req = null;
+		HttpServletRequest request = null;
 
 		try {
-			ServletContext ctx = getServletContext();
-			req = getServletRequest();
-			StringServletResponse res = getServletResponse();
+			ServletContext servletContext = getServletContext();
+			request = getServletRequest();
+			StringServletResponse stringResponse = getServletResponse();
 
-			Theme theme = (Theme)req.getAttribute(WebKeys.THEME);
+			Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
 
 			String page = getPage();
 
 			if (isTheme()) {
-				ThemeUtil.include(ctx, req, res, pageContext, page, theme);
+				ThemeUtil.include(
+					servletContext, request, stringResponse, pageContext, page,
+					theme);
 			}
 			else {
-				RequestDispatcher rd = ctx.getRequestDispatcher(page);
+				RequestDispatcher requestDispatcher =
+					servletContext.getRequestDispatcher(page);
 
-				rd.include(req, res);
+				requestDispatcher.include(request, stringResponse);
 			}
 
-			pageContext.getOut().print(res.getString());
+			pageContext.getOut().print(stringResponse.getString());
 
 			return EVAL_PAGE;
 		}
 		catch (Exception e) {
-			if (req != null) {
-				String currentURL = (String)req.getAttribute(
+			if (request != null) {
+				String currentURL = (String)request.getAttribute(
 					WebKeys.CURRENT_URL);
 
 				_log.error(

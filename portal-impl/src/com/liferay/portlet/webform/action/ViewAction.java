@@ -70,13 +70,13 @@ import org.apache.struts.action.ActionMapping;
 public class ViewAction extends PortletAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		PortletConfigImpl configImpl = (PortletConfigImpl)config;
+		PortletConfigImpl portletConfigImpl = (PortletConfigImpl)portletConfig;
 
-		String portletId = configImpl.getPortletId();
+		String portletId = portletConfigImpl.getPortletId();
 
 		PortletPreferences prefs =
 			PortletPreferencesFactoryUtil.getPortletSetup(req, portletId);
@@ -162,7 +162,7 @@ public class ViewAction extends PortletAction {
 	}
 
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 

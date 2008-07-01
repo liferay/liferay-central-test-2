@@ -66,10 +66,10 @@ public class LiferayServletContextProviderWrapper
 	}
 
 	private ServletContextProvider _getProvider(GenericPortlet portlet) {
-		PortletContext portletCtx = portlet.getPortletContext();
+		PortletContext portletContext = portlet.getPortletContext();
 
 		if (_provider == null) {
-			_provider = (ServletContextProvider)portletCtx.getAttribute(
+			_provider = (ServletContextProvider)portletContext.getAttribute(
 				ServletContextProvider.STRUTS_BRIDGES_CONTEXT_PROVIDER);
 		}
 

@@ -58,21 +58,21 @@ import org.openid4java.OpenIDException;
 public class ViewAction extends PortletAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = req.getParameter(Constants.CMD);
+		String cmd = actionRequest.getParameter(Constants.CMD);
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		if (req.getRemoteUser() != null) {
-			res.sendRedirect(themeDisplay.getPathMain());
+		if (actionRequest.getRemoteUser() != null) {
+			actionResponse.sendRedirect(themeDisplay.getPathMain());
 		}
 		else if (Validator.isNotNull(cmd)) {
 			try {
-				login(themeDisplay, req, res);
+				login(themeDisplay, actionRequest, actionResponse);
 			}
 			catch (Exception e) {
 				if (e instanceof OpenIDException) {
@@ -82,34 +82,37 @@ public class ViewAction extends PortletAction {
 								e.getMessage());
 					}
 
-					SessionErrors.add(req, e.getClass().getName());
+					SessionErrors.add(actionRequest, e.getClass().getName());
 				}
 				else {
-					PortalUtil.sendError(e, req, res);
+					PortalUtil.sendError(e, actionRequest, actionResponse);
 				}
 			}
 		}
 	}
 
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		return mapping.findForward("portlet.open_id.view");
 	}
 
 	protected void login(
-			ThemeDisplay themeDisplay, ActionRequest req, ActionResponse res)
+			ThemeDisplay themeDisplay, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+		HttpServletResponse response = PortalUtil.getHttpServletResponse(
+			actionResponse);
 
-		String openId = ParamUtil.getString(req, "openId");
+		String openId = ParamUtil.getString(actionRequest, "openId");
 
 		OpenIdRequestAction.sendOpenIdRequest(
-			themeDisplay, httpReq, httpRes, openId);
+			themeDisplay, request, response, openId);
 	}
 
 	private static Log _log = LogFactory.getLog(ViewAction.class);

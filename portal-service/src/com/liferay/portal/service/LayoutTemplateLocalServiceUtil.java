@@ -92,33 +92,35 @@ public class LayoutTemplateLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, Boolean>> init(
-		javax.servlet.ServletContext ctx, java.lang.String[] xmls,
+		javax.servlet.ServletContext servletContext, java.lang.String[] xmls,
 		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage) {
 		LayoutTemplateLocalService layoutTemplateLocalService = LayoutTemplateLocalServiceFactory.getService();
 
-		return layoutTemplateLocalService.init(ctx, xmls, pluginPackage);
-	}
-
-	public static java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, Boolean>> init(
-		java.lang.String servletContextName, javax.servlet.ServletContext ctx,
-		java.lang.String[] xmls,
-		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage) {
-		LayoutTemplateLocalService layoutTemplateLocalService = LayoutTemplateLocalServiceFactory.getService();
-
-		return layoutTemplateLocalService.init(servletContextName, ctx, xmls,
+		return layoutTemplateLocalService.init(servletContext, xmls,
 			pluginPackage);
 	}
 
+	public static java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, Boolean>> init(
+		java.lang.String servletContextName,
+		javax.servlet.ServletContext servletContext, java.lang.String[] xmls,
+		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage) {
+		LayoutTemplateLocalService layoutTemplateLocalService = LayoutTemplateLocalServiceFactory.getService();
+
+		return layoutTemplateLocalService.init(servletContextName,
+			servletContext, xmls, pluginPackage);
+	}
+
 	public static void readLayoutTemplate(java.lang.String servletContextName,
-		javax.servlet.ServletContext ctx,
+		javax.servlet.ServletContext servletContext,
 		java.util.Set<com.liferay.portal.kernel.util.ObjectValuePair<String, Boolean>> layoutTemplateIds,
 		com.liferay.portal.kernel.xml.Element el, boolean standard,
 		java.lang.String themeId,
 		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage) {
 		LayoutTemplateLocalService layoutTemplateLocalService = LayoutTemplateLocalServiceFactory.getService();
 
-		layoutTemplateLocalService.readLayoutTemplate(servletContextName, ctx,
-			layoutTemplateIds, el, standard, themeId, pluginPackage);
+		layoutTemplateLocalService.readLayoutTemplate(servletContextName,
+			servletContext, layoutTemplateIds, el, standard, themeId,
+			pluginPackage);
 	}
 
 	public static void uninstallLayoutTemplate(

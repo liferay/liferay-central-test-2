@@ -71,31 +71,34 @@ public class VelocityPortlet extends GenericPortlet {
 	 */
 	private static SimplePool writerPool = new SimplePool(40);
 
-	public void init(PortletConfig config) throws PortletException {
-		super.init(config);
+	public void init(PortletConfig portletConfig) throws PortletException {
+		super.init(portletConfig);
 
-		PortletContext portletCtx = config.getPortletContext();
+		PortletContext portletContext = portletConfig.getPortletContext();
 
-		_portletContextName = portletCtx.getPortletContextName();
+		_portletContextName = portletContext.getPortletContextName();
 
 		_editTemplate = getInitParameter("edit-template");
 		_helpTemplate = getInitParameter("help-template");
 		_viewTemplate = getInitParameter("view-template");
 	}
 
-	public void processAction(ActionRequest req, ActionResponse res)
+	public void processAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException, PortletException {
 	}
 
-	public void doEdit(RenderRequest req, RenderResponse res)
+	public void doEdit(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		if (req.getPreferences() == null) {
-			super.doEdit(req, res);
+		if (renderRequest.getPreferences() == null) {
+			super.doEdit(renderRequest, renderResponse);
 		}
 		else {
 			try {
-				mergeTemplate(getTemplate(_editTemplate), req, res);
+				mergeTemplate(
+					getTemplate(_editTemplate), renderRequest, renderResponse);
 			}
 			catch (Exception e) {
 				throw new PortletException(e);
@@ -103,33 +106,39 @@ public class VelocityPortlet extends GenericPortlet {
 		}
 	}
 
-	public void doHelp(RenderRequest req, RenderResponse res)
+	public void doHelp(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
 		try {
-			mergeTemplate(getTemplate(_helpTemplate), req, res);
+			mergeTemplate(
+				getTemplate(_helpTemplate), renderRequest, renderResponse);
 		}
 		catch (Exception e) {
 			throw new PortletException(e);
 		}
 	}
 
-	public void doView(RenderRequest req, RenderResponse res)
+	public void doView(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
 		try {
-			mergeTemplate(getTemplate(_viewTemplate), req, res);
+			mergeTemplate(
+				getTemplate(_viewTemplate), renderRequest, renderResponse);
 		}
 		catch (Exception e) {
 			throw new PortletException(e);
 		}
 	}
 
-	protected Context getContext(PortletRequest req, PortletResponse res) {
+	protected Context getContext(
+		PortletRequest portletRequest, PortletResponse portletResponse) {
+
 		Context context = new VelocityContext();
 
-		context.put(REQUEST, req);
-		context.put(RESPONSE, res);
+		context.put(REQUEST, portletRequest);
+		context.put(RESPONSE, portletResponse);
 
 		return context;
 	}

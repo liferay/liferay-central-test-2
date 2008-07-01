@@ -47,32 +47,35 @@ public class EditUserAction
 	extends com.liferay.portlet.enterpriseadmin.action.EditUserAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		if (redirectToLogin(req, res)) {
+		if (redirectToLogin(actionRequest, actionResponse)) {
 			return;
 		}
 
-		super.processAction(mapping, form, config, req, res);
+		super.processAction(
+			mapping, form, portletConfig, actionRequest, actionResponse);
 	}
 
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		User user = PortalUtil.getUser(req);
+		User user = PortalUtil.getUser(renderRequest);
 
-		RenderRequestImpl renderReqImpl = (RenderRequestImpl)req;
+		RenderRequestImpl renderRequestImpl = (RenderRequestImpl)renderRequest;
 
-		DynamicServletRequest dynamicReq =
-			(DynamicServletRequest)renderReqImpl.getHttpServletRequest();
+		DynamicServletRequest dynamicRequest =
+			(DynamicServletRequest)renderRequestImpl.getHttpServletRequest();
 
-		dynamicReq.setParameter("p_u_i_d", String.valueOf(user.getUserId()));
+		dynamicRequest.setParameter(
+			"p_u_i_d", String.valueOf(user.getUserId()));
 
-		return super.render(mapping, form, config, req, res);
+		return super.render(
+			mapping, form, portletConfig, renderRequest, renderResponse);
 	}
 
 }

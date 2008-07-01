@@ -80,18 +80,18 @@ import org.apache.struts.action.ActionMapping;
 public class EditUserAction extends PortletAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			User user = null;
 			String oldScreenName = StringPool.BLANK;
 
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				Object[] returnValue = updateUser(req);
+				Object[] returnValue = updateUser(actionRequest);
 
 				user = (User)returnValue[0];
 				oldScreenName = ((String)returnValue[1]);
@@ -100,16 +100,16 @@ public class EditUserAction extends PortletAction {
 					 cmd.equals(Constants.DELETE) ||
 					 cmd.equals(Constants.RESTORE)) {
 
-				deleteUsers(req);
+				deleteUsers(actionRequest);
 			}
 			else if (cmd.equals("deleteRole")) {
-				deleteRole(req);
+				deleteRole(actionRequest);
 			}
 			else if (cmd.equals("unlock")) {
-				user = updateLockout(req);
+				user = updateLockout(actionRequest);
 			}
 
-			String redirect = ParamUtil.getString(req, "redirect");
+			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
 			if (user != null) {
 				if (Validator.isNotNull(oldScreenName)) {
@@ -119,8 +119,9 @@ public class EditUserAction extends PortletAction {
 					// that references the old screen name no longer points to a
 					// valid screen name and therefore needs to be updated.
 
-					ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
-						WebKeys.THEME_DISPLAY);
+					ThemeDisplay themeDisplay =
+						(ThemeDisplay)actionRequest.getAttribute(
+							WebKeys.THEME_DISPLAY);
 
 					Group group = user.getGroup();
 
@@ -150,15 +151,15 @@ public class EditUserAction extends PortletAction {
 				redirect += user.getUserId();
 			}
 
-			sendRedirect(req, res, redirect);
+			sendRedirect(actionRequest, actionResponse, redirect);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchUserException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.enterprise_admin.error");
+				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
 			else if (e instanceof ContactFirstNameException ||
 					 e instanceof ContactLastNameException ||
@@ -173,10 +174,11 @@ public class EditUserAction extends PortletAction {
 					 e instanceof UserScreenNameException ||
 					 e instanceof UserSmsException) {
 
-				SessionErrors.add(req, e.getClass().getName(), e);
+				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 
 				if (e instanceof RequiredUserException) {
-					res.sendRedirect(ParamUtil.getString(req, "redirect"));
+					actionResponse.sendRedirect(
+						ParamUtil.getString(actionRequest, "redirect"));
 				}
 			}
 			else {
@@ -186,16 +188,16 @@ public class EditUserAction extends PortletAction {
 	}
 
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			PortalUtil.getSelectedUser(req);
+			PortalUtil.getSelectedUser(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof PrincipalException) {
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.enterprise_admin.error");
 			}
@@ -205,22 +207,22 @@ public class EditUserAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(req, "portlet.enterprise_admin.edit_user"));
+			getForward(renderRequest, "portlet.enterprise_admin.edit_user"));
 	}
 
-	protected void deleteRole(ActionRequest req) throws Exception {
-		User user = PortalUtil.getSelectedUser(req);
+	protected void deleteRole(ActionRequest actionRequest) throws Exception {
+		User user = PortalUtil.getSelectedUser(actionRequest);
 
-		long roleId = ParamUtil.getLong(req, "roleId");
+		long roleId = ParamUtil.getLong(actionRequest, "roleId");
 
 		UserServiceUtil.deleteRoleUser(roleId, user.getUserId());
 	}
 
-	protected void deleteUsers(ActionRequest req) throws Exception {
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+	protected void deleteUsers(ActionRequest actionRequest) throws Exception {
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		long[] deleteUserIds = StringUtil.split(
-			ParamUtil.getString(req, "deleteUserIds"), 0L);
+			ParamUtil.getString(actionRequest, "deleteUserIds"), 0L);
 
 		for (int i = 0; i < deleteUserIds.length; i++) {
 			if (cmd.equals(Constants.DEACTIVATE) ||
@@ -236,52 +238,58 @@ public class EditUserAction extends PortletAction {
 		}
 	}
 
-	protected User updateLockout(ActionRequest req) throws Exception {
-		User user = PortalUtil.getSelectedUser(req);
+	protected User updateLockout(ActionRequest actionRequest) throws Exception {
+		User user = PortalUtil.getSelectedUser(actionRequest);
 
 		UserServiceUtil.updateLockout(user.getUserId(), false);
 
 		return user;
 	}
 
-	protected Object[] updateUser(ActionRequest req) throws Exception {
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+	protected Object[] updateUser(ActionRequest actionRequest)
+		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		boolean autoPassword = ParamUtil.getBoolean(req, "autoPassword", true);
-		String password1 = ParamUtil.getString(req, "password1");
-		String password2 = ParamUtil.getString(req, "password2");
-		boolean autoScreenName = ParamUtil.getBoolean(req, "autoScreenName");
-		String screenName = ParamUtil.getString(req, "screenName");
-		String emailAddress = ParamUtil.getString(req, "emailAddress");
-		String languageId = ParamUtil.getString(req, "languageId");
-		String timeZoneId = ParamUtil.getString(req, "timeZoneId");
-		String greeting = ParamUtil.getString(req, "greeting");
-		String firstName = ParamUtil.getString(req, "firstName");
-		String middleName = ParamUtil.getString(req, "middleName");
-		String lastName = ParamUtil.getString(req, "lastName");
-		int prefixId = ParamUtil.getInteger(req, "prefixId");
-		int suffixId = ParamUtil.getInteger(req, "suffixId");
-		boolean male = ParamUtil.getBoolean(req, "male", true);
-		int birthdayMonth = ParamUtil.getInteger(req, "birthdayMonth");
-		int birthdayDay = ParamUtil.getInteger(req, "birthdayDay");
-		int birthdayYear = ParamUtil.getInteger(req, "birthdayYear");
-		String comments = ParamUtil.getString(req, "comments");
-		String smsSn = ParamUtil.getString(req, "smsSn");
-		String aimSn = ParamUtil.getString(req, "aimSn");
-		String facebookSn = ParamUtil.getString(req, "facebookSn");
-		String icqSn = ParamUtil.getString(req, "icqSn");
-		String jabberSn = ParamUtil.getString(req, "jabberSn");
-		String msnSn = ParamUtil.getString(req, "msnSn");
-		String mySpaceSn = ParamUtil.getString(req, "mySpaceSn");
-		String skypeSn = ParamUtil.getString(req, "skypeSn");
-		String twitterSn = ParamUtil.getString(req, "twitterSn");
-		String ymSn = ParamUtil.getString(req, "ymSn");
-		String jobTitle = ParamUtil.getString(req, "jobTitle");
+		boolean autoPassword = ParamUtil.getBoolean(
+			actionRequest, "autoPassword", true);
+		String password1 = ParamUtil.getString(actionRequest, "password1");
+		String password2 = ParamUtil.getString(actionRequest, "password2");
+		boolean autoScreenName = ParamUtil.getBoolean(
+			actionRequest, "autoScreenName");
+		String screenName = ParamUtil.getString(actionRequest, "screenName");
+		String emailAddress = ParamUtil.getString(
+			actionRequest, "emailAddress");
+		String languageId = ParamUtil.getString(actionRequest, "languageId");
+		String timeZoneId = ParamUtil.getString(actionRequest, "timeZoneId");
+		String greeting = ParamUtil.getString(actionRequest, "greeting");
+		String firstName = ParamUtil.getString(actionRequest, "firstName");
+		String middleName = ParamUtil.getString(actionRequest, "middleName");
+		String lastName = ParamUtil.getString(actionRequest, "lastName");
+		int prefixId = ParamUtil.getInteger(actionRequest, "prefixId");
+		int suffixId = ParamUtil.getInteger(actionRequest, "suffixId");
+		boolean male = ParamUtil.getBoolean(actionRequest, "male", true);
+		int birthdayMonth = ParamUtil.getInteger(
+			actionRequest, "birthdayMonth");
+		int birthdayDay = ParamUtil.getInteger(actionRequest, "birthdayDay");
+		int birthdayYear = ParamUtil.getInteger(actionRequest, "birthdayYear");
+		String comments = ParamUtil.getString(actionRequest, "comments");
+		String smsSn = ParamUtil.getString(actionRequest, "smsSn");
+		String aimSn = ParamUtil.getString(actionRequest, "aimSn");
+		String facebookSn = ParamUtil.getString(actionRequest, "facebookSn");
+		String icqSn = ParamUtil.getString(actionRequest, "icqSn");
+		String jabberSn = ParamUtil.getString(actionRequest, "jabberSn");
+		String msnSn = ParamUtil.getString(actionRequest, "msnSn");
+		String mySpaceSn = ParamUtil.getString(actionRequest, "mySpaceSn");
+		String skypeSn = ParamUtil.getString(actionRequest, "skypeSn");
+		String twitterSn = ParamUtil.getString(actionRequest, "twitterSn");
+		String ymSn = ParamUtil.getString(actionRequest, "ymSn");
+		String jobTitle = ParamUtil.getString(actionRequest, "jobTitle");
 		long[] organizationIds = StringUtil.split(
-			ParamUtil.getString(req, "organizationIds"),  0L);
+			ParamUtil.getString(actionRequest, "organizationIds"),  0L);
 		boolean sendEmail = true;
 
 		User user = null;
@@ -302,13 +310,16 @@ public class EditUserAction extends PortletAction {
 
 			// Update user
 
-			user = PortalUtil.getSelectedUser(req);
+			user = PortalUtil.getSelectedUser(actionRequest);
 
 			String oldPassword = AdminUtil.getUpdateUserPassword(
-				req, user.getUserId());
-			String newPassword1 = ParamUtil.getString(req, "password1");
-			String newPassword2 = ParamUtil.getString(req, "password2");
-			boolean passwordReset = ParamUtil.getBoolean(req, "passwordReset");
+				actionRequest, user.getUserId());
+			String newPassword1 = ParamUtil.getString(
+				actionRequest, "password1");
+			String newPassword2 = ParamUtil.getString(
+				actionRequest, "password2");
+			boolean passwordReset = ParamUtil.getBoolean(
+				actionRequest, "passwordReset");
 
 			String tempOldScreenName = user.getScreenName();
 
@@ -320,7 +331,7 @@ public class EditUserAction extends PortletAction {
 				aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn,
 				twitterSn, ymSn, jobTitle, organizationIds);
 
-			String openId = ParamUtil.getString(req, "openId");
+			String openId = ParamUtil.getString(actionRequest, "openId");
 
 			if (!openId.equals(user.getOpenId())) {
 				UserServiceUtil.updateOpenId(user.getUserId(), openId);
@@ -328,11 +339,11 @@ public class EditUserAction extends PortletAction {
 
 			for (String type : AnnouncementsEntryImpl.TYPES) {
 				boolean email = ParamUtil.getBoolean(
-					req, "announcementsType" + type + "Email");
+					actionRequest, "announcementsType" + type + "Email");
 				boolean sms = ParamUtil.getBoolean(
-					req, "announcementsType" + type + "Sms");
+					actionRequest, "announcementsType" + type + "Sms");
 				boolean website = ParamUtil.getBoolean(
-					req, "announcementsType" + type + "Website");
+					actionRequest, "announcementsType" + type + "Website");
 
 				AnnouncementsDeliveryServiceUtil.updateDelivery(
 					user.getUserId(), type,	email, sms, website);
@@ -346,22 +357,23 @@ public class EditUserAction extends PortletAction {
 
 				// Reset the locale
 
-				HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(
-					req);
-				HttpSession httpSes = httpReq.getSession();
+				HttpServletRequest request = PortalUtil.getHttpServletRequest(
+					actionRequest);
+				HttpSession session = request.getSession();
 
-				httpSes.removeAttribute(Globals.LOCALE_KEY);
+				session.removeAttribute(Globals.LOCALE_KEY);
 
 				// Clear cached portlet responses
 
-				PortletSession ses = req.getPortletSession();
+				PortletSession portletSession =
+					actionRequest.getPortletSession();
 
-				InvokerPortlet.clearResponses(ses);
+				InvokerPortlet.clearResponses(portletSession);
 
 				// Password
 
 				if (Validator.isNotNull(newPassword1)) {
-					ses.setAttribute(
+					portletSession.setAttribute(
 						WebKeys.USER_PASSWORD, newPassword1,
 						PortletSession.APPLICATION_SCOPE);
 				}

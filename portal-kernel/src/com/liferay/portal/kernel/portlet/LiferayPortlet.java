@@ -39,40 +39,41 @@ import javax.portlet.WindowState;
  */
 public class LiferayPortlet extends GenericPortlet {
 
-	protected void doDispatch(RenderRequest req, RenderResponse res)
+	protected void doDispatch(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		WindowState state = req.getWindowState();
+		WindowState state = renderRequest.getWindowState();
 
 		if (!state.equals(WindowState.MINIMIZED)) {
-			PortletMode mode = req.getPortletMode();
+			PortletMode mode = renderRequest.getPortletMode();
 
 			if (mode.equals(PortletMode.VIEW)) {
-				doView(req, res);
+				doView(renderRequest, renderResponse);
 			}
 			else if (mode.equals(LiferayPortletMode.ABOUT)) {
-				doAbout(req, res);
+				doAbout(renderRequest, renderResponse);
 			}
 			else if (mode.equals(LiferayPortletMode.CONFIG)) {
-				doConfig(req, res);
+				doConfig(renderRequest, renderResponse);
 			}
 			else if (mode.equals(PortletMode.EDIT)) {
-				doEdit(req, res);
+				doEdit(renderRequest, renderResponse);
 			}
 			else if (mode.equals(LiferayPortletMode.EDIT_DEFAULTS)) {
-				doEditDefaults(req, res);
+				doEditDefaults(renderRequest, renderResponse);
 			}
 			else if (mode.equals(LiferayPortletMode.EDIT_GUEST)) {
-				doEditGuest(req, res);
+				doEditGuest(renderRequest, renderResponse);
 			}
 			else if (mode.equals(PortletMode.HELP)) {
-				doHelp(req, res);
+				doHelp(renderRequest, renderResponse);
 			}
 			else if (mode.equals(LiferayPortletMode.PREVIEW)) {
-				doPreview(req, res);
+				doPreview(renderRequest, renderResponse);
 			}
 			else if (mode.equals(LiferayPortletMode.PRINT)) {
-				doPrint(req, res);
+				doPrint(renderRequest, renderResponse);
 			}
 			else {
 				throw new PortletException(mode.toString());
@@ -80,37 +81,43 @@ public class LiferayPortlet extends GenericPortlet {
 		}
 	}
 
-	protected void doAbout(RenderRequest req, RenderResponse res)
+	protected void doAbout(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
 		throw new PortletException("doAbout method not implemented");
 	}
 
-	protected void doConfig(RenderRequest req, RenderResponse res)
+	protected void doConfig(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
 		throw new PortletException("doConfig method not implemented");
 	}
 
-	protected void doEditDefaults(RenderRequest req, RenderResponse res)
+	protected void doEditDefaults(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
 		throw new PortletException("doEditDefaults method not implemented");
 	}
 
-	protected void doEditGuest(RenderRequest req, RenderResponse res)
+	protected void doEditGuest(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
 		throw new PortletException("doEditGuest method not implemented");
 	}
 
-	protected void doPreview(RenderRequest req, RenderResponse res)
+	protected void doPreview(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
 		throw new PortletException("doPreview method not implemented");
 	}
 
-	protected void doPrint(RenderRequest req, RenderResponse res)
+	protected void doPrint(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
 		throw new PortletException("doPrint method not implemented");

@@ -36,8 +36,8 @@ import javax.servlet.http.HttpServletResponseWrapper;
  */
 public class NullServletResponse extends HttpServletResponseWrapper {
 
-	public NullServletResponse(HttpServletResponse res) {
-		super(res);
+	public NullServletResponse(HttpServletResponse response) {
+		super(response);
 	}
 
 	public ServletOutputStream getOutputStream() {

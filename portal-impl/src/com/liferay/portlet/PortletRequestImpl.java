@@ -249,7 +249,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 		else {
 			if (create) {
 				_ses = new PortletSessionImpl(
-					_req, _portletName, _portletCtx, _portalSessionId,
+					_req, _portletName, _portletContext, _portalSessionId,
 					_plid);
 			}
 
@@ -260,7 +260,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 			_req.getSession(create);
 
 			_ses = new PortletSessionImpl(
-				_req, _portletName, _portletCtx, _portalSessionId, _plid);
+				_req, _portletName, _portletContext, _portalSessionId, _plid);
 		}*/
 
 		if (!create && _invalidSession) {

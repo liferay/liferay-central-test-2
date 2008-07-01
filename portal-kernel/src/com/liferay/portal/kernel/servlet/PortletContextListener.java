@@ -50,7 +50,8 @@ public class PortletContextListener
 	implements PortalInitable, ServletContextListener {
 
 	public void portalInit() {
-		HotDeployUtil.fireDeployEvent(new HotDeployEvent(_ctx, _classLoader));
+		HotDeployUtil.fireDeployEvent(
+			new HotDeployEvent(_servletContext, _classLoader));
 
 		try {
 			if (_log.isDebugEnabled()) {
@@ -88,7 +89,7 @@ public class PortletContextListener
 
 	public void contextInitialized(ServletContextEvent event) {
 		_classLoader = Thread.currentThread().getContextClassLoader();
-		_ctx = event.getServletContext();
+		_servletContext = event.getServletContext();
 
 		PortalInitableUtil.init(this);
 	}
@@ -134,7 +135,7 @@ public class PortletContextListener
 		LogFactoryUtil.getLog(PortletContextListener.class);
 
 	private ClassLoader _classLoader;
-	private ServletContext _ctx;
+	private ServletContext _servletContext;
 	private boolean _bindLiferayPool;
 
 }

@@ -73,32 +73,34 @@ import org.w3c.dom.Element;
 public abstract class PortletResponseImpl implements PortletResponse {
 
 	public static PortletResponseImpl getPortletResponseImpl(
-		PortletResponse res) {
+		PortletResponse portletResponse) {
 
-		PortletResponseImpl resImpl = null;
+		PortletResponseImpl portletResponseImpl = null;
 
-		if (res instanceof PortletResponseImpl) {
-			resImpl = (PortletResponseImpl)res;
+		if (portletResponse instanceof PortletResponseImpl) {
+			portletResponseImpl = (PortletResponseImpl)portletResponse;
 		}
 		else {
 
 			// LEP-4033
 
 			try {
-				Method method = res.getClass().getMethod("getResponse");
+				Method method = portletResponse.getClass().getMethod(
+					"getResponse");
 
-				Object obj = method.invoke(res, (Object[])null);
+				Object obj = method.invoke(portletResponse, (Object[])null);
 
-				resImpl = getPortletResponseImpl((PortletResponse)obj);
+				portletResponseImpl = getPortletResponseImpl(
+					(PortletResponse)obj);
 			}
 			catch (Exception e) {
 				throw new RuntimeException(
 					"Unable to get the HTTP servlet resuest from " +
-						res.getClass().getName());
+						portletResponse.getClass().getName());
 			}
 		}
 
-		return resImpl;
+		return portletResponseImpl;
 	}
 
 	public void addDateHeader(String name, long date) {
@@ -207,7 +209,8 @@ public abstract class PortletResponseImpl implements PortletResponse {
 		long plid = _plid;
 
 		try {
-			Layout layout = (Layout)_req.getAttribute(WebKeys.LAYOUT);
+			Layout layout = (Layout)_portletRequestImpl.getAttribute(
+				WebKeys.LAYOUT);
 
 			PortletPreferences portletSetup =
 				PortletPreferencesFactoryUtil.getLayoutPortletSetup(
@@ -259,7 +262,7 @@ public abstract class PortletResponseImpl implements PortletResponse {
 
 		if (portletURLImpl == null) {
 			portletURLImpl = new PortletURLImpl(
-				_req, portletName, plid, lifecycle);
+				_portletRequestImpl, portletName, plid, lifecycle);
 		}
 
 		PortletApp portletApp = portlet.getPortletApp();
@@ -291,14 +294,14 @@ public abstract class PortletResponseImpl implements PortletResponse {
 		}
 
 		try {
-			portletURLImpl.setWindowState(_req.getWindowState());
+			portletURLImpl.setWindowState(_portletRequestImpl.getWindowState());
 		}
 		catch (WindowStateException wse) {
 			_log.error(wse.getMessage());
 		}
 
 		try {
-			portletURLImpl.setPortletMode(_req.getPortletMode());
+			portletURLImpl.setPortletMode(_portletRequestImpl.getPortletMode());
 		}
 		catch (PortletModeException pme) {
 			_log.error(pme.getMessage());
@@ -339,7 +342,7 @@ public abstract class PortletResponseImpl implements PortletResponse {
 		}
 
 		if (_urlEncoder != null) {
-			return _urlEncoder.encodeURL(_res, path);
+			return _urlEncoder.encodeURL(_response, path);
 		}
 		else {
 			return path;
@@ -351,11 +354,11 @@ public abstract class PortletResponseImpl implements PortletResponse {
 	}
 
 	public HttpServletRequest getHttpServletRequest() {
-		return _req.getHttpServletRequest();
+		return _portletRequestImpl.getHttpServletRequest();
 	}
 
 	public HttpServletResponse getHttpServletResponse() {
-		return _res;
+		return _response;
 	}
 
 	public abstract String getLifecycle();
@@ -391,7 +394,7 @@ public abstract class PortletResponseImpl implements PortletResponse {
 	}
 
 	public PortletRequestImpl getPortletRequest() {
-		return _req;
+		return _portletRequestImpl;
 	}
 
 	public Map<String, String[]> getProperties() {
@@ -461,7 +464,8 @@ public abstract class PortletResponseImpl implements PortletResponse {
 		_plid = plid;
 
 		if (_plid <= 0) {
-			Layout layout = (Layout)_req.getAttribute(WebKeys.LAYOUT);
+			Layout layout = (Layout)_portletRequestImpl.getAttribute(
+				WebKeys.LAYOUT);
 
 			if (layout != null) {
 				_plid = layout.getPlid();
@@ -481,7 +485,7 @@ public abstract class PortletResponseImpl implements PortletResponse {
 		_urlEncoder = urlEncoder;
 	}
 
-	public void transferHeaders(HttpServletResponse res) {
+	public void transferHeaders(HttpServletResponse response) {
 		for (Map.Entry<String, Object> entry : _headers.entrySet()) {
 			String name = entry.getKey();
 			Object values = entry.getValue();
@@ -490,11 +494,11 @@ public abstract class PortletResponseImpl implements PortletResponse {
 				Integer[] intValues = (Integer[])values;
 
 				for (int value : intValues) {
-					if (res.containsHeader(name)) {
-						res.addIntHeader(name, value);
+					if (response.containsHeader(name)) {
+						response.addIntHeader(name, value);
 					}
 					else {
-						res.setIntHeader(name, value);
+						response.setIntHeader(name, value);
 					}
 				}
 			}
@@ -502,11 +506,11 @@ public abstract class PortletResponseImpl implements PortletResponse {
 				Long[] dateValues = (Long[])values;
 
 				for (long value : dateValues) {
-					if (res.containsHeader(name)) {
-						res.addDateHeader(name, value);
+					if (response.containsHeader(name)) {
+						response.addDateHeader(name, value);
 					}
 					else {
-						res.setDateHeader(name, value);
+						response.setDateHeader(name, value);
 					}
 				}
 			}
@@ -514,11 +518,11 @@ public abstract class PortletResponseImpl implements PortletResponse {
 				String[] stringValues = (String[])values;
 
 				for (String value : stringValues) {
-					if (res.containsHeader(name)) {
-						res.addHeader(name, value);
+					if (response.containsHeader(name)) {
+						response.addHeader(name, value);
 					}
 					else {
-						res.setHeader(name, value);
+						response.setHeader(name, value);
 					}
 				}
 			}
@@ -526,26 +530,26 @@ public abstract class PortletResponseImpl implements PortletResponse {
 				Cookie[] cookies = (Cookie[])values;
 
 				for (Cookie cookie : cookies) {
-					res.addCookie(cookie);
+					response.addCookie(cookie);
 				}
 			}
 		}
 	}
 
 	protected void init(
-		PortletRequestImpl req, HttpServletResponse res, String portletName,
-		long companyId, long plid) {
+		PortletRequestImpl portletRequestImpl, HttpServletResponse response,
+		String portletName, long companyId, long plid) {
 
-		_req = req;
-		_res = res;
+		_portletRequestImpl = portletRequestImpl;
+		_response = response;
 		_portletName = portletName;
 		_companyId = companyId;
 		setPlid(plid);
 	}
 
 	protected void recycle() {
-		_req = null;
-		_res = null;
+		_portletRequestImpl = null;
+		_response = null;
 		_portletName = null;
 		_portlet = null;
 		_namespace = null;
@@ -556,8 +560,8 @@ public abstract class PortletResponseImpl implements PortletResponse {
 
 	private static Log _log = LogFactory.getLog(PortletResponseImpl.class);
 
-	private PortletRequestImpl _req;
-	private HttpServletResponse _res;
+	private PortletRequestImpl _portletRequestImpl;
+	private HttpServletResponse _response;
 	private String _portletName;
 	private Portlet _portlet;
 	private String _namespace;

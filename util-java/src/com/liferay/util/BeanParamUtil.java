@@ -25,7 +25,7 @@ package com.liferay.util;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.logging.Log;
@@ -40,13 +40,14 @@ import org.apache.commons.logging.LogFactory;
 public class BeanParamUtil {
 
 	public static boolean getBoolean(
-		Object bean, ServletRequest req, String param) {
+		Object bean, HttpServletRequest request, String param) {
 
-		return getBoolean(bean, req, param, GetterUtil.DEFAULT_BOOLEAN);
+		return getBoolean(bean, request, param, GetterUtil.DEFAULT_BOOLEAN);
 	}
 
 	public static boolean getBoolean(
-		Object bean, ServletRequest req, String param, boolean defaultValue) {
+		Object bean, HttpServletRequest request, String param,
+		boolean defaultValue) {
 
 		Boolean beanValue = null;
 
@@ -61,21 +62,22 @@ public class BeanParamUtil {
 		}
 
 		if (beanValue == null) {
-			return ParamUtil.get(req, param, defaultValue);
+			return ParamUtil.get(request, param, defaultValue);
 		}
 		else {
-			return ParamUtil.get(req, param, beanValue.booleanValue());
+			return ParamUtil.get(request, param, beanValue.booleanValue());
 		}
 	}
 
 	public static double getDouble(
-		Object bean, ServletRequest req, String param) {
+		Object bean, HttpServletRequest request, String param) {
 
-		return getDouble(bean, req, param, GetterUtil.DEFAULT_DOUBLE);
+		return getDouble(bean, request, param, GetterUtil.DEFAULT_DOUBLE);
 	}
 
 	public static double getDouble(
-		Object bean, ServletRequest req, String param, double defaultValue) {
+		Object bean, HttpServletRequest request, String param,
+		double defaultValue) {
 
 		Double beanValue = null;
 
@@ -90,21 +92,22 @@ public class BeanParamUtil {
 		}
 
 		if (beanValue == null) {
-			return ParamUtil.get(req, param, defaultValue);
+			return ParamUtil.get(request, param, defaultValue);
 		}
 		else {
-			return ParamUtil.get(req, param, beanValue.doubleValue());
+			return ParamUtil.get(request, param, beanValue.doubleValue());
 		}
 	}
 
 	public static int getInteger(
-		Object bean, ServletRequest req, String param) {
+		Object bean, HttpServletRequest request, String param) {
 
-		return getInteger(bean, req, param, GetterUtil.DEFAULT_INTEGER);
+		return getInteger(bean, request, param, GetterUtil.DEFAULT_INTEGER);
 	}
 
 	public static int getInteger(
-		Object bean, ServletRequest req, String param, int defaultValue) {
+		Object bean, HttpServletRequest request, String param,
+		int defaultValue) {
 
 		Integer beanValue = null;
 
@@ -119,19 +122,22 @@ public class BeanParamUtil {
 		}
 
 		if (beanValue == null) {
-			return ParamUtil.get(req, param, defaultValue);
+			return ParamUtil.get(request, param, defaultValue);
 		}
 		else {
-			return ParamUtil.get(req, param, beanValue.intValue());
+			return ParamUtil.get(request, param, beanValue.intValue());
 		}
-	}
-
-	public static long getLong(Object bean, ServletRequest req, String param) {
-		return getLong(bean, req, param, GetterUtil.DEFAULT_LONG);
 	}
 
 	public static long getLong(
-		Object bean, ServletRequest req, String param, long defaultValue) {
+		Object bean, HttpServletRequest request, String param) {
+
+		return getLong(bean, request, param, GetterUtil.DEFAULT_LONG);
+	}
+
+	public static long getLong(
+		Object bean, HttpServletRequest request, String param,
+		long defaultValue) {
 
 		Long beanValue = null;
 
@@ -146,21 +152,22 @@ public class BeanParamUtil {
 		}
 
 		if (beanValue == null) {
-			return ParamUtil.get(req, param, defaultValue);
+			return ParamUtil.get(request, param, defaultValue);
 		}
 		else {
-			return ParamUtil.get(req, param, beanValue.longValue());
+			return ParamUtil.get(request, param, beanValue.longValue());
 		}
 	}
 
 	public static String getString(
-		Object bean, ServletRequest req, String param) {
+		Object bean, HttpServletRequest request, String param) {
 
-		return getString(bean, req, param, GetterUtil.DEFAULT_STRING);
+		return getString(bean, request, param, GetterUtil.DEFAULT_STRING);
 	}
 
 	public static String getString(
-		Object bean, ServletRequest req, String param, String defaultValue) {
+		Object bean, HttpServletRequest request, String param,
+		String defaultValue) {
 
 		String beanValue = null;
 
@@ -175,10 +182,10 @@ public class BeanParamUtil {
 		}
 
 		if (beanValue == null) {
-			return ParamUtil.get(req, param, defaultValue);
+			return ParamUtil.get(request, param, defaultValue);
 		}
 		else {
-			return ParamUtil.get(req, param, beanValue);
+			return ParamUtil.get(request, param, beanValue);
 		}
 	}
 

@@ -37,11 +37,11 @@ import javax.portlet.RenderResponse;
 public interface ConfigurationAction {
 
 	public void processAction(
-			PortletConfig config, ActionRequest req, ActionResponse res)
+			PortletConfig portletConfig, ActionRequest req, ActionResponse res)
 		throws Exception;
 
 	public String render(
-			PortletConfig config, RenderRequest req, RenderResponse res)
+			PortletConfig portletConfig, RenderRequest req, RenderResponse res)
 		throws Exception;
 
 }

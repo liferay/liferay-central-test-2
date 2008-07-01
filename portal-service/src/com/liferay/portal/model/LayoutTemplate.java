@@ -82,7 +82,7 @@ public interface LayoutTemplate
 
 	public void setColumns(List<String> columns);
 
-	public void setServletContext(ServletContext ctx);
+	public void setServletContext(ServletContext servletContext);
 
 	public String getServletContextName();
 

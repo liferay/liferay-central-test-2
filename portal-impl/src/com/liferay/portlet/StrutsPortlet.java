@@ -143,8 +143,8 @@ public class StrutsPortlet extends LiferayPortlet {
 		include(req, res);
 	}
 
-	public void init(PortletConfig config) throws PortletException {
-		super.init(config);
+	public void init(PortletConfig portletConfig) throws PortletException {
+		super.init(portletConfig);
 
 		aboutAction = getInitParameter("about-action");
 		configAction = getInitParameter("config-action");
@@ -159,7 +159,7 @@ public class StrutsPortlet extends LiferayPortlet {
 		copyRequestParameters = GetterUtil.getBoolean(
 			getInitParameter("copy-request-parameters"), true);
 
-		_portletConfig = (PortletConfigImpl)config;
+		_portletConfig = (PortletConfigImpl)portletConfig;
 	}
 
 	public void processAction(ActionRequest req, ActionResponse res)

@@ -69,7 +69,7 @@ public class ServiceComponentLocalServiceImpl
 	extends ServiceComponentLocalServiceBaseImpl {
 
 	public ServiceComponent updateServiceComponent(
-			ServletContext ctx, ClassLoader portletClassLoader,
+			ServletContext servletContext, ClassLoader portletClassLoader,
 			String buildNamespace, long buildNumber, long buildDate)
 		throws PortalException, SystemException {
 
@@ -139,17 +139,17 @@ public class ServiceComponentLocalServiceImpl
 
 			Element data = doc.addElement("data");
 
-			String tablesSQL = HttpUtil.URLtoString(ctx.getResource(
+			String tablesSQL = HttpUtil.URLtoString(servletContext.getResource(
 				"/WEB-INF/sql/tables.sql"));
 
 			data.addElement("tables-sql").addCDATA(tablesSQL);
 
-			String sequencesSQL = HttpUtil.URLtoString(ctx.getResource(
-				"/WEB-INF/sql/sequences.sql"));
+			String sequencesSQL = HttpUtil.URLtoString(
+				servletContext.getResource("/WEB-INF/sql/sequences.sql"));
 
 			data.addElement("sequences-sql").addCDATA(sequencesSQL);
 
-			String indexesSQL = HttpUtil.URLtoString(ctx.getResource(
+			String indexesSQL = HttpUtil.URLtoString(servletContext.getResource(
 				"/WEB-INF/sql/indexes.sql"));
 
 			data.addElement("indexes-sql").addCDATA(indexesSQL);

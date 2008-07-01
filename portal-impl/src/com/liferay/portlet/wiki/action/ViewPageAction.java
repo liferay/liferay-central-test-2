@@ -59,7 +59,7 @@ import org.apache.struts.action.ActionMapping;
 public class ViewPageAction extends PortletAction {
 
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 

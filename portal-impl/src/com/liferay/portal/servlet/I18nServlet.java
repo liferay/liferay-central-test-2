@@ -67,11 +67,12 @@ public class I18nServlet extends HttpServlet {
 
 				request.setAttribute(WebKeys.I18N_LANGUAGE_ID, languageId);
 
-				ServletContext ctx = getServletContext();
+				ServletContext servletContext = getServletContext();
 
-				RequestDispatcher rd = ctx.getRequestDispatcher(redirect);
+				RequestDispatcher requestDispatcher =
+					servletContext.getRequestDispatcher(redirect);
 
-				rd.forward(request, response);
+				requestDispatcher.forward(request, response);
 			}
 		}
 		catch (Exception e) {

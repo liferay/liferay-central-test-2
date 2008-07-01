@@ -44,87 +44,91 @@ import javax.servlet.ServletContext;
  */
 public class LiferayServletContext implements ServletContext {
 
-	public LiferayServletContext(ServletContext ctx) {
-		_ctx = ctx;
+	public LiferayServletContext(ServletContext servletContext) {
+		_servletContext = servletContext;
 	}
 
 	public Object getAttribute(String name) {
-		return _ctx.getAttribute(name);
+		return _servletContext.getAttribute(name);
 	}
 
 	public Enumeration<String> getAttributeNames() {
-		return _ctx.getAttributeNames();
+		return _servletContext.getAttributeNames();
 	}
 
 	public ServletContext getContext(String uriPath) {
-		ServletContext refContext = _ctx.getContext(uriPath);
+		ServletContext servletContext = _servletContext.getContext(uriPath);
 
-		if (refContext == _ctx) {
+		if (servletContext == _servletContext) {
 			return this;
 		}
 		else {
-			return refContext;
+			return servletContext;
 		}
 	}
 
 	public String getInitParameter(String name) {
-		return _ctx.getInitParameter(name);
+		return _servletContext.getInitParameter(name);
 	}
 
 	public Enumeration<String> getInitParameterNames() {
-		return _ctx.getInitParameterNames();
+		return _servletContext.getInitParameterNames();
 	}
 
 	public int getMajorVersion() {
-		return _ctx.getMajorVersion();
+		return _servletContext.getMajorVersion();
 	}
 
 	public String getMimeType(String file) {
-		return _ctx.getMimeType(file);
+		return _servletContext.getMimeType(file);
 	}
 
 	public int getMinorVersion() {
-		return _ctx.getMinorVersion();
+		return _servletContext.getMinorVersion();
 	}
 
 	public RequestDispatcher getNamedDispatcher(String name) {
-		RequestDispatcher dispatcher = _ctx.getNamedDispatcher(name);
+		RequestDispatcher requestDispatcher =
+			_servletContext.getNamedDispatcher(name);
 
-		if (dispatcher != null) {
-			dispatcher = new LiferayRequestDispatcher(dispatcher, name);
+		if (requestDispatcher != null) {
+			requestDispatcher = new LiferayRequestDispatcher(
+				requestDispatcher, name);
 		}
 
-		return dispatcher;
+		return requestDispatcher;
 	}
 
-	public String getRealPath(String arg0) {
-		return _ctx.getRealPath(arg0);
+	public String getRealPath(String path) {
+		return _servletContext.getRealPath(path);
 	}
 
 	public RequestDispatcher getRequestDispatcher(String path) {
-		RequestDispatcher dispatcher = _ctx.getRequestDispatcher(path);
+		RequestDispatcher requestDispatcher =
+			_servletContext.getRequestDispatcher(path);
 
-		if (dispatcher != null) {
-			dispatcher = new LiferayRequestDispatcher(dispatcher, path);
+		if (requestDispatcher != null) {
+			requestDispatcher = new LiferayRequestDispatcher(
+				requestDispatcher, path);
 		}
 
-		return dispatcher;
+		return requestDispatcher;
 	}
 
 	public URL getResource(String path) throws MalformedURLException {
-		return _ctx.getResource(path);
+		return _servletContext.getResource(path);
 	}
 
 	public InputStream getResourceAsStream(String path) {
-		return _ctx.getResourceAsStream(path);
+		return _servletContext.getResourceAsStream(path);
 	}
 
 	public Set<String> getResourcePaths(String path) {
-		return _ctx.getResourcePaths(path);
+		return _servletContext.getResourcePaths(path);
 	}
 
 	public String getServerInfo() {
-		return _ctx.getServerInfo();
+		return _servletContext.getServerInfo();
 	}
 
 	public Servlet getServlet(String name) {
@@ -132,7 +136,7 @@ public class LiferayServletContext implements ServletContext {
 	}
 
 	public String getServletContextName() {
-		return _ctx.getServletContextName();
+		return _servletContext.getServletContextName();
 	}
 
 	public Enumeration<String> getServletNames() {
@@ -144,29 +148,29 @@ public class LiferayServletContext implements ServletContext {
 	}
 
 	public void log(Exception exception, String message) {
-		_ctx.log(message, exception);
+		_servletContext.log(message, exception);
 	}
 
 	public void log(String message) {
-		_ctx.log(message);
+		_servletContext.log(message);
 	}
 
 	public void log(String message, Throwable t) {
-		_ctx.log(message, t);
+		_servletContext.log(message, t);
 	}
 
 	public void removeAttribute(String name) {
-		_ctx.removeAttribute(name);
+		_servletContext.removeAttribute(name);
 	}
 
 	public void setAttribute(String name, Object value) {
-		_ctx.setAttribute(name, value);
+		_servletContext.setAttribute(name, value);
 	}
 
 	public String toString() {
-		return _ctx.toString();
+		return _servletContext.toString();
 	}
 
-	private ServletContext _ctx;
+	private ServletContext _servletContext;
 
 }

@@ -52,23 +52,23 @@ import org.apache.struts.action.ActionMapping;
 public class EditCompanyLogoAction extends PortletAction {
 
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			ActionRequest req, ActionResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		try {
-			updateLogo(req);
+			updateLogo(actionRequest);
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof PrincipalException) {
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.enterprise_admin.error");
+				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
 			else if (e instanceof UploadException) {
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
 				throw e;
@@ -77,21 +77,21 @@ public class EditCompanyLogoAction extends PortletAction {
 	}
 
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		return mapping.findForward(
-			getForward(req, "portlet.enterprise_admin.edit_company_logo"));
+		return mapping.findForward(getForward(
+			renderRequest, "portlet.enterprise_admin.edit_company_logo"));
 	}
 
-	protected void updateLogo(ActionRequest req) throws Exception {
-		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
-			req);
+	protected void updateLogo(ActionRequest actionRequest) throws Exception {
+		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
+			actionRequest);
 
-		long companyId = PortalUtil.getCompanyId(req);
+		long companyId = PortalUtil.getCompanyId(actionRequest);
 
-		File file = uploadReq.getFile("fileName");
+		File file = uploadRequest.getFile("fileName");
 		byte[] bytes = FileUtil.getBytes(file);
 
 		if ((bytes == null) || (bytes.length == 0)) {
