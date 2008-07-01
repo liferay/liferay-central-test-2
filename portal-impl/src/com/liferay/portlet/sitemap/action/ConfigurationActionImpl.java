@@ -72,7 +72,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	public String render(
-			PortletConfig portletConfig, RenderRequest req, RenderResponse res)
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		return "/html/portlet/site_map/configuration.jsp";
