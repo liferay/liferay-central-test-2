@@ -58,9 +58,7 @@ public class DocumentImpl implements Document {
 			return;
 		}
 
-		SimpleDateFormat sdf = new SimpleDateFormat(_DATE_FORMAT_PATTERN);
-
-		addKeyword(name, sdf.format(value));
+		addKeyword(name, _sdf.format(value));
 	}
 
 	public void addFile(String name, InputStream is, String fileExt) {
@@ -173,9 +171,7 @@ public class DocumentImpl implements Document {
 	}
 
 	public Date getDate(String name) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat(_DATE_FORMAT_PATTERN);
-
-		return sdf.parse(get(name));
+		return _sdf.parse(get(name));
 	}
 
 	public String[] getValues(String name) {
@@ -226,5 +222,6 @@ public class DocumentImpl implements Document {
 	private static final String _UID_FIELD = "_FIELD_";
 
 	private Map<String, Field> _fields = new HashMap<String, Field>();
+	private SimpleDateFormat _sdf = new SimpleDateFormat(_DATE_FORMAT_PATTERN);
 
 }
