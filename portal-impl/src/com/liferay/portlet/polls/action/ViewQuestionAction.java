@@ -36,13 +36,15 @@ import javax.portlet.ActionRequest;
  */
 public class ViewQuestionAction extends EditQuestionAction {
 
-	protected void updateQuestion(ActionRequest req) throws Exception {
-		long questionId = ParamUtil.getLong(req, "questionId");
-		long choiceId = ParamUtil.getLong(req, "choiceId");
+	protected void updateQuestion(ActionRequest actionRequest)
+		throws Exception {
+
+		long questionId = ParamUtil.getLong(actionRequest, "questionId");
+		long choiceId = ParamUtil.getLong(actionRequest, "choiceId");
 
 		PollsVoteServiceUtil.addVote(questionId, choiceId);
 
-		PollsUtil.saveVote(req, questionId);
+		PollsUtil.saveVote(actionRequest, questionId);
 	}
 
 }

@@ -41,9 +41,10 @@ import org.apache.commons.logging.LogFactory;
 public class ProgressInputStream extends InputStream {
 
 	public ProgressInputStream(
-		ActionRequest req, InputStream is, long totalSize, String progressId) {
+		ActionRequest actionRequest, InputStream is, long totalSize,
+		String progressId) {
 
-		_ses = req.getPortletSession();
+		_portletSession = actionRequest.getPortletSession();
 		_is = is;
 		_totalSize = totalSize;
 		_progressId = progressId;
@@ -56,7 +57,7 @@ public class ProgressInputStream extends InputStream {
 	}
 
 	public void clearProgress() {
-		_ses.removeAttribute(_getPercentAttributeName());
+		_portletSession.removeAttribute(_getPercentAttributeName());
 	}
 
 	public void close() throws IOException {
@@ -68,7 +69,7 @@ public class ProgressInputStream extends InputStream {
 	}
 
 	public void initProgress() {
-		_ses.setAttribute(
+		_portletSession.setAttribute(
 			_getPercentAttributeName(), new Integer(0),
 			PortletSession.APPLICATION_SCOPE);
 	}
@@ -139,11 +140,11 @@ public class ProgressInputStream extends InputStream {
 			_log.debug(bytesRead + "/" + _totalRead + "=" + percent);
 		}
 
-		Integer curPercent = (Integer)_ses.getAttribute(
+		Integer curPercent = (Integer)_portletSession.getAttribute(
 			_getPercentAttributeName(), PortletSession.APPLICATION_SCOPE);
 
 		if ((curPercent == null) || (percent - curPercent.intValue() >= 1)) {
-			_ses.setAttribute(
+			_portletSession.setAttribute(
 				_getPercentAttributeName(), new Integer(percent),
 				PortletSession.APPLICATION_SCOPE);
 		}
@@ -153,7 +154,7 @@ public class ProgressInputStream extends InputStream {
 
 	private static Log _log = LogFactory.getLog(ProgressInputStream.class);
 
-	private PortletSession _ses;
+	private PortletSession _portletSession;
 	private InputStream _is;
 	private long _totalRead;
 	private long _totalSize;

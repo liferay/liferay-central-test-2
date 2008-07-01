@@ -322,7 +322,8 @@ public class InvokerPortlet
 		}
 	}
 
-	public void processEvent(EventRequest req, EventResponse res)
+	public void processEvent(
+			EventRequest eventRequest, EventResponse eventResponse)
 		throws IOException, PortletException {
 
 		StopWatch stopWatch = null;
@@ -333,7 +334,7 @@ public class InvokerPortlet
 			stopWatch.start();
 		}
 
-		invokeEvent(req, res);
+		invokeEvent(eventRequest, eventResponse);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(

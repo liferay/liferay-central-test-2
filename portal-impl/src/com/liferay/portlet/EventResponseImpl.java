@@ -42,7 +42,7 @@ public class EventResponseImpl
 		return PortletRequest.EVENT_PHASE;
 	}
 
-	public void setRenderParameters(EventRequest req) {
+	public void setRenderParameters(EventRequest eventRequest) {
 	}
 
 	protected EventResponseImpl() {

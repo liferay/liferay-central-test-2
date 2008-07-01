@@ -35,8 +35,8 @@ import javax.portlet.filter.ActionResponseWrapper;
  */
 public class NoRedirectActionResponse extends ActionResponseWrapper {
 
-	public NoRedirectActionResponse(ActionResponse res) {
-		super(res);
+	public NoRedirectActionResponse(ActionResponse actionResponse) {
+		super(actionResponse);
 	}
 
 	public String getRedirectLocation() {

@@ -209,7 +209,8 @@ public class StrutsPortlet extends LiferayPortlet {
 		}
 	}
 
-	public void serveResource(ResourceRequest req, ResourceResponse res)
+	public void serveResource(
+			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws IOException, PortletException {
 
 		// Call serveResource of com.liferay.portal.struts.PortletAction
@@ -218,12 +219,12 @@ public class StrutsPortlet extends LiferayPortlet {
 			(PermissionCheckerImpl)PermissionThreadLocal.getPermissionChecker();
 
 		try {
-			permissionChecker.setValues(req);
+			permissionChecker.setValues(resourceRequest);
 
 			PortletRequestProcessor processor =
-				_getPortletRequestProcessor(req);
+				_getPortletRequestProcessor(resourceRequest);
 
-			processor.process(req, res);
+			processor.process(resourceRequest, resourceResponse);
 		}
 		catch (IOException ioe) {
 			throw ioe;

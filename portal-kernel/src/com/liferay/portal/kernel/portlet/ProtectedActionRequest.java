@@ -37,8 +37,10 @@ import javax.portlet.filter.ActionRequestWrapper;
  */
 public class ProtectedActionRequest extends ActionRequestWrapper {
 
-	public ProtectedActionRequest(ActionRequest req, String remoteUser) {
-		super(req);
+	public ProtectedActionRequest(
+		ActionRequest actionRequest, String remoteUser) {
+
+		super(actionRequest);
 
 		_remoteUser = remoteUser;
 

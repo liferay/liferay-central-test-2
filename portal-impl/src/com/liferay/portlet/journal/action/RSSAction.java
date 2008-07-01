@@ -94,15 +94,15 @@ public class RSSAction extends PortletAction {
 
 	public void serveResource(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ResourceRequest req, ResourceResponse res)
+			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
-		res.setContentType(ContentTypes.TEXT_XML_UTF8);
+		resourceResponse.setContentType(ContentTypes.TEXT_XML_UTF8);
 
-		OutputStream os = res.getPortletOutputStream();
+		OutputStream os = resourceResponse.getPortletOutputStream();
 
 		try {
-			os.write(getRSS(req, res));
+			os.write(getRSS(resourceRequest, resourceResponse));
 		}
 		finally {
 			os.close();
@@ -110,11 +110,12 @@ public class RSSAction extends PortletAction {
 	}
 
 	protected String exportToRSS(
-			ResourceRequest req, ResourceResponse res, JournalFeed feed,
-			String languageId, Layout layout, ThemeDisplay themeDisplay)
+			ResourceRequest resourceRequest, ResourceResponse resourceResponse,
+			JournalFeed feed, String languageId, Layout layout,
+			ThemeDisplay themeDisplay)
 		throws Exception {
 
-		ResourceURL feedURL = res.createResourceURL();
+		ResourceURL feedURL = resourceResponse.createResourceURL();
 
 		feedURL.setCacheability(ResourceURL.FULL);
 
@@ -146,7 +147,8 @@ public class RSSAction extends PortletAction {
 
 			String author = PortalUtil.getUserName(
 				article.getUserId(), article.getUserName());
-			String link = getEntryURL(req, feed, article, layout, themeDisplay);
+			String link = getEntryURL(
+				resourceRequest, feed, article, layout, themeDisplay);
 
 			SyndEntry syndEntry = new SyndEntryImpl();
 
@@ -190,8 +192,8 @@ public class RSSAction extends PortletAction {
 	}
 
 	protected String getEntryURL(
-			ResourceRequest req, JournalFeed feed, JournalArticle article,
-			Layout layout, ThemeDisplay themeDisplay)
+			ResourceRequest resourceRequest, JournalFeed feed,
+			JournalArticle article, Layout layout, ThemeDisplay themeDisplay)
 		throws Exception {
 
 		List<Long> hitLayoutIds =
@@ -219,7 +221,7 @@ public class RSSAction extends PortletAction {
 			}
 
 			PortletURL entryURL = new PortletURLImpl(
-				(PortletRequestImpl)req, portletId, plid,
+				(PortletRequestImpl)resourceRequest, portletId, plid,
 				PortletRequest.RENDER_PHASE);
 
 			entryURL.setParameter("struts_action", "/journal_content/view");
@@ -231,18 +233,19 @@ public class RSSAction extends PortletAction {
 		}
 	}
 
-	protected byte[] getRSS(ResourceRequest req, ResourceResponse res)
+	protected byte[] getRSS(
+			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		JournalFeed feed = null;
 
-		long id = ParamUtil.getLong(req, "id");
+		long id = ParamUtil.getLong(resourceRequest, "id");
 
-		long groupId = ParamUtil.getLong(req, "groupId");
-		String feedId = ParamUtil.getString(req, "feedId");
+		long groupId = ParamUtil.getLong(resourceRequest, "groupId");
+		String feedId = ParamUtil.getString(resourceRequest, "feedId");
 
 		if (id > 0) {
 			feed = JournalFeedLocalServiceUtil.getFeed(id);
@@ -251,7 +254,7 @@ public class RSSAction extends PortletAction {
 			feed = JournalFeedLocalServiceUtil.getFeed(groupId, feedId);
 		}
 
-		String languageId = LanguageUtil.getLanguageId(req);
+		String languageId = LanguageUtil.getLanguageId(resourceRequest);
 
 		long plid = PortalUtil.getPlidFromFriendlyURL(
 			themeDisplay.getCompanyId(), feed.getTargetLayoutFriendlyUrl());
@@ -267,7 +270,8 @@ public class RSSAction extends PortletAction {
 		}
 
 		String rss = exportToRSS(
-			req, res, feed, languageId, layout, themeDisplay);
+			resourceRequest, resourceResponse, feed, languageId, layout,
+			themeDisplay);
 
 		return rss.getBytes(StringPool.UTF8);
 	}

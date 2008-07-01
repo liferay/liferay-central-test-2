@@ -121,10 +121,11 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 		include(actionFile, actionRequest, actionResponse);
 	}
 
-	public void serveResource(ResourceRequest req, ResourceResponse res)
+	public void serveResource(
+			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws IOException {
 
-		include(resourceFile, req, res);
+		include(resourceFile, resourceRequest, resourceResponse);
 	}
 
 	protected void declareBeans(

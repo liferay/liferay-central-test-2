@@ -90,10 +90,13 @@ import org.apache.commons.logging.LogFactory;
  */
 public class StagingUtil {
 
-	public static void copyFromLive(ActionRequest req) throws Exception {
-		String tabs1 = ParamUtil.getString(req, "tabs1");
+	public static void copyFromLive(ActionRequest actionRequest)
+		throws Exception {
 
-		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
+		String tabs1 = ParamUtil.getString(actionRequest, "tabs1");
+
+		long stagingGroupId = ParamUtil.getLong(
+			actionRequest, "stagingGroupId");
 
 		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
 
@@ -111,18 +114,18 @@ public class StagingUtil {
 
 		Map<String, String[]> parameterMap = getStagingParameters();
 
-		String range = ParamUtil.getString(req, "range");
+		String range = ParamUtil.getString(actionRequest, "range");
 
 		Date startDate = null;
 		Date endDate = null;
 
 		if (range.equals("dateRange")) {
-			startDate = _getDate(req, "startDate", true).getTime();
+			startDate = _getDate(actionRequest, "startDate", true).getTime();
 
-			endDate = _getDate(req, "endDate", true).getTime();
+			endDate = _getDate(actionRequest, "endDate", true).getTime();
 		}
 		else if (range.equals("last")) {
-			int last = ParamUtil.getInteger(req, "last");
+			int last = ParamUtil.getInteger(actionRequest, "last");
 
 			Date now = new Date();
 
@@ -131,7 +134,7 @@ public class StagingUtil {
 			endDate = now;
 		}
 
-		String scope = ParamUtil.getString(req, "scope");
+		String scope = ParamUtil.getString(actionRequest, "scope");
 
 		if (scope.equals("all-pages")) {
 			publishLayouts(
@@ -141,11 +144,11 @@ public class StagingUtil {
 		else if (scope.equals("selected-pages")) {
 			Map<Long, Boolean> layoutIdMap = new LinkedHashMap<Long, Boolean>();
 
-			long[] rowIds = ParamUtil.getLongValues(req, "rowIds");
+			long[] rowIds = ParamUtil.getLongValues(actionRequest, "rowIds");
 
 			for (long selPlid : rowIds) {
 				boolean includeChildren = ParamUtil.getBoolean(
-					req, "includeChildren_" + selPlid);
+					actionRequest, "includeChildren_" + selPlid);
 
 				layoutIdMap.put(
 					new Long(selPlid), new Boolean(includeChildren));
@@ -157,10 +160,11 @@ public class StagingUtil {
 		}
 	}
 
-	public static void copyFromLive(ActionRequest req, Portlet portlet)
+	public static void copyFromLive(
+			ActionRequest actionRequest, Portlet portlet)
 		throws Exception {
 
-		long plid = ParamUtil.getLong(req, "plid");
+		long plid = ParamUtil.getLong(actionRequest, "plid");
 
 		Layout targetLayout = LayoutLocalServiceUtil.getLayout(plid);
 
@@ -172,16 +176,17 @@ public class StagingUtil {
 			targetLayout.getLayoutId());
 
 		copyPortlet(
-			req, sourceLayout.getPlid(), targetLayout.getPlid(),
+			actionRequest, sourceLayout.getPlid(), targetLayout.getPlid(),
 			portlet.getPortletId());
 	}
 
 	public static void copyPortlet(
-			ActionRequest req, long sourcePlid, long targetPlid,
+			ActionRequest actionRequest, long sourcePlid, long targetPlid,
 			String portletId)
 		throws Exception {
 
-		Map<String, String[]> parameterMap = getStagingParameters(req);
+		Map<String, String[]> parameterMap = getStagingParameters(
+			actionRequest);
 
 		byte[] bytes = LayoutLocalServiceUtil.exportPortletInfo(
 			sourcePlid, portletId, parameterMap, null, null);
@@ -405,10 +410,11 @@ public class StagingUtil {
 	}
 
 	public static Map<String, String[]> getStagingParameters(
-		ActionRequest req) {
+		ActionRequest actionRequest) {
 
 		Map<String, String[]> parameterMap =
-			new LinkedHashMap<String, String[]>(req.getParameterMap());
+			new LinkedHashMap<String, String[]>(
+				actionRequest.getParameterMap());
 
 		if (!parameterMap.containsKey(
 				PortletDataHandlerKeys.PORTLET_DATA)) {
@@ -604,14 +610,17 @@ public class StagingUtil {
 			targetGroupId, privateLayout, parameterMap, bais);
 	}
 
-	public static void publishToLive(ActionRequest req) throws Exception {
-		_publishToLive(req, false);
-	}
-
-	public static void publishToLive(ActionRequest req, Portlet portlet)
+	public static void publishToLive(ActionRequest actionRequest)
 		throws Exception {
 
-		long plid = ParamUtil.getLong(req, "plid");
+		_publishToLive(actionRequest, false);
+	}
+
+	public static void publishToLive(
+			ActionRequest actionRequest, Portlet portlet)
+		throws Exception {
+
+		long plid = ParamUtil.getLong(actionRequest, "plid");
 
 		Layout sourceLayout = LayoutLocalServiceUtil.getLayout(plid);
 
@@ -623,44 +632,46 @@ public class StagingUtil {
 			sourceLayout.getLayoutId());
 
 		copyPortlet(
-			req, sourceLayout.getPlid(), targetLayout.getPlid(),
+			actionRequest, sourceLayout.getPlid(), targetLayout.getPlid(),
 			portlet.getPortletId());
 	}
 
-	public static void publishToRemote(ActionRequest req) throws Exception {
-		_publishToRemote(req, false);
-	}
-
-	public static void schedulePublishToLive(ActionRequest req)
+	public static void publishToRemote(ActionRequest actionRequest)
 		throws Exception {
 
-		_publishToLive(req, true);
+		_publishToRemote(actionRequest, false);
 	}
 
-	public static void schedulePublishToRemote(ActionRequest req)
+	public static void schedulePublishToLive(ActionRequest actionRequest)
 		throws Exception {
 
-		_publishToRemote(req, true);
+		_publishToLive(actionRequest, true);
 	}
 
-	public static void unschedulePublishToLive(ActionRequest req)
+	public static void schedulePublishToRemote(ActionRequest actionRequest)
 		throws Exception {
 
-		long groupId = ParamUtil.getLong(req, "groupId");
+		_publishToRemote(actionRequest, true);
+	}
 
-		String jobName = ParamUtil.getString(req, "jobName");
+	public static void unschedulePublishToLive(ActionRequest actionRequest)
+		throws Exception {
+
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+
+		String jobName = ParamUtil.getString(actionRequest, "jobName");
 		String groupName = getSchedulerGroupName(
 			DestinationNames.LAYOUTS_LOCAL_PUBLISHER, groupId);
 
 		LayoutServiceUtil.unschedulePublishToLive(groupId, jobName, groupName);
 	}
 
-	public static void unschedulePublishToRemote(ActionRequest req)
+	public static void unschedulePublishToRemote(ActionRequest actionRequest)
 		throws Exception {
 
-		long groupId = ParamUtil.getLong(req, "groupId");
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 
-		String jobName = ParamUtil.getString(req, "jobName");
+		String jobName = ParamUtil.getString(actionRequest, "jobName");
 		String groupName = getSchedulerGroupName(
 			DestinationNames.LAYOUTS_REMOTE_PUBLISHER, groupId);
 
@@ -668,14 +679,16 @@ public class StagingUtil {
 			groupId, jobName, groupName);
 	}
 
-	public static void updateStaging(ActionRequest req) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+	public static void updateStaging(ActionRequest actionRequest)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
-		long liveGroupId = ParamUtil.getLong(req, "liveGroupId");
+		long liveGroupId = ParamUtil.getLong(actionRequest, "liveGroupId");
 
 		if (!GroupPermissionUtil.contains(
 				permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) {
@@ -683,9 +696,11 @@ public class StagingUtil {
 			throw new PrincipalException();
 		}
 
-		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
+		long stagingGroupId = ParamUtil.getLong(
+			actionRequest, "stagingGroupId");
 
-		boolean stagingEnabled = ParamUtil.getBoolean(req, "stagingEnabled");
+		boolean stagingEnabled = ParamUtil.getBoolean(
+			actionRequest, "stagingEnabled");
 
 		if ((stagingGroupId > 0) && !stagingEnabled) {
 			GroupServiceUtil.deleteGroup(stagingGroupId);
@@ -719,16 +734,16 @@ public class StagingUtil {
 	}
 
 	private static void _addWeeklyDayPos(
-		ActionRequest req, List<DayAndPosition> list, int day) {
+		ActionRequest actionRequest, List<DayAndPosition> list, int day) {
 
-		if (ParamUtil.getBoolean(req, "weeklyDayPos" + day)) {
+		if (ParamUtil.getBoolean(actionRequest, "weeklyDayPos" + day)) {
 			list.add(new DayAndPosition(day, 0));
 		}
 	}
 
 	private static String _getCronText(
-			ActionRequest req, Calendar startDate, boolean timeZoneSensitive,
-			int recurrenceType)
+			ActionRequest actionRequest, Calendar startDate,
+			boolean timeZoneSensitive, int recurrenceType)
 		throws Exception {
 
 		Calendar startCal = null;
@@ -748,11 +763,11 @@ public class StagingUtil {
 		recurrence.setWeekStart(Calendar.SUNDAY);
 
 		if (recurrenceType == Recurrence.DAILY) {
-			int dailyType = ParamUtil.getInteger(req, "dailyType");
+			int dailyType = ParamUtil.getInteger(actionRequest, "dailyType");
 
 			if (dailyType == 0) {
 				int dailyInterval = ParamUtil.getInteger(
-					req, "dailyInterval", 1);
+					actionRequest, "dailyInterval", 1);
 
 				recurrence.setInterval(dailyInterval);
 			}
@@ -769,19 +784,19 @@ public class StagingUtil {
 		}
 		else if (recurrenceType == Recurrence.WEEKLY) {
 			int weeklyInterval = ParamUtil.getInteger(
-				req, "weeklyInterval", 1);
+				actionRequest, "weeklyInterval", 1);
 
 			recurrence.setInterval(weeklyInterval);
 
 			List<DayAndPosition> dayPos = new ArrayList<DayAndPosition>();
 
-			_addWeeklyDayPos(req, dayPos, Calendar.SUNDAY);
-			_addWeeklyDayPos(req, dayPos, Calendar.MONDAY);
-			_addWeeklyDayPos(req, dayPos, Calendar.TUESDAY);
-			_addWeeklyDayPos(req, dayPos, Calendar.WEDNESDAY);
-			_addWeeklyDayPos(req, dayPos, Calendar.THURSDAY);
-			_addWeeklyDayPos(req, dayPos, Calendar.FRIDAY);
-			_addWeeklyDayPos(req, dayPos, Calendar.SATURDAY);
+			_addWeeklyDayPos(actionRequest, dayPos, Calendar.SUNDAY);
+			_addWeeklyDayPos(actionRequest, dayPos, Calendar.MONDAY);
+			_addWeeklyDayPos(actionRequest, dayPos, Calendar.TUESDAY);
+			_addWeeklyDayPos(actionRequest, dayPos, Calendar.WEDNESDAY);
+			_addWeeklyDayPos(actionRequest, dayPos, Calendar.THURSDAY);
+			_addWeeklyDayPos(actionRequest, dayPos, Calendar.FRIDAY);
+			_addWeeklyDayPos(actionRequest, dayPos, Calendar.SATURDAY);
 
 			if (dayPos.size() == 0) {
 				dayPos.add(new DayAndPosition(Calendar.MONDAY, 0));
@@ -790,21 +805,25 @@ public class StagingUtil {
 			recurrence.setByDay(dayPos.toArray(new DayAndPosition[0]));
 		}
 		else if (recurrenceType == Recurrence.MONTHLY) {
-			int monthlyType = ParamUtil.getInteger(req, "monthlyType");
+			int monthlyType = ParamUtil.getInteger(
+				actionRequest, "monthlyType");
 
 			if (monthlyType == 0) {
-				int monthlyDay = ParamUtil.getInteger(req, "monthlyDay0", 1);
+				int monthlyDay = ParamUtil.getInteger(
+					actionRequest, "monthlyDay0", 1);
 
 				recurrence.setByMonthDay(new int[] {monthlyDay});
 
 				int monthlyInterval = ParamUtil.getInteger(
-					req, "monthlyInterval0", 1);
+					actionRequest, "monthlyInterval0", 1);
 
 				recurrence.setInterval(monthlyInterval);
 			}
 			else {
-				int monthlyPos = ParamUtil.getInteger(req, "monthlyPos");
-				int monthlyDay = ParamUtil.getInteger(req, "monthlyDay1");
+				int monthlyPos = ParamUtil.getInteger(
+					actionRequest, "monthlyPos");
+				int monthlyDay = ParamUtil.getInteger(
+					actionRequest, "monthlyDay1");
 
 				DayAndPosition[] dayPos = {
 					new DayAndPosition(monthlyDay, monthlyPos)};
@@ -812,30 +831,35 @@ public class StagingUtil {
 				recurrence.setByDay(dayPos);
 
 				int monthlyInterval = ParamUtil.getInteger(
-					req, "monthlyInterval1", 1);
+					actionRequest, "monthlyInterval1", 1);
 
 				recurrence.setInterval(monthlyInterval);
 			}
 		}
 		else if (recurrenceType == Recurrence.YEARLY) {
-			int yearlyType = ParamUtil.getInteger(req, "yearlyType");
+			int yearlyType = ParamUtil.getInteger(actionRequest, "yearlyType");
 
 			if (yearlyType == 0) {
-				int yearlyMonth = ParamUtil.getInteger(req, "yearlyMonth0");
-				int yearlyDay = ParamUtil.getInteger(req, "yearlyDay0", 1);
+				int yearlyMonth = ParamUtil.getInteger(
+					actionRequest, "yearlyMonth0");
+				int yearlyDay = ParamUtil.getInteger(
+					actionRequest, "yearlyDay0", 1);
 
 				recurrence.setByMonth(new int[] {yearlyMonth});
 				recurrence.setByMonthDay(new int[] {yearlyDay});
 
 				int yearlyInterval = ParamUtil.getInteger(
-					req, "yearlyInterval0", 1);
+					actionRequest, "yearlyInterval0", 1);
 
 				recurrence.setInterval(yearlyInterval);
 			}
 			else {
-				int yearlyPos = ParamUtil.getInteger(req, "yearlyPos");
-				int yearlyDay = ParamUtil.getInteger(req, "yearlyDay1");
-				int yearlyMonth = ParamUtil.getInteger(req, "yearlyMonth1");
+				int yearlyPos = ParamUtil.getInteger(
+					actionRequest, "yearlyPos");
+				int yearlyDay = ParamUtil.getInteger(
+					actionRequest, "yearlyDay1");
+				int yearlyMonth = ParamUtil.getInteger(
+					actionRequest, "yearlyMonth1");
 
 				DayAndPosition[] dayPos = {
 					new DayAndPosition(yearlyDay, yearlyPos)};
@@ -845,7 +869,7 @@ public class StagingUtil {
 				recurrence.setByMonth(new int[] {yearlyMonth});
 
 				int yearlyInterval = ParamUtil.getInteger(
-					req, "yearlyInterval1", 1);
+					actionRequest, "yearlyInterval1", 1);
 
 				recurrence.setInterval(yearlyInterval);
 			}
@@ -855,15 +879,21 @@ public class StagingUtil {
 	}
 
 	private static Calendar _getDate(
-			ActionRequest req, String paramPrefix, boolean timeZoneSensitive)
+			ActionRequest actionRequest, String paramPrefix,
+			boolean timeZoneSensitive)
 		throws Exception {
 
-		int dateMonth = ParamUtil.getInteger(req, paramPrefix + "Month");
-		int dateDay = ParamUtil.getInteger(req, paramPrefix + "Day");
-		int dateYear = ParamUtil.getInteger(req, paramPrefix + "Year");
-		int dateHour = ParamUtil.getInteger(req, paramPrefix + "Hour");
-		int dateMinute = ParamUtil.getInteger(req, paramPrefix + "Minute");
-		int dateAmPm = ParamUtil.getInteger(req, paramPrefix + "AmPm");
+		int dateMonth = ParamUtil.getInteger(
+			actionRequest, paramPrefix + "Month");
+		int dateDay = ParamUtil.getInteger(actionRequest, paramPrefix + "Day");
+		int dateYear = ParamUtil.getInteger(
+			actionRequest, paramPrefix + "Year");
+		int dateHour = ParamUtil.getInteger(
+			actionRequest, paramPrefix + "Hour");
+		int dateMinute = ParamUtil.getInteger(
+			actionRequest, paramPrefix + "Minute");
+		int dateAmPm = ParamUtil.getInteger(
+			actionRequest, paramPrefix + "AmPm");
 
 		if (dateAmPm == Calendar.PM) {
 			dateHour += 12;
@@ -873,8 +903,8 @@ public class StagingUtil {
 		TimeZone timeZone = null;
 
 		if (timeZoneSensitive) {
-			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
-				WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
 			locale = themeDisplay.getLocale();
 			timeZone = themeDisplay.getTimeZone();
@@ -897,12 +927,14 @@ public class StagingUtil {
 		return cal;
 	}
 
-	private static void _publishToLive(ActionRequest req, boolean schedule)
+	private static void _publishToLive(
+			ActionRequest actionRequest, boolean schedule)
 		throws Exception {
 
-		String tabs1 = ParamUtil.getString(req, "tabs1");
+		String tabs1 = ParamUtil.getString(actionRequest, "tabs1");
 
-		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
+		long stagingGroupId = ParamUtil.getLong(
+			actionRequest, "stagingGroupId");
 
 		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
 
@@ -914,35 +946,36 @@ public class StagingUtil {
 			privateLayout = false;
 		}
 
-		String scope = ParamUtil.getString(req, "scope");
+		String scope = ParamUtil.getString(actionRequest, "scope");
 
-		Map<String, String[]> parameterMap = getStagingParameters(req);
+		Map<String, String[]> parameterMap = getStagingParameters(
+			actionRequest);
 
 		Map<Long, Boolean> layoutIdMap = new LinkedHashMap<Long, Boolean>();
 
 		if (scope.equals("selected-pages")) {
-			long[] rowIds = ParamUtil.getLongValues(req, "rowIds");
+			long[] rowIds = ParamUtil.getLongValues(actionRequest, "rowIds");
 
 			for (long selPlid : rowIds) {
 				boolean includeChildren = ParamUtil.getBoolean(
-					req, "includeChildren_" + selPlid);
+					actionRequest, "includeChildren_" + selPlid);
 
 				layoutIdMap.put(selPlid, includeChildren);
 			}
 		}
 
-		String range = ParamUtil.getString(req, "range");
+		String range = ParamUtil.getString(actionRequest, "range");
 
 		Date startDate = null;
 		Date endDate = null;
 
 		if (range.equals("dateRange")) {
-			startDate = _getDate(req, "startDate", true).getTime();
+			startDate = _getDate(actionRequest, "startDate", true).getTime();
 
-			endDate = _getDate(req, "endDate", true).getTime();
+			endDate = _getDate(actionRequest, "endDate", true).getTime();
 		}
 		else if (range.equals("last")) {
-			int rangeLast = ParamUtil.getInteger(req, "last");
+			int rangeLast = ParamUtil.getInteger(actionRequest, "last");
 
 			Date now = new Date();
 
@@ -955,24 +988,29 @@ public class StagingUtil {
 			String groupName = getSchedulerGroupName(
 				DestinationNames.LAYOUTS_LOCAL_PUBLISHER, liveGroupId);
 
-			int recurrenceType = ParamUtil.getInteger(req, "recurrenceType");
+			int recurrenceType = ParamUtil.getInteger(
+				actionRequest, "recurrenceType");
 
-			Calendar startCal = _getDate(req, "schedulerStartDate", false);
+			Calendar startCal = _getDate(
+				actionRequest, "schedulerStartDate", false);
 
 			String cronText = _getCronText(
-				req, startCal, false, recurrenceType);
+				actionRequest, startCal, false, recurrenceType);
 
 			Date schedulerEndDate = null;
 
-			int endDateType = ParamUtil.getInteger(req, "endDateType");
+			int endDateType = ParamUtil.getInteger(
+				actionRequest, "endDateType");
 
 			if (endDateType == 1) {
-				Calendar endCal = _getDate(req, "schedulerEndDate", false);
+				Calendar endCal = _getDate(
+					actionRequest, "schedulerEndDate", false);
 
 				schedulerEndDate = endCal.getTime();
 			}
 
-			String description = ParamUtil.getString(req, "description");
+			String description = ParamUtil.getString(
+				actionRequest, "description");
 
 			LayoutServiceUtil.schedulePublishToLive(
 				stagingGroupId, liveGroupId, privateLayout, layoutIdMap,
@@ -994,14 +1032,13 @@ public class StagingUtil {
 		}
 	}
 
-	private static void _publishToRemote(ActionRequest req, boolean schedule)
+	private static void _publishToRemote(
+			ActionRequest actionRequest, boolean schedule)
 		throws Exception {
 
-		String tabs1 = ParamUtil.getString(req, "tabs1");
+		String tabs1 = ParamUtil.getString(actionRequest, "tabs1");
 
-		long groupId = ParamUtil.getLong(req, "groupId");
-
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 
 		boolean privateLayout = true;
 
@@ -1009,49 +1046,50 @@ public class StagingUtil {
 			privateLayout = false;
 		}
 
-		String scope = ParamUtil.getString(req, "scope");
+		String scope = ParamUtil.getString(actionRequest, "scope");
 
 		if (Validator.isNull(scope)) {
 			scope = "all-pages";
 		}
 
 		Map<Long, Boolean> layoutIdMap = null;
-		Map<String, String[]> parameterMap = req.getParameterMap();
+		Map<String, String[]> parameterMap = actionRequest.getParameterMap();
 
 		if (scope.equals("selected-pages")) {
 			layoutIdMap = new LinkedHashMap<Long, Boolean>();
 
-			long[] rowIds = ParamUtil.getLongValues(req, "rowIds");
+			long[] rowIds = ParamUtil.getLongValues(actionRequest, "rowIds");
 
 			for (long selPlid : rowIds) {
 				boolean includeChildren = ParamUtil.getBoolean(
-					req, "includeChildren_" + selPlid);
+					actionRequest, "includeChildren_" + selPlid);
 
 				layoutIdMap.put(selPlid, includeChildren);
 			}
 		}
 
-		String remoteAddress = ParamUtil.getString(req, "remoteAddress");
-		int remotePort = ParamUtil.getInteger(req, "remotePort");
+		String remoteAddress = ParamUtil.getString(
+			actionRequest, "remoteAddress");
+		int remotePort = ParamUtil.getInteger(actionRequest, "remotePort");
 		boolean secureConnection = ParamUtil.getBoolean(
-			req, "secureConnection");
+			actionRequest, "secureConnection");
 
-		long remoteGroupId = ParamUtil.getLong(req, "remoteGroupId");
+		long remoteGroupId = ParamUtil.getLong(actionRequest, "remoteGroupId");
 		boolean remotePrivateLayout = ParamUtil.getBoolean(
-			req, "remotePrivateLayout");
+			actionRequest, "remotePrivateLayout");
 
-		String range = ParamUtil.getString(req, "range");
+		String range = ParamUtil.getString(actionRequest, "range");
 
 		Date startDate = null;
 		Date endDate = null;
 
 		if (range.equals("dateRange")) {
-			startDate = _getDate(req, "startDate", true).getTime();
+			startDate = _getDate(actionRequest, "startDate", true).getTime();
 
-			endDate = _getDate(req, "endDate", true).getTime();
+			endDate = _getDate(actionRequest, "endDate", true).getTime();
 		}
 		else if (range.equals("last")) {
-			int rangeLast = ParamUtil.getInteger(req, "last");
+			int rangeLast = ParamUtil.getInteger(actionRequest, "last");
 
 			Date now = new Date();
 
@@ -1064,36 +1102,42 @@ public class StagingUtil {
 			String groupName = getSchedulerGroupName(
 				DestinationNames.LAYOUTS_REMOTE_PUBLISHER, groupId);
 
-			int recurrenceType = ParamUtil.getInteger(req, "recurrenceType");
+			int recurrenceType = ParamUtil.getInteger(
+				actionRequest, "recurrenceType");
 
-			Calendar startCal = _getDate(req, "schedulerStartDate", false);
+			Calendar startCal = _getDate(
+				actionRequest, "schedulerStartDate", false);
 
 			String cronText = _getCronText(
-				req, startCal, false, recurrenceType);
+				actionRequest, startCal, false, recurrenceType);
 
 			Date schedulerEndDate = null;
 
-			int endDateType = ParamUtil.getInteger(req, "endDateType");
+			int endDateType = ParamUtil.getInteger(
+				actionRequest, "endDateType");
 
 			if (endDateType == 1) {
-				Calendar endCal = _getDate(req, "schedulerEndDate", false);
+				Calendar endCal = _getDate(
+					actionRequest, "schedulerEndDate", false);
 
 				schedulerEndDate = endCal.getTime();
 			}
 
-			String description = ParamUtil.getString(req, "description");
+			String description = ParamUtil.getString(
+				actionRequest, "description");
 
 			LayoutServiceUtil.schedulePublishToRemote(
-				groupId, privateLayout, layoutIdMap, getStagingParameters(req),
-				remoteAddress, remotePort, secureConnection, remoteGroupId,
-				remotePrivateLayout, startDate, endDate, groupName, cronText,
-				startCal.getTime(), schedulerEndDate, description);
+				groupId, privateLayout, layoutIdMap,
+				getStagingParameters(actionRequest), remoteAddress, remotePort,
+				secureConnection, remoteGroupId, remotePrivateLayout, startDate,
+				endDate, groupName, cronText, startCal.getTime(),
+				schedulerEndDate, description);
 		}
 		else {
 			copyRemoteLayouts(
 				groupId, privateLayout, layoutIdMap, parameterMap,
 				remoteAddress, remotePort, secureConnection, remoteGroupId,
-				remotePrivateLayout, getStagingParameters(req),
+				remotePrivateLayout, getStagingParameters(actionRequest),
 				startDate, endDate);
 		}
 	}

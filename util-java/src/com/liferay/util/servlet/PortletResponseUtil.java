@@ -51,53 +51,53 @@ import org.apache.commons.logging.LogFactory;
 public class PortletResponseUtil {
 
 	public static void sendFile(
-			ResourceResponse res, String fileName, byte[] bytes)
+			ResourceResponse resourceResponse, String fileName, byte[] bytes)
 		throws IOException {
 
-		sendFile(res, fileName, bytes, null);
+		sendFile(resourceResponse, fileName, bytes, null);
 	}
 
 	public static void sendFile(
-			ResourceResponse res, String fileName, byte[] bytes,
+			ResourceResponse resourceResponse, String fileName, byte[] bytes,
 			String contentType)
 		throws IOException {
 
-		setHeaders(res, fileName, contentType);
+		setHeaders(resourceResponse, fileName, contentType);
 
-		write(res, bytes);
+		write(resourceResponse, bytes);
 	}
 
 	public static void sendFile(
-			ResourceResponse res, String fileName, InputStream is)
+			ResourceResponse resourceResponse, String fileName, InputStream is)
 		throws IOException {
 
-		sendFile(res, fileName, is, null);
+		sendFile(resourceResponse, fileName, is, null);
 	}
 
 	public static void sendFile(
-			ResourceResponse res, String fileName, InputStream is,
+			ResourceResponse resourceResponse, String fileName, InputStream is,
 			String contentType)
 		throws IOException {
 
-		setHeaders(res, fileName, contentType);
+		setHeaders(resourceResponse, fileName, contentType);
 
-		write(res, is);
+		write(resourceResponse, is);
 	}
 
-	public static void write(ResourceResponse res, String s)
+	public static void write(ResourceResponse resourceResponse, String s)
 		throws IOException {
 
-		write(res, s.getBytes(StringPool.UTF8));
+		write(resourceResponse, s.getBytes(StringPool.UTF8));
 	}
 
-	public static void write(ResourceResponse res, byte[] bytes)
+	public static void write(ResourceResponse resourceResponse, byte[] bytes)
 		throws IOException {
 
-		write(res, bytes, 0);
+		write(resourceResponse, bytes, 0);
 	}
 
 	public static void write(
-			ResourceResponse res, byte[] bytes, int contentLength)
+			ResourceResponse resourceResponse, byte[] bytes, int contentLength)
 		throws IOException {
 
 		OutputStream os = null;
@@ -106,7 +106,7 @@ public class PortletResponseUtil {
 
 			// LEP-3122
 
-			if (!res.isCommitted() || ServerDetector.isPramati()) {
+			if (!resourceResponse.isCommitted() || ServerDetector.isPramati()) {
 
 				// LEP-536
 
@@ -114,9 +114,10 @@ public class PortletResponseUtil {
 					contentLength = bytes.length;
 				}
 
-				res.setContentLength(contentLength);
+				resourceResponse.setContentLength(contentLength);
 
-				os = new BufferedOutputStream(res.getPortletOutputStream());
+				os = new BufferedOutputStream(
+					resourceResponse.getPortletOutputStream());
 
 				os.write(bytes, 0, contentLength);
 			}
@@ -126,14 +127,15 @@ public class PortletResponseUtil {
 		}
 	}
 
-	public static void write(ResourceResponse res, InputStream is)
+	public static void write(ResourceResponse resourceResponse, InputStream is)
 		throws IOException {
 
 		OutputStream os = null;
 
 		try {
-			if (!res.isCommitted()) {
-				os = new BufferedOutputStream(res.getPortletOutputStream());
+			if (!resourceResponse.isCommitted()) {
+				os = new BufferedOutputStream(
+					resourceResponse.getPortletOutputStream());
 
 				int c = is.read();
 
@@ -150,7 +152,8 @@ public class PortletResponseUtil {
 	}
 
 	protected static void setHeaders(
-		ResourceResponse res, String fileName, String contentType) {
+		ResourceResponse resourceResponse, String fileName,
+		String contentType) {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Sending file of type " + contentType);
@@ -159,11 +162,12 @@ public class PortletResponseUtil {
 		// LEP-2201
 
 		if (Validator.isNotNull(contentType)) {
-			res.setContentType(contentType);
+			resourceResponse.setContentType(contentType);
 		}
 
-		res.setProperty(HttpHeaders.CACHE_CONTROL, HttpHeaders.PUBLIC);
-		res.setProperty(HttpHeaders.PRAGMA, HttpHeaders.PUBLIC);
+		resourceResponse.setProperty(
+			HttpHeaders.CACHE_CONTROL, HttpHeaders.PUBLIC);
+		resourceResponse.setProperty(HttpHeaders.PRAGMA, HttpHeaders.PUBLIC);
 
 		if (Validator.isNotNull(fileName)) {
 			String contentDisposition =
@@ -207,7 +211,7 @@ public class PortletResponseUtil {
 					contentDisposition, "attachment; ", "inline; ");
 			}
 
-			res.setProperty(
+			resourceResponse.setProperty(
 				HttpHeaders.CONTENT_DISPOSITION, contentDisposition);
 		}
 	}

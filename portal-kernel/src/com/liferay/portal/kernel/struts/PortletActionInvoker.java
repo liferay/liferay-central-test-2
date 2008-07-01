@@ -38,8 +38,8 @@ import javax.portlet.PortletConfig;
 public class PortletActionInvoker {
 
 	public static void processAction(
-			String className, PortletConfig portletConfig, ActionRequest req,
-			ActionResponse res)
+			String className, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		Object mapping = new NullWrapper(
@@ -49,7 +49,9 @@ public class PortletActionInvoker {
 
 		PortalClassInvoker.invoke(
 			className, "processAction",
-			new Object[] {mapping, form, portletConfig, req, res});
+			new Object[] {
+				mapping, form, portletConfig, actionRequest, actionResponse
+			});
 	}
 
 }

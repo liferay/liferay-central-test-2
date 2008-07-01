@@ -148,16 +148,19 @@ public class JSPPortlet extends LiferayPortlet {
 		throws IOException, PortletException {
 	}
 
-	public void serveResource(ResourceRequest req, ResourceResponse res)
+	public void serveResource(
+			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws IOException, PortletException {
 
-		String jspPage = req.getParameter("jspPage");
+		String jspPage = resourceRequest.getParameter("jspPage");
 
 		if (jspPage != null) {
-			include(jspPage, req, res, PortletRequest.RESOURCE_PHASE);
+			include(
+				jspPage, resourceRequest, resourceResponse,
+				PortletRequest.RESOURCE_PHASE);
 		}
 		else {
-			super.serveResource(req, res);
+			super.serveResource(resourceRequest, resourceResponse);
 		}
 	}
 
