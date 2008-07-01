@@ -938,6 +938,9 @@ public class PropsValues {
 	public static boolean THEME_CSS_FAST_LOAD = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.THEME_CSS_FAST_LOAD));
 
+	public static final String THEME_ICON_DEFAULT_NAME = PropsUtil.get(
+		PropsKeys.THEME_ICON_DEFAULT_NAME);
+
 	public static final boolean THEME_LOADER_NEW_THEME_ID_ON_IMPORT =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.THEME_LOADER_NEW_THEME_ID_ON_IMPORT));
