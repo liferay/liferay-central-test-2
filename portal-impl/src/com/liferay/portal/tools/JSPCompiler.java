@@ -109,12 +109,14 @@ public class JSPCompiler {
 		String classDestination = _directory;
 
 		if (OSDetector.isUnix()) {
-			cmd = _compiler + " -classpath " + _classPath +
-				" -d " + classDestination + " ";
+			cmd =
+				_compiler + " -classpath " + _classPath + " -d " +
+					classDestination + " ";
 		}
 		else {
-			cmd = _compiler + " -classpath \"" + _classPath +
-				"\" -d \"" + classDestination + "\" ";
+			cmd =
+				_compiler + " -classpath \"" + _classPath + "\" -d \"" +
+					classDestination + "\" ";
 		}
 
 		for (File file : files) {
