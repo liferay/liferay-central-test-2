@@ -37,10 +37,10 @@ public class PasswordPolicyDisplayTerms extends DisplayTerms {
 
 	public static final String NAME = "name";
 
-	public PasswordPolicyDisplayTerms(RenderRequest req) {
-		super(req);
+	public PasswordPolicyDisplayTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
-		name = ParamUtil.getString(req, NAME);
+		name = ParamUtil.getString(renderRequest, NAME);
 	}
 
 	public String getName() {

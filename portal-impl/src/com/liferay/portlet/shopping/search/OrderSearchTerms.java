@@ -35,14 +35,14 @@ import javax.portlet.RenderRequest;
  */
 public class OrderSearchTerms extends OrderDisplayTerms {
 
-	public OrderSearchTerms(RenderRequest req) {
-		super(req);
+	public OrderSearchTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
-		number = DAOParamUtil.getLike(req, NUMBER);
-		status = DAOParamUtil.getString(req, STATUS);
-		firstName = DAOParamUtil.getLike(req, FIRST_NAME);
-		lastName = DAOParamUtil.getLike(req, LAST_NAME);
-		emailAddress = DAOParamUtil.getLike(req, EMAIL_ADDRESS);
+		number = DAOParamUtil.getLike(renderRequest, NUMBER);
+		status = DAOParamUtil.getString(renderRequest, STATUS);
+		firstName = DAOParamUtil.getLike(renderRequest, FIRST_NAME);
+		lastName = DAOParamUtil.getLike(renderRequest, LAST_NAME);
+		emailAddress = DAOParamUtil.getLike(renderRequest, EMAIL_ADDRESS);
 	}
 
 	public String getStatus() {

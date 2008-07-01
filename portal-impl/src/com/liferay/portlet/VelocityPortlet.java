@@ -157,25 +157,28 @@ public class VelocityPortlet extends GenericPortlet {
 	}
 
 	protected void mergeTemplate(
-			Template template, RenderRequest req, RenderResponse res)
+			Template template, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
-		mergeTemplate(template, getContext(req, res), req, res);
+		mergeTemplate(
+			template, getContext(renderRequest, renderResponse), renderRequest,
+			renderResponse);
 	}
 
 	protected void mergeTemplate(
-			Template template, Context context, RenderRequest req,
-			RenderResponse res)
+			Template template, Context context, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
-		res.setContentType(req.getResponseContentType());
+		renderResponse.setContentType(renderRequest.getResponseContentType());
 
 		VelocityWriter velocityWriter = null;
 
 		try {
 			velocityWriter = (VelocityWriter)writerPool.get();
 
-			PrintWriter output = res.getWriter();
+			PrintWriter output = renderResponse.getWriter();
 
 			if (velocityWriter == null) {
 				velocityWriter = new VelocityWriter(output, 4 * 1024, true);

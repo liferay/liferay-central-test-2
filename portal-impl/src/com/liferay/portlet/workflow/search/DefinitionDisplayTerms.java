@@ -40,11 +40,11 @@ public class DefinitionDisplayTerms extends DisplayTerms {
 
 	public static final String NAME = "name";
 
-	public DefinitionDisplayTerms(RenderRequest req) {
-		super(req);
+	public DefinitionDisplayTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
-		definitionId = ParamUtil.getLong(req, DEFINITION_ID);
-		name = ParamUtil.getString(req, NAME);
+		definitionId = ParamUtil.getLong(renderRequest, DEFINITION_ID);
+		name = ParamUtil.getString(renderRequest, NAME);
 	}
 
 	public long getDefinitionId() {

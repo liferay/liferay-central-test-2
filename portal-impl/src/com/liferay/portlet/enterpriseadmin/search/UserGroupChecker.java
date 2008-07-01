@@ -40,8 +40,8 @@ import org.apache.commons.logging.LogFactory;
  */
 public class UserGroupChecker extends RowChecker {
 
-	public UserGroupChecker(RenderResponse res, Group group) {
-		super(res);
+	public UserGroupChecker(RenderResponse renderResponse, Group group) {
+		super(renderResponse);
 
 		_group = group;
 	}

@@ -58,14 +58,14 @@ public class TaskDisplayTerms extends DisplayTerms {
 
 	public static final String HIDE_ENDED_TASKS = "hideEndedTasks";
 
-	public TaskDisplayTerms(RenderRequest req) {
-		super(req);
+	public TaskDisplayTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
-		instanceId = ParamUtil.getLong(req, INSTANCE_ID);
-		taskName = ParamUtil.getString(req, TASK_NAME);
-		definitionName = ParamUtil.getString(req, DEFINITION_NAME);
-		assignedTo = ParamUtil.getString(req, ASSIGNED_TO);
-		hideEndedTasks = ParamUtil.getBoolean(req, HIDE_ENDED_TASKS);
+		instanceId = ParamUtil.getLong(renderRequest, INSTANCE_ID);
+		taskName = ParamUtil.getString(renderRequest, TASK_NAME);
+		definitionName = ParamUtil.getString(renderRequest, DEFINITION_NAME);
+		assignedTo = ParamUtil.getString(renderRequest, ASSIGNED_TO);
+		hideEndedTasks = ParamUtil.getBoolean(renderRequest, HIDE_ENDED_TASKS);
 	}
 
 	public long getInstanceId() {

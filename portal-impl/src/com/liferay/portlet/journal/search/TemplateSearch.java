@@ -23,6 +23,7 @@
 package com.liferay.portlet.journal.search;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
+import com.liferay.portlet.journal.model.JournalTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ import javax.portlet.RenderRequest;
  * @author Brian Wing Shun Chan
  *
  */
-public class TemplateSearch extends SearchContainer {
+public class TemplateSearch extends SearchContainer<JournalTemplate> {
 
 	static List<String> headerNames = new ArrayList<String>();
 
@@ -48,11 +49,11 @@ public class TemplateSearch extends SearchContainer {
 	public static final String EMPTY_RESULTS_MESSAGE =
 		"no-templates-were-found";
 
-	public TemplateSearch(RenderRequest req, PortletURL iteratorURL) {
+	public TemplateSearch(RenderRequest renderRequest, PortletURL iteratorURL) {
 		super(
-			req, new TemplateDisplayTerms(req), new TemplateSearchTerms(req),
-			DEFAULT_CUR_PARAM, DEFAULT_DELTA, iteratorURL, headerNames,
-			EMPTY_RESULTS_MESSAGE);
+			renderRequest, new TemplateDisplayTerms(renderRequest),
+			new TemplateSearchTerms(renderRequest), DEFAULT_CUR_PARAM,
+			DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
 		TemplateDisplayTerms displayTerms =
 			(TemplateDisplayTerms)getDisplayTerms();

@@ -47,14 +47,15 @@ public class IGUtil {
 
 	public static String getBreadcrumbs(
 			long folderId, long imageId, PageContext pageContext,
-			RenderRequest req, RenderResponse res)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		if (imageId > 0) {
 			IGImage image = IGImageLocalServiceUtil.getImage(imageId);
 
 			return getBreadcrumbs(
-				image.getFolder(), image, pageContext, req, res);
+				image.getFolder(), image, pageContext, renderRequest,
+				renderResponse);
 		}
 		else {
 			IGFolder folder = null;
@@ -65,22 +66,23 @@ public class IGUtil {
 			catch (Exception e) {
 			}
 
-			return getBreadcrumbs(folder, null, pageContext, req, res);
+			return getBreadcrumbs(
+				folder, null, pageContext, renderRequest, renderResponse);
 		}
 	}
 
 	public static String getBreadcrumbs(
 			IGFolder folder, IGImage image, PageContext pageContext,
-			RenderRequest req, RenderResponse res)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		if ((image != null) && (folder == null)) {
 			folder = image.getFolder();
 		}
 
-		PortletURL foldersURL = res.createRenderURL();
+		PortletURL foldersURL = renderResponse.createRenderURL();
 
-		WindowState windowState = req.getWindowState();
+		WindowState windowState = renderRequest.getWindowState();
 
 		if (windowState.equals(LiferayWindowState.POP_UP)) {
 			foldersURL.setWindowState(LiferayWindowState.POP_UP);
@@ -108,7 +110,7 @@ public class IGUtil {
 			for (int i = 0;; i++) {
 				folder = folder.toEscapedModel();
 
-				PortletURL portletURL = res.createRenderURL();
+				PortletURL portletURL = renderResponse.createRenderURL();
 
 				if (windowState.equals(LiferayWindowState.POP_UP)) {
 					portletURL.setWindowState(LiferayWindowState.POP_UP);
@@ -152,7 +154,7 @@ public class IGUtil {
 		if (image != null) {
 			image = image.toEscapedModel();
 
-			PortletURL imageURL = res.createRenderURL();
+			PortletURL imageURL = renderResponse.createRenderURL();
 
 			imageURL.setWindowState(WindowState.MAXIMIZED);
 

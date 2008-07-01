@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortalPreferences;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
@@ -50,7 +51,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class UserSearch extends SearchContainer {
+public class UserSearch extends SearchContainer<User> {
 
 	static List<String> headerNames = new ArrayList<String>();
 	static Map<String, String> orderableHeaders = new HashMap<String, String>();
@@ -72,12 +73,13 @@ public class UserSearch extends SearchContainer {
 
 	public static final String EMPTY_RESULTS_MESSAGE = "no-users-were-found";
 
-	public UserSearch(RenderRequest req, PortletURL iteratorURL) {
-		super(req, new UserDisplayTerms(req), new UserSearchTerms(req),
-			  DEFAULT_CUR_PARAM, DEFAULT_DELTA, iteratorURL, headerNames,
-			  EMPTY_RESULTS_MESSAGE);
+	public UserSearch(RenderRequest renderRequest, PortletURL iteratorURL) {
+		super(
+			renderRequest, new UserDisplayTerms(renderRequest),
+			new UserSearchTerms(renderRequest), DEFAULT_CUR_PARAM,
+			DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
-		PortletConfig portletConfig = (PortletConfig)req.getAttribute(
+		PortletConfig portletConfig = (PortletConfig)renderRequest.getAttribute(
 			JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		UserDisplayTerms displayTerms = (UserDisplayTerms)getDisplayTerms();
@@ -115,10 +117,13 @@ public class UserSearch extends SearchContainer {
 
 		try {
 			PortalPreferences prefs =
-				PortletPreferencesFactoryUtil.getPortalPreferences(req);
+				PortletPreferencesFactoryUtil.getPortalPreferences(
+					renderRequest);
 
-			String orderByCol = ParamUtil.getString(req, "orderByCol");
-			String orderByType = ParamUtil.getString(req, "orderByType");
+			String orderByCol = ParamUtil.getString(
+				renderRequest, "orderByCol");
+			String orderByType = ParamUtil.getString(
+				renderRequest, "orderByType");
 
 			if (Validator.isNotNull(orderByCol) &&
 				Validator.isNotNull(orderByType)) {

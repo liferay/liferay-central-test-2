@@ -36,14 +36,15 @@ import javax.portlet.RenderRequest;
  */
 public class StructureSearchTerms extends StructureDisplayTerms {
 
-	public StructureSearchTerms(RenderRequest req) {
-		super(req);
+	public StructureSearchTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
 		groupId = ParamUtil.getLong(
-			req, GROUP_ID, PortalUtil.getPortletGroupId(req));
-		structureId = DAOParamUtil.getLike(req, STRUCTURE_ID);
-		name = DAOParamUtil.getLike(req, NAME);
-		description = DAOParamUtil.getLike(req, DESCRIPTION);
+			renderRequest, GROUP_ID,
+			PortalUtil.getPortletGroupId(renderRequest));
+		structureId = DAOParamUtil.getLike(renderRequest, STRUCTURE_ID);
+		name = DAOParamUtil.getLike(renderRequest, NAME);
+		description = DAOParamUtil.getLike(renderRequest, DESCRIPTION);
 	}
 
 }

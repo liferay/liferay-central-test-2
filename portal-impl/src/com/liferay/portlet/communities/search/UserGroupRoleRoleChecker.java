@@ -41,10 +41,10 @@ import org.apache.commons.logging.LogFactory;
  */
 public class UserGroupRoleRoleChecker extends RowChecker {
 
-	public UserGroupRoleRoleChecker(RenderResponse res, User user,
-									Group group) {
+	public UserGroupRoleRoleChecker(
+		RenderResponse renderResponse, User user, Group group) {
 
-		super(res);
+		super(renderResponse);
 
 		_user = user;
 		_group = group;

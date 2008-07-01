@@ -65,7 +65,8 @@ public class ViewAction extends PortletAction {
 			long nodeId = GetterUtil.getLong(
 				prefs.getValue("node-id", StringPool.BLANK));
 			String title = ParamUtil.getString(
-				renderRequest, "title", prefs.getValue("title", WikiPageImpl.FRONT_PAGE));
+				renderRequest, "title",
+				prefs.getValue("title", WikiPageImpl.FRONT_PAGE));
 
 			WikiNode node = WikiNodeServiceUtil.getNode(nodeId);
 

@@ -44,14 +44,15 @@ public class FeedDisplayTerms extends DisplayTerms {
 
 	public static final String DESCRIPTION = "description";
 
-	public FeedDisplayTerms(RenderRequest req) {
-		super(req);
+	public FeedDisplayTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
 		groupId = ParamUtil.getLong(
-			req, GROUP_ID, PortalUtil.getPortletGroupId(req));
-		feedId = ParamUtil.getString(req, FEED_ID);
-		name = ParamUtil.getString(req, NAME);
-		description = ParamUtil.getString(req, DESCRIPTION);
+			renderRequest, GROUP_ID,
+			PortalUtil.getPortletGroupId(renderRequest));
+		feedId = ParamUtil.getString(renderRequest, FEED_ID);
+		name = ParamUtil.getString(renderRequest, NAME);
+		description = ParamUtil.getString(renderRequest, DESCRIPTION);
 	}
 
 	public long getGroupId() {

@@ -40,8 +40,8 @@ import org.apache.commons.logging.LogFactory;
  */
 public class UserRoleChecker extends RowChecker {
 
-	public UserRoleChecker(RenderResponse res, Role role) {
-		super(res);
+	public UserRoleChecker(RenderResponse renderResponse, Role role) {
+		super(renderResponse);
 
 		_role = role;
 	}

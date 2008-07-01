@@ -40,10 +40,10 @@ import org.apache.commons.logging.LogFactory;
  */
 public class UserPasswordPolicyChecker extends RowChecker {
 
-	public UserPasswordPolicyChecker(RenderResponse res,
-									 PasswordPolicy passwordPolicy) {
+	public UserPasswordPolicyChecker(
+		RenderResponse renderResponse, PasswordPolicy passwordPolicy) {
 
-		super(res);
+		super(renderResponse);
 
 		_passwordPolicy = passwordPolicy;
 	}

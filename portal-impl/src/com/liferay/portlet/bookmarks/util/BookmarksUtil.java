@@ -55,7 +55,7 @@ public class BookmarksUtil {
 
 	public static String getBreadcrumbs(
 			long folderId, long entryId, PageContext pageContext,
-			RenderRequest req, RenderResponse res)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		if (entryId > 0) {
@@ -63,7 +63,8 @@ public class BookmarksUtil {
 				BookmarksEntryLocalServiceUtil.getEntry(entryId);
 
 			return getBreadcrumbs(
-				entry.getFolder(), entry, pageContext, req, res);
+				entry.getFolder(), entry, pageContext, renderRequest,
+				renderResponse);
 		}
 		else {
 			BookmarksFolder folder = null;
@@ -74,16 +75,19 @@ public class BookmarksUtil {
 			catch (Exception e) {
 			}
 
-			return getBreadcrumbs(folder, null, pageContext, req, res);
+			return getBreadcrumbs(
+				folder, null, pageContext, renderRequest, renderResponse);
 		}
 	}
 
 	public static String getBreadcrumbs(
 			BookmarksFolder folder, BookmarksEntry entry,
-			PageContext pageContext, RenderRequest req, RenderResponse res)
+			PageContext pageContext, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
-		String strutsAction = ParamUtil.getString(req, "struts_action");
+		String strutsAction = ParamUtil.getString(
+			renderRequest, "struts_action");
 
 		boolean selectFolder = strutsAction.equals("/bookmarks/select_folder");
 
@@ -91,7 +95,7 @@ public class BookmarksUtil {
 			folder = entry.getFolder();
 		}
 
-		PortletURL foldersURL = res.createRenderURL();
+		PortletURL foldersURL = renderResponse.createRenderURL();
 
 		if (selectFolder) {
 			foldersURL.setWindowState(LiferayWindowState.POP_UP);
@@ -119,7 +123,7 @@ public class BookmarksUtil {
 			for (int i = 0;; i++) {
 				folder = folder.toEscapedModel();
 
-				PortletURL portletURL = res.createRenderURL();
+				PortletURL portletURL = renderResponse.createRenderURL();
 
 				if (selectFolder) {
 					portletURL.setWindowState(LiferayWindowState.POP_UP);
@@ -162,7 +166,7 @@ public class BookmarksUtil {
 		if (entry != null) {
 			entry = entry.toEscapedModel();
 
-			PortletURL entryURL = res.createRenderURL();
+			PortletURL entryURL = renderResponse.createRenderURL();
 
 			entryURL.setWindowState(WindowState.MAXIMIZED);
 

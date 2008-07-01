@@ -35,14 +35,15 @@ import javax.portlet.RenderRequest;
  */
 public class FeedSearchTerms extends FeedDisplayTerms {
 
-	public FeedSearchTerms(RenderRequest req) {
-		super(req);
+	public FeedSearchTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
 		groupId = ParamUtil.getLong(
-			req, GROUP_ID, PortalUtil.getPortletGroupId(req));
-		feedId = ParamUtil.getString(req, FEED_ID);
-		name = ParamUtil.getString(req, NAME);
-		description = ParamUtil.getString(req, DESCRIPTION);
+			renderRequest, GROUP_ID,
+			PortalUtil.getPortletGroupId(renderRequest));
+		feedId = ParamUtil.getString(renderRequest, FEED_ID);
+		name = ParamUtil.getString(renderRequest, NAME);
+		description = ParamUtil.getString(renderRequest, DESCRIPTION);
 	}
 
 }

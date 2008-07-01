@@ -31,7 +31,6 @@ import java.io.PrintWriter;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.GenericPortlet;
-import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -43,16 +42,16 @@ import javax.portlet.RenderResponse;
  */
 public class HelloWorldPortlet extends GenericPortlet {
 
-	public void processAction(ActionRequest req, ActionResponse res)
-		throws IOException, PortletException {
+	public void processAction(ActionRequest req, ActionResponse res) {
 	}
 
-	public void doView(RenderRequest req, RenderResponse res)
-		throws IOException, PortletException {
+	public void doView(
+			RenderRequest renderRequest, RenderResponse renderResponse)
+		throws IOException {
 
-		res.setContentType(ContentTypes.TEXT_HTML_UTF8);
+		renderResponse.setContentType(ContentTypes.TEXT_HTML_UTF8);
 
-		PrintWriter writer = res.getWriter();
+		PrintWriter writer = renderResponse.getWriter();
 
 		writer.print("Welcome to " + ReleaseInfo.getReleaseInfo() + ".");
 	}

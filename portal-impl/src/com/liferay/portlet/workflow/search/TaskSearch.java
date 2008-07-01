@@ -23,6 +23,7 @@
 package com.liferay.portlet.workflow.search;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
+import com.liferay.portlet.workflow.model.WorkflowTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ import javax.portlet.RenderRequest;
  * @author Brian Wing Shun Chan
  *
  */
-public class TaskSearch extends SearchContainer {
+public class TaskSearch extends SearchContainer<WorkflowTask> {
 
 	static List<String> headerNames = new ArrayList<String>();
 
@@ -53,10 +54,11 @@ public class TaskSearch extends SearchContainer {
 
 	public static final String EMPTY_RESULTS_MESSAGE = "no-tasks-were-found";
 
-	public TaskSearch(RenderRequest req, PortletURL iteratorURL) {
-		super(req, new TaskDisplayTerms(req), new TaskSearchTerms(req),
-			  DEFAULT_CUR_PARAM, DEFAULT_DELTA, iteratorURL, headerNames,
-			  EMPTY_RESULTS_MESSAGE);
+	public TaskSearch(RenderRequest renderRequest, PortletURL iteratorURL) {
+		super(
+			renderRequest, new TaskDisplayTerms(renderRequest),
+			new TaskSearchTerms(renderRequest), DEFAULT_CUR_PARAM,
+			DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
 		TaskDisplayTerms displayTerms = (TaskDisplayTerms)getDisplayTerms();
 

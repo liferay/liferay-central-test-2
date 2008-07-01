@@ -168,7 +168,8 @@ public class ViewAction extends PortletAction {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		return mapping.findForward(getForward(renderRequest, "portlet.invitation.view"));
+		return mapping.findForward(
+			getForward(renderRequest, "portlet.invitation.view"));
 	}
 
 }

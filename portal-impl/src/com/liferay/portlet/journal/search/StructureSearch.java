@@ -23,6 +23,7 @@
 package com.liferay.portlet.journal.search;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
+import com.liferay.portlet.journal.model.JournalStructure;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ import javax.portlet.RenderRequest;
  * @author Brian Wing Shun Chan
  *
  */
-public class StructureSearch extends SearchContainer {
+public class StructureSearch extends SearchContainer<JournalStructure> {
 
 	static List<String> headerNames = new ArrayList<String>();
 
@@ -48,11 +49,13 @@ public class StructureSearch extends SearchContainer {
 	public static final String EMPTY_RESULTS_MESSAGE =
 		"no-structures-were-found";
 
-	public StructureSearch(RenderRequest req, PortletURL iteratorURL) {
+	public StructureSearch(
+		RenderRequest renderRequest, PortletURL iteratorURL) {
+
 		super(
-			req, new StructureDisplayTerms(req), new StructureSearchTerms(req),
-			DEFAULT_CUR_PARAM, DEFAULT_DELTA, iteratorURL, headerNames,
-			EMPTY_RESULTS_MESSAGE);
+			renderRequest, new StructureDisplayTerms(renderRequest),
+			new StructureSearchTerms(renderRequest), DEFAULT_CUR_PARAM,
+			DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
 		StructureDisplayTerms displayTerms =
 			(StructureDisplayTerms)getDisplayTerms();

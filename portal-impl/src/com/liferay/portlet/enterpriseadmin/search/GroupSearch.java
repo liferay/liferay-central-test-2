@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortalPreferences;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
@@ -48,7 +49,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class GroupSearch extends SearchContainer {
+public class GroupSearch extends SearchContainer<Group> {
 
 	static List<String> headerNames = new ArrayList<String>();
 	static Map<String, String> orderableHeaders = new HashMap<String, String>();
@@ -64,10 +65,11 @@ public class GroupSearch extends SearchContainer {
 	public static final String EMPTY_RESULTS_MESSAGE =
 		"no-communities-were-found";
 
-	public GroupSearch(RenderRequest req, PortletURL iteratorURL) {
-		super(req, new GroupDisplayTerms(req), new GroupSearchTerms(req),
-			  DEFAULT_CUR_PARAM, DEFAULT_DELTA, iteratorURL, headerNames,
-			  EMPTY_RESULTS_MESSAGE);
+	public GroupSearch(RenderRequest renderRequest, PortletURL iteratorURL) {
+		super(
+			renderRequest, new GroupDisplayTerms(renderRequest),
+			new GroupSearchTerms(renderRequest), DEFAULT_CUR_PARAM,
+			DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
 		GroupDisplayTerms displayTerms = (GroupDisplayTerms)getDisplayTerms();
 
@@ -78,10 +80,13 @@ public class GroupSearch extends SearchContainer {
 
 		try {
 			PortalPreferences prefs =
-				PortletPreferencesFactoryUtil.getPortalPreferences(req);
+				PortletPreferencesFactoryUtil.getPortalPreferences(
+					renderRequest);
 
-			String orderByCol = ParamUtil.getString(req, "orderByCol");
-			String orderByType = ParamUtil.getString(req, "orderByType");
+			String orderByCol = ParamUtil.getString(
+				renderRequest, "orderByCol");
+			String orderByType = ParamUtil.getString(
+				renderRequest, "orderByType");
 
 			if (Validator.isNotNull(orderByCol) &&
 				Validator.isNotNull(orderByType)) {

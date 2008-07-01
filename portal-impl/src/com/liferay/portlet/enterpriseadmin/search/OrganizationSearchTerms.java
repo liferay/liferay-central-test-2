@@ -35,17 +35,18 @@ import javax.portlet.RenderRequest;
  */
 public class OrganizationSearchTerms extends OrganizationDisplayTerms {
 
-	public OrganizationSearchTerms(RenderRequest req) {
-		super(req);
+	public OrganizationSearchTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
-		type = DAOParamUtil.getInteger(req, TYPE);
-		name = DAOParamUtil.getLike(req, NAME);
-		street = DAOParamUtil.getLike(req, STREET);
-		city = DAOParamUtil.getLike(req, CITY);
-		zip = DAOParamUtil.getLike(req, ZIP);
-		regionId = ParamUtil.getLong(req, REGION_ID);
-		countryId = ParamUtil.getLong(req, COUNTRY_ID);
-		parentOrganizationId = ParamUtil.getLong(req, PARENT_ORGANIZATION_ID);
+		type = DAOParamUtil.getInteger(renderRequest, TYPE);
+		name = DAOParamUtil.getLike(renderRequest, NAME);
+		street = DAOParamUtil.getLike(renderRequest, STREET);
+		city = DAOParamUtil.getLike(renderRequest, CITY);
+		zip = DAOParamUtil.getLike(renderRequest, ZIP);
+		regionId = ParamUtil.getLong(renderRequest, REGION_ID);
+		countryId = ParamUtil.getLong(renderRequest, COUNTRY_ID);
+		parentOrganizationId = ParamUtil.getLong(
+			renderRequest, PARENT_ORGANIZATION_ID);
 	}
 
 	public Long getRegionIdObj() {

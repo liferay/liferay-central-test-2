@@ -36,11 +36,11 @@ import javax.portlet.RenderRequest;
  */
 public class DefinitionSearchTerms extends DefinitionDisplayTerms {
 
-	public DefinitionSearchTerms(RenderRequest req) {
-		super(req);
+	public DefinitionSearchTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
-		definitionId = ParamUtil.getLong(req, DEFINITION_ID);
-		name = DAOParamUtil.getLike(req, NAME, StringPool.PERCENT);
+		definitionId = ParamUtil.getLong(renderRequest, DEFINITION_ID);
+		name = DAOParamUtil.getLike(renderRequest, NAME, StringPool.PERCENT);
 	}
 
 }

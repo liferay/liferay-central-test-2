@@ -38,20 +38,21 @@ import javax.portlet.RenderRequest;
  */
 public class ArticleSearchTerms extends ArticleDisplayTerms {
 
-	public ArticleSearchTerms(RenderRequest req) {
-		super(req);
+	public ArticleSearchTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
 		groupId = ParamUtil.getLong(
-			req, GROUP_ID, PortalUtil.getPortletGroupId(req));
-		articleId = DAOParamUtil.getLike(req, ARTICLE_ID);
-		version = ParamUtil.getDouble(req, VERSION);
-		title = DAOParamUtil.getLike(req, TITLE);
-		description = DAOParamUtil.getLike(req, DESCRIPTION);
-		content = DAOParamUtil.getLike(req, CONTENT);
-		type = DAOParamUtil.getString(req, TYPE);
-		structureId = DAOParamUtil.getString(req, STRUCTURE_ID);
-		templateId = DAOParamUtil.getString(req, TEMPLATE_ID);
-		status = ParamUtil.getString(req, STATUS);
+			renderRequest, GROUP_ID,
+			PortalUtil.getPortletGroupId(renderRequest));
+		articleId = DAOParamUtil.getLike(renderRequest, ARTICLE_ID);
+		version = ParamUtil.getDouble(renderRequest, VERSION);
+		title = DAOParamUtil.getLike(renderRequest, TITLE);
+		description = DAOParamUtil.getLike(renderRequest, DESCRIPTION);
+		content = DAOParamUtil.getLike(renderRequest, CONTENT);
+		type = DAOParamUtil.getString(renderRequest, TYPE);
+		structureId = DAOParamUtil.getString(renderRequest, STRUCTURE_ID);
+		templateId = DAOParamUtil.getString(renderRequest, TEMPLATE_ID);
+		status = ParamUtil.getString(renderRequest, STATUS);
 	}
 
 	public void setGroupId(long groupId) {

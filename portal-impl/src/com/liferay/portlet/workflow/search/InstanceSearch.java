@@ -23,6 +23,7 @@
 package com.liferay.portlet.workflow.search;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
+import com.liferay.portlet.workflow.model.WorkflowInstance;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ import javax.portlet.RenderRequest;
  * @author Brian Wing Shun Chan
  *
  */
-public class InstanceSearch extends SearchContainer {
+public class InstanceSearch extends SearchContainer<WorkflowInstance> {
 
 	static List<String> headerNames = new ArrayList<String>();
 
@@ -52,10 +53,11 @@ public class InstanceSearch extends SearchContainer {
 	public static final String EMPTY_RESULTS_MESSAGE =
 		"no-instances-were-found";
 
-	public InstanceSearch(RenderRequest req, PortletURL iteratorURL) {
-		super(req, new InstanceDisplayTerms(req), new InstanceSearchTerms(req),
-			  DEFAULT_CUR_PARAM, DEFAULT_DELTA, iteratorURL, headerNames,
-			  EMPTY_RESULTS_MESSAGE);
+	public InstanceSearch(RenderRequest renderRequest, PortletURL iteratorURL) {
+		super(
+			renderRequest, new InstanceDisplayTerms(renderRequest),
+			new InstanceSearchTerms(renderRequest), DEFAULT_CUR_PARAM,
+			DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
 		InstanceDisplayTerms displayTerms =
 			(InstanceDisplayTerms)getDisplayTerms();

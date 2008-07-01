@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortalPreferences;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
@@ -48,7 +49,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Scott Lee
  *
  */
-public class PasswordPolicySearch extends SearchContainer {
+public class PasswordPolicySearch extends SearchContainer<PasswordPolicy> {
 
 	static List<String> headerNames = new ArrayList<String>();
 	static Map<String, String> orderableHeaders = new HashMap<String, String>();
@@ -64,10 +65,13 @@ public class PasswordPolicySearch extends SearchContainer {
 	public static final String EMPTY_RESULTS_MESSAGE =
 		"no-password-policies-were-found";
 
-	public PasswordPolicySearch(RenderRequest req, PortletURL iteratorURL) {
-		super(req, new PasswordPolicyDisplayTerms(req),
-			  new PasswordPolicySearchTerms(req), DEFAULT_CUR_PARAM,
-			  DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
+	public PasswordPolicySearch(
+		RenderRequest renderRequest, PortletURL iteratorURL) {
+
+		super(
+			renderRequest, new PasswordPolicyDisplayTerms(renderRequest),
+			new PasswordPolicySearchTerms(renderRequest), DEFAULT_CUR_PARAM,
+			DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
 		PasswordPolicyDisplayTerms displayTerms =
 			(PasswordPolicyDisplayTerms)getDisplayTerms();
@@ -77,10 +81,13 @@ public class PasswordPolicySearch extends SearchContainer {
 
 		try {
 			PortalPreferences prefs =
-				PortletPreferencesFactoryUtil.getPortalPreferences(req);
+				PortletPreferencesFactoryUtil.getPortalPreferences(
+					renderRequest);
 
-			String orderByCol = ParamUtil.getString(req, "orderByCol");
-			String orderByType = ParamUtil.getString(req, "orderByType");
+			String orderByCol = ParamUtil.getString(
+				renderRequest, "orderByCol");
+			String orderByType = ParamUtil.getString(
+				renderRequest, "orderByType");
 
 			if (Validator.isNotNull(orderByCol) &&
 				Validator.isNotNull(orderByType)) {

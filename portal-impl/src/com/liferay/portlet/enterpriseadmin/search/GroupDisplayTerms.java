@@ -39,11 +39,11 @@ public class GroupDisplayTerms extends DisplayTerms {
 
 	public static final String DESCRIPTION = "description";
 
-	public GroupDisplayTerms(RenderRequest req) {
-		super(req);
+	public GroupDisplayTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
-		name = ParamUtil.getString(req, NAME);
-		description = ParamUtil.getString(req, DESCRIPTION);
+		name = ParamUtil.getString(renderRequest, NAME);
+		description = ParamUtil.getString(renderRequest, DESCRIPTION);
 	}
 
 	public String getName() {

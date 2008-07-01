@@ -580,8 +580,8 @@ public class ShoppingUtil {
 	}
 
 	public static String getBreadcrumbs(
-			long categoryId, PageContext pageContext, RenderRequest req,
-			RenderResponse res)
+			long categoryId, PageContext pageContext,
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		ShoppingCategory category = null;
@@ -592,17 +592,18 @@ public class ShoppingUtil {
 		catch (Exception e) {
 		}
 
-		return getBreadcrumbs(category, pageContext, req, res);
+		return getBreadcrumbs(
+			category, pageContext, renderRequest, renderResponse);
 	}
 
 	public static String getBreadcrumbs(
 			ShoppingCategory category, PageContext pageContext,
-			RenderRequest req, RenderResponse res)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		PortletURL categoriesURL = res.createRenderURL();
+		PortletURL categoriesURL = renderResponse.createRenderURL();
 
-		WindowState windowState = req.getWindowState();
+		WindowState windowState = renderRequest.getWindowState();
 
 		if (windowState.equals(LiferayWindowState.POP_UP)) {
 			categoriesURL.setWindowState(LiferayWindowState.POP_UP);
@@ -631,7 +632,7 @@ public class ShoppingUtil {
 			for (int i = 0;; i++) {
 				category = category.toEscapedModel();
 
-				PortletURL portletURL = res.createRenderURL();
+				PortletURL portletURL = renderResponse.createRenderURL();
 
 				if (windowState.equals(LiferayWindowState.POP_UP)) {
 					portletURL.setWindowState(LiferayWindowState.POP_UP);

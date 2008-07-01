@@ -81,14 +81,18 @@ public class CompareVersionsAction extends PortletAction {
 		return mapping.findForward("portlet.wiki.compare_versions");
 	}
 
-	protected void compareVersions(RenderRequest req) throws Exception {
-		long nodeId = ParamUtil.getLong(req, "nodeId");
+	protected void compareVersions(RenderRequest renderRequest)
+		throws Exception {
 
-		String title = ParamUtil.getString(req, "title");
+		long nodeId = ParamUtil.getLong(renderRequest, "nodeId");
 
-		double sourceVersion = ParamUtil.getDouble(req, "sourceVersion");
-		double targetVersion = ParamUtil.getDouble(req, "targetVersion");
-		String type = ParamUtil.getString(req, "type", "escape");
+		String title = ParamUtil.getString(renderRequest, "title");
+
+		double sourceVersion = ParamUtil.getDouble(
+			renderRequest, "sourceVersion");
+		double targetVersion = ParamUtil.getDouble(
+			renderRequest, "targetVersion");
+		String type = ParamUtil.getString(renderRequest, "type", "escape");
 
 		WikiPage sourcePage = WikiPageServiceUtil.getPage(
 			nodeId, title, sourceVersion);
@@ -113,11 +117,11 @@ public class CompareVersionsAction extends PortletAction {
 		List<DiffResult>[] diffResults = DiffUtil.diff(
 			new StringReader(sourceContent), new StringReader(targetContent));
 
-		req.setAttribute(
+		renderRequest.setAttribute(
 			WebKeys.SOURCE_NAME, title + StringPool.SPACE + sourceVersion);
-		req.setAttribute(
+		renderRequest.setAttribute(
 			WebKeys.TARGET_NAME, title + StringPool.SPACE + targetVersion);
-		req.setAttribute(WebKeys.DIFF_RESULTS, diffResults);
+		renderRequest.setAttribute(WebKeys.DIFF_RESULTS, diffResults);
 	}
 
 }

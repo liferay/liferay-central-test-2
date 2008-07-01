@@ -39,14 +39,15 @@ import javax.portlet.RenderResponse;
  */
 public class ReportsPortlet extends StrutsPortlet {
 
-	public void doView(RenderRequest req, RenderResponse res)
+	public void doView(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
 		PortletPreferences prefs = req.getPreferences();
 
 		System.out.println(prefs.getValue("test", ""));
 
-		super.doView(req, res);
+		super.doView(renderRequest, renderResponse);
 	}
 
 }

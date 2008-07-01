@@ -65,73 +65,82 @@ public class JSPPortlet extends LiferayPortlet {
 			getInitParameter("clear-request-parameters"));
 	}
 
-	public void doAbout(RenderRequest req, RenderResponse res)
+	public void doAbout(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		include(aboutJSP, req, res);
+		include(aboutJSP, renderRequest, renderResponse);
 	}
 
-	public void doConfig(RenderRequest req, RenderResponse res)
+	public void doConfig(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		include(configJSP, req, res);
+		include(configJSP, renderRequest, renderResponse);
 	}
 
-	public void doEdit(RenderRequest req, RenderResponse res)
+	public void doEdit(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		if (req.getPreferences() == null) {
-			super.doEdit(req, res);
+		if (renderRequest.getPreferences() == null) {
+			super.doEdit(renderRequest, renderResponse);
 		}
 		else {
-			include(editJSP, req, res);
+			include(editJSP, renderRequest, renderResponse);
 		}
 	}
 
-	public void doEditDefaults(RenderRequest req, RenderResponse res)
+	public void doEditDefaults(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		if (req.getPreferences() == null) {
-			super.doEdit(req, res);
-		}
-		else {
-			include(editDefaultsJSP, req, res);
-		}
-	}
-
-	public void doEditGuest(RenderRequest req, RenderResponse res)
-		throws IOException, PortletException {
-
-		if (req.getPreferences() == null) {
-			super.doEdit(req, res);
+		if (renderRequest.getPreferences() == null) {
+			super.doEdit(renderRequest, renderResponse);
 		}
 		else {
-			include(editGuestJSP, req, res);
+			include(editDefaultsJSP, renderRequest, renderResponse);
 		}
 	}
 
-	public void doHelp(RenderRequest req, RenderResponse res)
+	public void doEditGuest(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		include(helpJSP, req, res);
+		if (renderRequest.getPreferences() == null) {
+			super.doEdit(renderRequest, renderResponse);
+		}
+		else {
+			include(editGuestJSP, renderRequest, renderResponse);
+		}
 	}
 
-	public void doPreview(RenderRequest req, RenderResponse res)
+	public void doHelp(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		include(previewJSP, req, res);
+		include(helpJSP, renderRequest, renderResponse);
 	}
 
-	public void doPrint(RenderRequest req, RenderResponse res)
+	public void doPreview(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		include(printJSP, req, res);
+		include(previewJSP, renderRequest, renderResponse);
 	}
 
-	public void doView(RenderRequest req, RenderResponse res)
+	public void doPrint(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		include(viewJSP, req, res);
+		include(printJSP, renderRequest, renderResponse);
+	}
+
+	public void doView(
+			RenderRequest renderRequest, RenderResponse renderResponse)
+		throws IOException, PortletException {
+
+		include(viewJSP, renderRequest, renderResponse);
 	}
 
 	public void processAction(ActionRequest req, ActionResponse res)
@@ -151,16 +160,17 @@ public class JSPPortlet extends LiferayPortlet {
 		}
 	}
 
-	protected void doDispatch(RenderRequest req, RenderResponse res)
+	protected void doDispatch(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		String jspPage = req.getParameter("jspPage");
+		String jspPage = renderRequest.getParameter("jspPage");
 
 		if (jspPage != null) {
-			include(jspPage, req, res);
+			include(jspPage, renderRequest, renderResponse);
 		}
 		else {
-			super.doDispatch(req, res);
+			super.doDispatch(renderRequest, renderResponse);
 		}
 	}
 

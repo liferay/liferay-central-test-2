@@ -41,12 +41,12 @@ public class CouponDisplayTerms extends DisplayTerms {
 
 	public static final String ACTIVE = "active";
 
-	public CouponDisplayTerms(RenderRequest req) {
-		super(req);
+	public CouponDisplayTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
-		code = ParamUtil.getString(req, CODE);
-		discountType = ParamUtil.getString(req, DISCOUNT_TYPE);
-		active = ParamUtil.getBoolean(req, ACTIVE, true);
+		code = ParamUtil.getString(renderRequest, CODE);
+		discountType = ParamUtil.getString(renderRequest, DISCOUNT_TYPE);
+		active = ParamUtil.getBoolean(renderRequest, ACTIVE, true);
 	}
 
 	public String getCode() {

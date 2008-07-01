@@ -74,40 +74,44 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 		bsfManager = new BSFManager();
 	}
 
-	public void doDispatch(RenderRequest req, RenderResponse res)
+	public void doDispatch(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		String file = req.getParameter(getFileParam());
+		String file = renderRequest.getParameter(getFileParam());
 
 		if (file != null) {
-			include(file, req, res);
+			include(file, renderRequest, renderResponse);
 		}
 		else {
-			super.doDispatch(req, res);
+			super.doDispatch(renderRequest, renderResponse);
 		}
 	}
 
-	public void doEdit(RenderRequest req, RenderResponse res)
+	public void doEdit(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		if (req.getPreferences() == null) {
-			super.doEdit(req, res);
+		if (renderRequest.getPreferences() == null) {
+			super.doEdit(renderRequest, renderResponse);
 		}
 		else {
-			include(editFile, req, res);
+			include(editFile, renderRequest, renderResponse);
 		}
 	}
 
-	public void doHelp(RenderRequest req, RenderResponse res)
+	public void doHelp(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		include(helpFile, req, res);
+		include(helpFile, renderRequest, renderResponse);
 	}
 
-	public void doView(RenderRequest req, RenderResponse res)
+	public void doView(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		include(viewFile, req, res);
+		include(viewFile, renderRequest, renderResponse);
 	}
 
 	public void processAction(ActionRequest req, ActionResponse res)

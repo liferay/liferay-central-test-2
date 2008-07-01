@@ -35,12 +35,12 @@ import javax.portlet.RenderRequest;
  */
 public class RoleSearchTerms extends RoleDisplayTerms {
 
-	public RoleSearchTerms(RenderRequest req) {
-		super(req);
+	public RoleSearchTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
-		name = DAOParamUtil.getLike(req, NAME);
-		description = DAOParamUtil.getLike(req, DESCRIPTION);
-		type = ParamUtil.getInteger(req, TYPE);
+		name = DAOParamUtil.getLike(renderRequest, NAME);
+		description = DAOParamUtil.getLike(renderRequest, DESCRIPTION);
+		type = ParamUtil.getInteger(renderRequest, TYPE);
 	}
 
 	public Integer getTypeObj() {

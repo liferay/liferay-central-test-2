@@ -79,13 +79,14 @@ public class MBUtil {
 
 	public static String getBreadcrumbs(
 			long categoryId, long messageId, PageContext pageContext,
-			RenderRequest req, RenderResponse res)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		if (messageId > 0) {
 			MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
 
-			return getBreadcrumbs(null, message, pageContext, req, res);
+			return getBreadcrumbs(
+				null, message, pageContext, renderRequest, renderResponse);
 		}
 		else {
 			MBCategory category = null;
@@ -101,16 +102,18 @@ public class MBUtil {
 			catch (Exception e) {
 			}
 
-			return getBreadcrumbs(category, null, pageContext, req, res);
+			return getBreadcrumbs(
+				category, null, pageContext, renderRequest, renderResponse);
 		}
 	}
 
 	public static String getBreadcrumbs(
 			MBCategory category, MBMessage message, PageContext pageContext,
-			RenderRequest req, RenderResponse res)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		String strutsAction = ParamUtil.getString(req, "struts_action");
+		String strutsAction = ParamUtil.getString(
+			renderRequest, "struts_action");
 
 		boolean selectCategory = strutsAction.equals(
 			"/message_boards/select_category");
@@ -119,7 +122,7 @@ public class MBUtil {
 			category = message.getCategory();
 		}
 
-		PortletURL categoriesURL = res.createRenderURL();
+		PortletURL categoriesURL = renderResponse.createRenderURL();
 
 		if (selectCategory) {
 			categoriesURL.setWindowState(LiferayWindowState.POP_UP);
@@ -150,7 +153,7 @@ public class MBUtil {
 			for (int i = 0;; i++) {
 				category = category.toEscapedModel();
 
-				PortletURL portletURL = res.createRenderURL();
+				PortletURL portletURL = renderResponse.createRenderURL();
 
 				if (selectCategory) {
 					portletURL.setWindowState(LiferayWindowState.POP_UP);
@@ -194,7 +197,7 @@ public class MBUtil {
 		if (message != null) {
 			message = message.toEscapedModel();
 
-			PortletURL messageURL = res.createRenderURL();
+			PortletURL messageURL = renderResponse.createRenderURL();
 
 			messageURL.setWindowState(WindowState.MAXIMIZED);
 

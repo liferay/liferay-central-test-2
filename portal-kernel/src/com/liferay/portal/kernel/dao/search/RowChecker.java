@@ -47,31 +47,34 @@ public class RowChecker {
 
 	public static final String ROW_IDS = "rowIds";
 
-	public RowChecker(RenderResponse res) {
-		this(res, ALIGN, VALIGN, COLSPAN, FORM_NAME, ALL_ROW_IDS, ROW_IDS);
+	public RowChecker(RenderResponse renderResponse) {
+		this(
+			renderResponse, ALIGN, VALIGN, COLSPAN, FORM_NAME, ALL_ROW_IDS,
+			ROW_IDS);
 	}
 
 	public RowChecker(
-		RenderResponse res, String align, String valign, String formName,
-		String allRowsId, String rowId) {
+		RenderResponse renderResponse, String align, String valign,
+		String formName, String allRowsId, String rowId) {
 
-		this(res, align, valign, COLSPAN, formName, allRowsId, rowId);
+		this(
+			renderResponse, align, valign, COLSPAN, formName, allRowsId, rowId);
 	}
 
 	public RowChecker(
-		RenderResponse res, String align, String valign, int colspan,
+		RenderResponse renderResponse, String align, String valign, int colspan,
 		String formName, String allRowsId, String rowId) {
 
 		_align = align;
 		_valign = valign;
 		_colspan = colspan;
-		_formName = res.getNamespace() + formName;
+		_formName = renderResponse.getNamespace() + formName;
 
 		if (Validator.isNotNull(allRowsId)) {
-			_allRowsId = res.getNamespace() + allRowsId;
+			_allRowsId = renderResponse.getNamespace() + allRowsId;
 		}
 
-		_rowId = res.getNamespace() + rowId;
+		_rowId = renderResponse.getNamespace() + rowId;
 	}
 
 	public String getAlign() {

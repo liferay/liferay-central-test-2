@@ -45,14 +45,14 @@ public class OrderDisplayTerms extends DisplayTerms {
 
 	public static final String EMAIL_ADDRESS = "emailAddress";
 
-	public OrderDisplayTerms(RenderRequest req) {
-		super(req);
+	public OrderDisplayTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
-		number = ParamUtil.getString(req, NUMBER);
-		status = ParamUtil.getString(req, STATUS);
-		firstName = ParamUtil.getString(req, FIRST_NAME);
-		lastName = ParamUtil.getString(req, LAST_NAME);
-		emailAddress = ParamUtil.getString(req, EMAIL_ADDRESS);
+		number = ParamUtil.getString(renderRequest, NUMBER);
+		status = ParamUtil.getString(renderRequest, STATUS);
+		firstName = ParamUtil.getString(renderRequest, FIRST_NAME);
+		lastName = ParamUtil.getString(renderRequest, LAST_NAME);
+		emailAddress = ParamUtil.getString(renderRequest, EMAIL_ADDRESS);
 	}
 
 	public String getNumber() {

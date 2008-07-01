@@ -44,14 +44,15 @@ public class StructureDisplayTerms extends DisplayTerms {
 
 	public static final String DESCRIPTION = "description";
 
-	public StructureDisplayTerms(RenderRequest req) {
-		super(req);
+	public StructureDisplayTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
 		groupId = ParamUtil.getLong(
-			req, GROUP_ID, PortalUtil.getPortletGroupId(req));
-		structureId = ParamUtil.getString(req, STRUCTURE_ID);
-		name = ParamUtil.getString(req, NAME);
-		description = ParamUtil.getString(req, DESCRIPTION);
+			renderRequest, GROUP_ID,
+			PortalUtil.getPortletGroupId(renderRequest));
+		structureId = ParamUtil.getString(renderRequest, STRUCTURE_ID);
+		name = ParamUtil.getString(renderRequest, NAME);
+		description = ParamUtil.getString(renderRequest, DESCRIPTION);
 	}
 
 	public long getGroupId() {

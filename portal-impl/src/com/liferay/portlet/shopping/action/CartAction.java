@@ -100,7 +100,8 @@ public void processAction(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		return mapping.findForward(getForward(renderRequest, "portlet.shopping.cart"));
+		return mapping.findForward(
+			getForward(renderRequest, "portlet.shopping.cart"));
 	}
 
 	protected void updateCart(ActionRequest req) throws Exception {

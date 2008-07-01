@@ -35,18 +35,18 @@ import javax.portlet.RenderRequest;
  */
 public class UserSearchTerms extends UserDisplayTerms {
 
-	public UserSearchTerms(RenderRequest req) {
-		super(req);
+	public UserSearchTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
-		firstName = DAOParamUtil.getLike(req, FIRST_NAME);
-		middleName = DAOParamUtil.getLike(req, MIDDLE_NAME);
-		lastName = DAOParamUtil.getLike(req, LAST_NAME);
-		screenName = DAOParamUtil.getLike(req, SCREEN_NAME);
-		emailAddress = DAOParamUtil.getLike(req, EMAIL_ADDRESS);
-		active = ParamUtil.getBoolean(req, ACTIVE, true);
-		organizationId = ParamUtil.getLong(req, ORGANIZATION_ID);
-		roleId = ParamUtil.getLong(req, ROLE_ID);
-		userGroupId = ParamUtil.getLong(req, USER_GROUP_ID);
+		firstName = DAOParamUtil.getLike(renderRequest, FIRST_NAME);
+		middleName = DAOParamUtil.getLike(renderRequest, MIDDLE_NAME);
+		lastName = DAOParamUtil.getLike(renderRequest, LAST_NAME);
+		screenName = DAOParamUtil.getLike(renderRequest, SCREEN_NAME);
+		emailAddress = DAOParamUtil.getLike(renderRequest, EMAIL_ADDRESS);
+		active = ParamUtil.getBoolean(renderRequest, ACTIVE, true);
+		organizationId = ParamUtil.getLong(renderRequest, ORGANIZATION_ID);
+		roleId = ParamUtil.getLong(renderRequest, ROLE_ID);
+		userGroupId = ParamUtil.getLong(renderRequest, USER_GROUP_ID);
 	}
 
 	public Boolean getActiveObj() {

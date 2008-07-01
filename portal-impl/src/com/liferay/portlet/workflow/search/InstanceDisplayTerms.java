@@ -54,14 +54,15 @@ public class InstanceDisplayTerms extends DisplayTerms {
 
 	public static final String HIDE_ENDED_TASKS = "hideEndedTasks";
 
-	public InstanceDisplayTerms(RenderRequest req) {
-		super(req);
+	public InstanceDisplayTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
-		definitionId = ParamUtil.getLong(req, DEFINITION_ID);
-		instanceId = ParamUtil.getLong(req, INSTANCE_ID);
-		definitionName = ParamUtil.getString(req, DEFINITION_NAME);
-		definitionVersion = ParamUtil.getString(req, DEFINITION_VERSION);
-		hideEndedTasks = ParamUtil.getBoolean(req, HIDE_ENDED_TASKS);
+		definitionId = ParamUtil.getLong(renderRequest, DEFINITION_ID);
+		instanceId = ParamUtil.getLong(renderRequest, INSTANCE_ID);
+		definitionName = ParamUtil.getString(renderRequest, DEFINITION_NAME);
+		definitionVersion = ParamUtil.getString(
+			renderRequest, DEFINITION_VERSION);
+		hideEndedTasks = ParamUtil.getBoolean(renderRequest, HIDE_ENDED_TASKS);
 	}
 
 	public long getDefinitionId() {

@@ -85,19 +85,19 @@ public class ViewPageAction extends PortletAction {
 			getForward(renderRequest, "portlet.wiki.view_page"));
 	}
 
-	protected void getNode(RenderRequest req) throws Exception {
-		ActionUtil.getNode(req);
+	protected void getNode(RenderRequest renderRequest) throws Exception {
+		ActionUtil.getNode(renderRequest);
 
-		WikiNode node = (WikiNode)req.getAttribute(WebKeys.WIKI_NODE);
+		WikiNode node = (WikiNode)renderRequest.getAttribute(WebKeys.WIKI_NODE);
 
 		if (node != null) {
 			return;
 		}
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		List<WikiNode> nodes = WikiUtil.getNodes(req);
+		List<WikiNode> nodes = WikiUtil.getNodes(renderRequest);
 
 		if (nodes.size() == 0) {
 			String nodeName = PropsUtil.get(PropsKeys.WIKI_INITIAL_NODE_NAME);
@@ -126,7 +126,7 @@ public class ViewPageAction extends PortletAction {
 			}
 		}
 
-		req.setAttribute(WebKeys.WIKI_NODE, node);
+		renderRequest.setAttribute(WebKeys.WIKI_NODE, node);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {

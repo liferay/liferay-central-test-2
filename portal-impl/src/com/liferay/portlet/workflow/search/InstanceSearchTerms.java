@@ -36,18 +36,19 @@ import javax.portlet.RenderRequest;
  */
 public class InstanceSearchTerms extends InstanceDisplayTerms {
 
-	public InstanceSearchTerms(RenderRequest req) {
-		super(req);
+	public InstanceSearchTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
-		definitionId = ParamUtil.getLong(req, DEFINITION_ID);
+		definitionId = ParamUtil.getLong(renderRequest, DEFINITION_ID);
 		definitionName = DAOParamUtil.getLike(
-			req, DEFINITION_NAME, StringPool.PERCENT);
-		definitionVersion = ParamUtil.getString(req, DEFINITION_VERSION);
-		startDateGT = DAOParamUtil.getISODate(req, START_DATE_GT);
-		startDateLT = DAOParamUtil.getISODate(req, START_DATE_LT);
-		endDateGT = DAOParamUtil.getISODate(req, END_DATE_GT);
-		endDateLT = DAOParamUtil.getISODate(req, END_DATE_LT);
-		hideEndedTasks = ParamUtil.getBoolean(req, HIDE_ENDED_TASKS);
+			renderRequest, DEFINITION_NAME, StringPool.PERCENT);
+		definitionVersion = ParamUtil.getString(
+			renderRequest, DEFINITION_VERSION);
+		startDateGT = DAOParamUtil.getISODate(renderRequest, START_DATE_GT);
+		startDateLT = DAOParamUtil.getISODate(renderRequest, START_DATE_LT);
+		endDateGT = DAOParamUtil.getISODate(renderRequest, END_DATE_GT);
+		endDateLT = DAOParamUtil.getISODate(renderRequest, END_DATE_LT);
+		hideEndedTasks = ParamUtil.getBoolean(renderRequest, HIDE_ENDED_TASKS);
 	}
 
 }

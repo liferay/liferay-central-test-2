@@ -39,8 +39,8 @@ public class RenderURLLogic extends ActionURLLogic {
 
 	public static final String CLOSE_2_TAG = "/>";
 
-	public RenderURLLogic(RenderResponse res) {
-		super(res);
+	public RenderURLLogic(RenderResponse renderResponse) {
+		super(renderResponse);
 	}
 
 	public String getOpenTag() {

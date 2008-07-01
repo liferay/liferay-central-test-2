@@ -46,15 +46,16 @@ public class TemplateDisplayTerms extends DisplayTerms {
 
 	public static final String DESCRIPTION = "description";
 
-	public TemplateDisplayTerms(RenderRequest req) {
-		super(req);
+	public TemplateDisplayTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
 		groupId = ParamUtil.getLong(
-			req, GROUP_ID, PortalUtil.getPortletGroupId(req));
-		templateId = ParamUtil.getString(req, TEMPLATE_ID);
-		structureId = ParamUtil.getString(req, STRUCTURE_ID);
-		name = ParamUtil.getString(req, NAME);
-		description = ParamUtil.getString(req, DESCRIPTION);
+			renderRequest, GROUP_ID,
+			PortalUtil.getPortletGroupId(renderRequest));
+		templateId = ParamUtil.getString(renderRequest, TEMPLATE_ID);
+		structureId = ParamUtil.getString(renderRequest, STRUCTURE_ID);
+		name = ParamUtil.getString(renderRequest, NAME);
+		description = ParamUtil.getString(renderRequest, DESCRIPTION);
 	}
 
 	public long getGroupId() {

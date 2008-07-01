@@ -79,36 +79,42 @@ public class PHPPortlet extends GenericPortlet {
 		}
 	}
 
-	public void doDispatch(RenderRequest req, RenderResponse res)
+	public void doDispatch(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		String phpUri = req.getParameter(_PHP_URI_PARAM);
+		String phpUri = renderRequest.getParameter(_PHP_URI_PARAM);
 
 		if (phpUri != null) {
-			processPHP(phpUri, req, res);
+			processPHP(phpUri, renderRequest, renderResponse);
 		}
 		else {
-			super.doDispatch(req, res);
+			super.doDispatch(renderRequest, renderResponse);
 		}
 	}
 
-	public void doEdit(RenderRequest req, RenderResponse res)
+	public void doEdit(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		if (req.getPreferences() == null) {
-			super.doEdit(req, res);
+		if (renderRequest.getPreferences() == null) {
+			super.doEdit(renderRequest, renderResponse);
 		}
 		else {
-			processPHP(editUri, req, res);
+			processPHP(editUri, renderRequest, renderResponse);
 		}
 	}
 
-	public void doHelp(RenderRequest req, RenderResponse res) {
-		processPHP(helpUri, req, res);
+	public void doHelp(
+		RenderRequest renderRequest, RenderResponse renderResponse) {
+
+		processPHP(helpUri, renderRequest, renderResponse);
 	}
 
-	public void doView(RenderRequest req, RenderResponse res) {
-		processPHP(viewUri, req, res);
+	public void doView(
+		RenderRequest renderRequest, RenderResponse renderResponse) {
+
+		processPHP(viewUri, renderRequest, renderResponse);
 	}
 
 	public void processAction(ActionRequest req, ActionResponse res) {

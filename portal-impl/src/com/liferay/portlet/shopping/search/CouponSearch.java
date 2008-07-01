@@ -23,6 +23,7 @@
 package com.liferay.portlet.shopping.search;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
+import com.liferay.portlet.shopping.model.ShoppingCoupon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ import javax.portlet.RenderRequest;
  * @author Brian Wing Shun Chan
  *
  */
-public class CouponSearch extends SearchContainer {
+public class CouponSearch extends SearchContainer<ShoppingCoupon> {
 
 	static List<String> headerNames = new ArrayList<String>();
 
@@ -51,10 +52,11 @@ public class CouponSearch extends SearchContainer {
 	public static final String EMPTY_RESULTS_MESSAGE =
 		"no-coupons-were-found";
 
-	public CouponSearch(RenderRequest req, PortletURL iteratorURL) {
-		super(req, new CouponDisplayTerms(req), new CouponSearchTerms(req),
-			  DEFAULT_CUR_PARAM, DEFAULT_DELTA, iteratorURL, headerNames,
-			  EMPTY_RESULTS_MESSAGE);
+	public CouponSearch(RenderRequest renderRequest, PortletURL iteratorURL) {
+		super(
+			renderRequest, new CouponDisplayTerms(renderRequest),
+			new CouponSearchTerms(renderRequest), DEFAULT_CUR_PARAM,
+			DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
 		CouponDisplayTerms displayTerms =
 			(CouponDisplayTerms)getDisplayTerms();

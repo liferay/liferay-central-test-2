@@ -36,21 +36,22 @@ import javax.portlet.RenderRequest;
  */
 public class TaskSearchTerms extends TaskDisplayTerms {
 
-	public TaskSearchTerms(RenderRequest req) {
-		super(req);
+	public TaskSearchTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
-		instanceId = ParamUtil.getLong(req, INSTANCE_ID);
-		taskName = DAOParamUtil.getLike(req, TASK_NAME, StringPool.PERCENT);
+		instanceId = ParamUtil.getLong(renderRequest, INSTANCE_ID);
+		taskName = DAOParamUtil.getLike(
+			renderRequest, TASK_NAME, StringPool.PERCENT);
 		definitionName = DAOParamUtil.getLike(
-			req, DEFINITION_NAME, StringPool.PERCENT);
-		assignedTo = ParamUtil.getString(req, ASSIGNED_TO);
-		createDateGT = DAOParamUtil.getISODate(req, CREATE_DATE_GT);
-		createDateLT = DAOParamUtil.getISODate(req, CREATE_DATE_LT);
-		startDateGT = DAOParamUtil.getISODate(req, START_DATE_GT);
-		startDateLT = DAOParamUtil.getISODate(req, START_DATE_LT);
-		endDateGT = DAOParamUtil.getISODate(req, END_DATE_GT);
-		endDateLT = DAOParamUtil.getISODate(req, END_DATE_LT);
-		hideEndedTasks = ParamUtil.getBoolean(req, HIDE_ENDED_TASKS);
+			renderRequest, DEFINITION_NAME, StringPool.PERCENT);
+		assignedTo = ParamUtil.getString(renderRequest, ASSIGNED_TO);
+		createDateGT = DAOParamUtil.getISODate(renderRequest, CREATE_DATE_GT);
+		createDateLT = DAOParamUtil.getISODate(renderRequest, CREATE_DATE_LT);
+		startDateGT = DAOParamUtil.getISODate(renderRequest, START_DATE_GT);
+		startDateLT = DAOParamUtil.getISODate(renderRequest, START_DATE_LT);
+		endDateGT = DAOParamUtil.getISODate(renderRequest, END_DATE_GT);
+		endDateLT = DAOParamUtil.getISODate(renderRequest, END_DATE_LT);
+		hideEndedTasks = ParamUtil.getBoolean(renderRequest, HIDE_ENDED_TASKS);
 	}
 
 }

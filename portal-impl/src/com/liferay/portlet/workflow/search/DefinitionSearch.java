@@ -23,6 +23,7 @@
 package com.liferay.portlet.workflow.search;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
+import com.liferay.portlet.workflow.model.WorkflowDefinition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ import javax.portlet.RenderRequest;
  * @author Brian Wing Shun Chan
  *
  */
-public class DefinitionSearch extends SearchContainer {
+public class DefinitionSearch extends SearchContainer<WorkflowDefinition> {
 
 	static List<String> headerNames = new ArrayList<String>();
 
@@ -49,10 +50,13 @@ public class DefinitionSearch extends SearchContainer {
 	public static final String EMPTY_RESULTS_MESSAGE =
 		"no-definitions-were-found";
 
-	public DefinitionSearch(RenderRequest req, PortletURL iteratorURL) {
-		super(req, new DefinitionDisplayTerms(req),
-			  new DefinitionSearchTerms(req), DEFAULT_CUR_PARAM, DEFAULT_DELTA,
-			  iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
+	public DefinitionSearch(
+		RenderRequest renderRequest, PortletURL iteratorURL) {
+
+		super(
+			renderRequest, new DefinitionDisplayTerms(renderRequest),
+			new DefinitionSearchTerms(renderRequest), DEFAULT_CUR_PARAM,
+			DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
 		DefinitionDisplayTerms displayTerms =
 			(DefinitionDisplayTerms)getDisplayTerms();

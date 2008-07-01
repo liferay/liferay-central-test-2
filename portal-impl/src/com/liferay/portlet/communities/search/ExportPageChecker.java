@@ -34,22 +34,24 @@ import javax.portlet.RenderResponse;
  */
 public class ExportPageChecker extends RowChecker {
 
-	public ExportPageChecker(RenderResponse res) {
-		super(res);
+	public ExportPageChecker(RenderResponse renderResponse) {
+		super(renderResponse);
 	}
 
 	public ExportPageChecker(
-		RenderResponse res, String align, String valign, String formName,
-		String allRowsId, String rowId) {
-
-		super(res, align, valign, COLSPAN, formName, allRowsId, rowId);
-	}
-
-	public ExportPageChecker(
-		RenderResponse res, String align, String valign, int colspan,
+		RenderResponse renderResponse, String align, String valign,
 		String formName, String allRowsId, String rowId) {
 
-		super(res, align, valign, colspan, formName, allRowsId, rowId);
+		super(
+			renderResponse, align, valign, COLSPAN, formName, allRowsId, rowId);
+	}
+
+	public ExportPageChecker(
+		RenderResponse renderResponse, String align, String valign, int colspan,
+		String formName, String allRowsId, String rowId) {
+
+		super(
+			renderResponse, align, valign, colspan, formName, allRowsId, rowId);
 	}
 
 	public boolean isChecked(Object obj) {

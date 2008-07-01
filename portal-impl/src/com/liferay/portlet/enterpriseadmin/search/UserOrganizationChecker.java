@@ -41,9 +41,9 @@ import org.apache.commons.logging.LogFactory;
 public class UserOrganizationChecker extends RowChecker {
 
 	public UserOrganizationChecker(
-		RenderResponse res, Organization organization) {
+		RenderResponse renderResponse, Organization organization) {
 
-		super(res);
+		super(renderResponse);
 
 		_organization = organization;
 	}

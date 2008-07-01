@@ -56,91 +56,104 @@ import javax.servlet.ServletException;
  */
 public class StrutsPortlet extends LiferayPortlet {
 
-	public void doAbout(RenderRequest req, RenderResponse res)
+	public void doAbout(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		req.setAttribute(WebKeys.PORTLET_STRUTS_ACTION, aboutAction);
+		renderRequest.setAttribute(WebKeys.PORTLET_STRUTS_ACTION, aboutAction);
 
-		include(req, res);
+		include(renderRequest, renderResponse);
 	}
 
-	public void doConfig(RenderRequest req, RenderResponse res)
+	public void doConfig(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		req.setAttribute(WebKeys.PORTLET_STRUTS_ACTION, configAction);
+		renderRequest.setAttribute(WebKeys.PORTLET_STRUTS_ACTION, configAction);
 
-		include(req, res);
+		include(renderRequest, renderResponse);
 	}
 
-	public void doEdit(RenderRequest req, RenderResponse res)
+	public void doEdit(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		if (req.getPreferences() == null) {
-			super.doEdit(req, res);
+		if (renderRequest.getPreferences() == null) {
+			super.doEdit(renderRequest, renderResponse);
 		}
 		else {
-			req.setAttribute(WebKeys.PORTLET_STRUTS_ACTION, editAction);
+			renderRequest.setAttribute(
+				WebKeys.PORTLET_STRUTS_ACTION, editAction);
 
-			include(req, res);
+			include(renderRequest, renderResponse);
 		}
 	}
 
-	public void doEditDefaults(RenderRequest req, RenderResponse res)
+	public void doEditDefaults(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		if (req.getPreferences() == null) {
-			super.doEdit(req, res);
-		}
-		else {
-			req.setAttribute(WebKeys.PORTLET_STRUTS_ACTION, editDefaultsAction);
-
-			include(req, res);
-		}
-	}
-
-	public void doEditGuest(RenderRequest req, RenderResponse res)
-		throws IOException, PortletException {
-
-		if (req.getPreferences() == null) {
-			super.doEdit(req, res);
+		if (renderRequest.getPreferences() == null) {
+			super.doEdit(renderRequest, renderResponse);
 		}
 		else {
-			req.setAttribute(WebKeys.PORTLET_STRUTS_ACTION, editGuestAction);
+			renderRequest.setAttribute(
+				WebKeys.PORTLET_STRUTS_ACTION, editDefaultsAction);
 
-			include(req, res);
+			include(renderRequest, renderResponse);
 		}
 	}
 
-	public void doHelp(RenderRequest req, RenderResponse res)
+	public void doEditGuest(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		req.setAttribute(WebKeys.PORTLET_STRUTS_ACTION, helpAction);
+		if (renderRequest.getPreferences() == null) {
+			super.doEdit(renderRequest, renderResponse);
+		}
+		else {
+			renderRequest.setAttribute(
+				WebKeys.PORTLET_STRUTS_ACTION, editGuestAction);
 
-		include(req, res);
+			include(renderRequest, renderResponse);
+		}
 	}
 
-	public void doPreview(RenderRequest req, RenderResponse res)
+	public void doHelp(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		req.setAttribute(WebKeys.PORTLET_STRUTS_ACTION, previewAction);
+		renderRequest.setAttribute(WebKeys.PORTLET_STRUTS_ACTION, helpAction);
 
-		include(req, res);
+		include(renderRequest, renderResponse);
 	}
 
-	public void doPrint(RenderRequest req, RenderResponse res)
+	public void doPreview(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		req.setAttribute(WebKeys.PORTLET_STRUTS_ACTION, printAction);
+		renderRequest.setAttribute(
+			WebKeys.PORTLET_STRUTS_ACTION, previewAction);
 
-		include(req, res);
+		include(renderRequest, renderResponse);
 	}
 
-	public void doView(RenderRequest req, RenderResponse res)
+	public void doPrint(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		req.setAttribute(WebKeys.PORTLET_STRUTS_ACTION, viewAction);
+		renderRequest.setAttribute(WebKeys.PORTLET_STRUTS_ACTION, printAction);
 
-		include(req, res);
+		include(renderRequest, renderResponse);
+	}
+
+	public void doView(
+			RenderRequest renderRequest, RenderResponse renderResponse)
+		throws IOException, PortletException {
+
+		renderRequest.setAttribute(WebKeys.PORTLET_STRUTS_ACTION, viewAction);
+
+		include(renderRequest, renderResponse);
 	}
 
 	public void init(PortletConfig portletConfig) throws PortletException {
@@ -222,7 +235,8 @@ public class StrutsPortlet extends LiferayPortlet {
 		}
 	}
 
-	protected void include(RenderRequest req, RenderResponse res)
+	protected void include(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
 		// Call render of com.liferay.portal.struts.PortletAction
@@ -230,20 +244,20 @@ public class StrutsPortlet extends LiferayPortlet {
 		Map<String, Object> strutsAttributes = null;
 
 		if (_portletConfig.isWARFile()) {
-			strutsAttributes =
-				StrutsUtil.removeStrutsAttributes(getPortletContext(), req);
+			strutsAttributes = StrutsUtil.removeStrutsAttributes(
+				getPortletContext(), renderRequest);
 		}
 
 		PermissionCheckerImpl permissionChecker =
 			(PermissionCheckerImpl)PermissionThreadLocal.getPermissionChecker();
 
 		try {
-			permissionChecker.setValues(req);
+			permissionChecker.setValues(renderRequest);
 
 			PortletRequestProcessor processor =
-				_getPortletRequestProcessor(req);
+				_getPortletRequestProcessor(renderRequest);
 
-			processor.process(req, res);
+			processor.process(renderRequest, renderResponse);
 		}
 		catch (IOException ioe) {
 			throw ioe;
@@ -255,12 +269,12 @@ public class StrutsPortlet extends LiferayPortlet {
 			permissionChecker.resetValues();
 
 			if (_portletConfig.isWARFile()) {
-				StrutsUtil.setStrutsAttributes(req, strutsAttributes);
+				StrutsUtil.setStrutsAttributes(renderRequest, strutsAttributes);
 			}
 		}
 
 		if (copyRequestParameters) {
-			PortalUtil.clearRequestParameters(req);
+			PortalUtil.clearRequestParameters(renderRequest);
 		}
 	}
 

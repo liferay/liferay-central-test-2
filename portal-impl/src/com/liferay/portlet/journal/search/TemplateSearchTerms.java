@@ -36,15 +36,16 @@ import javax.portlet.RenderRequest;
  */
 public class TemplateSearchTerms extends TemplateDisplayTerms {
 
-	public TemplateSearchTerms(RenderRequest req) {
-		super(req);
+	public TemplateSearchTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
 		groupId = ParamUtil.getLong(
-			req, GROUP_ID, PortalUtil.getPortletGroupId(req));
-		templateId = DAOParamUtil.getLike(req, TEMPLATE_ID);
-		structureId = DAOParamUtil.getString(req, STRUCTURE_ID);
-		name = DAOParamUtil.getLike(req, NAME);
-		description = DAOParamUtil.getLike(req, DESCRIPTION);
+			renderRequest, GROUP_ID,
+			PortalUtil.getPortletGroupId(renderRequest));
+		templateId = DAOParamUtil.getLike(renderRequest, TEMPLATE_ID);
+		structureId = DAOParamUtil.getString(renderRequest, STRUCTURE_ID);
+		name = DAOParamUtil.getLike(renderRequest, NAME);
+		description = DAOParamUtil.getLike(renderRequest, DESCRIPTION);
 	}
 
 	public void setStructureId(String structureId) {

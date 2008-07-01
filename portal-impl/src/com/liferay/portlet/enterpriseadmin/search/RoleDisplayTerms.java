@@ -42,12 +42,12 @@ public class RoleDisplayTerms extends DisplayTerms {
 
 	public static final String TYPE = "type";
 
-	public RoleDisplayTerms(RenderRequest req) {
-		super(req);
+	public RoleDisplayTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
-		name = ParamUtil.getString(req, NAME);
-		description = ParamUtil.getString(req, DESCRIPTION);
-		type = ParamUtil.getInteger(req, TYPE);
+		name = ParamUtil.getString(renderRequest, NAME);
+		description = ParamUtil.getString(renderRequest, DESCRIPTION);
+		type = ParamUtil.getInteger(renderRequest, TYPE);
 	}
 
 	public String getName() {

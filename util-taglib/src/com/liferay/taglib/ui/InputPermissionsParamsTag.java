@@ -33,7 +33,7 @@ import java.util.List;
 
 import javax.portlet.RenderResponse;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
@@ -47,12 +47,14 @@ public class InputPermissionsParamsTag extends TagSupport {
 
 	public int doEndTag() throws JspException {
 		try {
-			ServletRequest req = pageContext.getRequest();
+			HttpServletRequest request =
+				(HttpServletRequest)pageContext.getRequest();
 
-			RenderResponse res = (RenderResponse)req.getAttribute(
-				JavaConstants.JAVAX_PORTLET_RESPONSE);
+			RenderResponse renderResponse =
+				(RenderResponse)request.getAttribute(
+					JavaConstants.JAVAX_PORTLET_RESPONSE);
 
-			Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+			Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
 
 			Group group = layout.getGroup();
 
@@ -86,7 +88,7 @@ public class InputPermissionsParamsTag extends TagSupport {
 				if (group.isCommunity() || group.isOrganization()) {
 					if (communityChecked) {
 						sb.append(StringPool.AMPERSAND);
-						sb.append(res.getNamespace());
+						sb.append(renderResponse.getNamespace());
 						sb.append("communityPermissions=");
 						sb.append(action);
 					}
@@ -94,7 +96,7 @@ public class InputPermissionsParamsTag extends TagSupport {
 
 				if (guestChecked) {
 					sb.append(StringPool.AMPERSAND);
-					sb.append(res.getNamespace());
+					sb.append(renderResponse.getNamespace());
 					sb.append("guestPermissions=");
 					sb.append(action);
 				}

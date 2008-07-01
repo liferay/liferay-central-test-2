@@ -53,7 +53,7 @@ public class DLUtil {
 
 	public static String getBreadcrumbs(
 			long folderId, String name, PageContext pageContext,
-			RenderRequest req, RenderResponse res)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		if ((folderId > 0) && Validator.isNotNull(name)) {
@@ -61,7 +61,8 @@ public class DLUtil {
 				folderId, name);
 
 			return getBreadcrumbs(
-				fileEntry.getFolder(), fileEntry, pageContext, req, res);
+				fileEntry.getFolder(), fileEntry, pageContext, renderRequest,
+				renderResponse);
 		}
 		else {
 			DLFolder folder = null;
@@ -72,26 +73,28 @@ public class DLUtil {
 			catch (Exception e) {
 			}
 
-			return getBreadcrumbs(folder, null, pageContext, req, res);
+			return getBreadcrumbs(
+				folder, null, pageContext, renderRequest, renderResponse);
 		}
 	}
 
 	public static String getBreadcrumbs(
 			DLFolder folder, DLFileEntry fileEntry, PageContext pageContext,
-			RenderRequest req, RenderResponse res)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		String strutsAction = ParamUtil.getString(req, "struts_action");
+		String strutsAction = ParamUtil.getString(
+			renderRequest, "struts_action");
 
-		long groupId = ParamUtil.getLong(req, "groupId");
+		long groupId = ParamUtil.getLong(renderRequest, "groupId");
 
 		if ((fileEntry != null) && (folder == null)) {
 			folder = fileEntry.getFolder();
 		}
 
-		PortletURL foldersURL = res.createRenderURL();
+		PortletURL foldersURL = renderResponse.createRenderURL();
 
-		WindowState windowState = req.getWindowState();
+		WindowState windowState = renderRequest.getWindowState();
 
 		if (windowState.equals(LiferayWindowState.POP_UP)) {
 			foldersURL.setWindowState(LiferayWindowState.POP_UP);
@@ -119,7 +122,7 @@ public class DLUtil {
 			for (int i = 0;; i++) {
 				folder = folder.toEscapedModel();
 
-				PortletURL portletURL = res.createRenderURL();
+				PortletURL portletURL = renderResponse.createRenderURL();
 
 				if (windowState.equals(LiferayWindowState.POP_UP)) {
 					portletURL.setWindowState(LiferayWindowState.POP_UP);
@@ -163,7 +166,7 @@ public class DLUtil {
 		if (fileEntry != null) {
 			fileEntry = fileEntry.toEscapedModel();
 
-			PortletURL fileEntryURL = res.createRenderURL();
+			PortletURL fileEntryURL = renderResponse.createRenderURL();
 
 			fileEntryURL.setWindowState(WindowState.MAXIMIZED);
 

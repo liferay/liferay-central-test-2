@@ -191,11 +191,11 @@ public class PortletRequestUtil {
 	}
 
 	private static void _renderResponseToXML(
-		RenderResponse res, Element reqEl) {
+		RenderResponse renderResponse, Element reqEl) {
 
-		DocUtil.add(reqEl, "portlet-namespace", res.getNamespace());
+		DocUtil.add(reqEl, "portlet-namespace", renderResponse.getNamespace());
 
-		PortletURL url = res.createRenderURL();
+		PortletURL url = renderResponse.createRenderURL();
 
 		DocUtil.add(reqEl, "render-url", url);
 

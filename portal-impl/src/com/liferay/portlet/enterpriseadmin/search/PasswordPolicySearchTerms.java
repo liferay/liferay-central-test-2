@@ -34,10 +34,10 @@ import javax.portlet.RenderRequest;
  */
 public class PasswordPolicySearchTerms extends PasswordPolicyDisplayTerms {
 
-	public PasswordPolicySearchTerms(RenderRequest req) {
-		super(req);
+	public PasswordPolicySearchTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
-		name = DAOParamUtil.getLike(req, NAME);
+		name = DAOParamUtil.getLike(renderRequest, NAME);
 	}
 
 }

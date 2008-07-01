@@ -37,8 +37,10 @@ import javax.portlet.filter.RenderRequestWrapper;
  */
 public class ProtectedRenderRequest extends RenderRequestWrapper {
 
-	public ProtectedRenderRequest(RenderRequest req, String remoteUser) {
-		super(req);
+	public ProtectedRenderRequest(
+		RenderRequest renderRequest, String remoteUser) {
+
+		super(renderRequest);
 
 		_remoteUser = remoteUser;
 

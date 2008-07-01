@@ -23,6 +23,7 @@
 package com.liferay.portlet.journal.search;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
+import com.liferay.portlet.journal.model.JournalFeed;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ import javax.portlet.RenderRequest;
  * @author Raymond Augé
  *
  */
-public class FeedSearch extends SearchContainer {
+public class FeedSearch extends SearchContainer<JournalFeed> {
 
 	static List<String> headerNames = new ArrayList<String>();
 
@@ -47,11 +48,11 @@ public class FeedSearch extends SearchContainer {
 
 	public static final String EMPTY_RESULTS_MESSAGE = "no-feeds-were-found";
 
-	public FeedSearch(RenderRequest req, PortletURL iteratorURL) {
+	public FeedSearch(RenderRequest renderRequest, PortletURL iteratorURL) {
 		super(
-			req, new FeedDisplayTerms(req), new FeedSearchTerms(req),
-			DEFAULT_CUR_PARAM, DEFAULT_DELTA, iteratorURL, headerNames,
-			EMPTY_RESULTS_MESSAGE);
+			renderRequest, new FeedDisplayTerms(renderRequest),
+			new FeedSearchTerms(renderRequest), DEFAULT_CUR_PARAM,
+			DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
 		FeedDisplayTerms displayTerms = (FeedDisplayTerms)getDisplayTerms();
 

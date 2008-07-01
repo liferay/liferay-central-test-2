@@ -53,18 +53,18 @@ public class UserDisplayTerms extends DisplayTerms {
 
 	public static final String USER_GROUP_ID = "userGroupId";
 
-	public UserDisplayTerms(RenderRequest req) {
-		super(req);
+	public UserDisplayTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
-		firstName = ParamUtil.getString(req, FIRST_NAME);
-		middleName = ParamUtil.getString(req, MIDDLE_NAME);
-		lastName = ParamUtil.getString(req, LAST_NAME);
-		screenName = ParamUtil.getString(req, SCREEN_NAME);
-		emailAddress = ParamUtil.getString(req, EMAIL_ADDRESS);
-		active = ParamUtil.getBoolean(req, ACTIVE, true);
-		organizationId = ParamUtil.getLong(req, ORGANIZATION_ID);
-		roleId = ParamUtil.getLong(req, ROLE_ID);
-		userGroupId = ParamUtil.getLong(req, USER_GROUP_ID);
+		firstName = ParamUtil.getString(renderRequest, FIRST_NAME);
+		middleName = ParamUtil.getString(renderRequest, MIDDLE_NAME);
+		lastName = ParamUtil.getString(renderRequest, LAST_NAME);
+		screenName = ParamUtil.getString(renderRequest, SCREEN_NAME);
+		emailAddress = ParamUtil.getString(renderRequest, EMAIL_ADDRESS);
+		active = ParamUtil.getBoolean(renderRequest, ACTIVE, true);
+		organizationId = ParamUtil.getLong(renderRequest, ORGANIZATION_ID);
+		roleId = ParamUtil.getLong(renderRequest, ROLE_ID);
+		userGroupId = ParamUtil.getLong(renderRequest, USER_GROUP_ID);
 	}
 
 	public String getFirstName() {

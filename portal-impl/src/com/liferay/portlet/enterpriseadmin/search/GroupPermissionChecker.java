@@ -41,10 +41,11 @@ import org.apache.commons.logging.LogFactory;
  */
 public class GroupPermissionChecker extends RowChecker {
 
-	public GroupPermissionChecker(RenderResponse res, Role role,
-								  String resourceName, String actionId) {
+	public GroupPermissionChecker(
+		RenderResponse renderResponse, Role role, String resourceName,
+		String actionId) {
 
-		super(res);
+		super(renderResponse);
 
 		_role = role;
 		_resourceName = resourceName;

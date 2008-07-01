@@ -247,10 +247,10 @@ public class WikiUtil {
 		return sb.toString();
 	}
 
-	public static List<WikiNode> getNodes(RenderRequest req)
+	public static List<WikiNode> getNodes(RenderRequest renderRequest)
 		throws PortalException, SystemException {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		long groupId = themeDisplay.getLayout().getGroupId();
@@ -259,9 +259,10 @@ public class WikiUtil {
 			WikiNodeLocalServiceUtil.getNodes(groupId), "name");
 
 		String[] visibleNodes = StringUtil.split(
-			req.getPreferences().getValue("visible-nodes", allNodes));
+			renderRequest.getPreferences().getValue("visible-nodes", allNodes));
 		String[] hiddenNodes = StringUtil.split(
-			req.getPreferences().getValue("hidden-nodes", StringPool.BLANK));
+			renderRequest.getPreferences().getValue(
+				"hidden-nodes", StringPool.BLANK));
 
 		return getNodes(
 			groupId, visibleNodes, hiddenNodes,

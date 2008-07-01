@@ -52,17 +52,18 @@ public class OrganizationDisplayTerms extends DisplayTerms {
 
 	public static final String PARENT_ORGANIZATION_ID = "parentOrganizationId";
 
-	public OrganizationDisplayTerms(RenderRequest req) {
-		super(req);
+	public OrganizationDisplayTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
-		type = ParamUtil.getInteger(req, TYPE);
-		name = ParamUtil.getString(req, NAME);
-		street = ParamUtil.getString(req, STREET);
-		city = ParamUtil.getString(req, CITY);
-		zip = ParamUtil.getString(req, ZIP);
-		regionId = ParamUtil.getLong(req, REGION_ID);
-		countryId = ParamUtil.getLong(req, COUNTRY_ID);
-		parentOrganizationId = ParamUtil.getLong(req, PARENT_ORGANIZATION_ID);
+		type = ParamUtil.getInteger(renderRequest, TYPE);
+		name = ParamUtil.getString(renderRequest, NAME);
+		street = ParamUtil.getString(renderRequest, STREET);
+		city = ParamUtil.getString(renderRequest, CITY);
+		zip = ParamUtil.getString(renderRequest, ZIP);
+		regionId = ParamUtil.getLong(renderRequest, REGION_ID);
+		countryId = ParamUtil.getLong(renderRequest, COUNTRY_ID);
+		parentOrganizationId = ParamUtil.getLong(
+			renderRequest, PARENT_ORGANIZATION_ID);
 	}
 
 	public int getType() {

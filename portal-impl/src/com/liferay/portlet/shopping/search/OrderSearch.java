@@ -23,6 +23,7 @@
 package com.liferay.portlet.shopping.search;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
+import com.liferay.portlet.shopping.model.ShoppingOrder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ import javax.portlet.RenderRequest;
  * @author Brian Wing Shun Chan
  *
  */
-public class OrderSearch extends SearchContainer {
+public class OrderSearch extends SearchContainer<ShoppingOrder> {
 
 	static List<String> headerNames = new ArrayList<String>();
 
@@ -50,10 +51,11 @@ public class OrderSearch extends SearchContainer {
 	public static final String EMPTY_RESULTS_MESSAGE =
 		"no-orders-were-found";
 
-	public OrderSearch(RenderRequest req, PortletURL iteratorURL) {
-		super(req, new OrderDisplayTerms(req), new OrderSearchTerms(req),
-			  DEFAULT_CUR_PARAM, DEFAULT_DELTA, iteratorURL, headerNames,
-			  EMPTY_RESULTS_MESSAGE);
+	public OrderSearch(RenderRequest renderRequest, PortletURL iteratorURL) {
+		super(
+			renderRequest, new OrderDisplayTerms(renderRequest),
+			new OrderSearchTerms(renderRequest), DEFAULT_CUR_PARAM,
+			DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
 		OrderDisplayTerms displayTerms =
 			(OrderDisplayTerms)getDisplayTerms();

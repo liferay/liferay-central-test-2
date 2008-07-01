@@ -34,11 +34,11 @@ import javax.portlet.RenderRequest;
  */
 public class UserGroupSearchTerms extends UserGroupDisplayTerms {
 
-	public UserGroupSearchTerms(RenderRequest req) {
-		super(req);
+	public UserGroupSearchTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
-		name = DAOParamUtil.getLike(req, NAME);
-		description = DAOParamUtil.getLike(req, DESCRIPTION);
+		name = DAOParamUtil.getLike(renderRequest, NAME);
+		description = DAOParamUtil.getLike(renderRequest, DESCRIPTION);
 	}
 
 }

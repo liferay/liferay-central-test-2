@@ -41,10 +41,10 @@ import org.apache.commons.logging.LogFactory;
  */
 public class OrganizationPasswordPolicyChecker extends RowChecker {
 
-	public OrganizationPasswordPolicyChecker(RenderResponse res,
-											 PasswordPolicy passwordPolicy) {
+	public OrganizationPasswordPolicyChecker(
+		RenderResponse renderResponse, PasswordPolicy passwordPolicy) {
 
-		super(res);
+		super(renderResponse);
 
 		_passwordPolicy = passwordPolicy;
 	}

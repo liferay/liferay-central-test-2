@@ -35,12 +35,12 @@ import javax.portlet.RenderRequest;
  */
 public class CouponSearchTerms extends CouponDisplayTerms {
 
-	public CouponSearchTerms(RenderRequest req) {
-		super(req);
+	public CouponSearchTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
-		code = DAOParamUtil.getLike(req, CODE);
-		discountType = DAOParamUtil.getString(req, DISCOUNT_TYPE);
-		active = ParamUtil.getBoolean(req, ACTIVE, true);
+		code = DAOParamUtil.getLike(renderRequest, CODE);
+		discountType = DAOParamUtil.getString(renderRequest, DISCOUNT_TYPE);
+		active = ParamUtil.getBoolean(renderRequest, ACTIVE, true);
 	}
 
 }

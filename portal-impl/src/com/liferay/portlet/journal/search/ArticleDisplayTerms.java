@@ -63,20 +63,21 @@ public class ArticleDisplayTerms extends DisplayTerms {
 
 	public static final String STATUS = "status";
 
-	public ArticleDisplayTerms(RenderRequest req) {
-		super(req);
+	public ArticleDisplayTerms(RenderRequest renderRequest) {
+		super(renderRequest);
 
 		groupId = ParamUtil.getLong(
-			req, GROUP_ID, PortalUtil.getPortletGroupId(req));
-		articleId = ParamUtil.getString(req, ARTICLE_ID);
-		version = ParamUtil.getDouble(req, VERSION);
-		title = ParamUtil.getString(req, TITLE);
-		description = ParamUtil.getString(req, DESCRIPTION);
-		content = ParamUtil.getString(req, CONTENT);
-		type = ParamUtil.getString(req, TYPE);
-		structureId = ParamUtil.getString(req, STRUCTURE_ID);
-		templateId = ParamUtil.getString(req, TEMPLATE_ID);
-		status = ParamUtil.getString(req, STATUS);
+			renderRequest, GROUP_ID,
+			PortalUtil.getPortletGroupId(renderRequest));
+		articleId = ParamUtil.getString(renderRequest, ARTICLE_ID);
+		version = ParamUtil.getDouble(renderRequest, VERSION);
+		title = ParamUtil.getString(renderRequest, TITLE);
+		description = ParamUtil.getString(renderRequest, DESCRIPTION);
+		content = ParamUtil.getString(renderRequest, CONTENT);
+		type = ParamUtil.getString(renderRequest, TYPE);
+		structureId = ParamUtil.getString(renderRequest, STRUCTURE_ID);
+		templateId = ParamUtil.getString(renderRequest, TEMPLATE_ID);
+		status = ParamUtil.getString(renderRequest, STATUS);
 	}
 
 	public long getGroupId() {
