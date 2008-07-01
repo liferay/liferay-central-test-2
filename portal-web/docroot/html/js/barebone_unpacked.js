@@ -6570,11 +6570,7 @@ Liferay.Portal.ToolTip = {
 	_window: {}
 };
 Liferay.Portlet = {
-	fn: {},
-	fnAll: [],
-	fnLast: [],
-	ajaxList: {},
-	list: {},
+	list: [],
 
 	add: function(options) {
 		var instance = this;
@@ -6681,18 +6677,9 @@ Liferay.Portlet = {
 
 			portletBound.portletId = portletId;
 
-			instance.flagAjax(portletId);
-
 			jQuery(placeHolder).hide().after(portletBound).remove();
 
 			instance.refreshLayout(portletBound);
-
-			if (Liferay.Browser.is_firefox) {
-				setTimeout("Liferay.Portlet.process(\"" + portletId + "\")", 0);
-			}
-			else {
-				instance.process(portletId);
-			}
 
 			Liferay.Util.addInputType(portletBound.id);
 
@@ -6779,14 +6766,6 @@ Liferay.Portlet = {
 		}
 	},
 
-	isAjax: function(id) {
-		return (this.ajaxList[id] == 1);
-	},
-
-	flagAjax: function(id) {
-		this.ajaxList[id] = 1;
-	},
-
 	minimize: function(portlet, el, options) {
 		var instance = this;
 
@@ -6865,10 +6844,6 @@ Liferay.Portlet = {
 					portlet.columnPos = columnPos;
 					portlet.isStatic = isStatic;
 
-					if (!instance.isAjax(portletId)) {
-						instance.process(portletId);
-					}
-
 					// Functions to run on portlet load
 
 					if (canEditTitle) {
@@ -6883,123 +6858,71 @@ Liferay.Portlet = {
 					}
 
 					if (!themeDisplay.layoutMaximized) {
-						jQuery('.portlet-configuration:first a', portlet).click(
+						jPortlet.find('.portlet-configuration:first a').click(
 							function(event) {
 								location.href = this.href + '&previewWidth=' + portlet.offsetHeight;
 								return false;
 							}
 						);
 
-						jQuery('.portlet-minimize:first a', portlet).click(
+						jPortlet.find('.portlet-minimize:first a').click(
 							function(event) {
 								instance.minimize(portlet, this);
 								return false;
 							}
 						);
 
-						jQuery('.portlet-maximize:first a', portlet).click(
+						jPortlet.find('.portlet-maximize:first a').click(
 							function(event) {
 								submitForm(document.hrefFm, this.href);
 								return false;
 							}
 						);
 
-						jQuery('.portlet-close:first a', portlet).click(
+						jPortlet.find('.portlet-close:first a').click(
 							function(event) {
 								instance.close(portlet);
 								return false;
 							}
 						);
 
-						jQuery('.portlet-refresh:first a', portlet).click(
+						jPortlet.find('.portlet-refresh:first a').click(
 							function(event) {
 								instance.refresh(portlet);
 								return false;
 							}
 						);
 
-						jQuery('.portlet-print:first a', portlet).click(
+						jPortlet.find('.portlet-print:first a').click(
 							function(event) {
 								location.href = this.href;
 								return false;
 							}
 						);
 
-						jQuery('.portlet-css:first a', portlet).click(
+						jPortlet.find('.portlet-css:first a').click(
 							function(event) {
 								Liferay.PortletCSS.init(portlet.portletId);
 							}
-						)
+						);
+					}
+
+					Liferay.trigger('portletReady', {portletId: portletId, portlet: jPortlet});
+
+					var list = instance.list;
+
+					var index = list.indexOf(portletId);
+
+					if (index > -1) {
+						list.splice(index, 1);
+					}
+
+					if (!list.length) {
+						Liferay.trigger('allPortletsReady', {portletId: portletId});
 					}
 				}
 			}
 		);
-	},
-
-	process: function(id) {
-		var status = this.list[id];
-		var count = 0;
-
-		this.list[id] = 0;
-
-		if (status == 1) {
-			this.processPortlet(id);
-			this.processAll(id);
-		}
-		else if (status == 0) {
-
-			// Already processed. Do nothing.
-
-		}
-		else {
-
-			// New portlet. Process and mark.
-
-			this.processPortlet(id);
-		}
-
-		for (var i in this.list) {
-			count += this.list[i];
-		}
-
-		if (count == 0) {
-			this.processLast(id);
-		}
-	},
-
-	processAll: function(id) {
-		for (var i = 0; i < this.fnAll.length; i++) {
-			this.fnAll[i](id, jQuery("#p_p_id_" + id + "_"));
-		}
-	},
-
-	processPortlet: function(id) {
-		if (this.fn[id]) {
-			for (var i = 0; i < this.fn[id].length; i++) {
-				this.fn[id][i](id, jQuery("#p_p_id_" + id + "_"));
-			}
-			this.fn[id] = [];
-		}
-	},
-
-	processLast: function(id) {
-		for (var i = 0; i < this.fnLast.length; i++) {
-			this.fnLast[i](id);
-		}
-		this.fnLast = [];
-	},
-
-	ready: function(arg1, arg2) {
-		if (typeof arg1 == "function") {
-			this.fnAll.push(arg1);
-		}
-		else if (typeof arg1 == "string" && typeof arg2 == "function") {
-			if (!this.fn[arg1]) {
-				this.fn[arg1] = [];
-			}
-
-			this.fn[arg1].push(arg2);
-		}
 	},
 
 	refresh: function(portlet) {
@@ -7029,21 +6952,25 @@ Liferay.Portlet = {
 	},
 
 	refreshLayout: function(portletBound) {
-	},
-
-	remove: function(id) {
-		this.ajaxList[id] = 0;
-		this.list[id] = 1;
-		this.fn[id] = [];
-	},
-
-	last: function(arg1) {
-		this.fnLast.push(arg1);
 	}
 };
 
 jQuery.fn.last = function(fn) {
-	Liferay.Portlet.last(fn);
+	Liferay.bind('allPortletsReady',
+		function(event) {
+			fn();
+		}
+	)
+};
+
+// Backwards compatability
+
+Liferay.Portlet.ready = function(fn) {
+	Liferay.bind('portletReady',
+		function(event, data) {
+			fn(data.portletId, data.portlet);
+		}
+	);
 };
 Liferay.Dock = {
 	init: function() {

@@ -339,14 +339,16 @@ Liferay.Portlet = {
 					Liferay.trigger('portletReady', {portletId: portletId, portlet: jPortlet});
 
 					var list = instance.list;
+
 					var index = list.indexOf(portletId);
+
 					if (index > -1) {
 						list.splice(index, 1);
 					}
 
 					if (!list.length) {
 						Liferay.trigger('allPortletsReady', {portletId: portletId});
-					}					
+					}
 				}
 			}
 		);
@@ -393,7 +395,7 @@ jQuery.fn.last = function(fn) {
 // Backwards compatability
 
 Liferay.Portlet.ready = function(fn) {
-	Liferay.bind('portletReady', 
+	Liferay.bind('portletReady',
 		function(event, data) {
 			fn(data.portletId, data.portlet);
 		}
