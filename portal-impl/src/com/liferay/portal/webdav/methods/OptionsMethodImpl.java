@@ -35,8 +35,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class OptionsMethodImpl implements Method {
 
-	public int process(WebDAVRequest webDavReq) {
-		HttpServletResponse res = webDavReq.getHttpServletResponse();
+	public int process(WebDAVRequest webDavRequest) {
+		HttpServletResponse res = webDavRequest.getHttpServletResponse();
 
 		res.addHeader("DAV", "1");
 		res.addHeader("Allow", Method.SUPPORTED_METHODS);

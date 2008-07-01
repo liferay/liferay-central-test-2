@@ -66,13 +66,13 @@ import org.dom4j.io.SAXReader;
  */
 public class ProppatchMethodImpl extends BasePropMethodImpl {
 
-	public int process(WebDAVRequest webDavReq) throws WebDAVException {
+	public int process(WebDAVRequest webDavRequest) throws WebDAVException {
 		try {
-			HttpServletResponse res = webDavReq.getHttpServletResponse();
+			HttpServletResponse res = webDavRequest.getHttpServletResponse();
 
-			Set<Tuple> props = processInstructions(webDavReq);
+			Set<Tuple> props = processInstructions(webDavRequest);
 
-			String xml = getResponseXML(webDavReq, props);
+			String xml = getResponseXML(webDavRequest, props);
 
 			// Must set the status prior to writing the XML
 
@@ -102,12 +102,12 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 		}
 	}
 
-	protected WebDAVProps getStoredProperties(WebDAVRequest webDavReq)
+	protected WebDAVProps getStoredProperties(WebDAVRequest webDavRequest)
 		throws PortalException, SystemException {
 
-		WebDAVStorage storage = webDavReq.getWebDAVStorage();
+		WebDAVStorage storage = webDavRequest.getWebDAVStorage();
 
-		Resource resource = storage.getResource(webDavReq);
+		Resource resource = storage.getResource(webDavRequest);
 
 		WebDAVProps webDavProps = null;
 
@@ -120,21 +120,21 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 		}
 
 		webDavProps = WebDAVPropsLocalServiceUtil.getWebDAVProps(
-			webDavReq.getCompanyId(), resource.getClassName(),
+			webDavRequest.getCompanyId(), resource.getClassName(),
 			resource.getPrimaryKey());
 
 		return webDavProps;
 	}
 
-	protected Set<Tuple> processInstructions(WebDAVRequest webDavReq)
+	protected Set<Tuple> processInstructions(WebDAVRequest webDavRequest)
 		throws InvalidRequestException {
 
 		try {
 			Set<Tuple> newProps = new HashSet<Tuple>();
 
-			HttpServletRequest req = webDavReq.getHttpServletRequest();
+			HttpServletRequest req = webDavRequest.getHttpServletRequest();
 
-			WebDAVProps webDavProps = getStoredProperties(webDavReq);
+			WebDAVProps webDavProps = getStoredProperties(webDavRequest);
 
 			String xml = new String(FileUtil.getBytes(req.getInputStream()));
 

@@ -58,13 +58,14 @@ public class EditPagesAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String redirect = ParamUtil.getString(req, "redirect");
+		String redirect = ParamUtil.getString(actionRequest, "redirect");
 
-		long groupId = ParamUtil.getLong(req, "groupId");
-		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+		boolean privateLayout = ParamUtil.getBoolean(
+			actionRequest, "privateLayout");
 
 		Layout layout = null;
 
@@ -96,10 +97,11 @@ public class EditPagesAction extends PortletAction {
 				tabs1 = "private-pages";
 			}
 
-			HttpServletRequest httReq = PortalUtil.getHttpServletRequest(req);
+			HttpServletRequest request = PortalUtil.getHttpServletRequest(
+				actionRequest);
 
 			PortletURL portletURL = new PortletURLImpl(
-				httReq, PortletKeys.LAYOUT_MANAGEMENT, layout.getPlid(),
+				request, PortletKeys.LAYOUT_MANAGEMENT, layout.getPlid(),
 				PortletRequest.RENDER_PHASE);
 
 			portletURL.setWindowState(WindowState.MAXIMIZED);
@@ -111,7 +113,7 @@ public class EditPagesAction extends PortletAction {
 			portletURL.setParameter("redirect", redirect);
 			portletURL.setParameter("groupId", String.valueOf(groupId));
 
-			res.sendRedirect(portletURL.toString());
+			actionResponse.sendRedirect(portletURL.toString());
 		}
 	}
 

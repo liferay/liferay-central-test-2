@@ -35,19 +35,19 @@ import java.util.List;
  */
 public class GroupWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
-	public Resource getResource(WebDAVRequest webDavReq)
+	public Resource getResource(WebDAVRequest webDavRequest)
 		throws WebDAVException {
 
-		String path = getRootPath() + webDavReq.getPath();
+		String path = getRootPath() + webDavRequest.getPath();
 
 		return new BaseResourceImpl(
 			path, StringPool.BLANK, WebDAVUtil.getWebId(path));
 	}
 
-	public List<Resource> getResources(WebDAVRequest webDavReq) {
+	public List<Resource> getResources(WebDAVRequest webDavRequest) {
 		List<Resource> resources = new ArrayList<Resource>();
 
-		String path = getRootPath() + webDavReq.getPath();
+		String path = getRootPath() + webDavRequest.getPath();
 
 		for (String token : WebDAVUtil.getStorageTokens()) {
 			resources.add(new BaseResourceImpl(path, token, token));

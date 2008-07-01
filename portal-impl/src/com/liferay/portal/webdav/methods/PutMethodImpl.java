@@ -35,10 +35,10 @@ import com.liferay.portal.webdav.WebDAVStorage;
  */
 public class PutMethodImpl implements Method {
 
-	public int process(WebDAVRequest webDavReq) throws WebDAVException {
-		WebDAVStorage storage = webDavReq.getWebDAVStorage();
+	public int process(WebDAVRequest webDavRequest) throws WebDAVException {
+		WebDAVStorage storage = webDavRequest.getWebDAVStorage();
 
-		return storage.putResource(webDavReq);
+		return storage.putResource(webDavRequest);
 	}
 
 }

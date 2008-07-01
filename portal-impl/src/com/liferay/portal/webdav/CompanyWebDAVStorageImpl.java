@@ -41,28 +41,28 @@ import java.util.List;
  */
 public class CompanyWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
-	public Resource getResource(WebDAVRequest webDavReq)
+	public Resource getResource(WebDAVRequest webDavRequest)
 		throws WebDAVException {
 
-		String path = getRootPath() + webDavReq.getPath();
+		String path = getRootPath() + webDavRequest.getPath();
 
 		return new BaseResourceImpl(
 			path, StringPool.BLANK, WebDAVUtil.getWebId(path));
 	}
 
-	public List<Resource> getResources(WebDAVRequest webDavReq)
+	public List<Resource> getResources(WebDAVRequest webDavRequest)
 		throws WebDAVException {
 
 		try {
 			LinkedHashMap<String, Object> groupParams =
 				new LinkedHashMap<String, Object>();
 
-			groupParams.put("usersGroups", new Long(webDavReq.getUserId()));
+			groupParams.put("usersGroups", new Long(webDavRequest.getUserId()));
 
 			List<Resource> resources = new ArrayList<Resource>();
 
 			List<Group> groups = GroupLocalServiceUtil.search(
-				webDavReq.getCompanyId(), null, null, groupParams,
+				webDavRequest.getCompanyId(), null, null, groupParams,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 			for (Group group : groups) {
@@ -72,7 +72,7 @@ public class CompanyWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			}
 
 			Group group = GroupLocalServiceUtil.getUserGroup(
-				webDavReq.getCompanyId(), webDavReq.getUserId());
+				webDavRequest.getCompanyId(), webDavRequest.getUserId());
 
 			Resource resource = getResource(group);
 

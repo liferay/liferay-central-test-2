@@ -60,13 +60,13 @@ import org.dom4j.io.SAXReader;
  */
 public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 
-	public int process(WebDAVRequest webDavReq) throws WebDAVException {
+	public int process(WebDAVRequest webDavRequest) throws WebDAVException {
 		try {
-			HttpServletResponse res = webDavReq.getHttpServletResponse();
+			HttpServletResponse res = webDavRequest.getHttpServletResponse();
 
-			Set<Tuple> props = getProps(webDavReq);
+			Set<Tuple> props = getProps(webDavRequest);
 
-			String xml = getResponseXML(webDavReq, props);
+			String xml = getResponseXML(webDavRequest, props);
 
 			res.setStatus(WebDAVUtil.SC_MULTI_STATUS);
 			res.setContentType(ContentTypes.TEXT_XML_UTF8);
@@ -90,13 +90,13 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 		}
 	}
 
-	protected Set<Tuple> getProps(WebDAVRequest webDavReq)
+	protected Set<Tuple> getProps(WebDAVRequest webDavRequest)
 		throws InvalidRequestException {
 
 		try {
 			Set<Tuple> props = new HashSet<Tuple>();
 
-			HttpServletRequest req = webDavReq.getHttpServletRequest();
+			HttpServletRequest req = webDavRequest.getHttpServletRequest();
 
 			String xml = new String(FileUtil.getBytes(req.getInputStream()));
 

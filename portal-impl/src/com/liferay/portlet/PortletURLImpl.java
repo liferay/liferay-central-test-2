@@ -318,9 +318,9 @@ public class PortletURLImpl
 		}
 
 		if (_portletRequest instanceof ResourceRequest) {
-			ResourceRequest resourceReq = (ResourceRequest)_portletRequest;
+			ResourceRequest resourceRequest = (ResourceRequest)_portletRequest;
 
-			String parentCacheability = resourceReq.getCacheability();
+			String parentCacheability = resourceRequest.getCacheability();
 
 			if (parentCacheability.equals(FULL)) {
 				if (!cacheability.equals(FULL)) {

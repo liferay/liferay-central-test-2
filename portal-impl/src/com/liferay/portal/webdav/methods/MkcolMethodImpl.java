@@ -43,21 +43,21 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class MkcolMethodImpl implements Method {
 
-	public int process(WebDAVRequest webDavReq) throws WebDAVException {
-		WebDAVStorage storage = webDavReq.getWebDAVStorage();
-		HttpServletRequest req = webDavReq.getHttpServletRequest();
-		HttpServletResponse res = webDavReq.getHttpServletResponse();
-		long groupId = webDavReq.getGroupId();
+	public int process(WebDAVRequest webDavRequest) throws WebDAVException {
+		WebDAVStorage storage = webDavRequest.getWebDAVStorage();
+		HttpServletRequest req = webDavRequest.getHttpServletRequest();
+		HttpServletResponse res = webDavRequest.getHttpServletResponse();
+		long groupId = webDavRequest.getGroupId();
 
 		int statusCode = HttpServletResponse.SC_FORBIDDEN;
 
 		if (groupId != 0) {
-			Status status = storage.makeCollection(webDavReq);
+			Status status = storage.makeCollection(webDavRequest);
 
 			if (Validator.isNotNull(status.getLocation())) {
 				res.setHeader(
 					HttpHeaders.LOCATION,
-					PortalUtil.getPortalURL(req) + webDavReq.getRootPath() +
+					PortalUtil.getPortalURL(req) + webDavRequest.getRootPath() +
 						StringPool.SLASH + status.getLocation());
 			}
 

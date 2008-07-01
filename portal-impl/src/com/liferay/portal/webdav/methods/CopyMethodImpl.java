@@ -43,9 +43,9 @@ import org.apache.commons.logging.LogFactory;
  */
 public class CopyMethodImpl implements Method {
 
-	public int process(WebDAVRequest webDavReq) throws WebDAVException {
-		WebDAVStorage storage = webDavReq.getWebDAVStorage();
-		HttpServletRequest req = webDavReq.getHttpServletRequest();
+	public int process(WebDAVRequest webDavRequest) throws WebDAVException {
+		WebDAVStorage storage = webDavRequest.getWebDAVStorage();
+		HttpServletRequest req = webDavRequest.getHttpServletRequest();
 
 		String destination = WebDAVUtil.getDestination(
 			req, storage.getRootPath());
@@ -58,10 +58,11 @@ public class CopyMethodImpl implements Method {
 
 		int status = HttpServletResponse.SC_FORBIDDEN;
 
-		if ((!destination.equals(webDavReq.getPath())) &&
-			(WebDAVUtil.getGroupId(destination) == webDavReq.getGroupId())) {
+		if ((!destination.equals(webDavRequest.getPath())) &&
+			(WebDAVUtil.getGroupId(destination) ==
+				webDavRequest.getGroupId())) {
 
-			Resource resource = storage.getResource(webDavReq);
+			Resource resource = storage.getResource(webDavRequest);
 
 			if (resource == null) {
 				status = HttpServletResponse.SC_NOT_FOUND;
@@ -78,7 +79,7 @@ public class CopyMethodImpl implements Method {
 				}
 
 				status = storage.copyCollectionResource(
-					webDavReq, resource, destination, overwrite, depth);
+					webDavRequest, resource, destination, overwrite, depth);
 			}
 			else {
 				boolean overwrite = WebDAVUtil.isOverwrite(req);
@@ -90,7 +91,7 @@ public class CopyMethodImpl implements Method {
 				}
 
 				status = storage.copySimpleResource(
-					webDavReq, resource, destination, overwrite);
+					webDavRequest, resource, destination, overwrite);
 			}
 		}
 

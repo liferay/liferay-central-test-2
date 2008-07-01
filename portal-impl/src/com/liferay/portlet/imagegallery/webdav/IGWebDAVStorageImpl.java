@@ -71,7 +71,7 @@ import org.apache.commons.logging.LogFactory;
 public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 	public int copyCollectionResource(
-			WebDAVRequest webDavReq, Resource resource, String destination,
+			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite, long depth)
 		throws WebDAVException {
 
@@ -130,7 +130,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 	}
 
 	public int copySimpleResource(
-			WebDAVRequest webDavReq, Resource resource, String destination,
+			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite)
 		throws WebDAVException {
 
@@ -200,9 +200,11 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
-	public int deleteResource(WebDAVRequest webDavReq) throws WebDAVException {
+	public int deleteResource(WebDAVRequest webDavRequest)
+		throws WebDAVException {
+
 		try {
-			Resource resource = getResource(webDavReq);
+			Resource resource = getResource(webDavRequest);
 
 			if (resource == null) {
 				return HttpServletResponse.SC_NOT_FOUND;
@@ -231,32 +233,32 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
-	public Resource getResource(WebDAVRequest webDavReq)
+	public Resource getResource(WebDAVRequest webDavRequest)
 		throws WebDAVException {
 
 		try {
-			String[] pathArray = webDavReq.getPathArray();
+			String[] pathArray = webDavRequest.getPathArray();
 
 			long parentFolderId = getParentFolderId(pathArray);
 			String name = WebDAVUtil.getResourceName(pathArray);
 
 			if (Validator.isNull(name)) {
-				String path = getRootPath() + webDavReq.getPath();
+				String path = getRootPath() + webDavRequest.getPath();
 
 				return new BaseResourceImpl(path, StringPool.BLANK, getToken());
 			}
 
 			try {
 				IGFolder folder = IGFolderServiceUtil.getFolder(
-					webDavReq.getGroupId(), parentFolderId, name);
+					webDavRequest.getGroupId(), parentFolderId, name);
 
 				if ((folder.getParentFolderId() != parentFolderId) ||
-					(webDavReq.getGroupId() != folder.getGroupId())) {
+					(webDavRequest.getGroupId() != folder.getGroupId())) {
 
 					throw new NoSuchFolderException();
 				}
 
-				return toResource(webDavReq, folder, false);
+				return toResource(webDavRequest, folder, false);
 			}
 			catch (NoSuchFolderException nsfe) {
 				try {
@@ -265,7 +267,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 							getImageByFolderIdAndNameWithExtension(
 								parentFolderId, name);
 
-					return toResource(webDavReq, image, false);
+					return toResource(webDavRequest, image, false);
 				}
 				catch (NoSuchImageException nsie) {
 					return null;
@@ -277,14 +279,14 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
-	public List<Resource> getResources(WebDAVRequest webDavReq)
+	public List<Resource> getResources(WebDAVRequest webDavRequest)
 		throws WebDAVException {
 
 		try {
-			long folderId = getFolderId(webDavReq.getPathArray());
+			long folderId = getFolderId(webDavRequest.getPathArray());
 
-			List<Resource> folders = getFolders(webDavReq, folderId);
-			List<Resource> images = getImages(webDavReq, folderId);
+			List<Resource> folders = getFolders(webDavRequest, folderId);
+			List<Resource> images = getImages(webDavRequest, folderId);
 
 			List<Resource> resources = new ArrayList<Resource>(
 				folders.size() + images.size());
@@ -299,20 +301,20 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
-	public Status makeCollection(WebDAVRequest webDavReq)
+	public Status makeCollection(WebDAVRequest webDavRequest)
 		throws WebDAVException {
 
 		try {
-			HttpServletRequest req = webDavReq.getHttpServletRequest();
+			HttpServletRequest req = webDavRequest.getHttpServletRequest();
 
 			if (req.getContentLength() > 0) {
 				return new Status(
 					HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
 			}
 
-			String[] pathArray = webDavReq.getPathArray();
+			String[] pathArray = webDavRequest.getPathArray();
 
-			long plid = getPlid(webDavReq.getGroupId());
+			long plid = getPlid(webDavRequest.getGroupId());
 			long parentFolderId = getParentFolderId(pathArray);
 			String name = WebDAVUtil.getResourceName(pathArray);
 			String description = StringPool.BLANK;
@@ -342,7 +344,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 	}
 
 	public int moveCollectionResource(
-			WebDAVRequest webDavReq, Resource resource, String destination,
+			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite)
 		throws WebDAVException {
 
@@ -383,7 +385,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 	}
 
 	public int moveSimpleResource(
-			WebDAVRequest webDavReq, Resource resource, String destination,
+			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite)
 		throws WebDAVException {
 
@@ -429,13 +431,13 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
-	public int putResource(WebDAVRequest webDavReq) throws WebDAVException {
+	public int putResource(WebDAVRequest webDavRequest) throws WebDAVException {
 		File file = null;
 
 		try {
-			HttpServletRequest req = webDavReq.getHttpServletRequest();
+			HttpServletRequest req = webDavRequest.getHttpServletRequest();
 
-			String[] pathArray = webDavReq.getPathArray();
+			String[] pathArray = webDavRequest.getPathArray();
 
 			long parentFolderId = getParentFolderId(pathArray);
 			String name = WebDAVUtil.getResourceName(pathArray);
@@ -524,18 +526,18 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 	}
 
 	protected List<Resource> getFolders(
-			WebDAVRequest webDavReq, long parentFolderId)
+			WebDAVRequest webDavRequest, long parentFolderId)
 		throws Exception {
 
 		List<Resource> resources = new ArrayList<Resource>();
 
-		long groupId = webDavReq.getGroupId();
+		long groupId = webDavRequest.getGroupId();
 
 		List<IGFolder> folders = IGFolderServiceUtil.getFolders(
 			groupId, parentFolderId);
 
 		for (IGFolder folder : folders) {
-			Resource resource = toResource(webDavReq, folder, true);
+			Resource resource = toResource(webDavRequest, folder, true);
 
 			resources.add(resource);
 		}
@@ -544,7 +546,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 	}
 
 	protected List<Resource> getImages(
-			WebDAVRequest webDavReq, long parentFolderId)
+			WebDAVRequest webDavRequest, long parentFolderId)
 		throws Exception {
 
 		List<Resource> resources = new ArrayList<Resource>();
@@ -552,7 +554,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		List<IGImage> images = IGImageServiceUtil.getImages(parentFolderId);
 
 		for (IGImage image : images) {
-			Resource resource = toResource(webDavReq, image, true);
+			Resource resource = toResource(webDavRequest, image, true);
 
 			resources.add(resource);
 		}
@@ -601,9 +603,9 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 	}
 
 	protected Resource toResource(
-		WebDAVRequest webDavReq, IGImage image, boolean appendPath) {
+		WebDAVRequest webDavRequest, IGImage image, boolean appendPath) {
 
-		String parentPath = getRootPath() + webDavReq.getPath();
+		String parentPath = getRootPath() + webDavRequest.getPath();
 		String name = StringPool.BLANK;
 
 		if (appendPath) {
@@ -614,9 +616,9 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 	}
 
 	protected Resource toResource(
-		WebDAVRequest webDavReq, IGFolder folder, boolean appendPath) {
+		WebDAVRequest webDavRequest, IGFolder folder, boolean appendPath) {
 
-		String parentPath = getRootPath() + webDavReq.getPath();
+		String parentPath = getRootPath() + webDavRequest.getPath();
 		String name = StringPool.BLANK;
 
 		if (appendPath) {

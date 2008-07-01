@@ -40,7 +40,7 @@ import java.io.InputStream;
 public class DLFileEntryResourceImpl extends BaseResourceImpl {
 
 	public DLFileEntryResourceImpl(
-		WebDAVRequest webDavReq, DLFileEntry fileEntry, String parentPath,
+		WebDAVRequest webDavRequest, DLFileEntry fileEntry, String parentPath,
 		String name) {
 
 		super(
@@ -52,7 +52,7 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 		setClassName(DLFileEntry.class.getName());
 		setPrimaryKey(fileEntry.getPrimaryKey());
 
-		_webDavReq = webDavReq;
+		_webDavRequest = webDavRequest;
 		_fileEntry = fileEntry;
 	}
 
@@ -67,7 +67,7 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 	public InputStream getContentAsStream() throws WebDAVException {
 		try {
 			return DLFileEntryLocalServiceUtil.getFileAsStream(
-				_webDavReq.getCompanyId(), _webDavReq.getUserId(),
+				_webDavRequest.getCompanyId(), _webDavRequest.getUserId(),
 				_fileEntry.getFolderId(), _fileEntry.getName());
 		}
 		catch (Exception e) {
@@ -75,7 +75,7 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 		}
 	}
 
-	private WebDAVRequest _webDavReq;
+	private WebDAVRequest _webDavRequest;
 	private DLFileEntry _fileEntry;
 
 }

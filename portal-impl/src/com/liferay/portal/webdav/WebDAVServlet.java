@@ -96,7 +96,7 @@ public class WebDAVServlet extends HttpServlet {
 
 			// Process the method
 
-			WebDAVRequest webDavReq = new WebDAVRequest(
+			WebDAVRequest webDavRequest = new WebDAVRequest(
 				storage, request, response, permissionChecker);
 
 			if (_log.isInfoEnabled()) {
@@ -105,7 +105,7 @@ public class WebDAVServlet extends HttpServlet {
 						" " + request.getRequestURI());
 			}
 
-			status = method.process(webDavReq);
+			status = method.process(webDavRequest);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

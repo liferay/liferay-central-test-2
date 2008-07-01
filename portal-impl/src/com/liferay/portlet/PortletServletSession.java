@@ -35,19 +35,19 @@ import javax.servlet.http.HttpSession;
 public class PortletServletSession extends HttpSessionWrapper {
 
 	public PortletServletSession(
-		HttpSession ses, PortletRequestImpl portletReq) {
+		HttpSession ses, PortletRequestImpl portletRequestImpl) {
 
 		super(ses);
 
-		_portletReq = portletReq;
+		_portletRequestImpl = portletRequestImpl;
 	}
 
 	public void invalidate() {
 		super.invalidate();
 
-		_portletReq.invalidateSession();
+		_portletRequestImpl.invalidateSession();
 	}
 
-	private PortletRequestImpl _portletReq;
+	private PortletRequestImpl _portletRequestImpl;
 
 }

@@ -83,7 +83,7 @@ public class OpenIdRequestAction extends Action {
 
 		ses.setAttribute(WebKeys.OPEN_ID_DISCO, discovered);
 
-		AuthRequest authReq = manager.authenticate(discovered, returnURL);
+		AuthRequest authRequest = manager.authenticate(discovered, returnURL);
 
 		try {
 			UserLocalServiceUtil.getUserByOpenId(openId);
@@ -109,18 +109,18 @@ public class OpenIdRequestAction extends Action {
 					"lastName", "http://schema.openid.net/namePerson/last",
 					true);
 
-				authReq.addExtension(fetch);
+				authRequest.addExtension(fetch);
 
 				SRegRequest sregRequest = SRegRequest.createFetchRequest();
 
 				sregRequest.addAttribute("fullname", true);
 				sregRequest.addAttribute("email", true);
 
-				authReq.addExtension(sregRequest);
+				authRequest.addExtension(sregRequest);
 			}
 		}
 
-		response.sendRedirect(authReq.getDestinationUrl(true));
+		response.sendRedirect(authRequest.getDestinationUrl(true));
 	}
 
 	public ActionForward execute(

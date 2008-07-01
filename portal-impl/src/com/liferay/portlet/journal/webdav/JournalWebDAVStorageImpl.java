@@ -55,9 +55,11 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
-	public int deleteResource(WebDAVRequest webDavReq) throws WebDAVException {
+	public int deleteResource(WebDAVRequest webDavRequest)
+		throws WebDAVException {
+
 		try {
-			Resource resource = getResource(webDavReq);
+			Resource resource = getResource(webDavRequest);
 
 			if (resource == null) {
 				return HttpServletResponse.SC_NOT_FOUND;
@@ -93,21 +95,21 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
-	public Resource getResource(WebDAVRequest webDavReq)
+	public Resource getResource(WebDAVRequest webDavRequest)
 		throws WebDAVException {
 
 		try {
-			String[] pathArray = webDavReq.getPathArray();
+			String[] pathArray = webDavRequest.getPathArray();
 
 			if (pathArray.length == 3) {
-				String path = getRootPath() + webDavReq.getPath();
+				String path = getRootPath() + webDavRequest.getPath();
 
 				return new BaseResourceImpl(path, StringPool.BLANK, getToken());
 			}
 			else if (pathArray.length == 4) {
 				String type = pathArray[3];
 
-				return toResource(webDavReq, type, false);
+				return toResource(webDavRequest, type, false);
 			}
 			else if (pathArray.length == 5) {
 				String type = pathArray[3];
@@ -117,9 +119,10 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 					try {
 						JournalStructure journalStructure =
 							JournalStructureLocalServiceUtil.getStructure(
-								webDavReq.getGroupId(), journalTypeId);
+								webDavRequest.getGroupId(), journalTypeId);
 
-						return toResource(webDavReq, journalStructure, false);
+						return toResource(
+							webDavRequest, journalStructure, false);
 					}
 					catch (NoSuchStructureException nsse) {
 						return null;
@@ -129,9 +132,10 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 					try {
 						JournalTemplate journalTemplate =
 							JournalTemplateLocalServiceUtil.getTemplate(
-								webDavReq.getGroupId(), journalTypeId);
+								webDavRequest.getGroupId(), journalTypeId);
 
-						return toResource(webDavReq, journalTemplate, false);
+						return toResource(
+							webDavRequest, journalTemplate, false);
 					}
 					catch (NoSuchTemplateException nste) {
 						return null;
@@ -146,23 +150,23 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
-	public List<Resource> getResources(WebDAVRequest webDavReq)
+	public List<Resource> getResources(WebDAVRequest webDavRequest)
 		throws WebDAVException {
 
 		try {
-			String[] pathArray = webDavReq.getPathArray();
+			String[] pathArray = webDavRequest.getPathArray();
 
 			if (pathArray.length == 3) {
-				return getFolders(webDavReq);
+				return getFolders(webDavRequest);
 			}
 			else if (pathArray.length == 4) {
 				String type = pathArray[3];
 
 				if (type.equals(_TYPE_STRUCTURES)) {
-					return getStructures(webDavReq);
+					return getStructures(webDavRequest);
 				}
 				else if (type.equals(_TYPE_TEMPLATES)) {
-					return getTemplates(webDavReq);
+					return getTemplates(webDavRequest);
 				}
 			}
 
@@ -173,9 +177,9 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
-	public int putResource(WebDAVRequest webDavReq) throws WebDAVException {
+	public int putResource(WebDAVRequest webDavRequest) throws WebDAVException {
 		try {
-			Resource resource = getResource(webDavReq);
+			Resource resource = getResource(webDavRequest);
 
 			if (resource == null) {
 				return HttpServletResponse.SC_NOT_FOUND;
@@ -186,7 +190,7 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			if (model instanceof JournalStructure) {
 				JournalStructure structure = (JournalStructure)model;
 
-				HttpServletRequest req = webDavReq.getHttpServletRequest();
+				HttpServletRequest req = webDavRequest.getHttpServletRequest();
 
 				String xsd = StringUtil.read(req.getInputStream());
 
@@ -199,7 +203,7 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			else if (model instanceof JournalTemplate) {
 				JournalTemplate template = (JournalTemplate)model;
 
-				HttpServletRequest req = webDavReq.getHttpServletRequest();
+				HttpServletRequest req = webDavRequest.getHttpServletRequest();
 
 				String xsl = StringUtil.read(req.getInputStream());
 				boolean formatXsl = true;
@@ -227,30 +231,30 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
-	protected List<Resource> getFolders(WebDAVRequest webDavReq)
+	protected List<Resource> getFolders(WebDAVRequest webDavRequest)
 		throws Exception {
 
 		List<Resource> folders = new ArrayList<Resource>();
 
-		//folders.add(toResource(webDavReq, _TYPE_ARTICLES, true));
-		folders.add(toResource(webDavReq, _TYPE_STRUCTURES, true));
-		folders.add(toResource(webDavReq, _TYPE_TEMPLATES, true));
+		//folders.add(toResource(webDavRequest, _TYPE_ARTICLES, true));
+		folders.add(toResource(webDavRequest, _TYPE_STRUCTURES, true));
+		folders.add(toResource(webDavRequest, _TYPE_TEMPLATES, true));
 
 		return folders;
 	}
 
-	protected List<Resource> getStructures(WebDAVRequest webDavReq)
+	protected List<Resource> getStructures(WebDAVRequest webDavRequest)
 		throws Exception {
 
 		List<Resource> resources = new ArrayList<Resource>();
 
-		long groupId = webDavReq.getGroupId();
+		long groupId = webDavRequest.getGroupId();
 
 		List<JournalStructure> structures =
 			JournalStructureLocalServiceUtil.getStructures(groupId);
 
 		for (JournalStructure structure : structures) {
-			Resource resource = toResource(webDavReq, structure, true);
+			Resource resource = toResource(webDavRequest, structure, true);
 
 			resources.add(resource);
 		}
@@ -258,18 +262,18 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		return resources;
 	}
 
-	protected List<Resource> getTemplates(WebDAVRequest webDavReq)
+	protected List<Resource> getTemplates(WebDAVRequest webDavRequest)
 		throws Exception {
 
 		List<Resource> resources = new ArrayList<Resource>();
 
-		long groupId = webDavReq.getGroupId();
+		long groupId = webDavRequest.getGroupId();
 
 		List<JournalTemplate> templates =
 			JournalTemplateLocalServiceUtil.getTemplates(groupId);
 
 		for (JournalTemplate template : templates) {
-			Resource resource = toResource(webDavReq, template, true);
+			Resource resource = toResource(webDavRequest, template, true);
 
 			resources.add(resource);
 		}
@@ -278,9 +282,9 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 	}
 
 	protected Resource toResource(
-		WebDAVRequest webDavReq, String type, boolean appendPath) {
+		WebDAVRequest webDavRequest, String type, boolean appendPath) {
 
-		String parentPath = getRootPath() + webDavReq.getPath();
+		String parentPath = getRootPath() + webDavRequest.getPath();
 		String name = StringPool.BLANK;
 
 		if (appendPath) {
@@ -295,10 +299,10 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 	}
 
 	protected Resource toResource(
-		WebDAVRequest webDavReq, JournalStructure structure,
+		WebDAVRequest webDavRequest, JournalStructure structure,
 		boolean appendPath) {
 
-		String parentPath = getRootPath() + webDavReq.getPath();
+		String parentPath = getRootPath() + webDavRequest.getPath();
 		String name = StringPool.BLANK;
 
 		if (appendPath) {
@@ -309,9 +313,10 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 	}
 
 	protected Resource toResource(
-		WebDAVRequest webDavReq, JournalTemplate template, boolean appendPath) {
+		WebDAVRequest webDavRequest, JournalTemplate template,
+		boolean appendPath) {
 
-		String parentPath = getRootPath() + webDavReq.getPath();
+		String parentPath = getRootPath() + webDavRequest.getPath();
 		String name = StringPool.BLANK;
 
 		if (appendPath) {

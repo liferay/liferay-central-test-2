@@ -36,7 +36,7 @@ import javax.servlet.http.HttpServletResponse;
 public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 
 	public int copyCollectionResource(
-			WebDAVRequest webDavReq, Resource resource, String destination,
+			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite, long depth)
 		throws WebDAVException {
 
@@ -44,7 +44,7 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 	}
 
 	public int copySimpleResource(
-			WebDAVRequest webDavReq, Resource resource, String destination,
+			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite)
 		throws WebDAVException {
 
@@ -65,10 +65,10 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 		return WebDAVUtil.getStorageToken(getClass().getName());
 	}
 
-	public boolean isAvailable(WebDAVRequest webDavReq)
+	public boolean isAvailable(WebDAVRequest webDavRequest)
 		throws WebDAVException {
 
-		if (getResource(webDavReq) == null) {
+		if (getResource(webDavRequest) == null) {
 			return false;
 		}
 		else {
@@ -76,14 +76,14 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 		}
 	}
 
-	public Status makeCollection(WebDAVRequest webDavReq)
+	public Status makeCollection(WebDAVRequest webDavRequest)
 		throws WebDAVException {
 
 		return new Status(HttpServletResponse.SC_FORBIDDEN);
 	}
 
 	public int moveCollectionResource(
-			WebDAVRequest webDavReq, Resource resource, String destination,
+			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite)
 		throws WebDAVException {
 
@@ -91,14 +91,14 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 	}
 
 	public int moveSimpleResource(
-			WebDAVRequest webDavReq, Resource resource, String destination,
+			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite)
 		throws WebDAVException {
 
 		return HttpServletResponse.SC_FORBIDDEN;
 	}
 
-	public int putResource(WebDAVRequest webDavReq) throws WebDAVException {
+	public int putResource(WebDAVRequest webDavRequest) throws WebDAVException {
 		return HttpServletResponse.SC_FORBIDDEN;
 	}
 

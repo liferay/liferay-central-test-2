@@ -34,40 +34,43 @@ import java.util.List;
 public interface WebDAVStorage {
 
 	public int copyCollectionResource(
-			WebDAVRequest webDavReq, Resource resource, String destination,
+			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite, long depth)
 		throws WebDAVException;
 
 	public int copySimpleResource(
-			WebDAVRequest webDavReq, Resource resource, String destination,
+			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite)
 		throws WebDAVException;
 
-	public int deleteResource(WebDAVRequest webDavReq) throws WebDAVException;
+	public int deleteResource(WebDAVRequest webDavRequest)
+		throws WebDAVException;
 
-	public Resource getResource(WebDAVRequest webDavReq) throws WebDAVException;
+	public Resource getResource(WebDAVRequest webDavRequest)
+		throws WebDAVException;
 
-	public List<Resource> getResources(WebDAVRequest webDavReq)
+	public List<Resource> getResources(WebDAVRequest webDavRequest)
 		throws WebDAVException;
 
 	public String getRootPath();
 
-	public boolean isAvailable(WebDAVRequest webDavReq) throws WebDAVException;
+	public boolean isAvailable(WebDAVRequest webDavRequest)
+		throws WebDAVException;
 
-	public Status makeCollection(WebDAVRequest webDavReq)
+	public Status makeCollection(WebDAVRequest webDavRequest)
 		throws WebDAVException;
 
 	public int moveCollectionResource(
-			WebDAVRequest webDavReq, Resource resource, String destination,
+			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite)
 		throws WebDAVException;
 
 	public int moveSimpleResource(
-			WebDAVRequest webDavReq, Resource resource, String destination,
+			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite)
 		throws WebDAVException;
 
-	public int putResource(WebDAVRequest webDavReq) throws WebDAVException;
+	public int putResource(WebDAVRequest webDavRequest) throws WebDAVException;
 
 	public void setRootPath(String rootPath);
 

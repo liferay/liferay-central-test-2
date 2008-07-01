@@ -269,9 +269,10 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 					portletRequest.getContextPath() + pathNoQueryString;
 			}
 
-			PortletServletRequest portletServletReq = new PortletServletRequest(
-				request, portletRequestImpl, pathInfo, queryString, requestURI,
-				servletPath, _named, include);
+			PortletServletRequest portletServletRequest =
+				new PortletServletRequest(
+					request, portletRequestImpl, pathInfo, queryString,
+					requestURI, servletPath, _named, include);
 
 			PortletServletResponse portletServletResponse =
 				new PortletServletResponse(
@@ -288,7 +289,7 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 						WebKeys.THEME_DISPLAY);
 
 				URLEncoder strutsURLEncoderObj = new StrutsURLEncoder(
-					portletServletReq.getContextPath(),
+					portletServletRequest.getContextPath(),
 					themeDisplay.getPathMain(),
 					(String)_portletContextImpl.getAttribute(
 						Globals.SERVLET_KEY),
@@ -299,11 +300,11 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 
 			if (include) {
 				_requestDispatcher.include(
-					portletServletReq, portletServletResponse);
+					portletServletRequest, portletServletResponse);
 			}
 			else {
 				_requestDispatcher.forward(
-					portletServletReq, portletServletResponse);
+					portletServletRequest, portletServletResponse);
 			}
 		}
 		catch (ServletException se) {

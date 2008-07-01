@@ -77,7 +77,7 @@ public abstract class BasePropMethodImpl implements Method {
 	}
 
 	protected void addResponse(
-			WebDAVRequest webDavReq, Resource resource, Set<Tuple> props,
+			WebDAVRequest webDavRequest, Resource resource, Set<Tuple> props,
 			Element multistatus)
 		throws Exception {
 
@@ -193,7 +193,7 @@ public abstract class BasePropMethodImpl implements Method {
 		// Check remaining properties against custom properties
 
 		WebDAVProps webDavProps = WebDAVPropsLocalServiceUtil.getWebDAVProps(
-			webDavReq.getCompanyId(), resource.getClassName(),
+			webDavRequest.getCompanyId(), resource.getClassName(),
 			resource.getPrimaryKey());
 
 		Set<Tuple> customProps = webDavProps.getPropsSet();
