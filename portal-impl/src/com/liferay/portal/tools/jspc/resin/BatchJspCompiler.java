@@ -20,17 +20,20 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.resin;
+package com.liferay.portal.tools.jspc.resin;
 
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.StackTraceUtil;
+import com.liferay.portal.util.FileImpl;
 
 import java.io.File;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import org.apache.tools.ant.DirectoryScanner;
 
 /**
  * <a href="BatchJspCompiler.java.html"><b><i>View Source</i></b></a>
@@ -54,64 +57,65 @@ public class BatchJspCompiler {
 			_appDir = appDir;
 			_classDir = classDir;
 
-			_compile(new File(appDir));
+			DirectoryScanner ds = new DirectoryScanner();
+
+			ds.setBasedir(appDir);
+			ds.setIncludes(new String[] {"**\\*.jsp"});
+
+			ds.scan();
+
+			String[] files = ds.getIncludedFiles();
+
+			Arrays.sort(files);
+
+			List<String> fileNames = new ArrayList<String>();
+
+			for (int i = 0; i < files.length; i++) {
+				File file = new File(appDir + "/" + files[i]);
+
+				fileNames.add(file.toString());
+
+				if (((i > 0) && ((i % 200) == 0)) ||
+					((i + 1) == files.length)) {
+
+					_compile(fileNames);
+
+					fileNames.clear();
+				}
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void _compile(File directory) throws Exception {
-		if (directory.exists() && directory.isDirectory()) {
-			List<File> fileList = new ArrayList<File>();
-
-			File[] fileArray = FileUtil.sortFiles(directory.listFiles());
-
-			for (int i = 0; i < fileArray.length; i++) {
-				File file = fileArray[i];
-
-				if (file.isDirectory()) {
-					_compile(fileArray[i]);
-				}
-				else if (file.getName().endsWith(".jsp")) {
-					fileList.add(file);
-				}
-			}
-
-			_compile(directory.getPath(), fileList);
-		}
-	}
-
-	private void _compile(String sourcePath, List<File> files)
-		throws Exception {
-
-		if (files.size() == 0) {
+	private void _compile(List<String> fileNames) throws Exception {
+		if (fileNames.size() == 0) {
 			return;
 		}
 
-		System.out.println(sourcePath);
+		List<String> args = new ArrayList<String>();
 
-		for (int i = 0; i < files.size(); i++) {
-			File file = files.get(i);
+		args.add("-app-dir");
+		args.add(_appDir);
+		args.add("-class-dir");
+		args.add(_classDir);
+		args.addAll(fileNames);
 
-			String fileName = file.toString();
+		MethodWrapper methodWrapper = new MethodWrapper(
+			"com.caucho.jsp.JspCompiler", "main",
+			new Object[] {args.toArray(new String[args.size()])});
 
-			String[] args = new String[] {
-				"-app-dir", _appDir, "-class-dir", _classDir, fileName
-			};
-
-			MethodWrapper methodWrapper = new MethodWrapper(
-				"com.caucho.jsp.JspCompiler", "main", new Object[] {args});
-
-			try {
-				MethodInvoker.invoke(methodWrapper);
-			}
-			catch (Exception e) {
-				FileUtil.write(
-					fileName + ".jspc_error", StackTraceUtil.getStackTrace(e));
-			}
+		try {
+			MethodInvoker.invoke(methodWrapper);
+		}
+		catch (Exception e) {
+			_fileUtil.write(
+				_appDir + "/../jspc_error", StackTraceUtil.getStackTrace(e));
 		}
 	}
+
+	private static FileImpl _fileUtil = new FileImpl();
 
 	private String _appDir;
 	private String _classDir;
