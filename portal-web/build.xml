@@ -49,8 +49,6 @@
 	</target>
 
 	<target name="compile-common-lib">
-		<delete dir="${classpath.jsp}" />
-
 		<unjar src="${project.dir}/portal-impl/portal-impl.jar" dest="${classpath.jsp}" />
 
 		<unjar src="${project.dir}/portal-kernel/portal-kernel.jar" dest="${classpath.jsp}" />
@@ -95,6 +93,8 @@
 	</target>
 
 	<target name="compile-common-jsp">
+		<delete dir="${jspc.classes.dir}" />
+
 		<java
 			classname="org.apache.jasper.JspC"
 			classpath="${jspc.classpath}"
@@ -104,31 +104,32 @@
 			<arg line="${arg.line}" />
 		</java>
 
-		<java
-			classname="com.liferay.portal.tools.JSPCompiler"
+		<javac
 			classpath="${jspc.classpath}"
-			failonerror="true"
-			fork="true"
-			newenvironment="true"
-		>
-			<arg value="${app.server.type}" />
-			<arg value="${javac.compiler}" />
-			<arg value="${jspc.classpath}" />
-			<arg value="${jspc.classes.dir}" />
-		</java>
-
-		<delete file="alfresco.log" />
+			compiler="${javac.compiler}"
+			deprecation="${javac.deprecation}"
+			destdir="${jspc.classes.dir}"
+			nowarn="on"
+			srcdir="${jspc.classes.dir}"
+		/>
 	</target>
 
 	<target name="compile-jboss-jetty">
 		<property name="jspc.classes.dir" value="classes/${app.server.type}" />
 		<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.deploy.dir}/jbossweb-jetty.sar/jasper-compiler.jar;${app.server.deploy.dir}/jbossweb-jetty.sar/jasper-runtime.jar" />
 
-		<antcall target="compile-common-lib" />
+		<if>
+			<not>
+				<available file="${classpath.jsp}" />
+			</not>
+			<then>
+				<antcall target="compile-common-lib" />
 
-		<unjar src="${app.server.instance.dir}/lib/javax.servlet.jar" dest="${classpath.jsp}" />
-		<unjar src="${app.server.instance.dir}/lib/javax.servlet.jsp.jar" dest="${classpath.jsp}" />
-		<unjar src="${app.server.deploy.dir}/jbossweb-jetty.sar/commons-el.jar" dest="${classpath.jsp}" />
+				<unjar src="${app.server.instance.dir}/lib/javax.servlet.jar" dest="${classpath.jsp}" />
+				<unjar src="${app.server.instance.dir}/lib/javax.servlet.jsp.jar" dest="${classpath.jsp}" />
+				<unjar src="${app.server.deploy.dir}/jbossweb-jetty.sar/commons-el.jar" dest="${classpath.jsp}" />
+			</then>
+		</if>
 
 		<antcall target="compile-common-jsp">
 			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp ${jsp.precompile.dir}" />
@@ -142,11 +143,18 @@
 				<property name="jspc.classes.dir" value="classes/${app.server.type}" />
 				<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.deploy.dir}/jbossweb-tomcat55.sar/jasper-compiler.jar;${app.server.deploy.dir}/jbossweb-tomcat55.sar/jasper-runtime.jar" />
 
-				<antcall target="compile-common-lib" />
+				<if>
+					<not>
+						<available file="${classpath.jsp}" />
+					</not>
+					<then>
+						<antcall target="compile-common-lib" />
 
-				<unjar src="${app.server.instance.dir}/lib/javax.servlet.jar" dest="${classpath.jsp}" />
-				<unjar src="${app.server.instance.dir}/lib/javax.servlet.jsp.jar" dest="${classpath.jsp}" />
-				<unjar src="${app.server.deploy.dir}/jbossweb-tomcat55.sar/commons-el.jar" dest="${classpath.jsp}" />
+						<unjar src="${app.server.instance.dir}/lib/javax.servlet.jar" dest="${classpath.jsp}" />
+						<unjar src="${app.server.instance.dir}/lib/javax.servlet.jsp.jar" dest="${classpath.jsp}" />
+						<unjar src="${app.server.deploy.dir}/jbossweb-tomcat55.sar/commons-el.jar" dest="${classpath.jsp}" />
+					</then>
+				</if>
 			</then>
 			<elseif>
 				<equals arg1="${app.server.version}" arg2="4.2" />
@@ -154,11 +162,18 @@
 					<property name="jspc.classes.dir" value="classes/${app.server.type}" />
 					<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/lib/jboss-common.jar;${app.server.deploy.dir}/jboss-web.deployer/jasper-jdt.jar;${app.server.deploy.dir}/jboss-web.deployer/jbossweb.jar;${app.server.instance.dir}/lib/el-api.jar" />
 
-					<antcall target="compile-common-lib" />
+					<if>
+						<not>
+							<available file="${classpath.jsp}" />
+						</not>
+						<then>
+							<antcall target="compile-common-lib" />
 
-					<unjar src="${app.server.instance.dir}/lib/jsp-api.jar" dest="${classpath.jsp}" />
-					<unjar src="${app.server.instance.dir}/lib/servlet-api.jar" dest="${classpath.jsp}" />
-					<unjar src="${app.server.deploy.dir}/jboss-web.deployer/jstl.jar" dest="${classpath.jsp}" />
+							<unjar src="${app.server.instance.dir}/lib/jsp-api.jar" dest="${classpath.jsp}" />
+							<unjar src="${app.server.instance.dir}/lib/servlet-api.jar" dest="${classpath.jsp}" />
+							<unjar src="${app.server.deploy.dir}/jboss-web.deployer/jstl.jar" dest="${classpath.jsp}" />
+						</then>
+					</if>
 				</then>
 			</elseif>
 		</if>
@@ -172,9 +187,16 @@
 		<property name="jspc.classes.dir" value="classes/${app.server.type}" />
 		<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/ext/commons-el.jar;${app.server.dir}/ext/jasper-compiler.jar;${app.server.dir}/ext/jasper-runtime.jar" />
 
-		<antcall target="compile-common-lib" />
+		<if>
+			<not>
+				<available file="${classpath.jsp}" />
+			</not>
+			<then>
+				<antcall target="compile-common-lib" />
 
-		<unjar src="${app.server.dir}/lib/javax.servlet.jar" dest="${classpath.jsp}" />
+				<unjar src="${app.server.dir}/lib/javax.servlet.jar" dest="${classpath.jsp}" />
+			</then>
+		</if>
 
 		<antcall target="compile-common-jsp">
 			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp ${jsp.precompile.dir}" />
@@ -185,10 +207,17 @@
 		<property name="jspc.classes.dir" value="classes/${app.server.type}" />
 		<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/lib/jetty/ext/commons-el.jar;${app.server.dir}/lib/jetty/ext/jasper-compiler.jar;${app.server.dir}/lib/jetty/ext/jasper-runtime.jar" />
 
-		<antcall target="compile-common-lib" />
+		<if>
+			<not>
+				<available file="${classpath.jsp}" />
+			</not>
+			<then>
+				<antcall target="compile-common-lib" />
 
-		<unjar src="${app.server.dir}/lib/commons/j2ee/jsp-2_0.jar" dest="${classpath.jsp}" />
-		<unjar src="${app.server.dir}/lib/commons/j2ee/servlet-2_4.jar" dest="${classpath.jsp}" />
+				<unjar src="${app.server.dir}/lib/commons/j2ee/jsp-2_0.jar" dest="${classpath.jsp}" />
+				<unjar src="${app.server.dir}/lib/commons/j2ee/servlet-2_4.jar" dest="${classpath.jsp}" />
+			</then>
+		</if>
 
 		<antcall target="compile-common-jsp">
 			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp ${jsp.precompile.dir}" />
@@ -199,10 +228,17 @@
 		<property name="jspc.classes.dir" value="classes/${app.server.type}" />
 		<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/lib/catalina/common/lib/commons-el.jar;${app.server.dir}/lib/catalina/common/lib/jasper-compiler.jar;${app.server.dir}/lib/catalina/common/lib/jasper-runtime.jar" />
 
-		<antcall target="compile-common-lib" />
+		<if>
+			<not>
+				<available file="${classpath.jsp}" />
+			</not>
+			<then>
+				<antcall target="compile-common-lib" />
 
-		<unjar src="${app.server.dir}/lib/commons/j2ee/jsp-2_0.jar" dest="${classpath.jsp}" />
-		<unjar src="${app.server.dir}/lib/commons/j2ee/servlet-2_4.jar" dest="${classpath.jsp}" />
+				<unjar src="${app.server.dir}/lib/commons/j2ee/jsp-2_0.jar" dest="${classpath.jsp}" />
+				<unjar src="${app.server.dir}/lib/commons/j2ee/servlet-2_4.jar" dest="${classpath.jsp}" />
+			</then>
+		</if>
 
 		<antcall target="compile-common-jsp">
 			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp ${jsp.precompile.dir}" />
@@ -255,10 +291,17 @@
 				<property name="jspc.classes.dir" value="classes/${app.server.type}" />
 				<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/common/lib/commons-el.jar;${app.server.dir}/common/lib/jasper-compiler.jar;${app.server.dir}/common/lib/jasper-runtime.jar" />
 
-				<antcall target="compile-common-lib" />
+				<if>
+					<not>
+						<available file="${classpath.jsp}" />
+					</not>
+					<then>
+						<antcall target="compile-common-lib" />
 
-				<unjar src="${app.server.dir}/common/lib/jsp-api.jar" dest="${classpath.jsp}" />
-				<unjar src="${app.server.dir}/common/lib/servlet-api.jar" dest="${classpath.jsp}" />
+						<unjar src="${app.server.dir}/common/lib/jsp-api.jar" dest="${classpath.jsp}" />
+						<unjar src="${app.server.dir}/common/lib/servlet-api.jar" dest="${classpath.jsp}" />
+					</then>
+				</if>
 			</then>
 			<elseif>
 				<equals arg1="${app.server.version}" arg2="6.0" />
@@ -266,11 +309,18 @@
 					<property name="jspc.classes.dir" value="classes/${app.server.type}" />
 					<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/lib/jasper.jar;${app.server.dir}/lib/jasper-el.jar;${app.server.dir}/lib/jasper-jdt.jar;${app.server.bin.dir}/tomcat-juli.jar" />
 
-					<antcall target="compile-common-lib" />
+					<if>
+						<not>
+							<available file="${classpath.jsp}" />
+						</not>
+						<then>
+							<antcall target="compile-common-lib" />
 
-					<unjar src="${app.server.dir}/lib/el-api.jar" dest="${classpath.jsp}" />
-					<unjar src="${app.server.dir}/lib/jsp-api.jar" dest="${classpath.jsp}" />
-					<unjar src="${app.server.dir}/lib/servlet-api.jar" dest="${classpath.jsp}" />
+							<unjar src="${app.server.dir}/lib/el-api.jar" dest="${classpath.jsp}" />
+							<unjar src="${app.server.dir}/lib/jsp-api.jar" dest="${classpath.jsp}" />
+							<unjar src="${app.server.dir}/lib/servlet-api.jar" dest="${classpath.jsp}" />
+						</then>
+					</if>
 				</then>
 			</elseif>
 		</if>
