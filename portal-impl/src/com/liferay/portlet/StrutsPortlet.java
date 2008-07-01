@@ -175,10 +175,11 @@ public class StrutsPortlet extends LiferayPortlet {
 		_portletConfig = (PortletConfigImpl)portletConfig;
 	}
 
-	public void processAction(ActionRequest req, ActionResponse res)
+	public void processAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException, PortletException {
 
-		String path = req.getParameter("struts_action");
+		String path = actionRequest.getParameter("struts_action");
 
 		if (Validator.isNotNull(path)) {
 
@@ -188,12 +189,12 @@ public class StrutsPortlet extends LiferayPortlet {
 				PermissionThreadLocal.getPermissionChecker();
 
 			try {
-				permissionChecker.setValues(req);
+				permissionChecker.setValues(actionRequest);
 
 				PortletRequestProcessor processor =
-					_getPortletRequestProcessor(req);
+					_getPortletRequestProcessor(actionRequest);
 
-				processor.process(req, res, path);
+				processor.process(actionRequest, actionResponse, path);
 			}
 			catch (ServletException se) {
 				throw new PortletException(se);
@@ -204,7 +205,7 @@ public class StrutsPortlet extends LiferayPortlet {
 		}
 
 		if (copyRequestParameters) {
-			PortalUtil.copyRequestParameters(req, res);
+			PortalUtil.copyRequestParameters(actionRequest, actionResponse);
 		}
 	}
 

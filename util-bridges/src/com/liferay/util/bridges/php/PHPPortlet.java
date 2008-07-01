@@ -117,11 +117,12 @@ public class PHPPortlet extends GenericPortlet {
 		processPHP(viewUri, renderRequest, renderResponse);
 	}
 
-	public void processAction(ActionRequest req, ActionResponse res) {
-		String phpURI = req.getParameter(_PHP_URI_PARAM);
+	public void processAction(
+			ActionRequest actionRequest, ActionResponse actionResponse) {
+		String phpURI = actionRequest.getParameter(_PHP_URI_PARAM);
 
 		if (phpURI != null) {
-			res.setRenderParameter(_PHP_URI_PARAM, phpURI);
+			actionResponse.setRenderParameter(_PHP_URI_PARAM, phpURI);
 		}
 	}
 

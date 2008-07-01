@@ -41,18 +41,20 @@ import javax.portlet.PortletException;
  */
 public class TranslatorPortlet extends JSPPortlet {
 
-	public void processAction(ActionRequest req, ActionResponse res)
+	public void processAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws PortletException {
 
 		try {
-			String translationId = ParamUtil.getString(req, "id");
-			String fromText = ParamUtil.getString(req, "text");
+			String translationId = ParamUtil.getString(actionRequest, "id");
+			String fromText = ParamUtil.getString(actionRequest, "text");
 
 			if (Validator.isNotNull(fromText)) {
 				Translation translation =
 					TranslatorUtil.getTranslation(translationId, fromText);
 
-				req.setAttribute(WebKeys.TRANSLATOR_TRANSLATION, translation);
+				actionRequest.setAttribute(
+					WebKeys.TRANSLATOR_TRANSLATION, translation);
 			}
 		}
 		catch (Exception e) {

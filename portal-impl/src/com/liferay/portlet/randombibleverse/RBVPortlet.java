@@ -43,23 +43,26 @@ import javax.portlet.PortletPreferences;
  */
 public class RBVPortlet extends JSPPortlet {
 
-	public void processAction(ActionRequest req, ActionResponse res)
+	public void processAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException, PortletException {
 
-		if (req.getPortletMode().equals(PortletMode.EDIT)) {
-			String cmd = ParamUtil.getString(req, Constants.CMD);
+		if (actionRequest.getPortletMode().equals(PortletMode.EDIT)) {
+			String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 			if (cmd.equals(Constants.UPDATE)) {
-				String language = ParamUtil.getString(req, "language");
+				String language = ParamUtil.getString(
+					actionRequest, "language");
 
-				PortletPreferences prefs = req.getPreferences();
+				PortletPreferences prefs = actionRequest.getPreferences();
 
 				prefs.setValue("language", language);
 
 				prefs.store();
 
 				SessionMessages.add(
-					req, getPortletConfig().getPortletName() + ".doEdit");
+					actionRequest,
+					getPortletConfig().getPortletName() + ".doEdit");
 			}
 		}
 	}

@@ -48,41 +48,45 @@ import javax.portlet.PortletException;
  */
 public class SMSPortlet extends JSPPortlet {
 
-	public void processAction(ActionRequest req, ActionResponse res)
+	public void processAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws PortletException {
 
 		try {
-			String cmd = ParamUtil.getString(req, Constants.CMD);
+			String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 			if (cmd.equals(Constants.SEND)) {
-				String to = req.getParameter("to");
-				String subject = ParamUtil.getString(req, "subject");
-				String message = ParamUtil.getString(req, "message");
+				String to = actionRequest.getParameter("to");
+				String subject = ParamUtil.getString(actionRequest, "subject");
+				String message = ParamUtil.getString(actionRequest, "message");
 
 				if (!Validator.isEmailAddress(to)) {
 
-					SessionErrors.add(req, "to");
+					SessionErrors.add(actionRequest, "to");
 				}
 
-				if (SessionErrors.isEmpty(req)) {
-					User user = PortalUtil.getUser(req);
+				if (SessionErrors.isEmpty(actionRequest)) {
+					User user = PortalUtil.getUser(actionRequest);
 
 					MailServiceUtil.sendEmail(new MailMessage(
 						new InternetAddress(
 							user.getEmailAddress(), user.getFullName()),
 						new InternetAddress(to), subject, message));
 
-					res.setRenderParameter("to", StringPool.BLANK);
-					res.setRenderParameter("subject", StringPool.BLANK);
-					res.setRenderParameter("message", StringPool.BLANK);
+					actionResponse.setRenderParameter("to", StringPool.BLANK);
+					actionResponse.setRenderParameter(
+						"subject", StringPool.BLANK);
+					actionResponse.setRenderParameter(
+						"message", StringPool.BLANK);
 
 					SessionMessages.add(
-						req, getPortletConfig().getPortletName() + ".send", to);
+						actionRequest,
+						getPortletConfig().getPortletName() + ".send", to);
 				}
 				else {
-					res.setRenderParameter("to", to);
-					res.setRenderParameter("subject", subject);
-					res.setRenderParameter("message", message);
+					actionResponse.setRenderParameter("to", to);
+					actionResponse.setRenderParameter("subject", subject);
+					actionResponse.setRenderParameter("message", message);
 				}
 			}
 		}

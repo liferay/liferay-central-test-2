@@ -59,7 +59,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public abstract class BaseBSFPortlet extends GenericPortlet {
 
-	public void init() throws PortletException {
+	public void init() {
 		editFile = getInitParameter("edit-file");
 		helpFile = getInitParameter("help-file");
 		viewFile = getInitParameter("view-file");
@@ -102,26 +102,27 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 
 	public void doHelp(
 			RenderRequest renderRequest, RenderResponse renderResponse)
-		throws IOException, PortletException {
+		throws IOException {
 
 		include(helpFile, renderRequest, renderResponse);
 	}
 
 	public void doView(
 			RenderRequest renderRequest, RenderResponse renderResponse)
-		throws IOException, PortletException {
+		throws IOException {
 
 		include(viewFile, renderRequest, renderResponse);
 	}
 
-	public void processAction(ActionRequest req, ActionResponse res)
-		throws IOException, PortletException {
+	public void processAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws IOException {
 
-		include(actionFile, req, res);
+		include(actionFile, actionRequest, actionResponse);
 	}
 
 	public void serveResource(ResourceRequest req, ResourceResponse res)
-		throws IOException, PortletException {
+		throws IOException {
 
 		include(resourceFile, req, res);
 	}
@@ -220,7 +221,7 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 	protected abstract String getScriptingEngineLanguage();
 
 	protected void include(String path, PortletRequest req, PortletResponse res)
-		throws IOException, PortletException {
+		throws IOException {
 
 		InputStream is = getPortletContext().getResourceAsStream(path);
 

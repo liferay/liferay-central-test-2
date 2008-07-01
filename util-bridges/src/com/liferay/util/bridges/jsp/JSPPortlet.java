@@ -143,7 +143,8 @@ public class JSPPortlet extends LiferayPortlet {
 		include(viewJSP, renderRequest, renderResponse);
 	}
 
-	public void processAction(ActionRequest req, ActionResponse res)
+	public void processAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException, PortletException {
 	}
 

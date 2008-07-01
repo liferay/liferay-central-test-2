@@ -295,7 +295,8 @@ public class InvokerPortlet
 		return _strutsPortlet;
 	}
 
-	public void processAction(ActionRequest req, ActionResponse res)
+	public void processAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException {
 
 		StopWatch stopWatch = null;
@@ -307,10 +308,11 @@ public class InvokerPortlet
 		}
 
 		try {
-			invokeAction(req, res);
+			invokeAction(actionRequest, actionResponse);
 		}
 		catch (PortletException pe) {
-			req.setAttribute(_portletId + PortletException.class.getName(), pe);
+			actionRequest.setAttribute(
+				_portletId + PortletException.class.getName(), pe);
 		}
 
 		if (_log.isDebugEnabled()) {

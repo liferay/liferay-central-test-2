@@ -42,7 +42,8 @@ import javax.portlet.RenderResponse;
  */
 public class HelloWorldPortlet extends GenericPortlet {
 
-	public void processAction(ActionRequest req, ActionResponse res) {
+	public void processAction(
+		ActionRequest actionRequest, ActionResponse actionResponse) {
 	}
 
 	public void doView(
