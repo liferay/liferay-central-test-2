@@ -287,49 +287,49 @@ Liferay.Portlet = {
 					}
 
 					if (!themeDisplay.layoutMaximized) {
-						jQuery('.portlet-configuration:first a', portlet).click(
+						jPortlet.find('.portlet-configuration:first a').click(
 							function(event) {
 								location.href = this.href + '&previewWidth=' + portlet.offsetHeight;
 								return false;
 							}
 						);
 
-						jQuery('.portlet-minimize:first a', portlet).click(
+						jPortlet.find('.portlet-minimize:first a').click(
 							function(event) {
 								instance.minimize(portlet, this);
 								return false;
 							}
 						);
 
-						jQuery('.portlet-maximize:first a', portlet).click(
+						jPortlet.find('.portlet-maximize:first a').click(
 							function(event) {
 								submitForm(document.hrefFm, this.href);
 								return false;
 							}
 						);
 
-						jQuery('.portlet-close:first a', portlet).click(
+						jPortlet.find('.portlet-close:first a').click(
 							function(event) {
 								instance.close(portlet);
 								return false;
 							}
 						);
 
-						jQuery('.portlet-refresh:first a', portlet).click(
+						jPortlet.find('.portlet-refresh:first a').click(
 							function(event) {
 								instance.refresh(portlet);
 								return false;
 							}
 						);
 
-						jQuery('.portlet-print:first a', portlet).click(
+						jPortlet.find('.portlet-print:first a').click(
 							function(event) {
 								location.href = this.href;
 								return false;
 							}
 						);
 
-						jQuery('.portlet-css:first a', portlet).click(
+						jPortlet.find('.portlet-css:first a').click(
 							function(event) {
 								Liferay.PortletCSS.init(portlet.portletId);
 							}
