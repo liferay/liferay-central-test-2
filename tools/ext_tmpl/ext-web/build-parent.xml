@@ -66,6 +66,7 @@
 		<java
 			classname="com.liferay.portal.tools.JSPCompiler"
 			classpath="${jspc.classpath}"
+			failonerror="true"
 			fork="true"
 			newenvironment="true"
 		>

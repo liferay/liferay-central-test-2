@@ -104,54 +104,47 @@ public class JSPCompiler {
 
 		System.out.println(sourcePath);
 
-		for (File file : files) {
-			String classDestination = _directory;
+		String cmd = null;
 
-			String cmd = null;
+		String classDestination = _directory;
 
-			if (OSDetector.isUnix()) {
-				cmd = _compiler + " -classpath " + _classPath +
-					" -d " + classDestination + " " +
-					file.toString();
-			}
-			else {
-				cmd = _compiler + " -classpath \"" + _classPath +
-					"\" -d \"" + classDestination + "\" " +
-					file.toString();
-			}
-
-			File classFile = new File(
-				sourcePath + File.separator +
-				StringUtil.replace(file.getName(), ".java", ".class"));
-
-			if (!classFile.exists() ||
-				(_checkTimeStamp &&
-				 (file.lastModified() > classFile.lastModified()))) {
-
-				Runtime rt = Runtime.getRuntime();
-
-				Process p = rt.exec(cmd);
-
-				BufferedReader br = new BufferedReader(
-					new InputStreamReader(p.getErrorStream()));
-
-				StringBuilder sb = new StringBuilder();
-				String line = null;
-
-				while ((line = br.readLine()) != null) {
-					sb.append(line).append("\n");
-				}
-
-				br.close();
-
-				p.waitFor();
-				p.destroy();
-
-				if (!classFile.exists()) {
-					throw new Exception(sb.toString());
-				}
-			}
+		if (OSDetector.isUnix()) {
+			cmd = _compiler + " -classpath " + _classPath +
+				" -d " + classDestination + " ";
 		}
+		else {
+			cmd = _compiler + " -classpath \"" + _classPath +
+				"\" -d \"" + classDestination + "\" ";
+		}
+
+		for (File file : files) {
+			cmd += file.toString() + " ";
+		}
+
+		//System.out.println(cmd);
+
+		Runtime rt = Runtime.getRuntime();
+
+		Process p = rt.exec(cmd);
+
+		BufferedReader br = new BufferedReader(
+			new InputStreamReader(p.getErrorStream()));
+
+		StringBuilder sb = new StringBuilder();
+		String line = null;
+
+		while ((line = br.readLine()) != null) {
+			sb.append(line).append("\n");
+		}
+
+		br.close();
+
+		if (sb.length() > 0) {
+			System.out.println(sb.toString());
+		}
+
+		p.waitFor();
+		p.destroy();
 	}
 
 	private static FileImpl _fileUtil = new FileImpl();
