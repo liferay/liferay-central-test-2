@@ -194,29 +194,12 @@
 		<c:if test="<%= (layoutTypePortlet != null) %>">
 
 			<%
-			List portletIds = layoutTypePortlet.getPortletIds();
+			List<String> portletIds = layoutTypePortlet.getPortletIds();
 			%>
 
-			<c:choose>
-				<c:when test="<%= portletIds.size() > 0 && !layoutTypePortlet.hasStateMax() %>">
-					Liferay.Portlet.list = {<%
-						for (int i = 0; i < portletIds.size(); i++) {
-							out.print("\"" + portletIds.get(i) + "\":1");
-
-							if (i < portletIds.size() - 1) {
-								out.print(",");
-							}
-						}
-					%>};
-				</c:when>
-				<c:otherwise>
-					jQuery(
-						function() {
-							Liferay.Portlet.processLast();
-						}
-					);
-				</c:otherwise>
-			</c:choose>
+			<c:if test="<%= portletIds.size() > 0 && !layoutTypePortlet.hasStateMax() %>">
+				Liferay.Portlet.list = ['<%= StringUtil.merge(portletIds.toArray(new String[portletIds.size()]), "','") %>'];
+			</c:if>
 		</c:if>
 
 		<%
