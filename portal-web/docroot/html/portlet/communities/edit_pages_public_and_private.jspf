@@ -47,7 +47,7 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 	%>
 
 	<c:if test="<%= ree.getType() == RemoteExportException.BAD_CONNECTION %>">
-		<%= LanguageUtil.format(pageContext, "could-not-connect-to-address-x,please-verify-that-the-specified-port-is-correct-and-the-remote-tunnel-servlet-is-configured-to-accept-requests-from-this-server", "<i>" + ree.getURL() + "</i>") %>
+		<%= LanguageUtil.format(pageContext, "could-not-connect-to-address-x.-please-verify-that-the-specified-port-is-correct-and-that-the-remote-server-is-configured-to-accept-requests-from-this-server", "<i>" + ree.getURL() + "</i>") %>
 	</c:if>
 	<c:if test="<%= ree.getType() == RemoteExportException.NO_GROUP %>">
 		<%= LanguageUtil.format(pageContext, "remote-group-with-id-x-does-not-exist", ree.getGroupId()) %>
@@ -59,7 +59,6 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 
 <c:choose>
 	<c:when test="<%= stagingGroup != null %>">
-
 		<div class="portlet-msg-alert">
 			<liferay-ui:message key="the-staging-environment-is-activated-changes-have-to-be-published-to-make-them-available-to-end-users" />
 		</div>
