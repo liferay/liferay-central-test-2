@@ -31,7 +31,7 @@
 <%@ page import="com.liferay.portlet.journal.model.JournalTemplate" %>
 <%@ page import="com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil" %>
 
-<link rel="Shortcut Icon" href="<%= themeDisplay.getPathThemeImages() %>/<%= PropsValues.THEME_ICON_DEFAULT_NAME %>" />
+<link rel="Shortcut Icon" href="<%= themeDisplay.getPathThemeImages() %>/<%= PropsValues.THEME_SHORTCUT_ICON %>" />
 
 <link href="<%= themeDisplay.getCDNHost() %><%= themeDisplay.getPathMain() %>/portal/css_cached?themeId=<%= themeDisplay.getTheme().getThemeId() %>&amp;colorSchemeId=<%= themeDisplay.getColorScheme().getColorSchemeId() %>&amp;t=<%= theme.getTimestamp() %>" type="text/css" rel="stylesheet" />
 

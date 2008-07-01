@@ -1003,13 +1003,13 @@ public class PropsKeys {
 
 	public static final String THEME_CSS_FAST_LOAD = "theme.css.fast.load";
 
-	public static final String THEME_ICON_DEFAULT_NAME = "theme.icon.default.name";
-
 	public static final String THEME_LOADER_NEW_THEME_ID_ON_IMPORT = "theme.loader.new.theme.id.on.import";
 
 	public static final String THEME_LOADER_STORAGE_PATH = "theme.loader.storage.path";
 
 	public static final String THEME_PORTLET_DECORATE_DEFAULT = "theme.portlet.decorate.default";
+
+	public static final String THEME_SHORTCUT_ICON = "theme.shortcut.icon";
 
 	public static final String THEME_SYNC_ON_GROUP = "theme.sync.on.group";
 
