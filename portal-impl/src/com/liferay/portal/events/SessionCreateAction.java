@@ -22,7 +22,6 @@
 
 package com.liferay.portal.events;
 
-import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SessionAction;
 
 import javax.servlet.http.HttpSession;
@@ -38,9 +37,9 @@ import org.apache.commons.logging.LogFactory;
  */
 public class SessionCreateAction extends SessionAction {
 
-	public void run(HttpSession ses) throws ActionException {
+	public void run(HttpSession session) {
 		if (_log.isDebugEnabled()) {
-			_log.debug(ses.getId());
+			_log.debug(session.getId());
 		}
 	}
 

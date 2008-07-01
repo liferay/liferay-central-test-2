@@ -44,9 +44,9 @@ public class SessionLayoutClone implements LayoutClone {
 	public void update(
 		HttpServletRequest request, long plid, String typeSettings) {
 
-		HttpSession ses = request.getSession();
+		HttpSession session = request.getSession();
 
-		ses.setAttribute(_encodeKey(plid), typeSettings);
+		session.setAttribute(_encodeKey(plid), typeSettings);
 	}
 
 	private String _encodeKey(long plid) {

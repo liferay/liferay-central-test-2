@@ -314,9 +314,9 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		throws WebDAVException {
 
 		try {
-			HttpServletRequest req = webDavRequest.getHttpServletRequest();
+			HttpServletRequest request = webDavRequest.getHttpServletRequest();
 
-			if (req.getContentLength() > 0) {
+			if (request.getContentLength() > 0) {
 				return new Status(
 					HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
 			}
@@ -446,7 +446,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		File file = null;
 
 		try {
-			HttpServletRequest req = webDavRequest.getHttpServletRequest();
+			HttpServletRequest request = webDavRequest.getHttpServletRequest();
 
 			String[] pathArray = webDavRequest.getPathArray();
 
@@ -472,12 +472,12 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				DLFileEntryServiceUtil.updateFileEntry(
 					parentFolderId, parentFolderId, name, title, title,
 					description, tagsEntries, extraSettings,
-					FileUtil.getBytes(req.getInputStream()));
+					FileUtil.getBytes(request.getInputStream()));
 			}
 			catch (NoSuchFileEntryException nsfee) {
 				file = FileUtil.createTempFile(FileUtil.getExtension(name));
 
-				FileUtil.write(file, req.getInputStream());
+				FileUtil.write(file, request.getInputStream());
 
 				DLFileEntryServiceUtil.addFileEntry(
 					parentFolderId, name, title, description, tagsEntries,

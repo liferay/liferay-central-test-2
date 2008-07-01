@@ -24,7 +24,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.taglib.util.IncludeTag;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="InputSelectTag.java.html"><b><i>View Source</i></b></a>
@@ -35,12 +35,14 @@ import javax.servlet.ServletRequest;
 public class InputSelectTag extends IncludeTag {
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute("liferay-ui:input-select:formName", _formName);
-		req.setAttribute("liferay-ui:input-select:param", _param);
-		req.setAttribute("liferay-ui:input-select:defaultValue", _defaultValue);
-		req.setAttribute(
+		request.setAttribute("liferay-ui:input-select:formName", _formName);
+		request.setAttribute("liferay-ui:input-select:param", _param);
+		request.setAttribute(
+			"liferay-ui:input-select:defaultValue", _defaultValue);
+		request.setAttribute(
 			"liferay-ui:input-select:disabled", String.valueOf(_disabled));
 
 		return EVAL_BODY_BUFFERED;

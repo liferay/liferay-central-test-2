@@ -29,7 +29,7 @@ import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 
 import javax.portlet.RenderResponse;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 
 /**
@@ -48,10 +48,12 @@ public class SectionTag extends ParamAndPropertyAncestorTagImpl {
 		}
 
 		try {
-			ServletRequest req = pageContext.getRequest();
+			HttpServletRequest request =
+				(HttpServletRequest)pageContext.getRequest();
 
-			RenderResponse renderResponse = (RenderResponse)req.getAttribute(
-				JavaConstants.JAVAX_PORTLET_RESPONSE);
+			RenderResponse renderResponse =
+				(RenderResponse)request.getAttribute(
+					JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 			String namespace = StringPool.BLANK;
 
@@ -69,10 +71,11 @@ public class SectionTag extends ParamAndPropertyAncestorTagImpl {
 
 			_tabsTag.incrementSection();
 
-			req.setAttribute("liferay-ui:section:param", sectionParam);
-			req.setAttribute("liferay-ui:section:name", sectionName);
-			req.setAttribute("liferay-ui:section:selected", _sectionSelected);
-			req.setAttribute("liferay-ui:section:scroll", sectionScroll);
+			request.setAttribute("liferay-ui:section:param", sectionParam);
+			request.setAttribute("liferay-ui:section:name", sectionName);
+			request.setAttribute(
+				"liferay-ui:section:selected", _sectionSelected);
+			request.setAttribute("liferay-ui:section:scroll", sectionScroll);
 
 			pageContext.setAttribute("sectionSelected", _sectionSelected);
 			pageContext.setAttribute("sectionParam", sectionParam);

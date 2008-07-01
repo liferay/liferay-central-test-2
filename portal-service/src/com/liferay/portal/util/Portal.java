@@ -356,7 +356,7 @@ public interface Portal {
 		long userId, String defaultUserName, String userAttribute,
 		HttpServletRequest request);
 
-	public String getUserPassword(HttpSession ses);
+	public String getUserPassword(HttpSession session);
 
 	public String getUserPassword(HttpServletRequest request);
 

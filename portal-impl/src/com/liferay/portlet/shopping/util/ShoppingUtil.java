@@ -690,22 +690,23 @@ public class ShoppingUtil {
 		return cart;
 	}
 
-	public static ShoppingCart getCart(PortletRequest req)
+	public static ShoppingCart getCart(PortletRequest portletRequest)
 		throws PortalException, SystemException {
 
-		PortletSession ses = req.getPortletSession();
+		PortletSession portletSession = portletRequest.getPortletSession();
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String sesCartId =
+		String sessionCartId =
 			ShoppingCart.class.getName() + themeDisplay.getPortletGroupId();
 
 		if (themeDisplay.isSignedIn()) {
-			ShoppingCart cart = (ShoppingCart)ses.getAttribute(sesCartId);
+			ShoppingCart cart = (ShoppingCart)portletSession.getAttribute(
+				sessionCartId);
 
 			if (cart != null) {
-				ses.removeAttribute(sesCartId);
+				portletSession.removeAttribute(sessionCartId);
 			}
 
 			if ((cart != null) && (cart.getItemsSize() > 0)) {
@@ -734,12 +735,13 @@ public class ShoppingUtil {
 			return cart;
 		}
 		else {
-			ShoppingCart cart = (ShoppingCart)ses.getAttribute(sesCartId);
+			ShoppingCart cart = (ShoppingCart)portletSession.getAttribute(
+				sessionCartId);
 
 			if (cart == null) {
 				cart = getCart(themeDisplay);
 
-				ses.setAttribute(sesCartId, cart);
+				portletSession.setAttribute(sessionCartId, cart);
 			}
 
 			return cart;

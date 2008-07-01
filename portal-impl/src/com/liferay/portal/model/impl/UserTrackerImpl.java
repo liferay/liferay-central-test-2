@@ -49,13 +49,13 @@ public class UserTrackerImpl
 	}
 
 	public HttpSession getHttpSession() {
-		return _ses;
+		return _session;
 	}
 
-	public void setHttpSession(HttpSession ses) {
-		_ses = ses;
+	public void setHttpSession(HttpSession session) {
+		_session = session;
 
-		setSessionId(_ses.getId());
+		setSessionId(_session.getId());
 	}
 
 	public String getFullName() {
@@ -136,7 +136,7 @@ public class UserTrackerImpl
 
 	private static Log _log = LogFactory.getLog(UserTrackerImpl.class);
 
-	private HttpSession _ses;
+	private HttpSession _session;
 	private User _user;
 	private String _fullName;
 	private String _emailAddress;

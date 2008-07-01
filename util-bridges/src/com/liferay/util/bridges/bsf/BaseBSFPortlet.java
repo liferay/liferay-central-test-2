@@ -129,14 +129,17 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 	}
 
 	protected void declareBeans(
-			InputStream is, PortletRequest req, PortletResponse res)
+			InputStream is, PortletRequest portletRequest,
+			PortletResponse portletResponse)
 		throws BSFException, IOException {
 
-		declareBeans(new String(FileUtil.getBytes(is)), req, res);
+		declareBeans(
+			new String(FileUtil.getBytes(is)), portletRequest, portletResponse);
 	}
 
 	protected void declareBeans(
-			String code, PortletRequest req, PortletResponse res)
+			String code, PortletRequest portletRequest,
+			PortletResponse portletResponse)
 		throws BSFException, IOException {
 
 		StringBuilder sb = new StringBuilder();
@@ -148,9 +151,10 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 
 		PortletConfig portletConfig = getPortletConfig();
 		PortletContext portletContext = getPortletContext();
-		PortletPreferences preferences = req.getPreferences();
-		Map<String, String> userInfo = (Map<String, String>)req.getAttribute(
-			PortletRequest.USER_INFO);
+		PortletPreferences preferences = portletRequest.getPreferences();
+		Map<String, String> userInfo =
+			(Map<String, String>)portletRequest.getAttribute(
+				PortletRequest.USER_INFO);
 
 		bsfManager.declareBean(
 			"portletConfig", portletConfig, PortletConfig.class);
@@ -160,26 +164,30 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 			"preferences", preferences, PortletPreferences.class);
 		bsfManager.declareBean("userInfo", userInfo, Map.class);
 
-		if (req instanceof ActionRequest) {
-			bsfManager.declareBean("actionRequest", req, ActionRequest.class);
-		}
-		else if (req instanceof RenderRequest) {
-			bsfManager.declareBean("renderRequest", req, RenderRequest.class);
-		}
-		else if (req instanceof ResourceRequest) {
+		if (portletRequest instanceof ActionRequest) {
 			bsfManager.declareBean(
-				"resourceRequest", req, ResourceRequest.class);
+				"actionRequest", portletRequest, ActionRequest.class);
+		}
+		else if (portletRequest instanceof RenderRequest) {
+			bsfManager.declareBean(
+				"renderRequest", portletRequest, RenderRequest.class);
+		}
+		else if (portletRequest instanceof ResourceRequest) {
+			bsfManager.declareBean(
+				"resourceRequest", portletRequest, ResourceRequest.class);
 		}
 
-		if (res instanceof ActionResponse) {
-			bsfManager.declareBean("actionResponse", res, ActionResponse.class);
-		}
-		else if (res instanceof RenderResponse) {
-			bsfManager.declareBean("renderResponse", res, RenderResponse.class);
-		}
-		else if (res instanceof ResourceResponse) {
+		if (portletResponse instanceof ActionResponse) {
 			bsfManager.declareBean(
-				"resourceResponse", res, ResourceResponse.class);
+				"actionResponse", portletResponse, ActionResponse.class);
+		}
+		else if (portletResponse instanceof RenderResponse) {
+			bsfManager.declareBean(
+				"renderResponse", portletResponse, RenderResponse.class);
+		}
+		else if (portletResponse instanceof ResourceResponse) {
+			bsfManager.declareBean(
+				"resourceResponse", portletResponse, ResourceResponse.class);
 		}
 
 		bsfManager.exec(getScriptingEngineLanguage(), "(java)", 1, 1, script);
@@ -221,7 +229,9 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 
 	protected abstract String getScriptingEngineLanguage();
 
-	protected void include(String path, PortletRequest req, PortletResponse res)
+	protected void include(
+			String path, PortletRequest portletRequest,
+			PortletResponse portletResponse)
 		throws IOException {
 
 		InputStream is = getPortletContext().getResourceAsStream(path);
@@ -235,7 +245,7 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 		}
 
 		try {
-			declareBeans(is, req, res);
+			declareBeans(is, portletRequest, portletResponse);
 		}
 		catch (BSFException bsfe) {
 			logBSFException(bsfe, path);

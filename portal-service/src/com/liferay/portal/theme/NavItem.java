@@ -133,9 +133,9 @@ public class NavItem implements Serializable {
 	}
 
 	public String icon() throws Exception {
-		HttpServletRequest req = _vars.getRequest();
+		HttpServletRequest request = _vars.getRequest();
 
-		Object velocityTaglib = req.getAttribute(WebKeys.VELOCITY_TAGLIB);
+		Object velocityTaglib = request.getAttribute(WebKeys.VELOCITY_TAGLIB);
 
 		Method method = MethodCache.get(
 			_VELOCITY_TAGLIB_CLASS, _VELOCITY_TAGLIB_LAYOUT_ICON_METHOD,

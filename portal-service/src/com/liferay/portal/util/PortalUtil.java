@@ -624,8 +624,8 @@ public class PortalUtil {
 			userId, defaultUserName, userAttribute, request);
 	}
 
-	public static String getUserPassword(HttpSession ses) {
-		return getPortal().getUserPassword(ses);
+	public static String getUserPassword(HttpSession session) {
+		return getPortal().getUserPassword(session);
 	}
 
 	public static String getUserPassword(HttpServletRequest request) {

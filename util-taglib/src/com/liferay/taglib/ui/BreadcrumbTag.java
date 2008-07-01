@@ -27,7 +27,7 @@ import com.liferay.taglib.util.IncludeTag;
 
 import javax.portlet.PortletURL;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="BreadcrumbTag.java.html"><b><i>View Source</i></b></a>
@@ -38,13 +38,14 @@ import javax.servlet.ServletRequest;
 public class BreadcrumbTag extends IncludeTag {
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute("liferay-ui:breadcrumb:selLayout", _selLayout);
-		req.setAttribute(
+		request.setAttribute("liferay-ui:breadcrumb:selLayout", _selLayout);
+		request.setAttribute(
 			"liferay-ui:breadcrumb:selLayoutParam", _selLayoutParam);
-		req.setAttribute("liferay-ui:breadcrumb:portletURL", _portletURL);
-		req.setAttribute(
+		request.setAttribute("liferay-ui:breadcrumb:portletURL", _portletURL);
+		request.setAttribute(
 			"liferay-ui:breadcrumb:displayStyle",
 			String.valueOf(_displayStyle));
 

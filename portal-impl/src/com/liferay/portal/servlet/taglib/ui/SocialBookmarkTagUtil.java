@@ -54,13 +54,13 @@ public class SocialBookmarkTagUtil {
 		throws JspException {
 
 		try {
-			HttpServletRequest req =
+			HttpServletRequest request =
 				(HttpServletRequest)pageContext.getRequest();
 
-			req.setAttribute("liferay-ui:social-bookmark:type", type);
-			req.setAttribute("liferay-ui:social-bookmark:url", url);
-			req.setAttribute("liferay-ui:social-bookmark:title", title);
-			req.setAttribute("liferay-ui:social-bookmark:target", target);
+			request.setAttribute("liferay-ui:social-bookmark:type", type);
+			request.setAttribute("liferay-ui:social-bookmark:url", url);
+			request.setAttribute("liferay-ui:social-bookmark:title", title);
+			request.setAttribute("liferay-ui:social-bookmark:target", target);
 
 			String[] socialTypes = PropsUtil.getArray(
 				PropsKeys.SOCIAL_BOOKMARK_TYPES);
@@ -71,7 +71,7 @@ public class SocialBookmarkTagUtil {
 
 			String postUrl = _getPostUrl(type, url, title);
 
-			req.setAttribute("liferay-ui:social-bookmark:postUrl", postUrl);
+			request.setAttribute("liferay-ui:social-bookmark:postUrl", postUrl);
 
 			PortalIncludeUtil.include(pageContext, page);
 		}

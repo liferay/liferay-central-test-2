@@ -45,8 +45,8 @@ public class MkcolMethodImpl implements Method {
 
 	public int process(WebDAVRequest webDavRequest) throws WebDAVException {
 		WebDAVStorage storage = webDavRequest.getWebDAVStorage();
-		HttpServletRequest req = webDavRequest.getHttpServletRequest();
-		HttpServletResponse res = webDavRequest.getHttpServletResponse();
+		HttpServletRequest request = webDavRequest.getHttpServletRequest();
+		HttpServletResponse response = webDavRequest.getHttpServletResponse();
 		long groupId = webDavRequest.getGroupId();
 
 		int statusCode = HttpServletResponse.SC_FORBIDDEN;
@@ -55,10 +55,11 @@ public class MkcolMethodImpl implements Method {
 			Status status = storage.makeCollection(webDavRequest);
 
 			if (Validator.isNotNull(status.getLocation())) {
-				res.setHeader(
+				response.setHeader(
 					HttpHeaders.LOCATION,
-					PortalUtil.getPortalURL(req) + webDavRequest.getRootPath() +
-						StringPool.SLASH + status.getLocation());
+					PortalUtil.getPortalURL(request) +
+						webDavRequest.getRootPath() + StringPool.SLASH +
+							status.getLocation());
 			}
 
 			statusCode = status.getCode();

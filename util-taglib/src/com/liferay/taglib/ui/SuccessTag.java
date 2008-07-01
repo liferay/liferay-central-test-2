@@ -24,7 +24,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.taglib.util.IncludeTag;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="SuccessTag.java.html"><b><i>View Source</i></b></a>
@@ -35,11 +35,12 @@ import javax.servlet.ServletRequest;
 public class SuccessTag extends IncludeTag {
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute("liferay-ui:success:key", _key);
-		req.setAttribute("liferay-ui:success:message", _message);
-		req.setAttribute(
+		request.setAttribute("liferay-ui:success:key", _key);
+		request.setAttribute("liferay-ui:success:message", _message);
+		request.setAttribute(
 			"liferay-ui:success:translateMessage",
 			String.valueOf(_translateMessage));
 

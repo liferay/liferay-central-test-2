@@ -84,15 +84,15 @@ public class JournalContentPortletLayoutListener
 	protected void deleteContentSearch(String portletId, long plid)
 		throws Exception {
 
-		MockHttpServletRequest req = new MockHttpServletRequest();
+		MockHttpServletRequest request = new MockHttpServletRequest();
 
 		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-		req.setAttribute(WebKeys.LAYOUT, layout);
+		request.setAttribute(WebKeys.LAYOUT, layout);
 
 		PortletPreferences prefs =
 			PortletPreferencesFactoryUtil.getPortletSetup(
-				req, portletId, StringPool.BLANK);
+				request, portletId, StringPool.BLANK);
 
 		String articleId = prefs.getValue("article-id", null);
 

@@ -25,7 +25,7 @@ package com.liferay.taglib.ui;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.taglib.util.IncludeTag;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="SearchFormTag.java.html"><b><i>View Source</i></b></a>
@@ -36,17 +36,19 @@ import javax.servlet.ServletRequest;
 public class SearchFormTag extends IncludeTag {
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute("liferay-ui:search:searchContainer", _searchContainer);
+		request.setAttribute(
+			"liferay-ui:search:searchContainer", _searchContainer);
 
 		return EVAL_BODY_BUFFERED;
 	}
 
-	public void setSearchContainer(SearchContainer searchContainer) {
+	public void setSearchContainer(SearchContainer<?> searchContainer) {
 		_searchContainer = searchContainer;
 	}
 
-	private SearchContainer _searchContainer;
+	private SearchContainer<?> _searchContainer;
 
 }

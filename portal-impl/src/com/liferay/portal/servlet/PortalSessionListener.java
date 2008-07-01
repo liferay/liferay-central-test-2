@@ -53,16 +53,16 @@ public class PortalSessionListener implements HttpSessionListener {
 			return;
 		}
 
-		HttpSession ses = event.getSession();
+		HttpSession session = event.getSession();
 
-		PortalSessionContext.put(ses.getId(), ses);
+		PortalSessionContext.put(session.getId(), session);
 
 		// Process session created events
 
 		try {
 			EventsProcessor.process(
 				PropsKeys.SERVLET_SESSION_CREATE_EVENTS,
-				PropsValues.SERVLET_SESSION_CREATE_EVENTS, ses);
+				PropsValues.SERVLET_SESSION_CREATE_EVENTS, session);
 		}
 		catch (ActionException ae) {
 			_log.error(ae, ae);
@@ -74,12 +74,12 @@ public class PortalSessionListener implements HttpSessionListener {
 			return;
 		}
 
-		HttpSession ses = event.getSession();
+		HttpSession session = event.getSession();
 
-		PortalSessionContext.remove(ses.getId());
+		PortalSessionContext.remove(session.getId());
 
 		try {
-			Long userIdObj = (Long)ses.getAttribute(WebKeys.USER_ID);
+			Long userIdObj = (Long)session.getAttribute(WebKeys.USER_ID);
 
 			if (userIdObj == null) {
 				_log.warn("User id is not in the session");
@@ -95,7 +95,7 @@ public class PortalSessionListener implements HttpSessionListener {
 				setCompanyId(userId);
 			}
 
-			LiveUsers.signOut(ses.getId(), userId);
+			LiveUsers.signOut(session.getId(), userId);
 		}
 		catch (IllegalStateException ise) {
 			_log.warn("Please upgrade to a servlet 2.4 compliant container");
@@ -104,14 +104,14 @@ public class PortalSessionListener implements HttpSessionListener {
 			_log.error(e, e);
 		}
 
-		ses.removeAttribute(WebKeys.PORTLET_SESSION_TRACKER);
+		session.removeAttribute(WebKeys.PORTLET_SESSION_TRACKER);
 
 		// Process session destroyed events
 
 		try {
 			EventsProcessor.process(
 				PropsKeys.SERVLET_SESSION_DESTROY_EVENTS,
-				PropsValues.SERVLET_SESSION_DESTROY_EVENTS, ses);
+				PropsValues.SERVLET_SESSION_DESTROY_EVENTS, session);
 		}
 		catch (ActionException ae) {
 			_log.error(ae, ae);

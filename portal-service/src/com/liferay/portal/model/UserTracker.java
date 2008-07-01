@@ -51,7 +51,7 @@ package com.liferay.portal.model;
 public interface UserTracker extends UserTrackerModel {
 	public javax.servlet.http.HttpSession getHttpSession();
 
-	public void setHttpSession(javax.servlet.http.HttpSession ses);
+	public void setHttpSession(javax.servlet.http.HttpSession session);
 
 	public java.lang.String getFullName();
 

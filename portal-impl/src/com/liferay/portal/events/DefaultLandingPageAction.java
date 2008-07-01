@@ -59,9 +59,9 @@ public class DefaultLandingPageAction extends Action {
 			LastPath lastPath = new LastPath(
 				StringPool.BLANK, path, new HashMap<String, String[]>());
 
-			HttpSession ses = request.getSession();
+			HttpSession session = request.getSession();
 
-			ses.setAttribute(WebKeys.LAST_PATH, lastPath);
+			session.setAttribute(WebKeys.LAST_PATH, lastPath);
 		}
 
 		// The commented code shows how you can programmaticaly set the user's

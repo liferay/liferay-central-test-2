@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.io.IOException;
 
+import java.util.Map;
+
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
@@ -179,15 +181,17 @@ public class JSPPortlet extends LiferayPortlet {
 	}
 
 	protected void include(
-			String path, PortletRequest req, PortletResponse res)
+			String path, PortletRequest portletRequest,
+			PortletResponse portletResponse)
 		throws IOException, PortletException {
 
-		include(path, req, res, PortletRequest.RENDER_PHASE);
+		include(
+			path, portletRequest, portletResponse, PortletRequest.RENDER_PHASE);
 	}
 
 	protected void include(
-			String path, PortletRequest req, PortletResponse res,
-			String lifecycle)
+			String path, PortletRequest portletRequest,
+			PortletResponse portletResponse, String lifecycle)
 		throws IOException, PortletException {
 
 		PortletRequestDispatcher prd =
@@ -197,12 +201,18 @@ public class JSPPortlet extends LiferayPortlet {
 			_log.error(path + " is not a valid include");
 		}
 		else {
-			prd.include(req, res);
+			prd.include(portletRequest, portletResponse);
 		}
 
 		if (clearRequestParameters) {
 			if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
-				((LiferayPortletRequest)req).getRenderParameters().clear();
+				LiferayPortletRequest liferayPortletRequest =
+					(LiferayPortletRequest)portletRequest;
+
+				Map<String, String[]> renderParameters =
+					liferayPortletRequest.getRenderParameters();
+
+				renderParameters.clear();
 			}
 		}
 	}

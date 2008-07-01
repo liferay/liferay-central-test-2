@@ -744,9 +744,9 @@ public class ServicePreAction extends Action {
 			layouts.addAll(0, guestLayouts);
 		}
 		else {
-			HttpSession ses = request.getSession();
+			HttpSession session = request.getSession();
 
-			Long previousGroupId = (Long)ses.getAttribute(
+			Long previousGroupId = (Long)session.getAttribute(
 				WebKeys.LIFERAY_SHARED_VISITED_GROUP_ID_PREVIOUS);
 
 			if ((previousGroupId != null) &&
@@ -801,18 +801,18 @@ public class ServicePreAction extends Action {
 			return;
 		}
 
-		HttpSession ses = request.getSession();
+		HttpSession session = request.getSession();
 
-		Long recentGroupId = (Long)ses.getAttribute(
+		Long recentGroupId = (Long)session.getAttribute(
 			WebKeys.LIFERAY_SHARED_VISITED_GROUP_ID_RECENT);
 
-		Long previousGroupId = (Long)ses.getAttribute(
+		Long previousGroupId = (Long)session.getAttribute(
 			WebKeys.LIFERAY_SHARED_VISITED_GROUP_ID_PREVIOUS);
 
 		if (recentGroupId == null) {
 			recentGroupId = new Long(currentGroupId);
 
-			ses.setAttribute(
+			session.setAttribute(
 				WebKeys.LIFERAY_SHARED_VISITED_GROUP_ID_RECENT,
 				recentGroupId);
 		}
@@ -821,11 +821,11 @@ public class ServicePreAction extends Action {
 
 			recentGroupId = new Long(currentGroupId);
 
-			ses.setAttribute(
+			session.setAttribute(
 				WebKeys.LIFERAY_SHARED_VISITED_GROUP_ID_RECENT,
 				recentGroupId);
 
-			ses.setAttribute(
+			session.setAttribute(
 				WebKeys.LIFERAY_SHARED_VISITED_GROUP_ID_PREVIOUS,
 				previousGroupId);
 		}

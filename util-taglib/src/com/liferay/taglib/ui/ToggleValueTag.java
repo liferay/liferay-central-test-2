@@ -71,10 +71,10 @@ public class ToggleValueTag extends TagSupport {
 
 	public int doEndTag() throws JspTagException {
 		try {
-			HttpServletRequest req =
+			HttpServletRequest request =
 				(HttpServletRequest)pageContext.getRequest();
 
-			doTag(_id, pageContext, req);
+			doTag(_id, pageContext, request);
 
 			return EVAL_PAGE;
 		}

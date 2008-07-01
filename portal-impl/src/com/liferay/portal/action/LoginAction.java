@@ -112,7 +112,7 @@ public class LoginAction extends Action {
 
 		CookieKeys.validateSupportCookie(request);
 
-		HttpSession ses = request.getSession();
+		HttpSession session = request.getSession();
 
 		long userId = GetterUtil.getLong(login);
 
@@ -169,14 +169,14 @@ public class LoginAction extends Action {
 
 				// Invalidate the previous session to prevent phishing
 
-				Boolean httpsInitial = (Boolean)ses.getAttribute(
+				Boolean httpsInitial = (Boolean)session.getAttribute(
 					WebKeys.HTTPS_INITIAL);
 
-				LastPath lastPath = (LastPath)ses.getAttribute(
+				LastPath lastPath = (LastPath)session.getAttribute(
 					WebKeys.LAST_PATH);
 
 				try {
-					ses.invalidate();
+					session.invalidate();
 				}
 				catch (IllegalStateException ise) {
 
@@ -187,14 +187,14 @@ public class LoginAction extends Action {
 					}
 				}
 
-				ses = request.getSession(true);
+				session = request.getSession(true);
 
 				if (httpsInitial != null) {
-					ses.setAttribute(WebKeys.HTTPS_INITIAL, httpsInitial);
+					session.setAttribute(WebKeys.HTTPS_INITIAL, httpsInitial);
 				}
 
 				if (lastPath != null) {
-					ses.setAttribute(WebKeys.LAST_PATH, lastPath);
+					session.setAttribute(WebKeys.LAST_PATH, lastPath);
 				}
 			}
 
@@ -206,11 +206,11 @@ public class LoginAction extends Action {
 
 			String userIdString = String.valueOf(userId);
 
-			ses.setAttribute("j_username", userIdString);
-			ses.setAttribute("j_password", user.getPassword());
-			ses.setAttribute("j_remoteuser", userIdString);
+			session.setAttribute("j_username", userIdString);
+			session.setAttribute("j_password", user.getPassword());
+			session.setAttribute("j_remoteuser", userIdString);
 
-			ses.setAttribute(WebKeys.USER_PASSWORD, password);
+			session.setAttribute(WebKeys.USER_PASSWORD, password);
 
 			Cookie companyIdCookie = new Cookie(
 				CookieKeys.COMPANY_ID, String.valueOf(company.getCompanyId()));
@@ -329,13 +329,13 @@ public class LoginAction extends Action {
 			return null;
 		}
 
-		HttpSession ses = request.getSession();
+		HttpSession session = request.getSession();
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		if (ses.getAttribute("j_username") != null &&
-			ses.getAttribute("j_password") != null) {
+		if (session.getAttribute("j_username") != null &&
+			session.getAttribute("j_password") != null) {
 
 			if (PropsValues.PORTAL_JAAS_ENABLE) {
 				return mapping.findForward("/portal/touch_protected.jsp");

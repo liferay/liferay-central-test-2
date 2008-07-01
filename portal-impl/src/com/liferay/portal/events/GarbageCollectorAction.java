@@ -39,7 +39,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class GarbageCollectorAction extends SessionAction {
 
-	public void run(HttpSession ses) {
+	public void run(HttpSession session) {
 		Runtime runtime = Runtime.getRuntime();
 
 		NumberFormat nf = NumberFormat.getInstance();

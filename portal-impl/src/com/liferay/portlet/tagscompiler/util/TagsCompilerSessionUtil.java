@@ -40,54 +40,60 @@ import javax.portlet.PortletSession;
  */
 public class TagsCompilerSessionUtil {
 
-	public static void addEntries(PortletRequest req, List<String> entries) {
-		Set<String> entriesSet = _getEntriesSet(req);
+	public static void addEntries(
+		PortletRequest portletRequest, List<String> entries) {
+
+		Set<String> entriesSet = _getEntriesSet(portletRequest);
 
 		entriesSet.addAll(entries);
 	}
 
-	public static void addEntry(PortletRequest req, String entry) {
-		Set<String> entriesSet = _getEntriesSet(req);
+	public static void addEntry(PortletRequest portletRequest, String entry) {
+		Set<String> entriesSet = _getEntriesSet(portletRequest);
 
 		entriesSet.add(entry);
 	}
 
-	public static void clearEntries(PortletRequest req) {
-		Set<String> entriesSet = _getEntriesSet(req);
+	public static void clearEntries(PortletRequest portletRequest) {
+		Set<String> entriesSet = _getEntriesSet(portletRequest);
 
 		entriesSet.clear();
 	}
 
-	public static Collection<String> getEntries(PortletRequest req) {
-		Set<String> entriesSet = _getEntriesSet(req);
+	public static Collection<String> getEntries(PortletRequest portletRequest) {
+		Set<String> entriesSet = _getEntriesSet(portletRequest);
 
 		return entriesSet;
 	}
 
-	public static void removeEntries(PortletRequest req, List<String> entries) {
-		Set<String> entriesSet = _getEntriesSet(req);
+	public static void removeEntries(
+		PortletRequest portletRequest, List<String> entries) {
+
+		Set<String> entriesSet = _getEntriesSet(portletRequest);
 
 		entriesSet.removeAll(entries);
 	}
 
-	public static void setEntries(PortletRequest req, List<String> entries) {
-		Set<String> entriesSet = _getEntriesSet(req);
+	public static void setEntries(
+		PortletRequest portletRequest, List<String> entries) {
+
+		Set<String> entriesSet = _getEntriesSet(portletRequest);
 
 		entriesSet.clear();
 
 		entriesSet.addAll(entries);
 	}
 
-	private static Set<String> _getEntriesSet(PortletRequest req) {
-		PortletSession ses = req.getPortletSession();
+	private static Set<String> _getEntriesSet(PortletRequest portletRequest) {
+		PortletSession portletSession = portletRequest.getPortletSession();
 
-		Set<String> entriesSet = (Set<String>)ses.getAttribute(
+		Set<String> entriesSet = (Set<String>)portletSession.getAttribute(
 			WebKeys.TAGS_COMPILER_ENTRIES, PortletSession.APPLICATION_SCOPE);
 
 		if (entriesSet == null) {
 			entriesSet = new TreeSet<String>();
 
-			ses.setAttribute(
+			portletSession.setAttribute(
 				WebKeys.TAGS_COMPILER_ENTRIES, entriesSet,
 				PortletSession.APPLICATION_SCOPE);
 		}

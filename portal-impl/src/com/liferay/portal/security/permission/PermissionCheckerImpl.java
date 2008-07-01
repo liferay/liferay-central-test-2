@@ -109,7 +109,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		resetValues();
 	}
 
-	public void setValues(PortletRequest req) {
+	public void setValues(PortletRequest portletRequest) {
 
 		// This method is called in com.liferay.portlet.StrutsPortlet to allow
 		// developers to hook in additiona parameters from the portlet request.

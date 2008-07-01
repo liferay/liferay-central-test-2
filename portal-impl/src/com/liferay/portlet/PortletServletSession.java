@@ -35,9 +35,9 @@ import javax.servlet.http.HttpSession;
 public class PortletServletSession extends HttpSessionWrapper {
 
 	public PortletServletSession(
-		HttpSession ses, PortletRequestImpl portletRequestImpl) {
+		HttpSession session, PortletRequestImpl portletRequestImpl) {
 
-		super(ses);
+		super(session);
 
 		_portletRequestImpl = portletRequestImpl;
 	}

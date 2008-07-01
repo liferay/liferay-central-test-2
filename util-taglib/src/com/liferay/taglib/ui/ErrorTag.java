@@ -31,7 +31,7 @@ import com.liferay.portal.kernel.util.Validator;
 
 import javax.portlet.RenderRequest;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
@@ -45,17 +45,18 @@ public class ErrorTag extends TagSupport {
 
 	public int doStartTag() throws JspException {
 		try {
-			ServletRequest req = pageContext.getRequest();
+			HttpServletRequest request =
+				(HttpServletRequest)pageContext.getRequest();
 
-			RenderRequest renderRequest = (RenderRequest)req.getAttribute(
+			RenderRequest renderRequest = (RenderRequest)request.getAttribute(
 				JavaConstants.JAVAX_PORTLET_REQUEST);
 
-			req.setAttribute("liferay-ui:error:key", _key);
-			req.setAttribute("liferay-ui:error:message", _message);
-			req.setAttribute(
+			request.setAttribute("liferay-ui:error:key", _key);
+			request.setAttribute("liferay-ui:error:message", _message);
+			request.setAttribute(
 				"liferay-ui:error:translateMessage",
 				String.valueOf(_translateMessage));
-			req.setAttribute("liferay-ui:error:rowBreak", _rowBreak);
+			request.setAttribute("liferay-ui:error:rowBreak", _rowBreak);
 
 			if ((_exception != null) && (Validator.isNull(_message)) &&
 				(SessionErrors.contains(renderRequest, _exception.getName()))) {
@@ -79,9 +80,10 @@ public class ErrorTag extends TagSupport {
 
 	public int doEndTag() throws JspException {
 		try {
-			ServletRequest req = pageContext.getRequest();
+			HttpServletRequest request =
+				(HttpServletRequest)pageContext.getRequest();
 
-			RenderRequest renderRequest = (RenderRequest)req.getAttribute(
+			RenderRequest renderRequest = (RenderRequest)request.getAttribute(
 				JavaConstants.JAVAX_PORTLET_REQUEST);
 
 			boolean includeEndPage = false;

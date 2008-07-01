@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.dao.search.DisplayTerms;
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.util.Validator;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
@@ -40,10 +40,11 @@ public class SearchToggleTag extends TagSupport {
 
 	public int doStartTag() throws JspException {
 		try {
-			ServletRequest req = pageContext.getRequest();
+			HttpServletRequest request =
+				(HttpServletRequest)pageContext.getRequest();
 
-			req.setAttribute("liferay-ui:search-toggle:id", _id);
-			req.setAttribute(
+			request.setAttribute("liferay-ui:search-toggle:id", _id);
+			request.setAttribute(
 				"liferay-ui:search-toggle:displayTerms", _displayTerms);
 
 			PortalIncludeUtil.include(pageContext, getStartPage());

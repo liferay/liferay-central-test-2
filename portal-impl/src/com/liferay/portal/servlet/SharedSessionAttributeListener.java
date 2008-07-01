@@ -54,14 +54,14 @@ public class SharedSessionAttributeListener
 			return;
 		}
 
-		HttpSession ses = event.getSession();
+		HttpSession session = event.getSession();
 
-		if (!_sessionIds.contains(ses.getId())) {
+		if (!_sessionIds.contains(session.getId())) {
 			return;
 		}
 
 		SharedSessionAttributeCache cache =
-			SharedSessionAttributeCache.getInstance(ses);
+			SharedSessionAttributeCache.getInstance(session);
 
 		String name = event.getName();
 
@@ -79,14 +79,14 @@ public class SharedSessionAttributeListener
 			return;
 		}
 
-		HttpSession ses = event.getSession();
+		HttpSession session = event.getSession();
 
-		if (!_sessionIds.contains(ses.getId())) {
+		if (!_sessionIds.contains(session.getId())) {
 			return;
 		}
 
 		SharedSessionAttributeCache cache =
-			SharedSessionAttributeCache.getInstance(ses);
+			SharedSessionAttributeCache.getInstance(session);
 
 		cache.removeAttribute(event.getName());
 	}
@@ -96,14 +96,14 @@ public class SharedSessionAttributeListener
 			return;
 		}
 
-		HttpSession ses = event.getSession();
+		HttpSession session = event.getSession();
 
-		if (!_sessionIds.contains(ses.getId())) {
+		if (!_sessionIds.contains(session.getId())) {
 			return;
 		}
 
 		SharedSessionAttributeCache cache =
-			SharedSessionAttributeCache.getInstance(ses);
+			SharedSessionAttributeCache.getInstance(session);
 
 		if (cache.contains(event.getName())) {
 			cache.setAttribute(event.getName(), event.getValue());
@@ -115,11 +115,11 @@ public class SharedSessionAttributeListener
 			return;
 		}
 
-		HttpSession ses = event.getSession();
+		HttpSession session = event.getSession();
 
-		SharedSessionAttributeCache.getInstance(ses);
+		SharedSessionAttributeCache.getInstance(session);
 
-		_sessionIds.add(ses.getId());
+		_sessionIds.add(session.getId());
 	}
 
 	public void sessionDestroyed(HttpSessionEvent event) {
@@ -127,9 +127,9 @@ public class SharedSessionAttributeListener
 			return;
 		}
 
-		HttpSession ses = event.getSession();
+		HttpSession session = event.getSession();
 
-		_sessionIds.remove(ses.getId());
+		_sessionIds.remove(session.getId());
 	}
 
 	private Set<String> _sessionIds = new ConcurrentHashSet<String>();

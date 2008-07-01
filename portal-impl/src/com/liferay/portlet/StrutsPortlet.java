@@ -281,7 +281,7 @@ public class StrutsPortlet extends LiferayPortlet {
 	}
 
 	private PortletRequestProcessor _getPortletRequestProcessor(
-		PortletRequest req) {
+		PortletRequest portletRequest) {
 
 		return (PortletRequestProcessor)getPortletContext().getAttribute(
 			WebKeys.PORTLET_STRUTS_PROCESSOR);

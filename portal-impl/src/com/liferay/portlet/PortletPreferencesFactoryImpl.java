@@ -102,9 +102,9 @@ public class PortletPreferencesFactoryImpl
 				prefsImpl, themeDisplay.isSignedIn());
 		}
 		else {
-			HttpSession ses = request.getSession();
+			HttpSession session = request.getSession();
 
-			portalPrefs = (PortalPreferences)ses.getAttribute(
+			portalPrefs = (PortalPreferences)session.getAttribute(
 				WebKeys.PORTAL_PREFERENCES);
 
 			if (portalPrefs == null) {
@@ -118,7 +118,7 @@ public class PortletPreferencesFactoryImpl
 				portalPrefs = new PortalPreferencesImpl(
 					prefsImpl, themeDisplay.isSignedIn());
 
-				ses.setAttribute(WebKeys.PORTAL_PREFERENCES, portalPrefs);
+				session.setAttribute(WebKeys.PORTAL_PREFERENCES, portalPrefs);
 			}
 		}
 

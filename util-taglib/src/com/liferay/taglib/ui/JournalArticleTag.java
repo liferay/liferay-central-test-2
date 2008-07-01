@@ -25,7 +25,7 @@ package com.liferay.taglib.ui;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.taglib.util.IncludeTag;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="JournalArticleTag.java.html"><b><i>View Source</i></b></a>
@@ -36,19 +36,22 @@ import javax.servlet.ServletRequest;
 public class JournalArticleTag extends IncludeTag {
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:journal-article:articleResourcePrimKey",
 			String.valueOf(_articleResourcePrimKey));
-		req.setAttribute("liferay-ui:journal-article:languageId", _languageId);
-		req.setAttribute(
+		request.setAttribute(
+			"liferay-ui:journal-article:languageId", _languageId);
+		request.setAttribute(
 			"liferay-ui:journal-article:articlePage",
 			String.valueOf(_articlePage));
-		req.setAttribute("liferay-ui:journal-article:xmlRequest", _xmlRequest);
-		req.setAttribute(
+		request.setAttribute(
+			"liferay-ui:journal-article:xmlRequest", _xmlRequest);
+		request.setAttribute(
 			"liferay-ui:journal-article:showTitle", String.valueOf(_showTitle));
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:journal-article:showAvailableLocales",
 			String.valueOf(_showAvailableLocales));
 

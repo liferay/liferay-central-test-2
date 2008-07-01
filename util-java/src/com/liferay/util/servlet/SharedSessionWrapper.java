@@ -44,29 +44,29 @@ import org.apache.commons.logging.LogFactory;
  */
 public class SharedSessionWrapper implements HttpSession {
 
-	public SharedSessionWrapper(HttpSession ses) {
-		this(ses, new ConcurrentHashMap<String, Object>());
+	public SharedSessionWrapper(HttpSession session) {
+		this(session, new ConcurrentHashMap<String, Object>());
 	}
 
 	public SharedSessionWrapper(
-		HttpSession ses, Map<String, Object> sharedAttributes) {
+		HttpSession session, Map<String, Object> sharedAttributes) {
 
-		if (ses == null) {
-			_ses = new NullSession();
+		if (session == null) {
+			_session = new NullSession();
 
 			if (_log.isWarnEnabled()) {
 				_log.warn("Wrapped session is null");
 			}
 		}
 		else {
-			_ses = ses;
+			_session = session;
 		}
 
 		_sharedAttributes = sharedAttributes;
 	}
 
 	public Object getAttribute(String name) {
-		Object value = _ses.getAttribute(name);
+		Object value = _session.getAttribute(name);
 
 		if (value == null) {
 			value = _sharedAttributes.get(name);
@@ -78,7 +78,7 @@ public class SharedSessionWrapper implements HttpSession {
 	public Enumeration<String> getAttributeNames() {
 		if (_sharedAttributes.size() > 0) {
 			List<String> names = ListUtil.fromEnumeration(
-				_ses.getAttributeNames());
+				_session.getAttributeNames());
 
 			for (String name : _sharedAttributes.keySet()) {
 				names.add(name);
@@ -87,35 +87,35 @@ public class SharedSessionWrapper implements HttpSession {
 			return Collections.enumeration(names);
 		}
 		else {
-			return _ses.getAttributeNames();
+			return _session.getAttributeNames();
 		}
 	}
 
 	public long getCreationTime() {
-		return _ses.getCreationTime();
+		return _session.getCreationTime();
 	}
 
 	public String getId() {
-		return _ses.getId();
+		return _session.getId();
 	}
 
 	public long getLastAccessedTime() {
-		return _ses.getLastAccessedTime();
+		return _session.getLastAccessedTime();
 	}
 
 	public int getMaxInactiveInterval() {
-		return _ses.getMaxInactiveInterval();
+		return _session.getMaxInactiveInterval();
 	}
 
 	public ServletContext getServletContext() {
-		return _ses.getServletContext();
+		return _session.getServletContext();
 	}
 
 	/**
 	 * @deprecated
 	 */
 	public javax.servlet.http.HttpSessionContext getSessionContext() {
-		return _ses.getSessionContext();
+		return _session.getSessionContext();
 	}
 
 	public Object getValue(String name) {
@@ -129,11 +129,11 @@ public class SharedSessionWrapper implements HttpSession {
 	}
 
 	public void invalidate() {
-		_ses.invalidate();
+		_session.invalidate();
 	}
 
 	public boolean isNew() {
-		return _ses.isNew();
+		return _session.isNew();
 	}
 
 	public void putValue(String name, Object value) {
@@ -141,7 +141,7 @@ public class SharedSessionWrapper implements HttpSession {
 	}
 
 	public void removeAttribute(String name) {
-		_ses.removeAttribute(name);
+		_session.removeAttribute(name);
 	}
 
 	public void removeValue(String name) {
@@ -149,16 +149,16 @@ public class SharedSessionWrapper implements HttpSession {
 	}
 
 	public void setAttribute(String name, Object value) {
-		_ses.setAttribute(name, value);
+		_session.setAttribute(name, value);
 	}
 
 	public void setMaxInactiveInterval(int maxInactiveInterval) {
-		_ses.setMaxInactiveInterval(maxInactiveInterval);
+		_session.setMaxInactiveInterval(maxInactiveInterval);
 	}
 
 	private static Log _log = LogFactory.getLog(SharedSessionWrapper.class);
 
-	private HttpSession _ses;
+	private HttpSession _session;
 	private Map<String, Object> _sharedAttributes;
 
 }

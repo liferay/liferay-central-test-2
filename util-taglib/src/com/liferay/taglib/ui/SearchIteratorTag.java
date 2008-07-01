@@ -22,7 +22,7 @@
 
 package com.liferay.taglib.ui;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="SearchIteratorTag.java.html"><b><i>View Source</i></b></a>
@@ -35,9 +35,10 @@ public class SearchIteratorTag extends SearchFormTag {
 	public int doStartTag() {
 		super.doStartTag();
 
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:search-iterator:paginate", String.valueOf(_paginate));
 
 		return EVAL_BODY_BUFFERED;

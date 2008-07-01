@@ -24,7 +24,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.taglib.util.IncludeTag;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="InputCheckBoxTag.java.html"><b><i>View Source</i></b></a>
@@ -35,14 +35,15 @@ import javax.servlet.ServletRequest;
 public class InputCheckBoxTag extends IncludeTag {
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute("liferay-ui:input-checkbox:formName", _formName);
-		req.setAttribute("liferay-ui:input-checkbox:param", _param);
-		req.setAttribute(
+		request.setAttribute("liferay-ui:input-checkbox:formName", _formName);
+		request.setAttribute("liferay-ui:input-checkbox:param", _param);
+		request.setAttribute(
 			"liferay-ui:input-checkbox:defaultValue", _defaultValue);
-		req.setAttribute("liferay-ui:input-checkbox:onClick", _onClick);
-		req.setAttribute(
+		request.setAttribute("liferay-ui:input-checkbox:onClick", _onClick);
+		request.setAttribute(
 			"liferay-ui:input-checkbox:disabled", String.valueOf(_disabled));
 
 		return EVAL_BODY_BUFFERED;

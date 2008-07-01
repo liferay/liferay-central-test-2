@@ -24,7 +24,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.search.Hits;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="SearchSpeedTag.java.html"><b><i>View Source</i></b></a>
@@ -35,9 +35,10 @@ import javax.servlet.ServletRequest;
 public class SearchSpeedTag extends SearchFormTag {
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute("liferay-ui:search:hits", _hits);
+		request.setAttribute("liferay-ui:search:hits", _hits);
 
 		return super.doStartTag();
 	}

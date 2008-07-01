@@ -78,7 +78,7 @@ public class DynamicPortletAction extends PortletAction {
 			mapping, form, portletConfig, renderRequest, renderResponse);
 	}
 
-	protected String getPath(PortletRequest req) throws Exception {
+	protected String getPath(PortletRequest portletRequest) throws Exception {
 		return null;
 	}
 

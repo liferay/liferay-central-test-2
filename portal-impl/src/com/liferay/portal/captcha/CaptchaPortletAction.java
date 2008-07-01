@@ -55,13 +55,13 @@ public class CaptchaPortletAction extends PortletAction {
 		throws Exception {
 
 		try {
-			PortletSession ses = actionRequest.getPortletSession();
+			PortletSession portletSession = actionRequest.getPortletSession();
 
 			CaptchaProducer captchaProducer = CaptchaUtil.getCaptchaProducer();
 
 			String captchaText = captchaProducer.createText();
 
-			ses.setAttribute(WebKeys.CAPTCHA_TEXT, captchaText);
+			portletSession.setAttribute(WebKeys.CAPTCHA_TEXT, captchaText);
 
 			HttpServletResponse response = PortalUtil.getHttpServletResponse(
 				actionResponse);

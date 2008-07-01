@@ -27,7 +27,7 @@ import com.liferay.taglib.util.IncludeTag;
 
 import java.util.Calendar;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="InputDateTag.java.html"><b><i>View Source</i></b></a>
@@ -38,45 +38,47 @@ import javax.servlet.ServletRequest;
 public class InputDateTag extends IncludeTag {
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:input-date:disableNamespace",
 			String.valueOf(_disableNamespace));
-		req.setAttribute("liferay-ui:input-date:formName", _formName);
-		req.setAttribute("liferay-ui:input-date:monthParam", _monthParam);
-		req.setAttribute(
+		request.setAttribute("liferay-ui:input-date:formName", _formName);
+		request.setAttribute("liferay-ui:input-date:monthParam", _monthParam);
+		request.setAttribute(
 			"liferay-ui:input-date:monthValue", String.valueOf(_monthValue));
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:input-date:monthNullable",
 			String.valueOf(_monthNullable));
-		req.setAttribute("liferay-ui:input-date:dayParam", _dayParam);
-		req.setAttribute(
+		request.setAttribute("liferay-ui:input-date:dayParam", _dayParam);
+		request.setAttribute(
 			"liferay-ui:input-date:dayValue", String.valueOf(_dayValue));
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:input-date:dayNullable", String.valueOf(_dayNullable));
-		req.setAttribute("liferay-ui:input-date:yearParam", _yearParam);
-		req.setAttribute(
+		request.setAttribute("liferay-ui:input-date:yearParam", _yearParam);
+		request.setAttribute(
 			"liferay-ui:input-date:yearValue", String.valueOf(_yearValue));
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:input-date:yearNullable",
 			String.valueOf(_yearNullable));
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:input-date:yearRangeStart",
 			String.valueOf(_yearRangeStart));
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:input-date:yearRangeEnd",
 			String.valueOf(_yearRangeEnd));
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:input-date:monthAndYearParam", _monthAndYearParam);
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:input-date:monthAndYearNullable",
 			String.valueOf(_monthAndYearNullable));
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:input-date:firstDayOfWeek",
 			String.valueOf(_firstDayOfWeek));
-		req.setAttribute("liferay-ui:input-date:imageInputId", _imageInputId);
-		req.setAttribute(
+		request.setAttribute(
+			"liferay-ui:input-date:imageInputId", _imageInputId);
+		request.setAttribute(
 			"liferay-ui:input-date:disabled", String.valueOf(_disabled));
 
 		return EVAL_BODY_BUFFERED;

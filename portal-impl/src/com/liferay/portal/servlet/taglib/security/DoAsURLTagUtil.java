@@ -50,10 +50,10 @@ public class DoAsURLTagUtil extends TagSupport {
 		throws JspException {
 
 		try {
-			HttpServletRequest req =
+			HttpServletRequest request =
 				(HttpServletRequest)pageContext.getRequest();
 
-			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
 			Company company = themeDisplay.getCompany();

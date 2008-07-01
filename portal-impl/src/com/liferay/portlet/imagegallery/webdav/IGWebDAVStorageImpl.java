@@ -305,9 +305,9 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		throws WebDAVException {
 
 		try {
-			HttpServletRequest req = webDavRequest.getHttpServletRequest();
+			HttpServletRequest request = webDavRequest.getHttpServletRequest();
 
-			if (req.getContentLength() > 0) {
+			if (request.getContentLength() > 0) {
 				return new Status(
 					HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
 			}
@@ -435,7 +435,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		File file = null;
 
 		try {
-			HttpServletRequest req = webDavRequest.getHttpServletRequest();
+			HttpServletRequest request = webDavRequest.getHttpServletRequest();
 
 			String[] pathArray = webDavRequest.getPathArray();
 
@@ -445,7 +445,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			file = FileUtil.createTempFile(FileUtil.getExtension(name));
 
-			FileUtil.write(file, req.getInputStream());
+			FileUtil.write(file, request.getInputStream());
 
 			String contentType = ContentTypeUtil.getContentType(name);
 			String[] tagsEntries = null;

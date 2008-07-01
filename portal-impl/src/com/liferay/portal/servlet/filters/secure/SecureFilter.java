@@ -243,10 +243,10 @@ public class SecureFilter extends BasePortalFilter {
 			// web.xml and JAAS is disabled. Make sure to run this once per
 			// session and wrap the request if necessary.
 
-			HttpSession ses = request.getSession();
+			HttpSession session = request.getSession();
 
 			long userId = GetterUtil.getLong(
-				(String)ses.getAttribute(_AUTHENTICATED_USER));
+				(String)session.getAttribute(_AUTHENTICATED_USER));
 
 			if (_basicAuthEnabled && !PropsValues.PORTAL_JAAS_ENABLE) {
 				if (userId > 0) {
@@ -267,7 +267,7 @@ public class SecureFilter extends BasePortalFilter {
 						request = new ProtectedServletRequest(
 							request, userIdString);
 
-						ses.setAttribute(_AUTHENTICATED_USER, userIdString);
+						session.setAttribute(_AUTHENTICATED_USER, userIdString);
 					}
 					else {
 						response.setHeader(

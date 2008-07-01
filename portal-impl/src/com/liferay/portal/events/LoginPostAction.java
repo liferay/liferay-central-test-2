@@ -50,14 +50,14 @@ public class LoginPostAction extends Action {
 				_log.debug("Running " + request.getRemoteUser());
 			}
 
-			HttpSession ses = request.getSession();
+			HttpSession session = request.getSession();
 
 			//long companyId = PortalUtil.getCompanyId(req);
 			//long userId = PortalUtil.getUserId(req);
 
 			LiveUsers.signIn(request);
 
-			ses.removeAttribute(Globals.LOCALE_KEY);
+			session.removeAttribute(Globals.LOCALE_KEY);
 		}
 		catch (Exception e) {
 			throw new ActionException(e);

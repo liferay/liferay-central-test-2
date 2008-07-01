@@ -377,20 +377,21 @@ public class InvokerPortlet
 			StringServletResponse stringResponse = (StringServletResponse)
 				renderResponseImpl.getHttpServletResponse();
 
-			PortletSession ses = renderRequest.getPortletSession();
+			PortletSession portletSession = renderRequest.getPortletSession();
 
 			long now = System.currentTimeMillis();
 
 			Layout layout = (Layout)renderRequest.getAttribute(WebKeys.LAYOUT);
 
-			Map<String, InvokerPortletResponse> sesResponses =
-				getResponses(ses);
+			Map<String, InvokerPortletResponse> sessionResponses =
+				getResponses(portletSession);
 
-			String sesResponseId = encodeResponseKey(
+			String sessionResponseId = encodeResponseKey(
 				layout.getPlid(), _portletId,
 				LanguageUtil.getLanguageId(renderRequest));
 
-			InvokerPortletResponse response = sesResponses.get(sesResponseId);
+			InvokerPortletResponse response = sessionResponses.get(
+				sessionResponseId);
 
 			if (response == null) {
 				String title = invokeRender(renderRequest, renderResponse);
@@ -399,7 +400,7 @@ public class InvokerPortlet
 					title, stringResponse.getString(),
 					now + Time.SECOND * _expCache.intValue());
 
-				sesResponses.put(sesResponseId, response);
+				sessionResponses.put(sessionResponseId, response);
 			}
 			else if ((response.getTime() < now) &&
 					 (_expCache.intValue() > 0)) {

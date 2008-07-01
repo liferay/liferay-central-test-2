@@ -34,6 +34,6 @@ import javax.servlet.http.HttpSession;
  */
 public interface LiferayPortletSession extends PortletSession {
 
-	public void setHttpSession(HttpSession ses);
+	public void setHttpSession(HttpSession session);
 
 }

@@ -24,7 +24,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.taglib.util.IncludeTag;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="InputEditorTag.java.html"><b><i>View Source</i></b></a>
@@ -35,16 +35,17 @@ import javax.servlet.ServletRequest;
 public class InputEditorTag extends IncludeTag {
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute("liferay-ui:input-editor:name", _name);
-		req.setAttribute("liferay-ui:input-editor:editorImpl", _editorImpl);
-		req.setAttribute("liferay-ui:input-editor:toolbarSet", _toolbarSet);
-		req.setAttribute("liferay-ui:input-editor:initMethod", _initMethod);
-		req.setAttribute(
+		request.setAttribute("liferay-ui:input-editor:name", _name);
+		request.setAttribute("liferay-ui:input-editor:editorImpl", _editorImpl);
+		request.setAttribute("liferay-ui:input-editor:toolbarSet", _toolbarSet);
+		request.setAttribute("liferay-ui:input-editor:initMethod", _initMethod);
+		request.setAttribute(
 			"liferay-ui:input-editor:onChangeMethod", _onChangeMethod);
-		req.setAttribute("liferay-ui:input-editor:height", _height);
-		req.setAttribute("liferay-ui:input-editor:width", _width);
+		request.setAttribute("liferay-ui:input-editor:height", _height);
+		request.setAttribute("liferay-ui:input-editor:width", _width);
 
 		return EVAL_BODY_BUFFERED;
 	}

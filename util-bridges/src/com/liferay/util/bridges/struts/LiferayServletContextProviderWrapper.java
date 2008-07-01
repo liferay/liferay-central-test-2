@@ -50,19 +50,19 @@ public class LiferayServletContextProviderWrapper
 	}
 
 	public HttpServletRequest getHttpServletRequest(
-		GenericPortlet portlet, PortletRequest req) {
+		GenericPortlet portlet, PortletRequest portletRequest) {
 
 		ServletContextProvider provider = _getProvider(portlet);
 
-		return provider.getHttpServletRequest(portlet, req);
+		return provider.getHttpServletRequest(portlet, portletRequest);
 	}
 
 	public HttpServletResponse getHttpServletResponse(
-		GenericPortlet portlet, PortletResponse res) {
+		GenericPortlet portlet, PortletResponse portletResponse) {
 
 		ServletContextProvider provider = _getProvider(portlet);
 
-		return provider.getHttpServletResponse(portlet, res);
+		return provider.getHttpServletResponse(portlet, portletResponse);
 	}
 
 	private ServletContextProvider _getProvider(GenericPortlet portlet) {

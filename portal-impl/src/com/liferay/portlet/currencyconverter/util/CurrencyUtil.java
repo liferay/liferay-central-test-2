@@ -48,9 +48,10 @@ import javax.servlet.jsp.PageContext;
 public class CurrencyUtil {
 
 	public static Map<String, String> getAllSymbols(PageContext pageContext) {
-		HttpServletRequest req = (HttpServletRequest)pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		Locale locale = req.getLocale();
+		Locale locale = request.getLocale();
 
 		String key = locale.toString();
 

@@ -92,11 +92,11 @@ import org.apache.commons.logging.LogFactory;
 public abstract class PortletRequestImpl implements LiferayPortletRequest {
 
 	public void defineObjects(
-		PortletConfig portletConfig, PortletResponse res) {
+		PortletConfig portletConfig, PortletResponse portletResponse) {
 
 		setAttribute(JavaConstants.JAVAX_PORTLET_CONFIG, portletConfig);
 		setAttribute(JavaConstants.JAVAX_PORTLET_REQUEST, this);
-		setAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE, res);
+		setAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE, portletResponse);
 		setAttribute(PortletRequest.LIFECYCLE_PHASE, getLifecycle());
 	}
 
@@ -237,7 +237,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 	}
 
 	public PortletSession getPortletSession() {
-		return _ses;
+		return _session;
 	}
 
 	public PortletSession getPortletSession(boolean create) {
@@ -248,7 +248,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 		}
 		else {
 			if (create) {
-				_ses = new PortletSessionImpl(
+				_session = new PortletSessionImpl(
 					_req, _portletName, _portletContext, _portalSessionId,
 					_plid);
 			}
@@ -256,10 +256,10 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 			return _ses;
 		}*/
 
-		/*if ((_ses == null) && create) {
+		/*if ((_session == null) && create) {
 			_req.getSession(create);
 
-			_ses = new PortletSessionImpl(
+			_session = new PortletSessionImpl(
 				_req, _portletName, _portletContext, _portalSessionId, _plid);
 		}*/
 
@@ -267,7 +267,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 			return null;
 		}
 
-		return _ses;
+		return _session;
 	}
 
 	public PortletPreferences getPreferences() {
@@ -413,8 +413,8 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 	}
 
 	public boolean isRequestedSessionIdValid() {
-		if (_ses != null) {
-			return _ses.isValid();
+		if (_session != null) {
+			return _session.isValid();
 		}
 		else {
 			return _request.isRequestedSessionIdValid();
@@ -612,7 +612,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 		_portletMode = portletMode;
 		_prefs = prefs;
 		_portalSessionId = _request.getRequestedSessionId();
-		_ses = new PortletSessionImpl(
+		_session = new PortletSessionImpl(
 			_request, _portletName, _portletContext, _portalSessionId, plid);
 
 		long userId = PortalUtil.getUserId(request);
@@ -751,7 +751,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 		_windowState = null;
 		_portletMode = null;
 		_prefs = null;
-		_ses = null;
+		_session = null;
 		_portalSessionId = null;
 		_remoteUser = null;
 		_userPrincipal = null;
@@ -772,7 +772,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 	private WindowState _windowState;
 	private PortletMode _portletMode;
 	private PortletPreferences _prefs;
-	private PortletSessionImpl _ses;
+	private PortletSessionImpl _session;
 	private String _portalSessionId;
 	private boolean _invalidSession;
 	private String _remoteUser;

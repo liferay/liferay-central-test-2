@@ -24,7 +24,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.taglib.util.IncludeTag;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="SocialBookmarksTag.java.html"><b><i>View Source</i></b></a>
@@ -36,12 +36,13 @@ import javax.servlet.ServletRequest;
 public class SocialBookmarksTag extends IncludeTag {
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute("liferay-ui:social-bookmark:types", _types);
-		req.setAttribute("liferay-ui:social-bookmark:url", _url);
-		req.setAttribute("liferay-ui:social-bookmark:title", _title);
-		req.setAttribute("liferay-ui:social-bookmark:target", _target);
+		request.setAttribute("liferay-ui:social-bookmark:types", _types);
+		request.setAttribute("liferay-ui:social-bookmark:url", _url);
+		request.setAttribute("liferay-ui:social-bookmark:title", _title);
+		request.setAttribute("liferay-ui:social-bookmark:target", _target);
 
 		return EVAL_BODY_BUFFERED;
 	}

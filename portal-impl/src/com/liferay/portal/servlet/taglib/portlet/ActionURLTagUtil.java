@@ -64,22 +64,22 @@ public class ActionURLTagUtil {
 		throws JspException {
 
 		try {
-			HttpServletRequest req =
+			HttpServletRequest request =
 				(HttpServletRequest)pageContext.getRequest();
 
 			if (portletName == null) {
 				PortletConfigImpl portletConfig =
-					(PortletConfigImpl)req.getAttribute(
+					(PortletConfigImpl)request.getAttribute(
 						JavaConstants.JAVAX_PORTLET_CONFIG);
 
 				portletName = portletConfig.getPortletId();
 			}
 
-			PortletResponseImpl portletRes =
-				(PortletResponseImpl)req.getAttribute(
+			PortletResponseImpl portletResponse =
+				(PortletResponseImpl)request.getAttribute(
 					JavaConstants.JAVAX_PORTLET_RESPONSE);
 
-			if (portletRes == null) {
+			if (portletResponse == null) {
 				_log.error(
 					"Render response is null because this tag is not being " +
 						"called within the context of a portlet");
@@ -87,7 +87,7 @@ public class ActionURLTagUtil {
 				return StringPool.BLANK;
 			}
 
-			LiferayPortletURL portletURL = portletRes.createPortletURLImpl(
+			LiferayPortletURL portletURL = portletResponse.createPortletURLImpl(
 				portletName, lifecycle);
 
 			if (Validator.isNotNull(windowState)) {
@@ -104,7 +104,7 @@ public class ActionURLTagUtil {
 				portletURL.setSecure(secure.booleanValue());
 			}
 			else {
-				portletURL.setSecure(req.isSecure());
+				portletURL.setSecure(request.isSecure());
 			}
 
 			if (copyCurrentRenderParameters != null) {
@@ -146,10 +146,11 @@ public class ActionURLTagUtil {
 				portletConfiguration.booleanValue()) {
 
 				String returnToFullPageURL = ParamUtil.getString(
-					req, "returnToFullPageURL");
+					request, "returnToFullPageURL");
 				String portletResource = ParamUtil.getString(
-					req, "portletResource");
-				String previewWidth = ParamUtil.getString(req, "previewWidth");
+					request, "portletResource");
+				String previewWidth = ParamUtil.getString(
+					request, "previewWidth");
 
 				portletURL.setParameter(
 					"struts_action",

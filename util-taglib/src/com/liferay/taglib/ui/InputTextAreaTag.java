@@ -25,7 +25,7 @@ package com.liferay.taglib.ui;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.taglib.util.IncludeTag;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="InputTextAreaTag.java.html"><b><i>View Source</i></b></a>
@@ -36,12 +36,13 @@ import javax.servlet.ServletRequest;
 public class InputTextAreaTag extends IncludeTag {
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute("liferay-ui:input-textarea:param", _param);
-		req.setAttribute(
+		request.setAttribute("liferay-ui:input-textarea:param", _param);
+		request.setAttribute(
 			"liferay-ui:input-textarea:defaultValue", _defaultValue);
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:input-textarea:disabled", String.valueOf(_disabled));
 
 		return EVAL_BODY_BUFFERED;

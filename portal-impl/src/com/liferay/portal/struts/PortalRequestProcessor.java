@@ -378,12 +378,13 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 	}
 
 	protected String getLastPath(HttpServletRequest request) {
-		HttpSession ses = request.getSession();
+		HttpSession session = request.getSession();
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		Boolean httpsInitial = (Boolean)ses.getAttribute(WebKeys.HTTPS_INITIAL);
+		Boolean httpsInitial = (Boolean)session.getAttribute(
+			WebKeys.HTTPS_INITIAL);
 
 		String portalURL = null;
 
@@ -418,7 +419,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			return sb.toString();
 		}
 
-		LastPath lastPath = (LastPath)ses.getAttribute(WebKeys.LAST_PATH);
+		LastPath lastPath = (LastPath)session.getAttribute(WebKeys.LAST_PATH);
 
 		if (lastPath == null) {
 			return sb.toString();
@@ -515,14 +516,14 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		String path = super.processPath(request, response);
 
-		HttpSession ses = request.getSession();
+		HttpSession session = request.getSession();
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		// Current users
 
-		UserTracker userTracker = LiveUsers.getUserTracker(ses.getId());
+		UserTracker userTracker = LiveUsers.getUserTracker(session.getId());
 
 		if ((userTracker != null) && (path != null) &&
 			(!path.equals(_PATH_C)) &&
@@ -605,7 +606,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 						request.getParameterMap());
 				}
 
-				ses.setAttribute(WebKeys.LAST_PATH, lastPath);
+				session.setAttribute(WebKeys.LAST_PATH, lastPath);
 			}
 		}
 
@@ -671,7 +672,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		if (!PropsValues.AUTH_SIMULTANEOUS_LOGINS) {
 			Boolean staleSession =
-				(Boolean)ses.getAttribute(WebKeys.STALE_SESSION);
+				(Boolean)session.getAttribute(WebKeys.STALE_SESSION);
 
 			if ((user != null) && (staleSession != null) &&
 				(staleSession.booleanValue())) {

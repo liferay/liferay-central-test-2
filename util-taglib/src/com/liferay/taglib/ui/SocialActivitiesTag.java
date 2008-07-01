@@ -28,7 +28,7 @@ import com.liferay.taglib.util.IncludeTag;
 
 import java.util.List;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="SocialActivitiesTag.java.html"><b><i>View Source</i></b></a>
@@ -39,23 +39,27 @@ import javax.servlet.ServletRequest;
 public class SocialActivitiesTag extends IncludeTag {
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute("liferay-ui:social-activities:className", _className);
-		req.setAttribute(
+		request.setAttribute(
+			"liferay-ui:social-activities:className", _className);
+		request.setAttribute(
 			"liferay-ui:social-activities:classPK", String.valueOf(_classPK));
 
 		if (_activities != null) {
-			req.setAttribute(
+			request.setAttribute(
 				"liferay-ui:social-activities:activities", _activities);
 		}
 
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:social-activities:feedEnabled",
 			String.valueOf(_feedEnabled));
-		req.setAttribute("liferay-ui:social-activities:feedTitle", _feedTitle);
-		req.setAttribute("liferay-ui:social-activities:feedLink", _feedLink);
-		req.setAttribute(
+		request.setAttribute(
+			"liferay-ui:social-activities:feedTitle", _feedTitle);
+		request.setAttribute(
+			"liferay-ui:social-activities:feedLink", _feedLink);
+		request.setAttribute(
 			"liferay-ui:social-activities:feedLinkMessage", _feedLinkMessage);
 
 		return EVAL_BODY_BUFFERED;

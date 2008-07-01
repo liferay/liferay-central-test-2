@@ -27,7 +27,7 @@ import com.liferay.taglib.util.IncludeTag;
 
 import java.util.List;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="InputPermissionsTag.java.html"><b><i>View Source</i></b></a>
@@ -39,9 +39,11 @@ import javax.servlet.ServletRequest;
 public class InputPermissionsTag extends IncludeTag {
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute("liferay-ui:input-permissions:formName", _formName);
+		request.setAttribute(
+			"liferay-ui:input-permissions:formName", _formName);
 
 		if (_modelName != null) {
 			List<String> supportedActions =
@@ -56,18 +58,18 @@ public class InputPermissionsTag extends IncludeTag {
 				ResourceActionsUtil.getModelResourceGuestUnsupportedActions(
 					_modelName);
 
-			req.setAttribute(
+			request.setAttribute(
 				"liferay-ui:input-permissions:modelName", _modelName);
-			req.setAttribute(
+			request.setAttribute(
 				"liferay-ui:input-permissions:supportedActions",
 				supportedActions);
-			req.setAttribute(
+			request.setAttribute(
 				"liferay-ui:input-permissions:communityDefaultActions",
 				communityDefaultActions);
-			req.setAttribute(
+			request.setAttribute(
 				"liferay-ui:input-permissions:guestDefaultActions",
 				guestDefaultActions);
-			req.setAttribute(
+			request.setAttribute(
 				"liferay-ui:input-permissions:guestUnsupportedActions",
 				guestUnsupportedActions);
 		}

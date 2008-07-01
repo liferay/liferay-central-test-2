@@ -88,9 +88,9 @@ public class CaptchaUtil {
 			return;
 		}
 
-		HttpSession ses = request.getSession();
+		HttpSession session = request.getSession();
 
-		String captchaText = (String)ses.getAttribute(WebKeys.CAPTCHA_TEXT);
+		String captchaText = (String)session.getAttribute(WebKeys.CAPTCHA_TEXT);
 
 		if (captchaText == null) {
 			if (_log.isErrorEnabled()) {
@@ -110,12 +110,13 @@ public class CaptchaUtil {
 			_log.debug("Captcha text is valid");
 		}
 
-		ses.removeAttribute(WebKeys.CAPTCHA_TEXT);
+		session.removeAttribute(WebKeys.CAPTCHA_TEXT);
 
 		if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
 			(Validator.isNotNull(request.getRemoteUser()))) {
 
-			Integer count = (Integer)ses.getAttribute(WebKeys.CAPTCHA_COUNT);
+			Integer count = (Integer)session.getAttribute(
+				WebKeys.CAPTCHA_COUNT);
 
 			if (count == null) {
 				count = new Integer(1);
@@ -124,7 +125,7 @@ public class CaptchaUtil {
 				count = new Integer(count.intValue() + 1);
 			}
 
-			ses.setAttribute(WebKeys.CAPTCHA_COUNT, count);
+			session.setAttribute(WebKeys.CAPTCHA_COUNT, count);
 		}
 	}
 

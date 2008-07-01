@@ -468,7 +468,7 @@ public class MainServlet extends ActionServlet {
 			return;
 		}
 
-		HttpSession ses = request.getSession();
+		HttpSession session = request.getSession();
 
 		// Company id
 
@@ -532,8 +532,8 @@ public class MainServlet extends ActionServlet {
 
 		// Portlet session tracker
 
-		if (ses.getAttribute(WebKeys.PORTLET_SESSION_TRACKER) == null ) {
-			ses.setAttribute(
+		if (session.getAttribute(WebKeys.PORTLET_SESSION_TRACKER) == null ) {
+			session.setAttribute(
 				WebKeys.PORTLET_SESSION_TRACKER,
 				PortletSessionTracker.getInstance());
 		}
@@ -596,12 +596,12 @@ public class MainServlet extends ActionServlet {
 		// Is JAAS enabled?
 
 		if (!PropsValues.PORTAL_JAAS_ENABLE) {
-			String jRemoteUser = (String)ses.getAttribute("j_remoteuser");
+			String jRemoteUser = (String)session.getAttribute("j_remoteuser");
 
 			if (jRemoteUser != null) {
 				remoteUser = jRemoteUser;
 
-				ses.removeAttribute("j_remoteuser");
+				session.removeAttribute("j_remoteuser");
 			}
 		}
 
@@ -652,11 +652,11 @@ public class MainServlet extends ActionServlet {
 
 				// User id
 
-				ses.setAttribute(WebKeys.USER_ID, new Long(userId));
+				session.setAttribute(WebKeys.USER_ID, new Long(userId));
 
 				// User locale
 
-				ses.setAttribute(Globals.LOCALE_KEY, user.getLocale());
+				session.setAttribute(Globals.LOCALE_KEY, user.getLocale());
 
 				// Post login events
 

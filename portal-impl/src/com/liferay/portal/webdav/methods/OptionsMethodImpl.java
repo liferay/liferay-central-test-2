@@ -36,11 +36,11 @@ import javax.servlet.http.HttpServletResponse;
 public class OptionsMethodImpl implements Method {
 
 	public int process(WebDAVRequest webDavRequest) {
-		HttpServletResponse res = webDavRequest.getHttpServletResponse();
+		HttpServletResponse response = webDavRequest.getHttpServletResponse();
 
-		res.addHeader("DAV", "1");
-		res.addHeader("Allow", Method.SUPPORTED_METHODS);
-		res.addHeader("MS-Author-Via", "DAV");
+		response.addHeader("DAV", "1");
+		response.addHeader("Allow", Method.SUPPORTED_METHODS);
+		response.addHeader("MS-Author-Via", "DAV");
 
 		return HttpServletResponse.SC_OK;
 	}

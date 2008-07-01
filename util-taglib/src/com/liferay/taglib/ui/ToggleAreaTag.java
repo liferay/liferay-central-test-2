@@ -25,7 +25,7 @@ package com.liferay.taglib.ui;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 
 /**
@@ -38,20 +38,23 @@ public class ToggleAreaTag extends ParamAndPropertyAncestorTagImpl {
 
 	public int doStartTag() throws JspException {
 		try {
-			ServletRequest req = getServletRequest();
+			HttpServletRequest request =
+				(HttpServletRequest)pageContext.getRequest();
 
-			req.setAttribute("liferay-ui:toggle-area:id", _id);
-			req.setAttribute("liferay-ui:toggle-area:showImage", _showImage);
-			req.setAttribute("liferay-ui:toggle-area:hideImage", _hideImage);
-			req.setAttribute(
+			request.setAttribute("liferay-ui:toggle-area:id", _id);
+			request.setAttribute(
+				"liferay-ui:toggle-area:showImage", _showImage);
+			request.setAttribute(
+				"liferay-ui:toggle-area:hideImage", _hideImage);
+			request.setAttribute(
 				"liferay-ui:toggle-area:showMessage", _showMessage);
-			req.setAttribute(
+			request.setAttribute(
 				"liferay-ui:toggle-area:hideMessage", _hideMessage);
-			req.setAttribute(
+			request.setAttribute(
 				"liferay-ui:toggle-area:defaultShowContent",
 				String.valueOf(_defaultShowContent));
-			req.setAttribute("liferay-ui:toggle-area:stateVar", _stateVar);
-			req.setAttribute("liferay-ui:toggle-area:align", _align);
+			request.setAttribute("liferay-ui:toggle-area:stateVar", _stateVar);
+			request.setAttribute("liferay-ui:toggle-area:align", _align);
 
 			include(getStartPage());
 

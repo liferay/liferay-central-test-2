@@ -45,10 +45,10 @@ public class MoveMethodImpl implements Method {
 
 	public int process(WebDAVRequest webDavRequest) throws WebDAVException {
 		WebDAVStorage storage = webDavRequest.getWebDAVStorage();
-		HttpServletRequest req = webDavRequest.getHttpServletRequest();
+		HttpServletRequest request = webDavRequest.getHttpServletRequest();
 
 		String destination = WebDAVUtil.getDestination(
-			req, storage.getRootPath());
+			request, storage.getRootPath());
 
 		StringBuilder sb = new StringBuilder();
 
@@ -68,7 +68,7 @@ public class MoveMethodImpl implements Method {
 				status = HttpServletResponse.SC_NOT_FOUND;
 			}
 			else {
-				boolean overwrite = WebDAVUtil.isOverwrite(req);
+				boolean overwrite = WebDAVUtil.isOverwrite(request);
 
 				if (_log.isInfoEnabled()) {
 					sb.append(", overwrite is " + overwrite);

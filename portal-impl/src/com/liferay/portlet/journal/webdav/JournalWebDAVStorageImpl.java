@@ -190,9 +190,10 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			if (model instanceof JournalStructure) {
 				JournalStructure structure = (JournalStructure)model;
 
-				HttpServletRequest req = webDavRequest.getHttpServletRequest();
+				HttpServletRequest request =
+					webDavRequest.getHttpServletRequest();
 
-				String xsd = StringUtil.read(req.getInputStream());
+				String xsd = StringUtil.read(request.getInputStream());
 
 				JournalStructureServiceUtil.updateStructure(
 					structure.getGroupId(), structure.getStructureId(),
@@ -203,9 +204,10 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			else if (model instanceof JournalTemplate) {
 				JournalTemplate template = (JournalTemplate)model;
 
-				HttpServletRequest req = webDavRequest.getHttpServletRequest();
+				HttpServletRequest request =
+					webDavRequest.getHttpServletRequest();
 
-				String xsl = StringUtil.read(req.getInputStream());
+				String xsl = StringUtil.read(request.getInputStream());
 				boolean formatXsl = true;
 				File smallFile = null;
 

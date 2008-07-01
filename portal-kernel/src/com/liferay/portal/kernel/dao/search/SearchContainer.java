@@ -50,15 +50,16 @@ public class SearchContainer<R> {
 	}
 
 	public SearchContainer(
-		PortletRequest req, DisplayTerms displayTerms, DisplayTerms searchTerms,
-		String curParam, int delta, PortletURL iteratorURL,
-		List<String> headerNames, String emptyResultsMessage) {
+		PortletRequest portletRequest, DisplayTerms displayTerms,
+		DisplayTerms searchTerms, String curParam, int delta,
+		PortletURL iteratorURL, List<String> headerNames,
+		String emptyResultsMessage) {
 
 		_displayTerms = displayTerms;
 		_searchTerms = searchTerms;
 
 		_curParam = curParam;
-		_curValue = ParamUtil.get(req, _curParam, DEFAULT_CUR_VALUE);
+		_curValue = ParamUtil.get(portletRequest, _curParam, DEFAULT_CUR_VALUE);
 
 		if (_curValue < 1) {
 			_curValue = DEFAULT_CUR_VALUE;
@@ -70,15 +71,17 @@ public class SearchContainer<R> {
 
 		_iteratorURL.setParameter(
 			DisplayTerms.KEYWORDS,
-			ParamUtil.getString(req, DisplayTerms.KEYWORDS));
+			ParamUtil.getString(portletRequest, DisplayTerms.KEYWORDS));
 		_iteratorURL.setParameter(
 			DisplayTerms.ADVANCED_SEARCH,
 			String.valueOf(
-				ParamUtil.getBoolean(req, DisplayTerms.ADVANCED_SEARCH)));
+				ParamUtil.getBoolean(
+					portletRequest, DisplayTerms.ADVANCED_SEARCH)));
 		_iteratorURL.setParameter(
 			DisplayTerms.AND_OPERATOR,
 			String.valueOf(
-				ParamUtil.getBoolean(req, DisplayTerms.AND_OPERATOR, true)));
+				ParamUtil.getBoolean(
+					portletRequest, DisplayTerms.AND_OPERATOR, true)));
 
 		if (headerNames != null) {
 			_headerNames = new ArrayList<String>(headerNames.size());

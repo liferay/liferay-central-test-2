@@ -55,7 +55,7 @@ public class LogoutAction extends Action {
 		throws Exception {
 
 		try {
-			HttpSession ses = request.getSession();
+			HttpSession session = request.getSession();
 
 			EventsProcessor.process(
 				PropsKeys.LOGOUT_EVENTS_PRE, PropsValues.LOGOUT_EVENTS_PRE,
@@ -97,7 +97,7 @@ public class LogoutAction extends Action {
 			CookieKeys.addCookie(response, passwordCookie);
 
 			try {
-				ses.invalidate();
+				session.invalidate();
 			}
 			catch (Exception e) {
 			}

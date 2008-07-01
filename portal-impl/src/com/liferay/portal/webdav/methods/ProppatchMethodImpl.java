@@ -68,7 +68,8 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 
 	public int process(WebDAVRequest webDavRequest) throws WebDAVException {
 		try {
-			HttpServletResponse res = webDavRequest.getHttpServletResponse();
+			HttpServletResponse response =
+				webDavRequest.getHttpServletResponse();
 
 			Set<Tuple> props = processInstructions(webDavRequest);
 
@@ -76,11 +77,11 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 
 			// Must set the status prior to writing the XML
 
-			res.setStatus(WebDAVUtil.SC_MULTI_STATUS);
-			res.setContentType(ContentTypes.TEXT_XML_UTF8);
+			response.setStatus(WebDAVUtil.SC_MULTI_STATUS);
+			response.setContentType(ContentTypes.TEXT_XML_UTF8);
 
 			try {
-				ServletResponseUtil.write(res, xml);
+				ServletResponseUtil.write(response, xml);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
@@ -132,11 +133,12 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 		try {
 			Set<Tuple> newProps = new HashSet<Tuple>();
 
-			HttpServletRequest req = webDavRequest.getHttpServletRequest();
+			HttpServletRequest request = webDavRequest.getHttpServletRequest();
 
 			WebDAVProps webDavProps = getStoredProperties(webDavRequest);
 
-			String xml = new String(FileUtil.getBytes(req.getInputStream()));
+			String xml = new String(
+				FileUtil.getBytes(request.getInputStream()));
 
 			if (Validator.isNull(xml)) {
 				return newProps;

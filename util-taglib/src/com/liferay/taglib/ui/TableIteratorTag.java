@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.util.List;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
@@ -45,19 +45,20 @@ public class TableIteratorTag extends TagSupport {
 	public int doStartTag() throws JspException {
 		try {
 			if (_list.size() > 0) {
-				ServletRequest req = pageContext.getRequest();
+				HttpServletRequest request =
+					(HttpServletRequest)pageContext.getRequest();
 
-				req.setAttribute("liferay-ui:table-iterator:list", _list);
-				req.setAttribute(
+				request.setAttribute("liferay-ui:table-iterator:list", _list);
+				request.setAttribute(
 					"liferay-ui:table-iterator:rowLength",
 					String.valueOf(_rowLength));
-				req.setAttribute(
+				request.setAttribute(
 					"liferay-ui:table-iterator:rowPadding", _rowPadding);
-				req.setAttribute(
+				request.setAttribute(
 					"liferay-ui:table-iterator:rowValign", _rowValign);
-				req.setAttribute(
+				request.setAttribute(
 					"liferay-ui:table-iterator:rowBreak", _rowBreak);
-				req.setAttribute("liferay-ui:table-iterator:width", _width);
+				request.setAttribute("liferay-ui:table-iterator:width", _width);
 
 				PortalIncludeUtil.include(pageContext, getStartPage());
 
@@ -79,9 +80,10 @@ public class TableIteratorTag extends TagSupport {
 
 	public int doAfterBody() throws JspException {
 		try {
-			ServletRequest req = pageContext.getRequest();
+			HttpServletRequest request =
+				(HttpServletRequest)pageContext.getRequest();
 
-			req.setAttribute(
+			request.setAttribute(
 				"liferay-ui:table-iterator:listPos", String.valueOf(_listPos));
 
 			PortalIncludeUtil.include(pageContext, getBodyPage());

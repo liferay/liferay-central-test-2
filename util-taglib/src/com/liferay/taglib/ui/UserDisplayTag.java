@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
@@ -42,29 +42,31 @@ public class UserDisplayTag extends TagSupport {
 
 	public int doStartTag() throws JspException {
 		try {
-			ServletRequest req = pageContext.getRequest();
+			HttpServletRequest request =
+				(HttpServletRequest)pageContext.getRequest();
 
-			req.setAttribute(
+			request.setAttribute(
 				"liferay-ui:user-display:user-id", String.valueOf(_userId));
-			req.setAttribute("liferay-ui:user-display:user-name", _userName);
+			request.setAttribute(
+				"liferay-ui:user-display:user-name", _userName);
 
 			User user = null;
 
 			try {
 				user = UserLocalServiceUtil.getUserById(_userId);
 
-				req.setAttribute("liferay-ui:user-display:user", user);
+				request.setAttribute("liferay-ui:user-display:user", user);
 
 				pageContext.setAttribute("userDisplay", user);
 			}
 			catch (NoSuchUserException usue) {
-				req.removeAttribute("liferay-ui:user-display:user");
+				request.removeAttribute("liferay-ui:user-display:user");
 
 				pageContext.removeAttribute("userDisplay");
 			}
 
-			req.setAttribute("liferay-ui:user-display:url", _url);
-			req.setAttribute(
+			request.setAttribute("liferay-ui:user-display:url", _url);
+			request.setAttribute(
 				"liferay-ui:user-display:displayStyle",
 				String.valueOf(_displayStyle));
 

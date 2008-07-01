@@ -27,7 +27,7 @@ import com.liferay.taglib.util.IncludeTag;
 
 import java.util.List;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="InputMoveBoxesTag.java.html"><b><i>View Source</i></b></a>
@@ -38,25 +38,30 @@ import javax.servlet.ServletRequest;
 public class InputMoveBoxesTag extends IncludeTag {
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute("liferay-ui:input-move-boxes:formName", _formName);
-		req.setAttribute("liferay-ui:input-move-boxes:leftTitle", _leftTitle);
-		req.setAttribute("liferay-ui:input-move-boxes:rightTitle", _rightTitle);
-		req.setAttribute(
+		request.setAttribute("liferay-ui:input-move-boxes:formName", _formName);
+		request.setAttribute(
+			"liferay-ui:input-move-boxes:leftTitle", _leftTitle);
+		request.setAttribute(
+			"liferay-ui:input-move-boxes:rightTitle", _rightTitle);
+		request.setAttribute(
 			"liferay-ui:input-move-boxes:leftBoxName", _leftBoxName);
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:input-move-boxes:rightBoxName", _rightBoxName);
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:input-move-boxes:leftOnChange", _leftOnChange);
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:input-move-boxes:rightOnChange", _rightOnChange);
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:input-move-boxes:leftReorder", _leftReorder);
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:input-move-boxes:rightReorder", _rightReorder);
-		req.setAttribute("liferay-ui:input-move-boxes:leftList", _leftList);
-		req.setAttribute("liferay-ui:input-move-boxes:rightList", _rightList);
+		request.setAttribute(
+			"liferay-ui:input-move-boxes:leftList", _leftList);
+		request.setAttribute(
+			"liferay-ui:input-move-boxes:rightList", _rightList);
 
 		return EVAL_BODY_BUFFERED;
 	}

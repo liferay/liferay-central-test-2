@@ -396,9 +396,9 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 
 	public void setProperty(String name, Object value) {
 		if (_request != null) {
-			HttpSession ses = _request.getSession();
+			HttpSession session = _request.getSession();
 
-			ses.setAttribute(name, value);
+			session.setAttribute(name, value);
 		}
 	}
 

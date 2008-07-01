@@ -24,7 +24,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.taglib.util.IncludeTag;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="InputTimeTag.java.html"><b><i>View Source</i></b></a>
@@ -35,30 +35,31 @@ import javax.servlet.ServletRequest;
 public class InputTimeTag extends IncludeTag {
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute("liferay-ui:input-time:hourParam", _hourParam);
-		req.setAttribute(
+		request.setAttribute("liferay-ui:input-time:hourParam", _hourParam);
+		request.setAttribute(
 			"liferay-ui:input-time:hourValue", String.valueOf(_hourValue));
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:input-time:hourNullable",
 			String.valueOf(_hourNullable));
-		req.setAttribute("liferay-ui:input-time:minuteParam", _minuteParam);
-		req.setAttribute(
+		request.setAttribute("liferay-ui:input-time:minuteParam", _minuteParam);
+		request.setAttribute(
 			"liferay-ui:input-time:minuteValue", String.valueOf(_minuteValue));
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:input-time:minuteNullable",
 			String.valueOf(_minuteNullable));
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:input-time:minuteInterval",
 			String.valueOf(_minuteInterval));
-		req.setAttribute("liferay-ui:input-time:amPmParam", _amPmParam);
-		req.setAttribute(
+		request.setAttribute("liferay-ui:input-time:amPmParam", _amPmParam);
+		request.setAttribute(
 			"liferay-ui:input-time:amPmValue", String.valueOf(_amPmValue));
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:input-time:amPmNullable",
 			String.valueOf(_amPmNullable));
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:input-time:disabled", String.valueOf(_disabled));
 
 		return EVAL_BODY_BUFFERED;

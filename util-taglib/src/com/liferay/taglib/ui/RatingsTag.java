@@ -24,7 +24,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.taglib.util.IncludeTag;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="RatingsTag.java.html"><b><i>View Source</i></b></a>
@@ -35,13 +35,14 @@ import javax.servlet.ServletRequest;
 public class RatingsTag extends IncludeTag {
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute("liferay-ui:ratings:className", _className);
-		req.setAttribute(
+		request.setAttribute("liferay-ui:ratings:className", _className);
+		request.setAttribute(
 			"liferay-ui:ratings:classPK", String.valueOf(_classPK));
-		req.setAttribute("liferay-ui:ratings:type", _type);
-		req.setAttribute("liferay-ui:ratings:url", _url);
+		request.setAttribute("liferay-ui:ratings:type", _type);
+		request.setAttribute("liferay-ui:ratings:url", _url);
 
 		return EVAL_BODY_BUFFERED;
 	}

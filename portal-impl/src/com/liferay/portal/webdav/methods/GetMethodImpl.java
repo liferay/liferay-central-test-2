@@ -49,7 +49,8 @@ public class GetMethodImpl implements Method {
 
 		try {
 			WebDAVStorage storage = webDavRequest.getWebDAVStorage();
-			HttpServletResponse res = webDavRequest.getHttpServletResponse();
+			HttpServletResponse response =
+				webDavRequest.getHttpServletResponse();
 
 			Resource resource = storage.getResource(webDavRequest);
 
@@ -68,7 +69,7 @@ public class GetMethodImpl implements Method {
 
 			if (is != null) {
 				try {
-					ServletResponseUtil.write(res, is);
+					ServletResponseUtil.write(response, is);
 				}
 				catch (Exception e) {
 					if (_log.isWarnEnabled()) {

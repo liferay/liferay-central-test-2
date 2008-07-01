@@ -98,30 +98,30 @@ public class JournalUtil {
 	public static final String XML_INDENT = "  ";
 
 	public static void addRecentArticle(
-		PortletRequest req, JournalArticle article) {
+		PortletRequest portletRequest, JournalArticle article) {
 
 		if (article != null) {
-			Stack<JournalArticle> stack = getRecentArticles(req);
+			Stack<JournalArticle> stack = getRecentArticles(portletRequest);
 
 			stack.push(article);
 		}
 	}
 
 	public static void addRecentStructure(
-		PortletRequest req, JournalStructure structure) {
+		PortletRequest portletRequest, JournalStructure structure) {
 
 		if (structure != null) {
-			Stack<JournalStructure> stack = getRecentStructures(req);
+			Stack<JournalStructure> stack = getRecentStructures(portletRequest);
 
 			stack.push(structure);
 		}
 	}
 
 	public static void addRecentTemplate(
-		PortletRequest req, JournalTemplate template) {
+		PortletRequest portletRequest, JournalTemplate template) {
 
 		if (template != null) {
-			Stack<JournalTemplate> stack = getRecentTemplates(req);
+			Stack<JournalTemplate> stack = getRecentTemplates(portletRequest);
 
 			stack.push(template);
 		}
@@ -515,37 +515,40 @@ public class JournalUtil {
 		}
 	}
 
-	public static Stack<JournalArticle> getRecentArticles(PortletRequest req) {
-		PortletSession ses = req.getPortletSession();
+	public static Stack<JournalArticle> getRecentArticles(
+		PortletRequest portletRequest) {
+
+		PortletSession portletSession = portletRequest.getPortletSession();
 
 		Stack<JournalArticle> recentArticles =
-			(Stack<JournalArticle>)ses.getAttribute(
+			(Stack<JournalArticle>)portletSession.getAttribute(
 				WebKeys.JOURNAL_RECENT_ARTICLES);
 
 		if (recentArticles == null) {
 			recentArticles = new FiniteUniqueStack<JournalArticle>(
 				MAX_STACK_SIZE);
 
-			ses.setAttribute(WebKeys.JOURNAL_RECENT_ARTICLES, recentArticles);
+			portletSession.setAttribute(
+				WebKeys.JOURNAL_RECENT_ARTICLES, recentArticles);
 		}
 
 		return recentArticles;
 	}
 
 	public static Stack<JournalStructure> getRecentStructures(
-		PortletRequest req) {
+		PortletRequest portletRequest) {
 
-		PortletSession ses = req.getPortletSession();
+		PortletSession portletSession = portletRequest.getPortletSession();
 
 		Stack<JournalStructure> recentStructures =
-			(Stack<JournalStructure>)ses.getAttribute(
+			(Stack<JournalStructure>)portletSession.getAttribute(
 				WebKeys.JOURNAL_RECENT_STRUCTURES);
 
 		if (recentStructures == null) {
 			recentStructures = new FiniteUniqueStack<JournalStructure>(
 				MAX_STACK_SIZE);
 
-			ses.setAttribute(
+			portletSession.setAttribute(
 				WebKeys.JOURNAL_RECENT_STRUCTURES, recentStructures);
 		}
 
@@ -553,19 +556,20 @@ public class JournalUtil {
 	}
 
 	public static Stack<JournalTemplate> getRecentTemplates(
-		PortletRequest req) {
+		PortletRequest portletRequest) {
 
-		PortletSession ses = req.getPortletSession();
+		PortletSession portletSession = portletRequest.getPortletSession();
 
 		Stack<JournalTemplate> recentTemplates =
-			(Stack<JournalTemplate>)ses.getAttribute(
+			(Stack<JournalTemplate>)portletSession.getAttribute(
 				WebKeys.JOURNAL_RECENT_TEMPLATES);
 
 		if (recentTemplates == null) {
 			recentTemplates = new FiniteUniqueStack<JournalTemplate>(
 				MAX_STACK_SIZE);
 
-			ses.setAttribute(WebKeys.JOURNAL_RECENT_TEMPLATES, recentTemplates);
+			portletSession.setAttribute(
+				WebKeys.JOURNAL_RECENT_TEMPLATES, recentTemplates);
 		}
 
 		return recentTemplates;
@@ -797,9 +801,9 @@ public class JournalUtil {
 	}
 
 	public static void removeRecentArticle(
-		PortletRequest req, String articleId) {
+		PortletRequest portletRequest, String articleId) {
 
-		Stack<JournalArticle> stack = getRecentArticles(req);
+		Stack<JournalArticle> stack = getRecentArticles(portletRequest);
 
 		Iterator<JournalArticle> itr = stack.iterator();
 
@@ -815,9 +819,9 @@ public class JournalUtil {
 	}
 
 	public static void removeRecentStructure(
-		PortletRequest req, String structureId) {
+		PortletRequest portletRequest, String structureId) {
 
-		Stack<JournalStructure> stack = getRecentStructures(req);
+		Stack<JournalStructure> stack = getRecentStructures(portletRequest);
 
 		Iterator<JournalStructure> itr = stack.iterator();
 
@@ -833,9 +837,9 @@ public class JournalUtil {
 	}
 
 	public static void removeRecentTemplate(
-		PortletRequest req, String templateId) {
+		PortletRequest portletRequest, String templateId) {
 
-		Stack<JournalTemplate> stack = getRecentTemplates(req);
+		Stack<JournalTemplate> stack = getRecentTemplates(portletRequest);
 
 		Iterator<JournalTemplate> itr = stack.iterator();
 

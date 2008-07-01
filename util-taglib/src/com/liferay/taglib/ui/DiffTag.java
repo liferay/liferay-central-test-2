@@ -27,7 +27,7 @@ import com.liferay.util.diff.DiffResult;
 
 import java.util.List;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="DiffTag.java.html"><b><i>View Source</i></b></a>
@@ -38,11 +38,12 @@ import javax.servlet.ServletRequest;
 public class DiffTag extends IncludeTag {
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute("liferay-ui:diff:sourceName", _sourceName);
-		req.setAttribute("liferay-ui:diff:targetName", _targetName);
-		req.setAttribute("liferay-ui:diff:diffResults", _diffResults);
+		request.setAttribute("liferay-ui:diff:sourceName", _sourceName);
+		request.setAttribute("liferay-ui:diff:targetName", _targetName);
+		request.setAttribute("liferay-ui:diff:diffResults", _diffResults);
 
 		return EVAL_BODY_BUFFERED;
 	}

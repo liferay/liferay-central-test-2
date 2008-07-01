@@ -55,14 +55,16 @@ public class ProgressTracker {
 
 	public void updateProgress(int percentage) {
 		if (_request != null) {
-			HttpSession ses = _request.getSession(true);
+			HttpSession session = _request.getSession(true);
 
-			ses.setAttribute(PERCENT + _progressId, new Integer(percentage));
+			session.setAttribute(
+				PERCENT + _progressId, new Integer(percentage));
 		}
 		else {
-			PortletSession ses = _portletRequest.getPortletSession(true);
+			PortletSession portletSession = _portletRequest.getPortletSession(
+				true);
 
-			ses.setAttribute(
+			portletSession.setAttribute(
 				PERCENT + _progressId, new Integer(percentage),
 				PortletSession.APPLICATION_SCOPE);
 		}

@@ -56,10 +56,10 @@ public class PermissionsURLTagUtil extends TagSupport {
 		throws JspException {
 
 		try {
-			HttpServletRequest req =
+			HttpServletRequest request =
 				(HttpServletRequest)pageContext.getRequest();
 
-			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
 			PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
@@ -67,11 +67,11 @@ public class PermissionsURLTagUtil extends TagSupport {
 			Layout layout = themeDisplay.getLayout();
 
 			if (Validator.isNull(redirect)) {
-				redirect = PortalUtil.getCurrentURL(req);
+				redirect = PortalUtil.getCurrentURL(request);
 			}
 
 			PortletURL portletURL = new PortletURLImpl(
-				req, PortletKeys.PORTLET_CONFIGURATION, layout.getPlid(),
+				request, PortletKeys.PORTLET_CONFIGURATION, layout.getPlid(),
 				PortletRequest.RENDER_PHASE);
 
 			if (themeDisplay.isStatePopUp()) {

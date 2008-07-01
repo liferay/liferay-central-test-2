@@ -94,7 +94,7 @@ public class ChangePasswordAction extends Action {
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
-		HttpSession ses = request.getSession();
+		HttpSession session = request.getSession();
 
 		long userId = PortalUtil.getUserId(request);
 		String password1 = ParamUtil.getString(request, "password1");
@@ -104,7 +104,7 @@ public class ChangePasswordAction extends Action {
 		UserServiceUtil.updatePassword(
 			userId, password1, password2, passwordReset);
 
-		ses.setAttribute(WebKeys.USER_PASSWORD, password1);
+		session.setAttribute(WebKeys.USER_PASSWORD, password1);
 	}
 
 }

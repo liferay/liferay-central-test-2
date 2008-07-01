@@ -54,15 +54,16 @@ public class RenderParametersPool {
 	}
 
 	public static Map<String, Map<String, String[]>> get(
-			HttpServletRequest request, long plid) {
-		HttpSession ses = request.getSession();
+		HttpServletRequest request, long plid) {
+
+		HttpSession session = request.getSession();
 
 		if (plid <= 0) {
 			return new ConcurrentHashMap<String, Map<String, String[]>>();
 		}
 
 		Map<Long, Map<String, Map<String, String[]>>> pool =
-			_getRenderParametersPool(ses);
+			_getRenderParametersPool(session);
 
 		Map<String, Map<String, String[]>> plidPool = pool.get(plid);
 

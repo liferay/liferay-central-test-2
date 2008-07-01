@@ -69,7 +69,7 @@ public class OpenIdRequestAction extends Action {
 			return;
 		}
 
-		HttpSession ses = request.getSession();
+		HttpSession session = request.getSession();
 
 		String returnURL =
 			PortalUtil.getPortalURL(request) + themeDisplay.getPathMain() +
@@ -81,7 +81,7 @@ public class OpenIdRequestAction extends Action {
 
 		DiscoveryInformation discovered = manager.associate(discoveries);
 
-		ses.setAttribute(WebKeys.OPEN_ID_DISCO, discovered);
+		session.setAttribute(WebKeys.OPEN_ID_DISCO, discovered);
 
 		AuthRequest authRequest = manager.authenticate(discovered, returnURL);
 

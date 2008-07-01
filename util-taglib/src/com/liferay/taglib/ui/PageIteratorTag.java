@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
@@ -42,25 +42,29 @@ public class PageIteratorTag extends TagSupport {
 		try {
 			_pages = (int)Math.ceil((double)_total / _delta);
 
-			ServletRequest req = pageContext.getRequest();
+			HttpServletRequest request =
+				(HttpServletRequest)pageContext.getRequest();
 
-			req.setAttribute("liferay-ui:page-iterator:formName", _formName);
-			req.setAttribute("liferay-ui:page-iterator:curParam", _curParam);
-			req.setAttribute(
+			request.setAttribute(
+				"liferay-ui:page-iterator:formName", _formName);
+			request.setAttribute(
+				"liferay-ui:page-iterator:curParam", _curParam);
+			request.setAttribute(
 				"liferay-ui:page-iterator:curValue", String.valueOf(_curValue));
-			req.setAttribute(
+			request.setAttribute(
 				"liferay-ui:page-iterator:delta", String.valueOf(_delta));
-			req.setAttribute("liferay-ui:page-iterator:jsCall", _jsCall);
-			req.setAttribute(
+			request.setAttribute("liferay-ui:page-iterator:jsCall", _jsCall);
+			request.setAttribute(
 				"liferay-ui:page-iterator:maxPages", String.valueOf(_maxPages));
-			req.setAttribute("liferay-ui:page-iterator:target", _target);
-			req.setAttribute(
+			request.setAttribute("liferay-ui:page-iterator:target", _target);
+			request.setAttribute(
 				"liferay-ui:page-iterator:total", String.valueOf(_total));
-			req.setAttribute("liferay-ui:page-iterator:url", _url);
-			req.setAttribute("liferay-ui:page-iterator:urlAnchor", _urlAnchor);
-			req.setAttribute(
+			request.setAttribute("liferay-ui:page-iterator:url", _url);
+			request.setAttribute(
+				"liferay-ui:page-iterator:urlAnchor", _urlAnchor);
+			request.setAttribute(
 				"liferay-ui:page-iterator:pages", String.valueOf(_pages));
-			req.setAttribute("liferay-ui:page-iterator:type", _type);
+			request.setAttribute("liferay-ui:page-iterator:type", _type);
 
 			PortalIncludeUtil.include(pageContext, getStartPage());
 

@@ -35,93 +35,93 @@ import javax.servlet.http.HttpSession;
  */
 public class HttpSessionWrapper implements HttpSession {
 
-	public HttpSessionWrapper(HttpSession ses) {
-		_ses = ses;
+	public HttpSessionWrapper(HttpSession session) {
+		_session = session;
 	}
 
 	public Object getAttribute(String name) {
-		return _ses.getAttribute(name);
+		return _session.getAttribute(name);
 	}
 
 	public Enumeration<String> getAttributeNames() {
-		return _ses.getAttributeNames();
+		return _session.getAttributeNames();
 	}
 
 	public long getCreationTime() {
-		return _ses.getCreationTime();
+		return _session.getCreationTime();
 	}
 
 	public String getId() {
-		return _ses.getId();
+		return _session.getId();
 	}
 
 	public long getLastAccessedTime() {
-		return _ses.getLastAccessedTime();
+		return _session.getLastAccessedTime();
 	}
 
 	public int getMaxInactiveInterval() {
-		return _ses.getMaxInactiveInterval();
+		return _session.getMaxInactiveInterval();
 	}
 
 	public ServletContext getServletContext() {
-		return _ses.getServletContext();
+		return _session.getServletContext();
 	}
 
 	/**
 	 * @deprecated
 	 */
 	public javax.servlet.http.HttpSessionContext getSessionContext() {
-		return _ses.getSessionContext();
+		return _session.getSessionContext();
 	}
 
 	/**
 	 * @deprecated
 	 */
 	public Object getValue(String name) {
-		return _ses.getValue(name);
+		return _session.getValue(name);
 	}
 
 	/**
 	 * @deprecated
 	 */
 	public String[] getValueNames() {
-		return _ses.getValueNames();
+		return _session.getValueNames();
 	}
 
 	public void invalidate() {
-		_ses.invalidate();
+		_session.invalidate();
 	}
 
 	public boolean isNew() {
-		return _ses.isNew();
+		return _session.isNew();
 	}
 
 	/**
 	 * @deprecated
 	 */
 	public void putValue(String name, Object value) {
-		_ses.putValue(name, value);
+		_session.putValue(name, value);
 	}
 
 	public void removeAttribute(String name) {
-		_ses.removeAttribute(name);
+		_session.removeAttribute(name);
 	}
 
 	/**
 	 * @deprecated
 	 */
 	public void removeValue(String name) {
-		_ses.removeValue(name);
+		_session.removeValue(name);
 	}
 
 	public void setAttribute(String name, Object value) {
-		_ses.setAttribute(name, value);
+		_session.setAttribute(name, value);
 	}
 
 	public void setMaxInactiveInterval(int interval) {
-		_ses.setMaxInactiveInterval(interval);
+		_session.setMaxInactiveInterval(interval);
 	}
 
-	private HttpSession _ses;
+	private HttpSession _session;
 
 }

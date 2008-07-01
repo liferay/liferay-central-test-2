@@ -90,9 +90,9 @@ public class LiferayServletContextProvider implements ServletContextProvider {
 	}
 
 	public HttpServletResponse getHttpServletResponse(
-		GenericPortlet portlet, PortletResponse res) {
+		GenericPortlet portlet, PortletResponse portletResponse) {
 
-		return PortalUtil.getHttpServletResponse(res);
+		return PortalUtil.getHttpServletResponse(portletResponse);
 	}
 
 }

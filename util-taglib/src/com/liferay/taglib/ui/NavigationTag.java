@@ -24,7 +24,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.taglib.util.IncludeTag;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="NavigationTag.java.html"><b><i>View Source</i></b></a>
@@ -36,17 +36,19 @@ import javax.servlet.ServletRequest;
 public class NavigationTag extends IncludeTag {
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute("liferay-ui:navigation:bulletStyle", _bulletStyle);
-		req.setAttribute("liferay-ui:navigation:displayStyle", _displayStyle);
-		req.setAttribute("liferay-ui:navigation:headerType", _headerType);
-		req.setAttribute(
+		request.setAttribute("liferay-ui:navigation:bulletStyle", _bulletStyle);
+		request.setAttribute(
+			"liferay-ui:navigation:displayStyle", _displayStyle);
+		request.setAttribute("liferay-ui:navigation:headerType", _headerType);
+		request.setAttribute(
 			"liferay-ui:navigation:rootLayoutType", _rootLayoutType);
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:navigation:rootLayoutLevel",
 			String.valueOf(_rootLayoutLevel));
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:navigation:includedLayouts", _includedLayouts);
 
 		return EVAL_BODY_BUFFERED;

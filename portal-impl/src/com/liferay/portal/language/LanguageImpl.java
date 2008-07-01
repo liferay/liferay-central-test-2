@@ -308,9 +308,10 @@ public class LanguageImpl implements Language {
 	public String get(
 		PageContext pageContext, String key, String defaultValue) {
 
-		HttpServletRequest req = (HttpServletRequest)pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		if (themeDisplay != null) {
@@ -337,11 +338,11 @@ public class LanguageImpl implements Language {
 
 			// LEP-2849
 
-			PortletConfig portletConfig = (PortletConfig)req.getAttribute(
+			PortletConfig portletConfig = (PortletConfig)request.getAttribute(
 				JavaConstants.JAVAX_PORTLET_CONFIG);
 
 			if (portletConfig != null) {
-				Locale locale = req.getLocale();
+				Locale locale = request.getLocale();
 
 				ResourceBundle bundle = portletConfig.getResourceBundle(locale);
 

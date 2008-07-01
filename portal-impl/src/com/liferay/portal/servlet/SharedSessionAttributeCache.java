@@ -37,15 +37,15 @@ import javax.servlet.http.HttpSession;
  */
 public class SharedSessionAttributeCache implements Serializable {
 
-	public static SharedSessionAttributeCache getInstance(HttpSession ses) {
-		synchronized (ses) {
+	public static SharedSessionAttributeCache getInstance(HttpSession session) {
+		synchronized (session) {
 			SharedSessionAttributeCache cache =
-				(SharedSessionAttributeCache)ses.getAttribute(_SESSION_KEY);
+				(SharedSessionAttributeCache)session.getAttribute(_SESSION_KEY);
 
 			if (cache == null) {
 				cache = new SharedSessionAttributeCache();
 
-				ses.setAttribute(_SESSION_KEY, cache);
+				session.setAttribute(_SESSION_KEY, cache);
 			}
 
 			return cache;

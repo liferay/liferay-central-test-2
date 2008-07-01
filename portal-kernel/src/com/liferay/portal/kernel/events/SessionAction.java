@@ -32,6 +32,6 @@ import javax.servlet.http.HttpSession;
  */
 public abstract class SessionAction {
 
-	public abstract void run(HttpSession ses) throws ActionException;
+	public abstract void run(HttpSession session) throws ActionException;
 
 }

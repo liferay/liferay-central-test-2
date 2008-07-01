@@ -38,11 +38,11 @@ import java.util.Map;
 public class StrutsActionPortletURL extends PortletURLImplWrapper {
 
 	public StrutsActionPortletURL(
-		PortletResponseImpl res, long plid, String lifecycle) {
+		PortletResponseImpl portletResponseImpl, long plid, String lifecycle) {
 
-		super(res, plid, lifecycle);
+		super(portletResponseImpl, plid, lifecycle);
 
-		_portlet = res.getPortlet();
+		_portlet = portletResponseImpl.getPortlet();
 		_strutsPath =
 			StringPool.SLASH + _portlet.getStrutsPath() + StringPool.SLASH;
 	}

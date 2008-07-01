@@ -41,19 +41,20 @@ public class HeadMethodImpl implements Method {
 	public int process(WebDAVRequest webDavRequest) throws WebDAVException {
 		try {
 			WebDAVStorage storage = webDavRequest.getWebDAVStorage();
-			HttpServletResponse res = webDavRequest.getHttpServletResponse();
+			HttpServletResponse response =
+				webDavRequest.getHttpServletResponse();
 
 			Resource resource = storage.getResource(webDavRequest);
 
 			int status = HttpServletResponse.SC_NOT_FOUND;
 
 			if (resource == null) {
-				res.sendError(
+				response.sendError(
 					HttpServletResponse.SC_NOT_FOUND, webDavRequest.getPath());
 			}
 			else {
 				if (!resource.isCollection()) {
-					res.setContentLength(resource.getSize());
+					response.setContentLength(resource.getSize());
 				}
 
 				status = HttpServletResponse.SC_OK;

@@ -28,7 +28,7 @@ import java.text.DateFormat;
 
 import java.util.Set;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="CalendarTag.java.html"><b><i>View Source</i></b></a>
@@ -39,15 +39,18 @@ import javax.servlet.ServletRequest;
 public class CalendarTag extends IncludeTag {
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute("liferay-ui:calendar:month", String.valueOf(_month));
-		req.setAttribute("liferay-ui:calendar:day", String.valueOf(_day));
-		req.setAttribute("liferay-ui:calendar:year", String.valueOf(_year));
-		req.setAttribute("liferay-ui:calendar:headerPattern", _headerPattern);
-		req.setAttribute("liferay-ui:calendar:headerFormat", _headerFormat);
-		req.setAttribute("liferay-ui:calendar:data", _data);
-		req.setAttribute(
+		request.setAttribute(
+			"liferay-ui:calendar:month", String.valueOf(_month));
+		request.setAttribute("liferay-ui:calendar:day", String.valueOf(_day));
+		request.setAttribute("liferay-ui:calendar:year", String.valueOf(_year));
+		request.setAttribute(
+			"liferay-ui:calendar:headerPattern", _headerPattern);
+		request.setAttribute("liferay-ui:calendar:headerFormat", _headerFormat);
+		request.setAttribute("liferay-ui:calendar:data", _data);
+		request.setAttribute(
 			"liferay-ui:calendar:showAllPotentialWeeks",
 			String.valueOf(_showAllPotentialWeeks));
 

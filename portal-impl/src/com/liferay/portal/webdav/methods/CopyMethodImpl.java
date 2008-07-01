@@ -45,10 +45,10 @@ public class CopyMethodImpl implements Method {
 
 	public int process(WebDAVRequest webDavRequest) throws WebDAVException {
 		WebDAVStorage storage = webDavRequest.getWebDAVStorage();
-		HttpServletRequest req = webDavRequest.getHttpServletRequest();
+		HttpServletRequest request = webDavRequest.getHttpServletRequest();
 
 		String destination = WebDAVUtil.getDestination(
-			req, storage.getRootPath());
+			request, storage.getRootPath());
 
 		StringBuilder sb = new StringBuilder();
 
@@ -68,8 +68,8 @@ public class CopyMethodImpl implements Method {
 				status = HttpServletResponse.SC_NOT_FOUND;
 			}
 			else if (resource.isCollection()) {
-				boolean overwrite = WebDAVUtil.isOverwrite(req);
-				long depth = WebDAVUtil.getDepth(req);
+				boolean overwrite = WebDAVUtil.isOverwrite(request);
+				long depth = WebDAVUtil.getDepth(request);
 
 				if (_log.isInfoEnabled()) {
 					sb.append(", overwrite is " + overwrite);
@@ -82,7 +82,7 @@ public class CopyMethodImpl implements Method {
 					webDavRequest, resource, destination, overwrite, depth);
 			}
 			else {
-				boolean overwrite = WebDAVUtil.isOverwrite(req);
+				boolean overwrite = WebDAVUtil.isOverwrite(request);
 
 				if (_log.isInfoEnabled()) {
 					sb.append(", overwrite is " + overwrite);

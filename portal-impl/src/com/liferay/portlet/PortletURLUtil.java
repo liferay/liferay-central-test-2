@@ -41,14 +41,16 @@ import javax.portlet.WindowState;
  */
 public class PortletURLUtil {
 
-	public static PortletURL getCurrent(PortletRequest req, MimeResponse res) {
-		PortletURL portletURL = res.createRenderURL();
+	public static PortletURL getCurrent(
+		PortletRequest portletRequest, MimeResponse mimeResponse) {
 
-		Enumeration<String> enu = req.getParameterNames();
+		PortletURL portletURL = mimeResponse.createRenderURL();
+
+		Enumeration<String> enu = portletRequest.getParameterNames();
 
 		while (enu.hasMoreElements()) {
 			String param = enu.nextElement();
-			String[] values = req.getParameterValues(param);
+			String[] values = portletRequest.getParameterValues(param);
 
 			boolean addParam = true;
 
@@ -70,35 +72,37 @@ public class PortletURLUtil {
 		return portletURL;
 	}
 
-	public static PortletURL clone(PortletURL portletURL, MimeResponse res)
+	public static PortletURL clone(
+			PortletURL portletURL, MimeResponse mimeResponse)
 		throws PortletException {
 
 		LiferayPortletURL liferayPortletURL = (LiferayPortletURL)portletURL;
 
-		return clone(liferayPortletURL, liferayPortletURL.getLifecycle(), res);
+		return clone(
+			liferayPortletURL, liferayPortletURL.getLifecycle(), mimeResponse);
 	}
 
 	public static PortletURL clone(
-			PortletURL portletURL, String lifecycle, MimeResponse res)
+			PortletURL portletURL, String lifecycle, MimeResponse mimeResponse)
 		throws PortletException {
 
 		LiferayPortletURL liferayPortletURL = (LiferayPortletURL)portletURL;
 
-		return clone(liferayPortletURL, lifecycle, res);
+		return clone(liferayPortletURL, lifecycle, mimeResponse);
 	}
 
 	public static PortletURL clone(
 			LiferayPortletURL liferayPortletURL, String lifecycle,
-			MimeResponse res)
+			MimeResponse mimeResponse)
 		throws PortletException {
 
 		LiferayPortletURL newURLImpl = null;
 
 		if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
-			newURLImpl = (LiferayPortletURL)res.createActionURL();
+			newURLImpl = (LiferayPortletURL)mimeResponse.createActionURL();
 		}
 		else if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
-			newURLImpl = (LiferayPortletURL)res.createRenderURL();
+			newURLImpl = (LiferayPortletURL)mimeResponse.createRenderURL();
 		}
 
 		newURLImpl.setPortletId(liferayPortletURL.getPortletId());

@@ -27,7 +27,7 @@ import com.liferay.taglib.util.IncludeTag;
 
 import java.util.TimeZone;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="InputTimeZoneTag.java.html"><b><i>View Source</i></b></a>
@@ -38,18 +38,19 @@ import javax.servlet.ServletRequest;
 public class InputTimeZoneTag extends IncludeTag {
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute("liferay-ui:input-time-zone:name", _name);
-		req.setAttribute("liferay-ui:input-time-zone:value", _value);
-		req.setAttribute(
+		request.setAttribute("liferay-ui:input-time-zone:name", _name);
+		request.setAttribute("liferay-ui:input-time-zone:value", _value);
+		request.setAttribute(
 			"liferay-ui:input-time-zone:nullable", String.valueOf(_nullable));
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:input-time-zone:daylight", String.valueOf(_daylight));
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:input-time-zone:displayStyle",
 			String.valueOf(_displayStyle));
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:input-time-zone:disabled", String.valueOf(_disabled));
 
 		return EVAL_BODY_BUFFERED;

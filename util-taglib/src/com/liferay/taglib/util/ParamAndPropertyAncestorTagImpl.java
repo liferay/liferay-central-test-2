@@ -34,7 +34,6 @@ import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.tagext.BodyTagSupport;
@@ -116,19 +115,21 @@ public class ParamAndPropertyAncestorTagImpl
 	}
 
 	public ServletContext getServletContext() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		return (ServletContext)req.getAttribute(WebKeys.CTX);
+		return (ServletContext)request.getAttribute(WebKeys.CTX);
 	}
 
 	public HttpServletRequest getServletRequest() {
-		HttpServletRequest req = (HttpServletRequest)pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
 		if (_params != null) {
-			req = new DynamicServletRequest(req, _params);
+			request = new DynamicServletRequest(request, _params);
 		}
 
-		return req;
+		return request;
 	}
 
 	public StringServletResponse getServletResponse() {

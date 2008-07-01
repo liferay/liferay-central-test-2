@@ -31,9 +31,11 @@ package com.liferay.portlet;
 public class PortletURLImplWrapper extends PortletURLImpl {
 
 	public PortletURLImplWrapper(
-		PortletResponseImpl res, long plid, String lifecycle) {
+		PortletResponseImpl portletResponseImpl, long plid, String lifecycle) {
 
-		super(res.getPortletRequest(), res.getPortletName(), plid, lifecycle);
+		super(
+			portletResponseImpl.getPortletRequest(),
+			portletResponseImpl.getPortletName(), plid, lifecycle);
 	}
 
 }

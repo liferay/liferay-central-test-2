@@ -56,7 +56,9 @@ import org.dom4j.Element;
  */
 public class PortletRequestUtil {
 
-	public static String toXML(PortletRequest req, PortletResponse res) {
+	public static String toXML(
+		PortletRequest portletRequest, PortletResponse portletResponse) {
+
 		String xml = null;
 
 		Document doc = DocumentHelper.createDocument();
@@ -64,34 +66,38 @@ public class PortletRequestUtil {
 		Element reqEl = doc.addElement("request");
 
 		DocUtil.add(reqEl, "container-type", "portlet");
-		DocUtil.add(reqEl, "container-namespace", req.getContextPath());
-		DocUtil.add(reqEl, "content-type", req.getResponseContentType());
-		DocUtil.add(reqEl, "server-name", req.getServerName());
-		DocUtil.add(reqEl, "server-port", req.getServerPort());
-		DocUtil.add(reqEl, "secure", req.isSecure());
-		DocUtil.add(reqEl, "auth-type", req.getAuthType());
-		DocUtil.add(reqEl, "remote-user", req.getRemoteUser());
-		DocUtil.add(reqEl, "context-path", req.getContextPath());
-		DocUtil.add(reqEl, "locale", req.getLocale());
-		DocUtil.add(reqEl, "portlet-mode", req.getPortletMode());
-		DocUtil.add(reqEl, "portlet-session-id", req.getRequestedSessionId());
-		DocUtil.add(reqEl, "scheme", req.getScheme());
-		DocUtil.add(reqEl, "window-state", req.getWindowState());
+		DocUtil.add(
+			reqEl, "container-namespace", portletRequest.getContextPath());
+		DocUtil.add(
+			reqEl, "content-type", portletRequest.getResponseContentType());
+		DocUtil.add(reqEl, "server-name", portletRequest.getServerName());
+		DocUtil.add(reqEl, "server-port", portletRequest.getServerPort());
+		DocUtil.add(reqEl, "secure", portletRequest.isSecure());
+		DocUtil.add(reqEl, "auth-type", portletRequest.getAuthType());
+		DocUtil.add(reqEl, "remote-user", portletRequest.getRemoteUser());
+		DocUtil.add(reqEl, "context-path", portletRequest.getContextPath());
+		DocUtil.add(reqEl, "locale", portletRequest.getLocale());
+		DocUtil.add(reqEl, "portlet-mode", portletRequest.getPortletMode());
+		DocUtil.add(
+			reqEl, "portlet-session-id",
+			portletRequest.getRequestedSessionId());
+		DocUtil.add(reqEl, "scheme", portletRequest.getScheme());
+		DocUtil.add(reqEl, "window-state", portletRequest.getWindowState());
 
-		if (req instanceof RenderRequest) {
+		if (portletRequest instanceof RenderRequest) {
 			DocUtil.add(reqEl, "action", Boolean.FALSE);
 		}
-		else if (req instanceof ActionRequest) {
+		else if (portletRequest instanceof ActionRequest) {
 			DocUtil.add(reqEl, "action", Boolean.TRUE);
 		}
 
-		if (res instanceof RenderResponse) {
-			_renderResponseToXML((RenderResponse)res, reqEl);
+		if (portletResponse instanceof RenderResponse) {
+			_renderResponseToXML((RenderResponse)portletResponse, reqEl);
 		}
 
 		Element parametersEl = reqEl.addElement("parameters");
 
-		Enumeration<String> enu = req.getParameterNames();
+		Enumeration<String> enu = portletRequest.getParameterNames();
 
 		while (enu.hasMoreElements()) {
 			String name = enu.nextElement();
@@ -100,7 +106,7 @@ public class PortletRequestUtil {
 
 			DocUtil.add(parameterEl, "name", name);
 
-			String[] values = req.getParameterValues(name);
+			String[] values = portletRequest.getParameterValues(name);
 
 			for (int i = 0; i < values.length; i++) {
 				DocUtil.add(parameterEl, "value", values[i]);
@@ -109,7 +115,7 @@ public class PortletRequestUtil {
 
 		Element attributesEl = reqEl.addElement("attributes");
 
-		enu = req.getAttributeNames();
+		enu = portletRequest.getAttributeNames();
 
 		while (enu.hasMoreElements()) {
 			String name = enu.nextElement();
@@ -118,7 +124,7 @@ public class PortletRequestUtil {
 				continue;
 			}
 
-			Object value = req.getAttribute(name);
+			Object value = portletRequest.getAttribute(name);
 
 			if (!_isValidAttributeValue(value)) {
 				continue;
@@ -134,9 +140,9 @@ public class PortletRequestUtil {
 
 		attributesEl = portletSessionEl.addElement("portlet-attributes");
 
-		PortletSession ses = req.getPortletSession();
+		PortletSession portletSession = portletRequest.getPortletSession();
 
-		enu = ses.getAttributeNames(PortletSession.PORTLET_SCOPE);
+		enu = portletSession.getAttributeNames(PortletSession.PORTLET_SCOPE);
 
 		while (enu.hasMoreElements()) {
 			String name = enu.nextElement();
@@ -145,7 +151,8 @@ public class PortletRequestUtil {
 				continue;
 			}
 
-			Object value = ses.getAttribute(name, PortletSession.PORTLET_SCOPE);
+			Object value = portletSession.getAttribute(
+				name, PortletSession.PORTLET_SCOPE);
 
 			if (!_isValidAttributeValue(value)) {
 				continue;
@@ -159,7 +166,8 @@ public class PortletRequestUtil {
 
 		attributesEl = portletSessionEl.addElement("application-attributes");
 
-		enu = ses.getAttributeNames(PortletSession.APPLICATION_SCOPE);
+		enu = portletSession.getAttributeNames(
+			PortletSession.APPLICATION_SCOPE);
 
 		while (enu.hasMoreElements()) {
 			String name = enu.nextElement();
@@ -168,7 +176,7 @@ public class PortletRequestUtil {
 				continue;
 			}
 
-			Object value = ses.getAttribute(
+			Object value = portletSession.getAttribute(
 				name, PortletSession.APPLICATION_SCOPE);
 
 			if (!_isValidAttributeValue(value)) {

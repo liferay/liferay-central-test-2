@@ -24,7 +24,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.taglib.util.IncludeTag;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="TagsSelectorTag.java.html"><b><i>View Source</i></b></a>
@@ -35,16 +35,18 @@ import javax.servlet.ServletRequest;
 public class TagsSelectorTag extends IncludeTag {
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute("liferay-ui:tags_selector:className", _className);
-		req.setAttribute(
+		request.setAttribute("liferay-ui:tags_selector:className", _className);
+		request.setAttribute(
 			"liferay-ui:tags_selector:classPK", String.valueOf(_classPK));
-		req.setAttribute("liferay-ui:tags_selector:hiddenInput", _hiddenInput);
-		req.setAttribute("liferay-ui:tags_selector:curTags", _curTags);
-		req.setAttribute(
+		request.setAttribute(
+			"liferay-ui:tags_selector:hiddenInput", _hiddenInput);
+		request.setAttribute("liferay-ui:tags_selector:curTags", _curTags);
+		request.setAttribute(
 			"liferay-ui:tags_selector:focus", String.valueOf(_focus));
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:tags_selector:contentCallback",
 			String.valueOf(_contentCallback));
 

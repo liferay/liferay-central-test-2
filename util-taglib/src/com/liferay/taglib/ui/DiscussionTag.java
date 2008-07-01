@@ -24,7 +24,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.taglib.util.IncludeTag;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="DiscussionTag.java.html"><b><i>View Source</i></b></a>
@@ -35,18 +35,19 @@ import javax.servlet.ServletRequest;
 public class DiscussionTag extends IncludeTag {
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute("liferay-ui:discussion:formName", _formName);
-		req.setAttribute("liferay-ui:discussion:formAction", _formAction);
-		req.setAttribute("liferay-ui:discussion:className", _className);
-		req.setAttribute(
+		request.setAttribute("liferay-ui:discussion:formName", _formName);
+		request.setAttribute("liferay-ui:discussion:formAction", _formAction);
+		request.setAttribute("liferay-ui:discussion:className", _className);
+		request.setAttribute(
 			"liferay-ui:discussion:classPK", String.valueOf(_classPK));
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:discussion:userId", String.valueOf(_userId));
-		req.setAttribute("liferay-ui:discussion:subject", _subject);
-		req.setAttribute("liferay-ui:discussion:redirect", _redirect);
-		req.setAttribute(
+		request.setAttribute("liferay-ui:discussion:subject", _subject);
+		request.setAttribute("liferay-ui:discussion:redirect", _redirect);
+		request.setAttribute(
 			"liferay-ui:discussion:ratingsEnabled",
 			String.valueOf(_ratingsEnabled));
 

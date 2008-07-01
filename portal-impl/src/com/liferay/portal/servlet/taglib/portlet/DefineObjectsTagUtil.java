@@ -30,7 +30,7 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletSession;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -42,13 +42,15 @@ import javax.servlet.jsp.PageContext;
 public class DefineObjectsTagUtil {
 
 	public static void doStartTag(PageContext pageContext) {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		String lifecycle = (String)req.getAttribute(
+		String lifecycle = (String)request.getAttribute(
 			PortletRequest.LIFECYCLE_PHASE);
 
-		PortletConfigImpl portletConfig = (PortletConfigImpl)req.getAttribute(
-			JavaConstants.JAVAX_PORTLET_CONFIG);
+		PortletConfigImpl portletConfig =
+			(PortletConfigImpl)request.getAttribute(
+				JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		if (portletConfig != null) {
 			pageContext.setAttribute("portletConfig", portletConfig);
@@ -56,7 +58,7 @@ public class DefineObjectsTagUtil {
 				"portletName", portletConfig.getPortletName());
 		}
 
-		PortletRequest portletRequest = (PortletRequest)req.getAttribute(
+		PortletRequest portletRequest = (PortletRequest)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST);
 
 		if (portletRequest != null) {
@@ -96,7 +98,7 @@ public class DefineObjectsTagUtil {
 			}
 		}
 
-		PortletResponse portletResponse = (PortletResponse)req.getAttribute(
+		PortletResponse portletResponse = (PortletResponse)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 		if (portletResponse != null) {

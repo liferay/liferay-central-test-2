@@ -24,7 +24,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.taglib.util.IncludeTag;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="InputResourceTag.java.html"><b><i>View Source</i></b></a>
@@ -35,9 +35,10 @@ import javax.servlet.ServletRequest;
 public class InputResourceTag extends IncludeTag {
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute("liferay-ui:input-resource:url", _url);
+		request.setAttribute("liferay-ui:input-resource:url", _url);
 
 		return EVAL_BODY_BUFFERED;
 	}

@@ -24,7 +24,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.taglib.util.IncludeTag;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="InputFieldTag.java.html"><b><i>View Source</i></b></a>
@@ -35,15 +35,17 @@ import javax.servlet.ServletRequest;
 public class InputFieldTag extends IncludeTag {
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute("liferay-ui:input-field:formName", _formName);
-		req.setAttribute("liferay-ui:input-field:model", _model.getName());
-		req.setAttribute("liferay-ui:input-field:bean", _bean);
-		req.setAttribute("liferay-ui:input-field:field", _field);
-		req.setAttribute("liferay-ui:input-field:fieldParam", _fieldParam);
-		req.setAttribute("liferay-ui:input-field:defaultValue", _defaultValue);
-		req.setAttribute(
+		request.setAttribute("liferay-ui:input-field:formName", _formName);
+		request.setAttribute("liferay-ui:input-field:model", _model.getName());
+		request.setAttribute("liferay-ui:input-field:bean", _bean);
+		request.setAttribute("liferay-ui:input-field:field", _field);
+		request.setAttribute("liferay-ui:input-field:fieldParam", _fieldParam);
+		request.setAttribute(
+			"liferay-ui:input-field:defaultValue", _defaultValue);
+		request.setAttribute(
 			"liferay-ui:input-field:disabled", String.valueOf(_disabled));
 
 		return EVAL_BODY_BUFFERED;

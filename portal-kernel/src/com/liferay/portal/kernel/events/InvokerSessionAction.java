@@ -43,14 +43,14 @@ public class InvokerSessionAction extends SessionAction {
 		_classLoader = classLoader;
 	}
 
-	public void run(HttpSession ses) throws ActionException {
+	public void run(HttpSession session) throws ActionException {
 		ClassLoader contextClassLoader =
 			Thread.currentThread().getContextClassLoader();
 
 		Thread.currentThread().setContextClassLoader(_classLoader);
 
 		try {
-			_sessionAction.run(ses);
+			_sessionAction.run(session);
 		}
 		finally {
 			Thread.currentThread().setContextClassLoader(contextClassLoader);

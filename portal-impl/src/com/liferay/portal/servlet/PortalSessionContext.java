@@ -39,8 +39,8 @@ public class PortalSessionContext {
 		return _instance._get(sessionId);
 	}
 
-	public static void put(String sessionId, HttpSession ses) {
-		_instance._put(sessionId, ses);
+	public static void put(String sessionId, HttpSession session) {
+		_instance._put(sessionId, session);
 	}
 
 	public static HttpSession remove(String sessionId) {
@@ -55,8 +55,8 @@ public class PortalSessionContext {
 		return _sessionPool.get(sessionId);
 	}
 
-	private void _put(String sessionId, HttpSession ses) {
-		_sessionPool.put(sessionId, ses);
+	private void _put(String sessionId, HttpSession session) {
+		_sessionPool.put(sessionId, session);
 	}
 
 	private HttpSession _remove(String sessionId) {

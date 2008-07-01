@@ -30,7 +30,6 @@ import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 
 import javax.portlet.PortletURL;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 
@@ -151,30 +150,31 @@ public class TabsTag extends ParamAndPropertyAncestorTagImpl {
 
 	public int doEndTag() throws JspException {
 		try {
-			ServletRequest req = pageContext.getRequest();
+			HttpServletRequest request =
+				(HttpServletRequest)pageContext.getRequest();
 
 			include(getEndPage());
 
-			req.removeAttribute("liferay-ui:tabs:names");
-			req.removeAttribute("liferay-ui:tabs:values");
-			req.removeAttribute("liferay-ui:tabs:formName");
-			req.removeAttribute("liferay-ui:tabs:param");
-			req.removeAttribute("liferay-ui:tabs:value");
-			req.removeAttribute("liferay-ui:tabs:portletURL");
-			req.removeAttribute("liferay-ui:tabs:url");
-			req.removeAttribute("liferay-ui:tabs:url0");
-			req.removeAttribute("liferay-ui:tabs:url1");
-			req.removeAttribute("liferay-ui:tabs:url2");
-			req.removeAttribute("liferay-ui:tabs:url3");
-			req.removeAttribute("liferay-ui:tabs:url4");
-			req.removeAttribute("liferay-ui:tabs:url5");
-			req.removeAttribute("liferay-ui:tabs:url6");
-			req.removeAttribute("liferay-ui:tabs:url7");
-			req.removeAttribute("liferay-ui:tabs:url8");
-			req.removeAttribute("liferay-ui:tabs:url9");
-			req.removeAttribute("liferay-ui:tabs:backURL");
-			req.removeAttribute("liferay-ui:tabs:refresh");
-			req.removeAttribute("liferay-ui:tabs:onClick");
+			request.removeAttribute("liferay-ui:tabs:names");
+			request.removeAttribute("liferay-ui:tabs:values");
+			request.removeAttribute("liferay-ui:tabs:formName");
+			request.removeAttribute("liferay-ui:tabs:param");
+			request.removeAttribute("liferay-ui:tabs:value");
+			request.removeAttribute("liferay-ui:tabs:portletURL");
+			request.removeAttribute("liferay-ui:tabs:url");
+			request.removeAttribute("liferay-ui:tabs:url0");
+			request.removeAttribute("liferay-ui:tabs:url1");
+			request.removeAttribute("liferay-ui:tabs:url2");
+			request.removeAttribute("liferay-ui:tabs:url3");
+			request.removeAttribute("liferay-ui:tabs:url4");
+			request.removeAttribute("liferay-ui:tabs:url5");
+			request.removeAttribute("liferay-ui:tabs:url6");
+			request.removeAttribute("liferay-ui:tabs:url7");
+			request.removeAttribute("liferay-ui:tabs:url8");
+			request.removeAttribute("liferay-ui:tabs:url9");
+			request.removeAttribute("liferay-ui:tabs:backURL");
+			request.removeAttribute("liferay-ui:tabs:refresh");
+			request.removeAttribute("liferay-ui:tabs:onClick");
 
 			return EVAL_PAGE;
 		}

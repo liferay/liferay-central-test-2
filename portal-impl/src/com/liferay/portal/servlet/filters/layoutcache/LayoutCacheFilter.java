@@ -414,9 +414,9 @@ public class LayoutCacheFilter
 					WebKeys.LAST_PATH);
 
 				if (lastPath != null) {
-					HttpSession ses = request.getSession();
+					HttpSession session = request.getSession();
 
-					ses.setAttribute(WebKeys.LAST_PATH, lastPath);
+					session.setAttribute(WebKeys.LAST_PATH, lastPath);
 				}
 			}
 

@@ -24,7 +24,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.taglib.util.IncludeTag;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 
 /**
@@ -36,17 +36,19 @@ import javax.servlet.jsp.JspException;
 public class IconTag extends IncludeTag {
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute("liferay-ui:icon:image", _image);
-		req.setAttribute("liferay-ui:icon:message", _message);
-		req.setAttribute("liferay-ui:icon:src", _src);
-		req.setAttribute("liferay-ui:icon:url", _url);
-		req.setAttribute("liferay-ui:icon:method", _method);
-		req.setAttribute("liferay-ui:icon:target", _target);
-		req.setAttribute("liferay-ui:icon:label", String.valueOf(_label));
-		req.setAttribute("liferay-ui:icon:toolTip", String.valueOf(_toolTip));
-		req.setAttribute("liferay-ui:icon:cssClass", _cssClass);
+		request.setAttribute("liferay-ui:icon:image", _image);
+		request.setAttribute("liferay-ui:icon:message", _message);
+		request.setAttribute("liferay-ui:icon:src", _src);
+		request.setAttribute("liferay-ui:icon:url", _url);
+		request.setAttribute("liferay-ui:icon:method", _method);
+		request.setAttribute("liferay-ui:icon:target", _target);
+		request.setAttribute("liferay-ui:icon:label", String.valueOf(_label));
+		request.setAttribute(
+			"liferay-ui:icon:toolTip", String.valueOf(_toolTip));
+		request.setAttribute("liferay-ui:icon:cssClass", _cssClass);
 
 		return EVAL_BODY_BUFFERED;
 	}
@@ -55,17 +57,18 @@ public class IconTag extends IncludeTag {
 		int value = super.doEndTag();
 
 		try {
-			ServletRequest req = pageContext.getRequest();
+			HttpServletRequest request =
+				(HttpServletRequest)pageContext.getRequest();
 
-			req.removeAttribute("liferay-ui:icon:image");
-			req.removeAttribute("liferay-ui:icon:message");
-			req.removeAttribute("liferay-ui:icon:src");
-			req.removeAttribute("liferay-ui:icon:url");
-			req.removeAttribute("liferay-ui:icon:method");
-			req.removeAttribute("liferay-ui:icon:target");
-			req.removeAttribute("liferay-ui:icon:label");
-			req.removeAttribute("liferay-ui:icon:toolTip");
-			req.removeAttribute("liferay-ui:icon:cssClass");
+			request.removeAttribute("liferay-ui:icon:image");
+			request.removeAttribute("liferay-ui:icon:message");
+			request.removeAttribute("liferay-ui:icon:src");
+			request.removeAttribute("liferay-ui:icon:url");
+			request.removeAttribute("liferay-ui:icon:method");
+			request.removeAttribute("liferay-ui:icon:target");
+			request.removeAttribute("liferay-ui:icon:label");
+			request.removeAttribute("liferay-ui:icon:toolTip");
+			request.removeAttribute("liferay-ui:icon:cssClass");
 
 			return value;
 		}

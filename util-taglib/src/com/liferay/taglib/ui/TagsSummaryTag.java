@@ -26,7 +26,7 @@ import com.liferay.taglib.util.IncludeTag;
 
 import javax.portlet.PortletURL;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="TagsSummaryTag.java.html"><b><i>View Source</i></b></a>
@@ -37,13 +37,14 @@ import javax.servlet.ServletRequest;
 public class TagsSummaryTag extends IncludeTag {
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute("liferay-ui:tags_summary:className", _className);
-		req.setAttribute(
+		request.setAttribute("liferay-ui:tags_summary:className", _className);
+		request.setAttribute(
 			"liferay-ui:tags_summary:classPK", String.valueOf(_classPK));
-		req.setAttribute("liferay-ui:tags_summary:message", _message);
-		req.setAttribute("liferay-ui:tags_summary:portletURL", _portletURL);
+		request.setAttribute("liferay-ui:tags_summary:message", _message);
+		request.setAttribute("liferay-ui:tags_summary:portletURL", _portletURL);
 
 		return EVAL_BODY_BUFFERED;
 	}

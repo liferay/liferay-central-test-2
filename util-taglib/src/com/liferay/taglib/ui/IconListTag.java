@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
-import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyContent;
 import javax.servlet.jsp.tagext.BodyTagSupport;
@@ -41,9 +41,10 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 public class IconListTag extends BodyTagSupport {
 
 	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		req.setAttribute(
+		request.setAttribute(
 			"liferay-ui:icon-list:icon-count", new IntegerWrapper());
 
 		return EVAL_BODY_BUFFERED;
@@ -54,12 +55,13 @@ public class IconListTag extends BodyTagSupport {
 
 		_bodyContentString = bodyContent.getString();
 
-		ServletRequest req = pageContext.getRequest();
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
 
-		IntegerWrapper iconCount = (IntegerWrapper)req.getAttribute(
+		IntegerWrapper iconCount = (IntegerWrapper)request.getAttribute(
 			"liferay-ui:icon-list:icon-count");
 
-		Boolean singleIcon = (Boolean)req.getAttribute(
+		Boolean singleIcon = (Boolean)request.getAttribute(
 			"liferay-ui:icon-list:single-icon");
 
 		if ((iconCount != null) && (iconCount.getValue() == 1) &&
@@ -67,7 +69,8 @@ public class IconListTag extends BodyTagSupport {
 
 			bodyContent.clearBody();
 
-			req.setAttribute("liferay-ui:icon-list:single-icon", Boolean.TRUE);
+			request.setAttribute(
+				"liferay-ui:icon-list:single-icon", Boolean.TRUE);
 
 			return EVAL_BODY_AGAIN;
 		}
@@ -78,17 +81,18 @@ public class IconListTag extends BodyTagSupport {
 
 	public int doEndTag() throws JspException {
 		try {
-			ServletRequest req = pageContext.getRequest();
+			HttpServletRequest request =
+				(HttpServletRequest)pageContext.getRequest();
 
-			IntegerWrapper iconCount = (IntegerWrapper)req.getAttribute(
+			IntegerWrapper iconCount = (IntegerWrapper)request.getAttribute(
 				"liferay-ui:icon-list:icon-count");
 
-			req.removeAttribute("liferay-ui:icon-list:icon-count");
+			request.removeAttribute("liferay-ui:icon-list:icon-count");
 
-			Boolean singleIcon = (Boolean)req.getAttribute(
+			Boolean singleIcon = (Boolean)request.getAttribute(
 				"liferay-ui:icon-list:single-icon");
 
-			req.removeAttribute("liferay-ui:icon-list:single-icon");
+			request.removeAttribute("liferay-ui:icon-list:single-icon");
 
 			if ((iconCount != null) && (iconCount.getValue() > 1) &&
 				(singleIcon == null)) {
