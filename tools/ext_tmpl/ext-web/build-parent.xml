@@ -16,6 +16,7 @@
 
 		<copy todir="${classpath.jsp}">
 			<fileset dir="${project.dir}/ext-impl/classes" />
+			<fileset dir="${project.dir}/ext-service/classes" />
 		</copy>
 
 		<unjar src="${project.dir}/modules/portal-impl.jar" dest="${classpath.jsp}" />
@@ -37,7 +38,6 @@
 		<unjar src="${project.dir}/lib/portal/commons-math.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/displaytag.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/dom4j.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/friki.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/jabsorb.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/jackrabbit-text-extractors.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/jcifs.jar" dest="${classpath.jsp}" />
@@ -47,9 +47,7 @@
 		<unjar src="${project.dir}/lib/portal/jstl.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/jstl-impl.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/log4j.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/lucene.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/openid4java.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/quartz.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/rome.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/struts.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/velocity.jar" dest="${classpath.jsp}" />
