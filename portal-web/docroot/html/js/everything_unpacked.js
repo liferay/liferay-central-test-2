@@ -19281,7 +19281,7 @@ Liferay.Navigation = new Class({
 
 		savePage.click(
 			function(event) {
-				instance._savePage(event, this, instance);
+				instance._savePage(event, this);
 				pageParents.unbind('click.liferay', pageBlur);
 			}
 		);
@@ -19458,7 +19458,7 @@ Liferay.Navigation = new Class({
 
 					savePage.click(
 						function(event) {
-							instance._savePage(event, this, instance, text);
+							instance._savePage(event, this, text);
 							pageParents.unbind('blur.liferay', pageBlur);
 							pageParents.unbind('click.liferay', pageBlur);
 						}
