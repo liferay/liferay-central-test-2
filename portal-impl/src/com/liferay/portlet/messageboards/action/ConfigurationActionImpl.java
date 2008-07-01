@@ -58,52 +58,55 @@ import javax.portlet.RenderResponse;
 public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			PortletConfig portletConfig, ActionRequest req, ActionResponse res)
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		if (!cmd.equals(Constants.UPDATE)) {
 			return;
 		}
 
-		String portletResource = ParamUtil.getString(req, "portletResource");
+		String portletResource = ParamUtil.getString(
+			actionRequest, "portletResource");
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				actionRequest, portletResource);
 
-		String tabs2 = ParamUtil.getString(req, "tabs2");
+		String tabs2 = ParamUtil.getString(actionRequest, "tabs2");
 
 		if (tabs2.equals("anonymous-posting")) {
-			updateAnonymousPosting(req, prefs);
+			updateAnonymousPosting(actionRequest, prefs);
 		}
 		else if (tabs2.equals("email-from")) {
-			updateEmailFrom(req, prefs);
+			updateEmailFrom(actionRequest, prefs);
 		}
 		else if (tabs2.equals("message-added-email")) {
-			updateEmailMessageAdded(req, prefs);
+			updateEmailMessageAdded(actionRequest, prefs);
 		}
 		else if (tabs2.equals("message-updated-email")) {
-			updateEmailMessageUpdated(req, prefs);
+			updateEmailMessageUpdated(actionRequest, prefs);
 		}
 		else if (tabs2.equals("ratings")) {
-			updateRatings(req, prefs);
+			updateRatings(actionRequest, prefs);
 		}
 		else if (tabs2.equals("rss")) {
-			updateRSS(req, prefs);
+			updateRSS(actionRequest, prefs);
 		}
 		else if (tabs2.equals("thread-priorities")) {
-			updateThreadPriorities(req, prefs);
+			updateThreadPriorities(actionRequest, prefs);
 		}
 		else if (tabs2.equals("user-ranks")) {
-			updateUserRanks(req, prefs);
+			updateUserRanks(actionRequest, prefs);
 		}
 
-		if (SessionErrors.isEmpty(req)) {
+		if (SessionErrors.isEmpty(actionRequest)) {
 			prefs.store();
 
 			SessionMessages.add(
-				req, portletConfig.getPortletName() + ".doConfigure");
+				actionRequest, portletConfig.getPortletName() + ".doConfigure");
 		}
 	}
 
@@ -116,29 +119,33 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	protected void updateAnonymousPosting(
-			ActionRequest req, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
 		String allowAnonymousPosting = ParamUtil.getString(
-			req, "allowAnonymousPosting");
+			actionRequest, "allowAnonymousPosting");
 
 		prefs.setValue("allow-anonymous-posting", allowAnonymousPosting);
 	}
 
-	protected void updateEmailFrom(ActionRequest req, PortletPreferences prefs)
+	protected void updateEmailFrom(
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
-		String emailFromName = ParamUtil.getString(req, "emailFromName");
-		String emailFromAddress = ParamUtil.getString(req, "emailFromAddress");
-		boolean emailHtmlFormat = ParamUtil.getBoolean(req, "emailHtmlFormat");
+		String emailFromName = ParamUtil.getString(
+			actionRequest, "emailFromName");
+		String emailFromAddress = ParamUtil.getString(
+			actionRequest, "emailFromAddress");
+		boolean emailHtmlFormat = ParamUtil.getBoolean(
+			actionRequest, "emailHtmlFormat");
 
 		if (Validator.isNull(emailFromName)) {
-			SessionErrors.add(req, "emailFromName");
+			SessionErrors.add(actionRequest, "emailFromName");
 		}
 		else if (!Validator.isEmailAddress(emailFromAddress) &&
 				 !Validator.isVariableTerm(emailFromAddress)) {
 
-			SessionErrors.add(req, "emailFromAddress");
+			SessionErrors.add(actionRequest, "emailFromAddress");
 		}
 		else {
 			prefs.setValue("email-from-name", emailFromName);
@@ -149,23 +156,23 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	protected void updateEmailMessageAdded(
-			ActionRequest req, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
 		boolean emailMessageAddedEnabled = ParamUtil.getBoolean(
-			req, "emailMessageAddedEnabled");
+			actionRequest, "emailMessageAddedEnabled");
 		String emailMessageAddedSubjectPrefix = ParamUtil.getString(
-			req, "emailMessageAddedSubjectPrefix");
+			actionRequest, "emailMessageAddedSubjectPrefix");
 		String emailMessageAddedBody = ParamUtil.getString(
-			req, "emailMessageAddedBody");
+			actionRequest, "emailMessageAddedBody");
 		String emailMessageAddedSignature = ParamUtil.getString(
-			req, "emailMessageAddedSignature");
+			actionRequest, "emailMessageAddedSignature");
 
 		if (Validator.isNull(emailMessageAddedSubjectPrefix)) {
-			SessionErrors.add(req, "emailMessageAddedSubjectPrefix");
+			SessionErrors.add(actionRequest, "emailMessageAddedSubjectPrefix");
 		}
 		else if (Validator.isNull(emailMessageAddedBody)) {
-			SessionErrors.add(req, "emailMessageAddedBody");
+			SessionErrors.add(actionRequest, "emailMessageAddedBody");
 		}
 		else {
 			prefs.setValue(
@@ -181,23 +188,24 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	protected void updateEmailMessageUpdated(
-			ActionRequest req, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
 		boolean emailMessageUpdatedEnabled = ParamUtil.getBoolean(
-			req, "emailMessageUpdatedEnabled");
+			actionRequest, "emailMessageUpdatedEnabled");
 		String emailMessageUpdatedSubjectPrefix = ParamUtil.getString(
-			req, "emailMessageUpdatedSubjectPrefix");
+			actionRequest, "emailMessageUpdatedSubjectPrefix");
 		String emailMessageUpdatedBody = ParamUtil.getString(
-			req, "emailMessageUpdatedBody");
+			actionRequest, "emailMessageUpdatedBody");
 		String emailMessageUpdatedSignature = ParamUtil.getString(
-			req, "emailMessageUpdatedSignature");
+			actionRequest, "emailMessageUpdatedSignature");
 
 		if (Validator.isNull(emailMessageUpdatedSubjectPrefix)) {
-			SessionErrors.add(req, "emailMessageUpdatedSubjectPrefix");
+			SessionErrors.add(
+				actionRequest, "emailMessageUpdatedSubjectPrefix");
 		}
 		else if (Validator.isNull(emailMessageUpdatedBody)) {
-			SessionErrors.add(req, "emailMessageUpdatedBody");
+			SessionErrors.add(actionRequest, "emailMessageUpdatedBody");
 		}
 		else {
 			prefs.setValue(
@@ -214,22 +222,25 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		}
 	}
 
-	protected void updateRatings(ActionRequest req, PortletPreferences prefs)
+	protected void updateRatings(
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
 		boolean enableMessageRatings = ParamUtil.getBoolean(
-			req, "enableMessageRatings");
+			actionRequest, "enableMessageRatings");
 
 		prefs.setValue(
 			"enable-message-ratings", String.valueOf(enableMessageRatings));
 	}
 
-	protected void updateRSS(ActionRequest req, PortletPreferences prefs)
+	protected void updateRSS(
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
-		int rssDelta = ParamUtil.getInteger(req, "rssDelta");
-		String rssDisplayStyle = ParamUtil.getString(req, "rssDisplayStyle");
-		String rssFormat = ParamUtil.getString(req, "rssFormat");
+		int rssDelta = ParamUtil.getInteger(actionRequest, "rssDelta");
+		String rssDisplayStyle = ParamUtil.getString(
+			actionRequest, "rssDisplayStyle");
+		String rssFormat = ParamUtil.getString(actionRequest, "rssFormat");
 
 		prefs.setValue("rss-delta", String.valueOf(rssDelta));
 		prefs.setValue("rss-display-style", rssDisplayStyle);
@@ -237,7 +248,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	protected void updateThreadPriorities(
-			ActionRequest req, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
 		Locale[] locales = LanguageUtil.getAvailableLocales();
@@ -249,11 +260,11 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 			for (int j = 0; j < 10; j++) {
 				String name = ParamUtil.getString(
-					req, "priorityName" + j + "_" + languageId);
+					actionRequest, "priorityName" + j + "_" + languageId);
 				String image = ParamUtil.getString(
-					req, "priorityImage" + j + "_" + languageId);
+					actionRequest, "priorityImage" + j + "_" + languageId);
 				double value = ParamUtil.getDouble(
-					req, "priorityValue" + j + "_" + languageId);
+					actionRequest, "priorityValue" + j + "_" + languageId);
 
 				if (Validator.isNotNull(name) || Validator.isNotNull(image) ||
 					(value != 0.0)) {
@@ -270,7 +281,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		}
 	}
 
-	protected void updateUserRanks(ActionRequest req, PortletPreferences prefs)
+	protected void updateUserRanks(
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
 		Locale[] locales = LanguageUtil.getAvailableLocales();
@@ -279,7 +291,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			String languageId = LocaleUtil.toLanguageId(locales[i]);
 
 			String[] ranks = StringUtil.split(
-				ParamUtil.getString(req, "ranks_" + languageId),
+				ParamUtil.getString(actionRequest, "ranks_" + languageId),
 				StringPool.NEW_LINE);
 
 			Map<String, String> map = new TreeMap<String, String>();

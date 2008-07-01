@@ -47,31 +47,34 @@ import javax.portlet.RenderResponse;
 public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			PortletConfig portletConfig, ActionRequest req, ActionResponse res)
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		try {
-			String cmd = ParamUtil.getString(req, Constants.CMD);
+			String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 			if (!cmd.equals(Constants.UPDATE)) {
 				return;
 			}
 
-			long groupId = ParamUtil.getLong(req, "groupId");
-			String type = ParamUtil.getString(req, "type");
-			String pageURL = ParamUtil.getString(req, "pageURL");
-			int pageDelta = ParamUtil.getInteger(req, "pageDelta");
-			String orderByCol = ParamUtil.getString(req, "orderByCol");
-			String orderByType = ParamUtil.getString(req, "orderByType");
+			long groupId = ParamUtil.getLong(actionRequest, "groupId");
+			String type = ParamUtil.getString(actionRequest, "type");
+			String pageURL = ParamUtil.getString(actionRequest, "pageURL");
+			int pageDelta = ParamUtil.getInteger(actionRequest, "pageDelta");
+			String orderByCol = ParamUtil.getString(
+				actionRequest, "orderByCol");
+			String orderByType = ParamUtil.getString(
+				actionRequest, "orderByType");
 
 			GroupLocalServiceUtil.getGroup(groupId);
 
 			String portletResource = ParamUtil.getString(
-				req, "portletResource");
+				actionRequest, "portletResource");
 
 			PortletPreferences prefs =
 				PortletPreferencesFactoryUtil.getPortletSetup(
-					req, portletResource);
+					actionRequest, portletResource);
 
 			prefs.setValue("group-id", String.valueOf(groupId));
 			prefs.setValue("type", type);
@@ -83,10 +86,10 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			prefs.store();
 
 			SessionMessages.add(
-				req, portletConfig.getPortletName() + ".doConfigure");
+				actionRequest, portletConfig.getPortletName() + ".doConfigure");
 		}
 		catch (NoSuchGroupException nsge) {
-			SessionErrors.add(req, nsge.getClass().getName());
+			SessionErrors.add(actionRequest, nsge.getClass().getName());
 		}
 	}
 

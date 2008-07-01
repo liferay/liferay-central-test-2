@@ -44,23 +44,26 @@ import javax.portlet.RenderResponse;
 public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			PortletConfig portletConfig, ActionRequest req, ActionResponse res)
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		if (!cmd.equals(Constants.UPDATE)) {
 			return;
 		}
 
-		String viewType = ParamUtil.getString(req, "viewType");
-		String definitionName = ParamUtil.getString(req, "definitionName");
+		String viewType = ParamUtil.getString(actionRequest, "viewType");
+		String definitionName = ParamUtil.getString(
+			actionRequest, "definitionName");
 
 		String portletResource = ParamUtil.getString(
-			req, "portletResource");
+			actionRequest, "portletResource");
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				actionRequest, portletResource);
 
 		prefs.setValue("viewType", viewType);
 		prefs.setValue("definitionName", definitionName);
@@ -68,7 +71,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.store();
 
 		SessionMessages.add(
-			req, portletConfig.getPortletName() + ".doConfigure");
+			actionRequest, portletConfig.getPortletName() + ".doConfigure");
 	}
 
 	public String render(

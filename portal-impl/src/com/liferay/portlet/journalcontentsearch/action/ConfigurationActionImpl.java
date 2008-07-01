@@ -45,23 +45,28 @@ import javax.portlet.RenderResponse;
 public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			PortletConfig portletConfig, ActionRequest req, ActionResponse res)
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		if (!cmd.equals(Constants.UPDATE)) {
 			return;
 		}
 
-		boolean showListed = ParamUtil.getBoolean(req, "showListed");
-		String targetPortletId = ParamUtil.getString(req, "targetPortletId");
-		String type = ParamUtil.getString(req, "type");
+		boolean showListed = ParamUtil.getBoolean(
+			actionRequest, "showListed");
+		String targetPortletId = ParamUtil.getString(
+			actionRequest, "targetPortletId");
+		String type = ParamUtil.getString(actionRequest, "type");
 
-		String portletResource = ParamUtil.getString(req, "portletResource");
+		String portletResource = ParamUtil.getString(
+			actionRequest, "portletResource");
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				actionRequest, portletResource);
 
 		prefs.setValue("show-listed", String.valueOf(showListed));
 		prefs.setValue("target-portlet-id", targetPortletId);
@@ -70,7 +75,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.store();
 
 		SessionMessages.add(
-			req, portletConfig.getPortletName() + ".doConfigure");
+			actionRequest, portletConfig.getPortletName() + ".doConfigure");
 	}
 
 	public String render(

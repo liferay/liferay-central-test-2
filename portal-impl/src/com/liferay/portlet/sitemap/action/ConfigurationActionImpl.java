@@ -44,23 +44,27 @@ import javax.portlet.RenderResponse;
 public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			PortletConfig portletConfig, ActionRequest req, ActionResponse res)
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		if (!cmd.equals(Constants.UPDATE)) {
 			return;
 		}
 
-		long rootLayoutId = ParamUtil.getLong(req, "rootLayoutId");
+		long rootLayoutId = ParamUtil.getLong(actionRequest, "rootLayoutId");
 
-		String displayDepth = ParamUtil.getString(req, "displayDepth");
+		String displayDepth = ParamUtil.getString(
+			actionRequest, "displayDepth");
 
-		String portletResource = ParamUtil.getString(req, "portletResource");
+		String portletResource = ParamUtil.getString(
+			actionRequest, "portletResource");
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				actionRequest, portletResource);
 
 		prefs.setValue("root-layout-id", String.valueOf(rootLayoutId));
 		prefs.setValue("display-depth", displayDepth);
@@ -68,7 +72,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.store();
 
 		SessionMessages.add(
-			req, portletConfig.getPortletName() + ".doConfigure");
+			actionRequest, portletConfig.getPortletName() + ".doConfigure");
 	}
 
 	public String render(

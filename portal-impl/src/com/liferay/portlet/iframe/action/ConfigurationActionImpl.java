@@ -46,42 +46,45 @@ import javax.portlet.RenderResponse;
 public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			PortletConfig portletConfig, ActionRequest req, ActionResponse res)
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		if (!cmd.equals(Constants.UPDATE)) {
 			return;
 		}
 
-		String src = ParamUtil.getString(req, "src");
+		String src = ParamUtil.getString(actionRequest, "src");
 
 		if (!src.startsWith("/") &&
 			!StringUtil.startsWith(src, "http://") &&
 			!StringUtil.startsWith(src, "https://") &&
 			!StringUtil.startsWith(src, "mhtml://")) {
 
-			src = HttpUtil.getProtocol(req) + "://" + src;
+			src = HttpUtil.getProtocol(actionRequest) + "://" + src;
 		}
 
-		boolean relative = ParamUtil.getBoolean(req, "relative");
+		boolean relative = ParamUtil.getBoolean(actionRequest, "relative");
 
-		boolean auth = ParamUtil.getBoolean(req, "auth");
-		String authType = ParamUtil.getString(req, "authType");
-		String formMethod = ParamUtil.getString(req, "formMethod");
-		String userName = ParamUtil.getString(req, "userName");
-		String password = ParamUtil.getString(req, "password");
-		String hiddenVariables = ParamUtil.getString(req, "hiddenVariables");
+		boolean auth = ParamUtil.getBoolean(actionRequest, "auth");
+		String authType = ParamUtil.getString(actionRequest, "authType");
+		String formMethod = ParamUtil.getString(actionRequest, "formMethod");
+		String userName = ParamUtil.getString(actionRequest, "userName");
+		String password = ParamUtil.getString(actionRequest, "password");
+		String hiddenVariables = ParamUtil.getString(
+			actionRequest, "hiddenVariables");
 
 		String[] htmlAttributes = StringUtil.split(ParamUtil.getString(
-			req, "htmlAttributes"), "\n");
+			actionRequest, "htmlAttributes"), "\n");
 
 		String portletResource = ParamUtil.getString(
-			req, "portletResource");
+			actionRequest, "portletResource");
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				actionRequest, portletResource);
 
 		prefs.setValue("src", src);
 		prefs.setValue("relative", String.valueOf(relative));
@@ -108,7 +111,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.store();
 
 		SessionMessages.add(
-			req, portletConfig.getPortletName() + ".doConfigure");
+			actionRequest, portletConfig.getPortletName() + ".doConfigure");
 	}
 
 	public String render(

@@ -48,48 +48,55 @@ import javax.portlet.RenderResponse;
 public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			PortletConfig portletConfig, ActionRequest req, ActionResponse res)
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		if (!cmd.equals(Constants.UPDATE)) {
 			return;
 		}
 
 		String folderDisplayStyle = ParamUtil.getString(
-			req, "folderDisplayStyle");
+			actionRequest, "folderDisplayStyle");
 
-		long rootFolderId = ParamUtil.getLong(req, "rootFolderId");
+		long rootFolderId = ParamUtil.getLong(actionRequest, "rootFolderId");
 
-		boolean showBreadcrumbs = ParamUtil.getBoolean(req, "showBreadcrumbs");
+		boolean showBreadcrumbs = ParamUtil.getBoolean(
+			actionRequest, "showBreadcrumbs");
 		boolean showFoldersSearch = ParamUtil.getBoolean(
-			req, "showFoldersSearch");
-		boolean showSubfolders = ParamUtil.getBoolean(req, "showSubfolders");
-		int foldersPerPage = ParamUtil.getInteger(req, "foldersPerPage");
-		String folderColumns = ParamUtil.getString(req, "folderColumns");
+			actionRequest, "showFoldersSearch");
+		boolean showSubfolders = ParamUtil.getBoolean(
+			actionRequest, "showSubfolders");
+		int foldersPerPage = ParamUtil.getInteger(
+			actionRequest, "foldersPerPage");
+		String folderColumns = ParamUtil.getString(
+			actionRequest, "folderColumns");
 
 		boolean showFileEntriesSearch = ParamUtil.getBoolean(
-			req, "showFileEntriesSearch");
+			actionRequest, "showFileEntriesSearch");
 		int fileEntriesPerPage = ParamUtil.getInteger(
-			req, "fileEntriesPerPage");
-		String fileEntryColumns = ParamUtil.getString(req, "fileEntryColumns");
+			actionRequest, "fileEntriesPerPage");
+		String fileEntryColumns = ParamUtil.getString(
+			actionRequest, "fileEntryColumns");
 
 		boolean enableCommentRatings = ParamUtil.getBoolean(
-			req, "enableCommentRatings");
+			actionRequest, "enableCommentRatings");
 
 		String portletResource = ParamUtil.getString(
-			req, "portletResource");
+			actionRequest, "portletResource");
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				actionRequest, portletResource);
 
 		if (rootFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 			try {
 				DLFolderLocalServiceUtil.getFolder(rootFolderId);
 			}
 			catch (NoSuchFolderException e) {
-				SessionErrors.add(req, "rootFolderIdInvalid");
+				SessionErrors.add(actionRequest, "rootFolderIdInvalid");
 			}
 		}
 
@@ -112,11 +119,11 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.setValue(
 			"enable-comment-ratings", String.valueOf(enableCommentRatings));
 
-		if (SessionErrors.isEmpty(req)) {
+		if (SessionErrors.isEmpty(actionRequest)) {
 			prefs.store();
 
 			SessionMessages.add(
-				req, portletConfig.getPortletName() + ".doConfigure");
+				actionRequest, portletConfig.getPortletName() + ".doConfigure");
 		}
 	}
 

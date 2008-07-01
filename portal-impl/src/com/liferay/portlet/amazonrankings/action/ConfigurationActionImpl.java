@@ -50,24 +50,28 @@ import javax.portlet.ValidatorException;
 public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			PortletConfig portletConfig, ActionRequest req, ActionResponse res)
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		if (!cmd.equals(Constants.UPDATE)) {
 			return;
 		}
 
 		String[] isbns = StringUtil.split(
-			ParamUtil.getString(req, "isbns").toUpperCase(), StringPool.SPACE);
+			ParamUtil.getString(actionRequest, "isbns").toUpperCase(),
+			StringPool.SPACE);
 
 		Arrays.sort(isbns);
 
-		String portletResource = ParamUtil.getString(req, "portletResource");
+		String portletResource = ParamUtil.getString(
+			actionRequest, "portletResource");
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				actionRequest, portletResource);
 
 		prefs.setValues("isbns", isbns);
 
@@ -75,13 +79,14 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			prefs.store();
 		}
 		catch (ValidatorException ve) {
-			SessionErrors.add(req, ValidatorException.class.getName(), ve);
+			SessionErrors.add(
+				actionRequest, ValidatorException.class.getName(), ve);
 
 			return;
 		}
 
 		SessionMessages.add(
-			req, portletConfig.getPortletName() + ".doConfigure");
+			actionRequest, portletConfig.getPortletName() + ".doConfigure");
 	}
 
 	public String render(

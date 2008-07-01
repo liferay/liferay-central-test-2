@@ -50,48 +50,51 @@ import javax.portlet.RenderResponse;
 public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			PortletConfig portletConfig, ActionRequest req, ActionResponse res)
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-		String portletResource = ParamUtil.getString(req, "portletResource");
+		String portletResource = ParamUtil.getString(
+			actionRequest, "portletResource");
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				actionRequest, portletResource);
 
 		if (cmd.equals("add-selection")) {
-			AssetPublisherUtil.addSelection(req, prefs);
+			AssetPublisherUtil.addSelection(actionRequest, prefs);
 		}
 		else if (cmd.equals("move-selection-down")) {
-			moveSelectionDown(req, prefs);
+			moveSelectionDown(actionRequest, prefs);
 		}
 		else if (cmd.equals("move-selection-up")) {
-			moveSelectionUp(req, prefs);
+			moveSelectionUp(actionRequest, prefs);
 		}
 		else if (cmd.equals("remove-selection")) {
-			removeSelection(req, prefs);
+			removeSelection(actionRequest, prefs);
 		}
 		else if (cmd.equals("selection-style")) {
-			setSelectionStyle(req, prefs);
+			setSelectionStyle(actionRequest, prefs);
 		}
 		else if (cmd.equals(Constants.UPDATE)) {
 			String selectionStyle = prefs.getValue(
 				"selection-style", "dynamic");
 
 			if (selectionStyle.equals("dynamic")) {
-				updateDynamicSettings(req, prefs);
+				updateDynamicSettings(actionRequest, prefs);
 			}
 			else if (selectionStyle.equals("manual")) {
-				updateManualSettings(req, prefs);
+				updateManualSettings(actionRequest, prefs);
 			}
 		}
 
-		if (SessionErrors.isEmpty(req)) {
+		if (SessionErrors.isEmpty(actionRequest)) {
 			prefs.store();
 
 			SessionMessages.add(
-				req, portletConfig.getPortletName() + ".doConfigure");
+				actionRequest, portletConfig.getPortletName() + ".doConfigure");
 		}
 	}
 
@@ -104,10 +107,10 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	protected void moveSelectionDown(
-			ActionRequest req, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
-		int assetOrder = ParamUtil.getInteger(req, "assetOrder");
+		int assetOrder = ParamUtil.getInteger(actionRequest, "assetOrder");
 
 		String[] manualEntries = prefs.getValues(
 			"manual-entries", new String[0]);
@@ -124,10 +127,11 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.setValues("manual-entries", manualEntries);
 	}
 
-	protected void moveSelectionUp(ActionRequest req, PortletPreferences prefs)
+	protected void moveSelectionUp(
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
-		int assetOrder = ParamUtil.getInteger(req, "assetOrder");
+		int assetOrder = ParamUtil.getInteger(actionRequest, "assetOrder");
 
 		String[] manualEntries = prefs.getValues(
 			"manual-entries", new String[0]);
@@ -144,10 +148,11 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.setValues("manual-entries", manualEntries);
 	}
 
-	protected void removeSelection(ActionRequest req, PortletPreferences prefs)
+	protected void removeSelection(
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
-		int assetOrder = ParamUtil.getInteger(req, "assetOrder");
+		int assetOrder = ParamUtil.getInteger(actionRequest, "assetOrder");
 
 		String[] manualEntries = prefs.getValues(
 			"manual-entries", new String[0]);
@@ -171,11 +176,13 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	protected void setSelectionStyle(
-			ActionRequest req, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
-		String selectionStyle = ParamUtil.getString(req, "selectionStyle");
-		String displayStyle = ParamUtil.getString(req, "displayStyle");
+		String selectionStyle = ParamUtil.getString(
+			actionRequest, "selectionStyle");
+		String displayStyle = ParamUtil.getString(
+			actionRequest, "displayStyle");
 
 		prefs.setValue("selection-style", selectionStyle);
 
@@ -193,40 +200,52 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	protected void updateDynamicSettings(
-			ActionRequest req, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		long userId = themeDisplay.getUserId();
 
 		String[] entries = StringUtil.split(
-			ParamUtil.getString(req, "entries"));
+			ParamUtil.getString(actionRequest, "entries"));
 		String[] notEntries = StringUtil.split(
-			ParamUtil.getString(req, "notEntries"));
-		boolean mergeUrlTags = ParamUtil.getBoolean(req, "mergeUrlTags");
-		boolean andOperator = ParamUtil.getBoolean(req, "andOperator");
+			ParamUtil.getString(actionRequest, "notEntries"));
+		boolean mergeUrlTags = ParamUtil.getBoolean(
+			actionRequest, "mergeUrlTags");
+		boolean andOperator = ParamUtil.getBoolean(
+			actionRequest, "andOperator");
 
-		long classNameId = ParamUtil.getLong(req, "classNameId");
-		String category = ParamUtil.getString(req, "category");
-		String displayStyle = ParamUtil.getString(req, "displayStyle");
-		String orderByColumn1 = ParamUtil.getString(req, "orderByColumn1");
-		String orderByColumn2 = ParamUtil.getString(req, "orderByColumn2");
-		String orderByType1 = ParamUtil.getString(req, "orderByType1");
-		String orderByType2 = ParamUtil.getString(req, "orderByType2");
+		long classNameId = ParamUtil.getLong(actionRequest, "classNameId");
+		String category = ParamUtil.getString(actionRequest, "category");
+		String displayStyle = ParamUtil.getString(
+			actionRequest, "displayStyle");
+		String orderByColumn1 = ParamUtil.getString(
+			actionRequest, "orderByColumn1");
+		String orderByColumn2 = ParamUtil.getString(
+			actionRequest, "orderByColumn2");
+		String orderByType1 = ParamUtil.getString(
+			actionRequest, "orderByType1");
+		String orderByType2 = ParamUtil.getString(
+			actionRequest, "orderByType2");
 		boolean excludeZeroViewCount = ParamUtil.getBoolean(
-			req, "excludeZeroViewCount");
-		boolean showQueryLogic = ParamUtil.getBoolean(req, "showQueryLogic");
-		int delta = ParamUtil.getInteger(req, "delta");
-		String paginationType = ParamUtil.getString(req, "paginationType");
+			actionRequest, "excludeZeroViewCount");
+		boolean showQueryLogic = ParamUtil.getBoolean(
+			actionRequest, "showQueryLogic");
+		int delta = ParamUtil.getInteger(actionRequest, "delta");
+		String paginationType = ParamUtil.getString(
+			actionRequest, "paginationType");
 		boolean showAvailableLocales = ParamUtil.getBoolean(
-			req, "showAvailableLocales");
-		boolean enableComments = ParamUtil.getBoolean(req, "enableComments");
+			actionRequest, "showAvailableLocales");
+		boolean enableComments = ParamUtil.getBoolean(
+			actionRequest, "enableComments");
 		boolean enableCommentRatings = ParamUtil.getBoolean(
-			req, "enableCommentRatings");
-		boolean enableRatings = ParamUtil.getBoolean(req, "enableRatings");
-		String medatadaFields = ParamUtil.getString(req, "metadataFields");
+			actionRequest, "enableCommentRatings");
+		boolean enableRatings = ParamUtil.getBoolean(
+			actionRequest, "enableRatings");
+		String medatadaFields = ParamUtil.getString(
+			actionRequest, "metadataFields");
 
 		prefs.setValues("entries", entries);
 		prefs.setValues("not-entries", notEntries);
@@ -258,16 +277,19 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	protected void updateManualSettings(
-			ActionRequest req, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
-		String displayStyle = ParamUtil.getString(req, "displayStyle");
+		String displayStyle = ParamUtil.getString(
+			actionRequest, "displayStyle");
 		boolean showAvailableLocales = ParamUtil.getBoolean(
-			req, "showAvailableLocales");
-		boolean enableComments = ParamUtil.getBoolean(req, "enableComments");
+			actionRequest, "showAvailableLocales");
+		boolean enableComments = ParamUtil.getBoolean(
+			actionRequest, "enableComments");
 		boolean enableCommentRatings = ParamUtil.getBoolean(
-			req, "enableCommentRatings");
-		boolean enableRatings = ParamUtil.getBoolean(req, "enableRatings");
+			actionRequest, "enableCommentRatings");
+		boolean enableRatings = ParamUtil.getBoolean(
+			actionRequest, "enableRatings");
 
 		prefs.setValue("display-style", displayStyle);
 		prefs.setValue(

@@ -44,30 +44,37 @@ import javax.portlet.RenderResponse;
 public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			PortletConfig portletConfig, ActionRequest req, ActionResponse res)
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		if (!cmd.equals(Constants.UPDATE)) {
 			return;
 		}
 
-		int pageDelta = ParamUtil.getInteger(req, "pageDelta");
-		String pageDisplayStyle = ParamUtil.getString(req, "pageDisplayStyle");
-		boolean enableRatings = ParamUtil.getBoolean(req, "enableRatings");
-		boolean enableComments = ParamUtil.getBoolean(req, "enableComments");
+		int pageDelta = ParamUtil.getInteger(actionRequest, "pageDelta");
+		String pageDisplayStyle = ParamUtil.getString(
+			actionRequest, "pageDisplayStyle");
+		boolean enableRatings = ParamUtil.getBoolean(
+			actionRequest, "enableRatings");
+		boolean enableComments = ParamUtil.getBoolean(
+			actionRequest, "enableComments");
 		boolean enableCommentRatings = ParamUtil.getBoolean(
-			req, "enableCommentRatings");
+			actionRequest, "enableCommentRatings");
 
-		int rssDelta = ParamUtil.getInteger(req, "rssDelta");
-		String rssDisplayStyle = ParamUtil.getString(req, "rssDisplayStyle");
-		String rssFormat = ParamUtil.getString(req, "rssFormat");
+		int rssDelta = ParamUtil.getInteger(actionRequest, "rssDelta");
+		String rssDisplayStyle = ParamUtil.getString(
+			actionRequest, "rssDisplayStyle");
+		String rssFormat = ParamUtil.getString(actionRequest, "rssFormat");
 
-		String portletResource = ParamUtil.getString(req, "portletResource");
+		String portletResource = ParamUtil.getString(
+			actionRequest, "portletResource");
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				actionRequest, portletResource);
 
 		prefs.setValue("page-delta", String.valueOf(pageDelta));
 		prefs.setValue("page-display-style", pageDisplayStyle);
@@ -83,7 +90,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.store();
 
 		SessionMessages.add(
-			req, portletConfig.getPortletName() + ".doConfigure");
+			actionRequest, portletConfig.getPortletName() + ".doConfigure");
 	}
 
 	public String render(

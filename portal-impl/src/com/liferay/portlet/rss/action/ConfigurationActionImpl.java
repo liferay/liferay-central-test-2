@@ -46,45 +46,48 @@ import javax.portlet.ValidatorException;
 public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			PortletConfig portletConfig, ActionRequest req, ActionResponse res)
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		String portletResource = ParamUtil.getString(
-			req, "portletResource");
+			actionRequest, "portletResource");
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				actionRequest, portletResource);
 
 		if (cmd.equals("remove-footer-article")) {
-			removeFooterArticle(req, prefs);
+			removeFooterArticle(actionRequest, prefs);
 		}
 		else if (cmd.equals("remove-header-article")) {
-			removeHeaderArticle(req, prefs);
+			removeHeaderArticle(actionRequest, prefs);
 		}
 		else if (cmd.equals("set-footer-article")) {
-			setFooterArticle(req, prefs);
+			setFooterArticle(actionRequest, prefs);
 		}
 		else if (cmd.equals("set-header-article")) {
-			setHeaderArticle(req, prefs);
+			setHeaderArticle(actionRequest, prefs);
 		}
 		else if (cmd.equals(Constants.UPDATE)) {
-			updateConfiguration(req, prefs);
+			updateConfiguration(actionRequest, prefs);
 		}
 
-		if (SessionErrors.isEmpty(req)) {
+		if (SessionErrors.isEmpty(actionRequest)) {
 			try {
 				prefs.store();
 			}
 			catch (ValidatorException ve) {
-				SessionErrors.add(req, ValidatorException.class.getName(), ve);
+				SessionErrors.add(
+					actionRequest, ValidatorException.class.getName(), ve);
 
 				return;
 			}
 
 			SessionMessages.add(
-				req, portletConfig.getPortletName() + ".doConfigure");
+				actionRequest, portletConfig.getPortletName() + ".doConfigure");
 		}
 	}
 
@@ -97,7 +100,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	protected void removeFooterArticle(
-			ActionRequest req, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
 		prefs.setValues(
@@ -105,20 +108,21 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	protected void removeHeaderArticle(
-			ActionRequest req, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
 		prefs.setValues(
 			"header-article-resource-values", new String[] {"0", ""});
 	}
 
-	protected void setFooterArticle(ActionRequest req, PortletPreferences prefs)
+	protected void setFooterArticle(
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
 		String footerArticleResourcePrimKey = ParamUtil.getString(
-			req, "resourcePrimKey");
+			actionRequest, "resourcePrimKey");
 		String footerArticleResouceTitle = ParamUtil.getString(
-			req, "resourceTitle");
+			actionRequest, "resourceTitle");
 
 		prefs.setValues(
 			"footer-article-resource-values",
@@ -127,13 +131,14 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			});
 	}
 
-	protected void setHeaderArticle(ActionRequest req, PortletPreferences prefs)
+	protected void setHeaderArticle(
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
 		String headerArticleResourcePrimKey = ParamUtil.getString(
-			req, "resourcePrimKey");
+			actionRequest, "resourcePrimKey");
 		String headerArticleResouceTitle = ParamUtil.getString(
-			req, "resourceTitle");
+			actionRequest, "resourceTitle");
 
 		prefs.setValues(
 			"header-article-resource-values",
@@ -141,22 +146,25 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	protected void updateConfiguration(
-			ActionRequest req, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
-		String[] urls = req.getParameterValues("url");
-		String[] titles = req.getParameterValues("title");
-		int entriesPerFeed = ParamUtil.getInteger(req, "entriesPerFeed", 4);
-		boolean showFeedTitle = ParamUtil.getBoolean(req, "showFeedTitle");
+		String[] urls = actionRequest.getParameterValues("url");
+		String[] titles = actionRequest.getParameterValues("title");
+		int entriesPerFeed = ParamUtil.getInteger(
+			actionRequest, "entriesPerFeed", 4);
+		boolean showFeedTitle = ParamUtil.getBoolean(
+			actionRequest, "showFeedTitle");
 		boolean showFeedPublishedDate = ParamUtil.getBoolean(
-			req, "showFeedPublishedDate");
+			actionRequest, "showFeedPublishedDate");
 		boolean showFeedDescription = ParamUtil.getBoolean(
-			req, "showFeedDescription");
-		boolean showFeedImage = ParamUtil.getBoolean(req, "showFeedImage");
+			actionRequest, "showFeedDescription");
+		boolean showFeedImage = ParamUtil.getBoolean(
+			actionRequest, "showFeedImage");
 		String feedImageAlignment = ParamUtil.getString(
-			req, "feedImageAlignment");
+			actionRequest, "feedImageAlignment");
 		boolean showFeedItemAuthor = ParamUtil.getBoolean(
-			req, "showFeedItemAuthor");
+			actionRequest, "showFeedItemAuthor");
 
 		if (urls != null && titles != null) {
 			prefs.setValues("urls", urls);

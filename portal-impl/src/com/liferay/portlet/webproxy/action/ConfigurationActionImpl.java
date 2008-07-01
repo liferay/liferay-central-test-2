@@ -46,45 +46,47 @@ import javax.portlet.RenderResponse;
 public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			PortletConfig portletConfig, ActionRequest req, ActionResponse res)
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		if (!cmd.equals(Constants.UPDATE)) {
 			return;
 		}
 
-		String initUrl = ParamUtil.getString(req, "initUrl");
+		String initUrl = ParamUtil.getString(actionRequest, "initUrl");
 
 		if (!initUrl.startsWith("/") &&
 			!StringUtil.startsWith(initUrl, "http://") &&
 			!StringUtil.startsWith(initUrl, "https://") &&
 			!StringUtil.startsWith(initUrl, "mhtml://")) {
 
-			initUrl = HttpUtil.getProtocol(req) + "://" + initUrl;
+			initUrl = HttpUtil.getProtocol(actionRequest) + "://" + initUrl;
 		}
 
-		String scope = ParamUtil.getString(req, "scope");
-		String proxyHost = ParamUtil.getString(req, "proxyHost");
-		String proxyPort = ParamUtil.getString(req, "proxyPort");
+		String scope = ParamUtil.getString(actionRequest, "scope");
+		String proxyHost = ParamUtil.getString(actionRequest, "proxyHost");
+		String proxyPort = ParamUtil.getString(actionRequest, "proxyPort");
 		String proxyAuthentication = ParamUtil.getString(
-			req, "proxyAuthentication");
+			actionRequest, "proxyAuthentication");
 		String proxyAuthenticationUsername = ParamUtil.getString(
-			req, "proxyAuthenticationUsername");
+			actionRequest, "proxyAuthenticationUsername");
 		String proxyAuthenticationPassword = ParamUtil.getString(
-			req, "proxyAuthenticationPassword");
+			actionRequest, "proxyAuthenticationPassword");
 		String proxyAuthenticationHost = ParamUtil.getString(
-			req, "proxyAuthenticationHost");
+			actionRequest, "proxyAuthenticationHost");
 		String proxyAuthenticationDomain = ParamUtil.getString(
-			req, "proxyAuthenticationDomain");
-		String stylesheet = ParamUtil.getString(req, "stylesheet");
+			actionRequest, "proxyAuthenticationDomain");
+		String stylesheet = ParamUtil.getString(actionRequest, "stylesheet");
 
 		String portletResource = ParamUtil.getString(
-			req, "portletResource");
+			actionRequest, "portletResource");
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				actionRequest, portletResource);
 
 		prefs.setValue("initUrl", initUrl);
 		prefs.setValue("scope", scope);
@@ -102,7 +104,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.store();
 
 		SessionMessages.add(
-			req, portletConfig.getPortletName() + ".doConfigure");
+			actionRequest, portletConfig.getPortletName() + ".doConfigure");
 	}
 
 	public String render(

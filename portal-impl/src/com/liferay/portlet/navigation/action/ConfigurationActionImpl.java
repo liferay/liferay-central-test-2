@@ -44,26 +44,33 @@ import javax.portlet.RenderResponse;
 public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			PortletConfig portletConfig, ActionRequest req, ActionResponse res)
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		if (!cmd.equals(Constants.UPDATE)) {
 			return;
 		}
 
-		String displayStyle = ParamUtil.getString(req, "displayStyle");
-		String bulletStyle = ParamUtil.getString(req, "bulletStyle");
-		String headerType = ParamUtil.getString(req, "headerType");
-		String rootLayoutType = ParamUtil.getString(req, "rootLayoutType");
-		int rootLayoutLevel = ParamUtil.getInteger(req, "rootLayoutLevel");
-		String includedLayouts = ParamUtil.getString(req, "includedLayouts");
+		String displayStyle = ParamUtil.getString(
+			actionRequest, "displayStyle");
+		String bulletStyle = ParamUtil.getString(actionRequest, "bulletStyle");
+		String headerType = ParamUtil.getString(actionRequest, "headerType");
+		String rootLayoutType = ParamUtil.getString(
+			actionRequest, "rootLayoutType");
+		int rootLayoutLevel = ParamUtil.getInteger(
+			actionRequest, "rootLayoutLevel");
+		String includedLayouts = ParamUtil.getString(
+			actionRequest, "includedLayouts");
 
-		String portletResource = ParamUtil.getString(req, "portletResource");
+		String portletResource = ParamUtil.getString(
+			actionRequest, "portletResource");
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				actionRequest, portletResource);
 
 		prefs.setValue("display-style", displayStyle);
 		prefs.setValue("bullet-style", bulletStyle);
@@ -79,7 +86,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.store();
 
 		SessionMessages.add(
-			req, portletConfig.getPortletName() + ".doConfigure");
+			actionRequest, portletConfig.getPortletName() + ".doConfigure");
 	}
 
 	public String render(

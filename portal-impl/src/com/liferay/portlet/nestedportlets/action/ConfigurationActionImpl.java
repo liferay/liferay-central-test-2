@@ -63,17 +63,21 @@ import javax.portlet.RenderResponse;
 public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			PortletConfig portletConfig, ActionRequest req, ActionResponse res)
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
-		String layoutTemplateId = ParamUtil.getString(req, "layoutTemplateId");
+		String layoutTemplateId = ParamUtil.getString(
+			actionRequest, "layoutTemplateId");
 		String portletSetupShowBorders = ParamUtil.getString(
-			req, "portletSetupShowBorders");
+			actionRequest, "portletSetupShowBorders");
 
-		String portletResource = ParamUtil.getString(req, "portletResource");
+		String portletResource = ParamUtil.getString(
+			actionRequest, "portletResource");
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				actionRequest, portletResource);
 
 		String oldLayoutTemplateId = prefs.getValue(
 			"layout-template-id",
@@ -81,7 +85,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		if (!oldLayoutTemplateId.equals(layoutTemplateId)) {
 			reorganizeNestedColumns(
-				req, portletResource, layoutTemplateId, oldLayoutTemplateId);
+				actionRequest, portletResource, layoutTemplateId,
+				oldLayoutTemplateId);
 		}
 
 		prefs.setValue("layout-template-id", layoutTemplateId);
@@ -90,7 +95,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.store();
 
 		SessionMessages.add(
-			req, portletConfig.getPortletName() + ".doConfigure");
+			actionRequest, portletConfig.getPortletName() + ".doConfigure");
 	}
 
 	public String render(
@@ -124,11 +129,11 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	protected void reorganizeNestedColumns(
-			ActionRequest req, String portletResource,
+			ActionRequest actionRequest, String portletResource,
 			String newLayoutTemplateId, String oldLayoutTemplateId)
 		throws PortalException, SystemException {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();

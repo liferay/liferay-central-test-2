@@ -46,44 +46,46 @@ import javax.portlet.RenderResponse;
 public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			PortletConfig portletConfig, ActionRequest req, ActionResponse res)
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		if (!cmd.equals(Constants.UPDATE)) {
 			return;
 		}
 
 		String portletResource = ParamUtil.getString(
-			req, "portletResource");
+			actionRequest, "portletResource");
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				actionRequest, portletResource);
 
-		String tabs2 = ParamUtil.getString(req, "tabs2");
+		String tabs2 = ParamUtil.getString(actionRequest, "tabs2");
 
 		if (tabs2.equals("email-from")) {
-			updateEmailFrom(req, prefs);
+			updateEmailFrom(actionRequest, prefs);
 		}
 		else if (tabs2.equals("article-approval-denied-email")) {
-			updateEmailArticleApprovalDenied(req, prefs);
+			updateEmailArticleApprovalDenied(actionRequest, prefs);
 		}
 		else if (tabs2.equals("article-approval-granted-email")) {
-			updateEmailArticleApprovalGranted(req, prefs);
+			updateEmailArticleApprovalGranted(actionRequest, prefs);
 		}
 		else if (tabs2.equals("article-approval-requested-email")) {
-			updateEmailArticleApprovalRequested(req, prefs);
+			updateEmailArticleApprovalRequested(actionRequest, prefs);
 		}
 		else if (tabs2.equals("article-review-email")) {
-			updateEmailArticleReview(req, prefs);
+			updateEmailArticleReview(actionRequest, prefs);
 		}
 
-		if (SessionErrors.isEmpty(req)) {
+		if (SessionErrors.isEmpty(actionRequest)) {
 			prefs.store();
 
 			SessionMessages.add(
-				req, portletConfig.getPortletName() + ".doConfigure");
+				actionRequest, portletConfig.getPortletName() + ".doConfigure");
 		}
 	}
 
@@ -95,17 +97,20 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		return "/html/portlet/journal/configuration.jsp";
 	}
 
-	protected void updateEmailFrom(ActionRequest req, PortletPreferences prefs)
+	protected void updateEmailFrom(
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
-		String emailFromName = ParamUtil.getString(req, "emailFromName");
-		String emailFromAddress = ParamUtil.getString(req, "emailFromAddress");
+		String emailFromName = ParamUtil.getString(
+			actionRequest, "emailFromName");
+		String emailFromAddress = ParamUtil.getString(
+			actionRequest, "emailFromAddress");
 
 		if (Validator.isNull(emailFromName)) {
-			SessionErrors.add(req, "emailFromName");
+			SessionErrors.add(actionRequest, "emailFromName");
 		}
 		else if (!Validator.isEmailAddress(emailFromAddress)) {
-			SessionErrors.add(req, "emailFromAddress");
+			SessionErrors.add(actionRequest, "emailFromAddress");
 		}
 		else {
 			prefs.setValue("email-from-name", emailFromName);
@@ -114,21 +119,22 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	protected void updateEmailArticleApprovalDenied(
-			ActionRequest req, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
 		boolean emailArticleApprovalDeniedEnabled = ParamUtil.getBoolean(
-			req, "emailArticleApprovalDeniedEnabled");
+			actionRequest, "emailArticleApprovalDeniedEnabled");
 		String emailArticleApprovalDeniedSubject = ParamUtil.getString(
-			req, "emailArticleApprovalDeniedSubject");
+			actionRequest, "emailArticleApprovalDeniedSubject");
 		String emailArticleApprovalDeniedBody = ParamUtil.getString(
-			req, "emailArticleApprovalDeniedBody");
+			actionRequest, "emailArticleApprovalDeniedBody");
 
 		if (Validator.isNull(emailArticleApprovalDeniedSubject)) {
-			SessionErrors.add(req, "emailArticleApprovalDeniedSubject");
+			SessionErrors.add(
+				actionRequest, "emailArticleApprovalDeniedSubject");
 		}
 		else if (Validator.isNull(emailArticleApprovalDeniedBody)) {
-			SessionErrors.add(req, "emailArticleApprovalDeniedBody");
+			SessionErrors.add(actionRequest, "emailArticleApprovalDeniedBody");
 		}
 		else {
 			prefs.setValue(
@@ -144,21 +150,22 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	protected void updateEmailArticleApprovalGranted(
-			ActionRequest req, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
 		boolean emailArticleApprovalGrantedEnabled = ParamUtil.getBoolean(
-			req, "emailArticleApprovalGrantedEnabled");
+			actionRequest, "emailArticleApprovalGrantedEnabled");
 		String emailArticleApprovalGrantedSubject = ParamUtil.getString(
-			req, "emailArticleApprovalGrantedSubject");
+			actionRequest, "emailArticleApprovalGrantedSubject");
 		String emailArticleApprovalGrantedBody = ParamUtil.getString(
-			req, "emailArticleApprovalGrantedBody");
+			actionRequest, "emailArticleApprovalGrantedBody");
 
 		if (Validator.isNull(emailArticleApprovalGrantedSubject)) {
-			SessionErrors.add(req, "emailArticleApprovalGrantedSubject");
+			SessionErrors.add(
+				actionRequest, "emailArticleApprovalGrantedSubject");
 		}
 		else if (Validator.isNull(emailArticleApprovalGrantedBody)) {
-			SessionErrors.add(req, "emailArticleApprovalGrantedBody");
+			SessionErrors.add(actionRequest, "emailArticleApprovalGrantedBody");
 		}
 		else {
 			prefs.setValue(
@@ -174,21 +181,23 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	protected void updateEmailArticleApprovalRequested(
-			ActionRequest req, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
 		boolean emailArticleApprovalRequestedEnabled = ParamUtil.getBoolean(
-			req, "emailArticleApprovalRequestedEnabled");
+			actionRequest, "emailArticleApprovalRequestedEnabled");
 		String emailArticleApprovalRequestedSubject = ParamUtil.getString(
-			req, "emailArticleApprovalRequestedSubject");
+			actionRequest, "emailArticleApprovalRequestedSubject");
 		String emailArticleApprovalRequestedBody = ParamUtil.getString(
-			req, "emailArticleApprovalRequestedBody");
+			actionRequest, "emailArticleApprovalRequestedBody");
 
 		if (Validator.isNull(emailArticleApprovalRequestedSubject)) {
-			SessionErrors.add(req, "emailArticleApprovalRequestedSubject");
+			SessionErrors.add(
+				actionRequest, "emailArticleApprovalRequestedSubject");
 		}
 		else if (Validator.isNull(emailArticleApprovalRequestedBody)) {
-			SessionErrors.add(req, "emailArticleApprovalRequestedBody");
+			SessionErrors.add(
+				actionRequest, "emailArticleApprovalRequestedBody");
 		}
 		else {
 			prefs.setValue(
@@ -204,21 +213,21 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	protected void updateEmailArticleReview(
-			ActionRequest req, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
 		boolean emailArticleReviewEnabled = ParamUtil.getBoolean(
-			req, "emailArticleReviewEnabled");
+			actionRequest, "emailArticleReviewEnabled");
 		String emailArticleReviewSubject = ParamUtil.getString(
-			req, "emailArticleReviewSubject");
+			actionRequest, "emailArticleReviewSubject");
 		String emailArticleReviewBody = ParamUtil.getString(
-			req, "emailArticleReviewBody");
+			actionRequest, "emailArticleReviewBody");
 
 		if (Validator.isNull(emailArticleReviewSubject)) {
-			SessionErrors.add(req, "emailArticleReviewSubject");
+			SessionErrors.add(actionRequest, "emailArticleReviewSubject");
 		}
 		else if (Validator.isNull(emailArticleReviewBody)) {
-			SessionErrors.add(req, "emailArticleReviewBody");
+			SessionErrors.add(actionRequest, "emailArticleReviewBody");
 		}
 		else {
 			prefs.setValue(

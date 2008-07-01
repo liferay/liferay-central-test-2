@@ -46,33 +46,34 @@ import javax.portlet.RenderResponse;
 public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			PortletConfig portletConfig, ActionRequest req, ActionResponse res)
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		if (!cmd.equals(Constants.UPDATE)) {
 			return;
 		}
 
 		String emailMessageSubject = ParamUtil.getString(
-			req, "emailMessageSubject");
+			actionRequest, "emailMessageSubject");
 		String emailMessageBody = ParamUtil.getString(
-			req, "emailMessageBody");
+			actionRequest, "emailMessageBody");
 
 		if (Validator.isNull(emailMessageSubject)) {
-			SessionErrors.add(req, "emailMessageSubject");
+			SessionErrors.add(actionRequest, "emailMessageSubject");
 		}
 		else if (Validator.isNull(emailMessageBody)) {
-			SessionErrors.add(req, "emailMessageBody");
+			SessionErrors.add(actionRequest, "emailMessageBody");
 		}
 		else {
 			String portletResource = ParamUtil.getString(
-				req, "portletResource");
+				actionRequest, "portletResource");
 
 			PortletPreferences prefs =
 				PortletPreferencesFactoryUtil.getPortletSetup(
-					req, portletResource);
+					actionRequest, portletResource);
 
 			prefs.setValue("email-message-subject", emailMessageSubject);
 			prefs.setValue("email-message-body", emailMessageBody);
@@ -80,7 +81,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			prefs.store();
 
 			SessionMessages.add(
-				req, portletConfig.getPortletName() + ".doConfigure");
+				actionRequest, portletConfig.getPortletName() + ".doConfigure");
 		}
 	}
 

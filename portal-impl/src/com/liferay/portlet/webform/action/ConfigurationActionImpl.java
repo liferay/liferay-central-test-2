@@ -51,54 +51,62 @@ import javax.portlet.RenderResponse;
 public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			PortletConfig portletConfig, ActionRequest req, ActionResponse res)
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		if (!cmd.equals(Constants.UPDATE)) {
 			return;
 		}
 
-		String title = ParamUtil.getString(req, "title");
-		String description = ParamUtil.getString(req, "description");
-		boolean requireCaptcha = ParamUtil.getBoolean(req, "requireCaptcha");
-		String successURL = ParamUtil.getString(req, "successURL");
+		String title = ParamUtil.getString(actionRequest, "title");
+		String description = ParamUtil.getString(actionRequest, "description");
+		boolean requireCaptcha = ParamUtil.getBoolean(
+			actionRequest, "requireCaptcha");
+		String successURL = ParamUtil.getString(actionRequest, "successURL");
 
-		boolean sendAsEmail = ParamUtil.getBoolean(req, "sendAsEmail");
-		String subject = ParamUtil.getString(req, "subject");
-		String emailAddress = ParamUtil.getString(req, "emailAddress");
+		boolean sendAsEmail = ParamUtil.getBoolean(
+			actionRequest, "sendAsEmail");
+		String subject = ParamUtil.getString(actionRequest, "subject");
+		String emailAddress = ParamUtil.getString(
+			actionRequest, "emailAddress");
 
-		boolean saveToDatabase = ParamUtil.getBoolean(req, "saveToDatabase");
+		boolean saveToDatabase = ParamUtil.getBoolean(
+			actionRequest, "saveToDatabase");
 
-		boolean saveToFile = ParamUtil.getBoolean(req, "saveToFile");
-		String fileName = ParamUtil.getString(req, "fileName");
+		boolean saveToFile = ParamUtil.getBoolean(actionRequest, "saveToFile");
+		String fileName = ParamUtil.getString(actionRequest, "fileName");
 
-		boolean updateFields = ParamUtil.getBoolean(req, "updateFields");
+		boolean updateFields = ParamUtil.getBoolean(
+			actionRequest, "updateFields");
 
-		String portletResource = ParamUtil.getString(req, "portletResource");
+		String portletResource = ParamUtil.getString(
+			actionRequest, "portletResource");
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				actionRequest, portletResource);
 
 		if (Validator.isNull(title)) {
-			SessionErrors.add(req, "titleRequired");
+			SessionErrors.add(actionRequest, "titleRequired");
 		}
 
 		if (Validator.isNull(subject)) {
-			SessionErrors.add(req, "subjectRequired");
+			SessionErrors.add(actionRequest, "subjectRequired");
 		}
 
 		if (!sendAsEmail && !saveToDatabase && !saveToFile) {
-			SessionErrors.add(req, "handlingRequired");
+			SessionErrors.add(actionRequest, "handlingRequired");
 		}
 
 		if (sendAsEmail) {
 			if (Validator.isNull(emailAddress)) {
-				SessionErrors.add(req, "emailAddressRequired");
+				SessionErrors.add(actionRequest, "emailAddressRequired");
 			}
 			else if (!Validator.isEmailAddress(emailAddress)) {
-				SessionErrors.add(req, "emailAddressInvalid");
+				SessionErrors.add(actionRequest, "emailAddressInvalid");
 			}
 		}
 
@@ -112,14 +120,14 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				fos.close();
 			}
 			catch (SecurityException es) {
-				SessionErrors.add(req, "fileNameInvalid");
+				SessionErrors.add(actionRequest, "fileNameInvalid");
 			}
 			catch (FileNotFoundException fnfe) {
-				SessionErrors.add(req, "fileNameInvalid");
+				SessionErrors.add(actionRequest, "fileNameInvalid");
 			}
 		}
 
-		if (!SessionErrors.isEmpty(req)) {
+		if (!SessionErrors.isEmpty(actionRequest)) {
 			return;
 		}
 
@@ -142,11 +150,14 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 			prefs.setValue("databaseTableName", databaseTableName);
 
-			String fieldLabel = ParamUtil.getString(req, "fieldLabel" + i);
-			String fieldType = ParamUtil.getString(req, "fieldType" + i);
+			String fieldLabel = ParamUtil.getString(
+				actionRequest, "fieldLabel" + i);
+			String fieldType = ParamUtil.getString(
+				actionRequest, "fieldType" + i);
 			boolean fieldOptional = ParamUtil.getBoolean(
-				req, "fieldOptional" + i);
-			String fieldOptions = ParamUtil.getString(req, "fieldOptions" + i);
+				actionRequest, "fieldOptional" + i);
+			String fieldOptions = ParamUtil.getString(
+				actionRequest, "fieldOptions" + i);
 
 			while ((i == 1) || (Validator.isNotNull(fieldLabel))) {
 				prefs.setValue("fieldLabel" + i, fieldLabel);
@@ -157,10 +168,13 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 				i++;
 
-				fieldLabel = ParamUtil.getString(req, "fieldLabel" + i);
-				fieldType = ParamUtil.getString(req, "fieldType" + i);
-				fieldOptional = ParamUtil.getBoolean(req, "fieldOptional" + i);
-				fieldOptions = ParamUtil.getString(req, "fieldOptions" + i);
+				fieldLabel = ParamUtil.getString(
+					actionRequest, "fieldLabel" + i);
+				fieldType = ParamUtil.getString(actionRequest, "fieldType" + i);
+				fieldOptional = ParamUtil.getBoolean(
+					actionRequest, "fieldOptional" + i);
+				fieldOptions = ParamUtil.getString(
+					actionRequest, "fieldOptions" + i);
 			}
 
 			// Clear previous preferences that are now blank
@@ -179,11 +193,11 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			}
 		}
 
-		if (SessionErrors.isEmpty(req)) {
+		if (SessionErrors.isEmpty(actionRequest)) {
 			prefs.store();
 
 			SessionMessages.add(
-				req, portletConfig.getPortletName() + ".doConfigure");
+				actionRequest, portletConfig.getPortletName() + ".doConfigure");
 		}
 	}
 

@@ -47,30 +47,36 @@ import javax.portlet.RenderResponse;
 public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			PortletConfig portletConfig, ActionRequest req, ActionResponse res)
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		if (!cmd.equals(Constants.UPDATE)) {
 			return;
 		}
 
-		long groupId = ParamUtil.getLong(req, "groupId");
-		String articleId = ParamUtil.getString(req, "articleId").toUpperCase();
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+		String articleId = ParamUtil.getString(
+			actionRequest, "articleId").toUpperCase();
 		String templateId = ParamUtil.getString(
-			req, "templateId").toUpperCase();
+			actionRequest, "templateId").toUpperCase();
 		boolean showAvailableLocales = ParamUtil.getBoolean(
-			req, "showAvailableLocales");
-		boolean enableRatings = ParamUtil.getBoolean(req, "enableRatings");
-		boolean enableComments = ParamUtil.getBoolean(req, "enableComments");
+			actionRequest, "showAvailableLocales");
+		boolean enableRatings = ParamUtil.getBoolean(
+			actionRequest, "enableRatings");
+		boolean enableComments = ParamUtil.getBoolean(
+			actionRequest, "enableComments");
 		boolean enableCommentRatings = ParamUtil.getBoolean(
-			req, "enableCommentRatings");
+			actionRequest, "enableCommentRatings");
 
-		String portletResource = ParamUtil.getString(req, "portletResource");
+		String portletResource = ParamUtil.getString(
+			actionRequest, "portletResource");
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				actionRequest, portletResource);
 
 		prefs.setValue("group-id", String.valueOf(groupId));
 		prefs.setValue("article-id", articleId);
@@ -84,9 +90,10 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		prefs.store();
 
-		updateContentSearch(req, portletResource, articleId);
+		updateContentSearch(actionRequest, portletResource, articleId);
 
-		res.sendRedirect(ParamUtil.getString(req, "redirect"));
+		actionResponse.sendRedirect(
+			ParamUtil.getString(actionRequest, "redirect"));
 	}
 
 	public String render(
@@ -98,10 +105,11 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	protected void updateContentSearch(
-			ActionRequest req, String portletResource, String articleId)
+			ActionRequest actionRequest, String portletResource,
+			String articleId)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();

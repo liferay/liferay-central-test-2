@@ -47,38 +47,40 @@ import javax.portlet.RenderResponse;
 public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			PortletConfig portletConfig, ActionRequest req, ActionResponse res)
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		if (!cmd.equals(Constants.UPDATE)) {
 			return;
 		}
 
 		String portletResource = ParamUtil.getString(
-			req, "portletResource");
+			actionRequest, "portletResource");
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				actionRequest, portletResource);
 
-		String tabs2 = ParamUtil.getString(req, "tabs2");
+		String tabs2 = ParamUtil.getString(actionRequest, "tabs2");
 
 		if (tabs2.equals("display-settings")) {
-			updateDisplaySettings(req, prefs);
+			updateDisplaySettings(actionRequest, prefs);
 		}
 		else if (tabs2.equals("email-from")) {
-			updateEmailFrom(req, prefs);
+			updateEmailFrom(actionRequest, prefs);
 		}
 		else if (tabs2.equals("event-reminder-email")) {
-			updateEmailEventReminder(req, prefs);
+			updateEmailEventReminder(actionRequest, prefs);
 		}
 
-		if (SessionErrors.isEmpty(req)) {
+		if (SessionErrors.isEmpty(actionRequest)) {
 			prefs.store();
 
 			SessionMessages.add(
-				req, portletConfig.getPortletName() + ".doConfigure");
+				actionRequest, portletConfig.getPortletName() + ".doConfigure");
 		}
 	}
 
@@ -91,16 +93,17 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	protected void updateDisplaySettings(
-			ActionRequest req, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
-		String tabs1Default = ParamUtil.getString(req, "tabs1Default");
+		String tabs1Default = ParamUtil.getString(
+			actionRequest, "tabs1Default");
 		String summaryTabOrientation = ParamUtil.getString(
-			req, "summaryTabOrientation");
+			actionRequest, "summaryTabOrientation");
 		String summaryTabShowMiniMonth = ParamUtil.getString(
-			req, "summaryTabShowMiniMonth");
+			actionRequest, "summaryTabShowMiniMonth");
 		String summaryTabShowTodaysEvents = ParamUtil.getString(
-			req, "summaryTabShowTodaysEvents");
+			actionRequest, "summaryTabShowTodaysEvents");
 
 		prefs.setValue("tabs1-default", tabs1Default);
 		prefs.setValue("summary-tab-orientation", summaryTabOrientation);
@@ -109,17 +112,20 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			"summary-tab-show-todays-events", summaryTabShowTodaysEvents);
 	}
 
-	protected void updateEmailFrom(ActionRequest req, PortletPreferences prefs)
+	protected void updateEmailFrom(
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
-		String emailFromName = ParamUtil.getString(req, "emailFromName");
-		String emailFromAddress = ParamUtil.getString(req, "emailFromAddress");
+		String emailFromName = ParamUtil.getString(
+			actionRequest, "emailFromName");
+		String emailFromAddress = ParamUtil.getString(
+			actionRequest, "emailFromAddress");
 
 		if (Validator.isNull(emailFromName)) {
-			SessionErrors.add(req, "emailFromName");
+			SessionErrors.add(actionRequest, "emailFromName");
 		}
 		else if (!Validator.isEmailAddress(emailFromAddress)) {
-			SessionErrors.add(req, "emailFromAddress");
+			SessionErrors.add(actionRequest, "emailFromAddress");
 		}
 		else {
 			prefs.setValue("email-from-name", emailFromName);
@@ -128,21 +134,21 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	protected void updateEmailEventReminder(
-			ActionRequest req, PortletPreferences prefs)
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
 		boolean emailEventReminderEnabled = ParamUtil.getBoolean(
-			req, "emailEventReminderEnabled");
+			actionRequest, "emailEventReminderEnabled");
 		String emailEventReminderSubject = ParamUtil.getString(
-			req, "emailEventReminderSubject");
+			actionRequest, "emailEventReminderSubject");
 		String emailEventReminderBody = ParamUtil.getString(
-			req, "emailEventReminderBody");
+			actionRequest, "emailEventReminderBody");
 
 		if (Validator.isNull(emailEventReminderSubject)) {
-			SessionErrors.add(req, "emailEventReminderSubject");
+			SessionErrors.add(actionRequest, "emailEventReminderSubject");
 		}
 		else if (Validator.isNull(emailEventReminderBody)) {
-			SessionErrors.add(req, "emailEventReminderBody");
+			SessionErrors.add(actionRequest, "emailEventReminderBody");
 		}
 		else {
 			prefs.setValue(

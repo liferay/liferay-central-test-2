@@ -47,36 +47,37 @@ import javax.portlet.RenderResponse;
 public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			PortletConfig portletConfig, ActionRequest req, ActionResponse res)
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		try {
-			String cmd = ParamUtil.getString(req, Constants.CMD);
+			String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 			if (!cmd.equals(Constants.UPDATE)) {
 				return;
 			}
 
-			long questionId = ParamUtil.getLong(req, "questionId");
+			long questionId = ParamUtil.getLong(actionRequest, "questionId");
 
 			PollsQuestionServiceUtil.getQuestion(questionId);
 
 			String portletResource = ParamUtil.getString(
-				req, "portletResource");
+				actionRequest, "portletResource");
 
 			PortletPreferences prefs =
 				PortletPreferencesFactoryUtil.getPortletSetup(
-					req, portletResource);
+					actionRequest, portletResource);
 
 			prefs.setValue("question-id", String.valueOf(questionId));
 
 			prefs.store();
 
 			SessionMessages.add(
-				req, portletConfig.getPortletName() + ".doConfigure");
+				actionRequest, portletConfig.getPortletName() + ".doConfigure");
 		}
 		catch (NoSuchQuestionException nsqe) {
-			SessionErrors.add(req, nsqe.getClass().getName());
+			SessionErrors.add(actionRequest, nsqe.getClass().getName());
 		}
 	}
 

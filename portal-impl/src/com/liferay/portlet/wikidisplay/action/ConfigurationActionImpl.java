@@ -48,27 +48,28 @@ import javax.portlet.RenderResponse;
 public class ConfigurationActionImpl implements ConfigurationAction {
 
 	public void processAction(
-			PortletConfig portletConfig, ActionRequest req, ActionResponse res)
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		try {
-			String cmd = ParamUtil.getString(req, Constants.CMD);
+			String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 			if (!cmd.equals(Constants.UPDATE)) {
 				return;
 			}
 
-			long nodeId = ParamUtil.getLong(req, "nodeId");
-			String title = ParamUtil.getString(req, "title");
+			long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
+			String title = ParamUtil.getString(actionRequest, "title");
 
 			WikiNode node = WikiNodeServiceUtil.getNode(nodeId);
 
 			String portletResource = ParamUtil.getString(
-				req, "portletResource");
+				actionRequest, "portletResource");
 
 			PortletPreferences prefs =
 				PortletPreferencesFactoryUtil.getPortletSetup(
-					req, portletResource);
+					actionRequest, portletResource);
 
 			prefs.setValue("node-id", String.valueOf(node.getNodeId()));
 			prefs.setValue("title", title);
@@ -76,10 +77,10 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			prefs.store();
 
 			SessionMessages.add(
-				req, portletConfig.getPortletName() + ".doConfigure");
+				actionRequest, portletConfig.getPortletName() + ".doConfigure");
 		}
 		catch (NoSuchNodeException nsne) {
-			SessionErrors.add(req, nsne.getClass().getName());
+			SessionErrors.add(actionRequest, nsne.getClass().getName());
 		}
 	}
 
