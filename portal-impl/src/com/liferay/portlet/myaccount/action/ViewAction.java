@@ -43,14 +43,14 @@ public class ViewAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		if (req.getRemoteUser() == null) {
+		if (renderRequest.getRemoteUser() == null) {
 			return mapping.findForward("portlet.my_account.view");
 		}
 		else {
-			if (req.getWindowState().equals(WindowState.MAXIMIZED)) {
+			if (renderRequest.getWindowState().equals(WindowState.MAXIMIZED)) {
 				return mapping.findForward("portlet.my_account.edit_user");
 			}
 			else {

@@ -113,17 +113,17 @@ public class EditEntryAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getEntry(req);
+			ActionUtil.getEntry(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchEntryException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.bookmarks.error");
 			}
@@ -133,7 +133,7 @@ public class EditEntryAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(req, "portlet.bookmarks.edit_entry"));
+			getForward(renderRequest, "portlet.bookmarks.edit_entry"));
 	}
 
 	protected void deleteEntry(ActionRequest req) throws Exception {

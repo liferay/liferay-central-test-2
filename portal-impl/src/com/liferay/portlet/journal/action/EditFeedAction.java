@@ -105,14 +105,14 @@ public class EditFeedAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			String cmd = ParamUtil.getString(req, Constants.CMD);
+			String cmd = ParamUtil.getString(renderRequest, Constants.CMD);
 
 			if (!cmd.equals(Constants.ADD)) {
-				ActionUtil.getFeed(req);
+				ActionUtil.getFeed(renderRequest);
 			}
 		}
 		catch (NoSuchFeedException nssfe) {
@@ -123,7 +123,7 @@ public class EditFeedAction extends PortletAction {
 		}
 		catch (Exception e) {
 			if (e instanceof PrincipalException) {
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.journal.error");
 			}
@@ -133,7 +133,7 @@ public class EditFeedAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(req, "portlet.journal.edit_feed"));
+			getForward(renderRequest, "portlet.journal.edit_feed"));
 	}
 
 	protected void deleteFeeds(ActionRequest req) throws Exception {

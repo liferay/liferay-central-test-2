@@ -97,17 +97,17 @@ public class EditNodeAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getNode(req);
+			ActionUtil.getNode(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchNodeException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.wiki.error");
 			}
@@ -116,7 +116,8 @@ public class EditNodeAction extends PortletAction {
 			}
 		}
 
-		return mapping.findForward(getForward(req, "portlet.wiki.edit_node"));
+		return mapping.findForward(
+			getForward(renderRequest, "portlet.wiki.edit_node"));
 	}
 
 	protected void deleteNode(ActionRequest req) throws Exception {

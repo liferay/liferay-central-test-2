@@ -127,14 +127,14 @@ public class EditStructureAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			String cmd = ParamUtil.getString(req, Constants.CMD);
+			String cmd = ParamUtil.getString(renderRequest, Constants.CMD);
 
 			if (!cmd.equals(Constants.ADD)) {
-				ActionUtil.getStructure(req);
+				ActionUtil.getStructure(renderRequest);
 			}
 		}
 		catch (NoSuchStructureException nsse) {
@@ -147,7 +147,7 @@ public class EditStructureAction extends PortletAction {
 			if (//e instanceof NoSuchStructureException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.journal.error");
 			}
@@ -157,7 +157,7 @@ public class EditStructureAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(req, "portlet.journal.edit_structure"));
+			getForward(renderRequest, "portlet.journal.edit_structure"));
 	}
 
 	protected void deleteStructures(ActionRequest req) throws Exception {

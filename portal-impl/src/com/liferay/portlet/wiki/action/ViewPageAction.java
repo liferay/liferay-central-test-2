@@ -60,19 +60,19 @@ public class ViewPageAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			getNode(req);
-			ActionUtil.getPage(req);
+			getNode(renderRequest);
+			ActionUtil.getPage(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchNodeException ||
 				e instanceof NoSuchPageException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.wiki.error");
 			}
@@ -81,7 +81,8 @@ public class ViewPageAction extends PortletAction {
 			}
 		}
 
-		return mapping.findForward(getForward(req, "portlet.wiki.view_page"));
+		return mapping.findForward(
+			getForward(renderRequest, "portlet.wiki.view_page"));
 	}
 
 	protected void getNode(RenderRequest req) throws Exception {

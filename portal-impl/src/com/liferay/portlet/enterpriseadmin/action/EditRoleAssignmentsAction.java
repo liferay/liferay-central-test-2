@@ -89,17 +89,17 @@ public class EditRoleAssignmentsAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getRole(req);
+			ActionUtil.getRole(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchRoleException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.enterprise_admin.error");
 			}
@@ -108,8 +108,8 @@ public class EditRoleAssignmentsAction extends PortletAction {
 			}
 		}
 
-		return mapping.findForward(
-			getForward(req, "portlet.enterprise_admin.edit_role_assignments"));
+		return mapping.findForward(getForward(
+			renderRequest, "portlet.enterprise_admin.edit_role_assignments"));
 	}
 
 	protected void updateRoleGroups(ActionRequest req) throws Exception {

@@ -165,10 +165,10 @@ public class ViewAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		return mapping.findForward(getForward(req, "portlet.invitation.view"));
+		return mapping.findForward(getForward(renderRequest, "portlet.invitation.view"));
 	}
 
 }

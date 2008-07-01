@@ -116,17 +116,17 @@ public class EditQuestionAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getQuestion(req);
+			ActionUtil.getQuestion(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchQuestionException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.polls.error");
 			}
@@ -136,7 +136,7 @@ public class EditQuestionAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(req, "portlet.polls.edit_question"));
+			getForward(renderRequest, "portlet.polls.edit_question"));
 	}
 
 	protected void deleteQuestion(ActionRequest req) throws Exception {

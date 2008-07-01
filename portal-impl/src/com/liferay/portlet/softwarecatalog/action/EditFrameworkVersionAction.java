@@ -88,17 +88,17 @@ public class EditFrameworkVersionAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getFrameworkVersion(req);
+			ActionUtil.getFrameworkVersion(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchFrameworkVersionException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.software_catalog.error");
 			}
@@ -108,7 +108,7 @@ public class EditFrameworkVersionAction extends PortletAction {
 		}
 
 		return mapping.findForward(getForward(
-			req, "portlet.software_catalog.edit_framework_version"));
+			renderRequest, "portlet.software_catalog.edit_framework_version"));
 	}
 
 	protected void deleteFrameworkVersion(ActionRequest req) throws Exception {

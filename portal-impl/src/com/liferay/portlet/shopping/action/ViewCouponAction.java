@@ -49,13 +49,13 @@ public class ViewCouponAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			long couponId = ParamUtil.getLong(req, "couponId");
+			long couponId = ParamUtil.getLong(renderRequest, "couponId");
 
-			String code = ParamUtil.getString(req, "code");
+			String code = ParamUtil.getString(renderRequest, "code");
 
 			ShoppingCoupon coupon = null;
 
@@ -66,13 +66,13 @@ public class ViewCouponAction extends PortletAction {
 				coupon = ShoppingCouponLocalServiceUtil.getCoupon(code);
 			}
 
-			req.setAttribute(WebKeys.SHOPPING_COUPON, coupon);
+			renderRequest.setAttribute(WebKeys.SHOPPING_COUPON, coupon);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchCouponException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.shopping.error");
 			}

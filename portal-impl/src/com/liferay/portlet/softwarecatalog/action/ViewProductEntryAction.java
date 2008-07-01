@@ -47,14 +47,15 @@ public class ViewProductEntryAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getProductEntry(req);
+			ActionUtil.getProductEntry(renderRequest);
 
-			SCProductEntry productEntry = (SCProductEntry)req.getAttribute(
-				WebKeys.SOFTWARE_CATALOG_PRODUCT_ENTRY);
+			SCProductEntry productEntry =
+				(SCProductEntry)renderRequest.getAttribute(
+					WebKeys.SOFTWARE_CATALOG_PRODUCT_ENTRY);
 
 			if (productEntry == null) {
 				throw new NoSuchProductEntryException();
@@ -64,7 +65,7 @@ public class ViewProductEntryAction extends PortletAction {
 			if (e instanceof NoSuchProductEntryException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.software_catalog.error");
 			}

@@ -88,17 +88,17 @@ public class EditPhoneAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getPhone(req);
+			ActionUtil.getPhone(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchPhoneException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.enterprise_admin.error");
 			}
@@ -108,7 +108,7 @@ public class EditPhoneAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(req, "portlet.enterprise_admin.edit_phone"));
+			getForward(renderRequest, "portlet.enterprise_admin.edit_phone"));
 	}
 
 	protected void deletePhone(ActionRequest req) throws Exception {

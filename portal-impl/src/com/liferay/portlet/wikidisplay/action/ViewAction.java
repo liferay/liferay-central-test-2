@@ -56,16 +56,16 @@ public class ViewAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			PortletPreferences prefs = req.getPreferences();
+			PortletPreferences prefs = renderRequest.getPreferences();
 
 			long nodeId = GetterUtil.getLong(
 				prefs.getValue("node-id", StringPool.BLANK));
 			String title = ParamUtil.getString(
-				req, "title", prefs.getValue("title", WikiPageImpl.FRONT_PAGE));
+				renderRequest, "title", prefs.getValue("title", WikiPageImpl.FRONT_PAGE));
 
 			WikiNode node = WikiNodeServiceUtil.getNode(nodeId);
 
@@ -79,8 +79,8 @@ public class ViewAction extends PortletAction {
 					nodeId, WikiPageImpl.FRONT_PAGE);
 			}
 
-			req.setAttribute(WebKeys.WIKI_NODE, node);
-			req.setAttribute(WebKeys.WIKI_PAGE, wikiPage);
+			renderRequest.setAttribute(WebKeys.WIKI_NODE, node);
+			renderRequest.setAttribute(WebKeys.WIKI_PAGE, wikiPage);
 
 			return mapping.findForward("portlet.wiki_display.view");
 		}
@@ -91,7 +91,7 @@ public class ViewAction extends PortletAction {
 			return mapping.findForward("/portal/portlet_not_setup");
 		}
 		catch (PrincipalException pe) {
-			SessionErrors.add(req, pe.getClass().getName());
+			SessionErrors.add(renderRequest, pe.getClass().getName());
 
 			return mapping.findForward("portlet.wiki_display.error");
 		}

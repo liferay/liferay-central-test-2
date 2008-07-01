@@ -91,17 +91,17 @@ public class EditPasswordPolicyAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getPasswordPolicy(req);
+			ActionUtil.getPasswordPolicy(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchPasswordPolicyException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.enterprise_admin.error");
 			}
@@ -110,8 +110,8 @@ public class EditPasswordPolicyAction extends PortletAction {
 			}
 		}
 
-		return mapping.findForward(
-			getForward(req, "portlet.enterprise_admin.edit_password_policy"));
+		return mapping.findForward(getForward(
+			renderRequest, "portlet.enterprise_admin.edit_password_policy"));
 	}
 
 	protected void deletePasswordPolicy(ActionRequest req) throws Exception {

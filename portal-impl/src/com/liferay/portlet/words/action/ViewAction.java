@@ -48,15 +48,16 @@ public class ViewAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			String cmd = ParamUtil.getString(req, Constants.CMD);
+			String cmd = ParamUtil.getString(renderRequest, Constants.CMD);
 
 			if (cmd.equals(Constants.SEARCH)) {
-				String word = ParamUtil.getString(req, "word");
-				boolean scramble = ParamUtil.getBoolean(req, "scramble");
+				String word = ParamUtil.getString(renderRequest, "word");
+				boolean scramble = ParamUtil.getBoolean(
+					renderRequest, "scramble");
 
 				String[] words = null;
 
@@ -67,11 +68,11 @@ public class ViewAction extends PortletAction {
 					words = WordsUtil.unscramble(word);
 				}
 
-				req.setAttribute(WebKeys.WORDS_LIST, words);
+				renderRequest.setAttribute(WebKeys.WORDS_LIST, words);
 			}
 		}
 		catch (ScramblerException se) {
-			SessionErrors.add(req, se.getClass().getName());
+			SessionErrors.add(renderRequest, se.getClass().getName());
 		}
 
 		return mapping.findForward("portlet.words.view");

@@ -96,17 +96,17 @@ public class SplitThreadAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getMessage(req);
+			ActionUtil.getMessage(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchMessageException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.message_boards.error");
 			}
@@ -116,7 +116,7 @@ public class SplitThreadAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(req, "portlet.message_boards.split_thread"));
+			getForward(renderRequest, "portlet.message_boards.split_thread"));
 	}
 
 	protected void splitThread(ActionRequest req, ActionResponse res)

@@ -88,17 +88,17 @@ public class EditOrderAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getOrder(req);
+			ActionUtil.getOrder(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchOrderException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.shopping.error");
 			}
@@ -108,7 +108,7 @@ public class EditOrderAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(req, "portlet.shopping.edit_order"));
+			getForward(renderRequest, "portlet.shopping.edit_order"));
 	}
 
 	protected void deleteOrders(ActionRequest req) throws Exception {

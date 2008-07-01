@@ -85,17 +85,17 @@ public class EditDefinitionAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getDefinition(req);
+			ActionUtil.getDefinition(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchDefinitionException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.workflow.error");
 			}
@@ -105,7 +105,7 @@ public class EditDefinitionAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(req, "portlet.workflow.edit_definition"));
+			getForward(renderRequest, "portlet.workflow.edit_definition"));
 	}
 
 	protected void addDefinition(ActionRequest req) throws Exception {

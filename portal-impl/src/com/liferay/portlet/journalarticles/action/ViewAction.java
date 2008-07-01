@@ -47,11 +47,11 @@ public class ViewAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			PortletPreferences prefs = req.getPreferences();
+			PortletPreferences prefs = renderRequest.getPreferences();
 
 			long groupId = GetterUtil.getLong(
 				prefs.getValue("group-id", StringPool.BLANK));

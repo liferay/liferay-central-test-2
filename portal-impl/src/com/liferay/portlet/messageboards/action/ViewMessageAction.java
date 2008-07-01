@@ -49,16 +49,17 @@ public class ViewMessageAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			long messageId = ParamUtil.getLong(req, "messageId");
+			long messageId = ParamUtil.getLong(renderRequest, "messageId");
 
 			MBMessageDisplay messageDisplay =
 				MBMessageServiceUtil.getMessageDisplay(messageId);
 
-			req.setAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE, messageDisplay);
+			renderRequest.setAttribute(
+				WebKeys.MESSAGE_BOARDS_MESSAGE, messageDisplay);
 
 			return mapping.findForward("portlet.message_boards.view_message");
 		}
@@ -66,7 +67,7 @@ public class ViewMessageAction extends PortletAction {
 			if (e instanceof NoSuchMessageException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.message_boards.error");
 			}

@@ -86,17 +86,17 @@ public class EditLicenseAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getLicense(req);
+			ActionUtil.getLicense(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchLicenseException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.software_catalog.error");
 			}
@@ -106,7 +106,7 @@ public class EditLicenseAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(req, "portlet.software_catalog.edit_license"));
+			getForward(renderRequest, "portlet.software_catalog.edit_license"));
 	}
 
 	protected void deleteLicense(ActionRequest req) throws Exception {

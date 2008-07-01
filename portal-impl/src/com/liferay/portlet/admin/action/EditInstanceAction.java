@@ -87,17 +87,17 @@ public class EditInstanceAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getInstance(req);
+			ActionUtil.getInstance(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchCompanyException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.admin.error");
 			}
@@ -107,7 +107,7 @@ public class EditInstanceAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(req, "portlet.admin.edit_instance"));
+			getForward(renderRequest, "portlet.admin.edit_instance"));
 	}
 
 	protected void updateInstance(ActionRequest req) throws Exception {

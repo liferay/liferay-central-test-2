@@ -86,11 +86,11 @@ public class EditTaskAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		return mapping.findForward(
-			getForward(req, "portlet.workflow.edit_task"));
+			getForward(renderRequest, "portlet.workflow.edit_task"));
 	}
 
 	protected Map updateTask(ActionRequest req) throws Exception {

@@ -89,17 +89,17 @@ public class EditFileShortcutAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getFileShortcut(req);
+			ActionUtil.getFileShortcut(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchFileShortcutException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.document_library.error");
 			}
@@ -108,8 +108,8 @@ public class EditFileShortcutAction extends PortletAction {
 			}
 		}
 
-		return mapping.findForward(
-			getForward(req, "portlet.document_library.edit_file_shortcut"));
+		return mapping.findForward(getForward(
+			renderRequest, "portlet.document_library.edit_file_shortcut"));
 	}
 
 	protected void deleteFileShortcut(ActionRequest req) throws Exception {

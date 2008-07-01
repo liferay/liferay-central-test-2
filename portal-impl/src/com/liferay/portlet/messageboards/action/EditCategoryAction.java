@@ -98,17 +98,17 @@ public class EditCategoryAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getCategory(req);
+			ActionUtil.getCategory(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchCategoryException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.message_boards.error");
 			}
@@ -118,7 +118,7 @@ public class EditCategoryAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(req, "portlet.message_boards.edit_category"));
+			getForward(renderRequest, "portlet.message_boards.edit_category"));
 	}
 
 	protected void deleteCategory(ActionRequest req) throws Exception {

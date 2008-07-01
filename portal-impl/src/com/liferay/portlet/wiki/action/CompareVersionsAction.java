@@ -57,19 +57,19 @@ public class CompareVersionsAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getNode(req);
-			ActionUtil.getPage(req);
+			ActionUtil.getNode(renderRequest);
+			ActionUtil.getPage(renderRequest);
 
-			compareVersions(req);
+			compareVersions(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchPageException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.wiki.error");
 			}

@@ -49,11 +49,11 @@ public class ViewAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			PortletPreferences prefs = req.getPreferences();
+			PortletPreferences prefs = renderRequest.getPreferences();
 
 			long questionId = GetterUtil.getLong(
 				prefs.getValue("question-id", StringPool.BLANK));
@@ -61,7 +61,7 @@ public class ViewAction extends PortletAction {
 			PollsQuestion question =
 				PollsQuestionServiceUtil.getQuestion(questionId);
 
-			req.setAttribute(WebKeys.POLLS_QUESTION, question);
+			renderRequest.setAttribute(WebKeys.POLLS_QUESTION, question);
 
 			return mapping.findForward("portlet.polls_display.view");
 		}

@@ -72,11 +72,11 @@ public class AddBookItemsAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		return mapping.findForward(
-			getForward(req, "portlet.shopping.add_book_items"));
+			getForward(renderRequest, "portlet.shopping.add_book_items"));
 	}
 
 	protected void quickAddItems(ActionRequest req) throws Exception {

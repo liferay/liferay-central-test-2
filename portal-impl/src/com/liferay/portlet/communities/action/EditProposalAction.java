@@ -129,22 +129,23 @@ public class EditProposalAction extends EditPagesAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			checkPermissions(req);
+			checkPermissions(renderRequest);
 		}
 		catch (PrincipalException pe) {
-			SessionErrors.add(req, PrincipalException.class.getName());
+			SessionErrors.add(
+				renderRequest, PrincipalException.class.getName());
 
 			return mapping.findForward("portlet.communities.error");
 		}
 
 		try {
-			ActionUtil.getGroup(req);
+			ActionUtil.getGroup(renderRequest);
 
-			long proposalId = ParamUtil.getLong(req, "proposalId");
+			long proposalId = ParamUtil.getLong(renderRequest, "proposalId");
 
 			TasksProposal proposal = null;
 
@@ -153,13 +154,13 @@ public class EditProposalAction extends EditPagesAction {
 					proposalId);
 			}
 
-			req.setAttribute(WebKeys.TASKS_PROPOSAL, proposal);
+			renderRequest.setAttribute(WebKeys.TASKS_PROPOSAL, proposal);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchProposalException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.communities.error");
 			}
@@ -169,7 +170,7 @@ public class EditProposalAction extends EditPagesAction {
 		}
 
 		return mapping.findForward(
-			getForward(req, "portlet.communities.edit_proposal"));
+			getForward(renderRequest, "portlet.communities.edit_proposal"));
 	}
 
 	protected void approveReview(ActionRequest req) throws Exception {

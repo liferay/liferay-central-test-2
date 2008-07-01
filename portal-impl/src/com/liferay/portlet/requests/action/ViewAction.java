@@ -55,10 +55,10 @@ public class ViewAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		Group group = GroupLocalServiceUtil.getGroup(
@@ -74,7 +74,7 @@ public class ViewAction extends PortletAction {
 				themeDisplay.getPermissionChecker(), user.getUserId(),
 				ActionKeys.UPDATE)) {
 
-			req.setAttribute(WebKeys.PORTLET_DECORATE, Boolean.FALSE);
+			renderRequest.setAttribute(WebKeys.PORTLET_DECORATE, Boolean.FALSE);
 		}
 		else {
 			List<SocialRequest> requests =
@@ -83,10 +83,11 @@ public class ViewAction extends PortletAction {
 					100);
 
 			if (requests.size() == 0) {
-				req.setAttribute(WebKeys.PORTLET_DECORATE, Boolean.FALSE);
+				renderRequest.setAttribute(
+					WebKeys.PORTLET_DECORATE, Boolean.FALSE);
 			}
 			else {
-				req.setAttribute(WebKeys.SOCIAL_REQUESTS, requests);
+				renderRequest.setAttribute(WebKeys.SOCIAL_REQUESTS, requests);
 			}
 		}
 

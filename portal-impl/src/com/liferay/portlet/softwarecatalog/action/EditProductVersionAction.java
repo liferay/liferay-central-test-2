@@ -95,17 +95,17 @@ public class EditProductVersionAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getProductVersion(req);
+			ActionUtil.getProductVersion(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchProductVersionException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.software_catalog.error");
 			}
@@ -115,7 +115,7 @@ public class EditProductVersionAction extends PortletAction {
 		}
 
 		return mapping.findForward(getForward(
-			req, "portlet.software_catalog.edit_product_version"));
+			renderRequest, "portlet.software_catalog.edit_product_version"));
 	}
 
 	protected void deleteProductVersion(ActionRequest req) throws Exception {

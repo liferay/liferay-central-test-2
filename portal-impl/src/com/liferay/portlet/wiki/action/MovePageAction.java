@@ -98,12 +98,12 @@ public class MovePageAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getNode(req);
-			ActionUtil.getPage(req);
+			ActionUtil.getNode(renderRequest);
+			ActionUtil.getPage(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchNodeException ||
@@ -111,7 +111,7 @@ public class MovePageAction extends PortletAction {
 				e instanceof PageTitleException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.wiki.error");
 			}
@@ -120,7 +120,8 @@ public class MovePageAction extends PortletAction {
 			}
 		}
 
-		return mapping.findForward(getForward(req, "portlet.wiki.move_page"));
+		return mapping.findForward(
+			getForward(renderRequest, "portlet.wiki.move_page"));
 	}
 
 	protected void changeParentPage(ActionRequest req) throws Exception {

@@ -94,17 +94,17 @@ public class EditUserGroupAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getUserGroup(req);
+			ActionUtil.getUserGroup(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchUserGroupException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.enterprise_admin.error");
 			}
@@ -113,8 +113,8 @@ public class EditUserGroupAction extends PortletAction {
 			}
 		}
 
-		return mapping.findForward(
-			getForward(req, "portlet.enterprise_admin.edit_user_group"));
+		return mapping.findForward(getForward(
+			renderRequest, "portlet.enterprise_admin.edit_user_group"));
 	}
 
 	protected void deleteUserGroups(ActionRequest req) throws Exception {

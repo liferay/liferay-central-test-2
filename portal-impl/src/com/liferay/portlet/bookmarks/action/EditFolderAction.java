@@ -87,17 +87,17 @@ public class EditFolderAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getFolder(req);
+			ActionUtil.getFolder(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchFolderException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.bookmarks.error");
 			}
@@ -107,7 +107,7 @@ public class EditFolderAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(req, "portlet.bookmarks.edit_folder"));
+			getForward(renderRequest, "portlet.bookmarks.edit_folder"));
 	}
 
 	protected void deleteFolder(ActionRequest req) throws Exception {

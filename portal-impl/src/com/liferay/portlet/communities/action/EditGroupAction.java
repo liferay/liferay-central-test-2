@@ -99,17 +99,17 @@ public class EditGroupAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse renderResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getGroup(req);
+			ActionUtil.getGroup(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchGroupException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.communities.error");
 			}
@@ -119,7 +119,7 @@ public class EditGroupAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(req, "portlet.communities.edit_community"));
+			getForward(renderRequest, "portlet.communities.edit_community"));
 	}
 
 	protected void deleteGroup(ActionRequest req) throws Exception {
