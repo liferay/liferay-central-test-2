@@ -97,7 +97,7 @@ public void processAction(
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse res)
+			RenderRequest req, RenderResponse renderResponse)
 		throws Exception {
 
 		return mapping.findForward(getForward(req, "portlet.shopping.cart"));

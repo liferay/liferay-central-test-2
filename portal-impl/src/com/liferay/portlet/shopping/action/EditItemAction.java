@@ -73,21 +73,21 @@ public class EditItemAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateItem(req);
+				updateItem(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteItem(req);
+				deleteItem(actionRequest);
 			}
 
 			if (Validator.isNotNull(cmd)) {
-				sendRedirect(req, res);
+				sendRedirect(actionRequest, actionResponse);
 			}
 		}
 		catch (Exception e) {
@@ -95,9 +95,9 @@ public class EditItemAction extends PortletAction {
 				e instanceof NoSuchItemException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.shopping.error");
+				setForward(actionRequest, "portlet.shopping.error");
 			}
 			else if (e instanceof DuplicateItemSKUException ||
 					 e instanceof ItemLargeImageNameException ||
@@ -109,7 +109,7 @@ public class EditItemAction extends PortletAction {
 					 e instanceof ItemSmallImageNameException ||
 					 e instanceof ItemSmallImageSizeException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
 				throw e;
@@ -119,17 +119,17 @@ public class EditItemAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse res)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getItem(req);
+			ActionUtil.getItem(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchItemException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.shopping.error");
 			}
@@ -139,37 +139,38 @@ public class EditItemAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(req, "portlet.shopping.edit_item"));
+			getForward(renderRequest, "portlet.shopping.edit_item"));
 	}
 
-	protected void deleteItem(ActionRequest req) throws Exception {
-		long itemId = ParamUtil.getLong(req, "itemId");
+	protected void deleteItem(ActionRequest actionRequest) throws Exception {
+		long itemId = ParamUtil.getLong(actionRequest, "itemId");
 
 		ShoppingItemServiceUtil.deleteItem(itemId);
 	}
 
-	protected void updateItem(ActionRequest req) throws Exception {
-		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
-			req);
+	protected void updateItem(ActionRequest actionRequest) throws Exception {
+		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
+			actionRequest);
 
-		long itemId = ParamUtil.getLong(uploadReq, "itemId");
+		long itemId = ParamUtil.getLong(uploadRequest, "itemId");
 
-		long categoryId = ParamUtil.getLong(uploadReq, "categoryId");
-		String sku = ParamUtil.getString(uploadReq, "sku");
-		String name = ParamUtil.getString(uploadReq, "name");
-		String description = ParamUtil.getString(uploadReq, "description");
-		String properties = ParamUtil.getString(uploadReq, "properties");
+		long categoryId = ParamUtil.getLong(uploadRequest, "categoryId");
+		String sku = ParamUtil.getString(uploadRequest, "sku");
+		String name = ParamUtil.getString(uploadRequest, "name");
+		String description = ParamUtil.getString(uploadRequest, "description");
+		String properties = ParamUtil.getString(uploadRequest, "properties");
 
-		int fieldsCount = ParamUtil.getInteger(uploadReq, "fieldsCount", 1);
+		int fieldsCount = ParamUtil.getInteger(uploadRequest, "fieldsCount", 1);
 
 		List<ShoppingItemField> itemFields = new ArrayList<ShoppingItemField>();
 
 		for (int i = 0; i < fieldsCount; i ++) {
-			String fieldName = ParamUtil.getString(uploadReq, "fieldName" + i);
+			String fieldName = ParamUtil.getString(
+				uploadRequest, "fieldName" + i);
 			String fieldValues = ParamUtil.getString(
-				uploadReq, "fieldValues" + i);
+				uploadRequest, "fieldValues" + i);
 			String fieldDescription = ParamUtil.getString(
-				uploadReq, "fieldDescription" + i);
+				uploadRequest, "fieldDescription" + i);
 
 			ShoppingItemField itemField = ShoppingItemFieldUtil.create(0);
 
@@ -181,26 +182,29 @@ public class EditItemAction extends PortletAction {
 		}
 
 		String fieldsQuantities = ParamUtil.getString(
-			uploadReq, "fieldsQuantities");
+			uploadRequest, "fieldsQuantities");
 
-		int pricesCount = ParamUtil.getInteger(uploadReq, "pricesCount", 1);
+		int pricesCount = ParamUtil.getInteger(uploadRequest, "pricesCount", 1);
 
 		List<ShoppingItemPrice> itemPrices = new ArrayList<ShoppingItemPrice>();
 
 		for (int i = 0; i < pricesCount; i ++) {
 			int minQuantity = ParamUtil.getInteger(
-				uploadReq, "minQuantity" + i);
+				uploadRequest, "minQuantity" + i);
 			int maxQuantity = ParamUtil.getInteger(
-				uploadReq, "maxQuantity" + i);
-			double price = ParamUtil.getDouble(uploadReq, "price" + i);
+				uploadRequest, "maxQuantity" + i);
+			double price = ParamUtil.getDouble(uploadRequest, "price" + i);
 			double discount = ParamUtil.getDouble(
-				uploadReq, "discount" + i) / 100;
-			boolean taxable = ParamUtil.getBoolean(uploadReq, "taxable" + i);
-			double shipping = ParamUtil.getDouble(uploadReq, "shipping" + i);
+				uploadRequest, "discount" + i) / 100;
+			boolean taxable = ParamUtil.getBoolean(
+				uploadRequest, "taxable" + i);
+			double shipping = ParamUtil.getDouble(
+				uploadRequest, "shipping" + i);
 			boolean useShippingFormula = ParamUtil.getBoolean(
-				uploadReq, "useShippingFormula" + i);
-			boolean active = ParamUtil.getBoolean(uploadReq, "active" + i);
-			int defaultPrice = ParamUtil.getInteger(uploadReq, "defaultPrice");
+				uploadRequest, "useShippingFormula" + i);
+			boolean active = ParamUtil.getBoolean(uploadRequest, "active" + i);
+			int defaultPrice = ParamUtil.getInteger(
+				uploadRequest, "defaultPrice");
 
 			int status = ShoppingItemPriceImpl.STATUS_ACTIVE_DEFAULT;
 
@@ -226,28 +230,32 @@ public class EditItemAction extends PortletAction {
 		}
 
 		boolean requiresShipping = ParamUtil.getBoolean(
-			uploadReq, "requiresShipping");
-		int stockQuantity = ParamUtil.getInteger(uploadReq, "stockQuantity");
+			uploadRequest, "requiresShipping");
+		int stockQuantity = ParamUtil.getInteger(
+			uploadRequest, "stockQuantity");
 
-		boolean featured = ParamUtil.getBoolean(uploadReq, "featured");
+		boolean featured = ParamUtil.getBoolean(uploadRequest, "featured");
 		Boolean sale = null;
 
-		boolean smallImage = ParamUtil.getBoolean(uploadReq, "smallImage");
-		String smallImageURL = ParamUtil.getString(uploadReq, "smallImageURL");
-		File smallFile = uploadReq.getFile("smallFile");
+		boolean smallImage = ParamUtil.getBoolean(uploadRequest, "smallImage");
+		String smallImageURL = ParamUtil.getString(
+			uploadRequest, "smallImageURL");
+		File smallFile = uploadRequest.getFile("smallFile");
 
-		boolean mediumImage = ParamUtil.getBoolean(uploadReq, "mediumImage");
+		boolean mediumImage = ParamUtil.getBoolean(
+			uploadRequest, "mediumImage");
 		String mediumImageURL = ParamUtil.getString(
-			uploadReq, "mediumImageURL");
-		File mediumFile = uploadReq.getFile("mediumFile");
+			uploadRequest, "mediumImageURL");
+		File mediumFile = uploadRequest.getFile("mediumFile");
 
-		boolean largeImage = ParamUtil.getBoolean(uploadReq, "largeImage");
-		String largeImageURL = ParamUtil.getString(uploadReq, "largeImageURL");
-		File largeFile = uploadReq.getFile("largeFile");
+		boolean largeImage = ParamUtil.getBoolean(uploadRequest, "largeImage");
+		String largeImageURL = ParamUtil.getString(
+			uploadRequest, "largeImageURL");
+		File largeFile = uploadRequest.getFile("largeFile");
 
-		String[] communityPermissions = req.getParameterValues(
+		String[] communityPermissions = actionRequest.getParameterValues(
 			"communityPermissions");
-		String[] guestPermissions = req.getParameterValues(
+		String[] guestPermissions = actionRequest.getParameterValues(
 			"guestPermissions");
 
 		if (itemId <= 0) {

@@ -57,20 +57,21 @@ import org.dom4j.QName;
 public abstract class BasePropMethodImpl implements Method {
 
 	protected void addResponse(
-			WebDAVStorage storage, WebDAVRequest webDavReq,
+			WebDAVStorage storage, WebDAVRequest webDavRequest,
 			Resource resource, Set<Tuple> props, Element multistatus,
 			long depth)
 		throws Exception {
 
-		addResponse(webDavReq, resource, props, multistatus);
+		addResponse(webDavRequest, resource, props, multistatus);
 
 		if (resource.isCollection() && (depth != 0)) {
-			Iterator<Resource> itr = storage.getResources(webDavReq).iterator();
+			Iterator<Resource> itr = storage.getResources(
+				webDavRequest).iterator();
 
 			while (itr.hasNext()) {
 				resource = itr.next();
 
-				addResponse(webDavReq, resource, props, multistatus);
+				addResponse(webDavRequest, resource, props, multistatus);
 			}
 		}
 	}
@@ -257,12 +258,13 @@ public abstract class BasePropMethodImpl implements Method {
 			propstat, "status", WebDAVUtil.DAV_URI, "HTTP/1.1 404 Not Found");
 	}
 
-	protected String getResponseXML(WebDAVRequest webDavReq, Set<Tuple> props)
+	protected String getResponseXML(
+			WebDAVRequest webDavRequest, Set<Tuple> props)
 		throws Exception {
 
-		WebDAVStorage storage = webDavReq.getWebDAVStorage();
+		WebDAVStorage storage = webDavRequest.getWebDAVStorage();
 
-		long depth = WebDAVUtil.getDepth(webDavReq.getHttpServletRequest());
+		long depth = WebDAVUtil.getDepth(webDavRequest.getHttpServletRequest());
 
 		DocumentFactory docFactory = DocumentFactory.getInstance();
 
@@ -273,14 +275,14 @@ public abstract class BasePropMethodImpl implements Method {
 
 		doc.setRootElement(multistatus);
 
-		Resource resource = storage.getResource(webDavReq);
+		Resource resource = storage.getResource(webDavRequest);
 
 		if (resource != null) {
 			addResponse(
-				storage, webDavReq, resource, props, multistatus, depth);
+				storage, webDavRequest, resource, props, multistatus, depth);
 		}
 		else {
-			String path = storage.getRootPath() + webDavReq.getPath();
+			String path = storage.getRootPath() + webDavRequest.getPath();
 
 			if (_log.isWarnEnabled()) {
 				_log.warn("No resource found for " + path);

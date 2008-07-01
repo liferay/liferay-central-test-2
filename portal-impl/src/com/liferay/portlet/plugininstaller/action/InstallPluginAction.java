@@ -93,71 +93,76 @@ public class InstallPluginAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
 		if (!permissionChecker.isOmniadmin()) {
-			SessionErrors.add(req, PrincipalException.class.getName());
+			SessionErrors.add(
+				actionRequest, PrincipalException.class.getName());
 
-			setForward(req, "portlet.plugin_installer.error");
+			setForward(actionRequest, "portlet.plugin_installer.error");
 
 			return;
 		}
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		if (cmd.equals("deployConfiguration")) {
-			deployConfiguration(req);
+			deployConfiguration(actionRequest);
 		}
 		else if (cmd.equals("ignorePackages")) {
-			ignorePackages(req);
+			ignorePackages(actionRequest);
 		}
 		else if (cmd.equals("localDeploy")) {
-			localDeploy(req);
+			localDeploy(actionRequest);
 		}
 		else if (cmd.equals("reloadRepositories")) {
-			reloadRepositories(req);
+			reloadRepositories(actionRequest);
 		}
 		else if (cmd.equals("remoteDeploy")) {
-			remoteDeploy(req);
+			remoteDeploy(actionRequest);
 		}
 		else if (cmd.equals("unignorePackages")) {
-			unignorePackages(req);
+			unignorePackages(actionRequest);
 		}
 		else if (cmd.equals("uninstall")) {
-			uninstall(req);
+			uninstall(actionRequest);
 		}
 
-		sendRedirect(req, res);
+		sendRedirect(actionRequest, actionResponse);
 	}
 
-	protected void deployConfiguration(ActionRequest req) throws Exception {
-		boolean enabled = ParamUtil.getBoolean(req, "enabled");
-		String deployDir = ParamUtil.getString(req, "deployDir");
-		String destDir = ParamUtil.getString(req, "destDir");
-		long interval = ParamUtil.getLong(req, "interval");
+	protected void deployConfiguration(ActionRequest actionRequest)
+		throws Exception {
+
+		boolean enabled = ParamUtil.getBoolean(actionRequest, "enabled");
+		String deployDir = ParamUtil.getString(actionRequest, "deployDir");
+		String destDir = ParamUtil.getString(actionRequest, "destDir");
+		long interval = ParamUtil.getLong(actionRequest, "interval");
 		int blacklistThreshold = ParamUtil.getInteger(
-			req, "blacklistThreshold");
-		boolean unpackWar = ParamUtil.getBoolean(req, "unpackWar");
+			actionRequest, "blacklistThreshold");
+		boolean unpackWar = ParamUtil.getBoolean(actionRequest, "unpackWar");
 		boolean customPortletXml = ParamUtil.getBoolean(
-			req, "customPortletXml");
-		String jbossPrefix = ParamUtil.getString(req, "jbossPrefix");
-		String tomcatConfDir = ParamUtil.getString(req, "tomcatConfDir");
-		String tomcatLibDir = ParamUtil.getString(req, "tomcatLibDir");
+			actionRequest, "customPortletXml");
+		String jbossPrefix = ParamUtil.getString(actionRequest, "jbossPrefix");
+		String tomcatConfDir = ParamUtil.getString(
+			actionRequest, "tomcatConfDir");
+		String tomcatLibDir = ParamUtil.getString(
+			actionRequest, "tomcatLibDir");
 		String pluginRepositoriesTrusted = ParamUtil.getString(
-			req, "pluginRepositoriesTrusted");
+			actionRequest, "pluginRepositoriesTrusted");
 		String pluginRepositoriesUntrusted = ParamUtil.getString(
-			req, "pluginRepositoriesUntrusted");
+			actionRequest, "pluginRepositoriesUntrusted");
 		boolean pluginNotificationsEnabled = ParamUtil.getBoolean(
-			req, "pluginNotificationsEnabled");
+			actionRequest, "pluginNotificationsEnabled");
 		String pluginPackagesIgnored = ParamUtil.getString(
-			req, "pluginPackagesIgnored");
+			actionRequest, "pluginPackagesIgnored");
 
 		PortletPreferences prefs = PrefsPropsUtil.getPreferences();
 
@@ -191,7 +196,7 @@ public class InstallPluginAction extends PortletAction {
 
 		prefs.store();
 
-		reloadRepositories(req);
+		reloadRepositories(actionRequest);
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Unregistering auto deploy directories");
@@ -224,9 +229,11 @@ public class InstallPluginAction extends PortletAction {
 		return PropsUtil.getArray(PropsKeys.SOURCE_FORGE_MIRRORS);
 	}
 
-	protected void ignorePackages(ActionRequest req) throws Exception {
+	protected void ignorePackages(ActionRequest actionRequest)
+		throws Exception {
+
 		String pluginPackagesIgnored = ParamUtil.getString(
-			req, "pluginPackagesIgnored");
+			actionRequest, "pluginPackagesIgnored");
 
 		String oldPluginPackagesIgnored= PrefsPropsUtil.getString(
 			PropsKeys.PLUGIN_NOTIFICATIONS_PACKAGES_IGNORED);
@@ -247,21 +254,21 @@ public class InstallPluginAction extends PortletAction {
 		PluginPackageUtil.refreshUpdatesAvailableCache();
 	}
 
-	protected void localDeploy(ActionRequest req) throws Exception {
-		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
-			req);
+	protected void localDeploy(ActionRequest actionRequest) throws Exception {
+		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
+			actionRequest);
 
 		String fileName = null;
 
 		String deploymentContext = ParamUtil.getString(
-			req, "deploymentContext");
+			actionRequest, "deploymentContext");
 
 		if (Validator.isNotNull(deploymentContext)) {
 			fileName =
 				BaseDeployer.DEPLOY_TO_PREFIX + deploymentContext + ".war";
 		}
 		else {
-			fileName = GetterUtil.getString(uploadReq.getFileName("file"));
+			fileName = GetterUtil.getString(uploadRequest.getFileName("file"));
 
 			int pos = fileName.lastIndexOf(StringPool.PERIOD);
 
@@ -270,12 +277,12 @@ public class InstallPluginAction extends PortletAction {
 			}
 		}
 
-		File file = uploadReq.getFile("file");
+		File file = uploadRequest.getFile("file");
 
 		byte[] bytes = FileUtil.getBytes(file);
 
 		if ((bytes == null) || (bytes.length == 0)) {
-			SessionErrors.add(req, UploadException.class.getName());
+			SessionErrors.add(actionRequest, UploadException.class.getName());
 
 			return;
 		}
@@ -294,41 +301,45 @@ public class InstallPluginAction extends PortletAction {
 
 			FileUtil.copyFile(source, destination);
 
-			SessionMessages.add(req, "pluginUploaded");
+			SessionMessages.add(actionRequest, "pluginUploaded");
 		}
 		finally {
 			PluginPackageUtil.endPluginPackageInstallation(deploymentContext);
 		}
 	}
 
-	protected void reloadRepositories(ActionRequest req) throws Exception {
+	protected void reloadRepositories(ActionRequest actionRequest)
+		throws Exception {
+
 		RepositoryReport report = PluginPackageUtil.reloadRepositories();
 
-		SessionMessages.add(req, WebKeys.PLUGIN_REPOSITORY_REPORT, report);
+		SessionMessages.add(
+			actionRequest, WebKeys.PLUGIN_REPOSITORY_REPORT, report);
 	}
 
-	protected void remoteDeploy(ActionRequest req) throws Exception {
+	protected void remoteDeploy(ActionRequest actionRequest) throws Exception {
 		try {
-			String url = ParamUtil.getString(req, "url");
+			String url = ParamUtil.getString(actionRequest, "url");
 
 			URL urlObj = new URL(url);
 
 			String host = urlObj.getHost();
 
 			if (host.endsWith(".sf.net") || host.endsWith(".sourceforge.net")) {
-				remoteDeploySourceForge(urlObj.getPath(), req);
+				remoteDeploySourceForge(urlObj.getPath(), actionRequest);
 			}
 			else {
-				remoteDeploy(url, urlObj, req, true);
+				remoteDeploy(url, urlObj, actionRequest, true);
 			}
 		}
 		catch (MalformedURLException murle) {
-			SessionErrors.add(req, "invalidUrl", murle);
+			SessionErrors.add(actionRequest, "invalidUrl", murle);
 		}
 	}
 
 	protected int remoteDeploy(
-			String url, URL urlObj, ActionRequest req, boolean failOnError)
+			String url, URL urlObj, ActionRequest actionRequest,
+			boolean failOnError)
 		throws Exception {
 
 		int responseCode = HttpServletResponse.SC_OK;
@@ -336,7 +347,7 @@ public class InstallPluginAction extends PortletAction {
 		GetMethod getMethod = null;
 
 		String deploymentContext = ParamUtil.getString(
-			req, "deploymentContext");
+			actionRequest, "deploymentContext");
 
 		try {
 			HttpImpl httpImpl = (HttpImpl)HttpUtil.getHttp();
@@ -371,7 +382,7 @@ public class InstallPluginAction extends PortletAction {
 			if (responseCode != HttpServletResponse.SC_OK) {
 				if (failOnError) {
 					SessionErrors.add(
-						req, "errorConnectingToUrl",
+						actionRequest, "errorConnectingToUrl",
 						new Object[] {String.valueOf(responseCode)});
 				}
 
@@ -380,11 +391,12 @@ public class InstallPluginAction extends PortletAction {
 
 			long contentLength = getMethod.getResponseContentLength();
 
-			String progressId = ParamUtil.getString(req, Constants.PROGRESS_ID);
+			String progressId = ParamUtil.getString(
+				actionRequest, Constants.PROGRESS_ID);
 
 			ProgressInputStream pis = new ProgressInputStream(
-				req, getMethod.getResponseBodyAsStream(), contentLength,
-				progressId);
+				actionRequest, getMethod.getResponseBodyAsStream(),
+				contentLength, progressId);
 
 			String deployDir = PrefsPropsUtil.getString(
 				PropsKeys.AUTO_DEPLOY_DEPLOY_DIR,
@@ -429,21 +441,22 @@ public class InstallPluginAction extends PortletAction {
 					FileUtil.delete(tmpFile);
 				}
 
-				SessionMessages.add(req, "pluginDownloaded");
+				SessionMessages.add(actionRequest, "pluginDownloaded");
 			}
 			else {
 				if (failOnError) {
-					SessionErrors.add(req, UploadException.class.getName());
+					SessionErrors.add(
+						actionRequest, UploadException.class.getName());
 				}
 
 				responseCode = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 			}
 		}
 		catch (MalformedURLException murle) {
-			SessionErrors.add(req, "invalidUrl", murle);
+			SessionErrors.add(actionRequest, "invalidUrl", murle);
 		}
 		catch (IOException ioe) {
-			SessionErrors.add(req, "errorConnectingToUrl", ioe);
+			SessionErrors.add(actionRequest, "errorConnectingToUrl", ioe);
 		}
 		finally {
 			if (getMethod != null) {
@@ -456,7 +469,8 @@ public class InstallPluginAction extends PortletAction {
 		return responseCode;
 	}
 
-	protected void remoteDeploySourceForge(String path, ActionRequest req)
+	protected void remoteDeploySourceForge(
+			String path, ActionRequest actionRequest)
 		throws Exception {
 
 		String[] sourceForgeMirrors = getSourceForgeMirrors();
@@ -477,21 +491,24 @@ public class InstallPluginAction extends PortletAction {
 					failOnError = true;
 				}
 
-				int responseCode = remoteDeploy(url, urlObj, req, failOnError);
+				int responseCode = remoteDeploy(
+					url, urlObj, actionRequest, failOnError);
 
 				if (responseCode == HttpServletResponse.SC_OK) {
 					return;
 				}
 			}
 			catch (MalformedURLException murle) {
-				SessionErrors.add(req, "invalidUrl", murle);
+				SessionErrors.add(actionRequest, "invalidUrl", murle);
 			}
 		}
 	}
 
-	protected void unignorePackages(ActionRequest req) throws Exception {
+	protected void unignorePackages(ActionRequest actionRequest)
+		throws Exception {
+
 		String[] pluginPackagesUnignored = StringUtil.split(
-			ParamUtil.getString(req, "pluginPackagesUnignored"),
+			ParamUtil.getString(actionRequest, "pluginPackagesUnignored"),
 			StringPool.NEW_LINE);
 
 		String[] pluginPackagesIgnored = PrefsPropsUtil.getStringArray(
@@ -520,11 +537,11 @@ public class InstallPluginAction extends PortletAction {
 		PluginPackageUtil.refreshUpdatesAvailableCache();
 	}
 
-	protected void uninstall(ActionRequest req) throws Exception {
+	protected void uninstall(ActionRequest actionRequest) throws Exception {
 		String appServerType = ServerDetector.getServerId();
 
 		String deploymentContext = ParamUtil.getString(
-			req, "deploymentContext");
+			actionRequest, "deploymentContext");
 
 		if (appServerType.startsWith(ServerDetector.JBOSS_ID)) {
 			deploymentContext += ".war";

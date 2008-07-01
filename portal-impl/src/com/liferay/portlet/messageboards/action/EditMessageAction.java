@@ -76,30 +76,30 @@ public class EditMessageAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateMessage(req, res);
+				updateMessage(actionRequest, actionResponse);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteMessage(req);
+				deleteMessage(actionRequest);
 			}
 			else if (cmd.equals(Constants.SUBSCRIBE)) {
-				subscribeMessage(req);
+				subscribeMessage(actionRequest);
 			}
 			else if (cmd.equals(Constants.UNSUBSCRIBE)) {
-				unsubscribeMessage(req);
+				unsubscribeMessage(actionRequest);
 			}
 
 			if (cmd.equals(Constants.DELETE) ||
 				cmd.equals(Constants.SUBSCRIBE) ||
 				cmd.equals(Constants.UNSUBSCRIBE)) {
 
-				sendRedirect(req, res);
+				sendRedirect(actionRequest, actionResponse);
 			}
 		}
 		catch (Exception e) {
@@ -107,9 +107,9 @@ public class EditMessageAction extends PortletAction {
 				e instanceof PrincipalException ||
 				e instanceof RequiredMessageException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.message_boards.error");
+				setForward(actionRequest, "portlet.message_boards.error");
 			}
 			else if (e instanceof CaptchaTextException ||
 					 e instanceof FileNameException ||
@@ -117,10 +117,10 @@ public class EditMessageAction extends PortletAction {
 					 e instanceof MessageBodyException ||
 					 e instanceof MessageSubjectException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else if (e instanceof TagsEntryException) {
-				SessionErrors.add(req, e.getClass().getName(), e);
+				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 			}
 			else {
 				throw e;
@@ -130,17 +130,17 @@ public class EditMessageAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse res)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getMessage(req);
+			ActionUtil.getMessage(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchMessageException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.message_boards.error");
 			}
@@ -150,54 +150,61 @@ public class EditMessageAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(req, "portlet.message_boards.edit_message"));
+			getForward(renderRequest, "portlet.message_boards.edit_message"));
 	}
 
-	protected void deleteMessage(ActionRequest req) throws Exception {
-		long messageId = ParamUtil.getLong(req, "messageId");
+	protected void deleteMessage(ActionRequest actionRequest) throws Exception {
+		long messageId = ParamUtil.getLong(actionRequest, "messageId");
 
 		MBMessageServiceUtil.deleteMessage(messageId);
 	}
 
-	protected void subscribeMessage(ActionRequest req) throws Exception {
-		long messageId = ParamUtil.getLong(req, "messageId");
+	protected void subscribeMessage(ActionRequest actionRequest)
+		throws Exception {
+
+		long messageId = ParamUtil.getLong(actionRequest, "messageId");
 
 		MBMessageServiceUtil.subscribeMessage(messageId);
 	}
 
-	protected void unsubscribeMessage(ActionRequest req) throws Exception {
-		long messageId = ParamUtil.getLong(req, "messageId");
+	protected void unsubscribeMessage(ActionRequest actionRequest)
+		throws Exception {
+
+		long messageId = ParamUtil.getLong(actionRequest, "messageId");
 
 		MBMessageServiceUtil.unsubscribeMessage(messageId);
 	}
 
-	protected void updateMessage(ActionRequest req, ActionResponse res)
+	protected void updateMessage(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		PortletPreferences prefs = req.getPreferences();
+		PortletPreferences prefs = actionRequest.getPreferences();
 
-		long messageId = ParamUtil.getLong(req, "messageId");
+		long messageId = ParamUtil.getLong(actionRequest, "messageId");
 
-		long categoryId = ParamUtil.getLong(req, "categoryId");
-		long threadId = ParamUtil.getLong(req, "threadId");
-		long parentMessageId = ParamUtil.getLong(req, "parentMessageId");
-		String subject = ParamUtil.getString(req, "subject");
-		String body = ParamUtil.getString(req, "body");
-		boolean attachments = ParamUtil.getBoolean(req, "attachments");
+		long categoryId = ParamUtil.getLong(actionRequest, "categoryId");
+		long threadId = ParamUtil.getLong(actionRequest, "threadId");
+		long parentMessageId = ParamUtil.getLong(
+			actionRequest, "parentMessageId");
+		String subject = ParamUtil.getString(actionRequest, "subject");
+		String body = ParamUtil.getString(actionRequest, "body");
+		boolean attachments = ParamUtil.getBoolean(
+			actionRequest, "attachments");
 
 		List<ObjectValuePair<String, byte[]>> files =
 			new ArrayList<ObjectValuePair<String, byte[]>>();
 
 		if (attachments) {
-			UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
-				req);
+			UploadPortletRequest uploadRequest =
+				PortalUtil.getUploadPortletRequest(actionRequest);
 
 			for (int i = 1; i <= 5; i++) {
-				File file = uploadReq.getFile("msgFile" + i);
-				String fileName = uploadReq.getFileName("msgFile" + i);
+				File file = uploadRequest.getFile("msgFile" + i);
+				String fileName = uploadRequest.getFileName("msgFile" + i);
 				byte[] bytes = FileUtil.getBytes(file);
 
 				if ((bytes != null) && (bytes.length > 0)) {
@@ -209,22 +216,22 @@ public class EditMessageAction extends PortletAction {
 			}
 		}
 
-		boolean anonymous = ParamUtil.getBoolean(req, "anonymous");
-		double priority = ParamUtil.getDouble(req, "priority");
+		boolean anonymous = ParamUtil.getBoolean(actionRequest, "anonymous");
+		double priority = ParamUtil.getDouble(actionRequest, "priority");
 
 		String[] tagsEntries = StringUtil.split(
-			ParamUtil.getString(req, "tagsEntries"));
+			ParamUtil.getString(actionRequest, "tagsEntries"));
 
-		String[] communityPermissions = req.getParameterValues(
+		String[] communityPermissions = actionRequest.getParameterValues(
 			"communityPermissions");
-		String[] guestPermissions = req.getParameterValues(
+		String[] guestPermissions = actionRequest.getParameterValues(
 			"guestPermissions");
 
 		MBMessage message = null;
 
 		if (messageId <= 0) {
 			if (PropsValues.CAPTCHA_CHECK_PORTLET_MESSAGE_BOARDS_EDIT_MESSAGE) {
-				CaptchaUtil.check(req);
+				CaptchaUtil.check(actionRequest);
 			}
 
 			if (threadId <= 0) {
@@ -250,7 +257,8 @@ public class EditMessageAction extends PortletAction {
 			List<String> existingFiles = new ArrayList<String>();
 
 			for (int i = 1; i <= 5; i++) {
-				String path = ParamUtil.getString(req, "existingPath" + i);
+				String path = ParamUtil.getString(
+					actionRequest, "existingPath" + i);
 
 				if (Validator.isNotNull(path)) {
 					existingFiles.add(path);
@@ -264,14 +272,15 @@ public class EditMessageAction extends PortletAction {
 				tagsEntries, prefs, themeDisplay);
 		}
 
-		PortletURL portletURL = ((ActionResponseImpl)res).createRenderURL();
+		PortletURL portletURL =
+			((ActionResponseImpl)actionResponse).createRenderURL();
 
 		portletURL.setParameter(
 			"struts_action", "/message_boards/view_message");
 		portletURL.setParameter(
 			"messageId", String.valueOf(message.getMessageId()));
 
-		res.sendRedirect(portletURL.toString());
+		actionResponse.sendRedirect(portletURL.toString());
 	}
 
 }

@@ -111,52 +111,59 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		}
 	}
 
-	public PortletRequestProcessor(ActionServlet servlet, ModuleConfig config)
+	public PortletRequestProcessor(
+			ActionServlet actionServlet, ModuleConfig moduleConfig)
 		throws ServletException {
 
-		init(servlet, config);
+		init(actionServlet, moduleConfig);
 	}
 
-	public void process(ActionRequest req, ActionResponse res, String path)
+	public void process(
+			ActionRequest actionRequest, ActionResponse actionResponse,
+			String path)
 		throws IOException, ServletException {
 
-		ActionResponseImpl resImpl = (ActionResponseImpl)res;
+		ActionResponseImpl actionResponseImpl =
+			(ActionResponseImpl)actionResponse;
 
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+		HttpServletResponse response = PortalUtil.getHttpServletResponse(
+			actionResponse);
 
-		ActionMapping mapping = processMapping(httpReq, httpRes, path);
+		ActionMapping mapping = processMapping(request, response, path);
 
 		if (mapping == null) {
 			return;
 		}
 
-		if (!processRoles(httpReq, httpRes, mapping, true)) {
+		if (!processRoles(request, response, mapping, true)) {
 			return;
 		}
 
-		ActionForm form = processActionForm(httpReq, httpRes, mapping);
+		ActionForm form = processActionForm(request, response, mapping);
 
-		processPopulate(httpReq, httpRes, form, mapping);
+		processPopulate(request, response, form, mapping);
 
-		if (!processValidateAction(httpReq, httpRes, form, mapping)) {
+		if (!processValidateAction(request, response, form, mapping)) {
 			return;
 		}
 
 		PortletAction action =
-			(PortletAction)processActionCreate(httpReq, httpRes, mapping);
+			(PortletAction)processActionCreate(request, response, mapping);
 
 		if (action == null) {
 			return;
 		}
 
-		PortletConfigImpl portletConfig = (PortletConfigImpl)req.getAttribute(
-			JavaConstants.JAVAX_PORTLET_CONFIG);
+		PortletConfigImpl portletConfigImpl =
+			(PortletConfigImpl)actionRequest.getAttribute(
+				JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		try {
 			if (action.isCheckMethodOnProcessAction()) {
-				if (!PortalUtil.isMethodPost(req)) {
-					String currentURL = PortalUtil.getCurrentURL(req);
+				if (!PortalUtil.isMethodPost(actionRequest)) {
+					String currentURL = PortalUtil.getCurrentURL(actionRequest);
 
 					if (_log.isWarnEnabled()) {
 						_log.warn(
@@ -168,18 +175,20 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 				}
 			}
 
-			action.processAction(mapping, form, portletConfig, req, res);
+			action.processAction(
+				mapping, form, portletConfigImpl, actionRequest,
+				actionResponse);
 		}
 		catch (Exception e) {
 			String exceptionId =
 				WebKeys.PORTLET_STRUTS_EXCEPTION + StringPool.PERIOD +
-					portletConfig.getPortletId();
+					portletConfigImpl.getPortletId();
 
-			req.setAttribute(exceptionId, e);
+			actionRequest.setAttribute(exceptionId, e);
 		}
 
-		String forward = (String)req.getAttribute(
-			PortletAction.getForwardKey(req));
+		String forward = (String)actionRequest.getAttribute(
+			PortletAction.getForwardKey(actionRequest));
 
 		if (forward != null) {
 			String queryString = StringPool.BLANK;
@@ -198,7 +207,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 
 				if (forwardPath.startsWith("/")) {
 					LiferayPortletURL forwardURL =
-						(LiferayPortletURL)resImpl.createRenderURL();
+						(LiferayPortletURL)actionResponseImpl.createRenderURL();
 
 					forwardURL.setParameter("struts_action", forwardPath);
 
@@ -207,27 +216,33 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 					forwardPath = forwardURL.toString();
 				}
 
-				res.sendRedirect(forwardPath);
+				actionResponse.sendRedirect(forwardPath);
 			}
 		}
 	}
 
-	public void process(RenderRequest req, RenderResponse res)
+	public void process(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, ServletException {
 
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			renderRequest);
+		HttpServletResponse response = PortalUtil.getHttpServletResponse(
+			renderResponse);
 
-		process(httpReq, httpRes);
+		process(request, response);
 	}
 
-	public void process(ResourceRequest req, ResourceResponse res)
+	public void process(
+			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws IOException, ServletException {
 
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			resourceRequest);
+		HttpServletResponse response = PortalUtil.getHttpServletResponse(
+			resourceResponse);
 
-		process(httpReq, httpRes);
+		process(request, response);
 	}
 
 	protected void doForward(

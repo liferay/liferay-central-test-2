@@ -76,30 +76,30 @@ public class EditProductEntryAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateProductEntry(req);
+				updateProductEntry(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteProductEntry(req);
+				deleteProductEntry(actionRequest);
 			}
 
 			if (Validator.isNotNull(cmd)) {
-				sendRedirect(req, res);
+				sendRedirect(actionRequest, actionResponse);
 			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchProductEntryException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.software_catalog.error");
+				setForward(actionRequest, "portlet.software_catalog.error");
 			}
 			else if (e instanceof DuplicateProductEntryModuleIdException ||
 					 e instanceof ProductEntryAuthorException ||
@@ -110,7 +110,7 @@ public class EditProductEntryAction extends PortletAction {
 					 e instanceof ProductEntryShortDescriptionException ||
 					 e instanceof ProductEntryTypeException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
 				throw e;
@@ -120,17 +120,17 @@ public class EditProductEntryAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse res)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getProductEntry(req);
+			ActionUtil.getProductEntry(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchProductEntryException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.software_catalog.error");
 			}
@@ -139,41 +139,46 @@ public class EditProductEntryAction extends PortletAction {
 			}
 		}
 
-		return mapping.findForward(
-			getForward(req, "portlet.software_catalog.edit_product_entry"));
+		return mapping.findForward(getForward(
+			renderRequest, "portlet.software_catalog.edit_product_entry"));
 	}
 
-	protected void deleteProductEntry(ActionRequest req) throws Exception {
-		long productEntryId = ParamUtil.getLong(req, "productEntryId");
+	protected void deleteProductEntry(ActionRequest actionRequest)
+		throws Exception {
+
+		long productEntryId = ParamUtil.getLong(
+			actionRequest, "productEntryId");
 
 		SCProductEntryServiceUtil.deleteProductEntry(productEntryId);
 	}
 
-	protected List<byte[]> getFullImages(UploadPortletRequest uploadReq)
+	protected List<byte[]> getFullImages(UploadPortletRequest uploadRequest)
 		throws Exception {
 
-		return getImages(uploadReq, "fullImage");
+		return getImages(uploadRequest, "fullImage");
 	}
 
 	protected List<byte[]> getImages(
-			UploadPortletRequest uploadReq, String imagePrefix)
+			UploadPortletRequest uploadRequest, String imagePrefix)
 		throws Exception {
 
 		List<byte[]> images = new ArrayList<byte[]>();
 
-		for (String name : getSortedParameterNames(uploadReq, imagePrefix)) {
+		for (String name :
+				getSortedParameterNames(uploadRequest, imagePrefix)) {
+
 			int priority = GetterUtil.getInteger(
 				name.substring(imagePrefix.length(), name.length()));
 
-			File file = uploadReq.getFile(name);
+			File file = uploadRequest.getFile(name);
 			byte[] bytes = FileUtil.getBytes(file);
 
 			boolean preserveScreenshot = ParamUtil.getBoolean(
-				uploadReq, "preserveScreenshot" + priority);
+				uploadRequest, "preserveScreenshot" + priority);
 
 			if (preserveScreenshot) {
 				SCProductScreenshot productScreenshot = getProductScreenshot(
-					uploadReq, priority);
+					uploadRequest, priority);
 
 				Image image = null;
 
@@ -201,10 +206,11 @@ public class EditProductEntryAction extends PortletAction {
 	}
 
 	protected SCProductScreenshot getProductScreenshot(
-			UploadPortletRequest uploadReq, int priority)
+			UploadPortletRequest uploadRequest, int priority)
 		throws Exception {
 
-		long productEntryId = ParamUtil.getLong(uploadReq, "productEntryId");
+		long productEntryId = ParamUtil.getLong(
+			uploadRequest, "productEntryId");
 
 		try {
 			return SCProductScreenshotLocalServiceUtil.getProductScreenshot(
@@ -216,12 +222,12 @@ public class EditProductEntryAction extends PortletAction {
 	}
 
 	protected List<String> getSortedParameterNames(
-			UploadPortletRequest uploadReq, String imagePrefix)
+			UploadPortletRequest uploadRequest, String imagePrefix)
 		throws Exception {
 
 		List<String> parameterNames = new ArrayList<String>();
 
-		Enumeration<String> enu = uploadReq.getParameterNames();
+		Enumeration<String> enu = uploadRequest.getParameterNames();
 
 		while (enu.hasMoreElements()) {
 			String name = enu.nextElement();
@@ -236,38 +242,44 @@ public class EditProductEntryAction extends PortletAction {
 		return parameterNames;
 	}
 
-	protected List<byte[]> getThumbnails(UploadPortletRequest uploadReq)
+	protected List<byte[]> getThumbnails(UploadPortletRequest uploadRequest)
 		throws Exception {
 
-		return getImages(uploadReq, "thumbnail");
+		return getImages(uploadRequest, "thumbnail");
 	}
 
-	protected void updateProductEntry(ActionRequest req) throws Exception {
-		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
-			req);
+	protected void updateProductEntry(ActionRequest actionRequest)
+		throws Exception {
 
-		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
+			actionRequest);
 
-		long productEntryId = ParamUtil.getLong(req, "productEntryId");
+		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
 
-		String name = ParamUtil.getString(req, "name");
-		String type = ParamUtil.getString(req, "type");
-		String tags = ParamUtil.getString(req, "tags");
-		String shortDescription = ParamUtil.getString(req, "shortDescription");
-		String longDescription = ParamUtil.getString(req, "longDescription");
-		String pageURL = ParamUtil.getString(req, "pageURL");
-		String author = ParamUtil.getString(req, "author");
-		String repoGroupId = ParamUtil.getString(req, "repoGroupId");
-		String repoArtifactId = ParamUtil.getString(req, "repoArtifactId");
+		long productEntryId = ParamUtil.getLong(
+			actionRequest, "productEntryId");
 
-		long[] licenseIds = ParamUtil.getLongValues(req, "licenses");
+		String name = ParamUtil.getString(actionRequest, "name");
+		String type = ParamUtil.getString(actionRequest, "type");
+		String tags = ParamUtil.getString(actionRequest, "tags");
+		String shortDescription = ParamUtil.getString(
+			actionRequest, "shortDescription");
+		String longDescription = ParamUtil.getString(
+			actionRequest, "longDescription");
+		String pageURL = ParamUtil.getString(actionRequest, "pageURL");
+		String author = ParamUtil.getString(actionRequest, "author");
+		String repoGroupId = ParamUtil.getString(actionRequest, "repoGroupId");
+		String repoArtifactId = ParamUtil.getString(
+			actionRequest, "repoArtifactId");
 
-		List<byte[]> thumbnails = getThumbnails(uploadReq);
-		List<byte[]> fullImages = getFullImages(uploadReq);
+		long[] licenseIds = ParamUtil.getLongValues(actionRequest, "licenses");
 
-		String[] communityPermissions = req.getParameterValues(
+		List<byte[]> thumbnails = getThumbnails(uploadRequest);
+		List<byte[]> fullImages = getFullImages(uploadRequest);
+
+		String[] communityPermissions = actionRequest.getParameterValues(
 			"communityPermissions");
-		String[] guestPermissions = req.getParameterValues(
+		String[] guestPermissions = actionRequest.getParameterValues(
 			"guestPermissions");
 
 		if (productEntryId <= 0) {

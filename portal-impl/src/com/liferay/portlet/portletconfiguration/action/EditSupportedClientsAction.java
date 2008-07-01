@@ -54,51 +54,55 @@ public class EditSupportedClientsAction extends EditConfigurationAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		Portlet portlet = null;
 
 		try {
-			portlet = getPortlet(req);
+			portlet = getPortlet(actionRequest);
 		}
 		catch (PrincipalException pe) {
-			SessionErrors.add(req, PrincipalException.class.getName());
+			SessionErrors.add(
+				actionRequest, PrincipalException.class.getName());
 
-			setForward(req, "portlet.portlet_configuration.error");
+			setForward(actionRequest, "portlet.portlet_configuration.error");
 		}
 
-		updateSupportedClients(portlet, req);
+		updateSupportedClients(portlet, actionRequest);
 
-		sendRedirect(req, res);
+		sendRedirect(actionRequest, actionResponse);
 	}
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse res)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		Portlet portlet = null;
 
 		try {
-			portlet = getPortlet(req);
+			portlet = getPortlet(renderRequest);
 		}
 		catch (PrincipalException pe) {
-			SessionErrors.add(req, PrincipalException.class.getName());
+			SessionErrors.add(
+				renderRequest, PrincipalException.class.getName());
 
 			return mapping.findForward("portlet.portlet_configuration.error");
 		}
 
-		res.setTitle(getTitle(portlet, req));
+		renderResponse.setTitle(getTitle(portlet, renderRequest));
 
 		return mapping.findForward(getForward(
-			req, "portlet.portlet_configuration.edit_supported_clients"));
+			renderRequest,
+			"portlet.portlet_configuration.edit_supported_clients"));
 	}
 
-	protected void updateSupportedClients(Portlet portlet, ActionRequest req)
+	protected void updateSupportedClients(
+			Portlet portlet, ActionRequest actionRequest)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
@@ -114,7 +118,7 @@ public class EditSupportedClientsAction extends EditConfigurationAction {
 				"portlet-setup-supported-clients-mobile-devices-" + portletMode;
 
 			boolean mobileDevices = ParamUtil.getBoolean(
-				req, mobileDevicesParam);
+				actionRequest, mobileDevicesParam);
 
 			portletSetup.setValue(
 				mobileDevicesParam, String.valueOf(mobileDevices));

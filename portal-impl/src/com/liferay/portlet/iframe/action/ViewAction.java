@@ -53,66 +53,73 @@ public class ViewAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse res)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		String src = transformSrc(req, res);
+		String src = transformSrc(renderRequest, renderResponse);
 
 		if (Validator.isNull(src)) {
 			return mapping.findForward("/portal/portlet_not_setup");
 		}
 
-		req.setAttribute(WebKeys.IFRAME_SRC, src);
+		renderRequest.setAttribute(WebKeys.IFRAME_SRC, src);
 
 		return mapping.findForward("portlet.iframe.view");
 	}
 
-	protected String getSrc(RenderRequest req, RenderResponse res) {
-		PortletPreferences prefs = req.getPreferences();
+	protected String getSrc(
+		RenderRequest renderRequest, RenderResponse renderResponse) {
+
+		PortletPreferences prefs = renderRequest.getPreferences();
 
 		String src = prefs.getValue("src", StringPool.BLANK);
 
-		src = ParamUtil.getString(req, "src", src);
+		src = ParamUtil.getString(renderRequest, "src", src);
 
 		return src;
 	}
 
-	protected String getUserName(RenderRequest req, RenderResponse res) {
-		PortletPreferences prefs = req.getPreferences();
+	protected String getUserName(
+		RenderRequest renderRequest, RenderResponse renderResponse) {
+
+		PortletPreferences prefs = renderRequest.getPreferences();
 
 		String userName = prefs.getValue("user-name", StringPool.BLANK);
 
 		if (Validator.isNull(userName)) {
-			userName = req.getRemoteUser();
+			userName = renderRequest.getRemoteUser();
 		}
 
 		return userName;
 	}
 
-	protected String getPassword(RenderRequest req, RenderResponse res) {
-		PortletPreferences prefs = req.getPreferences();
+	protected String getPassword(
+		RenderRequest renderRequest, RenderResponse renderResponse) {
+
+		PortletPreferences prefs = renderRequest.getPreferences();
 
 		String password = prefs.getValue("password", StringPool.BLANK);
 
 		if (Validator.isNull(password)) {
-			password = PortalUtil.getUserPassword(req);
+			password = PortalUtil.getUserPassword(renderRequest);
 		}
 
 		return password;
 	}
 
-	protected String transformSrc(RenderRequest req, RenderResponse res)
+	protected String transformSrc(
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws SystemException {
 
-		PortletPreferences prefs = req.getPreferences();
+		PortletPreferences prefs = renderRequest.getPreferences();
 
-		String src = getSrc(req, res);
+		String src = getSrc(renderRequest, renderResponse);
 
 		boolean auth = GetterUtil.getBoolean(
 			prefs.getValue("auth", StringPool.BLANK));
 		String authType = prefs.getValue("auth-type", StringPool.BLANK);
-		String userName = getUserName(req, res);
-		String password = getPassword(req, res);
+		String userName = getUserName(renderRequest, renderResponse);
+		String password = getPassword(renderRequest, renderResponse);
 
 		if (auth) {
 			if (authType.equals("basic")) {
@@ -126,10 +133,11 @@ public class ViewAction extends PortletAction {
 					"@" + url;
 			}
 			else {
-				ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
-					WebKeys.THEME_DISPLAY);
+				ThemeDisplay themeDisplay =
+					(ThemeDisplay)renderRequest.getAttribute(
+						WebKeys.THEME_DISPLAY);
 
-				String portletId = PortalUtil.getPortletId(req);
+				String portletId = PortalUtil.getPortletId(renderRequest);
 
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(
 					themeDisplay.getCompanyId(), portletId);

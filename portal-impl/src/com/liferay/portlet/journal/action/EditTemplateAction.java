@@ -75,42 +75,42 @@ public class EditTemplateAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		JournalTemplate template = null;
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				template = updateTemplate(req);
+				template = updateTemplate(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteTemplates(req);
+				deleteTemplates(actionRequest);
 			}
 
-			String redirect = ParamUtil.getString(req, "redirect");
+			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
 			if (template != null) {
 				boolean saveAndContinue = ParamUtil.getBoolean(
-					req, "saveAndContinue");
+					actionRequest, "saveAndContinue");
 
 				if (saveAndContinue) {
 					redirect = getSaveAndContinueRedirect(
-						portletConfig, req, template, redirect);
+						portletConfig, actionRequest, template, redirect);
 				}
 			}
 
-			sendRedirect(req, res, redirect);
+			sendRedirect(actionRequest, actionResponse, redirect);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchTemplateException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.journal.error");
+				setForward(actionRequest, "portlet.journal.error");
 			}
 			else if (e instanceof DuplicateTemplateIdException ||
 					 e instanceof RequiredTemplateException ||
@@ -121,10 +121,11 @@ public class EditTemplateAction extends PortletAction {
 					 e instanceof TemplateSmallImageSizeException ||
 					 e instanceof TemplateXslException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
 				if (e instanceof RequiredTemplateException) {
-					res.sendRedirect(ParamUtil.getString(req, "redirect"));
+					actionResponse.sendRedirect(
+						ParamUtil.getString(actionRequest, "redirect"));
 				}
 			}
 			else {
@@ -135,14 +136,14 @@ public class EditTemplateAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse res)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			String cmd = ParamUtil.getString(req, Constants.CMD);
+			String cmd = ParamUtil.getString(renderRequest, Constants.CMD);
 
 			if (!cmd.equals(Constants.ADD)) {
-				ActionUtil.getTemplate(req);
+				ActionUtil.getTemplate(renderRequest);
 			}
 		}
 		catch (NoSuchTemplateException nsse) {
@@ -155,7 +156,7 @@ public class EditTemplateAction extends PortletAction {
 			if (//e instanceof NoSuchTemplateException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.journal.error");
 			}
@@ -165,35 +166,39 @@ public class EditTemplateAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(req, "portlet.journal.edit_template"));
+			getForward(renderRequest, "portlet.journal.edit_template"));
 	}
 
-	protected void deleteTemplates(ActionRequest req) throws Exception {
-		long groupId = ParamUtil.getLong(req, "groupId");
+	protected void deleteTemplates(ActionRequest actionRequest)
+		throws Exception {
+
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 
 		String[] deleteTemplateIds = StringUtil.split(
-			ParamUtil.getString(req, "deleteTemplateIds"));
+			ParamUtil.getString(actionRequest, "deleteTemplateIds"));
 
 		for (int i = 0; i < deleteTemplateIds.length; i++) {
 			JournalTemplateServiceUtil.deleteTemplate(
 				groupId, deleteTemplateIds[i]);
 
-			JournalUtil.removeRecentTemplate(req, deleteTemplateIds[i]);
+			JournalUtil.removeRecentTemplate(
+				actionRequest, deleteTemplateIds[i]);
 		}
 	}
 
 	protected String getSaveAndContinueRedirect(
-			PortletConfig portletConfig, ActionRequest req,
+			PortletConfig portletConfig, ActionRequest actionRequest,
 			JournalTemplate template, String redirect)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String originalRedirect = ParamUtil.getString(req, "originalRedirect");
+		String originalRedirect = ParamUtil.getString(
+			actionRequest, "originalRedirect");
 
 		PortletURLImpl portletURL = new PortletURLImpl(
-			(ActionRequestImpl)req, portletConfig.getPortletName(),
+			(ActionRequestImpl)actionRequest, portletConfig.getPortletName(),
 			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
 		portletURL.setWindowState(WindowState.MAXIMIZED);
@@ -209,47 +214,48 @@ public class EditTemplateAction extends PortletAction {
 		return portletURL.toString();
 	}
 
-	protected JournalTemplate updateTemplate(ActionRequest req)
+	protected JournalTemplate updateTemplate(ActionRequest actionRequest)
 		throws Exception {
 
-		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
-			req);
+		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
+			actionRequest);
 
-		String cmd = ParamUtil.getString(uploadReq, Constants.CMD);
+		String cmd = ParamUtil.getString(uploadRequest, Constants.CMD);
 
-		Layout layout = (Layout)uploadReq.getAttribute(WebKeys.LAYOUT);
+		Layout layout = (Layout)uploadRequest.getAttribute(WebKeys.LAYOUT);
 
-		long groupId = ParamUtil.getLong(uploadReq, "groupId");
+		long groupId = ParamUtil.getLong(uploadRequest, "groupId");
 
-		String templateId = ParamUtil.getString(uploadReq, "templateId");
+		String templateId = ParamUtil.getString(uploadRequest, "templateId");
 		boolean autoTemplateId = ParamUtil.getBoolean(
-			uploadReq, "autoTemplateId");
+			uploadRequest, "autoTemplateId");
 
-		String structureId = ParamUtil.getString(uploadReq, "structureId");
-		String name = ParamUtil.getString(uploadReq, "name");
-		String description = ParamUtil.getString(uploadReq, "description");
+		String structureId = ParamUtil.getString(uploadRequest, "structureId");
+		String name = ParamUtil.getString(uploadRequest, "name");
+		String description = ParamUtil.getString(uploadRequest, "description");
 
-		String xsl = ParamUtil.getString(uploadReq, "xsl");
+		String xsl = ParamUtil.getString(uploadRequest, "xsl");
 		String xslContent = JS.decodeURIComponent(
-			ParamUtil.getString(uploadReq, "xslContent"));
-		boolean formatXsl = ParamUtil.getBoolean(uploadReq, "formatXsl");
+			ParamUtil.getString(uploadRequest, "xslContent"));
+		boolean formatXsl = ParamUtil.getBoolean(uploadRequest, "formatXsl");
 
 		if (Validator.isNull(xsl)) {
 			xsl = xslContent;
 		}
 
 		String langType = ParamUtil.getString(
-			uploadReq, "langType", JournalTemplateImpl.LANG_TYPE_XSL);
+			uploadRequest, "langType", JournalTemplateImpl.LANG_TYPE_XSL);
 
-		boolean cacheable = ParamUtil.getBoolean(uploadReq, "cacheable");
+		boolean cacheable = ParamUtil.getBoolean(uploadRequest, "cacheable");
 
-		boolean smallImage = ParamUtil.getBoolean(uploadReq, "smallImage");
-		String smallImageURL = ParamUtil.getString(uploadReq, "smallImageURL");
-		File smallFile = uploadReq.getFile("smallFile");
+		boolean smallImage = ParamUtil.getBoolean(uploadRequest, "smallImage");
+		String smallImageURL = ParamUtil.getString(
+			uploadRequest, "smallImageURL");
+		File smallFile = uploadRequest.getFile("smallFile");
 
-		String[] communityPermissions = uploadReq.getParameterValues(
+		String[] communityPermissions = uploadRequest.getParameterValues(
 			"communityPermissions");
-		String[] guestPermissions = uploadReq.getParameterValues(
+		String[] guestPermissions = uploadRequest.getParameterValues(
 			"guestPermissions");
 
 		JournalTemplate template = null;
@@ -276,7 +282,7 @@ public class EditTemplateAction extends PortletAction {
 
 		// Recent templates
 
-		JournalUtil.addRecentTemplate(req, template);
+		JournalUtil.addRecentTemplate(actionRequest, template);
 
 		return template;
 	}

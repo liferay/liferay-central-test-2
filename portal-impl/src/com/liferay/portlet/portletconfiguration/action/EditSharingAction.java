@@ -52,21 +52,22 @@ public class EditSharingAction extends EditConfigurationAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		Portlet portlet = null;
 
 		try {
-			portlet = getPortlet(req);
+			portlet = getPortlet(actionRequest);
 		}
 		catch (PrincipalException pe) {
-			SessionErrors.add(req, PrincipalException.class.getName());
+			SessionErrors.add(
+				actionRequest, PrincipalException.class.getName());
 
-			setForward(req, "portlet.portlet_configuration.error");
+			setForward(actionRequest, "portlet.portlet_configuration.error");
 		}
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
@@ -75,61 +76,65 @@ public class EditSharingAction extends EditConfigurationAction {
 			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 				layout, portlet.getPortletId());
 
-		String tabs2 = ParamUtil.getString(req, "tabs2");
+		String tabs2 = ParamUtil.getString(actionRequest, "tabs2");
 
 		if (tabs2.equals("any-website")) {
-			updateAnyWebsite(req, prefs);
+			updateAnyWebsite(actionRequest, prefs);
 		}
 		else if (tabs2.equals("facebook")) {
-			updateFacebook(req, prefs);
+			updateFacebook(actionRequest, prefs);
 		}
 
 		prefs.store();
 
-		sendRedirect(req, res);
+		sendRedirect(actionRequest, actionResponse);
 	}
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse res)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		Portlet portlet = null;
 
 		try {
-			portlet = getPortlet(req);
+			portlet = getPortlet(renderRequest);
 		}
 		catch (PrincipalException pe) {
-			SessionErrors.add(req, PrincipalException.class.getName());
+			SessionErrors.add(
+				renderRequest, PrincipalException.class.getName());
 
 			return mapping.findForward("portlet.portlet_configuration.error");
 		}
 
-		res.setTitle(getTitle(portlet, req));
+		renderResponse.setTitle(getTitle(portlet, renderRequest));
 
-		return mapping.findForward(
-			getForward(req, "portlet.portlet_configuration.edit_sharing"));
+		return mapping.findForward(getForward(
+			renderRequest, "portlet.portlet_configuration.edit_sharing"));
 	}
 
-	protected void updateAnyWebsite(ActionRequest req, PortletPreferences prefs)
+	protected void updateAnyWebsite(
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
 		boolean widgetShowAddAppLink = ParamUtil.getBoolean(
-			req, "widgetShowAddAppLink");
+			actionRequest, "widgetShowAddAppLink");
 
 		prefs.setValue(
 			"lfr-widget-show-add-app-link",
 			String.valueOf(widgetShowAddAppLink));
 	}
 
-	protected void updateFacebook(ActionRequest req, PortletPreferences prefs)
+	protected void updateFacebook(
+			ActionRequest actionRequest, PortletPreferences prefs)
 		throws Exception {
 
-		String facebookAPIKey = ParamUtil.getString(req, "facebookAPIKey");
+		String facebookAPIKey = ParamUtil.getString(
+			actionRequest, "facebookAPIKey");
 		String facebookCanvasPageURL = ParamUtil.getString(
-			req, "facebookCanvasPageURL");
+			actionRequest, "facebookCanvasPageURL");
 		boolean facebookShowAddAppLink = ParamUtil.getBoolean(
-			req, "facebookShowAddAppLink");
+			actionRequest, "facebookShowAddAppLink");
 
 		prefs.setValue("lfr-facebook-api-key", facebookAPIKey);
 		prefs.setValue("lfr-facebook-canvas-page-url", facebookCanvasPageURL);

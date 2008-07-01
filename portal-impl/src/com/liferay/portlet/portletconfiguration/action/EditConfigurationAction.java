@@ -65,58 +65,63 @@ public class EditConfigurationAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		Portlet portlet = null;
 
 		try {
-			portlet = getPortlet(req);
+			portlet = getPortlet(actionRequest);
 		}
 		catch (PrincipalException pe) {
-			SessionErrors.add(req, PrincipalException.class.getName());
+			SessionErrors.add(
+				actionRequest, PrincipalException.class.getName());
 
-			setForward(req, "portlet.portlet_configuration.error");
+			setForward(actionRequest, "portlet.portlet_configuration.error");
 		}
 
 		ConfigurationAction configurationAction = getConfigurationAction(
 			portlet);
 
 		if (configurationAction != null) {
-			configurationAction.processAction(portletConfig, req, res);
+			configurationAction.processAction(
+				portletConfig, actionRequest, actionResponse);
 		}
 	}
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse res)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		Portlet portlet = null;
 
 		try {
-			portlet = getPortlet(req);
+			portlet = getPortlet(renderRequest);
 		}
 		catch (PrincipalException pe) {
-			SessionErrors.add(req, PrincipalException.class.getName());
+			SessionErrors.add(
+				renderRequest, PrincipalException.class.getName());
 
 			return mapping.findForward("portlet.portlet_configuration.error");
 		}
 
-		res.setTitle(getTitle(portlet, req));
+		renderResponse.setTitle(getTitle(portlet, renderRequest));
 
 		ConfigurationAction configurationAction = getConfigurationAction(
 			portlet);
 
 		if (configurationAction != null) {
-			String path = configurationAction.render(portletConfig, req, res);
+			String path = configurationAction.render(
+				portletConfig, renderRequest, renderResponse);
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Configuration action returned render path " + path);
 			}
 
 			if (Validator.isNotNull(path)) {
-				req.setAttribute(WebKeys.CONFIGURATION_ACTION_PATH, path);
+				renderRequest.setAttribute(
+					WebKeys.CONFIGURATION_ACTION_PATH, path);
 			}
 			else {
 				_log.error("Configuration action returned a null path");
@@ -124,7 +129,7 @@ public class EditConfigurationAction extends PortletAction {
 		}
 
 		return mapping.findForward(getForward(
-			req, "portlet.portlet_configuration.edit_configuration"));
+			renderRequest, "portlet.portlet_configuration.edit_configuration"));
 	}
 
 	protected ConfigurationAction getConfigurationAction(Portlet portlet)
@@ -142,16 +147,19 @@ public class EditConfigurationAction extends PortletAction {
 		return configurationAction;
 	}
 
-	protected Portlet getPortlet(PortletRequest req) throws Exception {
-		long companyId = PortalUtil.getCompanyId(req);
+	protected Portlet getPortlet(PortletRequest portletRequest)
+		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		long companyId = PortalUtil.getCompanyId(portletRequest);
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
-		String portletId = ParamUtil.getString(req, "portletResource");
+		String portletId = ParamUtil.getString(
+			portletRequest, "portletResource");
 
 		if (!PortletPermissionUtil.contains(
 				permissionChecker, themeDisplay.getPlid(), portletId,
@@ -163,18 +171,18 @@ public class EditConfigurationAction extends PortletAction {
 		return PortletLocalServiceUtil.getPortletById(companyId, portletId);
 	}
 
-	protected String getTitle(Portlet portlet, RenderRequest req)
+	protected String getTitle(Portlet portlet, RenderRequest renderRequest)
 		throws Exception {
 
-		ServletContext servletContext = (ServletContext)req.getAttribute(
-			WebKeys.CTX);
+		ServletContext servletContext =
+			(ServletContext)renderRequest.getAttribute(WebKeys.CTX);
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		PortletPreferences portletSetup =
 			PortletPreferencesFactoryUtil.getPortletSetup(
-				req, portlet.getPortletId());
+				renderRequest, portlet.getPortletId());
 
 		String title = PortletConfigurationUtil.getPortletTitle(
 			portletSetup, themeDisplay.getLanguageId());

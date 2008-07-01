@@ -47,19 +47,19 @@ public class SearchAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse res)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		LayoutTypePortlet layoutTypePortlet =
 			themeDisplay.getLayoutTypePortlet();
 
-		String portletId = PortalUtil.getPortletId(req);
+		String portletId = PortalUtil.getPortletId(renderRequest);
 
 		if (!layoutTypePortlet.hasPortletId(portletId)) {
-			res.setTitle(
+			renderResponse.setTitle(
 				LanguageUtil.get(
 					themeDisplay.getCompanyId(), themeDisplay.getLocale(),
 					"search"));

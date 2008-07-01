@@ -61,40 +61,42 @@ public class EditPermissionsAction extends EditConfigurationAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals("group_permissions")) {
-				updateGroupPermissions(req);
+				updateGroupPermissions(actionRequest);
 			}
 			else if (cmd.equals("guest_permissions")) {
-				updateGuestPermissions(req);
+				updateGuestPermissions(actionRequest);
 			}
 			else if (cmd.equals("organization_permissions")) {
-				updateOrganizationPermissions(req);
+				updateOrganizationPermissions(actionRequest);
 			}
 			else if (cmd.equals("role_permissions")) {
-				updateRolePermissions(req);
+				updateRolePermissions(actionRequest);
 			}
 			else if (cmd.equals("user_group_permissions")) {
-				updateUserGroupPermissions(req);
+				updateUserGroupPermissions(actionRequest);
 			}
 			else if (cmd.equals("user_permissions")) {
-				updateUserPermissions(req);
+				updateUserPermissions(actionRequest);
 			}
 
-			String redirect = ParamUtil.getString(req, "permissionsRedirect");
+			String redirect = ParamUtil.getString(
+				actionRequest, "permissionsRedirect");
 
-			sendRedirect(req, res, redirect);
+			sendRedirect(actionRequest, actionResponse, redirect);
 		}
 		catch (Exception e) {
 			if (e instanceof PrincipalException) {
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.portlet_configuration.error");
+				setForward(
+					actionRequest, "portlet.portlet_configuration.error");
 			}
 			else {
 				throw e;
@@ -104,17 +106,20 @@ public class EditPermissionsAction extends EditConfigurationAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse res)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		long groupId = themeDisplay.getPortletGroupId();
 
-		String portletResource = ParamUtil.getString(req, "portletResource");
-		String modelResource = ParamUtil.getString(req, "modelResource");
-		String resourcePrimKey = ParamUtil.getString(req, "resourcePrimKey");
+		String portletResource = ParamUtil.getString(
+			renderRequest, "portletResource");
+		String modelResource = ParamUtil.getString(
+			renderRequest, "modelResource");
+		String resourcePrimKey = ParamUtil.getString(
+			renderRequest, "resourcePrimKey");
 
 		String selResource = portletResource;
 
@@ -127,29 +132,32 @@ public class EditPermissionsAction extends EditConfigurationAction {
 				groupId, selResource, resourcePrimKey);
 		}
 		catch (PrincipalException pe) {
-			SessionErrors.add(req, PrincipalException.class.getName());
+			SessionErrors.add(
+				renderRequest, PrincipalException.class.getName());
 
-			setForward(req, "portlet.portlet_configuration.error");
+			setForward(renderRequest, "portlet.portlet_configuration.error");
 		}
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			themeDisplay.getCompanyId(), portletResource);
 
 		if (portlet != null) {
-			res.setTitle(getTitle(portlet, req));
+			renderResponse.setTitle(getTitle(portlet, renderRequest));
 		}
 
-		return mapping.findForward(
-			getForward(req, "portlet.portlet_configuration.edit_permissions"));
+		return mapping.findForward(getForward(
+			renderRequest, "portlet.portlet_configuration.edit_permissions"));
 	}
 
-	protected void updateGroupPermissions(ActionRequest req) throws Exception {
-		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+	protected void updateGroupPermissions(ActionRequest actionRequest)
+		throws Exception {
 
-		long resourceId = ParamUtil.getLong(req, "resourceId");
-		long groupId = ParamUtil.getLong(req, "groupId");
+		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
+
+		long resourceId = ParamUtil.getLong(actionRequest, "resourceId");
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 		String[] actionIds = StringUtil.split(
-			ParamUtil.getString(req, "groupIdActionIds"));
+			ParamUtil.getString(actionRequest, "groupIdActionIds"));
 
 		PermissionServiceUtil.setGroupPermissions(
 			groupId, actionIds, resourceId);
@@ -166,31 +174,33 @@ public class EditPermissionsAction extends EditConfigurationAction {
 		}
 	}
 
-	protected void updateGuestPermissions(ActionRequest req) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+	protected void updateGuestPermissions(ActionRequest actionRequest)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long resourceId = ParamUtil.getLong(req, "resourceId");
+		long resourceId = ParamUtil.getLong(actionRequest, "resourceId");
 		String[] actionIds = StringUtil.split(
-			ParamUtil.getString(req, "guestActionIds"));
+			ParamUtil.getString(actionRequest, "guestActionIds"));
 
 		PermissionServiceUtil.setUserPermissions(
 			themeDisplay.getDefaultUserId(), themeDisplay.getPortletGroupId(),
 			actionIds, resourceId);
 	}
 
-	protected void updateOrganizationPermissions(ActionRequest req)
+	protected void updateOrganizationPermissions(ActionRequest actionRequest)
 		throws Exception {
 
-		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
 
-		long resourceId = ParamUtil.getLong(req, "resourceId");
+		long resourceId = ParamUtil.getLong(actionRequest, "resourceId");
 		long organizationId = ParamUtil.getLong(
-			req, "organizationIdsPosValue");
+			actionRequest, "organizationIdsPosValue");
 		String[] actionIds = StringUtil.split(
-			ParamUtil.getString(req, "organizationIdActionIds"));
+			ParamUtil.getString(actionRequest, "organizationIdActionIds"));
 		//boolean organizationIntersection = ParamUtil.getBoolean(
-		//	req, "organizationIntersection");
+		//	actionRequest, "organizationIntersection");
 
 		//if (!organizationIntersection) {
 			PermissionServiceUtil.setGroupPermissions(
@@ -203,45 +213,47 @@ public class EditPermissionsAction extends EditConfigurationAction {
 		}*/
 	}
 
-	protected void updateRolePermissions(ActionRequest req)
+	protected void updateRolePermissions(ActionRequest actionRequest)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long resourceId = ParamUtil.getLong(req, "resourceId");
-		long roleId = ParamUtil.getLong(req, "roleIdsPosValue");
+		long resourceId = ParamUtil.getLong(actionRequest, "resourceId");
+		long roleId = ParamUtil.getLong(actionRequest, "roleIdsPosValue");
 		String[] actionIds = StringUtil.split(
-			ParamUtil.getString(req, "roleIdActionIds"));
+			ParamUtil.getString(actionRequest, "roleIdActionIds"));
 
 		PermissionServiceUtil.setRolePermissions(
 			roleId, themeDisplay.getPortletGroupId(), actionIds, resourceId);
 	}
 
-	protected void updateUserGroupPermissions(ActionRequest req)
+	protected void updateUserGroupPermissions(ActionRequest actionRequest)
 		throws Exception {
 
-		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
 
-		long resourceId = ParamUtil.getLong(req, "resourceId");
+		long resourceId = ParamUtil.getLong(actionRequest, "resourceId");
 		long userGroupId = ParamUtil.getLong(
-			req, "userGroupIdsPosValue");
+			actionRequest, "userGroupIdsPosValue");
 		String[] actionIds = StringUtil.split(
-			ParamUtil.getString(req, "userGroupIdActionIds"));
+			ParamUtil.getString(actionRequest, "userGroupIdActionIds"));
 
 		PermissionServiceUtil.setGroupPermissions(
 			UserGroup.class.getName(), String.valueOf(userGroupId),
 			layout.getGroupId(), actionIds, resourceId);
 	}
 
-	protected void updateUserPermissions(ActionRequest req) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+	protected void updateUserPermissions(ActionRequest actionRequest)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long resourceId = ParamUtil.getLong(req, "resourceId");
-		long userId = ParamUtil.getLong(req, "userIdsPosValue");
+		long resourceId = ParamUtil.getLong(actionRequest, "resourceId");
+		long userId = ParamUtil.getLong(actionRequest, "userIdsPosValue");
 		String[] actionIds = StringUtil.split(
-			ParamUtil.getString(req, "userIdActionIds"));
+			ParamUtil.getString(actionRequest, "userIdActionIds"));
 
 		PermissionServiceUtil.setUserPermissions(
 			userId, themeDisplay.getPortletGroupId(), actionIds, resourceId);

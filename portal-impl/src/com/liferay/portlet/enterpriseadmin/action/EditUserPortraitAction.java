@@ -65,26 +65,26 @@ public class EditUserPortraitAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		try {
-			updatePortrait(req);
+			updatePortrait(actionRequest);
 
-			sendRedirect(req, res);
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchUserException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.enterprise_admin.error");
+				setForward(actionRequest, "portlet.enterprise_admin.error");
 			}
 			else if (e instanceof UploadException ||
 					 e instanceof UserPortraitException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
 				throw e;
@@ -94,21 +94,22 @@ public class EditUserPortraitAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse res)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		return mapping.findForward(
-			getForward(req, "portlet.enterprise_admin.edit_user_portrait"));
+		return mapping.findForward(getForward(
+			renderRequest, "portlet.enterprise_admin.edit_user_portrait"));
 	}
 
-	protected void testRequest(ActionRequest req) throws Exception {
+	protected void testRequest(ActionRequest actionRequest) throws Exception {
 
 		// Check if the given request is a multipart request
 
-		boolean isMultiPartContent = PortletFileUpload.isMultipartContent(req);
+		boolean multiPartContent = PortletFileUpload.isMultipartContent(
+			actionRequest);
 
 		if (_log.isInfoEnabled()) {
-			if (isMultiPartContent) {
+			if (multiPartContent) {
 				_log.info("The given request is a multipart request");
 			}
 			else {
@@ -122,7 +123,7 @@ public class EditUserPortraitAction extends PortletAction {
 
 		PortletFileUpload upload = new PortletFileUpload(factory);
 
-		List<DiskFileItem> fileItems = upload.parseRequest(req);
+		List<DiskFileItem> fileItems = upload.parseRequest(actionRequest);
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
@@ -140,7 +141,7 @@ public class EditUserPortraitAction extends PortletAction {
 
 		// Read directly from the portlet input stream
 
-		InputStream is = req.getPortletInputStream();
+		InputStream is = actionRequest.getPortletInputStream();
 
 		if (is != null) {
 			ByteArrayMaker bam = new ByteArrayMaker();
@@ -166,16 +167,17 @@ public class EditUserPortraitAction extends PortletAction {
 		}
 	}
 
-	protected void updatePortrait(ActionRequest req) throws Exception {
+	protected void updatePortrait(ActionRequest actionRequest)
+		throws Exception {
 
 		//_testRequest(req);
 
-		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
-			req);
+		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
+			actionRequest);
 
-		User user = PortalUtil.getSelectedUser(uploadReq);
+		User user = PortalUtil.getSelectedUser(uploadRequest);
 
-		File file = uploadReq.getFile("fileName");
+		File file = uploadRequest.getFile("fileName");
 		byte[] bytes = FileUtil.getBytes(file);
 
 		if ((bytes == null) || (bytes.length == 0)) {

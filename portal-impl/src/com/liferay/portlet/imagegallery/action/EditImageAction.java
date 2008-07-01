@@ -66,38 +66,38 @@ public class EditImageAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest req, ActionResponse res)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateImage(req);
+				updateImage(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteImage(req);
+				deleteImage(actionRequest);
 
-				sendRedirect(req, res);
+				sendRedirect(actionRequest, actionResponse);
 			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchImageException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(req, "portlet.image_gallery.error");
+				setForward(actionRequest, "portlet.image_gallery.error");
 			}
 			else if (e instanceof DuplicateImageNameException ||
 					 e instanceof ImageNameException ||
 					 e instanceof ImageSizeException ||
 					 e instanceof NoSuchFolderException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else if (e instanceof TagsEntryException) {
-				SessionErrors.add(req, e.getClass().getName(), e);
+				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 			}
 			else {
 				throw e;
@@ -107,17 +107,17 @@ public class EditImageAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse res)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			ActionUtil.getImage(req);
+			ActionUtil.getImage(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchImageException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(req, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward("portlet.image_gallery.error");
 			}
@@ -128,22 +128,24 @@ public class EditImageAction extends PortletAction {
 
 		String forward = "portlet.image_gallery.edit_image";
 
-		if (req.getWindowState().equals(LiferayWindowState.POP_UP)) {
+		if (renderRequest.getWindowState().equals(LiferayWindowState.POP_UP)) {
 			forward = "portlet.image_gallery.edit_image_form";
 		}
 
-		return mapping.findForward(getForward(req, forward));
+		return mapping.findForward(getForward(renderRequest, forward));
 	}
 
-	protected void deleteImage(ActionRequest req) throws Exception {
-		long imageId = ParamUtil.getLong(req, "imageId");
+	protected void deleteImage(ActionRequest actionRequest) throws Exception {
+		long imageId = ParamUtil.getLong(actionRequest, "imageId");
 
 		IGImageServiceUtil.deleteImage(imageId);
 	}
 
-	protected String getContentType(UploadPortletRequest uploadReq, File file) {
+	protected String getContentType(
+		UploadPortletRequest uploadRequest, File file) {
+
 		String contentType = GetterUtil.getString(
-			uploadReq.getContentType("file"));
+			uploadRequest.getContentType("file"));
 
 		if (contentType.equals("application/octet-stream")) {
 			String ext = GetterUtil.getString(
@@ -164,20 +166,20 @@ public class EditImageAction extends PortletAction {
 		return contentType;
 	}
 
-	protected void updateImage(ActionRequest req) throws Exception {
-		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
-			req);
+	protected void updateImage(ActionRequest actionRequest) throws Exception {
+		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
+			actionRequest);
 
-		long imageId = ParamUtil.getLong(uploadReq, "imageId");
+		long imageId = ParamUtil.getLong(uploadRequest, "imageId");
 
-		long folderId = ParamUtil.getLong(uploadReq, "folderId");
-		String name = ParamUtil.getString(uploadReq, "name");
-		String fileName = uploadReq.getFileName("file");
+		long folderId = ParamUtil.getLong(uploadRequest, "folderId");
+		String name = ParamUtil.getString(uploadRequest, "name");
+		String fileName = uploadRequest.getFileName("file");
 		String description = ParamUtil.getString(
-			uploadReq, "description", fileName);
+			uploadRequest, "description", fileName);
 
-		File file = uploadReq.getFile("file");
-		String contentType = getContentType(uploadReq, file);
+		File file = uploadRequest.getFile("file");
+		String contentType = getContentType(uploadRequest, file);
 
 		if (contentType.equals("application/octet-stream")) {
 			String ext = GetterUtil.getString(
@@ -196,11 +198,11 @@ public class EditImageAction extends PortletAction {
 		}
 
 		String[] tagsEntries = StringUtil.split(
-			ParamUtil.getString(uploadReq, "tagsEntries"));
+			ParamUtil.getString(uploadRequest, "tagsEntries"));
 
-		String[] communityPermissions = req.getParameterValues(
+		String[] communityPermissions = actionRequest.getParameterValues(
 			"communityPermissions");
-		String[] guestPermissions = req.getParameterValues(
+		String[] guestPermissions = actionRequest.getParameterValues(
 			"guestPermissions");
 
 		if (imageId <= 0) {
@@ -216,7 +218,7 @@ public class EditImageAction extends PortletAction {
 				communityPermissions, guestPermissions);
 
 			AssetPublisherUtil.addAndStoreSelection(
-				req, IGImage.class.getName(), image.getImageId(), -1);
+				actionRequest, IGImage.class.getName(), image.getImageId(), -1);
 		}
 		else {
 
@@ -232,7 +234,7 @@ public class EditImageAction extends PortletAction {
 		}
 
 		AssetPublisherUtil.addRecentFolderId(
-			req, IGImage.class.getName(), folderId);
+			actionRequest, IGImage.class.getName(), folderId);
 	}
 
 }

@@ -111,12 +111,12 @@ public class OpenIdRequestAction extends Action {
 
 				authReq.addExtension(fetch);
 
-				SRegRequest sregReq = SRegRequest.createFetchRequest();
+				SRegRequest sregRequest = SRegRequest.createFetchRequest();
 
-				sregReq.addAttribute("fullname", true);
-				sregReq.addAttribute("email", true);
+				sregRequest.addAttribute("fullname", true);
+				sregRequest.addAttribute("email", true);
 
-				authReq.addExtension(sregReq);
+				authReq.addExtension(sregRequest);
 			}
 		}
 

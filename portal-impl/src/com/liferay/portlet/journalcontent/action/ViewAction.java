@@ -54,23 +54,23 @@ public class ViewAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse res)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		PortletPreferences prefs = req.getPreferences();
+		PortletPreferences prefs = renderRequest.getPreferences();
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long groupId = ParamUtil.getLong(req, "groupId");
+		long groupId = ParamUtil.getLong(renderRequest, "groupId");
 
 		if (groupId < 1) {
 			groupId = GetterUtil.getLong(
 				prefs.getValue("group-id", StringPool.BLANK));
 		}
 
-		String articleId = ParamUtil.getString(req, "articleId");
-		String templateId = ParamUtil.getString(req, "templateId");
+		String articleId = ParamUtil.getString(renderRequest, "articleId");
+		String templateId = ParamUtil.getString(renderRequest, "templateId");
 
 		if (Validator.isNull(articleId)) {
 			articleId = GetterUtil.getString(
@@ -79,11 +79,12 @@ public class ViewAction extends PortletAction {
 				prefs.getValue("template-id", StringPool.BLANK));
 		}
 
-		String languageId = LanguageUtil.getLanguageId(req);
+		String languageId = LanguageUtil.getLanguageId(renderRequest);
 
-		int page = ParamUtil.getInteger(req, "page", 1);
+		int page = ParamUtil.getInteger(renderRequest, "page", 1);
 
-		String xmlRequest = PortletRequestUtil.toXML(req, res);
+		String xmlRequest = PortletRequestUtil.toXML(
+			renderRequest, renderResponse);
 
 		JournalArticleDisplay articleDisplay = null;
 
@@ -94,17 +95,18 @@ public class ViewAction extends PortletAction {
 		}
 
 		if (articleDisplay != null) {
-			req.setAttribute(WebKeys.JOURNAL_ARTICLE_DISPLAY, articleDisplay);
+			renderRequest.setAttribute(
+				WebKeys.JOURNAL_ARTICLE_DISPLAY, articleDisplay);
 		}
 		else {
-			req.removeAttribute(WebKeys.JOURNAL_ARTICLE_DISPLAY);
+			renderRequest.removeAttribute(WebKeys.JOURNAL_ARTICLE_DISPLAY);
 
 			// Don't decorate this portlet if there is no content. This will
 			// prevent end users from seeing empty portlets from expired
 			// articles. Administrators can still see the portlet and either
 			// remove the portlet or select a new article.
 
-			req.setAttribute(WebKeys.PORTLET_DECORATE, Boolean.FALSE);
+			renderRequest.setAttribute(WebKeys.PORTLET_DECORATE, Boolean.FALSE);
 		}
 
 		return mapping.findForward("portlet.journal_content.view");

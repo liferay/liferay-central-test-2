@@ -78,7 +78,7 @@ public class EditUserRolesAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse res)
+			RenderRequest req, RenderResponse renderResponse)
 		throws Exception {
 
 		try {

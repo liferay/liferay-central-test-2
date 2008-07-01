@@ -51,7 +51,9 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 		return HttpServletResponse.SC_FORBIDDEN;
 	}
 
-	public int deleteResource(WebDAVRequest webDavReq) throws WebDAVException {
+	public int deleteResource(WebDAVRequest webDavRequest)
+		throws WebDAVException {
+
 		return HttpServletResponse.SC_FORBIDDEN;
 	}
 

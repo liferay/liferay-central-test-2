@@ -44,13 +44,15 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ViewAction extends com.liferay.portlet.iframe.action.ViewAction {
 
-	protected String getSrc(RenderRequest req, RenderResponse res) {
-		String src = super.getSrc(req, res);
+	protected String getSrc(
+		RenderRequest renderRequest, RenderResponse renderResponse) {
+
+		String src = super.getSrc(renderRequest, renderResponse);
 
 		TimeZone timeZone = TimeZoneUtil.getDefault();
 
 		try {
-			User user = PortalUtil.getUser(req);
+			User user = PortalUtil.getUser(renderRequest);
 
 			timeZone = user.getTimeZone();
 		}

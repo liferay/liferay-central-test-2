@@ -111,24 +111,26 @@ public class EditArchivedSetupsAction extends EditConfigurationAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest req, RenderResponse res)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		Portlet portlet = null;
 
 		try {
-			portlet = getPortlet(req);
+			portlet = getPortlet(renderRequest);
 		}
 		catch (PrincipalException pe) {
-			SessionErrors.add(req, PrincipalException.class.getName());
+			SessionErrors.add(
+				renderRequest, PrincipalException.class.getName());
 
 			return mapping.findForward("portlet.portlet_configuration.error");
 		}
 
-		res.setTitle(getTitle(portlet, req));
+		renderResponse.setTitle(getTitle(portlet, renderRequest));
 
 		return mapping.findForward(getForward(
-			req, "portlet.portlet_configuration.edit_archived_setups"));
+			renderRequest,
+			"portlet.portlet_configuration.edit_archived_setups"));
 	}
 
 	private void deleteSetup(ActionRequest req) throws Exception {
