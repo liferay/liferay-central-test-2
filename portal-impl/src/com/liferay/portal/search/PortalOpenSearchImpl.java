@@ -52,7 +52,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.document.DateTools;
 
 import org.dom4j.Element;
 
@@ -116,8 +115,7 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 
 				String url = portletURL.toString();
 
-				Date modifedDate = DateTools.stringToDate(
-					result.get(Field.MODIFIED));
+				Date modifedDate = result.getDate(Field.MODIFIED);
 
 				String content = StringPool.BLANK;
 

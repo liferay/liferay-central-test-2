@@ -190,7 +190,7 @@ try {
 		String pluginPackageGroupId = doc.get("groupId");
 		String pluginPackageArtifactId = doc.get("artifactId");
 		String pluginPackageAvailableVersion = doc.get("version");
-		String pluginPackageModifiedDate = doc.get("modified-date");
+		Date pluginPackageModifiedDate = doc.getDate("modified-date");
 		String pluginPackageShortDescription = doc.get("shortDescription");
 		String pluginPackageChangeLog = doc.get("changeLog");
 		String pluginPackageRepositoryURL = doc.get("repositoryURL");
@@ -303,7 +303,7 @@ try {
 
 		// Modified date
 
-		row.addText(dateFormatDateTime.format(DateTools.stringToDate(pluginPackageModifiedDate)));
+		row.addText(dateFormatDateTime.format(pluginPackageModifiedDate));
 
 		// Add result row
 

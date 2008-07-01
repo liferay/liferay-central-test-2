@@ -46,7 +46,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.document.DateTools;
 
 import org.dom4j.Element;
 
@@ -115,8 +114,7 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 
 				String title = docSummary.getTitle();
 				String url = getURL(themeDisplay, groupId, result, portletURL);
-				Date modifedDate = DateTools.stringToDate(
-					result.get(Field.MODIFIED));
+				Date modifedDate = result.getDate(Field.MODIFIED);
 				String content = docSummary.getContent();
 
 				String[] tags = new String[0];

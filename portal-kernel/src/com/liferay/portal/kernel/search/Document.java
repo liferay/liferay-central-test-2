@@ -26,6 +26,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.text.ParseException;
+
 import java.util.Date;
 import java.util.Map;
 
@@ -81,6 +83,8 @@ public interface Document {
 		String portletId, String field1, String field2, String field3);
 
 	public String get(String name);
+
+	public Date getDate(String name) throws ParseException;
 
 	public String[] getValues(String name);
 

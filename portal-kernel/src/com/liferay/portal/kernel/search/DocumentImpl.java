@@ -33,6 +33,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
@@ -57,9 +58,7 @@ public class DocumentImpl implements Document {
 			return;
 		}
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-
-		addKeyword(name, sdf.format(value));
+		addKeyword(name, _sdf.format(value));
 	}
 
 	public void addFile(String name, InputStream is, String fileExt) {
@@ -171,6 +170,10 @@ public class DocumentImpl implements Document {
 		return field.getValue();
 	}
 
+	public Date getDate(String name) throws ParseException {
+		return _sdf.parse(get(name));
+	}
+
 	public String[] getValues(String name) {
 		Field field = _fields.get(name);
 
@@ -217,5 +220,7 @@ public class DocumentImpl implements Document {
 	private static final String _UID_FIELD = "_FIELD_";
 
 	private Map<String, Field> _fields = new HashMap<String, Field>();
+
+	private SimpleDateFormat _sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 
 }

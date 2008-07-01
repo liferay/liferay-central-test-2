@@ -37,8 +37,6 @@
 <%@ page import="com.liferay.util.License" %>
 <%@ page import="com.liferay.util.Screenshot" %>
 
-<%@ page import="org.apache.lucene.document.DateTools" %>
-
 <%
 PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
