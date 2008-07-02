@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 
 import java.io.BufferedReader;
@@ -419,22 +418,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public boolean isUserInRole(String role) {
-		if (_remoteUserId <= 0) {
-			return false;
-		}
-		else {
-			try {
-				long companyId = PortalUtil.getCompanyId(_request);
-
-				return RoleLocalServiceUtil.hasUserRole(
-					_remoteUserId, companyId, role, true);
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-
-			return _request.isUserInRole(role);
-		}
+		return _portletRequestImpl.isUserInRole(role);
 	}
 
 	public void removeAttribute(String name) {

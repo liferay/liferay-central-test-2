@@ -437,11 +437,11 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 
 				if (Validator.isNotNull(roleLink)) {
 					return RoleLocalServiceUtil.hasUserRole(
-							_remoteUserId, companyId, roleLink, true);
+						_remoteUserId, companyId, roleLink, true);
 				}
 				else {
 					return RoleLocalServiceUtil.hasUserRole(
-							_remoteUserId, companyId, role, true);
+						_remoteUserId, companyId, role, true);
 				}
 			}
 			catch (Exception e) {
