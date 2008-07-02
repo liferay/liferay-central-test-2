@@ -149,7 +149,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		ActionMapping mapping = (ActionMapping)moduleConfig.findActionConfig(
 			path);
 
-		if ((mapping == null) && !path.startsWith(_PATH_WSRP)) {
+		if (mapping == null) {
 			String lastPath = getLastPath(request);
 
 			if (_log.isDebugEnabled()) {
@@ -455,8 +455,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			(!path.equals(_PATH_C)) &&
 			(!path.startsWith(_PATH_COMMON)) &&
 			(path.indexOf(_PATH_J_SECURITY_CHECK) == -1) &&
-			(!path.startsWith(_PATH_PORTAL)) &&
-			(!path.startsWith(_PATH_WSRP))) {
+			(!path.startsWith(_PATH_PORTAL))) {
 
 			return true;
 		}
@@ -468,8 +467,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 	protected boolean isPublicPath(String path) {
 		if ((path != null) &&
 			(_publicPaths.contains(path)) ||
-			(path.startsWith(_PATH_COMMON)) ||
-			(path.startsWith(_PATH_WSRP))) {
+			(path.startsWith(_PATH_COMMON))) {
 
 			return true;
 		}
@@ -708,12 +706,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		ActionMapping mapping =
 			(ActionMapping)moduleConfig.findActionConfig(path);
 
-		if (path.startsWith(_PATH_WSRP)) {
-			path = _PATH_WSRP;
-		}
-		else {
-			path = mapping.getPath();
-		}
+		path = mapping.getPath();
 
 		// Authenticated users must have at least one role
 
@@ -926,8 +919,6 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 	private static String _PATH_PORTAL_UPDATE_TERMS_OF_USE =
 		"/portal/update_terms_of_use";
-
-	private static String _PATH_WSRP = "/wsrp";
 
 	private static Log _log = LogFactory.getLog(PortalRequestProcessor.class);
 
