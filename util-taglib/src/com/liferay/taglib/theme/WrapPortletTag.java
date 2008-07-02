@@ -70,8 +70,17 @@ public class WrapPortletTag extends ParamAndPropertyAncestorTagImpl {
 
 		stringResponse.recycle();
 
-		return ThemeUtil.includeVM(
+		String content = ThemeUtil.includeVM(
 			servletContext, request, pageContext, wrapPage, theme, false);
+
+		StringBuilder sb = new StringBuilder(
+			content.length() + _CONTENT_WRAPPER_LENGTH);
+
+		sb.append(_CONTENT_WRAPPER_PRE);
+		sb.append(content);
+		sb.append(_CONTENT_WRAPPER_POST);
+
+		return sb.toString();
 	}
 
 	public int doStartTag() {
@@ -126,6 +135,14 @@ public class WrapPortletTag extends ParamAndPropertyAncestorTagImpl {
 	public void setPage(String page) {
 		_page = page;
 	}
+
+	private static final String _CONTENT_WRAPPER_PRE =
+		"<div id=\"content-wrapper\" class=\"column-1\">";
+
+	private static final String _CONTENT_WRAPPER_POST = "</div>";
+
+	private static final int _CONTENT_WRAPPER_LENGTH =
+		_CONTENT_WRAPPER_PRE.length() + _CONTENT_WRAPPER_POST.length();
 
 	private String _page;
 	private String _bodyContentString = StringPool.BLANK;
