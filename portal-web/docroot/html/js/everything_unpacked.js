@@ -16322,7 +16322,7 @@ Liferay.Layout = {
 				data: {
 					p_l_id: themeDisplay.getPlid(),
 					doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-					redirect: Liferay.currentURLEncoded
+					redirect: Liferay.currentURL
 				},
 				success: function(response) {
 					Liferay.Popup(
