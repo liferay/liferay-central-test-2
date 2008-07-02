@@ -69,7 +69,7 @@ Liferay.Portlet = {
 				container.prepend(placeHolder);
 			}
 
-			data.currentURL = Liferay.currentURLEncoded;
+			data.currentURL = Liferay.currentURL;
 
 			return instance.addHTML(
 				{
