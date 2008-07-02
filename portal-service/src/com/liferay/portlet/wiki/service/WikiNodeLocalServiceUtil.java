@@ -267,12 +267,14 @@ public class WikiNodeLocalServiceUtil {
 	}
 
 	public static void importPages(long userId, long nodeId,
-		java.io.File[] files, java.util.Map<String, String[]> options)
+		java.lang.String importer, java.io.File[] files,
+		java.util.Map<String, String[]> options)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
 
-		wikiNodeLocalService.importPages(userId, nodeId, files, options);
+		wikiNodeLocalService.importPages(userId, nodeId, importer, files,
+			options);
 	}
 
 	public static void reIndex(java.lang.String[] ids)

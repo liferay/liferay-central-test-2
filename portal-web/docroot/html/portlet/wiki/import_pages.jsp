@@ -54,6 +54,7 @@ portletURL.setParameter("nodeId", String.valueOf(nodeId));
 <input name="<portlet:namespace />importProgressId" type="hidden" value="<%= importProgressId %>" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 <input name="<portlet:namespace />nodeId" type="hidden" value="<%= nodeId %>" />
+<input name="<portlet:namespace />importer" type="hidden" value="<%= HtmlUtil.escape(tabs2) %>" />
 
 <liferay-ui:tabs
 	names="import-pages"

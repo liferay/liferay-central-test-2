@@ -305,27 +305,34 @@ public class WikiNodeServiceHttp {
 	}
 
 	public static void importPages(HttpPrincipal httpPrincipal, long nodeId,
-		java.io.File[] files, java.util.Map<String, String[]> options)
+		java.lang.String importer, java.io.File[] files,
+		java.util.Map<String, String[]> options)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(nodeId);
 
-			Object paramObj1 = files;
+			Object paramObj1 = importer;
 
-			if (files == null) {
-				paramObj1 = new NullWrapper("[Ljava.io.File;");
+			if (importer == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = options;
+			Object paramObj2 = files;
+
+			if (files == null) {
+				paramObj2 = new NullWrapper("[Ljava.io.File;");
+			}
+
+			Object paramObj3 = options;
 
 			if (options == null) {
-				paramObj2 = new NullWrapper("java.util.Map");
+				paramObj3 = new NullWrapper("java.util.Map");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(WikiNodeServiceUtil.class.getName(),
 					"importPages",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);

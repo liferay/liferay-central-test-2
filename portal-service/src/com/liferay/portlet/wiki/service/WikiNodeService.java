@@ -75,8 +75,8 @@ public interface WikiNodeService {
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void importPages(long nodeId, java.io.File[] files,
-		java.util.Map<String, String[]> options)
+	public void importPages(long nodeId, java.lang.String importer,
+		java.io.File[] files, java.util.Map<String, String[]> options)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

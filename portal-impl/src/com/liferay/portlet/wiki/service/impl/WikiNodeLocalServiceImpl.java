@@ -24,20 +24,24 @@ package com.liferay.portlet.wiki.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsKeys;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.wiki.DuplicateNodeNameException;
 import com.liferay.portlet.wiki.NodeNameException;
-import com.liferay.portlet.wiki.importers.mediawiki.MediaWikiImporter;
+import com.liferay.portlet.wiki.importers.WikiImporter;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.base.WikiNodeLocalServiceBaseImpl;
@@ -46,6 +50,7 @@ import com.liferay.portlet.wiki.util.Indexer;
 import java.io.File;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -268,13 +273,34 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 	}
 
 	public void importPages(
-			long userId, long nodeId, File[] files,
+			long userId, long nodeId, String importer, File[] files,
 			Map<String, String[]> options)
 		throws PortalException, SystemException {
 
 		WikiNode node = getNode(nodeId);
 
-		_importer.importPages(userId, node, files, options);
+		_getWikiImporter(importer).importPages(userId, node, files, options);
+	}
+
+	private WikiImporter _getWikiImporter(String importer) {
+		WikiImporter wikiImporter = _wikiImporters.get(importer);
+
+		if (wikiImporter == null) {
+			String importerClass = PropsUtil.get(
+				PropsKeys.WIKI_IMPORTERS_CLASS, new Filter(importer));
+
+			if (importerClass != null) {
+				wikiImporter = (WikiImporter)InstancePool.get(importerClass);
+
+				_wikiImporters.put(importer, wikiImporter);
+			}
+
+			if (importer == null) {
+				throw new RuntimeException(importer);
+			}
+		}
+
+		return wikiImporter;
 	}
 
 	public void reIndex(String[] ids) throws SystemException {
@@ -433,6 +459,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 	private static Log _log = LogFactory.getLog(WikiNodeLocalServiceImpl.class);
 
-	private MediaWikiImporter _importer = new MediaWikiImporter();
+	private Map<String, WikiImporter> _wikiImporters =
+		new HashMap<String, WikiImporter>();
 
 }
