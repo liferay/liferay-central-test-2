@@ -110,41 +110,41 @@ public class ContainerRequestFactory {
 	public static ExecuteActionRequest createExecuteActionRequest(
 			HttpServletRequest request, Portlet portlet,
 			WindowState windowState, PortletMode portletMode,
-			WindowRequestReader windowRequestReader, long plid)
+			long plid, boolean facesPortlet, boolean remotePortlet)
 		throws Exception {
 
 		return (ExecuteActionRequest)_createContainerRequest(
-			request, portlet, windowState, portletMode, windowRequestReader,
-			PortletRequest.ACTION_PHASE, plid);
+			request, portlet, windowState, portletMode, plid,
+			facesPortlet, remotePortlet, PortletRequest.ACTION_PHASE);
 	}
 
 	public static GetMarkupRequest createGetMarkUpRequest(
 			HttpServletRequest request, Portlet portlet,
 			WindowState windowState, PortletMode portletMode,
-			WindowRequestReader windowRequestReader, long plid)
+			long plid, boolean facesPortlet, boolean remotePortlet)
 		throws Exception {
 
 		return (GetMarkupRequest)_createContainerRequest(
-			request, portlet, windowState, portletMode, windowRequestReader,
-			PortletRequest.RENDER_PHASE, plid);
+			request, portlet, windowState, portletMode, plid,
+			facesPortlet, remotePortlet, PortletRequest.RENDER_PHASE);
 	}
 
 	public static GetResourceRequest createGetResourceRequest(
 			HttpServletRequest request, Portlet portlet,
 			WindowState windowState, PortletMode portletMode,
-			WindowRequestReader windowRequestReader, long plid)
+			long plid, boolean facesPortlet, boolean remotePortlet)
 		throws Exception {
 
 		return (GetResourceRequest)_createContainerRequest(
-			request, portlet, windowState, portletMode, windowRequestReader,
-			PortletRequest.RESOURCE_PHASE, plid);
+			request, portlet, windowState, portletMode, plid,
+			facesPortlet, remotePortlet, PortletRequest.RESOURCE_PHASE);
 	}
 
 	private static ContainerRequest _createContainerRequest(
 			HttpServletRequest request, Portlet portlet,
 			WindowState windowState, PortletMode portletMode,
-			WindowRequestReader windowRequestReader, String lifecycle,
-			long plid)
+			long plid, boolean facesPortlet, boolean remotePortlet,
+			String lifecycle)
 		throws Exception {
 
 		EntityID entityID = WindowInvokerUtil.getEntityID(portlet);
@@ -158,11 +158,21 @@ public class ContainerRequestFactory {
 		PortletWindowContext portletWindowContext =
 			new PortletWindowContextImpl(request, portlet, lifecycle);
 
-		ChannelURLFactory channelURLFactory = new PortletWindowURLFactory(
-			request, portlet, channelWindowState, channelPortletMode, plid);
+		ChannelURLFactory channelURLFactory = null;
+		if (!remotePortlet) {
+			channelURLFactory = new PortletWindowURLFactory(
+				request, portlet, channelWindowState, channelPortletMode, plid);
+		}
+
+		WindowRequestReader windowRequestReader = null;
 
 		if (lifecycle.equals(PortletRequest.ACTION_PHASE) ||
 			lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+
+			if (!remotePortlet) {
+				windowRequestReader =
+					new PortletWindowRequestReader(facesPortlet);
+			}
 
 			ChannelState newWindowState =
 				windowRequestReader.readNewWindowState(request);

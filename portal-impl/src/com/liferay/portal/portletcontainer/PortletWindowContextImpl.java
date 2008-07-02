@@ -44,7 +44,9 @@ package com.liferay.portal.portletcontainer;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
+import com.liferay.portal.kernel.servlet.ProtectedPrincipal;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -52,9 +54,12 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.PortletPreferencesIds;
+import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
@@ -108,7 +113,7 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 		_request = request;
 		_portlet = portlet;
 		_lifecycle = lifecycle;
-		setUserId(request);
+		setUserId(request, portlet);
 	}
 
 	public String encodeURL(String url) {
@@ -305,7 +310,12 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 	}
 
 	public List<String> getRoles() {
-		return Collections.EMPTY_LIST;
+		try {
+			return _getRoles(_request);
+		} catch (SystemException ex) {
+			_log.error(ex);
+			return Collections.EMPTY_LIST;
+		}
 	}
 
 	public String getShortTitle(String portletName, String desiredLocale) {
@@ -360,18 +370,7 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 	}
 
 	public String getUserID() {
-		if (_userId == null) {
-			Principal principal = _request.getUserPrincipal();
-
-			if (principal != null) {
-				_userId = principal.getName();
-			}
-			else {
-				_userId = _request.getParameter("wsrp.userID");
-			}
-		}
-
-		return _userId;
+		return _remoteUser;
 	}
 
 	public Map<String, String> getUserInfo() {
@@ -380,6 +379,10 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 
 	public Map<String, String> getUserInfoMap(String portletWindowName) {
 		return Collections.EMPTY_MAP;
+	}
+
+	public Principal getUserPrincipal() {
+		return _userPrincipal;
 	}
 
 	public void init(HttpServletRequest request) {
@@ -496,13 +499,64 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 		return portlets;
 	}
 
-	protected void setUserId(HttpServletRequest request)
-		throws PortalException, SystemException {
+	protected void setUserId(HttpServletRequest request, Portlet portletModel)
+		throws SystemException {
 
-		User user = PortalUtil.getUser(request);
+		long userId = PortalUtil.getUserId(request);
+		String remoteUser = request.getRemoteUser();
 
-		if (user != null) {
-			_userId = user.getLogin();
+		String userPrincipalStrategy = portletModel.getUserPrincipalStrategy();
+
+		if (userPrincipalStrategy.equals(
+				PortletConstants.USER_PRINCIPAL_STRATEGY_SCREEN_NAME)) {
+
+			try {
+				User user = PortalUtil.getUser(request);
+
+				_remoteUser = user.getScreenName();
+				_remoteUserId = user.getUserId();
+				_userPrincipal = new ProtectedPrincipal(_remoteUser);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+		else {
+			if ((userId > 0) && (remoteUser == null)) {
+				_remoteUser = String.valueOf(userId);
+				_remoteUserId = userId;
+				_userPrincipal = new ProtectedPrincipal(_remoteUser);
+			}
+			else {
+				_remoteUser = remoteUser;
+				_remoteUserId = GetterUtil.getLong(remoteUser);
+				_userPrincipal = request.getUserPrincipal();
+			}
+		}
+	}
+
+	private List<String> _getRoles(HttpServletRequest request)
+		throws SystemException {
+
+		if (_remoteUserId <= 0) {
+			return Collections.emptyList();
+		}
+
+		long companyId = PortalUtil.getCompanyId(request);
+
+		List<Role> roles = RoleLocalServiceUtil.getRoles(companyId);
+
+		if (roles.isEmpty()) {
+			return Collections.EMPTY_LIST;
+		}
+		else {
+			List<String> roleNames = new ArrayList<String>(roles.size());
+
+			for (Role role : roles) {
+				roleNames.add(role.getName());
+			}
+
+			return roleNames;
 		}
 	}
 
@@ -511,6 +565,8 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 	private HttpServletRequest _request;
 	private Portlet _portlet;
 	private String _lifecycle;
-	private String _userId;
+	private String _remoteUser;
+	private long _remoteUserId;
+	private Principal _userPrincipal;
 
 }

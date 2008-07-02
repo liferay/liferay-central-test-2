@@ -44,13 +44,8 @@ package com.liferay.portal.portletcontainer;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.ccpp.PortalProfileFactory;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.PortletConstants;
-import com.liferay.portal.model.Role;
-import com.liferay.portal.model.User;
-import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -76,7 +71,6 @@ import com.sun.portal.container.GetMarkupRequest;
 import com.sun.portal.container.GetMarkupResponse;
 import com.sun.portal.container.GetResourceRequest;
 import com.sun.portal.container.GetResourceResponse;
-import com.sun.portal.container.WindowRequestReader;
 import com.sun.portal.portletcontainer.appengine.PortletAppEngineUtils;
 
 import java.io.IOException;
@@ -84,8 +78,6 @@ import java.io.PrintWriter;
 
 import java.net.URL;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.ccpp.Profile;
@@ -129,7 +121,6 @@ public class WindowInvoker extends InvokerPortlet {
 
 		_portletModel = portletModel;
 		_container = _getContainer();
-		_windowRequestReader = _getWindowRequestReader();
 	}
 
 	public WindowInvoker(
@@ -145,9 +136,9 @@ public class WindowInvoker extends InvokerPortlet {
 
 		_portletModel = portletModel;
 		_container = _getContainer();
-		_windowRequestReader = _getWindowRequestReader();
 	}
 
+	@Override
 	protected void invokeAction(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException, PortletException {
@@ -172,8 +163,8 @@ public class WindowInvoker extends InvokerPortlet {
 			ExecuteActionRequest executeActionRequest =
 				ContainerRequestFactory.createExecuteActionRequest(
 					request, _portletModel, actionRequestImpl.getWindowState(),
-					actionRequestImpl.getPortletMode(), _windowRequestReader,
-					_getPlid(actionRequest));
+					actionRequestImpl.getPortletMode(), _getPlid(actionRequest),
+					isFacesPortlet(), _remotePortlet);
 
 			_populateContainerRequest(
 				request, response, executeActionRequest, actionRequestImpl);
@@ -218,6 +209,7 @@ public class WindowInvoker extends InvokerPortlet {
 		}
 	}
 
+	@Override
 	protected void invokeEvent(
 			EventRequest eventRequest, EventResponse eventResponse)
 		throws IOException, PortletException {
@@ -227,6 +219,7 @@ public class WindowInvoker extends InvokerPortlet {
 		}
 	}
 
+	@Override
 	protected String invokeRender(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -249,8 +242,8 @@ public class WindowInvoker extends InvokerPortlet {
 			GetMarkupRequest getMarkupRequest =
 				ContainerRequestFactory.createGetMarkUpRequest(
 					request, _portletModel, renderRequestImpl.getWindowState(),
-					renderRequestImpl.getPortletMode(), _windowRequestReader,
-					_getPlid(renderRequest));
+					renderRequestImpl.getPortletMode(), _getPlid(renderRequest),
+					isFacesPortlet(), _remotePortlet);
 
 			_populateContainerRequest(
 				request, response, getMarkupRequest, renderRequestImpl);
@@ -288,6 +281,7 @@ public class WindowInvoker extends InvokerPortlet {
 		}
 	}
 
+	@Override
 	protected void invokeResource(
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws IOException, PortletException {
@@ -313,8 +307,9 @@ public class WindowInvoker extends InvokerPortlet {
 				ContainerRequestFactory.createGetResourceRequest(
 					request, _portletModel,
 					resourceRequestImpl.getWindowState(),
-					resourceRequestImpl.getPortletMode(), _windowRequestReader,
-					_getPlid(resourceRequest));
+					resourceRequestImpl.getPortletMode(),
+					_getPlid(resourceRequest), isFacesPortlet(),
+					_remotePortlet);
 
 			_populateContainerRequest(
 				request, response, getResourceRequest, resourceRequestImpl);
@@ -372,72 +367,11 @@ public class WindowInvoker extends InvokerPortlet {
 		}
 	}
 
-	private WindowRequestReader _getWindowRequestReader() {
-		if (_remotePortlet) {
-			return null;
-		}
-		else {
-			return new PortletWindowRequestReader(isFacesPortlet());
-		}
-	}
-
 	private long _getPlid(PortletRequest portletRequest) {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		return themeDisplay.getPlid();
-	}
-
-	private List<String> _getRoles(HttpServletRequest request)
-		throws SystemException {
-
-		long userId = PortalUtil.getUserId(request);
-		String remoteUser = request.getRemoteUser();
-		long remoteUserId = 0;
-
-		String userPrincipalStrategy = _portletModel.getUserPrincipalStrategy();
-
-		if (userPrincipalStrategy.equals(
-				PortletConstants.USER_PRINCIPAL_STRATEGY_SCREEN_NAME)) {
-
-			try {
-				User user = PortalUtil.getUser(request);
-
-				remoteUserId = user.getUserId();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-		else {
-			if ((userId > 0) && (remoteUser == null)) {
-				remoteUserId = userId;
-			}
-			else {
-				remoteUserId = GetterUtil.getLong(remoteUser);
-			}
-		}
-
-		if (remoteUserId <= 0) {
-			return Collections.emptyList();
-		}
-
-		long companyId = PortalUtil.getCompanyId(request);
-
-		List<Role> roles = RoleLocalServiceUtil.getRoles(companyId);
-
-		if (roles.isEmpty()) {
-			return Collections.EMPTY_LIST;
-		}
-		else {
-			List<String> roleNames = new ArrayList<String>(roles.size());
-
-			for (Role role : roles) {
-				roleNames.add(role.getName());
-			}
-
-			return roleNames;
-		}
 	}
 
 	private boolean _isWARFile() {
@@ -449,7 +383,8 @@ public class WindowInvoker extends InvokerPortlet {
 			ContainerRequest containerRequest, PortletRequest portletRequest)
 		throws SystemException {
 
-		containerRequest.setRoles(_getRoles(request));
+		containerRequest.setRoles(
+			containerRequest.getPortletWindowContext().getRoles());
 		containerRequest.setUserInfo(
 			UserInfoFactory.getUserInfo(request, _portletModel));
 
@@ -475,7 +410,6 @@ public class WindowInvoker extends InvokerPortlet {
 
 	private com.liferay.portal.model.Portlet _portletModel;
 	private Container _container;
-	private WindowRequestReader _windowRequestReader;
 	private boolean _remotePortlet;
 	private Profile _profile;
 
