@@ -679,37 +679,15 @@ public class LayoutAction extends Action {
 					windowState, portletMode, portletPreferences,
 					layout.getPlid());
 
-			StringServletResponse stringResponse = new StringServletResponse(
-				response);
-
 			ResourceResponseImpl resourceResponseImpl =
 				ResourceResponseFactory.create(
-					resourceRequestImpl, stringResponse, portletId, companyId);
+					resourceRequestImpl, response, portletId, companyId);
 
 			resourceRequestImpl.defineObjects(
 				portletConfig, resourceResponseImpl);
 
 			invokerPortlet.serveResource(
 				resourceRequestImpl, resourceResponseImpl);
-
-			resourceResponseImpl.transferHeaders(response);
-
-			if (stringResponse.isCalledGetOutputStream()) {
-				InputStream is = new ByteArrayInputStream(
-					stringResponse.getByteArrayMaker().toByteArray());
-
-				ServletResponseUtil.sendFile(
-					response, resourceRequestImpl.getResourceID(), is,
-					resourceResponseImpl.getContentType());
-			}
-			else {
-				byte[] content = stringResponse.getString().getBytes(
-					StringPool.UTF8);
-
-				ServletResponseUtil.sendFile(
-					response, resourceRequestImpl.getResourceID(), content,
-					resourceResponseImpl.getContentType());
-			}
 		}
 
 		return portlet;

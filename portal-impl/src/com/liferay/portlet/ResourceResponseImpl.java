@@ -30,6 +30,7 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 import javax.portlet.ResourceURL;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
@@ -43,6 +44,30 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ResourceResponseImpl
 	extends MimeResponseImpl implements ResourceResponse {
+
+	public void addDateHeader(String name, long date) {
+		super.addDateHeader(name, date);
+		
+		_response.addDateHeader(name, date);
+	}
+
+	public void addHeader(String name, String value) {
+		super.addHeader(name, value);
+		
+		_response.addHeader(name, value);
+	}
+
+	public void addIntHeader(String name, int value) {
+		super.addIntHeader(name, value);
+		
+		_response.addIntHeader(name, value);
+	}
+
+	public void addProperty(Cookie cookie) {
+		super.addProperty(cookie);
+
+		_response.addCookie(cookie);
+	}
 
 	public PortletURL createActionURL() {
 		return super.createActionURL();
@@ -122,6 +147,24 @@ public class ResourceResponseImpl
 		super.recycle();
 
 		_response = null;
+	}
+
+	public void setDateHeader(String name, long date) {
+		super.setDateHeader(name, date);
+		
+		_response.setDateHeader(name, date);
+	}
+
+	public void setHeader(String name, String value) {
+		super.setHeader(name, value);
+		
+		_response.setHeader(name, value);
+	}
+
+	public void setIntHeader(String name, int value) {
+		super.setIntHeader(name, value);
+
+		_response.setIntHeader(name, value);
 	}
 
 	private static Log _log = LogFactory.getLog(ResourceResponseImpl.class);

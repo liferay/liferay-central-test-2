@@ -142,6 +142,8 @@ public abstract class MimeResponseImpl
 				LiferayWindowState.EXCLUSIVE)) {
 
 			valid = true;
+			
+			_response.setContentType(contentType);
 		}
 		else {
 			while (enu.hasMoreElements()) {
