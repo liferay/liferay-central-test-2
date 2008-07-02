@@ -34,6 +34,7 @@ import com.liferay.portalweb.portlet.bookmarks.BookmarksTests;
 import com.liferay.portalweb.portlet.breadcrumb.BreadcrumbTests;
 import com.liferay.portalweb.portlet.calendar.CalendarTests;
 import com.liferay.portalweb.portlet.communities.CommunitiesTests;
+import com.liferay.portalweb.portlet.createtestusers.CreateTestUsers;
 import com.liferay.portalweb.portlet.currencyconverter.CurrencyConverterTests;
 import com.liferay.portalweb.portlet.dictionary.DictionaryTests;
 import com.liferay.portalweb.portlet.directory.DirectoryTests;
@@ -110,6 +111,7 @@ public class PortalWebTestSuite extends BaseTests {
 
 	public PortalWebTestSuite() {
 		addTestSuite(LoginTest.class);
+		addTestSuite(CreateTestUsers.class);
 		addTestSuite(AdminTests.class);
 		addTestSuite(AmazonRankingsTests.class);
 		addTestSuite(AnalogClockTests.class);

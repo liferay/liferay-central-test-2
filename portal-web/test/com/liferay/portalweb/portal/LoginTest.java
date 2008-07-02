@@ -41,6 +41,8 @@ public class LoginTest extends BaseTestCase {
 		selenium.click(
 			"document.getElementById('tabs1already-registeredTabsSection').getElementsByTagName('div')[0].getElementsByTagName('form')[0].getElementsByTagName('fieldset')[0].getElementsByTagName('div')[3].getElementsByTagName('input')[0]");
 		selenium.waitForPageToLoad("30000");
+		selenium.click("//input[@value='I Agree']");
+		selenium.waitForPageToLoad("30000");
 		selenium.click("document.getElementById('my-community-private-pages')");
 		selenium.waitForPageToLoad("30000");
 	}
