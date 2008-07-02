@@ -138,7 +138,6 @@ public class WindowInvoker extends InvokerPortlet {
 		_container = _getContainer();
 	}
 
-	@Override
 	protected void invokeAction(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException, PortletException {
@@ -209,7 +208,6 @@ public class WindowInvoker extends InvokerPortlet {
 		}
 	}
 
-	@Override
 	protected void invokeEvent(
 			EventRequest eventRequest, EventResponse eventResponse)
 		throws IOException, PortletException {
@@ -219,7 +217,6 @@ public class WindowInvoker extends InvokerPortlet {
 		}
 	}
 
-	@Override
 	protected String invokeRender(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -281,7 +278,6 @@ public class WindowInvoker extends InvokerPortlet {
 		}
 	}
 
-	@Override
 	protected void invokeResource(
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws IOException, PortletException {
