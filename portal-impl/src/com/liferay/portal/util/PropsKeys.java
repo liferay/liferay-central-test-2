@@ -1117,9 +1117,9 @@ public class PropsKeys {
 
 	public static final String WIKI_IMPORTERS = "wiki.importers";
 
-	public static final String WIKI_IMPORTERS_PAGE = "wiki.importers.page";
-
 	public static final String WIKI_IMPORTERS_CLASS = "wiki.importers.class";
+
+	public static final String WIKI_IMPORTERS_PAGE = "wiki.importers.page";
 
 	public static final String WIKI_INITIAL_NODE_NAME = "wiki.initial.node.name";
 

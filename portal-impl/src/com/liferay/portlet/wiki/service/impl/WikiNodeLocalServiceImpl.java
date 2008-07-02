@@ -279,28 +279,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 		WikiNode node = getNode(nodeId);
 
-		_getWikiImporter(importer).importPages(userId, node, files, options);
-	}
-
-	private WikiImporter _getWikiImporter(String importer) {
-		WikiImporter wikiImporter = _wikiImporters.get(importer);
-
-		if (wikiImporter == null) {
-			String importerClass = PropsUtil.get(
-				PropsKeys.WIKI_IMPORTERS_CLASS, new Filter(importer));
-
-			if (importerClass != null) {
-				wikiImporter = (WikiImporter)InstancePool.get(importerClass);
-
-				_wikiImporters.put(importer, wikiImporter);
-			}
-
-			if (importer == null) {
-				throw new RuntimeException(importer);
-			}
-		}
-
-		return wikiImporter;
+		getWikiImporter(importer).importPages(userId, node, files, options);
 	}
 
 	public void reIndex(String[] ids) throws SystemException {
@@ -435,6 +414,31 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		wikiNodePersistence.update(node, false);
 
 		return node;
+	}
+
+	protected WikiImporter getWikiImporter(String importer)
+		throws SystemException {
+
+		WikiImporter wikiImporter = _wikiImporters.get(importer);
+
+		if (wikiImporter == null) {
+			String importerClass = PropsUtil.get(
+				PropsKeys.WIKI_IMPORTERS_CLASS, new Filter(importer));
+
+			if (importerClass != null) {
+				wikiImporter = (WikiImporter)InstancePool.get(importerClass);
+
+				_wikiImporters.put(importer, wikiImporter);
+			}
+
+			if (importer == null) {
+				throw new SystemException(
+					"Unable to instantiate wiki importer class " +
+						importerClass);
+			}
+		}
+
+		return wikiImporter;
 	}
 
 	protected void validate(long groupId, String name)
