@@ -164,11 +164,12 @@ else {
 	if (selGroup.isStagingGroup() || selGroup.hasStagingGroup()) {
 		cmd = "publish_to_live";
 	}
-	else if (!localPublishing) {
-		cmd = "publish_to_remote";
-	}
 	else {
 		cmd = "copy_from_live";
+	}
+
+	if (!localPublishing) {
+		cmd = "publish_to_remote";
 	}
 
 	portletURL.setParameter("struts_action", "/communities/edit_pages");
