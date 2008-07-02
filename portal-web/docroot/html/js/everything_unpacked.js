@@ -17513,8 +17513,6 @@ Liferay.Portlet = {
 				column.addClass('empty');
 			}
 
-			instance.remove(portletId);
-
 			Liferay.trigger('closePortlet', {plid: plid, portletId: portletId});
 		}
 		else {
@@ -17637,6 +17635,7 @@ Liferay.Portlet = {
 
 						jPortlet.find('.portlet-close:first a').click(
 							function(event) {
+console.log('closed portlet');
 								instance.close(portlet);
 								return false;
 							}
