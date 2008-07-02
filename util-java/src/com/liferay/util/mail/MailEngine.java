@@ -351,8 +351,7 @@ public class MailEngine {
 	}
 
 	private static void _send(
-			Session session, Message msg, InternetAddress[] bulkAddresses)
-		throws MessagingException {
+		Session session, Message msg, InternetAddress[] bulkAddresses) {
 
 		try {
 			boolean smtpAuth = GetterUtil.getBoolean(

@@ -24,8 +24,6 @@ package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.util.ByteArrayMaker;
 
-import java.io.IOException;
-
 import javax.servlet.ServletOutputStream;
 
 /**
@@ -40,7 +38,7 @@ public class StringServletOutputStream extends ServletOutputStream {
 		_bam = bam;
 	}
 
-	public void write(int b) throws IOException {
+	public void write(int b) {
 		_bam.write(b);
 	}
 

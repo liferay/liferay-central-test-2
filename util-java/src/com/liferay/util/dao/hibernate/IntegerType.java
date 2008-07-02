@@ -79,7 +79,7 @@ public class IntegerType implements UserType {
 	}
 
 	public Object nullSafeGet(ResultSet rs, String[] names, Object obj)
-		throws HibernateException, SQLException {
+		throws HibernateException {
 
 		Integer value = null;
 

@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.portlet;
 
-import java.io.IOException;
-
 import javax.portlet.ActionResponse;
 import javax.portlet.filter.ActionResponseWrapper;
 
@@ -43,7 +41,7 @@ public class NoRedirectActionResponse extends ActionResponseWrapper {
 		return _redirectLocation;
 	}
 
-	public void sendRedirect(String location) throws IOException {
+	public void sendRedirect(String location) {
 
 		// Disable send redirect
 

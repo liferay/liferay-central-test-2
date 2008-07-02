@@ -41,7 +41,6 @@
 
 package com.liferay.portal.portletcontainer;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.ProtectedPrincipal;
@@ -107,8 +106,7 @@ import org.apache.commons.logging.LogFactory;
 public class PortletWindowContextImpl implements PortletWindowContext {
 
 	public PortletWindowContextImpl(
-			HttpServletRequest request, Portlet portlet, String lifecycle)
-		throws PortalException, SystemException {
+		HttpServletRequest request, Portlet portlet, String lifecycle) {
 
 		_request = request;
 		_portlet = portlet;
@@ -501,9 +499,7 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 		return portlets;
 	}
 
-	protected void setUserId(HttpServletRequest request, Portlet portlet)
-		throws SystemException {
-
+	protected void setUserId(HttpServletRequest request, Portlet portlet) {
 		long userId = PortalUtil.getUserId(request);
 		String remoteUser = request.getRemoteUser();
 

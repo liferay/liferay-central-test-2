@@ -98,6 +98,12 @@ public class SampleAppStartupAction extends SimpleAction {
 			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
 			birthdayDay, birthdayYear, jobTitle, organizationIds, sendEmail);
 
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				paulUser.getFullName() + " was created with user id " +
+					paulUser.getUserId());
+		}
+		
 		screenName = "jane";
 		emailAddress = "jane@liferay.com";
 		firstName = "Jane";
@@ -107,6 +113,12 @@ public class SampleAppStartupAction extends SimpleAction {
 			autoScreenName, screenName, emailAddress, locale, firstName,
 			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
 			birthdayDay, birthdayYear, jobTitle, organizationIds, sendEmail);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				janeUser.getFullName() + " was created with user id " +
+					janeUser.getUserId());
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(SampleAppStartupAction.class);

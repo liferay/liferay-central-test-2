@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.util;
 
-import java.io.IOException;
-
 /**
  * <a href="PortalClassLoaderUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,9 +34,7 @@ public class PortalClassLoaderUtil {
 		return _classLoader;
 	}
 
-	public static void setClassLoader(ClassLoader contextClassLoader)
-		throws IOException {
-
+	public static void setClassLoader(ClassLoader contextClassLoader) {
 		_classLoader = contextClassLoader;
 	}
 

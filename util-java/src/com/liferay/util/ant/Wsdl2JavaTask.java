@@ -23,7 +23,6 @@
 package com.liferay.util.ant;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.apache.axis.tools.ant.wsdl.NamespaceMapping;
 import org.apache.axis.tools.ant.wsdl.Wsdl2javaAntTask;
@@ -36,15 +35,11 @@ import org.apache.axis.tools.ant.wsdl.Wsdl2javaAntTask;
  */
 public class Wsdl2JavaTask {
 
-	public static void generateJava(String url, String output)
-		throws IOException {
-
+	public static void generateJava(String url, String output) {
 		generateJava(url, output, null);
 	}
 
-	public static void generateJava(String url, String output, String mapping)
-		throws IOException {
-
+	public static void generateJava(String url, String output, String mapping) {
 		Wsdl2javaAntTask wsdl2Java = new Wsdl2javaAntTask();
 
 		wsdl2Java.setProject(AntUtil.getProject());

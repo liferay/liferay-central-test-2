@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
 /**
@@ -42,7 +41,7 @@ import javax.servlet.http.HttpServlet;
  */
 public class PortalDelegateServlet extends HttpServlet {
 
-	public void init(ServletConfig config) throws ServletException {
+	public void init(ServletConfig config) {
 		String servletClass = config.getInitParameter("servlet-class");
 
 		_subContext = config.getInitParameter("sub-context");

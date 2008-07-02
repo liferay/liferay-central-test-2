@@ -41,7 +41,6 @@
 
 package com.liferay.portal.portletcontainer;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.ccpp.PortalProfileFactory;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -99,9 +98,6 @@ import javax.portlet.ResourceResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="WindowInvoker.java.html"><b><i>View Source</i></b></a>
@@ -375,9 +371,8 @@ public class WindowInvoker extends InvokerPortlet {
 	}
 
 	private void _populateContainerRequest(
-			HttpServletRequest request, HttpServletResponse response,
-			ContainerRequest containerRequest, PortletRequest portletRequest)
-		throws SystemException {
+		HttpServletRequest request, HttpServletResponse response,
+		ContainerRequest containerRequest, PortletRequest portletRequest) {
 
 		containerRequest.setRoles(
 			containerRequest.getPortletWindowContext().getRoles());
@@ -401,8 +396,6 @@ public class WindowInvoker extends InvokerPortlet {
 		request.setAttribute(
 			JavaConstants.JAVAX_PORTLET_RESPONSE, portletResponse);
 	}
-
-	private static Log _log = LogFactory.getLog(WindowInvoker.class);
 
 	private com.liferay.portal.model.Portlet _portletModel;
 	private Container _container;
