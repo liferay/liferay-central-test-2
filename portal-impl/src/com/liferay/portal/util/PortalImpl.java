@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
+import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
@@ -2088,7 +2089,7 @@ public class PortalImpl implements Portal {
 
 		String method = GetterUtil.getString(request.getMethod());
 
-		if (method.equalsIgnoreCase(_METHOD_GET)) {
+		if (method.equalsIgnoreCase(HttpMethods.GET)) {
 			return true;
 		}
 		else {
@@ -2101,7 +2102,7 @@ public class PortalImpl implements Portal {
 
 		String method = GetterUtil.getString(request.getMethod());
 
-		if (method.equalsIgnoreCase(_METHOD_POST)) {
+		if (method.equalsIgnoreCase(HttpMethods.POST)) {
 			return true;
 		}
 		else {
@@ -2865,10 +2866,6 @@ public class PortalImpl implements Portal {
 	}
 
 	private static final String _JSESSIONID = ";jsessionid=";
-
-	private static final String _METHOD_GET = "get";
-
-	private static final String _METHOD_POST = "post";
 
 	private static Log _log = LogFactory.getLog(PortalImpl.class);
 

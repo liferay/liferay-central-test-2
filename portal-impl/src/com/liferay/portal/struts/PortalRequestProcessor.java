@@ -28,9 +28,8 @@ import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.RequiredRoleException;
 import com.liferay.portal.UserActiveException;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
-import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -578,20 +577,11 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			boolean saveLastPath = ParamUtil.getBoolean(
 				request, "saveLastPath", true);
 
-			// Resource URLs, Exclusive and pop up window states, and Action 
-			// URLs should never be set as the last path
-			
-			if (themeDisplay.isLifecycleResource()) {
-				saveLastPath = false;				
-			}
-			
-			if (LiferayWindowState.isExclusive(request) ||
-				LiferayWindowState.isPopUp(request)) {
+			if (themeDisplay.isLifecycleResource() ||
+				themeDisplay.isStateExclusive() ||
+				themeDisplay.isStatePopUp() ||
+				!request.getMethod().equalsIgnoreCase(HttpMethods.GET)) {
 
-				saveLastPath = false;
-			}
-
-			if (!request.getMethod().equalsIgnoreCase("GET")) {
 				saveLastPath = false;
 			}
 

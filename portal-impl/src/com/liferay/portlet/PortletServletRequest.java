@@ -22,6 +22,7 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.servlet.ProtectedPrincipal;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -278,7 +279,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 
 	public String getMethod() {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE)) {
-			return "GET";
+			return HttpMethods.GET;
 		}
 		else {
 			return _request.getMethod();
