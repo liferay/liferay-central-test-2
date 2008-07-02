@@ -62,6 +62,12 @@ public class ResourceResponseImpl
 		_response.addIntHeader(name, value);
 	}
 
+	public void addProperty(Cookie cookie) {
+		super.addProperty(cookie);
+
+		_response.addCookie(cookie);
+	}
+
 	public PortletURL createActionURL() {
 		return super.createActionURL();
 	}
