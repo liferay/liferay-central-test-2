@@ -288,6 +288,7 @@ Liferay.Portlet = {
 						jPortlet.find('.portlet-configuration:first a').click(
 							function(event) {
 								location.href = this.href + '&previewWidth=' + portlet.offsetHeight;
+
 								return false;
 							}
 						);
@@ -295,6 +296,7 @@ Liferay.Portlet = {
 						jPortlet.find('.portlet-minimize:first a').click(
 							function(event) {
 								instance.minimize(portlet, this);
+
 								return false;
 							}
 						);
@@ -302,14 +304,15 @@ Liferay.Portlet = {
 						jPortlet.find('.portlet-maximize:first a').click(
 							function(event) {
 								submitForm(document.hrefFm, this.href);
+
 								return false;
 							}
 						);
 
 						jPortlet.find('.portlet-close:first a').click(
 							function(event) {
-console.log('closed portlet');
 								instance.close(portlet);
+
 								return false;
 							}
 						);
@@ -317,6 +320,7 @@ console.log('closed portlet');
 						jPortlet.find('.portlet-refresh:first a').click(
 							function(event) {
 								instance.refresh(portlet);
+
 								return false;
 							}
 						);
@@ -324,6 +328,7 @@ console.log('closed portlet');
 						jPortlet.find('.portlet-print:first a').click(
 							function(event) {
 								location.href = this.href;
+
 								return false;
 							}
 						);
