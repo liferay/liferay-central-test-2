@@ -32,11 +32,10 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class SearchUsersTest extends BaseTestCase {
 	public void testSearchUsers() throws Exception {
-		selenium.type("toggle_id_enterprise_admin_user_searchkeywords",
-			"Joe Bloggs");
+		selenium.type("toggle_id_enterprise_admin_user_searchkeywords", "Test");
 		selenium.click("//input[@value='Search Users']");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=joebloggs");
+		selenium.click("link=Test");
 		selenium.waitForPageToLoad("30000");
 		verifyTrue(selenium.isTextPresent(""));
 		selenium.click("link=Return to Full Page");

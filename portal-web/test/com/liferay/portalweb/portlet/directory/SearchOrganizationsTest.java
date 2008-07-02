@@ -53,7 +53,7 @@ public class SearchOrganizationsTest extends BaseTestCase {
 		}
 
 		selenium.type("toggle_id_enterprise_admin_organization_searchkeywords",
-			"Los Angeles");
+			"Liferay");
 		selenium.click("//input[@value='Search Organizations']");
 		selenium.waitForPageToLoad("30000");
 
@@ -63,7 +63,7 @@ public class SearchOrganizationsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Liferay Los Angeles")) {
+				if (selenium.isElementPresent("link=Liferay, Inc.")) {
 					break;
 				}
 			}
@@ -89,7 +89,7 @@ public class SearchOrganizationsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Liferay Los Angeles");
+		selenium.click("link=Liferay, Inc.");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

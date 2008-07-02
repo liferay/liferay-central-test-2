@@ -34,7 +34,8 @@ public class GetVacationEventsTest extends BaseTestCase {
 	public void testGetVacationEvents() throws Exception {
 		selenium.click("link=Day");
 		selenium.waitForPageToLoad("30000");
-		selenium.select("document._8_fm.elements[1]", "label=Vacation");
+		selenium.select("//div[@id='portlet-wrapper-8']/div[2]/div/div/form/table/tbody/tr/td[2]/select",
+			"label=Vacation");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -87,7 +88,8 @@ public class GetVacationEventsTest extends BaseTestCase {
 
 		selenium.click("link=Week");
 		selenium.waitForPageToLoad("30000");
-		selenium.select("document._8_fm.elements[1]", "label=Vacation");
+		selenium.select("//div[@id='portlet-wrapper-8']/div[2]/div/div/form/table/tbody/tr/td[2]/select",
+			"label=Vacation");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -124,7 +126,8 @@ public class GetVacationEventsTest extends BaseTestCase {
 
 		selenium.click("link=Month");
 		selenium.waitForPageToLoad("30000");
-		selenium.select("document._8_fm.elements[1]", "label=Vacation");
+		selenium.select("//div[@id='portlet-wrapper-8']/div[2]/div/div/form/table/tbody/tr/td[2]/select",
+			"label=Vacation");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

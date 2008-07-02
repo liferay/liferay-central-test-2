@@ -41,7 +41,7 @@ public class ApplyOrganizationTest extends BaseTestCase {
 		selenium.click("//input[@value='Select']");
 		selenium.waitForPopUp("organization", "30000");
 		selenium.selectWindow("organization");
-		selenium.click("link=Selenium");
+		selenium.click("link=Liferay, Inc.");
 		selenium.selectWindow("null");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");

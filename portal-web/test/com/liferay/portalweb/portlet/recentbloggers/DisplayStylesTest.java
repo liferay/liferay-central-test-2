@@ -46,7 +46,7 @@ public class DisplayStylesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Joe Bloggs")) {
+				if (selenium.isElementPresent("link=Test Test")) {
 					break;
 				}
 			}

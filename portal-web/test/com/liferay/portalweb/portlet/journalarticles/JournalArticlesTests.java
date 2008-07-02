@@ -35,7 +35,7 @@ public class JournalArticlesTests extends BaseTests {
 	public JournalArticlesTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddJournalArticlesTest.class);
+		//addTestSuite(AddJournalArticlesTest.class);
 	}
 
 }

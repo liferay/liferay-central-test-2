@@ -127,7 +127,7 @@ public class AddCommunitiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("test01")) {
+				if (selenium.isTextPresent("selen01")) {
 					break;
 				}
 			}
@@ -143,7 +143,7 @@ public class AddCommunitiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("test02")) {
+				if (selenium.isTextPresent("selen02")) {
 					break;
 				}
 			}
@@ -169,7 +169,7 @@ public class AddCommunitiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("Test Location")) {
+				if (selenium.isTextPresent("Liferay, Inc.")) {
 					break;
 				}
 			}
