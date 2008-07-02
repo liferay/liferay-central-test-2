@@ -30,6 +30,7 @@ import com.liferay.portal.UserActiveException;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -577,9 +578,13 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			boolean saveLastPath = ParamUtil.getBoolean(
 				request, "saveLastPath", true);
 
-			// Exclusive and pop up window states should never be set as the
-			// last path
-
+			// Resource URLs, Exclusive and pop up window states, and Action 
+			// URLs should never be set as the last path
+			
+			if (themeDisplay.isLifecycleResource()) {
+				saveLastPath = false;				
+			}
+			
 			if (LiferayWindowState.isExclusive(request) ||
 				LiferayWindowState.isPopUp(request)) {
 
