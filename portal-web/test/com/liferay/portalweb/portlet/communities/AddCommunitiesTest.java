@@ -115,11 +115,7 @@ public class AddCommunitiesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Available");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("document._29_fm._29_rowIds[1]");
-		selenium.click("document._29_fm._29_rowIds[2]");
-		selenium.click("document._29_fm._29_rowIds[3]");
-		selenium.click("document._29_fm._29_rowIds[4]");
-		selenium.click("document._29_fm._29_rowIds[5]");
+		selenium.click("_29_allRowIds");
 		selenium.click("//input[@value='Update Associations']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Current");
@@ -131,7 +127,7 @@ public class AddCommunitiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("Test DLC 1")) {
+				if (selenium.isTextPresent("test01")) {
 					break;
 				}
 			}
@@ -147,23 +143,7 @@ public class AddCommunitiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("Test DLC 10")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("Test DLC 2")) {
+				if (selenium.isTextPresent("test02")) {
 					break;
 				}
 			}
@@ -177,7 +157,7 @@ public class AddCommunitiesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Available");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("document._29_fm._29_rowIds[7]");
+		selenium.click("_29_rowIds");
 		selenium.click("//input[@value='Update Associations']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Current");
@@ -189,7 +169,7 @@ public class AddCommunitiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("Liferay Los Angeles")) {
+				if (selenium.isTextPresent("Test Location")) {
 					break;
 				}
 			}
