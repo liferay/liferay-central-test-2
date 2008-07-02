@@ -159,6 +159,7 @@ public class ContainerRequestFactory {
 			new PortletWindowContextImpl(request, portlet, lifecycle);
 
 		ChannelURLFactory channelURLFactory = null;
+
 		if (!remotePortlet) {
 			channelURLFactory = new PortletWindowURLFactory(
 				request, portlet, channelWindowState, channelPortletMode, plid);
@@ -170,8 +171,8 @@ public class ContainerRequestFactory {
 			lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
 			if (!remotePortlet) {
-				windowRequestReader =
-					new PortletWindowRequestReader(facesPortlet);
+				windowRequestReader = new PortletWindowRequestReader(
+					facesPortlet);
 			}
 
 			ChannelState newWindowState =

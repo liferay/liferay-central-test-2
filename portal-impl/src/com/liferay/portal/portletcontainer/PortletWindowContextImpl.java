@@ -312,8 +312,10 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 	public List<String> getRoles() {
 		try {
 			return _getRoles(_request);
-		} catch (SystemException ex) {
-			_log.error(ex);
+		}
+		catch (SystemException se) {
+			_log.error(se);
+
 			return Collections.EMPTY_LIST;
 		}
 	}
@@ -499,13 +501,13 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 		return portlets;
 	}
 
-	protected void setUserId(HttpServletRequest request, Portlet portletModel)
+	protected void setUserId(HttpServletRequest request, Portlet portlet)
 		throws SystemException {
 
 		long userId = PortalUtil.getUserId(request);
 		String remoteUser = request.getRemoteUser();
 
-		String userPrincipalStrategy = portletModel.getUserPrincipalStrategy();
+		String userPrincipalStrategy = portlet.getUserPrincipalStrategy();
 
 		if (userPrincipalStrategy.equals(
 				PortletConstants.USER_PRINCIPAL_STRATEGY_SCREEN_NAME)) {
