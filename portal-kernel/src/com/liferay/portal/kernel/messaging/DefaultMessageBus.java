@@ -66,6 +66,20 @@ public class DefaultMessageBus implements MessageBus {
 		_destinations.remove(responseDestination);
 	}
 
+	public void sendMessage(String destination, Object message) {
+		Destination destinationModel = _destinations.get(destination);
+
+		if (destinationModel == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Destination " + destination + " is not configured");
+			}
+
+			return;
+		}
+
+		destinationModel.send(message);
+	}
+
 	public void sendMessage(String destination, String message) {
 		Destination destinationModel = _destinations.get(destination);
 

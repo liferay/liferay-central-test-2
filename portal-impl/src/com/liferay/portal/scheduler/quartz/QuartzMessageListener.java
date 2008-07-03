@@ -41,6 +41,10 @@ import org.apache.commons.logging.LogFactory;
  */
 public class QuartzMessageListener implements MessageListener {
 
+	public void receive(Object message) {
+		throw new UnsupportedOperationException();
+	}
+
 	public void receive(String message) {
 		try {
 			doReceive(message);

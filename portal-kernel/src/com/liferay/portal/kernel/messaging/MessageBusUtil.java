@@ -58,6 +58,10 @@ public class MessageBusUtil {
 		_instance._removeDestination(destination);
 	}
 
+	public static void sendMessage(String destination, Object message) {
+		_instance._sendMessage(destination, message);
+	}
+
 	public static void sendMessage(String destination, String message) {
 		_instance._sendMessage(destination, message);
 	}
@@ -103,6 +107,10 @@ public class MessageBusUtil {
 
 	private void _removeDestination(String destination) {
 		_messageBus.removeDestination(destination);
+	}
+
+	private void _sendMessage(String destination, Object message) {
+		_messageBus.sendMessage(destination, message);
 	}
 
 	private void _sendMessage(String destination, String message) {

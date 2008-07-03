@@ -49,6 +49,10 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LayoutsLocalPublisherMessageListener implements MessageListener {
 
+	public void receive(Object message) {
+		throw new UnsupportedOperationException();
+	}
+
 	public void receive(String message) {
 		PermissionCheckerImpl permissionChecker = null;
 

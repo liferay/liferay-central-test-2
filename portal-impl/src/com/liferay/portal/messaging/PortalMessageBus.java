@@ -56,6 +56,10 @@ public class PortalMessageBus implements DisposableBean, MessageBus {
 		_messageBus.removeDestination(destination);
 	}
 
+	public void sendMessage(String destination, Object message) {
+		_messageBus.sendMessage(destination, message);
+	}
+
 	public void sendMessage(String destination, String message) {
 		_messageBus.sendMessage(destination, message);
 	}

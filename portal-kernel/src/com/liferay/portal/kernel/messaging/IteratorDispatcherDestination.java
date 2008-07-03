@@ -56,6 +56,26 @@ public abstract class IteratorDispatcherDestination extends BaseDestination {
 		_listeners.add(listener);
 	}
 
+	public void send(Object message) {
+		if (_listeners.size() == 0) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("No listeners for destination " + getName());
+			}
+
+			return;
+		}
+
+		ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
+
+		if (threadPoolExecutor.isShutdown()) {
+			throw new IllegalStateException(
+				"Destination " + getName() + " is shutdown and cannot " +
+					"receive more messages");
+		}
+
+		dispatch(_listeners.iterator(), message);
+	}
+
 	public void send(String message) {
 		if (_listeners.size() == 0) {
 			if (_log.isDebugEnabled()) {
@@ -81,6 +101,9 @@ public abstract class IteratorDispatcherDestination extends BaseDestination {
 
 		return _listeners.remove(listener);
 	}
+
+	protected abstract void dispatch(
+		Iterator<MessageListener> listenersItr, Object message);
 
 	protected abstract void dispatch(
 		Iterator<MessageListener> listenersItr, String message);

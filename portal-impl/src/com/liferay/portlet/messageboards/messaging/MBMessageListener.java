@@ -56,6 +56,10 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MBMessageListener implements MessageListener {
 
+	public void receive(Object message) {
+		throw new UnsupportedOperationException();
+	}
+
 	public void receive(String message) {
 		try {
 			doReceive(message);

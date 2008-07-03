@@ -44,6 +44,26 @@ public class TempDestination extends IteratorDispatcherDestination {
 	}
 
 	protected void dispatch(
+		Iterator<MessageListener> listenersItr, final Object message) {
+
+		ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
+
+		while (listenersItr.hasNext()) {
+			final MessageListener listener = listenersItr.next();
+
+			Runnable runnable = new Runnable() {
+
+				public void run() {
+					listener.receive(message);
+				}
+
+			};
+
+			threadPoolExecutor.execute(runnable);
+		}
+	}
+
+	protected void dispatch(
 		Iterator<MessageListener> listenersItr, final String message) {
 
 		ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();

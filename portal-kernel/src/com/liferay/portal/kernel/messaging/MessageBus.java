@@ -37,6 +37,8 @@ public interface MessageBus {
 
 	public void removeDestination(String destination);
 
+	public void sendMessage(String destination, Object message);
+
 	public void sendMessage(String destination, String message);
 
 	public String sendSynchronizedMessage(

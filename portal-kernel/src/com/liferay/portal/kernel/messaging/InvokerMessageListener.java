@@ -59,6 +59,20 @@ public class InvokerMessageListener implements MessageListener {
 		return _messageListener.hashCode();
 	}
 
+	public void receive(Object message) {
+		ClassLoader contextClassLoader =
+			Thread.currentThread().getContextClassLoader();
+
+		Thread.currentThread().setContextClassLoader(_classLoader);
+
+		try {
+			_messageListener.receive(message);
+		}
+		finally {
+			Thread.currentThread().setContextClassLoader(contextClassLoader);
+		}
+	}
+
 	public void receive(String message) {
 		ClassLoader contextClassLoader =
 			Thread.currentThread().getContextClassLoader();

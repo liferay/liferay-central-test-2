@@ -83,6 +83,10 @@ public class ResponseMessageListener implements MessageListener {
 		return _responseMessage;
 	}
 
+	public void receive(Object message) {
+		throw new UnsupportedOperationException();
+	}
+
 	public synchronized void receive(String message) {
 		if (message.indexOf(
 				"\"lfrResponseId\":\"" + _responseId + "\"") != -1) {
