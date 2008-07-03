@@ -41,10 +41,18 @@
 
 package com.liferay.portal.portletcontainer;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.ccpp.PortalProfileFactory;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.servlet.ProtectedPrincipal;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.PortletConstants;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -77,8 +85,12 @@ import java.io.PrintWriter;
 
 import java.net.URL;
 
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import java.util.Locale;
 import javax.ccpp.Profile;
 
 import javax.portlet.ActionRequest;
@@ -98,6 +110,9 @@ import javax.portlet.ResourceResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="WindowInvoker.java.html"><b><i>View Source</i></b></a>
@@ -155,6 +170,8 @@ public class WindowInvoker extends InvokerPortlet {
 			HttpServletResponse response =
 				actionResponseImpl.getHttpServletResponse();
 
+			_initUser(request, _portletModel);
+			
 			ExecuteActionRequest executeActionRequest =
 				ContainerRequestFactory.createExecuteActionRequest(
 					request, _portletModel, actionRequestImpl.getWindowState(),
@@ -162,7 +179,7 @@ public class WindowInvoker extends InvokerPortlet {
 					isFacesPortlet(), _remotePortlet);
 
 			_populateContainerRequest(
-				request, response, executeActionRequest, actionRequestImpl);
+				request, response, executeActionRequest);
 
 			ExecuteActionResponse executeActionResponse =
 				ContainerResponseFactory.createExecuteActionResponse(response);
@@ -232,6 +249,8 @@ public class WindowInvoker extends InvokerPortlet {
 			HttpServletResponse response =
 				renderResponseImpl.getHttpServletResponse();
 
+			_initUser(request, _portletModel);
+			
 			GetMarkupRequest getMarkupRequest =
 				ContainerRequestFactory.createGetMarkUpRequest(
 					request, _portletModel, renderRequestImpl.getWindowState(),
@@ -239,7 +258,7 @@ public class WindowInvoker extends InvokerPortlet {
 					isFacesPortlet(), _remotePortlet);
 
 			_populateContainerRequest(
-				request, response, getMarkupRequest, renderRequestImpl);
+				request, response, getMarkupRequest);
 
 			GetMarkupResponse getMarkupResponse =
 				ContainerResponseFactory.createGetMarkUpResponse(response);
@@ -295,6 +314,8 @@ public class WindowInvoker extends InvokerPortlet {
 			HttpServletResponse response =
 				resourceResponseImpl.getHttpServletResponse();
 
+			_initUser(request, _portletModel);
+			
 			GetResourceRequest getResourceRequest =
 				ContainerRequestFactory.createGetResourceRequest(
 					request, _portletModel,
@@ -304,7 +325,7 @@ public class WindowInvoker extends InvokerPortlet {
 					_remotePortlet);
 
 			_populateContainerRequest(
-				request, response, getResourceRequest, resourceRequestImpl);
+				request, response, getResourceRequest);
 
 			GetResourceResponse getResourceResponse =
 				ContainerResponseFactory .createGetResourceResponse(response);
@@ -359,6 +380,16 @@ public class WindowInvoker extends InvokerPortlet {
 		}
 	}
 
+	public Locale _getLocale(HttpServletRequest request) {
+		Locale locale = request.getLocale();
+
+		if (locale == null) {
+			locale = LocaleUtil.getDefault();
+		}
+
+		return locale;
+	}
+
 	private long _getPlid(PortletRequest portletRequest) {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -366,16 +397,82 @@ public class WindowInvoker extends InvokerPortlet {
 		return themeDisplay.getPlid();
 	}
 
+	private List<String> _getRoles(HttpServletRequest request) {
+
+		if (_remoteUserId <= 0) {
+			return Collections.emptyList();
+		}
+
+		long companyId = PortalUtil.getCompanyId(request);
+
+		List<Role> roles = null;
+		try {
+			roles = RoleLocalServiceUtil.getRoles(companyId);
+		} catch (SystemException se) {
+			_log.error(se);
+		}
+
+		if (roles == null || roles.isEmpty()) {
+			return Collections.EMPTY_LIST;
+		}
+		else {
+			List<String> roleNames = new ArrayList<String>(roles.size());
+
+			for (Role role : roles) {
+				roleNames.add(role.getName());
+			}
+
+			return roleNames;
+		}
+	}
+
 	private boolean _isWARFile() {
 		return getPortletConfig().isWARFile();
 	}
 
+	private void _initUser(
+		HttpServletRequest request, com.liferay.portal.model.Portlet portlet) {
+		long userId = PortalUtil.getUserId(request);
+		String remoteUser = request.getRemoteUser();
+
+		String userPrincipalStrategy = portlet.getUserPrincipalStrategy();
+
+		if (userPrincipalStrategy.equals(
+				PortletConstants.USER_PRINCIPAL_STRATEGY_SCREEN_NAME)) {
+
+			try {
+				User user = PortalUtil.getUser(request);
+
+				_remoteUser = user.getScreenName();
+				_remoteUserId = user.getUserId();
+				_userPrincipal = new ProtectedPrincipal(_remoteUser);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+		else {
+			if ((userId > 0) && (remoteUser == null)) {
+				_remoteUser = String.valueOf(userId);
+				_remoteUserId = userId;
+				_userPrincipal = new ProtectedPrincipal(_remoteUser);
+			}
+			else {
+				_remoteUser = remoteUser;
+				_remoteUserId = GetterUtil.getLong(remoteUser);
+				_userPrincipal = request.getUserPrincipal();
+			}
+		}
+	}
+
 	private void _populateContainerRequest(
 		HttpServletRequest request, HttpServletResponse response,
-		ContainerRequest containerRequest, PortletRequest portletRequest) {
+		ContainerRequest containerRequest) {
 
-		containerRequest.setRoles(
-			containerRequest.getPortletWindowContext().getRoles());
+		containerRequest.setRoles(_getRoles(request));
+		containerRequest.setUserID(_remoteUser);
+		containerRequest.setUserPrincipal(_userPrincipal);
+		containerRequest.setLocale(_getLocale(request));
 		containerRequest.setUserInfo(
 			UserInfoFactory.getUserInfo(request, _portletModel));
 
@@ -396,10 +493,15 @@ public class WindowInvoker extends InvokerPortlet {
 		request.setAttribute(
 			JavaConstants.JAVAX_PORTLET_RESPONSE, portletResponse);
 	}
+	
+	private static Log _log = LogFactory.getLog(WindowInvoker.class);
 
 	private com.liferay.portal.model.Portlet _portletModel;
 	private Container _container;
 	private boolean _remotePortlet;
 	private Profile _profile;
+	private String _remoteUser;
+	private long _remoteUserId;
+	private Principal _userPrincipal;
 
 }
