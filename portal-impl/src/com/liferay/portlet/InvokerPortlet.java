@@ -559,7 +559,15 @@ public class InvokerPortlet
 				PortletServlet.PORTLET_SERVLET_FILTER_CHAIN, filterChain);
 
 			try {
-				requestDispatcher.include(request, response);
+				// Resource phase must be a forward because includes do not 
+				// allow you to specify the content type or headers
+				
+				if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+					requestDispatcher.forward(request, response);
+				}
+				else {
+					requestDispatcher.include(request, response);					
+				}
 			}
 			catch (ServletException se) {
 				Throwable cause = se.getRootCause();
