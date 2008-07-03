@@ -763,18 +763,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/activemq.jar</file-name>
-		<version>4.1.1</version>
-		<project-name>ActiveMQ</project-name>
-		<project-url>http://activemq.apache.org</project-url>
-		<licenses>
-			<license>
-				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) 2005-2006 The Apache Software Foundation</copyright-notice>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>portal/ant.jar</file-name>
 		<version>1.7.0</version>
 		<project-name>Ant</project-name>

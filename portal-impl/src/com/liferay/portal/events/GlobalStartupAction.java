@@ -22,6 +22,7 @@
 
 package com.liferay.portal.events;
 
+import com.liferay.mail.messaging.MailMessageListener;
 import com.liferay.portal.comm.CommLink;
 import com.liferay.portal.deploy.DeployUtil;
 import com.liferay.portal.jcr.JCRFactoryUtil;
@@ -226,6 +227,23 @@ public class GlobalStartupAction extends SimpleAction {
 		}
 
 		SchedulerEngineUtil.init(new SchedulerEngineImpl());
+
+		// Message bus
+
+		populateMessageBus();
+	}
+
+	protected void populateMessageBus() {
+
+		// Mail
+
+		Destination mailDestination = new ParallelDestination(
+			DestinationNames.MAIL);
+
+		MessageBusUtil.addDestination(mailDestination);
+
+		MessageBusUtil.registerMessageListener(
+			mailDestination.getName(), new MailMessageListener());
 
 		// Message boards
 

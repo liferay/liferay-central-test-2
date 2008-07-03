@@ -20,9 +20,10 @@
  * SOFTWARE.
  */
 
-package com.liferay.mail.service.jms;
+package com.liferay.mail.messaging;
 
 import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
@@ -30,68 +31,33 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.mail.MailEngine;
 
-import javax.jms.Message;
-import javax.jms.MessageListener;
-import javax.jms.ObjectMessage;
-import javax.jms.Queue;
-import javax.jms.QueueConnection;
-import javax.jms.QueueConnectionFactory;
-import javax.jms.QueueReceiver;
-import javax.jms.QueueSession;
-import javax.jms.Session;
-
 import javax.mail.internet.InternetAddress;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="MailConsumer.java.html"><b><i>View Source</i></b></a>
+ * <a href="MailMessageListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class MailConsumer implements MessageListener {
+public class MailMessageListener implements MessageListener {
 
-	public void consume() {
+	public void receive(Object message) {
 		try {
-			QueueConnectionFactory qcf = MailQCFUtil.getQCF();
-			QueueConnection con = qcf.createQueueConnection();
-
-			QueueSession session = con.createQueueSession(
-				false, Session.AUTO_ACKNOWLEDGE);
-			Queue queue = MailQueueUtil.getQueue();
-
-			QueueReceiver subscriber = session.createReceiver(queue);
-
-			subscriber.setMessageListener(this);
-
-			con.start();
+			doReceive(message);
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			_log.error("Unable to process message " + message, e);
 		}
 	}
 
-	public void onMessage(Message msg) {
-		try {
-			ObjectMessage objMsg = (ObjectMessage)msg;
-
-			Object obj = objMsg.getObject();
-
-			if (obj instanceof MailMessage) {
-				_onMessage((MailMessage)obj);
-			}
-			else if (obj instanceof MethodWrapper) {
-				_onMessage((MethodWrapper)obj);
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
+	public void receive(String message) {
+		throw new UnsupportedOperationException();
 	}
 
-	private void _onMessage(MailMessage mailMessage) throws Exception {
+	public void doMailMessage(MailMessage mailMessage) throws Exception {
 		InternetAddress[] auditTrail = InternetAddress.parse(
 			PropsUtil.get(PropsKeys.MAIL_AUDIT_TRAIL));
 
@@ -114,10 +80,19 @@ public class MailConsumer implements MessageListener {
 		MailEngine.send(mailMessage);
 	}
 
-	private void _onMessage(MethodWrapper methodWrapper) throws Exception {
+	public void doMethodWrapper(MethodWrapper methodWrapper) throws Exception {
 		MethodInvoker.invoke(methodWrapper);
 	}
 
-	private static Log _log = LogFactory.getLog(MailConsumer.class);
+	public void doReceive(Object message) throws Exception {
+		if (message instanceof MailMessage) {
+			doMailMessage((MailMessage)message);
+		}
+		else if (message instanceof MethodWrapper) {
+			doMethodWrapper((MethodWrapper)message);
+		}
+	}
+
+	private static Log _log = LogFactory.getLog(MailMessageListener.class);
 
 }

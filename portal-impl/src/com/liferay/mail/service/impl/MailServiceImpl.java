@@ -24,9 +24,9 @@ package com.liferay.mail.service.impl;
 
 import com.liferay.mail.model.Filter;
 import com.liferay.mail.service.MailService;
-import com.liferay.mail.service.jms.MailProducer;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
@@ -46,9 +46,8 @@ import org.apache.commons.logging.LogFactory;
 public class MailServiceImpl implements MailService {
 
 	public void addForward(
-			long userId, List<Filter> filters, List<String> emailAddresses,
-			boolean leaveCopy)
-		throws SystemException {
+		long userId, List<Filter> filters, List<String> emailAddresses,
+		boolean leaveCopy) {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("addForward");
@@ -61,13 +60,12 @@ public class MailServiceImpl implements MailService {
 				new BooleanWrapper(leaveCopy)
 			});
 
-		MailProducer.produce(methodWrapper);
+		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
 	}
 
 	public void addUser(
-			long userId, String password, String firstName, String middleName,
-			String lastName, String emailAddress)
-		throws SystemException {
+		long userId, String password, String firstName, String middleName,
+		String lastName, String emailAddress) {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("addUser");
@@ -80,12 +78,11 @@ public class MailServiceImpl implements MailService {
 				lastName, emailAddress
 			});
 
-		MailProducer.produce(methodWrapper);
+		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
 	}
 
 	public void addVacationMessage(
-			long userId, String emailAddress, String vacationMessage)
-		throws SystemException {
+		long userId, String emailAddress, String vacationMessage) {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("addVacationMessage");
@@ -97,10 +94,10 @@ public class MailServiceImpl implements MailService {
 				new LongWrapper(userId), emailAddress, vacationMessage
 			});
 
-		MailProducer.produce(methodWrapper);
+		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
 	}
 
-	public void deleteEmailAddress(long userId) throws SystemException {
+	public void deleteEmailAddress(long userId) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("deleteEmailAddress");
 		}
@@ -109,10 +106,10 @@ public class MailServiceImpl implements MailService {
 			PropsValues.MAIL_HOOK_IMPL, "deleteEmailAddress",
 			new Object[] {new LongWrapper(userId)});
 
-		MailProducer.produce(methodWrapper);
+		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
 	}
 
-	public void deleteUser(long userId) throws SystemException {
+	public void deleteUser(long userId) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("deleteUser");
 		}
@@ -121,20 +118,18 @@ public class MailServiceImpl implements MailService {
 			PropsValues.MAIL_HOOK_IMPL, "deleteUser",
 			new Object[] {new LongWrapper(userId)});
 
-		MailProducer.produce(methodWrapper);
+		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
 	}
 
-	public void sendEmail(MailMessage mailMessage) throws SystemException {
+	public void sendEmail(MailMessage mailMessage) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("sendEmail");
 		}
 
-		MailProducer.produce(mailMessage);
+		MessageBusUtil.sendMessage(DestinationNames.MAIL, mailMessage);
 	}
 
-	public void updateBlocked(long userId, List<String> blocked)
-		throws SystemException {
-
+	public void updateBlocked(long userId, List<String> blocked) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("updateBlocked");
 		}
@@ -143,12 +138,10 @@ public class MailServiceImpl implements MailService {
 			PropsValues.MAIL_HOOK_IMPL, "updateBlocked",
 			new Object[] {new LongWrapper(userId), blocked});
 
-		MailProducer.produce(methodWrapper);
+		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
 	}
 
-	public void updateEmailAddress(long userId, String emailAddress)
-		throws SystemException {
-
+	public void updateEmailAddress(long userId, String emailAddress) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("updateEmailAddress");
 		}
@@ -157,12 +150,10 @@ public class MailServiceImpl implements MailService {
 			PropsValues.MAIL_HOOK_IMPL, "updateEmailAddress",
 			new Object[] {new LongWrapper(userId), emailAddress});
 
-		MailProducer.produce(methodWrapper);
+		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
 	}
 
-	public void updatePassword(long userId, String password)
-		throws SystemException {
-
+	public void updatePassword(long userId, String password) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("updatePassword");
 		}
@@ -171,7 +162,7 @@ public class MailServiceImpl implements MailService {
 			PropsValues.MAIL_HOOK_IMPL, "updatePassword",
 			new Object[] {new LongWrapper(userId), password});
 
-		MailProducer.produce(methodWrapper);
+		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
 	}
 
 	private static Log _log = LogFactory.getLog(MailServiceImpl.class);

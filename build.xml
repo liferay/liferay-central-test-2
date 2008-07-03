@@ -250,8 +250,6 @@
 		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
 
 		<antcall target="test-tomcat-5.5" />
-
-		<delete dir="activemq-data" />
 	</target>
 
 	<target name="jar">

@@ -23,10 +23,7 @@
 package com.liferay.mail.service;
 
 import com.liferay.mail.model.Filter;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.mail.MailMessage;
-
-import java.rmi.RemoteException;
 
 import java.util.List;
 
@@ -39,9 +36,8 @@ import java.util.List;
 public class MailServiceUtil {
 
 	public static void addForward(
-			long userId, List<Filter> filters, List<String> emailAddresses,
-			boolean leaveCopy)
-		throws RemoteException, SystemException {
+		long userId, List<Filter> filters, List<String> emailAddresses,
+		boolean leaveCopy) {
 
 		MailService mailService = MailServiceFactory.getService();
 
@@ -49,9 +45,8 @@ public class MailServiceUtil {
 	}
 
 	public static void addUser(
-			long userId, String password, String firstName, String middleName,
-			String lastName, String emailAddress)
-		throws RemoteException, SystemException {
+		long userId, String password, String firstName, String middleName,
+		String lastName, String emailAddress) {
 
 		MailService mailService = MailServiceFactory.getService();
 
@@ -60,57 +55,44 @@ public class MailServiceUtil {
 	}
 
 	public static void addVacationMessage(
-			long userId, String emailAddress, String vacationMessage)
-		throws RemoteException, SystemException {
+		long userId, String emailAddress, String vacationMessage) {
 
 		MailService mailService = MailServiceFactory.getService();
 
 		mailService.addVacationMessage(userId, emailAddress, vacationMessage);
 	}
 
-	public static void deleteEmailAddress(long userId)
-		throws RemoteException, SystemException {
-
+	public static void deleteEmailAddress(long userId) {
 		MailService mailService = MailServiceFactory.getService();
 
 		mailService.deleteEmailAddress(userId);
 	}
 
-	public static void deleteUser(long userId)
-		throws RemoteException, SystemException {
-
+	public static void deleteUser(long userId) {
 		MailService mailService = MailServiceFactory.getService();
 
 		mailService.deleteUser(userId);
 	}
 
-	public static void sendEmail(MailMessage mailMessage)
-		throws RemoteException, SystemException {
-
+	public static void sendEmail(MailMessage mailMessage) {
 		MailService mailService = MailServiceFactory.getService();
 
 		mailService.sendEmail(mailMessage);
 	}
 
-	public static void updateBlocked(long userId, List<String> blocked)
-		throws RemoteException, SystemException {
-
+	public static void updateBlocked(long userId, List<String> blocked) {
 		MailService mailService = MailServiceFactory.getService();
 
 		mailService.updateBlocked(userId, blocked);
 	}
 
-	public static void updateEmailAddress(long userId, String emailAddress)
-		throws RemoteException, SystemException {
-
+	public static void updateEmailAddress(long userId, String emailAddress) {
 		MailService mailService = MailServiceFactory.getService();
 
 		mailService.updateEmailAddress(userId, emailAddress);
 	}
 
-	public static void updatePassword(long userId, String password)
-		throws RemoteException, SystemException {
-
+	public static void updatePassword(long userId, String password) {
 		MailService mailService = MailServiceFactory.getService();
 
 		mailService.updatePassword(userId, password);

@@ -612,10 +612,6 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="org.apache.activemq">
-		<priority value="ERROR" />
-	</category>
-
 	<category name="org.apache.axis">
 		<priority value="INFO" />
 	</category>

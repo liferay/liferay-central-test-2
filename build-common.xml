@@ -239,8 +239,6 @@ ECJ was automatically installed. Please rerun your task.
 				</junit>
 			</else>
 		</if>
-
-		<delete dir="activemq-data" />
 	</target>
 
 	<target name="test-class" depends="compile,compile-test" if="class">
@@ -252,7 +250,5 @@ ECJ was automatically installed. Please rerun your task.
 				<fileset dir="test-classes" includes="**/${class}.class" />
 			</batchtest>
 		</junit>
-
-		<delete dir="activemq-data" />
 	</target>
 </project>

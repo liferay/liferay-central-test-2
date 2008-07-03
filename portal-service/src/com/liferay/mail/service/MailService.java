@@ -23,10 +23,7 @@
 package com.liferay.mail.service;
 
 import com.liferay.mail.model.Filter;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.mail.MailMessage;
-
-import java.rmi.RemoteException;
 
 import java.util.List;
 
@@ -39,35 +36,26 @@ import java.util.List;
 public interface MailService {
 
 	public void addForward(
-			long userId, List<Filter> filters, List<String> emailAddresses,
-			boolean leaveCopy)
-		throws RemoteException, SystemException;
+		long userId, List<Filter> filters, List<String> emailAddresses,
+		boolean leaveCopy);
 
 	public void addUser(
-			long userId, String password, String firstName, String middleName,
-			String lastName, String emailAddress)
-		throws RemoteException, SystemException;
+		long userId, String password, String firstName, String middleName,
+		String lastName, String emailAddress);
 
 	public void addVacationMessage(
-			long userId, String emailAddress, String vacationMessage)
-		throws RemoteException, SystemException;
+		long userId, String emailAddress, String vacationMessage);
 
-	public void deleteEmailAddress(long userId)
-		throws RemoteException, SystemException;
+	public void deleteEmailAddress(long userId);
 
-	public void deleteUser(long userId)
-		throws RemoteException, SystemException;
+	public void deleteUser(long userId);
 
-	public void sendEmail(MailMessage mailMessage)
-		throws RemoteException, SystemException;
+	public void sendEmail(MailMessage mailMessage);
 
-	public void updateBlocked(long userId, List<String> blocked)
-		throws RemoteException, SystemException;
+	public void updateBlocked(long userId, List<String> blocked);
 
-	public void updateEmailAddress(long userId, String emailAddress)
-		throws RemoteException, SystemException;
+	public void updateEmailAddress(long userId, String emailAddress);
 
-	public void updatePassword(long userId, String password)
-		throws RemoteException, SystemException;
+	public void updatePassword(long userId, String password);
 
 }

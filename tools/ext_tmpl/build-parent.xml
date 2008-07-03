@@ -9,7 +9,7 @@
 		<ant dir="ext-web" target="clean" inheritAll="false" />
 
 		<delete includeemptydirs="true" failonerror="false">
-			<fileset dir="${app.server.bin.dir}" includes="*.log*,ActiveMQ/**,alf_data/**,console.out" />
+			<fileset dir="${app.server.bin.dir}" includes="*.log*" />
 		</delete>
 
 		<if>
