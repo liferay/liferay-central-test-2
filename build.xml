@@ -48,7 +48,7 @@
 		</delete>
 
 		<delete includeemptydirs="true" failonerror="false">
-			<fileset dir="${app.server.bin.dir}" includes="*.log*,ActiveMQ/**,alf_data/**,alfresco.*,console.out" />
+			<fileset dir="${app.server.bin.dir}" includes="*.log*" />
 		</delete>
 
 		<if>
@@ -229,7 +229,29 @@
 	</target>
 
 	<target name="test">
+		<!--<antcall target="all" />-->
+
+		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
+
+		<ant dir="portal-impl" target="test-class" inheritAll="false">
+			<property name="class" value="ServiceTestSuite" />
+		</ant>
+
+		<ant dir="portal-impl" target="test-class" inheritAll="false">
+			<property name="class" value="PersistenceTestSuite" />
+		</ant>
+
+		<ant dir="portal-impl" target="test-class" inheritAll="false">
+			<property name="class" value="MiscTestSuite" />
+		</ant>
+
 		<ant dir="util-java" target="test" inheritAll="false" />
+
+		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
+
+		<antcall target="test-tomcat-5.5" />
+
+		<delete dir="activemq-data" />
 	</target>
 
 	<target name="jar">
@@ -1297,7 +1319,15 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip
 					<http url="http://localhost:8080" />
 				</waitfor>
 
-				<ant dir="portal-web" target="test" inheritAll="false" />
+				<ant dir="portal-impl" target="test-class" inheritAll="false">
+					<property name="class" value="ServiceHttpTestSuite" />
+				</ant>
+
+				<ant dir="portal-impl" target="test-class" inheritAll="false">
+					<property name="class" value="ServiceSoapTestSuite" />
+				</ant>
+
+				<!--<ant dir="portal-web" target="test" inheritAll="false" />-->
 
 				<exec dir="${app.server.tomcat.bin.dir}" executable="shutdown.bat" resolveexecutable="true" />
 

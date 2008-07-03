@@ -23,8 +23,6 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.image.ImageProcessorImplTest;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.util.TestPropsUtil;
 
 import junit.framework.TestSuite;
 
@@ -37,12 +35,6 @@ import junit.framework.TestSuite;
 public class MiscTestSuite extends TestSuite {
 
 	public MiscTestSuite() {
-		if (!GetterUtil.getBoolean(TestPropsUtil.get(
-				MiscTestSuite.class.getName() + ".enabled"))) {
-
-			return;
-		}
-
 		addTestSuite(ImageProcessorImplTest.class);
 	}
 

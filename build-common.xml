@@ -219,7 +219,7 @@ ECJ was automatically installed. Please rerun your task.
 		<if>
 			<equals arg1="${test.suite.classes.available}" arg2="$${test.suite.classes.available}" />
 			<then>
-				<junit fork="on" forkmode="once" haltonfailure="no" printsummary="on">
+				<junit dir="${project.dir}" fork="on" forkmode="once" haltonfailure="no" printsummary="on">
 					<classpath refid="test.classpath" />
 					<formatter type="brief" usefile="false" />
 					<formatter type="xml" />
@@ -229,7 +229,7 @@ ECJ was automatically installed. Please rerun your task.
 				</junit>
 			</then>
 			<else>
-				<junit fork="on" forkmode="once" haltonfailure="no" printsummary="on">
+				<junit dir="${project.dir}" fork="on" forkmode="once" haltonfailure="no" printsummary="on">
 					<classpath refid="test.classpath" />
 					<formatter type="brief" usefile="false" />
 					<formatter type="xml" />
@@ -244,7 +244,7 @@ ECJ was automatically installed. Please rerun your task.
 	</target>
 
 	<target name="test-class" depends="compile,compile-test" if="class">
-		<junit fork="on" forkmode="once" haltonfailure="no" printsummary="on">
+		<junit dir="${project.dir}" fork="on" forkmode="once" haltonfailure="no" printsummary="on">
 			<classpath refid="test.classpath" />
 			<formatter type="brief" usefile="false" />
 			<formatter type="xml" />
@@ -252,5 +252,7 @@ ECJ was automatically installed. Please rerun your task.
 				<fileset dir="test-classes" includes="**/${class}.class" />
 			</batchtest>
 		</junit>
+
+		<delete dir="activemq-data" />
 	</target>
 </project>

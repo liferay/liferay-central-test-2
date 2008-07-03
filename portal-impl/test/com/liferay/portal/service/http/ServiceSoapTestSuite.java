@@ -22,9 +22,6 @@
 
 package com.liferay.portal.service.http;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.util.TestPropsUtil;
-
 import junit.framework.TestSuite;
 
 /**
@@ -36,12 +33,6 @@ import junit.framework.TestSuite;
 public class ServiceSoapTestSuite extends TestSuite {
 
 	public ServiceSoapTestSuite() {
-		if (!GetterUtil.getBoolean(TestPropsUtil.get(
-				ServiceSoapTestSuite.class.getName() + ".enabled"))) {
-
-			return;
-		}
-
 		addTestSuite(UserServiceSoapTest.class);
 	}
 

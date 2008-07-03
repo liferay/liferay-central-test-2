@@ -68,8 +68,11 @@ public class ImageProcessorImplTest extends BaseTestCase {
 	}
 
 	protected void testRead(String fileName) throws Exception {
-		File file = new File(
-			"test/com/liferay/portal/image/dependencies/" + fileName);
+		fileName =
+			"portal-impl/test/com/liferay/portal/image/dependencies/" +
+				fileName;
+
+		File file = new File(fileName);
 
 		BufferedImage expectedImage = ImageIO.read(file);
 

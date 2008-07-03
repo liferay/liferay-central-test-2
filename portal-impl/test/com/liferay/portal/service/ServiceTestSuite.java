@@ -29,13 +29,13 @@ import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageSender;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.search.IndexSearcherImpl;
 import com.liferay.portal.search.IndexWriterImpl;
 import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.spring.util.SpringUtil;
-import com.liferay.portal.util.TestPropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceTest;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceTest;
@@ -55,11 +55,6 @@ import junit.framework.TestSuite;
 public class ServiceTestSuite extends TestSuite {
 
 	public ServiceTestSuite() {
-		if (!GetterUtil.getBoolean(TestPropsUtil.get(
-				ServiceTestSuite.class.getName() + ".enabled"))) {
-
-			return;
-		}
 
 		// Bean locator
 
@@ -68,6 +63,10 @@ public class ServiceTestSuite extends TestSuite {
 
 			SpringUtil.initContext(SpringUtil.getContext());
 		}
+
+		// Resource repositories root
+
+		FileUtil.deltree(PropsValues.RESOURCE_REPOSITORIES_ROOT);
 
 		// JCR
 

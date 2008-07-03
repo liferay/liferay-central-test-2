@@ -22,8 +22,6 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.util.TestPropsUtil;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistenceTest;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistenceTest;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistenceTest;
@@ -99,12 +97,6 @@ import junit.framework.TestSuite;
 public class PersistenceTestSuite extends TestSuite {
 
 	public PersistenceTestSuite() {
-		if (!GetterUtil.getBoolean(TestPropsUtil.get(
-				PersistenceTestSuite.class.getName() + ".enabled"))) {
-
-			return;
-		}
-
 		addTestSuite(AccountPersistenceTest.class);
 		addTestSuite(AddressPersistenceTest.class);
 		addTestSuite(ClassNamePersistenceTest.class);
