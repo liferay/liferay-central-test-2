@@ -25,9 +25,11 @@ package com.liferay.portlet.messageboards.service.http;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.util.StringPool;
 
 import com.liferay.portlet.messageboards.model.MBThread;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -59,7 +61,16 @@ public class MBThreadJSONSerializer {
 		jsonObj.put("messageCount", model.getMessageCount());
 		jsonObj.put("viewCount", model.getViewCount());
 		jsonObj.put("lastPostByUserId", model.getLastPostByUserId());
-		jsonObj.put("lastPostDate", model.getLastPostDate().getTime());
+
+		Date lastPostDate = model.getLastPostDate();
+
+		String lastPostDateJSON = StringPool.BLANK;
+
+		if (lastPostDate != null) {
+			lastPostDateJSON = String.valueOf(lastPostDate.getTime());
+		}
+
+		jsonObj.put("lastPostDate", lastPostDateJSON);
 		jsonObj.put("priority", model.getPriority());
 
 		return jsonObj;

@@ -25,9 +25,11 @@ package com.liferay.portlet.tags.service.http;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.util.StringPool;
 
 import com.liferay.portlet.tags.model.TagsAsset;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -58,14 +60,68 @@ public class TagsAssetJSONSerializer {
 		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());
 		jsonObj.put("userName", model.getUserName());
-		jsonObj.put("createDate", model.getCreateDate().getTime());
-		jsonObj.put("modifiedDate", model.getModifiedDate().getTime());
+
+		Date createDate = model.getCreateDate();
+
+		String createDateJSON = StringPool.BLANK;
+
+		if (createDate != null) {
+			createDateJSON = String.valueOf(createDate.getTime());
+		}
+
+		jsonObj.put("createDate", createDateJSON);
+
+		Date modifiedDate = model.getModifiedDate();
+
+		String modifiedDateJSON = StringPool.BLANK;
+
+		if (modifiedDate != null) {
+			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
+		}
+
+		jsonObj.put("modifiedDate", modifiedDateJSON);
 		jsonObj.put("classNameId", model.getClassNameId());
 		jsonObj.put("classPK", model.getClassPK());
-		jsonObj.put("startDate", model.getStartDate().getTime());
-		jsonObj.put("endDate", model.getEndDate().getTime());
-		jsonObj.put("publishDate", model.getPublishDate().getTime());
-		jsonObj.put("expirationDate", model.getExpirationDate().getTime());
+
+		Date startDate = model.getStartDate();
+
+		String startDateJSON = StringPool.BLANK;
+
+		if (startDate != null) {
+			startDateJSON = String.valueOf(startDate.getTime());
+		}
+
+		jsonObj.put("startDate", startDateJSON);
+
+		Date endDate = model.getEndDate();
+
+		String endDateJSON = StringPool.BLANK;
+
+		if (endDate != null) {
+			endDateJSON = String.valueOf(endDate.getTime());
+		}
+
+		jsonObj.put("endDate", endDateJSON);
+
+		Date publishDate = model.getPublishDate();
+
+		String publishDateJSON = StringPool.BLANK;
+
+		if (publishDate != null) {
+			publishDateJSON = String.valueOf(publishDate.getTime());
+		}
+
+		jsonObj.put("publishDate", publishDateJSON);
+
+		Date expirationDate = model.getExpirationDate();
+
+		String expirationDateJSON = StringPool.BLANK;
+
+		if (expirationDate != null) {
+			expirationDateJSON = String.valueOf(expirationDate.getTime());
+		}
+
+		jsonObj.put("expirationDate", expirationDateJSON);
 		jsonObj.put("mimeType", model.getMimeType());
 		jsonObj.put("title", model.getTitle());
 		jsonObj.put("description", model.getDescription());

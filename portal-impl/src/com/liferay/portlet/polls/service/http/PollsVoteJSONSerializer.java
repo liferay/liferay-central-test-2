@@ -25,9 +25,11 @@ package com.liferay.portlet.polls.service.http;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.util.StringPool;
 
 import com.liferay.portlet.polls.model.PollsVote;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -57,7 +59,16 @@ public class PollsVoteJSONSerializer {
 		jsonObj.put("userId", model.getUserId());
 		jsonObj.put("questionId", model.getQuestionId());
 		jsonObj.put("choiceId", model.getChoiceId());
-		jsonObj.put("voteDate", model.getVoteDate().getTime());
+
+		Date voteDate = model.getVoteDate();
+
+		String voteDateJSON = StringPool.BLANK;
+
+		if (voteDate != null) {
+			voteDateJSON = String.valueOf(voteDate.getTime());
+		}
+
+		jsonObj.put("voteDate", voteDateJSON);
 
 		return jsonObj;
 	}

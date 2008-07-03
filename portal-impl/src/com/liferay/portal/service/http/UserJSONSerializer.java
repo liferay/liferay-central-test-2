@@ -25,8 +25,10 @@ package com.liferay.portal.service.http;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -55,15 +57,41 @@ public class UserJSONSerializer {
 		jsonObj.put("uuid", model.getUuid());
 		jsonObj.put("userId", model.getUserId());
 		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("createDate", model.getCreateDate().getTime());
-		jsonObj.put("modifiedDate", model.getModifiedDate().getTime());
+
+		Date createDate = model.getCreateDate();
+
+		String createDateJSON = StringPool.BLANK;
+
+		if (createDate != null) {
+			createDateJSON = String.valueOf(createDate.getTime());
+		}
+
+		jsonObj.put("createDate", createDateJSON);
+
+		Date modifiedDate = model.getModifiedDate();
+
+		String modifiedDateJSON = StringPool.BLANK;
+
+		if (modifiedDate != null) {
+			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
+		}
+
+		jsonObj.put("modifiedDate", modifiedDateJSON);
 		jsonObj.put("defaultUser", model.getDefaultUser());
 		jsonObj.put("contactId", model.getContactId());
 		jsonObj.put("password", model.getPassword());
 		jsonObj.put("passwordEncrypted", model.getPasswordEncrypted());
 		jsonObj.put("passwordReset", model.getPasswordReset());
-		jsonObj.put("passwordModifiedDate",
-			model.getPasswordModifiedDate().getTime());
+
+		Date passwordModifiedDate = model.getPasswordModifiedDate();
+
+		String passwordModifiedDateJSON = StringPool.BLANK;
+
+		if (passwordModifiedDate != null) {
+			passwordModifiedDateJSON = String.valueOf(passwordModifiedDate.getTime());
+		}
+
+		jsonObj.put("passwordModifiedDate", passwordModifiedDateJSON);
 		jsonObj.put("graceLoginCount", model.getGraceLoginCount());
 		jsonObj.put("screenName", model.getScreenName());
 		jsonObj.put("emailAddress", model.getEmailAddress());
@@ -73,15 +101,50 @@ public class UserJSONSerializer {
 		jsonObj.put("timeZoneId", model.getTimeZoneId());
 		jsonObj.put("greeting", model.getGreeting());
 		jsonObj.put("comments", model.getComments());
-		jsonObj.put("loginDate", model.getLoginDate().getTime());
+
+		Date loginDate = model.getLoginDate();
+
+		String loginDateJSON = StringPool.BLANK;
+
+		if (loginDate != null) {
+			loginDateJSON = String.valueOf(loginDate.getTime());
+		}
+
+		jsonObj.put("loginDate", loginDateJSON);
 		jsonObj.put("loginIP", model.getLoginIP());
-		jsonObj.put("lastLoginDate", model.getLastLoginDate().getTime());
+
+		Date lastLoginDate = model.getLastLoginDate();
+
+		String lastLoginDateJSON = StringPool.BLANK;
+
+		if (lastLoginDate != null) {
+			lastLoginDateJSON = String.valueOf(lastLoginDate.getTime());
+		}
+
+		jsonObj.put("lastLoginDate", lastLoginDateJSON);
 		jsonObj.put("lastLoginIP", model.getLastLoginIP());
-		jsonObj.put("lastFailedLoginDate",
-			model.getLastFailedLoginDate().getTime());
+
+		Date lastFailedLoginDate = model.getLastFailedLoginDate();
+
+		String lastFailedLoginDateJSON = StringPool.BLANK;
+
+		if (lastFailedLoginDate != null) {
+			lastFailedLoginDateJSON = String.valueOf(lastFailedLoginDate.getTime());
+		}
+
+		jsonObj.put("lastFailedLoginDate", lastFailedLoginDateJSON);
 		jsonObj.put("failedLoginAttempts", model.getFailedLoginAttempts());
 		jsonObj.put("lockout", model.getLockout());
-		jsonObj.put("lockoutDate", model.getLockoutDate().getTime());
+
+		Date lockoutDate = model.getLockoutDate();
+
+		String lockoutDateJSON = StringPool.BLANK;
+
+		if (lockoutDate != null) {
+			lockoutDateJSON = String.valueOf(lockoutDate.getTime());
+		}
+
+		jsonObj.put("lockoutDate", lockoutDateJSON);
 		jsonObj.put("agreedToTermsOfUse", model.getAgreedToTermsOfUse());
 		jsonObj.put("active", model.getActive());
 

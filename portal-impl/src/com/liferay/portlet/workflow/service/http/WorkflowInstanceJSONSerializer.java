@@ -25,8 +25,10 @@ package com.liferay.portlet.workflow.service.http;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.workflow.model.WorkflowInstance;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,8 +44,27 @@ public class WorkflowInstanceJSONSerializer {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
 		jsonObj.put("instanceId", model.getInstanceId());
-		jsonObj.put("startDate", model.getStartDate());
-		jsonObj.put("endDate", model.getEndDate());
+
+		Date startDate = model.getStartDate();
+
+		String startDateJSON = StringPool.BLANK;
+
+		if (startDate != null) {
+			startDateJSON = String.valueOf(startDate.getTime());
+		}
+
+		jsonObj.put("startDate", startDateJSON);
+
+		Date endDate = model.getEndDate();
+
+		String endDateJSON = StringPool.BLANK;
+
+		if (endDate != null) {
+			endDateJSON = String.valueOf(endDate.getTime());
+		}
+
+		jsonObj.put("endDate", endDateJSON);
+
 		jsonObj.put("ended", model.isEnded());
 
 		return jsonObj;

@@ -25,9 +25,11 @@ package com.liferay.portlet.messageboards.service.http;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.util.StringPool;
 
 import com.liferay.portlet.messageboards.model.MBMessage;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -58,8 +60,26 @@ public class MBMessageJSONSerializer {
 		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());
 		jsonObj.put("userName", model.getUserName());
-		jsonObj.put("createDate", model.getCreateDate().getTime());
-		jsonObj.put("modifiedDate", model.getModifiedDate().getTime());
+
+		Date createDate = model.getCreateDate();
+
+		String createDateJSON = StringPool.BLANK;
+
+		if (createDate != null) {
+			createDateJSON = String.valueOf(createDate.getTime());
+		}
+
+		jsonObj.put("createDate", createDateJSON);
+
+		Date modifiedDate = model.getModifiedDate();
+
+		String modifiedDateJSON = StringPool.BLANK;
+
+		if (modifiedDate != null) {
+			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
+		}
+
+		jsonObj.put("modifiedDate", modifiedDateJSON);
 		jsonObj.put("categoryId", model.getCategoryId());
 		jsonObj.put("threadId", model.getThreadId());
 		jsonObj.put("parentMessageId", model.getParentMessageId());

@@ -25,9 +25,11 @@ package com.liferay.portlet.announcements.service.http;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.util.StringPool;
 
 import com.liferay.portlet.announcements.model.AnnouncementsFlag;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -55,7 +57,16 @@ public class AnnouncementsFlagJSONSerializer {
 
 		jsonObj.put("flagId", model.getFlagId());
 		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("createDate", model.getCreateDate().getTime());
+
+		Date createDate = model.getCreateDate();
+
+		String createDateJSON = StringPool.BLANK;
+
+		if (createDate != null) {
+			createDateJSON = String.valueOf(createDate.getTime());
+		}
+
+		jsonObj.put("createDate", createDateJSON);
 		jsonObj.put("entryId", model.getEntryId());
 		jsonObj.put("value", model.getValue());
 

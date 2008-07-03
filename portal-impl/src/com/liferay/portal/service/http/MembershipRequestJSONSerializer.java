@@ -25,8 +25,10 @@ package com.liferay.portal.service.http;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.MembershipRequest;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -55,11 +57,29 @@ public class MembershipRequestJSONSerializer {
 		jsonObj.put("membershipRequestId", model.getMembershipRequestId());
 		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("createDate", model.getCreateDate().getTime());
+
+		Date createDate = model.getCreateDate();
+
+		String createDateJSON = StringPool.BLANK;
+
+		if (createDate != null) {
+			createDateJSON = String.valueOf(createDate.getTime());
+		}
+
+		jsonObj.put("createDate", createDateJSON);
 		jsonObj.put("groupId", model.getGroupId());
 		jsonObj.put("comments", model.getComments());
 		jsonObj.put("replyComments", model.getReplyComments());
-		jsonObj.put("replyDate", model.getReplyDate().getTime());
+
+		Date replyDate = model.getReplyDate();
+
+		String replyDateJSON = StringPool.BLANK;
+
+		if (replyDate != null) {
+			replyDateJSON = String.valueOf(replyDate.getTime());
+		}
+
+		jsonObj.put("replyDate", replyDateJSON);
 		jsonObj.put("replierUserId", model.getReplierUserId());
 		jsonObj.put("statusId", model.getStatusId());
 

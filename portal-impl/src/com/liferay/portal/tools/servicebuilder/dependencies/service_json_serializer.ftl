@@ -5,6 +5,7 @@ import ${packagePath}.model.${entity.name};
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.JSONUtil;
 
 import java.util.Date;
@@ -35,13 +36,19 @@ public class ${entity.name}JSONSerializer {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
 		<#list entity.regularColList as column>
-			jsonObj.put("${column.name}", model.get${column.methodName}()
-
 			<#if column.type == "Date">
-				.getTime()
-			</#if>
+				Date ${column.name} = model.get${column.methodName}();
 
-			);
+				String ${column.name}JSON = StringPool.BLANK;
+
+				if (${column.name} != null) {
+					${column.name}JSON = String.valueOf(${column.name}.getTime());
+				}
+
+				jsonObj.put("${column.name}", ${column.name}JSON);
+			<#else>
+				jsonObj.put("${column.name}", model.get${column.methodName}());
+			</#if>
 		</#list>
 
 		return jsonObj;
