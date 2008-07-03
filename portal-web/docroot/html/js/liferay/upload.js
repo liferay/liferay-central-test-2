@@ -94,6 +94,7 @@ Liferay.Upload = new Class({
 
 		while (stats.files_queued > 0) {
 			instance._uploader.cancelUpload();
+
 			stats = instance._getStats();
 		}
 
@@ -113,6 +114,7 @@ Liferay.Upload = new Class({
 
 		if (!listingUl.length) {
 			instance._listInfo.append('<h4>' + instance._fileListText + '</h4>');
+
 			listingFiles.append('<ul class="lfr-component"></ul>');
 
 			instance._uploadTarget.append(instance._clearUploadsButton);
@@ -188,17 +190,25 @@ Liferay.Upload = new Class({
 
 		li.removeClass('file-uploading').addClass('upload-complete');
 
-		var uploader = instance._uploader;		
+		var uploader = instance._uploader;
 		var stats = instance._getStats();
 
 		if (stats.files_queued > 0 && !instance._queueCancelled) {
-			// Automatically start the next upload (if the queue wasn't cancelled)
+
+			// Automatically start the next upload if the queue wasn't cancelled
+
 			uploader.startUpload();
-		} else if (stats.files_queued === 0 && !instance._queueCancelled) {
+		}
+		else if (stats.files_queued === 0 && !instance._queueCancelled) {
+
 			// Call Queue Complete if there are no more files queued and the queue wasn't cancelled
+
 			instance.uploadsComplete(file);
-		} else {
+		}
+		else {
+
 			// Don't do anything. Remove the queue cancelled flag (if the queue was cancelled it will be set again)
+
 			instance._queueCancelled = false;
 		}
 
@@ -263,6 +273,7 @@ Liferay.Upload = new Class({
 		}
 
 		var uploader = instance._uploader;
+
 		uploader.setStats(
 			{
 				successful_uploads: 0
@@ -290,7 +301,7 @@ Liferay.Upload = new Class({
 	},
 
 	uploadSuccess: function(file, data) {
-		var instance = this;	
+		var instance = this;
 
 		instance.fileUploadComplete(file, data);
 	},
