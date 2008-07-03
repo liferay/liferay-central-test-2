@@ -41,6 +41,8 @@ Liferay.Upload = new Class({
 		instance._classicUploaderParam = 'uploader=classic';
 		instance._newUploaderParam = 'uploader=new';
 
+		instance._queueCancelled = false;
+
 		instance._flashVersion = deconcept.SWFObjectUtil.getPlayerVersion().major;
 
 		// Check for an override via the query string
@@ -78,7 +80,6 @@ Liferay.Upload = new Class({
 
 			instance._setupIframe();
 
-
 			return;
 		}
 
@@ -89,12 +90,22 @@ Liferay.Upload = new Class({
 	cancelUploads: function() {
 		var instance = this;
 
-		instance._uploader.cancelQueue();
+		var stats = instance._getStats();
+
+		while (stats.files_queued > 0) {
+			instance._uploader.cancelUpload();
+			stats = instance._getStats();
+		}
+
+		if (stats.in_progress === 0) {
+			instance._queueCancelled = false;
+		}
+
 		instance._uploadButton.hide();
 		instance._cancelButton.hide();
 	},
 
-	fileAdded: function(file, listLength) {
+	fileAdded: function(file) {
 		var instance = this;
 
 		var listingFiles = instance._fileList;
@@ -102,7 +113,7 @@ Liferay.Upload = new Class({
 
 		if (!listingUl.length) {
 			instance._listInfo.append('<h4>' + instance._fileListText + '</h4>');
-			listingFiles.append('<ul></ul>');
+			listingFiles.append('<ul class="lfr-component"></ul>');
 
 			instance._uploadTarget.append(instance._clearUploadsButton);
 			instance._clearUploadsButton.hide();
@@ -134,7 +145,7 @@ Liferay.Upload = new Class({
 
 		li.find('.cancel-button').click(
 			function() {
-				instance._uploader.cancelFile(file.id);
+				instance._uploader.cancelUpload(file.id);
 			}
 		);
 
@@ -149,17 +160,22 @@ Liferay.Upload = new Class({
 			listingFiles.append(li);
 		}
 
+		var stats = instance._getStats();
+		var listLength = stats.files_queued;
+
 		instance._updateList(listLength);
 	},
 
-	fileCancelled: function(file, listLength) {
+	fileCancelled: function(file, error_code, msg) {
 		var instance = this;
+
+		var stats = instance._getStats();
 
 		var fileId = instance._namespace(file.id);
 		var fileName = file.name;
 		var li = jQuery('#' + fileId);
 
-		instance._updateList(listLength);
+		instance._updateList(stats.files_queued);
 
 		li.fadeOut('slow');
 	},
@@ -172,6 +188,20 @@ Liferay.Upload = new Class({
 
 		li.removeClass('file-uploading').addClass('upload-complete');
 
+		var uploader = instance._uploader;		
+		var stats = instance._getStats();
+
+		if (stats.files_queued > 0 && !instance._queueCancelled) {
+			// Automatically start the next upload (if the queue wasn't cancelled)
+			uploader.startUpload();
+		} else if (stats.files_queued === 0 && !instance._queueCancelled) {
+			// Call Queue Complete if there are no more files queued and the queue wasn't cancelled
+			instance.uploadsComplete(file);
+		} else {
+			// Don't do anything. Remove the queue cancelled flag (if the queue was cancelled it will be set again)
+			instance._queueCancelled = false;
+		}
+
 		if (instance._onFileComplete) {
 			instance._onFileComplete(file);
 		}
@@ -183,7 +213,7 @@ Liferay.Upload = new Class({
 		instance._setupControls();
 	},
 
-	uploadError: function(errno) {
+	uploadError: function(file, error_code, msg) {
 		var instance = this;
 
 		/*
@@ -195,8 +225,12 @@ Liferay.Upload = new Class({
 			-50 Filesize too big
 		*/
 
+		if (error_code == SWFUpload.UPLOAD_ERROR.FILE_CANCELLED) {
+			instance.fileCancelled(file, error_code, msg);
+		}
+
 		if (instance._onUploadError) {
-			instance._onUploadError(errno);
+			instance._onUploadError(arguments);
 		}
 	},
 
@@ -227,10 +261,21 @@ Liferay.Upload = new Class({
 		if (instance._onUploadsComplete) {
 			instance._onUploadsComplete();
 		}
+
+		var uploader = instance._uploader;
+		uploader.setStats(
+			{
+				successful_uploads: 0
+			}
+		);
 	},
 
-	uploadStart: function(file, position, listLength) {
+	uploadStart: function(file) {
 		var instance = this;
+
+		var stats = instance._getStats();
+		var listLength = (stats.successful_uploads + stats.upload_errors + stats.files_queued);
+		var position = (stats.successful_uploads + stats.upload_errors + 1);
 
 		var currentListText = instance._uploadStatusText.replace('[$POS$]', position).replace('[$TOTAL$]', listLength);
 		var fileId = instance._namespace(file.id);
@@ -242,6 +287,12 @@ Liferay.Upload = new Class({
 		li.addClass('file-uploading');
 
 		return true;
+	},
+
+	uploadSuccess: function(file, data) {
+		var instance = this;	
+
+		instance.fileUploadComplete(file, data);
 	},
 
 	_clearUploads: function() {
@@ -256,6 +307,12 @@ Liferay.Upload = new Class({
 		);
 
 		instance._clearUploadsButton.hide();
+	},
+
+	_getStats: function() {
+		var instance = this;
+
+		return instance._uploader.getStats();
 	},
 
 	_namespace: function(txt) {
@@ -279,6 +336,7 @@ Liferay.Upload = new Class({
 		instance._uploadStart = instance._namespace('uploadStart');
 		instance._uploadProgress = instance._namespace('uploadProgress');
 		instance._uploadError = instance._namespace('uploadError');
+		instance._uploadSuccess = instance._namespace('uploadSuccess');
 		instance._fileUploadComplete = instance._namespace('fileUploadComplete');
 		instance._uploadsComplete = instance._namespace('uploadsComplete');
 		instance._uploadsCancelled = instance._namespace('uploadsCancelled');
@@ -313,6 +371,10 @@ Liferay.Upload = new Class({
 
 		window[instance._fileUploadComplete] = function() {
 			instance.fileUploadComplete.apply(instance, arguments);
+		};
+
+		window[instance._uploadSuccess] = function() {
+			instance.uploadSuccess.apply(instance, arguments);
 		};
 
 		window[instance._uploadsComplete] = function() {
@@ -352,13 +414,13 @@ Liferay.Upload = new Class({
 
 		instance._browseButton.click(
 			function() {
-				instance._uploader.browse();
+				instance._uploader.selectFiles();
 			}
 		);
 
 		instance._uploadButton.click(
 			function() {
-				instance._uploader.upload();
+				instance._uploader.startUpload();
 			}
 		);
 
@@ -438,27 +500,28 @@ Liferay.Upload = new Class({
 		}
 
 		instance._uploader = new SWFUpload({
-			upload_script: instance._uploadFile,
+			upload_url: instance._uploadFile,
 			target: instance._uploadTargetId,
-			flash_path: themeDisplay.getPathContext() + '/html/js/misc/swfupload/SWFUpload.swf',
-			allowed_filesize: instance._maxFileSize,
-			allowed_filetypes: instance._allowedFileTypes,
-			allowed_filetypes_description: instance._fileTypesDescriptionText,
+			flash_url: themeDisplay.getPathContext() + '/html/js/misc/swfupload/swfupload_f9.swf',
+			file_size_limit: instance._maxFileSize,
+			file_types: instance._allowedFileTypes,
+			file_types_description: instance._fileTypesDescriptionText,
 			browse_link_innerhtml: instance._browseText,
 			upload_link_innerhtml: instance._uploadFilesText,
 			browse_link_class: 'browse-button liferay-button',
 			upload_link_class: 'upload-button liferay-button',
-			flash_loaded_callback: instance._flashLoaded,
-			upload_file_queued_callback: instance._fileAdded,
-			upload_file_start_callback: instance._uploadStart,
-			upload_progress_callback: instance._uploadProgress,
-			upload_file_complete_callback: instance._fileUploadComplete,
-			upload_file_cancel_callback: instance._fileCancelled,
-			upload_queue_complete_callback: instance._uploadsComplete,
-			upload_file_error_callback: instance._uploadError,
-			upload_cancel_callback: instance._cancelUploads,
+			swfupload_loaded_handler: window[instance._flashLoaded],
+			file_queued_handler: window[instance._fileAdded],
+			upload_start_handler: window[instance._uploadStart],
+			upload_progress_handler: window[instance._uploadProgress],
+			upload_complete_handler: window[instance._fileUploadComplete],
+			upload_success_handler: window[instance._uploadSuccess],
+			upload_file_cancel_callback: window[instance._fileCancelled],
+			upload_queue_complete_callback: window[instance._uploadsComplete],
+			upload_error_handler: window[instance._uploadError],
+			upload_cancel_callback: window[instance._cancelUploads],
 			auto_upload : false,
-			upload_field_name: 'file',
+			file_post_name: 'file',
 			create_ui: true,
 			debug: false
 		});
