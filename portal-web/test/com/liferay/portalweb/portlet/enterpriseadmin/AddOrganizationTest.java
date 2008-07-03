@@ -36,8 +36,8 @@ public class AddOrganizationTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add Organization']");
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_79_name", "Liferay, Inc.");
-		selenium.type("_79_name", "Liferay, Inc.");
+		selenium.typeKeys("_79_name", "Selenium");
+		selenium.type("_79_name", "Selenium");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -95,7 +95,7 @@ public class AddOrganizationTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add']");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_79_address", "Liferay@Liferay.com");
+		selenium.type("_79_address", "Selenium@selenium.com");
 		selenium.select("_79_typeId", "label=E-mail");
 		selenium.click("_79_primaryCheckbox");
 		selenium.click("//input[@value='Save']");
