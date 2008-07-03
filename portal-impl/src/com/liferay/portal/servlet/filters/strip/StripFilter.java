@@ -78,15 +78,16 @@ public class StripFilter extends BasePortalFilter {
 		}
 		else {
 
-			// The exclusive state is used to stream binary content.
+			// The exclusive / resource state is used to stream binary content.
 			// Compressing binary content through a servlet filter is bad on
 			// performance because the user will not start downloading the
 			// content until the entire content is compressed.
 
 			String lifecycle = ParamUtil.getString(request, "p_p_lifecycle");
 
-			if (lifecycle.equals("1") &&
-				LiferayWindowState.isExclusive(request)) {
+			if ((lifecycle.equals("1") &&
+				LiferayWindowState.isExclusive(request)) ||
+				lifecycle.equals("2")) {
 
 				return false;
 			}

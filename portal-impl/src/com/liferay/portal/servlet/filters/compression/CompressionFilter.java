@@ -24,6 +24,7 @@ package com.liferay.portal.servlet.filters.compression;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -88,9 +89,12 @@ public class CompressionFilter extends BasePortalFilter {
 			// performance because the user will not start downloading the
 			// content until the entire content is compressed.
 
-			String windowState = ParamUtil.getString(request, "p_p_state");
+			String lifecycle = ParamUtil.getString(request, "p_p_lifecycle");
 
-			if (windowState.equals("exclusive")) {
+			if ((lifecycle.equals("1") &&
+				LiferayWindowState.isExclusive(request)) ||
+				lifecycle.equals("2")) {
+
 				return false;
 			}
 			else {
