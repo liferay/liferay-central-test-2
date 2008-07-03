@@ -230,9 +230,7 @@ if (!localPublishing) {
 	tabs2Names += ",remote-options";
 }
 
-if (selGroup.isStagingGroup() || selGroup.hasStagingGroup()) {
-	tabs2Names += ",scheduler";
-}
+tabs2Names += ",scheduler";
 
 String actionKey = "copy";
 
@@ -286,11 +284,9 @@ if (selGroup.isStagingGroup() || popupId.equals("publish-to-remote")) {
 		</liferay-ui:section>
 	</c:if>
 
-	<c:if test="<%= selGroup.isStagingGroup() || selGroup.hasStagingGroup() %>">
-		<liferay-ui:section>
-			<%@ include file="/html/portlet/communities/export_pages_scheduler.jspf" %>
-		</liferay-ui:section>
-	</c:if>
+	<liferay-ui:section>
+		<%@ include file="/html/portlet/communities/export_pages_scheduler.jspf" %>
+	</liferay-ui:section>
 </liferay-ui:tabs>
 
 </form>
