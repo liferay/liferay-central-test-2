@@ -134,13 +134,24 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			parentMessageId, subject, body, themeDisplay);
 
 		if (parentMessageId == MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID) {
-			long discussionId = counterLocalService.increment();
+			MBDiscussion discussion = null;
 
-			MBDiscussion discussion = mbDiscussionPersistence.create(
-				discussionId);
+			try {
+				long classNameId = PortalUtil.getClassNameId(className);
 
-			discussion.setClassNameId(PortalUtil.getClassNameId(className));
-			discussion.setClassPK(classPK);
+				discussion = mbDiscussionPersistence.findByC_C(
+					classNameId, classPK);
+			}
+			catch (NoSuchDiscussionException nsde) {
+				long discussionId = counterLocalService.increment();
+
+				discussion = mbDiscussionPersistence.create(
+					discussionId);
+
+				discussion.setClassNameId(PortalUtil.getClassNameId(className));
+				discussion.setClassPK(classPK);
+			}
+
 			discussion.setThreadId(message.getThreadId());
 
 			mbDiscussionPersistence.update(discussion, false);
