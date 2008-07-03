@@ -44,44 +44,37 @@ import javax.portlet.filter.FilterChain;
  *
  */
 public class PortletFilterUtil {
-	
-	public static void doFilter(PortletRequest portletRequest, 
-		PortletResponse portletResponse, String lifecycle, 
-		FilterChain filterChain) throws IOException, PortletException {
-		
+
+	public static void doFilter(
+			PortletRequest portletRequest, PortletResponse portletResponse,
+			String lifecycle, FilterChain filterChain)
+		throws IOException, PortletException {
+
 		if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
-			ActionRequest actionRequest =
-				(ActionRequest)portletRequest;
-			ActionResponse actionResponse =
-				(ActionResponse)portletResponse;
+			ActionRequest actionRequest = (ActionRequest)portletRequest;
+			ActionResponse actionResponse = (ActionResponse)portletResponse;
 
 			filterChain.doFilter(actionRequest, actionResponse);
 		}
 		else if (lifecycle.equals(PortletRequest.EVENT_PHASE)) {
-			EventRequest eventRequest =
-				(EventRequest)portletRequest;
-			EventResponse eventResponse =
-				(EventResponse)portletResponse;
+			EventRequest eventRequest = (EventRequest)portletRequest;
+			EventResponse eventResponse = (EventResponse)portletResponse;
 
 			filterChain.doFilter(eventRequest, eventResponse);
 		}
 		else if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
-			RenderRequest renderRequest =
-				(RenderRequest)portletRequest;
-			RenderResponse renderResponse =
-				(RenderResponse)portletResponse;
+			RenderRequest renderRequest = (RenderRequest)portletRequest;
+			RenderResponse renderResponse = (RenderResponse)portletResponse;
 
 			filterChain.doFilter(renderRequest, renderResponse);
 		}
 		else if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
-			ResourceRequest resourceRequest =
-				(ResourceRequest)portletRequest;
+			ResourceRequest resourceRequest = (ResourceRequest)portletRequest;
 			ResourceResponse resourceResponse =
 				(ResourceResponse)portletResponse;
 
 			filterChain.doFilter(resourceRequest, resourceResponse);
 		}
-		
 	}
-	
+
 }

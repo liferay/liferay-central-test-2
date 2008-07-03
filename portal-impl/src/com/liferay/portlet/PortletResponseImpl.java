@@ -71,8 +71,7 @@ import org.w3c.dom.Element;
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class PortletResponseImpl implements PortletResponse, 
-	LiferayPortletResponse {
+public abstract class PortletResponseImpl implements LiferayPortletResponse {
 
 	public static PortletResponseImpl getPortletResponseImpl(
 		PortletResponse portletResponse) {

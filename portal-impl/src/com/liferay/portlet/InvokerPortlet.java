@@ -40,6 +40,7 @@ import com.liferay.portal.util.WebKeys;
 import com.sun.portal.portletcontainer.appengine.filter.FilterChainImpl;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -485,12 +486,11 @@ public class InvokerPortlet
 		}
 	}
 
-	protected void invoke(LiferayPortletRequest portletRequest, 
-			LiferayPortletResponse portletResponse, 
-			List<? extends PortletFilter> filters, String lifecycle)
+	protected void invoke(
+			LiferayPortletRequest portletRequest,
+			LiferayPortletResponse portletResponse, String lifecycle,
+			List<? extends PortletFilter> filters)
 		throws IOException, PortletException {
-
-		Map<String, String[]> properties = null;
 
 		FilterChain filterChain = new FilterChainImpl(_portlet, filters);
 
@@ -504,13 +504,13 @@ public class InvokerPortlet
 					path);
 
 			HttpServletRequest request = portletRequest.getHttpServletRequest();
-			HttpServletResponse response = 
+			HttpServletResponse response =
 				portletResponse.getHttpServletResponse();
 
 			request.setAttribute(JavaConstants.JAVAX_PORTLET_PORTLET, _portlet);
+			request.setAttribute(PortletRequest.LIFECYCLE_PHASE, lifecycle);
 			request.setAttribute(
 				PortletServlet.PORTLET_SERVLET_FILTER_CHAIN, filterChain);
-			request.setAttribute(PortletRequest.LIFECYCLE_PHASE, lifecycle);
 
 			try {
 
@@ -535,10 +535,11 @@ public class InvokerPortlet
 			}
 		}
 		else {
-			PortletFilterUtil.doFilter(portletRequest, portletResponse, lifecycle, filterChain);
+			PortletFilterUtil.doFilter(
+				portletRequest, portletResponse, lifecycle, filterChain);
 		}
 
-		properties = portletResponse.getProperties();
+		Map<String, String[]> properties = portletResponse.getProperties();
 
 		if ((properties != null) && (properties.size() > 0)) {
 			if (_expCache != null) {
@@ -558,42 +559,42 @@ public class InvokerPortlet
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException, PortletException {
 
-		LiferayPortletRequest portletRequest = 
+		LiferayPortletRequest portletRequest =
 			(LiferayPortletRequest)actionRequest;
-		
-		LiferayPortletResponse portletResponse = 
+		LiferayPortletResponse portletResponse =
 			(LiferayPortletResponse)actionResponse;
-		
-		invoke(portletRequest, portletResponse, _actionFilters, 
-			PortletRequest.ACTION_PHASE);
+
+		invoke(
+			portletRequest, portletResponse, PortletRequest.ACTION_PHASE,
+			_actionFilters);
 	}
 
 	protected void invokeEvent(
 			EventRequest eventRequest, EventResponse eventResponse)
 		throws IOException, PortletException {
 
-		LiferayPortletRequest portletRequest = 
+		LiferayPortletRequest portletRequest =
 			(LiferayPortletRequest)eventRequest;
-		
-		LiferayPortletResponse portletResponse = 
+		LiferayPortletResponse portletResponse =
 			(LiferayPortletResponse)eventResponse;
 
-		invoke(portletRequest, portletResponse, _eventFilters, 
-			PortletRequest.EVENT_PHASE);
+		invoke(
+			portletRequest, portletResponse, PortletRequest.EVENT_PHASE,
+			_eventFilters);
 	}
 
 	protected String invokeRender(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		LiferayPortletRequest portletRequest = 
+		LiferayPortletRequest portletRequest =
 			(LiferayPortletRequest)renderRequest;
-		
-		LiferayPortletResponse portletResponse = 
+		LiferayPortletResponse portletResponse =
 			(LiferayPortletResponse)renderResponse;
 
-		invoke(portletRequest, portletResponse, _renderFilters, 
-			PortletRequest.RENDER_PHASE);
+		invoke(
+			portletRequest, portletResponse, PortletRequest.RENDER_PHASE,
+			_renderFilters);
 
 		RenderResponseImpl renderResponseImpl =
 			(RenderResponseImpl)renderResponse;
@@ -605,15 +606,14 @@ public class InvokerPortlet
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws IOException, PortletException {
 
-		LiferayPortletRequest portletRequest = 
+		LiferayPortletRequest portletRequest =
 			(LiferayPortletRequest)resourceRequest;
-		
-		LiferayPortletResponse portletResponse = 
+		LiferayPortletResponse portletResponse =
 			(LiferayPortletResponse)resourceResponse;
 
 		invoke(
-			portletRequest, portletResponse, _resourceFilters, 
-			PortletRequest.RESOURCE_PHASE);
+			portletRequest, portletResponse, PortletRequest.RESOURCE_PHASE,
+			_resourceFilters);
 	}
 
 	private static Log _log = LogFactory.getLog(InvokerPortlet.class);

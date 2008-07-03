@@ -34,6 +34,7 @@ import javax.portlet.PortletException;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.filter.FilterChain;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -72,12 +73,12 @@ public class PortletServlet extends HttpServlet {
 		PortletResponse portletResponse = (PortletResponse)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_RESPONSE);
 
+		String lifecycle = (String)request.getAttribute(
+			PortletRequest.LIFECYCLE_PHASE);
+
 		FilterChain filterChain = (FilterChain)request.getAttribute(
 			PORTLET_SERVLET_FILTER_CHAIN);
 
-		String lifecycle = 
-			(String)request.getAttribute(PortletRequest.LIFECYCLE_PHASE);
-		
 		LiferayPortletSession portletSession =
 			(LiferayPortletSession)portletRequest.getPortletSession();
 
@@ -92,8 +93,8 @@ public class PortletServlet extends HttpServlet {
 		portletSession.setHttpSession(session);
 
 		try {
-			PortletFilterUtil.doFilter(portletRequest, portletResponse, 
-				lifecycle, filterChain);
+			PortletFilterUtil.doFilter(
+				portletRequest, portletResponse, lifecycle, filterChain);
 		}
 		catch (PortletException pe) {
 			_log.error(pe, pe);

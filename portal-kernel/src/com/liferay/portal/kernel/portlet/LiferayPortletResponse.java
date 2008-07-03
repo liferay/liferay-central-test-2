@@ -25,10 +25,11 @@ package com.liferay.portal.kernel.portlet;
 import java.util.Map;
 
 import javax.portlet.PortletResponse;
+
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="LiferayRenderResponse.java.html"><b><i>View Source</i></b></a>
+ * <a href="LiferayPortletResponse.java.html"><b><i>View Source</i></b></a>
  *
  * @author Raymond Augé
  *
@@ -40,9 +41,9 @@ public interface LiferayPortletResponse extends PortletResponse {
 	public void addHeader(String name, String value);
 
 	public void addIntHeader(String name, int value);
-	
+
 	public HttpServletResponse getHttpServletResponse();
-	
+
 	public Map<String, String[]> getProperties();
 
 	public void setDateHeader(String name, long date);
@@ -50,4 +51,5 @@ public interface LiferayPortletResponse extends PortletResponse {
 	public void setHeader(String name, String value);
 
 	public void setIntHeader(String name, int value);
+
 }
