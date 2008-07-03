@@ -73,10 +73,10 @@ String[] workflowRoleNames = (String[])request.getAttribute("edit_pages.jsp-work
 					<select name="<portlet:namespace />workflowStages" onChange="<portlet:namespace />changeWorkflowStages();">
 
 						<%
-						for (int i = 2; i <= 5; i++) {
+						for (int i = 3; i <= 6; i++) {
 						%>
 
-							<option <%= (i == workflowStages) ? "selected" : "" %>><%= i %></option>
+							<option <%= (i == workflowStages+1) ? "selected" : "" %> value="<%= (i-1) %>"><%= i %></option>
 
 						<%
 						}
@@ -90,6 +90,16 @@ String[] workflowRoleNames = (String[])request.getAttribute("edit_pages.jsp-work
 			<br />
 
 			<table class="lfr-table">
+			<tr>
+				<td>
+					<%= LanguageUtil.format(pageContext, "stage-x-role", String.valueOf(1)) %>
+				</td>
+				<td>
+					<%= LanguageUtil.get(pageContext, "content-creators") %>
+
+					<liferay-ui:icon-help message="stage-1-role-help" />
+				</td>
+			</tr>
 
 			<%
 			int roleType = liveGroup.isCommunity() ? RoleImpl.TYPE_COMMUNITY : RoleImpl.TYPE_ORGANIZATION;
@@ -101,7 +111,7 @@ String[] workflowRoleNames = (String[])request.getAttribute("edit_pages.jsp-work
 
 				<tr>
 					<td>
-						<%= LanguageUtil.format(pageContext, "stage-x-role", String.valueOf(i)) %>
+						<%= LanguageUtil.format(pageContext, "stage-x-role", String.valueOf(i+1)) %>
 					</td>
 					<td>
 						<select name="<portlet:namespace />workflowRoleName_<%= i %>">
@@ -117,6 +127,18 @@ String[] workflowRoleNames = (String[])request.getAttribute("edit_pages.jsp-work
 							%>
 
 						</select>
+
+						<c:choose>
+							<c:when test="<%= i == 1 %>">
+								<liferay-ui:icon-help message="stage-2-role-help" />
+							</c:when>
+							<c:when test="<%= i == (workflowStages) %>">
+								<liferay-ui:icon-help message="stage-last-role-help" />
+							</c:when>
+							<c:otherwise>
+								<liferay-ui:icon-help message="stage-review-role-help" />
+							</c:otherwise>
+						</c:choose>
 					</td>
 				</tr>
 
@@ -125,6 +147,10 @@ String[] workflowRoleNames = (String[])request.getAttribute("edit_pages.jsp-work
 			%>
 
 			</table>
+
+			<br /><br />
+
+			<liferay-ui:message key="stage-permissions-reference-help" />
 		</fieldset>
 
 		<br />
