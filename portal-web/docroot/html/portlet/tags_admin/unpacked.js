@@ -331,7 +331,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 									html += '<span class="ui-tag">';
 									html += ' <a class="tag-name" href="javascript: ' + hrefJS + '" tagId="' + entry.entryId + '">' + entry.name + '</a>';
-									html += '<a class="ui-tag-delete" href="javascript: ' + instanceVar + '.deleteEntry(' + instanceVar + ', ' + entry.entryId + ')"><span>x</span></a>';
+									html += ' <a class="ui-tag-delete" href="javascript: ' + instanceVar + '.deleteEntry(' + instanceVar + ', ' + entry.entryId + ')"><span>x</span></a>';
 									html += '</span>';
 								}
 							);
