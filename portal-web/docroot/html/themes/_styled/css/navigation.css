@@ -47,7 +47,7 @@
 
 #navigation li a {
 	display: block;
-	padding: 5px 10px;
+	padding: 5px 20px;
 	text-decoration: none;
 }
 
@@ -398,9 +398,9 @@
 	background: url(../images/common/remove.png) no-repeat 42%;
 	cursor: pointer;
 	display: block;
-	height: 7px;
+	height: 8px;
 	position: absolute;
-	right: 5px;
+	right: 2px;
 	text-indent: -9999em;
 	top: 2px;
 	width: 8px;
