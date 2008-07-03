@@ -25,6 +25,7 @@
 <%@ include file="/html/common/init.jsp" %>
 
 <%@ page import="com.liferay.portal.CookieNotSupportedException" %>
+<%@ page import="com.liferay.portal.DuplicateUserEmailAddressException" %>
 <%@ page import="com.liferay.portal.LayoutFriendlyURLException" %>
 <%@ page import="com.liferay.portal.LayoutHiddenException" %>
 <%@ page import="com.liferay.portal.LayoutNameException" %>
