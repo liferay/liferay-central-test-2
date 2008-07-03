@@ -30,6 +30,8 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ObjectValuePair;
@@ -70,7 +72,6 @@ import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
 import com.liferay.portlet.messageboards.model.impl.MBTreeWalkerImpl;
 import com.liferay.portlet.messageboards.service.base.MBMessageLocalServiceBaseImpl;
-import com.liferay.portlet.messageboards.service.jms.MBMessageProducer;
 import com.liferay.portlet.messageboards.social.MBActivityKeys;
 import com.liferay.portlet.messageboards.util.Indexer;
 import com.liferay.portlet.messageboards.util.MBUtil;
@@ -1557,15 +1558,23 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				message.getParentMessageId());
 		}
 
-		MBMessageProducer.produce(
-			new String[] {
-				String.valueOf(message.getCompanyId()),
-				String.valueOf(message.getUserId()),
-				StringUtil.merge(categoryIds),
-				String.valueOf(message.getThreadId()),
-				fromName, fromAddress, subject, body, replyToAddress, mailId,
-				inReplyTo, String.valueOf(htmlFormat)
-			});
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+
+		jsonObj.put("companyId", message.getCompanyId());
+		jsonObj.put("userId", message.getUserId());
+		jsonObj.put("categoryIds", StringUtil.merge(categoryIds));
+		jsonObj.put("threadId", message.getThreadId());
+		jsonObj.put("fromName", fromName);
+		jsonObj.put("fromAddress", fromAddress);
+		jsonObj.put("subject", subject);
+		jsonObj.put("body", body);
+		jsonObj.put("replyToAddress", replyToAddress);
+		jsonObj.put("mailId", mailId);
+		jsonObj.put("inReplyTo", inReplyTo);
+		jsonObj.put("htmlFormat", htmlFormat);
+
+		MessageBusUtil.sendMessage(
+			DestinationNames.MESSAGE_BOARDS_MESSAGE, jsonObj.toString());
 	}
 
 	protected void sendBlogsCommentsEmail(

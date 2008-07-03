@@ -20,11 +20,14 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.messageboards.service.jms;
+package com.liferay.portlet.messageboards.messaging;
 
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Subscription;
@@ -40,82 +43,50 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.jms.Message;
-import javax.jms.MessageListener;
-import javax.jms.ObjectMessage;
-import javax.jms.Queue;
-import javax.jms.QueueConnection;
-import javax.jms.QueueConnectionFactory;
-import javax.jms.QueueReceiver;
-import javax.jms.QueueSession;
-import javax.jms.Session;
-
 import javax.mail.internet.InternetAddress;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="MBMessageConsumer.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBMessageListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class MBMessageConsumer implements MessageListener {
+public class MBMessageListener implements MessageListener {
 
-	public void consume() {
+	public void receive(String message) {
 		try {
-			QueueConnectionFactory qcf = MBMessageQCFUtil.getQCF();
-			QueueConnection con = qcf.createQueueConnection();
-
-			QueueSession session = con.createQueueSession(
-				false, Session.AUTO_ACKNOWLEDGE);
-			Queue queue = MBMessageQueueUtil.getQueue();
-
-			QueueReceiver subscriber = session.createReceiver(queue);
-
-			subscriber.setMessageListener(this);
-
-			con.start();
+			doReceive(message);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error("Unable to process message " + message, e);
 		}
 	}
 
-	public void onMessage(Message msg) {
-		try {
-			ObjectMessage objMsg = (ObjectMessage)msg;
+	public void doReceive(String message) throws Exception {
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject(message);
 
-			String[] array = (String[])objMsg.getObject();
-
-			_onMessage(array);
-		}
-		catch (Exception e) {
-			_log.error("Error sending message board notifications", e);
-		}
-	}
-
-	private void _onMessage(String[] array) throws Exception {
-		long companyId = GetterUtil.getLong(array[0]);
-		long userId = GetterUtil.getLong(array[1]);
-		String[] categoryIds = StringUtil.split(array[2]);
-		String threadId = array[3];
-		String fromName = array[4];
-		String fromAddress = array[5];
-		String subject = array[6];
-		String body = array[7];
-		String replyToAddress = array[8];
-		String mailId = array[9];
-		String inReplyTo = array[10];
-		boolean htmlFormat = GetterUtil.getBoolean(array[11]);
+		long companyId = jsonObj.getLong("companyId");
+		long userId = jsonObj.getLong("userId");
+		String categoryIds = jsonObj.getString("categoryIds");
+		String threadId = jsonObj.getString("threadId");
+		String fromName = jsonObj.getString("fromName");
+		String fromAddress = jsonObj.getString("fromAddress");
+		String subject = jsonObj.getString("subject");
+		String body = jsonObj.getString("body");
+		String replyToAddress = jsonObj.getString("replyToAddress");
+		String mailId = jsonObj.getString("mailId");
+		String inReplyTo = jsonObj.getString("inReplyTo");
+		boolean htmlFormat = jsonObj.getBoolean("htmlFormat");
 
 		Set<Long> sent = new HashSet<Long>();
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				"Sending notifications for {mailId=" + mailId + ", threadId=" +
-					threadId + ", categoryIds=" + array[2] + "}");
+					threadId + ", categoryIds=" + categoryIds + "}");
 		}
 
 		// Threads
@@ -125,18 +96,19 @@ public class MBMessageConsumer implements MessageListener {
 				companyId, MBThread.class.getName(),
 				GetterUtil.getLong(threadId));
 
-		_sendEmail(
+		sendEmail(
 			userId, fromName, fromAddress, subject, body, subscriptions, sent,
 			replyToAddress, mailId, inReplyTo, htmlFormat);
 
 		// Categories
 
-		for (int i = 0; i < categoryIds.length; i++) {
-			subscriptions = SubscriptionLocalServiceUtil.getSubscriptions(
-				companyId, MBCategory.class.getName(),
-				GetterUtil.getLong(categoryIds[i]));
+		long[] categoryIdsArray = StringUtil.split(categoryIds, 0L);
 
-			_sendEmail(
+		for (long categoryId : categoryIdsArray) {
+			subscriptions = SubscriptionLocalServiceUtil.getSubscriptions(
+				companyId, MBCategory.class.getName(), categoryId);
+
+			sendEmail(
 				userId, fromName, fromAddress, subject, body, subscriptions,
 				sent, replyToAddress, mailId, inReplyTo, htmlFormat);
 		}
@@ -146,7 +118,7 @@ public class MBMessageConsumer implements MessageListener {
 		}
 	}
 
-	private void _sendEmail(
+	protected void sendEmail(
 			long userId, String fromName, String fromAddress, String subject,
 			String body, List<Subscription> subscriptions, Set<Long> sent,
 			String replyToAddress, String mailId, String inReplyTo,
@@ -267,6 +239,6 @@ public class MBMessageConsumer implements MessageListener {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(MBMessageConsumer.class);
+	private static Log _log = LogFactory.getLog(MBMessageListener.class);
 
 }

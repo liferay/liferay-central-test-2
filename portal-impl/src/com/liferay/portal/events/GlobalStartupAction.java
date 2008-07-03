@@ -32,6 +32,10 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.jndi.PortalJNDIUtil;
+import com.liferay.portal.kernel.messaging.Destination;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.messaging.ParallelDestination;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
@@ -42,6 +46,7 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.messageboards.messaging.MBMessageListener;
 
 import java.io.File;
 
@@ -220,6 +225,16 @@ public class GlobalStartupAction extends SimpleAction {
 		}
 
 		SchedulerEngineUtil.init(new SchedulerEngineImpl());
+
+		// Message boards
+
+		Destination destination = new ParallelDestination(
+			DestinationNames.MESSAGE_BOARDS_MESSAGE);
+
+		MessageBusUtil.addDestination(destination);
+
+		MessageBusUtil.registerMessageListener(
+			destination.getName(), new MBMessageListener());
 	}
 
 	private static Log _log = LogFactory.getLog(GlobalStartupAction.class);
