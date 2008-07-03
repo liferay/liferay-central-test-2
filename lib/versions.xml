@@ -654,7 +654,7 @@
 	</library>
 	<library>
 		<file-name>development/selenium-java-client-driver.jar</file-name>
-		<version>0.9.2</version>
+		<version>June 30, 2008 Nightly Build</version>
 		<project-name>Selenium Remote Control</project-name>
 		<project-url>http://www.openqa.org/selenium-rc</project-url>
 		<licenses>
@@ -665,7 +665,7 @@
 	</library>
 	<library>
 		<file-name>development/selenium-server.jar</file-name>
-		<version>0.9.2</version>
+		<version>June 30, 2008 Nightly Build</version>
 		<project-name>Selenium Remote Control</project-name>
 		<project-url>http://www.openqa.org/selenium-rc</project-url>
 		<licenses>
