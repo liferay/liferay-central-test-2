@@ -129,7 +129,6 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(DirectoryTests.class);
 		addTestSuite(DocumentLibraryTests.class);
 		addTestSuite(DocumentLibraryDisplayTests.class);
-		addTestSuite(EnterpriseAdminTests.class);
 		addTestSuite(FlashTests.class);
 		addTestSuite(GlobalPrayerDigestTests.class);
 		addTestSuite(GospelForAsiaTests.class);
