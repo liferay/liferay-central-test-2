@@ -1,3 +1,4 @@
+<%@ page import="com.liferay.portal.DuplicateUserEmailAddressException" %>
 <c:if test="<%= sectionSelected.booleanValue() %>">
 	<c:if test='<%= SessionMessages.contains(request, "user_added") %>'>
 
@@ -29,6 +30,12 @@
 	<c:if test="<%= SessionErrors.contains(request, CookieNotSupportedException.class.getName()) %>">
 		<span class="portlet-msg-error">
 		<liferay-ui:message key="authentication-failed-please-enable-browser-cookies" />
+		</span>
+	</c:if>
+
+	<c:if test="<%= SessionErrors.contains(request, DuplicateUserEmailAddressException.class.getName()) %>">
+		<span class="portlet-msg-error">
+		<liferay-ui:message key="there-is-already-a-user-account-with-the-same-email-address" />
 		</span>
 	</c:if>
 

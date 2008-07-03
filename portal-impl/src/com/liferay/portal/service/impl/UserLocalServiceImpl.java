@@ -338,9 +338,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Group
 
+		String friendlyURL = getFriendlyURL(companyId, screenName);
+
 		groupLocalService.addGroup(
 			user.getUserId(), User.class.getName(), user.getUserId(), null,
-			null, 0, StringPool.SLASH + screenName, true);
+			null, 0, friendlyURL, true);
 
 		// Default groups
 
@@ -2358,6 +2360,25 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		MailMessage message = new MailMessage(from, to, subject, body, true);
 
 		mailService.sendEmail(message);
+	}
+
+	protected String getFriendlyURL(long companyId, String screenName)
+		throws SystemException {
+
+		String friendlyURL = StringPool.SLASH + screenName;
+
+		for (int i = 1;; i++) {
+			try {
+				groupPersistence.findByC_F(companyId, friendlyURL);
+
+				friendlyURL = StringPool.SLASH + screenName + i;
+			}
+			catch (NoSuchGroupException nsue) {
+				break;
+			}
+		}
+
+		return friendlyURL;
 	}
 
 	protected Map<String, String[]> getLayoutTemplatesParameters() {

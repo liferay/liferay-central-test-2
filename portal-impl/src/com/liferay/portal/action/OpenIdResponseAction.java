@@ -22,6 +22,7 @@
 
 package com.liferay.portal.action;
 
+import com.liferay.portal.DuplicateUserEmailAddressException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
@@ -98,6 +99,7 @@ public class OpenIdResponseAction extends Action {
 			if (e instanceof AssociationException ||
 				e instanceof ConsumerException ||
 				e instanceof DiscoveryException ||
+				e instanceof DuplicateUserEmailAddressException ||
 				e instanceof MessageException) {
 
 				SessionErrors.add(request, e.getClass().getName());
