@@ -29,7 +29,7 @@ abbr, acronym {
 body {
 }
 
-html, body {
+html {
 }
 
 body {
@@ -124,7 +124,10 @@ code, pre {
 
 /* ---------- Staging area ---------- */
 
-body.staging #wrapper {
+body.staging {
+}
+
+.portal-iframe.staging {
 }
 
 /* ---------- Main content body ---------- */
@@ -133,6 +136,9 @@ body.staging #wrapper {
 }
 
 #content-wrapper {
+}
+
+.portal-iframe #content-wrapper {
 }
 
 /* ---------- Banner ---------- */
