@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.tags.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+
 import com.liferay.portlet.tags.model.TagsEntry;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,22 +51,22 @@ import java.util.List;
  */
 public class TagsEntryJSONSerializer {
 	public static JSONObject toJSONObject(TagsEntry model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "entryId", model.getEntryId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "userName", model.getUserName());
-		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
-		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
-		JSONUtil.put(jsonObj, "name", model.getName());
+		jsonObj.put("entryId", model.getEntryId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("userName", model.getUserName());
+		jsonObj.put("createDate", model.getCreateDate().getTime());
+		jsonObj.put("modifiedDate", model.getModifiedDate().getTime());
+		jsonObj.put("name", model.getName());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.tags.model.TagsEntry> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (TagsEntry model : models) {
 			jsonArray.put(toJSONObject(model));

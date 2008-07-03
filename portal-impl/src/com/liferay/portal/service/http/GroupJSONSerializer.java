@@ -22,12 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.Group;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,28 +50,28 @@ import java.util.List;
  */
 public class GroupJSONSerializer {
 	public static JSONObject toJSONObject(Group model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "creatorUserId", model.getCreatorUserId());
-		JSONUtil.put(jsonObj, "classNameId", model.getClassNameId());
-		JSONUtil.put(jsonObj, "classPK", model.getClassPK());
-		JSONUtil.put(jsonObj, "parentGroupId", model.getParentGroupId());
-		JSONUtil.put(jsonObj, "liveGroupId", model.getLiveGroupId());
-		JSONUtil.put(jsonObj, "name", model.getName());
-		JSONUtil.put(jsonObj, "description", model.getDescription());
-		JSONUtil.put(jsonObj, "type", model.getType());
-		JSONUtil.put(jsonObj, "typeSettings", model.getTypeSettings());
-		JSONUtil.put(jsonObj, "friendlyURL", model.getFriendlyURL());
-		JSONUtil.put(jsonObj, "active", model.getActive());
+		jsonObj.put("groupId", model.getGroupId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("creatorUserId", model.getCreatorUserId());
+		jsonObj.put("classNameId", model.getClassNameId());
+		jsonObj.put("classPK", model.getClassPK());
+		jsonObj.put("parentGroupId", model.getParentGroupId());
+		jsonObj.put("liveGroupId", model.getLiveGroupId());
+		jsonObj.put("name", model.getName());
+		jsonObj.put("description", model.getDescription());
+		jsonObj.put("type", model.getType());
+		jsonObj.put("typeSettings", model.getTypeSettings());
+		jsonObj.put("friendlyURL", model.getFriendlyURL());
+		jsonObj.put("active", model.getActive());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.Group> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (Group model : models) {
 			jsonArray.put(toJSONObject(model));

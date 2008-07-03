@@ -22,12 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.MembershipRequest;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,26 +50,25 @@ import java.util.List;
  */
 public class MembershipRequestJSONSerializer {
 	public static JSONObject toJSONObject(MembershipRequest model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "membershipRequestId",
-			model.getMembershipRequestId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
-		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
-		JSONUtil.put(jsonObj, "comments", model.getComments());
-		JSONUtil.put(jsonObj, "replyComments", model.getReplyComments());
-		JSONUtil.put(jsonObj, "replyDate", model.getReplyDate());
-		JSONUtil.put(jsonObj, "replierUserId", model.getReplierUserId());
-		JSONUtil.put(jsonObj, "statusId", model.getStatusId());
+		jsonObj.put("membershipRequestId", model.getMembershipRequestId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("createDate", model.getCreateDate().getTime());
+		jsonObj.put("groupId", model.getGroupId());
+		jsonObj.put("comments", model.getComments());
+		jsonObj.put("replyComments", model.getReplyComments());
+		jsonObj.put("replyDate", model.getReplyDate().getTime());
+		jsonObj.put("replierUserId", model.getReplierUserId());
+		jsonObj.put("statusId", model.getStatusId());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.MembershipRequest> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (MembershipRequest model : models) {
 			jsonArray.put(toJSONObject(model));

@@ -22,12 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.OrgLabor;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,32 +50,32 @@ import java.util.List;
  */
 public class OrgLaborJSONSerializer {
 	public static JSONObject toJSONObject(OrgLabor model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "orgLaborId", model.getOrgLaborId());
-		JSONUtil.put(jsonObj, "organizationId", model.getOrganizationId());
-		JSONUtil.put(jsonObj, "typeId", model.getTypeId());
-		JSONUtil.put(jsonObj, "sunOpen", model.getSunOpen());
-		JSONUtil.put(jsonObj, "sunClose", model.getSunClose());
-		JSONUtil.put(jsonObj, "monOpen", model.getMonOpen());
-		JSONUtil.put(jsonObj, "monClose", model.getMonClose());
-		JSONUtil.put(jsonObj, "tueOpen", model.getTueOpen());
-		JSONUtil.put(jsonObj, "tueClose", model.getTueClose());
-		JSONUtil.put(jsonObj, "wedOpen", model.getWedOpen());
-		JSONUtil.put(jsonObj, "wedClose", model.getWedClose());
-		JSONUtil.put(jsonObj, "thuOpen", model.getThuOpen());
-		JSONUtil.put(jsonObj, "thuClose", model.getThuClose());
-		JSONUtil.put(jsonObj, "friOpen", model.getFriOpen());
-		JSONUtil.put(jsonObj, "friClose", model.getFriClose());
-		JSONUtil.put(jsonObj, "satOpen", model.getSatOpen());
-		JSONUtil.put(jsonObj, "satClose", model.getSatClose());
+		jsonObj.put("orgLaborId", model.getOrgLaborId());
+		jsonObj.put("organizationId", model.getOrganizationId());
+		jsonObj.put("typeId", model.getTypeId());
+		jsonObj.put("sunOpen", model.getSunOpen());
+		jsonObj.put("sunClose", model.getSunClose());
+		jsonObj.put("monOpen", model.getMonOpen());
+		jsonObj.put("monClose", model.getMonClose());
+		jsonObj.put("tueOpen", model.getTueOpen());
+		jsonObj.put("tueClose", model.getTueClose());
+		jsonObj.put("wedOpen", model.getWedOpen());
+		jsonObj.put("wedClose", model.getWedClose());
+		jsonObj.put("thuOpen", model.getThuOpen());
+		jsonObj.put("thuClose", model.getThuClose());
+		jsonObj.put("friOpen", model.getFriOpen());
+		jsonObj.put("friClose", model.getFriClose());
+		jsonObj.put("satOpen", model.getSatOpen());
+		jsonObj.put("satClose", model.getSatClose());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.OrgLabor> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (OrgLabor model : models) {
 			jsonArray.put(toJSONObject(model));

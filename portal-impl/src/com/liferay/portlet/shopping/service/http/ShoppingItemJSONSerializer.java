@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.shopping.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+
 import com.liferay.portlet.shopping.model.ShoppingItem;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,49 +51,48 @@ import java.util.List;
  */
 public class ShoppingItemJSONSerializer {
 	public static JSONObject toJSONObject(ShoppingItem model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "itemId", model.getItemId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "userName", model.getUserName());
-		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
-		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
-		JSONUtil.put(jsonObj, "categoryId", model.getCategoryId());
-		JSONUtil.put(jsonObj, "sku", model.getSku());
-		JSONUtil.put(jsonObj, "name", model.getName());
-		JSONUtil.put(jsonObj, "description", model.getDescription());
-		JSONUtil.put(jsonObj, "properties", model.getProperties());
-		JSONUtil.put(jsonObj, "fields", model.getFields());
-		JSONUtil.put(jsonObj, "fieldsQuantities", model.getFieldsQuantities());
-		JSONUtil.put(jsonObj, "minQuantity", model.getMinQuantity());
-		JSONUtil.put(jsonObj, "maxQuantity", model.getMaxQuantity());
-		JSONUtil.put(jsonObj, "price", model.getPrice());
-		JSONUtil.put(jsonObj, "discount", model.getDiscount());
-		JSONUtil.put(jsonObj, "taxable", model.getTaxable());
-		JSONUtil.put(jsonObj, "shipping", model.getShipping());
-		JSONUtil.put(jsonObj, "useShippingFormula",
-			model.getUseShippingFormula());
-		JSONUtil.put(jsonObj, "requiresShipping", model.getRequiresShipping());
-		JSONUtil.put(jsonObj, "stockQuantity", model.getStockQuantity());
-		JSONUtil.put(jsonObj, "featured", model.getFeatured());
-		JSONUtil.put(jsonObj, "sale", model.getSale());
-		JSONUtil.put(jsonObj, "smallImage", model.getSmallImage());
-		JSONUtil.put(jsonObj, "smallImageId", model.getSmallImageId());
-		JSONUtil.put(jsonObj, "smallImageURL", model.getSmallImageURL());
-		JSONUtil.put(jsonObj, "mediumImage", model.getMediumImage());
-		JSONUtil.put(jsonObj, "mediumImageId", model.getMediumImageId());
-		JSONUtil.put(jsonObj, "mediumImageURL", model.getMediumImageURL());
-		JSONUtil.put(jsonObj, "largeImage", model.getLargeImage());
-		JSONUtil.put(jsonObj, "largeImageId", model.getLargeImageId());
-		JSONUtil.put(jsonObj, "largeImageURL", model.getLargeImageURL());
+		jsonObj.put("itemId", model.getItemId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("userName", model.getUserName());
+		jsonObj.put("createDate", model.getCreateDate().getTime());
+		jsonObj.put("modifiedDate", model.getModifiedDate().getTime());
+		jsonObj.put("categoryId", model.getCategoryId());
+		jsonObj.put("sku", model.getSku());
+		jsonObj.put("name", model.getName());
+		jsonObj.put("description", model.getDescription());
+		jsonObj.put("properties", model.getProperties());
+		jsonObj.put("fields", model.getFields());
+		jsonObj.put("fieldsQuantities", model.getFieldsQuantities());
+		jsonObj.put("minQuantity", model.getMinQuantity());
+		jsonObj.put("maxQuantity", model.getMaxQuantity());
+		jsonObj.put("price", model.getPrice());
+		jsonObj.put("discount", model.getDiscount());
+		jsonObj.put("taxable", model.getTaxable());
+		jsonObj.put("shipping", model.getShipping());
+		jsonObj.put("useShippingFormula", model.getUseShippingFormula());
+		jsonObj.put("requiresShipping", model.getRequiresShipping());
+		jsonObj.put("stockQuantity", model.getStockQuantity());
+		jsonObj.put("featured", model.getFeatured());
+		jsonObj.put("sale", model.getSale());
+		jsonObj.put("smallImage", model.getSmallImage());
+		jsonObj.put("smallImageId", model.getSmallImageId());
+		jsonObj.put("smallImageURL", model.getSmallImageURL());
+		jsonObj.put("mediumImage", model.getMediumImage());
+		jsonObj.put("mediumImageId", model.getMediumImageId());
+		jsonObj.put("mediumImageURL", model.getMediumImageURL());
+		jsonObj.put("largeImage", model.getLargeImage());
+		jsonObj.put("largeImageId", model.getLargeImageId());
+		jsonObj.put("largeImageURL", model.getLargeImageURL());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.shopping.model.ShoppingItem> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (ShoppingItem model : models) {
 			jsonArray.put(toJSONObject(model));

@@ -22,12 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.PasswordPolicy;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,42 +50,41 @@ import java.util.List;
  */
 public class PasswordPolicyJSONSerializer {
 	public static JSONObject toJSONObject(PasswordPolicy model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "passwordPolicyId", model.getPasswordPolicyId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "userName", model.getUserName());
-		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
-		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
-		JSONUtil.put(jsonObj, "defaultPolicy", model.getDefaultPolicy());
-		JSONUtil.put(jsonObj, "name", model.getName());
-		JSONUtil.put(jsonObj, "description", model.getDescription());
-		JSONUtil.put(jsonObj, "changeable", model.getChangeable());
-		JSONUtil.put(jsonObj, "changeRequired", model.getChangeRequired());
-		JSONUtil.put(jsonObj, "minAge", model.getMinAge());
-		JSONUtil.put(jsonObj, "checkSyntax", model.getCheckSyntax());
-		JSONUtil.put(jsonObj, "allowDictionaryWords",
-			model.getAllowDictionaryWords());
-		JSONUtil.put(jsonObj, "minLength", model.getMinLength());
-		JSONUtil.put(jsonObj, "history", model.getHistory());
-		JSONUtil.put(jsonObj, "historyCount", model.getHistoryCount());
-		JSONUtil.put(jsonObj, "expireable", model.getExpireable());
-		JSONUtil.put(jsonObj, "maxAge", model.getMaxAge());
-		JSONUtil.put(jsonObj, "warningTime", model.getWarningTime());
-		JSONUtil.put(jsonObj, "graceLimit", model.getGraceLimit());
-		JSONUtil.put(jsonObj, "lockout", model.getLockout());
-		JSONUtil.put(jsonObj, "maxFailure", model.getMaxFailure());
-		JSONUtil.put(jsonObj, "lockoutDuration", model.getLockoutDuration());
-		JSONUtil.put(jsonObj, "requireUnlock", model.getRequireUnlock());
-		JSONUtil.put(jsonObj, "resetFailureCount", model.getResetFailureCount());
+		jsonObj.put("passwordPolicyId", model.getPasswordPolicyId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("userName", model.getUserName());
+		jsonObj.put("createDate", model.getCreateDate().getTime());
+		jsonObj.put("modifiedDate", model.getModifiedDate().getTime());
+		jsonObj.put("defaultPolicy", model.getDefaultPolicy());
+		jsonObj.put("name", model.getName());
+		jsonObj.put("description", model.getDescription());
+		jsonObj.put("changeable", model.getChangeable());
+		jsonObj.put("changeRequired", model.getChangeRequired());
+		jsonObj.put("minAge", model.getMinAge());
+		jsonObj.put("checkSyntax", model.getCheckSyntax());
+		jsonObj.put("allowDictionaryWords", model.getAllowDictionaryWords());
+		jsonObj.put("minLength", model.getMinLength());
+		jsonObj.put("history", model.getHistory());
+		jsonObj.put("historyCount", model.getHistoryCount());
+		jsonObj.put("expireable", model.getExpireable());
+		jsonObj.put("maxAge", model.getMaxAge());
+		jsonObj.put("warningTime", model.getWarningTime());
+		jsonObj.put("graceLimit", model.getGraceLimit());
+		jsonObj.put("lockout", model.getLockout());
+		jsonObj.put("maxFailure", model.getMaxFailure());
+		jsonObj.put("lockoutDuration", model.getLockoutDuration());
+		jsonObj.put("requireUnlock", model.getRequireUnlock());
+		jsonObj.put("resetFailureCount", model.getResetFailureCount());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.PasswordPolicy> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (PasswordPolicy model : models) {
 			jsonArray.put(toJSONObject(model));

@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.journal.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+
 import com.liferay.portlet.journal.model.JournalFeed;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,40 +51,39 @@ import java.util.List;
  */
 public class JournalFeedJSONSerializer {
 	public static JSONObject toJSONObject(JournalFeed model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "uuid", model.getUuid());
-		JSONUtil.put(jsonObj, "id", model.getId());
-		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "userName", model.getUserName());
-		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
-		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
-		JSONUtil.put(jsonObj, "feedId", model.getFeedId());
-		JSONUtil.put(jsonObj, "name", model.getName());
-		JSONUtil.put(jsonObj, "description", model.getDescription());
-		JSONUtil.put(jsonObj, "type", model.getType());
-		JSONUtil.put(jsonObj, "structureId", model.getStructureId());
-		JSONUtil.put(jsonObj, "templateId", model.getTemplateId());
-		JSONUtil.put(jsonObj, "rendererTemplateId",
-			model.getRendererTemplateId());
-		JSONUtil.put(jsonObj, "delta", model.getDelta());
-		JSONUtil.put(jsonObj, "orderByCol", model.getOrderByCol());
-		JSONUtil.put(jsonObj, "orderByType", model.getOrderByType());
-		JSONUtil.put(jsonObj, "targetLayoutFriendlyUrl",
+		jsonObj.put("uuid", model.getUuid());
+		jsonObj.put("id", model.getId());
+		jsonObj.put("groupId", model.getGroupId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("userName", model.getUserName());
+		jsonObj.put("createDate", model.getCreateDate().getTime());
+		jsonObj.put("modifiedDate", model.getModifiedDate().getTime());
+		jsonObj.put("feedId", model.getFeedId());
+		jsonObj.put("name", model.getName());
+		jsonObj.put("description", model.getDescription());
+		jsonObj.put("type", model.getType());
+		jsonObj.put("structureId", model.getStructureId());
+		jsonObj.put("templateId", model.getTemplateId());
+		jsonObj.put("rendererTemplateId", model.getRendererTemplateId());
+		jsonObj.put("delta", model.getDelta());
+		jsonObj.put("orderByCol", model.getOrderByCol());
+		jsonObj.put("orderByType", model.getOrderByType());
+		jsonObj.put("targetLayoutFriendlyUrl",
 			model.getTargetLayoutFriendlyUrl());
-		JSONUtil.put(jsonObj, "targetPortletId", model.getTargetPortletId());
-		JSONUtil.put(jsonObj, "contentField", model.getContentField());
-		JSONUtil.put(jsonObj, "feedType", model.getFeedType());
-		JSONUtil.put(jsonObj, "feedVersion", model.getFeedVersion());
+		jsonObj.put("targetPortletId", model.getTargetPortletId());
+		jsonObj.put("contentField", model.getContentField());
+		jsonObj.put("feedType", model.getFeedType());
+		jsonObj.put("feedVersion", model.getFeedVersion());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.journal.model.JournalFeed> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (JournalFeed model : models) {
 			jsonArray.put(toJSONObject(model));

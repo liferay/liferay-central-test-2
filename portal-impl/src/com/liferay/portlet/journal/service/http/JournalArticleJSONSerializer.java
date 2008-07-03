@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.journal.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+
 import com.liferay.portlet.journal.model.JournalArticle;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,45 +51,44 @@ import java.util.List;
  */
 public class JournalArticleJSONSerializer {
 	public static JSONObject toJSONObject(JournalArticle model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "uuid", model.getUuid());
-		JSONUtil.put(jsonObj, "id", model.getId());
-		JSONUtil.put(jsonObj, "resourcePrimKey", model.getResourcePrimKey());
-		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "userName", model.getUserName());
-		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
-		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
-		JSONUtil.put(jsonObj, "articleId", model.getArticleId());
-		JSONUtil.put(jsonObj, "version", model.getVersion());
-		JSONUtil.put(jsonObj, "title", model.getTitle());
-		JSONUtil.put(jsonObj, "description", model.getDescription());
-		JSONUtil.put(jsonObj, "content", model.getContent());
-		JSONUtil.put(jsonObj, "type", model.getType());
-		JSONUtil.put(jsonObj, "structureId", model.getStructureId());
-		JSONUtil.put(jsonObj, "templateId", model.getTemplateId());
-		JSONUtil.put(jsonObj, "displayDate", model.getDisplayDate());
-		JSONUtil.put(jsonObj, "approved", model.getApproved());
-		JSONUtil.put(jsonObj, "approvedByUserId", model.getApprovedByUserId());
-		JSONUtil.put(jsonObj, "approvedByUserName",
-			model.getApprovedByUserName());
-		JSONUtil.put(jsonObj, "approvedDate", model.getApprovedDate());
-		JSONUtil.put(jsonObj, "expired", model.getExpired());
-		JSONUtil.put(jsonObj, "expirationDate", model.getExpirationDate());
-		JSONUtil.put(jsonObj, "reviewDate", model.getReviewDate());
-		JSONUtil.put(jsonObj, "indexable", model.getIndexable());
-		JSONUtil.put(jsonObj, "smallImage", model.getSmallImage());
-		JSONUtil.put(jsonObj, "smallImageId", model.getSmallImageId());
-		JSONUtil.put(jsonObj, "smallImageURL", model.getSmallImageURL());
+		jsonObj.put("uuid", model.getUuid());
+		jsonObj.put("id", model.getId());
+		jsonObj.put("resourcePrimKey", model.getResourcePrimKey());
+		jsonObj.put("groupId", model.getGroupId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("userName", model.getUserName());
+		jsonObj.put("createDate", model.getCreateDate().getTime());
+		jsonObj.put("modifiedDate", model.getModifiedDate().getTime());
+		jsonObj.put("articleId", model.getArticleId());
+		jsonObj.put("version", model.getVersion());
+		jsonObj.put("title", model.getTitle());
+		jsonObj.put("description", model.getDescription());
+		jsonObj.put("content", model.getContent());
+		jsonObj.put("type", model.getType());
+		jsonObj.put("structureId", model.getStructureId());
+		jsonObj.put("templateId", model.getTemplateId());
+		jsonObj.put("displayDate", model.getDisplayDate().getTime());
+		jsonObj.put("approved", model.getApproved());
+		jsonObj.put("approvedByUserId", model.getApprovedByUserId());
+		jsonObj.put("approvedByUserName", model.getApprovedByUserName());
+		jsonObj.put("approvedDate", model.getApprovedDate().getTime());
+		jsonObj.put("expired", model.getExpired());
+		jsonObj.put("expirationDate", model.getExpirationDate().getTime());
+		jsonObj.put("reviewDate", model.getReviewDate().getTime());
+		jsonObj.put("indexable", model.getIndexable());
+		jsonObj.put("smallImage", model.getSmallImage());
+		jsonObj.put("smallImageId", model.getSmallImageId());
+		jsonObj.put("smallImageURL", model.getSmallImageURL());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.journal.model.JournalArticle> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (JournalArticle model : models) {
 			jsonArray.put(toJSONObject(model));

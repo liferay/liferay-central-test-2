@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.documentlibrary.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,25 +51,25 @@ import java.util.List;
  */
 public class DLFileShortcutJSONSerializer {
 	public static JSONObject toJSONObject(DLFileShortcut model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "uuid", model.getUuid());
-		JSONUtil.put(jsonObj, "fileShortcutId", model.getFileShortcutId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "userName", model.getUserName());
-		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
-		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
-		JSONUtil.put(jsonObj, "folderId", model.getFolderId());
-		JSONUtil.put(jsonObj, "toFolderId", model.getToFolderId());
-		JSONUtil.put(jsonObj, "toName", model.getToName());
+		jsonObj.put("uuid", model.getUuid());
+		jsonObj.put("fileShortcutId", model.getFileShortcutId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("userName", model.getUserName());
+		jsonObj.put("createDate", model.getCreateDate().getTime());
+		jsonObj.put("modifiedDate", model.getModifiedDate().getTime());
+		jsonObj.put("folderId", model.getFolderId());
+		jsonObj.put("toFolderId", model.getToFolderId());
+		jsonObj.put("toName", model.getToName());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (DLFileShortcut model : models) {
 			jsonArray.put(toJSONObject(model));

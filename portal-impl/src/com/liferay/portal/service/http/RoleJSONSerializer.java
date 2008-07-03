@@ -22,12 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.Role;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,22 +50,22 @@ import java.util.List;
  */
 public class RoleJSONSerializer {
 	public static JSONObject toJSONObject(Role model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "roleId", model.getRoleId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "classNameId", model.getClassNameId());
-		JSONUtil.put(jsonObj, "classPK", model.getClassPK());
-		JSONUtil.put(jsonObj, "name", model.getName());
-		JSONUtil.put(jsonObj, "description", model.getDescription());
-		JSONUtil.put(jsonObj, "type", model.getType());
+		jsonObj.put("roleId", model.getRoleId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("classNameId", model.getClassNameId());
+		jsonObj.put("classPK", model.getClassPK());
+		jsonObj.put("name", model.getName());
+		jsonObj.put("description", model.getDescription());
+		jsonObj.put("type", model.getType());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.Role> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (Role model : models) {
 			jsonArray.put(toJSONObject(model));

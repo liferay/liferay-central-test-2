@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.calendar.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+
 import com.liferay.portlet.calendar.model.CalEvent;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,37 +51,37 @@ import java.util.List;
  */
 public class CalEventJSONSerializer {
 	public static JSONObject toJSONObject(CalEvent model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "uuid", model.getUuid());
-		JSONUtil.put(jsonObj, "eventId", model.getEventId());
-		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "userName", model.getUserName());
-		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
-		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
-		JSONUtil.put(jsonObj, "title", model.getTitle());
-		JSONUtil.put(jsonObj, "description", model.getDescription());
-		JSONUtil.put(jsonObj, "startDate", model.getStartDate());
-		JSONUtil.put(jsonObj, "endDate", model.getEndDate());
-		JSONUtil.put(jsonObj, "durationHour", model.getDurationHour());
-		JSONUtil.put(jsonObj, "durationMinute", model.getDurationMinute());
-		JSONUtil.put(jsonObj, "allDay", model.getAllDay());
-		JSONUtil.put(jsonObj, "timeZoneSensitive", model.getTimeZoneSensitive());
-		JSONUtil.put(jsonObj, "type", model.getType());
-		JSONUtil.put(jsonObj, "repeating", model.getRepeating());
-		JSONUtil.put(jsonObj, "recurrence", model.getRecurrence());
-		JSONUtil.put(jsonObj, "remindBy", model.getRemindBy());
-		JSONUtil.put(jsonObj, "firstReminder", model.getFirstReminder());
-		JSONUtil.put(jsonObj, "secondReminder", model.getSecondReminder());
+		jsonObj.put("uuid", model.getUuid());
+		jsonObj.put("eventId", model.getEventId());
+		jsonObj.put("groupId", model.getGroupId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("userName", model.getUserName());
+		jsonObj.put("createDate", model.getCreateDate().getTime());
+		jsonObj.put("modifiedDate", model.getModifiedDate().getTime());
+		jsonObj.put("title", model.getTitle());
+		jsonObj.put("description", model.getDescription());
+		jsonObj.put("startDate", model.getStartDate().getTime());
+		jsonObj.put("endDate", model.getEndDate().getTime());
+		jsonObj.put("durationHour", model.getDurationHour());
+		jsonObj.put("durationMinute", model.getDurationMinute());
+		jsonObj.put("allDay", model.getAllDay());
+		jsonObj.put("timeZoneSensitive", model.getTimeZoneSensitive());
+		jsonObj.put("type", model.getType());
+		jsonObj.put("repeating", model.getRepeating());
+		jsonObj.put("recurrence", model.getRecurrence());
+		jsonObj.put("remindBy", model.getRemindBy());
+		jsonObj.put("firstReminder", model.getFirstReminder());
+		jsonObj.put("secondReminder", model.getSecondReminder());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.calendar.model.CalEvent> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (CalEvent model : models) {
 			jsonArray.put(toJSONObject(model));

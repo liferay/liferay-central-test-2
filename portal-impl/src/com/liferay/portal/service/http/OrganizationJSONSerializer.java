@@ -22,12 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.Organization;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,26 +50,25 @@ import java.util.List;
  */
 public class OrganizationJSONSerializer {
 	public static JSONObject toJSONObject(Organization model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "organizationId", model.getOrganizationId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "parentOrganizationId",
-			model.getParentOrganizationId());
-		JSONUtil.put(jsonObj, "name", model.getName());
-		JSONUtil.put(jsonObj, "location", model.getLocation());
-		JSONUtil.put(jsonObj, "recursable", model.getRecursable());
-		JSONUtil.put(jsonObj, "regionId", model.getRegionId());
-		JSONUtil.put(jsonObj, "countryId", model.getCountryId());
-		JSONUtil.put(jsonObj, "statusId", model.getStatusId());
-		JSONUtil.put(jsonObj, "comments", model.getComments());
+		jsonObj.put("organizationId", model.getOrganizationId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("parentOrganizationId", model.getParentOrganizationId());
+		jsonObj.put("name", model.getName());
+		jsonObj.put("location", model.getLocation());
+		jsonObj.put("recursable", model.getRecursable());
+		jsonObj.put("regionId", model.getRegionId());
+		jsonObj.put("countryId", model.getCountryId());
+		jsonObj.put("statusId", model.getStatusId());
+		jsonObj.put("comments", model.getComments());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.Organization> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (Organization model : models) {
 			jsonArray.put(toJSONObject(model));

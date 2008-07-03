@@ -42,9 +42,11 @@ package com.liferay.portal.service.http;
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
  * if the method in the service utility returns a <code>java.util.List</code>,
- * that is translated to a <code>org.json.JSONArray</code>. If the method in the
+ * that is translated to a
+ * <code>com.liferay.portal.kernel.json.JSONArray</code>. If the method in the
  * service utility returns a <code>com.liferay.portal.model.Account</code>,
- * that is translated to a <code>org.json.JSONObject</code>. Methods that JSON
+ * that is translated to a
+ * <code>com.liferay.portal.kernel.json.JSONObject</code>. Methods that JSON
  * cannot safely use are skipped. The logic for the translation is encapsulated
  * in <code>com.liferay.portal.service.http.AccountJSONSerializer</code>.
  * </p>

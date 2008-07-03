@@ -22,12 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.PortletPreferences;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,22 +50,21 @@ import java.util.List;
  */
 public class PortletPreferencesJSONSerializer {
 	public static JSONObject toJSONObject(PortletPreferences model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "portletPreferencesId",
-			model.getPortletPreferencesId());
-		JSONUtil.put(jsonObj, "ownerId", model.getOwnerId());
-		JSONUtil.put(jsonObj, "ownerType", model.getOwnerType());
-		JSONUtil.put(jsonObj, "plid", model.getPlid());
-		JSONUtil.put(jsonObj, "portletId", model.getPortletId());
-		JSONUtil.put(jsonObj, "preferences", model.getPreferences());
+		jsonObj.put("portletPreferencesId", model.getPortletPreferencesId());
+		jsonObj.put("ownerId", model.getOwnerId());
+		jsonObj.put("ownerType", model.getOwnerType());
+		jsonObj.put("plid", model.getPlid());
+		jsonObj.put("portletId", model.getPortletId());
+		jsonObj.put("preferences", model.getPreferences());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.PortletPreferences> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (PortletPreferences model : models) {
 			jsonArray.put(toJSONObject(model));

@@ -22,12 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.Company;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,22 +50,22 @@ import java.util.List;
  */
 public class CompanyJSONSerializer {
 	public static JSONObject toJSONObject(Company model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "accountId", model.getAccountId());
-		JSONUtil.put(jsonObj, "webId", model.getWebId());
-		JSONUtil.put(jsonObj, "key", model.getKey());
-		JSONUtil.put(jsonObj, "virtualHost", model.getVirtualHost());
-		JSONUtil.put(jsonObj, "mx", model.getMx());
-		JSONUtil.put(jsonObj, "logoId", model.getLogoId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("accountId", model.getAccountId());
+		jsonObj.put("webId", model.getWebId());
+		jsonObj.put("key", model.getKey());
+		jsonObj.put("virtualHost", model.getVirtualHost());
+		jsonObj.put("mx", model.getMx());
+		jsonObj.put("logoId", model.getLogoId());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.Company> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (Company model : models) {
 			jsonArray.put(toJSONObject(model));

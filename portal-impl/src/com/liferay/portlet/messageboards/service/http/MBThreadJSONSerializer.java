@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.messageboards.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+
 import com.liferay.portlet.messageboards.model.MBThread;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,23 +51,23 @@ import java.util.List;
  */
 public class MBThreadJSONSerializer {
 	public static JSONObject toJSONObject(MBThread model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "threadId", model.getThreadId());
-		JSONUtil.put(jsonObj, "categoryId", model.getCategoryId());
-		JSONUtil.put(jsonObj, "rootMessageId", model.getRootMessageId());
-		JSONUtil.put(jsonObj, "messageCount", model.getMessageCount());
-		JSONUtil.put(jsonObj, "viewCount", model.getViewCount());
-		JSONUtil.put(jsonObj, "lastPostByUserId", model.getLastPostByUserId());
-		JSONUtil.put(jsonObj, "lastPostDate", model.getLastPostDate());
-		JSONUtil.put(jsonObj, "priority", model.getPriority());
+		jsonObj.put("threadId", model.getThreadId());
+		jsonObj.put("categoryId", model.getCategoryId());
+		jsonObj.put("rootMessageId", model.getRootMessageId());
+		jsonObj.put("messageCount", model.getMessageCount());
+		jsonObj.put("viewCount", model.getViewCount());
+		jsonObj.put("lastPostByUserId", model.getLastPostByUserId());
+		jsonObj.put("lastPostDate", model.getLastPostDate().getTime());
+		jsonObj.put("priority", model.getPriority());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.messageboards.model.MBThread> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (MBThread model : models) {
 			jsonArray.put(toJSONObject(model));

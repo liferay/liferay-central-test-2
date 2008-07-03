@@ -22,12 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.EmailAddress;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,26 +50,26 @@ import java.util.List;
  */
 public class EmailAddressJSONSerializer {
 	public static JSONObject toJSONObject(EmailAddress model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "emailAddressId", model.getEmailAddressId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "userName", model.getUserName());
-		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
-		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
-		JSONUtil.put(jsonObj, "classNameId", model.getClassNameId());
-		JSONUtil.put(jsonObj, "classPK", model.getClassPK());
-		JSONUtil.put(jsonObj, "address", model.getAddress());
-		JSONUtil.put(jsonObj, "typeId", model.getTypeId());
-		JSONUtil.put(jsonObj, "primary", model.getPrimary());
+		jsonObj.put("emailAddressId", model.getEmailAddressId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("userName", model.getUserName());
+		jsonObj.put("createDate", model.getCreateDate().getTime());
+		jsonObj.put("modifiedDate", model.getModifiedDate().getTime());
+		jsonObj.put("classNameId", model.getClassNameId());
+		jsonObj.put("classPK", model.getClassPK());
+		jsonObj.put("address", model.getAddress());
+		jsonObj.put("typeId", model.getTypeId());
+		jsonObj.put("primary", model.getPrimary());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.EmailAddress> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (EmailAddress model : models) {
 			jsonArray.put(toJSONObject(model));

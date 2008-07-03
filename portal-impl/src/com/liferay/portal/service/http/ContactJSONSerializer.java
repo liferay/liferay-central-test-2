@@ -22,12 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.Contact;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,45 +50,45 @@ import java.util.List;
  */
 public class ContactJSONSerializer {
 	public static JSONObject toJSONObject(Contact model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "contactId", model.getContactId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "userName", model.getUserName());
-		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
-		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
-		JSONUtil.put(jsonObj, "accountId", model.getAccountId());
-		JSONUtil.put(jsonObj, "parentContactId", model.getParentContactId());
-		JSONUtil.put(jsonObj, "firstName", model.getFirstName());
-		JSONUtil.put(jsonObj, "middleName", model.getMiddleName());
-		JSONUtil.put(jsonObj, "lastName", model.getLastName());
-		JSONUtil.put(jsonObj, "prefixId", model.getPrefixId());
-		JSONUtil.put(jsonObj, "suffixId", model.getSuffixId());
-		JSONUtil.put(jsonObj, "male", model.getMale());
-		JSONUtil.put(jsonObj, "birthday", model.getBirthday());
-		JSONUtil.put(jsonObj, "smsSn", model.getSmsSn());
-		JSONUtil.put(jsonObj, "aimSn", model.getAimSn());
-		JSONUtil.put(jsonObj, "facebookSn", model.getFacebookSn());
-		JSONUtil.put(jsonObj, "icqSn", model.getIcqSn());
-		JSONUtil.put(jsonObj, "jabberSn", model.getJabberSn());
-		JSONUtil.put(jsonObj, "msnSn", model.getMsnSn());
-		JSONUtil.put(jsonObj, "mySpaceSn", model.getMySpaceSn());
-		JSONUtil.put(jsonObj, "skypeSn", model.getSkypeSn());
-		JSONUtil.put(jsonObj, "twitterSn", model.getTwitterSn());
-		JSONUtil.put(jsonObj, "ymSn", model.getYmSn());
-		JSONUtil.put(jsonObj, "employeeStatusId", model.getEmployeeStatusId());
-		JSONUtil.put(jsonObj, "employeeNumber", model.getEmployeeNumber());
-		JSONUtil.put(jsonObj, "jobTitle", model.getJobTitle());
-		JSONUtil.put(jsonObj, "jobClass", model.getJobClass());
-		JSONUtil.put(jsonObj, "hoursOfOperation", model.getHoursOfOperation());
+		jsonObj.put("contactId", model.getContactId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("userName", model.getUserName());
+		jsonObj.put("createDate", model.getCreateDate().getTime());
+		jsonObj.put("modifiedDate", model.getModifiedDate().getTime());
+		jsonObj.put("accountId", model.getAccountId());
+		jsonObj.put("parentContactId", model.getParentContactId());
+		jsonObj.put("firstName", model.getFirstName());
+		jsonObj.put("middleName", model.getMiddleName());
+		jsonObj.put("lastName", model.getLastName());
+		jsonObj.put("prefixId", model.getPrefixId());
+		jsonObj.put("suffixId", model.getSuffixId());
+		jsonObj.put("male", model.getMale());
+		jsonObj.put("birthday", model.getBirthday().getTime());
+		jsonObj.put("smsSn", model.getSmsSn());
+		jsonObj.put("aimSn", model.getAimSn());
+		jsonObj.put("facebookSn", model.getFacebookSn());
+		jsonObj.put("icqSn", model.getIcqSn());
+		jsonObj.put("jabberSn", model.getJabberSn());
+		jsonObj.put("msnSn", model.getMsnSn());
+		jsonObj.put("mySpaceSn", model.getMySpaceSn());
+		jsonObj.put("skypeSn", model.getSkypeSn());
+		jsonObj.put("twitterSn", model.getTwitterSn());
+		jsonObj.put("ymSn", model.getYmSn());
+		jsonObj.put("employeeStatusId", model.getEmployeeStatusId());
+		jsonObj.put("employeeNumber", model.getEmployeeNumber());
+		jsonObj.put("jobTitle", model.getJobTitle());
+		jsonObj.put("jobClass", model.getJobClass());
+		jsonObj.put("hoursOfOperation", model.getHoursOfOperation());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.Contact> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (Contact model : models) {
 			jsonArray.put(toJSONObject(model));

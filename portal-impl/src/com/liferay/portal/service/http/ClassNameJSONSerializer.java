@@ -22,12 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.ClassName;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,17 +50,17 @@ import java.util.List;
  */
 public class ClassNameJSONSerializer {
 	public static JSONObject toJSONObject(ClassName model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "classNameId", model.getClassNameId());
-		JSONUtil.put(jsonObj, "value", model.getValue());
+		jsonObj.put("classNameId", model.getClassNameId());
+		jsonObj.put("value", model.getValue());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.ClassName> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (ClassName model : models) {
 			jsonArray.put(toJSONObject(model));

@@ -22,12 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.Layout;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,37 +50,37 @@ import java.util.List;
  */
 public class LayoutJSONSerializer {
 	public static JSONObject toJSONObject(Layout model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "plid", model.getPlid());
-		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "privateLayout", model.getPrivateLayout());
-		JSONUtil.put(jsonObj, "layoutId", model.getLayoutId());
-		JSONUtil.put(jsonObj, "parentLayoutId", model.getParentLayoutId());
-		JSONUtil.put(jsonObj, "name", model.getName());
-		JSONUtil.put(jsonObj, "title", model.getTitle());
-		JSONUtil.put(jsonObj, "description", model.getDescription());
-		JSONUtil.put(jsonObj, "type", model.getType());
-		JSONUtil.put(jsonObj, "typeSettings", model.getTypeSettings());
-		JSONUtil.put(jsonObj, "hidden", model.getHidden());
-		JSONUtil.put(jsonObj, "friendlyURL", model.getFriendlyURL());
-		JSONUtil.put(jsonObj, "iconImage", model.getIconImage());
-		JSONUtil.put(jsonObj, "iconImageId", model.getIconImageId());
-		JSONUtil.put(jsonObj, "themeId", model.getThemeId());
-		JSONUtil.put(jsonObj, "colorSchemeId", model.getColorSchemeId());
-		JSONUtil.put(jsonObj, "wapThemeId", model.getWapThemeId());
-		JSONUtil.put(jsonObj, "wapColorSchemeId", model.getWapColorSchemeId());
-		JSONUtil.put(jsonObj, "css", model.getCss());
-		JSONUtil.put(jsonObj, "priority", model.getPriority());
-		JSONUtil.put(jsonObj, "dlFolderId", model.getDlFolderId());
+		jsonObj.put("plid", model.getPlid());
+		jsonObj.put("groupId", model.getGroupId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("privateLayout", model.getPrivateLayout());
+		jsonObj.put("layoutId", model.getLayoutId());
+		jsonObj.put("parentLayoutId", model.getParentLayoutId());
+		jsonObj.put("name", model.getName());
+		jsonObj.put("title", model.getTitle());
+		jsonObj.put("description", model.getDescription());
+		jsonObj.put("type", model.getType());
+		jsonObj.put("typeSettings", model.getTypeSettings());
+		jsonObj.put("hidden", model.getHidden());
+		jsonObj.put("friendlyURL", model.getFriendlyURL());
+		jsonObj.put("iconImage", model.getIconImage());
+		jsonObj.put("iconImageId", model.getIconImageId());
+		jsonObj.put("themeId", model.getThemeId());
+		jsonObj.put("colorSchemeId", model.getColorSchemeId());
+		jsonObj.put("wapThemeId", model.getWapThemeId());
+		jsonObj.put("wapColorSchemeId", model.getWapColorSchemeId());
+		jsonObj.put("css", model.getCss());
+		jsonObj.put("priority", model.getPriority());
+		jsonObj.put("dlFolderId", model.getDlFolderId());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.Layout> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (Layout model : models) {
 			jsonArray.put(toJSONObject(model));

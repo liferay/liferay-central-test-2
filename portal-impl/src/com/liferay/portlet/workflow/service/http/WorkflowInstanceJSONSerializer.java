@@ -22,11 +22,10 @@
 
 package com.liferay.portlet.workflow.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portlet.workflow.model.WorkflowInstance;
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -40,18 +39,18 @@ import java.util.List;
 public class WorkflowInstanceJSONSerializer {
 
 	public static JSONObject toJSONObject(WorkflowInstance model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "instanceId", model.getInstanceId());
-		JSONUtil.put(jsonObj, "startDate", model.getStartDate());
-		JSONUtil.put(jsonObj, "endDate", model.getEndDate());
-		JSONUtil.put(jsonObj, "ended", model.isEnded());
+		jsonObj.put("instanceId", model.getInstanceId());
+		jsonObj.put("startDate", model.getStartDate());
+		jsonObj.put("endDate", model.getEndDate());
+		jsonObj.put("ended", model.isEnded());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(List<WorkflowInstance> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (WorkflowInstance model : models) {
 			jsonArray.put(toJSONObject(model));

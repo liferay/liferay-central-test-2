@@ -22,12 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.LayoutSet;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,28 +50,28 @@ import java.util.List;
  */
 public class LayoutSetJSONSerializer {
 	public static JSONObject toJSONObject(LayoutSet model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "layoutSetId", model.getLayoutSetId());
-		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "privateLayout", model.getPrivateLayout());
-		JSONUtil.put(jsonObj, "logo", model.getLogo());
-		JSONUtil.put(jsonObj, "logoId", model.getLogoId());
-		JSONUtil.put(jsonObj, "themeId", model.getThemeId());
-		JSONUtil.put(jsonObj, "colorSchemeId", model.getColorSchemeId());
-		JSONUtil.put(jsonObj, "wapThemeId", model.getWapThemeId());
-		JSONUtil.put(jsonObj, "wapColorSchemeId", model.getWapColorSchemeId());
-		JSONUtil.put(jsonObj, "css", model.getCss());
-		JSONUtil.put(jsonObj, "pageCount", model.getPageCount());
-		JSONUtil.put(jsonObj, "virtualHost", model.getVirtualHost());
+		jsonObj.put("layoutSetId", model.getLayoutSetId());
+		jsonObj.put("groupId", model.getGroupId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("privateLayout", model.getPrivateLayout());
+		jsonObj.put("logo", model.getLogo());
+		jsonObj.put("logoId", model.getLogoId());
+		jsonObj.put("themeId", model.getThemeId());
+		jsonObj.put("colorSchemeId", model.getColorSchemeId());
+		jsonObj.put("wapThemeId", model.getWapThemeId());
+		jsonObj.put("wapColorSchemeId", model.getWapColorSchemeId());
+		jsonObj.put("css", model.getCss());
+		jsonObj.put("pageCount", model.getPageCount());
+		jsonObj.put("virtualHost", model.getVirtualHost());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.LayoutSet> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (LayoutSet model : models) {
 			jsonArray.put(toJSONObject(model));

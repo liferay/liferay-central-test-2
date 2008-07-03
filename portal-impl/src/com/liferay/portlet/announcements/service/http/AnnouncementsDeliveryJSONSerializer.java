@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.announcements.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+
 import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,22 +51,22 @@ import java.util.List;
  */
 public class AnnouncementsDeliveryJSONSerializer {
 	public static JSONObject toJSONObject(AnnouncementsDelivery model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "deliveryId", model.getDeliveryId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "type", model.getType());
-		JSONUtil.put(jsonObj, "email", model.getEmail());
-		JSONUtil.put(jsonObj, "sms", model.getSms());
-		JSONUtil.put(jsonObj, "website", model.getWebsite());
+		jsonObj.put("deliveryId", model.getDeliveryId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("type", model.getType());
+		jsonObj.put("email", model.getEmail());
+		jsonObj.put("sms", model.getSms());
+		jsonObj.put("website", model.getWebsite());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (AnnouncementsDelivery model : models) {
 			jsonArray.put(toJSONObject(model));

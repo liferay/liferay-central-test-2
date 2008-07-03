@@ -22,12 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.Address;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,33 +50,33 @@ import java.util.List;
  */
 public class AddressJSONSerializer {
 	public static JSONObject toJSONObject(Address model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "addressId", model.getAddressId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "userName", model.getUserName());
-		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
-		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
-		JSONUtil.put(jsonObj, "classNameId", model.getClassNameId());
-		JSONUtil.put(jsonObj, "classPK", model.getClassPK());
-		JSONUtil.put(jsonObj, "street1", model.getStreet1());
-		JSONUtil.put(jsonObj, "street2", model.getStreet2());
-		JSONUtil.put(jsonObj, "street3", model.getStreet3());
-		JSONUtil.put(jsonObj, "city", model.getCity());
-		JSONUtil.put(jsonObj, "zip", model.getZip());
-		JSONUtil.put(jsonObj, "regionId", model.getRegionId());
-		JSONUtil.put(jsonObj, "countryId", model.getCountryId());
-		JSONUtil.put(jsonObj, "typeId", model.getTypeId());
-		JSONUtil.put(jsonObj, "mailing", model.getMailing());
-		JSONUtil.put(jsonObj, "primary", model.getPrimary());
+		jsonObj.put("addressId", model.getAddressId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("userName", model.getUserName());
+		jsonObj.put("createDate", model.getCreateDate().getTime());
+		jsonObj.put("modifiedDate", model.getModifiedDate().getTime());
+		jsonObj.put("classNameId", model.getClassNameId());
+		jsonObj.put("classPK", model.getClassPK());
+		jsonObj.put("street1", model.getStreet1());
+		jsonObj.put("street2", model.getStreet2());
+		jsonObj.put("street3", model.getStreet3());
+		jsonObj.put("city", model.getCity());
+		jsonObj.put("zip", model.getZip());
+		jsonObj.put("regionId", model.getRegionId());
+		jsonObj.put("countryId", model.getCountryId());
+		jsonObj.put("typeId", model.getTypeId());
+		jsonObj.put("mailing", model.getMailing());
+		jsonObj.put("primary", model.getPrimary());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.Address> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (Address model : models) {
 			jsonArray.put(toJSONObject(model));

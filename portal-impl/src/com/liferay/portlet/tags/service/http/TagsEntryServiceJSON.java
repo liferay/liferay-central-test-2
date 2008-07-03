@@ -22,10 +22,10 @@
 
 package com.liferay.portlet.tags.service.http;
 
-import com.liferay.portlet.tags.service.TagsEntryServiceUtil;
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONObject;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.liferay.portlet.tags.service.TagsEntryServiceUtil;
 
 /**
  * <a href="TagsEntryServiceJSON.java.html"><b><i>View Source</i></b></a>
@@ -46,9 +46,11 @@ import org.json.JSONObject;
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
  * if the method in the service utility returns a <code>java.util.List</code>,
- * that is translated to a <code>org.json.JSONArray</code>. If the method in the
+ * that is translated to a
+ * <code>com.liferay.portal.kernel.json.JSONArray</code>. If the method in the
  * service utility returns a <code>com.liferay.portlet.tags.model.TagsEntry</code>,
- * that is translated to a <code>org.json.JSONObject</code>. Methods that JSON
+ * that is translated to a
+ * <code>com.liferay.portal.kernel.json.JSONObject</code>. Methods that JSON
  * cannot safely use are skipped. The logic for the translation is encapsulated
  * in <code>com.liferay.portlet.tags.service.http.TagsEntryJSONSerializer</code>.
  * </p>
@@ -137,13 +139,14 @@ public class TagsEntryServiceJSON {
 		return TagsEntryJSONSerializer.toJSONArray(returnValue);
 	}
 
-	public static JSONArray searchAutocomplete(long companyId,
-		java.lang.String name, java.lang.String[] properties, int start, int end)
+	public static com.liferay.portal.kernel.json.JSONArray searchAutocomplete(
+		long companyId, java.lang.String name, java.lang.String[] properties,
+		int start, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
-		com.liferay.portal.kernel.json.JSONArrayWrapper returnValue = TagsEntryServiceUtil.searchAutocomplete(companyId,
+		com.liferay.portal.kernel.json.JSONArray returnValue = TagsEntryServiceUtil.searchAutocomplete(companyId,
 				name, properties, start, end);
 
-		return (JSONArray)returnValue.getValue();
+		return returnValue;
 	}
 
 	public static int searchCount(long companyId, java.lang.String name,

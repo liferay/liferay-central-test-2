@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.documentlibrary.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,32 +51,32 @@ import java.util.List;
  */
 public class DLFileEntryJSONSerializer {
 	public static JSONObject toJSONObject(DLFileEntry model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "uuid", model.getUuid());
-		JSONUtil.put(jsonObj, "fileEntryId", model.getFileEntryId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "userName", model.getUserName());
-		JSONUtil.put(jsonObj, "versionUserId", model.getVersionUserId());
-		JSONUtil.put(jsonObj, "versionUserName", model.getVersionUserName());
-		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
-		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
-		JSONUtil.put(jsonObj, "folderId", model.getFolderId());
-		JSONUtil.put(jsonObj, "name", model.getName());
-		JSONUtil.put(jsonObj, "title", model.getTitle());
-		JSONUtil.put(jsonObj, "description", model.getDescription());
-		JSONUtil.put(jsonObj, "version", model.getVersion());
-		JSONUtil.put(jsonObj, "size", model.getSize());
-		JSONUtil.put(jsonObj, "readCount", model.getReadCount());
-		JSONUtil.put(jsonObj, "extraSettings", model.getExtraSettings());
+		jsonObj.put("uuid", model.getUuid());
+		jsonObj.put("fileEntryId", model.getFileEntryId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("userName", model.getUserName());
+		jsonObj.put("versionUserId", model.getVersionUserId());
+		jsonObj.put("versionUserName", model.getVersionUserName());
+		jsonObj.put("createDate", model.getCreateDate().getTime());
+		jsonObj.put("modifiedDate", model.getModifiedDate().getTime());
+		jsonObj.put("folderId", model.getFolderId());
+		jsonObj.put("name", model.getName());
+		jsonObj.put("title", model.getTitle());
+		jsonObj.put("description", model.getDescription());
+		jsonObj.put("version", model.getVersion());
+		jsonObj.put("size", model.getSize());
+		jsonObj.put("readCount", model.getReadCount());
+		jsonObj.put("extraSettings", model.getExtraSettings());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.documentlibrary.model.DLFileEntry> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (DLFileEntry model : models) {
 			jsonArray.put(toJSONObject(model));

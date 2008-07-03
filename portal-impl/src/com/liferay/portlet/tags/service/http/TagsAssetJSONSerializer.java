@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.tags.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+
 import com.liferay.portlet.tags.model.TagsAsset;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,37 +51,37 @@ import java.util.List;
  */
 public class TagsAssetJSONSerializer {
 	public static JSONObject toJSONObject(TagsAsset model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "assetId", model.getAssetId());
-		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "userName", model.getUserName());
-		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
-		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
-		JSONUtil.put(jsonObj, "classNameId", model.getClassNameId());
-		JSONUtil.put(jsonObj, "classPK", model.getClassPK());
-		JSONUtil.put(jsonObj, "startDate", model.getStartDate());
-		JSONUtil.put(jsonObj, "endDate", model.getEndDate());
-		JSONUtil.put(jsonObj, "publishDate", model.getPublishDate());
-		JSONUtil.put(jsonObj, "expirationDate", model.getExpirationDate());
-		JSONUtil.put(jsonObj, "mimeType", model.getMimeType());
-		JSONUtil.put(jsonObj, "title", model.getTitle());
-		JSONUtil.put(jsonObj, "description", model.getDescription());
-		JSONUtil.put(jsonObj, "summary", model.getSummary());
-		JSONUtil.put(jsonObj, "url", model.getUrl());
-		JSONUtil.put(jsonObj, "height", model.getHeight());
-		JSONUtil.put(jsonObj, "width", model.getWidth());
-		JSONUtil.put(jsonObj, "priority", model.getPriority());
-		JSONUtil.put(jsonObj, "viewCount", model.getViewCount());
+		jsonObj.put("assetId", model.getAssetId());
+		jsonObj.put("groupId", model.getGroupId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("userName", model.getUserName());
+		jsonObj.put("createDate", model.getCreateDate().getTime());
+		jsonObj.put("modifiedDate", model.getModifiedDate().getTime());
+		jsonObj.put("classNameId", model.getClassNameId());
+		jsonObj.put("classPK", model.getClassPK());
+		jsonObj.put("startDate", model.getStartDate().getTime());
+		jsonObj.put("endDate", model.getEndDate().getTime());
+		jsonObj.put("publishDate", model.getPublishDate().getTime());
+		jsonObj.put("expirationDate", model.getExpirationDate().getTime());
+		jsonObj.put("mimeType", model.getMimeType());
+		jsonObj.put("title", model.getTitle());
+		jsonObj.put("description", model.getDescription());
+		jsonObj.put("summary", model.getSummary());
+		jsonObj.put("url", model.getUrl());
+		jsonObj.put("height", model.getHeight());
+		jsonObj.put("width", model.getWidth());
+		jsonObj.put("priority", model.getPriority());
+		jsonObj.put("viewCount", model.getViewCount());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.tags.model.TagsAsset> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (TagsAsset model : models) {
 			jsonArray.put(toJSONObject(model));

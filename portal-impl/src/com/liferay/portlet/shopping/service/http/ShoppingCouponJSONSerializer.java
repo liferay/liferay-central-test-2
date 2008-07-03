@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.shopping.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,33 +51,33 @@ import java.util.List;
  */
 public class ShoppingCouponJSONSerializer {
 	public static JSONObject toJSONObject(ShoppingCoupon model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "couponId", model.getCouponId());
-		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "userName", model.getUserName());
-		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
-		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
-		JSONUtil.put(jsonObj, "code", model.getCode());
-		JSONUtil.put(jsonObj, "name", model.getName());
-		JSONUtil.put(jsonObj, "description", model.getDescription());
-		JSONUtil.put(jsonObj, "startDate", model.getStartDate());
-		JSONUtil.put(jsonObj, "endDate", model.getEndDate());
-		JSONUtil.put(jsonObj, "active", model.getActive());
-		JSONUtil.put(jsonObj, "limitCategories", model.getLimitCategories());
-		JSONUtil.put(jsonObj, "limitSkus", model.getLimitSkus());
-		JSONUtil.put(jsonObj, "minOrder", model.getMinOrder());
-		JSONUtil.put(jsonObj, "discount", model.getDiscount());
-		JSONUtil.put(jsonObj, "discountType", model.getDiscountType());
+		jsonObj.put("couponId", model.getCouponId());
+		jsonObj.put("groupId", model.getGroupId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("userName", model.getUserName());
+		jsonObj.put("createDate", model.getCreateDate().getTime());
+		jsonObj.put("modifiedDate", model.getModifiedDate().getTime());
+		jsonObj.put("code", model.getCode());
+		jsonObj.put("name", model.getName());
+		jsonObj.put("description", model.getDescription());
+		jsonObj.put("startDate", model.getStartDate().getTime());
+		jsonObj.put("endDate", model.getEndDate().getTime());
+		jsonObj.put("active", model.getActive());
+		jsonObj.put("limitCategories", model.getLimitCategories());
+		jsonObj.put("limitSkus", model.getLimitSkus());
+		jsonObj.put("minOrder", model.getMinOrder());
+		jsonObj.put("discount", model.getDiscount());
+		jsonObj.put("discountType", model.getDiscountType());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.shopping.model.ShoppingCoupon> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (ShoppingCoupon model : models) {
 			jsonArray.put(toJSONObject(model));

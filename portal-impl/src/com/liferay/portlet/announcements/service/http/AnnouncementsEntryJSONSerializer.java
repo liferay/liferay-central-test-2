@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.announcements.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+
 import com.liferay.portlet.announcements.model.AnnouncementsEntry;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,32 +51,32 @@ import java.util.List;
  */
 public class AnnouncementsEntryJSONSerializer {
 	public static JSONObject toJSONObject(AnnouncementsEntry model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "uuid", model.getUuid());
-		JSONUtil.put(jsonObj, "entryId", model.getEntryId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "userName", model.getUserName());
-		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
-		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
-		JSONUtil.put(jsonObj, "classNameId", model.getClassNameId());
-		JSONUtil.put(jsonObj, "classPK", model.getClassPK());
-		JSONUtil.put(jsonObj, "title", model.getTitle());
-		JSONUtil.put(jsonObj, "content", model.getContent());
-		JSONUtil.put(jsonObj, "url", model.getUrl());
-		JSONUtil.put(jsonObj, "type", model.getType());
-		JSONUtil.put(jsonObj, "displayDate", model.getDisplayDate());
-		JSONUtil.put(jsonObj, "expirationDate", model.getExpirationDate());
-		JSONUtil.put(jsonObj, "priority", model.getPriority());
-		JSONUtil.put(jsonObj, "alert", model.getAlert());
+		jsonObj.put("uuid", model.getUuid());
+		jsonObj.put("entryId", model.getEntryId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("userName", model.getUserName());
+		jsonObj.put("createDate", model.getCreateDate().getTime());
+		jsonObj.put("modifiedDate", model.getModifiedDate().getTime());
+		jsonObj.put("classNameId", model.getClassNameId());
+		jsonObj.put("classPK", model.getClassPK());
+		jsonObj.put("title", model.getTitle());
+		jsonObj.put("content", model.getContent());
+		jsonObj.put("url", model.getUrl());
+		jsonObj.put("type", model.getType());
+		jsonObj.put("displayDate", model.getDisplayDate().getTime());
+		jsonObj.put("expirationDate", model.getExpirationDate().getTime());
+		jsonObj.put("priority", model.getPriority());
+		jsonObj.put("alert", model.getAlert());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.announcements.model.AnnouncementsEntry> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (AnnouncementsEntry model : models) {
 			jsonArray.put(toJSONObject(model));

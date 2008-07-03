@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.softwarecatalog.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,21 +51,21 @@ import java.util.List;
  */
 public class SCLicenseJSONSerializer {
 	public static JSONObject toJSONObject(SCLicense model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "licenseId", model.getLicenseId());
-		JSONUtil.put(jsonObj, "name", model.getName());
-		JSONUtil.put(jsonObj, "url", model.getUrl());
-		JSONUtil.put(jsonObj, "openSource", model.getOpenSource());
-		JSONUtil.put(jsonObj, "active", model.getActive());
-		JSONUtil.put(jsonObj, "recommended", model.getRecommended());
+		jsonObj.put("licenseId", model.getLicenseId());
+		jsonObj.put("name", model.getName());
+		jsonObj.put("url", model.getUrl());
+		jsonObj.put("openSource", model.getOpenSource());
+		jsonObj.put("active", model.getActive());
+		jsonObj.put("recommended", model.getRecommended());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.softwarecatalog.model.SCLicense> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (SCLicense model : models) {
 			jsonArray.put(toJSONObject(model));

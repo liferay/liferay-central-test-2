@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.softwarecatalog.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,31 +51,31 @@ import java.util.List;
  */
 public class SCProductEntryJSONSerializer {
 	public static JSONObject toJSONObject(SCProductEntry model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "productEntryId", model.getProductEntryId());
-		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "userName", model.getUserName());
-		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
-		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
-		JSONUtil.put(jsonObj, "name", model.getName());
-		JSONUtil.put(jsonObj, "type", model.getType());
-		JSONUtil.put(jsonObj, "tags", model.getTags());
-		JSONUtil.put(jsonObj, "shortDescription", model.getShortDescription());
-		JSONUtil.put(jsonObj, "longDescription", model.getLongDescription());
-		JSONUtil.put(jsonObj, "pageURL", model.getPageURL());
-		JSONUtil.put(jsonObj, "author", model.getAuthor());
-		JSONUtil.put(jsonObj, "repoGroupId", model.getRepoGroupId());
-		JSONUtil.put(jsonObj, "repoArtifactId", model.getRepoArtifactId());
+		jsonObj.put("productEntryId", model.getProductEntryId());
+		jsonObj.put("groupId", model.getGroupId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("userName", model.getUserName());
+		jsonObj.put("createDate", model.getCreateDate().getTime());
+		jsonObj.put("modifiedDate", model.getModifiedDate().getTime());
+		jsonObj.put("name", model.getName());
+		jsonObj.put("type", model.getType());
+		jsonObj.put("tags", model.getTags());
+		jsonObj.put("shortDescription", model.getShortDescription());
+		jsonObj.put("longDescription", model.getLongDescription());
+		jsonObj.put("pageURL", model.getPageURL());
+		jsonObj.put("author", model.getAuthor());
+		jsonObj.put("repoGroupId", model.getRepoGroupId());
+		jsonObj.put("repoArtifactId", model.getRepoArtifactId());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (SCProductEntry model : models) {
 			jsonArray.put(toJSONObject(model));

@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.tags.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+
 import com.liferay.portlet.tags.model.TagsSource;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,19 +51,19 @@ import java.util.List;
  */
 public class TagsSourceJSONSerializer {
 	public static JSONObject toJSONObject(TagsSource model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "sourceId", model.getSourceId());
-		JSONUtil.put(jsonObj, "parentSourceId", model.getParentSourceId());
-		JSONUtil.put(jsonObj, "name", model.getName());
-		JSONUtil.put(jsonObj, "acronym", model.getAcronym());
+		jsonObj.put("sourceId", model.getSourceId());
+		jsonObj.put("parentSourceId", model.getParentSourceId());
+		jsonObj.put("name", model.getName());
+		jsonObj.put("acronym", model.getAcronym());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.tags.model.TagsSource> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (TagsSource model : models) {
 			jsonArray.put(toJSONObject(model));

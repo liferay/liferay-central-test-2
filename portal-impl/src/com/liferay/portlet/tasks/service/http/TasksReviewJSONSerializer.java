@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.tasks.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+
 import com.liferay.portlet.tasks.model.TasksReview;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,29 +51,28 @@ import java.util.List;
  */
 public class TasksReviewJSONSerializer {
 	public static JSONObject toJSONObject(TasksReview model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "reviewId", model.getReviewId());
-		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "userName", model.getUserName());
-		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
-		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
-		JSONUtil.put(jsonObj, "proposalId", model.getProposalId());
-		JSONUtil.put(jsonObj, "assignedByUserId", model.getAssignedByUserId());
-		JSONUtil.put(jsonObj, "assignedByUserName",
-			model.getAssignedByUserName());
-		JSONUtil.put(jsonObj, "stage", model.getStage());
-		JSONUtil.put(jsonObj, "completed", model.getCompleted());
-		JSONUtil.put(jsonObj, "rejected", model.getRejected());
+		jsonObj.put("reviewId", model.getReviewId());
+		jsonObj.put("groupId", model.getGroupId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("userName", model.getUserName());
+		jsonObj.put("createDate", model.getCreateDate().getTime());
+		jsonObj.put("modifiedDate", model.getModifiedDate().getTime());
+		jsonObj.put("proposalId", model.getProposalId());
+		jsonObj.put("assignedByUserId", model.getAssignedByUserId());
+		jsonObj.put("assignedByUserName", model.getAssignedByUserName());
+		jsonObj.put("stage", model.getStage());
+		jsonObj.put("completed", model.getCompleted());
+		jsonObj.put("rejected", model.getRejected());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.tasks.model.TasksReview> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (TasksReview model : models) {
 			jsonArray.put(toJSONObject(model));

@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.announcements.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+
 import com.liferay.portlet.announcements.model.AnnouncementsFlag;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,20 +51,20 @@ import java.util.List;
  */
 public class AnnouncementsFlagJSONSerializer {
 	public static JSONObject toJSONObject(AnnouncementsFlag model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "flagId", model.getFlagId());
-		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
-		JSONUtil.put(jsonObj, "entryId", model.getEntryId());
-		JSONUtil.put(jsonObj, "value", model.getValue());
+		jsonObj.put("flagId", model.getFlagId());
+		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("createDate", model.getCreateDate().getTime());
+		jsonObj.put("entryId", model.getEntryId());
+		jsonObj.put("value", model.getValue());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.announcements.model.AnnouncementsFlag> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (AnnouncementsFlag model : models) {
 			jsonArray.put(toJSONObject(model));

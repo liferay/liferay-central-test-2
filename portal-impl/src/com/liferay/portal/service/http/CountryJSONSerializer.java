@@ -22,12 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.Country;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,22 +50,22 @@ import java.util.List;
  */
 public class CountryJSONSerializer {
 	public static JSONObject toJSONObject(Country model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "countryId", model.getCountryId());
-		JSONUtil.put(jsonObj, "name", model.getName());
-		JSONUtil.put(jsonObj, "a2", model.getA2());
-		JSONUtil.put(jsonObj, "a3", model.getA3());
-		JSONUtil.put(jsonObj, "number", model.getNumber());
-		JSONUtil.put(jsonObj, "idd", model.getIdd());
-		JSONUtil.put(jsonObj, "active", model.getActive());
+		jsonObj.put("countryId", model.getCountryId());
+		jsonObj.put("name", model.getName());
+		jsonObj.put("a2", model.getA2());
+		jsonObj.put("a3", model.getA3());
+		jsonObj.put("number", model.getNumber());
+		jsonObj.put("idd", model.getIdd());
+		jsonObj.put("active", model.getActive());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.Country> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (Country model : models) {
 			jsonArray.put(toJSONObject(model));

@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.bookmarks.service.http;
 
-import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 
-import org.json.JSONObject;
+import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
 
 /**
  * <a href="BookmarksFolderServiceJSON.java.html"><b><i>View Source</i></b></a>
@@ -45,9 +45,11 @@ import org.json.JSONObject;
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
  * if the method in the service utility returns a <code>java.util.List</code>,
- * that is translated to a <code>org.json.JSONArray</code>. If the method in the
+ * that is translated to a
+ * <code>com.liferay.portal.kernel.json.JSONArray</code>. If the method in the
  * service utility returns a <code>com.liferay.portlet.bookmarks.model.BookmarksFolder</code>,
- * that is translated to a <code>org.json.JSONObject</code>. Methods that JSON
+ * that is translated to a
+ * <code>com.liferay.portal.kernel.json.JSONObject</code>. Methods that JSON
  * cannot safely use are skipped. The logic for the translation is encapsulated
  * in <code>com.liferay.portlet.bookmarks.service.http.BookmarksFolderJSONSerializer</code>.
  * </p>

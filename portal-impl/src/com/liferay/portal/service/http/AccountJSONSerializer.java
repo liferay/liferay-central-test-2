@@ -22,12 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.Account;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,31 +50,31 @@ import java.util.List;
  */
 public class AccountJSONSerializer {
 	public static JSONObject toJSONObject(Account model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "accountId", model.getAccountId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "userName", model.getUserName());
-		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
-		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
-		JSONUtil.put(jsonObj, "parentAccountId", model.getParentAccountId());
-		JSONUtil.put(jsonObj, "name", model.getName());
-		JSONUtil.put(jsonObj, "legalName", model.getLegalName());
-		JSONUtil.put(jsonObj, "legalId", model.getLegalId());
-		JSONUtil.put(jsonObj, "legalType", model.getLegalType());
-		JSONUtil.put(jsonObj, "sicCode", model.getSicCode());
-		JSONUtil.put(jsonObj, "tickerSymbol", model.getTickerSymbol());
-		JSONUtil.put(jsonObj, "industry", model.getIndustry());
-		JSONUtil.put(jsonObj, "type", model.getType());
-		JSONUtil.put(jsonObj, "size", model.getSize());
+		jsonObj.put("accountId", model.getAccountId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("userName", model.getUserName());
+		jsonObj.put("createDate", model.getCreateDate().getTime());
+		jsonObj.put("modifiedDate", model.getModifiedDate().getTime());
+		jsonObj.put("parentAccountId", model.getParentAccountId());
+		jsonObj.put("name", model.getName());
+		jsonObj.put("legalName", model.getLegalName());
+		jsonObj.put("legalId", model.getLegalId());
+		jsonObj.put("legalType", model.getLegalType());
+		jsonObj.put("sicCode", model.getSicCode());
+		jsonObj.put("tickerSymbol", model.getTickerSymbol());
+		jsonObj.put("industry", model.getIndustry());
+		jsonObj.put("type", model.getType());
+		jsonObj.put("size", model.getSize());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.Account> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (Account model : models) {
 			jsonArray.put(toJSONObject(model));

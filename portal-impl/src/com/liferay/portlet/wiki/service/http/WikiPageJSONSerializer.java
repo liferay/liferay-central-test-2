@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.wiki.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+
 import com.liferay.portlet.wiki.model.WikiPage;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,32 +51,32 @@ import java.util.List;
  */
 public class WikiPageJSONSerializer {
 	public static JSONObject toJSONObject(WikiPage model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "uuid", model.getUuid());
-		JSONUtil.put(jsonObj, "pageId", model.getPageId());
-		JSONUtil.put(jsonObj, "resourcePrimKey", model.getResourcePrimKey());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "userName", model.getUserName());
-		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
-		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
-		JSONUtil.put(jsonObj, "nodeId", model.getNodeId());
-		JSONUtil.put(jsonObj, "title", model.getTitle());
-		JSONUtil.put(jsonObj, "version", model.getVersion());
-		JSONUtil.put(jsonObj, "content", model.getContent());
-		JSONUtil.put(jsonObj, "summary", model.getSummary());
-		JSONUtil.put(jsonObj, "format", model.getFormat());
-		JSONUtil.put(jsonObj, "head", model.getHead());
-		JSONUtil.put(jsonObj, "parentTitle", model.getParentTitle());
-		JSONUtil.put(jsonObj, "redirectTitle", model.getRedirectTitle());
+		jsonObj.put("uuid", model.getUuid());
+		jsonObj.put("pageId", model.getPageId());
+		jsonObj.put("resourcePrimKey", model.getResourcePrimKey());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("userName", model.getUserName());
+		jsonObj.put("createDate", model.getCreateDate().getTime());
+		jsonObj.put("modifiedDate", model.getModifiedDate().getTime());
+		jsonObj.put("nodeId", model.getNodeId());
+		jsonObj.put("title", model.getTitle());
+		jsonObj.put("version", model.getVersion());
+		jsonObj.put("content", model.getContent());
+		jsonObj.put("summary", model.getSummary());
+		jsonObj.put("format", model.getFormat());
+		jsonObj.put("head", model.getHead());
+		jsonObj.put("parentTitle", model.getParentTitle());
+		jsonObj.put("redirectTitle", model.getRedirectTitle());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.wiki.model.WikiPage> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (WikiPage model : models) {
 			jsonArray.put(toJSONObject(model));

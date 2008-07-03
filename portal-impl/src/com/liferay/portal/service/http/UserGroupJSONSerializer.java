@@ -22,12 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.UserGroup;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,20 +50,20 @@ import java.util.List;
  */
 public class UserGroupJSONSerializer {
 	public static JSONObject toJSONObject(UserGroup model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "userGroupId", model.getUserGroupId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "parentUserGroupId", model.getParentUserGroupId());
-		JSONUtil.put(jsonObj, "name", model.getName());
-		JSONUtil.put(jsonObj, "description", model.getDescription());
+		jsonObj.put("userGroupId", model.getUserGroupId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("parentUserGroupId", model.getParentUserGroupId());
+		jsonObj.put("name", model.getName());
+		jsonObj.put("description", model.getDescription());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.UserGroup> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (UserGroup model : models) {
 			jsonArray.put(toJSONObject(model));

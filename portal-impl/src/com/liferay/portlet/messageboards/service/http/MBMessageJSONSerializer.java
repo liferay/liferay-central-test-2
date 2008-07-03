@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.messageboards.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+
 import com.liferay.portlet.messageboards.model.MBMessage;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,29 +51,29 @@ import java.util.List;
  */
 public class MBMessageJSONSerializer {
 	public static JSONObject toJSONObject(MBMessage model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "uuid", model.getUuid());
-		JSONUtil.put(jsonObj, "messageId", model.getMessageId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "userName", model.getUserName());
-		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
-		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
-		JSONUtil.put(jsonObj, "categoryId", model.getCategoryId());
-		JSONUtil.put(jsonObj, "threadId", model.getThreadId());
-		JSONUtil.put(jsonObj, "parentMessageId", model.getParentMessageId());
-		JSONUtil.put(jsonObj, "subject", model.getSubject());
-		JSONUtil.put(jsonObj, "body", model.getBody());
-		JSONUtil.put(jsonObj, "attachments", model.getAttachments());
-		JSONUtil.put(jsonObj, "anonymous", model.getAnonymous());
+		jsonObj.put("uuid", model.getUuid());
+		jsonObj.put("messageId", model.getMessageId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("userName", model.getUserName());
+		jsonObj.put("createDate", model.getCreateDate().getTime());
+		jsonObj.put("modifiedDate", model.getModifiedDate().getTime());
+		jsonObj.put("categoryId", model.getCategoryId());
+		jsonObj.put("threadId", model.getThreadId());
+		jsonObj.put("parentMessageId", model.getParentMessageId());
+		jsonObj.put("subject", model.getSubject());
+		jsonObj.put("body", model.getBody());
+		jsonObj.put("attachments", model.getAttachments());
+		jsonObj.put("anonymous", model.getAnonymous());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.messageboards.model.MBMessage> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (MBMessage model : models) {
 			jsonArray.put(toJSONObject(model));

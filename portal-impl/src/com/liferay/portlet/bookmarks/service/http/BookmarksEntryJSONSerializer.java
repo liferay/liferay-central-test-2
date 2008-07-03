@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.bookmarks.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,27 +51,27 @@ import java.util.List;
  */
 public class BookmarksEntryJSONSerializer {
 	public static JSONObject toJSONObject(BookmarksEntry model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "uuid", model.getUuid());
-		JSONUtil.put(jsonObj, "entryId", model.getEntryId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
-		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
-		JSONUtil.put(jsonObj, "folderId", model.getFolderId());
-		JSONUtil.put(jsonObj, "name", model.getName());
-		JSONUtil.put(jsonObj, "url", model.getUrl());
-		JSONUtil.put(jsonObj, "comments", model.getComments());
-		JSONUtil.put(jsonObj, "visits", model.getVisits());
-		JSONUtil.put(jsonObj, "priority", model.getPriority());
+		jsonObj.put("uuid", model.getUuid());
+		jsonObj.put("entryId", model.getEntryId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("createDate", model.getCreateDate().getTime());
+		jsonObj.put("modifiedDate", model.getModifiedDate().getTime());
+		jsonObj.put("folderId", model.getFolderId());
+		jsonObj.put("name", model.getName());
+		jsonObj.put("url", model.getUrl());
+		jsonObj.put("comments", model.getComments());
+		jsonObj.put("visits", model.getVisits());
+		jsonObj.put("priority", model.getPriority());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.bookmarks.model.BookmarksEntry> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (BookmarksEntry model : models) {
 			jsonArray.put(toJSONObject(model));

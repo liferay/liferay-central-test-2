@@ -22,12 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.User;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,49 +50,47 @@ import java.util.List;
  */
 public class UserJSONSerializer {
 	public static JSONObject toJSONObject(User model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "uuid", model.getUuid());
-		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
-		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
-		JSONUtil.put(jsonObj, "defaultUser", model.getDefaultUser());
-		JSONUtil.put(jsonObj, "contactId", model.getContactId());
-		JSONUtil.put(jsonObj, "password", model.getPassword());
-		JSONUtil.put(jsonObj, "passwordEncrypted", model.getPasswordEncrypted());
-		JSONUtil.put(jsonObj, "passwordReset", model.getPasswordReset());
-		JSONUtil.put(jsonObj, "passwordModifiedDate",
-			model.getPasswordModifiedDate());
-		JSONUtil.put(jsonObj, "graceLoginCount", model.getGraceLoginCount());
-		JSONUtil.put(jsonObj, "screenName", model.getScreenName());
-		JSONUtil.put(jsonObj, "emailAddress", model.getEmailAddress());
-		JSONUtil.put(jsonObj, "openId", model.getOpenId());
-		JSONUtil.put(jsonObj, "portraitId", model.getPortraitId());
-		JSONUtil.put(jsonObj, "languageId", model.getLanguageId());
-		JSONUtil.put(jsonObj, "timeZoneId", model.getTimeZoneId());
-		JSONUtil.put(jsonObj, "greeting", model.getGreeting());
-		JSONUtil.put(jsonObj, "comments", model.getComments());
-		JSONUtil.put(jsonObj, "loginDate", model.getLoginDate());
-		JSONUtil.put(jsonObj, "loginIP", model.getLoginIP());
-		JSONUtil.put(jsonObj, "lastLoginDate", model.getLastLoginDate());
-		JSONUtil.put(jsonObj, "lastLoginIP", model.getLastLoginIP());
-		JSONUtil.put(jsonObj, "lastFailedLoginDate",
-			model.getLastFailedLoginDate());
-		JSONUtil.put(jsonObj, "failedLoginAttempts",
-			model.getFailedLoginAttempts());
-		JSONUtil.put(jsonObj, "lockout", model.getLockout());
-		JSONUtil.put(jsonObj, "lockoutDate", model.getLockoutDate());
-		JSONUtil.put(jsonObj, "agreedToTermsOfUse",
-			model.getAgreedToTermsOfUse());
-		JSONUtil.put(jsonObj, "active", model.getActive());
+		jsonObj.put("uuid", model.getUuid());
+		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("createDate", model.getCreateDate().getTime());
+		jsonObj.put("modifiedDate", model.getModifiedDate().getTime());
+		jsonObj.put("defaultUser", model.getDefaultUser());
+		jsonObj.put("contactId", model.getContactId());
+		jsonObj.put("password", model.getPassword());
+		jsonObj.put("passwordEncrypted", model.getPasswordEncrypted());
+		jsonObj.put("passwordReset", model.getPasswordReset());
+		jsonObj.put("passwordModifiedDate",
+			model.getPasswordModifiedDate().getTime());
+		jsonObj.put("graceLoginCount", model.getGraceLoginCount());
+		jsonObj.put("screenName", model.getScreenName());
+		jsonObj.put("emailAddress", model.getEmailAddress());
+		jsonObj.put("openId", model.getOpenId());
+		jsonObj.put("portraitId", model.getPortraitId());
+		jsonObj.put("languageId", model.getLanguageId());
+		jsonObj.put("timeZoneId", model.getTimeZoneId());
+		jsonObj.put("greeting", model.getGreeting());
+		jsonObj.put("comments", model.getComments());
+		jsonObj.put("loginDate", model.getLoginDate().getTime());
+		jsonObj.put("loginIP", model.getLoginIP());
+		jsonObj.put("lastLoginDate", model.getLastLoginDate().getTime());
+		jsonObj.put("lastLoginIP", model.getLastLoginIP());
+		jsonObj.put("lastFailedLoginDate",
+			model.getLastFailedLoginDate().getTime());
+		jsonObj.put("failedLoginAttempts", model.getFailedLoginAttempts());
+		jsonObj.put("lockout", model.getLockout());
+		jsonObj.put("lockoutDate", model.getLockoutDate().getTime());
+		jsonObj.put("agreedToTermsOfUse", model.getAgreedToTermsOfUse());
+		jsonObj.put("active", model.getActive());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.User> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (User model : models) {
 			jsonArray.put(toJSONObject(model));

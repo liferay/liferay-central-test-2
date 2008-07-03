@@ -22,12 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.Permission;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,19 +50,19 @@ import java.util.List;
  */
 public class PermissionJSONSerializer {
 	public static JSONObject toJSONObject(Permission model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "permissionId", model.getPermissionId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "actionId", model.getActionId());
-		JSONUtil.put(jsonObj, "resourceId", model.getResourceId());
+		jsonObj.put("permissionId", model.getPermissionId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("actionId", model.getActionId());
+		jsonObj.put("resourceId", model.getResourceId());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.Permission> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (Permission model : models) {
 			jsonArray.put(toJSONObject(model));

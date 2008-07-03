@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.polls.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+
 import com.liferay.portlet.polls.model.PollsVote;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,20 +51,20 @@ import java.util.List;
  */
 public class PollsVoteJSONSerializer {
 	public static JSONObject toJSONObject(PollsVote model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "voteId", model.getVoteId());
-		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "questionId", model.getQuestionId());
-		JSONUtil.put(jsonObj, "choiceId", model.getChoiceId());
-		JSONUtil.put(jsonObj, "voteDate", model.getVoteDate());
+		jsonObj.put("voteId", model.getVoteId());
+		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("questionId", model.getQuestionId());
+		jsonObj.put("choiceId", model.getChoiceId());
+		jsonObj.put("voteDate", model.getVoteDate().getTime());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.polls.model.PollsVote> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (PollsVote model : models) {
 			jsonArray.put(toJSONObject(model));

@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.blogs.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+
 import com.liferay.portlet.blogs.model.BlogsEntry;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,30 +51,30 @@ import java.util.List;
  */
 public class BlogsEntryJSONSerializer {
 	public static JSONObject toJSONObject(BlogsEntry model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "uuid", model.getUuid());
-		JSONUtil.put(jsonObj, "entryId", model.getEntryId());
-		JSONUtil.put(jsonObj, "groupId", model.getGroupId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "userName", model.getUserName());
-		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
-		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
-		JSONUtil.put(jsonObj, "title", model.getTitle());
-		JSONUtil.put(jsonObj, "urlTitle", model.getUrlTitle());
-		JSONUtil.put(jsonObj, "content", model.getContent());
-		JSONUtil.put(jsonObj, "displayDate", model.getDisplayDate());
-		JSONUtil.put(jsonObj, "draft", model.getDraft());
-		JSONUtil.put(jsonObj, "allowTrackbacks", model.getAllowTrackbacks());
-		JSONUtil.put(jsonObj, "trackbacks", model.getTrackbacks());
+		jsonObj.put("uuid", model.getUuid());
+		jsonObj.put("entryId", model.getEntryId());
+		jsonObj.put("groupId", model.getGroupId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("userName", model.getUserName());
+		jsonObj.put("createDate", model.getCreateDate().getTime());
+		jsonObj.put("modifiedDate", model.getModifiedDate().getTime());
+		jsonObj.put("title", model.getTitle());
+		jsonObj.put("urlTitle", model.getUrlTitle());
+		jsonObj.put("content", model.getContent());
+		jsonObj.put("displayDate", model.getDisplayDate().getTime());
+		jsonObj.put("draft", model.getDraft());
+		jsonObj.put("allowTrackbacks", model.getAllowTrackbacks());
+		jsonObj.put("trackbacks", model.getTrackbacks());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.blogs.model.BlogsEntry> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (BlogsEntry model : models) {
 			jsonArray.put(toJSONObject(model));

@@ -22,12 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.Portlet;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,20 +50,20 @@ import java.util.List;
  */
 public class PortletJSONSerializer {
 	public static JSONObject toJSONObject(Portlet model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "id", model.getId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "portletId", model.getPortletId());
-		JSONUtil.put(jsonObj, "roles", model.getRoles());
-		JSONUtil.put(jsonObj, "active", model.getActive());
+		jsonObj.put("id", model.getId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("portletId", model.getPortletId());
+		jsonObj.put("roles", model.getRoles());
+		jsonObj.put("active", model.getActive());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.Portlet> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (Portlet model : models) {
 			jsonArray.put(toJSONObject(model));

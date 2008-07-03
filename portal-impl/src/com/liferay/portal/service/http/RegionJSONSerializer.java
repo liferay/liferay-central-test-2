@@ -22,12 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.Region;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,20 +50,20 @@ import java.util.List;
  */
 public class RegionJSONSerializer {
 	public static JSONObject toJSONObject(Region model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "regionId", model.getRegionId());
-		JSONUtil.put(jsonObj, "countryId", model.getCountryId());
-		JSONUtil.put(jsonObj, "regionCode", model.getRegionCode());
-		JSONUtil.put(jsonObj, "name", model.getName());
-		JSONUtil.put(jsonObj, "active", model.getActive());
+		jsonObj.put("regionId", model.getRegionId());
+		jsonObj.put("countryId", model.getCountryId());
+		jsonObj.put("regionCode", model.getRegionCode());
+		jsonObj.put("name", model.getName());
+		jsonObj.put("active", model.getActive());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portal.model.Region> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (Region model : models) {
 			jsonArray.put(toJSONObject(model));

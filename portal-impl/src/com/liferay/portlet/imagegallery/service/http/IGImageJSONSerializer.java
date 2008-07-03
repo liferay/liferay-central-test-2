@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.imagegallery.service.http;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+
 import com.liferay.portlet.imagegallery.model.IGImage;
-
-import com.liferay.util.JSONUtil;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -52,28 +51,28 @@ import java.util.List;
  */
 public class IGImageJSONSerializer {
 	public static JSONObject toJSONObject(IGImage model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "uuid", model.getUuid());
-		JSONUtil.put(jsonObj, "imageId", model.getImageId());
-		JSONUtil.put(jsonObj, "companyId", model.getCompanyId());
-		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
-		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
-		JSONUtil.put(jsonObj, "folderId", model.getFolderId());
-		JSONUtil.put(jsonObj, "name", model.getName());
-		JSONUtil.put(jsonObj, "description", model.getDescription());
-		JSONUtil.put(jsonObj, "smallImageId", model.getSmallImageId());
-		JSONUtil.put(jsonObj, "largeImageId", model.getLargeImageId());
-		JSONUtil.put(jsonObj, "custom1ImageId", model.getCustom1ImageId());
-		JSONUtil.put(jsonObj, "custom2ImageId", model.getCustom2ImageId());
+		jsonObj.put("uuid", model.getUuid());
+		jsonObj.put("imageId", model.getImageId());
+		jsonObj.put("companyId", model.getCompanyId());
+		jsonObj.put("userId", model.getUserId());
+		jsonObj.put("createDate", model.getCreateDate().getTime());
+		jsonObj.put("modifiedDate", model.getModifiedDate().getTime());
+		jsonObj.put("folderId", model.getFolderId());
+		jsonObj.put("name", model.getName());
+		jsonObj.put("description", model.getDescription());
+		jsonObj.put("smallImageId", model.getSmallImageId());
+		jsonObj.put("largeImageId", model.getLargeImageId());
+		jsonObj.put("custom1ImageId", model.getCustom1ImageId());
+		jsonObj.put("custom2ImageId", model.getCustom2ImageId());
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(
 		List<com.liferay.portlet.imagegallery.model.IGImage> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (IGImage model : models) {
 			jsonArray.put(toJSONObject(model));
