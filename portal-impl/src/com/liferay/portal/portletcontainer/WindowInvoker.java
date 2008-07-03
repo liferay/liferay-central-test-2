@@ -86,11 +86,12 @@ import java.io.PrintWriter;
 import java.net.URL;
 
 import java.security.Principal;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import java.util.Locale;
+
 import javax.ccpp.Profile;
 
 import javax.portlet.ActionRequest;
@@ -171,15 +172,14 @@ public class WindowInvoker extends InvokerPortlet {
 				actionResponseImpl.getHttpServletResponse();
 
 			_initUser(request, _portletModel);
-			
+
 			ExecuteActionRequest executeActionRequest =
 				ContainerRequestFactory.createExecuteActionRequest(
 					request, _portletModel, actionRequestImpl.getWindowState(),
 					actionRequestImpl.getPortletMode(), _getPlid(actionRequest),
 					isFacesPortlet(), _remotePortlet);
 
-			_populateContainerRequest(
-				request, response, executeActionRequest);
+			_populateContainerRequest(request, response, executeActionRequest);
 
 			ExecuteActionResponse executeActionResponse =
 				ContainerResponseFactory.createExecuteActionResponse(response);
@@ -250,15 +250,14 @@ public class WindowInvoker extends InvokerPortlet {
 				renderResponseImpl.getHttpServletResponse();
 
 			_initUser(request, _portletModel);
-			
+
 			GetMarkupRequest getMarkupRequest =
 				ContainerRequestFactory.createGetMarkUpRequest(
 					request, _portletModel, renderRequestImpl.getWindowState(),
 					renderRequestImpl.getPortletMode(), _getPlid(renderRequest),
 					isFacesPortlet(), _remotePortlet);
 
-			_populateContainerRequest(
-				request, response, getMarkupRequest);
+			_populateContainerRequest(request, response, getMarkupRequest);
 
 			GetMarkupResponse getMarkupResponse =
 				ContainerResponseFactory.createGetMarkUpResponse(response);
@@ -315,7 +314,7 @@ public class WindowInvoker extends InvokerPortlet {
 				resourceResponseImpl.getHttpServletResponse();
 
 			_initUser(request, _portletModel);
-			
+
 			GetResourceRequest getResourceRequest =
 				ContainerRequestFactory.createGetResourceRequest(
 					request, _portletModel,
@@ -324,8 +323,7 @@ public class WindowInvoker extends InvokerPortlet {
 					_getPlid(resourceRequest), isFacesPortlet(),
 					_remotePortlet);
 
-			_populateContainerRequest(
-				request, response, getResourceRequest);
+			_populateContainerRequest(request, response, getResourceRequest);
 
 			GetResourceResponse getResourceResponse =
 				ContainerResponseFactory .createGetResourceResponse(response);
@@ -398,7 +396,6 @@ public class WindowInvoker extends InvokerPortlet {
 	}
 
 	private List<String> _getRoles(HttpServletRequest request) {
-
 		if (_remoteUserId <= 0) {
 			return Collections.emptyList();
 		}
@@ -406,9 +403,11 @@ public class WindowInvoker extends InvokerPortlet {
 		long companyId = PortalUtil.getCompanyId(request);
 
 		List<Role> roles = null;
+
 		try {
 			roles = RoleLocalServiceUtil.getRoles(companyId);
-		} catch (SystemException se) {
+		}
+		catch (SystemException se) {
 			_log.error(se);
 		}
 
@@ -426,12 +425,9 @@ public class WindowInvoker extends InvokerPortlet {
 		}
 	}
 
-	private boolean _isWARFile() {
-		return getPortletConfig().isWARFile();
-	}
-
 	private void _initUser(
 		HttpServletRequest request, com.liferay.portal.model.Portlet portlet) {
+
 		long userId = PortalUtil.getUserId(request);
 		String remoteUser = request.getRemoteUser();
 
@@ -465,6 +461,10 @@ public class WindowInvoker extends InvokerPortlet {
 		}
 	}
 
+	private boolean _isWARFile() {
+		return getPortletConfig().isWARFile();
+	}
+
 	private void _populateContainerRequest(
 		HttpServletRequest request, HttpServletResponse response,
 		ContainerRequest containerRequest) {
@@ -493,7 +493,7 @@ public class WindowInvoker extends InvokerPortlet {
 		request.setAttribute(
 			JavaConstants.JAVAX_PORTLET_RESPONSE, portletResponse);
 	}
-	
+
 	private static Log _log = LogFactory.getLog(WindowInvoker.class);
 
 	private com.liferay.portal.model.Portlet _portletModel;
