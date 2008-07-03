@@ -41,7 +41,7 @@
 
 	<liferay-ui:message key="click-on-any-tag-to-edit-it" />
 
-	<div id="<portlet:namespace />searchResultsDiv" /></div>
+	<div class="ui-tags" id="<portlet:namespace />searchResultsDiv" /></div>
 </fieldset>
 
 <fieldset id="<portlet:namespace />editEntryFields">

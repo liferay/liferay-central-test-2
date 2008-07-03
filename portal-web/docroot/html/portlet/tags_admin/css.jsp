@@ -24,10 +24,10 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-tags-admin .tag {
+.portlet-tags-admin .ui-tag {
 	float: left;
 	margin-bottom: 2px;
-	width: 25%;
+	width: 20%;
 }
 
 .portlet-tags-admin .tags-container {
@@ -36,15 +36,13 @@
 	width: 100%;
 }
 
-.portlet-tags-admin .drop-zone {
-	background: #dadada;
-	margin-right: 2px;
-	width: 24%;
+.portlet-tags-admin .dragging .ui-tag {
+	background: #D3DADD;
 }
 
-.portlet-tags-admin .drop-hover {
-	background: #9FD0F8;
-	font-weight: bold;
+.portlet-tags-admin .dragging .active-area {
+	background: #FFC;
+	border-color: #fc0;
 }
 
 .portlet-tags-admin .tag {

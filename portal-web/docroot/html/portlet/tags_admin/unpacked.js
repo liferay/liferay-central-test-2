@@ -329,15 +329,10 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 									var numEntries = entries.length;
 
-									html += '<div class="tag">';
+									html += '<span class="ui-tag">';
 									html += ' <a class="tag-name" href="javascript: ' + hrefJS + '" tagId="' + entry.entryId + '">' + entry.name + '</a>';
-									html += ' <a href="javascript: ' + instanceVar + '.deleteEntry(' + instanceVar + ', ' + entry.entryId + ')">[x]</a>';
-
-									if ((i + 1) < entries.length) {
-										html += '<br />';
-									}
-
-									html += '</div>';
+									html += '<a class="ui-tag-delete" href="javascript: ' + instanceVar + '.deleteEntry(' + instanceVar + ', ' + entry.entryId + ')"><span>x</span></a>';
+									html += '</span>';
 								}
 							);
 
@@ -349,22 +344,27 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 							searchResultsDiv.html(html);
 
-							var tags = searchResultsDiv.find('.tag');
+							var tags = searchResultsDiv.find('.ui-tag');
 
 							tags.draggable(
 								{
-									zIndex: 1000,
-									ghosting: true,
+									ghosting: false,
 									opacity: 0.7,
-									revert: true
+									revert: true,
+									zIndex: 1000,
+									start: function(event, ui) {
+										searchResultsDiv.addClass('dragging');
+									},
+									stop: function(event, ui) {
+										searchResultsDiv.removeClass('dragging');
+									}
 								}
 							);
 
 							tags.droppable(
 								{
-									accept : '.tag',
-									activeClass: 'drop-zone',
-									hoverClass:	'drop-hover',
+									accept : '.ui-tag',
+									hoverClass:	'active-area',
 									tolerance: 'pointer',
 									drop: function (event, ui) {
 										var draggable = ui.draggable;
@@ -398,7 +398,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 												},
 												function() {
 													draggable.remove();
-													jQuery('div.tag[@tagId=' + fromId + ']').remove();
+													jQuery('.ui-tag[@tagId=' + fromId + ']').remove();
 												}
 											);
 										}
