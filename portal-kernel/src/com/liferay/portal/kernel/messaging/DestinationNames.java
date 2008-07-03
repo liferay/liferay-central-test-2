@@ -38,11 +38,12 @@ public interface DestinationNames {
 	public static final String LAYOUTS_REMOTE_PUBLISHER =
 		"liferay/layouts_remote_publisher";
 
-	public static final String MESSAGE_BOARDS_MESSAGE =
-		"liferay/message_boards_message";
+	public static final String MESSAGE_BOARDS = "liferay/message_boards";
 
 	public static final String SCHEDULER = "liferay/scheduler";
 
 	public static final String SEARCH = "liferay/search";
+
+	public static final String WIKI = "liferay/wiki";
 
 }

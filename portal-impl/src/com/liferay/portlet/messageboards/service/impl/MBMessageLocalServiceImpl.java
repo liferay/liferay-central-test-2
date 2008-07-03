@@ -1574,7 +1574,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		jsonObj.put("htmlFormat", htmlFormat);
 
 		MessageBusUtil.sendMessage(
-			DestinationNames.MESSAGE_BOARDS_MESSAGE, jsonObj.toString());
+			DestinationNames.MESSAGE_BOARDS, jsonObj.toString());
 	}
 
 	protected void sendBlogsCommentsEmail(

@@ -20,12 +20,14 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.wiki.service.jms;
+package com.liferay.portlet.wiki.messaging;
 
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.mail.MailMessage;
-import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.User;
@@ -38,73 +40,41 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.jms.Message;
-import javax.jms.MessageListener;
-import javax.jms.ObjectMessage;
-import javax.jms.Queue;
-import javax.jms.QueueConnection;
-import javax.jms.QueueConnectionFactory;
-import javax.jms.QueueReceiver;
-import javax.jms.QueueSession;
-import javax.jms.Session;
-
 import javax.mail.internet.InternetAddress;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="WikiPageConsumer.java.html"><b><i>View Source</i></b></a>
+ * <a href="WikiMessageListener.java.html"><b><i>View Source</i></b></a>
  *
- * @author Bruno Farache
+ * @author Brian Wing Shun Chan
  *
  */
-public class WikiPageConsumer implements MessageListener {
+public class WikiMessageListener implements MessageListener {
 
-	public void consume() {
+	public void receive(String message) {
 		try {
-			QueueConnectionFactory qcf = WikiPageQCFUtil.getQCF();
-			QueueConnection con = qcf.createQueueConnection();
-
-			QueueSession session = con.createQueueSession(
-				false, Session.AUTO_ACKNOWLEDGE);
-			Queue queue = WikiPageQueueUtil.getQueue();
-
-			QueueReceiver subscriber = session.createReceiver(queue);
-
-			subscriber.setMessageListener(this);
-
-			con.start();
+			doReceive(message);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error("Unable to process message " + message, e);
 		}
 	}
 
-	public void onMessage(Message msg) {
-		try {
-			ObjectMessage objMsg = (ObjectMessage)msg;
+	public void doReceive(String message) throws Exception {
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject(message);
 
-			String[] array = (String[])objMsg.getObject();
-
-			_onMessage(array);
-		}
-		catch (Exception e) {
-			_log.error("Error sending wiki notifications", e);
-		}
-	}
-
-	private void _onMessage(String[] array) throws Exception {
-		long companyId = GetterUtil.getLong(array[0]);
-		long userId = GetterUtil.getLong(array[1]);
-		long nodeId = GetterUtil.getLong(array[2]);
-		long pageResourcePrimKey = GetterUtil.getLong(array[3]);
-		String fromName = array[4];
-		String fromAddress = array[5];
-		String subject = array[6];
-		String body = array[7];
-		String replyToAddress = array[8];
-		String mailId = array[9];
+		long companyId = jsonObj.getLong("companyId");
+		long userId = jsonObj.getLong("userId");
+		long nodeId = jsonObj.getLong("nodeId");
+		long pageResourcePrimKey = jsonObj.getLong("pageResourcePrimKey");
+		String fromName = jsonObj.getString("fromName");
+		String fromAddress = jsonObj.getString("fromAddress");
+		String subject = jsonObj.getString("subject");
+		String body = jsonObj.getString("body");
+		String replyToAddress = jsonObj.getString("replyToAddress");
+		String mailId = jsonObj.getString("mailId");
 
 		Set<Long> sent = new HashSet<Long>();
 
@@ -121,7 +91,7 @@ public class WikiPageConsumer implements MessageListener {
 			SubscriptionLocalServiceUtil.getSubscriptions(
 				companyId, WikiPage.class.getName(), pageResourcePrimKey);
 
-		_sendEmail(
+		sendEmail(
 			userId, fromName, fromAddress, subject, body, subscriptions, sent,
 			replyToAddress, mailId);
 
@@ -130,7 +100,7 @@ public class WikiPageConsumer implements MessageListener {
 		subscriptions = SubscriptionLocalServiceUtil.getSubscriptions(
 			companyId, WikiNode.class.getName(), nodeId);
 
-		_sendEmail(
+		sendEmail(
 			userId, fromName, fromAddress, subject, body, subscriptions, sent,
 			replyToAddress, mailId);
 
@@ -139,7 +109,7 @@ public class WikiPageConsumer implements MessageListener {
 		}
 	}
 
-	private void _sendEmail(
+	protected void sendEmail(
 			long userId, String fromName, String fromAddress, String subject,
 			String body, List<Subscription> subscriptions, Set<Long> sent,
 			String replyToAddress, String mailId)
@@ -232,6 +202,6 @@ public class WikiPageConsumer implements MessageListener {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(WikiPageConsumer.class);
+	private static Log _log = LogFactory.getLog(WikiMessageListener.class);
 
 }

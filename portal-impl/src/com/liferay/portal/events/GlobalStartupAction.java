@@ -47,6 +47,7 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.messageboards.messaging.MBMessageListener;
+import com.liferay.portlet.wiki.messaging.WikiMessageListener;
 
 import java.io.File;
 
@@ -228,13 +229,23 @@ public class GlobalStartupAction extends SimpleAction {
 
 		// Message boards
 
-		Destination destination = new ParallelDestination(
-			DestinationNames.MESSAGE_BOARDS_MESSAGE);
+		Destination messageBoardsDestination = new ParallelDestination(
+			DestinationNames.MESSAGE_BOARDS);
 
-		MessageBusUtil.addDestination(destination);
+		MessageBusUtil.addDestination(messageBoardsDestination);
 
 		MessageBusUtil.registerMessageListener(
-			destination.getName(), new MBMessageListener());
+			messageBoardsDestination.getName(), new MBMessageListener());
+
+		// Wiki
+
+		Destination wikiDestination = new ParallelDestination(
+			DestinationNames.WIKI);
+
+		MessageBusUtil.addDestination(wikiDestination);
+
+		MessageBusUtil.registerMessageListener(
+			wikiDestination.getName(), new WikiMessageListener());
 	}
 
 	private static Log _log = LogFactory.getLog(GlobalStartupAction.class);

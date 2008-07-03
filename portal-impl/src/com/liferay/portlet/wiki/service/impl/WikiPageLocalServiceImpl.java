@@ -28,6 +28,10 @@ import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -59,7 +63,6 @@ import com.liferay.portlet.wiki.model.WikiPageResource;
 import com.liferay.portlet.wiki.model.impl.WikiPageDisplayImpl;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 import com.liferay.portlet.wiki.service.base.WikiPageLocalServiceBaseImpl;
-import com.liferay.portlet.wiki.service.jms.WikiPageProducer;
 import com.liferay.portlet.wiki.util.Indexer;
 import com.liferay.portlet.wiki.util.WikiCacheThreadLocal;
 import com.liferay.portlet.wiki.util.WikiCacheUtil;
@@ -1198,14 +1201,20 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			subject = subjectPrefix + subject;
 		}
 
-		WikiPageProducer.produce(
-			new String[] {
-				String.valueOf(node.getCompanyId()),
-				String.valueOf(page.getUserId()),
-				String.valueOf(node.getNodeId()),
-				String.valueOf(page.getResourcePrimKey()),
-				fromName, fromAddress, subject, body, replyToAddress, mailId
-			});
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+
+		jsonObj.put("companyId", node.getCompanyId());
+		jsonObj.put("userId", node.getUserId());
+		jsonObj.put("nodeId", node.getNodeId());
+		jsonObj.put("pageResourcePrimKey", page.getResourcePrimKey());
+		jsonObj.put("fromName", fromName);
+		jsonObj.put("fromAddress", fromAddress);
+		jsonObj.put("subject", subject);
+		jsonObj.put("body", body);
+		jsonObj.put("replyToAddress", replyToAddress);
+		jsonObj.put("mailId", mailId);
+
+		MessageBusUtil.sendMessage(DestinationNames.WIKI, jsonObj.toString());
 	}
 
 	protected void validate(long nodeId, String content, String format)
