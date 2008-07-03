@@ -22,6 +22,8 @@
 
 package com.liferay.portal.search.lucene.messaging;
 
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.search.Document;
@@ -29,12 +31,9 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.messaging.SearchRequest;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
-import com.liferay.util.JSONUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.json.JSONObject;
 
 /**
  * <a href="LuceneMessageListener.java.html"><b><i>View Source</i></b></a>
@@ -54,17 +53,17 @@ public class LuceneMessageListener implements MessageListener {
 	}
 
 	public void doReceive(String message) throws Exception {
-		JSONObject jsonObj = new JSONObject(message);
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject(message);
 
-		String responseDestination = jsonObj.optString(
+		String responseDestination = jsonObj.getString(
 			"lfrResponseDestination");
-		String responseId = jsonObj.optString("lfrResponseId");
+		String responseId = jsonObj.getString("lfrResponseId");
 
 		jsonObj.remove("lfrResponseDestination");
 		jsonObj.remove("lfrResponseId");
 
 		SearchRequest searchRequest =
-			(SearchRequest)JSONUtil.deserialize(message);
+			(SearchRequest)JSONFactoryUtil.deserialize(message);
 
 		String command = searchRequest.getCommand();
 
@@ -104,10 +103,10 @@ public class LuceneMessageListener implements MessageListener {
 
 		boolean indexOnly = LuceneSearchEngineUtil.isIndexReadOnly();
 
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "lfrResponseId", responseId);
-		JSONUtil.put(jsonObj, "indexOnly", indexOnly);
+		jsonObj.put("lfrResponseId", responseId);
+		jsonObj.put("indexOnly", indexOnly);
 
 		MessageBusUtil.sendMessage(responseDestination, jsonObj.toString());
 	}
@@ -122,10 +121,10 @@ public class LuceneMessageListener implements MessageListener {
 			searchRequest.getSort(), searchRequest.getStart(),
 			searchRequest.getEnd());
 
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "lfrResponseId", responseId);
-		JSONUtil.put(jsonObj, "hits", JSONUtil.serialize(hits));
+		jsonObj.put("lfrResponseId", responseId);
+		jsonObj.put("hits", JSONFactoryUtil.serialize(hits));
 
 		MessageBusUtil.sendMessage(responseDestination, jsonObj.toString());
 	}

@@ -23,13 +23,13 @@
 package com.liferay.util;
 
 import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 /**
  * <a href="Autocomplete.java.html"><b><i>View Source</i></b></a>
@@ -48,16 +48,16 @@ public class Autocomplete {
 			max = array.length;
 		}
 
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (int i = 0; (i < array.length) && (i < max); i++) {
 			String text = array[i][0];
 			String value = array[i][1];
 
-			JSONObject jsonObj = new JSONObject();
+			JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-			JSONUtil.put(jsonObj, "text", text);
-			JSONUtil.put(jsonObj, "value", value);
+			jsonObj.put("text", text);
+			jsonObj.put("value", value);
 
 			jsonArray.put(jsonObj);
 		}

@@ -22,29 +22,62 @@
 
 package com.liferay.portal.kernel.json;
 
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+
 /**
- * <a href="JSONArrayWrapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="JSONFactoryUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class JSONArrayWrapper {
+public class JSONFactoryUtil {
 
-	public JSONArrayWrapper() {
+	public static JSONArray createJSONArray() {
+		return getJSONFactory().createJSONArray();
 	}
 
-	public JSONArrayWrapper(Object value) {
-		_value = value;
+	public static JSONObject createJSONObject() {
+		return getJSONFactory().createJSONObject();
 	}
 
-	public Object getValue() {
-		return _value;
+	public static JSONObject createJSONObject(String json)
+		throws JSONException {
+
+		return getJSONFactory().createJSONObject(json);
 	}
 
-	public void setValue(Object value) {
-		_value = value;
+	public static Object deserialize(JSONObject jsonObj) {
+		return getJSONFactory().deserialize(jsonObj);
 	}
 
-	private Object _value;
+	public static Object deserialize(String json) {
+		return getJSONFactory().deserialize(json);
+	}
+
+	public static JSONFactory getJSONFactory() {
+		return _getUtil()._jsonFactory;
+	}
+
+	public static String serialize(Object obj) {
+		return getJSONFactory().serialize(obj);
+	}
+
+	public void setJSONFactory(JSONFactory jsonFactory) {
+		_jsonFactory = jsonFactory;
+	}
+
+	private static JSONFactoryUtil _getUtil() {
+		if (_util == null) {
+			_util = (JSONFactoryUtil)BeanLocatorUtil.locate(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static final String _UTIL = JSONFactoryUtil.class.getName();
+
+	private static JSONFactoryUtil _util;
+
+	private JSONFactory _jsonFactory;
 
 }

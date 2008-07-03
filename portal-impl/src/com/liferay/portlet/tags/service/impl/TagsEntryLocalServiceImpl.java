@@ -24,7 +24,7 @@ package com.liferay.portlet.tags.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.json.JSONArrayWrapper;
+import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -315,7 +315,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			companyId, name, properties, start, end);
 	}
 
-	public JSONArrayWrapper searchAutocomplete(
+	public JSONArray searchAutocomplete(
 			long companyId, String name, String[] properties, int start,
 			int end)
 		throws SystemException {
@@ -323,8 +323,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		List<TagsEntry> list = tagsEntryFinder.findByC_N_P(
 			companyId, name, properties, start, end);
 
-		return new JSONArrayWrapper(
-			Autocomplete.listToJson(list, "name", "name"));
+		return Autocomplete.listToJson(list, "name", "name");
 	}
 
 	public int searchCount(long companyId, String name, String[] properties)

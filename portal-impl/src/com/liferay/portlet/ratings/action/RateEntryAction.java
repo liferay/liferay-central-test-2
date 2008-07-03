@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.ratings.action;
 
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portlet.ratings.model.RatingsStats;
@@ -33,8 +35,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
-
-import org.json.JSONObject;
 
 /**
  * <a href="RateEntryAction.java.html"><b><i>View Source</i></b></a>
@@ -63,7 +63,7 @@ public class RateEntryAction extends JSONAction {
 		RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(
 			className, classPK);
 
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
 		jsonObj.put("totalEntries", stats.getTotalEntries());
 		jsonObj.put("totalScore", stats.getTotalScore());

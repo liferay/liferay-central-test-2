@@ -22,6 +22,8 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -34,8 +36,6 @@ import javax.portlet.PortletPreferences;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.json.JSONObject;
 
 /**
  * <a href="PortletSetupUtil.java.html"><b><i>View Source</i></b></a>
@@ -80,13 +80,13 @@ public class PortletSetupUtil {
 			_log.debug("Transform CSS to JSON " + css);
 		}
 
-		JSONObject jsonObj = new JSONObject(css);
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject(css);
 
-		JSONObject portletData = new JSONObject();
+		JSONObject portletData = JSONFactoryUtil.createJSONObject();
 
 		jsonObj.put("portletData", portletData);
 
-		JSONObject titles = new JSONObject();
+		JSONObject titles = JSONFactoryUtil.createJSONObject();
 
 		portletData.put("titles", titles);
 
@@ -113,11 +113,6 @@ public class PortletSetupUtil {
 		portletData.put("useCustomTitle", useCustomTitle);
 		portletData.put("showBorders", showBorders);
 		portletData.put("portletLinksTarget", linkToPlid);
-
-		// The JSONObject class does not properly detect boolean attributes
-		// without going through serialization
-
-		jsonObj = new JSONObject(jsonObj.toString());
 
 		return jsonObj;
 	}

@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.tasks.social;
 
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -30,8 +32,6 @@ import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivityFeedEntry;
 import com.liferay.portlet.tasks.model.TasksProposal;
 import com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil;
-
-import org.json.JSONObject;
 
 /**
  * <a href="TasksActivityInterpreter.java.html"><b><i>View Source</i></b></a>
@@ -59,7 +59,8 @@ public class TasksActivityInterpreter extends BaseSocialActivityInterpreter {
 		JSONObject extraData = null;
 
 		if (Validator.isNotNull(activity.getExtraData())) {
-			extraData = new JSONObject(activity.getExtraData());
+			extraData = JSONFactoryUtil.createJSONObject(
+				activity.getExtraData());
 		}
 
 		// Title

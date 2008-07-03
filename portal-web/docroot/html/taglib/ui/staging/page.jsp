@@ -103,7 +103,7 @@
 
 								String[] workflowRoleNames = StringUtil.split(liveGroup.getWorkflowRoleNames());
 
-								JSONArray jsonReviewers = new JSONArray();
+								JSONArray jsonReviewers = JSONFactoryUtil.createJSONArray();
 
 								Role role = RoleLocalServiceUtil.getRole(company.getCompanyId(), workflowRoleNames[0]);
 
@@ -128,7 +128,7 @@
 								}
 
 								for (User reviewer : reviewers) {
-									JSONObject jsonReviewer = new JSONObject();
+									JSONObject jsonReviewer = JSONFactoryUtil.createJSONObject();
 
 									jsonReviewer.put("userId", reviewer.getUserId());
 									jsonReviewer.put("fullName", reviewer.getFullName());

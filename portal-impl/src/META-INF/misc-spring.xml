@@ -52,6 +52,12 @@
 			<ref bean="com.liferay.portal.jndi.PortalJNDIImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.json.JSONFactoryImpl" class="com.liferay.portal.json.JSONFactoryImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.kernel.json.JSONFactoryUtil" class="com.liferay.portal.kernel.json.JSONFactoryUtil" lazy-init="true">
+		<property name="JSONFactory">
+			<ref bean="com.liferay.portal.json.JSONFactoryImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.language.LanguageImpl" class="com.liferay.portal.language.LanguageImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.kernel.language.LanguageUtil" class="com.liferay.portal.kernel.language.LanguageUtil" lazy-init="true">
 		<property name="language">

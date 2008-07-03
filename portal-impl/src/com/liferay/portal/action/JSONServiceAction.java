@@ -22,12 +22,14 @@
 
 package com.liferay.portal.action;
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portlet.tags.model.TagsAssetDisplay;
 import com.liferay.portlet.tags.model.TagsAssetType;
-import com.liferay.util.JSONUtil;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -43,9 +45,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 /**
  * <a href="JSONServiceAction.java.html"><b><i>View Source</i></b></a>
@@ -114,7 +113,7 @@ public class JSONServiceAction extends JSONAction {
 							 returnObj instanceof Short ||
 							 returnObj instanceof String) {
 
-						JSONObject jsonObj = new JSONObject();
+						JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
 						jsonObj.put("returnValue", returnObj.toString());
 
@@ -133,13 +132,13 @@ public class JSONServiceAction extends JSONAction {
 					}
 				}
 				else {
-					JSONObject jsonObj = new JSONObject();
+					JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
 					return jsonObj.toString();
 				}
 			}
 			catch (InvocationTargetException ite) {
-				JSONObject jsonObj = new JSONObject();
+				JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
 				jsonObj.put("exception", ite.getCause().toString());
 
@@ -312,7 +311,7 @@ public class JSONServiceAction extends JSONAction {
 	protected String getReturnValue(TagsAssetDisplay[] assetDisplays)
 		throws Exception {
 
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (int i = 0; i < assetDisplays.length; i++) {
 			TagsAssetDisplay assetDisplay = assetDisplays[i];
@@ -334,7 +333,7 @@ public class JSONServiceAction extends JSONAction {
 	protected String getReturnValue(TagsAssetType[] assetTypes)
 		throws Exception {
 
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (int i = 0; i < assetTypes.length; i++) {
 			TagsAssetType assetType = assetTypes[i];
@@ -346,45 +345,44 @@ public class JSONServiceAction extends JSONAction {
 	}
 
 	public static JSONObject toJSONObject(TagsAssetDisplay assetDisplay) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "assetId", assetDisplay.getAssetId());
-		JSONUtil.put(jsonObj, "companyId", assetDisplay.getCompanyId());
-		JSONUtil.put(jsonObj, "userId", assetDisplay.getUserId());
-		JSONUtil.put(jsonObj, "userName", assetDisplay.getUserName());
-		JSONUtil.put(jsonObj, "createDate", assetDisplay.getCreateDate());
-		JSONUtil.put(jsonObj, "modifiedDate", assetDisplay.getModifiedDate());
-		JSONUtil.put(jsonObj, "classNameId", assetDisplay.getClassNameId());
-		JSONUtil.put(jsonObj, "className", assetDisplay.getClassName());
-		JSONUtil.put(jsonObj, "classPK", assetDisplay.getClassPK());
-		JSONUtil.put(jsonObj, "portletId", assetDisplay.getPortletId());
-		JSONUtil.put(jsonObj, "portletTitle", assetDisplay.getPortletTitle());
-		JSONUtil.put(jsonObj, "startDate", assetDisplay.getStartDate());
-		JSONUtil.put(jsonObj, "endDate", assetDisplay.getEndDate());
-		JSONUtil.put(jsonObj, "publishDate", assetDisplay.getPublishDate());
-		JSONUtil.put(
-			jsonObj, "expirationDate", assetDisplay.getExpirationDate());
-		JSONUtil.put(jsonObj, "mimeType", assetDisplay.getMimeType());
-		JSONUtil.put(jsonObj, "title", assetDisplay.getTitle());
-		JSONUtil.put(jsonObj, "description", assetDisplay.getDescription());
-		JSONUtil.put(jsonObj, "summary", assetDisplay.getSummary());
-		JSONUtil.put(jsonObj, "url", assetDisplay.getUrl());
-		JSONUtil.put(jsonObj, "height", assetDisplay.getHeight());
-		JSONUtil.put(jsonObj, "width", assetDisplay.getWidth());
-		JSONUtil.put(jsonObj, "priority", assetDisplay.getPriority());
-		JSONUtil.put(jsonObj, "viewCount", assetDisplay.getViewCount());
-		JSONUtil.put(jsonObj, "tagsEntries", assetDisplay.getTagsEntries());
+		jsonObj.put("assetId", assetDisplay.getAssetId());
+		jsonObj.put("companyId", assetDisplay.getCompanyId());
+		jsonObj.put("userId", assetDisplay.getUserId());
+		jsonObj.put("userName", assetDisplay.getUserName());
+		jsonObj.put("createDate", assetDisplay.getCreateDate());
+		jsonObj.put("modifiedDate", assetDisplay.getModifiedDate());
+		jsonObj.put("classNameId", assetDisplay.getClassNameId());
+		jsonObj.put("className", assetDisplay.getClassName());
+		jsonObj.put("classPK", assetDisplay.getClassPK());
+		jsonObj.put("portletId", assetDisplay.getPortletId());
+		jsonObj.put("portletTitle", assetDisplay.getPortletTitle());
+		jsonObj.put("startDate", assetDisplay.getStartDate());
+		jsonObj.put("endDate", assetDisplay.getEndDate());
+		jsonObj.put("publishDate", assetDisplay.getPublishDate());
+		jsonObj.put("expirationDate", assetDisplay.getExpirationDate());
+		jsonObj.put("mimeType", assetDisplay.getMimeType());
+		jsonObj.put("title", assetDisplay.getTitle());
+		jsonObj.put("description", assetDisplay.getDescription());
+		jsonObj.put("summary", assetDisplay.getSummary());
+		jsonObj.put("url", assetDisplay.getUrl());
+		jsonObj.put("height", assetDisplay.getHeight());
+		jsonObj.put("width", assetDisplay.getWidth());
+		jsonObj.put("priority", assetDisplay.getPriority());
+		jsonObj.put("viewCount", assetDisplay.getViewCount());
+		jsonObj.put("tagsEntries", assetDisplay.getTagsEntries());
 
 		return jsonObj;
 	}
 
 	public static JSONObject toJSONObject(TagsAssetType assetType) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(jsonObj, "classNameId", assetType.getClassNameId());
-		JSONUtil.put(jsonObj, "className", assetType.getClassName());
-		JSONUtil.put(jsonObj, "portletId", assetType.getPortletId());
-		JSONUtil.put(jsonObj, "portletTitle", assetType.getPortletTitle());
+		jsonObj.put("classNameId", assetType.getClassNameId());
+		jsonObj.put("className", assetType.getClassName());
+		jsonObj.put("portletId", assetType.getPortletId());
+		jsonObj.put("portletTitle", assetType.getPortletTitle());
 
 		return jsonObj;
 	}

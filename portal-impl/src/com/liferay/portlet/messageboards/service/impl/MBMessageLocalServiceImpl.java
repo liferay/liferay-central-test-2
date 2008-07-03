@@ -27,6 +27,8 @@ import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -74,7 +76,6 @@ import com.liferay.portlet.messageboards.util.Indexer;
 import com.liferay.portlet.messageboards.util.MBUtil;
 import com.liferay.portlet.messageboards.util.comparator.MessageThreadComparator;
 import com.liferay.portlet.messageboards.util.comparator.ThreadLastPostDateComparator;
-import com.liferay.util.JSONUtil;
 
 import java.io.IOException;
 
@@ -94,8 +95,6 @@ import javax.portlet.PortletPreferences;
 import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.json.JSONObject;
 
 /**
  * <a href="MBMessageLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -184,9 +183,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(classPK);
 
-			JSONObject extraData = new JSONObject();
+			JSONObject extraData = JSONFactoryUtil.createJSONObject();
 
-			JSONUtil.put(extraData, "messageId", message.getMessageId());
+			extraData.put("messageId", message.getMessageId());
 
 			socialActivityLocalService.addActivity(
 				userId, entry.getGroupId(), BlogsEntry.class.getName(),

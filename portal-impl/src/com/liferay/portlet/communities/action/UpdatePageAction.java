@@ -24,6 +24,8 @@ package com.liferay.portlet.communities.action;
 
 import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.kernel.configuration.Filter;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -51,8 +53,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
-
-import org.json.JSONObject;
 
 /**
  * <a href="UpdatePageAction.java.html"><b><i>View Source</i></b></a>
@@ -111,7 +111,7 @@ public class UpdatePageAction extends JSONAction {
 
 		String cmd = ParamUtil.getString(request, Constants.CMD);
 
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
 		if (cmd.equals("add")) {
 			String[] array = addPage(themeDisplay, request, response);

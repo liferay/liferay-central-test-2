@@ -2,13 +2,13 @@ package ${packagePath}.service.http;
 
 import ${packagePath}.model.${entity.name};
 
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.util.JSONUtil;
 
 import java.util.Date;
 import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 /**
  * <a href="${entity.name}JSONSerializer.java.html"><b><i>View Source</i></b></a>
@@ -32,17 +32,23 @@ import org.json.JSONObject;
 public class ${entity.name}JSONSerializer {
 
 	public static JSONObject toJSONObject(${entity.name} model) {
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
 		<#list entity.regularColList as column>
-			JSONUtil.put(jsonObj, "${column.name}", model.get${column.methodName}());
+			jsonObj.put("${column.name}", model.get${column.methodName}()
+
+			<#if column.type == "Date">
+				.getTime()
+			</#if>
+
+			);
 		</#list>
 
 		return jsonObj;
 	}
 
 	public static JSONArray toJSONArray(List<${packagePath}.model.${entity.name}> models) {
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (${entity.name} model : models) {
 			jsonArray.put(toJSONObject(model));

@@ -240,7 +240,7 @@ boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionCla
 
 									String[] workflowRoleNames = StringUtil.split(liveGroup.getWorkflowRoleNames());
 
-									JSONArray jsonReviewers = new JSONArray();
+									JSONArray jsonReviewers = JSONFactoryUtil.createJSONArray();
 
 									Role role = RoleLocalServiceUtil.getRole(company.getCompanyId(), workflowRoleNames[0]);
 
@@ -265,7 +265,7 @@ boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionCla
 									}
 
 									for (User reviewer : reviewers) {
-										JSONObject jsonReviewer = new JSONObject();
+										JSONObject jsonReviewer = JSONFactoryUtil.createJSONObject();
 
 										jsonReviewer.put("userId", reviewer.getUserId());
 										jsonReviewer.put("fullName", reviewer.getFullName());

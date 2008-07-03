@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.portletconfiguration.action;
 
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -49,8 +51,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
-
-import org.json.JSONObject;
 
 /**
  * <a href="UpdateLookAndFeelAction.java.html"><b><i>View Source</i></b></a>
@@ -95,7 +95,7 @@ public class UpdateLookAndFeelAction extends JSONAction {
 			_log.debug("Updating css " + css);
 		}
 
-		JSONObject jsonObj = new JSONObject(css);
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject(css);
 
 		JSONObject portletData = jsonObj.getJSONObject("portletData");
 

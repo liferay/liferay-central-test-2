@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.blogs.action;
 
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -46,7 +48,6 @@ import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 import com.liferay.portlet.taggedcontent.util.AssetPublisherUtil;
 import com.liferay.portlet.tags.TagsEntryException;
-import com.liferay.util.JSONUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.ByteArrayInputStream;
@@ -65,8 +66,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-
-import org.json.JSONObject;
 
 /**
  * <a href="EditEntryAction.java.html"><b><i>View Source</i></b></a>
@@ -126,11 +125,11 @@ public class EditEntryAction extends PortletAction {
 			}
 
 			if ((entry != null) && entry.isDraft()) {
-				JSONObject jsonObj = new JSONObject();
+				JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-				JSONUtil.put(jsonObj, "entryId", entry.getEntryId());
-				JSONUtil.put(jsonObj, "redirect", redirect);
-				JSONUtil.put(jsonObj, "updateRedirect", updateRedirect);
+				jsonObj.put("entryId", entry.getEntryId());
+				jsonObj.put("redirect", redirect);
+				jsonObj.put("updateRedirect", updateRedirect);
 
 				HttpServletResponse response =
 					PortalUtil.getHttpServletResponse(actionResponse);

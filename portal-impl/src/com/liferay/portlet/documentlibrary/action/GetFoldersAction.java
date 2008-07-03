@@ -23,13 +23,15 @@
 package com.liferay.portlet.documentlibrary.action;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.http.DLFolderJSONSerializer;
-import com.liferay.util.JSONUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,9 +41,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 /**
  * <a href="GetFoldersAction.java.html"><b><i>View Source</i></b></a>
@@ -70,7 +69,7 @@ public class GetFoldersAction extends JSONAction {
 	protected JSONArray toJSONArray(List<DLFolder> folders)
 		throws SystemException {
 
-		JSONArray jsonArray = new JSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (DLFolder folder : folders) {
 			jsonArray.put(toJSONObject(folder));
@@ -94,8 +93,8 @@ public class GetFoldersAction extends JSONAction {
 			DLFileEntryLocalServiceUtil.getFileEntriesAndShortcutsCount(
 				subfolderIds);
 
-		JSONUtil.put(jsonObj, "subFoldersCount", subFoldersCount);
-		JSONUtil.put(jsonObj, "fileEntriesCount", fileEntriesCount);
+		jsonObj.put("subFoldersCount", subFoldersCount);
+		jsonObj.put("fileEntriesCount", fileEntriesCount);
 
 		return jsonObj;
 	}

@@ -103,7 +103,7 @@ public class SampleAppStartupAction extends SimpleAction {
 				paulUser.getFullName() + " was created with user id " +
 					paulUser.getUserId());
 		}
-		
+
 		screenName = "jane";
 		emailAddress = "jane@liferay.com";
 		firstName = "Jane";

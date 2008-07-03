@@ -22,17 +22,16 @@
 
 package com.liferay.portal.scheduler.quartz;
 
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
-import com.liferay.util.JSONUtil;
 
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.json.JSONObject;
 
 /**
  * <a href="QuartzMessageListener.java.html"><b><i>View Source</i></b></a>
@@ -52,17 +51,17 @@ public class QuartzMessageListener implements MessageListener {
 	}
 
 	protected void doReceive(String message) throws Exception {
-		JSONObject jsonObj = new JSONObject(message);
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject(message);
 
-		String responseDestination = jsonObj.optString(
+		String responseDestination = jsonObj.getString(
 			"lfrResponseDestination");
-		String responseId = jsonObj.optString("lfrResponseId");
+		String responseId = jsonObj.getString("lfrResponseId");
 
 		jsonObj.remove("lfrResponseDestination");
 		jsonObj.remove("lfrResponseId");
 
 		SchedulerRequest schedulerRequest =
-			(SchedulerRequest)JSONUtil.deserialize(jsonObj);
+			(SchedulerRequest)JSONFactoryUtil.deserialize(jsonObj);
 
 		String command = schedulerRequest.getCommand();
 
@@ -96,11 +95,11 @@ public class QuartzMessageListener implements MessageListener {
 			QuartzSchedulerEngineUtil.getScheduledJobs(
 				schedulerRequest.getGroupName());
 
-		JSONObject jsonObj = new JSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
 		jsonObj.put("lfrResponseId", responseId);
 		jsonObj.put(
-			"schedulerRequests", JSONUtil.serialize(schedulerRequests));
+			"schedulerRequests", JSONFactoryUtil.serialize(schedulerRequests));
 
 		MessageBusUtil.sendMessage(responseDestination, jsonObj.toString());
 	}

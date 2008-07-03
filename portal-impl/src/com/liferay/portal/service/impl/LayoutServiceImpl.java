@@ -24,6 +24,7 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -41,7 +42,6 @@ import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portlet.communities.messaging.LayoutsLocalPublisherRequest;
 import com.liferay.portlet.communities.messaging.LayoutsRemotePublisherRequest;
-import com.liferay.util.JSONUtil;
 
 import java.io.File;
 import java.io.InputStream;
@@ -272,7 +272,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		SchedulerEngineUtil.schedule(
 			groupName, cronText, schedulerStartDate, schedulerEndDate,
 			description, DestinationNames.LAYOUTS_LOCAL_PUBLISHER,
-			JSONUtil.serialize(publisherRequest));
+			JSONFactoryUtil.serialize(publisherRequest));
 	}
 
 	public void schedulePublishToRemote(
@@ -315,7 +315,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		SchedulerEngineUtil.schedule(
 			groupName, cronText, schedulerStartDate, schedulerEndDate,
 			description, DestinationNames.LAYOUTS_REMOTE_PUBLISHER,
-			JSONUtil.serialize(publisherRequest));
+			JSONFactoryUtil.serialize(publisherRequest));
 	}
 
 	public void setLayouts(

@@ -22,16 +22,15 @@
 
 package com.liferay.portal.scheduler.quartz;
 
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
-import com.liferay.util.JSONUtil;
 
 import java.util.Date;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.json.JSONObject;
 
 import org.quartz.Job;
 import org.quartz.JobDataMap;
@@ -60,11 +59,12 @@ public class MessageSenderJob implements Job {
 
 			Date scheduledFireTime = jobExecutionContext.getScheduledFireTime();
 
-			JSONObject jsonObj = new JSONObject(messageBody);
+			JSONObject jsonObj = JSONFactoryUtil.createJSONObject(messageBody);
 
-			JSONUtil.put(
-				jsonObj, "scheduledFireTime",
-				new JSONObject(JSONUtil.serialize(scheduledFireTime)));
+			jsonObj.put(
+				"scheduledFireTime",
+				JSONFactoryUtil.createJSONObject(
+					JSONFactoryUtil.serialize(scheduledFireTime)));
 
 			MessageBusUtil.sendMessage(destination, jsonObj.toString());
 		}

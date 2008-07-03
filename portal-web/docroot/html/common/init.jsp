@@ -67,6 +67,9 @@
 <%@ page import="com.liferay.portal.kernel.dao.search.SearchContainer" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.SearchEntry" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.TextSearchEntry" %>
+<%@ page import="com.liferay.portal.kernel.json.JSONArray" %>
+<%@ page import="com.liferay.portal.kernel.json.JSONFactoryUtil" %>
+<%@ page import="com.liferay.portal.kernel.json.JSONObject" %>
 <%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %>
 <%@ page import="com.liferay.portal.kernel.language.LanguageWrapper" %>
 <%@ page import="com.liferay.portal.kernel.language.UnicodeLanguageUtil" %>
@@ -242,9 +245,6 @@
 
 <%@ page import="org.apache.commons.math.util.MathUtils" %>
 <%@ page import="org.apache.struts.Globals" %>
-
-<%@ page import="org.json.JSONArray" %>
-<%@ page import="org.json.JSONObject" %>
 
 <liferay-theme:defineObjects />
 

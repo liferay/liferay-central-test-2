@@ -81,7 +81,7 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 						</portlet:actionURL>
 
 						<%
-						JSONArray jsonReviewers = new JSONArray();
+						JSONArray jsonReviewers = JSONFactoryUtil.createJSONArray();
 
 						Role role = RoleLocalServiceUtil.getRole(company.getCompanyId(), workflowRoleNames[0]);
 
@@ -106,7 +106,7 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 						}
 
 						for (User reviewer : reviewers) {
-							JSONObject jsonReviewer = new JSONObject();
+							JSONObject jsonReviewer = JSONFactoryUtil.createJSONObject();
 
 							jsonReviewer.put("userId", reviewer.getUserId());
 							jsonReviewer.put("fullName", reviewer.getFullName());

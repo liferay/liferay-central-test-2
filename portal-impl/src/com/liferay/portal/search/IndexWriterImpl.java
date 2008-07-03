@@ -22,12 +22,12 @@
 
 package com.liferay.portal.search;
 
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.IndexWriter;
 import com.liferay.portal.kernel.search.messaging.SearchRequest;
-import com.liferay.util.JSONUtil;
 
 /**
  * <a href="IndexWriterImpl.java.html"><b><i>View Source</i></b></a>
@@ -42,7 +42,7 @@ public class IndexWriterImpl implements IndexWriter {
 			SearchRequest.COMMAND_ADD, companyId, doc);
 
 		MessageBusUtil.sendMessage(
-			DestinationNames.SEARCH, JSONUtil.serialize(searchRequest));
+			DestinationNames.SEARCH, JSONFactoryUtil.serialize(searchRequest));
 	}
 
 	public void deleteDocument(long companyId, String uid) {
@@ -50,7 +50,7 @@ public class IndexWriterImpl implements IndexWriter {
 			SearchRequest.COMMAND_DELETE, companyId, uid);
 
 		MessageBusUtil.sendMessage(
-			DestinationNames.SEARCH, JSONUtil.serialize(searchRequest));
+			DestinationNames.SEARCH, JSONFactoryUtil.serialize(searchRequest));
 	}
 
 	public void deletePortletDocuments(long companyId, String portletId) {
@@ -59,7 +59,7 @@ public class IndexWriterImpl implements IndexWriter {
 			portletId);
 
 		MessageBusUtil.sendMessage(
-			DestinationNames.SEARCH, JSONUtil.serialize(searchRequest));
+			DestinationNames.SEARCH, JSONFactoryUtil.serialize(searchRequest));
 	}
 
 	public void updateDocument(long companyId, String uid, Document doc) {
@@ -67,7 +67,7 @@ public class IndexWriterImpl implements IndexWriter {
 			SearchRequest.COMMAND_UPDATE, companyId, uid, doc);
 
 		MessageBusUtil.sendMessage(
-			DestinationNames.SEARCH, JSONUtil.serialize(searchRequest));
+			DestinationNames.SEARCH, JSONFactoryUtil.serialize(searchRequest));
 	}
 
 }

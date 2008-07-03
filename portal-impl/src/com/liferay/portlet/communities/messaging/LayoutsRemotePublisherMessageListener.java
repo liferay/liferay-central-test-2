@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.communities.messaging;
 
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.User;
@@ -31,7 +32,6 @@ import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.communities.util.StagingUtil;
-import com.liferay.util.JSONUtil;
 import com.liferay.util.MapUtil;
 
 import java.util.Date;
@@ -54,7 +54,8 @@ public class LayoutsRemotePublisherMessageListener implements MessageListener {
 
 		try {
 			LayoutsRemotePublisherRequest publisherRequest =
-				(LayoutsRemotePublisherRequest)JSONUtil.deserialize(message);
+				(LayoutsRemotePublisherRequest)JSONFactoryUtil.deserialize(
+					message);
 
 			long userId = publisherRequest.getUserId();
 			long sourceGroupId = publisherRequest.getSourceGroupId();

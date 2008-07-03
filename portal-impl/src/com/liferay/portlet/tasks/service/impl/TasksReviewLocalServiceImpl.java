@@ -24,21 +24,20 @@ package com.liferay.portlet.tasks.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.User;
 import com.liferay.portlet.tasks.DuplicateReviewUserIdException;
 import com.liferay.portlet.tasks.model.TasksProposal;
 import com.liferay.portlet.tasks.model.TasksReview;
 import com.liferay.portlet.tasks.service.base.TasksReviewLocalServiceBaseImpl;
 import com.liferay.portlet.tasks.social.TasksActivityKeys;
-import com.liferay.util.JSONUtil;
 import com.liferay.util.SetUtil;
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import org.json.JSONObject;
 
 /**
  * <a href="TasksReviewLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -84,11 +83,11 @@ public class TasksReviewLocalServiceImpl
 
 		// Social
 
-		JSONObject extraData = new JSONObject();
+		JSONObject extraData = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(extraData, "stage", review.getStage());
-		JSONUtil.put(extraData, "completed", review.getCompleted());
-		JSONUtil.put(extraData, "rejected", review.getRejected());
+		extraData.put("stage", review.getStage());
+		extraData.put("completed", review.getCompleted());
+		extraData.put("rejected", review.getRejected());
 
 		socialActivityLocalService.addActivity(
 			assignedByUserId, proposal.getGroupId(),
@@ -214,11 +213,11 @@ public class TasksReviewLocalServiceImpl
 
 		// Social
 
-		JSONObject extraData = new JSONObject();
+		JSONObject extraData = JSONFactoryUtil.createJSONObject();
 
-		JSONUtil.put(extraData, "stage", review.getStage());
-		JSONUtil.put(extraData, "completed", review.getCompleted());
-		JSONUtil.put(extraData, "rejected", review.getRejected());
+		extraData.put("stage", review.getStage());
+		extraData.put("completed", review.getCompleted());
+		extraData.put("rejected", review.getRejected());
 
 		socialActivityLocalService.addActivity(
 			userId, review.getGroupId(), TasksProposal.class.getName(),

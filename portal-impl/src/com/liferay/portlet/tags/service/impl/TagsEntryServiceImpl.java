@@ -24,7 +24,7 @@ package com.liferay.portlet.tags.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.json.JSONArrayWrapper;
+import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.service.base.TagsEntryServiceBaseImpl;
 
@@ -91,7 +91,7 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 			companyId, name, properties, start, end);
 	}
 
-	public JSONArrayWrapper searchAutocomplete(
+	public JSONArray searchAutocomplete(
 			long companyId, String name, String[] properties, int start,
 			int end)
 		throws SystemException {

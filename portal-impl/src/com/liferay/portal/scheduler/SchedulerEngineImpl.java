@@ -22,6 +22,8 @@
 
 package com.liferay.portal.scheduler;
 
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.messaging.Destination;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
@@ -31,12 +33,9 @@ import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 import com.liferay.portlet.communities.messaging.LayoutsLocalPublisherMessageListener;
 import com.liferay.portlet.communities.messaging.LayoutsRemotePublisherMessageListener;
-import com.liferay.util.JSONUtil;
 
 import java.util.Date;
 import java.util.List;
-
-import org.json.JSONObject;
 
 /**
  * <a href="SchedulerEngineImpl.java.html"><b><i>View Source</i></b></a>
@@ -74,11 +73,11 @@ public class SchedulerEngineImpl implements SchedulerEngine {
 
 			String message = MessageBusUtil.sendSynchronizedMessage(
 				DestinationNames.SCHEDULER,
-				JSONUtil.serialize(schedulerRequest));
+				JSONFactoryUtil.serialize(schedulerRequest));
 
-			JSONObject jsonObj = new JSONObject(message);
+			JSONObject jsonObj = JSONFactoryUtil.createJSONObject(message);
 
-			return (List<SchedulerRequest>)JSONUtil.deserialize(
+			return (List<SchedulerRequest>)JSONFactoryUtil.deserialize(
 				jsonObj.getString("schedulerRequests"));
 		}
 		catch (Exception e) {
@@ -95,13 +94,14 @@ public class SchedulerEngineImpl implements SchedulerEngine {
 			startDate, endDate, description, destinationName, messageBody);
 
 		MessageBusUtil.sendMessage(
-			DestinationNames.SCHEDULER, JSONUtil.serialize(schedulerRequest));
+			DestinationNames.SCHEDULER,
+			JSONFactoryUtil.serialize(schedulerRequest));
 	}
 
 	public void shutdown() {
 		MessageBusUtil.sendMessage(
 			DestinationNames.SCHEDULER,
-			JSONUtil.serialize(
+			JSONFactoryUtil.serialize(
 				new SchedulerRequest(SchedulerRequest.COMMAND_SHUTDOWN)));
 	}
 
@@ -113,7 +113,8 @@ public class SchedulerEngineImpl implements SchedulerEngine {
 			SchedulerRequest.COMMAND_UNREGISTER, jobName, groupName);
 
 		MessageBusUtil.sendMessage(
-			DestinationNames.SCHEDULER, JSONUtil.serialize(schedulerRequest));
+			DestinationNames.SCHEDULER,
+			JSONFactoryUtil.serialize(schedulerRequest));
 	}
 
 }

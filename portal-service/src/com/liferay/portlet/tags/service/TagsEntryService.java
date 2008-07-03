@@ -84,7 +84,7 @@ public interface TagsEntryService {
 		int start, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
-	public com.liferay.portal.kernel.json.JSONArrayWrapper searchAutocomplete(
+	public com.liferay.portal.kernel.json.JSONArray searchAutocomplete(
 		long companyId, java.lang.String name, java.lang.String[] properties,
 		int start, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
