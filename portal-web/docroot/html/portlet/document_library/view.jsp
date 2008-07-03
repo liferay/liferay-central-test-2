@@ -291,61 +291,68 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 							var expandImage = jQuery('#<portlet:namespace />expand-image-' + folderId);
 							var folderImage = jQuery('#<portlet:namespace />folder-image-' + folderId);
 
-							jQuery.getJSON(
-								themeDisplay.getPathMain() + '/document_library/get_folders',
-								{groupId: '<%= portletGroupId %>', folderId: '"' + folderId + '"'},
-								function(json) {
-									if (json.length > 0) {
-										var ulId = '<portlet:namespace />ul-' + json[0].parentFolderId;
+							jQuery.ajax(
+								{
+									url: themeDisplay.getPathMain() + '/document_library/get_folders',
+									data: {
+										groupId: '<%= portletGroupId %>',
+										folderId: folderId
+									},
+									dataType: 'json',
+									type: 'get',
+									success: function(json) {
+										if (json.length > 0) {
+											var ulId = '<portlet:namespace />ul-' + json[0].parentFolderId;
 
-										expandImage.parent('li').append('<ul id="' + ulId + '"></ul>');
+											expandImage.parent('li').append('<ul id="' + ulId + '"></ul>');
 
-										var ul = jQuery('#' + ulId);
-										var folderURL = '<%= folderURL %>';
-										var actionMenuURL = '<%= actionMenuURL %>';
+											var ul = jQuery('#' + ulId);
+											var folderURL = '<%= folderURL %>';
+											var actionMenuURL = '<%= actionMenuURL %>';
 
-										for (var i = 0; i < json.length; i++) {
-											ul.append(
-												'<li class="list-item">' +
-													'<img border="0" class="expand-image" hspace="0" id="<portlet:namespace />expand-image-' + json[i].folderId + '" onclick="<portlet:namespace />getFolders(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/trees/plus.png" vspace="0" />\n' +
-													'<img border="0" class="folder-image" hspace="0" id="<portlet:namespace />folder-image-' + json[i].folderId + '" onclick="<portlet:namespace />getFolders(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/common/folder.png" vspace="0" />\n' +
-													'<a href="' + folderURL + '&<portlet:namespace />folderId=' + json[i].folderId + '">' + json[i].name + '</a>\n' +
-													'<span class="col-folders">' + json[i].subFoldersCount + '</span>\n' +
-													'<span class="col-documents">' + json[i].fileEntriesCount + '</span>\n' +
-													'<span id="span-' + json[i].folderId + '"></span>' +
-												'</li>'
-											);
+											for (var i = 0; i < json.length; i++) {
+												ul.append(
+													'<li class="list-item">' +
+														'<img border="0" class="expand-image" hspace="0" id="<portlet:namespace />expand-image-' + json[i].folderId + '" onclick="<portlet:namespace />getFolders(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/trees/plus.png" vspace="0" />\n' +
+														'<img border="0" class="folder-image" hspace="0" id="<portlet:namespace />folder-image-' + json[i].folderId + '" onclick="<portlet:namespace />getFolders(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/common/folder.png" vspace="0" />\n' +
+														'<a href="' + folderURL + '&<portlet:namespace />folderId=' + json[i].folderId + '">' + json[i].name + '</a>\n' +
+														'<span class="col-folders">' + json[i].subFoldersCount + '</span>\n' +
+														'<span class="col-documents">' + json[i].fileEntriesCount + '</span>\n' +
+														'<span id="span-' + json[i].folderId + '"></span>' +
+													'</li>'
+												);
 
-											jQuery('#span-' + json[i].folderId).load(
-												actionMenuURL + '&<portlet:namespace />folderId=' + json[i].folderId + '&<portlet:namespace />ajaxRedirect=' + folderURL,
-												function() {
-													new Liferay.Menu(
-														{
-															trigger: '.lfr-trigger',
-															button: '.lfr-actions'
-														}
-													);
-												}
-											);
+												jQuery('#span-' + json[i].folderId).load(
+													actionMenuURL + '&<portlet:namespace />folderId=' + json[i].folderId + '&<portlet:namespace />ajaxRedirect=' + folderURL,
+													function() {
+														new Liferay.Menu(
+															{
+																trigger: '.lfr-trigger',
+																button: '.lfr-actions'
+															}
+														);
+													}
+												);
+											}
 										}
-									}
 
-									if (Liferay.Browser.is_ie) {
+										if (Liferay.Browser.is_ie) {
 
-										// Must create a new element to change the onclick attribute for IE
+											// Must create a new element to change the onclick attribute for IE
 
-										expandImage.after(document.createElement('<img border="0" class="expand-image" hspace="0" id="<portlet:namespace />expand-image-' + folderId + '" onclick="<portlet:namespace />toggle(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/trees/minus.png" vspace="0" />'));
-										expandImage.remove();
+											expandImage.after(document.createElement('<img border="0" class="expand-image" hspace="0" id="<portlet:namespace />expand-image-' + folderId + '" onclick="<portlet:namespace />toggle(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/trees/minus.png" vspace="0" />'));
+											expandImage.remove();
 
-										folderImage.after(document.createElement('<img border="0" class="folder-image" hspace="0" id="<portlet:namespace />folder-image-' + folderId + '" onclick="<portlet:namespace />toggle(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/common/folder_open.png" vspace="0" />'));
-										folderImage.remove();
-									}
-									else {
-										expandImage.attr("src", "<%= themeDisplay.getPathThemeImages() %>/trees/minus.png");
-										expandImage.attr("onclick", "<portlet:namespace />toggle(this.id);");
+											folderImage.after(document.createElement('<img border="0" class="folder-image" hspace="0" id="<portlet:namespace />folder-image-' + folderId + '" onclick="<portlet:namespace />toggle(this.id);" src="<%= themeDisplay.getPathThemeImages() %>/common/folder_open.png" vspace="0" />'));
+											folderImage.remove();
+										}
+										else {
+											expandImage.attr("src", "<%= themeDisplay.getPathThemeImages() %>/trees/minus.png");
+											expandImage.attr("onclick", "<portlet:namespace />toggle(this.id);");
 
-										folderImage.attr("src", "<%= themeDisplay.getPathThemeImages() %>/common/folder_open.png");
-										folderImage.attr("onclick", "<portlet:namespace />toggle(this.id);");
+											folderImage.attr("src", "<%= themeDisplay.getPathThemeImages() %>/common/folder_open.png");
+											folderImage.attr("onclick", "<portlet:namespace />toggle(this.id);");
+										}
 									}
 								}
 							);

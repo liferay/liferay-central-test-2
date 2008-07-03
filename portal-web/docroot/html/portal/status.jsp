@@ -125,9 +125,26 @@ if (Validator.isNotNull(exception)) {
 		<br /><br />
 
 		<code><%= url %></code>
+
+		<%
+		for (String key : SessionErrors.keySet(request)) {
+			Object value = SessionErrors.get(request, key);
+
+			if (value instanceof Exception) {
+				Exception e = (Exception)value;
+
+				_log.error(e, e);
+			}
+		}
+		%>
+
 	</c:otherwise>
 </c:choose>
 
 <div class="separator"><!-- --></div>
 
 <a href="javascript: history.go(-1);">&laquo; <liferay-ui:message key="back" /></a>
+
+<%!
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portal.status.jsp");
+%>
