@@ -76,7 +76,7 @@ String[] workflowRoleNames = (String[])request.getAttribute("edit_pages.jsp-work
 						for (int i = 3; i <= 6; i++) {
 						%>
 
-							<option <%= (i == workflowStages+1) ? "selected" : "" %> value="<%= (i-1) %>"><%= i %></option>
+							<option <%= (i == (workflowStages + 1)) ? "selected" : "" %> value="<%= (i - 1) %>"><%= i %></option>
 
 						<%
 						}
@@ -92,10 +92,10 @@ String[] workflowRoleNames = (String[])request.getAttribute("edit_pages.jsp-work
 			<table class="lfr-table">
 			<tr>
 				<td>
-					<%= LanguageUtil.format(pageContext, "stage-x-role", String.valueOf(1)) %>
+					<%= LanguageUtil.format(pageContext, "stage-x-role", "1") %>
 				</td>
 				<td>
-					<%= LanguageUtil.get(pageContext, "content-creators") %>
+					<liferay-ui:icon-help message="content-creators" />
 
 					<liferay-ui:icon-help message="stage-1-role-help" />
 				</td>
@@ -111,7 +111,7 @@ String[] workflowRoleNames = (String[])request.getAttribute("edit_pages.jsp-work
 
 				<tr>
 					<td>
-						<%= LanguageUtil.format(pageContext, "stage-x-role", String.valueOf(i+1)) %>
+						<%= LanguageUtil.format(pageContext, "stage-x-role", String.valueOf(i + 1)) %>
 					</td>
 					<td>
 						<select name="<portlet:namespace />workflowRoleName_<%= i %>">
@@ -132,7 +132,7 @@ String[] workflowRoleNames = (String[])request.getAttribute("edit_pages.jsp-work
 							<c:when test="<%= i == 1 %>">
 								<liferay-ui:icon-help message="stage-2-role-help" />
 							</c:when>
-							<c:when test="<%= i == (workflowStages) %>">
+							<c:when test="<%= i == workflowStages %>">
 								<liferay-ui:icon-help message="stage-last-role-help" />
 							</c:when>
 							<c:otherwise>
@@ -147,10 +147,6 @@ String[] workflowRoleNames = (String[])request.getAttribute("edit_pages.jsp-work
 			%>
 
 			</table>
-
-			<br /><br />
-
-			<liferay-ui:message key="stage-permissions-reference-help" />
 		</fieldset>
 
 		<br />
