@@ -22,7 +22,10 @@
 
 package com.liferay.portal.kernel.portlet;
 
-import javax.portlet.RenderResponse;
+import java.util.Map;
+
+import javax.portlet.PortletResponse;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * <a href="LiferayRenderResponse.java.html"><b><i>View Source</i></b></a>
@@ -30,8 +33,21 @@ import javax.portlet.RenderResponse;
  * @author Raymond Augé
  *
  */
-public interface LiferayRenderResponse extends RenderResponse {
+public interface LiferayPortletResponse extends PortletResponse {
 
-	public void setResourceName(String resourceName);
+	public void addDateHeader(String name, long date);
 
+	public void addHeader(String name, String value);
+
+	public void addIntHeader(String name, int value);
+	
+	public HttpServletResponse getHttpServletResponse();
+	
+	public Map<String, String[]> getProperties();
+
+	public void setDateHeader(String name, long date);
+
+	public void setHeader(String name, String value);
+
+	public void setIntHeader(String name, int value);
 }

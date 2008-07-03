@@ -24,6 +24,7 @@ package com.liferay.portlet;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -70,7 +71,8 @@ import org.w3c.dom.Element;
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class PortletResponseImpl implements PortletResponse {
+public abstract class PortletResponseImpl implements PortletResponse, 
+	LiferayPortletResponse {
 
 	public static PortletResponseImpl getPortletResponseImpl(
 		PortletResponse portletResponse) {

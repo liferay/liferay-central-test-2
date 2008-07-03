@@ -25,23 +25,15 @@ package com.liferay.portal.kernel.servlet;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletSession;
+import com.liferay.portal.kernel.portlet.PortletFilterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 
 import java.io.IOException;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
-import javax.portlet.EventRequest;
-import javax.portlet.EventResponse;
 import javax.portlet.PortletException;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
-import javax.portlet.ResourceRequest;
-import javax.portlet.ResourceResponse;
 import javax.portlet.filter.FilterChain;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -83,6 +75,9 @@ public class PortletServlet extends HttpServlet {
 		FilterChain filterChain = (FilterChain)request.getAttribute(
 			PORTLET_SERVLET_FILTER_CHAIN);
 
+		String lifecycle = 
+			(String)request.getAttribute(PortletRequest.LIFECYCLE_PHASE);
+		
 		LiferayPortletSession portletSession =
 			(LiferayPortletSession)portletRequest.getPortletSession();
 
@@ -97,32 +92,8 @@ public class PortletServlet extends HttpServlet {
 		portletSession.setHttpSession(session);
 
 		try {
-			if (portletRequest instanceof ActionRequest) {
-				ActionRequest actionRequest = (ActionRequest)portletRequest;
-				ActionResponse actionResponse = (ActionResponse)portletResponse;
-
-				filterChain.doFilter(actionRequest, actionResponse);
-			}
-			else if (portletRequest instanceof EventRequest) {
-				EventRequest eventRequest = (EventRequest)portletRequest;
-				EventResponse eventResponse = (EventResponse)portletResponse;
-
-				filterChain.doFilter(eventRequest, eventResponse);
-			}
-			else if (portletRequest instanceof RenderRequest) {
-				RenderRequest renderRequest = (RenderRequest)portletRequest;
-				RenderResponse renderResponse = (RenderResponse)portletResponse;
-
-				filterChain.doFilter(renderRequest, renderResponse);
-			}
-			else if (portletRequest instanceof ResourceRequest) {
-				ResourceRequest resourceRequest =
-					(ResourceRequest)portletRequest;
-				ResourceResponse resourceResponse =
-					(ResourceResponse)portletResponse;
-
-				filterChain.doFilter(resourceRequest, resourceResponse);
-			}
+			PortletFilterUtil.doFilter(portletRequest, portletResponse, 
+				lifecycle, filterChain);
 		}
 		catch (PortletException pe) {
 			_log.error(pe, pe);

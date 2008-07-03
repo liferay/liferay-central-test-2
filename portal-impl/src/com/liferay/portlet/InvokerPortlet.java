@@ -23,6 +23,9 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
+import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.kernel.portlet.PortletFilterUtil;
 import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.ClassUtil;
@@ -37,7 +40,6 @@ import com.liferay.portal.util.WebKeys;
 import com.sun.portal.portletcontainer.appengine.filter.FilterChainImpl;
 
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -54,7 +56,6 @@ import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletException;
 import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
 import javax.portlet.PortletSession;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -484,14 +485,14 @@ public class InvokerPortlet
 		}
 	}
 
-	protected void invoke(
-			PortletRequest portletRequest, PortletResponse portletResponse,
-			String lifecycle)
+	protected void invoke(LiferayPortletRequest portletRequest, 
+			LiferayPortletResponse portletResponse, 
+			List<? extends PortletFilter> filters, String lifecycle)
 		throws IOException, PortletException {
 
-		FilterChain filterChain = null;
-
 		Map<String, String[]> properties = null;
+
+		FilterChain filterChain = new FilterChainImpl(_portlet, filters);
 
 		if (_portletConfigImpl.isWARFile()) {
 			String path =
@@ -502,61 +503,14 @@ public class InvokerPortlet
 				_portletContextImpl.getServletContext().getRequestDispatcher(
 					path);
 
-			HttpServletRequest request = null;
-			HttpServletResponse response = null;
-
-			ActionRequestImpl actionRequestImpl = null;
-			ActionResponseImpl actionResponseImpl = null;
-
-			EventRequestImpl eventRequestImpl = null;
-			EventResponseImpl eventResponseImpl = null;
-
-			RenderRequestImpl renderRequestImpl = null;
-			RenderResponseImpl renderResponseImpl = null;
-
-			ResourceRequestImpl resourceRequestImpl = null;
-			ResourceResponseImpl resourceResponseImpl = null;
-
-			if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
-				actionRequestImpl = (ActionRequestImpl)portletRequest;
-				actionResponseImpl = (ActionResponseImpl)portletResponse;
-
-				request = actionRequestImpl.getHttpServletRequest();
-				response = actionResponseImpl.getHttpServletResponse();
-
-				filterChain = new FilterChainImpl(_portlet, _actionFilters);
-			}
-			else if (lifecycle.equals(PortletRequest.EVENT_PHASE)) {
-				eventRequestImpl = (EventRequestImpl)portletRequest;
-				eventResponseImpl = (EventResponseImpl)portletResponse;
-
-				request = eventRequestImpl.getHttpServletRequest();
-				response = eventResponseImpl.getHttpServletResponse();
-
-				filterChain = new FilterChainImpl(_portlet, _eventFilters);
-			}
-			else if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
-				renderRequestImpl = (RenderRequestImpl)portletRequest;
-				renderResponseImpl = (RenderResponseImpl)portletResponse;
-
-				request = renderRequestImpl.getHttpServletRequest();
-				response = renderResponseImpl.getHttpServletResponse();
-
-				filterChain = new FilterChainImpl(_portlet, _renderFilters);
-			}
-			else if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
-				resourceRequestImpl = (ResourceRequestImpl)portletRequest;
-				resourceResponseImpl = (ResourceResponseImpl)portletResponse;
-
-				request = resourceRequestImpl.getHttpServletRequest();
-				response = resourceResponseImpl.getHttpServletResponse();
-
-				filterChain = new FilterChainImpl(_portlet, _resourceFilters);
-			}
+			HttpServletRequest request = portletRequest.getHttpServletRequest();
+			HttpServletResponse response = 
+				portletResponse.getHttpServletResponse();
 
 			request.setAttribute(JavaConstants.JAVAX_PORTLET_PORTLET, _portlet);
 			request.setAttribute(
 				PortletServlet.PORTLET_SERVLET_FILTER_CHAIN, filterChain);
+			request.setAttribute(PortletRequest.LIFECYCLE_PHASE, lifecycle);
 
 			try {
 
@@ -579,70 +533,12 @@ public class InvokerPortlet
 
 				throw new PortletException(cause);
 			}
-
-			if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
-				properties = actionResponseImpl.getProperties();
-			}
-			else if (lifecycle.equals(PortletRequest.EVENT_PHASE)) {
-				properties = eventResponseImpl.getProperties();
-			}
-			else if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
-				properties = renderResponseImpl.getProperties();
-			}
-			else if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
-				properties = resourceResponseImpl.getProperties();
-			}
 		}
 		else {
-			if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
-				ActionRequestImpl actionRequestImpl =
-					(ActionRequestImpl)portletRequest;
-				ActionResponseImpl actionResponseImpl =
-					(ActionResponseImpl)portletResponse;
-
-				filterChain = new FilterChainImpl(_portlet, _actionFilters);
-
-				filterChain.doFilter(actionRequestImpl, actionResponseImpl);
-
-				properties = actionResponseImpl.getProperties();
-			}
-			else if (lifecycle.equals(PortletRequest.EVENT_PHASE)) {
-				EventRequestImpl eventRequestImpl =
-					(EventRequestImpl)portletRequest;
-				EventResponseImpl eventResponseImpl =
-					(EventResponseImpl)portletResponse;
-
-				filterChain = new FilterChainImpl(_portlet, _eventFilters);
-
-				filterChain.doFilter(eventRequestImpl, eventResponseImpl);
-
-				properties = eventResponseImpl.getProperties();
-			}
-			else if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
-				RenderRequestImpl renderRequestImpl =
-					(RenderRequestImpl)portletRequest;
-				RenderResponseImpl renderResponseImpl =
-					(RenderResponseImpl)portletResponse;
-
-				filterChain = new FilterChainImpl(_portlet, _renderFilters);
-
-				filterChain.doFilter(renderRequestImpl, renderResponseImpl);
-
-				properties = renderResponseImpl.getProperties();
-			}
-			else if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
-				ResourceRequestImpl resourceRequestImpl =
-					(ResourceRequestImpl)portletRequest;
-				ResourceResponseImpl resourceResponseImpl =
-					(ResourceResponseImpl)portletResponse;
-
-				filterChain = new FilterChainImpl(_portlet, _resourceFilters);
-
-				filterChain.doFilter(resourceRequestImpl, resourceResponseImpl);
-
-				properties = resourceResponseImpl.getProperties();
-			}
+			PortletFilterUtil.doFilter(portletRequest, portletResponse, lifecycle, filterChain);
 		}
+
+		properties = portletResponse.getProperties();
 
 		if ((properties != null) && (properties.size() > 0)) {
 			if (_expCache != null) {
@@ -662,21 +558,42 @@ public class InvokerPortlet
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException, PortletException {
 
-		invoke(actionRequest, actionResponse, PortletRequest.ACTION_PHASE);
+		LiferayPortletRequest portletRequest = 
+			(LiferayPortletRequest)actionRequest;
+		
+		LiferayPortletResponse portletResponse = 
+			(LiferayPortletResponse)actionResponse;
+		
+		invoke(portletRequest, portletResponse, _actionFilters, 
+			PortletRequest.ACTION_PHASE);
 	}
 
 	protected void invokeEvent(
 			EventRequest eventRequest, EventResponse eventResponse)
 		throws IOException, PortletException {
 
-		invoke(eventRequest, eventResponse, PortletRequest.EVENT_PHASE);
+		LiferayPortletRequest portletRequest = 
+			(LiferayPortletRequest)eventRequest;
+		
+		LiferayPortletResponse portletResponse = 
+			(LiferayPortletResponse)eventResponse;
+
+		invoke(portletRequest, portletResponse, _eventFilters, 
+			PortletRequest.EVENT_PHASE);
 	}
 
 	protected String invokeRender(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		invoke(renderRequest, renderResponse, PortletRequest.RENDER_PHASE);
+		LiferayPortletRequest portletRequest = 
+			(LiferayPortletRequest)renderRequest;
+		
+		LiferayPortletResponse portletResponse = 
+			(LiferayPortletResponse)renderResponse;
+
+		invoke(portletRequest, portletResponse, _renderFilters, 
+			PortletRequest.RENDER_PHASE);
 
 		RenderResponseImpl renderResponseImpl =
 			(RenderResponseImpl)renderResponse;
@@ -688,8 +605,15 @@ public class InvokerPortlet
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws IOException, PortletException {
 
+		LiferayPortletRequest portletRequest = 
+			(LiferayPortletRequest)resourceRequest;
+		
+		LiferayPortletResponse portletResponse = 
+			(LiferayPortletResponse)resourceResponse;
+
 		invoke(
-			resourceRequest, resourceResponse, PortletRequest.RESOURCE_PHASE);
+			portletRequest, portletResponse, _resourceFilters, 
+			PortletRequest.RESOURCE_PHASE);
 	}
 
 	private static Log _log = LogFactory.getLog(InvokerPortlet.class);
