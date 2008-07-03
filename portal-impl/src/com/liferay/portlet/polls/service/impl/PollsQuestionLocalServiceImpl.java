@@ -175,9 +175,11 @@ public class PollsQuestionLocalServiceImpl
 
 		// Choices
 
-		for (PollsChoice choice : choices) {
-			pollsChoiceLocalService.addChoice(
-				questionId, choice.getName(), choice.getDescription());
+		if (choices != null) {
+			for (PollsChoice choice : choices) {
+				pollsChoiceLocalService.addChoice(
+					questionId, choice.getName(), choice.getDescription());
+			}
 		}
 
 		return question;
@@ -378,7 +380,7 @@ public class PollsQuestionLocalServiceImpl
 			throw new QuestionDescriptionException();
 		}
 
-		if (choices.size() < 2) {
+		if (choices != null && choices.size() < 2) {
 			throw new QuestionChoiceException();
 		}
 	}
