@@ -60,9 +60,15 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 
 		// Clean unnecessary header emphasis
 
-		regexps.put("= '''([^=]*)''' =", "= $1 =");
-		regexps.put("== '''([^=]*)''' ==", "== $1 ==");
-		regexps.put("== '''([^=]*)''' ===", "=== $1 ===");
+		regexps.put("= '''([^=]+)''' =", "= $1 =");
+		regexps.put("== '''([^=]+)''' ==", "== $1 ==");
+		regexps.put("== '''([^=]+)''' ===", "=== $1 ===");
+
+		// Headers in Creole start with two equal signs
+
+		regexps.put("^===([^=]+)===", "====$1====");
+		regexps.put("^==([^=]+)==", "===$1===");
+		regexps.put("^=([^=]+)=", "==$1==");
 
 		// Unscape angle brackets
 

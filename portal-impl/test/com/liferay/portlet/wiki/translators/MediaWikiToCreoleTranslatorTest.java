@@ -46,7 +46,7 @@ public class MediaWikiToCreoleTranslatorTest extends TestCase {
 	public void testCleanUnnecessaryHeaderEmphasis1() throws Exception {
 		String content = "= '''title''' =";
 
-		String expected = "= title =";
+		String expected = "== title ==";
 		String actual = _translate(content);
 
 		assertEquals(expected, actual);
@@ -55,7 +55,7 @@ public class MediaWikiToCreoleTranslatorTest extends TestCase {
 	public void testCleanUnnecessaryHeaderEmphasis2() throws Exception {
 		String content = "== '''title''' ==";
 
-		String expected = "== title ==";
+		String expected = "=== title ===";
 		String actual = _translate(content);
 
 		assertEquals(expected, actual);
@@ -64,7 +64,43 @@ public class MediaWikiToCreoleTranslatorTest extends TestCase {
 	public void testCleanUnnecessaryHeaderEmphasis3() throws Exception {
 		String content = "=== '''title''' ===";
 
-		String expected = "=== title ===";
+		String expected = "==== title ====";
+		String actual = _translate(content);
+
+		assertEquals(expected, actual);
+	}
+
+	public void testHeader3() throws Exception {
+		String content = "=== Header 3 ===";
+
+		String expected = "==== Header 3 ====";
+		String actual = _translate(content);
+
+		assertEquals(expected, actual);
+	}
+
+	public void testHeader2() throws Exception {
+		String content = "== Header 2 ==";
+
+		String expected = "=== Header 2 ===";
+		String actual = _translate(content);
+
+		assertEquals(expected, actual);
+	}
+
+	public void testHeader1() throws Exception {
+		String content = "= Header 1 =";
+
+		String expected = "== Header 1 ==";
+		String actual = _translate(content);
+
+		assertEquals(expected, actual);
+	}
+
+	public void testHeader1WithoutSpaces() throws Exception {
+		String content = "=Header 1=";
+
+		String expected = "==Header 1==";
 		String actual = _translate(content);
 
 		assertEquals(expected, actual);
@@ -331,15 +367,6 @@ public class MediaWikiToCreoleTranslatorTest extends TestCase {
 			MediaWikiToCreoleTranslator.TABLE_OF_CONTENTS +
 				"[[Link With Underscores]]";
 		String actual = _translator.postProcess(_translate(content));
-
-		assertEquals(expected, actual);
-	}
-
-	public void testHeader1() throws Exception {
-		String content = "= Header 1 =";
-
-		String expected = content;
-		String actual = _translate(content);
 
 		assertEquals(expected, actual);
 	}
