@@ -147,6 +147,17 @@ String[] workflowRoleNames = (String[])request.getAttribute("edit_pages.jsp-work
 			%>
 
 			</table>
+
+			<br /><br />
+
+			<c:choose>
+				<c:when test="<%= liveGroup.isCommunity() %>">
+					<liferay-ui:message key="stage-community-permissions-reference-help" />
+				</c:when>
+				<c:otherwise>
+					<liferay-ui:message key="stage-organization-permissions-reference-help" />
+				</c:otherwise>
+			</c:choose>
 		</fieldset>
 
 		<br />
