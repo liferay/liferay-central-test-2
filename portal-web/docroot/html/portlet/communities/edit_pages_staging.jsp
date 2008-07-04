@@ -61,6 +61,17 @@ String[] workflowRoleNames = (String[])request.getAttribute("edit_pages.jsp-work
 	<c:if test="<%= workflowEnabled %>">
 		<br />
 
+		<div class="portlet-msg-info">
+			<c:choose>
+				<c:when test="<%= liveGroup.isCommunity() %>">
+					<liferay-ui:message key="stage-community-permissions-reference-help" />
+				</c:when>
+				<c:otherwise>
+					<liferay-ui:message key="stage-organization-permissions-reference-help" />
+				</c:otherwise>
+			</c:choose>
+		</div>
+
 		<fieldset>
 			<legend><liferay-ui:message key="workflow" /></legend>
 
@@ -95,7 +106,7 @@ String[] workflowRoleNames = (String[])request.getAttribute("edit_pages.jsp-work
 					<%= LanguageUtil.format(pageContext, "stage-x-role", "1") %>
 				</td>
 				<td>
-					<liferay-ui:icon-help message="content-creators" />
+					<liferay-ui:message key="content-creators" />
 
 					<liferay-ui:icon-help message="stage-1-role-help" />
 				</td>
@@ -147,17 +158,6 @@ String[] workflowRoleNames = (String[])request.getAttribute("edit_pages.jsp-work
 			%>
 
 			</table>
-
-			<br /><br />
-
-			<c:choose>
-				<c:when test="<%= liveGroup.isCommunity() %>">
-					<liferay-ui:message key="stage-community-permissions-reference-help" />
-				</c:when>
-				<c:otherwise>
-					<liferay-ui:message key="stage-organization-permissions-reference-help" />
-				</c:otherwise>
-			</c:choose>
 		</fieldset>
 
 		<br />
