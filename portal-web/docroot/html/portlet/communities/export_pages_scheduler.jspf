@@ -26,13 +26,13 @@
 String scheduleCMD = StringPool.BLANK;
 String unscheduleCMD = StringPool.BLANK;
 
-if (cmd.equals("publish_to_live")) {
-	scheduleCMD = "schedule_publish_to_live";
-	unscheduleCMD = "unschedule_publish_to_live";
-}
-else if (cmd.equals("copy_from_live")) {
+if (cmd.equals("copy_from_live")) {
 	scheduleCMD = "schedule_copy_from_live";
 	unscheduleCMD = "unschedule_copy_from_live";
+}
+else if (cmd.equals("publish_to_live")) {
+	scheduleCMD = "schedule_publish_to_live";
+	unscheduleCMD = "unschedule_publish_to_live";
 }
 else if (cmd.equals("publish_to_remote")) {
 	scheduleCMD = "schedule_publish_to_remote";
