@@ -297,7 +297,6 @@ ${exception.message}
 			<jvmarg value="-Dservice.sql.sequences.file=sequences.sql" />
 			<jvmarg value="-Dservice.base.persistence.package=com.liferay.portal.service.persistence" />
 			<jvmarg value="-Dservice.bean.locator.util.package=com.liferay.portal.kernel.bean" />
-			<jvmarg value="-Dservice.principal.bean.package=com.liferay.portal.service.impl" />
 			<jvmarg value="-Dservice.props.util.package=com.liferay.portal.util" />
 			<jvmarg value="-Dservice.spring.context.package=com.liferay.portal.spring.context" />
 			<jvmarg value="-Dservice.spring.hibernate.package=com.liferay.portal.spring.hibernate" />

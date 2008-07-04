@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service.impl;
+package com.liferay.portal.service.base;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;

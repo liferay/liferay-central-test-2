@@ -58,7 +58,7 @@ import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserServiceFactory;
-import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portal.service.persistence.CompanyFinder;
 import com.liferay.portal.service.persistence.CompanyFinderUtil;
 import com.liferay.portal.service.persistence.CompanyPersistence;

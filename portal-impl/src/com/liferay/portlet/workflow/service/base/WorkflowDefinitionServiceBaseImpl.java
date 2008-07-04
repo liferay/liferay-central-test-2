@@ -31,7 +31,7 @@ import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.ResourceServiceFactory;
-import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourceFinderUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;

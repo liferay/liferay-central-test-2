@@ -127,7 +127,6 @@ public class ServiceBuilder {
 			boolean autoNamespaceTables = false;
 			String basePersistencePackage = "com.liferay.portal.service.persistence";
 			String beanLocatorUtilPackage = "com.liferay.portal.kernel.bean";
-			String principalBeanPackage = "com.liferay.portal.service.impl";
 			String propsUtilPackage = "com.liferay.portal.util";
 			String springContextPackage = "com.liferay.portal.spring.context";
 			String springHibernatePackage = "com.liferay.portal.spring.hibernate";
@@ -140,9 +139,8 @@ public class ServiceBuilder {
 				remotingFileName, sqlDir, sqlFileName, sqlIndexesFileName,
 				sqlIndexesPropertiesFileName, sqlSequencesFileName,
 				autoNamespaceTables, basePersistencePackage,
-				beanLocatorUtilPackage, principalBeanPackage, propsUtilPackage,
-				springContextPackage, springHibernatePackage, springUtilPackage,
-				testDir);
+				beanLocatorUtilPackage, propsUtilPackage, springContextPackage,
+				springHibernatePackage, springUtilPackage, testDir);
 		}
 		else if (args.length == 0) {
 			String fileName = System.getProperty("service.input.file");
@@ -162,7 +160,6 @@ public class ServiceBuilder {
 			boolean autoNamespaceTables = GetterUtil.getBoolean(System.getProperty("service.auto.namespace.tables"));
 			String basePersistencePackage = System.getProperty("service.base.persistence.package");
 			String beanLocatorUtilPackage = System.getProperty("service.bean.locator.util.package");
-			String principalBeanPackage = System.getProperty("service.principal.bean.package");
 			String propsUtilPackage = System.getProperty("service.props.util.package");
 			String springContextPackage = System.getProperty("service.spring.context.package");
 			String springHibernatePackage = System.getProperty("service.spring.hibernate.package");
@@ -175,9 +172,8 @@ public class ServiceBuilder {
 				remotingFileName, sqlDir, sqlFileName, sqlIndexesFileName,
 				sqlIndexesPropertiesFileName, sqlSequencesFileName,
 				autoNamespaceTables, basePersistencePackage,
-				beanLocatorUtilPackage, principalBeanPackage, propsUtilPackage,
-				springContextPackage, springHibernatePackage, springUtilPackage,
-				testDir);
+				beanLocatorUtilPackage, propsUtilPackage, springContextPackage,
+				springHibernatePackage, springUtilPackage, testDir);
 		}
 
 		if (serviceBuilder == null) {
@@ -417,10 +413,9 @@ public class ServiceBuilder {
 		String sqlDir, String sqlFileName, String sqlIndexesFileName,
 		String sqlIndexesPropertiesFileName, String sqlSequencesFileName,
 		boolean autoNamespaceTables, String basePersistencePackage,
-		String beanLocatorUtilPackage, String principalBeanPackage,
-		String propsUtilPackage, String springContextPackage,
-		String springHibernatePackage, String springUtilPackage,
-		String testDir) {
+		String beanLocatorUtilPackage, String propsUtilPackage,
+		String springContextPackage, String springHibernatePackage,
+		String springUtilPackage, String testDir) {
 
 		new ServiceBuilder(
 			fileName, hbmFileName, modelHintsFileName, springFileName,
@@ -428,8 +423,8 @@ public class ServiceBuilder {
 			remotingFileName, sqlDir, sqlFileName, sqlIndexesFileName,
 			sqlIndexesPropertiesFileName, sqlSequencesFileName,
 			autoNamespaceTables, basePersistencePackage, beanLocatorUtilPackage,
-			principalBeanPackage, propsUtilPackage, springContextPackage,
-			springHibernatePackage, springUtilPackage, testDir, true);
+			propsUtilPackage, springContextPackage, springHibernatePackage,
+			springUtilPackage, testDir, true);
 	}
 
 	public ServiceBuilder(
@@ -439,10 +434,9 @@ public class ServiceBuilder {
 		String sqlDir, String sqlFileName, String sqlIndexesFileName,
 		String sqlIndexesPropertiesFileName, String sqlSequencesFileName,
 		boolean autoNamespaceTables, String basePersistencePackage,
-		String beanLocatorUtilPackage, String principalBeanPackage,
-		String propsUtilPackage, String springContextPackage,
-		String springHibernatePackage, String springUtilPackage, String testDir,
-		boolean build) {
+		String beanLocatorUtilPackage, String propsUtilPackage,
+		String springContextPackage, String springHibernatePackage,
+		String springUtilPackage, String testDir, boolean build) {
 
 		_tplBadColumnNames = _getTplProperty(
 			"bad_column_names", _tplBadColumnNames);
@@ -489,8 +483,6 @@ public class ServiceBuilder {
 			"portal_context_loader_listener", _tplPortalContextLoaderListener);
 		_tplPortletCustomSQLUtil = _getTplProperty(
 			"portlet_custom_sql_util", _tplPortletCustomSQLUtil);
-		_tplPrincipalBean = _getTplProperty(
-			"principal_bean", _tplPrincipalBean);
 		_tplProps = _getTplProperty("props", _tplProps);
 		_tplPropsKeys = _getTplProperty("props_keys", _tplPropsKeys);
 		_tplPropsUtil = _getTplProperty("props_util", _tplPropsUtil);
@@ -533,7 +525,6 @@ public class ServiceBuilder {
 			_autoNamespaceTables = autoNamespaceTables;
 			_basePersistencePackage = basePersistencePackage;
 			_beanLocatorUtilPackage = beanLocatorUtilPackage;
-			_principalBeanPackage = principalBeanPackage;
 			_propsUtilPackage = propsUtilPackage;
 			_springContextPackage = springContextPackage;
 			_springHibernatePackage = springHibernatePackage;
@@ -1031,7 +1022,6 @@ public class ServiceBuilder {
 				_createLazyClassPathApplicationContext();
 				_createPortalContextLoaderListener();
 				_createPortletCustomSQLUtil();
-				_createPrincipalBean();
 				_createProps();
 				_createPropsKeys();
 				_createPropsUtil();
@@ -1161,9 +1151,9 @@ public class ServiceBuilder {
 				_remotingFileName, _sqlDir, _sqlFileName, _sqlIndexesFileName,
 				_sqlIndexesPropertiesFileName, _sqlSequencesFileName,
 				_autoNamespaceTables, _basePersistencePackage,
-				_beanLocatorUtilPackage, _principalBeanPackage,
-				_propsUtilPackage, _springContextPackage,
-				_springHibernatePackage, _springUtilPackage, _testDir, false);
+				_beanLocatorUtilPackage, _propsUtilPackage,
+				_springContextPackage, _springHibernatePackage,
+				_springUtilPackage, _testDir, false);
 
 			entity = serviceBuilder.getEntity(refEntity);
 
@@ -2223,25 +2213,6 @@ public class ServiceBuilder {
 		FileUtil.write(ejbFile, content, true);
 	}
 
-	private void _createPrincipalBean() throws Exception {
-		if (_principalBeanPackage.equals("com.liferay.portal.service.impl")) {
-			return;
-		}
-
-		// Content
-
-		String content = _processTemplate(_tplPrincipalBean);
-
-		// Write file
-
-		File ejbFile = new File(
-			_implDir + "/" +
-				StringUtil.replace(_principalBeanPackage, ".", "/") +
-					"/PrincipalBean.java");
-
-		FileUtil.write(ejbFile, content, true);
-	}
-
 	private void _createProps() throws Exception {
 		if (_propsUtilPackage.equals("com.liferay.portal.util")) {
 			return;
@@ -3243,7 +3214,6 @@ public class ServiceBuilder {
 		context.put("sqlFileName", _sqlFileName);
 		context.put("basePersistencePackage", _basePersistencePackage);
 		context.put("beanLocatorUtilPackage", _beanLocatorUtilPackage);
-		context.put("principalBeanPackage", _principalBeanPackage);
 		context.put("propsUtilPackage", _propsUtilPackage);
 		context.put("springContextPackage", _springContextPackage);
 		context.put("springHibernatePackage", _springHibernatePackage);
@@ -3626,7 +3596,6 @@ public class ServiceBuilder {
 		_TPL_ROOT + "portal_context_loader_listener.ftl";
 	private String _tplPortletCustomSQLUtil =
 		_TPL_ROOT + "portlet_custom_sql_util.ftl";
-	private String _tplPrincipalBean = _TPL_ROOT + "principal_bean.ftl";
 	private String _tplProps = _TPL_ROOT + "props.ftl";
 	private String _tplPropsKeys = _TPL_ROOT + "props_keys.ftl";
 	private String _tplPropsUtil = _TPL_ROOT + "props_util.ftl";
@@ -3663,7 +3632,6 @@ public class ServiceBuilder {
 	private boolean _autoNamespaceTables;
 	private String _basePersistencePackage;
 	private String _beanLocatorUtilPackage;
-	private String _principalBeanPackage;
 	private String _propsUtilPackage;
 	private String _springContextPackage;
 	private String _springHibernatePackage;

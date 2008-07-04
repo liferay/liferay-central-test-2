@@ -3,7 +3,7 @@ package ${packagePath}.service.base;
 import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 
 <#if sessionTypeName == "">
-	import ${principalBeanPackage}.PrincipalBean;
+	import com.liferay.portal.service.base.PrincipalBean;
 </#if>
 
 <#if entity.hasColumns()>

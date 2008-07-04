@@ -158,7 +158,6 @@ import com.liferay.portal.service.WebDAVPropsLocalServiceFactory;
 import com.liferay.portal.service.WebsiteLocalService;
 import com.liferay.portal.service.WebsiteLocalServiceFactory;
 import com.liferay.portal.service.WebsiteService;
-import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.persistence.AccountPersistence;
 import com.liferay.portal.service.persistence.AccountUtil;
 import com.liferay.portal.service.persistence.AddressPersistence;

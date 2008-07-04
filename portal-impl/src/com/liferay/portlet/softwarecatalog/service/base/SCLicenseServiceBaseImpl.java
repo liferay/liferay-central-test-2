@@ -27,7 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
-import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.portal.service.base.PrincipalBean;
 
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceFactory;

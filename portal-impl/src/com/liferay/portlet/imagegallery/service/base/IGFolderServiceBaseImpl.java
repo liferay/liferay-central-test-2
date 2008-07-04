@@ -41,7 +41,7 @@ import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserServiceFactory;
-import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portal.service.persistence.ImagePersistence;
 import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.service.persistence.LayoutFinder;

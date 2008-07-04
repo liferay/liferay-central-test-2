@@ -46,7 +46,7 @@ import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserServiceFactory;
 import com.liferay.portal.service.WebDAVPropsLocalService;
 import com.liferay.portal.service.WebDAVPropsLocalServiceFactory;
-import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portal.service.persistence.LayoutFinder;
 import com.liferay.portal.service.persistence.LayoutFinderUtil;
 import com.liferay.portal.service.persistence.LayoutPersistence;
