@@ -16382,15 +16382,17 @@ Liferay.Layout.Columns = {
 
 		instance._gridColumns = '.lfr-column';
 
+		instance._counter = 0;
+
 		var options = {
 			appendTo: 'body',
 			connectWith: [instance._columns],
 			dropOnEmpty: true,
 			handle: instance._handleSelector,
 			items: instance._boxSelector,
-			placeholder: 'portlet-sort-helper',
 			helper: instance._createHelper,
-			tolerance: 'touch',
+			placeholder: 'portlet-sort-helper',
+			tolerance: 'guess',
 			revert:	false,
 			distance: 2,
 			scroll: true,
@@ -16419,12 +16421,21 @@ Liferay.Layout.Columns = {
 			// the callstack and instead just do the work inline.
 
 			over: function(event, ui) {
+				instance._counter++;
 				jQuery(this).parent(instance._gridColumns).addClass(instance._activeAreaClass);
 				ui.helper.removeClass('not-intersecting');
 			},
 			out: function(event, ui) {
+				instance._counter++;
 				jQuery(this).parent(instance._gridColumns).removeClass(instance._activeAreaClass);
-				ui.helper.addClass('not-intersecting');
+
+				// We need to make sure that the active class and the intersection 
+				// logic don't fall out of sync
+
+				if (!(instance._counter % 2)) {
+					ui.helper.addClass('not-intersecting');
+					instance._counter = 0;
+				}
 			},
 			activate: function(event, ui) {
 				instance._grid.addClass('dragging');
@@ -16546,6 +16557,9 @@ Liferay.Layout.Columns = {
 			var currentColumnId = Liferay.Util.getColumnId(currentCol.id);
 			var portletId = Liferay.Util.getPortletId(portlet.id);
 
+			var viewport = Liferay.Util.viewport.scroll();
+			var portletOffset = ui.item.offset();
+
 			Liferay.Layout._saveLayout(
 				{
 					cmd: 'move',
@@ -16557,6 +16571,10 @@ Liferay.Layout.Columns = {
 
 			if (instance._onCompleteCallback) {
 				instance._onCompleteCallback(event, ui);
+			}
+
+			if (viewport.y > portletOffset.top) {
+				window.scrollTo(portletOffset.left, portletOffset.top - 10);
 			}
 		}
 	}
@@ -18669,7 +18687,7 @@ var LayoutConfiguration = {
 
 			sortColumns.bind('sortreceive.sortable',
 				function(event, ui) {
-					if (ui.item.is('.lfr-portlet-item') && !sortableInstance.dragging) {
+					if (ui.item.is('.lfr-portlet-item') && ui.sender.is('.lfr-portlet-item') && !sortableInstance.dragging) {
 						var placeholder = ui.item;
 						var portlet = ui.sender;
 
