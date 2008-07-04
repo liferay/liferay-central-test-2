@@ -331,9 +331,10 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
+
 	<!--
-	liferay-portlet:resourceURL is similar to portlet:resourceURL except it has the
-	additional attributes portletName, anchor, and encrypt.
+	liferay-portlet:resourceURL is similar to portlet:resourceURL except it has
+	the additional attributes portletName, anchor, and encrypt.
 
 	Set varImpl to set the PortletURL object. This gives you an object reference
 	to the underlying URL implementation.
