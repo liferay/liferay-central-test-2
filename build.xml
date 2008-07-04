@@ -259,7 +259,7 @@
 
 		<antcall target="test-tomcat-5.5" />
 
-		<get src="http://localhost:4444/selenium-server/driver/?cmd=shutDown" ignoreerrors="true" />
+		<antelope:post to="http://localhost:4444/selenium-server/driver/?cmd=shutDown" wantresponse="false" />
 	</target>
 
 	<target name="jar">
