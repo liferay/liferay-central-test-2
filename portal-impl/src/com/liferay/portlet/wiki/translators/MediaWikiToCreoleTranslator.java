@@ -64,12 +64,6 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 		regexps.put("== '''([^=]+)''' ==", "== $1 ==");
 		regexps.put("== '''([^=]+)''' ===", "=== $1 ===");
 
-		// Headers in Creole start with two equal signs
-
-		regexps.put("^===([^=]+)===", "====$1====");
-		regexps.put("^==([^=]+)==", "===$1===");
-		regexps.put("^=([^=]+)=", "==$1==");
-
 		// Unscape angle brackets
 
 		regexps.put("&lt;", "<");
@@ -136,7 +130,19 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 	}
 
 	protected String postProcess(String content) {
+
+		// LEP-6118
+
 		Matcher matcher = Pattern.compile(
+			"^=([^=]+)=", Pattern.MULTILINE).matcher(content);
+
+		if (matcher.find()) {
+			content = runRegexp(content, "^===([^=]+)===", "====$1====");
+			content = runRegexp(content, "^==([^=]+)==", "===$1===");
+			content = runRegexp(content, "^=([^=]+)=", "==$1==");
+		}
+
+		matcher = Pattern.compile(
 			"\\[{2}([^\\]]*)\\]{2}", Pattern.DOTALL).matcher(content);
 
 		StringBuffer sb = new StringBuffer(content);
