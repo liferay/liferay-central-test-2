@@ -107,7 +107,7 @@ for (int i = 0; i < curActions.size(); i++) {
 					<%
 					boolean disabled = portletResource.equals(PortletKeys.ENTERPRISE_ADMIN) || portletResource.equals(PortletKeys.ORGANIZATION_ADMIN) || portletResource.equals(PortletKeys.PORTAL);
 
-					if ((role.getType() == RoleImpl.TYPE_ORGANIZATION) && ResourceActionsUtil.isOrganizationModelResource(curModelResourceName)) {
+					if ((role.getType() == RoleImpl.TYPE_ORGANIZATION) && Validator.isNotNull(curModelResource) && curModelResource.equals(Organization.class.getName())) {
 						disabled = false;
 					}
 					%>

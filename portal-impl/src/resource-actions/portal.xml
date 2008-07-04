@@ -90,12 +90,16 @@
 		<community-defaults />
 		<guest-defaults />
 		<guest-unsupported>
+			<action-key>APPROVE_PROPOSAL</action-key>
 			<action-key>ASSIGN_MEMBERS</action-key>
+			<action-key>ASSIGN_REVIEWER</action-key>
 			<action-key>DELETE</action-key>
 			<action-key>MANAGE_ANNOUNCEMENTS</action-key>
+			<action-key>MANAGE_ARCHIVED_SETUPS</action-key>
 			<action-key>MANAGE_LAYOUTS</action-key>
 			<action-key>MANAGE_STAGING</action-key>
 			<action-key>PERMISSIONS</action-key>
+			<action-key>PUBLISH_STAGING</action-key>
 			<action-key>UPDATE</action-key>
 		</guest-unsupported>
 	</model-resource>
@@ -141,26 +145,36 @@
 			<portlet-name>90</portlet-name>
 		</portlet-ref>
 		<supports>
+			<action-key>APPROVE_PROPOSAL</action-key>
 			<action-key>ASSIGN_MEMBERS</action-key>
+			<action-key>ASSIGN_REVIEWER</action-key>
 			<action-key>DELETE</action-key>
 			<action-key>MANAGE_ANNOUNCEMENTS</action-key>
+			<action-key>MANAGE_ARCHIVED_SETUPS</action-key>
 			<action-key>MANAGE_LAYOUTS</action-key>
+			<action-key>MANAGE_STAGING</action-key>
 			<action-key>MANAGE_SUBORGANIZATIONS</action-key>
 			<action-key>MANAGE_USERS</action-key>
 			<action-key>PERMISSIONS</action-key>
+			<action-key>PUBLISH_STAGING</action-key>
 			<action-key>UPDATE</action-key>
 			<action-key>VIEW</action-key>
 		</supports>
 		<community-defaults />
 		<guest-defaults />
 		<guest-unsupported>
+			<action-key>APPROVE_PROPOSAL</action-key>
 			<action-key>ASSIGN_MEMBERS</action-key>
+			<action-key>ASSIGN_REVIEWER</action-key>
 			<action-key>DELETE</action-key>
 			<action-key>MANAGE_ANNOUNCEMENTS</action-key>
+			<action-key>MANAGE_ARCHIVED_SETUPS</action-key>
 			<action-key>MANAGE_LAYOUTS</action-key>
+			<action-key>MANAGE_STAGING</action-key>
 			<action-key>MANAGE_SUBORGANIZATIONS</action-key>
 			<action-key>MANAGE_USERS</action-key>
 			<action-key>PERMISSIONS</action-key>
+			<action-key>PUBLISH_STAGING</action-key>
 			<action-key>UPDATE</action-key>
 			<action-key>VIEW</action-key>
 		</guest-unsupported>

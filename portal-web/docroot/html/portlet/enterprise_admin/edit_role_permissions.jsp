@@ -440,6 +440,10 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 				if ((role.getType() != RoleImpl.TYPE_REGULAR) && ResourceActionsUtil.isPortalModelResource(curModelResource)) {
 					selectable = false;
 				}
+
+				if ((role.getType() == RoleImpl.TYPE_ORGANIZATION) && Validator.isNotNull(curModelResource) && curModelResource.equals(Organization.class.getName())) {
+					selectable = true;
+				}
 				%>
 
 				<br />
