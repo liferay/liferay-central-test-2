@@ -255,7 +255,11 @@
 
 		<delete dir="${propsutil.resource.repositories.root}" />
 
+		<java jar="lib/development/selenium-server.jar" fork="true" spawn="true" />
+
 		<antcall target="test-tomcat-5.5" />
+
+		<get src="http://localhost:4444/selenium-server/driver/?cmd=shutDown" ignoreerrors="true" />
 	</target>
 
 	<target name="jar">
