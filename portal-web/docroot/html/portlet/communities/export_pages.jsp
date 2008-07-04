@@ -161,7 +161,7 @@ if (proposalId > 0) {
 	portletURL.setParameter("proposalId", String.valueOf(proposalId));
 }
 else {
-	if (selGroup.isStagingGroup() || selGroup.hasStagingGroup()) {
+	if (selGroup.isStagingGroup()) {
 		cmd = "publish_to_live";
 	}
 	else {
