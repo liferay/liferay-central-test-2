@@ -15,19 +15,6 @@
 		</guest-unsupported>
 	</portlet-resource>
 	<portlet-resource>
-		<portlet-name>40</portlet-name>
-		<supports>
-			<action-key>CONFIGURATION</action-key>
-			<action-key>VIEW</action-key>
-		</supports>
-		<community-defaults />
-		<guest-defaults />
-		<guest-unsupported>
-			<action-key>CONFIGURATION</action-key>
-			<action-key>VIEW</action-key>
-		</guest-unsupported>
-	</portlet-resource>
-	<portlet-resource>
 		<portlet-name>79</portlet-name>
 		<supports>
 			<action-key>CONFIGURATION</action-key>
@@ -107,7 +94,6 @@
 		<model-name>com.liferay.portal.model.Location</model-name>
 		<portlet-ref>
 			<portlet-name>11</portlet-name>
-			<portlet-name>40</portlet-name>
 			<portlet-name>79</portlet-name>
 			<portlet-name>80</portlet-name>
 			<portlet-name>90</portlet-name>
@@ -139,7 +125,6 @@
 		<model-name>com.liferay.portal.model.Organization</model-name>
 		<portlet-ref>
 			<portlet-name>11</portlet-name>
-			<portlet-name>40</portlet-name>
 			<portlet-name>79</portlet-name>
 			<portlet-name>80</portlet-name>
 			<portlet-name>90</portlet-name>
@@ -233,7 +218,6 @@
 		<model-name>com.liferay.portal.model.User</model-name>
 		<portlet-ref>
 			<portlet-name>11</portlet-name>
-			<portlet-name>40</portlet-name>
 			<portlet-name>79</portlet-name>
 			<portlet-name>80</portlet-name>
 			<portlet-name>90</portlet-name>
@@ -259,7 +243,6 @@
 		<model-name>com.liferay.portal.model.UserGroup</model-name>
 		<portlet-ref>
 			<portlet-name>11</portlet-name>
-			<portlet-name>40</portlet-name>
 			<portlet-name>79</portlet-name>
 			<portlet-name>80</portlet-name>
 			<portlet-name>90</portlet-name>
