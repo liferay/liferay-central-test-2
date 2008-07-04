@@ -488,7 +488,6 @@ ${exception.message}
 			<jvmarg value="-Dservice.sql.indexes.file=indexes.sql" />
 			<jvmarg value="-Dservice.sql.indexes.properties.file=indexes.properties" />
 			<jvmarg value="-Dservice.sql.sequences.file=sequences.sql" />
-			<jvmarg value="-Dservice.base.model.impl.package=com.liferay.portal.model.impl" />
 			<jvmarg value="-Dservice.base.persistence.package=com.liferay.portal.service.persistence" />
 			<jvmarg value="-Dservice.bean.locator.util.package=com.liferay.portal.kernel.bean" />
 			<jvmarg value="-Dservice.principal.bean.package=com.liferay.portal.service.impl" />
