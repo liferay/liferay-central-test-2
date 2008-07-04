@@ -36,7 +36,6 @@ import com.liferay.portalweb.portlet.journalcontent.JournalContentTests;
 import com.liferay.portalweb.portlet.journalcontentsearch.JournalContentSearchTests;
 import com.liferay.portalweb.portlet.language.LanguageTests;
 
-
 /**
  * <a href="PortalWebTestSuite.java.html"><b><i>View Source</i></b></a>
  *
@@ -128,6 +127,8 @@ public class PortalWebTestSuite extends BaseTests {
 		//addTestSuite(WikiDisplayTests.class);
 		//addTestSuite(WordsTests.class);
 		//addTestSuite(XSLContentTests.class);
+
+		addTestSuite(StopSeleniumTest.class);
 	}
 
 }
