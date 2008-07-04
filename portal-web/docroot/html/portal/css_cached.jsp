@@ -44,6 +44,10 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	list-style: none;
 }
 
+.lfr-component li img {
+	vertical-align: middle;
+}
+
 #layout-grid.dragging .lfr-portlet-column.empty {
 	padding: 20px;
 }
