@@ -44,13 +44,8 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	list-style: none;
 }
 
-#layout-grid.dragging .lfr-column {
-	overflow: hidden;
-}
-
-#layout-grid.dragging .lfr-portlet-column {
-	padding-bottom: 10000px;
-	margin-bottom: -10000px;
+#layout-grid.dragging .lfr-portlet-column.empty {
+	padding: 20px;
 }
 
 .nojs .lfr-js-required {
