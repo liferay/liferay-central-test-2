@@ -317,7 +317,7 @@ var LayoutConfiguration = {
 
 			sortColumns.bind('sortreceive.sortable',
 				function(event, ui) {
-					if (ui.item.is('.lfr-portlet-item') && !sortableInstance.dragging) {
+					if (ui.item.is('.lfr-portlet-item') && ui.sender.is('.lfr-portlet-item') && !sortableInstance.dragging) {
 						var placeholder = ui.item;
 						var portlet = ui.sender;
 
