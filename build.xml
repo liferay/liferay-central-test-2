@@ -249,7 +249,11 @@
 
 		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
 
-		<delete dir="${user.home}/liferay" />
+		<taskdef classname="com.liferay.portal.util.PropsUtilTask" classpathref="project.classpath" name="propsutil" />
+
+		<propsutil key="resource.repositories.root" result="propsutil.resource.repositories.root" />
+
+		<delete dir="${propsutil.resource.repositories.root}" />
 
 		<antcall target="test-tomcat-5.5" />
 	</target>
