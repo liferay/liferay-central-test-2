@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v5_0_2;
+package com.liferay.portal.upgrade.v5_1_0;
 
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.upgrade.UpgradeException;

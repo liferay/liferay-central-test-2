@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v5_0_2;
+package com.liferay.portal.upgrade.v5_1_0;
 
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
@@ -28,7 +28,7 @@ import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.v5_0_2.util.BlogsEntryUrlTitleUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v5_1_0.util.BlogsEntryUrlTitleUpgradeColumnImpl;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 
 import org.apache.commons.logging.Log;

@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v5_0_2;
+package com.liferay.portal.upgrade.v5_1_0;
 
 import com.liferay.portal.upgrade.SmartUpgradeSchema;
 
@@ -33,7 +33,7 @@ import com.liferay.portal.upgrade.SmartUpgradeSchema;
 public class UpgradeSchema extends SmartUpgradeSchema {
 
 	protected void upgradeOnce() throws Exception {
-		runSQLTemplate("update-5.0.1-5.0.2.sql", false);
+		runSQLTemplate("update-5.0.1-5.1.0.sql", false);
 	}
 
 }

@@ -23,23 +23,23 @@
 package com.liferay.portal.upgrade;
 
 import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.upgrade.v5_0_2.UpgradeBlogs;
-import com.liferay.portal.upgrade.v5_0_2.UpgradeMessageBoards;
-import com.liferay.portal.upgrade.v5_0_2.UpgradeSchema;
+import com.liferay.portal.upgrade.v5_1_0.UpgradeBlogs;
+import com.liferay.portal.upgrade.v5_1_0.UpgradeMessageBoards;
+import com.liferay.portal.upgrade.v5_1_0.UpgradeSchema;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UpgradeProcess_5_0_2.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeProcess_5_1_0.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class UpgradeProcess_5_0_2 extends UpgradeProcess {
+public class UpgradeProcess_5_1_0 extends UpgradeProcess {
 
 	public int getThreshold() {
-		return ReleaseInfo.RELEASE_5_0_2_BUILD_NUMBER;
+		return ReleaseInfo.RELEASE_5_1_0_BUILD_NUMBER;
 	}
 
 	public void upgrade() throws UpgradeException {
@@ -50,6 +50,6 @@ public class UpgradeProcess_5_0_2 extends UpgradeProcess {
 		upgrade(UpgradeMessageBoards.class);
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeProcess_5_0_2.class);
+	private static Log _log = LogFactory.getLog(UpgradeProcess_5_1_0.class);
 
 }

@@ -421,7 +421,7 @@ public abstract class DBUtil {
 		String template = FileUtil.read(file);
 
 		if (fileName.equals("portal") || fileName.equals("portal-minimal") ||
-			fileName.equals("update-5.0.1-5.0.2")) {
+			fileName.equals("update-5.0.1-5.1.0")) {
 
 			BufferedReader br = new BufferedReader(new StringReader(template));
 
