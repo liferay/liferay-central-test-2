@@ -93,71 +93,17 @@ public class StagingUtil {
 	public static void copyFromLive(ActionRequest actionRequest)
 		throws Exception {
 
-		String tabs1 = ParamUtil.getString(actionRequest, "tabs1");
-
 		long stagingGroupId = ParamUtil.getLong(
 			actionRequest, "stagingGroupId");
 
 		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
 
-		boolean privateLayout = true;
-
-		if (tabs1.equals("public-pages")) {
-			privateLayout = false;
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Copying live to staging for group " +
-					stagingGroup.getLiveGroupId());
-		}
+		long liveGroupId = stagingGroup.getLiveGroupId();
 
 		Map<String, String[]> parameterMap = getStagingParameters();
 
-		String range = ParamUtil.getString(actionRequest, "range");
-
-		Date startDate = null;
-		Date endDate = null;
-
-		if (range.equals("dateRange")) {
-			startDate = _getDate(actionRequest, "startDate", true).getTime();
-
-			endDate = _getDate(actionRequest, "endDate", true).getTime();
-		}
-		else if (range.equals("last")) {
-			int last = ParamUtil.getInteger(actionRequest, "last");
-
-			Date now = new Date();
-
-			startDate = new Date(now.getTime() - (last * Time.HOUR));
-
-			endDate = now;
-		}
-
-		String scope = ParamUtil.getString(actionRequest, "scope");
-
-		if (scope.equals("all-pages")) {
-			publishLayouts(
-				stagingGroup.getLiveGroupId(), stagingGroup.getGroupId(),
-				privateLayout, parameterMap, startDate, endDate);
-		}
-		else if (scope.equals("selected-pages")) {
-			Map<Long, Boolean> layoutIdMap = new LinkedHashMap<Long, Boolean>();
-
-			long[] rowIds = ParamUtil.getLongValues(actionRequest, "rowIds");
-
-			for (long selPlid : rowIds) {
-				boolean includeChildren = ParamUtil.getBoolean(
-					actionRequest, "includeChildren_" + selPlid);
-
-				layoutIdMap.put(
-					new Long(selPlid), new Boolean(includeChildren));
-			}
-
-			publishLayouts(
-				stagingGroup.getLiveGroupId(), stagingGroup.getGroupId(),
-				privateLayout, layoutIdMap, parameterMap, startDate, endDate);
-		}
+		_publishLayouts(
+			actionRequest, liveGroupId, stagingGroupId, parameterMap, false);
 	}
 
 	public static void copyFromLive(
@@ -613,7 +559,18 @@ public class StagingUtil {
 	public static void publishToLive(ActionRequest actionRequest)
 		throws Exception {
 
-		_publishToLive(actionRequest, false);
+		long stagingGroupId = ParamUtil.getLong(
+			actionRequest, "stagingGroupId");
+
+		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
+
+		long liveGroupId = stagingGroup.getLiveGroupId();
+
+		Map<String, String[]> parameterMap = getStagingParameters(
+			actionRequest);
+
+		_publishLayouts(
+			actionRequest, stagingGroupId, liveGroupId, parameterMap, false);
 	}
 
 	public static void publishToLive(
@@ -642,10 +599,37 @@ public class StagingUtil {
 		_publishToRemote(actionRequest, false);
 	}
 
+	public static void scheduleCopyFromLive(ActionRequest actionRequest)
+		throws Exception {
+
+		long stagingGroupId = ParamUtil.getLong(
+			actionRequest, "stagingGroupId");
+
+		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
+
+		long liveGroupId = stagingGroup.getLiveGroupId();
+
+		Map<String, String[]> parameterMap = getStagingParameters();
+
+		_publishLayouts(
+			actionRequest, liveGroupId, stagingGroupId, parameterMap, true);
+	}
+
 	public static void schedulePublishToLive(ActionRequest actionRequest)
 		throws Exception {
 
-		_publishToLive(actionRequest, true);
+		long stagingGroupId = ParamUtil.getLong(
+			actionRequest, "stagingGroupId");
+
+		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
+
+		long liveGroupId = stagingGroup.getLiveGroupId();
+
+		Map<String, String[]> parameterMap = getStagingParameters(
+			actionRequest);
+
+		_publishLayouts(
+			actionRequest, stagingGroupId, liveGroupId, parameterMap, true);
 	}
 
 	public static void schedulePublishToRemote(ActionRequest actionRequest)
@@ -654,29 +638,54 @@ public class StagingUtil {
 		_publishToRemote(actionRequest, true);
 	}
 
-	public static void unschedulePublishToLive(ActionRequest actionRequest)
+	public static void unscheduleCopyFromLive(ActionRequest actionRequest)
 		throws Exception {
 
-		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+		long stagingGroupId = ParamUtil.getLong(
+			actionRequest, "stagingGroupId");
 
 		String jobName = ParamUtil.getString(actionRequest, "jobName");
 		String groupName = getSchedulerGroupName(
-			DestinationNames.LAYOUTS_LOCAL_PUBLISHER, groupId);
+			DestinationNames.LAYOUTS_LOCAL_PUBLISHER, stagingGroupId);
 
-		LayoutServiceUtil.unschedulePublishToLive(groupId, jobName, groupName);
+		LayoutServiceUtil.unschedulePublishToLive(
+			stagingGroupId, jobName, groupName);
+	}
+
+	public static void unschedulePublishToLive(ActionRequest actionRequest)
+		throws Exception {
+
+		long stagingGroupId = ParamUtil.getLong(
+			actionRequest, "stagingGroupId");
+
+		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
+
+		long liveGroupId = stagingGroup.getLiveGroupId();
+
+		String jobName = ParamUtil.getString(actionRequest, "jobName");
+		String groupName = getSchedulerGroupName(
+			DestinationNames.LAYOUTS_LOCAL_PUBLISHER, liveGroupId);
+
+		LayoutServiceUtil.unschedulePublishToLive(
+			liveGroupId, jobName, groupName);
 	}
 
 	public static void unschedulePublishToRemote(ActionRequest actionRequest)
 		throws Exception {
 
-		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+		long stagingGroupId = ParamUtil.getLong(
+			actionRequest, "stagingGroupId");
+
+		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
+
+		long liveGroupId = stagingGroup.getLiveGroupId();
 
 		String jobName = ParamUtil.getString(actionRequest, "jobName");
 		String groupName = getSchedulerGroupName(
-			DestinationNames.LAYOUTS_REMOTE_PUBLISHER, groupId);
+			DestinationNames.LAYOUTS_REMOTE_PUBLISHER, liveGroupId);
 
 		LayoutServiceUtil.unschedulePublishToRemote(
-			groupId, jobName, groupName);
+			liveGroupId, jobName, groupName);
 	}
 
 	public static void updateStaging(ActionRequest actionRequest)
@@ -927,18 +936,12 @@ public class StagingUtil {
 		return cal;
 	}
 
-	private static void _publishToLive(
-			ActionRequest actionRequest, boolean schedule)
+	private static void _publishLayouts(
+			ActionRequest actionRequest, long sourceGroupId, long targetGroupId,
+			Map<String, String[]> parameterMap, boolean schedule)
 		throws Exception {
 
 		String tabs1 = ParamUtil.getString(actionRequest, "tabs1");
-
-		long stagingGroupId = ParamUtil.getLong(
-			actionRequest, "stagingGroupId");
-
-		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
-
-		long liveGroupId = stagingGroup.getLiveGroupId();
 
 		boolean privateLayout = true;
 
@@ -947,9 +950,6 @@ public class StagingUtil {
 		}
 
 		String scope = ParamUtil.getString(actionRequest, "scope");
-
-		Map<String, String[]> parameterMap = getStagingParameters(
-			actionRequest);
 
 		Map<Long, Boolean> layoutIdMap = new LinkedHashMap<Long, Boolean>();
 
@@ -986,7 +986,7 @@ public class StagingUtil {
 
 		if (schedule) {
 			String groupName = getSchedulerGroupName(
-				DestinationNames.LAYOUTS_LOCAL_PUBLISHER, liveGroupId);
+				DestinationNames.LAYOUTS_LOCAL_PUBLISHER, targetGroupId);
 
 			int recurrenceType = ParamUtil.getInteger(
 				actionRequest, "recurrenceType");
@@ -1013,21 +1013,20 @@ public class StagingUtil {
 				actionRequest, "description");
 
 			LayoutServiceUtil.schedulePublishToLive(
-				stagingGroupId, liveGroupId, privateLayout, layoutIdMap,
+				sourceGroupId, targetGroupId, privateLayout, layoutIdMap,
 				parameterMap, scope, startDate, endDate, groupName, cronText,
 				startCal.getTime(), schedulerEndDate, description);
 		}
 		else {
 			if (scope.equals("all-pages")) {
 				publishLayouts(
-					stagingGroup.getGroupId(), stagingGroup.getLiveGroupId(),
-					privateLayout, parameterMap, startDate, endDate);
+					sourceGroupId, targetGroupId, privateLayout, parameterMap,
+					startDate, endDate);
 			}
 			else {
 				publishLayouts(
-					stagingGroup.getGroupId(), stagingGroup.getLiveGroupId(),
-					privateLayout, layoutIdMap, parameterMap, startDate,
-					endDate);
+					sourceGroupId, targetGroupId, privateLayout, layoutIdMap,
+					parameterMap, startDate, endDate);
 			}
 		}
 	}

@@ -158,6 +158,9 @@ public class EditPagesAction extends PortletAction {
 			else if (cmd.equals("publish_to_remote")) {
 				StagingUtil.publishToRemote(actionRequest);
 			}
+			else if (cmd.equals("schedule_copy_from_live")) {
+				StagingUtil.scheduleCopyFromLive(actionRequest);
+			}
 			else if (cmd.equals("schedule_publish_to_live")) {
 				StagingUtil.schedulePublishToLive(actionRequest);
 			}
@@ -166,6 +169,9 @@ public class EditPagesAction extends PortletAction {
 			}
 			else if (cmd.equals("staging")) {
 				StagingUtil.updateStaging(actionRequest);
+			}
+			else if (cmd.equals("unschedule_copy_from_live")) {
+				StagingUtil.unscheduleCopyFromLive(actionRequest);
 			}
 			else if (cmd.equals("unschedule_publish_to_live")) {
 				StagingUtil.unschedulePublishToLive(actionRequest);
