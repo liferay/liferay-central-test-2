@@ -119,8 +119,12 @@ Liferay.Popup = function(options) {
 
 		open: function(e, ui) {
 			if (!options.dragHelper) {
-				var dialog = jQuery(this).parents('.ui-dialog:first');
-
+				var dialog = jQuery(this).parents('.ui-dialog:first'), target = jQuery(this);
+				
+				dialog.click(function() {
+					checkExternalClick(target);
+				});
+				
 				cacheDialogHelper(dialog);
 			}
 		}
