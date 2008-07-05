@@ -23,7 +23,6 @@
 package com.liferay.portal.spring.context;
 
 import com.liferay.portal.spring.util.SpringUtil;
-import com.liferay.util.spring.context.LazyWebApplicationContext;
 
 import org.springframework.context.ApplicationContext;
 

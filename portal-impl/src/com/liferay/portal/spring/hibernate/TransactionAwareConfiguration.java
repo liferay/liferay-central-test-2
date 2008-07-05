@@ -20,38 +20,39 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.spring.context;
+package com.liferay.portal.spring.hibernate;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.lang.reflect.Proxy;
 
-import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
-import org.springframework.web.context.support.XmlWebApplicationContext;
+import org.hibernate.SessionFactory;
+import org.hibernate.engine.SessionFactoryImplementor;
+
+import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
 
 /**
- * <a href="LazyWebApplicationContext.java.html"><b><i>View Source</i></b></a>
+ * <a href="TransactionAwareConfiguration.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class LazyWebApplicationContext extends XmlWebApplicationContext {
+public class TransactionAwareConfiguration extends LocalSessionFactoryBean {
 
-	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) {
-		String[] configLocations = getConfigLocations();
+	protected SessionFactory wrapSessionFactoryIfNecessary(
+		SessionFactory target) {
 
-		if (configLocations != null) {
-			for (int i = 0; i < configLocations.length; i++) {
-				try {
-					reader.loadBeanDefinitions(configLocations[i]);
-				}
-				catch (Exception e) {
-					_log.warn(e);
-				}
-			}
+		// LEP-2996
+
+		Class<?> sessionFactoryInterface = SessionFactory.class;
+
+		if (target instanceof SessionFactoryImplementor) {
+			sessionFactoryInterface = SessionFactoryImplementor.class;
 		}
-	}
 
-	private static Log _log =
-		LogFactory.getLog(LazyWebApplicationContext.class);
+		return (SessionFactory)Proxy.newProxyInstance(
+			sessionFactoryInterface.getClassLoader(),
+			new Class[] {sessionFactoryInterface},
+			new SessionFactoryInvocationHandler(target));
+	}
 
 }

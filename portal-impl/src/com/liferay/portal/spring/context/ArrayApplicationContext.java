@@ -20,39 +20,43 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.spring.hibernate;
+package com.liferay.portal.spring.context;
 
-import java.lang.reflect.Proxy;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.engine.SessionFactoryImplementor;
-
-import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
+import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * <a href="TransactionAwareConfiguration.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="ArrayApplicationContext.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class TransactionAwareConfiguration extends LocalSessionFactoryBean {
+public class ArrayApplicationContext extends ClassPathXmlApplicationContext {
 
-	protected SessionFactory wrapSessionFactoryIfNecessary(
-		SessionFactory target) {
-
-		// LEP-2996
-
-		Class<?> sessionFactoryInterface = SessionFactory.class;
-
-		if (target instanceof SessionFactoryImplementor) {
-			sessionFactoryInterface = SessionFactoryImplementor.class;
-		}
-
-		return (SessionFactory)Proxy.newProxyInstance(
-			sessionFactoryInterface.getClassLoader(),
-			new Class[] {sessionFactoryInterface},
-			new SessionFactoryInvocationHandler(target));
+	public ArrayApplicationContext(String[] configLocations) {
+		super(configLocations);
 	}
+
+	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) {
+		String[] configLocations = getConfigLocations();
+
+		if (configLocations != null) {
+			for (int i = 0; i < configLocations.length; i++) {
+				try {
+					reader.loadBeanDefinitions(configLocations[i]);
+				}
+				catch (Exception e) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(e);
+					}
+				}
+			}
+		}
+	}
+
+	private static Log _log = LogFactory.getLog(ArrayApplicationContext.class);
 
 }

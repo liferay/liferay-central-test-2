@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.spring.hibernate;
+package com.liferay.portal.spring.hibernate;
 
 import com.liferay.util.dao.hibernate.LiferayClassicSession;
 
