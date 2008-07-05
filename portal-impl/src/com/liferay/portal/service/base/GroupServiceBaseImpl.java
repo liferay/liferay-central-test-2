@@ -408,8 +408,6 @@ import com.liferay.portlet.wiki.service.WikiNodeServiceFactory;
 import com.liferay.portlet.wiki.service.persistence.WikiNodePersistence;
 import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="GroupServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -417,7 +415,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 public abstract class GroupServiceBaseImpl extends PrincipalBean
-	implements GroupService, InitializingBean {
+	implements GroupService {
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}
@@ -2054,7 +2052,7 @@ public abstract class GroupServiceBaseImpl extends PrincipalBean
 		this.wikiNodePersistence = wikiNodePersistence;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

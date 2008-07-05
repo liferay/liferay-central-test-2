@@ -61,8 +61,6 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionUtil
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -72,7 +70,7 @@ import java.util.List;
  *
  */
 public abstract class DLFileVersionLocalServiceBaseImpl
-	implements DLFileVersionLocalService, InitializingBean {
+	implements DLFileVersionLocalService {
 	public DLFileVersion addDLFileVersion(DLFileVersion dlFileVersion)
 		throws SystemException {
 		dlFileVersion.setNew(true);
@@ -253,7 +251,7 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 		this.dlFolderPersistence = dlFolderPersistence;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (dlFileEntryLocalService == null) {
 			dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getImpl();
 		}

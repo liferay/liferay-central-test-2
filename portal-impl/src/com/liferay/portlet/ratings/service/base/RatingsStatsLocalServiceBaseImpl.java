@@ -42,8 +42,6 @@ import com.liferay.portlet.ratings.service.persistence.RatingsEntryUtil;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -53,7 +51,7 @@ import java.util.List;
  *
  */
 public abstract class RatingsStatsLocalServiceBaseImpl
-	implements RatingsStatsLocalService, InitializingBean {
+	implements RatingsStatsLocalService {
 	public RatingsStats addRatingsStats(RatingsStats ratingsStats)
 		throws SystemException {
 		ratingsStats.setNew(true);
@@ -146,7 +144,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (ratingsEntryLocalService == null) {
 			ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getImpl();
 		}

@@ -118,8 +118,6 @@ import com.liferay.portlet.tags.service.persistence.TagsEntryFinderUtil;
 import com.liferay.portlet.tags.service.persistence.TagsEntryPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -129,7 +127,7 @@ import java.util.List;
  *
  */
 public abstract class BlogsEntryLocalServiceBaseImpl
-	implements BlogsEntryLocalService, InitializingBean {
+	implements BlogsEntryLocalService {
 	public BlogsEntry addBlogsEntry(BlogsEntry blogsEntry)
 		throws SystemException {
 		blogsEntry.setNew(true);
@@ -541,7 +539,7 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (blogsEntryPersistence == null) {
 			blogsEntryPersistence = BlogsEntryUtil.getPersistence();
 		}

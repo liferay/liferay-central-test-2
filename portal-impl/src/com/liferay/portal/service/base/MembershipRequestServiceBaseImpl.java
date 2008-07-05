@@ -270,8 +270,6 @@ import com.liferay.portal.service.persistence.WebDAVPropsUtil;
 import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.service.persistence.WebsiteUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="MembershipRequestServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -279,7 +277,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 public abstract class MembershipRequestServiceBaseImpl extends PrincipalBean
-	implements MembershipRequestService, InitializingBean {
+	implements MembershipRequestService {
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}
@@ -1311,7 +1309,7 @@ public abstract class MembershipRequestServiceBaseImpl extends PrincipalBean
 		this.mailService = mailService;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

@@ -58,8 +58,6 @@ import com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreensh
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -69,7 +67,7 @@ import java.util.List;
  *
  */
 public abstract class SCLicenseLocalServiceBaseImpl
-	implements SCLicenseLocalService, InitializingBean {
+	implements SCLicenseLocalService {
 	public SCLicense addSCLicense(SCLicense scLicense)
 		throws SystemException {
 		scLicense.setNew(true);
@@ -234,7 +232,7 @@ public abstract class SCLicenseLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (scLicensePersistence == null) {
 			scLicensePersistence = SCLicenseUtil.getPersistence();
 		}

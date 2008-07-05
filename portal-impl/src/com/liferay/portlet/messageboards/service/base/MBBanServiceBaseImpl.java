@@ -79,8 +79,6 @@ import com.liferay.portlet.messageboards.service.persistence.MBThreadFinderUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="MBBanServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -88,7 +86,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 public abstract class MBBanServiceBaseImpl extends PrincipalBean
-	implements MBBanService, InitializingBean {
+	implements MBBanService {
 	public MBBanLocalService getMBBanLocalService() {
 		return mbBanLocalService;
 	}
@@ -307,7 +305,7 @@ public abstract class MBBanServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (mbBanLocalService == null) {
 			mbBanLocalService = MBBanLocalServiceFactory.getImpl();
 		}

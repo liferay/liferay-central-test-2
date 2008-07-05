@@ -74,8 +74,6 @@ import com.liferay.portlet.tasks.service.persistence.TasksProposalUtil;
 import com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence;
 import com.liferay.portlet.tasks.service.persistence.TasksReviewUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -85,7 +83,7 @@ import java.util.List;
  *
  */
 public abstract class TasksProposalLocalServiceBaseImpl
-	implements TasksProposalLocalService, InitializingBean {
+	implements TasksProposalLocalService {
 	public TasksProposal addTasksProposal(TasksProposal tasksProposal)
 		throws SystemException {
 		tasksProposal.setNew(true);
@@ -312,7 +310,7 @@ public abstract class TasksProposalLocalServiceBaseImpl
 		this.socialActivityFinder = socialActivityFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (tasksReviewLocalService == null) {
 			tasksReviewLocalService = TasksReviewLocalServiceFactory.getImpl();
 		}

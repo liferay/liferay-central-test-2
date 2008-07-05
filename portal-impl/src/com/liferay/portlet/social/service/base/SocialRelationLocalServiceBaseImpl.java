@@ -58,8 +58,6 @@ import com.liferay.portlet.social.service.persistence.SocialRelationUtil;
 import com.liferay.portlet.social.service.persistence.SocialRequestPersistence;
 import com.liferay.portlet.social.service.persistence.SocialRequestUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -69,7 +67,7 @@ import java.util.List;
  *
  */
 public abstract class SocialRelationLocalServiceBaseImpl
-	implements SocialRelationLocalService, InitializingBean {
+	implements SocialRelationLocalService {
 	public SocialRelation addSocialRelation(SocialRelation socialRelation)
 		throws SystemException {
 		socialRelation.setNew(true);
@@ -231,7 +229,7 @@ public abstract class SocialRelationLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (socialActivityLocalService == null) {
 			socialActivityLocalService = SocialActivityLocalServiceFactory.getImpl();
 		}

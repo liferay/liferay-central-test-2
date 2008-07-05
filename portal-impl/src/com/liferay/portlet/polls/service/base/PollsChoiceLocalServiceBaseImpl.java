@@ -50,8 +50,6 @@ import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
 import com.liferay.portlet.polls.service.persistence.PollsVotePersistence;
 import com.liferay.portlet.polls.service.persistence.PollsVoteUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -61,7 +59,7 @@ import java.util.List;
  *
  */
 public abstract class PollsChoiceLocalServiceBaseImpl
-	implements PollsChoiceLocalService, InitializingBean {
+	implements PollsChoiceLocalService {
 	public PollsChoice addPollsChoice(PollsChoice pollsChoice)
 		throws SystemException {
 		pollsChoice.setNew(true);
@@ -189,7 +187,7 @@ public abstract class PollsChoiceLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (pollsChoicePersistence == null) {
 			pollsChoicePersistence = PollsChoiceUtil.getPersistence();
 		}

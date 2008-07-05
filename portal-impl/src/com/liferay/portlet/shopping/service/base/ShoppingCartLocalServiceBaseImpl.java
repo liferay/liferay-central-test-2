@@ -86,8 +86,6 @@ import com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence;
 import com.liferay.portlet.shopping.service.persistence.ShoppingOrderUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -97,7 +95,7 @@ import java.util.List;
  *
  */
 public abstract class ShoppingCartLocalServiceBaseImpl
-	implements ShoppingCartLocalService, InitializingBean {
+	implements ShoppingCartLocalService {
 	public ShoppingCart addShoppingCart(ShoppingCart shoppingCart)
 		throws SystemException {
 		shoppingCart.setNew(true);
@@ -382,7 +380,7 @@ public abstract class ShoppingCartLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (shoppingCartPersistence == null) {
 			shoppingCartPersistence = ShoppingCartUtil.getPersistence();
 		}

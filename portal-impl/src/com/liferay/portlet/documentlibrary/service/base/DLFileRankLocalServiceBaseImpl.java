@@ -74,8 +74,6 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionUtil
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -85,7 +83,7 @@ import java.util.List;
  *
  */
 public abstract class DLFileRankLocalServiceBaseImpl
-	implements DLFileRankLocalService, InitializingBean {
+	implements DLFileRankLocalService {
 	public DLFileRank addDLFileRank(DLFileRank dlFileRank)
 		throws SystemException {
 		dlFileRank.setNew(true);
@@ -314,7 +312,7 @@ public abstract class DLFileRankLocalServiceBaseImpl
 		this.layoutFinder = layoutFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (dlFileEntryLocalService == null) {
 			dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getImpl();
 		}

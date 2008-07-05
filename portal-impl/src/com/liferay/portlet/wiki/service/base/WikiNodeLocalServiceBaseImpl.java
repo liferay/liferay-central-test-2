@@ -76,8 +76,6 @@ import com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence;
 import com.liferay.portlet.wiki.service.persistence.WikiPageResourceUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -87,7 +85,7 @@ import java.util.List;
  *
  */
 public abstract class WikiNodeLocalServiceBaseImpl
-	implements WikiNodeLocalService, InitializingBean {
+	implements WikiNodeLocalService {
 	public WikiNode addWikiNode(WikiNode wikiNode) throws SystemException {
 		wikiNode.setNew(true);
 
@@ -318,7 +316,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (wikiNodePersistence == null) {
 			wikiNodePersistence = WikiNodeUtil.getPersistence();
 		}

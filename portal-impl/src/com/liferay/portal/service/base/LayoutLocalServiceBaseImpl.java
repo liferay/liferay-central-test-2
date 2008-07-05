@@ -300,8 +300,6 @@ import com.liferay.portlet.tasks.service.persistence.TasksProposalFinderUtil;
 import com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence;
 import com.liferay.portlet.tasks.service.persistence.TasksProposalUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -310,8 +308,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService,
-	InitializingBean {
+public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService {
 	public Layout addLayout(Layout layout) throws SystemException {
 		layout.setNew(true);
 
@@ -1493,7 +1490,7 @@ public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService,
 		this.tasksProposalFinder = tasksProposalFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

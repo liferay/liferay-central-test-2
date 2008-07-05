@@ -266,8 +266,6 @@ import com.liferay.portal.service.persistence.WebDAVPropsUtil;
 import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.service.persistence.WebsiteUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -276,8 +274,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class ImageLocalServiceBaseImpl implements ImageLocalService,
-	InitializingBean {
+public abstract class ImageLocalServiceBaseImpl implements ImageLocalService {
 	public Image addImage(Image image) throws SystemException {
 		image.setNew(true);
 
@@ -1322,7 +1319,7 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService,
 		this.websitePersistence = websitePersistence;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

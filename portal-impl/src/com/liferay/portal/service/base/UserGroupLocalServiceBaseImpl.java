@@ -269,8 +269,6 @@ import com.liferay.portal.service.persistence.WebDAVPropsUtil;
 import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.service.persistence.WebsiteUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -280,7 +278,7 @@ import java.util.List;
  *
  */
 public abstract class UserGroupLocalServiceBaseImpl
-	implements UserGroupLocalService, InitializingBean {
+	implements UserGroupLocalService {
 	public UserGroup addUserGroup(UserGroup userGroup)
 		throws SystemException {
 		userGroup.setNew(true);
@@ -1336,7 +1334,7 @@ public abstract class UserGroupLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

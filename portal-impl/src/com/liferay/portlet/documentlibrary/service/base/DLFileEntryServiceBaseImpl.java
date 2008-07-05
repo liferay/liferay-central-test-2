@@ -111,8 +111,6 @@ import com.liferay.portlet.tags.service.persistence.TagsAssetFinderUtil;
 import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="DLFileEntryServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -120,7 +118,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
-	implements DLFileEntryService, InitializingBean {
+	implements DLFileEntryService {
 	public DLFileEntryLocalService getDLFileEntryLocalService() {
 		return dlFileEntryLocalService;
 	}
@@ -470,7 +468,7 @@ public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
 		this.tagsAssetFinder = tagsAssetFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (dlFileEntryLocalService == null) {
 			dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getImpl();
 		}

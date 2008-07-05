@@ -49,8 +49,6 @@ import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryU
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="AnnouncementsFlagServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -58,7 +56,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 public abstract class AnnouncementsFlagServiceBaseImpl extends PrincipalBean
-	implements AnnouncementsFlagService, InitializingBean {
+	implements AnnouncementsFlagService {
 	public AnnouncementsDeliveryLocalService getAnnouncementsDeliveryLocalService() {
 		return announcementsDeliveryLocalService;
 	}
@@ -156,7 +154,7 @@ public abstract class AnnouncementsFlagServiceBaseImpl extends PrincipalBean
 		this.counterService = counterService;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (announcementsDeliveryLocalService == null) {
 			announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getImpl();
 		}

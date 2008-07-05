@@ -141,8 +141,6 @@ import com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence;
 import com.liferay.portlet.wiki.service.persistence.WikiPageResourceUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="TagsAssetServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -150,7 +148,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 public abstract class TagsAssetServiceBaseImpl extends PrincipalBean
-	implements TagsAssetService, InitializingBean {
+	implements TagsAssetService {
 	public TagsAssetLocalService getTagsAssetLocalService() {
 		return tagsAssetLocalService;
 	}
@@ -635,7 +633,7 @@ public abstract class TagsAssetServiceBaseImpl extends PrincipalBean
 		this.wikiPageResourcePersistence = wikiPageResourcePersistence;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (tagsAssetLocalService == null) {
 			tagsAssetLocalService = TagsAssetLocalServiceFactory.getImpl();
 		}

@@ -72,8 +72,6 @@ import com.liferay.portlet.calendar.service.persistence.CalEventFinderUtil;
 import com.liferay.portlet.calendar.service.persistence.CalEventPersistence;
 import com.liferay.portlet.calendar.service.persistence.CalEventUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="CalEventServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -81,7 +79,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 public abstract class CalEventServiceBaseImpl extends PrincipalBean
-	implements CalEventService, InitializingBean {
+	implements CalEventService {
 	public CalEventLocalService getCalEventLocalService() {
 		return calEventLocalService;
 	}
@@ -264,7 +262,7 @@ public abstract class CalEventServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (calEventLocalService == null) {
 			calEventLocalService = CalEventLocalServiceFactory.getImpl();
 		}

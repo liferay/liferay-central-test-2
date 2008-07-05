@@ -100,8 +100,6 @@ import com.liferay.portlet.journal.service.persistence.JournalTemplateFinderUtil
 import com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -111,7 +109,7 @@ import java.util.List;
  *
  */
 public abstract class JournalContentSearchLocalServiceBaseImpl
-	implements JournalContentSearchLocalService, InitializingBean {
+	implements JournalContentSearchLocalService {
 	public JournalContentSearch addJournalContentSearch(
 		JournalContentSearch journalContentSearch) throws SystemException {
 		journalContentSearch.setNew(true);
@@ -457,7 +455,7 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 		this.portletPreferencesFinder = portletPreferencesFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (journalArticleLocalService == null) {
 			journalArticleLocalService = JournalArticleLocalServiceFactory.getImpl();
 		}

@@ -90,8 +90,6 @@ import com.liferay.portlet.journal.service.persistence.JournalTemplateFinderUtil
 import com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -101,7 +99,7 @@ import java.util.List;
  *
  */
 public abstract class JournalFeedLocalServiceBaseImpl
-	implements JournalFeedLocalService, InitializingBean {
+	implements JournalFeedLocalService {
 	public JournalFeed addJournalFeed(JournalFeed journalFeed)
 		throws SystemException {
 		journalFeed.setNew(true);
@@ -403,7 +401,7 @@ public abstract class JournalFeedLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (journalArticleLocalService == null) {
 			journalArticleLocalService = JournalArticleLocalServiceFactory.getImpl();
 		}

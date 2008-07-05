@@ -410,8 +410,6 @@ import com.liferay.portlet.wiki.service.WikiNodeServiceFactory;
 import com.liferay.portlet.wiki.service.persistence.WikiNodePersistence;
 import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -420,8 +418,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
-	InitializingBean {
+public abstract class GroupLocalServiceBaseImpl implements GroupLocalService {
 	public Group addGroup(Group group) throws SystemException {
 		group.setNew(true);
 
@@ -2086,7 +2083,7 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 		this.wikiNodePersistence = wikiNodePersistence;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

@@ -140,8 +140,6 @@ import com.liferay.portlet.tags.service.persistence.TagsEntryFinderUtil;
 import com.liferay.portlet.tags.service.persistence.TagsEntryPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="JournalArticleServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -149,7 +147,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 public abstract class JournalArticleServiceBaseImpl extends PrincipalBean
-	implements JournalArticleService, InitializingBean {
+	implements JournalArticleService {
 	public JournalArticleLocalService getJournalArticleLocalService() {
 		return journalArticleLocalService;
 	}
@@ -630,7 +628,7 @@ public abstract class JournalArticleServiceBaseImpl extends PrincipalBean
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (journalArticleLocalService == null) {
 			journalArticleLocalService = JournalArticleLocalServiceFactory.getImpl();
 		}

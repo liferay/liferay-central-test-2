@@ -89,8 +89,6 @@ import com.liferay.portlet.journal.service.persistence.JournalTemplateFinderUtil
 import com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="JournalFeedServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -98,7 +96,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 public abstract class JournalFeedServiceBaseImpl extends PrincipalBean
-	implements JournalFeedService, InitializingBean {
+	implements JournalFeedService {
 	public JournalArticleLocalService getJournalArticleLocalService() {
 		return journalArticleLocalService;
 	}
@@ -368,7 +366,7 @@ public abstract class JournalFeedServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (journalArticleLocalService == null) {
 			journalArticleLocalService = JournalArticleLocalServiceFactory.getImpl();
 		}

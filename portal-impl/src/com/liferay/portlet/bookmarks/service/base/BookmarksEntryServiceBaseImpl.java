@@ -67,8 +67,6 @@ import com.liferay.portlet.tags.service.persistence.TagsAssetFinderUtil;
 import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="BookmarksEntryServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -76,7 +74,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 public abstract class BookmarksEntryServiceBaseImpl extends PrincipalBean
-	implements BookmarksEntryService, InitializingBean {
+	implements BookmarksEntryService {
 	public BookmarksEntryLocalService getBookmarksEntryLocalService() {
 		return bookmarksEntryLocalService;
 	}
@@ -246,7 +244,7 @@ public abstract class BookmarksEntryServiceBaseImpl extends PrincipalBean
 		this.tagsAssetFinder = tagsAssetFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (bookmarksEntryLocalService == null) {
 			bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getImpl();
 		}

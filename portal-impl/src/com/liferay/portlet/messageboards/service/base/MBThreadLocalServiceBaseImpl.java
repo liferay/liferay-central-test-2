@@ -111,8 +111,6 @@ import com.liferay.portlet.tags.service.persistence.TagsAssetFinderUtil;
 import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -122,7 +120,7 @@ import java.util.List;
  *
  */
 public abstract class MBThreadLocalServiceBaseImpl
-	implements MBThreadLocalService, InitializingBean {
+	implements MBThreadLocalService {
 	public MBThread addMBThread(MBThread mbThread) throws SystemException {
 		mbThread.setNew(true);
 
@@ -498,7 +496,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 		this.tagsAssetFinder = tagsAssetFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (mbBanLocalService == null) {
 			mbBanLocalService = MBBanLocalServiceFactory.getImpl();
 		}

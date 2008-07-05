@@ -266,8 +266,6 @@ import com.liferay.portal.service.persistence.WebDAVPropsUtil;
 import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.service.persistence.WebsiteUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -276,8 +274,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class ReleaseLocalServiceBaseImpl implements ReleaseLocalService,
-	InitializingBean {
+public abstract class ReleaseLocalServiceBaseImpl implements ReleaseLocalService {
 	public Release addRelease(Release release) throws SystemException {
 		release.setNew(true);
 
@@ -1324,7 +1321,7 @@ public abstract class ReleaseLocalServiceBaseImpl implements ReleaseLocalService
 		this.websitePersistence = websitePersistence;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

@@ -47,8 +47,6 @@ import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
 import com.liferay.portlet.polls.service.persistence.PollsVotePersistence;
 import com.liferay.portlet.polls.service.persistence.PollsVoteUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="PollsVoteServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -56,7 +54,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 public abstract class PollsVoteServiceBaseImpl extends PrincipalBean
-	implements PollsVoteService, InitializingBean {
+	implements PollsVoteService {
 	public PollsChoiceLocalService getPollsChoiceLocalService() {
 		return pollsChoiceLocalService;
 	}
@@ -144,7 +142,7 @@ public abstract class PollsVoteServiceBaseImpl extends PrincipalBean
 		this.counterService = counterService;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (pollsChoiceLocalService == null) {
 			pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getImpl();
 		}

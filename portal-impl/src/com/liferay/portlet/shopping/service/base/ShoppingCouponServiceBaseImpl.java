@@ -83,8 +83,6 @@ import com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence;
 import com.liferay.portlet.shopping.service.persistence.ShoppingOrderUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="ShoppingCouponServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -92,7 +90,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 public abstract class ShoppingCouponServiceBaseImpl extends PrincipalBean
-	implements ShoppingCouponService, InitializingBean {
+	implements ShoppingCouponService {
 	public ShoppingCartLocalService getShoppingCartLocalService() {
 		return shoppingCartLocalService;
 	}
@@ -336,7 +334,7 @@ public abstract class ShoppingCouponServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (shoppingCartLocalService == null) {
 			shoppingCartLocalService = ShoppingCartLocalServiceFactory.getImpl();
 		}

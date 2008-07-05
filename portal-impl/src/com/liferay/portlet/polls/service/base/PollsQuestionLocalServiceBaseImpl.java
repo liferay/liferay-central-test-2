@@ -64,8 +64,6 @@ import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
 import com.liferay.portlet.polls.service.persistence.PollsVotePersistence;
 import com.liferay.portlet.polls.service.persistence.PollsVoteUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -75,7 +73,7 @@ import java.util.List;
  *
  */
 public abstract class PollsQuestionLocalServiceBaseImpl
-	implements PollsQuestionLocalService, InitializingBean {
+	implements PollsQuestionLocalService {
 	public PollsQuestion addPollsQuestion(PollsQuestion pollsQuestion)
 		throws SystemException {
 		pollsQuestion.setNew(true);
@@ -259,7 +257,7 @@ public abstract class PollsQuestionLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (pollsChoiceLocalService == null) {
 			pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getImpl();
 		}

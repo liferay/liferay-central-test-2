@@ -24,8 +24,6 @@ package com.liferay.portlet.social.service.base;
 
 import com.liferay.portlet.social.service.SocialActivityInterpreterLocalService;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="SocialActivityInterpreterLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -33,7 +31,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 public abstract class SocialActivityInterpreterLocalServiceBaseImpl
-	implements SocialActivityInterpreterLocalService, InitializingBean {
-	public void afterPropertiesSet() {
+	implements SocialActivityInterpreterLocalService {
+	public void init() {
 	}
 }

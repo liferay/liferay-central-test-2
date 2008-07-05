@@ -157,8 +157,6 @@ import com.liferay.portlet.tags.service.persistence.TagsEntryFinderUtil;
 import com.liferay.portlet.tags.service.persistence.TagsEntryPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="MBMessageServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -166,7 +164,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 public abstract class MBMessageServiceBaseImpl extends PrincipalBean
-	implements MBMessageService, InitializingBean {
+	implements MBMessageService {
 	public MBBanLocalService getMBBanLocalService() {
 		return mbBanLocalService;
 	}
@@ -707,7 +705,7 @@ public abstract class MBMessageServiceBaseImpl extends PrincipalBean
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (mbBanLocalService == null) {
 			mbBanLocalService = MBBanLocalServiceFactory.getImpl();
 		}

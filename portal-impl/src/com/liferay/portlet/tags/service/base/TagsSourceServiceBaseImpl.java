@@ -56,8 +56,6 @@ import com.liferay.portlet.tags.service.persistence.TagsPropertyUtil;
 import com.liferay.portlet.tags.service.persistence.TagsSourcePersistence;
 import com.liferay.portlet.tags.service.persistence.TagsSourceUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="TagsSourceServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -65,7 +63,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 public abstract class TagsSourceServiceBaseImpl extends PrincipalBean
-	implements TagsSourceService, InitializingBean {
+	implements TagsSourceService {
 	public TagsAssetLocalService getTagsAssetLocalService() {
 		return tagsAssetLocalService;
 	}
@@ -195,7 +193,7 @@ public abstract class TagsSourceServiceBaseImpl extends PrincipalBean
 		this.tagsSourcePersistence = tagsSourcePersistence;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (tagsAssetLocalService == null) {
 			tagsAssetLocalService = TagsAssetLocalServiceFactory.getImpl();
 		}

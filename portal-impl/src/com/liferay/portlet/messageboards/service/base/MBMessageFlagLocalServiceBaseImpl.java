@@ -82,8 +82,6 @@ import com.liferay.portlet.messageboards.service.persistence.MBThreadFinderUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -93,7 +91,7 @@ import java.util.List;
  *
  */
 public abstract class MBMessageFlagLocalServiceBaseImpl
-	implements MBMessageFlagLocalService, InitializingBean {
+	implements MBMessageFlagLocalService {
 	public MBMessageFlag addMBMessageFlag(MBMessageFlag mbMessageFlag)
 		throws SystemException {
 		mbMessageFlag.setNew(true);
@@ -352,7 +350,7 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (mbBanLocalService == null) {
 			mbBanLocalService = MBBanLocalServiceFactory.getImpl();
 		}

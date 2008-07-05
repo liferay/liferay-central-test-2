@@ -325,8 +325,6 @@ import com.liferay.portlet.social.service.persistence.SocialActivityUtil;
 import com.liferay.portlet.social.service.persistence.SocialRequestPersistence;
 import com.liferay.portlet.social.service.persistence.SocialRequestUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="UserServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -334,7 +332,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 public abstract class UserServiceBaseImpl extends PrincipalBean
-	implements UserService, InitializingBean {
+	implements UserService {
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}
@@ -1604,7 +1602,7 @@ public abstract class UserServiceBaseImpl extends PrincipalBean
 		this.socialRequestPersistence = socialRequestPersistence;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

@@ -69,8 +69,6 @@ import com.liferay.portlet.tags.service.persistence.TagsPropertyUtil;
 import com.liferay.portlet.tags.service.persistence.TagsSourcePersistence;
 import com.liferay.portlet.tags.service.persistence.TagsSourceUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="TagsEntryServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -78,7 +76,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 public abstract class TagsEntryServiceBaseImpl extends PrincipalBean
-	implements TagsEntryService, InitializingBean {
+	implements TagsEntryService {
 	public TagsAssetLocalService getTagsAssetLocalService() {
 		return tagsAssetLocalService;
 	}
@@ -256,7 +254,7 @@ public abstract class TagsEntryServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (tagsAssetLocalService == null) {
 			tagsAssetLocalService = TagsAssetLocalServiceFactory.getImpl();
 		}

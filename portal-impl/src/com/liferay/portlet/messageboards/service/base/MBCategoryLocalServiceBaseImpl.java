@@ -100,8 +100,6 @@ import com.liferay.portlet.tags.service.persistence.TagsEntryFinderUtil;
 import com.liferay.portlet.tags.service.persistence.TagsEntryPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -111,7 +109,7 @@ import java.util.List;
  *
  */
 public abstract class MBCategoryLocalServiceBaseImpl
-	implements MBCategoryLocalService, InitializingBean {
+	implements MBCategoryLocalService {
 	public MBCategory addMBCategory(MBCategory mbCategory)
 		throws SystemException {
 		mbCategory.setNew(true);
@@ -447,7 +445,7 @@ public abstract class MBCategoryLocalServiceBaseImpl
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (mbBanLocalService == null) {
 			mbBanLocalService = MBBanLocalServiceFactory.getImpl();
 		}

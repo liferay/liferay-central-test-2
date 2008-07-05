@@ -113,8 +113,6 @@ import com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence;
 import com.liferay.portlet.wiki.service.persistence.WikiPageResourceUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -124,7 +122,7 @@ import java.util.List;
  *
  */
 public abstract class WikiPageLocalServiceBaseImpl
-	implements WikiPageLocalService, InitializingBean {
+	implements WikiPageLocalService {
 	public WikiPage addWikiPage(WikiPage wikiPage) throws SystemException {
 		wikiPage.setNew(true);
 
@@ -505,7 +503,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 		this.tagsAssetFinder = tagsAssetFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (wikiNodeLocalService == null) {
 			wikiNodeLocalService = WikiNodeLocalServiceFactory.getImpl();
 		}

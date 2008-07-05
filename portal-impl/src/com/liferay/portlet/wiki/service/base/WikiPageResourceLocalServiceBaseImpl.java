@@ -50,8 +50,6 @@ import com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence;
 import com.liferay.portlet.wiki.service.persistence.WikiPageResourceUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -61,7 +59,7 @@ import java.util.List;
  *
  */
 public abstract class WikiPageResourceLocalServiceBaseImpl
-	implements WikiPageResourceLocalService, InitializingBean {
+	implements WikiPageResourceLocalService {
 	public WikiPageResource addWikiPageResource(
 		WikiPageResource wikiPageResource) throws SystemException {
 		wikiPageResource.setNew(true);
@@ -186,7 +184,7 @@ public abstract class WikiPageResourceLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (wikiNodeLocalService == null) {
 			wikiNodeLocalService = WikiNodeLocalServiceFactory.getImpl();
 		}

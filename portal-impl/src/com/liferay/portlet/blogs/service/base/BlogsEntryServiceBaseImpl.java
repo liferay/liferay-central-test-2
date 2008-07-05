@@ -117,8 +117,6 @@ import com.liferay.portlet.tags.service.persistence.TagsEntryFinderUtil;
 import com.liferay.portlet.tags.service.persistence.TagsEntryPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="BlogsEntryServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -126,7 +124,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 public abstract class BlogsEntryServiceBaseImpl extends PrincipalBean
-	implements BlogsEntryService, InitializingBean {
+	implements BlogsEntryService {
 	public BlogsEntryLocalService getBlogsEntryLocalService() {
 		return blogsEntryLocalService;
 	}
@@ -506,7 +504,7 @@ public abstract class BlogsEntryServiceBaseImpl extends PrincipalBean
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (blogsEntryLocalService == null) {
 			blogsEntryLocalService = BlogsEntryLocalServiceFactory.getImpl();
 		}

@@ -79,8 +79,6 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionUtil
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="DLFileShortcutServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -88,7 +86,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 public abstract class DLFileShortcutServiceBaseImpl extends PrincipalBean
-	implements DLFileShortcutService, InitializingBean {
+	implements DLFileShortcutService {
 	public DLFileEntryLocalService getDLFileEntryLocalService() {
 		return dlFileEntryLocalService;
 	}
@@ -309,7 +307,7 @@ public abstract class DLFileShortcutServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (dlFileEntryLocalService == null) {
 			dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getImpl();
 		}

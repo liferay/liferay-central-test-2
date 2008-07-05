@@ -66,8 +66,6 @@ import com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreensh
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -77,7 +75,7 @@ import java.util.List;
  *
  */
 public abstract class SCProductVersionLocalServiceBaseImpl
-	implements SCProductVersionLocalService, InitializingBean {
+	implements SCProductVersionLocalService {
 	public SCProductVersion addSCProductVersion(
 		SCProductVersion scProductVersion) throws SystemException {
 		scProductVersion.setNew(true);
@@ -274,7 +272,7 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (scLicenseLocalService == null) {
 			scLicenseLocalService = SCLicenseLocalServiceFactory.getImpl();
 		}

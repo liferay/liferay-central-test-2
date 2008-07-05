@@ -271,8 +271,6 @@ import com.liferay.portal.service.persistence.WebDAVPropsUtil;
 import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.service.persistence.WebsiteUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -282,7 +280,7 @@ import java.util.List;
  *
  */
 public abstract class UserTrackerLocalServiceBaseImpl
-	implements UserTrackerLocalService, InitializingBean {
+	implements UserTrackerLocalService {
 	public UserTracker addUserTracker(UserTracker userTracker)
 		throws SystemException {
 		userTracker.setNew(true);
@@ -1347,7 +1345,7 @@ public abstract class UserTrackerLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

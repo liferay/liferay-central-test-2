@@ -75,8 +75,6 @@ import com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence;
 import com.liferay.portlet.wiki.service.persistence.WikiPageResourceUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="WikiNodeServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -84,7 +82,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 public abstract class WikiNodeServiceBaseImpl extends PrincipalBean
-	implements WikiNodeService, InitializingBean {
+	implements WikiNodeService {
 	public WikiNodeLocalService getWikiNodeLocalService() {
 		return wikiNodeLocalService;
 	}
@@ -286,7 +284,7 @@ public abstract class WikiNodeServiceBaseImpl extends PrincipalBean
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (wikiNodeLocalService == null) {
 			wikiNodeLocalService = WikiNodeLocalServiceFactory.getImpl();
 		}

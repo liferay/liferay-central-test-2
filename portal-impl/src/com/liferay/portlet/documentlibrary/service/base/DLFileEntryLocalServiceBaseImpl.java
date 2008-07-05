@@ -112,8 +112,6 @@ import com.liferay.portlet.tags.service.persistence.TagsAssetFinderUtil;
 import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -123,7 +121,7 @@ import java.util.List;
  *
  */
 public abstract class DLFileEntryLocalServiceBaseImpl
-	implements DLFileEntryLocalService, InitializingBean {
+	implements DLFileEntryLocalService {
 	public DLFileEntry addDLFileEntry(DLFileEntry dlFileEntry)
 		throws SystemException {
 		dlFileEntry.setNew(true);
@@ -505,7 +503,7 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 		this.tagsAssetFinder = tagsAssetFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (dlFileEntryPersistence == null) {
 			dlFileEntryPersistence = DLFileEntryUtil.getPersistence();
 		}

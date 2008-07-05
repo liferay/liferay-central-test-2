@@ -58,8 +58,6 @@ import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryU
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -69,7 +67,7 @@ import java.util.List;
  *
  */
 public abstract class AnnouncementsDeliveryLocalServiceBaseImpl
-	implements AnnouncementsDeliveryLocalService, InitializingBean {
+	implements AnnouncementsDeliveryLocalService {
 	public AnnouncementsDelivery addAnnouncementsDelivery(
 		AnnouncementsDelivery announcementsDelivery) throws SystemException {
 		announcementsDelivery.setNew(true);
@@ -233,7 +231,7 @@ public abstract class AnnouncementsDeliveryLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (announcementsDeliveryPersistence == null) {
 			announcementsDeliveryPersistence = AnnouncementsDeliveryUtil.getPersistence();
 		}

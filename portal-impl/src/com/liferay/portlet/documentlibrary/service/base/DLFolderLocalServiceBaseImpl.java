@@ -97,8 +97,6 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionUtil
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -108,7 +106,7 @@ import java.util.List;
  *
  */
 public abstract class DLFolderLocalServiceBaseImpl
-	implements DLFolderLocalService, InitializingBean {
+	implements DLFolderLocalService {
 	public DLFolder addDLFolder(DLFolder dlFolder) throws SystemException {
 		dlFolder.setNew(true);
 
@@ -425,7 +423,7 @@ public abstract class DLFolderLocalServiceBaseImpl
 		this.webDAVPropsPersistence = webDAVPropsPersistence;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (dlFileEntryLocalService == null) {
 			dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getImpl();
 		}

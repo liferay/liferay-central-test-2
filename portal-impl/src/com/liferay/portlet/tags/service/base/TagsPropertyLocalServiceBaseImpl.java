@@ -70,8 +70,6 @@ import com.liferay.portlet.tags.service.persistence.TagsPropertyUtil;
 import com.liferay.portlet.tags.service.persistence.TagsSourcePersistence;
 import com.liferay.portlet.tags.service.persistence.TagsSourceUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -81,7 +79,7 @@ import java.util.List;
  *
  */
 public abstract class TagsPropertyLocalServiceBaseImpl
-	implements TagsPropertyLocalService, InitializingBean {
+	implements TagsPropertyLocalService {
 	public TagsProperty addTagsProperty(TagsProperty tagsProperty)
 		throws SystemException {
 		tagsProperty.setNew(true);
@@ -291,7 +289,7 @@ public abstract class TagsPropertyLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (tagsAssetLocalService == null) {
 			tagsAssetLocalService = TagsAssetLocalServiceFactory.getImpl();
 		}

@@ -327,8 +327,6 @@ import com.liferay.portlet.social.service.persistence.SocialActivityUtil;
 import com.liferay.portlet.social.service.persistence.SocialRequestPersistence;
 import com.liferay.portlet.social.service.persistence.SocialRequestUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -337,8 +335,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class UserLocalServiceBaseImpl implements UserLocalService,
-	InitializingBean {
+public abstract class UserLocalServiceBaseImpl implements UserLocalService {
 	public User addUser(User user) throws SystemException {
 		user.setNew(true);
 
@@ -1634,7 +1631,7 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 		this.socialRequestPersistence = socialRequestPersistence;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

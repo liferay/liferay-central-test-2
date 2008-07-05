@@ -24,16 +24,13 @@ package com.liferay.portal.service.base;
 
 import com.liferay.portal.service.ThemeLocalService;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="ThemeLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class ThemeLocalServiceBaseImpl implements ThemeLocalService,
-	InitializingBean {
-	public void afterPropertiesSet() {
+public abstract class ThemeLocalServiceBaseImpl implements ThemeLocalService {
+	public void init() {
 	}
 }

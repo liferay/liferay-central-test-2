@@ -98,8 +98,6 @@ import com.liferay.portlet.journal.service.persistence.JournalTemplateFinderUtil
 import com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -109,7 +107,7 @@ import java.util.List;
  *
  */
 public abstract class JournalTemplateLocalServiceBaseImpl
-	implements JournalTemplateLocalService, InitializingBean {
+	implements JournalTemplateLocalService {
 	public JournalTemplate addJournalTemplate(JournalTemplate journalTemplate)
 		throws SystemException {
 		journalTemplate.setNew(true);
@@ -444,7 +442,7 @@ public abstract class JournalTemplateLocalServiceBaseImpl
 		this.webDAVPropsPersistence = webDAVPropsPersistence;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (journalArticleLocalService == null) {
 			journalArticleLocalService = JournalArticleLocalServiceFactory.getImpl();
 		}

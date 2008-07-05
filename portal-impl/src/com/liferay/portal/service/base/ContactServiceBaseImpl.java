@@ -262,8 +262,6 @@ import com.liferay.portal.service.persistence.WebDAVPropsUtil;
 import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.service.persistence.WebsiteUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="ContactServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -271,7 +269,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 public abstract class ContactServiceBaseImpl extends PrincipalBean
-	implements ContactService, InitializingBean {
+	implements ContactService {
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}
@@ -1280,7 +1278,7 @@ public abstract class ContactServiceBaseImpl extends PrincipalBean
 		this.websitePersistence = websitePersistence;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

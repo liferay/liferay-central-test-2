@@ -61,8 +61,6 @@ import com.liferay.portlet.ratings.service.persistence.RatingsEntryUtil;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="RatingsEntryServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -70,7 +68,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 public abstract class RatingsEntryServiceBaseImpl extends PrincipalBean
-	implements RatingsEntryService, InitializingBean {
+	implements RatingsEntryService {
 	public RatingsEntryLocalService getRatingsEntryLocalService() {
 		return ratingsEntryLocalService;
 	}
@@ -216,7 +214,7 @@ public abstract class RatingsEntryServiceBaseImpl extends PrincipalBean
 		this.blogsStatsUserFinder = blogsStatsUserFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (ratingsEntryLocalService == null) {
 			ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getImpl();
 		}

@@ -50,8 +50,6 @@ import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryU
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -61,7 +59,7 @@ import java.util.List;
  *
  */
 public abstract class AnnouncementsFlagLocalServiceBaseImpl
-	implements AnnouncementsFlagLocalService, InitializingBean {
+	implements AnnouncementsFlagLocalService {
 	public AnnouncementsFlag addAnnouncementsFlag(
 		AnnouncementsFlag announcementsFlag) throws SystemException {
 		announcementsFlag.setNew(true);
@@ -191,7 +189,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (announcementsDeliveryLocalService == null) {
 			announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getImpl();
 		}

@@ -68,8 +68,6 @@ import com.liferay.portlet.tags.service.persistence.TagsEntryFinderUtil;
 import com.liferay.portlet.tags.service.persistence.TagsEntryPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -79,7 +77,7 @@ import java.util.List;
  *
  */
 public abstract class BookmarksFolderLocalServiceBaseImpl
-	implements BookmarksFolderLocalService, InitializingBean {
+	implements BookmarksFolderLocalService {
 	public BookmarksFolder addBookmarksFolder(BookmarksFolder bookmarksFolder)
 		throws SystemException {
 		bookmarksFolder.setNew(true);
@@ -281,7 +279,7 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (bookmarksEntryLocalService == null) {
 			bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getImpl();
 		}

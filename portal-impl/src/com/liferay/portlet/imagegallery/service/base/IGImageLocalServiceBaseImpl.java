@@ -72,8 +72,6 @@ import com.liferay.portlet.tags.service.persistence.TagsAssetFinderUtil;
 import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -82,8 +80,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService,
-	InitializingBean {
+public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService {
 	public IGImage addIGImage(IGImage igImage) throws SystemException {
 		igImage.setNew(true);
 
@@ -294,7 +291,7 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 		this.tagsAssetFinder = tagsAssetFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (igFolderLocalService == null) {
 			igFolderLocalService = IGFolderLocalServiceFactory.getImpl();
 		}

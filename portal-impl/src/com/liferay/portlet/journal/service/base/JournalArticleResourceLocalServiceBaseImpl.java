@@ -76,8 +76,6 @@ import com.liferay.portlet.journal.service.persistence.JournalTemplateFinderUtil
 import com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -87,7 +85,7 @@ import java.util.List;
  *
  */
 public abstract class JournalArticleResourceLocalServiceBaseImpl
-	implements JournalArticleResourceLocalService, InitializingBean {
+	implements JournalArticleResourceLocalService {
 	public JournalArticleResource addJournalArticleResource(
 		JournalArticleResource journalArticleResource)
 		throws SystemException {
@@ -337,7 +335,7 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (journalArticleLocalService == null) {
 			journalArticleLocalService = JournalArticleLocalServiceFactory.getImpl();
 		}

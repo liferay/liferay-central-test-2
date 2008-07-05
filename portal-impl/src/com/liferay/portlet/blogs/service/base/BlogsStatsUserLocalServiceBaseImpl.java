@@ -54,8 +54,6 @@ import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinderUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -65,7 +63,7 @@ import java.util.List;
  *
  */
 public abstract class BlogsStatsUserLocalServiceBaseImpl
-	implements BlogsStatsUserLocalService, InitializingBean {
+	implements BlogsStatsUserLocalService {
 	public BlogsStatsUser addBlogsStatsUser(BlogsStatsUser blogsStatsUser)
 		throws SystemException {
 		blogsStatsUser.setNew(true);
@@ -207,7 +205,7 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 		this.groupFinder = groupFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (blogsEntryLocalService == null) {
 			blogsEntryLocalService = BlogsEntryLocalServiceFactory.getImpl();
 		}

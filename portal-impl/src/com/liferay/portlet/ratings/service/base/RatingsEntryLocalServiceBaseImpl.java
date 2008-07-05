@@ -62,8 +62,6 @@ import com.liferay.portlet.ratings.service.persistence.RatingsEntryUtil;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -73,7 +71,7 @@ import java.util.List;
  *
  */
 public abstract class RatingsEntryLocalServiceBaseImpl
-	implements RatingsEntryLocalService, InitializingBean {
+	implements RatingsEntryLocalService {
 	public RatingsEntry addRatingsEntry(RatingsEntry ratingsEntry)
 		throws SystemException {
 		ratingsEntry.setNew(true);
@@ -251,7 +249,7 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 		this.blogsStatsUserFinder = blogsStatsUserFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (ratingsEntryPersistence == null) {
 			ratingsEntryPersistence = RatingsEntryUtil.getPersistence();
 		}

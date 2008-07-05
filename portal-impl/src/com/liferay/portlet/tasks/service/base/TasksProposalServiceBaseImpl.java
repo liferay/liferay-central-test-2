@@ -73,8 +73,6 @@ import com.liferay.portlet.tasks.service.persistence.TasksProposalUtil;
 import com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence;
 import com.liferay.portlet.tasks.service.persistence.TasksReviewUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="TasksProposalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -82,7 +80,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 public abstract class TasksProposalServiceBaseImpl extends PrincipalBean
-	implements TasksProposalService, InitializingBean {
+	implements TasksProposalService {
 	public TasksReviewLocalService getTasksReviewLocalService() {
 		return tasksReviewLocalService;
 	}
@@ -277,7 +275,7 @@ public abstract class TasksProposalServiceBaseImpl extends PrincipalBean
 		this.socialActivityFinder = socialActivityFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (tasksReviewLocalService == null) {
 			tasksReviewLocalService = TasksReviewLocalServiceFactory.getImpl();
 		}

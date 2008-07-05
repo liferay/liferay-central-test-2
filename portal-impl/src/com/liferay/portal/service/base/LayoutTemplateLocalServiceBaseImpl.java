@@ -24,8 +24,6 @@ package com.liferay.portal.service.base;
 
 import com.liferay.portal.service.LayoutTemplateLocalService;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="LayoutTemplateLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -33,7 +31,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 public abstract class LayoutTemplateLocalServiceBaseImpl
-	implements LayoutTemplateLocalService, InitializingBean {
-	public void afterPropertiesSet() {
+	implements LayoutTemplateLocalService {
+	public void init() {
 	}
 }

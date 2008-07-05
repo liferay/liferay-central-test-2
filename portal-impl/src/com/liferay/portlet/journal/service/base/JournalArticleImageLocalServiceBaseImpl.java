@@ -80,8 +80,6 @@ import com.liferay.portlet.journal.service.persistence.JournalTemplateFinderUtil
 import com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -91,7 +89,7 @@ import java.util.List;
  *
  */
 public abstract class JournalArticleImageLocalServiceBaseImpl
-	implements JournalArticleImageLocalService, InitializingBean {
+	implements JournalArticleImageLocalService {
 	public JournalArticleImage addJournalArticleImage(
 		JournalArticleImage journalArticleImage) throws SystemException {
 		journalArticleImage.setNew(true);
@@ -352,7 +350,7 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 		this.imagePersistence = imagePersistence;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (journalArticleLocalService == null) {
 			journalArticleLocalService = JournalArticleLocalServiceFactory.getImpl();
 		}

@@ -73,8 +73,6 @@ import com.liferay.portlet.calendar.service.persistence.CalEventFinderUtil;
 import com.liferay.portlet.calendar.service.persistence.CalEventPersistence;
 import com.liferay.portlet.calendar.service.persistence.CalEventUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -84,7 +82,7 @@ import java.util.List;
  *
  */
 public abstract class CalEventLocalServiceBaseImpl
-	implements CalEventLocalService, InitializingBean {
+	implements CalEventLocalService {
 	public CalEvent addCalEvent(CalEvent calEvent) throws SystemException {
 		calEvent.setNew(true);
 
@@ -296,7 +294,7 @@ public abstract class CalEventLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (calEventPersistence == null) {
 			calEventPersistence = CalEventUtil.getPersistence();
 		}

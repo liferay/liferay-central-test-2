@@ -108,8 +108,6 @@ import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryU
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="AnnouncementsEntryServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -117,7 +115,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 public abstract class AnnouncementsEntryServiceBaseImpl extends PrincipalBean
-	implements AnnouncementsEntryService, InitializingBean {
+	implements AnnouncementsEntryService {
 	public AnnouncementsDeliveryLocalService getAnnouncementsDeliveryLocalService() {
 		return announcementsDeliveryLocalService;
 	}
@@ -452,7 +450,7 @@ public abstract class AnnouncementsEntryServiceBaseImpl extends PrincipalBean
 		this.userGroupFinder = userGroupFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (announcementsDeliveryLocalService == null) {
 			announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getImpl();
 		}

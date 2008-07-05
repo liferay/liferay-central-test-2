@@ -59,8 +59,6 @@ import com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreensh
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -70,7 +68,7 @@ import java.util.List;
  *
  */
 public abstract class SCProductScreenshotLocalServiceBaseImpl
-	implements SCProductScreenshotLocalService, InitializingBean {
+	implements SCProductScreenshotLocalService {
 	public SCProductScreenshot addSCProductScreenshot(
 		SCProductScreenshot scProductScreenshot) throws SystemException {
 		scProductScreenshot.setNew(true);
@@ -244,7 +242,7 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 		this.imagePersistence = imagePersistence;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (scLicenseLocalService == null) {
 			scLicenseLocalService = SCLicenseLocalServiceFactory.getImpl();
 		}

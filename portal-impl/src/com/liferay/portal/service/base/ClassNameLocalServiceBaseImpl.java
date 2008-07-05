@@ -269,8 +269,6 @@ import com.liferay.portal.service.persistence.WebDAVPropsUtil;
 import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.service.persistence.WebsiteUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -280,7 +278,7 @@ import java.util.List;
  *
  */
 public abstract class ClassNameLocalServiceBaseImpl
-	implements ClassNameLocalService, InitializingBean {
+	implements ClassNameLocalService {
 	public ClassName addClassName(ClassName className)
 		throws SystemException {
 		className.setNew(true);
@@ -1336,7 +1334,7 @@ public abstract class ClassNameLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

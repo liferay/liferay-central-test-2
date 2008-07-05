@@ -89,8 +89,6 @@ import com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreensh
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="SCProductEntryServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -98,7 +96,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 public abstract class SCProductEntryServiceBaseImpl extends PrincipalBean
-	implements SCProductEntryService, InitializingBean {
+	implements SCProductEntryService {
 	public SCLicenseLocalService getSCLicenseLocalService() {
 		return scLicenseLocalService;
 	}
@@ -364,7 +362,7 @@ public abstract class SCProductEntryServiceBaseImpl extends PrincipalBean
 		this.ratingsStatsPersistence = ratingsStatsPersistence;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (scLicenseLocalService == null) {
 			scLicenseLocalService = SCLicenseLocalServiceFactory.getImpl();
 		}

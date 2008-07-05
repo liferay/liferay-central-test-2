@@ -269,8 +269,6 @@ import com.liferay.portal.service.persistence.WebDAVPropsUtil;
 import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.service.persistence.WebsiteUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -280,7 +278,7 @@ import java.util.List;
  *
  */
 public abstract class PasswordPolicyLocalServiceBaseImpl
-	implements PasswordPolicyLocalService, InitializingBean {
+	implements PasswordPolicyLocalService {
 	public PasswordPolicy addPasswordPolicy(PasswordPolicy passwordPolicy)
 		throws SystemException {
 		passwordPolicy.setNew(true);
@@ -1336,7 +1334,7 @@ public abstract class PasswordPolicyLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

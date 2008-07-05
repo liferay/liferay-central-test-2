@@ -71,8 +71,6 @@ import com.liferay.portlet.tags.service.persistence.TagsAssetFinderUtil;
 import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 /**
  * <a href="IGImageServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -80,7 +78,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 public abstract class IGImageServiceBaseImpl extends PrincipalBean
-	implements IGImageService, InitializingBean {
+	implements IGImageService {
 	public IGFolderLocalService getIGFolderLocalService() {
 		return igFolderLocalService;
 	}
@@ -261,7 +259,7 @@ public abstract class IGImageServiceBaseImpl extends PrincipalBean
 		this.tagsAssetFinder = tagsAssetFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (igFolderLocalService == null) {
 			igFolderLocalService = IGFolderLocalServiceFactory.getImpl();
 		}

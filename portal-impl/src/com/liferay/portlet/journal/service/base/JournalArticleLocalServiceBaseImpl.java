@@ -141,8 +141,6 @@ import com.liferay.portlet.tags.service.persistence.TagsEntryFinderUtil;
 import com.liferay.portlet.tags.service.persistence.TagsEntryPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -152,7 +150,7 @@ import java.util.List;
  *
  */
 public abstract class JournalArticleLocalServiceBaseImpl
-	implements JournalArticleLocalService, InitializingBean {
+	implements JournalArticleLocalService {
 	public JournalArticle addJournalArticle(JournalArticle journalArticle)
 		throws SystemException {
 		journalArticle.setNew(true);
@@ -665,7 +663,7 @@ public abstract class JournalArticleLocalServiceBaseImpl
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (journalArticlePersistence == null) {
 			journalArticlePersistence = JournalArticleUtil.getPersistence();
 		}

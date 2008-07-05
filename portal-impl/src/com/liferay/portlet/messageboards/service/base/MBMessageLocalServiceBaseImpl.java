@@ -158,8 +158,6 @@ import com.liferay.portlet.tags.service.persistence.TagsEntryFinderUtil;
 import com.liferay.portlet.tags.service.persistence.TagsEntryPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -169,7 +167,7 @@ import java.util.List;
  *
  */
 public abstract class MBMessageLocalServiceBaseImpl
-	implements MBMessageLocalService, InitializingBean {
+	implements MBMessageLocalService {
 	public MBMessage addMBMessage(MBMessage mbMessage)
 		throws SystemException {
 		mbMessage.setNew(true);
@@ -741,7 +739,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (mbBanLocalService == null) {
 			mbBanLocalService = MBBanLocalServiceFactory.getImpl();
 		}

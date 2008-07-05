@@ -54,8 +54,6 @@ import com.liferay.portlet.expando.service.persistence.ExpandoValueFinderUtil;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.expando.service.persistence.ExpandoValueUtil;
 
-import org.springframework.beans.factory.InitializingBean;
-
 import java.util.List;
 
 /**
@@ -65,7 +63,7 @@ import java.util.List;
  *
  */
 public abstract class ExpandoColumnLocalServiceBaseImpl
-	implements ExpandoColumnLocalService, InitializingBean {
+	implements ExpandoColumnLocalService {
 	public ExpandoColumn addExpandoColumn(ExpandoColumn expandoColumn)
 		throws SystemException {
 		expandoColumn.setNew(true);
@@ -210,7 +208,7 @@ public abstract class ExpandoColumnLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	public void afterPropertiesSet() {
+	public void init() {
 		if (expandoColumnPersistence == null) {
 			expandoColumnPersistence = ExpandoColumnUtil.getPersistence();
 		}
