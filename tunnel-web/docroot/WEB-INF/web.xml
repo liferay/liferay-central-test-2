@@ -10,10 +10,6 @@
 		<param-name>company_web_id</param-name>
 		<param-value>liferay.com</param-value>
 	</context-param>
-	<context-param>
-		<param-name>contextClass</param-name>
-		<param-value>com.liferay.portal.spring.context.PortalWebApplicationContext</param-value>
-	</context-param>
 	<filter>
 		<filter-name>AxisServlet Filter</filter-name>
 		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
@@ -194,12 +190,6 @@
 		<filter-name>Secure WebDAVServlet Filter</filter-name>
 		<url-pattern>/secure/webdav/*</url-pattern>
 	</filter-mapping>
-	<listener>
-		<listener-class>com.liferay.portal.kernel.servlet.SpringServletContextListener</listener-class>
-	</listener>
-	<listener>
-		<listener-class>com.liferay.portal.kernel.servlet.TunnelContextListener</listener-class>
-	</listener>
 	<servlet>
 		<servlet-name>AxisServlet</servlet-name>
 		<servlet-class>com.liferay.portal.kernel.servlet.PortalClassLoaderServlet</servlet-class>

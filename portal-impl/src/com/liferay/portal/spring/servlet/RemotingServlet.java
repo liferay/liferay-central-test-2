@@ -30,7 +30,7 @@ import com.liferay.portal.security.permission.PermissionCheckerFactory;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.spring.context.LazyWebApplicationContext;
+import com.liferay.portal.spring.context.PortalWebApplicationContext;
 import com.liferay.portal.util.PortalInstances;
 
 import javax.servlet.ServletException;
@@ -51,7 +51,7 @@ import org.springframework.web.servlet.DispatcherServlet;
 public class RemotingServlet extends DispatcherServlet {
 
 	public static final String CONTEXT_CLASS =
-		LazyWebApplicationContext.class.getName();
+		PortalWebApplicationContext.class.getName();
 
 	public static final String CONTEXT_CONFIG_LOCATION =
 		"/WEB-INF/remoting-servlet.xml,/WEB-INF/remoting-servlet-ext.xml";

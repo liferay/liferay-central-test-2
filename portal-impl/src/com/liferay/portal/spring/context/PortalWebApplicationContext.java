@@ -24,7 +24,12 @@ package com.liferay.portal.spring.context;
 
 import com.liferay.portal.spring.util.SpringUtil;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.XmlWebApplicationContext;
 
 /**
  * <a href="PortalWebApplicationContext.java.html"><b><i>View Source</i></b></a>
@@ -32,7 +37,7 @@ import org.springframework.context.ApplicationContext;
  * @author Brian Wing Shun Chan
  *
  */
-public class PortalWebApplicationContext extends LazyWebApplicationContext {
+public class PortalWebApplicationContext extends XmlWebApplicationContext {
 
 	public void setParent(ApplicationContext parent) {
 		if (parent == null) {
@@ -41,5 +46,25 @@ public class PortalWebApplicationContext extends LazyWebApplicationContext {
 
 		super.setParent(parent);
 	}
+
+	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) {
+		String[] configLocations = getConfigLocations();
+
+		if (configLocations != null) {
+			for (int i = 0; i < configLocations.length; i++) {
+				try {
+					reader.loadBeanDefinitions(configLocations[i]);
+				}
+				catch (Exception e) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(e);
+					}
+				}
+			}
+		}
+	}
+
+	private static Log _log =
+		LogFactory.getLog(PortalWebApplicationContext.class);
 
 }
