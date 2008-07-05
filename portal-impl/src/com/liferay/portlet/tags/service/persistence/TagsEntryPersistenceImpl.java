@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.tags.NoSuchEntryException;
@@ -110,7 +109,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 			throw nsee;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -141,7 +140,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 			clearTagsAssets.clear(tagsEntry.getPrimaryKey());
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			FinderCache.clearCache("TagsAssets_TagsEntries");
@@ -159,7 +158,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 			return tagsEntry;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -250,7 +249,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 			return tagsEntry;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -285,7 +284,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 			return (TagsEntry)session.get(TagsEntryImpl.class, new Long(entryId));
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -387,7 +386,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 				}
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -417,7 +416,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 			return query.list();
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -439,7 +438,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 			return query.list();
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -512,7 +511,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -607,7 +606,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -660,7 +659,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -709,7 +708,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 			Session session = null;
 
 			try {
-				session = HibernateUtil.openSession();
+				session = openSession();
 
 				StringBuilder sb = new StringBuilder();
 
@@ -776,7 +775,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETTAGSASSETSSIZE);
 
-				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+				q.addScalar(COUNT_COLUMN_NAME, Hibernate.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -801,7 +800,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);

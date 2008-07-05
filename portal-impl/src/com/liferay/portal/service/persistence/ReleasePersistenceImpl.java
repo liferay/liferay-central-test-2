@@ -35,7 +35,6 @@ import com.liferay.portal.model.Release;
 import com.liferay.portal.model.impl.ReleaseImpl;
 import com.liferay.portal.model.impl.ReleaseModelImpl;
 import com.liferay.portal.spring.hibernate.FinderCache;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -94,7 +93,7 @@ public class ReleasePersistenceImpl extends BasePersistence
 			throw nsee;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -132,7 +131,7 @@ public class ReleasePersistenceImpl extends BasePersistence
 			return release;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -220,7 +219,7 @@ public class ReleasePersistenceImpl extends BasePersistence
 			return release;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -255,7 +254,7 @@ public class ReleasePersistenceImpl extends BasePersistence
 			return (Release)session.get(ReleaseImpl.class, new Long(releaseId));
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -274,7 +273,7 @@ public class ReleasePersistenceImpl extends BasePersistence
 			return query.list();
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -296,7 +295,7 @@ public class ReleasePersistenceImpl extends BasePersistence
 			return query.list();
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -362,7 +361,7 @@ public class ReleasePersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -421,7 +420,7 @@ public class ReleasePersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);

@@ -36,7 +36,6 @@ import com.liferay.portal.model.UserTrackerPath;
 import com.liferay.portal.model.impl.UserTrackerPathImpl;
 import com.liferay.portal.model.impl.UserTrackerPathModelImpl;
 import com.liferay.portal.spring.hibernate.FinderCache;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -97,7 +96,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 			throw nsee;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -137,7 +136,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 			return userTrackerPath;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -227,7 +226,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 			return userTrackerPath;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -265,7 +264,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 				new Long(userTrackerPathId));
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -317,7 +316,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -393,7 +392,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -493,7 +492,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 			return array;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -512,7 +511,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 			return query.list();
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -534,7 +533,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 			return query.list();
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -601,7 +600,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -682,7 +681,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -735,7 +734,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);

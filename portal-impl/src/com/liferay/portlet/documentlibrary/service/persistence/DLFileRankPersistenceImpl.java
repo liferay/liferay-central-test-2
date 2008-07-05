@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.documentlibrary.NoSuchFileRankException;
@@ -98,7 +97,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			throw nsee;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -137,7 +136,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			return dlFileRank;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -226,7 +225,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			return dlFileRank;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -263,7 +262,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				new Long(fileRankId));
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -318,7 +317,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -400,7 +399,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -502,7 +501,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			return array;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -573,7 +572,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -670,7 +669,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -792,7 +791,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			return array;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -917,7 +916,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				}
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -947,7 +946,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			return query.list();
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -969,7 +968,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 			return query.list();
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -1043,7 +1042,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1135,7 +1134,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1216,7 +1215,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1315,7 +1314,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1368,7 +1367,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);

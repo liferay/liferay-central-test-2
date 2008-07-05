@@ -36,7 +36,6 @@ import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.ResourceModelImpl;
 import com.liferay.portal.spring.hibernate.FinderCache;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -96,7 +95,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 			throw nsee;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -134,7 +133,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 			return resource;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -222,7 +221,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 			return resource;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -259,7 +258,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 				new Long(resourceId));
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -309,7 +308,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -384,7 +383,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -478,7 +477,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 			return array;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -575,7 +574,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 				}
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -605,7 +604,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 			return query.list();
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -627,7 +626,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 			return query.list();
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -693,7 +692,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -777,7 +776,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -858,7 +857,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -911,7 +910,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);

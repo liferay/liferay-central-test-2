@@ -36,7 +36,6 @@ import com.liferay.portal.model.PasswordPolicyRel;
 import com.liferay.portal.model.impl.PasswordPolicyRelImpl;
 import com.liferay.portal.model.impl.PasswordPolicyRelModelImpl;
 import com.liferay.portal.spring.hibernate.FinderCache;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -98,7 +97,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 			throw nsee;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -138,7 +137,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 			return passwordPolicyRel;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -228,7 +227,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 			return passwordPolicyRel;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -266,7 +265,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 				new Long(passwordPolicyRelId));
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -359,7 +358,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 				}
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -475,7 +474,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 				}
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -505,7 +504,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 			return query.list();
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -527,7 +526,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 			return query.list();
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -594,7 +593,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -692,7 +691,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -776,7 +775,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -829,7 +828,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);

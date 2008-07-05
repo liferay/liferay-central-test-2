@@ -36,7 +36,6 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.impl.OrganizationImpl;
 import com.liferay.portal.model.impl.OrganizationModelImpl;
 import com.liferay.portal.spring.hibernate.FinderCache;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -109,7 +108,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			throw nsee;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -141,7 +140,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			clearGroups.clear(organization.getPrimaryKey());
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			FinderCache.clearCache("Groups_Orgs");
@@ -151,7 +150,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			clearUsers.clear(organization.getPrimaryKey());
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			FinderCache.clearCache("Users_Orgs");
@@ -169,7 +168,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			return organization;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -262,7 +261,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			return organization;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -300,7 +299,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				new Long(organizationId));
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -356,7 +355,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -438,7 +437,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -543,7 +542,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			return array;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -599,7 +598,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -681,7 +680,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -786,7 +785,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			return array;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -852,7 +851,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -942,7 +941,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1060,7 +1059,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			return array;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -1162,7 +1161,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				}
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1192,7 +1191,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			return query.list();
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -1214,7 +1213,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			return query.list();
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -1287,7 +1286,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1386,7 +1385,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1452,7 +1451,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1529,7 +1528,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1611,7 +1610,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1664,7 +1663,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1712,7 +1711,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			Session session = null;
 
 			try {
-				session = HibernateUtil.openSession();
+				session = openSession();
 
 				StringBuilder sb = new StringBuilder();
 
@@ -1785,7 +1784,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETGROUPSSIZE);
 
-				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+				q.addScalar(COUNT_COLUMN_NAME, Hibernate.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1810,7 +1809,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -2062,7 +2061,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 			Session session = null;
 
 			try {
-				session = HibernateUtil.openSession();
+				session = openSession();
 
 				StringBuilder sb = new StringBuilder();
 
@@ -2129,7 +2128,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETUSERSSIZE);
 
-				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+				q.addScalar(COUNT_COLUMN_NAME, Hibernate.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2154,7 +2153,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);

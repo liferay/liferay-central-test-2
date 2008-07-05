@@ -36,7 +36,6 @@ import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.GroupModelImpl;
 import com.liferay.portal.spring.hibernate.FinderCache;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -107,7 +106,7 @@ public class GroupPersistenceImpl extends BasePersistence
 			throw nsee;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -137,7 +136,7 @@ public class GroupPersistenceImpl extends BasePersistence
 			clearOrganizations.clear(group.getPrimaryKey());
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			FinderCache.clearCache("Groups_Orgs");
@@ -147,7 +146,7 @@ public class GroupPersistenceImpl extends BasePersistence
 			clearPermissions.clear(group.getPrimaryKey());
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			FinderCache.clearCache("Groups_Permissions");
@@ -157,7 +156,7 @@ public class GroupPersistenceImpl extends BasePersistence
 			clearRoles.clear(group.getPrimaryKey());
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			FinderCache.clearCache("Groups_Roles");
@@ -167,7 +166,7 @@ public class GroupPersistenceImpl extends BasePersistence
 			clearUserGroups.clear(group.getPrimaryKey());
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			FinderCache.clearCache("Groups_UserGroups");
@@ -177,7 +176,7 @@ public class GroupPersistenceImpl extends BasePersistence
 			clearUsers.clear(group.getPrimaryKey());
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			FinderCache.clearCache("Users_Groups");
@@ -195,7 +194,7 @@ public class GroupPersistenceImpl extends BasePersistence
 			return group;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -288,7 +287,7 @@ public class GroupPersistenceImpl extends BasePersistence
 			return group;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -322,7 +321,7 @@ public class GroupPersistenceImpl extends BasePersistence
 			return (Group)session.get(GroupImpl.class, new Long(groupId));
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -404,7 +403,7 @@ public class GroupPersistenceImpl extends BasePersistence
 				}
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -516,7 +515,7 @@ public class GroupPersistenceImpl extends BasePersistence
 				}
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -628,7 +627,7 @@ public class GroupPersistenceImpl extends BasePersistence
 				}
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -744,7 +743,7 @@ public class GroupPersistenceImpl extends BasePersistence
 				}
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -774,7 +773,7 @@ public class GroupPersistenceImpl extends BasePersistence
 			return query.list();
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -796,7 +795,7 @@ public class GroupPersistenceImpl extends BasePersistence
 			return query.list();
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -868,7 +867,7 @@ public class GroupPersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -967,7 +966,7 @@ public class GroupPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1048,7 +1047,7 @@ public class GroupPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1129,7 +1128,7 @@ public class GroupPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1211,7 +1210,7 @@ public class GroupPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1264,7 +1263,7 @@ public class GroupPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1313,7 +1312,7 @@ public class GroupPersistenceImpl extends BasePersistence
 			Session session = null;
 
 			try {
-				session = HibernateUtil.openSession();
+				session = openSession();
 
 				StringBuilder sb = new StringBuilder();
 
@@ -1386,7 +1385,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETORGANIZATIONSSIZE);
 
-				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+				q.addScalar(COUNT_COLUMN_NAME, Hibernate.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1411,7 +1410,7 @@ public class GroupPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1676,7 +1675,7 @@ public class GroupPersistenceImpl extends BasePersistence
 			Session session = null;
 
 			try {
-				session = HibernateUtil.openSession();
+				session = openSession();
 
 				StringBuilder sb = new StringBuilder();
 
@@ -1743,7 +1742,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETPERMISSIONSSIZE);
 
-				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+				q.addScalar(COUNT_COLUMN_NAME, Hibernate.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1768,7 +1767,7 @@ public class GroupPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -2029,7 +2028,7 @@ public class GroupPersistenceImpl extends BasePersistence
 			Session session = null;
 
 			try {
-				session = HibernateUtil.openSession();
+				session = openSession();
 
 				StringBuilder sb = new StringBuilder();
 
@@ -2102,7 +2101,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETROLESSIZE);
 
-				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+				q.addScalar(COUNT_COLUMN_NAME, Hibernate.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2127,7 +2126,7 @@ public class GroupPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -2376,7 +2375,7 @@ public class GroupPersistenceImpl extends BasePersistence
 			Session session = null;
 
 			try {
-				session = HibernateUtil.openSession();
+				session = openSession();
 
 				StringBuilder sb = new StringBuilder();
 
@@ -2449,7 +2448,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETUSERGROUPSSIZE);
 
-				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+				q.addScalar(COUNT_COLUMN_NAME, Hibernate.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2474,7 +2473,7 @@ public class GroupPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -2733,7 +2732,7 @@ public class GroupPersistenceImpl extends BasePersistence
 			Session session = null;
 
 			try {
-				session = HibernateUtil.openSession();
+				session = openSession();
 
 				StringBuilder sb = new StringBuilder();
 
@@ -2800,7 +2799,7 @@ public class GroupPersistenceImpl extends BasePersistence
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETUSERSSIZE);
 
-				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+				q.addScalar(COUNT_COLUMN_NAME, Hibernate.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2825,7 +2824,7 @@ public class GroupPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);

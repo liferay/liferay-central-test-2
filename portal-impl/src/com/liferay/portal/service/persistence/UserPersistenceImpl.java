@@ -38,7 +38,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.model.impl.UserModelImpl;
 import com.liferay.portal.spring.hibernate.FinderCache;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -111,7 +110,7 @@ public class UserPersistenceImpl extends BasePersistence
 			throw nsee;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -141,7 +140,7 @@ public class UserPersistenceImpl extends BasePersistence
 			clearGroups.clear(user.getPrimaryKey());
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			FinderCache.clearCache("Users_Groups");
@@ -151,7 +150,7 @@ public class UserPersistenceImpl extends BasePersistence
 			clearOrganizations.clear(user.getPrimaryKey());
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			FinderCache.clearCache("Users_Orgs");
@@ -161,7 +160,7 @@ public class UserPersistenceImpl extends BasePersistence
 			clearPermissions.clear(user.getPrimaryKey());
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			FinderCache.clearCache("Users_Permissions");
@@ -171,7 +170,7 @@ public class UserPersistenceImpl extends BasePersistence
 			clearRoles.clear(user.getPrimaryKey());
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			FinderCache.clearCache("Users_Roles");
@@ -181,7 +180,7 @@ public class UserPersistenceImpl extends BasePersistence
 			clearUserGroups.clear(user.getPrimaryKey());
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			FinderCache.clearCache("Users_UserGroups");
@@ -199,7 +198,7 @@ public class UserPersistenceImpl extends BasePersistence
 			return user;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -298,7 +297,7 @@ public class UserPersistenceImpl extends BasePersistence
 			return user;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -332,7 +331,7 @@ public class UserPersistenceImpl extends BasePersistence
 			return (User)session.get(UserImpl.class, new Long(userId));
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -389,7 +388,7 @@ public class UserPersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -471,7 +470,7 @@ public class UserPersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -572,7 +571,7 @@ public class UserPersistenceImpl extends BasePersistence
 			return array;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -622,7 +621,7 @@ public class UserPersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -697,7 +696,7 @@ public class UserPersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -791,7 +790,7 @@ public class UserPersistenceImpl extends BasePersistence
 			return array;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -869,7 +868,7 @@ public class UserPersistenceImpl extends BasePersistence
 				}
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -938,7 +937,7 @@ public class UserPersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1020,7 +1019,7 @@ public class UserPersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1122,7 +1121,7 @@ public class UserPersistenceImpl extends BasePersistence
 			return array;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -1207,7 +1206,7 @@ public class UserPersistenceImpl extends BasePersistence
 				}
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1296,7 +1295,7 @@ public class UserPersistenceImpl extends BasePersistence
 				}
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1397,7 +1396,7 @@ public class UserPersistenceImpl extends BasePersistence
 				}
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1500,7 +1499,7 @@ public class UserPersistenceImpl extends BasePersistence
 				}
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1577,7 +1576,7 @@ public class UserPersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1667,7 +1666,7 @@ public class UserPersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1781,7 +1780,7 @@ public class UserPersistenceImpl extends BasePersistence
 			return array;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -1878,7 +1877,7 @@ public class UserPersistenceImpl extends BasePersistence
 				}
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1986,7 +1985,7 @@ public class UserPersistenceImpl extends BasePersistence
 				}
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -2016,7 +2015,7 @@ public class UserPersistenceImpl extends BasePersistence
 			return query.list();
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -2038,7 +2037,7 @@ public class UserPersistenceImpl extends BasePersistence
 			return query.list();
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -2104,7 +2103,7 @@ public class UserPersistenceImpl extends BasePersistence
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -2257,7 +2256,7 @@ public class UserPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -2322,7 +2321,7 @@ public class UserPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -2387,7 +2386,7 @@ public class UserPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -2460,7 +2459,7 @@ public class UserPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -2532,7 +2531,7 @@ public class UserPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -2597,7 +2596,7 @@ public class UserPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -2671,7 +2670,7 @@ public class UserPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -2747,7 +2746,7 @@ public class UserPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -2828,7 +2827,7 @@ public class UserPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -2909,7 +2908,7 @@ public class UserPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -2990,7 +2989,7 @@ public class UserPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -3043,7 +3042,7 @@ public class UserPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -3091,7 +3090,7 @@ public class UserPersistenceImpl extends BasePersistence
 			Session session = null;
 
 			try {
-				session = HibernateUtil.openSession();
+				session = openSession();
 
 				StringBuilder sb = new StringBuilder();
 
@@ -3164,7 +3163,7 @@ public class UserPersistenceImpl extends BasePersistence
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETGROUPSSIZE);
 
-				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+				q.addScalar(COUNT_COLUMN_NAME, Hibernate.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -3189,7 +3188,7 @@ public class UserPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -3442,7 +3441,7 @@ public class UserPersistenceImpl extends BasePersistence
 			Session session = null;
 
 			try {
-				session = HibernateUtil.openSession();
+				session = openSession();
 
 				StringBuilder sb = new StringBuilder();
 
@@ -3515,7 +3514,7 @@ public class UserPersistenceImpl extends BasePersistence
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETORGANIZATIONSSIZE);
 
-				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+				q.addScalar(COUNT_COLUMN_NAME, Hibernate.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -3540,7 +3539,7 @@ public class UserPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -3805,7 +3804,7 @@ public class UserPersistenceImpl extends BasePersistence
 			Session session = null;
 
 			try {
-				session = HibernateUtil.openSession();
+				session = openSession();
 
 				StringBuilder sb = new StringBuilder();
 
@@ -3872,7 +3871,7 @@ public class UserPersistenceImpl extends BasePersistence
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETPERMISSIONSSIZE);
 
-				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+				q.addScalar(COUNT_COLUMN_NAME, Hibernate.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -3897,7 +3896,7 @@ public class UserPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -4158,7 +4157,7 @@ public class UserPersistenceImpl extends BasePersistence
 			Session session = null;
 
 			try {
-				session = HibernateUtil.openSession();
+				session = openSession();
 
 				StringBuilder sb = new StringBuilder();
 
@@ -4231,7 +4230,7 @@ public class UserPersistenceImpl extends BasePersistence
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETROLESSIZE);
 
-				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+				q.addScalar(COUNT_COLUMN_NAME, Hibernate.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -4256,7 +4255,7 @@ public class UserPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -4505,7 +4504,7 @@ public class UserPersistenceImpl extends BasePersistence
 			Session session = null;
 
 			try {
-				session = HibernateUtil.openSession();
+				session = openSession();
 
 				StringBuilder sb = new StringBuilder();
 
@@ -4578,7 +4577,7 @@ public class UserPersistenceImpl extends BasePersistence
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETUSERGROUPSSIZE);
 
-				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+				q.addScalar(COUNT_COLUMN_NAME, Hibernate.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -4603,7 +4602,7 @@ public class UserPersistenceImpl extends BasePersistence
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
