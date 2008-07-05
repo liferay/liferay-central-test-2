@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
 import ${basePersistencePackage}.BasePersistence;
 import ${springHibernatePackage}.FinderCache;
-import ${springHibernatePackage}.HibernateUtil;
 import ${propsUtilPackage}.PropsUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -100,7 +99,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 			throw nsee;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -134,7 +133,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					clear${tempEntity.names}.clear(${entity.varName}.getPrimaryKey());
 				}
 				catch (Exception e) {
-					throw HibernateUtil.processException(e);
+					throw processException(e);
 				}
 				finally {
 					FinderCache.clearCache("${column.mappingTable}");
@@ -154,7 +153,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 			return ${entity.varName};
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -253,7 +252,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 			return ${entity.varName};
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -297,7 +296,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 			);
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -447,7 +446,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 						return list;
 					}
 					catch (Exception e) {
-						throw HibernateUtil.processException(e);
+						throw processException(e);
 					}
 					finally {
 						closeSession(session);
@@ -614,7 +613,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 						return list;
 					}
 					catch (Exception e) {
-						throw HibernateUtil.processException(e);
+						throw processException(e);
 					}
 					finally {
 						closeSession(session);
@@ -831,7 +830,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					return array;
 				}
 				catch (Exception e) {
-					throw HibernateUtil.processException(e);
+					throw processException(e);
 				}
 				finally {
 					closeSession(session);
@@ -1030,7 +1029,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 						}
 					}
 					catch (Exception e) {
-						throw HibernateUtil.processException(e);
+						throw processException(e);
 					}
 					finally {
 						closeSession(session);
@@ -1061,7 +1060,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 			return query.list();
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -1081,7 +1080,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 			return query.list();
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -1149,7 +1148,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 				return list;
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1363,7 +1362,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					return count.intValue();
 				}
 				catch (Exception e) {
-					throw HibernateUtil.processException(e);
+					throw processException(e);
 				}
 				finally {
 					closeSession(session);
@@ -1413,7 +1412,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 				return count.intValue();
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1491,7 +1490,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					Session session = null;
 
 					try {
-						session = HibernateUtil.openSession();
+						session = openSession();
 
 						StringBuilder sb = new StringBuilder();
 
@@ -1599,7 +1598,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 						SQLQuery q = session.createSQLQuery(_SQL_GET${tempEntity.names?upper_case}SIZE);
 
-						q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+						q.addScalar(COUNT_COLUMN_NAME, Hibernate.LONG);
 
 						QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1622,7 +1621,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 						return count.intValue();
 					}
 					catch (Exception e) {
-						throw HibernateUtil.processException(e);
+						throw processException(e);
 					}
 					finally {
 						closeSession(session);

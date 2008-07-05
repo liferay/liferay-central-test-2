@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
@@ -44,6 +45,8 @@ import org.hibernate.engine.SessionFactoryImplementor;
  *
  */
 public class BasePersistence {
+
+	public static final String COUNT_COLUMN_NAME = "COUNT_VALUE";
 
 	public DataSource getDataSource() {
 		return _dataSource;
@@ -92,6 +95,10 @@ public class BasePersistence {
 		throws HibernateException {
 
 		return HibernateUtil.openSession(sessionFactory);
+	}
+
+	protected SystemException processException(Exception e) {
+		return HibernateUtil.processException(e);
 	}
 
 	private static Log _log = LogFactory.getLog(BasePersistence.class);
