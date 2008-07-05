@@ -154,7 +154,7 @@ public abstract class AnnouncementsFlagServiceBaseImpl extends PrincipalBean
 		this.counterService = counterService;
 	}
 
-	public void init() {
+	protected void init() {
 		if (announcementsDeliveryLocalService == null) {
 			announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getImpl();
 		}

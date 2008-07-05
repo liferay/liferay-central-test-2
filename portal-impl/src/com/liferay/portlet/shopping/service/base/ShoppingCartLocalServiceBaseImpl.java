@@ -380,7 +380,7 @@ public abstract class ShoppingCartLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	public void init() {
+	protected void init() {
 		if (shoppingCartPersistence == null) {
 			shoppingCartPersistence = ShoppingCartUtil.getPersistence();
 		}

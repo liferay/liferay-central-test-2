@@ -77,8 +77,6 @@ public interface TagsAssetLocalService {
 		com.liferay.portlet.tags.model.TagsAsset tagsAsset)
 		throws com.liferay.portal.SystemException;
 
-	public void init();
-
 	public void deleteAsset(long assetId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

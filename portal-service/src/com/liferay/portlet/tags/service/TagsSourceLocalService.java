@@ -77,6 +77,4 @@ public interface TagsSourceLocalService {
 	public com.liferay.portlet.tags.model.TagsSource updateTagsSource(
 		com.liferay.portlet.tags.model.TagsSource tagsSource)
 		throws com.liferay.portal.SystemException;
-
-	public void init();
 }

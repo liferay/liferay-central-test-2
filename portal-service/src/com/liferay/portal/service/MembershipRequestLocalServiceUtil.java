@@ -109,12 +109,6 @@ public class MembershipRequestLocalServiceUtil {
 		return membershipRequestLocalService.updateMembershipRequest(membershipRequest);
 	}
 
-	public static void init() {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		membershipRequestLocalService.init();
-	}
-
 	public static com.liferay.portal.model.MembershipRequest addMembershipRequest(
 		long userId, long groupId, java.lang.String comments)
 		throws com.liferay.portal.PortalException,

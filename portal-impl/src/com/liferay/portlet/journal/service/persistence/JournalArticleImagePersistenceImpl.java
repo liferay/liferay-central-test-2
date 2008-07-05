@@ -1771,7 +1771,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
 	}
 
-	protected void initDao() {
+	protected void init() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					PropsUtil.get(
 						"value.object.listener.com.liferay.portlet.journal.model.JournalArticleImage")));

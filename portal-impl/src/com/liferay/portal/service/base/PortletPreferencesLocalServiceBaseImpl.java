@@ -1334,7 +1334,7 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	public void init() {
+	protected void init() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

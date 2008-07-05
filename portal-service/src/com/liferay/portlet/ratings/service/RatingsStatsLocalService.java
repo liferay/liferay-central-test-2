@@ -78,8 +78,6 @@ public interface RatingsStatsLocalService {
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats)
 		throws com.liferay.portal.SystemException;
 
-	public void init();
-
 	public void deleteStats(java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;
 

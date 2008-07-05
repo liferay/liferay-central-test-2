@@ -109,12 +109,6 @@ public class PasswordPolicyLocalServiceUtil {
 		return passwordPolicyLocalService.updatePasswordPolicy(passwordPolicy);
 	}
 
-	public static void init() {
-		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
-
-		passwordPolicyLocalService.init();
-	}
-
 	public static com.liferay.portal.model.PasswordPolicy addPasswordPolicy(
 		long userId, boolean defaultPolicy, java.lang.String name,
 		java.lang.String description, boolean changeable,

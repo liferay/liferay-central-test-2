@@ -229,7 +229,7 @@ public abstract class SocialRelationLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	public void init() {
+	protected void init() {
 		if (socialActivityLocalService == null) {
 			socialActivityLocalService = SocialActivityLocalServiceFactory.getImpl();
 		}

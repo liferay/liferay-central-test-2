@@ -335,7 +335,7 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	public void init() {
+	protected void init() {
 		if (journalArticleLocalService == null) {
 			journalArticleLocalService = JournalArticleLocalServiceFactory.getImpl();
 		}

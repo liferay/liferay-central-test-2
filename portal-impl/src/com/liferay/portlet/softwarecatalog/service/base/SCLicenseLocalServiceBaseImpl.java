@@ -232,7 +232,7 @@ public abstract class SCLicenseLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	public void init() {
+	protected void init() {
 		if (scLicensePersistence == null) {
 			scLicensePersistence = SCLicenseUtil.getPersistence();
 		}

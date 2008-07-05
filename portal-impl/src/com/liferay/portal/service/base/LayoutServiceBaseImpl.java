@@ -1460,7 +1460,7 @@ public abstract class LayoutServiceBaseImpl extends PrincipalBean
 		this.tasksProposalFinder = tasksProposalFinder;
 	}
 
-	public void init() {
+	protected void init() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

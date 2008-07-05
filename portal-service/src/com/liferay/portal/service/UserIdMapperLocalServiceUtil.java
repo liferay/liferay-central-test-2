@@ -109,12 +109,6 @@ public class UserIdMapperLocalServiceUtil {
 		return userIdMapperLocalService.updateUserIdMapper(userIdMapper);
 	}
 
-	public static void init() {
-		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
-
-		userIdMapperLocalService.init();
-	}
-
 	public static void deleteUserIdMappers(long userId)
 		throws com.liferay.portal.SystemException {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();

@@ -108,12 +108,6 @@ public class TasksReviewLocalServiceUtil {
 		return tasksReviewLocalService.updateTasksReview(tasksReview);
 	}
 
-	public static void init() {
-		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
-
-		tasksReviewLocalService.init();
-	}
-
 	public static com.liferay.portlet.tasks.model.TasksReview addReview(
 		long userId, long proposalId, long assignedByUserId, int stage)
 		throws com.liferay.portal.PortalException,

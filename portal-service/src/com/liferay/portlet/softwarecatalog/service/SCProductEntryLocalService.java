@@ -78,8 +78,6 @@ public interface SCProductEntryLocalService {
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
 		throws com.liferay.portal.SystemException;
 
-	public void init();
-
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry addProductEntry(
 		long userId, long plid, java.lang.String name, java.lang.String type,
 		java.lang.String tags, java.lang.String shortDescription,

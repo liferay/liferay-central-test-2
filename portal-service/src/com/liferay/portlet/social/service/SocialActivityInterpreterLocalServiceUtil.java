@@ -51,13 +51,6 @@ package com.liferay.portlet.social.service;
  *
  */
 public class SocialActivityInterpreterLocalServiceUtil {
-	public static void init() {
-		SocialActivityInterpreterLocalService socialActivityInterpreterLocalService =
-			SocialActivityInterpreterLocalServiceFactory.getService();
-
-		socialActivityInterpreterLocalService.init();
-	}
-
 	public static void addActivityInterpreter(
 		com.liferay.portlet.social.model.SocialActivityInterpreter activityInterpreter) {
 		SocialActivityInterpreterLocalService socialActivityInterpreterLocalService =

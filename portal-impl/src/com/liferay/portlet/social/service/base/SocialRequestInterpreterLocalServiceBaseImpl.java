@@ -32,6 +32,6 @@ import com.liferay.portlet.social.service.SocialRequestInterpreterLocalService;
  */
 public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	implements SocialRequestInterpreterLocalService {
-	public void init() {
+	protected void init() {
 	}
 }

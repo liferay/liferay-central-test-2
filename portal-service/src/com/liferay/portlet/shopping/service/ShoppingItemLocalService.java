@@ -78,8 +78,6 @@ public interface ShoppingItemLocalService {
 		com.liferay.portlet.shopping.model.ShoppingItem shoppingItem)
 		throws com.liferay.portal.SystemException;
 
-	public void init();
-
 	public void addBookItems(long userId, long categoryId,
 		java.lang.String[] isbns)
 		throws com.liferay.portal.PortalException,

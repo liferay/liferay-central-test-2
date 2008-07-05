@@ -1345,7 +1345,7 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 		this.mailService = mailService;
 	}
 
-	public void init() {
+	protected void init() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

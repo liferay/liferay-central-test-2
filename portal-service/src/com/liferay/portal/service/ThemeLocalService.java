@@ -49,8 +49,6 @@ package com.liferay.portal.service;
  *
  */
 public interface ThemeLocalService {
-	public void init();
-
 	public com.liferay.portal.model.ColorScheme getColorScheme(long companyId,
 		java.lang.String themeId, java.lang.String colorSchemeId,
 		boolean wapTheme);

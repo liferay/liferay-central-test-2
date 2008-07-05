@@ -229,7 +229,7 @@ public abstract class SocialActivityLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	public void init() {
+	protected void init() {
 		if (socialActivityPersistence == null) {
 			socialActivityPersistence = SocialActivityUtil.getPersistence();
 		}

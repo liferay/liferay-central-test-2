@@ -76,8 +76,6 @@ public interface LayoutLocalService {
 		com.liferay.portal.model.Layout layout)
 		throws com.liferay.portal.SystemException;
 
-	public void init();
-
 	public com.liferay.portal.model.Layout addLayout(long userId, long groupId,
 		boolean privateLayout, long parentLayoutId, java.lang.String name,
 		java.lang.String title, java.lang.String description,

@@ -109,12 +109,6 @@ public class JournalContentSearchLocalServiceUtil {
 		return journalContentSearchLocalService.updateJournalContentSearch(journalContentSearch);
 	}
 
-	public static void init() {
-		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
-
-		journalContentSearchLocalService.init();
-	}
-
 	public static void checkContentSearches(long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

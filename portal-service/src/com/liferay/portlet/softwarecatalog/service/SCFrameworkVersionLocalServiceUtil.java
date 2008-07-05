@@ -109,12 +109,6 @@ public class SCFrameworkVersionLocalServiceUtil {
 		return scFrameworkVersionLocalService.updateSCFrameworkVersion(scFrameworkVersion);
 	}
 
-	public static void init() {
-		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
-
-		scFrameworkVersionLocalService.init();
-	}
-
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion addFrameworkVersion(
 		long userId, long plid, java.lang.String name, java.lang.String url,
 		boolean active, int priority, boolean addCommunityPermissions,

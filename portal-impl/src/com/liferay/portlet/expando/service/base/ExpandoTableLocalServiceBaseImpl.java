@@ -208,7 +208,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	public void init() {
+	protected void init() {
 		if (expandoColumnLocalService == null) {
 			expandoColumnLocalService = ExpandoColumnLocalServiceFactory.getImpl();
 		}

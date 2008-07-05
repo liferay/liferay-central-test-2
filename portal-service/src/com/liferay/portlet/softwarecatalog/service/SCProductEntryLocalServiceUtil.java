@@ -109,12 +109,6 @@ public class SCProductEntryLocalServiceUtil {
 		return scProductEntryLocalService.updateSCProductEntry(scProductEntry);
 	}
 
-	public static void init() {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		scProductEntryLocalService.init();
-	}
-
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry addProductEntry(
 		long userId, long plid, java.lang.String name, java.lang.String type,
 		java.lang.String tags, java.lang.String shortDescription,

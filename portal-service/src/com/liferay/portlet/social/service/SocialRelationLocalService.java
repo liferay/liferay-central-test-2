@@ -78,8 +78,6 @@ public interface SocialRelationLocalService {
 		com.liferay.portlet.social.model.SocialRelation socialRelation)
 		throws com.liferay.portal.SystemException;
 
-	public void init();
-
 	public com.liferay.portlet.social.model.SocialRelation addRelation(
 		long userId1, long userId2, int type)
 		throws com.liferay.portal.PortalException,

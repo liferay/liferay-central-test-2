@@ -144,7 +144,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	public void init() {
+	protected void init() {
 		if (ratingsEntryLocalService == null) {
 			ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getImpl();
 		}

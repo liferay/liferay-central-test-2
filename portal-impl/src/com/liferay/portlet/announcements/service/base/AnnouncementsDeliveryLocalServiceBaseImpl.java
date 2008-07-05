@@ -231,7 +231,7 @@ public abstract class AnnouncementsDeliveryLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	public void init() {
+	protected void init() {
 		if (announcementsDeliveryPersistence == null) {
 			announcementsDeliveryPersistence = AnnouncementsDeliveryUtil.getPersistence();
 		}

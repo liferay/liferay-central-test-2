@@ -205,7 +205,7 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 		this.groupFinder = groupFinder;
 	}
 
-	public void init() {
+	protected void init() {
 		if (blogsEntryLocalService == null) {
 			blogsEntryLocalService = BlogsEntryLocalServiceFactory.getImpl();
 		}

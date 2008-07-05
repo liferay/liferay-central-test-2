@@ -107,12 +107,6 @@ public class ResourceLocalServiceUtil {
 		return resourceLocalService.updateResource(resource);
 	}
 
-	public static void init() {
-		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
-
-		resourceLocalService.init();
-	}
-
 	public static void addModelResources(long companyId, long groupId,
 		long userId, java.lang.String name, long primKey,
 		java.lang.String[] communityPermissions,

@@ -539,7 +539,7 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
-	public void init() {
+	protected void init() {
 		if (blogsEntryPersistence == null) {
 			blogsEntryPersistence = BlogsEntryUtil.getPersistence();
 		}

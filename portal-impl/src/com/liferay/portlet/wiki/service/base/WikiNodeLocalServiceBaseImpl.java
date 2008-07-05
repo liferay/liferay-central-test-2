@@ -316,7 +316,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
-	public void init() {
+	protected void init() {
 		if (wikiNodePersistence == null) {
 			wikiNodePersistence = WikiNodeUtil.getPersistence();
 		}

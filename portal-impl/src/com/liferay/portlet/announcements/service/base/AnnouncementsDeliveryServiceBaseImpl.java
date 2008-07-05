@@ -194,7 +194,7 @@ public abstract class AnnouncementsDeliveryServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
-	public void init() {
+	protected void init() {
 		if (announcementsDeliveryLocalService == null) {
 			announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getImpl();
 		}

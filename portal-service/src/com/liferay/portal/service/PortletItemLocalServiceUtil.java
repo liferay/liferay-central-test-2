@@ -108,12 +108,6 @@ public class PortletItemLocalServiceUtil {
 		return portletItemLocalService.updatePortletItem(portletItem);
 	}
 
-	public static void init() {
-		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
-
-		portletItemLocalService.init();
-	}
-
 	public static com.liferay.portal.model.PortletItem addPortletItem(
 		long userId, long groupId, java.lang.String name,
 		java.lang.String portletId, java.lang.String className)

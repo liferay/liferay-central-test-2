@@ -366,7 +366,7 @@ public abstract class JournalFeedServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
-	public void init() {
+	protected void init() {
 		if (journalArticleLocalService == null) {
 			journalArticleLocalService = JournalArticleLocalServiceFactory.getImpl();
 		}

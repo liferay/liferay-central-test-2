@@ -109,12 +109,6 @@ public class DLFileShortcutLocalServiceUtil {
 		return dlFileShortcutLocalService.updateDLFileShortcut(dlFileShortcut);
 	}
 
-	public static void init() {
-		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
-
-		dlFileShortcutLocalService.init();
-	}
-
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
 		long userId, long folderId, long toFolderId, java.lang.String toName,
 		boolean addCommunityPermissions, boolean addGuestPermissions)

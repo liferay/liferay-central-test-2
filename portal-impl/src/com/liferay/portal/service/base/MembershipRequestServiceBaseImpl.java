@@ -1309,7 +1309,7 @@ public abstract class MembershipRequestServiceBaseImpl extends PrincipalBean
 		this.mailService = mailService;
 	}
 
-	public void init() {
+	protected void init() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

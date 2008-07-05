@@ -51,12 +51,6 @@ package com.liferay.portal.service;
  *
  */
 public class LayoutTemplateLocalServiceUtil {
-	public static void init() {
-		LayoutTemplateLocalService layoutTemplateLocalService = LayoutTemplateLocalServiceFactory.getService();
-
-		layoutTemplateLocalService.init();
-	}
-
 	public static java.lang.String getContent(
 		java.lang.String layoutTemplateId, boolean standard,
 		java.lang.String themeId) throws com.liferay.portal.SystemException {

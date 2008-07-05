@@ -108,12 +108,6 @@ public class SCLicenseLocalServiceUtil {
 		return scLicenseLocalService.updateSCLicense(scLicense);
 	}
 
-	public static void init() {
-		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
-
-		scLicenseLocalService.init();
-	}
-
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense addLicense(
 		java.lang.String name, java.lang.String url, boolean openSource,
 		boolean active, boolean recommended)

@@ -294,7 +294,7 @@ public abstract class CalEventLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	public void init() {
+	protected void init() {
 		if (calEventPersistence == null) {
 			calEventPersistence = CalEventUtil.getPersistence();
 		}

@@ -1330,7 +1330,7 @@ public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService {
 		this.counterService = counterService;
 	}
 
-	public void init() {
+	protected void init() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

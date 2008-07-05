@@ -262,7 +262,7 @@ public abstract class CalEventServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
-	public void init() {
+	protected void init() {
 		if (calEventLocalService == null) {
 			calEventLocalService = CalEventLocalServiceFactory.getImpl();
 		}

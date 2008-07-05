@@ -66,7 +66,7 @@ public abstract class WorkflowComponentServiceBaseImpl extends PrincipalBean
 		this.workflowTaskService = workflowTaskService;
 	}
 
-	public void init() {
+	protected void init() {
 		if (workflowDefinitionService == null) {
 			workflowDefinitionService = WorkflowDefinitionServiceFactory.getImpl();
 		}

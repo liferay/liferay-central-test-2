@@ -462,7 +462,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 		this.mbMessageFinder = mbMessageFinder;
 	}
 
-	public void init() {
+	protected void init() {
 		if (shoppingCartLocalService == null) {
 			shoppingCartLocalService = ShoppingCartLocalServiceFactory.getImpl();
 		}

@@ -242,7 +242,7 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 		this.imagePersistence = imagePersistence;
 	}
 
-	public void init() {
+	protected void init() {
 		if (scLicenseLocalService == null) {
 			scLicenseLocalService = SCLicenseLocalServiceFactory.getImpl();
 		}

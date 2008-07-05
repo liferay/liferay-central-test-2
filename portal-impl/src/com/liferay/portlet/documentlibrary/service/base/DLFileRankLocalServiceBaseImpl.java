@@ -312,7 +312,7 @@ public abstract class DLFileRankLocalServiceBaseImpl
 		this.layoutFinder = layoutFinder;
 	}
 
-	public void init() {
+	protected void init() {
 		if (dlFileEntryLocalService == null) {
 			dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getImpl();
 		}

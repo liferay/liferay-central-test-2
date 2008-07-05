@@ -78,8 +78,6 @@ public interface UserIdMapperLocalService {
 		com.liferay.portal.model.UserIdMapper userIdMapper)
 		throws com.liferay.portal.SystemException;
 
-	public void init();
-
 	public void deleteUserIdMappers(long userId)
 		throws com.liferay.portal.SystemException;
 

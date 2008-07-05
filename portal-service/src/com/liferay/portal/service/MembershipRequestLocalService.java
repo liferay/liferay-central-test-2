@@ -78,8 +78,6 @@ public interface MembershipRequestLocalService {
 		com.liferay.portal.model.MembershipRequest membershipRequest)
 		throws com.liferay.portal.SystemException;
 
-	public void init();
-
 	public com.liferay.portal.model.MembershipRequest addMembershipRequest(
 		long userId, long groupId, java.lang.String comments)
 		throws com.liferay.portal.PortalException,

@@ -77,8 +77,6 @@ public interface TagsEntryLocalService {
 		com.liferay.portlet.tags.model.TagsEntry tagsEntry)
 		throws com.liferay.portal.SystemException;
 
-	public void init();
-
 	public com.liferay.portlet.tags.model.TagsEntry addEntry(long userId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException,

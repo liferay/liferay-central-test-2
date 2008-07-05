@@ -106,12 +106,6 @@ public class GroupLocalServiceUtil {
 		return groupLocalService.updateGroup(group);
 	}
 
-	public static void init() {
-		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
-
-		groupLocalService.init();
-	}
-
 	public static com.liferay.portal.model.Group addGroup(long userId,
 		java.lang.String className, long classPK, java.lang.String name,
 		java.lang.String description, int type, java.lang.String friendlyURL,

@@ -78,8 +78,6 @@ public interface UserTrackerPathLocalService {
 		com.liferay.portal.model.UserTrackerPath userTrackerPath)
 		throws com.liferay.portal.SystemException;
 
-	public void init();
-
 	public java.util.List<com.liferay.portal.model.UserTrackerPath> getUserTrackerPaths(
 		long userTrackerId, int start, int end)
 		throws com.liferay.portal.SystemException;

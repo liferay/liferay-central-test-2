@@ -75,6 +75,4 @@ public interface ContactLocalService {
 	public com.liferay.portal.model.Contact updateContact(
 		com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.SystemException;
-
-	public void init();
 }

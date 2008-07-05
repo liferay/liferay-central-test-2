@@ -75,6 +75,4 @@ public interface AccountLocalService {
 	public com.liferay.portal.model.Account updateAccount(
 		com.liferay.portal.model.Account account)
 		throws com.liferay.portal.SystemException;
-
-	public void init();
 }

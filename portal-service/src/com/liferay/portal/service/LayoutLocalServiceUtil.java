@@ -106,12 +106,6 @@ public class LayoutLocalServiceUtil {
 		return layoutLocalService.updateLayout(layout);
 	}
 
-	public static void init() {
-		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
-
-		layoutLocalService.init();
-	}
-
 	public static com.liferay.portal.model.Layout addLayout(long userId,
 		long groupId, boolean privateLayout, long parentLayoutId,
 		java.lang.String name, java.lang.String title,

@@ -76,8 +76,6 @@ public interface ImageLocalService {
 		com.liferay.portal.model.Image image)
 		throws com.liferay.portal.SystemException;
 
-	public void init();
-
 	public com.liferay.portal.model.Image getCompanyLogo(long imageId);
 
 	public com.liferay.portal.model.Image getDefaultCompanyLogo();

@@ -254,7 +254,7 @@ public abstract class TagsEntryServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
-	public void init() {
+	protected void init() {
 		if (tagsAssetLocalService == null) {
 			tagsAssetLocalService = TagsAssetLocalServiceFactory.getImpl();
 		}

@@ -105,10 +105,4 @@ public class AccountLocalServiceUtil {
 
 		return accountLocalService.updateAccount(account);
 	}
-
-	public static void init() {
-		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
-
-		accountLocalService.init();
-	}
 }

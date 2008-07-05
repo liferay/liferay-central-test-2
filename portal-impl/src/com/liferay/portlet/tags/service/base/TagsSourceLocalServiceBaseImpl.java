@@ -228,7 +228,7 @@ public abstract class TagsSourceLocalServiceBaseImpl
 		this.tagsSourcePersistence = tagsSourcePersistence;
 	}
 
-	public void init() {
+	protected void init() {
 		if (tagsAssetLocalService == null) {
 			tagsAssetLocalService = TagsAssetLocalServiceFactory.getImpl();
 		}

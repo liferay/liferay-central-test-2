@@ -106,12 +106,6 @@ public class RoleLocalServiceUtil {
 		return roleLocalService.updateRole(role);
 	}
 
-	public static void init() {
-		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
-
-		roleLocalService.init();
-	}
-
 	public static com.liferay.portal.model.Role addRole(long userId,
 		long companyId, java.lang.String name, java.lang.String description,
 		int type)

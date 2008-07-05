@@ -667,7 +667,7 @@ public abstract class TagsAssetLocalServiceBaseImpl
 		this.wikiPageResourcePersistence = wikiPageResourcePersistence;
 	}
 
-	public void init() {
+	protected void init() {
 		if (tagsAssetPersistence == null) {
 			tagsAssetPersistence = TagsAssetUtil.getPersistence();
 		}

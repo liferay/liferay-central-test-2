@@ -1602,7 +1602,7 @@ public abstract class UserServiceBaseImpl extends PrincipalBean
 		this.socialRequestPersistence = socialRequestPersistence;
 	}
 
-	public void init() {
+	protected void init() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

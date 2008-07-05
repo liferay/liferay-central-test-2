@@ -455,7 +455,7 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 		this.portletPreferencesFinder = portletPreferencesFinder;
 	}
 
-	public void init() {
+	protected void init() {
 		if (journalArticleLocalService == null) {
 			journalArticleLocalService = JournalArticleLocalServiceFactory.getImpl();
 		}

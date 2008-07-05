@@ -663,7 +663,7 @@ public abstract class JournalArticleLocalServiceBaseImpl
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
-	public void init() {
+	protected void init() {
 		if (journalArticlePersistence == null) {
 			journalArticlePersistence = JournalArticleUtil.getPersistence();
 		}

@@ -128,7 +128,7 @@ public abstract class WorkflowDefinitionServiceBaseImpl extends PrincipalBean
 		this.resourceFinder = resourceFinder;
 	}
 
-	public void init() {
+	protected void init() {
 		if (workflowComponentService == null) {
 			workflowComponentService = WorkflowComponentServiceFactory.getImpl();
 		}

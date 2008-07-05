@@ -108,12 +108,6 @@ public class JournalFeedLocalServiceUtil {
 		return journalFeedLocalService.updateJournalFeed(journalFeed);
 	}
 
-	public static void init() {
-		JournalFeedLocalService journalFeedLocalService = JournalFeedLocalServiceFactory.getService();
-
-		journalFeedLocalService.init();
-	}
-
 	public static com.liferay.portlet.journal.model.JournalFeed addFeed(
 		long userId, long plid, java.lang.String feedId, boolean autoFeedId,
 		java.lang.String name, java.lang.String description,

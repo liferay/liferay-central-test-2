@@ -331,7 +331,7 @@ public abstract class IGFolderLocalServiceBaseImpl
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
-	public void init() {
+	protected void init() {
 		if (igFolderPersistence == null) {
 			igFolderPersistence = IGFolderUtil.getPersistence();
 		}

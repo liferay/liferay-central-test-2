@@ -193,7 +193,7 @@ public abstract class TagsSourceServiceBaseImpl extends PrincipalBean
 		this.tagsSourcePersistence = tagsSourcePersistence;
 	}
 
-	public void init() {
+	protected void init() {
 		if (tagsAssetLocalService == null) {
 			tagsAssetLocalService = TagsAssetLocalServiceFactory.getImpl();
 		}

@@ -78,8 +78,6 @@ public interface JournalArticleImageLocalService {
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage)
 		throws com.liferay.portal.SystemException;
 
-	public void init();
-
 	public void addArticleImageId(long articleImageId, long groupId,
 		java.lang.String articleId, double version, java.lang.String elName,
 		java.lang.String languageId)

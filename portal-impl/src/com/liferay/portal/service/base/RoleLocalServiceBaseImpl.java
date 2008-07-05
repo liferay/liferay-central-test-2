@@ -1328,7 +1328,7 @@ public abstract class RoleLocalServiceBaseImpl implements RoleLocalService {
 		this.counterService = counterService;
 	}
 
-	public void init() {
+	protected void init() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

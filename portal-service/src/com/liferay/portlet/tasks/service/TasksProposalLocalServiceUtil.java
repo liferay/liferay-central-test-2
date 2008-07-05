@@ -109,12 +109,6 @@ public class TasksProposalLocalServiceUtil {
 		return tasksProposalLocalService.updateTasksProposal(tasksProposal);
 	}
 
-	public static void init() {
-		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
-
-		tasksProposalLocalService.init();
-	}
-
 	public static com.liferay.portlet.tasks.model.TasksProposal addProposal(
 		long userId, long groupId, java.lang.String className,
 		java.lang.String classPK, java.lang.String name,

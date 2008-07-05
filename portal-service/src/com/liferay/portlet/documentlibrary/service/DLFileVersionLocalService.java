@@ -78,8 +78,6 @@ public interface DLFileVersionLocalService {
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion)
 		throws com.liferay.portal.SystemException;
 
-	public void init();
-
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getFileVersions(
 		long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;

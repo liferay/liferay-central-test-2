@@ -198,7 +198,7 @@ public abstract class SCLicenseServiceBaseImpl extends PrincipalBean
 		this.counterService = counterService;
 	}
 
-	public void init() {
+	protected void init() {
 		if (scLicenseLocalService == null) {
 			scLicenseLocalService = SCLicenseLocalServiceFactory.getImpl();
 		}

@@ -1332,7 +1332,7 @@ public abstract class CompanyLocalServiceBaseImpl implements CompanyLocalService
 		this.counterService = counterService;
 	}
 
-	public void init() {
+	protected void init() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

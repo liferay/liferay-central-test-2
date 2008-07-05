@@ -249,7 +249,7 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 		this.blogsStatsUserFinder = blogsStatsUserFinder;
 	}
 
-	public void init() {
+	protected void init() {
 		if (ratingsEntryPersistence == null) {
 			ratingsEntryPersistence = RatingsEntryUtil.getPersistence();
 		}

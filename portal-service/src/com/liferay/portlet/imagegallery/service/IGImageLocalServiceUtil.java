@@ -108,12 +108,6 @@ public class IGImageLocalServiceUtil {
 		return igImageLocalService.updateIGImage(igImage);
 	}
 
-	public static void init() {
-		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
-
-		igImageLocalService.init();
-	}
-
 	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
 		long userId, long folderId, java.lang.String name,
 		java.lang.String description, java.io.File file,

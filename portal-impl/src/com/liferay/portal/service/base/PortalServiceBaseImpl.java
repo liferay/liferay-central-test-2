@@ -1278,7 +1278,7 @@ public abstract class PortalServiceBaseImpl extends PrincipalBean
 		this.websitePersistence = websitePersistence;
 	}
 
-	public void init() {
+	protected void init() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

@@ -76,8 +76,6 @@ public interface CompanyLocalService {
 		com.liferay.portal.model.Company company)
 		throws com.liferay.portal.SystemException;
 
-	public void init();
-
 	public com.liferay.portal.model.Company addCompany(java.lang.String webId,
 		java.lang.String virtualHost, java.lang.String mx)
 		throws com.liferay.portal.PortalException,

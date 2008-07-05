@@ -350,7 +350,7 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 		this.imagePersistence = imagePersistence;
 	}
 
-	public void init() {
+	protected void init() {
 		if (journalArticleLocalService == null) {
 			journalArticleLocalService = JournalArticleLocalServiceFactory.getImpl();
 		}

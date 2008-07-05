@@ -187,7 +187,7 @@ public abstract class PollsChoiceLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	public void init() {
+	protected void init() {
 		if (pollsChoicePersistence == null) {
 			pollsChoicePersistence = PollsChoiceUtil.getPersistence();
 		}

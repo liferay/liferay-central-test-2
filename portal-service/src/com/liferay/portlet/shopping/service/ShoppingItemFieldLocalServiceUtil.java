@@ -109,12 +109,6 @@ public class ShoppingItemFieldLocalServiceUtil {
 		return shoppingItemFieldLocalService.updateShoppingItemField(shoppingItemField);
 	}
 
-	public static void init() {
-		ShoppingItemFieldLocalService shoppingItemFieldLocalService = ShoppingItemFieldLocalServiceFactory.getService();
-
-		shoppingItemFieldLocalService.init();
-	}
-
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> getItemFields(
 		long itemId) throws com.liferay.portal.SystemException {
 		ShoppingItemFieldLocalService shoppingItemFieldLocalService = ShoppingItemFieldLocalServiceFactory.getService();

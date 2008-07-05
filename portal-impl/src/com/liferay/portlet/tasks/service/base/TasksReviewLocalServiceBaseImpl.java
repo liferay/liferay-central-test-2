@@ -228,7 +228,7 @@ public abstract class TasksReviewLocalServiceBaseImpl
 		this.socialActivityFinder = socialActivityFinder;
 	}
 
-	public void init() {
+	protected void init() {
 		if (tasksReviewPersistence == null) {
 			tasksReviewPersistence = TasksReviewUtil.getPersistence();
 		}

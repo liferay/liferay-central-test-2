@@ -106,12 +106,6 @@ public class CompanyLocalServiceUtil {
 		return companyLocalService.updateCompany(company);
 	}
 
-	public static void init() {
-		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-
-		companyLocalService.init();
-	}
-
 	public static com.liferay.portal.model.Company addCompany(
 		java.lang.String webId, java.lang.String virtualHost,
 		java.lang.String mx)

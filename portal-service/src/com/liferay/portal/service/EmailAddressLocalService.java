@@ -78,8 +78,6 @@ public interface EmailAddressLocalService {
 		com.liferay.portal.model.EmailAddress emailAddress)
 		throws com.liferay.portal.SystemException;
 
-	public void init();
-
 	public com.liferay.portal.model.EmailAddress addEmailAddress(long userId,
 		java.lang.String className, long classPK, java.lang.String address,
 		int typeId, boolean primary)

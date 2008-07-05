@@ -108,12 +108,6 @@ public class MBCategoryLocalServiceUtil {
 		return mbCategoryLocalService.updateMBCategory(mbCategory);
 	}
 
-	public static void init() {
-		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
-
-		mbCategoryLocalService.init();
-	}
-
 	public static com.liferay.portlet.messageboards.model.MBCategory addCategory(
 		long userId, long plid, long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,

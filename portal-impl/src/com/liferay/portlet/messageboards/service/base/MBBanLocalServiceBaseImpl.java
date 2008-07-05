@@ -334,7 +334,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService {
 		this.userFinder = userFinder;
 	}
 
-	public void init() {
+	protected void init() {
 		if (mbBanPersistence == null) {
 			mbBanPersistence = MBBanUtil.getPersistence();
 		}

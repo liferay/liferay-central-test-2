@@ -1298,7 +1298,7 @@ public abstract class PluginSettingServiceBaseImpl extends PrincipalBean
 		this.counterService = counterService;
 	}
 
-	public void init() {
+	protected void init() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

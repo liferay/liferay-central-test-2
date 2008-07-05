@@ -1311,7 +1311,7 @@ public abstract class AccountLocalServiceBaseImpl implements AccountLocalService
 		this.websitePersistence = websitePersistence;
 	}
 
-	public void init() {
+	protected void init() {
 		if (accountPersistence == null) {
 			accountPersistence = AccountUtil.getPersistence();
 		}

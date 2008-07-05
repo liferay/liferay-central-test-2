@@ -31,6 +31,6 @@ import com.liferay.portal.service.ThemeLocalService;
  *
  */
 public abstract class ThemeLocalServiceBaseImpl implements ThemeLocalService {
-	public void init() {
+	protected void init() {
 	}
 }

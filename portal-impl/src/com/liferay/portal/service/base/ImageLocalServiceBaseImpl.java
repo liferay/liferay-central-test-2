@@ -1319,7 +1319,7 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService {
 		this.websitePersistence = websitePersistence;
 	}
 
-	public void init() {
+	protected void init() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

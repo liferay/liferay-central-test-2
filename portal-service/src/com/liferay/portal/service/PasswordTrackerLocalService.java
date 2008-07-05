@@ -78,8 +78,6 @@ public interface PasswordTrackerLocalService {
 		com.liferay.portal.model.PasswordTracker passwordTracker)
 		throws com.liferay.portal.SystemException;
 
-	public void init();
-
 	public void deletePasswordTrackers(long userId)
 		throws com.liferay.portal.SystemException;
 

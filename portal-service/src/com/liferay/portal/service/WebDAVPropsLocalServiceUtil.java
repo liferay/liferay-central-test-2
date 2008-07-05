@@ -108,12 +108,6 @@ public class WebDAVPropsLocalServiceUtil {
 		return webDAVPropsLocalService.updateWebDAVProps(webDAVProps);
 	}
 
-	public static void init() {
-		WebDAVPropsLocalService webDAVPropsLocalService = WebDAVPropsLocalServiceFactory.getService();
-
-		webDAVPropsLocalService.init();
-	}
-
 	public static void deleteWebDAVProps(java.lang.String className,
 		long classPK) throws com.liferay.portal.SystemException {
 		WebDAVPropsLocalService webDAVPropsLocalService = WebDAVPropsLocalServiceFactory.getService();

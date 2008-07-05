@@ -106,12 +106,6 @@ public class PortletLocalServiceUtil {
 		return portletLocalService.updatePortlet(portlet);
 	}
 
-	public static void init() {
-		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
-
-		portletLocalService.init();
-	}
-
 	public static void destroyPortlet(com.liferay.portal.model.Portlet portlet) {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 

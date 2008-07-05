@@ -78,8 +78,6 @@ public interface BlogsStatsUserLocalService {
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser)
 		throws com.liferay.portal.SystemException;
 
-	public void init();
-
 	public void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 

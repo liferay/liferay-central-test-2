@@ -106,12 +106,6 @@ public class ImageLocalServiceUtil {
 		return imageLocalService.updateImage(image);
 	}
 
-	public static void init() {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		imageLocalService.init();
-	}
-
 	public static com.liferay.portal.model.Image getCompanyLogo(long imageId) {
 		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
 

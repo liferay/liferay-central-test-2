@@ -485,7 +485,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 		this.userGroupFinder = userGroupFinder;
 	}
 
-	public void init() {
+	protected void init() {
 		if (announcementsDeliveryLocalService == null) {
 			announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getImpl();
 		}

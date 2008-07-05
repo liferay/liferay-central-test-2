@@ -251,7 +251,7 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 		this.dlFolderPersistence = dlFolderPersistence;
 	}
 
-	public void init() {
+	protected void init() {
 		if (dlFileEntryLocalService == null) {
 			dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getImpl();
 		}

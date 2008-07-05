@@ -109,12 +109,6 @@ public class SocialRequestLocalServiceUtil {
 		return socialRequestLocalService.updateSocialRequest(socialRequest);
 	}
 
-	public static void init() {
-		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
-
-		socialRequestLocalService.init();
-	}
-
 	public static com.liferay.portlet.social.model.SocialRequest addRequest(
 		long userId, long groupId, java.lang.String className, long classPK,
 		int type, java.lang.String extraData, long receiverUserId)

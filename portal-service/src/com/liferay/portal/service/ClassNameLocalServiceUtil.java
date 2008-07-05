@@ -108,12 +108,6 @@ public class ClassNameLocalServiceUtil {
 		return classNameLocalService.updateClassName(className);
 	}
 
-	public static void init() {
-		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
-
-		classNameLocalService.init();
-	}
-
 	public static void checkClassNames()
 		throws com.liferay.portal.SystemException {
 		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();

@@ -78,8 +78,6 @@ public interface UserTrackerLocalService {
 		com.liferay.portal.model.UserTracker userTracker)
 		throws com.liferay.portal.SystemException;
 
-	public void init();
-
 	public com.liferay.portal.model.UserTracker addUserTracker(long companyId,
 		long userId, java.util.Date modifiedDate, java.lang.String sessionId,
 		java.lang.String remoteAddr, java.lang.String remoteHost,

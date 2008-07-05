@@ -109,12 +109,6 @@ public class RatingsStatsLocalServiceUtil {
 		return ratingsStatsLocalService.updateRatingsStats(ratingsStats);
 	}
 
-	public static void init() {
-		RatingsStatsLocalService ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getService();
-
-		ratingsStatsLocalService.init();
-	}
-
 	public static void deleteStats(java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
 		RatingsStatsLocalService ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getService();

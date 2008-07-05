@@ -106,12 +106,6 @@ public class PhoneLocalServiceUtil {
 		return phoneLocalService.updatePhone(phone);
 	}
 
-	public static void init() {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		phoneLocalService.init();
-	}
-
 	public static com.liferay.portal.model.Phone addPhone(long userId,
 		java.lang.String className, long classPK, java.lang.String number,
 		java.lang.String extension, int typeId, boolean primary)

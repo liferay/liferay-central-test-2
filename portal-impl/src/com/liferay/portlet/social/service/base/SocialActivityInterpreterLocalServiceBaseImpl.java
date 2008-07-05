@@ -32,6 +32,6 @@ import com.liferay.portlet.social.service.SocialActivityInterpreterLocalService;
  */
 public abstract class SocialActivityInterpreterLocalServiceBaseImpl
 	implements SocialActivityInterpreterLocalService {
-	public void init() {
+	protected void init() {
 	}
 }

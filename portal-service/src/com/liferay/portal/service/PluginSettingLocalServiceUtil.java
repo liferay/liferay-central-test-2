@@ -109,12 +109,6 @@ public class PluginSettingLocalServiceUtil {
 		return pluginSettingLocalService.updatePluginSetting(pluginSetting);
 	}
 
-	public static void init() {
-		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
-
-		pluginSettingLocalService.init();
-	}
-
 	public static void checkPermission(long userId, java.lang.String pluginId,
 		java.lang.String pluginType) throws com.liferay.portal.PortalException {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();

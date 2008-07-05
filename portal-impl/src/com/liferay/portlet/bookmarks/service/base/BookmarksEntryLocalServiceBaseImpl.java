@@ -279,7 +279,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 		this.tagsAssetFinder = tagsAssetFinder;
 	}
 
-	public void init() {
+	protected void init() {
 		if (bookmarksEntryPersistence == null) {
 			bookmarksEntryPersistence = BookmarksEntryUtil.getPersistence();
 		}

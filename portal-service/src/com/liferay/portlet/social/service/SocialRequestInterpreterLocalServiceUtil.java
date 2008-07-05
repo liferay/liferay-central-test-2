@@ -51,13 +51,6 @@ package com.liferay.portlet.social.service;
  *
  */
 public class SocialRequestInterpreterLocalServiceUtil {
-	public static void init() {
-		SocialRequestInterpreterLocalService socialRequestInterpreterLocalService =
-			SocialRequestInterpreterLocalServiceFactory.getService();
-
-		socialRequestInterpreterLocalService.init();
-	}
-
 	public static void addRequestInterpreter(
 		com.liferay.portlet.social.model.SocialRequestInterpreter requestInterpreter) {
 		SocialRequestInterpreterLocalService socialRequestInterpreterLocalService =

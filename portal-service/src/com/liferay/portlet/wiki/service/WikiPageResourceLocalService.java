@@ -78,8 +78,6 @@ public interface WikiPageResourceLocalService {
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
 		throws com.liferay.portal.SystemException;
 
-	public void init();
-
 	public void deletePageResource(long nodeId, java.lang.String title)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

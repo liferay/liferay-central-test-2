@@ -78,8 +78,6 @@ public interface ShoppingItemPriceLocalService {
 		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice)
 		throws com.liferay.portal.SystemException;
 
-	public void init();
-
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getItemPrices(
 		long itemId)
 		throws com.liferay.portal.PortalException,

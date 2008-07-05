@@ -109,12 +109,6 @@ public class SocialActivityLocalServiceUtil {
 		return socialActivityLocalService.updateSocialActivity(socialActivity);
 	}
 
-	public static void init() {
-		SocialActivityLocalService socialActivityLocalService = SocialActivityLocalServiceFactory.getService();
-
-		socialActivityLocalService.init();
-	}
-
 	public static com.liferay.portlet.social.model.SocialActivity addActivity(
 		long userId, long groupId, java.lang.String className, long classPK,
 		int type, java.lang.String extraData, long receiverUserId)

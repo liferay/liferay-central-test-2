@@ -108,12 +108,6 @@ public class MBBanLocalServiceUtil {
 		return mbBanLocalService.updateMBBan(mbBan);
 	}
 
-	public static void init() {
-		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
-
-		mbBanLocalService.init();
-	}
-
 	public static com.liferay.portlet.messageboards.model.MBBan addBan(
 		long userId, long plid, long banUserId)
 		throws com.liferay.portal.PortalException,

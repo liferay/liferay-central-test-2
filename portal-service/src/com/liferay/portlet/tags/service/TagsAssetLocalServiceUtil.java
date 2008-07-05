@@ -108,12 +108,6 @@ public class TagsAssetLocalServiceUtil {
 		return tagsAssetLocalService.updateTagsAsset(tagsAsset);
 	}
 
-	public static void init() {
-		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
-
-		tagsAssetLocalService.init();
-	}
-
 	public static void deleteAsset(long assetId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

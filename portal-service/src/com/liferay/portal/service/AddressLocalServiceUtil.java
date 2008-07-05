@@ -106,12 +106,6 @@ public class AddressLocalServiceUtil {
 		return addressLocalService.updateAddress(address);
 	}
 
-	public static void init() {
-		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-
-		addressLocalService.init();
-	}
-
 	public static com.liferay.portal.model.Address addAddress(long userId,
 		java.lang.String className, long classPK, java.lang.String street1,
 		java.lang.String street2, java.lang.String street3,

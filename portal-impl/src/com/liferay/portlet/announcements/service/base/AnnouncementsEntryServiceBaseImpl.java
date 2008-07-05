@@ -450,7 +450,7 @@ public abstract class AnnouncementsEntryServiceBaseImpl extends PrincipalBean
 		this.userGroupFinder = userGroupFinder;
 	}
 
-	public void init() {
+	protected void init() {
 		if (announcementsDeliveryLocalService == null) {
 			announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getImpl();
 		}

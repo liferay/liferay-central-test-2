@@ -109,12 +109,6 @@ public class SubscriptionLocalServiceUtil {
 		return subscriptionLocalService.updateSubscription(subscription);
 	}
 
-	public static void init() {
-		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
-
-		subscriptionLocalService.init();
-	}
-
 	public static com.liferay.portal.model.Subscription addSubscription(
 		long userId, java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,

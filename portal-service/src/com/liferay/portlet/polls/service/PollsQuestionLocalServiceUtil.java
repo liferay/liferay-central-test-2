@@ -109,12 +109,6 @@ public class PollsQuestionLocalServiceUtil {
 		return pollsQuestionLocalService.updatePollsQuestion(pollsQuestion);
 	}
 
-	public static void init() {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		pollsQuestionLocalService.init();
-	}
-
 	public static com.liferay.portlet.polls.model.PollsQuestion addQuestion(
 		long userId, long plid, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,

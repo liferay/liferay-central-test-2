@@ -106,12 +106,6 @@ public class WebsiteLocalServiceUtil {
 		return websiteLocalService.updateWebsite(website);
 	}
 
-	public static void init() {
-		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-
-		websiteLocalService.init();
-	}
-
 	public static com.liferay.portal.model.Website addWebsite(long userId,
 		java.lang.String className, long classPK, java.lang.String url,
 		int typeId, boolean primary)

@@ -109,12 +109,6 @@ public class AnnouncementsEntryLocalServiceUtil {
 		return announcementsEntryLocalService.updateAnnouncementsEntry(announcementsEntry);
 	}
 
-	public static void init() {
-		AnnouncementsEntryLocalService announcementsEntryLocalService = AnnouncementsEntryLocalServiceFactory.getService();
-
-		announcementsEntryLocalService.init();
-	}
-
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry addEntry(
 		long userId, long classNameId, long classPK, java.lang.String title,
 		java.lang.String content, java.lang.String url, java.lang.String type,

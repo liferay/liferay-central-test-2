@@ -32,6 +32,6 @@ import com.liferay.portal.service.LayoutTemplateLocalService;
  */
 public abstract class LayoutTemplateLocalServiceBaseImpl
 	implements LayoutTemplateLocalService {
-	public void init() {
+	protected void init() {
 	}
 }

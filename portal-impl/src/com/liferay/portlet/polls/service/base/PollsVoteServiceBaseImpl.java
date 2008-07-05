@@ -142,7 +142,7 @@ public abstract class PollsVoteServiceBaseImpl extends PrincipalBean
 		this.counterService = counterService;
 	}
 
-	public void init() {
+	protected void init() {
 		if (pollsChoiceLocalService == null) {
 			pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getImpl();
 		}

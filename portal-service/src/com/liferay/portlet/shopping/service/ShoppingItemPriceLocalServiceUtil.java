@@ -109,12 +109,6 @@ public class ShoppingItemPriceLocalServiceUtil {
 		return shoppingItemPriceLocalService.updateShoppingItemPrice(shoppingItemPrice);
 	}
 
-	public static void init() {
-		ShoppingItemPriceLocalService shoppingItemPriceLocalService = ShoppingItemPriceLocalServiceFactory.getService();
-
-		shoppingItemPriceLocalService.init();
-	}
-
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getItemPrices(
 		long itemId)
 		throws com.liferay.portal.PortalException,

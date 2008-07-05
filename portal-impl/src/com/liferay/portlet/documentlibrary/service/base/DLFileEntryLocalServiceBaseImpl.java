@@ -503,7 +503,7 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 		this.tagsAssetFinder = tagsAssetFinder;
 	}
 
-	public void init() {
+	protected void init() {
 		if (dlFileEntryPersistence == null) {
 			dlFileEntryPersistence = DLFileEntryUtil.getPersistence();
 		}

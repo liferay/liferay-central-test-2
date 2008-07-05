@@ -108,12 +108,6 @@ public class UserTrackerLocalServiceUtil {
 		return userTrackerLocalService.updateUserTracker(userTracker);
 	}
 
-	public static void init() {
-		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
-
-		userTrackerLocalService.init();
-	}
-
 	public static com.liferay.portal.model.UserTracker addUserTracker(
 		long companyId, long userId, java.util.Date modifiedDate,
 		java.lang.String sessionId, java.lang.String remoteAddr,

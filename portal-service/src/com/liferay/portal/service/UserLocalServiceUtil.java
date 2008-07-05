@@ -106,12 +106,6 @@ public class UserLocalServiceUtil {
 		return userLocalService.updateUser(user);
 	}
 
-	public static void init() {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.init();
-	}
-
 	public static void addGroupUsers(long groupId, long[] userIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

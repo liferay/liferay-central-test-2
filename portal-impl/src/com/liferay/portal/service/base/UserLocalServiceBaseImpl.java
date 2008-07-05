@@ -1631,7 +1631,7 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService {
 		this.socialRequestPersistence = socialRequestPersistence;
 	}
 
-	public void init() {
+	protected void init() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

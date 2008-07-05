@@ -109,12 +109,6 @@ public class SCProductScreenshotLocalServiceUtil {
 		return scProductScreenshotLocalService.updateSCProductScreenshot(scProductScreenshot);
 	}
 
-	public static void init() {
-		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
-
-		scProductScreenshotLocalService.init();
-	}
-
 	public static void deleteProductScreenshot(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot productScreenshot)
 		throws com.liferay.portal.PortalException,

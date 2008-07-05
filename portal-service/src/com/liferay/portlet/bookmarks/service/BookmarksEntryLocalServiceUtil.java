@@ -109,12 +109,6 @@ public class BookmarksEntryLocalServiceUtil {
 		return bookmarksEntryLocalService.updateBookmarksEntry(bookmarksEntry);
 	}
 
-	public static void init() {
-		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
-
-		bookmarksEntryLocalService.init();
-	}
-
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
 		long userId, long folderId, java.lang.String name,
 		java.lang.String url, java.lang.String comments,
