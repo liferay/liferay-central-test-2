@@ -1900,7 +1900,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
 	}
 
-	protected void initDao() {
+	protected void init() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(PropsUtil.get("value.object.listener.${packagePath}.model.${entity.name}")));
 
 		if (listenerClassNames.length > 0) {

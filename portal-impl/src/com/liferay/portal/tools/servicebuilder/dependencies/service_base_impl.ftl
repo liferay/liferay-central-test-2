@@ -144,7 +144,7 @@ import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 		</#if>
 	</#list>
 
-	public void init() {
+	protected void init() {
 		<#list referenceList as tempEntity>
 			<#if entity.equals(tempEntity)>
 				<#if sessionTypeName == "" && tempEntity.hasLocalService()>
@@ -204,7 +204,7 @@ import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 		</#if>
 	</#list>
 <#else>
-	public void init() {
+	protected void init() {
 	}
 </#if>
 

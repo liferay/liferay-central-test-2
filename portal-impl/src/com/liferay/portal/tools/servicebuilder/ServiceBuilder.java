@@ -1340,8 +1340,7 @@ public class ServiceBuilder {
 	public boolean isCustomMethod(JavaMethod method) {
 		String methodName = method.getName();
 
-		if (methodName.equals("afterPropertiesSet") ||
-			methodName.equals("equals") ||
+		if (methodName.equals("equals") ||
 			methodName.equals("getClass") ||
 			methodName.equals("hashCode") ||
 			methodName.equals("notify") ||

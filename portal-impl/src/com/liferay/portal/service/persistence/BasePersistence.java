@@ -25,6 +25,8 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
+import javax.sql.DataSource;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -35,21 +37,27 @@ import org.hibernate.connection.ConnectionProvider;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.engine.SessionFactoryImplementor;
 
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
-
 /**
  * <a href="BasePersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BasePersistence extends JdbcDaoSupport {
+public class BasePersistence {
+
+	public DataSource getDataSource() {
+		return _dataSource;
+	}
 
 	public SessionFactory getSessionFactory() {
 		return _sessionFactory;
 	}
 
 	public void registerListener(ModelListener listener) {
+	}
+
+	public void setDataSource(DataSource dataSource) {
+		_dataSource = dataSource;
 	}
 
 	public void setSessionFactory(SessionFactory sessionFactory) {
@@ -88,6 +96,7 @@ public class BasePersistence extends JdbcDaoSupport {
 
 	private static Log _log = LogFactory.getLog(BasePersistence.class);
 
+	private DataSource _dataSource;
 	private SessionFactoryImplementor _sessionFactory;
 	private Dialect _dialect;
 
