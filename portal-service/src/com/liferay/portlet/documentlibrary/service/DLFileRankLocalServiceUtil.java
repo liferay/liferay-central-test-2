@@ -108,6 +108,12 @@ public class DLFileRankLocalServiceUtil {
 		return dlFileRankLocalService.updateDLFileRank(dlFileRank);
 	}
 
+	public static void init() {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
+		dlFileRankLocalService.init();
+	}
+
 	public static void deleteFileRanks(long userId)
 		throws com.liferay.portal.SystemException {
 		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();

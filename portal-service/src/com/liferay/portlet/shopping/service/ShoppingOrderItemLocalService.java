@@ -78,6 +78,8 @@ public interface ShoppingOrderItemLocalService {
 		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem)
 		throws com.liferay.portal.SystemException;
 
+	public void init();
+
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrderItem> getOrderItems(
 		long orderId) throws com.liferay.portal.SystemException;
 }

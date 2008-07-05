@@ -78,6 +78,8 @@ public interface PortletPreferencesLocalService {
 		com.liferay.portal.model.PortletPreferences portletPreferences)
 		throws com.liferay.portal.SystemException;
 
+	public void init();
+
 	public void deletePortletPreferences(long ownerId, int ownerType, long plid)
 		throws com.liferay.portal.SystemException;
 

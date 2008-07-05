@@ -78,6 +78,8 @@ public interface JournalArticleLocalService {
 		com.liferay.portlet.journal.model.JournalArticle journalArticle)
 		throws com.liferay.portal.SystemException;
 
+	public void init();
+
 	public com.liferay.portlet.journal.model.JournalArticle addArticle(
 		long userId, java.lang.String articleId, boolean autoArticleId,
 		long plid, java.lang.String title, java.lang.String description,

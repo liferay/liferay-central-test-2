@@ -109,6 +109,12 @@ public class ResourceCodeLocalServiceUtil {
 		return resourceCodeLocalService.updateResourceCode(resourceCode);
 	}
 
+	public static void init() {
+		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
+
+		resourceCodeLocalService.init();
+	}
+
 	public static com.liferay.portal.model.ResourceCode getResourceCode(
 		long companyId, java.lang.String name, int scope)
 		throws com.liferay.portal.SystemException {

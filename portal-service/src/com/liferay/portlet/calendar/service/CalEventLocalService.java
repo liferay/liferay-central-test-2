@@ -77,6 +77,8 @@ public interface CalEventLocalService {
 		com.liferay.portlet.calendar.model.CalEvent calEvent)
 		throws com.liferay.portal.SystemException;
 
+	public void init();
+
 	public com.liferay.portlet.calendar.model.CalEvent addEvent(long userId,
 		long plid, java.lang.String title, java.lang.String description,
 		int startDateMonth, int startDateDay, int startDateYear,

@@ -76,6 +76,8 @@ public interface ReleaseLocalService {
 		com.liferay.portal.model.Release release)
 		throws com.liferay.portal.SystemException;
 
+	public void init();
+
 	public int getBuildNumberOrCreate()
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

@@ -109,6 +109,12 @@ public class PortletPreferencesLocalServiceUtil {
 		return portletPreferencesLocalService.updatePortletPreferences(portletPreferences);
 	}
 
+	public static void init() {
+		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
+		portletPreferencesLocalService.init();
+	}
+
 	public static void deletePortletPreferences(long ownerId, int ownerType,
 		long plid) throws com.liferay.portal.SystemException {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();

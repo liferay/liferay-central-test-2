@@ -78,6 +78,8 @@ public interface ShoppingCouponLocalService {
 		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon)
 		throws com.liferay.portal.SystemException;
 
+	public void init();
+
 	public com.liferay.portlet.shopping.model.ShoppingCoupon addCoupon(
 		long userId, long plid, java.lang.String code, boolean autoCode,
 		java.lang.String name, java.lang.String description,

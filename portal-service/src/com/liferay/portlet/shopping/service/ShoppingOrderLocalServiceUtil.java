@@ -109,6 +109,12 @@ public class ShoppingOrderLocalServiceUtil {
 		return shoppingOrderLocalService.updateShoppingOrder(shoppingOrder);
 	}
 
+	public static void init() {
+		ShoppingOrderLocalService shoppingOrderLocalService = ShoppingOrderLocalServiceFactory.getService();
+
+		shoppingOrderLocalService.init();
+	}
+
 	public static void completeOrder(java.lang.String number,
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
 		double ppPaymentGross, java.lang.String ppReceiverEmail,

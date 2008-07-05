@@ -49,6 +49,8 @@ package com.liferay.portal.service;
  *
  */
 public interface LayoutTemplateLocalService {
+	public void init();
+
 	public java.lang.String getContent(java.lang.String layoutTemplateId,
 		boolean standard, java.lang.String themeId)
 		throws com.liferay.portal.SystemException;

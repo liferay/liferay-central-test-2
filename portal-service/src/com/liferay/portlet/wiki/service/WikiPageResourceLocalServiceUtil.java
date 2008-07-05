@@ -109,6 +109,12 @@ public class WikiPageResourceLocalServiceUtil {
 		return wikiPageResourceLocalService.updateWikiPageResource(wikiPageResource);
 	}
 
+	public static void init() {
+		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
+
+		wikiPageResourceLocalService.init();
+	}
+
 	public static void deletePageResource(long nodeId, java.lang.String title)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

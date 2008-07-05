@@ -78,6 +78,8 @@ public interface PluginSettingLocalService {
 		com.liferay.portal.model.PluginSetting pluginSetting)
 		throws com.liferay.portal.SystemException;
 
+	public void init();
+
 	public void checkPermission(long userId, java.lang.String pluginId,
 		java.lang.String pluginType) throws com.liferay.portal.PortalException;
 

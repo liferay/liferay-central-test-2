@@ -107,4 +107,10 @@ public class TagsSourceLocalServiceUtil {
 
 		return tagsSourceLocalService.updateTagsSource(tagsSource);
 	}
+
+	public static void init() {
+		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+
+		tagsSourceLocalService.init();
+	}
 }

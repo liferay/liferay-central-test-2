@@ -49,6 +49,8 @@ package com.liferay.portlet.social.service;
  *
  */
 public interface SocialActivityInterpreterLocalService {
+	public void init();
+
 	public void addActivityInterpreter(
 		com.liferay.portlet.social.model.SocialActivityInterpreter activityInterpreter);
 

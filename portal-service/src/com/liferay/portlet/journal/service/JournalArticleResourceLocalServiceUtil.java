@@ -109,6 +109,12 @@ public class JournalArticleResourceLocalServiceUtil {
 		return journalArticleResourceLocalService.updateJournalArticleResource(journalArticleResource);
 	}
 
+	public static void init() {
+		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
+
+		journalArticleResourceLocalService.init();
+	}
+
 	public static void deleteArticleResource(long groupId,
 		java.lang.String articleId)
 		throws com.liferay.portal.PortalException,

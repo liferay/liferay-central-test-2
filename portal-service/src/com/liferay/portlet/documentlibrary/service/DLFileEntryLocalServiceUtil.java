@@ -108,6 +108,12 @@ public class DLFileEntryLocalServiceUtil {
 		return dlFileEntryLocalService.updateDLFileEntry(dlFileEntry);
 	}
 
+	public static void init() {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
+		dlFileEntryLocalService.init();
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		long userId, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,

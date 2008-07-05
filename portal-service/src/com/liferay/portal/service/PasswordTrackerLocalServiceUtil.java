@@ -109,6 +109,12 @@ public class PasswordTrackerLocalServiceUtil {
 		return passwordTrackerLocalService.updatePasswordTracker(passwordTracker);
 	}
 
+	public static void init() {
+		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
+
+		passwordTrackerLocalService.init();
+	}
+
 	public static void deletePasswordTrackers(long userId)
 		throws com.liferay.portal.SystemException {
 		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();

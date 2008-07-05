@@ -109,6 +109,12 @@ public class AnnouncementsDeliveryLocalServiceUtil {
 		return announcementsDeliveryLocalService.updateAnnouncementsDelivery(announcementsDelivery);
 	}
 
+	public static void init() {
+		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getService();
+
+		announcementsDeliveryLocalService.init();
+	}
+
 	public static void deleteDeliveries(long userId)
 		throws com.liferay.portal.SystemException {
 		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getService();

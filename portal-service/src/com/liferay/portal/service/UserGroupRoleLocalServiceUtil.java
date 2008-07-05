@@ -110,6 +110,12 @@ public class UserGroupRoleLocalServiceUtil {
 		return userGroupRoleLocalService.updateUserGroupRole(userGroupRole);
 	}
 
+	public static void init() {
+		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
+
+		userGroupRoleLocalService.init();
+	}
+
 	public static void addUserGroupRoles(long userId, long groupId,
 		long[] roleIds)
 		throws com.liferay.portal.PortalException,

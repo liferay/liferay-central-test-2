@@ -108,6 +108,12 @@ public class TagsEntryLocalServiceUtil {
 		return tagsEntryLocalService.updateTagsEntry(tagsEntry);
 	}
 
+	public static void init() {
+		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
+		tagsEntryLocalService.init();
+	}
+
 	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
 		long userId, java.lang.String name)
 		throws com.liferay.portal.PortalException,

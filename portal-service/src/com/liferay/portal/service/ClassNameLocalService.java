@@ -76,6 +76,8 @@ public interface ClassNameLocalService {
 		com.liferay.portal.model.ClassName className)
 		throws com.liferay.portal.SystemException;
 
+	public void init();
+
 	public void checkClassNames() throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ClassName getClassName(

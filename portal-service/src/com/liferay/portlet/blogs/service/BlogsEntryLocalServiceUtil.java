@@ -108,6 +108,12 @@ public class BlogsEntryLocalServiceUtil {
 		return blogsEntryLocalService.updateBlogsEntry(blogsEntry);
 	}
 
+	public static void init() {
+		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
+
+		blogsEntryLocalService.init();
+	}
+
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
 		long userId, long plid, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,

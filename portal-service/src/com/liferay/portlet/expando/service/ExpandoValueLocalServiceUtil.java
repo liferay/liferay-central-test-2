@@ -109,6 +109,12 @@ public class ExpandoValueLocalServiceUtil {
 		return expandoValueLocalService.updateExpandoValue(expandoValue);
 	}
 
+	public static void init() {
+		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
+
+		expandoValueLocalService.init();
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoValue addValue(
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, boolean data)

@@ -79,6 +79,8 @@ public interface UserGroupRoleLocalService {
 		com.liferay.portal.model.UserGroupRole userGroupRole)
 		throws com.liferay.portal.SystemException;
 
+	public void init();
+
 	public void addUserGroupRoles(long userId, long groupId, long[] roleIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

@@ -109,6 +109,12 @@ public class AnnouncementsFlagLocalServiceUtil {
 		return announcementsFlagLocalService.updateAnnouncementsFlag(announcementsFlag);
 	}
 
+	public static void init() {
+		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
+
+		announcementsFlagLocalService.init();
+	}
+
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag addFlag(
 		long userId, long entryId, int value)
 		throws com.liferay.portal.SystemException {

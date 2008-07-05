@@ -108,6 +108,12 @@ public class PollsVoteLocalServiceUtil {
 		return pollsVoteLocalService.updatePollsVote(pollsVote);
 	}
 
+	public static void init() {
+		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
+
+		pollsVoteLocalService.init();
+	}
+
 	public static com.liferay.portlet.polls.model.PollsVote addVote(
 		long userId, long questionId, long choiceId)
 		throws com.liferay.portal.PortalException,

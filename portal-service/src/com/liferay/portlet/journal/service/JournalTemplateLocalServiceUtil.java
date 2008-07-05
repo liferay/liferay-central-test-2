@@ -109,6 +109,12 @@ public class JournalTemplateLocalServiceUtil {
 		return journalTemplateLocalService.updateJournalTemplate(journalTemplate);
 	}
 
+	public static void init() {
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+
+		journalTemplateLocalService.init();
+	}
+
 	public static com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		long userId, java.lang.String templateId, boolean autoTemplateId,
 		long plid, java.lang.String structureId, java.lang.String name,

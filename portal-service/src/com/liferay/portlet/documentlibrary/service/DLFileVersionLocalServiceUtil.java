@@ -109,6 +109,12 @@ public class DLFileVersionLocalServiceUtil {
 		return dlFileVersionLocalService.updateDLFileVersion(dlFileVersion);
 	}
 
+	public static void init() {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+
+		dlFileVersionLocalService.init();
+	}
+
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getFileVersions(
 		long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException {

@@ -108,6 +108,12 @@ public class DLFolderLocalServiceUtil {
 		return dlFolderLocalService.updateDLFolder(dlFolder);
 	}
 
+	public static void init() {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		dlFolderLocalService.init();
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
 		long userId, long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,

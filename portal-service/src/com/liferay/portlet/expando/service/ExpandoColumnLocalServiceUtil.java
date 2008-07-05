@@ -109,6 +109,12 @@ public class ExpandoColumnLocalServiceUtil {
 		return expandoColumnLocalService.updateExpandoColumn(expandoColumn);
 	}
 
+	public static void init() {
+		ExpandoColumnLocalService expandoColumnLocalService = ExpandoColumnLocalServiceFactory.getService();
+
+		expandoColumnLocalService.init();
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoColumn addColumn(
 		long tableId, java.lang.String name, int type)
 		throws com.liferay.portal.PortalException,

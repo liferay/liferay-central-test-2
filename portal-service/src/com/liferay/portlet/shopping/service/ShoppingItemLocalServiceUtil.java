@@ -109,6 +109,12 @@ public class ShoppingItemLocalServiceUtil {
 		return shoppingItemLocalService.updateShoppingItem(shoppingItem);
 	}
 
+	public static void init() {
+		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
+
+		shoppingItemLocalService.init();
+	}
+
 	public static void addBookItems(long userId, long categoryId,
 		java.lang.String[] isbns)
 		throws com.liferay.portal.PortalException,

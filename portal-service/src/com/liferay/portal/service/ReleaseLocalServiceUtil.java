@@ -106,6 +106,12 @@ public class ReleaseLocalServiceUtil {
 		return releaseLocalService.updateRelease(release);
 	}
 
+	public static void init() {
+		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
+
+		releaseLocalService.init();
+	}
+
 	public static int getBuildNumberOrCreate()
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

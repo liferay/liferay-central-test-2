@@ -109,6 +109,12 @@ public class BookmarksFolderLocalServiceUtil {
 		return bookmarksFolderLocalService.updateBookmarksFolder(bookmarksFolder);
 	}
 
+	public static void init() {
+		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
+
+		bookmarksFolderLocalService.init();
+	}
+
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
 		long userId, long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,

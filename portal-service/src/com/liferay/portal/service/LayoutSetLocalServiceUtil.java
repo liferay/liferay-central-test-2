@@ -108,6 +108,12 @@ public class LayoutSetLocalServiceUtil {
 		return layoutSetLocalService.updateLayoutSet(layoutSet);
 	}
 
+	public static void init() {
+		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
+
+		layoutSetLocalService.init();
+	}
+
 	public static com.liferay.portal.model.LayoutSet addLayoutSet(
 		long groupId, boolean privateLayout)
 		throws com.liferay.portal.PortalException,

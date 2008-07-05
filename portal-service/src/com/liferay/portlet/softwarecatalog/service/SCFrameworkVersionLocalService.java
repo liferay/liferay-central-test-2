@@ -78,6 +78,8 @@ public interface SCFrameworkVersionLocalService {
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion)
 		throws com.liferay.portal.SystemException;
 
+	public void init();
+
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion addFrameworkVersion(
 		long userId, long plid, java.lang.String name, java.lang.String url,
 		boolean active, int priority, boolean addCommunityPermissions,

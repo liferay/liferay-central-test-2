@@ -78,6 +78,8 @@ public interface ShoppingItemFieldLocalService {
 		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField)
 		throws com.liferay.portal.SystemException;
 
+	public void init();
+
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> getItemFields(
 		long itemId) throws com.liferay.portal.SystemException;
 }

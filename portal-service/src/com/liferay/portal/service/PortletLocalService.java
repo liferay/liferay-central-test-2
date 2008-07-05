@@ -76,6 +76,8 @@ public interface PortletLocalService {
 		com.liferay.portal.model.Portlet portlet)
 		throws com.liferay.portal.SystemException;
 
+	public void init();
+
 	public void destroyPortlet(com.liferay.portal.model.Portlet portlet);
 
 	public com.liferay.portal.model.PortletCategory getEARDisplay(

@@ -108,6 +108,12 @@ public class MBThreadLocalServiceUtil {
 		return mbThreadLocalService.updateMBThread(mbThread);
 	}
 
+	public static void init() {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		mbThreadLocalService.init();
+	}
+
 	public static void deleteThread(long threadId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

@@ -109,6 +109,12 @@ public class SCProductVersionLocalServiceUtil {
 		return scProductVersionLocalService.updateSCProductVersion(scProductVersion);
 	}
 
+	public static void init() {
+		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
+
+		scProductVersionLocalService.init();
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion addProductVersion(
 		long userId, long productEntryId, java.lang.String version,
 		java.lang.String changeLog, java.lang.String downloadPageURL,

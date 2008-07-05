@@ -109,6 +109,12 @@ public class JournalArticleImageLocalServiceUtil {
 		return journalArticleImageLocalService.updateJournalArticleImage(journalArticleImage);
 	}
 
+	public static void init() {
+		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
+
+		journalArticleImageLocalService.init();
+	}
+
 	public static void addArticleImageId(long articleImageId, long groupId,
 		java.lang.String articleId, double version, java.lang.String elName,
 		java.lang.String languageId)

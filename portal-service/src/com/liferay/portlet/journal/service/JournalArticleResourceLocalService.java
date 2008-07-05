@@ -78,6 +78,8 @@ public interface JournalArticleResourceLocalService {
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource)
 		throws com.liferay.portal.SystemException;
 
+	public void init();
+
 	public void deleteArticleResource(long groupId, java.lang.String articleId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

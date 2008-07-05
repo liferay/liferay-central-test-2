@@ -78,6 +78,8 @@ public interface AnnouncementsDeliveryLocalService {
 		com.liferay.portlet.announcements.model.AnnouncementsDelivery announcementsDelivery)
 		throws com.liferay.portal.SystemException;
 
+	public void init();
+
 	public void deleteDeliveries(long userId)
 		throws com.liferay.portal.SystemException;
 

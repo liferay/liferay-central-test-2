@@ -78,6 +78,8 @@ public interface OrganizationLocalService {
 		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.SystemException;
 
+	public void init();
+
 	public void addGroupOrganizations(long groupId, long[] organizationIds)
 		throws com.liferay.portal.SystemException;
 

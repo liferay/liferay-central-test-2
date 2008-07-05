@@ -108,6 +108,12 @@ public class CalEventLocalServiceUtil {
 		return calEventLocalService.updateCalEvent(calEvent);
 	}
 
+	public static void init() {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
+		calEventLocalService.init();
+	}
+
 	public static com.liferay.portlet.calendar.model.CalEvent addEvent(
 		long userId, long plid, java.lang.String title,
 		java.lang.String description, int startDateMonth, int startDateDay,

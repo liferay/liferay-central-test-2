@@ -109,6 +109,12 @@ public class RatingsEntryLocalServiceUtil {
 		return ratingsEntryLocalService.updateRatingsEntry(ratingsEntry);
 	}
 
+	public static void init() {
+		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
+
+		ratingsEntryLocalService.init();
+	}
+
 	public static void deleteEntry(long userId, java.lang.String className,
 		long classPK)
 		throws com.liferay.portal.PortalException,

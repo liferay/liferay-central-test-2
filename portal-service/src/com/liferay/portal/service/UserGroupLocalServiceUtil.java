@@ -108,6 +108,12 @@ public class UserGroupLocalServiceUtil {
 		return userGroupLocalService.updateUserGroup(userGroup);
 	}
 
+	public static void init() {
+		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
+
+		userGroupLocalService.init();
+	}
+
 	public static void addGroupUserGroups(long groupId, long[] userGroupIds)
 		throws com.liferay.portal.SystemException {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();

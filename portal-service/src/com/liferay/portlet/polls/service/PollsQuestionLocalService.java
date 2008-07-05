@@ -78,6 +78,8 @@ public interface PollsQuestionLocalService {
 		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion)
 		throws com.liferay.portal.SystemException;
 
+	public void init();
+
 	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
 		long userId, long plid, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,

@@ -76,6 +76,8 @@ public interface LayoutSetLocalService {
 		com.liferay.portal.model.LayoutSet layoutSet)
 		throws com.liferay.portal.SystemException;
 
+	public void init();
+
 	public com.liferay.portal.model.LayoutSet addLayoutSet(long groupId,
 		boolean privateLayout)
 		throws com.liferay.portal.PortalException,

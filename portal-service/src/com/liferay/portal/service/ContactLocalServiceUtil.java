@@ -105,4 +105,10 @@ public class ContactLocalServiceUtil {
 
 		return contactLocalService.updateContact(contact);
 	}
+
+	public static void init() {
+		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
+		contactLocalService.init();
+	}
 }

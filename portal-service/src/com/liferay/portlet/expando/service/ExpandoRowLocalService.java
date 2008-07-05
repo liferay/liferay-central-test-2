@@ -78,6 +78,8 @@ public interface ExpandoRowLocalService {
 		com.liferay.portlet.expando.model.ExpandoRow expandoRow)
 		throws com.liferay.portal.SystemException;
 
+	public void init();
+
 	public com.liferay.portlet.expando.model.ExpandoRow addRow(long tableId,
 		long classPK) throws com.liferay.portal.SystemException;
 

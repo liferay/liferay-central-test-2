@@ -76,6 +76,8 @@ public interface PermissionLocalService {
 		com.liferay.portal.model.Permission permission)
 		throws com.liferay.portal.SystemException;
 
+	public void init();
+
 	public com.liferay.portal.model.Permission addPermission(long companyId,
 		java.lang.String actionId, long resourceId)
 		throws com.liferay.portal.SystemException;

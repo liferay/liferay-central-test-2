@@ -109,6 +109,12 @@ public class ServiceComponentLocalServiceUtil {
 		return serviceComponentLocalService.updateServiceComponent(serviceComponent);
 	}
 
+	public static void init() {
+		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
+
+		serviceComponentLocalService.init();
+	}
+
 	public static com.liferay.portal.model.ServiceComponent updateServiceComponent(
 		javax.servlet.ServletContext servletContext,
 		java.lang.ClassLoader portletClassLoader,

@@ -109,6 +109,12 @@ public class SocialRelationLocalServiceUtil {
 		return socialRelationLocalService.updateSocialRelation(socialRelation);
 	}
 
+	public static void init() {
+		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
+
+		socialRelationLocalService.init();
+	}
+
 	public static com.liferay.portlet.social.model.SocialRelation addRelation(
 		long userId1, long userId2, int type)
 		throws com.liferay.portal.PortalException,

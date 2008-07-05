@@ -109,6 +109,12 @@ public class MBMessageFlagLocalServiceUtil {
 		return mbMessageFlagLocalService.updateMBMessageFlag(mbMessageFlag);
 	}
 
+	public static void init() {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
+		mbMessageFlagLocalService.init();
+	}
+
 	public static void addReadFlags(long userId,
 		java.util.List<com.liferay.portlet.messageboards.model.MBMessage> messages)
 		throws com.liferay.portal.PortalException,

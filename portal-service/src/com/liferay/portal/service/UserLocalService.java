@@ -76,6 +76,8 @@ public interface UserLocalService {
 		com.liferay.portal.model.User user)
 		throws com.liferay.portal.SystemException;
 
+	public void init();
+
 	public void addGroupUsers(long groupId, long[] userIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

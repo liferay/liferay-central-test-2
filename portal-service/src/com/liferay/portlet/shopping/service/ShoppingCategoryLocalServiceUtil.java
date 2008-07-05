@@ -109,6 +109,12 @@ public class ShoppingCategoryLocalServiceUtil {
 		return shoppingCategoryLocalService.updateShoppingCategory(shoppingCategory);
 	}
 
+	public static void init() {
+		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
+		shoppingCategoryLocalService.init();
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
 		long userId, long plid, long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,

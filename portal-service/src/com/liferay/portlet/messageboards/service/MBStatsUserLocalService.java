@@ -78,6 +78,8 @@ public interface MBStatsUserLocalService {
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
 		throws com.liferay.portal.SystemException;
 
+	public void init();
+
 	public void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 

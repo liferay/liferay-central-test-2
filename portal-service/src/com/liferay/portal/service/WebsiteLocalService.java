@@ -76,6 +76,8 @@ public interface WebsiteLocalService {
 		com.liferay.portal.model.Website website)
 		throws com.liferay.portal.SystemException;
 
+	public void init();
+
 	public com.liferay.portal.model.Website addWebsite(long userId,
 		java.lang.String className, long classPK, java.lang.String url,
 		int typeId, boolean primary)

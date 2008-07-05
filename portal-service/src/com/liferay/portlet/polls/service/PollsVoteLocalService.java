@@ -77,6 +77,8 @@ public interface PollsVoteLocalService {
 		com.liferay.portlet.polls.model.PollsVote pollsVote)
 		throws com.liferay.portal.SystemException;
 
+	public void init();
+
 	public com.liferay.portlet.polls.model.PollsVote addVote(long userId,
 		long questionId, long choiceId)
 		throws com.liferay.portal.PortalException,

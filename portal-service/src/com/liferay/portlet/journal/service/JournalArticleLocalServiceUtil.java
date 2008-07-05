@@ -109,6 +109,12 @@ public class JournalArticleLocalServiceUtil {
 		return journalArticleLocalService.updateJournalArticle(journalArticle);
 	}
 
+	public static void init() {
+		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
+
+		journalArticleLocalService.init();
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
 		long userId, java.lang.String articleId, boolean autoArticleId,
 		long plid, java.lang.String title, java.lang.String description,

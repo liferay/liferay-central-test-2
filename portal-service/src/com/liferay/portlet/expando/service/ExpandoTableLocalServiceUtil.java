@@ -109,6 +109,12 @@ public class ExpandoTableLocalServiceUtil {
 		return expandoTableLocalService.updateExpandoTable(expandoTable);
 	}
 
+	public static void init() {
+		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
+
+		expandoTableLocalService.init();
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoTable addDefaultTable(
 		java.lang.String className)
 		throws com.liferay.portal.PortalException,

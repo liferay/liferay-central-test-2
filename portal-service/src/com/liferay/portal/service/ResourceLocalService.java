@@ -76,6 +76,8 @@ public interface ResourceLocalService {
 		com.liferay.portal.model.Resource resource)
 		throws com.liferay.portal.SystemException;
 
+	public void init();
+
 	public void addModelResources(long companyId, long groupId, long userId,
 		java.lang.String name, long primKey,
 		java.lang.String[] communityPermissions,

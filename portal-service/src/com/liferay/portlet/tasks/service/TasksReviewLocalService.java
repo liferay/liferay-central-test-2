@@ -78,6 +78,8 @@ public interface TasksReviewLocalService {
 		com.liferay.portlet.tasks.model.TasksReview tasksReview)
 		throws com.liferay.portal.SystemException;
 
+	public void init();
+
 	public com.liferay.portlet.tasks.model.TasksReview addReview(long userId,
 		long proposalId, long assignedByUserId, int stage)
 		throws com.liferay.portal.PortalException,

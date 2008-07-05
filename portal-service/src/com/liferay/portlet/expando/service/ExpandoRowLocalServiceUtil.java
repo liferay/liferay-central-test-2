@@ -108,6 +108,12 @@ public class ExpandoRowLocalServiceUtil {
 		return expandoRowLocalService.updateExpandoRow(expandoRow);
 	}
 
+	public static void init() {
+		ExpandoRowLocalService expandoRowLocalService = ExpandoRowLocalServiceFactory.getService();
+
+		expandoRowLocalService.init();
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoRow addRow(
 		long tableId, long classPK) throws com.liferay.portal.SystemException {
 		ExpandoRowLocalService expandoRowLocalService = ExpandoRowLocalServiceFactory.getService();

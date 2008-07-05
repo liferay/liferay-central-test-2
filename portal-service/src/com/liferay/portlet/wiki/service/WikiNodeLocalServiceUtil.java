@@ -108,6 +108,12 @@ public class WikiNodeLocalServiceUtil {
 		return wikiNodeLocalService.updateWikiNode(wikiNode);
 	}
 
+	public static void init() {
+		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
+		wikiNodeLocalService.init();
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiNode addNode(long userId,
 		long plid, java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)

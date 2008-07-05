@@ -109,6 +109,12 @@ public class JournalStructureLocalServiceUtil {
 		return journalStructureLocalService.updateJournalStructure(journalStructure);
 	}
 
+	public static void init() {
+		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
+
+		journalStructureLocalService.init();
+	}
+
 	public static com.liferay.portlet.journal.model.JournalStructure addStructure(
 		long userId, java.lang.String structureId, boolean autoStructureId,
 		long plid, java.lang.String name, java.lang.String description,

@@ -108,6 +108,12 @@ public class MBStatsUserLocalServiceUtil {
 		return mbStatsUserLocalService.updateMBStatsUser(mbStatsUser);
 	}
 
+	public static void init() {
+		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
+		mbStatsUserLocalService.init();
+	}
+
 	public static void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();

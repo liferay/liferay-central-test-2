@@ -108,6 +108,12 @@ public class PermissionLocalServiceUtil {
 		return permissionLocalService.updatePermission(permission);
 	}
 
+	public static void init() {
+		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
+		permissionLocalService.init();
+	}
+
 	public static com.liferay.portal.model.Permission addPermission(
 		long companyId, java.lang.String actionId, long resourceId)
 		throws com.liferay.portal.SystemException {

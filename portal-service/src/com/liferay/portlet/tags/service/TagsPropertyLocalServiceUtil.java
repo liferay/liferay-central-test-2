@@ -109,6 +109,12 @@ public class TagsPropertyLocalServiceUtil {
 		return tagsPropertyLocalService.updateTagsProperty(tagsProperty);
 	}
 
+	public static void init() {
+		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+
+		tagsPropertyLocalService.init();
+	}
+
 	public static com.liferay.portlet.tags.model.TagsProperty addProperty(
 		long userId, long entryId, java.lang.String key, java.lang.String value)
 		throws com.liferay.portal.PortalException,

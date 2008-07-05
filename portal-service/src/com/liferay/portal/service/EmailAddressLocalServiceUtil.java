@@ -109,6 +109,12 @@ public class EmailAddressLocalServiceUtil {
 		return emailAddressLocalService.updateEmailAddress(emailAddress);
 	}
 
+	public static void init() {
+		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
+		emailAddressLocalService.init();
+	}
+
 	public static com.liferay.portal.model.EmailAddress addEmailAddress(
 		long userId, java.lang.String className, long classPK,
 		java.lang.String address, int typeId, boolean primary)

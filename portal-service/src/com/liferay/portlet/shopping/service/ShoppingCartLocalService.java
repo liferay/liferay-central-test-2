@@ -78,6 +78,8 @@ public interface ShoppingCartLocalService {
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart)
 		throws com.liferay.portal.SystemException;
 
+	public void init();
+
 	public void deleteGroupCarts(long groupId)
 		throws com.liferay.portal.SystemException;
 

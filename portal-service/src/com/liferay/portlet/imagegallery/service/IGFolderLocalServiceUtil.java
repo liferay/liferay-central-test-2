@@ -108,6 +108,12 @@ public class IGFolderLocalServiceUtil {
 		return igFolderLocalService.updateIGFolder(igFolder);
 	}
 
+	public static void init() {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
+		igFolderLocalService.init();
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGFolder addFolder(
 		long userId, long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,

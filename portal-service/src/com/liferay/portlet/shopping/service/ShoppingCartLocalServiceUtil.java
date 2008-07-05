@@ -109,6 +109,12 @@ public class ShoppingCartLocalServiceUtil {
 		return shoppingCartLocalService.updateShoppingCart(shoppingCart);
 	}
 
+	public static void init() {
+		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
+
+		shoppingCartLocalService.init();
+	}
+
 	public static void deleteGroupCarts(long groupId)
 		throws com.liferay.portal.SystemException {
 		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();

@@ -109,6 +109,12 @@ public class OrganizationLocalServiceUtil {
 		return organizationLocalService.updateOrganization(organization);
 	}
 
+	public static void init() {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		organizationLocalService.init();
+	}
+
 	public static void addGroupOrganizations(long groupId,
 		long[] organizationIds) throws com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();

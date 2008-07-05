@@ -108,6 +108,12 @@ public class MBMessageLocalServiceUtil {
 		return mbMessageLocalService.updateMBMessage(mbMessage);
 	}
 
+	public static void init() {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		mbMessageLocalService.init();
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
 		long userId, java.lang.String userName, java.lang.String subject,
 		java.lang.String body)
