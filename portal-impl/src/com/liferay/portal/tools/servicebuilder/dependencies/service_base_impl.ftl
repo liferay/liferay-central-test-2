@@ -49,12 +49,10 @@ import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 	</#if>
 </#list>
 
-import org.springframework.beans.factory.InitializingBean;
-
 <#if sessionTypeName == "Local">
-	public abstract class ${entity.name}LocalServiceBaseImpl implements ${entity.name}LocalService, InitializingBean {
+	public abstract class ${entity.name}LocalServiceBaseImpl implements ${entity.name}LocalService {
 <#else>
-	public abstract class ${entity.name}ServiceBaseImpl extends PrincipalBean implements ${entity.name}Service, InitializingBean {
+	public abstract class ${entity.name}ServiceBaseImpl extends PrincipalBean implements ${entity.name}Service {
 </#if>
 
 <#if sessionTypeName == "Local" && entity.hasColumns()>
@@ -146,7 +144,7 @@ import org.springframework.beans.factory.InitializingBean;
 		</#if>
 	</#list>
 
-	public void afterPropertiesSet() {
+	public void init() {
 		<#list referenceList as tempEntity>
 			<#if entity.equals(tempEntity)>
 				<#if sessionTypeName == "" && tempEntity.hasLocalService()>
@@ -206,7 +204,7 @@ import org.springframework.beans.factory.InitializingBean;
 		</#if>
 	</#list>
 <#else>
-	public void afterPropertiesSet() {
+	public void init() {
 	}
 </#if>
 

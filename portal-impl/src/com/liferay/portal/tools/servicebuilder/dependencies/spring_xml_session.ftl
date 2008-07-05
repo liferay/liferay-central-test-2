@@ -1,4 +1,4 @@
-<bean id="${packagePath}.service.${entity.name}${sessionType}Service.impl" class="${packagePath}.service.impl.${entity.name}${sessionType}ServiceImpl" lazy-init="true" />
+<bean id="${packagePath}.service.${entity.name}${sessionType}Service.impl" class="${packagePath}.service.impl.${entity.name}${sessionType}ServiceImpl" lazy-init="true" init-method="init" />
 
 <#if entity.TXManager != "none">
 	<bean id="${packagePath}.service.${entity.name}${sessionType}Service.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
