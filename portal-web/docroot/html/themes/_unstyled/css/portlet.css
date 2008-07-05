@@ -40,22 +40,13 @@ body.portlet {
 .lfr-panel {
 }
 
-.lfr-panel .portlet, .lfr-panel .portlet-topper, .lfr-panel .portlet-content, .lfr-panel .portlet-title {
-}
-
-.lfr-panel .portlet-icons {
-}
-
-.lfr-panel .portlet-topper {
-}
-
 .lfr-panel .portlet-title {
 }
 
-.lfr-panel .portlet {
+.lfr-panel #content-wrapper {
 }
 
-.lfr-panel .portlet-content {
+.lfr-panel .lfr-add-content h2 span {
 }
 
 /* ---------- Standard styles defined in the JSR 168 ---------- */

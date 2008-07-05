@@ -65,37 +65,21 @@ body.portlet {
 /* ---------- Panel Page ---------- */
 
 .lfr-panel {
-	margin-top: 10px;
-}
-
-.lfr-panel .portlet, .lfr-panel .portlet-topper, .lfr-panel .portlet-content, .lfr-panel .portlet-title {
-	background: none;
-}
-
-.lfr-panel .portlet-icons {
-	margin: 0;
-	top: 0;
-}
-
-.lfr-panel .portlet-topper {
-	border-bottom: 2px solid #828F95;
-	margin-right: 0;
-	padding-bottom: 5px;
-	padding-right: 0;
+	margin: 0 auto;
+	width: 90%;
 }
 
 .lfr-panel .portlet-title {
 	font-size: 13px;
-	padding: 0;
 }
 
-.lfr-panel .portlet {
+.lfr-panel #content-wrapper {
 	margin: 0;
-	padding: 0;
+	width: auto;
 }
 
-.lfr-panel .portlet-content {
-	padding: 15px 0;
+.lfr-panel .lfr-add-content h2 span {
+	background-color: #D3DADD;
 }
 
 /* ---------- Standard styles defined in the JSR 168 ---------- */
