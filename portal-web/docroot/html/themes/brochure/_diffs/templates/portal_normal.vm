@@ -14,7 +14,7 @@
 
 	#if ($company_logo != "")
 		<style type="text/css">
-			#banner .logo {
+			#banner .logo a {
 				background: url($company_logo) no-repeat;
 				height: ${company_logo_height}px;
 				width: ${company_logo_width}px;

@@ -5,6 +5,7 @@ body {
 }
 
 #wrapper {
+	margin: 0 auto;
 	width: 825px;
 }
 
@@ -17,6 +18,7 @@ body {
 	margin: 0 3px;
 	margin-top: -5px;
 	padding: 15px 5px 5px;
+	width: auto;
 }
 
 #content-wrapper.login {
@@ -51,18 +53,26 @@ font {
 }
 
 #banner .logo {
-	background: url() no-repeat;
+	background: transparent url(../images/common/logo_bg.png) no-repeat 0 0;
 	display: block;
 	float: none;
 	font-size: 0;
-	margin-bottom: 20px;
-	margin-left: 0.5em;
 	padding: 0;
-	text-indent: -9999em;
+}
+
+#banner h1.logo {
+	left: auto;
+	margin-bottom: 0;
+	margin-left: 0.5em;
+	margin-top: 0;
+	position: relative;
 }
 
 #banner .logo a {
+	background: url(../images/common/logo_bg.png) no-repeat;
+	display: block;
 	text-decoration: none;
+	text-indent: -9999em;
 }
 
 .js.ie #banner {
@@ -77,10 +87,11 @@ font {
 
 #navigation {
 	background: url(../images/navigation/bg.png) no-repeat 0 0;
+	border-top: none;
 	bottom: 0.5em;
 	height: 25px;
 	left: 5px;
-	margin: 1em auto 0.5em;
+	margin: 0 auto 0.5em;
 	padding: 0;
 	position: relative;
 	width: 99%;
@@ -103,6 +114,7 @@ font {
 
 #navigation li {
 	background: none;
+	border: none;
 	display: inline;
 	float: left;
 	margin: 0 0.89em;
@@ -158,12 +170,39 @@ font {
 	padding-top: 5px;
 }
 
+/* ---------- Application styles ---------- */
+
+.ui-wrapper, .ui-dialog, #ui-datepicker-div, .ui-datepicker-inline, #content-wrapper #layout-grid.dragging .lfr-column, .ui-resizable-proxy {
+	border-color: #12558E;
+}
+
+.results-header, .navigation-sort-helper, .ui-datepicker-links, .ui-datepicker-header select, .ui-datepicker-days-cell a:hover {
+	background-color: #356792;
+}
+
+.ui-datepicker .ui-datepicker-days-row {
+	color: #356792;
+}
+
+.ui-datepicker-current-day a, .ui-colorpicker-current {
+	border-color: #356792;
+}
+
+.lfr-actions .lfr-trigger li a:hover {
+	background-color: #12558E;
+}
+
 /* ---------- Portlet ---------- */
 
 .portlet {
 	background: transparent;
+	border: none;
 	margin: 0 0 10px;
 	padding: 0;
+}
+
+.portlet.ui-proxy {
+	border: 1px dotted #12558E;
 }
 
 .portlet .portlet-topper {
@@ -224,11 +263,11 @@ font {
 
 /* ---------- Tabs ---------- */
 
-.tabs {
+.ui-tabs {
 	border-bottom: 1px solid #2B5A79;
 }
 
-.tabs li {
+.ui-tabs li {
 	background: url(../images/common/tabs_bg.png) no-repeat 0 -100px;
 	display: inline;
 	float: left;
@@ -239,62 +278,80 @@ font {
 	text-decoration: none;
 }
 
-.tabs li a, .tabs li span {
+.ui-tabs li a, .ui-tabs li span, .ui-tabs li a:hover, .ui-tabs li span:hover {
 	background: url(../images/common/tabs_bg.png) no-repeat 100% -300px;
+	border: none;
 	color: #fff;
 	display: block;
 	float: left;
 	padding: 0.35em 1em 0;
 	text-decoration: none;
+	top: 0;
 }
 
-.tabs li.current {
+.ui-tabs li.current {
 	background: url(../images/common/tabs_bg.png) no-repeat 0 0;
 	border-right: 1px solid #5E90BB;
 	font-weight: bold;
 	top: 0.05em;
 }
 
-.tabs li.current a, .tabs li.current span {
+.ui-tabs li.current a, .ui-tabs li.current span {
 	background: url(../images/custom/tab_marker.gif) no-repeat 50% bottom;
+	border: none;
 	border-right: 1px solid #C3E3FF;
 	color: #fff;
 	margin-top: 1px;
 	padding: 0.15em 1em;
 }
 
-.tabs li a:hover {
+.ui-tabs li a:hover, .ui-tabs li span:hover, .ui-tabs li.current:hover, .ui-tabs li.current a:hover  {
+	background-color: transparent;
 	color: #ABCBE7;
 }
 
-.ie .tabs li {
+.ie .ui-tabs li {
 	line-height: 2.2;
 }
 
-.ie .tabs li.current a, .ie .tabs li.current span {
+.ie .ui-tabs li.current a, .ie .ui-tabs li.current span {
 	padding: 0.05em 1em;
 }
 
-.safari .tabs li {
+.safari .ui-tabs li {
 	line-height: 2.35;
 }
 
-.safari .tabs li a, .safari .tabs li span {
+.safari .ui-tabs li a, .safari .ui-tabs li span {
 	padding: 0.25em 1em 0;
 }
 
 /* ---------- Dock with Javascript ---------- */
 
+.js .lfr-dock.interactive-mode {
+	right: 10px;
+}
+
 .js .lfr-dock.interactive-mode h2 {
-	background-position: 100% -25px;
 	font-size: 1.1em;
 }
 
 .js .lfr-dock.interactive-mode h2 span {
-	color: #0C3163;
 	font-size: 1.1em;
 	padding: 0.4em 0.5em 0.35em 2.5em;
 	text-align: left;
+}
+
+.js .interactive-mode li:hover, .js .interactive-mode .my-places li:hover {
+	background-color: #12558E;
+}
+
+.js .interactive-mode li:hover a:hover, .js .interactive-mode li:hover > a, .js .interactive-mode li:hover > h3 > a {
+	background-color: #12558E;
+}
+
+.ie6 .js .interactive-mode li a:hover {
+	background-color: #12558E;
 }
 
 .ie.js .lfr-dock.interactive-mode h2 {
