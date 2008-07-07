@@ -6173,7 +6173,8 @@ Liferay.Popup = function(options) {
 		},
 		dragStart: function(e, ui) {
 			if (!options.dragHelper) {
-				var dialog = jQuery(this).parents('.ui-dialog:first'), target = jQuery(e.target);
+				var dialog = jQuery(this).parents('.ui-dialog:first');
+				var target = jQuery(e.target);
 
 				checkExternalClick(target);
 				dialog.css('visibility', 'hidden');
@@ -6205,8 +6206,12 @@ Liferay.Popup = function(options) {
 
 		open: function(e, ui) {
 			if (!options.dragHelper) {
-				var dialog = jQuery(this).parents('.ui-dialog:first');
-
+				var dialog = jQuery(this).parents('.ui-dialog:first'), target = jQuery(this);
+				
+				dialog.click(function() {
+					checkExternalClick(target);
+				});
+				
 				cacheDialogHelper(dialog);
 			}
 		}
