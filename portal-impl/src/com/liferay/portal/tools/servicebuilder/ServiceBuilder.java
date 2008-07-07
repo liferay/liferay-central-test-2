@@ -183,7 +183,6 @@ public class ServiceBuilder {
 				"\t-Dservice.sql.sequences.file=sequences.sql\n" +
 				"\t-Dservice.bean.locator.util.package=com.liferay.portal.kernel.bean\n" +
 				"\t-Dservice.props.util.package=com.liferay.portal.util\n" +
-				"\t-Dservice.spring.context.package=com.liferay.portal.spring.context\n" +
 				"\n" +
 				"You can also customize the generated code by overriding the default templates with these optional properties:\n" +
 				"\n" +

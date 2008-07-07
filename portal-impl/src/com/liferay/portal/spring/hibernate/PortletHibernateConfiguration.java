@@ -22,7 +22,7 @@
 
 package com.liferay.portal.spring.hibernate;
 
-import com.liferay.portal.kernel.portlet.PortletClassLoaderThreadLocal;
+import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsUtil;
 
@@ -49,7 +49,7 @@ public class PortletHibernateConfiguration
 
 		try {
 			ClassLoader classLoader =
-				PortletClassLoaderThreadLocal.getClassLoader();
+				PortletClassLoaderUtil.getClassLoader();
 
 			InputStream is = classLoader.getResourceAsStream(
 				"META-INF/portlet-hbm.xml");

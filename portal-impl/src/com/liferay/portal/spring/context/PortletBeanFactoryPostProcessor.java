@@ -22,7 +22,7 @@
 
 package com.liferay.portal.spring.context;
 
-import com.liferay.portal.kernel.portlet.PortletClassLoaderThreadLocal;
+import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
@@ -43,7 +43,7 @@ public class PortletBeanFactoryPostProcessor
 
 		beanFactory.setBeanClassLoader(
 			new PortletBeanClassLoader(
-				PortletClassLoaderThreadLocal.getClassLoader(),
+				PortletClassLoaderUtil.getClassLoader(),
 				PortalClassLoaderUtil.getClassLoader()));
 	}
 

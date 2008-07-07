@@ -23,13 +23,13 @@
 package com.liferay.portal.kernel.portlet;
 
 /**
- * <a href="PortletClassLoaderThreadLocal.java.html"><b><i>View Source</i></b>
+ * <a href="PortletClassLoaderUtil.java.html"><b><i>View Source</i></b>
  * </a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletClassLoaderThreadLocal {
+public class PortletClassLoaderUtil {
 
 	public static ClassLoader getClassLoader() {
 		return _threadLocal.get();

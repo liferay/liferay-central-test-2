@@ -24,7 +24,7 @@ package com.liferay.portal.spring.context;
 
 import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.BeanLocator;
-import com.liferay.portal.kernel.portlet.PortletClassLoaderThreadLocal;
+import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
 
 import java.lang.reflect.Method;
 
@@ -58,7 +58,7 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 		try {
 			Class<?> beanLocatorUtilClass = Class.forName(
 				"com.liferay.util.bean.BeanLocatorUtil", true,
-				PortletClassLoaderThreadLocal.getClassLoader());
+				PortletClassLoaderUtil.getClassLoader());
 
 			Method setBeanLocatorMethod = beanLocatorUtilClass.getMethod(
 				"setBeanLocator", new Class[] {BeanLocator.class});
