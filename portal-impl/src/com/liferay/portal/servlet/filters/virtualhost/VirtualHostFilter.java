@@ -69,15 +69,15 @@ import javax.servlet.http.HttpSession;
  */
 public class VirtualHostFilter extends BasePortalFilter {
 
-	public void init(FilterConfig config) {
-		super.init(config);
+	public void init(FilterConfig filterConfig) {
+		super.init(filterConfig);
 
-		_servletContext = config.getServletContext();
+		_servletContext = filterConfig.getServletContext();
 	}
 
 	public void doFilter(
 			ServletRequest servletRequest, ServletResponse servletResponse,
-			FilterChain chain)
+			FilterChain filterChain)
 		throws IOException, ServletException {
 
 		if (_log.isDebugEnabled()) {
@@ -126,7 +126,8 @@ public class VirtualHostFilter extends BasePortalFilter {
 		}
 
 		if (!isFilterEnabled()) {
-			processFilter(VirtualHostFilter.class, request, response, chain);
+			processFilter(
+				VirtualHostFilter.class, request, response, filterChain);
 
 			return;
 		}
@@ -138,7 +139,8 @@ public class VirtualHostFilter extends BasePortalFilter {
 		}
 
 		if (!isValidRequestURL(requestURL)) {
-			processFilter(VirtualHostFilter.class, request, response, chain);
+			processFilter(
+				VirtualHostFilter.class, request, response, filterChain);
 
 			return;
 		}
@@ -162,7 +164,8 @@ public class VirtualHostFilter extends BasePortalFilter {
 		}
 
 		if (!isValidFriendlyURL(friendlyURL)) {
-			processFilter(VirtualHostFilter.class, request, response, chain);
+			processFilter(
+				VirtualHostFilter.class, request, response, filterChain);
 
 			return;
 		}
@@ -224,7 +227,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 			}
 		}
 
-		processFilter(VirtualHostFilter.class, request, response, chain);
+		processFilter(VirtualHostFilter.class, request, response, filterChain);
 	}
 
 	protected boolean isValidFriendlyURL(String friendlyURL) {
@@ -285,7 +288,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 	protected void processFilter(
 		HttpServletRequest request, HttpServletResponse response,
-		FilterChain chain) {
+		FilterChain filterChain) {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(VirtualHostFilter.class);

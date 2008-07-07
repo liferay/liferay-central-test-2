@@ -118,7 +118,7 @@ public class AutoLoginFilter extends BasePortalFilter {
 
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
-			FilterChain chain)
+			FilterChain filterChain)
 		throws IOException, ServletException {
 
 		HttpSession session = request.getSession();
@@ -130,7 +130,8 @@ public class AutoLoginFilter extends BasePortalFilter {
 				_log.debug("Ignore host " + host);
 			}
 
-			processFilter(AutoLoginFilter.class, request, response, chain);
+			processFilter(
+				AutoLoginFilter.class, request, response, filterChain);
 
 			return;
 		}
@@ -150,7 +151,8 @@ public class AutoLoginFilter extends BasePortalFilter {
 				_log.debug("Ignore path " + path);
 			}
 
-			processFilter(AutoLoginFilter.class, request, response, chain);
+			processFilter(
+				AutoLoginFilter.class, request, response, filterChain);
 
 			return;
 		}
@@ -194,7 +196,7 @@ public class AutoLoginFilter extends BasePortalFilter {
 			}
 		}
 
-		processFilter(AutoLoginFilter.class, request, response, chain);
+		processFilter(AutoLoginFilter.class, request, response, filterChain);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(AutoLoginFilter.class);

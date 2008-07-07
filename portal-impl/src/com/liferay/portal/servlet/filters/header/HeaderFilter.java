@@ -54,24 +54,24 @@ import javax.servlet.http.HttpSession;
  */
 public class HeaderFilter extends BasePortalFilter {
 
-	public void init(FilterConfig config) {
-		super.init(config);
+	public void init(FilterConfig filterConfig) {
+		super.init(filterConfig);
 
-		_config = config;
+		_filterConfig = filterConfig;
 		_timeZone = TimeZone.getTimeZone(_TIME_ZONE);
 	}
 
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
-			FilterChain chain)
+			FilterChain filterChain)
 		throws IOException, ServletException {
 
-		Enumeration<String> enu = _config.getInitParameterNames();
+		Enumeration<String> enu = _filterConfig.getInitParameterNames();
 
 		while (enu.hasMoreElements()) {
 			String name = enu.nextElement();
 
-			String value = _config.getInitParameter(name);
+			String value = _filterConfig.getInitParameter(name);
 
 			if (name.equals(_EXPIRES) && Validator.isNumber(value)) {
 				int seconds = GetterUtil.getInteger(value);
@@ -105,7 +105,7 @@ public class HeaderFilter extends BasePortalFilter {
 			}
 		}
 
-		processFilter(HeaderFilter.class, request, response, chain);
+		processFilter(HeaderFilter.class, request, response, filterChain);
 	}
 
 	private static final String _DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
@@ -114,7 +114,7 @@ public class HeaderFilter extends BasePortalFilter {
 
 	private static final String _TIME_ZONE = "GMT";
 
-	private FilterConfig _config;
+	private FilterConfig _filterConfig;
 	private TimeZone _timeZone;
 
 }

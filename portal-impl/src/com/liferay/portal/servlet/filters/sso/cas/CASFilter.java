@@ -107,7 +107,7 @@ public class CASFilter extends BaseFilter {
 
 	protected void processFilter(
 		HttpServletRequest request, HttpServletResponse response,
-		FilterChain chain) {
+		FilterChain filterChain) {
 
 		try {
 			long companyId = PortalUtil.getCompanyId(request);
@@ -131,11 +131,11 @@ public class CASFilter extends BaseFilter {
 				else {
 					Filter casFilter = getCASFilter(companyId);
 
-					casFilter.doFilter(request, response, chain);
+					casFilter.doFilter(request, response, filterChain);
 				}
 			}
 			else {
-				processFilter(CASFilter.class, request, response, chain);
+				processFilter(CASFilter.class, request, response, filterChain);
 			}
 		}
 		catch (Exception e) {

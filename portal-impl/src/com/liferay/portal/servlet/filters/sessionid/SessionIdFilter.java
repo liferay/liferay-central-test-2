@@ -46,13 +46,14 @@ public class SessionIdFilter extends BasePortalFilter {
 
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
-			FilterChain chain)
+			FilterChain filterChain)
 		throws IOException, ServletException {
 
 		SessionIdServletRequest sessionIdRequest = new SessionIdServletRequest(
 			request, response);
 
-		processFilter(SessionIdFilter.class, sessionIdRequest, response, chain);
+		processFilter(
+			SessionIdFilter.class, sessionIdRequest, response, filterChain);
 	}
 
 }

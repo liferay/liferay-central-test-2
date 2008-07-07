@@ -81,7 +81,7 @@ import org.apache.struts.tiles.TilesRequestProcessor;
 public class PortletRequestProcessor extends TilesRequestProcessor {
 
 	public static PortletRequestProcessor getInstance(
-			ActionServlet servlet, ModuleConfig config)
+			ActionServlet servlet, ModuleConfig moduleConfig)
 		throws ServletException {
 
 		try {
@@ -98,7 +98,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			PortletRequestProcessor portletReqProcessor =
 				(PortletRequestProcessor)constructor.newInstance(
 					new Object[] {
-						servlet, config
+						servlet, moduleConfig
 					}
 				);
 
@@ -107,7 +107,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		catch (Exception e) {
 			_log.error(e);
 
-			return new PortletRequestProcessor(servlet, config);
+			return new PortletRequestProcessor(servlet, moduleConfig);
 		}
 	}
 

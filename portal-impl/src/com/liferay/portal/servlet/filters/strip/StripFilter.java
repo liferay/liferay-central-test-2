@@ -98,7 +98,7 @@ public class StripFilter extends BasePortalFilter {
 
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
-			FilterChain chain)
+			FilterChain filterChain)
 		throws IOException, ServletException {
 
 		String completeURL = HttpUtil.getCompleteURL(request);
@@ -114,7 +114,8 @@ public class StripFilter extends BasePortalFilter {
 
 			StripResponse stripResponse = new StripResponse(response);
 
-			processFilter(StripFilter.class, request, stripResponse, chain);
+			processFilter(
+				StripFilter.class, request, stripResponse, filterChain);
 
 			String contentType = GetterUtil.getString(
 				stripResponse.getContentType());
@@ -280,7 +281,7 @@ public class StripFilter extends BasePortalFilter {
 				_log.debug("Not stripping " + completeURL);
 			}
 
-			processFilter(StripFilter.class, request, response, chain);
+			processFilter(StripFilter.class, request, response, filterChain);
 		}
 	}
 

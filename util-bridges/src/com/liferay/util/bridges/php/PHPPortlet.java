@@ -132,7 +132,7 @@ public class PHPPortlet extends GenericPortlet {
 		}
 	}
 
-	protected synchronized void initQuercus(ServletConfig config)
+	protected synchronized void initQuercus(ServletConfig servletConfig)
 		throws PortletException {
 
 		if (quercusServlet == null) {
@@ -142,19 +142,19 @@ public class PHPPortlet extends GenericPortlet {
 
 				Map<String, String> params = new HashMap<String, String>();
 
-				Enumeration<String> enu = config.getInitParameterNames();
+				Enumeration<String> enu = servletConfig.getInitParameterNames();
 
 				while (enu.hasMoreElements()) {
 					String name = enu.nextElement();
 
 					if (!name.equals("portlet-class")) {
-						params.put(name, config.getInitParameter(name));
+						params.put(name, servletConfig.getInitParameter(name));
 					}
 				}
 
-				config = new DynamicServletConfig(config, params);
+				servletConfig = new DynamicServletConfig(servletConfig, params);
 
-				quercusServlet.init(config);
+				quercusServlet.init(servletConfig);
 			}
 			catch (Exception e) {
 				throw new PortletException(e);

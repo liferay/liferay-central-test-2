@@ -70,10 +70,10 @@ import org.apache.velocity.app.Velocity;
  */
 public class VelocityFilter extends BasePortalFilter {
 
-	public void init(FilterConfig config) {
-		super.init(config);
+	public void init(FilterConfig filterConfig) {
+		super.init(filterConfig);
 
-		String pattern = config.getInitParameter("pattern");
+		String pattern = filterConfig.getInitParameter("pattern");
 
 		_pattern = Pattern.compile(pattern);
 	}
@@ -86,7 +86,7 @@ public class VelocityFilter extends BasePortalFilter {
 
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
-			FilterChain chain)
+			FilterChain filterChain)
 		throws IOException, ServletException {
 
 		String completeURL = HttpUtil.getCompleteURL(request);
@@ -99,7 +99,8 @@ public class VelocityFilter extends BasePortalFilter {
 			CacheResponse cacheResponse = new CacheResponse(
 				response, StringPool.UTF8);
 
-			processFilter(VelocityFilter.class, request, cacheResponse, chain);
+			processFilter(
+				VelocityFilter.class, request, cacheResponse, filterChain);
 
 			VelocityContext context = new VelocityContext();
 
@@ -185,7 +186,7 @@ public class VelocityFilter extends BasePortalFilter {
 				_log.debug("Not processing " + completeURL);
 			}
 
-			processFilter(VelocityFilter.class, request, response, chain);
+			processFilter(VelocityFilter.class, request, response, filterChain);
 		}
 	}
 

@@ -44,13 +44,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 public abstract class BaseFilter implements Filter {
 
-	public void init(FilterConfig config) {
-		_config = config;
+	public void init(FilterConfig filterConfig) {
+		_filterConfig = filterConfig;
 	}
 
 	public void doFilter(
 			ServletRequest servletRequest, ServletResponse servletResponse,
-			FilterChain chain)
+			FilterChain filterChain)
 		throws IOException, ServletException {
 
 		Log log = getLog();
@@ -68,15 +68,15 @@ public abstract class BaseFilter implements Filter {
 		HttpServletResponse response = (HttpServletResponse)servletResponse;
 
 		if (isFilterEnabled()) {
-			processFilter(request, response, chain);
+			processFilter(request, response, filterChain);
 		}
 		else {
-			processFilter(_filterClass, request, response, chain);
+			processFilter(_filterClass, request, response, filterChain);
 		}
 	}
 
 	public FilterConfig getFilterConfig() {
-		return _config;
+		return _filterConfig;
 	}
 
 	public void destroy() {
@@ -90,12 +90,12 @@ public abstract class BaseFilter implements Filter {
 
 	protected abstract void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
-			FilterChain chain)
+			FilterChain filterChain)
 		throws IOException, ServletException;
 
 	protected void processFilter(
 			Class<?> filterClass, HttpServletRequest request,
-			HttpServletResponse response, FilterChain chain)
+			HttpServletResponse response, FilterChain filterChain)
 		throws IOException, ServletException {
 
 		long startTime = 0;
@@ -129,7 +129,7 @@ public abstract class BaseFilter implements Filter {
 					filterClass.getName() + " " + path);
 		}
 
-		chain.doFilter(request, response);
+		filterChain.doFilter(request, response);
 
 		if (log.isDebugEnabled()) {
 			long endTime = System.currentTimeMillis();
@@ -151,7 +151,7 @@ public abstract class BaseFilter implements Filter {
 
 	private static final String _DEPTHER = "DEPTHER";
 
-	private FilterConfig _config;
+	private FilterConfig _filterConfig;
 	private Class<?> _filterClass = getClass();
 	private boolean _filterEnabled = true;
 

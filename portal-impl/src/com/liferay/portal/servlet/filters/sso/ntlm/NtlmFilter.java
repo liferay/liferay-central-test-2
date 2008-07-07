@@ -66,15 +66,15 @@ import jcifs.util.Base64;
  */
 public class NtlmFilter extends NtlmHttpFilter {
 
-	public void init(FilterConfig config) throws ServletException {
-		super.init(config);
+	public void init(FilterConfig filterConfig) throws ServletException {
+		super.init(filterConfig);
 
-		_config = new DynamicFilterConfig(config);
+		_filterConfig = new DynamicFilterConfig(filterConfig);
 	}
 
 	public void doFilter(
 			ServletRequest servletRequest, ServletResponse servletResponse,
-			FilterChain chain)
+			FilterChain filterChain)
 		throws IOException, ServletException {
 
 		try {
@@ -84,24 +84,23 @@ public class NtlmFilter extends NtlmHttpFilter {
 			long companyId = PortalInstances.getCompanyId(request);
 
 			if (PortalLDAPUtil.isNtlmEnabled(companyId)) {
-				if ((_config.getInitParameter("jcifs.http.domainController")
-						== null) &&
-					(_config.getInitParameter("jcifs.smb.client.domain")
-						== null)) {
+				String domainController = _filterConfig.getInitParameter(
+					"jcifs.http.domainController");
+				String domain = _filterConfig.getInitParameter(
+					"jcifs.smb.client.domain");
 
-					String domainController = PrefsPropsUtil.getString(
+				if ((domainController == null) && (domain == null)) {
+					domainController = PrefsPropsUtil.getString(
 						companyId, PropsKeys.NTLM_DOMAIN_CONTROLLER);
-
-					String domain = PrefsPropsUtil.getString(
+					domain = PrefsPropsUtil.getString(
 						companyId, PropsKeys.NTLM_DOMAIN);
 
-					_config.addInitParameter(
+					_filterConfig.addInitParameter(
 						"jcifs.http.domainController", domainController);
-
-					_config.addInitParameter(
+					_filterConfig.addInitParameter(
 						"jcifs.smb.client.domain", domain);
 
-					super.init(_config);
+					super.init(_filterConfig);
 
 					if (_log.isDebugEnabled()) {
 						_log.debug("Host " + domainController);
@@ -176,7 +175,7 @@ public class NtlmFilter extends NtlmHttpFilter {
 			_log.error(e);
 		}
 
-		chain.doFilter(servletRequest, servletResponse);
+		filterChain.doFilter(servletRequest, servletResponse);
 	}
 
 	public NtlmPasswordAuthentication negotiate(
@@ -239,6 +238,6 @@ public class NtlmFilter extends NtlmHttpFilter {
 
 	private static Log _log = LogFactoryUtil.getLog(NtlmFilter.class);
 
-	private DynamicFilterConfig _config;
+	private DynamicFilterConfig _filterConfig;
 
 }

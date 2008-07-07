@@ -120,7 +120,7 @@ public class CompressionFilter extends BasePortalFilter {
 
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
-			FilterChain chain)
+			FilterChain filterChain)
 		throws IOException, ServletException {
 
 		String completeURL = HttpUtil.getCompleteURL(request);
@@ -139,7 +139,8 @@ public class CompressionFilter extends BasePortalFilter {
 				new CompressionResponse(response);
 
 			processFilter(
-				CompressionFilter.class, request, compressionResponse, chain);
+				CompressionFilter.class, request, compressionResponse,
+				filterChain);
 
 			compressionResponse.finishResponse();
 		}
@@ -148,7 +149,8 @@ public class CompressionFilter extends BasePortalFilter {
 				_log.debug("Not compressing " + completeURL);
 			}
 
-			processFilter(CompressionFilter.class, request, response, chain);
+			processFilter(
+				CompressionFilter.class, request, response, filterChain);
 		}
 	}
 

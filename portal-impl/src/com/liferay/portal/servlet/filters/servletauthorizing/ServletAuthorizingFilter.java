@@ -59,7 +59,7 @@ public class ServletAuthorizingFilter extends BasePortalFilter {
 
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
-			FilterChain chain)
+			FilterChain filterChain)
 		throws IOException, ServletException {
 
 		HttpSession session = request.getSession();
@@ -145,7 +145,7 @@ public class ServletAuthorizingFilter extends BasePortalFilter {
 
 		try {
 			processFilter(
-				ServletAuthorizingFilter.class, request, response, chain);
+				ServletAuthorizingFilter.class, request, response, filterChain);
 		}
 		finally {
 			try {

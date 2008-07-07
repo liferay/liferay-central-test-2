@@ -38,9 +38,9 @@ import javax.servlet.ServletContext;
 public class DynamicServletConfig implements ServletConfig {
 
 	public DynamicServletConfig(
-		ServletConfig config, Map<String, String> params) {
+		ServletConfig servletConfig, Map<String, String> params) {
 
-		_config = config;
+		_servletConfig = servletConfig;
 		_params = params;
 	}
 
@@ -53,14 +53,14 @@ public class DynamicServletConfig implements ServletConfig {
 	}
 
 	public ServletContext getServletContext() {
-		return _config.getServletContext();
+		return _servletConfig.getServletContext();
 	}
 
 	public String getServletName() {
-		return _config.getServletName();
+		return _servletConfig.getServletName();
 	}
 
-	private ServletConfig _config;
+	private ServletConfig _servletConfig;
 	private Map<String, String> _params;
 
 }

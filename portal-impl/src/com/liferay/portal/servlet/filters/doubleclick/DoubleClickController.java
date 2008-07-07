@@ -46,7 +46,7 @@ public class DoubleClickController implements Serializable {
 
 	public void control(
 			HttpServletRequest request, HttpServletResponse response,
-			FilterChain chain)
+			FilterChain filterChain)
 		throws IOException, ServletException {
 
 		boolean firstRequest = false;
@@ -66,7 +66,7 @@ public class DoubleClickController implements Serializable {
 
 		if (firstRequest) {
 			try {
-				chain.doFilter(request, _cacheResponse);
+				filterChain.doFilter(request, _cacheResponse);
 			}
 			catch (Throwable t) {
 				_throwable = t;

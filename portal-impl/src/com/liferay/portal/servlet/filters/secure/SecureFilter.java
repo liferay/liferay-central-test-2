@@ -62,22 +62,22 @@ import javax.servlet.http.HttpSession;
  */
 public class SecureFilter extends BasePortalFilter {
 
-	public void init(FilterConfig config) {
-		super.init(config);
+	public void init(FilterConfig filterConfig) {
+		super.init(filterConfig);
 
 		_basicAuthEnabled = GetterUtil.getBoolean(
-			config.getInitParameter("basic_auth"));
+			filterConfig.getInitParameter("basic_auth"));
 
 		String propertyPrefix =
-			config.getInitParameter("portal_property_prefix");
+			filterConfig.getInitParameter("portal_property_prefix");
 
 		String[] hostsAllowedArray = null;
 
 		if (Validator.isNull(propertyPrefix)) {
 			hostsAllowedArray = StringUtil.split(
-				config.getInitParameter("hosts.allowed"));
+				filterConfig.getInitParameter("hosts.allowed"));
 			_httpsRequired = GetterUtil.getBoolean(
-				config.getInitParameter("https.required"));
+				filterConfig.getInitParameter("https.required"));
 		}
 		else {
 			hostsAllowedArray = PropsUtil.getArray(
@@ -177,7 +177,7 @@ public class SecureFilter extends BasePortalFilter {
 
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
-			FilterChain chain)
+			FilterChain filterChain)
 		throws IOException, ServletException {
 
 		String remoteAddr = request.getRemoteAddr();
@@ -279,7 +279,7 @@ public class SecureFilter extends BasePortalFilter {
 				}
 			}
 
-			processFilter(SecureFilter.class, request, response, chain);
+			processFilter(SecureFilter.class, request, response, filterChain);
 		}
 	}
 

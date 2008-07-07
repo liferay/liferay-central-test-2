@@ -49,7 +49,7 @@ public class DoubleClickFilter extends BasePortalFilter {
 
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
-			FilterChain chain)
+			FilterChain filterChain)
 		throws IOException, ServletException {
 
 		StopWatch stopWatch = null;
@@ -63,7 +63,8 @@ public class DoubleClickFilter extends BasePortalFilter {
 		HttpSession session = request.getSession(false);
 
 		if (session == null) {
-			processFilter(DoubleClickFilter.class, request, response, chain);
+			processFilter(
+				DoubleClickFilter.class, request, response, filterChain);
 		}
 		else {
 			DoubleClickController controller = null;
@@ -82,7 +83,7 @@ public class DoubleClickFilter extends BasePortalFilter {
 			boolean ok = false;
 
 			try {
-				controller.control(request, response, chain);
+				controller.control(request, response, filterChain);
 
 				ok = true;
 			}

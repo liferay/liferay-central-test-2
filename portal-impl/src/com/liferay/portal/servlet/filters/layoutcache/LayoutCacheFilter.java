@@ -81,7 +81,7 @@ public class LayoutCacheFilter
 
 	public void portalInit() {
 		_pattern = GetterUtil.getInteger(
-			_config.getInitParameter("pattern"));
+			_filterConfig.getInitParameter("pattern"));
 
 		if ((_pattern != _PATTERN_FRIENDLY) &&
 			(_pattern != _PATTERN_LAYOUT) &&
@@ -91,10 +91,10 @@ public class LayoutCacheFilter
 		}
 	}
 
-	public void init(FilterConfig config) {
-		super.init(config);
+	public void init(FilterConfig filterConfig) {
+		super.init(filterConfig);
 
-		_config = config;
+		_filterConfig = filterConfig;
 
 		PortalInitableUtil.init(this);
 	}
@@ -356,7 +356,7 @@ public class LayoutCacheFilter
 
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
-			FilterChain chain)
+			FilterChain filterChain)
 		throws IOException, ServletException {
 
 		if (!isPortletRequest(request) && isLayout(request) &&
@@ -379,7 +379,8 @@ public class LayoutCacheFilter
 					}
 
 					processFilter(
-						LayoutCacheFilter.class, request, response, chain);
+						LayoutCacheFilter.class, request, response,
+						filterChain);
 
 					return;
 				}
@@ -392,7 +393,8 @@ public class LayoutCacheFilter
 					response, StringPool.UTF8);
 
 				processFilter(
-					LayoutCacheFilter.class, request, cacheResponse, chain);
+					LayoutCacheFilter.class, request, cacheResponse,
+					filterChain);
 
 				data = new CacheResponseData(
 					cacheResponse.getData(), cacheResponse.getContentType(),
@@ -427,7 +429,8 @@ public class LayoutCacheFilter
 				_log.debug("Did not request a layout");
 			}
 
-			processFilter(LayoutCacheFilter.class, request, response, chain);
+			processFilter(
+				LayoutCacheFilter.class, request, response, filterChain);
 		}
 	}
 
@@ -445,7 +448,7 @@ public class LayoutCacheFilter
 
 	private static Log _log = LogFactoryUtil.getLog(LayoutCacheFilter.class);
 
-	private FilterConfig _config;
+	private FilterConfig _filterConfig;
 	private int _pattern;
 
 }

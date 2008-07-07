@@ -49,7 +49,7 @@ public class OpenSSOFilter extends BasePortalFilter {
 
 	protected void processFilter(
 		HttpServletRequest request, HttpServletResponse response,
-		FilterChain chain) {
+		FilterChain filterChain) {
 
 		try {
 			long companyId = PortalUtil.getCompanyId(request);
@@ -70,7 +70,8 @@ public class OpenSSOFilter extends BasePortalFilter {
 			if (!enabled || Validator.isNull(loginUrl) ||
 				Validator.isNull(logoutUrl) || Validator.isNull(serviceUrl)) {
 
-				processFilter(OpenSSOFilter.class, request, response, chain);
+				processFilter(
+					OpenSSOFilter.class, request, response, filterChain);
 
 				return;
 			}
@@ -98,7 +99,7 @@ public class OpenSSOFilter extends BasePortalFilter {
 					_log.error(e, e);
 
 					processFilter(
-						OpenSSOFilter.class, request, response, chain);
+						OpenSSOFilter.class, request, response, filterChain);
 
 					return;
 				}
@@ -127,7 +128,7 @@ public class OpenSSOFilter extends BasePortalFilter {
 					}
 
 					processFilter(
-						OpenSSOFilter.class, request, response, chain);
+						OpenSSOFilter.class, request, response, filterChain);
 				}
 				else {
 					response.sendRedirect(loginUrl);

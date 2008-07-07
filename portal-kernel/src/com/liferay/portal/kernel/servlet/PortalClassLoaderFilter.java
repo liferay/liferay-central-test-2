@@ -50,7 +50,7 @@ public class PortalClassLoaderFilter implements Filter, PortalInitable {
 		try {
 			ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
 
-			String filterClass = _config.getInitParameter("filter-class");
+			String filterClass = _filterConfig.getInitParameter("filter-class");
 
 			if (filterClass.startsWith("com.liferay.filters.")) {
 				filterClass = StringUtil.replace(
@@ -60,22 +60,22 @@ public class PortalClassLoaderFilter implements Filter, PortalInitable {
 
 			_filter = (Filter)classLoader.loadClass(filterClass).newInstance();
 
-			_filter.init(_config);
+			_filter.init(_filterConfig);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
 	}
 
-	public void init(FilterConfig config) {
-		_config = config;
+	public void init(FilterConfig filterConfig) {
+		_filterConfig = filterConfig;
 
 		PortalInitableUtil.init(this);
 	}
 
 	public void doFilter(
 			ServletRequest servletRequest, ServletResponse servletResponse,
-			FilterChain chain)
+			FilterChain filterChain)
 		throws IOException, ServletException {
 
 		ClassLoader contextClassLoader =
@@ -85,7 +85,7 @@ public class PortalClassLoaderFilter implements Filter, PortalInitable {
 			Thread.currentThread().setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
-			_filter.doFilter(servletRequest, servletResponse, chain);
+			_filter.doFilter(servletRequest, servletResponse, filterChain);
 		}
 		finally {
 			Thread.currentThread().setContextClassLoader(contextClassLoader);
@@ -111,6 +111,6 @@ public class PortalClassLoaderFilter implements Filter, PortalInitable {
 		LogFactoryUtil.getLog(PortalClassLoaderFilter.class);
 
 	private Filter _filter;
-	private FilterConfig _config;
+	private FilterConfig _filterConfig;
 
 }

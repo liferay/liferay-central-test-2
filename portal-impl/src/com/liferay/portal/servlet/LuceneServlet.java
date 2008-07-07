@@ -53,8 +53,8 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LuceneServlet extends HttpServlet {
 
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
+	public void init(ServletConfig filterConfig) throws ServletException {
+		super.init(filterConfig);
 
 		long[] companyIds = PortalInstances.getCompanyIds();
 
