@@ -224,6 +224,12 @@
 			<ref bean="com.liferay.portal.webcache.WebCachePoolImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.xml.SAXReaderImpl" class="com.liferay.portal.xml.SAXReaderImpl" singleton="false" lazy-init="true" />
+	<bean id="com.liferay.portal.kernel.xml.SAXReaderUtil" class="com.liferay.portal.kernel.xml.SAXReaderUtil" singleton="false" lazy-init="true">
+		<property name="SAXReader">
+			<ref bean="com.liferay.portal.xml.SAXReaderImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.PortletPreferencesFactoryImpl" class="com.liferay.portlet.PortletPreferencesFactoryImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.PortletPreferencesFactoryUtil" class="com.liferay.portlet.PortletPreferencesFactoryUtil" lazy-init="true">
 		<property name="portletPreferencesFactory">
