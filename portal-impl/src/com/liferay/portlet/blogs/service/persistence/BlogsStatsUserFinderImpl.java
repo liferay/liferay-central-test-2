@@ -33,7 +33,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl;
-import com.liferay.util.dao.hibernate.CustomSQLUtil;
+import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;

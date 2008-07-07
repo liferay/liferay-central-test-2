@@ -37,7 +37,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsFlagImpl;
-import com.liferay.util.dao.hibernate.CustomSQLUtil;
+import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.sql.Timestamp;
 

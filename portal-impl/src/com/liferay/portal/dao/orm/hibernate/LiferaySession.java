@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.dao.hibernate;
+package com.liferay.portal.dao.orm.hibernate;
 
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 

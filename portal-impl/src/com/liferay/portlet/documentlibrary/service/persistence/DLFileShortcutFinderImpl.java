@@ -30,7 +30,7 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl;
-import com.liferay.util.dao.hibernate.CustomSQLUtil;
+import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.List;
 

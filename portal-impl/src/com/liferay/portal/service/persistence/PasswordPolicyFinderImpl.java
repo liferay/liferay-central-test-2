@@ -33,7 +33,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.impl.PasswordPolicyImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
-import com.liferay.util.dao.hibernate.CustomSQLUtil;
+import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.Iterator;
 import java.util.List;

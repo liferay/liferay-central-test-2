@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.dao.hibernate;
+package com.liferay.portal.dao.orm.hibernate;
 
 import java.io.Serializable;
 
@@ -34,16 +34,16 @@ import org.hibernate.HibernateException;
 import org.hibernate.usertype.UserType;
 
 /**
- * <a href="ShortType.java.html"><b><i>View Source</i></b></a>
+ * <a href="FloatType.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ShortType implements UserType {
+public class FloatType implements UserType {
 
-	public final static short DEFAULT_VALUE = 0;
+	public final static float DEFAULT_VALUE = 0.0F;
 
-	public final static int[] SQL_TYPES = new int[] {Types.SMALLINT};
+	public final static int[] SQL_TYPES = new int[] {Types.FLOAT};
 
 	public Object assemble(Serializable cached, Object owner) {
 		return cached;
@@ -80,10 +80,10 @@ public class ShortType implements UserType {
 	public Object nullSafeGet(ResultSet rs, String[] names, Object obj)
 		throws HibernateException, SQLException {
 
-		Short value = (Short)Hibernate.SHORT.nullSafeGet(rs, names[0]);
+		Float value = (Float)Hibernate.FLOAT.nullSafeGet(rs, names[0]);
 
 		if (value == null) {
-			return new Short(DEFAULT_VALUE);
+			return new Float(DEFAULT_VALUE);
 		}
 		else {
 			return value;
@@ -94,18 +94,18 @@ public class ShortType implements UserType {
 		throws HibernateException, SQLException {
 
 		if (obj == null) {
-			obj = new Short(DEFAULT_VALUE);
+			obj = new Float(DEFAULT_VALUE);
 		}
 
-		Hibernate.SHORT.nullSafeSet(ps, obj, index);
+		Hibernate.FLOAT.nullSafeSet(ps, obj, index);
 	}
 
 	public Object replace(Object original, Object target, Object owner) {
 		return original;
 	}
 
-	public Class<Short> returnedClass() {
-		return Short.class;
+	public Class<Float> returnedClass() {
+		return Float.class;
 	}
 
 	public int[] sqlTypes() {

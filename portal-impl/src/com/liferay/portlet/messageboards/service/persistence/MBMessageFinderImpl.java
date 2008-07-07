@@ -34,7 +34,7 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
-import com.liferay.util.dao.hibernate.CustomSQLUtil;
+import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.Iterator;
 import java.util.List;

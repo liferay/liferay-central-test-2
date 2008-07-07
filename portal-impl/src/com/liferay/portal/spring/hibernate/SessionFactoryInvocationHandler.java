@@ -22,7 +22,7 @@
 
 package com.liferay.portal.spring.hibernate;
 
-import com.liferay.util.dao.hibernate.LiferayClassicSession;
+import com.liferay.portal.dao.orm.hibernate.LiferayClassicSession;
 
 import java.lang.Object;
 import java.lang.reflect.InvocationHandler;

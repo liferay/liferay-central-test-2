@@ -32,7 +32,7 @@ import com.liferay.portal.model.LayoutReference;
 import com.liferay.portal.model.LayoutSoap;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
-import com.liferay.util.dao.hibernate.CustomSQLUtil;
+import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;

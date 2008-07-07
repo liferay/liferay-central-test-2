@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
-import com.liferay.util.dao.hibernate.CustomSQLUtil;
+import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.sql.Timestamp;
 

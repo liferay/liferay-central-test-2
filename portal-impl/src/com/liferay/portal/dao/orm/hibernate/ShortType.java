@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.dao.hibernate;
+package com.liferay.portal.dao.orm.hibernate;
 
 import java.io.Serializable;
 
@@ -34,16 +34,16 @@ import org.hibernate.HibernateException;
 import org.hibernate.usertype.UserType;
 
 /**
- * <a href="BooleanType.java.html"><b><i>View Source</i></b></a>
+ * <a href="ShortType.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BooleanType implements UserType {
+public class ShortType implements UserType {
 
-	public final static boolean DEFAULT_VALUE = false;
+	public final static short DEFAULT_VALUE = 0;
 
-	public final static int[] SQL_TYPES = new int[] {Types.BIT};
+	public final static int[] SQL_TYPES = new int[] {Types.SMALLINT};
 
 	public Object assemble(Serializable cached, Object owner) {
 		return cached;
@@ -80,10 +80,10 @@ public class BooleanType implements UserType {
 	public Object nullSafeGet(ResultSet rs, String[] names, Object obj)
 		throws HibernateException, SQLException {
 
-		Boolean value = (Boolean)Hibernate.BOOLEAN.nullSafeGet(rs, names[0]);
+		Short value = (Short)Hibernate.SHORT.nullSafeGet(rs, names[0]);
 
 		if (value == null) {
-			return Boolean.valueOf(DEFAULT_VALUE);
+			return new Short(DEFAULT_VALUE);
 		}
 		else {
 			return value;
@@ -94,18 +94,18 @@ public class BooleanType implements UserType {
 		throws HibernateException, SQLException {
 
 		if (obj == null) {
-			obj = Boolean.valueOf(DEFAULT_VALUE);
+			obj = new Short(DEFAULT_VALUE);
 		}
 
-		Hibernate.BOOLEAN.nullSafeSet(ps, obj, index);
+		Hibernate.SHORT.nullSafeSet(ps, obj, index);
 	}
 
 	public Object replace(Object original, Object target, Object owner) {
 		return original;
 	}
 
-	public Class<Boolean> returnedClass() {
-		return Boolean.class;
+	public Class<Short> returnedClass() {
+		return Short.class;
 	}
 
 	public int[] sqlTypes() {

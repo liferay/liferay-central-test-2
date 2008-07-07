@@ -31,7 +31,7 @@ import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.tags.model.TagsProperty;
 import com.liferay.portlet.tags.model.impl.TagsPropertyImpl;
-import com.liferay.util.dao.hibernate.CustomSQLUtil;
+import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;

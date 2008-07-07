@@ -63,7 +63,7 @@
 					</#if>
 
 					<#if column.isPrimitiveType() || column.type == "String">
-						type="com.liferay.util.dao.hibernate.${serviceBuilder.getPrimitiveObj("${column.type}")}Type"
+						type="com.liferay.portal.dao.orm.hibernate.${serviceBuilder.getPrimitiveObj("${column.type}")}Type"
 					</#if>
 
 					/>

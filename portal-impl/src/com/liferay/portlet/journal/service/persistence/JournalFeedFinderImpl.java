@@ -35,7 +35,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.journal.model.JournalFeed;
 import com.liferay.portlet.journal.model.impl.JournalFeedImpl;
-import com.liferay.util.dao.hibernate.CustomSQLUtil;
+import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.Iterator;
 import java.util.List;

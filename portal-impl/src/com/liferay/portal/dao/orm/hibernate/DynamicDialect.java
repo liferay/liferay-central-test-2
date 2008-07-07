@@ -20,11 +20,10 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.spring.hibernate;
+package com.liferay.portal.dao.orm.hibernate;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.tools.sql.DBUtil;
-import com.liferay.util.dao.hibernate.DB2Dialect;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;

@@ -20,9 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.dao.hibernate;
-
-import com.liferay.portal.kernel.util.GetterUtil;
+package com.liferay.portal.dao.orm.hibernate;
 
 import java.io.Serializable;
 
@@ -36,16 +34,17 @@ import org.hibernate.HibernateException;
 import org.hibernate.usertype.UserType;
 
 /**
- * <a href="LongType.java.html"><b><i>View Source</i></b></a>
+ * <a href="IntegerType.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Bruno Farache
  *
  */
-public class LongType implements UserType {
+public class IntegerType implements UserType {
 
-	public final static long DEFAULT_VALUE = 0;
+	public final static int DEFAULT_VALUE = 0;
 
-	public final static int[] SQL_TYPES = new int[] {Types.BIGINT};
+	public final static int[] SQL_TYPES = new int[] {Types.INTEGER};
 
 	public Object assemble(Serializable cached, Object owner) {
 		return cached;
@@ -80,29 +79,18 @@ public class LongType implements UserType {
 	}
 
 	public Object nullSafeGet(ResultSet rs, String[] names, Object obj)
-		throws HibernateException, SQLException {
+		throws HibernateException {
 
-		Object value = null;
+		Integer value = null;
 
 		try {
-			value = Hibernate.LONG.nullSafeGet(rs, names[0]);
+			value = (Integer)Hibernate.INTEGER.nullSafeGet(rs, names[0]);
 		}
-		catch (SQLException sqle1) {
-
-			// Some JDBC drivers do not know how to convert a VARCHAR column
-			// with a blank entry into a BIGINT
-
-			try {
-				value = new Long(GetterUtil.getLong(
-					(String)Hibernate.STRING.nullSafeGet(rs, names[0])));
-			}
-			catch (SQLException sqle2) {
-				throw sqle1;
-			}
+		catch (SQLException sqle) {
 		}
 
 		if (value == null) {
-			return new Long(DEFAULT_VALUE);
+			return new Integer(DEFAULT_VALUE);
 		}
 		else {
 			return value;
@@ -113,18 +101,18 @@ public class LongType implements UserType {
 		throws HibernateException, SQLException {
 
 		if (obj == null) {
-			obj = new Long(DEFAULT_VALUE);
+			obj = new Integer(DEFAULT_VALUE);
 		}
 
-		Hibernate.LONG.nullSafeSet(ps, obj, index);
+		Hibernate.INTEGER.nullSafeSet(ps, obj, index);
 	}
 
 	public Object replace(Object original, Object target, Object owner) {
 		return original;
 	}
 
-	public Class<Long> returnedClass() {
-		return Long.class;
+	public Class<Integer> returnedClass() {
+		return Integer.class;
 	}
 
 	public int[] sqlTypes() {

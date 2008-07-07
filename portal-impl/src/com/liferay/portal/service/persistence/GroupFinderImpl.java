@@ -52,7 +52,7 @@ import com.liferay.portal.model.impl.RoleModelImpl;
 import com.liferay.portal.model.impl.UserGroupRoleModelImpl;
 import com.liferay.portal.model.impl.UserModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
-import com.liferay.util.dao.hibernate.CustomSQLUtil;
+import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;

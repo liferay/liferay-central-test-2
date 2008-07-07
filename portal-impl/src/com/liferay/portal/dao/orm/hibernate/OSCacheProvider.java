@@ -20,11 +20,10 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.spring.hibernate;
+package com.liferay.portal.dao.orm.hibernate;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.dao.hibernate.CacheWrapper;
 
 import com.opensymphony.oscache.base.CacheEntry;
 

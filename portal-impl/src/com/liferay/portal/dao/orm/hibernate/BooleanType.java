@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.dao.hibernate;
+package com.liferay.portal.dao.orm.hibernate;
 
 import java.io.Serializable;
 
@@ -34,16 +34,16 @@ import org.hibernate.HibernateException;
 import org.hibernate.usertype.UserType;
 
 /**
- * <a href="DoubleType.java.html"><b><i>View Source</i></b></a>
+ * <a href="BooleanType.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DoubleType implements UserType {
+public class BooleanType implements UserType {
 
-	public final static double DEFAULT_VALUE = 0.0;
+	public final static boolean DEFAULT_VALUE = false;
 
-	public final static int[] SQL_TYPES = new int[] {Types.DOUBLE};
+	public final static int[] SQL_TYPES = new int[] {Types.BIT};
 
 	public Object assemble(Serializable cached, Object owner) {
 		return cached;
@@ -80,10 +80,10 @@ public class DoubleType implements UserType {
 	public Object nullSafeGet(ResultSet rs, String[] names, Object obj)
 		throws HibernateException, SQLException {
 
-		Double value = (Double)Hibernate.DOUBLE.nullSafeGet(rs, names[0]);
+		Boolean value = (Boolean)Hibernate.BOOLEAN.nullSafeGet(rs, names[0]);
 
 		if (value == null) {
-			return new Double(DEFAULT_VALUE);
+			return Boolean.valueOf(DEFAULT_VALUE);
 		}
 		else {
 			return value;
@@ -94,18 +94,18 @@ public class DoubleType implements UserType {
 		throws HibernateException, SQLException {
 
 		if (obj == null) {
-			obj = new Double(DEFAULT_VALUE);
+			obj = Boolean.valueOf(DEFAULT_VALUE);
 		}
 
-		Hibernate.DOUBLE.nullSafeSet(ps, obj, index);
+		Hibernate.BOOLEAN.nullSafeSet(ps, obj, index);
 	}
 
 	public Object replace(Object original, Object target, Object owner) {
 		return original;
 	}
 
-	public Class<Double> returnedClass() {
-		return Double.class;
+	public Class<Boolean> returnedClass() {
+		return Boolean.class;
 	}
 
 	public int[] sqlTypes() {

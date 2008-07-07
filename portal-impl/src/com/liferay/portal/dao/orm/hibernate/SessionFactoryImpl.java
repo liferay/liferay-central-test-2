@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.dao.orm.Dialect;
 import com.liferay.portal.kernel.dao.orm.HibernateException;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
-import com.liferay.util.dao.hibernate.LiferayClassicSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

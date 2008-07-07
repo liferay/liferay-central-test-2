@@ -20,37 +20,33 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.dao.hibernate;
+package com.liferay.portal.dao.orm.hibernate;
 
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
-import com.liferay.portal.kernel.dao.orm.DynamicQueryInitializer;
-
-import org.hibernate.Session;
-import org.hibernate.criterion.DetachedCriteria;
+import com.liferay.portal.kernel.util.StringPool;
 
 /**
- * <a href="DynamicQueryInitializerImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="StringType.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DynamicQueryInitializerImpl implements DynamicQueryInitializer {
+public class StringType extends org.hibernate.type.StringType {
 
-	public DynamicQueryInitializerImpl(DetachedCriteria detachedCriteria) {
-		_detachedCriteria = detachedCriteria;
-	}
+	public boolean isEqual(Object x, Object y) {
+		boolean equal = super.isEqual(x, y);
 
-	public DynamicQuery initialize(Object obj) {
-		Session session = (Session)obj;
+		if (!equal) {
+			if (((x == null) || x.equals(StringPool.BLANK)) &&
+				((y == null) || y.equals(StringPool.BLANK))) {
 
-		if (session instanceof LiferaySession) {
-			session = ((LiferaySession)session).getHibernateSession();
+				equal = true;
+			}
+			else {
+				equal = false;
+			}
 		}
 
-		return new DynamicQueryImpl(
-			_detachedCriteria.getExecutableCriteria(session));
+		return equal;
 	}
-
-	private DetachedCriteria _detachedCriteria;
 
 }

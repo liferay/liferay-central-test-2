@@ -20,33 +20,18 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.dao.hibernate;
-
-import com.liferay.portal.kernel.util.StringPool;
+package com.liferay.portal.dao.orm.hibernate;
 
 /**
- * <a href="StringType.java.html"><b><i>View Source</i></b></a>
+ * <a href="EhCacheProvider.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class StringType extends org.hibernate.type.StringType {
+public class EhCacheProvider extends CacheProviderWrapper {
 
-	public boolean isEqual(Object x, Object y) {
-		boolean equal = super.isEqual(x, y);
-
-		if (!equal) {
-			if (((x == null) || x.equals(StringPool.BLANK)) &&
-				((y == null) || y.equals(StringPool.BLANK))) {
-
-				equal = true;
-			}
-			else {
-				equal = false;
-			}
-		}
-
-		return equal;
+	public EhCacheProvider() {
+		super("net.sf.ehcache.hibernate.EhCacheProvider");
 	}
 
 }

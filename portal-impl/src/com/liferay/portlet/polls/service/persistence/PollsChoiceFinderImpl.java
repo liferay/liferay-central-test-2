@@ -30,7 +30,7 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.polls.NoSuchChoiceException;
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.model.impl.PollsChoiceImpl;
-import com.liferay.util.dao.hibernate.CustomSQLUtil;
+import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.List;
 

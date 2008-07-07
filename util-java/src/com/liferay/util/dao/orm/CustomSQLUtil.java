@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.dao.hibernate;
+package com.liferay.util.dao.orm;
 
 import com.liferay.portal.kernel.util.OrderByComparator;
 

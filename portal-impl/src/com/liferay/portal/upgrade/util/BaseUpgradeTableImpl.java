@@ -22,6 +22,12 @@
 
 package com.liferay.portal.upgrade.util;
 
+import com.liferay.portal.dao.orm.hibernate.BooleanType;
+import com.liferay.portal.dao.orm.hibernate.DoubleType;
+import com.liferay.portal.dao.orm.hibernate.FloatType;
+import com.liferay.portal.dao.orm.hibernate.IntegerType;
+import com.liferay.portal.dao.orm.hibernate.LongType;
+import com.liferay.portal.dao.orm.hibernate.ShortType;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -34,12 +40,6 @@ import com.liferay.portal.upgrade.StagnantRowException;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.SystemProperties;
-import com.liferay.util.dao.hibernate.BooleanType;
-import com.liferay.util.dao.hibernate.DoubleType;
-import com.liferay.util.dao.hibernate.FloatType;
-import com.liferay.util.dao.hibernate.IntegerType;
-import com.liferay.util.dao.hibernate.LongType;
-import com.liferay.util.dao.hibernate.ShortType;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.dao.hibernate;
+package com.liferay.portal.dao.orm.hibernate;
 
 import java.io.Serializable;
 
@@ -34,16 +34,16 @@ import org.hibernate.HibernateException;
 import org.hibernate.usertype.UserType;
 
 /**
- * <a href="FloatType.java.html"><b><i>View Source</i></b></a>
+ * <a href="DoubleType.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class FloatType implements UserType {
+public class DoubleType implements UserType {
 
-	public final static float DEFAULT_VALUE = 0.0F;
+	public final static double DEFAULT_VALUE = 0.0;
 
-	public final static int[] SQL_TYPES = new int[] {Types.FLOAT};
+	public final static int[] SQL_TYPES = new int[] {Types.DOUBLE};
 
 	public Object assemble(Serializable cached, Object owner) {
 		return cached;
@@ -80,10 +80,10 @@ public class FloatType implements UserType {
 	public Object nullSafeGet(ResultSet rs, String[] names, Object obj)
 		throws HibernateException, SQLException {
 
-		Float value = (Float)Hibernate.FLOAT.nullSafeGet(rs, names[0]);
+		Double value = (Double)Hibernate.DOUBLE.nullSafeGet(rs, names[0]);
 
 		if (value == null) {
-			return new Float(DEFAULT_VALUE);
+			return new Double(DEFAULT_VALUE);
 		}
 		else {
 			return value;
@@ -94,18 +94,18 @@ public class FloatType implements UserType {
 		throws HibernateException, SQLException {
 
 		if (obj == null) {
-			obj = new Float(DEFAULT_VALUE);
+			obj = new Double(DEFAULT_VALUE);
 		}
 
-		Hibernate.FLOAT.nullSafeSet(ps, obj, index);
+		Hibernate.DOUBLE.nullSafeSet(ps, obj, index);
 	}
 
 	public Object replace(Object original, Object target, Object owner) {
 		return original;
 	}
 
-	public Class<Float> returnedClass() {
-		return Float.class;
+	public Class<Double> returnedClass() {
+		return Double.class;
 	}
 
 	public int[] sqlTypes() {

@@ -20,35 +20,37 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.dao.hibernate;
-
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
-
-import java.util.List;
-
-import org.hibernate.Criteria;
+package com.liferay.portal.dao.orm.hibernate;
 
 /**
- * <a href="DynamicQueryImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="DB2Dialect.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Shepherd Ching
+ * @author Jian Cao
  *
  */
-public class DynamicQueryImpl implements DynamicQuery {
+public class DB2Dialect extends org.hibernate.dialect.DB2Dialect {
 
-	public DynamicQueryImpl(Criteria criteria) {
-		_criteria = criteria;
+	public String getLimitString(String sql, boolean hasOffset) {
+		if (!sql.startsWith("(")) {
+			return super.getLimitString(sql, hasOffset);
+		}
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("select cursor1.* from (");
+		sb.append("select rownumber() over() as rownumber_, cursor2.* from (");
+		sb.append(sql);
+		sb.append(") as cursor2) as cursor1 where rownumber_");
+
+		if (hasOffset) {
+			sb.append(" between ? + 1 and ?");
+		}
+		else {
+			sb.append(" <= ?");
+		}
+
+		return sb.toString();
 	}
-
-	public List<?> list() {
-		return _criteria.list();
-	}
-
-	public void setLimit(int start, int end) {
-		_criteria = _criteria.setFirstResult(start);
-		_criteria = _criteria.setMaxResults(end - start);
-	}
-
-	private Criteria _criteria;
 
 }
