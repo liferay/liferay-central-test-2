@@ -67,8 +67,8 @@ public class AddCommunitiesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_29_name", "Test Community");
-		selenium.type("_29_name", "Test Community");
+		selenium.typeKeys("_29_name", "Selenium");
+		selenium.type("_29_name", "Selenium");
 		selenium.typeKeys("_29_description", "This is a test community!");
 		selenium.type("_29_description", "This is a test community!");
 		selenium.click("//input[@value='Save']");
@@ -90,8 +90,8 @@ public class AddCommunitiesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_29_name", "Test");
-		selenium.type("_29_name", "Test");
+		selenium.typeKeys("_29_name", "Selenium");
+		selenium.type("_29_name", "Selenium");
 		selenium.click("//input[@value='Search Communities']");
 		selenium.waitForPageToLoad("30000");
 
@@ -114,6 +114,9 @@ public class AddCommunitiesTest extends BaseTestCase {
 		selenium.click("link=Assign Members");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Available");
+		selenium.waitForPageToLoad("30000");
+		selenium.type("toggle_id_enterprise_admin_user_searchkeywords", "selen");
+		selenium.click("//input[@value='Search Users']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_29_allRowIds");
 		selenium.click("//input[@value='Update Associations']");
@@ -157,6 +160,8 @@ public class AddCommunitiesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Available");
 		selenium.waitForPageToLoad("30000");
+		selenium.type("toggle_id_enterprise_admin_organization_searchkeywords",
+			"selenium");
 		selenium.click("_29_rowIds");
 		selenium.click("//input[@value='Update Associations']");
 		selenium.waitForPageToLoad("30000");
@@ -169,7 +174,7 @@ public class AddCommunitiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("Liferay, Inc.")) {
+				if (selenium.isTextPresent("Selenium")) {
 					break;
 				}
 			}
