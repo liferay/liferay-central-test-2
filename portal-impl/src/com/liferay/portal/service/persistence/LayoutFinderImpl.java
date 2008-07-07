@@ -23,21 +23,20 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.hibernate.Type;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutReference;
 import com.liferay.portal.model.LayoutSoap;
 import com.liferay.portal.model.impl.LayoutImpl;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.util.dao.hibernate.QueryPos;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import org.hibernate.Hibernate;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 /**
  * <a href="LayoutFinderImpl.java.html"><b><i>View Source</i></b></a>
@@ -45,7 +44,8 @@ import org.hibernate.Session;
  * @author Brian Wing Shun Chan
  *
  */
-public class LayoutFinderImpl implements LayoutFinder {
+public class LayoutFinderImpl
+	extends BasePersistenceImpl implements LayoutFinder {
 
 	public static String FIND_BY_NULL_FRIENDLY_URL =
 		LayoutFinder.class.getName() + ".findByNullFriendlyURL";
@@ -57,7 +57,7 @@ public class LayoutFinderImpl implements LayoutFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_NULL_FRIENDLY_URL);
 
@@ -71,7 +71,7 @@ public class LayoutFinderImpl implements LayoutFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -87,14 +87,14 @@ public class LayoutFinderImpl implements LayoutFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_C_P_P);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar("layoutPlid", Hibernate.LONG);
-			q.addScalar("prefsPortletId", Hibernate.STRING);
+			q.addScalar("layoutPlid", Type.LONG);
+			q.addScalar("prefsPortletId", Type.STRING);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -128,7 +128,7 @@ public class LayoutFinderImpl implements LayoutFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 

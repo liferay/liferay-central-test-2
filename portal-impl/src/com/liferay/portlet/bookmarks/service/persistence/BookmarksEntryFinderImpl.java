@@ -23,21 +23,20 @@
 package com.liferay.portlet.bookmarks.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.hibernate.Type;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.bookmarks.NoSuchEntryException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl;
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.util.Iterator;
 import java.util.List;
-
-import org.hibernate.Hibernate;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 /**
  * <a href="BookmarksEntryFinderImpl.java.html"><b><i>View Source</i></b></a>
@@ -45,7 +44,8 @@ import org.hibernate.Session;
  * @author Brian Wing Shun Chan
  *
  */
-public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
+public class BookmarksEntryFinderImpl
+	extends BasePersistenceImpl implements BookmarksEntryFinder {
 
 	public static String COUNT_BY_FOLDER_IDS =
 		BookmarksEntryFinder.class.getName() + ".countByFolderIds";
@@ -72,7 +72,7 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_FOLDER_IDS);
 
@@ -81,7 +81,7 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -107,7 +107,7 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -115,13 +115,13 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_GROUP_ID);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -143,7 +143,7 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -151,13 +151,13 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_G_U);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -180,7 +180,7 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -190,7 +190,7 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_GROUP_ID);
 
@@ -203,13 +203,13 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 			qPos.add(groupId);
 
 			return (List<BookmarksEntry>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -217,7 +217,7 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_NO_ASSETS);
 
@@ -231,7 +231,7 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -241,7 +241,7 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_UUID_G);
 
@@ -278,7 +278,7 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -289,7 +289,7 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_G_U);
 
@@ -303,13 +303,13 @@ public class BookmarksEntryFinderImpl implements BookmarksEntryFinder {
 			qPos.add(userId);
 
 			return (List<BookmarksEntry>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 

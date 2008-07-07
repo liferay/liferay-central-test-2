@@ -22,10 +22,10 @@
 
 package com.liferay.portal.upgrade.v4_3_5;
 
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.impl.GroupImpl;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portlet.blogs.model.BlogsEntry;
@@ -49,7 +49,6 @@ import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.util.dao.DataAccess;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -211,7 +210,7 @@ public class UpgradePermission extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = HibernateUtil.getConnection();
+			con = DataAccess.getConnection();
 
 			for (long plid : getPlids(guestGroupId)) {
 				ps = con.prepareStatement(
@@ -244,7 +243,7 @@ public class UpgradePermission extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = HibernateUtil.getConnection();
+			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(_GET_COMPANY_IDS);
 
@@ -272,7 +271,7 @@ public class UpgradePermission extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = HibernateUtil.getConnection();
+			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(_GET_DEFAULT_USER_ID);
 
@@ -300,7 +299,7 @@ public class UpgradePermission extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = HibernateUtil.getConnection();
+			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(_GET_GUEST_GROUP_ID);
 
@@ -330,7 +329,7 @@ public class UpgradePermission extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = HibernateUtil.getConnection();
+			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(_GET_PERMISSION_IDS_1);
 
@@ -364,7 +363,7 @@ public class UpgradePermission extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = HibernateUtil.getConnection();
+			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
 				"select " + tablePKCol + " from " + tableName + " " +
@@ -398,7 +397,7 @@ public class UpgradePermission extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = HibernateUtil.getConnection();
+			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
 				"select " + tablePKCol1 + " from " + tableName1 + " " +
@@ -433,7 +432,7 @@ public class UpgradePermission extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = HibernateUtil.getConnection();
+			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(_GET_PERMISSION_IDS_2);
 
@@ -464,7 +463,7 @@ public class UpgradePermission extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = HibernateUtil.getConnection();
+			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(_GET_PLIDS);
 

@@ -23,22 +23,21 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.hibernate.Type;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.util.Iterator;
 import java.util.List;
-
-import org.hibernate.Hibernate;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 /**
  * <a href="DLFileEntryFinderImpl.java.html"><b><i>View Source</i></b></a>
@@ -46,7 +45,8 @@ import org.hibernate.Session;
  * @author Brian Wing Shun Chan
  *
  */
-public class DLFileEntryFinderImpl implements DLFileEntryFinder {
+public class DLFileEntryFinderImpl
+	extends BasePersistenceImpl implements DLFileEntryFinder {
 
 	public static String COUNT_BY_FOLDER_IDS =
 		DLFileEntryFinder.class.getName() + ".countByFolderIds";
@@ -73,7 +73,7 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_FOLDER_IDS);
 
@@ -82,7 +82,7 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -108,7 +108,7 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -116,13 +116,13 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_GROUP_ID);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -144,7 +144,7 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -152,13 +152,13 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_G_U);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -181,7 +181,7 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -198,7 +198,7 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_GROUP_ID);
 
@@ -213,13 +213,13 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 			qPos.add(groupId);
 
 			return (List<DLFileEntry>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -227,7 +227,7 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_NO_ASSETS);
 
@@ -241,7 +241,7 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -260,7 +260,7 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_G_U);
 
@@ -276,13 +276,13 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 			qPos.add(userId);
 
 			return (List<DLFileEntry>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -292,7 +292,7 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_UUID_G);
 
@@ -329,7 +329,7 @@ public class DLFileEntryFinderImpl implements DLFileEntryFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 

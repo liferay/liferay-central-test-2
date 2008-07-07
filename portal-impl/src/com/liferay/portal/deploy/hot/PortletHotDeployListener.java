@@ -681,11 +681,11 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		try {
 			serviceBuilderPropertiesConfiguration =
 				ConfigurationFactoryUtil.getConfiguration(
-					portletClassLoader, "portlet-service");
+					portletClassLoader, "service");
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to read portlet-service.properties");
+				_log.warn("Unable to read service.properties");
 			}
 		}
 

@@ -23,15 +23,18 @@
 package com.liferay.portlet.wiki.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.hibernate.Type;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.sql.Timestamp;
 
@@ -39,17 +42,14 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import org.hibernate.Hibernate;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-
 /**
  * <a href="WikiPageFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class WikiPageFinderImpl implements WikiPageFinder {
+public class WikiPageFinderImpl
+	extends BasePersistenceImpl implements WikiPageFinder {
 
 	public static String COUNT_BY_CREATE_DATE =
 		WikiPageFinder.class.getName() + ".countByCreateDate";
@@ -77,7 +77,7 @@ public class WikiPageFinderImpl implements WikiPageFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String createDateComparator = StringPool.GREATER_THAN;
 
@@ -92,7 +92,7 @@ public class WikiPageFinderImpl implements WikiPageFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -116,7 +116,7 @@ public class WikiPageFinderImpl implements WikiPageFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -136,7 +136,7 @@ public class WikiPageFinderImpl implements WikiPageFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String createDateComparator = StringPool.GREATER_THAN;
 
@@ -159,14 +159,13 @@ public class WikiPageFinderImpl implements WikiPageFinder {
 			qPos.add(createDate);
 			qPos.add(true);
 
-			return (List<WikiPage>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+			return (List<WikiPage>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -174,7 +173,7 @@ public class WikiPageFinderImpl implements WikiPageFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_NO_ASSETS);
 
@@ -188,7 +187,7 @@ public class WikiPageFinderImpl implements WikiPageFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -198,7 +197,7 @@ public class WikiPageFinderImpl implements WikiPageFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_UUID_G);
 
@@ -235,7 +234,7 @@ public class WikiPageFinderImpl implements WikiPageFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 

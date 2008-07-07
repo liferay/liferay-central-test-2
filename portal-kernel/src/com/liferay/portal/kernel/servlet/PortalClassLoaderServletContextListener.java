@@ -24,6 +24,7 @@ package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.PortletClassLoaderThreadLocal;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PortalInitable;
 import com.liferay.portal.kernel.util.PortalInitableUtil;
@@ -47,6 +48,8 @@ public abstract class PortalClassLoaderServletContextListener
 	public void portalInit() {
 		ClassLoader contextClassLoader =
 			Thread.currentThread().getContextClassLoader();
+
+		PortletClassLoaderThreadLocal.setClassLoader(contextClassLoader);
 
 		try {
 			Thread.currentThread().setContextClassLoader(

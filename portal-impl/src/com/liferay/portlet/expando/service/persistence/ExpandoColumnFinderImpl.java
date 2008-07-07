@@ -23,18 +23,17 @@
 package com.liferay.portlet.expando.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.hibernate.Type;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.model.impl.ExpandoColumnImpl;
-import com.liferay.util.dao.hibernate.QueryPos;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.util.Iterator;
 import java.util.List;
-
-import org.hibernate.Hibernate;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 /**
  * <a href="ExpandoColumnFinderImpl.java.html"><b><i>View Source</i></b></a>
@@ -42,7 +41,8 @@ import org.hibernate.Session;
  * @author Raymond Augé
  *
  */
-public class ExpandoColumnFinderImpl implements ExpandoColumnFinder {
+public class ExpandoColumnFinderImpl
+	extends BasePersistenceImpl implements ExpandoColumnFinder {
 
 	public static String COUNT_BY_TC_TN =
 		ExpandoColumnFinder.class.getName() + ".countByTC_TN";
@@ -59,13 +59,13 @@ public class ExpandoColumnFinderImpl implements ExpandoColumnFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_TC_TN);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -88,7 +88,7 @@ public class ExpandoColumnFinderImpl implements ExpandoColumnFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -98,7 +98,7 @@ public class ExpandoColumnFinderImpl implements ExpandoColumnFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_TC_TN);
 
@@ -117,7 +117,7 @@ public class ExpandoColumnFinderImpl implements ExpandoColumnFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -128,7 +128,7 @@ public class ExpandoColumnFinderImpl implements ExpandoColumnFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_TC_TN_CN);
 
@@ -148,7 +148,7 @@ public class ExpandoColumnFinderImpl implements ExpandoColumnFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 

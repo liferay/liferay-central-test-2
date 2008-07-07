@@ -22,13 +22,13 @@
 
 package com.liferay.portal.upgrade.v4_4_0;
 
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Location;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
@@ -36,7 +36,6 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
-import com.liferay.util.dao.DataAccess;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -73,7 +72,7 @@ public class UpgradePermission extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = HibernateUtil.getConnection();
+			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(_GET_PERMISSION_SQL);
 
@@ -117,7 +116,7 @@ public class UpgradePermission extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = HibernateUtil.getConnection();
+			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
 				"select permissionId from Permission_ where resourceId = ?");
@@ -143,7 +142,7 @@ public class UpgradePermission extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = HibernateUtil.getConnection();
+			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
 				"select resourceId from Resource_ where codeId = ?");
@@ -174,7 +173,7 @@ public class UpgradePermission extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = HibernateUtil.getConnection();
+			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
 				"select codeId from ResourceCode where name = ?");
@@ -204,7 +203,7 @@ public class UpgradePermission extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = HibernateUtil.getConnection();
+			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(_GET_ROLES_PERMISSIONS_SQL);
 
@@ -230,7 +229,7 @@ public class UpgradePermission extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = HibernateUtil.getConnection();
+			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(_GET_USERS_PERMISSIONS_SQL);
 
@@ -291,7 +290,7 @@ public class UpgradePermission extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = HibernateUtil.getConnection();
+			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(_GET_PERMISSION_SQL);
 

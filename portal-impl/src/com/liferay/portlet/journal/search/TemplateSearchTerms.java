@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.journal.search;
 
-import com.liferay.portal.kernel.dao.DAOParamUtil;
+import com.liferay.portal.kernel.dao.search.DAOParamUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PortalUtil;
 

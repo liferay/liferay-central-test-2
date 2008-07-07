@@ -1,7 +1,5 @@
 package ${packagePath}.service;
 
-import ${beanLocatorUtilPackage}.BeanLocatorUtil;
-
 /**
  * <a href="${entity.name}${sessionTypeName}ServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,7 +35,7 @@ public class ${entity.name}${sessionTypeName}ServiceFactory {
 
 	public static ${entity.name}${sessionTypeName}Service getImpl() {
 		if (_impl == null) {
-			_impl = (${entity.name}${sessionTypeName}Service) BeanLocatorUtil.locate(_IMPL);
+			_impl = (${entity.name}${sessionTypeName}Service) ${beanLocatorUtil}.locate(_IMPL);
 		}
 
 		return _impl;
@@ -45,7 +43,7 @@ public class ${entity.name}${sessionTypeName}ServiceFactory {
 
 	public static ${entity.name}${sessionTypeName}Service getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (${entity.name}${sessionTypeName}Service)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (${entity.name}${sessionTypeName}Service)${beanLocatorUtil}.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -57,7 +55,7 @@ public class ${entity.name}${sessionTypeName}ServiceFactory {
 
 	private static ${entity.name}${sessionTypeName}ServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (${entity.name}${sessionTypeName}ServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (${entity.name}${sessionTypeName}ServiceFactory)${beanLocatorUtil}.locate(_FACTORY);
 		}
 
 		return _factory;

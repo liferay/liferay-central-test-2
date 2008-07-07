@@ -23,26 +23,25 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.hibernate.Type;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.hibernate.Hibernate;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 /**
  * <a href="OrganizationFinderImpl.java.html"><b><i>View Source</i></b></a>
@@ -51,7 +50,8 @@ import org.hibernate.Session;
  * @author Jorge Ferrer
  *
  */
-public class OrganizationFinderImpl implements OrganizationFinder {
+public class OrganizationFinderImpl
+	extends BasePersistenceImpl implements OrganizationFinder {
 
 	public static String COUNT_BY_C_PO_N_S_C_Z_R_C =
 		OrganizationFinder.class.getName() + ".countByC_PO_N_S_C_Z_R_C";
@@ -159,7 +159,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = null;
 
@@ -208,7 +208,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -255,7 +255,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -335,7 +335,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = null;
 
@@ -385,7 +385,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar("orgId", Hibernate.LONG);
+			q.addScalar("orgId", Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -419,7 +419,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			List<Organization> organizations = new ArrayList<Organization>();
 
 			Iterator<Long> itr = (Iterator<Long>)QueryUtil.iterate(
-				q, HibernateUtil.getDialect(), start, end);
+				q, getDialect(), start, end);
 
 			while (itr.hasNext()) {
 				Long organizationId = itr.next();
@@ -436,7 +436,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -451,7 +451,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			StringBuilder sb = new StringBuilder();
 
@@ -552,7 +552,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -608,7 +608,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -623,7 +623,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			StringBuilder sb = new StringBuilder();
 
@@ -726,7 +726,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar("orgId", Hibernate.LONG);
+			q.addScalar("orgId", Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -767,7 +767,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			List<Organization> organizations = new ArrayList<Organization>();
 
 			Iterator<Long> itr = (Iterator<Long>)QueryUtil.iterate(
-				q, HibernateUtil.getDialect(), start, end);
+				q, getDialect(), start, end);
 
 			while (itr.hasNext()) {
 				Long organizationId = itr.next();
@@ -784,7 +784,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 

@@ -24,6 +24,12 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.hibernate.Type;
+import com.liferay.portal.kernel.spring.hibernate.FinderCacheUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -45,11 +51,8 @@ import com.liferay.portal.model.impl.ResourceModelImpl;
 import com.liferay.portal.model.impl.RoleModelImpl;
 import com.liferay.portal.model.impl.UserGroupRoleModelImpl;
 import com.liferay.portal.model.impl.UserModelImpl;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.FinderCache;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -57,17 +60,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.Hibernate;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-
 /**
  * <a href="GroupFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class GroupFinderImpl implements GroupFinder {
+public class GroupFinderImpl
+	extends BasePersistenceImpl implements GroupFinder {
 
 	public static String COUNT_BY_GROUP_ID =
 		GroupFinder.class.getName() + ".countByGroupId";
@@ -140,9 +140,9 @@ public class GroupFinderImpl implements GroupFinder {
 		Object result = null;
 
 		if (!ArrayUtil.contains(finderClassNamesCacheEnabled, false)) {
-			result = FinderCache.getResult(
+			result = FinderCacheUtil.getResult(
 				finderSQL, finderClassNames, finderMethodName, finderParams,
-				finderArgs);
+				finderArgs, this);
 		}
 
 		if (result == null) {
@@ -164,13 +164,13 @@ public class GroupFinderImpl implements GroupFinder {
 			Session session = null;
 
 			try {
-				session = HibernateUtil.openSession();
+				session = openSession();
 
 				int count = countByGroupId(session, groupId, params1);
 				count += countByGroupId(session, groupId, params2);
 				count += countByGroupId(session, groupId, params3);
 
-				FinderCache.putResult(
+				FinderCacheUtil.putResult(
 					finderSQL, finderClassNamesCacheEnabled, finderClassNames,
 					finderMethodName, finderParams, finderArgs,
 					new Long(count));
@@ -181,7 +181,7 @@ public class GroupFinderImpl implements GroupFinder {
 				throw new SystemException(e);
 			}
 			finally {
-				HibernateUtil.closeSession(session);
+				closeSession(session);
 			}
 		}
 		else {
@@ -228,7 +228,7 @@ public class GroupFinderImpl implements GroupFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			int count = countByC_N_D(
 				session, companyId, name, description, params1);
@@ -247,7 +247,7 @@ public class GroupFinderImpl implements GroupFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -255,7 +255,7 @@ public class GroupFinderImpl implements GroupFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_NULL_FRIENDLY_URL);
 
@@ -269,7 +269,7 @@ public class GroupFinderImpl implements GroupFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -286,14 +286,14 @@ public class GroupFinderImpl implements GroupFinder {
 		};
 		Object finderArgs[] = new Object[] {companyId, name};
 
-		Object result = FinderCache.getResult(
-			finderClassName, finderMethodName, finderParams, finderArgs);
+		Object result = FinderCacheUtil.getResult(
+			finderClassName, finderMethodName, finderParams, finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
 
 			try {
-				session = HibernateUtil.openSession();
+				session = openSession();
 
 				String sql = CustomSQLUtil.get(FIND_BY_C_N);
 
@@ -311,7 +311,7 @@ public class GroupFinderImpl implements GroupFinder {
 				if (itr.hasNext()) {
 					Group group = itr.next();
 
-					FinderCache.putResult(
+					FinderCacheUtil.putResult(
 						finderClassNameCacheEnabled, finderClassName,
 						finderMethodName, finderParams, finderArgs, group);
 
@@ -322,7 +322,7 @@ public class GroupFinderImpl implements GroupFinder {
 				throw new SystemException(e);
 			}
 			finally {
-				HibernateUtil.closeSession(session);
+				closeSession(session);
 			}
 
 			StringBuilder sb = new StringBuilder();
@@ -463,20 +463,20 @@ public class GroupFinderImpl implements GroupFinder {
 		Object result = null;
 
 		if (!ArrayUtil.contains(finderClassNamesCacheEnabled, false)) {
-			result = FinderCache.getResult(
+			result = FinderCacheUtil.getResult(
 				finderSQL, finderClassNames, finderMethodName, finderParams,
-				finderArgs);
+				finderArgs, this);
 		}
 
 		if (result == null) {
 			Session session = null;
 
 			try {
-				session = HibernateUtil.openSession();
+				session = openSession();
 
 				SQLQuery q = session.createSQLQuery(sql);
 
-				q.addScalar("groupId", Hibernate.STRING);
+				q.addScalar("groupId", Type.STRING);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -506,7 +506,7 @@ public class GroupFinderImpl implements GroupFinder {
 				List<Group> groups = new ArrayList<Group>();
 
 				Iterator<String> itr = (Iterator<String>)QueryUtil.iterate(
-					q, HibernateUtil.getDialect(), start, end);
+					q, getDialect(), start, end);
 
 				while (itr.hasNext()) {
 					long groupId = GetterUtil.getLong(itr.next());
@@ -516,7 +516,7 @@ public class GroupFinderImpl implements GroupFinder {
 					groups.add(group);
 				}
 
-				FinderCache.putResult(
+				FinderCacheUtil.putResult(
 					finderSQL, finderClassNamesCacheEnabled, finderClassNames,
 					finderMethodName, finderParams, finderArgs, groups);
 
@@ -526,7 +526,7 @@ public class GroupFinderImpl implements GroupFinder {
 				throw new SystemException(e);
 			}
 			finally {
-				HibernateUtil.closeSession(session);
+				closeSession(session);
 			}
 		}
 		else {
@@ -544,7 +544,7 @@ public class GroupFinderImpl implements GroupFinder {
 
 		SQLQuery q = session.createSQLQuery(sql);
 
-		q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+		q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
@@ -575,7 +575,7 @@ public class GroupFinderImpl implements GroupFinder {
 
 		SQLQuery q = session.createSQLQuery(sql);
 
-		q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+		q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 		QueryPos qPos = QueryPos.getInstance(q);
 

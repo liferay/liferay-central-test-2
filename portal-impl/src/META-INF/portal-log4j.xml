@@ -673,7 +673,7 @@
 	</category>
 
 	<category name="org.hibernate">
-		<priority value="ERROR" />
+		<priority value="INFO" />
 	</category>
 
 	<category name="org.jabsorb">

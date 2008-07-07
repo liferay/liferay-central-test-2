@@ -19,8 +19,8 @@ import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -310,13 +310,13 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
         String finderMethodName = "findByCompanyId";
         String[] finderParams = new String[] {
                 String.class.getName(),
-                
+
                 "java.lang.Integer", "java.lang.Integer",
                 "com.liferay.portal.kernel.util.OrderByComparator"
             };
         Object[] finderArgs = new Object[] {
                 companyId,
-                
+
                 String.valueOf(start), String.valueOf(end), String.valueOf(obc)
             };
 
@@ -558,13 +558,13 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
         String finderMethodName = "findByUserId";
         String[] finderParams = new String[] {
                 String.class.getName(),
-                
+
                 "java.lang.Integer", "java.lang.Integer",
                 "com.liferay.portal.kernel.util.OrderByComparator"
             };
         Object[] finderArgs = new Object[] {
                 userId,
-                
+
                 String.valueOf(start), String.valueOf(end), String.valueOf(obc)
             };
 

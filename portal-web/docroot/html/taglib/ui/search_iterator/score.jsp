@@ -24,8 +24,6 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%@ page import="com.liferay.portal.kernel.dao.search.ScoreSearchEntry" %>
-
 <%
 ScoreSearchEntry entry = (ScoreSearchEntry)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW_ENTRY);
 

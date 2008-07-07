@@ -22,19 +22,18 @@
 
 package com.liferay.portal.upgrade.util;
 
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.StagnantRowException;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.SystemProperties;
-import com.liferay.util.dao.DataAccess;
 import com.liferay.util.dao.hibernate.BooleanType;
 import com.liferay.util.dao.hibernate.DoubleType;
 import com.liferay.util.dao.hibernate.FloatType;
@@ -395,7 +394,7 @@ public abstract class BaseUpgradeTableImpl {
 		BufferedWriter bw = new BufferedWriter(new FileWriter(tempFileName));
 
 		try {
-			con = HibernateUtil.getConnection();
+			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(selectSQL);
 
@@ -457,7 +456,7 @@ public abstract class BaseUpgradeTableImpl {
 		String line = null;
 
 		try {
-			con = HibernateUtil.getConnection();
+			con = DataAccess.getConnection();
 
 			boolean useBatch = con.getMetaData().supportsBatchUpdates();
 

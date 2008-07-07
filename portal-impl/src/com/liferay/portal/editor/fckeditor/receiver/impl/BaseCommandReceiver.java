@@ -25,6 +25,7 @@ package com.liferay.portal.editor.fckeditor.receiver.impl;
 import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import com.liferay.portal.editor.fckeditor.exception.FCKException;
 import com.liferay.portal.editor.fckeditor.receiver.CommandReceiver;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -36,7 +37,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.upload.LiferayFileItemFactory;
 import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.io.File;
 import java.io.PrintWriter;

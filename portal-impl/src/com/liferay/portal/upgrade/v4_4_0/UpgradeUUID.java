@@ -22,11 +22,10 @@
 
 package com.liferay.portal.upgrade.v4_4_0;
 
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.util.dao.DataAccess;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -84,7 +83,7 @@ public class UpgradeUUID extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = HibernateUtil.getConnection();
+			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
 				"SELECT " + pkColName + " FROM " + tableName +

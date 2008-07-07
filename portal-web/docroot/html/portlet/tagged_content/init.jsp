@@ -24,7 +24,6 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portal.kernel.dao.search.ResultRow" %>
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>
 <%@ page import="com.liferay.portlet.PortalPreferences" %>
 <%@ page import="com.liferay.portlet.blogs.model.BlogsEntry" %>

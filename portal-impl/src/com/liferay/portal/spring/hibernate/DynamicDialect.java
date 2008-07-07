@@ -22,7 +22,8 @@
 
 package com.liferay.portal.spring.hibernate;
 
-import com.liferay.util.dao.DataAccess;
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.util.dao.hibernate.DB2Dialect;
 
 import java.sql.CallableStatement;
@@ -69,7 +70,7 @@ public class DynamicDialect extends Dialect {
 		Connection con = null;
 
 		try {
-			con = HibernateUtil.getConnection();
+			con = DataAccess.getConnection();
 
 			DatabaseMetaData metaData = con.getMetaData();
 
@@ -101,6 +102,8 @@ public class DynamicDialect extends Dialect {
 				_dialect = DialectFactory.determineDialect(
 					dbName, dbMajorVersion);
 			}
+
+			DBUtil.setInstance(_dialect);
 
 			if (_log.isInfoEnabled()) {
 				_log.info("Using dialect " + _dialect.getClass().getName());

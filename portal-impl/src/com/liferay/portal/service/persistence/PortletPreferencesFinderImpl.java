@@ -23,16 +23,15 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.impl.PortletPreferencesImpl;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.util.dao.hibernate.QueryPos;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.util.List;
-
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 /**
  * <a href="PortletPreferencesFinderImpl.java.html"><b><i>View Source</i></b>
@@ -41,7 +40,8 @@ import org.hibernate.Session;
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletPreferencesFinderImpl implements PortletPreferencesFinder {
+public class PortletPreferencesFinderImpl
+	extends BasePersistenceImpl implements PortletPreferencesFinder {
 
 	public static String FIND_BY_PORTLETID =
 		PortletPreferencesFinder.class.getName() + ".findByPortletId";
@@ -52,7 +52,7 @@ public class PortletPreferencesFinderImpl implements PortletPreferencesFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_PORTLETID);
 
@@ -70,7 +70,7 @@ public class PortletPreferencesFinderImpl implements PortletPreferencesFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 

@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.shopping.search;
 
-import com.liferay.portal.kernel.dao.DAOParamUtil;
+import com.liferay.portal.kernel.dao.search.DAOParamUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 
 import javax.portlet.RenderRequest;

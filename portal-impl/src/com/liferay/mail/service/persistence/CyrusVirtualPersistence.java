@@ -25,15 +25,13 @@ package com.liferay.mail.service.persistence;
 import com.liferay.mail.NoSuchCyrusVirtualException;
 import com.liferay.mail.model.CyrusVirtual;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.service.persistence.BasePersistence;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.kernel.dao.hibernate.ObjectNotFoundException;
+import com.liferay.portal.kernel.dao.hibernate.Query;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.util.Iterator;
 import java.util.List;
-
-import org.hibernate.ObjectNotFoundException;
-import org.hibernate.Query;
-import org.hibernate.Session;
 
 /**
  * <a href="CyrusVirtualPersistence.java.html"><b><i>View Source</i></b></a>
@@ -41,7 +39,7 @@ import org.hibernate.Session;
  * @author Brian Wing Shun Chan
  *
  */
-public class CyrusVirtualPersistence extends BasePersistence {
+public class CyrusVirtualPersistence extends BasePersistenceImpl {
 
 	public static String FIND_BY_USER_ID =
 		"FROM " + CyrusVirtual.class.getName() + " WHERE userId = ?";
@@ -52,7 +50,7 @@ public class CyrusVirtualPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			session = getSessionFactory().openSession();
+			session = openSession();
 
 			CyrusVirtual virtual = (CyrusVirtual)session.load(
 				CyrusVirtual.class, emailAddress);
@@ -65,10 +63,10 @@ public class CyrusVirtualPersistence extends BasePersistence {
 			throw new NoSuchCyrusVirtualException();
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
-			session.close();
+			closeSession(session);
 		}
 	}
 
@@ -76,7 +74,7 @@ public class CyrusVirtualPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			session = getSessionFactory().openSession();
+			session = openSession();
 
 			try {
 				CyrusVirtual virtualModel = (CyrusVirtual)session.load(
@@ -96,10 +94,10 @@ public class CyrusVirtualPersistence extends BasePersistence {
 			}
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
-			session.close();
+			closeSession(session);
 		}
 	}
 
@@ -109,7 +107,7 @@ public class CyrusVirtualPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			session = getSessionFactory().openSession();
+			session = openSession();
 
 			return (CyrusVirtual)session.load(CyrusVirtual.class, emailAddress);
 		}
@@ -117,10 +115,10 @@ public class CyrusVirtualPersistence extends BasePersistence {
 			throw new NoSuchCyrusVirtualException();
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
-			session.close();
+			closeSession(session);
 		}
 	}
 
@@ -128,7 +126,7 @@ public class CyrusVirtualPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			session = getSessionFactory().openSession();
+			session = openSession();
 
 			Query q = session.createQuery(FIND_BY_USER_ID);
 
@@ -137,10 +135,10 @@ public class CyrusVirtualPersistence extends BasePersistence {
 			return q.list();
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
-			session.close();
+			closeSession(session);
 		}
 	}
 
@@ -148,7 +146,7 @@ public class CyrusVirtualPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			session = getSessionFactory().openSession();
+			session = openSession();
 
 			Query q = session.createQuery(FIND_BY_USER_ID);
 
@@ -162,13 +160,13 @@ public class CyrusVirtualPersistence extends BasePersistence {
 				session.delete(virtual);
 			}
 
-			session.flush();
+			closeSession(session);
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
-			session.close();
+			closeSession(session);
 		}
 	}
 

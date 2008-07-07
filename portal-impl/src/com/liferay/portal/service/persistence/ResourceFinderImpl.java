@@ -23,16 +23,15 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.impl.ResourceImpl;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.util.dao.hibernate.QueryPos;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.util.List;
-
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 /**
  * <a href="ResourceFinderImpl.java.html"><b><i>View Source</i></b></a>
@@ -41,7 +40,8 @@ import org.hibernate.Session;
  * @author Alexander Chow
  *
  */
-public class ResourceFinderImpl implements ResourceFinder {
+public class ResourceFinderImpl
+	extends BasePersistenceImpl implements ResourceFinder {
 
 	public static String FIND_BY_NAME =
 		ResourceFinder.class.getName() + ".findByName";
@@ -53,7 +53,7 @@ public class ResourceFinderImpl implements ResourceFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_NAME);
 
@@ -71,7 +71,7 @@ public class ResourceFinderImpl implements ResourceFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -81,7 +81,7 @@ public class ResourceFinderImpl implements ResourceFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_C_P);
 
@@ -100,7 +100,7 @@ public class ResourceFinderImpl implements ResourceFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 

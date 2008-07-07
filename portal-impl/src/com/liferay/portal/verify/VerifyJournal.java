@@ -22,10 +22,10 @@
 
 package com.liferay.portal.verify;
 
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
@@ -34,7 +34,6 @@ import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.tags.NoSuchAssetException;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
-import com.liferay.util.dao.DataAccess;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -199,7 +198,7 @@ public class VerifyJournal extends VerifyProcess {
 		ResultSet rs = null;
 
 		try {
-			con = HibernateUtil.getConnection();
+			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(_GET_PORTLET_PREFERENCES_COUNT);
 

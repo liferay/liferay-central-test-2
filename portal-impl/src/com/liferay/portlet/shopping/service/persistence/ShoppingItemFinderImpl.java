@@ -23,20 +23,19 @@
 package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.hibernate.Type;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.impl.ShoppingItemImpl;
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.util.Iterator;
 import java.util.List;
-
-import org.hibernate.Hibernate;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 /**
  * <a href="ShoppingItemFinderImpl.java.html"><b><i>View Source</i></b></a>
@@ -44,7 +43,8 @@ import org.hibernate.Session;
  * @author Brian Wing Shun Chan
  *
  */
-public class ShoppingItemFinderImpl implements ShoppingItemFinder {
+public class ShoppingItemFinderImpl
+	extends BasePersistenceImpl implements ShoppingItemFinder {
 
 	public static String COUNT_BY_CATEGORY_IDS =
 		ShoppingItemFinder.class.getName() + ".countByCategoryIds";
@@ -55,7 +55,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_CATEGORY_IDS);
 
@@ -64,7 +64,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -90,7 +90,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -100,7 +100,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			StringBuilder query = new StringBuilder();
 
@@ -130,7 +130,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 
 			SQLQuery q = session.createSQLQuery(query.toString());
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -159,7 +159,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -170,7 +170,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			StringBuilder query = new StringBuilder();
 
@@ -203,7 +203,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 
 			SQLQuery q = session.createSQLQuery(query.toString());
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -233,7 +233,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -243,7 +243,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			StringBuilder query = new StringBuilder();
 
@@ -273,7 +273,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 
 			SQLQuery q = session.createSQLQuery(query.toString());
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -302,7 +302,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -315,7 +315,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			StringBuilder query = new StringBuilder();
 
@@ -359,13 +359,13 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 			qPos.add(true);
 
 			return (List<ShoppingItem>)QueryUtil.randomList(
-				q, HibernateUtil.getDialect(), countByFeatured, numOfItems);
+				q, getDialect(), countByFeatured, numOfItems);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -377,7 +377,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			StringBuilder query = new StringBuilder();
 
@@ -425,13 +425,13 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 			qPos.add(keywords);
 
 			return (List<ShoppingItem>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -444,7 +444,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			StringBuilder query = new StringBuilder();
 
@@ -488,13 +488,13 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 			qPos.add(true);
 
 			return (List<ShoppingItem>)QueryUtil.randomList(
-				q, HibernateUtil.getDialect(), countBySale, numOfItems);
+				q, getDialect(), countBySale, numOfItems);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 

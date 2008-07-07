@@ -23,17 +23,16 @@
 package com.liferay.portlet.polls.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.polls.NoSuchChoiceException;
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.model.impl.PollsChoiceImpl;
-import com.liferay.util.dao.hibernate.QueryPos;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.util.List;
-
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 /**
  * <a href="PollsChoiceFinderImpl.java.html"><b><i>View Source</i></b></a>
@@ -41,7 +40,8 @@ import org.hibernate.Session;
  * @author Bruno Farache
  *
  */
-public class PollsChoiceFinderImpl implements PollsChoiceFinder {
+public class PollsChoiceFinderImpl
+	extends BasePersistenceImpl implements PollsChoiceFinder {
 
 	public static String FIND_BY_UUID_G =
 		PollsChoiceFinder.class.getName() + ".findByUuid_G";
@@ -52,7 +52,7 @@ public class PollsChoiceFinderImpl implements PollsChoiceFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_UUID_G);
 
@@ -89,7 +89,7 @@ public class PollsChoiceFinderImpl implements PollsChoiceFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 

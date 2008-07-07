@@ -23,23 +23,22 @@
 package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.hibernate.Type;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
 import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.util.Iterator;
 import java.util.List;
-
-import org.hibernate.Hibernate;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 /**
  * <a href="ShoppingOrderFinderImpl.java.html"><b><i>View Source</i></b></a>
@@ -47,7 +46,8 @@ import org.hibernate.Session;
  * @author Brian Wing Shun Chan
  *
  */
-public class ShoppingOrderFinderImpl implements ShoppingOrderFinder {
+public class ShoppingOrderFinderImpl
+	extends BasePersistenceImpl implements ShoppingOrderFinder {
 
 	public static String COUNT_BY_G_C_U_N_PPPS =
 		ShoppingOrderFinder.class.getName() + ".countByG_C_U_N_PPPS";
@@ -68,7 +68,7 @@ public class ShoppingOrderFinderImpl implements ShoppingOrderFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_G_C_U_N_PPPS);
 
@@ -87,7 +87,7 @@ public class ShoppingOrderFinderImpl implements ShoppingOrderFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -130,7 +130,7 @@ public class ShoppingOrderFinderImpl implements ShoppingOrderFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -148,7 +148,7 @@ public class ShoppingOrderFinderImpl implements ShoppingOrderFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_G_C_U_N_PPPS);
 
@@ -196,13 +196,13 @@ public class ShoppingOrderFinderImpl implements ShoppingOrderFinder {
 			qPos.add(ppPaymentStatus);
 
 			return (List<ShoppingOrder>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 

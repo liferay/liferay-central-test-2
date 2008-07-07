@@ -662,6 +662,14 @@ public class PortalImpl implements Portal {
 		return (String)portletRequest.getAttribute(WebKeys.CURRENT_URL);
 	}
 
+	public String getCustomSQLFunctionIsNotNull() {
+		return PropsValues.CUSTOM_SQL_FUNCTION_ISNOTNULL;
+	}
+
+	public String getCustomSQLFunctionIsNull() {
+		return PropsValues.CUSTOM_SQL_FUNCTION_ISNULL;
+	}
+
 	public Date getDate(int month, int day, int year, PortalException pe)
 		throws PortalException {
 

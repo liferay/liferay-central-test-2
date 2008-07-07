@@ -23,15 +23,14 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.util.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.hibernate.Type;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.util.Iterator;
-
-import org.hibernate.Hibernate;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 /**
  * <a href="MBMessageFlagFinderImpl.java.html"><b><i>View Source</i></b></a>
@@ -39,7 +38,8 @@ import org.hibernate.Session;
  * @author Brian Wing Shun Chan
  *
  */
-public class MBMessageFlagFinderImpl implements MBMessageFlagFinder {
+public class MBMessageFlagFinderImpl
+	extends BasePersistenceImpl implements MBMessageFlagFinder {
 
 	public static String COUNT_BY_T_U =
 		MBMessageFlagFinder.class.getName() + ".countByU_T";
@@ -48,13 +48,13 @@ public class MBMessageFlagFinderImpl implements MBMessageFlagFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_T_U);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -77,7 +77,7 @@ public class MBMessageFlagFinderImpl implements MBMessageFlagFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 

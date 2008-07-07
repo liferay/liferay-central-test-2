@@ -24,6 +24,12 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.hibernate.Type;
+import com.liferay.portal.kernel.spring.hibernate.FinderCacheUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
@@ -35,11 +41,8 @@ import com.liferay.portal.model.impl.GroupModelImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.model.impl.RoleModelImpl;
 import com.liferay.portal.model.impl.UserModelImpl;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.FinderCache;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,17 +51,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.Hibernate;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-
 /**
  * <a href="RoleFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class RoleFinderImpl implements RoleFinder {
+public class RoleFinderImpl extends BasePersistenceImpl implements RoleFinder {
 
 	public static String COUNT_BY_C_N_D_T =
 		RoleFinder.class.getName() + ".countByC_N_D_T";
@@ -119,16 +118,16 @@ public class RoleFinderImpl implements RoleFinder {
 		Object result = null;
 
 		if (!ArrayUtil.contains(finderClassNamesCacheEnabled, false)) {
-			result = FinderCache.getResult(
+			result = FinderCacheUtil.getResult(
 				finderSQL, finderClassNames, finderMethodName, finderParams,
-				finderArgs);
+				finderArgs, this);
 		}
 
 		if (result == null) {
 			Session session = null;
 
 			try {
-				session = HibernateUtil.openSession();
+				session = openSession();
 
 				StringBuilder sb = new StringBuilder();
 
@@ -144,7 +143,7 @@ public class RoleFinderImpl implements RoleFinder {
 
 				SQLQuery q = session.createSQLQuery(sb.toString());
 
-				q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+				q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -165,7 +164,7 @@ public class RoleFinderImpl implements RoleFinder {
 					}
 				}
 
-				FinderCache.putResult(
+				FinderCacheUtil.putResult(
 					finderSQL, finderClassNamesCacheEnabled, finderClassNames,
 					finderMethodName, finderParams, finderArgs,
 					new Long(count));
@@ -176,7 +175,7 @@ public class RoleFinderImpl implements RoleFinder {
 				throw new SystemException(e);
 			}
 			finally {
-				HibernateUtil.closeSession(session);
+				closeSession(session);
 			}
 		}
 		else {
@@ -195,7 +194,7 @@ public class RoleFinderImpl implements RoleFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_C_N_D_T);
 
@@ -208,7 +207,7 @@ public class RoleFinderImpl implements RoleFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -239,7 +238,7 @@ public class RoleFinderImpl implements RoleFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -249,7 +248,7 @@ public class RoleFinderImpl implements RoleFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_USER_GROUP_ROLE);
 
@@ -268,7 +267,7 @@ public class RoleFinderImpl implements RoleFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -285,14 +284,14 @@ public class RoleFinderImpl implements RoleFinder {
 		};
 		Object finderArgs[] = new Object[] {new Long(companyId), name};
 
-		Object result = FinderCache.getResult(
-			finderClassName, finderMethodName, finderParams, finderArgs);
+		Object result = FinderCacheUtil.getResult(
+			finderClassName, finderMethodName, finderParams, finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
 
 			try {
-				session = HibernateUtil.openSession();
+				session = openSession();
 
 				String sql = CustomSQLUtil.get(FIND_BY_C_N);
 
@@ -310,7 +309,7 @@ public class RoleFinderImpl implements RoleFinder {
 				if (itr.hasNext()) {
 					Role role = itr.next();
 
-					FinderCache.putResult(
+					FinderCacheUtil.putResult(
 						finderClassNameCacheEnabled, finderClassName,
 						finderMethodName, finderParams, finderArgs, role);
 
@@ -321,7 +320,7 @@ public class RoleFinderImpl implements RoleFinder {
 				throw new SystemException(e);
 			}
 			finally {
-				HibernateUtil.closeSession(session);
+				closeSession(session);
 			}
 
 			throw new NoSuchRoleException(
@@ -345,7 +344,7 @@ public class RoleFinderImpl implements RoleFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_U_G);
 
@@ -367,7 +366,7 @@ public class RoleFinderImpl implements RoleFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -397,7 +396,7 @@ public class RoleFinderImpl implements RoleFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_C_N_D_T);
 
@@ -426,14 +425,13 @@ public class RoleFinderImpl implements RoleFinder {
 				qPos.add(type);
 			}
 
-			return (List<Role>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+			return (List<Role>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -444,14 +442,14 @@ public class RoleFinderImpl implements RoleFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_C_N_S_P);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar("roleName", Hibernate.STRING);
-			q.addScalar("actionId", Hibernate.STRING);
+			q.addScalar("roleName", Type.STRING);
+			q.addScalar("actionId", Type.STRING);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -488,7 +486,7 @@ public class RoleFinderImpl implements RoleFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 

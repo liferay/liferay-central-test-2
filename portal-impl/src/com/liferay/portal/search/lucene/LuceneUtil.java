@@ -22,17 +22,17 @@
 
 package com.liferay.portal.search.lucene;
 
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.jndi.PortalJNDIUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.util.dao.DataAccess;
 import com.liferay.util.lucene.KeywordsUtil;
 
 import java.io.IOException;
@@ -46,6 +46,8 @@ import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
+
+import javax.naming.NamingException;
 
 import javax.sql.DataSource;
 
@@ -347,7 +349,7 @@ public class LuceneUtil {
 			Connection con = null;
 
 			try {
-				con = HibernateUtil.getConnection();
+				con = DataAccess.getConnection();
 
 				String url = con.getMetaData().getURL();
 
@@ -451,7 +453,7 @@ public class LuceneUtil {
 		Statement s = null;
 
 		try {
-			con = HibernateUtil.getConnection();
+			con = DataAccess.getConnection();
 
 			s = con.createStatement();
 
@@ -544,7 +546,7 @@ public class LuceneUtil {
 			}
 
 			try {
-				DataSource ds = HibernateUtil.getDataSource();
+				DataSource ds = PortalJNDIUtil.getDataSource();
 
 				directory = new JdbcDirectory(ds, _dialect, tableName);
 
@@ -556,6 +558,9 @@ public class LuceneUtil {
 			}
 			catch (IOException ioe) {
 				throw new RuntimeException(ioe);
+			}
+			catch (NamingException ne) {
+				throw new RuntimeException(ne);
 			}
 			catch (UnsupportedOperationException uoe) {
 				if (_log.isWarnEnabled()) {
@@ -611,7 +616,7 @@ public class LuceneUtil {
 		ResultSet rs = null;
 
 		try {
-			con = HibernateUtil.getConnection();
+			con = DataAccess.getConnection();
 
 			// Check if table exists
 

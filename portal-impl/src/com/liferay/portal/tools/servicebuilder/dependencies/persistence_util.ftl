@@ -82,7 +82,7 @@ public class ${entity.name}Util {
 
 	private static ${entity.name}Util _getUtil() {
 		if (_util == null) {
-			_util = (${entity.name}Util) ${beanLocatorUtilPackage}.BeanLocatorUtil.locate(_UTIL);
+			_util = (${entity.name}Util) ${beanLocatorUtil}.locate(_UTIL);
 		}
 
 		return _util;

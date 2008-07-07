@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.enterpriseadmin.action;
 
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ProgressTracker;
@@ -33,7 +34,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.dao.hibernate.QueryUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.util.Iterator;

@@ -39,16 +39,27 @@ import org.springframework.context.ApplicationContext;
  */
 public class BeanLocatorImpl implements BeanLocator {
 
+	public BeanLocatorImpl() {
+	}
+
+	public BeanLocatorImpl(ApplicationContext applicationContext) {
+		_applicationContext = applicationContext;
+	}
+
 	public Object locate(String name) throws BeanLocatorException {
-		ApplicationContext ctx = SpringUtil.getContext();
+		if (_applicationContext == null) {
+			_applicationContext = SpringUtil.getContext();
+		}
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Locating " + name);
 		}
 
-		return ctx.getBean(name);
+		return _applicationContext.getBean(name);
 	}
 
 	private static Log _log = LogFactory.getLog(BeanLocatorImpl.class);
+
+	private ApplicationContext _applicationContext;
 
 }

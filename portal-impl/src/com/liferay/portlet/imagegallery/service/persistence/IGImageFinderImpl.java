@@ -23,21 +23,20 @@
 package com.liferay.portlet.imagegallery.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.hibernate.Type;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.imagegallery.NoSuchImageException;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.util.Iterator;
 import java.util.List;
-
-import org.hibernate.Hibernate;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 /**
  * <a href="IGImageFinderImpl.java.html"><b><i>View Source</i></b></a>
@@ -45,7 +44,8 @@ import org.hibernate.Session;
  * @author Brian Wing Shun Chan
  *
  */
-public class IGImageFinderImpl implements IGImageFinder {
+public class IGImageFinderImpl
+	extends BasePersistenceImpl implements IGImageFinder {
 
 	public static String COUNT_BY_FOLDER_IDS =
 		IGImageFinder.class.getName() + ".countByFolderIds";
@@ -72,7 +72,7 @@ public class IGImageFinderImpl implements IGImageFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_FOLDER_IDS);
 
@@ -81,7 +81,7 @@ public class IGImageFinderImpl implements IGImageFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -107,7 +107,7 @@ public class IGImageFinderImpl implements IGImageFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -115,13 +115,13 @@ public class IGImageFinderImpl implements IGImageFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_GROUP_ID);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -143,7 +143,7 @@ public class IGImageFinderImpl implements IGImageFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -153,13 +153,13 @@ public class IGImageFinderImpl implements IGImageFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_G_U);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -182,7 +182,7 @@ public class IGImageFinderImpl implements IGImageFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -192,7 +192,7 @@ public class IGImageFinderImpl implements IGImageFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_GROUP_ID);
 
@@ -204,14 +204,13 @@ public class IGImageFinderImpl implements IGImageFinder {
 
 			qPos.add(groupId);
 
-			return (List<IGImage>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+			return (List<IGImage>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -219,7 +218,7 @@ public class IGImageFinderImpl implements IGImageFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_NO_ASSETS);
 
@@ -233,7 +232,7 @@ public class IGImageFinderImpl implements IGImageFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -243,7 +242,7 @@ public class IGImageFinderImpl implements IGImageFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_UUID_G);
 
@@ -280,7 +279,7 @@ public class IGImageFinderImpl implements IGImageFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -291,7 +290,7 @@ public class IGImageFinderImpl implements IGImageFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_G_U);
 
@@ -304,14 +303,13 @@ public class IGImageFinderImpl implements IGImageFinder {
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			return (List<IGImage>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+			return (List<IGImage>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 

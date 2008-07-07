@@ -24,6 +24,7 @@ package com.liferay.portlet.journal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
@@ -33,7 +34,6 @@ import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.model.JournalContentSearch;
 import com.liferay.portlet.journal.service.base.JournalContentSearchLocalServiceBaseImpl;
-import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.util.ArrayList;
 import java.util.List;

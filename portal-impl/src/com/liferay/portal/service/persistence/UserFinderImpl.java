@@ -23,25 +23,24 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.hibernate.Type;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.UserImpl;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.hibernate.Hibernate;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 /**
  * <a href="UserFinderImpl.java.html"><b><i>View Source</i></b></a>
@@ -51,7 +50,7 @@ import org.hibernate.Session;
  * @author Raymond Augé
  *
  */
-public class UserFinderImpl implements UserFinder {
+public class UserFinderImpl extends BasePersistenceImpl implements UserFinder {
 
 	public static String COUNT_BY_C_FN_MN_LN_SN_EA_A =
 		UserFinder.class.getName() + ".countByC_FN_MN_LN_SN_EA_A";
@@ -158,7 +157,7 @@ public class UserFinderImpl implements UserFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_C_FN_MN_LN_SN_EA_A);
 
@@ -188,7 +187,7 @@ public class UserFinderImpl implements UserFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -221,7 +220,7 @@ public class UserFinderImpl implements UserFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -260,7 +259,7 @@ public class UserFinderImpl implements UserFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_NO_ANNOUNCEMENTS_DELIVERIES);
 
@@ -278,7 +277,7 @@ public class UserFinderImpl implements UserFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -312,7 +311,7 @@ public class UserFinderImpl implements UserFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_C_FN_MN_LN_SN_EA_A);
 
@@ -360,14 +359,13 @@ public class UserFinderImpl implements UserFinder {
 				qPos.add(active);
 			}
 
-			return (List<User>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+			return (List<User>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 

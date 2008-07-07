@@ -24,12 +24,12 @@ package com.liferay.portlet.social.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.social.NoSuchActivityException;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.service.base.SocialActivityLocalServiceBaseImpl;
-import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.util.Date;
 import java.util.List;

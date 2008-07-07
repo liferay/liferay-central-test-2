@@ -8,9 +8,14 @@
 			<ref bean="liferayDataSourceTarget" />
 		</property>
 	</bean>
-	<bean id="liferaySessionFactory" class="com.liferay.portal.spring.hibernate.HibernateConfiguration" lazy-init="true">
+	<bean id="liferayHibernateSessionFactory" class="com.liferay.portal.spring.hibernate.PortalHibernateConfiguration" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
+		</property>
+	</bean>
+	<bean id="liferaySessionFactory" class="com.liferay.portal.dao.hibernate.SessionFactoryImpl" lazy-init="true">
+		<property name="sessionFactoryImplementor">
+			<ref bean="liferayHibernateSessionFactory" />
 		</property>
 	</bean>
 	<bean id="liferayTransactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager" lazy-init="true">
@@ -18,7 +23,7 @@
 			<ref bean="liferayDataSource" />
 		</property>
 		<property name="sessionFactory">
-			<ref bean="liferaySessionFactory" />
+			<ref bean="liferayHibernateSessionFactory" />
 		</property>
 	</bean>
 </beans>

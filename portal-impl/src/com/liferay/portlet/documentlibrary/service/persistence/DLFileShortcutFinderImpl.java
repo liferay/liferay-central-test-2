@@ -23,17 +23,16 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl;
-import com.liferay.util.dao.hibernate.QueryPos;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.util.List;
-
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 /**
  * <a href="DLFileShortcutFinderImpl.java.html"><b><i>View Source</i></b></a>
@@ -41,7 +40,8 @@ import org.hibernate.Session;
  * @author Bruno Farache
  *
  */
-public class DLFileShortcutFinderImpl implements DLFileShortcutFinder {
+public class DLFileShortcutFinderImpl
+	extends BasePersistenceImpl implements DLFileShortcutFinder {
 
 	public static String FIND_BY_UUID_G =
 		DLFileShortcutFinder.class.getName() + ".findByUuid_G";
@@ -52,7 +52,7 @@ public class DLFileShortcutFinderImpl implements DLFileShortcutFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_UUID_G);
 
@@ -89,7 +89,7 @@ public class DLFileShortcutFinderImpl implements DLFileShortcutFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 

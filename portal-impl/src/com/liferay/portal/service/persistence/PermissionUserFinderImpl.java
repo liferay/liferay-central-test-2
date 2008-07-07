@@ -23,19 +23,18 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.hibernate.Type;
 import com.liferay.portal.model.User;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import org.hibernate.Hibernate;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 /**
  * <a href="PermissionUserFinderImpl.java.html"><b><i>View Source</i></b></a>
@@ -43,7 +42,8 @@ import org.hibernate.Session;
  * @author Charles May
  *
  */
-public class PermissionUserFinderImpl implements PermissionUserFinder {
+public class PermissionUserFinderImpl
+	extends BasePersistenceImpl implements PermissionUserFinder {
 
 	public static String COUNT_BY_ADMIN_ROLE =
 		PermissionUserFinder.class.getName() + ".countByAdminRole";
@@ -109,13 +109,13 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_ORG_GROUP_PERMISSIONS);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -140,7 +140,7 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -153,7 +153,7 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			int count = countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_ADMIN_ROLE), companyId,
@@ -199,7 +199,7 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -212,7 +212,7 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			int count = countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_ADMIN_ROLE), companyId,
@@ -236,7 +236,7 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -250,7 +250,7 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			StringBuilder sb = new StringBuilder();
 
@@ -277,7 +277,7 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar("userId", Hibernate.LONG);
+			q.addScalar("userId", Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -311,7 +311,7 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 			List<User> users = new ArrayList<User>();
 
 			List<Long> userIds = (List<Long>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+				q, getDialect(), start, end);
 
 			for (long userId : userIds) {
 				User user = UserUtil.findByPrimaryKey(userId);
@@ -325,7 +325,7 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -338,7 +338,7 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			StringBuilder sb = new StringBuilder();
 
@@ -357,7 +357,7 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar("userId", Hibernate.LONG);
+			q.addScalar("userId", Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -383,7 +383,7 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 			List<User> users = new ArrayList<User>();
 
 			List<Long> userIds = (List<Long>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+				q, getDialect(), start, end);
 
 			for (long userId : userIds) {
 				User user = UserUtil.findByPrimaryKey(userId);
@@ -397,7 +397,7 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -411,7 +411,7 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 
 		SQLQuery q = session.createSQLQuery(sql);
 
-		q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+		q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 		QueryPos qPos = QueryPos.getInstance(q);
 

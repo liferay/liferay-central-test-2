@@ -29,6 +29,8 @@ import java.io.IOException;
 
 import java.sql.SQLException;
 
+import javax.naming.NamingException;
+
 /**
  * <a href="UpgradeProcess.java.html"><b><i>View Source</i></b></a>
  *
@@ -50,22 +52,26 @@ public abstract class UpgradeProcess {
 		return 0;
 	}
 
-	public void runSQL(String template) throws IOException, SQLException {
+	public void runSQL(String template)
+		throws IOException, NamingException, SQLException {
+
 		DBUtil.getInstance().runSQL(template);
 	}
 
 	public void runSQL(String[] templates)
-		throws IOException, SQLException {
+		throws IOException, NamingException, SQLException {
 
 		DBUtil.getInstance().runSQL(templates);
 	}
 
-	public void runSQLTemplate(String path) throws IOException, SQLException {
+	public void runSQLTemplate(String path)
+		throws IOException, NamingException, SQLException {
+
 		DBUtil.getInstance().runSQLTemplate(path);
 	}
 
 	public void runSQLTemplate(String path, boolean failOnError)
-		throws IOException, SQLException {
+		throws IOException, NamingException, SQLException {
 
 		DBUtil.getInstance().runSQLTemplate(path, failOnError);
 	}

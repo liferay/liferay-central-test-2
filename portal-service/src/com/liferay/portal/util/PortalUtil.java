@@ -166,6 +166,14 @@ public class PortalUtil {
 		return getPortal().getCurrentURL(portletRequest);
 	}
 
+	public static String getCustomSQLFunctionIsNotNull() {
+		return getPortal().getCustomSQLFunctionIsNotNull();
+	}
+
+	public static String getCustomSQLFunctionIsNull() {
+		return getPortal().getCustomSQLFunctionIsNull();
+	}
+
 	public static Date getDate(int month, int day, int year, PortalException pe)
 		throws PortalException {
 

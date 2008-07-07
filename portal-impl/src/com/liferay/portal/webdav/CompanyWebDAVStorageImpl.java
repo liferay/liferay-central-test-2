@@ -22,12 +22,12 @@
 
 package com.liferay.portal.webdav;
 
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

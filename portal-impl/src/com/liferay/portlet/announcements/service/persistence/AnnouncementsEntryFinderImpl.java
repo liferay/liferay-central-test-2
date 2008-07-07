@@ -24,17 +24,20 @@ package com.liferay.portlet.announcements.service.persistence;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.hibernate.Type;
 import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsFlagImpl;
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.sql.Timestamp;
 
@@ -44,10 +47,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.Hibernate;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-
 /**
  * <a href="AnnouncementsEntryFinderImpl.java.html"><b><i>View Source</i></b>
  * </a>
@@ -56,7 +55,8 @@ import org.hibernate.Session;
  * @author Raymond Augé
  *
  */
-public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
+public class AnnouncementsEntryFinderImpl
+	extends BasePersistenceImpl implements AnnouncementsEntryFinder {
 
 	public static String COUNT_BY_HIDDEN =
 		AnnouncementsEntryFinder.class.getName() + ".countByHidden";
@@ -85,7 +85,7 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_HIDDEN);
 
@@ -99,7 +99,7 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -131,7 +131,7 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -147,7 +147,7 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_HIDDEN);
 
@@ -160,7 +160,7 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -192,7 +192,7 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -206,7 +206,7 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_DISPLAY_DATE);
 
@@ -225,7 +225,7 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -241,7 +241,7 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_HIDDEN);
 
@@ -272,13 +272,13 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 			qPos.add(AnnouncementsFlagImpl.HIDDEN);
 
 			return (List<AnnouncementsEntry>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -294,7 +294,7 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_HIDDEN);
 
@@ -324,13 +324,13 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 			qPos.add(AnnouncementsFlagImpl.HIDDEN);
 
 			return (List<AnnouncementsEntry>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 

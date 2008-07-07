@@ -25,6 +25,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.OldServiceComponentException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -41,7 +42,6 @@ import java.io.IOException;
 import java.io.StringReader;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -76,18 +76,12 @@ public class ServiceComponentLocalServiceImpl
 		try {
 			ModelHintsUtil.read(
 				portletClassLoader, "META-INF/portlet-model-hints.xml");
-
-			Class<?> finderCacheClass = Class.forName(
-				"com.liferay.portlet.service.FinderCache", true,
-				portletClassLoader);
-
-			Method clearCacheMethod = finderCacheClass.getMethod("clearCache");
-
-			clearCacheMethod.invoke(finderCacheClass);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
+
+		CacheRegistry.clear();
 
 		ServiceComponent serviceComponent = null;
 		ServiceComponent previousServiceComponent = null;

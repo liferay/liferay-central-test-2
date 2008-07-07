@@ -22,11 +22,10 @@
 
 package com.liferay.portal.verify;
 
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portlet.social.service.SocialActivityLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialRequestLocalServiceUtil;
-import com.liferay.util.dao.DataAccess;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -79,7 +78,7 @@ public class VerifySocial extends VerifyProcess {
 		ResultSet rs = null;
 
 		try {
-			con = HibernateUtil.getConnection();
+			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(sql);
 
@@ -152,7 +151,7 @@ public class VerifySocial extends VerifyProcess {
 		ResultSet rs = null;
 
 		try {
-			con = HibernateUtil.getConnection();
+			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(sql);
 

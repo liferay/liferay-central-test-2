@@ -8,8 +8,15 @@ import ${packagePath}.model.impl.${entity.name}Impl;
 import ${packagePath}.model.impl.${entity.name}ModelImpl;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQuery;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.hibernate.Query;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Type;
+import com.liferay.portal.kernel.dao.search.DynamicQuery;
+import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.spring.hibernate.FinderCacheUtil;
 import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -19,11 +26,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
-import ${basePersistencePackage}.BasePersistence;
-import ${springHibernatePackage}.FinderCache;
-import ${propsUtilPackage}.PropsUtil;
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -38,17 +41,12 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.hibernate.Hibernate;
-import org.hibernate.Query;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.object.MappingSqlQuery;
 import org.springframework.jdbc.object.SqlUpdate;
 
-public class ${entity.name}PersistenceImpl extends BasePersistence implements ${entity.name}Persistence {
+public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implements ${entity.name}Persistence {
 
 	public ${entity.name} create(${entity.PKClassName} ${entity.PKVarName}) {
 		${entity.name} ${entity.varName} = new ${entity.name}Impl();
@@ -136,7 +134,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					throw processException(e);
 				}
 				finally {
-					FinderCache.clearCache("${column.mappingTable}");
+					FinderCacheUtil.clearCache("${column.mappingTable}");
 				}
 			</#if>
 		</#list>
@@ -158,7 +156,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 		finally {
 			closeSession(session);
 
-			FinderCache.clearCache(${entity.name}.class.getName());
+			FinderCacheUtil.clearCache(${entity.name}.class.getName());
 		}
 	}
 
@@ -219,7 +217,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 	public ${entity.name} updateImpl(${packagePath}.model.${entity.name} ${entity.varName}, boolean merge) throws SystemException {
 		<#list entity.columnList as column>
 			<#if column.isCollection() && column.isMappingManyToMany()>
-				FinderCache.clearCache("${column.mappingTable}");
+				FinderCacheUtil.clearCache("${column.mappingTable}");
 			</#if>
 		</#list>
 
@@ -257,7 +255,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 		finally {
 			closeSession(session);
 
-			FinderCache.clearCache(${entity.name}.class.getName());
+			FinderCacheUtil.clearCache(${entity.name}.class.getName());
 		}
 	}
 
@@ -355,7 +353,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 				Object result = null;
 
 				if (finderClassNameCacheEnabled) {
-					result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());
+					result = FinderCacheUtil.getResult(finderClassName, finderMethodName, finderParams, finderArgs, this);
 				}
 
 				if (result == null) {
@@ -441,7 +439,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 						List<${entity.name}> list = q.list();
 
-						FinderCache.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
+						FinderCacheUtil.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
 
 						return list;
 					}
@@ -515,7 +513,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 				Object result = null;
 
 				if (finderClassNameCacheEnabled) {
-					result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());
+					result = FinderCacheUtil.getResult(finderClassName, finderMethodName, finderParams, finderArgs, this);
 				}
 
 				if (result == null) {
@@ -608,7 +606,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 						List<${entity.name}> list = (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end);
 
-						FinderCache.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
+						FinderCacheUtil.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
 
 						return list;
 					}
@@ -933,7 +931,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 				Object result = null;
 
 				if (finderClassNameCacheEnabled) {
-					result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());
+					result = FinderCacheUtil.getResult(finderClassName, finderMethodName, finderParams, finderArgs, this);
 				}
 
 				if (result == null) {
@@ -1019,7 +1017,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 						List<${entity.name}> list = q.list();
 
-						FinderCache.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
+						FinderCacheUtil.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
 
 						if (list.size() == 0) {
 							return null;
@@ -1105,7 +1103,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName, finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1143,7 +1141,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					Collections.sort(list);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
 
 				return list;
 			}
@@ -1270,7 +1268,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 			Object result = null;
 
 			if (finderClassNameCacheEnabled) {
-				result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());
+				result = FinderCacheUtil.getResult(finderClassName, finderMethodName, finderParams, finderArgs, this);
 			}
 
 			if (result == null) {
@@ -1357,7 +1355,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 						count = new Long(0);
 					}
 
-					FinderCache.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, count);
+					FinderCacheUtil.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, count);
 
 					return count.intValue();
 				}
@@ -1384,7 +1382,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName, finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1407,7 +1405,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, count);
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, count);
 
 				return count.intValue();
 			}
@@ -1483,7 +1481,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 				Object result = null;
 
 				if (finderClassNameCacheEnabled) {
-					result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());
+					result = FinderCacheUtil.getResult(finderClassName, finderMethodName, finderParams, finderArgs, this);
 				}
 
 				if (result == null) {
@@ -1525,7 +1523,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 						List<${tempEntity.packagePath}.model.${tempEntity.name}> list = (List<${tempEntity.packagePath}.model.${tempEntity.name}>)QueryUtil.list(q, getDialect(), start, end);
 
-						FinderCache.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
+						FinderCacheUtil.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, list);
 
 						return list;
 					}
@@ -1587,7 +1585,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 				Object result = null;
 
 				if (finderClassNameCacheEnabled) {
-					result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());
+					result = FinderCacheUtil.getResult(finderClassName, finderMethodName, finderParams, finderArgs, this);
 				}
 
 				if (result == null) {
@@ -1598,7 +1596,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 						SQLQuery q = session.createSQLQuery(_SQL_GET${tempEntity.names?upper_case}SIZE);
 
-						q.addScalar(COUNT_COLUMN_NAME, Hibernate.LONG);
+						q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 						QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1616,7 +1614,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 							count = new Long(0);
 						}
 
-						FinderCache.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, count);
+						FinderCacheUtil.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, count);
 
 						return count.intValue();
 					}
@@ -1700,14 +1698,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 				Object result = null;
 
 				if (finderClassNameCacheEnabled) {
-					result = FinderCache.getResult(finderClassName, finderMethodName, finderParams, finderArgs, getSessionFactory());
+					result = FinderCacheUtil.getResult(finderClassName, finderMethodName, finderParams, finderArgs, this);
 				}
 
 				if (result == null) {
 					try {
 						Boolean value = Boolean.valueOf(contains${tempEntity.name}.contains(pk, ${tempEntity.varName}PK));
 
-						FinderCache.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, value);
+						FinderCacheUtil.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, value);
 
 						return value.booleanValue();
 					}
@@ -1740,7 +1738,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 						throw new SystemException(dae);
 					}
 					finally {
-						FinderCache.clearCache("${column.mappingTable}");
+						FinderCacheUtil.clearCache("${column.mappingTable}");
 					}
 				}
 
@@ -1752,7 +1750,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 						throw new SystemException(dae);
 					}
 					finally {
-						FinderCache.clearCache("${column.mappingTable}");
+						FinderCacheUtil.clearCache("${column.mappingTable}");
 					}
 				}
 
@@ -1766,7 +1764,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 						throw new SystemException(dae);
 					}
 					finally {
-						FinderCache.clearCache("${column.mappingTable}");
+						FinderCacheUtil.clearCache("${column.mappingTable}");
 					}
 				}
 
@@ -1780,7 +1778,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 						throw new SystemException(dae);
 					}
 					finally {
-						FinderCache.clearCache("${column.mappingTable}");
+						FinderCacheUtil.clearCache("${column.mappingTable}");
 					}
 				}
 
@@ -1792,7 +1790,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 						throw new SystemException(dae);
 					}
 					finally {
-						FinderCache.clearCache("${column.mappingTable}");
+						FinderCacheUtil.clearCache("${column.mappingTable}");
 					}
 				}
 
@@ -1804,7 +1802,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 						throw new SystemException(dae);
 					}
 					finally {
-						FinderCache.clearCache("${column.mappingTable}");
+						FinderCacheUtil.clearCache("${column.mappingTable}");
 					}
 				}
 
@@ -1816,7 +1814,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 						throw new SystemException(dae);
 					}
 					finally {
-						FinderCache.clearCache("${column.mappingTable}");
+						FinderCacheUtil.clearCache("${column.mappingTable}");
 					}
 				}
 
@@ -1830,7 +1828,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 						throw new SystemException(dae);
 					}
 					finally {
-						FinderCache.clearCache("${column.mappingTable}");
+						FinderCacheUtil.clearCache("${column.mappingTable}");
 					}
 				}
 
@@ -1844,7 +1842,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 						throw new SystemException(dae);
 					}
 					finally {
-						FinderCache.clearCache("${column.mappingTable}");
+						FinderCacheUtil.clearCache("${column.mappingTable}");
 					}
 				}
 
@@ -1860,7 +1858,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 						throw new SystemException(dae);
 					}
 					finally {
-						FinderCache.clearCache("${column.mappingTable}");
+						FinderCacheUtil.clearCache("${column.mappingTable}");
 					}
 				}
 
@@ -1876,7 +1874,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 						throw new SystemException(dae);
 					}
 					finally {
-						FinderCache.clearCache("${column.mappingTable}");
+						FinderCacheUtil.clearCache("${column.mappingTable}");
 					}
 				}
 			</#if>
@@ -1900,7 +1898,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 	}
 
 	protected void init() {
-		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(PropsUtil.get("value.object.listener.${packagePath}.model.${entity.name}")));
+		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(${propsUtil}.get("value.object.listener.${packagePath}.model.${entity.name}")));
 
 		if (listenerClassNames.length > 0) {
 			try {

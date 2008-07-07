@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.social.service;
 
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.BaseServiceTestCase;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -29,7 +30,6 @@ import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portal.util.comparator.UserScreenNameComparator;
 import com.liferay.portlet.social.model.SocialRelationConstants;
 import com.liferay.portlet.social.service.SocialRelationLocalServiceUtil;
-import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.util.List;
 

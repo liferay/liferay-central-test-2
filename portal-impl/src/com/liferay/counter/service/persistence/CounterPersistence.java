@@ -25,9 +25,12 @@ package com.liferay.counter.service.persistence;
 import com.liferay.counter.model.Counter;
 import com.liferay.counter.model.CounterRegister;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.hibernate.LockMode;
+import com.liferay.portal.kernel.dao.hibernate.ObjectNotFoundException;
+import com.liferay.portal.kernel.dao.hibernate.Query;
+import com.liferay.portal.kernel.dao.hibernate.Session;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.service.persistence.BasePersistence;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
@@ -38,11 +41,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.LockMode;
-import org.hibernate.ObjectNotFoundException;
-import org.hibernate.Query;
-import org.hibernate.Session;
-
 /**
  * <a href="CounterPersistence.java.html"><b><i>View Source</i></b></a>
  *
@@ -50,7 +48,7 @@ import org.hibernate.Session;
  * @author Harry Mark
  *
  */
-public class CounterPersistence extends BasePersistence {
+public class CounterPersistence extends BasePersistenceImpl {
 
 	public CounterPersistence() {
 	}
@@ -78,7 +76,7 @@ public class CounterPersistence extends BasePersistence {
 			return list;
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
 			closeSession(session);
@@ -128,7 +126,7 @@ public class CounterPersistence extends BasePersistence {
 					register.setRangeMax(rangeMax);
 				}
 				catch (Exception e) {
-					throw HibernateUtil.processException(e);
+					throw processException(e);
 				}
 				finally {
 					closeSession(session);
@@ -176,7 +174,7 @@ public class CounterPersistence extends BasePersistence {
 			catch (ObjectNotFoundException onfe) {
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -207,7 +205,7 @@ public class CounterPersistence extends BasePersistence {
 			catch (ObjectNotFoundException onfe) {
 			}
 			catch (Exception e) {
-				throw HibernateUtil.processException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);

@@ -16,7 +16,7 @@ import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 
 	import com.liferay.portal.PortalException;
 	import com.liferay.portal.SystemException;
-	import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+	import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
 
 	import java.util.List;
 </#if>

@@ -23,19 +23,18 @@
 package com.liferay.portlet.tasks.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.hibernate.Type;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.tasks.model.TasksProposal;
 import com.liferay.portlet.tasks.model.impl.TasksProposalImpl;
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.util.Iterator;
 import java.util.List;
-
-import org.hibernate.Hibernate;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 /**
  * <a href="TasksProposalFinderImpl.java.html"><b><i>View Source</i></b></a>
@@ -43,7 +42,8 @@ import org.hibernate.Session;
  * @author Raymond Aug�
  *
  */
-public class TasksProposalFinderImpl implements TasksProposalFinder {
+public class TasksProposalFinderImpl
+	extends BasePersistenceImpl implements TasksProposalFinder {
 
 	public static String COUNT_BY_G_U =
 		TasksProposalFinder.class.getName() + ".countByG_U";
@@ -57,13 +57,13 @@ public class TasksProposalFinderImpl implements TasksProposalFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_G_U);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -86,7 +86,7 @@ public class TasksProposalFinderImpl implements TasksProposalFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -97,7 +97,7 @@ public class TasksProposalFinderImpl implements TasksProposalFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_G_U);
 
@@ -111,13 +111,13 @@ public class TasksProposalFinderImpl implements TasksProposalFinder {
 			qPos.add(userId);
 
 			return (List<TasksProposal>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 

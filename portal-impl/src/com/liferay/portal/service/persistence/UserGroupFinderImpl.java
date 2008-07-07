@@ -24,6 +24,12 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchUserGroupException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.hibernate.Type;
+import com.liferay.portal.kernel.spring.hibernate.FinderCacheUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -31,20 +37,13 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.UserGroupImpl;
 import com.liferay.portal.model.impl.UserGroupModelImpl;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.FinderCache;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.hibernate.Hibernate;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 /**
  * <a href="UserGroupFinderImpl.java.html"><b><i>View Source</i></b></a>
@@ -52,7 +51,8 @@ import org.hibernate.Session;
  * @author Charles May
  *
  */
-public class UserGroupFinderImpl implements UserGroupFinder {
+public class UserGroupFinderImpl
+	extends BasePersistenceImpl implements UserGroupFinder {
 
 	public static String COUNT_BY_C_N_D =
 		UserGroupFinder.class.getName() + ".countByC_N_D";
@@ -83,7 +83,7 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_C_N_D);
 
@@ -92,7 +92,7 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -119,7 +119,7 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -136,14 +136,14 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 		};
 		Object finderArgs[] = new Object[] {new Long(companyId), name};
 
-		Object result = FinderCache.getResult(
-			finderClassName, finderMethodName, finderParams, finderArgs);
+		Object result = FinderCacheUtil.getResult(
+			finderClassName, finderMethodName, finderParams, finderArgs, this);
 
 		if (result == null) {
 			Session session = null;
 
 			try {
-				session = HibernateUtil.openSession();
+				session = openSession();
 
 				String sql = CustomSQLUtil.get(FIND_BY_C_N);
 
@@ -161,7 +161,7 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 				if (itr.hasNext()) {
 					UserGroup userGroup = itr.next();
 
-					FinderCache.putResult(
+					FinderCacheUtil.putResult(
 						finderClassNameCacheEnabled, finderClassName,
 						finderMethodName, finderParams, finderArgs, userGroup);
 
@@ -172,7 +172,7 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 				throw new SystemException(e);
 			}
 			finally {
-				HibernateUtil.closeSession(session);
+				closeSession(session);
 			}
 
 			throw new NoSuchUserGroupException(
@@ -196,7 +196,7 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_C_N_D);
 
@@ -218,13 +218,13 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 			qPos.add(description);
 
 			return (List<UserGroup>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 

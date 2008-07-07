@@ -58,7 +58,7 @@ public class ${entity.name}FinderUtil {
 
 	private static ${entity.name}FinderUtil _getUtil() {
 		if (_util == null) {
-			_util = (${entity.name}FinderUtil)${beanLocatorUtilPackage}.BeanLocatorUtil.locate(_UTIL);
+			_util = (${entity.name}FinderUtil)${beanLocatorUtil}.locate(_UTIL);
 		}
 
 		return _util;

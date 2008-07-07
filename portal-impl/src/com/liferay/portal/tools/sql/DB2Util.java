@@ -22,10 +22,9 @@
 
 package com.liferay.portal.tools.sql;
 
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.util.dao.DataAccess;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -38,6 +37,8 @@ import java.sql.SQLException;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.naming.NamingException;
 
 /**
  * <a href="DB2Util.java.html"><b><i>View Source</i></b></a>
@@ -64,7 +65,9 @@ public class DB2Util extends DBUtil {
 		return template;
 	}
 
-	public void runSQL(String template) throws IOException, SQLException {
+	public void runSQL(String template)
+		throws IOException, NamingException, SQLException {
+
 		if (template.startsWith(ALTER_COLUMN_NAME)) {
 			String sql = buildSQL(template);
 
@@ -77,7 +80,9 @@ public class DB2Util extends DBUtil {
 		}
 	}
 
-	public void runSQL(String[] templates) throws IOException, SQLException {
+	public void runSQL(String[] templates)
+		throws IOException, NamingException, SQLException {
+
 		super.runSQL(templates);
 
 		_reorgTables(templates);
@@ -155,7 +160,9 @@ public class DB2Util extends DBUtil {
 		return sb.toString();
 	}
 
-	private void _reorgTables(String[] templates) throws SQLException {
+	private void _reorgTables(String[] templates)
+		throws NamingException, SQLException {
+
 		Set<String> tableNames = new HashSet<String>();
 
 		for (String template : templates) {
@@ -172,7 +179,7 @@ public class DB2Util extends DBUtil {
 		CallableStatement callStmt = null;
 
 		try {
-			con = HibernateUtil.getConnection();
+			con = DataAccess.getConnection();
 
 			for (String tableName : tableNames) {
 				String sql = "call sysproc.admin_cmd(?)";

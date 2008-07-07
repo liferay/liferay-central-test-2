@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.webform.action;
 
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -33,7 +34,6 @@ import com.liferay.portlet.expando.model.ExpandoRow;
 import com.liferay.portlet.expando.service.ExpandoRowLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
 import com.liferay.portlet.webform.util.WebFormUtil;
-import com.liferay.util.dao.hibernate.QueryUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.ByteArrayInputStream;

@@ -25,11 +25,9 @@ package com.liferay.mail.service.persistence;
 import com.liferay.mail.NoSuchCyrusUserException;
 import com.liferay.mail.model.CyrusUser;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.service.persistence.BasePersistence;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-
-import org.hibernate.ObjectNotFoundException;
-import org.hibernate.Session;
+import com.liferay.portal.kernel.dao.hibernate.ObjectNotFoundException;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 /**
  * <a href="CyrusUserPersistence.java.html"><b><i>View Source</i></b></a>
@@ -37,7 +35,7 @@ import org.hibernate.Session;
  * @author Brian Wing Shun Chan
  *
  */
-public class CyrusUserPersistence extends BasePersistence {
+public class CyrusUserPersistence extends BasePersistenceImpl {
 
 	public void remove(long userId)
 		throws NoSuchCyrusUserException, SystemException {
@@ -45,7 +43,7 @@ public class CyrusUserPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			session = getSessionFactory().openSession();
+			session = openSession();
 
 			CyrusUser user = (CyrusUser)session.load(
 				CyrusUser.class, String.valueOf(userId));
@@ -58,10 +56,10 @@ public class CyrusUserPersistence extends BasePersistence {
 			throw new NoSuchCyrusUserException();
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
-			session.close();
+			closeSession(session);
 		}
 	}
 
@@ -69,7 +67,7 @@ public class CyrusUserPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			session = getSessionFactory().openSession();
+			session = openSession();
 
 			try {
 				CyrusUser userModel = (CyrusUser)session.load(
@@ -89,10 +87,10 @@ public class CyrusUserPersistence extends BasePersistence {
 			}
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
-			session.close();
+			closeSession(session);
 		}
 	}
 
@@ -102,7 +100,7 @@ public class CyrusUserPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			session = getSessionFactory().openSession();
+			session = openSession();
 
 			return (CyrusUser)session.load(
 				CyrusUser.class, String.valueOf(userId));
@@ -111,10 +109,10 @@ public class CyrusUserPersistence extends BasePersistence {
 			throw new NoSuchCyrusUserException();
 		}
 		catch (Exception e) {
-			throw HibernateUtil.processException(e);
+			throw processException(e);
 		}
 		finally {
-			session.close();
+			closeSession(session);
 		}
 	}
 

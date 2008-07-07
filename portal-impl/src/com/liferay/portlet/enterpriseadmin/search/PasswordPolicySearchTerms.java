@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.enterpriseadmin.search;
 
-import com.liferay.portal.kernel.dao.DAOParamUtil;
+import com.liferay.portal.kernel.dao.search.DAOParamUtil;
 
 import javax.portlet.RenderRequest;
 

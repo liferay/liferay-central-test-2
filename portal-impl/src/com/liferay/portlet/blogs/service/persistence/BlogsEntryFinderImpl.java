@@ -23,21 +23,20 @@
 package com.liferay.portlet.blogs.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.hibernate.Type;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import org.hibernate.Hibernate;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 /**
  * <a href="BlogsEntryFinderImpl.java.html"><b><i>View Source</i></b></a>
@@ -45,7 +44,8 @@ import org.hibernate.Session;
  * @author Brian Wing Shun Chan
  *
  */
-public class BlogsEntryFinderImpl implements BlogsEntryFinder {
+public class BlogsEntryFinderImpl
+	extends BasePersistenceImpl implements BlogsEntryFinder {
 
 	public static String COUNT_BY_ORGANIZATION_IDS =
 		BlogsEntryFinder.class.getName() + ".countByOrganizationIds";
@@ -73,7 +73,7 @@ public class BlogsEntryFinderImpl implements BlogsEntryFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_ORGANIZATION_IDS);
 
@@ -83,7 +83,7 @@ public class BlogsEntryFinderImpl implements BlogsEntryFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -111,7 +111,7 @@ public class BlogsEntryFinderImpl implements BlogsEntryFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -133,7 +133,7 @@ public class BlogsEntryFinderImpl implements BlogsEntryFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_ORGANIZATION_IDS);
 
@@ -156,13 +156,13 @@ public class BlogsEntryFinderImpl implements BlogsEntryFinder {
 			qPos.add(draft);
 
 			return (List<BlogsEntry>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -170,7 +170,7 @@ public class BlogsEntryFinderImpl implements BlogsEntryFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_NO_ASSETS);
 
@@ -184,7 +184,7 @@ public class BlogsEntryFinderImpl implements BlogsEntryFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 

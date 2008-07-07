@@ -24,6 +24,7 @@ package com.liferay.portlet.announcements.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -45,7 +46,6 @@ import com.liferay.portlet.announcements.job.CheckEntryJob;
 import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
 import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 import com.liferay.portlet.announcements.service.base.AnnouncementsEntryLocalServiceBaseImpl;
-import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.io.IOException;
 

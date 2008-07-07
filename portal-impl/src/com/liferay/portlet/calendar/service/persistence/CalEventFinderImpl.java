@@ -23,20 +23,19 @@
 package com.liferay.portlet.calendar.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
 import com.liferay.portal.kernel.util.CalendarUtil;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
-import com.liferay.util.dao.hibernate.QueryPos;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.sql.Timestamp;
 
 import java.util.Date;
 import java.util.List;
-
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 /**
  * <a href="CalEventFinderImpl.java.html"><b><i>View Source</i></b></a>
@@ -44,7 +43,8 @@ import org.hibernate.Session;
  * @author Brian Wing Shun Chan
  *
  */
-public class CalEventFinderImpl implements CalEventFinder {
+public class CalEventFinderImpl
+	extends BasePersistenceImpl implements CalEventFinder {
 
 	public static String FIND_BY_G_SD =
 		CalEventFinder.class.getName() + ".findByG_SD";
@@ -63,7 +63,7 @@ public class CalEventFinderImpl implements CalEventFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_G_SD);
 
@@ -85,7 +85,7 @@ public class CalEventFinderImpl implements CalEventFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -93,7 +93,7 @@ public class CalEventFinderImpl implements CalEventFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_REMINDBY);
 
@@ -111,7 +111,7 @@ public class CalEventFinderImpl implements CalEventFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 

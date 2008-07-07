@@ -13,7 +13,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
-import ${propsUtilPackage}.PropsUtil;
 
 import java.io.Serializable;
 
@@ -71,7 +70,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl {
 
 	public static final String TX_MANAGER = "${entity.getTXManager()}";
 
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get("value.object.finder.cache.enabled.${packagePath}.model.${entity.name}"), true);
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(${propsUtil}.get("value.object.finder.cache.enabled.${packagePath}.model.${entity.name}"), true);
 
 	public static ${entity.name} toModel(${entity.name}Soap soapModel) {
 		${entity.name} model = new ${entity.name}Impl();
@@ -100,7 +99,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl {
 			<#assign entityShortName = stringUtil.shorten(entity.name, 10, "")>
 
 			<#if stringUtil.startsWith(column.mappingTable, entityShortName)>
-				GetterUtil.getBoolean(PropsUtil.get("value.object.finder.cache.enabled.${column.mappingTable}"), true)
+				GetterUtil.getBoolean(${propsUtil}.get("value.object.finder.cache.enabled.${column.mappingTable}"), true)
 			<#else>
 				<#assign tempEntity = serviceBuilder.getEntity(column.getEJBName())>
 
@@ -111,7 +110,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl {
 		</#if>
 	</#list>
 
-	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get("lock.expiration.time.${packagePath}.model.${entity.name}"));
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(${propsUtil}.get("lock.expiration.time.${packagePath}.model.${entity.name}"));
 
 	public ${entity.name}ModelImpl() {
 	}

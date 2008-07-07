@@ -23,18 +23,17 @@
 package com.liferay.portlet.social.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.impl.SocialActivityImpl;
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.util.Iterator;
 import java.util.List;
-
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 /**
  * <a href="SocialActivityFinderImpl.java.html"><b><i>View Source</i></b></a>
@@ -42,7 +41,8 @@ import org.hibernate.Session;
  * @author Brian Wing Shun Chan
  *
  */
-public class SocialActivityFinderImpl implements SocialActivityFinder {
+public class SocialActivityFinderImpl
+	extends BasePersistenceImpl implements SocialActivityFinder {
 
 	public static String COUNT_BY_GROUP_ID =
 		SocialActivityFinder.class.getName() + ".countByGroupId";
@@ -72,7 +72,7 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_GROUP_ID);
 
@@ -100,7 +100,7 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -110,7 +110,7 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_ORGANIZATION_ID);
 
@@ -138,7 +138,7 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -146,7 +146,7 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_RELATION);
 
@@ -174,7 +174,7 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -184,7 +184,7 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_RELATION_TYPE);
 
@@ -213,7 +213,7 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -223,7 +223,7 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_GROUP_ID);
 
@@ -236,13 +236,13 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 			qPos.add(groupId);
 
 			return (List<SocialActivity>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -253,7 +253,7 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_ORGANIZATION_ID);
 
@@ -266,13 +266,13 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 			qPos.add(organizationId);
 
 			return (List<SocialActivity>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -282,7 +282,7 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_RELATION);
 
@@ -295,13 +295,13 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 			qPos.add(userId);
 
 			return (List<SocialActivity>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -312,7 +312,7 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_RELATION_TYPE);
 
@@ -326,13 +326,13 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 			qPos.add(type);
 
 			return (List<SocialActivity>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 

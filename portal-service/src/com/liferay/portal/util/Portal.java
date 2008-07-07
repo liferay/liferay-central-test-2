@@ -129,6 +129,10 @@ public interface Portal {
 
 	public String getCurrentURL(PortletRequest portletRequest);
 
+	public String getCustomSQLFunctionIsNotNull();
+
+	public String getCustomSQLFunctionIsNull();
+
 	public Date getDate(int month, int day, int year, PortalException pe)
 		throws PortalException;
 

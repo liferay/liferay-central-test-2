@@ -23,16 +23,15 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
 import com.liferay.portal.model.OrgGroupPermission;
 import com.liferay.portal.model.impl.OrgGroupPermissionImpl;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.util.dao.hibernate.QueryPos;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.util.Iterator;
-
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 /**
  * <a href="OrgGroupPermissionFinderImpl.java.html"><b><i>View Source</i></b>
@@ -41,7 +40,8 @@ import org.hibernate.Session;
  * @author Brian Wing Shun Chan
  *
  */
-public class OrgGroupPermissionFinderImpl implements OrgGroupPermissionFinder {
+public class OrgGroupPermissionFinderImpl
+	extends BasePersistenceImpl implements OrgGroupPermissionFinder {
 
 	public static String FIND_BY_O_G_R =
 		OrgGroupPermissionFinder.class.getName() + ".findByO_G_R";
@@ -53,7 +53,7 @@ public class OrgGroupPermissionFinderImpl implements OrgGroupPermissionFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_O_G_R);
 
@@ -80,7 +80,7 @@ public class OrgGroupPermissionFinderImpl implements OrgGroupPermissionFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 

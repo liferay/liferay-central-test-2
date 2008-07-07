@@ -22,8 +22,8 @@
 
 package com.liferay.portal.jndi;
 
+import com.liferay.portal.kernel.jndi.JNDIUtil;
 import com.liferay.portal.kernel.jndi.PortalJNDI;
-import com.liferay.util.JNDIUtil;
 
 import javax.mail.Session;
 

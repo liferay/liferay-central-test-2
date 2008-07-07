@@ -23,20 +23,19 @@
 package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.hibernate.Type;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
 import com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl;
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.util.Iterator;
 import java.util.List;
-
-import org.hibernate.Hibernate;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 /**
  * <a href="ShoppingCouponFinderImpl.java.html"><b><i>View Source</i></b></a>
@@ -44,7 +43,8 @@ import org.hibernate.Session;
  * @author Brian Wing Shun Chan
  *
  */
-public class ShoppingCouponFinderImpl implements ShoppingCouponFinder {
+public class ShoppingCouponFinderImpl
+	extends BasePersistenceImpl implements ShoppingCouponFinder {
 
 	public static String COUNT_BY_G_C_C_A_DT =
 		ShoppingCouponFinder.class.getName() + ".countByG_C_C_A_DT";
@@ -62,7 +62,7 @@ public class ShoppingCouponFinderImpl implements ShoppingCouponFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_G_C_C_A_DT);
 
@@ -70,7 +70,7 @@ public class ShoppingCouponFinderImpl implements ShoppingCouponFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -98,7 +98,7 @@ public class ShoppingCouponFinderImpl implements ShoppingCouponFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -112,7 +112,7 @@ public class ShoppingCouponFinderImpl implements ShoppingCouponFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_G_C_C_A_DT);
 
@@ -133,13 +133,13 @@ public class ShoppingCouponFinderImpl implements ShoppingCouponFinder {
 			qPos.add(discountType);
 
 			return (List<ShoppingCoupon>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 

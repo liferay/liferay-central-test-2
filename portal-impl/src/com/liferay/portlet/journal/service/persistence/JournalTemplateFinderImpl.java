@@ -23,23 +23,22 @@
 package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.hibernate.Type;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.util.Iterator;
 import java.util.List;
-
-import org.hibernate.Hibernate;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 /**
  * <a href="JournalTemplateFinderImpl.java.html"><b><i>View Source</i></b></a>
@@ -48,7 +47,8 @@ import org.hibernate.Session;
  * @author Bruno Farache
  *
  */
-public class JournalTemplateFinderImpl implements JournalTemplateFinder {
+public class JournalTemplateFinderImpl
+	extends BasePersistenceImpl implements JournalTemplateFinder {
 
 	public static String COUNT_BY_C_G_T_S_N_D =
 		JournalTemplateFinder.class.getName() + ".countByC_G_T_S_N_D";
@@ -105,7 +105,7 @@ public class JournalTemplateFinderImpl implements JournalTemplateFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_C_G_T_S_N_D);
 
@@ -137,7 +137,7 @@ public class JournalTemplateFinderImpl implements JournalTemplateFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -183,7 +183,7 @@ public class JournalTemplateFinderImpl implements JournalTemplateFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -238,7 +238,7 @@ public class JournalTemplateFinderImpl implements JournalTemplateFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_C_G_T_S_N_D);
 
@@ -302,13 +302,13 @@ public class JournalTemplateFinderImpl implements JournalTemplateFinder {
 			qPos.add(descriptions, 2);
 
 			return (List<JournalTemplate>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 

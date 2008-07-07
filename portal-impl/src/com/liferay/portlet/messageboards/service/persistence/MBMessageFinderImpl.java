@@ -23,22 +23,21 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.hibernate.Type;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.util.Iterator;
 import java.util.List;
-
-import org.hibernate.Hibernate;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 /**
  * <a href="MBMessageFinderImpl.java.html"><b><i>View Source</i></b></a>
@@ -46,7 +45,8 @@ import org.hibernate.Session;
  * @author Brian Wing Shun Chan
  *
  */
-public class MBMessageFinderImpl implements MBMessageFinder {
+public class MBMessageFinderImpl
+	extends BasePersistenceImpl implements MBMessageFinder {
 
 	public static String COUNT_BY_CATEGORY_IDS =
 		MBMessageFinder.class.getName() + ".countByCategoryIds";
@@ -78,7 +78,7 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_CATEGORY_IDS);
 
@@ -87,7 +87,7 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -113,7 +113,7 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -121,13 +121,13 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_GROUP_ID);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -149,7 +149,7 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -157,13 +157,13 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_G_U);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -186,7 +186,7 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -203,7 +203,7 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_GROUP_ID);
 
@@ -217,14 +217,13 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 
 			qPos.add(groupId);
 
-			return (List<MBMessage>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+			return (List<MBMessage>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -232,7 +231,7 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_NO_ASSETS);
 
@@ -246,7 +245,7 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -256,7 +255,7 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_UUID_G);
 
@@ -293,7 +292,7 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -312,7 +311,7 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_G_U);
 
@@ -327,14 +326,13 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			return (List<MBMessage>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+			return (List<MBMessage>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -344,7 +342,7 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_C_C);
 
@@ -363,7 +361,7 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 

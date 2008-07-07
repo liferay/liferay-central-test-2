@@ -23,16 +23,19 @@
 package com.liferay.portlet.tags.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.hibernate.Type;
 import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.spring.hibernate.CustomSQLUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.impl.TagsAssetImpl;
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
+import com.liferay.util.dao.hibernate.CustomSQLUtil;
 
 import java.sql.Timestamp;
 
@@ -40,17 +43,14 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import org.hibernate.Hibernate;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-
 /**
  * <a href="TagsAssetFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class TagsAssetFinderImpl implements TagsAssetFinder {
+public class TagsAssetFinderImpl
+	extends BasePersistenceImpl implements TagsAssetFinder {
 
 	public static String COUNT_BY_AND_ENTRY_IDS =
 		TagsAssetFinder.class.getName() + ".countByAndEntryIds";
@@ -84,7 +84,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			StringBuilder sb = new StringBuilder();
 
@@ -110,7 +110,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -138,7 +138,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -151,7 +151,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			StringBuilder sb = new StringBuilder();
 
@@ -215,7 +215,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -245,7 +245,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -258,7 +258,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_OR_ENTRY_IDS);
 
@@ -304,7 +304,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -334,7 +334,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -353,7 +353,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			StringBuilder sb = new StringBuilder();
 
@@ -405,14 +405,13 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 
 			setClassNamedIds(qPos, classNameIds);
 
-			return (List<TagsAsset>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+			return (List<TagsAsset>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -432,7 +431,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			StringBuilder sb = new StringBuilder();
 
@@ -524,14 +523,13 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 
 			setClassNamedIds(qPos, classNameIds);
 
-			return (List<TagsAsset>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+			return (List<TagsAsset>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -562,7 +560,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_OR_ENTRY_IDS);
 
@@ -640,14 +638,13 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 
 			setClassNamedIds(qPos, classNameIds);
 
-			return (List<TagsAsset>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+			return (List<TagsAsset>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 
@@ -658,7 +655,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.openSession();
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_VIEW_COUNT);
 
@@ -698,14 +695,13 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 				qPos.add(classNameId[i]);
 			}
 
-			return (List<TagsAsset>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), start, end);
+			return (List<TagsAsset>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			HibernateUtil.closeSession(session);
+			closeSession(session);
 		}
 	}
 

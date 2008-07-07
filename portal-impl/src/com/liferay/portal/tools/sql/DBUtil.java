@@ -22,13 +22,12 @@
 
 package com.liferay.portal.tools.sql;
 
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.velocity.VelocityUtil;
 import com.liferay.util.SimpleCounter;
-import com.liferay.util.dao.DataAccess;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -43,6 +42,8 @@ import java.sql.Statement;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.naming.NamingException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -108,11 +109,59 @@ public abstract class DBUtil {
 	};
 
 	public static DBUtil getInstance() {
-		if (_dbUtil != null) {
-			return _dbUtil;
+		return _dbUtil;
+	}
+
+	public static DBUtil getInstance(String dbType) {
+		DBUtil dbUtil = null;
+
+		if (dbType.equals(DB_TYPE_DB2)) {
+			dbUtil = DB2Util.getInstance();
+		}
+		else if (dbType.equals(DB_TYPE_DERBY)) {
+			dbUtil = DerbyUtil.getInstance();
+		}
+		else if (dbType.equals(DB_TYPE_FIREBIRD)) {
+			dbUtil = FirebirdUtil.getInstance();
+		}
+		else if (dbType.equals(DB_TYPE_HYPERSONIC)) {
+			dbUtil = HypersonicUtil.getInstance();
+		}
+		else if (dbType.equals(DB_TYPE_INFORMIX)) {
+			dbUtil = InformixUtil.getInstance();
+		}
+		else if (dbType.equals(DB_TYPE_INTERBASE)) {
+			dbUtil = InterBaseUtil.getInstance();
+		}
+		else if (dbType.equals(DB_TYPE_JDATASTORE)) {
+			dbUtil = JDataStoreUtil.getInstance();
+		}
+		else if (dbType.equals(DB_TYPE_MYSQL)) {
+			dbUtil = MySQLUtil.getInstance();
+		}
+		else if (dbType.equals(DB_TYPE_ORACLE)) {
+			dbUtil = OracleUtil.getInstance();
+		}
+		else if (dbType.equals(DB_TYPE_POSTGRESQL)) {
+			dbUtil = PostgreSQLUtil.getInstance();
+		}
+		else if (dbType.equals(DB_TYPE_SAP)) {
+			dbUtil = SAPUtil.getInstance();
+		}
+		else if (dbType.equals(DB_TYPE_SQLSERVER)) {
+			dbUtil = SQLServerUtil.getInstance();
+		}
+		else if (dbType.equals(DB_TYPE_SYBASE)) {
+			dbUtil = SybaseUtil.getInstance();
 		}
 
-		Dialect dialect = HibernateUtil.getWrappedDialect();
+		return dbUtil;
+	}
+
+	public static void setInstance(Dialect dialect) {
+		if (_dbUtil != null) {
+			return;
+		}
 
 		if (dialect instanceof DB2Dialect) {
 			if (dialect instanceof DerbyDialect) {
@@ -164,54 +213,6 @@ public abstract class DBUtil {
 				_dbUtil = SybaseUtil.getInstance();
 			}
 		}
-
-		return _dbUtil;
-	}
-
-	public static DBUtil getInstance(String dbType) {
-		DBUtil dbUtil = null;
-
-		if (dbType.equals(DB_TYPE_DB2)) {
-			dbUtil = DB2Util.getInstance();
-		}
-		else if (dbType.equals(DB_TYPE_DERBY)) {
-			dbUtil = DerbyUtil.getInstance();
-		}
-		else if (dbType.equals(DB_TYPE_FIREBIRD)) {
-			dbUtil = FirebirdUtil.getInstance();
-		}
-		else if (dbType.equals(DB_TYPE_HYPERSONIC)) {
-			dbUtil = HypersonicUtil.getInstance();
-		}
-		else if (dbType.equals(DB_TYPE_INFORMIX)) {
-			dbUtil = InformixUtil.getInstance();
-		}
-		else if (dbType.equals(DB_TYPE_INTERBASE)) {
-			dbUtil = InterBaseUtil.getInstance();
-		}
-		else if (dbType.equals(DB_TYPE_JDATASTORE)) {
-			dbUtil = JDataStoreUtil.getInstance();
-		}
-		else if (dbType.equals(DB_TYPE_MYSQL)) {
-			dbUtil = MySQLUtil.getInstance();
-		}
-		else if (dbType.equals(DB_TYPE_ORACLE)) {
-			dbUtil = OracleUtil.getInstance();
-		}
-		else if (dbType.equals(DB_TYPE_POSTGRESQL)) {
-			dbUtil = PostgreSQLUtil.getInstance();
-		}
-		else if (dbType.equals(DB_TYPE_SAP)) {
-			dbUtil = SAPUtil.getInstance();
-		}
-		else if (dbType.equals(DB_TYPE_SQLSERVER)) {
-			dbUtil = SQLServerUtil.getInstance();
-		}
-		else if (dbType.equals(DB_TYPE_SYBASE)) {
-			dbUtil = SybaseUtil.getInstance();
-		}
-
-		return dbUtil;
 	}
 
 	public void buildCreateFile(String databaseName) throws IOException {
@@ -240,18 +241,20 @@ public abstract class DBUtil {
 		return getTemplate()[1];
 	}
 
-	public void runSQL(String sql) throws IOException, SQLException {
+	public void runSQL(String sql)
+		throws IOException, NamingException, SQLException {
+
 		runSQL(new String[] {sql});
 	}
 
 	public void runSQL(String[] sqls)
-		throws IOException, SQLException {
+		throws IOException, NamingException, SQLException {
 
 		Connection con = null;
 		Statement stmt = null;
 
 		try {
-			con = HibernateUtil.getConnection();
+			con = DataAccess.getConnection();
 
 			stmt = con.createStatement();
 
@@ -285,12 +288,14 @@ public abstract class DBUtil {
 		}
 	}
 
-	public void runSQLTemplate(String path) throws IOException, SQLException {
+	public void runSQLTemplate(String path)
+		throws IOException, NamingException, SQLException {
+
 		runSQLTemplate(path, true);
 	}
 
 	public void runSQLTemplate(String path, boolean failOnError)
-		throws IOException, SQLException {
+		throws IOException, NamingException, SQLException {
 
 		ClassLoader classLoader = getClass().getClassLoader();
 
@@ -312,7 +317,7 @@ public abstract class DBUtil {
 
 	public void runSQLTemplateString(
 			String template, boolean evaluate, boolean failOnError)
-		throws IOException, SQLException {
+		throws IOException, NamingException, SQLException {
 
 		if (evaluate) {
 			try {
