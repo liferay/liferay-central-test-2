@@ -637,8 +637,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 					portletClassLoader, "portlet");
 		}
 		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to read portlet.properties");
+			if (_log.isDebugEnabled()) {
+				_log.debug("Unable to read portlet.properties");
 			}
 		}
 
@@ -691,8 +691,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 					portletClassLoader, "service");
 		}
 		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to read service.properties");
+			if (_log.isDebugEnabled()) {
+				_log.debug("Unable to read service.properties");
 			}
 		}
 
