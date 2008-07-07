@@ -25,7 +25,6 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.OldServiceComponentException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -80,8 +79,6 @@ public class ServiceComponentLocalServiceImpl
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
-
-		CacheRegistry.clear();
 
 		ServiceComponent serviceComponent = null;
 		ServiceComponent previousServiceComponent = null;

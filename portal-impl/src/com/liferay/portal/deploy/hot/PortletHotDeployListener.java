@@ -23,6 +23,7 @@
 package com.liferay.portal.deploy.hot;
 
 import com.liferay.portal.apache.bridges.struts.LiferayServletContextProvider;
+import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
@@ -220,7 +221,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		// Portlet context wrapper
 
-		strutsBridges = false;
+		_strutsBridges = false;
 
 		Iterator<Portlet> portletsItr = portlets.iterator();
 
@@ -233,13 +234,13 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		// Struts bridges
 
-		if (!strutsBridges) {
-			strutsBridges = GetterUtil.getBoolean(
+		if (!_strutsBridges) {
+			_strutsBridges = GetterUtil.getBoolean(
 				servletContext.getInitParameter(
 					"struts-bridges-context-provider"));
 		}
 
-		if (strutsBridges) {
+		if (_strutsBridges) {
 			servletContext.setAttribute(
 				ServletContextProvider.STRUTS_BRIDGES_CONTEXT_PROVIDER,
 				new LiferayServletContextProvider());
@@ -275,6 +276,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		processPortletProperties(servletContextName, portletClassLoader);
 
 		// Service builder properties
+
+		_processServiceBuilderProperties = false;
 
 		processServiceBuilderProperties(servletContext, portletClassLoader);
 
@@ -342,6 +345,10 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		PortletResourceBundles.remove(servletContextName);
 
+		if (_processServiceBuilderProperties) {
+			CacheRegistry.clear();
+		}
+
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				portlets.size() + " portlets for " + servletContextName +
@@ -374,7 +381,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			(javax.portlet.Portlet)portletClass.newInstance();
 
 		if (ClassUtil.isSubclass(portletClass, StrutsPortlet.class.getName())) {
-			strutsBridges = true;
+			_strutsBridges = true;
 		}
 
 		ConfigurationAction configurationActionInstance = null;
@@ -716,13 +723,16 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		ServiceComponentLocalServiceUtil.updateServiceComponent(
 			servletContext, portletClassLoader, buildNamespace, buildNumber,
 			buildDate);
-	}
 
-	protected boolean strutsBridges;
+		_processServiceBuilderProperties = true;
+	}
 
 	private static Log _log = LogFactory.getLog(PortletHotDeployListener.class);
 
 	private static Map<String, ObjectValuePair<long[], List<Portlet>>> _vars =
 		new HashMap<String, ObjectValuePair<long[], List<Portlet>>>();
+
+	private boolean _strutsBridges;
+	private boolean _processServiceBuilderProperties;
 
 }
