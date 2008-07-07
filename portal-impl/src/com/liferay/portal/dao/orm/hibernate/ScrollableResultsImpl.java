@@ -22,7 +22,7 @@
 
 package com.liferay.portal.dao.orm.hibernate;
 
-import com.liferay.portal.kernel.dao.orm.HibernateException;
+import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.ScrollableResults;
 
 /**
@@ -39,7 +39,7 @@ public class ScrollableResultsImpl implements ScrollableResults {
 		_scrollableResults = scrollableResults;
 	}
 
-	public boolean first() throws HibernateException {
+	public boolean first() throws ORMException {
 		try {
 			return _scrollableResults.first();
 		}
@@ -48,7 +48,7 @@ public class ScrollableResultsImpl implements ScrollableResults {
 		}
 	}
 
-	public Object get(int i) throws HibernateException {
+	public Object get(int i) throws ORMException {
 		try {
 			return _scrollableResults.get(i);
 		}
@@ -57,7 +57,7 @@ public class ScrollableResultsImpl implements ScrollableResults {
 		}
 	}
 
-	public boolean last() throws HibernateException {
+	public boolean last() throws ORMException {
 		try {
 			return _scrollableResults.last();
 		}
@@ -66,7 +66,7 @@ public class ScrollableResultsImpl implements ScrollableResults {
 		}
 	}
 
-	public boolean next() throws HibernateException {
+	public boolean next() throws ORMException {
 		try {
 			return _scrollableResults.next();
 		}
@@ -75,7 +75,7 @@ public class ScrollableResultsImpl implements ScrollableResults {
 		}
 	}
 
-	public boolean previous() throws HibernateException {
+	public boolean previous() throws ORMException {
 		try {
 			return _scrollableResults.previous();
 		}
@@ -84,7 +84,7 @@ public class ScrollableResultsImpl implements ScrollableResults {
 		}
 	}
 
-	public boolean scroll(int i) throws HibernateException {
+	public boolean scroll(int i) throws ORMException {
 		try {
 			return _scrollableResults.scroll(i);
 		}

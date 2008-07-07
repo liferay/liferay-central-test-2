@@ -23,7 +23,7 @@
 package com.liferay.portal.dao.orm.hibernate;
 
 import com.liferay.portal.kernel.dao.orm.Dialect;
-import com.liferay.portal.kernel.dao.orm.HibernateException;
+import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
 
@@ -40,14 +40,14 @@ import org.hibernate.engine.SessionFactoryImplementor;
  */
 public class SessionFactoryImpl implements SessionFactory {
 
-	public void closeSession(Session session) throws HibernateException {
+	public void closeSession(Session session) throws ORMException {
 	}
 
-	public Dialect getDialect() throws HibernateException {
+	public Dialect getDialect() throws ORMException {
 		return new DialectImpl(_sessionFactoryImplementor.getDialect());
 	}
 
-	public Session openSession() throws HibernateException {
+	public Session openSession() throws ORMException {
 		org.hibernate.Session session =
 			_sessionFactoryImplementor.getCurrentSession();
 

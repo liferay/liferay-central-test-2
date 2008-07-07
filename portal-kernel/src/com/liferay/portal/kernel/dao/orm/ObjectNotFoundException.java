@@ -28,7 +28,7 @@ package com.liferay.portal.kernel.dao.orm;
  * @author Brian Wing Shun Chan
  *
  */
-public class ObjectNotFoundException extends HibernateException {
+public class ObjectNotFoundException extends ORMException {
 
 	public ObjectNotFoundException() {
 		super();

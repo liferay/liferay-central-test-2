@@ -26,7 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.orm.Dialect;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
-import com.liferay.portal.kernel.dao.orm.HibernateException;
+import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.ModelListener;
@@ -55,7 +55,7 @@ public class BasePersistenceImpl implements SessionFactory {
 		return _dialect;
 	}
 
-	public Session openSession() throws HibernateException {
+	public Session openSession() throws ORMException {
 		return _sessionFactory.openSession();
 	}
 
@@ -63,15 +63,15 @@ public class BasePersistenceImpl implements SessionFactory {
 	}
 
 	public SystemException processException(Exception e) {
-		if (e instanceof HibernateException) {
-			_log.error("Caught HibernateException");
+		if (e instanceof ORMException) {
+			_log.error("Caught ORMException");
 		}
 		else {
 			_log.error("Caught unexpected exception " + e.getClass().getName());
 		}
-	
+
 		_log.error(e, e);
-	
+
 		return new SystemException(e);
 	}
 

@@ -22,7 +22,7 @@
 
 package com.liferay.portal.dao.orm.hibernate;
 
-import com.liferay.portal.kernel.dao.orm.HibernateException;
+import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.ObjectNotFoundException;
 
 /**
@@ -33,12 +33,12 @@ import com.liferay.portal.kernel.dao.orm.ObjectNotFoundException;
  */
 public class ExceptionTranslator {
 
-	public static HibernateException translate(Exception e) {
+	public static ORMException translate(Exception e) {
 		if (e instanceof org.hibernate.ObjectNotFoundException) {
 			return new ObjectNotFoundException(e.getMessage());
 		}
 		else {
-			return new HibernateException(e.getMessage());
+			return new ORMException(e.getMessage());
 		}
 	}
 

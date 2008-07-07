@@ -30,16 +30,16 @@ package com.liferay.portal.kernel.dao.orm;
  */
 public interface ScrollableResults {
 
-	public boolean first() throws HibernateException;
+	public boolean first() throws ORMException;
 
-	public Object get(int i) throws HibernateException;
+	public Object get(int i) throws ORMException;
 
-	public boolean last() throws HibernateException;
+	public boolean last() throws ORMException;
 
-	public boolean next() throws HibernateException;
+	public boolean next() throws ORMException;
 
-	public boolean previous() throws HibernateException;
+	public boolean previous() throws ORMException;
 
-	public boolean scroll(int i) throws HibernateException;
+	public boolean scroll(int i) throws ORMException;
 
 }

@@ -37,11 +37,11 @@ import java.util.List;
  */
 public interface Query {
 
-	public Iterator iterate() throws HibernateException;
+	public Iterator iterate() throws ORMException;
 
-	public List list() throws HibernateException;
+	public List list() throws ORMException;
 
-	public ScrollableResults scroll() throws HibernateException;
+	public ScrollableResults scroll() throws ORMException;
 
 	public Query setBoolean(int pos, boolean value);
 
@@ -65,6 +65,6 @@ public interface Query {
 
 	public Query setTimestamp(int pos, Timestamp value);
 
-	public Object uniqueResult() throws HibernateException;
+	public Object uniqueResult() throws ORMException;
 
 }

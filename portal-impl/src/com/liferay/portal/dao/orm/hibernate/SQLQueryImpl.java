@@ -22,7 +22,7 @@
 
 package com.liferay.portal.dao.orm.hibernate;
 
-import com.liferay.portal.kernel.dao.orm.HibernateException;
+import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.ScrollableResults;
@@ -59,7 +59,7 @@ public class SQLQueryImpl implements SQLQuery {
 		return this;
 	}
 
-	public Iterator iterate() throws HibernateException {
+	public Iterator iterate() throws ORMException {
 		try {
 			return _sqlQuery.iterate();
 		}
@@ -68,7 +68,7 @@ public class SQLQueryImpl implements SQLQuery {
 		}
 	}
 
-	public List list() throws HibernateException {
+	public List list() throws ORMException {
 		try {
 			return _sqlQuery.list();
 		}
@@ -77,7 +77,7 @@ public class SQLQueryImpl implements SQLQuery {
 		}
 	}
 
-	public ScrollableResults scroll() throws HibernateException {
+	public ScrollableResults scroll() throws ORMException {
 		try {
 			return new ScrollableResultsImpl(_sqlQuery.scroll());
 		}
@@ -152,7 +152,7 @@ public class SQLQueryImpl implements SQLQuery {
 		return this;
 	}
 
-	public Object uniqueResult() throws HibernateException {
+	public Object uniqueResult() throws ORMException {
 		try {
 			return _sqlQuery.uniqueResult();
 		}

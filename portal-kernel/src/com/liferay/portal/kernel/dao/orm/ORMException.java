@@ -23,26 +23,26 @@
 package com.liferay.portal.kernel.dao.orm;
 
 /**
- * <a href="HibernateException.java.html"><b><i>View Source</i></b></a>
+ * <a href="ORMException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class HibernateException extends RuntimeException {
+public class ORMException extends RuntimeException {
 
-	public HibernateException() {
+	public ORMException() {
 		super();
 	}
 
-	public HibernateException(String msg) {
+	public ORMException(String msg) {
 		super(msg);
 	}
 
-	public HibernateException(Throwable cause) {
+	public ORMException(Throwable cause) {
 		super(cause);
 	}
 
-	public HibernateException(String msg, Throwable cause) {
+	public ORMException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 

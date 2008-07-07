@@ -22,8 +22,8 @@
 
 package com.liferay.portal.dao.orm.hibernate;
 
-import com.liferay.portal.kernel.dao.orm.HibernateException;
 import com.liferay.portal.kernel.dao.orm.LockMode;
+import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
@@ -44,7 +44,7 @@ public class SessionImpl implements Session {
 		_session = session;
 	}
 
-	public Connection close() throws HibernateException {
+	public Connection close() throws ORMException {
 		try {
 			return _session.close();
 		}
@@ -53,7 +53,7 @@ public class SessionImpl implements Session {
 		}
 	}
 
-	public Query createQuery(String queryString) throws HibernateException {
+	public Query createQuery(String queryString) throws ORMException {
 		try {
 			return new QueryImpl(_session.createQuery(queryString));
 		}
@@ -63,7 +63,7 @@ public class SessionImpl implements Session {
 	}
 
 	public SQLQuery createSQLQuery(String queryString)
-		throws HibernateException {
+		throws ORMException {
 
 		try {
 			return new SQLQueryImpl(_session.createSQLQuery(queryString));
@@ -73,7 +73,7 @@ public class SessionImpl implements Session {
 		}
 	}
 
-	public void delete(Object object) throws HibernateException {
+	public void delete(Object object) throws ORMException {
 		try {
 			_session.delete(object);
 		}
@@ -82,7 +82,7 @@ public class SessionImpl implements Session {
 		}
 	}
 
-	public void flush() throws HibernateException {
+	public void flush() throws ORMException {
 		try {
 			_session.flush();
 		}
@@ -91,7 +91,7 @@ public class SessionImpl implements Session {
 		}
 	}
 
-	public Object get(Class clazz, Serializable id) throws HibernateException {
+	public Object get(Class clazz, Serializable id) throws ORMException {
 		try {
 			return _session.get(clazz, id);
 		}
@@ -101,7 +101,7 @@ public class SessionImpl implements Session {
 	}
 
 	public Object get(Class clazz, Serializable id, LockMode lockMode)
-		throws HibernateException {
+		throws ORMException {
 
 		try {
 			return _session.get(
@@ -112,7 +112,7 @@ public class SessionImpl implements Session {
 		}
 	}
 
-	public Object load(Class clazz, Serializable id) throws HibernateException {
+	public Object load(Class clazz, Serializable id) throws ORMException {
 		try {
 			return _session.load(clazz, id);
 		}
@@ -121,7 +121,7 @@ public class SessionImpl implements Session {
 		}
 	}
 
-	public Object merge(Object object) throws HibernateException {
+	public Object merge(Object object) throws ORMException {
 		try {
 			return _session.merge(object);
 		}
@@ -130,7 +130,7 @@ public class SessionImpl implements Session {
 		}
 	}
 
-	public Serializable save(Object object) throws HibernateException {
+	public Serializable save(Object object) throws ORMException {
 		try {
 			return _session.save(object);
 		}

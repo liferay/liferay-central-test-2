@@ -30,10 +30,10 @@ package com.liferay.portal.kernel.dao.orm;
  */
 public interface SessionFactory {
 
-	public void closeSession(Session session) throws HibernateException;
+	public void closeSession(Session session) throws ORMException;
 
-	public Dialect getDialect() throws HibernateException;
+	public Dialect getDialect() throws ORMException;
 
-	public Session openSession() throws HibernateException;
+	public Session openSession() throws ORMException;
 
 }

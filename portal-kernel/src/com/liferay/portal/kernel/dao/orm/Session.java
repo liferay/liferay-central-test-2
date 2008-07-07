@@ -34,26 +34,25 @@ import java.sql.Connection;
  */
 public interface Session {
 
-	public Connection close() throws HibernateException;
+	public Connection close() throws ORMException;
 
-	public Query createQuery(String queryString) throws HibernateException;
+	public Query createQuery(String queryString) throws ORMException;
 
-	public SQLQuery createSQLQuery(String queryString)
-		throws HibernateException;
+	public SQLQuery createSQLQuery(String queryString) throws ORMException;
 
-	public void delete(Object object) throws HibernateException;
+	public void delete(Object object) throws ORMException;
 
-	public void flush() throws HibernateException;
+	public void flush() throws ORMException;
 
-	public Object get(Class clazz, Serializable id) throws HibernateException;
+	public Object get(Class clazz, Serializable id) throws ORMException;
 
 	public Object get(Class clazz, Serializable id, LockMode lockMode)
-		throws HibernateException;
+		throws ORMException;
 
-	public Object load(Class clazz, Serializable id) throws HibernateException;
+	public Object load(Class clazz, Serializable id) throws ORMException;
 
-	public Object merge(Object object) throws HibernateException;
+	public Object merge(Object object) throws ORMException;
 
-	public Serializable save(Object object) throws HibernateException;
+	public Serializable save(Object object) throws ORMException;
 
 }
